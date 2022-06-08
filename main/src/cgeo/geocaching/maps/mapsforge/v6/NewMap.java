@@ -23,6 +23,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
@@ -66,12 +67,15 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BranchDetectionHelper;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
@@ -94,6 +98,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -101,6 +106,7 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,6 +145,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
+import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
@@ -163,6 +170,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private HistoryLayer historyLayer;
     private PositionLayer positionLayer;
     private NavigationLayer navigationLayer;
+    private TapHandlerLayer tapHandlerLayer;
     private RouteLayer routeLayer;
     private TrackLayer trackLayer;
     private CachesBundle caches;
@@ -526,6 +534,43 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         return true;
     }
 
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.map_longclick, menu);
+        menu.findItem(R.id.menu_add_waypoint).setVisible(getCurrentTargetCache() != null);
+    }
+
+    @Override
+    public boolean onContextItemSelected(final @NonNull MenuItem item) {
+        final Geopoint longClickGeopoint = new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude);
+        final int id = item.getItemId();
+        if (id == R.id.menu_udc) {
+            InternalConnector.interactiveCreateCache(this, longClickGeopoint, mapOptions.fromList, true);
+        } else if (id == R.id.menu_add_waypoint) {
+            final Geocache cache = getCurrentTargetCache();
+            if (cache != null) {
+                EditWaypointActivity.startActivityAddWaypoint(this, cache, longClickGeopoint);
+            }
+        } else if (id == R.id.menu_coords) {
+            SimpleDialog.ofContext(this).setTitle(R.string.waypoint_coordinates).setMessage(TextParam.text(longClickGeopoint.toString())).setNegativeButton(TextParam.id(android.R.string.copy)).show(null, (dialog, which) -> {
+                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(longClickGeopoint.toString()));
+                showToast(R.string.clipboard_copy_ok);
+            });
+        } else if (id == R.id.menu_add_to_route) {
+            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer);
+        } else {
+            return super.onContextItemSelected(item);
+        }
+        return true;
+    }
+
+    @Override
+    public void onContextMenuClosed(final @NonNull Menu menu) {
+        tapHandlerLayer.resetLongTabLatLong();
+        super.onContextMenuClosed(menu);
+    }
+
     private void refreshMapData(final boolean circlesSwitched) {
         if (circlesSwitched) {
             caches.switchCircles();
@@ -840,8 +885,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         GeoitemLayer.resetColors();
 
         // TapHandler
-        final TapHandlerLayer tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
-        this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
+        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
+        this.mapView.getLayerManager().getLayers().add(this.tapHandlerLayer);
 
         // Caches bundle
         if (mapOptions.searchResult != null) {
@@ -1043,13 +1088,13 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
-    public void showAddWaypoint(final LatLong tapLatLong) {
+    public void triggerLongTabContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
-            final Geocache cache = getCurrentTargetCache();
-            if (cache != null) {
-                EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            mapView.setOnCreateContextMenuListener(this);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mapView.showContextMenu((float) tapXY.x + 10, (float) tapXY.y + 10);
             } else {
-                InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), mapOptions.fromList, true);
+                mapView.showContextMenu();
             }
         }
     }

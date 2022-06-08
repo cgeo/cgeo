@@ -29,8 +29,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -131,6 +133,21 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     }
 
     @Override
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        mapBase.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(final @NonNull MenuItem item) {
+        return mapBase.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onContextMenuClosed(final @NonNull Menu menu) {
+        mapBase.onContextMenuClosed(menu);
+    }
+
+    @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         invalidateOptionsMenu();
@@ -171,6 +188,21 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     @Override
     public boolean superOnOptionsItemSelected(@NonNull final MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void superOnCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean superOnContextItemSelected(final MenuItem item) {
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void superOnContextMenuClosed(final Menu menu) {
+        super.onContextMenuClosed(menu);
     }
 
     @Override

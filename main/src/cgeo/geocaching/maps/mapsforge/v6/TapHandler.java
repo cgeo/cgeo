@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.mapsforge.core.model.LatLong;
+import org.mapsforge.core.model.Point;
 
 public class TapHandler {
 
@@ -42,13 +42,13 @@ public class TapHandler {
         hitItems.clear();
     }
 
-    public void onLongPress(final LatLong tapLatLong) {
+    public void onLongPress(final Point tapXY) {
 
         final NewMap map = this.map.get();
 
         // show popup
         if (map != null && hitItems.isEmpty()) {
-            map.showAddWaypoint(tapLatLong);
+            map.triggerLongTabContextMenu(tapXY);
         }
     }
 }

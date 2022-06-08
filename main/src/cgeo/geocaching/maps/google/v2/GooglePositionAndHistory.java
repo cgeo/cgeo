@@ -57,6 +57,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private float heading;
     private final PositionHistory history = new PositionHistory();
 
+    private LatLng longTabLatLng;
+
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
     private int mapRotation = MAPROTATION_MANUAL;
@@ -65,6 +67,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private WeakReference<GoogleMap> mapRef = null;
     private final GoogleMapObjects positionObjs;
+    private final GoogleMapObjects longTabObjs;
     private final GoogleMapObjects historyObjs;
     private final GoogleMapObjects routeObjs;
     private final GoogleMapObjects trackObjs;
@@ -86,6 +89,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
+        longTabObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
@@ -158,6 +162,23 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
+    public void setLongTabLatLng(final LatLng latLng) {
+        longTabLatLng = latLng;
+        repaintRequired();
+    }
+
+    @Override
+    public LatLng getLongTabLatLng() {
+        return longTabLatLng;
+    }
+
+    @Override
+    public void resetLongTabLatLng() {
+        longTabLatLng = null;
+        repaintRequired();
+    }
+
+    @Override
     public ArrayList<TrailHistoryElement> getHistory() {
         return history.getHistory();
     }
@@ -215,6 +236,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         drawHistory();
         drawViewport(lastViewport);
         drawRouteAndTracks();
+        drawLongTabMarker();
     }
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
@@ -385,4 +407,15 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
     }
 
+    private synchronized void drawLongTabMarker() {
+        longTabObjs.removeAll();
+        if (longTabLatLng != null) {
+            positionObjs.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.map_pin, null)))
+                    .position(longTabLatLng)
+                    .anchor(0.5f, 1f)
+                    .zIndex(ZINDEX_POSITION)
+            );
+        }
+    }
 }
