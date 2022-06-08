@@ -1677,7 +1677,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
-        private int maxPersonalNotesChars = 0;
         private Geocache cache;
 
         @Override
@@ -1756,7 +1755,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
             binding.storewaypointsPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
-                activity.storeWaypointsInPersonalNote(cache, maxPersonalNotesChars);
+                activity.storeWaypointsInPersonalNote(cache);
             });
             TooltipCompat.setTooltipText(binding.deleteewaypointsPersonalnote, getString(R.string.cache_personal_note_removewaypoints));
             binding.deleteewaypointsPersonalnote.setOnClickListener(v -> {
@@ -1765,12 +1764,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
-                maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
+                final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
                 binding.uploadPersonalnote.setVisibility(View.VISIBLE);
                 TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
                 binding.uploadPersonalnote.setOnClickListener(v -> {
-                    if (StringUtils.length(cache.getPersonalNote()) > maxPersonalNotesChars) {
-                        warnPersonalNoteExceedsLimit(activity);
+                    final int personalNoteLength = StringUtils.length(cache.getPersonalNote());
+                    if (personalNoteLength > maxPersonalNotesChars) {
+                        warnPersonalNoteExceedsLimit(activity, personalNoteLength, maxPersonalNotesChars, connector.getName());
                     } else {
                         uploadPersonalNote(activity);
                     }
@@ -1872,8 +1872,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity) {
-            SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncation, maxPersonalNotesChars).confirm(
+        private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity, final int personalNoteLength, final int maxPersonalNotesChars, final String connectorName) {
+            final int reduceLength = personalNoteLength - maxPersonalNotesChars;
+            SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, maxPersonalNotesChars, connectorName).confirm(
                     (dialog, which) -> {
                         dialog.dismiss();
                         uploadPersonalNote(activity);
@@ -2870,7 +2871,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         showShortToast(note.equals(newNote) ? R.string.cache_personal_note_removewaypoints_nowaypoints : R.string.cache_personal_note_removedwaypoints);
     }
 
-    public void storeWaypointsInPersonalNote(final Geocache cache, final int maxPersonalNotesChars) {
+    public void storeWaypointsInPersonalNote(final Geocache cache) {
         final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
 
         //only user modified waypoints
@@ -2885,15 +2886,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return;
         }
 
-        //if given maxSize is obviously bogus, then make length unlimited
         final String newNote = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables());
         setNewPersonalNote(newNote);
-        final int reduceCount = newNote.length() - maxPersonalNotesChars;
-        if (reduceCount > 0) {
-            showShortToast(getString(R.string.cache_personal_note_storewaypoints_limited_reduce, reduceCount));
-        } else {
-            showShortToast(R.string.cache_personal_note_storewaypoints_success);
-        }
+        showShortToast(R.string.cache_personal_note_storewaypoints_success);
     }
 
     private void setNewPersonalNote(final String newNote) {
