@@ -1,3 +1,3 @@
-- New: Download / update caches in background (experimental)
-- New: Copy current coordinates when long-clicking location on home screen
+- Νέo: Λήψη / ενημέρωση κρυπτών στο παρασκήνιο (πειραματικό)
+- Νέo: Αντιγραφή τρεχουσών συντεταγμένων όταν κάνετε παρατεταμένο κλικ στην τοποθεσία στην αρχική οθόνη
 
