@@ -52,7 +52,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     public static boolean isDownloadPending(final Geocache geocache) {
-        return downloadQuery.containsKey(geocache.getGeocode());
+        return isDownloadPending(geocache.getGeocode());
     }
 
     public static void downloadCaches(final Activity context, final Set<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
@@ -171,19 +171,18 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             }
 
             // download...
-            Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null);
-
-            // send a broadcast so that foreground activities know that they might need to update their content
-            LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Intents.ACTION_GEOCACHE_REFRESHED).putExtra(Intents.EXTRA_GEOCODE, geocode));
-
-            // check whether the download properties are still null,
-            // otherwise there is a new download task...
-            synchronized (downloadQuery) {
-                if (downloadQuery.get(geocode) == null) {
-                    downloadQuery.remove(geocode);
+            if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
+                // send a broadcast so that foreground activities know that they might need to update their content
+                LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Intents.ACTION_GEOCACHE_REFRESHED).putExtra(Intents.EXTRA_GEOCODE, geocode));
+                // check whether the download properties are still null,
+                // otherwise there is a new download task...
+                synchronized (downloadQuery) {
+                    if (downloadQuery.get(geocode) == null) {
+                        downloadQuery.remove(geocode);
+                    }
                 }
+                cachesDownloaded++;
             }
-            cachesDownloaded++;
         } catch (Exception ex) {
             Log.e("background download failed", ex);
         }

@@ -1935,7 +1935,17 @@ public class Geocache implements IWaypoint {
         storeCache(null, geocode, combinedListIds, true, handler);
     }
 
-    public static void storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
+    /**
+     * Download and store a cache synchronous
+     *
+     * @param origCache the cache which should be refreshed, can be null
+     * @param geocode the geocode of the cache which should be downloaded
+     * @param lists to which lists the cache should be added
+     * @param forceRedownload whether the cache should be re-downloaded, even if it's already stored offline
+     * @param handler a handler to receive status updates, can be null
+     * @return true, if the cache was stored successfully
+     */
+    public static boolean storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
         try {
             final Geocache cache;
             // get cache details, they may not yet be complete
@@ -1965,11 +1975,11 @@ public class Geocache implements IWaypoint {
                     handler.sendMessage(Message.obtain());
                 }
 
-                return;
+                return false;
             }
 
             if (DisposableHandler.isDisposed(handler)) {
-                return;
+                return false;
             }
 
             final HtmlImage imgGetter = new HtmlImage(cache.getGeocode(), false, true, forceRedownload);
@@ -1980,7 +1990,7 @@ public class Geocache implements IWaypoint {
             }
 
             if (DisposableHandler.isDisposed(handler)) {
-                return;
+                return false;
             }
 
             // store spoilers
@@ -1991,7 +2001,7 @@ public class Geocache implements IWaypoint {
             }
 
             if (DisposableHandler.isDisposed(handler)) {
-                return;
+                return false;
             }
 
             // store images from logs
@@ -2006,7 +2016,7 @@ public class Geocache implements IWaypoint {
             }
 
             if (DisposableHandler.isDisposed(handler)) {
-                return;
+                return false;
             }
 
             // Need to wait for images loading since HtmlImage.getDrawable is non-blocking here
@@ -2016,14 +2026,16 @@ public class Geocache implements IWaypoint {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (DisposableHandler.isDisposed(handler)) {
-                return;
+                return false;
             }
 
             if (handler != null) {
                 handler.sendEmptyMessage(DisposableHandler.DONE);
             }
+            return true;
         } catch (final Exception e) {
             Log.e("Geocache.storeCache", e);
+            return false;
         }
     }
 
