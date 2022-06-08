@@ -1,3 +1,3 @@
-- New: Download / update caches in background (experimental)
-- New: Copy current coordinates when long-clicking location on home screen
+- Novo: Transferência / actualização de caches em segundo plano (experimental)
+- Novo: Cópia das coordenadas actuais com um toque longo na página inicial
 
