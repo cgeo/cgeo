@@ -24,4 +24,13 @@ public class BranchDetectionHelper {
         return !(BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("nightly"));
     }
 
+    /**
+     * @return true, if BUILD_TYPE is a debug build. Nightly builds are **not** considered as developer build!
+     */
+    // BUILD_TYPE is detected as constant but can change depending on the build configuration
+    @SuppressWarnings("ConstantConditions")
+    public static boolean isDeveloperBuild() {
+        return BuildConfig.BUILD_TYPE.equals("debug");
+    }
+
 }
