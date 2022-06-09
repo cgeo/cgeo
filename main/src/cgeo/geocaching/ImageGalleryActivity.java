@@ -35,6 +35,9 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
         setCacheTitleBar(geocode);
 
         images = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
+
+        imageGallery = findViewById(R.id.image_gallery);
+        ImageUtils.initializeImageGallery(imageGallery, null, images);
     }
 
     @Override
@@ -45,19 +48,12 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
 
 
     @Override
-    public void onStart() {
-        super.onStart();
-        imageGallery = findViewById(R.id.image_gallery);
-        ImageUtils.initializeImageGallery(imageGallery, null, images);
-    }
-
-    @Override
-    public void onStop() {
+    public void onDestroy() {
+        super.onDestroy();
         // Reclaim native memory faster than the finalizers would
         if (imageGallery != null) {
             imageGallery.clear();
         }
-        super.onStop();
     }
 
     public static void startActivity(final Context fromActivity, final String geocode, final List<Image> images) {
