@@ -38,7 +38,7 @@ public final class CheckerUtils {
     @Nullable
     public static String getCheckerUrl(@NonNull final Geocache cache) {
         final Geopoint coordinateToCheck;
-        if (!cache.hasUserModifiedCoords() && cache.hasFinalDefined()) {
+        if (!cache.hasUserModifiedCoords() && cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords) != null) {
             coordinateToCheck = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
         } else {
             coordinateToCheck = cache.getCoords();
