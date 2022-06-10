@@ -367,6 +367,14 @@
     <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
     <string name="caches_store_background_should_force_refresh">Obnovit již stažené kešky</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
+    <string name="caches_store_background_result_failed">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
+    <string name="caches_store_background_result_canceled">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d keška stažena</item>
+        <item quantity="few">%d kešek staženo</item>
+        <item quantity="many">%d kešek staženo</item>
+        <item quantity="other">%d kešek staženo</item>
+    </plurals>
     <string name="caches_history">Historie</string>
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
