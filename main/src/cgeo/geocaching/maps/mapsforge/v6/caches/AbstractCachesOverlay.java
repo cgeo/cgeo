@@ -402,7 +402,7 @@ public abstract class AbstractCachesOverlay {
             } else {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint, true).getDrawable());
             }
-            return new GeoitemLayer(waypoint.getGeoitemRef(), waypoint.getWaypointType().applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
+            return new GeoitemLayer(waypoint.getGeoitemRef(), waypoint.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
         }
 
         return null;
