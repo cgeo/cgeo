@@ -46,7 +46,7 @@ public final class CacheDetailsCreator {
         public final View layout;
         public final TextView valueView;
 
-        NameValueLine(View layout, TextView value) {
+        NameValueLine(final View layout, final TextView value) {
             this.layout = layout;
             this.valueView = value;
         }
