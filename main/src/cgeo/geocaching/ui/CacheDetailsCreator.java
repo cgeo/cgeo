@@ -34,9 +34,6 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-// TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
-// details also, not just only change the code here.
-@SuppressLint("InflateParams")
 public final class CacheDetailsCreator {
     private final Activity activity;
     private final ViewGroup parentView;
@@ -92,7 +89,7 @@ public final class CacheDetailsCreator {
 
     @NonNull
     private NameValueLine createNameValueLine(final int nameId) {
-        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         final TextView nameView = layout.findViewById(R.id.name);
         nameView.setText(res.getString(nameId));
         final TextView valueView = layout.findViewById(R.id.value);
@@ -105,7 +102,7 @@ public final class CacheDetailsCreator {
     }
 
     private View addStars(final int nameId, final float value, final int max) {
-        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         final TextView nameView = layout.findViewById(R.id.name);
         final TextView valueView = layout.findViewById(R.id.value);
 
@@ -136,7 +133,7 @@ public final class CacheDetailsCreator {
         }
         if (cache.isEventCache() && states.isEmpty()) {
             for (final LogEntry log : cache.getLogs()) {
-                if (log.getType() == LogType.WILL_ATTEND && log.isOwn()) {
+                if (log.logType == LogType.WILL_ATTEND && log.isOwn()) {
                     states.add(LogType.WILL_ATTEND.getL10n());
                 }
             }
@@ -246,7 +243,7 @@ public final class CacheDetailsCreator {
     public void addLatestLogs(final Geocache cache) {
         final Context context = parentView.getContext();
 
-        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         final TextView nameView = layout.findViewById(R.id.name);
         nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);
