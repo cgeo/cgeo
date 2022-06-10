@@ -31,7 +31,7 @@ public abstract class MockedCache extends Geocache {
     public static final List<MockedCache> MOCKED_CACHES;
 
     static {
-        MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J(), new GC3FJ5F()));
+        MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J(), new GC40()));
     }
 
     protected MockedCache(final Geopoint coords) {
