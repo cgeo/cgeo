@@ -50,8 +50,7 @@
             android:numStars="5"
             android:visibility="gone"
             tools:rating="2"
-            tools:visibility="visible"
-            tools:ignore="MissingConstraints"/>
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/addition"
@@ -63,8 +62,7 @@
             android:visibility="gone"
             android:textColor="@color/colorText"
             tools:text="additional text"
-            tools:visibility="visible"
-            tools:ignore="MissingConstraints"/>
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/linearlayout"
@@ -72,8 +70,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|left"
             android:paddingTop="3dp"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints"/>
+            android:orientation="horizontal" />
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="0dp"
@@ -85,6 +82,6 @@
             app:flow_horizontalStyle="packed"
             app:flow_horizontalBias="0"
             app:flow_horizontalGap="5dip"
-            app:constraint_referenced_ids="value, stars, addition, linearlayout" />
+            app:constraint_referenced_ids="value,stars,addition,linearlayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
