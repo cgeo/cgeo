@@ -57,6 +57,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.util.Pair;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
@@ -1722,6 +1723,52 @@ public class Settings {
         putString(R.string.pref_username, StringUtils.trim(username));
         putString(R.string.pref_password, password);
     }
+
+    // methods for setting and retrieving login status (connector-specific)
+
+    private static void setLastLoginError(@StringRes final int connectorPrefId, final String status, @StringRes final int timePrefId) {
+        if (connectorPrefId != 0 && timePrefId != 0 && StringUtils.isNotBlank(status)) {
+            putString(connectorPrefId, status);
+            putLong(timePrefId, System.currentTimeMillis());
+        }
+    }
+
+    @Nullable
+    private static Pair<String, Long> getLastLoginError(@StringRes final int connectorPrefId, @StringRes final int timePrefId) {
+        if (connectorPrefId != 0 && timePrefId != 0) {
+            final Pair<String, Long> data = new Pair<>(getString(connectorPrefId, ""), getLong(timePrefId, 0));
+            return StringUtils.isBlank(data.first) || data.second == 0 ? null : data;
+        }
+        return null;
+    }
+
+    private static void setLastLoginSuccess(@StringRes final int timePrefId) {
+        if (timePrefId != 0) {
+            putLong(timePrefId, System.currentTimeMillis());
+        }
+    }
+
+    private static long getLastLoginSuccess(@StringRes final int timePrefId) {
+        return getLong(timePrefId, 0);
+    }
+
+    public static void setLastLoginErrorGC(final String status) {
+        setLastLoginError(R.string.pref_gcLastLoginErrorStatus, status, R.string.pref_gcLastLoginError);
+    }
+
+    @Nullable
+    public static Pair<String, Long> getLastLoginErrorGC() {
+        return getLastLoginError(R.string.pref_gcLastLoginErrorStatus, R.string.pref_gcLastLoginError);
+    }
+
+    public static void setLastLoginSuccessGC() {
+        setLastLoginSuccess(R.string.pref_gcLastLoginSuccess);
+    }
+
+    public static long getLastLoginSuccessGC() {
+        return getLastLoginSuccess(R.string.pref_gcLastLoginSuccess);
+    }
+
 
     public static long getFieldnoteExportDate() {
         return getLong(R.string.pref_fieldNoteExportDate, 0);

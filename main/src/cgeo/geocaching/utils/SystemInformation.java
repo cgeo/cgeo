@@ -36,6 +36,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -115,6 +116,14 @@ public final class SystemInformation {
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
             body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
+        }
+        final Pair<String, Long> gcError = Settings.getLastLoginErrorGC();
+        if (gcError != null) {
+            body.append("\n- Last login error on geocaching.com: ").append(gcError.first).append(" (").append(Formatter.formatDateForFilename(gcError.second)).append(")");
+        }
+        final long gcSuccess = Settings.getLastLoginSuccessGC();
+        if (gcSuccess != 0) {
+            body.append("\n- Last successful login on geocaching.com: ").append(Formatter.formatDateForFilename(gcSuccess));
         }
         body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
         appendAddons(body);
