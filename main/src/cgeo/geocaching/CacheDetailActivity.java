@@ -148,7 +148,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -180,7 +179,6 @@ import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
@@ -1174,7 +1172,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
-        private ImmutablePair<RelativeLayout, TextView> favoriteLine;
+        private CacheDetailsCreator.NameValueLine favoriteLine;
         private Geocache cache;
 
         @Override
@@ -1207,7 +1205,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // cache name (full name), may be editable
             final SpannableString span = TextUtils.coloredCacheText(cache, cache.getName());
-            final TextView cachename = details.add(R.string.cache_name, span).right;
+            final TextView cachename = details.add(R.string.cache_name, span).valueView;
             activity.addContextMenu(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
@@ -1220,7 +1218,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            activity.addContextMenu(details.add(R.string.cache_geocode, cache.getShortGeocode()).right);
+            activity.addContextMenu(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
 
             activity.cacheDistanceView = details.addDistance(cache, activity.cacheDistanceView);
@@ -1239,7 +1237,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // cache author
             if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
-                final TextView ownerView = details.add(R.string.cache_owner, "").right;
+                final TextView ownerView = details.add(R.string.cache_owner, "").valueView;
                 if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
                     ownerView.setText(cache.getOwnerDisplayName(), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
@@ -1264,7 +1262,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).right;
+                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).valueView;
                 new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
                 activity.addContextMenu(valueView);
             }
@@ -1572,16 +1570,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // Favorite counts
             final int favCount = cache.getFavoritePoints();
             if (favCount >= 0 && !cache.isEventCache()) {
-                favoriteLine.left.setVisibility(View.VISIBLE);
+                favoriteLine.layout.setVisibility(View.VISIBLE);
 
                 final int findsCount = cache.getFindsCount();
                 if (findsCount > 0) {
-                    favoriteLine.right.setText(getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
+                    favoriteLine.valueView.setText(getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
                 } else {
-                    favoriteLine.right.setText(getString(R.string.favorite_count, favCount));
+                    favoriteLine.valueView.setText(getString(R.string.favorite_count, favCount));
                 }
             } else {
-                favoriteLine.left.setVisibility(View.GONE);
+                favoriteLine.layout.setVisibility(View.GONE);
             }
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             binding.favpointBox.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);

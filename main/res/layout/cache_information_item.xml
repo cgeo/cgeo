@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dip">
+    android:layout_marginBottom="3dip"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/name"
@@ -25,9 +26,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@id/name">
+        android:layout_width="0dp"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/value"
@@ -50,8 +50,7 @@
             android:numStars="5"
             android:visibility="gone"
             tools:rating="2"
-            tools:visibility="visible"
-            tools:ignore="MissingConstraints"/>
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/addition"
@@ -63,8 +62,7 @@
             android:visibility="gone"
             android:textColor="@color/colorText"
             tools:text="additional text"
-            tools:visibility="visible"
-            tools:ignore="MissingConstraints"/>
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/linearlayout"
@@ -72,8 +70,7 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|left"
             android:paddingTop="3dp"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints"/>
+            android:orientation="horizontal" />
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="0dp"
@@ -85,6 +82,6 @@
             app:flow_horizontalStyle="packed"
             app:flow_horizontalBias="0"
             app:flow_horizontalGap="5dip"
-            app:constraint_referenced_ids="value, stars, addition, linearlayout" />
+            app:constraint_referenced_ids="value,stars,addition,linearlayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
+</LinearLayout>
