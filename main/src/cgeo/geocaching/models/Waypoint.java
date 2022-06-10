@@ -523,7 +523,7 @@ public class Waypoint implements IWaypoint {
         if (applyDistanceRule) {
             final Geocache parentCache = getParentGeocache();
             if (parentCache != null) {
-                applyDistanceRule = parentCache.applyDistanceRule();
+                applyDistanceRule = parentCache.mayApplyDistanceRule();
             }
         }
         return applyDistanceRule;
