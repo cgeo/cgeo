@@ -363,6 +363,12 @@
     <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
     <string name="caches_store_background_should_force_refresh">Vernieuwen reeds gedownloade caches</string>
     <string name="caches_store_background_title">Caches downloaden</string>
+    <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache gedownload</item>
+        <item quantity="other">%d caches gedownload</item>
+    </plurals>
     <string name="caches_history">Geschiedenis</string>
     <string name="caches_on_map">Toon op kaart</string>
     <string name="caches_sort">Sorteren</string>
