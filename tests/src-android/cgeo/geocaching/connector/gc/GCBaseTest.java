@@ -1,15 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.mock.GC40;
-import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.test.Compare;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import junit.framework.TestCase;
 
 public class GCBaseTest extends TestCase {
