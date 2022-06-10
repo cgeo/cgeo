@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 
 public class GCBaseTest extends TestCase {
 
+    /* TODO: temporary disabled, see PR #13119
     public static void testSearchFromMap() {
         final MockedCache mockedCache = new GC40();
 
@@ -25,5 +26,6 @@ public class GCBaseTest extends TestCase {
 
         Compare.assertCompareCaches(mockedCache, parsedCache, false);
     }
+    */
 
 }
