@@ -9,7 +9,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.databinding.MapGoogleBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CoordinatesType;
@@ -898,7 +897,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public void refreshMapData(final boolean circlesSwitched) {
         markersInvalidated = true;
-        Tile.cache.clear();
         overlayPositionAndScale.repaintRequired();
         if (circlesSwitched) {
             mapView.setCircles(Settings.isShowCircles());

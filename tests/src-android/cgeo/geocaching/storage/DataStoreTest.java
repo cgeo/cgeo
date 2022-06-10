@@ -2,8 +2,6 @@ package cgeo.geocaching.storage;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.list.PseudoList;
@@ -196,46 +194,6 @@ public class DataStoreTest extends CGeoTestCase {
         // check that two different routines behave the same
         assertThat(history.getCount()).isEqualTo(DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id));
     }
-
-    public static void testCachedMissing() {
-
-        // Tile to test
-        final Tile tile = new Tile(new Geopoint("N49 44.0 E8 37.0"), 14);
-        final Set<Tile> tiles = new HashSet<>();
-        tiles.add(tile);
-
-        // set up geocaches to fill into cacheCache
-        final Geocache main = new Geocache();
-        main.setGeocode("GC12345");
-        main.setCoords(new Geopoint("N49 44.0 E8 37.0"));
-        final Geocache inTileLowZoom = new Geocache();
-        inTileLowZoom.setGeocode("GC12346");
-        inTileLowZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 5);
-        final Geocache outTile = new Geocache();
-        outTile.setGeocode("GC12347");
-        outTile.setCoords(new Geopoint(tile.getViewport().getLatitudeMin() - 0.1, tile.getViewport().getLongitudeMin() - 0.1));
-        final Geocache otherConnector = new Geocache();
-        otherConnector.setGeocode("OC0001");
-        otherConnector.setCoords(new Geopoint("N49 44.0 E8 37.0"));
-        final Geocache inTileHighZoom = new Geocache();
-        inTileHighZoom.setGeocode("GC12348");
-        inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
-
-        // put in cache
-        DataStore.saveCache(main, EnumSet.of(SaveFlag.CACHE));
-        DataStore.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.CACHE));
-        DataStore.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.CACHE));
-        DataStore.saveCache(outTile, EnumSet.of(SaveFlag.CACHE));
-        DataStore.saveCache(otherConnector, EnumSet.of(SaveFlag.CACHE));
-
-        final SearchResult search = new SearchResult(main);
-
-        final Set<String> filteredGeoCodes = DataStore.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
-
-        assertThat(filteredGeoCodes).contains(inTileLowZoom.getGeocode());
-        assertThat(filteredGeoCodes).doesNotContain(inTileHighZoom.getGeocode(), otherConnector.getGeocode(), outTile.getGeocode(), main.getGeocode());
-    }
-
 
     public static void testOfflineLog() {
         final String geocode = ARTIFICIAL_GEOCODE + "-O";

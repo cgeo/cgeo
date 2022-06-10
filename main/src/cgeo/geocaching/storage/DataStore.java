@@ -5,9 +5,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -4664,37 +4662,6 @@ public class DataStore {
             return true;
         }
         return false;
-    }
-
-    @NonNull
-    public static Set<String> getCachedMissingFromSearch(final SearchResult searchResult, final Set<Tile> tiles, final IConnector connector, final int maxZoom) {
-
-        // get cached CacheListActivity
-        final Set<String> cachedGeocodes = new HashSet<>();
-        for (final Tile tile : tiles) {
-            cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport()));
-        }
-        // remove found in search result
-        cachedGeocodes.removeAll(searchResult.getGeocodes());
-
-        // check remaining against viewports
-        final Set<String> missingFromSearch = new HashSet<>();
-        for (final String geocode : cachedGeocodes) {
-            if (connector.canHandle(geocode)) {
-                final Geocache geocache = cacheCache.getCacheFromCache(geocode);
-                // TODO: parallel searches seem to have the potential to make some caches be expunged from the CacheCache (see issue #3716).
-                if (geocache != null && geocache.getCoordZoomLevel() <= maxZoom) {
-                    for (final Tile tile : tiles) {
-                        if (tile.containsPoint(geocache)) {
-                            missingFromSearch.add(geocode);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return missingFromSearch;
     }
 
     @Nullable

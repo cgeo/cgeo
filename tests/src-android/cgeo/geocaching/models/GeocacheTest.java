@@ -598,8 +598,6 @@ public class GeocacheTest extends CGeoTestCase {
 
         final Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setType(CacheType.MULTI, 12);
-        livemap.setCoords(new Geopoint(41.0, 9.0), 12);
 
         livemap.gatherMissingFrom(previous);
 
@@ -607,7 +605,6 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
         assertThat(livemap.getType()).as("merged type").isEqualTo(CacheType.TRADITIONAL);
         assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0, 8.0));
-        assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(previous.getCoordZoomLevel());
     }
 
     public static void testMergeLivemapStored() {
@@ -621,8 +618,6 @@ public class GeocacheTest extends CGeoTestCase {
 
         final Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setType(CacheType.MULTI, 12);
-        livemap.setCoords(new Geopoint(41.0, 9.0), 12);
 
         livemap.gatherMissingFrom(stored);
 
@@ -630,61 +625,6 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
         assertThat(livemap.getType()).as("merged type").isEqualTo(CacheType.TRADITIONAL);
         assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0, 8.0));
-        assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(stored.getCoordZoomLevel());
-    }
-
-    public static void testMergeLivemapZoomin() {
-        final Geocache livemapFirst = new Geocache();
-        livemapFirst.setGeocode("GC12345");
-        livemapFirst.setType(CacheType.TRADITIONAL);
-        livemapFirst.setCoords(new Geopoint(40.0, 8.0), 11);
-
-        final Geocache livemapSecond = new Geocache();
-        livemapSecond.setGeocode("GC12345");
-        livemapSecond.setType(CacheType.MULTI);
-        livemapSecond.setCoords(new Geopoint(41.0, 9.0), 12);
-
-        livemapSecond.gatherMissingFrom(livemapFirst);
-
-        assertThat(livemapSecond.getType()).as("merged type").isEqualTo(CacheType.MULTI);
-        assertThat(livemapSecond.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(41.0, 9.0));
-        assertThat(livemapSecond.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
-    }
-
-    public static void testMergeLivemapZoomout() {
-        final Geocache livemapFirst = new Geocache();
-        livemapFirst.setGeocode("GC12345");
-        livemapFirst.setType(CacheType.TRADITIONAL, 12);
-        livemapFirst.setCoords(new Geopoint(40.0, 8.0), 12);
-
-        final Geocache livemapSecond = new Geocache();
-        livemapSecond.setGeocode("GC12345");
-        livemapSecond.setType(CacheType.MULTI, 11);
-        livemapSecond.setCoords(new Geopoint(41.0, 9.0), 11);
-
-        livemapSecond.gatherMissingFrom(livemapFirst);
-
-        assertThat(livemapSecond.getType()).as("merged type").isEqualTo(CacheType.TRADITIONAL);
-        assertThat(livemapSecond.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0, 8.0));
-        assertThat(livemapSecond.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
-    }
-
-    public static void testMergePopupLivemap() {
-        final Geocache livemap = new Geocache();
-        livemap.setGeocode("GC12345");
-        livemap.setCoords(new Geopoint(40.0, 8.0), 12);
-        livemap.setFound(true);
-
-        final Geocache popup = new Geocache();
-        popup.setGeocode("GC12345");
-        popup.setType(CacheType.MULTI);
-
-        popup.gatherMissingFrom(livemap);
-
-        assertThat(popup.getType()).as("merged type").isEqualTo(CacheType.MULTI);
-        assertThat(popup.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0, 8.0));
-        assertThat(popup.isFound()).overridingErrorMessage("merged found").isTrue();
-        assertThat(popup.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
     }
 
     public static void testMergeLivemapBMSearched() {
@@ -693,12 +633,11 @@ public class GeocacheTest extends CGeoTestCase {
 
         final Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");
-        livemap.setCoords(new Geopoint(40.0, 8.0), 12);
+        livemap.setCoords(new Geopoint(40.0, 8.0));
 
         livemap.gatherMissingFrom(bmsearched);
 
         assertThat(livemap.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(40.0, 8.0));
-        assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
     }
 
     /**
