@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import static android.view.View.GONE;
 
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
 // details also, not just only change the code here.
@@ -43,6 +41,19 @@ public final class CacheDetailsCreator {
     private final Activity activity;
     private final ViewGroup parentView;
     private final Resources res;
+
+    /**
+     * Immutable pair holder for name value line views.
+     */
+    public static final class NameValueLine {
+        public final View layout;
+        public final TextView valueView;
+
+        NameValueLine(View layout, TextView value) {
+            this.layout = layout;
+            this.valueView = value;
+        }
+    }
 
     public CacheDetailsCreator(final Activity activity, final ViewGroup parentView) {
         this.activity = activity;
@@ -58,9 +69,9 @@ public final class CacheDetailsCreator {
      * @param value  the initial value
      * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */
-    public ImmutablePair<RelativeLayout, TextView> add(final int nameId, final CharSequence value) {
-        final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
-        nameValue.getRight().setText(value);
+    public NameValueLine add(final int nameId, final CharSequence value) {
+        final NameValueLine nameValue = createNameValueLine(nameId);
+        nameValue.valueView.setText(value);
         return nameValue;
     }
 
@@ -72,29 +83,29 @@ public final class CacheDetailsCreator {
      * @param geocode the geocode for image getter
      * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */
-    public ImmutablePair<RelativeLayout, TextView> addHtml(final int nameId, final CharSequence value, final String geocode) {
-        final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
-        final TextView valueView = nameValue.getRight();
+    public NameValueLine addHtml(final int nameId, final CharSequence value, final String geocode) {
+        final NameValueLine nameValue = createNameValueLine(nameId);
+        final TextView valueView = nameValue.valueView;
         valueView.setText(HtmlCompat.fromHtml(value.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
         return nameValue;
     }
 
     @NonNull
-    private ImmutablePair<RelativeLayout, TextView> createNameValueLine(final int nameId) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+    private NameValueLine createNameValueLine(final int nameId) {
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = layout.findViewById(R.id.name);
         nameView.setText(res.getString(nameId));
         final TextView valueView = layout.findViewById(R.id.value);
         parentView.addView(layout);
-        return ImmutablePair.of(layout, valueView);
+        return new NameValueLine(layout, valueView);
     }
 
-    public RelativeLayout addStars(final int nameId, final float value) {
+    public View addStars(final int nameId, final float value) {
         return addStars(nameId, value, 5);
     }
 
-    private RelativeLayout addStars(final int nameId, final float value, final int max) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+    private View addStars(final int nameId, final float value, final int max) {
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = layout.findViewById(R.id.name);
         final TextView valueView = layout.findViewById(R.id.value);
 
@@ -159,7 +170,7 @@ public final class CacheDetailsCreator {
     @SuppressLint("SetTextI18n")
     public void addRating(final Geocache cache) {
         if (cache.getRating() > 0) {
-            final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());
+            final View itemLayout = addStars(R.string.cache_rating, cache.getRating());
             if (cache.getVotes() > 0) {
                 final TextView itemAddition = itemLayout.findViewById(R.id.addition);
                 itemAddition.setText(" (" + cache.getVotes() + ')');
@@ -199,7 +210,7 @@ public final class CacheDetailsCreator {
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = cacheDistanceView.getText().toString();
         }
-        return add(R.string.cache_distance, text).right;
+        return add(R.string.cache_distance, text).valueView;
     }
 
     public TextView addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
@@ -212,7 +223,7 @@ public final class CacheDetailsCreator {
             // this prevents displaying "--" while waiting for a new position update (See bug #1468)
             text = waypointDistanceView.getText().toString();
         }
-        return add(R.string.cache_distance, text).right;
+        return add(R.string.cache_distance, text).valueView;
     }
 
     public void addEventDate(@NonNull final Geocache cache) {
@@ -227,7 +238,7 @@ public final class CacheDetailsCreator {
         if (StringUtils.isEmpty(dateString)) {
             return null;
         }
-        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).right;
+        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).valueView;
         view.setId(R.id.date);
         return view;
     }
@@ -235,7 +246,7 @@ public final class CacheDetailsCreator {
     public void addLatestLogs(final Geocache cache) {
         final Context context = parentView.getContext();
 
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = layout.findViewById(R.id.name);
         nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);

@@ -520,7 +520,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             }
 
             // trackable name
-            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : activity.res.getString(R.string.trackable_unknown)).right;
+            final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : activity.res.getString(R.string.trackable_unknown)).valueView;
             activity.addContextMenu(nameTxtView);
 
             // missing status
@@ -539,19 +539,19 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             details.add(R.string.trackable_type, tbType);
 
             // trackable geocode
-            activity.addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).right);
+            activity.addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).valueView);
 
             // retrieved status
             final Date logDate = trackable.getLogDate();
             final LogType logType = trackable.getLogType();
             if (logDate != null && logType != null) {
                 final Uri uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("LUID=" + trackable.getLogGuid()).build();
-                final TextView logView = details.add(R.string.trackable_status, activity.res.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).right;
+                final TextView logView = details.add(R.string.trackable_status, activity.res.getString(R.string.trackable_found, logType.getL10n(), Formatter.formatDate(logDate.getTime()))).valueView;
                 logView.setOnClickListener(v -> ShareUtils.openUrl(activity, uri.toString()));
             }
 
             // trackable owner
-            final TextView owner = details.add(R.string.trackable_owner, activity.res.getString(R.string.trackable_unknown)).right;
+            final TextView owner = details.add(R.string.trackable_owner, activity.res.getString(R.string.trackable_unknown)).valueView;
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(HtmlCompat.fromHtml(trackable.getOwner(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 owner.setOnClickListener(UserClickListener.forOwnerOf(trackable));
@@ -599,7 +599,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                     }
                 }
 
-                final TextView spotted = details.add(R.string.trackable_spotted, text.toString()).right;
+                final TextView spotted = details.add(R.string.trackable_spotted, text.toString()).valueView;
                 spotted.setClickable(true);
                 if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
                     spotted.setOnClickListener(arg0 -> {
@@ -622,7 +622,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
             // trackable origin
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
-                final TextView origin = details.add(R.string.trackable_origin, "").right;
+                final TextView origin = details.add(R.string.trackable_origin, "").valueView;
                 origin.setText(HtmlCompat.fromHtml(trackable.getOrigin(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
                 activity.addContextMenu(origin);
             }
@@ -630,12 +630,12 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             // trackable released
             final Date releasedDate = trackable.getReleased();
             if (releasedDate != null) {
-                activity.addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(releasedDate.getTime())).right);
+                activity.addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(releasedDate.getTime())).valueView);
             }
 
             // trackable distance
             if (trackable.getDistance() >= 0) {
-                activity.addContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())).right);
+                activity.addContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())).valueView);
             }
 
             // trackable goal
