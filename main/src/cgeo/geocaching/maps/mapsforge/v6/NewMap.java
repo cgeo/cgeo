@@ -13,7 +13,6 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -534,8 +533,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (caches != null) {
             caches.invalidate();
         }
-        Tile.cache.clear();
-
         if (null != trackLayer) {
 //            trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();

@@ -1,11 +1,9 @@
 package cgeo.geocaching.storage;
 
-import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
-import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -26,7 +24,6 @@ public class CacheCache {
 
     public CacheCache() {
         cachesCache = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_CACHES);
-        cachesCache.setRemoveHandler(new CacheRemoveHandler());
     }
 
     public synchronized void removeAllFromCache() {
@@ -96,18 +93,6 @@ public class CacheCache {
     @NonNull
     public synchronized String toString() {
         return StringUtils.join(cachesCache.keySet(), ' ');
-    }
-
-    private static class CacheRemoveHandler implements RemoveHandler<Geocache> {
-
-        @Override
-        public void onRemove(final Geocache removed) {
-            // FIXME: as above, we sometimes get caches with null coordinates, that may then provoke
-            // a NullPointerException down the invocation chain.
-            if (removed.getCoords() != null) {
-                Tile.cache.removeFromTileCache(removed);
-            }
-        }
     }
 
 }

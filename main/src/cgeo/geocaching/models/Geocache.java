@@ -12,8 +12,6 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -113,7 +111,7 @@ public class Geocache implements IWaypoint {
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
-    private UncertainProperty<CacheType> cacheType = new UncertainProperty<>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
+    private CacheType cacheType = CacheType.UNKNOWN;
     private String name = "";
     private String ownerDisplayName = "";
     private String ownerGuid = "";
@@ -136,7 +134,7 @@ public class Geocache implements IWaypoint {
      * lazy initialized
      */
     private String location = null;
-    private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
+    private Geopoint coords = null;
     private final PersonalNote personalNote = new PersonalNote();
     /**
      * lazy initialized
@@ -290,7 +288,9 @@ public class Geocache implements IWaypoint {
         if (StringUtils.isBlank(guid)) {
             guid = other.guid;
         }
-        cacheType = UncertainProperty.getMergedProperty(cacheType, other.cacheType);
+        if (cacheType == CacheType.UNKNOWN) {
+            cacheType = other.cacheType;
+        }
         if (StringUtils.isBlank(name)) {
             name = other.name;
         }
@@ -376,7 +376,9 @@ public class Geocache implements IWaypoint {
             }
             setCoords(other.getCoords());
         } else {
-            coords = UncertainProperty.getMergedProperty(coords, other.coords);
+            if (coords == null) {
+                coords = other.coords;
+            }
         }
         // if cache has ORIGINAL type waypoint ... it is considered that it has modified coordinates, otherwise not
         if (getOriginalWaypoint() != null) {
@@ -428,14 +430,14 @@ public class Geocache implements IWaypoint {
         return detailed == other.detailed &&
                 StringUtils.equalsIgnoreCase(geocode, other.geocode) &&
                 StringUtils.equalsIgnoreCase(name, other.name) &&
-                UncertainProperty.equalValues(cacheType, other.cacheType) &&
+                cacheType.equals(other.cacheType) &&
                 size == other.size &&
                 Objects.equals(found, other.found) &&
                 Objects.equals(didNotFound, other.didNotFound) &&
                 Objects.equals(premiumMembersOnly, other.premiumMembersOnly) &&
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
-                UncertainProperty.equalValues(coords, other.coords) &&
+                Objects.equals(coords, other.coords) &&
                 Objects.equals(disabled, other.disabled) &&
                 Objects.equals(archived, other.archived) &&
                 Objects.equals(lists, other.lists) &&
@@ -490,7 +492,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isEventCache() {
-        return cacheType.getValue().isEvent();
+        return cacheType.isEvent();
     }
 
     // returns whether the current cache is a future event, for which
@@ -1021,7 +1023,7 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isVirtual() {
-        return cacheType.getValue().isVirtual();
+        return cacheType.isVirtual();
     }
 
     public boolean showSize() {
@@ -1097,25 +1099,14 @@ public class Geocache implements IWaypoint {
 
     @Override
     public Geopoint getCoords() {
-        return coords.getValue();
-    }
-
-    public int getCoordZoomLevel() {
-        return coords.getCertaintyLevel();
+        return coords;
     }
 
     /**
      * Set reliable coordinates
      */
     public void setCoords(final Geopoint coords) {
-        this.coords = new UncertainProperty<>(coords);
-    }
-
-    /**
-     * Set unreliable coordinates from a certain map zoom level
-     */
-    public void setCoords(final Geopoint coords, final int zoomlevel) {
-        this.coords = new UncertainProperty<>(coords, zoomlevel);
+        this.coords = coords;
     }
 
     public void setShortDescription(final String shortdesc) {
@@ -1465,22 +1456,14 @@ public class Geocache implements IWaypoint {
      * @returns Never null
      */
     public CacheType getType() {
-        return cacheType.getValue();
+        return cacheType;
     }
 
     public void setType(final CacheType cacheType) {
         if (cacheType == null || cacheType == CacheType.ALL) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = new UncertainProperty<>(cacheType);
-        this.eventTimeMinutes = null; // will be recalculated if/when necessary
-    }
-
-    public void setType(final CacheType cacheType, final int zoomlevel) {
-        if (cacheType == null || cacheType == CacheType.ALL) {
-            throw new IllegalArgumentException("Illegal cache type");
-        }
-        this.cacheType = new UncertainProperty<>(cacheType, zoomlevel);
+        this.cacheType = cacheType;
         this.eventTimeMinutes = null; // will be recalculated if/when necessary
     }
 
