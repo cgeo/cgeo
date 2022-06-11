@@ -1150,12 +1150,10 @@
     <string name="cache_personal_note_removedwaypoints">Τα σημεία αφαιρέθηκαν</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Δεν βρέθηκαν σημεία αναφοράς για αφαίρεση</string>
     <string name="cache_personal_note_storewaypoints_success">Τα σημεία προστέθηκαν στην προσωπική σημείωση</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Τα σημεία προστέθηκαν στη σημείωση, αλλά έπρεπε να συντομευτούν (μέγιστο μέγεθος προσωπικής σημείωσης: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Δεν βρέθηκαν αποθηκεύσιμα ενδιάμεσα σημεία</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Αποτροπή εξαγωγής των waypoints</string>
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Μετά τους %d χαρακτήρες, το κείμενο θα περικοπεί από την Geocaching.com.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Αυτή η προσωπική σημείωση θα περικοπεί από περίπου %1$d χαρακτήρες κατά %3$s (μέγιστο μέγεθος %2$d).</string>
     <string name="cache_personal_note_upload">Ανέβασμα</string>
     <string name="cache_personal_note_uploading">Ανέβασμα προσωπικής σημείωσης</string>
     <string name="cache_personal_note_upload_done">Η προσωπική σημείωση ανέβηκε</string>
