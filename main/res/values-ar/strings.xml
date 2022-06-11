@@ -545,7 +545,6 @@
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>
     <string name="cache_personal_note_limit">حد الملاحظة الشخصية</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">هذه الملاحظة الشخصية بعد %d أحرف سيتم اقتطاعها بواسطة Geocaching.com.</string>
     <string name="cache_personal_note_upload">رفع</string>
     <string name="cache_personal_note_uploading">رفع الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload_done">تم رفع الملاحضة الشخصية</string>
