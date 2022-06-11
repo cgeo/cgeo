@@ -1160,12 +1160,9 @@
     <string name="cache_personal_note_removedwaypoints">Waypoint verwijderd</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Geen waypoints gevonden om te verwijderen</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints zijn toegevoegd aan persoonlijke notitie</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Waypoints zijn toegevoegd aan notitie, maar moesten worden ingekort (max. persoonlijke notitiegrootte: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Waypoints konden niet worden opgeslagen in notitie vanwege groottelimieten (max. persoonlijke notitiegrotte: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Geen waypoints gevonden die opgeslagen kunnen worden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Waypoint extractie voorkomen</string>
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
     <string name="cache_personal_note_upload">Uploaden</string>
     <string name="cache_personal_note_uploading">Persoonlijke notitie uploaden</string>
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
