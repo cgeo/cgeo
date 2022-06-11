@@ -557,7 +557,6 @@
     <string name="cache_personal_note">Ang pansariling tala</string>
     <string name="cache_personal_note_edit">Baguhin</string>
     <string name="cache_personal_note_limit">Ang limitasyon ng pansariling tala</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang pansariling tala na ito ay napuputol matapos ang %d na mga karakter ng Geocaching.com.</string>
     <string name="cache_personal_note_upload">I-upload</string>
     <string name="cache_personal_note_uploading">Ang pag-upload ng sariling tala</string>
     <string name="cache_personal_note_upload_done">Ang sariling tala ay nai-upload</string>
