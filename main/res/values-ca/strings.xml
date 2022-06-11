@@ -1153,12 +1153,9 @@
     <string name="cache_personal_note_removedwaypoints">S\'han eliminat els punts de ruta</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No s\'ha trobat cap punt de ruta per eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Es van afegir punts de ruta a la nota personal</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Els punts de ruta es van afegir a la nota, però es van haver d’escurçar (mida màxima de la nota personal:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Els punts de ruta no s\'han pogut emmagatzemar a la nota a causa de la mida (mida màxima de la nota personal:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">No s\'han trobat punts de ruta per guardar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Eviteu l\'extracció de punts de ruta</string>
     <string name="cache_personal_note_limit">Límit de la nota personal</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Aquesta nota personal es tallarà després de %d caràcters per Geocaching.com.</string>
     <string name="cache_personal_note_upload">Puja</string>
     <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
     <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
