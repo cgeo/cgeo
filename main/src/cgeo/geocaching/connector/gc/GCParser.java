@@ -42,6 +42,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -104,6 +105,7 @@ public final class GCParser {
     }
 
     @Nullable
+    @WorkerThread
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent, final int alreadyTaken) {
@@ -341,6 +343,7 @@ public final class GCParser {
     }
 
     @Nullable
+    @WorkerThread
     static SearchResult parseCache(final IConnector con, final String page, final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
@@ -833,6 +836,7 @@ public final class GCParser {
     }
 
     @Nullable
+    @WorkerThread
     public static SearchResult searchByNextPage(final IConnector con, final Bundle context) {
         if (context == null) {
             return null;
@@ -879,10 +883,12 @@ public final class GCParser {
     }
 
     @Nullable
+    @WorkerThread
     private static SearchResult searchByAny(final IConnector con, final Parameters params) {
         return searchByAny(con, params, null, false);
     }
 
+    @WorkerThread
     private static SearchResult searchByAny(final IConnector con, final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
 
@@ -931,6 +937,7 @@ public final class GCParser {
         return searchByAny(con, params);
     }
 
+    @WorkerThread
     public static SearchResult searchByUsername(final IConnector con, final String userName, @Nullable final CacheType ct, final boolean noOwnFound) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
@@ -1007,11 +1014,12 @@ public final class GCParser {
     }
 
     /**
-     * Fetches a list of bookmark lists. Shouldn't be called on main tread!
+     * Fetches a list of bookmark lists. Shouldn't be called on main thread!
      *
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
+    @WorkerThread
     public static List<GCList> searchBookmarkLists() {
         final Parameters params = new Parameters();
         params.add("skip", "0");
@@ -1056,11 +1064,12 @@ public final class GCParser {
     }
 
     /**
-     * Creates a new bookmark list. Shouldn't be called on main tread!
+     * Creates a new bookmark list. Shouldn't be called on main thread!
      *
      * @return guid of the new list.
      */
     @Nullable
+    @WorkerThread
     public static String createBookmarkList(final String name) {
         final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("name", name);
         jo.putObject("type").put("code", "bm");
@@ -1089,10 +1098,11 @@ public final class GCParser {
     }
 
     /**
-     * Creates a new bookmark list. Shouldn't be called on main tread!
+     * Creates a new bookmark list. Shouldn't be called on main thread!
      *
      * @return successful?
      */
+    @WorkerThread
     public static boolean addCachesToBookmarkList(final String listGuid, final List<Geocache> geocaches) {
         final ArrayNode arrayNode = JsonUtils.createArrayNode();
 
@@ -1115,11 +1125,12 @@ public final class GCParser {
     }
 
     /**
-     * Fetches a list of pocket queries. Shouldn't be called on main tread!
+     * Fetches a list of pocket queries. Shouldn't be called on main thread!
      *
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
+    @WorkerThread
     public static List<GCList> searchPocketQueries() {
         final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", null);
         if (StringUtils.isBlank(page)) {
@@ -1214,6 +1225,7 @@ public final class GCParser {
      * @return status code of the upload and ID of the log
      */
     @NonNull
+    @WorkerThread
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
                                               final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
         if (GCLogin.isEmpty(viewstates)) {
@@ -1271,6 +1283,7 @@ public final class GCParser {
      * @param cache the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
+    @WorkerThread
     static boolean addToWatchlist(@NonNull final Geocache cache) {
         return addToOrRemoveFromWatchlist(cache, true);
     }
@@ -1278,6 +1291,7 @@ public final class GCParser {
     /**
      * internal method to handle add to / remove from watchlist
      */
+    @WorkerThread
     private static boolean addToOrRemoveFromWatchlist(@NonNull final Geocache cache, final boolean doAdd) {
 
         final String logContext = "GCParser.addToOrRemoveFromWatchlist(cache = " + cache.getGeocode() + ", add = " + doAdd + ")";
@@ -1329,6 +1343,7 @@ public final class GCParser {
      * @param cache the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
+    @WorkerThread
     static boolean removeFromWatchlist(@NonNull final Geocache cache) {
         return addToOrRemoveFromWatchlist(cache, false);
     }
@@ -1831,6 +1846,7 @@ public final class GCParser {
         return types;
     }
 
+    @WorkerThread
     private static void getExtraOnlineInfo(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {
         // This method starts the page parsing for logs in the background, as well as retrieve the friends and own logs
         // if requested. It merges them and stores them in the background, while the rating is retrieved if needed and
@@ -1949,6 +1965,7 @@ public final class GCParser {
         }
     }
 
+    @WorkerThread
     @SuppressWarnings("UnusedReturnValue")
     static boolean ignoreCache(@NonNull final Geocache cache) {
         final String uri = "https://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;

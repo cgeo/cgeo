@@ -62,6 +62,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -1928,6 +1929,7 @@ public class Geocache implements IWaypoint {
      * @param handler a handler to receive status updates, can be null
      * @return true, if the cache was stored successfully
      */
+    @WorkerThread
     public static boolean storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
         try {
             final Geocache cache;
@@ -2023,6 +2025,7 @@ public class Geocache implements IWaypoint {
     }
 
     @Nullable
+    @WorkerThread
     public static SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final boolean forceReload, @Nullable final DisposableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");

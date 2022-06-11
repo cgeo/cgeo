@@ -8,6 +8,7 @@ import cgeo.geocaching.models.Image;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.Calendar;
 import java.util.List;
@@ -19,6 +20,7 @@ public interface ILoggingManager {
      *
      * @param logPassword optional, maybe null
      */
+    @WorkerThread
     @NonNull
     LogResult postLog(@NonNull LogType logType,
                       @NonNull Calendar date,
@@ -27,6 +29,7 @@ public interface ILoggingManager {
                       @NonNull List<TrackableLog> trackableLogs,
                       @NonNull ReportProblemType reportProblem);
 
+    @WorkerThread
     @NonNull
     ImageResult postLogImage(String logId,
                              Image image);

@@ -14,6 +14,7 @@ import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -82,11 +83,13 @@ public abstract class AbstractLogin {
     }
 
     @NonNull
+    @WorkerThread
     public StatusCode login() {
         return login(null);
     }
 
     @NonNull
+    @WorkerThread
     public StatusCode login(@Nullable final Credentials credentials) {
         if (!Network.isConnected()) {
             return StatusCode.COMMUNICATION_ERROR;
@@ -98,9 +101,11 @@ public abstract class AbstractLogin {
     }
 
     @NonNull
+    @WorkerThread
     protected abstract StatusCode login(boolean retry);
 
     @NonNull
+    @WorkerThread
     protected abstract StatusCode login(boolean retry, @NonNull Credentials credentials);
 
     public void increaseActualCachesFound() {

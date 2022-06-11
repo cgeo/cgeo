@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.Objects;
 
@@ -34,6 +35,7 @@ public class AvatarUtils {
     /**
      * Retrieves avatar image for a given connector supporting avatars. May return null. Call is BLOCKING, don't use on main thread!
      */
+    @WorkerThread
     public static BitmapDrawable getAvatar(@Nullable final IAvatar avatar) {
         if (avatar == null) {
             return null;

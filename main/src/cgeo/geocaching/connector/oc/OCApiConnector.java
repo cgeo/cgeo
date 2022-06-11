@@ -13,6 +13,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import io.reactivex.rxjava3.core.Maybe;
 import org.apache.commons.lang3.StringUtils;
@@ -146,6 +147,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
      * get the OC1234 geocode from an internal cache id, for URLs like host.tld/viewcache.php?cacheid
      */
     @Nullable
+    @WorkerThread
     protected String getGeocodeFromCacheId(final String url, final String host) {
         final Uri uri = Uri.parse(url);
         if (!StringUtils.containsIgnoreCase(uri.getHost(), host)) {

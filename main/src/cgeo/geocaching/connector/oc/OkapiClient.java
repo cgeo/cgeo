@@ -65,6 +65,7 @@ import static android.util.Base64.DEFAULT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -1157,6 +1158,7 @@ final class OkapiClient {
     }
 
     @NonNull
+    @WorkerThread
     private static JSONResult request(@NonNull final OCApiConnector connector, @NonNull final OkapiService service, @NonNull final String method, @NonNull final Parameters params) {
         final String host = connector.getHost();
         if (StringUtils.isBlank(host)) {

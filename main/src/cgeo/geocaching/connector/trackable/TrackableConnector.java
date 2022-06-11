@@ -8,6 +8,7 @@ import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.List;
 
@@ -81,6 +82,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @Nullable
+    @WorkerThread
     Trackable searchTrackable(String geocode, String guid, String id);
 
     /**
@@ -90,6 +92,7 @@ public interface TrackableConnector {
      * @return the Trackable object.
      */
     @NonNull
+    @WorkerThread
     List<Trackable> searchTrackables(String geocode);
 
     /**
@@ -134,6 +137,7 @@ public interface TrackableConnector {
      * @return the Trackable list.
      */
     @NonNull
+    @WorkerThread
     List<Trackable> loadInventory();
 
     /**

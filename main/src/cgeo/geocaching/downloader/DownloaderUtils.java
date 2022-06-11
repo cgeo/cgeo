@@ -39,6 +39,7 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
@@ -289,6 +290,7 @@ public class DownloaderUtils {
         }
 
         @Nullable
+        @WorkerThread
         private Download checkForUpdate(final CompanionFileUtils.DownloadedFileData offlineMapData) {
             final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapData.remoteParsetype);
             if (downloader == null) {

@@ -14,6 +14,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,6 +69,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
     }
 
     // used for area tile checking, see MapUtils
+    @WorkerThread
     public HashMap<String, Download> getAvailableTiles() {
         final HashMap<String, Download> tiles = new HashMap<>();
 

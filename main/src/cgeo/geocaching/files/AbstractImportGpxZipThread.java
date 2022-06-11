@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.os.Handler;
 
 import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
 import androidx.core.util.Predicate;
 
 import java.io.BufferedInputStream;
@@ -110,5 +111,6 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
         return gpxFileName == null ? ".gpx" : TextUtils.stripHtml(gpxFileName);
     }
 
+    @WorkerThread
     protected abstract InputStream getInputStream() throws IOException;
 }

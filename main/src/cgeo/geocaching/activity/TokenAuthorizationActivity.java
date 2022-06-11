@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 import java.util.regex.Pattern;
 
@@ -128,6 +129,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         setIntent(intent);
     }
 
+    @WorkerThread
     protected void requestToken(final String username, final String password) {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             ActivityMixin.showToast(this, R.string.err_missing_auth);

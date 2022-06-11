@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 /**
  * Connector capability to ignore caches.
@@ -28,6 +29,7 @@ public interface IIgnoreCapability extends IConnector {
      *
      * @return True - success/False - failure
      */
+    @WorkerThread
     boolean addToIgnorelist(@NonNull Geocache cache);
 
     /**
@@ -35,6 +37,7 @@ public interface IIgnoreCapability extends IConnector {
      *
      * @return True - success/False - failure
      */
+    @WorkerThread
     boolean removeFromIgnorelist(@NonNull Geocache cache);
 
 

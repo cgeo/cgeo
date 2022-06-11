@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +48,7 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
 
     abstract void setFiltersetting(boolean value);
 
+    @WorkerThread
     abstract List<GCList> getList();
 
     abstract boolean alwaysShow(GCList list);

@@ -11,7 +11,7 @@ public class LogResult {
     private final StatusCode postLogResult;
     @NonNull
     private final String logId;
-
+    @Nullable
     private final String serviceLogId;
 
     public LogResult(@NonNull final StatusCode postLogResult, @NonNull final String logId) {

@@ -9,6 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 
 /**
@@ -77,6 +78,7 @@ public interface IVotingCapability extends IConnector {
      * @param rating vote to set
      * @return status of the request
      */
+    @WorkerThread
     boolean postVote(@NonNull Geocache cache, float rating);
 
 }

@@ -34,6 +34,7 @@ import static android.util.Base64.DEFAULT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -367,16 +368,19 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     private static JSONResult getRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) throws SuApiException {
         return request(connector, endpoint, "GET", params);
     }
 
     @NonNull
+    @WorkerThread
     private static JSONResult postRequest(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final Parameters params) throws SuApiException {
         return request(connector, endpoint, "POST", params);
     }
 
     @NonNull
+    @WorkerThread
     private static JSONResult request(@NonNull final SuConnector connector, @NonNull final SuApiEndpoint endpoint, @NonNull final String method, @NonNull final Parameters params) throws SuApiException {
         final String host = connector.getHost();
         if (StringUtils.isBlank(host)) {
