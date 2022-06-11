@@ -363,6 +363,12 @@
     <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
     <string name="caches_store_background_should_force_refresh">Actualizar caches já transferidas</string>
     <string name="caches_store_background_title">Transferir caches</string>
+    <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache transferida</item>
+        <item quantity="other">%d caches transferidas</item>
+    </plurals>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -1154,12 +1160,9 @@
     <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Não foram encontrados pontos adicionais armazenados</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
