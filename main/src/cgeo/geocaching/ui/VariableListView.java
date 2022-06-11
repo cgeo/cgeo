@@ -460,7 +460,12 @@ public class VariableListView extends LinearLayout {
 
 
         private void changeFormulaFor(final int varPos, final String formula) {
-            final String var = getItem(varPos).getVar();
+            final VariableMap.VariableState state = getItem(varPos);
+            if (state == null) {
+                return;
+            }
+
+            final String var = state.getVar();
             if (variables.changeVariable(var, formula)) {
                 recalculateResultsInView();
             }
