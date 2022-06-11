@@ -1190,12 +1190,9 @@
     <string name="cache_personal_note_removedwaypoints">Trasové body odstraněny</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nebyly nalezeny žádné trasové body k odstranění</string>
     <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Trasové body byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Trasové body nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uložené trasové body</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit extrakci trasových bodů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
     <string name="cache_personal_note_upload">Nahrát</string>
     <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
