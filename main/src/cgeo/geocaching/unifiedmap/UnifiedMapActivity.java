@@ -314,8 +314,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     Log.e("bearing change from " + old.bearing + " to " + currentMapPosition.bearing);
                 }
             });
+            tileProvider.getMap().setResetFollowMyLocationListener(() -> {
+                followMyLocation = false;
+                initFollowMyLocationButton();
+            });
         } else {
             tileProvider.getMap().setActivityMapChangeListener(null);
+            tileProvider.getMap().setResetFollowMyLocationListener(null);
         }
     }
 
