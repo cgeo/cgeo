@@ -1138,12 +1138,9 @@
     <string name="cache_personal_note_removedwaypoints">Body trasy odstránené</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nenašli sa žiadne body trasy na odstránenie</string>
     <string name="cache_personal_note_storewaypoints_success">Body trasy boli pridané do osobnej poznámky</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Body trasy boli pridané do poznámky, ale boli skrátené (max. veľkosť osobnej poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Body trasy nemožno kvôli limitom veľkosti uložiť (max. veľkosť osobnej poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Neboli nájdené žiadne uložiteľné body trasy</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabrániť extrakcii bodov trasy</string>
     <string name="cache_personal_note_limit">Limit na osobné poznámky</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Geocaching.com skráti túto osobnú poznámku na %d znakov.</string>
     <string name="cache_personal_note_upload">Nahrať</string>
     <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
