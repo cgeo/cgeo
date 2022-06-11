@@ -1146,12 +1146,9 @@
     <string name="cache_personal_note_removedwaypoints">Waypoints borttagna</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Inga waypoints att ta bort hittades</string>
     <string name="cache_personal_note_storewaypoints_success">Punkterna är tillagda i personlig anteckning</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Punkterna är tillagda i personliga anteckningen men behövde förkortas (max längd för anteckning: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Punkterna kunde inte läggas till i den personliga anteckning p.g.a. storleksbegränsningar (max längd för anteckning: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Inga lagringsbara vägpunkter hittades</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
     <string name="cache_personal_note_upload">Ladda upp</string>
     <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
     <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
