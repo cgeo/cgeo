@@ -971,12 +971,9 @@
     <string name="cache_menu_allowWaypointExtraction">Tillad rutepunkter fra note</string>
     <string name="cache_personal_note_edit">Redigér</string>
     <string name="cache_personal_note_storewaypoints_success">Rutepunkter blev tilføjet til personlig note</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Rutepunkter blev tilføjet til noten, men er blevet forkortet (største personlig notestørrelse: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Rutepunkter kunne ikke gemmes i noten på grund af størrelsesgrænser (største personlig notestørrelse: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Ingen rutepunkter kan gemmes</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Undgå ekstraktion af rutepunkter</string>
     <string name="cache_personal_note_limit">Afkortning af personlig note</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denne personlige note vil blive afkortet af geocaching.com efter %d tegn.</string>
     <string name="cache_personal_note_upload">Upload</string>
     <string name="cache_personal_note_uploading">Upload personlig note</string>
     <string name="cache_personal_note_upload_done">Personlig note uploadet</string>
