@@ -754,7 +754,6 @@
     <string name="cache_personal_note">Személyes megjegyzés</string>
     <string name="cache_personal_note_edit">Szerkesztés</string>
     <string name="cache_personal_note_limit">Személyes megjegyzés max. hossza</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ezt a megjegyzést %d karakter hosszúságúra vágja a geocaching.com.</string>
     <string name="cache_personal_note_upload">Feltöltés</string>
     <string name="cache_personal_note_uploading">Személyes megjegyzés feltöltése</string>
     <string name="cache_personal_note_upload_done">Személyes megjegyzés feltöltve</string>
