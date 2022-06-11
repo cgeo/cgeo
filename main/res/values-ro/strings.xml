@@ -616,7 +616,6 @@
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
     <string name="cache_personal_note_limit">Limită pentru note personale</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Din această notă personală, Geocaching.com va păstra doar primele %d caractere.</string>
     <string name="cache_personal_note_upload">Încarcă</string>
     <string name="cache_personal_note_uploading">Încărcare notă personală</string>
     <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
