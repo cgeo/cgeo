@@ -349,6 +349,10 @@ public class DownloaderUtils {
         if (null != downloadManager) {
             final DownloadManager.Query query = new DownloadManager.Query();
             try (Cursor c = downloadManager.query(query)) {
+                if (c == null) {
+                    Log.w("checkPendingDownloads: querying DownloadManager returned null");
+                    return;
+                }
                 final int columnId = c.getColumnIndex(DownloadManager.COLUMN_ID);
                 final int columnStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
                 final int columnBytesA = c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
