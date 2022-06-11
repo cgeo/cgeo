@@ -17,6 +17,7 @@ public abstract class AbstractUnifiedMapView<T> {
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
+    protected Runnable resetFollowMyLocationListener = null;
     protected int mapRotation = Settings.MAPROTATION_OFF;
     protected int delayedZoomTo = -1;
     protected Geopoint delayedCenterTo = null;
@@ -57,6 +58,10 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;
+    }
+
+    public void setResetFollowMyLocationListener(@Nullable final Runnable listener) {
+        resetFollowMyLocationListener = listener;
     }
 
     public abstract void setCenter(Geopoint geopoint);

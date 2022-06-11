@@ -127,11 +127,17 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     protected void configMapChangeListener(final boolean enable) {
         if (mMap != null) {
             mMap.setOnCameraIdleListener(null);
+            mMap.setOnCameraMoveStartedListener(null);
             if (enable) {
                 mMap.setOnCameraIdleListener(() -> {
                     if (activityMapChangeListener != null) {
                         final CameraPosition pos = mMap.getCameraPosition();
                         activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
+                    }
+                });
+                mMap.setOnCameraMoveStartedListener(reason -> {
+                    if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && resetFollowMyLocationListener != null) {
+                        resetFollowMyLocationListener.run();
                     }
                 });
             }
