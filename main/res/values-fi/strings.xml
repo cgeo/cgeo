@@ -1154,12 +1154,9 @@
     <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Poistettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Tallennettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Estä reittipisteiden siirto</string>
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tämä oma muistiinpano katkaistaan %d merkin jälkeen Geocaching.com:n toimesta.</string>
     <string name="cache_personal_note_upload">Lataa</string>
     <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
