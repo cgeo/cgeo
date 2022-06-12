@@ -390,9 +390,9 @@ public class Image implements Parcelable {
         return mimeInformation.second;
     }
 
-    public boolean isImageUri() {
+    public boolean isImageOrUnknownUri() {
         final String mimeType = getMimeType();
-        return mimeType != null && mimeType.startsWith("image/");
+        return mimeType == null || mimeType.startsWith("image/");
     }
 
     private void ensureMimeInformation() {

@@ -278,7 +278,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         mainBinding.imageOpenFile.setOnClickListener(v -> {
             final Image img = imageList.get(imagePos);
 
-            if (img.isImageUri()) {
+            if (img.isImageOrUnknownUri()) {
                 ImageUtils.viewImageInStandardApp(ImageViewActivity.this, img.getUri(), imageContextCode);
             } else {
                 ShareUtils.openContentForView(this, img.getUrl());
@@ -332,9 +332,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         final List<CharSequence> imageInfos = new ArrayList<>();
         if (!StringUtils.isEmpty(currentImage.title)) {
-            imageInfos.add(Html.fromHtml("<b>" + currentImage.title + (currentImage.isImageUri() ? "" : " (" + currentImage.getMimeFileExtension() + ")") + "</b>"));
+            imageInfos.add(Html.fromHtml("<b>" + currentImage.title + (currentImage.isImageOrUnknownUri() ? "" : " (" + currentImage.getMimeFileExtension() + ")") + "</b>"));
         }
-        if (!currentImage.isImageUri()) {
+        if (!currentImage.isImageOrUnknownUri()) {
             imageInfos.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_mimetype) + ":</b> " + currentImage.getMimeType()));
         }
         if (!StringUtils.isEmpty(currentImage.getDescription())) {
@@ -355,7 +355,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         });
         setInfoShowHide(binding, showImageInformation);
 
-        if (!currentImage.isImageUri()) {
+        if (!currentImage.isImageOrUnknownUri()) {
             binding.imageFull.setImageResource(UriUtils.getMimeTypeIcon(currentImage.getMimeType()));
             showImage(pagerPos, binding);
         } else {

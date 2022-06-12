@@ -88,10 +88,17 @@ public final class UriUtils {
         if (context != null && context.getContentResolver() != null) {
             mimeType = context.getContentResolver().getType(uri);
         }
-        if (mimeType == null) {
+        if (StringUtils.isBlank(mimeType)) {
             mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
         }
-        return mimeType;
+        if (StringUtils.isBlank(mimeType)) {
+            final String uriString = uri.toString();
+            final int lidx = uriString.lastIndexOf(".");
+            if (lidx >= 0) {
+                mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(uriString.substring(lidx + 1));
+            }
+        }
+        return StringUtils.isBlank(mimeType) ? null : mimeType;
     }
 
     /**

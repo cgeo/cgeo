@@ -174,7 +174,7 @@ public class ImageGalleryView extends LinearLayout {
         setImageLayoutSizes(binding, imageSizeDp);
         binding.imageDescriptionMarker.setVisibility(img.hasDescription() ? View.VISIBLE : View.GONE);
 
-        if (!img.isImageUri()) {
+        if (!img.isImageOrUnknownUri()) {
             binding.imageTitle.setText(TextUtils.concat(binding.imageTitle.getText(), " (" + UriUtils.getMimeFileExtension(img.getUri()) + ")"));
             binding.imageImage.setImageResource(UriUtils.getMimeTypeIcon(img.getMimeType()));
             binding.imageImage.setVisibility(View.VISIBLE);
@@ -204,7 +204,7 @@ public class ImageGalleryView extends LinearLayout {
         }
 
         binding.imageWrapper.setOnClickListener(v -> {
-            if (imgData.image.isImageUri()) {
+            if (imgData.image.isImageOrUnknownUri()) {
                 openImageViewer(imgData, binding);
             } else {
                 ShareUtils.openContentForView(getContext(), img.getUrl());
