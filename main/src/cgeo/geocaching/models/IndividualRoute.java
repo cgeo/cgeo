@@ -43,6 +43,10 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public void toggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater) {
+        toggleItem(context, item, routeUpdater, false);
+    }
+
+    public void toggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater, final boolean addToRouteStart) {
         if (loadingRoute) {
             Log.d("[RouteTrackDebug] Individual route: Cannot toggle item, route still loading");
             return;
@@ -53,7 +57,7 @@ public class IndividualRoute extends Route implements Parcelable {
             return;
         }
 
-        final ToggleItemState result = toggleItemInternal(item);
+        final ToggleItemState result = toggleItemInternal(item, addToRouteStart);
         if (result == ToggleItemState.REMOVED) {
             Log.d("[RouteTrackDebug] Individual route: Removed first element from route (" + item.getIdentifier() + ")");
         }
@@ -107,7 +111,7 @@ public class IndividualRoute extends Route implements Parcelable {
         final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();
         for (int i = 0; i < routeItems.size(); i++) {
             Log.d("[RouteTrackDebug] Individual route: Add item #" + i + " (" + routeItems.get(i).getIdentifier() + ")");
-            toggleItemInternal(routeItems.get(i));
+            toggleItemInternal(routeItems.get(i), false);
         }
         Log.d("[RouteTrackDebug] Individual route: Finished loading from database");
         loadingRoute = false;
@@ -134,7 +138,7 @@ public class IndividualRoute extends Route implements Parcelable {
      * @param item item to be added or removed
      * @return ToggleItemState
      */
-    private ToggleItemState toggleItemInternal(final RouteItem item) {
+    private ToggleItemState toggleItemInternal(final RouteItem item, final boolean addToRouteStart) {
         if (segments == null) {
             segments = new ArrayList<>();
         }
@@ -142,7 +146,11 @@ public class IndividualRoute extends Route implements Parcelable {
         if (pos == -1) {
             final RouteSegment segment = new RouteSegment(item, null, true);
             if (segment.hasPoint()) {
-                segments.add(segment);
+                if (addToRouteStart) {
+                    segments.add(0, segment);
+                } else {
+                    segments.add(segment);
+                }
                 calculateNavigationRoute(segments.size() - 1);
                 return ToggleItemState.ADDED;
             } else {

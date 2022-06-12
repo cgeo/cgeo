@@ -13,6 +13,10 @@
         android:title="@string/context_map_add_to_route">
     </item>
     <item
+        android:id="@+id/menu_add_to_route_start"
+        android:title="@string/context_map_add_to_route_start">
+    </item>
+    <item
         android:id="@+id/menu_coords"
         android:title="@string/context_map_get_coords">
     </item>

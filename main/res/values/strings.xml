@@ -1486,6 +1486,7 @@
     <string name="image_category_log">Log</string>
 
     <string name="context_map_add_to_route">Add point to route</string>
+    <string name="context_map_add_to_route_start">Add point to route (as first target)</string>
     <string name="context_map_get_coords">Get coordinates</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>

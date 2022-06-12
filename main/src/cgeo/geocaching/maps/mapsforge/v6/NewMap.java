@@ -539,6 +539,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.map_longclick, menu);
         menu.findItem(R.id.menu_add_waypoint).setVisible(getCurrentTargetCache() != null);
+        menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
     }
 
     @Override
@@ -558,7 +559,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 showToast(R.string.clipboard_copy_ok);
             });
         } else if (id == R.id.menu_add_to_route) {
-            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer);
+            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer, false);
+        } else if (id == R.id.menu_add_to_route_start) {
+            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer, true);
         } else {
             return super.onContextItemSelected(item);
         }
