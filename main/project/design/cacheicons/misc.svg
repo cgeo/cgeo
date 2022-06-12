@@ -1,0 +1,23 @@
+<svg width="0" height="0" class="hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tick">
+        <path fill="#43a047" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="compass_arrow_mini_black">
+        <path fill="#212121" d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="compass_arrow_mini_white">
+        <path fill="#e0e0e0" d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="type_overlay_archived">
+        <path d="m2.4 21.6 19.2-19.2" stroke="#b71c1c" stroke-width="3" />
+        <path d="m21.6 21.6-19.2-19.2" stroke="#b71c1c" stroke-width="3" />
+        <!--
+        <line x1="10%" y1="90%" x2="90%" y2="10%" stroke="#b71c1c" stroke-width="3" />
+        <line x1="90%" y1="90%" x2="10%" y2="10%" stroke="#b71c1c" stroke-width="3" />-->
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="type_overlay_visited">
+        <path fill="#43a047" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+    </symbol>
+</svg>

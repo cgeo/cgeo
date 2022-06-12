@@ -1,0 +1,48 @@
+<svg width="0" height="0" class="hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_cgeo">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#f7991d" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_advlab">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#7b1fa2" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_black">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#212121" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_event">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#D32F2F" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_multi">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#F57C00" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_mystery">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#303F9F" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_special">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#afb42b" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_traditional">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#388E3C" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_unknown">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#616161" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_virtual">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#0288d1" cx="12" cy="12" r="10" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="dot_disabled">
+        <circle fill="#fff" cx="12" cy="12" r="12" />
+        <circle fill="#90a4ae" cx="12" cy="12" r="10" />
+    </symbol>
+</svg>

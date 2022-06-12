@@ -1,0 +1,143 @@
+<svg width="0" height="0" class="hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_found">
+        <circle fill="#5D4037" cx="12" cy="12" r="12" />
+        <path fill="#fdd835" d="M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M15.5,8A1.5,1.5 0 0,1 17,9.5A1.5,1.5 0 0,1 15.5,11A1.5,1.5 0 0,1 14,9.5A1.5,1.5 0 0,1 15.5,8M8.5,8A1.5,1.5 0 0,1 10,9.5A1.5,1.5 0 0,1 8.5,11A1.5,1.5 0 0,1 7,9.5A1.5,1.5 0 0,1 8.5,8M12,17.5C9.67,17.5 7.69,16.04 6.89,14H17.11C16.3,16.04 14.33,17.5 12,17.5Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_found_offline">
+        <circle fill="#5D4037" cx="12" cy="12" r="12" />
+        <path fill="#F57C00" d="M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M15.5,8A1.5,1.5 0 0,1 17,9.5A1.5,1.5 0 0,1 15.5,11A1.5,1.5 0 0,1 14,9.5A1.5,1.5 0 0,1 15.5,8M8.5,8A1.5,1.5 0 0,1 10,9.5A1.5,1.5 0 0,1 8.5,11A1.5,1.5 0 0,1 7,9.5A1.5,1.5 0 0,1 8.5,8M12,17.5C9.67,17.5 7.69,16.04 6.89,14H17.11C16.3,16.04 14.33,17.5 12,17.5Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_not_found_offline">
+        <circle fill="#1A237E" cx="12" cy="12" r="12" />
+        <path fill="#448AFF" d="m 12,2 c -5.5228475,10e-8 -9.9999999,4.4771525 -9.9999999,10 0,5.522847 4.4771524,10 9.9999999,10 5.522847,0 10,-4.477153 10,-10 C 22,6.4771525 17.522847,2 12,2 M 7.0000001,9.5 c 0,-0.8 0.7,-1.5 1.5,-1.5 C 9.3,8 10,8.7 10,9.5 10,10.3 9.3,11 8.5000001,11 c -0.8,0 -1.5,-0.7 -1.5,-1.5 M 6.89,17.5 C 7.8497124,15.16013 9.9475614,14.045447 12,14 c 1.75,0 4.130266,1.014652 5.11,3.5 M 15.5,11 C 14.7,11 14,10.3 14,9.5 14,8.7 14.7,8 15.5,8 16.3,8 17,8.7 17,9.5 17,10.3 16.3,11 15.5,11 Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_unknown_offline">
+        <circle fill="#424242" cx="12" cy="12" r="12" />
+        <path d="m12 2c-5.5228 0-10 4.4772-10 10 0 5.5228 4.4772 10 10 10 5.5228 0 10-4.4772 10-10 0-5.5228-4.4772-10-10-10zm-3.5 6c0.8 0 1.5 0.7 1.5 1.5s-0.7 1.5-1.5 1.5-1.5-0.7-1.5-1.5 0.7-1.5 1.5-1.5zm7 0c0.8 0 1.5 0.7 1.5 1.5s-0.7 1.5-1.5 1.5-1.5-0.7-1.5-1.5 0.7-1.5 1.5-1.5zm-2.9004 5.8008h4v2h-4c-1.4312-0.0021-2.7532 0.76057-3.4687 2l-1.7305-1c1.0725-1.8576 3.0543-3.0014 5.1992-3z" fill="#9e9e9e" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_own">
+        <circle fill="#FF6F00" cx="12" cy="12" r="12" />
+        <circle fill="#fff" cx="12" cy="12" r="9" />
+        <path fill="#FFAB00" d="M16.23,18L12,15.45L7.77,18L8.89,13.19L5.16,9.96L10.08,9.54L12,5L13.92,9.53L18.84,9.95L15.11,13.18L16.23,18M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_personalnote">
+        <circle fill="#33691E" cx="12" cy="12" r="12" />
+        <circle fill="#689F38" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M16.84,2.73C16.45,2.73 16.07,2.88 15.77,3.17L13.65,5.29L18.95,10.6L21.07,8.5C21.67,7.89 21.67,6.94 21.07,6.36L17.9,3.17C17.6,2.88 17.22,2.73 16.84,2.73M12.94,6L4.84,14.11L7.4,14.39L7.58,16.68L9.86,16.85L10.15,19.41L18.25,11.3M4.25,15.04L2.5,21.73L9.2,19.94L8.96,17.78L6.65,17.61L6.47,15.29" transform="translate(4,3.5) scale(0.666666667)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_maintenance">
+        <circle fill="#B71C1C" cx="12" cy="12" r="12" />
+        <circle fill="#FF5252" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M18 14H14V18H10V14H6V10H10V6H14V10H18" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_owner_maintenance">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M18 14H14V18H10V14H6V10H10V6H14V10H18" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_note">
+        <circle fill="#3E2723" cx="12" cy="12" r="12" />
+        <circle fill="#795548" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M14,10H19.5L14,4.5V10M5,3H15L21,9V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3M5,12V14H19V12H5M5,16V18H14V16H5Z" transform="translate(5.5,4.1) scale(0.57,0.65)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_archive">
+        <circle fill="#B71C1C" cx="12" cy="12" r="12" />
+        <circle fill="#FF5252" cx="12" cy="12" r="10" />
+        <path d="m7.2 16.8 9.6-9.6" stroke="#fff" stroke-width="2.5" />
+        <path d="m16.8 16.8-9.6-9.6" stroke="#fff" stroke-width="2.5" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_usermodifiedcoords">
+        <circle fill="#01579B" cx="12" cy="12" r="12" />
+        <circle fill="#039BE5" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" transform="translate(4,3.5) scale(0.666666667)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_calendar">
+        <circle fill="#B71C1C" cx="12" cy="12" r="12" />
+        <circle fill="#FF5252" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+    <!-- want to keep this small as most caches will have it -->
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_stored">
+        <g transform="translate(3,1.8) scale(0.8)">
+            <path d="m17.833 1.5h-14c-1.295 0-2.3333 1.05-2.3333 2.3333v16.333c1.1e-6 1.2887 1.0447 2.3333 2.3333 2.3333h16.333c1.2887-1e-6 2.3333-1.0447 2.3333-2.3333v-14z" fill="#fff" style="paint-order:normal" />
+            <path d="m15 9h-10v-4h10m-3 14a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3m5-16h-12c-1.11 0-2 0.9-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-12l-4-4z" fill="#3c3c3c" style="paint-order:normal" />
+        </g>
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_visited">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" transform="translate(3.8,3.5) scale(0.7)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_hasfinal">
+        <circle id="background" fill="#999" cx="12" cy="12" r="12" />
+        <circle id="foreground" fill="#fff" cx="12" cy="12" r="10" />
+        <path fill="#C62828" d="M6,3A1,1 0 0,1 7,4V4.88C8.06,4.44 9.5,4 11,4C14,4 14,6 16,6C19,6 20,4 20,4V12C20,12 19,14 16,14C13,14 13,12 11,12C8,12 7,14 7,14V21H5V4A1,1 0 0,1 6,3Z" transform="translate(3,3) scale(0.75)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_update_coordinates">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M9 11.5C7.62 11.5 6.5 10.38 6.5 9S7.62 6.5 9 6.5 11.5 7.62 11.5 9 10.38 11.5 9 11.5M9 2C5.13 2 2 5.13 2 9C2 14.25 9 22 9 22S16 14.25 16 9C16 5.13 12.87 2 9 2M18 17L23 12L18 7V17Z" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_publish">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z" transform="translate(3,2.6) scale(0.75)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_retract">
+        <circle fill="#B71C1C" cx="12" cy="12" r="12" />
+        <circle fill="#FF5252" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M9,4H15V12H19.84L12,19.84L4.16,12H9V4Z" transform="translate(3,3.4) scale(0.75)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_disable">
+        <circle fill="#455A64" cx="12" cy="12" r="12" />
+        <circle fill="#90A4AE" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M14,19H18V5H14M6,19H10V5H6V19Z" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_announcement">
+        <circle fill="#B71C1C" cx="12" cy="12" r="12" />
+        <circle fill="#FF5252" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="marker_reviewer_note">
+        <circle fill="#01579B" cx="12" cy="12" r="12" />
+        <circle fill="#039BE5" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" transform="translate(4,3.5) scale(0.666666667)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_discover">
+        <circle fill="#5D4037" cx="12" cy="12" r="12" />
+        <circle fill="#fdd835" cx="12" cy="12" r="10" />
+        <path fill="#5D4037" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" transform="translate(4,4) scale(0.666666667)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_visit">
+        <circle fill="#01579B" cx="12" cy="12" r="12" />
+        <circle fill="#039BE5" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M20,14H4V8H7V10H9V8H15V10H17V8H20M20,19H4V17H20M9,4H15V6H9M20,6H17V4C17,2.89 16.11,2 15,2H9C7.89,2 7,2.89 7,4V6H4C2.89,6 2,6.89 2,8V19C2,20.11 2.89,21 4,21H20C21.11,21 22,20.11 22,19V8C22,6.89 21.11,6 20,6Z" transform="translate(4.5,4.1) scale(0.625)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_retrieve">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z" transform="translate(3,2.6) scale(0.75)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_drop">
+        <circle fill="#1B5E20" cx="12" cy="12" r="12" />
+        <circle fill="#43A047" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M9,4H15V12H19.84L12,19.84L4.16,12H9V4Z" transform="translate(3,3.4) scale(0.75)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_grab">
+        <circle fill="#6D4C41" cx="12" cy="12" r="12" />
+        <circle fill="#EF6C00" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M20 13C20.6 13 21.1 13.2 21.5 13.6C21.8 14 22 14.5 22 15L14 18L7 16V7H8.9L16.2 9.7C16.7 9.9 17 10.3 17 10.8C17 11.1 16.9 11.4 16.7 11.6S16.1 12 15.8 12H13L11.2 11.3L10.9 12.2L13 13H20M1 7H5V18H1V7Z" transform="translate(4.5,4.3) scale(0.65)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_collection">
+        <circle fill="#455A64" cx="12" cy="12" r="12" />
+        <circle fill="#90A4AE" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M3 3H21V7H3V3M4 21V8H20V21H4M14 14V11H10V14H7L12 19L17 14H14Z" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="tb_inventory">
+        <circle fill="#455A64" cx="12" cy="12" r="12" />
+        <circle fill="#90A4AE" cx="12" cy="12" r="10" />
+        <path fill="#fff" d="M4 21H20V8H4M14 15V18H10V15H7L12 10L17 15M3 3H21V7H3" transform="translate(4.5,4.5) scale(0.625)" />
+    </symbol>
+</svg>
