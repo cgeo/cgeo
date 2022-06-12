@@ -1,3 +1,3 @@
 
-- Fix: Exception in CheckerUtils
-- New: Added last geocaching.com login status to status page
+- Oprava: Výjimka v CheckerUtils
+- Novinka: Na stavovou stránku přidán poslední stav přihlášení na geocaching.com
