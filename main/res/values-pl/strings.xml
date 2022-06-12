@@ -266,11 +266,11 @@
     <string name="warn_no_username">Brak nazwy użytkownika.</string>
     <string name="warn_no_connector">Brak aktywnych usług geocachingowych umożliwiających ten typ wyszukiwania.</string>
     <string name="warn_search_help_title">Potrzebujesz pomocy?</string>
-    <string name="warn_search_help_address">Wpisz adres lub nazwę, np. adres ulicy \"ul. Grunwaldzka, Gdańsk, Polska\", nazwę miasta \"Koszalin\" lub po prostu nazwę jak \"Łazienki Królewskie\".</string>
-    <string name="warn_search_help_gccode">Wpisz kod GC skrytki. Na przykład \"GC1VCAZ\".</string>
-    <string name="warn_search_help_keyword">Wpisz pełną nazwę skrytki lub jej część. Na przykład \"Rysy\".</string>
+    <string name="warn_search_help_address">Wpisz adres lub nazwę miejsca, np. adres ulicy „ul. Grunwaldzka, Gdańsk, Polska”, nazwę miasta „Koszalin” lub po prostu nazwę jak „Łazienki Królewskie”.</string>
+    <string name="warn_search_help_gccode">Wpisz kod GC skrytki. Na przykład „GC1VCAZ”.</string>
+    <string name="warn_search_help_keyword">Wpisz pełną nazwę skrytki lub jej część. Na przykład „Rysy”.</string>
     <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
-    <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
+    <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład „TB29QMZ”.</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
@@ -403,7 +403,7 @@
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać nowe współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
     <string name="caches_upload_allcoords_dialogtitle">UWAGA - Przesyłanie wszystkich współrzędnych</string>
-    <string name="caches_upload_allcoords_warning">Spowoduje to nadpisanie istniejących współrzędnych na serwerze dla wszystkich (zaznaczonych) skrytek na Twojej liście bieżącymi współrzędnymi zapisanymi w c:geo! Tę operację można zastosować tylko w szczególnych przypadkach, np. gdy zaimportowałeś plik GPX, który zawiera skorygowane współrzędne. Nie można cofnąć tej operacji i powinieneś ją używać tylko wtedy, gdy wiesz, co robisz. W normalnych przypadkach możesz raczej chcieć użyć funkcji \"Wyślij zmodyfikowane współrzędne\" w tym samym menu.</string>
+    <string name="caches_upload_allcoords_warning">Spowoduje to nadpisanie istniejących współrzędnych na serwerze dla wszystkich (zaznaczonych) skrytek na Twojej liście bieżącymi współrzędnymi zapisanymi w c:geo! Tę operację można zastosować tylko w szczególnych przypadkach, np. gdy zaimportowałeś plik GPX, który zawiera skorygowane współrzędne. Nie można cofnąć tej operacji i powinieneś ją używać tylko wtedy, gdy wiesz, co robisz. W normalnych przypadkach możesz raczej chcieć użyć funkcji „Wyślij zmodyfikowane współrzędne” w tym samym menu.</string>
     <string name="caches_refresh_selected">Odśwież wybrane</string>
     <string name="caches_refresh_all">Odśwież wszystkie</string>
     <string name="caches_move_selected">Przenieś zaznaczone</string>
@@ -457,7 +457,7 @@
     <string name="list_dialog_create">Utwórz</string>
     <string name="list_dialog_create_err">c:geo nie mógł utworzyć nowej listy</string>
     <string name="list_dialog_remove_title">Usuń listę</string>
-    <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki na tej liście zostaną przeniesione do listy \"Zapisane\".</string>
+    <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki na tej liście zostaną przeniesione do listy „Zapisane”.</string>
     <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
     <string name="list_dialog_do_not_ask_me_again">Nie pytaj ponownie o tę listę</string>
     <string name="list_dialog_remove">Usuń</string>
@@ -607,10 +607,10 @@
     <string name="about_system_info">c:geo informacje systemowe</string>
     <string name="about_system_info_send_chooser">Wyślij informacje systemowe</string>
     <string name="about_system_write_logcat">Generuj plik dziennika</string>
-    <string name="about_system_write_logcat_type">Utworzyć standardowy lub rozszerzony plik logów?\n\nStandardowe pliki logów będą dobre dla większości przypadków używania.\nUżywaj rozszerzonych plików logów tylko wtedy, gdy zostaniesz o to poproszony.</string>
+    <string name="about_system_write_logcat_type">Utworzyć standardowy lub rozszerzony plik dziennika?\n\nStandardowe pliki dziennika będą dobre dla większości przypadków.\nUżywaj rozszerzonych plików dziennika tylko wtedy, gdy zostaniesz o to poproszony.</string>
     <string name="about_system_write_logcat_type_standard">Standardowy</string>
     <string name="about_system_write_logcat_type_extended">Rozszerzony</string>
-    <string name="about_system_write_logcat_success">Plik dziennika \"%1$s\" zapisany do folderu \"%2$s\"</string>
+    <string name="about_system_write_logcat_success">Plik dziennika „%1$s” zapisany do folderu „%2$s”</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
     <string name="changelog_github">Lista wszystkich zmian</string>
@@ -630,7 +630,7 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Zgłoś problem</string>
     <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
-    <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo. \nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji \"O c:geo\"</string>
+    <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo.\nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji „O c:geo”</string>
     <string name="debug_current_downloads">Bieżące pobierania</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
@@ -648,7 +648,7 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_routing">Nawigacja offline</string>
-    <string name="settings_summary_offline_routing">Nawigacja offline jest dostępna jeśli zainstalowana i skonfigurowana jest aplikacja \"BRouter\" lub włączona jest nawigacja wewnętrzna.</string>
+    <string name="settings_summary_offline_routing">Nawigacja offline jest dostępna jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączona jest nawigacja wewnętrzna.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
@@ -892,16 +892,16 @@
     <string name="init_trailwidth_summary">Wybierz grubość dla linii historii ścieżki</string>
     <string name="init_directioncolor">Kolor linii kierunku</string>
     <string name="init_directioncolor_summary">Wybierz kolor i nieprzezroczystość dla linii kierunkowej. Kierunek pokazuje linię prostą do wybranego celu nawigacyjnego, lub określoną ścieżkę nawigacyjną, jeśli trasa jest włączona poprzez zainstalowanie aplikacji BRouter.</string>
-    <string name="init_directionwidth">Szerokość linii kierunku</string>
-    <string name="init_directionwidth_summary">Wybierz szerokość dla linii kierunku</string>
+    <string name="init_directionwidth">Grubość linii kierunku</string>
+    <string name="init_directionwidth_summary">Wybierz grubość dla linii kierunku</string>
     <string name="init_routecolor">Kolor linii indywidualnej trasy</string>
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie dotknięcie na punkt nawigacyjny/skrytkę. (Musisz najpierw włączyć funkcję długiego naciśnięcia, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Grubość linii indywidualnej trasy</string>
     <string name="init_routewidth_summary">Wybierz grubość dla linii indywidualnej trasy</string>
     <string name="init_trackcolor">Kolor linii ścieżki/trasy GPX</string>
     <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki/trasy. Ścieżka/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ścieżki/trasy.</string>
-    <string name="init_trackwidth">Szerokość linii ścieżki/trasy GPX</string>
-    <string name="init_trackwidth_summary">Wybierz szerokość dla linii ścieżki/trasy GPX</string>
+    <string name="init_trackwidth">Grubość linii ścieżki/trasy GPX</string>
+    <string name="init_trackwidth_summary">Wybierz grubość dla linii ścieżki/trasy GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgu. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrytki lub fizycznego punktu nawigacji, gdzie nie jest dozwolona żadna inna skrytka lub fizyczny punkt nawigacji. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
@@ -910,9 +910,9 @@
     <string name="init_accuracycirclecolor_summary">Wybierz kolor i poziom przezroczystości dla linii okręgu dokładności. Okręg dokładności jest używany jako wizualna reprezentacja dokładności sygnału lokalizacji.</string>
     <string name="init_accuracycirclefillcolor">Kolor wypełnienia okręgu dokładności</string>
     <string name="init_accuracycirclefillcolor_summary">Wybierz kolor i poziom przezroczystości dla wypełniania okręgów dokładności</string>
-    <string name="init_include_found_status">Uwzględnij status \"Znalezione\"</string>
-    <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
-    <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na \"Odwiedzony\"</string>
+    <string name="init_include_found_status">Uwzględnij status „Znalezione”</string>
+    <string name="init_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
+    <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
     <string name="init_offlinelogs_homescreen">Pokaż wpisy offline</string>
     <string name="init_summary_offlinelogs_homescreen">Licznik wpisów offline (np. „+ 1”) pojawi się obok Twojego licznika znalezień online na ekranie głównym, jeśli masz wpisy, które jeszcze nie zostały przesłane.</string>
@@ -981,8 +981,8 @@
     <string name="feature_search_live_map">Mapa skrytek online</string>
     <string name="feature_search_center">Szukanie po lokalizacji</string>
     <string name="feature_search_geocode">Szukanie po numerze skrytki</string>
-    <string name="feature_search_owner">Szukaj wg właściciela</string>
-    <string name="feature_search_finder">Szukaj wg znalazcy</string>
+    <string name="feature_search_owner">Szukanie wg właściciela</string>
+    <string name="feature_search_finder">Szukanie wg znalazcy</string>
     <string name="feature_favorite">Dodaję skrytkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrytek</string>
     <string name="init_maplines_title">Dostosowanie linii mapy</string>
@@ -1127,7 +1127,7 @@
     <string name="cache_offline_drop">Usuń z listy</string>
     <string name="cache_delete_userdefined_waypoints">Usuń punkty zdefiniowane przez użytkownika</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Czy usunąć wszystkie zdefiniowane punkty użytkownika dla tej skrytki?\n\nPunkty zostaną zostaną natychmiast usunięte, nie można tego cofnąć.</string>
-    <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono \"Punkty nawigacji z notatki\". Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty nawigacji zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki osobistej.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono „Punkty nawigacji z notatki”. Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty nawigacji zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki osobistej.</string>
     <string name="cache_delete_userdefined_waypoints_success">Punkty zdefiniowane przez użytkownika zostały usunięte</string>
     <string name="cache_delete_generated_waypoints">Usuń wygenerowane punkty nawigacji</string>
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
@@ -1345,14 +1345,14 @@
     <string name="internal_cache_default_name">Skrytka zdefiniowana przez użytkownika #%1$d</string>
     <string name="internal_cache_default_description">To jest skrytka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
-    <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
-    <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacyjnych tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacyjny. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
+    <string name="internal_goto_targets_title">Cele „Idź do”</string>
+    <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele „Idź do”. Jest ona automatycznie tworzona po użyciu funkcji „Idź do” w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacji. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrytkę zdefiniowaną przez użytkownika)</string>
     <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
-    <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
+    <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
@@ -2131,7 +2131,7 @@
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
-    <string name="map_disable_autotarget_individual_route">\"Ustaw początek trasy jako cel\" wyłączony</string>
+    <string name="map_disable_autotarget_individual_route">„Ustaw początek trasy jako cel” wyłączony</string>
     <string name="map_clear_manual_targets">Wyczyść ręczne cele</string>
     <string name="map_manual_targets_cleared">Ręczne cele wyczyszczone</string>
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
@@ -2152,7 +2152,7 @@
     <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania ścieżki/trasy</string>
     <string name="map_clear_track">Wyczyść trasę/ślad</string>
-    <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad \"%s\"?</string>
+    <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad „%s”?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
@@ -2202,7 +2202,7 @@
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Odbieranie pliku</string>
-    <string name="receivedownload_success">Plik pomyślnie zapisany jako \"%s\"</string>
+    <string name="receivedownload_success">Plik pomyślnie zapisany jako „%s”</string>
     <string name="receivedownload_error">Błąd podczas odbierania pliku</string>
     <string name="receivedownload_error_io_exception">Błąd I/O podczas odbierania pliku. Czy Twój folder \"%s\" jest zapisywalny?</string>
     <string name="receivedownload_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku.</string>
@@ -2211,13 +2211,13 @@
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
     <string name="download_title">Pobieranie pliku</string>
-    <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
+    <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
-    <string name="download_confirmation">%1$sPobrać plik \"%2$s\"?%3$s</string>
+    <string name="download_confirmation">%1$sPobrać plik „%2$s”?%3$s</string>
     <string name="download_confirmation_updates">Znaleziono aktualizacje dla:\n%1$s\n\nCzy chcesz zaktualizować?%2$s</string>
     <string name="download_warning">Może to zająć trochę czasu i może prowadzić do znacznych kosztów, w zależności od Twojego połączenia z siecią.</string>
     <string name="download_error">Nieudane pobieranie (błąd #%d)</string>
@@ -2267,11 +2267,11 @@
     <!-- history track export -->
     <string name="trailhistory">Historia ścieżki</string>
     <string name="export_trailhistory_title">Eksportuj historię ścieżki</string>
-    <string name="export_trailhistory_success">Wyeksportowano historię ścieżki do \"%s\"</string>
+    <string name="export_trailhistory_success">Wyeksportowano historię ścieżki do „%s”</string>
     <string name="export_trailhistory_clear_after_export">Wyczyść historię ścieżki po wyeksportowaniu</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksportuj indywidualną trasę</string>
-    <string name="export_individualroute_success">Wyeksportowano indywidualną trasę do \"%s\"</string>
+    <string name="export_individualroute_success">Wyeksportowano indywidualną trasę do „%s”</string>
     <!-- install wizard -->
     <string name="wizard">Kreator konfiguracji</string>
     <string name="wizard_welcome_title">Witamy w c:geo</string>
@@ -2284,7 +2284,7 @@
     <string name="wizard_permissions_title">Ustaw uprawnienia aplikacji</string>
     <string name="wizard_permissions_intro">c:geo do prawidłowego działania wymaga pewnych uprawnień na urządzeniu.\nW dalszych krokach wyjaśnię więcej szczegółów.</string>
     <string name="wizard_permissions_folder_title">Ustaw folder: %s</string>
-    <string name="wizard_basefolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania danych takich jak pliki GPX, kopie zapasowe, notatki polowe i pliki logów. Domyślnie te pliki są przechowywane w podfolderach tak zwanego „folderu podstawowego”. Wybierz lub utwórz taki folder w następnym kroku.\n\nJeśli zaktualizowałeś c:geo z poprzedniej wersji, wybierz istniejący folder „cgeo” na głównym poziomie pamięci urządzenia.\nWskazówka: Być może musisz najpierw odkryć pamięć wewnętrzną urządzenia w kolejnym selektorze plików.</string>
+    <string name="wizard_basefolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania danych takich jak pliki GPX, kopie zapasowe, notatki polowe i pliki dziennika. Domyślnie te pliki są przechowywane w podfolderach tak zwanego „folderu podstawowego”. Wybierz lub utwórz taki folder w następnym kroku.\n\nJeśli zaktualizowałeś c:geo z poprzedniej wersji, wybierz istniejący folder „cgeo” na głównym poziomie pamięci urządzenia.\nWskazówka: Być może musisz najpierw odkryć pamięć wewnętrzną urządzenia w kolejnym selektorze plików.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików z mapami offline.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania motywów dla map offline.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików GPX (np. do importowania / eksportowania skrytek lub śladów).</string>
@@ -2308,7 +2308,7 @@
     <string name="wizard_status_basefolder">Folder podstawowy</string>
     <string name="wizard_status_platform">Usługi Geocaching</string>
     <string name="wizard_not_now">Nie teraz</string>
-    <string name="wizard_skip_wizard_warning">c:geo może nie działać zgodnie z oczekiwaniami dopóki konfiguracja nie zostanie zakończona. W zależności od brakującej konfiguracji c:geo może nie być w stanie odczytywać/przechowywać danych takich jak mapy offline, skrytki, pliki logów itp.\n\nGdy będziesz gotowy do sfinalizowania konfiguracji, wybierz „Kreatora konfiguracji” w menu głównym lub zrestartuj c:geo.</string>
+    <string name="wizard_skip_wizard_warning">c:geo może nie działać zgodnie z oczekiwaniami dopóki konfiguracja nie zostanie zakończona. W zależności od brakującej konfiguracji c:geo może nie być w stanie odczytywać/przechowywać danych takich jak mapy offline, skrytki, pliki dziennika itp.\n\nGdy będziesz gotowy do sfinalizowania konfiguracji, wybierz „Kreatora konfiguracji” w menu głównym lub zrestartuj c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizacja folderu %1$s zakończona po %2$s, %3$d z %4$s wymaga synchronizacji</string>
     <!-- default actions in dialogs -->
