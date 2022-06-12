@@ -530,7 +530,6 @@
     <string name="cache_personal_note">Personal nga sulat</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Limitasyon sa personal nga nota</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang kaning personal nga note kay putlon inig human sa %d mga karakter pinaagi sa Geocaching.com.</string>
     <string name="cache_personal_note_upload">I-upload</string>
     <string name="cache_personal_note_uploading">Pag-upload ug personal nga nota</string>
     <string name="cache_personal_note_upload_done">Ang personal nga nota kay na-upload</string>

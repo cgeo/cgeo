@@ -1113,12 +1113,9 @@
     <string name="cache_personal_note_removewaypoints">Fjern veipunkter</string>
     <string name="cache_personal_note_removedwaypoints">Veipunkter fjernet</string>
     <string name="cache_personal_note_storewaypoints_success">Veipunkter ble lagt til personlig notat</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Veipunkter ble lagt til notat, men måtte forkortes (maksimal personlig notat-størrelse: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Veipunkter kan ikke lagres i notat på grunn av størrelsesbegrensningene (maksimal personlig notat-størrelse: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Ingen veipunkter som kan lagres ble funnet</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Unngå uttrekk av veipunkter</string>
     <string name="cache_personal_note_limit">Begrensning på personlig cachenotat</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Dette personlige cachenotatet vil bli kuttet etter %d bokstaver av Geocaching.com.</string>
     <string name="cache_personal_note_upload">Last opp</string>
     <string name="cache_personal_note_uploading">Laster opp personlig cachenotat</string>
     <string name="cache_personal_note_upload_done">Personlig cachenotat er lastet opp</string>

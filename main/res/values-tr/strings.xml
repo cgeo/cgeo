@@ -1118,12 +1118,9 @@
     <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Kaldırılacak yol noktası bulunamadı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Kaydedilebilir ara nokta bulunamadı</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Yol noktası çıkarmayı engelle</string>
     <string name="cache_personal_note_limit">Kişisel not sınırı</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Bu kişisel not, %d karakterden sonra Geocaching.com tarafından kesilecek.</string>
     <string name="cache_personal_note_upload">Yükle</string>
     <string name="cache_personal_note_uploading">Kişisel not yükleniyor</string>
     <string name="cache_personal_note_upload_done">Kişisel not yüklendi</string>

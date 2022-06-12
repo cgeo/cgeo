@@ -1152,12 +1152,9 @@
     <string name="cache_personal_note_removedwaypoints">Points de passage supprimés</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Aucun point de passage à supprimer</string>
     <string name="cache_personal_note_storewaypoints_success">Les points de passage ont été ajoutés à la note personnelle</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Les points de passage ont été ajoutés à la note mais ont été raccourcis (taille maximale de la note personnelle : %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Les points de passage n\'ont pas pu être stockés dans la note en raison de la limite de taille (taille maximale de la note personnelle : %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Aucun point de passage enregistrable trouvé</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des points de passage</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
     <string name="cache_personal_note_upload">Envoyer</string>
     <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>

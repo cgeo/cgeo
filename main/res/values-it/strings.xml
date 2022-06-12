@@ -1152,12 +1152,9 @@
     <string name="cache_personal_note_removedwaypoints">Waypoints rimossi</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nessun waypoint trovato da rimuovere</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">I waypoint sono stati aggiunti alla nota ma hanno dovuto essere accorciati (lunghezza massima della nota: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">I waypoint non possono essere memorizzati nella nota a causa dei limiti di dimensione (lunghezza massima della nota: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nessun waypoint memorizzabile trovato</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Questa nota personale verrà troncata da Geocaching.com dopo %d caratteri.</string>
     <string name="cache_personal_note_upload">Carica</string>
     <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
     <string name="cache_personal_note_upload_done">Nota personale caricata</string>

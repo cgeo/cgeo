@@ -1181,12 +1181,9 @@
     <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty nawigacji zostały dodane do notatki osobistej</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Punkty nawigacji zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Punkty nawigacji nie mogą być zapisane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacji, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
     <string name="cache_personal_note_upload">Wyślij</string>
     <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
     <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>

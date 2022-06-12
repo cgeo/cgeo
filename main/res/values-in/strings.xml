@@ -553,7 +553,6 @@
     <string name="cache_personal_note">Catatan pribadi</string>
     <string name="cache_personal_note_edit">Sunting</string>
     <string name="cache_personal_note_limit">Batas catatan pribadi</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Catatan pribadi ini akan dipotong setelah %d karakter oleh Geocaching.com.</string>
     <string name="cache_personal_note_upload">Unggah</string>
     <string name="cache_personal_note_uploading">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_done">Mengunggah catatan pribadi</string>

@@ -964,12 +964,9 @@
     <string name="cache_personal_note_removedwaypoints">Путевые точки удалены</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Нет точек для удаления</string>
     <string name="cache_personal_note_storewaypoints_success">Путевые точки были добавлены в личную заметку</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Путевые точки были добавлены к заметке, но их нужно было сократить (максимальный размер персональной заметки: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Путевые точки не могут быть сохранены в заметке из-за ограничений размера (максимальный размер персональной заметки: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Не найдено сохраняемых путевых точек</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Не создавать точки из текста заметки</string>
     <string name="cache_personal_note_limit">Лимит персональных заметок</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Персональная заметка будет обрезана после %d символов из-за лимита на Geocaching.com.</string>
     <string name="cache_personal_note_upload">Загрузить</string>
     <string name="cache_personal_note_uploading">Загрузка личной заметки</string>
     <string name="cache_personal_note_upload_done">Личная заметка загружена</string>

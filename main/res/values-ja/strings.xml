@@ -1106,12 +1106,9 @@
     <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">ノートにウェイポイントが追加されましたが超過分は削除されました\n(パーソナルノートの最大サイズ:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">ノートのサイズ制限のためウェイポイントが追加されませんでした\n(パーソナルノートの最大サイズ:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">保存できるウェイポイントが見つかりません</string>
     <string name="cache_personal_note_preventWaypointsExtraction">ウェイポイント抽出しない</string>
     <string name="cache_personal_note_limit">パーソナルノートの制限</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">このパーソナルノートはGeocaching.comにより%d文字以降は削除されます</string>
     <string name="cache_personal_note_upload">アップロード</string>
     <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>

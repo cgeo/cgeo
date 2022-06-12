@@ -1022,12 +1022,9 @@
     <string name="cache_personal_note_edit">Redaguoti</string>
     <string name="cache_personal_note_removedwaypoints">Kelio taškai pašalinti</string>
     <string name="cache_personal_note_storewaypoints_success">Papildomi taškai pridėti prie asmeninių užrašų</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Papildomi taškai pridėti prie užrašų, tačiau buvo sutrumpinti (maksimalus asmeninių užrašų ilgis: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Nepavyko išsaugoti papildomų taškų, nes viršyta asmeninių užrašų ilgio riba (%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nerasta saugomų papildomų taškų</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Neleisti išskleisti papildomų taškų</string>
     <string name="cache_personal_note_limit">Asmeninės pastabos limitas</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ši asmeninė pastaba bus sutrumpinta Geocaching.com svetainės iki %d simbolių.</string>
     <string name="cache_personal_note_upload">Įkelti</string>
     <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
