@@ -88,11 +88,9 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
@@ -120,7 +118,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

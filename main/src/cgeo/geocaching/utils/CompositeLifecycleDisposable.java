@@ -27,28 +27,28 @@ public class CompositeLifecycleDisposable implements LifecycleEventObserver, Dis
     }
 
     @Override
-    public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+    public void onStateChanged(@NonNull final LifecycleOwner source, @NonNull final Lifecycle.Event event) {
         if (event == untilEvent) {
             disposable.clear();
         }
     }
 
     @Override
-    public boolean add(@NonNull Disposable d) {
+    public boolean add(@NonNull final Disposable d) {
         return disposable.add(d);
     }
 
-    public boolean addAll(@NonNull Disposable... disposables) {
+    public boolean addAll(@NonNull final Disposable... disposables) {
         return disposable.addAll(disposables);
     }
 
     @Override
-    public boolean remove(@NonNull Disposable d) {
+    public boolean remove(@NonNull final Disposable d) {
         return disposable.remove(d);
     }
 
     @Override
-    public boolean delete(@NonNull Disposable d) {
+    public boolean delete(@NonNull final Disposable d) {
         return disposable.delete(d);
     }
 

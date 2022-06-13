@@ -3,7 +3,6 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
@@ -75,10 +74,7 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
@@ -101,7 +97,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

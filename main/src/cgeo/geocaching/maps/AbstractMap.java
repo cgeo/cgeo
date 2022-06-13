@@ -46,7 +46,7 @@ public abstract class AbstractMap implements LifecycleOwner {
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
 
-    final private LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
+    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
 
     protected AbstractMap(final MapActivityImpl activity) {
         mapActivity = activity;

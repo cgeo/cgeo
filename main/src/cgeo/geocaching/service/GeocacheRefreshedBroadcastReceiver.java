@@ -21,21 +21,21 @@ public abstract class GeocacheRefreshedBroadcastReceiver extends BroadcastReceiv
         applicationContext = context.getApplicationContext();
     }
 
-    protected abstract void onReceive(final Context context, final String geocode);
+    protected abstract void onReceive(Context context, String geocode);
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, final Intent intent) {
         final String geocode = intent.getStringExtra(EXTRA_GEOCODE);
         onReceive(context, geocode);
     }
 
     @Override
-    public void onStart(@NonNull LifecycleOwner owner) {
+    public void onStart(@NonNull final LifecycleOwner owner) {
         LocalBroadcastManager.getInstance(applicationContext).registerReceiver(this, new IntentFilter(ACTION_GEOCACHE_REFRESHED));
     }
 
     @Override
-    public void onStop(@NonNull LifecycleOwner owner) {
+    public void onStop(@NonNull final LifecycleOwner owner) {
         LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(this);
     }
 
