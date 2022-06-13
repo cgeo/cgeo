@@ -90,6 +90,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ColorUtils;
+import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -159,6 +160,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
@@ -174,7 +176,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.DisposableContainer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -232,14 +234,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private ImageGalleryView imageGallery;
 
-    private final CompositeDisposable createDisposables = new CompositeDisposable();
+    private final DisposableContainer createDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_DESTROY);
     /**
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
      */
     private Waypoint selectedWaypoint;
 
     private boolean requireGeodata;
-    private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
+    private final CompositeLifecycleDisposable geoDataDisposable = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
@@ -437,14 +439,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     @Override
-    public void onPause() {
-        geoDataDisposable.clear();
-        super.onPause();
-    }
-
-    @Override
     public void onDestroy() {
-        createDisposables.clear();
         SpeechService.stopService(this);
         if (cache != null) {
             cache.setChangeNotificationHandler(null);

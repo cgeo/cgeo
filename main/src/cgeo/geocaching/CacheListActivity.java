@@ -86,6 +86,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -124,6 +125,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -142,7 +144,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.DisposableContainer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -233,7 +235,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
-    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
+    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
@@ -715,12 +717,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     protected void onStop() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
         super.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        resumeDisposables.clear();
-        super.onPause();
     }
 
     @Override

@@ -15,6 +15,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -35,15 +36,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Lifecycle;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.DisposableContainer;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
     public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
     public static final int REQUEST_CODE_TARGET_INFO = 1;
     protected static final String GEOCODE_ARG = "GEOCODE";
     protected static final String WAYPOINT_ARG = "WAYPOINT";
-    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
+    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
@@ -109,13 +111,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                     }
                 });
         init();
-    }
-
-
-    @Override
-    public void onPause() {
-        resumeDisposables.clear();
-        super.onPause();
     }
 
     protected final void addCacheDetails(final boolean showGeocode) {

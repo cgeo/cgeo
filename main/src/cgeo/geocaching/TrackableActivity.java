@@ -30,6 +30,7 @@ import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -58,6 +59,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.text.HtmlCompat;
+import androidx.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -65,7 +67,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.DisposableContainer;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -110,8 +112,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     private ImagesList imagesList = null;
     private ImageGalleryView imageGallery = null;
     private String fallbackKeywordSearch = null;
-    private final CompositeDisposable createDisposables = new CompositeDisposable();
-    private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
+    private final DisposableContainer createDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_DESTROY);
+    private final DisposableContainer geoDataDisposable = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
     private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @SuppressWarnings("EmptyMethod")
         @Override
@@ -232,12 +234,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onPause() {
-        geoDataDisposable.clear();
-        super.onPause();
     }
 
     private void act(final Trackable newTrackable) {
@@ -750,7 +746,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
     @Override
     protected void onDestroy() {
-        createDisposables.clear();
         if (imageGallery != null) {
             imageGallery.clear();
         }

@@ -15,6 +15,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -45,6 +46,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Lifecycle;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
@@ -52,7 +54,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -60,7 +61,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     protected CgeoApplication app = null;
     protected Resources res = null;
-    private final CompositeDisposable resumeDisposable = new CompositeDisposable();
+    private final CompositeLifecycleDisposable resumeDisposable = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
 
     private final String logToken = "[" + this.getClass().getName() + "]";
 
@@ -125,7 +126,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     @Override
     public void onPause() {
         Log.v(logToken + ".onPause");
-        resumeDisposable.clear();
         super.onPause();
     }
 
