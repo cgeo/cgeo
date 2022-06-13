@@ -63,6 +63,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
+import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -219,10 +220,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private RouteTrackUtils routeTrackUtils = null;
 
-    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
+    private final GeocacheRefreshedBroadcastReceiver cacheRefreshedBroadcastReceiver = new GeocacheRefreshedBroadcastReceiver(this) {
         @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
+        protected void onReceive(final Context context, final String geocode) {
             caches.invalidate(Collections.singleton(geocode));
         }
     };
@@ -367,6 +367,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
         MapUtils.showMapOneTimeMessages(this, mapMode);
+        getLifecycle().addObserver(cacheRefreshedBroadcastReceiver);
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -798,7 +799,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         Log.d("NewMap: onStart");
 
         initializeLayers();
-        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
     }
 
     private void initializeLayers() {
@@ -909,7 +909,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         waitDialog = null;
         terminateLayers();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
 
         super.onStop();
     }
