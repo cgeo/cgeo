@@ -102,10 +102,12 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         return searchByCenter(center, 20);
     }
 
+    @NonNull
     @WorkerThread
     private static Collection<Geocache> searchByCenter(final Geopoint center, final int distance) {
         final Parameters params = new Parameters("fnc", "center");
@@ -121,6 +123,7 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
         //for now we have to assume that ECConnector supports only SINGLE criteria search
 

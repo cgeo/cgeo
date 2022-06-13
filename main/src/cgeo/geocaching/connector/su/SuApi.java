@@ -59,6 +59,7 @@ public class SuApi {
 
 
     @NonNull
+    @WorkerThread
     public static UserInfo getUserInfo(@NonNull final SuConnector connector) throws SuApiException {
         final Parameters params = new Parameters();
 
@@ -72,6 +73,7 @@ public class SuApi {
     }
 
     @Nullable
+    @WorkerThread
     public static Geocache searchByGeocode(final String geocode) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(geocode);
         if (!(connector instanceof SuConnector)) {
@@ -92,6 +94,7 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     public static List<Geocache> searchByBBox(final Viewport viewport, @NonNull final SuConnector connector) throws SuApiException {
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
@@ -108,6 +111,7 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     public static List<Geocache> searchByKeyword(final String keyword, @NonNull final SuConnector connector) throws SuApiException {
         if (keyword.isEmpty()) {
             return Collections.emptyList();
@@ -121,6 +125,7 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     public static List<Geocache> searchByOwner(final String owner, @NonNull final SuConnector connector) throws SuApiException {
         if (owner.isEmpty()) {
             return Collections.emptyList();
@@ -142,6 +147,7 @@ public class SuApi {
      * @return list of caches located around {@code center}
      */
     @NonNull
+    @WorkerThread
     public static List<Geocache> searchByCenter(final Geopoint center, final float radius, @NonNull final SuConnector connector) throws SuApiException {
         final Parameters params = new Parameters(
                 "lat", String.valueOf(center.getLatitude()),
@@ -153,6 +159,7 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     public static List<Geocache> searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final SuConnector connector) throws SuApiException {
 
         //for now we have to assume that SUConnector supports only SINGLE criteria search
@@ -194,6 +201,7 @@ public class SuApi {
     }
 
     @NonNull
+    @WorkerThread
     public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, final boolean addRecommendation) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
         if (!(connector instanceof SuConnector)) {
@@ -263,6 +271,7 @@ public class SuApi {
         return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
     }
 
+    @WorkerThread
     public static boolean setWatchState(@NonNull final Geocache cache, final boolean watched) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("watched", watched ? "true" : "false");
@@ -279,6 +288,7 @@ public class SuApi {
         return true;
     }
 
+    @WorkerThread
     public static boolean setIgnoreState(@NonNull final Geocache cache, final boolean ignored) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("ignored", ignored ? "true" : "false");
@@ -295,6 +305,7 @@ public class SuApi {
         return true;
     }
 
+    @WorkerThread
     public static boolean setRecommendation(@NonNull final Geocache cache, final boolean status) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("recommend", status ? "true" : "false");
@@ -317,6 +328,7 @@ public class SuApi {
         return true;
     }
 
+    @WorkerThread
     public static boolean postVote(@NonNull final Geocache cache, final float rating) {
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         params.add("value", String.valueOf(rating));
@@ -337,7 +349,6 @@ public class SuApi {
         return true;
     }
 
-
     public static int getAvailableRecommendations() {
         // Nothing here as we want to get info about current user
         final Parameters params = new Parameters();
@@ -355,6 +366,7 @@ public class SuApi {
         return data.get("data").get("recommendationsLeft").asInt();
     }
 
+    @WorkerThread
     public static boolean uploadPersonalNote(final Geocache cache) {
         final String currentNote = StringUtils.defaultString(cache.getPersonalNote());
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
