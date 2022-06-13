@@ -701,6 +701,142 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(12);
     }
 
+    /**
+     * distance circle should be shown for some cache-types only for GC- and internal connector.
+     */
+    public final void testShowDistanceCircleForCaches() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+
+        cache.setType(CacheType.TRADITIONAL);
+        assertThat(cache.applyDistanceRule()).as("show for traditional").isTrue();
+
+        cache.setType(CacheType.USER_DEFINED);
+        assertThat(cache.applyDistanceRule()).as("show for user-defined").isTrue();
+
+        cache.setType(CacheType.MULTI);
+        assertThat(cache.applyDistanceRule()).as("don't show for multi").isFalse();
+
+        cache.setType(CacheType.MYSTERY);
+        assertThat(cache.applyDistanceRule()).as("don't show for mystery").isFalse();
+
+        cache.setGeocode("ZZ1234");
+        cache.setType(CacheType.TRADITIONAL);
+        assertThat(cache.applyDistanceRule()).as("show for Internal").isTrue();
+
+        cache.setGeocode("OC12345");
+        cache.setType(CacheType.TRADITIONAL);
+        assertThat(cache.applyDistanceRule()).as("don't show for OC").isFalse();
+    }
+
+    /**
+     * distance circle should be shown for some cache-types with user-modified-coordinates.
+     */
+    public final void testShowDistanceCircleForCacheWithUsermodifiedCoordinates() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+        cache.setUserModifiedCoords(true);
+
+        cache.setType(CacheType.TRADITIONAL);
+        assertThat(cache.applyDistanceRule()).as("show for traditional").isTrue();
+
+        cache.setType(CacheType.USER_DEFINED);
+        assertThat(cache.applyDistanceRule()).as("show for user-defined").isTrue();
+
+        cache.setType(CacheType.MULTI);
+        assertThat(cache.applyDistanceRule()).as("show for multi with user-modified coords").isTrue();
+
+        cache.setType(CacheType.MYSTERY);
+        assertThat(cache.applyDistanceRule()).as("show for mystery with user-modified coords").isTrue();
+    }
+
+    /**
+     * distance circle must not be shown for archived caches.
+     */
+    public final void testShowDistanceCircleNotForArchivedCaches() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+        cache.setArchived(true);
+
+        cache.setType(CacheType.TRADITIONAL);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived traditional").isFalse();
+
+        cache.setType(CacheType.USER_DEFINED);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived user-defined").isFalse();
+
+        cache.setType(CacheType.MULTI);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived multi").isFalse();
+
+        cache.setType(CacheType.MYSTERY);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived mystery").isFalse();
+
+
+        cache.setUserModifiedCoords(true);
+
+        cache.setType(CacheType.MULTI);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived multi with user-modified coords").isFalse();
+
+        cache.setType(CacheType.MYSTERY);
+        assertThat(cache.applyDistanceRule()).as("don't show for archived mystery with user-modified coords").isFalse();
+    }
+
+    /**
+     * distance circle should be shown for some waypoint-types.
+     */
+    public final void testShowDistanceCircleForWaypoint() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+        saveFreshCacheToDB(cache);
+
+        final Waypoint finalWaypoint = new Waypoint("Final", WaypointType.FINAL, true);
+        final Waypoint stageWaypoint = new Waypoint("Stage", WaypointType.STAGE, true);
+        final Waypoint parkingWaypoint = new Waypoint("Stage", WaypointType.PARKING, true);
+        final Waypoint ownWaypoint = new Waypoint("Stage", WaypointType.OWN, true);
+        cache.addOrChangeWaypoint(finalWaypoint, false);
+        cache.addOrChangeWaypoint(stageWaypoint, false);
+        cache.addOrChangeWaypoint(parkingWaypoint, false);
+        cache.addOrChangeWaypoint(ownWaypoint, false);
+
+        assertThat(finalWaypoint.applyDistanceRule()).as("show for final waypoint").isTrue();
+        assertThat(stageWaypoint.applyDistanceRule()).as("show for stage waypoint").isTrue();
+        assertThat(parkingWaypoint.applyDistanceRule()).as("don't show for parking waypoint").isFalse();
+        assertThat(ownWaypoint.applyDistanceRule()).as("don't show for own waypoint").isFalse();
+
+
+        final Geocache ocCache = new Geocache();
+        ocCache.setGeocode("OC12345");
+        saveFreshCacheToDB(ocCache);
+
+        final Waypoint ocFinalWaypoint = new Waypoint("Final", WaypointType.FINAL, true);
+        ocCache.addOrChangeWaypoint(ocFinalWaypoint, false);
+
+        assertThat(ocFinalWaypoint.applyDistanceRule()).as("don't show for final waypoint of OC-cache").isFalse();
+    }
+
+    /**
+     * distance circle must not be shown for waypoints of archived caches.
+     */
+    public final void testShowDistanceCircleForArchivedWaypoint() {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("GC12345");
+        cache.setArchived(true);
+        saveFreshCacheToDB(cache);
+
+        final Waypoint finalWaypoint = new Waypoint("Final", WaypointType.FINAL, true);
+        final Waypoint stageWaypoint = new Waypoint("Stage", WaypointType.STAGE, true);
+        final Waypoint parkingWaypoint = new Waypoint("Stage", WaypointType.PARKING, true);
+        final Waypoint ownWaypoint = new Waypoint("Stage", WaypointType.OWN, true);
+        cache.addOrChangeWaypoint(finalWaypoint, false);
+        cache.addOrChangeWaypoint(stageWaypoint, false);
+        cache.addOrChangeWaypoint(parkingWaypoint, false);
+        cache.addOrChangeWaypoint(ownWaypoint, false);
+
+        assertThat(finalWaypoint.applyDistanceRule()).as("don't show for final waypoint").isFalse();
+        assertThat(stageWaypoint.applyDistanceRule()).as("don't show for stage waypoint").isFalse();
+        assertThat(parkingWaypoint.applyDistanceRule()).as("don't show for parking waypoint").isFalse();
+        assertThat(ownWaypoint.applyDistanceRule()).as("don't show for own waypoint").isFalse();
+    }
+
     public static void testNameForSorting() {
         final Geocache cache = new Geocache();
         cache.setName("GR8 01-01");

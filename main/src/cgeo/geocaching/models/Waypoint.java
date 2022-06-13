@@ -518,4 +518,14 @@ public class Waypoint implements IWaypoint {
         return ConnectorFactory.getConnector(geocode).getCacheMapDotMarkerBackgroundId();
     }
 
+    public boolean applyDistanceRule() {
+        boolean applyDistanceRule = getWaypointType().applyDistanceRule();
+        if (applyDistanceRule) {
+            final Geocache parentCache = getParentGeocache();
+            if (parentCache != null) {
+                applyDistanceRule = parentCache.mayApplyDistanceRule();
+            }
+        }
+        return applyDistanceRule;
+    }
 }

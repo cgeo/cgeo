@@ -2218,8 +2218,12 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean applyDistanceRule() {
+        return mayApplyDistanceRule()
+                && (getType().applyDistanceRule() || hasUserModifiedCoords());
+    }
+
+    public boolean mayApplyDistanceRule() {
         return !isArchived()
-                && (getType().applyDistanceRule() || hasUserModifiedCoords())
                 && (getConnector() == GCConnector.getInstance() || getConnector() == InternalConnector.getInstance());
     }
 
