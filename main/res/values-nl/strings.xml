@@ -1163,6 +1163,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Geen waypoints gevonden die opgeslagen kunnen worden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Waypoint extractie voorkomen</string>
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Deze persoonlijke notitie zal worden afgekapt met ca. %1$d tekens bij %3$s (max grootte %2$d).</string>
     <string name="cache_personal_note_upload">Uploaden</string>
     <string name="cache_personal_note_uploading">Persoonlijke notitie uploaden</string>
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
