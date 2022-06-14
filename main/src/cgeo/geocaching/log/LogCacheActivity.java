@@ -719,8 +719,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             final ContextLogger cLog = new ContextLogger("LCA.Poster.doInBackgroundInternal(%s)", log);
             try {
-                final LogResult logResult = loggingManager.postLog(logType.get(), date.getCalendar(),
-                        log, logPwd, new ArrayList<>(trackables), reportProblem.get());
+                final LogResult logResult;
+                if (loggingManager instanceof ILoggingWithFavorites) {
+                    logResult = ((ILoggingWithFavorites) loggingManager).postLog(logType.get(), date.getCalendar(),
+                            log, logPwd, new ArrayList<>(trackables), reportProblem.get(), binding.favoriteCheck.isChecked());
+                } else {
+                    logResult = loggingManager.postLog(logType.get(), date.getCalendar(),
+                            log, logPwd, new ArrayList<>(trackables), reportProblem.get());
+                }
                 ImageResult imageResult = null;
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {

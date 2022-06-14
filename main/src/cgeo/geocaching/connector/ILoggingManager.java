@@ -22,6 +22,7 @@ public interface ILoggingManager {
      */
     @WorkerThread
     @NonNull
+    @WorkerThread
     LogResult postLog(@NonNull LogType logType,
                       @NonNull Calendar date,
                       @NonNull String log,
@@ -31,6 +32,7 @@ public interface ILoggingManager {
 
     @WorkerThread
     @NonNull
+    @WorkerThread
     ImageResult postLogImage(String logId,
                              Image image);
 

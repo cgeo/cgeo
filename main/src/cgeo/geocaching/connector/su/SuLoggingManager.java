@@ -52,19 +52,24 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
         LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
+    @NonNull
+    @Override
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    }
+
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
         final LogResult result;
-        final boolean addFavorite = ((CheckBox) activity.findViewById(R.id.favorite_check)).isChecked();
         try {
-            result = SuApi.postLog(cache, logType, date, log, addFavorite);
+            result = SuApi.postLog(cache, logType, date, log, addToFavorites);
         } catch (final SuApi.SuApiException e) {
             Log.e("Logging manager SuApi.postLog exception: ", e);
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
-        if (addFavorite) {
+        if (addToFavorites) {
             cache.setFavorite(true);
             cache.setFavoritePoints(cache.getFavoritePoints() + 1);
         }

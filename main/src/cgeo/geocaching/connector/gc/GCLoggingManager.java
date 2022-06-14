@@ -128,14 +128,19 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
+    @NonNull
+    @Override
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    }
+
     @Override
     @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
 
         try {
-            final CheckBox favCheck = (CheckBox) activity.findViewById(R.id.favorite_check);
             final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(cache, logType,
-                    date.getTime(), log, trackableLogs, favCheck.isChecked());
+                    date.getTime(), log, trackableLogs, addToFavorites);
 
             if (postResult.left == StatusCode.NO_ERROR) {
                 DataStore.saveVisitDate(cache.getGeocode(), date.getTime().getTime());
@@ -148,7 +153,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     cache.setDisabled(false);
                 }
 
-                if (favCheck.isChecked()) {
+                if (addToFavorites) {
                     cache.setFavorite(true);
                     cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }
