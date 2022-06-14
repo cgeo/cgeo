@@ -1,3 +1,3 @@
 
-- Fix: Exception in CheckerUtils
-- New: Added last geocaching.com login status to status page
+- Oplossing: Exceptie in CheckerUtils
+- Nieuw: Laatste geocaching.com inlogstatus toegevoegd aan de statuspagina
