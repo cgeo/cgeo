@@ -1,3 +1,4 @@
 - Novo: Transferência / actualização de caches em segundo plano (experimental)
 - Novo: Cópia das coordenadas actuais com um toque longo na página inicial
 - Change: Remove size-limit check while storing waypoints in personal notes
+- Fix: Do not show distance circles for waypoints of archived caches
