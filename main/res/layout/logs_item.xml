@@ -70,7 +70,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:gravity="left"
-                android:textIsSelectable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
                 android:textColor="@color/colorText"/>
 

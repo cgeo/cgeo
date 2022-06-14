@@ -177,6 +177,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             holder.binding.author.setOnClickListener(new EditOfflineLogListener(getCache(), (CacheDetailActivity) getActivity()));
             holder.binding.logMark.setVisibility(View.VISIBLE);
             holder.binding.logMark.setImageResource(R.drawable.mark_orange);
+        } else {
+            holder.binding.log.setTextIsSelectable(true);
         }
     }
 
