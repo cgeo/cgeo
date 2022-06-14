@@ -1,15 +1,15 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.log.TrackableLog;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.Calendar;
 import java.util.List;
-
-import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
 
 /**
  * This is the counterpart of {@link cgeo.geocaching.connector.capability.IFavoriteCapability} for logging.
