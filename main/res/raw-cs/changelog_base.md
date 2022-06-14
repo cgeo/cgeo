@@ -1,3 +1,4 @@
 - New: Download / update caches in background (experimental)
 - New: Copy current coordinates when long-clicking location on home screen
 - Změna: Odstraněna kontrola omezení velikosti při ukládání trasových bodů do osobních poznámek
+- Oprava: Nezobrazují se kruhy vzdálenosti pro trasové body archivovaných kešek
