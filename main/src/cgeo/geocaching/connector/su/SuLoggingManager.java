@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.su;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
@@ -17,7 +16,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +27,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
+public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<Integer>, ILoggingWithFavorites {
 
     @NonNull
     private final SuConnector connector;
@@ -96,22 +94,21 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
 
     @Override
     @NonNull
-    public Loader<String> onCreateLoader(final int id, final Bundle args) {
+    public Loader<Integer> onCreateLoader(final int id, final Bundle args) {
         activity.onLoadStarted();
         return new SuLoggingLoader(activity.getBaseContext());
     }
 
     @Override
-    public void onLoadFinished(@NonNull final Loader<String> loader, final String data) {
-        // Download fav points
-        recommendationsCount = SuApi.getAvailableRecommendations();
+    public void onLoadFinished(@NonNull final Loader<Integer> loader, final Integer data) {
+        recommendationsCount = data;
         hasFavPointLoadError = false;
 
         activity.onLoadFinished();
     }
 
     @Override
-    public void onLoaderReset(@NonNull final Loader<String> loader) {
+    public void onLoaderReset(@NonNull final Loader<Integer> loader) {
         // nothing to do
     }
 
@@ -125,7 +122,7 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
         return hasFavPointLoadError;
     }
 
-    static class SuLoggingLoader extends AsyncTaskLoader<String> {
+    static class SuLoggingLoader extends AsyncTaskLoader<Integer> {
         SuLoggingLoader(final Context context) {
             super(context);
         }
@@ -136,10 +133,9 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
         }
 
         @Override
-        public String loadInBackground() {
-            // XXX: We need this dummy Loader because in other case button "Send log" will complain
-            // about "Downloading data in progress"
-            return "nothing to load here";
+        public Integer loadInBackground() {
+            // Download fav points
+            return SuApi.getAvailableRecommendations();
         }
     }
 }

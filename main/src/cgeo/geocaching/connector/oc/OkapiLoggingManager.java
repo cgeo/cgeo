@@ -45,7 +45,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
         LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
-    @Nullable
+    @NonNull
     @Override
     public Loader<OkapiClient.InstallationInformation> onCreateLoader(final int arg0, final Bundle arg1) {
         activity.onLoadStarted();

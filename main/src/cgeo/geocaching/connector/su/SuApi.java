@@ -349,6 +349,7 @@ public class SuApi {
         return true;
     }
 
+    @WorkerThread
     public static int getAvailableRecommendations() {
         // Nothing here as we want to get info about current user
         final Parameters params = new Parameters();

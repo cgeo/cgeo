@@ -1048,6 +1048,8 @@ class GCWebAPI {
     /**
      * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
+    @NonNull
+    @WorkerThread
     static List<TrackableInventoryEntry> getTrackableInventory() {
         final List<TrackableInventoryEntry> trackableInventoryEntries = new ArrayList<>();
         int skip = 0;

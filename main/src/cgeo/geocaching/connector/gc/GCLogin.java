@@ -369,6 +369,7 @@ public class GCLogin extends AbstractLogin {
         }, throwable -> Log.w("Unable to retrieve the home location"));
     }
 
+    @WorkerThread
     public ServerParameters getServerParameters() {
         if (serverParameters != null) {
             return serverParameters;
