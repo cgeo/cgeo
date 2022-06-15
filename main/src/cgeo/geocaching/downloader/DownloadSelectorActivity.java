@@ -37,6 +37,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -256,6 +257,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         }
 
         @Nullable
+        @WorkerThread
         private Download checkForUpdate(final CompanionFileUtils.DownloadedFileData offlineMapData) {
             final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapData.remoteParsetype);
             if (downloader == null) {

@@ -27,6 +27,7 @@ import android.text.Html;
 import android.text.Spanned;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -138,6 +139,7 @@ public class MapUtils {
         });
     }
 
+    @WorkerThread
     private static void checkTiles(final HashMap<String, String> missingTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
         // read tiles already stored
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_TILES.getFolder());

@@ -36,6 +36,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class GCMap {
      * @param viewport Area to search
      */
     @NonNull
+    @WorkerThread
     public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
@@ -78,16 +80,19 @@ public class GCMap {
     }
 
     @NonNull
+    @WorkerThread
     public static SearchResult searchByFilter(@NonNull final IConnector con, @NonNull final GeocacheFilter filter) {
         return searchByFilter(con, filter, SEARCH_LOAD_INITIAL, 0);
     }
 
     @Nullable
+    @WorkerThread
     public static SearchResult searchByNextPage(final IConnector con, final Bundle context, final GeocacheFilter filter) {
         final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
         return searchByFilter(con, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook);
     }
 
+    @WorkerThread
     private static SearchResult searchByFilter(final IConnector con, @NonNull final GeocacheFilter filter, final int take, final int alreadyTook) {
 
         final Pair<GCWebAPI.WebApiSearch, SearchResult> search = createSearchForFilter(con, filter, take, alreadyTook);

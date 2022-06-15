@@ -27,6 +27,7 @@ import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -64,6 +65,7 @@ final class ALApi {
     }
 
     @Nullable
+    @WorkerThread
     protected static Geocache searchByGeocode(final String geocode) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
@@ -105,6 +107,7 @@ final class ALApi {
     }
 
     @NonNull
+    @WorkerThread
     private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
@@ -345,4 +348,3 @@ final class ALApi {
         }
     }
 }
-

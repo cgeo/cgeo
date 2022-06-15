@@ -19,6 +19,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -255,6 +256,7 @@ public class SearchResult implements Parcelable {
         return searchContext;
     }
 
+    @WorkerThread
     public SearchResult putInCacheAndLoadRating() {
         final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
@@ -360,6 +362,7 @@ public class SearchResult implements Parcelable {
      * @param connectors connectors to be considered in request
      * @param func       connector request
      */
+    @WorkerThread
     public static <C extends IConnector> SearchResult parallelCombineActive(
             @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
         return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {

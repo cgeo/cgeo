@@ -15,6 +15,7 @@ import cgeo.geocaching.settings.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -61,6 +62,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
         return null;
     }
 
+    @WorkerThread
     static String getTravelbugViewstates(final String guid) {
         return Network.getResponseData(Network.getRequest("https://www.geocaching.com/track/log.aspx", new Parameters("wid", guid)));
     }

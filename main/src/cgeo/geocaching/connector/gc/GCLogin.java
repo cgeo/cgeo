@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -158,6 +159,7 @@ public class GCLogin extends AbstractLogin {
         Log.w("Login.login: " + status);
     }
 
+    @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
@@ -236,6 +238,7 @@ public class GCLogin extends AbstractLogin {
         }
     }
 
+    @WorkerThread
     public StatusCode logout() {
         try {
             getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
@@ -264,6 +267,7 @@ public class GCLogin extends AbstractLogin {
         return body;
     }
 
+    @WorkerThread
     private String getLoginPage() {
         return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
@@ -275,6 +279,7 @@ public class GCLogin extends AbstractLogin {
         return StringUtils.isNotEmpty(value) ? value : null;
     }
 
+    @WorkerThread
     private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
@@ -322,6 +327,7 @@ public class GCLogin extends AbstractLogin {
      * @param previousPage the content of the last loaded page
      * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
      */
+    @WorkerThread
     private boolean switchToEnglish(final String previousPage) {
         if (previousPage != null && isLanguageEnglish(previousPage)) {
             Log.i("Geocaching.com language already set to English");
@@ -509,6 +515,7 @@ public class GCLogin extends AbstractLogin {
     /**
      * POST HTTP request. Do the request a second time if the user is not logged in
      */
+    @WorkerThread
     String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
 
@@ -528,6 +535,7 @@ public class GCLogin extends AbstractLogin {
      * GET HTTP request. Do the request a second time if the user is not logged in
      */
     @Nullable
+    @WorkerThread
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
         try {
             final Response response = Network.getRequest(uri, params).blockingGet();

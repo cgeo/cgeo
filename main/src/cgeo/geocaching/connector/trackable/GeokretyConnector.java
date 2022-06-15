@@ -20,6 +20,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.InputStream;
 import java.net.URLEncoder;
@@ -119,6 +120,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Nullable
+    @WorkerThread
     public static Trackable searchTrackable(final String geocode) {
         final int gkid;
 
@@ -217,6 +219,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @NonNull
+    @WorkerThread
     private static List<Trackable> loadInventory(final int userid) {
         Log.d("GeokretyConnector.loadInventory: userid=" + userid);
         try {
@@ -314,6 +317,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      * @return the Trackable Geocode
      */
     @Nullable
+    @WorkerThread
     private static String getGeocodeFromTrackingCode(final String trackingCode) {
         final String response = Network.getResponseData(Network.getRequest(URLPROXY + "/nr2id/" + trackingCode));
         // An empty response means "not found"
@@ -366,6 +370,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         return true;
     }
 
+    @WorkerThread
     public static ImmutablePair<StatusCode, List<String>> postLogTrackable(final Context context, final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // See doc: http://geokrety.org/api.php
         Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);

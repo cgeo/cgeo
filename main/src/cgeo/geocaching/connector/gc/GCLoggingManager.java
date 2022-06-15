@@ -55,7 +55,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         this.cache = cache;
     }
 
-    @Nullable
+    @NonNull
     @Override
     public Loader<String> onCreateLoader(final int arg0, final Bundle arg1) {
         if (!Settings.hasGCCredentials()) { // allow offline logging

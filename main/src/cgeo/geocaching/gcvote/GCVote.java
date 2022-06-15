@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,6 +61,7 @@ public final class GCVote implements ICredentials {
      * before a request to gcvote.com is made.
      */
     @Nullable
+    @WorkerThread
     public static GCVoteRating getRating(final String guid, final String geocode) {
         if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
             return RATINGS_CACHE.get(guid);
@@ -78,6 +80,7 @@ public final class GCVote implements ICredentials {
      * Get user ratings from gcvote.com
      */
     @NonNull
+    @WorkerThread
     private static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
         if (guids == null && geocodes == null) {
             return Collections.emptyMap();
@@ -108,6 +111,7 @@ public final class GCVote implements ICredentials {
     }
 
     @NonNull
+    @WorkerThread
     static Map<String, GCVoteRating> getRatingsFromXMLResponse(@NonNull final InputStream response, final boolean requestByGuids) {
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -148,6 +152,7 @@ public final class GCVote implements ICredentials {
      * @param rating the rating
      * @return {@code true} if the rating was submitted successfully
      */
+    @WorkerThread
     public static boolean setRating(@NonNull final Geocache cache, final float rating) {
         final IConnector connector = ConnectorFactory.getConnector(cache);
         if (!(connector instanceof IVotingCapability)) {
@@ -182,6 +187,7 @@ public final class GCVote implements ICredentials {
         return true;
     }
 
+    @WorkerThread
     public static void loadRatings(@NonNull final List<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;

@@ -27,6 +27,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.regex.Pattern;
 
@@ -204,6 +205,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         exchangeTokens(verifier);
     }
 
+    @WorkerThread
     private void requestToken() {
 
         final Parameters params = new Parameters();
@@ -253,6 +255,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     }
 
+    @WorkerThread
     private void changeToken(final String verifier) {
 
         int status = NOT_AUTHENTICATED;

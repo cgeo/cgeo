@@ -5,6 +5,8 @@ import cgeo.geocaching.connector.IConnector;
 import android.app.Activity;
 import android.os.Handler;
 
+import androidx.annotation.WorkerThread;
+
 public interface ILogin extends IConnector {
 
     int UNKNOWN_FINDS = -1;
@@ -17,11 +19,13 @@ public interface ILogin extends IConnector {
      *
      * @return true in case of success, false in case of failure
      */
+    @WorkerThread
     boolean login();
 
     /**
      * Log out of the connector if possible.
      */
+    @WorkerThread
     void logout();
 
     /**

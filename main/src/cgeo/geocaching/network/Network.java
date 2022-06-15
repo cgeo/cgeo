@@ -15,6 +15,7 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.io.IOException;
@@ -520,6 +521,7 @@ public final class Network {
      * @return the body stream
      */
     @Nullable
+    @WorkerThread
     public static InputStream getResponseStream(final Single<Response> response) {
         try {
             return response.flatMap(withSuccess).blockingGet().body().byteStream();
@@ -574,6 +576,7 @@ public final class Network {
      * @return the body with whitespace replaced if the response comes from a successful HTTP request, {@code null} otherwise
      */
     @Nullable
+    @WorkerThread
     public static String getResponseData(final Single<Response> response) {
         try {
             return response.flatMap(getResponseDataReplaceWhitespace).blockingGet();
@@ -621,6 +624,7 @@ public final class Network {
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, {@code null} otherwise
      */
+    @WorkerThread
     @Nullable
     public static String getResponseData(final Single<Response> response, final boolean replaceWhitespace) {
         try {

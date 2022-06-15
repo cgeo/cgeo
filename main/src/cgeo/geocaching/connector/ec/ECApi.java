@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -63,6 +64,7 @@ final class ECApi {
     }
 
     @Nullable
+    @WorkerThread
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         try {
@@ -79,6 +81,7 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
@@ -99,10 +102,13 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static Collection<Geocache> searchByCenter(final Geopoint center) {
         return searchByCenter(center, 20);
     }
 
+    @NonNull
+    @WorkerThread
     private static Collection<Geocache> searchByCenter(final Geopoint center, final int distance) {
         final Parameters params = new Parameters("fnc", "center");
         params.add("distance", "" + distance);
@@ -117,6 +123,7 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
         //for now we have to assume that ECConnector supports only SINGLE criteria search
 
@@ -135,6 +142,7 @@ final class ECApi {
     }
 
     @NonNull
+    @WorkerThread
     static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
         final Parameters params = new Parameters("cache_id", cache.getGeocode());
         params.add("type", logType.type);

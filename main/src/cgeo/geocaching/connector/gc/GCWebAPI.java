@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 import androidx.core.util.Consumer;
 
 import java.text.DateFormat;
@@ -337,6 +338,7 @@ class GCWebAPI {
             return from + "-" + to;
         }
 
+        @WorkerThread
         MapSearchResultSet execute() {
             final Parameters params = new Parameters();
 
@@ -812,6 +814,7 @@ class GCWebAPI {
         return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
     }
 
+    @WorkerThread
     static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
         final SearchResult result = new SearchResult();
 
@@ -931,6 +934,7 @@ class GCWebAPI {
     }
 
     @NonNull
+    @WorkerThread
     static ImmutablePair<StatusCode, String> postLog(final Geocache geocache,
                                                      final LogType logType, final Date date,
                                                      final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
@@ -1032,6 +1036,7 @@ class GCWebAPI {
         return trackableLogs.isEmpty() || postLogTrackable(trackableLogs).isSuccessful();
     }
 
+    @WorkerThread
     private static Response postLogTrackable(final List<TrackableLog> trackableLogs) {
         final Response response = postAPI("/trackable/activities", trackableLogs, (Consumer<Parameters>) null).blockingGet();
         if (!response.isSuccessful()) {
@@ -1114,6 +1119,8 @@ class GCWebAPI {
      * </pre>
      * Response not used
      */
+    @WorkerThread
+    @NonNull
     static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
 
         // 0) open log page to get a Request Token

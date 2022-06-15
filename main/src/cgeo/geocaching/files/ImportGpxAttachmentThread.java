@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Handler;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class ImportGpxAttachmentThread extends AbstractImportGpxThread {
     }
 
     @Nullable
+    @WorkerThread
     private InputStream getStream() {
         try {
             return contentResolver.openInputStream(uri);

@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 /**
  * Connector interface to implement for adding/removing caches to/from a watch list (which is hosted at the connectors
@@ -21,6 +22,7 @@ public interface WatchListCapability extends IConnector {
      *
      * @return True - success/False - failure
      */
+    @WorkerThread
     boolean addToWatchlist(@NonNull Geocache cache);
 
     /**
@@ -28,6 +30,7 @@ public interface WatchListCapability extends IConnector {
      *
      * @return True - success/False - failure
      */
+    @WorkerThread
     boolean removeFromWatchlist(@NonNull Geocache cache);
 
 }
