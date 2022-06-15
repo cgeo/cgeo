@@ -219,7 +219,7 @@
     <string name="err_detail_cache_find">c:geo nie mógł znaleźć skrytki</string>
     <string name="err_detail_cache_find_some">c:geo nie mógł znaleźć tej skrytki.</string>
     <string name="err_detail_cache_find_any">c:geo nie mógł znaleźć żadnej skrytki.</string>
-    <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrytki.</string>
+    <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęć ze spoilerami dla tej skrytki.</string>
     <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
     <string name="err_detail_premium_log_found">Ta skrytka jest dostępna tylko dla członków premium geocaching.com. Dlatego nie można wyświetlić informacji o skrytce.\n\nJeśli jednak już znalazłeś tę skrytkę, możesz ją zalogować tutaj.</string>
     <string name="err_watchlist_still_managing">Wciąż pracuję nad listą obserwowanych.</string>
@@ -653,8 +653,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
-    <string name="settings_title_offline_routing">Nawigacja offline</string>
-    <string name="settings_summary_offline_routing">Nawigacja offline jest dostępna jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączona jest nawigacja wewnętrzna.</string>
+    <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
+    <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
@@ -768,15 +768,15 @@
     <string name="init_brouterThreshold_description">Maksymalna odległość, do której trasa będzie obliczana w trybie offline.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="init_autoDownloads">Automatyczne pobieranie</string>
-    <string name="init_brouterAutoTileDownloads_description">Automatycznie zaoferuj pobieranie brakujących danych kafelków dla nawigacji.</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatycznie zaoferuj pobieranie brakujących danych kafelków dla wyznaczania trasy.</string>
     <string name="init_brouterProfileWalk">Profil „Pieszo”</string>
     <string name="init_brouterProfileBike">Profil „Rower”</string>
     <string name="init_brouterProfileCar">Profil „Samochód”</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
-    <string name="brouter_missing_data">Otwórz BRouter, aby pobrać brakujące dane nawigacyjne (%s)</string>
+    <string name="brouter_missing_data">Otwórz BRouter, aby pobrać brakujące dane nawigowania (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
-    <string name="init_useInternalRouting">Użyj wewnętrznej nawigacji</string>
-    <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych routingu i innych funkcji</string>
+    <string name="init_useInternalRouting">Użyj wewnętrznego wyznaczania trasy</string>
+    <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych nawigowania i innych funkcji</string>
     <string name="init_bigSmileysOnMap">Duże ikony</string>
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
@@ -882,20 +882,20 @@
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
     <string name="init_map_directory_description">Folder z mapami offline</string>
-    <string name="init_brouter_directory_description">Folder z danymi nawigacji BRouter</string>
+    <string name="init_brouter_directory_description">Folder z danymi nawigowania BRouter</string>
     <string name="init_updateinterval_title">Częstotliwość odświeżania</string>
     <string name="init_updateinterval_description">Przypomina o sprawdzaniu aktualizacji co x dni (ważne tylko dla plików pobranych z c:geo), 0 = wyłączone</string>
     <string name="init_gpx_importexportdir">Folder z plikami GPX</string>
     <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrytek (spoilery, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
-    <string name="init_maptrail">Pokaż historię ścieżki</string>
-    <string name="init_maptrail_length">Maks. długość historii ścieżki</string>
-    <string name="init_maptrail_length_summary">Ustaw maksymalną długość historii ścieżki (wymuszaną przy każdym uruchomieniu c:geo). Wartość domyślna to 700 punktów - dostosuj w zależności od dostępnej pamięci.</string>
-    <string name="init_summary_maptrail">Kiedy aktywowano (i GPS jest włączony) c:geo zapisuje historię twoich ruchów jako trasę i wyświetla ją na mapie.</string>
-    <string name="init_trailcolor">Kolor linii historii ścieżki</string>
-    <string name="init_trailcolor_summary">Wybierz kolor i nieprzezroczystość dla linii historii ścieżki</string>
-    <string name="init_trailwidth">Grubość linii historii ścieżki</string>
-    <string name="init_trailwidth_summary">Wybierz grubość dla linii historii ścieżki</string>
+    <string name="init_maptrail">Pokaż historię śladu</string>
+    <string name="init_maptrail_length">Maks. długość historii śladu</string>
+    <string name="init_maptrail_length_summary">Ustaw maksymalną długość historii śladu (wymuszaną przy każdym uruchomieniu c:geo). Wartość domyślna to 700 punktów – dostosuj w zależności od dostępnej pamięci.</string>
+    <string name="init_summary_maptrail">Gdy funkcja jest aktywna (i GPS jest włączony) c:geo zapisuje historię twoich ruchów jako ślad i wyświetla go na mapie.</string>
+    <string name="init_trailcolor">Kolor linii historii śladu</string>
+    <string name="init_trailcolor_summary">Wybierz kolor i nieprzezroczystość dla linii historii śladu</string>
+    <string name="init_trailwidth">Grubość linii historii śladu</string>
+    <string name="init_trailwidth_summary">Wybierz grubość dla linii historii śladu</string>
     <string name="init_directioncolor">Kolor linii kierunku</string>
     <string name="init_directioncolor_summary">Wybierz kolor i nieprzezroczystość dla linii kierunkowej. Kierunek pokazuje linię prostą do wybranego celu nawigacyjnego, lub określoną ścieżkę nawigacyjną, jeśli trasa jest włączona poprzez zainstalowanie aplikacji BRouter.</string>
     <string name="init_directionwidth">Grubość linii kierunku</string>
@@ -904,10 +904,10 @@
     <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie dotknięcie na punkt nawigacyjny/skrytkę. (Musisz najpierw włączyć funkcję długiego naciśnięcia, zobacz ustawienia mapy.)</string>
     <string name="init_routewidth">Grubość linii indywidualnej trasy</string>
     <string name="init_routewidth_summary">Wybierz grubość dla linii indywidualnej trasy</string>
-    <string name="init_trackcolor">Kolor linii ścieżki/trasy GPX</string>
-    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii ścieżki/trasy. Ścieżka/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ścieżki/trasy.</string>
-    <string name="init_trackwidth">Grubość linii ścieżki/trasy GPX</string>
-    <string name="init_trackwidth_summary">Wybierz grubość dla linii ścieżki/trasy GPX</string>
+    <string name="init_trackcolor">Kolor linii trasy/śladu GPX</string>
+    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii śladu/trasy. Ślad/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ze śladem/trasą.</string>
+    <string name="init_trackwidth">Grubość linii trasy/śladu GPX</string>
+    <string name="init_trackwidth_summary">Wybierz grubość dla linii trasy/śladu GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgu. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrytki lub fizycznego punktu nawigacji, gdzie nie jest dozwolona żadna inna skrytka lub fizyczny punkt nawigacji. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
@@ -1058,7 +1058,7 @@
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
     <string name="persistablefolder_spoilerimages">Zdjęcia ze spoilerami</string>
-    <string name="persistablefolder_routingbase">Nawigacja</string>
+    <string name="persistablefolder_routingbase">Wyznaczanie trasy</string>
     <string name="persistablefolder_routingtiles">Dane nawigowania</string>
     <string name="persistableuri_track">Plik śladu</string>
     <!-- FolderUtils: async processing -->
@@ -1262,7 +1262,7 @@
     <string name="cache_menu_visit">Wpisz wizytę</string>
     <string name="cache_log_too_long">c:geo nie mógł przesłać twojego wpisu, gdyż jest zbyt długi. Ale dziękujemy za próbę zapisu tak obszernego wpisu ;-)</string>
     <string name="cache_menu_visit_offline">Szybki log offline</string>
-    <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
+    <string name="cache_menu_spoilers">Zdjęcia ze spoilerami</string>
     <string name="cache_menu_around">Skrytki w pobliżu</string>
     <string name="around">W pobliżu %s</string>
     <string name="menu_caches">Zarządzaj skrytkami</string>
@@ -1319,7 +1319,7 @@
     <string name="cache_location">Położenie</string>
     <string name="cache_coordinates">Współrzędne</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
-    <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
+    <string name="cache_spoiler_images_title">Zdjęcia ze spoilerami</string>
     <string name="cache_log_types">Rodzaj wpisu</string>
     <string name="cache_coordinates_no">Ta skrytka nie ma współrzędnych GPS.</string>
     <string name="cache_clear_history">Usuń historię</string>
@@ -1551,7 +1551,7 @@
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Wyznaczanie trasy</string>
     <string name="map_routing_activate_title">Włącz wyznaczanie trasy</string>
-    <string name="map_routing_activate">Niektóre tryby wyznaczania trasy są obecnie niedostępne, ponieważ silnik wyznaczania trasy nie jest aktywny.\n\nCzy chcesz aktywować wewnętrzny silnik wyznaczania trasy c:geo i pobierać dane nawigacyjne?</string>
+    <string name="map_routing_activate">Niektóre tryby wyznaczania trasy są obecnie niedostępne, ponieważ silnik wyznaczania trasy nie jest aktywny.\n\nCzy chcesz aktywować wewnętrzny silnik wyznaczania trasy c:geo i pobierać dane nawigowania?</string>
     <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
@@ -1679,7 +1679,7 @@
     <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
     <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
     <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
-    <string name="helper_locus_description">Program do nawigacji w terenie dla Twojego telefonu lub tabletu. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
+    <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
@@ -1687,7 +1687,7 @@
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrytek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
     <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrytek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
-    <string name="helper_alc_description">Aplikacja Adventure Lab dla twojego telefonu lub tabletu.</string>
+    <string name="helper_alc_description">Aplikacja Adventure Lab na twój telefon lub tablet.</string>
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksport</string>
@@ -2167,8 +2167,8 @@
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <!-- individual track -->
-    <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
-    <string name="load_track_error">Błąd ładowania ścieżki/trasy</string>
+    <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
+    <string name="load_track_error">Błąd ładowania śladu/trasy</string>
     <string name="map_clear_track">Wyczyść trasę/ślad</string>
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad „%s”?</string>
     <!-- route/track commons -->
@@ -2248,12 +2248,12 @@
     <string name="downloadmap_directory">folder</string>
     <string name="downloadmap_mapfile">plik mapy</string>
     <string name="downloadmap_themefile">plik motywu</string>
-    <string name="downloadmap_tilefile">plik danych prowadzenia</string>
+    <string name="downloadmap_tilefile">plik danych nawigowania</string>
     <string name="downloadmap_download">pobieranie</string>
     <string name="downloadmap_retrieving_directory_data">Pobieranie danych folderu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
-    <string name="downloadtile_title">Brakujące dane nawigacyjne</string>
-    <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigacyjnymi. Czy chcesz pobrać brakujące dane nawigacyjne?</string>
+    <string name="downloadtile_title">Brakujące dane nawigowania</string>
+    <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigowania. Czy chcesz pobrać brakujące dane nawigowania?</string>
     <string name="check_tiles_menu">Sprawdź brakujące dane nawigowania</string>
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
     <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:\n%1$s\n\nCzy chcesz pobrać te pliki?%2$s</string>
@@ -2269,7 +2269,7 @@
     <string name="mapserver_freizeitkarte_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Freizeitkarte”</string>
     <string name="mapserver_hylly_info">Szczegółowe mapy dla Finlandii wymagają jednego z tematów mapy „Hylly”</string>
     <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, zbudowany dla map „Hylly”</string>
-    <string name="brouter_info">Usługa nawigacji offline</string>
+    <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
@@ -2278,15 +2278,15 @@
     <string name="maptheme_scale_symbol_title">Współczynnik skali symboli</string>
     <string name="maptheme_scale_symbol_summary">Dodatkowo skaluje rozmiary symboli na mapie; 100% = brak dodatkowego skalowania</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
-    <string name="map_trailhistory_cleared">Wyczyszczono historię ścieżki</string>
-    <string name="map_trail_show">Pokaż historię ścieżki</string>
-    <string name="map_trail_hide">Ukryj historię ścieżki</string>
+    <string name="map_clear_trailhistory">Wyczyść historię śladu</string>
+    <string name="map_trailhistory_cleared">Wyczyszczono historię śladu</string>
+    <string name="map_trail_show">Pokaż historię śladu</string>
+    <string name="map_trail_hide">Ukryj historię śladu</string>
     <!-- history track export -->
-    <string name="trailhistory">Historia ścieżki</string>
-    <string name="export_trailhistory_title">Eksportuj historię ścieżki</string>
-    <string name="export_trailhistory_success">Wyeksportowano historię ścieżki do „%s”</string>
-    <string name="export_trailhistory_clear_after_export">Wyczyść historię ścieżki po wyeksportowaniu</string>
+    <string name="trailhistory">Historia śladu</string>
+    <string name="export_trailhistory_title">Eksportuj historię śladu</string>
+    <string name="export_trailhistory_success">Wyeksportowano historię śladu do „%s”</string>
+    <string name="export_trailhistory_clear_after_export">Wyczyść historię śladu po wyeksportowaniu</string>
     <!-- individual route export -->
     <string name="export_individualroute_title">Eksportuj indywidualną trasę</string>
     <string name="export_individualroute_success">Wyeksportowano indywidualną trasę do „%s”</string>
@@ -2306,7 +2306,7 @@
     <string name="wizard_mapfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików z mapami offline.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania motywów dla map offline.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo potrzebuje lokalnego folderu do przechowywania plików GPX (np. do importowania / eksportowania skrytek lub śladów).</string>
-    <string name="wizard_broutertilesfolder_request_explanation">Aby skorzystać ze zintegrowanej funkcji automatycznego pobierania i aktualizacji kafelków z danymi nawigacyjnymi, należy ustawić folder danych dla kafelków.</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Aby skorzystać ze zintegrowanej funkcji automatycznego pobierania i aktualizacji kafelków z danymi nawigowania, należy ustawić folder danych dla kafelków.</string>
     <string name="wizard_select_or_create">Wybierz lub utwórz taki folder w następnym kroku.</string>
     <string name="wizard_platforms_title">Konfigurowanie usług</string>
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
@@ -2316,7 +2316,7 @@
     <string name="wizard_advanced_offlinemaps_label">Mapy offline</string>
     <string name="wizard_advanced_offlinemaps_info">Ta strona zawiera pewne zaawansowane funkcje, których użycie jest opcjonalne.\n\nc:geo może pobierać pliki map do użytku offline.</string>
     <string name="wizard_advanced_routing_label">Aktywuj wyznaczanie trasy offline</string>
-    <string name="wizard_advanced_routing_info">c:geo posiada wewnętrzny silnik służący do wyznaczania trasy offline i może automatycznie pobrać brakujące dane nawigacyjne dla ciebie.</string>
+    <string name="wizard_advanced_routing_info">c:geo posiada wewnętrzny silnik służący do wyznaczania trasy offline i może automatycznie pobrać brakujące dane nawigowania dla ciebie.</string>
     <string name="wizard_advanced_restore_label">Przywróć</string>
     <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
     <string name="status_not_ok">BŁĄD</string>
