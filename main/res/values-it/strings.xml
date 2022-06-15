@@ -363,6 +363,12 @@
     <string name="caches_store_refresh_background">Aggiornamento sfondo (Sperimentale!)</string>
     <string name="caches_store_background_should_force_refresh">Aggiorna cache già scaricate</string>
     <string name="caches_store_background_title">Scarica cache</string>
+    <string name="caches_store_background_result_failed">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
+    <string name="caches_store_background_result_canceled">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache scaricato</item>
+        <item quantity="other">%d cache scaricati</item>
+    </plurals>
     <string name="caches_history">Cronologia</string>
     <string name="caches_on_map">Visualizza sulla mappa</string>
     <string name="caches_sort">Ordina</string>
@@ -983,6 +989,8 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Usa mappa unificata</string>
+    <string name="init_summary_useUnifiedMap">Usa la nuova mappa unificata invece delle mappe integrate di Google Map / Mapsforge (OSM) (sperimentale / lungi dall\'essere completo / solo per test)</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
     <!-- proximity notification -->
@@ -1155,6 +1163,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nessun waypoint memorizzabile trovato</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Impedisci estrazione waypoint</string>
     <string name="cache_personal_note_limit">Limite per le note personali</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Questa nota personale sarà troncata a circa %1$d caratteri di %3$s (dimensione massima %2$d).</string>
     <string name="cache_personal_note_upload">Carica</string>
     <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
     <string name="cache_personal_note_upload_done">Nota personale caricata</string>
@@ -1972,6 +1981,7 @@
     <string name="tts_toggle">Attiva/disattiva il parlato</string>
     <string name="tts_started">Sintesi vocale on</string>
     <string name="tts_stopped">Sintesi vocale off</string>
+    <string name="tts_running">Il servizio vocale è attivo…</string>
     <string name="err_tts_lang_not_supported">Il linguaggio attivo non è supportato dal modulo di sintesi vocale.</string>
     <string name="tts_one_kilometer">un chilometro</string>
     <plurals name="tts_kilometers">
