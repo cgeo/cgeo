@@ -13,6 +13,7 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -170,6 +171,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
         super.fillViewHolder(convertView, holder, log);
@@ -178,6 +180,14 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             holder.binding.logMark.setVisibility(View.VISIBLE);
             holder.binding.logMark.setImageResource(R.drawable.mark_orange);
         }
+        // avoid the need for a double tap to edit item (offline log) resp. display context menu (all other log types)
+        // see stackoverflow.com/questions/22653641/using-onclick-on-textview-with-selectable-text-how-to-avoid-double-click
+        holder.binding.log.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.requestFocus();
+            }
+            return false;
+        });
     }
 
     private boolean isOfflineLog(final LogEntry log) {
