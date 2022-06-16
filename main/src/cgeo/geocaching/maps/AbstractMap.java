@@ -26,7 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LifecycleRegistry;
 
 import java.util.Collection;
 
@@ -38,6 +37,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AbstractMap implements LifecycleOwner {
 
+    @NonNull
     final MapActivityImpl mapActivity;
     protected MapViewImpl<CachesOverlayItemImpl> mapView;
 
@@ -46,9 +46,7 @@ public abstract class AbstractMap implements LifecycleOwner {
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
 
-    private final LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);
-
-    protected AbstractMap(final MapActivityImpl activity) {
+    protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;
     }
 
@@ -65,33 +63,27 @@ public abstract class AbstractMap implements LifecycleOwner {
     }
 
     public void onCreate(final Bundle savedInstanceState) {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mapActivity.superOnCreate(savedInstanceState);
         Routing.connect();
     }
 
     public void onStart() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
         mapActivity.superOnStart();
     }
 
     public void onResume() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
         mapActivity.superOnResume();
     }
 
     public void onPause() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
         mapActivity.superOnPause();
     }
 
     public void onStop() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
         mapActivity.superOnStop();
     }
 
     public void onDestroy() {
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
         mapActivity.superOnDestroy();
         Routing.disconnect();
     }
@@ -99,7 +91,7 @@ public abstract class AbstractMap implements LifecycleOwner {
     @NonNull
     @Override
     public Lifecycle getLifecycle() {
-        return lifecycleRegistry;
+        return mapActivity.getActivity().getLifecycle();
     }
 
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {

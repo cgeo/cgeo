@@ -417,7 +417,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private int currentSourceId;
 
 
-    public CGeoMap(final MapActivityImpl activity) {
+    public CGeoMap(@NonNull final MapActivityImpl activity) {
         super(activity);
         // only add cache if it is currently visible
         getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
