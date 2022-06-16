@@ -24,7 +24,12 @@ public class QueryMapFile extends AppCompatActivity {
         final Bundle bundle = getIntent().getExtras();
         final boolean forceAndFeedback = null != bundle && bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam));
 
-        final String mapFile = PersistableFolder.OFFLINE_MAPS.getUri().toString();
+        String mapFile;
+        try {
+            mapFile = PersistableFolder.OFFLINE_MAPS.getUri().toString();
+        } catch (NullPointerException e) {
+            mapFile = null;
+        }
         if (forceAndFeedback || StringUtils.isNotEmpty(mapFile)) {
             try {
                 final Intent intent = new Intent(Intent.ACTION_SENDTO);
