@@ -29,7 +29,7 @@ public class InternalServiceConnection extends AbstractServiceConnection {
 
         try {
             return ((IInternalRoutingService) routingService).getTrackFromParams(params);
-        } catch (final RemoteException e) {
+        } catch (final RemoteException | NullPointerException e) {
             return null;
         }
     }
