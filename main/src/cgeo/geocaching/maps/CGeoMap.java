@@ -144,6 +144,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_ROUTE = "route";
+    private static final String BUNDLE_FILTERCONTEXT = "filterContext";
 
     private static final String KEY_ELAPSED_MS = "elapsedMs";
     private static final String KEY_PROGRESS = "progress";
@@ -433,6 +434,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (individualRoute != null) {
             outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
+        if (mapOptions.filterContext != null) {
+            outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
+        }
     }
 
     @Override
@@ -559,6 +563,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource().getNumericalId());
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
+            mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
         } else {
