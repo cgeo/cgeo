@@ -2207,7 +2207,7 @@
     <string name="edit_setting_error_unknown_type">Nieznany typ ustawień - edycja nie jest obsługiwana</string>
     <string name="edit_setting_error_invalid_data">Wprowadzono nieprawidłowe dane \"%s\". Wartość ustawienia nie uległa zmianie.</string>
     <string name="activate_editmode_title">Aktywuj tryb edycji</string>
-    <string name="activate_editmode_warning">Wkraczasz tutaj niebezpieczny obszar!\n\nZmiana ustawień może spowodować pomylenie c:geo lub zapobieżenie dalszemu uruchomieniu programu, więc bądź ostrożny!\n\nCzy na pewno chcesz kontynuować na własne ryzyko?</string>
+    <string name="activate_editmode_warning">Wkraczasz na niebezpieczny obszar!\n\nBezpośrednie zmienianie ustawień może zdezorientować c:geo lub nawet spowodować, że aplikacja przestanie się uruchamiać, więc bądź ostrożny!\n\nCzy na pewno chcesz kontynuować na własne ryzyko?</string>
     <string name="add_setting">Dodaj ustawienie</string>
     <string name="add_setting_preference_name">Nazwa preferencji</string>
     <string name="add_setting_preference_type">Typ preferencji</string>
