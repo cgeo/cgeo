@@ -363,6 +363,8 @@
     <string name="caches_store_refresh_background">Päivitys taustalla (Kokeellinen!)</string>
     <string name="caches_store_background_should_force_refresh">Päivitä jo ladatut kätköt</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
+    <string name="caches_store_background_result_failed">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_canceled">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Näytä kartalla</string>
     <string name="caches_sort">Järjestä</string>
