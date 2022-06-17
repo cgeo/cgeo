@@ -1,3 +1,3 @@
 
-- Fix: Exception in CheckerUtils
-- New: Added last geocaching.com login status to status page
+- Korrektur: Verbesserte Fehlerbehandlung in CheckerUtils, internem Routing Service und WhereYouGo Connector
+- Neu: Letzter Login-Status von geocaching.com zur Statusseite hinzugefügt
