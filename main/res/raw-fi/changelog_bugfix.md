@@ -1,3 +1,4 @@
 
-- Fix: Exception in CheckerUtils
-- New: Added last geocaching.com login status to status page
+- Korjaus: Poikkeustilanteet checkertyökaluissa, sisäinen reititystyökalu ja WhereYouGo-silta
+- Korjaus: Hävinneet suodatinasetukset näyttöä käännettäessä kun osoitehaun tulos näytetään kartalla
+- Uusi: Lisätty viimeisin geocaching.com kirjautumistila tilasivulle
