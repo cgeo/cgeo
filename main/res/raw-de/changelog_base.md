@@ -1,4 +1,4 @@
 - Neu: Caches im Hintergrund herunterladen / aktualisieren (experimentell)
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Do not show distance circles for waypoints of archived caches
+- Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
+- Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
