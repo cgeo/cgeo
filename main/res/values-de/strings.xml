@@ -363,6 +363,12 @@
     <string name="caches_store_refresh_background">Hintergrund-Aktualisierung (Experimentell!)</string>
     <string name="caches_store_background_should_force_refresh">Aktualisiere bereits heruntergeladene Caches</string>
     <string name="caches_store_background_title">Caches herunterladen</string>
+    <string name="caches_store_background_result_failed">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <string name="caches_store_background_result_canceled">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d Cache heruntergeladen</item>
+        <item quantity="other">%d Caches heruntergeladen</item>
+    </plurals>
     <string name="caches_history">Verlauf</string>
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
@@ -1157,6 +1163,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Keine speicherbaren Wegpunkte gefunden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Wegpunkt-Extraktion verhindern</string>
     <string name="cache_personal_note_limit">Upload der persönlicher Notiz ist begrenzt</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Diese persönliche Notiz wird um ca. %1$d Zeichen von %3$s gekürzt (maximale Größe %2$d).</string>
     <string name="cache_personal_note_upload">Hochladen</string>
     <string name="cache_personal_note_uploading">Persönliche Notiz wird gesendet</string>
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
