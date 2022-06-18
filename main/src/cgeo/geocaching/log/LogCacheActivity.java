@@ -43,7 +43,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -64,7 +63,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,7 +74,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
@@ -106,7 +104,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
-    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
@@ -320,6 +318,13 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
                     }
                 });
+    }
+
+    @Override
+    public void onPause() {
+        resumeDisposables.clear();
+        super.onPause();
+
     }
 
     private void setLogText(final String newText) {

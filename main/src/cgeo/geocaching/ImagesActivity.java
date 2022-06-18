@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,19 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class ImagesActivity extends AbstractActionBarActivity {
 
     private List<Image> imageNames;
     private ImagesList imagesList;
-    private final DisposableContainer createDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_STOP);
+    private final CompositeDisposable createDisposables = new CompositeDisposable();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -65,6 +63,13 @@ public class ImagesActivity extends AbstractActionBarActivity {
     public void onStart() {
         super.onStart();
         createDisposables.add(imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames));
+    }
+
+    @Override
+    public void onStop() {
+        // Reclaim native memory faster than the finalizers would
+        createDisposables.clear();
+        super.onStop();
     }
 
     public static void startActivity(final Context fromActivity, final String geocode, final List<Image> logImages) {

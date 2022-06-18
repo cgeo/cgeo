@@ -4,7 +4,6 @@ import cgeo.geocaching.databinding.StatusBinding;
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Intent;
@@ -17,13 +16,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class StatusFragment extends Fragment {
 
-    private final DisposableContainer statusSubscription = new CompositeLifecycleDisposable(getViewLifecycleOwner(), Lifecycle.Event.ON_DESTROY);
+    private final CompositeDisposable statusSubscription = new CompositeDisposable();
     private StatusBinding binding;
 
     @Override
@@ -72,6 +70,12 @@ public class StatusFragment extends Fragment {
                     }
                 }));
         return statusGroup;
+    }
+
+    @Override
+    public void onDestroyView() {
+        statusSubscription.clear();
+        super.onDestroyView();
     }
 
 }
