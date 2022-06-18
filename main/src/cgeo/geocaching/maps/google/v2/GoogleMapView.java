@@ -32,7 +32,6 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -139,18 +138,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                         ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
                     }
                 }
-                if (!hitWaypoint) {
-                    setOnCreateContextMenuListener(((CGeoMap) onCacheTapListener).getActivity());
-                    if (null != positionAndHistoryRef) {
-                        final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
-                        if (null != positionAndHistory) {
-                            positionAndHistory.setLongTabLatLng(tapLatLong);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                showContextMenu((float) tappedPoint.x + 10, (float) tappedPoint.y + 10);
-                            } else {
-                                showContextMenu();
-                            }
-                        }
+                if (!hitWaypoint && null != positionAndHistoryRef) {
+                    final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+                    if (null != positionAndHistory) {
+                        positionAndHistory.setLongTabLatLng(tapLatLong);
+                        ((CGeoMap) onCacheTapListener).triggerLongTabContextMenu(tappedPoint);
                     }
                 }
             }

@@ -18,10 +18,8 @@ import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -99,18 +97,6 @@ public abstract class AbstractMap {
 
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         return mapActivity.superOnOptionsItemSelected(item);
-    }
-
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        mapActivity.superOnCreateContextMenu(menu, v, menuInfo);
-    }
-
-    public boolean onContextItemSelected(final @NonNull MenuItem item) {
-        return mapActivity.superOnContextItemSelected(item);
-    }
-
-    public void onContextMenuClosed(final @NonNull Menu menu) {
-        mapActivity.superOnContextMenuClosed(menu);
     }
 
     public abstract void onSaveInstanceState(@NonNull Bundle outState);

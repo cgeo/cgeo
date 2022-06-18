@@ -3,7 +3,6 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -19,7 +18,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -57,15 +55,12 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BranchDetectionHelper;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
@@ -82,11 +77,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -900,41 +895,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         return true;
     }
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        activity.getMenuInflater().inflate(R.menu.map_longclick, menu);
-        menu.findItem(R.id.menu_add_waypoint).setVisible(getCurrentTargetCache() != null);
-    }
-
-    @Override
-    public boolean onContextItemSelected(final @NonNull MenuItem item) {
-        final Geopoint longClickGeopoint = new Geopoint(overlayPositionAndScale.getLongTabLatLng().latitude, overlayPositionAndScale.getLongTabLatLng().longitude);
-        final int id = item.getItemId();
-        if (id == R.id.menu_udc) {
-            InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true);
-        } else if (id == R.id.menu_add_waypoint) {
-            final Geocache cache = getCurrentTargetCache();
-            if (cache != null) {
-                EditWaypointActivity.startActivityAddWaypoint(activity, cache, longClickGeopoint);
-            }
-        } else if (id == R.id.menu_coords) {
-            SimpleDialog.ofContext(activity).setTitle(R.string.waypoint_coordinates).setMessage(TextParam.text(longClickGeopoint.toString())).setNegativeButton(TextParam.id(android.R.string.copy)).show(null, (dialog, which) -> {
-                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(longClickGeopoint.toString()));
-                Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
-            });
-        } else if (id == R.id.menu_add_to_route) {
-            individualRoute.toggleItem(this.mapView.getContext(), new RouteItem(longClickGeopoint), overlayPositionAndScale);
-        } else {
-            return super.onContextItemSelected(item);
+    public void triggerLongTabContextMenu(final Point tapXY) {
+        if (Settings.isLongTapOnMapActivated()) {
+            MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTabLatLng().latitude, overlayPositionAndScale.getLongTabLatLng().longitude),
+                            tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, getCurrentTargetCache(), mapOptions)
+                    .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTabLatLng())
+                    .show();
         }
-        return true;
-    }
-
-    @Override
-    public void onContextMenuClosed(final @NonNull Menu menu) {
-        overlayPositionAndScale.resetLongTabLatLng();
-        super.onContextMenuClosed(menu);
     }
 
     @Override

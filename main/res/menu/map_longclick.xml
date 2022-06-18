@@ -18,6 +18,10 @@
     </item>
     <item
         android:id="@+id/menu_coords"
-        android:title="@string/context_map_get_coords">
+        android:title="@string/context_map_show_coords">
+    </item>
+    <item
+        android:id="@+id/menu_navigate"
+        android:title="@string/cache_menu_navigate">
     </item>
 </menu>

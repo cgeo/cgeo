@@ -5,7 +5,6 @@ import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -13,7 +12,6 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CoordinatesType;
@@ -23,7 +21,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
@@ -67,15 +64,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
-import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BranchDetectionHelper;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
@@ -98,7 +92,6 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -106,7 +99,6 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -532,46 +524,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.map_longclick, menu);
-        menu.findItem(R.id.menu_add_waypoint).setVisible(getCurrentTargetCache() != null);
-        menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
-    }
-
-    @Override
-    public boolean onContextItemSelected(final @NonNull MenuItem item) {
-        final Geopoint longClickGeopoint = new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude);
-        final int id = item.getItemId();
-        if (id == R.id.menu_udc) {
-            InternalConnector.interactiveCreateCache(this, longClickGeopoint, mapOptions.fromList, true);
-        } else if (id == R.id.menu_add_waypoint) {
-            final Geocache cache = getCurrentTargetCache();
-            if (cache != null) {
-                EditWaypointActivity.startActivityAddWaypoint(this, cache, longClickGeopoint);
-            }
-        } else if (id == R.id.menu_coords) {
-            SimpleDialog.ofContext(this).setTitle(R.string.waypoint_coordinates).setMessage(TextParam.text(longClickGeopoint.toString())).setNegativeButton(TextParam.id(android.R.string.copy)).show(null, (dialog, which) -> {
-                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(longClickGeopoint.toString()));
-                showToast(R.string.clipboard_copy_ok);
-            });
-        } else if (id == R.id.menu_add_to_route) {
-            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer, false);
-        } else if (id == R.id.menu_add_to_route_start) {
-            individualRoute.toggleItem(this, new RouteItem(longClickGeopoint), routeLayer, true);
-        } else {
-            return super.onContextItemSelected(item);
-        }
-        return true;
-    }
-
-    @Override
-    public void onContextMenuClosed(final @NonNull Menu menu) {
-        tapHandlerLayer.resetLongTabLatLong();
-        super.onContextMenuClosed(menu);
     }
 
     private void refreshMapData(final boolean circlesSwitched) {
@@ -1093,12 +1045,12 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     public void triggerLongTabContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
-            mapView.setOnCreateContextMenuListener(this);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                mapView.showContextMenu((float) tapXY.x + 10, (float) tapXY.y + 10);
-            } else {
-                mapView.showContextMenu();
-            }
+
+            MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude),
+                            (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
+                            getCurrentTargetCache(), mapOptions)
+                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTabLatLong())
+                    .show();
         }
     }
 

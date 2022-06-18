@@ -6,10 +6,8 @@ import cgeo.geocaching.maps.Tracks;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,12 +38,6 @@ public interface MapActivityImpl extends FilteredActivity {
     boolean superOnPrepareOptionsMenu(Menu menu);
 
     boolean superOnOptionsItemSelected(MenuItem item);
-
-    void superOnCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo);
-
-    boolean superOnContextItemSelected(MenuItem item);
-
-    void superOnContextMenuClosed(Menu menu);
 
     RouteTrackUtils getRouteTrackUtils();
 
