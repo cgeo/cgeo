@@ -1,3 +1,4 @@
 - New: Download / update caches in background (experimental)
 - New: Copy current coordinates when long-clicking location on home screen
 - Change: Remove size-limit check while storing waypoints in personal notes
+- Fix: Do not show distance circles for waypoints of archived caches

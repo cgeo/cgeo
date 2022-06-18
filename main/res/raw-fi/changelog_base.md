@@ -1,3 +1,4 @@
-- New: Download / update caches in background (experimental)
-- New: Copy current coordinates when long-clicking location on home screen
-- Change: Remove size-limit check while storing waypoints in personal notes
+- Uusi: Lataa / päivitä kätköt taustalla (kokeellinen)
+- Uusi: Kopioi nykyiset koordinaatit, kun pitkään napsautetaan sijaintia aloitusnäytöllä
+- Muutos: Poista kokorajan tarkistus tallennettaessa reittipisteitä henkilökohtaisiin muistiinpanoihin
+- Korjaus: Älä näytä arkistoitujen kätköjen reittipisteiden ympyröitä

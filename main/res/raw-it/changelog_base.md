@@ -1,3 +1,4 @@
-- New: Download / update caches in background (experimental)
-- New: Copy current coordinates when long-clicking location on home screen
-- Change: Remove size-limit check while storing waypoints in personal notes
+- Nuovo: Scarica/aggiorna i cache in background (sperimentale)
+- Nuovo: Copia le coordinate correnti con un tocco prolungato sulla posizione della schermata iniziale
+- Modifica: Rimosso controllo sul limite nelle dimensioni durante la memorizzazione dei waypoint nelle note personali
+- Corretto: Non vengono mostrati i cerchi di distanza per i waypoint dei cache archiviati
