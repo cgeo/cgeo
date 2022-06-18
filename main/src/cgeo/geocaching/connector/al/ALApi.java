@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DateRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
@@ -67,6 +68,85 @@ final class ALApi {
         // utility class with static methods
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class ALSearchV4Query {
+        @JsonProperty("Origin")
+        private Origin origin;
+        @JsonProperty("RadiusInMeters")
+        private Integer radiusInMeters;
+        @JsonProperty("RecentlyPublishedDays")
+        private Integer recentlyPublishedDays = null;
+        @JsonProperty("Skip")
+        private Integer skip = 0;
+        @JsonProperty("Take")
+        private Integer take;
+        @JsonProperty("CompletionStatuses")
+        private List<Integer> completionStatuses = null;
+        @JsonProperty("AdventureTypes")
+        private List<Integer> adventureTypes = null;
+        @JsonProperty("MedianCompletionTimes")
+        private List<String> medianCompletionTimes = null;
+        @JsonProperty("CallingUserPublicGuid")
+        private String callingUserPublicGuid;
+        @JsonProperty("Themes")
+        private List<Integer> themes = null;
+
+        public void setRadiusInMeters(final Integer radiusInMeters) {
+            this.radiusInMeters = radiusInMeters;
+        }
+
+        public void setRecentlyPublishedDays(final Integer recentlyPublishedDays) {
+            this.recentlyPublishedDays = recentlyPublishedDays;
+        }
+
+        public void setTake(final Integer take) {
+            this.take = take;
+        }
+
+        public void setSkip(final Integer skip) {
+            this.skip = skip;
+        }
+
+        public void setOrigin(final Double latitude, final Double longitude, final Double altitude) {
+            this.origin = new Origin(latitude, longitude, altitude);
+        }
+
+        public void setCompletionStatuses(final List<Integer> completionStatuses) {
+            this.completionStatuses = completionStatuses;
+        }
+
+        public void setAdventureTypes(final List<Integer> adventureTypes) {
+            this.adventureTypes = adventureTypes;
+        }
+
+        public void setMedianCompletionTimes(final List<String> medianCompletionTimes) {
+            this.medianCompletionTimes = medianCompletionTimes;
+        }
+
+        public void setCallingUserPublicGuid(final String callingUserPublicGuid) {
+            this.callingUserPublicGuid = callingUserPublicGuid;
+        }
+
+        public void setThemes(final List<Integer> themes) {
+            this.themes = themes;
+        }
+
+        class Origin {
+            @JsonProperty("Latitude")
+            private Double latitude;
+            @JsonProperty("Longitude")
+            private Double longitude;
+            @JsonProperty("Altitude")
+            private Double altitude;
+
+            Origin(final Double latitude, final Double longitude, final Double altitude) {
+                this.latitude = latitude;
+                this.longitude = longitude;
+                this.altitude = altitude;
+            }
+        }
+    }
+
     @Nullable
     @WorkerThread
     protected static Geocache searchByGeocode(final String geocode) {
@@ -101,17 +181,17 @@ final class ALApi {
         Log.d("_AL Radius: " + radius);
 
         final Geopoint center = new Geopoint(latcenter, loncenter);
-        return searchByCenter(center, radius);
+        return searchByCenter(center, radius, null);
     }
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
-        return searchByCenter(center, DEFAULT_RADIUS);
+        return searchByCenter(center, DEFAULT_RADIUS, null);
     }
 
     @NonNull
     @WorkerThread
-    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters) {
+    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
@@ -120,6 +200,7 @@ final class ALApi {
         query.setOrigin(center.getLatitude(), center.getLongitude(), 0.0);
         query.setTake(100);
         query.setRadiusInMeters(distanceInMeters);
+        query.setRecentlyPublishedDays(daysSincePublish);
         try {
             final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
@@ -128,81 +209,44 @@ final class ALApi {
         }
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static final class ALSearchV4Query {
-        @JsonProperty("Origin")
-        private Origin origin;
-        @JsonProperty("RadiusInMeters")
-        private Integer radiusInMeters;
-        @JsonProperty("RecentlyPublishedDays")
-        private Integer recentlyPublishedDays = null;
-        @JsonProperty("Skip")
-        private Integer skip = 0;
-        @JsonProperty("Take")
-        private Integer take;
-        @JsonProperty("CompletionStatuses")
-        private List<Integer> completionStatuses = null;
-        @JsonProperty("AdventureTypes")
-        private List<Integer> adventureTypes = null;
-        @JsonProperty("MedianCompletionTimes")
-        private List<String> medianCompletionTimes = null;
-        @JsonProperty("CallingUserPublicGuid")
-        private String callingUserPublicGuid;
-        @JsonProperty("Themes")
-        private List<Integer> themes = null;
-
-        public void setRadiusInMeters(Integer radiusInMeters) {
-            this.radiusInMeters = radiusInMeters;
-        }
-
-        public void setRecentlyPublishedDays(Integer recentlyPublishedDays) {
-            this.recentlyPublishedDays = recentlyPublishedDays;
-        }
-
-        public void setTake(Integer take) {
-            this.take = take;
-        }
-
-        public void setOrigin(Double latitude, Double longitude, Double altitude) {
-            this.origin = new Origin(latitude, longitude, altitude);
-        }
-
-        public class Origin {
-            @JsonProperty("Latitude")
-            private Double latitude;
-            @JsonProperty("Longitude")
-            private Double longitude;
-            @JsonProperty("Altitude")
-            private Double altitude;
-
-            public Origin(Double latitude, Double longitude, Double altitude) {
-                this.latitude = latitude;
-                this.longitude = longitude;
-                this.altitude = altitude;
-            }
-        }
-    }
-
     @NonNull
     public static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
         //for now we have to assume that ALConnector supports only SINGLE criteria search
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        // Origin excludes Lab
         final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
         }
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000);
-        }
+        // Type excludes Lab
         final TypeGeocacheFilter tf = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
         if (tf != null && tf.isFiltering() && !tf.getRawValues().contains(ADVLAB)) {
             return new ArrayList<>();
         }
 
-        //by default, search around current position
-        return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
+        final Geopoint searchCoords;
+        final int radius;
+        final Integer daysSincePublish;
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            searchCoords = df.getEffectiveCoordinate();
+            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
+        } else {
+            // by default, search around current position
+            searchCoords = Sensors.getInstance().currentGeo().getCoords();
+            radius = DEFAULT_RADIUS;
+        }
+
+        final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
+        if (dr != null) {
+            daysSincePublish = dr.getRelativeMinDateOffset();
+        } else {
+            daysSincePublish = null;
+        }
+
+        return searchByCenter(searchCoords, radius, daysSincePublish);
     }
 
     @NonNull
@@ -302,10 +346,9 @@ final class ALApi {
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
+            cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt()));
-            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
+            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -420,8 +463,5 @@ final class ALApi {
             return new Date(0);
         }
     }
-
-    private static boolean parseCompletionStatus(final int completionStatus) {
-        return (completionStatus == 0);
-    }
 }
+
