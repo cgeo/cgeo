@@ -205,6 +205,7 @@ final class OkapiClient {
     private static final Pattern PATTERN_TIMEZONE = Pattern.compile("([+-][01][0-9]):([03])0");
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String DEFAULT_RADIUS = "200";
 
     private OkapiClient() {
         // utility class
@@ -239,7 +240,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("center", centerString);
         valueMap.put("limit", getCacheLimit());
-        valueMap.put("radius", "200");
+        valueMap.put("radius", DEFAULT_RADIUS);
 
         return requestCaches(connector, params, valueMap, false);
     }
@@ -319,14 +320,27 @@ final class OkapiClient {
     @WorkerThread
     private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+
+        final Geopoint searchCoords;
+        final String radius;
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            searchCoords = df.getEffectiveCoordinate();
+            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : ""+(df.getMaxRangeValue().intValue() * 1000);
+        } else {
+            // search around current position by default
+            searchCoords = null;
+            radius = DEFAULT_RADIUS;
+        }
 
         //fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("limit", "" + take);
         valueMap.put("offset", "" + skip);
-        //search around current position by default
-        fillSearchParameterCenter(valueMap, params, null);
+        fillSearchParameterCenter(valueMap, params, searchCoords, radius);
 
         String finder = null;
 
@@ -375,7 +389,7 @@ final class OkapiClient {
                 if (distanceFilter.getMaxRangeValue() != null) {
                     fillSearchParameterBox(valueMap, params, new Viewport(coord, distanceFilter.getMaxRangeValue()));
                 } else {
-                    fillSearchParameterCenter(valueMap, params, coord);
+                    fillSearchParameterCenter(valueMap, params, coord, DEFAULT_RADIUS);
                 }
                 break;
             case DIFFICULTY:
@@ -464,11 +478,11 @@ final class OkapiClient {
 
     }
 
-    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center) {
+    public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, final String radius) {
         final Geopoint usedCenter = center != null ? center : Sensors.getInstance().currentGeo().getCoords();
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
         valueMap.put("center", centerString);
-        valueMap.put("radius", "200");
+        valueMap.put("radius", radius);
         params.removeKey("search_method");
         params.put("search_method", METHOD_SEARCH_NEAREST);
     }
@@ -481,7 +495,7 @@ final class OkapiClient {
                 + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
         valueMap.put("bbox", bboxString);
 
-        fillSearchParameterCenter(valueMap, params, viewport.getCenter());
+        fillSearchParameterCenter(valueMap, params, viewport.getCenter(), DEFAULT_RADIUS);
         params.removeKey("search_method");
         params.put("search_method", METHOD_SEARCH_BBOX);
     }
@@ -848,6 +862,8 @@ final class OkapiClient {
         //set basic properties which are constant / not used for OC platforms
         cache.setPremiumMembersOnly(false);
         cache.setUserModifiedCoords(false);
+
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
     }
 
     private static String absoluteUrl(final String url, final String geocode) {
