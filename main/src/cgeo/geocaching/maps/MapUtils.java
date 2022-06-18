@@ -1,33 +1,48 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IndividualRoute;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +50,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MapUtils {
 
@@ -162,5 +178,39 @@ public class MapUtils {
                 }
             }
         }
+    }
+
+    /**
+     * @return the complete popup builder without dismiss listener specified
+     */
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Geocache currentTargetCache, final MapOptions mapOptions) {
+        final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
+
+        return SimplePopupMenu.of(activity)
+                .setMenuContent(R.menu.map_longclick)
+                .setPosition(new Point(tapX, tapY - offset), (int) (offset * 1.25))
+                .setOnCreatePopupMenuListener(menu -> {
+                    menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
+                    menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
+                })
+                .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
+                .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
+                .addItemClickListener(R.id.menu_coords, item -> {
+                    final AtomicReference<TextView> textview = new AtomicReference<>();
+                    final AlertDialog dialog = Dialogs.newBuilder(activity)
+                            .setTitle(R.string.waypoint_coordinates)
+                            .setMessage("") // set a dummy message so that the textview gets created
+                            .setPositiveButton(R.string.ok, null)
+                            .setNegativeButton(android.R.string.copy, (d, which) -> {
+                                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
+                                Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
+                            })
+                            .show();
+                    textview.set(dialog.findViewById(android.R.id.message));
+                    new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
+                })
+                .addItemClickListener(R.id.menu_add_to_route, item -> individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false))
+                .addItemClickListener(R.id.menu_add_to_route_start, item -> individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true))
+                .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
     }
 }

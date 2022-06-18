@@ -5,7 +5,6 @@ import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -13,7 +12,6 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CoordinatesType;
@@ -139,6 +137,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
+import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
@@ -163,6 +162,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private HistoryLayer historyLayer;
     private PositionLayer positionLayer;
     private NavigationLayer navigationLayer;
+    private TapHandlerLayer tapHandlerLayer;
     private RouteLayer routeLayer;
     private TrackLayer trackLayer;
     private CachesBundle caches;
@@ -842,8 +842,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         GeoitemLayer.resetColors();
 
         // TapHandler
-        final TapHandlerLayer tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
-        this.mapView.getLayerManager().getLayers().add(tapHandlerLayer);
+        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
+        this.mapView.getLayerManager().getLayers().add(this.tapHandlerLayer);
 
         // Caches bundle
         if (mapOptions.searchResult != null) {
@@ -1048,14 +1048,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
-    public void showAddWaypoint(final LatLong tapLatLong) {
+    public void triggerLongTabContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
-            final Geocache cache = getCurrentTargetCache();
-            if (cache != null) {
-                EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-            } else {
-                InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), mapOptions.fromList, true);
-            }
+
+            MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude),
+                            (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
+                            getCurrentTargetCache(), mapOptions)
+                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTabLatLong())
+                    .show();
         }
     }
 

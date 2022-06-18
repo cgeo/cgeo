@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_add_waypoint"
+        android:title="@string/cache_waypoints_add">
+    </item>
+    <item
+        android:id="@+id/menu_udc"
+        android:title="@string/create_internal_cache">
+    </item>
+    <item
+        android:id="@+id/menu_add_to_route"
+        android:title="@string/context_map_add_to_route">
+    </item>
+    <item
+        android:id="@+id/menu_add_to_route_start"
+        android:title="@string/context_map_add_to_route_start">
+    </item>
+    <item
+        android:id="@+id/menu_coords"
+        android:title="@string/context_map_show_coords">
+    </item>
+    <item
+        android:id="@+id/menu_navigate"
+        android:title="@string/cache_menu_navigate">
+    </item>
+</menu>

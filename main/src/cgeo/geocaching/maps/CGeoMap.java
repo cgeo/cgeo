@@ -77,6 +77,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -897,6 +898,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
         }
         return true;
+    }
+
+    public void triggerLongTabContextMenu(final Point tapXY) {
+        if (Settings.isLongTapOnMapActivated()) {
+            MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTabLatLng().latitude, overlayPositionAndScale.getLongTabLatLng().longitude),
+                            tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, getCurrentTargetCache(), mapOptions)
+                    .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTabLatLng())
+                    .show();
+        }
     }
 
     @Override

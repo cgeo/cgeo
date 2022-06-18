@@ -1485,6 +1485,9 @@
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
 
+    <string name="context_map_add_to_route">Append to route</string>
+    <string name="context_map_add_to_route_start">Prepend to route</string>
+    <string name="context_map_show_coords">Show coordinates</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="create_internal_cache_short">New cache</string>

@@ -7,6 +7,8 @@ import android.location.Location;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public interface PositionAndHistory extends IndividualRoute.UpdateIndividualRoute {
 
 
@@ -17,6 +19,12 @@ public interface PositionAndHistory extends IndividualRoute.UpdateIndividualRout
     void setHeading(float bearingNow);
 
     float getHeading();
+
+    void setLongTabLatLng(LatLng latLng);
+
+    LatLng getLongTabLatLng();
+
+    void resetLongTabLatLng();
 
     ArrayList<TrailHistoryElement> getHistory();
 

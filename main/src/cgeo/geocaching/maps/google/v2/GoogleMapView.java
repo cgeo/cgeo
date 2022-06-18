@@ -1,8 +1,6 @@
 package cgeo.geocaching.maps.google.v2;
 
-import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -21,7 +19,6 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -133,20 +130,19 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             if (Settings.isLongTapOnMapActivated()) {
                 boolean hitWaypoint = false;
                 final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+                final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
                 if (closest != null) {
                     final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
-                    final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
                     if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
                         hitWaypoint = true;
                         ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
                     }
                 }
-                if (!hitWaypoint) {
-                    final Geocache cache = ((CGeoMap) onCacheTapListener).getSingleModeCache();
-                    if (null != cache) {
-                        EditWaypointActivity.startActivityAddWaypoint(this.getContext(), cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-                    } else {
-                        InternalConnector.interactiveCreateCache(this.getContext(), new Geopoint(tapLatLong.latitude, tapLatLong.longitude), fromList, true);
+                if (!hitWaypoint && null != positionAndHistoryRef) {
+                    final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+                    if (null != positionAndHistory) {
+                        positionAndHistory.setLongTabLatLng(tapLatLong);
+                        ((CGeoMap) onCacheTapListener).triggerLongTabContextMenu(tappedPoint);
                     }
                 }
             }
