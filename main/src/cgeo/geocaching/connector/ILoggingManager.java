@@ -20,7 +20,6 @@ public interface ILoggingManager {
      *
      * @param logPassword optional, maybe null
      */
-    @WorkerThread
     @NonNull
     @WorkerThread
     LogResult postLog(@NonNull LogType logType,
@@ -30,7 +29,6 @@ public interface ILoggingManager {
                       @NonNull List<TrackableLog> trackableLogs,
                       @NonNull ReportProblemType reportProblem);
 
-    @WorkerThread
     @NonNull
     @WorkerThread
     ImageResult postLogImage(String logId,
