@@ -2,15 +2,23 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.LocSwitchActionBinding;
+import cgeo.geocaching.downloader.CompanionFileUtils;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,11 +27,15 @@ import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
+import androidx.core.view.MenuCompat;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -79,6 +91,7 @@ public class MapProviderFactory {
 
     public static void addMapviewMenuItems(final Activity activity, final Menu menu) {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
+        MenuCompat.setGroupDividerEnabled(parentMenu, true);
 
         final int currentSource = Settings.getMapSource().getNumericalId();
         int i = 0;
@@ -88,7 +101,48 @@ public class MapProviderFactory {
             i++;
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
-        parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, mapSources.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
+    }
+
+    /** displays a list of offline map sources and deletes selected item after confirmation */
+    public static void showDeleteMenu(final Activity activity) {
+        final int currentSource = Settings.getMapSource().getNumericalId();
+
+        // build list of available offline map sources except currently active one
+        final List<Pair<String, Integer>> list = new ArrayList<>();
+        for (MapSource mapSource : mapSources.values()) {
+            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && mapSource.getNumericalId() != currentSource) {
+                list.add(new Pair<>(mapSource.getName(), mapSource.getNumericalId()));
+            }
+        }
+        if (list.isEmpty()) {
+            ActivityMixin.showToast(activity, R.string.no_deletable_offlinemaps);
+            return;
+        }
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).selectSingle(list, (l, pos) -> TextParam.text(l.first), -1, SimpleDialog.SingleChoiceMode.NONE, (l, pos) -> {
+            final MapsforgeMapProvider.OfflineMapSource mapSource = (MapsforgeMapProvider.OfflineMapSource) getMapSource(l.second);
+            if (mapSource != null) {
+                final ContentStorage cs = ContentStorage.get();
+                final ContentStorage.FileInformation fi = cs.getFileInfo(mapSource.getMapUri());
+                if (fi != null) {
+                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm((dialog, which) -> {
+                        final Uri cf = CompanionFileUtils.companionFileExists(cs.list(PersistableFolder.OFFLINE_MAPS), fi.name);
+                        cs.delete(mapSource.getMapUri());
+                        if (cf != null) {
+                            cs.delete(cf);
+                        }
+                        ActivityMixin.showShortToast(activity, String.format(activity.getString(R.string.file_deleted_info), fi.name));
+                        MapsforgeMapProvider.getInstance().updateOfflineMaps();
+                        if (Settings.showUnifiedMap()) {
+                            TileProviderFactory.buildTileProviderList(true);
+                        }
+                        ActivityMixin.invalidateOptionsMenu(activity);
+                    });
+                }
+            }
+        });
     }
 
     public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {

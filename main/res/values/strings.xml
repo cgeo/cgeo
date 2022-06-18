@@ -2452,6 +2452,10 @@
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
+    <string name="delete_offlinemap_title">Delete offline map</string>
+    <string name="no_deletable_offlinemaps">No deletable offline maps</string>
+    <string name="delete_file_confirmation">Delete %s?</string>
+    <string name="file_deleted_info">%s deleted</string>
     <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_filename">Downloading %s</string>

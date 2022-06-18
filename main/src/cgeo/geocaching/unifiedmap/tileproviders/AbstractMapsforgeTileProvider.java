@@ -34,6 +34,10 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
         }
     }
 
+    protected Uri getMapUri() {
+        return mapUri;
+    }
+
     @Override
     @NonNull
     public String getId() {

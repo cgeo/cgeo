@@ -1185,6 +1185,12 @@ public class Settings {
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
+    /** display UnifiedMap icon on home screen? */
+    public static boolean showUnifiedMap() {
+        return getBoolean(R.string.pref_showUnifiedMap, false);
+    }
+
+    /** use UnifiedMap as default map in certain places */
     public static boolean useUnifiedMap() {
         return getBoolean(R.string.pref_useUnifiedMap, false);
     }
