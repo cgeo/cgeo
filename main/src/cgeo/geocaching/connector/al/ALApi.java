@@ -232,6 +232,8 @@ final class ALApi {
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
+            cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
+            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt()));
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
@@ -346,5 +348,9 @@ final class ALApi {
         } catch (final ParseException e) {
             return new Date(0);
         }
+    }
+
+    private static boolean parseCompletionStatus(final int completionStatus) {
+        return (completionStatus == 0);
     }
 }
