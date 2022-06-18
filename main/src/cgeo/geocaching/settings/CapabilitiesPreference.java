@@ -7,6 +7,9 @@ import cgeo.geocaching.connector.IConnector;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.widget.TextView;
+
+import androidx.preference.PreferenceViewHolder;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -50,5 +53,16 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPreference {
     @Override
     public void setSummary(final CharSequence summary) {
         super.setSummary(createCapabilitiesMessage());
+    }
+
+    @Override
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+
+        // there is a UI bug in the material preference implementation, see #12338
+        final TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+        if (summaryView != null) {
+            summaryView.setVerticalScrollBarEnabled(false);
+        }
     }
 }
