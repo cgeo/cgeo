@@ -2,9 +2,14 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.downloader.CompanionFileUtils;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsView;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.utils.CollectionStream;
@@ -22,7 +27,10 @@ import android.view.SubMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.util.Pair;
+import androidx.core.view.MenuCompat;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -52,6 +60,7 @@ public class TileProviderFactory {
 
     public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
         final Menu parentMenu = menu.getMenu();
+        MenuCompat.setGroupDividerEnabled(parentMenu, true);
 
         final int currentTileProvider = Settings.getTileProvider().getNumericalId();
         final Set<String> hideTileproviders = Settings.getHideTileproviders();
@@ -70,7 +79,48 @@ public class TileProviderFactory {
             i++;
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
-        parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, tileProviders.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
+    }
+
+    /**
+     * displays a list of offline map sources and deletes selected item after confirmation
+     */
+    public static void showDeleteMenu(final Activity activity) {
+        final int currentSource = Settings.getTileProvider().getNumericalId();
+
+        // build list of available offline map sources except currently active one
+        final List<Pair<String, Integer>> list = new ArrayList<>();
+        for (AbstractTileProvider tileProvider : tileProviders.values()) {
+            if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider && tileProvider.getNumericalId() != currentSource) {
+                list.add(new Pair<>(tileProvider.getTileProviderName(), tileProvider.getNumericalId()));
+            }
+        }
+        if (list.isEmpty()) {
+            ActivityMixin.showToast(activity, R.string.no_deletable_offlinemaps);
+            return;
+        }
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).selectSingle(list, (l, pos) -> TextParam.text(l.first), -1, SimpleDialog.SingleChoiceMode.NONE, (l, pos) -> {
+            final AbstractMapsforgeOfflineTileProvider tileProvider = (AbstractMapsforgeOfflineTileProvider) getTileProvider(l.second);
+            if (tileProvider != null) {
+                final ContentStorage cs = ContentStorage.get();
+                final ContentStorage.FileInformation fi = cs.getFileInfo(tileProvider.getMapUri());
+                if (fi != null) {
+                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm((dialog, which) -> {
+                        final Uri cf = CompanionFileUtils.companionFileExists(cs.list(PersistableFolder.OFFLINE_MAPS), fi.name);
+                        cs.delete(tileProvider.getMapUri());
+                        if (cf != null) {
+                            cs.delete(cf);
+                        }
+                        ActivityMixin.showShortToast(activity, String.format(activity.getString(R.string.file_deleted_info), fi.name));
+                        MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
+                        TileProviderFactory.buildTileProviderList(true);
+                        ActivityMixin.invalidateOptionsMenu(activity);
+                    });
+                }
+            }
+        });
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {

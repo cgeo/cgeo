@@ -380,7 +380,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         }
 
         // temporarily add button for unified map, if enabled in settings
-        if (Settings.getBoolean(R.string.pref_showUnifiedMap, false)) {
+        if (Settings.showUnifiedMap()) {
             addButton(R.drawable.sc_icon_map, lp, () -> startActivity(new Intent(this, UnifiedMapActivity.class)), "Start unified map");
         }
     }

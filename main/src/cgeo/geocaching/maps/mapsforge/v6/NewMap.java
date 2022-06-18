@@ -506,7 +506,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-                || DownloaderUtils.onOptionsItemSelected(this, id)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id, false)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);

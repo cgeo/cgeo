@@ -4,6 +4,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -17,6 +18,7 @@ import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -61,9 +63,16 @@ public class DownloaderUtils {
         // utility class
     }
 
-    public static boolean onOptionsItemSelected(final Activity activity, final int id) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id, final boolean inUnifiedMap) {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
+            return true;
+        } else if (id == R.id.menu_delete_offlinemap) {
+            if (inUnifiedMap) {
+                TileProviderFactory.showDeleteMenu(activity);
+            } else {
+                MapProviderFactory.showDeleteMenu(activity);
+            }
             return true;
         }
         return false;

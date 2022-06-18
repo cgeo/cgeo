@@ -512,7 +512,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
-                || DownloaderUtils.onOptionsItemSelected(this, id)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id, true)) {
             return true;
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
