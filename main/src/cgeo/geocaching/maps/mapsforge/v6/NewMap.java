@@ -200,6 +200,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_ROUTE = "route";
+    private static final String BUNDLE_FILTERCONTEXT = "filterContext";
 
     // Handler messages
     // DisplayHandler
@@ -257,6 +258,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
+            mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -1004,6 +1006,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
         if (individualRoute != null) {
             outState.putParcelable(BUNDLE_ROUTE, individualRoute);
+        }
+        if (mapOptions.filterContext != null) {
+            outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
         }
     }
 

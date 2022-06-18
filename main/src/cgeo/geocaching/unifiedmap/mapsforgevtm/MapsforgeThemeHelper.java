@@ -171,7 +171,9 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     protected void disposeTheme() {
-        mTheme.dispose();
+        if (mTheme != null) {
+            mTheme.dispose();
+        }
     }
 
     private ThemeFile createThemeFor(@NonNull final ThemeData theme) throws IOException {
