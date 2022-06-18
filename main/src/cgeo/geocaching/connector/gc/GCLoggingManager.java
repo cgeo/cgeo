@@ -10,23 +10,24 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 
 import android.os.Bundle;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String>, ILoggingWithFavorites {
+class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<GCLoggingManager.Result>, ILoggingWithFavorites {
 
     private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
     private final LogCacheActivity activity;
@@ -57,69 +58,100 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @NonNull
     @Override
-    public Loader<String> onCreateLoader(final int arg0, final Bundle arg1) {
+    public Loader<GCLoggingManager.Result> onCreateLoader(final int arg0, final Bundle arg1) {
         if (!Settings.hasGCCredentials()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getString(R.string.err_login));
             //start the UrlLoader anyway, DON'T return null! (returning null will crash the activity, see #8761)
             //The activity logic will handle this as if it were a "normal" network connectivity failure
         }
         activity.onLoadStarted();
-        return new UrlLoader(activity.getBaseContext(), "https://www.geocaching.com/play/geocache/" + cache.getGeocode() + "/log", null);
+
+        final String url = "https://www.geocaching.com/play/geocache/" + cache.getGeocode() + "/log";
+        return new AsyncTaskLoader<Result>(activity.getBaseContext()) {
+            @Override
+            protected void onStartLoading() {
+                forceLoad();
+            }
+
+            @Nullable
+            @Override
+            public Result loadInBackground() {
+                final String page;
+                try {
+                    page = Network.getResponseData(Network.getRequest(url, null));
+                } catch (final Exception e) {
+                    Log.w("UrlLoader.loadInBackground", e);
+                    return null;
+                }
+
+                @Nullable
+                List<TrackableLog> trackables = null;
+                try {
+                    final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
+                    trackables = CollectionStream.of(trackableInventoryItems).map(entry -> new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG)).toList();
+                } catch (final Exception e) {
+                    Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
+                }
+
+                final List<LogType> possibleLogTypes = GCParser.parseTypes(page);
+
+                // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
+
+                /* TODO: the GUID is not available in the new log page
+                if (StringUtils.isBlank(cache.getGuid())) {
+                    // Acquire the cache GUID from the log page. This will not only complete the information in the database,
+                    // but also allow the user to post a rating using GCVote since it requires the GUID to do so.
+
+                    final String guid = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_GUID, null);
+                    if (StringUtils.isNotBlank(guid)) {
+                        cache.setGuid(guid);
+                        DataStore.saveChangedCache(cache);
+                    } else {
+                        Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
+                    }
+                }*/
+
+                Integer premFavcount = null;
+                try {
+                    final GCLogin.ServerParameters params = GCLogin.getInstance().getServerParameters();
+                    premFavcount = GCWebAPI.getAvailableFavoritePoints(params.userInfo.referenceCode).blockingGet();
+                } catch (final Exception e) {
+                    Log.w("GCLoggingManager.onLoadFinished: getAvailableFavoritePoints", e);
+                }
+
+                return new Result(trackables, possibleLogTypes, premFavcount);
+            }
+        };
     }
 
     @Override
-    public void onLoadFinished(@NonNull final Loader<String> arg0, final String page) {
-        if (page == null) {
+    public void onLoadFinished(@NonNull final Loader<GCLoggingManager.Result> loader, final GCLoggingManager.Result result) {
+        if (result == null) {
             hasLoaderError = true;
         } else {
-            trackables = new ArrayList<>();
-            try {
-                final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
-                if (trackableInventoryItems != null) {
-                    for (final GCWebAPI.TrackableInventoryEntry entry : trackableInventoryItems) {
-                        trackables.add(new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG));
-                    }
-                }
+            if (result.trackables != null) {
+                trackables = result.trackables;
                 hasTrackableLoadError = false;
-            } catch (final Exception e) {
+            } else {
                 hasTrackableLoadError = true;
-                Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
             }
 
-            possibleLogTypes = GCParser.parseTypes(page);
-
-            // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
-
-            /* TODO: the GUID is not available in the new log page
-            if (StringUtils.isBlank(cache.getGuid())) {
-                // Acquire the cache GUID from the log page. This will not only complete the information in the database,
-                // but also allow the user to post a rating using GCVote since it requires the GUID to do so.
-
-                final String guid = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_GUID, null);
-                if (StringUtils.isNotBlank(guid)) {
-                    cache.setGuid(guid);
-                    DataStore.saveChangedCache(cache);
-                } else {
-                    Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
-                }
-            }*/
-
-            try {
-                final GCLogin.ServerParameters params = GCLogin.getInstance().getServerParameters();
-                premFavcount = GCWebAPI.getAvailableFavoritePoints(params.userInfo.referenceCode).blockingGet();
-                hasFavPointLoadError = false;
-            } catch (final Exception e) {
-                hasFavPointLoadError = true;
-                Log.w("GCLoggingManager.onLoadFinished: getAvailableFavoritePoints", e);
-            }
+            possibleLogTypes = result.possibleLogTypes;
             hasLoaderError = possibleLogTypes.isEmpty();
+
+            if (result.premFavcount != null) {
+                premFavcount = result.premFavcount;
+                hasFavPointLoadError = false;
+            } else {
+                hasFavPointLoadError = true;
+            }
         }
 
         activity.onLoadFinished();
     }
 
     @Override
-    public void onLoaderReset(@NonNull final Loader<String> arg0) {
+    public void onLoaderReset(@NonNull final Loader<Result> loader) {
         // nothing to do
     }
 
@@ -128,14 +160,19 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
+    @NonNull
+    @Override
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    }
+
     @Override
     @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
 
         try {
-            final CheckBox favCheck = (CheckBox) activity.findViewById(R.id.favorite_check);
             final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(cache, logType,
-                    date.getTime(), log, trackableLogs, favCheck.isChecked());
+                    date.getTime(), log, trackableLogs, addToFavorites);
 
             if (postResult.left == StatusCode.NO_ERROR) {
                 DataStore.saveVisitDate(cache.getGeocode(), date.getTime().getTime());
@@ -148,7 +185,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     cache.setDisabled(false);
                 }
 
-                if (favCheck.isChecked()) {
+                if (addToFavorites) {
                     cache.setFavorite(true);
                     cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }
@@ -233,4 +270,18 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         return possibleReportProblemTypes;
     }
 
+    public static class Result {
+        @Nullable
+        public final List<TrackableLog> trackables;
+        @NonNull
+        public final List<LogType> possibleLogTypes;
+        @Nullable
+        public final Integer premFavcount;
+
+        Result(@Nullable final List<TrackableLog> trackables, @NonNull final List<LogType> possibleLogTypes, @Nullable final Integer premFavcount) {
+            this.trackables = trackables;
+            this.possibleLogTypes = possibleLogTypes;
+            this.premFavcount = premFavcount;
+        }
+    }
 }
