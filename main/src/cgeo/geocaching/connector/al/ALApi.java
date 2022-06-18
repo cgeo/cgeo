@@ -38,6 +38,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.reactivex.rxjava3.core.Single;
@@ -112,17 +115,71 @@ final class ALApi {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
-        final Parameters params = new Parameters("skip", "0");
-        params.add("take", "100");
-        params.add("radiusMeters", "" + distanceInMeters);
-        params.add("origin.latitude", String.valueOf(center.getLatitude()));
-        params.add("origin.longitude", String.valueOf(center.getLongitude()));
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
+        final ALSearchV4Query query = new ALSearchV4Query();
+        query.setOrigin(center.getLatitude(), center.getLongitude(), 0.0);
+        query.setTake(100);
+        query.setRadiusInMeters(distanceInMeters);
         try {
-            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
+            final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
+        }
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class ALSearchV4Query {
+        @JsonProperty("Origin")
+        private Origin origin;
+        @JsonProperty("RadiusInMeters")
+        private Integer radiusInMeters;
+        @JsonProperty("RecentlyPublishedDays")
+        private Integer recentlyPublishedDays = null;
+        @JsonProperty("Skip")
+        private Integer skip = 0;
+        @JsonProperty("Take")
+        private Integer take;
+        @JsonProperty("CompletionStatuses")
+        private List<Integer> completionStatuses = null;
+        @JsonProperty("AdventureTypes")
+        private List<Integer> adventureTypes = null;
+        @JsonProperty("MedianCompletionTimes")
+        private List<String> medianCompletionTimes = null;
+        @JsonProperty("CallingUserPublicGuid")
+        private String callingUserPublicGuid;
+        @JsonProperty("Themes")
+        private List<Integer> themes = null;
+
+        public void setRadiusInMeters(Integer radiusInMeters) {
+            this.radiusInMeters = radiusInMeters;
+        }
+
+        public void setRecentlyPublishedDays(Integer recentlyPublishedDays) {
+            this.recentlyPublishedDays = recentlyPublishedDays;
+        }
+
+        public void setTake(Integer take) {
+            this.take = take;
+        }
+
+        public void setOrigin(Double latitude, Double longitude, Double altitude) {
+            this.origin = new Origin(latitude, longitude, altitude);
+        }
+
+        public class Origin {
+            @JsonProperty("Latitude")
+            private Double latitude;
+            @JsonProperty("Longitude")
+            private Double longitude;
+            @JsonProperty("Altitude")
+            private Double altitude;
+
+            public Origin(Double latitude, Double longitude, Double altitude) {
+                this.latitude = latitude;
+                this.longitude = longitude;
+                this.altitude = altitude;
+            }
         }
     }
 
@@ -167,6 +224,20 @@ final class ALApi {
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
             if (!isRetry && response1.code() == 403) {
                 return apiRequest(uri, params, headers, true);
+            }
+            return Single.just(response1);
+        });
+    }
+
+    @NonNull
+    private static Single<Response> apiPostRequest(final String uri, final Parameters headers, final Object jsonObj, final boolean isRetry) throws JsonProcessingException {
+
+        final Single<Response> response = Network.postJsonRequest(API_HOST + uri, headers, jsonObj);
+
+        // retry at most one time
+        return response.flatMap((Function<Response, Single<Response>>) response1 -> {
+            if (!isRetry && response1.code() == 403) {
+                return apiPostRequest(uri, headers, jsonObj, true);
             }
             return Single.just(response1);
         });
