@@ -38,13 +38,13 @@ public class SimplePopupMenu {
     }
 
     public static SimplePopupMenu forView(final View view) {
-        SimplePopupMenu popupMenu = new SimplePopupMenu(view.getContext());
+        final SimplePopupMenu popupMenu = new SimplePopupMenu(view.getContext());
         popupMenu.view = view;
         return popupMenu;
     }
 
     public static SimplePopupMenu of(final Activity activity) {
-        SimplePopupMenu popupMenu = new SimplePopupMenu(activity);
+        final SimplePopupMenu popupMenu = new SimplePopupMenu(activity);
         popupMenu.activity = activity;
         return popupMenu;
     }
@@ -101,7 +101,7 @@ public class SimplePopupMenu {
         }
 
 
-        PopupMenu popupMenu = new PopupMenu(context, anchorView);
+        final PopupMenu popupMenu = new PopupMenu(context, anchorView);
 
         if (menuRes != 0) {
             popupMenu.getMenuInflater().inflate(menuRes, popupMenu.getMenu());
