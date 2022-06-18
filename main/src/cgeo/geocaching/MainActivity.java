@@ -43,7 +43,6 @@ import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
@@ -83,7 +82,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuCompat;
-import androidx.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +92,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
@@ -121,7 +119,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     /**
      * initialization with an empty subscription
      */
-    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     private BackupUtils backupUtils = null;
 
@@ -529,6 +527,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onPause() {
         initialized = false;
+        resumeDisposables.clear();
 
         super.onPause();
     }

@@ -66,7 +66,6 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
-import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSortContext;
@@ -87,7 +86,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -99,8 +97,10 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -124,9 +124,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
-import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -142,7 +142,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -221,9 +221,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     };
 
-    private final GeocacheRefreshedBroadcastReceiver cacheRefreshedBroadcastReceiver = new GeocacheRefreshedBroadcastReceiver(this) {
+    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
         @Override
-        protected void onReceive(final Context context, final String geocode) {
+        public void onReceive(final Context context, final Intent intent) {
+            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
             if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
                 refreshCurrentList();
             }
@@ -232,7 +233,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
-    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
     private final Handler loadCachesHandler = new LoadCachesHandler(this);
@@ -592,8 +593,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             importGpxAttachement();
         }
-
-        getLifecycle().addObserver(cacheRefreshedBroadcastReceiver);
     }
 
     @Override
@@ -704,6 +703,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (forceSort) {
             adapter.forceSort();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
+        super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        resumeDisposables.clear();
+        super.onPause();
     }
 
     @Override

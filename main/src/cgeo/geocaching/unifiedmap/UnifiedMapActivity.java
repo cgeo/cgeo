@@ -29,7 +29,6 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -53,11 +52,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.Lifecycle;
 
 import java.lang.ref.WeakReference;
 
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 
@@ -72,7 +70,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private AbstractGeoitemLayer geoitemLayer = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
-    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_STOP);
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private static boolean followMyLocation = Settings.isLiveMap();
     private MenuItem followMyLocationItem = null;
 
@@ -601,6 +599,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
                     }
                 });
+    }
+
+    @Override
+    protected void onStop() {
+        this.resumeDisposables.clear();
+        super.onStop();
     }
 
     @Override

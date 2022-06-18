@@ -24,7 +24,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.CompositeLifecycleDisposable;
 import cgeo.geocaching.utils.EditUtils;
 
 import android.app.Activity;
@@ -56,14 +55,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
 
 import com.google.android.material.textfield.TextInputLayout;
-import io.reactivex.rxjava3.disposables.DisposableContainer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
@@ -101,7 +99,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     private FragmentActivity myContext;
 
-    private final DisposableContainer resumeDisposables = new CompositeLifecycleDisposable(this, Lifecycle.Event.ON_PAUSE);
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
         @Override
         public void updateGeoData(final GeoData geo) {
@@ -166,6 +164,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
+        resumeDisposables.clear();
         Keyboard.hide(getActivity());
 
     }
