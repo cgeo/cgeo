@@ -60,6 +60,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
+import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -84,11 +85,9 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
@@ -116,7 +115,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -219,10 +217,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private RouteTrackUtils routeTrackUtils = null;
 
-    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
+    private final GeocacheRefreshedBroadcastReceiver cacheRefreshedBroadcastReceiver = new GeocacheRefreshedBroadcastReceiver(this) {
         @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
+        protected void onReceive(final Context context, final String geocode) {
             caches.invalidate(Collections.singleton(geocode));
         }
     };
@@ -368,6 +365,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
         MapUtils.showMapOneTimeMessages(this, mapMode);
+        getLifecycle().addObserver(cacheRefreshedBroadcastReceiver);
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -797,7 +795,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         Log.d("NewMap: onStart");
 
         initializeLayers();
-        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
     }
 
     private void initializeLayers() {
@@ -908,7 +905,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         waitDialog = null;
         terminateLayers();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
 
         super.onStop();
     }

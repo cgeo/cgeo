@@ -24,6 +24,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.util.Collection;
 
@@ -33,8 +35,9 @@ import org.apache.commons.lang3.StringUtils;
  * Base class for the map activity. Delegates base class calls to the
  * provider-specific implementation.
  */
-public abstract class AbstractMap {
+public abstract class AbstractMap implements LifecycleOwner {
 
+    @NonNull
     final MapActivityImpl mapActivity;
     protected MapViewImpl<CachesOverlayItemImpl> mapView;
 
@@ -43,7 +46,7 @@ public abstract class AbstractMap {
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
 
-    protected AbstractMap(final MapActivityImpl activity) {
+    protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;
     }
 
@@ -64,25 +67,31 @@ public abstract class AbstractMap {
         Routing.connect();
     }
 
-    public void onResume() {
-        mapActivity.superOnResume();
-    }
-
     public void onStart() {
         mapActivity.superOnStart();
     }
 
-    public void onStop() {
-        mapActivity.superOnStop();
+    public void onResume() {
+        mapActivity.superOnResume();
     }
 
     public void onPause() {
         mapActivity.superOnPause();
     }
 
+    public void onStop() {
+        mapActivity.superOnStop();
+    }
+
     public void onDestroy() {
         mapActivity.superOnDestroy();
         Routing.disconnect();
+    }
+
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return mapActivity.getActivity().getLifecycle();
     }
 
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
