@@ -529,7 +529,11 @@ public class Settings {
     }
 
     private static boolean getBooleanDirect(final String prefKey, final boolean defaultValue) {
-        return sharedPrefs == null ? defaultValue : sharedPrefs.getBoolean(prefKey, defaultValue);
+        try {
+            return sharedPrefs == null ? defaultValue : sharedPrefs.getBoolean(prefKey, defaultValue);
+        } catch (ClassCastException cce) {
+            return defaultValue;
+        }
     }
 
 
@@ -689,7 +693,10 @@ public class Settings {
     }
 
     public static boolean enableFeatureNewImageGallery() {
-        return getBoolean(R.string.pref_feature_new_image_gallery, false) || !BranchDetectionHelper.isProductionBuild();
+        if (!contains(R.string.pref_feature_new_image_gallery)) {
+            return !BranchDetectionHelper.isProductionBuild();
+        }
+        return getBoolean(R.string.pref_feature_new_image_gallery, false);
     }
 
     public static String getALCLauncher() {
