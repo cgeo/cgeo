@@ -181,17 +181,17 @@ final class ALApi {
         Log.d("_AL Radius: " + radius);
 
         final Geopoint center = new Geopoint(latcenter, loncenter);
-        return searchByCenter(center, radius, null);
+        return search(center, radius, null);
     }
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
-        return searchByCenter(center, DEFAULT_RADIUS, null);
+        return search(center, DEFAULT_RADIUS, null);
     }
 
     @NonNull
     @WorkerThread
-    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
+    private static Collection<Geocache> search(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
@@ -241,12 +241,12 @@ final class ALApi {
 
         final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
         if (dr != null) {
-            daysSincePublish = dr.getRelativeMinDateOffset();
+            daysSincePublish = dr.getDaysSinceMinDate() == 0 ? null : dr.getDaysSinceMinDate();
         } else {
             daysSincePublish = null;
         }
 
-        return searchByCenter(searchCoords, radius, daysSincePublish);
+        return search(searchCoords, radius, daysSincePublish);
     }
 
     @NonNull
