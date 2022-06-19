@@ -49,8 +49,10 @@ public class TapHandlerLayer extends Layer {
     @Override
     public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
         longTabLatLong = tapLatLong;
+        if (!tapHandler.onLongPress(tapXY)) {
+            longTabLatLong = null;
+        }
         requestRedraw();
-        tapHandler.onLongPress(tapXY);
         tapHandler.finished();
 
         return true;

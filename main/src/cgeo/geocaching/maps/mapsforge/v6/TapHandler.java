@@ -42,13 +42,16 @@ public class TapHandler {
         hitItems.clear();
     }
 
-    public void onLongPress(final Point tapXY) {
+    /** returns true if longTapContextMenu got triggered */
+    public boolean onLongPress(final Point tapXY) {
 
         final NewMap map = this.map.get();
 
         // show popup
         if (map != null && hitItems.isEmpty()) {
-            map.triggerLongTabContextMenu(tapXY);
+            map.triggerLongTapContextMenu(tapXY);
+            return true;
         }
+        return false;
     }
 }

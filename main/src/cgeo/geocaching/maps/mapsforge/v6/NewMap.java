@@ -1048,7 +1048,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
-    public void triggerLongTabContextMenu(final Point tapXY) {
+    public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
 
             MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude),
