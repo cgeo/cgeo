@@ -2,3 +2,4 @@
 - Nuovo: Copia le coordinate correnti con un tocco prolungato sulla posizione della schermata iniziale
 - Modifica: Rimosso controllo sul limite nelle dimensioni durante la memorizzazione dei waypoint nelle note personali
 - Corretto: Non vengono mostrati i cerchi di distanza per i waypoint dei cache archiviati
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
