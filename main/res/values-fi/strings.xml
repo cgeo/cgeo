@@ -1327,6 +1327,9 @@
     <string name="image_category_own">Oma</string>
     <string name="image_category_listing">Listaus</string>
     <string name="image_category_log">Loki</string>
+    <string name="context_map_add_to_route">Lisää reitin loppuun</string>
+    <string name="context_map_add_to_route_start">Lisää reitin alkuun</string>
+    <string name="context_map_show_coords">Näytä koordinaatit</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
