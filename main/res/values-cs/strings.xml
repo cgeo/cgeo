@@ -1362,6 +1362,9 @@
     <string name="image_category_own">Vlastní</string>
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Přidat na trasu</string>
+    <string name="context_map_add_to_route_start">Přidat před trasu</string>
+    <string name="context_map_show_coords">Zobrazit souřadnice</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
