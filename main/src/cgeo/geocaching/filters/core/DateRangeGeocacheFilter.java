@@ -1,13 +1,10 @@
 package cgeo.geocaching.filters.core;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
@@ -37,13 +34,12 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
         this.dateFilter.setMinMaxDate(min, max);
     }
 
-    public void setRelativeMinMaxDays(final int daysBeforeToday, final int daysAfterToday) {
-        setMinMaxDate(DateUtils.addDays(new Date(), -1 * daysBeforeToday), DateUtils.addDays(new Date(), daysAfterToday));
+    public void setRelativeMinMaxDays(final int minOffset, final int maxOffset) {
+        this.dateFilter.setRelativeDays(minOffset, maxOffset);
     }
 
-    public int getRelativeMinDateOffset() {
-        final long diffInMilliSecs = Math.abs(new Date().getTime() - dateFilter.getMinDate().getTime());
-        return (int) Math.ceil(TimeUnit.DAYS.convert(diffInMilliSecs, TimeUnit.MILLISECONDS));
+    public int getDaysSinceMinDate() {
+        return dateFilter.getDaysSinceMinDate();
     }
 
     @Override

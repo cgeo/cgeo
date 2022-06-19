@@ -258,14 +258,13 @@ public final class Formatter {
     @NonNull
     public static String formatDaysAgo(final long date) {
         final int days = CalendarUtils.daysSince(date);
-        switch (days) {
-            case 0:
-                return CgeoApplication.getInstance().getString(R.string.log_today);
-            case 1:
-                return CgeoApplication.getInstance().getString(R.string.log_yesterday);
-            default:
-                return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
-        }
+        return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
+    }
+
+    @NonNull
+    public static String formatDaysAhead(final long date) {
+        final int days = CalendarUtils.daysSince(date);
+        return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ahead, days, days);
     }
 
     @NonNull
