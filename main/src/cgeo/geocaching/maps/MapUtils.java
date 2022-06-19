@@ -29,6 +29,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
@@ -188,7 +189,7 @@ public class MapUtils {
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
-                .setPosition(new Point(tapX, tapY - offset), (int) (offset * 1.25))
+                .setPosition(new Point(tapX + DisplayUtils.getPxFromDp(CgeoApplication.getInstance().getResources(), 10f, 1f), tapY - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
