@@ -132,7 +132,7 @@
     <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
-    <string name="log_templates">Znaleziono: Szablon dziennika…</string>
+    <string name="log_templates">Znaleziono: Szablon wpisu…</string>
     <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
     <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
     <string name="log_add">Dodaj</string>
@@ -172,8 +172,8 @@
     <string name="log_problem_none">Brak problemów</string>
     <string name="log_problem_needs_maintenance_label">Wymagany serwis skrytki</string>
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
-    <string name="log_problem_log_full_label">Logbook jest pełny</string>
-    <string name="log_problem_log_full_text">Ten geocacher poinformował, że logbook jest pełny.</string>
+    <string name="log_problem_log_full_label">Dziennik jest pełny</string>
+    <string name="log_problem_log_full_text">Ten geocacher poinformował, że dziennik jest pełny.</string>
     <string name="log_problem_damaged_label">Pojemnik jest uszkodzony</string>
     <string name="log_problem_damaged_text">Ten geocacher poinformował, że pojemnik jest uszkodzony.</string>
     <string name="log_problem_missing_label">Skrytka mogła zniknąć</string>
@@ -480,7 +480,7 @@
     <string name="cache_filter_size">Rozmiar skrytki</string>
     <string name="cache_filter_personalnote">Notatka osobista</string>
     <string name="cache_filter_description">Opis skrytki</string>
-    <string name="cache_filter_offlinelog">Dziennik offline</string>
+    <string name="cache_filter_offlinelog">Wpis offline</string>
     <string name="cache_filter_owner">Właściciel skrytki</string>
     <string name="cache_filter_difficulty">Trudność</string>
     <string name="cache_filter_terrain">Teren</string>
@@ -728,10 +728,10 @@
     <string name="init_signature">Podpis</string>
     <string name="init_template_title">Tytuł szablonu</string>
     <string name="init_template_text">Tekst szablonu</string>
-    <string name="init_log_template">Szablon dziennika</string>
+    <string name="init_log_template">Szablon wpisu</string>
     <string name="init_log_template_addnew">Dodaj nowy szablon</string>
     <string name="init_log_template_remove_confirm">Czy na pewno chcesz usunąć szablon?</string>
-    <string name="init_log_templates">Szablony dzienników</string>
+    <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
@@ -1320,7 +1320,7 @@
     <string name="cache_coordinates">Współrzędne</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
     <string name="cache_spoiler_images_title">Zdjęcia ze spoilerami</string>
-    <string name="cache_log_types">Rodzaj wpisu</string>
+    <string name="cache_log_types">Rodzaje wpisów</string>
     <string name="cache_coordinates_no">Ta skrytka nie ma współrzędnych GPS.</string>
     <string name="cache_clear_history">Usuń historię</string>
     <string name="cache_remove_from_history">Usuń z historii</string>
@@ -1350,8 +1350,8 @@
     <string name="context_share_as_link">Udostępnij link</string>
     <string name="image_category_uncategorized">Bez kategorii</string>
     <string name="image_category_own">Własne</string>
-    <string name="image_category_listing">Lista</string>
-    <string name="image_category_log">Log</string>
+    <string name="image_category_listing">Z opisu</string>
+    <string name="image_category_log">Z dziennika</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
