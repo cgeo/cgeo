@@ -1331,6 +1331,9 @@
     <string name="image_category_own">Minhas</string>
     <string name="image_category_listing">Listagem</string>
     <string name="image_category_log">Registar</string>
+    <string name="context_map_add_to_route">Acrescentar à rota</string>
+    <string name="context_map_add_to_route_start">Acrescentar ao início da rota</string>
+    <string name="context_map_show_coords">Mostrar coordenadas</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
