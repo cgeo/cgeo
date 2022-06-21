@@ -2,4 +2,4 @@
 - Νέo: Αντιγραφή τρεχουσών συντεταγμένων όταν κάνετε παρατεταμένο κλικ στην τοποθεσία στην αρχική οθόνη
 - Αλλαγή: Αφαίρεση του έλεγχου μεγέθους κατά την αποθήκευση σημείων διαδρομής σε προσωπικές σημειώσεις
 - Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Νέο: Πατήστε στον ελεύθερο χώρο του χάρτη για να δημιουργήσετε σημείο αναφοράς ή κρύπτης, προσάρτηση ή προετοιμασία για μεμονωμένη διαδρομή, εμφάνιση συντεταγμένων ή πλοήγηση (ανάλογα με το περιβάλλον)
