@@ -410,6 +410,12 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.1.4'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
+    // Support Library Lifecycle
+    def lifecycleVersion = '2.4.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
+
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.3.1'
 

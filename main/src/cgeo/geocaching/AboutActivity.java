@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.about.SystemInformationViewModel;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
@@ -14,18 +15,14 @@ import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
 import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
@@ -37,14 +34,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.util.Consumer;
 import androidx.core.util.Pair;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,9 +55,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
     public static final Pattern VERSION_PLACEHOLDER_PATTERN = Pattern.compile("((^|[\\r\\n]+)[ \\t]*##[ \\t]*[\\r\\n]+)");
 
-    private final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
-
-    enum Page {
+    private enum Page {
         VERSION(R.string.about_version),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
@@ -92,7 +87,6 @@ public class AboutActivity extends TabbedViewPagerActivity {
         super.onCreate(savedInstanceState);
 
         Routing.connect();
-        systemInformationTask.execute();
 
         int startPage = 0;
         final Bundle extras = getIntent().getExtras();
@@ -156,7 +150,21 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
         @Override
         public AboutVersionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return AboutVersionPageBinding.inflate(getLayoutInflater(), container, false);
+            final FragmentActivity activity = requireActivity();
+            final AboutVersionPageBinding binding = AboutVersionPageBinding.inflate(inflater, container, false);
+            final SystemInformationViewModel viewModel = new ViewModelProvider(activity).get(SystemInformationViewModel.class);
+
+            viewModel.getSystemInformation().observe(getViewLifecycleOwner(), (si -> {
+                if (si != null) {
+                    setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(activity)) +
+                            "&body=" + Uri.encode(si) + "\n");
+                    binding.support.setEnabled(true);
+                } else {
+                    binding.support.setEnabled(false);
+                }
+            }));
+
+            return binding;
         }
 
         @Override
@@ -187,13 +195,6 @@ public class AboutActivity extends TabbedViewPagerActivity {
                     binding.aboutVersionIcon.setImageResource(R.mipmap.ic_launcher_rc);
                 }
             }
-            binding.support.setEnabled(false);
-
-            activity.getSystemInformationTask().getSystemInformation(si -> {
-                setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(activity)) +
-                        "&body=" + Uri.encode(si) + "\n");
-                binding.support.setEnabled(true);
-            });
 
             setClickListener(binding.website, "https://www.cgeo.org/");
             setClickListener(binding.facebook, "https://www.facebook.com/pages/cgeo/297269860090");
@@ -270,7 +271,29 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
         @Override
         public AboutSystemPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return AboutSystemPageBinding.inflate(getLayoutInflater(), container, false);
+            final FragmentActivity activity = requireActivity();
+            final AboutSystemPageBinding binding = AboutSystemPageBinding.inflate(inflater, container, false);
+            final SystemInformationViewModel viewModel = new ViewModelProvider(activity).get(SystemInformationViewModel.class);
+
+            viewModel.getSystemInformation().observe(getViewLifecycleOwner(), (si -> {
+                if (si != null) {
+                    final Markwon markwon = Markwon.create(activity);
+                    markwon.setMarkdown(binding.system, si);
+                    binding.copy.setEnabled(true);
+                    binding.copy.setOnClickListener(view -> {
+                        ClipboardUtils.copyToClipboard(si);
+                        ActivityMixin.showShortToast(activity, getString(R.string.clipboard_copy_ok));
+                    });
+                    binding.share.setEnabled(true);
+                    binding.share.setOnClickListener(view -> ShareUtils.shareAsEmail(activity, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
+                } else {
+                    binding.system.setText(R.string.about_system_collecting);
+                    binding.copy.setEnabled(false);
+                    binding.share.setEnabled(false);
+                }
+            }));
+
+            return binding;
         }
 
         @Override
@@ -285,22 +308,6 @@ public class AboutActivity extends TabbedViewPagerActivity {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
-
-            binding.system.setText(R.string.about_system_collecting);
-            binding.copy.setEnabled(false);
-            binding.share.setEnabled(false);
-
-            activity.getSystemInformationTask().getSystemInformation(si -> {
-                final Markwon markwon = Markwon.create(activity);
-                markwon.setMarkdown(binding.system, si);
-                binding.copy.setEnabled(true);
-                binding.copy.setOnClickListener(view1 -> {
-                    ClipboardUtils.copyToClipboard(si);
-                    ActivityMixin.showShortToast(activity, getString(R.string.clipboard_copy_ok));
-                });
-                binding.share.setEnabled(true);
-                binding.share.setOnClickListener(view12 -> ShareUtils.shareAsEmail(activity, getString(R.string.about_system_info), si, null, R.string.about_system_info_send_chooser));
-            });
 
             binding.system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             binding.system.setTextIsSelectable(true);
@@ -430,63 +437,16 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
     }
 
-    protected static class GatherSystemInformationTask extends AsyncTask<Void, Void, String> {
-
-        private final Object mutex = new Object();
-        private String systemInformation = null;
-        private final List<Consumer<String>> consumers = new ArrayList<>();
-
-        public void getSystemInformation(final Consumer<String> callback) {
-            synchronized (mutex) {
-                if (systemInformation != null) {
-                    callback.accept(systemInformation);
-                    return;
-                }
-                consumers.add(callback);
-            }
-        }
-
-        public void onDestroy() {
-            synchronized (mutex) {
-                consumers.clear();
-                systemInformation = null;
-            }
-        }
-
-        @Override
-        protected String doInBackground(final Void[] params) {
-            final Context context = CgeoApplication.getInstance().getApplicationContext();
-            return SystemInformation.getSystemInformation(context);
-        }
-
-        @Override
-        protected void onPostExecute(final String systemInformation) {
-            Log.d("SystemInformation returned");
-            synchronized (mutex) {
-                this.systemInformation = systemInformation;
-                for (Consumer<String> consumer : consumers) {
-                    consumer.accept(this.systemInformation);
-                }
-                consumers.clear();
-            }
-        }
-    }
-
     public static void showChangeLog(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.id);
         fromActivity.startActivity(intent);
     }
 
-    protected GatherSystemInformationTask getSystemInformationTask() {
-        return systemInformationTask;
-    }
-
     @Override
     protected void onDestroy() {
         Routing.disconnect();
         super.onDestroy();
-        systemInformationTask.onDestroy();
     }
 
 }
