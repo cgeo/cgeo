@@ -68,21 +68,22 @@ public class AboutActivity extends TabbedViewPagerActivity {
         LICENSE(R.string.about_license);
 
         @StringRes
-        protected final int resourceId;
-        protected final long id;
+        private final int resourceId;
+        private final long id;
 
         Page(@StringRes final int resourceId) {
             this.resourceId = resourceId;
             this.id = ordinal();
         }
 
+        @NonNull
         static Page find(final long pageId) {
             for (Page page : Page.values()) {
                 if (page.id == pageId) {
                     return page;
                 }
             }
-            return null;
+            throw new IllegalStateException(); // should not happen, unless invalid page is in list
         }
     }
 
