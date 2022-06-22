@@ -211,7 +211,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         changeMapSource(Settings.getTileProvider());
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
+        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
 //        MapUtils.showMapOneTimeMessages(this, mapMode);

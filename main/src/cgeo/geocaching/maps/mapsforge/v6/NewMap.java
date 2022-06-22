@@ -362,7 +362,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
+        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
@@ -985,7 +985,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapView.destroy();
         ResourceBitmapCacheMonitor.release();
 
-        Routing.disconnect(ROUTING_SERVICE_KEY);
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(null);
         }

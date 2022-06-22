@@ -90,7 +90,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Routing.connect();
+        Routing.connect(this);
         systemInformationTask.execute();
 
         int startPage = 0;
@@ -483,7 +483,6 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
     @Override
     protected void onDestroy() {
-        Routing.disconnect();
         super.onDestroy();
         systemInformationTask.onDestroy();
     }
