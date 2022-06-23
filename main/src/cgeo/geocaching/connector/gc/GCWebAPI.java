@@ -694,12 +694,24 @@ class GCWebAPI {
         String region;
         @JsonProperty("country")
         String country;
+        @JsonProperty("attributes")
+        List<Attribute> attributes;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class GeocacheType {
         long id;
         String name;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class Attribute {
+        @JsonProperty("id")
+        int id;
+        @JsonProperty("name")
+        String name;
+        @JsonProperty("isApplicable")
+        boolean isApplicable;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -865,8 +877,6 @@ class GCWebAPI {
         result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
         final List<Geocache> foundCaches = new ArrayList<>();
 
-        final List<String> searchedAttributes = CollectionStream.of(search.cacheAttributes).map(ca -> ca.getValue(true)).toList();
-
         if (mapSearchResultSet.results != null) {
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
 
@@ -913,8 +923,12 @@ class GCWebAPI {
                     c.setOwnerUserId(r.owner.username);
                 }
 
-                //if search contains attributes, then we know that cache has these attributes -> add them
-                c.setAttributes(searchedAttributes);
+                // parse attributes
+                final List<String> attributes = new ArrayList<>();
+                for (Attribute attribute : r.attributes) {
+                    attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                }
+                c.setAttributes(attributes);
 
                 foundCaches.add(c);
             }

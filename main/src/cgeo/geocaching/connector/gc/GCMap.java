@@ -157,7 +157,7 @@ public class GCMap {
             case NAME:
                 search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
                 break;
-            case ATTRIBUTES: //TODO: does not work for v1!
+            case ATTRIBUTES:
                 search.addCacheAttributes(
                         CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
                                 .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
