@@ -2,4 +2,4 @@
 - Nieuw: Kopieer huidige coördinaten bij lang klikken op locatie op het startscherm
 - Wijziging: Verwijder grootte controle tijdens het opslaan van waypoints in persoonlijke notities
 - Oplossing: Toon geen afstandscirkels voor waypoints van gearchiveerde caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Nieuw: Tik op vrije plek op de kaart om een waypoint of gebruiker gedefinieerde cache te maken, voeg voor of toe aan individuele route, toon coördinaten of navigeer (afhankelijk van de context)
