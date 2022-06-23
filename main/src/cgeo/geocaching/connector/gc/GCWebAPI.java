@@ -688,6 +688,10 @@ class GCWebAPI {
         Date lastFoundDate;
         @JsonProperty("trackableCount")
         int trackableCount;
+        @JsonProperty("region")
+        String region;
+        @JsonProperty("country")
+        String country;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -888,6 +892,7 @@ class GCWebAPI {
                 c.setHidden(r.placedDate);
                 c.setLastFound(r.lastFoundDate);
                 c.setInventoryItems(r.trackableCount);
+                c.setLocation(r.region + ", " + r.country);
 
                 //Only set found if the map returns a "found",
                 //the map API will possibly lag behind and break
