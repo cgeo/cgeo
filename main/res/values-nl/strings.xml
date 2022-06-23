@@ -1332,6 +1332,9 @@
     <string name="image_category_own">Eigen</string>
     <string name="image_category_listing">Lijst</string>
     <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Toevoegen aan route</string>
+    <string name="context_map_add_to_route_start">Toevoegen aan route (vooraan)</string>
+    <string name="context_map_show_coords">Coördinaten tonen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
