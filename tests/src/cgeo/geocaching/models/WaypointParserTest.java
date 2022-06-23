@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -634,12 +635,24 @@ public class WaypointParserTest {
 
     @Test
     public void testParseVariables() {
+        assertParseVars("$TEST=3+4\n$B=4+5|c=6", "TEST", "3+4", "B", "4+5", "c", "6");
+    }
+
+    @Test
+    public void testParseComplexVariables() {
+        assertParseVars("A=?, B=?, C = ?, D=6, E = 5x, Fg = 8, h9", "D", "6", "E", "5", "Fg", "8");
+        assertParseVars("test\nA=?, B=5\n$C=4*y|D=8|$R=3*5", "B", "5", "C", "4*y", "D", "8", "R", "3*5");
+    }
+
+    private void assertParseVars(final String text, final String ... expectedVars) {
         final WaypointParser parser = createParser("Praefix");
-        parser.parseWaypoints("$TEST=3+4\n B=4+5\n c6");
+        parser.parseWaypoints(text);
+        final Map<String, String> expectedVarMap = new HashMap<>();
+        for (int i = 0; i < expectedVars.length; i += 2) {
+            expectedVarMap.put(expectedVars[i], expectedVars[i + 1]);
+        }
         final Map<String, String> vars = parser.getParsedVariables();
-        assertThat(vars).containsEntry("TEST", "3+4");
-        assertThat(vars).containsEntry("B", "4+5");
-        assertThat(vars).containsEntry("c", "6");
+        assertThat(vars).isEqualTo(expectedVarMap);
 
     }
 }

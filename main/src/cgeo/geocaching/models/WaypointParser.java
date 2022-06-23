@@ -11,7 +11,6 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 
@@ -54,13 +53,9 @@ public class WaypointParser {
 
     //Constants for variable parsing
 
-    private static final String PARSING_VAR_NAME_PRAEFIX = "$";
-    private static final Pattern[] PARSING_VAR_FINDER_PATTERNS = new Pattern[] {
-            Pattern.compile("\\s+([A-Za-z])\\s*="), //any one-letter-varname
-            Pattern.compile(Pattern.quote(PARSING_VAR_NAME_PRAEFIX) + "\\s*([a-zA-Z][a-zA-Z0-9]*)\\s*=")
-    };
-    private static final Pattern PARSING_VAR_SINGLE_LETTER_NUMERIC = Pattern.compile("\\s+([A-Za-z])([0-9]+)\\s+");
-
+    private static final String PARSING_VAR_LETTERS_FULL = "\\$([a-zA-Z][a-zA-Z0-9]*)\\s*=\\s*([^\\n|]+)[\\n|]";
+    private static final String PARSING_VAR_LETTERS_NUMERIC = "[^A-Za-z0-9]([A-Za-z]+)\\s*=\\s*([0-9]+(?:[,.][0-9]+)?)[^0-9]";
+    private static final Pattern PARSING_VARS = Pattern.compile(PARSING_VAR_LETTERS_FULL + "|" + PARSING_VAR_LETTERS_NUMERIC);
 
     //general members
     private final Geocache cache;
@@ -571,30 +566,22 @@ public class WaypointParser {
                 sb.append(" | ");
             }
             first = false;
-            sb.append(PARSING_VAR_NAME_PRAEFIX).append(entry.getKey()).append("=").append(entry.getValue());
+            sb.append("$").append(entry.getKey()).append("=").append(entry.getValue());
         }
         return sb.toString();
     }
 
     private void parseVariablesFromString(final String pText) {
-        final String text = " " + pText + " ";
-        final Matcher matcher = PARSING_VAR_SINGLE_LETTER_NUMERIC.matcher(text);
-        while (matcher.find()) {
-            final String varName = matcher.group(1);
-            final String value = matcher.group(2);
+        final String text = " " + pText + "\n";
+        final Matcher matcher = PARSING_VARS.matcher(text);
+        int pos = 0;
+        while (matcher.find(pos)) {
+            final int group = matcher.group(1) == null ? 3 : 1;
+            final String varName = matcher.group(group);
+            final String value = matcher.group(group + 1);
+            pos = matcher.end(group + 1);
             addVariable(varName, value, true);
         }
-        for (Pattern p : PARSING_VAR_FINDER_PATTERNS) {
-            final Matcher m = p.matcher(text);
-            while (m.find()) {
-                final String varName = m.group(1);
-                final TextParser valueParser = new TextParser(text.substring(m.end()));
-                final String value = valueParser.parseUntil(c -> c == '|' || c == '\n', true, '\\', false);
-                addVariable(varName, value, true);
-            }
-        }
-
-
     }
 
     private static String getParseableFormulaString(final CalcState calcState) {
