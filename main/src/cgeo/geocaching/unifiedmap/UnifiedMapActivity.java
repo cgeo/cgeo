@@ -79,6 +79,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private Tracks tracks = null;
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
+    private MapMode compatibilityMapMode = MapMode.LIVE;
 
     // rotation indicator
     protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
@@ -186,6 +187,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (extras != null) {
             mapType = extras.getParcelable(BUNDLE_MAPTYPE);
         }
+        setMapModeFromMapType();
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
@@ -218,6 +220,22 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     }
 
+    private void setMapModeFromMapType() {
+        if (mapType == null) {
+            return;
+        }
+        compatibilityMapMode = MapMode.LIVE;
+        switch (mapType.type) {
+            case UMTT_TargetGeocode:
+                compatibilityMapMode = MapMode.SINGLE;
+                break;
+            case UMTT_TargetCoords:
+                compatibilityMapMode = MapMode.COORDS;
+                break;
+        }
+        Log.e("map mode=" + compatibilityMapMode);
+    }
+
     private void changeMapSource(final AbstractTileProvider newSource) {
         final AbstractTileProvider oldProvider = tileProvider;
         if (oldProvider != null) {
@@ -228,7 +246,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (oldProvider != null) {
                 tileProvider.getMap().init(this, oldProvider.getMap().getCurrentZoom(), oldProvider.getMap().getCenter(), () -> onMapReadyTasks(newSource, true));
             } else {
-                tileProvider.getMap().init(this, Settings.getMapZoom(MapMode.LIVE), null, () -> onMapReadyTasks(newSource, true));   // @todo: use actual mapmode
+                tileProvider.getMap().init(this, Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true));
             }
             configMapChangeListener(true);
         } else {
@@ -262,10 +280,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
 
             // react to mapType
+            setMapModeFromMapType();
             switch (mapType.type) {
                 case UMTT_PlainMap:
                     // restore last saved position and zoom
-                    tileProvider.getMap().setZoom(Settings.getMapZoom(MapMode.LIVE));
+                    tileProvider.getMap().setZoom(Settings.getMapZoom(compatibilityMapMode));
                     tileProvider.getMap().setCenter(Settings.getUMMapCenter());
                     break;
                 case UMTT_TargetGeocode:
@@ -618,7 +637,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         tileProvider.getMap().onPause();
         configMapChangeListener(false);
 
-        Settings.setMapZoom(MapMode.LIVE, tileProvider.getMap().getCurrentZoom()); // @todo: use actual map mode
+        Settings.setMapZoom(compatibilityMapMode, tileProvider.getMap().getCurrentZoom());
         Settings.setMapCenter(tileProvider.getMap().getCenter());
 
         super.onPause();
