@@ -243,6 +243,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         tileProvider.getMap().setDelayedZoomTo();
         tileProvider.getMap().setDelayedCenterTo();
 
+        final View spinner = findViewById(R.id.map_progressbar);
+        if (spinner != null) {
+            spinner.setVisibility(View.GONE);
+        }
+
         if (mapChanged) {
             routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
             tracks = new Tracks(routeTrackUtils, this::setTrack);
