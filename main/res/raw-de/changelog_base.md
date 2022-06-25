@@ -2,4 +2,6 @@
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 - Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
+- New: Option to delete offline maps
+- Fix: Missing trackable count in search results
