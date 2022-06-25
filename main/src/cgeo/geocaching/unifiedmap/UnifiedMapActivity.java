@@ -36,6 +36,8 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Intent;
@@ -226,16 +228,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (mapType == null) {
             return;
         }
-        compatibilityMapMode = MapMode.LIVE;
-        switch (mapType.type) {
-            case UMTT_TargetGeocode:
-                compatibilityMapMode = MapMode.SINGLE;
-                break;
-            case UMTT_TargetCoords:
-                compatibilityMapMode = MapMode.COORDS;
-                break;
+        if (mapType.type == UMTT_TargetGeocode) {
+            compatibilityMapMode = MapMode.SINGLE;
+        } else if (mapType.type == UMTT_TargetCoords) {
+            compatibilityMapMode = MapMode.COORDS;
+        } else {
+            compatibilityMapMode = MapMode.LIVE;
         }
-        Log.e("map mode=" + compatibilityMapMode);
     }
 
     private void changeMapSource(final AbstractTileProvider newSource) {
