@@ -1971,10 +1971,6 @@
     <string name="tts_oclock">Klockan %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopierat till urklipp</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d dag sedan</item>
-        <item quantity="other">%d dagar sedan</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
     <string name="create_shortcut">Skapa genväg</string>
