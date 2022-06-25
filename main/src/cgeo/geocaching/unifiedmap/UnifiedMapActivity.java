@@ -63,6 +63,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_ROUTE = "route";
+    private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
@@ -80,6 +81,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
+    private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
     // rotation indicator
     protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
@@ -194,7 +196,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (savedInstanceState.containsKey(BUNDLE_MAPTYPE)) {
                 mapType = savedInstanceState.getParcelable(BUNDLE_MAPTYPE);
             }
-            Log.e("mapType=" + mapType);
+            overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
 //            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -301,6 +303,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 default:
                     // nothing to do
                     break;
+            }
+            if (overridePositionAndZoom) {
+                tileProvider.getMap().setZoom(Settings.getMapZoom(compatibilityMapMode));
+                tileProvider.getMap().setCenter(Settings.getUMMapCenter());
+                overridePositionAndZoom = false;
             }
             // @todo for testing purposes only
             /*
@@ -609,6 +616,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (individualRoute != null) {
             outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
+        outState.putBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, true);
     }
 
     @Override
