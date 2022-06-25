@@ -1332,6 +1332,9 @@
     <string name="image_category_own">Eigene</string>
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">An Route anhängen</string>
+    <string name="context_map_add_to_route_start">Vor Route einfügen</string>
+    <string name="context_map_show_coords">Koordinaten anzeigen</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
@@ -2007,10 +2010,6 @@
     <string name="tts_oclock">%s Uhr</string>
     <!-- various -->
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
-    <plurals name="days_ago">
-        <item quantity="one">vor %d Tag</item>
-        <item quantity="other">vor %d Tagen</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
