@@ -52,12 +52,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 
@@ -398,36 +400,51 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // ========================================================================
     // Routes, tracks and targets handling
 
-    private void setTarget(final Geopoint geopoint, final String s) {
+    @Nullable
+    private Geocache getCurrentTargetCache() {
         if (tileProvider.getMap().positionLayer != null) {
-            tileProvider.getMap().positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
-        }
-        // @todo
-        /*
-        lastNavTarget = coords;
-        if (StringUtils.isNotBlank(geocode)) {
-            targetGeocode = geocode;
-            final Geocache target = getCurrentTargetCache();
-            targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
-            if (lastNavTarget == null && target != null) {
-                lastNavTarget = target.getCoords();
+            final String targetGeocode = tileProvider.getMap().positionLayer.mapDistanceDrawer.getTargetGeocode();
+            if (StringUtils.isNotBlank(targetGeocode)) {
+                return DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
             }
-        } else {
-            targetGeocode = null;
-            targetView.setTarget(null, null);
         }
-        if (navigationLayer != null) {
-            navigationLayer.setDestination(lastNavTarget);
-            navigationLayer.requestRedraw();
-        }
-        if (distanceView != null) {
-            distanceView.setDestination(lastNavTarget);
-            distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
-        }
+        return null;
+    }
 
+    private void setTarget(final Geopoint geopoint, final String geocode) {
+        AbstractPositionLayer positionLayer = tileProvider.getMap().positionLayer;
+        if (positionLayer == null) {
+            positionLayer = tileProvider.getMap().configPositionLayer(true);
+        }
+        if (positionLayer != null) {
+            positionLayer.mapDistanceDrawer.setLastNavTarget(geopoint);
+            if (StringUtils.isNotBlank(geocode)) {
+                positionLayer.mapDistanceDrawer.setTargetGeocode(geocode);
+                final Geocache target = getCurrentTargetCache();
+                positionLayer.mapDistanceDrawer.setTarget(target != null ? target.getName() : StringUtils.EMPTY);
+                positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
+                if (positionLayer.mapDistanceDrawer.getLastNavTarget() == null && target != null) {
+                    positionLayer.mapDistanceDrawer.setLastNavTarget(target.getCoords());
+                }
+            } else {
+                positionLayer.mapDistanceDrawer.setTargetGeocode(null);
+                positionLayer.mapDistanceDrawer.setTarget(null);
+                if (tileProvider.getMap().positionLayer != null) {
+                    tileProvider.getMap().positionLayer.setDestination(null);
+                }
+            }
+            /*
+            if (navigationLayer != null) {
+                navigationLayer.setDestination(lastNavTarget);
+                navigationLayer.requestRedraw();
+            }
+            if (distanceView != null) {
+                distanceView.setDestination(lastNavTarget);
+                distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
+            }
+            */
+        }
         ActivityMixin.invalidateOptionsMenu(this);
-
-         */
     }
 
     // glue method for old map

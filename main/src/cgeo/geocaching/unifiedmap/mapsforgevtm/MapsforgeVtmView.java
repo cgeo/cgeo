@@ -184,9 +184,13 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
         if (create) {
-            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap, rootView);
+            if (positionLayer == null) {
+                positionLayer = new MapsforgePositionLayer(mMap, rootView);
+            }
+            return positionLayer;
         } else if (positionLayer != null) {
             ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
+            positionLayer = null;
         }
         return null;
     }

@@ -207,7 +207,12 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     protected AbstractPositionLayer<LatLng> configPositionLayer(final boolean create) {
         if (create) {
-            return positionLayer != null ? positionLayer : mMap == null ? null : new GoogleMapsPositionLayer(mMap, rootView);
+            if (positionLayer == null) {
+                positionLayer = mMap == null ? null : new GoogleMapsPositionLayer(mMap, rootView);
+            }
+            return positionLayer;
+        } else {
+            positionLayer = null;
         }
         return null;
     }

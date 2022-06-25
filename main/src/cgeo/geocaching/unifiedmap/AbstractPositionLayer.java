@@ -3,7 +3,6 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.MapDistanceDrawerCommons;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Route;
@@ -56,7 +55,7 @@ public abstract class AbstractPositionLayer<T> {
     protected float directDistance = 0.0f;
     protected float individualRouteDistance = 0.0f;
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
-    private final MapDistanceDrawerCommons mapDistanceDrawer;
+    public final UnifiedTargetAndDistancesHandler mapDistanceDrawer;
 
     // position and heading arrow
     protected Bitmap positionAndHeadingArrow = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
@@ -86,7 +85,7 @@ public abstract class AbstractPositionLayer<T> {
     }
 
     protected AbstractPositionLayer(final View root, final Func2<Double, Double, T> createNewPoint) {
-        mapDistanceDrawer = new MapDistanceDrawerCommons(root);
+        mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(root);
         this.createNewPoint = createNewPoint;
     }
 
