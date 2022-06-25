@@ -63,8 +63,8 @@ public class AboutActivity extends TabbedViewPagerActivity {
         LICENSE(R.string.about_license);
 
         @StringRes
-        private final int resourceId;
-        private final long id;
+        final int resourceId;
+        final long id;
 
         Page(@StringRes final int resourceId) {
             this.resourceId = resourceId;

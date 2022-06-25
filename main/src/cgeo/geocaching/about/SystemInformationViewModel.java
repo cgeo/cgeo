@@ -3,7 +3,6 @@ package cgeo.geocaching.about;
 import cgeo.geocaching.utils.SystemInformation;
 
 import android.app.Application;
-import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -20,7 +19,7 @@ public class SystemInformationViewModel extends AndroidViewModel {
 
     private final LiveData<String> systemInformation;
 
-    public SystemInformationViewModel(@NonNull Application application) {
+    public SystemInformationViewModel(@NonNull final Application application) {
         super(application);
 
         systemInformation = LiveDataReactiveStreams.fromPublisher(
