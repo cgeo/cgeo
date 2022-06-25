@@ -2,3 +2,6 @@
 - New: Copy current coordinates when long-clicking location on home screen
 - Change: Remove size-limit check while storing waypoints in personal notes
 - Corrigé : Ne plus afficher les cercles de distance pour les caches archivées
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Missing trackable count in search results

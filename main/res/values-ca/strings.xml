@@ -1983,10 +1983,6 @@
     <string name="tts_oclock">%s en punt</string>
     <!-- various -->
     <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
-    <plurals name="days_ago">
-        <item quantity="one">fa %d dia</item>
-        <item quantity="other">fa %d dies</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>
