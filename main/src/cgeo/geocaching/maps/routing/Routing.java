@@ -19,6 +19,8 @@ import android.util.Xml;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,13 +61,28 @@ public final class Routing {
         connect(null, null);
     }
 
+    public static synchronized void connect(@Nullable final LifecycleOwner owner) {
+        connect(null, null, owner);
+    }
 
-    public static synchronized void connect(final String callbackKey, final Runnable onServiceConnectedCallback) {
+    public static synchronized void connect(@Nullable final String callbackKey, @Nullable final Runnable onServiceConnectedCallback) {
+        connect(callbackKey, onServiceConnectedCallback, null);
+    }
+
+    public static synchronized void connect(
+        @Nullable final String callbackKey,
+        @Nullable final Runnable onServiceConnectedCallback,
+        @Nullable final LifecycleOwner owner
+    ) {
 
         connectCount++;
 
         if (callbackKey != null && onServiceConnectedCallback != null) {
             REGISTERED_CALLBACKS.put(callbackKey, onServiceConnectedCallback);
+        }
+
+        if (owner != null) {
+            owner.getLifecycle().addObserver(new RoutingObserver(callbackKey));
         }
 
         if (isConnected()) {
@@ -322,5 +339,20 @@ public final class Routing {
      */
     public static String getExternalRoutingPackageName() {
         return getContext().getString(R.string.package_brouter);
+    }
+
+    private static class RoutingObserver implements DefaultLifecycleObserver {
+
+        @Nullable
+        private final String callbackKey;
+
+        RoutingObserver(@Nullable final String callbackKey) {
+            this.callbackKey = callbackKey;
+        }
+
+        @Override
+        public void onDestroy(@NonNull final LifecycleOwner owner) {
+            disconnect(callbackKey);
+        }
     }
 }

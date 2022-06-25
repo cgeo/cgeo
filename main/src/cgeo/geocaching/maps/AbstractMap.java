@@ -62,7 +62,7 @@ public abstract class AbstractMap {
 
     public void onCreate(final Bundle savedInstanceState) {
         mapActivity.superOnCreate(savedInstanceState);
-        Routing.connect();
+        Routing.connect(getActivity());
     }
 
     public void onStart() {
@@ -83,7 +83,6 @@ public abstract class AbstractMap {
 
     public void onDestroy() {
         mapActivity.superOnDestroy();
-        Routing.disconnect();
     }
 
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
