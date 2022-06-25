@@ -2010,10 +2010,6 @@
     <string name="tts_oclock">%s uur</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d dag geleden</item>
-        <item quantity="other">%d dagen geleden</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
@@ -2184,6 +2180,10 @@
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
+    <string name="delete_offlinemap_title">Verwijder offline kaart</string>
+    <string name="no_deletable_offlinemaps">Geen verwijderbare offline kaarten</string>
+    <string name="delete_file_confirmation">Verwijder %s?</string>
+    <string name="file_deleted_info">%s verwijderd</string>
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_filename">%s downloaden</string>
