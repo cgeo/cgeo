@@ -1662,12 +1662,6 @@
     <string name="tts_oclock">%s часов</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Скопировано в буфер</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d день назад</item>
-        <item quantity="few">%d дня назад</item>
-        <item quantity="many">%d дней назад</item>
-        <item quantity="other">%d дней назад</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>
