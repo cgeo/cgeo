@@ -2000,10 +2000,6 @@
     <string name="tts_oclock">%s η ώρα</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Αντιγραφή στο πρόχειρο</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d ημέρα πριν</item>
-        <item quantity="other">πριν %d μέρες</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
@@ -2165,6 +2161,10 @@
     <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
+    <string name="delete_offlinemap_title">Διαγραφή offline χάρτη</string>
+    <string name="no_deletable_offlinemaps">Δεν υπάρχουν offline χάρτες για διαγραφη</string>
+    <string name="delete_file_confirmation">Διαγραφή %s;</string>
+    <string name="file_deleted_info">Το \'%s\' διαγράφηκε</string>
     <string name="download_title">Λήψη αρχείου</string>
     <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί, το αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
