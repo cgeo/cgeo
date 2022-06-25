@@ -66,6 +66,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
+import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSortContext;
@@ -97,10 +98,8 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -126,7 +125,6 @@ import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -219,16 +217,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.setActualCoordinates(geoData.getCoords());
         }
 
-    };
-
-    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
-            if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
-                refreshCurrentList();
-            }
-        }
     };
 
     private ContextMenuInfo lastMenuInfo;
@@ -593,6 +581,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             importGpxAttachement();
         }
+
+        getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(this) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
+                    refreshCurrentList();
+                }
+            }
+        });
     }
 
     @Override
@@ -703,18 +700,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (forceSort) {
             adapter.forceSort();
         }
-    }
-
-    @Override
-    protected void onStart() {
-        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
-        super.onStop();
     }
 
     @Override

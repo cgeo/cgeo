@@ -34,6 +34,14 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
         this.dateFilter.setMinMaxDate(min, max);
     }
 
+    public void setRelativeMinMaxDays(final int minOffset, final int maxOffset) {
+        this.dateFilter.setRelativeDays(minOffset, maxOffset);
+    }
+
+    public int getDaysSinceMinDate() {
+        return dateFilter.getDaysSinceMinDate();
+    }
+
     @Override
     public void setConfig(final ExpressionConfig config) {
         dateFilter.setConfig(config.get(null));

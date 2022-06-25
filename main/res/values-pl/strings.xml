@@ -132,7 +132,7 @@
     <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
-    <string name="log_templates">Znaleziono: Szablon dziennika…</string>
+    <string name="log_templates">Znaleziono: Szablon wpisu…</string>
     <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
     <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
     <string name="log_add">Dodaj</string>
@@ -172,8 +172,8 @@
     <string name="log_problem_none">Brak problemów</string>
     <string name="log_problem_needs_maintenance_label">Wymagany serwis skrytki</string>
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
-    <string name="log_problem_log_full_label">Logbook jest pełny</string>
-    <string name="log_problem_log_full_text">Ten geocacher poinformował, że logbook jest pełny.</string>
+    <string name="log_problem_log_full_label">Dziennik jest pełny</string>
+    <string name="log_problem_log_full_text">Ten geocacher poinformował, że dziennik jest pełny.</string>
     <string name="log_problem_damaged_label">Pojemnik jest uszkodzony</string>
     <string name="log_problem_damaged_text">Ten geocacher poinformował, że pojemnik jest uszkodzony.</string>
     <string name="log_problem_missing_label">Skrytka mogła zniknąć</string>
@@ -400,8 +400,8 @@
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
-    <string name="caches_upload_modifiedcoords">Prześlij nowe współrzędne</string>
-    <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać nowe współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
+    <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
+    <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać zmodyfikowane współrzędne dla wszystkich (zaznaczonych) skrytek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrytek</string>
     <string name="caches_upload_allcoords_dialogtitle">UWAGA - Przesyłanie wszystkich współrzędnych</string>
     <string name="caches_upload_allcoords_warning">Spowoduje to nadpisanie istniejących współrzędnych na serwerze dla wszystkich (zaznaczonych) skrytek na Twojej liście bieżącymi współrzędnymi zapisanymi w c:geo! Tę operację można zastosować tylko w szczególnych przypadkach, np. gdy zaimportowałeś plik GPX, który zawiera skorygowane współrzędne. Nie można cofnąć tej operacji i powinieneś ją używać tylko wtedy, gdy wiesz, co robisz. W normalnych przypadkach możesz raczej chcieć użyć funkcji „Wyślij zmodyfikowane współrzędne” w tym samym menu.</string>
@@ -480,7 +480,7 @@
     <string name="cache_filter_size">Rozmiar skrytki</string>
     <string name="cache_filter_personalnote">Notatka osobista</string>
     <string name="cache_filter_description">Opis skrytki</string>
-    <string name="cache_filter_offlinelog">Dziennik offline</string>
+    <string name="cache_filter_offlinelog">Wpis offline</string>
     <string name="cache_filter_owner">Właściciel skrytki</string>
     <string name="cache_filter_difficulty">Trudność</string>
     <string name="cache_filter_terrain">Teren</string>
@@ -728,10 +728,10 @@
     <string name="init_signature">Podpis</string>
     <string name="init_template_title">Tytuł szablonu</string>
     <string name="init_template_text">Tekst szablonu</string>
-    <string name="init_log_template">Szablon dziennika</string>
+    <string name="init_log_template">Szablon wpisu</string>
     <string name="init_log_template_addnew">Dodaj nowy szablon</string>
     <string name="init_log_template_remove_confirm">Czy na pewno chcesz usunąć szablon?</string>
-    <string name="init_log_templates">Szablony dzienników</string>
+    <string name="init_log_templates">Szablony wpisów</string>
     <string name="init_log_template_prefix">Szablon:\u0020</string>
     <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
@@ -930,9 +930,9 @@
     <string name="init_default_navigation_tool_select">Wybierz narzędzie</string>
     <string name="init_default_navigation_tool_2_description">Tutaj możesz wybrać drugie preferowane narzędzie nawigacji. Jest aktywowane przez długie dotknięcie ikony nawigacji obok nazwy skrytki.</string>
     <string name="init_navigation_menu_description">Możesz tu wybrać jakie dostępne metody nawigacji będą widoczne w menu nawigacji. Pozycje wyłączone nie są zainstalowane na urządzeniu.</string>
-    <string name="init_debug_title">Informacja o błędach</string>
-    <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Aktywacja tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecana tylko, jeśli zostanie wyświetlona prośba o wysyłanie logu do programistów. Prosimy o zachowanie tego logowania wyłączonego podczas normalnego korzystania z c:geo!</string>
-    <string name="init_debug">Włącz logowanie błędów</string>
+    <string name="init_debug_title">Informacje debugowania</string>
+    <string name="init_debug_note">c:geo może generować wiele informacji związanych z debugowaniem. Włączenie tego ustawienia będzie mieć wpływ na stabilność c:geo i jest zalecane tylko wtedy, gdy zostaniesz poproszony o przesłanie logu (dziennika) debugowania do programistów. Prosimy nie włączać tej opcji podczas normalnego korzystania z c:geo!</string>
+    <string name="init_debug">Aktywuj dziennik debugowania</string>
     <string name="init_dbonsdcard_title">Położenie bazy danych</string>
     <string name="init_dbonsdcard_note">Możesz przechowywać bazę danych c:geo wewnętrznie lub w folderze na dysku użytkownika. Zalecamy aktywację tej opcji tylko wtedy, gdy potrzebujesz regularnego ręcznego dostępu do pliku bazy danych.</string>
     <string name="init_dbonsdcard">Na dysku użytkownika</string>
@@ -992,9 +992,10 @@
     <string name="feature_favorite">Dodaję skrytkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrytek</string>
     <string name="init_maplines_title">Dostosowanie linii mapy</string>
-    <string name="init_map_other">Inna</string>
+    <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Użyj zunifikowanej mapy</string>
     <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
@@ -1320,7 +1321,7 @@
     <string name="cache_coordinates">Współrzędne</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
     <string name="cache_spoiler_images_title">Zdjęcia ze spoilerami</string>
-    <string name="cache_log_types">Rodzaj wpisu</string>
+    <string name="cache_log_types">Rodzaje wpisów</string>
     <string name="cache_coordinates_no">Ta skrytka nie ma współrzędnych GPS.</string>
     <string name="cache_clear_history">Usuń historię</string>
     <string name="cache_remove_from_history">Usuń z historii</string>
@@ -1336,7 +1337,7 @@
     <string name="cache_image_delete">Usuń</string>
     <string name="cache_image_title_camera_prefix">Zdjęcie</string>
     <string name="cache_image_background">Obrazek tła listy skrytek</string>
-    <string name="cache_share_field">Współdziel</string>
+    <string name="cache_share_field">Udostępnij</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
     <string name="cache_recently_viewed">Ostatnio oglądane</string>
@@ -1350,8 +1351,9 @@
     <string name="context_share_as_link">Udostępnij link</string>
     <string name="image_category_uncategorized">Bez kategorii</string>
     <string name="image_category_own">Własne</string>
-    <string name="image_category_listing">Lista</string>
-    <string name="image_category_log">Log</string>
+    <string name="image_category_listing">Z opisu</string>
+    <string name="image_category_log">Z dziennika</string>
+    <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -1690,12 +1692,12 @@
     <string name="helper_alc_description">Aplikacja Adventure Lab na twój telefon lub tablet.</string>
     <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
-    <string name="share_export">Udostępnij / Eksport</string>
+    <string name="share_export">Udostępnij / Eksportuj</string>
     <string name="export">Eksport</string>
     <string name="export_progress">Eksportowanie: %1$s</string>
     <string name="export_exportedto">wyeksportowano do</string>
     <string name="export_failed">Eksport nie powiódł się</string>
-    <string name="export_fieldnotes">Notatki</string>
+    <string name="export_fieldnotes">Notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
     <string name="export_fieldnotes_upload">Wyślij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
@@ -1713,11 +1715,11 @@
         <item quantity="many">Wysłano pomyślnie %1$d notatek</item>
         <item quantity="other">Wysłano pomyślnie %1$d notatek</item>
     </plurals>
-    <string name="export_modifiedcoords">Zmienione współrzędne</string>
-    <string name="export_modifiedcoords_uploading">Eksportowanie %1$d</string>
-    <string name="export_modifiedcoords_success">Eksportowanie zakończone</string>
-    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Eksportowanie zakończone: %1$d nieudane / %2$d ok</string>
-    <string name="export_modifiedcoords_error">Eksportowanie nie powiodło się</string>
+    <string name="export_modifiedcoords">Zmodyfikowane współrzędne</string>
+    <string name="export_modifiedcoords_uploading">Przesyłanie %1$d</string>
+    <string name="export_modifiedcoords_success">Przesyłanie zakończone</string>
+    <string name="export_modifiedcoords_result" tools:ignore="PluralsCandidate">Przesyłanie zakończone: %1$d nieudane / %2$d ok</string>
+    <string name="export_modifiedcoords_error">Przesyłanie nie powiodło się</string>
     <string name="filename_without_extension">Nazwa pliku (bez rozszerzenia)</string>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Psy dozwolone</string>
@@ -2039,10 +2041,16 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
     <plurals name="days_ago">
-        <item quantity="one">%d dzień temu</item>
+        <item quantity="one">Wczoraj</item>
         <item quantity="few">%d dni temu</item>
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Jutro</item>
+        <item quantity="few">Za %d dni</item>
+        <item quantity="many">Za %d dni</item>
+        <item quantity="other">Za %d dni</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>

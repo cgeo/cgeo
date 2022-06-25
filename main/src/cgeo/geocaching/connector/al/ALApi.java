@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DateRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
@@ -38,6 +39,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.reactivex.rxjava3.core.Single;
@@ -62,6 +66,85 @@ final class ALApi {
 
     private ALApi() {
         // utility class with static methods
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class ALSearchV4Query {
+        @JsonProperty("Origin")
+        private Origin origin;
+        @JsonProperty("RadiusInMeters")
+        private Integer radiusInMeters;
+        @JsonProperty("RecentlyPublishedDays")
+        private Integer recentlyPublishedDays = null;
+        @JsonProperty("Skip")
+        private Integer skip = 0;
+        @JsonProperty("Take")
+        private Integer take;
+        @JsonProperty("CompletionStatuses")
+        private List<Integer> completionStatuses = null;
+        @JsonProperty("AdventureTypes")
+        private List<Integer> adventureTypes = null;
+        @JsonProperty("MedianCompletionTimes")
+        private List<String> medianCompletionTimes = null;
+        @JsonProperty("CallingUserPublicGuid")
+        private String callingUserPublicGuid;
+        @JsonProperty("Themes")
+        private List<Integer> themes = null;
+
+        public void setRadiusInMeters(final Integer radiusInMeters) {
+            this.radiusInMeters = radiusInMeters;
+        }
+
+        public void setRecentlyPublishedDays(final Integer recentlyPublishedDays) {
+            this.recentlyPublishedDays = recentlyPublishedDays;
+        }
+
+        public void setTake(final Integer take) {
+            this.take = take;
+        }
+
+        public void setSkip(final Integer skip) {
+            this.skip = skip;
+        }
+
+        public void setOrigin(final Double latitude, final Double longitude, final Double altitude) {
+            this.origin = new Origin(latitude, longitude, altitude);
+        }
+
+        public void setCompletionStatuses(final List<Integer> completionStatuses) {
+            this.completionStatuses = completionStatuses;
+        }
+
+        public void setAdventureTypes(final List<Integer> adventureTypes) {
+            this.adventureTypes = adventureTypes;
+        }
+
+        public void setMedianCompletionTimes(final List<String> medianCompletionTimes) {
+            this.medianCompletionTimes = medianCompletionTimes;
+        }
+
+        public void setCallingUserPublicGuid(final String callingUserPublicGuid) {
+            this.callingUserPublicGuid = callingUserPublicGuid;
+        }
+
+        public void setThemes(final List<Integer> themes) {
+            this.themes = themes;
+        }
+
+        class Origin {
+            @JsonProperty("Latitude")
+            private Double latitude;
+            @JsonProperty("Longitude")
+            private Double longitude;
+            @JsonProperty("Altitude")
+            private Double altitude;
+
+            Origin(final Double latitude, final Double longitude, final Double altitude) {
+                this.latitude = latitude;
+                this.longitude = longitude;
+                this.altitude = altitude;
+            }
+        }
     }
 
     @Nullable
@@ -98,28 +181,28 @@ final class ALApi {
         Log.d("_AL Radius: " + radius);
 
         final Geopoint center = new Geopoint(latcenter, loncenter);
-        return searchByCenter(center, radius);
+        return search(center, radius, null);
     }
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
-        return searchByCenter(center, DEFAULT_RADIUS);
+        return search(center, DEFAULT_RADIUS, null);
     }
 
     @NonNull
     @WorkerThread
-    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters) {
+    private static Collection<Geocache> search(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
-        final Parameters params = new Parameters("skip", "0");
-        params.add("take", "100");
-        params.add("radiusMeters", "" + distanceInMeters);
-        params.add("origin.latitude", String.valueOf(center.getLatitude()));
-        params.add("origin.longitude", String.valueOf(center.getLongitude()));
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
+        final ALSearchV4Query query = new ALSearchV4Query();
+        query.setOrigin(center.getLatitude(), center.getLongitude(), 0.0);
+        query.setTake(100);
+        query.setRadiusInMeters(distanceInMeters);
+        query.setRecentlyPublishedDays(daysSincePublish);
         try {
-            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
+            final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
@@ -131,21 +214,39 @@ final class ALApi {
         //for now we have to assume that ALConnector supports only SINGLE criteria search
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        // Origin excludes Lab
         final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
         }
-        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
-        if (df != null) {
-            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000);
-        }
+        // Type excludes Lab
         final TypeGeocacheFilter tf = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
         if (tf != null && tf.isFiltering() && !tf.getRawValues().contains(ADVLAB)) {
             return new ArrayList<>();
         }
 
-        //by default, search around current position
-        return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
+        final Geopoint searchCoords;
+        final int radius;
+        final Integer daysSincePublish;
+
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            searchCoords = df.getEffectiveCoordinate();
+            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
+        } else {
+            // by default, search around current position
+            searchCoords = Sensors.getInstance().currentGeo().getCoords();
+            radius = DEFAULT_RADIUS;
+        }
+
+        final DateRangeGeocacheFilter dr = GeocacheFilter.findInChain(filters, DateRangeGeocacheFilter.class);
+        if (dr != null) {
+            daysSincePublish = dr.getDaysSinceMinDate() == 0 ? null : dr.getDaysSinceMinDate();
+        } else {
+            daysSincePublish = null;
+        }
+
+        return search(searchCoords, radius, daysSincePublish);
     }
 
     @NonNull
@@ -167,6 +268,20 @@ final class ALApi {
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
             if (!isRetry && response1.code() == 403) {
                 return apiRequest(uri, params, headers, true);
+            }
+            return Single.just(response1);
+        });
+    }
+
+    @NonNull
+    private static Single<Response> apiPostRequest(final String uri, final Parameters headers, final Object jsonObj, final boolean isRetry) throws JsonProcessingException {
+
+        final Single<Response> response = Network.postJsonRequest(API_HOST + uri, headers, jsonObj);
+
+        // retry at most one time
+        return response.flatMap((Function<Response, Single<Response>>) response1 -> {
+            if (!isRetry && response1.code() == 403) {
+                return apiPostRequest(uri, headers, jsonObj, true);
             }
             return Single.just(response1);
         });
@@ -231,8 +346,9 @@ final class ALApi {
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
-            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
+            cache.setArchived(response.get("IsArchived").asBoolean());
+            cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
+            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -348,3 +464,4 @@ final class ALApi {
         }
     }
 }
+

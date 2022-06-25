@@ -2,3 +2,6 @@
 - Novo: Cópia das coordenadas actuais com um toque longo na página inicial
 - Alteração: Remover a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
 - Correcção: não mostrar círculos de distância para pontos adicionais de caches arquivadas
+- Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
+- New: Option to delete offline maps
+- Fix: Missing trackable count in search results

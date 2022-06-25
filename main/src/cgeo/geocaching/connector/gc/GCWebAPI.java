@@ -583,32 +583,69 @@ class GCWebAPI {
 
     //Complete example for reference
     //    {
-    //        "id": 3866836,
-    //        "name": "Ness Bridge",
-    //        "code": "GC4KJHJ",
-    //        "premiumOnly": true,
-    //        "favoritePoints": 723,
-    //        "geocacheType": 2,
-    //        "containerType": 6,
-    //        "difficulty": 2.0,
-    //        "terrain": 1.5,
-    //        "userFound": false,
-    //        "userDidNotFind": false,
-    //        "cacheStatus": 0,
-    //        "postedCoordinates": {
+    //      "id": 3866836,
+    //      "name": "Ness Bridge",
+    //      "code": "GC4KJHJ",
+    //      "premiumOnly": true,
+    //      "favoritePoints": 847,
+    //      "geocacheType": 2,
+    //      "containerType": 6,
+    //      "difficulty": 2,
+    //      "terrain": 1.5,
+    //      "userFound": false,
+    //      "userDidNotFind": false,
+    //      "cacheStatus": 0,
+    //      "postedCoordinates": {
     //        "latitude": 57.476967,
-    //            "longitude": -4.2278
-    //    },
-    //        "detailsUrl": "/geocache/GC4KJHJ",
-    //        "hasGeotour": false,
-    //        "hasLogDraft": false,
-    //        "placedDate": "2013-08-22T00:00:00",
-    //        "owner": {
+    //        "longitude": -4.2278
+    //      },
+    //      "detailsUrl": "/geocache/GC4KJHJ",
+    //      "hasGeotour": false,
+    //      "hasLogDraft": false,
+    //      "placedDate": "2013-08-22T00:00:00",
+    //      "owner": {
     //        "code": "PR1ZE74",
-    //            "username": "Ah!"
-    //    },
-    //        "lastFoundDate": "2021-02-26T20:17:59"
-    //    },
+    //        "username": "Ah!"
+    //      },
+    //      "lastFoundDate": "2022-06-22T18:00:49",
+    //      "trackableCount": 0,
+    //      "region": "Northern Scotland",
+    //      "country": "United Kingdom",
+    //      "attributes": [
+    //        {
+    //          "id": 24,
+    //          "name": "Wheelchair accessible",
+    //          "isApplicable": false
+    //        },
+    //        {
+    //          "id": 8,
+    //          "name": "Scenic view",
+    //          "isApplicable": true
+    //        },
+    //        {
+    //          "id": 13,
+    //          "name": "Available 24/7",
+    //          "isApplicable": true
+    //        },
+    //        {
+    //          "id": 7,
+    //          "name": "Takes less than one hour",
+    //          "isApplicable": true
+    //        },
+    //        {
+    //          "id": 14,
+    //          "name": "Recommended at night",
+    //          "isApplicable": true
+    //        },
+    //        {
+    //          "id": 40,
+    //          "name": "Stealth required",
+    //          "isApplicable": true
+    //        }
+    //      ],
+    //      "distance": "Here",
+    //      "bearing": ""
+    //    }
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class MapSearchResult {
         @JsonProperty
@@ -651,12 +688,30 @@ class GCWebAPI {
         CacheOwner owner;
         @JsonProperty("lastFoundDate")
         Date lastFoundDate;
+        @JsonProperty("trackableCount")
+        int trackableCount;
+        @JsonProperty("region")
+        String region;
+        @JsonProperty("country")
+        String country;
+        @JsonProperty("attributes")
+        List<Attribute> attributes;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class GeocacheType {
         long id;
         String name;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    static final class Attribute {
+        @JsonProperty("id")
+        int id;
+        @JsonProperty("name")
+        String name;
+        @JsonProperty("isApplicable")
+        boolean isApplicable;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -822,8 +877,6 @@ class GCWebAPI {
         result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
         final List<Geocache> foundCaches = new ArrayList<>();
 
-        final List<String> searchedAttributes = CollectionStream.of(search.cacheAttributes).map(ca -> ca.getValue(true)).toList();
-
         if (mapSearchResultSet.results != null) {
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
 
@@ -851,6 +904,8 @@ class GCWebAPI {
                 c.setPremiumMembersOnly(r.premiumOnly);
                 c.setHidden(r.placedDate);
                 c.setLastFound(r.lastFoundDate);
+                c.setInventoryItems(r.trackableCount);
+                c.setLocation(r.region + ", " + r.country);
 
                 //Only set found if the map returns a "found",
                 //the map API will possibly lag behind and break
@@ -868,8 +923,12 @@ class GCWebAPI {
                     c.setOwnerUserId(r.owner.username);
                 }
 
-                //if search contains attributes, then we know that cache has these attributes -> add them
-                c.setAttributes(searchedAttributes);
+                // parse attributes
+                final List<String> attributes = new ArrayList<>();
+                for (Attribute attribute : r.attributes) {
+                    attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                }
+                c.setAttributes(attributes);
 
                 foundCaches.add(c);
             }

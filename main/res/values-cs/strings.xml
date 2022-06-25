@@ -1362,6 +1362,9 @@
     <string name="image_category_own">Vlastní</string>
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Přidat na trasu</string>
+    <string name="context_map_add_to_route_start">Přidat před trasu</string>
+    <string name="context_map_show_coords">Zobrazit souřadnice</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
@@ -2050,10 +2053,16 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
     <plurals name="days_ago">
-        <item quantity="one">před %d dnem</item>
+        <item quantity="one">Včera</item>
         <item quantity="few">před %d dny</item>
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Zítra</item>
+        <item quantity="few">Za %d dní</item>
+        <item quantity="many">Za %d dní</item>
+        <item quantity="other">Za %d dní</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
@@ -2239,6 +2248,10 @@
     <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
+    <string name="delete_offlinemap_title">Odstranit offline mapu</string>
+    <string name="no_deletable_offlinemaps">Žádné odstranitelné offline mapy</string>
+    <string name="delete_file_confirmation">Odstranit %s?</string>
+    <string name="file_deleted_info">%s odstraněno</string>
     <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_filename">Stahování %s</string>

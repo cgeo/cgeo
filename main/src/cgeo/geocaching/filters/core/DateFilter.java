@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import java.text.DateFormat;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 
 public class DateFilter {
@@ -23,24 +26,38 @@ public class DateFilter {
 
     private Date minDate;
     private Date maxDate;
+    private boolean isRelative = false;
+    private int minDateOffset = -1;
+    private int maxDateOffset = -1;
 
     public Boolean matches(final Date value) {
         if (value == null) {
-            return minDate == null && maxDate == null ? true : null;
+            return getMinDate() == null && getMaxDate() == null ? true : null;
         }
 
-        if (minDate != null && minDate.getTime() / MILLIS_PER_DAY > value.getTime() / MILLIS_PER_DAY) {
+        if (getMinDate() != null && getMinDate().getTime() / MILLIS_PER_DAY > value.getTime() / MILLIS_PER_DAY) {
             return false;
         }
-        return maxDate == null || maxDate.getTime() / MILLIS_PER_DAY >= value.getTime() / MILLIS_PER_DAY;
+        return getMaxDate() == null || getMaxDate().getTime() / MILLIS_PER_DAY >= value.getTime() / MILLIS_PER_DAY;
     }
 
     public Date getMinDate() {
+        if (isRelative && minDateOffset > -1) {
+            return DateUtils.addDays(new Date(), -1 * minDateOffset);
+        }
         return minDate;
     }
 
     public Date getMaxDate() {
+        if (isRelative && maxDateOffset > -1) {
+            return DateUtils.addDays(new Date(), minDateOffset);
+        }
         return maxDate;
+    }
+
+    public int getDaysSinceMinDate() {
+        final long diffInMilliSecs = Math.abs(new Date().getTime() - getMinDate().getTime());
+        return (int) Math.ceil(TimeUnit.DAYS.convert(diffInMilliSecs, TimeUnit.MILLISECONDS));
     }
 
     public void setMinMaxDate(final Date min, final Date max) {
@@ -51,6 +68,13 @@ public class DateFilter {
             this.minDate = min;
             this.maxDate = max;
         }
+        this.isRelative = false;
+    }
+
+    public void setRelativeDays(final int daysBeforeToday, final int daysAfterToday) {
+        this.minDateOffset = daysBeforeToday;
+        this.maxDateOffset = daysAfterToday;
+        this.isRelative = true;
     }
 
     public void setFromConfig(final String[] config, final int startPos) {
@@ -58,14 +82,22 @@ public class DateFilter {
             minDate = parseDate(config[startPos]);
             maxDate = parseDate(config[startPos + 1]);
         }
+        if (config != null && config.length > startPos + 4) {
+            isRelative = Boolean.parseBoolean(config[startPos + 2]);
+            minDateOffset = Integer.parseInt(config[startPos + 3]);
+            maxDateOffset = Integer.parseInt(config[startPos + 4]);
+        }
     }
 
     public String[] addToConfig(final String[] config, final int startPos) {
-        if (config == null || config.length <= startPos + 1) {
+        if (config == null || config.length <= startPos + 4) {
             return config;
         }
         config[startPos] = minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate);
         config[startPos + 1] = maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate);
+        config[startPos + 2] = Boolean.toString(isRelative);
+        config[startPos + 3] = String.valueOf(minDateOffset);
+        config[startPos + 4] = String.valueOf(maxDateOffset);
         return config;
     }
 
@@ -73,6 +105,9 @@ public class DateFilter {
         if (config != null) {
             minDate = config.size() > 0 ? parseDate(config.get(0)) : null;
             maxDate = config.size() > 1 ? parseDate(config.get(1)) : null;
+            isRelative = config.size() > 2 ? Boolean.parseBoolean(config.get(2)) : false;
+            minDateOffset = config.size() > 3 ? Integer.parseInt(config.get(3)) : -1;
+            maxDateOffset = config.size() > 4 ? Integer.parseInt(config.get(4)) : -1;
         }
     }
 
@@ -80,6 +115,9 @@ public class DateFilter {
         final List<String> config = new ArrayList<>();
         config.add(minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate));
         config.add(maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate));
+        config.add(Boolean.toString(isRelative));
+        config.add(String.valueOf(minDateOffset));
+        config.add(String.valueOf(maxDateOffset));
         return config;
     }
 
@@ -96,20 +134,20 @@ public class DateFilter {
     }
 
     public boolean isFilled() {
-        return minDate != null || maxDate != null;
+        return getMinDate() != null || getMaxDate() != null;
     }
 
     public void addToSql(final SqlBuilder sqlBuilder, final String valueExpression) {
 
         //convert long to date in SQLite: date(hidden/1000, 'unixepoch')
 
-        if (valueExpression != null && (minDate != null || maxDate != null)) {
+        if (valueExpression != null && (getMinDate() != null || getMaxDate() != null)) {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-            if (minDate != null) {
-                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(minDate) + "'");
+            if (getMinDate() != null) {
+                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') >= '" + DAY_DATE_FORMAT_SQL.format(getMinDate()) + "'");
             }
-            if (maxDate != null) {
-                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(maxDate) + "'");
+            if (getMaxDate() != null) {
+                sqlBuilder.addWhere("date(" + valueExpression + "/1000, 'unixepoch') <= '" + DAY_DATE_FORMAT_SQL.format(getMaxDate()) + "'");
             }
             sqlBuilder.closeWhere();
         } else {
@@ -120,9 +158,15 @@ public class DateFilter {
 
     public String getUserDisplayableConfig() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(minDate == null ? "*" : DAY_DATE_FORMAT.format(minDate));
-        sb.append("-");
-        sb.append(maxDate == null ? "*" : DAY_DATE_FORMAT.format(maxDate));
+        if (isRelative) {
+            sb.append(minDateOffset == -1 ? "*" : Formatter.formatDaysAgo(minDateOffset));
+            sb.append("-");
+            sb.append(maxDateOffset == -1 ? "*" : Formatter.formatDaysAhead(maxDateOffset));
+        } else {
+            sb.append(minDate == null ? "*" : DAY_DATE_FORMAT.format(minDate));
+            sb.append("-");
+            sb.append(maxDate == null ? "*" : DAY_DATE_FORMAT.format(maxDate));
+        }
         return sb.toString();
     }
 

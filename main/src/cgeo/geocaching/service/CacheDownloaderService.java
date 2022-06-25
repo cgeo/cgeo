@@ -1,6 +1,5 @@
 package cgeo.geocaching.service;
 
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -173,7 +171,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             // download...
             if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
-                LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(Intents.ACTION_GEOCACHE_REFRESHED).putExtra(Intents.EXTRA_GEOCODE, geocode));
+                GeocacheRefreshedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
                 synchronized (downloadQuery) {

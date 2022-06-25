@@ -36,6 +36,8 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Intent;
@@ -63,6 +65,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_ROUTE = "route";
+    private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
@@ -79,6 +82,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private Tracks tracks = null;
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
+    private MapMode compatibilityMapMode = MapMode.LIVE;
+    private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
     // rotation indicator
     protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
@@ -186,13 +191,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (extras != null) {
             mapType = extras.getParcelable(BUNDLE_MAPTYPE);
         }
+        setMapModeFromMapType();
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(BUNDLE_MAPTYPE)) {
                 mapType = savedInstanceState.getParcelable(BUNDLE_MAPTYPE);
             }
-            Log.e("mapType=" + mapType);
+            overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
 //            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -211,11 +217,24 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         changeMapSource(Settings.getTileProvider());
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
+        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
 //        MapUtils.showMapOneTimeMessages(this, mapMode);
 
+    }
+
+    private void setMapModeFromMapType() {
+        if (mapType == null) {
+            return;
+        }
+        if (mapType.type == UMTT_TargetGeocode) {
+            compatibilityMapMode = MapMode.SINGLE;
+        } else if (mapType.type == UMTT_TargetCoords) {
+            compatibilityMapMode = MapMode.COORDS;
+        } else {
+            compatibilityMapMode = MapMode.LIVE;
+        }
     }
 
     private void changeMapSource(final AbstractTileProvider newSource) {
@@ -228,7 +247,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (oldProvider != null) {
                 tileProvider.getMap().init(this, oldProvider.getMap().getCurrentZoom(), oldProvider.getMap().getCenter(), () -> onMapReadyTasks(newSource, true));
             } else {
-                tileProvider.getMap().init(this, Settings.getMapZoom(MapMode.LIVE), null, () -> onMapReadyTasks(newSource, true));   // @todo: use actual mapmode
+                tileProvider.getMap().init(this, Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true));
             }
             configMapChangeListener(true);
         } else {
@@ -242,6 +261,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         Settings.setTileProvider(newSource);
         tileProvider.getMap().setDelayedZoomTo();
         tileProvider.getMap().setDelayedCenterTo();
+
+        final View spinner = findViewById(R.id.map_progressbar);
+        if (spinner != null) {
+            spinner.setVisibility(View.GONE);
+        }
 
         if (mapChanged) {
             routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
@@ -257,17 +281,19 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
 
             // react to mapType
+            setMapModeFromMapType();
             switch (mapType.type) {
                 case UMTT_PlainMap:
-                    // @todo: set bounds to last known viewport
+                    // restore last saved position and zoom
+                    tileProvider.getMap().setZoom(Settings.getMapZoom(compatibilityMapMode));
+                    tileProvider.getMap().setCenter(Settings.getUMMapCenter());
                     break;
                 case UMTT_TargetGeocode:
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
                         geoitemLayer.add(cache);
-                        tileProvider.getMap().setCenter(cache.getCoords());
+                        tileProvider.getMap().zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         setTarget(cache.getCoords(), cache.getName());
-                        // @todo: adjust zoom if needed
                     }
                     break;
                 case UMTT_TargetCoords:
@@ -276,6 +302,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 default:
                     // nothing to do
                     break;
+            }
+            if (overridePositionAndZoom) {
+                tileProvider.getMap().setZoom(Settings.getMapZoom(compatibilityMapMode));
+                tileProvider.getMap().setCenter(Settings.getUMMapCenter());
+                overridePositionAndZoom = false;
             }
             // @todo for testing purposes only
             /*
@@ -512,7 +543,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
-                || DownloaderUtils.onOptionsItemSelected(this, id)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id, true)) {
             return true;
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
@@ -584,6 +615,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (individualRoute != null) {
             outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
+        outState.putBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, true);
     }
 
     @Override
@@ -611,6 +643,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public void onPause() {
         tileProvider.getMap().onPause();
         configMapChangeListener(false);
+
+        Settings.setMapZoom(compatibilityMapMode, tileProvider.getMap().getCurrentZoom());
+        Settings.setMapCenter(tileProvider.getMap().getCenter());
+
         super.onPause();
     }
 
