@@ -1,5 +1,7 @@
-- New: Download / update caches in background (experimental)
+- Nowość: Pobieranie/aktualizowanie skrytek w tle (eksperymentalne)
 - New: Copy current coordinates when long-clicking location on home screen
 - Change: Remove size-limit check while storing waypoints in personal notes
 - Fix: Do not show distance circles for waypoints of archived caches
 - New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Nowość: Opcja usuwania map offline
+- Fix: Missing trackable count in search results
