@@ -2007,10 +2007,6 @@
     <string name="tts_oclock">a ore %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiato nella clipboard</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d giorno fa</item>
-        <item quantity="other">%d giorni fa</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
