@@ -1997,10 +1997,6 @@
     <string name="tts_oclock">%s heures</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
-    <plurals name="days_ago">
-        <item quantity="one">il y a %d jour</item>
-        <item quantity="other">il y a %d jours</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
     <string name="create_shortcut">Créer un raccourci</string>
@@ -2169,6 +2165,10 @@
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
+    <string name="delete_offlinemap_title">Supprimer la carte hors ligne</string>
+    <string name="no_deletable_offlinemaps">Aucune carte hors ligne ne peut être supprimée</string>
+    <string name="delete_file_confirmation">Supprimer %s ?</string>
+    <string name="file_deleted_info">%s supprimée</string>
     <string name="download_title">Télécharger le fichier</string>
     <string name="downloadmap_info">Sélectionnez un fichier de carte pour votre région en appuyant sur l\'icône \"Enregistrer\".\n\nLe téléchargement est effectué en arrière-plan. Lorsque le transfert est terminé, le fichier est copié dans le dossier des cartes c:geo et défini comme la carte actuelle.\n\nAttention : Le téléchargement d\'une carte peut causer un trafic réseau élevé !</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
