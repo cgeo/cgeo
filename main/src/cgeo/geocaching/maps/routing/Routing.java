@@ -351,7 +351,7 @@ public final class Routing {
         }
 
         @Override
-        public void onDestroy(@NonNull LifecycleOwner owner) {
+        public void onDestroy(@NonNull final LifecycleOwner owner) {
             disconnect(callbackKey);
         }
     }
