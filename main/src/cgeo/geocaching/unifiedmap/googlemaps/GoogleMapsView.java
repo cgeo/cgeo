@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.googlemaps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
@@ -175,10 +176,10 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     // zoom & heading methods
 
     @Override
-    public void zoomToBounds(final BoundingBox bounds) {
+    public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
             mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
-            mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
+            mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
         }
     }
 

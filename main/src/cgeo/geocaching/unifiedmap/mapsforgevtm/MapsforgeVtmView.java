@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
@@ -230,6 +231,12 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     // zoom & heading methods
 
     @Override
+    public void zoomToBounds(final Viewport bounds) {
+        final MapPosition pos = new MapPosition();
+        pos.setByBoundingBox(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()), Tile.SIZE * 4, Tile.SIZE * 4);
+        mMap.setMapPosition(pos);
+    }
+
     public void zoomToBounds(final BoundingBox bounds) {
         final MapPosition pos = new MapPosition();
         pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);

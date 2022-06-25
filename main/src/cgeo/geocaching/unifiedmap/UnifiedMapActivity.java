@@ -272,9 +272,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
                         geoitemLayer.add(cache);
-                        tileProvider.getMap().setCenter(cache.getCoords());
+                        tileProvider.getMap().zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         setTarget(cache.getCoords(), cache.getName());
-                        // @todo: adjust zoom if needed
                     }
                     break;
                 case UMTT_TargetCoords:
