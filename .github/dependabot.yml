@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: daily
     # no limit :)
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 30
     ignore:
       # Ignore some updates to the apache 'commons-io' package
       # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
