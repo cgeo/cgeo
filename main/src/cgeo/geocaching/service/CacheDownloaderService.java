@@ -66,8 +66,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 forceRedownload -> askForListsIfNecessaryAndDownload(context, geocodes, forceRedownload, isOffline, onStartCallback), null);
     }
 
-    public static void refreshCache(final Activity context, final String geocode, final boolean isOffline) {
-        askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), true, isOffline, null);
+    public static void refreshCache(final Activity context, final String geocode, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+        askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), true, isOffline, onStartCallback);
     }
 
     private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
