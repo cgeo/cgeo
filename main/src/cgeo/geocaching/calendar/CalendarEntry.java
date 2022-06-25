@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.CalendarContract;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -144,8 +145,9 @@ class CalendarEntry {
     public void showToast(final Context context, final int res) {
         final String text = context.getResources().getString(res);
         final Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-
-        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+        if (Build.VERSION.SDK_INT < 30) {
+            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+        }
         toast.show();
     }
 }
