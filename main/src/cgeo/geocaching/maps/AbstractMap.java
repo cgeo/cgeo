@@ -35,6 +35,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public abstract class AbstractMap {
 
+    @NonNull
     final MapActivityImpl mapActivity;
     protected MapViewImpl<CachesOverlayItemImpl> mapView;
 
@@ -43,7 +44,7 @@ public abstract class AbstractMap {
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
 
-    protected AbstractMap(final MapActivityImpl activity) {
+    protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;
     }
 
@@ -64,20 +65,20 @@ public abstract class AbstractMap {
         Routing.connect();
     }
 
-    public void onResume() {
-        mapActivity.superOnResume();
-    }
-
     public void onStart() {
         mapActivity.superOnStart();
     }
 
-    public void onStop() {
-        mapActivity.superOnStop();
+    public void onResume() {
+        mapActivity.superOnResume();
     }
 
     public void onPause() {
         mapActivity.superOnPause();
+    }
+
+    public void onStop() {
+        mapActivity.superOnStop();
     }
 
     public void onDestroy() {

@@ -3,7 +3,6 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
@@ -53,6 +52,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
+import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
@@ -72,10 +72,7 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
@@ -98,7 +95,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -218,20 +214,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
     private static final ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private MapOptions mapOptions;
-
-    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-
-            // only add cache if it is currently visible
-            if (caches.remove(cache)) {
-                caches.add(cache);
-                displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
-            }
-        }
-    };
 
     // handlers
 
@@ -434,8 +416,21 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private int currentSourceId;
 
 
-    public CGeoMap(final MapActivityImpl activity) {
+    public CGeoMap(@NonNull final MapActivityImpl activity) {
         super(activity);
+        // only add cache if it is currently visible
+        getActivity().getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+                // only add cache if it is currently visible
+                if (caches.remove(cache)) {
+                    caches.add(cache);
+                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
+                }
+            }
+        });
     }
 
     protected void countVisibleCaches() {
@@ -751,14 +746,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void onStart() {
-        LocalBroadcastManager.getInstance(activity).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
-        super.onStart();
-    }
-
-    @Override
     public void onStop() {
-        LocalBroadcastManager.getInstance(activity).unregisterReceiver(cacheRefreshedBroadcastReceiver);
         // Ensure that handlers will not try to update the dialog once the view is detached.
         waitDialog = null;
         super.onStop();
