@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Window;
@@ -95,7 +96,9 @@ public final class ActivityMixin {
         Log.v("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
         try {
             final Toast toast = Toast.makeText(context, text, toastDuration);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+            if (Build.VERSION.SDK_INT < 30) {
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+            }
             toast.show();
         } catch (RuntimeException re) {
             //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
