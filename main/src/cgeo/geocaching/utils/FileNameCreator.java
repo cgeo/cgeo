@@ -26,16 +26,16 @@ public class FileNameCreator {
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
 
     private final String fixedName;
-    private final String praefix;
+    private final String prefix;
     private final String suffix;
 
-    private FileNameCreator(final String praefix, final String suffix) {
-        this(null, praefix, suffix);
+    private FileNameCreator(final String prefix, final String suffix) {
+        this(null, prefix, suffix);
     }
 
-    private FileNameCreator(final String fixedName, final String praefix, final String suffix) {
+    private FileNameCreator(final String fixedName, final String prefix, final String suffix) {
         this.fixedName = fixedName;
-        this.praefix = praefix;
+        this.prefix = prefix;
         this.suffix = suffix;
     }
 
@@ -52,7 +52,7 @@ public class FileNameCreator {
         }
 
         //create new unique filename
-        return (praefix == null ? "" : String.format(praefix, params) + "-") +
+        return (prefix == null ? "" : String.format(prefix, params) + "-") +
                 CalendarUtils.formatDateTime("yyyy-MM-dd-HH-mm-ss") + "-" +
                 (fileNameCounter.addAndGet(1))
                 + (suffix == null ? "" : "." + suffix);
