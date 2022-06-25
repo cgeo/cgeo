@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.functions.Action1;
@@ -99,7 +100,7 @@ public abstract class AbstractUnifiedMapView<T> {
     // ========================================================================
     // zoom & heading methods
 
-    public abstract void zoomToBounds(BoundingBox bounds);
+    public abstract void zoomToBounds(Viewport bounds);
 
     public int getZoomMin() {
         return currentTileProvider == null ? 0 : currentTileProvider.getZoomMin();
