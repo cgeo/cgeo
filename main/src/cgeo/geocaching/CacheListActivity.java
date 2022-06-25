@@ -1213,7 +1213,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (BranchDetectionHelper.isProductionBuild()) {
                 refreshStored(Collections.singletonList(cache));
             } else {
-                CacheDownloaderService.refreshCache(this, cache.getGeocode(), itemId == R.id.menu_refresh);
+                CacheDownloaderService.refreshCache(this, cache.getGeocode(), itemId == R.id.menu_refresh, this::refreshCurrentList);
             }
         } else {
             // we must remember the menu info for the sub menu, there is a bug
