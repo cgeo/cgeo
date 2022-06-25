@@ -264,7 +264,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             // react to mapType
             switch (mapType.type) {
                 case UMTT_PlainMap:
-                    // @todo: set bounds to last known viewport
+                    // restore last saved position and zoom
+                    tileProvider.getMap().setZoom(Settings.getMapZoom(MapMode.LIVE));
+                    tileProvider.getMap().setCenter(Settings.getUMMapCenter());
                     break;
                 case UMTT_TargetGeocode:
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
@@ -616,6 +618,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public void onPause() {
         tileProvider.getMap().onPause();
         configMapChangeListener(false);
+
+        Settings.setMapZoom(MapMode.LIVE, tileProvider.getMap().getCurrentZoom()); // @todo: use actual map mode
+        Settings.setMapCenter(tileProvider.getMap().getCenter());
+
         super.onPause();
     }
 

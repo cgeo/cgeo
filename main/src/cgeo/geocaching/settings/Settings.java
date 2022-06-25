@@ -1109,6 +1109,11 @@ public class Settings {
                         getInt(R.string.pref_lastmaplon, 0) / 1e6));
     }
 
+    // temporary workaround for UnifiedMap necessary, as it is completely parallel to getMapProvider() currently
+    public static Geopoint getUMMapCenter() {
+        return new Geopoint(getInt(R.string.pref_lastmaplat, 0) / 1e6, getInt(R.string.pref_lastmaplon, 0) / 1e6);
+    }
+
     public static boolean getZoomIncludingWaypoints() {
         return getBoolean(R.string.pref_zoomincludingwaypoints, false);
     }

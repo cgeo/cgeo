@@ -1,6 +1,7 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.models.ICoordinates;
 
 import android.location.Location;
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Abstraction of geographic point. This class is immutable.
  */
-public final class Geopoint implements ICoordinates, Parcelable {
+public final class Geopoint implements GeoPointImpl, Parcelable {
 
     public enum LatLon {
         LAT,
