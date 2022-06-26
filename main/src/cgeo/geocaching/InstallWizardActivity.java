@@ -21,6 +21,8 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.wizard.InstallWizardViewModel;
+import cgeo.geocaching.wizard.NextButton;
+import cgeo.geocaching.wizard.PreviousButton;
 import cgeo.geocaching.wizard.WizardMode;
 import cgeo.geocaching.wizard.WizardStep;
 
@@ -82,19 +84,19 @@ public class InstallWizardActivity extends AppCompatActivity {
                     final boolean needsMigration;
                     switch (pf) {
                         case GPX:
-                            needsMigration = gpxFolderNeedsMigration();
+                            needsMigration = InstallWizardViewModel.gpxFolderNeedsMigration();
                             break;
                         case BASE:
                             needsMigration = !ContentStorageActivityHelper.baseFolderIsSet();
                             break;
                         case OFFLINE_MAPS:
-                            needsMigration = mapFolderNeedsMigration();
+                            needsMigration = InstallWizardViewModel.mapFolderNeedsMigration();
                             break;
                         case OFFLINE_MAP_THEMES:
-                            needsMigration = mapThemeFolderNeedsMigration();
+                            needsMigration = InstallWizardViewModel.mapThemeFolderNeedsMigration();
                             break;
                         case ROUTING_TILES:
-                            needsMigration = broutertilesFolderNeedsMigration();
+                            needsMigration = InstallWizardViewModel.broutertilesFolderNeedsMigration();
                             break;
                         default:
                             needsMigration = false;
@@ -118,49 +120,69 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_START: {
                 binding.wizardTitle.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
                 binding.wizardText.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
-                setNavigation(this::skipWizard, R.string.wizard_not_now, null, 0, viewModel::gotoNext, 0);
+                setNavigationButtonPrevious(PreviousButton.NOT_NOW);
+                setNavigationButtonSkip(false);
+                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT);
                 break;
             }
             case WIZARD_PERMISSIONS: {
                 binding.wizardTitle.setText(R.string.wizard_permissions_title);
                 binding.wizardText.setText(R.string.wizard_permissions_intro);
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, viewModel::gotoNext, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(false);
+                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT);
                 break;
             }
             case WIZARD_PERMISSIONS_STORAGE:
                 binding.wizardTitle.setText(R.string.wizard_status_storage_permission);
                 binding.wizardText.setText(R.string.storage_permission_request_explanation);
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, this::requestStorage, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(false);
+                setNavigationButtonNext(this::requestStorage, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_LOCATION:
                 binding.wizardTitle.setText(R.string.wizard_status_location_permission);
                 binding.wizardText.setText(R.string.location_permission_request_explanation);
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, this::requestLocation, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(false);
+                setNavigationButtonNext(this::requestLocation, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
-                setNavigation(viewModel::gotoPrevious, 0, forceSkipButton ? viewModel::gotoNext : null, 0, this::requestBasefolder, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(forceSkipButton);
+                setNavigationButtonNext(this::requestBasefolder, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_MAPFOLDER:
                 setFolderInfo(PersistableFolder.OFFLINE_MAPS, R.string.wizard_mapfolder_request_explanation, true);
-                setNavigation(viewModel::gotoPrevious, 0, forceSkipButton ? viewModel::gotoNext : null, 0, this::requestMapfolder, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(forceSkipButton);
+                setNavigationButtonNext(this::requestMapfolder, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
                 setFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES, R.string.wizard_mapthemesfolder_request_explanation, true);
-                setNavigation(viewModel::gotoPrevious, 0, forceSkipButton ? viewModel::gotoNext : null, 0, this::requestMapthemefolder, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(forceSkipButton);
+                setNavigationButtonNext(this::requestMapthemefolder, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
                 setFolderInfo(PersistableFolder.GPX, R.string.wizard_gpxfolder_request_explanation, true);
-                setNavigation(viewModel::gotoPrevious, 0, forceSkipButton ? viewModel::gotoNext : null, 0, this::requestGpxfolder, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(forceSkipButton);
+                setNavigationButtonNext(this::requestGpxfolder, NextButton.NEXT);
                 break;
             case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
                 setFolderInfo(PersistableFolder.ROUTING_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
-                setNavigation(viewModel::gotoPrevious, 0, forceSkipButton ? viewModel::gotoNext : null, 0, this::requestBroutertilesfolder, 0);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(forceSkipButton);
+                setNavigationButtonNext(this::requestBroutertilesfolder, NextButton.NEXT);
                 break;
             case WIZARD_PLATFORMS:
                 binding.wizardTitle.setText(R.string.wizard_platforms_title);
                 binding.wizardText.setText(R.string.wizard_platforms_intro);
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, viewModel::gotoNext, R.string.skip);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(true);
+                setNavigationButtonNext(null, NextButton.NEXT);
                 setButton(binding.wizardButton1, R.string.wizard_platforms_gc, v -> {
                     setButtonToDone();
                     authorizeGC();
@@ -173,7 +195,9 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_ADVANCED:
                 binding.wizardTitle.setText(R.string.wizard_welcome_advanced);
                 binding.wizardText.setVisibility(View.GONE);
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, viewModel::gotoNext, R.string.skip);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(true);
+                setNavigationButtonNext(null, NextButton.NEXT);
                 setButton(binding.wizardButton1, R.string.wizard_advanced_offlinemaps_label, v -> {
                     setButtonToDone();
                     startActivity(new Intent(this, DownloadSelectorActivity.class));
@@ -200,10 +224,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                 binding.wizardTitle.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
-                        .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_platform));
+                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                    .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 final StringBuilder platforms = new StringBuilder();
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
@@ -223,7 +247,9 @@ public class InstallWizardActivity extends AppCompatActivity {
 
                 binding.wizardText.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
 
-                setNavigation(viewModel::gotoPrevious, 0, null, 0, this::finishWizard, R.string.finish);
+                setNavigationButtonPrevious(PreviousButton.PREVIOUS);
+                setNavigationButtonSkip(false);
+                setNavigationButtonNext(this::finishWizard, NextButton.FINISH);
                 break;
             }
             default: {
@@ -235,39 +261,46 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void setButtonToDone() {
-        binding.wizardNext.setText(R.string.done);
+        setNavigationButtonSkip(false);
+        setNavigationButtonNext(viewModel::gotoNext, NextButton.DONE);
     }
 
-    private void setNavigation(@Nullable final Runnable listenerPrev, final int prevLabelRes, @Nullable final Runnable listenerSkip, final int skipLabelRes, @Nullable final Runnable listenerNext, final int nextLabelRes) {
-        if (listenerPrev == null) {
-            binding.wizardPrev.setVisibility(View.GONE);
-        } else {
-            binding.wizardPrev.setVisibility(View.VISIBLE);
-            binding.wizardPrev.setText(prevLabelRes == 0 ? R.string.previous : prevLabelRes);
-            binding.wizardPrev.setOnClickListener(v -> listenerPrev.run());
-        }
-        if (listenerSkip == null) {
-            binding.wizardSkip.setVisibility(View.GONE);
-        } else {
-            binding.wizardSkip.setVisibility(View.VISIBLE);
-            binding.wizardSkip.setText(skipLabelRes == 0 ? R.string.skip : skipLabelRes);
-            binding.wizardSkip.setOnClickListener(v -> listenerSkip.run());
-        }
+    /**
+     * Configure the previous button at the bottom of the screen.
+     */
+    private void setNavigationButtonPrevious(final PreviousButton mode) {
+        binding.wizardPrev.setText(mode.string);
+        binding.wizardPrev.setOnClickListener(mode == PreviousButton.NOT_NOW ? v -> skipWizard() : v -> viewModel.gotoPrevious());
+    }
 
-        final boolean useNextOutlinedButton = nextLabelRes == R.string.skip;
+    /**
+     * Configure the skip button at the bottom of the screen.
+     * @param visible If true, show the skip button. If false, hide it.
+     */
+    private void setNavigationButtonSkip(final boolean visible) {
+        if (visible) {
+            binding.wizardSkip.setVisibility(View.VISIBLE);
+            binding.wizardSkip.setText(R.string.skip);
+            binding.wizardSkip.setOnClickListener(v -> viewModel.gotoNext());
+        } else {
+            binding.wizardSkip.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * Configure the next button at the bottom of the screen.
+     * @param listenerNext Listener for the next button.
+     *                     If null, the button is hidden and the skip button takes its place.
+     */
+    private void setNavigationButtonNext(@Nullable final Runnable listenerNext, final NextButton mode) {
         if (listenerNext == null) {
             binding.wizardNext.setVisibility(View.GONE);
-            binding.wizardNextOutlined.setVisibility(View.GONE);
+            binding.wizardNextSpace.setVisibility(View.GONE);
         } else {
-            binding.wizardNext.setVisibility(useNextOutlinedButton ? View.GONE : View.VISIBLE);
-            binding.wizardNextOutlined.setVisibility(useNextOutlinedButton ? View.VISIBLE : View.GONE);
-            if (useNextOutlinedButton) {
-                binding.wizardNextOutlined.setText(nextLabelRes);
-                binding.wizardNextOutlined.setOnClickListener(v -> listenerNext.run());
-            } else {
-                binding.wizardNext.setText(nextLabelRes == 0 ? R.string.next : nextLabelRes);
-                binding.wizardNext.setOnClickListener(v -> listenerNext.run());
-            }
+            binding.wizardNext.setVisibility(View.VISIBLE);
+            binding.wizardNextSpace.setVisibility(View.VISIBLE);
+            binding.wizardNext.setText(mode.string);
+            binding.wizardNext.setOnClickListener(v -> listenerNext.run());
         }
     }
 
@@ -315,7 +348,10 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     public static boolean needsFolderMigration() {
-        return mapFolderNeedsMigration() || mapThemeFolderNeedsMigration() || gpxFolderNeedsMigration() || broutertilesFolderNeedsMigration();
+        return InstallWizardViewModel.mapFolderNeedsMigration()
+            || InstallWizardViewModel.mapThemeFolderNeedsMigration()
+            || InstallWizardViewModel.gpxFolderNeedsMigration()
+            || InstallWizardViewModel.broutertilesFolderNeedsMigration();
     }
 
     // -------------------------------------------------------------------
@@ -380,49 +416,33 @@ public class InstallWizardActivity extends AppCompatActivity {
         }
     }
 
-    private static boolean mapFolderNeedsMigration() {
-        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_offlinemaps);
-    }
-
     private void requestMapfolder() {
         viewModel.setForceSkipButton(false);
-        if (mapFolderNeedsMigration()) {
+        if (InstallWizardViewModel.mapFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAPS);
         }
     }
 
-    private static boolean mapThemeFolderNeedsMigration() {
-        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_offlinemapthemes);
-    }
-
     private void requestMapthemefolder() {
         viewModel.setForceSkipButton(false);
-        if (mapThemeFolderNeedsMigration()) {
+        if (InstallWizardViewModel.mapThemeFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES);
         }
     }
 
-    private static boolean gpxFolderNeedsMigration() {
-        return Settings.legacyFolderNeedsToBeMigrated(R.string.pref_persistablefolder_gpx);
-    }
-
     private void requestGpxfolder() {
         viewModel.setForceSkipButton(false);
-        if (gpxFolderNeedsMigration()) {
+        if (InstallWizardViewModel.gpxFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.GPX);
         }
     }
 
-    private static boolean broutertilesFolderNeedsMigration() {
-        return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isExternalRoutingInstalled();
-    }
-
     private void requestBroutertilesfolder() {
         viewModel.setForceSkipButton(false);
-        if (broutertilesFolderNeedsMigration()) {
+        if (InstallWizardViewModel.broutertilesFolderNeedsMigration()) {
             prepareFolderDefaultValues();
             this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.ROUTING_TILES);
         }
