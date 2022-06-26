@@ -60,24 +60,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private final ActivityResultLauncher<CredentialsAuthorizationContract.Input> authorize =
         registerForActivityResult(new CredentialsAuthorizationContract(), result -> onAuthorizationResult());
 
-    private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
-
-    // dialog elements
-    private ImageView logo = null;
-    private TextView title = null;
-    private TextView text = null;
-
-    private TextView button1Info = null;
-    private Button button1 = null;
-    private TextView button2Info = null;
-    private Button button2 = null;
-    private TextView button3Info = null;
-    private Button button3 = null;
-
-    private Button prev = null;
-    private Button skip = null;
-    private Button next = null;
-    private Button nextOutlined = null;
+    private InstallWizardBinding binding;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -94,24 +77,8 @@ public class InstallWizardActivity extends AppCompatActivity {
         } else {
             mode = WizardMode.values()[getIntent().getIntExtra(BUNDLE_MODE, WizardMode.WIZARDMODE_DEFAULT.id)];
         }
-        final InstallWizardBinding binding = InstallWizardBinding.inflate(getLayoutInflater());
+        binding = InstallWizardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        logo = binding.wizardLogo;
-        title = binding.wizardTitle;
-        text = binding.wizardText;
-
-        button1Info = binding.wizardButton1Info;
-        button1 = binding.wizardButton1;
-        button2Info = binding.wizardButton2Info;
-        button2 = binding.wizardButton2;
-        button3Info = binding.wizardButton3Info;
-        button3 = binding.wizardButton3;
-
-        prev = binding.wizardPrev;
-        skip = binding.wizardSkip;
-        next = binding.wizardNext;
-        nextOutlined = binding.wizardNextOutlined;
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_CSAH))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> {
@@ -143,32 +110,32 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void updateDialog() {
-        logo.setImageResource(R.mipmap.ic_launcher);
-        text.setVisibility(View.VISIBLE);
-        setButton(button1, 0, null, button1Info, 0);
-        setButton(button2, 0, null, button2Info, 0);
-        setButton(button3, 0, null, button3Info, 0);
+        binding.wizardLogo.setImageResource(R.mipmap.ic_launcher);
+        binding.wizardText.setVisibility(View.VISIBLE);
+        setButton(binding.wizardButton1, 0, null, binding.wizardButton1Info, 0);
+        setButton(binding.wizardButton2, 0, null, binding.wizardButton2Info, 0);
+        setButton(binding.wizardButton3, 0, null, binding.wizardButton3Info, 0);
         switch (step) {
             case WIZARD_START: {
-                title.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
-                text.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
+                binding.wizardTitle.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
+                binding.wizardText.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
                 setNavigation(this::skipWizard, R.string.wizard_not_now, null, 0, this::gotoNext, 0);
                 break;
             }
             case WIZARD_PERMISSIONS: {
-                title.setText(R.string.wizard_permissions_title);
-                text.setText(R.string.wizard_permissions_intro);
+                binding.wizardTitle.setText(R.string.wizard_permissions_title);
+                binding.wizardText.setText(R.string.wizard_permissions_intro);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
                 break;
             }
             case WIZARD_PERMISSIONS_STORAGE:
-                title.setText(R.string.wizard_status_storage_permission);
-                text.setText(R.string.storage_permission_request_explanation);
+                binding.wizardTitle.setText(R.string.wizard_status_storage_permission);
+                binding.wizardText.setText(R.string.storage_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestStorage, 0);
                 break;
             case WIZARD_PERMISSIONS_LOCATION:
-                title.setText(R.string.wizard_status_location_permission);
-                text.setText(R.string.location_permission_request_explanation);
+                binding.wizardTitle.setText(R.string.wizard_status_location_permission);
+                binding.wizardText.setText(R.string.location_permission_request_explanation);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::requestLocation, 0);
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
@@ -192,35 +159,35 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBroutertilesfolder, 0);
                 break;
             case WIZARD_PLATFORMS:
-                title.setText(R.string.wizard_platforms_title);
-                text.setText(R.string.wizard_platforms_intro);
+                binding.wizardTitle.setText(R.string.wizard_platforms_title);
+                binding.wizardText.setText(R.string.wizard_platforms_intro);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, R.string.skip);
-                setButton(button1, R.string.wizard_platforms_gc, v -> {
+                setButton(binding.wizardButton1, R.string.wizard_platforms_gc, v -> {
                     setButtonToDone();
                     authorizeGC();
-                }, button1Info, 0);
-                setButton(button2, R.string.wizard_platforms_others, v -> {
+                }, binding.wizardButton1Info, 0);
+                setButton(binding.wizardButton2, R.string.wizard_platforms_others, v -> {
                     setButtonToDone();
                     SettingsActivity.openForScreen(R.string.preference_screen_services, this);
-                }, button2Info, 0);
+                }, binding.wizardButton2Info, 0);
                 break;
             case WIZARD_ADVANCED:
-                title.setText(R.string.wizard_welcome_advanced);
-                text.setVisibility(View.GONE);
+                binding.wizardTitle.setText(R.string.wizard_welcome_advanced);
+                binding.wizardText.setVisibility(View.GONE);
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, R.string.skip);
-                setButton(button1, R.string.wizard_advanced_offlinemaps_label, v -> {
+                setButton(binding.wizardButton1, R.string.wizard_advanced_offlinemaps_label, v -> {
                     setButtonToDone();
                     startActivity(new Intent(this, DownloadSelectorActivity.class));
-                }, button1Info, R.string.wizard_advanced_offlinemaps_info);
+                }, binding.wizardButton1Info, R.string.wizard_advanced_offlinemaps_info);
                 if (!Routing.isAvailable()) {
-                    setButton(button2, R.string.wizard_advanced_routing_label, v -> {
+                    setButton(binding.wizardButton2, R.string.wizard_advanced_routing_label, v -> {
                         setButtonToDone();
                         Settings.setUseInternalRouting(true);
                         Settings.setBrouterAutoTileDownloads(true);
-                        setButton(button2, 0, null, button2Info, 0);
-                    }, button2Info, R.string.wizard_advanced_routing_info);
+                        setButton(binding.wizardButton2, 0, null, binding.wizardButton2Info, 0);
+                    }, binding.wizardButton2Info, R.string.wizard_advanced_routing_info);
                 }
-                setButton(button3, R.string.wizard_advanced_restore_label, v -> {
+                setButton(binding.wizardButton3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
                     DataStore.resetNewlyCreatedDatabase();
                     if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
@@ -228,10 +195,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                     } else {
                         backupUtils.selectBackupDirIntent();
                     }
-                }, button3Info, R.string.wizard_advanced_restore_info);
+                }, binding.wizardButton3Info, R.string.wizard_advanced_restore_info);
                 break;
             case WIZARD_END: {
-                title.setText(R.string.wizard_welcome_title);
+                binding.wizardTitle.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
                         .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
@@ -252,10 +219,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                 } else {
                     info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
                 }
-                button1Info.setVisibility(View.VISIBLE);
-                button1Info.setText(info);
+                binding.wizardButton1Info.setVisibility(View.VISIBLE);
+                binding.wizardButton1Info.setText(info);
 
-                text.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
+                binding.wizardText.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
 
                 setNavigation(this::gotoPrevious, 0, null, 0, this::finishWizard, R.string.finish);
                 break;
@@ -270,38 +237,38 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void setButtonToDone() {
-        next.setText(R.string.done);
+        binding.wizardNext.setText(R.string.done);
     }
 
     private void setNavigation(@Nullable final Runnable listenerPrev, final int prevLabelRes, @Nullable final Runnable listenerSkip, final int skipLabelRes, @Nullable final Runnable listenerNext, final int nextLabelRes) {
         if (listenerPrev == null) {
-            prev.setVisibility(View.GONE);
+            binding.wizardPrev.setVisibility(View.GONE);
         } else {
-            prev.setVisibility(View.VISIBLE);
-            prev.setText(prevLabelRes == 0 ? R.string.previous : prevLabelRes);
-            prev.setOnClickListener(v -> listenerPrev.run());
+            binding.wizardPrev.setVisibility(View.VISIBLE);
+            binding.wizardPrev.setText(prevLabelRes == 0 ? R.string.previous : prevLabelRes);
+            binding.wizardPrev.setOnClickListener(v -> listenerPrev.run());
         }
         if (listenerSkip == null) {
-            skip.setVisibility(View.GONE);
+            binding.wizardSkip.setVisibility(View.GONE);
         } else {
-            skip.setVisibility(View.VISIBLE);
-            skip.setText(skipLabelRes == 0 ? R.string.skip : skipLabelRes);
-            skip.setOnClickListener(v -> listenerSkip.run());
+            binding.wizardSkip.setVisibility(View.VISIBLE);
+            binding.wizardSkip.setText(skipLabelRes == 0 ? R.string.skip : skipLabelRes);
+            binding.wizardSkip.setOnClickListener(v -> listenerSkip.run());
         }
 
         final boolean useNextOutlinedButton = nextLabelRes == R.string.skip;
         if (listenerNext == null) {
-            next.setVisibility(View.GONE);
-            nextOutlined.setVisibility(View.GONE);
+            binding.wizardNext.setVisibility(View.GONE);
+            binding.wizardNextOutlined.setVisibility(View.GONE);
         } else {
-            next.setVisibility(useNextOutlinedButton ? View.GONE : View.VISIBLE);
-            nextOutlined.setVisibility(useNextOutlinedButton ? View.VISIBLE : View.GONE);
+            binding.wizardNext.setVisibility(useNextOutlinedButton ? View.GONE : View.VISIBLE);
+            binding.wizardNextOutlined.setVisibility(useNextOutlinedButton ? View.VISIBLE : View.GONE);
             if (useNextOutlinedButton) {
-                nextOutlined.setText(nextLabelRes);
-                nextOutlined.setOnClickListener(v -> listenerNext.run());
+                binding.wizardNextOutlined.setText(nextLabelRes);
+                binding.wizardNextOutlined.setOnClickListener(v -> listenerNext.run());
             } else {
-                next.setText(nextLabelRes == 0 ? R.string.next : nextLabelRes);
-                next.setOnClickListener(v -> listenerNext.run());
+                binding.wizardNext.setText(nextLabelRes == 0 ? R.string.next : nextLabelRes);
+                binding.wizardNext.setOnClickListener(v -> listenerNext.run());
             }
         }
     }
@@ -426,9 +393,9 @@ public class InstallWizardActivity extends AppCompatActivity {
     // Android SAF-based permissions related methods
 
     private void setFolderInfo(final PersistableFolder folder, @StringRes final int info, final boolean addSelectOrCreateInfo) {
-        title.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
+        binding.wizardTitle.setText(String.format(getString(R.string.wizard_permissions_folder_title), getString(folder.getNameKeyId())));
         final String temp = getString(info) + (addSelectOrCreateInfo ? " " + getString(R.string.wizard_select_or_create) : "");
-        text.setText(temp);
+        binding.wizardText.setText(temp);
     }
 
     private void requestBasefolder() {
