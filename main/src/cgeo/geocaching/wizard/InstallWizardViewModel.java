@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -37,6 +36,9 @@ public class InstallWizardViewModel extends AndroidViewModel {
     @NonNull
     private final MutableLiveData<Boolean> forceSkipButton = new MutableLiveData<>(false);
 
+    @NonNull
+    private final LiveData<PreviousButton> previousButton;
+
     public InstallWizardViewModel(final Application application, final SavedStateHandle savedStateHandle) {
         super(application);
         state = savedStateHandle;
@@ -47,6 +49,11 @@ public class InstallWizardViewModel extends AndroidViewModel {
         step = Transformations.distinctUntilChanged(Transformations.map(
             savedStateHandle.getLiveData(BUNDLE_STEP, WizardStep.WIZARD_START.ordinal()),
             (ordinal) -> WizardStep.values()[ordinal]
+        ));
+
+        previousButton = Transformations.distinctUntilChanged(Transformations.map(
+            step,
+            (step) -> step == WizardStep.WIZARD_START ? PreviousButton.NOT_NOW : PreviousButton.PREVIOUS
         ));
     }
 
@@ -60,6 +67,26 @@ public class InstallWizardViewModel extends AndroidViewModel {
     }
 
     @NonNull
+    public LiveData<Boolean> getForceSkipButton() {
+        return forceSkipButton;
+    }
+
+    public void setForceSkipButton(final boolean forceSkipButton) {
+        this.forceSkipButton.setValue(forceSkipButton);
+    }
+
+    /**
+     * State for the previous button at the bottom of the screen.
+     */
+    @NonNull
+    public LiveData<PreviousButton> getPreviousButton() {
+        return previousButton;
+    }
+
+    /**
+     * The current step in the wizard flow.
+     */
+    @NonNull
     public LiveData<WizardStep> getStep() {
         return step;
     }
@@ -68,17 +95,11 @@ public class InstallWizardViewModel extends AndroidViewModel {
         state.set(BUNDLE_STEP, step.ordinal());
     }
 
+    /**
+     * Reset the wizard - used in case of invalid state.
+     */
     public void resetStep() {
         setStep(WizardStep.WIZARD_START);
-    }
-
-    @NonNull
-    public LiveData<Boolean> getForceSkipButton() {
-        return forceSkipButton;
-    }
-
-    public void setForceSkipButton(final boolean forceSkipButton) {
-        this.forceSkipButton.setValue(forceSkipButton);
     }
 
     public void gotoPrevious() {
@@ -143,5 +164,21 @@ public class InstallWizardViewModel extends AndroidViewModel {
 
     public static boolean broutertilesFolderNeedsMigration() {
         return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isExternalRoutingInstalled();
+    }
+
+    private boolean skipButtonVisibleSource(final WizardStep step, final boolean forceSkipButton) {
+        switch (step) {
+            case WIZARD_PERMISSIONS_BASEFOLDER:
+            case WIZARD_PERMISSIONS_MAPFOLDER:
+            case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
+            case WIZARD_PERMISSIONS_GPXFOLDER:
+            case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
+                return forceSkipButton;
+            case WIZARD_PLATFORMS:
+            case WIZARD_ADVANCED:
+                return true;
+            default:
+                return false;
+        }
     }
 }
