@@ -548,7 +548,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
 
             // initialize menu items
-            menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
+            // menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
             menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
 
             final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();
