@@ -925,8 +925,10 @@ class GCWebAPI {
 
                 // parse attributes
                 final List<String> attributes = new ArrayList<>();
-                for (Attribute attribute : r.attributes) {
-                    attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                if (r.attributes != null) {
+                    for (Attribute attribute : r.attributes) {
+                        attributes.add(CacheAttribute.getById(attribute.id).getValue(attribute.isApplicable));
+                    }
                 }
                 c.setAttributes(attributes);
 
