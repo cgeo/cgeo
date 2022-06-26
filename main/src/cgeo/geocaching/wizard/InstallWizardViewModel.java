@@ -30,39 +30,42 @@ public class InstallWizardViewModel extends AndroidViewModel {
     private final SavedStateHandle state;
 
     @NonNull
-    private final LiveData<WizardMode> mode;
+    private WizardMode mode;
+
     @NonNull
     private final LiveData<WizardStep> step;
     @NonNull
     private final MutableLiveData<Boolean> forceSkipButton = new MutableLiveData<>(false);
-
     @NonNull
     private final LiveData<PreviousButton> previousButton;
 
     public InstallWizardViewModel(final Application application, final SavedStateHandle savedStateHandle) {
         super(application);
         state = savedStateHandle;
-        mode = Transformations.map(
-            savedStateHandle.getLiveData(BUNDLE_MODE, WizardMode.WIZARDMODE_DEFAULT.ordinal()),
-            (ordinal) -> WizardMode.values()[ordinal]
-        );
+
+        final Integer modeOrdinal = savedStateHandle.get(BUNDLE_MODE);
+        mode = modeOrdinal == null ? WizardMode.WIZARDMODE_DEFAULT : WizardMode.values()[modeOrdinal];
+
         step = Transformations.distinctUntilChanged(Transformations.map(
             savedStateHandle.getLiveData(BUNDLE_STEP, WizardStep.WIZARD_START.ordinal()),
             (ordinal) -> WizardStep.values()[ordinal]
         ));
-
         previousButton = Transformations.distinctUntilChanged(Transformations.map(
             step,
             (step) -> step == WizardStep.WIZARD_START ? PreviousButton.NOT_NOW : PreviousButton.PREVIOUS
         ));
     }
 
+    /**
+     * Get the wizard mode. This value is set by the activity based on intent data and is not reactive.
+     */
     @NonNull
-    public LiveData<WizardMode> getMode() {
+    public WizardMode getMode() {
         return mode;
     }
 
     public void setMode(@NonNull final WizardMode mode) {
+        this.mode = mode;
         this.state.set(BUNDLE_MODE, mode.ordinal());
     }
 
@@ -125,7 +128,7 @@ public class InstallWizardViewModel extends AndroidViewModel {
 
     private boolean stepCanBeSkipped() {
         final WizardStep step = Objects.requireNonNull(this.step.getValue());
-        final WizardMode mode = Objects.requireNonNull(this.mode.getValue());
+        final WizardMode mode = this.mode;
 
         return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission() && hasLocationPermission())))
             || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
@@ -164,21 +167,5 @@ public class InstallWizardViewModel extends AndroidViewModel {
 
     public static boolean broutertilesFolderNeedsMigration() {
         return Settings.isBrouterAutoTileDownloads() && PersistableFolder.ROUTING_TILES.isLegacy() && Routing.isExternalRoutingInstalled();
-    }
-
-    private boolean skipButtonVisibleSource(final WizardStep step, final boolean forceSkipButton) {
-        switch (step) {
-            case WIZARD_PERMISSIONS_BASEFOLDER:
-            case WIZARD_PERMISSIONS_MAPFOLDER:
-            case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
-            case WIZARD_PERMISSIONS_GPXFOLDER:
-            case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
-                return forceSkipButton;
-            case WIZARD_PLATFORMS:
-            case WIZARD_ADVANCED:
-                return true;
-            default:
-                return false;
-        }
     }
 }

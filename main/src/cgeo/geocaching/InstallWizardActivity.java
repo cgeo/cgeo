@@ -46,6 +46,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Objects;
+
 public class InstallWizardActivity extends AppCompatActivity {
 
     public static final String BUNDLE_MODE = "wizardmode";
@@ -105,14 +107,19 @@ public class InstallWizardActivity extends AppCompatActivity {
                     onReturnFromFolderMigration(!needsMigration);
                 });
 
-        viewModel.getStep().observe(this, (step) -> updateDialog(step, viewModel.getMode().getValue(), viewModel.getForceSkipButton().getValue()));
-        viewModel.getMode().observe(this, (mode) -> updateDialog(viewModel.getStep().getValue(), mode, viewModel.getForceSkipButton().getValue()));
-        viewModel.getForceSkipButton().observe(this, (forceSkipButton) -> updateDialog(viewModel.getStep().getValue(), viewModel.getMode().getValue(), forceSkipButton));
+        viewModel.getStep().observe(this, (step) -> {
+            final boolean forceSkipButton = Boolean.TRUE.equals(viewModel.getForceSkipButton().getValue());
+            updateDialog(step, forceSkipButton);
+        });
+        viewModel.getForceSkipButton().observe(this, (forceSkipButton) -> {
+            final WizardStep step = Objects.requireNonNull(viewModel.getStep().getValue());
+            updateDialog(step, forceSkipButton);
+        });
 
         viewModel.getPreviousButton().observe(this, this::setNavigationButtonPrevious);
     }
 
-    private void updateDialog(@NonNull final WizardStep step, @NonNull final WizardMode mode, final boolean forceSkipButton) {
+    private void updateDialog(@NonNull final WizardStep step, final boolean forceSkipButton) {
         binding.wizardLogo.setImageResource(R.mipmap.ic_launcher);
         binding.wizardText.setVisibility(View.VISIBLE);
         setButton(binding.wizardButton1, 0, null, binding.wizardButton1Info, 0);
@@ -120,61 +127,52 @@ public class InstallWizardActivity extends AppCompatActivity {
         setButton(binding.wizardButton3, 0, null, binding.wizardButton3Info, 0);
         switch (step) {
             case WIZARD_START: {
+                final WizardMode mode = viewModel.getMode();
                 binding.wizardTitle.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
                 binding.wizardText.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
-                setNavigationButtonSkip(false);
-                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT);
+                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT, forceSkipButton);
                 break;
             }
             case WIZARD_PERMISSIONS: {
                 binding.wizardTitle.setText(R.string.wizard_permissions_title);
                 binding.wizardText.setText(R.string.wizard_permissions_intro);
-                setNavigationButtonSkip(false);
-                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT);
+                setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT, forceSkipButton);
                 break;
             }
             case WIZARD_PERMISSIONS_STORAGE:
                 binding.wizardTitle.setText(R.string.wizard_status_storage_permission);
                 binding.wizardText.setText(R.string.storage_permission_request_explanation);
-                setNavigationButtonSkip(false);
-                setNavigationButtonNext(this::requestStorage, NextButton.NEXT);
+                setNavigationButtonNext(this::requestStorage, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_LOCATION:
                 binding.wizardTitle.setText(R.string.wizard_status_location_permission);
                 binding.wizardText.setText(R.string.location_permission_request_explanation);
-                setNavigationButtonSkip(false);
-                setNavigationButtonNext(this::requestLocation, NextButton.NEXT);
+                setNavigationButtonNext(this::requestLocation, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_BASEFOLDER:
                 setFolderInfo(PersistableFolder.BASE, R.string.wizard_basefolder_request_explanation, false);
-                setNavigationButtonSkip(forceSkipButton);
-                setNavigationButtonNext(this::requestBasefolder, NextButton.NEXT);
+                setNavigationButtonNext(this::requestBasefolder, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_MAPFOLDER:
                 setFolderInfo(PersistableFolder.OFFLINE_MAPS, R.string.wizard_mapfolder_request_explanation, true);
-                setNavigationButtonSkip(forceSkipButton);
-                setNavigationButtonNext(this::requestMapfolder, NextButton.NEXT);
+                setNavigationButtonNext(this::requestMapfolder, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_MAPTHEMEFOLDER:
                 setFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES, R.string.wizard_mapthemesfolder_request_explanation, true);
-                setNavigationButtonSkip(forceSkipButton);
-                setNavigationButtonNext(this::requestMapthemefolder, NextButton.NEXT);
+                setNavigationButtonNext(this::requestMapthemefolder, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_GPXFOLDER:
                 setFolderInfo(PersistableFolder.GPX, R.string.wizard_gpxfolder_request_explanation, true);
-                setNavigationButtonSkip(forceSkipButton);
-                setNavigationButtonNext(this::requestGpxfolder, NextButton.NEXT);
+                setNavigationButtonNext(this::requestGpxfolder, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
                 setFolderInfo(PersistableFolder.ROUTING_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
-                setNavigationButtonSkip(forceSkipButton);
-                setNavigationButtonNext(this::requestBroutertilesfolder, NextButton.NEXT);
+                setNavigationButtonNext(this::requestBroutertilesfolder, NextButton.NEXT, forceSkipButton);
                 break;
             case WIZARD_PLATFORMS:
                 binding.wizardTitle.setText(R.string.wizard_platforms_title);
                 binding.wizardText.setText(R.string.wizard_platforms_intro);
-                setNavigationButtonSkip(true);
-                setNavigationButtonNext(null, NextButton.NEXT);
+                setNavigationButtonNext(null, NextButton.NEXT, false);
                 setButton(binding.wizardButton1, R.string.wizard_platforms_gc, v -> {
                     setButtonToDone();
                     authorizeGC();
@@ -187,8 +185,7 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_ADVANCED:
                 binding.wizardTitle.setText(R.string.wizard_welcome_advanced);
                 binding.wizardText.setVisibility(View.GONE);
-                setNavigationButtonSkip(true);
-                setNavigationButtonNext(null, NextButton.NEXT);
+                setNavigationButtonNext(null, NextButton.NEXT, false);
                 setButton(binding.wizardButton1, R.string.wizard_advanced_offlinemaps_label, v -> {
                     setButtonToDone();
                     startActivity(new Intent(this, DownloadSelectorActivity.class));
@@ -238,8 +235,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
                 binding.wizardText.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
 
-                setNavigationButtonSkip(false);
-                setNavigationButtonNext(this::finishWizard, NextButton.FINISH);
+                setNavigationButtonNext(this::finishWizard, NextButton.FINISH, false);
                 break;
             }
             default: {
@@ -251,8 +247,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void setButtonToDone() {
-        setNavigationButtonSkip(false);
-        setNavigationButtonNext(viewModel::gotoNext, NextButton.DONE);
+        setNavigationButtonNext(viewModel::gotoNext, NextButton.DONE, false);
     }
 
     /**
@@ -264,25 +259,15 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     /**
-     * Configure the skip button at the bottom of the screen.
-     * @param visible If true, show the skip button. If false, hide it.
-     */
-    private void setNavigationButtonSkip(final boolean visible) {
-        if (visible) {
-            binding.wizardSkip.setVisibility(View.VISIBLE);
-            binding.wizardSkip.setText(R.string.skip);
-            binding.wizardSkip.setOnClickListener(v -> viewModel.gotoNext());
-        } else {
-            binding.wizardSkip.setVisibility(View.GONE);
-        }
-    }
-
-    /**
-     * Configure the next button at the bottom of the screen.
+     * Configure the next and skip buttons at the bottom of the screen.
      * @param listenerNext Listener for the next button.
      *                     If null, the button is hidden and the skip button takes its place.
+     * @param forceSkipButton If true, a skip button will be shown.
+     *                        If false, a skip button is only shown when listenerNext is null.
      */
-    private void setNavigationButtonNext(@Nullable final Runnable listenerNext, final NextButton mode) {
+    private void setNavigationButtonNext(@Nullable final Runnable listenerNext, final NextButton mode, final boolean forceSkipButton) {
+        final boolean skipButtonVisible = listenerNext == null || forceSkipButton;
+
         if (listenerNext == null) {
             binding.wizardNext.setVisibility(View.GONE);
             binding.wizardNextSpace.setVisibility(View.GONE);
@@ -291,6 +276,14 @@ public class InstallWizardActivity extends AppCompatActivity {
             binding.wizardNextSpace.setVisibility(View.VISIBLE);
             binding.wizardNext.setText(mode.string);
             binding.wizardNext.setOnClickListener(v -> listenerNext.run());
+        }
+
+        if (skipButtonVisible) {
+            binding.wizardSkip.setVisibility(View.VISIBLE);
+            binding.wizardSkip.setText(R.string.skip);
+            binding.wizardSkip.setOnClickListener(v -> viewModel.gotoNext());
+        } else {
+            binding.wizardSkip.setVisibility(View.GONE);
         }
     }
 
@@ -324,7 +317,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private void finishWizard() {
         // call MainActivity (if not returning) and finish this Activity
-        if (viewModel.getMode().getValue() != WizardMode.WIZARDMODE_RETURNING) {
+        if (viewModel.getMode() != WizardMode.WIZARDMODE_RETURNING) {
             final Intent main = new Intent(this, MainActivity.class);
             main.putExtras(getIntent());
             startActivity(main);
