@@ -90,6 +90,9 @@ import java.util.Set;
 import com.google.android.material.button.MaterialButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import cgeo.geocaching.wizard.WizardMode;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -577,7 +580,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivity(new Intent(this, UsefulAppsActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
-            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? WizardMode.WIZARDMODE_MIGRATION.id : WizardMode.WIZARDMODE_RETURNING.id);
             startActivity(wizard);
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);

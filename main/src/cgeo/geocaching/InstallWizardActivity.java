@@ -19,6 +19,8 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.wizard.WizardMode;
+import cgeo.geocaching.wizard.WizardStep;
 
 import android.Manifest;
 import android.content.Context;
@@ -46,27 +48,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     private static final String BUNDLE_STEP = "step";
     private static final String BUNDLE_CSAH = "csah";
     private static final String BUNDLE_BACKUPUTILS = "backuputils";
-
-    public enum WizardMode {
-        WIZARDMODE_DEFAULT(0),
-        WIZARDMODE_RETURNING(1),
-        WIZARDMODE_MIGRATION(2);
-
-        public final int id;
-
-        WizardMode(final int id) {
-            this.id = id;
-        }
-    }
-
-    private enum WizardStep {
-        WIZARD_START,
-        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
-        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER, WIZARD_PERMISSIONS_BROUTERTILESFOLDER,
-        WIZARD_PLATFORMS,
-        WIZARD_ADVANCED,
-        WIZARD_END
-    }
 
     private WizardMode mode = WizardMode.WIZARDMODE_DEFAULT;
     private WizardStep step = WizardStep.WIZARD_START;
