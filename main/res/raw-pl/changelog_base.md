@@ -1,7 +1,7 @@
 - Nowość: Pobieranie/aktualizowanie skrytek w tle (eksperymentalne)
-- New: Copy current coordinates when long-clicking location on home screen
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Nowość: Kopiowanie bieżących współrzędnych po długim kliknięciu lokalizacji na ekranie głównym
+- Zmiana: Usunięcie sprawdzania limitu rozmiaru podczas przechowywania punktów nawigacji w notatkach osobistych
+- Poprawka: Nie pokazuj okręgów odległości dla punktów nawigacji dla zarchiwizowanych skrytek
+- Nowość: Dotknij wolne miejsce na mapie, aby utworzyć punkt nawigacji lub skrytkę zdefiniowaną przez użytkownika, dołączyć do początku lub do końca indywidualnej trasy, wyświetlić współrzędne lub nawigować (w zależności od kontekstu)
 - Nowość: Opcja usuwania map offline
-- Fix: Missing trackable count in search results
+- Poprawka: Brak liczby przedmiotów podróżnych w wynikach wyszukiwania
