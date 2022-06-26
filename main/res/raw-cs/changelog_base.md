@@ -4,4 +4,4 @@
 - Oprava: Nezobrazují se kruhy vzdálenosti pro trasové body archivovaných kešek
 - Novinka: Klepnutím na volné místo na mapě můžete vytvořit trasový bod nebo uživatelem definovanou kešku, přidat nebo předřadit individuální trasu, zobrazit souřadnice nebo navigovat (v závislosti na kontextu)
 - Novinka: Možnost odstranit offline mapy
-- Fix: Missing trackable count in search results
+- Oprava: Chybějící počet TB ve výsledcích vyhledávání
