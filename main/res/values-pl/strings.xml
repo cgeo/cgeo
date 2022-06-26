@@ -367,6 +367,14 @@
     <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
     <string name="caches_store_background_should_force_refresh">Odśwież już pobrane skrytki</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
+    <string name="caches_store_background_result_failed">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
+    <string name="caches_store_background_result_canceled">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d skrytka pobrana</item>
+        <item quantity="few">%d skrytki pobrane</item>
+        <item quantity="many">%d skrytek pobranych</item>
+        <item quantity="other">%d skrytek pobranych</item>
+    </plurals>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -1185,6 +1193,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacji, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ta osobista notatka będzie obcięta o około %1$d znaków na %3$s (maksymalny rozmiar %2$d).</string>
     <string name="cache_personal_note_upload">Wyślij</string>
     <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
     <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
@@ -1353,6 +1362,8 @@
     <string name="image_category_own">Własne</string>
     <string name="image_category_listing">Z opisu</string>
     <string name="image_category_log">Z dziennika</string>
+    <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
+    <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
@@ -1647,7 +1658,7 @@
     <string name="geokret_type_post">List</string>
     <!-- user -->
     <string name="user_menu_title">O użytkowniku</string>
-    <string name="user_menu_view_hidden">Skrytki ukryte</string>
+    <string name="user_menu_view_hidden">Założone skrytki</string>
     <string name="user_menu_view_found">Znalezione skrytki</string>
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
@@ -2007,6 +2018,7 @@
     <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
+    <string name="tts_running">Usługa mowy jest uruchomiona…</string>
     <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
@@ -2236,6 +2248,10 @@
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
+    <string name="delete_offlinemap_title">Usuń mapę offline</string>
+    <string name="no_deletable_offlinemaps">Nie ma map offline do usunięcia</string>
+    <string name="delete_file_confirmation">Usunąć %s?</string>
+    <string name="file_deleted_info">%s usunięto</string>
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
