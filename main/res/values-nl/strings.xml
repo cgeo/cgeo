@@ -2010,6 +2010,14 @@
     <string name="tts_oclock">%s uur</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
+    <plurals name="days_ago">
+        <item quantity="one">Gisteren</item>
+        <item quantity="other">%d dagen geleden</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Morgen</item>
+        <item quantity="other">Over %d dagen</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
