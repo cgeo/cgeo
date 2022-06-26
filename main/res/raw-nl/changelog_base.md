@@ -4,4 +4,4 @@
 - Oplossing: Toon geen afstandscirkels voor waypoints van gearchiveerde caches
 - Nieuw: Tik op vrije plek op de kaart om een waypoint of gebruiker gedefinieerde cache te maken, voeg voor of toe aan individuele route, toon coördinaten of navigeer (afhankelijk van de context)
 - Nieuw: Optie om offline kaarten te verwijderen
-- Fix: Missing trackable count in search results
+- Oplossing: Ontbrekende trackable telling in zoekresultaten
