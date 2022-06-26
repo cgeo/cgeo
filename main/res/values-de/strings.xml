@@ -2010,6 +2010,14 @@
     <string name="tts_oclock">%s Uhr</string>
     <!-- various -->
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
+    <plurals name="days_ago">
+        <item quantity="one">Gestern</item>
+        <item quantity="other">Vor %d Tagen</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Morgen</item>
+        <item quantity="other">In %d Tagen</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
