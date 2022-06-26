@@ -10,6 +10,7 @@ import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.Credentials;
+import cgeo.geocaching.settings.CredentialsAuthorizationContract;
 import cgeo.geocaching.settings.GCAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -35,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -54,6 +56,9 @@ public class InstallWizardActivity extends AppCompatActivity {
     private boolean forceSkipButton = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
     private BackupUtils backupUtils;
+
+    private final ActivityResultLauncher<CredentialsAuthorizationContract.Input> authorize =
+        registerForActivityResult(new CredentialsAuthorizationContract(), result -> onAuthorizationResult());
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
@@ -505,11 +510,8 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void authorizeGC() {
-        final Intent checkIntent = new Intent(this, GCAuthorizationActivity.class);
         final Credentials credentials = GCConnector.getInstance().getCredentials();
-        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_USERNAME, credentials.getUsernameRaw());
-        checkIntent.putExtra(Intents.EXTRA_CREDENTIALS_AUTH_PASSWORD, credentials.getPasswordRaw());
-        startActivityForResult(checkIntent, REQUEST_CODE_WIZARD_GC);
+        authorize.launch(new CredentialsAuthorizationContract.Input(credentials, GCAuthorizationActivity.class));
     }
 
     // -------------------------------------------------------------------
@@ -526,21 +528,21 @@ public class InstallWizardActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_WIZARD_GC) {
-            if (!hasValidGCCredentials()) {
-                Toast.makeText(this, R.string.err_auth_process, Toast.LENGTH_SHORT).show();
-            } else {
-                SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm((dialog, which) -> {
-                    Settings.setGCConnectorActive(true);
-                    gotoNext();
-                }, (dialog, i) -> {
-                });
-            }
-            return;
-        }
         if ((contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data))) {
             return;
         }
         backupUtils.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void onAuthorizationResult() {
+        if (!hasValidGCCredentials()) {
+            Toast.makeText(this, R.string.err_auth_process, Toast.LENGTH_SHORT).show();
+        } else {
+            SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm((dialog, which) -> {
+                Settings.setGCConnectorActive(true);
+                gotoNext();
+            }, (dialog, i) -> {
+            });
+        }
     }
 }
