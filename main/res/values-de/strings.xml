@@ -2188,6 +2188,10 @@
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
+    <string name="delete_offlinemap_title">Offline-Karte löschen</string>
+    <string name="no_deletable_offlinemaps">Keine löschbaren Offline-Karten</string>
+    <string name="delete_file_confirmation">%s löschen?</string>
+    <string name="file_deleted_info">%s gelöscht</string>
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_filename">Lade %s</string>
