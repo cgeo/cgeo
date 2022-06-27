@@ -1,8 +1,8 @@
 package cgeo.geocaching.wizard;
 
-import androidx.annotation.StringRes;
-
 import cgeo.geocaching.R;
+
+import androidx.annotation.StringRes;
 
 public enum NextButton {
     NEXT(R.string.next), FINISH(R.string.finish), DONE(R.string.done);

@@ -1,14 +1,14 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
+import cgeo.geocaching.connector.gc.GCConnector;
+
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import cgeo.geocaching.Intents;
-import cgeo.geocaching.connector.gc.GCConnector;
 
 public class CredentialsAuthorizationContract extends ActivityResultContract<CredentialsAuthorizationContract.Input, Intent> {
 

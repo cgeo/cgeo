@@ -1,6 +1,8 @@
 package cgeo.geocaching.wizard;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -140,6 +142,39 @@ public class InstallWizardViewModel extends AndroidViewModel {
             || (step == WizardStep.WIZARD_PERMISSIONS_BROUTERTILESFOLDER && !broutertilesFolderNeedsMigration())
             || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
             || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION);
+    }
+
+    @NonNull
+    private String okOrError(final boolean ok) {
+        return getApplication().getString(ok ? android.R.string.ok : R.string.status_not_ok);
+    }
+
+    @NonNull
+    public String getWizardEndInfo() {
+        final Context context = getApplication();
+        final StringBuilder info = new StringBuilder();
+        info.append(context.getString(R.string.wizard_status_title)).append(":\n")
+                .append(context.getString(R.string.wizard_status_storage_permission)).append(": ").append(okOrError(hasStoragePermission())).append("\n")
+                .append(context.getString(R.string.wizard_status_location_permission)).append(": ").append(okOrError(hasLocationPermission())).append("\n")
+                .append(context.getString(R.string.wizard_status_basefolder)).append(": ").append(okOrError(ContentStorageActivityHelper.baseFolderIsSet())).append("\n")
+                .append(context.getString(R.string.wizard_status_platform));
+
+        boolean platformConfigured = false;
+        final StringBuilder platforms = new StringBuilder();
+        for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
+            if (platformConfigured) {
+                platforms.append(", ");
+            }
+            platforms.append(conn.getName());
+            platformConfigured = true;
+        }
+
+        if (platformConfigured) {
+            info.append(": ").append(context.getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
+        } else {
+            info.append(": ").append(context.getString(R.string.status_not_ok)).append("\n");
+        }
+        return info.toString();
     }
 
     private boolean hasStoragePermission() {

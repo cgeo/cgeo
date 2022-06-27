@@ -52,6 +52,7 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.wizard.WizardMode;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -90,9 +91,6 @@ import java.util.Set;
 import com.google.android.material.button.MaterialButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import cgeo.geocaching.wizard.WizardMode;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;

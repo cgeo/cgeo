@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.databinding.InstallWizardBinding;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
@@ -126,19 +125,17 @@ public class InstallWizardActivity extends AppCompatActivity {
         setButton(binding.wizardButton2, 0, null, binding.wizardButton2Info, 0);
         setButton(binding.wizardButton3, 0, null, binding.wizardButton3Info, 0);
         switch (step) {
-            case WIZARD_START: {
+            case WIZARD_START:
                 final WizardMode mode = viewModel.getMode();
                 binding.wizardTitle.setText(mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_migration_title : R.string.wizard_welcome_title);
                 binding.wizardText.setText(mode == WizardMode.WIZARDMODE_RETURNING ? R.string.wizard_intro_returning : mode == WizardMode.WIZARDMODE_MIGRATION ? R.string.wizard_intro_migration : R.string.wizard_intro);
                 setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT, forceSkipButton);
                 break;
-            }
-            case WIZARD_PERMISSIONS: {
+            case WIZARD_PERMISSIONS:
                 binding.wizardTitle.setText(R.string.wizard_permissions_title);
                 binding.wizardText.setText(R.string.wizard_permissions_intro);
                 setNavigationButtonNext(viewModel::gotoNext, NextButton.NEXT, forceSkipButton);
                 break;
-            }
             case WIZARD_PERMISSIONS_STORAGE:
                 binding.wizardTitle.setText(R.string.wizard_status_storage_permission);
                 binding.wizardText.setText(R.string.storage_permission_request_explanation);
@@ -200,38 +197,13 @@ public class InstallWizardActivity extends AppCompatActivity {
                 }
                 setButton(binding.wizardButton3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
-                    DataStore.resetNewlyCreatedDatabase();
-                    if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
-                        backupUtils.restore(BackupUtils.newestBackupFolder());
-                    } else {
-                        backupUtils.selectBackupDirIntent();
-                    }
+                    restoreBackup();
                 }, binding.wizardButton3Info, R.string.wizard_advanced_restore_info);
                 break;
             case WIZARD_END: {
                 binding.wizardTitle.setText(R.string.wizard_welcome_title);
-                final StringBuilder info = new StringBuilder();
-                info.append(getString(R.string.wizard_status_title)).append(":\n")
-                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_platform));
-                boolean platformConfigured = false;
-                final StringBuilder platforms = new StringBuilder();
-                for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
-                    if (platformConfigured) {
-                        platforms.append(", ");
-                    }
-                    platforms.append(conn.getName());
-                    platformConfigured = true;
-                }
-                if (platformConfigured) {
-                    info.append(": ").append(getString(android.R.string.ok)).append("\n(").append(platforms).append(")\n");
-                } else {
-                    info.append(": ").append(getString(R.string.status_not_ok)).append("\n");
-                }
                 binding.wizardButton1Info.setVisibility(View.VISIBLE);
-                binding.wizardButton1Info.setText(info);
+                binding.wizardButton1Info.setText(viewModel.getWizardEndInfo());
 
                 binding.wizardText.setText(isConfigurationOk(this) ? R.string.wizard_outro_ok : R.string.wizard_outro_error);
 
@@ -312,7 +284,8 @@ public class InstallWizardActivity extends AppCompatActivity {
             .setTitle(R.string.wizard)
             .setMessage(R.string.wizard_skip_wizard_warning)
             .setButtons(0, R.string.back)
-            .confirm((dialog, which) -> finishWizard(), (dialog, which) -> {});
+            .confirm((dialog, which) -> finishWizard(), (dialog, which) -> {
+            });
     }
 
     private void finishWizard() {
@@ -323,6 +296,15 @@ public class InstallWizardActivity extends AppCompatActivity {
             startActivity(main);
         }
         finish();
+    }
+
+    private void restoreBackup() {
+        DataStore.resetNewlyCreatedDatabase();
+        if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
+            backupUtils.restore(BackupUtils.newestBackupFolder());
+        } else {
+            backupUtils.selectBackupDirIntent();
+        }
     }
 
     public static boolean isConfigurationOk(final Context context) {

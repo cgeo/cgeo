@@ -1,8 +1,8 @@
 package cgeo.geocaching.wizard;
 
-import androidx.annotation.StringRes;
-
 import cgeo.geocaching.R;
+
+import androidx.annotation.StringRes;
 
 public enum PreviousButton {
     PREVIOUS(R.string.previous), NOT_NOW(R.string.wizard_not_now);
