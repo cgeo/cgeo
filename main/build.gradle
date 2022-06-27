@@ -413,6 +413,7 @@ dependencies {
     // Support Library Lifecycle Helpers
     def lifecycleVersion = '2.4.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
