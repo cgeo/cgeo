@@ -418,19 +418,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     public CGeoMap(@NonNull final MapActivityImpl activity) {
         super(activity);
-        // only add cache if it is currently visible
-        getActivity().getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
-            @Override
-            protected void onReceive(final Context context, final String geocode) {
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-
-                // only add cache if it is currently visible
-                if (caches.remove(cache)) {
-                    caches.add(cache);
-                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
-                }
-            }
-        });
     }
 
     protected void countVisibleCaches() {
@@ -487,6 +474,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.setBuiltInZoomControls(true);
         mapView.displayZoomControls(true);
         mapView.setOnDragListener(new MapDragListener(this));
+
+        // only add cache if it is currently visible
+        getActivity().getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+                // only add cache if it is currently visible
+                if (caches.remove(cache)) {
+                    caches.add(cache);
+                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
+                }
+            }
+        });
 
         // initialize overlays
         mapView.clearOverlays();
