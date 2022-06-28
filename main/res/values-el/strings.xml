@@ -2000,6 +2000,14 @@
     <string name="tts_oclock">%s η ώρα</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Αντιγραφή στο πρόχειρο</string>
+    <plurals name="days_ago">
+        <item quantity="one">Χθες</item>
+        <item quantity="other">Πριν %d μέρες</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Αύριο</item>
+        <item quantity="other">Σε %d ημέρες</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
