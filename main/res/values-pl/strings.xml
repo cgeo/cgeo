@@ -867,7 +867,7 @@
     <string name="init_restore_settings_failed">Przywracanie ustawień programu nie powiodło się.</string>
     <string name="init_restore_running">Przywracanie bazy skrytek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
-    <string name="init_backup_last">Kopia dostępna od</string>
+    <string name="init_backup_last">Dostępna kopia zapasowa z</string>
     <string name="init_backup_unavailable">niedostępne</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="init_restore_version_error">Nieoczekiwany format - nie można przywrócić bazy danych.\n\nOczekiwana wersja to %1$d,\nkopia zapasowa ma wersję %2$d</string>
@@ -1691,7 +1691,7 @@
     <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
     <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
     <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
-    <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
+    <string name="helper_sendtocgeo_description">Wyślij do c:geo (Send2cgeo) jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
@@ -1710,9 +1710,9 @@
     <string name="export_failed">Eksport nie powiódł się</string>
     <string name="export_fieldnotes">Notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
-    <string name="export_fieldnotes_upload">Wyślij do geocaching.com</string>
+    <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
-    <string name="export_fieldnotes_upload_success">Wysyłanie do geocaching.com zakończone sukcesem</string>
+    <string name="export_fieldnotes_upload_success">Przesyłanie do geocaching.com zakończone powodzeniem</string>
     <string name="export_fieldnotes_onlynew">Tylko od ostatniego eksportu</string>
     <string name="export_fieldnotes_creating">Tworzenie notatek…</string>
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
