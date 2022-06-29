@@ -352,18 +352,6 @@ public class BackupUtils {
      * Create a backup after confirming to overwrite the existing backup.
      */
     public void backup(final Runnable runAfterwards, final boolean autobackup) {
-
-        // avoid overwriting an existing backup with an empty database
-        // (can happen directly after reinstalling the app)
-        if (DataStore.getAllCachesCount() == 0) {
-            SimpleDialog.of(activityContext).setTitle(R.string.init_backup_backup).setMessage(R.string.init_backup_unnecessary)
-                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> backupStep2(runAfterwards, autobackup));
-        } else {
-            backupStep2(runAfterwards, autobackup);
-        }
-    }
-
-    private void backupStep2(final Runnable runAfterwards, final boolean autobackup) {
         final List<ContentStorage.FileInformation> dirs = getDirsToRemove(autobackup ? MAX_AUTO_BACKUPS : Settings.allowedBackupsNumber(), autobackup);
         if (dirs != null) {
             if (autobackup) {
