@@ -475,20 +475,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.displayZoomControls(true);
         mapView.setOnDragListener(new MapDragListener(this));
 
-        // only add cache if it is currently visible
-        getActivity().getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
-            @Override
-            protected void onReceive(final Context context, final String geocode) {
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-
-                // only add cache if it is currently visible
-                if (caches.remove(cache)) {
-                    caches.add(cache);
-                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
-                }
-            }
-        });
-
         // initialize overlays
         mapView.clearOverlays();
 
@@ -621,6 +607,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
+
+        // only add cache if it is currently visible
+        activity.getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+                // only add cache if it is currently visible
+                if (caches.remove(cache)) {
+                    caches.add(cache);
+                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
+                }
+            }
+        });
 
         // added keys must be removed before passing bundle to google's mapView, otherwise this will be thrown:
         // ClassNotFoundException: Didn't find class "cgeo.geocaching.sensors.GeoData"
