@@ -20,3 +20,6 @@ updates:
       # Ignore updates to the 'guava' package
       # found no way to instead integrate listenablefuture/9999.0-empty-to-avoid-conflict-with-guava
       - dependency-name: "com.google.guava:guava"
+      # Ignore updates to the 'jts-core' package
+      # jts-core 1.17.0 includes a API breaking change not supported by VTM
+      - dependency-name: "org.locationtech.jts:jts-core"
