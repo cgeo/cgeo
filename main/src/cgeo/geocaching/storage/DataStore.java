@@ -3722,40 +3722,43 @@ public class DataStore {
         databaseCleaned = true;
 
         try (ContextLogger ignore = new ContextLogger(true, "DataStore.cleanIfNeeded: cleans DB")) {
+            if (Settings.dbNeedsCleanup()) {
+                Settings.setDbCleanupLastCheck(false);
 
-            Schedulers.io().scheduleDirect(() -> {
-                Log.d("Database clean: started");
-                try {
-                    final Set<String> geocodes = new HashSet<>();
-                    final String timestampString = Long.toString(System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED);
-                    queryToColl(dbTableCaches,
-                            new String[]{"geocode"},
-                            "detailedupdate < ? AND visiteddate < ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
-                            new String[]{timestampString, timestampString},
-                            null,
-                            null,
-                            geocodes,
-                            GET_STRING_0);
+                Schedulers.io().scheduleDirect(() -> {
+                    Log.d("Database clean: started");
+                    try {
+                        final Set<String> geocodes = new HashSet<>();
+                        final String timestampString = Long.toString(System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED);
+                        queryToColl(dbTableCaches,
+                                new String[]{"geocode"},
+                                "detailedupdate < ? AND visiteddate < ? AND geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
+                                new String[]{timestampString, timestampString},
+                                null,
+                                null,
+                                geocodes,
+                                GET_STRING_0);
 
-                    final Set<String> withoutOfflineLogs = exceptCachesWithOfflineLog(geocodes);
-                    Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches");
-                    removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
+                        final Set<String> withoutOfflineLogs = exceptCachesWithOfflineLog(geocodes);
+                        Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches");
+                        removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
 
-                    deleteOrphanedRecords();
+                        deleteOrphanedRecords();
 
-                    // Remove the obsolete "_others" directory where the user avatar used to be stored.
-                    FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory("_others"));
+                        // Remove the obsolete "_others" directory where the user avatar used to be stored.
+                        FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory("_others"));
 
-                    final int version = Version.getVersionCode(context);
-                    if (version > -1) {
-                        Settings.setVersion(version);
+                        final int version = Version.getVersionCode(context);
+                        if (version > -1) {
+                            Settings.setVersion(version);
+                        }
+                    } catch (final Exception e) {
+                        Log.w("DataStore.clean", e);
                     }
-                } catch (final Exception e) {
-                    Log.w("DataStore.clean", e);
-                }
 
-                Log.d("Database clean: finished");
-            });
+                    Log.d("Database clean: finished");
+                });
+            }
         }
     }
 

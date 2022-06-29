@@ -1233,6 +1233,23 @@ public class Settings {
         putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval()));
     }
 
+    public static boolean dbNeedsCleanup() {
+        final int interval = 1; // check once per day
+        // initialization on first run
+        final long lastCheck = getLong(R.string.pref_dbCleanupLastCheck, 0);
+        if (lastCheck == 0) {
+            setDbCleanupLastCheck(false);
+            return false;
+        }
+        // check if interval is completed
+        final long now = System.currentTimeMillis() / 1000;
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+    }
+
+    public static void setDbCleanupLastCheck(final boolean delay) {
+        putLong(R.string.pref_dbCleanupLastCheck, calculateNewTimestamp(delay, 1));
+    }
+
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
         putBoolean(R.string.pref_pqShowDownloadableOnly, showDownloadableOnly);
     }
