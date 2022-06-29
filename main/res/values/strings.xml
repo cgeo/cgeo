@@ -2226,8 +2226,8 @@
     <string name="clipboard_copy_ok">Copied to clipboard</string>
 
     <plurals name="days_ago">
-        <item quantity="zero">Today</item>
-        <item quantity="one">Yesterday</item>
+        <item quantity="zero">%d days ago</item>
+        <item quantity="one">%d day ago</item>
         <item quantity="two">%d days ago</item>
         <item quantity="few">%d days ago</item>
         <item quantity="many">%d days ago</item>
@@ -2235,8 +2235,8 @@
     </plurals>
 
     <plurals name="days_ahead">
-        <item quantity="zero">Today</item>
-        <item quantity="one">Tomorrow</item>
+        <item quantity="zero">In %d days</item>
+        <item quantity="one">In %d day</item>
         <item quantity="two">In %d days</item>
         <item quantity="few">In %d days</item>
         <item quantity="many">In %d days</item>
