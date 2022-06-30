@@ -1896,6 +1896,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_oclock">%s時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
+    <plurals name="days_ago">
+        <item quantity="other">%d日前</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
     <string name="create_shortcut">ショートカットを作成</string>

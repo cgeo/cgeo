@@ -2005,6 +2005,10 @@
     <string name="tts_oclock">kello %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopioitu leikepöydälle</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d päivä sitten</item>
+        <item quantity="other">%d päivää sitten</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>

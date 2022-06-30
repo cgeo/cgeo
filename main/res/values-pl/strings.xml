@@ -23,7 +23,7 @@
     <string name="event">Wydarzenie</string>
     <string name="mega">Mega-Wydarzenie</string>
     <string name="giga">Giga-Wydarzenie</string>
-    <string name="earth">Earthcache</string>
+    <string name="earth">EarthCache</string>
     <string name="cito">CITO</string>
     <string name="webcam">Skrytka Webcam</string>
     <string name="virtual">Wirtualna</string>
@@ -227,7 +227,7 @@
     <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
     <string name="err_auth_initialize">c:geo nie mógł rozpocząć autoryzacji.</string>
     <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
-    <string name="err_cannot_log_visit">c:geo nie może dodać wpisu wizyty. Proszę spróbuj przez szczegóły skrytki.</string>
+    <string name="err_cannot_log_visit">c:geo nie może dodać wpisu wizyty. Proszę spróbuj zalogować swoją wizytę na ekranie szczegółów skrytki.</string>
     <string name="err_download_fail">c:geo nie może załadować skrytek.</string>
     <string name="err_dwld_details_failed">c:geo nie może załadować szczegółów skrytki.</string>
     <string name="err_load_descr_failed">c:geo nie może załadować opisu.</string>
@@ -277,7 +277,7 @@
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
     <string name="warn_notloggedin_title">Tryb offline</string>
-    <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże tylko skrytki przechowywane lokalnie. Kliknij tutaj, aby uzyskać więcej informacji.</string>
+    <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże tylko skrytki przechowywane lokalnie. Dotknij tutaj, aby uzyskać więcej informacji.</string>
     <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrytki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
     <string name="err_read_pocket_query_list">Błąd podczas odczytu listy Pocket query.</string>
     <string name="err_read_bookmark_list">Błąd odczytywania list zakładek.</string>
@@ -367,6 +367,14 @@
     <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
     <string name="caches_store_background_should_force_refresh">Odśwież już pobrane skrytki</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
+    <string name="caches_store_background_result_failed">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
+    <string name="caches_store_background_result_canceled">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d skrytka pobrana</item>
+        <item quantity="few">%d skrytki pobrane</item>
+        <item quantity="many">%d skrytek pobranych</item>
+        <item quantity="other">%d skrytek pobranych</item>
+    </plurals>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -458,7 +466,7 @@
     <string name="list_dialog_create">Utwórz</string>
     <string name="list_dialog_create_err">c:geo nie mógł utworzyć nowej listy</string>
     <string name="list_dialog_remove_title">Usuń listę</string>
-    <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki na tej liście zostaną przeniesione do listy „Zapisane”.</string>
+    <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki z tej listy zostaną przeniesione do listy „Zapisane”.</string>
     <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
     <string name="list_dialog_do_not_ask_me_again">Nie pytaj ponownie o tę listę</string>
     <string name="list_dialog_remove">Usuń</string>
@@ -602,7 +610,7 @@
     <string name="about_changelog_bugfix_release">Wersja z poprawkami błędów</string>
     <string name="about_system">System</string>
     <string name="about_donate">Wesprzyj nas</string>
-    <string name="about_donation_more">Odwiedź stronę po więcej informacji</string>
+    <string name="about_donation_more">Więcej informacji na stronie</string>
     <string name="about_contributors">Współpracownicy</string>
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
@@ -754,8 +762,8 @@
     <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
-    <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
-    <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
+    <string name="init_openlastdetailspage">Ostatnia strona ze szczegółami</string>
+    <string name="init_summary_openlastdetailspage">Otwieraj szczegóły na ostatnio używanej stronie</string>
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
@@ -786,7 +794,7 @@
     <string name="init_prevent_cache_note_merge">Nadpisz osobistą notatkę skrytki</string>
     <string name="init_summary_prevent_cache_note_merge">Jeśli to ustawienie jest włączone, c:geo usunie lokalnie zapisaną notatkę i zastąpi ją notatką osobistą z serwera. Scalanie nie zostanie wykonane.</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
-    <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
+    <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko wtedy, gdy jest zainstalowany Chrome)</string>
     <string name="init_rot13_hint">Szyfruj wskazówkę</string>
     <string name="init_summary_rot13_hint">Pokaż tekst wskazówek zaszyfrowany ROT-13 aż do naciśnięcia</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -859,7 +867,7 @@
     <string name="init_restore_settings_failed">Przywracanie ustawień programu nie powiodło się.</string>
     <string name="init_restore_running">Przywracanie bazy skrytek…</string>
     <string name="init_restore_confirm">Baza danych jest pusta. Czy na pewno chcesz odzyskać bazę danych z kopii zapasowej?</string>
-    <string name="init_backup_last">Kopia dostępna od</string>
+    <string name="init_backup_last">Dostępna kopia zapasowa z</string>
     <string name="init_backup_unavailable">niedostępne</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="init_restore_version_error">Nieoczekiwany format - nie można przywrócić bazy danych.\n\nOczekiwana wersja to %1$d,\nkopia zapasowa ma wersję %2$d</string>
@@ -955,7 +963,7 @@
     <string name="init_maintenance_start">Konserwacja rozpoczęta</string>
     <string name="init_maintenance_finished">Konserwacja zakończona</string>
     <string name="init_location">Geolokalizacja</string>
-    <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Jednakże to przeszkadza w użyciu zewnętrznego odbiornika GPS BlueTooth.</string>
+    <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Uniemożliwia to jednak korzystanie z zewnętrznego odbiornika GPS Bluetooth.</string>
     <string name="init_location_googleplayservices">Użyj usług Google Play</string>
     <string name="init_low_power">Tryb niskiego zużycia energii</string>
     <string name="init_low_power_note">Tryb niskiego zużycia energii pozwala na uniknięcie używania GPS i żyroskopu kiedy bardzo dokładna pozycja nie jest ściśle potrzebna, kosztem dłuższego ustalania pozycji.</string>
@@ -1073,7 +1081,7 @@
     <string name="folder_copy_finished_dialog_message">Zawartość folderu %1$s została skopiowana do %2$s.\n\n%3$s z %4$s i %5$s z %6$s zostały przetworzone.</string>
     <string name="folder_move_finished_dialog_message">Zawartość folderu %1$s została przeniesiona do %2$s.\n\n%3$s z %4$s i %5$s z %6$s zostały przetworzone.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">Operacja nie powiodła się z kodem %1$s podczas przetwarzania pliku %2$s.</string>
-    <string name="folder_move_finished_dialog_tap">Dotknij \'ok\', aby zakończyć zmianę folderu.</string>
+    <string name="folder_move_finished_dialog_tap">Dotknij „ok”, aby zakończyć zmianę folderu.</string>
     <plurals name="file_count">
         <item quantity="one">%1$d plik</item>
         <item quantity="few">%1$d pliki</item>
@@ -1104,7 +1112,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Poniższy proces umożliwi <b>c:geo</b> dostęp do %s.</string>
     <string name="auth_credentials_explain_long">Jeśli masz już konto, wprowadź poniżej poświadczenia konta dla %s:</string>
-    <string name="auth_register_explain">Jeśli nie masz jeszcze konta, kliknij poniżej, aby przejść do strony internetowej usługi w celu utworzenia konta. Upewnij się, że używasz metody z nazwą użytkownika i hasłem, aby utworzyć konto, ponieważ c:geo nie obsługuje logowania przez Google/Apple/Facebook. Po utworzeniu konta może być konieczne sprawdzenie poprawności adresu e-mail, zanim będzie można użyć logowania za pomocą c:geo.</string>
+    <string name="auth_register_explain">Jeśli nie masz jeszcze konta, dotknij poniżej, aby przejść do strony internetowej usługi w celu utworzenia konta. Upewnij się, że używasz metody z nazwą użytkownika i hasłem, aby utworzyć konto, ponieważ c:geo nie obsługuje logowania przez Google/Apple/Facebook. Po utworzeniu konta może być konieczne sprawdzenie poprawności adresu e-mail, zanim będzie można użyć logowania za pomocą c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
     <string name="auth_token_explain_long">Uzupełnienie danych i dotknięcie przycisku „Sprawdź uwierzytelnienie” rozpocznie proces uwierzytelniający. Aplikacja połączy się z %s i sprawdzi Twoje dane uwierzytelniające. To wszystko.</string>
@@ -1185,6 +1193,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacji, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ta osobista notatka będzie obcięta o około %1$d znaków na %3$s (maksymalny rozmiar %2$d).</string>
     <string name="cache_personal_note_upload">Wyślij</string>
     <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
     <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
@@ -1217,7 +1226,7 @@
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak podpowiedzi</string>
     <string name="cache_logs">Dziennik</string>
-    <string name="cache_latest_logs">Najnowsze logi</string>
+    <string name="cache_latest_logs">Ostatnie wpisy</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
     <string name="cache_dialog_loading_details">Ładuję szczegóły skrytki…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
@@ -1353,6 +1362,8 @@
     <string name="image_category_own">Własne</string>
     <string name="image_category_listing">Z opisu</string>
     <string name="image_category_log">Z dziennika</string>
+    <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
+    <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
@@ -1396,8 +1407,8 @@
     <!-- import -->
     <string name="web_import_title">Import z send2cgeo</string>
     <string name="web_import_waiting">Czekam na nowe skrytki z send2cgeo…</string>
-    <string name="web_downloading">Ściąganie</string>
-    <string name="web_downloaded">Ściągnięte</string>
+    <string name="web_downloading">Pobieranie</string>
+    <string name="web_downloaded">Pobrano</string>
     <!-- popup -->
     <string name="popup_more">Więcej szczegółów</string>
     <!-- waypoint -->
@@ -1647,7 +1658,7 @@
     <string name="geokret_type_post">List</string>
     <!-- user -->
     <string name="user_menu_title">O użytkowniku</string>
-    <string name="user_menu_view_hidden">Skrytki ukryte</string>
+    <string name="user_menu_view_hidden">Założone skrytki</string>
     <string name="user_menu_view_found">Znalezione skrytki</string>
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
@@ -1680,7 +1691,7 @@
     <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
     <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
     <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
-    <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
+    <string name="helper_sendtocgeo_description">Wyślij do c:geo (Send2cgeo) jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
@@ -1699,9 +1710,9 @@
     <string name="export_failed">Eksport nie powiódł się</string>
     <string name="export_fieldnotes">Notatki polowe</string>
     <string name="export_fieldnotes_info">Notatki będą wyeksportowane do /sdcard/field-notes z obecną datą i czasem jako nazwą pliku.</string>
-    <string name="export_fieldnotes_upload">Wyślij do geocaching.com</string>
+    <string name="export_fieldnotes_upload">Prześlij do geocaching.com</string>
     <string name="export_fieldnotes_uploading">Wysyłanie…</string>
-    <string name="export_fieldnotes_upload_success">Wysyłanie do geocaching.com zakończone sukcesem</string>
+    <string name="export_fieldnotes_upload_success">Przesyłanie do geocaching.com zakończone powodzeniem</string>
     <string name="export_fieldnotes_onlynew">Tylko od ostatniego eksportu</string>
     <string name="export_fieldnotes_creating">Tworzenie notatek…</string>
     <string name="export_gpx_info">Plik GPX będzie wyeksportowany do %1$s z obecną datą i czasem jako nazwą pliku.</string>
@@ -1994,19 +2005,20 @@
     <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
-    <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
-    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nKliknij aby zainstalować.</string>
-    <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nKliknij aby zainstalować.</string>
+    <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nDotknij, aby zainstalować.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa nocna wersja.\nDotknij, aby zainstalować.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny kandydat na nową wersję.\nDotknij, aby zainstalować.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Zmiany na stronie geocaching.com powodują problemy w c:geo. \nJesteśmy tego świadomi i pracujemy nad tym - prosimy o trochę czasu!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Zmiany na stronie geocaching.com powodują problemy z mapą online w c:geo. \nJesteśmy tego świadomi i pracujemy nad tym - prosimy o trochę czasu!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Strona geocaching.com nie jest w tej chwili (w pełni) dostępna. \nMożesz napotkać różne problemy w c:geo.</string>
-    <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tej wiadomości, aby uzyskać więcej informacji.</string>
+    <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda na to, że używasz starszej wersji Androida. Przyszłe wydania c:geo mogą nie być już dłużej dostępne dla Twojego urządzenia.\nDotknij tę wiadomość, aby uzyskać więcej informacji.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która jest starsza niż rok. Niektóre funkcje mogą już nie działać ze względu na zmiany na stronie internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
     <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
+    <string name="tts_running">Usługa mowy jest uruchomiona…</string>
     <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
@@ -2041,13 +2053,13 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
     <plurals name="days_ago">
-        <item quantity="one">Wczoraj</item>
+        <item quantity="one">%d dzień temu</item>
         <item quantity="few">%d dni temu</item>
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
     </plurals>
     <plurals name="days_ahead">
-        <item quantity="one">Jutro</item>
+        <item quantity="one">Za %d dzień</item>
         <item quantity="few">Za %d dni</item>
         <item quantity="many">Za %d dni</item>
         <item quantity="other">Za %d dni</item>
@@ -2227,15 +2239,19 @@
     <string name="localfile_title">Otwórz plik lokalny</string>
     <string name="localfile_cannot_handle">Błąd odczytu pliku lub c:geo nie może obsłużyć tego typu pliku.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Odbieranie pliku</string>
+    <string name="receivedownload_intenttitle">Pobieranie pliku</string>
     <string name="receivedownload_success">Plik pomyślnie zapisany jako „%s”</string>
-    <string name="receivedownload_error">Błąd podczas odbierania pliku</string>
-    <string name="receivedownload_error_io_exception">Błąd I/O podczas odbierania pliku. Czy Twój folder \"%s\" jest zapisywalny?</string>
-    <string name="receivedownload_error_filenotfound_exception">Nie znaleziono pliku podczas odbierania pliku.</string>
+    <string name="receivedownload_error">Błąd podczas pobierania pliku</string>
+    <string name="receivedownload_error_io_exception">Błąd I/O podczas pobierania pliku. Czy Twój folder „%s” jest zapisywalny?</string>
+    <string name="receivedownload_error_filenotfound_exception">Nie znaleziono pliku podczas pobierania pliku.</string>
     <string name="receivedownload_amount_copied">%s skopiowany</string>
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
+    <string name="delete_offlinemap_title">Usuń mapę offline</string>
+    <string name="no_deletable_offlinemaps">Nie ma map offline do usunięcia</string>
+    <string name="delete_file_confirmation">Usunąć %s?</string>
+    <string name="file_deleted_info">%s usunięto</string>
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
@@ -2276,7 +2292,7 @@
     <string name="mapserver_freizeitkarte_info">Szczegółowe mapy, wymagają jednego z motywów map „freizeitkarte”.</string>
     <string name="mapserver_freizeitkarte_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Freizeitkarte”</string>
     <string name="mapserver_hylly_info">Szczegółowe mapy dla Finlandii wymagają jednego z tematów mapy „Hylly”</string>
-    <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, zbudowany dla map „Hylly”</string>
+    <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>

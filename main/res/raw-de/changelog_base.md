@@ -3,5 +3,5 @@
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 - Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
 - Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
-- New: Option to delete offline maps
-- Fix: Missing trackable count in search results
+- Neu: Option zum Löschen von Offline-Karten
+- Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen

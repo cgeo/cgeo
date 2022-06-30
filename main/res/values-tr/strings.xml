@@ -1902,6 +1902,10 @@
     <string name="tts_oclock">saat %s yönü</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Panoya kopyalandı</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d gün önce</item>
+        <item quantity="other">%d gün önce</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
     <string name="create_shortcut">Kısayol oluştur</string>
