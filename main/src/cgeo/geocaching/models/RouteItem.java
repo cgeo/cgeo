@@ -22,6 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 public class RouteItem implements Parcelable {
     // groups: 1=geocode, 3=wp prefix, 4=additional text
     private static final Pattern GEOINFO_PATTERN = Pattern.compile("^([A-Za-z]{1,2}[0-9A-Za-z]{1,6})(-([A-Za-z0-9]{1,10}))?( .*)?$");
+    private static final Pattern AL_GEOINFO_PATTERN = Pattern.compile("^AL([A-Za-z0-9]+)(-[A-Za-z0-9]+)+( .*)?$");
+    private static final Pattern AL_WAYPOINT_PATTERN = Pattern.compile("(-([0-9]+))?( .*)?$");
 
     // only identifier and point are needed to identify a RouteItem
     private String identifier;
@@ -47,47 +49,66 @@ public class RouteItem implements Parcelable {
 
         // try to parse name string
         if (StringUtils.isNotBlank(name)) {
+            String geocode = null;
+            String prefix = null;
             final MatcherWrapper matches = new MatcherWrapper(GEOINFO_PATTERN, name);
             if (matches.find()) {
-
-                // do we have a valid geocode, and a cache available for it?
-                final String temp = matches.group(1);
-                if (ConnectorFactory.canHandle(temp)) {
-                    final Geocache cache = DataStore.loadCache(temp, LoadFlags.LOAD_CACHE_OR_DB);
-                    if (null != cache) {
-                        cacheGeocode = temp;
-
-                        // if no waypoint data is available: stay with geocache
-                        if (matches.groupCount() < 3 || null == matches.group(3)) {
-                            setDetails(cache);
-                            return;
+                geocode = matches.group(1);
+                if (matches.groupCount() >= 3) {
+                    prefix = matches.group(3);
+                }
+            } else {
+                final MatcherWrapper matchesAL = new MatcherWrapper(AL_GEOINFO_PATTERN, name);
+                if (matchesAL.find()) {
+                    final MatcherWrapper matchesALwpt = new MatcherWrapper(AL_WAYPOINT_PATTERN, name);
+                    if (matchesALwpt.find()) {
+                        geocode = StringUtils.left(name, name.length() - matchesALwpt.group(1).length() - (matchesALwpt.group(3) != null ? matchesALwpt.group(3).length() : 0));
+                        prefix = matchesALwpt.group(2);
+                    } else {
+                        if (matchesAL.groupCount() > 2 && matchesAL.group(3) != null) {
+                            // remove comment at end (if given)
+                            geocode = StringUtils.left(name, name.length() - matchesAL.group(3).length());
+                        } else {
+                            geocode = name;
                         }
+                        prefix = null;
+                    }
+                }
+            }
+            if (StringUtils.isNotBlank(geocode) && ConnectorFactory.canHandle(geocode)) {
+                // do we have a valid geocode, and a cache available for it?
 
-                        // try to extract waypoint data
-                        final String prefix = matches.group(3);
-                        if (StringUtils.isNotBlank(prefix)) {
-                            final List<Waypoint> waypoints = DataStore.loadWaypoints(cacheGeocode);
-                            if (null != waypoints && !waypoints.isEmpty()) {
-                                int counter = 0;
-                                Waypoint tempWaypoint = null;
-                                for (Waypoint waypoint : waypoints) {
-                                    if (prefix.equals(waypoint.getPrefix())) {
-                                        tempWaypoint = waypoint;
-                                        counter++;
-                                    }
-                                }
-                                if (counter == 1) {
-                                    // unique prefix => use waypoint
-                                    setDetails(tempWaypoint);
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                if (null != cache) {
+                    cacheGeocode = geocode;
+
+                    // if no waypoint data is available: stay with geocache
+                    if (StringUtils.isBlank(prefix)) {
+                        setDetails(cache);
+                        return;
+                    }
+
+                    // try to extract waypoint data
+                    final List<Waypoint> waypoints = DataStore.loadWaypoints(cacheGeocode);
+                    if (null != waypoints && !waypoints.isEmpty()) {
+                        int counter = 0;
+                        Waypoint tempWaypoint = null;
+                        for (Waypoint waypoint : waypoints) {
+                            if (prefix.equals(waypoint.getPrefix())) {
+                                tempWaypoint = waypoint;
+                                counter++;
+                            }
+                        }
+                        if (counter == 1) {
+                            // unique prefix => use waypoint
+                            setDetails(tempWaypoint);
+                            return;
+                        } else if (counter > 1) {
+                            // for non-unique prefixes try to find a user-defined waypoint with the same coordinates
+                            for (Waypoint waypoint : waypoints) {
+                                if (point.equalsDecMinute(waypoint.getCoords())) {
+                                    setDetails(waypoint);
                                     return;
-                                } else if (counter > 1) {
-                                    // for non-unique prefixes try to find a user-defined waypoint with the same coordinates
-                                    for (Waypoint waypoint : waypoints) {
-                                        if (point.equalsDecMinute(waypoint.getCoords())) {
-                                            setDetails(waypoint);
-                                            return;
-                                        }
-                                    }
                                 }
                             }
                         }
