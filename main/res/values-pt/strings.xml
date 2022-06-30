@@ -2009,6 +2009,10 @@
     <string name="tts_oclock">%s horas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
+    <plurals name="days_ago">
+        <item quantity="one">Há %d dia</item>
+        <item quantity="other">Há %d dias</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
