@@ -1998,12 +1998,8 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
     <plurals name="days_ago">
-        <item quantity="one">Hier</item>
-        <item quantity="other">Il y a %d jours</item>
-    </plurals>
-    <plurals name="days_ahead">
-        <item quantity="one">Demain</item>
-        <item quantity="other">Dans %d jours</item>
+        <item quantity="one">il y a %d jour</item>
+        <item quantity="other">il y a %d jours</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
