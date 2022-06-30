@@ -2011,11 +2011,11 @@
     <!-- various -->
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
     <plurals name="days_ago">
-        <item quantity="one">Gestern</item>
-        <item quantity="other">Vor %d Tagen</item>
+        <item quantity="one">vor %d Tag</item>
+        <item quantity="other">vor %d Tagen</item>
     </plurals>
     <plurals name="days_ahead">
-        <item quantity="one">Morgen</item>
+        <item quantity="one">In %d Tag</item>
         <item quantity="other">In %d Tagen</item>
     </plurals>
     <!-- shortcuts -->
