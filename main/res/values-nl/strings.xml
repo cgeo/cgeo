@@ -2011,11 +2011,11 @@
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
     <plurals name="days_ago">
-        <item quantity="one">Gisteren</item>
+        <item quantity="one">%d dag geleden</item>
         <item quantity="other">%d dagen geleden</item>
     </plurals>
     <plurals name="days_ahead">
-        <item quantity="one">Morgen</item>
+        <item quantity="one">Over %d dag</item>
         <item quantity="other">Over %d dagen</item>
     </plurals>
     <!-- shortcuts -->
