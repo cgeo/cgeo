@@ -1906,6 +1906,12 @@
     <string name="tts_oclock">%s hodín</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopírované do schránky</string>
+    <plurals name="days_ago">
+        <item quantity="one">pred %d dňom</item>
+        <item quantity="few">pred %d dňami</item>
+        <item quantity="many">pred %d dňami</item>
+        <item quantity="other">pred %d dňami</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
     <string name="create_shortcut">Vytvoriť odkaz</string>
