@@ -24,7 +24,7 @@
 - Zmiana: Ustawienia => Mapa => Długie dotknięcie mapy spowoduje teraz włączenie/wyłączenie długiego dotknięcia mapy skrytek (istotne dla tworzenia nowych punktów nawigacyjnych dla bieżącej skrytki)
 - Zmiana: Nie pokazywanie okręgów odległości dla zarchiwizowanych skrzynek
 - Poprawka: W określonych warunkach występowała awaria na mapach OpenStreetMap
-- Naprawka: Wyznaczanie trasy nie reagowało po zainstalowaniu wielu kafelków routingu
+- Poprawka: Wyznaczanie trasy nie reagowało po zainstalowaniu wielu kafelków routingu
 
 ### Ogólne
 
