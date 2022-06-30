@@ -1555,6 +1555,9 @@
     <string name="tts_oclock">%s小時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">複製到剪貼簿</string>
+    <plurals name="days_ago">
+        <item quantity="other">%d天前</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo捷徑</string>
     <string name="create_shortcut">建立捷徑</string>
