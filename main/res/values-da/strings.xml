@@ -748,7 +748,6 @@
     <string name="init_user_confirmation">Jeg ved, hvad jeg gør</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
-    <string name="init_backup_unnecessary">Database er tom, backup er derfor ikke nødvendig. Opret en backup alligevel?</string>
     <string name="init_backup_folder_exists_error">Kunne ikke oprette en ny mappe til sikkerhedskopier. Har du allerede lavet en sikkerhedskopi inden for det sidste minut?</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
     <string name="backup_confirm_overwrite">Dette vil slette din ældste sikkerhedskopi fra %s. \nVil du fortsætte?</string>
