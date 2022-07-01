@@ -839,7 +839,6 @@
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
-    <string name="init_backup_unnecessary">Il database è vuoto, nessun backup necessario. Creare comunque un backup?</string>
     <string name="init_backup_folder_exists_error">Impossibile creare una nuova cartella di backup. Hai già eseguito un backup nell\'ultimo minuto?</string>
     <string name="init_backup_no_backup_available">Non c\'è nessun file di backup disponibile.</string>
     <string name="backup_confirm_overwrite">Questo eliminerà la cartella di backup esistente più vecchia da %s. \nVuoi continuare?</string>
