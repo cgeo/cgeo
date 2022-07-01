@@ -798,7 +798,6 @@
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
-    <string name="init_backup_unnecessary">データベースが空です。バックアップは必要ありませんが、それでもバックアップを作成しますか?</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
     <string name="backup_confirm_overwrite">一番古いバックアップ(%s)は削除されます。\n続けますか?</string>
