@@ -853,7 +853,6 @@
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
-    <string name="init_backup_unnecessary">Databáze je prázdná, není nutná žádná záloha. Přejete si i nadále vytvořit zálohu?</string>
     <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku zálohy. Neprováděli jste za poslední minutu nějakou zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Tímto odstraníte nejstarší složku zálohy z %s. \nChcete pokračovat?</string>
