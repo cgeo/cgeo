@@ -827,7 +827,6 @@
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
-    <string name="init_backup_unnecessary">데이터베이스가 비어 있으며 백업이 필요하지 않습니다. 그래도 백업을 만드시겠습니까?</string>
     <string name="init_backup_folder_exists_error">새로운 백업 폴더를 만들 수 없습니다. 마지막 순간에 이미 백업을 수행 했습니까?</string>
     <string name="init_backup_no_backup_available">백업할 파일이 없습니다.</string>
     <string name="backup_confirm_overwrite">%s에서 가장 오래된 기존 백업 폴더가 삭제됩니다. \n계속 하시겠습니까?</string>
