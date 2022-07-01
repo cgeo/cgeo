@@ -806,7 +806,6 @@
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
-    <string name="init_backup_unnecessary">Databáza je prázdna, nie je potrebná žiadna záloha. Naďalej vytvárať zálohu?</string>
     <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
     <string name="backup_confirm_overwrite">Tým odstránite priečinok s najstaršou existujúcou zálohou zo %s. \nChcete pokračovať?</string>
