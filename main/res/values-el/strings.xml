@@ -829,7 +829,6 @@
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
-    <string name="init_backup_unnecessary">Η βάση δεδομένων είναι κενή, δεν χρειάζεται αντίγραφο ασφαλείας. Επιμένετε στην δημιουργία του;</string>
     <string name="init_backup_folder_exists_error">Δεν μπορεί να δημιουργηθεί νέος φάκελος αποθήκευσης αντιγράφων ασφαλείας. Έχετε δημιουργήσει ήδη ένα αντίγραφό ασφαλείας το τελευταίο λεπτό;</string>
     <string name="init_backup_no_backup_available">Δεν υπάρχουν διαθέσιμα αντίγραφα ασφαλείας.</string>
     <string name="backup_confirm_overwrite">Αυτό θα διαγράψει τον παλιότερο φάκελο αντίγραφου ασφαλείας από %s. \nΘέλετε να συνεχίσετε;</string>
