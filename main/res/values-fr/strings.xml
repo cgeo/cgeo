@@ -833,7 +833,6 @@
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
-    <string name="init_backup_unnecessary">La base de données est vide, aucune sauvegarde n\'est donc nécessaire. Souhaitez-vous quand même créer une sauvegarde ?</string>
     <string name="init_backup_folder_exists_error">Impossible de créer un nouveau dossier de sauvegarde. Avez-vous déjà effectué une sauvegarde au cours de la dernière minute ?</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
     <string name="backup_confirm_overwrite">Ceci supprimera votre plus ancien dossier de sauvegarde existant de %s. \nVoulez-vous continuer ?</string>
