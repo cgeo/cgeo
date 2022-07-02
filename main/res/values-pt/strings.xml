@@ -2012,6 +2012,10 @@
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
     </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Dentro de %d dia</item>
+        <item quantity="other">Dentro de %d dias</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
@@ -2177,6 +2181,10 @@
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
+    <string name="delete_offlinemap_title">Apagar mapa offline</string>
+    <string name="no_deletable_offlinemaps">Não há mapas offline para apagar</string>
+    <string name="delete_file_confirmation">Apagar %s?</string>
+    <string name="file_deleted_info">%s apagado</string>
     <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_filename">A transferir %s</string>
