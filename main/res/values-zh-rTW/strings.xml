@@ -706,7 +706,6 @@
     <string name="init_user_confirmation">我瞭解我在幹嘛</string>
     <string name="init_backup_success">c:geo的資料庫成功備份到</string>
     <string name="init_backup_failed">備份c:geo資料庫失敗</string>
-    <string name="init_backup_unnecessary">資料庫是空的，不需備份。仍然要備份嗎?</string>
     <string name="init_backup_folder_exists_error">無法產生新的備份目錄。是否剛建立一個新的備份?</string>
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
     <string name="backup_confirm_overwrite">這將從%s刪除您最先前的備份。是否繼續執行?</string>

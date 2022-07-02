@@ -835,7 +835,6 @@
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
-    <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita. Haluatko silti luoda varmuuskopion?</string>
     <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Tämä poistaa vanhimman olemassa olevan varmuuskopiokansiosi kohteesta %s. \nHaluatko jatkaa?</string>

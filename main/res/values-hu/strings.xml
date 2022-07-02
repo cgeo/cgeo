@@ -588,7 +588,6 @@
     <string name="init_backup_restore">Visszaállítás</string>
     <string name="init_backup_success">A c:geo adatbázisának mentése sikerült:</string>
     <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
-    <string name="init_backup_unnecessary">Az adatbázis üres, nincs szükség biztonsági mentésre. Mégis hozzon létre biztonsági másolatot?</string>
     <string name="init_backup_no_backup_available">Nincs elérhető biztonsági mentés.</string>
     <string name="init_restore_success">Visszaállítás kész.</string>
     <string name="init_restore_running">A ládaadatbázis visszaállítása…</string>

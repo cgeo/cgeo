@@ -794,7 +794,6 @@
     <string name="init_user_confirmation">Sé lo que estoy haciendo</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
-    <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad. ¿Quiere crear una copia de seguridad?</string>
     <string name="init_backup_folder_exists_error">No se puede crear una nueva carpeta de copia de seguridad. ¿Ya ha realizado una copia de seguridad en el último minuto?</string>
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
     <string name="backup_confirm_overwrite">Esto eliminará su carpeta más antigua de copia de seguridad existente de %s. \n¿Desea continuar?</string>

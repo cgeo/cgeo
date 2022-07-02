@@ -839,7 +839,6 @@
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
-    <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig. Trotzdem Sicherung erstellen?</string>
     <string name="init_backup_folder_exists_error">Konnte keinen neuen Sicherungsordner erstellen. Hast du innerhalb der letzten Minute bereits eine Sicherung erstellt?</string>
     <string name="init_backup_no_backup_available">Es ist keine Sicherung verfügbar.</string>
     <string name="backup_confirm_overwrite">Dies wird deinen ältesten existierenden Sicherungsordner von %s löschen.\nMöchtest du fortfahren?</string>

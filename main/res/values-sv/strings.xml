@@ -827,7 +827,6 @@
     <string name="init_user_confirmation">Jag vet vad jag gör</string>
     <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
     <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
-    <string name="init_backup_unnecessary">Databasen är tom, säkerhetskopiering behövs inte. Vill du ändå skapa en säkerhetskopia?</string>
     <string name="init_backup_folder_exists_error">Det gick inte att skapa en ny mapp för säkerhetskopior. Har du redan gjort en säkerhetskopia i sista minuten?</string>
     <string name="init_backup_no_backup_available">Ingen backup-fil tillgänglig.</string>
     <string name="backup_confirm_overwrite">Detta kommer att ta bort din äldsta befintliga säkerhetskopieringsmapp från %s. \nVill du fortsätta?</string>

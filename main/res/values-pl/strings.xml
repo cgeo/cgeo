@@ -853,7 +853,6 @@
     <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
-    <string name="init_backup_unnecessary">Baza danych jest pusta, kopia zapasowa nie jest wymagana. Utworzyć kopię zapasową mimo to?</string>
     <string name="init_backup_folder_exists_error">Nie można utworzyć nowego folderu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
     <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego folderu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
