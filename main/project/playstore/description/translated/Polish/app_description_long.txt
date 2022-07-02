@@ -1,30 +1,30 @@
 c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficjalnym klientem dla geocaching.com i oferuje podstawowe wsparcie dla innych platform geocachingowych (takich jak Opencaching). Nie wymaga przeglądarki internetowej ani eksportu - po prostu zainstaluj ją i zacznij od razu.
 
 Główne funkcje:
-- Przeglądaj skrzynki na mapie na żywo
+- Przeglądaj skrytki na mapie na żywo
 - Używaj Map Google lub OpenStreetMap
-- Wyszukaj skrzynki według różnych kryteriów
+- Wyszukaj skrytki według różnych kryteriów
 - Zaloguj swoje znaleziska online lub offline
-- Przechowuj informacje o skrzynkach na swoim urządzeniu
-- Twórz punkty i zarządzaj nimi
+- Przechowuj informacje o skrytkach na swoim urządzeniu
+- Twórz punkty nawigacji i zarządzaj nimi
 - Nawiguj używając kompasu, mapy lub innej aplikacji
 - Importuj / eksportuj pliki GPX
-- Pełne wsparcie dla śledzenia (trackables)
-- Funkcje buforowania offline, w tym mapy offline
+- Pełne wsparcie dla przedmiotów podróżnych (trackables)
+- Funkcje keszowania w trybie offline, włączając w to mapy offline
 
 c: geo to prosty w obsłudze, ale potężny klient geocaching z wieloma dodatkowymi funkcjami. Wszystko, czego potrzebujesz, aby rozpocząć, to istniejące konto na geocaching.com lub innej platformie geocaching (np. Opencaching).
-Znajdź skrzynki przy użyciu mapy na żywo lub jednej z wielu funkcji wyszukiwania.
+Znajdź skrytki przy użyciu mapy na żywo lub jednej z wielu funkcji wyszukiwania.
 
-Nawiguj do skrytki lub do punktu nawigacyjnego skrytki za pomocą wbudowanej funkcji kompasu, mapy lub przekaż współrzędne do różnych aplikacji zewnętrznych (np. Radar, Nawigacja Google, StreetView, Locus, Navigon, Sygic i wiele innych).
+Nawiguj do skrytki lub do punktu nawigacji skrytki za pomocą wbudowanej funkcji kompasu, mapy lub przekaż współrzędne do różnych aplikacji zewnętrznych (np. Radar, Nawigacja Google, StreetView, Locus, Navigon, Sygic i wiele innych).
 
-Przechowuj informacje o skrzynkach na swoim urządzeniu bezpośrednio z geocaching.com, a także za pomocą importu plików GPX, aby były dostępne w dowolnym momencie.
-Możesz zarządzać przechowywanymi skrzynkami na różnych listach oraz sortować i filtrować je zgodnie z własnymi potrzebami.
-Przechowywane skrzynki wraz z plikami map offline lub mapami statycznymi mogą służyć do znajdowania skrzynek bez połączenia z Internetem (np. kiedy jesteś poza krajem).
-Logowania mogą być publikowane online lub przechowywane offline w celu późniejszego przesłania lub eksportowane za pomocą notatek terenowych.
+Przechowuj informacje o skrytkach na swoim urządzeniu bezpośrednio z geocaching.com, a także za pomocą importu plików GPX, aby były dostępne w dowolnym momencie.
+Możesz zarządzać przechowywanymi skrytkami na różnych listach oraz sortować i filtrować je zgodnie z własnymi potrzebami.
+Przechowywane skrytki wraz z plikami map offline lub mapami statycznymi mogą służyć do znajdowania skrytek bez połączenia z Internetem (np. kiedy jesteś poza krajem).
+Wpisy do dziennika znalezień (logbooka) mogą być publikowane online lub przechowywane offline w celu późniejszego przesłania lub eksportowane za pomocą notatek terenowych.
 
-Wyszukuj i odkrywaj Trackables, zarządzaj zasobami możliwymi do wyśledzenia i upuszczaj Trackable podczas publikowania dziennika skrzynki.
+Wyszukuj i odkrywaj przedmioty podróżne, zarządzaj swoim inwentarzem przedmiotów podróżnych oraz umieszczaj przedmioty podróżne podczas publikowania wpisu do dziennika znalezień skrytki.
 
-Jeśli masz problemy z instalacją lub używaniem c: geo, najpierw zapoznaj się z naszym FAQ (https://faq.cgeo.org) lub zapoznaj się z instrukcją obsługi (https://manual.cgeo.org).
+Jeśli masz problemy z instalacją lub używaniem c:geo, najpierw zapoznaj się z naszym FAQ (https://faq.cgeo.org) lub zapoznaj się z instrukcją obsługi (https://manual.cgeo.org).
 Jeśli nadal występują problemy, skontaktuj się z pomocą techniczną za pośrednictwem poczty e-mail.
 
 Jeśli chcesz wiedzieć, dlaczego c:geo potrzebuje wymaganych uprawnień, sprawdź https://www.cgeo.org/faq#permissions aby uzyskać wyjaśnienie.
