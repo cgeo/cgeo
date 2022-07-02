@@ -25,24 +25,29 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
 
+    private final GoogleMapObjects directionObjs;
     private final GoogleMapObjects positionObjs;
     private final GoogleMapObjects trackObjs;
     private final GoogleMapObjects historyObjs;
 
     GoogleMapsPositionLayer(final GoogleMap googleMap, final View root) {
         super(root, LatLng::new);
+        directionObjs = new GoogleMapObjects(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
     }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
-        setCurrentPositionAndHeadingHelper(location, heading, (directionLine) -> positionObjs.addPolyline(new PolylineOptions()
-                .addAll(directionLine)
-                .color(MapLineUtils.getDirectionColor())
-                .width(MapLineUtils.getDirectionLineWidth())
-                .zIndex(ZINDEX_DIRECTION_LINE)
-        ), MAP_GOOGLE);
+        setCurrentPositionAndHeadingHelper(location, heading, (directionLine) -> {
+            directionObjs.removeAll();
+            directionObjs.addPolyline(new PolylineOptions()
+                    .addAll(directionLine)
+                    .color(MapLineUtils.getDirectionColor())
+                    .width(MapLineUtils.getDirectionLineWidth())
+                    .zIndex(ZINDEX_DIRECTION_LINE)
+            );
+        }, MAP_GOOGLE);
     }
 
     // ========================================================================
