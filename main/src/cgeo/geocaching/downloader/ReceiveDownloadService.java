@@ -61,8 +61,7 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
     @Override
     public NotificationCompat.Builder createInitialNotification() {
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.notification_download_receiver_title)
-                .setProgress(100, 0, true)
-                .setOnlyAlertOnce(true);
+                .setProgress(100, 0, true);
     }
 
     @Override

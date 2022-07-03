@@ -120,8 +120,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
-                .addAction(R.drawable.ic_menu_cancel, getString(android.R.string.cancel), actionCancelIntent)
-                .setOnlyAlertOnce(true);
+                .addAction(R.drawable.ic_menu_cancel, getString(android.R.string.cancel), actionCancelIntent);
     }
 
     @Override
@@ -200,7 +199,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     private void showEndNotification(final String text) {
         notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
-                this, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.caches_store_background_title, text).build());
+                this, NotificationChannels.CACHES_DOWNLOADED_NOTIFICATION, R.string.caches_store_background_title, text).setSilent(true).build());
 
     }
 
