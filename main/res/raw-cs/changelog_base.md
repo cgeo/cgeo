@@ -5,3 +5,4 @@
 - Novinka: Klepnutím na volné místo na mapě můžete vytvořit trasový bod nebo uživatelem definovanou kešku, přidat nebo předřadit individuální trasu, zobrazit souřadnice nebo navigovat (v závislosti na kontextu)
 - Novinka: Možnost odstranit offline mapy
 - Oprava: Chybějící počet TB ve výsledcích vyhledávání
+- Oprava: Položky Lab Adventures v jednotlivých trasách nebyly jako takové po úpravě rozpoznány
