@@ -5,3 +5,4 @@
 - Nowość: Dotknij wolne miejsce na mapie, aby utworzyć punkt nawigacji lub skrytkę zdefiniowaną przez użytkownika, dołączyć do początku lub do końca indywidualnej trasy, wyświetlić współrzędne lub nawigować (w zależności od kontekstu)
 - Nowość: Opcja usuwania map offline
 - Poprawka: Brak liczby przedmiotów podróżnych w wynikach wyszukiwania
+- Poprawka: elementy adventure lab na indywidualnych trasach nie były rozpoznawane jako takie po edycji
