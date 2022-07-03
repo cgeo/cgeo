@@ -5,3 +5,4 @@
 - Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
 - Neu: Option zum Löschen von Offline-Karten
 - Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
+- Fix: Lab adventure items in individual routes not recognized as such after edit
