@@ -5,3 +5,4 @@
 - New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
 - New: Option to delete offline maps
 - Fix: Missing trackable count in search results
+- Fix: Lab adventure items in individual routes not recognized as such after edit
