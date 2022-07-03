@@ -38,7 +38,9 @@ public abstract class AbstractForegroundIntentService extends IntentService {
         Log.w(logTag + " - WakeLock acquired");
 
         notificationManager = Notifications.getNotificationManager(this);
-        notification = createInitialNotification();
+        notification = createInitialNotification()
+                .setOnlyAlertOnce(true)
+                .setSilent(true);
 
         startForeground(getForegroundNotificationId(), notification.build());
     }
