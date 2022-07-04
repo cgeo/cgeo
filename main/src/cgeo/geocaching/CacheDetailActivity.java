@@ -95,6 +95,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LifecycleStartedBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -111,11 +112,9 @@ import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -389,7 +388,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         AndroidBeam.enable(this, this);
 
         // get notified on cache changes (e.g.: waypoint creation from map)
-        LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver, new IntentFilter(Intents.INTENT_CACHE_CHANGED));
+        this.getLifecycle().addObserver(new LifecycleStartedBroadcastReceiver(this, Intents.INTENT_CACHE_CHANGED) {
+            /**
+             * Receives update notifications from asynchronous processes
+             */
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -449,7 +456,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
         super.onDestroy();
     }
 
@@ -947,17 +953,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         Settings.addCacheToHistory(cache.getGeocode());
     }
-
-    /**
-     * Receives update notifications from asynchronous processes
-     */
-    private final BroadcastReceiver updateReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            notifyDataSetChanged();
-        }
-    };
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity using the default navigation tool.
