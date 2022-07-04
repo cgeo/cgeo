@@ -134,12 +134,6 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         return false;
     }
 
-    @Override
-    public void onDestroy() {
-        SpeechService.stopService(getActivity());
-        super.onDestroy();
-    }
-
     /**
      * Tries to navigate to the {@link Geocache} of this activity.
      */

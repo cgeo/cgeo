@@ -148,7 +148,6 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public void onDestroy() {
         binding.rose.destroyDrawingCache();
-        SpeechService.stopService(this);
         super.onDestroy();
     }
 
