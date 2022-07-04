@@ -295,6 +295,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testCanParseStatus() throws Exception {
         parseCache(cacheJson);
+        cache.setArchived(false); // make sure the cache is not archived, otherwise disabled will allways return false
         assertThat(cache.isDisabled()).isTrue();
     }
 

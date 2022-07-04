@@ -21,18 +21,19 @@ public class StatusGeocacheFilterTest {
         singleActiveDisabledArchived(false, false, true, false, false, false);
         singleActiveDisabledArchived(true, false, true, false, false, true);
         singleActiveDisabledArchived(false, true, true, false, false, true);
+        singleActiveDisabledArchived(true, true, true, false, false, true);
 
         //exclude disabled
         singleActiveDisabledArchived(false, false, false, true, false, true);
         singleActiveDisabledArchived(true, false, false, true, false, false);
         singleActiveDisabledArchived(false, true, false, true, false, true);
-        singleActiveDisabledArchived(true, true, false, true, false, false);
+        singleActiveDisabledArchived(true, true, false, true, false, true); // archived does win over disabled
 
         //exclude archived
         singleActiveDisabledArchived(false, false, false, false, true, true);
         singleActiveDisabledArchived(true, false, false, false, true, true);
         singleActiveDisabledArchived(false, true, false, false, true, false);
-        singleActiveDisabledArchived(true, true, false, false, true, false);
+        singleActiveDisabledArchived(true, true, false, false, true, false); // archived does win over disabled
 
     }
 
