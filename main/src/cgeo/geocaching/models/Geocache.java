@@ -707,7 +707,8 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean isDisabled() {
-        return BooleanUtils.isTrue(disabled);
+        // a cache can never be disabled and archived at the same time, so the archived state should win (see #11428)
+        return !isArchived() && BooleanUtils.isTrue(disabled);
     }
 
     public boolean isPremiumMembersOnly() {
