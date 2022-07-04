@@ -21,8 +21,11 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
@@ -194,7 +197,7 @@ public class SpeechService extends Service implements OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    public static void startService(final Activity activity, final Geopoint dstCoords) {
+    private static void startService(final Activity activity, final Geopoint dstCoords) {
         synchronized (startingActivityLock) {
             startingActivity = activity;
         }
@@ -203,7 +206,7 @@ public class SpeechService extends Service implements OnInitListener {
         activity.startService(talkingService);
     }
 
-    public static void stopService(final Activity activity) {
+    private static void stopService(final Activity activity) {
         synchronized (startingActivityLock) {
             if (activity.stopService(new Intent(activity, SpeechService.class))) {
                 ActivityMixin.showShortToast(activity, activity.getString(R.string.tts_stopped));
@@ -212,16 +215,21 @@ public class SpeechService extends Service implements OnInitListener {
         }
     }
 
-    public static void toggleService(final Activity activity, final Geopoint dstCoords) {
+    public static void toggleService(final ComponentActivity activity, final Geopoint dstCoords) {
         if (isRunning()) {
             stopService(activity);
         } else {
             startService(activity, dstCoords);
+            activity.getLifecycle().addObserver(new DefaultLifecycleObserver() {
+                @Override
+                public void onDestroy(@NonNull final LifecycleOwner owner) {
+                    stopService(activity);
+                }
+            });
         }
     }
 
     public static boolean isRunning() {
         return startingActivity != null;
     }
-
 }
