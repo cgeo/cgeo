@@ -8,7 +8,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
@@ -18,6 +17,9 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,9 +34,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * TODO: Currently this is an ALPHA feature. Before releasing, all hardcoded strings should be localized.
- */
 public class CacheDownloaderService extends AbstractForegroundIntentService {
     static {
         logTag = "CacheDownloaderService";
@@ -60,12 +59,36 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
             return;
         }
+        if (isOffline) {
+            downloadCachesInternal(context, geocodes, null, defaultForceRedownload, onStartCallback);
+            return;
+        }
+        if (DataStore.getUnsavedGeocodes(geocodes).size() == geocodes.size()) {
+            askForListsIfNecessaryAndDownload(context, geocodes, false, false, onStartCallback);
+            return;
+        }
 
-        Dialogs.confirmWithCheckbox(context, "Warning", "This feature is untested and can lead to unexpected behaviour or may even break your database.\n\nWe recommend to do a backup before using the feature, just to be save.",
-                CheckboxDialogConfig.newCheckbox(R.string.caches_store_background_should_force_refresh)
-                        .setCheckedOnInit(defaultForceRedownload)
-                        .setVisible(!isOffline),
-                forceRedownload -> askForListsIfNecessaryAndDownload(context, geocodes, forceRedownload, isOffline, onStartCallback), null);
+        // some caches are already stored offline, thus show the advanced selection dialog
+
+        final View content = LayoutInflater.from(context).inflate(R.layout.dialog_background_download_config, null);
+        final RadioGroup radioGroup = (RadioGroup) content.findViewById(R.id.radioGroup);
+
+        Dialogs.newBuilder(context)
+                .setView(content)
+                .setTitle(R.string.caches_store_background_title)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    final int id = radioGroup.getCheckedRadioButtonId();
+                    if (id == R.id.radio_button_refresh) {
+                        askForListsIfNecessaryAndDownload(context, geocodes, true, false, onStartCallback);
+                    } else if (id == R.id.radio_button_add_to_list) {
+                        askForListsIfNecessaryAndDownload(context, geocodes, false, false, onStartCallback);
+                    } else {
+                        askForListsIfNecessaryAndDownload(context, DataStore.getUnsavedGeocodes(geocodes), false, false, onStartCallback);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+
     }
 
     public static void refreshCache(final Activity context, final String geocode, final boolean isOffline) {
@@ -99,6 +122,11 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 newGeocodes.add(geocode);
             }
         }
+
+        if (newGeocodes.isEmpty()) {
+            return;
+        }
+
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
         ContextCompat.startForegroundService(context, intent);

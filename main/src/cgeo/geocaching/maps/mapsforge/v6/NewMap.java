@@ -125,7 +125,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -484,7 +483,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else if (id == R.id.menu_store_caches) {
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
-            return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
+            return storeCaches(DataStore.getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
         } else if (id == R.id.menu_store_caches_background) {
             final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
             CacheDownloaderService.downloadCaches(this, visibleCacheGeocodes, false, false, () -> caches.invalidate(visibleCacheGeocodes));
@@ -587,16 +586,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         postZoomToViewport(viewport);
     }
 
-    private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
-        final Set<String> unsavedGeocodes = new HashSet<>();
 
-        for (final String geocode : geocodes) {
-            if (!DataStore.isOffline(geocode, null)) {
-                unsavedGeocodes.add(geocode);
-            }
-        }
-        return unsavedGeocodes;
-    }
 
     private boolean storeCaches(final Set<String> geocodes) {
         if (!caches.isDownloading()) {

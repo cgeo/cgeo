@@ -1473,11 +1473,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void refreshInBackground(final List<Geocache> caches) {
         if (type.isStoredInDatabase && caches.size() > REFRESH_WARNING_THRESHOLD) {
             SimpleDialog.of(this).setTitle(R.string.caches_refresh_all).setMessage(R.string.caches_refresh_all_warning).confirm((dialog, id) -> {
-                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, null);
+                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList);
                 dialog.cancel();
             });
         } else {
-            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, null);
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList);
         }
     }
 
