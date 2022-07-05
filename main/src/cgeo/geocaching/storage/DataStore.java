@@ -2003,6 +2003,17 @@ public class DataStore {
         return false;
     }
 
+    public static Set<String> getUnsavedGeocodes(@NonNull final Set<String> geocodes) {
+        final Set<String> unsavedGeocodes = new HashSet<>();
+
+        for (final String geocode : geocodes) {
+            if (!isOffline(geocode, null)) {
+                unsavedGeocodes.add(geocode);
+            }
+        }
+        return unsavedGeocodes;
+    }
+
     @Nullable
     public static String getGeocodeForGuid(final String guid) {
         if (StringUtils.isBlank(guid)) {

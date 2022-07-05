@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="25dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/text_default"
+        android:paddingVertical="10dp"
+        android:text="@string/caches_store_background_already_stored"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:checkedButton="@id/radio_button_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radio_button_nothing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/caches_store_background_option_nothing"/>
+        <RadioButton
+            android:id="@+id/radio_button_add_to_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/caches_store_background_option_add_to_list"/>
+        <RadioButton
+            android:id="@+id/radio_button_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/caches_store_background_option_refresh"/>
+    </RadioGroup>
+</LinearLayout>

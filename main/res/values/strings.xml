@@ -392,8 +392,11 @@
     <string name="caches_store_selected">Store Selected</string>
     <string name="caches_store_background">Background download (Experimental!)</string>
     <string name="caches_store_refresh_background">Background refresh (Experimental!)</string>
-    <string name="caches_store_background_should_force_refresh">Refresh already downloaded caches</string>
     <string name="caches_store_background_title">Download caches</string>
+    <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
+    <string name="caches_store_background_option_nothing">Do nothing</string>
+    <string name="caches_store_background_option_add_to_list">Add to list</string>
+    <string name="caches_store_background_option_refresh">Refresh and add to list</string>
     <string name="caches_store_background_result_failed">Download failed, %1$d/%2$d caches were downloaded</string>
     <string name="caches_store_background_result_canceled">Download canceled, %1$d/%2$d caches were downloaded</string>
     <plurals name="caches_store_background_result">
