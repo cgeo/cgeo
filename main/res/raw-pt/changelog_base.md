@@ -5,3 +5,4 @@
 - Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
 - Novo: Opção para apagar mapas offline
 - Correcção: Inclusão de trackables em falta nos resultados de pesquisa
+- Fix: Lab adventure items in individual routes not recognized as such after edit

@@ -5,3 +5,4 @@
 - Uusi: Napauta vapaata karttatilaa luodaksesi reittipisteen tai käyttäjän määrittelemän kätkön, liittääksesi tai esiladataksesi yksittäisiä reittejä, näyttääksesi koordinaatit tai navigoidaksesi (kontekstista riippuen)
 - New: Option to delete offline maps
 - Fix: Missing trackable count in search results
+- Fix: Lab adventure items in individual routes not recognized as such after edit
