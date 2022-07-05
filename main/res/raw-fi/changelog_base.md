@@ -3,6 +3,6 @@
 - Muutos: Poista kokorajan tarkistus tallennettaessa reittipisteitä henkilökohtaisiin muistiinpanoihin
 - Korjaus: Älä näytä arkistoitujen kätköjen reittipisteiden ympyröitä
 - Uusi: Napauta vapaata karttatilaa luodaksesi reittipisteen tai käyttäjän määrittelemän kätkön, liittääksesi tai esiladataksesi yksittäisiä reittejä, näyttääksesi koordinaatit tai navigoidaksesi (kontekstista riippuen)
-- New: Option to delete offline maps
-- Fix: Missing trackable count in search results
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Uusi: Mahdollisuus poistaa offline-kartat
+- Korjaus: Puuttuva matkaajien määrä hakutuloksissa
+- Korjaus: Lab adventure kohteita yksittäisillä reiteillä joita ei ole tunnistettu muokkauksen jälkeen
