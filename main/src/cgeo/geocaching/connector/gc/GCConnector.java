@@ -522,7 +522,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getWaypointGpxId(final String prefix, @NonNull final String geocode) {
+    @NonNull
+    public String getWaypointGpxId(@NonNull final String prefix, @NonNull final String geocode) {
         String gpxId = prefix;
         if (StringUtils.isNotBlank(geocode) && geocode.length() > 2) {
             gpxId += geocode.substring(2);
