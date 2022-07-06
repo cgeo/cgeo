@@ -361,7 +361,6 @@
     <string name="caches_store_selected">Geselecteerden opslaan</string>
     <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
     <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
-    <string name="caches_store_background_should_force_refresh">Vernieuwen reeds gedownloade caches</string>
     <string name="caches_store_background_title">Caches downloaden</string>
     <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
     <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
