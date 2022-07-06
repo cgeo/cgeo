@@ -361,7 +361,6 @@
     <string name="caches_store_selected">Salva selezionati</string>
     <string name="caches_store_background">Download in background (Sperimentale!)</string>
     <string name="caches_store_refresh_background">Aggiornamento sfondo (Sperimentale!)</string>
-    <string name="caches_store_background_should_force_refresh">Aggiorna cache già scaricate</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_result_failed">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
     <string name="caches_store_background_result_canceled">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
