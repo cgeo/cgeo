@@ -365,8 +365,11 @@
     <string name="caches_store_selected">Zapisz wybrane</string>
     <string name="caches_store_background">Pobieranie w tle (eksperymentalne!)</string>
     <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
-    <string name="caches_store_background_should_force_refresh">Odśwież już pobrane skrytki</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
+    <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
+    <string name="caches_store_background_option_nothing">Nic nie rób</string>
+    <string name="caches_store_background_option_add_to_list">Dodaj do listy</string>
+    <string name="caches_store_background_option_refresh">Odśwież i dodaj do listy</string>
     <string name="caches_store_background_result_failed">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
     <string name="caches_store_background_result_canceled">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
     <plurals name="caches_store_background_result">
