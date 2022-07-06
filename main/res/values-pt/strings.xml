@@ -361,7 +361,6 @@
     <string name="caches_store_selected">Memorizar seleccionada(s)</string>
     <string name="caches_store_background">Transferência em segundo plano (Experimental!)</string>
     <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
-    <string name="caches_store_background_should_force_refresh">Actualizar caches já transferidas</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
     <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
