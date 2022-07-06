@@ -978,7 +978,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         item.setChecked(true);
     }
 
-    private boolean storeCaches(final Set<String> geocodesInViewport) {
+    private boolean storeCaches(@NonNull final Set<String> geocodesInViewport) {
         if (!isLoading()) {
             if (geocodesInViewport.size() == 0) {
                 ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
@@ -1013,6 +1013,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     /**
      * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */
+    @NonNull
     private Set<String> getGeocodesForCachesInViewport() {
         final Set<String> geocodes = new HashSet<>();
         final List<Geocache> cachesProtected = caches.getAsList();
@@ -1032,6 +1033,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         return geocodes;
     }
 
+    @NonNull
     private Set<String> getUnsavedGeocodes(final Set<String> geocodes) {
         final Set<String> unsavedGeocodes = new HashSet<>();
 
@@ -1545,7 +1547,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      *
      * @param listIds the lists to store the caches in
      */
-    private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
+    private void storeCaches(@NonNull final Set<String> geocodes, @NonNull final Set<Integer> listIds) {
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(this);
 
         waitDialog = new ProgressDialog(activity);
@@ -1582,11 +1584,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private class LoadDetails extends Thread {
 
+        @NonNull
         private final DisposableHandler handler;
+        @NonNull
         private final Set<String> geocodes;
+        @NonNull
         private final Set<Integer> listIds;
 
-        LoadDetails(final DisposableHandler handler, final Set<String> geocodes, final Set<Integer> listIds) {
+        LoadDetails(@NonNull final DisposableHandler handler, @NonNull final Set<String> geocodes, @NonNull final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listIds = listIds;

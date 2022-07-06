@@ -581,9 +581,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         postZoomToViewport(viewport);
     }
 
-
-
-    private boolean storeCaches(final Set<String> geocodes) {
+    private boolean storeCaches(@NonNull final Set<String> geocodes) {
         if (!caches.isDownloading()) {
             if (geocodes.isEmpty()) {
                 ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
@@ -926,7 +924,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
      *
      * @param listIds the lists to store the caches in
      */
-    private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
+    private void storeCaches(@NonNull final Set<String> geocodes, @NonNull final Set<Integer> listIds) {
 
         final int count = geocodes.size();
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(count, this);
@@ -1567,11 +1565,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private class LoadDetails extends Thread {
 
+        @NonNull
         private final DisposableHandler handler;
+        @NonNull
         private final Collection<String> geocodes;
+        @NonNull
         private final Set<Integer> listIds;
 
-        LoadDetails(final DisposableHandler handler, final Collection<String> geocodes, final Set<Integer> listIds) {
+        LoadDetails(@NonNull final DisposableHandler handler, @NonNull final Collection<String> geocodes, @NonNull final Set<Integer> listIds) {
             this.handler = handler;
             this.geocodes = geocodes;
             this.listIds = listIds;

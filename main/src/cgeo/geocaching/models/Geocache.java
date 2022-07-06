@@ -995,12 +995,12 @@ public class Geocache implements IWaypoint {
         return result;
     }
 
-    @Nullable
+    @NonNull
     private String imageUrlForSpoilerCompare(@Nullable final String url) {
         if (url == null) {
             return "";
         }
-        return Uri.parse(url).getLastPathSegment();
+        return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
     }
 
     /**
@@ -1959,7 +1959,7 @@ public class Geocache implements IWaypoint {
      * @return true, if the cache was stored successfully
      */
     @WorkerThread
-    public static boolean storeCache(final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
+    public static boolean storeCache(@Nullable final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
         try {
             final Geocache cache;
             // get cache details, they may not yet be complete
