@@ -472,6 +472,21 @@ public class GeocacheTest extends CGeoTestCase {
         }
     }
 
+    public static void testDisabledArchivedCombinations() {
+        final Geocache cache = new Geocache();
+        assertThat(cache.isDisabled()).isFalse();
+        assertThat(cache.isArchived()).isFalse();
+        cache.setDisabled(true);
+        assertThat(cache.isDisabled()).isTrue();
+        assertThat(cache.isArchived()).isFalse();
+        cache.setArchived(true);
+        assertThat(cache.isDisabled()).isFalse();
+        assertThat(cache.isArchived()).isTrue();
+        cache.setArchived(false);
+        assertThat(cache.isDisabled()).isTrue();
+        assertThat(cache.isArchived()).isFalse();
+    }
+
     public static void testMergeDownloaded() {
         final Geocache previous = new Geocache();
         previous.setGeocode("GC12345");
