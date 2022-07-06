@@ -19,7 +19,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
@@ -70,9 +69,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
@@ -84,7 +81,6 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -118,7 +114,6 @@ import androidx.core.util.Supplier;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
@@ -128,7 +123,6 @@ import java.util.concurrent.RejectedExecutionException;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.core.model.BoundingBox;
@@ -176,8 +170,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private Geopoint lastNavTarget = null;
     private final Queue<String> popupGeocodes = new ConcurrentLinkedQueue<>();
 
-    private ProgressDialog waitDialog;
-    private LoadDetails loadDetailsThread;
     private ProgressBar spinner;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -205,9 +197,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     // ShowProgressHandler
     public static final int HIDE_PROGRESS = 0;
     public static final int SHOW_PROGRESS = 1;
-    // LoadDetailsHandler
-    public static final int UPDATE_PROGRESS = 0;
-    public static final int FINISHED_LOADING_DETAILS = 1;
 
     private Viewport lastViewport = null;
     private boolean lastCompactIconMode = false;
@@ -413,16 +402,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             }
             itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 
-            final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
-
-            menu.findItem(R.id.menu_store_caches).setVisible(false);
-            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !visibleCacheGeocodes.isEmpty());
-
-            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
-            menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
-            if (!BranchDetectionHelper.isProductionBuild()) {
-                menu.findItem(R.id.menu_store_caches_background).setVisible(!caches.isDownloading() && !visibleCacheGeocodes.isEmpty());
-            }
+            menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !caches.getVisibleCacheGeocodes().isEmpty());
 
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
@@ -478,10 +458,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
         } else if (id == R.id.menu_store_caches) {
-            return storeCaches(caches.getVisibleCacheGeocodes());
-        } else if (id == R.id.menu_store_unsaved_caches) {
-            return storeCaches(DataStore.getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
-        } else if (id == R.id.menu_store_caches_background) {
             final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
             CacheDownloaderService.downloadCaches(this, visibleCacheGeocodes, false, false, () -> caches.invalidate(visibleCacheGeocodes));
         } else if (id == R.id.menu_theme_mode) {
@@ -579,25 +555,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         switchMyLocationButton();
         mapView.getModel().mapViewPosition.setMapPosition(new MapPosition(new LatLong(latitude, longitude), (byte) mapView.getMapZoomLevel()));
         postZoomToViewport(viewport);
-    }
-
-
-
-    private boolean storeCaches(final Set<String> geocodes) {
-        if (!caches.isDownloading()) {
-            if (geocodes.isEmpty()) {
-                ActivityMixin.showToast(this, res.getString(R.string.warn_save_nothing));
-                return true;
-            }
-
-            if (Settings.getChooseList()) {
-                // let user select list to store cache in
-                new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title, selectedListIds -> storeCaches(geocodes, selectedListIds), true, Collections.emptySet(), false);
-            } else {
-                storeCaches(geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
-            }
-        }
-        return true;
     }
 
     private void menuCompass() {
@@ -890,10 +847,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     protected void onStop() {
         Log.d("NewMap: onStop");
-
-        waitDialog = null;
         terminateLayers();
-
         super.onStop();
     }
 
@@ -919,46 +873,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             this.tileLayer.getTileLayer().onDestroy();
             this.tileLayer = null;
         }
-    }
-
-    /**
-     * store caches, invoked by "store offline" menu item
-     *
-     * @param listIds the lists to store the caches in
-     */
-    private void storeCaches(final Set<String> geocodes, final Set<Integer> listIds) {
-
-        final int count = geocodes.size();
-        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler(count, this);
-
-        waitDialog = new ProgressDialog(this);
-        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        waitDialog.setCancelable(true);
-        waitDialog.setCancelMessage(loadDetailsHandler.disposeMessage());
-        waitDialog.setMax(count);
-        waitDialog.setOnCancelListener(arg0 -> {
-            try {
-                if (loadDetailsThread != null) {
-                    loadDetailsThread.stopIt();
-                }
-            } catch (final Exception e) {
-                Log.e("CGeoMap.storeCaches.onCancel", e);
-            }
-        });
-
-        final float etaTime = count * 7.0f / 60.0f;
-        final int roundedEta = Math.round(etaTime);
-        if (etaTime < 0.4) {
-            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-        } else {
-            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, roundedEta, roundedEta));
-        }
-        loadDetailsHandler.setStart();
-
-        waitDialog.show();
-
-        loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes, listIds);
-        loadDetailsThread.start();
     }
 
     @Override
@@ -1207,71 +1121,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 return;
             }
             map.spinner.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
-
-    }
-
-    private static final class LoadDetailsHandler extends DisposableHandler {
-
-        private final int detailTotal;
-        private int detailProgress;
-        private long detailProgressTime;
-        private final WeakReference<NewMap> mapRef;
-
-        LoadDetailsHandler(final int detailTotal, final NewMap map) {
-            super();
-
-            this.detailTotal = detailTotal;
-            this.detailProgress = 0;
-            this.mapRef = new WeakReference<>(map);
-        }
-
-        public void setStart() {
-            detailProgressTime = System.currentTimeMillis();
-        }
-
-        @Override
-        public void handleRegularMessage(final Message msg) {
-            final NewMap map = mapRef.get();
-            if (map == null) {
-                return;
-            }
-            if (msg.what == UPDATE_PROGRESS) {
-                if (detailProgress < detailTotal) {
-                    detailProgress++;
-                }
-                if (map.waitDialog != null) {
-                    final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    final int secondsRemaining;
-                    if (detailProgress > 0) {
-                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
-                    } else {
-                        secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
-                    }
-
-                    map.waitDialog.setProgress(detailProgress);
-                    if (secondsRemaining < 40) {
-                        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getString(R.string.caches_eta_ltm));
-                    } else {
-                        final int minsRemaining = secondsRemaining / 60;
-                        map.waitDialog.setMessage(map.res.getString(R.string.caches_downloading) + " " + map.res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining, minsRemaining));
-                    }
-                }
-            } else if (msg.what == FINISHED_LOADING_DETAILS && map.waitDialog != null) {
-                map.waitDialog.dismiss();
-                map.waitDialog.setOnCancelListener(null);
-            }
-        }
-
-        @Override
-        public void handleDispose() {
-            final NewMap map = mapRef.get();
-            if (map == null) {
-                return;
-            }
-            if (map.loadDetailsThread != null) {
-                map.loadDetailsThread.stopIt();
-            }
         }
 
     }
@@ -1559,54 +1408,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void savePrefs() {
         Settings.setMapZoom(this.mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
-    }
-
-    /**
-     * Thread to store the caches in the viewport. Started by Activity.
-     */
-
-    private class LoadDetails extends Thread {
-
-        private final DisposableHandler handler;
-        private final Collection<String> geocodes;
-        private final Set<Integer> listIds;
-
-        LoadDetails(final DisposableHandler handler, final Collection<String> geocodes, final Set<Integer> listIds) {
-            this.handler = handler;
-            this.geocodes = geocodes;
-            this.listIds = listIds;
-        }
-
-        public void stopIt() {
-            handler.dispose();
-        }
-
-        @Override
-        public void run() {
-            if (CollectionUtils.isEmpty(geocodes)) {
-                return;
-            }
-
-            for (final String geocode : geocodes) {
-                try {
-                    if (handler.isDisposed()) {
-                        break;
-                    }
-                    Geocache.storeCache(null, geocode, listIds, false, handler);
-                } catch (final Exception e) {
-                    Log.e("CGeoMap.LoadDetails.run", e);
-                } finally {
-                    handler.sendEmptyMessage(UPDATE_PROGRESS);
-                }
-            }
-
-            // we're done, but map might even have been closed.
-            if (caches != null) {
-                caches.invalidate(geocodes);
-            }
-            invalidateOptionsMenuCompatible();
-            handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
-        }
     }
 
     @Override

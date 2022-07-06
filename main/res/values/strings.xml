@@ -388,10 +388,7 @@
 
     <string name="caches_store_offline">Store Offline</string>
     <string name="caches_store_all">Store All</string>
-    <string name="caches_store_unsaved">Store Unsaved</string>
     <string name="caches_store_selected">Store Selected</string>
-    <string name="caches_store_background">Background download (Experimental!)</string>
-    <string name="caches_store_refresh_background">Background refresh (Experimental!)</string>
     <string name="caches_store_background_title">Download caches</string>
     <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
     <string name="caches_store_background_option_nothing">Do nothing</string>
