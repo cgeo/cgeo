@@ -19,6 +19,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.core.util.Consumer;
 
@@ -115,7 +116,8 @@ public class SearchResult implements Parcelable {
         this(null, geocodes, geocodes.size());
     }
 
-    private SearchResult(final Parcel in) {
+    @VisibleForTesting
+    SearchResult(final Parcel in) {
         final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
         geocodes.addAll(list);
@@ -249,6 +251,12 @@ public class SearchResult implements Parcelable {
         synchronized (this.connectorContext) {
             setter.accept(getConnectorContext(con));
         }
+    }
+
+    @VisibleForTesting
+    @Nullable
+    String getFinder() {
+        return this.finder;
     }
 
     public void setFinder(@NonNull final String finder) {

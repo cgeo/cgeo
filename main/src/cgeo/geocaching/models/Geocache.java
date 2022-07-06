@@ -222,6 +222,7 @@ public class Geocache implements IWaypoint {
      * @param other the other version, or null if non-existent
      * @return true if this cache is "equal" to the other version
      */
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public boolean gatherMissingFrom(@Nullable final Geocache other) {
         if (other == null) {
             return false;
@@ -473,7 +474,7 @@ public class Geocache implements IWaypoint {
                 Objects.equals(logCounts, other.logCounts) &&
                 Objects.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined &&
-                finder.equals(other.finder);
+                Objects.equals(finder, other.finder);
     }
 
     public boolean hasTrackables() {
@@ -1934,15 +1935,15 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
-    public Disposable refresh(final DisposableHandler handler, final Scheduler scheduler) {
+    public Disposable refresh(@NonNull final DisposableHandler handler, @NonNull final Scheduler scheduler) {
         return scheduler.scheduleDirect(() -> refreshSynchronous(handler));
     }
 
-    public void refreshSynchronous(final DisposableHandler handler) {
+    public void refreshSynchronous(@NonNull final DisposableHandler handler) {
         refreshSynchronous(handler, lists);
     }
 
-    public void refreshSynchronous(final DisposableHandler handler, final Set<Integer> additionalListIds) {
+    public void refreshSynchronous(@Nullable final DisposableHandler handler, @NonNull final Set<Integer> additionalListIds) {
         final Set<Integer> combinedListIds = new HashSet<>(lists);
         combinedListIds.addAll(additionalListIds);
         storeCache(null, geocode, combinedListIds, true, handler);
@@ -1959,7 +1960,8 @@ public class Geocache implements IWaypoint {
      * @return true, if the cache was stored successfully
      */
     @WorkerThread
-    public static boolean storeCache(@Nullable final Geocache origCache, final String geocode, final Set<Integer> lists, final boolean forceRedownload, final DisposableHandler handler) {
+    @SuppressWarnings("PMD.NPathComplexity")
+    public static boolean storeCache(@Nullable final Geocache origCache, @Nullable final String geocode, @NonNull final Set<Integer> lists, final boolean forceRedownload, @Nullable final DisposableHandler handler) {
         try {
             final Geocache cache;
             // get cache details, they may not yet be complete
@@ -2140,7 +2142,7 @@ public class Geocache implements IWaypoint {
      *
      * @param spoilers the list to add to
      */
-    private void addLocalSpoilersTo(final List<Image> spoilers) {
+    private void addLocalSpoilersTo(@NonNull final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
             final Folder spoilerFolder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
@@ -2165,7 +2167,7 @@ public class Geocache implements IWaypoint {
      * Gets whether the user has logged the specific log type for this cache. Only checks the currently stored logs of
      * the cache, so the result might be wrong.
      */
-    public boolean hasOwnLog(final LogType logType) {
+    public boolean hasOwnLog(@NonNull final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
             if (logEntry.getType() == logType && logEntry.isOwn()) {
                 return true;
@@ -2288,7 +2290,7 @@ public class Geocache implements IWaypoint {
     /**
      * Show the hint as toast message. If no hint is available, a default "no hint available" will be shown instead.
      */
-    public void showHintToast(final Activity activity) {
+    public void showHintToast(@NonNull final Activity activity) {
         final String hint = getHint();
         ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
     }
@@ -2299,7 +2301,7 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
-    public static String getAlternativeListingText(final String alternativeCode) {
+    public static String getAlternativeListingText(@NonNull final String alternativeCode) {
         return CgeoApplication.getInstance().getResources()
                 .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()) +
                 ": <a href=\"https://coord.info/" +
@@ -2341,7 +2343,7 @@ public class Geocache implements IWaypoint {
     /**
      * used for online search metainfos (e.g. finder)
      */
-    public void setSearchFinder(final String finder) {
+    public void setSearchFinder(@Nullable final String finder) {
         this.finder = finder;
     }
 }

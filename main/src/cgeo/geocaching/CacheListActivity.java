@@ -1490,7 +1490,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private void refreshStoredInternal(final List<Geocache> caches, final Set<Integer> additionalListIds) {
+    private void refreshStoredInternal(final List<Geocache> caches, @NonNull final Set<Integer> additionalListIds) {
         detailProgress.set(0);
 
         showProgress(false);
@@ -1553,7 +1553,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Method to asynchronously refresh the caches details.
      */
-    private void loadDetails(final DisposableHandler handler, final List<Geocache> caches, final Set<Integer> additionalListIds) {
+    private void loadDetails(final DisposableHandler handler, final List<Geocache> caches, @NonNull final Set<Integer> additionalListIds) {
         final Observable<Geocache> allCaches;
         allCaches = Observable.fromIterable(caches);
         final Observable<Geocache> loaded = allCaches.flatMap((Function<Geocache, Observable<Geocache>>) cache -> Observable.create((ObservableOnSubscribe<Geocache>) emitter -> {
