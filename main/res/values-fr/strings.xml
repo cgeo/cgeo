@@ -361,7 +361,6 @@
     <string name="caches_store_selected">Enregistrer la sélection</string>
     <string name="caches_store_background">Téléchargement en arrière-plan (expérimental)</string>
     <string name="caches_store_refresh_background">Actualisation en arrière-plan (expérimental)</string>
-    <string name="caches_store_background_should_force_refresh">Actualiser les caches téléchargées</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
