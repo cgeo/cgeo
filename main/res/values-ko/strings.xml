@@ -359,7 +359,6 @@
     <string name="caches_store_selected">선택한 것 저장</string>
     <string name="caches_store_background">백그라운드 다운로드(실험적!)</string>
     <string name="caches_store_refresh_background">백그라운드 새로 고침(실험적!)</string>
-    <string name="caches_store_background_should_force_refresh">이미 다운로드한 캐시 새로 고침</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
     <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
