@@ -10,7 +10,6 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class CalendarAdder {

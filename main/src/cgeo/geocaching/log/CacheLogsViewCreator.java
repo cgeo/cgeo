@@ -9,6 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.TooltipCompat;
 
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
@@ -138,12 +141,14 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
+    protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, @NonNull final LogEntry log) {
         final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-        if (getCache().canShareLog(log)) {
-            ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> getCache().shareLog(activity, log));
+        final String logUrl = getCache().getLogUrl(log);
+        final boolean canShareLog = StringUtils.isNotBlank(logUrl);
+        if (canShareLog) {
+            ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> ShareUtils.shareLink(activity, getCache().getShareSubject(), logUrl));
             ctxMenu.addItem(activity.getString(R.string.cache_menu_browser),
-                    R.drawable.ic_menu_info_details, it -> getCache().openLogInBrowser(activity, log));
+                    R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(activity, logUrl, true));
         }
         if (isOfflineLog(log)) {
             ctxMenu.addItem(R.string.cache_personal_note_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), activity).onClick(null));
