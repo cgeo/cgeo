@@ -366,6 +366,10 @@
     <string name="caches_store_background">Stahování na pozadí (experimentální!)</string>
     <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
+    <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
+    <string name="caches_store_background_option_nothing">Nedělat nic</string>
+    <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
+    <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
     <string name="caches_store_background_result_failed">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
     <string name="caches_store_background_result_canceled">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
