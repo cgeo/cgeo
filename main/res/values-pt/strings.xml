@@ -362,6 +362,10 @@
     <string name="caches_store_background">Transferência em segundo plano (Experimental!)</string>
     <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
     <string name="caches_store_background_title">Transferir caches</string>
+    <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
+    <string name="caches_store_background_option_nothing">Não fazer nada</string>
+    <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
+    <string name="caches_store_background_option_refresh">Actualizar e adicionar à lista</string>
     <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
     <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
     <plurals name="caches_store_background_result">
@@ -2095,6 +2099,8 @@
     <string name="notification_channel_foreground_description">a notificação é exibida enquanto c:geo está a realizar trabalho em segundo plano</string>
     <string name="notification_channel_downloader_name">gestor de transferências c:geo</string>
     <string name="notification_channel_downloader_description">notificações acerca das transferências (ex: mapas offline)</string>
+    <string name="notification_channel_cache_download_name">gestor de transferências de caches</string>
+    <string name="notification_channel_cache_download_description">notificações do resultado das transferências de caches em segundo plano</string>
     <string name="notification_proximity_title">notificação de proximidade</string>
     <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
