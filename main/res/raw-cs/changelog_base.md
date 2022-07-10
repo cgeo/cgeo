@@ -1,4 +1,4 @@
-- Novinka: Stahování / aktualizace kešek na pozadí (experimentální)
+- New: Download / update caches in background
 - Novinka: Kopírování aktuálních souřadnic při dlouhém kliknutí na polohu na domovské obrazovce
 - Změna: Odstraněna kontrola omezení velikosti při ukládání trasových bodů do osobních poznámek
 - Oprava: Nezobrazují se kruhy vzdálenosti pro trasové body archivovaných kešek
