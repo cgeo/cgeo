@@ -1,4 +1,4 @@
-- Nowość: Pobieranie/aktualizowanie skrytek w tle (eksperymentalne)
+- New: Download / update caches in background
 - Nowość: Kopiowanie bieżących współrzędnych po długim kliknięciu lokalizacji na ekranie głównym
 - Zmiana: Usunięcie sprawdzania limitu rozmiaru podczas przechowywania punktów nawigacji w notatkach osobistych
 - Poprawka: Nie pokazuj okręgów odległości dla punktów nawigacji dla zarchiwizowanych skrytek
