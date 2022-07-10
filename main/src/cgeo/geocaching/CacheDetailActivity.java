@@ -2649,7 +2649,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (Settings.enableFeatureNewImageGallery()) {
                 pages.add(Page.IMAGEGALLERY.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
+            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
                 pages.add(Page.IMAGES.id);
             }
         }
