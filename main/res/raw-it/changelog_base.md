@@ -1,4 +1,4 @@
-- Nuovo: Scarica/aggiorna i cache in background (sperimentale)
+- New: Download / update caches in background
 - Nuovo: Copia le coordinate correnti con un tocco prolungato sulla posizione della schermata iniziale
 - Modifica: Rimosso controllo sul limite nelle dimensioni durante la memorizzazione dei waypoint nelle note personali
 - Corretto: Non vengono mostrati i cerchi di distanza per i waypoint dei cache archiviati
