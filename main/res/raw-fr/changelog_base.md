@@ -1,4 +1,4 @@
-- New: Download / update caches in background
+- Nouveauté : Télécharger / mettre à jour les caches en arrière-plan
 - New: Copy current coordinates when long-clicking location on home screen
 - Change: Remove size-limit check while storing waypoints in personal notes
 - Corrigé : Ne plus afficher les cercles de distance pour les caches archivées
