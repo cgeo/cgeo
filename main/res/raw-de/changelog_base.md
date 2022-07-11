@@ -1,4 +1,4 @@
-- New: Download / update caches in background
+- Neu: Caches im Hintergrund herunterladen/aktualisieren
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 - Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
