@@ -19,8 +19,8 @@ They collect issues that might be suitable for your first contribution.
 
 ## Project status
 
-[![Build Status](https://ci.cgeo.org/job/cgeo%20continuous%20integration/badge/icon)](https://ci.cgeo.org/job/cgeo%20continuous%20integration/)<br>
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/3256314c8ba8457b9639bd2d4f4e7c91)](https://www.codacy.com/app/cgeo/cgeo)<br>
+[![Build Status](https://ci.cgeo.org/view/Continous%20Integration/job/cgeo-CI_commit-build/badge/icon)](https://ci.cgeo.org/view/Continous%20Integration/job/cgeo-CI_commit-build/)<br>
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7e23148260a94e248b928800497006db)](https://www.codacy.com/gh/cgeo/cgeo/dashboard)<br>
 [![Crowdin](https://badges.crowdin.net/cgeo/localized.svg)](https://crowdin.com/project/cgeo)
 
 ## Get the source
