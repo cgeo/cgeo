@@ -351,7 +351,6 @@
     </plurals>
     <string name="caches_store_offline">オフライン用に保存</string>
     <string name="caches_store_all">すべて保存</string>
-    <string name="caches_store_unsaved">未保存を一括保存</string>
     <string name="caches_store_selected">選択したキャッシュを保存</string>
     <string name="caches_history">履歴</string>
     <string name="caches_on_map">地図で表示</string>
@@ -873,7 +872,7 @@
     <string name="init_summary_trackautovisit">「発見」したログを書く時にトラッカブルを自動的に「訪れた」にする</string>
     <string name="init_sigautoinsert">署名を自動的に挿入</string>
     <string name="init_offlinelogs_homescreen">オフラインログ数の表示</string>
-    <string name="init_summary_offlinelogs_homescreen">未投稿のオフラインログがある場合にメインページ下部のステータス情報にオフラインログ数(例 +1)を表示します</string>
+    <string name="init_summary_offlinelogs_homescreen">未投稿のオフラインログがある場合にホーム画面下部のステータス情報にオフラインログ数(例 +1)を表示します</string>
     <string name="init_loaddirectionimg">方向アイコン</string>
     <string name="init_summary_loaddirectionimg">必要なら方向アイコンを取得(ベーシック会員のみ)</string>
     <string name="init_default_navigation_tool">デフォルトのナビゲーション</string>
