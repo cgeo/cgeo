@@ -745,6 +745,8 @@
     <string name="init_summary_prevent_cache_note_merge">この設定が有効になっている場合、c:geoはデバイスに保存されたノートを完全に削除し、サーバー上のパーソナルノートで置き換えます。 マージは行われません。</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
     <string name="init_summary_customtabs_as_browser">外部Webサイトがc:geo内で表示されます(Chromeのインストールが必要です)</string>
+    <string name="init_rot13_hint">ヒントの暗号化</string>
+    <string name="init_summary_rot13_hint">ヒントをROT-13で暗号化して表示します。タップすると解読します</string>
     <string name="init_save_log_img">画像保存</string>
     <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">マイル/フィート表示</string>
@@ -759,6 +761,8 @@
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
+    <string name="init_quicklaunchitems">クイック起動ボタン</string>
+    <string name="init_summary_quicklaunchitems">ホーム画面に表示するクイック起動ボタンの選択</string>
     <!-- app theme -->
     <string name="settings_theme_title">テーマ</string>
     <string-array name="settings_theme_entries">
@@ -793,6 +797,7 @@
     <string name="init_backup_history_length_min">最新のみ</string>
     <string name="init_backup_history_length_max">無制限</string>
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
+    <string name="init_backup_automatic">自動バックアップ</string>
     <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象)にします。0にするとオフになります</string>
     <string name="init_backup_automatic_performing">バックアップを作成中…</string>
     <string name="init_user_confirmation">はい、了承します</string>
@@ -1134,6 +1139,7 @@
     <string name="cache_images">画像</string>
     <string name="cache_advanced">その他</string>
     <string name="cache_waypoints">ウェイポイント</string>
+    <string name="cache_variables">変数</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
@@ -1210,6 +1216,7 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (オフライン)</string>
     <string name="cache_menu_vote">評価を投稿</string>
     <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
+    <string name="cache_menu_log_in_browser">ブラウザでログを書く</string>
     <string name="cache_menu_ignore">キャッシュを無視</string>
     <string name="cache_log_menu_decrypt">暗号化/復号化</string>
     <string name="cache_log_menu_popup_title">%sのログ</string>
@@ -1274,6 +1281,9 @@
     <string name="internal_goto_targets_title">「移動」の行先</string>
     <string name="internal_goto_targets_description">このキャッシュには最近の「移動」の行先が保存されています。メインメニューの「移動」を使用すると自動的に作成されます。入力された座標はこのキャッシュのウェイポイントに保存されます。これらの座標が不要になったら、このキャッシュまたはそのウェイポイントを安全に削除できます。キャッシュをほかのリストに移動もできます</string>
     <string name="init_longtap_map">地図でのロングタップ</string>
+    <string name="init_summary_longtap_map">ロングタップを有効化(地図のアイコン上: 個別ルート作成、アイコン以外: ユーザー定義のキャッシュ/ウェイポイントを作成)</string>
+    <string name="onetime_info_longtap_disabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は無効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で有効にできます</string>
+    <string name="onetime_info_longtap_enabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は有効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で無効にできます</string>
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
@@ -1314,6 +1324,7 @@
     <string name="waypoint_calculated_coordinates_global">座標計算</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
+    <string name="waypoint_my_coordinates_accuracy">現在地(±%s)</string>
     <string name="waypoint_bearing">方位(度[°])</string>
     <string name="waypoint_distance">距離</string>
     <string name="waypoint_name">ウェイポイント名</string>
@@ -1347,6 +1358,7 @@
     <string name="waypoint_duplicate">ウェイポイントを複製</string>
     <string name="waypoint_toclipboard">クリップボードにウェイポイントをコピー</string>
     <string name="waypoint_copy_of">コピー ～ </string>
+    <string name="waypoint_open_geochecker">ジオチェッカーを開く</string>
     <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
@@ -1360,6 +1372,8 @@
     <string name="variables_deleteall">すべて削除</string>
     <string name="variables_deleteall_confirm_text">すべての変数を削除しますか?</string>
     <string name="variables_info">ヘルプ</string>
+    <string name="variables_varname_dialog_title">変数名</string>
+    <string name="variables_varname_dialog_message">変数名を入力してください(空欄のままでも可)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">ガイドモード</string>
     <string name="calccoord_guided_edit">数字をタップして編集</string>
@@ -1368,7 +1382,9 @@
     <string name="calccoord_plain_tools_title">プレーンツール</string>
     <string name="calccoord_remove_spaces">空白を削除</string>
     <string name="calccoord_paste_from_clipboard">クリップボードから貼付け</string>
+    <string name="calccoord_generate_title">ウェイポイントを作成</string>
     <!-- Formula -->
+    <string name="formula_choose_function">関数を選択</string>
     <string name="formula_function_sqrt">平方根</string>
     <string name="formula_function_sin">サイン</string>
     <string name="formula_function_cos">コサイン</string>
@@ -1445,6 +1461,11 @@
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
     <string name="map_theme_legend">地図の凡例</string>
     <string name="map_theme_legend_info">カテゴリをタップするとカテゴリを開いたり閉じたりできます。各凡例をロングタップすると短い情報が表示されます。 詳細な凡例をオンラインで見るには情報アイコンをタップしてください</string>
+    <string name="google_maps_style_default">デフォルト</string>
+    <string name="google_maps_style_night">ダークモード</string>
+    <string name="google_maps_style_retro">レトロ</string>
+    <string name="google_maps_style_contrast">高コントラスト</string>
+    <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1945,6 +1966,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
         <item quantity="other">%dウェイポイントを抽出しました</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com座標チェッカーがブラウザで利用できます</string>
+    <string name="geochecker_available">ジオチェッカーはブラウザー経由で利用できます</string>
     <!-- calendar adder -->
     <string name="event_fail">イベントキャッシュをカレンダーに追加できませんでした</string>
     <string name="init_low_disk_space">ストレージ容量が不足しています</string>
@@ -2048,7 +2070,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivedownload_amount_copied">%sをコピーしました</string>
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
-    <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
+    <string name="downloadmap_title">オフライン地図のダウンロード</string>
     <string name="download_title">ファイルをダウンロード</string>
     <string name="downloadmap_info">お好みの地域の「保存アイコン」をタップするとダウンロードできます。\n\nダウンロードはバックグラウンドで実行されます。完了後に地図フォルダに保存され、表示する地図に設定されます。\n\n注意: 地図ファイルはサイズがとても大きいので、たくさんのデータ通信量が必要です!</string>
     <string name="downloadmap_filename">%sをダウンロード中</string>
