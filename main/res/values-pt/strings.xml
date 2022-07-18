@@ -357,10 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
-    <string name="caches_store_unsaved">Armazenar apenas caches por guardar</string>
     <string name="caches_store_selected">Memorizar seleccionada(s)</string>
-    <string name="caches_store_background">Transferência em segundo plano (Experimental!)</string>
-    <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
@@ -1165,6 +1162,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Não foram encontrados pontos adicionais armazenados</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Serão reduzidos %1$d caracteres a esta nota pessoal pelo serviço %3$s (número máximo de caracteres %2$d).</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
