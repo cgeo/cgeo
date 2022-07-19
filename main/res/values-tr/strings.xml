@@ -1388,6 +1388,7 @@
     <string name="formula_function_if">Eğer</string>
     <string name="formula_function_length">Metin Uzunluğu</string>
     <string name="formula_function_rot">Karakterleri Döndür</string>
+    <string name="formula_function_checksum">Sağlama</string>
     <string name="formula_function_lettervalue">Kelime Değeri</string>
     <string name="formula_function_vanity">Vanity Kod</string>
     <string name="formula_function_group_complexnumeric">Karmaşık Sayı</string>
@@ -2271,6 +2272,7 @@
     <string name="rtl_water_park">su parkı</string>
     <string name="rtl_airport">havalimanı</string>
     <string name="rtl_cable_car">teleferik</string>
+    <string name="rtl_gondola">gondol</string>
     <string name="rtl_helipad">helikopter pisti</string>
     <string name="rtl_rail_funicular">finükiler</string>
     <string name="rtl_parking">park</string>
@@ -2373,6 +2375,7 @@
     <string name="rtl_cemetery_muslim">müslüman mezarlığı</string>
     <string name="rtl_pedestrian_area">yaya alanı</string>
     <string name="rtl_prison">hapishane</string>
+    <string name="rtl_corral">Ağıl</string>
     <string name="rtl_ruin">harabe</string>
     <string name="rtl_secondary_road">ikincil yol</string>
     <string name="rtl_access_road">ulaşım yolu</string>
@@ -2386,5 +2389,18 @@
     <string name="rtl_path_quality23">kalite 2/3 (döşenmiş: çakıl, tamir edilmiş, …)</string>
     <string name="rtl_path_quality45">kalite 4/5 (döşenmemiş)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Gülen Yüz</string>
+    <string name="smiley_cool">Tarz</string>
+    <string name="smiley_evil">Şeytan</string>
+    <string name="smiley_wink">Göz Kırpma</string>
+    <string name="smiley_dead">Ölü</string>
+    <string name="smiley_sleepy">Uykulu</string>
+    <string name="smiley_kisses">Öpücük</string>
     <string name="smiley_approve">Onaylandı</string>
+    <string name="smiley_question">Soru</string>
+    <string name="smiley_innocent">Masum</string>
+    <string name="smiley_kiss">Öpücük</string>
+    <string name="smiley_laughing">Gülen</string>
+    <string name="smiley_money">Para</string>
+    <string name="smiley_yell">Bağır</string>
 </resources>
