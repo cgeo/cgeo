@@ -19,6 +19,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
@@ -735,7 +736,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
-
+            if (mapOptions.mapMode == MapMode.SINGLE) {
+                LoggingUI.onPrepareOptionsMenu(menu, getSingleModeCache());
+            }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
         } catch (final RuntimeException e) {
@@ -787,6 +790,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
+        } else if (LoggingUI.onMenuItemSelected(item, activity, getSingleModeCache(), null)) {
+            return true;
         } else if (id == R.id.menu_check_routingdata) {
             final Viewport bb = mapView.getViewport();
             MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
