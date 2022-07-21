@@ -8,6 +8,7 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -21,10 +22,7 @@ import cgeo.geocaching.utils.TextUtils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
@@ -44,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
@@ -64,6 +63,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
 
         protected final class ViewHolder extends AbstractRecyclerViewHolder {
             private final DownloaderItemBinding binding;
+            @Nullable private Thread thread;
 
             ViewHolder(final View view) {
                 super(view);
@@ -108,58 +108,82 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                         + Formatter.SEPARATOR + offlineMap.getTypeAsString());
                 holder.binding.action.setImageResource(offlineMap.getIconRes());
                 holder.binding.getRoot().setOnClickListener(v -> {
-
                     if (offlineMap.getUri() != null) {
                         DownloaderUtils.triggerDownload(DownloadSelectorActivity.this, R.string.downloadmap_title,
                                 offlineMap.getType().id, offlineMap.getUri(), "", offlineMap.getSizeInfo(), null,
-                                id -> {
-                                    final DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                                    if (manager == null) {
-                                        return;
-                                    }
-                                    holder.binding.progressHorizontal.show();
-                                    final Thread thread = new Thread(() -> {
-                                        while (!Thread.currentThread().isInterrupted()) {
-                                            final DownloadManager.Query q = new DownloadManager.Query();
-                                            q.setFilterById(id);
-                                            final Cursor cursor = manager.query(q);
-                                            cursor.moveToFirst();
-                                            final int bytesDownloadedPos = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
-                                            final int bytesTotalPos = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
-                                            final int progress;
-                                            if (bytesDownloadedPos >= 0 && bytesTotalPos >= 0) {
-                                                int bytesDownloaded = 0;
-                                                int bytesTotal = 0;
-                                                try {
-                                                    bytesDownloaded = cursor.getInt(bytesDownloadedPos);
-                                                    bytesTotal = cursor.getInt(bytesTotalPos);
-                                                } catch (CursorIndexOutOfBoundsException ignore) {
-                                                    // should not happen, but...
-                                                }
-                                                progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
-                                            } else {
-                                                progress = 0;
-                                            }
-
-                                            runOnUiThread(() -> holder.binding.progressHorizontal.setProgressCompat(progress, true));
-                                            cursor.close();
-                                        }
-                                    });
-                                    thread.start();
-                                    final BroadcastReceiver onComplete = new BroadcastReceiver() {
-                                        public void onReceive(final Context context, final Intent intent) {
-                                            if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == id) {
-                                                holder.binding.progressHorizontal.hide();
-                                                unregisterReceiver(this);
-                                                thread.interrupt();
-                                            }
-                                        }
-                                    };
-                                    registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-                                });
+                                id -> holder.thread = createProgressWatcherThread(holder.binding.progressHorizontal, id));
                     }
                 });
+                if (offlineMap.getUri() != null) {
+                    final PendingDownload pendingDownload = PendingDownload.findByUri(offlineMap.getUri().toString());
+                    if (pendingDownload != null) {
+                        holder.thread = createProgressWatcherThread(holder.binding.progressHorizontal, pendingDownload.getDownloadId());
+                    }
+                }
             }
+        }
+
+        @Override
+        public void onViewRecycled(final @NonNull ViewHolder holder) {
+            if (holder.thread != null && !holder.thread.isInterrupted()) {
+                holder.thread.interrupt();
+            }
+            holder.thread = null;
+            super.onViewRecycled(holder);
+        }
+
+        private Thread createProgressWatcherThread(final LinearProgressIndicator progressbar, final long downloadId) {
+            final DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            if (manager == null) {
+                return null;
+            }
+            final Thread thread = new Thread(() -> {
+                while (!Thread.currentThread().isInterrupted()) {
+                    final DownloadManager.Query q = new DownloadManager.Query();
+                    q.setFilterById(downloadId);
+                    final Cursor cursor = manager.query(q);
+                    if (cursor.moveToFirst()) {
+                        final int status = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS));
+                        if (status == DownloadManager.STATUS_PENDING) {
+                            runOnUiThread(() -> {
+                                progressbar.show();
+                                progressbar.setIndeterminate(true);
+                            });
+                        } else if (status == DownloadManager.STATUS_RUNNING || status == DownloadManager.STATUS_PAUSED) {
+                            final int bytesDownloadedPos = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+                            final int bytesTotalPos = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                            if (bytesDownloadedPos >= 0 && bytesTotalPos >= 0) {
+                                int bytesDownloaded = 0;
+                                int bytesTotal = 0;
+                                try {
+                                    bytesDownloaded = cursor.getInt(bytesDownloadedPos);
+                                    bytesTotal = cursor.getInt(bytesTotalPos);
+                                } catch (CursorIndexOutOfBoundsException ignore) {
+                                    // should not happen, but...
+                                }
+                                final int progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
+                                runOnUiThread(() -> {
+                                    progressbar.show();
+                                    progressbar.setProgressCompat(progress, true);
+                                });
+                            } else {
+                                runOnUiThread(() -> {
+                                    progressbar.show();
+                                    progressbar.setIndeterminate(true);
+                                });
+                            }
+                        } else {
+                            runOnUiThread(progressbar::hide);
+                            Thread.currentThread().interrupt();
+                        }
+                    } else {
+                        Thread.currentThread().interrupt();
+                    }
+                    cursor.close();
+                }
+            });
+            thread.start();
+            return thread;
         }
     }
 
