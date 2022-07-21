@@ -22,6 +22,7 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -415,6 +416,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
+            if (mapOptions.mapMode == MapMode.SINGLE) {
+                LoggingUI.onPrepareOptionsMenu(menu, getSingleModeCache());
+            }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
@@ -473,6 +477,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
+        } else if (LoggingUI.onMenuItemSelected(item, this, getSingleModeCache(), null)) {
+            return true;
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);

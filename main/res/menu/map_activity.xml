@@ -61,6 +61,20 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_log_visit_offline"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/cache_menu_visit_offline"
+        android:visible="false"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menu_log_visit"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/cache_menu_visit"
+        android:visible="false"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_save"
         android:showAsAction="ifRoom|withText"
