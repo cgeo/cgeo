@@ -361,10 +361,7 @@
     </plurals>
     <string name="caches_store_offline">Uložit offline</string>
     <string name="caches_store_all">Uložit všechny</string>
-    <string name="caches_store_unsaved">Uložit neuložené</string>
     <string name="caches_store_selected">Uložit vybrané</string>
-    <string name="caches_store_background">Stahování na pozadí (experimentální!)</string>
-    <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
@@ -439,9 +436,9 @@
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <plurals name="user_finds">
         <item quantity="one">%d nález</item>
-        <item quantity="few">%d nálezů</item>
+        <item quantity="few">%d nálezy</item>
         <item quantity="many">%d nálezů</item>
-        <item quantity="other">%d nálezy</item>
+        <item quantity="other">%d nálezů</item>
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="one">%d zaznamenána offline</item>
