@@ -357,8 +357,11 @@
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
     <string name="caches_store_background">Λήψη φόντου (Πειραματικό!)</string>
     <string name="caches_store_refresh_background">Ανανέωση φόντου (Πειραματικό!)</string>
-    <string name="caches_store_background_should_force_refresh">Ανανέωση ήδη κατεβασμένων κρυπτών</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
+    <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
+    <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
+    <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
+    <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
     <string name="caches_store_background_result_failed">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_store_background_result_canceled">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
@@ -2083,6 +2086,8 @@
     <string name="notification_channel_foreground_description">η ειδοποίηση εμφανίζεται ενώ το c:geo κάνει εργασία στο παρασκήνιο</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">ειδοποιήσεις αποτελεσμάτων για λήψεις (π.χ. χάρτες εκτός σύνδεσης)</string>
+    <string name="notification_channel_cache_download_name">Κατέβασμα κρυπτών</string>
+    <string name="notification_channel_cache_download_description">Ειδοποιήσεις αποτελέσματος για λήψεις κρυπτών στο παρασκήνιο</string>
     <string name="notification_proximity_title">Ειδοποίηση εγγύτητας του c:geo</string>
     <string name="notification_download_receiver_title">Εισαγωγή λήψης</string>
     <!-- individual routes -->

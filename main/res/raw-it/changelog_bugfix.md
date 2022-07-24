@@ -1,5 +1,5 @@
 
-- Fix: Exceptions in CheckerUtils, internal routing service and WhereYouGo connector
-- Fix: Filter settings lost on screen rotation when mapping an address search result
-- Fix: Double tap required to edit offline log
+- Corretto: Eccezione nella connessione con CheckerUtils, servizio di navigazione interno e WhereYouGo
+- Corretto: Perdita delle impostazioni del filtro con la rotazione dello schermo quando si visualizza sulla mappa il risultato di ricerca di un indirizzo
+- Corretto: è necessario un doppio tocco per modificare il log offline
 - Nuovo: Aggiunto l'ultimo stato di accesso di geocaching.com alla pagina di stato

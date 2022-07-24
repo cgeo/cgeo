@@ -362,7 +362,6 @@
     <string name="caches_store_selected">Desa els seleccionats</string>
     <string name="caches_store_background">Baixada de fons (experimental!)</string>
     <string name="caches_store_refresh_background">Actualització de fons (experimental!)</string>
-    <string name="caches_store_background_should_force_refresh">Actualitza els catxés ja baixats</string>
     <string name="caches_store_background_title">Descarregar catxés</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>

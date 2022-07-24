@@ -357,12 +357,12 @@
     </plurals>
     <string name="caches_store_offline">Salva per Offline</string>
     <string name="caches_store_all">Archiviare tutto</string>
-    <string name="caches_store_unsaved">Archiviare non salvati</string>
     <string name="caches_store_selected">Salva selezionati</string>
-    <string name="caches_store_background">Download in background (Sperimentale!)</string>
-    <string name="caches_store_refresh_background">Aggiornamento sfondo (Sperimentale!)</string>
-    <string name="caches_store_background_should_force_refresh">Aggiorna cache già scaricate</string>
     <string name="caches_store_background_title">Scarica cache</string>
+    <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
+    <string name="caches_store_background_option_nothing">Non fare nulla</string>
+    <string name="caches_store_background_option_add_to_list">Aggiungi alla lista</string>
+    <string name="caches_store_background_option_refresh">Aggiorna e aggiungi alla lista</string>
     <string name="caches_store_background_result_failed">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
     <string name="caches_store_background_result_canceled">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
     <plurals name="caches_store_background_result">
@@ -1331,6 +1331,9 @@
     <string name="image_category_own">Propri</string>
     <string name="image_category_listing">Descrizione</string>
     <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Aggiungi al percorso</string>
+    <string name="context_map_add_to_route_start">Anteporre al percorso</string>
+    <string name="context_map_show_coords">Mostra le coordinate</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="create_internal_cache_short">Nuova cache</string>
     <string name="create_internal_cache_currentlist">Usa la lista corrente</string>
@@ -2010,6 +2013,10 @@
         <item quantity="one">%d giorno fa</item>
         <item quantity="other">%d giorni fa</item>
     </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Tra %d giorno</item>
+        <item quantity="other">Tra %d giorni</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
@@ -2090,6 +2097,8 @@
     <string name="notification_channel_foreground_description">la notifica è mostrata mentre c:geo opera in background</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">notifiche del risultato per i download (ad esempio mappe offline)</string>
+    <string name="notification_channel_cache_download_name">cache downloader</string>
+    <string name="notification_channel_cache_download_description">notifiche dei risultati per i download in background dei cache</string>
     <string name="notification_proximity_title">Notifica di prossimità c:geo</string>
     <string name="notification_download_receiver_title">Importazione download</string>
     <!-- individual routes -->
@@ -2180,6 +2189,10 @@
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
+    <string name="delete_offlinemap_title">Elimina mappa offline</string>
+    <string name="no_deletable_offlinemaps">Nessuna mappa offline eliminabile</string>
+    <string name="delete_file_confirmation">Eliminare %s?</string>
+    <string name="file_deleted_info">%s eliminata</string>
     <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>

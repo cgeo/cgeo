@@ -361,8 +361,11 @@
     <string name="caches_store_selected">Ausgewählte speichern</string>
     <string name="caches_store_background">Hintergrund-Download (Experimentell!)</string>
     <string name="caches_store_refresh_background">Hintergrund-Aktualisierung (Experimentell!)</string>
-    <string name="caches_store_background_should_force_refresh">Aktualisiere bereits heruntergeladene Caches</string>
     <string name="caches_store_background_title">Caches herunterladen</string>
+    <string name="caches_store_background_already_stored">Einige Caches sind bereits gespeichert. Was soll mit ihnen geschehen?</string>
+    <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
+    <string name="caches_store_background_option_add_to_list">Zur Liste hinzufügen</string>
+    <string name="caches_store_background_option_refresh">Aktualisieren und zur Liste hinzufügen</string>
     <string name="caches_store_background_result_failed">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <string name="caches_store_background_result_canceled">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <plurals name="caches_store_background_result">
@@ -2097,6 +2100,8 @@
     <string name="notification_channel_foreground_description">Benachrichtigung wird angezeigt, während c:geo im Hintergrund arbeitet</string>
     <string name="notification_channel_downloader_name">c:geo Downloader</string>
     <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
+    <string name="notification_channel_cache_download_name">Cache Downloader</string>
+    <string name="notification_channel_cache_download_description">Ergebnisbenachrichtigung für Cache Downloads</string>
     <string name="notification_proximity_title">c:geo Annäherungsbenachrichtigung</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->

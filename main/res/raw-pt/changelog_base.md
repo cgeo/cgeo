@@ -1,8 +1,8 @@
-- Novo: Transferência / actualização de caches em segundo plano (experimental)
+- Novo: Transferência / actualização de caches em segundo plano
 - Novo: Cópia das coordenadas actuais com um toque longo na página inicial
 - Alteração: Remover a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
 - Correcção: não mostrar círculos de distância para pontos adicionais de caches arquivadas
 - Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
 - Novo: Opção para apagar mapas offline
 - Correcção: Inclusão de trackables em falta nos resultados de pesquisa
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Correcção: Os itens das Adventure Labs em rotas individuais não eram reconhecidos como tal, após edição

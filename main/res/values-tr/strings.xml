@@ -354,7 +354,6 @@
     </plurals>
     <string name="caches_store_offline">Çevrimdışı kaydet</string>
     <string name="caches_store_all">Tümünü Depola</string>
-    <string name="caches_store_unsaved">Kayıtsız olanları kaydet</string>
     <string name="caches_store_selected">Geocache\'ler Seçildi</string>
     <string name="caches_store_background_title">Cache\'leri indir</string>
     <string name="caches_history">Geçmiş</string>
@@ -1261,10 +1260,14 @@
     <string name="cache_remove_from_history">Geçmişten kaldır</string>
     <string name="cache_license">Lisans</string>
     <string name="cache_image">Görsel</string>
+    <string name="cache_image_open">Aç</string>
     <string name="cache_image_open_file">Dosya olarak aç</string>
     <string name="cache_image_open_browser">Tarayıcıda aç</string>
+    <string name="cache_image_share">Paylaş</string>
     <string name="cache_image_show_description">Açıklamayı göster</string>
     <string name="cache_image_add_waypoint">Yol noktası ekle</string>
+    <string name="cache_image_delete">Sil</string>
+    <string name="cache_image_title_camera_prefix">Görsel</string>
     <string name="cache_image_background">Geocache listeleme sayfası arkaplan resmi</string>
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
@@ -1276,6 +1279,8 @@
     <string name="cache_alc_install">Bu macerayı oynayabilmek için Adventure Lab uygulamasını yükleyin</string>
     <string name="context_share_as_text">Metni paylaş</string>
     <string name="context_share_as_link">Bağlantıyı paylaş</string>
+    <string name="image_category_listing">Listeleme</string>
+    <string name="image_category_log">Kayıt</string>
     <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
     <string name="create_internal_cache_short">Yeni Geocache</string>
     <string name="create_internal_cache_currentlist">Mevcut listeyi kullan</string>
@@ -1285,6 +1290,8 @@
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
     <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
+    <string name="onetime_info_longtap_disabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktif değildir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
+    <string name="onetime_info_longtap_enabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktiftir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1311,7 +1318,7 @@
     <string name="gpx_import_canceled_with_filename">%1$s\'den GPX aktarımı iptal edildi</string>
     <string name="gpx_import_select_list_title">GPX\'i listeye aktar</string>
     <!-- import -->
-    <string name="web_import_title">Send2cegeo\'dan aktar</string>
+    <string name="web_import_title">Send2cgeo\'dan aktar</string>
     <string name="web_import_waiting">Send2cgeo\'dan yeni Geocache\'ler için bekleniyor…</string>
     <string name="web_downloading">İndiriliyor</string>
     <string name="web_downloaded">İndirildi</string>
@@ -1384,6 +1391,7 @@
     <string name="formula_function_if">Eğer</string>
     <string name="formula_function_length">Metin Uzunluğu</string>
     <string name="formula_function_rot">Karakterleri Döndür</string>
+    <string name="formula_function_checksum">Sağlama</string>
     <string name="formula_function_lettervalue">Kelime Değeri</string>
     <string name="formula_function_vanity">Vanity Kod</string>
     <string name="formula_function_group_complexnumeric">Karmaşık Sayı</string>
@@ -1391,6 +1399,7 @@
     <string name="formula_error_cyclicdependency">Döngü: %1$s</string>
     <string name="formula_error_other">Hata: \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_metadata_comment">Yorum</string>
     <!-- visit -->
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
@@ -2094,6 +2103,7 @@
     <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
     <string name="downloadtile_title">Rotalama dosyası eksik</string>
     <string name="downloadtile_info">c:geo, bazı rotalama dosyaları eksik olduğundan istenilen rotayı hesaplayamıyor. Eksik olan rotalama dosyalarını indirmek ister misiniz?</string>
+    <string name="check_tiles_menu">Eksik yönlendirme verilerini bul</string>
     <string name="no_updates_found">Güncelleme bulunamadı</string>
     <string name="updates_check">Güncellemelerin kontrolü</string>
     <string name="mapserver_mapsforge_info">Temel harita, harita teması gerekmez</string>
@@ -2267,6 +2277,7 @@
     <string name="rtl_water_park">su parkı</string>
     <string name="rtl_airport">havalimanı</string>
     <string name="rtl_cable_car">teleferik</string>
+    <string name="rtl_gondola">gondol</string>
     <string name="rtl_helipad">helikopter pisti</string>
     <string name="rtl_rail_funicular">finükiler</string>
     <string name="rtl_parking">park</string>
@@ -2369,6 +2380,7 @@
     <string name="rtl_cemetery_muslim">müslüman mezarlığı</string>
     <string name="rtl_pedestrian_area">yaya alanı</string>
     <string name="rtl_prison">hapishane</string>
+    <string name="rtl_corral">Ağıl</string>
     <string name="rtl_ruin">harabe</string>
     <string name="rtl_secondary_road">ikincil yol</string>
     <string name="rtl_access_road">ulaşım yolu</string>
@@ -2382,5 +2394,18 @@
     <string name="rtl_path_quality23">kalite 2/3 (döşenmiş: çakıl, tamir edilmiş, …)</string>
     <string name="rtl_path_quality45">kalite 4/5 (döşenmemiş)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Gülen Yüz</string>
+    <string name="smiley_cool">Tarz</string>
+    <string name="smiley_evil">Şeytan</string>
+    <string name="smiley_wink">Göz Kırpma</string>
+    <string name="smiley_dead">Ölü</string>
+    <string name="smiley_sleepy">Uykulu</string>
+    <string name="smiley_kisses">Öpücük</string>
     <string name="smiley_approve">Onaylandı</string>
+    <string name="smiley_question">Soru</string>
+    <string name="smiley_innocent">Masum</string>
+    <string name="smiley_kiss">Öpücük</string>
+    <string name="smiley_laughing">Gülen</string>
+    <string name="smiley_money">Para</string>
+    <string name="smiley_yell">Bağır</string>
 </resources>

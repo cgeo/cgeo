@@ -361,8 +361,11 @@
     <string name="caches_store_selected">Geselecteerden opslaan</string>
     <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
     <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
-    <string name="caches_store_background_should_force_refresh">Vernieuwen reeds gedownloade caches</string>
     <string name="caches_store_background_title">Caches downloaden</string>
+    <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
+    <string name="caches_store_background_option_nothing">Niets doen</string>
+    <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
+    <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
     <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
     <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
     <plurals name="caches_store_background_result">
@@ -2097,6 +2100,8 @@
     <string name="notification_channel_foreground_description">melding wordt getoond terwijl c:geo werk op de achtergrond doet</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">resultaat meldingen voor downloads (bijv. offline kaarten)</string>
+    <string name="notification_channel_cache_download_name">cache downloader</string>
+    <string name="notification_channel_cache_download_description">resultaat meldingen voor caches achtergronddownloads</string>
     <string name="notification_proximity_title">c:geo nabijheidsmelding</string>
     <string name="notification_download_receiver_title">Download importeren</string>
     <!-- individual routes -->
