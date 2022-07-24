@@ -328,7 +328,7 @@ final class OkapiClient {
         final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
         if (df != null) {
             searchCoords = df.getEffectiveCoordinate();
-            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : ""+(df.getMaxRangeValue().intValue() * 1000);
+            radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : "" + (df.getMaxRangeValue().intValue() * 1000);
         } else {
             // search around current position by default
             searchCoords = null;
