@@ -174,6 +174,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 return;
             }
 
+            Log.d("Download #" + cachesDownloaded + " " + geocode + " started");
+
             final DownloadTaskProperties properties;
             synchronized (downloadQuery) {
                 properties = downloadQuery.put(geocode, null); // set the properties to null, to point out that the download is currently ongoing
@@ -206,10 +208,13 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                         downloadQuery.remove(geocode);
                     }
                 }
+                Log.d("Download #" + cachesDownloaded + " " + geocode + " completed");
                 cachesDownloaded++;
+            } else {
+                Log.d("Download #" + cachesDownloaded + " " + geocode + " failed");
             }
         } catch (Exception ex) {
-            Log.e("background download failed", ex);
+            Log.e("exception while background download", ex);
         }
     }
 
