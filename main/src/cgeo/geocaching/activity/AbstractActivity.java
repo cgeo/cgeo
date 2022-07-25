@@ -17,7 +17,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
-import cgeo.geocaching.utils.LifecycleStartedBroadcastReceiver;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -150,7 +150,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
-        this.getLifecycle().addObserver(new LifecycleStartedBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 finish();

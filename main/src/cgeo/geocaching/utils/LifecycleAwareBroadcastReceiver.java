@@ -9,19 +9,19 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-public abstract class LifecycleStartedBroadcastReceiver extends BroadcastReceiver implements DefaultLifecycleObserver {
+public abstract class LifecycleAwareBroadcastReceiver extends BroadcastReceiver implements DefaultLifecycleObserver {
 
     @NonNull
     private final Context applicationContext;
     @NonNull
     private final IntentFilter filter;
 
-    public LifecycleStartedBroadcastReceiver(@NonNull final Context context, @NonNull final IntentFilter filter) {
+    public LifecycleAwareBroadcastReceiver(@NonNull final Context context, @NonNull final IntentFilter filter) {
         applicationContext = context.getApplicationContext();
         this.filter = filter;
     }
 
-    public LifecycleStartedBroadcastReceiver(@NonNull final Context context, @NonNull final String action) {
+    public LifecycleAwareBroadcastReceiver(@NonNull final Context context, @NonNull final String action) {
         applicationContext = context.getApplicationContext();
         filter = new IntentFilter(action);
     }

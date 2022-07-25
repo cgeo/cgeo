@@ -95,7 +95,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LifecycleStartedBroadcastReceiver;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -388,7 +388,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         AndroidBeam.enable(this, this);
 
         // get notified on cache changes (e.g.: waypoint creation from map)
-        this.getLifecycle().addObserver(new LifecycleStartedBroadcastReceiver(this, Intents.INTENT_CACHE_CHANGED) {
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, Intents.INTENT_CACHE_CHANGED) {
             /**
              * Receives update notifications from asynchronous processes
              */
