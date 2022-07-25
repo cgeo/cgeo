@@ -172,12 +172,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public void onDestroy() {
-        SpeechService.stopService(getActivity());
-        super.onDestroy();
-    }
-
-    @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 

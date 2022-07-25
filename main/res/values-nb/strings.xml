@@ -356,7 +356,6 @@
     <string name="caches_store_selected">Lagre valgte</string>
     <string name="caches_store_background">Bakgrunnsnedlasting (Eksperimentell!)</string>
     <string name="caches_store_refresh_background">Bakgrunnsoppdatering (Eksperimentell!)</string>
-    <string name="caches_store_background_should_force_refresh">Oppdater allerede nedlastede cachene</string>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>

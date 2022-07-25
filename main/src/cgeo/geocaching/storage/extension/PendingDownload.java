@@ -13,6 +13,10 @@ public class PendingDownload extends DataStore.DBExtension {
         super(copyFrom);
     }
 
+    public long getDownloadId() {
+        return Long.parseLong(getKey());
+    }
+
     public String getFilename() {
         return getString1();
     }
@@ -35,13 +39,25 @@ public class PendingDownload extends DataStore.DBExtension {
         return null == temp ? null : new PendingDownload(temp);
     }
 
-    public static void add(final long pendingDownload, @NonNull final String filename, @NonNull final String remoteUrl, final long date, final int offlineMapTypeId) {
-        final String key = String.valueOf(pendingDownload);
+    @Nullable
+    public static PendingDownload findByUri(@NonNull final String remoteUri) {
+        for (DataStore.DBExtension temp : getAll(type, null)) {
+            final PendingDownload download = new PendingDownload(temp);
+            if (remoteUri.equals(download.getRemoteUrl())) {
+                return download;
+            }
+        }
+        return null;
+    }
+
+
+    public static void add(final long downloadId, @NonNull final String filename, @NonNull final String remoteUrl, final long date, final int offlineMapTypeId) {
+        final String key = String.valueOf(downloadId);
         removeAll(type, key);
         add(type, key, date, offlineMapTypeId, 0, 0, filename, remoteUrl, "", "");
     }
 
-    public static void remove(final long pendingDownload) {
-        removeAll(type, String.valueOf(pendingDownload));
+    public static void remove(final long downloadId) {
+        removeAll(type, String.valueOf(downloadId));
     }
 }

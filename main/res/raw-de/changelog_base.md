@@ -1,8 +1,8 @@
-- Neu: Caches im Hintergrund herunterladen / aktualisieren (experimentell)
+- Neu: Caches im Hintergrund herunterladen/aktualisieren
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 - Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
 - Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
 - Neu: Option zum Löschen von Offline-Karten
 - Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Korrektur: Lab Adventure-Einträge in individuellen Routen werden nach der Bearbeitung nicht mehr als solche erkannt

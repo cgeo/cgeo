@@ -360,7 +360,6 @@
     <string name="caches_store_selected">Spara valda</string>
     <string name="caches_store_background">Bakgrundshämtning (Experimentell!)</string>
     <string name="caches_store_refresh_background">Bakgrundsuppdatering (Experimentell!)</string>
-    <string name="caches_store_background_should_force_refresh">Uppdatera redan hämtade cacher</string>
     <string name="caches_store_background_title">Ladda ned cacher</string>
     <string name="caches_history">Senast hittade cacher</string>
     <string name="caches_on_map">Visa på karta</string>

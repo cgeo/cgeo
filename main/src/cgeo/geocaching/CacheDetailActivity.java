@@ -445,7 +445,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public void onDestroy() {
         createDisposables.clear();
-        SpeechService.stopService(this);
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }

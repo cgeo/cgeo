@@ -7,10 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="3dip"
     android:orientation="horizontal"
-    android:paddingBottom="7dip"
-    android:paddingLeft="5dip"
-    android:paddingRight="5dip"
-    android:paddingTop="7dip"
+    android:paddingVertical="7dip"
+    android:paddingHorizontal="5dip"
     tools:context=".address.AddressListAdapter" >
 
     <LinearLayout
@@ -45,14 +43,10 @@
             android:maxLines="1" />
 
     </LinearLayout>
-    <ImageView
+    <Button
         android:id="@+id/mapIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:gravity="right"
-        android:scrollHorizontally="true"
-        tools:text="place holder for jump to map"
-        app:srcCompat="@drawable/ic_menu_mapmode"
-        android:layout_alignParentRight="true" />
+        style="@style/button_icon"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        app:icon="@drawable/ic_menu_mapmode" />
 </RelativeLayout>

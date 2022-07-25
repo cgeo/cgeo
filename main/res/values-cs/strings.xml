@@ -361,12 +361,12 @@
     </plurals>
     <string name="caches_store_offline">Uložit offline</string>
     <string name="caches_store_all">Uložit všechny</string>
-    <string name="caches_store_unsaved">Uložit neuložené</string>
     <string name="caches_store_selected">Uložit vybrané</string>
-    <string name="caches_store_background">Stahování na pozadí (experimentální!)</string>
-    <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
-    <string name="caches_store_background_should_force_refresh">Obnovit již stažené kešky</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
+    <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
+    <string name="caches_store_background_option_nothing">Nedělat nic</string>
+    <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
+    <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
     <string name="caches_store_background_result_failed">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
     <string name="caches_store_background_result_canceled">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
@@ -436,9 +436,9 @@
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <plurals name="user_finds">
         <item quantity="one">%d nález</item>
-        <item quantity="few">%d nálezů</item>
+        <item quantity="few">%d nálezy</item>
         <item quantity="many">%d nálezů</item>
-        <item quantity="other">%d nálezy</item>
+        <item quantity="other">%d nálezů</item>
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="one">%d zaznamenána offline</item>
@@ -2155,6 +2155,8 @@
     <string name="notification_channel_foreground_description">oznámení se zobrazí, když aplikace c:geo pracuje na pozadí</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
+    <string name="notification_channel_cache_download_name">stahování kešky</string>
+    <string name="notification_channel_cache_download_description">oznámení o výsledku stahování kešek na pozadí</string>
     <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
     <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
