@@ -744,6 +744,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
+            actionBar.setHomeActionContentDescription(R.string.about);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
