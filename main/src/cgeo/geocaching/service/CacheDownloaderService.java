@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -31,6 +32,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.functions.Function;
 
 public class CacheDownloaderService extends AbstractForegroundIntentService {
     static {
@@ -162,9 +167,17 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             return;
         }
 
-        for (String geocode : intent.getStringArrayListExtra(EXTRA_GEOCODES)) {
+        // schedule download on multiple threads...
+
+        Log.d("Download task started");
+
+        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
+        geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
             handleDownload(geocode);
-        }
+            emitter.onComplete();
+        }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
+
+        Log.d("Download task completed");
     }
 
     private void handleDownload(final String geocode) {
