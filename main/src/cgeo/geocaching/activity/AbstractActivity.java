@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -28,7 +29,6 @@ import cgeo.geocaching.utils.formulas.FormulaUtils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
@@ -150,17 +150,16 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
-        LocalBroadcastManager.getInstance(this).registerReceiver(finishBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                finish();
+            }
+        });
     }
 
     public void clearBackStack() {
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_CLEAR_BACKSTACK));
-    }
-
-    @Override
-    protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
-        super.onDestroy();
     }
 
     protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID) {
