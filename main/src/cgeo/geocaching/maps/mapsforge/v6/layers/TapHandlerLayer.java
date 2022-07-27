@@ -18,7 +18,7 @@ import org.mapsforge.map.layer.overlay.Marker;
 public class TapHandlerLayer extends Layer {
 
     private final TapHandler tapHandler;
-    private LatLong longTabLatLong;
+    private LatLong longTapLatLong;
     private Bitmap markerBitmap;
 
     public TapHandlerLayer(final TapHandler tapHandler) {
@@ -28,11 +28,11 @@ public class TapHandlerLayer extends Layer {
     @Override
     public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
         // display a pin marker if a long click was performed, otherwise nothing visible here
-        if (longTabLatLong != null) {
+        if (longTapLatLong != null) {
             if (markerBitmap == null) {
                 markerBitmap = AndroidGraphicFactory.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.map_pin, null));
             }
-            final Marker marker = new Marker(longTabLatLong, markerBitmap, 0, -markerBitmap.getHeight() / 2);
+            final Marker marker = new Marker(longTapLatLong, markerBitmap, 0, -markerBitmap.getHeight() / 2);
             marker.setDisplayModel(this.getDisplayModel());
             marker.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
         }
@@ -48,9 +48,9 @@ public class TapHandlerLayer extends Layer {
 
     @Override
     public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
-        longTabLatLong = tapLatLong;
+        longTapLatLong = tapLatLong;
         if (!tapHandler.onLongPress(tapXY)) {
-            longTabLatLong = null;
+            longTapLatLong = null;
         }
         requestRedraw();
         tapHandler.finished();
@@ -58,12 +58,12 @@ public class TapHandlerLayer extends Layer {
         return true;
     }
 
-    public LatLong getLongTabLatLong() {
-        return longTabLatLong;
+    public LatLong getLongTapLatLong() {
+        return longTapLatLong;
     }
 
-    public void resetLongTabLatLong() {
-        longTabLatLong = null;
+    public void resetLongTapLatLong() {
+        longTapLatLong = null;
         requestRedraw();
     }
 }

@@ -812,11 +812,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         return true;
     }
 
-    public void triggerLongTabContextMenu(final Point tapXY) {
+    public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
-            MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTabLatLng().latitude, overlayPositionAndScale.getLongTabLatLng().longitude),
+            MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTapLatLng().latitude, overlayPositionAndScale.getLongTapLatLng().longitude),
                             tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, getCurrentTargetCache(), mapOptions)
-                    .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTabLatLng())
+                    .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTapLatLng())
                     .show();
         }
     }

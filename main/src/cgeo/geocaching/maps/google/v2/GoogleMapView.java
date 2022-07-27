@@ -141,8 +141,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 if (!hitWaypoint && null != positionAndHistoryRef) {
                     final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
                     if (null != positionAndHistory) {
-                        positionAndHistory.setLongTabLatLng(tapLatLong);
-                        ((CGeoMap) onCacheTapListener).triggerLongTabContextMenu(tappedPoint);
+                        positionAndHistory.setLongTapLatLng(tapLatLong);
+                        ((CGeoMap) onCacheTapListener).triggerLongTapContextMenu(tappedPoint);
                     }
                 }
             }

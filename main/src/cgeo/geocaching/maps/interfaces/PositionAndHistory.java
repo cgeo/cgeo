@@ -20,11 +20,11 @@ public interface PositionAndHistory extends IndividualRoute.UpdateIndividualRout
 
     float getHeading();
 
-    void setLongTabLatLng(LatLng latLng);
+    void setLongTapLatLng(LatLng latLng);
 
-    LatLng getLongTabLatLng();
+    LatLng getLongTapLatLng();
 
-    void resetLongTabLatLng();
+    void resetLongTapLatLng();
 
     ArrayList<TrailHistoryElement> getHistory();
 

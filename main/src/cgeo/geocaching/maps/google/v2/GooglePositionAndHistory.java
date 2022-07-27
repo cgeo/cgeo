@@ -57,7 +57,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private float heading;
     private final PositionHistory history = new PositionHistory();
 
-    private LatLng longTabLatLng;
+    private LatLng longTapLatLng;
 
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
@@ -67,7 +67,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private WeakReference<GoogleMap> mapRef = null;
     private final GoogleMapObjects positionObjs;
-    private final GoogleMapObjects longTabObjs;
+    private final GoogleMapObjects longTapObjs;
     private final GoogleMapObjects historyObjs;
     private final GoogleMapObjects routeObjs;
     private final GoogleMapObjects trackObjs;
@@ -89,7 +89,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
         positionObjs = new GoogleMapObjects(googleMap);
-        longTabObjs = new GoogleMapObjects(googleMap);
+        longTapObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
@@ -162,19 +162,19 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void setLongTabLatLng(final LatLng latLng) {
-        longTabLatLng = latLng;
+    public void setLongTapLatLng(final LatLng latLng) {
+        longTapLatLng = latLng;
         repaintRequired();
     }
 
     @Override
-    public LatLng getLongTabLatLng() {
-        return longTabLatLng;
+    public LatLng getLongTapLatLng() {
+        return longTapLatLng;
     }
 
     @Override
-    public void resetLongTabLatLng() {
-        longTabLatLng = null;
+    public void resetLongTapLatLng() {
+        longTapLatLng = null;
         repaintRequired();
     }
 
@@ -236,7 +236,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         drawHistory();
         drawViewport(lastViewport);
         drawRouteAndTracks();
-        drawLongTabMarker();
+        drawLongTapMarker();
     }
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
@@ -407,12 +407,12 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
     }
 
-    private synchronized void drawLongTabMarker() {
-        longTabObjs.removeAll();
-        if (longTabLatLng != null) {
+    private synchronized void drawLongTapMarker() {
+        longTapObjs.removeAll();
+        if (longTapLatLng != null) {
             positionObjs.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.map_pin, null)))
-                    .position(longTabLatLng)
+                    .position(longTapLatLng)
                     .anchor(0.5f, 1f)
                     .zIndex(ZINDEX_POSITION)
             );
