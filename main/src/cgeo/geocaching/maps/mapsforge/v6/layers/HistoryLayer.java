@@ -44,7 +44,7 @@ public class HistoryLayer extends Layer {
 
     public void resetColor() {
         historyLine = AndroidGraphicFactory.INSTANCE.createPaint();
-        historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth());
+        historyLine.setStrokeWidth(MapLineUtils.getHistoryLineWidth(false));
         historyLine.setStyle(Style.STROKE);
         historyLine.setColor(MapLineUtils.getTrailColor());
     }
