@@ -954,10 +954,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
 
-            MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTabLatLong().latitude, tapHandlerLayer.getLongTabLatLong().longitude),
+            MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTapLatLong().latitude, tapHandlerLayer.getLongTapLatLong().longitude),
                             (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
                             getCurrentTargetCache(), mapOptions)
-                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTabLatLong())
+                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();
         }
     }
