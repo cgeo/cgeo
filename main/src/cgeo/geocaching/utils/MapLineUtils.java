@@ -13,8 +13,8 @@ public class MapLineUtils {
 
     // history trail line
 
-    public static float getHistoryLineWidth() {
-        return getWidth(R.string.pref_mapline_trailwidth, R.integer.default_trailwidth);
+    public static float getHistoryLineWidth(final boolean unifiedMap) {
+        return getWidth(R.string.pref_mapline_trailwidth, R.integer.default_trailwidth, unifiedMap);
     }
 
     public static int getTrailColor() {
@@ -23,8 +23,8 @@ public class MapLineUtils {
 
     // direction line
 
-    public static float getDirectionLineWidth() {
-        return getWidth(R.string.pref_mapline_directionwidth, R.integer.default_directionwidth);
+    public static float getDirectionLineWidth(final boolean unifiedMap) {
+        return getWidth(R.string.pref_mapline_directionwidth, R.integer.default_directionwidth, unifiedMap);
     }
 
     public static int getDirectionColor() {
@@ -33,8 +33,8 @@ public class MapLineUtils {
 
     // route line
 
-    public static float getRouteLineWidth() {
-        return getWidth(R.string.pref_mapline_routewidth, R.integer.default_routewidth);
+    public static float getRouteLineWidth(final boolean unifiedMap) {
+        return getWidth(R.string.pref_mapline_routewidth, R.integer.default_routewidth, unifiedMap);
     }
 
     public static int getRouteColor() {
@@ -43,8 +43,8 @@ public class MapLineUtils {
 
     // track line
 
-    public static float getTrackLineWidth() {
-        return getWidth(R.string.pref_mapline_trackwidth, R.integer.default_trackwidth);
+    public static float getTrackLineWidth(final boolean unifiedMap) {
+        return getWidth(R.string.pref_mapline_trackwidth, R.integer.default_trackwidth, unifiedMap);
     }
 
     public static int getTrackColor() {
@@ -84,8 +84,8 @@ public class MapLineUtils {
 
     // helper methods
 
-    private static float getWidth(final int prefKeyId, final int defaultValueKeyId) {
-        return (Settings.getMapLineValue(prefKeyId, defaultValueKeyId) / 2.0f + 1.0f) * DisplayUtils.getDisplayDensity();
+    private static float getWidth(final int prefKeyId, final int defaultValueKeyId, final boolean unifiedMap) {
+        return (Settings.getMapLineValue(prefKeyId, defaultValueKeyId) / (unifiedMap ? 4.0f : 2.0f) + 1.0f) * DisplayUtils.getDisplayDensity();
     }
 
 }

@@ -241,7 +241,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
-                .width(MapLineUtils.getDirectionLineWidth())
+                .width(MapLineUtils.getDirectionLineWidth(false))
                 .color(MapLineUtils.getDirectionColor())
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
@@ -344,7 +344,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                         historyObjs.addPolyline(new PolylineOptions()
                                 .addAll(points)
                                 .color(MapLineUtils.getTrailColor())
-                                .width(MapLineUtils.getHistoryLineWidth())
+                                .width(MapLineUtils.getHistoryLineWidth(false))
                                 .zIndex(ZINDEX_HISTORY)
                         );
                     }
@@ -383,7 +383,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 routeObjs.addPolyline(new PolylineOptions()
                         .addAll(segment)
                         .color(MapLineUtils.getRouteColor())
-                        .width(MapLineUtils.getRouteLineWidth())
+                        .width(MapLineUtils.getRouteLineWidth(false))
                         .zIndex(ZINDEX_ROUTE)
                 );
             }
@@ -398,7 +398,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)
                                 .color(MapLineUtils.getTrackColor())
-                                .width(MapLineUtils.getTrackLineWidth())
+                                .width(MapLineUtils.getTrackLineWidth(false))
                                 .zIndex(ZINDEX_TRACK)
                         );
                     }
