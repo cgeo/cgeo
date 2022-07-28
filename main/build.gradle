@@ -347,11 +347,11 @@ dependencies {
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
     //def mapsforgeSource = 'com.github.mapsforge.mapsforge'
-    //def mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
+    //def mapsforgeVersion = '0.16.0' // master as of 18.07.22
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
     def mapsforgeSource = 'com.github.cgeo.mapsforge'
-    def mapsforgeVersion = 'fbc75a4' // fix for #12210
+    def mapsforgeVersion = '0.16.0' // fix for #12210
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
