@@ -427,7 +427,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
         if (null == individualRoute) {
             individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);
-            individualRoute.reloadRoute(overlayPositionAndScale);
+            reloadIndividualRoute();
         } else {
             individualRoute.updateRoute(overlayPositionAndScale);
         }
@@ -587,7 +587,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);
         }
         individualRoute.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
-        ActivityMixin.invalidateOptionsMenu(activity);
+        mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
         overlayPositionAndScale.repaintRequired();
     }
 
@@ -732,8 +732,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            mapActivity.getRouteTrackUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
-
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             if (mapOptions.mapMode == MapMode.SINGLE) {
@@ -839,7 +837,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
             Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         }
-        individualRoute.reloadRoute(overlayPositionAndScale);
+        reloadIndividualRoute();
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
@@ -863,6 +861,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTrack(final String key, final Route route) {
         mapActivity.getTracks().setRoute(key, route);
         resumeTrack(key, null == route);
+        mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
     }
 
     @Override
@@ -874,8 +873,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void reloadIndividualRoute() {
-        individualRoute.reloadRoute(overlayPositionAndScale);
-        mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+        individualRoute.reloadRoute((route) -> {
+            overlayPositionAndScale.updateIndividualRoute(route);
+            mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+            mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+        });
     }
 
     private void clearTrailHistory() {
@@ -887,10 +889,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void clearIndividualRoute() {
-        individualRoute.clearRoute(overlayPositionAndScale);
-        overlayPositionAndScale.repaintRequired();
-        ActivityMixin.invalidateOptionsMenu(activity);
-        ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
+        individualRoute.clearRoute((route) -> {
+            overlayPositionAndScale.repaintRequired();
+            mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+            ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
+        });
     }
 
     private void setMapRotation(final MenuItem item, final int rotation) {

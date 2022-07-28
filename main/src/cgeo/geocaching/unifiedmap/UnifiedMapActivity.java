@@ -462,19 +462,23 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void setTrack(final String key, final Route route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
     }
 
     private void reloadIndividualRoute() {
         individualRoute.reloadRoute((route) -> {
             if (tileProvider.getMap().positionLayer != null) {
                 tileProvider.getMap().positionLayer.updateIndividualRoute(route);
+                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
             }
         });
     }
 
     private void clearIndividualRoute() {
-        individualRoute.clearRoute((route) -> tileProvider.getMap().positionLayer.updateIndividualRoute(route));
-//        ActivityMixin.invalidateOptionsMenu(this); // @todo still needed since introduction of route popup?
+        individualRoute.clearRoute((route) -> {
+            tileProvider.getMap().positionLayer.updateIndividualRoute(route);
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        });
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
 
@@ -493,7 +497,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         final boolean result = super.onPrepareOptionsMenu(menu);
         TileProviderFactory.addMapViewLanguageMenuItems(menu);
-        this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, tracks);
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
 
         // map rotation state

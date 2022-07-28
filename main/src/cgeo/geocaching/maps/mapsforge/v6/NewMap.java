@@ -412,8 +412,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, tracks);
-
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             if (mapOptions.mapMode == MapMode.SINGLE) {
@@ -524,7 +522,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
             Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         }
-        individualRoute.reloadRoute(routeLayer);
+        reloadIndividualRoute();
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
@@ -551,8 +549,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private void clearIndividualRoute() {
         individualRoute.clearRoute(routeLayer);
+        individualRoute.clearRoute((route) -> {
+            routeLayer.updateIndividualRoute(route);
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        });
         distanceView.showRouteDistance();
-        ActivityMixin.invalidateOptionsMenu(this);
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
 
@@ -712,7 +713,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void resumeRoute(final boolean force) {
         if (null == individualRoute || force) {
             individualRoute = new IndividualRoute(this::setTarget);
-            individualRoute.reloadRoute(routeLayer);
+            reloadIndividualRoute();
         } else {
             individualRoute.updateRoute(routeLayer);
         }
@@ -1367,7 +1368,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
         individualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
-        ActivityMixin.invalidateOptionsMenu(this);
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
     }
 
     @Nullable
@@ -1452,11 +1453,15 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void setTrack(final String key, final Route route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
     }
 
     private void reloadIndividualRoute() {
         if (null != routeLayer) {
-            individualRoute.reloadRoute(routeLayer);
+            individualRoute.reloadRoute((route) -> {
+                routeLayer.updateIndividualRoute(route);
+                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            });
         } else {
             // try again in 0.25 second
             new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);
