@@ -65,6 +65,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -95,7 +96,6 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -158,7 +158,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -387,14 +386,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        // get notified on cache changes (e.g.: waypoint creation from map)
-        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, Intents.INTENT_CACHE_CHANGED) {
-            /**
-             * Receives update notifications from asynchronous processes
-             */
+        // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
-            public void onReceive(final Context context, final Intent intent) {
-                notifyDataSetChanged();
+            protected void onReceive(final Context context, final String geocode) {
+                if (cache.getGeocode().equals(geocode)) {
+                    notifyDataSetChanged();
+                }
             }
         });
     }
@@ -586,7 +584,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 protected void onPostExecute(final Boolean result) {
                     if (result) {
                         notifyDataSetChanged();
-                        LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
+                        GeocacheChangedBroadcastReceiver.sendBroadcast(CacheDetailActivity.this, cache.getGeocode());
                     }
                 }
             }.execute();

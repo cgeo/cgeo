@@ -1,7 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.ImageViewActivity;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.ImageGalleryCategoryBinding;
@@ -12,6 +11,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -40,7 +40,6 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.gridlayout.widget.GridLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -517,9 +516,7 @@ public class ImageGalleryView extends LinearLayout {
                     final Waypoint waypoint = new Waypoint(img.getTitle(), WaypointType.WAYPOINT, true);
                     waypoint.setCoords(gp);
                     geocache.addOrChangeWaypoint(waypoint, true);
-                    final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                    intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                    LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(activity, geocode);
                 }
             });
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_navigate), R.drawable.ic_menu_navigate,

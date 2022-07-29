@@ -60,7 +60,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
-import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -347,7 +347,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
         MapUtils.showMapOneTimeMessages(this, mapMode);
-        getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(this) {
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
                 caches.invalidate(Collections.singleton(geocode));

@@ -213,7 +213,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             // download...
             if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
-                GeocacheRefreshedBroadcastReceiver.sendBroadcast(this, geocode);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
                 synchronized (downloadQuery) {

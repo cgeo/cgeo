@@ -23,6 +23,7 @@ import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -39,7 +40,6 @@ import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,7 +57,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -702,7 +701,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             finishHandler.sendEmptyMessage(SAVE_ERROR);
         }
 
-        LocalBroadcastManager.getInstance(EditWaypointActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
+        GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
     }
 
     private static class ActivityData {
