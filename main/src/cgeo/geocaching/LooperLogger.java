@@ -32,7 +32,7 @@ public class LooperLogger {
         final LooperLogger ll = new LooperLogger();
         looper.setMessageLogging(ll::process);
         looper.getThread().getStackTrace();
-        AndroidRxUtils.runPeriodically(AndroidRxUtils.networkScheduler, () -> {
+        AndroidRxUtils.runPeriodically(AndroidRxUtils.computationScheduler, () -> {
             if (!ll.collectTraces.get()) {
                 return;
             }

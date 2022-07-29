@@ -646,7 +646,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         if (!toRefresh.isEmpty()) {
-            AndroidRxUtils.refreshScheduler.scheduleDirect(() -> {
+            AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                 for (final String geocode : toRefresh) {
                     final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                     if (cache != null) {

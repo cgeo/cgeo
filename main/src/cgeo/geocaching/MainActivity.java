@@ -158,7 +158,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             connectorStatus.setText(connInfo);
                             connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
-                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
                                     () -> {
                                         final StringBuilder userFoundCount = new StringBuilder();
 
