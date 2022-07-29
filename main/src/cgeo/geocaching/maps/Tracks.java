@@ -45,7 +45,7 @@ public class Tracks {
     }
 
     private void getListOfTrackfilesInBackground(@Nullable final Runnable runAfterLoad) {
-        AndroidRxUtils.refreshScheduler.scheduleDirect(() -> {
+        AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
             for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {
                 data.add(new Track(trackfile));
             }
