@@ -32,8 +32,14 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
-        android:key="@string/pref_navigation_menu_google_maps"
+        android:key="@string/pref_navigation_menu_other"
         android:title="@string/cache_menu_map_ext"
+        app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_other_nolabel"
+        android:title="@string/cache_menu_map_ext_nolabel"
         app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"

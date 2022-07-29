@@ -54,9 +54,13 @@ public final class NavigationAppFactory {
          */
         LOCUS(new LocusApp(), 4, R.string.pref_navigation_menu_locus),
         /**
-         * Google Maps
+         * Other external map app (label included)
          */
-        GOOGLE_MAPS(new GoogleMapsApp(), 6, R.string.pref_navigation_menu_google_maps),
+        OTHER_MAP(new OtherMapsApp.OtherMapsAppWithLabel(), 6, R.string.pref_navigation_menu_other),
+        /**
+         * Other external map app (coordinates only)
+         */
+        OTHER_MAP_NOLABEL(new OtherMapsApp.OtherMapsAppWithoutLabel(), 27, R.string.pref_navigation_menu_other_nolabel),
         /**
          * Google Navigation
          */
