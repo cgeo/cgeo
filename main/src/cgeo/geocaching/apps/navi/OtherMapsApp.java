@@ -14,11 +14,15 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
-class GoogleMapsApp extends AbstractPointNavigationApp {
+abstract class OtherMapsApp extends AbstractPointNavigationApp {
 
-    GoogleMapsApp() {
-        super(getString(R.string.cache_menu_map_ext), null);
+    boolean withLabel = false;
+
+    OtherMapsApp(@StringRes final int title, final boolean withLabel) {
+        super(getString(title), null);
+        this.withLabel = withLabel;
     }
 
     @Override
@@ -31,19 +35,19 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
         navigate(context, point, context.getString(R.string.waypoint));
     }
 
-    private static void navigate(final Context context, final Geopoint point, final String label) {
+    private void navigate(final Context context, final Geopoint point, final String label) {
         try {
             final String latitude = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, point);
             final String longitude = GeopointFormatter.format(Format.LON_DECDEGREE_RAW, point);
             final String geoLocation = "geo:" + latitude + "," + longitude;
-            final String query = latitude + "," + longitude + "(" + label + ")";
+            final String query = latitude + "," + longitude + (withLabel ? "(" + label + ")" : "");
             final String uriString = geoLocation + "?q=" + Uri.encode(query);
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
             return;
         } catch (final RuntimeException ignored) {
             // nothing
         }
-        Log.i("GoogleMapsApp.navigate: No maps application available.");
+        Log.i("OtherMapsApp.navigate: No maps application available.");
 
         ActivityMixin.showToast(context, getString(R.string.err_application_no));
     }
@@ -56,5 +60,17 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
         navigate(context, waypoint.getCoords(), waypoint.getName());
+    }
+
+    static class OtherMapsAppWithLabel extends OtherMapsApp {
+        OtherMapsAppWithLabel() {
+            super(R.string.cache_menu_map_ext, true);
+        }
+    }
+
+    static class OtherMapsAppWithoutLabel extends OtherMapsApp {
+        OtherMapsAppWithoutLabel() {
+            super(R.string.cache_menu_map_ext_nolabel, false);
+        }
     }
 }

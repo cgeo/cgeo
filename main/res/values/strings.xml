@@ -1382,6 +1382,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
     <string name="cache_menu_map_ext">Other external apps</string>
+    <string name="cache_menu_map_ext_nolabel">Other external apps (coords only)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Open in browser</string>
     <string name="no_browser_found">No browser found</string>
