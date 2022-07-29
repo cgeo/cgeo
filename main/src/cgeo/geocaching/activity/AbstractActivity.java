@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -10,6 +9,7 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -258,9 +258,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
             if (success) {
-                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));

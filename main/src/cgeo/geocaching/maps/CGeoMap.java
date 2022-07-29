@@ -52,7 +52,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
-import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
@@ -544,7 +544,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
 
         // only add cache if it is currently visible
-        activity.getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(mapView.getContext()) {
+        activity.getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(mapView.getContext()) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
