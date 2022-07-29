@@ -299,7 +299,6 @@
     </plurals>
     <string name="caches_store_offline">Salvează local</string>
     <string name="caches_store_all">Salvează pe toate</string>
-    <string name="caches_store_unsaved">Salvează nesalvate</string>
     <string name="caches_store_selected">Salvează cutiile selectate</string>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
