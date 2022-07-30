@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
@@ -112,7 +113,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
             // position and heading arrow
             final Matrix matrix = new Matrix();
-            matrix.setRotate(currentHeading, arrowWidthHalf, arrowHeightHalf);
+            matrix.setRotate(AngleUtils.normalize(currentHeading + map.getMapPosition().getBearing()), arrowWidthHalf, arrowHeightHalf);
             final Bitmap arrow = new AndroidBitmap(android.graphics.Bitmap.createBitmap(positionAndHeadingArrow, 0, 0, arrowWidth, arrowHeight, matrix, true));
             arrowLayer.removeAllItems();
             final MarkerItem item = new MarkerItem("current position", "", new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
