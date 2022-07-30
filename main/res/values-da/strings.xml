@@ -352,7 +352,6 @@
     </plurals>
     <string name="caches_store_offline">Gem Offline</string>
     <string name="caches_store_all">Gem alle</string>
-    <string name="caches_store_unsaved">Gem ændringer</string>
     <string name="caches_store_selected">Gem valgte</string>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
@@ -523,7 +522,6 @@
     <string name="cache_filter_status_select_label_has_trackable">Har Trackables</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Offline Fundet-log findes</string>
     <string name="cache_filter_status_select_label_solved_mystery">Løst Mystery</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Denne filterindstilling vil kun påvirke mystery caches.\n\n En mystery-cache betragtes som \'løst\', hvis det enten har ændret koordinater eller et gyldigt sidste waypoint med udfyldte koordinater.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiveret</string>
     <string name="cache_filter_status_archived">Lukket</string>
