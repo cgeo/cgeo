@@ -349,7 +349,6 @@
     </plurals>
     <string name="caches_store_offline">Guardar sin conexión</string>
     <string name="caches_store_all">Guardar todos</string>
-    <string name="caches_store_unsaved">Guardar los no guardados</string>
     <string name="caches_store_selected">Guardar seleccionados</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Ver en mapa</string>
@@ -534,7 +533,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tiene registro sin conexión</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tiene registros sin conexión</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misterio resuelto</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuración de filtro sólo afectará a cachés misteriosos.\n\n Un misterio se considera \'resuelto\' si ha cambiado de coordenadas o un punto final válido lleno de coordenadas.</string>
     <string name="cache_filter_status_active">Activo</string>
     <string name="cache_filter_status_disabled">Desactivado</string>
     <string name="cache_filter_status_archived">Archivado</string>
