@@ -298,7 +298,6 @@
     </plurals>
     <string name="caches_store_offline">Saglabāt bezsaistes lietošanai</string>
     <string name="caches_store_all">Saglabāt visu</string>
-    <string name="caches_store_unsaved">Saglabāt nesaglabātos</string>
     <string name="caches_store_selected">Saglabāt atlasīto</string>
     <string name="caches_history">Vēsture</string>
     <string name="caches_on_map">Parādīt kartē</string>
