@@ -558,7 +558,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ha un Log \"Trovato\" Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Ha Waypoint Definiti Dall\'Utente</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro riguarderà solo i cache mistery.\n\n Un mistery è considerato \'risolto\' se ha cambiato coordinate o sono state inserite le coordinate di un waypoint finale.</string>
     <string name="cache_filter_status_active">Attivo</string>
     <string name="cache_filter_status_disabled">Disabilitato</string>
     <string name="cache_filter_status_archived">Archiviato</string>
