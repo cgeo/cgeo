@@ -357,10 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Offline speichern</string>
     <string name="caches_store_all">Alle speichern</string>
-    <string name="caches_store_unsaved">Neue speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
-    <string name="caches_store_background">Hintergrund-Download (Experimentell!)</string>
-    <string name="caches_store_refresh_background">Hintergrund-Aktualisierung (Experimentell!)</string>
     <string name="caches_store_background_title">Caches herunterladen</string>
     <string name="caches_store_background_already_stored">Einige Caches sind bereits gespeichert. Was soll mit ihnen geschehen?</string>
     <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
@@ -561,7 +558,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Mit eigenen Wegpunkten</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus.\n\n Ein Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiviert</string>
     <string name="cache_filter_status_archived">Archiviert</string>
