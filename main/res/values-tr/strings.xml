@@ -132,6 +132,7 @@
     <string name="log_posting_image">Resimler gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
+    <string name="log_templates">Buldum: Şablon…</string>
     <string name="log_post_not_possible">Verilerin indirilmesi devam ediyor…\nLütfen birkaç saniye içinde tekrar deneyin veya internet bağlantınızı kontrol edin.</string>
     <string name="log_date_future_not_allowed">Gelecekteki kayıt tarihlerine izin verilmez.</string>
     <string name="log_add">Ekle</string>
@@ -650,6 +651,8 @@
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
     <string name="settings_category_browser">Tarayıcı</string>
     <string name="settings_category_geocaching_platform">Geocaching Platformu</string>
+    <string name="settings_category_nearbysearch">Yakınlarda ara</string>
+    <string name="init_nearbysearchlimit_title">Yakınları arama limiti</string>
     <string name="settings_category_geocaching_additionals">Diğer servisler ve eklentiler</string>
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
@@ -749,6 +752,7 @@
     <string name="init_prevent_cache_note_merge">Kişisel Cache Notu Üzerine Yaz</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
     <string name="init_summary_customtabs_as_browser">Harici siteler c:geo\'dan ayrılmadan gösterilecek (sadece Chrome yüklenmişse çalışır)</string>
+    <string name="init_rot13_hint">İp ucunu şifrele</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
     <string name="init_summary_save_log_img">Kayıtlardan Resimleri Kaydet</string>
     <string name="init_units">İngiliz Ölçü Birimlerini Kullan</string>
@@ -763,6 +767,8 @@
     <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
+    <string name="init_quicklaunchitems">Hızlı başlatma düğmeleri</string>
+    <string name="init_summary_quicklaunchitems">Ana ekranda hızlı başlatma düğmeleri olarak bir veya daha fazla öğe seçin</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -1330,6 +1336,7 @@
     <string name="waypoint_calculated_coordinates_global">Koordinatları hesapla</string>
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
+    <string name="waypoint_my_coordinates_accuracy">Koordinatlarım (±%s)</string>
     <string name="waypoint_bearing">Azimut açısı</string>
     <string name="waypoint_distance">Mesafe</string>
     <string name="waypoint_name">İsim</string>
@@ -1363,6 +1370,7 @@
     <string name="waypoint_duplicate">Yol noktasını yinele</string>
     <string name="waypoint_toclipboard">Yol noktasını panoya kopyala</string>
     <string name="waypoint_copy_of">Kopyası</string>
+    <string name="waypoint_open_geochecker">Geochecker\'ı aç</string>
     <string name="waypointcalc_notes_prompt">Notları buraya giriniz…</string>
     <string name="waypoint_coordinate_formats_plain">Açık koordinat</string>
     <string name="from_clipboard">Panodan</string>
@@ -1850,6 +1858,8 @@
     <string name="cat_tools">Ekipman</string>
     <string name="cat_type">Tür</string>
     <string name="cat_location">Cache konumu</string>
+    <string name="cat_duration">Mesafe / Süre</string>
+    <string name="cat_surrounding">Geocache yakınlarında</string>
     <string name="cat_permissions">İzinler</string>
     <!-- cache attribute sources -->
     <string name="attribute_source_gc">GC</string>
@@ -2176,7 +2186,9 @@
     <string name="touch_again_to_exit">Çıkmak için lütfen yeniden dokunun</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alanlar</string>
+    <string name="rtl_fell_meadow">otlak / çayırlık</string>
     <string name="rtl_rock">kaya</string>
+    <string name="rtl_scree">çarşak</string>
     <string name="rtl_glacier">buzul</string>
     <string name="rtl_grass">çimen</string>
     <string name="rtl_farmland">tarım arazisi</string>
@@ -2244,6 +2256,7 @@
     <string name="rtl_volcano">yanardağ</string>
     <string name="rtl_archaeological">Arkeolojik</string>
     <string name="rtl_artwork">sanat eseri</string>
+    <string name="rtl_attraction">cazibe noktası</string>
     <string name="rtl_castle">kale</string>
     <string name="rtl_cinema">sinema</string>
     <string name="rtl_fountain">çeşme</string>
@@ -2331,6 +2344,7 @@
     <string name="rtl_wastewater_plant">atıksu tesisi</string>
     <string name="rtl_watermill">su değirmeni</string>
     <string name="rtl_windmill">yel değirmeni</string>
+    <string name="rtl_bunker">bunker</string>
     <string name="rtl_lighthouse">deniz feneri</string>
     <string name="rtl_tower_observation">gözlem kulesi</string>
     <string name="rtl_kindergarten">çocuk yuvası</string>
@@ -2352,6 +2366,7 @@
     <string name="rtl_cave_entrance">mağara girişi</string>
     <string name="rtl_cycle_barrier">döngü bariyer</string>
     <string name="rtl_elevator">asansör</string>
+    <string name="rtl_ford">Sığ Su Geçidi</string>
     <string name="rtl_gate">geçit</string>
     <string name="rtl_geyser">gayzer</string>
     <string name="rtl_hot_spring">kaplıca</string>
@@ -2393,11 +2408,15 @@
     <string name="smiley_cool">Tarz</string>
     <string name="smiley_evil">Şeytan</string>
     <string name="smiley_wink">Göz Kırpma</string>
+    <string name="smiley_clown">Palyaço</string>
+    <string name="smiley_shy">Utangaç</string>
+    <string name="smiley_angry">Kızgın</string>
     <string name="smiley_dead">Ölü</string>
     <string name="smiley_sleepy">Uykulu</string>
     <string name="smiley_kisses">Öpücük</string>
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
+    <string name="smiley_cry">Ağlak</string>
     <string name="smiley_innocent">Masum</string>
     <string name="smiley_kiss">Öpücük</string>
     <string name="smiley_laughing">Gülen</string>
