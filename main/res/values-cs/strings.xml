@@ -427,9 +427,9 @@
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <plurals name="user_finds">
         <item quantity="one">%d nález</item>
-        <item quantity="few">%d nálezů</item>
+        <item quantity="few">%d nálezy</item>
         <item quantity="many">%d nálezů</item>
-        <item quantity="other">%d nálezy</item>
+        <item quantity="other">%d nálezů</item>
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="one">%d zaznamenána offline</item>
