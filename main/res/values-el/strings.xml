@@ -353,10 +353,7 @@
     </plurals>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
     <string name="caches_store_all">Αποθήκευση όλων</string>
-    <string name="caches_store_unsaved">Αποθήκευση των μη αποθηκευμένων</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
-    <string name="caches_store_background">Λήψη φόντου (Πειραματικό!)</string>
-    <string name="caches_store_refresh_background">Ανανέωση φόντου (Πειραματικό!)</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
@@ -552,7 +549,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρυπτες γριφου.\n\n Ένας γρίφος θεωρείται «λυμένος» αν έχει αλλάγμενες συντεταγμένες ή ένα έγκυρο τελικό σημείο με συμπληρωμένο συντεταγμένες.</string>
     <string name="cache_filter_status_active">Ενεργή</string>
     <string name="cache_filter_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_filter_status_archived">Αρχειοθετημένη</string>
