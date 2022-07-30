@@ -302,7 +302,6 @@
     </plurals>
     <string name="caches_store_offline">离线存储</string>
     <string name="caches_store_all">全部存储</string>
-    <string name="caches_store_unsaved">存储未保存</string>
     <string name="caches_store_selected">存储选中的</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
