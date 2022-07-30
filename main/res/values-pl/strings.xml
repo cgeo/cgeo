@@ -361,10 +361,7 @@
     </plurals>
     <string name="caches_store_offline">Zapisz offline</string>
     <string name="caches_store_all">Zapisz wszystkie</string>
-    <string name="caches_store_unsaved">Zapisz niezapisane</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
-    <string name="caches_store_background">Pobieranie w tle (eksperymentalne!)</string>
-    <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
@@ -575,7 +572,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe.\n\n Zagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt nawigacji ma wpisane współrzędne.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
     <string name="cache_filter_status_archived">Zarchiwizowana</string>
