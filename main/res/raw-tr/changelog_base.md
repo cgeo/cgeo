@@ -1,6 +1,6 @@
 ### Geocache Ayrıntıları
 
-- New: Redesigned coordinates calculator (supporting functions)
+- Yeni: Yeniden tasarlanan koordinat hesaplayıcısı (fonksiyonları destekler)
 - Change: Variables for waypoint calculation are now cache-global
 - New: Variables tab in cache details
 - New: Generating waypoints using formulas and variables with ranges
