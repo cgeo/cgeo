@@ -357,10 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
     <string name="caches_store_all">Alle opslaan</string>
-    <string name="caches_store_unsaved">Niet opgeslagen opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
-    <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
-    <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
     <string name="caches_store_background_title">Caches downloaden</string>
     <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
     <string name="caches_store_background_option_nothing">Niets doen</string>
@@ -561,7 +558,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
     <string name="cache_filter_status_disabled">Uitgeschakeld</string>
     <string name="cache_filter_status_archived">Gearchiveerd</string>
