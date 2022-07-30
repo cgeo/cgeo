@@ -341,7 +341,6 @@
     </plurals>
     <string name="caches_store_offline">Išsaugoti slėptuves</string>
     <string name="caches_store_all">Išsaugoti visas</string>
-    <string name="caches_store_unsaved">Išsaugoti neišsaugotas</string>
     <string name="caches_store_selected">Išsaugoti pasirinktas</string>
     <string name="caches_history">Istorija</string>
     <string name="caches_on_map">Rodyti žemėlapyje</string>
