@@ -351,7 +351,6 @@
     </plurals>
     <string name="caches_store_offline">Uložiť offline</string>
     <string name="caches_store_all">Uložiť všetko</string>
-    <string name="caches_store_unsaved">Uložiť neuložené</string>
     <string name="caches_store_selected">Uložiť vybraté</string>
     <string name="caches_history">História</string>
     <string name="caches_on_map">Zobraziť na mape</string>
@@ -544,7 +543,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log Nájdené</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyriešená mysterka</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra sa týka len mysteriek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo vyplnený finálny bod trasy so súradnicami.</string>
     <string name="cache_filter_status_active">Aktívna</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
