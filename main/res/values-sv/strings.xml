@@ -556,7 +556,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Har hittad-logg offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Löst mysterium</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Har användardefinierade waypoints</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Den här filterinställningen kommer endast att påverka mystery cacher.\n\n Ett mysterium anses vara \"löst\" om det antingen har bytt koordinater eller har en giltig slutpunkt ifylld med koordinater.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Inaktiverad</string>
     <string name="cache_filter_status_archived">Arkiverad</string>
