@@ -253,7 +253,6 @@
     </plurals>
     <string name="caches_store_offline">Ang pag-istor ay sarado</string>
     <string name="caches_store_all">I-istor lahat</string>
-    <string name="caches_store_unsaved">Ang pag-istor ay hindi nai-save</string>
     <string name="caches_store_selected">Ang istor ay napili</string>
     <string name="caches_history">Ang Kasaysayan</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
