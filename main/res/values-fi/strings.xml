@@ -357,10 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Tallenna offline</string>
     <string name="caches_store_all">Tallenna kaikki</string>
-    <string name="caches_store_unsaved">Tallenna tallentamattomat</string>
     <string name="caches_store_selected">Tallenna valitut</string>
-    <string name="caches_store_background">Lataus taustalla (Kokeellinen!)</string>
-    <string name="caches_store_refresh_background">Päivitys taustalla (Kokeellinen!)</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
@@ -561,7 +558,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Sisältää käyttäjän määrittämiä reittipisteitä</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin\n\n Mysteeri oletetaan olevan \'ratkaistu\' jos sillä on joko muutetut koordinaatit tai pätevä koordinaatit sisältävä viimeinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
     <string name="cache_filter_status_disabled">Ei käytössä</string>
     <string name="cache_filter_status_archived">Arkistoitu</string>
