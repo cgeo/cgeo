@@ -52,7 +52,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -491,18 +490,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             if (doSave) {
                 lastSavedState = logEntry;
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(final Void... params) {
-                        try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
-                            cache.logOffline(LogCacheActivity.this, logEntry);
-                            Settings.setLastCacheLog(logEntry.log);
-                            ccLog.add("log=%s", logEntry.log);
-                            imageListFragment.adjustImagePersistentState();
-                            return null;
-                        }
+                AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
+                    try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
+                        cache.logOffline(LogCacheActivity.this, logEntry);
+                        Settings.setLastCacheLog(logEntry.log);
+                        ccLog.add("log=%s", logEntry.log);
+                        imageListFragment.adjustImagePersistentState();
                     }
-                }.execute();
+                });
             }
         }
     }
