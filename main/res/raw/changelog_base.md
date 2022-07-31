@@ -6,3 +6,4 @@
 - New: Option to delete offline maps
 - Fix: Missing trackable count in search results
 - Fix: Lab adventure items in individual routes not recognized as such after edit
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
