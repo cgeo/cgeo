@@ -558,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Mit eigenen Wegpunkten</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus. Falls Du auch andere Cachetypen ausschließen möchtest, verwende bitte zusätzlich einen Cachetyp-Filter.\n\nEin Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiviert</string>
     <string name="cache_filter_status_archived">Archiviert</string>
