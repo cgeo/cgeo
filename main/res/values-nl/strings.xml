@@ -558,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches. Indien je andere cachetypes wilt uitsluiten, vul dan een passend cachetype filter in.\n\nEen mystery wordt beschouwd als \'opgelost\' als de coördinaten zijn gewijzigd of een geldig waypoint de heeft voorzien van coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
     <string name="cache_filter_status_disabled">Uitgeschakeld</string>
     <string name="cache_filter_status_archived">Gearchiveerd</string>
