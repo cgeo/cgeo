@@ -402,7 +402,7 @@
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
-    <string name="caches_remove_all">Odstranit vše ze seznamu</string>
+    <string name="caches_remove_all">Odstranit vše</string>
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
@@ -1264,6 +1264,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
+    <string name="cache_menu_map_ext_nolabel">Další externí aplikace (pouze souřadnice)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
