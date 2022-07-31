@@ -1,8 +1,15 @@
-- Novo: Transferência / actualização de caches em segundo plano
-- Novo: Cópia das coordenadas actuais com um toque longo na página inicial
-- Alteração: Remover a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
-- Correcção: não mostrar círculos de distância para pontos adicionais de caches arquivadas
-- Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
-- Novo: Opção para apagar mapas offline
-- Correcção: Inclusão de trackables em falta nos resultados de pesquisa
-- Correcção: Os itens das Adventure Labs em rotas individuais não eram reconhecidos como tal, após edição
+
+### Mapa
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
+
+### Detalhes da cache
+- Change: Remove size-limit check while storing waypoints in personal notes
+
+### Geral
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
