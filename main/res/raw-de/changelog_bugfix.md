@@ -3,4 +3,4 @@
 - Korrektur: Filtereinstellungen gehen bei Drehen des Bildschirms verloren, wenn man Ergebnis einer Adresssuche in Karte anzeigt
 - Korrektur: Zweifaches Antippen notwendig, um Offline-Log zu bearbeiten
 - Neu: Letzter Login-Status von geocaching.com zur Statusseite hinzugefügt
-- Geändert: Irreführenden maps.me-Dialog
+- Geändert: Irreführender maps.me-Dialog
