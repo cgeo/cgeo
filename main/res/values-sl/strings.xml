@@ -262,7 +262,6 @@
     </plurals>
     <string name="caches_store_offline">Shrani</string>
     <string name="caches_store_all">Shrani vse</string>
-    <string name="caches_store_unsaved">Shrani neshranjene</string>
     <string name="caches_store_selected">Shrani izbrane</string>
     <string name="caches_history">Zgodovina</string>
     <string name="caches_on_map">Pokaži na zemljevidu</string>

@@ -355,10 +355,7 @@
     </plurals>
     <string name="caches_store_offline">오프라인으로 저장</string>
     <string name="caches_store_all">모두 저장</string>
-    <string name="caches_store_unsaved">저장 안된 것 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
-    <string name="caches_store_background">백그라운드 다운로드(실험적!)</string>
-    <string name="caches_store_refresh_background">백그라운드 새로 고침(실험적!)</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
     <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
@@ -550,7 +547,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
     <string name="cache_filter_status_disabled">일시정지됨</string>
     <string name="cache_filter_status_archived">영구보관됨</string>

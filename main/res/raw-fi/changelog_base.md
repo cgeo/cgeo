@@ -1,8 +1,15 @@
+
+### Kartta
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
+
+### Kätkön tiedot
+- Change: Remove size-limit check while storing waypoints in personal notes
+
+### Yleinen
 - New: Download / update caches in background
-- Uusi: Kopioi nykyiset koordinaatit, kun pitkään napsautetaan sijaintia aloitusnäytöllä
-- Muutos: Poista kokorajan tarkistus tallennettaessa reittipisteitä henkilökohtaisiin muistiinpanoihin
-- Korjaus: Älä näytä arkistoitujen kätköjen reittipisteiden ympyröitä
-- Uusi: Napauta vapaata karttatilaa luodaksesi reittipisteen tai käyttäjän määrittelemän kätkön, liittääksesi tai esiladataksesi yksittäisiä reittejä, näyttääksesi koordinaatit tai navigoidaksesi (kontekstista riippuen)
-- Uusi: Mahdollisuus poistaa offline-kartat
-- Korjaus: Puuttuva matkaajien määrä hakutuloksissa
-- Korjaus: Lab adventure kohteita yksittäisillä reiteillä joita ei ole tunnistettu muokkauksen jälkeen
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)

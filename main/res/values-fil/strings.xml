@@ -248,7 +248,6 @@
     </plurals>
     <string name="caches_store_offline">Iimbak nang naka-offline</string>
     <string name="caches_store_all">Iimbak ang lahat</string>
-    <string name="caches_store_unsaved">Iimbak ang hindi na-save</string>
     <string name="caches_store_selected">Ang Napiling Pag-iimbakan</string>
     <string name="caches_history">Historya</string>
     <string name="caches_on_map">Ipakita sa mapa</string>

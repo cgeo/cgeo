@@ -299,7 +299,6 @@
     </plurals>
     <string name="caches_store_offline">Зберігати в автономному режимі</string>
     <string name="caches_store_all">Зберегти все</string>
-    <string name="caches_store_unsaved">Магазин не збережено</string>
     <string name="caches_store_selected">Вибраний магазин</string>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>

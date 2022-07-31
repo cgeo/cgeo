@@ -346,7 +346,6 @@
     </plurals>
     <string name="caches_store_offline">Загрузить в память</string>
     <string name="caches_store_all">Сохранить всё</string>
-    <string name="caches_store_unsaved">Сохранить несохранённое</string>
     <string name="caches_store_selected">Загрузить в память выбранные</string>
     <string name="caches_history">История</string>
     <string name="caches_on_map">Показать на карте</string>

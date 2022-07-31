@@ -357,10 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Enregistrer localement</string>
     <string name="caches_store_all">Tout enregistrer</string>
-    <string name="caches_store_unsaved">Enregistrer les non sauvegardées</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
-    <string name="caches_store_background">Téléchargement en arrière-plan (expérimental)</string>
-    <string name="caches_store_refresh_background">Actualisation en arrière-plan (expérimental)</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
@@ -551,7 +548,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">A un log Trouvé (hors ligne)</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mystery résolue</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Avec points de passage définis par l’utilisateur</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">La configuration du filtre affectera les mysteries.\n\nUne mystery est considéré “résolue” si elle a soit, les coordonnées modifiées, soit un point de passage final avec des coordonnées.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Ce paramètre de filtre n\'affectera que les caches mystère. Si vous souhaitez exclure d\'autres types de cache, veuillez définir un filtre pour le type de cache approprié.\n\nUne cache mystère est considérée comme « résolue » si ses coordonnées ont été modifiées ou si un waypoint final valide vérifie de coordonnées.</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
@@ -1224,6 +1221,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
+    <string name="cache_menu_map_ext_nolabel">Autres applications externes (coordonnées seulement)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="no_browser_found">Aucun navigateur Internet n\'a été trouvé</string>

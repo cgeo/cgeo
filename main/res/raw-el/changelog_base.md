@@ -1,8 +1,15 @@
-- Νέα: Λήψη / ενημέρωση κρυπτών στο παρασκήνιο (πειραματικό)
-- Νέo: Αντιγραφή τρεχουσών συντεταγμένων όταν κάνετε παρατεταμένο κλικ στην τοποθεσία στην αρχική οθόνη
-- Αλλαγή: Αφαίρεση του έλεγχου μεγέθους κατά την αποθήκευση σημείων διαδρομής σε προσωπικές σημειώσεις
-- Διόρθωση: Μην εμφανίζετε κύκλους απόστασης για τα σημεία αρχειοθετημένων κρυπτών
-- Νέο: Πατήστε στον ελεύθερο χώρο του χάρτη για να δημιουργήσετε σημείο αναφοράς ή κρύπτης, προσάρτηση ή προετοιμασία για μεμονωμένη διαδρομή, εμφάνιση συντεταγμένων ή πλοήγηση (ανάλογα με το περιβάλλον)
-- Νέα: Επιλογή διαγραφής χαρτών offline
-- Διόρθωση: Έλλειψη αριθμού ανιχνεύσιμου στα αποτελέσματα αναζήτησης
+
+### Χάρτης
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
 - Fix: Lab adventure items in individual routes not recognized as such after edit
+
+### Λεπτομέρειες κρύπτης
+- Change: Remove size-limit check while storing waypoints in personal notes
+
+### Γενικά
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)

@@ -402,7 +402,7 @@
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
-    <string name="caches_remove_all">Odstranit vše ze seznamu</string>
+    <string name="caches_remove_all">Odstranit vše</string>
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
@@ -572,7 +572,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky. Pokud chcete vyloučit ostatní typy kešek, zadejte příslušný filtr typu kešky.\n\nMysterka je považována za \'vyřešenou\', pokud změnila souřadnice nebo platný finální trasový bod vyplněný souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
@@ -1264,6 +1264,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
+    <string name="cache_menu_map_ext_nolabel">Další externí aplikace (pouze souřadnice)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>

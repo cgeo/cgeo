@@ -250,7 +250,6 @@
     <string name="caches_eta_ltm">أقل من دقيقة</string>
     <string name="caches_store_offline">تخزين في وضع عدم الاتصال</string>
     <string name="caches_store_all">تخزين الكل</string>
-    <string name="caches_store_unsaved">تخزين غير محفوظ</string>
     <string name="caches_store_selected">تخزين المحدد</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>

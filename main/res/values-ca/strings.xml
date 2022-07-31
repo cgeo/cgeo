@@ -358,10 +358,7 @@
     </plurals>
     <string name="caches_store_offline">Desa per usar fora de línia</string>
     <string name="caches_store_all">Desar-ho tot</string>
-    <string name="caches_store_unsaved">Desa el que manca per desar</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
-    <string name="caches_store_background">Baixada de fons (experimental!)</string>
-    <string name="caches_store_refresh_background">Actualització de fons (experimental!)</string>
     <string name="caches_store_background_title">Descarregar catxés</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
@@ -552,7 +549,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Té Registre \"Trobat\" Fora de línia</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misteri Resolt</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Té Punts de ruta definits per l\'usuari</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Aquest paràmetre de filtre només afectarà els catxés misteri.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o bé ha completat un punt de ruta final vàlid.</string>
     <string name="cache_filter_status_active">Actiu</string>
     <string name="cache_filter_status_disabled">Desactivat</string>
     <string name="cache_filter_status_archived">Arxivat</string>

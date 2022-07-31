@@ -330,7 +330,6 @@
     </plurals>
     <string name="caches_store_offline">Összes mentése</string>
     <string name="caches_store_all">Összes mentése</string>
-    <string name="caches_store_unsaved">Nem mentettek mentése</string>
     <string name="caches_store_selected">Kijelöltek mentése</string>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
