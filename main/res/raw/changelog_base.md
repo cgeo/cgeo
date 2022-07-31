@@ -10,6 +10,6 @@
 
 ### General
 - New: Download / update caches in background
-- New: Copy current coordinates when long-clicking location on home screen
+- New: Copy current coordinates when long-tapping location on home screen
 - Fix: Missing trackable count in search results
 - New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
