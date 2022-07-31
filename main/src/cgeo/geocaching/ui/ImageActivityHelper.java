@@ -3,14 +3,13 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -271,34 +270,11 @@ public class ImageActivityHelper {
         if (image.isEmpty()) {
             return;
         }
-        DisplayImageAsyncTask.displayAsync(image, imageView);
-    }
-
-    private static class DisplayImageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
-
-        private final Image image;
-        private final ImageView imageView;
-
-        public static void displayAsync(final Image image, final ImageView imageView) {
-            imageView.setVisibility(View.INVISIBLE);
-            new DisplayImageAsyncTask(image, imageView).execute();
-        }
-
-        private DisplayImageAsyncTask(final Image image, final ImageView imageView) {
-            this.image = image;
-            this.imageView = imageView;
-        }
-
-        @Override
-        protected Bitmap doInBackground(final Void... params) {
-            return ImageUtils.readAndScaleImageToFitDisplay(image.getUri());
-        }
-
-        @Override
-        protected void onPostExecute(final Bitmap bitmap) {
+        imageView.setVisibility(View.INVISIBLE);
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri()), bitmap -> {
             imageView.setImageBitmap(bitmap);
             imageView.setVisibility(View.VISIBLE);
-        }
+        });
     }
 
     private boolean checkBasicResults(final int resultCode) {
