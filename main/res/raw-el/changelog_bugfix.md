@@ -3,4 +3,4 @@
 - Fix: Filter settings lost on screen rotation when mapping an address search result
 - Διόρθωση: Απαιτείται διπλό πάτημα για την επεξεργασία καταγραφής εκτός σύνδεσης
 - Νέο: Προστέθηκε τελευταία κατάσταση geocaching.com σύνδεσης στη σελίδα κατάστασης
-- Changed: Misleading maps.me dialog
+- Αλλαγή: Παραπλανητικός διάλογος γιά maps.me
