@@ -549,6 +549,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρύπτες μυστηρίου. Αν θέλετε να αποκλείσετε άλλους τύπους κρυπτών, παρακαλούμε να ορίσετε ένα κατάλληλο φίλτρο τύπου κρύπτης.\n\nΈνα; γρίφος θεωρείται «λυμένος» αν έχει αλλάξει συντεταγμένες ή ένα έγκυρο τελικό σημείο που συμπληρώνεται με συντεταγμένες.</string>
     <string name="cache_filter_status_active">Ενεργή</string>
     <string name="cache_filter_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_filter_status_archived">Αρχειοθετημένη</string>
@@ -1223,6 +1224,7 @@
     <string name="cache_menu_radar">Ραντάρ</string>
     <string name="cache_menu_map">Χάρτης</string>
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
+    <string name="cache_menu_map_ext_nolabel">Άλλες εξωτερικές εφαρμογές (μόνο για συντεταγμένες)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="no_browser_found">Δε βρέθηκε εφαρμογή περιήγησης</string>
