@@ -191,7 +191,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void updateIndividualRoute(final Route route) {
+    public void updateIndividualRoute(final IndividualRoute route) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route);
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());

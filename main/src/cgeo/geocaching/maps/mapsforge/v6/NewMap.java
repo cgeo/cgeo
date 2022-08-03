@@ -115,6 +115,7 @@ import androidx.core.util.Supplier;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -755,7 +756,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             if (null != this.distanceView) {
                 this.distanceView.setRouteDistance(realRouteDistance);
             }
-        });
+        }, this.mapHandlers.getTapHandler(), mapView.getLayerManager());
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         // TrackLayer
@@ -1275,10 +1276,20 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             return;
         }
         try {
-            final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
-            Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
+            final ArrayList<GeoitemRef> filtered = new ArrayList<>(items);
 
-            final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
+            // Coords only items (-> routing points) shouldn't appear in the selector
+            Iterator<GeoitemRef> i = filtered.iterator();
+            while(i.hasNext()) {
+                GeoitemRef e = i.next();
+                if (e.getType() == CoordinatesType.COORDS) {
+                    i.remove();
+                }
+            }
+
+            Collections.sort(filtered, GeoitemRef.NAME_COMPARATOR);
+
+            final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, filtered) {
                 @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
@@ -1289,7 +1300,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             final AlertDialog dialog = Dialogs.newBuilder(this)
                     .setTitle(res.getString(R.string.map_select_multiple_items))
-                    .setAdapter(adapter, new SelectionClickListener(sorted, longPressMode))
+                    .setAdapter(adapter, new SelectionClickListener(filtered, longPressMode))
                     .create();
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
@@ -1353,7 +1364,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void toggleRouteItem(final GeoitemRef item) {
-        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+        if (item == null) {
             return;
         }
         if (individualRoute == null) {

@@ -135,6 +135,9 @@ public class RouteItem implements Parcelable {
                     setDetails(buildIdentifier(waypoint), waypoint.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId());
                 }
                 break;
+            case COORDS:
+                setDetails(item.getItemCode(), parseCoordsFromIdentifier(item.getItemCode()), RouteItemType.COORDS, "", 0);
+                break;
             default:
                 throw new IllegalStateException("RouteItem: unknown item type");
         }
@@ -211,7 +214,11 @@ public class RouteItem implements Parcelable {
         return "COORDS!" + (null == point ? "" : " " + GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT, point));
     }
 
-    public enum RouteItemType {
+    private Geopoint parseCoordsFromIdentifier(final String identifier) {
+        return new Geopoint(identifier.substring("COORDS!".length()));
+    }
+
+    public enum RouteItemType { // todo: replace with generic CoordinatesType enum
         WAYPOINT,
         GEOCACHE,
         COORDS
