@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.annotation.SuppressLint;
@@ -179,6 +180,15 @@ public final class CacheDetailsCreator {
     public void addSize(final Geocache cache) {
         if (cache.showSize()) {
             add(R.string.cache_size, cache.getSize().getL10n());
+        }
+    }
+
+    public void addAlcMode(final Geocache cache) {
+        Log.d("_AL add mode to view: " + cache.isLinearAlc());
+        if (cache.isLinearAlc()) {
+            add(R.string.cache_mode, res.getString(R.string.cache_mode_linear));
+        } else {
+            add(R.string.cache_mode, res.getString(R.string.cache_mode_random));
         }
     }
 

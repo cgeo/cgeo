@@ -346,6 +346,8 @@ final class ALApi {
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
+            cache.setVotes(response.get("RatingsTotalCount").asInt());
+            cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
@@ -377,12 +379,21 @@ final class ALApi {
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
+            cache.setVotes(response.get("RatingsTotalCount").asInt());
+            cache.setRating(response.get("RatingsAverage").floatValue());
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
             cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries")), true);
+            final boolean isLinear = response.get("IsLinear").asBoolean();
+            if (isLinear) {
+                cache.setAlcMode(1);
+            } else {
+                cache.setAlcMode(0);
+            }
+            Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
@@ -403,7 +414,7 @@ final class ALApi {
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint(wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final Waypoint wpt = new Waypoint("S" + String.valueOf(stageCounter) + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();

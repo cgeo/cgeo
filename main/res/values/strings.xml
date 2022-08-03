@@ -1434,6 +1434,9 @@
     <string name="cache_description_updated">Cache description updated</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Size</string>
+    <string name="cache_mode">Mode</string>
+    <string name="cache_mode_linear">Linear</string>
+    <string name="cache_mode_random">Random</string>
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulty</string>
     <string name="cache_terrain">Terrain</string>
