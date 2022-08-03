@@ -118,6 +118,7 @@ public class Geocache implements IWaypoint {
     private String ownerGuid = "";
     private String ownerUserId = "";
     private int assignedEmoji = 0;
+    private int alcMode = 0;
 
     @Nullable
     private Date hidden = null;
@@ -1257,6 +1258,21 @@ public class Geocache implements IWaypoint {
 
     public void setOnWatchlist(final boolean onWatchlist) {
         this.onWatchlist = onWatchlist;
+    }
+
+    public boolean isLinearAlc() {
+        Log.d("_AL isLinearAlc: " + alcMode);
+        return alcMode == 1;
+    }
+
+    public void setAlcMode(final int alcMode) {
+        Log.d("_AL setAlcMode: " + alcMode);
+        this.alcMode = alcMode;
+    }
+
+    public int getAlcMode() {
+        Log.d("_AL getAlcMode: " + alcMode);
+        return alcMode;
     }
 
     /**

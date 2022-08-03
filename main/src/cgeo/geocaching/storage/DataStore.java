@@ -211,7 +211,8 @@ public class DataStore {
                     "cg_caches.watchlistCount," +  // 42
                     "cg_caches.preventWaypointsFromNote," +  // 43
                     "cg_caches.owner_guid," +  // 44
-                    "cg_caches.emoji";                       // 45
+                    "cg_caches.emoji," +       // 45
+                    "cg_caches.alcMode";       // 46
 
     /**
      * The list of fields needed for mapping.
@@ -228,7 +229,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 98;
+    private static final int dbVersion = 99;
     public static final int customListIdOffset = 10;
 
     /**
@@ -262,7 +263,8 @@ public class DataStore {
             95, // add table to store custom filters
             96, // add preventAskForDeletion to cg_lists
             97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
-            98  // add table cg_variables to store cache variables
+            98, // add table cg_variables to store cache variables
+            99  // add alcMode to differentiate Linear vs Random
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -333,7 +335,8 @@ public class DataStore {
             + "watchlistCount INTEGER DEFAULT -1,"
             + "preventWaypointsFromNote INTEGER DEFAULT 0,"
             + "owner_guid TEXT NOT NULL DEFAULT '',"
-            + "emoji INTEGER DEFAULT 0"
+            + "emoji INTEGER DEFAULT 0,"
+            + "alcMode INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -1672,6 +1675,15 @@ public class DataStore {
                         }
                     }
 
+                    // add alcMode to cg_caches
+                    if (oldVersion < 99) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "alcMode INTEGER DEFAULT 0");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 99);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2243,6 +2255,7 @@ public class DataStore {
         values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
         values.put("owner_guid", cache.getOwnerGuid());
         values.put("emoji", cache.getAssignedEmoji());
+        values.put("alcMode", cache.getAlcMode());
 
         init();
 
@@ -2937,6 +2950,7 @@ public class DataStore {
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
+        cache.setAlcMode(cursor.getInt(46));
 
         return cache;
     }
