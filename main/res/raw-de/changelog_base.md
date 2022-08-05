@@ -13,3 +13,4 @@
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
 - Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
 - New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
