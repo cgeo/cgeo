@@ -13,3 +13,4 @@
 - Nouveauté : Copier les coordonnées actuelles lors d'un appui long sur la position depuis l'écran d'accueil
 - Corrigé : le nombre d'objets était absent des résultats de recherche
 - Nouveauté : La méthode de navigation "Autres applications externes (Coordonnées seulement)" pour appeler une application de navigation externe avec juste des coordonnées (par exemple : Here WeGo en mode hors ligne)
+- New: Posibility to build nested filters
