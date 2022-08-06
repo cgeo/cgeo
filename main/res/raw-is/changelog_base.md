@@ -13,3 +13,6 @@
 - New: Copy current coordinates when long-tapping location on home screen
 - Fix: Missing trackable count in search results
 - New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window

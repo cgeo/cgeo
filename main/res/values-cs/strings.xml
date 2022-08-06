@@ -1322,7 +1322,7 @@
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
-    <string name="cache_favorite">Oblíbená</string>
+    <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
     <string name="cache_event">Datum</string>

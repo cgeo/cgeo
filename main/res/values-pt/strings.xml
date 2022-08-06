@@ -558,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Tendo pontos adicionais definidos pelo utilizador</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">A configuração deste filtro apenas afectará caches mistério. Se pretende excluir outros tipos de cache, por favor especifique um filtro adequado para esse tipo de cache.\n\nUma cache mistério é considerada \'resolvida\' caso tenha as suas coordenadas alteradas ou tenha um ponto adicional \'final\' preenchido com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
     <string name="cache_filter_status_disabled">Desactivadas</string>
     <string name="cache_filter_status_archived">Arquivadas</string>
