@@ -352,7 +352,6 @@
     </plurals>
     <string name="caches_store_offline">Gem Offline</string>
     <string name="caches_store_all">Gem alle</string>
-    <string name="caches_store_unsaved">Gem ændringer</string>
     <string name="caches_store_selected">Gem valgte</string>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
@@ -523,7 +522,6 @@
     <string name="cache_filter_status_select_label_has_trackable">Har Trackables</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Offline Fundet-log findes</string>
     <string name="cache_filter_status_select_label_solved_mystery">Løst Mystery</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Denne filterindstilling vil kun påvirke mystery caches.\n\n En mystery-cache betragtes som \'løst\', hvis det enten har ændret koordinater eller et gyldigt sidste waypoint med udfyldte koordinater.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiveret</string>
     <string name="cache_filter_status_archived">Lukket</string>
@@ -748,7 +746,6 @@
     <string name="init_user_confirmation">Jeg ved, hvad jeg gør</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
-    <string name="init_backup_unnecessary">Database er tom, backup er derfor ikke nødvendig. Opret en backup alligevel?</string>
     <string name="init_backup_folder_exists_error">Kunne ikke oprette en ny mappe til sikkerhedskopier. Har du allerede lavet en sikkerhedskopi inden for det sidste minut?</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
     <string name="backup_confirm_overwrite">Dette vil slette din ældste sikkerhedskopi fra %s. \nVil du fortsætte?</string>
@@ -971,12 +968,9 @@
     <string name="cache_menu_allowWaypointExtraction">Tillad rutepunkter fra note</string>
     <string name="cache_personal_note_edit">Redigér</string>
     <string name="cache_personal_note_storewaypoints_success">Rutepunkter blev tilføjet til personlig note</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Rutepunkter blev tilføjet til noten, men er blevet forkortet (største personlig notestørrelse: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Rutepunkter kunne ikke gemmes i noten på grund af størrelsesgrænser (største personlig notestørrelse: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Ingen rutepunkter kan gemmes</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Undgå ekstraktion af rutepunkter</string>
     <string name="cache_personal_note_limit">Afkortning af personlig note</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Denne personlige note vil blive afkortet af geocaching.com efter %d tegn.</string>
     <string name="cache_personal_note_upload">Upload</string>
     <string name="cache_personal_note_uploading">Upload personlig note</string>
     <string name="cache_personal_note_upload_done">Personlig note uploadet</string>
@@ -1196,6 +1190,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Post fund på Twitter</string>
     <!-- map -->
