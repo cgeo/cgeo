@@ -14,3 +14,5 @@
 - Oprava: Chybějící počet TB ve výsledcích vyhledávání
 - Novinka: Navigační metoda "Další externí aplikace (pouze souřadnice)" pro vyvolání externí navigační aplikace pouze se souřadnicemi (pomáhá s aplikací Here WeGo v režimu offline)
 - Novinka: Možnost vytvářet vnořené filtry
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
