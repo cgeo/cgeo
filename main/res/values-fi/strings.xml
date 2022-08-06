@@ -315,6 +315,7 @@
     <string name="loc_trying">Yritetään paikantaa</string>
     <string name="loc_no_addr">Tuntematon osoite</string>
     <string name="loc_gps_disabled">GPS ei käytössä</string>
+    <string name="loc_copied_clipboard">Nykyinen sijainti kopioitiin leikepöydälle</string>
     <string name="menu_centerposition">Keskitä omaan sijaintiini</string>
     <!-- standard menu -->
     <string name="menu_about">Tietoja c:geosta</string>
@@ -356,12 +357,18 @@
     </plurals>
     <string name="caches_store_offline">Tallenna offline</string>
     <string name="caches_store_all">Tallenna kaikki</string>
-    <string name="caches_store_unsaved">Tallenna tallentamattomat</string>
     <string name="caches_store_selected">Tallenna valitut</string>
-    <string name="caches_store_background">Lataus taustalla (Kokeellinen!)</string>
-    <string name="caches_store_refresh_background">Päivitys taustalla (Kokeellinen!)</string>
-    <string name="caches_store_background_should_force_refresh">Päivitä jo ladatut kätköt</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
+    <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
+    <string name="caches_store_background_option_nothing">Älä tee mitään</string>
+    <string name="caches_store_background_option_add_to_list">Lisää listaan</string>
+    <string name="caches_store_background_option_refresh">Päivitä ja lisää listaan</string>
+    <string name="caches_store_background_result_failed">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_canceled">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d kätkö ladattu</item>
+        <item quantity="other">%d kätköä ladattu</item>
+    </plurals>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Näytä kartalla</string>
     <string name="caches_sort">Järjestä</string>
@@ -487,12 +494,15 @@
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
     <string name="cache_filter_origin">Alkuperä</string>
     <string name="cache_filter_stored_since">Viimeisin yksityiskohtien päivitys</string>
+    <string name="cache_filter_logical_filter_group">Sisäkkäinen suodatin</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
+    <string name="cache_filtergroup_special">Erikois</string>
     <string name="cache_filter_contexttype_live_title">Live-suodatin</string>
     <string name="cache_filter_contexttype_offline_title">Offline-suodatin</string>
     <string name="cache_filter_contexttype_transient_title">Suodatin</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Sisäkkäinen suodatin</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
@@ -548,7 +558,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Sisältää käyttäjän määrittämiä reittipisteitä</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin\n\n Mysteeri oletetaan olevan \'ratkaistu\' jos sillä on joko muutetut koordinaatit tai pätevä koordinaatit sisältävä viimeinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
     <string name="cache_filter_status_disabled">Ei käytössä</string>
     <string name="cache_filter_status_archived">Arkistoitu</string>
@@ -556,6 +565,8 @@
     <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Sisällytä kätköt ilman D/T:tä</string>
+    <string name="cache_filter_nested_filter_modify">muokkaa</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Alisuodatin on tällä hetkellä tyhjä</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt</string>
     <string name="cache_filter_log_entry_logtext">Lokiteksti</string>
     <string name="cache_filter_stored_since_notstored">Ei tallennettu</string>
@@ -827,7 +838,6 @@
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
-    <string name="init_backup_unnecessary">Tietokanta on tyhjä, varmuuskopiointia ei tarvita. Haluatko silti luoda varmuuskopion?</string>
     <string name="init_backup_folder_exists_error">Uutta varmuuskopiohakemistoa ei voitu luoda. Oletko juuri tehnyt varmuuskopion?</string>
     <string name="init_backup_no_backup_available">Ei varmuuskopiota käytettävissä.</string>
     <string name="backup_confirm_overwrite">Tämä poistaa vanhimman olemassa olevan varmuuskopiokansiosi kohteesta %s. \nHaluatko jatkaa?</string>
@@ -977,6 +987,8 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
+    <string name="init_summary_useUnifiedMap">Käytä uutta yhtenäistä karttaa sisäänrakennettujen Google Map / Mapsforge (OSM) -karttojen sijaan (kokeellinen / kaukana täydellisestä / vain testaukseen)</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
     <string name="localstorage_migrate_status_major">Versio %1$d</string>
     <!-- proximity notification -->
@@ -1146,12 +1158,9 @@
     <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Poistettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Reittipisteet lisättiin muistiinpanoon, mutta niitä piti lyhentää (maksimi henkilökohtainen muistiinpanon koko: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Reittipisteitä ei voitu tallentaa muistiinpanoon kokorajojen vuoksi (maksimi henkilökohtaisen merkinnän koko: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Tallennettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Estä reittipisteiden siirto</string>
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tämä oma muistiinpano katkaistaan %d merkin jälkeen Geocaching.com:n toimesta.</string>
     <string name="cache_personal_note_upload">Lataa</string>
     <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
@@ -1294,10 +1303,15 @@
     <string name="cache_remove_from_history">Poista historiatiedoista</string>
     <string name="cache_license">Lisenssi</string>
     <string name="cache_image">Kuva</string>
+    <string name="cache_image_open">Avaa</string>
     <string name="cache_image_open_file">Avaa tiedosto</string>
     <string name="cache_image_open_browser">Avaa selaimessa</string>
+    <string name="cache_image_share">Jaa</string>
     <string name="cache_image_show_description">Näytä kuvaus</string>
     <string name="cache_image_add_waypoint">Lisää reittipiste</string>
+    <string name="cache_image_rename">Nimeä uudelleen</string>
+    <string name="cache_image_delete">Poista</string>
+    <string name="cache_image_title_camera_prefix">Kuva</string>
     <string name="cache_image_background">Kätkölistauksen taustakuva</string>
     <string name="cache_share_field">Jaa</string>
     <string name="cache_time_full_hours">Kello</string>
@@ -1311,6 +1325,13 @@
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
+    <string name="image_category_uncategorized">Luokittelematon</string>
+    <string name="image_category_own">Oma</string>
+    <string name="image_category_listing">Listaus</string>
+    <string name="image_category_log">Loki</string>
+    <string name="context_map_add_to_route">Lisää reitin loppuun</string>
+    <string name="context_map_add_to_route_start">Lisää reitin alkuun</string>
+    <string name="context_map_show_coords">Näytä koordinaatit</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
@@ -1464,6 +1485,11 @@
     <string name="formula_error_cyclicdependency">Sykli: %1$s</string>
     <string name="formula_error_empty">Tyhjä kaava</string>
     <string name="formula_error_other">Virhe: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Nimetön</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Kommentti</string>
     <!-- visit -->
     <string name="visit_tweet">Lähetä tämä löytö Twitteriin</string>
     <!-- map -->
@@ -1955,6 +1981,7 @@
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
     <string name="tts_started">Puhuminen aloitettu</string>
     <string name="tts_stopped">Puhuminen lopetettu</string>
+    <string name="tts_running">Puhepalvelu on käynnissä…</string>
     <string name="err_tts_lang_not_supported">Teksti puheeksi -toiminto ei tue valittua kieltä.</string>
     <string name="tts_one_kilometer">yksi kilometri</string>
     <plurals name="tts_kilometers">
@@ -1983,6 +2010,10 @@
     <plurals name="days_ago">
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">%d päivässä</item>
+        <item quantity="other">%d päivässä</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
@@ -2064,6 +2095,8 @@
     <string name="notification_channel_foreground_description">ilmoitus näytetään, kun c:geo tekee taustatyötä</string>
     <string name="notification_channel_downloader_name">c:geon lataaja</string>
     <string name="notification_channel_downloader_description">latausten tulosilmoitukset (kuten offline-kartat)</string>
+    <string name="notification_channel_cache_download_name">kätkölataaja</string>
+    <string name="notification_channel_cache_download_description">tulosilmoitukset kätköjen taustalatauksille</string>
     <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
     <string name="notification_download_receiver_title">Tuodaan latausta</string>
     <!-- individual routes -->
@@ -2154,6 +2187,10 @@
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
+    <string name="delete_offlinemap_title">Poista offline-kartta</string>
+    <string name="no_deletable_offlinemaps">Ei poistettavia offline-karttoja</string>
+    <string name="delete_file_confirmation">Poista %s?</string>
+    <string name="file_deleted_info">%s poistettu</string>
     <string name="download_title">Lataa tiedosto</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
     <string name="downloadmap_filename">Ladataan %s</string>
