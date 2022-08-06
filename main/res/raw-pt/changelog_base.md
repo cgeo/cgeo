@@ -1,38 +1,18 @@
-### Detalhes da cache
-
-- Novo: Calculadora de coordenadas redesenhada (funções suportadas)
-- Alteração: As variáveis para cálculo dos pontos adicionais agora são transversais a qualquer cache
-- Novo: separador de variáveis nos detalhes da cache
-- Novo: Criar pontos adicionais através de fórmulas e variáveis com intervalos
-- Novo: Modelos de registo para registos offline
-- Novo: Adicionar \[local\] ao menu de modelos de registo
-- Novo: Permitir selecionar textos do registo
-- Correção: ligação ao verificador de coordenadas do GeoCaching ficava em ciclo, em certas condições no Android 12
-- Novo: Botão de geo-checker adicionado no final da descrição (quando apropriado)
-- Novo: Opção de 'iniciar sessão no navegador' adicionada ao menu de cache
-
-### Lista de caches
-
-- Novo: Adicionada opção "tem pontos adicionais definidos pelo utilizador" às opções avançadas do filtro
-- Novo: Permitir a inclusão de caches sem D/T no filtro
-- Correção: Lista de caches em cada mudança de localização, na ordenação por distância
 
 ### Mapa
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
 
-- Novo: Temas de mapa para Google Maps
-- Novo: Opções de escala do mapa para OpenStreetMap (ver opções do tema)
-- Alteração: Definições => Mapa => Toque longo no mapa irá agora também activar/desactivar um toque longo no mapa da cache (relevante para a criação de novos pontos adicionais para a cache actual)
-- Alteração: Não mostrar círculos de distância para caches arquivadas
-- Correcção: Encerramento inesperado com mapas OpenStreetMap em certas condições
-- Correção: O encaminhamento não funcionava quando estavam instalados muitos blocos de encaminhamento
+### Detalhes da cache
+- Change: Remove size-limit check while storing waypoints in personal notes
 
 ### Geral
-
-- Novo: Executar cópias de segurança automaticamente (opcional)
-- Correcção: Continuar a importação de transferências concluídas
-- Novo: Adicionados botões de lançamento rápido configuráveis ao ecrã inicial, ver Definições => Aparência
-- Novo: Encaminhamento interno de BRouter actualizado para a versão 1.6.3
-- Novo: Limitada a necessidade de utilizar repetidamente a tecla voltar ao iniciar uma nova sequência de actividades quando mudar para outra secção da aplicação
-- Novo: Adicionada uma configuração para desencriptar a dica da cache por defeito (ao invés de apenas ser desencriptada quando se tocar nela)
-- Novo: Suporte à definição de caches de fonte desconhecida como encontradas, localmente
-- Removido: O serviço Geolutin, pois foi descontinuado
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
