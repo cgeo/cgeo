@@ -315,6 +315,7 @@
     <string name="loc_trying">위치 찾는 중</string>
     <string name="loc_no_addr">알 수 없는 주소</string>
     <string name="loc_gps_disabled">GPS 비활성화</string>
+    <string name="loc_copied_clipboard">현재 위치가 클립보드에 복사되었습니다.</string>
     <string name="menu_centerposition">내위치를 중심으로</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo에 대해</string>
@@ -354,12 +355,13 @@
     </plurals>
     <string name="caches_store_offline">오프라인으로 저장</string>
     <string name="caches_store_all">모두 저장</string>
-    <string name="caches_store_unsaved">저장 안된 것 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
-    <string name="caches_store_background">백그라운드 다운로드(실험적!)</string>
-    <string name="caches_store_refresh_background">백그라운드 새로 고침(실험적!)</string>
-    <string name="caches_store_background_should_force_refresh">이미 다운로드한 캐시 새로 고침</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
+    <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
+    <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="other">%d 개 캐시 다운로드했음</item>
+    </plurals>
     <string name="caches_history">지난 기록</string>
     <string name="caches_on_map">지도에 표시</string>
     <string name="caches_sort">정렬</string>
@@ -482,12 +484,15 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
+    <string name="cache_filtergroup_special">특수</string>
     <string name="cache_filter_contexttype_live_title">라이브 필터</string>
     <string name="cache_filter_contexttype_offline_title">오프라인 필터</string>
     <string name="cache_filter_contexttype_transient_title">필터</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">중첩 필터</string>
     <string name="cache_filter_include">포함</string>
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
@@ -542,7 +547,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
     <string name="cache_filter_status_disabled">일시정지됨</string>
     <string name="cache_filter_status_archived">영구보관됨</string>
@@ -550,6 +554,8 @@
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
+    <string name="cache_filter_nested_filter_modify">편집</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
     <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
@@ -821,7 +827,6 @@
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
-    <string name="init_backup_unnecessary">데이터베이스가 비어 있으며 백업이 필요하지 않습니다. 그래도 백업을 만드시겠습니까?</string>
     <string name="init_backup_folder_exists_error">새로운 백업 폴더를 만들 수 없습니다. 마지막 순간에 이미 백업을 수행 했습니까?</string>
     <string name="init_backup_no_backup_available">백업할 파일이 없습니다.</string>
     <string name="backup_confirm_overwrite">%s에서 가장 오래된 기존 백업 폴더가 삭제됩니다. \n계속 하시겠습니까?</string>
@@ -971,6 +976,8 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
+    <string name="init_title_useUnifiedMap">통합 지도 사용</string>
+    <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도 사용(실험 기능/완전하지 않음/테스트 전용)</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
     <string name="localstorage_migrate_status_major">버전 %1$d</string>
     <!-- proximity notification -->
@@ -1132,12 +1139,10 @@
     <string name="cache_personal_note_removedwaypoints">지점이 삭제되었습니다.</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">삭제할 지점이 없습니다.</string>
     <string name="cache_personal_note_storewaypoints_success">개인 메모에 지점이 추가되었습니다.</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">지점이 메모에 추가되었지만 단축되어야했습니다 (최대 개인 메모 크기: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">크기 제한으로 인해 지점을 메모에 저장할 수 없습니다 (최대 개인 메모 크기: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">저장 가능한 지점을 찾을 수 없습니다.</string>
     <string name="cache_personal_note_preventWaypointsExtraction">지점 추출 방지</string>
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">이 개인 메모는 Geocaching.com에서 %d 문자 이후는 잘립니다.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">이 개인 메모는 약 %1$d 문자에서 %3$s(최대 크기 %2$d)로 잘립니다.</string>
     <string name="cache_personal_note_upload">올리기</string>
     <string name="cache_personal_note_uploading">개인 메모 올리기</string>
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
@@ -1280,10 +1285,15 @@
     <string name="cache_remove_from_history">기록에서 제거</string>
     <string name="cache_license">라이센스</string>
     <string name="cache_image">사진</string>
+    <string name="cache_image_open">열기</string>
     <string name="cache_image_open_file">파일로 열기</string>
     <string name="cache_image_open_browser">브라우저에서 열기</string>
+    <string name="cache_image_share">공유</string>
     <string name="cache_image_show_description">설명 보기</string>
     <string name="cache_image_add_waypoint">지점 추가</string>
+    <string name="cache_image_rename">이름변경</string>
+    <string name="cache_image_delete">삭제</string>
+    <string name="cache_image_title_camera_prefix">사진</string>
     <string name="cache_image_background">캐시정보 배경 이미지</string>
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
@@ -1297,6 +1307,13 @@
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
+    <string name="image_category_uncategorized">카테고리 없음</string>
+    <string name="image_category_own">소유</string>
+    <string name="image_category_listing">목록</string>
+    <string name="image_category_log">로그</string>
+    <string name="context_map_add_to_route">경로 후에 추가</string>
+    <string name="context_map_add_to_route_start">경로 전에 추가</string>
+    <string name="context_map_show_coords">좌표 보기</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
@@ -1449,6 +1466,11 @@
     <string name="formula_error_cyclicdependency">주기: %1$s</string>
     <string name="formula_error_empty">빈 공식</string>
     <string name="formula_error_other">오류: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">제목 없음</string>
+    <string name="imageview_mimetype">MIME형식</string>
+    <string name="imageview_metadata_geopoint">지오포인트</string>
+    <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->
@@ -1939,6 +1961,7 @@
     <string name="tts_toggle">말하기 전환</string>
     <string name="tts_started">연설 시작됨</string>
     <string name="tts_stopped">연설 중지됨</string>
+    <string name="tts_running">음성 서비스 실행 중…</string>
     <string name="err_tts_lang_not_supported">현재 언어는 텍스트 음성 변환이 지원되지 않습니다.</string>
     <string name="tts_one_kilometer">1 킬로미터</string>
     <plurals name="tts_kilometers">
@@ -1962,6 +1985,9 @@
     <string name="clipboard_copy_ok">클립보드에 복사됨</string>
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="other">%d일 후</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
@@ -2037,6 +2063,8 @@
     <string name="notification_channel_foreground_description">c:geo가 백그라운드 작업을 수행하는 동안 알림이 표시됩니다.</string>
     <string name="notification_channel_downloader_name">c:geo 다운로더</string>
     <string name="notification_channel_downloader_description">다운로드 결과 알림 (예: 오프라인지도)</string>
+    <string name="notification_channel_cache_download_name">캐시 다운로더</string>
+    <string name="notification_channel_cache_download_description">캐시 백그라운드 다운로드에 대한 결과 알림</string>
     <string name="notification_proximity_title">c:geo 근접성 알림</string>
     <string name="notification_download_receiver_title">다운로드 가져오는 중</string>
     <!-- individual routes -->
@@ -2126,6 +2154,10 @@
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
+    <string name="delete_offlinemap_title">오프라인 지도 삭제</string>
+    <string name="no_deletable_offlinemaps">삭제할 수 있는 오프라인 지도가 없습니다.</string>
+    <string name="delete_file_confirmation">%s를 삭제하시겠습니까?</string>
+    <string name="file_deleted_info">%s 삭제되었습니다</string>
     <string name="download_title">파일 다운로드</string>
     <string name="downloadmap_info">\"저장\"아이콘을 눌러 해당 지역의지도 파일을 선택하십시오.\n\n다운로드는 백그라운드에서 수행됩니다. 전송이 완료되면 파일이 c:geo 지도 폴더에 복사되고 현재 지도으로 설정됩니다.\n\n주의: 지도를 다운로드하면 네트워크 트래픽이 증가 할 수 있습니다!</string>
     <string name="downloadmap_filename">다운로드 중 %s</string>
