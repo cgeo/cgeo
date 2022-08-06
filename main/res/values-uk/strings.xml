@@ -299,7 +299,6 @@
     </plurals>
     <string name="caches_store_offline">Зберігати в автономному режимі</string>
     <string name="caches_store_all">Зберегти все</string>
-    <string name="caches_store_unsaved">Магазин не збережено</string>
     <string name="caches_store_selected">Вибраний магазин</string>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>
@@ -729,12 +728,9 @@
     <string name="cache_menu_allowWaypointExtraction">дозволити шляхові точки з примітки</string>
     <string name="cache_personal_note_edit">редагувати</string>
     <string name="cache_personal_note_storewaypoints_success">Точки було додано до особистої нотатки</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Шляхові точки були додані до нотатки, але їх потрібно було скоротити (максимальний розмір особистих нотаток: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Маршрути не можуть бути збережені в нотатці через обмеження розміру (максимальний розмір особистих нотаток: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Не знайдено доступних для зберігання точок</string>
     <string name="cache_personal_note_preventWaypointsExtraction">запобігання вилученню шляхових точок</string>
     <string name="cache_personal_note_limit">обмеження особистих записок</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Цю особисту нотатку буде скорочено після %d символів від Geocaching.com.</string>
     <string name="cache_personal_note_upload">завантажити</string>
     <string name="cache_personal_note_uploading">Завантаження особистої нотатки</string>
     <string name="cache_personal_note_upload_done">завантажено особисту нотатку</string>
@@ -948,6 +944,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Опублікувати це на Твіттері</string>
     <!-- map -->
