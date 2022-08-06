@@ -332,7 +332,6 @@
     </plurals>
     <string name="caches_store_offline">离线存储</string>
     <string name="caches_store_all">全部儲存</string>
-    <string name="caches_store_unsaved">存储未保存</string>
     <string name="caches_store_selected">儲存所選的</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
@@ -706,7 +705,6 @@
     <string name="init_user_confirmation">我瞭解我在幹嘛</string>
     <string name="init_backup_success">c:geo的資料庫成功備份到</string>
     <string name="init_backup_failed">備份c:geo資料庫失敗</string>
-    <string name="init_backup_unnecessary">資料庫是空的，不需備份。仍然要備份嗎?</string>
     <string name="init_backup_folder_exists_error">無法產生新的備份目錄。是否剛建立一個新的備份?</string>
     <string name="init_backup_no_backup_available">没有可用的资源。</string>
     <string name="backup_confirm_overwrite">這將從%s刪除您最先前的備份。是否繼續執行?</string>
@@ -967,7 +965,6 @@
     <string name="cache_personal_note_removedwaypoints">航點已刪除。</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">沒有可移除的航點</string>
     <string name="cache_personal_note_storewaypoints_success">航點增加到個人筆記\'</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">航點已被新增至記事，但必須被縮短。(最大的個人記事容量:%1$d)</string>
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
@@ -1185,6 +1182,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">發佈這個found到推特</string>
     <!-- map -->
