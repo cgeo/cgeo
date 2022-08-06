@@ -349,7 +349,6 @@
     </plurals>
     <string name="caches_store_offline">Guardar sin conexión</string>
     <string name="caches_store_all">Guardar todos</string>
-    <string name="caches_store_unsaved">Guardar los no guardados</string>
     <string name="caches_store_selected">Guardar seleccionados</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Ver en mapa</string>
@@ -534,7 +533,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tiene registro sin conexión</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tiene registros sin conexión</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misterio resuelto</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuración de filtro sólo afectará a cachés misteriosos.\n\n Un misterio se considera \'resuelto\' si ha cambiado de coordenadas o un punto final válido lleno de coordenadas.</string>
     <string name="cache_filter_status_active">Activo</string>
     <string name="cache_filter_status_disabled">Desactivado</string>
     <string name="cache_filter_status_archived">Archivado</string>
@@ -794,7 +792,6 @@
     <string name="init_user_confirmation">Sé lo que estoy haciendo</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
-    <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad. ¿Quiere crear una copia de seguridad?</string>
     <string name="init_backup_folder_exists_error">No se puede crear una nueva carpeta de copia de seguridad. ¿Ya ha realizado una copia de seguridad en el último minuto?</string>
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
     <string name="backup_confirm_overwrite">Esto eliminará su carpeta más antigua de copia de seguridad existente de %s. \n¿Desea continuar?</string>
@@ -1110,12 +1107,9 @@
     <string name="cache_personal_note_removedwaypoints">Waypoints eliminados</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No hay waypoints para eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Los waypoints fueron añadidos a la nota personal</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Se añadieron waypoints a la nota, pero se tuvieron que acortar (tamaño máximo de nota personal: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Los waypoints no se han podido almacenar en la nota debido a límites de tamaño (tamaño máximo de la nota personal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">No se encontraron waypoints para guardar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Evitar extracción de waypoints</string>
     <string name="cache_personal_note_limit">Límite de la nota personal</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Geocaching.com cortará esta nota personal después de %d caracteres.</string>
     <string name="cache_personal_note_upload">Subir</string>
     <string name="cache_personal_note_uploading">Cargando nota personal</string>
     <string name="cache_personal_note_upload_done">Nota personal cargada</string>
@@ -1358,6 +1352,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publicar en Twitter</string>
     <!-- map -->
