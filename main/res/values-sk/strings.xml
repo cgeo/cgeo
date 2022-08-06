@@ -351,7 +351,6 @@
     </plurals>
     <string name="caches_store_offline">Uložiť offline</string>
     <string name="caches_store_all">Uložiť všetko</string>
-    <string name="caches_store_unsaved">Uložiť neuložené</string>
     <string name="caches_store_selected">Uložiť vybraté</string>
     <string name="caches_history">História</string>
     <string name="caches_on_map">Zobraziť na mape</string>
@@ -544,7 +543,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log Nájdené</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyriešená mysterka</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra sa týka len mysteriek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo vyplnený finálny bod trasy so súradnicami.</string>
     <string name="cache_filter_status_active">Aktívna</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
@@ -806,7 +804,6 @@
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
-    <string name="init_backup_unnecessary">Databáza je prázdna, nie je potrebná žiadna záloha. Naďalej vytvárať zálohu?</string>
     <string name="init_backup_folder_exists_error">Nedá sa vytvoriť nový priečinok na zálohy. Vytvorili ste už zálohu za poslednú minútu?</string>
     <string name="init_backup_no_backup_available">Nie je dostupný žiadny súbor so zálohou.</string>
     <string name="backup_confirm_overwrite">Tým odstránite priečinok s najstaršou existujúcou zálohou zo %s. \nChcete pokračovať?</string>
@@ -1138,12 +1135,9 @@
     <string name="cache_personal_note_removedwaypoints">Body trasy odstránené</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nenašli sa žiadne body trasy na odstránenie</string>
     <string name="cache_personal_note_storewaypoints_success">Body trasy boli pridané do osobnej poznámky</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Body trasy boli pridané do poznámky, ale boli skrátené (max. veľkosť osobnej poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Body trasy nemožno kvôli limitom veľkosti uložiť (max. veľkosť osobnej poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Neboli nájdené žiadne uložiteľné body trasy</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabrániť extrakcii bodov trasy</string>
     <string name="cache_personal_note_limit">Limit na osobné poznámky</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Geocaching.com skráti túto osobnú poznámku na %d znakov.</string>
     <string name="cache_personal_note_upload">Nahrať</string>
     <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
@@ -1390,6 +1384,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Informovať o nájdení na Twitteri</string>
     <!-- map -->
