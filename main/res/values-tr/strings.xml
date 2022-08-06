@@ -355,9 +355,16 @@
     </plurals>
     <string name="caches_store_offline">Çevrimdışı kaydet</string>
     <string name="caches_store_all">Tümünü Depola</string>
-    <string name="caches_store_unsaved">Kayıtsız olanları kaydet</string>
     <string name="caches_store_selected">Geocache\'ler Seçildi</string>
     <string name="caches_store_background_title">Cache\'leri indir</string>
+    <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
+    <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
+    <string name="caches_store_background_result_failed">İndirme başarısız, %1$d/%2$d cache indirildi</string>
+    <string name="caches_store_background_result_canceled">İndirme iptal edildi, %1$d/%2$d cache indirildi</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache indirildi</item>
+        <item quantity="other">%d cache indirildi</item>
+    </plurals>
     <string name="caches_history">Geçmiş</string>
     <string name="caches_on_map">Haritada göster</string>
     <string name="caches_sort">Sırala</string>
@@ -485,6 +492,7 @@
     <string name="cache_filtergroup_basic">Temel</string>
     <string name="cache_filtergroup_details">Detaylar</string>
     <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
+    <string name="cache_filtergroup_special">Özel</string>
     <string name="cache_filter_contexttype_live_title">Canlı Filtre</string>
     <string name="cache_filter_contexttype_offline_title">Çevrimdışı Filtre</string>
     <string name="cache_filter_contexttype_transient_title">Filtre</string>
@@ -542,7 +550,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Çevrimdışı Kayıt Girilmiş</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Çevrımdışı Buldum Kaydı Olan</string>
     <string name="cache_filter_status_select_label_solved_mystery">Çözülmüş Gizemli</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Bu filtre ayarı sadece Gizemli cache\'ler için çalışır.\n\nEğer bir Gizemli cache\'in koordinatları değiştirilmişse veya geçerli bir yol noktasına koordinat girilmişse \'Çözülmüş\' olarak kabul edilir.</string>
     <string name="cache_filter_status_active">Aktif</string>
     <string name="cache_filter_status_disabled">Devredışı</string>
     <string name="cache_filter_status_archived">Arşivenlendi</string>
@@ -550,6 +557,7 @@
     <string name="cache_filter_status_exclude_disabled">Devredışıları Hariç Tut</string>
     <string name="cache_filter_status_exclude_archived">Arşivlenmişleri Hariç Tut</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Z/A belirli olmayan Cache\'leri dahil et</string>
+    <string name="cache_filter_nested_filter_modify">düzenle</string>
     <string name="cache_filter_log_entry_foundby">Bulan</string>
     <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
     <string name="cache_filter_stored_since_notstored">Kaydedilmemiş</string>
@@ -808,7 +816,6 @@
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
-    <string name="init_backup_unnecessary">Veritabanı boş, yedekleme gerekli değil. Yine de yedeklemek istiyor musunuz?</string>
     <string name="init_backup_folder_exists_error">Yeni bir yedekleme klasörü oluşturulamıyor. Son zamanlarda bir yedekleme yaptınız mı?</string>
     <string name="init_backup_no_backup_available">Mevcut yedekleme dosyası bulunmuyor.</string>
     <string name="backup_confirm_overwrite">Bu işlem, %s\'de bulunan mevcut en eski yedekleme dizininizi silecektir. \nDevam etmek istiyor musunuz?</string>
@@ -1122,12 +1129,9 @@
     <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Kaldırılacak yol noktası bulunamadı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Yol noktaları notlara eklendi fakat kısaltıldı (max kişisel not boyutu:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Yol noktaları boyut sınırlamalarından dolayı notlarda saklanamaz (max kişisel not boyutu:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Kaydedilebilir ara nokta bulunamadı</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Yol noktası çıkarmayı engelle</string>
     <string name="cache_personal_note_limit">Kişisel not sınırı</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Bu kişisel not, %d karakterden sonra Geocaching.com tarafından kesilecek.</string>
     <string name="cache_personal_note_upload">Yükle</string>
     <string name="cache_personal_note_uploading">Kişisel not yükleniyor</string>
     <string name="cache_personal_note_upload_done">Kişisel not yüklendi</string>
@@ -1269,10 +1273,15 @@
     <string name="cache_remove_from_history">Geçmişten kaldır</string>
     <string name="cache_license">Lisans</string>
     <string name="cache_image">Görsel</string>
+    <string name="cache_image_open">Aç</string>
     <string name="cache_image_open_file">Dosya olarak aç</string>
     <string name="cache_image_open_browser">Tarayıcıda aç</string>
+    <string name="cache_image_share">Paylaş</string>
     <string name="cache_image_show_description">Açıklamayı göster</string>
     <string name="cache_image_add_waypoint">Yol noktası ekle</string>
+    <string name="cache_image_rename">Yeniden Adlandır</string>
+    <string name="cache_image_delete">Sil</string>
+    <string name="cache_image_title_camera_prefix">Görsel</string>
     <string name="cache_image_background">Geocache listeleme sayfası arkaplan resmi</string>
     <string name="cache_share_field">Paylaş</string>
     <string name="cache_time_full_hours">saattinde</string>
@@ -1284,6 +1293,10 @@
     <string name="cache_alc_install">Bu macerayı oynayabilmek için Adventure Lab uygulamasını yükleyin</string>
     <string name="context_share_as_text">Metni paylaş</string>
     <string name="context_share_as_link">Bağlantıyı paylaş</string>
+    <string name="image_category_uncategorized">Kategorilenmemiş</string>
+    <string name="image_category_own">Benim</string>
+    <string name="image_category_listing">Listeleme</string>
+    <string name="image_category_log">Kayıt</string>
     <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
     <string name="create_internal_cache_short">Yeni Geocache</string>
     <string name="create_internal_cache_currentlist">Mevcut listeyi kullan</string>
@@ -1403,6 +1416,9 @@
     <string name="formula_error_missingvarvalue">Eksik: %1$s</string>
     <string name="formula_error_cyclicdependency">Döngü: %1$s</string>
     <string name="formula_error_other">Hata: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_metadata_geopoint">Geopuan</string>
+    <string name="imageview_metadata_comment">Yorum</string>
     <!-- visit -->
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
@@ -1998,6 +2014,7 @@
     <string name="notification_channel_foreground_description">bildirim c:geo arkada çalışırken gösterilir</string>
     <string name="notification_channel_downloader_name">c:geo indirici</string>
     <string name="notification_channel_downloader_description">indirme sonuç bildirimleri ( ör: çevrimdışı haritalar)</string>
+    <string name="notification_channel_cache_download_name">Geocache indirici</string>
     <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
     <string name="notification_download_receiver_title">İndirmeyi dışa aktarma</string>
     <!-- individual routes -->
@@ -2082,6 +2099,8 @@
     <string name="receivedownload_cancelled">Dosya aktarımı iptal edildi</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
+    <string name="delete_file_confirmation">%s silinsin mi?</string>
+    <string name="file_deleted_info">%s silindi</string>
     <string name="download_title">Dosyayı indir</string>
     <string name="downloadmap_info">\"Kaydet\" düğmesine basarak bölgeniz için harita dosyası seçin.\n\nİndirme arka planda çalışacak. İndirme tamamlandığında, indirilmiş dosya c:geo\'nun harita klasörüne kopyalanacak ve c:geo için mevcut harita olarak ayarlanacak.\n\nDikkat edin: harita indirmek yoğun ağ trafiğine sebep olur!</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
