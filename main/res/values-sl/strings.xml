@@ -262,7 +262,6 @@
     </plurals>
     <string name="caches_store_offline">Shrani</string>
     <string name="caches_store_all">Shrani vse</string>
-    <string name="caches_store_unsaved">Shrani neshranjene</string>
     <string name="caches_store_selected">Shrani izbrane</string>
     <string name="caches_history">Zgodovina</string>
     <string name="caches_on_map">Pokaži na zemljevidu</string>
@@ -534,7 +533,6 @@
     <string name="cache_personal_note">Lastna opomba</string>
     <string name="cache_personal_note_edit">Uredi</string>
     <string name="cache_personal_note_limit">Omejitev osebnega zapisa</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osebni zapis bo odrezan po %d znakih na Geocaching.com.</string>
     <string name="cache_personal_note_upload">Naloži</string>
     <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
     <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
@@ -690,6 +688,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Objavi na Twitter</string>
     <!-- map -->
