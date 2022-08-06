@@ -299,7 +299,6 @@
     </plurals>
     <string name="caches_store_offline">Salvează local</string>
     <string name="caches_store_all">Salvează pe toate</string>
-    <string name="caches_store_unsaved">Salvează nesalvate</string>
     <string name="caches_store_selected">Salvează cutiile selectate</string>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
@@ -468,7 +467,6 @@
     <string name="init_backup_restore">Restaurează</string>
     <string name="init_backup_success">Baza de date a c:geo a fost copiată aici:</string>
     <string name="init_backup_failed">Salvarea bazei de date a eşuat.</string>
-    <string name="init_backup_unnecessary">Baza de date este goală, nu este necesară o copie de rezervă. Încă doriți să creați o copie de rezervă?</string>
     <string name="init_backup_no_backup_available">Nu există nici o salvare de siguranţă.</string>
     <string name="init_restore_success">Restaurare finalizată.</string>
     <string name="init_restore_running">Restaurare bază de date cutii…</string>
@@ -616,7 +614,6 @@
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
     <string name="cache_personal_note_limit">Limită pentru note personale</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Din această notă personală, Geocaching.com va păstra doar primele %d caractere.</string>
     <string name="cache_personal_note_upload">Încarcă</string>
     <string name="cache_personal_note_uploading">Încărcare notă personală</string>
     <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
@@ -788,6 +785,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publică pe Twitter</string>
     <!-- map -->
