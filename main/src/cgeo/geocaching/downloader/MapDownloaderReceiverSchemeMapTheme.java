@@ -27,12 +27,10 @@ public class MapDownloaderReceiverSchemeMapTheme extends AbstractActivity {
             DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS.id, newUri, "", "", this::callback, null);
         } else if (host.equals("kartat-dl.hylly.org") && path.endsWith("kartta.zip")) {
             // check for Hylly map themes - mf-theme://kartat-dl.hylly.org/2021-04-25/peruskartta.zip
-            final Uri newUri = Uri.parse("https://" + host + path);
-            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY.id, newUri, "", "", this::callback, null);
+            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY.id, Uri.parse("https://" + host + path), "", "", this::callback, null);
         } else {
-            // generic map theme download - not yet supported
-            Log.w("MapDownloaderReceiverSchemeMapTheme: Received map theme download intent from unknown source: " + uri.toString());
-            finish();
+            // generic map theme download - only pure download supported, no updates
+            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_THEME_JUSTDOWNLOAD.id, Uri.parse("https://" + host + path), "", "", this::callback, null);
         }
     }
 

@@ -9,6 +9,8 @@ import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderHylly;
 import cgeo.geocaching.downloader.MapDownloaderHyllyThemes;
+import cgeo.geocaching.downloader.MapDownloaderJustDownload;
+import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
@@ -102,6 +104,9 @@ public class Download {
         DOWNLOADTYPE_MAP_HYLLY(6, R.string.downloadmap_mapfile),
         DOWNLOADTYPE_THEME_HYLLY(7, R.string.downloadmap_themefile),
 
+        DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload),
+        DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload),
+
         DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile);
 
         public final int id;
@@ -158,6 +163,8 @@ public class Download {
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_HYLLY, MapDownloaderHylly.getInstance(), R.string.mapserver_hylly_name));
 
                 // all other download types
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
 
                 // adding maps and map themes to download types for completeness
