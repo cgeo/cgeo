@@ -297,7 +297,6 @@
     </plurals>
     <string name="caches_store_offline">Offline späicheren</string>
     <string name="caches_store_all">Alles späicheren</string>
-    <string name="caches_store_unsaved">Nei späicheren</string>
     <string name="caches_store_selected">Auswal späicheren</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
@@ -542,6 +541,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <!-- map -->
     <!-- search -->
