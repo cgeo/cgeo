@@ -330,7 +330,6 @@
     </plurals>
     <string name="caches_store_offline">Összes mentése</string>
     <string name="caches_store_all">Összes mentése</string>
-    <string name="caches_store_unsaved">Nem mentettek mentése</string>
     <string name="caches_store_selected">Kijelöltek mentése</string>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
@@ -588,7 +587,6 @@
     <string name="init_backup_restore">Visszaállítás</string>
     <string name="init_backup_success">A c:geo adatbázisának mentése sikerült:</string>
     <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
-    <string name="init_backup_unnecessary">Az adatbázis üres, nincs szükség biztonsági mentésre. Mégis hozzon létre biztonsági másolatot?</string>
     <string name="init_backup_no_backup_available">Nincs elérhető biztonsági mentés.</string>
     <string name="init_restore_success">Visszaállítás kész.</string>
     <string name="init_restore_running">A ládaadatbázis visszaállítása…</string>
@@ -754,7 +752,6 @@
     <string name="cache_personal_note">Személyes megjegyzés</string>
     <string name="cache_personal_note_edit">Szerkesztés</string>
     <string name="cache_personal_note_limit">Személyes megjegyzés max. hossza</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ezt a megjegyzést %d karakter hosszúságúra vágja a geocaching.com.</string>
     <string name="cache_personal_note_upload">Feltöltés</string>
     <string name="cache_personal_note_uploading">Személyes megjegyzés feltöltése</string>
     <string name="cache_personal_note_upload_done">Személyes megjegyzés feltöltve</string>
@@ -932,6 +929,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
     <!-- map -->
