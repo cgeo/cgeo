@@ -1,38 +1,18 @@
-### Detaily kešky
-
-- Novinka: Přepracovaný kalkulátor souřadnic (podpora funkcí)
-- Změna: Proměnné pro výpočet trasových bodů jsou nyní cache-global
-- Novinka: Karta "Proměnné" v podrobnostech o kešce
-- Novinka: Generování trasových bodů pomocí vzorců a proměnných s rozsahy
-- Novinka: Šablony pro offline logy
-- Novinka: Přidáno \[umístění\] do nabídky šablony protokolu
-- Novinka: Povolen výběr textů protokolu
-- Oprava: Odkaz na GC checker vedoucí v určitých podmínkách k zacyklení v systému Android 12
-- Novinka: Přidáno tlačítko geochecker na konec textu popisu (pokud je to vhodné)
-- Novinka: Do nabídky kešky byla přidána možnost "zalogovat se v prohlížeči"
-
-### Seznam kešek
-
-- Novinka: Do filtru pokročilých stavů byla přidána možnost "má uživatelem definované trasové body"
-- Novinka: Povolit zařazení kešek bez O/T do filtru
-- Oprava: Uspořádat seznam kešek při každé změně polohy podle pořadí vzdálenosti
 
 ### Mapa
+- Oprava: Nezobrazují se kruhy vzdálenosti pro trasové body archivovaných kešek
+- Novinka: Klepnutím na volné místo na mapě můžete vytvořit trasový bod nebo uživatelem definovanou kešku, přidat nebo předřadit individuální trasu, zobrazit souřadnice nebo navigovat (v závislosti na kontextu)
+- Novinka: Možnost odstranit offline mapy
+- Oprava: Položky Lab Adventures v jednotlivých trasách nebyly jako takové po úpravě rozpoznány
 
-- Novinka: Témata mapy pro Mapy Google
-- Novinka: Možnosti měřítka mapy pro OpenStreetMap (viz možnosti tématu)
-- Změna: Nastavení => Mapa => Dlouhé klepnutí na mapu nyní povolí/zakáže dlouhé klepnutí i v mapě kešky (důležité pro vytváření nových trasových bodů pro aktuální kešku)
-- Změna: Nezobrazovat kruh vzdálenosti u archivovaných kešek
-- Oprava: Pád map OpenStreetMap za určitých podmínek
-- Oprava: Směrování přestane reagovat, když je nainstalováno mnoho směrovacích dlaždic
+### Detaily kešky
+- Změna: Odstraněna kontrola omezení velikosti při ukládání trasových bodů do osobních poznámek
 
 ### Obecné
-
-- Novinka: Automaticky provádět zálohy (volitelné)
-- Oprava: Pokračovat v importu dokončených stahování
-- Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
-- Novinka: Aktualizováno interní směrování BRouter na verzi v1.6.3
-- Novinka: Omezení nutnosti opakovaného používání klávesy zpět spuštěním nového zásobníku aktivit při přechodu do jiné části aplikace
-- Novinka: Přidáno nastavení pro dešifrování nápovědy ke kešce ve výchozím nastavení (místo pouze při klepnutí na ni)
-- Novinka: Podpora nastavení kešek z neznámého zdroje jako lokálně nalezených
-- Odstraněno: Skladovací služba Geolutin, protože byla ukončena
+- Novinka: Stahování / aktualizace kešek na pozadí
+- Novinka: Kopírování aktuálních souřadnic při dlouhém poklepnutí na polohu na domovské obrazovce
+- Oprava: Chybějící počet TB ve výsledcích vyhledávání
+- Novinka: Navigační metoda "Další externí aplikace (pouze souřadnice)" pro vyvolání externí navigační aplikace pouze se souřadnicemi (pomáhá s aplikací Here WeGo v režimu offline)
+- Novinka: Možnost vytvářet vnořené filtry
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
