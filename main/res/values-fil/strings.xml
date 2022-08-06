@@ -248,7 +248,6 @@
     </plurals>
     <string name="caches_store_offline">Iimbak nang naka-offline</string>
     <string name="caches_store_all">Iimbak ang lahat</string>
-    <string name="caches_store_unsaved">Iimbak ang hindi na-save</string>
     <string name="caches_store_selected">Ang Napiling Pag-iimbakan</string>
     <string name="caches_history">Historya</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
@@ -557,7 +556,6 @@
     <string name="cache_personal_note">Pansariling tala</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Ang limitadong pansariling tala</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Ang pansariling tala ay pinutol makalipas ang %d sa mga karakter ng Geocaching.com.</string>
     <string name="cache_personal_note_upload">Nag-upload</string>
     <string name="cache_personal_note_uploading">I-upload ang pansariling tala</string>
     <string name="cache_personal_note_upload_done">Ang pansariling tala ay nai-upload na</string>
@@ -733,6 +731,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Ipaskil ito upang mahanap ang Twitter</string>
     <!-- map -->
