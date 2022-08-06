@@ -90,13 +90,13 @@ public class FormulaUtils {
         return hasElse ? values.get(values.size() - 1) : Value.of(0);
     }
 
-    public static int valueChecksum(final Value value, final boolean iterative) {
-        final int cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
+    public static long valueChecksum(final Value value, final boolean iterative) {
+        final long cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
         return iterative ? checksum(cs, true) : cs;
     }
 
-    public static int checksum(final int value, final boolean iterative) {
-        int result = Math.abs(value);
+    public static long checksum(final long value, final boolean iterative) {
+        long result = Math.abs(value);
         do {
             int cs = 0;
             while (result > 0) {
