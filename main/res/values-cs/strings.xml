@@ -315,6 +315,7 @@
     <string name="loc_trying">Zjišťování pozice</string>
     <string name="loc_no_addr">Neznámá adresa</string>
     <string name="loc_gps_disabled">GPS zakázáno</string>
+    <string name="loc_copied_clipboard">Aktuální poloha byla zkopírována do schránky</string>
     <string name="menu_centerposition">Vycentrovat na mou polohu</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikaci</string>
@@ -360,12 +361,20 @@
     </plurals>
     <string name="caches_store_offline">Uložit offline</string>
     <string name="caches_store_all">Uložit všechny</string>
-    <string name="caches_store_unsaved">Uložit neuložené</string>
     <string name="caches_store_selected">Uložit vybrané</string>
-    <string name="caches_store_background">Stahování na pozadí (experimentální!)</string>
-    <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
-    <string name="caches_store_background_should_force_refresh">Obnovit již stažené kešky</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
+    <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
+    <string name="caches_store_background_option_nothing">Nedělat nic</string>
+    <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
+    <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
+    <string name="caches_store_background_result_failed">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
+    <string name="caches_store_background_result_canceled">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d keška stažena</item>
+        <item quantity="few">%d kešek staženo</item>
+        <item quantity="many">%d kešek staženo</item>
+        <item quantity="other">%d kešek staženo</item>
+    </plurals>
     <string name="caches_history">Historie</string>
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
@@ -497,12 +506,15 @@
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
+    <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
+    <string name="cache_filtergroup_special">Speciální</string>
     <string name="cache_filter_contexttype_live_title">Živý filtr</string>
     <string name="cache_filter_contexttype_offline_title">Offline filtr</string>
     <string name="cache_filter_contexttype_transient_title">Filtr</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Vložený filtr</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
@@ -560,7 +572,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky. Pokud chcete vyloučit ostatní typy kešek, zadejte příslušný filtr typu kešky.\n\nMysterka je považována za \'vyřešenou\', pokud změnila souřadnice nebo platný finální trasový bod vyplněný souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
@@ -568,6 +580,8 @@
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Zahrnout kešky bez O/T</string>
+    <string name="cache_filter_nested_filter_modify">upravit</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Dílčí filtr je aktuálně prázdný</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
     <string name="cache_filter_log_entry_logtext">Text logu</string>
     <string name="cache_filter_stored_since_notstored">Neuložené</string>
@@ -839,7 +853,6 @@
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
-    <string name="init_backup_unnecessary">Databáze je prázdná, není nutná žádná záloha. Přejete si i nadále vytvořit zálohu?</string>
     <string name="init_backup_folder_exists_error">Nelze vytvořit novou složku zálohy. Neprováděli jste za poslední minutu nějakou zálohu?</string>
     <string name="init_backup_no_backup_available">Není dostupný žádný záložní soubor.</string>
     <string name="backup_confirm_overwrite">Tímto odstraníte nejstarší složku zálohy z %s. \nChcete pokračovat?</string>
@@ -989,6 +1002,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Použít jednotnou mapu</string>
+    <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -1174,12 +1189,10 @@
     <string name="cache_personal_note_removedwaypoints">Trasové body odstraněny</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nebyly nalezeny žádné trasové body k odstranění</string>
     <string name="cache_personal_note_storewaypoints_success">Do osobní poznámky byly přidány trasové body</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Trasové body byly přidány do poznámky, ale byly zkráceny (max. velikost osobní poznámky: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Trasové body nelze kvůli limitům velikosti uložit (max. velikost osobní poznámky: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nebyly nalezeny žádné uložené trasové body</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabránit extrakci trasových bodů</string>
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Tato osobní poznámka bude po %d znacích zkrácena webem Geocaching.com.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Tato osobní poznámka bude zkrácena přibližně o %1$d znaků do %3$s (maximální velikost %2$d).</string>
     <string name="cache_personal_note_upload">Nahrát</string>
     <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
@@ -1251,6 +1264,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
+    <string name="cache_menu_map_ext_nolabel">Další externí aplikace (pouze souřadnice)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
@@ -1322,10 +1336,15 @@
     <string name="cache_remove_from_history">Odstranit z historie</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Obrázek</string>
+    <string name="cache_image_open">Otevřít</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
     <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
+    <string name="cache_image_share">Sdílet</string>
     <string name="cache_image_show_description">Zobrazit popis</string>
     <string name="cache_image_add_waypoint">Přidat trasový bod</string>
+    <string name="cache_image_rename">Přejmenovat</string>
+    <string name="cache_image_delete">Odstranit</string>
+    <string name="cache_image_title_camera_prefix">Fotografie</string>
     <string name="cache_image_background">Obrázek na pozadí popisu kešky</string>
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
@@ -1339,6 +1358,13 @@
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
+    <string name="image_category_uncategorized">Nezařazené</string>
+    <string name="image_category_own">Vlastní</string>
+    <string name="image_category_listing">Listing</string>
+    <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Přidat na trasu</string>
+    <string name="context_map_add_to_route_start">Přidat před trasu</string>
+    <string name="context_map_show_coords">Zobrazit souřadnice</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
@@ -1494,6 +1520,11 @@
     <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
     <string name="formula_error_empty">Prázdný vzorec</string>
     <string name="formula_error_other">Chyba: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Bez názvu</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Komentář</string>
     <!-- visit -->
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->
@@ -1987,6 +2018,7 @@
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
     <string name="tts_started">Řeč zahájena</string>
     <string name="tts_stopped">Řeč ukončena</string>
+    <string name="tts_running">Hlasová služba je spuštěna…</string>
     <string name="err_tts_lang_not_supported">Převod textu na řeč není pro tento jazyk k dispozici.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
@@ -2025,6 +2057,12 @@
         <item quantity="few">před %d dny</item>
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Za %d den</item>
+        <item quantity="few">Za %d dní</item>
+        <item quantity="many">Za %d dní</item>
+        <item quantity="other">Za %d dní</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
@@ -2118,6 +2156,8 @@
     <string name="notification_channel_foreground_description">oznámení se zobrazí, když aplikace c:geo pracuje na pozadí</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
+    <string name="notification_channel_cache_download_name">stahování kešky</string>
+    <string name="notification_channel_cache_download_description">oznámení o výsledku stahování kešek na pozadí</string>
     <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
     <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
@@ -2210,6 +2250,10 @@
     <string name="receivedownload_cancelled">Přenos souboru byl zrušen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Stáhnout offline mapu</string>
+    <string name="delete_offlinemap_title">Odstranit offline mapu</string>
+    <string name="no_deletable_offlinemaps">Žádné odstranitelné offline mapy</string>
+    <string name="delete_file_confirmation">Odstranit %s?</string>
+    <string name="file_deleted_info">%s odstraněno</string>
     <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_filename">Stahování %s</string>
