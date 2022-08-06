@@ -1,38 +1,18 @@
-### Cache details
-
-- Nieuw: De coördinaten calculator opnieuw ontworpen (ondersteuning van functies)
-- Wijziging: Variabelen voor waypoint berekening zijn nu cache-globaal
-- Nieuw: Variabelen tabblad in cache details
-- Nieuw: waypoints genereren met behulp van formules en variabelen met bereik
-- Nieuw: Log templates voor offline logs
-- Nieuw: Voeg \[locatie\] toe aan logsjabloon menu
-- Nieuw: Sta het selecteren van logteksten toe
-- Oplossing: GC checker link leidde tot oneindige loop onder bepaalde voorwaarden op Android 12
-- Nieuw: Geochecker knop toegevoegd aan het einde van de beschrijvingstekst (indien van toepassing)
-- Nieuw: De optie 'log bezoek in browser' toegevoegd aan het cachemenu
-
-### Cache lijst
-
-- Nieuw: Optie toegevoegd voor "heeft gebruiker gedefinieerde waypoints" voor de geavanceerde status filter
-- Nieuw: Sta opname van caches toe zonder D/T in het filter
-- Oplossing: Hersorteer cache lijst op elke locatie wijzigen in sorteervolgorde op afstand
 
 ### Kaart
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
 
-- Nieuw: Kaart thema voor Google Maps
-- Nieuw: Kaart schaalopties voor OpenStreetMap (zie thema opties)
-- Wijziging: Instellingen => Kaart => Lang tikken op kaart zal nu ook het aanzetten/uitschakelen van lange tik in de cache kaart instellen (relevant voor het maken van nieuwe waypoints voor huidige cache)
-- Wijziging: Toon geen afstand-cirkel voor gearchiveerde caches
-- Oplossing: Crash in OpenStreetMap kaarten onder bepaalde voorwaarden
-- Oplossing: Routering die niet reageert wanneer veel tegels zijn geïnstalleerd
+### Cache details
+- Change: Remove size-limit check while storing waypoints in personal notes
 
 ### Algemeen
-
-- Nieuw: Automatisch back-ups uitvoeren (optioneel)
-- Oplossing: Hervatten van importeren van voltooide downloads
-- Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
-- Nieuw: interne routing bijgewerkt naar BRouter v1.6.3
-- Nieuw: Limiteer de noodzaak van herhalende terug tik gebruik door het starten van een nieuwe activiteitstack wanneer je overschakelt naar een ander deel van de app
-- Nieuw: Instelling toegevoegd om de cache hint standaard te ontcijferen (in plaats van alleen wanneer erop geklikt wordt)
-- Nieuw: Ondersteuning om caches uit onbekende bron lokaal als gevonden te loggen
-- Verwijderd: Geolutin trackable service omdat deze niet langer bestaat
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
