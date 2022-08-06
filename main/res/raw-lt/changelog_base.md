@@ -1,38 +1,18 @@
-### Cache details
-
-- New: Redesigned coordinates calculator (supporting functions)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Generating waypoints using formulas and variables with ranges
-- New: Log templates for offline logs
-- New: Add \[location\] to log template menu
-- New: Allow selecting log texts
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
-
-### Cache list
-
-- New: Added option for "has user defined waypoints" to advanced status filter
-- New: Allow inclusion of caches without D/T in filter
-- Fix: Resort cache list on every location change on distance sort order
 
 ### Map
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
-- Fix: Crash in OpenStreetMap maps under certain conditions
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+### Cache details
+- Change: Remove size-limit check while storing waypoints in personal notes
 
 ### General
-
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
-- New: Limit the need of repetitive back key usage by starting a new activity stack when changing to another part of the app
-- New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
-- New: Support setting caches from unknown source as found locally
-- Removed: Geolutin trackable service as it was discontinued
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
