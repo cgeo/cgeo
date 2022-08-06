@@ -1286,6 +1286,9 @@
     <string name="cache_description_updated">Cachebeschreibung aktualisiert</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Größe</string>
+    <string name="cache_mode">Modus</string>
+    <string name="cache_mode_linear">Linear</string>
+    <string name="cache_mode_random">Zufällig</string>
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>

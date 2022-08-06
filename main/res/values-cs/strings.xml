@@ -1316,6 +1316,9 @@
     <string name="cache_description_updated">Popis kešky aktualizován</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Velikost</string>
+    <string name="cache_mode">Režim</string>
+    <string name="cache_mode_linear">Lineární</string>
+    <string name="cache_mode_random">Náhodné</string>
     <string name="cache_distance">Vzdálenost</string>
     <string name="cache_difficulty">Obtížnost</string>
     <string name="cache_terrain">Terén</string>
