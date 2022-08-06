@@ -312,6 +312,7 @@
     <string name="loc_trying">住所確認中</string>
     <string name="loc_no_addr">住所不明</string>
     <string name="loc_gps_disabled">GPS無効</string>
+    <string name="loc_copied_clipboard">現在地の座標をクリップボードにコピーしました</string>
     <string name="menu_centerposition">私の位置に中心</string>
     <!-- standard menu -->
     <string name="menu_about">c:geoについて</string>
@@ -351,7 +352,6 @@
     </plurals>
     <string name="caches_store_offline">オフライン用に保存</string>
     <string name="caches_store_all">すべて保存</string>
-    <string name="caches_store_unsaved">未保存を一括保存</string>
     <string name="caches_store_selected">選択したキャッシュを保存</string>
     <string name="caches_history">履歴</string>
     <string name="caches_on_map">地図で表示</string>
@@ -474,12 +474,15 @@
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
     <string name="cache_filter_stored_since">詳細の更新日時</string>
+    <string name="cache_filter_logical_filter_group">ネストされたフィルタ</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
+    <string name="cache_filtergroup_special">特殊</string>
     <string name="cache_filter_contexttype_live_title">オンラインフィルタ</string>
     <string name="cache_filter_contexttype_offline_title">オフラインフィルタ</string>
     <string name="cache_filter_contexttype_transient_title">フィルタ</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">ネストされたフィルタ</string>
     <string name="cache_filter_include">含む</string>
     <string name="cache_filter_exclude">除く</string>
     <string name="cache_filter_userdisplay_none">なし</string>
@@ -530,7 +533,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">発見(オフラインログ)</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">ユーザー定義ウェイポイントあり</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
     <string name="cache_filter_status_disabled">一時停止中</string>
     <string name="cache_filter_status_archived">アーカイブ済み</string>
@@ -538,6 +540,8 @@
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">難易度/地形なしのキャッシュを含める</string>
+    <string name="cache_filter_nested_filter_modify">編集</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">サブフィルタが未定義です</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
     <string name="cache_filter_stored_since_notstored">未保存</string>
@@ -803,7 +807,6 @@
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
-    <string name="init_backup_unnecessary">データベースが空です。バックアップは必要ありませんが、それでもバックアップを作成しますか?</string>
     <string name="init_backup_folder_exists_error">新しいバックアップフォルダを作成できませんでした。1分以内に連続してバックアップはできません</string>
     <string name="init_backup_no_backup_available">バックアップファイルはありません。</string>
     <string name="backup_confirm_overwrite">一番古いバックアップ(%s)は削除されます。\n続けますか?</string>
@@ -1111,12 +1114,9 @@
     <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">ノートにウェイポイントが追加されましたが超過分は削除されました\n(パーソナルノートの最大サイズ:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">ノートのサイズ制限のためウェイポイントが追加されませんでした\n(パーソナルノートの最大サイズ:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">保存できるウェイポイントが見つかりません</string>
     <string name="cache_personal_note_preventWaypointsExtraction">ウェイポイント抽出しない</string>
     <string name="cache_personal_note_limit">パーソナルノートの制限</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">このパーソナルノートはGeocaching.comにより%d文字以降は削除されます</string>
     <string name="cache_personal_note_upload">アップロード</string>
     <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
@@ -1258,9 +1258,14 @@
     <string name="cache_remove_from_history">履歴から削除</string>
     <string name="cache_license">ライセンス</string>
     <string name="cache_image">画像</string>
+    <string name="cache_image_open">開く</string>
     <string name="cache_image_open_file">ほかのアプリで開く</string>
     <string name="cache_image_open_browser">ブラウザで開く</string>
+    <string name="cache_image_share">共有</string>
     <string name="cache_image_add_waypoint">ウェイポイントを追加</string>
+    <string name="cache_image_rename">名前の変更</string>
+    <string name="cache_image_delete">削除</string>
+    <string name="cache_image_title_camera_prefix">写真</string>
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
@@ -1272,6 +1277,13 @@
     <string name="cache_alc_install">このアドベンチャーを始めるにはAdventure Labアプリのインストールが必要です</string>
     <string name="context_share_as_text">テキストを共有</string>
     <string name="context_share_as_link">リンクを共有</string>
+    <string name="image_category_uncategorized">未分類</string>
+    <string name="image_category_own">自分のもの</string>
+    <string name="image_category_listing">一覧</string>
+    <string name="image_category_log">ログ</string>
+    <string name="context_map_add_to_route">ルートの最後に追加</string>
+    <string name="context_map_add_to_route_start">ルートの最初に追加</string>
+    <string name="context_map_show_coords">座標を表示</string>
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="create_internal_cache_short">新しいキャッシュ</string>
     <string name="create_internal_cache_currentlist">現在のリストを使用</string>
@@ -1411,6 +1423,11 @@
     <string name="formula_error_missingvarvalue">不明:%1$s</string>
     <string name="formula_error_empty">未入力</string>
     <string name="formula_error_other">エラー:%1$s</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">名称未設定</string>
+    <string name="imageview_mimetype">MIMEタイプ</string>
+    <string name="imageview_metadata_geopoint">ジオポイント</string>
+    <string name="imageview_metadata_comment">コメント</string>
     <!-- visit -->
     <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
@@ -1898,6 +1915,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
+    <string name="tts_running">スピーチサービスを実行しています…</string>
     <string name="err_tts_lang_not_supported">現在の言語ではテキスト読み上げ機能に対応していません</string>
     <string name="tts_one_kilometer">1キロメートル</string>
     <plurals name="tts_kilometers">
@@ -2071,6 +2089,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン地図のダウンロード</string>
+    <string name="delete_offlinemap_title">オフライン地図の削除</string>
+    <string name="no_deletable_offlinemaps">削除可能なオフライン地図はありません</string>
+    <string name="delete_file_confirmation">%sを削除しますか?</string>
+    <string name="file_deleted_info">%sが削除されました</string>
     <string name="download_title">ファイルをダウンロード</string>
     <string name="downloadmap_info">お好みの地域の「保存アイコン」をタップするとダウンロードできます。\n\nダウンロードはバックグラウンドで実行されます。完了後に地図フォルダに保存され、表示する地図に設定されます。\n\n注意: 地図ファイルはサイズがとても大きいので、たくさんのデータ通信量が必要です!</string>
     <string name="downloadmap_filename">%sをダウンロード中</string>
