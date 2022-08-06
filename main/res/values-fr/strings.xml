@@ -315,6 +315,7 @@
     <string name="loc_trying">Localisation en cours…</string>
     <string name="loc_no_addr">Position inconnue</string>
     <string name="loc_gps_disabled">GPS désactivé</string>
+    <string name="loc_copied_clipboard">La position actuelle a été copiée dans le presse-papiers</string>
     <string name="menu_centerposition">Centrer sur ma position</string>
     <!-- standard menu -->
     <string name="menu_about">À propos de c:geo</string>
@@ -356,11 +357,7 @@
     </plurals>
     <string name="caches_store_offline">Enregistrer localement</string>
     <string name="caches_store_all">Tout enregistrer</string>
-    <string name="caches_store_unsaved">Enregistrer les non sauvegardées</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
-    <string name="caches_store_background">Téléchargement en arrière-plan (expérimental)</string>
-    <string name="caches_store_refresh_background">Actualisation en arrière-plan (expérimental)</string>
-    <string name="caches_store_background_should_force_refresh">Actualiser les caches téléchargées</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
@@ -487,12 +484,15 @@
     <string name="cache_filter_stored_lists">Listes stockées</string>
     <string name="cache_filter_origin">Origine</string>
     <string name="cache_filter_stored_since">Détails de la dernière mise à jour</string>
+    <string name="cache_filter_logical_filter_group">Filtre imbriqué</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
     <string name="cache_filtergroup_userspecific">Spécifique à l\'utilisateur</string>
+    <string name="cache_filtergroup_special">Spécial</string>
     <string name="cache_filter_contexttype_live_title">Filtre temps réel</string>
     <string name="cache_filter_contexttype_offline_title">Filtre hors ligne</string>
     <string name="cache_filter_contexttype_transient_title">Filtrer</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtre imbriqué</string>
     <string name="cache_filter_include">Inclure</string>
     <string name="cache_filter_exclude">Exclure</string>
     <string name="cache_filter_userdisplay_complex">Complexe</string>
@@ -548,7 +548,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">A un log Trouvé (hors ligne)</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mystery résolue</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Avec points de passage définis par l’utilisateur</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">La configuration du filtre affectera les mysteries.\n\nUne mystery est considéré “résolue” si elle a soit, les coordonnées modifiées, soit un point de passage final avec des coordonnées.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Ce paramètre de filtre n\'affectera que les caches mystère. Si vous souhaitez exclure d\'autres types de cache, veuillez définir un filtre pour le type de cache approprié.\n\nUne cache mystère est considérée comme « résolue » si ses coordonnées ont été modifiées ou si un waypoint final valide vérifie de coordonnées.</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
@@ -556,6 +556,8 @@
     <string name="cache_filter_status_exclude_disabled">Exclure les caches désactivées</string>
     <string name="cache_filter_status_exclude_archived">Exclure les caches archivées</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclure les caches sans D/T</string>
+    <string name="cache_filter_nested_filter_modify">modifier</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Actuellement, le sous-filtre est vide</string>
     <string name="cache_filter_log_entry_foundby">Trouvée par</string>
     <string name="cache_filter_log_entry_logtext">Texte du journal</string>
     <string name="cache_filter_stored_since_notstored">Non enregistrée</string>
@@ -827,7 +829,6 @@
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
-    <string name="init_backup_unnecessary">La base de données est vide, aucune sauvegarde n\'est donc nécessaire. Souhaitez-vous quand même créer une sauvegarde ?</string>
     <string name="init_backup_folder_exists_error">Impossible de créer un nouveau dossier de sauvegarde. Avez-vous déjà effectué une sauvegarde au cours de la dernière minute ?</string>
     <string name="init_backup_no_backup_available">Aucun fichier de sauvegarde n\'est disponible.</string>
     <string name="backup_confirm_overwrite">Ceci supprimera votre plus ancien dossier de sauvegarde existant de %s. \nVoulez-vous continuer ?</string>
@@ -1146,12 +1147,9 @@
     <string name="cache_personal_note_removedwaypoints">Points de passage supprimés</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Aucun point de passage à supprimer</string>
     <string name="cache_personal_note_storewaypoints_success">Les points de passage ont été ajoutés à la note personnelle</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Les points de passage ont été ajoutés à la note mais ont été raccourcis (taille maximale de la note personnelle : %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Les points de passage n\'ont pas pu être stockés dans la note en raison de la limite de taille (taille maximale de la note personnelle : %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Aucun point de passage enregistrable trouvé</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des points de passage</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">La note personnelle sera tronquée au delà de %d caractères par Geocaching.com.</string>
     <string name="cache_personal_note_upload">Envoyer</string>
     <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
@@ -1223,6 +1221,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
+    <string name="cache_menu_map_ext_nolabel">Autres applications externes (coordonnées seulement)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="no_browser_found">Aucun navigateur Internet n\'a été trouvé</string>
@@ -1294,10 +1293,15 @@
     <string name="cache_remove_from_history">Supprimer de l\'historique</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_open">Ouvrir</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
+    <string name="cache_image_share">Partager</string>
     <string name="cache_image_show_description">Afficher la description</string>
     <string name="cache_image_add_waypoint">Ajouter un point de passage</string>
+    <string name="cache_image_rename">Renommer</string>
+    <string name="cache_image_delete">Supprimer</string>
+    <string name="cache_image_title_camera_prefix">Photo</string>
     <string name="cache_image_background">Image d\'arrière-plan pour la liste des caches</string>
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
@@ -1311,6 +1315,10 @@
     <string name="cache_alc_install">Installez l\'application Adventure Lab pour jouer à cette aventure</string>
     <string name="context_share_as_text">Partager comme texte</string>
     <string name="context_share_as_link">Partager le lien</string>
+    <string name="image_category_uncategorized">Sans catégorie</string>
+    <string name="image_category_own">Mes caches</string>
+    <string name="image_category_listing">Liste</string>
+    <string name="image_category_log">Signaler votre visite</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
@@ -1464,6 +1472,11 @@
     <string name="formula_error_cyclicdependency">cicle : %1$s</string>
     <string name="formula_error_empty">Formule vide</string>
     <string name="formula_error_other">Erreur : \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Sans titre</string>
+    <string name="imageview_mimetype">Type MIME</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Commentaire</string>
     <!-- visit -->
     <string name="visit_tweet">Publier votre découverte sur Twitter</string>
     <!-- map -->
@@ -2064,6 +2077,7 @@
     <string name="notification_channel_foreground_description">la notification est affichée lorsque que c:geo travaille en arrière-plan</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">Notification des résultats de téléchargement (par exemple pour les cartes hors-ligne)</string>
+    <string name="notification_channel_cache_download_description">notifications des résultats du téléchargement de cache en arrière-plan</string>
     <string name="notification_proximity_title">notification de proximité c:geo</string>
     <string name="notification_download_receiver_title">Téléchargement en cours</string>
     <!-- individual routes -->
@@ -2152,6 +2166,10 @@
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
+    <string name="delete_offlinemap_title">Supprimer la carte hors ligne</string>
+    <string name="no_deletable_offlinemaps">Aucune carte hors ligne ne peut être supprimée</string>
+    <string name="delete_file_confirmation">Supprimer %s ?</string>
+    <string name="file_deleted_info">%s supprimée</string>
     <string name="download_title">Télécharger le fichier</string>
     <string name="downloadmap_info">Sélectionnez un fichier de carte pour votre région en appuyant sur l\'icône \"Enregistrer\".\n\nLe téléchargement est effectué en arrière-plan. Lorsque le transfert est terminé, le fichier est copié dans le dossier des cartes c:geo et défini comme la carte actuelle.\n\nAttention : Le téléchargement d\'une carte peut causer un trafic réseau élevé !</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
