@@ -1,38 +1,18 @@
-### Cache-Details
-
-- Neu: Umgestalteter Koordinatenrechner (unterstützt nun auch Funktionen)
-- Änderung: Variablen zur Wegpunkte-Berechnung haben nun Gültigkeit innerhalb aller Wegpunkte des Caches
-- Neu: Variablen-Tab in Cache-Details
-- Neu: Generierte Wegpunkte (verwendet Funktionen und Variablen mit Bereichen)
-- Neu: Log-Vorlagen für Offline-Logs
-- Neu: \[Standort\] als Log-Vorlage hinzugefügt
-- Neu: Erlaube Markieren und Kopieren von Logeinträgen
-- Korrektur: GC Geochecker-Verknüpfung führt in bestimmten Situation unter Android 12 zu Schleife
-- Neu: Geochecker-Button am Ende der Beschreibung ergänzt (wenn sinnvoll)
-- Neu: 'Im Browser loggen'-Option im Cachemenü ergänzt
-
-### Cacheliste
-
-- Neu: Option für "hat benutzerdefinierte Wegpunkte" zum erweiterten Statusfilter hinzugefügt
-- Neu: Erlaube die Aufnahme von Caches ohne D/T in Filter
-- Korrektur: Nach Entfernung sortierte Cacheliste bei Positionsänderungen neu sortieren
 
 ### Karte
+- Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
+- Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
+- Neu: Option zum Löschen von Offline-Karten
+- Korrektur: Lab Adventure-Einträge in individuellen Routen werden nach der Bearbeitung nicht mehr als solche erkannt
 
-- Neu: Kartendesign-Optionen für Google Maps
-- Neu: Skalierungsoptionen für OpenStreetMap (siehe Design-Optionen)
-- Änderung: Einstellungen => Karte => Langes Tippen auf Karte berücksichtigt nun auch die Cache-Karte (relevant für das Erstellen neuer Wegpunkte für den aktuellen Cache)
-- Änderung: Entfernungskreis für archivierte Caches nicht anzeigen
-- Korrektur: Absturz bei OpenStreetMap unter bestimmten Bedingungen
-- Korrektur: Routing unvollständig oder langsam nach Installation vieler Routing-Kacheln
+### Cache-Details
+- Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 
 ### Allgemein
-
-- Neu: Automatische Sicherungen durchführen (optional)
-- Korrektur: Importieren von fertigen Downloads fortsetzen
-- Neu: Konfigurierbare Schnellstart-Buttons zum Startbildschirm hinzugefügt, siehe Einstellungen => Erscheinungsbild
-- Neu: Internes Routing auf BRouter v1.6.3 aktualisiert
-- Neu: Begrenzen der Notwendigkeit der wiederholten Verwendung der Zurück-Taste durch das Starten eines neuen Aktivitätsstapels, wenn zu einem anderen Teil der App gewechselt wird
-- Neu: Einstellung hinzugefügt, um den Cache-Hinweis standardmäßig zu entschlüsseln (statt nur nach Tippen darauf)
-- Neu: Caches aus unbekannten Quellen als gefunden markieren
-- Entfernt: Geolutin Trackable-Service, da er eingestellt wurde
+- Neu: Caches im Hintergrund herunterladen/aktualisieren
+- Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
+- Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
+- Neu: Navigationsmethode "Andere externe App (nur Koordinaten)", um externe Navigations-App nur mit Koordinaten aufzurufen (hilft mit Here WeGo im Offline-Modus)
+- Neu: Erstellen verschachtelter Filter
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
