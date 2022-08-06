@@ -1,38 +1,18 @@
-### Cache details
-
-- Nytt: Omgjord koordinat-kalkylator (stöder funktioner)
-- Förändring: Variabler för waypoint-beräkning är nu cache-global
-- Nytt: Fliken Variabler i cache-detaljer
-- Nytt: Genererar vägpunkter med hjälp av formler och variabler med områden
-- Nytt: Loggmallar för loggar offline
-- Nytt: Lägg \[location\] till mallmenyn
-- Nytt: Tillåt val av loggtexter
-- Fix: GC checker länk som leder till loop i vissa förhållanden på Android 12
-- Nytt: Tillagd geochecker-knapp i slutet av beskrivningstexten (vid behov)
-- Nytt: Lagt till alternativet "Logga in webbläsare" i cache-menyn
-
-### Cachelista
-
-- Nytt: Lagt till alternativ för "har användardefinierade waypoints" till avancerat statusfilter
-- New: Allow inclusion of caches without D/T in filter
-- Fix: Omsortera cache-listan vid varje plats ändring när distanssortering används
 
 ### Karta
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
-- Förändring: Inställningar => Karta => Långtryck på kartan kommer nu att aktivera/inaktivera långtryck även i cache-kartan (relevant för att skapa nya waypoints för aktuell cache)
-- Ändring: Visa inte distans-cirkel för arkiverade cacher
-- Fix: Krasch i OpenStreetMap-kartor under vissa förhållanden
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+### Cache details
+- Change: Remove size-limit check while storing waypoints in personal notes
 
 ### Allmänt
-
-- Nytt: Utför säkerhetskopior automatiskt (valfritt)
-- Fix: Återuppta importering av färdiga nedladdningar
-- Nytt: Lagt till konfigurerbara snabbstartsknappar till startskärmen, se Inställningar => Utseende
-- Nytt: Uppdaterad intern routing till BRouter v1.6.3
-- New: Limit the need of repetitive back key usage by starting a new activity stack when changing to another part of the app
-- New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
-- New: Support setting caches from unknown source as found locally
-- Removed: Geolutin trackable service as it was discontinued
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
