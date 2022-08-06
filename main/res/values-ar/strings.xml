@@ -250,7 +250,6 @@
     <string name="caches_eta_ltm">أقل من دقيقة</string>
     <string name="caches_store_offline">تخزين في وضع عدم الاتصال</string>
     <string name="caches_store_all">تخزين الكل</string>
-    <string name="caches_store_unsaved">تخزين غير محفوظ</string>
     <string name="caches_store_selected">تخزين المحدد</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>
@@ -545,7 +544,6 @@
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>
     <string name="cache_personal_note_limit">حد الملاحظة الشخصية</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">هذه الملاحظة الشخصية بعد %d أحرف سيتم اقتطاعها بواسطة Geocaching.com.</string>
     <string name="cache_personal_note_upload">رفع</string>
     <string name="cache_personal_note_uploading">رفع الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload_done">تم رفع الملاحضة الشخصية</string>
@@ -721,6 +719,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">نشر هذا الاكتشاف على التويتر</string>
     <!-- map -->
