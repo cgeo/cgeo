@@ -315,6 +315,7 @@
     <string name="loc_trying">Próba lokalizacji</string>
     <string name="loc_no_addr">Nieznany adres</string>
     <string name="loc_gps_disabled">GPS wyłączony</string>
+    <string name="loc_copied_clipboard">Bieżąca lokalizacja została skopiowana do schowka</string>
     <string name="menu_centerposition">Wyśrodkuj na moje położenie</string>
     <!-- standard menu -->
     <string name="menu_about">O c:geo</string>
@@ -360,12 +361,20 @@
     </plurals>
     <string name="caches_store_offline">Zapisz offline</string>
     <string name="caches_store_all">Zapisz wszystkie</string>
-    <string name="caches_store_unsaved">Zapisz niezapisane</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
-    <string name="caches_store_background">Pobieranie w tle (eksperymentalne!)</string>
-    <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
-    <string name="caches_store_background_should_force_refresh">Odśwież już pobrane skrytki</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
+    <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
+    <string name="caches_store_background_option_nothing">Nic nie rób</string>
+    <string name="caches_store_background_option_add_to_list">Dodaj do listy</string>
+    <string name="caches_store_background_option_refresh">Odśwież i dodaj do listy</string>
+    <string name="caches_store_background_result_failed">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
+    <string name="caches_store_background_result_canceled">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d skrytka pobrana</item>
+        <item quantity="few">%d skrytki pobrane</item>
+        <item quantity="many">%d skrytek pobranych</item>
+        <item quantity="other">%d skrytek pobranych</item>
+    </plurals>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -497,12 +506,15 @@
     <string name="cache_filter_stored_lists">Zapisane listy</string>
     <string name="cache_filter_origin">Pochodzenie</string>
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
+    <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
     <string name="cache_filtergroup_userspecific">Specyficzne dla użytkownika</string>
+    <string name="cache_filtergroup_special">Specjalne</string>
     <string name="cache_filter_contexttype_live_title">Filtr na żywo</string>
     <string name="cache_filter_contexttype_offline_title">Filtr offline</string>
     <string name="cache_filter_contexttype_transient_title">Filtr</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Zagnieżdżony filtr</string>
     <string name="cache_filter_include">Dołącz</string>
     <string name="cache_filter_exclude">Wyklucz</string>
     <string name="cache_filter_userdisplay_complex">Złożone</string>
@@ -560,7 +572,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe.\n\n Zagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt nawigacji ma wpisane współrzędne.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
     <string name="cache_filter_status_archived">Zarchiwizowana</string>
@@ -568,6 +579,8 @@
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
+    <string name="cache_filter_nested_filter_modify">modyfikuj</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Podfiltr jest obecnie pusty</string>
     <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
     <string name="cache_filter_log_entry_logtext">Tekst wpisu</string>
     <string name="cache_filter_stored_since_notstored">Nieprzechowywane</string>
@@ -839,7 +852,6 @@
     <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
-    <string name="init_backup_unnecessary">Baza danych jest pusta, kopia zapasowa nie jest wymagana. Utworzyć kopię zapasową mimo to?</string>
     <string name="init_backup_folder_exists_error">Nie można utworzyć nowego folderu kopii zapasowej. Czy wykonałeś już kopię zapasową w ciągu ostatniej minuty?</string>
     <string name="init_backup_no_backup_available">Plik kopii zapasowej nie jest dostępny.</string>
     <string name="backup_confirm_overwrite">Spowoduje to usunięcie najstarszego istniejącego folderu kopii zapasowej z %s. \nCzy chcesz kontynuować?</string>
@@ -989,6 +1001,8 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Użyj zunifikowanej mapy</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1174,12 +1188,10 @@
     <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty nawigacji zostały dodane do notatki osobistej</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Punkty nawigacji zostały dodane do notatki, ale musiały zostać skrócone (maksymalny rozmiar notatki osobistej: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Punkty nawigacji nie mogą być zapisane w notatce ze względu na ograniczenia rozmiaru (maksymalny rozmiar notatki osobistej: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nie znaleziono punktów nawigacji, które można zapisać</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zapobiegaj ekstrakcji punktów nawigacji</string>
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ta osobista notatka będzie obcięta o około %1$d znaków na %3$s (maksymalny rozmiar %2$d).</string>
     <string name="cache_personal_note_upload">Wyślij</string>
     <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
     <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
@@ -1322,10 +1334,15 @@
     <string name="cache_remove_from_history">Usuń z historii</string>
     <string name="cache_license">Licencja</string>
     <string name="cache_image">Zdjęcie</string>
+    <string name="cache_image_open">Otwórz</string>
     <string name="cache_image_open_file">Otwórz jako plik</string>
     <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
+    <string name="cache_image_share">Udostępnij</string>
     <string name="cache_image_show_description">Pokaż opis</string>
     <string name="cache_image_add_waypoint">Dodaj punkt nawigacji</string>
+    <string name="cache_image_rename">Zmień nazwę</string>
+    <string name="cache_image_delete">Usuń</string>
+    <string name="cache_image_title_camera_prefix">Zdjęcie</string>
     <string name="cache_image_background">Obrazek tła listy skrytek</string>
     <string name="cache_share_field">Udostępnij</string>
     <string name="cache_time_full_hours">godzina</string>
@@ -1339,6 +1356,13 @@
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
     <string name="context_share_as_link">Udostępnij link</string>
+    <string name="image_category_uncategorized">Bez kategorii</string>
+    <string name="image_category_own">Własne</string>
+    <string name="image_category_listing">Z opisu</string>
+    <string name="image_category_log">Z dziennika</string>
+    <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
+    <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
+    <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -1494,6 +1518,11 @@
     <string name="formula_error_cyclicdependency">Cykl: %1$s</string>
     <string name="formula_error_empty">Pusta formuła</string>
     <string name="formula_error_other">Błąd: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Bez nazwy</string>
+    <string name="imageview_mimetype">Typ MIME</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Komentarz</string>
     <!-- visit -->
     <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
@@ -1987,6 +2016,7 @@
     <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
+    <string name="tts_running">Usługa mowy jest uruchomiona…</string>
     <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
@@ -2025,6 +2055,12 @@
         <item quantity="few">%d dni temu</item>
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Za %d dzień</item>
+        <item quantity="few">Za %d dni</item>
+        <item quantity="many">Za %d dni</item>
+        <item quantity="other">Za %d dni</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
@@ -2118,6 +2154,8 @@
     <string name="notification_channel_foreground_description">powiadomienie jest wyświetlane, gdy c:geo wykonuje pracę w tle</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">powiadomienia o wynikach pobierania (np. map offline)</string>
+    <string name="notification_channel_cache_download_name">pobieranie skrytek</string>
+    <string name="notification_channel_cache_download_description">powiadomienia o wynikach pobierania skrytek w tle</string>
     <string name="notification_proximity_title">Powiadomienie o bliskości</string>
     <string name="notification_download_receiver_title">Importowanie pobierania</string>
     <!-- individual routes -->
@@ -2210,6 +2248,10 @@
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
+    <string name="delete_offlinemap_title">Usuń mapę offline</string>
+    <string name="no_deletable_offlinemaps">Nie ma map offline do usunięcia</string>
+    <string name="delete_file_confirmation">Usunąć %s?</string>
+    <string name="file_deleted_info">%s usunięto</string>
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
