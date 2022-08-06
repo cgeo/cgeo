@@ -12,5 +12,7 @@
 - Neu: Caches im Hintergrund herunterladen/aktualisieren
 - Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
 - Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
+- Neu: Navigationsmethode "Andere externe App (nur Koordinaten)", um externe Navigations-App nur mit Koordinaten aufzurufen (hilft mit Here WeGo im Offline-Modus)
+- Neu: Erstellen verschachtelter Filter
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
