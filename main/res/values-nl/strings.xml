@@ -315,6 +315,7 @@
     <string name="loc_trying">Proberen te lokaliseren</string>
     <string name="loc_no_addr">Adres onbekend</string>
     <string name="loc_gps_disabled">GPS uitgeschakeld</string>
+    <string name="loc_copied_clipboard">Huidige locatie is gekopieerd naar klembord</string>
     <string name="menu_centerposition">Centreer op mijn positie</string>
     <!-- standard menu -->
     <string name="menu_about">Over c:geo</string>
@@ -356,12 +357,18 @@
     </plurals>
     <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
     <string name="caches_store_all">Alle opslaan</string>
-    <string name="caches_store_unsaved">Niet opgeslagen opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
-    <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
-    <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
-    <string name="caches_store_background_should_force_refresh">Vernieuwen reeds gedownloade caches</string>
     <string name="caches_store_background_title">Caches downloaden</string>
+    <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
+    <string name="caches_store_background_option_nothing">Niets doen</string>
+    <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
+    <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
+    <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache gedownload</item>
+        <item quantity="other">%d caches gedownload</item>
+    </plurals>
     <string name="caches_history">Geschiedenis</string>
     <string name="caches_on_map">Toon op kaart</string>
     <string name="caches_sort">Sorteren</string>
@@ -487,12 +494,15 @@
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filter_stored_since">Laatste details update</string>
+    <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
+    <string name="cache_filtergroup_special">Speciaal</string>
     <string name="cache_filter_contexttype_live_title">Live filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Geneste filter</string>
     <string name="cache_filter_include">Opnemen</string>
     <string name="cache_filter_exclude">Uitsluiten</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
@@ -548,7 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches. Indien je andere cachetypes wilt uitsluiten, vul dan een passend cachetype filter in.\n\nEen mystery wordt beschouwd als \'opgelost\' als de coördinaten zijn gewijzigd of een geldig waypoint de heeft voorzien van coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
     <string name="cache_filter_status_disabled">Uitgeschakeld</string>
     <string name="cache_filter_status_archived">Gearchiveerd</string>
@@ -556,6 +566,8 @@
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclusief caches zonder D/T</string>
+    <string name="cache_filter_nested_filter_modify">bewerk</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Het subfilter is momenteel leeg</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door</string>
     <string name="cache_filter_log_entry_logtext">Log tekst</string>
     <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
@@ -827,7 +839,6 @@
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
-    <string name="init_backup_unnecessary">Database is leeg, geen back-up nodig. Toch een back-up maken?</string>
     <string name="init_backup_folder_exists_error">Kan geen nieuwe back-up map maken. Heb je in de laatste minuut al een back-up gemaakt?</string>
     <string name="init_backup_no_backup_available">Er is geen back-up bestand beschikbaar.</string>
     <string name="backup_confirm_overwrite">Dit zal je oudste bestaande back-up map verwijderen van %s. \nWil je doorgaan?</string>
@@ -977,6 +988,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
+    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten (experimenteel / verre van compleet / alleen voor test)</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1146,12 +1159,10 @@
     <string name="cache_personal_note_removedwaypoints">Waypoint verwijderd</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Geen waypoints gevonden om te verwijderen</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints zijn toegevoegd aan persoonlijke notitie</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Waypoints zijn toegevoegd aan notitie, maar moesten worden ingekort (max. persoonlijke notitiegrootte: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Waypoints konden niet worden opgeslagen in notitie vanwege groottelimieten (max. persoonlijke notitiegrotte: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Geen waypoints gevonden die opgeslagen kunnen worden</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Waypoint extractie voorkomen</string>
     <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Deze persoonlijke notitie zal worden afgekapt met ca. %1$d tekens bij %3$s (max grootte %2$d).</string>
     <string name="cache_personal_note_upload">Uploaden</string>
     <string name="cache_personal_note_uploading">Persoonlijke notitie uploaden</string>
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
@@ -1294,10 +1305,15 @@
     <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
     <string name="cache_license">Licentie</string>
     <string name="cache_image">Afbeelding</string>
+    <string name="cache_image_open">Open</string>
     <string name="cache_image_open_file">Open als bestand</string>
     <string name="cache_image_open_browser">Openen in browser</string>
+    <string name="cache_image_share">Delen</string>
     <string name="cache_image_show_description">Toon beschrijving</string>
     <string name="cache_image_add_waypoint">Waypoint toevoegen</string>
+    <string name="cache_image_rename">Hernoemen</string>
+    <string name="cache_image_delete">Verwijderen</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Achtergrondafbeelding van de cache-lijst</string>
     <string name="cache_share_field">Delen</string>
     <string name="cache_time_full_hours">uur</string>
@@ -1311,6 +1327,13 @@
     <string name="cache_alc_install">Installeer de Adventure Lab speler om dit avontuur te spelen</string>
     <string name="context_share_as_text">Tekst delen</string>
     <string name="context_share_as_link">Link delen</string>
+    <string name="image_category_uncategorized">Niet gecategoriseerd</string>
+    <string name="image_category_own">Eigen</string>
+    <string name="image_category_listing">Lijst</string>
+    <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Toevoegen aan route</string>
+    <string name="context_map_add_to_route_start">Toevoegen aan route (vooraan)</string>
+    <string name="context_map_show_coords">Coördinaten tonen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
@@ -1464,6 +1487,11 @@
     <string name="formula_error_cyclicdependency">Cyclus: %1$s</string>
     <string name="formula_error_empty">Lege Formule</string>
     <string name="formula_error_other">Fout: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Naamloos</string>
+    <string name="imageview_mimetype">Mimetype</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Opmerking</string>
     <!-- visit -->
     <string name="visit_tweet">Post deze vondst op Twitter</string>
     <!-- map -->
@@ -1955,6 +1983,7 @@
     <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
     <string name="tts_started">Gestart toespraak</string>
     <string name="tts_stopped">Gestopt toespraak</string>
+    <string name="tts_running">Spraakservice is actief…</string>
     <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>
     <string name="tts_one_kilometer">één kilometer</string>
     <plurals name="tts_kilometers">
@@ -1983,6 +2012,10 @@
     <plurals name="days_ago">
         <item quantity="one">%d dag geleden</item>
         <item quantity="other">%d dagen geleden</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Over %d dag</item>
+        <item quantity="other">Over %d dagen</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
@@ -2064,6 +2097,8 @@
     <string name="notification_channel_foreground_description">melding wordt getoond terwijl c:geo werk op de achtergrond doet</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">resultaat meldingen voor downloads (bijv. offline kaarten)</string>
+    <string name="notification_channel_cache_download_name">cache downloader</string>
+    <string name="notification_channel_cache_download_description">resultaat meldingen voor caches achtergronddownloads</string>
     <string name="notification_proximity_title">c:geo nabijheidsmelding</string>
     <string name="notification_download_receiver_title">Download importeren</string>
     <!-- individual routes -->
@@ -2154,6 +2189,10 @@
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
+    <string name="delete_offlinemap_title">Verwijder offline kaart</string>
+    <string name="no_deletable_offlinemaps">Geen verwijderbare offline kaarten</string>
+    <string name="delete_file_confirmation">Verwijder %s?</string>
+    <string name="file_deleted_info">%s verwijderd</string>
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_filename">%s downloaden</string>
