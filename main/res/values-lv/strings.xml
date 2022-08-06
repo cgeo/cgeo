@@ -298,7 +298,6 @@
     </plurals>
     <string name="caches_store_offline">Saglabāt bezsaistes lietošanai</string>
     <string name="caches_store_all">Saglabāt visu</string>
-    <string name="caches_store_unsaved">Saglabāt nesaglabātos</string>
     <string name="caches_store_selected">Saglabāt atlasīto</string>
     <string name="caches_history">Vēsture</string>
     <string name="caches_on_map">Parādīt kartē</string>
@@ -697,10 +696,8 @@
     <string name="cache_personal_note">Personiska piezīme</string>
     <string name="cache_personal_note_edit">Rediģēt</string>
     <string name="cache_personal_note_storewaypoints_success">Ceļa punkti tika pievienoti personiskajai piezīmei</string>
-    <string name="cache_personal_note_storewaypoints_failed">Izmēra ierobežojumu dēļ ceļa punkti netika saglabāti piezīmē (maksimālais personiskās piezīmes izmērs. %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nav atrasti saglabājami ceļa punkti</string>
     <string name="cache_personal_note_limit">Personiskās piezīmes limits</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Šī personiskā piezīme tiks apcirsta iekš Geocaching.com pēc %d rakstzīmju.</string>
     <string name="cache_personal_note_upload">Augšupielādēt</string>
     <string name="cache_personal_note_uploading">Augšupielādē personīgo piezīmi</string>
     <string name="cache_personal_note_upload_done">Personiskā piezīme ir augšupielādēta</string>
@@ -909,6 +906,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publicēt šo atradumu Twitter\'ī</string>
     <!-- map -->
