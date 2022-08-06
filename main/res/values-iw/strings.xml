@@ -265,7 +265,6 @@
     </plurals>
     <string name="caches_store_offline">שמור במצב לא מקוון</string>
     <string name="caches_store_all">שמור הכל</string>
-    <string name="caches_store_unsaved">שמור כל מה שלא שמור</string>
     <string name="caches_store_selected">שמור נבחרים</string>
     <string name="caches_history">היסטוריה</string>
     <string name="caches_on_map">הצג במפה</string>
@@ -447,6 +446,7 @@
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <!-- map -->
     <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
