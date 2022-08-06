@@ -315,6 +315,7 @@
     <string name="loc_trying">A tentar localizar</string>
     <string name="loc_no_addr">Endereço desconhecido</string>
     <string name="loc_gps_disabled">GPS desactivado</string>
+    <string name="loc_copied_clipboard">A localização actual foi copiada para a área de transferência</string>
     <string name="menu_centerposition">Centrar na minha posição</string>
     <!-- standard menu -->
     <string name="menu_about">Acerca do c:geo</string>
@@ -356,12 +357,18 @@
     </plurals>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
-    <string name="caches_store_unsaved">Armazenar apenas caches por guardar</string>
     <string name="caches_store_selected">Memorizar seleccionada(s)</string>
-    <string name="caches_store_background">Transferência em segundo plano (Experimental!)</string>
-    <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
-    <string name="caches_store_background_should_force_refresh">Actualizar caches já transferidas</string>
     <string name="caches_store_background_title">Transferir caches</string>
+    <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
+    <string name="caches_store_background_option_nothing">Não fazer nada</string>
+    <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
+    <string name="caches_store_background_option_refresh">Actualizar e adicionar à lista</string>
+    <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache transferida</item>
+        <item quantity="other">%d caches transferidas</item>
+    </plurals>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -487,12 +494,15 @@
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
     <string name="cache_filter_stored_since">Última actualização de detalhes</string>
+    <string name="cache_filter_logical_filter_group">Filtro agrupado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
+    <string name="cache_filtergroup_special">Especial</string>
     <string name="cache_filter_contexttype_live_title">Filtro em Tempo Real</string>
     <string name="cache_filter_contexttype_offline_title">Filtro em Modo Offline</string>
     <string name="cache_filter_contexttype_transient_title">Filtro</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtro agrupado</string>
     <string name="cache_filter_include">Incluir</string>
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complexo</string>
@@ -548,7 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Tendo pontos adicionais definidos pelo utilizador</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">A configuração deste filtro apenas afectará caches mistério. Se pretende excluir outros tipos de cache, por favor especifique um filtro adequado para esse tipo de cache.\n\nUma cache mistério é considerada \'resolvida\' caso tenha as suas coordenadas alteradas ou tenha um ponto adicional \'final\' preenchido com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
     <string name="cache_filter_status_disabled">Desactivadas</string>
     <string name="cache_filter_status_archived">Arquivadas</string>
@@ -556,6 +566,8 @@
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluir caches sem D/T</string>
+    <string name="cache_filter_nested_filter_modify">modificar</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
     <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
@@ -827,7 +839,6 @@
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
-    <string name="init_backup_unnecessary">A base de dados está vazia, não é necessário fazer uma cópia de segurança. Ainda assim, quer criar uma cópia de segurança?</string>
     <string name="init_backup_folder_exists_error">Não foi possível criar uma nova pasta de cópias de segurança. Realizou alguma cópia de segurança nos últimos 60 segundos?</string>
     <string name="init_backup_no_backup_available">Não existe nenhum ficheiro de cópia de segurança.</string>
     <string name="backup_confirm_overwrite">Isto irá apagar a sua pasta de cópias de segurança mais antiga de %s. \nDeseja continuar?</string>
@@ -977,6 +988,8 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
+    <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1146,12 +1159,10 @@
     <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Os Pontos Adicionais foram adicionados à nota, mas tiveram que ser encurtados (tamanho máximo da nota pessoal: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Pontos Adicionais não puderam ser armazenados na nota devido aos limites de tamanho (tamanho máximo da nota pessoal: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Não foram encontrados pontos adicionais armazenados</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevenir a extracção de pontos adicionais</string>
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Esta nota individual será cortada após %d caracteres, por Geocaching.com.</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Serão reduzidos %1$d caracteres a esta nota pessoal pelo serviço %3$s (número máximo de caracteres %2$d).</string>
     <string name="cache_personal_note_upload">Carregar</string>
     <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
@@ -1294,10 +1305,15 @@
     <string name="cache_remove_from_history">Remover do histórico</string>
     <string name="cache_license">Licença</string>
     <string name="cache_image">Imagem</string>
+    <string name="cache_image_open">Abrir</string>
     <string name="cache_image_open_file">Abrir como ficheiro</string>
     <string name="cache_image_open_browser">Abrir no browser</string>
+    <string name="cache_image_share">Partilhar</string>
     <string name="cache_image_show_description">Mostrar descrição</string>
     <string name="cache_image_add_waypoint">Adicionar ponto adicional</string>
+    <string name="cache_image_rename">Mudar o nome</string>
+    <string name="cache_image_delete">Eliminar</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Imagem de fundo da descrição da cache</string>
     <string name="cache_share_field">Partilhar</string>
     <string name="cache_time_full_hours">o\'clock</string>
@@ -1311,6 +1327,13 @@
     <string name="cache_alc_install">Instale a aplicação Adventure Lab para dar início a esta aventura</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
+    <string name="image_category_uncategorized">Sem categoria</string>
+    <string name="image_category_own">Minhas</string>
+    <string name="image_category_listing">Listagem</string>
+    <string name="image_category_log">Registar</string>
+    <string name="context_map_add_to_route">Acrescentar à rota</string>
+    <string name="context_map_add_to_route_start">Acrescentar ao início da rota</string>
+    <string name="context_map_show_coords">Mostrar coordenadas</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
@@ -1464,6 +1487,11 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Fórmula vazia</string>
     <string name="formula_error_other">Erro: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Sem título</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Comentário</string>
     <!-- visit -->
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
@@ -1955,6 +1983,7 @@
     <string name="tts_toggle">Ligar/desligar a fala</string>
     <string name="tts_started">Início das instruções de voz</string>
     <string name="tts_stopped">Fala interrompida</string>
+    <string name="tts_running">Serviço de fala está activo…</string>
     <string name="err_tts_lang_not_supported">A linguagem actual não é suportada pela conversão de texto em voz.</string>
     <string name="tts_one_kilometer">um quilómetro</string>
     <plurals name="tts_kilometers">
@@ -1983,6 +2012,10 @@
     <plurals name="days_ago">
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Dentro de %d dia</item>
+        <item quantity="other">Dentro de %d dias</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
@@ -2064,6 +2097,8 @@
     <string name="notification_channel_foreground_description">a notificação é exibida enquanto c:geo está a realizar trabalho em segundo plano</string>
     <string name="notification_channel_downloader_name">gestor de transferências c:geo</string>
     <string name="notification_channel_downloader_description">notificações acerca das transferências (ex: mapas offline)</string>
+    <string name="notification_channel_cache_download_name">gestor de transferências de caches</string>
+    <string name="notification_channel_cache_download_description">notificações do resultado das transferências de caches em segundo plano</string>
     <string name="notification_proximity_title">notificação de proximidade</string>
     <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
@@ -2149,6 +2184,10 @@
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
+    <string name="delete_offlinemap_title">Apagar mapa offline</string>
+    <string name="no_deletable_offlinemaps">Não há mapas offline para apagar</string>
+    <string name="delete_file_confirmation">Apagar %s?</string>
+    <string name="file_deleted_info">%s apagado</string>
     <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_filename">A transferir %s</string>
