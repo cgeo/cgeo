@@ -1234,6 +1234,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Karte</string>
     <string name="cache_menu_map_ext">Andere externe App</string>
+    <string name="cache_menu_map_ext_nolabel">Andere externe App (nur Koordinaten)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Im Browser öffnen</string>
     <string name="no_browser_found">Kein Browser gefunden</string>
