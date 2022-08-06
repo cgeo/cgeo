@@ -316,6 +316,7 @@
     <string name="loc_trying">Intentant ubicar</string>
     <string name="loc_no_addr">L\'adreça és desconeguda</string>
     <string name="loc_gps_disabled">El GPS està desactivat</string>
+    <string name="loc_copied_clipboard">La ubicació actual s\'ha copiat al porta-retalls</string>
     <string name="menu_centerposition">Centra a la meva posició</string>
     <!-- standard menu -->
     <string name="menu_about">Quant al c:geo</string>
@@ -357,11 +358,7 @@
     </plurals>
     <string name="caches_store_offline">Desa per usar fora de línia</string>
     <string name="caches_store_all">Desar-ho tot</string>
-    <string name="caches_store_unsaved">Desa el que manca per desar</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
-    <string name="caches_store_background">Baixada de fons (experimental!)</string>
-    <string name="caches_store_refresh_background">Actualització de fons (experimental!)</string>
-    <string name="caches_store_background_should_force_refresh">Actualitza els catxés ja baixats</string>
     <string name="caches_store_background_title">Descarregar catxés</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
@@ -488,12 +485,15 @@
     <string name="cache_filter_stored_lists">Llistes emmagatzemades</string>
     <string name="cache_filter_origin">Origen</string>
     <string name="cache_filter_stored_since">Última actualització de detalls</string>
+    <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
     <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
+    <string name="cache_filtergroup_special">Especial</string>
     <string name="cache_filter_contexttype_live_title">Filtre en viu</string>
     <string name="cache_filter_contexttype_offline_title">Filtre fora de línia</string>
     <string name="cache_filter_contexttype_transient_title">Filtre</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtre agrupat</string>
     <string name="cache_filter_include">Incloure</string>
     <string name="cache_filter_exclude">Excloure</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
@@ -549,7 +549,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Té Registre \"Trobat\" Fora de línia</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misteri Resolt</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Té Punts de ruta definits per l\'usuari</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Aquest paràmetre de filtre només afectarà els catxés misteri.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o bé ha completat un punt de ruta final vàlid.</string>
     <string name="cache_filter_status_active">Actiu</string>
     <string name="cache_filter_status_disabled">Desactivat</string>
     <string name="cache_filter_status_archived">Arxivat</string>
@@ -557,6 +556,8 @@
     <string name="cache_filter_status_exclude_disabled">Exclou desactivat</string>
     <string name="cache_filter_status_exclude_archived">Exclou arxivats</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclou catxés sense D/T</string>
+    <string name="cache_filter_nested_filter_modify">modificar</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">El subfiltre està buit actualment</string>
     <string name="cache_filter_log_entry_foundby">Trobat per</string>
     <string name="cache_filter_log_entry_logtext">Text del registre</string>
     <string name="cache_filter_stored_since_notstored">No desat</string>
@@ -828,7 +829,6 @@
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
-    <string name="init_backup_unnecessary">La base de dades està buida, no cal fer cap còpia de seguretat. Encara voleu crear una còpia de seguretat?</string>
     <string name="init_backup_folder_exists_error">No es pot crear una carpeta de còpia de seguretat nova. Heu realitzat una còpia de seguretat en l\'últim minut?</string>
     <string name="init_backup_no_backup_available">No hi ha cap còpia de seguretat disponible.</string>
     <string name="backup_confirm_overwrite">Això suprimirà la carpeta de la còpia de seguretat més antiga de %s. \nVoleu continuar?</string>
@@ -1147,12 +1147,9 @@
     <string name="cache_personal_note_removedwaypoints">S\'han eliminat els punts de ruta</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No s\'ha trobat cap punt de ruta per eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Es van afegir punts de ruta a la nota personal</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Els punts de ruta es van afegir a la nota, però es van haver d’escurçar (mida màxima de la nota personal:%1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Els punts de ruta no s\'han pogut emmagatzemar a la nota a causa de la mida (mida màxima de la nota personal:%1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">No s\'han trobat punts de ruta per guardar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Eviteu l\'extracció de punts de ruta</string>
     <string name="cache_personal_note_limit">Límit de la nota personal</string>
-    <string name="cache_personal_note_truncation" tools:ignore="PluralsCandidate">Aquesta nota personal es tallarà després de %d caràcters per Geocaching.com.</string>
     <string name="cache_personal_note_upload">Puja</string>
     <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
     <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
@@ -1462,6 +1459,7 @@
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->
