@@ -7,6 +7,7 @@
 
 ### Détails de la cache
 - Modifié : Suppression de la vérification de la limite de taille lors du stockage des points de passage dans les notes personnelles
+- Fix: Wrong checksum formula results on large numbers
 
 ### Général
 - Nouveauté : Télécharger / mettre à jour les caches en arrière-plan
@@ -16,3 +17,4 @@
 - New: Posibility to build nested filters
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
+- Fix: Support selecting the same value for d/t filter range
