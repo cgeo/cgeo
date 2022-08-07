@@ -7,6 +7,7 @@
 
 ### Cache-Details
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
+- Fix: Wrong checksum formula results on large numbers
 
 ### Allgemein
 - Neu: Caches im Hintergrund herunterladen/aktualisieren
@@ -16,3 +17,4 @@
 - Neu: Erstellen verschachtelter Filter
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
+- Korrektur: Unterstützt die Auswahl des gleichen Wertes für D/T Filter
