@@ -7,6 +7,7 @@
 
 ### Λεπτομέρειες κρύπτης
 - Αλλαγή: Αφαιρέστε τον έλεγχο μεγέθους-ορίου κατά την αποθήκευση σημείων διαδρομής σε προσωπικές σημειώσεις
+- Fix: Wrong checksum formula results on large numbers
 
 ### Γενικά
 - Νέα: Λήψη / ενημέρωση κρυπτών στο παρασκήνιο (πειραματικό)
@@ -16,3 +17,4 @@
 - Νέο: Δυνατότητα κατασκευής σύνθετων φίλτρων
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
+- Fix: Support selecting the same value for d/t filter range
