@@ -62,15 +62,14 @@ public class RouteItem implements Parcelable {
                 if (matchesAL.find()) {
                     final MatcherWrapper matchesALwpt = new MatcherWrapper(AL_WAYPOINT_PATTERN, name);
                     if (matchesALwpt.find()) {
-                        geocode = StringUtils.left(name, name.length() - matchesALwpt.group(1).length() - (matchesALwpt.group(3) != null ? matchesALwpt.group(3).length() : 0));
+                        final int l1 = matchesALwpt.group(1) == null ? 0 : matchesALwpt.group(1).length();
+                        final int l3 = matchesALwpt.group(3) == null ? 0 : matchesALwpt.group(3).length();
+                        geocode = StringUtils.left(name, name.length() - l1 - l3);
                         prefix = matchesALwpt.group(2);
                     } else {
-                        if (matchesAL.groupCount() > 2 && matchesAL.group(3) != null) {
-                            // remove comment at end (if given)
-                            geocode = StringUtils.left(name, name.length() - matchesAL.group(3).length());
-                        } else {
-                            geocode = name;
-                        }
+                        // remove comment at end (if given)
+                        final int l2 = matchesAL.group(3) == null ? 0 : matchesAL.group(3).length();
+                        geocode = StringUtils.left(name, name.length() - l2);
                         prefix = null;
                     }
                 }
