@@ -1,20 +1,20 @@
 
 ### Kaart
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Oplossing: Toon geen afstandscirkels voor waypoints van gearchiveerde caches
+- Nieuw: Tik op vrije plek op de kaart om een waypoint of gebruiker gedefinieerde cache te maken, voeg voor of toe aan individuele route, toon coördinaten of navigeer (afhankelijk van de context)
+- Nieuw: Optie om offline kaarten te verwijderen
+- Oplossing: Lab avonture items in individuele routes die niet als zodanig worden herkend na bewerking
 
 ### Cache details
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Wrong checksum formula results on large numbers
+- Wijziging: Verwijder controle van grootte tijdens het opslaan van waypoints in persoonlijke notities
+- Oplossing: Verkeerde checksum formuleresultaten op grote getallen
 
 ### Algemeen
-- New: Download / update caches in background
-- New: Copy current coordinates when long-tapping location on home screen
-- Fix: Missing trackable count in search results
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- Nieuw: Download / update caches op de achtergrond
+- Nieuw: Kopieer huidige coördinaten bij lang tikken op locatie op het startscherm
+- Oplossing: Ontbrekende trackable telling in zoekresultaten
+- Nieuw: Navigatiemethode "Andere externe apps (alleen coördinaten)" om een externe navigatieapp aan te roepen met gewoon coördinaten (helpt met Here WeGo in offline modus)
+- Nieuw: Mogelijkheid om geneste filters te bouwen
+- Nieuw: Toon Lab avontuur modus (willekeurig / lineair)
+- Nieuw: Ondersteuning voor het instellen vanuit het app info venster
+- Oplossing: Ondersteun het selecteren van dezelfde waarde voor d/t filterbereik
