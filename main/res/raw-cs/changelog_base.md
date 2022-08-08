@@ -7,6 +7,7 @@
 
 ### Detaily kešky
 - Změna: Odstraněna kontrola omezení velikosti při ukládání trasových bodů do osobních poznámek
+- Oprava: Nesprávný vzorec kontrolního součtu pro velká čísla
 
 ### Obecné
 - Novinka: Stahování / aktualizace kešek na pozadí
@@ -16,3 +17,4 @@
 - Novinka: Možnost vytvářet vnořené filtry
 - Novinka: Zobrazení režimu Lab Adventure (náhodné / lineární)
 - Novinka: Podpora konfigurace nastavení z okna informace o aplikaci
+- Oprava: Podpora výběru stejné hodnoty pro rozsah filtru o/t

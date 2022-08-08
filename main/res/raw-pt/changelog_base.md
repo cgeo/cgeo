@@ -7,6 +7,7 @@
 
 ### Detalhes da cache
 - Change: Remove size-limit check while storing waypoints in personal notes
+- Fix: Wrong checksum formula results on large numbers
 
 ### Geral
 - New: Download / update caches in background
@@ -16,3 +17,4 @@
 - New: Posibility to build nested filters
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
+- Fix: Support selecting the same value for d/t filter range
