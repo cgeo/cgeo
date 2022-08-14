@@ -72,8 +72,8 @@
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
+            android:text="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
-            android:enabled="false"
             app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_mapShadingLinearity_description"
