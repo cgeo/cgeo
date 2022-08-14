@@ -4,7 +4,7 @@
     <option name="configuration">
       <map>
         <entry key="active-configuration-0" value="PROJECT_RELATIVE:$PROJECT_DIR$/checkstyle.xml:cgeo" />
-        <entry key="checkstyle-version" value="10.3.1" />
+        <entry key="checkstyle-version" value="10.3.2" />
         <entry key="copy-libs" value="false" />
         <entry key="location-0" value="BUNDLED:(bundled):Sun Checks;All" />
         <entry key="location-1" value="BUNDLED:(bundled):Google Checks;All" />
