@@ -99,7 +99,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
 
-    private boolean sendButtonEnabled;
+    private MenuItem sendButton;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -151,7 +151,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
 
         refreshGui();
-        enablePostButton(true);
+        sendButton.setEnabled(true);
         showProgress(false);
     }
 
@@ -210,10 +210,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
         Collections.sort(sortedTrackables, comparator.getComparator());
         return sortedTrackables;
-    }
-
-    private void enablePostButton(final boolean enabled) {
-        sendButtonEnabled = enabled;
     }
 
     @Override
@@ -283,11 +279,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             fillViewFromEntry(lastSavedState);
         }
-
-        // TODO: Why is it disabled in onCreate?
-        // Probably it should be disabled only when there is some explicit issue.
-        // See https://github.com/cgeo/cgeo/issues/7188
-        enablePostButton(false);
 
         refreshGui();
 
@@ -548,10 +539,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void sendLogAndConfirm() {
-        if (!sendButtonEnabled) {
-            SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
-            return;
-        }
         if (CalendarUtils.isFuture(date.getCalendar())) {
             SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
@@ -574,6 +561,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
+        sendButton = menu.findItem(R.id.menu_send);
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
