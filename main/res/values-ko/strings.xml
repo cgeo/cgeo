@@ -357,6 +357,10 @@
     <string name="caches_store_all">모두 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
+    <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
+    <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
+    <string name="caches_store_background_option_add_to_list">목록에 추가</string>
+    <string name="caches_store_background_option_refresh">새로 고침 및 목록에 추가</string>
     <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
     <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
     <plurals name="caches_store_background_result">
@@ -547,6 +551,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다. 다른 캐시 유형을 제외하려면 적절한 캐시 유형 필터를 정의하십시오.\n\n미스터리는 좌표가 변경되었거나 좌표로 채워진 유효한 최종 지점니 있는 경우 \'해결됨\' 것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
     <string name="cache_filter_status_disabled">일시정지됨</string>
     <string name="cache_filter_status_archived">영구보관됨</string>
@@ -1214,6 +1219,7 @@
     <string name="cache_menu_radar">레이더</string>
     <string name="cache_menu_map">지도</string>
     <string name="cache_menu_map_ext">기타 외부 앱</string>
+    <string name="cache_menu_map_ext_nolabel">기타 외부 앱(좌표만 해당)</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
     <string name="no_browser_found">브라우저를 찾을 수 없음</string>
@@ -1265,6 +1271,9 @@
     <string name="cache_description_updated">캐시 설명이 업데이트되었습니다.</string>
     <string name="cache_type">유형</string>
     <string name="cache_size">크기</string>
+    <string name="cache_mode">모드</string>
+    <string name="cache_mode_linear">선형</string>
+    <string name="cache_mode_random">무작위</string>
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
