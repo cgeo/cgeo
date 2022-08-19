@@ -359,6 +359,16 @@
     <string name="caches_store_all">Tout enregistrer</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
+    <string name="caches_store_background_already_stored">Certaines caches sont déjà enregistrées. Que souhaitez-vous faire ?</string>
+    <string name="caches_store_background_option_nothing">Ne rien faire</string>
+    <string name="caches_store_background_option_add_to_list">Ajouter à la liste</string>
+    <string name="caches_store_background_option_refresh">Actualiser et ajouter à la liste</string>
+    <string name="caches_store_background_result_failed">Le téléchargement a échoué, %1$d/%2$d caches ont été téléchargées</string>
+    <string name="caches_store_background_result_canceled">Téléchargement annulé, %1$d/%2$d caches ont été téléchargées</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache téléchargée</item>
+        <item quantity="other">%d caches téléchargées</item>
+    </plurals>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
@@ -978,6 +988,8 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
+    <string name="init_summary_useUnifiedMap">Utiliser la nouvelle carte unifiée plutôt que les cartes Google Map / Mapsforge (OSM) (carte expérimentale loin d\'être complète, à utiliser seulement pour test)</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1150,6 +1162,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Aucun point de passage enregistrable trouvé</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des points de passage</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Cette note personnelle sera tronquée d\'environ %1$d caractères par %3$s (taille maxi %2$d).</string>
     <string name="cache_personal_note_upload">Envoyer</string>
     <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
@@ -1273,6 +1286,9 @@
     <string name="cache_description_updated">Description de la cache mise à jour</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Taille</string>
+    <string name="cache_mode">Mode</string>
+    <string name="cache_mode_linear">Linéaire</string>
+    <string name="cache_mode_random">Aléatoire</string>
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulté</string>
     <string name="cache_terrain">Terrain</string>
@@ -1319,6 +1335,9 @@
     <string name="image_category_own">Mes caches</string>
     <string name="image_category_listing">Liste</string>
     <string name="image_category_log">Signaler votre visite</string>
+    <string name="context_map_add_to_route">Ajouter à la trace</string>
+    <string name="context_map_add_to_route_start">Ajouter à la route</string>
+    <string name="context_map_show_coords">Afficher les coordonnées</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
@@ -1968,6 +1987,7 @@
     <string name="tts_toggle">Basculer la synthèse vocale</string>
     <string name="tts_started">Boussole parlante démarrée</string>
     <string name="tts_stopped">Boussole parlante arrêtée</string>
+    <string name="tts_running">Le service vocal écoute…</string>
     <string name="err_tts_lang_not_supported">La langue courante n\'est pas prise en charge par la synthèse vocale.</string>
     <string name="tts_one_kilometer">un kilomètre</string>
     <plurals name="tts_kilometers">
@@ -1996,6 +2016,10 @@
     <plurals name="days_ago">
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Dans %d jour</item>
+        <item quantity="other">Dans %d jours</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
@@ -2077,6 +2101,7 @@
     <string name="notification_channel_foreground_description">la notification est affichée lorsque que c:geo travaille en arrière-plan</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">Notification des résultats de téléchargement (par exemple pour les cartes hors-ligne)</string>
+    <string name="notification_channel_cache_download_name">téléchargeur de cache</string>
     <string name="notification_channel_cache_download_description">notifications des résultats du téléchargement de cache en arrière-plan</string>
     <string name="notification_proximity_title">notification de proximité c:geo</string>
     <string name="notification_download_receiver_title">Téléchargement en cours</string>
