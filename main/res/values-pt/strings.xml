@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_templates">Encontrada: Modelo de registo…</string>
-    <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à Internet.</string>
     <string name="log_date_future_not_allowed">Não são permitidos registos com datas futuras.</string>
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
