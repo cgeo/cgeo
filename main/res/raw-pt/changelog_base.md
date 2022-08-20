@@ -8,6 +8,7 @@
 ### Detalhes da cache
 - Alteração: Removida a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
 - Correcção: Verificação errada dos resultados da fórmula em números grandes
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### Geral
 - Novo: Transferência / actualização de caches em segundo plano
@@ -18,3 +19,4 @@
 - Novo: Modo de mostrar Adventure Lab (aleatório / linear)
 - Novo: Alteração de definições a partir da janela de informações da aplicação
 - Correcção: Permitir a selecção do mesmo valor de D/T para a escala do filtro
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
