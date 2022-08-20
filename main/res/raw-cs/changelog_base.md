@@ -8,6 +8,7 @@
 ### Detaily kešky
 - Změna: Odstraněna kontrola omezení velikosti při ukládání trasových bodů do osobních poznámek
 - Oprava: Nesprávný vzorec kontrolního součtu pro velká čísla
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### Obecné
 - Novinka: Stahování / aktualizace kešek na pozadí
@@ -18,3 +19,4 @@
 - Novinka: Zobrazení režimu Lab Adventure (náhodné / lineární)
 - Novinka: Podpora konfigurace nastavení z okna informace o aplikaci
 - Oprava: Podpora výběru stejné hodnoty pro rozsah filtru o/t
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
