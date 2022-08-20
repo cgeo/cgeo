@@ -8,6 +8,7 @@
 ### 캐시 상세정보
 - 변경: 개인 메모에 지점을 저장하는 동안 크기 제한 확인을 제거합니다.
 - 수정: 큰 숫자에 대한 잘못된 체크섬 공식 결과
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### 일반
 - 신규: 백그라운드에서 캐시 다운로드/업데이트
@@ -18,3 +19,4 @@
 - 신규: 디스플레이 랩 모험 모드(무작위/선형)
 - 신규: 앱 정보 창에서 설정 구성 지원
 - 수정: 난이도/지형 필터 범위에 대해 동일한 값 선택 지원
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
