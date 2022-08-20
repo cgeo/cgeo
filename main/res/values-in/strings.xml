@@ -84,7 +84,6 @@
     <string name="log_posting_twitter">Posting tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Mencatat %1$s %2$d/%3$d</string>
     <string name="log_clear">Bersihkan</string>
-    <string name="log_post_not_possible">Data yang diunduh sedang berlangsung&#8230;\nsilahkan coba lagi dalam beberapa detik atau periksa koneksi internet anda.</string>
     <string name="log_date_future_not_allowed">Tanggal log masa depan tidak diperbolehkan.</string>
     <string name="log_add">Tambahkan</string>
     <string name="log_repeat">Ulangi terakhir masuk</string>
