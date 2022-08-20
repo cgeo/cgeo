@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
     <string name="log_templates">Hittade det: Loggmall…</string>
-    <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
     <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
     <string name="log_add">Lägg till</string>
     <string name="log_repeat">Upprepa senaste loggen</string>
