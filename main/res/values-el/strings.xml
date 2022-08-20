@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_templates">Πρότυπο καταγραφής: Βρέθηκε…</string>
-    <string name="log_post_not_possible">Γίνεται λήψη δεδομένων…\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
     <string name="log_date_future_not_allowed">Δεν επιτρέπεται η μελλοντική ημερομηνία καταγραφής.</string>
     <string name="log_add">Προσθήκη</string>
     <string name="log_repeat">Επανάληψη τελευταίου αρχείου καταγραφής</string>
