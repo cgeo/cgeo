@@ -8,6 +8,7 @@
 ### Cache-Details
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
 - Fix: Wrong checksum formula results on large numbers
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### Allgemein
 - Neu: Caches im Hintergrund herunterladen/aktualisieren
@@ -18,3 +19,4 @@
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
 - Korrektur: Unterstützt die Auswahl des gleichen Wertes für D/T Filter
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
