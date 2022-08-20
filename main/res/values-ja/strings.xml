@@ -130,7 +130,6 @@
     <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
-    <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
     <string name="log_date_future_not_allowed">ログには未来の日付けを設定できません</string>
     <string name="log_add">挿入</string>
     <string name="log_repeat">最後のログを繰り返す</string>
