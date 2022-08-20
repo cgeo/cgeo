@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
     <string name="log_templates">Fant den: Logg mal…</string>
-    <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen om noen sekunder eller kontroller Internett-tilkoblingen.</string>
     <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
     <string name="log_add">Legg til</string>
     <string name="log_repeat">Gjenta siste logg</string>
