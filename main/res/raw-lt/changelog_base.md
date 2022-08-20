@@ -8,6 +8,7 @@
 ### Cache details
 - Change: Remove size-limit check while storing waypoints in personal notes
 - Fix: Wrong checksum formula results on large numbers
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### General
 - New: Download / update caches in background
@@ -18,3 +19,4 @@
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
 - Fix: Support selecting the same value for d/t filter range
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
