@@ -8,6 +8,7 @@
 ### Cache details
 - Wijziging: Verwijder controle van grootte tijdens het opslaan van waypoints in persoonlijke notities
 - Oplossing: Verkeerde checksum formuleresultaten op grote getallen
+- Change: Disable the "Send" button in log activity while it's not yet available
 
 ### Algemeen
 - Nieuw: Download / update caches op de achtergrond
@@ -18,3 +19,4 @@
 - Nieuw: Toon Lab avontuur modus (willekeurig / lineair)
 - Nieuw: Ondersteuning voor het instellen vanuit het app info venster
 - Oplossing: Ondersteun het selecteren van dezelfde waarde voor d/t filterbereik
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
