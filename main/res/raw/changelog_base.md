@@ -18,3 +18,4 @@
 - New: Display Lab adventure mode (random / linear)
 - New: Support configuring settings from app info window
 - Fix: Support selecting the same value for d/t filter range
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no updates supported)
