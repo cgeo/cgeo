@@ -1,5 +1,6 @@
 
 ### Map
+- New: Add support for hillshading on OSM
 
 ### Cache details
 - Change: Disable the "Send" button in log activity while it's not yet available
