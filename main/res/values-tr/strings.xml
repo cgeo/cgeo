@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
     <string name="log_templates">Buldum: Şablon…</string>
-    <string name="log_post_not_possible">Verilerin indirilmesi devam ediyor…\nLütfen birkaç saniye içinde tekrar deneyin veya internet bağlantınızı kontrol edin.</string>
     <string name="log_date_future_not_allowed">Gelecekteki kayıt tarihlerine izin verilmez.</string>
     <string name="log_add">Ekle</string>
     <string name="log_repeat">Son kayıdı tekrarla</string>
@@ -618,7 +617,7 @@
     <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Bir sorun bildir</string>
+    <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <string name="debug_current_downloads">Mevcut indirmeler</string>
