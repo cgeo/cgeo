@@ -1156,6 +1156,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
+    <string name="persistablefolder_offline_maps_shading">Map Shading Files</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
