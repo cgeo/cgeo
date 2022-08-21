@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_templates">Πρότυπο καταγραφής: Βρέθηκε…</string>
-    <string name="log_post_not_possible">Γίνεται λήψη δεδομένων…\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
     <string name="log_date_future_not_allowed">Δεν επιτρέπεται η μελλοντική ημερομηνία καταγραφής.</string>
     <string name="log_add">Προσθήκη</string>
     <string name="log_repeat">Επανάληψη τελευταίου αρχείου καταγραφής</string>
@@ -2196,6 +2195,8 @@
     <string name="downloadmap_mapfile">Αρχείο χάρτη</string>
     <string name="downloadmap_themefile">αρχείο θέματος</string>
     <string name="downloadmap_tilefile">αρχείο δεδομένων δρομολόγησης</string>
+    <string name="downloadmap_othermapdownload">Λήψη άλλου χάρτη</string>
+    <string name="downloadmap_otherthemedownload">Λήψη άλλου θέματος</string>
     <string name="downloadmap_download">Λήψη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
