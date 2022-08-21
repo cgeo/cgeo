@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
     <string name="log_templates">Nalezeno: Šablona logu…</string>
-    <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k internetu.</string>
     <string name="log_date_future_not_allowed">Log s nadcházejícím datem není povolen.</string>
     <string name="log_add">Přidat</string>
     <string name="log_repeat">Opakovat poslední log</string>
