@@ -129,7 +129,6 @@
     <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
-    <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
     <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
     <string name="log_add">Tilføj</string>
     <string name="log_repeat">Gentag sidste logbesked</string>
