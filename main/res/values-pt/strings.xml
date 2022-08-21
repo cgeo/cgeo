@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_templates">Encontrada: Modelo de registo…</string>
-    <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à Internet.</string>
     <string name="log_date_future_not_allowed">Não são permitidos registos com datas futuras.</string>
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
@@ -2213,6 +2212,8 @@
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
     <string name="downloadmap_themefile">ficheiro de tema</string>
     <string name="downloadmap_tilefile">ficheiro dos dados de encaminhamento</string>
+    <string name="downloadmap_othermapdownload">outra transferência de mapa</string>
+    <string name="downloadmap_otherthemedownload">outra transferência de tema</string>
     <string name="downloadmap_download">transferir</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
