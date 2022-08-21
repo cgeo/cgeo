@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
-    <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
     <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
     <string name="log_add">Toevoegen</string>
     <string name="log_repeat">Herhaal laatste log</string>
