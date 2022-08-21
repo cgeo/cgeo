@@ -1234,6 +1234,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
+    <string name="cache_menu_map_ext_nolabel">Andere externe apps (alleen coördinaten)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
     <string name="no_browser_found">Geen browser gevonden</string>
@@ -1285,6 +1286,9 @@
     <string name="cache_description_updated">Cache-omschrijving bijgewerkt</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Grootte</string>
+    <string name="cache_mode">Modus</string>
+    <string name="cache_mode_linear">Lineair</string>
+    <string name="cache_mode_random">Willekeurig</string>
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>

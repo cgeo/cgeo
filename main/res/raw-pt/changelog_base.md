@@ -1,20 +1,20 @@
 
 ### Mapa
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Correcção: Não mostrava círculos de distância para pontos adicionais de caches arquivadas
+- Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
+- Novo: Opção para eliminar mapas offline
+- Correcção: Os itens das Adventure Labs em rotas individuais não eram reconhecidos como tal, após edição
 
 ### Detalhes da cache
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Wrong checksum formula results on large numbers
+- Alteração: Removida a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
+- Correcção: Verificação errada dos resultados da fórmula em números grandes
 
 ### Geral
-- New: Download / update caches in background
-- New: Copy current coordinates when long-tapping location on home screen
-- Fix: Missing trackable count in search results
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- Novo: Transferência / actualização de caches em segundo plano
+- Novo: Cópia das coordenadas actuais com um toque longo na página inicial
+- Correcção: Inclusão de trackables em falta nos resultados de pesquisa
+- Novo: Método de navegação "Outros aplicativos ext. (apenas coordenadas)" para abrir uma aplicação de navegação externa apenas com coordenadas (útil para o Here WeGo no modo offline)
+- Novo: Possibilidade de construir filtros em cascata
+- Novo: Modo de mostrar Adventure Lab (aleatório / linear)
+- Novo: Alteração de definições a partir da janela de informações da aplicação
+- Correcção: Permitir a selecção do mesmo valor de D/T para a escala do filtro

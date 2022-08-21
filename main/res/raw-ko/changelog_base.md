@@ -1,20 +1,20 @@
 
 ### 지도
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- 수정: 영구보관된 캐시의 지점에 대한 거리 원을 표시하지 않음
+- 신규: 비어 있는 지도 공간을 누리면 지점 또는 사용자 정의 캐시 생성, 개별 경로에 추가, 좌표 표시 또는 탐색 (컨텍스트에 따라 다름)
+- 신규: 오프라인 지도 삭제 옵션
+- 수정: 편집 후 개별 경로의 어드벤처 랩 항목이 인식되지 않음
 
 ### 캐시 상세정보
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Wrong checksum formula results on large numbers
+- 변경: 개인 메모에 지점을 저장하는 동안 크기 제한 확인을 제거합니다.
+- 수정: 큰 숫자에 대한 잘못된 체크섬 공식 결과
 
 ### 일반
-- New: Download / update caches in background
-- New: Copy current coordinates when long-tapping location on home screen
-- Fix: Missing trackable count in search results
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- 신규: 백그라운드에서 캐시 다운로드/업데이트
+- 신규: 홈 화면에서 위치를 길게 누를 때 현재 좌표를 복사합니다.
+- 수정: 검색 결과에서 추적아이템 개수 누락
+- 신규: 좌표만으로 외부 탐색 앱을 호출하는 탐색 방법 "기타 외부 앱(좌표 전용)"(오프라인 모드에서 Here WeGo에 도움)
+- 신규: 중첩 필터 구축 가능성
+- 신규: 디스플레이 랩 모험 모드(무작위/선형)
+- 신규: 앱 정보 창에서 설정 구성 지원
+- 수정: 난이도/지형 필터 범위에 대해 동일한 값 선택 지원
