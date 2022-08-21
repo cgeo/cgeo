@@ -1037,6 +1037,12 @@
     <string name="init_use_native_ua">Android browser</string>
     <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
+    <string name="init_mapshading_folder">Map Shading Files Folder</string>
+    <string name="init_mapshading_folder_text">Offline maps can be overlaid with elevation information. This information is provided as hgt/dem files that can have to be placed in this folder.</string>
+    <string name="init_mapShadingLinearity_title">Shading Linearity</string>
+    <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
+    <string name="init_mapShadingScale_title">Shading Opacity</string>
+    <string name="init_mapShadingScale_description">Opacity of the shading layer, from invisible to higher values intensifying shading but may produce artifacts</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
@@ -1149,6 +1155,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
+    <string name="persistablefolder_offline_maps_shading">Map Shading Files</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>

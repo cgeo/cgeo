@@ -31,7 +31,7 @@ public class MultiRendererLayer implements ITileLayer {
             zoomLevelMax = (byte) Math.max(headerInfo.zoomLevelMax, zoomLevelMax);
         }
 
-        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory);
+        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory, HillShadingLayerHelper.getHillsRenderConfig());
     }
 
     @Override
