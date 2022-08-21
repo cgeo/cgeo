@@ -1234,6 +1234,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mostrar no mapa</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
+    <string name="cache_menu_map_ext_nolabel">Outras aplicações ext. (apenas coordenadas)</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
     <string name="no_browser_found">Não foi encontrado nenhum navegador de Internet</string>
@@ -1285,6 +1286,9 @@
     <string name="cache_description_updated">Descrição da cache actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamanho</string>
+    <string name="cache_mode">Modo</string>
+    <string name="cache_mode_linear">Linear</string>
+    <string name="cache_mode_random">Aleatório</string>
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>

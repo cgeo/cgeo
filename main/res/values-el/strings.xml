@@ -1276,6 +1276,9 @@
     <string name="cache_description_updated">Η περιγραφή της κρύπτης ενημερώθηκε</string>
     <string name="cache_type">Τύπος</string>
     <string name="cache_size">Μέγεθος</string>
+    <string name="cache_mode">Λειτουργία</string>
+    <string name="cache_mode_linear">Γραμμικό</string>
+    <string name="cache_mode_random">Τυχαίο</string>
     <string name="cache_distance">Απόσταση</string>
     <string name="cache_difficulty">Δυσκολία</string>
     <string name="cache_terrain">Έδαφος</string>

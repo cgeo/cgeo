@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CheckStyle-IDEA">
-    <option name="configuration">
-      <map>
-        <entry key="active-configuration-0" value="PROJECT_RELATIVE:C:/private/geocaching/github/cgeo/checkstyle.xml:cgeo" />
-        <entry key="checkstyle-version" value="8.44" />
-        <entry key="copy-libs" value="false" />
-        <entry key="location-0" value="BUNDLED:(bundled):Sun Checks;All" />
-        <entry key="location-1" value="BUNDLED:(bundled):Google Checks;All" />
-        <entry key="location-2" value="PROJECT_RELATIVE:$PROJECT_DIR$/checkstyle.xml:cgeo;All" />
-        <entry key="scan-before-checkin" value="true" />
-        <entry key="scanscope" value="JavaOnlyWithTests" />
-        <entry key="suppress-errors" value="false" />
-      </map>
+  <component name="CheckStyle-IDEA" serialisationVersion="2">
+    <checkstyleVersion>10.3.2</checkstyleVersion>
+    <scanScope>JavaOnlyWithTests</scanScope>
+    <scanBeforeCheckin>true</scanBeforeCheckin>
+    <option name="thirdPartyClasspath" />
+    <option name="activeLocationIds">
+      <option value="cgeo-checks" />
+    </option>
+    <option name="locations">
+      <list>
+        <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="cgeo-checks" type="PROJECT_RELATIVE" scope="All" description="cgeo">$PROJECT_DIR$/checkstyle.xml</ConfigurationLocation>
+      </list>
     </option>
   </component>
 </project>
