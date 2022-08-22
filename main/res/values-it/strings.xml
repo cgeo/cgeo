@@ -941,6 +941,12 @@
     <string name="init_use_native_ua">Browser Android</string>
     <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
     <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
+    <string name="init_mapshading_folder">Cartella File Di ombreggiatura della Mappa</string>
+    <string name="init_mapshading_folder_text">Le mappe offline possono essere sovrapposte con informazioni di elevazione. Queste informazioni sono fornite come file hgt/dem che possono essere posizionati in questa cartella.</string>
+    <string name="init_mapShadingLinearity_title">Linearità di Ombreggiatura</string>
+    <string name="init_mapShadingLinearity_description">Piccoli valori accentuano il contrasto in pendii ripidi, ma nascondono cambiamenti nelle zone pianeggianti, grandi valori lo rendono più lineare</string>
+    <string name="init_mapShadingScale_title">Opacità Ombreggiatura</string>
+    <string name="init_mapShadingScale_description">Opacità dello strato di ombreggiatura, da invisibile a valori superiori intensifica l\'ombreggiatura, ma può produrre artefatti</string>
     <string name="init_maintenance">Manutenzione</string>
     <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
     <string name="init_maintenance_directories">Elimina file orfani</string>
@@ -1047,6 +1053,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mappe Offline</string>
     <string name="persistablefolder_offline_maps_themes">Temi Mappa</string>
+    <string name="persistablefolder_offline_maps_shading">File di ombreggiatura della Mappa</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1285,6 +1292,9 @@
     <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Dimensione</string>
+    <string name="cache_mode">Modalità</string>
+    <string name="cache_mode_linear">Lineare</string>
+    <string name="cache_mode_random">Casuale</string>
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
@@ -2214,6 +2224,8 @@
     <string name="downloadmap_mapfile">file mappa</string>
     <string name="downloadmap_themefile">file del tema</string>
     <string name="downloadmap_tilefile">file dei dati di percorso</string>
+    <string name="downloadmap_othermapdownload">altro download della mappa</string>
+    <string name="downloadmap_otherthemedownload">altro download del tema</string>
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Recupero dati cartella…</string>
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
