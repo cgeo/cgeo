@@ -931,6 +931,12 @@
     <string name="init_use_native_ua">Πρόγραμμα περιήγησης Android</string>
     <string name="init_summary_use_native_ua">Προσδιορίζουν το πρόγραμμα περιήγησης για Android. Λύνει προβλήματα σύνδεσης όταν χρησιμοποιείτε ορισμένες υπηρεσίες παροχής δικτύου.</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
+    <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
+    <string name="init_mapshading_folder_text">Οι χάρτες εκτός σύνδεσης μπορούν να επικαλυφθούν με υψομετρικές πληροφορίες. Αυτές οι πληροφορίες παρέχονται ως hgt/dem αρχεία που μπορούν να τοποθετηθούν σε αυτόν τον φάκελο.</string>
+    <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
+    <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
+    <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
+    <string name="init_mapShadingScale_description">Αδιαφάνεια του στρώματος σκίασης, από αόρατες έως υψηλότερες τιμές που εντείνουν τη σκίαση, αλλά μπορεί να παράγει οπτικά λαθη</string>
     <string name="init_maintenance">Συντήρηση</string>
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
@@ -1037,6 +1043,7 @@
     <string name="persistablefolder_base">Βάση</string>
     <string name="persistablefolder_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="persistablefolder_offline_maps_themes">Θέματα Χάρτη</string>
+    <string name="persistablefolder_offline_maps_shading">Φάκελος αρχείων σκίασης χάρτη</string>
     <string name="persistablefolder_backup">Αντίγραφα ασφαλείας</string>
     <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
     <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
