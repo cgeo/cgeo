@@ -941,6 +941,7 @@
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
+    <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
