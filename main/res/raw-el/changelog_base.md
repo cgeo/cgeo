@@ -1,9 +1,9 @@
 
 ### Χάρτης
-- New: Add support for hillshading on OSM
+- Νέο: Προσθέστε υποστήριξη για τη σκίαση στο OSM
 
 ### Λεπτομέρειες κρύπτης
-- Change: Disable the "Send" button in log activity while it's not yet available
+- Αλλαγή: Απενεργοποιήστε το κουμπί "Αποστολή" στη δραστηριότητα καταγραφής ενώ δεν είναι ακόμα διαθέσιμο
 
 ### Γενικά
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
