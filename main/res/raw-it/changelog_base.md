@@ -1,9 +1,9 @@
 
 ### Mappa
-- New: Add support for hillshading on OSM
+- Nuovo: Aggiunto il supporto per ombreggiatura su OSM
 
 ### Dettagli del cache
-- Change: Disable the "Send" button in log activity while it's not yet available
+- Modificato: Il pulsante "Invia" nell'attività di log è disattivato quando non è ancora disponibile
 
 ### Generale
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Nuovo: Supporto ai download generici per i link con prefisso "mf-v4-map" e "mf-theme" (aggiornamento automatico non supportato)
