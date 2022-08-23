@@ -955,6 +955,12 @@
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_rendertheme_folder">Složka mapových témat</string>
+    <string name="init_mapshading_folder">Složka se soubory stínování map</string>
+    <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které lze umístit do této složky.</string>
+    <string name="init_mapShadingLinearity_title">Linearita stínování</string>
+    <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
+    <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
+    <string name="init_mapShadingScale_description">Neprůhlednost vrstvy stínování, od neviditelné po vyšší hodnoty, které zintenzivňují stínování, ale mohou vytvářet artefakty</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
@@ -1061,6 +1067,7 @@
     <string name="persistablefolder_base">Hlavní</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
+    <string name="persistablefolder_offline_maps_shading">Soubory se stínováním map</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Koncepty</string>
@@ -2277,6 +2284,8 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
+    <string name="downloadmap_otherthemedownload">další téma ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
