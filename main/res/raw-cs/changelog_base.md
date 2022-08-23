@@ -1,9 +1,9 @@
 
 ### Mapa
-- New: Add support for hillshading on OSM
+- Novinka: Přidána podpora pro stínování kopců v OSM
 
 ### Detaily kešky
-- Change: Disable the "Send" button in log activity while it's not yet available
+- Změna: Deaktivujte tlačítko "Odeslat" v protokolu aktivity, když ještě není k dispozici
 
 ### Obecné
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
