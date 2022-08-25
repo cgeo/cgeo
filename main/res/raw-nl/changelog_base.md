@@ -1,9 +1,9 @@
 
 ### Kaart
-- New: Add support for hillshading on OSM
+- Nieuw: Voeg ondersteuning voor heuvel arvering toe op OSM
 
 ### Cache details
-- Change: Disable the "Send" button in log activity while it's not yet available
+- Wijziging: Schakel de "Verzenden" knop in log activiteit uit terwijl deze nog niet beschikbaar is
 
 ### Algemeen
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
