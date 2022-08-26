@@ -941,6 +941,12 @@
     <string name="init_use_native_ua">Browser do Android</string>
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
+    <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
+    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que podem ser colocados nesta pasta.</string>
+    <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
+    <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
+    <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
+    <string name="init_mapShadingScale_description">A opacidade da camada de sombreado, do invisível para valores mais altos que se intensificam, mas pode produzir artefactos</string>
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
@@ -1047,6 +1053,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapas offline</string>
     <string name="persistablefolder_offline_maps_themes">Temas de mapa</string>
+    <string name="persistablefolder_offline_maps_shading">Ficheiros para sombreado de mapas</string>
     <string name="persistablefolder_backup">Cópia de segurança</string>
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
