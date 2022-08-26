@@ -1,6 +1,6 @@
 
 ### Mapa
-- New: Add support for hillshading on OSM
+- Novo: Adicionado suporte para sombrear os montes no OSM
 
 ### Detalhes da cache
 - Alteração: Desactivado o botão "Enviar" na actividade de registo enquanto ainda não esteja disponível
