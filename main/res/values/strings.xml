@@ -2987,17 +2987,5 @@
     <string name="smiley_approve">Approved</string>
     <string name="smiley_disapprove">Disapproved</string>
     <string name="smiley_question">Question</string>
-    <string name="smiley_cry">Cry</string>
-    <string name="smiley_embarassed">Embarassed</string>
-    <string name="smiley_footinmouth">Foot in mouth</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Kiss</string>
-    <string name="smiley_laughing">Laughing</string>
-    <string name="smiley_money">Money</string>
-    <string name="smiley_sealed">Sealed</string>
-    <string name="smiley_surprised">Surprised</string>
-    <string name="smiley_tongueout">Tongue out</string>
-    <string name="smiley_undecided">Undecided</string>
-    <string name="smiley_yell">Yell</string>
 
 </resources>
