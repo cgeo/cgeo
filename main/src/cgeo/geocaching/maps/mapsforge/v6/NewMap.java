@@ -1457,14 +1457,16 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void reloadIndividualRoute() {
+        individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
+    }
+
+    private void reloadIndividualRouteFollowUp(final Route route) {
         if (null != routeLayer) {
-            individualRoute.reloadRoute((route) -> {
-                routeLayer.updateIndividualRoute(route);
-                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
-            });
+            routeLayer.updateIndividualRoute(route);
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
         } else {
-            // try again in 0.25 second
-            new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);
+            // try again in 0.25 seconds
+            new Handler(Looper.getMainLooper()).postDelayed(() -> reloadIndividualRouteFollowUp(route), 250);
         }
     }
 
