@@ -71,7 +71,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         super.onResume();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
-        getActivity().setTitle(R.string.settings_title_offlinedata);
+        activity.setTitle(R.string.settings_title_offlinedata);
         SettingsUtils.initPublicFolders(this, activity.getCsah());
     }
 }
