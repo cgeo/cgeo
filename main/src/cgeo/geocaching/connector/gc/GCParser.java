@@ -1112,7 +1112,7 @@ public final class GCParser {
             }
         }
 
-        Log.e(arrayNode.toString());
+        Log.d(arrayNode.toString());
 
         try {
             Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode));

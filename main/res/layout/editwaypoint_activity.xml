@@ -74,7 +74,7 @@
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-            android:hint="@string/waypoint_name" >
+            android:hint="@string/waypoint_name" android:id="@+id/name_layout">
             <AutoCompleteTextView
                 android:id="@+id/name"
                 style="@style/textinput_embedded_singleline"

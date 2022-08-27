@@ -63,6 +63,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -160,8 +161,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         activity.binding.note.setText("");
                     }
                 } else {
-                    activity.nonEditable(activity.binding.name);
-                    activity.nonEditable(activity.binding.note);
+                    activity.nonEditable(activity.binding.nameLayout, activity.binding.name);
+                    activity.nonEditable(activity.binding.noteLayout, activity.binding.note);
                     if (waypoint != null && !waypoint.isOriginalCoordsEmpty()) {
                         activity.binding.projection.setVisibility(View.GONE);
                     }
@@ -180,7 +181,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    private void nonEditable(final TextView textView) {
+    private void nonEditable(final TextInputLayout textLayout, final TextView textView) {
+        textLayout.setEndIconMode(TextInputLayout.END_ICON_NONE);
         textView.setKeyListener(null);
         textView.setTextIsSelectable(true);
     }
