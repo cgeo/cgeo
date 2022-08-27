@@ -732,6 +732,8 @@
     <string name="settings_title_map">Map</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
+    <string name="settings_title_offline_maps">Offline maps</string>
+    <string name="settings_title_map_themes">Offline map themes &amp; hillshading</string>
     <string name="settings_title_offline_routing">Offline routing</string>
     <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
     <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
