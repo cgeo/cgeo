@@ -1038,7 +1038,7 @@
     <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
     <string name="init_mapshading_folder">Map Shading Files Folder</string>
-    <string name="init_mapshading_folder_text">Offline maps can be overlaid with elevation information. This information is provided as hgt/dem files that can have to be placed in this folder.</string>
+    <string name="init_mapshading_folder_text">Offline maps can be overlaid with elevation information. This information is provided as hgt/dem files that have to be placed in this folder.</string>
     <string name="init_mapShadingLinearity_title">Shading Linearity</string>
     <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
     <string name="init_mapShadingScale_title">Shading Opacity</string>
