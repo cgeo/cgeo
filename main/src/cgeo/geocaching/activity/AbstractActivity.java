@@ -72,14 +72,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         }
     };
 
-    protected final void showProgress(final boolean show) {
-        try {
-            ActivityMixin.showProgress(this, show);
-        } catch (final Exception ex) {
-            Log.e(String.format(Locale.US, "Error seeting progress: %b", show), ex);
-        }
-    }
-
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
     }

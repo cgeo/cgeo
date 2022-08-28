@@ -58,17 +58,6 @@ public final class ActivityMixin {
         }
     }
 
-    public static void showProgress(final AppCompatActivity activity, final boolean show) {
-        if (activity == null) {
-            return;
-        }
-
-        View progressBar = activity.findViewById(R.id.progress_bar);
-        if (progressBar != null) {
-            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
-    }
-
     private static int getThemeId() {
         return R.style.cgeo;
     }

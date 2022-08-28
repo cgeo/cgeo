@@ -113,9 +113,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             }
         }
 
-        sendButton.setEnabled(loggingManager.postReady()); // we're done, user can post log
-
-        showProgress(false);
+        showProgress(loggingManager.postReady());
     }
 
     @Override
@@ -348,6 +346,13 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         } else {
             binding.locationFrame.setVisibility(View.GONE);
         }
+    }
+
+    private void showProgress(final boolean loading) {
+        sendButton.setEnabled(!loading);
+
+        View progressBar = findViewById(R.id.progress_bar);
+        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
     private void initTwitter() {
