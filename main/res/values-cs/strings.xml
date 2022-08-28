@@ -956,7 +956,7 @@
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_rendertheme_folder">Složka mapových témat</string>
     <string name="init_mapshading_folder">Složka se soubory stínování map</string>
-    <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které lze umístit do této složky.</string>
+    <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které je třeba umístit do této složky.</string>
     <string name="init_mapShadingLinearity_title">Linearita stínování</string>
     <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
     <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
@@ -2736,16 +2736,4 @@
     <string name="smiley_approve">Schváleno</string>
     <string name="smiley_disapprove">Neschváleno</string>
     <string name="smiley_question">Otázka</string>
-    <string name="smiley_cry">Plačící</string>
-    <string name="smiley_embarassed">Vyčerpaný</string>
-    <string name="smiley_footinmouth">Noha v puse</string>
-    <string name="smiley_innocent">Nevinný</string>
-    <string name="smiley_kiss">Polibek</string>
-    <string name="smiley_laughing">Smějící se</string>
-    <string name="smiley_money">Peníze</string>
-    <string name="smiley_sealed">Zapečetěný</string>
-    <string name="smiley_surprised">Překvapený</string>
-    <string name="smiley_tongueout">Vyplazující jazyk</string>
-    <string name="smiley_undecided">Nerozhodný</string>
-    <string name="smiley_yell">Křičící</string>
 </resources>
