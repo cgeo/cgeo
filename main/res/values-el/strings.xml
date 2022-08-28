@@ -932,7 +932,6 @@
     <string name="init_summary_use_native_ua">Προσδιορίζουν το πρόγραμμα περιήγησης για Android. Λύνει προβλήματα σύνδεσης όταν χρησιμοποιείτε ορισμένες υπηρεσίες παροχής δικτύου.</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
     <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
-    <string name="init_mapshading_folder_text">Οι χάρτες εκτός σύνδεσης μπορούν να επικαλυφθούν με υψομετρικές πληροφορίες. Αυτές οι πληροφορίες παρέχονται ως hgt/dem αρχεία που μπορούν να τοποθετηθούν σε αυτόν τον φάκελο.</string>
     <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
     <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
     <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
@@ -2353,15 +2352,4 @@
     <string name="smiley_approve">Εγκεκριμένο</string>
     <string name="smiley_disapprove">Απορριπτέο</string>
     <string name="smiley_question">Ερώτηση</string>
-    <string name="smiley_cry">Κλάμα</string>
-    <string name="smiley_embarassed">Ντροπή</string>
-    <string name="smiley_footinmouth">Είπα χαζομάρα</string>
-    <string name="smiley_innocent">Αθώος</string>
-    <string name="smiley_kiss">Φιλί</string>
-    <string name="smiley_laughing">Γελάω</string>
-    <string name="smiley_money">Χρήματα</string>
-    <string name="smiley_sealed">Σφραγισμένο</string>
-    <string name="smiley_surprised">Έκπληξη</string>
-    <string name="smiley_tongueout">Βγάζω γλώσσα</string>
-    <string name="smiley_undecided">Αναποφάσιστο</string>
 </resources>
