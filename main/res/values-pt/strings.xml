@@ -942,7 +942,6 @@
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
     <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
-    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que podem ser colocados nesta pasta.</string>
     <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
     <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
     <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
@@ -2671,16 +2670,4 @@
     <string name="smiley_approve">Aprovado</string>
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
-    <string name="smiley_cry">Chorar</string>
-    <string name="smiley_embarassed">Envergonhado</string>
-    <string name="smiley_footinmouth">Pé na boca</string>
-    <string name="smiley_innocent">Inocente</string>
-    <string name="smiley_kiss">Beijo</string>
-    <string name="smiley_laughing">Gargalhadas</string>
-    <string name="smiley_money">Dinheiro</string>
-    <string name="smiley_sealed">Selado</string>
-    <string name="smiley_surprised">Surpreso</string>
-    <string name="smiley_tongueout">Língua de fora</string>
-    <string name="smiley_undecided">Indeciso</string>
-    <string name="smiley_yell">Gritar</string>
 </resources>
