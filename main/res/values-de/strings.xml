@@ -2667,16 +2667,4 @@
     <string name="smiley_approve">Zustimmung</string>
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
-    <string name="smiley_cry">Weinen</string>
-    <string name="smiley_embarassed">Peinlich</string>
-    <string name="smiley_footinmouth">Maulkorb</string>
-    <string name="smiley_innocent">Unschuldig</string>
-    <string name="smiley_kiss">Kuss</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verschlossen</string>
-    <string name="smiley_surprised">Überrascht</string>
-    <string name="smiley_tongueout">Zunge raus</string>
-    <string name="smiley_undecided">Unentschlossen</string>
-    <string name="smiley_yell">Schrei</string>
 </resources>
