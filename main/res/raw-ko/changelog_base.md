@@ -1,9 +1,9 @@
 
 ### 지도
-- New: Add support for hillshading on OSM
+- 신규: OSM에서 음영식 지원 추가
 
 ### 캐시 상세정보
-- Change: Disable the "Send" button in log activity while it's not yet available
+- 변경: 아직 사용할 수 없는 동안 로그 활동에서 "보내기" 버튼을 비활성화합니다.
 
 ### 일반
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- 신규: "mf-v4-map" 및 "mf-theme" 접두사 링크에 대한 일반 다운로드 지원(자동 업데이트는 지원되지 않음)
