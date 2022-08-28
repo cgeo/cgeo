@@ -2434,10 +2434,4 @@
     <string name="smiley_kisses">Öpücük</string>
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
-    <string name="smiley_cry">Ağlak</string>
-    <string name="smiley_innocent">Masum</string>
-    <string name="smiley_kiss">Öpücük</string>
-    <string name="smiley_laughing">Gülen</string>
-    <string name="smiley_money">Para</string>
-    <string name="smiley_yell">Bağır</string>
 </resources>
