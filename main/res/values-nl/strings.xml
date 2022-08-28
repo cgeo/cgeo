@@ -942,7 +942,7 @@
     <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
     <string name="init_rendertheme_folder">Kaart Thema\'s Map</string>
     <string name="init_mapshading_folder">Kaart Arcering Bestanden Map</string>
-    <string name="init_mapshading_folder_text">Offline kaarten kunnen worden overlegd met hoogte informatie. Deze informatie wordt verstrekt als hgt/dem bestanden die in deze map geplaatst moeten worden.</string>
+    <string name="init_mapshading_folder_text">Offline kaarten kunnen worden gearceerd met hoogte informatie. Deze informatie wordt verstrekt als hgt/dem bestanden die in deze map geplaatst dienen te worden.</string>
     <string name="init_mapShadingLinearity_title">Arcering Lineariteit</string>
     <string name="init_mapShadingLinearity_description">Kleine waarden accentueren contrast in steile hellingen, maar verbergen veranderingen in vlakten, grote waarden maken het meer lineair</string>
     <string name="init_mapShadingScale_title">Arcering Doorzichtigheid</string>
@@ -2676,16 +2676,4 @@
     <string name="smiley_approve">Goedgekeurd</string>
     <string name="smiley_disapprove">Afgekeurd</string>
     <string name="smiley_question">Vraag</string>
-    <string name="smiley_cry">Huilen</string>
-    <string name="smiley_embarassed">Beschaamd</string>
-    <string name="smiley_footinmouth">Mond vol tanden</string>
-    <string name="smiley_innocent">Onschuldig</string>
-    <string name="smiley_kiss">Kus</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verzegeld</string>
-    <string name="smiley_surprised">Verrast</string>
-    <string name="smiley_tongueout">Tong uitsteken</string>
-    <string name="smiley_undecided">Onbeslist</string>
-    <string name="smiley_yell">Schreeuw</string>
 </resources>
