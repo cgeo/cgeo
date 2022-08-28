@@ -934,6 +934,12 @@
     <string name="init_use_native_ua">안드로이드 브라우저</string>
     <string name="init_summary_use_native_ua">안드로이드 브라우저로 인식하게 합니다. 특정 네트워크를 사용시 로그인 문제를 해결합니다.</string>
     <string name="init_rendertheme_folder">지도 테마 폴더</string>
+    <string name="init_mapshading_folder">지도 음영 파일 폴더</string>
+    <string name="init_mapshading_folder_text">오프라인 지도는 고도 정보와 중첩될 수 있습니다. 이 정보는 이 폴더에 있어야 하는 hgt/dem 파일로 제공됩니다.</string>
+    <string name="init_mapShadingLinearity_title">음영 선형성</string>
+    <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
+    <string name="init_mapShadingScale_title">음영 불투명도</string>
+    <string name="init_mapShadingScale_description">음영 레이어의 불투명도는 보이지 않는 값에서 더 높은 값까지 음영을 강화하지만 아티팩트를 생성할 수 있습니다.</string>
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
@@ -1040,6 +1046,7 @@
     <string name="persistablefolder_base">기본</string>
     <string name="persistablefolder_offline_maps">오프라인 지도</string>
     <string name="persistablefolder_offline_maps_themes">지도 테마</string>
+    <string name="persistablefolder_offline_maps_shading">지도 음영 파일</string>
     <string name="persistablefolder_backup">백업</string>
     <string name="persistablefolder_logfiles">로그파일</string>
     <string name="persistablefolder_fieldnotes">현장 기록</string>
@@ -2187,6 +2194,8 @@
     <string name="downloadmap_mapfile">지도 파일</string>
     <string name="downloadmap_themefile">테마 파일</string>
     <string name="downloadmap_tilefile">라우팅 데이터 파일</string>
+    <string name="downloadmap_othermapdownload">다른 지도 다운로드</string>
+    <string name="downloadmap_otherthemedownload">다른 테마 다운로드</string>
     <string name="downloadmap_download">다운로드</string>
     <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중…</string>
     <string name="downloadmap_checking_for_updates">업데이트 확인중…</string>
@@ -2637,16 +2646,4 @@
     <string name="smiley_approve">승인</string>
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
-    <string name="smiley_cry">울음</string>
-    <string name="smiley_embarassed">부끄러움</string>
-    <string name="smiley_footinmouth">입에 발</string>
-    <string name="smiley_innocent">무고함</string>
-    <string name="smiley_kiss">키스</string>
-    <string name="smiley_laughing">웃음</string>
-    <string name="smiley_money">현금</string>
-    <string name="smiley_sealed">봉인</string>
-    <string name="smiley_surprised">놀람</string>
-    <string name="smiley_tongueout">메롱</string>
-    <string name="smiley_undecided">결정하지 못함</string>
-    <string name="smiley_yell">고함</string>
 </resources>
