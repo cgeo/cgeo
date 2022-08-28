@@ -1,20 +1,20 @@
 
 ### Mappa
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Corretto: Non vengono mostrati i cerchi di distanza per i waypoint dei cache archiviati
+- Nuovo: Un Tocco in uno spazio libero sulla mappa crea un waypoint o un cache definito dall'utente, aggiunge in fondo o all'inizio del percorso personalizzato, visualizza le coordinate o naviga (a seconda del contesto)
+- Nuovo: Opzione per eliminare le mappe offline
+- Correzione: gli Adventure Lab, in percorsi personalizzati, non venivano riconosciuti come tali dopo la modifica
 
 ### Dettagli del cache
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Wrong checksum formula results on large numbers
+- Modifica: Rimosso controllo sul limite nelle dimensioni durante la memorizzazione dei waypoint nelle note personali
+- Corretto: i risultati errati nella formula di checksum su grandi numeri
 
 ### Generale
-- New: Download / update caches in background
-- New: Copy current coordinates when long-tapping location on home screen
-- Fix: Missing trackable count in search results
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- Nuovo: Scarica/aggiorna i cache in background
+- Nuovo: Copia le coordinate correnti con un tocco prolungato sulla posizione della schermata iniziale
+- Corretto: Perdita nel conteggio di tracciabili nei risultati di ricerca
+- Nuovo: Metodo di navigazione "Altre applicazioni esterne (solo coordinate)" per invocare app di navigazione esterna con solo coordinate (aiuta con Here WeGo in modalità offline)
+- Nuovo: Posibilità per costruire filtri annidati
+- Nuovo: modalità di visualizzazione di Adventure Lab (casuale / lineare)
+- Nuovo: Supporto alle impostazioni di configurazione dalla finestra info app
+- Corretto: Supporto alla selezione dello stesso valore per l'intervallo di filtri d/t

@@ -7,7 +7,7 @@
 
 ### Cache-Details
 - Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
-- Fix: Wrong checksum formula results on large numbers
+- Korrektur: Falsche Quersummen-Ergebnisse für großen Zahlen (>2^31)
 
 ### Allgemein
 - Neu: Caches im Hintergrund herunterladen/aktualisieren
@@ -15,6 +15,6 @@
 - Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
 - Neu: Navigationsmethode "Andere externe App (nur Koordinaten)", um externe Navigations-App nur mit Koordinaten aufzurufen (hilft mit Here WeGo im Offline-Modus)
 - Neu: Erstellen verschachtelter Filter
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
+- Neu: Modus (linear / zufällig) für Lab Adventures anzeigen
+- Neu: Biete Konfiguration aus dem App-Info-Fenster an
 - Korrektur: Unterstützt die Auswahl des gleichen Wertes für D/T Filter
