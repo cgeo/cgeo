@@ -942,7 +942,6 @@
     <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
     <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
     <string name="init_mapshading_folder">Cartella File Di ombreggiatura della Mappa</string>
-    <string name="init_mapshading_folder_text">Le mappe offline possono essere sovrapposte con informazioni di elevazione. Queste informazioni sono fornite come file hgt/dem che possono essere posizionati in questa cartella.</string>
     <string name="init_mapShadingLinearity_title">Linearità di Ombreggiatura</string>
     <string name="init_mapShadingLinearity_description">Piccoli valori accentuano il contrasto in pendii ripidi, ma nascondono cambiamenti nelle zone pianeggianti, grandi valori lo rendono più lineare</string>
     <string name="init_mapShadingScale_title">Opacità Ombreggiatura</string>
@@ -2676,16 +2675,4 @@
     <string name="smiley_approve">Approvato</string>
     <string name="smiley_disapprove">Disapprovato</string>
     <string name="smiley_question">Domanda</string>
-    <string name="smiley_cry">Pianto</string>
-    <string name="smiley_embarassed">Imbarazzato</string>
-    <string name="smiley_footinmouth">Piede in bocca</string>
-    <string name="smiley_innocent">Innocente</string>
-    <string name="smiley_kiss">Bacio</string>
-    <string name="smiley_laughing">Risata</string>
-    <string name="smiley_money">Soldi</string>
-    <string name="smiley_sealed">Sigillato</string>
-    <string name="smiley_surprised">Sorpreso</string>
-    <string name="smiley_tongueout">Linguaccia</string>
-    <string name="smiley_undecided">Indeciso</string>
-    <string name="smiley_yell">Urlo</string>
 </resources>
