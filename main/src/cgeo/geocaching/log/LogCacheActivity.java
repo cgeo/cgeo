@@ -450,9 +450,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void showProgress(final boolean loading) {
         sendButton.setEnabled(!loading);
-
-        View progressBar = findViewById(R.id.progress_bar);
-        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
     private void updateTweetBox(final LogType type) {
