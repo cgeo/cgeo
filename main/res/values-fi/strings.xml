@@ -2661,16 +2661,4 @@
     <string name="smiley_approve">Hyväksytty</string>
     <string name="smiley_disapprove">Hylätty</string>
     <string name="smiley_question">Kysymys</string>
-    <string name="smiley_cry">Itku</string>
-    <string name="smiley_embarassed">Nolostunut</string>
-    <string name="smiley_footinmouth">Jalka suussa</string>
-    <string name="smiley_innocent">Viaton</string>
-    <string name="smiley_kiss">Pusu</string>
-    <string name="smiley_laughing">Nauru</string>
-    <string name="smiley_money">Raha</string>
-    <string name="smiley_sealed">Sinetöity</string>
-    <string name="smiley_surprised">Yllättynyt</string>
-    <string name="smiley_tongueout">Kieli ulos</string>
-    <string name="smiley_undecided">Epävarma</string>
-    <string name="smiley_yell">Huuto</string>
 </resources>
