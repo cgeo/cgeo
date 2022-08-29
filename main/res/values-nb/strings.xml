@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
     <string name="log_templates">Fant den: Logg mal…</string>
-    <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen om noen sekunder eller kontroller Internett-tilkoblingen.</string>
     <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
     <string name="log_add">Legg til</string>
     <string name="log_repeat">Gjenta siste logg</string>
@@ -273,7 +272,7 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
