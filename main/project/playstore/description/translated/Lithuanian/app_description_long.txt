@@ -2,7 +2,7 @@ c:geo yra atviro kodo, funkcionali, visada paruošta neoficiali geocaching.com p
 
 Pagrindinės funkcijos:
 - Lobių peržiūra tiesiogiai iš žemėlapio
-- Use Google Maps or OpenStreetMap
+- Naudoti Google Maps arba OpenStreetMap
 - Lobių paieška pagal įvairius kriterijus
 - Surastų lobių registracija prisijungus arba neprisijungus prie interneto
 - Išsaugoti slėptuvės informaciją jūsų įrenginyje
