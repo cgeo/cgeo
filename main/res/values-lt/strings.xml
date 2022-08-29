@@ -127,7 +127,6 @@
     <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
-    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
     <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
     <string name="log_add">Pridėti</string>
     <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -307,18 +306,22 @@
     <string name="loc_trying">Bandoma nustatyti</string>
     <string name="loc_no_addr">Nežinomas adresas</string>
     <string name="loc_gps_disabled">GPS išjungtas</string>
+    <string name="loc_copied_clipboard">Dabartinė vieta nukopijuota į mainų sritį</string>
     <string name="menu_centerposition">Centruoti mano vietoje</string>
     <!-- standard menu -->
     <string name="menu_about">Apie c:geo</string>
     <string name="menu_helpers">Naudingos programos</string>
     <string name="menu_settings">Nustatymai</string>
     <string name="menu_backup">Atsarginė kopija / atkurti</string>
+    <string name="menu_update">Atnaujinkite duomenis neprisijungus</string>
     <string name="menu_update_routingdata">Maršruto duomenys</string>
     <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
+    <string name="menu_search_clipboard">Įkelti geokodą iš iškarpynės</string>
     <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
+    <string name="home_button">Pradžia</string>
     <string name="caches_nearby_button">Netoliese</string>
     <string name="advanced_search_button">Ieškoti</string>
     <string name="stored_caches_button">Išsaugota</string>
@@ -342,9 +345,17 @@
     <string name="caches_store_offline">Išsaugoti slėptuves</string>
     <string name="caches_store_all">Išsaugoti visas</string>
     <string name="caches_store_selected">Išsaugoti pasirinktas</string>
+    <string name="caches_store_background_title">Atsisiųsti slėptuves</string>
+    <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
+    <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
+    <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
+    <string name="caches_store_background_option_refresh">Atnaujinti ir pridėti prie sąrašo</string>
+    <string name="caches_store_background_result_failed">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
+    <string name="caches_store_background_result_canceled">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_history">Istorija</string>
     <string name="caches_on_map">Rodyti žemėlapyje</string>
     <string name="caches_sort">Rūšiuoti</string>
+    <string name="caches_sort_automatic">Automatiškai (%s)</string>
     <string name="caches_sort_distance">Atstumas</string>
     <string name="caches_sort_distance_target">Atstumas iki tikslo</string>
     <string name="caches_sort_difficulty">Sudėtingumas</string>
@@ -364,6 +375,7 @@
     <string name="caches_sort_storage">Išsaugojimo įrenginyje data</string>
     <string name="caches_sort_eventdate">Renginio data</string>
     <string name="caches_select_mode">Pasirinkti</string>
+    <string name="caches_select_next">Pasirinkti sekančias 20 slėptuvių</string>
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>
@@ -391,6 +403,9 @@
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
+    <string name="caches_show_attributes">Rodyti atributų apžvalgą</string>
+    <string name="caches_set_cache_icon">Nustatykite slėptuvės piktogramą</string>
+    <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
     <string name="select_icon">Pasirinkite piktogramą</string>
@@ -450,6 +465,7 @@
     <string name="cache_filtergroup_basic">Pagrindiniai</string>
     <string name="cache_filtergroup_details">Detalės</string>
     <string name="cache_filtergroup_userspecific">Naudotojui</string>
+    <string name="cache_filtergroup_special">Specialus</string>
     <string name="cache_filter_contexttype_live_title">Filtras tiesiogiai</string>
     <string name="cache_filter_contexttype_offline_title">Filtras neprisijungus</string>
     <string name="cache_filter_contexttype_transient_title">Filtras</string>
@@ -467,6 +483,7 @@
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
     <string name="cache_filter_storage_clear_button">Išvalyti</string>
     <string name="cache_filter_storage_load_delete_title">Įkelkite arba ištrinkite esamą filtrą</string>
+    <string name="cache_filter_storage_select_title">Pasirinkti filtrą</string>
     <string name="cache_filter_storage_delete_title">Ištrinti failą</string>
     <string name="cache_filter_storage_delete_message">Ar tikrai norite ištrinti šią filtro konfigūraciją?</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Filtras dar nėra išsaugotas.</string>
@@ -487,6 +504,7 @@
     <string name="cache_filter_datefilter_label_to">Iki:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>
     <string name="cache_filter_checkboxlist_add_items">Pridėti daugiau elementų</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Pridėti visus elementus</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridėti elementus</string>
     <string name="cache_filter_favorites_absolute">Absoliutus</string>
     <string name="cache_filter_favorites_percentage">Procentais</string>
@@ -502,6 +520,8 @@
     <string name="cache_filter_status_select_label_watchlist">Stebimas</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
     <string name="cache_filter_status_select_label_has_trackable">Su keliauninku</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Turi savo balsą</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Turi įrašą neprisijungus</string>
     <string name="cache_filter_status_select_label_solved_mystery">Išspręsta Mystery</string>
     <string name="cache_filter_status_active">Aktyvi</string>
     <string name="cache_filter_status_disabled">Išjungta</string>
@@ -509,6 +529,7 @@
     <string name="cache_filter_status_exclude_active">Neįtraukti aktyvias</string>
     <string name="cache_filter_status_exclude_disabled">Neįtraukti išjungtas</string>
     <string name="cache_filter_status_exclude_archived">Neįtraukti archyvuotas</string>
+    <string name="cache_filter_nested_filter_modify">keisti</string>
     <string name="cache_filter_log_entry_foundby">Surado</string>
     <string name="cache_filter_log_entry_logtext">Įrašo tekstas</string>
     <string name="cache_filter_stored_since_notstored">Neišsaugota</string>
@@ -559,6 +580,7 @@
     <string name="contribution_tester">testuotojas</string>
     <string name="contribution_support">pagalba</string>
     <string name="contribution_documentation">dokumentacija</string>
+    <string name="contribution_infrastructure">infrastruktūra</string>
     <string name="contribution_projectleader">atvirojo kodo projekto vadovas</string>
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Pranešti apie problemą</string>
@@ -578,6 +600,7 @@
     <string name="settings_title_map">Žemėlapis</string>
     <string name="settings_summary_map">Nustatyti žemėlapio šaltinį, žemėlapių nustatymai nenaudojant ryšio ir žemėlapio detalės.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
+    <string name="settings_title_offline_maps">Neinternetiniai žemėlapiai</string>
     <string name="settings_title_map_rotation">Žemėlapio sukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Papildomi taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
@@ -630,6 +653,7 @@
     <string name="init_login_popup_failed">Nepavyko prisijungti</string>
     <string name="init_login_popup_failed_reason">Nepavyko prisijungti: %s</string>
     <string name="init_login_popup_not_authorized">Neprisiregistruota</string>
+    <string name="init_login_popup_not_logged_in">Esate neprisijungę</string>
     <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite įrenginio laiką</string>
     <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
     <string name="init_authorization_credential_username">Vartotojo vardas</string>
@@ -638,6 +662,11 @@
     <string name="settings_service_active_unavailable">Aktyvus/Nepasiekiamas</string>
     <string name="settings_navigation_disabled">Panašu, kad ši programa nėra įdiegta</string>
     <string name="init_signature">Parašas</string>
+    <string name="init_template_title">Šablono pavadinimas</string>
+    <string name="init_template_text">Šablono tekstas</string>
+    <string name="init_log_template_addnew">Pridėti naują šabloną</string>
+    <string name="init_log_template_remove_confirm">Ar tikrai norite pašalinti šabloną?</string>
+    <string name="init_log_template_prefix">Šablonas:\u0020</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Laikas</string>
     <string name="init_signature_template_datetime">Data ir laikas</string>
@@ -651,6 +680,7 @@
     <string name="init_signature_template_log">Įrašo tekstas</string>
     <string name="init_signature_template_size">Dydis</string>
     <string name="init_signature_template_type">Tipas</string>
+    <string name="init_signature_template_location">Vieta</string>
     <string name="init_ratingwanted">GCvote reitingas</string>
     <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
@@ -661,6 +691,7 @@
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
     <string name="init_select_language">Pasirinkite kalbą</string>
     <string name="init_use_default_language">Naudokite numatytąją kalbą</string>
+    <string name="init_showwaypoints">Rodyti tarpinius taškus</string>
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_zoomincludingwaypoints">Priartinimas su papildomais taškais</string>
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
@@ -1391,7 +1422,7 @@
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
     <!-- export -->
     <string name="share_export">Dalintis/Eksportuoti</string>
@@ -1883,6 +1914,10 @@
     <string name="receivedownload_cancelled">Failo perdavimas atšauktas</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
+    <string name="delete_offlinemap_title">Ištrinti žemėlapį naudojimui neprisijungus</string>
+    <string name="no_deletable_offlinemaps">Nėra trinamų žemėlapių naudojimui neprisijungus</string>
+    <string name="delete_file_confirmation">Ištrinti %s?</string>
+    <string name="file_deleted_info">%s ištrintas</string>
     <string name="download_title">Parsisiųsti failą</string>
     <string name="downloadmap_filename">Parsisiunčiama %s</string>
     <string name="downloadmanager_not_available">Failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
