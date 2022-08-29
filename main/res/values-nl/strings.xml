@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
-    <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
     <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
     <string name="log_add">Toevoegen</string>
     <string name="log_repeat">Herhaal laatste log</string>
@@ -942,6 +941,12 @@
     <string name="init_use_native_ua">Identificeer als Android browser</string>
     <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
     <string name="init_rendertheme_folder">Kaart Thema\'s Map</string>
+    <string name="init_mapshading_folder">Kaart Arcering Bestanden Map</string>
+    <string name="init_mapshading_folder_text">Offline kaarten kunnen worden gearceerd met hoogte informatie. Deze informatie wordt verstrekt als hgt/dem bestanden die in deze map geplaatst dienen te worden.</string>
+    <string name="init_mapShadingLinearity_title">Arcering Lineariteit</string>
+    <string name="init_mapShadingLinearity_description">Kleine waarden accentueren contrast in steile hellingen, maar verbergen veranderingen in vlakten, grote waarden maken het meer lineair</string>
+    <string name="init_mapShadingScale_title">Arcering Doorzichtigheid</string>
+    <string name="init_mapShadingScale_description">Doorzichtbaarheid van de arceringslaag, van onzichtbaar tot hogere waarden die arcering intensiveren, maar kan artefacten produceren</string>
     <string name="init_maintenance">Onderhoud</string>
     <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
     <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
@@ -1048,6 +1053,7 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline kaarten</string>
     <string name="persistablefolder_offline_maps_themes">Kaart Thema\'s</string>
+    <string name="persistablefolder_offline_maps_shading">Kaart Arcering Bestanden</string>
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
@@ -2218,6 +2224,8 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_themefile">themabestand</string>
     <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_othermapdownload">andere kaart downloaden</string>
+    <string name="downloadmap_otherthemedownload">ander thema downloaden</string>
     <string name="downloadmap_download">downloaden</string>
     <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
@@ -2668,16 +2676,4 @@
     <string name="smiley_approve">Goedgekeurd</string>
     <string name="smiley_disapprove">Afgekeurd</string>
     <string name="smiley_question">Vraag</string>
-    <string name="smiley_cry">Huilen</string>
-    <string name="smiley_embarassed">Beschaamd</string>
-    <string name="smiley_footinmouth">Mond vol tanden</string>
-    <string name="smiley_innocent">Onschuldig</string>
-    <string name="smiley_kiss">Kus</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verzegeld</string>
-    <string name="smiley_surprised">Verrast</string>
-    <string name="smiley_tongueout">Tong uitsteken</string>
-    <string name="smiley_undecided">Onbeslist</string>
-    <string name="smiley_yell">Schreeuw</string>
 </resources>
