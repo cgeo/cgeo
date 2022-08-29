@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
     <string name="log_templates">Hittade det: Loggmall…</string>
-    <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
     <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
     <string name="log_add">Lägg till</string>
     <string name="log_repeat">Upprepa senaste loggen</string>
@@ -2641,16 +2640,4 @@
     <string name="smiley_approve">Godkänd</string>
     <string name="smiley_disapprove">Ej godkänd</string>
     <string name="smiley_question">Fråga</string>
-    <string name="smiley_cry">Gråta</string>
-    <string name="smiley_embarassed">Generad</string>
-    <string name="smiley_footinmouth">Bortgjord</string>
-    <string name="smiley_innocent">Oskyldig</string>
-    <string name="smiley_kiss">Kyss</string>
-    <string name="smiley_laughing">Skrattar</string>
-    <string name="smiley_money">Pengar</string>
-    <string name="smiley_sealed">Förseglad</string>
-    <string name="smiley_surprised">Förvånad</string>
-    <string name="smiley_tongueout">Tungan ut</string>
-    <string name="smiley_undecided">Tveksam</string>
-    <string name="smiley_yell">Skriker</string>
 </resources>
