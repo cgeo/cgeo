@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
-    <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez dans quelques secondes ou vérifiez votre connexion à Internet.</string>
     <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
     <string name="log_add">Ajouter</string>
     <string name="log_repeat">Recopier la dernière visite</string>
@@ -647,6 +646,7 @@
     <string name="settings_title_map">Carte</string>
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
+    <string name="settings_title_offline_maps">Cartes hors-ligne</string>
     <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_summary_offline_routing">Le routage hors ligne est disponible si l\'application \"BRouter\" est installée et configurée ou si le routage interne est activé.</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
@@ -942,6 +942,8 @@
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
+    <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
+    <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
@@ -2216,6 +2218,8 @@
     <string name="downloadmap_mapfile">fichier de carte</string>
     <string name="downloadmap_themefile">fichier de thème</string>
     <string name="downloadmap_tilefile">fichier données de routage</string>
+    <string name="downloadmap_othermapdownload">autre téléchargement de carte</string>
+    <string name="downloadmap_otherthemedownload">autre téléchargement de thème</string>
     <string name="downloadmap_download">télécharger</string>
     <string name="downloadmap_retrieving_directory_data">Récupération des données du dossier …</string>
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
@@ -2666,16 +2670,4 @@
     <string name="smiley_approve">Approuvé</string>
     <string name="smiley_disapprove">Désapprouvé</string>
     <string name="smiley_question">Interrogatif(ve)</string>
-    <string name="smiley_cry">En larmes</string>
-    <string name="smiley_embarassed">Embarrassé(e)</string>
-    <string name="smiley_footinmouth">Maladroit(e)</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Bise</string>
-    <string name="smiley_laughing">Rieur(se)</string>
-    <string name="smiley_money">Argent</string>
-    <string name="smiley_sealed">Censuré(e)</string>
-    <string name="smiley_surprised">Étonné(e)</string>
-    <string name="smiley_tongueout">Tire la langue</string>
-    <string name="smiley_undecided">Indécis(e)</string>
-    <string name="smiley_yell">Crier</string>
 </resources>
