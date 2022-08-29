@@ -2063,4 +2063,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             sortContext.setListContext(type, null);
         }
     }
+
+    private void showProgress(final boolean loading) {
+        final View progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+    }
 }

@@ -151,7 +151,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
 
         refreshGui();
-        sendButton.setEnabled(true);
         showProgress(false);
     }
 
@@ -447,6 +446,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
         updateTrackablesList();
+    }
+
+    private void showProgress(final boolean loading) {
+        sendButton.setEnabled(!loading);
+        binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
     private void updateTweetBox(final LogType type) {
