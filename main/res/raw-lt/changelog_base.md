@@ -1,15 +1,15 @@
 
-### Map
+### Žemėlapis
 - Fix: Do not show distance circles for waypoints of archived caches
 - New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
+- Nauja: galimybė ištrinti neprisijungus pasiekiamus žemėlapius
 - Fix: Lab adventure items in individual routes not recognized as such after edit
 
-### Cache details
+### Slėptuvės detalės
 - Change: Remove size-limit check while storing waypoints in personal notes
 - Fix: Wrong checksum formula results on large numbers
 
-### General
+### Bendras
 - New: Download / update caches in background
 - New: Copy current coordinates when long-tapping location on home screen
 - Fix: Missing trackable count in search results
