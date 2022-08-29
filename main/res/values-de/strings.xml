@@ -133,7 +133,6 @@
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
-    <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
     <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
     <string name="log_add">Hinzufügen</string>
     <string name="log_repeat">Verwende das letzte Log erneut</string>
@@ -2668,16 +2667,4 @@
     <string name="smiley_approve">Zustimmung</string>
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
-    <string name="smiley_cry">Weinen</string>
-    <string name="smiley_embarassed">Peinlich</string>
-    <string name="smiley_footinmouth">Maulkorb</string>
-    <string name="smiley_innocent">Unschuldig</string>
-    <string name="smiley_kiss">Kuss</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verschlossen</string>
-    <string name="smiley_surprised">Überrascht</string>
-    <string name="smiley_tongueout">Zunge raus</string>
-    <string name="smiley_undecided">Unentschlossen</string>
-    <string name="smiley_yell">Schrei</string>
 </resources>
