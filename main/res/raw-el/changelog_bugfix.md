@@ -1,4 +1,4 @@
 ##
 
-- Fix: Clear icon being shown on name edit for system waypoints
-- Fix: Crash on 'Add to bookmark' in debug mode
+- Διόρθωση: Εκκαθάριση εικονιδίου που εμφανίζεται στο όνομα επεξεργασίας για τα σημεία του συστήματος
+- Διόρθωση: Κατάρρευση στο 'Προσθήκη στο σελιδοδείκτη' σε λειτουργία εντοπισμού σφαλμάτων
