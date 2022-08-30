@@ -646,6 +646,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
+    <string name="settings_title_offline_maps">Mapas offline</string>
+    <string name="settings_title_map_themes">Temas de mapa offline &amp; sombreado de montes e montanhas</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
@@ -942,6 +944,7 @@
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
     <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
+    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que têm de ser colocados nesta pasta.</string>
     <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
     <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
     <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
