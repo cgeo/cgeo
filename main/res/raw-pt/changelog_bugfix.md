@@ -1,4 +1,4 @@
 ##
 
-- Fix: Clear icon being shown on name edit for system waypoints
-- Fix: Crash on 'Add to bookmark' in debug mode
+- Correção: Mostrado ícone bem evidente na edição do nome de pontos adicionais do sistema
+- Correção: Falha em 'Adicionar ao marcador' no modo de depuração
