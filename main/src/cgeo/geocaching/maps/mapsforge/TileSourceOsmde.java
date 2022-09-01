@@ -8,11 +8,10 @@ import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 
 public class TileSourceOsmde extends AbstractTileSource {
     /**
-     * A tile source which fetches cyclosm tiles from OpenStreetMap.fr.
+     * A tile source which fetches Mapnik german style tiles from OpenStreetMap.de.
      * Requires a valid HTTP User-Agent identifying application: https://operations.osmfoundation.org/policies/tiles/
      */
-    public static final TileSourceOsmde INSTANCE = new TileSourceOsmde(new String[]{
-            "a.tile.openstreetmap.de", "b.tile.openstreetmap.de", "c.tile.openstreetmap.de"}, 443);
+    public static final TileSourceOsmde INSTANCE = new TileSourceOsmde(new String[]{"tile.openstreetmap.de"}, 443);
     private static final int PARALLEL_REQUESTS_LIMIT = 8;
     private static final String PROTOCOL = "https";
     private static final int ZOOM_LEVEL_MAX = 18;
