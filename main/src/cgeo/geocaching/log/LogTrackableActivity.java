@@ -71,7 +71,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     /**
      * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
      */
-    private MenuItem sendButton;
+    private boolean readyToPost = true;
     private final DateTimeEditor date = new DateTimeEditor();
     private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
     private Trackable trackable;
@@ -349,7 +349,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     }
 
     private void showProgress(final boolean loading) {
-        sendButton.setEnabled(!loading);
+        readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
@@ -520,6 +520,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Do form validation then post the Log
      */
     private void sendLog() {
+        // Can logging?
+        if (!readyToPost) {
+            showToast(res.getString(R.string.log_post_not_possible));
+            return;
+        }
+
         // Check Tracking Code existence
         if (loggingManager.isTrackingCodeNeededToPostNote() && binding.tracking.getText().toString().isEmpty()) {
             showToast(res.getString(R.string.err_log_post_missing_tracking_code));
@@ -556,7 +562,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
-        sendButton = menu.findItem(R.id.menu_send);
         for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
             if (template.getTemplateString().equals("NUMBER") || template.getTemplateString().equals("ONLINENUM")) {
                 menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());

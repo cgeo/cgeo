@@ -99,7 +99,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
 
-    private MenuItem sendButton;
+    private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -449,7 +449,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void showProgress(final boolean loading) {
-        sendButton.setEnabled(!loading);
+        readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
@@ -543,6 +543,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void sendLogAndConfirm() {
+        if (!readyToPost) {
+            SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
+            return;
+        }
         if (CalendarUtils.isFuture(date.getCalendar())) {
             SimpleDialog.of(this).setMessage(R.string.log_date_future_not_allowed).show();
             return;
@@ -565,7 +569,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        sendButton = menu.findItem(R.id.menu_send);
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
