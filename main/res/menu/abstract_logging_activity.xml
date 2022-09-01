@@ -4,7 +4,6 @@
 
     <item
         android:id="@+id/menu_send"
-        android:enabled="false"
         android:icon="@drawable/ic_menu_send"
         android:title="@string/send"
         app:showAsAction="ifRoom|withText">
