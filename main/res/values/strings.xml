@@ -825,6 +825,7 @@
     <string name="init_signature_template_button">Insert Placeholder</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Time</string>
+    <string name="init_signature_template_day_of_week">Day of week</string>
     <string name="init_signature_template_datetime">Date &amp; Time</string>
     <string name="init_signature_template_user">User</string>
     <string name="init_signature_template_number">Number</string>
