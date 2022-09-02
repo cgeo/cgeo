@@ -1,6 +1,6 @@
 
 ### Žemėlapis
-- Pakeista: nerodoma atstumo apskritimų archyvuotų slėptuvių kelio taškams
+- Fix: Do not show distance circles for waypoints of archived caches
 - New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
 - Nauja: galimybė ištrinti neprisijungus pasiekiamus žemėlapius
 - Fix: Lab adventure items in individual routes not recognized as such after edit
