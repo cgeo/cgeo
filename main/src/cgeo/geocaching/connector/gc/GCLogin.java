@@ -217,7 +217,7 @@ public class GCLogin extends AbstractLogin {
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
-            if (loginData.contains("You must validate your account before you can log in.")) {
+            if (loginData.contains("content=\"account/join/success\"")) {
                 logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }

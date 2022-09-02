@@ -319,7 +319,7 @@ public final class GCParser {
 
                     final String coordinates = Network.getResponseData(Network.postRequest("https://www.geocaching.com/seek/" + queryUrl, params), false);
 
-                    if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
+                    if (StringUtils.contains(coordinates, GCConstants.STRING_UNAPPROVED_LICENSE)) {
                         Log.i("User has not agreed to the license agreement. Can't download .loc file.");
                         searchResult.setError(con, StatusCode.UNAPPROVED_LICENSE);
                         return searchResult;
@@ -412,7 +412,7 @@ public final class GCParser {
             return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE, null);
         }
 
-        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
+        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY)) {
             final Geocache cache = new Geocache();
             cache.setPremiumMembersOnly(true);
             final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PREMIUMONLY_CACHETYPE, pageIn);
@@ -1583,8 +1583,8 @@ public final class GCParser {
             trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
         }
 
-        // trackable may be locked
-        if (page.contains(GCConstants.TRACKABLE_IS_LOCKED)) {
+        // trackable may be locked (see e.g. TB673CE)
+        if (new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_IS_LOGGED, page).find()) {
             trackable.setIsLocked();
         }
 
