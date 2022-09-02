@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
     <string name="log_templates">찾음: 로그 템플릿…</string>
+    <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
     <string name="log_date_future_not_allowed">오늘 이후 로그 날짜는 허용 되지 않습니다.</string>
     <string name="log_add">추가</string>
     <string name="log_repeat">마지막 로그를 반복하기</string>
