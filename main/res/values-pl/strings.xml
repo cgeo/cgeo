@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_templates">Znaleziono: Szablon wpisu…</string>
+    <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
     <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
     <string name="log_add">Dodaj</string>
     <string name="log_repeat">Powtórz ostatni wpis</string>
