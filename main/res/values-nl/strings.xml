@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
+    <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
     <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
     <string name="log_add">Toevoegen</string>
     <string name="log_repeat">Herhaal laatste log</string>
@@ -646,6 +647,8 @@
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
+    <string name="settings_title_offline_maps">Offline kaarten</string>
+    <string name="settings_title_map_themes">Offline kaart thema\'s &amp; heuvelarcering</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
@@ -731,6 +734,7 @@
     <string name="init_signature_template_button">Plaatshouder invoegen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
+    <string name="init_signature_template_day_of_week">Dag van de week</string>
     <string name="init_signature_template_datetime">Datum &amp; tijd</string>
     <string name="init_signature_template_user">Gebruiker</string>
     <string name="init_signature_template_number">Nummer</string>
