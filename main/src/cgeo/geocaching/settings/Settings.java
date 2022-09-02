@@ -708,7 +708,7 @@ public class Settings {
     }
 
     public static void setGCMemberStatus(final GCMemberState memberStatus) {
-        putString(R.string.pref_memberstatus, memberStatus.englishWebsite);
+        putString(R.string.pref_memberstatus, memberStatus.id);
     }
 
     @NonNull
