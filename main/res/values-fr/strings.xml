@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
+    <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez dans quelques secondes ou vérifiez votre connexion à Internet.</string>
     <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
     <string name="log_add">Ajouter</string>
     <string name="log_repeat">Recopier la dernière visite</string>
@@ -732,6 +733,7 @@
     <string name="init_signature_template_button">Insérer un champ dynamique</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
+    <string name="init_signature_template_day_of_week">Jour de la semaine</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
     <string name="init_signature_template_user">Utilisateur</string>
     <string name="init_signature_template_number">Numéro de visite</string>
