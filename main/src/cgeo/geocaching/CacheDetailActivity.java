@@ -389,7 +389,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
-                if (cache.getGeocode().equals(geocode)) {
+                if (cache != null && cache.getGeocode().equals(geocode)) {
                     notifyDataSetChanged();
                 }
             }
