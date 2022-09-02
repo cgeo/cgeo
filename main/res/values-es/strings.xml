@@ -130,6 +130,7 @@
     <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
+    <string name="log_post_not_possible">Descarga de datos en curso…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
     <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
     <string name="log_add">Añadir</string>
     <string name="log_repeat">Repetir el último registro</string>
