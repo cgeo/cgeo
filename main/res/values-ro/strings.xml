@@ -111,6 +111,7 @@
     <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
+    <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
     <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
     <string name="log_add">Adaugă</string>
     <string name="log_repeat">Repetă ultima însemnare</string>
