@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
+    <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
     <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
     <string name="log_add">Hinzufügen</string>
     <string name="log_repeat">Verwende das letzte Log erneut</string>
