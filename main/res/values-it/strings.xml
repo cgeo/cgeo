@@ -133,6 +133,7 @@
     <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Azzera</string>
     <string name="log_templates">Trovato: modello di log…</string>
+    <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
     <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
     <string name="log_add">Aggiungi</string>
     <string name="log_repeat">Ripeti l\'ultimo log</string>
