@@ -130,6 +130,7 @@
     <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
     <string name="log_clear">Törlés</string>
+    <string name="log_post_not_possible">Az adatok letöltése folyamatban van…\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
     <string name="log_date_future_not_allowed">Jövőbeli log dátum nem lehetséges.</string>
     <string name="log_add">Hozzáadás</string>
     <string name="log_repeat">Utolsó log ismétlése</string>
