@@ -312,7 +312,7 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    private boolean isLanguageEnglish(@NonNull final String page) {
+    private boolean isLanguageEnglish() {
         final ServerParameters params = getServerParameters();
         try {
             return params != null && (params.appOptions.localRegion.equals("en-US"));
@@ -329,10 +329,10 @@ public class GCLogin extends AbstractLogin {
      */
     @WorkerThread
     private boolean switchToEnglish(final String previousPage) {
-        if (previousPage != null && isLanguageEnglish(previousPage)) {
+        if (isLanguageEnglish()) {
             Log.i("Geocaching.com language already set to English");
-            // get find count
-            getLoginStatus(previousPage);
+        } else if (!Settings.getGcLanguageSwitchEnabled()) {
+            Log.i("Geocaching.com language switch explicitly disabled");
         } else {
             try {
                 final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
@@ -344,6 +344,8 @@ public class GCLogin extends AbstractLogin {
                 Log.e("Failed to set geocaching.com language to English");
             }
         }
+        // get find count
+        getLoginStatus(previousPage);
         return false;
     }
 
