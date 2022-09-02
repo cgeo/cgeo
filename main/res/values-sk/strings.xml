@@ -130,6 +130,7 @@
     <string name="log_posting_image">Pridávajú sa obrázky…</string>
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
+    <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
     <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
     <string name="log_add">Pridať</string>
     <string name="log_repeat">Zopakovať posledný log</string>
