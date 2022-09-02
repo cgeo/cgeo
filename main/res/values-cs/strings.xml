@@ -661,6 +661,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
+    <string name="settings_title_offline_maps">Offline mapy</string>
+    <string name="settings_title_map_themes">Offline mapové motivy &amp; stínování kopců</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
@@ -746,6 +748,7 @@
     <string name="init_signature_template_button">Vložit zástupný znak</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Čas</string>
+    <string name="init_signature_template_day_of_week">Den v týdnu</string>
     <string name="init_signature_template_datetime">Datum a čas</string>
     <string name="init_signature_template_user">Uživatel</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
@@ -956,6 +959,12 @@
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_rendertheme_folder">Složka mapových témat</string>
+    <string name="init_mapshading_folder">Složka se soubory stínování map</string>
+    <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které je třeba umístit do této složky.</string>
+    <string name="init_mapShadingLinearity_title">Linearita stínování</string>
+    <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
+    <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
+    <string name="init_mapShadingScale_description">Neprůhlednost vrstvy stínování, od neviditelné po vyšší hodnoty, které zintenzivňují stínování, ale mohou vytvářet artefakty</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
@@ -1062,6 +1071,7 @@
     <string name="persistablefolder_base">Hlavní</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
+    <string name="persistablefolder_offline_maps_shading">Soubory se stínováním map</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Koncepty</string>
@@ -2278,6 +2288,8 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
+    <string name="downloadmap_otherthemedownload">další téma ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
@@ -2728,16 +2740,4 @@
     <string name="smiley_approve">Schváleno</string>
     <string name="smiley_disapprove">Neschváleno</string>
     <string name="smiley_question">Otázka</string>
-    <string name="smiley_cry">Plačící</string>
-    <string name="smiley_embarassed">Vyčerpaný</string>
-    <string name="smiley_footinmouth">Noha v puse</string>
-    <string name="smiley_innocent">Nevinný</string>
-    <string name="smiley_kiss">Polibek</string>
-    <string name="smiley_laughing">Smějící se</string>
-    <string name="smiley_money">Peníze</string>
-    <string name="smiley_sealed">Zapečetěný</string>
-    <string name="smiley_surprised">Překvapený</string>
-    <string name="smiley_tongueout">Vyplazující jazyk</string>
-    <string name="smiley_undecided">Nerozhodný</string>
-    <string name="smiley_yell">Křičící</string>
 </resources>

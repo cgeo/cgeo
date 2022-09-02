@@ -647,6 +647,7 @@
     <string name="settings_title_map">Karte</string>
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
+    <string name="settings_title_offline_maps">Offline-Karten</string>
     <string name="settings_title_offline_routing">Offline-Routing</string>
     <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
@@ -732,6 +733,7 @@
     <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
+    <string name="init_signature_template_day_of_week">Wochentag</string>
     <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
     <string name="init_signature_template_user">Benutzer</string>
     <string name="init_signature_template_number">Nummer</string>
@@ -2218,6 +2220,8 @@
     <string name="downloadmap_mapfile">Karte</string>
     <string name="downloadmap_themefile">Kartendesign-Datei</string>
     <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_othermapdownload">Anderer Kartendownload</string>
+    <string name="downloadmap_otherthemedownload">Anderer Designdownload</string>
     <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
@@ -2668,16 +2672,4 @@
     <string name="smiley_approve">Zustimmung</string>
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
-    <string name="smiley_cry">Weinen</string>
-    <string name="smiley_embarassed">Peinlich</string>
-    <string name="smiley_footinmouth">Maulkorb</string>
-    <string name="smiley_innocent">Unschuldig</string>
-    <string name="smiley_kiss">Kuss</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verschlossen</string>
-    <string name="smiley_surprised">Überrascht</string>
-    <string name="smiley_tongueout">Zunge raus</string>
-    <string name="smiley_undecided">Unentschlossen</string>
-    <string name="smiley_yell">Schrei</string>
 </resources>

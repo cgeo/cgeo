@@ -1,4 +1,4 @@
 ##
 
-- Fix: Clear icon being shown on name edit for system waypoints
-- Fix: Crash on 'Add to bookmark' in debug mode
+- Korrektur: 'Löschen'-Icon wird im Namensfeld für System-Wegpunkte angezeigt
+- Korrektur: Absturz bei 'Lesezeichen hinzufügen' im Debug-Modus

@@ -2617,16 +2617,4 @@
     <string name="smiley_approve">Aprovat</string>
     <string name="smiley_disapprove">Desaprovat</string>
     <string name="smiley_question">Pregunta</string>
-    <string name="smiley_cry">Plorar</string>
-    <string name="smiley_embarassed">Avergonyit</string>
-    <string name="smiley_footinmouth">Ficar la pota</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Petó</string>
-    <string name="smiley_laughing">Rient</string>
-    <string name="smiley_money">Diners</string>
-    <string name="smiley_sealed">Segellat</string>
-    <string name="smiley_surprised">Sorprès</string>
-    <string name="smiley_tongueout">Treu la llengua</string>
-    <string name="smiley_undecided">Indecisos</string>
-    <string name="smiley_yell">Crida</string>
 </resources>

@@ -2723,16 +2723,4 @@
     <string name="smiley_approve">Zatwierdzone</string>
     <string name="smiley_disapprove">Odrzucone</string>
     <string name="smiley_question">Pytanie</string>
-    <string name="smiley_cry">Płacz</string>
-    <string name="smiley_embarassed">Zawstydzony</string>
-    <string name="smiley_footinmouth">Stopa w ustach</string>
-    <string name="smiley_innocent">Niewinny</string>
-    <string name="smiley_kiss">Pocałunek</string>
-    <string name="smiley_laughing">Śmiech</string>
-    <string name="smiley_money">Pieniądze</string>
-    <string name="smiley_sealed">Zapieczętowany</string>
-    <string name="smiley_surprised">Zaskoczony</string>
-    <string name="smiley_tongueout">Język na wierzchu</string>
-    <string name="smiley_undecided">Niezdecydowany</string>
-    <string name="smiley_yell">Krzyk</string>
 </resources>
