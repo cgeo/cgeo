@@ -643,6 +643,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (geocache.isFound()) {
             result.removeAll(Arrays.asList(LogType.FOUND_IT, LogType.ATTENDED, LogType.WEBCAM_PHOTO_TAKEN));
         }
+        // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
+        result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
         return result;
     }
 
