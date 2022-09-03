@@ -558,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Sisältää käyttäjän määrittämiä reittipisteitä</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin. Jos haluat sulkea pois muita kätkötyyppejä, määritä sopiva kätkötyyppisuodatin.\n\nMysteeriä pidetään \'ratkaistuna\', jos sillä on joko muutetut koordinaatit tai kelvollinen koordinaateilla täytetty lopullinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
     <string name="cache_filter_status_disabled">Ei käytössä</string>
     <string name="cache_filter_status_archived">Arkistoitu</string>
@@ -646,6 +647,8 @@
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
+    <string name="settings_title_offline_maps">Offline-kartat</string>
+    <string name="settings_title_map_themes">Offline-kartan teemat &amp; kukkuloiden varjostus</string>
     <string name="settings_title_offline_routing">Offline-reititys</string>
     <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
@@ -731,6 +734,7 @@
     <string name="init_signature_template_button">Aseta paikanpitäjämerkki</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
+    <string name="init_signature_template_day_of_week">Viikonpäivä</string>
     <string name="init_signature_template_datetime">Päivämäärä &amp; aika</string>
     <string name="init_signature_template_user">Käyttäjä</string>
     <string name="init_signature_template_number">Numero</string>
@@ -941,6 +945,12 @@
     <string name="init_use_native_ua">Android-selain</string>
     <string name="init_summary_use_native_ua">Näyttäydy Android-selaimena. Ratkaisee kirjautumisongelmia eräillä sivustoilla.</string>
     <string name="init_rendertheme_folder">Karttateemat sisältävä kansio</string>
+    <string name="init_mapshading_folder">Karttavarjostustiedostojen kansio</string>
+    <string name="init_mapshading_folder_text">Offline-kartat voidaan päällystää korkeustiedoilla. Nämä tiedot annetaan hgt/dem tiedostoina, jotka on sijoitettava tähän kansioon.</string>
+    <string name="init_mapShadingLinearity_title">Varjostuksen lineaarisuus</string>
+    <string name="init_mapShadingLinearity_description">Pienet arvot korostavat kontrastia jyrkillä rinteillä, mutta piilottavat muutokset loivissa, suuret arvot tekevät siitä lineaarisemman</string>
+    <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
+    <string name="init_mapShadingScale_description">Varjostuskerroksen läpikuultavuus näkymättömistä korkeampiin arvoihin tehostaen varjostusta, mutta se voi tuottaa virheitä</string>
     <string name="init_maintenance">Ylläpito</string>
     <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
     <string name="init_maintenance_directories">Poista orpotiedostot</string>
@@ -1047,6 +1057,7 @@
     <string name="persistablefolder_base">Juuri</string>
     <string name="persistablefolder_offline_maps">Offline-kartat</string>
     <string name="persistablefolder_offline_maps_themes">Karttateemat</string>
+    <string name="persistablefolder_offline_maps_shading">Karttavarjostustiedostot</string>
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
@@ -1161,6 +1172,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Tallennettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Estä reittipisteiden siirto</string>
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Tämä henkilökohtainen muistiinpano lyhennetään arviolta %1$d merkillä %2$d merkkiin (%3$s:n maksimikoko).</string>
     <string name="cache_personal_note_upload">Lataa</string>
     <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
@@ -1232,6 +1244,7 @@
     <string name="cache_menu_radar">Tutka</string>
     <string name="cache_menu_map">Kartta</string>
     <string name="cache_menu_map_ext">Muut ulkoiset sovellukset</string>
+    <string name="cache_menu_map_ext_nolabel">Muut ulkoiset sovellukset (vain koordinaatit)</string>
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="no_browser_found">Selainta ei löytynyt</string>
@@ -1283,6 +1296,9 @@
     <string name="cache_description_updated">Kätkön kuvaus päivitetty</string>
     <string name="cache_type">Tyyppi</string>
     <string name="cache_size">Koko</string>
+    <string name="cache_mode">Tila</string>
+    <string name="cache_mode_linear">Lineaarinen</string>
+    <string name="cache_mode_random">Satunnainen</string>
     <string name="cache_distance">Etäisyys</string>
     <string name="cache_difficulty">Vaikeus</string>
     <string name="cache_terrain">Maasto</string>
@@ -2212,6 +2228,8 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
+    <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>
     <string name="downloadmap_retrieving_directory_data">Haetaan kansion tietoja…</string>
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
