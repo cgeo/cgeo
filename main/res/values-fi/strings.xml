@@ -558,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Sisältää käyttäjän määrittämiä reittipisteitä</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin. Jos haluat sulkea pois muita kätkötyyppejä, määritä sopiva kätkötyyppisuodatin.\n\nMysteeriä pidetään \'ratkaistuna\', jos sillä on joko muutetut koordinaatit tai kelvollinen koordinaateilla täytetty lopullinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
     <string name="cache_filter_status_disabled">Ei käytössä</string>
     <string name="cache_filter_status_archived">Arkistoitu</string>
@@ -1161,6 +1162,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Tallennettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Estä reittipisteiden siirto</string>
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Tämä henkilökohtainen muistiinpano lyhennetään arviolta %1$d merkillä %2$d merkkiin (%3$s:n maksimikoko).</string>
     <string name="cache_personal_note_upload">Lataa</string>
     <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
@@ -1232,6 +1234,7 @@
     <string name="cache_menu_radar">Tutka</string>
     <string name="cache_menu_map">Kartta</string>
     <string name="cache_menu_map_ext">Muut ulkoiset sovellukset</string>
+    <string name="cache_menu_map_ext_nolabel">Muut ulkoiset sovellukset (vain koordinaatit)</string>
     <string name="cache_menu_streetview">Katunäkymä</string>
     <string name="cache_menu_browser">Avaa selaimessa</string>
     <string name="no_browser_found">Selainta ei löytynyt</string>
@@ -1283,6 +1286,9 @@
     <string name="cache_description_updated">Kätkön kuvaus päivitetty</string>
     <string name="cache_type">Tyyppi</string>
     <string name="cache_size">Koko</string>
+    <string name="cache_mode">Tila</string>
+    <string name="cache_mode_linear">Lineaarinen</string>
+    <string name="cache_mode_random">Satunnainen</string>
     <string name="cache_distance">Etäisyys</string>
     <string name="cache_difficulty">Vaikeus</string>
     <string name="cache_terrain">Maasto</string>
