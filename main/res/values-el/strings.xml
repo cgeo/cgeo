@@ -725,6 +725,7 @@
     <string name="init_signature_template_button">Δώστε θέση</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
+    <string name="init_signature_template_day_of_week">Ημέρα της εβδομάδας</string>
     <string name="init_signature_template_datetime">Ημερομηνία &amp; Ώρα</string>
     <string name="init_signature_template_user">Χρήστης</string>
     <string name="init_signature_template_number">Αριθμός</string>

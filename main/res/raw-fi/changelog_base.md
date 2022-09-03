@@ -1,9 +1,9 @@
 
 ### Kartta
-- New: Add support for hillshading on OSM
+- Uusi: Lisää tuki OSM:in kukkulavarjostukselle
 
 ### Kätkön tiedot
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
+- Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
 
 ### Yleinen
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
