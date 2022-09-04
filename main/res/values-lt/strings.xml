@@ -1396,7 +1396,7 @@
     <string name="init_renderthemefolder_synctolocal">Sinchronizuoti temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tai sinchronizuos jūsų temos į privatų programos aplanką, kad pagerintumėte žemėlapių peržiūros priemonės atidarymo našumą, nes tai kainuoja šiek tiek įrenginio saugyklos vietos.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Įjunkite temos aplanko sinchronizavimą</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir % dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
