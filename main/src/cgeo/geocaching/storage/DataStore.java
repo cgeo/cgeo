@@ -2565,7 +2565,7 @@ public class DataStore {
                 final long logId = insertLog.executeInsert();
                 if (log.hasLogImages()) {
                     final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
-                    for (final Image img : log.getLogImages()) {
+                    for (final Image img : log.logImages) {
                         imgCnt++;
                         insertImage.bindLong(1, logId);
                         insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
