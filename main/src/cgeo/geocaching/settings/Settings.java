@@ -1296,7 +1296,7 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, isLightSkin() ?
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
                 DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
     }
 
@@ -1315,12 +1315,6 @@ public class Settings {
 
     public static boolean isLightSkin(final @NonNull Context context) {
         return !isDarkThemeActive(context, getAppTheme(context));
-    }
-
-    /* use only for migration purposes */
-    @Deprecated
-    private static boolean isLightSkin() {
-        return getBoolean(R.string.old_pref_skin, false);
     }
 
     @NonNull
