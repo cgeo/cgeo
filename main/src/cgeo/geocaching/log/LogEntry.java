@@ -417,17 +417,6 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Get the {@link LogType}
-     *
-     * @return The {@link LogType}
-     * @deprecated use read-only property "logType" direclty
-     */
-    @Deprecated
-    public LogType getType() {
-        return logType;
-    }
-
-    /**
      * Get the {@link Image} for log
      *
      * @return The {@link Image}s List

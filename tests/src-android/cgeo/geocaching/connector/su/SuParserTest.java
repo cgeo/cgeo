@@ -236,7 +236,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testCanParseLogType() throws Exception {
         parseCache(cacheJson);
-        assertThat(cache.getLogs().get(2).getType()).isEqualTo(LogType.OWNER_MAINTENANCE);
+        assertThat(cache.getLogs().get(2).logType).isEqualTo(LogType.OWNER_MAINTENANCE);
     }
 
     public void testCanParseLogDateTime() throws Exception {

@@ -448,7 +448,7 @@ class GeokretyParser {
      */
     static String getLastSpottedUsername(final List<LogEntry> logsEntries) {
         for (final LogEntry log : logsEntries) {
-            final LogType logType = log.getType();
+            final LogType logType = log.logType;
             if (logType == LogType.GRABBED_IT || logType == LogType.VISIT) {
                 return log.author;
             }

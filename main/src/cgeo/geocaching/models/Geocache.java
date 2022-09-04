@@ -512,7 +512,7 @@ public class Geocache implements IWaypoint {
         boolean willAttend = false;
         final List<LogEntry> logs = getLogs();
         for (final LogEntry logEntry : logs) {
-            final LogType logType = logEntry.getType();
+            final LogType logType = logEntry.logType;
             if (logType == LogType.ATTENDED) {
                 return false;
             } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
@@ -2155,7 +2155,7 @@ public class Geocache implements IWaypoint {
      */
     public boolean hasOwnLog(final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.getType() == logType && logEntry.isOwn()) {
+            if (logEntry.logType == logType && logEntry.isOwn()) {
                 return true;
             }
         }
