@@ -233,7 +233,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log1.cacheName).isNullOrEmpty();
         assertThat(log1.cacheGeocode).isNullOrEmpty();
 
-        final List<Image> logImages1 = log1.getLogImages();
+        final List<Image> logImages1 = log1.logImages;
         assertThat(logImages1).hasSize(2);
         final Image image1 = logImages1.get(0);
         assertThat(image1.getTitle()).isEqualTo("test logo 2");

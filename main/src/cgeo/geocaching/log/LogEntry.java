@@ -417,18 +417,6 @@ public class LogEntry implements Parcelable {
     }
 
     /**
-     * Get the {@link Image} for log
-     *
-     * @return The {@link Image}s List
-     * @deprecated use rad-only property "logImages" direclty
-     */
-    @NonNull
-    @Deprecated
-    public List<Image> getLogImages() {
-        return logImages;
-    }
-
-    /**
      * Get the hashCode of a LogEntry Object.
      *
      * @return The object's hash code
