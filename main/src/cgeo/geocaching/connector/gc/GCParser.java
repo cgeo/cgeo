@@ -1869,7 +1869,7 @@ public final class GCParser {
         mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
         if (cache.isFound() || cache.isDNF()) {
             ownLogs.subscribe(logEntry -> {
-                if (logEntry.getType().isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.getType() == LogType.DIDNT_FIND_IT)) {
+                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
                     cache.setVisitedDate(logEntry.date);
                 }
             });

@@ -98,7 +98,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(logs).isNotNull();
         assertThat(logs).isNotEmpty();
         final LogEntry marked = logs.get(0);
-        assertThat(marked.getType()).isEqualTo(LogType.MARKED_MISSING);
+        assertThat(marked.logType).isEqualTo(LogType.MARKED_MISSING);
     }
 
     private Trackable getTB2R124() {

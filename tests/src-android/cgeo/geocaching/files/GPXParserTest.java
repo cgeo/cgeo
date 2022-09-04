@@ -557,7 +557,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         final LogEntry log = logs.get(0);
         assertThat(log.author).isEqualTo("toubiV");
-        assertThat(log.getType()).isEqualTo(LogType.FOUND_IT);
+        assertThat(log.logType).isEqualTo(LogType.FOUND_IT);
         assertThat(log.log).startsWith("Visited the nearby Geocache");
         assertThat(log.log).endsWith("Nice location.");
         assertThat(log.date).isNotEqualTo(0);

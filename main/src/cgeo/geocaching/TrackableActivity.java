@@ -592,7 +592,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                 // days since last spotting
                 if (showTimeSpan) {
                     for (final LogEntry log : trackable.getLogs()) {
-                        if (log.getType() == LogType.RETRIEVED_IT || log.getType() == LogType.GRABBED_IT || log.getType() == LogType.DISCOVERED_IT || log.getType() == LogType.PLACED_IT) {
+                        if (log.logType == LogType.RETRIEVED_IT || log.logType == LogType.GRABBED_IT || log.logType == LogType.DISCOVERED_IT || log.logType == LogType.PLACED_IT) {
                             text.append(" (").append(Formatter.formatDaysAgo(log.date)).append(')');
                             break;
                         }

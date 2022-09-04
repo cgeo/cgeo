@@ -84,7 +84,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
         final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
-        final LogType currentLogType = currentLog == null ? null : currentLog.getType();
+        final LogType currentLogType = currentLog == null ? null : currentLog.logType;
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<>();

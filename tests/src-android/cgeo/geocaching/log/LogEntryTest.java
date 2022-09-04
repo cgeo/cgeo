@@ -24,7 +24,7 @@ public class LogEntryTest extends CGeoTestCase {
         final LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
         assertThat(logEntry.date).isEqualTo(100);
-        assertThat(logEntry.getType()).isEqualTo(LogType.FOUND_IT);
+        assertThat(logEntry.logType).isEqualTo(LogType.FOUND_IT);
         assertThat(logEntry.log).isEqualTo("LOGENTRY");
     }
 
