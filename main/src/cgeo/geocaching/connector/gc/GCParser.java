@@ -265,7 +265,7 @@ public final class GCParser {
             cache.setFound(row.contains("/images/icons/16/found.png") || row.contains("uxUserLogDate\" class=\"Success\""));
 
             // infer cache id from geocode
-            cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+            cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
             cids.add(cache.getCacheId());
 
             // favorite count
@@ -459,7 +459,7 @@ public final class GCParser {
         cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
 
         // cache id
-        cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+        cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
 
         // cache guid
         cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));

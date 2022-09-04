@@ -225,15 +225,6 @@ public final class GCConstants {
      */
     static final int NUMBER_OF_LOGS = 35;
 
-    /**
-     * Convert GCCode (geocode) to (old) GCIds
-     * Deprecated: use {@link GCUtils#gcLikeCodeToGcLikeId(String)}  instead
-     */
-    @Deprecated
-    public static long gccodeToGCId(final String gccode) {
-        return GCUtils.gcLikeCodeToGcLikeId(gccode);
-    }
-
     private GCConstants() {
         // this class shall not have instances
     }

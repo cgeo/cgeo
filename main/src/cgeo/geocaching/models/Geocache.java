@@ -11,7 +11,7 @@ import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -818,7 +818,7 @@ public class Geocache implements IWaypoint {
         // For some connectors ID can be calculated out of geocode
         if (StringUtils.isBlank(cacheId)) {
             if (getConnector() instanceof GCConnector) {
-                return String.valueOf(GCConstants.gccodeToGCId(geocode));
+                return String.valueOf(GCUtils.gcLikeCodeToGcLikeId(geocode));
             }
             if (getConnector() instanceof SuConnector) {
                 return SuConnector.geocodeToId(geocode);
