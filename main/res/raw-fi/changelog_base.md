@@ -1,20 +1,20 @@
 
 ### Kartta
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
-- New: Option to delete offline maps
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Korjaus: Älä näytä arkistoitujen kätköjen reittipisteiden ympyröitä
+- Uusi: Napauta vapaata karttatilaa luodaksesi reittipisteen tai käyttäjän määrittelemän kätkön, liittääksesi tai esiladataksesi yksittäisiä reittejä, näyttääksesi koordinaatit tai navigoidaksesi (kontekstista riippuen)
+- Uusi: Mahdollisuus poistaa offline-kartat
+- Korjaus: Lab adventure kohteita yksittäisillä reiteillä ei tunnisteta muokkauksen jälkeen
 
 ### Kätkön tiedot
-- Change: Remove size-limit check while storing waypoints in personal notes
-- Fix: Wrong checksum formula results on large numbers
+- Muutos: Poista kokorajan tarkistus tallennettaessa reittipisteitä henkilökohtaisiin muistiinpanoihin
+- Fix: Väärä checksum-kaavan tulokset isoilla numeroilla
 
 ### Yleinen
-- New: Download / update caches in background
-- New: Copy current coordinates when long-tapping location on home screen
-- Fix: Missing trackable count in search results
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- Uusi: Lataa / päivitä kätköjä taustalla
+- Uusi: Kopioi nykyiset koordinaatit, kun pitkään napautetaan sijaintia aloitusnäytöllä
+- Korjaus: Puuttuva matkaajien määrä hakutuloksissa
+- Uusi: Navigointimenetelmä "Muut ulkoiset sovellukset (vain koordinaatit)" ulkoisen navigointisovelluksen vain koordinaateilla avaamiseen (auttaa Here WeGo offline-tilassa)
+- Uusi: Mahdollisuus sisäkkäisten suodattimien rakentamiseen
+- Uusi: Näytä Adventure Labin seikkailun tyyppi (satunnainen / lineaarinen)
+- Uusi: Tuki asetusten määrittämiseksi sovelluksen info-ikkunasta
+- Korjaus: Tuki saman arvon valitseminen d / t suodatinalueelle
