@@ -3769,6 +3769,7 @@ public class DataStore {
                         removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
 
                         deleteOrphanedRecords();
+                        makeWaypointPrefixesUnique();
 
                         // Remove the obsolete "_others" directory where the user avatar used to be stored.
                         FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory("_others"));
@@ -3830,6 +3831,57 @@ public class DataStore {
             database.delete(dbTableExtension, "_type NOT IN (" + type + ")", null);
         }
         database.delete(dbTableExtension, "_type=" + DBEXTENSION_INVALID.id, null);
+    }
+
+    /**
+     * due to historical reasons some waypoints of the same cache may have the same prefix, which is invalid
+     * this method makes those prefixes unique
+     */
+    private static void makeWaypointPrefixesUnique() {
+        init();
+        try (Cursor cursor = database.query(dbTableWaypoints, new String[]{"_id", "geocode", "prefix"}, null, null, "geocode, prefix", "COUNT(prefix) > 1", "geocode", null)) {
+            while (cursor.moveToNext()) {
+                final int id = cursor.getInt(0);
+                final String geocode = cursor.getString(1);
+                final String prefix = cursor.getString(2);
+                Log.w("found duplicate prefixes in waypoints for cache " + geocode + ", prefix=" + prefix);
+
+                // retrieve all prefixes for this cache
+                final ArrayList<String> usedPrefixes = new ArrayList<>();
+                queryToColl(dbTableWaypoints, new String[]{"prefix"}, "geocode=?", new String[]{geocode}, "_id", null, usedPrefixes, GET_STRING_0);
+
+                try (Cursor cursor2 = database.query(dbTableWaypoints, new String[]{"_id", "prefix"}, "geocode=? AND prefix=?", new String[]{geocode, prefix}, null, null, "_id", null)) {
+                    while (cursor2.moveToNext()) {
+                        if (id != cursor2.getInt(0)) {
+                            final String duplicate = cursor2.getString(1);
+                            int counter = 0;
+                            boolean found = true;
+                            while (found) {
+                                found = false;
+                                counter++;
+                                final String newPrefix = duplicate + "-" + counter;
+                                for (String usedPrefix : usedPrefixes) {
+                                    if (StringUtils.equals(usedPrefix, newPrefix)) {
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    // update prefix in database
+                                    ContentValues values = new ContentValues();
+                                    values.put("prefix", newPrefix);
+                                    database.update(dbTableWaypoints, values, "_id=?", new String[]{String.valueOf(cursor2.getInt(0))});
+                                    usedPrefixes.add(newPrefix);
+                                    Log.w("=> updated prefix for waypoint id=" + cursor2.getInt(0) + ", from " + duplicate + " to " + newPrefix);
+                                }
+                            }
+                        }
+                    }
+                }
+                // remove cache from cachecache to force reload with updated data
+                cacheCache.removeCacheFromCache(cursor.getString(1));
+            }
+        }
     }
 
     /**
