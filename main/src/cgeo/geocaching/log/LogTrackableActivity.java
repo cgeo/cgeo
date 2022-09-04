@@ -522,20 +522,20 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private void sendLog() {
         // Can logging?
         if (!readyToPost) {
-            showToast(res.getString(R.string.log_post_not_possible));
+            SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
             return;
         }
 
         // Check Tracking Code existence
         if (loggingManager.isTrackingCodeNeededToPostNote() && binding.tracking.getText().toString().isEmpty()) {
-            showToast(res.getString(R.string.err_log_post_missing_tracking_code));
+            SimpleDialog.of(this).setMessage(R.string.err_log_post_missing_tracking_code).show();
             return;
         }
         trackable.setTrackingcode(binding.tracking.getText().toString());
 
         // Check params for trackables needing coordinates
         if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
-            showToast(res.getString(R.string.err_log_post_missing_coordinates));
+            SimpleDialog.of(this).setMessage(R.string.err_log_post_missing_coordinates).show();
             return;
         }
 
