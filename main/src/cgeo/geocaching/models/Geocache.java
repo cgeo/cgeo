@@ -1616,8 +1616,27 @@ public class Geocache implements IWaypoint {
         }
         final int index = getWaypointIndex(original);
         final Waypoint copy = new Waypoint(original);
-        copy.setUserDefined();
         copy.setName((addPrefix ? CgeoApplication.getInstance().getString(R.string.waypoint_copy_of) + " " : "") + copy.getName());
+
+        // create unique prefix
+        copy.setUserDefined();
+        final String basePrefix = copy.getPrefix();
+        int counter = 0;
+        boolean found = true;
+        while (found) {
+            found = false;
+            for (Waypoint waypoint : waypoints) {
+                if (StringUtils.equals(waypoint.getPrefix(), copy.getPrefix())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                counter++;
+                copy.setPrefix(basePrefix + "-" + counter);
+            }
+        }
+
         waypoints.add(index + 1, copy);
         return DataStore.saveWaypoint(-1, geocode, copy) ? copy : null;
     }
