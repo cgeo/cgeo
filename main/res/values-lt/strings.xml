@@ -1381,6 +1381,7 @@
     <!-- map -->
     <string name="map_map">Išsaugotos slėptuvės</string>
     <string name="map_live">Slėptuvės iš interneto</string>
+    <string name="map_offline">Žemėlapis neprisijungus</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
@@ -2111,6 +2112,7 @@
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_bench">suoliukas</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Šypsenėlė</string>
     <string name="smiley_big_smile">Didelė šypsena</string>
@@ -2134,4 +2136,8 @@
     <string name="smiley_question">Klausimas</string>
     <string name="smiley_kiss">Bučkis</string>
     <string name="smiley_money">Pinigai</string>
+    <string name="smiley_surprised">Nustebintas</string>
+    <string name="smiley_tongueout">Iškištas liežuvis</string>
+    <string name="smiley_undecided">Neapsisprendęs</string>
+    <string name="smiley_yell">Šaukiantis</string>
 </resources>
