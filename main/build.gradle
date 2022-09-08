@@ -419,7 +419,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
     // Support Library core (used for eg. HtmlCompat)
     implementation 'androidx.core:core:1.8.0'
