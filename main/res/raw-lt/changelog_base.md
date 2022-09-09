@@ -1,20 +1,20 @@
 
 ### Žemėlapis
-- Fix: Do not show distance circles for waypoints of archived caches
-- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- Pataisymas: nerodoma atstumo apskritimų archyvuotų slėptuvių kelio taškams
+- Nauja: bakstelėkite laisvą žemėlapio vietą, kad sukurtumėte maršruto tašką arba vartotojo nustatytą talpyklą, pridėtumėte arba pridėtumėte prie atskiro maršruto, rodytumėte koordinates arba naršytumėte (atsižvelgiant į kontekstą)
 - Nauja: galimybė ištrinti neprisijungus pasiekiamus žemėlapius
-- Fix: Lab adventure items in individual routes not recognized as such after edit
+- Pataisymas: Lab adventure elementai atskiruose maršrutuose po redagavimo neatpažinti kaip tokie
 
 ### Slėptuvės detalės
 - Pakeista: pašalinkite dydžio ribos patikrinimą, kai laikote kelio taškus asmeniniuose užrašuose
-- Fix: Wrong checksum formula results on large numbers
+- Pataisymas: esant dideliems skaičiams, gaunama neteisinga kontrolinės sumos formulė
 
 ### Bendras
 - Nauja: atsisiųskite/atnaujinkite slėptuves fone
 - Nauja: nukopijuokite dabartines koordinates, kai pagrindiniame ekrane ilgai spustelėsite vietą
 - Pataisyta: paieškos rezultatuose trūksta keliauninkų skaičiaus
-- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
-- New: Posibility to build nested filters
-- New: Display Lab adventure mode (random / linear)
-- New: Support configuring settings from app info window
-- Fix: Support selecting the same value for d/t filter range
+- Nauja: naršymo metodas „Kitos išorinės programos (tik koordinatės)“, norint iškviesti išorinę navigacijos programą tik su koordinatėmis (padeda „Here WeGo“ neprisijungus)
+- Nauja: galimybė kurti įdėtus filtrus
+- Nauja: Rodyti Lab adventure režimą (atsitiktinis / linijinis)
+- Nauja: palaikomas nustatymų konfigūravimas programos informacijos lange
+- Pataisymas: palaikomas tos pačios vertės pasirinkimas s/v filtro diapazonui
