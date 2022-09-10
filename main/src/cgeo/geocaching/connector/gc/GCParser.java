@@ -1584,7 +1584,7 @@ public final class GCParser {
         }
 
         // trackable may be locked (see e.g. TB673CE)
-        if (new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_IS_LOGGED, page).find()) {
+        if (new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_IS_LOCKED, page).find()) {
             trackable.setIsLocked();
         }
 
