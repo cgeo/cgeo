@@ -3747,6 +3747,10 @@ public class DataStore {
         databaseCleaned = true;
 
         try (ContextLogger ignore = new ContextLogger(true, "DataStore.cleanIfNeeded: cleans DB")) {
+            // check for UDC cleanup every time this method is called
+            deleteOrphanedUDC();
+
+            // other cleanup will be done once a day at max
             if (Settings.dbNeedsCleanup()) {
                 Settings.setDbCleanupLastCheck(false);
 
@@ -3830,6 +3834,25 @@ public class DataStore {
             database.delete(dbTableExtension, "_type NOT IN (" + type + ")", null);
         }
         database.delete(dbTableExtension, "_type=" + DBEXTENSION_INVALID.id, null);
+    }
+
+    private static void deleteOrphanedUDC() {
+        final Set<String> orphanedUDC = new HashSet<>();
+        queryToColl(dbTableCaches,
+                new String[]{"geocode"},
+                "SUBSTR(geocode,1," + InternalConnector.PREFIX.length() + ") = '" + InternalConnector.PREFIX + "' AND geocode NOT IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE SUBSTR(geocode,1," + InternalConnector.PREFIX.length() + ") = '" + InternalConnector.PREFIX + "')",
+                null,
+                null,
+                null,
+                orphanedUDC,
+                GET_STRING_0
+        );
+        final StringBuilder info = new StringBuilder();
+        for (String geocode : orphanedUDC) {
+            info.append(" ").append(geocode);
+        }
+        Log.i("delete orphaned UDC" + info);
+        removeCaches(orphanedUDC, LoadFlags.REMOVE_ALL);
     }
 
     /**
