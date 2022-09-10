@@ -321,6 +321,15 @@ public class GCLogin extends AbstractLogin {
         }
     }
 
+    public String getWebsiteLanguage() {
+        final ServerParameters params = getServerParameters();
+        try {
+            return params.appOptions.localRegion;
+        } catch (final Exception e) {
+            return "UNKNOWN";
+        }
+    }
+
     /**
      * Ensure that the web site is in English.
      *
