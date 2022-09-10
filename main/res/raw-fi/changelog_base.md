@@ -1,6 +1,7 @@
 
 ### Kartta
 - Uusi: Lisää tuki OSM:in kukkulavarjostukselle
+- Fix: Manually copied waypoints of a cache not all being displayed
 
 ### Kätkön tiedot
 - Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
