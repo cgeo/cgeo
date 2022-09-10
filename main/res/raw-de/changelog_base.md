@@ -1,6 +1,7 @@
 
 ### Karte
 - New: Add support for hillshading on OSM
+- Fix: Manually copied waypoints of a cache not all being displayed
 
 ### Cache-Details
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
