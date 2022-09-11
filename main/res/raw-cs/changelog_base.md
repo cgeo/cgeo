@@ -1,7 +1,7 @@
 
 ### Mapa
 - Novinka: Přidána podpora pro stínování kopců v OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Oprava: Ručně zkopírované terasové body z kešky se nezobrazují všechny
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
