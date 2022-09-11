@@ -1,7 +1,7 @@
 
 ### Mappa
 - Nuovo: Aggiunto il supporto per ombreggiatura su OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Correzione: i waypoint di un cache copiati manualmente, non sono tutti visualizzati
 
 ### Dettagli del cache
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
