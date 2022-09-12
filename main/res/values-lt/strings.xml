@@ -932,6 +932,8 @@
     <string name="init_maintenance">Priežiūra</string>
     <string name="init_maintenance_directories_note">c:geo vaizdus ir kitus failus, susijusius su slėptuve, saugo tam skirtame aplanke. Kai kuriais atvejais (pvz., Importuojant/eksportuojant duomenų bazę) šiame aplanke gali būti pasenusių failų, kuriuos galima ištrinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
+    <string name="init_maintenance_start">Prasidėjo techninė priežiūra</string>
+    <string name="init_maintenance_finished">Priežiūra baigta</string>
     <string name="init_location">Vietos nustatymo paslauga</string>
     <string name="init_location_note">Įrenginiuose su Google Play paslauga, c:geo gali automatiškai naudoti geresnį vietos nustatymo paslaugų teikėją. Tačiau tai neleidžia naudoti išorinį BlueTooth GPS imtuvą.</string>
     <string name="init_location_googleplayservices">Naudoti Google Play paslaugas</string>
