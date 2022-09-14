@@ -424,8 +424,6 @@ public final class GCParser {
             }
             cache.setName(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_CACHENAME, true, "")));
             cache.setGeocode(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_GEOCODE, true, ""));
-            cache.setOwnerDisplayName(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_OWNER, true, "")));
-            cache.setOwnerUserId(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_OWNER, true, ""))); // set owner display name also as user id, as it's better than nothing ;-)
             cache.setDifficulty(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_DIFFICULTY, true, "0")));
             cache.setTerrain(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_TERRAIN, true, "0")));
             cache.setSize(CacheSize.getById(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_SIZE, true, CacheSize.NOT_CHOSEN.id)));
