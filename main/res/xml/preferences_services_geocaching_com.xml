@@ -39,13 +39,6 @@
                 android:title="@string/init_loaddirectionimg"
                 app:iconSpaceReserved="false" />
         </PreferenceScreen>
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_gc_lang_switch"
-            android:title="SWITCH LANGUAGE TO ENGLISH"
-            android:summary="This is a development feature which is not intended for normal usage. Leave it enabled."
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

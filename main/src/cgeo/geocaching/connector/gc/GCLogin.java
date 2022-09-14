@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
 import java.io.IOException;
@@ -180,9 +181,6 @@ public class GCLogin extends AbstractLogin {
 
             if (getLoginStatus(tryLoggedInData)) {
                 Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                if (switchToEnglish(tryLoggedInData) && retry) {
-                    return login(false, credentials);
-                }
                 return completeLoginProcess();
             }
 
@@ -200,9 +198,6 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (getLoginStatus(loginData)) {
-                if (switchToEnglish(loginData) && retry) {
-                    return login(false, credentials);
-                }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 return completeLoginProcess();
             }
@@ -224,7 +219,7 @@ public class GCLogin extends AbstractLogin {
 
             logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
-                switchToEnglish(loginData);
+                getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
@@ -312,15 +307,6 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    private boolean isLanguageEnglish() {
-        final ServerParameters params = getServerParameters();
-        try {
-            return params != null && (params.appOptions.localRegion.equals("en-US"));
-        } catch (final Exception e) {
-            return false;
-        }
-    }
-
     public String getWebsiteLanguage() {
         final ServerParameters params = getServerParameters();
         try {
@@ -331,30 +317,28 @@ public class GCLogin extends AbstractLogin {
     }
 
     /**
-     * Ensure that the web site is in English.
+     * Ensure that the website is presented in the specified language.
      *
-     * @param previousPage the content of the last loaded page
-     * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
+     * Used for unit tests.
+     *
+     * @param language the language code to be used at geocaching.com (e.g. "en-US")
+     * @return {@code true} if a switch was necessary and successfully performed (different language -> target language)
      */
     @WorkerThread
-    private boolean switchToEnglish(final String previousPage) {
-        if (isLanguageEnglish()) {
-            Log.i("Geocaching.com language already set to English");
-        } else if (!Settings.getGcLanguageSwitchEnabled()) {
-            Log.i("Geocaching.com language switch explicitly disabled");
+    @VisibleForTesting
+    public boolean switchToLanguage(final String language) {
+        if (getWebsiteLanguage().equals(language)) {
+            Log.i("Geocaching.com language already set to " + language);
         } else {
             try {
-                final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
-                Log.i("changed language on geocaching.com to English");
+                final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=" + language));
+                Log.i("changed language on geocaching.com to " + language);
                 resetServerParameters();
-                getLoginStatus(page);
-                return true;
+                return getLoginStatus(page);
             } catch (final Exception ignored) {
-                Log.e("Failed to set geocaching.com language to English");
+                Log.e("Failed to set geocaching.com language to " + language);
             }
         }
-        // get find count
-        getLoginStatus(previousPage);
         return false;
     }
 

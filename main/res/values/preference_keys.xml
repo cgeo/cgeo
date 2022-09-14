@@ -68,7 +68,6 @@
     <string translatable="false" name="pref_loaddirectionimg">loaddirectionimg</string>
     <string translatable="false" name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string translatable="false" name="pref_fakekey_gc_website">fakekey_gc_website</string>
-    <string translatable="false" name="pref_gc_lang_switch">gc_lang_switch</string>
 
     <!-- settings for geocaching.com lab adventures screen -->
     <string translatable="false" name="preference_screen_al">preference_screen_al</string>
