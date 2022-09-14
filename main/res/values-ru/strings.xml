@@ -672,7 +672,7 @@
     <string name="init_backup_history_length_min">Только последняя</string>
     <string name="init_backup_history_length_max">Сохранять все</string>
     <string name="init_backup_history_delete_warning">У вас больше резервных копий, нежели установленное максимальное значение. Вы точно хотите удалить все \"лишние\" резервные копии?</string>
-    <string name="init_backup_automatic_summary">Автоматически создавать резервные копии каждые X дней (0=выключить). Это работает дополнено к копиям, созданным вручную</string>
+    <string name="init_backup_automatic_summary">Автоматически создавать резервные копии каждые X дней (0 — выключить). Это работает дополнительно к копиям, созданным вручную</string>
     <string name="init_user_confirmation">Я точно уверен в том, что делаю</string>
     <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
