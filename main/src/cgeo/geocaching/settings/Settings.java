@@ -862,10 +862,6 @@ public class Settings {
         return !isGCPremiumMember() && getBoolean(R.string.pref_loaddirectionimg, true);
     }
 
-    public static boolean getGcLanguageSwitchEnabled() {
-        return getBoolean(R.string.pref_gc_lang_switch, true);
-    }
-
     public static void setGcCustomDate(final String format) {
         putString(R.string.pref_gccustomdate, format);
     }

@@ -36,6 +36,25 @@ public class GCLoginTest extends TestCase {
         assertThat(homeLocation).isEqualTo(TextUtils.stripHtml(homeLocation));
     }
 
+    public static void testLanguageSwitch() {
+        final String userLanguage = GCLogin.getInstance().getWebsiteLanguage();
+        assertThat(userLanguage).isNotNull();
+
+        // make sure language is set to english
+        if (!userLanguage.equals("en-US")) {
+            GCLogin.getInstance().switchToLanguage("en-US");
+        }
+        assertThat(GCLogin.getInstance().getWebsiteLanguage()).isEqualTo("en-US");
+
+        // test switching
+        assertThat(GCLogin.getInstance().switchToLanguage("de-DE")).isTrue();
+        assertThat(GCLogin.getInstance().getWebsiteLanguage()).isEqualTo("de-DE");
+
+        // reset to user preference
+        GCLogin.getInstance().switchToLanguage(userLanguage);
+        assertThat(GCLogin.getInstance().getWebsiteLanguage()).isEqualTo(userLanguage);
+    }
+
     public void testAvatar() {
         instance.resetServerParameters();
         AvatarUtils.changeAvatar(GCConnector.getInstance(), null);
