@@ -101,8 +101,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" aria-labelledby=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile(Pattern.quote("CoordInfoCode\">") + "(TB[0-9A-Z&&[^ILOSU]]+)<");
 
-    // multiple error codes, depending on the search term for the trackable code
-    //// TODO: maybe language dependent, needs to be checked
+    // multiple error codes, depending on the search term for the trackable code. Interestingly, these error messages are not localized by now.
     static final String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
     static final String ERROR_TB_ELEMENT_EXCEPTION = "ElementNotFound Exception";
     static final String ERROR_TB_ARITHMETIC_OVERFLOW = "operation resulted in an overflow";
@@ -117,13 +116,13 @@ public final class GCConstants {
      */
     static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/p(rofile)?/\\?guid=(.*?)\">(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");
-    static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
+    static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<img src=\"/images/logtypes/(.*?).png\" id=\"ctl00_ContentBody_InteractionLogTypeImage\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_DISPOSITION_LOG = Pattern.compile("<a id=\"ctl00_ContentBody_InteractionLogLink\"[^>]*href=\"/track/log.aspx\\?LUID=([a-z0-9\\-]+)\">[^0-9]+(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
     /**
      * Two groups !
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>"); //TODO: language dependent
     /**
      * Three groups !
      */
