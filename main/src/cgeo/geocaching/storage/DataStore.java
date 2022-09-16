@@ -1924,6 +1924,16 @@ public class DataStore {
                 }
             });
         }
+
+        // Try to reclaim unused space and reindex all tables
+        try {
+            Log.d("Database clean: vacuuming the freed space");
+            database.execSQL("VACUUM");
+            Log.d("Database clean: recreate indices");
+            database.execSQL("REINDEX");
+        } catch (final Exception e) {
+            Log.w("DataStore.clean", e);
+        }
     }
 
     public static boolean isThere(final String geocode, final String guid, final boolean checkTime) {
@@ -3868,7 +3878,7 @@ public class DataStore {
                                 }
                                 if (!found) {
                                     // update prefix in database
-                                    ContentValues values = new ContentValues();
+                                    final ContentValues values = new ContentValues();
                                     values.put("prefix", newPrefix);
                                     database.update(dbTableWaypoints, values, "_id=?", new String[]{String.valueOf(cursor2.getInt(0))});
                                     usedPrefixes.add(newPrefix);
