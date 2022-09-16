@@ -20,7 +20,6 @@ public class GeoData extends Location {
 
     private static final String INITIAL_PROVIDER = "initial";
     private static final String HOME_PROVIDER = "home";
-    private static final String FUSED_PROVIDER = "fused";
     public static final String LOW_POWER_PROVIDER = "low-power";
 
     // Some devices will not have the last position available (for example the emulator). In this case,
@@ -54,8 +53,7 @@ public class GeoData extends Location {
                 return LocationProviderType.GPS;
             case LocationManager.NETWORK_PROVIDER:
                 return LocationProviderType.NETWORK;
-            case FUSED_PROVIDER:
-                // LocationManager.FUSED_PROVIDER constant is not available at API level 9
+            case LocationManager.FUSED_PROVIDER:
                 return LocationProviderType.FUSED;
             case LOW_POWER_PROVIDER:
                 return LocationProviderType.LOW_POWER;
