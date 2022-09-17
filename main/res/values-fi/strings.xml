@@ -355,9 +355,6 @@
         <item quantity="one">%d minuutti</item>
         <item quantity="other">%d minuuttia</item>
     </plurals>
-    <string name="caches_store_offline">Tallenna offline</string>
-    <string name="caches_store_all">Tallenna kaikki</string>
-    <string name="caches_store_selected">Tallenna valitut</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
