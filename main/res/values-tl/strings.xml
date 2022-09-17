@@ -251,9 +251,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuto</item>
     </plurals>
-    <string name="caches_store_offline">Ang pag-istor ay sarado</string>
-    <string name="caches_store_all">I-istor lahat</string>
-    <string name="caches_store_selected">Ang istor ay napili</string>
     <string name="caches_history">Ang Kasaysayan</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Ayusin</string>
