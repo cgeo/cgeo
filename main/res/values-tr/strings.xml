@@ -353,9 +353,6 @@
         <item quantity="one">%d dakika</item>
         <item quantity="other">%d dakika</item>
     </plurals>
-    <string name="caches_store_offline">Çevrimdışı kaydet</string>
-    <string name="caches_store_all">Tümünü Depola</string>
-    <string name="caches_store_selected">Geocache\'ler Seçildi</string>
     <string name="caches_store_background_title">Cache\'leri indir</string>
     <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
     <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
