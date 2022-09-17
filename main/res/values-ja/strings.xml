@@ -350,9 +350,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 分</item>
     </plurals>
-    <string name="caches_store_offline">オフライン用に保存</string>
-    <string name="caches_store_all">すべて保存</string>
-    <string name="caches_store_selected">選択したキャッシュを保存</string>
     <string name="caches_store_background_title">キャッシュのダウンロード</string>
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>
