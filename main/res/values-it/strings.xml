@@ -355,9 +355,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuti</item>
     </plurals>
-    <string name="caches_store_offline">Salva per Offline</string>
-    <string name="caches_store_all">Archiviare tutto</string>
-    <string name="caches_store_selected">Salva selezionati</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
