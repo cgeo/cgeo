@@ -349,9 +349,6 @@
         <item quantity="many">%d minút</item>
         <item quantity="other">%d minút</item>
     </plurals>
-    <string name="caches_store_offline">Uložiť offline</string>
-    <string name="caches_store_all">Uložiť všetko</string>
-    <string name="caches_store_selected">Uložiť vybraté</string>
     <string name="caches_history">História</string>
     <string name="caches_on_map">Zobraziť na mape</string>
     <string name="caches_sort">Zoradiť</string>
