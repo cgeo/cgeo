@@ -355,9 +355,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minutos</item>
     </plurals>
-    <string name="caches_store_offline">Armazenar para uso offline</string>
-    <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
-    <string name="caches_store_selected">Memorizar seleccionada(s)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
