@@ -244,9 +244,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d menit</item>
     </plurals>
-    <string name="caches_store_offline">Toko offline</string>
-    <string name="caches_store_all">Simpan semua</string>
-    <string name="caches_store_selected">Toko yang dipilih</string>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>
     <string name="caches_sort">Urutkan</string>
