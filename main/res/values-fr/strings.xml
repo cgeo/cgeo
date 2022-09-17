@@ -355,9 +355,6 @@
         <item quantity="one">%d minute</item>
         <item quantity="other">%d minutes</item>
     </plurals>
-    <string name="caches_store_offline">Enregistrer localement</string>
-    <string name="caches_store_all">Tout enregistrer</string>
-    <string name="caches_store_selected">Enregistrer la sélection</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_store_background_already_stored">Certaines caches sont déjà enregistrées. Que souhaitez-vous faire ?</string>
     <string name="caches_store_background_option_nothing">Ne rien faire</string>
