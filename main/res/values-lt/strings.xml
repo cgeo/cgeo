@@ -356,9 +356,6 @@
         <item quantity="many">%d minučių</item>
         <item quantity="other">%d minučių</item>
     </plurals>
-    <string name="caches_store_offline">Išsaugoti slėptuves</string>
-    <string name="caches_store_all">Išsaugoti visas</string>
-    <string name="caches_store_selected">Išsaugoti pasirinktas</string>
     <string name="caches_store_background_title">Atsisiųstos slėptuvės</string>
     <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
