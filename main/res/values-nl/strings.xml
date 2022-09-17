@@ -355,9 +355,6 @@
         <item quantity="one">%d minuut</item>
         <item quantity="other">%d minuten</item>
     </plurals>
-    <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
-    <string name="caches_store_all">Alle opslaan</string>
-    <string name="caches_store_selected">Geselecteerden opslaan</string>
     <string name="caches_store_background_title">Caches downloaden</string>
     <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
     <string name="caches_store_background_option_nothing">Niets doen</string>
