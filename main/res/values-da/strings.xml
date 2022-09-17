@@ -350,9 +350,6 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minutter</item>
     </plurals>
-    <string name="caches_store_offline">Gem Offline</string>
-    <string name="caches_store_all">Gem alle</string>
-    <string name="caches_store_selected">Gem valgte</string>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
