@@ -200,9 +200,6 @@
         <item quantity="one">%d mínúta</item>
         <item quantity="other">%d mínútur</item>
     </plurals>
-    <string name="caches_store_offline">Vista án nettengingar</string>
-    <string name="caches_store_all">Geyma alla</string>
-    <string name="caches_store_selected">Vista valið</string>
     <string name="caches_history">Ferill</string>
     <string name="caches_on_map">Sýna á korti</string>
     <string name="caches_sort">Flokka niður</string>
