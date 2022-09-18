@@ -359,6 +359,9 @@
         <item quantity="many">%d minut</item>
         <item quantity="other">%d minut</item>
     </plurals>
+    <string name="caches_store_offline">Uložit offline</string>
+    <string name="caches_store_offline_map">Ukládat kešky offline</string>
+    <string name="caches_store_selected">Uložit vybrané</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
