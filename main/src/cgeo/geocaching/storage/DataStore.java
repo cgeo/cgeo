@@ -3747,14 +3747,14 @@ public class DataStore {
         databaseCleaned = true;
 
         try (ContextLogger ignore = new ContextLogger(true, "DataStore.cleanIfNeeded: cleans DB")) {
-            // check for UDC cleanup every time this method is called
-            deleteOrphanedUDC();
+            Schedulers.io().scheduleDirect(() -> {
+                // check for UDC cleanup every time this method is called
+                deleteOrphanedUDC();
 
-            // other cleanup will be done once a day at max
-            if (Settings.dbNeedsCleanup()) {
-                Settings.setDbCleanupLastCheck(false);
+                // other cleanup will be done once a day at max
+                if (Settings.dbNeedsCleanup()) {
+                    Settings.setDbCleanupLastCheck(false);
 
-                Schedulers.io().scheduleDirect(() -> {
                     Log.d("Database clean: started");
                     try {
                         final Set<String> geocodes = new HashSet<>();
@@ -3784,10 +3784,9 @@ public class DataStore {
                     } catch (final Exception e) {
                         Log.w("DataStore.clean", e);
                     }
-
                     Log.d("Database clean: finished");
-                });
-            }
+                }
+            });
         }
     }
 
