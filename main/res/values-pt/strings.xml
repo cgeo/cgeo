@@ -355,6 +355,9 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minutos</item>
     </plurals>
+    <string name="caches_store_offline">Armazenar para uso offline</string>
+    <string name="caches_store_offline_map">Armazenar as caches para utilização offline</string>
+    <string name="caches_store_selected">Armazenar seleccionada(s)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
@@ -952,6 +955,7 @@
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
+    <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
