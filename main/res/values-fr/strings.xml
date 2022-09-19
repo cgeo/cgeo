@@ -355,6 +355,9 @@
         <item quantity="one">%d minute</item>
         <item quantity="other">%d minutes</item>
     </plurals>
+    <string name="caches_store_offline">Stocker localement</string>
+    <string name="caches_store_offline_map">Stocker les caches localement</string>
+    <string name="caches_store_selected">Enregistrer la sélection</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_store_background_already_stored">Certaines caches sont déjà enregistrées. Que souhaitez-vous faire ?</string>
     <string name="caches_store_background_option_nothing">Ne rien faire</string>
@@ -947,6 +950,7 @@
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
     <string name="init_maintenance_start">Début de la maintenance</string>
+    <string name="init_maintenance_ongoing">Cela peut prendre un peu de temps …</string>
     <string name="init_maintenance_finished">Maintenance terminée</string>
     <string name="init_location">Géolocalisation</string>
     <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth.</string>
