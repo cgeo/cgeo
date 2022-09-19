@@ -2532,7 +2532,13 @@
     <string name="rtl_laundry">skalbykla</string>
     <string name="rtl_mall">prekybos centras</string>
     <string name="rtl_sports_shop">sporto prekių parduotuvė</string>
+    <string name="rtl_gate">vartai</string>
+    <string name="rtl_gate_private">privatūs vartai</string>
+    <string name="rtl_geyser">geizeris</string>
+    <string name="rtl_hot_spring">karštoji versmė</string>
+    <string name="rtl_ladder">kopėčios</string>
     <string name="rtl_log">įrašas</string>
+    <string name="rtl_oneway">vienpusis</string>
     <string name="rtl_ruin">griuvėsiai</string>
     <string name="rtl_freeway">greitkelis</string>
     <string name="rtl_freeway_similar">panašus į greitkelį</string>
@@ -2542,6 +2548,9 @@
     <string name="rtl_side_street">šalutinė gatvė</string>
     <string name="rtl_residential_road">gyvenamasis kelias</string>
     <string name="rtl_access_road">privažiavimo kelias</string>
+    <string name="rtl_tunnel">tunelis</string>
+    <string name="rtl_bridge">tiltas</string>
+    <string name="rtl_railway">geležinkelis</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Šypsenėlė</string>
     <string name="smiley_big_smile">Didelė šypsena</string>
