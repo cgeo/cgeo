@@ -356,9 +356,9 @@
         <item quantity="many">%d minučių</item>
         <item quantity="other">%d minučių</item>
     </plurals>
-    <string name="caches_store_offline">Išsaugoti slėptuves</string>
-    <string name="caches_store_all">Išsaugoti visas</string>
-    <string name="caches_store_selected">Išsaugoti pasirinktas</string>
+    <string name="caches_store_offline">Saugoti naudojimui neprisijungus</string>
+    <string name="caches_store_offline_map">Saugoti slęptuves naudojimui neprisijungus</string>
+    <string name="caches_store_selected">Saugoti pasirinktas</string>
     <string name="caches_store_background_title">Atsisiųstos slėptuvės</string>
     <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
@@ -655,6 +655,8 @@
     <string name="settings_title_map">Žemėlapis</string>
     <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus pasiekiamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
+    <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
+    <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos ir kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
     <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
@@ -738,6 +740,7 @@
     <string name="init_signature_template_button">Įterpti rezervuotąją vietą</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Laikas</string>
+    <string name="init_signature_template_day_of_week">Savaitės diena</string>
     <string name="init_signature_template_datetime">Data ir laikas</string>
     <string name="init_signature_template_user">Vartotojas</string>
     <string name="init_signature_template_number">Skaičius</string>
@@ -946,10 +949,17 @@
     <string name="init_use_native_ua">\"Android\" naršyklė</string>
     <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
     <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
+    <string name="init_mapshading_folder">Žemėlapio šešėliavimo failų aplankas</string>
+    <string name="init_mapshading_folder_text">Neprisijungus pasiekiami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
+    <string name="init_mapShadingLinearity_title">Šešėlių tiesiškumas</string>
+    <string name="init_mapShadingLinearity_description">Mažos reikšmės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
+    <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
+    <string name="init_mapShadingScale_description">Šešėlių sluoksnio skaidrumas, nuo nematomo iki didesnių verčių, sustiprinantis šešėlį, bet gali atsirasti artefaktų</string>
     <string name="init_maintenance">Aptarnavimas</string>
     <string name="init_maintenance_directories_note">c:geo vaizdus ir kitus failus, susijusius su slėptuve, saugo tam skirtame aplanke. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame aplanke gali būti pasenusių failų, kuriuos galima ištrinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
     <string name="init_maintenance_start">Aptarnavimas prasidėjo</string>
+    <string name="init_maintenance_ongoing">Tai gali užtrukti…</string>
     <string name="init_maintenance_finished">Aptarnavimas baigtas</string>
     <string name="init_location">Vietos nustatymo paslauga</string>
     <string name="init_location_note">Įrenginiuose su Google Play paslauga, c:geo gali automatiškai naudoti geresnį vietos nustatymo paslaugų teikėją. Tačiau tai neleidžia naudoti išorinį BlueTooth GPS imtuvą.</string>
@@ -1052,6 +1062,7 @@
     <string name="persistablefolder_base">Pagrindinis</string>
     <string name="persistablefolder_offline_maps">Žemėlapiai neprisijungus</string>
     <string name="persistablefolder_offline_maps_themes">Žemėlapio temos</string>
+    <string name="persistablefolder_offline_maps_shading">Žemėlapio šešėliavimo failai</string>
     <string name="persistablefolder_backup">Atsarginė kopija</string>
     <string name="persistablefolder_logfiles">Įrašai</string>
     <string name="persistablefolder_fieldnotes">Lauko užrašai</string>
@@ -2561,16 +2572,4 @@
     <string name="smiley_approve">Patvirtinta</string>
     <string name="smiley_disapprove">Nepatvirtinta</string>
     <string name="smiley_question">Klausimas</string>
-    <string name="smiley_cry">Verkiantis</string>
-    <string name="smiley_embarassed">Susigėdęs</string>
-    <string name="smiley_footinmouth">Pėda burnoje</string>
-    <string name="smiley_innocent">Nekaltas</string>
-    <string name="smiley_kiss">Bučkis</string>
-    <string name="smiley_laughing">Juokiasi</string>
-    <string name="smiley_money">Pinigai</string>
-    <string name="smiley_sealed">Užantspauduotas</string>
-    <string name="smiley_surprised">Nustebintas</string>
-    <string name="smiley_tongueout">Iškištas liežuvis</string>
-    <string name="smiley_undecided">Neapsisprendęs</string>
-    <string name="smiley_yell">Šaukiantis</string>
 </resources>
