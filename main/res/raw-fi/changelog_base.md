@@ -8,3 +8,6 @@
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
+- New: Maintenance function reindexes and compresses database
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
