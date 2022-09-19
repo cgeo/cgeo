@@ -1,20 +1,13 @@
 
 ### Kartta
-- Korjaus: Älä näytä arkistoitujen kätköjen reittipisteiden ympyröitä
-- Uusi: Napauta vapaata karttatilaa luodaksesi reittipisteen tai käyttäjän määrittelemän kätkön, liittääksesi tai esiladataksesi yksittäisiä reittejä, näyttääksesi koordinaatit tai navigoidaksesi (kontekstista riippuen)
-- Uusi: Mahdollisuus poistaa offline-kartat
-- Korjaus: Lab adventure kohteita yksittäisillä reiteillä ei tunnisteta muokkauksen jälkeen
+- Uusi: Lisää tuki OSM:in kukkulavarjostukselle
+- Fix: Manually copied waypoints of a cache not all being displayed
 
 ### Kätkön tiedot
-- Muutos: Poista kokorajan tarkistus tallennettaessa reittipisteitä henkilökohtaisiin muistiinpanoihin
-- Fix: Väärä checksum-kaavan tulokset isoilla numeroilla
+- Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
 
 ### Yleinen
-- Uusi: Lataa / päivitä kätköjä taustalla
-- Uusi: Kopioi nykyiset koordinaatit, kun pitkään napautetaan sijaintia aloitusnäytöllä
-- Korjaus: Puuttuva matkaajien määrä hakutuloksissa
-- Uusi: Navigointimenetelmä "Muut ulkoiset sovellukset (vain koordinaatit)" ulkoisen navigointisovelluksen vain koordinaateilla avaamiseen (auttaa Here WeGo offline-tilassa)
-- Uusi: Mahdollisuus sisäkkäisten suodattimien rakentamiseen
-- Uusi: Näytä Adventure Labin seikkailun tyyppi (satunnainen / lineaarinen)
-- Uusi: Tuki asetusten määrittämiseksi sovelluksen info-ikkunasta
-- Korjaus: Tuki saman arvon valitseminen d / t suodatinalueelle
+- Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
+- New: Maintenance function reindexes and compresses database
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
