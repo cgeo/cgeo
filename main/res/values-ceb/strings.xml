@@ -238,9 +238,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d mga minuto</item>
     </plurals>
-    <string name="caches_store_offline">Gitipigan sa Offline</string>
-    <string name="caches_store_all">Itipig Tanan</string>
-    <string name="caches_store_selected">Ang napilian nga Store</string>
     <string name="caches_history">Ang mga niaagi</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Han-ayon</string>
