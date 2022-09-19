@@ -8,3 +8,6 @@
 
 ### Generale
 - Nuovo: Supporto ai download generici per i link con prefisso "mf-v4-map" e "mf-theme" (aggiornamento automatico non supportato)
+- New: Maintenance function reindexes and compresses database
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
