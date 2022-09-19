@@ -347,9 +347,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minutos</item>
     </plurals>
-    <string name="caches_store_offline">Guardar sin conexión</string>
-    <string name="caches_store_all">Guardar todos</string>
-    <string name="caches_store_selected">Guardar seleccionados</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Ver en mapa</string>
     <string name="caches_sort">Ordenar</string>
