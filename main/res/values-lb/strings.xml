@@ -295,9 +295,6 @@
         <item quantity="one">%d Minutt</item>
         <item quantity="other">%d Minutten</item>
     </plurals>
-    <string name="caches_store_offline">Offline späicheren</string>
-    <string name="caches_store_all">Alles späicheren</string>
-    <string name="caches_store_selected">Auswal späicheren</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
     <string name="caches_sort">Sortéieren</string>
