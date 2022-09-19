@@ -1,20 +1,13 @@
 
 ### Žemėlapis
-- Pataisymas: nerodoma atstumo apskritimų archyvuotų slėptuvių kelio taškams
-- Nauja: bakstelėkite laisvą žemėlapio vietą, kad sukurtumėte maršruto tašką arba vartotojo nustatytą talpyklą, pridėtumėte arba pridėtumėte prie atskiro maršruto, rodytumėte koordinates arba naršytumėte (atsižvelgiant į kontekstą)
-- Nauja: galimybė ištrinti neprisijungus pasiekiamus žemėlapius
-- Pataisymas: Lab adventure elementai atskiruose maršrutuose po redagavimo neatpažinti kaip tokie
+- Naujiena: pridėtas reljefo šešėlių palaikymas OSM
+- Fix: Manually copied waypoints of a cache not all being displayed
 
 ### Slėptuvės detalės
-- Pakeista: pašalinkite dydžio ribos patikrinimą, kai laikote kelio taškus asmeniniuose užrašuose
-- Pataisymas: esant dideliems skaičiams, gaunama neteisinga kontrolinės sumos formulė
+- Pakeista: rodyti įkėlimo indikatorių žurnalo veikloje, kol vyksta reikiamų duomenų gavimas
 
 ### Bendras
-- Nauja: atsisiųskite/atnaujinkite slėptuves fone
-- Nauja: nukopijuokite dabartines koordinates, kai pagrindiniame ekrane ilgai spustelėsite vietą
-- Pataisyta: paieškos rezultatuose trūksta keliauninkų skaičiaus
-- Nauja: naršymo metodas „Kitos išorinės programos (tik koordinatės)“, norint iškviesti išorinę navigacijos programą tik su koordinatėmis (padeda „Here WeGo“ neprisijungus)
-- Nauja: galimybė kurti įdėtus filtrus
-- Nauja: Rodyti Lab adventure režimą (atsitiktinis / linijinis)
-- Nauja: palaikomas nustatymų konfigūravimas programos informacijos lange
-- Pataisymas: palaikomas tos pačios vertės pasirinkimas s/v filtro diapazonui
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- New: Maintenance function reindexes and compresses database
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
