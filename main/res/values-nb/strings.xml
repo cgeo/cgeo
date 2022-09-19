@@ -350,9 +350,6 @@
         <item quantity="one">%d minutt</item>
         <item quantity="other">%d minutter</item>
     </plurals>
-    <string name="caches_store_offline">Lagre lokalt</string>
-    <string name="caches_store_all">Lagre alle</string>
-    <string name="caches_store_selected">Lagre valgte</string>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>
