@@ -35,7 +35,7 @@
     <string name="gps">Labirynt Przygód GPS</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Skrytka bezlokacyjna (Odwrotna)</string>
-    <string name="advlab">Skrytka Przygodowa</string>
+    <string name="advlab">Skrytka Lab</string>
     <string name="userdefined">Skrytka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
     <string name="all_types_short">Wszystkie</string>
@@ -58,7 +58,7 @@
     <string name="gps_short">GPS Exhibit</string>
     <string name="block_short">GCHQ Block</string>
     <string name="locationless_short">Bez lokalizacji</string>
-    <string name="advlab_short">Przygodowa</string>
+    <string name="advlab_short">Lab</string>
     <string name="userdefined_short">Użytkownika</string>
     <string name="unknown_short">Nieznana</string>
     <!-- cache sizes -->
@@ -697,8 +697,8 @@
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrytek.</string>
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrytek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Autoryzuj c:geo z geocaching.su aby wyszukać skrytki.</string>
-    <string name="settings_lc_description">Wyświetlaj Skrytki Przygodowe na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
-    <string name="lc_default_description">To jest Skrytka Przygodowa z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Przygodowych na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
+    <string name="settings_lc_description">Wyświetlaj Skrytki Lab na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
+    <string name="lc_default_description">To jest Skrytka Lab z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Lab na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Załaduj skrzynki z opencaching.de</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
     <string name="init_summary_oc_pl">Załaduj skrzynki z opencaching.pl</string>
