@@ -353,12 +353,10 @@
         <item quantity="one">%d dakika</item>
         <item quantity="other">%d dakika</item>
     </plurals>
-    <string name="caches_store_offline">Çevrimdışı kaydet</string>
-    <string name="caches_store_all">Tümünü Depola</string>
-    <string name="caches_store_selected">Geocache\'ler Seçildi</string>
     <string name="caches_store_background_title">Cache\'leri indir</string>
     <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
     <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
+    <string name="caches_store_background_option_refresh">Yenile ve listeye ekle</string>
     <string name="caches_store_background_result_failed">İndirme başarısız, %1$d/%2$d cache indirildi</string>
     <string name="caches_store_background_result_canceled">İndirme iptal edildi, %1$d/%2$d cache indirildi</string>
     <plurals name="caches_store_background_result">
@@ -637,6 +635,7 @@
     <string name="settings_title_map">Harita</string>
     <string name="settings_summary_map">Harita kaynağını, çevrimdışı harita ayarlarını ve harita detaylarını ayarlayın.</string>
     <string name="settings_title_map_data">Harita verileri</string>
+    <string name="settings_title_offline_maps">Çevrimdışı haritalar</string>
     <string name="settings_title_offline_routing">Çevrimdışı yönlendirme</string>
     <string name="settings_summary_offline_routing">Çevrim dışı yönlendirme \"BRouter\" yardımcı uygulaması yüklü olduğunda ve yapılandırıldığında veya dahili yönlendirme etkinleştirildiği zaman mevcut olacaktır.</string>
     <string name="settings_title_map_rotation">Harita açısı (Google Maps)</string>
@@ -716,6 +715,7 @@
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
+    <string name="init_signature_template_day_of_week">Haftanın Günü</string>
     <string name="init_signature_template_datetime">Tarih &amp; Saat</string>
     <string name="init_signature_template_user">Kullanıcı</string>
     <string name="init_signature_template_number">Bulma sırası</string>
@@ -756,6 +756,7 @@
     <string name="init_useInternalRouting">Dahili rotalamayı kullan</string>
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Büyük simgeler</string>
+    <string name="init_dtMarkerOnCacheIcon">Geocache simgelerinde Z/A</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_prevent_cache_note_merge">Kişisel Cache Notu Üzerine Yaz</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
@@ -1253,6 +1254,9 @@
     <string name="cache_description_updated">Geocache açıklaması güncellendi</string>
     <string name="cache_type">Tür</string>
     <string name="cache_size">Boyut</string>
+    <string name="cache_mode">Mod</string>
+    <string name="cache_mode_linear">Doğrusal</string>
+    <string name="cache_mode_random">Rastgele</string>
     <string name="cache_distance">Mesafe</string>
     <string name="cache_difficulty">Zorluk</string>
     <string name="cache_terrain">Arazi</string>

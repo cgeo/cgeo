@@ -355,9 +355,6 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minuter</item>
     </plurals>
-    <string name="caches_store_offline">Spara för Offline</string>
-    <string name="caches_store_all">Spara alla</string>
-    <string name="caches_store_selected">Spara valda</string>
     <string name="caches_store_background_title">Ladda ned cacher</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>

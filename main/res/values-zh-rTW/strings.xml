@@ -330,9 +330,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 分钟</item>
     </plurals>
-    <string name="caches_store_offline">离线存储</string>
-    <string name="caches_store_all">全部儲存</string>
-    <string name="caches_store_selected">儲存所選的</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>

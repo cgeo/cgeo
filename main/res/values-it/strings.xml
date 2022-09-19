@@ -355,9 +355,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuti</item>
     </plurals>
-    <string name="caches_store_offline">Salva per Offline</string>
-    <string name="caches_store_all">Archiviare tutto</string>
-    <string name="caches_store_selected">Salva selezionati</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
@@ -647,6 +644,8 @@
     <string name="settings_title_map">Mappa</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
+    <string name="settings_title_offline_maps">Mappe offline</string>
+    <string name="settings_title_map_themes">Temi mappa offline e ombreggiatura dei rilievi</string>
     <string name="settings_title_offline_routing">Navigazione offline</string>
     <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
@@ -732,6 +731,7 @@
     <string name="init_signature_template_button">Inserire segnaposto</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
+    <string name="init_signature_template_day_of_week">Giorno della settimana</string>
     <string name="init_signature_template_datetime">Data e Ora</string>
     <string name="init_signature_template_user">Utente</string>
     <string name="init_signature_template_number">Numero cache</string>
@@ -943,6 +943,7 @@
     <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
     <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
     <string name="init_mapshading_folder">Cartella File Di ombreggiatura della Mappa</string>
+    <string name="init_mapshading_folder_text">Le mappe off-line possono essere sovrepposte da curve di livello. Queste informazioni sono fornite come file hgt/dem che possono essere posizionati in questa cartella.</string>
     <string name="init_mapShadingLinearity_title">Linearità di Ombreggiatura</string>
     <string name="init_mapShadingLinearity_description">Piccoli valori accentuano il contrasto in pendii ripidi, ma nascondono cambiamenti nelle zone pianeggianti, grandi valori lo rendono più lineare</string>
     <string name="init_mapShadingScale_title">Opacità Ombreggiatura</string>

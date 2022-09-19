@@ -353,9 +353,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 분</item>
     </plurals>
-    <string name="caches_store_offline">오프라인으로 저장</string>
-    <string name="caches_store_all">모두 저장</string>
-    <string name="caches_store_selected">선택한 것 저장</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>

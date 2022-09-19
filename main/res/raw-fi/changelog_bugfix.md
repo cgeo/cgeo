@@ -1,5 +1,9 @@
 ##
 
+- Fix: Deleted user-defined caches are not deleted on c:geo restart
+
+##
+
 - Korjaa: Tyhjän kuvakkeen näkyminen järjestelmän reittipisteiden nimen muokkauksessa
 - Korjaa: Kaatuminen 'Lisää kirjanmerkkiin' vianetsintätilassa
 - Fix: Decimal values separated by = being parsed as coords

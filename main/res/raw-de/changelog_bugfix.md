@@ -1,5 +1,9 @@
 ##
 
+- Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
+
+##
+
 - Korrektur: 'Löschen'-Icon wird im Namensfeld für System-Wegpunkte angezeigt
 - Korrektur: Absturz bei 'Lesezeichen hinzufügen' im Debug-Modus
 - Korrektur: Durch = getrennte Dezimalwerte werden als Koordinaten erkannt

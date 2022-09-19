@@ -1,5 +1,9 @@
 ##
 
+- Fix: Deleted user-defined caches are not deleted on c:geo restart
+
+##
+
 - 수정: 시스템 지점에 대한 이름 편집 시 지우기 아이콘이 표시됨
 - 수정: 디버그 모드에서 '북마크에 추가' 시 충돌
 - 수정: =로 구분된 10진수 값이 좌표로 구문 분석됨

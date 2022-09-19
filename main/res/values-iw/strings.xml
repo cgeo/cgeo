@@ -263,9 +263,6 @@
         <item quantity="many">%d דקות</item>
         <item quantity="other">%d דקות</item>
     </plurals>
-    <string name="caches_store_offline">שמור במצב לא מקוון</string>
-    <string name="caches_store_all">שמור הכל</string>
-    <string name="caches_store_selected">שמור נבחרים</string>
     <string name="caches_history">היסטוריה</string>
     <string name="caches_on_map">הצג במפה</string>
     <string name="caches_sort">מיין</string>

@@ -356,9 +356,6 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minuts</item>
     </plurals>
-    <string name="caches_store_offline">Desa per usar fora de línia</string>
-    <string name="caches_store_all">Desar-ho tot</string>
-    <string name="caches_store_selected">Desa els seleccionats</string>
     <string name="caches_store_background_title">Descarregar catxés</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>

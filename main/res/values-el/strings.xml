@@ -351,9 +351,6 @@
         <item quantity="one">%d λεπτό</item>
         <item quantity="other">%dλεπτά</item>
     </plurals>
-    <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
-    <string name="caches_store_all">Αποθήκευση όλων</string>
-    <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
