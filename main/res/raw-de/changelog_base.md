@@ -11,3 +11,4 @@
 - Neu: Wartungsfunktion reindiziert und komprimiert Datenbank
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
+- Fix: Deleted user-defined caches are not deleted on c:geo restart
