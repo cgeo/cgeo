@@ -8,3 +8,6 @@
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
+- New: Maintenance function reindexes and compresses database
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
