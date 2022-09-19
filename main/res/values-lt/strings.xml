@@ -557,7 +557,7 @@
     <string name="cache_filter_status_select_yes">Taip</string>
     <string name="cache_filter_status_select_no">Ne</string>
     <string name="cache_filter_status_select_label_found">Rasta</string>
-    <string name="cache_filter_status_select_label_owned">Priklauso</string>
+    <string name="cache_filter_status_select_label_owned">Nuosavos</string>
     <string name="cache_filter_status_select_label_stored">Išsaugota</string>
     <string name="cache_filter_status_select_label_favorite">Nuosavas mėgstamiausias</string>
     <string name="cache_filter_status_select_label_watchlist">Stebimas</string>
@@ -656,6 +656,7 @@
     <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus pasiekiamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
+    <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
     <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Kelio taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
@@ -671,6 +672,7 @@
     <string name="confirm_data_dir_move">Slėptuvių duomenų perkėlimas gali užtrukti, priklausomai nuo jūsų įrenginio ir duomenų apimties.</string>
     <string name="settings_title_basicmembers">Parinktys paprastiesiems nariams</string>
     <string name="settings_title_navigation">Maršrutas / Navigacija</string>
+    <string name="settings_summary_navigation">Konfigūruokite maršrutą neprisijungus, pasirinkite pageidaujamus navigavimo būdus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Specifiniai sistemos nustatymai ir derinimo parinktys.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
@@ -692,6 +694,7 @@
     <string name="settings_gc_description">Leiskite c:geo prisijungti prie geocaching.com tam, kad galėtumėt ieškoti slėptuvių.</string>
     <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="settings_su_description">Leiskite c:geo prisijungti prie geocaching.su tam, kad galėtumėt ieškoti slėptuvių.</string>
+    <string name="settings_lc_description">Į žemėlapį įtraukite Adventure Lab slėptuves.\n\n(Galima tik \"Geocaching.com\" Premium nariams. Reikia suaktyvinti \"Geocaching.com\" paslaugą.)\n\nNorint pakeisti šį nustatymą, reikia paleisti iš naujo.</string>
     <string name="init_summary_oc_de">Įkelti slėptuves iš opencaching.de</string>
     <string name="init_oc_de_description">Leiskite c:geo prisijungti prie opencaching.de tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="init_summary_oc_pl">Įkelti slėptuves iš opencaching.pl</string>
@@ -731,6 +734,8 @@
     <string name="init_log_templates">Įrašo šablonai</string>
     <string name="init_log_template_prefix">Šablonas:\u0020</string>
     <string name="init_log_template_missing_error">Reikia pateikti ir šablono pavadinimą, ir tekstą.</string>
+    <string name="init_template_help">Vietos rezervavimo eilutės, pvz., [NAME], užpildomos nurodytu tekstu, kai naudojamas šablonas.</string>
+    <string name="init_signature_template_button">Įterpti rezervuotąją vietą</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Laikas</string>
     <string name="init_signature_template_datetime">Data ir laikas</string>
@@ -759,13 +764,18 @@
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų kelio taškai.</string>
     <string name="init_zoomincludingwaypoints">Priartinimas su kelio taškais</string>
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
+    <string name="init_brouterThreshold_description">Didžiausias atstumas, iki kurio bus apskaičiuotas maršrutas neprisijungus.</string>
     <string name="init_brouterShowBothDistances">Rodyti tiesų atstumą</string>
     <string name="init_autoDownloads">Automatinis siuntimas</string>
+    <string name="init_brouterAutoTileDownloads_description">Automatiškai pasiūlyti atsisiųsti trūkstamus maršruto duomenis.</string>
     <string name="init_brouterProfileWalk">„Vaikščiojimo“ profilis</string>
     <string name="init_brouterProfileBike">\"Dviračio\" profilis</string>
     <string name="init_brouterProfileCar">\"Automobilio\" profilis</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone…</string>
+    <string name="brouter_missing_data">Atidarykite BRouter, kad atsisiųstumėte trūkstamus maršruto duomenis (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
+    <string name="init_useInternalRouting">Naudoti vidinį maršrutizavimą</string>
+    <string name="init_summary_useInternalRouting">Naudokite c:geo vidinį maršrutizavimą, kad galėtumėte naudoti automatinį maršruto duomenų atsisiuntimą ir kitas funkcijas</string>
     <string name="init_bigSmileysOnMap">Didelės piktogramos</string>
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
@@ -1548,6 +1558,7 @@
     <string name="map_show_caches_title">Rodyti slėptuves:</string>
     <string name="map_show_waypoints_title">Rodyti kelio taškus:</string>
     <string name="map_show_other_title">Rodyti kitus:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Slėptuvės filtras per sudėtingas</string>
     <string name="map_settings_cache_filter_too_complex_message">Dabartinis slėptuvės filtras yra per sudėtingas, kad čia būtų galima pritaikyti papildomas parinktis. Paprastai tai reiškia, kad slėptuvės filtre vietoj paprastos IR logikos yra išraiškų NE arba ARBA.</string>
     <string name="map_theme_legend">Temos legenda</string>
     <string name="map_theme_legend_info">Norėdami atidaryti / uždaryti kategoriją, bakstelėkite kategorijos pavadinimą. Norėdami gauti trumpos informacijos apie simbolį, ilgai palieskite simbolį. Bakstelėkite informacijos piktogramą, kad aplankytumėte išsamią legendą internete.</string>
@@ -1977,6 +1988,7 @@
     <string name="faq_title">DUK</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nBakstelėkite, kad įdiegtumėte.</string>
+    <string name="status_new_rc" tools:ignore="UnusedResources">Galimas naujas leidimas.\nPalieskite, kad įdiegtumėte.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com pakeitimai sukelia problemų gyvame žemėlapyje.\nMes žinome ir dirbame su tuo, skirkite mums šiek tiek laiko!</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Jūs naudojate senesnę Android versiją. Ši c:geo versija nebesuderinama su jūsų įrenginiu ir gali neveikti arba netikėtai elgtis.\nNorėdami gauti daugiau informacijos, bakstelėkite šį pranešimą.</string>
     <!-- text-to-speech for compass view -->
@@ -2239,6 +2251,7 @@
     <string name="downloadmap_retrieving_directory_data">Gaunami aplanko duomenys…</string>
     <string name="downloadmap_checking_for_updates">Ieškoma atnaujinimų…</string>
     <string name="downloadtile_title">Trūksta maršrutizavimo duomenų</string>
+    <string name="check_tiles_missing">Trūksta maršruto duomenų:\n%1$s\n\nAr norite atsisiųsti trūkstamus failus?%2$s</string>
     <string name="check_tiles_unsupported">Įspėjimas: Maršruto duomenys bent iš dalies nepasiekiami pasirinktame regione</string>
     <string name="tileupdate_info">Bakstelėkite čia norėdami patikrinti, ar nėra atsisiųstų maršruto duomenų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>
     <string name="mapupdate_info">Bakstelėkite čia, kad patikrintumėte, ar nėra žemėlapių ir temų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>
