@@ -355,9 +355,6 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minuter</item>
     </plurals>
-    <string name="caches_store_offline">Spara för Offline</string>
-    <string name="caches_store_all">Spara alla</string>
-    <string name="caches_store_selected">Spara valda</string>
     <string name="caches_store_background_title">Ladda ned cacher</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>
@@ -2641,16 +2638,4 @@
     <string name="smiley_approve">Godkänd</string>
     <string name="smiley_disapprove">Ej godkänd</string>
     <string name="smiley_question">Fråga</string>
-    <string name="smiley_cry">Gråta</string>
-    <string name="smiley_embarassed">Generad</string>
-    <string name="smiley_footinmouth">Bortgjord</string>
-    <string name="smiley_innocent">Oskyldig</string>
-    <string name="smiley_kiss">Kyss</string>
-    <string name="smiley_laughing">Skrattar</string>
-    <string name="smiley_money">Pengar</string>
-    <string name="smiley_sealed">Förseglad</string>
-    <string name="smiley_surprised">Förvånad</string>
-    <string name="smiley_tongueout">Tungan ut</string>
-    <string name="smiley_undecided">Tveksam</string>
-    <string name="smiley_yell">Skriker</string>
 </resources>
