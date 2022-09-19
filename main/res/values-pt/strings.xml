@@ -356,8 +356,8 @@
         <item quantity="other">%d minutos</item>
     </plurals>
     <string name="caches_store_offline">Armazenar para uso offline</string>
-    <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
-    <string name="caches_store_selected">Memorizar seleccionada(s)</string>
+    <string name="caches_store_offline_map">Armazenar as caches para utilização offline</string>
+    <string name="caches_store_selected">Armazenar seleccionada(s)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
@@ -647,6 +647,8 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
+    <string name="settings_title_offline_maps">Mapas offline</string>
+    <string name="settings_title_map_themes">Temas de mapa offline &amp; sombreado de montes e montanhas</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
@@ -732,6 +734,7 @@
     <string name="init_signature_template_button">Inserir Espaço Reservado</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
+    <string name="init_signature_template_day_of_week">Dia da semana</string>
     <string name="init_signature_template_datetime">Data &amp; Hora</string>
     <string name="init_signature_template_user">Utilizador</string>
     <string name="init_signature_template_number">Número</string>
@@ -942,10 +945,17 @@
     <string name="init_use_native_ua">Browser do Android</string>
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
+    <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
+    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que têm de ser colocados nesta pasta.</string>
+    <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
+    <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
+    <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
+    <string name="init_mapShadingScale_description">A opacidade da camada de sombreado, do invisível para valores mais altos que se intensificam, mas pode produzir artefactos</string>
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
+    <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
@@ -1048,6 +1058,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapas offline</string>
     <string name="persistablefolder_offline_maps_themes">Temas de mapa</string>
+    <string name="persistablefolder_offline_maps_shading">Ficheiros para sombreado de mapas</string>
     <string name="persistablefolder_backup">Cópia de segurança</string>
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
@@ -2213,6 +2224,8 @@
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
     <string name="downloadmap_themefile">ficheiro de tema</string>
     <string name="downloadmap_tilefile">ficheiro dos dados de encaminhamento</string>
+    <string name="downloadmap_othermapdownload">outra transferência de mapa</string>
+    <string name="downloadmap_otherthemedownload">outra transferência de tema</string>
     <string name="downloadmap_download">transferir</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
@@ -2663,16 +2676,4 @@
     <string name="smiley_approve">Aprovado</string>
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
-    <string name="smiley_cry">Chorar</string>
-    <string name="smiley_embarassed">Envergonhado</string>
-    <string name="smiley_footinmouth">Pé na boca</string>
-    <string name="smiley_innocent">Inocente</string>
-    <string name="smiley_kiss">Beijo</string>
-    <string name="smiley_laughing">Gargalhadas</string>
-    <string name="smiley_money">Dinheiro</string>
-    <string name="smiley_sealed">Selado</string>
-    <string name="smiley_surprised">Surpreso</string>
-    <string name="smiley_tongueout">Língua de fora</string>
-    <string name="smiley_undecided">Indeciso</string>
-    <string name="smiley_yell">Gritar</string>
 </resources>
