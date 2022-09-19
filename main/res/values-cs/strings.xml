@@ -969,6 +969,7 @@
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
     <string name="init_maintenance_start">Údržba zahájena</string>
+    <string name="init_maintenance_ongoing">To může nějakou dobu trvat…</string>
     <string name="init_maintenance_finished">Údržba dokončena</string>
     <string name="init_location">Geolokace</string>
     <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
