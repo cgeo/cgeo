@@ -355,9 +355,6 @@
         <item quantity="one">%d minuutti</item>
         <item quantity="other">%d minuuttia</item>
     </plurals>
-    <string name="caches_store_offline">Tallenna offline</string>
-    <string name="caches_store_all">Tallenna kaikki</string>
-    <string name="caches_store_selected">Tallenna valitut</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
@@ -647,6 +644,8 @@
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
+    <string name="settings_title_offline_maps">Offline-kartat</string>
+    <string name="settings_title_map_themes">Offline-kartan teemat &amp; kukkuloiden varjostus</string>
     <string name="settings_title_offline_routing">Offline-reititys</string>
     <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
@@ -732,6 +731,7 @@
     <string name="init_signature_template_button">Aseta paikanpitäjämerkki</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
+    <string name="init_signature_template_day_of_week">Viikonpäivä</string>
     <string name="init_signature_template_datetime">Päivämäärä &amp; aika</string>
     <string name="init_signature_template_user">Käyttäjä</string>
     <string name="init_signature_template_number">Numero</string>
@@ -942,6 +942,12 @@
     <string name="init_use_native_ua">Android-selain</string>
     <string name="init_summary_use_native_ua">Näyttäydy Android-selaimena. Ratkaisee kirjautumisongelmia eräillä sivustoilla.</string>
     <string name="init_rendertheme_folder">Karttateemat sisältävä kansio</string>
+    <string name="init_mapshading_folder">Karttavarjostustiedostojen kansio</string>
+    <string name="init_mapshading_folder_text">Offline-kartat voidaan päällystää korkeustiedoilla. Nämä tiedot annetaan hgt/dem tiedostoina, jotka on sijoitettava tähän kansioon.</string>
+    <string name="init_mapShadingLinearity_title">Varjostuksen lineaarisuus</string>
+    <string name="init_mapShadingLinearity_description">Pienet arvot korostavat kontrastia jyrkillä rinteillä, mutta piilottavat muutokset loivissa, suuret arvot tekevät siitä lineaarisemman</string>
+    <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
+    <string name="init_mapShadingScale_description">Varjostuskerroksen läpikuultavuus näkymättömistä korkeampiin arvoihin tehostaen varjostusta, mutta se voi tuottaa virheitä</string>
     <string name="init_maintenance">Ylläpito</string>
     <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
     <string name="init_maintenance_directories">Poista orpotiedostot</string>
@@ -1048,6 +1054,7 @@
     <string name="persistablefolder_base">Juuri</string>
     <string name="persistablefolder_offline_maps">Offline-kartat</string>
     <string name="persistablefolder_offline_maps_themes">Karttateemat</string>
+    <string name="persistablefolder_offline_maps_shading">Karttavarjostustiedostot</string>
     <string name="persistablefolder_backup">Varmuuskopiointi</string>
     <string name="persistablefolder_logfiles">Lokitiedostot</string>
     <string name="persistablefolder_fieldnotes">Kenttämerkinnät</string>
@@ -2218,6 +2225,8 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
+    <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>
     <string name="downloadmap_retrieving_directory_data">Haetaan kansion tietoja…</string>
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
@@ -2668,16 +2677,4 @@
     <string name="smiley_approve">Hyväksytty</string>
     <string name="smiley_disapprove">Hylätty</string>
     <string name="smiley_question">Kysymys</string>
-    <string name="smiley_cry">Itku</string>
-    <string name="smiley_embarassed">Nolostunut</string>
-    <string name="smiley_footinmouth">Jalka suussa</string>
-    <string name="smiley_innocent">Viaton</string>
-    <string name="smiley_kiss">Pusu</string>
-    <string name="smiley_laughing">Nauru</string>
-    <string name="smiley_money">Raha</string>
-    <string name="smiley_sealed">Sinetöity</string>
-    <string name="smiley_surprised">Yllättynyt</string>
-    <string name="smiley_tongueout">Kieli ulos</string>
-    <string name="smiley_undecided">Epävarma</string>
-    <string name="smiley_yell">Huuto</string>
 </resources>
