@@ -356,7 +356,7 @@
         <item quantity="other">%d Minuten</item>
     </plurals>
     <string name="caches_store_offline">Offline speichern</string>
-    <string name="caches_store_all">Alle speichern</string>
+    <string name="caches_store_offline_map">Caches offline speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
     <string name="caches_store_background_title">Caches herunterladen</string>
     <string name="caches_store_background_already_stored">Einige Caches sind bereits gespeichert. Was soll mit ihnen geschehen?</string>
@@ -647,6 +647,8 @@
     <string name="settings_title_map">Karte</string>
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
+    <string name="settings_title_offline_maps">Offline-Karten</string>
+    <string name="settings_title_map_themes">Designs für Offline-Karten &amp; Kartenschattierung</string>
     <string name="settings_title_offline_routing">Offline-Routing</string>
     <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
@@ -732,6 +734,7 @@
     <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
+    <string name="init_signature_template_day_of_week">Wochentag</string>
     <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
     <string name="init_signature_template_user">Benutzer</string>
     <string name="init_signature_template_number">Nummer</string>
@@ -942,10 +945,17 @@
     <string name="init_use_native_ua">Android-Browser</string>
     <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
     <string name="init_rendertheme_folder">Ordner für Kartendesigns</string>
+    <string name="init_mapshading_folder">Ordner für Kartenschattierungs-Dateien</string>
+    <string name="init_mapshading_folder_text">Offline-Karten können mit Höheninformationen überlagert werden, bereitgestellt durch hgt/dem-Dateien, die in diesem Ordner abgelegt werden müssen.</string>
+    <string name="init_mapShadingLinearity_title">Schattierungslinearität</string>
+    <string name="init_mapShadingLinearity_description">Kleine Werte betonen den Kontrast in steilen Hängen aber verbergen Unterschiede in der Ebene, große Werte sind linearer</string>
+    <string name="init_mapShadingScale_title">Schattierungsdeckkraft</string>
+    <string name="init_mapShadingScale_description">Deckkraft der Schattierungsebene, von unsichtbar über höhere Werte zunehmend intensiver, kann aber Artefakte hervorbringen</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
     <string name="init_maintenance_start">Wartung gestartet</string>
+    <string name="init_maintenance_ongoing">Dies kann einige Zeit dauern…</string>
     <string name="init_maintenance_finished">Wartung beendet</string>
     <string name="init_location">Positionierung</string>
     <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
@@ -1048,6 +1058,7 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline-Karten</string>
     <string name="persistablefolder_offline_maps_themes">Kartendesigns</string>
+    <string name="persistablefolder_offline_maps_shading">Kartenschattierungsdateien</string>
     <string name="persistablefolder_backup">Sicherung</string>
     <string name="persistablefolder_logfiles">Logdateien</string>
     <string name="persistablefolder_fieldnotes">Feldnotizen</string>
@@ -2218,6 +2229,8 @@
     <string name="downloadmap_mapfile">Karte</string>
     <string name="downloadmap_themefile">Kartendesign-Datei</string>
     <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_othermapdownload">Anderer Kartendownload</string>
+    <string name="downloadmap_otherthemedownload">Anderer Designdownload</string>
     <string name="downloadmap_download">Download</string>
     <string name="downloadmap_retrieving_directory_data">Empfange Ordnerdaten…</string>
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
@@ -2668,16 +2681,4 @@
     <string name="smiley_approve">Zustimmung</string>
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
-    <string name="smiley_cry">Weinen</string>
-    <string name="smiley_embarassed">Peinlich</string>
-    <string name="smiley_footinmouth">Maulkorb</string>
-    <string name="smiley_innocent">Unschuldig</string>
-    <string name="smiley_kiss">Kuss</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verschlossen</string>
-    <string name="smiley_surprised">Überrascht</string>
-    <string name="smiley_tongueout">Zunge raus</string>
-    <string name="smiley_undecided">Unentschlossen</string>
-    <string name="smiley_yell">Schrei</string>
 </resources>
