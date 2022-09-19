@@ -83,8 +83,9 @@ public class ImageListFragment extends Fragment {
     }
 
     private void rebuildImageTitles() {
+        // The title of the first image will vary depending on whether there is more than one image present.
+        // Therefore we always update the first element if something does change.
         if (imageList.getItemCount() > 0) {
-            // the title of the first image will vary depending on whether there is more than one image present...
             imageList.notifyItemChanged(0);
         }
     }
@@ -107,12 +108,10 @@ public class ImageListFragment extends Fragment {
                 final Image image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
                 if (deleteFlag && indexIsValid) {
                     imageList.removeItem(imageIndex);
-                    rebuildImageTitles();
                 } else if (image != null && indexIsValid) {
                     imageList.updateItem(image, imageIndex);
                 } else if (image != null) {
                     imageList.addItem(image);
-                    rebuildImageTitles();
                 }
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
@@ -167,7 +166,6 @@ public class ImageListFragment extends Fragment {
         imageHelper = new ImageActivityHelper(this.getActivity(), (r, imgs, uk) -> {
             final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> ImageUtils.toLocalLogImage(geocode, img).buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
             imageList.addItems(imagesToAdd);
-            rebuildImageTitles();
         });
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
@@ -211,6 +209,18 @@ public class ImageListFragment extends Fragment {
             super(new ManagedListAdapter.Config(recyclerView)
                     .setNotifyOnPositionChange(true)
                     .setSupportDragDrop(true));
+
+            registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onItemRangeInserted(final int positionStart, final int itemCount) {
+                    rebuildImageTitles();
+                }
+
+                @Override
+                public void onItemRangeRemoved(final int positionStart, final int itemCount) {
+                    rebuildImageTitles();
+                }
+            });
         }
 
         private void fillViewHolder(final ImageViewHolder holder, final Image image, final int position) {
@@ -258,10 +268,7 @@ public class ImageListFragment extends Fragment {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.imagelist_item, parent, false);
             final ImageViewHolder viewHolder = new ImageViewHolder(view);
             viewHolder.itemView.setOnClickListener(view1 -> addOrEditImage(viewHolder.getAdapterPosition()));
-            viewHolder.binding.imageDelete.setOnClickListener(v -> {
-                removeItem(viewHolder.getAdapterPosition());
-                rebuildImageTitles();
-            });
+            viewHolder.binding.imageDelete.setOnClickListener(v -> removeItem(viewHolder.getAdapterPosition()));
             registerStartDrag(viewHolder, viewHolder.binding.imageDrag);
             return viewHolder;
         }
