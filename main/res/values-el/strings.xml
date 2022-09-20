@@ -351,6 +351,9 @@
         <item quantity="one">%d λεπτό</item>
         <item quantity="other">%dλεπτά</item>
     </plurals>
+    <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
+    <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
+    <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
@@ -942,6 +945,7 @@
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
+    <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
     <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
     <string name="init_location">Γεωτοποθεσία</string>
     <string name="init_location_note">Σε συσκευές που διαθέτουν υπηρεσίες Google Play, το c:geo μπορεί να χρησιμοποιήσει αυτόματα ένα καλύτερο πάροχο γεωτοποθεσίας. Ωστόσο, αυτό εμποδίζει τη χρήση ενός εξωτερικού δέκτη BlueTooth GPS.</string>
