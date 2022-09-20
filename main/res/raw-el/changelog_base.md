@@ -8,6 +8,7 @@
 
 ### Γενικά
 - Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
+- Νέο: Διορθώσεις λειτουργίας reindex και συμπίεσής βάσης δεδομένων
+- Διόρθωση: Λεπτομέρειεςτοποθεσίας
+- Αλλαγή: Αφαίρεση διακόπτη γλώσσας ιστοχώρου
+- Διόρθωση: Οι διαγραμμένες κρύπτες δε διαγράφονταν σε επανεκκίνηση του c:geo
