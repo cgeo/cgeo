@@ -11,4 +11,4 @@
 - New: Maintenance function reindexes and compresses database
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Poprawka: Usunięte skrytki zdefiniowane przez użytkownika nie były usuwane przy ponownym uruchomieniu c:geo
