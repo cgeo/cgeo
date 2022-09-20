@@ -353,6 +353,9 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 분</item>
     </plurals>
+    <string name="caches_store_offline">오프라인으로 저장</string>
+    <string name="caches_store_offline_map">캐시는 오프라인으로 저장</string>
+    <string name="caches_store_selected">선택한 것 저장</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
@@ -945,6 +948,7 @@
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
     <string name="init_maintenance_start">유지 보수 시작됨</string>
+    <string name="init_maintenance_ongoing">시간이 좀 걸릴 수 있습니다…</string>
     <string name="init_maintenance_finished">유지 보수 완료</string>
     <string name="init_location">위치 정보</string>
     <string name="init_location_note">구글플레이 서비스를 장착한 기기의 경우, c:geo는 자동적으로 더 나은 위치정보 제공자를 사용합니다. 하지만, 이렇게 하면 외부 블루투스 GPS 수신기를 사용할 수 없습니다.</string>
