@@ -8,6 +8,7 @@
 
 ### Bendras
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
+- Naujiena: Aptarnavimo funkcija iš naujo indeksuoja ir suspaudžia duomenų bazę
+- Pataisymas: valdyti trūkstamą vietos leidimą
+- Pakeitimas: pašalintas svetainės kalbos jungiklis
+- Pataisymas: Ištrintos vartotojo nustatytos slėptuvės neištrinamos paleidus c:geo iš naujo
