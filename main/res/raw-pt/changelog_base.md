@@ -10,4 +10,5 @@
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
 - New: Maintenance function reindexes and compresses database
 - Fix: Handle missing fine location permission
-- Change: Website language switch removed
+- Alteração: removida opção de mudança de idioma do sítio Web
+- Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
