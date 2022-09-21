@@ -1,13 +1,13 @@
 
 ### Žemėlapis
 - Naujiena: pridėtas reljefo šešėlių palaikymas OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Pataisymas: ne visi rodomi rankiniu būdu nukopijuoti slėptuvių kelio taškai
 
 ### Slėptuvės detalės
 - Pakeista: rodyti įkėlimo indikatorių žurnalo veikloje, kol vyksta reikiamų duomenų gavimas
 
 ### Bendras
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
 - Naujiena: Aptarnavimo funkcija iš naujo indeksuoja ir suspaudžia duomenų bazę
 - Pataisymas: valdyti trūkstamą vietos leidimą
 - Pakeitimas: pašalintas svetainės kalbos jungiklis
