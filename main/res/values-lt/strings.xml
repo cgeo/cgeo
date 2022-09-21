@@ -33,7 +33,7 @@
     <string name="gchq">Geocaching HQ</string>
     <string name="gchqceleb">Geocaching HQ šventė</string>
     <string name="gps">GPS nuotykių paroda</string>
-    <string name="block">Geocaching HQ Block Party</string>
+    <string name="block">Geocaching HQ Block vakarėlis</string>
     <string name="locationless">Slėptuvė be koordinačių (atvirkštinė)</string>
     <string name="advlab">Adventure Lab slėptuvė</string>
     <string name="userdefined">Vartotojo nustatyta slėptuvė</string>
@@ -54,7 +54,9 @@
     <string name="communceleb_short">Bendruomenė</string>
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ šventė</string>
     <string name="gps_short">GPS Exhibit</string>
+    <string name="block_short">GCHQ Block vakarėlis</string>
     <string name="locationless_short">Be vietos</string>
     <string name="advlab_short">Adv Lab</string>
     <string name="userdefined_short">Nustatyta vartotojo</string>
@@ -326,6 +328,7 @@
     <string name="menu_history">Istorija</string>
     <string name="menu_search_clipboard">Įkelti geokodą iš iškarpinės</string>
     <string name="menu_history_longstring">Suradimų istorija</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
@@ -597,10 +600,12 @@
         <item>7d</item>
         <item>30d</item>
     </string-array>
+    <string name="cache_filter_stored_since_stored_max">laiko pradžia</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
+    <string name="about_changelog_nightly_build">Naktinis leidimas</string>
     <string name="about_changelog_next_release">Kitas leidimas</string>
     <string name="about_changelog_bugfix_release">Klaidų taisymo leidimas</string>
     <string name="about_system">Sistema</string>
@@ -1477,6 +1482,7 @@
     <string name="variables_varname_dialog_title">Kintamojo pavadinimas (Automatinis vertimas)</string>
     <string name="variables_varname_dialog_message">Įveskite kintamojo pavadinimą (gali būti paliktas tuščias)</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Valdovo režimas</string>
     <string name="calccoord_guided_edit">Norėdami redaguoti, palieskite skaitmenį</string>
     <string name="calccoord_guided_value">Reikšmė</string>
     <string name="calccoord_convert_to_plain">Konvertuoti į paprastas koordinates</string>
@@ -1619,6 +1625,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Žymių sąrašas</string>
     <string name="search_pocket_is_new">naujas</string>
+    <string name="search_pocket_loading">Įkeliamos Pocket queries</string>
     <string name="search_bookmark_loading">Įkeliami žymių sąrašai</string>
     <string name="search_bookmark_select">Pasirinkite žymių sąrašus</string>
     <string name="search_bookmark_new">Sukurkite naują žymių sąrašą</string>
@@ -1703,6 +1710,7 @@
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paliete ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
     <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp geoslėptuvėms.</string>
+    <string name="helper_alc_description">Adventure Lab Player programa jūsų telefonui ar planšetiniam kompiuteriui.</string>
     <!-- export -->
     <string name="share_export">Dalintis/Eksportuoti</string>
     <string name="export">Eksportuoti</string>
@@ -2007,14 +2015,18 @@
     <string name="faq_title">DUK</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nBakstelėkite, kad įdiegtumėte.</string>
+    <string name="status_new_nightly" tools:ignore="UnusedResources">Galimas naujas naktinis leidimas.\nPalieskite, kad įdiegtumėte.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Galimas naujas leidimas.\nPalieskite, kad įdiegtumėte.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Pakeitimai svetainėje geocaching.com sukelia problemų c:geo.\nMes žinome ir dirbame su tuo, skirkite mums šiek tiek laiko!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com pakeitimai sukelia problemų gyvame žemėlapyje.\nMes žinome ir dirbame su tuo, skirkite mums šiek tiek laiko!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com šiuo metu nėra (visiškai) pasiekiama.\nGalite susidurti su įvairiomis c:geo problemomis.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Jūs naudojate senesnę Android versiją. Ši c:geo versija nebesuderinama su jūsų įrenginiu ir gali neveikti arba netikėtai elgtis.\nNorėdami gauti daugiau informacijos, bakstelėkite šį pranešimą.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kalbantis kompasas</string>
     <string name="tts_toggle">Įjungti kalbėjimą</string>
     <string name="tts_started">Pradėtas kalbėjimas</string>
     <string name="tts_stopped">Sustabdytas kalbėjimas</string>
+    <string name="tts_running">Kalbėjimo tarnyba veikia…</string>
     <string name="err_tts_lang_not_supported">Dabartinė kalba nepalaikoma teksto-į-kalbą.</string>
     <string name="tts_one_kilometer">vienas kilometras</string>
     <plurals name="tts_kilometers">
@@ -2150,7 +2162,9 @@
     <string name="notification_channel_proximity_description">naudojamas rodyti slėptuvėms netoliese</string>
     <string name="notification_channel_foreground_name">pirmaeilė paslauga</string>
     <string name="notification_channel_foreground_description">pranešimas rodomas, kai c:geo atlieka foninį darbą</string>
+    <string name="notification_channel_downloader_name">c:geo parsisiuntimo programa</string>
     <string name="notification_channel_downloader_description">atsisiuntimų rezultatų pranešimai (pvz., žemėlapiai neprisijungus)</string>
+    <string name="notification_channel_cache_download_name">sleptuvės parsisiuntimo programa</string>
     <string name="notification_channel_cache_download_description">slėptuvių atsisiuntimų rezultatų fono pranešimai</string>
     <string name="notification_proximity_title">c:geo priartėjimo pranešimas</string>
     <string name="notification_download_receiver_title">Importuojamas atsisiuntimas</string>
@@ -2267,6 +2281,8 @@
     <string name="downloadmap_mapfile">žemėlapio failas</string>
     <string name="downloadmap_themefile">temos failas</string>
     <string name="downloadmap_tilefile">maršrutizavimo duomenų failas</string>
+    <string name="downloadmap_othermapdownload">kitas žemėlapio atsisiuntimas</string>
+    <string name="downloadmap_otherthemedownload">kitas temos atsisiuntimas</string>
     <string name="downloadmap_download">atsisiųsti</string>
     <string name="downloadmap_retrieving_directory_data">Gaunami aplanko duomenys…</string>
     <string name="downloadmap_checking_for_updates">Ieškoma atnaujinimų…</string>
@@ -2332,6 +2348,7 @@
     <string name="wizard_advanced_offlinemaps_label">Žemėlapiai neprisijungus</string>
     <string name="wizard_advanced_offlinemaps_info">Šiame puslapyje pateikiamos kai kurios išplėstinės funkcijos, kurių naudojimas yra neprivalomas.\n\nc:geo gali atsisiųsti žemėlapio failus, skirtus naudoti neprisijungus.</string>
     <string name="wizard_advanced_routing_label">Suaktyvinkite maršruto parinkimą neprisijungus</string>
+    <string name="wizard_advanced_routing_info">c:geo turi vidinį maršruto parinkimo variklį, skirtą maršrutizavimui neprisijungus, ir gali automatiškai atsisiųsti trūkstamus maršruto duomenis.</string>
     <string name="wizard_advanced_restore_label">Atkurti</string>
     <string name="wizard_advanced_restore_info">Jei turite ankstesnio diegimo atsarginę kopiją, galite atkurti nustatymus ir (arba) geoslėptuvių duomenis.</string>
     <string name="status_not_ok">KLAIDA</string>
@@ -2363,6 +2380,7 @@
     <string name="rtl_heath">šilas</string>
     <string name="rtl_marsh">pelkė</string>
     <string name="rtl_rock">akmenys</string>
+    <string name="rtl_scree">nuobiros</string>
     <string name="rtl_scrub">krūmai</string>
     <string name="rtl_wood_mixed">medžiai (mišrūs)</string>
     <string name="rtl_wood_coniferous">medžiai (spygliuočiai)</string>
@@ -2380,19 +2398,35 @@
     <string name="rtl_cliff">skardis</string>
     <string name="rtl_ridge">ketera</string>
     <string name="rtl_reef">rifas</string>
+    <string name="rtl_dyke">pylimas</string>
+    <string name="rtl_embankment">pylimas</string>
     <string name="rtl_beach">paplūdimys</string>
     <string name="rtl_beach_gravel">žvyruotas paplūdimys</string>
     <string name="rtl_spring">šaltinis</string>
     <string name="rtl_powerline">elektros linija</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Keliai ir Takai</string>
-    <string name="rtl_unpaved_path_partly_grown">neasfaltuotas takas (iš dalies užaugęs)</string>
+    <string name="rtl_paved_path">takas su danga</string>
+    <string name="rtl_paved_path_gravel">takas su danga (žvyras)</string>
+    <string name="rtl_unpaved_path">takas be dangos</string>
+    <string name="rtl_unpaved_path_partly_grown">takas be dangos (iš dalies apaugęs)</string>
+    <string name="rtl_unpaved_path_grown">takas be dangos (apaugęs)</string>
     <string name="rtl_surface_unknown">danga nežinoma</string>
+    <string name="rtl_unpaved_footpath">pėsčiųjų takas be dangos</string>
+    <string name="rtl_paved_footpath">pėsčiųjų takas su danga</string>
+    <string name="rtl_bridleway">jojimo kelias</string>
     <string name="rtl_access_destination">prieiga (pristatymas)</string>
     <string name="rtl_access_private">prieiga (privati)</string>
+    <string name="rtl_access_agricultural">ribojamas eismas žemės ūkio / miško transportu</string>
     <string name="rtl_access_no">prieiga (ne)</string>
     <string name="rtl_cycleway">dviračių takas</string>
     <string name="rtl_cycleway_steep">dviračių takas (status)</string>
+    <string name="rtl_cycleway_paved">dviračių takas (su danga)</string>
+    <string name="rtl_paved_smooth">su danga (lygus)</string>
+    <string name="rtl_paved_rough">su danga (nelygus)</string>
+    <string name="rtl_surface_compacted">danga sutankinta</string>
+    <string name="rtl_surface_gravel">danga žvyras</string>
+    <string name="rtl_surface_raw">danga neapdorota</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Ėjimas, važiavimas dviračiu, laipiojimas</string>
     <string name="rtl_hiking_T1">ėjimas V1</string>
@@ -2544,15 +2578,117 @@
     <string name="rtl_farm_shop">ūkio parduotuvė</string>
     <string name="rtl_laundry">skalbykla</string>
     <string name="rtl_mall">prekybos centras</string>
+    <string name="rtl_marketplace">turgavietė</string>
+    <string name="rtl_organic">ekologiškas</string>
+    <string name="rtl_postbox">pašto dėžutė</string>
+    <string name="rtl_postoffice">pašto skyrius</string>
     <string name="rtl_sports_shop">sporto prekių parduotuvė</string>
+    <string name="rtl_supermarket">prekybos centras</string>
+    <string name="rtl_travel_agency">kelionių agentūra</string>
+    <string name="rtl_defibrillator">defibriliatorius</string>
+    <string name="rtl_doctors">gydytojai</string>
+    <string name="rtl_embassy">ambasada</string>
+    <string name="rtl_emergency_phone">skubios pagalbos telefonas</string>
+    <string name="rtl_firebrigade">ugniagesių brigada</string>
+    <string name="rtl_emergency_access_point">avarinės prieigos taškas</string>
+    <string name="rtl_hospital">ligoninė</string>
+    <string name="rtl_clinic">klinika</string>
+    <string name="rtl_pharmacy">vaistinė</string>
+    <string name="rtl_police">policija</string>
+    <string name="rtl_emergency_fire_hydrant">hidrantas</string>
+    <string name="rtl_emergency_suction_point">avarinis siurbimo taškas</string>
+    <string name="rtl_adit">šachta</string>
+    <string name="rtl_petroleum_well">naftos gręžinys</string>
+    <string name="rtl_power_coal">energija (anglis)</string>
+    <string name="rtl_power_gas">energija (dujos)</string>
+    <string name="rtl_power_nuclear">energija (branduolinė)</string>
+    <string name="rtl_power_water">energija (vanduo)</string>
+    <string name="rtl_power_wind">energija (vėjas)</string>
+    <string name="rtl_wastewater_plant">nuotekų įrenginys</string>
+    <string name="rtl_water_works">vandentiekis</string>
+    <string name="rtl_watermill">vandens malūnas</string>
+    <string name="rtl_weir">užtvanka</string>
+    <string name="rtl_windmill">vėjo malūnas</string>
+    <string name="rtl_windpump">vėjo pompa</string>
+    <string name="rtl_bunker">bunkeris</string>
+    <string name="rtl_farmyard">ūkio kiemas</string>
+    <string name="rtl_hunting_stand">medžioklės bokštelis</string>
+    <string name="rtl_lighthouse">švyturys</string>
+    <string name="rtl_tower_communication">ryšių bokštas</string>
+    <string name="rtl_tower_observation">apžvalgos bokštas</string>
+    <string name="rtl_kindergarten">vaikų darželis</string>
+    <string name="rtl_school">mokykla</string>
+    <string name="rtl_university">universitetas</string>
+    <string name="rtl_college">kolegija</string>
+    <string name="rtl_buddhist">budistų</string>
+    <string name="rtl_church">bažnyčia</string>
+    <string name="rtl_hindu">induistų</string>
+    <string name="rtl_mosque">mečetė</string>
+    <string name="rtl_place_of_worship">maldos vieta</string>
+    <string name="rtl_shinto">šintotas</string>
+    <string name="rtl_synagogue">sinagoga</string>
+    <string name="rtl_pow">maldos vieta</string>
+    <string name="rtl_pow_christian">krikščionių maldos vieta</string>
+    <string name="rtl_pow_jewish">žydų maldos vieta</string>
+    <string name="rtl_pow_muslim">musulmonų maldos vieta</string>
+    <string name="rtl_block">blokas</string>
+    <string name="rtl_bollard">stulpelis</string>
+    <string name="rtl_border_control">pasienio kontrolės</string>
+    <string name="rtl_bridge_movable">kilnojamas tiltas</string>
+    <string name="rtl_cave_entrance">įėjimas į urvą</string>
+    <string name="rtl_cycle_barrier">dviračio barjeras</string>
+    <string name="rtl_elevator">liftas</string>
+    <string name="rtl_ford">brasta</string>
+    <string name="rtl_ford_small">maža brasta</string>
     <string name="rtl_gate">vartai</string>
     <string name="rtl_gate_private">privatūs vartai</string>
     <string name="rtl_geyser">geizeris</string>
     <string name="rtl_hot_spring">karštoji versmė</string>
+    <string name="rtl_kissing_gate">vartai žmonėms</string>
     <string name="rtl_ladder">kopėčios</string>
+    <string name="rtl_lift_gate">pakeliami vartai</string>
     <string name="rtl_log">įrašas</string>
     <string name="rtl_oneway">vienpusis</string>
+    <string name="rtl_oneway_cycle">vienpusis (dviračių)</string>
+    <string name="rtl_oneway_cycle_rev">vienpusis (dviračių, atgal)</string>
+    <string name="rtl_oneway_rev">vienpusis (atgal)</string>
+    <string name="rtl_peak_small">maža viršūnė</string>
+    <string name="rtl_rapids">sraunuma</string>
+    <string name="rtl_rungs">pakopos</string>
+    <string name="rtl_saddle_0">balnas 0°</string>
+    <string name="rtl_saddle_45">balnas 45°</string>
+    <string name="rtl_saddle_90">balnas 90°</string>
+    <string name="rtl_saddle_135">balnas 135°</string>
+    <string name="rtl_safety_rope">saugos virvė</string>
+    <string name="rtl_stone">akmuo</string>
+    <string name="rtl_traffic_signal">eismo signalas</string>
+    <string name="rtl_turnstile">turniketas</string>
+    <string name="rtl_viewpoint">apžvalgos aikštelė</string>
+    <string name="rtl_waterfall">vandens krioklys</string>
+    <string name="rtl_alp">alpinė pieva</string>
+    <string name="rtl_wetland">pelkė</string>
+    <string name="rtl_moor">viržynas</string>
+    <string name="rtl_coppice">atžalynas</string>
+    <string name="rtl_plantation">plantacija</string>
+    <string name="rtl_reed">nendrės</string>
+    <string name="rtl_mud">purvas</string>
+    <string name="rtl_mudflat">purvynas</string>
+    <string name="rtl_cemetery">kapinės</string>
+    <string name="rtl_cemetery_christian">krikščionių kapinės</string>
+    <string name="rtl_cemetery_jewish">žydų kapinės</string>
+    <string name="rtl_cemetery_muslim">musulmonų kapinės</string>
+    <string name="rtl_pedestrian_area">pėsčiųjų zona</string>
+    <string name="rtl_trading">prekyba</string>
+    <string name="rtl_parking_restricted">ribotas automobilių stovėjimas</string>
+    <string name="rtl_prison">kalėjimas</string>
+    <string name="rtl_corral">aptvaras</string>
+    <string name="rtl_riding_range">jojimo aikštelė</string>
+    <string name="rtl_allotment">žemės sklypai</string>
+    <string name="rtl_retention_reservoir">sulaikymo rezervuaras</string>
+    <string name="rtl_dump">sąvartynas</string>
+    <string name="rtl_driving_range">važiavimo nuotolis</string>
     <string name="rtl_ruin">griuvėsiai</string>
+    <string name="rtl_saline">druskos</string>
     <string name="rtl_freeway">greitkelis</string>
     <string name="rtl_freeway_similar">panašus į greitkelį</string>
     <string name="rtl_interstate">tarpvalstybinis / kelias</string>
@@ -2561,9 +2697,19 @@
     <string name="rtl_side_street">šalutinė gatvė</string>
     <string name="rtl_residential_road">gyvenamasis kelias</string>
     <string name="rtl_access_road">privažiavimo kelias</string>
+    <string name="rtl_traffic_calmed_area">ramioje eismo zonoje</string>
+    <string name="rtl_pedestrian_road">pėsčiųjų kelias</string>
     <string name="rtl_tunnel">tunelis</string>
     <string name="rtl_bridge">tiltas</string>
     <string name="rtl_railway">geležinkelis</string>
+    <string name="rtl_path_foot">bendras pėsčiųjų takas</string>
+    <string name="rtl_path_bicycle">bendras dviračių takas</string>
+    <string name="rtl_path_combined_bicycle_foot">kombinuotas dviračių ir pėsčiųjų takas</string>
+    <string name="rtl_path_narrow">bendras kelias ar takas, nepakankamai platus automobiliams</string>
+    <string name="rtl_path_badly_visible">blogai matomas kelias</string>
+    <string name="rtl_path_quality1">kokybė 1 (danga: asfaltas, …)</string>
+    <string name="rtl_path_quality23">kokybė 2/3 (danga: žvyras, remontuotas, ...)</string>
+    <string name="rtl_path_quality45">kokybė 4/5 (be dangos)</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Šypsenėlė</string>
     <string name="smiley_big_smile">Didelė šypsena</string>
