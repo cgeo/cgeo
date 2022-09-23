@@ -704,6 +704,7 @@
     <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="settings_su_description">Leiskite c:geo prisijungti prie geocaching.su tam, kad galėtumėt ieškoti slėptuvių.</string>
     <string name="settings_lc_description">Į žemėlapį įtraukite Adventure Lab slėptuves.\n\n(Galima tik \"Geocaching.com\" Premium nariams. Reikia suaktyvinti \"Geocaching.com\" paslaugą.)\n\nNorint pakeisti šį nustatymą, reikia paleisti iš naujo.</string>
+    <string name="lc_default_description">Tai geocaching.com Adventure Lab slėptuvė. Nuotykius galima žaisti tik naudojant Groundspeak Adventure Lab programą. Puslapyje \'\'Išsami informacija\'\' bakstelėkite Adventure Lab piktogramą, kad iš ten atidarytumėte/įdiegtumėte Adventure Lab programą, skirtą šiam nuotykiui.\nJei nenorite matyti Adventure Lab slėptuvių savo žemėlapyje ir ieškoti, galite išjungti naudodami \'\'nustatymai\'\' meniu – Paslaugos – Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Įkelti slėptuves iš opencaching.de</string>
     <string name="init_oc_de_description">Leiskite c:geo prisijungti prie opencaching.de tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="init_summary_oc_pl">Įkelti slėptuves iš opencaching.pl</string>
@@ -1121,6 +1122,7 @@
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <string name="auth_credentials_explain_long">Jei jau turite paskyrą, žemiau įveskite savo paskyros kredencialus, skirtus %s:</string>
+    <string name="auth_register_explain">Jei dar neturite paskyros, bakstelėkite toliau, kad būtumėte nukreipti į paslaugos tinklalapį ir sukurti paskyrą. Norėdami sukurti paskyrą, būtinai naudokite metodą su vartotojo vardu ir slaptažodžiu, nes c:geo nepalaiko prisijungimo per Google/Apple/Facebook. Sukūrus paskyrą gali prireikti patvirtinti jūsų el. pašto adresą, kad galėtumėte prisijungti prie c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
@@ -1384,6 +1386,7 @@
     <string name="internal_cache_default_description">Tai vartotojo nustatyta slėptuvė</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\'Eiti į\' tikslus</string>
+    <string name="internal_goto_targets_description">Šioje slėptuvėje saugomi naujausi \'\'Eiti į\'\' tikslai. Jis sukuriamas automatiškai, kai pagrindiniame meniu naudojate funkciją \'\'Eiti į\'\'. Ten įvestos koordinatės bus saugomos šios slėptuvės kelio taškuose. Jei jums nebereikia šių koordinačių, galite saugiai ištrinti šią slėptuvę arba bet kurį iš jos kelio taškų. Taip pat galite perkelti slėptuvę į bet kurį kitą pasirinktą sąrašą.</string>
     <string name="init_longtap_map">Ilgas žemėlapio palietimas</string>
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
     <string name="onetime_info_longtap_disabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu išjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
@@ -1711,6 +1714,7 @@
     <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo geoslėptuvėse. c:geo gali automatiškai suaktyvinti kasečių atsisiuntimą šioje programoje.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp geoslėptuvėms.</string>
     <string name="helper_alc_description">Adventure Lab Player programa jūsų telefonui ar planšetiniam kompiuteriui.</string>
+    <string name="helper_gcwizard_description">GC vedlys turi daugybę įrankių, skirtų paprastam kriptografiniam, geodeziniam ir moksliniams skaičiavimams, taip pat šimtus įvairių simbolių rinkinių.</string>
     <!-- export -->
     <string name="share_export">Dalintis/Eksportuoti</string>
     <string name="export">Eksportuoti</string>
@@ -2021,6 +2025,7 @@
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com pakeitimai sukelia problemų gyvame žemėlapyje.\nMes žinome ir dirbame su tuo, skirkite mums šiek tiek laiko!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com šiuo metu nėra (visiškai) pasiekiama.\nGalite susidurti su įvairiomis c:geo problemomis.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Jūs naudojate senesnę Android versiją. Ši c:geo versija nebesuderinama su jūsų įrenginiu ir gali neveikti arba netikėtai elgtis.\nNorėdami gauti daugiau informacijos, bakstelėkite šį pranešimą.</string>
+    <string name="status_version_deprecated" tools:ignore="UnusedResources">Naudojate c:geo versiją, kuri atrodo senesnė nei vieneri metai. Kai kurios funkcijos gali nebeveikti dėl svetainės ar kitų techninių pakeitimų. Perskaitykite mūsų DUK apie tai, kaip atnaujinti.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kalbantis kompasas</string>
     <string name="tts_toggle">Įjungti kalbėjimą</string>
@@ -2329,12 +2334,14 @@
     <string name="wizard_welcome_title">Sveiki atvykę į c:geo</string>
     <string name="wizard_migration_title">c:geo aplanko perkėlimas</string>
     <string name="wizard_intro">Norint sukonfigūruoti c:geo ir pradėti dirbti, reikia atlikti vos kelis veiksmus. Ar aš tau padėsiu tai padaryti?</string>
+    <string name="wizard_intro_returning">Sveiki sugrįžę į konfigūravimo vedlį. Jūsų c:geo sąranka dar nebaigta. Ar galiu padėti jums ją užbaigti ir pradėti? Tai tik keli žingsniai.</string>
     <string name="wizard_intro_migration">Dėl vidinių Android leidimų sistemos pakeitimų turiu jūsų paprašyti leidimo pasiekti tam tikrus c:geo duomenų aplankus. Žingsnis po žingsnio padėsiu jums tai padaryti.</string>
     <string name="wizard_outro_ok">Dėkojame, kad sukonfigūravote c:geo.\nLinksminkitės!</string>
     <string name="wizard_outro_error">Nebaigta konfigūracija\nNe visos c:geo dalys veiks taip, kaip tikėtasi!</string>
     <string name="wizard_permissions_title">Nustatykite programos leidimus</string>
     <string name="wizard_permissions_intro">c:geo reikia tam tikrų leidimų jūsų įrenginyje, kad jis tinkamai veiktų.\nIšsamiau paaiškinsiu atlikdamas kitus veiksmus.</string>
     <string name="wizard_permissions_folder_title">Nustatyti aplanką: %s</string>
+    <string name="wizard_basefolder_request_explanation">c:geo reikia vietinio aplanko, kad būtų galima saugoti duomenis, pvz., GPX failus, atsargines kopijas, lauko pastabas ir žurnalo failus. Pagal numatytuosius nustatymus šie failai yra saugomi aplankuose, esančiuose po vadinamuoju \'\'baziniu aplanku\'\'. Pasirinkite arba sukurkite tokį aplanką kitame veiksme.\n\nJei atnaujinote c:geo iš ankstesnės versijos, pasirinkite esamą aplanką \'\'cgeo\'\' įrenginio saugyklos šakniniame lygyje.\nPatarimas: gali reikėti nebeslėpti įrenginio vidinė atmintis pirmiausia rodoma failų parinkiklyje.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo reikia vietinio aplanko, kad būtų galima saugoti žemėlapio failus naudojimui neprisijungus.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo reikia vietinio aplanko, kad būtų galima saugoti neprisijungus naudojamų žemėlapių temų failus.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo reikia vietinio aplanko GPX failams saugoti (pvz., slėptuvėms ar pėdsakams importuoti / eksportuoti).</string>
