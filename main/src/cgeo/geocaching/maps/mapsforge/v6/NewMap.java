@@ -526,7 +526,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
-                    route.calculateNavigationRoute();
+                    if (route != null) {
+                        route.calculateNavigationRoute();
+                    }
                     trackLayer.updateRoute(key, route);
                 }), () -> trackLayer.requestRedraw());
             } catch (RejectedExecutionException e) {
