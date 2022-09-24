@@ -716,7 +716,35 @@
     <string name="debug_user_error_report_title">Report a problem</string>
     <string name="debug_user_error_errortext">An unexpected problem has occured which we would request you to report to us:</string>
     <string name="debug_user_error_explain_options">Help us fixing c:geo problems by reporting them via email with system information and c:geo logfile included.\nPlease do always also include a detailed error description with your mail!\n\nBefore sending a mail please also check our FAQ and/or social media presence for known problems.\nOther contact options can be found at \'About c:geo\'</string>
+
+    <!-- download manager -->
     <string name="debug_current_downloads">Current downloads</string>
+    <string name="downloader_pending_downloads">Pending downloads</string>
+    <string name="downloader_no_pending_downloads">No pending downloads currently</string>
+    <string name="downloader_cancel_download">Cancel download</string>
+    <string name="downloader_cancel_file">Cancel pending download of "%s" and remove downloaded parts?</string>
+    <string name="downloader_cancelled_download">Cancelled download for "%s"</string>
+
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
+    <string name="asdm_status_paused">Download is waiting to retry or resume</string>
+    <string name="asdm_status_pending">Download is waiting to start</string>
+    <string name="asdm_status_running">Download is currently running</string>
+    <string name="asdm_status_successful">Download has successfully completed</string>
+
+    <string name="asdm_paused_queued_for_wifi">Paused: Waiting for Wifi</string>
+    <string name="asdm_paused_unknown">Paused for some other reason</string>
+    <string name="asdm_paused_waiting_for_network">Paused: Waiting for network connectivity to proceed</string>
+    <string name="asdm_paused_waiting_to_retry">Paused: Some network error occurred and the download manager is waiting before retrying the request</string>
+    <string name="asdm_error_cannot_resume">Error: Some possibly transient error occurred, but we can\'t resume the download</string>
+    <string name="asdm_error_device_not_found">Error: No external storage device was found. SD card mounted?</string>
+    <string name="asdm_error_file_already_exists">Error: Requested destination file already exists, will not be overwritten</string>
+    <string name="asdm_error_file_error">Error: Unknown storage issue</string>
+    <string name="asdm_error_http_data_error">Error: HTTP processing error at data level</string>
+    <string name="asdm_error_insufficient_space">Error: Insufficient storage space</string>
+    <string name="asdm_error_too_many_redirects">Error: Too many redirects</string>
+    <string name="asdm_error_unhandled_http_code">Error: Unhandled HTTP code</string>
+    <string name="asdm_error_unknwon">Error: Unknown error</string>
 
     <!-- settings -->
     <string name="settings_title_open_settings">Open settings?</string>
