@@ -5,6 +5,7 @@
 
 ### Cache details
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
+- Fix: Log image labelled "Image 1" even if only a single image added
 
 ### General
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
