@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.downloader.PendingDownloadsActivity;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
@@ -604,6 +605,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_pending_downloads) {
+            startActivity(new Intent(this, PendingDownloadsActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }

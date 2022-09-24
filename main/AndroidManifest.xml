@@ -903,6 +903,7 @@
             android:label="@string/search_bookmark_list">
         </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
+        <activity android:name=".downloader.PendingDownloadsActivity" android:exported="false" />
         <activity
             android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
             android:label="@string/download_title">
