@@ -393,6 +393,8 @@
     <string name="contribution_documentation">Документація</string>
     <string name="contribution_projectleader">лідер проекту з відкритим кодом</string>
     <string name="contribution_graphics">Графіка</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Відкрити налаштування?</string>
     <string name="settings_title_services">Послуги</string>
