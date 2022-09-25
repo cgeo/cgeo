@@ -35,6 +35,7 @@ import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -57,12 +58,14 @@ import cgeo.geocaching.wizard.WizardMode;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
@@ -436,6 +439,33 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         DataStore.cleanIfNeeded(this);
         updateCacheCounter();
         prepareQuickLaunchItems();
+        checkPendingDownloads();
+    }
+
+    /** prompts user if there's at least one blocked or failed download */
+    private void checkPendingDownloads() {
+        final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
+        if (pendingDownloads.size() == 0) {
+            return;
+        }
+
+        final DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
+            final DownloadManager.Query query = new DownloadManager.Query();
+            query.setFilterById(download.id);
+            try (Cursor c = downloadManager.query(query)) {
+                while (c.moveToNext()) {
+                    final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                    if (colStatus >= 0) {
+                        final int status = c.getInt(colStatus);
+                        if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                            SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override

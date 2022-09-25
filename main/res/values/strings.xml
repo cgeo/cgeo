@@ -724,6 +724,7 @@
     <string name="downloader_cancel_download">Cancel download</string>
     <string name="downloader_cancel_file">Cancel pending download of "%s" and remove downloaded parts?</string>
     <string name="downloader_cancelled_download">Cancelled download for "%s"</string>
+    <string name="downloader_pending_info">There is at least one pausing or failed download. Do you want to open the list of pending downloads?</string>
 
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
