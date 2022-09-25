@@ -353,6 +353,9 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 분</item>
     </plurals>
+    <string name="caches_store_offline">오프라인으로 저장</string>
+    <string name="caches_store_offline_map">캐시는 오프라인으로 저장</string>
+    <string name="caches_store_selected">선택한 것 저장</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
@@ -621,7 +624,9 @@
     <string name="debug_user_error_report_title">문제 신고하기</string>
     <string name="debug_user_error_errortext">예상치 못한 문제가 발생하여 신고를 요청합니다.</string>
     <string name="debug_user_error_explain_options">시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요.\n메일에 항상 자세한 오류 설명을 포함하십시오!\n\n메일을 보내기 전에 알려진 문제에 대한 FAQ 및/또는 소셜 미디어 존재를 확인하십시오.\n다른 연락처 옵션은 \'c:geo 정보\'에서 찾을 수 있습니다.</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">현재 다운로드</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -945,6 +950,7 @@
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
     <string name="init_maintenance_start">유지 보수 시작됨</string>
+    <string name="init_maintenance_ongoing">시간이 좀 걸릴 수 있습니다…</string>
     <string name="init_maintenance_finished">유지 보수 완료</string>
     <string name="init_location">위치 정보</string>
     <string name="init_location_note">구글플레이 서비스를 장착한 기기의 경우, c:geo는 자동적으로 더 나은 위치정보 제공자를 사용합니다. 하지만, 이렇게 하면 외부 블루투스 GPS 수신기를 사용할 수 없습니다.</string>
