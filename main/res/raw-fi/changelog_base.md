@@ -8,7 +8,8 @@
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
-- New: Maintenance function reindexes and compresses database
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
