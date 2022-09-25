@@ -273,7 +273,7 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
@@ -604,7 +604,9 @@
     <string name="debug_user_error_report_title">Rapporter et problem</string>
     <string name="debug_user_error_errortext">Det oppsto et uventet problem som vi ønsker at du melder ifra til oss:</string>
     <string name="debug_user_error_explain_options">Hjelp oss å fikse c:geo problemer ved å rapportere dem via e-post med systeminformasjonen og loggfilen til c:geo.\nVennligst legg til en detaljert feilbeskrivelse i e-posten\n\nFør du sender en e-post, vennligst også sjekk vår FAQ og/eller sosiale medier for kjente problemer.\nAndre kontaktalternativer finner du på \'Om c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Pågående nedlastinger</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Åpne innstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
