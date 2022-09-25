@@ -1250,6 +1250,23 @@ public class Settings {
         putLong(R.string.pref_dbCleanupLastCheck, calculateNewTimestamp(delay, 1));
     }
 
+    public static boolean dbNeedsReindex() {
+        final int interval = 90; // check about every three months
+        // initialization on first run
+        final long lastCheck = getLong(R.string.pref_dbReindexLastCheck, 0);
+        if (lastCheck == 0) {
+            setDbReindexLastCheck(false);
+            return false;
+        }
+        // check if interval is completed
+        final long now = System.currentTimeMillis() / 1000;
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+    }
+
+    public static void setDbReindexLastCheck(final boolean delay) {
+        putLong(R.string.pref_dbReindexLastCheck, calculateNewTimestamp(delay, 90));
+    }
+
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
         putBoolean(R.string.pref_pqShowDownloadableOnly, showDownloadableOnly);
     }
