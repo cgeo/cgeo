@@ -8,7 +8,8 @@
 
 ### Generale
 - Nuovo: Supporto ai download generici per i link con prefisso "mf-v4-map" e "mf-theme" (aggiornamento automatico non supportato)
-- New: Maintenance function reindexes and compresses database
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
