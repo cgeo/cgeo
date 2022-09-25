@@ -624,7 +624,9 @@
     <string name="debug_user_error_report_title">Rapportera ett problem</string>
     <string name="debug_user_error_errortext">Ett oväntat problem har uppstått som vi ber er att rapportera till oss:</string>
     <string name="debug_user_error_explain_options">Hjälp oss att fixa c:geo-problem genom att rapportera dem via e-post med systeminformation och c:geo-loggfil inkluderad.\nVänligen inkludera alltid en detaljerad felbeskrivning med din e-post!\n\nInnan du skickar ett mail vänligen kontrollera också vår FAQ och/eller sociala medier närvaro för kända problem.\nAndra kontaktalternativ hittar du på \'Om c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Aktuella nedladdningar</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Öppna inställningar?</string>
     <string name="settings_title_services">Tjänster</string>
