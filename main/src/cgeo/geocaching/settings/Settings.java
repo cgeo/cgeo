@@ -1209,20 +1209,7 @@ public class Settings {
     }
 
     public static boolean mapAutoDownloadsNeedUpdate() {
-        // update check disabled?
-        final int interval = getMapAutoDownloadsInterval();
-        if (interval < 1) {
-            return false;
-        }
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
-        if (lastCheck == 0) {
-            setMapAutoDownloadsLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_mapAutoDownloadsLastCheck, getMapAutoDownloadsInterval(), () -> setMapAutoDownloadsLastCheck(false));
     }
 
     private static int getMapAutoDownloadsInterval() {
@@ -1234,16 +1221,7 @@ public class Settings {
     }
 
     public static boolean dbNeedsCleanup() {
-        final int interval = 1; // check once per day
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_dbCleanupLastCheck, 0);
-        if (lastCheck == 0) {
-            setDbCleanupLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_dbCleanupLastCheck, 1, () -> setDbCleanupLastCheck(false));
     }
 
     public static void setDbCleanupLastCheck(final boolean delay) {
@@ -1251,16 +1229,7 @@ public class Settings {
     }
 
     public static boolean dbNeedsReindex() {
-        final int interval = 90; // check about every three months
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_dbReindexLastCheck, 0);
-        if (lastCheck == 0) {
-            setDbReindexLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_dbReindexLastCheck, 90, () -> setDbReindexLastCheck(false));
     }
 
     public static void setDbReindexLastCheck(final boolean delay) {
@@ -1379,20 +1348,7 @@ public class Settings {
     }
 
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
-        // update check disabled?
-        final long interval = getBrouterAutoTileDownloadsInterval();
-        if (interval < 1) {
-            return false;
-        }
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
-        if (lastCheck == 0) {
-            setBrouterAutoTileDownloadsLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_brouterAutoTileDownloadsLastCheck, getBrouterAutoTileDownloadsInterval(), () -> setBrouterAutoTileDownloadsLastCheck(false));
     }
 
     private static int getBrouterAutoTileDownloadsInterval() {
@@ -1420,10 +1376,27 @@ public class Settings {
     }
 
     // calculate new "last checked" timestamp - either "now" or "now - interval + delay [3 days at most]
-    // used for update checks for maps & route tiles downloaders
+    // used for update checks for maps & route tiles downloaders (and other places)
     private static long calculateNewTimestamp(final boolean delay, final int interval) {
         // if delay requested: delay by regular interval, but by three days at most
         return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (long) (interval - 3) * DAYS_TO_SECONDS : 0);
+    }
+
+    // checks given timestamp against interval; initializes timestampt, if needed
+    private static boolean needsIntervalAction(final @StringRes int prefTimestamp, final int interval, final Runnable initAction) {
+        // check disabled?
+        if (interval < 1) {
+            return false;
+        }
+        // initialization on first run
+        final long lastCheck = getLong(prefTimestamp, 0);
+        if (lastCheck == 0) {
+            initAction.run();
+            return false;
+        }
+        // check if interval is completed
+        final long now = System.currentTimeMillis() / 1000;
+        return (lastCheck + ((long) interval * DAYS_TO_SECONDS)) <= now;
     }
 
     public static boolean isBigSmileysEnabled() {
