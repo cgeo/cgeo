@@ -8,7 +8,8 @@
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
-- New: Maintenance function reindexes and compresses database
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
