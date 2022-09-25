@@ -8,7 +8,8 @@
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
-- Neu: Wartungsfunktion reindiziert und komprimiert Datenbank
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
