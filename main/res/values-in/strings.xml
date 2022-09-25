@@ -315,6 +315,8 @@
     <string name="about_system_info">c:geo sistem informasi</string>
     <string name="about_system_info_send_chooser">Mengirimkan sistem informasi</string>
     <string name="changelog_github">Daftar semua perubahan</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Buka pengaturan?</string>
     <string name="settings_title_services">Layanan</string>
