@@ -631,7 +631,9 @@
     <string name="debug_user_error_report_title">Probleem melden</string>
     <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
     <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Huidige downloads</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
