@@ -8,7 +8,8 @@
 
 ### Γενικά
 - Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
-- Νέο: Διορθώσεις λειτουργίας reindex και συμπίεσής βάσης δεδομένων
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
 - Διόρθωση: Λεπτομέρειεςτοποθεσίας
 - Αλλαγή: Αφαίρεση διακόπτη γλώσσας ιστοχώρου
 - Διόρθωση: Οι διαγραμμένες κρύπτες δε διαγράφονταν σε επανεκκίνηση του c:geo
