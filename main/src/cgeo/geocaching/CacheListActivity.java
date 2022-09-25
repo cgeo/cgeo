@@ -869,7 +869,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
-            new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
+            new GpxExport().export(adapter.getCheckedOrAllCaches(), this, title);
         } else if (menuItem == R.id.menu_export_fieldnotes) {
             new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_persnotes) {

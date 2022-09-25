@@ -736,7 +736,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 notifyDataSetChanged();
             }));
         } else if (menuItem == R.id.menu_export_gpx) {
-            new GpxExport().export(Collections.singletonList(cache), this);
+            new GpxExport().export(Collections.singletonList(cache), this, cache.getName());
         } else if (menuItem == R.id.menu_export_fieldnotes) {
             new FieldNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
