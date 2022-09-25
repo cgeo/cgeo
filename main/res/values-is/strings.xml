@@ -265,6 +265,8 @@
     <string name="about_system_info">Kerfisupplýsingar c:geo</string>
     <string name="about_system_info_send_chooser">Senda kerfisupplýsingar</string>
     <string name="changelog_github">Listi af öllum breytingum</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Opna stillingar?</string>
     <string name="settings_title_services">Þjónustur</string>
