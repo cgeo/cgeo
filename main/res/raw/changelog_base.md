@@ -14,3 +14,4 @@
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
+- New: View for pending downloads
