@@ -1925,10 +1925,12 @@ public class DataStore {
             });
         }
 
-        // Try to reclaim unused space and reindex all tables
+        reindexDatabase();
+    }
+
+    private static void reindexDatabase() {
+        init();
         try {
-            Log.d("Database clean: vacuuming the freed space");
-            database.execSQL("VACUUM");
             Log.d("Database clean: recreate indices");
             database.execSQL("REINDEX");
         } catch (final Exception e) {
@@ -3760,6 +3762,12 @@ public class DataStore {
             Schedulers.io().scheduleDirect(() -> {
                 // check for UDC cleanup every time this method is called
                 deleteOrphanedUDC();
+
+                // reindex if needed
+                if (Settings.dbNeedsReindex()) {
+                    Settings.setDbReindexLastCheck(false);
+                    reindexDatabase();
+                }
 
                 // other cleanup will be done once a day at max
                 if (Settings.dbNeedsCleanup()) {
