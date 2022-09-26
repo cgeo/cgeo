@@ -5,13 +5,13 @@
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
-- Fix: Log image labelled "Image 1" even if only a single image added
+- Oprava: Obrázek v logu označený jako "Obrázek 1", i když byl přidán pouze jeden obrázek
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- New: View for pending downloads
+- Novinka: Funkce údržby reindexuje databázi
+- Novinka: Automatická optimalizace výkonu databáze každých 90 dní (reindexace)
+- Oprava: Zpracování chybějícího oprávnění pro přesnou polohu
+- Změna: Přepínání jazyka webové stránky bylo odstraněno
+- Oprava: Odstraněné uživatelsky definované kešky se při restartu c:geo neodstraní
+- Novinka: Zobrazení čekajících stahování
