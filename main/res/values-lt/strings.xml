@@ -174,7 +174,7 @@
     <string name="log_problem_needs_maintenance_text">Šis naudotojas pranešė, kad su šia slėptuve yra problema.</string>
     <string name="log_problem_log_full_label">Įrašų žurnalas yra pilnas</string>
     <string name="log_problem_log_full_text">Šis naudotojas pranešė, kad įrašų žurnalas yra pilnas.</string>
-    <string name="log_problem_damaged_label">Talpykla yra pažeista</string>
+    <string name="log_problem_damaged_label">Konteineris pažeistas</string>
     <string name="log_problem_damaged_text">Šis naudotojas pranešė, kad slėptuvė yra pažeista.</string>
     <string name="log_problem_missing_label">Slėptuvė gali būti dingusi</string>
     <string name="log_problem_missing_text">Šis naudotojas pranešė, kad slėptuvė gali būti dingusi.</string>
@@ -221,7 +221,7 @@
     <string name="err_detail_cache_find_any">c:geo neranda jokių geoslėptuvių.</string>
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
-    <string name="err_detail_premium_log_found">Slėptuvė pasiekiamas tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei radote šią slėptuvę, galite registruoti ją čia.</string>
+    <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei radote šią slėptuvę, galite registruoti ją čia.</string>
     <string name="err_watchlist_still_managing">Dar tvarkomas stebimų slėptuvių sąrašas.</string>
     <string name="err_watchlist_failed">Nepavyko pakeisti stebimų slėptuvių sąrašo.</string>
     <string name="err_application_no">c:geo neranda tinkamos programos.</string>
@@ -302,7 +302,7 @@
     <string name="more_information">Daugiau informacijos</string>
     <string name="undo">Atšaukti</string>
     <string name="dont_show_again">Daugiau neberodyti</string>
-    <string name="warn_gm_not_available">Google Maps nepasiekiami.</string>
+    <string name="warn_gm_not_available">Google Maps neprieinami.</string>
     <string name="switch_to_mf">Jūsų Google Play Service pasenusi. Ar perjungti į Mapsforge žemėlapių tiekėją?</string>
     <string name="switched_to_mf">Numatytasis žemėlapis perjungtas į Mapsforge žemėlapių teikėją. Iš naujo paleiskite žemėlapį dabar.</string>
     <!-- location service -->
@@ -322,7 +322,7 @@
     <string name="menu_helpers">Naudingos programos</string>
     <string name="menu_settings">Nustatymai</string>
     <string name="menu_backup">Atsarginė kopija / atkurti</string>
-    <string name="menu_update">Atnaujinkite duomenis neprisijungus</string>
+    <string name="menu_update">Atnaujinti duomenis naudojimui neprisijungus</string>
     <string name="menu_update_routingdata">Maršruto duomenys</string>
     <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
@@ -508,7 +508,7 @@
     <string name="cache_filter_stored_since">Paskutinis išsamios informacijos atnaujinimas</string>
     <string name="cache_filter_logical_filter_group">Įdėtas filtras</string>
     <string name="cache_filtergroup_basic">Pagrindiniai</string>
-    <string name="cache_filtergroup_details">Detalės</string>
+    <string name="cache_filtergroup_details">Informacija</string>
     <string name="cache_filtergroup_userspecific">Naudotojui</string>
     <string name="cache_filtergroup_special">Specialus</string>
     <string name="cache_filter_contexttype_live_title">Filtras gyvai</string>
@@ -569,7 +569,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Su keliauninku</string>
     <string name="cache_filter_status_select_label_has_own_vote">Turi nuosavą balsą</string>
     <string name="cache_filter_status_select_label_has_offline_log">Turi įrašą neprisijungus</string>
-    <string name="cache_filter_status_select_label_has_offline_found_log">Užregistruota neprisijungus</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Turi radimo įrašas neprisijungus</string>
     <string name="cache_filter_status_select_label_solved_mystery">Išspręsta Mystery</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Turi vartotojo nustatytus kelio taškus</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Šis filtro nustatymas turės įtakos tik Mystery slėptuvėms. Jei norite išskirti kitus slėptuvės tipus, apibrėžkite atitinkamą slėptuvės tipo filtrą.\n\nMystery laikoma „išspręsta“, jei jos koordinatės pakeistos arba galiojantis galutinis maršruto taškas užpildytas koordinatėmis.</string>
@@ -654,12 +654,12 @@
     <string name="settings_summary_appearance">Konfigūruoti atstumo vienetus, kalbą ir programos spalvas.</string>
     <string name="settings_title_cachedetails">Slėptuvės informacija</string>
     <string name="settings_summary_cachedetails">Tinkinkite slėptuvės informacijos rodymą.</string>
-    <string name="settings_title_offlinedata">Duomenys darbui be interneto</string>
+    <string name="settings_title_offlinedata">Duomenys darbui neprisijungus</string>
     <string name="settings_summary_offlinedata">Sukonfigūruokite duomenis, kurie bus išsaugoti naudoti neprisijungę, saugojimo vietą ir GPX failų aplankus.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
     <string name="settings_title_map">Žemėlapis</string>
-    <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus pasiekiamo žemėlapio nustatymus ir žemėlapio detales.</string>
+    <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
     <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos ir kalvų šešėliai</string>
@@ -885,13 +885,13 @@
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
     <string name="settings_folder_changed">Atkuriant \"%1$s\" bus pakeista į \"%2$s\". \n\nNorėdami tęsti bakstelėkite \"%4$s\". Tokiu atveju jūsų bus paprašyta iš naujo nustatyti c:geo prieigą prie to aplanko. \n\nBakstelėkite \"%3$s\", jei norite palikti dabartinį nustatymą.</string>
     <string name="settings_info_offline_maps_title">Informacija apie žemėlapius naudojimui neprisijungus</string>
-    <string name="settings_info_offline_maps">c:geo palaiko žemėlapius, skirtus naudoti neprisijungus. Žemėlapius galite gauti iš skirtingų tiekėjų arba net sukurti savo žemėlapius (iš OSM duomenų). Pirmiausia turite pasirinkti aplanką, kuriame bus saugomi neprisijungus pasiekiami žemėlapiai.</string>
+    <string name="settings_info_offline_maps">c:geo palaiko žemėlapius, skirtus naudoti neprisijungus. Žemėlapius galite gauti iš skirtingų tiekėjų arba net sukurti savo žemėlapius (iš OSM duomenų). Pirmiausia turite pasirinkti aplanką, kuriame bus saugomi žemėlapiai naudojimui neprisijungus.</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
-    <string name="settings_info_themes">c:geo palaiko pasirinktines neprisijungus pasiekiamų žemėlapių temas. Juos galima naudoti norint pakeisti žemėlapio spalvų stilių (pvz., norint turėti naktinio vaizdo žemėlapį) arba paryškinti tam tikrus objektus, pvz., dviračių takus ar aukščio linijas žemėlapyje.\n\nDirbant su neįtrauktomis žemėlapių temomis gali sumažėti žemėlapio peržiūros priemonės atidarymo našumas. Tokiu atveju temos aplanką galima pasirinktinai sinchronizuoti su programos privačiu vietiniu aplanku, kad būtų galima greičiau pasiekti (už tam tikrą saugyklos vietos kainą).</string>
+    <string name="settings_info_themes">c:geo palaiko pasirinktines neprisijungus pasiekiamų žemėlapių temas. Jas galima naudoti norint pakeisti žemėlapio spalvų stilių (pvz., norint turėti naktinio vaizdo žemėlapį) arba paryškinti tam tikrus objektus, pvz., dviračių takus ar aukščio linijas žemėlapyje.\n\nDirbant su neįtrauktomis žemėlapių temomis gali sumažėti žemėlapio peržiūros priemonės atidarymo našumas. Tokiu atveju temos aplanką galima pasirinktinai sinchronizuoti su programos privačiu vietiniu aplanku, kad būtų galima greičiau pasiekti (už tam tikrą saugyklos vietos kainą).</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_local_file_system">Vietinė failų sistema</string>
     <string name="init_base_directory_description">Bazinis aplankas viešiems vietiniams duomenims</string>
-    <string name="init_map_directory_description">Aplankas su neprisijungus pasiekiamais žemėlapiais</string>
+    <string name="init_map_directory_description">Aplankas su neprisijungus naudojamais žemėlapiais</string>
     <string name="init_brouter_directory_description">Aplankas su BRouter maršruto duomenimis</string>
     <string name="init_updateinterval_title">Atnaujinimo intervalas</string>
     <string name="init_updateinterval_description">Kas x dienas primena apie atnaujinimo patikrinimą (galioja tik failams, kuriuos atsisiuntėte iš c:geo), 0= išjungta</string>
@@ -960,17 +960,17 @@
     <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
     <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
     <string name="init_mapshading_folder">Žemėlapio šešėliavimo failų aplankas</string>
-    <string name="init_mapshading_folder_text">Neprisijungus pasiekiami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
+    <string name="init_mapshading_folder_text">Neprisijungus naudojami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
     <string name="init_mapShadingLinearity_title">Šešėlių tiesiškumas</string>
     <string name="init_mapShadingLinearity_description">Mažos reikšmės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
     <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
     <string name="init_mapShadingScale_description">Šešėlių sluoksnio skaidrumas, nuo nematomo iki didesnių verčių, sustiprinantis šešėlį, bet gali atsirasti artefaktų</string>
-    <string name="init_maintenance">Aptarnavimas</string>
+    <string name="init_maintenance">Priežiūra</string>
     <string name="init_maintenance_directories_note">c:geo nuotraukas ir kitus failus, susijusius su slėptuve, saugo tam skirtame aplanke. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame aplanke gali būti pasenusių failų, kuriuos galima ištrinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
-    <string name="init_maintenance_start">Aptarnavimas prasidėjo</string>
+    <string name="init_maintenance_start">Priežiūra prasidėjo</string>
     <string name="init_maintenance_ongoing">Tai gali užtrukti…</string>
-    <string name="init_maintenance_finished">Aptarnavimas baigtas</string>
+    <string name="init_maintenance_finished">Priežiūra baigta</string>
     <string name="init_location">Vietos nustatymo paslauga</string>
     <string name="init_location_note">Įrenginiuose su Google Play paslauga, c:geo gali automatiškai naudoti geresnį vietos nustatymo paslaugų teikėją. Tačiau tai neleidžia naudoti išorinį BlueTooth GPS imtuvą.</string>
     <string name="init_location_googleplayservices">Naudoti Google Play paslaugas</string>
@@ -1160,10 +1160,10 @@
     <string name="cache_delete_generated_waypoints_success">Sugeneruoti kelio taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
     <string name="cache_offline_stored">Išsaugota įrenginyje</string>
-    <string name="cache_offline_not_ready">Neišsaugota</string>
+    <string name="cache_offline_not_ready">Nepasiekiama neprisijungus</string>
     <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
     <plurals name="cache_offline_about_time_mins">
-        <item quantity="one">prieš %d minutes</item>
+        <item quantity="one">prieš %d minutę</item>
         <item quantity="few">prieš %d minutes</item>
         <item quantity="many">prieš %d minučių</item>
         <item quantity="other">prieš %d minučių</item>
@@ -1240,7 +1240,7 @@
     <string name="cache_logs_friends_and_own">Draugų/nuosavi įrašai</string>
     <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
-    <string name="cache_dialog_loading_details_status_details">Apdorojami duomenys</string>
+    <string name="cache_dialog_loading_details_status_details">Apdorojamos detalės</string>
     <string name="cache_dialog_loading_details_status_spoilers">Įkeliami užuominos vaizdai</string>
     <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apdorojami kelio taškai</string>
@@ -1248,7 +1248,7 @@
     <string name="cache_dialog_loading_details_status_cache">Išsaugomi duomenys</string>
     <string name="cache_dialog_loading_details_status_render">Generuojamas vaizdas</string>
     <string name="cache_dialog_offline_save_title">Išsaugoma</string>
-    <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui be interneto…</string>
+    <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
     <string name="cache_dialog_offline_drop_title">Pašalinti</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
     <string name="cache_dialog_refresh_title">Atnaujinama</string>
@@ -2143,7 +2143,7 @@
     <string name="geochecker_available">Geochecker pasiekiama per naršyklę</string>
     <!-- calendar adder -->
     <string name="event_fail">Nepavyko įtraukti Event slėptuvės į kalendorių</string>
-    <string name="init_low_disk_space">Mažai talpyklos vietos</string>
+    <string name="init_low_disk_space">Mažėja vieta saugykloje</string>
     <string name="init_low_disk_space_message">Slėptuvių duomenų aplanke liko mažai vietos. Tai gali sukelti c:geo veikimo sutrikimus. Atlaisvinkite vietos.</string>
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
@@ -2262,8 +2262,8 @@
     <string name="receivedownload_cancelled">Failo perdavimas atšauktas</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
-    <string name="delete_offlinemap_title">Ištrinti neprisijungus pasiekiamą žemėlapį</string>
-    <string name="no_deletable_offlinemaps">Nėra ištrinamų neprisijungus pasiekiamų žemėlapių</string>
+    <string name="delete_offlinemap_title">Ištrinti žemėlapį naudojimui neprisijungus</string>
+    <string name="no_deletable_offlinemaps">Nėra trinamų žemėlapių naudojimui neprisijungus</string>
     <string name="delete_file_confirmation">Ištrinti %s?</string>
     <string name="file_deleted_info">%s ištrintas</string>
     <string name="download_title">Atsisiųsti failą</string>
@@ -2353,7 +2353,7 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching ir kiti</string>
     <string name="wizard_welcome_advanced">Išplėstinė konfigūracija</string>
-    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai neprisijungus</string>
+    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai naudojimui neprisijungus</string>
     <string name="wizard_advanced_offlinemaps_info">Šiame puslapyje pateikiamos kai kurios išplėstinės funkcijos, kurių naudojimas yra neprivalomas.\n\nc:geo gali atsisiųsti žemėlapio failus, skirtus naudoti neprisijungus.</string>
     <string name="wizard_advanced_routing_label">Suaktyvinkite maršruto parinkimą neprisijungus</string>
     <string name="wizard_advanced_routing_info">c:geo turi vidinį maršruto parinkimo variklį, skirtą maršrutizavimui neprisijungus, ir gali automatiškai atsisiųsti trūkstamus maršruto duomenis.</string>
