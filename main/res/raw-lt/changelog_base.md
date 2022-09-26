@@ -9,9 +9,9 @@
 
 ### Bendras
 - Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
+- Naujiena: Priežiūros funkcija iš naujo indeksuoja duomenų bazę
+- Naujiena: Automatinis duomenų bazės našumo optimizavimas kas 90 dienų (perindeksavimas)
 - Pataisymas: valdyti trūkstamą vietos leidimą
 - Pakeitimas: pašalintas svetainės kalbos jungiklis
 - Pataisymas: Ištrintos vartotojo nustatytos slėptuvės neištrinamos paleidus c:geo iš naujo
-- New: View for pending downloads
+- Nauja: Peržiūrėti laukiančius atsisiuntimus
