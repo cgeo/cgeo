@@ -308,8 +308,8 @@ public class GCLogin extends AbstractLogin {
     }
 
     public String getWebsiteLanguage() {
-        final ServerParameters params = getServerParameters();
         try {
+            final ServerParameters params = getServerParameters();
             return params.appOptions.localRegion;
         } catch (final Exception e) {
             return "UNKNOWN";
