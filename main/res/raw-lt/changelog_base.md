@@ -4,8 +4,8 @@
 - Pataisymas: ne visi rodomi rankiniu būdu nukopijuoti slėptuvių kelio taškai
 
 ### Slėptuvės detalės
-- Pakeista: rodyti įkėlimo indikatorių žurnalo veikloje, kol vyksta reikiamų duomenų gavimas
-- Pataisymas: Žurnalo nuotrauka, pažymima „Nuotrauka 1“, net jei pridėta tik viena nuotrauka
+- Pakeista: rodyti įkėlimo indikatorių įrašo veikloje, kol vyksta reikiamų duomenų gavimas
+- Pataisymas: Įrašo vaizdas, pažymimas „Vaizdas 1“, net jei pridėta tik vienas vaizdas
 
 ### Bendras
 - Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
