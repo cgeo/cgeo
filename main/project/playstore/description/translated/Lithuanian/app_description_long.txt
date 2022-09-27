@@ -22,7 +22,7 @@ Galite tvarkyti saugomas slėptuves įvairiuose sąrašuose ir jas rūšiuoti be
 Išsaugotos slėptuvės kartu su neprisijungus naudojamais žemėlapių failais arba statiniais žemėlapiais gali būti naudojami ieškant slėptuvių be interneto ryšio (pvz. tarptinklinio ryšio metu).
 Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko užrašus.
 
-Ieškokite ir atraskite keliauninkus, tvarkykite savo keliauninkų inventorių ir palikite keliauninką skelbdami slėptuvės žurnale.
+Ieškokite ir atraskite keliauninkus, tvarkykite savo keliauninkų inventorių ir palikite keliauninką skelbdami slėptuvės įraše.
 
 Jei iškyla bėdų su c:geo diegtimi ar naudojimu, peržvelkite mūsų DUK (https://faq.cgeo.org) ar žinyną (https://manual.cgeo.org).
 Jeigu nepavyksta sutvarkyti bėdų, kreipkitės el. paštu.
