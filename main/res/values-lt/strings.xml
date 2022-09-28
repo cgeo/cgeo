@@ -2093,9 +2093,9 @@
     <string name="clipboard_copy_ok">Nukopijuota į iškarpinę</string>
     <plurals name="days_ago">
         <item quantity="one">Prieš %d dieną</item>
-        <item quantity="few">prieš %d dienas</item>
-        <item quantity="many">prieš %d dienų</item>
-        <item quantity="other">prieš %d dienų</item>
+        <item quantity="few">Prieš %d dienas</item>
+        <item quantity="many">Prieš %d dienų</item>
+        <item quantity="other">Prieš %d dienų</item>
     </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Per %d dieną</item>
