@@ -2,6 +2,7 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.button.MaterialButton;
 import io.noties.markwon.Markwon;
@@ -41,39 +43,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generic_recyclerview);
         setTitle(R.string.debug_current_downloads);
-
-        // retrieve list of pending downloads
-        pendingDownloads = PendingDownload.getAllPendingDownloads();
-        if (pendingDownloads.size() == 0) {
-            SimpleDialog.of(this).setTitle(R.string.debug_current_downloads).setMessage(R.string.downloader_no_pending_downloads).confirm((dialog, which) -> finish());
-        } else {
-            // get detailed info
-            downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-            for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
-                final DownloadManager.Query query = new DownloadManager.Query();
-                query.setFilterById(download.id);
-
-                final StringBuilder sb = new StringBuilder();
-                try (Cursor c = downloadManager.query(query)) {
-                    while (c.moveToNext()) {
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_STATUS), "Status", (i) -> formatStatus(c.getInt(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_REASON), "Reason", (i) -> formatReason(c.getInt(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES), "Bytes Total", (i) -> formatBytes(c.getLong(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR), "Bytes Current", (i) -> formatBytes(c.getLong(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP), "Last Modified", (i) -> formatDateForFilename(c.getLong(i)));
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", c::getString);
-                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI), "Local URI", c::getString);
-                    }
-                }
-                download.info = sb.toString();
-            }
-
-            // create view
-            recyclerView = findViewById(R.id.list);
-            adapter = new PendingDownloadsAdapter(this, downloadManager, pendingDownloads);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        }
+        fillAdapter();
     }
 
     private String formatStatus(final int statusCode) {
@@ -135,7 +105,50 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void cancelDownload(final long id) {
+    private void fillAdapter() {
+        // retrieve list of pending downloads
+        pendingDownloads = PendingDownload.getAllPendingDownloads();
+        if (pendingDownloads.size() == 0) {
+            SimpleDialog.of(this).setTitle(R.string.debug_current_downloads).setMessage(R.string.downloader_no_pending_downloads).confirm((dialog, which) -> finish());
+        } else {
+            // get detailed info
+            downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
+                final DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(download.id);
+
+                final StringBuilder sb = new StringBuilder();
+                final AtomicInteger status = new AtomicInteger();
+                try (Cursor c = downloadManager.query(query)) {
+                    final int statusColumn = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                    while (c.moveToNext()) {
+                        append(sb, statusColumn, "Status", (i) -> {
+                            status.set(c.getInt(i));
+                            return formatStatus(c.getInt(i));
+                        });
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_REASON), "Reason", (i) -> formatReason(c.getInt(i)));
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES), "Bytes Total", (i) -> formatBytes(c.getLong(i)));
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR), "Bytes Current", (i) -> formatBytes(c.getLong(i)));
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP), "Last Modified", (i) -> formatDateForFilename(c.getLong(i)));
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_URI), "Remote URI", c::getString);
+                        append(sb, c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI), "Local URI", c::getString);
+                    }
+                }
+                download.info = sb.toString();
+                download.isFailedDownload = (status.get() == DownloadManager.STATUS_FAILED);
+            }
+
+            // create view
+            recyclerView = findViewById(R.id.list);
+            adapter = new PendingDownloadsAdapter(this, downloadManager, pendingDownloads);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void cancelDownload(final long id, final boolean silent) {
         int pos = -1;
         for (int i = 0; i < pendingDownloads.size(); i++) {
             if (pendingDownloads.get(i).id == id) {
@@ -151,20 +164,26 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             // cancel selected download
             PendingDownload.remove(id);
             downloadManager.remove(id);
-            Toast.makeText(this, String.format(getString(R.string.downloader_cancelled_download), download.filename), Toast.LENGTH_SHORT).show();
+            if (!silent) {
+                Toast.makeText(this, String.format(getString(R.string.downloader_cancelled_download), download.filename), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private static class PendingDownloadsViewholder extends RecyclerView.ViewHolder {
+    private static class PendingDownloadsViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView detail;
+        MaterialButton buttonResume;
         MaterialButton buttonDelete;
 
-        PendingDownloadsViewholder(final View itemView) {
+        PendingDownloadsViewHolder(final View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             detail = itemView.findViewById(R.id.detail);
-            itemView.findViewById(R.id.button_left).setVisibility(View.GONE);
+
+            buttonResume = itemView.findViewById(R.id.button_left);
+            buttonResume.setIconResource(R.drawable.ic_menu_refresh);
+            buttonResume.setVisibility(View.GONE);
 
             buttonDelete = itemView.findViewById(R.id.button_right);
             buttonDelete.setIconResource(R.drawable.ic_menu_delete);
@@ -172,7 +191,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         }
     }
 
-    private static class PendingDownloadsAdapter extends RecyclerView.Adapter<PendingDownloadsViewholder> {
+    private static class PendingDownloadsAdapter extends RecyclerView.Adapter<PendingDownloadsViewHolder> {
 
         final PendingDownloadsActivity activity;
         final DownloadManager downloadManager;
@@ -188,18 +207,31 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
 
         @Override
         @NonNull
-        public PendingDownloadsViewholder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+        public PendingDownloadsViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
             final View downloadView = LayoutInflater.from(parent.getContext()).inflate(R.layout.twotexts_twobuttons_item, parent, false);
-            return new PendingDownloadsViewholder(downloadView);
+            return new PendingDownloadsViewHolder(downloadView);
         }
 
         @Override
-        public void onBindViewHolder(final PendingDownloadsViewholder viewHolder, final int position) {
+        public void onBindViewHolder(final PendingDownloadsViewHolder viewHolder, final int position) {
             final PendingDownload.PendingDownloadDescriptor download = pendingDownloads.get(position);
             viewHolder.title.setText(download == null ? "" : download.filename + " (# " + download.id + ")");
             if (download != null) {
                 markwon.setMarkdown(viewHolder.detail, download.info);
-                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm((dialog, which) -> activity.cancelDownload(download.id)));
+                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm((dialog, which) -> activity.cancelDownload(download.id, false)));
+                if (download.isFailedDownload) {
+                    viewHolder.buttonResume.setVisibility(View.VISIBLE);
+                    viewHolder.buttonResume.setOnClickListener(v -> {
+                        final ArrayList<Download> downloads = new ArrayList<>();
+                        downloads.add(new Download(PendingDownload.load(download.id)));
+                        DownloaderUtils.triggerDownloads(activity, R.string.downloader_retry_download, R.string.downloader_retry_download_details, downloads, triggered -> {
+                            if (triggered) {
+                                activity.cancelDownload(download.id, true);
+                                activity.fillAdapter();
+                            }
+                        });
+                    });
+                }
             } else {
                 viewHolder.detail.setText("");
                 viewHolder.buttonDelete.setVisibility(View.GONE);

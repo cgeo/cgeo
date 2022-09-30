@@ -14,6 +14,7 @@ import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
+import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
 
 import android.net.Uri;
@@ -45,6 +46,19 @@ public class Download {
         this.dateInfo = CalendarUtils.parseYearMonthDay(dateISO);
         this.type = type;
         this.iconRes = iconRes;
+    }
+
+    public Download(final PendingDownload pendingDownload) {
+        final DownloadTypeDescriptor desc = DownloadType.fromTypeId(pendingDownload.getOfflineMapTypeId());
+
+        this.name = CompanionFileUtils.getDisplayName(pendingDownload.getFilename());
+        this.uri = Uri.parse(pendingDownload.getRemoteUrl());
+        this.isDir = false;
+        this.sizeInfo = "";
+        this.addInfo = "";
+        this.dateInfo = pendingDownload.getDate();
+        this.type = desc == null ? DownloadType.DOWNLOADTYPE_ALL_MAPRELATED : desc.type;
+        this.iconRes = R.drawable.ic_menu_file;
     }
 
     public String getName() {

@@ -153,7 +153,7 @@ public class DownloaderUtils {
                 .show();
     }
 
-    public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads) {
+    public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads, @Nullable final Action1<Boolean> downloadTriggered) {
         String updates = "";
         for (Download download : downloads) {
             updates += (StringUtils.isNotBlank(updates) ? ", " : "") + download.getName() + (StringUtils.isNotBlank(download.getSizeInfo()) ? " (" + download.getSizeInfo() + ")" : "");
@@ -184,12 +184,20 @@ public class DownloaderUtils {
                             AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
                         }
                         ActivityMixin.showShortToast(activity, R.string.download_started);
+                        if (downloadTriggered != null) {
+                            downloadTriggered.call(true);
+                        }
                     } else {
                         ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
                     }
                     dialog.dismiss();
                 })
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    if (downloadTriggered != null) {
+                        downloadTriggered.call(false);
+                    }
+                    dialog.dismiss();
+                })
                 .create()
                 .show();
     }
@@ -345,7 +353,7 @@ public class DownloaderUtils {
                 if (result.size() == 0) {
                     Toast.makeText(activity, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
                 } else {
-                    triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result);
+                    triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result, null);
                 }
             }
         }
