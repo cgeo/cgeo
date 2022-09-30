@@ -1609,10 +1609,10 @@
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
     <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
-    <string name="search_hbu">Slepėjas</string>
+    <string name="search_hbu">Slėpėjas</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
-    <string name="search_finder">Radėjas</string>
+    <string name="search_finder">Surado</string>
     <string name="search_finder_prefill">Radėjas</string>
     <string name="search_finder_button">Ieškokite pagal ieškotojo vardą</string>
     <string name="search_filter">Filtras</string>
@@ -1651,12 +1651,12 @@
     <string name="trackable_type">Tipas</string>
     <string name="trackable_owner">Savininkas</string>
     <string name="trackable_spotted">Pastebėtas</string>
-    <string name="trackable_spotted_in_cache">Čia - </string>
+    <string name="trackable_spotted_in_cache">Čia</string>
     <string name="trackable_spotted_at_user">Rankose</string>
     <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
     <string name="trackable_spotted_owner">Savininko rankose</string>
-    <string name="trackable_spotted_archived">Archyvuota</string>
-    <string name="trackable_origin">Šaltinis</string>
+    <string name="trackable_spotted_archived">Suarchyvuota</string>
+    <string name="trackable_origin">Kilmė</string>
     <string name="trackable_unknown">Nenurodyta</string>
     <string name="trackable_released">Išleistas</string>
     <string name="trackable_distance">Nukeliauta</string>
@@ -1694,7 +1694,7 @@
     <string name="do_unknown">Nežinoma</string>
     <string name="do_auto">Automatiškai</string>
     <string name="do_flat">Horizontalus</string>
-    <string name="do_upright">Stačiai</string>
+    <string name="do_upright">Vertikalus</string>
     <!-- license -->
     <string name="license">Licencija</string>
     <string name="license_show">Rodyti licenciją</string>
