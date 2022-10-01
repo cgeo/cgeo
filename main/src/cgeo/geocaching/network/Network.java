@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -67,10 +66,6 @@ public final class Network {
      * User agent id
      */
     private static final String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
-    /**
-     * Native user agent, taken from a Android 2.2 Nexus
-     **/
-    private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
@@ -373,7 +368,7 @@ public final class Network {
                     .header("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7")
                     .header("Accept-Language", "en-US,*;q=0.9")
                     .header("X-Requested-With", "XMLHttpRequest")
-                    .header("User-Agent", Settings.getUseNativeUa() ? NATIVE_USER_AGENT : PC_USER_AGENT)
+                    .header("User-Agent", PC_USER_AGENT)
                     .build();
             return chain.proceed(request);
         }

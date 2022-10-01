@@ -57,9 +57,6 @@
     <!-- category nearby search -->
     <string translatable="false" name="pref_nearbySearchLimit">nearbySearchLimit</string>
 
-    <!-- category browser -->
-    <string translatable="false" name="pref_nativeUa">nativeUa</string>
-
     <!-- settings for geocaching.com service screen -->
     <string translatable="false" name="preference_screen_gc">preference_screen_gc</string>
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>

@@ -1675,10 +1675,6 @@ public class Settings {
         return getInt(R.string.pref_nearbySearchLimit, 0);
     }
 
-    public static boolean getUseNativeUa() {
-        return getBoolean(R.string.pref_nativeUa, false);
-    }
-
     @NonNull
     public static String getCacheTwitterMessage() {
         return StringUtils.defaultString(getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL])."));
