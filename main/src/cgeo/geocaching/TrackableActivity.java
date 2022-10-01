@@ -442,7 +442,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             binding.getRoot().setVisibility(View.VISIBLE);
 
             if (activity.imageGallery == null) {
-                ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages());
+                ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages(), true);
                 activity.imageGallery = binding.imageGallery;
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
