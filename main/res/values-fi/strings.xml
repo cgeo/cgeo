@@ -355,6 +355,9 @@
         <item quantity="one">%d minuutti</item>
         <item quantity="other">%d minuuttia</item>
     </plurals>
+    <string name="caches_store_offline">Tallenna offline-tilassa</string>
+    <string name="caches_store_offline_map">Tallenna kätköt offline-tilassa</string>
+    <string name="caches_store_selected">Tallenna valitut</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
@@ -952,6 +955,7 @@
     <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
     <string name="init_maintenance_directories">Poista orpotiedostot</string>
     <string name="init_maintenance_start">Huolto aloitettu</string>
+    <string name="init_maintenance_ongoing">Tämä voi kestää jonkin aikaa…</string>
     <string name="init_maintenance_finished">Huolto suoritettu</string>
     <string name="init_location">Paikkatieto</string>
     <string name="init_location_note">Laitteissa joissa on Google Play Palvelut, c:geo voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS -vastaanottimen käytön.</string>
