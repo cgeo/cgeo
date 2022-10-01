@@ -15,3 +15,4 @@
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
 - New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
