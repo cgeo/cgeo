@@ -15,3 +15,4 @@
 - Pakeitimas: pašalintas svetainės kalbos jungiklis
 - Pataisymas: Ištrintos vartotojo nustatytos slėptuvės neištrinamos paleidus c:geo iš naujo
 - Nauja: Peržiūrėti laukiančius atsisiuntimus
+- Nauja: Pridėti slėptuvės/sąrašo pavadinimą prie failo pavadinimo eksportuojant GPX
