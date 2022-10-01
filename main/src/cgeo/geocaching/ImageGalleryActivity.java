@@ -37,7 +37,7 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
         images = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
 
         imageGallery = findViewById(R.id.image_gallery);
-        ImageUtils.initializeImageGallery(imageGallery, null, images);
+        ImageUtils.initializeImageGallery(imageGallery, geocode, images, false);
     }
 
     @Override
