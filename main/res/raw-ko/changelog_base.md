@@ -5,13 +5,14 @@
 
 ### 캐시 상세정보
 - 변경: 필요한 데이터를 검색하는 중 로그 활동에 로드 표시기를 표시합니다.
-- Fix: Log image labelled "Image 1" even if only a single image added
+- 수정: 단일 이미지만 추가된 경우에도 "image 1"이라는 레이블이 지정된 로그 이미지
 
 ### 일반
 - 신규: "mf-v4-map" 및 "mf-theme" 접두사 링크에 대한 일반 다운로드 지원(자동 업데이트는 지원되지 않음)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
+- 신규: 유지 관리 기능이 데이터베이스를 다시 인덱싱합니다.
+- 신규: 90일마다 데이터베이스의 자동 성능 최적화 (다시 인덱싱)
 - 수정: 누락된 정밀 위치 권한 처리
 - 변경: 웹사이트 언어 스위치 제거됨
 - 수정: 삭제된 사용자 정의 캐시는 c:geo 재시작 시 삭제되지 않습니다.
-- New: View for pending downloads
+- 신규: 대기 중인 다운로드 보기
+- New: Append cache name / list name to file name on GPX export
