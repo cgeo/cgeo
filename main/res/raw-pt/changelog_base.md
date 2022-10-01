@@ -15,3 +15,4 @@
 - Alteração: removida opção de mudança de idioma do sítio Web
 - Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
 - Novo: Exibição das transferências em espera
+- New: Append cache name / list name to file name on GPX export
