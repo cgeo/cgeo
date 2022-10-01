@@ -33,7 +33,7 @@ public abstract class PseudoList extends AbstractList {
 
     private static final int HISTORY_LIST_ID = 4;
     /**
-     * list entry to create a new list
+     * list entry to show log history
      */
     public static final AbstractList HISTORY_LIST = new PseudoList(HISTORY_LIST_ID, R.string.menu_history) {
         @Override
