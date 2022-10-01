@@ -15,3 +15,4 @@
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
 - New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
