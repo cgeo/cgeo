@@ -370,10 +370,10 @@
     <string name="caches_store_background_result_failed">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_store_background_result_canceled">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
-        <item quantity="one">%d slėptuvė atsisiųsta</item>
-        <item quantity="few">%d slėptuvės atsisiųstos</item>
-        <item quantity="many">%d slėptuvių atsisiųsta</item>
-        <item quantity="other">%d slėptuvių atsisiųsta</item>
+        <item quantity="one">Atsisiųsta %d slėptuvė</item>
+        <item quantity="few">Atsisiųstos %d slėptuvės</item>
+        <item quantity="many">Atsisiųsta %d slėptuvių</item>
+        <item quantity="other">Atsisiųsta %d slėptuvių</item>
     </plurals>
     <string name="caches_history">Istorija</string>
     <string name="caches_on_map">Rodyti žemėlapyje</string>
