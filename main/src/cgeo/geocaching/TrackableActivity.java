@@ -456,7 +456,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         if (pageId == Page.IMAGEGALLERY.id) {
             String title = "*" + this.getString(Page.find(pageId).resId) + "*";
             if (this.imageGallery != null) {
-                title += " (" + this.imageGallery.getCount() + ")";
+                title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return title;
         }

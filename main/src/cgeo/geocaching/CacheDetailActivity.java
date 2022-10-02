@@ -232,6 +232,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     protected ImagesList imagesList;
 
     private ImageGalleryView imageGallery;
+    private int imageGalleryPos = 0;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
@@ -2350,10 +2351,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
+            binding.experimental.setOnClickListener(v -> {
+                binding.imageGallery.scrollTo(binding.imageGallery.getImageCount() - 1);
+            });
+
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
                 ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
                 activity.imageGallery = imageGallery;
+                activity.imageGallery.initializeToPosition(activity.imageGalleryPos);
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
@@ -2420,6 +2426,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (imageGallery != null) {
             imageGallery.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onActivityReenter(final int resultCode, final Intent data) {
+        super.onActivityReenter(resultCode, data);
+        this.imageGalleryPos = ImageGalleryView.onActivityReenter(this, this.imageGallery, data);
     }
 
     @Override
@@ -2608,7 +2620,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.IMAGEGALLERY.id) {
             String title = "*" + this.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
-                title += " (" + this.imageGallery.getCount() + ")";
+                title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {

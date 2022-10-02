@@ -51,6 +51,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
 
+    public static final String EXTRA_IMAGEVIEW_POS = "imageview_pos";
+
     private static final String TRANSITION_ID_ENTER = "image_enter_transition_id";
     private static final String TRANSITION_ID_EXIT = "image_exit_transition_id_";
 
@@ -323,6 +325,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @SuppressLint("SetTextI18n")
     private void loadImageView(final int pagerPos, final int loadImagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(loadImagePos);
+        binding.imageFull.setImageResource(R.drawable.mark_green_orange);
         if (currentImage == null) {
             binding.imageviewHeadline.setVisibility(View.INVISIBLE);
             binding.imageFull.setVisibility(View.GONE);
@@ -384,7 +387,10 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
                 showImage(pagerPos, binding);
 
-            }, () -> binding.imageFull.setVisibility(View.GONE));
+            }, () -> {
+                binding.imageFull.setImageResource(R.drawable.mark_transparent);
+                binding.imageFull.setVisibility(View.GONE);
+            });
         }
 
     }
@@ -441,6 +447,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         intent.putExtra(PARAM_IMAGE_CONTEXT_CODE, contextCode);
         intent.putExtra(PARAM_IMAGE_LIST, new ArrayList<>(images));
         intent.putExtra(PARAM_IMAGE_LIST_POS, pos);
+        activity.overridePendingTransition(0, 0);
         if (getImageView == null || getImageView.call(pos) == null) {
             activity.startActivity(intent);
         } else {
@@ -482,8 +489,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private void setFinishResult() {
         //pass back selected image index
         final Intent intent = new Intent();
-        intent.putExtra(Intents.EXTRA_INDEX, this.imagePos);
+        intent.putExtra(Intents.EXTRA_INDEX, this.imagePos); //TODO: might be deletable
+        intent.putExtra(ImageViewActivity.EXTRA_IMAGEVIEW_POS, this.imagePos);
         setResult(RESULT_OK, intent);
+    }
+
+    public static int getImageViewPos(final Bundle bundle) {
+        return bundle == null ? 0 : bundle.getInt(ImageViewActivity.EXTRA_IMAGEVIEW_POS, 0);
     }
 
 }
