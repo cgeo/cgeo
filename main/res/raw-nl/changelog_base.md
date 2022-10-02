@@ -10,9 +10,9 @@
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
 - Nieuw: Onderhoudsfunctie herindexeert database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- New: View for pending downloads
+- Nieuw: Automatische prestatieoptimalisatie van de database om de 90 dagen (herindexeren)
+- Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
+- Wijziging: Website taalschakelaar verwijderd
+- Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
+- Nieuw: Openstaande downloads weergave
 - Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
