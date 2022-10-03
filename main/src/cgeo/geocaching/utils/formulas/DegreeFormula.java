@@ -92,7 +92,7 @@ public class DegreeFormula {
     }
 
     private boolean isParserOnHemisphereChar(final boolean checkEof) {
-        return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || Character.isWhitespace(parser.peek()));
+        return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || TextParser.isFormulaWhitespace(parser.peek()));
     }
 
     private Formula parseFormula(final KeyableCharSet kcs) {
@@ -395,6 +395,10 @@ public class DegreeFormula {
                 css.add(TextUtils.setSpan(cs.toString(), Formula.createErrorSpan()));
             }
         }
+    }
+
+    public static String removeSpaces(final String formula) {
+        return formula == null ? "" : formula.replaceAll("\\s", "");
     }
 
 }

@@ -108,6 +108,11 @@ public class DegreeFormulaTest {
         assertParse("S53 33.6", null, -53d - 33.006 / 60, "S53°33.<00>6'");
     }
 
+    @Test
+    public void parseFormulaWithWhitespaces() {
+        assertParse("N\f46°\u00A0(C+E+F+1).\n0\t(C+F-E)", s -> Value.of(0), 46.0166666666666666666d, "N46°1.<0>00'");
+    }
+
 
     //this is a test to copy/paste single tests into for local analysis e.g. using Debugging
     @Test
@@ -143,5 +148,12 @@ public class DegreeFormulaTest {
         assertThat(DegreeFormula.compile("N48 12", false).evaluateToDouble(null)).isEqualTo(48d + 12d / 60);
         assertThat(DegreeFormula.compile("N48 12.345", false).evaluateToDouble(null)).isEqualTo(48d + 12.345d / 60);
         assertThat(DegreeFormula.compile("N48 12.A45", false).evaluateToDouble(x -> Value.of(3))).isEqualTo(48.20575d);
+    }
+
+    @Test
+    public void removeSpaces() {
+        //formula includes all sorts of whitespace
+        assertThat(DegreeFormula.removeSpaces("E10° 0 ( c\t ). (\ne*3\r+ d )"))
+                .isEqualTo("E10°0(c).(e*3+d)");
     }
 }
