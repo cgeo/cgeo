@@ -16,3 +16,6 @@
 - Oprava: Odstraněné uživatelsky definované kešky se při restartu c:geo neodstraní
 - Novinka: Zobrazení čekajících stahování
 - Novinka: Připojení názvu kešky / názvu seznamu k názvu souboru při exportu GPX
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
