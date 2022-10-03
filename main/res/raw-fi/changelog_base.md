@@ -16,3 +16,6 @@
 - Korjaus: Käyttäjän määrittämiä kätköjä ei poisteta, kun c:geo käynnistetään uudelleen
 - Uusi: Näkymä odottaville latauksille
 - Uusi: Lisää kätkön nimi / luettelon nimi tiedoston nimeen GPX- viennissä
+- Muutos: Poistettu "Tunnista Android-selaimeksi" asetus
+- Uusi: Tarkista odottavat lataukset (kartat / reititystiedot) käynnistettäessä
+- Korjaa: Suodatinpalkki ei ole luettavissa vaaleassa tilassa
