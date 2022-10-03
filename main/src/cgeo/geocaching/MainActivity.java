@@ -444,23 +444,26 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     /** prompts user if there's at least one blocked or failed download */
     private void checkPendingDownloads() {
-        final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
-        if (pendingDownloads.size() == 0) {
-            return;
-        }
+        if (Settings.pendingDownloadsNeedCheck()) {
+            final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
+            if (pendingDownloads.size() == 0) {
+                return;
+            }
 
-        final DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
-            final DownloadManager.Query query = new DownloadManager.Query();
-            query.setFilterById(download.id);
-            try (Cursor c = downloadManager.query(query)) {
-                while (c.moveToNext()) {
-                    final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-                    if (colStatus >= 0) {
-                        final int status = c.getInt(colStatus);
-                        if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
-                            SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
-                            break;
+            final DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
+                final DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(download.id);
+                try (Cursor c = downloadManager.query(query)) {
+                    while (c.moveToNext()) {
+                        final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                        if (colStatus >= 0) {
+                            final int status = c.getInt(colStatus);
+                            if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                                SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                                Settings.setPendingDownloadsLastCheck(false);
+                                break;
+                            }
                         }
                     }
                 }
