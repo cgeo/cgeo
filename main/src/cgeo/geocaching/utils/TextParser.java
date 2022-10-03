@@ -97,9 +97,14 @@ public final class TextParser {
     }
 
     public void skipWhitespaces() {
-        while (Character.isWhitespace(ch)) {
+        while (isFormulaWhitespace(ch)) {
             next();
         }
+    }
+
+    public static boolean isFormulaWhitespace(final int codePoint) {
+        //note that Character.isWhitespace() will NOT return true for nbsp!
+        return Character.isWhitespace(codePoint) || Character.isSpaceChar(codePoint);
     }
 
     public void nextNonWhitespace() {
