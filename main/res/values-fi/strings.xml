@@ -638,6 +638,9 @@
     <string name="downloader_cancel_download">Peruuta lataus</string>
     <string name="downloader_cancel_file">Peruuta odottava lataus \"%s\" ja poista ladatut osat?</string>
     <string name="downloader_cancelled_download">Peruttu lataus kohteelle \"%s\"</string>
+    <string name="downloader_pending_info">Löytyi ainakin yksi pysäytetty tai epäonnistunut lataus. Haluatko avata luettelon odottavista latauksista?</string>
+    <string name="downloader_retry_download">Yritä uudelleen latausta</string>
+    <string name="downloader_retry_download_details">Haluatko kokeilla uudelleen lataamista:\n%1$s</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Lataus on epäonnistunut (ja sitä ei yritetä uudelleen)</string>
     <string name="asdm_status_paused">Lataus odottaa uudelleenyritystä tai jatkamista</string>
