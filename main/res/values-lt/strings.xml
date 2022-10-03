@@ -652,6 +652,9 @@
     <string name="downloader_cancel_download">Atšaukti atsiuntimą</string>
     <string name="downloader_cancel_file">Atšaukti laukiantį \'\'%s\'\' atsisiuntimą ir pašalinti atsisiųstas dalis?</string>
     <string name="downloader_cancelled_download">\'\'%s\'\' atsisiuntimas atšauktas</string>
+    <string name="downloader_pending_info">Yra bent vienas pristabdytas arba nepavykęs atsisiuntimas. Ar norite atidaryti laukiančių atsisiuntimų sąrašą?</string>
+    <string name="downloader_retry_download">Bandyti atsisiųsti dar kartą</string>
+    <string name="downloader_retry_download_details">Ar norite dar kartą pabandyti atsisiųsti:\n%1$s</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Atsisiuntimas nepavyko (ir nebus bandomas iš naujo)</string>
     <string name="asdm_status_paused">Laukiama, kol bus galima bandyti iš naujo arba tęsti</string>
@@ -747,7 +750,7 @@
     <string name="err_vote_send_rating">Siunčiant įvertinimą įvyko klaida.</string>
     <string name="vote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="init_login_popup">Prisijungti</string>
-    <string name="init_login_popup_working">Jungiamasi…</string>
+    <string name="init_login_popup_working">Prisijungiama…</string>
     <string name="init_login_popup_ok">Prisijungta</string>
     <string name="init_login_popup_failed">Nepavyko prisijungti</string>
     <string name="init_login_popup_failed_reason">Nepavyko prisijungti: %s</string>
