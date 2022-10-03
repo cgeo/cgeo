@@ -16,3 +16,6 @@
 - Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
 - Nieuw: Openstaande downloads weergave
 - Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
