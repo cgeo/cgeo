@@ -16,3 +16,6 @@
 - Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
 - Novo: Exibição das transferências em espera
 - New: Append cache name / list name to file name on GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
