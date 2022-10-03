@@ -530,6 +530,7 @@
     <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
     <string translatable="false" name="pref_dbCleanupLastCheck">dbCleanupLastCheck</string>
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
+    <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>
