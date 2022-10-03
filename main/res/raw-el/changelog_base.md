@@ -16,3 +16,6 @@
 - Διόρθωση: Οι διαγραμμένες κρύπτες δε διαγράφονταν σε επανεκκίνηση του c:geo
 - Νέο: Προβολή αποσφαλμάτωσης για εκκρεμείς λήψεις
 - Νέο: Προσθήκη ονόματος cache / ονόματος λίστας στο όνομα αρχείου στην εξαγωγή GPX
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
