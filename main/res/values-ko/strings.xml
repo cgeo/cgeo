@@ -631,6 +631,9 @@
     <string name="downloader_cancel_download">다운로드 취소</string>
     <string name="downloader_cancel_file">대기 중인 \"%s\" 다운로드를 취소하고 다운로드한 부분을 제거하시겠습니까?</string>
     <string name="downloader_cancelled_download">\"%s\" 다운로드가 취소되었습니다.</string>
+    <string name="downloader_pending_info">일시 중지되거나 실패한 다운로드가 하나 이상 있습니다. 대기 중인 다운로드 목록을 여시겠습니까?</string>
+    <string name="downloader_retry_download">다운로드 재시도</string>
+    <string name="downloader_retry_download_details">다운로드를 다시 시도하시겠습니까:\n%1$s</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">다운로드 실패 (다시 시도하지 않음)</string>
     <string name="asdm_status_paused">다운로드가 재시도 또는 재개를 기다리고 있습니다.</string>
