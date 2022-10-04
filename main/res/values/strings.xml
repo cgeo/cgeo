@@ -726,7 +726,7 @@
     <string name="downloader_cancelled_download">Cancelled download for "%s"</string>
     <string name="downloader_pending_info">There is at least one pausing or failed download. Do you want to open the list of pending downloads?</string>
     <string name="downloader_retry_download">Retry download</string>
-    <string name="downloader_retry_download_details">Do you want to retry the download of:\n%1$s</string>
+    <string name="downloader_retry_download_details">Do you want to retry the download of</string>
 
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
@@ -2517,11 +2517,12 @@
     <string name="downloadmap_filename">Downloading %s</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
+    <string name="download_none_selected">No files selected for download</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Updates found for:\n%1$s\n\nDo you want to update?%2$s</string>
-    <string name="download_warning">This may take quite some time and can lead to significant costs, depending on your network connection.</string>
+    <string name="download_confirmation_updates">Updates found for:</string>
+    <string name="download_warning">Downloads may take quite some time and can lead to significant costs, depending on your network connection.</string>
     <string name="download_error">Download failed with error #%d</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
@@ -2542,7 +2543,7 @@
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
-    <string name="check_tiles_missing">Found missing routing data:\n%1$s\n\nDo you want to download those files?%2$s</string>
+    <string name="check_tiles_missing">Found missing routing data:</string>
     <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
