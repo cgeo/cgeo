@@ -26,6 +26,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
 
     private ButtonToggleGroup statusOwn = null;
     private ButtonToggleGroup statusFound = null;
+    private ButtonToggleGroup statusDnf = null;
     private ButtonToggleGroup statusHasOfflineLog = null;
     private ButtonToggleGroup statusHasOfflineFoundLog = null;
     private ButtonToggleGroup statusStored = null;
@@ -86,6 +87,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND, false);
+        statusDnf = createGroup(ll, StatusGeocacheFilter.StatusType.DNF, true);
         statusHasOfflineFoundLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_FOUND_LOG, false);
         statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
         statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED, true);
@@ -134,6 +136,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
                 filter.isExcludeArchived() ? -1 : 2);
 
         setFromBoolean(statusFound, filter.getStatusFound());
+        setFromBoolean(statusDnf, filter.getStatusDnf());
         setFromBoolean(statusOwn, filter.getStatusOwned());
         setFromBoolean(statusHasOfflineLog, filter.getStatusHasOfflineLog());
         setFromBoolean(statusHasOfflineFoundLog, filter.getStatusHasOfflineFoundLog());
@@ -158,6 +161,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setExcludeArchived(!checkedSet.contains(2));
 
         filter.setStatusFound(getFromGroup(statusFound));
+        filter.setStatusDnf(getFromGroup(statusDnf));
         filter.setStatusOwned(getFromGroup(statusOwn));
         filter.setStatusHasOfflineLog(getFromGroup(statusHasOfflineLog));
         filter.setStatusHasOfflineFoundLog(getFromGroup(statusHasOfflineFoundLog));
