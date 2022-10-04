@@ -13,3 +13,4 @@
 - Oprava: Zpracování chybějícího oprávnění pro přesnou polohu
 - Změna: Přepínání jazyka webové stránky bylo odstraněno
 - Oprava: Odstraněné uživatelsky definované kešky se při restartu c:geo neodstraní
+- Oprava: Panel filtru není čitelný ve světlém režimu
