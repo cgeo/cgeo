@@ -34,6 +34,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import static android.content.Context.DOWNLOAD_SERVICE;
@@ -112,8 +113,8 @@ public class DownloaderUtils {
         builder.setTitle(title);
         final View layout = View.inflate(activity, R.layout.downloader_confirmation, null);
         builder.setView(layout);
-        final TextView downloadInfo = layout.findViewById(R.id.download_info);
-        downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
+        ((TextView) layout.findViewById(R.id.download_info1)).setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
+        ((TextView) layout.findViewById(R.id.download_info2)).setVisibility(View.GONE);
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -154,17 +155,28 @@ public class DownloaderUtils {
     }
 
     public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads, @Nullable final Action1<Boolean> downloadTriggered) {
-        String updates = "";
-        for (Download download : downloads) {
-            updates += (StringUtils.isNotBlank(updates) ? ", " : "") + download.getName() + (StringUtils.isNotBlank(download.getSizeInfo()) ? " (" + download.getSizeInfo() + ")" : "");
-        }
-
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
         final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
         builder.setView(layout);
-        final TextView downloadInfo = layout.findViewById(R.id.download_info);
-        downloadInfo.setText(String.format(activity.getString(confirmation), updates, "\n\n" + activity.getString(R.string.download_warning)));
+        ((TextView) layout.findViewById(R.id.download_info1)).setText(confirmation);
+        ((TextView) layout.findViewById(R.id.download_info2)).setText(R.string.download_warning);
+
+        final LinearLayout ll = layout.findViewById(R.id.checkbox_placeholder);
+        for (Download download : downloads) {
+            final CheckBox cb = new CheckBox(activity);
+            final String sizeinfo = download.getSizeInfo();
+            cb.setText(download.getName() + (StringUtils.isNotBlank(sizeinfo) ? " (" + sizeinfo + ")" : ""));
+            cb.setChecked(true);
+            download.customMarker = true;
+
+            cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                cb.setChecked(isChecked);
+                download.customMarker = isChecked;
+                Log.e(download.getName() + ", checked=" + isChecked);
+            });
+            ll.addView(cb);
+        }
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -172,18 +184,22 @@ public class DownloaderUtils {
 
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
+                        int numFiles = 0;
                         for (Download download : downloads) {
-                            final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
-                                    .setTitle(download.getName())
-                                    .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
-                                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
-                                    .setAllowedOverMetered(allowMeteredNetwork)
-                                    .setAllowedOverRoaming(allowMeteredNetwork);
-                            Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
-                            AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                            if (download.customMarker) {
+                                numFiles++;
+                                final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
+                                        .setTitle(download.getName())
+                                        .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
+                                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
+                                        .setAllowedOverMetered(allowMeteredNetwork)
+                                        .setAllowedOverRoaming(allowMeteredNetwork);
+                                Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
+                                AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                            }
                         }
-                        ActivityMixin.showShortToast(activity, R.string.download_started);
+                        ActivityMixin.showShortToast(activity, numFiles > 0 ? R.string.download_started : R.string.download_none_selected);
                         if (downloadTriggered != null) {
                             downloadTriggered.call(true);
                         }

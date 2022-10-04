@@ -36,6 +36,7 @@ public class Download {
     private String addInfo;
     private final DownloadType type;
     @DrawableRes private final int iconRes;
+    public boolean customMarker = false; // handled solely by caller
 
     public Download(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type, @DrawableRes final int iconRes) {
         this.name = CompanionFileUtils.getDisplayName(name);
