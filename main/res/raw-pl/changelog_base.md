@@ -13,3 +13,4 @@
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Poprawka: Usunięte skrytki zdefiniowane przez użytkownika nie były usuwane przy ponownym uruchomieniu c:geo
+- Fix: Filter bar not readable in light mode
