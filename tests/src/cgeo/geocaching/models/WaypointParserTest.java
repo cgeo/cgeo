@@ -635,6 +635,13 @@ public class WaypointParserTest {
         assertParseVars("test\nA=?, B=5\n$C=4*y|D=8|$R=3*5", "B", "5", "C", "4*y", "D", "8", "R", "3*5");
     }
 
+    @Test
+    public void testParseEmptyVariables() {
+        assertParseVars("$TEST=\n$B= |c=", "TEST", "", "B", "");
+        assertParseVars("$a= | $a=5 | $b=6 | $b= | $c=", "a", "5", "b", "6", "c", "");
+
+    }
+
     private void assertParseVars(final String text, final String ... expectedVars) {
         final WaypointParser parser = createParser("Praefix");
         parser.parseWaypoints(text);

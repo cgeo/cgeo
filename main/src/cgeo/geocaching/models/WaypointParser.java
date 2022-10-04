@@ -53,7 +53,7 @@ public class WaypointParser {
 
     //Constants for variable parsing
 
-    private static final String PARSING_VAR_LETTERS_FULL = "\\$([a-zA-Z][a-zA-Z0-9]*)\\s*=\\s*([^\\n|]+)[\\n|]";
+    private static final String PARSING_VAR_LETTERS_FULL = "\\$([a-zA-Z][a-zA-Z0-9]*)\\s*=([^\\n|]*)[\\n|]";
     private static final String PARSING_VAR_LETTERS_NUMERIC = "[^A-Za-z0-9]([A-Za-z]+)\\s*=\\s*([0-9]+(?:[,.][0-9]+)?)[^0-9]";
     private static final Pattern PARSING_VARS = Pattern.compile(PARSING_VAR_LETTERS_FULL + "|" + PARSING_VAR_LETTERS_NUMERIC);
 
@@ -411,11 +411,14 @@ public class WaypointParser {
     }
 
     private void addVariable(final String name, final String expression, final boolean highPrio) {
-        if (StringUtils.isBlank(name) || StringUtils.isBlank(expression)) {
+        if (StringUtils.isBlank(name)) {
             return;
         }
-        if (highPrio || !variables.containsKey(name.trim())) {
-            variables.put(name.trim(), expression.trim());
+        final String varName = name.trim();
+        final String varExpression = expression == null ? "" : expression.trim();
+        final boolean varNotSet = StringUtils.isBlank(variables.get(varName));
+        if (varNotSet || (highPrio && !StringUtils.isBlank(varExpression))) {
+            variables.put(varName, varExpression);
         }
     }
 
