@@ -13,3 +13,4 @@
 - Korjaus: Käsittele puuttuva tarkan sijainnin lupa
 - Muutos: Sivuston kielivaihto poistettu
 - Korjaus: Käyttäjän määrittämiä kätköjä ei poisteta, kun c:geo käynnistetään uudelleen
+- Korjaa: Suodatinpalkki ei ole luettavissa vaaleassa tilassa
