@@ -13,3 +13,4 @@
 - Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
 - Wijziging: Website taalschakelaar verwijderd
 - Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
+- Fix: Filter bar not readable in light mode
