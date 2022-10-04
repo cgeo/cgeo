@@ -13,3 +13,4 @@
 - Fix: Handle missing fine location permission
 - Change: Website language switch removed
 - Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Fix: Filter bar not readable in light mode
