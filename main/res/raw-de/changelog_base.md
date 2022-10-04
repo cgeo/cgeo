@@ -13,3 +13,4 @@
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
+- Fix: Filter bar not readable in light mode
