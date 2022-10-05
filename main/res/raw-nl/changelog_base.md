@@ -5,10 +5,14 @@
 
 ### Cache details
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Nieuw: Onderhoudsfunctie herindexeert database
+- Nieuw: Automatische prestatieoptimalisatie van de database om de 90 dagen (herindexeren)
+- Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
+- Wijziging: Website taalschakelaar verwijderd
+- Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
+- Fix: Filter bar not readable in light mode

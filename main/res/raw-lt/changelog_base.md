@@ -1,14 +1,18 @@
 
 ### Žemėlapis
 - Naujiena: pridėtas reljefo šešėlių palaikymas OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Pataisymas: ne visi rodomi rankiniu būdu nukopijuoti slėptuvių kelio taškai
 
 ### Slėptuvės detalės
-- Pakeista: rodyti įkėlimo indikatorių žurnalo veikloje, kol vyksta reikiamų duomenų gavimas
+- Pakeista: rodyti įkėlimo indikatorių įrašo veikloje, kol vyksta reikiamų duomenų gavimas
+- Pataisyti: nbsp; nelaikomas tarpu analizuojant formulę
+- Pataisymas: papildomi kelio taškai, sukurti naudojant asmeninių užrašų formulių analizę
 
 ### Bendras
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
+- Naujiena: Priežiūros funkcija iš naujo indeksuoja duomenų bazę
+- Naujiena: Automatinis duomenų bazės našumo optimizavimas kas 90 dienų (perindeksavimas)
+- Pataisymas: valdyti trūkstamą vietos leidimą
+- Pakeitimas: pašalintas svetainės kalbos jungiklis
+- Pataisymas: Ištrintos vartotojo nustatytos slėptuvės neištrinamos paleidus c:geo iš naujo
+- Pataisymas: Filtro juosta neįskaitoma šviesiu režimu

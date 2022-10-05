@@ -5,10 +5,14 @@
 
 ### Detalhes da cache
 - Alteração: Mostrado o indicador de carregamento, na actividade de registo, enquanto ocorre a obtenção dos dados necessários
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Geral
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Novo: Função de manutenção voltar a indexar a base de dados
+- Novo: Optimizar o desempenho da base de dados automaticamente a cada 90 dias (voltar a indexar)
+- Correcção: Controlo da permissão em falta de localização melhorada
+- Alteração: removida opção de mudança de idioma do sítio Web
+- Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
+- Fix: Filter bar not readable in light mode
