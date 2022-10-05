@@ -22,3 +22,4 @@
 - Change: Removed "Identify as Android browser" setting
 - New: Check pending downloads (maps / routing data) on startup
 - Fix: Filter bar not readable in light mode
+- New: Allow selection of files to download
