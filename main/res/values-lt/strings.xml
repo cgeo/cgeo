@@ -370,10 +370,10 @@
     <string name="caches_store_background_result_failed">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_store_background_result_canceled">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
-        <item quantity="one">%d slėptuvė atsisiųsta</item>
-        <item quantity="few">%d slėptuvės atsisiųstos</item>
-        <item quantity="many">%d slėptuvių atsisiųsta</item>
-        <item quantity="other">%d slėptuvių atsisiųsta</item>
+        <item quantity="one">Atsisiųsta %d slėptuvė</item>
+        <item quantity="few">Atsisiųstos %d slėptuvės</item>
+        <item quantity="many">Atsisiųsta %d slėptuvių</item>
+        <item quantity="other">Atsisiųsta %d slėptuvių</item>
     </plurals>
     <string name="caches_history">Istorija</string>
     <string name="caches_on_map">Rodyti žemėlapyje</string>
@@ -722,7 +722,7 @@
     <string name="err_vote_send_rating">Siunčiant įvertinimą įvyko klaida.</string>
     <string name="vote_sent">Balsas sėkmingai išsiųstas</string>
     <string name="init_login_popup">Prisijungti</string>
-    <string name="init_login_popup_working">Jungiamasi…</string>
+    <string name="init_login_popup_working">Prisijungiama…</string>
     <string name="init_login_popup_ok">Prisijungta</string>
     <string name="init_login_popup_failed">Nepavyko prisijungti</string>
     <string name="init_login_popup_failed_reason">Nepavyko prisijungti: %s</string>
@@ -914,10 +914,10 @@
     <string name="init_routecolor_summary">Pasirinkite asmeninio maršruto linijos spalvą ir skaidrumą. Asmeninis maršrutas yra kelio taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai paliete kelio tašką/slėptuvę. (Pirmiausia turite įjungti ilgo palietimo funkciją, žr. Žemėlapio nustatymus.)</string>
     <string name="init_routewidth">Asmeninio maršruto linijos plotis</string>
     <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos plotį</string>
-    <string name="init_trackcolor">GPX kelio/maršruto linijos spalva</string>
-    <string name="init_trackcolor_summary">Pasirinkite kelio/maršruto linijos spalvą ir skaidrumą. Kelią/maršrutą sudaro keli kelio taškai ir jį galima įkelti naudojant GPX pėdsako/maršruto failą.</string>
-    <string name="init_trackwidth">GPX kelio/maršruto linijos plotis</string>
-    <string name="init_trackwidth_summary">Pasirinkite GPX kelio/maršruto linijos plotį</string>
+    <string name="init_trackcolor">GPX pėdsako/maršruto linijos spalva</string>
+    <string name="init_trackcolor_summary">Pasirinkite pėdsako/maršruto linijos spalvą ir skaidrumą. Pėdsaką/maršrutą sudaro keli kelio taškai ir jį galima įkelti naudojant GPX pėdsako/maršruto failą.</string>
+    <string name="init_trackwidth">GPX pėdsako/maršruto linijos plotis</string>
+    <string name="init_trackwidth_summary">Pasirinkite GPX pėdsako/maršruto linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo linijos spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis minimalaus spindulio aplink slėptuvę arba kelio tarpinį tašką atvaizdavimas, kai neleidžiama jokia kita slėptuvė arba fizinis kelio taškas. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
@@ -1052,9 +1052,9 @@
     <string name="contentstorage_selectfolder_dialog_choice_move">Perkelti visą turinį</string>
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Jokių tolesnių veiksmų</string>
     <string name="contentstorage_selectfolder_dialog_choice">Pasirinkote kitą aplanką nei šiuo metu saugomas. Dabartiniame aplanke yra %1$s, %2$s, jo dydis yra %3$s. Kaip norite tęsti?\n\nPasirinkite aplanką ir</string>
-    <string name="contentstorage_folder_selection_aborted">Atšaukiamas aplanko pasirinkimas, aplankas yra \'%s\'</string>
+    <string name="contentstorage_folder_selection_aborted">Nutraukimas aplanko pasirinkimas, aplankas yra \'%s\'</string>
     <string name="contentstorage_folder_selection_success">Aplankas nustatytas į \'%s\'</string>
-    <string name="contentstorage_file_selection_aborted">Atšaukiamas failo pasirinkimas</string>
+    <string name="contentstorage_file_selection_aborted">Nutraukimas failo pasirinkimas</string>
     <string name="contentstorage_file_selection_success">Pažymėtas failas: \'%s\'</string>
     <string name="contentstorage_err_read_failed">Failo \'%s\' perskaityti nepavyko</string>
     <string name="contentstorage_err_write_failed">Failo \'%s\' įrašyti nepavyko</string>
@@ -1079,7 +1079,7 @@
     <string name="persistablefolder_spoilerimages">Užuominos vaizdai</string>
     <string name="persistablefolder_routingbase">Maršrutizavimas</string>
     <string name="persistablefolder_routingtiles">Maršruto duomenys</string>
-    <string name="persistableuri_track">Pedsako failas</string>
+    <string name="persistableuri_track">Kelio failas</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s baigta</string>
     <string name="folder_process_status_currentfile">Apdorota %1$s</string>
@@ -2091,7 +2091,7 @@
     <string name="init_geokrety_description">Leiskite c:geo prisijungti prie GeoKrety.org tam, kad galėtumėt registruoti GeoKrety keliauninkus.</string>
     <string name="init_geokrety_userid">Vartotojo Id: %s</string>
     <string name="trackable_title_log_without_geocode">Nenurodytas geokodas</string>
-    <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geo kodo. Reikia nurodyti Geo kodą. Ar norite pridėti jį dabar?</string>
+    <string name="trackable_log_without_geocode">Jūs ruošiatės siųsti įrašą be Geokodo. Reikia nurodyti Geokodą. Ar norite pridėti jį dabar?</string>
     <string name="do_not_ask_me_again">Daugiau manęs neklausti</string>
     <string name="geokrety_parsing_failed">Nepavyko išnagrinėti GeoKrety atsakymo.</string>
     <string name="command_move_caches_progress">Perkelti slėptuves į %1s sąrašą</string>
@@ -2203,13 +2203,13 @@
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
     <!-- individual track -->
-    <string name="map_load_track">Įkelti GPX asmenini kelią/maršrutą</string>
-    <string name="load_track_error">Klaida įkeliant asmenini kelią/maršrutą</string>
+    <string name="map_load_track">Įkelti pėdsaką/maršrutą iš GPX</string>
+    <string name="load_track_error">Klaida įkeliant pėdsaką/maršrutą</string>
     <string name="map_clear_track">Išvalyti maršrutą/pėdsaką</string>
     <string name="map_clear_track_confirm">Ar norite pašalinti maršrutą/pedsaką \"%s\"?</string>
     <!-- route/track commons -->
-    <string name="routes_tracks_dialog_title">Maršrutų / takelių parinktys</string>
-    <string name="routes_tracks_menu">Maršrutai / Takeliai</string>
+    <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
+    <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
