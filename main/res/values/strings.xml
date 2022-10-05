@@ -727,7 +727,7 @@
     <string name="downloader_cancelled_download">Cancelled download for "%s"</string>
     <string name="downloader_pending_info">There is at least one pausing or failed download. Do you want to open the list of pending downloads?</string>
     <string name="downloader_retry_download">Retry download</string>
-    <string name="downloader_retry_download_details">Do you want to retry the download of</string>
+    <string name="downloader_retry_download_details">Please select the files you want to download again:</string>
 
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
