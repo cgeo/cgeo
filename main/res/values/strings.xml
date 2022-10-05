@@ -616,7 +616,7 @@
     <string name="cache_filter_status_select_no">No</string>
 
     <string name="cache_filter_status_select_label_found">Found</string>
-    <string name="cache_filter_status_select_label_dnf">DNF</string>
+    <string name="cache_filter_status_select_label_dnf">Did not find</string>
     <string name="cache_filter_status_select_label_owned">Owned</string>
     <string name="cache_filter_status_select_label_stored">Stored</string>
     <string name="cache_filter_status_select_label_favorite">Own Favorite</string>
