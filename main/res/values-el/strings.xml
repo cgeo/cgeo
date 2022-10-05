@@ -351,6 +351,9 @@
         <item quantity="one">%d λεπτό</item>
         <item quantity="other">%dλεπτά</item>
     </plurals>
+    <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
+    <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
+    <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
@@ -619,7 +622,32 @@
     <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
     <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
     <string name="debug_user_error_explain_options">Βοηθήστε να διορθώσουμε τα προβλήματα του c:geo αναφέροντας τα μέσω email, συμπεριλαμβάνοντας τις πληροφορίες συστήματος και το αρχείο καταγραφής του c:geo.\nΤο μήνυμα σας να συμπεριλαμβάνει πάντοτε και μια λεπτομερή περιγραφή του σφάλματος!\n\nΠριν από την αποστολή μηνύματος, ελέγξτε τις Συχνές Ερωτήσεις ή/και την παρουσία μας στα μέσα κοινωνικής δικτύωσης για γνωστά προβλήματα.\nΆλλες επιλογές επικοινωνίας μπορούν να βρεθούν στο \'Σχετικά με το c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Τρέχουσες λήψεις</string>
+    <string name="downloader_pending_downloads">Εκκρεμείς λήψεις</string>
+    <string name="downloader_no_pending_downloads">Δεν υπάρχουν λήψεις σε αναμονή αυτήν τη στιγμή</string>
+    <string name="downloader_cancel_download">Ακύρωση λήψης</string>
+    <string name="downloader_cancel_file">Ακύρωση εν αναμονή λήψης του \"%s\" και αφαίρεση κατεβασμένων τμημάτων;</string>
+    <string name="downloader_cancelled_download">Ακυρώθηκε η λήψη για \"%s\"</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Η λήψη απέτυχε (και δεν θα γίνει επανάληψη)</string>
+    <string name="asdm_status_paused">Η λήψη περιμένει να ξαναπροσπαθήσει ή να συνεχίσετε</string>
+    <string name="asdm_status_pending">Η λήψη είναι σε αναμονή για έναρξη</string>
+    <string name="asdm_status_running">Η λήψη εκτελείται αυτή τη στιγμή</string>
+    <string name="asdm_status_successful">Η διαγραφή έχει ολοκληρωθεί επιτυχώς</string>
+    <string name="asdm_paused_queued_for_wifi">Παύση: Αναμονή για Wifi</string>
+    <string name="asdm_paused_unknown">Παύση για κάποιον άλλο λόγο</string>
+    <string name="asdm_paused_waiting_for_network">Παύση: Αναμονή για να προχωρήσει η σύνδεση δικτύου</string>
+    <string name="asdm_paused_waiting_to_retry">Παύση: Παρουσιάστηκε κάποιο σφάλμα δικτύου και ο διαχειριστής λήψεων περιμένει πριν την επανάληψη της αίτησης</string>
+    <string name="asdm_error_cannot_resume">Σφάλμα: Προέκυψε κάποιο πιθανό μεταβατικό σφάλμα, αλλά δεν μπορούμε να συνεχίσουμε τη λήψη</string>
+    <string name="asdm_error_device_not_found">Σφάλμα: Δεν βρέθηκε εξωτερική συσκευή αποθήκευσης. Η κάρτα SD προσαρτήθηκε;</string>
+    <string name="asdm_error_file_already_exists">Σφάλμα: Το αρχείο προορισμού που ζητήθηκε υπάρχει ήδη, δεν θα αντικατασταθεί</string>
+    <string name="asdm_error_file_error">Σφάλμα: Άγνωστο πρόβλημα αποθήκευσης</string>
+    <string name="asdm_error_http_data_error">Σφάλμα: Σφάλμα επεξεργασίας HTTP σε επίπεδο δεδομένων</string>
+    <string name="asdm_error_insufficient_space">Ανεπαρκής χώρος αποθήκευσης</string>
+    <string name="asdm_error_too_many_redirects">Σφάλμα: Πάρα πολλές ανακατευθύνσεις</string>
+    <string name="asdm_error_unhandled_http_code">Σφάλμα: Μη αντιμετοπίσιμος κώδικας http</string>
+    <string name="asdm_error_unknwon">Σφάλμα: Άγνωστο σφάλμα</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
     <string name="settings_title_services">Υπηρεσίες</string>
@@ -942,6 +970,7 @@
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
+    <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
     <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
     <string name="init_location">Γεωτοποθεσία</string>
     <string name="init_location_note">Σε συσκευές που διαθέτουν υπηρεσίες Google Play, το c:geo μπορεί να χρησιμοποιήσει αυτόματα ένα καλύτερο πάροχο γεωτοποθεσίας. Ωστόσο, αυτό εμποδίζει τη χρήση ενός εξωτερικού δέκτη BlueTooth GPS.</string>

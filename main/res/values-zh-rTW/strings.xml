@@ -542,6 +542,8 @@
     <string name="contribution_graphics">圖像</string>
     <string name="debug_user_error_report_title">回報問題</string>
     <string name="debug_user_error_errortext">未預期的錯誤發生，請回報這個錯誤給我們。</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">開啟設置</string>
     <string name="settings_title_services">服务</string>

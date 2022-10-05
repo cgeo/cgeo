@@ -5,10 +5,19 @@
 
 ### Λεπτομέρειες κρύπτης
 - Αλλαγή: Εμφάνιση δείκτη φόρτωσης στη δραστηριότητα καταγραφής ενώ η ανάκτηση των απαιτούμενων δεδομένων είναι σε εξέλιξη
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Γενικά
 - Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
-- New: Maintenance function reindexes and compresses database
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
+- Νέο: Διορθώσεις λειτουργίας reindex και συμπίεσης βάσης δεδομένων
+- Νέα: Αυτόματη βελτιστοποίηση των επιδόσεων της βάσης δεδομένων κάθε 90 ημέρες (reindex)
+- Διόρθωση: Λεπτομέρειεςτοποθεσίας
+- Αλλαγή: Αφαίρεση διακόπτη γλώσσας ιστοχώρου
+- Διόρθωση: Οι διαγραμμένες κρύπτες δε διαγράφονταν σε επανεκκίνηση του c:geo
+- Νέο: Προβολή αποσφαλμάτωσης για εκκρεμείς λήψεις
+- Νέο: Προσθήκη ονόματος cache / ονόματος λίστας στο όνομα αρχείου στην εξαγωγή GPX
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode

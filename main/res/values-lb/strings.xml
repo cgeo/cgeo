@@ -391,6 +391,8 @@
     <string name="contribution_documentation">Dokumentatioun</string>
     <string name="contribution_projectleader">Open Source Projektmanager</string>
     <string name="contribution_graphics">Grafik</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Astellungen opmaachen?</string>
     <string name="settings_title_services">Servicer</string>

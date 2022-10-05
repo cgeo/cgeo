@@ -24,7 +24,7 @@
     <string name="mega">Mega event</string>
     <string name="giga">Giga event</string>
     <string name="earth">EarthCache</string>
-    <string name="cito">CITO - Cash in Trash Out Event</string>
+    <string name="cito">CITO - Cache In Trash Out Event</string>
     <string name="webcam">Webcam Cache</string>
     <string name="virtual">Virtuálka</string>
     <string name="wherigo">Wherigo keška</string>
@@ -608,7 +608,9 @@
     <string name="debug_user_error_report_title">Nahlásenie problému</string>
     <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomôžte nám opraviť problémy aplikácie c:geo tak, že ich nahlásite cez e-mail s informáciami o systéme a priloženým súborom denníka aplikácie c:geo.\nVo svojej e-mailovej správy vždy uveďte aj podrobný popis chyby!\n\nPred odoslaním e-mailu skontrolujte aj naše Najčastejšie otázky a spoločenské médiá, kde nájdete informácie o známych problémoch.\nĎalšie možnosti kontaktu nájdete v časti „Informácie o aplikácii c:geo“.</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Aktuálne preberania</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>

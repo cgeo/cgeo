@@ -355,6 +355,9 @@
         <item quantity="one">%d minuutti</item>
         <item quantity="other">%d minuuttia</item>
     </plurals>
+    <string name="caches_store_offline">Tallenna offline-tilassa</string>
+    <string name="caches_store_offline_map">Tallenna kätköt offline-tilassa</string>
+    <string name="caches_store_selected">Tallenna valitut</string>
     <string name="caches_store_background_title">Lataa kätköt</string>
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
@@ -628,7 +631,35 @@
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
     <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
     <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston.\n Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen!\n\nEnnen sähköpostin lähetystä, tarkistathan FAQmme ja/tai sosiaalisen median tilimme tiedossa olevien ongelmien varalta.\nMuita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Nykyiset lataukset</string>
+    <string name="downloader_pending_downloads">Odottavat lataukset</string>
+    <string name="downloader_no_pending_downloads">Ei odottavia latauksia</string>
+    <string name="downloader_cancel_download">Peruuta lataus</string>
+    <string name="downloader_cancel_file">Peruuta odottava lataus \"%s\" ja poista ladatut osat?</string>
+    <string name="downloader_cancelled_download">Peruttu lataus kohteelle \"%s\"</string>
+    <string name="downloader_pending_info">Löytyi ainakin yksi pysäytetty tai epäonnistunut lataus. Haluatko avata luettelon odottavista latauksista?</string>
+    <string name="downloader_retry_download">Yritä uudelleen latausta</string>
+    <string name="downloader_retry_download_details">Haluatko kokeilla uudelleen lataamista:\n%1$s</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Lataus on epäonnistunut (ja sitä ei yritetä uudelleen)</string>
+    <string name="asdm_status_paused">Lataus odottaa uudelleenyritystä tai jatkamista</string>
+    <string name="asdm_status_pending">Lataus odottaa käynnistystä</string>
+    <string name="asdm_status_running">Lataus on käynnissä</string>
+    <string name="asdm_status_successful">Lataus on suoritettu onnistuneesti</string>
+    <string name="asdm_paused_queued_for_wifi">Keskeytetty: Odotetaan Wifiä</string>
+    <string name="asdm_paused_unknown">Keskeytetty jostain muusta syystä</string>
+    <string name="asdm_paused_waiting_for_network">Keskeytetty: Odotetaan verkkoyhteyden jatkamista</string>
+    <string name="asdm_paused_waiting_to_retry">Pysäytetty: Joitakin verkkovirheitä esiintyi ja lataushallinta odottaa ennen kuin yritetään uudelleen pyyntöä</string>
+    <string name="asdm_error_cannot_resume">Virhe: Joitakin mahdollisesti ohimeneviä virheitä esiintyi, mutta emme voi jatkaa latausta</string>
+    <string name="asdm_error_device_not_found">Virhe: Ulkoista tallennuslaitetta ei löytynyt. SD-kortti kytketty?</string>
+    <string name="asdm_error_file_already_exists">Virhe: Pyydetty kohdetiedosto on jo olemassa, sitä ei korvata</string>
+    <string name="asdm_error_file_error">Virhe: Tuntematon tallennusongelma</string>
+    <string name="asdm_error_http_data_error">Virhe: HTTP käsittelyvirhe datatasolla</string>
+    <string name="asdm_error_insufficient_space">Virhe: tallennustilaa ei ole riittävästi</string>
+    <string name="asdm_error_too_many_redirects">Virhe: Liian monta uudelleenohjausta</string>
+    <string name="asdm_error_unhandled_http_code">Virhe: HTTP-koodia ei käsitelty</string>
+    <string name="asdm_error_unknwon">Virhe: Tuntematon virhe</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -952,6 +983,7 @@
     <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
     <string name="init_maintenance_directories">Poista orpotiedostot</string>
     <string name="init_maintenance_start">Huolto aloitettu</string>
+    <string name="init_maintenance_ongoing">Tämä voi kestää jonkin aikaa…</string>
     <string name="init_maintenance_finished">Huolto suoritettu</string>
     <string name="init_location">Paikkatieto</string>
     <string name="init_location_note">Laitteissa joissa on Google Play Palvelut, c:geo voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS -vastaanottimen käytön.</string>
@@ -2210,7 +2242,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>

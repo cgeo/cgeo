@@ -631,7 +631,32 @@
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
     <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Transferências em curso</string>
+    <string name="downloader_pending_downloads">Transferências em espera</string>
+    <string name="downloader_no_pending_downloads">Sem transferências em espera</string>
+    <string name="downloader_cancel_download">Cancelar transferência</string>
+    <string name="downloader_cancel_file">Cancelar a transferência em espera de \"%s\" e remover partes já transferidas?</string>
+    <string name="downloader_cancelled_download">Transferência de \"%s\" cancelada</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
+    <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
+    <string name="asdm_status_pending">A transferência aguarda o seu início</string>
+    <string name="asdm_status_running">A transferência está em curso</string>
+    <string name="asdm_status_successful">A transferência foi concluída com sucesso</string>
+    <string name="asdm_paused_queued_for_wifi">Pausada: A aguardar por Wi-Fi</string>
+    <string name="asdm_paused_unknown">Pausada por qualquer outra razão</string>
+    <string name="asdm_paused_waiting_for_network">Pausada: A aguardar por uma conexão de rede para continuar</string>
+    <string name="asdm_paused_waiting_to_retry">Pausada: Ocorreu algum erro de rede e o gestor de transferências está à espera para voltar a tentar este pedido</string>
+    <string name="asdm_error_cannot_resume">Erro: Ocorreu um erro possivelmente transitório, mas não podemos retomar a transferência</string>
+    <string name="asdm_error_device_not_found">Erro: Nenhum dispositivo de armazenamento externo foi encontrado. O cartão SD está montado?</string>
+    <string name="asdm_error_file_already_exists">Erro: O ficheiro de destino solicitado já existe, não será substituído</string>
+    <string name="asdm_error_file_error">Erro: Problema de armazenamento desconhecido</string>
+    <string name="asdm_error_http_data_error">Erro: Falhou o processamento de HTTP no nível de dados</string>
+    <string name="asdm_error_insufficient_space">Erro: Espaço de armazenamento insuficiente</string>
+    <string name="asdm_error_too_many_redirects">Erro: Demasiados redireccionamentos</string>
+    <string name="asdm_error_unhandled_http_code">Erro: Código HTTP não tratado</string>
+    <string name="asdm_error_unknwon">Erro: Erro desconhecido</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>

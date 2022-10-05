@@ -610,7 +610,9 @@
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">実行中のダウンロード</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>

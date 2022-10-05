@@ -598,7 +598,9 @@
     <string name="debug_user_error_report_title">Reportar un problema</string>
     <string name="debug_user_error_errortext">Ha ocurrido un problema inesperado que le pediremos que nos lo comunique:</string>
     <string name="debug_user_error_explain_options">Ayúdanos a solucionar los problemas de c:geo informándolos por correo electrónico con información del sistema e incluyendo el archivo de registro de c:geo.\nPor favor, ¡incluya siempre una descripción de error detallada con su correo!\n\nAntes de enviar un correo, por favor consulte nuestras preguntas frecuentes y/o la presencia en las redes sociales sobre problemas conocidos.\nOtras opciones de contacto se pueden encontrar en \'Acerca de c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Descargas actuales</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">¿Abrir ajustes?</string>
     <string name="settings_title_services">Servicios</string>

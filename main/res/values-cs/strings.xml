@@ -645,7 +645,32 @@
     <string name="debug_user_error_report_title">Nahlásit problém</string>
     <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo.\nK e-mailu vždy prosím uveďte také podrobný popis chyby.\n\nPřed odesláním e-mailu si prosím také přečtěte naše FAQ a/nebo přítomnost řešení známých problémů na sociálních médiích.\nOstatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Aktuální stahování</string>
+    <string name="downloader_pending_downloads">Čeká na stažení</string>
+    <string name="downloader_no_pending_downloads">Momentálně žádná čekající stahování</string>
+    <string name="downloader_cancel_download">Zrušit stahování</string>
+    <string name="downloader_cancel_file">Zrušit čekající stahování \"%s\" a odstranit stažené části?</string>
+    <string name="downloader_cancelled_download">Zrušené stahování pro \"%s\"</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Stahování se nezdařilo (a nebude obnoveno)</string>
+    <string name="asdm_status_paused">Stahování čeká na opakování nebo pokračování</string>
+    <string name="asdm_status_pending">Stahování čeká na spuštění</string>
+    <string name="asdm_status_running">Stahování právě probíhá</string>
+    <string name="asdm_status_successful">Stahování bylo úspěšně dokončeno</string>
+    <string name="asdm_paused_queued_for_wifi">Pozastaveno: Čekání na WiFi</string>
+    <string name="asdm_paused_unknown">Pozastaveno z jiného důvodu</string>
+    <string name="asdm_paused_waiting_for_network">Pozastaveno: Čekání na připojení k síti</string>
+    <string name="asdm_paused_waiting_to_retry">Pozastaveno: Došlo k chybě na síti a správce stahování čeká, než se pokusí požadavek zopakovat</string>
+    <string name="asdm_error_cannot_resume">Chyba: Došlo pravděpodobně k přechodné chybě, ale nemůžeme pokračovat ve stahování</string>
+    <string name="asdm_error_device_not_found">Chyba: Nebylo nalezeno žádné externí úložiště. Je SD karta připojena?</string>
+    <string name="asdm_error_file_already_exists">Chyba: Požadovaný cílový soubor již existuje, nebude přepsán</string>
+    <string name="asdm_error_file_error">Chyba: Neznámý problém s úložištěm</string>
+    <string name="asdm_error_http_data_error">Chyba: Chyba zpracování HTTP na úrovni dat</string>
+    <string name="asdm_error_insufficient_space">Chyba: Nedostatek místa v úložišti</string>
+    <string name="asdm_error_too_many_redirects">Chyba: Příliš mnoho přesměrování</string>
+    <string name="asdm_error_unhandled_http_code">Chyba: Nezpracovaný HTTP kód</string>
+    <string name="asdm_error_unknwon">Chyba: Neznámá chyba</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
