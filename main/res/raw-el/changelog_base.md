@@ -5,6 +5,8 @@
 
 ### Λεπτομέρειες κρύπτης
 - Αλλαγή: Εμφάνιση δείκτη φόρτωσης στη δραστηριότητα καταγραφής ενώ η ανάκτηση των απαιτούμενων δεδομένων είναι σε εξέλιξη
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Γενικά
 - Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
