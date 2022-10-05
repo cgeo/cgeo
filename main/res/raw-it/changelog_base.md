@@ -5,7 +5,9 @@
 
 ### Dettagli del cache
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
+- Fix: nbsp; not considered as space in formula parsing
 - Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Generale
 - Nuovo: Supporto ai download generici per i link con prefisso "mf-v4-map" e "mf-theme" (aggiornamento automatico non supportato)
