@@ -8,6 +8,7 @@
 - Fix: nbsp; not considered as space in formula parsing
 - Fix: Log image labelled "Image 1" even if only a single image added
 - Fix: Extra waypoints created on personal note formula parsing
+- Fix: Variables not created on copying formula to different cache
 
 ### General
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
