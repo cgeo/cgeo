@@ -5,7 +5,9 @@
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
-- Oprava: Obrázek v logu označený jako "Obrázek 1", i když byl přidán pouze jeden obrázek
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
