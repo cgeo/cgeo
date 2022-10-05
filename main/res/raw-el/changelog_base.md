@@ -5,7 +5,9 @@
 
 ### Λεπτομέρειες κρύπτης
 - Αλλαγή: Εμφάνιση δείκτη φόρτωσης στη δραστηριότητα καταγραφής ενώ η ανάκτηση των απαιτούμενων δεδομένων είναι σε εξέλιξη
-- Διόρθωση: Καταγραφή εικόνας με ετικέτα "Εικόνα 1" ακόμη και αν έχει προστεθεί μόνο μια εικόνα
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Γενικά
 - Νέα: Υποστήριξη γενικών λήψεων για "mf-v4-map"- και "mf-theme"-prefixed links (δεν υποστηρίζεται αυτόματη ενημέρωση)
