@@ -5,7 +5,9 @@
 
 ### Cache details
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
-- Oplossing: Log afbeelding gelabeld "Afbeelding 1", zelfs als er maar één afbeelding toegevoegd is
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
