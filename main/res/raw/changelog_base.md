@@ -9,6 +9,7 @@
 - Fix: Log image labelled "Image 1" even if only a single image added
 - Fix: Extra waypoints created on personal note formula parsing
 - Fix: Variables not created on copying formula to different cache
+- Fix: (Experimental gallery) Use image cache for log/spoiler images
 
 ### General
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)

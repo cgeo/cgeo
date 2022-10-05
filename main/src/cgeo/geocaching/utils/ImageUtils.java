@@ -789,11 +789,11 @@ public final class ImageUtils {
         return (mimeType != null && mimeType.startsWith("image/"));
     }
 
-    public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images) {
+    public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images, final boolean showOwnCategory) {
         imageGallery.clear();
         imageGallery.setup(geocode);
         imageGallery.registerCallerActivity();
-        if (geocode != null) {
+        if (geocode != null && showOwnCategory) {
             imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
         }
         if (images != null) {

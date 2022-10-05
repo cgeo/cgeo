@@ -2314,7 +2314,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
-                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages());
+                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
                 activity.imageGallery = imageGallery;
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
