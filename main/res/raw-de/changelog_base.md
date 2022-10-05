@@ -5,7 +5,9 @@
 
 ### Cache-Details
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
+- Fix: nbsp; not considered as space in formula parsing
 - Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
