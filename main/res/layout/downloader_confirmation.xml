@@ -31,8 +31,8 @@
         <CheckBox
             android:id="@+id/allow_metered_network"
             style="@style/checkbox_full"
+            android:textSize="@dimen/textSize_detailsSecondary"
             android:paddingTop="20dp"
-            android:paddingLeft="8dp"
             android:text="@string/downloadmap_allow_metered_network" />
 
         <TextView

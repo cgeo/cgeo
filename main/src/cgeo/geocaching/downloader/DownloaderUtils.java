@@ -44,6 +44,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 
@@ -164,7 +165,7 @@ public class DownloaderUtils {
 
         final LinearLayout ll = layout.findViewById(R.id.checkbox_placeholder);
         for (Download download : downloads) {
-            final CheckBox cb = new CheckBox(activity);
+            final CheckBox cb = new CheckBox(new ContextThemeWrapper(activity, R.style.checkbox_full));
             final String sizeinfo = download.getSizeInfo();
             cb.setText(download.getName() + (StringUtils.isNotBlank(sizeinfo) ? " (" + sizeinfo + ")" : ""));
             cb.setChecked(true);
