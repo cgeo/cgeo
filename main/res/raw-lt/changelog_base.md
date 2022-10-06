@@ -8,6 +8,8 @@
 - Pataisyti: nbsp; nelaikomas tarpu analizuojant formulę
 - Pataisymas: Įrašo vaizdas, pažymimas „Vaizdas 1“, net jei pridėta tik vienas vaizdas
 - Pataisymas: papildomi kelio taškai, sukurti naudojant asmeninių užrašų formulių analizę
+- Pataisymas: kintamieji nesukurti kopijuojant formulę į kitą slėptuvę
+- Pataisymas: (Eksperimentinė galerija) Naudokite vaizdų talpyklą įrašams/spoileriniams vaizdams
 
 ### Bendras
 - Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
@@ -21,3 +23,5 @@
 - Pakeitimas: pašalintas nustatymas ''Android'' naršyklė
 - Naujiena: Paleidžiant patikrina laukiančius atsisiuntimus (žemėlapius / maršruto duomenis)
 - Pataisymas: Filtro juosta neįskaitoma šviesiu režimu
+- Nauja: Leidžiama pasirinkti failus atsisiuntimui
+- Naujiena: DNF būsenos filtras
