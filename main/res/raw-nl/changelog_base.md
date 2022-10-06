@@ -7,6 +7,8 @@
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
 - Fix: nbsp; not considered as space in formula parsing
 - Fix: Extra waypoints created on personal note formula parsing
+- Fix: Variables not created on copying formula to different cache
+- Fix: (Experimental gallery) Use image cache for log/spoiler images
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
