@@ -633,6 +633,8 @@
     <string name="debug_user_error_explain_options">Hilf uns dabei Probleme in c:geo zu beheben, indem du diese per E-Mail zusammen deinen Systeminformationen und einer c:geo Logdatei meldest.\nBitte füge der E-Mail auch immer eine detaillierte Fehlerbeschreibung hinzu!\n\nBevor du eine Mail schickst, prüfe bitte auch unsere FAQ und/oder die sozialen Netzwerke nach bereits bekannten Problemen.\nAndere Kontaktmöglichkeiten findest du in \'Über c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Aktuelle Downloads</string>
+    <string name="downloader_pending_downloads">Ausstehende Downloads</string>
+    <string name="downloader_cancel_download">Download abbrechen</string>
     <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
@@ -2215,11 +2217,12 @@
     <string name="downloadmap_filename">Lade %s</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
+    <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>
     <string name="downloadmap_target_not_writable">Das ausgewählte Ziel \"%s\" ist nicht beschreibbar - die heruntergeladene Kartendatei wird im Download-Ordner des Systems gespeichert und muss manuell in den Kartenordner verschoben werden.</string>
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
     <string name="download_confirmation">%1$sDatei herunterladen \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Updates gefunden für:\n%1$s\n\nMöchtest du aktualisieren?%2$s</string>
-    <string name="download_warning">Dieser Vorgang kann eine ganze Weile dauern und kann, abhängig von deiner Netzwerkverbindung, zu erheblichen Kosten führen.</string>
+    <string name="download_confirmation_updates">Aktualisierungen gefunden für:</string>
+    <string name="download_warning">Das Herunterladen kann eine ganze Weile dauern und, abhängig von deiner Netzwerkverbindung, signifikante Kosten produzieren.</string>
     <string name="download_error">Download fehlgeschlagen mit Fehler #%d</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
     <string name="button_continue">Weiter</string>
@@ -2240,7 +2243,7 @@
     <string name="downloadtile_info">c:geo kann die angeforderte Route nicht berechnen, da einige Routingdaten fehlen. Möchtest du die fehlenden Routingdaten herunterladen?</string>
     <string name="check_tiles_menu">Auf fehlende Routingdaten prüfen</string>
     <string name="check_tiles_found">Routingdaten bereits vorhanden</string>
-    <string name="check_tiles_missing">Fehlende Routingdaten gefunden:\n%1$s\n\nMöchtest du diese Dateien herunterladen?%2$s</string>
+    <string name="check_tiles_missing">Fehlende Routing-Daten gefunden:</string>
     <string name="check_tiles_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Routingdaten verfügbar</string>
     <string name="tileupdate_info">Tippe hier, um nach Updates für heruntergeladene Routingdaten zu suchen. Lange Tippen um später erinnert zu werden.</string>
     <string name="mapupdate_info">Tippe hier, um nach Aktualisierungen von Karten- und Design-Dateien zu suchen. Lange Tippen um später erinnert zu werden.</string>
