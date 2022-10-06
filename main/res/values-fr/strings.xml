@@ -2225,8 +2225,6 @@
     <string name="downloadmap_target_not_writable">La cible sélectionnée \"%s\" n\'est pas accessible en écriture - le fichier de carte téléchargé est sauvegardé dans le dossier de téléchargement du système et doit être déplacé manuellement dans le dossier des cartes.</string>
     <string name="downloadmap_allow_metered_network">Autoriser le téléchargement sur un réseau limité (par exemple : la connexion mobile)</string>
     <string name="download_confirmation">%1$s Télécharger le fichier \"%2$s\" ? %3$s</string>
-    <string name="download_confirmation_updates">Mise à jour trouvée pour :\n%1$s\n\nVoulez-vous mettre à jour ? %2$s</string>
-    <string name="download_warning">Cela peut prendre un certain temps et peut entraîner des coûts significatifs, selon votre connexion réseau.</string>
     <string name="download_error">Le téléchargement a échoué en raison de l’erreur #%d</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
@@ -2247,7 +2245,6 @@
     <string name="downloadtile_info">c:geo ne peut pas calculer la route demandée car il y a un fichier de données de routage manquant. Voulez-vous télécharger les données de routage manquantes ?</string>
     <string name="check_tiles_menu">Vérifier les données de navigation manquantes</string>
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
-    <string name="check_tiles_missing">Des données de navigation sont manquantes :\n%1$s\n\nSouhaitez-vous télécharger ces fichiers ?%2$s</string>
     <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
     <string name="tileupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
