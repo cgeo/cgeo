@@ -2022,8 +2022,6 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_target_not_writable">El objetivo seleccionado \"%s\" no tiene permisos de escritura - el archivo de mapa descargado se guarda en la carpeta de descarga del sistema y debe moverse manualmente a la carpeta del mapa.</string>
     <string name="downloadmap_allow_metered_network">Permitir descargar a través de red (por ejemplo: conexión móvil)</string>
     <string name="download_confirmation">%1$s¿Descargar archivo \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Actualizaciones encontradas para:\n%1$s\n\n¿Desea actualizar?%2$s</string>
-    <string name="download_warning">Esto puede llevar bastante tiempo y puede llevar a costos significativos, dependiendo de su conexión de red.</string>
     <string name="download_error">Descarga fallida con error #%d</string>
     <string name="downloadmap_handling">La descarga en sí misma será manejada por el gestor de descargas de su sistema en segundo plano. Deberías ver una notificación tan pronto como se inicie la descarga (que puede tardar un rato).</string>
     <string name="button_continue">Continuar</string>
