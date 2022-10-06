@@ -2262,8 +2262,6 @@
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
     <string name="download_confirmation">%1$sPobrać plik „%2$s”?%3$s</string>
-    <string name="download_confirmation_updates">Znaleziono aktualizacje dla:\n%1$s\n\nCzy chcesz zaktualizować?%2$s</string>
-    <string name="download_warning">Może to zająć trochę czasu i może prowadzić do znacznych kosztów, w zależności od Twojego połączenia z siecią.</string>
     <string name="download_error">Nieudane pobieranie (błąd #%d)</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowy menedżer pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobierania (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
@@ -2282,7 +2280,6 @@
     <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigowania. Czy chcesz pobrać brakujące dane nawigowania?</string>
     <string name="check_tiles_menu">Sprawdź brakujące dane nawigowania</string>
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
-    <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:\n%1$s\n\nCzy chcesz pobrać te pliki?%2$s</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
     <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
