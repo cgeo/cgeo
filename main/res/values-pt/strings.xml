@@ -2236,8 +2236,6 @@
     <string name="downloadmap_target_not_writable">O destino seleccionado \"%s\" não é gravável - o mapa transferido será gravado na pasta de transferências do sistema e deve ser movido manualmente para a pasta de mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Actualizações encontradas para:\n%1$s\n\nDeseja actualizar?%2$s</string>
-    <string name="download_warning">Isso pode demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
     <string name="download_error">Transferência falhou, com o erro #%d</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
@@ -2258,7 +2256,6 @@
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
     <string name="check_tiles_menu">Verificar dados de percurso em falta</string>
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
-    <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
     <string name="tileupdate_info">Toque aqui para verificar por actualizações de ficheiros de encaminhamento transferidos. Toque longo para adiar.</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
