@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,6 +60,17 @@ public class EventTimeParser {
             }
         }
         return eventTimeMinutes;
+    }
+
+    public static int[] getEventTimesFromGcShortDesc(final String searchText) {
+        int[] times = new int[] { -1, -1 };
+        Pattern gcShortDescPattern = Pattern.compile("^<b>\\d{2} [A-Za-z]+ \\d{4}, (\\d{2}):(\\d{2}) - (\\d{2}):(\\d{2})</b>$");
+        final MatcherWrapper matcher = new MatcherWrapper(gcShortDescPattern, searchText);
+        if (matcher.matches()) {
+            times[0] = Integer.parseInt(matcher.group(1)) * 60 + Integer.parseInt(matcher.group(2));
+            times[1] = Integer.parseInt(matcher.group(3)) * 60 + Integer.parseInt(matcher.group(4));
+        }
+        return times;
     }
 
     /**

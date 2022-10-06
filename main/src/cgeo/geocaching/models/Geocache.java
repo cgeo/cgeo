@@ -190,6 +190,7 @@ public class Geocache implements IWaypoint {
     private Boolean hasLogOffline = null;
     private OfflineLogEntry offlineLog = null;
     private Integer eventTimeMinutes = null;
+    private Integer eventEndTimeMinutes = -1;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -2093,9 +2094,13 @@ public class Geocache implements IWaypoint {
 
     public int getEventTimeMinutes() {
         if (eventTimeMinutes == null) {
-            eventTimeMinutes = guessEventTimeMinutes();
+            guessEventTimeMinutes();
         }
         return eventTimeMinutes;
+    }
+
+    public int getEventEndTimeMinutes() {
+        return eventEndTimeMinutes;
     }
 
     /**
@@ -2103,13 +2108,21 @@ public class Geocache implements IWaypoint {
      *
      * @return start time in minutes after midnight
      */
-    private int guessEventTimeMinutes() {
+    private void guessEventTimeMinutes() {
         if (!isEventCache()) {
-            return -1;
+            eventTimeMinutes = -1;
         }
 
-        final String searchText = getShortDescription() + ' ' + getDescription();
-        return EventTimeParser.guessEventTimeMinutes(searchText);
+        // GC Listings have the start and end time in short description, try that first
+        int[] gcDates = EventTimeParser.getEventTimesFromGcShortDesc(getShortDescription());
+        if (gcDates[0] >= 0 && gcDates[1] >= 0) {
+            eventTimeMinutes = gcDates[0];
+            eventEndTimeMinutes = gcDates[1];
+        } else {
+            // if not successful scan the whole description for what looks like a start time
+            final String searchText = getShortDescription() + ' ' + getDescription();
+            eventTimeMinutes = EventTimeParser.guessEventTimeMinutes(searchText);
+        }
     }
 
     @NonNull
