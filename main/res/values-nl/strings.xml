@@ -2218,8 +2218,6 @@
     <string name="downloadmap_target_not_writable">Het geselecteerde doel \"%s\" is niet schrijfbaar - het gedownloade kaartbestand wordt opgeslagen in de systeem downloads map en dient handmatig te worden verplaatst naar de kaartenmap.</string>
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
     <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Updates gevonden voor:\n%1$s\n\nWil je bijwerken?%2$s</string>
-    <string name="download_warning">Dit kan heel wat tijd in beslag nemen en kan tot aanzienlijke kosten leiden, afhankelijk van uw netwerkverbinding.</string>
     <string name="download_error">Downloaden is mislukt met fout #%d</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
@@ -2240,7 +2238,6 @@
     <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
     <string name="check_tiles_menu">Controleer op ontbrekende routeringsgegevens</string>
     <string name="check_tiles_found">Route gegevens zijn al aanwezig</string>
-    <string name="check_tiles_missing">Ontbrekende routegegevens gevonden:\n%1$s\n\nWilt je deze bestanden downloaden?%2$s</string>
     <string name="check_tiles_unsupported">Waarschuwing: Routegegevens zijn ten minste gedeeltelijk niet beschikbaar voor de gekozen regio</string>
     <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
     <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
