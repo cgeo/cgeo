@@ -2115,8 +2115,6 @@
     <string name="downloadmap_target_not_writable">Seçili hedef \"%s\" yazılabilir değil - indirilmiş harita dosyası, sistem indirme klasörüne kaydedildi ve elle harita klasörüne taşınması gerekiyor.</string>
     <string name="downloadmap_allow_metered_network">Kotalı ağ üzerinden indirmeye izin ver (örn: mobil veri)</string>
     <string name="download_confirmation">%1$s\"%2$s\" dosyasını indiriyor musunuz?%3$s</string>
-    <string name="download_confirmation_updates">Şunlar için güncellemeler bulundu:\n%1$s\n\nGüncellemeyi istiyor musunuz?%2$s</string>
-    <string name="download_warning">Bu ağ bağlantınıza bağlı olarak uzun sürebilir ve tarifenize belirli ücretler yansıyabilir.</string>
     <string name="download_error">#%d hatasıyla indirme başarısız oldu</string>
     <string name="downloadmap_handling">İndirme, sisteminizin indirme yöneticisiyle arka planda çalışacaktır. İndirme başladığında bildirim göreceksiniz (biraz sürebilir).</string>
     <string name="button_continue">Devam et</string>
