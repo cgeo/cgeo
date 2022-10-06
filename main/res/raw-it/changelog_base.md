@@ -4,15 +4,17 @@
 - Correzione: i waypoint di un cache copiati manualmente, non sono tutti visualizzati
 
 ### Dettagli del cache
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
+- Modifica: Mostra l'indicatore di caricamento nell'attività di log durante il recupero dei dati richiesti è in corso
+- Corretto: nbsp; non viene considerato come spazio nell'analisi della formula
+- Corretto: Extra waypoint creati sull'analisi della formula di note personali
+- Fix: Variables not created on copying formula to different cache
+- Fix: (Experimental gallery) Use image cache for log/spoiler images
 
 ### Generale
 - Nuovo: Supporto ai download generici per i link con prefisso "mf-v4-map" e "mf-theme" (aggiornamento automatico non supportato)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- Fix: Filter bar not readable in light mode
+- Nuovo: la funzione di manutenzione reindicizza il database
+- Nuovo: ottimizzazione automatica delle prestazioni del database ogni 90 giorni (reindicizzazione)
+- Corretto: Aggiunto gestione del permesso della posizione ad alta precisione
+- Modifica: Rimosso cambio di lingua del sito web
+- Corretto: I cache, definiti dall'utente, eliminati, non vengono eliminati al riavvio di c:geo
+- Corretto: Barra del filtro non leggibile in modalità chiara
