@@ -1319,7 +1319,7 @@
     <string name="cache_menu_set_DNF">Nastavit jako nenalezeno</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
-    <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="cache_menu_set_cache_icon">Nastavit ikonu kešky</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
@@ -2301,8 +2301,6 @@
     <string name="downloadmap_target_not_writable">Vybraný cíl \"%s\" není zapisovatelný - stažený mapový soubor je uložen v systémové složce pro stahování a musí být ručně přesunut do složky s mapami.</string>
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
     <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
-    <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
     <string name="download_error">Stažení se nezdařilo s chybou #%d</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
@@ -2323,7 +2321,6 @@
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
     <string name="check_tiles_menu">Zkontrolovat chybějící směrovací data</string>
     <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
-    <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
     <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
     <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
