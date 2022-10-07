@@ -48,8 +48,8 @@ class CalendarEntry {
                 StringUtils.defaultString(cache.getPersonalNote()),
                 cache.getName(),
                 cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                cache.getEventTimeMinutes(),
-                cache.getEventEndTimeMinutes()
+                cache.getEventStartTimeInMinutes(),
+                cache.getEventEndTimeInMinutes()
                 );
     }
 
