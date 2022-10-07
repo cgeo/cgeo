@@ -5,10 +5,10 @@
 
 ### Detalhes da cache
 - Alteração: Mostrado o indicador de carregamento, na actividade de registo, enquanto ocorre a obtenção dos dados necessários
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- Correção: nbsp; não era considerado como espaço na análise da fórmula
+- Correção: Pontos adicionais extra criados na análise da fórmula na nota pessoal
+- Correção: Variáveis não eram criadas ao copiar uma fórmula para uma cache diferente
+- Correção: (galeria experimental) Usar a imagem em memória cache para imagens de registo/spoiler
 
 ### Geral
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
@@ -17,4 +17,4 @@
 - Correcção: Controlo da permissão em falta de localização melhorada
 - Alteração: removida opção de mudança de idioma do sítio Web
 - Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
-- Fix: Filter bar not readable in light mode
+- Correção: Barra de filtro não legível no modo claro
