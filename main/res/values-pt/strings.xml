@@ -547,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Sim</string>
     <string name="cache_filter_status_select_no">Não</string>
     <string name="cache_filter_status_select_label_found">Encontradas</string>
+    <string name="cache_filter_status_select_label_dnf">Não encontrada</string>
     <string name="cache_filter_status_select_label_owned">Minhas</string>
     <string name="cache_filter_status_select_label_stored">Armazenadas</string>
     <string name="cache_filter_status_select_label_favorite">Meus favoritos</string>
@@ -638,6 +639,9 @@
     <string name="downloader_cancel_download">Cancelar transferência</string>
     <string name="downloader_cancel_file">Cancelar a transferência em espera de \"%s\" e remover partes já transferidas?</string>
     <string name="downloader_cancelled_download">Transferência de \"%s\" cancelada</string>
+    <string name="downloader_pending_info">Há pelo menos uma transferência em pausa ou com falhas. Deseja abrir a lista de transferências pendentes?</string>
+    <string name="downloader_retry_download">Tentar de novo a transferência</string>
+    <string name="downloader_retry_download_details">Quer tentar novamente a transferência de</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
     <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
@@ -2233,9 +2237,12 @@
     <string name="downloadmap_filename">A transferir %s</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
+    <string name="download_none_selected">Não há ficheiros selecionados para transferir</string>
     <string name="downloadmap_target_not_writable">O destino seleccionado \"%s\" não é gravável - o mapa transferido será gravado na pasta de transferências do sistema e deve ser movido manualmente para a pasta de mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Encontradas actualizações para:</string>
+    <string name="download_warning">As transferências podem demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
     <string name="download_error">Transferência falhou, com o erro #%d</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
@@ -2256,6 +2263,7 @@
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
     <string name="check_tiles_menu">Verificar dados de percurso em falta</string>
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
+    <string name="check_tiles_missing">Encontrados dados de encaminhamento em falta:</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
     <string name="tileupdate_info">Toque aqui para verificar por actualizações de ficheiros de encaminhamento transferidos. Toque longo para adiar.</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
