@@ -49,6 +49,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -239,6 +240,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             }
 
             currentCoords = geo.getCoords();
+            final String averageHeight = GeoHeightUtils.getAverageHeight(geo, true);
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
                     binding.navLocation.setText(R.string.loc_no_addr);
@@ -248,10 +250,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                     final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
                     AndroidRxUtils.bindActivity(MainActivity.this, address)
                             .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(address12 -> binding.navLocation.setText(address12));
+                            .subscribe(address12 -> binding.navLocation.setText(address12 + averageHeight));
                 }
             } else {
-                binding.navLocation.setText(currentCoords.toString());
+                binding.navLocation.setText(currentCoords.toString() + averageHeight);
             }
         }
     }
