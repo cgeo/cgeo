@@ -29,7 +29,9 @@
             android:name="android.test.runner"
             android:required="false" />
 
-        <activity android:name="CgeoTestsActivity" >
+        <activity
+            android:name="CgeoTestsActivity"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
