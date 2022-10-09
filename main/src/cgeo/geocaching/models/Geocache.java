@@ -190,8 +190,7 @@ public class Geocache implements IWaypoint {
     private Boolean hasLogOffline = null;
     private OfflineLogEntry offlineLog = null;
 
-    private Integer eventStartTimeInMinutes = null;
-    private Integer eventEndTimeInMinutes = null;
+    private EventTimesInMin eventTimesInMin = new EventTimesInMin();
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -400,7 +399,7 @@ public class Geocache implements IWaypoint {
             searchContext = other.searchContext;
         }
 
-        this.eventStartTimeInMinutes = null; // will be recalculated if/when necessary
+        this.eventTimesInMin.reset(); // will be recalculated if/when necessary
         return isEqualTo(other);
     }
 
@@ -899,7 +898,7 @@ public class Geocache implements IWaypoint {
 
     public void setDescription(final String description) {
         this.description = description;
-        this.eventStartTimeInMinutes = null; // will be recalculated if/when necessary
+        this.eventTimesInMin.reset(); // will be recalculated if/when necessary
     }
 
     public boolean isFound() {
@@ -1116,7 +1115,7 @@ public class Geocache implements IWaypoint {
 
     public void setShortDescription(final String shortdesc) {
         this.shortdesc = shortdesc;
-        this.eventStartTimeInMinutes = null; // will be recalculated if/when necessary
+        this.eventTimesInMin.reset(); // will be recalculated if/when necessary
     }
 
     public void setFavoritePoints(final int favoriteCnt) {
@@ -1484,7 +1483,7 @@ public class Geocache implements IWaypoint {
             throw new IllegalArgumentException("Illegal cache type");
         }
         this.cacheType = cacheType;
-        this.eventStartTimeInMinutes = null; // will be recalculated if/when necessary
+        this.eventTimesInMin.reset(); // will be recalculated if/when necessary
     }
 
     public boolean hasDifficulty() {
@@ -2094,14 +2093,14 @@ public class Geocache implements IWaypoint {
     }
 
     public int getEventStartTimeInMinutes() {
-        if (eventStartTimeInMinutes == null) {
+        if (eventTimesInMin.start == null) {
             guessEventTimeMinutes();
         }
-        return eventStartTimeInMinutes;
+        return eventTimesInMin.start;
     }
 
     public int getEventEndTimeInMinutes() {
-        return eventEndTimeInMinutes == null ? -1 : eventEndTimeInMinutes;
+        return eventTimesInMin.end == null ? -1 : eventTimesInMin.end;
     }
 
     /**
@@ -2111,18 +2110,19 @@ public class Geocache implements IWaypoint {
      */
     private void guessEventTimeMinutes() {
         if (!isEventCache()) {
-            eventStartTimeInMinutes = -1;
+            eventTimesInMin.start = -1;
+            return;
         }
 
         // GC Listings have the start and end time in short description, try that first
         final int[] gcDates = EventTimeParser.getEventTimesFromGcShortDesc(getShortDescription());
         if (gcDates[0] >= 0 && gcDates[1] >= 0) {
-            eventStartTimeInMinutes = gcDates[0];
-            eventEndTimeInMinutes = gcDates[1];
+            eventTimesInMin.start = gcDates[0];
+            eventTimesInMin.end = gcDates[1];
         } else {
             // if not successful scan the whole description for what looks like a start time
             final String searchText = getShortDescription() + ' ' + getDescription();
-            eventStartTimeInMinutes = EventTimeParser.guessEventTimeMinutes(searchText);
+            eventTimesInMin.start = EventTimeParser.guessEventTimeMinutes(searchText);
         }
     }
 
@@ -2357,5 +2357,15 @@ public class Geocache implements IWaypoint {
      */
     public void setSearchContext(final Bundle searchContext) {
         this.searchContext = searchContext;
+    }
+
+    private class EventTimesInMin {
+        public Integer start = null;
+        public Integer end = null;
+
+        public void reset() {
+            this.start = null;
+            this.end = null;
+        }
     }
 }
