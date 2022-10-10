@@ -25,3 +25,4 @@
 - Corretto: Barra del filtro non leggibile in modalità chiara
 - New: Allow selection of files to download
 - New: Status filter for DNF
+- New: Display elevation on home screen (if available)
