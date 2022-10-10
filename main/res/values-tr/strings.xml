@@ -1998,7 +1998,6 @@
     <!-- permission handling -->
     <string name="close_app">Aplikasyonu kapat</string>
     <string name="ask_again">Bana yine sor</string>
-    <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrimdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_needed">Depolama izni olmaksızın bu özellik kullanılamıyor.</string>
     <!-- colors -->
