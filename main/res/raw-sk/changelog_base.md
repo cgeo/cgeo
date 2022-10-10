@@ -25,3 +25,4 @@
 - Oprava: Panel filtra nie je viditeľný v svetlom režime
 - Nové: Umožnenie výberu súborov na stiahnutie
 - Nové: Filter stavu pre DNF
+- New: Display elevation on home screen (if available)
