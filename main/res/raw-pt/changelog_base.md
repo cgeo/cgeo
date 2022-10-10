@@ -25,3 +25,4 @@
 - Correção: Barra de filtro não legível no modo claro
 - Novo: Possibilidade de seleccionar os ficheiros a transferir
 - Novo: Filtro de Estado para DNF
+- New: Display elevation on home screen (if available)
