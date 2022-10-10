@@ -2009,7 +2009,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>
-    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
@@ -2120,8 +2119,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_target_not_writable">選択したファルダ「%s」は書き込み可能ではありません。地図ファイルはシステムのダウンロードフォルダに保存されており、地図フォルダに手動で移動する必要があります。</string>
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
-    <string name="download_confirmation_updates">更新が見つかりました:\n%1$s\n\n更新しますか?%2$s</string>
-    <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
     <string name="download_error">ダウンロードできませんでした(エラー#%d)</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
@@ -2140,7 +2137,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="check_tiles_menu">ルート検索データの確認</string>
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
-    <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
     <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
     <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>

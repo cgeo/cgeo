@@ -124,6 +124,7 @@
     <string name="log_posting_image">Отправка фотографий…</string>
     <string name="log_posting_generic_trackable">Отправка %1$s %2$d/%3$d</string>
     <string name="log_clear">Очистить</string>
+    <string name="log_templates">Найдено: Шаблон отзыва…</string>
     <string name="log_post_not_possible">Идет загрузка данных…\nПожалуйста, попробуйте снова через несколько секунд или проверьте подключение к интернету.</string>
     <string name="log_date_future_not_allowed">Невозможно отправить запись из будущего.</string>
     <string name="log_add">Добавить</string>
@@ -515,6 +516,7 @@
     <string name="contribution_infrastructure">инфраструктура</string>
     <string name="contribution_projectleader">лидер проекта</string>
     <string name="contribution_graphics">графика</string>
+    <string name="debug_user_error_explain_options">Помогите нам исправить проблемы c:geo, сообщив об этом по электронной почте (не забудьте добавить системную информацию и логи c:geo).\nПожалуйста, также укажите подробное описание ошибки в вашем сообщении!\n\nПеред отправкой письма, пожалуйста, также проверьте раздел часто задаваемых вопросов (FAQ) и/или социальные сети на предмет описания уже обнаруженных проблем.\nДругие варианты контактов можно найти в разделе \"О c:geo\"</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Текущие загрузки</string>
     <!-- Android system download manager status messages -->
@@ -533,6 +535,7 @@
     <string name="settings_title_map">Карта</string>
     <string name="settings_summary_map">Выберите источник карт, настройки оффлайновых карт и детали карты.</string>
     <string name="settings_title_map_data">Данные карты</string>
+    <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
     <string name="settings_title_map_rotation">Вращение карты (Google Maps)</string>
     <string name="settings_title_waypoints">Путевые точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
@@ -547,6 +550,7 @@
     <string name="confirm_data_dir_move">Перемещение данных тайников может занять долгое время в зависимости от вашего устройства и количества данных.</string>
     <string name="settings_title_basicmembers">Опции для Базовых участников</string>
     <string name="settings_title_navigation">Навигация</string>
+    <string name="settings_summary_navigation">Офлайн-маршрутизация, параметры навигации.</string>
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
@@ -622,6 +626,7 @@
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
     <string name="init_zoomincludingwaypoints_description">При показе одиночного тайника масштаб будет таким, чтобы вместить все точки тайника</string>
     <string name="init_brouterThreshold">Вычислить путь</string>
+    <string name="init_brouterThreshold_description">Максимальное расстояние, на которое будет рассчитываться маршрут в онлайн-режиме.</string>
     <string name="init_brouterShowBothDistances">Показать расстояние по прямой</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="init_summary_brouterShowBothDistances">Если навигация активна: показать прямое расстояние в дополнение к рассчитанной длине маршрута.</string>
@@ -1249,6 +1254,7 @@
     <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
     <string name="search_hbu_button">Поиск по создателю</string>
+    <string name="search_filter_info_message" formatted="false">**Поиск по фильтру** производится по всем активным онлайн-сервисам по заданным условиям. Однако, поисковые возможности этих сервисов обычно более ограничены, чем возможности фильтра c:geo.\n\n- Все службы поддерживают только И фильтры (нет ИЛИ, нет инверсии).\n- Такие базовые фильтры, как **тип тайника** или **размер тайника**, есть во всех сервисах. Но более сложные фильтры зачастую не поддерживаются или имеют некоторые ограничения, например **избранное**.\n- Подробный список условий фильтрации, которые поддерживают разные сервисы, можно найти [здесь](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nФильтры, не поддерживаемые онлайн-сервисом, будут применяться c:geo для полученных результатов.</string>
     <string name="search_tb">Трекабл</string>
     <string name="search_tb_hint">Код трекабла</string>
     <string name="search_tb_button">Искать по трекаблу</string>
@@ -1732,7 +1738,6 @@
     <!-- permission handling -->
     <string name="close_app">Закрыть приложение</string>
     <string name="ask_again">Спросить снова</string>
-    <string name="location_permission_request_explanation">c:geo необходим доступ к GPS чтобы определять ваше местоположение и отображать дистанцию и направление к тайникам. Приложение не может быть использовано без этого разрешения.</string>
     <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
     <string name="storage_permission_needed">Эта функция невозможна без разрешения на хранение.</string>
     <!-- colors -->

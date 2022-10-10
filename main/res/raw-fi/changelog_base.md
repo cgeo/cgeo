@@ -5,9 +5,11 @@
 
 ### Kätkön tiedot
 - Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
+- Korjaa: nbsp; ei katsota välilyönniksi kaavan jäsennyksessä
+- Korjaus: Lokikuva merkitty "Kuva 1" vaikka vain yksi kuva lisätty
+- Korjaa: Lisäreittipisteiden luonti henkilökohtaisen muistiinpanon kaavan jäsennyksen yhteydessä
+- Korjaa: Muuttujia ei ole luotu kopioitaessa kaavaa eri kätköön
+- Korjaa: (Kokeellinen galleria) Käytä kuvien välimuistia loki / spoilerkuville
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
@@ -21,3 +23,6 @@
 - Muutos: Poistettu "Tunnista Android-selaimeksi" asetus
 - Uusi: Tarkista odottavat lataukset (kartat / reititystiedot) käynnistettäessä
 - Korjaa: Suodatinpalkki ei ole luettavissa vaaleassa tilassa
+- Uusi: Salli ladattavien tiedostojen valinta
+- Uusi: suodatin DNF:lle
+- New: Display elevation on home screen (if available)

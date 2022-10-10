@@ -1920,7 +1920,6 @@ Nombre de archivo:%2$s</string>
     <!-- permission handling -->
     <string name="close_app">Cerrar aplicación</string>
     <string name="ask_again">Preguntarme de nuevo</string>
-    <string name="location_permission_request_explanation">c:geo necesita acceso al GPS en tu dispositivo para localizar tu posición y calcular la distancia y la dirección a geocachés. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
     <!-- colors -->
@@ -2022,8 +2021,6 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_target_not_writable">El objetivo seleccionado \"%s\" no tiene permisos de escritura - el archivo de mapa descargado se guarda en la carpeta de descarga del sistema y debe moverse manualmente a la carpeta del mapa.</string>
     <string name="downloadmap_allow_metered_network">Permitir descargar a través de red (por ejemplo: conexión móvil)</string>
     <string name="download_confirmation">%1$s¿Descargar archivo \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Actualizaciones encontradas para:\n%1$s\n\n¿Desea actualizar?%2$s</string>
-    <string name="download_warning">Esto puede llevar bastante tiempo y puede llevar a costos significativos, dependiendo de su conexión de red.</string>
     <string name="download_error">Descarga fallida con error #%d</string>
     <string name="downloadmap_handling">La descarga en sí misma será manejada por el gestor de descargas de su sistema en segundo plano. Deberías ver una notificación tan pronto como se inicie la descarga (que puede tardar un rato).</string>
     <string name="button_continue">Continuar</string>

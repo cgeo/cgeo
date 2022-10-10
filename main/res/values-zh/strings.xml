@@ -741,7 +741,6 @@
     <string name="event_fail">添加 uid 为“%1”的事件到日历失败</string>
     <string name="init_low_disk_space">磁盘空间过低</string>
     <!-- permission handling -->
-    <string name="location_permission_request_explanation">c:geo 需要访问您设备上的 GPS 才能定位您的位置并计算到藏点的距离和方向。如果没有这种许可，该功能不可用。</string>
     <!-- colors -->
     <!-- number input -->
     <!-- notification / channel texts -->

@@ -381,7 +381,7 @@
     <string name="caches_sort_automatic">Automatiškai (%s)</string>
     <string name="caches_sort_distance">Atstumas</string>
     <string name="caches_sort_distance_target">Atstumas iki tikslo</string>
-    <string name="caches_sort_difficulty">Sudėtingumas</string>
+    <string name="caches_sort_difficulty">Sunkumas</string>
     <string name="caches_sort_terrain">Vietovė</string>
     <string name="caches_sort_size">Dydis</string>
     <string name="caches_sort_favorites">Kiek mėgstama</string>
@@ -490,9 +490,9 @@
     <string name="cache_filter_description">Slėptuvės aprašymas</string>
     <string name="cache_filter_offlinelog">Įrašas neprisijungus</string>
     <string name="cache_filter_owner">Slėptuvės savininkas</string>
-    <string name="cache_filter_difficulty">Sudėtingumas</string>
+    <string name="cache_filter_difficulty">Sunkumas</string>
     <string name="cache_filter_terrain">Vietovė</string>
-    <string name="cache_filter_difficulty_terrain">Sudėtingumas / Vietovė</string>
+    <string name="cache_filter_difficulty_terrain">Sunkumas / Vietovė</string>
     <string name="cache_filter_rating">Reitingas</string>
     <string name="cache_filter_status">Būsena</string>
     <string name="cache_filter_attributes">Slėptuvės savybės</string>
@@ -561,6 +561,7 @@
     <string name="cache_filter_status_select_yes">Taip</string>
     <string name="cache_filter_status_select_no">Ne</string>
     <string name="cache_filter_status_select_label_found">Rasta</string>
+    <string name="cache_filter_status_select_label_dnf">Neradęs</string>
     <string name="cache_filter_status_select_label_owned">Nuosava</string>
     <string name="cache_filter_status_select_label_stored">Išsaugota</string>
     <string name="cache_filter_status_select_label_favorite">Nuosava mėgstama</string>
@@ -654,7 +655,6 @@
     <string name="downloader_cancelled_download">\'\'%s\'\' atsisiuntimas atšauktas</string>
     <string name="downloader_pending_info">Yra bent vienas pristabdytas arba nepavykęs atsisiuntimas. Ar norite atidaryti laukiančių atsisiuntimų sąrašą?</string>
     <string name="downloader_retry_download">Bandyti atsisiųsti dar kartą</string>
-    <string name="downloader_retry_download_details">Ar norite dar kartą pabandyti atsisiųsti:\n%1$s</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Atsisiuntimas nepavyko (ir nebus bandomas iš naujo)</string>
     <string name="asdm_status_paused">Laukiama, kol bus galima bandyti iš naujo arba tęsti</string>
@@ -783,7 +783,7 @@
     <string name="init_signature_template_number_legacy">Numeris (ignoruoti įrašus neprisijungus)</string>
     <string name="init_signature_template_owner">Savininkas</string>
     <string name="init_signature_template_name">Pavadinimas</string>
-    <string name="init_signature_template_difficulty">Sudėtingumas</string>
+    <string name="init_signature_template_difficulty">Sunkumas</string>
     <string name="init_signature_template_terrain">Vietovė</string>
     <string name="init_signature_template_log">Įrašo tekstas</string>
     <string name="init_signature_template_size">Dydis</string>
@@ -1359,7 +1359,7 @@
     <string name="cache_mode_linear">Linijinis</string>
     <string name="cache_mode_random">Atsitiktinis</string>
     <string name="cache_distance">Atstumas</string>
-    <string name="cache_difficulty">Sudėtingumas</string>
+    <string name="cache_difficulty">Sunkumas</string>
     <string name="cache_terrain">Vietovė</string>
     <string name="cache_rating">Reitingas</string>
     <string name="cache_own_rating">Jūsų reitingas</string>
@@ -1421,7 +1421,7 @@
     <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
-    <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškai, išskyrus penkis naujausius</string>
+    <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
@@ -1801,8 +1801,8 @@
     <string name="attribute_scenic_no">Gražių vaizdų nėra</string>
     <string name="attribute_hiking_yes">Didelis žygis</string>
     <string name="attribute_hiking_no">Nedidelis žygis</string>
-    <string name="attribute_climbing_yes">Sudėtingas kopimas</string>
-    <string name="attribute_climbing_no">Nesudėtingas kopimas</string>
+    <string name="attribute_climbing_yes">Sunkus kopimas</string>
+    <string name="attribute_climbing_no">Nesunkus kopimas</string>
     <string name="attribute_wading_yes">Gali tekti bristi</string>
     <string name="attribute_wading_no">Gali nereikėti bristi</string>
     <string name="attribute_swimming_yes">Gali reikėti plaukti</string>
@@ -2178,7 +2178,6 @@
     <!-- permission handling -->
     <string name="close_app">Uždaryti programėlę</string>
     <string name="ask_again">Paklausti dar kartą</string>
-    <string name="location_permission_request_explanation">c:geo reikalinga prieigą prie jūsų GPS, kad nustatytumėte savo padėtį ir apskaičiuotumėte atstumą bei kryptį į geoslėptuvę. Jis negali būti naudojamas be šio leidimo.</string>
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
@@ -2299,11 +2298,12 @@
     <string name="downloadmap_filename">Atsisiunčiama %s</string>
     <string name="downloadmanager_not_available">Failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
+    <string name="download_none_selected">Atsisiuntimui nepasirinkta jokių failų</string>
     <string name="downloadmap_target_not_writable">Pasirinktas tikslas \"%s\" neįrašomas - atsisiųstas žemėlapio failas išsaugomas sistemos atsisiuntimo aplanke ir turi būti rankiniu būdu perkeltas į žemėlapio aplanką.</string>
     <string name="downloadmap_allow_metered_network">Leisti atsisiųsti per mokamą tinklą (pvz., mobilujį ryšį)</string>
     <string name="download_confirmation">%1$sAtsisiųsti failą \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Rasti naujiniai:\n%1$s\n\nAr norite atnaujinti?%2$s</string>
-    <string name="download_warning">Tai gali užtrukti nemažai laiko ir gali pareikalauti didelių išlaidų, atsižvelgiant į jūsų tinklo ryšį.</string>
+    <string name="download_confirmation_updates">Rasti naujiniai:</string>
+    <string name="download_warning">Atsisiuntimai gali užtrukti gana ilgai ir gali kainuoti, atsižvelgiant į jūsų tinklo ryšį.</string>
     <string name="download_error">Atsisiuntimas nepavyko su klaida #%d</string>
     <string name="downloadmap_handling">Patį atsisiuntimą tvarkys jūsų sistemos atsisiuntimų tvarkyklė fone. Turėtumėte pamatyti pranešimą, kai tik prasidės atsisiuntimas (tai gali šiek tiek užtrukti).</string>
     <string name="button_continue">Tęsti</string>
@@ -2324,7 +2324,7 @@
     <string name="downloadtile_info">c:geo negali apskaičiuoti prašomo maršruto, nes trūksta maršruto duomenų failo. Ar norite atsisiųsti trūkstamus maršruto duomenis?</string>
     <string name="check_tiles_menu">Patikrinti, ar trūksta maršruto duomenų</string>
     <string name="check_tiles_found">Maršruto duomenys jau yra</string>
-    <string name="check_tiles_missing">Trūksta maršruto duomenų:\n%1$s\n\nAr norite atsisiųsti trūkstamus failus?%2$s</string>
+    <string name="check_tiles_missing">Rasti trūkstami maršruto duomenys:</string>
     <string name="check_tiles_unsupported">Įspėjimas: Maršruto duomenys bent iš dalies nepasiekiami pasirinktame regione</string>
     <string name="tileupdate_info">Bakstelėkite čia norėdami patikrinti, ar nėra atsisiųstų maršruto duomenų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>
     <string name="mapupdate_info">Bakstelėkite čia, kad patikrintumėte, ar nėra žemėlapių ir temų failų naujinių. Norėdami atidėti, palieskite ilgai.</string>

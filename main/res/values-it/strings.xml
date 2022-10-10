@@ -355,6 +355,8 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuti</item>
     </plurals>
+    <string name="caches_store_offline">Salva offline</string>
+    <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
@@ -630,7 +632,32 @@
     <string name="debug_user_error_explain_options">Aiutaci a risolvere i problemi c:geo segnalandoli via email con le informazioni di sistema e il file di registro di c:geo incluso.\nPer favore allega sempre una descrizione dettagliata dell\'errore con la tua mail!\n\nPrima di inviare una mail controlla anche le nostre FAQ e/o sui nostri social media per problemi noti.\nAltre opzioni di contatto possono essere trovate su \'Informazioni su c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Download correnti</string>
+    <string name="downloader_pending_downloads">Download in attesa</string>
+    <string name="downloader_no_pending_downloads">Nessun download in sospeso al momento</string>
+    <string name="downloader_cancel_download">Annulla download</string>
+    <string name="downloader_cancel_file">Annullare il download in attesa di \"%s\" e rimuovere le parti scaricate?</string>
+    <string name="downloader_cancelled_download">Download annullato per \"%s\"</string>
+    <string name="downloader_pending_info">C\'è almeno una pausa o uno scaricamento non riuscito. Vuoi aprire l\'elenco dei download in sospeso?</string>
+    <string name="downloader_retry_download">Ritentare il download</string>
     <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Download non riuscito (e non verrà ritentato)</string>
+    <string name="asdm_status_paused">Il download è in attesa di riprovare o riprendere</string>
+    <string name="asdm_status_pending">Il download è in attesa di iniziare</string>
+    <string name="asdm_status_running">Il download è attualmente in esecuzione</string>
+    <string name="asdm_status_successful">Download completato con successo</string>
+    <string name="asdm_paused_queued_for_wifi">In pausa: In attesa di Wifi</string>
+    <string name="asdm_paused_unknown">In pausa per qualche altro motivo</string>
+    <string name="asdm_paused_waiting_for_network">In pausa: in attesa di connessione alla rete per procedere</string>
+    <string name="asdm_paused_waiting_to_retry">In pausa: si è verificato un errore di rete e il download è in attesa di riprovare</string>
+    <string name="asdm_error_cannot_resume">Errore: si è verificato un errore transitorio, ma non è possibile riprendere il download</string>
+    <string name="asdm_error_device_not_found">Errore: non è stato trovato alcun dispositivo di archiviazione esterno. La scheda SD è montata?</string>
+    <string name="asdm_error_file_already_exists">Errore: il file di destinazione richiesto esiste già, non verrà sovrascritto</string>
+    <string name="asdm_error_file_error">Errore: Problema di archiviazione sconosciuto</string>
+    <string name="asdm_error_http_data_error">Errore: errore di elaborazione HTTP a livello di dati</string>
+    <string name="asdm_error_insufficient_space">Errore: spazio di archiviazione insufficiente</string>
+    <string name="asdm_error_too_many_redirects">Errore: Troppi reindirizzamenti</string>
+    <string name="asdm_error_unhandled_http_code">Errore: Codice http non gestito</string>
+    <string name="asdm_error_unknwon">Errore sconosciuto</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -954,6 +981,7 @@
     <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
     <string name="init_maintenance_directories">Elimina file orfani</string>
     <string name="init_maintenance_start">Manutenzione avviata</string>
+    <string name="init_maintenance_ongoing">Questo potrebbe richiedere un po\' di tempo…</string>
     <string name="init_maintenance_finished">Manutenzione terminata</string>
     <string name="init_location">Geolocalizzazione</string>
     <string name="init_location_note">Su dispositivi con servizi Google Play, c:geo può utilizzare automaticamente un fornitore migliore di geolocalizzazione. Tuttavia, questo impedisce l\'uso di un ricevitore GPS BlueTooth esterno.</string>
@@ -2090,7 +2118,6 @@
     <!-- permission handling -->
     <string name="close_app">Chiudi app</string>
     <string name="ask_again">Chiedimi di nuovo</string>
-    <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la tua posizione e calcolare la distanza e la direzione per le geocache. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
@@ -2214,8 +2241,6 @@
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
     <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
-    <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
     <string name="download_error">Download fallito con errore #%d</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
@@ -2236,7 +2261,6 @@
     <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
     <string name="check_tiles_menu">Controlla i dati di routing mancanti</string>
     <string name="check_tiles_found">Dati di routing già presenti</string>
-    <string name="check_tiles_missing">Trovati dati di routing mancanti:\n%1$s\n\nVuoi scaricare questi file?%2$s</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
     <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>

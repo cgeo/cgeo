@@ -5,19 +5,24 @@
 
 ### Cache-Details
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
+- Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
+- Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
+- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
+- Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
+- Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
+- Neu: Wartungsfunktion indiziert die Datenbank neu
+- Neu: Automatische Leistungsoptimierung der Datenbank alle 90 Tage (erneutes Indizieren)
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
+- Neu: Ansicht für ausstehende Downloads
+- Neu: Cache-Name / Name der Liste beim GPX-Export an Dateiname anhängen
+- Änderung: "Als Android-Browser identifizieren"-Einstellung entfernt
+- Neu: Beim Start ausstehende Downloads prüfen (Karten- / Routing-Daten)
+- Korrektur: Filterleiste im hellen Design nicht lesbar
+- Neu: Auswahl der Dateien, die heruntergeladen werden sollen
+- Neu: Statusfilter für DNF
+- New: Display elevation on home screen (if available)

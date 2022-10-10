@@ -2060,7 +2060,6 @@
     <!-- permission handling -->
     <string name="close_app">Stäng appen</string>
     <string name="ask_again">Fråga igen</string>
-    <string name="location_permission_request_explanation">c:geo behöver tillgång till GPS på enheten för att hitta din position och beräkna avstånd och riktning till geocacher. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_request_explanation">c:geo kommer att skriva data på din telefonlagring eller SD-kortet så snart du sparar geocacher för användning offline. Vidare kommer c:geo att använda din telefonlagring för import och export av filer och läsning av offlinekartor. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
@@ -2177,8 +2176,6 @@
     <string name="downloadmap_target_not_writable">Det valda målet \"%s\" är inte skrivbart - den nedladdade kartfilen sparas i mappen för systemhämtning och måste flyttas manuellt till kartmappen.</string>
     <string name="downloadmap_allow_metered_network">Tillåt nedladdning över nätverk med datapriser (t.ex.: mobilanslutning)</string>
     <string name="download_confirmation">%1$sLadda ner fil \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Uppdateringar hittades för:\n%1$s\n\nVill du uppdatera?%2$s</string>
-    <string name="download_warning">Detta kan ta ganska lång tid och kan leda till betydande kostnader, beroende på din nätverksanslutning.</string>
     <string name="download_error">Nedladdning misslyckades med fel #%d</string>
     <string name="downloadmap_handling">Själva nedladdningen kommer att hanteras av ditt systems nedladdningshanterare i bakgrunden. Du bör se ett meddelande så snart nedladdningen startat (vilket kan ta ett tag).</string>
     <string name="button_continue">Fortsätt</string>
@@ -2197,7 +2194,6 @@
     <string name="downloadtile_info">c:geo kan inte beräkna den begärda rutten eftersom det saknas datafil med rutter. Vill du ladda ner saknade ruttdata?</string>
     <string name="check_tiles_menu">Sök efter saknad ruttberäkningsdata</string>
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
-    <string name="check_tiles_missing">Ruttberäkningsdata saknas:\n%1$s\n\nVill du ladda ner de filer som behövs?%2$s</string>
     <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgänglig för den valda regionen</string>
     <string name="tileupdate_info">Tryck här för att söka efter uppdateringar av hämtade routing-datafiler. Långtryck för att skjuta upp.</string>
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>

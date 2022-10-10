@@ -2000,7 +2000,6 @@
     <!-- permission handling -->
     <string name="close_app">Aplikasyonu kapat</string>
     <string name="ask_again">Bana yine sor</string>
-    <string name="location_permission_request_explanation">c:geo konumunuzu belirlemek, mesafe ve yön hesaplamak için cihazınızındaki GPS\'e erişim sağlamalıdır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrimdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_needed">Depolama izni olmaksızın bu özellik kullanılamıyor.</string>
     <!-- colors -->
@@ -2115,8 +2114,6 @@
     <string name="downloadmap_target_not_writable">Seçili hedef \"%s\" yazılabilir değil - indirilmiş harita dosyası, sistem indirme klasörüne kaydedildi ve elle harita klasörüne taşınması gerekiyor.</string>
     <string name="downloadmap_allow_metered_network">Kotalı ağ üzerinden indirmeye izin ver (örn: mobil veri)</string>
     <string name="download_confirmation">%1$s\"%2$s\" dosyasını indiriyor musunuz?%3$s</string>
-    <string name="download_confirmation_updates">Şunlar için güncellemeler bulundu:\n%1$s\n\nGüncellemeyi istiyor musunuz?%2$s</string>
-    <string name="download_warning">Bu ağ bağlantınıza bağlı olarak uzun sürebilir ve tarifenize belirli ücretler yansıyabilir.</string>
     <string name="download_error">#%d hatasıyla indirme başarısız oldu</string>
     <string name="downloadmap_handling">İndirme, sisteminizin indirme yöneticisiyle arka planda çalışacaktır. İndirme başladığında bildirim göreceksiniz (biraz sürebilir).</string>
     <string name="button_continue">Devam et</string>

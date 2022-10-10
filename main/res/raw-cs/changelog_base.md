@@ -5,9 +5,11 @@
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
+- Oprava: nbsp; nepovažuje se za mezeru při analýze vzorce
+- Oprava: Obrázek v logu označený jako "Obrázek 1", i když byl přidán pouze jeden obrázek
+- Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
+- Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
+- Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
@@ -21,3 +23,6 @@
 - Změna: Odstraněno nastavení "Identifikovat jako Android prohlížeč"
 - Novinka: Kontrola čekajících stahování (mapy / směrovací data) při spuštění
 - Oprava: Panel filtru není čitelný ve světlém režimu
+- Novinka: Umožnění výběru souborů ke stažení
+- Novinka: Stavový filtr pro DNF
+- Novinka: Zobrazení nadmořské výšky na domovské obrazovce (pokud je k dispozici)

@@ -547,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Kyllä</string>
     <string name="cache_filter_status_select_no">Ei</string>
     <string name="cache_filter_status_select_label_found">Löydetty</string>
+    <string name="cache_filter_status_select_label_dnf">Ei löytynyt</string>
     <string name="cache_filter_status_select_label_owned">Omat</string>
     <string name="cache_filter_status_select_label_stored">Tallennettu</string>
     <string name="cache_filter_status_select_label_favorite">Oma suosikki</string>
@@ -640,7 +641,6 @@
     <string name="downloader_cancelled_download">Peruttu lataus kohteelle \"%s\"</string>
     <string name="downloader_pending_info">Löytyi ainakin yksi pysäytetty tai epäonnistunut lataus. Haluatko avata luettelon odottavista latauksista?</string>
     <string name="downloader_retry_download">Yritä uudelleen latausta</string>
-    <string name="downloader_retry_download_details">Haluatko kokeilla uudelleen lataamista:\n%1$s</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Lataus on epäonnistunut (ja sitä ei yritetä uudelleen)</string>
     <string name="asdm_status_paused">Lataus odottaa uudelleenyritystä tai jatkamista</string>
@@ -2120,7 +2120,6 @@
     <!-- permission handling -->
     <string name="close_app">Sulje sovellus</string>
     <string name="ask_again">Kysy uudelleen</string>
-    <string name="location_permission_request_explanation">c:geo tarvitsee luvan käyttää laitteesi GPS:ää sijaintisi paikallistamiseen sekä etäisyyden ja suunnan geokätköihin. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
@@ -2241,11 +2240,12 @@
     <string name="downloadmap_filename">Ladataan %s</string>
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
+    <string name="download_none_selected">Ladattavia tiedostoja ei ole valittu</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
     <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
-    <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
+    <string name="download_confirmation_updates">Päivityksiä löytyi:</string>
+    <string name="download_warning">Lataukset voivat viedä jonkin aikaa ja aiheuttaa huomattavia kustannuksia verkkoyhteydestäsi riippuen.</string>
     <string name="download_error">Lataus epäonnistui virheellä #%d</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
@@ -2266,7 +2266,7 @@
     <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
     <string name="check_tiles_menu">Tarkista puuttuvat reititystiedot</string>
     <string name="check_tiles_found">Reititystiedot ovat jo olemassa</string>
-    <string name="check_tiles_missing">Löydettiin puuttuvat reititystiedot:\n%1$s\n\nHaluatko ladata nuo tiedostot?%2$s</string>
+    <string name="check_tiles_missing">Puuttuvat reititystiedot löytyivät:</string>
     <string name="check_tiles_unsupported">Varoitus: Reititystietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
     <string name="tileupdate_info">Napauta tästä tarkistaaksesi ladatun reititysdatan päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="mapupdate_info">Napauta tästä tarkistaaksesi kartta- ja teematiedostojen päivitykset. Paina pitkään lykätäksesi.</string>

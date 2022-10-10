@@ -539,6 +539,7 @@
     <string name="cache_filter_status_select_yes">Ναι</string>
     <string name="cache_filter_status_select_no">Όχι</string>
     <string name="cache_filter_status_select_label_found">Βρέθηκε</string>
+    <string name="cache_filter_status_select_label_dnf">Δεν βρέθηκε</string>
     <string name="cache_filter_status_select_label_owned">Ανήκει</string>
     <string name="cache_filter_status_select_label_stored">Αποθηκευμένα</string>
     <string name="cache_filter_status_select_label_favorite">Ίδια Αγαπημένα</string>
@@ -629,6 +630,8 @@
     <string name="downloader_cancel_download">Ακύρωση λήψης</string>
     <string name="downloader_cancel_file">Ακύρωση εν αναμονή λήψης του \"%s\" και αφαίρεση κατεβασμένων τμημάτων;</string>
     <string name="downloader_cancelled_download">Ακυρώθηκε η λήψη για \"%s\"</string>
+    <string name="downloader_pending_info">Υπάρχει τουλάχιστον μία παύση ή αποτυχημένη λήψη. Θέλετε να ανοίξετε τη λίστα των λήψεων που εκκρεμούν;</string>
+    <string name="downloader_retry_download">Επανάληψη λήψης</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Η λήψη απέτυχε (και δεν θα γίνει επανάληψη)</string>
     <string name="asdm_status_paused">Η λήψη περιμένει να ξαναπροσπαθήσει ή να συνεχίσετε</string>
@@ -2103,7 +2106,6 @@
     <!-- permission handling -->
     <string name="close_app">Κλείσιμο εφαρμογής</string>
     <string name="ask_again">Ερώτηση ξανά</string>
-    <string name="location_permission_request_explanation">Το c:geo χρειάζεται πρόσβαση στο GPS της συσκευής σας για να εντοπίσει την τοποθεσία σας και να υπολογίσει την απόσταση και την κατεύθυνση προς τις κρύπτες. Η χρήση του είναι αδύνατη χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_request_explanation">Το c:geo θα αποθηκεύσει δεδομένα στη μνήμη του τηλεφώνου σας ή στην κάρτα SD καθώς αποθηκεύετε κρύπτες για χρήση εκτός σύνδεσης. Επιπλέον το c:geo θα χρησιμοποιήσει τη μνήμη του τηλεφώνου σας για την εισαγωγή και εξαγωγή αρχείων και χαρτών εκτός σύνδεσης. Η χρήση του δεν είναι δυνατή χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_needed">Μη επιτρεπτή λειτουργία χωρίς άδεια αποθήκευσης.</string>
     <!-- colors -->
@@ -2216,10 +2218,11 @@
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου, ο διαχειριστής λήψεων δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
+    <string name="download_none_selected">Δεν επιλέχθηκαν χάρτες για κατέβασμα</string>
     <string name="downloadmap_target_not_writable">Ο επιλεγμένος στόχος \"%s\" δεν είναι εγγράψιμος - ο χάρτης αποθηκεύεται στο φάκελο λήψης του συστήματος και πρέπει να μετακινηθεί χειροκίνητα στο φάκελο χαρτών.</string>
     <string name="downloadmap_allow_metered_network">Να επιτρέπεται η λήψη σε εποπτευόμενα δίκτυα (π.χ.: δίκτυα κινητής)</string>
     <string name="download_confirmation">%1$sΛήψη αρχείου \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:\n%1$s\n\nΘέλετε να ενημερώσετε?%2$s</string>
+    <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:</string>
     <string name="download_warning">Αυτό μπορεί να πάρει αρκετό χρόνο και μπορεί να οδηγήσει σε σημαντικό κόστος, ανάλογα με τη σύνδεση του δικτύου σας.</string>
     <string name="download_error">Η λήψη απέτυχε με σφάλμα: #%d</string>
     <string name="downloadmap_handling">Θα γίνει διαχείριση της λήψης στο παρασκήνιο από το πρόγραμμα διαχείρισης λήψεων του συστήματος σας. Πρέπει να δείτε μια ειδοποίηση μόλις ξεκινήσει η λήψη (μπορεί να καθυστερήσει λίγο).</string>
@@ -2241,7 +2244,7 @@
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
     <string name="check_tiles_menu">Έλεγχος για ελλείποντα δεδομένα δρομολόγησης</string>
     <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
-    <string name="check_tiles_missing">Βρέθηκαν δεδομένα δρομολόγησης:\n%1$s\n\nΘέλετε να κατεβάσετε αυτά τα αρχεία?%2$s</string>
+    <string name="check_tiles_missing">Λείπουν δεδομένα δρομολόγησης:</string>
     <string name="check_tiles_unsupported">Προειδοποίηση: Τα δεδομένα δρομολόγησης τουλάχιστον εν μέρει δεν είναι διαθέσιμα για την επιλεγμένη περιοχή</string>
     <string name="tileupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις των αρχείων δεδομένων δρομολόγησης που έχουν ληφθεί. Πατήστε παρατεταμένα για αναβολή.</string>
     <string name="mapupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος. Πατήστε παρατεταμένα για αναβολή.</string>

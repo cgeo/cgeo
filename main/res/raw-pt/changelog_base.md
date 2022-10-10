@@ -5,9 +5,11 @@
 
 ### Detalhes da cache
 - Alteração: Mostrado o indicador de carregamento, na actividade de registo, enquanto ocorre a obtenção dos dados necessários
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
+- Correção: nbsp; não era considerado como espaço na análise da fórmula
+- Correcção: A imagem de registo era rotulada de "Imagem 1" mesmo quando só era adicionada uma única imagem
+- Correção: Pontos adicionais extra criados na análise da fórmula na nota pessoal
+- Correção: Variáveis não eram criadas ao copiar uma fórmula para uma cache diferente
+- Correção: (galeria experimental) Usar a imagem em memória cache para imagens de registo/spoiler
 
 ### Geral
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
@@ -17,7 +19,10 @@
 - Alteração: removida opção de mudança de idioma do sítio Web
 - Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
 - Novo: Exibição das transferências em espera
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
+- Novo: Acrescentar o nome da cache / nome da lista ao nome do ficheiro na exportação para GPX
+- Alteração: Removida a definição "Identificar como navegador Android"
+- Novo: Verificar transferências pendentes (mapas / dados de encaminhamento) na inicialização
+- Correção: Barra de filtro não legível no modo claro
+- Novo: Possibilidade de seleccionar os ficheiros a transferir
+- Novo: Filtro de Estado para DNF
+- New: Display elevation on home screen (if available)
