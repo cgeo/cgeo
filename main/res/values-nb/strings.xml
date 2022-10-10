@@ -1971,7 +1971,6 @@
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør igjen</string>
-    <string name="location_permission_request_explanation">c:geo trenger tilgang til GPSen på enheten din for å finne din posisjon og avstand og retning til geocacher. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_request_explanation">c:geo skriver data til internt lagringsområde eller SD-kort når du lagrer geocacher for offline bruk. Videre bruker c:geo lagringsområdet til importering og eksportering av filer og for å lese offline-kart. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_needed">Denne funksjonen er ikke tilgjengelig uten lagringstilatelse.</string>
     <!-- colors -->
