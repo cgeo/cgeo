@@ -2094,7 +2094,6 @@
     <!-- permission handling -->
     <string name="close_app">Tanca l\'aplicació</string>
     <string name="ask_again">Torna a preguntar</string>
-    <string name="location_permission_request_explanation">c:geo necessita l\'accés al GPS del dispositiu per localitzar la vostra posició i calcular la distància i la direcció als catxés. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_request_explanation">c:geo escriurà dades al vostre telèfon o a la targeta SD tan bon punt guardeu els catxés per a un ús fora de línia. A més, c:geo utilitzarà l’emmagatzematge del vostre telèfon per a la importació i exportació d’arxius i lectura de mapes fora de línia. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
