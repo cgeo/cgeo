@@ -2007,7 +2007,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>
-    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
