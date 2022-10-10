@@ -489,7 +489,7 @@ public class DownloaderUtils {
                         } else if (reason == DownloadManager.ERROR_UNHANDLED_HTTP_CODE) {
                             sb.append(" - ").append(R.string.asdm_error_unhandled_http_code);
                         } else if (reason == DownloadManager.ERROR_UNKNOWN) {
-                            sb.append(" - ").append(R.string.asdm_error_unknwon);
+                            sb.append(" - ").append(R.string.asdm_error_unknown);
                         }
 
                     } else {

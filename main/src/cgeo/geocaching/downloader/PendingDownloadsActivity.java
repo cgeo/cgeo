@@ -89,7 +89,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         } else if (reasonCode == DownloadManager.ERROR_UNHANDLED_HTTP_CODE) {
             value = R.string.asdm_error_unhandled_http_code;
         } else if (reasonCode == DownloadManager.ERROR_UNKNOWN) {
-            value = R.string.err_unknown;
+            value = R.string.asdm_error_unknown;
         }
         return (value > 0 ? getString(value) + " (" : "(") + reasonCode + ")";
     }
