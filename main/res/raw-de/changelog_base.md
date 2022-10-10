@@ -6,7 +6,7 @@
 ### Cache-Details
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
 - Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
-- Fix: Extra waypoints created on personal note formula parsing
+- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
 - Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
 - Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 
@@ -17,4 +17,4 @@
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
-- Fix: Filter bar not readable in light mode
+- Korrektur: Filterleiste im hellen Design nicht lesbar
