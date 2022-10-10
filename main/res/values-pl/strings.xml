@@ -2136,7 +2136,6 @@
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
-    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrytki. Dane z GPS nie mogą być używane bez twojej zgody.</string>
     <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrytek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
