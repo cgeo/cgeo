@@ -7,6 +7,8 @@
 - Pakeista: rodyti įkėlimo indikatorių įrašo veikloje, kol vyksta reikiamų duomenų gavimas
 - Pataisyti: nbsp; nelaikomas tarpu analizuojant formulę
 - Pataisymas: papildomi kelio taškai, sukurti naudojant asmeninių užrašų formulių analizę
+- Pataisymas: kintamieji nesukurti kopijuojant formulę į kitą slėptuvę
+- Pataisymas: (Eksperimentinė galerija) Naudokite vaizdų talpyklą įrašams/spoileriniams vaizdams
 
 ### Bendras
 - Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)

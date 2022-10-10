@@ -1364,7 +1364,6 @@
     <!-- permission handling -->
     <string name="close_app">App bezárása</string>
     <string name="ask_again">Újrakérdezés</string>
-    <string name="location_permission_request_explanation">A c:geo-nak szüksége van készüléked GPS-ének használatára, hogy megállapíthassa helyzetedet, a ládák irányát, távolságát. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_request_explanation">A c:geo adatokat tárol készülékeden vagy SD kártyádon, ha ládákat mentesz el offline használatra. Továbbá használja készüléked tárhelyét fájlok importálásakor/exportálásakor, valamint offline térképek olvasásakor. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->

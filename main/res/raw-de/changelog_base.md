@@ -5,14 +5,16 @@
 
 ### Cache-Details
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
+- Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
+- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
+- Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
+- Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
+- Neu: Wartungsfunktion indiziert die Datenbank neu
+- Neu: Automatische Leistungsoptimierung der Datenbank alle 90 Tage (erneutes Indizieren)
 - Korrektur: Handhabe fehlende Berechtigung für genauen Standort
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
-- Fix: Filter bar not readable in light mode
+- Korrektur: Filterleiste im hellen Design nicht lesbar

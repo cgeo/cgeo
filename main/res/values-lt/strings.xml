@@ -381,7 +381,7 @@
     <string name="caches_sort_automatic">Automatiškai (%s)</string>
     <string name="caches_sort_distance">Atstumas</string>
     <string name="caches_sort_distance_target">Atstumas iki tikslo</string>
-    <string name="caches_sort_difficulty">Sudėtingumas</string>
+    <string name="caches_sort_difficulty">Sunkumas</string>
     <string name="caches_sort_terrain">Vietovė</string>
     <string name="caches_sort_size">Dydis</string>
     <string name="caches_sort_favorites">Kiek mėgstama</string>
@@ -490,9 +490,9 @@
     <string name="cache_filter_description">Slėptuvės aprašymas</string>
     <string name="cache_filter_offlinelog">Įrašas neprisijungus</string>
     <string name="cache_filter_owner">Slėptuvės savininkas</string>
-    <string name="cache_filter_difficulty">Sudėtingumas</string>
+    <string name="cache_filter_difficulty">Sunkumas</string>
     <string name="cache_filter_terrain">Vietovė</string>
-    <string name="cache_filter_difficulty_terrain">Sudėtingumas / Vietovė</string>
+    <string name="cache_filter_difficulty_terrain">Sunkumas / Vietovė</string>
     <string name="cache_filter_rating">Reitingas</string>
     <string name="cache_filter_status">Būsena</string>
     <string name="cache_filter_attributes">Slėptuvės savybės</string>
@@ -755,7 +755,7 @@
     <string name="init_signature_template_number_legacy">Numeris (ignoruoti įrašus neprisijungus)</string>
     <string name="init_signature_template_owner">Savininkas</string>
     <string name="init_signature_template_name">Pavadinimas</string>
-    <string name="init_signature_template_difficulty">Sudėtingumas</string>
+    <string name="init_signature_template_difficulty">Sunkumas</string>
     <string name="init_signature_template_terrain">Vietovė</string>
     <string name="init_signature_template_log">Įrašo tekstas</string>
     <string name="init_signature_template_size">Dydis</string>
@@ -1331,7 +1331,7 @@
     <string name="cache_mode_linear">Linijinis</string>
     <string name="cache_mode_random">Atsitiktinis</string>
     <string name="cache_distance">Atstumas</string>
-    <string name="cache_difficulty">Sudėtingumas</string>
+    <string name="cache_difficulty">Sunkumas</string>
     <string name="cache_terrain">Vietovė</string>
     <string name="cache_rating">Reitingas</string>
     <string name="cache_own_rating">Jūsų reitingas</string>
@@ -1393,7 +1393,7 @@
     <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
-    <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškai, išskyrus penkis naujausius</string>
+    <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
@@ -1773,8 +1773,8 @@
     <string name="attribute_scenic_no">Gražių vaizdų nėra</string>
     <string name="attribute_hiking_yes">Didelis žygis</string>
     <string name="attribute_hiking_no">Nedidelis žygis</string>
-    <string name="attribute_climbing_yes">Sudėtingas kopimas</string>
-    <string name="attribute_climbing_no">Nesudėtingas kopimas</string>
+    <string name="attribute_climbing_yes">Sunkus kopimas</string>
+    <string name="attribute_climbing_no">Nesunkus kopimas</string>
     <string name="attribute_wading_yes">Gali tekti bristi</string>
     <string name="attribute_wading_no">Gali nereikėti bristi</string>
     <string name="attribute_swimming_yes">Gali reikėti plaukti</string>
@@ -2150,7 +2150,6 @@
     <!-- permission handling -->
     <string name="close_app">Uždaryti programėlę</string>
     <string name="ask_again">Paklausti dar kartą</string>
-    <string name="location_permission_request_explanation">c:geo reikalinga prieigą prie jūsų GPS, kad nustatytumėte savo padėtį ir apskaičiuotumėte atstumą bei kryptį į geoslėptuvę. Jis negali būti naudojamas be šio leidimo.</string>
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->

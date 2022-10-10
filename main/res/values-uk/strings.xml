@@ -1395,7 +1395,6 @@
     <!-- permission handling -->
     <string name="close_app">Закрити додаток</string>
     <string name="ask_again">Запитайте ще раз</string>
-    <string name="location_permission_request_explanation">c:geo потрібен доступ до GPS на вашому пристрої, щоб знайти своє положення, розрахунок відстані та напряму до схованок. Він не може бути використаний без цього дозволу.</string>
     <string name="storage_permission_request_explanation">c:geo випише дані на накопичувачі телефону або SD-карту, як тільки Ви збережете геокеші для використання в автономному режимі. Додатково:geo буде використовувати ваш телефон для імпорту та експорту файлів та читання автономних карт. Не можна використовувати без цього дозволу.</string>
     <string name="storage_permission_needed">Ця функція неможлива без дозволу на зберігання.</string>
     <!-- colors -->

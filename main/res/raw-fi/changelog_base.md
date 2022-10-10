@@ -5,8 +5,10 @@
 
 ### Kätkön tiedot
 - Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
+- Korjaa: nbsp; ei katsota välilyönniksi kaavan jäsennyksessä
+- Korjaa: Lisäreittipisteiden luonti henkilökohtaisen muistiinpanon kaavan jäsennyksen yhteydessä
+- Korjaa: Muuttujia ei ole luotu kopioitaessa kaavaa eri kätköön
+- Korjaa: (Kokeellinen galleria) Käytä kuvien välimuistia loki / spoilerkuville
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)

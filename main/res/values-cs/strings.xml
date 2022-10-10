@@ -1294,7 +1294,7 @@
     <string name="cache_menu_set_DNF">Nastavit jako nenalezeno</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
-    <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="cache_menu_set_cache_icon">Nastavit ikonu kešky</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
@@ -2150,7 +2150,7 @@
     <!-- permission handling -->
     <string name="close_app">Zavřít aplikaci</string>
     <string name="ask_again">Zeptat se znova</string>
-    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
+    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS (přesná poloha) na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte kešky pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->

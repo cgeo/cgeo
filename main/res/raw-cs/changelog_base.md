@@ -5,8 +5,10 @@
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
+- Oprava: nbsp; nepovažuje se za mezeru při analýze vzorce
+- Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
+- Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
+- Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
