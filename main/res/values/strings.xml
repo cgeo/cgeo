@@ -748,7 +748,7 @@
     <string name="asdm_error_insufficient_space">Error: Insufficient storage space</string>
     <string name="asdm_error_too_many_redirects">Error: Too many redirects</string>
     <string name="asdm_error_unhandled_http_code">Error: Unhandled HTTP code</string>
-    <string name="asdm_error_unknwon">Error: Unknown error</string>
+    <string name="asdm_error_unknown">Error: Unknown error</string>
 
     <!-- settings -->
     <string name="settings_title_open_settings">Open settings?</string>
