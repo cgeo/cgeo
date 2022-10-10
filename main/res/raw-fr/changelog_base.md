@@ -25,3 +25,4 @@
 - Fix: Filter bar not readable in light mode
 - New: Allow selection of files to download
 - New: Status filter for DNF
+- New: Display elevation on home screen (if available)
