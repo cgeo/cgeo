@@ -451,45 +451,45 @@ public class DownloaderUtils {
                         sb.append(c.getString(column));
                         final int status = c.getInt(column);
                         if (status == DownloadManager.STATUS_FAILED) {
-                            sb.append(" - download has failed (and will not be retried)");
+                            sb.append(" - ").append(R.string.asdm_status_failed);
                         } else if (status == DownloadManager.STATUS_PAUSED) {
-                            sb.append(" - download is waiting to retry or resume");
+                            sb.append(" - ").append(R.string.asdm_status_paused);
                         } else if (status == DownloadManager.STATUS_PENDING) {
-                            sb.append(" - download is waiting to start");
+                            sb.append(" - ").append(R.string.asdm_status_pending);
                         } else if (status == DownloadManager.STATUS_RUNNING) {
-                            sb.append(" - download is currently running");
+                            sb.append(" - ").append(R.string.asdm_status_running);
                         } else if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                            sb.append(" - download has successfully completed");
+                            sb.append(" - ").append(R.string.asdm_status_successful);
                         }
                     } else if (column == columnReason) {
                         final int reason = c.getInt(column);
                         sb.append(reason);
                         if (reason == DownloadManager.PAUSED_QUEUED_FOR_WIFI) {
-                            sb.append(" - paused: download exceeds a size limit for downloads over mobile network / waiting for Wifi");
+                            sb.append(" - ").append(R.string.asdm_paused_queued_for_wifi);
                         } else if (reason == DownloadManager.PAUSED_UNKNOWN) {
-                            sb.append(" - paused: for some other reason");
+                            sb.append(" - ").append(R.string.asdm_paused_unknown);
                         } else if (reason == DownloadManager.PAUSED_WAITING_FOR_NETWORK) {
-                            sb.append(" - paused: waiting for network connectivity to proceed");
+                            sb.append(" - ").append(R.string.asdm_paused_waiting_for_network);
                         } else if (reason == DownloadManager.PAUSED_WAITING_TO_RETRY) {
-                            sb.append(" - paused: some network error occurred and the download manager is waiting before retrying the request");
+                            sb.append(" - ").append(R.string.asdm_paused_waiting_to_retry);
                         } else if (reason == DownloadManager.ERROR_CANNOT_RESUME) {
-                            sb.append(" - error: some possibly transient error occurred but we can't resume the download");
+                            sb.append(" - ").append(R.string.asdm_error_cannot_resume);
                         } else if (reason == DownloadManager.ERROR_DEVICE_NOT_FOUND) {
-                            sb.append(" - error: no external storage device was found. SD card mounted?");
+                            sb.append(" - ").append(R.string.asdm_error_device_not_found);
                         } else if (reason == DownloadManager.ERROR_FILE_ALREADY_EXISTS) {
-                            sb.append(" - error: requested destination file already exists, will not be overwritten");
+                            sb.append(" - ").append(R.string.asdm_error_file_already_exists);
                         } else if (reason == DownloadManager.ERROR_FILE_ERROR) {
-                            sb.append(" - error: unknown storage issue");
+                            sb.append(" - ").append(R.string.asdm_error_file_error);
                         } else if (reason == DownloadManager.ERROR_HTTP_DATA_ERROR) {
-                            sb.append(" - error: HTTP processing error at data level");
+                            sb.append(" - ").append(R.string.asdm_error_http_data_error);
                         } else if (reason == DownloadManager.ERROR_INSUFFICIENT_SPACE) {
-                            sb.append(" - error: insufficient storage space");
+                            sb.append(" - ").append(R.string.asdm_error_insufficient_space);
                         } else if (reason == DownloadManager.ERROR_TOO_MANY_REDIRECTS) {
-                            sb.append(" - error: too many redirects");
+                            sb.append(" - ").append(R.string.asdm_error_too_many_redirects);
                         } else if (reason == DownloadManager.ERROR_UNHANDLED_HTTP_CODE) {
-                            sb.append(" - error: unhandled HTTP cod");
+                            sb.append(" - ").append(R.string.asdm_error_unhandled_http_code);
                         } else if (reason == DownloadManager.ERROR_UNKNOWN) {
-                            sb.append(" - error: unknown error");
+                            sb.append(" - ").append(R.string.asdm_error_unknwon);
                         }
 
                     } else {
