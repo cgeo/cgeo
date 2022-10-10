@@ -25,3 +25,4 @@
 - Pataisymas: Filtro juosta neįskaitoma šviesiu režimu
 - Nauja: Leidžiama pasirinkti failus atsisiuntimui
 - Naujiena: DNF būsenos filtras
+- New: Display elevation on home screen (if available)
