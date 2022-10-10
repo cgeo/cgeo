@@ -7,7 +7,7 @@
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
 - Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
 - Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
-- Fix: Extra waypoints created on personal note formula parsing
+- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
 - Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
 - Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 
@@ -19,9 +19,10 @@
 - Änderung: Website-Sprachwechsel entfernt
 - Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
 - Neu: Ansicht für ausstehende Downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
+- Neu: Cache-Name / Name der Liste beim GPX-Export an Dateiname anhängen
+- Änderung: "Als Android-Browser identifizieren"-Einstellung entfernt
+- Neu: Beim Start ausstehende Downloads prüfen (Karten- / Routing-Daten)
+- Korrektur: Filterleiste im hellen Design nicht lesbar
 - Neu: Auswahl der Dateien, die heruntergeladen werden sollen
 - Neu: Statusfilter für DNF
+- New: Display elevation on home screen (if available)
