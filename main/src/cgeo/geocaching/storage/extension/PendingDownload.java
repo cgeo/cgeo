@@ -75,12 +75,14 @@ public class PendingDownload extends DataStore.DBExtension {
         public long id;
         public String filename;
         public String info;
+        public long date;
         public boolean isFailedDownload;
 
         PendingDownloadDescriptor(final PendingDownload download) {
             this.id = download.getDownloadId();
             this.filename = download.getFilename();
             this.info = "";
+            this.date = download.getDate();
             this.isFailedDownload = false;
         }
     }
