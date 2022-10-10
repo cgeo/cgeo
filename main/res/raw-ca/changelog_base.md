@@ -25,3 +25,4 @@
 - Correcció: La barra de filtres no es pot llegir en mode lleuger
 - New: Allow selection of files to download
 - New: Status filter for DNF
+- New: Display elevation on home screen (if available)
