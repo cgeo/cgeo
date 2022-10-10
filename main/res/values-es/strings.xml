@@ -1918,7 +1918,6 @@ Nombre de archivo:%2$s</string>
     <!-- permission handling -->
     <string name="close_app">Cerrar aplicación</string>
     <string name="ask_again">Preguntarme de nuevo</string>
-    <string name="location_permission_request_explanation">c:geo necesita acceso al GPS en tu dispositivo para localizar tu posición y calcular la distancia y la dirección a geocachés. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
     <!-- colors -->
