@@ -8,8 +8,8 @@
 - Oprava: nbsp; nepovažuje se za mezeru při analýze vzorce
 - Oprava: Obrázek v logu označený jako "Obrázek 1", i když byl přidán pouze jeden obrázek
 - Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
+- Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
@@ -23,5 +23,5 @@
 - Změna: Odstraněno nastavení "Identifikovat jako Android prohlížeč"
 - Novinka: Kontrola čekajících stahování (mapy / směrovací data) při spuštění
 - Oprava: Panel filtru není čitelný ve světlém režimu
-- New: Allow selection of files to download
-- New: Status filter for DNF
+- Novinka: Umožnění výběru souborů ke stažení
+- Novinka: Stavový filtr pro DNF
