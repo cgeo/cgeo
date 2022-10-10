@@ -457,14 +457,22 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 final DownloadManager.Query query = new DownloadManager.Query();
                 query.setFilterById(download.id);
                 try (Cursor c = downloadManager.query(query)) {
-                    while (c.moveToNext()) {
-                        final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
-                        if (colStatus >= 0) {
-                            final int status = c.getInt(colStatus);
-                            if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
-                                SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
-                                Settings.setPendingDownloadsLastCheck(false);
-                                break;
+                    if (c.isAfterLast()) {
+                        if (download.date < 1665433698000L /* Oct 10th, 2022 */) {
+                            // entry is pretty old and no longer available in system's download manager, so do some housekeeping in our own database
+                            PendingDownload.remove(download.id);
+                            Log.w("removed stale download no longer recognized by download manager: id=" + download.id + ", fn=" + download.filename + ", date=" + Formatter.formatDate(download.date));
+                        }
+                    } else {
+                        while (c.moveToNext()) {
+                            final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                            if (colStatus >= 0) {
+                                final int status = c.getInt(colStatus);
+                                if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                                    Settings.setPendingDownloadsLastCheck(false);
+                                    break;
+                                }
                             }
                         }
                     }
