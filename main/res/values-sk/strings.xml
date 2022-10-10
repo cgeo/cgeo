@@ -2150,7 +2150,6 @@
     <!-- permission handling -->
     <string name="close_app">Zavrieť aplikáciu</string>
     <string name="ask_again">Opýtať sa znova</string>
-    <string name="location_permission_request_explanation">c.geo vyžaduje prístup ku GPS na vašom zariadení ny vyhľadanie polohy a výpočet vzdialenosti a smeru ku keškám. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
