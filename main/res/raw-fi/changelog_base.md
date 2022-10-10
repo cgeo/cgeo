@@ -25,3 +25,4 @@
 - Korjaa: Suodatinpalkki ei ole luettavissa vaaleassa tilassa
 - Uusi: Salli ladattavien tiedostojen valinta
 - Uusi: suodatin DNF:lle
+- New: Display elevation on home screen (if available)
