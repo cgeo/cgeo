@@ -25,3 +25,4 @@
 - 수정: 라이트 모드에서 필터 막대를 읽을 수 없음
 - New: Allow selection of files to download
 - New: Status filter for DNF
+- New: Display elevation on home screen (if available)
