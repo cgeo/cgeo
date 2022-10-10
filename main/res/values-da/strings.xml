@@ -1677,7 +1677,6 @@
     <!-- permission handling -->
     <string name="close_app">Luk app</string>
     <string name="ask_again">Spørg igen</string>
-    <string name="location_permission_request_explanation">c:geo skal have adgang til GPS-modtageren på din enhed for at bestemme din position og beregne afstand og retning til geocacherne. c:geo kan ikke bruges uden denne tilladelse.</string>
     <string name="storage_permission_request_explanation">c:geo vil skrive data til din telefons lager eller SD-kort, så snart du gemmer geocacher til offlinebrug. Desuden vil c:geo bruge din telefons lagerplads til import og eksport af filer og læsning af offline kort. c:geo kan ikke fungere uden denne tilladelse.</string>
     <string name="storage_permission_needed">Den funktion kan ikke bruges uden lagringstilladelse.</string>
     <!-- colors -->
