@@ -655,7 +655,6 @@
     <string name="downloader_cancelled_download">\'\'%s\'\' atsisiuntimas atšauktas</string>
     <string name="downloader_pending_info">Yra bent vienas pristabdytas arba nepavykęs atsisiuntimas. Ar norite atidaryti laukiančių atsisiuntimų sąrašą?</string>
     <string name="downloader_retry_download">Bandyti atsisiųsti dar kartą</string>
-    <string name="downloader_retry_download_details">Ar norite dar kartą pabandyti atsisiųsti</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Atsisiuntimas nepavyko (ir nebus bandomas iš naujo)</string>
     <string name="asdm_status_paused">Laukiama, kol bus galima bandyti iš naujo arba tęsti</string>
@@ -2179,7 +2178,6 @@
     <!-- permission handling -->
     <string name="close_app">Uždaryti programėlę</string>
     <string name="ask_again">Paklausti dar kartą</string>
-    <string name="location_permission_request_explanation">c:geo reikalinga prieigą prie jūsų GPS, kad nustatytumėte savo padėtį ir apskaičiuotumėte atstumą bei kryptį į geoslėptuvę. Jis negali būti naudojamas be šio leidimo.</string>
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
