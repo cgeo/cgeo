@@ -7,8 +7,8 @@
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
 - Oprava: nbsp; nepovažuje se za mezeru při analýze vzorce
 - Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
+- Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
