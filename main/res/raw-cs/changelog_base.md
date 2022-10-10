@@ -25,3 +25,4 @@
 - Oprava: Panel filtru není čitelný ve světlém režimu
 - Novinka: Umožnění výběru souborů ke stažení
 - Novinka: Stavový filtr pro DNF
+- Novinka: Zobrazení nadmořské výšky na domovské obrazovce (pokud je k dispozici)
