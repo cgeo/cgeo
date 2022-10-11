@@ -7,8 +7,8 @@
 - 변경: 필요한 데이터를 검색하는 중 로그 활동에 로드 표시기를 표시합니다.
 - 수정: nbsp; 수식 구문 분석에서 공백으로 간주되지 않음
 - 수정: 개인 메모 수식 구문 분석에서 생성된 추가 지점
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- 수정: 다른 캐시에 수식을 복사할 때 변수가 생성되지 않음
+- 수정: (실험 갤러리) 로그/스포일러 이미지에 이미지 캐시 사용
 
 ### 일반
 - 신규: "mf-v4-map" 및 "mf-theme" 접두사 링크에 대한 일반 다운로드 지원(자동 업데이트는 지원되지 않음)
