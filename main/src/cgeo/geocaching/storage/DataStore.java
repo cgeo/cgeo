@@ -217,7 +217,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "imageUri"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -229,7 +229,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 99;
+    private static final int dbVersion = 100;
     public static final int customListIdOffset = 10;
 
     /**
@@ -250,21 +250,22 @@ public class DataStore {
      * * {@link DbHelper#onUpgrade(SQLiteDatabase, int, int)} will fail later if db is "upgraded" again from "x-1" to x
      */
     private static final Set<Integer> DBVERSIONS_DOWNWARD_COMPATIBLE = new HashSet<>(Arrays.asList(
-            85, // adds offline logging columns/tables
-            86, // (re)create indices on c_logs and c_logImages
-            87, // adds service log id to logging tables
-            88, // add timestamp to trail history
-            89, // add altitude to trail history
-            90, // add user guid to cg_caches and cg_logs
-            91, // add fields to cg_extension
-            92, // add emoji id to cg_caches
-            93, // add emoji id to cg_lists
-            94, // add scale to offline log images
-            95, // add table to store custom filters
-            96, // add preventAskForDeletion to cg_lists
-            97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
-            98, // add table cg_variables to store cache variables
-            99  // add alcMode to differentiate Linear vs Random
+             85, // adds offline logging columns/tables
+             86, // (re)create indices on c_logs and c_logImages
+             87, // adds service log id to logging tables
+             88, // add timestamp to trail history
+             89, // add altitude to trail history
+             90, // add user guid to cg_caches and cg_logs
+             91, // add fields to cg_extension
+             92, // add emoji id to cg_caches
+             93, // add emoji id to cg_lists
+             94, // add scale to offline log images
+             95, // add table to store custom filters
+             96, // add preventAskForDeletion to cg_lists
+             97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
+             98, // add table cg_variables to store cache variables
+             99, // add alcMode to differentiate Linear vs Random
+            100  // add imageUri to cg_waypoints
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -377,7 +378,8 @@ public class DataStore {
             + "visited INTEGER DEFAULT 0, "
             + "user_note TEXT, "
             + "org_coords_empty INTEGER DEFAULT 0, "
-            + "calc_state TEXT"
+            + "calc_state TEXT,"
+            + "imageUri TEXT"
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -1683,6 +1685,14 @@ public class DataStore {
                             onUpgradeError(e, 99);
                         }
                     }
+                    // add imageUri to cg_waypoints
+                    if (oldVersion < 100) {
+                        try {
+                            createColumnIfNotExists(db, dbTableWaypoints, "imageUri TEXT DEFAULT ''");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 100);
+                        }
+                    }
 
                 }
 
@@ -2482,6 +2492,7 @@ public class DataStore {
         values.put("visited", waypoint.isVisited() ? 1 : 0);
         values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
         values.put("calc_state", waypoint.getCalcStateConfig());
+        values.put("imageUri", waypoint.getImageUri());
         return values;
     }
 
@@ -3094,6 +3105,7 @@ public class DataStore {
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
             waypoint.setCalcStateConfig(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
+            waypoint.setImageUri(cursor.getString(cursor.getColumnIndexOrThrow("imageUri")));
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

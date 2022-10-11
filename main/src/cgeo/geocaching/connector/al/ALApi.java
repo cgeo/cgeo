@@ -446,6 +446,7 @@ final class ALApi {
                     // ignore exception
                 }
                 wpt.setNote(note);
+                wpt.setImageUri(ilink);
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
                 if (!pt.equals(pointZero)) {

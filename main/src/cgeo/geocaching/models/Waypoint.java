@@ -55,6 +55,7 @@ public class Waypoint implements IWaypoint {
     private boolean originalCoordsEmpty = false;
 
     private String calcStateConfig = null;
+    private String imageUri = "";
 
     /**
      * Sort waypoints by their probable order (e.g. parking first, final last).
@@ -84,6 +85,15 @@ public class Waypoint implements IWaypoint {
         this.lookup = lookup;
         this.coords = coords;
         this.note = note;
+    }
+
+    public Waypoint(final String lookup, final Geopoint coords, final String name, final String prefix, final String note, final WaypointType type, final String imageUri) {
+        this(name, type, false);
+        this.prefix = prefix;
+        this.lookup = lookup;
+        this.coords = coords;
+        this.note = note;
+        this.imageUri = imageUri;
     }
 
     /**
@@ -265,6 +275,14 @@ public class Waypoint implements IWaypoint {
 
     public void setNote(final String note) {
         this.note = note;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(final String imageUri) {
+        this.note = imageUri;
     }
 
     @Override
