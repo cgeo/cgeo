@@ -1,20 +1,20 @@
 
-### Map
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+### Карта
+- Новое: Добавлена поддержка затенения высот в OSM
+- Исправлено: Скопированные вручную точки тайников не всегда отображались на экране
 
-### Cache details
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+### Детали тайника
+- Изменение: Показывать индикатор загрузки в активности журнала при получении необходимых данных
+- Исправлено: Неразрывный пробел (nbsp) не считался пробелом при поиске формул
+- Исправлено: Создавались лишние путевые точки во время парсинга персональной заметки
+- Исправлено: Переменные не создавались при копировании формулы в другой тайник
+- Исправлено: (Экспериментальная галерея) Использовать фото тайника для фото записей\спойлера
 
-### General
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- Fix: Filter bar not readable in light mode
+### Общее
+- Новое: Поддержка общих загрузок для ссылок, начинающихся с "mf-v4-map"- и "mf-theme"- (автоматическое обновление не поддерживается)
+- Новое: Сервисная процедура переиндексации базы данных
+- Новое: Автоматическая оптимизация (переиндексация) базы данных каждые 90 дней
+- Исправлено: Обработка отсутствующего доступа к местоположению
+- Изменение: Удалено переключение языка на сайте
+- Исправлено: Удаленные пользователем тайники не удалялись при перезапуске c:geo
+- Исправлено: Панель фильтра была нечитаема в светлой теме
