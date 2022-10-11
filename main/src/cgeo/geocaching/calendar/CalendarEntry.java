@@ -41,6 +41,7 @@ class CalendarEntry {
     @NonNull
     private final String coords;
     private final int startTimeMinutes;
+    private final int endTimeMinutes;
 
     CalendarEntry(@NonNull final Geocache cache, @NonNull final Date hiddenDate) {
         this(TextUtils.stripHtml(StringUtils.defaultString(cache.getShortDescription())),
@@ -50,12 +51,14 @@ class CalendarEntry {
                 StringUtils.defaultString(cache.getPersonalNote()),
                 cache.getName(),
                 cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                cache.getEventTimeMinutes());
+                cache.getEventStartTimeInMinutes(),
+                cache.getEventEndTimeInMinutes()
+                );
     }
 
     private CalendarEntry(@NonNull final String shortDesc, @NonNull final String longDesc, @NonNull final Date hiddenDate, @NonNull final String url,
                           @NonNull final String personalNote, @NonNull final String name, @NonNull final String coords,
-                          final int startTimeMinutes) {
+                          final int startTimeMinutes, final int endTimeMinutes) {
         this.shortDesc = shortDesc;
         this.longDesc = longDesc;
         this.hiddenDate = hiddenDate;
@@ -64,6 +67,7 @@ class CalendarEntry {
         this.name = name;
         this.coords = coords;
         this.startTimeMinutes = startTimeMinutes;
+        this.endTimeMinutes = endTimeMinutes;
     }
 
     /**
@@ -131,6 +135,9 @@ class CalendarEntry {
         final int entryStartTimeMinutes = startTimeMinutes;
         if (entryStartTimeMinutes >= 0) {
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventTime + entryStartTimeMinutes * 60000L);
+            if (endTimeMinutes >= 0) {
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, eventTime + endTimeMinutes * 60000L);
+            }
         } else {
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventTime);
             intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
