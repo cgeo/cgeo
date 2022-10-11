@@ -35,7 +35,7 @@
     <string name="gps">Labirynt Przygód GPS</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Skrytka bezlokacyjna (Odwrotna)</string>
-    <string name="advlab">Skrytka Przygodowa</string>
+    <string name="advlab">Skrytka Lab</string>
     <string name="userdefined">Skrytka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
     <string name="all_types_short">Wszystkie</string>
@@ -58,7 +58,7 @@
     <string name="gps_short">GPS Exhibit</string>
     <string name="block_short">GCHQ Block</string>
     <string name="locationless_short">Bez lokalizacji</string>
-    <string name="advlab_short">Przygodowa</string>
+    <string name="advlab_short">Lab</string>
     <string name="userdefined_short">Użytkownika</string>
     <string name="unknown_short">Nieznana</string>
     <!-- cache sizes -->
@@ -359,12 +359,8 @@
         <item quantity="many">%d minut</item>
         <item quantity="other">%d minut</item>
     </plurals>
-    <string name="caches_store_offline">Zapisz offline</string>
-    <string name="caches_store_all">Zapisz wszystkie</string>
-    <string name="caches_store_unsaved">Zapisz niezapisane</string>
-    <string name="caches_store_selected">Zapisz wybrane</string>
-    <string name="caches_store_background">Pobieranie w tle (eksperymentalne!)</string>
-    <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
+    <string name="caches_store_offline">Zapisz lokalnie</string>
+    <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
@@ -575,7 +571,6 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe.\n\n Zagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt nawigacji ma wpisane współrzędne.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
     <string name="cache_filter_status_archived">Zarchiwizowana</string>
@@ -648,7 +643,9 @@
     <string name="debug_user_error_report_title">Zgłoś problem</string>
     <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
     <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo.\nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji „O c:geo”</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Bieżące pobierania</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -664,6 +661,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
+    <string name="settings_title_offline_maps">Mapy offline</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
@@ -704,8 +702,8 @@
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrytek.</string>
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrytek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Autoryzuj c:geo z geocaching.su aby wyszukać skrytki.</string>
-    <string name="settings_lc_description">Wyświetlaj Skrytki Przygodowe na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
-    <string name="lc_default_description">To jest Skrytka Przygodowa z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Przygodowych na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
+    <string name="settings_lc_description">Wyświetlaj Skrytki Lab na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
+    <string name="lc_default_description">To jest Skrytka Lab z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Lab na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Załaduj skrzynki z opencaching.de</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
     <string name="init_summary_oc_pl">Załaduj skrzynki z opencaching.pl</string>
@@ -1260,7 +1258,7 @@
     <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
     <string name="cache_menu_navigation_transit">Nawigacja (Transport publiczny)</string>
     <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
-    <string name="cache_menu_maps_directions">Kierunki map Google</string>
+    <string name="cache_menu_maps_directions">Mapy Google</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
@@ -1299,7 +1297,7 @@
     <string name="cache_menu_log_in_browser">Utwórz wpis w dzienniku w przeglądarce</string>
     <string name="cache_menu_ignore">Ignoruj skrytkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
-    <string name="cache_log_menu_popup_title">Dziennik z %s</string>
+    <string name="cache_log_menu_popup_title">Dziennik – %s</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
@@ -2138,7 +2136,6 @@
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
-    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrytki. Dane z GPS nie mogą być używane bez twojej zgody.</string>
     <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrytek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
@@ -2264,8 +2261,6 @@
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
     <string name="download_confirmation">%1$sPobrać plik „%2$s”?%3$s</string>
-    <string name="download_confirmation_updates">Znaleziono aktualizacje dla:\n%1$s\n\nCzy chcesz zaktualizować?%2$s</string>
-    <string name="download_warning">Może to zająć trochę czasu i może prowadzić do znacznych kosztów, w zależności od Twojego połączenia z siecią.</string>
     <string name="download_error">Nieudane pobieranie (błąd #%d)</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowy menedżer pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobierania (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
@@ -2284,7 +2279,6 @@
     <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigowania. Czy chcesz pobrać brakujące dane nawigowania?</string>
     <string name="check_tiles_menu">Sprawdź brakujące dane nawigowania</string>
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
-    <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:\n%1$s\n\nCzy chcesz pobrać te pliki?%2$s</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
     <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
@@ -2727,16 +2721,4 @@
     <string name="smiley_approve">Zatwierdzone</string>
     <string name="smiley_disapprove">Odrzucone</string>
     <string name="smiley_question">Pytanie</string>
-    <string name="smiley_cry">Płacz</string>
-    <string name="smiley_embarassed">Zawstydzony</string>
-    <string name="smiley_footinmouth">Stopa w ustach</string>
-    <string name="smiley_innocent">Niewinny</string>
-    <string name="smiley_kiss">Pocałunek</string>
-    <string name="smiley_laughing">Śmiech</string>
-    <string name="smiley_money">Pieniądze</string>
-    <string name="smiley_sealed">Zapieczętowany</string>
-    <string name="smiley_surprised">Zaskoczony</string>
-    <string name="smiley_tongueout">Język na wierzchu</string>
-    <string name="smiley_undecided">Niezdecydowany</string>
-    <string name="smiley_yell">Krzyk</string>
 </resources>

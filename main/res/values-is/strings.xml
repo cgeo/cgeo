@@ -200,10 +200,6 @@
         <item quantity="one">%d mínúta</item>
         <item quantity="other">%d mínútur</item>
     </plurals>
-    <string name="caches_store_offline">Vista án nettengingar</string>
-    <string name="caches_store_all">Geyma alla</string>
-    <string name="caches_store_unsaved">Geyma óvistaða</string>
-    <string name="caches_store_selected">Vista valið</string>
     <string name="caches_history">Ferill</string>
     <string name="caches_on_map">Sýna á korti</string>
     <string name="caches_sort">Flokka niður</string>
@@ -269,6 +265,8 @@
     <string name="about_system_info">Kerfisupplýsingar c:geo</string>
     <string name="about_system_info_send_chooser">Senda kerfisupplýsingar</string>
     <string name="changelog_github">Listi af öllum breytingum</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Opna stillingar?</string>
     <string name="settings_title_services">Þjónustur</string>

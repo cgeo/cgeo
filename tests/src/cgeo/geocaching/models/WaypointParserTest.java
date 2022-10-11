@@ -635,6 +635,13 @@ public class WaypointParserTest {
         assertParseVars("test\nA=?, B=5\n$C=4*y|D=8|$R=3*5", "B", "5", "C", "4*y", "D", "8", "R", "3*5");
     }
 
+    @Test
+    public void testParseEmptyVariables() {
+        assertParseVars("$TEST=\n$B= |c=", "TEST", "", "B", "");
+        assertParseVars("$a= | $a=5 | $b=6 | $b= | $c=", "a", "5", "b", "6", "c", "");
+
+    }
+
     private void assertParseVars(final String text, final String ... expectedVars) {
         final WaypointParser parser = createParser("Praefix");
         parser.parseWaypoints(text);
@@ -644,6 +651,38 @@ public class WaypointParserTest {
         }
         final Map<String, String> vars = parser.getParsedVariables();
         assertThat(vars).isEqualTo(expectedVarMap);
+    }
 
+    @Test
+    public void testParseFormulaContainingPlainCoords() {
+        final WaypointParser parser = createParser("Praefix");
+        assertWaypoint(parser.parseWaypoints("37.000 +0.123").iterator().next(), "Praefix 1", new Geopoint(37d, 0.123d));
+        assertWaypoint(parser.parseWaypoints("16.000 -0.321").iterator().next(), "Praefix 1", new Geopoint(16d, -0.321d));
+
+        //Formulas may contain text which would be parseable as standalone coord.
+        //In this case however, such standalone coord should NOT be parsed
+        final Collection<Waypoint> wps =
+                parser.parseWaypoints("@Finale (F) {CC|N47° (37.000 +0.123)|E012° (16.000 -0.321)}");
+        assertThat(wps).hasSize(1);
+        final Waypoint wp = wps.iterator().next();
+        assertThat(wp.getCalcStateConfig()).isEqualTo("{CC|N47° (37.000 +0.123)|E012° (16.000 -0.321)}");
+
+        final Collection<Waypoint> wps2 = parser.parseWaypoints("{CC|N48|E11} 13.5 8.3 {CC|N34|E09}");
+        assertThat(wps2).hasSize(3);
+        Waypoint nonCalc = null;
+        int nonCalcCnt = 0;
+        int calcCnt = 0;
+        for (Waypoint w : wps2) {
+            if (!w.isCalculated()) {
+                nonCalc = w;
+                nonCalcCnt++;
+            } else {
+                calcCnt++;
+            }
+        }
+        assertThat(calcCnt).isEqualTo(2);
+        assertThat(nonCalcCnt).isEqualTo(1);
+        assertThat(nonCalc).isNotNull();
+        assertThat(nonCalc.getCoords()).isEqualTo(new Geopoint(13.5, 8.3));
     }
 }

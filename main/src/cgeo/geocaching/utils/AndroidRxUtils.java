@@ -26,12 +26,29 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class AndroidRxUtils {
 
+    /**
+     *  This Scheduler is intended for computational work.
+     *
+     *  This can be used for event-loops, processing callbacks and other computational work.
+     *  It is not recommended to perform blocking, IO-bound work on this scheduler. Use {@link Schedulers#io()} instead.
+     *
+     *  The number of threads equals the number of available processors on the device.
+     */
     public static final Scheduler computationScheduler = Schedulers.computation();
 
     private static final ThreadPoolExecutor.DiscardPolicy DISCARD_POLICY = new ThreadPoolExecutor.DiscardPolicy();
 
+    /**
+     *  This Scheduler is intended for network requests. Don't use it for offline computation.
+     */
     public static final Scheduler networkScheduler = Schedulers.from(newFixedDiscardingThreadPool(10, "network-"));
 
+    /**
+     * This Scheduler is intended for queuing Geocache refreshes.
+     *
+     * Don't use it for anything else than that.
+     * It shall SOLELY be used by {@link cgeo.geocaching.CacheDetailActivity} and {@link cgeo.geocaching.service.CacheDownloaderService}!
+     */
     public static final Scheduler refreshScheduler = Schedulers.from(newFixedDiscardingThreadPool(3, "refresh-"));
 
     private static final HandlerThread looperCallbacksThread =

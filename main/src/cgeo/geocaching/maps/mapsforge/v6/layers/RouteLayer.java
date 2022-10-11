@@ -23,7 +23,7 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
         super();
         this.postRealRouteDistance = postRealRouteDistance;
         resetColor();
-        width = MapLineUtils.getRouteLineWidth();
+        width = MapLineUtils.getRouteLineWidth(false);
     }
 
     public void resetColor() {

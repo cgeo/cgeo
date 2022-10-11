@@ -7,6 +7,50 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2022.09.04 Bugfix Release
+
+- Fix: Crash on logging "needs maintenance" => use "report problem" options instead
+- Fix: Crashes under certain conditions in map and cache list
+- Fix: Crash on 'Add to bookmark' in debug mode
+- Fix: Clear icon being shown on name edit for system waypoints
+- Fix: Decimal values separated by = being parsed as coords
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2022.08.21 Feature Release
+
+### Map
+- Fix: Do not show distance circles for waypoints of archived caches
+- New: Tap on free map space to create waypoint or user-defined cache, append or prepend to individual route, display coordinates or navigate (depending on context)
+- New: Option to delete offline maps
+- Fix: Lab adventure items in individual routes not recognized as such after edit
+
+### Cache details
+- Change: Remove size-limit check while storing waypoints in personal notes
+- Fix: Wrong checksum formula results on large numbers
+
+### General
+- New: Download / update caches in background
+- New: Copy current coordinates when long-tapping location on home screen
+- Fix: Missing trackable count in search results
+- New: Navigation method "Other external apps (coords only)" to invoke external navigation app with just coordinates (helps with Here WeGo in offline mode)
+- New: Posibility to build nested filters
+- New: Display Lab adventure mode (random / linear)
+- New: Support configuring settings from app info window
+- Fix: Support selecting the same value for d/t filter range
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2022.07.31 Bugfix Release
+
+- Fix: Filter settings lost on screen rotation when mapping an address search result
+- Fix: Double tap required to edit offline log
+- Fix: Exceptions in CheckerUtils, internal routing service and WhereYouGo connector
+- New: Added last geocaching.com login status to status page
+- Changed: Misleading maps.me dialog
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2022.06.06 Feature Release
 
 ### Cache details

@@ -1,8 +1,28 @@
-- Nowość: Pobieranie/aktualizowanie skrytek w tle
-- Nowość: Kopiowanie bieżących współrzędnych po długim kliknięciu lokalizacji na ekranie głównym
-- Zmiana: Usunięcie sprawdzania limitu rozmiaru podczas przechowywania punktów nawigacji w notatkach osobistych
-- Poprawka: Nie pokazuj okręgów odległości dla punktów nawigacji dla zarchiwizowanych skrytek
-- Nowość: Dotknij wolne miejsce na mapie, aby utworzyć punkt nawigacji lub skrytkę zdefiniowaną przez użytkownika, dołączyć do początku lub do końca indywidualnej trasy, wyświetlić współrzędne lub nawigować (w zależności od kontekstu)
-- Nowość: Opcja usuwania map offline
-- Poprawka: Brak liczby przedmiotów podróżnych w wynikach wyszukiwania
-- Poprawka: elementy adventure lab na indywidualnych trasach nie były rozpoznawane jako takie po edycji
+
+### Mapa
+- New: Add support for hillshading on OSM
+- Fix: Manually copied waypoints of a cache not all being displayed
+
+### Szczegóły skrytki
+- Change: Show loading indicator in log activity while retrieving required data is ongoing
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
+- Fix: Variables not created on copying formula to different cache
+- Fix: (Experimental gallery) Use image cache for log/spoiler images
+
+### Ogólne
+- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
+- New: Maintenance function reindexes database
+- New: Automatic performance optimization of database every 90 days (reindex)
+- Fix: Handle missing fine location permission
+- Change: Website language switch removed
+- Poprawka: Usunięte skrytki zdefiniowane przez użytkownika nie były usuwane przy ponownym uruchomieniu c:geo
+- New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
+- New: Allow selection of files to download
+- New: Status filter for DNF
+- New: Display elevation on home screen (if available)

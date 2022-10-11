@@ -342,16 +342,16 @@ dependencies {
     implementation "com.asamm:locus-api-android:0.9.32"
 
     // Mapsforge official version
-    def mapsforgeSource = 'org.mapsforge'
-    def mapsforgeVersion = '0.18.0'
+    //def mapsforgeSource = 'org.mapsforge'
+    //def mapsforgeVersion = '0.18.0'
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
     //def mapsforgeSource = 'com.github.mapsforge.mapsforge'
-    //def mapsforgeVersion = '905e9d48bb' // master as of 31.3.21
+    //def mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
-    // def mapsforgeSource = 'com.github.cgeo.mapsforge'
-    // def mapsforgeVersion = '91fa6e6254' // fix for #10128 + fix for #12145
+    def mapsforgeSource = 'com.github.cgeo.mapsforge'
+    def mapsforgeVersion = 'fbc75a4' // fix for #12210
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
@@ -360,8 +360,8 @@ dependencies {
     implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion"
 
     // Mapsforge VTM implementation
-    def mapsforgeVTMSource = 'org.mapsforge';
-    def mapsforgeVTMVersion = '0.18.0';
+    def mapsforgeVTMSource = 'org.mapsforge'
+    def mapsforgeVTMVersion = '0.18.0'
 
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
@@ -411,7 +411,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Support Library Lifecycle Helpers
-    def lifecycleVersion = '2.5.0'
+    def lifecycleVersion = '2.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"

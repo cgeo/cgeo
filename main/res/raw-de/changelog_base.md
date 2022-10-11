@@ -1,8 +1,28 @@
-- Neu: Caches im Hintergrund herunterladen/aktualisieren
-- Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
-- Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
-- Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
-- Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
-- Neu: Option zum Löschen von Offline-Karten
-- Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
-- Korrektur: Lab Adventure-Einträge in individuellen Routen werden nach der Bearbeitung nicht mehr als solche erkannt
+
+### Karte
+- Neu: Kartenschattierung für OSM Offline-Karten unterstützt
+- Korrektur: Manuell kopierte Wegpunkte eines Caches werden nicht alle angezeigt
+
+### Cache-Details
+- Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
+- Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
+- Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
+- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
+- Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
+- Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
+
+### Allgemein
+- Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
+- Neu: Wartungsfunktion indiziert die Datenbank neu
+- Neu: Automatische Leistungsoptimierung der Datenbank alle 90 Tage (erneutes Indizieren)
+- Korrektur: Handhabe fehlende Berechtigung für genauen Standort
+- Änderung: Website-Sprachwechsel entfernt
+- Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
+- Neu: Ansicht für ausstehende Downloads
+- Neu: Cache-Name / Name der Liste beim GPX-Export an Dateiname anhängen
+- Änderung: "Als Android-Browser identifizieren"-Einstellung entfernt
+- Neu: Beim Start ausstehende Downloads prüfen (Karten- / Routing-Daten)
+- Korrektur: Filterleiste im hellen Design nicht lesbar
+- Neu: Auswahl der Dateien, die heruntergeladen werden sollen
+- Neu: Statusfilter für DNF
+- New: Display elevation on home screen (if available)

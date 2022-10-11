@@ -350,12 +350,6 @@
         <item quantity="one">%d minutt</item>
         <item quantity="other">%d minutter</item>
     </plurals>
-    <string name="caches_store_offline">Lagre lokalt</string>
-    <string name="caches_store_all">Lagre alle</string>
-    <string name="caches_store_unsaved">Lagre ulagrede</string>
-    <string name="caches_store_selected">Lagre valgte</string>
-    <string name="caches_store_background">Bakgrunnsnedlasting (Eksperimentell!)</string>
-    <string name="caches_store_refresh_background">Bakgrunnsoppdatering (Eksperimentell!)</string>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>
@@ -610,7 +604,9 @@
     <string name="debug_user_error_report_title">Rapporter et problem</string>
     <string name="debug_user_error_errortext">Det oppsto et uventet problem som vi ønsker at du melder ifra til oss:</string>
     <string name="debug_user_error_explain_options">Hjelp oss å fikse c:geo problemer ved å rapportere dem via e-post med systeminformasjonen og loggfilen til c:geo.\nVennligst legg til en detaljert feilbeskrivelse i e-posten\n\nFør du sender en e-post, vennligst også sjekk vår FAQ og/eller sosiale medier for kjente problemer.\nAndre kontaktalternativer finner du på \'Om c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Pågående nedlastinger</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Åpne innstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -1975,7 +1971,6 @@
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør igjen</string>
-    <string name="location_permission_request_explanation">c:geo trenger tilgang til GPSen på enheten din for å finne din posisjon og avstand og retning til geocacher. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_request_explanation">c:geo skriver data til internt lagringsområde eller SD-kort når du lagrer geocacher for offline bruk. Videre bruker c:geo lagringsområdet til importering og eksportering av filer og for å lese offline-kart. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_needed">Denne funksjonen er ikke tilgjengelig uten lagringstilatelse.</string>
     <!-- colors -->

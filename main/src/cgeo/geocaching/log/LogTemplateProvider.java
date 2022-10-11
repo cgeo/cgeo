@@ -155,6 +155,13 @@ public final class LogTemplateProvider {
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
+        templates.add(new LogTemplate("DAYOFWEEK", R.string.init_signature_template_day_of_week) {
+
+            @Override
+            public String getValue(final LogContext context) {
+                return Formatter.formatDayOfWeek(System.currentTimeMillis());
+            }
+        });
         templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
 
             @Override

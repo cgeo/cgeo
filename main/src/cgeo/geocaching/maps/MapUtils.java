@@ -150,7 +150,7 @@ public class MapUtils {
                 if (hasUnsupportedTiles.get()) {
                     ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
                 }
-                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads);
+                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads, null);
             }
         });
     }

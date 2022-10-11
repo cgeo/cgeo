@@ -1,8 +1,28 @@
-- Nieuw: Download / update caches op de achtergrond
-- Nieuw: Kopieer huidige coördinaten bij lang klikken op locatie op het startscherm
-- Wijziging: Verwijder grootte controle tijdens het opslaan van waypoints in persoonlijke notities
-- Oplossing: Toon geen afstandscirkels voor waypoints van gearchiveerde caches
-- Nieuw: Tik op vrije plek op de kaart om een waypoint of gebruiker gedefinieerde cache te maken, voeg voor of toe aan individuele route, toon coördinaten of navigeer (afhankelijk van de context)
-- Nieuw: Optie om offline kaarten te verwijderen
-- Oplossing: Ontbrekende trackable telling in zoekresultaten
-- Oplossing: Labavonturen voorwerpen in individuele routes die niet als zodanig worden herkend na bewerking
+
+### Kaart
+- Nieuw: Voeg ondersteuning voor heuvel arvering toe op OSM
+- Oplossing: Handmatig gekopieerde waypoints van een cache werden niet allemaal weergegeven
+
+### Cache details
+- Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
+- Fix: nbsp; not considered as space in formula parsing
+- Fix: Log image labelled "Image 1" even if only a single image added
+- Fix: Extra waypoints created on personal note formula parsing
+- Fix: Variables not created on copying formula to different cache
+- Fix: (Experimental gallery) Use image cache for log/spoiler images
+
+### Algemeen
+- Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
+- Nieuw: Onderhoudsfunctie herindexeert database
+- Nieuw: Automatische prestatieoptimalisatie van de database om de 90 dagen (herindexeren)
+- Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
+- Wijziging: Website taalschakelaar verwijderd
+- Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
+- Nieuw: Openstaande downloads weergave
+- Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- Fix: Filter bar not readable in light mode
+- New: Allow selection of files to download
+- New: Status filter for DNF
+- New: Display elevation on home screen (if available)

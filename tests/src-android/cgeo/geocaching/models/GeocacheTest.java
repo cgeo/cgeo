@@ -802,7 +802,6 @@ public class GeocacheTest extends CGeoTestCase {
         gcCache.setGeocode("GC123");
         gcCache.setType(CacheType.WEBCAM);
         assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.WEBCAM_PHOTO_TAKEN);
-        assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.NEEDS_MAINTENANCE);
 
         final Geocache ocCache = new Geocache();
         ocCache.setGeocode("OC1234");

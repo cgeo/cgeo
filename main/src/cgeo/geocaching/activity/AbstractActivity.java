@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -10,6 +9,7 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -28,7 +29,6 @@ import cgeo.geocaching.utils.formulas.FormulaUtils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
@@ -71,14 +71,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             finish();
         }
     };
-
-    protected final void showProgress(final boolean show) {
-        try {
-            ActivityMixin.showProgress(this, show);
-        } catch (final Exception ex) {
-            Log.e(String.format(Locale.US, "Error seeting progress: %b", show), ex);
-        }
-    }
 
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
@@ -150,17 +142,16 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
-        LocalBroadcastManager.getInstance(this).registerReceiver(finishBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_CLEAR_BACKSTACK) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                finish();
+            }
+        });
     }
 
     public void clearBackStack() {
         LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_CLEAR_BACKSTACK));
-    }
-
-    @Override
-    protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
-        super.onDestroy();
     }
 
     protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID) {
@@ -259,9 +250,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
             if (success) {
-                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));

@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
@@ -60,7 +61,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         repaintPosition();
 
         // navigation
-        navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth());
+        navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
         map.layers().add(navigationLayer);
     }
 
@@ -112,7 +113,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
             // position and heading arrow
             final Matrix matrix = new Matrix();
-            matrix.setRotate(currentHeading, arrowWidthHalf, arrowHeightHalf);
+            matrix.setRotate(AngleUtils.normalize(currentHeading + map.getMapPosition().getBearing()), arrowWidthHalf, arrowHeightHalf);
             final Bitmap arrow = new AndroidBitmap(android.graphics.Bitmap.createBitmap(positionAndHeadingArrow, 0, 0, arrowWidth, arrowHeight, matrix, true));
             arrowLayer.removeAllItems();
             final MarkerItem item = new MarkerItem("current position", "", new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
@@ -125,7 +126,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     protected void repaintHistory() {
         clearLayers(historyLayers);
         repaintHistoryHelper((points) -> {
-            final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth());
+            final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth(true));
             historyLayers.add(historyLayer);
             map.layers().add(historyLayer);
             historyLayer.setPoints(points);
@@ -136,7 +137,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     protected void repaintRouteAndTracks() {
         clearLayers(trackLayers);
         repaintRouteAndTracksHelper((segment, isTrack) -> {
-            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor(), isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth());
+            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor(), isTrack ? MapLineUtils.getTrackLineWidth(true) : MapLineUtils.getRouteLineWidth(true));
             trackLayers.add(trackLayer);
             map.layers().add(trackLayer);
             trackLayer.setPoints(segment);

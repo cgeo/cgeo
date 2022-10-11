@@ -248,10 +248,6 @@
     <string name="caches_more_caches_currently">حالياً</string>
     <string name="caches_downloading">تحميل المخبآت&#8230;\nETA: </string>
     <string name="caches_eta_ltm">أقل من دقيقة</string>
-    <string name="caches_store_offline">تخزين في وضع عدم الاتصال</string>
-    <string name="caches_store_all">تخزين الكل</string>
-    <string name="caches_store_unsaved">تخزين غير محفوظ</string>
-    <string name="caches_store_selected">تخزين المحدد</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>
     <string name="caches_sort">الفرز</string>
@@ -323,6 +319,8 @@
     <string name="about_system_info">معلومات نظام الـ c:geo</string>
     <string name="about_system_info_send_chooser">إرسال معلومات النظام</string>
     <string name="changelog_github">قائمة جميع التغييرات</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">فتح الإعدادات؟</string>
     <string name="settings_title_services">الخدمات</string>

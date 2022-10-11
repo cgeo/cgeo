@@ -37,7 +37,7 @@ public class NavigationLayer extends Layer {
 
     public void resetColor() {
         paint = AndroidGraphicFactory.INSTANCE.createPaint();
-        paint.setStrokeWidth(MapLineUtils.getDirectionLineWidth());
+        paint.setStrokeWidth(MapLineUtils.getDirectionLineWidth(false));
         paint.setStyle(Style.STROKE);
         paint.setColor(MapLineUtils.getDirectionColor());
         paint.setTextSize(20);

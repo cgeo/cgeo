@@ -6,7 +6,7 @@ import cgeo.geocaching.utils.MapLineUtils;
 public class TrackLayer extends AbstractRouteLayer implements Tracks.UpdateTrack {
 
     public TrackLayer() {
-        width = MapLineUtils.getTrackLineWidth();
+        width = MapLineUtils.getTrackLineWidth(false);
         resetColor();
     }
 

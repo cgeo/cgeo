@@ -65,6 +65,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -111,15 +112,12 @@ import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -159,7 +157,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -388,8 +385,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        // get notified on cache changes (e.g.: waypoint creation from map)
-        LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver, new IntentFilter(Intents.INTENT_CACHE_CHANGED));
+        // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                if (cache != null && cache.getGeocode().equals(geocode)) {
+                    notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
@@ -448,7 +452,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
         super.onDestroy();
     }
 
@@ -495,21 +498,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (itemId == R.id.menu_waypoint_visited) {
             if (selectedWaypoint != null) {
                 ensureSaved();
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        selectedWaypoint.setVisited(true);
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            notifyDataSetChanged();
-                        }
-                    }
-                }.execute();
+                AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                    selectedWaypoint.setVisited(true);
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                }, this::notifyDataSetChanged);
             }
         } else if (itemId == R.id.menu_waypoint_copy_coordinates) {
             if (selectedWaypoint != null) {
@@ -527,23 +519,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_waypoint_duplicate) {
             ensureSaved();
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    if (cache.duplicateWaypoint(selectedWaypoint, true) != null) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-                    return false;
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                if (cache.duplicateWaypoint(selectedWaypoint, true) != null) {
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                    return true;
                 }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                    }
+                return false;
+            }, result -> {
+                if (result) {
+                    notifyDataSetChanged();
                 }
-            }.execute();
+            });
         } else if (itemId == R.id.menu_waypoint_toclipboard) {
             if (selectedWaypoint != null) {
                 ensureSaved();
@@ -566,24 +552,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_waypoint_delete) {
             ensureSaved();
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    if (cache.deleteWaypoint(selectedWaypoint)) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-                    return false;
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                if (cache.deleteWaypoint(selectedWaypoint)) {
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                    return true;
                 }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                        LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
-                    }
+                return false;
+            }, result -> {
+                if (result) {
+                    notifyDataSetChanged();
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(CacheDetailActivity.this, cache.getGeocode());
                 }
-            }.execute();
+            });
         } else if (itemId == R.id.menu_waypoint_navigate_default) {
             if (selectedWaypoint != null) {
                 NavigationAppFactory.startDefaultNavigationApplication(1, this, selectedWaypoint);
@@ -749,27 +729,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_toggleWaypointsFromNote) {
             cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
             setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    return true;
-                }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                    }
-                }
-            }.execute();
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)), this::notifyDataSetChanged);
         } else if (menuItem == R.id.menu_clear_goto_history) {
             SimpleDialog.of(this).setTitle(R.string.clear_goto_history_title).setMessage(R.string.clear_goto_history).confirm((dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
                 cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                 notifyDataSetChanged();
             }));
         } else if (menuItem == R.id.menu_export_gpx) {
-            new GpxExport().export(Collections.singletonList(cache), this);
+            new GpxExport().export(Collections.singletonList(cache), this, cache.getName());
         } else if (menuItem == R.id.menu_export_fieldnotes) {
             new FieldNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
@@ -946,17 +913,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         Settings.addCacheToHistory(cache.getGeocode());
     }
-
-    /**
-     * Receives update notifications from asynchronous processes
-     */
-    private final BroadcastReceiver updateReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            notifyDataSetChanged();
-        }
-    };
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity using the default navigation tool.
@@ -1216,6 +1172,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             details.add(R.string.cache_type, cache.getType().getL10n());
+            if (cache.getType() == CacheType.ADVLAB) {
+                details.addAlcMode(cache);
+            }
             details.addSize(cache);
             activity.addContextMenu(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
@@ -2014,13 +1973,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.getLists().add(StoredList.STANDARD_LIST_ID);
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(final Void... params) {
-                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                    return null;
-                }
-            }.execute();
+            AndroidRxUtils.computationScheduler.scheduleDirect(() -> DataStore.saveCache(cache, LoadFlags.SAVE_ALL));
             notifyDataSetChanged();
         }
     }
@@ -2361,7 +2314,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
-                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages());
+                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
                 activity.imageGallery = imageGallery;
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
@@ -2647,7 +2600,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (Settings.enableFeatureNewImageGallery()) {
                 pages.add(Page.IMAGEGALLERY.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
+            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
                 pages.add(Page.IMAGES.id);
             }
         }

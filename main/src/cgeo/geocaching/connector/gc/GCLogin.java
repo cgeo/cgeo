@@ -15,6 +15,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
 import java.io.IOException;
@@ -180,9 +181,6 @@ public class GCLogin extends AbstractLogin {
 
             if (getLoginStatus(tryLoggedInData)) {
                 Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-                if (switchToEnglish(tryLoggedInData) && retry) {
-                    return login(false, credentials);
-                }
                 return completeLoginProcess();
             }
 
@@ -200,9 +198,6 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (getLoginStatus(loginData)) {
-                if (switchToEnglish(loginData) && retry) {
-                    return login(false, credentials);
-                }
                 Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
                 return completeLoginProcess();
             }
@@ -217,14 +212,14 @@ public class GCLogin extends AbstractLogin {
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
-            if (loginData.contains("You must validate your account before you can log in.")) {
+            if (loginData.contains("content=\"account/join/success\"")) {
                 logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
             logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
-                switchToEnglish(loginData);
+                getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
@@ -312,36 +307,36 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    private boolean isLanguageEnglish(@NonNull final String page) {
-        final ServerParameters params = getServerParameters();
+    public String getWebsiteLanguage() {
         try {
-            return params != null && (params.appOptions.localRegion.equals("en-US"));
+            final ServerParameters params = getServerParameters();
+            return params.appOptions.localRegion;
         } catch (final Exception e) {
-            return false;
+            return "UNKNOWN";
         }
     }
 
     /**
-     * Ensure that the web site is in English.
+     * Ensure that the website is presented in the specified language.
      *
-     * @param previousPage the content of the last loaded page
-     * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
+     * Used for unit tests.
+     *
+     * @param language the language code to be used at geocaching.com (e.g. "en-US")
+     * @return {@code true} if a switch was necessary and successfully performed (different language -> target language)
      */
     @WorkerThread
-    private boolean switchToEnglish(final String previousPage) {
-        if (previousPage != null && isLanguageEnglish(previousPage)) {
-            Log.i("Geocaching.com language already set to English");
-            // get find count
-            getLoginStatus(previousPage);
+    @VisibleForTesting
+    public boolean switchToLanguage(final String language) {
+        if (getWebsiteLanguage().equals(language)) {
+            Log.i("Geocaching.com language already set to " + language);
         } else {
             try {
-                final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=en-US"));
-                Log.i("changed language on geocaching.com to English");
+                final String page = Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/culture/set?model.SelectedCultureCode=" + language));
+                Log.i("changed language on geocaching.com to " + language);
                 resetServerParameters();
-                getLoginStatus(page);
-                return true;
+                return getLoginStatus(page);
             } catch (final Exception ignored) {
-                Log.e("Failed to set geocaching.com language to English");
+                Log.e("Failed to set geocaching.com language to " + language);
             }
         }
         return false;

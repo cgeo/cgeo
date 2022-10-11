@@ -78,7 +78,7 @@
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_save"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/caches_store_all"
+        android:title="@string/caches_store_offline_map"
         app:showAsAction="ifRoom|withText">
     </item>
     <item

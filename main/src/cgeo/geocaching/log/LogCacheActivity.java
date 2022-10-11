@@ -52,7 +52,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -100,7 +99,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
 
-    private boolean sendButtonEnabled;
+    private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
@@ -152,7 +151,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
 
         refreshGui();
-        enablePostButton(true);
         showProgress(false);
     }
 
@@ -211,10 +209,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
         Collections.sort(sortedTrackables, comparator.getComparator());
         return sortedTrackables;
-    }
-
-    private void enablePostButton(final boolean enabled) {
-        sendButtonEnabled = enabled;
     }
 
     @Override
@@ -284,11 +278,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             fillViewFromEntry(lastSavedState);
         }
-
-        // TODO: Why is it disabled in onCreate?
-        // Probably it should be disabled only when there is some explicit issue.
-        // See https://github.com/cgeo/cgeo/issues/7188
-        enablePostButton(false);
 
         refreshGui();
 
@@ -459,6 +448,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         updateTrackablesList();
     }
 
+    private void showProgress(final boolean loading) {
+        readyToPost = !loading;
+        binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+    }
+
     private void updateTweetBox(final LogType type) {
         if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
             binding.tweet.setVisibility(View.VISIBLE);
@@ -491,18 +485,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             if (doSave) {
                 lastSavedState = logEntry;
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected Void doInBackground(final Void... params) {
-                        try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
-                            cache.logOffline(LogCacheActivity.this, logEntry);
-                            Settings.setLastCacheLog(logEntry.log);
-                            ccLog.add("log=%s", logEntry.log);
-                            imageListFragment.adjustImagePersistentState();
-                            return null;
-                        }
+                AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
+                    try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
+                        cache.logOffline(LogCacheActivity.this, logEntry);
+                        Settings.setLastCacheLog(logEntry.log);
+                        ccLog.add("log=%s", logEntry.log);
+                        imageListFragment.adjustImagePersistentState();
                     }
-                }.execute();
+                });
             }
         }
     }
@@ -553,7 +543,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void sendLogAndConfirm() {
-        if (!sendButtonEnabled) {
+        if (!readyToPost) {
             SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
             return;
         }

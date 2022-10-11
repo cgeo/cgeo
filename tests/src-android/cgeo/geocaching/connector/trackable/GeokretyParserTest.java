@@ -177,7 +177,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log6.id).isEqualTo(673734);
         assertThat(log6.date).isEqualTo(dateFormat.parse("2015-03-29 14:10").getTime());
         assertThat(log6.getDisplayText()).isEqualTo("Test");
-        assertThat(log6.getType()).isEqualTo(LogType.NOTE);
+        assertThat(log6.logType).isEqualTo(LogType.NOTE);
         assertThat(log6.cacheName).isNullOrEmpty();
         assertThat(log6.cacheGeocode).isNullOrEmpty();
 
@@ -186,7 +186,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log5.id).isEqualTo(722027);
         assertThat(log5.date).isEqualTo(dateFormat.parse("2015-07-04 00:00").getTime());
         assertThat(log5.getDisplayText()).isEqualTo("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.");
-        assertThat(log5.getType()).isEqualTo(LogType.VISIT);
+        assertThat(log5.logType).isEqualTo(LogType.VISIT);
         assertThat(log5.cacheName).isEqualTo("GC2E895");
         assertThat(log5.cacheGeocode).isEqualTo("GC2E895");
 
@@ -195,7 +195,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log4.id).isEqualTo(912063);
         assertThat(log4.date).isEqualTo(dateFormat.parse("2016-01-03 12:00").getTime());
         assertThat(log4.getDisplayText()).isEqualTo("test drop");
-        assertThat(log4.getType()).isEqualTo(LogType.PLACED_IT);
+        assertThat(log4.logType).isEqualTo(LogType.PLACED_IT);
         assertThat(log4.cacheName).isEqualTo("GC5BRQK");
         assertThat(log4.cacheGeocode).isEqualTo("GC5BRQK");
 
@@ -211,7 +211,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
                 "<br />" +
                 "<br />" +
                 "Multiline 4");
-        assertThat(log3.getType()).isEqualTo(LogType.DISCOVERED_IT);
+        assertThat(log3.logType).isEqualTo(LogType.DISCOVERED_IT);
         assertThat(log3.cacheName).isEqualTo("GC5BRQK");
         assertThat(log3.cacheGeocode).isEqualTo("GC5BRQK");
 
@@ -220,7 +220,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log2.id).isEqualTo(967656);
         assertThat(log2.date).isEqualTo(dateFormat.parse("2016-03-21 18:31").getTime());
         assertThat(log2.getDisplayText()).isEqualTo("Grabbed");
-        assertThat(log2.getType()).isEqualTo(LogType.GRABBED_IT);
+        assertThat(log2.logType).isEqualTo(LogType.GRABBED_IT);
         assertThat(log2.cacheName).isNullOrEmpty();
         assertThat(log2.cacheGeocode).isNullOrEmpty();
 
@@ -229,11 +229,11 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(log1.id).isEqualTo(911689);
         assertThat(log1.date).isEqualTo(dateFormat.parse("2016-05-02 12:00").getTime());
         assertThat(log1.getDisplayText()).isEqualTo("test images in log");
-        assertThat(log1.getType()).isEqualTo(LogType.NOTE);
+        assertThat(log1.logType).isEqualTo(LogType.NOTE);
         assertThat(log1.cacheName).isNullOrEmpty();
         assertThat(log1.cacheGeocode).isNullOrEmpty();
 
-        final List<Image> logImages1 = log1.getLogImages();
+        final List<Image> logImages1 = log1.logImages;
         assertThat(logImages1).hasSize(2);
         final Image image1 = logImages1.get(0);
         assertThat(image1.getTitle()).isEqualTo("test logo 2");
@@ -341,7 +341,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         final LogEntry logNocybe = logs.get(2);
         assertThat(logNocybe.id).isEqualTo(855750);
         assertThat(logNocybe.author).isEqualTo("nocybe1810");
-        assertThat(logNocybe.getType()).isEqualTo(LogType.GRABBED_IT);
+        assertThat(logNocybe.logType).isEqualTo(LogType.GRABBED_IT);
         assertThat(logNocybe.cacheName).isNullOrEmpty();
         assertThat(logNocybe.cacheGeocode).isNullOrEmpty();
     }

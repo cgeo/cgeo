@@ -44,7 +44,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
             directionObjs.addPolyline(new PolylineOptions()
                     .addAll(directionLine)
                     .color(MapLineUtils.getDirectionColor())
-                    .width(MapLineUtils.getDirectionLineWidth())
+                    .width(MapLineUtils.getDirectionLineWidth(true))
                     .zIndex(ZINDEX_DIRECTION_LINE)
             );
         }, MAP_GOOGLE);
@@ -107,7 +107,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
         repaintHistoryHelper((points) -> historyObjs.addPolyline(new PolylineOptions()
                 .addAll(points)
                 .color(MapLineUtils.getTrailColor())
-                .width(MapLineUtils.getHistoryLineWidth())
+                .width(MapLineUtils.getHistoryLineWidth(true))
                 .zIndex(ZINDEX_HISTORY)
         ));
     }
@@ -118,7 +118,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
         repaintRouteAndTracksHelper((segment, isTrack) -> trackObjs.addPolyline(new PolylineOptions()
                 .addAll(segment)
                 .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
-                .width(isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth())
+                .width(isTrack ? MapLineUtils.getTrackLineWidth(true) : MapLineUtils.getRouteLineWidth(true))
                 .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
         ));
     }

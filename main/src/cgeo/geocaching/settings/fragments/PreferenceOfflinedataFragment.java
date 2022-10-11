@@ -28,12 +28,19 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)).setOnPreferenceClickListener(preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
-            ActivityMixin.showShortToast(getActivity(), R.string.init_maintenance_start);
+
+            final ProgressDialog waitDialog = new ProgressDialog(getActivity());
+            waitDialog.setTitle(getString(R.string.init_maintenance_start));
+            waitDialog.setMessage(getString(R.string.init_maintenance_ongoing));
+            waitDialog.setCancelable(false);
+            waitDialog.show();
+
             AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> {
                 final Activity activity = getActivity();
                 if (activity != null) {
                     ActivityMixin.showShortToast(activity, R.string.init_maintenance_finished);
                 }
+                waitDialog.dismiss();
             });
             return true;
         });
@@ -71,7 +78,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         super.onResume();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
-        getActivity().setTitle(R.string.settings_title_offlinedata);
+        activity.setTitle(R.string.settings_title_offlinedata);
         SettingsUtils.initPublicFolders(this, activity.getCsah());
     }
 }

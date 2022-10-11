@@ -35,7 +35,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log).isNotNull();
         assertThat(log).hasSize(10);
 
-        final List<Image> logImages = log.get(5).getLogImages();
+        final List<Image> logImages = log.get(5).logImages;
         assertThat(logImages).isNotNull();
         assertThat(logImages).hasSize(1);
         assertThat(logImages.get(0).getUrl()).isEqualTo("https://img.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
@@ -98,7 +98,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(logs).isNotNull();
         assertThat(logs).isNotEmpty();
         final LogEntry marked = logs.get(0);
-        assertThat(marked.getType()).isEqualTo(LogType.MARKED_MISSING);
+        assertThat(marked.logType).isEqualTo(LogType.MARKED_MISSING);
     }
 
     private Trackable getTB2R124() {

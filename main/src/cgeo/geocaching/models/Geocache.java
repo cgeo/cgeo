@@ -11,7 +11,7 @@ import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -118,6 +118,7 @@ public class Geocache implements IWaypoint {
     private String ownerGuid = "";
     private String ownerUserId = "";
     private int assignedEmoji = 0;
+    private int alcMode = 0;
 
     @Nullable
     private Date hidden = null;
@@ -516,7 +517,7 @@ public class Geocache implements IWaypoint {
         boolean willAttend = false;
         final List<LogEntry> logs = getLogs();
         for (final LogEntry logEntry : logs) {
-            final LogType logType = logEntry.getType();
+            final LogType logType = logEntry.logType;
             if (logType == LogType.ATTENDED) {
                 return false;
             } else if (logType == LogType.WILL_ATTEND && logEntry.isOwn()) {
@@ -825,7 +826,7 @@ public class Geocache implements IWaypoint {
         // For some connectors ID can be calculated out of geocode
         if (StringUtils.isBlank(cacheId)) {
             if (getConnector() instanceof GCConnector) {
-                return String.valueOf(GCConstants.gccodeToGCId(geocode));
+                return String.valueOf(GCUtils.gcLikeCodeToGcLikeId(geocode));
             }
             if (getConnector() instanceof SuConnector) {
                 return SuConnector.geocodeToId(geocode);
@@ -1280,6 +1281,21 @@ public class Geocache implements IWaypoint {
         this.onWatchlist = onWatchlist;
     }
 
+    public boolean isLinearAlc() {
+        Log.d("_AL isLinearAlc: " + alcMode);
+        return alcMode == 1;
+    }
+
+    public void setAlcMode(final int alcMode) {
+        Log.d("_AL setAlcMode: " + alcMode);
+        this.alcMode = alcMode;
+    }
+
+    public int getAlcMode() {
+        Log.d("_AL getAlcMode: " + alcMode);
+        return alcMode;
+    }
+
     /**
      * Set the number of users watching this geocache
      *
@@ -1625,8 +1641,27 @@ public class Geocache implements IWaypoint {
         }
         final int index = getWaypointIndex(original);
         final Waypoint copy = new Waypoint(original);
-        copy.setUserDefined();
         copy.setName((addPrefix ? CgeoApplication.getInstance().getString(R.string.waypoint_copy_of) + " " : "") + copy.getName());
+
+        // create unique prefix
+        copy.setUserDefined();
+        final String basePrefix = copy.getPrefix();
+        int counter = 0;
+        boolean found = true;
+        while (found) {
+            found = false;
+            for (Waypoint waypoint : waypoints) {
+                if (StringUtils.equals(waypoint.getPrefix(), copy.getPrefix())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                counter++;
+                copy.setPrefix(basePrefix + "-" + counter);
+            }
+        }
+
         waypoints.add(index + 1, copy);
         return DataStore.saveWaypoint(-1, geocode, copy) ? copy : null;
     }
@@ -2024,7 +2059,7 @@ public class Geocache implements IWaypoint {
             if (Settings.isStoreLogImages()) {
                 for (final LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
-                        for (final Image oneLogImg : log.getLogImages()) {
+                        for (final Image oneLogImg : log.logImages) {
                             imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
@@ -2169,7 +2204,7 @@ public class Geocache implements IWaypoint {
      */
     public boolean hasOwnLog(@NonNull final LogType logType) {
         for (final LogEntry logEntry : getLogs()) {
-            if (logEntry.getType() == logType && logEntry.isOwn()) {
+            if (logEntry.logType == logType && logEntry.isOwn()) {
                 return true;
             }
         }

@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -31,6 +32,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.functions.Function;
 
 public class CacheDownloaderService extends AbstractForegroundIntentService {
     static {
@@ -42,7 +48,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     private static volatile boolean shouldStop = false;
     private static final Map<String, DownloadTaskProperties> downloadQuery = new HashMap<>();
 
-    int cachesDownloaded = 0;
+    final AtomicInteger cachesDownloaded = new AtomicInteger();
 
     public static boolean isDownloadPending(final String geocode) {
         return downloadQuery.containsKey(geocode);
@@ -162,9 +168,17 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             return;
         }
 
-        for (String geocode : intent.getStringArrayListExtra(EXTRA_GEOCODES)) {
+        // schedule download on multiple threads...
+
+        Log.d("Download task started");
+
+        final Observable<String> geocodes = Observable.fromIterable(intent.getStringArrayListExtra(EXTRA_GEOCODES));
+        geocodes.flatMap((Function<String, Observable<String>>) geocode -> Observable.create((ObservableOnSubscribe<String>) emitter -> {
             handleDownload(geocode);
-        }
+            emitter.onComplete();
+        }).subscribeOn(AndroidRxUtils.refreshScheduler)).blockingSubscribe();
+
+        Log.d("Download task completed");
     }
 
     private void handleDownload(final String geocode) {
@@ -173,6 +187,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 Log.i("download canceled");
                 return;
             }
+
+            Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " started");
 
             final DownloadTaskProperties properties;
             synchronized (downloadQuery) {
@@ -184,8 +200,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             }
 
             // update foreground service notification
-            notification.setProgress(downloadQuery.size() + cachesDownloaded, cachesDownloaded, false);
-            notification.setContentText(cachesDownloaded + "/" + (downloadQuery.size() + cachesDownloaded));
+            notification.setProgress(downloadQuery.size() + cachesDownloaded.get(), cachesDownloaded.get(), false);
+            notification.setContentText(cachesDownloaded.get() + "/" + (downloadQuery.size() + cachesDownloaded.get()));
             updateForegroundNotification();
 
             // merge current lists and additional lists
@@ -198,7 +214,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             // download...
             if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
-                GeocacheRefreshedBroadcastReceiver.sendBroadcast(this, geocode);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
                 synchronized (downloadQuery) {
@@ -206,10 +222,13 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                         downloadQuery.remove(geocode);
                     }
                 }
-                cachesDownloaded++;
+                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed");
+                cachesDownloaded.incrementAndGet();
+            } else {
+                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " failed");
             }
         } catch (Exception ex) {
-            Log.e("background download failed", ex);
+            Log.e("exception while background download", ex);
         }
     }
 
@@ -217,9 +236,9 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     public void onDestroy() {
         if (downloadQuery.size() > 0) {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
-                    cachesDownloaded, cachesDownloaded + downloadQuery.size()));
+                    cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else {
-            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded, cachesDownloaded));
+            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
         }
         downloadQuery.clear();
         super.onDestroy();

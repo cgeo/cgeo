@@ -297,10 +297,6 @@
         <item quantity="few">%d minute</item>
         <item quantity="other">%d minute</item>
     </plurals>
-    <string name="caches_store_offline">Salvează local</string>
-    <string name="caches_store_all">Salvează pe toate</string>
-    <string name="caches_store_unsaved">Salvează nesalvate</string>
-    <string name="caches_store_selected">Salvează cutiile selectate</string>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
     <string name="caches_sort">Sortare</string>
@@ -379,6 +375,8 @@
     <string name="changelog_github">Afişează toate modificările</string>
     <string name="debug_user_error_report_title">Raportează o problemă</string>
     <string name="debug_user_error_errortext">A apărut o problemă neașteptată pe care v-am ruga să ne-o raportați:</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Deschide setările?</string>
     <string name="settings_title_services">Servicii internet</string>

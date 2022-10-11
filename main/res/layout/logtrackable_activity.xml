@@ -5,12 +5,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip"
     tools:context=".log.LogTrackableActivity" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="4dip"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -117,5 +121,13 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:id="@+id/progress_bar"
+        tools:visibility="gone" />
+</RelativeLayout>
 
 </ScrollView>

@@ -23,6 +23,7 @@ import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -39,7 +40,6 @@ import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -57,13 +57,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -161,8 +161,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         activity.binding.note.setText("");
                     }
                 } else {
-                    activity.nonEditable(activity.binding.name);
-                    activity.nonEditable(activity.binding.note);
+                    activity.nonEditable(activity.binding.nameLayout, activity.binding.name);
+                    activity.nonEditable(activity.binding.noteLayout, activity.binding.note);
                     if (waypoint != null && !waypoint.isOriginalCoordsEmpty()) {
                         activity.binding.projection.setVisibility(View.GONE);
                     }
@@ -181,7 +181,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    private void nonEditable(final TextView textView) {
+    private void nonEditable(final TextInputLayout textLayout, final TextView textView) {
+        textLayout.setEndIconMode(TextInputLayout.END_ICON_NONE);
         textView.setKeyListener(null);
         textView.setTextIsSelectable(true);
     }
@@ -702,7 +703,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             finishHandler.sendEmptyMessage(SAVE_ERROR);
         }
 
-        LocalBroadcastManager.getInstance(EditWaypointActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
+        GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
     }
 
     private static class ActivityData {

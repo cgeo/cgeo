@@ -24,7 +24,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -251,14 +250,14 @@ public class RouteTrackUtils {
         });
     }
 
-    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final Tracks tracks) {
+    public void updateRouteTrackButtonVisibility(final View button, final IndividualRoute route, final Tracks tracks) {
         final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route) || isTargetSet.call());
         tracks.traverse((key, r) -> {
             if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
                 someTrackAvailable.set(true);
             }
         });
-        anchor.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
+        button.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
     }
 
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {

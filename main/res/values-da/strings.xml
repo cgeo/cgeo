@@ -350,10 +350,6 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minutter</item>
     </plurals>
-    <string name="caches_store_offline">Gem Offline</string>
-    <string name="caches_store_all">Gem alle</string>
-    <string name="caches_store_unsaved">Gem ændringer</string>
-    <string name="caches_store_selected">Gem valgte</string>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
@@ -523,7 +519,6 @@
     <string name="cache_filter_status_select_label_has_trackable">Har Trackables</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Offline Fundet-log findes</string>
     <string name="cache_filter_status_select_label_solved_mystery">Løst Mystery</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Denne filterindstilling vil kun påvirke mystery caches.\n\n En mystery-cache betragtes som \'løst\', hvis det enten har ændret koordinater eller et gyldigt sidste waypoint med udfyldte koordinater.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiveret</string>
     <string name="cache_filter_status_archived">Lukket</string>
@@ -590,6 +585,8 @@
     <string name="debug_user_error_report_title">Rapportér et problem</string>
     <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
     <string name="debug_user_error_explain_options">Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo.\nSkriv også en detaljeret fejlbeskrivelse i mailen.\n\nFør du indberetter en fejl beder vi dig om at checke vores FAQ og/eller vores profil på de sociale medier.\nAndre kontakt-måder findes under \'Om c:geo\'</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -1682,7 +1679,6 @@
     <!-- permission handling -->
     <string name="close_app">Luk app</string>
     <string name="ask_again">Spørg igen</string>
-    <string name="location_permission_request_explanation">c:geo skal have adgang til GPS-modtageren på din enhed for at bestemme din position og beregne afstand og retning til geocacherne. c:geo kan ikke bruges uden denne tilladelse.</string>
     <string name="storage_permission_request_explanation">c:geo vil skrive data til din telefons lager eller SD-kort, så snart du gemmer geocacher til offlinebrug. Desuden vil c:geo bruge din telefons lagerplads til import og eksport af filer og læsning af offline kort. c:geo kan ikke fungere uden denne tilladelse.</string>
     <string name="storage_permission_needed">Den funktion kan ikke bruges uden lagringstilladelse.</string>
     <!-- colors -->

@@ -586,7 +586,7 @@ public final class Formula {
 
         if (p.eat('!')) {
             x = createNumeric("!", new FormulaNode[]{x}, (nums, vars) -> {
-                final int facValue = nums.getAsInt(0, 0);
+                final int facValue = (int) nums.getAsInt(0, 0);
                 if (!nums.get(0).isInteger() || facValue < 0) {
                     throw new FormulaException(WRONG_TYPE, "positive Integer", nums.get(0), nums.get(0).getType());
                 }

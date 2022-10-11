@@ -287,6 +287,10 @@
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable_settings" />
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".settings.ViewSettingsActivity" />
         <activity
@@ -899,6 +903,7 @@
             android:label="@string/search_bookmark_list">
         </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
+        <activity android:name=".downloader.PendingDownloadsActivity" android:exported="false" />
         <activity
             android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
             android:label="@string/download_title">

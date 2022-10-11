@@ -37,7 +37,6 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -91,7 +90,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         findViewById(MENU_LIST).setOnLongClickListener(view -> onListsLongClicked());
         findViewById(MENU_SEARCH).setOnLongClickListener(view -> onSearchLongClicked());
         // will be called if c:geo cannot log in
-        registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
+        startLoginIssueHandler();
     }
 
     @Nullable
@@ -154,7 +153,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     protected void onResume() {
         super.onResume();
         updateSelectedBottomNavItemId();
-        registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
+        startLoginIssueHandler();
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
@@ -258,7 +257,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             final boolean wasConnected = isConnected;
             isConnected = Network.isConnected();
             if (isConnected && !wasConnected) {
-                registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), AbstractBottomNavigationActivity.this::onLoginIssue);
+                startLoginIssueHandler();
             }
         }
     }
@@ -279,35 +278,33 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     /**
      * detect whether c:geo is unable to log in
      *
-     * @param updateUserInfoHandler handle completed logins
-     * @param loginIssueCallback    code to be executed on login issues
      */
-    public static void registerLoginIssueHandler(final Handler scheduler, @Nullable final Handler updateUserInfoHandler, final Consumer<Boolean> loginIssueCallback) {
+    public void startLoginIssueHandler() {
         if (loginSuccessful != null && !loginSuccessful) {
             loginSuccessful = anyConnectorLoggedIn();
         }
         if (loginSuccessful != null && !loginSuccessful) {
-            loginIssueCallback.accept(true); // login still failing. Start loginIssueCallback
+            onLoginIssue(true); // login still failing. Start loginIssueCallback
         }
         if (loginSuccessful != null && loginSuccessful) {
-            loginIssueCallback.accept(false);
+            onLoginIssue(false);
             return; // there was a successfully login
         }
 
         if (!Network.isConnected()) {
-            loginIssueCallback.accept(true);
+            onLoginIssue(true);
             return;
         }
 
         // We are probably not yet ready. Log in and wait a bit...
-        startBackgroundLogin(updateUserInfoHandler);
-        scheduler.postDelayed(() -> {
+        startBackgroundLogin(getUpdateUserInfoHandler());
+        loginHandler.postDelayed(() -> {
             loginSuccessful = anyConnectorLoggedIn();
-            loginIssueCallback.accept(!loginSuccessful);
+            onLoginIssue(!loginSuccessful);
         }, 10000);
     }
 
-    private static void startBackgroundLogin(@Nullable final Handler updateUserInfoHandler) {
+    private void startBackgroundLogin(@Nullable final Handler updateUserInfoHandler) {
 
         final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
@@ -332,6 +329,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
                     LOGINS_IN_PROGRESS.addAndGet(-1);
 
+                    // the login state might have changed...
+                    if (anyConnectorLoggedIn()) {
+                        runOnUiThread(() -> onLoginIssue(false));
+                    }
                     if (updateUserInfoHandler != null) {
                         updateUserInfoHandler.sendEmptyMessage(-1);
                     }
