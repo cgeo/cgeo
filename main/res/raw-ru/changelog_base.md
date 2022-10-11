@@ -1,28 +1,28 @@
 
-### Map
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+### Карта
+- Новое: Добавлена поддержка затенения высот в OSM
+- Исправлено: Скопированные вручную точки тайников не всегда отображались на экране
 
-### Cache details
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+### Детали тайника
+- Изменение: Показывать индикатор загрузки в активности журнала при получении необходимых данных
+- Исправлено: Неразрывный пробел (nbsp) не считался пробелом при поиске формул
+- Исправлено: Фотография в записи называлась "Изображение 1", даже если было только одно изображение
+- Исправлено: Создавались лишние путевые точки во время парсинга персональной заметки
+- Исправлено: Переменные не создавались при копировании формулы в другой тайник
+- Исправлено: (Экспериментальная галерея) Использовать фото тайника для фото записей\спойлера
 
-### General
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
+### Общее
+- Новое: Поддержка общих загрузок для ссылок, начинающихся с "mf-v4-map"- и "mf-theme"- (автоматическое обновление не поддерживается)
+- Новое: Сервисная процедура переиндексации базы данных
+- Новое: Автоматическая оптимизация (переиндексация) базы данных каждые 90 дней
+- Исправлено: Обработка отсутствующего доступа к местоположению
+- Изменение: Удалено переключение языка на сайте
+- Исправлено: Удаленные пользователем тайники не удалялись при перезапуске c:geo
+- Новое: Просмотр отложенных загрузок
+- Новый: Добавлено имя тайника или списка к имени файла при экспорте GPX
+- Изменение: удалён параметр «Маскироваться под браузер Android»
+- Новое: Проверка ожидающих загрузки данных (карты / данные маршрутизации) при запуске
+- Исправлено: Панель фильтра была нечитаема в светлой теме
+- Новое: Разрешить выбор файлов для загрузки
+- Новый: Добавлен фильтр по статусу "не найден"
+- Новое: Показывать высоту на главном экране (если доступно)
