@@ -405,9 +405,6 @@ final class ALApi {
 
     @Nullable
     private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
-        if (!Settings.isALCAdvanced()) {
-            return null;
-        }
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
@@ -428,7 +425,10 @@ final class ALApi {
                 wpt.setGeocode(String.valueOf(stageCounter));
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText();
+                String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc;
+                if (Settings.isALCAdvanced()) {
+                    note += "<p><p>" + wptResponse.get("Question").asText();
+                }
 
                 try {
                     final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
