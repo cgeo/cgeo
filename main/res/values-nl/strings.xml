@@ -547,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Ja</string>
     <string name="cache_filter_status_select_no">Nee</string>
     <string name="cache_filter_status_select_label_found">Gevonden</string>
+    <string name="cache_filter_status_select_label_dnf">Niet gevonden</string>
     <string name="cache_filter_status_select_label_owned">Eigendom</string>
     <string name="cache_filter_status_select_label_stored">Opgeslagen</string>
     <string name="cache_filter_status_select_label_favorite">Eigen favoriet</string>
@@ -633,7 +634,33 @@
     <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Huidige downloads</string>
+    <string name="downloader_pending_downloads">Lopende downloads</string>
+    <string name="downloader_no_pending_downloads">Op dit moment zijn er geen lopende downloads</string>
+    <string name="downloader_cancel_download">Annuleer download</string>
+    <string name="downloader_cancel_file">Annuleer lopende downloads van%s\" en verwijder gedownloade onderdelen?</string>
+    <string name="downloader_cancelled_download">Downloaden geannuleerd voor \"%s\"</string>
+    <string name="downloader_pending_info">Er is ten minste één gepauseerde of mislukte download. Wil je de lijst met lopende downloads openen?</string>
+    <string name="downloader_retry_download">Opnieuw downloaden</string>
+    <string name="downloader_retry_download_details">Wil je het downloaden van het volgende bestand opnieuw proberen?</string>
     <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">De download is mislukt (en zal niet opnieuw worden geprobeerd)</string>
+    <string name="asdm_status_paused">Download is aan het wachten om opnieuw te proberen of hervatten</string>
+    <string name="asdm_status_pending">Download wacht op start</string>
+    <string name="asdm_status_running">Download is bezig</string>
+    <string name="asdm_status_successful">Download is succesvol voltooid</string>
+    <string name="asdm_paused_queued_for_wifi">Gepauzeerd: Wachten op wifi</string>
+    <string name="asdm_paused_unknown">Gepauzeerd om een andere reden</string>
+    <string name="asdm_paused_waiting_for_network">Gepauzeerd: Wachten op netwerkverbinding om verder te gaan</string>
+    <string name="asdm_paused_waiting_to_retry">Gepauzeerd: Er is een netwerkfout opgetreden en downloadbeheer is aan het wachten voordat het verzoek opnieuw wordt geprobeerd</string>
+    <string name="asdm_error_cannot_resume">Fout: Er is mogelijk een tijdelijke fout opgetreden, maar we kunnen de download niet hervatten</string>
+    <string name="asdm_error_device_not_found">Fout: Geen extern opslagapparaat gevonden. SD-kaart geplaatst en geladen?</string>
+    <string name="asdm_error_file_already_exists">Fout: Het opgevraagde doelbestand bestaat al, zal niet worden overschreven</string>
+    <string name="asdm_error_file_error">Fout: Onbekend opslagprobleem</string>
+    <string name="asdm_error_http_data_error">Fout: HTTP verwerkingsfout op dataniveau</string>
+    <string name="asdm_error_insufficient_space">Fout: Onvoldoende opslagruimte</string>
+    <string name="asdm_error_too_many_redirects">Fout: Te veel omleidingen</string>
+    <string name="asdm_error_unhandled_http_code">Fout: Niet afgevangen HTTP-code</string>
+    <string name="asdm_error_unknown">Fout: Onbekende fout</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -2094,6 +2121,7 @@
     <!-- permission handling -->
     <string name="close_app">App sluiten</string>
     <string name="ask_again">Opnieuw vragen</string>
+    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS (precieze locatie) op je apparaat om je positie te vinden en afstand en richting van geocaches te berekenen. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
@@ -2214,9 +2242,11 @@
     <string name="downloadmap_filename">%s downloaden</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="download_none_selected">Geen bestanden geselecteerd om te downloaden</string>
     <string name="downloadmap_target_not_writable">Het geselecteerde doel \"%s\" is niet schrijfbaar - het gedownloade kaartbestand wordt opgeslagen in de systeem downloads map en dient handmatig te worden verplaatst naar de kaartenmap.</string>
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
     <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Updates gevonden voor:</string>
     <string name="download_error">Downloaden is mislukt met fout #%d</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
