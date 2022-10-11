@@ -946,7 +946,7 @@ public final class GCParser {
 
         final SearchResult sr = searchByAny(con, params, ct, noOwnFound);
         if (sr != null) {
-            sr.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, userName);
+            sr.setFinder(userName);
         }
         return sr;
     }

@@ -19,6 +19,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 import androidx.core.util.Consumer;
 
@@ -45,7 +46,7 @@ public class SearchResult implements Parcelable {
     private final Set<String> geocodes = Collections.synchronizedSet(new HashSet<>());
     private final Set<String> filteredGeocodes = Collections.synchronizedSet(new HashSet<>());
 
-    private final Bundle searchContext = new Bundle();
+    private String finder = null;
 
     //A bundle of bundles where connectors can store specific context values
     private final Bundle connectorContext = new Bundle();
@@ -88,7 +89,7 @@ public class SearchResult implements Parcelable {
         geocodes.addAll(searchResult.geocodes);
         filteredGeocodes.clear();
         filteredGeocodes.addAll(searchResult.filteredGeocodes);
-        searchContext.putAll(searchResult.searchContext);
+        finder = searchResult.finder;
         connectorContext.putAll(searchResult.connectorContext);
     }
 
@@ -115,14 +116,15 @@ public class SearchResult implements Parcelable {
         this(null, geocodes, geocodes.size());
     }
 
-    public SearchResult(final Parcel in) {
+    @VisibleForTesting
+    SearchResult(final Parcel in) {
         final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
         geocodes.addAll(list);
         final ArrayList<String> filteredList = new ArrayList<>();
         in.readStringList(filteredList);
         filteredGeocodes.addAll(filteredList);
-        searchContext.putAll(in.readBundle(getClass().getClassLoader()));
+        finder = in.readString();
         connectorContext.putAll(in.readBundle(getClass().getClassLoader()));
     }
 
@@ -150,7 +152,7 @@ public class SearchResult implements Parcelable {
     public void writeToParcel(final Parcel out, final int flags) {
         out.writeStringArray(geocodes.toArray(new String[0]));
         out.writeStringArray(filteredGeocodes.toArray(new String[0]));
-        out.writeBundle(searchContext);
+        out.writeString(finder);
         out.writeBundle(connectorContext);
     }
 
@@ -251,9 +253,14 @@ public class SearchResult implements Parcelable {
         }
     }
 
-    @NonNull
-    public Bundle getSearchContext() {
-        return searchContext;
+    @VisibleForTesting
+    @Nullable
+    String getFinder() {
+        return this.finder;
+    }
+
+    public void setFinder(@NonNull final String finder) {
+        this.finder = finder;
     }
 
     @WorkerThread
@@ -301,7 +308,7 @@ public class SearchResult implements Parcelable {
     public void addAndPutInCache(@NonNull final Collection<Geocache> caches) {
         for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
-            geocache.setSearchContext(searchContext);
+            geocache.setSearchFinder(finder);
         }
         DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
     }
@@ -333,9 +340,9 @@ public class SearchResult implements Parcelable {
         }
         addGeocodes(other.geocodes);
         addFilteredGeocodes(other.filteredGeocodes);
-        addSearchContext(other);
+        finder = other.finder;
         for (Geocache cache : DataStore.loadCaches(other.geocodes, LoadFlags.LOAD_CACHE_ONLY)) {
-            cache.setSearchContext(this.searchContext);
+            cache.setSearchFinder(this.finder);
         }
 
 
@@ -344,10 +351,6 @@ public class SearchResult implements Parcelable {
                 getConnectorContext(keyOther).putAll(other.connectorContext.getBundle(keyOther));
             }
         }
-    }
-
-    public void addSearchContext(final SearchResult other) {
-        searchContext.putAll(other.searchContext);
     }
 
     public static <C extends IConnector> SearchResult parallelCombineActive(

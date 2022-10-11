@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import androidx.annotation.Nullable;
+
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -16,6 +18,7 @@ public class PersonalNote {
     private String note;
     private boolean fromProvider;
 
+    @Nullable
     public String getNote() {
         // non premium members have no personal notes, premium members have an empty string by default.
         // map both to null, so other code doesn't need to differentiate

@@ -49,12 +49,9 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     @Nullable
     @Override
     public Boolean filter(final Geocache cache) {
-
-        if (cache.getSearchContext() != null && !inverse) {
-            final String finder = cache.getSearchContext().getString(Geocache.SEARCHCONTEXT_FINDER);
-            if (finder != null && foundByFilter.matches(finder)) {
-                return true;
-            }
+        final String finder = cache.getSearchFinder();
+        if (finder != null && !inverse && foundByFilter.matches(finder)) {
+            return true;
         }
         final List<LogEntry> logEntries = cache.getLogs();
         if (logEntries.isEmpty() && !cache.inDatabase()) {

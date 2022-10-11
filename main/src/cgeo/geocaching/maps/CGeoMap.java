@@ -921,6 +921,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     /**
      * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */
+    @NonNull
     private Set<String> getGeocodesForCachesInViewport() {
         final Set<String> geocodes = new HashSet<>();
         final List<Geocache> cachesProtected = caches.getAsList();
