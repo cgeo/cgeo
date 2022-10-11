@@ -674,7 +674,7 @@
     <string name="asdm_error_insufficient_space">Chyba: Nedostatek místa v úložišti</string>
     <string name="asdm_error_too_many_redirects">Chyba: Příliš mnoho přesměrování</string>
     <string name="asdm_error_unhandled_http_code">Chyba: Nezpracovaný HTTP kód</string>
-    <string name="asdm_error_unknwon">Chyba: Neznámá chyba</string>
+    <string name="asdm_error_unknown">Chyba: Neznámá chyba</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
