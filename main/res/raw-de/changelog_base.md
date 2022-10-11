@@ -25,4 +25,4 @@
 - Korrektur: Filterleiste im hellen Design nicht lesbar
 - Neu: Auswahl der Dateien, die heruntergeladen werden sollen
 - Neu: Statusfilter für DNF
-- New: Display elevation on home screen (if available)
+- Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)
