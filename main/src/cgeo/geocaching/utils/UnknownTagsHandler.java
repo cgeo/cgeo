@@ -31,7 +31,7 @@ public class UnknownTagsHandler implements TagHandler {
             handleStrike(opening, output);
         } else if ("table".equalsIgnoreCase(tag)) {
             handleProblematic();
-        } else if ("td".equalsIgnoreCase(tag)) {
+        } else if ("td".equalsIgnoreCase(tag) || "th".equalsIgnoreCase(tag)) {
             handleTd(opening, output);
         } else if ("tr".equalsIgnoreCase(tag)) {
             handleTr(opening, output);
