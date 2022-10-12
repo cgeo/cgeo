@@ -282,7 +282,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public void setImageUri(final String imageUri) {
-        this.note = imageUri;
+        this.imageUri = imageUri;
     }
 
     @Override
