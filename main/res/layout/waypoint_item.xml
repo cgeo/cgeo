@@ -66,6 +66,11 @@
                 android:textColor="@color/colorText_listsPrimary"
                 tools:text="Description of the waypoint with a lot of small words so that an incorrect layout should easily be noticed"/>
 
+            <ImageView
+                android:id="@+id/infoImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
             <TextView
                 android:id="@+id/info"
                 android:layout_width="fill_parent"

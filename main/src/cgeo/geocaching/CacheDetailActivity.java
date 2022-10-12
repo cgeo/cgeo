@@ -117,6 +117,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -2145,6 +2146,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
             calculatedCoordinatesView.setText(cc.isFilled() ? "(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern() : LocalizationUtils.getString(R.string.waypoint_calculated_coordinates));
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
+
+            // image (if available)
+            final String imageUri = wpt.getImageUri();
+            if (StringUtils.isNotBlank(imageUri)) {
+                final HtmlImage image = new HtmlImage(wpt.getGeocode(), false, false, false);
+                final BitmapDrawable wptImage = image.getDrawable(imageUri);
+                holder.binding.infoImage.setImageDrawable(wptImage);
+                holder.binding.infoImage.setVisibility(View.VISIBLE);
+            } else {
+                holder.binding.infoImage.setVisibility(View.GONE);
+            }
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
