@@ -10,6 +10,7 @@
 - Korjaa: Lisäreittipisteiden luonti henkilökohtaisen muistiinpanon kaavan jäsennyksen yhteydessä
 - Korjaa: Muuttujia ei ole luotu kopioitaessa kaavaa eri kätköön
 - Korjaa: (Kokeellinen galleria) Käytä kuvien välimuistia loki / spoilerkuville
+- New: GEOCODE log template placeholder
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
