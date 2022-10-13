@@ -10,6 +10,7 @@
 - Fix: Extra waypoints created on personal note formula parsing
 - Fix: Variables not created on copying formula to different cache
 - Fix: (Experimental gallery) Use image cache for log/spoiler images
+- New: GEOCODE log template placeholder
 
 ### General
 - Nou: Admet descàrregues genèriques per a enllaços amb prefix "mf-v4-map" i "mf-theme" (no s'admeten actualitzacions automàtiques)
