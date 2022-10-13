@@ -21,6 +21,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
@@ -319,6 +320,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    @SuppressLint("SetTextI18n")
     private void loadImageView(final int pagerPos, final int loadImagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(loadImagePos);
         if (currentImage == null) {
