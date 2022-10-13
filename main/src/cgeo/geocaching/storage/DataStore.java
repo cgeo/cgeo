@@ -507,6 +507,7 @@ public class DataStore {
             + "longitude DOUBLE "
             + "); ";
 
+    @SuppressWarnings("SyntaxError")
     private static final String dbCreateExtension
             = "CREATE TABLE IF NOT EXISTS " + dbTableExtension + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
