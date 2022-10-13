@@ -790,6 +790,7 @@
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Umístění</string>
+    <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
