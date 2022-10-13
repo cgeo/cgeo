@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -155,6 +156,7 @@ public class DownloaderUtils {
                 .show();
     }
 
+    @SuppressLint("SetTextI18n")
     public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads, @Nullable final Action1<Boolean> downloadTriggered) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
