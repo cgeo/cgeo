@@ -1559,6 +1559,7 @@
     <string name="map_select_multiple_items">Выбрать элемент</string>
     <string name="map_routing">Маршрутизация</string>
     <string name="map_routing_activate_title">Включить маршрутизацию</string>
+    <string name="map_routing_activate">Некоторые режимы маршрутизации в настоящее время недоступны, так как не выбран механизм маршрутизации.\n\nВы хотите активировать внутренний механизм маршрутизации c:geo и загрузить данные маршрутизации?</string>
     <string name="map_gm_autorotation">Авто-поворот карты</string>
     <string name="map_gm_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
@@ -1610,6 +1611,7 @@
     <string name="search_pocket_is_new">новые</string>
     <string name="search_bookmark_loading">Загрузка списков закладок</string>
     <string name="search_bookmark_select">Выберите список закладок</string>
+    <string name="search_bookmark_new">Создать новый список закладок</string>
     <string name="search_bookmark_adding_caches_success">Все тайники были добавлены в выбранный лист закладок</string>
     <string name="search_bookmark_adding_caches_failed">Не удалось добавить тайники в список закладок</string>
     <string name="search_bookmark_create_new_failed">Не удалось создать новый список закладок</string>
@@ -2128,6 +2130,7 @@
     <string name="notification_channel_downloader_name">загрузчик c:geo</string>
     <string name="notification_channel_downloader_description">уведомления о загрузках (например, офлайн-карт)</string>
     <string name="notification_channel_cache_download_name">загрузчик тайника</string>
+    <string name="notification_channel_cache_download_description">уведомления о фоновых загрузках тайников</string>
     <string name="notification_proximity_title">уведомление о приближении c:geo</string>
     <string name="notification_download_receiver_title">Импорт загрузки</string>
     <!-- individual routes -->
@@ -2231,6 +2234,7 @@
     <string name="download_none_selected">Не выбраны файлы для загрузки</string>
     <string name="downloadmap_allow_metered_network">Разрешить загрузку по лимитированной сети (например, мобильному подключению)</string>
     <string name="download_confirmation_updates">Найдены обновления для:</string>
+    <string name="download_warning">Загрузка может занять некоторое время и привести к значительным затратам в зависимости от вашего сетевого подключения.</string>
     <string name="download_error">Ошибка загрузки с кодом #%d</string>
     <string name="downloadmap_handling">Скачивание будет обработано системным менеджером загрузок в фоновом режиме. Вы должны увидеть уведомление, как только начнется загрузка (это может занять некоторое время).</string>
     <string name="button_continue">Продолжить</string>
