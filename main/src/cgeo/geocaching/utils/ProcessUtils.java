@@ -11,6 +11,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -139,7 +140,7 @@ public final class ProcessUtils {
                     if (mStartActivity != null) {
                         mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         // create a pending intent so the application is restarted after System.exit(0) was called.
-                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                        final PendingIntent mPendingIntent = PendingIntent.getActivity(c, 1633838708, mStartActivity, (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_CANCEL_CURRENT);
                         final AlarmManager mgr = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
                         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                         System.exit(0);
