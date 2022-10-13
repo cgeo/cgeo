@@ -58,7 +58,6 @@ import cgeo.geocaching.models.WaypointParser;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -2178,7 +2177,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 noteView.setOnClickListener(new DecryptTextClickListener(noteView));
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
-                    noteView.setText(HtmlCompat.fromHtml(wpt.getNote(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(cache.getGeocode(), noteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                    noteView.setText(HtmlCompat.fromHtml(wpt.getNote(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, noteView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 } else {
                     noteView.setText(wpt.getNote());
                 }

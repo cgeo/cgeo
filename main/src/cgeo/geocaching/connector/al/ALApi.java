@@ -386,7 +386,7 @@ final class ALApi {
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries")), true);
+            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode), true);
             final boolean isLinear = response.get("IsLinear").asBoolean();
             if (isLinear) {
                 cache.setAlcMode(1);
@@ -404,7 +404,7 @@ final class ALApi {
     }
 
     @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
+    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
@@ -416,16 +416,10 @@ final class ALApi {
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                // For ALCs, waypoints don't have a geocode, of course they have an id (a uuid) though.
-                // We artificially create a geocode and a prefix as at least the prefix is used when
-                // showing waypoints on the map. It seems that the geocode from the parent is used but
-                // prefixed with what we set here. Not clear where the geocode of a waypoint comes into play
-                // but we will eventually figure that out.
-
-                wpt.setGeocode(String.valueOf(stageCounter));
+                wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc;
+                String note = "<img src=\"" + ilink + "\"</img><p><p>" + desc;
                 if (Settings.isALCAdvanced()) {
                     note += "<p><p>" + wptResponse.get("Question").asText();
                 }
@@ -475,4 +469,3 @@ final class ALApi {
         }
     }
 }
-
