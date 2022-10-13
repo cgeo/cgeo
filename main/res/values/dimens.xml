@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <dimen name="actionbar_height">45dip</dimen>
 
@@ -19,10 +19,10 @@
 
     <!-- all toolbars except main screen -->
     <!-- (we explicitly use dp for toolbar to avoid cut offs and follow material guidelines) -->
-    <dimen name="textSize_toolbarPrimary">20dp</dimen>
-    <dimen name="textSize_toolbarSecondary">18dp</dimen>
+    <dimen name="textSize_toolbarPrimary" tools:ignore="SpUsage">20dp</dimen>
+    <dimen name="textSize_toolbarSecondary" tools:ignore="SpUsage">18dp</dimen>
 
-    <dimen name="toolbarAvatarSize">36dp</dimen>
+    <dimen name="toolbarAvatarSize" tools:ignore="SpUsage">36dp</dimen>
 
     <!-- headings (not toolbar) -->
     <dimen name="textSize_headingPrimary">20sp</dimen>
