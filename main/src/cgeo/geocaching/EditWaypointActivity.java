@@ -17,7 +17,7 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -146,7 +146,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         final AutoCompleteTextView waypointName = activity.binding.name;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
-                        activity.binding.note.setText(HtmlCompat.fromHtml(StringUtils.trimToEmpty(waypoint.getNote()), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(activity.geocode, activity.binding.note), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                        activity.binding.note.setText(HtmlCompat.fromHtml(StringUtils.trimToEmpty(waypoint.getNote()), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(activity.geocode, true, false, activity.binding.note, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                         final EditText userNote = activity.binding.userNote;
                         userNote.setText(StringUtils.trimToEmpty(waypoint.getUserNote()));
                         Dialogs.moveCursorToEnd(userNote);
