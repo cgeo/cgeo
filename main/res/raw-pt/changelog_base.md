@@ -10,6 +10,7 @@
 - Correção: Pontos adicionais extra criados na análise da fórmula na nota pessoal
 - Correção: Variáveis não eram criadas ao copiar uma fórmula para uma cache diferente
 - Correção: (galeria experimental) Usar a imagem em memória cache para imagens de registo/spoiler
+- New: GEOCODE log template placeholder
 
 ### Geral
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
