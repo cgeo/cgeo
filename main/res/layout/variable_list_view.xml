@@ -16,7 +16,8 @@
        work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
 
             <androidx.recyclerview.widget.RecyclerView
 
