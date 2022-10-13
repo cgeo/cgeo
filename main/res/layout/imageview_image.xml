@@ -65,7 +65,8 @@
         <RelativeLayout android:id="@+id/imageview_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBackgroundTransparent">
+            android:background="@color/colorBackgroundTransparent"
+            tools:ignore="UselessParent">
             <TextView android:id="@+id/imageview_information_text"
                 style="@style/text_default"
                 android:layout_toLeftOf="@+id/imageview_information_icon_less"
