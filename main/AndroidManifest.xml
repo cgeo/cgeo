@@ -95,7 +95,6 @@
 
         <activity
             android:name=".SplashActivity"
-            android:label="@string/app_name"
             android:theme="@style/SplashScreenTheme"
             android:exported="true" >
             <intent-filter>
@@ -113,7 +112,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/cgeo"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustNothing" >
@@ -123,14 +121,12 @@
         <activity
             android:name=".InstallWizardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:theme="@style/cgeo"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".SearchActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden" >
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
@@ -193,7 +189,6 @@
         <activity
             android:name=".CachePopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
             android:windowSoftInputMode="stateHidden" >
         </activity>
@@ -320,8 +315,7 @@
         </activity>
         <activity
             android:name=".CacheListActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
@@ -466,18 +460,15 @@
         </activity>
         <activity
             android:name=".ImagesActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".ImageGalleryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".CacheDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:exported="true">
             <intent-filter>
                 <action android:name="wikitudeapi.arcallback" />
@@ -674,7 +665,6 @@
         <activity
             android:name="cgeo.geocaching.TrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:exported="true">
 
             <!-- TravelBug URL via coord.info redirection -->
@@ -780,7 +770,6 @@
         <activity
             android:name=".connector.oc.OCAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -821,7 +810,6 @@
         <activity
             android:name="cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -835,7 +823,6 @@
         <activity
             android:name="cgeo.geocaching.settings.GCAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -849,7 +836,6 @@
         <activity
             android:name="cgeo.geocaching.settings.ECAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -863,7 +849,6 @@
         <activity
             android:name="cgeo.geocaching.connector.su.SuAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -882,7 +867,6 @@
         <activity
             android:name="cgeo.geocaching.settings.GCVoteAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
