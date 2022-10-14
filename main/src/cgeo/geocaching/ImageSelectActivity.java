@@ -206,7 +206,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private void updateScaleValueDisplay() {
         int width = -1;
         int height = -1;
-        if (image != null && image.getUri() != null) {
+        if (image != null) {
             final ImmutablePair<Integer, Integer> size = ImageUtils.getImageSize(image.getUri());
             if (size != null) {
                 width = size.left;
