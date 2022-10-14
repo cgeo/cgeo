@@ -419,9 +419,9 @@ final class ALApi {
                 wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                String note = "<img src=\"" + ilink + "\"></img><p><p>" + desc;
+                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
                 if (Settings.isALCAdvanced()) {
-                    note += "<p><p>" + wptResponse.get("Question").asText();
+                    note.append("<p><p>").append(wptResponse.get("Question").asText());
                 }
 
                 try {
@@ -429,17 +429,17 @@ final class ALApi {
                     if (jn instanceof ArrayNode) { // implicitly covers null case as well
                         final ArrayNode multiChoiceOptions = (ArrayNode) jn;
                         if (!multiChoiceOptions.isEmpty()) {
-                            note += "<ul>";
+                            note.append("<ul>");
                             for (final JsonNode mc : multiChoiceOptions) {
-                                note += "<li>" + mc.get("Text").asText() + "</li>";
+                                note.append("<li>").append(mc.get("Text").asText()).append("</li>");
                             }
-                            note += "</ul>";
+                            note.append("</ul>");
                         }
                     }
                 } catch (Exception ignore) {
                     // ignore exception
                 }
-                wpt.setNote(note);
+                wpt.setNote(note.toString());
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
                 if (!pt.equals(pointZero)) {
