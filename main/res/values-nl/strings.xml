@@ -776,6 +776,7 @@
     <string name="init_signature_template_size">Grootte</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Locatie</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote.com waardering</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
