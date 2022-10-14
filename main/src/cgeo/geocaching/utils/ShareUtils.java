@@ -156,7 +156,7 @@ public class ShareUtils {
 
     /**
      * opens system's standard viewer for content.
-     * This method is explicitely designed for uris pointing to content/files, not for http/browser-Uris
+     * This method is explicitly designed for uris pointing to content/files, not for http/browser-Uris
      **/
     public static void openContentForView(final Context context, final String url) {
 
@@ -165,7 +165,7 @@ public class ShareUtils {
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
 
         try {
-            //mimeType must be set explicitely, otherwise some apps have problems e.g. Google Sheets with xlsx or csv files
+            //mimeType must be set explicitly, otherwise some apps have problems e.g. Google Sheets with xlsx or csv files
             viewIntent.setDataAndType(uri, UriUtils.getMimeType(uri));
 
             viewIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -240,7 +240,7 @@ public class BackupUtils {
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readibility
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public void restoreInternal(final Activity activityContext, final Folder backupDir, final boolean database, final boolean settings) {
         final Consumer<String> consumer = resultString -> {
 

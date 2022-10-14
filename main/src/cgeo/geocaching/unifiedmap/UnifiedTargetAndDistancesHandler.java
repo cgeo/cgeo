@@ -75,7 +75,7 @@ class UnifiedTargetAndDistancesHandler {
 
     // distances handling -------------------------------------------------------------------------------------------
 
-    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readibility
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
         this.showBothDistances = showBothDistances;
         this.distance = distance;
