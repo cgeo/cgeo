@@ -1,9 +1,9 @@
 package cgeo.geocaching.models;
 
-import androidx.annotation.Nullable;
-
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+
+import androidx.annotation.Nullable;
 
 import java.util.regex.Pattern;
 
