@@ -36,6 +36,6 @@ public abstract class AbstractGeoitemLayer<T> {
         synchronized (items) {
             items.remove(geocode);
         }
-    };
+    }
 
 }
