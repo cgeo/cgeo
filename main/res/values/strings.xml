@@ -1678,6 +1678,7 @@
     <string name="calccoord_migrate_infotext_markdown">A legacy coordinate calculation was found in this waypoint:\n\n%1$s\n\nYou can migrate this to the new cache calculation coordinates as follows:\n\n%2$s\n\nwith new cache variables:%3$s\n\nPlease choose:\n- %4$s to perform migration as suggested\n- %5$s to dismiss the found calculation data for good\n- %6$s to continue without migration. You will be asked for migration again next time you open the waypoint for editing. Note however that editing the waypoint coordinates could delete local calculation data.</string>
 
     <!-- Formula -->
+    <string name="formula">Formula</string>
     <string name="formula_choose_function">Choose function</string>
 
     <string name="formula_function_sqrt">Square Root</string>
