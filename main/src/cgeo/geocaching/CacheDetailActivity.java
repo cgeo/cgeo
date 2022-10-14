@@ -1292,7 +1292,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 attributesText.append("<br />");
                             }
                             orderedAttributeNames.add(key);
-                            attributesText.append(attr.getL10n(enabled == null ? true : enabled));
+                            attributesText.append(attr.getL10n(enabled == null || enabled));
                         }
                     }
                 }
