@@ -769,6 +769,7 @@
     <string name="init_signature_template_size">크기</string>
     <string name="init_signature_template_type">유형</string>
     <string name="init_signature_template_location">위치</string>
+    <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
