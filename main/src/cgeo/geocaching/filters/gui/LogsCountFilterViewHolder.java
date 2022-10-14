@@ -60,7 +60,7 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
                 return ">1000";
             }
             return "" + Math.round(f);
-        }, 6);
+        }, 6, 1);
         slider.setRange(0f, 1000.2f);
     }
 

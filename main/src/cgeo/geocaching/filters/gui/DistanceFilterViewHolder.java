@@ -52,7 +52,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
                 return ">" + maxDistance;
             }
             return "" + Math.round(f);
-        }, 6);
+        }, 6, 1);
         slider.setRange(-0.2f, maxDistance + 0.2f);
 
         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

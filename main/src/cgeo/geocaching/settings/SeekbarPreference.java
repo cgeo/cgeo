@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.InputType;
@@ -234,24 +233,14 @@ public class SeekbarPreference extends Preference {
         });
 
         valueView.setOnClickListener(v2 -> {
-            final String title = String.format(context.getString(R.string.number_input_title), valueToShownValue(progressToValue(minProgress)), valueToShownValue(progressToValue(maxProgress)));
             final String defaultValue = valueToShownValue(progressToValue(seekBar.getProgress()));
             int inputType = InputType.TYPE_CLASS_NUMBER;
             if (useDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
             final Consumer<String> listener = input -> {
-                int newValue;
                 try {
-                    newValue = valueToProgress(shownValueToValue(Float.parseFloat(input)));
-                    if (newValue > maxProgress) {
-                        newValue = maxProgress;
-                        Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
-                    }
-                    if (newValue < minProgress) {
-                        newValue = minProgress;
-                        Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
-                    }
+                    final int newValue = (int) SimpleDialog.checkInputRange(getContext(), valueToProgress(shownValueToValue(Float.parseFloat(input))), minProgress, maxProgress);
                     seekBar.setProgress(newValue);
                     saveSetting(seekBar.getProgress());
                     valueView.setText(getValueString(newValue));
@@ -259,7 +248,7 @@ public class SeekbarPreference extends Preference {
                     Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                 }
             };
-            SimpleDialog.of((Activity) context).setTitle(TextParam.text(title)).input(inputType, defaultValue, null, getUnitString(), listener);
+            SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(progressToValue(minProgress)), valueToShownValue(progressToValue(maxProgress)))).input(inputType, defaultValue, null, getUnitString(), listener);
         });
     }
 }
