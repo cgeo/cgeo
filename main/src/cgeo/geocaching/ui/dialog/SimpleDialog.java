@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -637,5 +638,17 @@ public class SimpleDialog {
         return new Pair<>(result, indexMap::get);
     }
 
-
+    /** checks a float value and restricts it to given bounds, emitting a short warning message if necessary */
+    public static float checkInputRange(final Context context, final float currentValue, final float minValue, final float maxValue) {
+        float newValue = currentValue;
+        if (newValue > maxValue) {
+            newValue = maxValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+        }
+        if (newValue < minValue) {
+            newValue = minValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+        }
+        return newValue;
+    }
 }
