@@ -313,7 +313,7 @@ public final class LogTemplateProvider {
             public String getValue(final LogContext context) {
                 final Geocache cache = context.getCache();
                 if (cache != null) {
-                    return String.valueOf(cache.getGeocode());
+                    return cache.getGeocode();
                 }
                 return StringUtils.EMPTY;
             }
