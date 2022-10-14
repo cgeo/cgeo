@@ -72,7 +72,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
                             try {
                                 context.startActivity(intent);
                             } catch (ActivityNotFoundException e) {
-                                Log.w("URLSpan", "Actvity was not found for intent, " + intent.toString());
+                                Log.w("URLSpan", "Actvity was not found for intent, " + intent);
                             }
                             // end copy from URLSpan.java
                         } else {

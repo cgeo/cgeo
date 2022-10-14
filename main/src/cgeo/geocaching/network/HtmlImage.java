@@ -344,7 +344,7 @@ public class HtmlImage implements Html.ImageGetter {
                     return true;
                 }
             } catch (final Exception e) {
-                Log.w("Exception in HtmlImage.downloadOrRefreshCopy: " + e.toString());
+                Log.w("Exception in HtmlImage.downloadOrRefreshCopy: " + e);
             }
         }
         return false;

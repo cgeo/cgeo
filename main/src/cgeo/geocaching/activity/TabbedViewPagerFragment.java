@@ -20,7 +20,7 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
     private final Integer mutextContentIsUpToDate = 0;
 
     public TabbedViewPagerFragment() {
-        Log.d("new fragment for " + getClass().toString());
+        Log.d("new fragment for " + getClass());
     }
 
     public void setClickListener(final View view, final String url) {

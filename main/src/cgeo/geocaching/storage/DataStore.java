@@ -2187,7 +2187,7 @@ public class DataStore {
     private static boolean updateDisabledStatus(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
-        Log.d("Updating disabled status of " + cache.toString() + " in DB");
+        Log.d("Updating disabled status of " + cache + " in DB");
 
         final ContentValues values = new ContentValues();
         values.put("disabled", cache.isDisabled() ? 1 : 0);
@@ -2212,7 +2212,7 @@ public class DataStore {
     public static boolean storeIntoDatabase(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
-        Log.d("Saving " + cache.toString() + " (" + cache.getLists() + ") to DB");
+        Log.d("Saving " + cache + " (" + cache.getLists() + ") to DB");
 
         final ContentValues values = new ContentValues();
 
@@ -2766,7 +2766,7 @@ public class DataStore {
         }
 
         if (CollectionUtils.isNotEmpty(remaining)) {
-            Log.d("DataStore.loadCaches(" + remaining.toString() + ") returned no results");
+            Log.d("DataStore.loadCaches(" + remaining + ") returned no results");
         }
         return result;
     }
