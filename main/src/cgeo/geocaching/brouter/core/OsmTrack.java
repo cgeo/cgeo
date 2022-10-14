@@ -74,7 +74,7 @@ public final class OsmTrack {
                     final int dlat = ep.waypoint.ilat - newEp.ilat;
                     final boolean targetMatch = dlon < 20 && dlon > -20 && dlat < 20 && dlat > -20;
                     if (debugInfo != null) {
-                        debugInfo.append("target-delta = " + dlon + "/" + dlat + " targetMatch=" + targetMatch);
+                        debugInfo.append("target-delta = ").append(dlon).append("/").append(dlat).append(" targetMatch=").append(targetMatch);
                     }
                     if (targetMatch) {
                         t = new OsmTrack();
@@ -110,8 +110,8 @@ public final class OsmTrack {
                         final boolean profileCheckOk = pchecksum == profileChecksum;
 
                         if (debugInfo != null) {
-                            debugInfo.append(" nogoCheckOk=" + nogoCheckOk + " profileCheckOk=" + profileCheckOk);
-                            debugInfo.append(" al=" + formatLongs(al) + " nogoChecksums=" + formatLongs(nogoChecksums));
+                            debugInfo.append(" nogoCheckOk=").append(nogoCheckOk).append(" profileCheckOk=").append(profileCheckOk);
+                            debugInfo.append(" al=").append(formatLongs(al)).append(" nogoChecksums=").append(formatLongs(nogoChecksums));
                         }
                         if (!(nogoCheckOk && profileCheckOk)) {
                             return null;
@@ -406,7 +406,7 @@ public final class OsmTrack {
 
             if (rteTime != lastRteTime) { // add timing only if available
                 final double t = rteTime - lastRteTime;
-                sb.append("    <time>").append("" + (int) (t + 0.5)).append("</time>\n");
+                sb.append("    <time>").append(String.valueOf((int) (t + 0.5))).append("</time>\n");
                 lastRteTime = rteTime;
             }
             sb.append("    <offset>0</offset>\n  </extensions>\n </rtept>\n");
@@ -421,17 +421,17 @@ public final class OsmTrack {
 
                 if (rteTime != lastRteTime) { // add timing only if available
                     final double t = rteTime - lastRteTime;
-                    sb.append("    <time>").append("" + (int) (t + 0.5)).append("</time>\n");
+                    sb.append("    <time>").append(String.valueOf((int) (t + 0.5))).append("</time>\n");
                     lastRteTime = rteTime;
                 }
-                sb.append("    <turn>").append(hint.getCommandString()).append("</turn>\n    <turn-angle>").append("" + (int) hint.angle)
-                        .append("</turn-angle>\n    <offset>").append("" + hint.indexInTrack).append("</offset>\n  </extensions>\n </rtept>\n");
+                sb.append("    <turn>").append(hint.getCommandString()).append("</turn>\n    <turn-angle>").append("").append(String.valueOf((int) hint.angle))
+                        .append("</turn-angle>\n    <offset>").append(String.valueOf(hint.indexInTrack)).append("</offset>\n  </extensions>\n </rtept>\n");
             }
             sb.append("  <rtept lat=\"").append(formatILat(nodes.get(nodes.size() - 1).getILat())).append("\" lon=\"")
                     .append(formatILon(nodes.get(nodes.size() - 1).getILon())).append("\">\n")
                     .append("   <desc>destination</desc>\n   <extensions>\n");
             sb.append("    <time>0</time>\n");
-            sb.append("    <offset>").append("" + (nodes.size() - 1)).append("</offset>\n  </extensions>\n </rtept>\n");
+            sb.append("    <offset>").append(String.valueOf(nodes.size() - 1)).append("</offset>\n  </extensions>\n </rtept>\n");
 
             sb.append("</rte>\n");
         }
@@ -445,16 +445,16 @@ public final class OsmTrack {
                         .append(formatILat(hint.ilat)).append("\">")
                         .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
                         .append("<name>").append(hint.getMessageString()).append("</name>")
-                        .append("<extensions><locus:rteDistance>").append("" + hint.distanceToNext).append("</locus:rteDistance>");
+                        .append("<extensions><locus:rteDistance>").append(String.valueOf(hint.distanceToNext)).append("</locus:rteDistance>");
                 final float rteTime = getVoiceHintTime(i + 1);
                 if (rteTime != lastRteTime) { // add timing only if available
                     final double t = rteTime - lastRteTime;
                     final double speed = hint.distanceToNext / t;
-                    sb.append("<locus:rteTime>").append("" + t).append("</locus:rteTime>")
-                            .append("<locus:rteSpeed>").append("" + speed).append("</locus:rteSpeed>");
+                    sb.append("<locus:rteTime>").append(String.valueOf(t)).append("</locus:rteTime>")
+                            .append("<locus:rteSpeed>").append(String.valueOf(speed)).append("</locus:rteSpeed>");
                     lastRteTime = rteTime;
                 }
-                sb.append("<locus:rtePointAction>").append("" + hint.getLocusAction()).append("</locus:rtePointAction></extensions>")
+                sb.append("<locus:rtePointAction>").append(String.valueOf(hint.getLocusAction())).append("</locus:rtePointAction></extensions>")
                         .append("</wpt>\n");
             }
         }
@@ -476,7 +476,7 @@ public final class OsmTrack {
                         .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
                         .append("<extensions>\n" +
                                 "<om:oruxmapsextensions xmlns:om=\"http://www.oruxmaps.com/oruxmapsextensions/1/0\">\n" +
-                                "<om:ext type=\"ICON\" subtype=\"0\">").append("" + hint.getOruxAction())
+                                "<om:ext type=\"ICON\" subtype=\"0\">").append(String.valueOf(hint.getOruxAction()))
                         .append("</om:ext>\n" +
                                 "</om:oruxmapsextensions>\n" +
                                 "</extensions>\n" +
@@ -515,7 +515,7 @@ public final class OsmTrack {
         }
 
         if (turnInstructionMode == 2) {
-            sb.append("  <extensions><locus:rteComputeType>").append("" + voiceHints.getLocusRouteType()).append("</locus:rteComputeType></extensions>\n");
+            sb.append("  <extensions><locus:rteComputeType>").append(String.valueOf(voiceHints.getLocusRouteType())).append("</locus:rteComputeType></extensions>\n");
             sb.append("  <extensions><locus:rteSimpleRoundabouts>1</locus:rteSimpleRoundabouts></extensions>\n");
         }
 
@@ -609,7 +609,7 @@ public final class OsmTrack {
 
     private void createFolder(final StringBuilder sb, final String type, final List<MatchedWaypoint> waypoints) {
         sb.append("    <Folder>\n");
-        sb.append("      <name>" + type + "</name>\n");
+        sb.append("      <name>").append(type).append("</name>\n");
         for (int i = 0; i < waypoints.size(); i++) {
             final MatchedWaypoint wp = waypoints.get(i);
             createPlaceMark(sb, wp.name, wp.waypoint.ilat, wp.waypoint.ilon);
@@ -619,9 +619,9 @@ public final class OsmTrack {
 
     private void createPlaceMark(final StringBuilder sb, final String name, final int ilat, final int ilon) {
         sb.append("      <Placemark>\n");
-        sb.append("        <name>" + StringUtils.escapeXml10(name) + "</name>\n");
+        sb.append("        <name>").append(StringUtils.escapeXml10(name)).append("</name>\n");
         sb.append("        <Point>\n");
-        sb.append("         <coordinates>" + formatILon(ilon) + "," + formatILat(ilat) + "</coordinates>\n");
+        sb.append("         <coordinates>").append(formatILon(ilon)).append(",").append(formatILat(ilat)).append("</coordinates>\n");
         sb.append("        </Point>\n");
         sb.append("      </Placemark>\n");
     }
@@ -775,14 +775,14 @@ public final class OsmTrack {
         sb.append("    {\n");
         sb.append("      \"type\": \"Feature\",\n");
         sb.append("      \"properties\": {\n");
-        sb.append("        \"name\": \"" + StringUtils.escapeJson(name) + "\",\n");
-        sb.append("        \"type\": \"" + type + "\"\n");
+        sb.append("        \"name\": \"").append(StringUtils.escapeJson(name)).append("\",\n");
+        sb.append("        \"type\": \"").append(type).append("\"\n");
         sb.append("      },\n");
         sb.append("      \"geometry\": {\n");
         sb.append("        \"type\": \"Point\",\n");
         sb.append("        \"coordinates\": [\n");
-        sb.append("          " + formatILon(ilon) + ",\n");
-        sb.append("          " + formatILat(ilat) + "\n");
+        sb.append("          ").append(formatILon(ilon)).append(",\n");
+        sb.append("          ").append(formatILat(ilat)).append("\n");
         sb.append("        ]\n");
         sb.append("      }\n");
         sb.append("    }");

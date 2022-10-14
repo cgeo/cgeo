@@ -40,7 +40,7 @@ public final class StatCoderContext extends BitCoderContext {
         final StringBuilder sb = new StringBuilder();
         for (String name : statsPerName.keySet()) {
             final long[] stats = statsPerName.get(name);
-            sb.append(name + " count=" + stats[1] + " bits=" + stats[0] + "\n");
+            sb.append(name).append(" count=").append(stats[1]).append(" bits=").append(stats[0]).append("\n");
         }
         statsPerName = null;
         return sb.toString();

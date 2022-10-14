@@ -152,7 +152,7 @@ public class SuParser {
                 final String url = imageResponse.get(CACHE_IMAGE_URL).asText();
                 if (type.contains("cache")) {
                     title = "Spoiler";
-                    descriptionBuilder.append("<img src=\"" + url + "\"/><br/>");
+                    descriptionBuilder.append("<img src=\"").append(url).append("\"/><br/>");
                 }
 
                 // No idea why all images are called "spoiler" here, just need to make them

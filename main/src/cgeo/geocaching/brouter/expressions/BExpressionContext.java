@@ -227,7 +227,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                 if (sb.length() > 0) {
                     sb.append(' ');
                 }
-                sb.append(lookupNames.get(inum) + "=" + value);
+                sb.append(lookupNames.get(inum)).append("=").append(value);
             }
         }
         return sb.toString();
