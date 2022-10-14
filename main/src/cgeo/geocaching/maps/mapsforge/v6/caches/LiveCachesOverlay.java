@@ -112,7 +112,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes);
             DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.CACHE));
 
             Log.d(String.format(Locale.ENGLISH, "Live caches found: %d", result.size()));

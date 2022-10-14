@@ -1898,7 +1898,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     final int start = spannable.getSpanStart(span);
                     final int end = spannable.getSpanEnd(span);
                     final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = Uri.parse(baseUrl + uri.toString());
+                    final Uri absoluteUri = Uri.parse(baseUrl + uri);
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
                 }

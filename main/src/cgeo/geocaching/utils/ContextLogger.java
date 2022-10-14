@@ -107,7 +107,7 @@ public class ContextLogger implements Closeable {
     public void endLog() {
         if (doLog) {
             hasLogged = true;
-            final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message.toString() +
+            final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message +
                     (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");
             if (this.exception == null) {
                 if (this.forceLog) {

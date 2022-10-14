@@ -1317,7 +1317,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes);
             caches.removeAll(DataStore.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
             DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.CACHE));
             // new collection type needs to remove first to refresh
