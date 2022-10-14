@@ -259,7 +259,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
             final StringBuilder attributation = new StringBuilder();
             for (ImmutablePair<String, Uri> mapUri : mapUris) {
-                attributation.append("<p><b>" + mapUri.left + "</b>:<br>");
+                attributation.append("<p><b>").append(mapUri.left).append("</b>:<br>");
                 attributation.append(MapsforgeMapProvider.getInstance().getAttributionFor(mapUri.right));
                 attributation.append("</p>");
             }

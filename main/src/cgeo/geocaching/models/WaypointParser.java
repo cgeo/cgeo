@@ -528,7 +528,7 @@ public class WaypointParser {
                         sb.append(formulaString);
                         final String variableString = getParseableVariablesString(calcState);
                         if (!variableString.isEmpty()) {
-                            sb.append(FormulaParser.WPC_DELIM + variableString);
+                            sb.append(FormulaParser.WPC_DELIM).append(variableString);
                         }
                     }
                 }
@@ -567,7 +567,7 @@ public class WaypointParser {
         final StringBuilder sb = new StringBuilder();
         if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
             sb.append(PARSING_COORD_FORMULA_PLAIN + " ");
-            sb.append(calcState.plainLat + " " + calcState.plainLon + " ");
+            sb.append(calcState.plainLat).append(" ").append(calcState.plainLon).append(" ");
         }
         return sb.toString();
     }
@@ -577,13 +577,13 @@ public class WaypointParser {
         for (VariableData equ : calcState.equations) {
             final String equExpr = equ.getExpression().trim();
             if (!equExpr.isEmpty()) {
-                sb.append(equ.getName() + "=" + equExpr + FormulaParser.WPC_DELIM);
+                sb.append(equ.getName()).append("=").append(equExpr).append(FormulaParser.WPC_DELIM);
             }
         }
         for (VariableData var : calcState.freeVariables) {
             final String varExpr = var.getExpression().trim();
             if (!varExpr.isEmpty()) {
-                sb.append(var.getName() + "=" + varExpr + FormulaParser.WPC_DELIM);
+                sb.append(var.getName()).append("=").append(varExpr).append(FormulaParser.WPC_DELIM);
             }
         }
         return sb.toString();

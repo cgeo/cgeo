@@ -314,7 +314,7 @@ public class CalculatedCoordinateMigrator {
         final String newCoordinate = "`" + waypointMigrationData.getLatPattern() + " • " + waypointMigrationData.getLonPattern() + "`";
         final StringBuilder newVariables = new StringBuilder();
         for (Map.Entry<String, String> ve : newCacheVariables.entrySet()) {
-            newVariables.append("\n- `" + ve.getKey() + " = " + ve.getValue() + "`");
+            newVariables.append("\n- `").append(ve.getKey()).append(" = ").append(ve.getValue()).append("`");
         }
 
         final String migrateButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate) + "**";
