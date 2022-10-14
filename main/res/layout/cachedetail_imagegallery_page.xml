@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/mark_orange"
         style="@style/text"
-        android:text="Experimental!"/>
+        android:text="Experimental!" tools:ignore="HardcodedText" />
 
     <cgeo.geocaching.ui.ImageGalleryView
     android:id="@+id/image_gallery"
