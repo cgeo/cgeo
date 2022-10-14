@@ -275,9 +275,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
             } else {
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> {
-                            cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
-                        });
+                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix)));
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
