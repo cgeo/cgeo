@@ -368,9 +368,7 @@ public class CalculatedCoordinateMigrator {
                     w.setCalcStateConfig(cc.toConfig());
                     cache.addOrChangeWaypoint(w, true);
                     actionAfterMigration.run();
-                }, (v, i) -> {
-                    actionAfterMigration.run();
-                }, (v, i) -> {
+                }, (v, i) -> actionAfterMigration.run(), (v, i) -> {
                     //dismiss calculated coordinate data
                     w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
                             ":" + mig.getMigrationData().getMigrationNotes());

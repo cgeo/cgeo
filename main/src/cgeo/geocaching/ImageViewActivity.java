@@ -349,12 +349,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageInfos.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_notitle) + "</b>"));
         }
         binding.imageviewInformationText.setText(TextUtils.join(imageInfos, d -> d, "\n"));
-        binding.imageviewInformation.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
-            setInfoShowHide(binding, showImageInformation);
-        });
-        binding.imageviewInformation.setOnClickListener(v -> {
-            imageAdapter.toggleShowInformationView();
-        });
+        binding.imageviewInformation.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> setInfoShowHide(binding, showImageInformation));
+        binding.imageviewInformation.setOnClickListener(v -> imageAdapter.toggleShowInformationView());
         setInfoShowHide(binding, showImageInformation);
 
         if (!currentImage.isImageOrUnknownUri()) {
@@ -388,9 +384,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
                 showImage(pagerPos, binding);
 
-            }, () -> {
-                binding.imageFull.setVisibility(View.GONE);
-            });
+            }, () -> binding.imageFull.setVisibility(View.GONE));
         }
 
     }
@@ -400,9 +394,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
             setFinishResult();
             finishAfterTransition();
-        }, () -> {
-            imageAdapter.toggleFullImageView();
-        });
+        }, () -> imageAdapter.toggleFullImageView());
 
         //trigger enter transition if this is start
         if (pagerPos == startPagerPos) {

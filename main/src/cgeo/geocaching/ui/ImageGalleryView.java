@@ -528,19 +528,17 @@ public class ImageGalleryView extends LinearLayout {
 
             final ImageCategoryData icd = categoryDataMap.get(category);
             final Image oldImg = icd.imageList.get(pos).image;
-            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_rename), R.drawable.ic_menu_edit, v -> {
-                SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.cache_image_rename))
-                        .input(-1, oldImg.getTitle(), null, null, newTitle -> {
-                            if (!StringUtils.isBlank(newTitle)) {
-                                final Image newImg = editHandler.setTitle(oldImg, newTitle);
-                                if (newImg != null) {
-                                    icd.imageList.set(pos, new ImageData(category, newImg));
-                                    final ImageGalleryImageBinding imgBinding = ImageGalleryImageBinding.bind(icd.view.imageGalleryList.getChildAt(pos));
-                                    setImageTitle(imgBinding, newTitle);
-                                }
-                            }
-                        });
-            });
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_rename), R.drawable.ic_menu_edit, v -> SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.cache_image_rename))
+                .input(-1, oldImg.getTitle(), null, null, newTitle -> {
+                    if (!StringUtils.isBlank(newTitle)) {
+                        final Image newImg = editHandler.setTitle(oldImg, newTitle);
+                        if (newImg != null) {
+                            icd.imageList.set(pos, new ImageData(category, newImg));
+                            final ImageGalleryImageBinding imgBinding = ImageGalleryImageBinding.bind(icd.view.imageGalleryList.getChildAt(pos));
+                            setImageTitle(imgBinding, newTitle);
+                        }
+                    }
+                }));
 
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_delete), R.drawable.ic_menu_delete, v -> {
                 icd.imageList.remove(pos);

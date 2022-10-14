@@ -2055,7 +2055,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setOnScrollListener(new FastScrollListener(v));
 
             //register for changes of variableslist -> calculated waypoints may have changed
-            cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(() -> adapter.notifyDataSetChanged()));
+            cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(adapter::notifyDataSetChanged));
 
             if (v.getHeaderViewsCount() < 1) {
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
