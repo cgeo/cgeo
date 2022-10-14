@@ -375,7 +375,7 @@ final class ALApi {
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get(TITLE).asText());
-            cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
+            cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\"></img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
@@ -419,7 +419,7 @@ final class ALApi {
                 wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                String note = "<img src=\"" + ilink + "\"</img><p><p>" + desc;
+                String note = "<img src=\"" + ilink + "\"></img><p><p>" + desc;
                 if (Settings.isALCAdvanced()) {
                     note += "<p><p>" + wptResponse.get("Question").asText();
                 }
