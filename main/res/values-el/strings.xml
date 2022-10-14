@@ -767,6 +767,7 @@
     <string name="init_signature_template_size">Μέγεθος</string>
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
+    <string name="init_signature_template_geocode">Γεωκωδικός</string>
     <string name="init_ratingwanted">Βαθμολογία GCvote</string>
     <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
