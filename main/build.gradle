@@ -395,7 +395,7 @@ dependencies {
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     // Play Services
-    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-location:21.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
