@@ -458,7 +458,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
             public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
                 if (names.size() == 1 && names.get(0) != null && names.get(0).startsWith(TRANSITION_ID_EXIT)) {
-                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID_EXIT.length()));
+                    final int pos = Integer.parseInt(names.get(0).substring(TRANSITION_ID_EXIT.length()));
                     final View v = getImageView.call(pos);
                     sharedElements.clear();
                     sharedElements.put(names.get(0), v);
