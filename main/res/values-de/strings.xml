@@ -776,6 +776,7 @@
     <string name="init_signature_template_size">Größe</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Standort</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCVote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
@@ -1503,6 +1504,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Verworfen</string>
     <string name="calccoord_migrate_infotext_markdown">Eine alte berechnete Koordinate wurde in diesem Wegpunkt gefunden:\n\n%1$s\n\nSie kann in eine neue berechnete Koordinate wie folgt migriert werden:\n\n%2$s\n\nmit neuen Cache-Variablen:%3$s\n\nBitte wählen:\n- %4$s um die Migration wie vorgeschlagen durchzuführen\n- %5$s um die gefundenen Berechnungsdaten zu verwerfen\n- %6$s um ohne Migration fortzufahren. Beim nächsten Öffnen des Wegpunktes wirst du erneut nach einer Migration gefragt. Beachte jedoch, dass das Bearbeiten der Wegpunktkoordinaten lokale Berechnungsdaten löschen kann.</string>
     <!-- Formula -->
+    <string name="formula">Formel</string>
     <string name="formula_choose_function">Funktion auswählen</string>
     <string name="formula_function_sqrt">Quadratwurzel</string>
     <string name="formula_function_sin">Sinus</string>
