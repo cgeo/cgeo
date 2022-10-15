@@ -2716,7 +2716,7 @@
     <string name="rtl_path_narrow">bendras kelias ar takas, nepakankamai platus automobiliams</string>
     <string name="rtl_path_badly_visible">blogai matomas kelias</string>
     <string name="rtl_path_quality1">kokybė 1 (danga: asfaltas, …)</string>
-    <string name="rtl_path_quality23">kokybė 2/3 (danga: žvyras, remontuotas, ...)</string>
+    <string name="rtl_path_quality23">kokybė 2/3 (danga: žvyras, remontuotas, …)</string>
     <string name="rtl_path_quality45">kokybė 4/5 (be dangos)</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Šypsenėlė</string>
