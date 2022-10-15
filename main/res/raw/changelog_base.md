@@ -28,3 +28,4 @@
 - New: Allow selection of files to download
 - New: Status filter for DNF
 - New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
