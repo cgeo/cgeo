@@ -142,13 +142,12 @@ public class FormulaUtilsTest {
         assertScanCoordinates("N48° 12.345' E10° 67.890'", "N48° 12.345'|E10° 67.890'");
         assertScanCoordinates("N48° 12.ABC' E10 67.DEF", "N48° 12.ABC'|E10 67.DEF");
 
-        assertScanCoordinates("text before N48 12.ABC txt inbetween E10 67.DEF txt after", "N48 12.ABC|E10 67.DEF");
-        assertScanCoordinates("text before N48° 12.ABC' txt inbetween E10° 67.DEF' txt after", "N48° 12.ABC'|E10° 67.DEF'");
+        assertScanCoordinates("text before N48 12.ABC text inbetween E10 67.DEF txt after", "N48 12.ABC|E10 67.DEF");
+        assertScanCoordinates("text before N48° 12.ABC' text inbetween E10° 67.DEF' txt after", "N48° 12.ABC'|E10° 67.DEF'");
 
-        assertScanCoordinates("N48 12.(A+1)(B/2)(C/2) txt inbetween E10 67.(D+D) (E+E) F txt after", "N48 12.(A+1)(B/2)(C/2)|E10 67.(D+D) (E+E) F");
+        assertScanCoordinates("N48 12.(A+1)(B/2)(C/2) text inbetween E10 67.(D+D) (E+E) F txt after", "N48 12.(A+1)(B/2)(C/2)|E10 67.(D+D) (E+E) F");
 
         assertScanCoordinates("N 053°2*a,(c+20*b):2+5  E 009°10*b-1,c:4-a+5", "N 053°2*a.(c+20*b):2+5|E 009°10*b-1.c:4-a+5");
-
     }
 
     @Test
@@ -177,12 +176,27 @@ public class FormulaUtilsTest {
         assertScanCoordinates(description, "N 053°2*a.(c+20*b):2+5|E 009°10*b-1.c:4-a+5", "N 053° 33.13*(d+7)+1|E 09° 59.18*(d-6)+2");
     }
 
+    @Test
+    public void scanForCoordinatesRealLifeCases() {
+        //from Issue #12867
+        assertScanCoordinates("N 49° 53.(H+1) (H-A) (B-2) \nE 008° 37. (B) (C) (H-1)", "N 49° 53.(H+1) (H-A) (B-2)|E 008° 37. (B) (C) (H-1)");
+        assertScanCoordinates("N 49° (A + 42).0(B + 10)\nE 008° (C*6 + 2).(D + 256)", "N 49° (A + 42).0(B + 10)|E 008° (C*6 + 2).(D + 256)");
+        assertScanCoordinates("N AB CD.EFG E HI JK.LMN", "N AB CD.EFG|E HI JK.LMN");
+
+        assertScanCoordinates("[N 49° 4(A-1).(B*50+85)]\n[E 008° (B+C+A).(D+45)]", "N 49° 4(A-1).(B*50+85))|E 008° (B+C+A).(D+45))");
+        //from https://coord.info/GCW1GJ
+        assertScanCoordinates("N 48° 04.ABE,\n E 11° 56.DEB.", "N 48° 04.ABE|E 11° 56.DEB");
+        assertScanCoordinates("N 48° 0B.(2x C)(2x C)(2x C),\n  E 11° BB.(G+H)DF", "N 48° 0B.(2* C)(2* C)(2* C)|E 11° BB.(G+H)DF");
+        assertScanCoordinates("N 48° 0B.0[I+J*D],\nE 11° BB.D(J/4)D", "N 48° 0B.0(I+J*D)|E 11° BB.D(J/4)D");
+
+    }
+
     private void assertScanCoordinates(final String textToScan, final String... expectedFindPairs) {
         final List<Pair<String, String>> result = FormulaUtils.scanForCoordinates(Collections.singleton(textToScan), null);
         if (expectedFindPairs == null || expectedFindPairs.length == 0) {
             assertThat(result).as("ScanCoord: '" + textToScan + "'").isEmpty();
         } else {
-            assertThat(result.size()).isEqualTo(expectedFindPairs.length);
+            assertThat(result.size()).as("Didn't find number of expected coordinate pairs").isEqualTo(expectedFindPairs.length);
             int idx = 0;
             for (String expectedPair : expectedFindPairs) {
                 final String desc = "-ScanCoord(" + idx + ") in '" + textToScan + "'";

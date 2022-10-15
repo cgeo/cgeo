@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FormulaUtils {
 
-    private static final String F_OPS = "-+/:*x";
+    private static final String F_OPS = "+/:*x-";
     private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
@@ -36,12 +36,13 @@ public class FormulaUtils {
     };
 
 
-    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "((" + F_FORMULA + "|[0-9a-zA-Z]{1,3})\\h*([°'\".]\\h*)?){1,6}";
+    private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9°'\".,\\s()" + F_OPS + "]";
+    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "(([a-zA-Z]{0,3})?" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+";
     private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
-            "(?<lat>[nNsS]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\h+([a-zA-Z]{2,}\\h+)*(?<lon>[eEwWoO]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
+            "(?<lat>[nNsS](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\s*([a-zA-Z,()-]{2,}\\s+){0,3}(?<lon>[eEwWoO](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
 
-    private static final Pattern DEGREE_TRAILINGWORD_REMOVER = Pattern.compile("\\h+([a-zA-Z]{2,})$");
+    private static final Pattern DEGREE_TRAILINGSTUFF_REMOVER = Pattern.compile("(\\s+[a-zA-Z]{2,}|[.,(+:*/-])$");
 
     private static final Map<Character, Integer> SPECIAL_LETTER_VALUE_MAP = new HashMap<>();
 
@@ -192,7 +193,7 @@ public class FormulaUtils {
         int start = 0;
         while (m.find(start)) {
             final String lat = m.group(1); // group("lat") needs SDk level >= 26
-            final String lon = m.group(16); // group("lon") needs SDk level >= 26
+            final String lon = m.group(6); // group("lon") needs SDk level >= 26
             final String latProcessed = processFoundDegree(lat);
             final String lonProcessed = processFoundDegree(lon);
             final String key = pairToKey(latProcessed, lonProcessed);
@@ -232,24 +233,25 @@ public class FormulaUtils {
     }
 
     private static String preprocessScanText(final String text) {
-        return text.replaceAll("\\h", " ").trim()
+        return text.replaceAll("\\h|\\s", " ").trim()
                 .replace(',', '.').replace('[', '(').replace(']', ')');
     }
 
     private static String processFoundDegree(final String degree) {
         String d = processFoundText(degree);
         //remove trailing words
-        Matcher m = DEGREE_TRAILINGWORD_REMOVER.matcher(d);
+        Matcher m = DEGREE_TRAILINGSTUFF_REMOVER.matcher(d);
         while (m.find()) {
-            d = d.substring(0, d.length() - m.group(1).length()).trim();
-            m = DEGREE_TRAILINGWORD_REMOVER.matcher(d);
+            final String group = m.group(1);
+            d = d.substring(0, d.length() - group.length()).trim();
+            m = DEGREE_TRAILINGSTUFF_REMOVER.matcher(d);
         }
-        return d;
+        return d.replace('x', '*');
     }
 
     private static String processFoundText(final String text) {
-        final String trimmed = text.replaceAll("\\h", " ").trim();
-        return trimmed.replaceAll(" x ", " * "); // lowercase x is most likely a multiply char
+        final String trimmed = text.replaceAll("\\s", " ").trim();
+        return trimmed.replaceAll(" x ", " * ");
     }
 
     private static boolean checkCandidate(final String candidate) {
