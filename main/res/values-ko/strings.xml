@@ -2063,6 +2063,7 @@
     <!-- permission handling -->
     <string name="close_app">앱 닫기</string>
     <string name="ask_again">다시 묻기</string>
+    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS(특정 위치)에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->

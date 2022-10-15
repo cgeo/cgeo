@@ -2092,6 +2092,7 @@
     <!-- permission handling -->
     <string name="close_app">App beenden</string>
     <string name="ask_again">Erneut nachfragen</string>
+    <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät (genauer Standort), um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->

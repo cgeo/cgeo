@@ -5,10 +5,10 @@
 
 ### Cache details
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- Oplossing: nbsp; werd niet beschouwd als spatie in formule verwerken
+- Oplossing: Extra waypoints gemaakt op persoonlijke notitie formule verwerken
+- Oplossing: Variabelen niet aangemaakt tijdens het kopiëren van de formule naar een andere cache
+- Oplossing: (Experimentele galerij) Gebruik afbeeldingencache voor log/spoiler afbeeldingen
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
@@ -17,4 +17,4 @@
 - Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
 - Wijziging: Website taalschakelaar verwijderd
 - Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
-- Fix: Filter bar not readable in light mode
+- Oplossing: filterbalk niet leesbaar in lichte modus

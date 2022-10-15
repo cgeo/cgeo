@@ -2092,6 +2092,7 @@
     <!-- permission handling -->
     <string name="close_app">App sluiten</string>
     <string name="ask_again">Opnieuw vragen</string>
+    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS (precieze locatie) op je apparaat om je positie te vinden en afstand en richting van geocaches te berekenen. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
