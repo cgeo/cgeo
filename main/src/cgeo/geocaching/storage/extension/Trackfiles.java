@@ -65,6 +65,15 @@ public class Trackfiles extends DataStore.DBExtension {
     /**
      * to be called by Tracks only, not intended for direct usage
      */
+    public void setDisplayname(@NonNull final String newName) {
+        string1 = newName;
+        removeAll(type, key);
+        add(type, key, 0, 0, 0, 0, newName, "", "", "");
+    }
+
+    /**
+     * to be called by Tracks only, not intended for direct usage
+     */
     public static void removeTrackfile(@NonNull final String filename) {
         removeAll(type, filename);
         FileUtils.delete(new File(LocalStorage.getTrackfilesDir(), filename));
