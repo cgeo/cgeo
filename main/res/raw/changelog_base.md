@@ -2,6 +2,7 @@
 ### Map
 - New: Add support for hillshading on OSM
 - Fix: Manually copied waypoints of a cache not all being displayed
+- New: Allow change of track's display name
 
 ### Cache details
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
