@@ -632,6 +632,7 @@
     <string name="downloader_cancelled_download">Ακυρώθηκε η λήψη για \"%s\"</string>
     <string name="downloader_pending_info">Υπάρχει τουλάχιστον μία παύση ή αποτυχημένη λήψη. Θέλετε να ανοίξετε τη λίστα των λήψεων που εκκρεμούν;</string>
     <string name="downloader_retry_download">Επανάληψη λήψης</string>
+    <string name="downloader_retry_download_details">Θέλετε να ξαναπροσπαθήσετε τη λήψη του παρακάτω αρχείου;</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Η λήψη απέτυχε (και δεν θα γίνει επανάληψη)</string>
     <string name="asdm_status_paused">Η λήψη περιμένει να ξαναπροσπαθήσει ή να συνεχίσετε</string>
@@ -650,7 +651,7 @@
     <string name="asdm_error_insufficient_space">Ανεπαρκής χώρος αποθήκευσης</string>
     <string name="asdm_error_too_many_redirects">Σφάλμα: Πάρα πολλές ανακατευθύνσεις</string>
     <string name="asdm_error_unhandled_http_code">Σφάλμα: Μη αντιμετοπίσιμος κώδικας http</string>
-    <string name="asdm_error_unknwon">Σφάλμα: Άγνωστο σφάλμα</string>
+    <string name="asdm_error_unknown">Σφάλμα: Άγνωστο σφάλμα</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
     <string name="settings_title_services">Υπηρεσίες</string>
@@ -766,6 +767,7 @@
     <string name="init_signature_template_size">Μέγεθος</string>
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
+    <string name="init_signature_template_geocode">Γεωκωδικός</string>
     <string name="init_ratingwanted">Βαθμολογία GCvote</string>
     <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
@@ -2106,6 +2108,7 @@
     <!-- permission handling -->
     <string name="close_app">Κλείσιμο εφαρμογής</string>
     <string name="ask_again">Ερώτηση ξανά</string>
+    <string name="location_permission_request_explanation">Το c:geo χρειάζεται πρόσβαση στο GPS της συσκευής σας για να εντοπίσει την τοποθεσία σας και να υπολογίσει την απόσταση και την κατεύθυνση προς τις κρύπτες. Η χρήση του είναι αδύνατη χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_request_explanation">Το c:geo θα αποθηκεύσει δεδομένα στη μνήμη του τηλεφώνου σας ή στην κάρτα SD καθώς αποθηκεύετε κρύπτες για χρήση εκτός σύνδεσης. Επιπλέον το c:geo θα χρησιμοποιήσει τη μνήμη του τηλεφώνου σας για την εισαγωγή και εξαγωγή αρχείων και χαρτών εκτός σύνδεσης. Η χρήση του δεν είναι δυνατή χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_needed">Μη επιτρεπτή λειτουργία χωρίς άδεια αποθήκευσης.</string>
     <!-- colors -->

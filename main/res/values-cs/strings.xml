@@ -674,7 +674,7 @@
     <string name="asdm_error_insufficient_space">Chyba: Nedostatek místa v úložišti</string>
     <string name="asdm_error_too_many_redirects">Chyba: Příliš mnoho přesměrování</string>
     <string name="asdm_error_unhandled_http_code">Chyba: Nezpracovaný HTTP kód</string>
-    <string name="asdm_error_unknwon">Chyba: Neznámá chyba</string>
+    <string name="asdm_error_unknown">Chyba: Neznámá chyba</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -790,6 +790,7 @@
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Umístění</string>
+    <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
@@ -1535,6 +1536,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Zamítnuto</string>
     <string name="calccoord_migrate_infotext_markdown">U tohoto trasového bodu byl nalezen starší výpočet souřadnic:\n\n%1$s\n\nTento výpočet můžete přesunout do nového výpočtu souřadnic kešky následovně:\n\n%2$s\n\ns novými proměnnými kešek:%3$s\n\nProsím vyberte:\n- %4$s pro provedení přesunu doporučeným způsobem \n- %5$s pro zrušení nalezených dat výpočtů navždy\n-%6$spro pokračování bez přesunu. Až znovu otevřete úpravu trasového bodu, budete znovu dotázáni na přesun. Nicméně berte na vědomí, že úprava souřadnic trasového bodu může smazat místní data výpočtů.</string>
     <!-- Formula -->
+    <string name="formula">Vzorec</string>
     <string name="formula_choose_function">Zvolte funkci</string>
     <string name="formula_function_sqrt">Druhá odmocnina</string>
     <string name="formula_function_sin">Sinus</string>

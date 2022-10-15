@@ -659,7 +659,6 @@
     <string name="asdm_error_insufficient_space">Virhe: tallennustilaa ei ole riittävästi</string>
     <string name="asdm_error_too_many_redirects">Virhe: Liian monta uudelleenohjausta</string>
     <string name="asdm_error_unhandled_http_code">Virhe: HTTP-koodia ei käsitelty</string>
-    <string name="asdm_error_unknwon">Virhe: Tuntematon virhe</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>

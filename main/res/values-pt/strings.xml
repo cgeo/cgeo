@@ -659,7 +659,6 @@
     <string name="asdm_error_insufficient_space">Erro: Espaço de armazenamento insuficiente</string>
     <string name="asdm_error_too_many_redirects">Erro: Demasiados redireccionamentos</string>
     <string name="asdm_error_unhandled_http_code">Erro: Código HTTP não tratado</string>
-    <string name="asdm_error_unknwon">Erro: Erro desconhecido</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>

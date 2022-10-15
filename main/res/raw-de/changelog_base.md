@@ -10,6 +10,7 @@
 - Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
 - Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
 - Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
+- Neu: Logplatzhalter GEOCODE
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
@@ -25,4 +26,4 @@
 - Korrektur: Filterleiste im hellen Design nicht lesbar
 - Neu: Auswahl der Dateien, die heruntergeladen werden sollen
 - Neu: Statusfilter für DNF
-- New: Display elevation on home screen (if available)
+- Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)

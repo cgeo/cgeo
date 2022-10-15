@@ -5,11 +5,12 @@
 
 ### Cache details
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- Oplossing: nbsp; werd niet beschouwd als spatie in formule verwerken
+- Oplossing: Log afbeelding gelabeld "Afbeelding 1", zelfs als er maar één afbeelding toegevoegd is
+- Oplossing: Extra waypoints gemaakt op persoonlijke notitie formule verwerken
+- Oplossing: Variabelen niet aangemaakt tijdens het kopiëren van de formule naar een andere cache
+- Oplossing: (Experimentele galerij) Gebruik afbeeldingencache voor log/spoiler afbeeldingen
+- Nieuw: GEOCODE logsjabloon veld
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
@@ -20,9 +21,9 @@
 - Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
 - Nieuw: Openstaande downloads weergave
 - Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
+- Wijziging: "Identificeren als Android browser" instelling verwijderd
+- Nieuw: Controleer lopende downloads (kaarten / routing gegevens) bij het opstarten
+- Oplossing: filterbalk niet leesbaar in lichte modus
+- Nieuw: Sta selectie van bestanden toe om te downloaden
+- Nieuw: Status filter voor DNF
+- Nieuw: Hoogteverschil op het startscherm weergeven (indien beschikbaar)

@@ -8,8 +8,9 @@
 - 수정: nbsp; 수식 구문 분석에서 공백으로 간주되지 않음
 - 수정: 단일 이미지만 추가된 경우에도 "image 1"이라는 레이블이 지정된 로그 이미지
 - 수정: 개인 메모 수식 구문 분석에서 생성된 추가 지점
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
+- 수정: 다른 캐시에 수식을 복사할 때 변수가 생성되지 않음
+- 수정: (실험 갤러리) 로그/스포일러 이미지에 이미지 캐시 사용
+- 신규: 지오코드 로그 템플릿 자리 표시자
 
 ### 일반
 - 신규: "mf-v4-map" 및 "mf-theme" 접두사 링크에 대한 일반 다운로드 지원(자동 업데이트는 지원되지 않음)
@@ -23,6 +24,6 @@
 - 변경: "Android 브라우저로 식별" 설정 제거
 - 신규: 시작 시 보류 중인 다운로드(지도/라우팅 데이터) 확인
 - 수정: 라이트 모드에서 필터 막대를 읽을 수 없음
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
+- 신규: 다운로드할 파일 선택 허용
+- 신규: DNF용 상태 필터
+- 신규: 홈 화면에 고도 표시(가능한 경우)

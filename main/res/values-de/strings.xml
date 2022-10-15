@@ -547,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Ja</string>
     <string name="cache_filter_status_select_no">Nein</string>
     <string name="cache_filter_status_select_label_found">Gefunden</string>
+    <string name="cache_filter_status_select_label_dnf">Nicht gefunden</string>
     <string name="cache_filter_status_select_label_owned">Eigener</string>
     <string name="cache_filter_status_select_label_stored">Gespeichert</string>
     <string name="cache_filter_status_select_label_favorite">Eigener Favorit</string>
@@ -634,11 +635,13 @@
     <!-- download manager -->
     <string name="debug_current_downloads">Aktuelle Downloads</string>
     <string name="downloader_pending_downloads">Ausstehende Downloads</string>
+    <string name="downloader_no_pending_downloads">Zur Zeit keine ausstehenden Downloads</string>
     <string name="downloader_cancel_download">Download abbrechen</string>
     <string name="downloader_cancel_file">Download von \"%s\" abbrechen und alle bereits heruntergeladenen Teile löschen?</string>
     <string name="downloader_cancelled_download">Download abgebrochen für \"%s\"</string>
     <string name="downloader_pending_info">Es gibt mindestens einen wartenden oder fehlgeschlagenen Download. Liste der ausstehenden Downloads öffnen?</string>
     <string name="downloader_retry_download">Download erneut versuchen</string>
+    <string name="downloader_retry_download_details">Download der folgenden Datei erneut versuchen?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download fehlgeschlagen (wird nicht wiederholt)</string>
     <string name="asdm_status_paused">Download wartet auf Wiederholung oder Fortsetzen</string>
@@ -657,7 +660,7 @@
     <string name="asdm_error_insufficient_space">Fehler: Zu wenig freier Speicherplatz</string>
     <string name="asdm_error_too_many_redirects">Fehler: Zu viele Weiterleitungen</string>
     <string name="asdm_error_unhandled_http_code">Fehler: Unbekannter HTTP-Code</string>
-    <string name="asdm_error_unknwon">Fehler: Unbekannter Fehler</string>
+    <string name="asdm_error_unknown">Fehler: Unbekannter Fehler</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Öffne Einstellungen?</string>
     <string name="settings_title_services">Dienste</string>
@@ -773,6 +776,7 @@
     <string name="init_signature_template_size">Größe</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Standort</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCVote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
@@ -1500,6 +1504,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Verworfen</string>
     <string name="calccoord_migrate_infotext_markdown">Eine alte berechnete Koordinate wurde in diesem Wegpunkt gefunden:\n\n%1$s\n\nSie kann in eine neue berechnete Koordinate wie folgt migriert werden:\n\n%2$s\n\nmit neuen Cache-Variablen:%3$s\n\nBitte wählen:\n- %4$s um die Migration wie vorgeschlagen durchzuführen\n- %5$s um die gefundenen Berechnungsdaten zu verwerfen\n- %6$s um ohne Migration fortzufahren. Beim nächsten Öffnen des Wegpunktes wirst du erneut nach einer Migration gefragt. Beachte jedoch, dass das Bearbeiten der Wegpunktkoordinaten lokale Berechnungsdaten löschen kann.</string>
     <!-- Formula -->
+    <string name="formula">Formel</string>
     <string name="formula_choose_function">Funktion auswählen</string>
     <string name="formula_function_sqrt">Quadratwurzel</string>
     <string name="formula_function_sin">Sinus</string>
@@ -2118,6 +2123,7 @@
     <!-- permission handling -->
     <string name="close_app">App beenden</string>
     <string name="ask_again">Erneut nachfragen</string>
+    <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät (genauer Standort), um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->

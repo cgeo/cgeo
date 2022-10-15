@@ -648,7 +648,6 @@
     <string name="asdm_error_insufficient_space">Erreur : Espace de stockage insuffisant</string>
     <string name="asdm_error_too_many_redirects">Erreur : Trop de redirections</string>
     <string name="asdm_error_unhandled_http_code">Erreur : Code HTTP non géré</string>
-    <string name="asdm_error_unknwon">Erreur : Erreur inconnue</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -2103,6 +2102,7 @@
     <!-- permission handling -->
     <string name="close_app">Fermer l\'application</string>
     <string name="ask_again">Demander plus tard</string>
+    <string name="location_permission_request_explanation">c:geo requiert l\'accès au GPS (localisation précise) de votre appareil pour calculer votre position ainsi que la distance et la direction des géocaches. c:geo ne peut pas être utilisé correctement sans cette autorisation.</string>
     <string name="storage_permission_request_explanation">c:geo écrira des données sur votre carte SD ou votre téléphone dès que vous sauvegarderez des géocaches pour une utilisation hors-ligne. En outre c:geo utilisera le stockage de votre téléphone pour importer et exporter des fichiers et lire des cartes hors-ligne. Il ne peut être utilisé sans cette autorisation.</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->

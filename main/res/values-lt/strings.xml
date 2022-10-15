@@ -655,6 +655,7 @@
     <string name="downloader_cancelled_download">\'\'%s\'\' atsisiuntimas atšauktas</string>
     <string name="downloader_pending_info">Yra bent vienas pristabdytas arba nepavykęs atsisiuntimas. Ar norite atidaryti laukiančių atsisiuntimų sąrašą?</string>
     <string name="downloader_retry_download">Bandyti atsisiųsti dar kartą</string>
+    <string name="downloader_retry_download_details">Ar norite dar kartą pabandyti atsisiųsti šį failą?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Atsisiuntimas nepavyko (ir nebus bandomas iš naujo)</string>
     <string name="asdm_status_paused">Laukiama, kol bus galima bandyti iš naujo arba tęsti</string>
@@ -673,7 +674,7 @@
     <string name="asdm_error_insufficient_space">Klaida: nepakanka vietos saugykloje</string>
     <string name="asdm_error_too_many_redirects">Klaida: per daug peradresavimų</string>
     <string name="asdm_error_unhandled_http_code">Klaida: Neapdorotas HTTP kodas</string>
-    <string name="asdm_error_unknwon">Klaida: nežinoma klaida</string>
+    <string name="asdm_error_unknown">Klaida: Nežinoma klaida</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Atidaryti parametrus?</string>
     <string name="settings_title_services">Paslaugos</string>
@@ -789,6 +790,7 @@
     <string name="init_signature_template_size">Dydis</string>
     <string name="init_signature_template_type">Tipas</string>
     <string name="init_signature_template_location">Vieta</string>
+    <string name="init_signature_template_geocode">Geokodas</string>
     <string name="init_ratingwanted">GCvote reitingas</string>
     <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Rodyti draugų/nuosavas</string>
@@ -1534,6 +1536,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Atsisakyta</string>
     <string name="calccoord_migrate_infotext_markdown">Šiame kelio taške buvo rastas senas koordinačių skaičiavimas:\n\n%1$s\n\nGalite perkelti tai į naujas slėptuvės skaičiavimo koordinates taip:\n\n%2$s\n\nsu naujais slėptuvės kintamaisiais: %3$s\n\nPasirinkite:\n- %4$s, kad atliktumėte perkėlimą, kaip siūloma\n- %5$s, jei norite visam laikui atmesti rastus skaičiavimo duomenis\n- %6$s, jei norite tęsti be perkėlimo. Kai kitą kartą atidarysite kelio tašką redaguoti, vėl būsite paprašyti perkelti. Tačiau atminkite, kad redaguojant kelio taško koordinates gali būti ištrinti vietiniai skaičiavimo duomenys.</string>
     <!-- Formula -->
+    <string name="formula">Formulė</string>
     <string name="formula_choose_function">Pasirinkite funkciją</string>
     <string name="formula_function_sqrt">Kvadratinė šaknis</string>
     <string name="formula_function_sin">Sinusas</string>
@@ -2178,6 +2181,7 @@
     <!-- permission handling -->
     <string name="close_app">Uždaryti programėlę</string>
     <string name="ask_again">Paklausti dar kartą</string>
+    <string name="location_permission_request_explanation">c:geo reikia prieigos prie GPS (tikslios vietos) jūsų įrenginyje, kad nustatytų jūsų padėtį ir apskaičiuotų atstumą bei kryptį iki geoslėptuvių. Ji negali būti naudojamas be šio leidimo.</string>
     <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->

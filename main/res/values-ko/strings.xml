@@ -540,6 +540,7 @@
     <string name="cache_filter_status_select_yes">예</string>
     <string name="cache_filter_status_select_no">아니요</string>
     <string name="cache_filter_status_select_label_found">찾음</string>
+    <string name="cache_filter_status_select_label_dnf">못찾음</string>
     <string name="cache_filter_status_select_label_owned">소유함</string>
     <string name="cache_filter_status_select_label_stored">저장됨</string>
     <string name="cache_filter_status_select_label_favorite">호감점수를 준 캐시</string>
@@ -633,6 +634,7 @@
     <string name="downloader_cancelled_download">\"%s\" 다운로드가 취소되었습니다.</string>
     <string name="downloader_pending_info">일시 중지되거나 실패한 다운로드가 하나 이상 있습니다. 대기 중인 다운로드 목록을 여시겠습니까?</string>
     <string name="downloader_retry_download">다운로드 재시도</string>
+    <string name="downloader_retry_download_details">다음 파일의 다운로드를 다시 시도하시겠습니까?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">다운로드 실패 (다시 시도하지 않음)</string>
     <string name="asdm_status_paused">다운로드가 재시도 또는 재개를 기다리고 있습니다.</string>
@@ -651,7 +653,7 @@
     <string name="asdm_error_insufficient_space">오류: 저장 공간 부족</string>
     <string name="asdm_error_too_many_redirects">오류: 리다이렉트가 너무 많음</string>
     <string name="asdm_error_unhandled_http_code">오류: 처리되지 않은 HTTP 코드</string>
-    <string name="asdm_error_unknwon">오류: 알 수 없는 오류</string>
+    <string name="asdm_error_unknown">오류: 알 수 없는 오류</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -767,6 +769,7 @@
     <string name="init_signature_template_size">크기</string>
     <string name="init_signature_template_type">유형</string>
     <string name="init_signature_template_location">위치</string>
+    <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
@@ -2090,6 +2093,7 @@
     <!-- permission handling -->
     <string name="close_app">앱 닫기</string>
     <string name="ask_again">다시 묻기</string>
+    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS(특정 위치)에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
@@ -2209,9 +2213,12 @@
     <string name="downloadmap_filename">다운로드 중 %s</string>
     <string name="downloadmanager_not_available">파일을 다운로드 할 수 없습니다. 시스템 다운로드 관리자를 사용할 수 없습니다.</string>
     <string name="download_started">백그라운드에서 다운로드 시작합니다.</string>
+    <string name="download_none_selected">다운로드할 파일을 선택하지 않았습니다.</string>
     <string name="downloadmap_target_not_writable">선택한 대상 \"%s\"에 쓸 수 없습니다. 다운로드한 지도 파일은 시스템 다운로드 폴더에 저장되며 수동으로 지도 폴더로 이동해야합니다.</string>
     <string name="downloadmap_allow_metered_network">종량제 네트워크를 통한 다운로드 허용 (예: 모바일 연결)</string>
     <string name="download_confirmation">%1$s다운로드 파일 \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">다음에 대한 업데이트를 찾았습니다:</string>
+    <string name="download_warning">다운로드에는 상당한 시간이 소요될 수 있으며 네트워크 연결에 따라 상당한 비용이 발생할 수 있습니다.</string>
     <string name="download_error">오류 #%d로 인해 다운로드에 실패했습니다.</string>
     <string name="downloadmap_handling">다운로드 자체는 백그라운드에서 시스템의 다운로드 관리자에 의해 처리됩니다. 다운로드가 시작되자마자 알림이 표시됩니다 (시간이 걸릴 수 있음).</string>
     <string name="button_continue">계속</string>
@@ -2232,6 +2239,7 @@
     <string name="downloadtile_info">c:geo는 일부 라우팅 데이터 파일이 누락되어 요청 된 경로를 계산할 수 없습니다. 누락된 라우팅 데이터를 다운로드 하시겠습니까?</string>
     <string name="check_tiles_menu">누락된 라우팅 데이터 확인</string>
     <string name="check_tiles_found">라우팅 데이터가 이미 있음</string>
+    <string name="check_tiles_missing">누락된 라우팅 데이터를 찾았습니다:</string>
     <string name="check_tiles_unsupported">경고: 선택한 지역에서 라우팅 데이터를 적어도 부분적으로 사용할 수 없습니다.</string>
     <string name="tileupdate_info">다운로드한 라우팅 데이터 파일의 업데이트를 확인하려면 여기를 누르십시오. 연기하려면 길게 누르세요.</string>
     <string name="mapupdate_info">지도 및 테마 파일의 업데이트를 확인하려면 여기를 누르세요. 연기하려면 길게 누르세요.</string>
