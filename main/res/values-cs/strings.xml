@@ -1536,6 +1536,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Zamítnuto</string>
     <string name="calccoord_migrate_infotext_markdown">U tohoto trasového bodu byl nalezen starší výpočet souřadnic:\n\n%1$s\n\nTento výpočet můžete přesunout do nového výpočtu souřadnic kešky následovně:\n\n%2$s\n\ns novými proměnnými kešek:%3$s\n\nProsím vyberte:\n- %4$s pro provedení přesunu doporučeným způsobem \n- %5$s pro zrušení nalezených dat výpočtů navždy\n-%6$spro pokračování bez přesunu. Až znovu otevřete úpravu trasového bodu, budete znovu dotázáni na přesun. Nicméně berte na vědomí, že úprava souřadnic trasového bodu může smazat místní data výpočtů.</string>
     <!-- Formula -->
+    <string name="formula">Vzorec</string>
     <string name="formula_choose_function">Zvolte funkci</string>
     <string name="formula_function_sqrt">Druhá odmocnina</string>
     <string name="formula_function_sin">Sinus</string>
