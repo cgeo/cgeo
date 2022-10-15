@@ -105,6 +105,14 @@ public class Tracks {
         return null;
     }
 
+    public void setDisplayname(@NonNull final String key, @NonNull final String newName) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setDisplayname(newName);
+            }
+        }
+    }
+
     public Route getRoute(@NonNull final String key) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
