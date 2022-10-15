@@ -13,6 +13,7 @@
 - Fix: (Experimental gallery) Use image cache for log/spoiler images
 - New: GEOCODE log template placeholder
 - New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### General
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
