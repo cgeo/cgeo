@@ -1536,6 +1536,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Atsisakyta</string>
     <string name="calccoord_migrate_infotext_markdown">Šiame kelio taške buvo rastas senas koordinačių skaičiavimas:\n\n%1$s\n\nGalite perkelti tai į naujas slėptuvės skaičiavimo koordinates taip:\n\n%2$s\n\nsu naujais slėptuvės kintamaisiais: %3$s\n\nPasirinkite:\n- %4$s, kad atliktumėte perkėlimą, kaip siūloma\n- %5$s, jei norite visam laikui atmesti rastus skaičiavimo duomenis\n- %6$s, jei norite tęsti be perkėlimo. Kai kitą kartą atidarysite kelio tašką redaguoti, vėl būsite paprašyti perkelti. Tačiau atminkite, kad redaguojant kelio taško koordinates gali būti ištrinti vietiniai skaičiavimo duomenys.</string>
     <!-- Formula -->
+    <string name="formula">Formulė</string>
     <string name="formula_choose_function">Pasirinkite funkciją</string>
     <string name="formula_function_sqrt">Kvadratinė šaknis</string>
     <string name="formula_function_sin">Sinusas</string>
