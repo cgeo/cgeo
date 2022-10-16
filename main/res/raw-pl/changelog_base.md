@@ -12,8 +12,8 @@
 - Poprawka: Zmienne nie były tworzone przy kopiowaniu wzoru do innej skrytki
 - Poprawka: (Eksperymentalna galeria) Użyj pamięci podręcznej dla zdjęć z dziennika/spoilerowych
 - Nowość: W szablonie wpisu do dziennika można używać GEOCODE
-- New: Improvements to coordinate scan in texts
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Nowość: Ulepszenia w skanowania współrzędnych w tekstach
+- Nowość: Podstawowa obsługa formatowania HTML dla list definicji (dl/dt/dd)
 
 ### Ogólne
 - Nowość: Obsługa ogólnego pobierania dla łączy z prefiksami „mf-v4-map” oraz „mf-theme” (bez obsługiwanych automatycznych aktualizacji)
@@ -30,4 +30,4 @@
 - Nowość: Pozwala na zaznaczenie plików do pobrania
 - Nowość: Filtr statusu dla DNF
 - Nowość: Wyświetlaj wysokość na ekranie głównym (jeśli dostępna)
-- New: Allow manual input of values in filters using sliders
+- Nowość: Zezwalaj na ręczne wprowadzanie wartości w filtrach za pomocą suwaków
