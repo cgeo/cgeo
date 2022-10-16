@@ -1,29 +1,33 @@
 
 ### Mapa
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Nowość: Dodanie wsparcia dla cieniowania wzniesień na OSM
+- Poprawka: Nie wszystkie ręcznie skopiowane punkty nawigacyjne skrytki były wyświetlane
+- New: Allow change of track's display name
 
 ### Szczegóły skrytki
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
-- New: GEOCODE log template placeholder
+- Zmiana: Pokaż wskaźnik ładowania w aktywności dziennika podczas pobierania wymaganych danych
+- Poprawka: nbsp; nie jest uważany jako odstęp podczas parsowania wzoru
+- Poprawka: Zdjęcie dołączone do dziennika miało oznaczenie „Obraz 1”, nawet jeśli dodano tylko jedną fotkę
+- Poprawka: Dodatkowe punkty nawigacji były tworzone podczas parsowania wzoru z notatki osobistej
+- Poprawka: Zmienne nie były tworzone przy kopiowaniu wzoru do innej skrytki
+- Poprawka: (Eksperymentalna galeria) Użyj pamięci podręcznej dla zdjęć z dziennika/spoilerowych
+- Nowość: W szablonie wpisu do dziennika można używać GEOCODE
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Ogólne
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
+- Nowość: Obsługa ogólnego pobierania dla łączy z prefiksami „mf-v4-map” oraz „mf-theme” (bez obsługiwanych automatycznych aktualizacji)
+- Nowość: Funkcja konserwacji reindeksuje bazę danych
+- Nowość: Automatyczna optymalizacja wydajności bazy danych co 90 dni (reindeksacja)
+- Poprawka: Obsługa brakującego uprawnienia do lokalizacji
+- Zmiana: Usunięto zmianę języka strony internetowej
 - Poprawka: Usunięte skrytki zdefiniowane przez użytkownika nie były usuwane przy ponownym uruchomieniu c:geo
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
+- Nowość: Widok oczekujących na pobranie
+- Nowość: Dołącz nazwę skrytki / nazwę listy do nazwy pliku podczas eksportu GPX
+- Zmiana: Usunięto ustawienie „Identyfikuj jako przeglądarkę Android”
+- Nowość: Sprawdzanie oczekujących na pobranie (mapy / dane nawigowania) przy starcie
+- Poprawka: Pasek z filtrem nie był czytelny w trybie jasnym
+- Nowość: Pozwala na zaznaczenie plików do pobrania
+- Nowość: Filtr statusu dla DNF
+- Nowość: Wyświetlaj wysokość na ekranie głównym (jeśli dostępna)
+- New: Allow manual input of values in filters using sliders
