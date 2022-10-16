@@ -2,6 +2,7 @@
 ### Mapa
 - Novo: Adicionado suporte para sombrear os montes no OSM
 - Correcção: Nem todos os pontos adicionais copiados manualmente de uma cache eram exibidos
+- New: Allow change of track's display name
 
 ### Detalhes da cache
 - Alteração: Mostrado o indicador de carregamento, na actividade de registo, enquanto ocorre a obtenção dos dados necessários
@@ -11,6 +12,8 @@
 - Correção: Variáveis não eram criadas ao copiar uma fórmula para uma cache diferente
 - Correção: (galeria experimental) Usar a imagem em memória cache para imagens de registo/spoiler
 - New: GEOCODE log template placeholder
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Geral
 - Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
@@ -27,3 +30,4 @@
 - Novo: Possibilidade de seleccionar os ficheiros a transferir
 - Novo: Filtro de Estado para DNF
 - New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
