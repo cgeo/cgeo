@@ -2,6 +2,7 @@
 ### Mapa
 - New: Add support for hillshading on OSM
 - Fix: Manually copied waypoints of a cache not all being displayed
+- New: Allow change of track's display name
 
 ### Detalles del caché
 - Change: Show loading indicator in log activity while retrieving required data is ongoing
@@ -11,6 +12,8 @@
 - Fix: Variables not created on copying formula to different cache
 - Fix: (Experimental gallery) Use image cache for log/spoiler images
 - New: GEOCODE log template placeholder
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### General
 - New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
@@ -27,3 +30,4 @@
 - New: Allow selection of files to download
 - New: Status filter for DNF
 - New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
