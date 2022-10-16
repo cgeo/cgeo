@@ -2,6 +2,7 @@
 ### 지도
 - 신규: OSM에서 음영식 지원 추가
 - 수정: 캐시의 수동으로 복사한 지점이 모두 표시되지 않음
+- New: Allow change of track's display name
 
 ### 캐시 상세정보
 - 변경: 필요한 데이터를 검색하는 중 로그 활동에 로드 표시기를 표시합니다.
@@ -11,6 +12,8 @@
 - 수정: 다른 캐시에 수식을 복사할 때 변수가 생성되지 않음
 - 수정: (실험 갤러리) 로그/스포일러 이미지에 이미지 캐시 사용
 - 신규: 지오코드 로그 템플릿 자리 표시자
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### 일반
 - 신규: "mf-v4-map" 및 "mf-theme" 접두사 링크에 대한 일반 다운로드 지원(자동 업데이트는 지원되지 않음)
@@ -27,3 +30,4 @@
 - 신규: 다운로드할 파일 선택 허용
 - 신규: DNF용 상태 필터
 - 신규: 홈 화면에 고도 표시(가능한 경우)
+- New: Allow manual input of values in filters using sliders
