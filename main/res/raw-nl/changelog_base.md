@@ -9,6 +9,7 @@
 - Oplossing: Extra waypoints gemaakt op persoonlijke notitie formule verwerken
 - Oplossing: Variabelen niet aangemaakt tijdens het kopiëren van de formule naar een andere cache
 - Oplossing: (Experimentele galerij) Gebruik afbeeldingencache voor log/spoiler afbeeldingen
+- New: Improvements to coordinate scan in texts
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
