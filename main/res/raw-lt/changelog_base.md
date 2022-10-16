@@ -2,7 +2,7 @@
 ### Žemėlapis
 - Naujiena: pridėtas reljefo šešėlių palaikymas OSM
 - Pataisymas: ne visi rodomi rankiniu būdu nukopijuoti slėptuvių kelio taškai
-- New: Allow change of track's display name
+- Naujiena: Leidžiama keisti rodomų pėdsakų pavadinimą
 
 ### Slėptuvės detalės
 - Pakeista: rodyti įkėlimo indikatorių įrašo veikloje, kol vyksta reikiamų duomenų gavimas
@@ -12,8 +12,8 @@
 - Pataisymas: kintamieji nesukurti kopijuojant formulę į kitą slėptuvę
 - Pataisymas: (Eksperimentinė galerija) Naudokite vaizdų talpyklą įrašams/spoileriniams vaizdams
 - Naujiena: GEOKODO įrašo šablono užpildymo eilutė
-- New: Improvements to coordinate scan in texts
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Naujiena: Patobulintas koordinačių nuskaitymas tekste
+- Naujiena: Paprasto HTML formatavimo palaikymas apibrėžimų sąrašams (dl/dt/dd)
 
 ### Bendras
 - Naujiena: Palaikomi bendri "mf-v4-map" ir "mf-theme" nuorodų atsisiuntimai (automatiniai naujinimai nepalaikomi)
@@ -30,4 +30,4 @@
 - Naujiena: Leidžiama pasirinkti failus atsisiuntimui
 - Naujiena: DNF būsenos filtras
 - Naujiena: Rodomas aukštis pagrindiniame ekrane (jei galima)
-- New: Allow manual input of values in filters using sliders
+- Naujiena: Leidžiama rankiniu būdu įvesti reikšmes į filtrus naudojant slankiklius
