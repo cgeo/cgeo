@@ -361,6 +361,7 @@
     </plurals>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
+    <string name="caches_store_selected">Zapisz wybrane</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
@@ -560,6 +561,7 @@
     <string name="cache_filter_status_select_yes">Tak</string>
     <string name="cache_filter_status_select_no">Nie</string>
     <string name="cache_filter_status_select_label_found">Znaleziona</string>
+    <string name="cache_filter_status_select_label_dnf">Nie znaleziono</string>
     <string name="cache_filter_status_select_label_owned">Własna</string>
     <string name="cache_filter_status_select_label_stored">Zapisana</string>
     <string name="cache_filter_status_select_label_favorite">Własne ulubione</string>
@@ -571,6 +573,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe. Jeśli chcesz wykluczyć inne typy skrytek, zdefiniuj odpowiedni filtr typu skrytki.\n\nZagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt trasy jest wypełniony współrzędnymi.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
     <string name="cache_filter_status_archived">Zarchiwizowana</string>
@@ -645,7 +648,33 @@
     <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo.\nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji „O c:geo”</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Bieżące pobierania</string>
+    <string name="downloader_pending_downloads">Oczekujące pobrania</string>
+    <string name="downloader_no_pending_downloads">Brak oczekujących na pobranie</string>
+    <string name="downloader_cancel_download">Anuluj pobieranie</string>
+    <string name="downloader_cancel_file">Anulować oczekujące pobranie „%s” i usunąć pobrane części?</string>
+    <string name="downloader_cancelled_download">Anulowano pobieranie „%s”</string>
+    <string name="downloader_pending_info">Istnieje co najmniej jedno przerwane lub nieudane pobieranie. Czy chcesz otworzyć listę oczekujących pobrań?</string>
+    <string name="downloader_retry_download">Ponów pobieranie</string>
+    <string name="downloader_retry_download_details">Czy chcesz ponowić pobieranie następującego pliku?</string>
     <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Pobieranie nie powiodło się (i nie zostanie ponowione)</string>
+    <string name="asdm_status_paused">Pobieranie czeka na ponowną próbę lub wznowienie</string>
+    <string name="asdm_status_pending">Pobieranie czeka na rozpoczęcie</string>
+    <string name="asdm_status_running">Pobieranie jest aktualnie uruchomione</string>
+    <string name="asdm_status_successful">Pobieranie pomyślnie zakończone</string>
+    <string name="asdm_paused_queued_for_wifi">Wstrzymane: Oczekiwanie na Wi-Fi</string>
+    <string name="asdm_paused_unknown">Wstrzymano z innego powodu</string>
+    <string name="asdm_paused_waiting_for_network">Wstrzymane: Oczekiwanie na połączenie z siecią</string>
+    <string name="asdm_paused_waiting_to_retry">Wstrzymane: Wystąpił błąd sieciowy, a menedżer pobierania oczekuje na ponowienie żądania</string>
+    <string name="asdm_error_cannot_resume">Błąd: Wystąpił prawdopodobnie przejściowy błąd, ale nie możemy wznowić pobierania</string>
+    <string name="asdm_error_device_not_found">Błąd: Nie znaleziono zewnętrznego urządzenia pamięci. Karta SD jest zamontowana?</string>
+    <string name="asdm_error_file_already_exists">Błąd: Żądany plik docelowy już istnieje, nie zostanie nadpisany</string>
+    <string name="asdm_error_file_error">Błąd: Nieznany problem z pamięcią</string>
+    <string name="asdm_error_http_data_error">Błąd: Błąd przetwarzania HTTP na poziomie danych</string>
+    <string name="asdm_error_insufficient_space">Błąd: Za mało miejsca do przechowywania</string>
+    <string name="asdm_error_too_many_redirects">Błąd: Zbyt wiele przekierowań</string>
+    <string name="asdm_error_unhandled_http_code">Błąd: Nieobsługiwany kod HTTP</string>
+    <string name="asdm_error_unknown">Błąd: Nieznany błąd</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otworzyć ustawienia?</string>
     <string name="settings_title_services">Usługi</string>
@@ -662,6 +691,7 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
+    <string name="settings_title_map_themes">Motywy map offline i cieniowanie</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
@@ -747,6 +777,7 @@
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
+    <string name="init_signature_template_day_of_week">Dzień tygodnia</string>
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
     <string name="init_signature_template_user">Użytkownik</string>
     <string name="init_signature_template_number">Numer</string>
@@ -759,6 +790,7 @@
     <string name="init_signature_template_size">Rozmiar</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Lokalizacja</string>
+    <string name="init_signature_template_geocode">Geokod</string>
     <string name="init_ratingwanted">Ocena GCvote</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
@@ -957,10 +989,17 @@
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_rendertheme_folder">Folder z motywami mapy</string>
+    <string name="init_mapshading_folder">Folder z plikami cieniowania map</string>
+    <string name="init_mapshading_folder_text">Na mapy offline mogą być nakładane informacje o wysokości. Te informacje są dostarczane w postaci plików hgt/dem, które mogą być umieszczone w tym folderze.</string>
+    <string name="init_mapShadingLinearity_title">Cieniowanie liniowości</string>
+    <string name="init_mapShadingLinearity_description">Małe wartości akcentują kontrast na stromych nachyleniach, ale ukrywają zmiany w płaskich; duże wartości sprawiają, że jest bardziej liniowy</string>
+    <string name="init_mapShadingScale_title">Nieprzezroczystość cieniowania</string>
+    <string name="init_mapShadingScale_description">Nieprzezroczystość warstwy cieniowania, od niewidzialności do wyższych wartości intensyfikujących cień, ale może powodować artefakty</string>
     <string name="init_maintenance">Konserwacja</string>
     <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
     <string name="init_maintenance_start">Konserwacja rozpoczęta</string>
+    <string name="init_maintenance_ongoing">To może trochę potrwać…</string>
     <string name="init_maintenance_finished">Konserwacja zakończona</string>
     <string name="init_location">Geolokalizacja</string>
     <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Uniemożliwia to jednak korzystanie z zewnętrznego odbiornika GPS Bluetooth.</string>
@@ -1063,6 +1102,7 @@
     <string name="persistablefolder_base">Podstawowy</string>
     <string name="persistablefolder_offline_maps">Mapy offline</string>
     <string name="persistablefolder_offline_maps_themes">Motywy map</string>
+    <string name="persistablefolder_offline_maps_shading">Pliki cieniowaia mapy</string>
     <string name="persistablefolder_backup">Kopia zapasowa</string>
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
@@ -1265,6 +1305,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
+    <string name="cache_menu_map_ext_nolabel">Inne aplikacje zewnętrzne (tylko współrzędne)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
     <string name="no_browser_found">Nie znaleziono przeglądarki</string>
@@ -1316,6 +1357,9 @@
     <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
+    <string name="cache_mode">Tryb</string>
+    <string name="cache_mode_linear">Liniowy</string>
+    <string name="cache_mode_random">Losowy</string>
     <string name="cache_distance">Odległość</string>
     <string name="cache_difficulty">Trudność</string>
     <string name="cache_terrain">Teren</string>
@@ -1492,6 +1536,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Odrzucone</string>
     <string name="calccoord_migrate_infotext_markdown">W tym punkcji nawigacji odnaleziono współrzędne obliczone dawniej:\n\n%1$s\n\nMożesz przenieść je na nowe współrzędne obliczeniowe skrytki w następujący sposób:\n\n%2$s\n\nz nowymi zmiennymi skrytki:%3$s\n\nProszę wybrać:\n- %4$s aby wykonać migrację zgodnie z sugestią\n- %5$s aby całkowicie odrzucić znalezione dane obliczeniowe\n- %6$s aby kontynuować bez migracji. Zostaniesz poproszony o migrację następnym razem, gdy otworzysz punkt nawigacji do edycji. Zauważ, że edycja współrzędnych punktu nawigacji może usunąć lokalne dane obliczeniowe.</string>
     <!-- Formula -->
+    <string name="formula">Wzór</string>
     <string name="formula_choose_function">Wybierz funkcję</string>
     <string name="formula_function_sqrt">Pierwiastek kwadratowy</string>
     <string name="formula_function_sin">Sinus</string>
@@ -2136,6 +2181,7 @@
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
+    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS (dokładna lokalizacja) na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrytek. Dane z GPS nie mogą być używane bez twojej zgody.</string>
     <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrytek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
@@ -2258,9 +2304,12 @@
     <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
+    <string name="download_none_selected">Nie wybrano plików do pobrania</string>
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
     <string name="download_confirmation">%1$sPobrać plik „%2$s”?%3$s</string>
+    <string name="download_confirmation_updates">Znaleziono aktualizacje dla:</string>
+    <string name="download_warning">Pobieranie może zająć trochę czasu i może prowadzić do znacznych kosztów, w zależności od Twojego połączenia z siecią.</string>
     <string name="download_error">Nieudane pobieranie (błąd #%d)</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowy menedżer pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobierania (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
@@ -2272,6 +2321,8 @@
     <string name="downloadmap_mapfile">plik mapy</string>
     <string name="downloadmap_themefile">plik motywu</string>
     <string name="downloadmap_tilefile">plik danych nawigowania</string>
+    <string name="downloadmap_othermapdownload">inne pobieranie mapy</string>
+    <string name="downloadmap_otherthemedownload">inne pobieranie motywu</string>
     <string name="downloadmap_download">pobieranie</string>
     <string name="downloadmap_retrieving_directory_data">Pobieranie danych folderu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
@@ -2279,6 +2330,7 @@
     <string name="downloadtile_info">c:geo nie może obliczyć żądanej trasy, ponieważ brakuje niektórych plików z danymi nawigowania. Czy chcesz pobrać brakujące dane nawigowania?</string>
     <string name="check_tiles_menu">Sprawdź brakujące dane nawigowania</string>
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
+    <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
     <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
