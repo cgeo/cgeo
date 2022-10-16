@@ -361,6 +361,7 @@
     </plurals>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
+    <string name="caches_store_selected">Zapisz wybrane</string>
     <string name="caches_store_background_title">Pobierz skrytki</string>
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
@@ -571,6 +572,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe. Jeśli chcesz wykluczyć inne typy skrytek, zdefiniuj odpowiedni filtr typu skrytki.\n\nZagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt trasy jest wypełniony współrzędnymi.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
     <string name="cache_filter_status_archived">Zarchiwizowana</string>
@@ -660,6 +662,7 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
+    <string name="settings_title_map_themes">Motywy map offline i cieniowanie</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
@@ -745,6 +748,7 @@
     <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
+    <string name="init_signature_template_day_of_week">Dzień tygodnia</string>
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
     <string name="init_signature_template_user">Użytkownik</string>
     <string name="init_signature_template_number">Numer</string>
@@ -955,10 +959,17 @@
     <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_rendertheme_folder">Folder z motywami mapy</string>
+    <string name="init_mapshading_folder">Folder z plikami cieniowania map</string>
+    <string name="init_mapshading_folder_text">Na mapy offline mogą być nakładane informacje o wysokości. Te informacje są dostarczane w postaci plików hgt/dem, które mogą być umieszczone w tym folderze.</string>
+    <string name="init_mapShadingLinearity_title">Cieniowanie liniowości</string>
+    <string name="init_mapShadingLinearity_description">Małe wartości akcentują kontrast na stromych nachyleniach, ale ukrywają zmiany w płaskich; duże wartości sprawiają, że jest bardziej liniowy</string>
+    <string name="init_mapShadingScale_title">Nieprzezroczystość cieniowania</string>
+    <string name="init_mapShadingScale_description">Nieprzezroczystość warstwy cieniowania, od niewidzialności do wyższych wartości intensyfikujących cień, ale może powodować artefakty</string>
     <string name="init_maintenance">Konserwacja</string>
     <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
     <string name="init_maintenance_start">Konserwacja rozpoczęta</string>
+    <string name="init_maintenance_ongoing">To może trochę potrwać…</string>
     <string name="init_maintenance_finished">Konserwacja zakończona</string>
     <string name="init_location">Geolokalizacja</string>
     <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Uniemożliwia to jednak korzystanie z zewnętrznego odbiornika GPS Bluetooth.</string>
@@ -1061,6 +1072,7 @@
     <string name="persistablefolder_base">Podstawowy</string>
     <string name="persistablefolder_offline_maps">Mapy offline</string>
     <string name="persistablefolder_offline_maps_themes">Motywy map</string>
+    <string name="persistablefolder_offline_maps_shading">Pliki cieniowaia mapy</string>
     <string name="persistablefolder_backup">Kopia zapasowa</string>
     <string name="persistablefolder_logfiles">Pliki dziennika</string>
     <string name="persistablefolder_fieldnotes">Notatki polowe</string>
@@ -1263,6 +1275,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Pokaż na mapie</string>
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
+    <string name="cache_menu_map_ext_nolabel">Inne aplikacje zewnętrzne (tylko współrzędne)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
     <string name="no_browser_found">Nie znaleziono przeglądarki</string>
@@ -1314,6 +1327,9 @@
     <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Rozmiar</string>
+    <string name="cache_mode">Tryb</string>
+    <string name="cache_mode_linear">Liniowy</string>
+    <string name="cache_mode_random">Losowy</string>
     <string name="cache_distance">Odległość</string>
     <string name="cache_difficulty">Trudność</string>
     <string name="cache_terrain">Teren</string>
@@ -2134,6 +2150,7 @@
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
+    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS (dokładna lokalizacja) na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrytek. Dane z GPS nie mogą być używane bez twojej zgody.</string>
     <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrytek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
@@ -2272,6 +2289,8 @@
     <string name="downloadmap_mapfile">plik mapy</string>
     <string name="downloadmap_themefile">plik motywu</string>
     <string name="downloadmap_tilefile">plik danych nawigowania</string>
+    <string name="downloadmap_othermapdownload">inne pobieranie mapy</string>
+    <string name="downloadmap_otherthemedownload">inne pobieranie motywu</string>
     <string name="downloadmap_download">pobieranie</string>
     <string name="downloadmap_retrieving_directory_data">Pobieranie danych folderu…</string>
     <string name="downloadmap_checking_for_updates">Sprawdzam aktualizacje…</string>
