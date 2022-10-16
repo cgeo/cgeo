@@ -2,6 +2,7 @@
 ### Mapa
 - Novinka: Přidána podpora pro stínování kopců v OSM
 - Oprava: Ručně zkopírované terasové body z kešky se nezobrazují všechny
+- New: Allow change of track's display name
 
 ### Detaily kešky
 - Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
@@ -11,6 +12,8 @@
 - Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
 - Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
 - Novinka: zástupný symbol šablony logu GEOKÓDU
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
@@ -27,3 +30,4 @@
 - Novinka: Umožnění výběru souborů ke stažení
 - Novinka: Stavový filtr pro DNF
 - Novinka: Zobrazení nadmořské výšky na domovské obrazovce (pokud je k dispozici)
+- New: Allow manual input of values in filters using sliders
