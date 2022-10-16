@@ -2,6 +2,7 @@
 ### Karte
 - Neu: Kartenschattierung für OSM Offline-Karten unterstützt
 - Korrektur: Manuell kopierte Wegpunkte eines Caches werden nicht alle angezeigt
+- New: Allow change of track's display name
 
 ### Cache-Details
 - Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
@@ -11,6 +12,8 @@
 - Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
 - Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 - Neu: Logplatzhalter GEOCODE
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
@@ -27,3 +30,4 @@
 - Neu: Auswahl der Dateien, die heruntergeladen werden sollen
 - Neu: Statusfilter für DNF
 - Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)
+- New: Allow manual input of values in filters using sliders
