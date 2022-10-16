@@ -161,22 +161,6 @@ public class GeopointTest {
     }
 
     @Test
-    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") //not necessary here
-    public void genau() {
-        final int a = 0;
-        final int b = 0;
-        final int c = 0;
-
-        final int north = 1000 + new java.util.Random(a).nextInt(500) - b;
-        final int east = 45000 + Integer.SIZE * 10 + c;
-
-        final String northString = north / 1000 + "." + String.format("%1$3s", "" + north % 1000).replace(' ', '0');
-        final String eastString = east / 1000 + "." + String.format("%1$3s", "" + east % 1000).replace(' ', '0');
-
-        System.out.println("N48 " + northString + " E011 " + eastString);
-    }
-
-    @Test
     public void testRaw() {
         final Geopoint gp1 = new Geopoint(51.3d, 13.8d);
         assertThat(gp1.getLatMinRaw()).isEqualTo(18);
