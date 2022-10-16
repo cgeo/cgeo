@@ -2,6 +2,7 @@
 ### Kartta
 - Uusi: Lisää tuki OSM:in kukkulavarjostukselle
 - Korjaa: Kaikki käsin kopioidut kätkön reittipisteet eivät ole näkyvillä
+- Uusi: Salli reitin näyttönimen muuttaminen
 
 ### Kätkön tiedot
 - Muutos: Näytä latausindikaattori lokitoiminnassa, kun vaadittujen tietojen haku on käynnissä
@@ -10,7 +11,9 @@
 - Korjaa: Lisäreittipisteiden luonti henkilökohtaisen muistiinpanon kaavan jäsennyksen yhteydessä
 - Korjaa: Muuttujia ei ole luotu kopioitaessa kaavaa eri kätköön
 - Korjaa: (Kokeellinen galleria) Käytä kuvien välimuistia loki / spoilerkuville
-- New: GEOCODE log template placeholder
+- Uusi: GEOCODE-lokimallin paikkamerkki
+- Uusi: Parannuksia koordinaattien hakemiseen tekstistä
+- Uusi: PerusHTML-muotoilutuki määritelmälistoille (dl/dt/dd)
 
 ### Yleinen
 - Uusi: Tue yleisiä latauksia "mf-v4-map"- ja "mf-theme"-etuliittellä oleville linkeille (ei automaattisia päivityksiä)
@@ -26,4 +29,5 @@
 - Korjaa: Suodatinpalkki ei ole luettavissa vaaleassa tilassa
 - Uusi: Salli ladattavien tiedostojen valinta
 - Uusi: suodatin DNF:lle
-- New: Display elevation on home screen (if available)
+- Uusi: Näytä korkeus aloitusnäytöllä (jos saatavilla)
+- Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
