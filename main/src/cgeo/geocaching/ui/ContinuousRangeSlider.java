@@ -125,7 +125,7 @@ public class ContinuousRangeSlider extends LinearLayout {
                             Toast.makeText(getContext(), R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                         }
                     };
-                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, slider.getValueFrom() * factor, slider.getValueTo() * factor)).input(inputType, defaultValue, null, "", listener);
+                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor))).input(inputType, defaultValue, null, "", listener);
                 }
             }
         });
