@@ -54,7 +54,6 @@ import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
@@ -985,25 +984,17 @@ public class Geocache implements IWaypoint {
             return Collections.emptyList();
         }
         final Set<String> listingUrls = new HashSet<>();
-        ImageUtils.forEachImageUrlInHtml(s -> listingUrls.add(imageUrlForSpoilerCompare(s)), getShortDescription(), getDescription());
+        ImageUtils.forEachImageUrlInHtml(s -> listingUrls.add(ImageUtils.imageUrlForSpoilerCompare(s)), getShortDescription(), getDescription());
         final List<Image> result = new ArrayList<>();
         for (Image spoilerCandidate : getSpoilers()) {
             final boolean spoilerInTitle = spoilerCandidate.getTitle() != null &&
                     spoilerCandidate.getTitle().toLowerCase(Locale.US).contains("spoiler");
-            final boolean containedInListing = listingUrls.contains(imageUrlForSpoilerCompare(spoilerCandidate.getUrl()));
+            final boolean containedInListing = listingUrls.contains(ImageUtils.imageUrlForSpoilerCompare(spoilerCandidate.getUrl()));
             if (spoilerInTitle || !containedInListing) {
                 result.add(spoilerCandidate);
             }
         }
         return result;
-    }
-
-    @NonNull
-    private String imageUrlForSpoilerCompare(@Nullable final String url) {
-        if (url == null) {
-            return "";
-        }
-        return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
     }
 
     /**

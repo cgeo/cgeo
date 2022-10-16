@@ -1904,8 +1904,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         final Collection<Image> listingImages = cache.getNonStaticImages();
                         CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
 
+                        final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));
+
                         if (Settings.enableFeatureNewImageGallery()) {
-                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, IterableUtils.indexOf(listingImages, i -> imageUrl.equals(i.getUrl())), null);
+                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
                         }
                     }
 
