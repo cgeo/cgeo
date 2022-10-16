@@ -441,6 +441,15 @@ public final class ImageUtils {
         return new BitmapDrawable(res, BitmapFactory.decodeResource(res, R.drawable.image_no_placement));
     }
 
+
+    @NonNull
+    public static String imageUrlForSpoilerCompare(@Nullable final String url) {
+        if (url == null) {
+            return "";
+        }
+        return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
+    }
+
     /**
      * Add images present in the HTML description to the existing collection.
      *
@@ -451,10 +460,10 @@ public final class ImageUtils {
     public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
         final Set<String> urls = new LinkedHashSet<>();
         for (final Image image : images) {
-            urls.add(image.getUrl());
+            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
         }
         forEachImageUrlInHtml(source -> {
-                if (!urls.contains(source) && canBeOpenedExternally(source)) {
+                if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source)
                             .setTitle(StringUtils.defaultString(geocode))
