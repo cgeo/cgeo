@@ -126,10 +126,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -174,6 +176,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -1849,6 +1852,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
                 activity.addWarning(unknownTagsHandler, description);
                 if (StringUtils.isNotBlank(description)) {
+                    handleImageClick(activity, description);
                     fixRelativeLinks(description);
                     fixTextColor(description, R.color.colorBackground);
 
@@ -1886,6 +1890,28 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             } catch (final RuntimeException ignored) {
                 activity.showToast(getString(R.string.err_load_descr_failed));
+            }
+        }
+
+        private void handleImageClick(final Activity activity, final Spannable spannable) {
+            final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
+            for (final ImageSpan span : spans) {
+                final ClickableSpan clickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(final View textView) {
+                        final String imageUrl = span.getSource();
+                        if (Settings.enableFeatureNewImageGallery()) {
+                            ImageViewActivity.openImageView(activity, cache.getGeocode(), Collections.singletonList(IterableUtils.find(cache.getImages(), i -> imageUrl.equals(i.getUrl()))), 0, null);
+                        }
+                    }
+
+                    @Override
+                    public void updateDrawState(final TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setUnderlineText(false);
+                    }
+                };
+                spannable.setSpan(clickableSpan, spannable.getSpanStart(span), spannable.getSpanEnd(span), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
 
