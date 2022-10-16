@@ -2092,6 +2092,7 @@
     <!-- permission handling -->
     <string name="close_app">Sulje sovellus</string>
     <string name="ask_again">Kysy uudelleen</string>
+    <string name="location_permission_request_explanation">c:geo tarvitsee luvan käyttää laitteesi GPS:ää (tarkka sijainti) sijaintisi paikallistamiseen sekä etäisyyden ja suunnan geokätköihin. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
