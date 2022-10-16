@@ -9,6 +9,7 @@
 - Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
 - Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
 - Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
+- New: Improvements to coordinate scan in texts
 
 ### Allgemein
 - Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
