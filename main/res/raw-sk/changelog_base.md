@@ -9,6 +9,7 @@
 - Oprava: Extra body trasy vytvorené pri analýze vzorca osobnej poznámky
 - Oprava: Nevytvorené premenné pri kopírovaní vzorca do inej kešky
 - Oprava: (Experimentálna galéria) Použitie obrázka kešky pre obrázky logu/fotohintu
+- New: Improvements to coordinate scan in texts
 
 ### Všeobecné
 - Nové: Podpora všeobecných sťahovaní pre odkazy s predponou „mf-v4-map“ a „mf-theme“ (nie sú podporované žiadne automatické aktualizácie)
