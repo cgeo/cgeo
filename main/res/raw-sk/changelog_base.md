@@ -2,6 +2,7 @@
 ### Mapa
 - Nové: Pridanie podpory pre tieňovanie kopcov na OSM
 - Oprava: Ručne skopírované body trasy kešky sa nezobrazujú všetky
+- New: Allow change of track's display name
 
 ### Detaily kešky
 - Zmena: Zobrazovanie indikátora načítavania v aktivite logu počas prebiehajpceho získavania potrebných údajov
@@ -11,6 +12,8 @@
 - Oprava: Nevytvorené premenné pri kopírovaní vzorca do inej kešky
 - Oprava: (Experimentálna galéria) Použitie obrázka kešky pre obrázky logu/fotohintu
 - New: GEOCODE log template placeholder
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Všeobecné
 - Nové: Podpora všeobecných sťahovaní pre odkazy s predponou „mf-v4-map“ a „mf-theme“ (nie sú podporované žiadne automatické aktualizácie)
@@ -27,3 +30,4 @@
 - Nové: Umožnenie výberu súborov na stiahnutie
 - Nové: Filter stavu pre DNF
 - New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
