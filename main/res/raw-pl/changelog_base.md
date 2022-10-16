@@ -9,7 +9,7 @@
 - Poprawka: Dodatkowe punkty nawigacji były tworzone podczas parsowania wzoru z notatki osobistej
 - Poprawka: Zmienne nie były tworzone przy kopiowaniu wzoru do innej skrytki
 - Poprawka: (Eksperymentalna galeria) Użyj pamięci podręcznej dla zdjęć z dziennika/spoilerowych
-- New: Improvements to coordinate scan in texts
+- Nowość: Ulepszenia w skanowania współrzędnych w tekstach
 
 ### Ogólne
 - Nowość: Obsługa ogólnego pobierania dla łączy z prefiksami „mf-v4-map” oraz „mf-theme” (bez obsługiwanych automatycznych aktualizacji)
