@@ -2,6 +2,7 @@
 ### Kaart
 - Nieuw: Voeg ondersteuning voor heuvel arvering toe op OSM
 - Oplossing: Handmatig gekopieerde waypoints van een cache werden niet allemaal weergegeven
+- New: Allow change of track's display name
 
 ### Cache details
 - Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
@@ -11,6 +12,8 @@
 - Oplossing: Variabelen niet aangemaakt tijdens het kopiëren van de formule naar een andere cache
 - Oplossing: (Experimentele galerij) Gebruik afbeeldingencache voor log/spoiler afbeeldingen
 - Nieuw: GEOCODE logsjabloon veld
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Algemeen
 - Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
@@ -27,3 +30,4 @@
 - Nieuw: Sta selectie van bestanden toe om te downloaden
 - Nieuw: Status filter voor DNF
 - Nieuw: Hoogteverschil op het startscherm weergeven (indien beschikbaar)
+- New: Allow manual input of values in filters using sliders
