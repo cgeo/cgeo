@@ -8,7 +8,6 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.wizard.WizardMode;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
             if (firstInstall || !ContentStorageActivityHelper.baseFolderIsSet() || folderMigrationNeeded) {
                 // new install, base folder missing or folder migration needed => run installation wizard
                 intent = new Intent(this, InstallWizardActivity.class);
-                intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? WizardMode.WIZARDMODE_DEFAULT.id : WizardMode.WIZARDMODE_MIGRATION.id);
+                intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? InstallWizardActivity.WizardMode.WIZARDMODE_DEFAULT.id : InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id);
             } else {
                 // otherwise regular startup
                 intent = new Intent(this, MainActivity.class);

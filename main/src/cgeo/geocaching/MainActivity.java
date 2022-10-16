@@ -52,7 +52,6 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.wizard.WizardMode;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -578,7 +577,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivity(new Intent(this, UsefulAppsActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
-            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? WizardMode.WIZARDMODE_MIGRATION.id : WizardMode.WIZARDMODE_RETURNING.id);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
             startActivity(wizard);
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);

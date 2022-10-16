@@ -93,7 +93,6 @@
             style="@style/InstallationWizardButtonFooter"
             android:text="@string/skip" />
         <Space
-            android:id="@+id/wizard_next_space"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
@@ -101,6 +100,11 @@
             android:id="@+id/wizard_next"
             style="@style/InstallationWizardButtonFooterSolid"
             android:text="@string/next" />
+        <Button
+            android:id="@+id/wizard_next_outlined"
+            style="@style/InstallationWizardButtonFooter"
+            android:text="@string/next"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
