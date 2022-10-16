@@ -39,7 +39,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
-import androidx.core.text.HtmlCompat;
 import androidx.exifinterface.media.ExifInterface;
 
 import java.io.BufferedOutputStream;
@@ -58,6 +57,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.igreenwood.loupe.Loupe;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -84,6 +86,8 @@ public final class ImageUtils {
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
     private static final String[] NO_EXTERNAL = {"geocheck.org"};
+
+    private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
@@ -466,11 +470,29 @@ public final class ImageUtils {
     }
 
     public static void forEachImageUrlInHtml(final androidx.core.util.Consumer<String> callback, final String ... htmlText) {
-        for (final String text : htmlText) {
-            HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
-                callback.accept(source);
-                return null;
-            }, null);
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "forEachImageUrlInHtml")) {
+            final boolean debug = Log.isDebug();
+            for (final String text : htmlText) {
+                final AtomicInteger count = debug ? new AtomicInteger(0) : null;
+                if (debug) {
+                    cLog.add("size:" + text.length());
+                }
+                //Performance warning: do NOT use HtmlCompat.fromHtml here - it is far too slow
+                //Example: scanning listing of GC89AXV (approx. 900KB text, 4002 images inside)
+                //-> takes > 4000ms with HtmlCompat.fromHtml, but only about 50-150ms with regex approach
+                final Matcher m = IMG_TAG.matcher(text);
+                while (m.find()) {
+                    if (m.groupCount() == 1) {
+                        if (debug) {
+                            count.addAndGet(1);
+                        }
+                        callback.accept(m.group(1));
+                    }
+                }
+                if (debug) {
+                    cLog.add("#found:" + count);
+                }
+            }
         }
     }
 
