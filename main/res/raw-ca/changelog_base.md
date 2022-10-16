@@ -2,6 +2,7 @@
 ### Mapa
 - Nou: Afegiu suport per a l'ombrejat a OSM
 - Correcció: Els waypoints copiats manualment d'un catxé no es mostren tots
+- New: Allow change of track's display name
 
 ### Detalls del catxé
 - Canvi: Mostra l'indicador de càrrega a l'activitat del registre mentre es continua recuperant les dades necessàries
@@ -11,6 +12,8 @@
 - Fix: Variables not created on copying formula to different cache
 - Fix: (Experimental gallery) Use image cache for log/spoiler images
 - New: GEOCODE log template placeholder
+- New: Improvements to coordinate scan in texts
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### General
 - Nou: Admet descàrregues genèriques per a enllaços amb prefix "mf-v4-map" i "mf-theme" (no s'admeten actualitzacions automàtiques)
@@ -27,3 +30,4 @@
 - New: Allow selection of files to download
 - New: Status filter for DNF
 - New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
