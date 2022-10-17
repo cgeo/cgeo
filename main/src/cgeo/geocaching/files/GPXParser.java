@@ -322,6 +322,11 @@ abstract class GPXParser extends FileParser {
 
                         waypoint.setCoords(cache.getCoords());
 
+                        // set flag for user-modified coordinates of cache
+                        if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
+                            cacheForWaypoint.setUserModifiedCoords(true);
+                        }
+
                         // user defined waypoint does not have original empty coordinates
                         if (wptEmptyCoordinates || (!waypoint.isUserDefined() && null == waypoint.getCoords())) {
                             waypoint.setOriginalCoordsEmpty(true);
