@@ -9,7 +9,7 @@
 - Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
 - Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
 - Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
-- New: Improvements to coordinate scan in texts
+- Novinka: Vylepšené skenování souřadnic v textech
 
 ### Obecné
 - Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
