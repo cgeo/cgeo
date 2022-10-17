@@ -130,6 +130,21 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wpEmpty.isOriginalCoordsEmpty()).as("OriginalCoordEmpty").isTrue();
     }
 
+    public void testGc31j2hWptsOriginal() throws IOException, ParserException {
+        removeCacheCompletely("GC31J2H");
+        final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts_original);
+        assertThat(caches).hasSize(1);
+        final Geocache cache = caches.get(0);
+
+        final List<Waypoint> waypointList = cache.getWaypoints();
+        assertThat(waypointList).isNotNull();
+        assertThat(waypointList).as("Number of imported waypoints").hasSize(1);
+
+        final Waypoint wpOriginal = waypointList.get(0);
+        assertThat(wpOriginal.getWaypointType()).as("Waypoint-Type").isEqualTo(WaypointType.ORIGINAL);
+
+        assertThat(cache.hasUserModifiedCoords()).as("Has user modified coordinates").isTrue();
+    }
 
     public void testOCddd2WptsEmptyCoord() throws IOException, ParserException {
         removeCacheCompletely("OCDDD2");
