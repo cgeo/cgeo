@@ -221,7 +221,7 @@
     <string name="err_detail_cache_find_any">c:geo neranda jokių geoslėptuvių.</string>
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
-    <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei radote šią slėptuvę, galite registruoti ją čia.</string>
+    <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei suradote šią slėptuvę, galite registruoti ją čia.</string>
     <string name="err_watchlist_still_managing">Dar tvarkomas stebimų slėptuvių sąrašas.</string>
     <string name="err_watchlist_failed">Nepavyko pakeisti stebimų slėptuvių sąrašo.</string>
     <string name="err_application_no">c:geo neranda tinkamos programos.</string>
@@ -435,10 +435,10 @@
     <string name="select_icon">Pasirinkite piktogramą</string>
     <string name="onetime_missing_unicode_info">Jūsų Android versija nepalaiko automatinio palaikomų piktogramų aptikimo - gali trūkti kai kurių simbolių</string>
     <plurals name="user_finds">
-        <item quantity="one">%d rasta</item>
-        <item quantity="few">%d rastos</item>
-        <item quantity="many">%d rastų</item>
-        <item quantity="other">%d rastų</item>
+        <item quantity="one">%d surasta</item>
+        <item quantity="few">%d surastos</item>
+        <item quantity="many">%d surastų</item>
+        <item quantity="other">%d surastų</item>
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="one">%d užregistruota neprisijungus</item>
@@ -500,7 +500,7 @@
     <string name="cache_filter_distance">Atstumas</string>
     <string name="cache_filter_hidden">Paslėpimo data</string>
     <string name="cache_filter_logs_count">Įrašų skaičius</string>
-    <string name="cache_filter_last_found">Vėliausia radimo data</string>
+    <string name="cache_filter_last_found">Vėliausia suradimo data</string>
     <string name="cache_filter_log_entry">Žurnalo įrašas</string>
     <string name="cache_filter_location">Vieta</string>
     <string name="cache_filter_stored_lists">Saugomi sąrašai</string>
@@ -560,7 +560,7 @@
     <string name="cache_filter_status_select_all">Visos</string>
     <string name="cache_filter_status_select_yes">Taip</string>
     <string name="cache_filter_status_select_no">Ne</string>
-    <string name="cache_filter_status_select_label_found">Rasta</string>
+    <string name="cache_filter_status_select_label_found">Surasta</string>
     <string name="cache_filter_status_select_label_dnf">Neradęs</string>
     <string name="cache_filter_status_select_label_owned">Nuosava</string>
     <string name="cache_filter_status_select_label_stored">Išsaugota</string>
@@ -570,7 +570,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Su keliauninku</string>
     <string name="cache_filter_status_select_label_has_own_vote">Turi nuosavą balsą</string>
     <string name="cache_filter_status_select_label_has_offline_log">Turi įrašą neprisijungus</string>
-    <string name="cache_filter_status_select_label_has_offline_found_log">Turi radimo įrašas neprisijungus</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Turi suradimo įrašą neprisijungus</string>
     <string name="cache_filter_status_select_label_solved_mystery">Išspręsta Mystery</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Turi vartotojo nustatytus kelio taškus</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Šis filtro nustatymas turės įtakos tik Mystery slėptuvėms. Jei norite išskirti kitus slėptuvės tipus, apibrėžkite atitinkamą slėptuvės tipo filtrą.\n\nMystery laikoma „išspręsta“, jei jos koordinatės pakeistos arba galiojantis galutinis maršruto taškas užpildytas koordinatėmis.</string>
@@ -819,7 +819,7 @@
     <string name="init_useInternalRouting">Naudoti vidinį maršrutizavimą</string>
     <string name="init_summary_useInternalRouting">Naudokite c:geo vidinį maršrutizavimą, kad galėtumėte naudoti automatinį maršruto duomenų atsisiuntimą ir kitas funkcijas</string>
     <string name="init_bigSmileysOnMap">Didelės piktogramos</string>
-    <string name="init_summary_bigSmileysOnMap">Jei įjungta, simboliai, pvz., \'rasta šypsenėlė\' arba \'pataisytos koordinatės\', žemėlapyje bus rodomi padidinti, o ne slėptuvės tipo piktograma.</string>
+    <string name="init_summary_bigSmileysOnMap">Jei įjungta, simboliai, pvz., \'surasta šypsenėlė\' arba \'pataisytos koordinatės\', žemėlapyje bus rodomi padidinti, o ne slėptuvės tipo piktograma.</string>
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
     <string name="init_global_wp_extraction_disable">Išjungti kelio taškų išskleidimą</string>
@@ -956,7 +956,7 @@
     <string name="init_accuracycirclecolor_summary">Pasirinkite tikslumo apskritimo linijos spalvą ir skaidrumą. Tikslumo apskritimas naudojamas kaip vaizdinis vietos signalo tikslumo vaizdas.</string>
     <string name="init_accuracycirclefillcolor">Tikslumo apskritimo užpildymo spalva</string>
     <string name="init_accuracycirclefillcolor_summary">Pasirinkite spalvą ir skaidrumą, kad būtų užpildyti tikslumo apskritimai</string>
-    <string name="init_include_found_status">Įtraukti \"Rasta\" būseną</string>
+    <string name="init_include_found_status">Įtraukti \"Surasta\" būseną</string>
     <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
     <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
     <string name="init_sigautoinsert">Įterpti automatiškai</string>
@@ -1019,8 +1019,8 @@
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
     <string name="settings_advanced">Išplėstiniai parametrai</string>
-    <string name="settings_twitter_cache_message">Rastos slėptuvės žinutė</string>
-    <string name="settings_twitter_trackable_message">Rasto keliauninko žinutė</string>
+    <string name="settings_twitter_cache_message">Surastos slėptuvės žinutė</string>
+    <string name="settings_twitter_trackable_message">Surasto keliauninko žinutė</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1320,10 +1320,10 @@
     <string name="cache_menu_event">Įtraukti į kalendorių</string>
     <string name="cache_menu_extract_waypoints">Išskleisti kelio taškus</string>
     <string name="cache_menu_scan_calculated_waypoints">Ieškokite kelio taškų formulių</string>
-    <string name="cache_menu_set_found">Pažymėti kaip rastą</string>
+    <string name="cache_menu_set_found">Pažymėti kaip surastą</string>
     <string name="cache_menu_set_DNF">Pažymėti kaip nerastą</string>
-    <string name="cache_menu_reset_foundstate">Iš naujo nustatyti rastą būseną</string>
-    <string name="cache_foundstate_updated">Radimo būsena atnaujinta</string>
+    <string name="cache_menu_reset_foundstate">Iš naujo nustatyti suradimo būseną</string>
+    <string name="cache_foundstate_updated">Suradimo būsena atnaujinta</string>
     <string name="cache_menu_set_cache_icon">Nustatyti slėptuvės piktogramą</string>
     <string name="cache_icon_updated">Slėptuvės piktograma atnaujinta</string>
     <string name="cache_menu_details">Informacija</string>
@@ -1343,7 +1343,7 @@
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
-    <string name="cache_status_found">Rasta</string>
+    <string name="cache_status_found">Surasta</string>
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_status_archived">Archyvuota</string>
     <string name="cache_status_disabled">Išjungta</string>
@@ -1581,7 +1581,7 @@
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
     <string name="map_show_circles">Apskritimai</string>
     <string name="map_showc_own">Nuosava</string>
-    <string name="map_showc_found">Rasta</string>
+    <string name="map_showc_found">Surasta</string>
     <string name="map_showc_disabled">Išjungta</string>
     <string name="map_showc_archived">Archyvuota</string>
     <string name="map_showc_found_offline">Surasta (neprisijungus)</string>
@@ -2215,7 +2215,7 @@
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
-    <string name="map_autotarget_individual_route">Nustatykite maršruto pradžią kaip tikslą</string>
+    <string name="map_autotarget_individual_route">Nustatyti maršruto pradžią kaip tikslą</string>
     <string name="map_disable_autotarget_individual_route">\"Nustatyti maršruto pradžią kaip tikslą\" išjungta</string>
     <string name="map_clear_manual_targets">Išvalyti rankinius tikslus</string>
     <string name="map_manual_targets_cleared">Rankiniai tikslai išvalyti</string>
