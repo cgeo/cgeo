@@ -1,33 +1,18 @@
 
 ### Mapa
-- Novo: Adicionado suporte para sombrear os montes no OSM
-- Correcção: Nem todos os pontos adicionais copiados manualmente de uma cache eram exibidos
-- New: Allow change of track's display name
+- Novo: Permitir a mudança do nome do percurso
 
 ### Detalhes da cache
-- Alteração: Mostrado o indicador de carregamento, na actividade de registo, enquanto ocorre a obtenção dos dados necessários
-- Correção: nbsp; não era considerado como espaço na análise da fórmula
 - Correcção: A imagem de registo era rotulada de "Imagem 1" mesmo quando só era adicionada uma única imagem
-- Correção: Pontos adicionais extra criados na análise da fórmula na nota pessoal
-- Correção: Variáveis não eram criadas ao copiar uma fórmula para uma cache diferente
-- Correção: (galeria experimental) Usar a imagem em memória cache para imagens de registo/spoiler
-- New: GEOCODE log template placeholder
-- New: Improvements to coordinate scan in texts
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Novo: espaço reservado para o modelo de registo de GEO-CÓDIGO
+- Novo: Suporte à formatação básica de HTML para listas definidas (dl/dt/dd)
 
 ### Geral
-- Novo: Suporte a transferências genéricas para "mf-v4-map"- e "mf-theme"- hiperligações com prefixos (não são suportadas as actualizações automáticas)
-- Novo: Função de manutenção voltar a indexar a base de dados
-- Novo: Optimizar o desempenho da base de dados automaticamente a cada 90 dias (voltar a indexar)
-- Correcção: Controlo da permissão em falta de localização melhorada
-- Alteração: removida opção de mudança de idioma do sítio Web
-- Correção: As caches definidas pelo utilizador que tinham sido apagadas, não eram removidas na reinicialização do c:geo
-- Novo: Exibição das transferências em espera
+- Novo: Exibição das transferências pendentes
 - Novo: Acrescentar o nome da cache / nome da lista ao nome do ficheiro na exportação para GPX
 - Alteração: Removida a definição "Identificar como navegador Android"
-- Novo: Verificar transferências pendentes (mapas / dados de encaminhamento) na inicialização
-- Correção: Barra de filtro não legível no modo claro
+- Novo: Verificar transferências pendentes (mapas / dados de encaminhamento) no arranque
 - Novo: Possibilidade de seleccionar os ficheiros a transferir
-- Novo: Filtro de Estado para DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
+- Novo: Filtro para o estado DNF
+- Novo: Exibir elevação no ecrã inicial (se disponível)
+- Novo: Permitir a introdução manual de valores em filtros, usando controles deslizantes
