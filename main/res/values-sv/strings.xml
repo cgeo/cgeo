@@ -355,7 +355,11 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minuter</item>
     </plurals>
+    <string name="caches_store_offline">Spara offline</string>
+    <string name="caches_store_offline_map">Spara cacher offline</string>
+    <string name="caches_store_selected">Spara valda</string>
     <string name="caches_store_background_title">Ladda ned cacher</string>
+    <string name="caches_store_background_already_stored">Vissa cacher är redan lagrade. Vad ska göras med dessa?</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>
     <string name="caches_store_background_option_refresh">Uppdatera och lägg till i lista</string>
@@ -494,6 +498,7 @@
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Användarspecifik</string>
+    <string name="cache_filtergroup_special">Speciell</string>
     <string name="cache_filter_contexttype_live_title">Live filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
@@ -553,6 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Har hittad-logg offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Löst mysterium</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Har användardefinierade waypoints</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Den här filterinställningen påverkar bara mysteriecacher. Om du vill utesluta andra cachetyper, ange ett lämpligt cachetypsfilter.\n\nEtt mysterium anses vara \"löst\" om det antingen har bytt koordinater eller har en giltig slutpunkt med koordinater angivna.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Inaktiverad</string>
     <string name="cache_filter_status_archived">Arkiverad</string>
@@ -560,6 +566,7 @@
     <string name="cache_filter_status_exclude_disabled">Exkludera inaktiverade</string>
     <string name="cache_filter_status_exclude_archived">Exkludera arkiverade</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inkludera cacher utan D/T</string>
+    <string name="cache_filter_nested_filter_modify">ändra</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Det underordnade filtret är för närvarande tomt</string>
     <string name="cache_filter_log_entry_foundby">Hittad av</string>
     <string name="cache_filter_log_entry_logtext">Loggtext</string>
@@ -640,6 +647,8 @@
     <string name="settings_title_map">Karta</string>
     <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
+    <string name="settings_title_offline_maps">Offlinekartor</string>
+    <string name="settings_title_map_themes">Offline kartteman &amp; terrängskuggning</string>
     <string name="settings_title_offline_routing">Offline navigering</string>
     <string name="settings_summary_offline_routing">Offline navigering är tillgänglig om antingen hjälpappen \"BRouter\" är installerad och konfigurerad eller intern routing är aktiverad.</string>
     <string name="settings_title_map_rotation">Kartrotation (Google Maps)</string>
@@ -725,6 +734,7 @@
     <string name="init_signature_template_button">Infoga mall</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
+    <string name="init_signature_template_day_of_week">Veckodag</string>
     <string name="init_signature_template_datetime">Datum &amp; Tid</string>
     <string name="init_signature_template_user">Ditt namn</string>
     <string name="init_signature_template_number">Nummer</string>
@@ -935,10 +945,16 @@
     <string name="init_use_native_ua">Identifiering</string>
     <string name="init_summary_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
     <string name="init_rendertheme_folder">Mapp för kartteman</string>
+    <string name="init_mapshading_folder">Filmapp för kartskuggning</string>
+    <string name="init_mapShadingLinearity_title">Skuggning linjäritet</string>
+    <string name="init_mapShadingLinearity_description">Små värden förstärker kontrast i branta sluttningar men döljer förändringar på plana ytor, stora värden gör det mer linjär</string>
+    <string name="init_mapShadingScale_title">Skuggning opacitet</string>
+    <string name="init_mapShadingScale_description">Opacitet av skuggning lager, från osynliga till högre värden som intensifierar skuggning men kan ge artefakter</string>
     <string name="init_maintenance">Underhåll</string>
     <string name="init_maintenance_directories_note">c:geo lagrar bilder och andra filer relaterade till en cache i en särskild mapp. I vissa fall (t.ex. vid import/export av databasen) kan denna mapp innehålla föråldrade filer som kan tas bort här.</string>
     <string name="init_maintenance_directories">Ta bort överblivna filer</string>
     <string name="init_maintenance_start">Underhåll startat</string>
+    <string name="init_maintenance_ongoing">Detta kan ta en stund…</string>
     <string name="init_maintenance_finished">Underhåll avslutat</string>
     <string name="init_location">Geolokalisering</string>
     <string name="init_location_note">På enheter utrustade med Google Play-tjänster kan c:geo automatiskt använda en bättre tjänst för positionering. Detta hindrar emellertid användningen av en extern Bluetooth GPS-mottagare.</string>
@@ -981,6 +997,8 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
+    <string name="init_title_useUnifiedMap">Använd enhetlig karta</string>
+    <string name="init_summary_useUnifiedMap">Använd ny enhetlig karta istället för inbyggd Google Map / Mapsforge (OSM) kartor (experimentell / långt ifrån att vara komplett / endast för testning)</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1039,6 +1057,7 @@
     <string name="persistablefolder_base">Bas</string>
     <string name="persistablefolder_offline_maps">Offlinekartor</string>
     <string name="persistablefolder_offline_maps_themes">Kartteman</string>
+    <string name="persistablefolder_offline_maps_shading">Filer för kartskuggning</string>
     <string name="persistablefolder_backup">Säkerhetskopiering</string>
     <string name="persistablefolder_logfiles">Loggfiler</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1153,6 +1172,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Inga lagringsbara vägpunkter hittades</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Förhindra extraktion av vägpunkter</string>
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Denna personliga anteckning kommer att förkortas med ca %1$d tecken vid %3$s (max storlek %2$d).</string>
     <string name="cache_personal_note_upload">Ladda upp</string>
     <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
     <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
@@ -1275,6 +1295,9 @@
     <string name="cache_description_updated">Cachens beskrivning uppdaterad</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Storlek</string>
+    <string name="cache_mode">Läge</string>
+    <string name="cache_mode_linear">Linjär</string>
+    <string name="cache_mode_random">Slumpmässig</string>
     <string name="cache_distance">Avstånd</string>
     <string name="cache_difficulty">Svårighet</string>
     <string name="cache_terrain">Terräng</string>
@@ -1320,6 +1343,9 @@
     <string name="image_category_uncategorized">Okategoriserad</string>
     <string name="image_category_own">Egen</string>
     <string name="image_category_listing">Listning</string>
+    <string name="image_category_log">Logg</string>
+    <string name="context_map_add_to_route">Lägg till rutt</string>
+    <string name="context_map_add_to_route_start">Lägg till i början av rutt</string>
     <string name="context_map_show_coords">Visa koordinater</string>
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
@@ -1330,6 +1356,7 @@
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
     <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
     <string name="init_longtap_map">Långtryck på kartan</string>
+    <string name="init_summary_longtap_map">Aktivera långtryck på kart-ikonen (för att skapa en egen rutt) eller på själva kartan (för att skapa en egendefinierad cache / vägpunkt)</string>
     <string name="onetime_info_longtap_disabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher / vägpunkter.\n\nLångtryck på kartan är för närvarande avaktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
     <string name="onetime_info_longtap_enabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher / vägpunkter.\n\nLångtryck på kartan är för närvarande aktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
     <string name="goto_targets_list">Interna cacher</string>
@@ -1407,6 +1434,7 @@
     <string name="waypoint_duplicate">Duplicera punkt</string>
     <string name="waypoint_toclipboard">Kopiera vägpunkt till urklipp</string>
     <string name="waypoint_copy_of">Kopia av</string>
+    <string name="waypoint_open_geochecker">Öppna Geochecker</string>
     <string name="waypointcalc_notes_prompt">Skriv anteckningar här&#8230;</string>
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
@@ -1998,6 +2026,10 @@
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>
     </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">om %d dag</item>
+        <item quantity="other">om %d dagar</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
     <string name="create_shortcut">Skapa genväg</string>
@@ -2058,6 +2090,7 @@
     <!-- permission handling -->
     <string name="close_app">Stäng appen</string>
     <string name="ask_again">Fråga igen</string>
+    <string name="location_permission_request_explanation">c:geo behöver tillgång till GPS på enheten för att hitta din position och beräkna avstånd och riktning till geocacher. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_request_explanation">c:geo kommer att skriva data på din telefonlagring eller SD-kortet så snart du sparar geocacher för användning offline. Vidare kommer c:geo att använda din telefonlagring för import och export av filer och läsning av offlinekartor. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
@@ -2078,6 +2111,7 @@
     <string name="notification_channel_downloader_name">c:geo hämtningar</string>
     <string name="notification_channel_downloader_description">aviseringar för hämtningar (t.ex. offline-kartor)</string>
     <string name="notification_channel_cache_download_name">cache-hämtare</string>
+    <string name="notification_channel_cache_download_description">resultatnotifieringar för cachers bakgrunds-nedladdningar</string>
     <string name="notification_proximity_title">c:geo närhetsnotifiering</string>
     <string name="notification_download_receiver_title">Importerar nedladdning</string>
     <!-- individual routes -->
@@ -2166,6 +2200,7 @@
     <string name="delete_offlinemap_title">Ta bort offline-karta</string>
     <string name="no_deletable_offlinemaps">Inga raderbara offline-kartor</string>
     <string name="delete_file_confirmation">Ta bort %s?</string>
+    <string name="file_deleted_info">\'%s\' raderad</string>
     <string name="download_title">Ladda ned fil</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
@@ -2187,6 +2222,8 @@
     <string name="downloadmap_mapfile">kartfil</string>
     <string name="downloadmap_themefile">temafil</string>
     <string name="downloadmap_tilefile">rutt-datafil</string>
+    <string name="downloadmap_othermapdownload">nedladdning av annan karta</string>
+    <string name="downloadmap_otherthemedownload">nedladdning av annat tema</string>
     <string name="downloadmap_download">ladda ner</string>
     <string name="downloadmap_retrieving_directory_data">Hämtar mappdata…</string>
     <string name="downloadmap_checking_for_updates">Söker efter uppdateringar…</string>
