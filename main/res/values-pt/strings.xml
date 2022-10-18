@@ -641,6 +641,7 @@
     <string name="downloader_cancelled_download">Transferência de \"%s\" cancelada</string>
     <string name="downloader_pending_info">Há pelo menos uma transferência em pausa ou com falhas. Deseja abrir a lista de transferências pendentes?</string>
     <string name="downloader_retry_download">Tentar de novo a transferência</string>
+    <string name="downloader_retry_download_details">Quer tentar novamente a transferência do seguinte ficheiro?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
     <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
@@ -659,6 +660,7 @@
     <string name="asdm_error_insufficient_space">Erro: Espaço de armazenamento insuficiente</string>
     <string name="asdm_error_too_many_redirects">Erro: Demasiados redireccionamentos</string>
     <string name="asdm_error_unhandled_http_code">Erro: Código HTTP não tratado</string>
+    <string name="asdm_error_unknown">Erro: Erro desconhecido</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -774,6 +776,7 @@
     <string name="init_signature_template_size">Tamanho</string>
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Localização</string>
+    <string name="init_signature_template_geocode">Geo-código</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
@@ -1501,6 +1504,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
     <string name="calccoord_migrate_infotext_markdown">Um cálculo antigo de coordenadas foi encontrado neste ponto adicional:\n\n%1$s\n\nPode migrar isso para o novo cálculo de coordenadas da cache da seguinte forma:\n\n%2$s\n\ncom novas variáveis de cache:%3$s\n\nPor favor, escolha:\n- %4$s para realizar a migração como sugerido\n- %5$s para descartar em definitivo os dados de cálculo encontrados\n- %6$s para continuar sem migração. Será novamente questionado sobre a migração, na próxima vez que abrir o ponto adicional para edição. Note, no entanto, que editar as coordenadas do ponto adicional pode excluir dados de cálculo locais.</string>
     <!-- Formula -->
+    <string name="formula">Fórmula</string>
     <string name="formula_choose_function">Escolher função</string>
     <string name="formula_function_sqrt">Raiz Quadrada</string>
     <string name="formula_function_sin">Seno</string>
@@ -2119,6 +2123,7 @@
     <!-- permission handling -->
     <string name="close_app">Fechar a aplicação</string>
     <string name="ask_again">Voltar a perguntar</string>
+    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS (localização melhorada) do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
     <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guarde geocaches para uso offline. Além disso, o c:geo utilizará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas offline. A memória não pode ser utilizada sem esta permissão.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
