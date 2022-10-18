@@ -1,33 +1,18 @@
 
 ### Mapa
-- Novinka: Přidána podpora pro stínování kopců v OSM
-- Oprava: Ručně zkopírované terasové body z kešky se nezobrazují všechny
-- Novinka: Povolena změna zobrazovaného názvu stopy
+- New: Allow change of track's display name
 
 ### Detaily kešky
-- Změna: Zobrazuje se indikátor načítání v činnosti protokolu, zatímco probíhá načítání požadovaných dat
-- Oprava: nbsp; nepovažuje se za mezeru při analýze vzorce
-- Oprava: Obrázek v logu označený jako "Obrázek 1", i když byl přidán pouze jeden obrázek
-- Oprava: Další trasové body vytvořené při analýze vzorce osobních poznámek
-- Oprava: Při kopírování vzorce do jiné kešky se nevytvoří proměnné
-- Oprava: (Experimentální galerie) Použití obrázků kešky pro obrázky logu/spoileru
-- Novinka: zástupný symbol šablony logu GEOKÓDU
-- Novinka: Vylepšené skenování souřadnic v textech
-- Novinka: Podpora základního HTML formátování pro seznamy definic (dl/dt/dd)
+- Fix: Log image labelled "Image 1" even if only a single image added
+- New: GEOCODE log template placeholder
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
 
 ### Obecné
-- Novinka: Podpora obecných stahování pro odkazy s předponou „mf-v4-map“ a „mf-theme“ (žádné automatické aktualizace nejsou podporovány)
-- Novinka: Funkce údržby reindexuje databázi
-- Novinka: Automatická optimalizace výkonu databáze každých 90 dní (reindexace)
-- Oprava: Zpracování chybějícího oprávnění pro přesnou polohu
-- Změna: Přepínání jazyka webové stránky bylo odstraněno
-- Oprava: Odstraněné uživatelsky definované kešky se při restartu c:geo neodstraní
-- Novinka: Zobrazení čekajících stahování
-- Novinka: Připojení názvu kešky / názvu seznamu k názvu souboru při exportu GPX
-- Změna: Odstraněno nastavení "Identifikovat jako Android prohlížeč"
-- Novinka: Kontrola čekajících stahování (mapy / směrovací data) při spuštění
-- Oprava: Panel filtru není čitelný ve světlém režimu
-- Novinka: Umožnění výběru souborů ke stažení
-- Novinka: Stavový filtr pro DNF
-- Novinka: Zobrazení nadmořské výšky na domovské obrazovce (pokud je k dispozici)
-- Novinka: Povoleno ruční zadávání hodnot do filtrů pomocí posuvníků
+- New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- New: Allow selection of files to download
+- New: Status filter for DNF
+- New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
