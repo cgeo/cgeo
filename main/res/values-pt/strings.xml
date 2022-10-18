@@ -2092,6 +2092,7 @@
     <!-- permission handling -->
     <string name="close_app">Fechar a aplicação</string>
     <string name="ask_again">Voltar a perguntar</string>
+    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS (localização melhorada) do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
     <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guarde geocaches para uso offline. Além disso, o c:geo utilizará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas offline. A memória não pode ser utilizada sem esta permissão.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
