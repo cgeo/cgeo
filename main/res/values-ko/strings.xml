@@ -1488,6 +1488,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">닫았음</string>
     <string name="calccoord_migrate_infotext_markdown">다음과 같이 지점에서 레거시 좌표 계산이 발견되었습니다:\n\n%1$s\n\n다음과 같이 이를 새 캐시 계산 좌표로 이동할 수 있습니다:\n\n%2$s\n\n새로운 캐시 변수 사용:%3$s\n\n다음 중 하나를 선택하십시오:\n- 제안된 대로 이동을 수행하려면 %4$s\n- 찾은 계산 데이터를 영구적으로 닫으려면 %5$s\n- 이동하지 않고 계속하려면 %6$s. 다음에 편집을 위해 지점을 열 때 이동을 다시 요청하게 됩니다. 참고: 그러나 지점 좌표를 편집하면 로컬 계산 데이터가 삭제될 수 있습니다.</string>
     <!-- Formula -->
+    <string name="formula">공식</string>
     <string name="formula_choose_function">기능 선택</string>
     <string name="formula_function_sqrt">제곱근</string>
     <string name="formula_function_sin">사인</string>
