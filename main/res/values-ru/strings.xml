@@ -783,6 +783,7 @@
     <string name="init_signature_template_size">Размер</string>
     <string name="init_signature_template_type">Тип</string>
     <string name="init_signature_template_location">Местоположение</string>
+    <string name="init_signature_template_geocode">Геокод</string>
     <string name="init_ratingwanted">Рейтинг GCvote</string>
     <string name="init_summary_ratingwanted">Загружать рейтинг тайника с GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Свои записи и записи друзей</string>
@@ -980,6 +981,9 @@
     <string name="init_use_native_ua">Android браузер</string>
     <string name="init_summary_use_native_ua">Представляться как браузер. Может решить проблемы входа для некоторых интернет провайдеров.</string>
     <string name="init_rendertheme_folder">Папка с темами карт</string>
+    <string name="init_mapshading_folder">Папка для затененных файлов карты</string>
+    <string name="init_mapShadingLinearity_description">Маленькие значения подчеркивают контрастность крутых склонов, но скрывают изменения в плоскостях, большие значения делают его более линейным</string>
+    <string name="init_mapShadingScale_title">Прозрачность затенения</string>
     <string name="init_mapShadingScale_description">Непрозрачность слоя затенения, от невидимого до более высоких значений, усиливает затенение, но может приводить к появлению артефактов</string>
     <string name="init_maintenance">Обслуживание</string>
     <string name="init_maintenance_directories_note">c:geo сохраняет изображения и другие файлы, связанные с тайниками в отдельной папке. Иногда (например, при восстановлении резервной копии) эта папка может содержать устаревшие данные, которые могут быть удалены.</string>
@@ -1069,12 +1073,16 @@
     <string name="contentstorage_selectfolder_dialog_choice_justselect">Ничего не делать</string>
     <string name="contentstorage_selectfolder_dialog_choice">Вы выбрали папку, отличающуюся от текущей. Текущая папка содержит %1$s, %2$s и занимает %3$s. Продолжить?\n\nВыберите папку и</string>
     <string name="contentstorage_folder_selection_aborted">Выбор папки прерван, используется \'%s\'</string>
+    <string name="contentstorage_folder_selection_success">Папка установлена в \'%s\'</string>
     <string name="contentstorage_file_selection_aborted">Выбор файла прерван</string>
     <string name="contentstorage_file_selection_success">Выбранный файл: \'%s\'</string>
     <string name="contentstorage_err_read_failed">Файл \'%s\' не может быть прочитан</string>
     <string name="contentstorage_err_write_failed">Файл \'%s\' не может быть записан</string>
     <string name="contentstorage_err_create_failed">Файл \'%1$s\' в \'%2$s\' не может быть создан</string>
     <string name="contentstorage_err_delete_failed">Файл \'%s\' не может быть удален</string>
+    <string name="contentstorage_err_list_failed">Файлы в папке \'%s\' не могут быть отображены</string>
+    <string name="contentstorage_err_folder_access_failed">Папка \'%s\' может быть недоступной</string>
+    <string name="contentstorage_err_copy_failed">Файл \'%1$s\' не может быть скопирован/перемещен в \'%2$s\' (переместить =%3$s)</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Пользовательская</string>
     <string name="persistablefolder_usertype_default">По умолчанию</string>
@@ -1093,9 +1101,14 @@
     <string name="persistablefolder_routingtiles">Данные маршрутизации</string>
     <string name="persistableuri_track">Файл трека</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s выполнено</string>
+    <string name="folder_process_status_currentfile">Обработка %1$s</string>
     <!-- FolderUtils: copy/move -->
+    <string name="folder_copy_progressbar_title">Копирование содержимого %1$s в %2$s</string>
+    <string name="folder_move_progressbar_title">Перемещение содержимого из %1$s в %2$s</string>
     <string name="folder_copy_finished_title">Содержимое папки было скопировано</string>
     <string name="folder_move_finished_title">Содержимое папки было перемещено</string>
+    <string name="folder_copy_finished_dialog_message">Содержимое папки %1$s было скопировано в %2$s.\n\n%3$s из %4$s и %5$s из %6$s обработано.</string>
     <string name="folder_move_finished_dialog_message">Содержимое папки %1$s было перемещено в %2$s.\n\n%3$s из %4$s и %5$s из %6$s обработано.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">Операция не удалась с кодом %1$s во время обработки файла %2$s.</string>
     <string name="folder_move_finished_dialog_tap">Нажмите \'OK\' для завершения изменения папки.</string>
@@ -1373,6 +1386,10 @@
     <string name="cache_recently_viewed">Недавно просмотренные</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
+    <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Этот кэш может использовать либо chirp передатчик, либо другой тип беспроводного маяка. Для чтения данных chirp вы можете установить Chirp Wolf.</string>
+    <string name="cache_alc_start">Откройте Adventure Lab, чтобы начать играть в это приключение</string>
+    <string name="cache_alc_install">Установите игрока Adventure Lab, чтобы играть в это приключение</string>
     <string name="context_share_as_text">Поделиться текстом</string>
     <string name="context_share_as_link">Поделиться ссылкой</string>
     <string name="image_category_uncategorized">Без категории</string>
@@ -1487,20 +1504,27 @@
     <string name="variables_varname_dialog_title">Имя переменной</string>
     <string name="variables_varname_dialog_message">Введите имя переменной (может быть пустым)</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Режим Сопровождения</string>
     <string name="calccoord_guided_edit">Нажмите на цифру для редактирования</string>
     <string name="calccoord_guided_value">Значение</string>
+    <string name="calccoord_convert_to_plain">Преобразовать в координаты в виде строки текста</string>
+    <string name="calccoord_plain_tools_title">Инструменты по работе с координатами в виде строки текста</string>
     <string name="calccoord_remove_spaces">Удалить пробелы</string>
     <string name="calccoord_paste_from_clipboard">Вставить из буфера обмена</string>
     <string name="calccoord_generate_title">Создать путевые точки</string>
     <string name="calccoord_generate_showonmap">Показать на карте</string>
     <string name="calccoord_generate_waypointnameprefix">Создано</string>
+    <string name="calccoord_generate_error_novarwithrange">Не найдена допустимая переменная с диапазонами</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ни одна комбинация не вернула корректные координаты</string>
     <string name="calccoord_generate_error_nogeopointselected">Координаты не выбраны</string>
     <string name="calccoord_migrate_title">Миграция путевых точек</string>
     <string name="calccoord_migrate_migrate">Мигрировать</string>
     <string name="calccoord_migrate_migrate_usernote_praefix">Мигрировано из</string>
     <string name="calccoord_migrate_cancel">Отмена</string>
+    <string name="calccoord_migrate_dismiss">Отклонить данные</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Отклонено</string>
     <!-- Formula -->
+    <string name="formula">Формула</string>
     <string name="formula_choose_function">Выберите функцию</string>
     <string name="formula_function_sqrt">Квадратный корень</string>
     <string name="formula_function_sin">Синус</string>
@@ -1514,11 +1538,15 @@
     <string name="formula_function_group_simplestring">Простая строка</string>
     <string name="formula_function_group_complexstring">Сложная строка</string>
     <string name="formula_error_unexpectedtoken">Ожидался \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Неправильное значение параметра, ожидалось %1$s-%2$s, получено %3$s</string>
+    <string name="formula_error_wrongtype">Неправильный тип, ожидалось \'%1$s\', получено \'%2$s\' типа \'%3$s\'</string>
     <string name="formula_error_missingvarvalue">Отсутствует: %1$s</string>
+    <string name="formula_error_cyclicdependency">Цикл: %1$s</string>
     <string name="formula_error_empty">Пустая Формула</string>
     <string name="formula_error_other">Ошибка: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Без названия</string>
+    <string name="imageview_mimetype">Mime-тип</string>
     <string name="imageview_metadata_geopoint">Геоточка</string>
     <string name="imageview_metadata_comment">Комментарий</string>
     <!-- visit -->
@@ -1542,6 +1570,7 @@
     <string name="init_renderthemefolder_synctolocal">Синхронизировать темы</string>
     <string name="init_summary_renderthemefolder_synctolocal">Загружать ваши темы во внутреннюю папку приложения — будет занято дополнительное место, но увеличится скорость открытия карты.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
+    <string name="init_renderthemefolder_synctolocal_dialog_message">Это будет постоянно синхронизировать содержимое папки Map Theme в приватную папку приложения для ускорения доступа к файлам. Убедитесь, что папка темы содержит только ваши темы, но без дополнительных (больших) данных перед включением этой функции.\n\nПапка с картой \'%1$s\' имеет в настоящее время %2$s, %3$s и размер %4$s.\n\nВключить синхронизацию папок?</string>
     <string name="onetime_mapthemefixslow_title">Исправить медленную отрисовку карт</string>
     <string name="onetime_mapthemefixslow_message">Работа с не заархивированными картами может снизить производительность просмотра карт. Вы можете заархивировать или синхронизировать их, чтобы повысить производительность и уменьшить задержку при запуске карты.</string>
     <string name="init_hidewp">Скрыть точки</string>
@@ -1570,6 +1599,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Слишком сложные условия фильтра тайников</string>
     <string name="map_settings_cache_filter_too_complex_message">Текущий фильтр тайников слишком сложен для дополнительных условий. Обычно это означает, что фильтр содержит выражения НЕ или ИЛИ, а не обычное И.</string>
     <string name="map_theme_legend">Описание темы</string>
+    <string name="map_theme_legend_info">Нажмите на название категории, чтобы открыть/закрыть категорию. Длительное нажатие на символ для краткой информации об этом символе. Нажмите на иконку с информацией, чтобы увидеть подробные легенды онлайн.</string>
     <string name="google_maps_style_default">По умолчанию</string>
     <string name="google_maps_style_night">Ночь</string>
     <string name="google_maps_style_retro">Ретро</string>
@@ -1983,6 +2013,7 @@
     <string name="support_title">Поддержка</string>
     <string name="website_title">Вебсайт</string>
     <string name="facebook_link"><a href="">страница c:geo</a></string>
+    <string name="fangroup_link"><a href="">Немецкая группа пользователей</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo на Google Play</a></string>
     <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
@@ -1992,6 +2023,9 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Доступна новая версия.\nНажмите, чтобы установить.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Доступна новая ночная сборка.\nНажмите, чтобы установить.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Доступен новый релиз кандидат.\nНажмите, чтобы установить.</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">Изменения на geocaching.com вызывают проблемы в c:geo.\nМы знаем и работаем над этим, пожалуйста, дайте нам время!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Изменения на geocaching.com вызывают проблемы на живой карте.\nМы знаем и работаем над этим, пожалуйста, дайте нам время!</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com не доступен (полностью) в данный момент.\nВы можете столкнуться с различными проблемами в c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Похоже, вы используете старую версию Android. Будущие версии c:geo могут быть недоступны для вашего устройства или работать непредсказуемо.\nНажмите на это сообщение для получения дополнительной информации.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
     <!-- text-to-speech for compass view -->
@@ -1999,6 +2033,7 @@
     <string name="tts_toggle">Включить говорилку</string>
     <string name="tts_started">Речь началась</string>
     <string name="tts_stopped">Речь закончилась</string>
+    <string name="tts_running">Голосовая служба запущена…</string>
     <string name="err_tts_lang_not_supported">Текущий язык не поддерживается TTS-движком.</string>
     <string name="tts_one_kilometer">один километр</string>
     <plurals name="tts_kilometers">
@@ -2126,6 +2161,7 @@
     <!-- notification / channel texts -->
     <string name="notification_channel_proximity_name">уведомления о приближении</string>
     <string name="notification_channel_proximity_description">отображение тайников поблизости</string>
+    <string name="notification_channel_foreground_name">активные сервисы</string>
     <string name="notification_channel_foreground_description">уведомление отображается, пока c:geo выполняет фоновую работу</string>
     <string name="notification_channel_downloader_name">загрузчик c:geo</string>
     <string name="notification_channel_downloader_description">уведомления о загрузках (например, офлайн-карт)</string>
@@ -2217,6 +2253,7 @@
     <string name="receivedownload_intenttitle">Получить файл</string>
     <string name="receivedownload_success">Файл успешно сохранен как \"%s\"</string>
     <string name="receivedownload_error">Ошибка при получении файла</string>
+    <string name="receivedownload_error_io_exception">Ошибка ввода/вывода при получении файла. Ваша папка \"%s\" доступна для записи?</string>
     <string name="receivedownload_error_filenotfound_exception">Ошибка \"файл не найден\" при получении файла.</string>
     <string name="receivedownload_amount_copied">%s скопирован</string>
     <string name="receivedownload_cancelled">Передача файла отменена</string>
@@ -2232,7 +2269,9 @@
     <string name="downloadmanager_not_available">Файл не может быть загружен, системный менеджер загрузок недоступен</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>
     <string name="download_none_selected">Не выбраны файлы для загрузки</string>
+    <string name="downloadmap_target_not_writable">Выбранная цель \"%s\" недоступна для записи - скачанный файл карты сохранен в системной папке загрузок и должен быть перемещен вручную в папку карты.</string>
     <string name="downloadmap_allow_metered_network">Разрешить загрузку по лимитированной сети (например, мобильному подключению)</string>
+    <string name="download_confirmation">%1$sСкачать файл \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Найдены обновления для:</string>
     <string name="download_warning">Загрузка может занять некоторое время и привести к значительным затратам в зависимости от вашего сетевого подключения.</string>
     <string name="download_error">Ошибка загрузки с кодом #%d</string>
@@ -2262,10 +2301,16 @@
     <string name="no_updates_found">Обновления не найдены</string>
     <string name="updates_check">Проверка обновлений</string>
     <string name="mapserver_mapsforge_info">Основные карты, темы карт не требуются</string>
+    <string name="mapserver_openandromaps_info">Подробные карты, требуется тема карты \"Elevate\"</string>
+    <string name="mapserver_freizeitkarte_info">Подробные карты, требуется одна из тем карты \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Подробная тема карты, специально для карт \"Freizeitkarte\"</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>
+    <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>
+    <string name="maptheme_scale_text_summary">Дополнительно масштабирует текстовые метки на карте; 100% = без дополнительного масштабирования</string>
+    <string name="maptheme_scale_symbol_title">Масштаб символов</string>
+    <string name="maptheme_scale_symbol_summary">Дополнительно масштабирует размер символа на карте; 100% = без дополнительного масштабирования</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистить историю трека</string>
     <string name="map_trailhistory_cleared">История трека очищена</string>
@@ -2295,6 +2340,7 @@
     <string name="wizard_mapfolder_request_explanation">c:geo нужна папка для хранения автономных карт.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo нужна папка для хранения файлов темы офлайн-карт.</string>
     <string name="wizard_gpxfolder_request_explanation">c:geo нужна папка для хранения GPX-файлов (например, для импорта/экспорта тайников или треков).</string>
+    <string name="wizard_broutertilesfolder_request_explanation">Для того, чтобы использовать встроенную функцию автоматической загрузки и обновления фрагментов данных маршрутизации, необходимо установить папку для хранения этих данных.</string>
     <string name="wizard_select_or_create">Выберите или создайте такую папку на следующем шаге.</string>
     <string name="wizard_platforms_title">Настроить сервисы</string>
     <string name="wizard_platforms_intro">Для поиска тайников с c:geo необходим аккаунт на одном из сервисов геокешинга, поддерживаемых c:geo.\nВыберите нужный сервис ниже, чтобы войти с существующей учетной записью или создать новую учетную запись.</string>
@@ -2331,12 +2377,52 @@
     <string name="touch_again_to_exit">Нажмите еще раз для выхода</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
+    <string name="rtl_fell_meadow">вырубка / луг</string>
+    <string name="rtl_heath">степь</string>
+    <string name="rtl_marsh">болото</string>
+    <string name="rtl_rock">скала</string>
+    <string name="rtl_scree">каменистая осыпь</string>
+    <string name="rtl_scrub">кустарник</string>
+    <string name="rtl_wood_mixed">лес (смешанный)</string>
+    <string name="rtl_wood_coniferous">лес (хвойный)</string>
+    <string name="rtl_wood_deciduous">лес (лиственный)</string>
+    <string name="rtl_glacier">ледник</string>
+    <string name="rtl_grass">трава</string>
+    <string name="rtl_farmland">пахота</string>
+    <string name="rtl_orchard">фруктовый сад</string>
+    <string name="rtl_vineyard">виноградник</string>
+    <string name="rtl_water">вода</string>
+    <string name="rtl_water_intermittent">вода (то сухо, то влажно)</string>
+    <string name="rtl_military">военные</string>
+    <string name="rtl_nature_reserve">природный заповедник</string>
+    <string name="rtl_nature_reserve_strict">природный заповедник (ограничения доступа)</string>
+    <string name="rtl_cliff">скала</string>
+    <string name="rtl_ridge">хребет</string>
+    <string name="rtl_reef">риф</string>
+    <string name="rtl_dyke">дамба</string>
+    <string name="rtl_embankment">насыпь</string>
+    <string name="rtl_beach">пляж</string>
+    <string name="rtl_beach_gravel">пляж с гравием</string>
+    <string name="rtl_spring">источник</string>
+    <string name="rtl_powerline">ЛЭП</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Дороги &amp; Тропы</string>
+    <string name="rtl_paved_path">мощеная дорога</string>
+    <string name="rtl_paved_path_gravel">мощеная дорога (гравий)</string>
+    <string name="rtl_unpaved_path">грунтовая дорога</string>
+    <string name="rtl_unpaved_path_partly_grown">грунтовая дорога (частично заросшая)</string>
+    <string name="rtl_unpaved_path_grown">грунтовая дорога (заросшая)</string>
+    <string name="rtl_surface_unknown">поверхность неизвестна</string>
+    <string name="rtl_unpaved_footpath">грунтовая пешеходная дорога</string>
+    <string name="rtl_paved_footpath">мощеная пешеходная дорога</string>
+    <string name="rtl_bridleway">мостовая</string>
+    <string name="rtl_access_destination">доступность (назначение)</string>
+    <string name="rtl_access_private">доступность (частная территория)</string>
+    <string name="rtl_access_no">доступ (нет)</string>
     <string name="rtl_cycleway">велодорожка</string>
     <string name="rtl_cycleway_steep">велодорожка (крутая)</string>
     <string name="rtl_cycleway_paved">велодорожка (покрытие)</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <string name="rtl_category_walking_cycling_climbing">Пешие прогулки, Велоспорт, Восхождение</string>
     <string name="rtl_hiking_T1">хайк T1</string>
     <string name="rtl_hiking_T2">хайк T2</string>
     <string name="rtl_hiking_T23">хайк T2/T3</string>
@@ -2345,7 +2431,17 @@
     <string name="rtl_hiking_T45">хайк T4/T5</string>
     <string name="rtl_hiking_T5">хайк T5</string>
     <string name="rtl_hiking_T6">хайк T6</string>
+    <string name="rtl_uphill15">подъем-15%</string>
+    <string name="rtl_uphill20">подъем-20%</string>
+    <string name="rtl_uphill25">подъем-25%</string>
+    <string name="rtl_uphill30">подъем-30%</string>
+    <string name="rtl_uphill40">подъем-40%</string>
+    <string name="rtl_uphill_too_steep">подъем в гору слишком крутой</string>
+    <string name="rtl_security_rope">безопасность: веревка</string>
+    <string name="rtl_security_rungs">безопасность: ступени</string>
+    <string name="rtl_security_ladder">безопасность: лестница</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_category_poi_symbols">POI / Символы</string>
     <string name="rtl_castle">замок</string>
     <string name="rtl_cinema">кинотеатр</string>
     <string name="rtl_cross">крест</string>
