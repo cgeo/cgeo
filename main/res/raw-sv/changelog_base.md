@@ -1,21 +1,21 @@
 
 ### Karta
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Nytt: Lägg till stöd för terränglutningsskuggning på OSM
+- Fix: Manuellt kopierade waypoints till en cache där inte alla visas
 
-### Cache details
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
+### Cachedetaljer
+- Ändra: Visa laddningsindikator i loggaktivitet vid hämtning av obligatoriska data
 - Fix: nbsp; not considered as space in formula parsing
 - Fix: Extra waypoints created on personal note formula parsing
 - Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
-- New: Improvements to coordinate scan in texts
+- Fix: (Experimentellt galleri) Använd bildcache för logg/spoilerbilder
+- Nytt: Förbättringar för att samordna skanning i texter
 
 ### Allmänt
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- Fix: Filter bar not readable in light mode
+- Nytt: Stöd generiska nedladdningar för "mf-v4-map"- och "mf-theme" prefixade länkar (inga automatiska uppdateringar stöds)
+- Nyhet: Underhållsfunktionen omindexerar databasen
+- Nytt: Automatisk prestandaoptimering av databasen var 90:e dag (omindexering)
+- Fix: Hantera saknad tillåtelse till noggrann plats
+- Ändra: Webbplatsens språkval borttaget
+- Fix: Borttagna användardefinierade cacher tas inte bort vid omstart av c:geo
+- Fix: Filterfältet är inte läsbart i ljust läge
