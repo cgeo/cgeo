@@ -1,33 +1,18 @@
 
 ### Mapa
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
-- New: Allow change of track's display name
+- Nuevo: Ahora puede cambiar el nombre que se muestra de un sendero
 
 ### Detalles del caché
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
-- New: GEOCODE log template placeholder
-- New: Improvements to coordinate scan in texts
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Corregido: Imagen de registro etiquetada como "Imagen 1" incluso si sólo se añade una sola imagen
+- Nuevo: Marcador de plantilla del tipo de registro GEOCODE
+- Nuevo: Soporte básico de formato HTML para definir listas (dl/dt/dd)
 
 ### General
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
+- Nuevo: Ver las descargas pendientes
+- Nuevo: Añadir nombre de caché / lista al nombre de archivo en la exportación GPX
+- Cambio: Se ha eliminado el ajuste "Identificar como navegador Android"
+- Nuevo: Comprobar descargas pendientes (mapas / datos de ruta) al iniciar
+- Nuevo: Permitir la selección de archivos para descargar
+- Nuevo: Filtro de estado para DNF
+- Nuevo: Mostrar elevación en la pantalla de inicio (si está disponible)
+- Nuevo: Ahora puede introducir manualmente valores en filtros usando deslizadores
