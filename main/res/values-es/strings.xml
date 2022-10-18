@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Sendero</string>
     <string name="wp_waypoint">Punto de referencia</string>
     <string name="wp_original">Coordenadas originales</string>
+    <string name="wp_generated">Generado</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Etapa</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Vía</string>
     <string name="wpnew_waypoint">Marcador</string>
     <string name="wpnew_original">Original</string>
+    <string name="wpnew_generated">Generado</string>
     <!-- logs -->
     <string name="log_found">Encontrado</string>
     <string name="log_dnf">No encontrado</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
+    <string name="log_templates">Encontrado: Plantilla de registro…</string>
     <string name="log_post_not_possible">Descarga de datos en curso…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
     <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
     <string name="log_add">Añadir</string>
@@ -312,6 +315,7 @@
     <string name="loc_trying">Intentando ubicar</string>
     <string name="loc_no_addr">Dirección desconocida</string>
     <string name="loc_gps_disabled">GPS desactivado</string>
+    <string name="loc_copied_clipboard">La ubicación actual ha sido copiada al portapapeles</string>
     <string name="menu_centerposition">Centrar en mi posición</string>
     <!-- standard menu -->
     <string name="menu_about">Sobre c:geo</string>
@@ -346,6 +350,20 @@
     <plurals name="caches_eta_mins">
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minutos</item>
+    </plurals>
+    <string name="caches_store_offline">Guardar en el dispositivo</string>
+    <string name="caches_store_offline_map">Almacenar cachés en el dispositivo</string>
+    <string name="caches_store_selected">Almacenamiento seleccionado</string>
+    <string name="caches_store_background_title">Descargar cachés</string>
+    <string name="caches_store_background_already_stored">Algunos cachés ya están almacenados. ¿Qué debería pasar con ellos?</string>
+    <string name="caches_store_background_option_nothing">No hacer nada</string>
+    <string name="caches_store_background_option_add_to_list">Añadir a la lista</string>
+    <string name="caches_store_background_option_refresh">Actualizar y añadir a la lista</string>
+    <string name="caches_store_background_result_failed">Descarga fallida, %1$d/%2$d cachés fueron descargados</string>
+    <string name="caches_store_background_result_canceled">Descarga cancelada, %1$d/%2$d cachés fueron descargados</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d caché descargado</item>
+        <item quantity="other">%d cachés descargados</item>
     </plurals>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Ver en mapa</string>
@@ -399,6 +417,8 @@
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
     <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
     <string name="caches_show_attributes">Mostrar resumen de atributos</string>
+    <string name="caches_set_cache_icon">Establecer icono del caché</string>
+    <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
     <string name="caches_askdeletion">Solicitar borrado si está vacío</string>
@@ -470,12 +490,15 @@
     <string name="cache_filter_stored_lists">Listas almacenadas</string>
     <string name="cache_filter_origin">Origen</string>
     <string name="cache_filter_stored_since">Últimos detalles actualizados</string>
+    <string name="cache_filter_logical_filter_group">Filtro anidado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalles</string>
     <string name="cache_filtergroup_userspecific">Específico del usuario</string>
+    <string name="cache_filtergroup_special">Especial</string>
     <string name="cache_filter_contexttype_live_title">Filtro en vivo</string>
     <string name="cache_filter_contexttype_offline_title">Filtro sin conexión</string>
     <string name="cache_filter_contexttype_transient_title">Filtro</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtro anidado</string>
     <string name="cache_filter_include">Incluir</string>
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complejo</string>
@@ -530,12 +553,17 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tiene registro sin conexión</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tiene registros sin conexión</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misterio resuelto</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Con waypoints definidos por el usuario</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuración de filtro sólo afectará a cachés mystery. Si desea excluir otros tipos de caché, por favor defina un filtro de tipo de caché apropiado.\n\nUn caché mystery se considera \'resuelto\' si ha cambiado de coordenadas o tiene un punto final válido con coordenadas.</string>
     <string name="cache_filter_status_active">Activo</string>
     <string name="cache_filter_status_disabled">Desactivado</string>
     <string name="cache_filter_status_archived">Archivado</string>
     <string name="cache_filter_status_exclude_active">Excluir activos</string>
     <string name="cache_filter_status_exclude_disabled">Excluir desactivados</string>
     <string name="cache_filter_status_exclude_archived">Excluir archivados</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluye cachés sin D/T</string>
+    <string name="cache_filter_nested_filter_modify">modificar</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">El sub-filtro está vacío</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto del registro</string>
     <string name="cache_filter_stored_since_notstored">No guardado</string>
@@ -685,6 +713,8 @@
     <string name="init_template_title">Título de la plantilla</string>
     <string name="init_template_text">Texto de plantilla</string>
     <string name="init_log_template">Plantilla de registro</string>
+    <string name="init_log_template_addnew">Añadir una nueva plantilla</string>
+    <string name="init_log_template_remove_confirm">¿Seguro que quieres eliminar la plantilla?</string>
     <string name="init_log_templates">Plantillas de registro</string>
     <string name="init_log_template_prefix">Plantilla:\u0020</string>
     <string name="init_log_template_missing_error">Es necesario proporcionar tanto el título de la plantilla como el texto.</string>
@@ -1260,6 +1290,10 @@
     <string name="cache_alc_install">Instalar el reproductor de Adventure Lab para jugar a esta aventura</string>
     <string name="context_share_as_text">Compartir texto</string>
     <string name="context_share_as_link">Compartir enlace</string>
+    <string name="image_category_log">Registro</string>
+    <string name="context_map_add_to_route">Añadir a la ruta</string>
+    <string name="context_map_add_to_route_start">Anteponer a la ruta</string>
+    <string name="context_map_show_coords">Mostrar coordenadas</string>
     <string name="create_internal_cache">Crear caché definido por el usuario</string>
     <string name="create_internal_cache_short">Nuevo caché</string>
     <string name="create_internal_cache_currentlist">Utilizar lista actual</string>
@@ -1269,6 +1303,9 @@
     <string name="internal_goto_targets_title">Objetivos \"Ir a\"</string>
     <string name="internal_goto_targets_description">Este caché almacena tus últimos objetivos \"Ir a\" y se crea automáticamente una vez que has usado la función \"Ir a\" en el menú principal. Las coordenadas introducidas se almacenarán en los waypoints de este caché. Si ya no necesitas estas coordenadas, puedes borrar este caché o cualquiera de sus waypoints. También puedes mover el caché a cualquier otra lista de tu elección.</string>
     <string name="init_longtap_map">Toque largo en el mapa</string>
+    <string name="init_summary_longtap_map">Activar el toque largo en el icono del mapa (para crear una ruta individual) o en el espacio libre del mapa (para crear un caché definido por el usuario)</string>
+    <string name="onetime_info_longtap_disabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está deshabilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
+    <string name="onetime_info_longtap_enabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está habilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
@@ -1307,8 +1344,10 @@
     <string name="waypoint_cache_coordinates">Coordenadas del caché</string>
     <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
     <string name="waypoint_custom">A medida</string>
     <string name="waypoint_my_coordinates">Mis coordenadas</string>
+    <string name="waypoint_my_coordinates_accuracy">Mis coordenadas (±%s)</string>
     <string name="waypoint_bearing">Orientación en º</string>
     <string name="waypoint_distance">Distancia</string>
     <string name="waypoint_name">Nombre</string>
@@ -1347,8 +1386,49 @@
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <!-- Variables -->
+    <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
+    <string name="variables_scanlisting">Escanear listado</string>
+    <string name="variables_scanlisting_choosepattern_title">Elige un patrón de los encontrados</string>
+    <string name="variables_scanlisting_nopatternfound">Patrón no encontrado</string>
+    <string name="variables_tidyup">Ordenar</string>
+    <string name="variables_deleteall">Borrar Todo</string>
+    <string name="variables_deleteall_confirm_text">¿Realmente desea eliminar todas las variables de este caché?</string>
+    <string name="variables_info">Ayuda</string>
+    <string name="variables_varname_dialog_title">Nombre de la variable</string>
+    <string name="variables_varname_dialog_message">Introduzca el nombre de la variable (puede dejarse vacío)</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Modo guiado</string>
+    <string name="calccoord_guided_edit">Toca un dígito para editar</string>
+    <string name="calccoord_guided_value">Valor</string>
+    <string name="calccoord_convert_to_plain">Convertir a Coordenadas simples</string>
+    <string name="calccoord_plain_tools_title">Herramientas simples</string>
+    <string name="calccoord_remove_spaces">Quitar espacios</string>
+    <string name="calccoord_paste_from_clipboard">Pegar desde el portapapeles</string>
+    <string name="calccoord_generate_title">Generar Waypoints</string>
+    <string name="calccoord_generate_showonmap">Mostrar en el mapa</string>
+    <string name="calccoord_generate_waypointnameprefix">Generado</string>
+    <string name="calccoord_generate_error_novarwithrange">No se encontró ninguna variable válida con rangos</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Ninguna combinación devuelve coordenadas válidas</string>
+    <string name="calccoord_generate_error_nogeopointselected">No hay Coordenadas seleccionadas</string>
+    <string name="calccoord_migrate_title">Migración de Waypoint</string>
+    <string name="calccoord_migrate_migrate">Migrar</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migrado desde</string>
+    <string name="calccoord_migrate_cancel">Cancelar</string>
+    <string name="calccoord_migrate_dismiss">Descartar datos</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Descartado</string>
+    <string name="calccoord_migrate_infotext_markdown">Se ha encontrado un cálculo de coordenadas heredado en este waypoint:\n\n%1$s\n\nPuede migrar esto al nuevo cálculo de coordenadas de la siguiente manera:\n\n%2$s\n\ncon nuevas variables de caché:%3$s\n\nPor favor, escoja:\n- %4$s para realizar la migración como se sugiere\n- %5$s para descartar los datos de cálculo encontrados para siempre\n- %6$s para continuar sin migración. Se le pedirá que vuelva a migrar la próxima vez que abra el waypoint para editar. Sin embargo, tenga en cuenta que editar las coordenadas de waypoint podría eliminar los datos de cálculo local.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Elegir función</string>
+    <string name="formula_function_sqrt">Raíz cuadrada</string>
+    <string name="formula_function_sin">Seno</string>
+    <string name="formula_function_cos">Coseno</string>
+    <string name="formula_function_tan">Tangente</string>
+    <string name="formula_function_abs">Valor absoluto</string>
+    <string name="formula_function_round">Redondeo</string>
+    <string name="formula_function_if">Si</string>
+    <string name="formula_function_length">Longitud del hilo</string>
+    <string name="formula_function_substring">Subhilo</string>
+    <string name="formula_function_rot13">Rotar caracteres por 13</string>
     <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publicar en Twitter</string>
@@ -1803,6 +1883,7 @@ Nombre de archivo:%2$s</string>
     <string name="cat_location">Ubicación del caché</string>
     <string name="cat_duration">Distancia / Duración</string>
     <string name="cat_surrounding">Alrededor del caché</string>
+    <string name="cat_permissions">Permisos</string>
     <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
@@ -2037,6 +2118,11 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_checking_for_updates">Comprobando actualizaciones…</string>
     <string name="downloadtile_title">Faltan datos de enrutaniento</string>
     <string name="downloadtile_info">c:geo no puede calcular la ruta solicitada ya que falta algún archivo de datos de enrutamiento. ¿Desea descargar los datos de enrutamiento que faltan?</string>
+    <string name="check_tiles_menu">Comprobar si faltan datos de ruta</string>
+    <string name="check_tiles_found">Los datos de ruta ya están presentes</string>
+    <string name="check_tiles_unsupported">Advertencia: Los datos de ruta no están disponibles al menos en parte para la región elegida</string>
+    <string name="tileupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de datos de ruta descargados. Mantenga pulsado para posponer.</string>
+    <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
     <string name="updates_check">Comprobar actualizaciones</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, no se requieren temas de mapa</string>
@@ -2048,6 +2134,9 @@ Nombre de archivo:%2$s</string>
     <string name="mapserver_hylly_themes_info">Tema detallado del mapa, construido para mapas \"Hylly\"</string>
     <string name="brouter_info">Servicio de ruta sin conexión</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rutas, [W] Vías</string>
+    <string name="maptheme_scale_map_title">Factor de la escala del mapa</string>
+    <string name="maptheme_scale_map_summary">Mapa de escalas; 100% = sin escala</string>
+    <string name="maptheme_scale_text_title">Factor de escala del texto</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
     <string name="map_trailhistory_cleared">historial de ruta borrado</string>
@@ -2109,12 +2198,153 @@ Nombre de archivo:%2$s</string>
     <string name="back">Atrás</string>
     <string name="later">Más tarde</string>
     <string name="cancel">Cancelar</string>
+    <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todo</string>
     <string name="touch_again_to_exit">Por favor toque de nuevo para salir</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Áreas</string>
+    <string name="rtl_fell_meadow">estiva / pradera</string>
+    <string name="rtl_heath">páramo</string>
+    <string name="rtl_marsh">pantano</string>
+    <string name="rtl_rock">roca</string>
+    <string name="rtl_scree">talud</string>
+    <string name="rtl_scrub">arbustal</string>
+    <string name="rtl_wood_mixed">bosque (mixto)</string>
+    <string name="rtl_wood_coniferous">bosque (coníferas)</string>
+    <string name="rtl_wood_deciduous">bosque (deciduo)</string>
+    <string name="rtl_glacier">glaciar</string>
+    <string name="rtl_grass">césped</string>
+    <string name="rtl_farmland">tierras agrícolas</string>
+    <string name="rtl_orchard">huerta</string>
+    <string name="rtl_vineyard">viñedo</string>
+    <string name="rtl_water">agua</string>
+    <string name="rtl_water_intermittent">agua (intermitente)</string>
+    <string name="rtl_military">militar</string>
+    <string name="rtl_nature_reserve">reserva natural</string>
+    <string name="rtl_nature_reserve_strict">reserva natural (estricta)</string>
+    <string name="rtl_cliff">acantilado</string>
+    <string name="rtl_ridge">cresta</string>
+    <string name="rtl_reef">arrecife</string>
+    <string name="rtl_dyke">dique</string>
+    <string name="rtl_embankment">embotellamiento</string>
+    <string name="rtl_beach">playa</string>
+    <string name="rtl_beach_gravel">playa de gravilla</string>
+    <string name="rtl_spring">manantial</string>
+    <string name="rtl_powerline">tendido eléctrico</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Carretas &amp; Rutas</string>
+    <string name="rtl_paved_path">ruta pavimentada</string>
+    <string name="rtl_paved_path_gravel">ruta pavimentada (gravilla)</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_cairn">montículo de piedra</string>
+    <string name="rtl_drinking_water">agua potable</string>
+    <string name="rtl_guidepost">poste indicador</string>
+    <string name="rtl_info_board">tablón de información</string>
+    <string name="rtl_info_office">oficina de información</string>
+    <string name="rtl_info_terminal">terminal de información</string>
+    <string name="rtl_peak">pico</string>
+    <string name="rtl_peak_cross">cruz de pico</string>
+    <string name="rtl_picnic_site">sitio de picnic</string>
+    <string name="rtl_playground">zona de juegos</string>
+    <string name="rtl_playground_private">parque privado</string>
+    <string name="rtl_recycling">reciclaje</string>
+    <string name="rtl_shelter">refugio</string>
+    <string name="rtl_shelter_picnic">refugio de pícnic</string>
+    <string name="rtl_shelter_rock">refugio de rocas</string>
+    <string name="rtl_telephone">teléfono</string>
+    <string name="rtl_toilets">retretes</string>
+    <string name="rtl_volcano">volcán</string>
+    <string name="rtl_adit_disused">entrada de mina abandonada</string>
+    <string name="rtl_archaeological">arqueológico</string>
+    <string name="rtl_artwork">obra de arte</string>
+    <string name="rtl_attraction">lugar de interés</string>
+    <string name="rtl_boundary_stone">límite (piedra)</string>
+    <string name="rtl_bunker_disused">búnker (abandonado)</string>
+    <string name="rtl_castle">castillo</string>
+    <string name="rtl_cinema">cine</string>
+    <string name="rtl_cross">cruz</string>
+    <string name="rtl_fountain">fuente</string>
+    <string name="rtl_memorial">memorial</string>
+    <string name="rtl_memorial_plaque">placa conmemorativa</string>
+    <string name="rtl_memorial_statue">estatua conmemorativa</string>
+    <string name="rtl_memorial_stolperstein">stolperstein conmemorativo</string>
+    <string name="rtl_memorial_stone">piedra conmemorativa</string>
+    <string name="rtl_memorial_war">memorial de guerra</string>
+    <string name="rtl_monument">monumento</string>
+    <string name="rtl_museum">museo</string>
+    <string name="rtl_ruins">ruinas</string>
+    <string name="rtl_stone_historic">piedra histórica</string>
+    <string name="rtl_theatre">teatro</string>
+    <string name="rtl_water_well">pozo de agua</string>
+    <string name="rtl_wayside_cross">cruce de caminos</string>
+    <string name="rtl_wayside_shrine">santuario de camino</string>
+    <string name="rtl_zoo">zoológico</string>
+    <string name="rtl_library">biblioteca</string>
+    <string name="rtl_arts_centre">centro de artes</string>
+    <string name="rtl_casino">casino</string>
+    <string name="rtl_nightclub">club nocturno</string>
+    <string name="rtl_community_centre">centro comunitario</string>
+    <string name="rtl_social_facility">instalación social</string>
+    <string name="rtl_townhall">ayuntamiento</string>
+    <string name="rtl_wilderness_hut">Cabaña de campo</string>
+    <string name="rtl_wilderness_hut_private">cabaña privada</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">Jardín</string>
+    <string name="rtl_cafe">cafetería</string>
+    <string name="rtl_fastfood">comida rápida</string>
+    <string name="rtl_ice_cream">helado</string>
+    <string name="rtl_pub">pub</string>
+    <string name="rtl_restaurant">restaurante</string>
+    <string name="rtl_bbq">Barbacoa</string>
+    <string name="rtl_water_point">fuente de agua</string>
+    <string name="rtl_atm">cajero automático</string>
+    <string name="rtl_bakery">panadería</string>
+    <string name="rtl_bank">banco</string>
+    <string name="rtl_beverages">bebidas</string>
+    <string name="rtl_books">libros</string>
+    <string name="rtl_butcher">carnicería</string>
+    <string name="rtl_chemist">Farmacia</string>
+    <string name="rtl_convenience">tienda variada</string>
+    <string name="rtl_doityourself">Manualidades</string>
+    <string name="rtl_farm_shop">tienda de implementos de granja</string>
+    <string name="rtl_laundry">lavandería</string>
+    <string name="rtl_mall">centro comercial</string>
+    <string name="rtl_marketplace">mercado</string>
+    <string name="rtl_organic">orgánico</string>
+    <string name="rtl_postbox">buzón</string>
+    <string name="rtl_postoffice">oficina de correos</string>
+    <string name="rtl_sports_shop">tienda deportiva</string>
+    <string name="rtl_supermarket">supermercado</string>
+    <string name="rtl_travel_agency">agencia de viajes</string>
+    <string name="rtl_defibrillator">defibrillator</string>
+    <string name="rtl_doctors">médico</string>
+    <string name="rtl_embassy">embajada</string>
+    <string name="rtl_emergency_phone">teléfono de emergencia</string>
+    <string name="rtl_firebrigade">bomberos</string>
+    <string name="rtl_emergency_access_point">punto de acceso de emergencia</string>
+    <string name="rtl_hospital">hospital</string>
+    <string name="rtl_clinic">clínica</string>
+    <string name="rtl_pharmacy">Farmacia</string>
+    <string name="rtl_police">policía</string>
+    <string name="rtl_emergency_fire_hydrant">boca de incendio</string>
+    <string name="rtl_emergency_suction_point">punto de aspiración de emergencia (bomberos)</string>
+    <string name="rtl_adit">adit</string>
+    <string name="rtl_petroleum_well">Pozo de petróleo</string>
+    <string name="rtl_power_coal">Central térmica (carbón)</string>
+    <string name="rtl_power_gas">Central térmica (gas)</string>
+    <string name="rtl_power_nuclear">Central nuclear</string>
+    <string name="rtl_power_water">Central hidráulica</string>
+    <string name="rtl_power_wind">Molinos de viento</string>
+    <string name="rtl_wastewater_plant">planta de aguas residuales</string>
+    <string name="rtl_safety_rope">cuerda de seguridad</string>
+    <string name="rtl_stone">piedra</string>
+    <string name="rtl_traffic_signal">señal de tráfico</string>
+    <string name="rtl_turnstile">torniquete</string>
+    <string name="rtl_viewpoint">mirador</string>
+    <string name="rtl_waterfall">cascada</string>
+    <string name="rtl_alp">alpes</string>
+    <string name="rtl_wetland">humedal</string>
     <!-- Smileys GC / OC -->
 </resources>
