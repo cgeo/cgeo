@@ -566,7 +566,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Есть оффлайн запись</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Есть оффлайн запись \"Найден\"</string>
     <string name="cache_filter_status_select_label_solved_mystery">Загадка разгадана</string>
-    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Определенные пользователем путевые точки</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Этот параметр фильтра повлияет только на логические тайники. Если вы хотите исключить другие типы тайников, пожалуйста, укажите подходящий фильтр по типу тайника.\n\nЗагадка считается \'решенной\', если изменились координаты или есть корректная конечная точка, заполненная координатами.</string>
     <string name="cache_filter_status_active">Активный</string>
     <string name="cache_filter_status_disabled">Вне игры</string>
