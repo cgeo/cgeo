@@ -1,17 +1,17 @@
 
 ### Χάρτης
-- New: Allow change of track's display name
+- Νέο: Να επιτρέπεται η αλλαγή του ονόματος του κομματιού
 
 ### Cache details
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Διόρθωση: Καταγραφή εικόνας με ετικέτα "Εικόνα 1" ακόμη και αν έχει προστεθεί μόνο μια εικόνα
+- Νέο: Δημιουργία θέσης προτύπου καταγραφής GEOCODE
+- Νέα: Βασική υποστήριξη μορφοποίησης HTML για λίστες ορισμού (dl/dt/dd)
 
 ### General
 - Νέο: Προβολή εκκρεμών λήψεων
 - Νέο: Προσθήκη ονόματος κρύπτης / ονόματος λίστας στο όνομα αρχείου στην εξαγωγή GPX
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
+- Αλλαγή: Αφαιρέθηκε η ρύθμιση "Identify as Android browser"
+- Νέο: Ελέγξτε τις λήψεις που εκκρεμούν (χάρτες / δεδομένα δρομολόγησης) κατά την εκκίνηση
 - Νέα: Να επιτρέπεται η επιλογή αρχείων για λήψη
 - Νέο: Φίλτρο κατάστασης για DNF
 - Νέο: Εμφάνιση ανύψωσης στην αρχική οθόνη (αν υπάρχει)
