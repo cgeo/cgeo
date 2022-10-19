@@ -567,7 +567,6 @@
     <string name="cache_filter_status_select_label_has_offline_log">Есть оффлайн запись</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Есть оффлайн запись \"Найден\"</string>
     <string name="cache_filter_status_select_label_solved_mystery">Загадка разгадана</string>
-    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Определенные пользователем путевые точки</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Этот параметр фильтра повлияет только на логические тайники. Если вы хотите исключить другие типы тайников, пожалуйста, укажите подходящий фильтр по типу тайника.\n\nЗагадка считается \'решенной\', если изменились координаты или есть корректная конечная точка, заполненная координатами.</string>
     <string name="cache_filter_status_active">Активный</string>
     <string name="cache_filter_status_disabled">Вне игры</string>
@@ -1504,10 +1503,7 @@
     <string name="variables_varname_dialog_title">Имя переменной</string>
     <string name="variables_varname_dialog_message">Введите имя переменной (может быть пустым)</string>
     <!-- Calculated coordinates -->
-    <string name="calccoord_guided_mode">Режим Сопровождения</string>
-    <string name="calccoord_guided_edit">Нажмите на цифру для редактирования</string>
     <string name="calccoord_guided_value">Значение</string>
-    <string name="calccoord_convert_to_plain">Преобразовать в координаты в виде строки текста</string>
     <string name="calccoord_plain_tools_title">Инструменты по работе с координатами в виде строки текста</string>
     <string name="calccoord_remove_spaces">Удалить пробелы</string>
     <string name="calccoord_paste_from_clipboard">Вставить из буфера обмена</string>
@@ -2292,7 +2288,6 @@
     <string name="downloadmap_checking_for_updates">Проверка обновлений…</string>
     <string name="downloadtile_title">Отсутствуют данные маршрутизации</string>
     <string name="downloadtile_info">c:geo не может рассчитать запрошенный маршрут, так как отсутствуют некоторые файлы с данными для маршрутизации. Вы хотите загрузить отсутствующие данные маршрутизации?</string>
-    <string name="check_tiles_menu">Проверка отсутствующих данных маршрутизации</string>
     <string name="check_tiles_found">Данные маршрутизации уже присутствуют</string>
     <string name="check_tiles_missing">Найдены недостающие данные маршрутизации:</string>
     <string name="check_tiles_unsupported">Предупреждение: Данные маршрутизации по крайней мере частично недоступны для выбранного региона</string>
