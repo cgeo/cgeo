@@ -70,6 +70,15 @@
             android:summary="@string/init_summary_renderthemefolder_synctolocal"
             android:title="@string/init_renderthemefolder_synctolocal"
             app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_map_hillshading"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="@string/pref_fakekey_info_offline_maphillshading"
+            android:text="@string/settings_info_hillshading"
+            android:title="@string/settings_info_hillshading_title"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
             android:text="@string/settings_info_themes"
