@@ -26,6 +26,7 @@ import static org.junit.Assert.fail;
 public class UserDisplayableStringTest {
 
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void testDifficulty() {
         final DifficultyGeocacheFilter f = GeocacheFilterType.DIFFICULTY.create();
 
@@ -38,6 +39,7 @@ public class UserDisplayableStringTest {
     }
 
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void testFavoritesPercentage() {
         final FavoritesGeocacheFilter f = GeocacheFilterType.FAVORITES.create();
         f.setPercentage(true);
@@ -51,6 +53,7 @@ public class UserDisplayableStringTest {
     }
 
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void testLastFound() {
         final LastFoundGeocacheFilter f = GeocacheFilterType.LAST_FOUND.create();
 
@@ -87,7 +90,7 @@ public class UserDisplayableStringTest {
         statusFilter.setStatusOwned(true);
         filterConfig.addChild(statusFilter);
 
-        final GeocacheFilter gcFilter =  GeocacheFilter.create("", false, false, filterConfig );
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
 
         final String valueOutput = "Cache Type: Trad, Status: Found=Yes, Owned=Yes";
 
