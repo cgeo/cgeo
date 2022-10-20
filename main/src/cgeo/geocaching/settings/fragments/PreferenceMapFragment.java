@@ -63,6 +63,7 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_maphillshading, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_hillshading)));
 
         initPublicFolders(this, activity.getCsah());
 
