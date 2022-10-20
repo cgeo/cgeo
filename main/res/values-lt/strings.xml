@@ -311,7 +311,7 @@
     <string name="loc_fused">Sujungta</string>
     <string name="loc_low_power">Energijos taupymas</string>
     <string name="loc_home">Namų koordinatės</string>
-    <string name="loc_sat">Pal.</string>
+    <string name="loc_sat">Palydovai</string>
     <string name="loc_trying">Bandoma nustatyti</string>
     <string name="loc_no_addr">Nežinomas adresas</string>
     <string name="loc_gps_disabled">GPS išjungtas</string>
@@ -1293,7 +1293,7 @@
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
-    <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
+    <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
     <string name="cache_menu_navigation_drive_select_target">Pasirinkite tikslą</string>
     <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
     <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
@@ -1301,7 +1301,7 @@
     <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
-    <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
+    <string name="cache_menu_sygic_drive">Sygic (vairavimas)</string>
     <string name="cache_menu_radar">Radaras</string>
     <string name="cache_menu_map">Žemėlapis</string>
     <string name="cache_menu_map_ext">Kitos išorinės programos</string>
@@ -2284,7 +2284,7 @@
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Gautas failas</string>
+    <string name="receivedownload_intenttitle">Atsidiųstas failas</string>
     <string name="receivedownload_success">Failas sėkmingai išsaugotas kaip \'%s\'</string>
     <string name="receivedownload_error">Klaida gaunant failą</string>
     <string name="receivedownload_error_io_exception">Nepavyko įrašyti failo, ar turite rašymo teises kataloge (\"%s\")?</string>
@@ -2299,7 +2299,7 @@
     <string name="file_deleted_info">%s ištrintas</string>
     <string name="download_title">Atsisiųsti failą</string>
     <string name="downloadmap_info">Pasirinkite savo regiono žemėlapio failą paliesdami piktogramą \"Išsaugoti\".\n\nAtsisiunčiama fone. Kai perkėlimas baigtas, failas nukopijuojamas į c:geo žemėlapio aplanką ir nustatomas kaip dabartinis žemėlapis.\n\nBūkite atsargūs: atsisiųsdami žemėlapį, tinklo srautas gali būti didelis!</string>
-    <string name="downloadmap_filename">Atsisiunčiama %s</string>
+    <string name="downloadmap_filename">Atsisiunčiamas %s</string>
     <string name="downloadmanager_not_available">Failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
     <string name="download_none_selected">Atsisiuntimui nepasirinkta jokių failų</string>
