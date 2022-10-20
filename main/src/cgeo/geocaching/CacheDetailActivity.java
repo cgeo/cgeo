@@ -120,7 +120,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -151,8 +150,10 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
@@ -1636,7 +1637,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
+        private static final int DESCRIPTION_MAX_SAFE_LENGTH = 50000;
+
         private Geocache cache;
+
 
         @Override
         public CachedetailDescriptionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -1663,20 +1667,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
-            // reset description
-            binding.description.setText("");
+            // load description
+            reloadDescription(this.getActivity(), cache, binding.description, binding.descriptionRenderFully, true);
 
-            // cache short description
-            if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(activity, cache.getShortDescription(), false, binding.description, null);
-            }
-
-            // long description
-            if (StringUtils.isNotBlank(cache.getDescription()) || cache.supportsDescriptionchange()) {
-                loadLongDescription(activity, container);
-            }
-
-            fixOldGeocheckerLink(activity);
+            //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
             binding.descriptionChecker.setVisibility(checkerUrl == null ? View.GONE : View.VISIBLE);
             if (checkerUrl != null) {
@@ -1815,22 +1809,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }));
         }
 
-        private void loadLongDescription(final CacheDetailActivity activity, final ViewGroup parentView) {
-            binding.loading.setVisibility(View.VISIBLE);
-
-            final String longDescription = cache.getDescription();
-            loadDescription(activity, longDescription, true, binding.description, binding.loading);
-
-            if (cache.supportsDescriptionchange()) {
-                binding.description.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
-                    binding.description.setText(description);
-                    cache.setDescription(description);
-                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                    Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
-                }));
-            }
-        }
-
         private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity, final int personalNoteLength, final int maxPersonalNotesChars, final String connectorName) {
             final int reduceLength = personalNoteLength - maxPersonalNotesChars;
             SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, maxPersonalNotesChars, connectorName).confirm(
@@ -1840,61 +1818,108 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     });
         }
 
-        /**
-         * Load the description in the background.
-         *
-         * @param descriptionString    the HTML description as retrieved from the connector
-         * @param descriptionView      the view to fill
-         * @param loadingIndicatorView the loading indicator view, will be hidden when completed
-         */
-        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
-            try {
-                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
-                activity.addWarning(unknownTagsHandler, description);
-                if (StringUtils.isNotBlank(description)) {
-                    handleImageClick(activity, description);
-                    fixRelativeLinks(description);
-                    fixTextColor(description, R.color.colorBackground);
-
-                    // check if short description is contained in long description
-                    boolean longDescriptionContainsShortDescription = false;
-                    final String shortDescription = cache.getShortDescription();
-                    if (StringUtils.isNotBlank(shortDescription)) {
-                        final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
-                        // allow up to 200 characters of HTML formatting
-                        if (index >= 0 && index < 200) {
-                            longDescriptionContainsShortDescription = true;
-                        }
+        /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
+        private static void reloadDescription(final Activity activity, final Geocache cache, final TextView descriptionView, final View descriptionFullLoadButton, final boolean restrictLength) {
+            descriptionFullLoadButton.setVisibility(View.GONE);
+            descriptionView.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            descriptionView.setVisibility(View.VISIBLE);
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
+                createDescriptionContent(activity, cache, restrictLength, descriptionView), p -> {
+                    displayDescription(activity, cache, p.first, descriptionView);
+                    if (p.second) {
+                        descriptionFullLoadButton.setVisibility(View.VISIBLE);
+                        descriptionFullLoadButton.setOnClickListener(v ->
+                                reloadDescription(activity, cache, descriptionView, descriptionFullLoadButton, false));
                     }
-
-                    try {
-                        if (descriptionView.getText().length() == 0 || (longDescriptionContainsShortDescription && isLongDescription)) {
-                            descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                        } else if (!longDescriptionContainsShortDescription) {
-                            descriptionView.append("\n");
-                            descriptionView.append(description);
-                        }
-                    } catch (final Exception e) {
-                        // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                        Log.e("Android bug setting text: ", e);
-                        // remove the formatting by converting to a simple string
-                        descriptionView.append(description.toString());
-                    }
-
-                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    descriptionView.setVisibility(View.VISIBLE);
-                    activity.addContextMenu(descriptionView);
                 }
-                if (loadingIndicatorView != null) {
-                    loadingIndicatorView.setVisibility(View.GONE);
+            );
+        }
+
+        /** displays given description into listing textview */
+        @MainThread
+        private static void displayDescription(final Activity activity, final Geocache cache, final CharSequence renderedDescription, final TextView descriptionView) {
+            try {
+                descriptionView.setText(renderedDescription, TextView.BufferType.SPANNABLE);
+                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                if (cache.supportsDescriptionchange()) {
+                    descriptionView.setOnClickListener(v ->
+                            Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
+                                descriptionView.setText(description);
+                                cache.setDescription(description);
+                                DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                                Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                            }));
+                } else {
+                    descriptionView.setOnClickListener(null);
                 }
             } catch (final RuntimeException ignored) {
-                activity.showToast(getString(R.string.err_load_descr_failed));
+                ActivityMixin.showToast(activity, R.string.err_load_descr_failed);
             }
         }
 
-        private void handleImageClick(final Activity activity, final Spannable spannable) {
+        /** CALL IN BACKGROUND ONLY! Renders cache description into an Editable. */
+        // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+        @WorkerThread
+        private static Pair<CharSequence, Boolean> createDescriptionContent(final Activity activity, final Geocache cache, final boolean restrictLength, final TextView descriptionView) {
+
+            try {
+                //combine short and long description to the final description to render
+                String descriptionText = cache.getDescription();
+                final String shortDescriptionText = cache.getShortDescription();
+                if (StringUtils.isNotBlank(shortDescriptionText)) {
+                    final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+                    // allow up to 200 characters of HTML formatting
+                    if (index < 0 || index > 200) {
+                        descriptionText = shortDescriptionText + "\n" + descriptionText;
+                    }
+                }
+
+                final int descriptionFullLength = descriptionText.length();
+
+                //check for too-long-listing
+                final boolean textTooLong = descriptionFullLength > DESCRIPTION_MAX_SAFE_LENGTH;
+                if (textTooLong && restrictLength) {
+                    descriptionText = descriptionText.substring(0, DESCRIPTION_MAX_SAFE_LENGTH);
+                }
+
+                //Format to HTML. This takes time on long listings or those with e.g. many images...
+                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionText, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
+
+                if (StringUtils.isNotBlank(description)) {
+                    handleImageClick(activity, cache, description);
+                    //display various fixes
+                    fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
+                    fixTextColor(description, R.color.colorBackground);
+                    final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
+                    fixOldGeocheckerLink(activity, cache, description, gcLinkInfo);
+                }
+
+                // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
+                // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
+                // sometimes technically incorrect.
+                if (unknownTagsHandler.isProblematicDetected()) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (StringUtils.isNotEmpty(cache.getUrl())) {
+                        final Spanned tableNote = HtmlCompat.fromHtml(activity.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
+                        description.append("\n\n").append(TextUtils.setSpan(tableNote, new StyleSpan(Typeface.ITALIC)));
+                    }
+                }
+
+                //add warning on too-long-listing
+                if (textTooLong && restrictLength) {
+                    description.append("\n\n")
+                            .append(TextParam.id(R.string.cache_description_render_restricted_warning, descriptionFullLength, DESCRIPTION_MAX_SAFE_LENGTH * 100 / descriptionFullLength).getText(null), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+
+                return new Pair<>(description, textTooLong);
+            } catch (final RuntimeException re) {
+                return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
+            }
+        }
+
+        private static void handleImageClick(final Activity activity, final Geocache cache, final Spannable spannable) {
             final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
             for (final ImageSpan span : spans) {
                 final ClickableSpan clickableSpan = new ClickableSpan() {
@@ -1921,8 +1946,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        private void fixRelativeLinks(final Spannable spannable) {
-            final String baseUrl = ConnectorFactory.getConnector(cache).getHostUrl() + "/";
+        private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
@@ -1946,9 +1970,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          *
          * @param activity calling activity
          */
-        private void fixOldGeocheckerLink(final Activity activity) {
-            final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
-            final Spannable spannable = (Spannable) binding.description.getText();
+        private static void fixOldGeocheckerLink(final Activity activity, final Geocache cache, final Spannable spannable, final String gcLinkInfo) {
 
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
             for (final URLSpan span : spans) {
@@ -1967,21 +1989,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-    }
-
-    // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
-    // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
-    // sometimes technically incorrect.
-    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Editable description) {
-        if (unknownTagsHandler.isProblematicDetected()) {
-            final int startPos = description.length();
-            final IConnector connector = ConnectorFactory.getConnector(cache);
-            if (StringUtils.isNotEmpty(cache.getUrl())) {
-                final Spanned tableNote = HtmlCompat.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
-                description.append("\n\n").append(tableNote);
-                description.setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
     }
 
     private static void fixTextColor(final Spannable spannable, final int backgroundColor) {

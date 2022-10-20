@@ -27,6 +27,14 @@
             tools:text="This is the cache description. It might be very long..."
             tools:visibility="visible" />
 
+        <Button
+            android:id="@+id/description_render_fully"
+            style="@style/button_full"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"
+            android:text="@string/cache_description_render_fully" />
+
         <RelativeLayout
             android:id="@+id/loading"
             android:layout_width="fill_parent"
