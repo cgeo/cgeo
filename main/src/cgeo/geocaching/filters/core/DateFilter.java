@@ -158,13 +158,25 @@ public class DateFilter {
     }
 
     public String getUserDisplayableConfig() {
-        final boolean minDateSet = isRelative ? minDateOffset != -1 : minDate != null;
-        final boolean maxDateSet = isRelative ? maxDateOffset != -1 : maxDate != null;
+        String minValueString = null;
+        String maxValueString = null;
 
+        if (isRelative) {
+            if (minDateOffset != -1) {
+                minValueString = Formatter.formatDaysAgo(minDateOffset);
+            }
+            if (maxDateOffset != -1) {
+                maxValueString = Formatter.formatDaysAgo(maxDateOffset);
+            }
+        } else {
+            if (minDate != null) {
+                minValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(minDate);
+            }
+            if (maxDate != null) {
+                maxValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(maxDate);
+            }
+        }
 
-        final String minDateString = minDateSet ? (isRelative ? Formatter.formatDaysAgo(minDateOffset) : DAY_DATE_FORMAT_USER_DISPLAY.format(minDate)) : "";
-        final String maxDateString = maxDateSet ? (isRelative ? Formatter.formatDaysAgo(maxDateOffset) : DAY_DATE_FORMAT_USER_DISPLAY.format(maxDate)) : "";
-
-        return UserDisplayableStringUtils.getUserDisplayableConfig(minDateSet, maxDateSet, minDateString, maxDateString);
+        return UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
     }
 }
