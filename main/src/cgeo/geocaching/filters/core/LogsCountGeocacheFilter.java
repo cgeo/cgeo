@@ -103,7 +103,7 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
 
     @Override
     protected String getUserDisplayableConfig() {
-        return (logType == null ? "" : logType.getL10n() + ":") + super.getUserDisplayableConfig();
+        return (logType == null ? "" : logType.getL10n() + ": ") + super.getUserDisplayableConfig();
     }
 
 }
