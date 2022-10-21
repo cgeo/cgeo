@@ -18,3 +18,4 @@
 - New: Status filter for DNF
 - New: Display elevation on home screen (if available)
 - New: Allow manual input of values in filters using sliders
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
