@@ -8,6 +8,7 @@
 - New: Basic HTML formatting support for definition lists (dl/dt/dd)
 - New: Open zoomable image view when tapping on listing images
 - Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
 
 ### General
 - New: View for pending downloads
