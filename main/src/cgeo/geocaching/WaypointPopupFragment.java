@@ -81,7 +81,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             binding.toolbar.toolbar.setTitle(wpCode);
             binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false).getDrawable());
 
-            binding.title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
+            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
             //Waypoint name

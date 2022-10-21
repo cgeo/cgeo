@@ -1163,6 +1163,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CacheDetailsCreator details = new CacheDetailsCreator(activity, binding.detailsList);
 
             // cache name (full name), may be editable
+            // Not using colored cache names at this place to have at least one place without any formatting to support visually impaired users
             final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
             activity.addContextMenu(cachename);
             if (cache.supportsNamechange()) {

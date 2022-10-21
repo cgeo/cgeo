@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -291,13 +291,13 @@ public final class TextUtils {
         return containsHtml(html) ? trimSpanned(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)).toString() : html;
     }
 
-    public static SpannableString coloredCacheText(@NonNull final Geocache cache, @NonNull final String text) {
+    public static SpannableString coloredCacheText(final Context context, @NonNull final Geocache cache, @NonNull final String text) {
         final SpannableString span = new SpannableString(text);
         if (cache.isDisabled() || cache.isArchived()) { // strike
             span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         if (cache.isArchived()) {
-            span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(CgeoApplication.getInstance(), R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            span.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context, R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return span;
     }
