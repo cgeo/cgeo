@@ -6,6 +6,8 @@
 - Fix: Log image labelled "Image 1" even if only a single image added
 - New: GEOCODE log template placeholder
 - New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
 
 ### General
 - New: View for pending downloads
