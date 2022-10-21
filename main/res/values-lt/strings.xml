@@ -92,7 +92,7 @@
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
-    <string name="log_note"> Pastaba</string>
+    <string name="log_note">Rašyti pastabą</string>
     <string name="log_published">Publikuota</string>
     <string name="log_enabled">Įjungta</string>
     <string name="log_disabled">Išjungta</string>
@@ -312,7 +312,7 @@
     <string name="loc_low_power">Energijos taupymas</string>
     <string name="loc_home">Namų koordinatės</string>
     <string name="loc_sat">Palydovai</string>
-    <string name="loc_trying">Bandoma nustatyti</string>
+    <string name="loc_trying">Bandoma nustatyti vietą</string>
     <string name="loc_no_addr">Nežinomas adresas</string>
     <string name="loc_gps_disabled">GPS išjungtas</string>
     <string name="loc_copied_clipboard">Dabartinė vieta nukopijuota į iškarpinę</string>
