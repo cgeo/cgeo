@@ -9,13 +9,14 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.LastFoundGeocacheFilter;
+import cgeo.geocaching.filters.core.NotGeocacheFilter;
+import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.utils.functions.Action2;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Stack;
 
@@ -35,7 +36,7 @@ public class UserDisplayableStringTest {
         final String minValueOutput = "2.0";
         final String maxValueOutput = "4.0";
 
-        testUserDisplayStrings(f, (min, max) -> f.setMinMaxRange(min, max), minValue, maxValue, minValueOutput, maxValueOutput);
+        testUserDisplayStringsForRange(f, f::setMinMaxRange, minValue, maxValue, minValueOutput, maxValueOutput);
     }
 
     @Test
@@ -49,7 +50,7 @@ public class UserDisplayableStringTest {
         final String minValueOutput = "200%";
         final String maxValueOutput = "400%";
 
-        testUserDisplayStrings(f, (min, max) -> f.setMinMaxRange(min, max), minValue, maxValue, minValueOutput, maxValueOutput);
+        testUserDisplayStringsForRange(f, f::setMinMaxRange, minValue, maxValue, minValueOutput, maxValueOutput);
     }
 
     @Test
@@ -72,14 +73,14 @@ public class UserDisplayableStringTest {
         final String minValueOutput = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.format(minValue);
         final String maxValueOutput = DateFilter.DAY_DATE_FORMAT_USER_DISPLAY.format(maxValue);
 
-        testUserDisplayStrings(f, (min, max) -> f.setMinMaxDate(min, max), minValue, maxValue, minValueOutput, maxValueOutput);
+        testUserDisplayStringsForRange(f, f::setMinMaxDate, minValue, maxValue, minValueOutput, maxValueOutput);
     }
 
     @Test
     public void testAndFilter() {
         final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
 
-        final List<CacheType> testTypes = new Stack<>();
+        final Stack<CacheType> testTypes = new Stack<>();
         testTypes.add(CacheType.TRADITIONAL);
         typeFilter.setValues(testTypes);
 
@@ -97,9 +98,53 @@ public class UserDisplayableStringTest {
         assertThat(gcFilter.toUserDisplayableString()).as("display for filter").isEqualTo(valueOutput);
     }
 
-    private <T> void testSingleUserDisplayString(final IGeocacheFilter filter, final Action2<T, T> filterSetter,
-                                                 final T minValue, final T maxValue,
-                                                 final String valueOutput) {
+    @Test
+    public void testOrFilter() {
+        final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
+
+        final Stack<CacheType> testTypes = new Stack<>();
+        testTypes.add(CacheType.TRADITIONAL);
+        typeFilter.setValues(testTypes);
+
+        final OrGeocacheFilter filterConfig = new OrGeocacheFilter();
+        filterConfig.addChild(typeFilter);
+        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
+        statusFilter.setStatusFound(true);
+        statusFilter.setStatusOwned(true);
+        filterConfig.addChild(statusFilter);
+
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
+
+        final String valueOutput = "Cache Type: Trad OR Status: Found=Yes, Owned=Yes";
+
+        assertThat(gcFilter.toUserDisplayableString()).as("display for filter").isEqualTo(valueOutput);
+    }
+
+    @Test
+    public void testNotFilter() {
+        final TypeGeocacheFilter typeFilter = GeocacheFilterType.TYPE.create();
+
+        final Stack<CacheType> testTypes = new Stack<>();
+        testTypes.add(CacheType.TRADITIONAL);
+        typeFilter.setValues(testTypes);
+
+        final NotGeocacheFilter filterConfig = new NotGeocacheFilter();
+        filterConfig.addChild(typeFilter);
+        final StatusGeocacheFilter statusFilter = GeocacheFilterType.STATUS.create();
+        statusFilter.setStatusFound(true);
+        statusFilter.setStatusOwned(true);
+        filterConfig.addChild(statusFilter);
+
+        final GeocacheFilter gcFilter = GeocacheFilter.create("", false, false, filterConfig);
+
+        final String valueOutput = "NOT[Cache Type: Trad, Status: Found=Yes, Owned=Yes]";
+
+        assertThat(gcFilter.toUserDisplayableString()).as("display for filter").isEqualTo(valueOutput);
+    }
+
+    private <T> void testSingleUserDisplayStringForRange(final IGeocacheFilter filter, final Action2<T, T> filterSetter,
+                                                         final T minValue, final T maxValue,
+                                                         final String valueOutput) {
         final int displayLevel = 1;
         if (filterSetter != null) {
             filterSetter.call(minValue, maxValue);
@@ -109,13 +154,13 @@ public class UserDisplayableStringTest {
         assertThat(filter.toUserDisplayableString(displayLevel)).as("display for filter").isEqualTo(valueOutput != null ? filterName + valueOutput : null);
     }
 
-    private <T> void testUserDisplayStrings(final IGeocacheFilter filter, final Action2<T, T> filterSetter,
-                                            final T minValue, final T maxValue,
-                                            final String minValueOutput, final String maxValueOutput) {
-        testSingleUserDisplayString(filter, filterSetter, null, null, null);
-        testSingleUserDisplayString(filter, filterSetter, minValue, null, ">" + minValueOutput);
-        testSingleUserDisplayString(filter, filterSetter, minValue, maxValue, minValueOutput + "-" + maxValueOutput);
-        testSingleUserDisplayString(filter, filterSetter, null, maxValue, "<" + maxValueOutput);
-        testSingleUserDisplayString(filter, filterSetter, maxValue, maxValue, maxValueOutput);
+    private <T> void testUserDisplayStringsForRange(final IGeocacheFilter filter, final Action2<T, T> filterSetter,
+                                                    final T minValue, final T maxValue,
+                                                    final String minValueOutput, final String maxValueOutput) {
+        testSingleUserDisplayStringForRange(filter, filterSetter, null, null, null);
+        testSingleUserDisplayStringForRange(filter, filterSetter, minValue, null, ">" + minValueOutput);
+        testSingleUserDisplayStringForRange(filter, filterSetter, minValue, maxValue, minValueOutput + "-" + maxValueOutput);
+        testSingleUserDisplayStringForRange(filter, filterSetter, null, maxValue, "<" + maxValueOutput);
+        testSingleUserDisplayStringForRange(filter, filterSetter, maxValue, maxValue, maxValueOutput);
     }
 }
