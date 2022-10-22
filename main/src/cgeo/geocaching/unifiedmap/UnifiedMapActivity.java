@@ -36,6 +36,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -53,10 +54,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
+import java.util.HashSet;
+import java.util.Set;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
@@ -234,6 +238,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             compatibilityMapMode = MapMode.SINGLE;
         } else if (mapType.type == UMTT_TargetCoords) {
             compatibilityMapMode = MapMode.COORDS;
+        } else if (mapType.type == UMTT_SearchResult) {
+            compatibilityMapMode = MapMode.LIST;
         } else {
             compatibilityMapMode = MapMode.LIVE;
         }
@@ -291,6 +297,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     tileProvider.getMap().setCenter(Settings.getUMMapCenter());
                     break;
                 case UMTT_TargetGeocode:
+                    // load cache, focus map on it, and set it as target
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
                         geoitemLayer.add(cache);
@@ -299,7 +306,21 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     }
                     break;
                 case UMTT_TargetCoords:
+                    // set given coords as map center
                     tileProvider.getMap().setCenter(mapType.coords);
+                    break;
+                case UMTT_SearchResult:
+                    // load list of caches and scale map to see them all
+                    // @todo: What about their waypoints?
+                    final Set<Geocache> tempCaches = new HashSet<>();
+                    for (String geocode : mapType.searchResult.getGeocodes()) {
+                        final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                        if (temp != null && temp.getCoords() != null) {
+                            tempCaches.add(temp);
+                            geoitemLayer.add(temp);
+                        }
+                        tileProvider.getMap().zoomToBounds(Viewport.containing(tempCaches));
+                    }
                     break;
                 default:
                     // nothing to do
@@ -310,21 +331,33 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 tileProvider.getMap().setCenter(Settings.getUMMapCenter());
                 overridePositionAndZoom = false;
             }
-            // @todo for testing purposes only
-            /*
-            if (geoitemLayer != null) {
-                geoitemLayer.add("GC9C8G5");
-                geoitemLayer.add("GC9RZT2");
-                geoitemLayer.add("GC37RRG");
-                geoitemLayer.add("GC360D1");
-                geoitemLayer.add("GC8902H");
-            }
-            */
+            setTitle();
         }
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
         onResume();
+    }
+
+    private void setTitle() {
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(MapUtils.getColoredValue(calculateTitle()));
+        }
+    }
+
+    @NonNull
+    private String calculateTitle() {
+        /* @todo live mode
+        return getString(R.string.map_live);
+        */
+        if (mapType.type == UMTT_TargetGeocode) {
+            final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null && cache.getCoords() != null) {
+                return cache.getName();
+            }
+        }
+        return StringUtils.defaultIfEmpty(mapType.title, getString(R.string.map_offline));
     }
 
     private void configMapChangeListener(final boolean enabled) {
