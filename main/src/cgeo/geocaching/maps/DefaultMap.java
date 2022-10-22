@@ -101,13 +101,24 @@ public final class DefaultMap {
     }
 
     public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title, final int fromList) {
-        new MapOptions(search, title, fromList).startIntent(fromActivity, cls);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in searchResult mode (item count: " + search.getGeocodes().size() + ", title='" + title + "', fromList=" + fromList + ")");
+            new UnifiedMapType(search, title, fromList).launchMap(fromActivity);
+        } else {
+            new MapOptions(search, title, fromList).startIntent(fromActivity, cls);
+        }
     }
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
-        final MapOptions mo = new MapOptions(search, title, fromList);
-        mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
-        mo.startIntent(fromActivity, getDefaultMapClass());
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in searchResult mode (item count: " + search.getGeocodes().size() + ", title='" + title + "', fromList=" + fromList + ")");
+            // @todo: filter
+            new UnifiedMapType(search, title, fromList).launchMap(fromActivity);
+        } else {
+            final MapOptions mo = new MapOptions(search, title, fromList);
+            mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+            mo.startIntent(fromActivity, getDefaultMapClass());
+        }
     }
 
 

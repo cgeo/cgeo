@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.location.Geopoint;
 
 import android.content.Context;
@@ -15,13 +16,17 @@ public class UnifiedMapType implements Parcelable {
         UMTT_Undefined,         // invalid state
         UMTT_PlainMap,          // open map (from bottom navigation)
         UMTT_TargetGeocode,     // set cache or waypoint as target
-        UMTT_TargetCoords       // set coords as target
+        UMTT_TargetCoords,      // set coords as target
+        UMTT_SearchResult       // show and scale to searchresult
         // to be extended
     }
 
     public UnifiedMapTypeType type = UnifiedMapTypeType.UMTT_Undefined;
     public String target = null;
     public Geopoint coords = null;
+    public SearchResult searchResult = null;
+    public String title = null;
+    public int fromList = 0;
     // reminder: add additional fields to parcelable methods below
 
     /** default UnifiedMapType is PlainMap with no further data */
@@ -41,6 +46,14 @@ public class UnifiedMapType implements Parcelable {
         this.coords = coords;
     }
 
+    /** show and scale to search result */
+    public UnifiedMapType(final SearchResult searchResult, final String title, final int fromList) {
+        type = UnifiedMapTypeType.UMTT_SearchResult;
+        this.searchResult = searchResult;
+        this.title = title;
+        this.fromList = fromList;
+    }
+
     /** launch fresh map with current settings */
     public void launchMap(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
@@ -55,6 +68,9 @@ public class UnifiedMapType implements Parcelable {
         type = UnifiedMapTypeType.values()[in.readInt()];
         target = in.readString();
         coords = in.readParcelable(Geopoint.class.getClassLoader());
+        searchResult = in.readParcelable(SearchResult.class.getClassLoader());
+        title = in.readString();
+        fromList = in.readInt();
         // ...
     }
 
@@ -68,6 +84,9 @@ public class UnifiedMapType implements Parcelable {
         dest.writeInt(type.ordinal());
         dest.writeString(target);
         dest.writeParcelable(coords, 0);
+        dest.writeParcelable(searchResult, 0);
+        dest.writeString(title);
+        dest.writeInt(fromList);
         // ...
     }
 
