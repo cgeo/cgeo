@@ -367,8 +367,8 @@
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
     <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
     <string name="caches_store_background_option_refresh">Atnaujinti ir pridėti prie sąrašo</string>
-    <string name="caches_store_background_result_failed">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
-    <string name="caches_store_background_result_canceled">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">Atsisiųsta %d slėptuvė</item>
         <item quantity="few">Atsisiųstos %d slėptuvės</item>
@@ -1241,6 +1241,8 @@
     <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
+    <string name="cache_description_rendering">Pateikiamas aprašymas, palaukite…</string>
+    <string name="cache_description_render_fully">Pateikite pilną aprašymą</string>
     <string name="cache_area_description">Vietovės aprašymas</string>
     <string name="cache_cache_description">Slėptuvės aprašymas</string>
     <string name="cache_virtual_description">Virtual slėptuvės klausimai</string>
