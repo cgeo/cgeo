@@ -322,7 +322,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                     binding.navAccuracy.setText(null);
                 }
 
-                binding.navLocation.setText(geo.getCoords() + GeoHeightUtils.getAverageHeight(geo, true, false));
+                binding.navLocation.setText(geo.getCoords() + GeoHeightUtils.getAverageHeight(geo, false));
 
                 updateDistanceInfo(geo);
 
