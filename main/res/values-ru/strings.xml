@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Ничего не делать</string>
     <string name="caches_store_background_option_add_to_list">Добавить в список</string>
     <string name="caches_store_background_option_refresh">Обновить и добавить в список</string>
-    <string name="caches_store_background_result_failed">Не удалось загрузить, скачано %1$d/%2$d тайников</string>
-    <string name="caches_store_background_result_canceled">Загрузка отменена, скачано %1$d/%2$d тайников</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Не удалось загрузить, скачано %1$d/%2$d тайников</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Загрузка отменена, скачано %1$d/%2$d тайников</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d тайник загружен</item>
         <item quantity="few">%d тайника загружено</item>
