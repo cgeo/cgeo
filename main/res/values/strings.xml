@@ -394,8 +394,8 @@
     <string name="caches_store_background_option_nothing">Do nothing</string>
     <string name="caches_store_background_option_add_to_list">Add to list</string>
     <string name="caches_store_background_option_refresh">Refresh and add to list</string>
-    <string name="caches_store_background_result_failed">Download failed, %1$d/%2$d caches were downloaded</string>
-    <string name="caches_store_background_result_canceled">Download canceled, %1$d/%2$d caches were downloaded</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download failed, %1$d/%2$d caches were downloaded</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download canceled, %1$d/%2$d caches were downloaded</string>
     <plurals name="caches_store_background_result">
         <item quantity="zero">%d caches downloaded</item>
         <item quantity="one">%d cache downloaded</item>
@@ -1363,7 +1363,7 @@
     <string name="cache_description">Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
     <string name="cache_description_rendering">Rendering description, please wait…</string>
-    <string name="cache_description_render_restricted_warning">Warning: Description is very large (%1$d chars). Only first %2$d%% were rendered.</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warning: Description is very large (%1$d chars). Only first %2$d%% were rendered.</string>
     <string name="cache_description_render_fully">Render complete description</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Cache Description</string>
