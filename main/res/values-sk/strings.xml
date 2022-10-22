@@ -367,8 +367,8 @@
     <string name="caches_store_background_option_nothing">Nerobiť nič</string>
     <string name="caches_store_background_option_add_to_list">Pridať do zoznamu</string>
     <string name="caches_store_background_option_refresh">Obnoviť a pridať do zoznamu</string>
-    <string name="caches_store_background_result_failed">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
-    <string name="caches_store_background_result_canceled">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d keška stiahnutá</item>
         <item quantity="few">%d kešky stiahnuté</item>
