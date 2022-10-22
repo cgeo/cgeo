@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
     <string name="caches_store_background_option_add_to_list">Zur Liste hinzufügen</string>
     <string name="caches_store_background_option_refresh">Aktualisieren und zur Liste hinzufügen</string>
-    <string name="caches_store_background_result_failed">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
-    <string name="caches_store_background_result_canceled">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d Cache heruntergeladen</item>
         <item quantity="other">%d Caches heruntergeladen</item>
@@ -1211,6 +1211,8 @@
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
     <string name="cache_description">Beschreibung</string>
     <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
+    <string name="cache_description_rendering">Formatiere Beschreibung, bitte warten…</string>
+    <string name="cache_description_render_fully">Komplette Beschreibung anzeigen</string>
     <string name="cache_area_description">Bereichsbeschreibung</string>
     <string name="cache_cache_description">Cachebeschreibung</string>
     <string name="cache_virtual_description">Virtuelle Frage</string>
