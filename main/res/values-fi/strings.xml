@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
     <string name="caches_store_background_option_add_to_list">Lisää listaan</string>
     <string name="caches_store_background_option_refresh">Päivitä ja lisää listaan</string>
-    <string name="caches_store_background_result_failed">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
-    <string name="caches_store_background_result_canceled">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d kätkö ladattu</item>
         <item quantity="other">%d kätköä ladattu</item>
@@ -1211,6 +1211,8 @@
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
+    <string name="cache_description_rendering">Muodostetaan kuvausta, odota…</string>
+    <string name="cache_description_render_fully">Muodosta täysi kuvaus</string>
     <string name="cache_area_description">Alueen kuvaus</string>
     <string name="cache_cache_description">Kätkön kuvaus</string>
     <string name="cache_virtual_description">Virtuaalinen kysymys</string>
