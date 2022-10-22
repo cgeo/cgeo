@@ -362,8 +362,8 @@
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
     <string name="caches_store_background_option_add_to_list">Aggiungi alla lista</string>
     <string name="caches_store_background_option_refresh">Aggiorna e aggiungi alla lista</string>
-    <string name="caches_store_background_result_failed">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
-    <string name="caches_store_background_result_canceled">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache scaricato</item>
         <item quantity="other">%d cache scaricati</item>
