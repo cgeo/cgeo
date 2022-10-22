@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Ne rien faire</string>
     <string name="caches_store_background_option_add_to_list">Ajouter à la liste</string>
     <string name="caches_store_background_option_refresh">Actualiser et ajouter à la liste</string>
-    <string name="caches_store_background_result_failed">Le téléchargement a échoué, %1$d/%2$d caches ont été téléchargées</string>
-    <string name="caches_store_background_result_canceled">Téléchargement annulé, %1$d/%2$d caches ont été téléchargées</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Le téléchargement a échoué, %1$d/%2$d caches ont été téléchargées</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Téléchargement annulé, %1$d/%2$d caches ont été téléchargées</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache téléchargée</item>
         <item quantity="other">%d caches téléchargées</item>
