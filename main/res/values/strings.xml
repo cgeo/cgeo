@@ -1363,7 +1363,7 @@
     <string name="cache_description">Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
     <string name="cache_description_rendering">Rendering description, please wait…</string>
-    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warning: Description is very large (%1$d chars). Only first %2$d%% were rendered.</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warning: Description is very large (%1$d chars). Only first %2$d%% are displayed.</string>
     <string name="cache_description_render_fully">Render complete description</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Cache Description</string>

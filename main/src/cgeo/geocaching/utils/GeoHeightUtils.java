@@ -14,17 +14,21 @@ public class GeoHeightUtils {
     }
 
     /** returns a formatted height string, empty, if height==0 */
-    public static String getAverageHeight(final GeoData geo, final boolean withSeparator) {
+    public static String getAverageHeight(final GeoData geo, final boolean onlyFullReadings) {
         // remember new altitude reading, and calculate average from past MAX_READINGS readings
         if (geo.hasAltitude() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || geo.getVerticalAccuracyMeters() > 0.0)) {
             altitudeReadings[altitudeReadingPos] = geo.getAltitude();
             altitudeReadingPos = (++altitudeReadingPos) % altitudeReadings.length;
         }
-        double averageAltitude = altitudeReadings[0];
-        for (int i = 1; i < altitudeReadings.length; i++) {
-            averageAltitude += altitudeReadings[i];
+        double averageAltitude = 0;
+        int countReadings = 0;
+        for (double altitude : altitudeReadings) {
+            averageAltitude += altitude;
+            if (altitude != 0) {
+                countReadings++;
+            }
         }
         averageAltitude /= (double) altitudeReadings.length;
-        return averageAltitude == 0 ? "" : (withSeparator ? Formatter.SEPARATOR : "") + Units.getDistanceFromMeters((float) averageAltitude);
+        return averageAltitude == 0 || (onlyFullReadings && countReadings < 5) ? "" : Formatter.SEPARATOR + (countReadings < 5 ? "~ " : "") + Units.getDistanceFromMeters((float) averageAltitude);
     }
 }
