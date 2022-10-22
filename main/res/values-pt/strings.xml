@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
     <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
     <string name="caches_store_background_option_refresh">Actualizar e adicionar à lista</string>
-    <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
-    <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache transferida</item>
         <item quantity="other">%d caches transferidas</item>
