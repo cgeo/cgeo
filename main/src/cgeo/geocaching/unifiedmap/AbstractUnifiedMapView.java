@@ -9,12 +9,15 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
+import java.lang.ref.WeakReference;
 
 import org.oscim.core.BoundingBox;
 
+
 public abstract class AbstractUnifiedMapView<T> {
 
+    protected WeakReference<UnifiedMapActivity> activityRef;
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
@@ -25,7 +28,8 @@ public abstract class AbstractUnifiedMapView<T> {
     protected Runnable onMapReadyTasks = null;
     protected boolean usesOwnBearingIndicator = true;
 
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+    public void init(final UnifiedMapActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+        activityRef = new WeakReference<>(activity);
         mapRotation = Settings.getMapRotation();
         this.delayedZoomTo = delayedZoomTo;
         this.delayedCenterTo = delayedCenterTo;
@@ -126,6 +130,18 @@ public abstract class AbstractUnifiedMapView<T> {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
             delayedZoomTo = -1;
         }
+    }
+
+    // ========================================================================
+    // Map tap handling
+
+    /** transmits tap on map to activity */
+    protected void onTapCallback(final double latitude, final double longitude, final boolean isLongTap) {
+        final UnifiedMapActivity activity = activityRef.get();
+        if (activity == null) {
+            throw new IllegalStateException("map tap handler: lost connection to map activity");
+        }
+        activity.onTap(latitude, longitude, isLongTap);
     }
 
     // ========================================================================

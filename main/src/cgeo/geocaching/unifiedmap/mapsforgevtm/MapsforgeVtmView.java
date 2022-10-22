@@ -7,14 +7,13 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import android.app.Activity;
 import android.view.View;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -24,6 +23,9 @@ import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
 import org.oscim.core.Tile;
+import org.oscim.event.Gesture;
+import org.oscim.event.GestureListener;
+import org.oscim.event.MotionEvent;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
 import org.oscim.map.Map;
@@ -52,7 +54,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     protected MapsforgeThemeHelper themeHelper;
 
     @Override
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+    public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
@@ -63,6 +65,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         themeHelper = new MapsforgeThemeHelper(activity);
+        mMap.layers().add(new MapEventsReceiver(mMap));
         onMapReadyTasks.run();
     }
 
@@ -260,6 +263,30 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     private void zoomInOut(final boolean zoomIn) {
         final int zoom = getCurrentZoom();
         setZoom(zoomIn ? zoom + 1 : zoom - 1);
+    }
+
+    // ========================================================================
+    // map events receiver
+
+    class MapEventsReceiver extends Layer implements GestureListener {
+
+        MapEventsReceiver(final Map map) {
+            super(map);
+        }
+
+        @Override
+        public boolean onGesture(final Gesture g, final MotionEvent e) {
+            if (g instanceof Gesture.Tap) {
+                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+                onTapCallback(p.getLatitude(), p.getLongitude(), false);
+                return true;
+            } else if (g instanceof Gesture.LongPress) {
+                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+                onTapCallback(p.getLatitude(), p.getLongitude(), true);
+                return true;
+            }
+            return false;
+        }
     }
 
     // ========================================================================

@@ -653,6 +653,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     // ========================================================================
+    // Map tap handling
+
+    public void onTap(final double latitude, final double longitude, final boolean isLongTap) {
+        Log.e("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitude + ", " + longitude + ")");
+
+    }
+
+    // ========================================================================
     // Lifecycle methods
 
     @Override

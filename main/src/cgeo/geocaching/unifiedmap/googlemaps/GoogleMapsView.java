@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -17,7 +18,6 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,14 +32,14 @@ import org.oscim.core.BoundingBox;
  * GoogleMapsView - Contains the view handling parts specific to Google Maps
  * To be called by UnifiedMapActivity (mostly)
  */
-public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback {
+public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private View rootView;
     private final GoogleMapController mapController = new GoogleMapController();
 
     @Override
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+    public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
@@ -91,7 +91,19 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         configMapChangeListener(true);
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
         onMapReadyTasks.run();
+    }
+
+    @Override
+    public void onMapClick(final LatLng point) {
+        onTapCallback(point.latitude, point.longitude, false);
+    }
+
+    @Override
+    public void onMapLongClick(final LatLng point) {
+        onTapCallback(point.latitude, point.longitude, true);
     }
 
     @Override
