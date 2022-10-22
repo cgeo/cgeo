@@ -1,18 +1,23 @@
 
 ### Kartta
-- New: Allow change of track's display name
+- Uusi: Salli reitin näyttönimen muuttaminen
 
 ### Kätkön tiedot
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Korjaus: Lokikuva merkitty "Kuva 1" vaikka vain yksi kuva lisätty
+- Uusi: GEOCODE-lokimallin paikkamerkki
+- Uusi: PerusHTML-muotoilutuki määritelmälistoille (dl/dt/dd)
+- Uusi: Avaa zoomattava kuvanäkymä kun napautetaan kuvauksessa olevia kuvia
+- Korjaa: Avaa kuvausten linkit sisäisessä selaimessa (jos aktivoitu)
+- Muutos: Renderöi kätkön kuvaus taustalla ja rajaa pituus 50 000 merkkiin oletuksena
 
 ### Yleinen
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
+- Uusi: Näkymä odottaville latauksille
+- Uusi: Lisää kätkön nimi / luettelon nimi tiedoston nimeen GPX- viennissä
+- Muutos: Poistettu "Tunnista Android-selaimeksi" asetus
+- Uusi: Tarkista odottavat lataukset (kartat / reititystiedot) käynnistettäessä
+- Uusi: Salli ladattavien tiedostojen valinta
+- Uusi: suodatin DNF:lle
+- Uusi: Näytä korkeus aloitusnäytöllä (jos saatavilla)
+- Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
+- Uusi: Ota käyttöön muokattujen koordinaattien lataaminen GPX-tiedostosta tuoduille kätköille, kun kätkössä on reittipiste "ORIGINAL"
+- Muutos: Paranna suodattimen tilarivin tekstiä
