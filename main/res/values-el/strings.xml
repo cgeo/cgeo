@@ -359,8 +359,8 @@
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
     <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
     <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
-    <string name="caches_store_background_result_failed">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
-    <string name="caches_store_background_result_canceled">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
@@ -1201,6 +1201,9 @@
     <string name="cache_personal_note_upload_cancelled">Το ανέβασμα προσωπικής σημείωσης ακυρώθηκε</string>
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
+    <string name="cache_description_rendering">Επεξεργασία  αποτύπωσης, παρακαλώ περιμένετε…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Προειδοποίηση: Η περιγραφή είναι πολύ μεγάλη (%1$d χαρακτήρες). Μόνο οι πρώτοι %2$d%% εμφανίζονται.</string>
+    <string name="cache_description_render_fully">Αποτύπωση πλήρους περιγραφής</string>
     <string name="cache_area_description">Περιγραφή περιοχής</string>
     <string name="cache_cache_description">Περιγραφή κρύπτης</string>
     <string name="cache_virtual_description">Εικονική ερώτηση</string>
