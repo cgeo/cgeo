@@ -6,6 +6,9 @@
 - Corregido: Imagen de registro etiquetada como "Imagen 1" incluso si sólo se añade una sola imagen
 - Nuevo: Marcador de plantilla del tipo de registro GEOCODE
 - Nuevo: Soporte básico de formato HTML para definir listas (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
 
 ### General
 - Nuevo: Ver las descargas pendientes
@@ -16,3 +19,5 @@
 - Nuevo: Filtro de estado para DNF
 - Nuevo: Mostrar elevación en la pantalla de inicio (si está disponible)
 - Nuevo: Ahora puede introducir manualmente valores en filtros usando deslizadores
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
+- Change: Improve filter status line text
