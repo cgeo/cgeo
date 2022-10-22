@@ -478,10 +478,18 @@ public final class ImageUtils {
             }, htmlText);
     }
 
-    public static void forEachImageUrlInHtml(final androidx.core.util.Consumer<String> callback, final String ... htmlText) {
+    public static void forEachImageUrlInHtml(@Nullable final androidx.core.util.Consumer<String> callback, @Nullable final String ... htmlText) {
+        //shortcut for nulls
+        if (htmlText == null || callback == null) {
+            return;
+        }
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "forEachImageUrlInHtml")) {
             final boolean debug = Log.isDebug();
             for (final String text : htmlText) {
+                //skip null or empty texts
+                if (StringUtils.isBlank(text)) {
+                    continue;
+                }
                 final AtomicInteger count = debug ? new AtomicInteger(0) : null;
                 if (debug) {
                     cLog.add("size:" + text.length());
