@@ -361,8 +361,8 @@
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
     <string name="caches_store_background_option_add_to_list">목록에 추가</string>
     <string name="caches_store_background_option_refresh">새로 고침 및 목록에 추가</string>
-    <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
-    <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
     <plurals name="caches_store_background_result">
         <item quantity="other">%d 개 캐시 다운로드했음</item>
     </plurals>
