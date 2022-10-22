@@ -239,7 +239,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             }
 
             currentCoords = geo.getCoords();
-            final String averageHeight = GeoHeightUtils.getAverageHeight(geo, true);
+            final String averageHeight = GeoHeightUtils.getAverageHeight(geo, true, true);
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
                     binding.navLocation.setText(R.string.loc_no_addr);
