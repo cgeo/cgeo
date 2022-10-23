@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.storage.DataStore;
 
 import java.util.HashMap;
@@ -16,11 +17,11 @@ public abstract class AbstractGeoitemLayer<T> {
     protected final HashMap<String, GeoItemCache<T>> items = new HashMap<>();
 
     public static class GeoItemCache<T> {
-        public GeoPoint geopoint;
+        public RouteItem routeItem;
         public T mapItem;
 
-        public GeoItemCache(final Geopoint geopoint, final T mapItem) {
-            this.geopoint = new GeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6());
+        public GeoItemCache(final RouteItem routeItem, final T mapItem) {
+            this.routeItem = routeItem;
             this.mapItem = mapItem;
         }
     }
@@ -48,13 +49,15 @@ public abstract class AbstractGeoitemLayer<T> {
         }
     }
 
-    public LinkedList<String> find(final BoundingBox boundingBox) {
-        final LinkedList<String> result = new LinkedList<>();
+    public LinkedList<RouteItem> find(final BoundingBox boundingBox) {
+        final LinkedList<RouteItem> result = new LinkedList<>();
         synchronized (items) {
             for (String geocode : items.keySet()) {
                 final GeoItemCache<T> item = items.get(geocode);
-                if (item != null && boundingBox.contains(item.geopoint)) {
-                    result.add(geocode);
+                assert item != null;
+                final Geopoint geopoint = item.routeItem.getPoint();
+                if (boundingBox.contains(new GeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6()))) {
+                    result.add(item.routeItem);
                 }
             }
         }

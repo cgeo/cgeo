@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -114,6 +115,32 @@ public class GeoItemSelectorUtils {
         tv.setCompoundDrawablesWithIntrinsicBounds(geoitemRef.getMarkerId(), 0, 0, 0);
 
 
+        return view;
+    }
+
+    public static View createRouteItemView(final Context context, final RouteItem routeItem, final View view) {
+        if (StringUtils.isNotEmpty(routeItem.getGeocode())) {
+            if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
+                final Geocache cache = DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null) {
+                    return createGeocacheItemView(context, cache, view);
+                }
+            } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT) {
+                final Waypoint waypoint = DataStore.loadWaypoint(routeItem.getWaypointId());
+                if (waypoint != null) {
+                    return createWaypointItemView(context, waypoint, view);
+                }
+            }
+        }
+
+        // Fallback - neither a cache nor waypoint. should never happen...
+        final TextView tv = view.findViewById(R.id.text);
+        tv.setText(routeItem.getIdentifier());
+
+        final TextView infoView = view.findViewById(R.id.info);
+        infoView.setText(routeItem.getGeocode());
+
+        // tv.setCompoundDrawablesWithIntrinsicBounds(routeItem.getMarkerId(), 0, 0, 0);
         return view;
     }
 

@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -42,7 +43,7 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
 
         Log.e("addGeoitem");
         synchronized (items) {
-            items.put(cache.getGeocode(), new GeoItemCache<>(coords, item));
+            items.put(cache.getGeocode(), new GeoItemCache<>(new RouteItem(cache), item));
         }
     }
 
