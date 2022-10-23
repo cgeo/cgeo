@@ -13,8 +13,12 @@ import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
+import android.graphics.Point;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -26,6 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.RuntimeRemoteException;
 import org.oscim.core.BoundingBox;
 
 /**
@@ -43,6 +48,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
+        mMapView = activity.findViewById(R.id.mapViewGM);
 
         // add map fragment
         final SupportMapFragment mapFragment = SupportMapFragment.newInstance();
@@ -93,17 +99,9 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         positionLayer = configPositionLayer(true);
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
+        mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
+        new GestureDetector(activityRef.get(), new GestureListener()); // detect single tap events
         onMapReadyTasks.run();
-    }
-
-    @Override
-    public void onMapClick(final LatLng point) {
-        onTapCallback(point.latitude, point.longitude, false);
-    }
-
-    @Override
-    public void onMapLongClick(final LatLng point) {
-        onTapCallback(point.latitude, point.longitude, true);
     }
 
     @Override
@@ -227,6 +225,37 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
             positionLayer = null;
         }
         return null;
+    }
+
+    // ========================================================================
+    // Tap handling methods
+
+    @Override
+    public void onMapClick(final LatLng point) {
+        onTapCallback((int) (point.latitude * 1E6), (int) (point.longitude * 1E6), false);
+    }
+
+    @Override
+    public void onMapLongClick(final LatLng point) {
+        onTapCallback((int) (point.latitude * 1E6), (int) (point.longitude * 1E6), true);
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onSingleTapUp(final MotionEvent e) {
+            if (mMap != null) {
+                try {
+                    final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) e.getX(), (int) e.getY()));
+                    Log.e("tap on " + latLng);
+                    // @todo: check all markers whether the got hit by this tap
+                    // and emit onTapCallback(geocode, longtap y/n) for every hit
+
+                } catch (RuntimeRemoteException ignore) {
+                    // silently ignore projection errors
+                }
+            }
+            return false;
+        }
     }
 
     // ========================================================================

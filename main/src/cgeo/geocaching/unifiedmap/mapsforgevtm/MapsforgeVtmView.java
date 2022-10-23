@@ -59,13 +59,13 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
+        super.mMapView = mMapView;
         mMap = mMapView.map();
         setMapRotation(mapRotation);
         usesOwnBearingIndicator = false; // let UnifiedMap handle bearing indicator
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         themeHelper = new MapsforgeThemeHelper(activity);
-        mMap.layers().add(new MapEventsReceiver(mMap));
         onMapReadyTasks.run();
     }
 
@@ -278,11 +278,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         public boolean onGesture(final Gesture g, final MotionEvent e) {
             if (g instanceof Gesture.Tap) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                onTapCallback(p.getLatitude(), p.getLongitude(), false);
+                onTapCallback(p.latitudeE6, p.longitudeE6, false);
                 return true;
             } else if (g instanceof Gesture.LongPress) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                onTapCallback(p.getLatitude(), p.getLongitude(), true);
+                onTapCallback(p.latitudeE6, p.longitudeE6, true);
                 return true;
             }
             return false;
@@ -295,9 +295,9 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     protected void onResume() {
         super.onResume();
-        // @todo: There must be a less resource-intensive way of applying style-changes...
-        applyTheme();
+        applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
         mMapView.onResume();
+        mMap.layers().add(new MapEventsReceiver(mMap));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
@@ -26,10 +25,10 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
     }
 
     @Override
-    protected Marker add(final Geocache cache) {
+    protected void add(final Geocache cache) {
         final GoogleMap map = mapRef.get();
         if (map == null) {
-            return null;
+            return;
         }
 
         final Geopoint coords = cache.getCoords();
@@ -43,9 +42,8 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
 
         Log.e("addGeoitem");
         synchronized (items) {
-            items.put(cache.getGeocode(), item);
+            items.put(cache.getGeocode(), new GeoItemCache<>(coords, item));
         }
-        return item;
     }
 
     @Override
@@ -53,9 +51,9 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
         final GoogleMap map = mapRef.get();
         if (map != null) {
             synchronized (items) {
-                final Marker item = items.get(geocode);
+                final GeoItemCache<Marker> item = items.get(geocode);
                 if (item != null) {
-                    item.remove();
+                    item.mapItem.remove();
                 }
             }
         }
