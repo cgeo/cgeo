@@ -691,7 +691,6 @@
     <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
-    <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos ir kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
     <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
@@ -1242,6 +1241,7 @@
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
     <string name="cache_description_rendering">Pateikiamas aprašymas, palaukite…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Įspėjimas: Aprašymas labai didelis (%1$d simbolių). Rodomi tik pirmieji %2$d%%.</string>
     <string name="cache_description_render_fully">Pateikite pilną aprašymą</string>
     <string name="cache_area_description">Vietovės aprašymas</string>
     <string name="cache_cache_description">Slėptuvės aprašymas</string>
