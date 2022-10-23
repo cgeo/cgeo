@@ -1,4 +1,7 @@
 
+### Pastaba: API lygio pasikeitimas
+Dėl būsimų apribojimų Play Store atnaujinome tikslinį Android API lygį. Tai neturėtų turėti įtakos naudojant c:geo, ji vis tiek turėtų veikti nuo Android 5 versijos, bet jei pastebėsite kokių nors pažeidimų, susisiekite su mumis adresu support@cgeo.org
+
 ### Žemėlapis
 - Naujiena: Leidžiama keisti rodomų pėdsakų pavadinimą
 
