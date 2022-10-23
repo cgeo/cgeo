@@ -675,7 +675,6 @@
     <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
     <string name="settings_title_offline_maps">Mapes fora de línia</string>
-    <string name="settings_title_map_themes">Temes de mapes fora de línia &amp; ombra de turons</string>
     <string name="settings_title_offline_routing">Encaminament fora de línia</string>
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>
