@@ -7,6 +7,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
@@ -27,6 +28,7 @@ public abstract class AbstractUnifiedMapView<T> {
     protected Geopoint delayedCenterTo = null;
     protected Runnable onMapReadyTasks = null;
     protected boolean usesOwnBearingIndicator = true;
+    protected View mMapView = null;
 
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         activityRef = new WeakReference<>(activity);
@@ -136,12 +138,12 @@ public abstract class AbstractUnifiedMapView<T> {
     // Map tap handling
 
     /** transmits tap on map to activity */
-    protected void onTapCallback(final double latitude, final double longitude, final boolean isLongTap) {
+    protected void onTapCallback(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
         final UnifiedMapActivity activity = activityRef.get();
         if (activity == null) {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
         }
-        activity.onTap(latitude, longitude, isLongTap);
+        activity.onTap(latitudeE6, longitudeE6, isLongTap);
     }
 
     // ========================================================================

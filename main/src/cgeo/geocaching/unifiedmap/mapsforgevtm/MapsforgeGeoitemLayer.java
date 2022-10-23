@@ -2,7 +2,6 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
@@ -35,7 +34,7 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
     }
 
     @Override
-    protected MarkerItem add(final Geocache cache) {
+    protected void add(final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         final MarkerItem item = new MarkerItem(cache.getGeocode(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6())); // @todo add marker touch handling
 
@@ -43,22 +42,21 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
         final MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
         item.setMarker(symbol);
         mMarkerLayer.addItem(item);
+
         Log.e("addGeoitem");
         synchronized (items) {
-            items.put(cache.getGeocode(), item);
+            items.put(cache.getGeocode(), new GeoItemCache<>(coords, item));
         }
-        return item;
     }
 
     @Override
     protected void remove(final String geocode) {
         if (mMarkerLayer != null) {
-            final MarkerItem item;
             synchronized (items) {
-                item = items.get(geocode);
-            }
-            if (item != null) {
-                mMarkerLayer.removeItem(item);
+                final GeoItemCache<MarkerItem> item = items.get(geocode);
+                if (item != null) {
+                    mMarkerLayer.removeItem(item.mapItem);
+                }
             }
         }
         super.remove(geocode);

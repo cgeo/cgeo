@@ -40,12 +40,14 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
+import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +62,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -655,8 +658,35 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // ========================================================================
     // Map tap handling
 
-    public void onTap(final double latitude, final double longitude, final boolean isLongTap) {
-        Log.e("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitude + ", " + longitude + ")");
+    public void onTap(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
+        Log.e("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
+
+        // numbers of cache markers fitting into width/height
+        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        final View v = tileProvider.getMap().mMapView;
+        final float numMarkersWidth = v.getWidth() / displayMetrics.density / SIZE_CACHE_MARKER_DP;
+        final float numMarkersHeight = v.getHeight() / displayMetrics.density / SIZE_CACHE_MARKER_DP;
+
+        // lat/lon covered by single marker
+        final BoundingBox bb = tileProvider.getMap().getBoundingBox();
+        final int deltaLat = (int) ((bb.maxLatitudeE6 - bb.minLatitudeE6) / numMarkersHeight);
+        final int deltaLong = (int) ((bb.maxLongitudeE6 - bb.minLongitudeE6) / numMarkersWidth);
+
+        // calculate new bounding box, taking offset of icon vs. hotspot into account
+        bb.minLatitudeE6 = latitudeE6 - 2 * deltaLat;
+        bb.maxLatitudeE6 = latitudeE6 + deltaLat;
+        bb.minLongitudeE6 = (int) (longitudeE6 - 1.5 * deltaLong);
+        bb.maxLongitudeE6 = (int) (longitudeE6 + 1.5 * deltaLong);
+        // ((MapsforgePositionLayer) (tileProvider.getMap().positionLayer)).drawRect(bb);
+
+        // lookup elements touched by this
+        final List<String> result = geoitemLayer.find(bb);
+        Log.e("touched elements (" + result.size() + "): " + result);
+
+        // @todo:
+        // - if single element => open popup for element
+        // - if multiple elements => open selector popup for elements
+        // - if empty => open context popup for coordinates
 
     }
 
