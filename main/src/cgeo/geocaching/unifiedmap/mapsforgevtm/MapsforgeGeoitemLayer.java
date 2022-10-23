@@ -39,7 +39,7 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
         final Geopoint coords = cache.getCoords();
         final MarkerItem item = new MarkerItem(cache.getGeocode(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6())); // @todo add marker touch handling
 
-        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
+        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null);
         final MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
         item.setMarker(symbol);
         mMarkerLayer.addItem(item);

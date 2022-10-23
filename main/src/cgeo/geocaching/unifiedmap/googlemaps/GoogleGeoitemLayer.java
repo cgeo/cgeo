@@ -33,7 +33,7 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
         }
 
         final Geopoint coords = cache.getCoords();
-        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
+        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null);
         final Marker item = map.addMarker(new MarkerOptions()
             .position(new LatLng(coords.getLatitude(), coords.getLongitude()))
             .title(cache.getGeocode())
