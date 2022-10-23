@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
@@ -43,7 +44,7 @@ import org.oscim.core.GeoPoint;
  *
  * T is the type the map expects its coordinates in (LatLng for Google Maps, GeoPoint for Mapsforge)
  */
-public abstract class AbstractPositionLayer<T> {
+public abstract class AbstractPositionLayer<T> implements IndividualRoute.UpdateIndividualRoute {
 
     protected Location currentLocation = null;
     protected float currentHeading = 0.0f;

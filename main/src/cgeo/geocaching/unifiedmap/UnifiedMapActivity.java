@@ -1,7 +1,9 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -16,6 +18,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -24,7 +27,9 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
@@ -43,6 +48,7 @@ import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_L
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.location.Location;
@@ -52,17 +58,22 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Set;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -518,6 +529,18 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
 
+    private void toggleRouteItem(final RouteItem item) {
+        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
+            return;
+        }
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setTarget);
+        }
+        individualRoute.toggleItem(this, item, tileProvider.getMap().positionLayer);
+        // distanceView.showRouteDistance();
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+    }
+
     // ========================================================================
     // Bottom navigation methods
 
@@ -677,17 +700,64 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         bb.maxLatitudeE6 = latitudeE6 + deltaLat;
         bb.minLongitudeE6 = (int) (longitudeE6 - 1.5 * deltaLong);
         bb.maxLongitudeE6 = (int) (longitudeE6 + 1.5 * deltaLong);
-        // ((MapsforgePositionLayer) (tileProvider.getMap().positionLayer)).drawRect(bb);
 
         // lookup elements touched by this
-        final List<String> result = geoitemLayer.find(bb);
+        final LinkedList<RouteItem> result = geoitemLayer.find(bb);
         Log.e("touched elements (" + result.size() + "): " + result);
 
-        // @todo:
-        // - if single element => open popup for element
-        // - if multiple elements => open selector popup for elements
-        // - if empty => open context popup for coordinates
+        if (result.size() == 0) {
+            // @todo: open context popup for coordinates
+        } else if (result.size() == 1) {
+            handleTap(result.get(0), isLongTap);
+        } else {
+            try {
+                final ArrayList<RouteItem> sorted = new ArrayList<>(result);
+                Collections.sort(sorted, RouteItem.NAME_COMPARATOR);
 
+                final ArrayAdapter<RouteItem> adapter = new ArrayAdapter<RouteItem>(this, R.layout.cacheslist_item_select, sorted) {
+                    @NonNull
+                    @Override
+                    public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                        return GeoItemSelectorUtils.createRouteItemView(UnifiedMapActivity.this, getItem(position),
+                                GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, convertView, parent));
+                    }
+                };
+
+                final AlertDialog dialog = Dialogs.newBuilder(this)
+                    .setTitle(res.getString(R.string.map_select_multiple_items))
+                    .setAdapter(adapter, (dialog1, which) -> {
+                        if (which >= 0 && which < sorted.size()) {
+                            handleTap(sorted.get(which), isLongTap);
+                        }
+                    })
+                    .create();
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
+            } catch (final Resources.NotFoundException e) {
+                Log.e("UnifiedMapActivity.showSelection", e);
+            }
+        }
+
+    }
+
+    private void handleTap(final RouteItem item, final boolean isLongTap) {
+        if (isLongTap) {
+            // toggle route item
+            if (Settings.isLongTapOnMapActivated()) {
+                toggleRouteItem(item);
+            }
+        } else {
+            // open popup for element
+            if (item.getType() == RouteItem.RouteItemType.GEOCACHE) {
+                // @todo: do we need a DataStore.loadCache() before?
+                CachePopup.startActivityAllowTarget(this, item.getGeocode());
+            } else if (item.getType() == RouteItem.RouteItemType.WAYPOINT && item.getWaypointId() != 0) {
+                // @todo: do we need a DataStore.loadWaypoint() before?
+                WaypointPopup.startActivityAllowTarget(this, item.getWaypointId(), item.getGeocode());
+            } else {
+                // @todo: open context popup for coordinates
+            }
+        }
     }
 
     // ========================================================================

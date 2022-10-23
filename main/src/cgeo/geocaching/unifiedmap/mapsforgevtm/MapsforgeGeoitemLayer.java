@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.Log;
@@ -45,7 +46,7 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
 
         Log.e("addGeoitem");
         synchronized (items) {
-            items.put(cache.getGeocode(), new GeoItemCache<>(coords, item));
+            items.put(cache.getGeocode(), new GeoItemCache<>(new RouteItem(cache), item));
         }
     }
 
