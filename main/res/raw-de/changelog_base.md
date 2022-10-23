@@ -1,4 +1,7 @@
 
+### Hinweis: Geänderte API-Version
+Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-Zielversion erhöht. Das sollte keinen Einfluss auf c:geo haben, und c:geo sollte weiterhin ab Android 5 aufwärts laufen. Bitte melde dich unter support@cgeo.org, falls du irgendwelche Auffälligkeiten beobachtest
+
 ### Karte
 - Neu: Ändern des Anzeigennamens von Tracks
 
@@ -6,9 +9,9 @@
 - Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
 - Neu: Logplatzhalter GEOCODE
 - Neu: Einfache HTML-Unterstützung für Definitionslisten (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
+- Neu: Zoombare Bildansicht für Bilder in Cachebeschreibung
+- Korrektur: Öffne Verlinkungen in Cachebeschreibung in integrierter Webansicht (falls aktiviert)
+- Änderung: Cache-Beschreibung im Hintergrund formatieren und standardmäßig auf 50.000 Zeichen begrenzen
 
 ### Allgemein
 - Neu: Ansicht für ausstehende Downloads
@@ -19,5 +22,5 @@
 - Neu: Statusfilter für DNF
 - Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)
 - Neu: Manuelle Eingabe von Werten in Filtern mit Schieberegler
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
+- Neu: Aktiviere Upload korrigierter Koordinaten für Caches aus GPX-Import, wenn sie Wegpunkte vom Typ "ORIGINAL" enthalten
+- Änderung: Filterstatus verständlicher formuliert
