@@ -691,7 +691,6 @@
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
-    <string name="settings_title_map_themes">Offline mapové motivy &amp; stínování kopců</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
