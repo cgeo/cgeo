@@ -677,7 +677,6 @@
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_maps">Mapas offline</string>
-    <string name="settings_title_map_themes">Temas de mapa offline &amp; sombreado de montes e montanhas</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
@@ -849,7 +848,7 @@
     <string name="init_backup_program_settings">definições de programa</string>
     <string name="init_backup_logins">Incluir dados de contas</string>
     <string name="init_backup_logins_summary">Com esta opção seleccionada, as suas credenciais de início de sessão são guardadas nas cópias de segurança que efectuar.</string>
-    <string name="init_backup">Backup de caches / waypoints</string>
+    <string name="init_backup">Cópia de segurança de caches / pontos adicionais</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
     <string name="init_backup_backup_failed">Erro ao criar a cópia de segurança</string>
@@ -1211,6 +1210,9 @@
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
     <string name="cache_description">Descrição</string>
     <string name="cache_description_table_note">A descrição contém formatação de tabela pelo que pode ser necessário vê-la em %s para ser vista correctamente.</string>
+    <string name="cache_description_rendering">A renderizar descrição, por favor aguarde…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Aviso: A descrição é muito grande (%1$d caracteres). Apenas os primeiros %2$d%% são mostrados.</string>
+    <string name="cache_description_render_fully">Renderizar a descrição completa</string>
     <string name="cache_area_description">Descrição da Área</string>
     <string name="cache_cache_description">Descrição da Cache</string>
     <string name="cache_virtual_description">Questão Virtual</string>
