@@ -691,7 +691,6 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
-    <string name="settings_title_map_themes">Motywy map offline i cieniowanie</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
