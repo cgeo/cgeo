@@ -819,7 +819,7 @@
     <string name="init_backup_program_settings">definições de programa</string>
     <string name="init_backup_logins">Incluir dados de contas</string>
     <string name="init_backup_logins_summary">Com esta opção seleccionada, as suas credenciais de início de sessão são guardadas nas cópias de segurança que efectuar.</string>
-    <string name="init_backup">Backup de caches / waypoints</string>
+    <string name="init_backup">Cópia de segurança de caches / pontos adicionais</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
     <string name="init_backup_backup_failed">Erro ao criar a cópia de segurança</string>
