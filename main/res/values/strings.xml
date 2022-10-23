@@ -1004,7 +1004,7 @@
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
     <string name="settings_info_hillshading_title">Info on Hillshading</string>
-    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Sloped will be darkened/lightened to generate a 3D-effect. The source files containing the elevation information have to be obtained manually - click this item for sources - and placed in the sources folder defined below.</string>
+    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nThe source files containing the elevation information have to be obtained manually - click this item for sources - and placed in the sources folder defined below.</string>
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
