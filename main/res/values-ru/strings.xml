@@ -684,7 +684,6 @@
     <string name="settings_summary_map">Выберите источник карт, настройки оффлайновых карт и детали карты.</string>
     <string name="settings_title_map_data">Данные карты</string>
     <string name="settings_title_offline_maps">Оффлайновые карты</string>
-    <string name="settings_title_map_themes">Оффлайновые темы карт &amp; затенение высот</string>
     <string name="settings_title_offline_routing">Маршрутизация офлайн</string>
     <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
     <string name="settings_title_map_rotation">Вращение карты (Google Maps)</string>
