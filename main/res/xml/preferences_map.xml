@@ -28,12 +28,12 @@
         <Preference
             android:key="@string/pref_fakekey_info_offline_maps"
             android:title="@string/settings_info_offline_maps_title"
-            android:text="@string/settings_info_offline_maps"
+            android:summary="@string/settings_info_offline_maps"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_start_downloader"
             android:title="@string/downloadmap_title"
-            android:text="@string/downloadmap_info"
+            android:summary="@string/downloadmap_info"
             app:iconSpaceReserved="false" />
 
         <Preference
@@ -57,7 +57,7 @@
         app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_info_offline_mapthemes"
-            android:text="@string/settings_info_themes"
+            android:summary="@string/settings_info_themes"
             android:title="@string/settings_info_themes_title"
             app:iconSpaceReserved="false" />
         <Preference
@@ -76,12 +76,12 @@
         app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_info_offline_maphillshading"
-            android:text="@string/settings_info_hillshading"
+            android:summary="@string/settings_info_hillshading"
             android:title="@string/settings_info_hillshading_title"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
-            android:text="@string/settings_info_themes"
+            android:summary="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
             app:iconSpaceReserved="false" />
         <SeekBarPreference
