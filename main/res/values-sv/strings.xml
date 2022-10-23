@@ -677,7 +677,6 @@
     <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_maps">Offlinekartor</string>
-    <string name="settings_title_map_themes">Offline kartteman &amp; terrängskuggning</string>
     <string name="settings_title_offline_routing">Offline navigering</string>
     <string name="settings_summary_offline_routing">Offline navigering är tillgänglig om antingen hjälpappen \"BRouter\" är installerad och konfigurerad eller intern routing är aktiverad.</string>
     <string name="settings_title_map_rotation">Kartrotation (Google Maps)</string>
