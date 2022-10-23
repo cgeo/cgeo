@@ -1,29 +1,26 @@
 
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
 ### Kaart
-- Nieuw: Voeg ondersteuning voor heuvel arvering toe op OSM
-- Oplossing: Handmatig gekopieerde waypoints van een cache werden niet allemaal weergegeven
+- New: Allow change of track's display name
 
 ### Cache details
-- Wijziging: Toon laad indicator in log activiteit tijdens het ophalen van de vereiste gegevens
-- Oplossing: nbsp; werd niet beschouwd als spatie in formule verwerken
-- Oplossing: Log afbeelding gelabeld "Afbeelding 1", zelfs als er maar één afbeelding toegevoegd is
-- Oplossing: Extra waypoints gemaakt op persoonlijke notitie formule verwerken
-- Oplossing: Variabelen niet aangemaakt tijdens het kopiëren van de formule naar een andere cache
-- Oplossing: (Experimentele galerij) Gebruik afbeeldingencache voor log/spoiler afbeeldingen
-- Nieuw: GEOCODE logsjabloon veld
+- Fix: Log image labelled "Image 1" even if only a single image added
+- New: GEOCODE log template placeholder
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
 
 ### Algemeen
-- Nieuw: Ondersteun algemene downloads voor "mf-v4-map"- en "mf-theme"-prefix links (geen automatische updates ondersteund)
-- Nieuw: Onderhoudsfunctie herindexeert database
-- Nieuw: Automatische prestatieoptimalisatie van de database om de 90 dagen (herindexeren)
-- Oplossing: Ontbrekende precieze locatiemachtigingFix aanpakken
-- Wijziging: Website taalschakelaar verwijderd
-- Oplossing: Verwijderde gebruikers-gedefinieerde caches worden niet verwijderd bij c:geo herstart
-- Nieuw: Openstaande downloads weergave
-- Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
-- Wijziging: "Identificeren als Android browser" instelling verwijderd
-- Nieuw: Controleer lopende downloads (kaarten / routing gegevens) bij het opstarten
-- Oplossing: filterbalk niet leesbaar in lichte modus
-- Nieuw: Sta selectie van bestanden toe om te downloaden
-- Nieuw: Status filter voor DNF
-- Nieuw: Hoogteverschil op het startscherm weergeven (indien beschikbaar)
+- New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- New: Allow selection of files to download
+- New: Status filter for DNF
+- New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
+- Change: Improve filter status line text

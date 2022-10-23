@@ -1,29 +1,26 @@
 
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
 ### Mapa
-- New: Add support for hillshading on OSM
-- Fix: Manually copied waypoints of a cache not all being displayed
+- Nuevo: Ahora puede cambiar el nombre que se muestra de un sendero
 
 ### Detalles del caché
-- Change: Show loading indicator in log activity while retrieving required data is ongoing
-- Fix: nbsp; not considered as space in formula parsing
-- Fix: Log image labelled "Image 1" even if only a single image added
-- Fix: Extra waypoints created on personal note formula parsing
-- Fix: Variables not created on copying formula to different cache
-- Fix: (Experimental gallery) Use image cache for log/spoiler images
-- New: GEOCODE log template placeholder
+- Corregido: Imagen de registro etiquetada como "Imagen 1" incluso si sólo se añade una sola imagen
+- Nuevo: Marcador de plantilla del tipo de registro GEOCODE
+- Nuevo: Soporte básico de formato HTML para definir listas (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
 
 ### General
-- New: Support generic downloads for "mf-v4-map"- and "mf-theme"-prefixed links (no automatic updates supported)
-- New: Maintenance function reindexes database
-- New: Automatic performance optimization of database every 90 days (reindex)
-- Fix: Handle missing fine location permission
-- Change: Website language switch removed
-- Fix: Deleted user-defined caches are not deleted on c:geo restart
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- Fix: Filter bar not readable in light mode
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
+- Nuevo: Ver las descargas pendientes
+- Nuevo: Añadir nombre de caché / lista al nombre de archivo en la exportación GPX
+- Cambio: Se ha eliminado el ajuste "Identificar como navegador Android"
+- Nuevo: Comprobar descargas pendientes (mapas / datos de ruta) al iniciar
+- Nuevo: Permitir la selección de archivos para descargar
+- Nuevo: Filtro de estado para DNF
+- Nuevo: Mostrar elevación en la pantalla de inicio (si está disponible)
+- Nuevo: Ahora puede introducir manualmente valores en filtros usando deslizadores
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
+- Change: Improve filter status line text

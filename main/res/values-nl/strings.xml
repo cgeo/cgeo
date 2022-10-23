@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Niets doen</string>
     <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
     <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
-    <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
-    <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache gedownload</item>
         <item quantity="other">%d caches gedownload</item>
@@ -677,7 +677,6 @@
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
     <string name="settings_title_offline_maps">Offline kaarten</string>
-    <string name="settings_title_map_themes">Offline kaart thema\'s &amp; heuvelarcering</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>

@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
     <string name="caches_store_background_option_add_to_list">Lisää listaan</string>
     <string name="caches_store_background_option_refresh">Päivitä ja lisää listaan</string>
-    <string name="caches_store_background_result_failed">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
-    <string name="caches_store_background_result_canceled">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d kätkö ladattu</item>
         <item quantity="other">%d kätköä ladattu</item>
@@ -641,6 +641,7 @@
     <string name="downloader_cancelled_download">Peruttu lataus kohteelle \"%s\"</string>
     <string name="downloader_pending_info">Löytyi ainakin yksi pysäytetty tai epäonnistunut lataus. Haluatko avata luettelon odottavista latauksista?</string>
     <string name="downloader_retry_download">Yritä uudelleen latausta</string>
+    <string name="downloader_retry_download_details">Haluatko kokeilla uudelleen seuraavan tiedoston lataamista?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Lataus on epäonnistunut (ja sitä ei yritetä uudelleen)</string>
     <string name="asdm_status_paused">Lataus odottaa uudelleenyritystä tai jatkamista</string>
@@ -659,6 +660,7 @@
     <string name="asdm_error_insufficient_space">Virhe: tallennustilaa ei ole riittävästi</string>
     <string name="asdm_error_too_many_redirects">Virhe: Liian monta uudelleenohjausta</string>
     <string name="asdm_error_unhandled_http_code">Virhe: HTTP-koodia ei käsitelty</string>
+    <string name="asdm_error_unknown">Virhe: Tuntematon virhe</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Avaa asetukset?</string>
     <string name="settings_title_services">Palvelut</string>
@@ -675,7 +677,6 @@
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
     <string name="settings_title_offline_maps">Offline-kartat</string>
-    <string name="settings_title_map_themes">Offline-kartan teemat &amp; kukkuloiden varjostus</string>
     <string name="settings_title_offline_routing">Offline-reititys</string>
     <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
@@ -774,6 +775,7 @@
     <string name="init_signature_template_size">Koko</string>
     <string name="init_signature_template_type">Tyyppi</string>
     <string name="init_signature_template_location">Sijainti</string>
+    <string name="init_signature_template_geocode">Geokoodi</string>
     <string name="init_ratingwanted">GCVote-arvostelu</string>
     <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
     <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
@@ -1208,6 +1210,8 @@
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
+    <string name="cache_description_rendering">Muodostetaan kuvausta, odota…</string>
+    <string name="cache_description_render_fully">Muodosta täysi kuvaus</string>
     <string name="cache_area_description">Alueen kuvaus</string>
     <string name="cache_cache_description">Kätkön kuvaus</string>
     <string name="cache_virtual_description">Virtuaalinen kysymys</string>
@@ -1501,6 +1505,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Hylätty</string>
     <string name="calccoord_migrate_infotext_markdown">Vanha koordinaattilaskenta löytyi tällä reittipisteellä:\n\n%1$s\n\nVoit siirtää tämän uuden kätkön laskentakoordinaatteihin seuraavasti:\n\n%2$s\n\nuusilla kätkömuuttujilla:%3$s\n\nValitse:\n- %4$s suorittaaksesi siirtymän ehdotetulla tavalla\n- %5$s hylkäämään löydetyt laskentatiedot lopullisesti\n- %6$s jatkaaksesi ilman siirtoa. Sinulta pyydetään siirtoa uudelleen, kun seuraavan kerran avaat reittipisteen muokkausta varten. Huomaa kuitenkin, että reittipisteen koordinaattien muokkaaminen voi poistaa paikallisia laskentatietoja.</string>
     <!-- Formula -->
+    <string name="formula">Kaava</string>
     <string name="formula_choose_function">Valitse funktio</string>
     <string name="formula_function_sqrt">Neliöjuuri</string>
     <string name="formula_function_sin">Sini</string>
@@ -2119,6 +2124,7 @@
     <!-- permission handling -->
     <string name="close_app">Sulje sovellus</string>
     <string name="ask_again">Kysy uudelleen</string>
+    <string name="location_permission_request_explanation">c:geo tarvitsee luvan käyttää laitteesi GPS:ää (tarkka sijainti) sijaintisi paikallistamiseen sekä etäisyyden ja suunnan geokätköihin. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->

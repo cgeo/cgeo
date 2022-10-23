@@ -363,8 +363,8 @@
     <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
     <string name="caches_store_background_option_add_to_list">Zur Liste hinzufügen</string>
     <string name="caches_store_background_option_refresh">Aktualisieren und zur Liste hinzufügen</string>
-    <string name="caches_store_background_result_failed">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
-    <string name="caches_store_background_result_canceled">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d Cache heruntergeladen</item>
         <item quantity="other">%d Caches heruntergeladen</item>
@@ -677,7 +677,6 @@
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
     <string name="settings_title_offline_maps">Offline-Karten</string>
-    <string name="settings_title_map_themes">Designs für Offline-Karten &amp; Kartenschattierung</string>
     <string name="settings_title_offline_routing">Offline-Routing</string>
     <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
@@ -1211,6 +1210,9 @@
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
     <string name="cache_description">Beschreibung</string>
     <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
+    <string name="cache_description_rendering">Formatiere Beschreibung, bitte warten…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warnung: Beschreibung ist sehr lang (%1$d Zeichen). Nur die ersten %2$d%% werden angezeigt.</string>
+    <string name="cache_description_render_fully">Komplette Beschreibung anzeigen</string>
     <string name="cache_area_description">Bereichsbeschreibung</string>
     <string name="cache_cache_description">Cachebeschreibung</string>
     <string name="cache_virtual_description">Virtuelle Frage</string>

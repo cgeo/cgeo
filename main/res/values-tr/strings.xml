@@ -357,8 +357,8 @@
     <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
     <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
     <string name="caches_store_background_option_refresh">Yenile ve listeye ekle</string>
-    <string name="caches_store_background_result_failed">İndirme başarısız, %1$d/%2$d cache indirildi</string>
-    <string name="caches_store_background_result_canceled">İndirme iptal edildi, %1$d/%2$d cache indirildi</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">İndirme başarısız, %1$d/%2$d cache indirildi</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">İndirme iptal edildi, %1$d/%2$d cache indirildi</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache indirildi</item>
         <item quantity="other">%d cache indirildi</item>

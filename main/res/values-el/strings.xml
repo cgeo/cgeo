@@ -359,8 +359,8 @@
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
     <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
     <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
-    <string name="caches_store_background_result_failed">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
-    <string name="caches_store_background_result_canceled">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
@@ -668,7 +668,6 @@
     <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
     <string name="settings_title_offline_maps">Χάρτες χωρίς σύνδεση</string>
-    <string name="settings_title_map_themes">Offline θέματα χάρτη &amp; σκιάσεις</string>
     <string name="settings_title_offline_routing">Δρομολόγηση εκτός σύνδεσης</string>
     <string name="settings_summary_offline_routing">Η σύνδεση δρομολόγησης είναι διαθέσιμη αν είτε η βοηθητική εφαρμογή \"BRouter\" είναι εγκατεστημένη και ρυθμισμένη είτε η εσωτερική δρομολόγηση είναι ενεργοποιημένη.</string>
     <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
@@ -1201,6 +1200,9 @@
     <string name="cache_personal_note_upload_cancelled">Το ανέβασμα προσωπικής σημείωσης ακυρώθηκε</string>
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
+    <string name="cache_description_rendering">Επεξεργασία  αποτύπωσης, παρακαλώ περιμένετε…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Προειδοποίηση: Η περιγραφή είναι πολύ μεγάλη (%1$d χαρακτήρες). Μόνο οι πρώτοι %2$d%% εμφανίζονται.</string>
+    <string name="cache_description_render_fully">Αποτύπωση πλήρους περιγραφής</string>
     <string name="cache_area_description">Περιγραφή περιοχής</string>
     <string name="cache_cache_description">Περιγραφή κρύπτης</string>
     <string name="cache_virtual_description">Εικονική ερώτηση</string>
@@ -1494,6 +1496,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Απόρριψη</string>
     <string name="calccoord_migrate_infotext_markdown">Βρέθηκε ένας υπολογισμός συντεταγμένων παλαιού τύπου με αυτόν τον τρόπο:\n\n%1$s\n\nΜπορείτε να μετεγκαταστήσετε αυτό στις νέες συντεταγμένες υπολογισμού της προσωρινής μνήμης ως εξής:\n\n%2$s\n\nμε νέο πρότυπο:%3$s\n\nΠαρακαλώ επιλέξτε:\n- %4$s για να εκτελέσετε τη μετεγκατάσταση όπως προτείνεται\n- %5$s για να απορρίψετε τα δεδομένα υπολογισμού που βρέθηκαν \n- %6$s για να συνεχίσετε χωρίς μετατροπη. Θα σας ζητηθεί να τα μετατρέψετε ξανά την επόμενη φορά που θα ανοίξετε το σημείο για επεξεργασία. Σημειώστε, ωστόσο, ότι η επεξεργασία των συντεταγμένων σημείου θα μπορούσε να διαγράψει τοπικά δεδομένα υπολογισμού.</string>
     <!-- Formula -->
+    <string name="formula">Τύπος</string>
     <string name="formula_choose_function">Επιλογή λειτουργίας</string>
     <string name="formula_function_sqrt">Τετραγωνική ρίζα</string>
     <string name="formula_function_sin">Ημίτονο</string>

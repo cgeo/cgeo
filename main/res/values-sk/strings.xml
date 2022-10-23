@@ -367,8 +367,8 @@
     <string name="caches_store_background_option_nothing">Nerobiť nič</string>
     <string name="caches_store_background_option_add_to_list">Pridať do zoznamu</string>
     <string name="caches_store_background_option_refresh">Obnoviť a pridať do zoznamu</string>
-    <string name="caches_store_background_result_failed">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
-    <string name="caches_store_background_result_canceled">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d keška stiahnutá</item>
         <item quantity="few">%d kešky stiahnuté</item>
@@ -688,7 +688,6 @@
     <string name="settings_summary_map">Nastavte zdroj mapy, možnosti offline máp a mapových detailov.</string>
     <string name="settings_title_map_data">Mapové podklady</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
-    <string name="settings_title_map_themes">Témy offline máp &amp; tieňovanie kopcov</string>
     <string name="settings_title_offline_routing">Offline navigácia</string>
     <string name="settings_summary_offline_routing">Offline navigácia je k dispozícii, ak je nainštalovaná a nakonfigurovaná pomocná aplikácia \"BRouter\", prípadne aj je povolená interná navigácia.</string>
     <string name="settings_title_map_rotation">Otáčanie mapy (Google Mapy)</string>

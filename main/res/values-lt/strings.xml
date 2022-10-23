@@ -92,7 +92,7 @@
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
-    <string name="log_note"> Pastaba</string>
+    <string name="log_note">Rašyti pastabą</string>
     <string name="log_published">Publikuota</string>
     <string name="log_enabled">Įjungta</string>
     <string name="log_disabled">Išjungta</string>
@@ -221,7 +221,7 @@
     <string name="err_detail_cache_find_any">c:geo neranda jokių geoslėptuvių.</string>
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
-    <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei radote šią slėptuvę, galite registruoti ją čia.</string>
+    <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei suradote šią slėptuvę, galite registruoti ją čia.</string>
     <string name="err_watchlist_still_managing">Dar tvarkomas stebimų slėptuvių sąrašas.</string>
     <string name="err_watchlist_failed">Nepavyko pakeisti stebimų slėptuvių sąrašo.</string>
     <string name="err_application_no">c:geo neranda tinkamos programos.</string>
@@ -311,8 +311,8 @@
     <string name="loc_fused">Sujungta</string>
     <string name="loc_low_power">Energijos taupymas</string>
     <string name="loc_home">Namų koordinatės</string>
-    <string name="loc_sat">Pal.</string>
-    <string name="loc_trying">Bandoma nustatyti</string>
+    <string name="loc_sat">Palydovai</string>
+    <string name="loc_trying">Bandoma nustatyti vietą</string>
     <string name="loc_no_addr">Nežinomas adresas</string>
     <string name="loc_gps_disabled">GPS išjungtas</string>
     <string name="loc_copied_clipboard">Dabartinė vieta nukopijuota į iškarpinę</string>
@@ -367,8 +367,8 @@
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
     <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
     <string name="caches_store_background_option_refresh">Atnaujinti ir pridėti prie sąrašo</string>
-    <string name="caches_store_background_result_failed">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
-    <string name="caches_store_background_result_canceled">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">Atsisiųsta %d slėptuvė</item>
         <item quantity="few">Atsisiųstos %d slėptuvės</item>
@@ -435,10 +435,10 @@
     <string name="select_icon">Pasirinkite piktogramą</string>
     <string name="onetime_missing_unicode_info">Jūsų Android versija nepalaiko automatinio palaikomų piktogramų aptikimo - gali trūkti kai kurių simbolių</string>
     <plurals name="user_finds">
-        <item quantity="one">%d rasta</item>
-        <item quantity="few">%d rastos</item>
-        <item quantity="many">%d rastų</item>
-        <item quantity="other">%d rastų</item>
+        <item quantity="one">%d surasta</item>
+        <item quantity="few">%d surastos</item>
+        <item quantity="many">%d surastų</item>
+        <item quantity="other">%d surastų</item>
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="one">%d užregistruota neprisijungus</item>
@@ -500,7 +500,7 @@
     <string name="cache_filter_distance">Atstumas</string>
     <string name="cache_filter_hidden">Paslėpimo data</string>
     <string name="cache_filter_logs_count">Įrašų skaičius</string>
-    <string name="cache_filter_last_found">Vėliausia radimo data</string>
+    <string name="cache_filter_last_found">Vėliausia suradimo data</string>
     <string name="cache_filter_log_entry">Žurnalo įrašas</string>
     <string name="cache_filter_location">Vieta</string>
     <string name="cache_filter_stored_lists">Saugomi sąrašai</string>
@@ -560,7 +560,7 @@
     <string name="cache_filter_status_select_all">Visos</string>
     <string name="cache_filter_status_select_yes">Taip</string>
     <string name="cache_filter_status_select_no">Ne</string>
-    <string name="cache_filter_status_select_label_found">Rasta</string>
+    <string name="cache_filter_status_select_label_found">Surasta</string>
     <string name="cache_filter_status_select_label_dnf">Neradęs</string>
     <string name="cache_filter_status_select_label_owned">Nuosava</string>
     <string name="cache_filter_status_select_label_stored">Išsaugota</string>
@@ -570,7 +570,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Su keliauninku</string>
     <string name="cache_filter_status_select_label_has_own_vote">Turi nuosavą balsą</string>
     <string name="cache_filter_status_select_label_has_offline_log">Turi įrašą neprisijungus</string>
-    <string name="cache_filter_status_select_label_has_offline_found_log">Turi radimo įrašas neprisijungus</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Turi suradimo įrašą neprisijungus</string>
     <string name="cache_filter_status_select_label_solved_mystery">Išspręsta Mystery</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Turi vartotojo nustatytus kelio taškus</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Šis filtro nustatymas turės įtakos tik Mystery slėptuvėms. Jei norite išskirti kitus slėptuvės tipus, apibrėžkite atitinkamą slėptuvės tipo filtrą.\n\nMystery laikoma „išspręsta“, jei jos koordinatės pakeistos arba galiojantis galutinis maršruto taškas užpildytas koordinatėmis.</string>
@@ -691,7 +691,6 @@
     <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
-    <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos ir kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
     <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
@@ -819,7 +818,7 @@
     <string name="init_useInternalRouting">Naudoti vidinį maršrutizavimą</string>
     <string name="init_summary_useInternalRouting">Naudokite c:geo vidinį maršrutizavimą, kad galėtumėte naudoti automatinį maršruto duomenų atsisiuntimą ir kitas funkcijas</string>
     <string name="init_bigSmileysOnMap">Didelės piktogramos</string>
-    <string name="init_summary_bigSmileysOnMap">Jei įjungta, simboliai, pvz., \'rasta šypsenėlė\' arba \'pataisytos koordinatės\', žemėlapyje bus rodomi padidinti, o ne slėptuvės tipo piktograma.</string>
+    <string name="init_summary_bigSmileysOnMap">Jei įjungta, simboliai, pvz., \'surasta šypsenėlė\' arba \'pataisytos koordinatės\', žemėlapyje bus rodomi padidinti, o ne slėptuvės tipo piktograma.</string>
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
     <string name="init_global_wp_extraction_disable">Išjungti kelio taškų išskleidimą</string>
@@ -956,7 +955,7 @@
     <string name="init_accuracycirclecolor_summary">Pasirinkite tikslumo apskritimo linijos spalvą ir skaidrumą. Tikslumo apskritimas naudojamas kaip vaizdinis vietos signalo tikslumo vaizdas.</string>
     <string name="init_accuracycirclefillcolor">Tikslumo apskritimo užpildymo spalva</string>
     <string name="init_accuracycirclefillcolor_summary">Pasirinkite spalvą ir skaidrumą, kad būtų užpildyti tikslumo apskritimai</string>
-    <string name="init_include_found_status">Įtraukti \"Rasta\" būseną</string>
+    <string name="init_include_found_status">Įtraukti \"Surasta\" būseną</string>
     <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
     <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
     <string name="init_sigautoinsert">Įterpti automatiškai</string>
@@ -1019,8 +1018,8 @@
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
     <string name="settings_advanced">Išplėstiniai parametrai</string>
-    <string name="settings_twitter_cache_message">Rastos slėptuvės žinutė</string>
-    <string name="settings_twitter_trackable_message">Rasto keliauninko žinutė</string>
+    <string name="settings_twitter_cache_message">Surastos slėptuvės žinutė</string>
+    <string name="settings_twitter_trackable_message">Surasto keliauninko žinutė</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1241,6 +1240,9 @@
     <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
+    <string name="cache_description_rendering">Pateikiamas aprašymas, palaukite…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Įspėjimas: Aprašymas labai didelis (%1$d simbolių). Rodomi tik pirmieji %2$d%%.</string>
+    <string name="cache_description_render_fully">Pateikite pilną aprašymą</string>
     <string name="cache_area_description">Vietovės aprašymas</string>
     <string name="cache_cache_description">Slėptuvės aprašymas</string>
     <string name="cache_virtual_description">Virtual slėptuvės klausimai</string>
@@ -1293,7 +1295,7 @@
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
-    <string name="cache_menu_navigation_drive">Navigacija (važiuoti)</string>
+    <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
     <string name="cache_menu_navigation_drive_select_target">Pasirinkite tikslą</string>
     <string name="cache_menu_navigation_walk">Navigacija (pėsčiomis)</string>
     <string name="cache_menu_navigation_transit">Navigacija (keleiviniu transportu)</string>
@@ -1301,7 +1303,7 @@
     <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
-    <string name="cache_menu_sygic_drive">Sygic (vairuoti)</string>
+    <string name="cache_menu_sygic_drive">Sygic (vairavimas)</string>
     <string name="cache_menu_radar">Radaras</string>
     <string name="cache_menu_map">Žemėlapis</string>
     <string name="cache_menu_map_ext">Kitos išorinės programos</string>
@@ -1320,10 +1322,10 @@
     <string name="cache_menu_event">Įtraukti į kalendorių</string>
     <string name="cache_menu_extract_waypoints">Išskleisti kelio taškus</string>
     <string name="cache_menu_scan_calculated_waypoints">Ieškokite kelio taškų formulių</string>
-    <string name="cache_menu_set_found">Pažymėti kaip rastą</string>
+    <string name="cache_menu_set_found">Pažymėti kaip surastą</string>
     <string name="cache_menu_set_DNF">Pažymėti kaip nerastą</string>
-    <string name="cache_menu_reset_foundstate">Iš naujo nustatyti rastą būseną</string>
-    <string name="cache_foundstate_updated">Radimo būsena atnaujinta</string>
+    <string name="cache_menu_reset_foundstate">Iš naujo nustatyti suradimo būseną</string>
+    <string name="cache_foundstate_updated">Suradimo būsena atnaujinta</string>
     <string name="cache_menu_set_cache_icon">Nustatyti slėptuvės piktogramą</string>
     <string name="cache_icon_updated">Slėptuvės piktograma atnaujinta</string>
     <string name="cache_menu_details">Informacija</string>
@@ -1343,7 +1345,7 @@
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
-    <string name="cache_status_found">Rasta</string>
+    <string name="cache_status_found">Surasta</string>
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_status_archived">Archyvuota</string>
     <string name="cache_status_disabled">Išjungta</string>
@@ -1581,7 +1583,7 @@
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
     <string name="map_show_circles">Apskritimai</string>
     <string name="map_showc_own">Nuosava</string>
-    <string name="map_showc_found">Rasta</string>
+    <string name="map_showc_found">Surasta</string>
     <string name="map_showc_disabled">Išjungta</string>
     <string name="map_showc_archived">Archyvuota</string>
     <string name="map_showc_found_offline">Surasta (neprisijungus)</string>
@@ -2215,7 +2217,7 @@
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
-    <string name="map_autotarget_individual_route">Nustatykite maršruto pradžią kaip tikslą</string>
+    <string name="map_autotarget_individual_route">Nustatyti maršruto pradžią kaip tikslą</string>
     <string name="map_disable_autotarget_individual_route">\"Nustatyti maršruto pradžią kaip tikslą\" išjungta</string>
     <string name="map_clear_manual_targets">Išvalyti rankinius tikslus</string>
     <string name="map_manual_targets_cleared">Rankiniai tikslai išvalyti</string>
@@ -2284,7 +2286,7 @@
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Gautas failas</string>
+    <string name="receivedownload_intenttitle">Atsidiųstas failas</string>
     <string name="receivedownload_success">Failas sėkmingai išsaugotas kaip \'%s\'</string>
     <string name="receivedownload_error">Klaida gaunant failą</string>
     <string name="receivedownload_error_io_exception">Nepavyko įrašyti failo, ar turite rašymo teises kataloge (\"%s\")?</string>
@@ -2299,7 +2301,7 @@
     <string name="file_deleted_info">%s ištrintas</string>
     <string name="download_title">Atsisiųsti failą</string>
     <string name="downloadmap_info">Pasirinkite savo regiono žemėlapio failą paliesdami piktogramą \"Išsaugoti\".\n\nAtsisiunčiama fone. Kai perkėlimas baigtas, failas nukopijuojamas į c:geo žemėlapio aplanką ir nustatomas kaip dabartinis žemėlapis.\n\nBūkite atsargūs: atsisiųsdami žemėlapį, tinklo srautas gali būti didelis!</string>
-    <string name="downloadmap_filename">Atsisiunčiama %s</string>
+    <string name="downloadmap_filename">Atsisiunčiamas %s</string>
     <string name="downloadmanager_not_available">Failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
     <string name="download_none_selected">Atsisiuntimui nepasirinkta jokių failų</string>

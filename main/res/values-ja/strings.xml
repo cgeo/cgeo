@@ -355,8 +355,8 @@
     <string name="caches_store_background_option_nothing">何もしない</string>
     <string name="caches_store_background_option_add_to_list">リストに追加</string>
     <string name="caches_store_background_option_refresh">更新してリストに追加</string>
-    <string name="caches_store_background_result_failed">ダウンロードに失敗しました。%1$d/%2$dキャッシュがダウンロードされました</string>
-    <string name="caches_store_background_result_canceled">ダウンロードがキャンセルされました。%1$d/%2$dキャッシュがダウンロードされました</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">ダウンロードに失敗しました。%1$d/%2$dキャッシュがダウンロードされました</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">ダウンロードがキャンセルされました。%1$d/%2$dキャッシュがダウンロードされました</string>
     <plurals name="caches_store_background_result">
         <item quantity="other">%dキャッシュをダウンロードしました</item>
     </plurals>

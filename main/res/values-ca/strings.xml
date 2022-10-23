@@ -364,8 +364,8 @@
     <string name="caches_store_background_option_nothing">No fer res</string>
     <string name="caches_store_background_option_add_to_list">Afegir a la llista</string>
     <string name="caches_store_background_option_refresh">Actualitza i afegeix a la llista</string>
-    <string name="caches_store_background_result_failed">La descàrrega ha fallat, s\'han baixat %1$d/%2$d catxés</string>
-    <string name="caches_store_background_result_canceled">La descàrrega s\'ha cancel·lat, s\'han baixat %1$d/%2$d catxés</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">La descàrrega ha fallat, s\'han baixat %1$d/%2$d catxés</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">La descàrrega s\'ha cancel·lat, s\'han baixat %1$d/%2$d catxés</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">S\'ha descarregat %d catxécatxé</item>
         <item quantity="other">S\'ha descarregat %d catxés</item>
@@ -675,7 +675,6 @@
     <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
     <string name="settings_title_offline_maps">Mapes fora de línia</string>
-    <string name="settings_title_map_themes">Temes de mapes fora de línia &amp; ombra de turons</string>
     <string name="settings_title_offline_routing">Encaminament fora de línia</string>
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>

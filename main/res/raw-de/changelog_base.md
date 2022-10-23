@@ -1,29 +1,26 @@
 
+### Hinweis: Geänderte API-Version
+Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-Zielversion erhöht. Das sollte keinen Einfluss auf c:geo haben, und c:geo sollte weiterhin ab Android 5 aufwärts laufen. Bitte melde dich unter support@cgeo.org, falls du irgendwelche Auffälligkeiten beobachtest
+
 ### Karte
-- Neu: Kartenschattierung für OSM Offline-Karten unterstützt
-- Korrektur: Manuell kopierte Wegpunkte eines Caches werden nicht alle angezeigt
+- Neu: Ändern des Anzeigennamens von Tracks
 
 ### Cache-Details
-- Änderung: Ladeanzeige während des Abrufs zum Loggen benötigten Daten
-- Korrektur: nbsp; beim Durchsuchen von Formeln nicht als Leerzeichen berücksichtigt
 - Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
-- Korrektur: Beim Analysieren von Formeln in Cachenotizen werden zusätzliche Wegpunkte angelegt
-- Korrektur: Variablen wurden beim Kopieren von Formeln in einen anderen Cache nicht erstellt
-- Korrektur: (Experimentelle Galerie) Nutze Bild-Cache auch für Log-/Spoiler-Bilder
 - Neu: Logplatzhalter GEOCODE
+- Neu: Einfache HTML-Unterstützung für Definitionslisten (dl/dt/dd)
+- Neu: Zoombare Bildansicht für Bilder in Cachebeschreibung
+- Korrektur: Öffne Verlinkungen in Cachebeschreibung in integrierter Webansicht (falls aktiviert)
+- Änderung: Cache-Beschreibung im Hintergrund formatieren und standardmäßig auf 50.000 Zeichen begrenzen
 
 ### Allgemein
-- Neu: Unterstütze generische Downloads für "mf-v4-map"- und "mf-theme"-basierte Links (automatische Updates dabei nicht unterstützt)
-- Neu: Wartungsfunktion indiziert die Datenbank neu
-- Neu: Automatische Leistungsoptimierung der Datenbank alle 90 Tage (erneutes Indizieren)
-- Korrektur: Handhabe fehlende Berechtigung für genauen Standort
-- Änderung: Website-Sprachwechsel entfernt
-- Korrektur: Gelöschte benutzerdefinierte Caches werden beim Neustart von c:geo nicht entfernt
 - Neu: Ansicht für ausstehende Downloads
 - Neu: Cache-Name / Name der Liste beim GPX-Export an Dateiname anhängen
 - Änderung: "Als Android-Browser identifizieren"-Einstellung entfernt
 - Neu: Beim Start ausstehende Downloads prüfen (Karten- / Routing-Daten)
-- Korrektur: Filterleiste im hellen Design nicht lesbar
 - Neu: Auswahl der Dateien, die heruntergeladen werden sollen
 - Neu: Statusfilter für DNF
 - Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)
+- Neu: Manuelle Eingabe von Werten in Filtern mit Schieberegler
+- Neu: Aktiviere Upload korrigierter Koordinaten für Caches aus GPX-Import, wenn sie Wegpunkte vom Typ "ORIGINAL" enthalten
+- Änderung: Filterstatus verständlicher formuliert
