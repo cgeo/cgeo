@@ -47,7 +47,7 @@
         <Preference
             android:key="@string/pref_gc_fb_login_hint"
             android:title="@string/settings_info_facebook_login_title"
-            android:text="@string/settings_info_facebook_login"
+            android:summary="@string/settings_info_facebook_login"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_gc_website"
