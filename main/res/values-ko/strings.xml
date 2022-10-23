@@ -670,7 +670,6 @@
     <string name="settings_summary_map">지도 종류, 오프라인 지도 설정 및 기본지도 등 설정하기</string>
     <string name="settings_title_map_data">지도 데이터</string>
     <string name="settings_title_offline_maps">오프라인 지도</string>
-    <string name="settings_title_map_themes">오프라인 지도 테마 &amp; 음영식</string>
     <string name="settings_title_offline_routing">오프라인 라우팅</string>
     <string name="settings_summary_offline_routing">도우미 앱 \"BRouter\"가 설치 및 구성되어 있거나 내부 라우팅이 활성화 된 경우 오프라인 라우팅을 사용할 수 있습니다.</string>
     <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
@@ -1196,6 +1195,9 @@
     <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
     <string name="cache_description">설명</string>
     <string name="cache_description_table_note">설명에는 %s에서 잘 보이도록 테이블 포맷이 포함됩니다.</string>
+    <string name="cache_description_rendering">렌더링 설명, 잠시만 기다려 주십시오…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">경고: 설명이 매우 깁니다(%1$d자). 처음 %2$d%%자만 표시됩니다.</string>
+    <string name="cache_description_render_fully">전체 설명 렌더링</string>
     <string name="cache_area_description">지역 설명</string>
     <string name="cache_cache_description">캐시 설명</string>
     <string name="cache_virtual_description">가상 질문</string>
