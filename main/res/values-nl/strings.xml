@@ -677,7 +677,6 @@
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
     <string name="settings_title_offline_maps">Offline kaarten</string>
-    <string name="settings_title_map_themes">Offline kaart thema\'s &amp; heuvelarcering</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
