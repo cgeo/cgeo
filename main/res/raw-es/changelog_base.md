@@ -1,4 +1,7 @@
 
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
 ### Mapa
 - Nuevo: Ahora puede cambiar el nombre que se muestra de un sendero
 
