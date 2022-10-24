@@ -691,6 +691,8 @@
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
+    <string name="settings_title_map_themes">Motywy map offline</string>
+    <string name="settings_title_map_hillshading">Cieniowanie map offline</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
     <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
@@ -917,6 +919,8 @@
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
+    <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
+    <string name="settings_info_hillshading">Cieniowanie (hillshading) jest techniką tworzenia map pomocy topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nPliki źródłowe zawierające informacje o wysokości muszą być uzyskane ręcznie – kliknij ten element dla źródeł – i umieść w folderze źródłowym określonym poniżej.</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
