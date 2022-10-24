@@ -691,6 +691,8 @@
     <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
+    <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos</string>
+    <string name="settings_title_map_hillshading">Žemėlapio naudojamo neprisijungus kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
     <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
@@ -917,6 +919,8 @@
     <string name="settings_info_offline_maps">c:geo palaiko žemėlapius, skirtus naudoti neprisijungus. Žemėlapius galite gauti iš skirtingų tiekėjų arba net sukurti savo žemėlapius (iš OSM duomenų). Pirmiausia turite pasirinkti aplanką, kuriame bus saugomi žemėlapiai naudojimui neprisijungus.</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
     <string name="settings_info_themes">c:geo palaiko pasirinktines temas žemėlapiams naujajamiems neprisijungus. Jas galima naudoti norint pakeisti žemėlapio spalvų stilių (pvz., norint turėti naktinio vaizdo žemėlapį) arba paryškinti tam tikrus objektus, pvz., dviračių takus ar aukščio linijas žemėlapyje.\n\nDirbant su neįtrauktomis žemėlapių temomis gali sumažėti žemėlapio peržiūros priemonės atidarymo našumas. Tokiu atveju temos aplanką galima pasirinktinai sinchronizuoti su programos privačiu vietiniu aplanku, kad būtų galima greičiau pasiekti (už tam tikrą saugyklos vietos kainą).</string>
+    <string name="settings_info_hillshading_title">Informacija apie kalvų šešėlius</string>
+    <string name="settings_info_hillshading">Reljiefo šešeliai yra topografinių reljefo žemėlapių kūrimo technika, pridedant prie žemėlapio apšvietimo efektą, nurodantį aukščio pokyčius. Šlaitai bus patamsinti / pašviesinti, kad būtų sukurtas 3D efektas.\nŠaltinio failus, kuriuose yra aukščio informacija, reikia gauti rankiniu būdu - spustelėkite šį elementą, kad pamatytumėte šaltinius - ir patalpinkite į toliau nurodytą šaltinių aplanką.</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_local_file_system">Vietinė failų sistema</string>
     <string name="init_base_directory_description">Bazinis aplankas viešiems vietiniams duomenims</string>
