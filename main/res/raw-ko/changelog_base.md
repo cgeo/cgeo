@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### 알림: API 레벨 변경
+플레이 스토어의 향후 제한 사항으로 인해 대상 Android API 레벨을 업그레이드했습니다. 이것은 c:geo 사용에 영향을 미치지 않아야 하며 Android 5 이상에서 계속 실행되어야 합니다. 그러나 불규칙성을 발견하면 support@cgeo.org로 문의해 주십시오.
 
 ### 지도
 - 신규: 트랙의 표시 이름 변경 허용
