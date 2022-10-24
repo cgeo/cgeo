@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Προσοχή: Αλλαγή επιπέδου API
+Λόγω των επερχόμενων περιορισμών στο Play Store έχουμε αναβαθμίσει το στοχευμένο επίπεδο API Android. Αυτό δεν πρέπει να επηρεάσει τη χρήση του c:geo, και θα πρέπει να συνεχίσει να τρέχει από το Android 5 και μετά, αλλά αν παρατηρήσετε δυσλειτουργίες, παρακαλούμε επικοινωνήστε μαζί μας στο support@cgeo.org
 
 ### Χάρτης
 - Νέο: Να επιτρέπεται η αλλαγή του ονόματος του κομματιού
