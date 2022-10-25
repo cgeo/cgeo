@@ -1,26 +1,26 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Opmerking: API-niveau wijzigen
+Als gevolg van aankomende beperkingen in de Play Store hebben we het gerichte Android API niveau verbeterd. Dit heeft geen invloed op het gebruik van c:geo, en diebt nog steeds te worden uitgevoerd vanaf Android 5 en hoger maar als je onregelmatigheden opmerkt, neem dan contact met ons op via support@cgeo.org
 
 ### Kaart
-- New: Allow change of track's display name
+- Nieuw: Toestaan dat de weergavenaam van de track wordt gewijzigd
 
 ### Cache details
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
+- Oplossing: Log afbeelding gelabeld "Afbeelding 1" zelfs als er maar één afbeelding toegevoegd is
+- Nieuw: GEOCODE logsjabloon veld
+- Nieuw: Basis HTML-opmaak ondersteuning voor definitielijsten (dl/dt/dd)
+- Nieuw: Open inzoombare afbeeldingsweergave bij het tikken op een lijst met afbeeldingen
+- Oplossing: Open links in lijsten in de geïntegreerde webweergave (indien ingeschakeld)
+- Wijziging: Render cache beschrijving op de achtergrond en limiet lengte standaard tot 50.000 tekens
 
 ### Algemeen
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
+- Nieuw: Lopende downloads weergave
+- Nieuw: Voeg cachenaam / lijstnaam toe aan bestandsnaam bij GPX export
+- Wijziging: "Identificeren als Android browser" instelling verwijderd
+- Nieuw: Controleer lopende downloads (kaarten / routing gegevens) bij het opstarten
+- Nieuw: Sta selectie van bestanden toe om te downloaden
+- Nieuw: Status filter voor DNF
+- Nieuw: Hoogteverschil op het startscherm weergeven (indien beschikbaar)
+- Nieuw: Handmatige invoer van waarden toestaan in filters met behulp van schuifregelaars
+- Nieuw: upload coördinaten inschakelen voor caches geïmporteerd uit GPX bestand, wanneer de cache een waypoint heeft van het type "ORIGINAL"
+- Wijziging: Verbetering van de tekst van de filter statusregel
