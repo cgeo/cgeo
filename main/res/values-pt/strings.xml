@@ -677,6 +677,8 @@
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_maps">Mapas offline</string>
+    <string name="settings_title_map_themes">Temas de mapas offline</string>
+    <string name="settings_title_map_hillshading">Sombreado de elevações nos mapas offline</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
@@ -903,6 +905,8 @@
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Estes podem ser utilizados para alterar o estilo de cor do mapa (por exemplo, para ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo dentro do mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
+    <string name="settings_info_hillshading_title">Informação sobre o Sombreado de elevações</string>
+    <string name="settings_info_hillshading">O Sombreado de elevações é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de elevação. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nOs ficheiros fonte, contendo as informações de elevação, devem ser obtidos manualmente - clique neste item para fontes - e colocados na pasta de fontes definida abaixo.</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
