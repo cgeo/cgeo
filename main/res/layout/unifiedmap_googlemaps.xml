@@ -29,11 +29,16 @@
             android:visibility="gone"
             android:maxLines="1" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/mapViewGM"
-            android:layout_width="match_parent"
+        <cgeo.geocaching.ui.TouchableWrapper
+            android:id="@+id/mapViewGMWrapper"
             android:layout_height="match_parent"
-            tools:context=".unifiedmap.UnifiedMapActivity" />
+            android:layout_width="match_parent">
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/mapViewGM"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".unifiedmap.UnifiedMapActivity" />
+        </cgeo.geocaching.ui.TouchableWrapper>
 
         <include layout="@layout/map_distanceinfo" />
         <include layout="@layout/map_settings_button" />
