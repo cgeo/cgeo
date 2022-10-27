@@ -188,6 +188,7 @@
     <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
     <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
+    <string translatable="false" name="pref_maphillshading">maphillshading</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
     <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
