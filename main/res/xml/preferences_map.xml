@@ -79,6 +79,11 @@
             android:summary="@string/settings_info_hillshading"
             android:title="@string/settings_info_hillshading_title"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_maphillshading"
+            android:title="@string/settings_hillshading_enable"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
             android:summary="@string/settings_info_themes"
