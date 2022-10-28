@@ -24,3 +24,4 @@
 - Νέα: Να επιτρέπεται η χειροκίνητη εισαγωγή τιμών στα φίλτρα με χρήση ρυθμιστικών
 - Νέο: Ενεργοποίηση μεταφόρτωσης τροποποιημένων συντεταγμένων για κρύπτες που εισάγονται από το αρχείο GPX, όταν η κρύπτη έχει σημείο του τύπου "ΚΑΤΑΓΩΓΗ"
 - Change: Improve filter status line text
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
