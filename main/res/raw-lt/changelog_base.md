@@ -24,3 +24,4 @@ Dėl būsimų apribojimų Play Store atnaujinome tikslinį Android API lygį. Ta
 - Naujiena: Leidžiama rankiniu būdu įvesti reikšmes į filtrus naudojant slankiklius
 - Naujiena: Įgalinkite pakeistų slėptuvės koordinačių importuotų iš GPX failo įkėlimą, kai slėptuvėje yra ''ORIGINAL'' tipo kelio taškas
 - Pakeitimas: Patobulintas filtro būsenos eilutės tekstas
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
