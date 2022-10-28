@@ -24,3 +24,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
 - Uusi: Ota käyttöön muokattujen koordinaattien lataaminen GPX-tiedostosta tuoduille kätköille, kun kätkössä on reittipiste "ORIGINAL"
 - Muutos: Paranna suodattimen tilarivin tekstiä
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
