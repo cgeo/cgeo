@@ -24,3 +24,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Nuevo: Ahora puede introducir manualmente valores en filtros usando deslizadores
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
