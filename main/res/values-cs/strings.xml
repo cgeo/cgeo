@@ -256,8 +256,8 @@
     <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
     <string name="err_parse_dist">c:geo nemůže dopočítat vzdálenost.</string>
     <string name="err_parse_lat_lon">c:geo nemůže dopočítat zeměpisnou šířku nebo délku.</string>
-    <string name="err_rendertheme_file_unreadable">Vybraný styl vykreslování nelze načíst. Bude použit výchozí styl.</string>
-    <string name="err_rendertheme_invalid">Vybraný styl vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí styl.</string>
+    <string name="err_rendertheme_file_unreadable">Vybraný motiv vykreslování nelze načíst. Bude použit výchozí.</string>
+    <string name="err_rendertheme_invalid">Vybraný motiv vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí.</string>
     <string name="err_invalid_filename_char">Znak %c není povolený</string>
     <string name="warn_save_nothing">Není nic k uložení.</string>
     <string name="warn_no_cache_coord">Není k dispozici žádná keška se souřadnicemi.</string>
@@ -691,6 +691,7 @@
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
+    <string name="settings_title_map_themes">Offline mapové motivy</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
@@ -915,7 +916,7 @@
     <string name="settings_folder_changed">Složka \"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo do této složky.\n\nKlepnutím na „%3$s“ zachováte místo toho aktuální nastavení složky.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
-    <string name="settings_info_themes_title">Info o stylech mapy</string>
+    <string name="settings_info_themes_title">Info o motivech mapy</string>
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
@@ -987,7 +988,7 @@
     <string name="init_summary_plain_logs">Zobrazovat logy bez barev</string>
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
-    <string name="init_rendertheme_folder">Složka mapových témat</string>
+    <string name="init_rendertheme_folder">Složka motivů map</string>
     <string name="init_mapshading_folder">Složka se soubory stínování map</string>
     <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které je třeba umístit do této složky.</string>
     <string name="init_mapShadingLinearity_title">Linearita stínování</string>
