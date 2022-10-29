@@ -9,10 +9,14 @@ import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import android.app.Activity;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -285,6 +289,18 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
             }
             return false;
         }
+    }
+
+    // ========================================================================
+    // additional menu entries
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+        if (item.getItemId() == R.id.menu_theme_legend) {
+            RenderThemeLegend.showLegend(activityRef.get(), themeHelper);
+            return true;
+        }
+        return false;
     }
 
     // ========================================================================

@@ -31,6 +31,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
@@ -625,7 +626,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // theming options
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemes());
-//@todo        menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
+        menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
 
         return result;
     }
@@ -707,9 +708,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             tileProvider.getMap().selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
             tileProvider.getMap().selectThemeOptions(this);
-        } else if (id == R.id.menu_theme_legend) {
-            // @todo
-            // RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
         } else if (id == R.id.menu_select_mapview) {
@@ -730,10 +728,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 tileProvider.getMap().setPreferredLanguage(language);
                 return true;
             }
-            final AbstractTileProvider tileProvider = TileProviderFactory.getTileProvider(id);
-            if (tileProvider != null) {
+            final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
+            if (tileProviderLocal != null) {
                 item.setChecked(true);
-                changeMapSource(tileProvider);
+                changeMapSource(tileProviderLocal);
+                return true;
+            }
+            if (tileProvider.getMap().onOptionsItemSelected(item)) {
                 return true;
             }
             // @todo: remove this if-block after having completed implementation of UnifiedMap
