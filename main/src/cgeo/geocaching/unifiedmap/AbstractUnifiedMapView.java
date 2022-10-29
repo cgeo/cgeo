@@ -8,8 +8,10 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
@@ -175,6 +177,13 @@ public abstract class AbstractUnifiedMapView<T> {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
         }
         activity.onTap(latitudeE6, longitudeE6, isLongTap);
+    }
+
+    // ========================================================================
+    // additional menu entries
+
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+        return false;
     }
 
     // ========================================================================
