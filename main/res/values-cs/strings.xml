@@ -692,6 +692,7 @@
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_map_themes">Offline mapové motivy</string>
+    <string name="settings_title_map_hillshading">Stínování kopců v offline mapách</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
@@ -918,6 +919,8 @@
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o motivech mapy</string>
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
+    <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
+    <string name="settings_info_hillshading">Stínování kopců je technika pro tvorbu map topografického reliéfu, která do mapy přidává světelný efekt pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nZdrojové soubory obsahující informace o nadmořské výšce je třeba získat ručně - klikněte na tuto položku pro zdroje - a umístěte je do níže definované složky zdrojů.</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
@@ -1241,6 +1244,9 @@
     <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
+    <string name="cache_description_rendering">Vykreslování popisu, čekejte prosím…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varování: Popis je velmi velký (%1$d znaků). Zobrazí se pouze prvních %2$d%%.</string>
+    <string name="cache_description_render_fully">Popis kompletně vykreslený</string>
     <string name="cache_area_description">Popis místa</string>
     <string name="cache_cache_description">Popis kešky</string>
     <string name="cache_virtual_description">Virtuální otázka</string>
@@ -1598,8 +1604,8 @@
     <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
     <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
     <string name="init_summary_hidewp_visited">Skrýt navštívené trasové body na mapě</string>
-    <string name="map_theme_select">Styl mapy…</string>
-    <string name="map_theme_options">Možnosti vzhledu</string>
+    <string name="map_theme_select">Vybrat motiv mapy</string>
+    <string name="map_theme_options">Možnosti motivu</string>
     <string name="map_language">Jazyk mapy</string>
     <string name="map_live_enable">Povolit živou mapu</string>
     <string name="map_live_disable">Zakázat živou mapu</string>
@@ -2322,7 +2328,7 @@
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
     <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
-    <string name="downloadmap_otherthemedownload">další téma ke stažení</string>
+    <string name="downloadmap_otherthemedownload">další motiv ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
@@ -2339,7 +2345,7 @@
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
-    <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jedno z témat map „freizeitkarte“.</string>
+    <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jeden z motivů map „freizeitkarte“.</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Freizeitkarte“</string>
     <string name="mapserver_hylly_info">Podrobné mapy Finska vyžadují jeden z motivů mapy „Hylly“</string>
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
