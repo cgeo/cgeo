@@ -13,7 +13,6 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import android.app.Activity;
-import android.view.View;
 
 import java.util.ArrayList;
 
@@ -45,7 +44,6 @@ import org.oscim.tiling.TileSource;
 public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     private MapView mMapView;
-    private View rootView;
     private Map mMap;
 
     protected TileLayer baseMap;
