@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -41,6 +42,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
@@ -72,7 +74,6 @@ import androidx.core.content.res.ResourcesCompat;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -91,6 +92,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private AbstractTileProvider tileProvider = null;
     private AbstractGeoitemLayer geoitemLayer = null;
+    private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -242,6 +244,15 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
 //        MapUtils.showMapOneTimeMessages(this, mapMode);
 
+        /*
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
+            @Override
+            protected void onReceive(final Context context, final String geocode) {
+                caches.invalidate(Collections.singleton(geocode));
+            }
+        });
+        */
+
     }
 
     private void setMapModeFromMapType() {
@@ -284,11 +295,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         tileProvider.getMap().setDelayedZoomTo();
         tileProvider.getMap().setDelayedCenterTo();
 
-        final View spinner = findViewById(R.id.map_progressbar);
-        if (spinner != null) {
-            spinner.setVisibility(View.GONE);
-        }
-
+        tileProvider.getMap().showSpinner();
         if (mapChanged) {
             routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
             tracks = new Tracks(routeTrackUtils, this::setTrack);
@@ -325,16 +332,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     break;
                 case UMTT_SearchResult:
                     // load list of caches and scale map to see them all
-                    // @todo: What about their waypoints?
-                    final Set<Geocache> tempCaches = new HashSet<>();
-                    for (String geocode : mapType.searchResult.getGeocodes()) {
-                        final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                        if (temp != null && temp.getCoords() != null) {
-                            tempCaches.add(temp);
-                            geoitemLayer.add(temp);
-                        }
-                        tileProvider.getMap().zoomToBounds(Viewport.containing(tempCaches));
-                    }
+                    final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes());
+                    addSearchResultByGeocaches(mapType.searchResult);
+                    // tileProvider.getMap().zoomToBounds(Viewport.containing(tempCaches));
+                    tileProvider.getMap().zoomToBounds(viewport2);
                     break;
                 default:
                     // nothing to do
@@ -346,11 +347,46 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 overridePositionAndZoom = false;
             }
             setTitle();
+
+            if (loadInBackgroundHandler != null) {
+                loadInBackgroundHandler.onDestroy();
+            }
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this, tileProvider);
         }
+        tileProvider.getMap().hideSpinner();
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
         onResume();
+    }
+
+    public void addSearchResultByGeocaches(final SearchResult searchResult) {
+        Log.e("add " + searchResult.getGeocodes());
+        for (String geocode : searchResult.getGeocodes()) {
+            final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (temp != null && temp.getCoords() != null) {
+                geoitemLayer.add(temp);
+            }
+        }
+    }
+
+    public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
+        Log.e("addSearchResult: " + searchResult.size());
+        for (Geocache cache : searchResult) {
+            geoitemLayer.add(cache);
+        }
+    }
+
+    public void addSearchResultByGeocodes(final Set<String> searchResult) {
+        final StringBuilder s = new StringBuilder();
+        for (String geocode : searchResult) {
+            s.append(" ").append(geocode);
+            final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (temp != null && temp.getCoords() != null) {
+                geoitemLayer.add(temp);
+            }
+        }
+        Log.e("add [" + s + "]");
     }
 
     private void setTitle() {
@@ -362,9 +398,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     @NonNull
     private String calculateTitle() {
-        /* @todo live mode
-        return getString(R.string.map_live);
-        */
+        if (Settings.isLiveMap() && mapType.type == UMTT_PlainMap) {
+            return getString(R.string.map_live);
+        }
         if (mapType.type == UMTT_TargetGeocode) {
             final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null && cache.getCoords() != null) {
@@ -558,8 +594,19 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         TileProviderFactory.addMapViewLanguageMenuItems(menu);
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
 
+        // live map mode
+        final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
+        if (Settings.isLiveMap()) {
+            itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
+            itemMapLive.setTitle(res.getString(R.string.map_live_disable));
+        } else {
+            itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
+            itemMapLive.setTitle(res.getString(R.string.map_live_enable));
+        }
+/* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */ itemMapLive.setVisible(true);
+
         // map rotation state
-        menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always when CGeoMap/NewMap is removed
+        menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always (xml definition) when CGeoMap/NewMap is removed
         final int mapRotation = Settings.getMapRotation();
         switch (mapRotation) {
             case MAPROTATION_OFF:
@@ -598,12 +645,44 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
         /* yet missing:
-        - live mode
+        - live mode (partially)
         - all cache related menu entries
         - all target related menu entries
         - filter related menu entries
          */
-        if (id == R.id.menu_toggle_mypos) {
+        if (id == R.id.menu_map_live) {
+            // partial implementation for PlainMap mode
+            if (mapType.type == UMTT_PlainMap) {
+                Settings.setLiveMap(!Settings.isLiveMap());
+                ActivityMixin.invalidateOptionsMenu(this);
+                setTitle();
+                setMapModeFromMapType();
+            }
+
+            /*
+            mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
+            if (mapOptions.isLiveEnabled) {
+                mapOptions.isStoredEnabled = true;
+                mapOptions.filterContext = new GeocacheFilterContext(LIVE);
+                caches.setFilterContext(mapOptions.filterContext);
+                refreshMapData(false);
+            }
+
+            if (mapOptions.mapMode == MapMode.LIVE) {
+                Settings.setLiveMap(mapOptions.isLiveEnabled);
+            }
+            caches.handleStoredLayers(this, mapOptions);
+            caches.handleLiveLayers(this, mapOptions);
+            ActivityMixin.invalidateOptionsMenu(this);
+            if (mapOptions.mapMode == MapMode.SINGLE) {
+                setTarget(mapOptions.coords, mapOptions.geocode);
+            }
+            mapOptions.mapMode = MapMode.LIVE;
+            updateSelectedBottomNavItemId();
+            mapOptions.title = StringUtils.EMPTY;
+            setTitle();
+            */
+        } else if (id == R.id.menu_toggle_mypos) {
             followMyLocation = !followMyLocation;
             Settings.setLiveMap(followMyLocation);
             if (followMyLocation) {
@@ -843,6 +922,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     protected void onDestroy() {
         tileProvider.getMap().onDestroy();
+        if (loadInBackgroundHandler != null) {
+            loadInBackgroundHandler.onDestroy();
+        }
         super.onDestroy();
     }
 

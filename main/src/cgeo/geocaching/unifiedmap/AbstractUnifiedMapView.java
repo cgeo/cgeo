@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
@@ -28,7 +29,9 @@ public abstract class AbstractUnifiedMapView<T> {
     protected Geopoint delayedCenterTo = null;
     protected Runnable onMapReadyTasks = null;
     protected boolean usesOwnBearingIndicator = true;
+
     protected View mMapView = null;
+    protected View rootView = null;
 
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         activityRef = new WeakReference<>(activity);
@@ -76,6 +79,11 @@ public abstract class AbstractUnifiedMapView<T> {
     public abstract Geopoint getCenter();
 
     public abstract BoundingBox getBoundingBox();
+
+    public Viewport getViewport() {
+        final BoundingBox bb = getBoundingBox();
+        return new Viewport(new Geopoint(bb.getMinLatitude(), bb.getMinLongitude()), new Geopoint(bb.getMaxLatitude(), bb.getMaxLongitude()));
+    }
 
     protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
@@ -131,6 +139,29 @@ public abstract class AbstractUnifiedMapView<T> {
         if (delayedZoomTo != -1) {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
             delayedZoomTo = -1;
+        }
+    }
+
+    // ========================================================================
+    // Map progressbar handling
+
+    public void showSpinner() {
+        final UnifiedMapActivity activity = activityRef.get();
+        if (activity != null) {
+            final View spinner = activity.findViewById(R.id.map_progressbar);
+            if (spinner != null) {
+                spinner.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public void hideSpinner() {
+        final UnifiedMapActivity activity = activityRef.get();
+        if (activity != null) {
+            final View spinner = activity.findViewById(R.id.map_progressbar);
+            if (spinner != null) {
+                spinner.setVisibility(View.GONE);
+            }
         }
     }
 

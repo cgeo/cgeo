@@ -18,7 +18,6 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.graphics.Point;
 import android.view.MotionEvent;
-import android.view.View;
 import static android.view.ViewConfiguration.getLongPressTimeout;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,6 @@ import org.oscim.core.BoundingBox;
 public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback /*, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener */ {
 
     private GoogleMap mMap;
-    private View rootView;
     private final GoogleMapController mapController = new GoogleMapController();
     private long lastTouchStart = -1;
 
