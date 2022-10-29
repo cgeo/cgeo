@@ -1,6 +1,6 @@
 
 ### Kaart
-- Nieuw: Voeg ondersteuning voor heuvel arvering toe op OSM
+- Nieuw: Voeg ondersteuning voor heuvel arcering toe op OSM
 - Oplossing: Handmatig gekopieerde waypoints van een cache werden niet allemaal weergegeven
 
 ### Cache details
