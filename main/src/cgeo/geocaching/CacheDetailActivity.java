@@ -122,7 +122,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
