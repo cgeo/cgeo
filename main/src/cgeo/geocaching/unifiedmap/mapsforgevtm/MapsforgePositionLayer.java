@@ -10,7 +10,6 @@ import android.graphics.Matrix;
 import android.location.Location;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.oscim.android.canvas.AndroidBitmap;
@@ -22,6 +21,7 @@ import org.oscim.layers.marker.MarkerSymbol;
 import org.oscim.layers.vector.PathLayer;
 import org.oscim.layers.vector.VectorLayer;
 import org.oscim.layers.vector.geometries.CircleDrawable;
+import org.oscim.layers.vector.geometries.LineDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
@@ -43,11 +43,23 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
             .build();
 
     // position history
-    private final List<PathLayer> historyLayers = new ArrayList<>();
+    private final ClearableVectorLayer historyLayer;
+    final Style historyStyle = Style.builder()
+            .strokeWidth(MapLineUtils.getHistoryLineWidth(true))
+            .strokeColor(MapLineUtils.getTrailColor())
+            .build();
 
     // individual route, routes & tracks
     private final PathLayer navigationLayer;
-    private final List<PathLayer> trackLayers = new ArrayList<>();
+    private final ClearableVectorLayer trackLayer;
+    final Style routeStyle = Style.builder()
+            .strokeWidth(MapLineUtils.getRouteLineWidth(true))
+            .strokeColor(MapLineUtils.getRouteColor())
+            .build();
+    final Style trackStyle = Style.builder()
+            .strokeWidth(MapLineUtils.getTrackLineWidth(true))
+            .strokeColor(MapLineUtils.getTrackColor())
+            .build();
 
     MapsforgePositionLayer(final Map map, final View root) {
         super(root, GeoPoint::new);
@@ -60,17 +72,25 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         map.layers().add(arrowLayer);
         repaintPosition();
 
+        // history
+        historyLayer = new ClearableVectorLayer(map);
+        map.layers().add(historyLayer);
+
         // navigation
         navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
         map.layers().add(navigationLayer);
+
+        // tracks & routes
+        trackLayer = new ClearableVectorLayer(map);
+        map.layers().add(trackLayer);
     }
 
     protected void destroyLayer(final Map map) {
         map.layers().remove(accuracyCircleLayer);
         map.layers().remove(arrowLayer);
-        clearLayers(historyLayers);
-        clearLayers(trackLayers);
+        map.layers().remove(historyLayer);
         map.layers().remove(navigationLayer);
+        map.layers().remove(trackLayer);
     }
 
     private void clearLayers(final List<PathLayer> layers) {
@@ -124,23 +144,19 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     protected void repaintHistory() {
-        clearLayers(historyLayers);
+        historyLayer.clear();
         repaintHistoryHelper((points) -> {
-            final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth(true));
-            historyLayers.add(historyLayer);
-            map.layers().add(historyLayer);
-            historyLayer.setPoints(points);
+            final LineDrawable path = new LineDrawable(points, historyStyle);
+            historyLayer.add(path);
         });
     }
 
     @Override
     protected void repaintRouteAndTracks() {
-        clearLayers(trackLayers);
+        trackLayer.clear();
         repaintRouteAndTracksHelper((segment, isTrack) -> {
-            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor(), isTrack ? MapLineUtils.getTrackLineWidth(true) : MapLineUtils.getRouteLineWidth(true));
-            trackLayers.add(trackLayer);
-            map.layers().add(trackLayer);
-            trackLayer.setPoints(segment);
+            final LineDrawable path = new LineDrawable(segment, isTrack ? trackStyle : routeStyle);
+            trackLayer.add(path);
         });
     }
 
