@@ -51,30 +51,14 @@ public abstract class AbstractUnifiedMapView<T> {
         currentTileProvider = newSource;
     }
 
-    public void setPreferredLanguage(final String language) {
-        // default: do nothing
-    }
-
-    public abstract float getCurrentBearing();
-
-    public abstract void setBearing(float bearing);
-
-    public void setMapRotation(final int mapRotation) {
-        this.mapRotation = mapRotation;
-        if (mapRotation == Settings.MAPROTATION_OFF) {
-            setBearing(0);
-        }
-    }
-
-    protected abstract void configMapChangeListener(boolean enable);
+    protected abstract AbstractGeoitemLayer createGeoitemLayers(AbstractTileProvider tileProvider);
 
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;
     }
 
-    public void setResetFollowMyLocationListener(@Nullable final Runnable listener) {
-        resetFollowMyLocationListener = listener;
-    }
+    // ========================================================================
+    // position related methods
 
     public abstract void setCenter(Geopoint geopoint);
 
@@ -87,8 +71,6 @@ public abstract class AbstractUnifiedMapView<T> {
         return new Viewport(new Geopoint(bb.getMinLatitude(), bb.getMinLongitude()), new Geopoint(bb.getMaxLatitude(), bb.getMaxLongitude()));
     }
 
-    protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
-
     protected void setDelayedCenterTo() {
         if (delayedCenterTo != null) {
             setCenter(delayedCenterTo);
@@ -96,10 +78,12 @@ public abstract class AbstractUnifiedMapView<T> {
         }
     }
 
-    protected abstract AbstractGeoitemLayer createGeoitemLayers(AbstractTileProvider tileProvider);
+    public void setResetFollowMyLocationListener(@Nullable final Runnable listener) {
+        resetFollowMyLocationListener = listener;
+    }
 
     // ========================================================================
-    // theme related methods
+    // theme & language related methods
 
     public void selectTheme(final Activity activity) {
         // default is empty
@@ -113,8 +97,14 @@ public abstract class AbstractUnifiedMapView<T> {
         // default is empty
     }
 
+    public void setPreferredLanguage(final String language) {
+        // default: do nothing
+    }
+
     // ========================================================================
-    // zoom & heading methods
+    // zoom, bearing & heading methods
+
+    protected abstract void configMapChangeListener(boolean enable);
 
     public abstract void zoomToBounds(Viewport bounds);
 
@@ -130,19 +120,30 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public abstract void setZoom(int zoomLevel);
 
+    public void setMapRotation(final int mapRotation) {
+        this.mapRotation = mapRotation;
+        if (mapRotation == Settings.MAPROTATION_OFF) {
+            setBearing(0);
+        }
+    }
+
+    public abstract float getCurrentBearing();
+
+    public abstract void setBearing(float bearing);
+
     public float getHeading() {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
     }
 
-    /**
-     * adjust zoom to be in allowed zoom range for current map
-     */
+    /** adjust zoom to be in allowed zoom range for current map */
     protected void setDelayedZoomTo() {
         if (delayedZoomTo != -1) {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
             delayedZoomTo = -1;
         }
     }
+
+    protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
     // ========================================================================
     // Map progressbar handling
@@ -168,7 +169,7 @@ public abstract class AbstractUnifiedMapView<T> {
     }
 
     // ========================================================================
-    // Map tap handling
+    // Tap handling methods
 
     /** transmits tap on map to activity */
     protected void onTapCallback(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {

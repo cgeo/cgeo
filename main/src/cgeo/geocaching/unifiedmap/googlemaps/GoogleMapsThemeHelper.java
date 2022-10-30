@@ -7,6 +7,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import android.app.Activity;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ class GoogleMapsThemeHelper {
             this.jsonRes = jsonRes;
         }
 
+        @Nullable
         public MapStyleOptions getMapStyleOptions(final Context context) {
             final int jsonResId;
             if (this == AUTO) {
@@ -45,6 +48,7 @@ class GoogleMapsThemeHelper {
             return null;
         }
 
+        @NonNull
         public static List<String> getLabels(final Context context) {
             final List<String> themeLabels = new ArrayList<>();
             for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
@@ -53,6 +57,7 @@ class GoogleMapsThemeHelper {
             return themeLabels;
         }
 
+        @NonNull
         public static GoogleMapsThemes getByName(final String themeName) {
             for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
                 if (theme.name().equals(themeName)) {
@@ -67,6 +72,7 @@ class GoogleMapsThemeHelper {
         // utility class
     }
 
+    /** Open theme selection dialog for GM map view, store result in settings */
     public static void selectTheme(final Activity activity, final GoogleMap googleMap) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.map_theme_select);
@@ -83,6 +89,7 @@ class GoogleMapsThemeHelper {
         builder.show();
     }
 
+    /** Apply selected GM theme to map (use default theme, if none is selected) */
     public static void setTheme(final Activity activity, final GoogleMap googleMap) {
         final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
         googleMap.setMapStyle(theme.getMapStyleOptions(activity));
