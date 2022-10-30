@@ -751,6 +751,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     @NonNull
     private String getComparable(final int position) {
+        if (position < 0 || position >= list.size()) {
+            return " ";
+        }
         try {
             return sortContext.getComparator().getSortableSection(list.get(position));
         } catch (NullPointerException e) {
