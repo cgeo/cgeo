@@ -625,7 +625,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // theming options
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
-        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemes());
+        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
         menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
 
         return result;
