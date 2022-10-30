@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.ImageGalleryCategoryBinding;
 import cgeo.geocaching.databinding.ImageGalleryImageBinding;
+import cgeo.geocaching.databinding.ImagegalleryViewBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
@@ -15,6 +16,9 @@ import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
+import cgeo.geocaching.utils.CategorizedListHelper;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
@@ -29,7 +33,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -38,25 +41,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.gridlayout.widget.GridLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageGalleryView extends LinearLayout {
 
     private static final int IMAGE_TARGET_SIZE_DB = 160;
-    private static final int IMAGE_SPACE_DB = 10;
 
     private Context context;
     private Activity activity;
+    private ImagegalleryViewBinding binding;
+    private ImageGalleryAdapter adapter;
+
+    private final CategorizedListHelper categorizedImageListHelper = new CategorizedListHelper();
+
+    private boolean allowOpenViewer = true;
 
     private ImageActivityHelper imageHelper = null;
     private final ImageDataMemoryCache imageDataMemoryCache = new ImageDataMemoryCache(2);
@@ -64,15 +73,9 @@ public class ImageGalleryView extends LinearLayout {
     private String geocode;
     private int imageCount = 0;
 
-    private int imageSizeDp = 150;
-    private int columnCount = 2;
-    private int categoryHorizontalMargin = 2;
-
     private Action2<ImageGalleryView, Integer> imageCountChangeCallback = null;
 
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
-    private final List<String> categoryList = new ArrayList<>();
-    private final Map<String, ImageCategoryData> categoryDataMap = new HashMap<>();
     private final Map<String, EditableCategoryHandler> editableCategoryHandlerMap = new HashMap<>();
 
     public interface EditableCategoryHandler {
@@ -87,6 +90,59 @@ public class ImageGalleryView extends LinearLayout {
 
     }
 
+    public static class ImageGalleryEntryHolder extends AbstractRecyclerViewHolder {
+
+        public final ImageGalleryImageBinding imageBinding;
+        public final ImageGalleryCategoryBinding categoryBinding;
+
+        public ImageGalleryEntry entry;
+
+        public static ImageGalleryEntryHolder createForImage(final ViewGroup view) {
+            return new ImageGalleryEntryHolder(ImageGalleryImageBinding.inflate(LayoutInflater.from(view.getContext()), view, false), null);
+        }
+
+        public static ImageGalleryEntryHolder createForCategory(final ViewGroup view) {
+            return new ImageGalleryEntryHolder(null, ImageGalleryCategoryBinding.inflate(LayoutInflater.from(view.getContext()), view, false));
+        }
+
+        private ImageGalleryEntryHolder(final ImageGalleryImageBinding imageBinding, final ImageGalleryCategoryBinding categoryBinding) {
+            super(imageBinding == null ? categoryBinding.getRoot() : imageBinding.getRoot());
+            this.imageBinding = imageBinding;
+            this.categoryBinding = categoryBinding;
+        }
+    }
+
+    public class ImageGalleryAdapter extends ManagedListAdapter<ImageGalleryEntry, ImageGalleryEntryHolder> {
+
+        protected ImageGalleryAdapter(final RecyclerView recyclerView) {
+            super(new Config(recyclerView));
+        }
+
+        @NonNull
+        @Override
+        public ImageGalleryEntryHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+            return viewType == 0 ? ImageGalleryEntryHolder.createForCategory(parent) : ImageGalleryEntryHolder.createForImage(parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final ImageGalleryEntryHolder holder, final int position) {
+            holder.entry = getItem(position);
+            if (holder.imageBinding != null) {
+                fillView(holder, holder.imageBinding);
+            } else {
+                fillCategoryView(holder, holder.categoryBinding);
+            }
+        }
+
+        @Override
+        public int getItemViewType(final int position) {
+            return getItem(position).isHeader() ? 0 : 1;
+        }
+
+    }
+
+
+
     @Override
     protected void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -95,82 +151,50 @@ public class ImageGalleryView extends LinearLayout {
 
     private void recalculateLayout(final Configuration newConfig) {
 
-        this.imageSizeDp = IMAGE_TARGET_SIZE_DB;
-        this.columnCount = Math.max(1, newConfig.screenWidthDp / (this.imageSizeDp + 10));
-
-        //provide at least 2 columns
-        if (this.columnCount == 1 && newConfig.screenWidthDp > 100) {
-            this.columnCount = 2;
-            this.imageSizeDp = (newConfig.screenWidthDp / 2) - 10;
-        }
-        this.categoryHorizontalMargin = Math.max(0,
-                (newConfig.screenWidthDp - this.columnCount * (this.imageSizeDp + IMAGE_SPACE_DB)) / 2 - 10);
-
-        //apply new layout
-        for (ImageCategoryData categoryData : this.categoryDataMap.values()) {
-            setListLayout(categoryData);
-        }
+        final GridLayoutManager manager = (GridLayoutManager) binding.imagegalleryList.getLayoutManager();
+        final int colCount = Math.max(1, newConfig.screenWidthDp / (IMAGE_TARGET_SIZE_DB + 10));
+        manager.setSpanCount(colCount);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(final int pos) {
+                return adapter.getItem(pos).isHeader() ? colCount : 1;
+            }
+        });
+        manager.getSpanSizeLookup().setSpanGroupIndexCacheEnabled(true);
+        manager.getSpanSizeLookup().setSpanIndexCacheEnabled(true);
     }
 
-    private void setListLayout(final ImageCategoryData categoryData) {
-        final MarginLayoutParams mlp = (MarginLayoutParams) categoryData.view.imageGalleryList.getLayoutParams();
-        final int mh = ViewUtils.dpToPixel(this.categoryHorizontalMargin);
-        mlp.setMargins(mh, 0, mh, 0);
-
-        final int colCountFinal = columnCount;
-        categoryData.view.imageGalleryList.setOrientation(GridLayout.HORIZONTAL);
-        setGridColumns(categoryData.view.imageGalleryList, colCountFinal);
+    private void invalidateSpanIndexCaches() {
+        final GridLayoutManager manager = (GridLayoutManager) binding.imagegalleryList.getLayoutManager();
+        manager.getSpanSizeLookup().invalidateSpanGroupIndexCache();
+        manager.getSpanSizeLookup().invalidateSpanIndexCache();
     }
 
-    private void setImageLayoutSizes(final ImageGalleryImageBinding image, final int imageSizeInDp) {
-        final int imageSizeInner = imageSizeInDp - 10;
-        setLayoutSize(image.imageComplete, imageSizeInDp, -1);
-        setLayoutSize(image.imageWrapper, imageSizeInner, imageSizeInner);
-        setLayoutSize(image.imageImage, imageSizeInner, imageSizeInner);
-        setLayoutSize(image.imageTitle, imageSizeInner, -1);
-
-        final MarginLayoutParams mlp = (MarginLayoutParams) image.imageComplete.getLayoutParams();
-        final int mh = ViewUtils.dpToPixel(IMAGE_SPACE_DB) / 2;
-        mlp.setMargins(0, mh, 0, mh);
-
-    }
-
-    private static void setLayoutSize(final View view, final int widthInDp, final int heightInDp) {
-        final ViewGroup.LayoutParams lp = view.getLayoutParams();
-        if (widthInDp > 0) {
-            lp.width = ViewUtils.dpToPixel(widthInDp);
-        }
-        if (heightInDp > 0) {
-            lp.height = ViewUtils.dpToPixel(heightInDp);
-        }
-    }
-
-    private static class ImageData {
+    private static class ImageGalleryEntry {
 
         public final Image image;
         public final String category;
 
-        ImageData(final String category, final Image image) {
+        ImageGalleryEntry(final String category) {
+            this(category, null);
+        }
+
+        ImageGalleryEntry(final String category, final Image image) {
             this.image = image;
             this.category = category;
         }
-    }
 
-    private static class ImageCategoryData {
-
-        public final List<ImageData> imageList = new ArrayList<>();
-        public final ImageGalleryCategoryBinding view;
-
-        ImageCategoryData(final ImageGalleryCategoryBinding view) {
-            this.view = view;
+        public boolean isHeader() {
+            return image == null;
         }
     }
 
-    public void fillView(final ImageData imgData, final ImageGalleryImageBinding binding) {
+    public void fillView(final ImageGalleryEntryHolder viewHolder, final ImageGalleryImageBinding binding) {
 
+        final ImageGalleryEntry imgData = viewHolder.entry;
         final Image img = imgData.image;
         setImageTitle(binding, img.getTitle());
-        setImageLayoutSizes(binding, imageSizeDp);
+        //setImageLayoutSizes(binding, imageSizeDp);
         binding.imageDescriptionMarker.setVisibility(img.hasDescription() ? View.VISIBLE : View.GONE);
 
         if (!img.isImageOrUnknownUri()) {
@@ -182,6 +206,12 @@ public class ImageGalleryView extends LinearLayout {
         } else {
 
             imageDataMemoryCache.loadImage(img.getUrl(), p -> {
+
+                final ImageGalleryEntry currentEntry = viewHolder.entry;
+                if (!currentEntry.image.getUrl().equals(img.getUrl())) {
+                    //this means that meanwhile in the same ViewHolder another image was place
+                    return;
+                }
 
                 binding.imageImage.setImageDrawable(p.first);
                 binding.imageImage.setVisibility(View.VISIBLE);
@@ -197,18 +227,14 @@ public class ImageGalleryView extends LinearLayout {
                 binding.imageProgressBar.setVisibility(View.GONE);
             }, () -> {
                 binding.imageProgressBar.setVisibility(View.VISIBLE);
-                binding.imageImage.setVisibility(View.GONE);
+                binding.imageImage.setImageResource(R.drawable.mark_transparent);
+                //binding.imageImage.setVisibility(View.GONE);
                 binding.imageGeoOverlay.setVisibility(View.GONE);
             });
         }
 
-        binding.imageWrapper.setOnClickListener(v -> {
-            if (imgData.image.isImageOrUnknownUri()) {
-                openImageViewer(imgData, binding);
-            } else {
-                ShareUtils.openContentForView(getContext(), img.getUrl());
-            }
-        });
+
+        binding.imageWrapper.setOnClickListener(v -> openImageDetails(imgData, binding));
         binding.imageWrapper.setOnLongClickListener(v -> {
             showContextOptions(imgData, binding);
             return true;
@@ -243,66 +269,69 @@ public class ImageGalleryView extends LinearLayout {
         setOrientation(VERTICAL);
         this.context = new ContextThemeWrapper(getContext(), R.style.cgeo);
         this.activity = ViewUtils.toActivity(this.context);
+
+        inflate(this.context, R.layout.imagegallery_view, this);
+        binding = ImagegalleryViewBinding.bind(this);
+        this.adapter = new ImageGalleryAdapter(binding.imagegalleryList);
+        binding.imagegalleryList.setAdapter(this.adapter);
+        binding.imagegalleryList.setLayoutManager(new GridLayoutManager(this.context, 2));
+
         recalculateLayout(getContext().getResources().getConfiguration());
 
         //enable transitions between gallery and image detail activity
         ImageViewActivity.enableViewTransitions(this.activity);
     }
 
+    /** (re)sets contextual information for gallery */
     public void setup(final String geocode) {
         this.geocode = geocode;
         this.imageDataMemoryCache.setCode(this.geocode);
     }
 
-    public int getCount() {
-        return imageCount;
+    /** gets total number of images currently displayed in this gallery */
+    public int getImageCount() {
+        return categorizedImageListHelper.getContentSize();
     }
 
+    /** adds images for display to this gallery */
     public void addImages(final Collection<Image> images) {
         addImages(images, i -> i.category == Image.ImageCategory.UNCATEGORIZED ? null : i.category.getI18n());
     }
 
+    /** adds images for display to this gallery */
     public void addImages(final Collection<Image> images, final Func1<Image, String> categoryMapper) {
         addImagesInternal(images, categoryMapper, false);
     }
 
     private void addImagesInternal(final Collection<Image> images, final Func1<Image, String> categoryMapper, final boolean force) {
 
-
-        final Map<String, List<ImageData>> catImages = new HashMap<>();
+        //order images by category
+        final List<String> categories = new ArrayList<>();
+        final Map<String, List<ImageGalleryEntry>> catImages = new HashMap<>();
         for (Image img : images) {
-            final String category = categoryMapper == null ? null : categoryMapper.call(img);
-
-            //can't add images from editable categories via this method
+            final String category = categoryMapper.call(img);
             if (!force && editableCategoryHandlerMap.containsKey(category)) {
                 continue;
             }
-
             if (!catImages.containsKey(category)) {
+                categories.add(category);
                 catImages.put(category, new ArrayList<>());
             }
-            catImages.get(category).add(new ImageData(category, img));
+            catImages.get(category).add(new ImageGalleryEntry(category, img));
         }
 
-        int changeCount = 0;
+        //add to gallery category-wise
+        for (String category : categories) {
 
-        for (Map.Entry<String, List<ImageData>> catImage : catImages.entrySet()) {
-            if (!categoryDataMap.containsKey(catImage.getKey())) {
-                createCategory(catImage.getKey());
+            if (!categorizedImageListHelper.containsCategory(category)) {
+                createCategory(category, false);
             }
-
-            final ImageCategoryData catData = categoryDataMap.get(catImage.getKey());
-            final GridLayout gl = catData.view.imageGalleryList;
-            for (ImageData ild : catImage.getValue()) {
-                final View view = LayoutInflater.from(gl.getContext()).inflate(R.layout.image_gallery_image, gl, false);
-                fillView(ild, ImageGalleryImageBinding.bind(view));
-                gl.addView(view);
-                catData.imageList.add(ild);
-            }
-            changeCount += catImage.getValue().size();
-            setListLayout(catData);
+            adapter.addItems(categorizedImageListHelper.getCategoryInsertPosition(category), catImages.get(category));
+            categorizedImageListHelper.addToCount(category, catImages.get(category).size());
         }
-        changeImageCount(changeCount);
+
+        //invalidate caches
+        invalidateSpanIndexCaches();
     }
 
     private void changeImageCount(final int by) {
@@ -314,13 +343,18 @@ public class ImageGalleryView extends LinearLayout {
         }
     }
 
-    private void createCategory(final String category) {
-        if (this.categoryDataMap.containsKey(category)) {
-            return;
-        }
+    private void createCategory(final String category, final boolean atStart) {
 
-        final ImageGalleryCategoryBinding binding = ImageGalleryCategoryBinding.inflate(LayoutInflater.from(this.context), this, false);
-        if (category == null) {
+        if (!categorizedImageListHelper.containsCategory(category)) {
+            categorizedImageListHelper.addOrMoveCategory(category, atStart);
+            adapter.addItem(atStart ? 0 : adapter.getItemCount(), new ImageGalleryEntry(category));
+        }
+    }
+
+    private void fillCategoryView(final ImageGalleryEntryHolder entry, final ImageGalleryCategoryBinding binding) {
+
+        final String category = entry.entry.category;
+        if (StringUtils.isBlank(category)) {
             binding.imgGalleryCategoryTitle.setVisibility(View.GONE);
         } else {
             binding.imgGalleryCategoryTitle.setVisibility(View.VISIBLE);
@@ -333,21 +367,18 @@ public class ImageGalleryView extends LinearLayout {
         binding.imgGalleryAddCamera.setOnClickListener(v -> imageHelper.getImageFromCamera(geocode, false, category));
         binding.imgGalleryAddMultiFiles.setOnClickListener(v -> imageHelper.getMultipleFilesFromStorage(geocode, false, category));
 
-        this.addView(binding.getRoot(), category == null ? 0 : this.getChildCount(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        this.categoryList.add(category == null ? 0 : this.categoryList.size(), category);
-        this.categoryDataMap.put(category, new ImageCategoryData(binding));
-        setListLayout(this.categoryDataMap.get(category));
     }
 
+    /** adds an editable category to this gallery. This is a category where user has options to add/rename/remove images */
     public void setEditableCategory(final String category, final EditableCategoryHandler handler) {
         if (this.activity == null) {
             //not supported if not in context of an activity
             return;
         }
+
         removeCategory(category);
         this.editableCategoryHandlerMap.put(category, handler);
-        createCategory(category);
+        createCategory(category, true);
 
         //fill initially
         addImagesInternal(handler.getAllImages(), i -> category, true);
@@ -360,7 +391,7 @@ public class ImageGalleryView extends LinearLayout {
                     //change title of camera photos
                     final Collection<Image> copy = new ArrayList<>(addedImgs);
                     addedImgs.clear();
-                    int idx = this.categoryDataMap.get(uk).imageList.size() + 1;
+                    int idx = categorizedImageListHelper.getCategoryCount(uk) + 1;
                     for (Image i : copy) {
                         final Image newImage = editableCategoryHandlerMap.get(uk).setTitle(i, LocalizationUtils.getString(R.string.cache_image_title_camera_prefix) + " " + idx);
                         if (newImage == null) {
@@ -377,79 +408,59 @@ public class ImageGalleryView extends LinearLayout {
         }
     }
 
-    /**
-     * include this method in your activity to support activity-related tasks
-     */
+    /** Important: include this method in your activity to support activity-related tasks. Necessary for e.g. editable categories */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         return imageHelper.onActivityResult(requestCode, resultCode, data);
     }
 
+    /** registers a callback which is triggered whenever the count of images displayed in gallery changes */
     public void setImageCountChangeCallback(final Action2<ImageGalleryView, Integer> callback) {
         this.imageCountChangeCallback = callback;
     }
 
-    public View getImageViewForIndex(final int index, final boolean scrollToIndex) {
-        if (index < 0) {
-            return null;
-        }
-
-        int pos = 0;
-        String category = null;
-        for (String cat : categoryList) {
-            category = cat;
-            final GridLayout adapter = Objects.requireNonNull(categoryDataMap.get(cat).view.imageGalleryList);
-            if (pos + adapter.getChildCount() > index) {
-                break;
-            }
-            pos += adapter.getChildCount();
-        }
-        final int idx = index - pos;
-        final GridLayout adapter = categoryDataMap.get(category).view.imageGalleryList;
-        if (category == null || adapter == null || idx < 0 || idx >= adapter.getChildCount()) {
-            return null;
-        }
-
-        final GridLayout recyclerView = categoryDataMap.get(category).view.imageGalleryList;
-        final View view = recyclerView.getChildAt(idx);
-
-        if (scrollToIndex && view != null) {
-            //scroll view into visibility
-            final Rect rect = new Rect(0, -100, view.getWidth(), view.getHeight() + 100);
-            view.requestRectangleOnScreen(rect, true);
-        }
-
-        return view == null ? null : view.findViewById(R.id.image_image);
+    /** scrolls the image gallery to the image index given */
+    public void scrollTo(final int contentIndex) {
+        binding.imagegalleryList.scrollToPosition(categorizedImageListHelper.getListIndexForContentIndex(contentIndex));
     }
 
+    /** returns the image view for given image index (or null if index is invalid) */
+    @Nullable
+    public View getImageViewForContentIndex(final int contentIndex) {
+        final int pos = categorizedImageListHelper.getListIndexForContentIndex(contentIndex);
+        if (pos == -1) {
+            return null;
+        }
+        final ImageGalleryEntryHolder vh = (ImageGalleryEntryHolder) binding.imagegalleryList.findViewHolderForAdapterPosition(pos);
+        if (vh == null || vh.imageBinding == null) {
+            return null;
+        }
+        return vh.imageBinding.imageImage;
+    }
+
+    /** clears this gallery */
     public void clear() {
         this.imageDataMemoryCache.clear();
-        this.removeAllViews();
-        this.categoryDataMap.clear();
-        this.categoryList.clear();
+        this.adapter.clearList();
+        this.categorizedImageListHelper.clear();
         this.imageCount = 0;
     }
 
+    /** registers the activity associated with this gallery for image transtions towards image detail view */
     public void registerCallerActivity() {
-
-        ImageViewActivity.registerCallerActivity(this.activity, p -> getImageViewForIndex(p, true));
+        ImageViewActivity.registerCallerActivity(this.activity, this::getImageViewForContentIndex);
     }
 
     public void removeCategory(final String category) {
-        if (!categoryDataMap.containsKey(category)) {
+        if (!categorizedImageListHelper.containsCategory(category)) {
             return;
         }
 
-        changeImageCount(-categoryDataMap.get(category).view.imageGalleryList.getChildCount());
-
-        for (int i = 0; i < getChildCount(); i++) {
-            final ImageGalleryCategoryBinding view = ImageGalleryCategoryBinding.bind(getChildAt(i));
-            if (Objects.equals(category, view.imgGalleryCategoryTitle.getText().toString())) {
-                removeView(view.getRoot());
-                break;
-            }
+        changeImageCount(-categorizedImageListHelper.getCategoryCount(category));
+        final int titlePos = categorizedImageListHelper.getCategoryTitlePosition(category);
+        for (int pos = categorizedImageListHelper.getCategoryInsertPosition(category) - 1; pos >= titlePos; pos--) {
+            adapter.removeItem(pos);
         }
-        categoryDataMap.remove(category);
-        categoryList.remove(category);
+        categorizedImageListHelper.removeCategory(category);
     }
 
     @Override
@@ -460,41 +471,77 @@ public class ImageGalleryView extends LinearLayout {
         this.imageDataMemoryCache.clear();
     }
 
-    private void openImageViewer(final ImageData imgData, final ImageGalleryImageBinding binding) {
-        if (activity == null) {
-            return;
-        }
-        final String category = imgData.category;
-        final int pos = categoryDataMap.get(category).view.imageGalleryList.indexOfChild(binding.getRoot());
-
-        final List<Image> images = new ArrayList<>();
-        int intentPos = -1;
-        for (String cat : categoryList) {
-            int idx = 0;
-            for (ImageData id : categoryDataMap.get(cat).imageList) {
-                if (Objects.equals(category, cat) && pos == idx) {
-                    intentPos = images.size();
-                }
-                images.add(id.image);
-                idx++;
+    /** Important: include this in your activity's "onActivityReenter" method.
+     * Needed e.g. for correct back transition when returning from detail view (e.g. scrolling to image gallery position) */
+    public static int onActivityReenter(final Activity activity, final ImageGalleryView imageGallery, final Intent data) {
+        final int pos = data.getExtras().getInt(ImageViewActivity.EXTRA_IMAGEVIEW_POS, -1);
+        if (pos >= 0) {
+            activity.postponeEnterTransition();
+            if (imageGallery != null) {
+                imageGallery.initializeToPosition(pos);
             }
         }
-        ImageViewActivity.openImageView(this.activity, geocode, images, intentPos,
-                p -> getImageViewForIndex(p, true));
+        return pos;
     }
 
-    private void showContextOptions(final ImageData imgData, final ImageGalleryImageBinding binding) {
+    /** initializes gallery to a certain position.
+     * Use this method directly for gallery recreation if gallery was not available in activity's "onActivityReender" method */
+    public void initializeToPosition(final int contentIndex) {
+        final int realPos = Math.max(0, Math.min(adapter.getItemCount() - 1, contentIndex));
+        this.allowOpenViewer();
+        this.scrollTo(realPos);
+        this.post(() -> activity.startPostponedEnterTransition());
+    }
+
+    /** allows the gallery to open a image detail view (again) */
+    private void allowOpenViewer() {
+        this.allowOpenViewer = true;
+    }
+
+    private void openImageDetails(final ImageGalleryEntry imgData, final ImageGalleryImageBinding binding) {
+        if (imgData.image.isImageOrUnknownUri()) {
+            openImageViewer(binding);
+        } else {
+            ShareUtils.openContentForView(getContext(), imgData.image.getUrl());
+        }
+    }
+
+    private void openImageViewer(final ImageGalleryImageBinding binding) {
+        if (activity == null || !allowOpenViewer) {
+            return;
+        }
+        allowOpenViewer = false;
+
+        final int intentPos = this.binding.imagegalleryList.getChildAdapterPosition(binding.getRoot());
+        final int contentPos = categorizedImageListHelper.getContentIndexForListIndex(intentPos);
+
+        final List<Image> images = new ArrayList<>();
+        for (ImageGalleryEntry item : adapter.getItems()) {
+            if (!item.isHeader()) {
+                images.add(item.image);
+            }
+        }
+
+        ImageViewActivity.openImageView(this.activity, geocode, images, contentPos,
+                this::getImageViewForContentIndex);
+    }
+
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    private void showContextOptions(final ImageGalleryEntry imgData, final ImageGalleryImageBinding binding) {
         if (activity == null || imgData == null || imgData.image == null) {
             return;
         }
         final String category = imgData.category;
         final Image img = imgData.image;
-        final int pos = categoryDataMap.get(category).view.imageGalleryList.indexOfChild(binding.getRoot());
+
+        final int intentPos = this.binding.imagegalleryList.getChildAdapterPosition(binding.getRoot());
+
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open), R.drawable.ic_menu_image,
-                v -> openImageViewer(imgData, binding));
+                v -> openImageDetails(imgData, binding));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_image,
                 v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
@@ -526,48 +573,27 @@ public class ImageGalleryView extends LinearLayout {
         final EditableCategoryHandler editHandler = editableCategoryHandlerMap.get(category);
         if (editHandler != null) {
 
-            final ImageCategoryData icd = categoryDataMap.get(category);
-            final Image oldImg = icd.imageList.get(pos).image;
+            final Image oldImg = adapter.getItem(intentPos).image;
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_rename), R.drawable.ic_menu_edit, v -> SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.cache_image_rename))
                 .input(-1, oldImg.getTitle(), null, null, newTitle -> {
                     if (!StringUtils.isBlank(newTitle)) {
                         final Image newImg = editHandler.setTitle(oldImg, newTitle);
                         if (newImg != null) {
-                            icd.imageList.set(pos, new ImageData(category, newImg));
-                            final ImageGalleryImageBinding imgBinding = ImageGalleryImageBinding.bind(icd.view.imageGalleryList.getChildAt(pos));
-                            setImageTitle(imgBinding, newTitle);
+                            final ImageGalleryEntry oldEntry = adapter.getItem(intentPos);
+                            adapter.updateItem(new ImageGalleryEntry(oldEntry.category, newImg), intentPos);
                         }
                     }
                 }));
 
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_delete), R.drawable.ic_menu_delete, v -> {
-                icd.imageList.remove(pos);
+                final ImageGalleryEntry oldEntry = adapter.getItem(intentPos);
+                adapter.removeItem(intentPos);
                 editHandler.delete(img);
-                icd.view.imageGalleryList.removeView(icd.view.imageGalleryList.getChildAt(pos));
-                setListLayout(icd);
+                categorizedImageListHelper.addToCount(oldEntry.category, -1);
                 changeImageCount(-1);
             });
         }
         ctxMenu.show();
-    }
-
-    private static void setGridColumns(final GridLayout gridLayout, final int columns) {
-        int col = 0;
-        int row = 0;
-        for (int i = 0; i < gridLayout.getChildCount(); i++) {
-            final View child = gridLayout.getChildAt(i);
-            final GridLayout.LayoutParams params = (GridLayout.LayoutParams) child.getLayoutParams();
-            params.columnSpec = GridLayout.spec(col, 1, 1f);
-            params.rowSpec = GridLayout.spec(row, 1, 1f);
-            if (col + 1 == columns) {
-                col = 0;
-                row++;
-            } else {
-                col++;
-            }
-        }
-        gridLayout.requestLayout(); // Forces maxIndex to be recalculated when columnCount is set
-        gridLayout.setColumnCount(columns);
     }
 
 }

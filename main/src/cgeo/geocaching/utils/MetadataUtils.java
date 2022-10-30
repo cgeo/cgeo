@@ -10,10 +10,13 @@ import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
+import com.drew.metadata.eps.EpsDirectory;
 import com.drew.metadata.exif.ExifDirectoryBase;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.GpsDirectory;
+import com.drew.metadata.iptc.IptcDirectory;
 import com.drew.metadata.jpeg.JpegCommentDirectory;
+import com.drew.metadata.mov.metadata.QuickTimeMetadataDirectory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -87,6 +90,9 @@ public final class MetadataUtils {
             for (ExifIFD0Directory dir : exifDirs) {
                 addIf(comment, dir.getString(ExifDirectoryBase.TAG_IMAGE_DESCRIPTION));
                 addIf(comment, dir.getString(ExifDirectoryBase.TAG_USER_COMMENT));
+                addIf(comment, dir.getString(ExifDirectoryBase.TAG_WIN_SUBJECT));
+                addIf(comment, dir.getString(ExifDirectoryBase.TAG_WIN_COMMENT));
+                addIf(comment, dir.getString(ExifDirectoryBase.TAG_WIN_KEYWORDS));
             }
 
             final Collection<JpegCommentDirectory> commentDirectories = metadata.getDirectoriesOfType(JpegCommentDirectory.class);
@@ -94,6 +100,21 @@ public final class MetadataUtils {
             for (final JpegCommentDirectory commentDirectory : commentDirectories) {
                 addIf(comment, commentDirectory.getString(0));
             }
+
+            final Collection<EpsDirectory> epsDirs = metadata.getDirectoriesOfType(EpsDirectory.class);
+            for (final EpsDirectory dir : epsDirs) {
+                addIf(comment, dir.getString(EpsDirectory.TAG_KEYWORDS));
+            }
+
+            final Collection<IptcDirectory> iptcDirs = metadata.getDirectoriesOfType(IptcDirectory.class);
+            for (final IptcDirectory dir : iptcDirs) {
+                addIf(comment, dir.getString(IptcDirectory.TAG_KEYWORDS));
+            }
+            final Collection<QuickTimeMetadataDirectory> quickDirs = metadata.getDirectoriesOfType(QuickTimeMetadataDirectory.class);
+            for (final QuickTimeMetadataDirectory dir : quickDirs) {
+                addIf(comment, dir.getString(QuickTimeMetadataDirectory.TAG_KEYWORDS));
+            }
+
         } catch (final Exception e) {
             Log.i("[MetadataUtils] Problem reading comments", e);
         }

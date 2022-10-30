@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imagegallery_root"
+    android:layout_marginTop="10dip"
+    android:layout_marginBottom="10dip"
+
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:visibility="visible">
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/imagegallery_list"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:nestedScrollingEnabled="true"
+        android:orientation="vertical"
+        android:padding="4dip"
+        android:scrollbars="none"
+        tools:listitem="@layout/image_gallery_image">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</merge>
+
