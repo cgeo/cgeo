@@ -23,6 +23,7 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
         super(name, uri, zoomMin, zoomMax);
         supportsThemes = true;
+        supportsThemeOptions = true; // rule of thumb, not all themes support options
     }
 
     @Override

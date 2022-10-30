@@ -16,6 +16,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
+import android.app.Activity;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import static android.view.ViewConfiguration.getLongPressTimeout;
@@ -95,6 +96,8 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         configMapChangeListener(true);
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
+        GoogleMapsThemeHelper.setTheme(activityRef.get(), mMap);
+
         /*
         mMap.setOnMapClickListener(this);
         mMap.setOnMapLongClickListener(this);
@@ -180,6 +183,14 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     public BoundingBox getBoundingBox() {
         final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
         return new BoundingBox(bounds.southwest.latitude, bounds.southwest.longitude, bounds.northeast.latitude, bounds.northeast.longitude);
+    }
+
+    // ========================================================================
+    // theme related methods
+
+    @Override
+    public void selectTheme(final Activity activity) {
+        GoogleMapsThemeHelper.selectTheme(activity, mMap);
     }
 
     // ========================================================================

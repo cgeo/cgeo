@@ -268,7 +268,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     public void selectMapThemeOptions(final Activity activity, final AbstractTileProvider tileProvider) {
-        if (!tileProvider.supportsThemes()) {
+        if (!tileProvider.supportsThemeOptions()) {
             return;
         }
 
