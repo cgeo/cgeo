@@ -1507,6 +1507,7 @@
     <string name="cache_remove_from_history">Remove from history</string>
     <string name="cache_license">License</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_information_unavailable">Image information unavailable</string>
     <string name="cache_image_open">Open</string>
     <string name="cache_image_open_file">Open as file</string>
     <string name="cache_image_open_browser">Open in browser</string>
@@ -1720,6 +1721,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Untitled</string>
     <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Comment</string>
 

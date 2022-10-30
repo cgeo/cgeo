@@ -2159,7 +2159,7 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
-    public Collection<Image> getNonStaticImages() {
+    public List<Image> getNonStaticImages() {
         final ArrayList<Image> result = new ArrayList<>();
         for (final Image image : getImages()) {
             // search strings fit geocaching.com and opencaching, may need to add others

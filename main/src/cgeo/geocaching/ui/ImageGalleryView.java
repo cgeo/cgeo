@@ -410,6 +410,8 @@ public class ImageGalleryView extends LinearLayout {
 
     /** Important: include this method in your activity to support activity-related tasks. Necessary for e.g. editable categories */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        allowOpenViewer();
+        onActivityReenter(activity, this, data);
         return imageHelper.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -474,7 +476,7 @@ public class ImageGalleryView extends LinearLayout {
     /** Important: include this in your activity's "onActivityReenter" method.
      * Needed e.g. for correct back transition when returning from detail view (e.g. scrolling to image gallery position) */
     public static int onActivityReenter(final Activity activity, final ImageGalleryView imageGallery, final Intent data) {
-        final int pos = data.getExtras().getInt(ImageViewActivity.EXTRA_IMAGEVIEW_POS, -1);
+        final int pos = data.getExtras() == null ? -1 : data.getExtras().getInt(ImageViewActivity.EXTRA_IMAGEVIEW_POS, -1);
         if (pos >= 0) {
             activity.postponeEnterTransition();
             if (imageGallery != null) {
