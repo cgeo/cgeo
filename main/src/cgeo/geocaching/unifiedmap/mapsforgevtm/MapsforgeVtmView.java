@@ -91,39 +91,15 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     }
 
     @Override
-    public void setMapRotation(final int mapRotation) {
-        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
-        super.setMapRotation(mapRotation);
+    public void setTileSource(final AbstractTileProvider newSource) {
+        super.setTileSource(newSource);
+        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(mMap);
+        startMap();
     }
 
     @Override
-    public float getCurrentBearing() {
-        return mMap.getMapPosition().bearing;
-    }
-
-    @Override
-    public void setBearing(final float bearing) {
-        final MapPosition pos = mMap.getMapPosition();
-        pos.setBearing(bearing);
-        mMap.setMapPosition(pos);
-    }
-
-    /**
-     * keep track of rotation and zoom level changes
-     **/
-    protected void configMapChangeListener(final boolean enable) {
-        if (mapUpdateListener != null) {
-            mMap.events.unbind(mapUpdateListener);
-            mapUpdateListener = null;
-        }
-        if (enable) {
-            mapUpdateListener = (event, mapPosition) -> {
-                if ((activityMapChangeListener != null) && (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT)) {
-                    activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));
-                }
-            };
-            mMap.events.bind(mapUpdateListener);
-        }
+    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
+        return new MapsforgeGeoitemLayer(tileProvider, mMap);
     }
 
     /**
@@ -154,11 +130,6 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         baseMap = null;
     }
 
-    @Override
-    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
-        return new MapsforgeGeoitemLayer(tileProvider, mMap);
-    }
-
     private void startMap() {
         final DefaultMapScaleBar mapScaleBar = new DefaultMapScaleBar(mMap);
         mapScaleBar.setScaleBarMode(DefaultMapScaleBar.ScaleBarMode.BOTH);
@@ -173,32 +144,8 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         addLayer(mapScaleBarLayer);
     }
 
-    @Override
-    public void setTileSource(final AbstractTileProvider newSource) {
-        super.setTileSource(newSource);
-        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(mMap);
-        startMap();
-    }
-
-    @Override
-    public void setPreferredLanguage(final String language) {
-        currentTileProvider.setPreferredLanguage(language);
-        mMap.clearMap();
-    }
-
-    @Override
-    protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
-        if (create) {
-            if (positionLayer == null) {
-                positionLayer = new MapsforgePositionLayer(mMap, rootView);
-            }
-            return positionLayer;
-        } else if (positionLayer != null) {
-            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
-            positionLayer = null;
-        }
-        return null;
-    }
+    // ========================================================================
+    // position related methods
 
     @Override
     public void setCenter(final Geopoint geopoint) {
@@ -219,7 +166,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     }
 
     // ========================================================================
-    // theme related methods
+    // theme & language related methods
 
     @Override
     public void selectTheme(final Activity activity) {
@@ -236,14 +183,35 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         themeHelper.reapplyMapTheme(mMap, currentTileProvider);
     }
 
+    @Override
+    public void setPreferredLanguage(final String language) {
+        currentTileProvider.setPreferredLanguage(language);
+        mMap.clearMap();
+    }
+
     // ========================================================================
-    // zoom & heading methods
+    // zoom, bearing & heading methods
+
+    /** keep track of rotation and zoom level changes */
+    @Override
+    protected void configMapChangeListener(final boolean enable) {
+        if (mapUpdateListener != null) {
+            mMap.events.unbind(mapUpdateListener);
+            mapUpdateListener = null;
+        }
+        if (enable) {
+            mapUpdateListener = (event, mapPosition) -> {
+                if ((activityMapChangeListener != null) && (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT)) {
+                    activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));
+                }
+            };
+            mMap.events.bind(mapUpdateListener);
+        }
+    }
 
     @Override
     public void zoomToBounds(final Viewport bounds) {
-        final MapPosition pos = new MapPosition();
-        pos.setByBoundingBox(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()), Tile.SIZE * 4, Tile.SIZE * 4);
-        mMap.setMapPosition(pos);
+        zoomToBounds(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()));
     }
 
     public void zoomToBounds(final BoundingBox bounds) {
@@ -252,10 +220,12 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         mMap.setMapPosition(pos);
     }
 
+    @Override
     public int getCurrentZoom() {
         return mMap.getMapPosition().getZoomLevel();
     }
 
+    @Override
     public void setZoom(final int zoomLevel) {
         final MapPosition pos = mMap.getMapPosition();
         pos.setZoomLevel(zoomLevel);
@@ -267,8 +237,40 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         setZoom(zoomIn ? zoom + 1 : zoom - 1);
     }
 
+    @Override
+    public void setMapRotation(final int mapRotation) {
+        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
+        super.setMapRotation(mapRotation);
+    }
+
+    @Override
+    public float getCurrentBearing() {
+        return mMap.getMapPosition().bearing;
+    }
+
+    @Override
+    public void setBearing(final float bearing) {
+        final MapPosition pos = mMap.getMapPosition();
+        pos.setBearing(bearing);
+        mMap.setMapPosition(pos);
+    }
+
+    @Override
+    protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
+        if (create) {
+            if (positionLayer == null) {
+                positionLayer = new MapsforgePositionLayer(mMap, rootView);
+            }
+            return positionLayer;
+        } else if (positionLayer != null) {
+            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
+            positionLayer = null;
+        }
+        return null;
+    }
+
     // ========================================================================
-    // map events receiver
+    // Tap handling methods
 
     class MapEventsReceiver extends Layer implements GestureListener {
 
