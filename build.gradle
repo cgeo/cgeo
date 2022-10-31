@@ -117,6 +117,7 @@ allprojects {
 
                 // grade 7.3 wants a beta version, which is not downloadable on google maven
                 force 'com.google.testing.platform:android-device-provider-local:0.0.7-dev'
+                force 'com.google.testing.platform:core:0.0.7-dev'
             }
         }
     }
