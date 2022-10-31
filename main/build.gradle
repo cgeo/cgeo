@@ -19,6 +19,8 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
+    namespace 'cgeo.geocaching'
+
     compileSdkVersion 31
 
     compileOptions {
@@ -51,7 +53,7 @@ android {
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
         // not yet enough translations (~50%): "is","iw"(="he"),"lb"
-        def locales = [ "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","uk","zh","zh-rTW" ]
+        def locales = [ 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'uk', 'zh', 'zh-rTW' ]
 
         // needed for in-app language selector
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
@@ -176,7 +178,7 @@ android {
         resultsDir = "$project.buildDir/build/test-results"
     }
 
-    lintOptions {
+    lint {
         // we do not accept lint errors when building
         abortOnError true
         // Warnings shall not fail build
@@ -196,39 +198,43 @@ android {
     }
 
     packagingOptions {
-        // you can double click an APK file in Android Studio 2.2+ to see what's in there
-        // license files of libs are not needed in our APK
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/dependencies'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/notice'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/license'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'COPYING'
-        exclude 'COPYING.LESSER'
-        exclude '.readme'
-        // AndroidAnnotations
-        exclude 'androidannotations-api.properties'
-        // mapsforge
-        exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.properties'
-        exclude 'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.xml'
-        exclude 'META-INF/maven/org.mapsforge/mapsforge-map/pom.properties'
-        exclude 'META-INF/maven/org.mapsforge/mapsforge-map/pom.xml'
-        exclude 'COPYING.LESSER.v3'
-        exclude 'COPYING.v3'
-        // Play Services
-        exclude 'build-data.properties'
-        // rxjava
-        exclude 'META-INF/rxandroid.properties'
-        exclude 'META-INF/rxjava.properties'
+        resources {
+            excludes += [
+                    // you can double click an APK file in Android Studio 2.2+ to see what's in there
+                    // license files of libs are not needed in our APK
+                    'META-INF/DEPENDENCIES',
+                    'META-INF/dependencies',
+                    'META-INF/NOTICE',
+                    'META-INF/notice',
+                    'META-INF/LICENSE',
+                    'META-INF/license',
+                    'META-INF/LICENSE.txt',
+                    'META-INF/license.txt',
+                    'META-INF/NOTICE.txt',
+                    'META-INF/notice.txt',
+                    'COPYING',
+                    'COPYING.LESSER',
+                    '.readme',
+                    // AndroidAnnotations
+                    'androidannotations-api.properties',
+                    // mapsforge
+                    'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.properties',
+                    'META-INF/maven/org.mapsforge/mapsforge-map-reader/pom.xml',
+                    'META-INF/maven/org.mapsforge/mapsforge-map/pom.properties',
+                    'META-INF/maven/org.mapsforge/mapsforge-map/pom.xml',
+                    'COPYING.LESSER.v3',
+                    'COPYING.v3',
+                    // Play Services
+                    'build-data.properties',
+                    // rxjava
+                    'META-INF/rxandroid.properties',
+                    'META-INF/rxjava.properties'
+            ]
 
-        // vtm-themes
-        resources.pickFirsts.add("assets/symbols/**")
-        resources.pickFirsts.add("assets/patterns/**")
+            // vtm-themes
+            pickFirsts.add("assets/symbols/**")
+            pickFirsts.add("assets/patterns/**")
+        }
     }
 
     flavorDimensions "javaCompilerTime" // all flavours must be assigned a dimension
