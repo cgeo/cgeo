@@ -1346,6 +1346,7 @@
     <string name="cache_remove_from_history">Αφαίρεση από το ιστορικό</string>
     <string name="cache_license">Άδεια χρήσης</string>
     <string name="cache_image">Εικόνα</string>
+    <string name="cache_image_information_unavailable">Μη διαθέσιμες πληροφορίες εικόνας</string>
     <string name="cache_image_open">Άνοιγμα</string>
     <string name="cache_image_open_file">Άνοιγμα ως αρχείο</string>
     <string name="cache_image_open_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
@@ -1532,6 +1533,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Χωρίς τίτλο</string>
     <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Σχόλιο</string>
     <!-- visit -->
