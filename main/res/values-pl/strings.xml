@@ -1244,6 +1244,9 @@
     <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
+    <string name="cache_description_rendering">Renderowanie opisu, proszę czekać…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Ostrzeżenie: Opis jest bardzo duży (%1$d znaków). Wyświetlane są tylko pierwsze %2$d%%.</string>
+    <string name="cache_description_render_fully">Renderowanie pełnego opisu</string>
     <string name="cache_area_description">Opis terenu</string>
     <string name="cache_cache_description">Opis skrytki</string>
     <string name="cache_virtual_description">Pytanie wirtualne</string>
@@ -1383,6 +1386,7 @@
     <string name="cache_remove_from_history">Usuń z historii</string>
     <string name="cache_license">Licencja</string>
     <string name="cache_image">Zdjęcie</string>
+    <string name="cache_image_information_unavailable">Informacje o obrazku są niedostępne</string>
     <string name="cache_image_open">Otwórz</string>
     <string name="cache_image_open_file">Otwórz jako plik</string>
     <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
@@ -1571,6 +1575,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Bez nazwy</string>
     <string name="imageview_mimetype">Typ MIME</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentarz</string>
     <!-- visit -->
