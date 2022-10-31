@@ -1,14 +1,13 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.net.Uri;
 
 import java.io.File;
 import java.util.Collections;
-
-import cgeo.geocaching.unifiedmap.LayerHelper;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;

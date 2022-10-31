@@ -4,11 +4,10 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
-import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.graphics.BitmapFactory;
@@ -37,18 +36,15 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
     }
 
     @Override
-    protected void add(final Geocache cache) {
-        final Geopoint coords = cache.getCoords();
-        final MarkerItem item = new MarkerItem(cache.getGeocode(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6())); // @todo add marker touch handling
-
-        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null);
-        final MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
-        item.setMarker(symbol);
-        mGeocacheLayer.addItem(item);
-
-        synchronized (items) {
-            items.put(cache.getGeocode(), new GeoItemCache<>(new RouteItem(cache), item));
+    protected GeoItemCache<MarkerItem> addInternal(final IWaypoint item, final boolean isCache, final Geopoint coords, final RouteItem routeItem, final CacheMarker cm) {
+        final MarkerItem marker = new MarkerItem(routeItem.getIdentifier(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6()));
+        marker.setMarker(new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER));
+        if (isCache) {
+            mGeocacheLayer.addItem(marker);
+        } else {
+            mWaypointLayer.addItem(marker);
         }
+        return new GeoItemCache<>(routeItem, marker);
     }
 
     @Override
