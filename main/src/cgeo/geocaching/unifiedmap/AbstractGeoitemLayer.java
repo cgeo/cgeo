@@ -1,10 +1,13 @@
 package cgeo.geocaching.unifiedmap;
 
-import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,21 +29,24 @@ public abstract class AbstractGeoitemLayer<T> {
         }
     }
 
-    protected abstract void add(Geocache cache);
-
-    void add(final String geocode) {
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);  // @todo check load flags
-        if (cache == null) {
-            return;
-        }
-
-        final Geopoint coords = cache.getCoords();
+    protected void add(final IWaypoint item) {
+        final Geopoint coords = item.getCoords();
         if (coords == null) {
             return;
         }
 
-        add(cache);
+        final boolean isCache = item instanceof Geocache;
+        final RouteItem routeItem = new RouteItem(isCache ? (Geocache) item : (Waypoint) item);
+        final CacheMarker cm = isCache
+                ? MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), (Geocache) item, null)
+                : MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), (Waypoint) item, true);
+        final GeoItemCache<T> cacheItem = addInternal(item, isCache, coords, routeItem, cm);
+        synchronized (items) {
+            items.put(routeItem.getIdentifier(), cacheItem);
+        }
     }
+
+    protected abstract GeoItemCache<T> addInternal(IWaypoint item, boolean isCache, Geopoint coords, RouteItem routeItem, CacheMarker cm);
 
     /** removes item from internal data structure, needs to be removed from actual layer by superclass */
     protected void remove(final String geocode) {
