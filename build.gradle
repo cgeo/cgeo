@@ -114,6 +114,9 @@ allprojects {
                 // force this version because of conflict to our resolutionStrategy from lint-gradle
                 // TODO check necessity after every gradle update (gradlew :main:lintBasicDebug)
                 force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
+
+                // grade 7.3 wants a beta version, which is not downloadable on google maven
+                force 'com.google.testing.platform:android-device-provider-local:0.0.7-dev'
             }
         }
     }
