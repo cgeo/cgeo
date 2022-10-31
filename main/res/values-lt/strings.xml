@@ -1386,6 +1386,7 @@
     <string name="cache_remove_from_history">Pašalinti iš istorijos</string>
     <string name="cache_license">Licencija</string>
     <string name="cache_image">Vaizdas</string>
+    <string name="cache_image_information_unavailable">Vaizdo informacija nepasiekiama</string>
     <string name="cache_image_open">Atidaryti</string>
     <string name="cache_image_open_file">Atidaryti kaip failą</string>
     <string name="cache_image_open_browser">Atidaryti naršyklėje</string>
@@ -1574,6 +1575,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Be pavadinimo</string>
     <string name="imageview_mimetype">Mime tipas</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geo taškas</string>
     <string name="imageview_metadata_comment">Komentaras</string>
     <!-- visit -->
