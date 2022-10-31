@@ -162,7 +162,6 @@ import androidx.fragment.app.FragmentManager;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -1926,7 +1925,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     @Override
                     public void onClick(final View textView) {
                         final String imageUrl = span.getSource();
-                        final Collection<Image> listingImages = cache.getNonStaticImages();
+                        final List<Image> listingImages = cache.getNonStaticImages();
                         CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
 
                         final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));

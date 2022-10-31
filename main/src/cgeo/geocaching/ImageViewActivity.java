@@ -6,7 +6,6 @@ import cgeo.geocaching.databinding.ImageviewImageBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
@@ -26,7 +25,6 @@ import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.transition.Transition;
@@ -41,15 +39,19 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
+
+    private static final int IMAGELIST_INTENT_MAX_SIZE = 20;
+
+    private static final int ACTIVITY_RESULT_CODE = 1509450356;
 
     public static final String EXTRA_IMAGEVIEW_POS = "imageview_pos";
 
@@ -57,11 +59,16 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private static final String TRANSITION_ID_EXIT = "image_exit_transition_id_";
 
     private static final String PARAM_IMAGE_LIST = "param_image_list";
-    private static final String PARAM_IMAGEDATA_LIST_SAVE = "param_image_list_save";
+    private static final String PARAM_IMAGE_LIST_SIZE = "param_image_list_size";
+    private static final String PARAM_IMAGE_LIST_STARTPOS = "param_image_list_startpos";
+    private static final String PARAM_IMAGE_LIST_CACHEID = "param_image_list_cacheid";
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
     private static final String PARAM_IMAGE_CONTEXT_CODE = "param_image_context_code";
     private static final String PARAM_FULLIMAGEVIEW = "param_full_image_view";
     private static final String PARAM_SHOWIMAGEINFO = "param_show_image_information";
+
+    private static final  AtomicInteger IMAGE_LIST_CACHE_ID = new AtomicInteger(0);
+    private static final  List<Image> IMAGE_LIST_CACHE = new ArrayList<>();
 
     private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
     private ImageAdapter imageAdapter;
@@ -131,7 +138,10 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
             cachedPosition = position;
             imagePos = position % realImageSize;
-            mainBinding.imageOpenBrowser.setEnabled(cachedPages.get(cachedPosition).isBrowseable);
+            final boolean hasImage = imageList.get(imagePos) != null;
+            mainBinding.imageOpenBrowser.setEnabled(hasImage && cachedPages.get(cachedPosition).isBrowseable);
+            mainBinding.imageOpenFile.setEnabled(hasImage);
+            mainBinding.imageShare.setEnabled(hasImage);
         }
 
         @Override
@@ -175,7 +185,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     private void setFullImageViewOnOff(final ImageviewImageBinding binding, final boolean turnOn) {
         binding.imageviewHeadline.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
-        binding.imageviewInformation.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        if (binding.imageviewInformation.getVisibility() != View.GONE) {
+            binding.imageviewInformation.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        }
         binding.imageviewActionSpace.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
         mainBinding.imageviewActions.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
         mainBinding.imageviewBackbutton.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
@@ -230,37 +242,15 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             }
         });
 
-        imageList.clear();
-
-        final Uri uri = AndroidBeam.getUri(getIntent());
-        if (uri != null) {
-            imageList.add(new Image.Builder().setUrl(uri).build());
-        }
-
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            final ArrayList<Image> extrasImgList = extras.getParcelableArrayList(PARAM_IMAGE_LIST);
-            if (extrasImgList != null) {
-                imageList.addAll(extrasImgList);
-            }
-            imageContextCode = extras.getString(PARAM_IMAGE_CONTEXT_CODE);
-            imagePos = extras.getInt(PARAM_IMAGE_LIST_POS, 0);
-            fullImageView = extras.getBoolean(PARAM_FULLIMAGEVIEW, false);
-            showImageInformation = extras.getBoolean(PARAM_SHOWIMAGEINFO, true);
+            restoreState(extras);
         }
 
         // Restore previous state
         if (savedInstanceState != null) {
-            final ArrayList<Image> ssImgList = savedInstanceState.getParcelableArrayList(PARAM_IMAGE_LIST);
-            if (ssImgList != null) {
-                imageList.clear();
-                imageList.addAll(ssImgList);
-            }
-            imageContextCode = savedInstanceState.getString(PARAM_IMAGE_CONTEXT_CODE);
-            imagePos = savedInstanceState.getInt(PARAM_IMAGE_LIST_POS, 0);
-            fullImageView = savedInstanceState.getBoolean(PARAM_FULLIMAGEVIEW, false);
-            showImageInformation = savedInstanceState.getBoolean(PARAM_SHOWIMAGEINFO, true);
+            restoreState(savedInstanceState);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
 
@@ -292,7 +282,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         mainBinding.imageShare.setOnClickListener(v ->
                 ShareUtils.shareImage(ImageViewActivity.this, imageList.get(imagePos).getUri(), imageContextCode, R.string.about_system_info_send_chooser));
 
-
     }
 
     @Override
@@ -302,13 +291,15 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     }
 
     @Override
+    protected void onRestoreInstanceState(@NonNull final Bundle inState) {
+        super.onRestoreInstanceState(inState);
+        restoreState(inState);
+    }
+
+    @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(PARAM_IMAGEDATA_LIST_SAVE, imageList);
-        outState.putString(PARAM_IMAGE_CONTEXT_CODE, imageContextCode);
-        outState.putInt(PARAM_IMAGE_LIST_POS, imagePos);
-        outState.putBoolean(PARAM_FULLIMAGEVIEW, fullImageView);
-        outState.putBoolean(PARAM_SHOWIMAGEINFO, showImageInformation);
+        saveState(outState);
     }
 
     @Override
@@ -324,15 +315,22 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     @SuppressLint("SetTextI18n")
     private void loadImageView(final int pagerPos, final int loadImagePos, final ImageviewImageBinding binding) {
+
+        binding.imageviewPosition.setText((loadImagePos + 1) + " / " + imageList.size());
+        binding.imageProgressBar.setVisibility(View.GONE);
+        binding.imageUnavailable.setVisibility(View.GONE);
+
         final Image currentImage = imageList.get(loadImagePos);
-        binding.imageFull.setImageResource(R.drawable.mark_green_orange);
         if (currentImage == null) {
-            binding.imageviewHeadline.setVisibility(View.INVISIBLE);
+            binding.imageviewCategory.setText("");
             binding.imageFull.setVisibility(View.GONE);
+            binding.imageviewInformation.setVisibility(View.GONE);
+            binding.imageUnavailable.setVisibility(View.VISIBLE);
             return;
         }
+
+
         setFullImageViewOnOff(binding, fullImageView);
-        binding.imageviewPosition.setText((loadImagePos + 1) + " / " + imageList.size());
         binding.imageviewCategory.setText(currentImage.category.getI18n());
 
         final List<CharSequence> imageInfos = new ArrayList<>();
@@ -363,33 +361,40 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
                 binding.imageFull.setImageDrawable(p.first);
+                binding.imageProgressBar.setVisibility(View.GONE);
+
+                final int bmHeight = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getHeight();
+                final int bmWidth = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getWidth();
 
                 //enhance description with metadata
+                final List<CharSequence> imageInfosNew = new ArrayList<>();
+                imageInfosNew.add(binding.imageviewInformationText.getText());
+                imageInfosNew.add(LocalizationUtils.getString(R.string.imageview_width_height, bmWidth, bmHeight));
+
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
-                final String comment = MetadataUtils.getComment(p.second);
-                if (gp != null || !StringUtils.isBlank(comment)) {
-                    final List<CharSequence> imageInfosNew = new ArrayList<>();
-                    imageInfosNew.add(binding.imageviewInformationText.getText());
-                    if (gp != null) {
-                        final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
-                        imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_geopoint) + ":</b> <i>" + gpAsHtml + "</i>"));
-                    }
-                    if (!StringUtils.isBlank(comment)) {
-                        String commentInView = comment;
-                        if (comment.length() > 300) {
-                            commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
-                        }
-                        imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + commentInView + "</i>"));
-                    }
-                    binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
-                    setInfoShowHide(binding, showImageInformation);
+                if (gp != null) {
+                    final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
+                    imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_geopoint) + ":</b> <i>" + gpAsHtml + "</i>"));
                 }
+
+                final String comment = MetadataUtils.getComment(p.second);
+                if (!StringUtils.isBlank(comment)) {
+                    String commentInView = comment;
+                    if (comment.length() > 300) {
+                        commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
+                    }
+                    imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + commentInView + "</i>"));
+                }
+
+                binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
+                setInfoShowHide(binding, showImageInformation);
 
                 showImage(pagerPos, binding);
 
             }, () -> {
                 binding.imageFull.setImageResource(R.drawable.mark_transparent);
                 binding.imageFull.setVisibility(View.GONE);
+                binding.imageProgressBar.setVisibility(View.VISIBLE);
             });
         }
 
@@ -439,22 +444,23 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     }
 
     public static void openImageView(final Activity activity, final String contextCode, final Image image, final View imageView) {
-        openImageView(activity, contextCode, Collections.singleton(image), 0, p -> imageView);
+        openImageView(activity, contextCode, Collections.singletonList(image), 0, p -> imageView);
     }
 
-    public static void openImageView(final Activity activity, final String contextCode, final Collection<Image> images, final int pos, final Func1<Integer, View> getImageView) {
+    public static void openImageView(final Activity activity, final String contextCode, final List<Image> images, final int pos, final Func1<Integer, View> getImageView) {
         final Intent intent = new Intent(activity, ImageViewActivity.class);
-        intent.putExtra(PARAM_IMAGE_CONTEXT_CODE, contextCode);
-        intent.putExtra(PARAM_IMAGE_LIST, new ArrayList<>(images));
-        intent.putExtra(PARAM_IMAGE_LIST_POS, pos);
+        final Bundle options = new Bundle();
+        createState(options, images, pos, contextCode);
+        intent.putExtras(options);
+
         activity.overridePendingTransition(0, 0);
         if (getImageView == null || getImageView.call(pos) == null) {
-            activity.startActivity(intent);
+            activity.startActivityForResult(intent, ACTIVITY_RESULT_CODE);
         } else {
             registerCallerActivity(activity, getImageView);
             final View posImageView = getImageView.call(pos);
             posImageView.setTransitionName(TRANSITION_ID_ENTER);
-            activity.startActivity(intent,
+            activity.startActivityForResult(intent, ACTIVITY_RESULT_CODE,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
         }
     }
@@ -489,13 +495,68 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private void setFinishResult() {
         //pass back selected image index
         final Intent intent = new Intent();
-        intent.putExtra(Intents.EXTRA_INDEX, this.imagePos); //TODO: might be deletable
         intent.putExtra(ImageViewActivity.EXTRA_IMAGEVIEW_POS, this.imagePos);
         setResult(RESULT_OK, intent);
     }
 
-    public static int getImageViewPos(final Bundle bundle) {
-        return bundle == null ? 0 : bundle.getInt(ImageViewActivity.EXTRA_IMAGEVIEW_POS, 0);
+    private void restoreState(final Bundle bundle) {
+        //restore imageList
+        imageList.clear();
+        final int imageListCacheId = bundle.getInt(PARAM_IMAGE_LIST_CACHEID, -1);
+        if (imageListCacheId > -1) {
+            if (IMAGE_LIST_CACHE_ID.get() == imageListCacheId) {
+                imageList.addAll(IMAGE_LIST_CACHE);
+                IMAGE_LIST_CACHE.clear();
+            } else {
+                for (int i = 0; i < bundle.getInt(PARAM_IMAGE_LIST_SIZE); i++) {
+                    imageList.add(null);
+                }
+                int insertPos = bundle.getInt(PARAM_IMAGE_LIST_STARTPOS, 0);
+                final ArrayList<Image> extrasImgList = bundle.getParcelableArrayList(PARAM_IMAGE_LIST);
+                if (extrasImgList != null) {
+                    for (Image img : extrasImgList) {
+                        imageList.set(insertPos, img);
+                        insertPos++;
+                    }
+                }
+            }
+        } else {
+            final ArrayList<Image> extrasImgList = bundle.getParcelableArrayList(PARAM_IMAGE_LIST);
+            if (extrasImgList != null) {
+                imageList.addAll(extrasImgList);
+            }
+        }
+
+        imageContextCode = bundle.getString(PARAM_IMAGE_CONTEXT_CODE);
+        imagePos = bundle.getInt(PARAM_IMAGE_LIST_POS, 0);
+        fullImageView = bundle.getBoolean(PARAM_FULLIMAGEVIEW, false);
+        showImageInformation = bundle.getBoolean(PARAM_SHOWIMAGEINFO, true);
+    }
+
+    private void saveState(final Bundle state) {
+        createState(state, imageList, imagePos, imageContextCode);
+        state.putBoolean(PARAM_FULLIMAGEVIEW, fullImageView);
+        state.putBoolean(PARAM_SHOWIMAGEINFO, showImageInformation);
+    }
+
+    private static void createState(final Bundle state, final List<Image> images, final int pos, final String imageContextCode) {
+        state.putString(PARAM_IMAGE_CONTEXT_CODE, imageContextCode);
+        state.putInt(PARAM_IMAGE_LIST_POS, pos);
+        state.putInt(PARAM_IMAGE_LIST_SIZE, images.size());
+
+        if (images.size() > IMAGELIST_INTENT_MAX_SIZE) {
+            IMAGE_LIST_CACHE.clear();
+            IMAGE_LIST_CACHE.addAll(images);
+            state.putInt(PARAM_IMAGE_LIST_CACHEID, IMAGE_LIST_CACHE_ID.addAndGet(1));
+            final int startPos = Math.max(0, Math.min(images.size() - IMAGELIST_INTENT_MAX_SIZE, pos - IMAGELIST_INTENT_MAX_SIZE / 2));
+            state.putInt(PARAM_IMAGE_LIST_STARTPOS, startPos);
+            state.putParcelableArrayList(PARAM_IMAGE_LIST,
+                    new ArrayList<>(images.subList(startPos, startPos + IMAGELIST_INTENT_MAX_SIZE)));
+        } else {
+            state.putParcelableArrayList(PARAM_IMAGE_LIST, images instanceof ArrayList ? (ArrayList<Image>) images : new ArrayList<>(images));
+            state.putInt(PARAM_IMAGE_LIST_STARTPOS, 0);
+            state.remove(PARAM_IMAGE_LIST_CACHEID);
+        }
     }
 
 }
