@@ -1356,6 +1356,7 @@
     <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
     <string name="cache_license">Licentie</string>
     <string name="cache_image">Afbeelding</string>
+    <string name="cache_image_information_unavailable">Afbeeldingsinformatie niet beschikbaar</string>
     <string name="cache_image_open">Open</string>
     <string name="cache_image_open_file">Open als bestand</string>
     <string name="cache_image_open_browser">Openen in browser</string>
@@ -1542,6 +1543,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Naamloos</string>
     <string name="imageview_mimetype">Mimetype</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Opmerking</string>
     <!-- visit -->
