@@ -7,6 +7,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
@@ -31,6 +32,8 @@ import org.oscim.event.GestureListener;
 import org.oscim.event.MotionEvent;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
+import org.oscim.layers.vector.VectorLayer;
+import org.oscim.map.Layers;
 import org.oscim.map.Map;
 import org.oscim.renderer.BitmapRenderer;
 import org.oscim.renderer.GLViewport;
@@ -99,7 +102,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     @Override
     protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
-        return new MapsforgeGeoitemLayer(tileProvider, mMap);
+        return new MapsforgeGeoitemLayer(mMap);
     }
 
     /**
@@ -114,15 +117,25 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     /**
      * call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider
      */
-    public synchronized void addLayer(final Layer layer) {
+    public synchronized void addLayer(final int index, final Layer layer) {
         layers.add(layer);
-        mMap.layers().add(layer);
+
+        final Layers temp = mMap.layers();
+        if (temp.size() <= index) {
+            // fill gaps with empty dummy layers
+            for (int i = temp.size(); i <= index; i++) {
+                final VectorLayer emptyLayer = new VectorLayer(mMap);
+                emptyLayer.setEnabled(false);
+                temp.add(emptyLayer);
+            }
+        }
+        mMap.layers().set(index, layer);
     }
 
     private void removeBaseMap() {
         if (baseMap != null) {
             try {
-                mMap.layers().remove(1);
+                mMap.layers().remove(LayerHelper.ZINDEX_BASEMAP);
             } catch (IndexOutOfBoundsException ignore) {
                 // ignored
             }
@@ -141,7 +154,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         final BitmapRenderer renderer = mapScaleBarLayer.getRenderer();
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
         renderer.setOffset(5 * CanvasAdapter.getScale(), 0);
-        addLayer(mapScaleBarLayer);
+        addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
     }
 
     // ========================================================================

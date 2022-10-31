@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.googlemaps;
 import cgeo.geocaching.maps.google.v2.GoogleMapObjects;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_GOOGLE;
 
@@ -17,13 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
-
-    public static final float ZINDEX_POSITION = 10;
-    public static final float ZINDEX_TRACK = 6;
-    public static final float ZINDEX_ROUTE = 5;
-    public static final float ZINDEX_DIRECTION_LINE = 5;
-    public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
-    public static final float ZINDEX_HISTORY = 2;
 
     private final GoogleMapObjects directionObjs;
     private final GoogleMapObjects positionObjs;
@@ -45,7 +39,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
                     .addAll(directionLine)
                     .color(MapLineUtils.getDirectionColor())
                     .width(MapLineUtils.getDirectionLineWidth(true))
-                    .zIndex(ZINDEX_DIRECTION_LINE)
+                    .zIndex(LayerHelper.ZINDEX_DIRECTION_LINE)
             );
         }, MAP_GOOGLE);
     }
@@ -85,7 +79,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
                     .strokeWidth(3)
                     .fillColor(MapLineUtils.getAccuracyCircleFillColor())
                     .radius(accuracy)
-                    .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
+                    .zIndex(LayerHelper.ZINDEX_POSITION_ACCURACY_CIRCLE)
             );
         }
 
@@ -96,7 +90,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
                 .rotation(currentHeading)
                 .anchor(0.5f, 0.5f)
                 .flat(true)
-                .zIndex(ZINDEX_POSITION)
+                .zIndex(LayerHelper.ZINDEX_POSITION)
         );
 
     }
@@ -108,7 +102,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
                 .addAll(points)
                 .color(MapLineUtils.getTrailColor())
                 .width(MapLineUtils.getHistoryLineWidth(true))
-                .zIndex(ZINDEX_HISTORY)
+                .zIndex(LayerHelper.ZINDEX_HISTORY)
         ));
     }
 
@@ -119,7 +113,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
                 .addAll(segment)
                 .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
                 .width(isTrack ? MapLineUtils.getTrackLineWidth(true) : MapLineUtils.getRouteLineWidth(true))
-                .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
+                .zIndex(LayerHelper.ZINDEX_TRACK_ROUTE)
         ));
     }
 
