@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
@@ -9,8 +10,6 @@ import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_M
 import android.graphics.Matrix;
 import android.location.Location;
 import android.view.View;
-
-import java.util.List;
 
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
@@ -67,22 +66,22 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
         // position and heading arrow
         accuracyCircleLayer = new VectorLayer(map);
-        map.layers().add(accuracyCircleLayer);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_POSITION_ACCURACY_CIRCLE, accuracyCircleLayer);
         arrowLayer = new ItemizedLayer(map, new MarkerSymbol(new AndroidBitmap(positionAndHeadingArrow), MarkerSymbol.HotspotPlace.CENTER));
-        map.layers().add(arrowLayer);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_POSITION, arrowLayer);
         repaintPosition();
 
         // history
         historyLayer = new ClearableVectorLayer(map);
-        map.layers().add(historyLayer);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_HISTORY, historyLayer);
 
-        // navigation
+        // direction line & navigation
         navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
-        map.layers().add(navigationLayer);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_DIRECTION_LINE, navigationLayer);
 
         // tracks & routes
         trackLayer = new ClearableVectorLayer(map);
-        map.layers().add(trackLayer);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_TRACK_ROUTE, trackLayer);
     }
 
     protected void destroyLayer(final Map map) {
@@ -91,11 +90,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         map.layers().remove(historyLayer);
         map.layers().remove(navigationLayer);
         map.layers().remove(trackLayer);
-    }
-
-    private void clearLayers(final List<PathLayer> layers) {
-        map.layers().removeAll(layers);
-        layers.clear();
     }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {

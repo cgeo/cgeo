@@ -8,6 +8,8 @@ import android.net.Uri;
 import java.io.File;
 import java.util.Collections;
 
+import cgeo.geocaching.unifiedmap.LayerHelper;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import org.oscim.layers.tile.bitmap.BitmapTileLayer;
@@ -37,7 +39,7 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
                 .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
         tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
-        MAP_MAPSFORGE.addLayer(new BitmapTileLayer(map, tileSource));
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BASEMAP, new BitmapTileLayer(map, tileSource));
     }
 
 }

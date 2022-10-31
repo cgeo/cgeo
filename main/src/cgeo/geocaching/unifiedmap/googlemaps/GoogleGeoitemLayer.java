@@ -6,7 +6,7 @@ import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
 import java.lang.ref.WeakReference;
@@ -39,9 +39,9 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
             .title(cache.getGeocode())
             .anchor(0.5f, 1f)
             .icon(BitmapDescriptorFactory.fromBitmap(cm.getBitmap()))
+            .zIndex(LayerHelper.ZINDEX_GEOCACHE)
         );
 
-        Log.e("addGeoitem");
         synchronized (items) {
             items.put(cache.getGeocode(), new GeoItemCache<>(new RouteItem(cache), item));
         }
