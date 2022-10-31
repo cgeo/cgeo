@@ -116,8 +116,9 @@ allprojects {
                 force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
 
                 // grade 7.3 wants a beta version, which is not downloadable on google maven
-                force 'com.google.testing.platform:android-device-provider-local:0.0.7-dev'
                 force 'com.google.testing.platform:core:0.0.7-dev'
+                force 'com.google.testing.platform:launcher:0.0.7-dev'
+                force 'com.google.testing.platform:android-device-provider-local:0.0.7-dev'
                 force 'com.google.testing.platform:android-driver-instrumentation:0.0.7-dev'
             }
         }
