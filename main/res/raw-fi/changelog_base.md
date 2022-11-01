@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Huomautus: API-tason muutos
+Play Storen tulevien rajoitusten vuoksi olemme päivittäneet kohdistettua Android API -tasoa. Tämän ei pitäisi vaikuttaa c:geon käyttöön, ja sen pitäisi silti olla käytössä Android 5 -versiossa. mutta jos huomaat epäsäännöllisyyksiä, ota yhteyttä meihin osoitteessa support@cgeo.org
 
 ### Kartta
 - Uusi: Salli reitin näyttönimen muuttaminen
@@ -24,4 +24,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
 - Uusi: Ota käyttöön muokattujen koordinaattien lataaminen GPX-tiedostosta tuoduille kätköille, kun kätkössä on reittipiste "ORIGINAL"
 - Muutos: Paranna suodattimen tilarivin tekstiä
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Muutos: Käytä paremmin luettavaa väriä arkistoiduille kätkön nimille otsikoissa ja poista väritys kätkön yksityiskohdista
