@@ -1489,15 +1489,15 @@ public final class GCParser {
         try {
             final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE, page);
             if (matcherSpottedCache.find()) {
-                trackable.setSpottedGuid(matcherSpottedCache.group(1));
-                trackable.setSpottedName(matcherSpottedCache.group(2).trim());
+                trackable.setSpottedGuid(matcherSpottedCache.group(2));
+                trackable.setSpottedName(matcherSpottedCache.group(1).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_CACHE);
             }
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find()) {
-                trackable.setSpottedGuid(matcherSpottedUser.group(2));
-                trackable.setSpottedName(matcherSpottedUser.group(3).trim());
+                trackable.setSpottedGuid(matcherSpottedUser.group(3));
+                trackable.setSpottedName(matcherSpottedUser.group(1).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
