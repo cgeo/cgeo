@@ -36,6 +36,7 @@ public class MapDownloaderOSMPawsThemes extends AbstractThemeDownloader {
         private String url;
         private long size;
         private String description;
+        private String dateInfo;
 
         private void parse(@NonNull final String page, final List<Download> result, final Download.DownloadType offlineMapType) {
             final RootElement root = new RootElement("", "channel");
