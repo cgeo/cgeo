@@ -122,13 +122,13 @@ public final class GCConstants {
     /**
      * Two groups !
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>"); //TODO: language dependent
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" data-name=\"([^\"]+)\" data-status=\"Cache\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">[^<]+</a>");
     /**
      * Three groups !
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>"); //TODO: language dependent
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>"); //TODO: language dependent
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>"); //TODO: language dependent
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-name=\"([^\"]+)\" data-status=\"User\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-status=\"Unknown\">[^<]*</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-status=\"Owner\">[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GOAL = Pattern.compile("<div id=\"TrackableGoal\">[^<]*<p>(.*?)</p>[^<]*</div>", Pattern.DOTALL);
     /**
      * Four groups
