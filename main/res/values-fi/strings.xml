@@ -677,6 +677,8 @@
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
     <string name="settings_title_offline_maps">Offline-kartat</string>
+    <string name="settings_title_map_themes">Offlinekarttojen teemat</string>
+    <string name="settings_title_map_hillshading">Offlinekarttojen rinnevarjostukset</string>
     <string name="settings_title_offline_routing">Offline-reititys</string>
     <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
     <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
@@ -903,6 +905,8 @@
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
+    <string name="settings_info_hillshading_title">Tietoa rinnevarjostuksesta</string>
+    <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nLähdetiedostot, jotka sisältävät korkeustiedon, on ladattava manuaalisesti - napauta tätä lähteiden saamiseksi - ja asetettava alla selostettuun kansioon.</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -1211,6 +1215,7 @@
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
     <string name="cache_description_rendering">Muodostetaan kuvausta, odota…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varoitus: Kuvaus on hyvin suuri (%1$d merkkiä). Vain ensimmäiset %2$d%% näytetään.</string>
     <string name="cache_description_render_fully">Muodosta täysi kuvaus</string>
     <string name="cache_area_description">Alueen kuvaus</string>
     <string name="cache_cache_description">Kätkön kuvaus</string>
@@ -1351,6 +1356,7 @@
     <string name="cache_remove_from_history">Poista historiatiedoista</string>
     <string name="cache_license">Lisenssi</string>
     <string name="cache_image">Kuva</string>
+    <string name="cache_image_information_unavailable">Kuvan tiedot eivät ole käytettävissä</string>
     <string name="cache_image_open">Avaa</string>
     <string name="cache_image_open_file">Avaa tiedosto</string>
     <string name="cache_image_open_browser">Avaa selaimessa</string>
@@ -1537,6 +1543,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Nimetön</string>
     <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d pikseliä</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- visit -->
