@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Checkable;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -97,6 +98,11 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         } else {
             //FORCE a set. This will set the new item in spinner even if it has changed its position
             set(selectedItem, true);
+        }
+
+        //values might have changed -> recreate spinner adapter
+        if (this.spinner != null) {
+            this.spinner.setAdapter(createSpinnerAdapter());
         }
 
         return this;
@@ -228,12 +234,16 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     public TextSpinner<T> setSpinner(@NonNull final Spinner spinner) {
         this.spinner = spinner;
 
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.spinner.setAdapter(adapter);
+        this.spinner.setAdapter(createSpinnerAdapter());
         this.spinner.setOnItemSelectedListener(this);
 
         return this;
+    }
+
+    private SpinnerAdapter createSpinnerAdapter() {
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return adapter;
     }
 
     /**
@@ -346,11 +356,13 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
                 sd.setTitle(TextParam.text(this.textDialogTitle));
             }
 
-            sd.selectSingleGrouped(values,
+            //use a COPY of values for display, in case value list changes while dialog is open. See #13578
+            final List<T> valuesCopy = new ArrayList<>(values);
+            sd.selectSingleGrouped(valuesCopy,
                     (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + displayMapper.call(v)),
                     getPositionFor(selectedItem, -1), this.textHideSelectionMarker ? SimpleDialog.SingleChoiceMode.NONE : SimpleDialog.SingleChoiceMode.SHOW_RADIO,
                     (v, i) -> this.textGroupMapper == null ? null : this.textGroupMapper.call(v),
-                    s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(values.get(pos)));
+                    s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(valuesCopy.get(pos)));
         }
     }
 
