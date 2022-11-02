@@ -13,6 +13,7 @@ import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
         try {
+            LastTrackableAction.setAction(trackableLog);
             final StatusCode status = GCParser.postLogTrackable(
                     guid,
                     trackableLog.trackCode,
