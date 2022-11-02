@@ -6,6 +6,7 @@ import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         try {
+            LastTrackableAction.setAction(trackableLog);
             final ImmutablePair<StatusCode, List<String>> response = GeokretyConnector.postLogTrackable(
                     getContext(),
                     cache,
