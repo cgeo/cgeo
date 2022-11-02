@@ -24,7 +24,7 @@ import org.oscim.tiling.source.mapfile.MapFileTileSource;
 import org.oscim.tiling.source.mapfile.MapInfo;
 import org.oscim.tiling.source.mapfile.MultiMapFileTileSource;
 
-class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeTileProvider {
+class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProvider {
 
     private final List<ImmutablePair<String, Uri>> maps;
 
