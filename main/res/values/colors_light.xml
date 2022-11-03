@@ -6,6 +6,7 @@
     <color name="colorText">@color/just_black</color>
     <color name="colorTextDark">#AA000000</color>
     <color name="colorTextHint">#FF666666</color>
+    <color name="archived_cache_color">#FFAC0B0B</color>
 
     <color name="colorTextHeadline">#88000000</color>
     <color name="colorTextHintActionBar">#FFAAAAAA</color>

@@ -7,6 +7,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import android.os.Parcel;
@@ -14,12 +15,16 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class RouteItem implements Parcelable {
+    public static final Comparator<? super RouteItem> NAME_COMPARATOR = (Comparator<RouteItem>) (left, right) -> TextUtils.COLLATOR.compare(left.identifier, right.identifier);
+
+
     // groups: 1=geocode, 3=wp prefix, 4=additional text
     private static final Pattern GEOINFO_PATTERN = Pattern.compile("^([A-Za-z]{1,2}[0-9A-Za-z]{1,6})(-([A-Za-z0-9]{1,10}))?( .*)?$");
     private static final Pattern AL_GEOINFO_PATTERN = Pattern.compile("^AL([A-Za-z0-9]+)(-[A-Za-z0-9]+)+( .*)?$");
@@ -62,15 +67,14 @@ public class RouteItem implements Parcelable {
                 if (matchesAL.find()) {
                     final MatcherWrapper matchesALwpt = new MatcherWrapper(AL_WAYPOINT_PATTERN, name);
                     if (matchesALwpt.find()) {
-                        geocode = StringUtils.left(name, name.length() - matchesALwpt.group(1).length() - (matchesALwpt.group(3) != null ? matchesALwpt.group(3).length() : 0));
+                        final int l1 = matchesALwpt.group(1) == null ? 0 : matchesALwpt.group(1).length();
+                        final int l3 = matchesALwpt.group(3) == null ? 0 : matchesALwpt.group(3).length();
+                        geocode = StringUtils.left(name, name.length() - l1 - l3);
                         prefix = matchesALwpt.group(2);
                     } else {
-                        if (matchesAL.groupCount() > 2 && matchesAL.group(3) != null) {
-                            // remove comment at end (if given)
-                            geocode = StringUtils.left(name, name.length() - matchesAL.group(3).length());
-                        } else {
-                            geocode = name;
-                        }
+                        // remove comment at end (if given)
+                        final int l2 = matchesAL.group(3) == null ? 0 : matchesAL.group(3).length();
+                        geocode = StringUtils.left(name, name.length() - l2);
                         prefix = null;
                     }
                 }

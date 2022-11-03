@@ -83,6 +83,18 @@ public final class Formatter {
     }
 
     /**
+     * Generate a date string according to system-wide settings (locale, date format)
+     * such as "Wednesday".
+     *
+     * @param date milliseconds since the epoch
+     * @return the formatted string
+     */
+    @NonNull
+    public static String formatDayOfWeek(final long date) {
+        return DateUtils.formatDateTime(getContext(), date, DateUtils.FORMAT_SHOW_WEEKDAY);
+    }
+
+    /**
      * Tries to get the date format pattern of the system short date.
      *
      * @return format pattern or empty String if it can't be retrieved

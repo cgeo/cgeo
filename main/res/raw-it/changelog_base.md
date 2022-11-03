@@ -1,8 +1,26 @@
-- Nuovo: Scarica/aggiorna i cache in background (sperimentale)
-- Nuovo: Copia le coordinate correnti con un tocco prolungato sulla posizione della schermata iniziale
-- Modifica: Rimosso controllo sul limite nelle dimensioni durante la memorizzazione dei waypoint nelle note personali
-- Corretto: Non vengono mostrati i cerchi di distanza per i waypoint dei cache archiviati
-- Nuovo: Toccare uno spazio libero sulla mappa per creare il waypoint o il cache definito dall'utente, aggiungere in fondo o all'inizio del percorso personalizzato, visualizzare le coordinate o navigare (a seconda del contesto)
-- Nuovo: Opzione per eliminare le mappe offline
-- Corretto: Perdita conteggio tracciabili nei risultati di ricerca
-- Correzione: gli Adventure Lab, in percorsi personalizzati, non venivano riconosciuti come tali dopo la modifica
+
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
+### Mappa
+- New: Allow change of track's display name
+
+### Dettagli del cache
+- Fix: Log image labelled "Image 1" even if only a single image added
+- New: GEOCODE log template placeholder
+- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
+
+### Generale
+- New: View for pending downloads
+- New: Append cache name / list name to file name on GPX export
+- Change: Removed "Identify as Android browser" setting
+- New: Check pending downloads (maps / routing data) on startup
+- New: Allow selection of files to download
+- New: Status filter for DNF
+- New: Display elevation on home screen (if available)
+- New: Allow manual input of values in filters using sliders
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
+- Change: Improve filter status line text

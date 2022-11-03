@@ -27,7 +27,7 @@ public class Value {
     //some caching
     private String asString;
     private Double asDouble;
-    private Integer asInteger;
+    private Long asInteger;
 
     public static Value of(final Object value) {
         return new Value(value);
@@ -49,7 +49,7 @@ public class Value {
 
     public boolean isInteger() {
         getAsInt();
-        return !asInteger.equals(Integer.MIN_VALUE);
+        return !asInteger.equals(Long.MIN_VALUE);
     }
 
     public boolean isString() {
@@ -78,22 +78,26 @@ public class Value {
         return isDouble() ? getAsDouble() > 0d + DOUBLE_DELTA : !StringUtils.isBlank(getAsString());
     }
 
-    public int getAsInt() {
+    public long getAsInt() {
         if (asInteger == null) {
-            if (raw instanceof Integer) {
-                asInteger = ((Number) raw).intValue();
+            if (raw instanceof Integer || raw instanceof Long) {
+                asInteger = ((Number) raw).longValue();
             } else if (raw instanceof Number && Math.abs(Math.round(((Number) raw).doubleValue()) - ((Number) raw).doubleValue()) < DOUBLE_DELTA) {
-                asInteger = ((Number) raw).intValue();
+                asInteger = ((Number) raw).longValue();
             } else {
-                final double d = getAsDouble();
-                if (isDouble() && (Math.abs(Math.round(d) - d) < DOUBLE_DELTA)) {
-                    asInteger = (int) Math.round(d);
-                } else {
-                    asInteger = Integer.MIN_VALUE;
+                try {
+                    asInteger = Long.parseLong(getAsString());
+                } catch (NumberFormatException nfe) {
+                    final double d = getAsDouble();
+                    if (isDouble() && d <= Long.MAX_VALUE && d >= Long.MIN_VALUE && Math.abs(Math.round(d) - d) < DOUBLE_DELTA) {
+                        asInteger = Math.round(d);
+                    } else {
+                        asInteger = Long.MIN_VALUE;
+                    }
                 }
             }
         }
-        return asInteger.equals(Integer.MIN_VALUE) ? 0 : asInteger;
+        return asInteger.equals(Long.MIN_VALUE) ? 0L : asInteger;
     }
 
     public double getAsDouble() {

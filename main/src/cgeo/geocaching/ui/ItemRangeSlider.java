@@ -81,7 +81,6 @@ public class ItemRangeSlider<T> extends LinearLayout {
         this.labelMapper = labelMapper;
         this.axisLabelMapper = axisLabelMapper;
 
-        binding.sliderInternal.setMinSeparationValue(1);
         binding.sliderInternal.setValueFrom(0);
         binding.sliderInternal.setValueTo(this.items.size() - 1);
         binding.sliderInternal.setLabelFormatter(f -> {

@@ -328,10 +328,6 @@
         <item quantity="one">%d perc</item>
         <item quantity="other">%d perc</item>
     </plurals>
-    <string name="caches_store_offline">Összes mentése</string>
-    <string name="caches_store_all">Összes mentése</string>
-    <string name="caches_store_unsaved">Nem mentettek mentése</string>
-    <string name="caches_store_selected">Kijelöltek mentése</string>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
     <string name="caches_sort">Rendezés</string>
@@ -479,6 +475,8 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Probléma jelentése</string>
     <string name="debug_user_error_errortext">Váratlan probléma lépett fel, amelyet légyszi jelents nekünk:</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Beállítások megnyitása?</string>
     <string name="settings_title_services">Szolgáltatások</string>
@@ -1368,7 +1366,6 @@
     <!-- permission handling -->
     <string name="close_app">App bezárása</string>
     <string name="ask_again">Újrakérdezés</string>
-    <string name="location_permission_request_explanation">A c:geo-nak szüksége van készüléked GPS-ének használatára, hogy megállapíthassa helyzetedet, a ládák irányát, távolságát. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_request_explanation">A c:geo adatokat tárol készülékeden vagy SD kártyádon, ha ládákat mentesz el offline használatra. Továbbá használja készüléked tárhelyét fájlok importálásakor/exportálásakor, valamint offline térképek olvasásakor. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->

@@ -26,7 +26,7 @@
         <Preference
             android:key="@string/pref_fakekey_sendtocgeo_info"
             android:title="@string/settings_info_send2cgeo_title"
-            android:text="@string/init_sendToCgeo_description"
+            android:summary="@string/init_sendToCgeo_description"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_sendtocgeo_website"

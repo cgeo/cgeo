@@ -211,7 +211,8 @@ public class DataStore {
                     "cg_caches.watchlistCount," +  // 42
                     "cg_caches.preventWaypointsFromNote," +  // 43
                     "cg_caches.owner_guid," +  // 44
-                    "cg_caches.emoji";                       // 45
+                    "cg_caches.emoji," +       // 45
+                    "cg_caches.alcMode";       // 46
 
     /**
      * The list of fields needed for mapping.
@@ -228,7 +229,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 98;
+    private static final int dbVersion = 99;
     public static final int customListIdOffset = 10;
 
     /**
@@ -262,7 +263,8 @@ public class DataStore {
             95, // add table to store custom filters
             96, // add preventAskForDeletion to cg_lists
             97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
-            98  // add table cg_variables to store cache variables
+            98, // add table cg_variables to store cache variables
+            99  // add alcMode to differentiate Linear vs Random
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -333,7 +335,8 @@ public class DataStore {
             + "watchlistCount INTEGER DEFAULT -1,"
             + "preventWaypointsFromNote INTEGER DEFAULT 0,"
             + "owner_guid TEXT NOT NULL DEFAULT '',"
-            + "emoji INTEGER DEFAULT 0"
+            + "emoji INTEGER DEFAULT 0,"
+            + "alcMode INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -504,6 +507,7 @@ public class DataStore {
             + "longitude DOUBLE "
             + "); ";
 
+    @SuppressWarnings("SyntaxError")
     private static final String dbCreateExtension
             = "CREATE TABLE IF NOT EXISTS " + dbTableExtension + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -1672,6 +1676,15 @@ public class DataStore {
                         }
                     }
 
+                    // add alcMode to cg_caches
+                    if (oldVersion < 99) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "alcMode INTEGER DEFAULT 0");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 99);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1911,6 +1924,18 @@ public class DataStore {
                     FileUtils.deleteDirectory(dir);
                 }
             });
+        }
+
+        reindexDatabase();
+    }
+
+    private static void reindexDatabase() {
+        init();
+        try {
+            Log.d("Database clean: recreate indices");
+            database.execSQL("REINDEX");
+        } catch (final Exception e) {
+            Log.w("DataStore.clean", e);
         }
     }
 
@@ -2162,7 +2187,7 @@ public class DataStore {
     private static boolean updateDisabledStatus(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
-        Log.d("Updating disabled status of " + cache.toString() + " in DB");
+        Log.d("Updating disabled status of " + cache + " in DB");
 
         final ContentValues values = new ContentValues();
         values.put("disabled", cache.isDisabled() ? 1 : 0);
@@ -2187,7 +2212,7 @@ public class DataStore {
     public static boolean storeIntoDatabase(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
-        Log.d("Saving " + cache.toString() + " (" + cache.getLists() + ") to DB");
+        Log.d("Saving " + cache + " (" + cache.getLists() + ") to DB");
 
         final ContentValues values = new ContentValues();
 
@@ -2243,6 +2268,7 @@ public class DataStore {
         values.put("preventWaypointsFromNote", cache.isPreventWaypointsFromNote() ? 1 : 0);
         values.put("owner_guid", cache.getOwnerGuid());
         values.put("emoji", cache.getAssignedEmoji());
+        values.put("alcMode", cache.getAlcMode());
 
         init();
 
@@ -2552,7 +2578,7 @@ public class DataStore {
                 final long logId = insertLog.executeInsert();
                 if (log.hasLogImages()) {
                     final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
-                    for (final Image img : log.getLogImages()) {
+                    for (final Image img : log.logImages) {
                         imgCnt++;
                         insertImage.bindLong(1, logId);
                         insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
@@ -2740,7 +2766,7 @@ public class DataStore {
         }
 
         if (CollectionUtils.isNotEmpty(remaining)) {
-            Log.d("DataStore.loadCaches(" + remaining.toString() + ") returned no results");
+            Log.d("DataStore.loadCaches(" + remaining + ") returned no results");
         }
         return result;
     }
@@ -2937,6 +2963,7 @@ public class DataStore {
         cache.setPreventWaypointsFromNote(cursor.getInt(43) > 0);
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
+        cache.setAlcMode(cursor.getInt(46));
 
         return cache;
     }
@@ -3733,10 +3760,20 @@ public class DataStore {
         databaseCleaned = true;
 
         try (ContextLogger ignore = new ContextLogger(true, "DataStore.cleanIfNeeded: cleans DB")) {
-            if (Settings.dbNeedsCleanup()) {
-                Settings.setDbCleanupLastCheck(false);
+            Schedulers.io().scheduleDirect(() -> {
+                // check for UDC cleanup every time this method is called
+                deleteOrphanedUDC();
 
-                Schedulers.io().scheduleDirect(() -> {
+                // reindex if needed
+                if (Settings.dbNeedsReindex()) {
+                    Settings.setDbReindexLastCheck(false);
+                    reindexDatabase();
+                }
+
+                // other cleanup will be done once a day at max
+                if (Settings.dbNeedsCleanup()) {
+                    Settings.setDbCleanupLastCheck(false);
+
                     Log.d("Database clean: started");
                     try {
                         final Set<String> geocodes = new HashSet<>();
@@ -3755,6 +3792,7 @@ public class DataStore {
                         removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
 
                         deleteOrphanedRecords();
+                        makeWaypointPrefixesUnique();
 
                         // Remove the obsolete "_others" directory where the user avatar used to be stored.
                         FileUtils.deleteDirectory(LocalStorage.getGeocacheDataDirectory("_others"));
@@ -3766,10 +3804,9 @@ public class DataStore {
                     } catch (final Exception e) {
                         Log.w("DataStore.clean", e);
                     }
-
                     Log.d("Database clean: finished");
-                });
-            }
+                }
+            });
         }
     }
 
@@ -3816,6 +3853,76 @@ public class DataStore {
             database.delete(dbTableExtension, "_type NOT IN (" + type + ")", null);
         }
         database.delete(dbTableExtension, "_type=" + DBEXTENSION_INVALID.id, null);
+    }
+
+    private static void deleteOrphanedUDC() {
+        final Set<String> orphanedUDC = new HashSet<>();
+        queryToColl(dbTableCaches,
+                new String[]{"geocode"},
+                "SUBSTR(geocode,1," + InternalConnector.PREFIX.length() + ") = '" + InternalConnector.PREFIX + "' AND geocode NOT IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE SUBSTR(geocode,1," + InternalConnector.PREFIX.length() + ") = '" + InternalConnector.PREFIX + "')",
+                null,
+                null,
+                null,
+                orphanedUDC,
+                GET_STRING_0
+        );
+        final StringBuilder info = new StringBuilder();
+        for (String geocode : orphanedUDC) {
+            info.append(" ").append(geocode);
+        }
+        Log.i("delete orphaned UDC" + info);
+        removeCaches(orphanedUDC, LoadFlags.REMOVE_ALL);
+    }
+
+    /**
+     * due to historical reasons some waypoints of the same cache may have the same prefix, which is invalid
+     * this method makes those prefixes unique
+     */
+    private static void makeWaypointPrefixesUnique() {
+        init();
+        try (Cursor cursor = database.query(dbTableWaypoints, new String[]{"_id", "geocode", "prefix"}, null, null, "geocode, prefix", "COUNT(prefix) > 1", "geocode", null)) {
+            while (cursor.moveToNext()) {
+                final int id = cursor.getInt(0);
+                final String geocode = cursor.getString(1);
+                final String prefix = cursor.getString(2);
+                Log.w("found duplicate prefixes in waypoints for cache " + geocode + ", prefix=" + prefix);
+
+                // retrieve all prefixes for this cache
+                final ArrayList<String> usedPrefixes = new ArrayList<>();
+                queryToColl(dbTableWaypoints, new String[]{"prefix"}, "geocode=?", new String[]{geocode}, "_id", null, usedPrefixes, GET_STRING_0);
+
+                try (Cursor cursor2 = database.query(dbTableWaypoints, new String[]{"_id", "prefix"}, "geocode=? AND prefix=?", new String[]{geocode, prefix}, null, null, "_id", null)) {
+                    while (cursor2.moveToNext()) {
+                        if (id != cursor2.getInt(0)) {
+                            final String duplicate = cursor2.getString(1);
+                            int counter = 0;
+                            boolean found = true;
+                            while (found) {
+                                found = false;
+                                counter++;
+                                final String newPrefix = duplicate + "-" + counter;
+                                for (String usedPrefix : usedPrefixes) {
+                                    if (StringUtils.equals(usedPrefix, newPrefix)) {
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    // update prefix in database
+                                    final ContentValues values = new ContentValues();
+                                    values.put("prefix", newPrefix);
+                                    database.update(dbTableWaypoints, values, "_id=?", new String[]{String.valueOf(cursor2.getInt(0))});
+                                    usedPrefixes.add(newPrefix);
+                                    Log.w("=> updated prefix for waypoint id=" + cursor2.getInt(0) + ", from " + duplicate + " to " + newPrefix);
+                                }
+                            }
+                        }
+                    }
+                }
+                // remove cache from cachecache to force reload with updated data
+                cacheCache.removeCacheFromCache(cursor.getString(1));
+            }
+        }
     }
 
     /**
@@ -4525,7 +4632,7 @@ public class DataStore {
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints)
                 .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
-                .append(" LIMIT " + (Math.max(10, Settings.getKeyInt(R.integer.waypoint_threshold_max)) * 2));  // Hardcoded limit to avoid memory overflow
+                .append(" LIMIT ").append(Math.max(10, Settings.getKeyInt(R.integer.waypoint_threshold_max)) * 2);  // Hardcoded limit to avoid memory overflow
 
         return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<>(), DataStore::createWaypointFromDatabaseContent);
     }

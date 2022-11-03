@@ -29,7 +29,7 @@ public class SearchResultTest extends AndroidTestCase {
         geocodes.add("GC45678");
         geocodes.add("GC56789");
         search.addFilteredGeocodes(geocodes);
-        search.getSearchContext().putString("testkey", "test");
+        search.setFinder("test");
 
         final Parcel parcel = Parcel.obtain();
         search.writeToParcel(parcel, 0);
@@ -47,7 +47,7 @@ public class SearchResultTest extends AndroidTestCase {
 
         assertThat(receive.getFilteredGeocodes()).contains("GC45678").doesNotContain("GC12345");
 
-        assertThat(receive.getSearchContext().getString("testkey")).isEqualTo("test");
+        assertThat(receive.getFinder()).isEqualTo("test");
     }
 
     public static void testAddSearchResult() {

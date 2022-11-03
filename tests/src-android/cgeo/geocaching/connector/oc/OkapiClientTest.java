@@ -125,7 +125,7 @@ public class OkapiClientTest extends CGeoTestCase {
             }
         }
         assertThat(logWithImage).isNotNull();
-        assertThat(logWithImage.getLogImages()).isNotEmpty();
+        assertThat(logWithImage.logImages).isNotEmpty();
     }
 
 }

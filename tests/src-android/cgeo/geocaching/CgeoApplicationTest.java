@@ -208,9 +208,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
             assertThat(searchedCache.getDifficulty()).isEqualTo(cache.getDifficulty());
             assertThat(searchedCache.getTerrain()).isEqualTo(cache.getTerrain());
             assertThat(searchedCache.getGeocode()).isEqualTo(cache.getGeocode());
-            assertThat(searchedCache.getOwnerDisplayName()).isEqualTo(cache.getOwnerDisplayName());
-            // for PM only caches we can only parse the owner display name which is therefore set as user id too
-            assertThat(searchedCache.getOwnerUserId()).isEqualTo(cache.getOwnerDisplayName());
             assertThat(searchedCache.getSize()).isEqualTo(cache.getSize());
             assertThat(searchedCache.getType()).isEqualTo(cache.getType());
             // it's not possible in guest sessions to distinguish whether a PM-only cache is disabled or archived

@@ -5,19 +5,23 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
+import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
-import android.view.View;
+import android.app.Activity;
+import android.graphics.Point;
+import android.view.MotionEvent;
+import static android.view.ViewConfiguration.getLongPressTimeout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,17 +36,18 @@ import org.oscim.core.BoundingBox;
  * GoogleMapsView - Contains the view handling parts specific to Google Maps
  * To be called by UnifiedMapActivity (mostly)
  */
-public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback {
+public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback /*, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener */ {
 
     private GoogleMap mMap;
-    private View rootView;
     private final GoogleMapController mapController = new GoogleMapController();
+    private long lastTouchStart = -1;
 
     @Override
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+    public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
+        mMapView = activity.findViewById(R.id.mapViewGM);
 
         // add map fragment
         final SupportMapFragment mapFragment = SupportMapFragment.newInstance();
@@ -60,6 +65,16 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         super.prepareForTileSourceChange();
     }
 
+    @Override
+    public void setTileSource(final AbstractTileProvider newSource) {
+        super.setTileSource(newSource);
+        ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+    }
+
+    @Override
+    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
+        return new GoogleGeoitemLayer(mMap);
+    }
 
     /* retrieve fingerprint with getKeyHash(activity, "SHA")
     private String getKeyHash(final Activity activity, final String hashStrategy) {
@@ -91,64 +106,14 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         configMapChangeListener(true);
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
+        GoogleMapsThemeHelper.setTheme(activityRef.get(), mMap);
+        mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
+        ((TouchableWrapper) (rootView.findViewById(R.id.mapViewGMWrapper))).setOnTouch(this::onTouchEvent);
         onMapReadyTasks.run();
     }
 
-    @Override
-    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
-        return new GoogleGeoitemLayer(mMap);
-    }
-
-    @Override
-    public void setTileSource(final AbstractTileProvider newSource) {
-        super.setTileSource(newSource);
-        ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
-    }
-
-    @Override
-    public void setMapRotation(final int mapRotation) {
-        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
-        super.setMapRotation(mapRotation);
-    }
-
-    @Override
-    public float getCurrentBearing() {
-        return mMap.getCameraPosition().bearing;
-    }
-
-    @Override
-    public void setBearing(final float bearing) {
-        // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
-    }
-
-    /**
-     * keep track of rotation and zoom level changes
-     **/
-    protected void configMapChangeListener(final boolean enable) {
-        if (mMap != null) {
-            mMap.setOnCameraIdleListener(null);
-            mMap.setOnCameraMoveStartedListener(null);
-            if (enable) {
-                mMap.setOnCameraIdleListener(() -> {
-                    if (activityMapChangeListener != null) {
-                        final CameraPosition pos = mMap.getCameraPosition();
-                        activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
-                    }
-                });
-                mMap.setOnCameraMoveStartedListener(reason -> {
-                    if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && resetFollowMyLocationListener != null) {
-                        resetFollowMyLocationListener.run();
-                    }
-                });
-            }
-        }
-    }
-
-    @Override
-    public void applyTheme() {
-        // @todo
-    }
+    // ========================================================================
+    // position related methods
 
     @Override
     public void setCenter(final Geopoint geopoint) {
@@ -173,7 +138,42 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     }
 
     // ========================================================================
-    // zoom & heading methods
+    // theme & language related methods
+
+    @Override
+    public void selectTheme(final Activity activity) {
+        GoogleMapsThemeHelper.selectTheme(activity, mMap);
+    }
+
+    @Override
+    public void applyTheme() {
+        GoogleMapsThemeHelper.setTheme(activityRef.get(), mMap);
+    }
+
+    // ========================================================================
+    // zoom, bearing & heading methods
+
+    /** keep track of rotation and zoom level changes */
+    @Override
+    protected void configMapChangeListener(final boolean enable) {
+        if (mMap != null) {
+            mMap.setOnCameraIdleListener(null);
+            mMap.setOnCameraMoveStartedListener(null);
+            if (enable) {
+                mMap.setOnCameraIdleListener(() -> {
+                    if (activityMapChangeListener != null) {
+                        final CameraPosition pos = mMap.getCameraPosition();
+                        activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
+                    }
+                });
+                mMap.setOnCameraMoveStartedListener(reason -> {
+                    if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && resetFollowMyLocationListener != null) {
+                        resetFollowMyLocationListener.run();
+                    }
+                });
+            }
+        }
+    }
 
     @Override
     public void zoomToBounds(final Viewport bounds) {
@@ -205,6 +205,23 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     }
 
     @Override
+    public void setMapRotation(final int mapRotation) {
+        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+        super.setMapRotation(mapRotation);
+    }
+
+    @Override
+    public float getCurrentBearing() {
+        return mMap.getCameraPosition().bearing;
+    }
+
+    @Override
+    public void setBearing(final float bearing) {
+        // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
+    }
+
+    @Override
     protected AbstractPositionLayer<LatLng> configPositionLayer(final boolean create) {
         if (create) {
             if (positionLayer == null) {
@@ -215,6 +232,21 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
             positionLayer = null;
         }
         return null;
+    }
+
+    // ========================================================================
+    // Tap handling methods
+
+    /** manual handling of touch events to be able to detect taps on markers */
+    private void onTouchEvent(final MotionEvent event) {
+        if (MotionEvent.ACTION_DOWN == event.getAction()) {
+            lastTouchStart = System.currentTimeMillis();
+        } else if (MotionEvent.ACTION_UP == event.getAction()) {
+            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
+            lastTouchStart = -1;
+        }
+
     }
 
     // ========================================================================

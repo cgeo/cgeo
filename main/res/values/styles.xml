@@ -114,11 +114,6 @@
         <item name="android:text" />
     </style>
 
-    <style name="settings_actionbar_theme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
-        <!-- Customize color of back arrow -->
-        <item name="android:textColorPrimary">@color/colorTextActionBar</item>
-    </style>
-
     <!-- buttons -->
 
     <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">

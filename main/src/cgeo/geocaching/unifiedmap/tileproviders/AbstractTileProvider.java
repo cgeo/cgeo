@@ -9,6 +9,7 @@ public abstract class AbstractTileProvider {
 
     protected boolean supportsLanguages;
     protected boolean supportsThemes;
+    protected boolean supportsThemeOptions;
     protected String tileProviderName;
     private Integer numericId;
     private static final Map<String, Integer> mapSourceIds = new HashMap<>();
@@ -31,6 +32,10 @@ public abstract class AbstractTileProvider {
 
     public boolean supportsThemes() {
         return supportsThemes;
+    }
+
+    public boolean supportsThemeOptions() {
+        return supportsThemeOptions;
     }
 
     public String getTileProviderName() {

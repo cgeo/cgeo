@@ -131,7 +131,7 @@ public final class Viewport {
 
     @Override
     public String toString() {
-        return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
+        return "(" + bottomLeft + "," + topRight + ")";
     }
 
     /**

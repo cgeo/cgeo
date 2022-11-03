@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_width="@dimen/equation_name_width"
         android:gravity="right"
+        android:hint="@string/variables_varname_dialog_title"
         android:textSize="22dp"
         />
 
@@ -25,6 +26,7 @@
         android:layout_width="wrap_content"
         android:textSize="22dp"
         android:text=" = "
+        tools:ignore="HardcodedText"
         />
 
 
@@ -33,5 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:inputType="text|textNoSuggestions"
+        android:hint="@string/formula"
         android:layout_weight="1"/>
 </LinearLayout>

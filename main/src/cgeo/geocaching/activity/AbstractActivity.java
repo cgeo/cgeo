@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -10,6 +9,7 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -71,14 +71,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             finish();
         }
     };
-
-    protected final void showProgress(final boolean show) {
-        try {
-            ActivityMixin.showProgress(this, show);
-        } catch (final Exception ex) {
-            Log.e(String.format(Locale.US, "Error seeting progress: %b", show), ex);
-        }
-    }
 
     protected final void setTheme() {
         ActivityMixin.setTheme(this);
@@ -258,9 +250,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
             if (success) {
-                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
@@ -285,9 +275,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
             } else {
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> {
-                            cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
-                        });
+                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix)));
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
@@ -321,7 +309,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
      * change the titlebar icon and text to show the current geocache
      */
     protected void setCacheTitleBar(@NonNull final Geocache cache) {
-        setTitle(TextUtils.coloredCacheText(cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
+        setTitle(TextUtils.coloredCacheText(this, cache, cache.getName() + " (" + cache.getShortGeocode() + ")"));
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowHomeEnabled(true);

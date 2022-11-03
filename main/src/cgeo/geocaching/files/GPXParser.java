@@ -322,6 +322,11 @@ abstract class GPXParser extends FileParser {
 
                         waypoint.setCoords(cache.getCoords());
 
+                        // set flag for user-modified coordinates of cache
+                        if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
+                            cacheForWaypoint.setUserModifiedCoords(true);
+                        }
+
                         // user defined waypoint does not have original empty coordinates
                         if (wptEmptyCoordinates || (!waypoint.isUserDefined() && null == waypoint.getCoords())) {
                             waypoint.setOriginalCoordsEmpty(true);
@@ -635,8 +640,8 @@ abstract class GPXParser extends FileParser {
 
         gcLog.setEndElementListener(() -> {
             final LogEntry log = logBuilder.build();
-            if (log.getType() != LogType.UNKNOWN) {
-                if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
+            if (log.logType != LogType.UNKNOWN) {
+                if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
                     if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
                         cache.setFound(true);
@@ -795,8 +800,8 @@ abstract class GPXParser extends FileParser {
 
         terraLog.setEndElementListener(() -> {
             final LogEntry log = logBuilder.build();
-            if (log.getType() != LogType.UNKNOWN) {
-                if (log.getType().isFoundLog() && StringUtils.isNotBlank(log.author)) {
+            if (log.logType != LogType.UNKNOWN) {
+                if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
                     final IConnector connector = ConnectorFactory.getConnector(cache);
                     if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
                         cache.setFound(true);

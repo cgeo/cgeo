@@ -65,6 +65,7 @@
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="faq_url_settings_themes">https://faq.cgeo.org/#theme-slow</string>
     <string translatable="false" name="manual_url_mapbehavior">https://manual.cgeo.org/en/mainmenu/settings#map_behavior</string>
+    <string translatable="false" name="manual_url_hillshading">https://manual.cgeo.org/en/offlinemaps#hillshading</string>
 
     <!-- contributors -->
     <string translatable="false" name="contributors_carnero">carnero</string>
@@ -73,36 +74,35 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2021-02 to 2022-02 -->
+    <!-- currently listed: contributions 2021-09 to 2022-09 -->
     <string translatable="false" name="contributors_recent">
-    baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
-    jakedot|https://github.com/jakedot|c|
-    jirkavrba|https://github.com/jirkavrba|c|
-    jonas-koeritz|https://github.com/jonas-koeritz|c|
-    k3b|https://github.com/k3b|c|
+    jakedot||c|
+    k3b||c|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    okainov|https://github.com/okainov|c|
-    pet0etie|https://github.com/pet0etie|c|
-    Rainer S.|https://github.com/rsudev|c|
+    nmrsmn||c|
+    NotWoods|https://github.com/NotWoods|c|
+    pet0etie||c|
+    Rainer S.||c|
     SammysHP|https://www.sammyshp.de/|i|
     SchoolGuy|https://github.com/SchoolGuy|c|
-    Surfoo|https://github.com/Surfoo|c|
-    UniQP|https://github.com/UniQP|c|
+    Surfoo||c|
+    Volthai7us||c
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
-    <!-- other contributors, meaning: before last year -->
+    <!-- past contributors, meaning: before last 12 months -->
     <!-- same format as contributors_recent string -->
     <string translatable="false" name="contributors_other">
     avogadogc|||
     Arne Schwabe||c|
+    baiti|https://github.com/baiti|c|
     Bananeweizen||c|
     BeckyDTP|https://github.com/BeckyDTP|c|
     bjdupuis||c|
@@ -121,6 +121,8 @@
     Iiro Jäppinen||g|
     Jan Žatecký|https://www.jaytech.cz/|g|
     jgoestl|https://github.com/jgoestl|c|
+    jirkavrba|https://github.com/jirkavrba|c|
+    jonas-koeritz|https://github.com/jonas-koeritz|c|
     JoWi24|https://joachim-wilke.de/|c|
     Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
@@ -132,6 +134,7 @@
     MichielK||c|
     msperkowski|||
     ncorreia||c|
+    okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     Pavol Babinčák||c|
     Peter Storch|https://github.com/pstorch|c|
@@ -141,6 +144,7 @@
     Samuel Tardieu|https://www.rfc1149.net/sam.html||
     S-Bartfast|https://github.com/S-Bartfast|c|
     stephanme/Geoteufel||c|
+    UniQP|https://github.com/UniQP|c|
     TakoTheDank|https://github.com/TacoTheDank|c|
     thiasB||c|
     YraFyra||c|

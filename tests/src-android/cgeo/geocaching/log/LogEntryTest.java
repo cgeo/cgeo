@@ -24,7 +24,7 @@ public class LogEntryTest extends CGeoTestCase {
         final LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
         assertThat(logEntry.date).isEqualTo(100);
-        assertThat(logEntry.getType()).isEqualTo(LogType.FOUND_IT);
+        assertThat(logEntry.logType).isEqualTo(LogType.FOUND_IT);
         assertThat(logEntry.log).isEqualTo("LOGENTRY");
     }
 
@@ -60,13 +60,13 @@ public class LogEntryTest extends CGeoTestCase {
 
         LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
-        assertThat(logEntry.getLogImages()).hasSize(0);
+        assertThat(logEntry.logImages).hasSize(0);
         assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
 
         final Image mockedImage1 = new Image.Builder().setTitle("").build();
         logEntry = logEntry.buildUpon().addLogImage(mockedImage1).build();
 
-        assertThat(logEntry.getLogImages()).hasSize(1);
+        assertThat(logEntry.logImages).hasSize(1);
         assertThat(logEntry.getImageTitles()).isEqualTo(defaultTitle);
 
         final Image mockedImage2 = new Image.Builder().setTitle("TITLE 1").build();
@@ -74,7 +74,7 @@ public class LogEntryTest extends CGeoTestCase {
         final Image mockedImage3 = new Image.Builder().setTitle("TITLE 2").build();
         logEntry = logEntry.buildUpon().addLogImage(mockedImage3).build();
 
-        assertThat(logEntry.getLogImages()).hasSize(3);
+        assertThat(logEntry.logImages).hasSize(3);
         final String titlesWanted = "• TITLE 1\n• TITLE 2";
         assertThat(logEntry.getImageTitles()).isEqualTo(titlesWanted);
     }

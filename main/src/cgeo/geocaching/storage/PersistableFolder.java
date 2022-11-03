@@ -40,6 +40,8 @@ public enum PersistableFolder {
      */
     //legacy setting: "renderthemepath", a pure file path is stored
     OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(OFFLINE_MAPS, "_themes")),
+    /** Offline Maps: optional folder for map shading files (dem) */
+    OFFLINE_MAP_SHADING(R.string.pref_persistablefolder_offlinemapshading, R.string.persistablefolder_offline_maps_shading, Folder.fromPersistableFolder(OFFLINE_MAPS, "_hgt")),
     /**
      * Target folder for written logfiles
      */

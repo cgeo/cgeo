@@ -238,10 +238,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d mga minuto</item>
     </plurals>
-    <string name="caches_store_offline">Gitipigan sa Offline</string>
-    <string name="caches_store_all">Itipig Tanan</string>
-    <string name="caches_store_unsaved">Itipig ang Wala nasave</string>
-    <string name="caches_store_selected">Ang napilian nga Store</string>
     <string name="caches_history">Ang mga niaagi</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Han-ayon</string>
@@ -312,6 +308,8 @@
     <string name="about_system_info">impormasyon sa sistemang c:geo</string>
     <string name="about_system_info_send_chooser">Ihatag ang impormasyon sa sistema</string>
     <string name="changelog_github">Ang listahan sa tanang kausaban</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Ablihon ang mga setting?</string>
     <string name="settings_title_services">Ang mga serbisyo</string>

@@ -1,6 +1,7 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -84,9 +85,14 @@ public final class LoggingUI extends AbstractUIFactory {
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
         final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
-        final LogType currentLogType = currentLog == null ? null : currentLog.getType();
+        final LogType currentLogType = currentLog == null ? null : currentLog.logType;
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
+        // manually add NM/NA log types for GC connector, as those are no longer part of default log types, but need to be selectable for quick offline log
+        if (GCConnector.getInstance().canHandle(cache.getGeocode())) {
+            logTypes.add(LogType.NEEDS_MAINTENANCE);
+            logTypes.add(LogType.NEEDS_ARCHIVE);
+        }
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
         for (final LogType logType : logTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));

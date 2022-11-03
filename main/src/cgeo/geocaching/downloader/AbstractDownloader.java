@@ -37,8 +37,8 @@ public abstract class AbstractDownloader {
 
     AbstractDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;
-        this.mapBase = Uri.parse(CgeoApplication.getInstance().getString(mapBase));
-        this.mapSourceName = CgeoApplication.getInstance().getString(mapSourceName);
+        this.mapBase = mapBase == 0 ? Uri.parse("") : Uri.parse(CgeoApplication.getInstance().getString(mapBase));
+        this.mapSourceName = mapSourceName == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceName);
         this.mapSourceInfo = mapSourceInfo == 0 ? "" : CgeoApplication.getInstance().getString(mapSourceInfo);
         this.projectUrl = projectUrl == 0 ? "" : CgeoApplication.getInstance().getString(projectUrl);
         if (projectUrl != 0) {

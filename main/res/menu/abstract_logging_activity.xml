@@ -4,10 +4,9 @@
 
     <item
         android:id="@+id/menu_send"
-        android:enabled="true"
         android:icon="@drawable/ic_menu_send"
         android:title="@string/send"
-        app:showAsAction="ifRoom|withText"> <!-- enabled=true, we show a message if logging is not possible -->
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_templates"

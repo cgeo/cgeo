@@ -44,7 +44,7 @@ class FieldNotes {
                 .append(',')
                 .append(FIELD_NOTE_DATE_FORMAT.format(new Date(log.date)))
                 .append(',')
-                .append(StringUtils.capitalize(log.getType().type))
+                .append(StringUtils.capitalize(log.logType.type))
                 .append(",\"")
                 .append(StringUtils.replaceChars(log.log, '"', '\''))
                 .append("\"\n");

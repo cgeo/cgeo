@@ -63,7 +63,7 @@
          <RelativeLayout
             android:id="@+id/device_information"
             android:layout_width="fill_parent"
-            android:layout_height="16dip"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="false"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
@@ -147,7 +147,7 @@
         <RelativeLayout
             android:id="@+id/status"
             android:layout_width="fill_parent"
-            android:layout_height="16dip"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"

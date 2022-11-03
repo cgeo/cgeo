@@ -265,7 +265,7 @@ public final class GCParser {
             cache.setFound(row.contains("/images/icons/16/found.png") || row.contains("uxUserLogDate\" class=\"Success\""));
 
             // infer cache id from geocode
-            cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+            cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
             cids.add(cache.getCacheId());
 
             // favorite count
@@ -319,7 +319,7 @@ public final class GCParser {
 
                     final String coordinates = Network.getResponseData(Network.postRequest("https://www.geocaching.com/seek/" + queryUrl, params), false);
 
-                    if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
+                    if (StringUtils.contains(coordinates, GCConstants.STRING_UNAPPROVED_LICENSE)) {
                         Log.i("User has not agreed to the license agreement. Can't download .loc file.");
                         searchResult.setError(con, StatusCode.UNAPPROVED_LICENSE);
                         return searchResult;
@@ -412,7 +412,7 @@ public final class GCParser {
             return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE, null);
         }
 
-        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
+        if (pageIn.contains(GCConstants.STRING_PREMIUMONLY)) {
             final Geocache cache = new Geocache();
             cache.setPremiumMembersOnly(true);
             final MatcherWrapper matcher = new MatcherWrapper(GCConstants.PATTERN_PREMIUMONLY_CACHETYPE, pageIn);
@@ -424,8 +424,6 @@ public final class GCParser {
             }
             cache.setName(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_CACHENAME, true, "")));
             cache.setGeocode(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_GEOCODE, true, ""));
-            cache.setOwnerDisplayName(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_OWNER, true, "")));
-            cache.setOwnerUserId(TextUtils.stripHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_OWNER, true, ""))); // set owner display name also as user id, as it's better than nothing ;-)
             cache.setDifficulty(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_DIFFICULTY, true, "0")));
             cache.setTerrain(Float.parseFloat(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_TERRAIN, true, "0")));
             cache.setSize(CacheSize.getById(TextUtils.getMatch(pageIn, GCConstants.PATTERN_PREMIUMONLY_SIZE, true, CacheSize.NOT_CHOSEN.id)));
@@ -459,7 +457,7 @@ public final class GCParser {
         cache.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
 
         // cache id
-        cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+        cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
 
         // cache guid
         cache.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.getGuid()));
@@ -948,7 +946,7 @@ public final class GCParser {
 
         final SearchResult sr = searchByAny(con, params, ct, noOwnFound);
         if (sr != null) {
-            sr.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, userName);
+            sr.setFinder(userName);
         }
         return sr;
     }
@@ -1112,7 +1110,7 @@ public final class GCParser {
             }
         }
 
-        Log.e(arrayNode.toString());
+        Log.d(arrayNode.toString());
 
         try {
             Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode));
@@ -1491,15 +1489,15 @@ public final class GCParser {
         try {
             final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE, page);
             if (matcherSpottedCache.find()) {
-                trackable.setSpottedGuid(matcherSpottedCache.group(1));
-                trackable.setSpottedName(matcherSpottedCache.group(2).trim());
+                trackable.setSpottedGuid(matcherSpottedCache.group(2));
+                trackable.setSpottedName(matcherSpottedCache.group(1).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_CACHE);
             }
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find()) {
-                trackable.setSpottedGuid(matcherSpottedUser.group(2));
-                trackable.setSpottedName(matcherSpottedUser.group(3).trim());
+                trackable.setSpottedGuid(matcherSpottedUser.group(3));
+                trackable.setSpottedName(matcherSpottedUser.group(1).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
@@ -1535,7 +1533,7 @@ public final class GCParser {
         try {
             final String logType = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_FOUND_LOG, false, null);
             if (logType != null) {
-                trackable.setLogType(LogType.getByType(StringUtils.trim(logType)));
+                trackable.setLogType(LogType.getByIconName(StringUtils.trim(logType)));
             }
             final MatcherWrapper retrievedMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISPOSITION_LOG, page);
             if (retrievedMatcher.find()) {
@@ -1583,8 +1581,8 @@ public final class GCParser {
             trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
         }
 
-        // trackable may be locked
-        if (page.contains(GCConstants.TRACKABLE_IS_LOCKED)) {
+        // trackable may be locked (see e.g. TB673CE)
+        if (new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_IS_LOCKED, page).find()) {
             trackable.setIsLocked();
         }
 
@@ -1869,7 +1867,7 @@ public final class GCParser {
         mergedLogs.subscribe(logEntries -> DataStore.saveLogs(cache.getGeocode(), logEntries, true));
         if (cache.isFound() || cache.isDNF()) {
             ownLogs.subscribe(logEntry -> {
-                if (logEntry.getType().isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.getType() == LogType.DIDNT_FIND_IT)) {
+                if (logEntry.logType.isFoundLog() || (!cache.isFound() && cache.isDNF() && logEntry.logType == LogType.DIDNT_FIND_IT)) {
                     cache.setVisitedDate(logEntry.date);
                 }
             });

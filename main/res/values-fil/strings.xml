@@ -246,10 +246,6 @@
 
 %d ang mga minuto</item>
     </plurals>
-    <string name="caches_store_offline">Iimbak nang naka-offline</string>
-    <string name="caches_store_all">Iimbak ang lahat</string>
-    <string name="caches_store_unsaved">Iimbak ang hindi na-save</string>
-    <string name="caches_store_selected">Ang Napiling Pag-iimbakan</string>
     <string name="caches_history">Historya</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Pagkaka-ayos</string>
@@ -321,6 +317,8 @@
     <string name="about_system_info">c:geo sistema ng impormasyon</string>
     <string name="about_system_info_send_chooser">Magpasa ng mga sistemang impormasyon</string>
     <string name="changelog_github">Ang Listahan sa lahat ng mga pagbabago</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Buksan ang mga setting?</string>
     <string name="settings_title_services">Ang mga Serbisyo</string>

@@ -101,8 +101,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" aria-labelledby=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile(Pattern.quote("CoordInfoCode\">") + "(TB[0-9A-Z&&[^ILOSU]]+)<");
 
-    // multiple error codes, depending on the search term for the trackable code
-
+    // multiple error codes, depending on the search term for the trackable code. Interestingly, these error messages are not localized by now.
     static final String ERROR_TB_DOES_NOT_EXIST = "does not exist in the system";
     static final String ERROR_TB_ELEMENT_EXCEPTION = "ElementNotFound Exception";
     static final String ERROR_TB_ARITHMETIC_OVERFLOW = "operation resulted in an overflow";
@@ -117,19 +116,19 @@ public final class GCConstants {
      */
     static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/p(rofile)?/\\?guid=(.*?)\">(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");
-    static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
+    static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<img src=\"/images/logtypes/(.*?).png\" id=\"ctl00_ContentBody_InteractionLogTypeImage\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_DISPOSITION_LOG = Pattern.compile("<a id=\"ctl00_ContentBody_InteractionLogLink\"[^>]*href=\"/track/log.aspx\\?LUID=([a-z0-9\\-]+)\">[^0-9]+(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
     /**
      * Two groups !
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" data-name=\"([^\"]+)\" data-status=\"Cache\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">[^<]+</a>");
     /**
      * Three groups !
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>");
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>");
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-name=\"([^\"]+)\" data-status=\"User\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-status=\"Unknown\">[^<]*</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" data-status=\"Owner\">[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GOAL = Pattern.compile("<div id=\"TrackableGoal\">[^<]*<p>(.*?)</p>[^<]*</div>", Pattern.DOTALL);
     /**
      * Four groups
@@ -141,7 +140,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+)(km|mi)[^\\)]*\\)\\s*<a href=\"map_gm");
     static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</th>.+?guid=([^\"]+).+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?LUID=([^\"]+)\">.+?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<ul class=\"log_images\"><li><a href=\"([^\"]+)\".+?class=\"tb_images\".+?alt=\"([^<]*)\"" + Pattern.quote(" />"));
-    static final String TRACKABLE_IS_LOCKED = ">Found it? Log it! (locked)</a></td>";
+    static final Pattern PATTERN_TRACKABLE_IS_LOCKED = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\"[^(]*\\(locked\\)</a></td>");
 
     // Patterns for parsing the result of a search (next)
 
@@ -199,23 +198,22 @@ public final class GCConstants {
     static final Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 
-    static final String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
-    static final String STRING_PREMIUMONLY_1 = "class=\"illustration lock-icon\"";
+    static final String STRING_PREMIUMONLY = "class=\"illustration lock-icon\"";
     static final Pattern PATTERN_PREMIUMONLY_CACHETYPE = Pattern.compile("/app/ui-icons/sprites/cache-types\\.svg#icon-([^\"\\-]+)-?([^\"]+)?");
     static final Pattern PATTERN_PREMIUMONLY_CACHENAME = Pattern.compile("<h1 class=\"heading-3\">(.+)</h1>");
     static final Pattern PATTERN_PREMIUMONLY_GEOCODE = Pattern.compile("<li class=\"li__gccode\">([^<]+)");
-    static final Pattern PATTERN_PREMIUMONLY_OWNER = Pattern.compile("<span id=\"ctl00_ContentBody_uxCacheBy\">A cache by (.+?)</span>");
     static final Pattern PATTERN_PREMIUMONLY_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_lblDifficulty\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
     static final Pattern PATTERN_PREMIUMONLY_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_lblTerrain\"(?:.|\\s)*?<span>([0-5](?:[\\.,]5)?)</span>");
     static final Pattern PATTERN_PREMIUMONLY_SIZE = Pattern.compile("<span id=\"ctl00_ContentBody_lblSize\"(?:.|\\s)*?<span>([^<]+)</span>");
 
-    static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
+    static final String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published"; //TODO: unpublished caches return a 404 page for other users meanwhile, so they cannot be detected anymore. We could however indicate this status for owners...
     static final String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
-    static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
+    static final String STRING_UNKNOWN_ERROR = "An Error Has Occurred"; //TODO: might be language dependent - but when does it occur at all?
     static final String STRING_STATUS_DISABLED = "<div id=\"ctl00_ContentBody_uxDisabledMessageBody\"";
     static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
     static final String STRING_STATUS_LOCKED = "<div id=\"ctl00_ContentBody_lockedMessage\"";
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
+    static final String STRING_UNAPPROVED_LICENSE = "<span id=\"ctl00_ContentBody_lblAgreementText\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";
@@ -224,15 +222,6 @@ public final class GCConstants {
      * Number of logs to retrieve from GC.com
      */
     static final int NUMBER_OF_LOGS = 35;
-
-    /**
-     * Convert GCCode (geocode) to (old) GCIds
-     * Deprecated: use {@link GCUtils#gcLikeCodeToGcLikeId(String)}  instead
-     */
-    @Deprecated
-    public static long gccodeToGCId(final String gccode) {
-        return GCUtils.gcLikeCodeToGcLikeId(gccode);
-    }
 
     private GCConstants() {
         // this class shall not have instances

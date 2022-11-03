@@ -45,7 +45,7 @@ public class Tracks {
     }
 
     private void getListOfTrackfilesInBackground(@Nullable final Runnable runAfterLoad) {
-        AndroidRxUtils.refreshScheduler.scheduleDirect(() -> {
+        AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
             for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {
                 data.add(new Track(trackfile));
             }
@@ -103,6 +103,14 @@ public class Tracks {
             }
         }
         return null;
+    }
+
+    public void setDisplayname(@NonNull final String key, @NonNull final String newName) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setDisplayname(newName);
+            }
+        }
     }
 
     public Route getRoute(@NonNull final String key) {

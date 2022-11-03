@@ -295,10 +295,6 @@
         <item quantity="one">%d Minutt</item>
         <item quantity="other">%d Minutten</item>
     </plurals>
-    <string name="caches_store_offline">Offline späicheren</string>
-    <string name="caches_store_all">Alles späicheren</string>
-    <string name="caches_store_unsaved">Nei späicheren</string>
-    <string name="caches_store_selected">Auswal späicheren</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
     <string name="caches_sort">Sortéieren</string>
@@ -395,6 +391,8 @@
     <string name="contribution_documentation">Dokumentatioun</string>
     <string name="contribution_projectleader">Open Source Projektmanager</string>
     <string name="contribution_graphics">Grafik</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Astellungen opmaachen?</string>
     <string name="settings_title_services">Servicer</string>
@@ -593,7 +591,6 @@
     <!-- permission handling -->
     <string name="close_app">App zoumaachen</string>
     <string name="ask_again">Fro mech nach emol</string>
-    <string name="location_permission_request_explanation">c:geo brauch den Zougrëff op de GPS vun dengem Gerät fir deng Positioun ze bestëmmen an d\'Distanz an d\'Richtung zu de Geocachen ze berechnen. Se kann net ouni dës Erlabnis funktionéieren.</string>
     <string name="storage_permission_request_explanation">c:geo wäert Daten op de Späicher vum Handy oder der SD Kaart späichere soubal\'s du Geocache späichers fir offline ze benotzen. Ausserdeem wäert c:geo de Späicher fir den Import, Export an dem Liese vun Offline Kaarte benotzen. Se kann net ouni des Erlabnis benotzt ginn.</string>
     <string name="storage_permission_needed">Des Funktioun ass ouni d\'Zougangsberechtegung op de Späicher net méiglech.</string>
     <!-- colors -->

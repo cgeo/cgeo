@@ -71,7 +71,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     /**
      * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
      */
-    private boolean postReady = true;
+    private boolean readyToPost = true;
     private final DateTimeEditor date = new DateTimeEditor();
     private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
     private Trackable trackable;
@@ -113,9 +113,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             }
         }
 
-        postReady = loggingManager.postReady(); // we're done, user can post log
-
-        showProgress(false);
+        showProgress(!loggingManager.postReady());
     }
 
     @Override
@@ -350,6 +348,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         }
     }
 
+    private void showProgress(final boolean loading) {
+        readyToPost = !loading;
+        binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+    }
+
     private void initTwitter() {
         binding.tweet.setChecked(true);
         if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
@@ -518,21 +521,21 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      */
     private void sendLog() {
         // Can logging?
-        if (!postReady) {
-            showToast(res.getString(R.string.log_post_not_possible));
+        if (!readyToPost) {
+            SimpleDialog.of(this).setMessage(R.string.log_post_not_possible).show();
             return;
         }
 
         // Check Tracking Code existence
         if (loggingManager.isTrackingCodeNeededToPostNote() && binding.tracking.getText().toString().isEmpty()) {
-            showToast(res.getString(R.string.err_log_post_missing_tracking_code));
+            SimpleDialog.of(this).setMessage(R.string.err_log_post_missing_tracking_code).show();
             return;
         }
         trackable.setTrackingcode(binding.tracking.getText().toString());
 
         // Check params for trackables needing coordinates
         if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
-            showToast(res.getString(R.string.err_log_post_missing_coordinates));
+            SimpleDialog.of(this).setMessage(R.string.err_log_post_missing_coordinates).show();
             return;
         }
 

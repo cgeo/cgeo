@@ -5,6 +5,8 @@ import cgeo.geocaching.storage.DataStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class PendingDownload extends DataStore.DBExtension {
 
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_PENDING_DOWNLOAD;
@@ -33,6 +35,15 @@ public class PendingDownload extends DataStore.DBExtension {
         return (int) getLong2();
     }
 
+    /** to be used by PendingDownloadsActivity primarily */
+    public static ArrayList<PendingDownloadDescriptor> getAllPendingDownloads() {
+        final ArrayList<PendingDownloadDescriptor> result = new ArrayList<>();
+        for (DataStore.DBExtension item : getAll(type, null)) {
+            result.add(new PendingDownloadDescriptor(new PendingDownload(item)));
+        }
+        return result;
+    }
+
     @Nullable
     public static PendingDownload load(final long pendingDownload) {
         final DataStore.DBExtension temp = load(type, String.valueOf(pendingDownload));
@@ -50,7 +61,6 @@ public class PendingDownload extends DataStore.DBExtension {
         return null;
     }
 
-
     public static void add(final long downloadId, @NonNull final String filename, @NonNull final String remoteUrl, final long date, final int offlineMapTypeId) {
         final String key = String.valueOf(downloadId);
         removeAll(type, key);
@@ -59,5 +69,21 @@ public class PendingDownload extends DataStore.DBExtension {
 
     public static void remove(final long downloadId) {
         removeAll(type, String.valueOf(downloadId));
+    }
+
+    public static class PendingDownloadDescriptor {
+        public long id;
+        public String filename;
+        public String info;
+        public long date;
+        public boolean isFailedDownload;
+
+        PendingDownloadDescriptor(final PendingDownload download) {
+            this.id = download.getDownloadId();
+            this.filename = download.getFilename();
+            this.info = "";
+            this.date = download.getDate();
+            this.isFailedDownload = false;
+        }
     }
 }

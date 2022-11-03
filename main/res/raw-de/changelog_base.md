@@ -1,8 +1,26 @@
-- Neu: Caches im Hintergrund herunterladen/aktualisieren
-- Neu: Kopiere aktuelle Koordinaten durch langes Tippen auf Standort im Startbildschirm
-- Änderung: Größenprüfung während der Speicherung von Wegpunkten in der persönlichen Notiz entfernt
-- Korrektur: Entfernungskreise nicht für Wegpunkte von archivierten Caches anzeigen
-- Neu: Tippe auf freie Stelle in Karte, um Wegpunkt oder benutzerdefinierten Cache zu erstellen, Punkt zu Route hinzuzufügen, Koordinaten anzuzeigen oder zu navigieren (je nach Kontext)
-- Neu: Option zum Löschen von Offline-Karten
-- Korrektur: Fehlende Anzahl von Trackables in Suchergebnissen
-- Korrektur: Lab Adventure-Einträge in individuellen Routen werden nach der Bearbeitung nicht mehr als solche erkannt
+
+### Hinweis: Geänderte API-Version
+Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-Zielversion erhöht. Das sollte keinen Einfluss auf c:geo haben, und c:geo sollte weiterhin ab Android 5 aufwärts laufen. Bitte melde dich unter support@cgeo.org, falls du irgendwelche Auffälligkeiten beobachtest
+
+### Karte
+- Neu: Ändern des Anzeigennamens von Tracks
+
+### Cache-Details
+- Korrektur: Logbild als "Bild 1" benannt, auch wenn nur ein Bild hinzugefügt wurde
+- Neu: Logplatzhalter GEOCODE
+- Neu: Einfache HTML-Unterstützung für Definitionslisten (dl/dt/dd)
+- Neu: Zoombare Bildansicht für Bilder in Cachebeschreibung
+- Korrektur: Öffne Verlinkungen in Cachebeschreibung in integrierter Webansicht (falls aktiviert)
+- Änderung: Cache-Beschreibung im Hintergrund formatieren und standardmäßig auf 50.000 Zeichen begrenzen
+
+### Allgemein
+- Neu: Ansicht für ausstehende Downloads
+- Neu: Cache-Name / Name der Liste beim GPX-Export an Dateiname anhängen
+- Änderung: "Als Android-Browser identifizieren"-Einstellung entfernt
+- Neu: Beim Start ausstehende Downloads prüfen (Karten- / Routing-Daten)
+- Neu: Auswahl der Dateien, die heruntergeladen werden sollen
+- Neu: Statusfilter für DNF
+- Neu: Höhe auf dem Startbildschirm anzeigen (falls verfügbar)
+- Neu: Manuelle Eingabe von Werten in Filtern mit Schieberegler
+- Neu: Aktiviere Upload korrigierter Koordinaten für Caches aus GPX-Import, wenn sie Wegpunkte vom Typ "ORIGINAL" enthalten
+- Änderung: Filterstatus verständlicher formuliert

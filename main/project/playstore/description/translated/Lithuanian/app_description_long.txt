@@ -1,28 +1,28 @@
-c:geo yra atviro kodo, funkcionali, visada paruošta neoficiali geocaching.com programėlė, taip pat palaikanti kitas lobiavimo platformas (pvz. Opencaching). Nereikalauja naršyklės arba duomenų eksporto - tiesiog įdiek ir naudokis.
+c:geo yra atviro kodo, visas funkcijas turintis, visada paruoštas neoficialus geocaching.com klientas ir siūlo pagrindinį kitų platformų (pvz., Opencaching) palaikymą. Nereikalauja naršyklės arba duomenų eksporto - tiesiog įdiek ir naudokis.
 
 Pagrindinės funkcijos:
-- Lobių peržiūra tiesiogiai iš žemėlapio
-- Use Google Maps or OpenStreetMap
-- Lobių paieška pagal įvairius kriterijus
-- Surastų lobių registracija prisijungus arba neprisijungus prie interneto
+- Peržiūrėkite slėptuves žemėlapyje gyvai
+- Naudoti Google Maps arba OpenStreetMap
+- Slėptuvių paieška pagal įvairius kriterijus
+- Užregistruokite savo radinius internete arba neprisijungę
 - Išsaugoti slėptuvės informaciją jūsų įrenginyje
-- Kurti ir tvarkyti taškus
+- Kurti ir tvarkyti kelio taškus
 - Naviguoti kompasu, žemėlapiu ar kitomis programėlėmis
 - Importuoti/eksportuoti GPX failus
 - Visapusiškas keliauninkų palaikymas
-- Lobiavimas ir žemėlapiai neprisijungus
+- Slėptuvių ieškojimo funkcijos neprisijungus, įskaitant neprisijungus naudojamus žemėlapius
 
-c:geo - paprasta ir galinga lobiavimo programėlė su daug papildomų funkcijų. Jums tereikia tik paskyros lobiavimo platformoje - geocaching.com, Opencaching ar kitoje.
-Ieškoti lobių tiesiogiai per žemėlapį ar paieškos funkcijas.
+c:geo yra paprastas naudoti, bet galingas slėptuvių ieškojimo klientas su daugybe papildomų funkcijų. Viskas, ko jums reikia norint pradėti, yra esama geocaching.com paskyra arba kita slėptuvių ieškojimo platforma (pvz., Opencaching).
+Raskite slėptuves naudodami žemėlapį gyvai arba naudodami vieną iš daugelio paieškos funkcijų.
 
-Keliaukite link lobio ar jo taško su kompaso, žemėlapio ar išorinių programėlių pagalba (pvz.: Radar, Google Navigation, StreetView, Locus, Navigon, Sygic ar kitų).
+Keliaukite link slėptuvės ar jos kelio taško naudodami integruotą kompaso funkciją, žemėlapį arba perduokite koordinates įvairioms išorinėms programoms (pvz., Radarai, Google Navigation, StreetView, Locus, Navigon, Sygic ir daugeliui kitų).
 
-Parsisiųskite lobių informaciją tiesiai iš geocaching.com ar GPX failų, kad visada ją turėtumėte šalia.
-Galite tvarkyti lobius - perkelti juos į skirtingus sąrašus, rikiuoti ir filtruoti pagal poreikį.
-Išsaugoti lobiai, žemėlapiai neprisijungus ar statiniai žemėlapiai naudojami lobių paieškoms neprisijungus (pvz.: lobiaujant užsienyje).
+Išsaugokite slėptuvės informaciją savo įrenginyje tiesiai iš geocaching.com, taip pat importuodami GPX failą, kad galėtumėte ją pasiekti bet kada.
+Galite tvarkyti saugomas slėptuves įvairiuose sąrašuose ir jas rūšiuoti bei filtruoti pagal savo poreikius.
+Išsaugotos slėptuvės kartu su neprisijungus naudojamais žemėlapių failais arba statiniais žemėlapiais gali būti naudojami ieškant slėptuvių be interneto ryšio (pvz. tarptinklinio ryšio metu).
 Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko užrašus.
 
-Ieškoti bei atrasti keliauninkus, tvarkyti jų inventorių bei palikti keliauninką per lobio įrašą.
+Ieškokite ir atraskite keliauninkus, tvarkykite savo keliauninkų inventorių ir palikite keliauninką skelbdami slėptuvės įraše.
 
 Jei iškyla bėdų su c:geo diegtimi ar naudojimu, peržvelkite mūsų DUK (https://faq.cgeo.org) ar žinyną (https://manual.cgeo.org).
 Jeigu nepavyksta sutvarkyti bėdų, kreipkitės el. paštu.

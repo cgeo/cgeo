@@ -297,10 +297,6 @@
         <item quantity="many">%d хвилин</item>
         <item quantity="other">%d хвилини</item>
     </plurals>
-    <string name="caches_store_offline">Зберігати в автономному режимі</string>
-    <string name="caches_store_all">Зберегти все</string>
-    <string name="caches_store_unsaved">Магазин не збережено</string>
-    <string name="caches_store_selected">Вибраний магазин</string>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>
     <string name="caches_sort">Сортувати</string>
@@ -397,6 +393,8 @@
     <string name="contribution_documentation">Документація</string>
     <string name="contribution_projectleader">лідер проекту з відкритим кодом</string>
     <string name="contribution_graphics">Графіка</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Відкрити налаштування?</string>
     <string name="settings_title_services">Послуги</string>
@@ -1399,7 +1397,6 @@
     <!-- permission handling -->
     <string name="close_app">Закрити додаток</string>
     <string name="ask_again">Запитайте ще раз</string>
-    <string name="location_permission_request_explanation">c:geo потрібен доступ до GPS на вашому пристрої, щоб знайти своє положення, розрахунок відстані та напряму до схованок. Він не може бути використаний без цього дозволу.</string>
     <string name="storage_permission_request_explanation">c:geo випише дані на накопичувачі телефону або SD-карту, як тільки Ви збережете геокеші для використання в автономному режимі. Додатково:geo буде використовувати ваш телефон для імпорту та експорту файлів та читання автономних карт. Не можна використовувати без цього дозволу.</string>
     <string name="storage_permission_needed">Ця функція неможлива без дозволу на зберігання.</string>
     <!-- colors -->

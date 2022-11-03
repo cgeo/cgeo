@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.net.Uri;
@@ -23,7 +24,7 @@ import org.oscim.tiling.source.mapfile.MapFileTileSource;
 import org.oscim.tiling.source.mapfile.MapInfo;
 import org.oscim.tiling.source.mapfile.MultiMapFileTileSource;
 
-class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeTileProvider {
+class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProvider {
 
     private final List<ImmutablePair<String, Uri>> maps;
 
@@ -64,8 +65,8 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeTileProvider {
         }
 
         final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
-        MAP_MAPSFORGE.addLayer(new BuildingLayer(map, tileLayer));
-        MAP_MAPSFORGE.addLayer(new LabelLayer(map, tileLayer));
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         MAP_MAPSFORGE.applyTheme();
 
         if (boundingBox != null && !boundingBox.contains(map.getMapPosition().getGeoPoint())) {

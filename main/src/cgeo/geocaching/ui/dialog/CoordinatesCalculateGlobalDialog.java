@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.formulas.VariableMap;
@@ -255,8 +256,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
                     .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
                         if (o == R.string.calccoord_remove_spaces) {
-                            binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
-                            binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
+                            binding.PlainLat.setText(DegreeFormula.removeSpaces(binding.PlainLat.getText().toString()));
+                            binding.PlainLon.setText(DegreeFormula.removeSpaces(binding.PlainLon.getText().toString()));
                         } else if (o == R.string.calccoord_paste_from_clipboard) {
                             final String clip = ClipboardUtils.getText();
                             final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);

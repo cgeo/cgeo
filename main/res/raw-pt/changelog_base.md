@@ -1,8 +1,26 @@
-- Novo: Transferência / actualização de caches em segundo plano
-- Novo: Cópia das coordenadas actuais com um toque longo na página inicial
-- Alteração: Remover a verificação do limite de tamanho ao armazenar pontos adicionais nas notas pessoais
-- Correcção: não mostrar círculos de distância para pontos adicionais de caches arquivadas
-- Novo: Toque no espaço livre do mapa para criar um ponto adicional ou uma cache criada pelo utilizador, acrescentar à rota individual, mostrar coordenadas ou navegar (dependendo do contexto)
-- Novo: Opção para apagar mapas offline
-- Correcção: Inclusão de trackables em falta nos resultados de pesquisa
-- Correcção: Os itens das Adventure Labs em rotas individuais não eram reconhecidos como tal, após edição
+
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
+### Mapa
+- Novo: Permitir a mudança do nome do percurso
+
+### Detalhes da cache
+- Correcção: A imagem de registo era rotulada de "Imagem 1" mesmo quando só era adicionada uma única imagem
+- Novo: espaço reservado para o modelo de registo de GEO-CÓDIGO
+- Novo: Suporte à formatação básica de HTML para listas definidas (dl/dt/dd)
+- New: Open zoomable image view when tapping on listing images
+- Fix: Open links in listings in integrated web view (if enabled)
+- Change: Render cache description in background and limit length to 50,000 characters by default
+
+### Geral
+- Novo: Exibição das transferências pendentes
+- Novo: Acrescentar o nome da cache / nome da lista ao nome do ficheiro na exportação para GPX
+- Alteração: Removida a definição "Identificar como navegador Android"
+- Novo: Verificar transferências pendentes (mapas / dados de encaminhamento) no arranque
+- Novo: Possibilidade de seleccionar os ficheiros a transferir
+- Novo: Filtro para o estado DNF
+- Novo: Exibir elevação no ecrã inicial (se disponível)
+- Novo: Permitir a introdução manual de valores em filtros, usando controles deslizantes
+- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
+- Change: Improve filter status line text

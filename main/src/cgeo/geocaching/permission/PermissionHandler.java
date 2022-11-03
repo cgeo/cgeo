@@ -23,11 +23,10 @@ public class PermissionHandler {
     }
 
     public static void executeIfLocationPermissionGranted(final Activity activity, final PermissionGrantedCallback callback) {
-        final String[] locationPermissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+        final String[] locationPermissions = {Manifest.permission.ACCESS_FINE_LOCATION};
         final PermissionKey pk = new PermissionKey(locationPermissions);
 
-        if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(activity, locationPermissions[1]) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED) {
             if (!callbackRegistry.containsKey(pk)) {
                 callbackRegistry.put(pk, new ArrayList<>());
                 ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
@@ -139,4 +138,3 @@ public class PermissionHandler {
     }
 
 }
-

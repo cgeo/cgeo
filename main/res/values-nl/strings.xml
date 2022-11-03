@@ -355,19 +355,16 @@
         <item quantity="one">%d minuut</item>
         <item quantity="other">%d minuten</item>
     </plurals>
-    <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
-    <string name="caches_store_all">Alle opslaan</string>
-    <string name="caches_store_unsaved">Niet opgeslagen opslaan</string>
+    <string name="caches_store_offline">Offline opslaan</string>
+    <string name="caches_store_offline_map">Caches offline opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
-    <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
-    <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
     <string name="caches_store_background_title">Caches downloaden</string>
     <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
     <string name="caches_store_background_option_nothing">Niets doen</string>
     <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
     <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
-    <string name="caches_store_background_result_failed">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
-    <string name="caches_store_background_result_canceled">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache gedownload</item>
         <item quantity="other">%d caches gedownload</item>
@@ -550,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Ja</string>
     <string name="cache_filter_status_select_no">Nee</string>
     <string name="cache_filter_status_select_label_found">Gevonden</string>
+    <string name="cache_filter_status_select_label_dnf">Niet gevonden</string>
     <string name="cache_filter_status_select_label_owned">Eigendom</string>
     <string name="cache_filter_status_select_label_stored">Opgeslagen</string>
     <string name="cache_filter_status_select_label_favorite">Eigen favoriet</string>
@@ -561,7 +559,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches. Indien je andere cachetypes wilt uitsluiten, vul dan een passend cachetype filter in.\n\nEen mystery wordt beschouwd als \'opgelost\' als de coördinaten zijn gewijzigd of een geldig waypoint de heeft voorzien van coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
     <string name="cache_filter_status_disabled">Uitgeschakeld</string>
     <string name="cache_filter_status_archived">Gearchiveerd</string>
@@ -634,7 +632,35 @@
     <string name="debug_user_error_report_title">Probleem melden</string>
     <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
     <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Huidige downloads</string>
+    <string name="downloader_pending_downloads">Lopende downloads</string>
+    <string name="downloader_no_pending_downloads">Op dit moment zijn er geen lopende downloads</string>
+    <string name="downloader_cancel_download">Annuleer download</string>
+    <string name="downloader_cancel_file">Annuleer lopende downloads van%s\" en verwijder gedownloade onderdelen?</string>
+    <string name="downloader_cancelled_download">Downloaden geannuleerd voor \"%s\"</string>
+    <string name="downloader_pending_info">Er is ten minste één gepauseerde of mislukte download. Wil je de lijst met lopende downloads openen?</string>
+    <string name="downloader_retry_download">Opnieuw downloaden</string>
+    <string name="downloader_retry_download_details">Wil je het downloaden van het volgende bestand opnieuw proberen?</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">De download is mislukt (en zal niet opnieuw worden geprobeerd)</string>
+    <string name="asdm_status_paused">Download is aan het wachten om opnieuw te proberen of hervatten</string>
+    <string name="asdm_status_pending">Download wacht op start</string>
+    <string name="asdm_status_running">Download is bezig</string>
+    <string name="asdm_status_successful">Download is succesvol voltooid</string>
+    <string name="asdm_paused_queued_for_wifi">Gepauzeerd: Wachten op wifi</string>
+    <string name="asdm_paused_unknown">Gepauzeerd om een andere reden</string>
+    <string name="asdm_paused_waiting_for_network">Gepauzeerd: Wachten op netwerkverbinding om verder te gaan</string>
+    <string name="asdm_paused_waiting_to_retry">Gepauzeerd: Er is een netwerkfout opgetreden en downloadbeheer is aan het wachten voordat het verzoek opnieuw wordt geprobeerd</string>
+    <string name="asdm_error_cannot_resume">Fout: Er is mogelijk een tijdelijke fout opgetreden, maar we kunnen de download niet hervatten</string>
+    <string name="asdm_error_device_not_found">Fout: Geen extern opslagapparaat gevonden. SD-kaart geplaatst en geladen?</string>
+    <string name="asdm_error_file_already_exists">Fout: Het opgevraagde doelbestand bestaat al, zal niet worden overschreven</string>
+    <string name="asdm_error_file_error">Fout: Onbekend opslagprobleem</string>
+    <string name="asdm_error_http_data_error">Fout: HTTP verwerkingsfout op dataniveau</string>
+    <string name="asdm_error_insufficient_space">Fout: Onvoldoende opslagruimte</string>
+    <string name="asdm_error_too_many_redirects">Fout: Te veel omleidingen</string>
+    <string name="asdm_error_unhandled_http_code">Fout: Niet afgevangen HTTP-code</string>
+    <string name="asdm_error_unknown">Fout: Onbekende fout</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Instellingen openen?</string>
     <string name="settings_title_services">Diensten</string>
@@ -650,6 +676,7 @@
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
+    <string name="settings_title_offline_maps">Offline kaarten</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
@@ -735,6 +762,7 @@
     <string name="init_signature_template_button">Plaatshouder invoegen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
+    <string name="init_signature_template_day_of_week">Dag van de week</string>
     <string name="init_signature_template_datetime">Datum &amp; tijd</string>
     <string name="init_signature_template_user">Gebruiker</string>
     <string name="init_signature_template_number">Nummer</string>
@@ -747,6 +775,7 @@
     <string name="init_signature_template_size">Grootte</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Locatie</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote.com waardering</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
@@ -945,10 +974,17 @@
     <string name="init_use_native_ua">Identificeer als Android browser</string>
     <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
     <string name="init_rendertheme_folder">Kaart Thema\'s Map</string>
+    <string name="init_mapshading_folder">Kaart Arcering Bestanden Map</string>
+    <string name="init_mapshading_folder_text">Offline kaarten kunnen worden gearceerd met hoogte informatie. Deze informatie wordt verstrekt als hgt/dem bestanden die in deze map geplaatst dienen te worden.</string>
+    <string name="init_mapShadingLinearity_title">Arcering Lineariteit</string>
+    <string name="init_mapShadingLinearity_description">Kleine waarden accentueren contrast in steile hellingen, maar verbergen veranderingen in vlakten, grote waarden maken het meer lineair</string>
+    <string name="init_mapShadingScale_title">Arcering Doorzichtigheid</string>
+    <string name="init_mapShadingScale_description">Doorzichtbaarheid van de arceringslaag, van onzichtbaar tot hogere waarden die arcering intensiveren, maar kan artefacten produceren</string>
     <string name="init_maintenance">Onderhoud</string>
     <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
     <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
     <string name="init_maintenance_start">Onderhoud gestart</string>
+    <string name="init_maintenance_ongoing">Dit kan enige tijd duren…</string>
     <string name="init_maintenance_finished">Onderhoud voltooid</string>
     <string name="init_location">Geolocatie</string>
     <string name="init_location_note">Op apparaten uitgerust met Google Play-Services, kan c:geo automatisch een betere geolocation provider gebruiken. Dit voorkomt echter het gebruik van een externe BlueTooth GPS-ontvanger.</string>
@@ -1051,6 +1087,7 @@
     <string name="persistablefolder_base">Basis</string>
     <string name="persistablefolder_offline_maps">Offline kaarten</string>
     <string name="persistablefolder_offline_maps_themes">Kaart Thema\'s</string>
+    <string name="persistablefolder_offline_maps_shading">Kaart Arcering Bestanden</string>
     <string name="persistablefolder_backup">Back-up</string>
     <string name="persistablefolder_logfiles">Logbestanden</string>
     <string name="persistablefolder_fieldnotes">Veld notities</string>
@@ -1237,6 +1274,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Toon op kaart</string>
     <string name="cache_menu_map_ext">Andere externe apps</string>
+    <string name="cache_menu_map_ext_nolabel">Andere externe apps (alleen coördinaten)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
     <string name="no_browser_found">Geen browser gevonden</string>
@@ -1288,6 +1326,9 @@
     <string name="cache_description_updated">Cache-omschrijving bijgewerkt</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Grootte</string>
+    <string name="cache_mode">Modus</string>
+    <string name="cache_mode_linear">Lineair</string>
+    <string name="cache_mode_random">Willekeurig</string>
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>
@@ -2080,7 +2121,7 @@
     <!-- permission handling -->
     <string name="close_app">App sluiten</string>
     <string name="ask_again">Opnieuw vragen</string>
-    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS op je apparaat om je positie te vinden en afstand en richting te berekenen naar geocaches. Het kan niet worden gebruikt zonder deze toestemming.</string>
+    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS (precieze locatie) op je apparaat om je positie te vinden en afstand en richting van geocaches te berekenen. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
@@ -2201,11 +2242,12 @@
     <string name="downloadmap_filename">%s downloaden</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="download_none_selected">Geen bestanden geselecteerd om te downloaden</string>
     <string name="downloadmap_target_not_writable">Het geselecteerde doel \"%s\" is niet schrijfbaar - het gedownloade kaartbestand wordt opgeslagen in de systeem downloads map en dient handmatig te worden verplaatst naar de kaartenmap.</string>
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
     <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Updates gevonden voor:\n%1$s\n\nWil je bijwerken?%2$s</string>
-    <string name="download_warning">Dit kan heel wat tijd in beslag nemen en kan tot aanzienlijke kosten leiden, afhankelijk van uw netwerkverbinding.</string>
+    <string name="download_confirmation_updates">Updates gevonden voor:</string>
+    <string name="download_warning">Downloads kunnen enige tijd in beslag nemen en kunnen aanzienlijke kosten met zich meebrengen, afhankelijk van je netwerkverbinding.</string>
     <string name="download_error">Downloaden is mislukt met fout #%d</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
@@ -2217,6 +2259,8 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_themefile">themabestand</string>
     <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_othermapdownload">andere kaart downloaden</string>
+    <string name="downloadmap_otherthemedownload">ander thema downloaden</string>
     <string name="downloadmap_download">downloaden</string>
     <string name="downloadmap_retrieving_directory_data">Mapgegevens ophalen…</string>
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
@@ -2224,7 +2268,7 @@
     <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
     <string name="check_tiles_menu">Controleer op ontbrekende routeringsgegevens</string>
     <string name="check_tiles_found">Route gegevens zijn al aanwezig</string>
-    <string name="check_tiles_missing">Ontbrekende routegegevens gevonden:\n%1$s\n\nWilt je deze bestanden downloaden?%2$s</string>
+    <string name="check_tiles_missing">Ontbrekende routeringsgegevens gevonden:</string>
     <string name="check_tiles_unsupported">Waarschuwing: Routegegevens zijn ten minste gedeeltelijk niet beschikbaar voor de gekozen regio</string>
     <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
     <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
@@ -2667,16 +2711,4 @@
     <string name="smiley_approve">Goedgekeurd</string>
     <string name="smiley_disapprove">Afgekeurd</string>
     <string name="smiley_question">Vraag</string>
-    <string name="smiley_cry">Huilen</string>
-    <string name="smiley_embarassed">Beschaamd</string>
-    <string name="smiley_footinmouth">Mond vol tanden</string>
-    <string name="smiley_innocent">Onschuldig</string>
-    <string name="smiley_kiss">Kus</string>
-    <string name="smiley_laughing">Lachen</string>
-    <string name="smiley_money">Geld</string>
-    <string name="smiley_sealed">Verzegeld</string>
-    <string name="smiley_surprised">Verrast</string>
-    <string name="smiley_tongueout">Tong uitsteken</string>
-    <string name="smiley_undecided">Onbeslist</string>
-    <string name="smiley_yell">Schreeuw</string>
 </resources>

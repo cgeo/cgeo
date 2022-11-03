@@ -300,10 +300,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 分钟</item>
     </plurals>
-    <string name="caches_store_offline">离线存储</string>
-    <string name="caches_store_all">全部存储</string>
-    <string name="caches_store_unsaved">存储未保存</string>
-    <string name="caches_store_selected">存储选中的</string>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -409,6 +405,8 @@
     <string name="contribution_graphics">图形</string>
     <string name="debug_user_error_report_title">报告问题</string>
     <string name="debug_user_error_errortext">出现了一个意外的问题，我们请求您向我们报告：</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">開啟設置</string>
     <string name="settings_title_services">服务</string>
@@ -743,7 +741,6 @@
     <string name="event_fail">添加 uid 为“%1”的事件到日历失败</string>
     <string name="init_low_disk_space">磁盘空间过低</string>
     <!-- permission handling -->
-    <string name="location_permission_request_explanation">c:geo 需要访问您设备上的 GPS 才能定位您的位置并计算到藏点的距离和方向。如果没有这种许可，该功能不可用。</string>
     <!-- colors -->
     <!-- number input -->
     <!-- notification / channel texts -->

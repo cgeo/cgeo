@@ -35,13 +35,22 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class GpxExport extends AbstractExport {
 
     private String fileName = "geocache.gpx"; // used in tests
+    private String title = null;
 
     public GpxExport() {
         super(R.string.export_gpx);
+    }
+
+    public void export(@NonNull final List<Geocache> caches, @Nullable final Activity activity, @Nullable final String title) {
+        if (StringUtils.isNotBlank(title)) {
+            this.title = title.replace("/", "_");
+        }
+        export(caches, activity);
     }
 
     @Override
@@ -62,9 +71,19 @@ public class GpxExport extends AbstractExport {
     private void calculateFileName(final String[] geocodes) {
         if (geocodes.length == 1) {
             // geocode as file name
-            fileName = geocodes[0] + ".gpx";
+            fileName = geocodes[0] + (StringUtils.isNotBlank(title) ? " " + title : "") + ".gpx";
         } else {
             fileName = FileNameCreator.GPX_EXPORT.createName();
+            if (StringUtils.isNotBlank(title)) {
+                final int pos = fileName.lastIndexOf(".");
+                if (pos >= 0) {
+                    final String first = fileName.substring(0, pos);
+                    final String last = fileName.substring(pos);
+                    fileName = first + " " + title + last;
+                } else {
+                    fileName += " " + title;
+                }
+            }
         }
     }
 

@@ -9,11 +9,14 @@ import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderHylly;
 import cgeo.geocaching.downloader.MapDownloaderHyllyThemes;
+import cgeo.geocaching.downloader.MapDownloaderJustDownload;
+import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.downloader.MapDownloaderOSMPaws;
 import cgeo.geocaching.downloader.MapDownloaderOSMPawsThemes;
+import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
 
 import android.net.Uri;
@@ -35,6 +38,7 @@ public class Download {
     private String addInfo;
     private final DownloadType type;
     @DrawableRes private final int iconRes;
+    public boolean customMarker = false; // handled solely by caller
 
     public Download(final String name, final Uri uri, final boolean isDir, final String dateISO, final String sizeInfo, final DownloadType type, @DrawableRes final int iconRes) {
         this.name = CompanionFileUtils.getDisplayName(name);
@@ -45,6 +49,19 @@ public class Download {
         this.dateInfo = CalendarUtils.parseYearMonthDay(dateISO);
         this.type = type;
         this.iconRes = iconRes;
+    }
+
+    public Download(final PendingDownload pendingDownload) {
+        final DownloadTypeDescriptor desc = DownloadType.fromTypeId(pendingDownload.getOfflineMapTypeId());
+
+        this.name = CompanionFileUtils.getDisplayName(pendingDownload.getFilename());
+        this.uri = Uri.parse(pendingDownload.getRemoteUrl());
+        this.isDir = false;
+        this.sizeInfo = "";
+        this.addInfo = "";
+        this.dateInfo = pendingDownload.getDate();
+        this.type = desc == null ? DownloadType.DOWNLOADTYPE_ALL_MAPRELATED : desc.type;
+        this.iconRes = R.drawable.ic_menu_file;
     }
 
     public String getName() {
@@ -106,6 +123,9 @@ public class Download {
         DOWNLOADTYPE_MAP_PAWS(8, R.string.downloadmap_mapfile),
         DOWNLOADTYPE_THEME_PAWS(9, R.string.downloadmap_themefile),
 
+        DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload),
+        DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload),
+
         DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile);
 
         public final int id;
@@ -164,6 +184,8 @@ public class Download {
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_PAWS, MapDownloaderOSMPaws.getInstance(), R.string.mapserver_osmpaws_name));
 
                 // all other download types
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
 
                 // adding maps and map themes to download types for completeness

@@ -232,7 +232,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             final String changelogBugfix = prepareChangelogBugfix(activity);
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
-                if (StringUtils.isNotEmpty(changelogBugfix)) {
+                if (StringUtils.isNotEmpty(changelogBugfix) && (!changelogBugfix.equals("##"))) {
                     markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
                 } else {
                     binding.changelogMaster.setVisibility(View.GONE);
@@ -264,7 +264,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             changelog = changelog.substring(0, pos.first) + "\r\n## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + activity.getString(R.string.about_changelog_bugfix_release) : activity.getString(R.string.about_changelog_next_release)) + "\r\n" + changelog.substring(pos.second);
             current++;
         }
-        return changelog;
+        return changelog.trim();
     }
 
     public static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {

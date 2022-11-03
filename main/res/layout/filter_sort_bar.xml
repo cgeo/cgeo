@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,12 +22,14 @@
         <ImageView
             style="@style/image_small_prepend_text"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_menu_filter" />
+            android:src="@drawable/ic_menu_filter"
+            app:tint="@color/colorTextActionBar" />
 
         <TextView
             android:id="@+id/filter_text"
             style="@style/text_label"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/colorTextActionBar"
             android:textSize="@dimen/textSize_detailsSecondary"
             tools:text="currently active filter" />
 
@@ -45,7 +48,8 @@
         <ImageView
             style="@style/image_small_prepend_text"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_menu_sort_alphabetically" />
+            android:src="@drawable/ic_menu_sort_alphabetically"
+            app:tint="@color/colorTextActionBar" />
 
         <TextView
             android:id="@+id/sort_text"
@@ -53,6 +57,7 @@
             android:layout_gravity="center_vertical"
             android:paddingRight="6dp"
             android:text="@string/caches_sort_difficulty"
+            android:textColor="@color/colorTextActionBar"
             android:textSize="@dimen/textSize_detailsSecondary"
             tools:text="currently active sort" />
     </LinearLayout>

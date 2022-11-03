@@ -60,6 +60,17 @@ public class EventTimeParser {
         return eventTimeMinutes;
     }
 
+    public static int[] getEventTimesFromGcShortDesc(final String searchText) {
+        final int[] times = new int[] { -1, -1 };
+        final Pattern gcShortDescPattern = Pattern.compile("^<b>\\d{2} [A-Za-z]+ \\d{4}, (\\d{2}):(\\d{2}) - (\\d{2}):(\\d{2})</b>$");
+        final MatcherWrapper matcher = new MatcherWrapper(gcShortDescPattern, searchText);
+        if (matcher.matches()) {
+            times[0] = Integer.parseInt(matcher.group(1)) * 60 + Integer.parseInt(matcher.group(2));
+            times[1] = Integer.parseInt(matcher.group(3)) * 60 + Integer.parseInt(matcher.group(4));
+        }
+        return times;
+    }
+
     /**
      * find a text matching https://gcffm.de/eventstandard.html
      */

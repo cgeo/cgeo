@@ -59,7 +59,7 @@ import org.oscim.theme.XmlThemeResourceProvider;
 import org.oscim.theme.ZipRenderTheme;
 import org.oscim.theme.ZipXmlThemeResourceProvider;
 
-class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
+public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final PersistableFolder MAP_THEMES_FOLDER = PersistableFolder.OFFLINE_MAP_THEMES;
     private static final File MAP_THEMES_INTERNAL_FOLDER = LocalStorage.getMapThemeInternalSyncDir();
@@ -106,6 +106,22 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             this.userDisplayableName = userDisplayableName;
             this.fileInfo = fileInfo;
             this.containingFolder = containingFolder;
+        }
+    }
+
+    public enum RenderThemeType {
+        RTT_NONE("", new String[]{}),
+        RTT_ELEVATE("", new String[]{"elevate", "elements"}),
+        RTT_FZK_BASE("freizeitkarte-v5", new String[]{"freizeitkarte"}),
+        RTT_FZK_OUTDOOR_CONTRAST("fzk-outdoor-contrast-v5", new String[]{"fzk-outdoor-contrast"}),
+        RTT_FZK_OUTDOOR_SOFT("fzk-outdoor-soft-v5", new String[]{"fzk-outdoor-soft"});
+
+        public final String relPath;
+        public final String[] searchPaths;
+
+        RenderThemeType(final String relPath, final String[] searchPaths) {
+            this.relPath = relPath;
+            this.searchPaths = searchPaths;
         }
     }
 
@@ -252,7 +268,7 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     public void selectMapThemeOptions(final Activity activity, final AbstractTileProvider tileProvider) {
-        if (!tileProvider.supportsThemes()) {
+        if (!tileProvider.supportsThemeOptions()) {
             return;
         }
 
@@ -587,6 +603,18 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     public XmlThemeResourceProvider getResourceProvider() {
         return resourceProvider;
+    }
+
+    public static RenderThemeType getRenderThemeType() {
+        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
+        for (MapsforgeThemeHelper.RenderThemeType rtt : MapsforgeThemeHelper.RenderThemeType.values()) {
+            for (String searchPath : rtt.searchPaths) {
+                if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
+                    return rtt;
+                }
+            }
+        }
+        return RenderThemeType.RTT_NONE;
     }
 
 }

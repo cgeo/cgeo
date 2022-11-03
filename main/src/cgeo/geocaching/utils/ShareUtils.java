@@ -156,7 +156,7 @@ public class ShareUtils {
 
     /**
      * opens system's standard viewer for content.
-     * This method is explicitely designed for uris pointing to content/files, not for http/browser-Uris
+     * This method is explicitly designed for uris pointing to content/files, not for http/browser-Uris
      **/
     public static void openContentForView(final Context context, final String url) {
 
@@ -165,7 +165,7 @@ public class ShareUtils {
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
 
         try {
-            //mimeType must be set explicitely, otherwise some apps have problems e.g. Google Sheets with xlsx or csv files
+            //mimeType must be set explicitly, otherwise some apps have problems e.g. Google Sheets with xlsx or csv files
             viewIntent.setDataAndType(uri, UriUtils.getMimeType(uri));
 
             viewIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -241,7 +241,7 @@ public class ShareUtils {
                 .setShareState(CustomTabsIntent.SHARE_STATE_ON);
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
-        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_UPDATE_CURRENT);
         builder.addMenuItem(context.getString(R.string.cache_menu_open_with), pendingIntent);
 
         final CustomTabsIntent customTabsIntent = builder.build();

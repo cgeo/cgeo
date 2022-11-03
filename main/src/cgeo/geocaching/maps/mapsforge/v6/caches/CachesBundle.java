@@ -192,6 +192,7 @@ public class CachesBundle {
         return getVisibleCachesCount(NO_OVERLAY_ID, 0);
     }
 
+    @NonNull
     public Set<String> getVisibleCacheGeocodes() {
 
         final Set<String> result = new HashSet<>();

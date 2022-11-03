@@ -52,7 +52,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
                 description = "";
                 dateInfo = "";
             });
-            map.getChild("", "Url").setEndTextElementListener(body -> url = body.replaceAll("\\/[0-9]{4,4}\\/", "/latest/"));
+            map.getChild("", "Url").setEndTextElementListener(body -> url = body.replaceAll("\\/[0-9]{4}\\/", "/latest/"));
             map.getChild("", "Size").setEndTextElementListener(body -> size = Long.parseLong(body));
             map.getChild("", "DescriptionEnglish").setEndTextElementListener(body -> description = body);
             map.getChild("", "MapsforgeDateOfCreation").setEndTextElementListener(body -> dateInfo = body);

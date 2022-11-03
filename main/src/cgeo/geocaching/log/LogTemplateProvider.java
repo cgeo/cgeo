@@ -155,6 +155,13 @@ public final class LogTemplateProvider {
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
+        templates.add(new LogTemplate("DAYOFWEEK", R.string.init_signature_template_day_of_week) {
+
+            @Override
+            public String getValue(final LogContext context) {
+                return Formatter.formatDayOfWeek(System.currentTimeMillis());
+            }
+        });
         templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
 
             @Override
@@ -297,6 +304,16 @@ public final class LogTemplateProvider {
                 if (cache != null) {
                     final CacheType cacheType = cache.getType();
                     return cacheType.getL10n();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("GEOCODE", R.string.init_signature_template_geocode) {
+            @Override
+            public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getGeocode();
                 }
                 return StringUtils.EMPTY;
             }

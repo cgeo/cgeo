@@ -49,12 +49,9 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     @Nullable
     @Override
     public Boolean filter(final Geocache cache) {
-
-        if (cache.getSearchContext() != null && !inverse) {
-            final String finder = cache.getSearchContext().getString(Geocache.SEARCHCONTEXT_FINDER);
-            if (finder != null && foundByFilter.matches(finder)) {
-                return true;
-            }
+        final String finder = cache.getSearchFinder();
+        if (finder != null && !inverse && foundByFilter.matches(finder)) {
+            return true;
         }
         final List<LogEntry> logEntries = cache.getLogs();
         if (logEntries.isEmpty() && !cache.inDatabase()) {
@@ -86,12 +83,12 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
         if (inverse) {
             sb.append("NOT ");
         }
-        sb.append("EXISTS( SELECT " + tid + ".geocode FROM cg_logs " + tid + " WHERE " + sqlBuilder.getMainTableId() + ".geocode = " + tid + ".geocode");
+        sb.append("EXISTS( SELECT ").append(tid).append(".geocode FROM cg_logs ").append(tid).append(" WHERE ").append(sqlBuilder.getMainTableId()).append(".geocode = ").append(tid).append(".geocode");
         if (foundByFilter.isFilled()) {
-            sb.append(" AND " + foundByFilter.getRawLikeSqlExpression("author"));
+            sb.append(" AND ").append(foundByFilter.getRawLikeSqlExpression("author"));
         }
         if (logTextFilter.isFilled()) {
-            sb.append(" AND " + logTextFilter.getRawLikeSqlExpression("log"));
+            sb.append(" AND ").append(logTextFilter.getRawLikeSqlExpression("log"));
         }
         sb.append(")");
         sqlBuilder.addWhere(sb.toString());

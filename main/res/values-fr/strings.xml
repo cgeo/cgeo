@@ -355,13 +355,20 @@
         <item quantity="one">%d minute</item>
         <item quantity="other">%d minutes</item>
     </plurals>
-    <string name="caches_store_offline">Enregistrer localement</string>
-    <string name="caches_store_all">Tout enregistrer</string>
-    <string name="caches_store_unsaved">Enregistrer les non sauvegardées</string>
+    <string name="caches_store_offline">Stocker localement</string>
+    <string name="caches_store_offline_map">Stocker les caches localement</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
-    <string name="caches_store_background">Téléchargement en arrière-plan (expérimental)</string>
-    <string name="caches_store_refresh_background">Actualisation en arrière-plan (expérimental)</string>
     <string name="caches_store_background_title">Télécharger les caches</string>
+    <string name="caches_store_background_already_stored">Certaines caches sont déjà enregistrées. Que souhaitez-vous faire ?</string>
+    <string name="caches_store_background_option_nothing">Ne rien faire</string>
+    <string name="caches_store_background_option_add_to_list">Ajouter à la liste</string>
+    <string name="caches_store_background_option_refresh">Actualiser et ajouter à la liste</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Le téléchargement a échoué, %1$d/%2$d caches ont été téléchargées</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Téléchargement annulé, %1$d/%2$d caches ont été téléchargées</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d cache téléchargée</item>
+        <item quantity="other">%d caches téléchargées</item>
+    </plurals>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
@@ -551,7 +558,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">A un log Trouvé (hors ligne)</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mystery résolue</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Avec points de passage définis par l’utilisateur</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">La configuration du filtre affectera les mysteries.\n\nUne mystery est considéré “résolue” si elle a soit, les coordonnées modifiées, soit un point de passage final avec des coordonnées.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Ce paramètre de filtre n\'affectera que les caches mystère. Si vous souhaitez exclure d\'autres types de cache, veuillez définir un filtre pour le type de cache approprié.\n\nUne cache mystère est considérée comme « résolue » si ses coordonnées ont été modifiées ou si un waypoint final valide vérifie de coordonnées.</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
@@ -624,7 +631,23 @@
     <string name="debug_user_error_report_title">Signaler un problème</string>
     <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
     <string name="debug_user_error_explain_options">Aidez nous à corriger les problèmes de c:geo en nous les signalant par email avec les informations systèmes de votre téléphone et le journal de log.\nRajoutez aussi une description détaillé de l\'erreur dans l\'email.\n\nVérifiez également notre FAQ et/ou les réseaux sociaux pour des problèmes déjà identifiés.\nD\'autres possibilités de contact sont disponibles dans «À propos de c:geo »</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Téléchargements en cours</string>
+    <string name="downloader_pending_downloads">Téléchargements en attente</string>
+    <string name="downloader_cancel_download">Annuler le téléchargement</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Le téléchargement a échoué (et ne sera pas relancé)</string>
+    <string name="asdm_status_pending">Le téléchargement est en attente de démarrage</string>
+    <string name="asdm_status_running">Le téléchargement est en cours</string>
+    <string name="asdm_status_successful">Téléchargement terminé avec succès</string>
+    <string name="asdm_paused_queued_for_wifi">En pause : Attente du Wifi</string>
+    <string name="asdm_paused_unknown">En pause pour une autre raison</string>
+    <string name="asdm_error_file_already_exists">Erreur : Le fichier de destination existe déjà et ne sera pas remplacé</string>
+    <string name="asdm_error_file_error">Erreur : Problème inconnu de stockage</string>
+    <string name="asdm_error_http_data_error">Erreur : Erreur de traitement HTTP au niveau des données</string>
+    <string name="asdm_error_insufficient_space">Erreur : Espace de stockage insuffisant</string>
+    <string name="asdm_error_too_many_redirects">Erreur : Trop de redirections</string>
+    <string name="asdm_error_unhandled_http_code">Erreur : Code HTTP non géré</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -640,6 +663,7 @@
     <string name="settings_title_map">Carte</string>
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
+    <string name="settings_title_offline_maps">Cartes hors-ligne</string>
     <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_summary_offline_routing">Le routage hors ligne est disponible si l\'application \"BRouter\" est installée et configurée ou si le routage interne est activé.</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
@@ -725,6 +749,7 @@
     <string name="init_signature_template_button">Insérer un champ dynamique</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
+    <string name="init_signature_template_day_of_week">Jour de la semaine</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
     <string name="init_signature_template_user">Utilisateur</string>
     <string name="init_signature_template_number">Numéro de visite</string>
@@ -935,10 +960,13 @@
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
+    <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
+    <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
     <string name="init_maintenance_start">Début de la maintenance</string>
+    <string name="init_maintenance_ongoing">Cela peut prendre un peu de temps …</string>
     <string name="init_maintenance_finished">Maintenance terminée</string>
     <string name="init_location">Géolocalisation</string>
     <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth.</string>
@@ -981,6 +1009,8 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
+    <string name="init_summary_useUnifiedMap">Utiliser la nouvelle carte unifiée plutôt que les cartes Google Map / Mapsforge (OSM) (carte expérimentale loin d\'être complète, à utiliser seulement pour test)</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1153,6 +1183,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Aucun point de passage enregistrable trouvé</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Empêcher l\'extraction des points de passage</string>
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Cette note personnelle sera tronquée d\'environ %1$d caractères par %3$s (taille maxi %2$d).</string>
     <string name="cache_personal_note_upload">Envoyer</string>
     <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
@@ -1224,6 +1255,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Carte</string>
     <string name="cache_menu_map_ext">Autres applications externes</string>
+    <string name="cache_menu_map_ext_nolabel">Autres applications externes (coordonnées seulement)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
     <string name="no_browser_found">Aucun navigateur Internet n\'a été trouvé</string>
@@ -1275,6 +1307,9 @@
     <string name="cache_description_updated">Description de la cache mise à jour</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Taille</string>
+    <string name="cache_mode">Mode</string>
+    <string name="cache_mode_linear">Linéaire</string>
+    <string name="cache_mode_random">Aléatoire</string>
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulté</string>
     <string name="cache_terrain">Terrain</string>
@@ -1321,6 +1356,9 @@
     <string name="image_category_own">Mes caches</string>
     <string name="image_category_listing">Liste</string>
     <string name="image_category_log">Signaler votre visite</string>
+    <string name="context_map_add_to_route">Ajouter à la trace</string>
+    <string name="context_map_add_to_route_start">Ajouter à la route</string>
+    <string name="context_map_show_coords">Afficher les coordonnées</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
@@ -1970,6 +2008,7 @@
     <string name="tts_toggle">Basculer la synthèse vocale</string>
     <string name="tts_started">Boussole parlante démarrée</string>
     <string name="tts_stopped">Boussole parlante arrêtée</string>
+    <string name="tts_running">Le service vocal écoute…</string>
     <string name="err_tts_lang_not_supported">La langue courante n\'est pas prise en charge par la synthèse vocale.</string>
     <string name="tts_one_kilometer">un kilomètre</string>
     <plurals name="tts_kilometers">
@@ -1998,6 +2037,10 @@
     <plurals name="days_ago">
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Dans %d jour</item>
+        <item quantity="other">Dans %d jours</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
@@ -2059,7 +2102,7 @@
     <!-- permission handling -->
     <string name="close_app">Fermer l\'application</string>
     <string name="ask_again">Demander plus tard</string>
-    <string name="location_permission_request_explanation">c:geo a besoin d\'accéder au GPS de votre appareil pour identifier votre position et calculer la distance et la direction des géocaches. Il ne peut être utilisé sans cette permission.</string>
+    <string name="location_permission_request_explanation">c:geo requiert l\'accès au GPS (localisation précise) de votre appareil pour calculer votre position ainsi que la distance et la direction des géocaches. c:geo ne peut pas être utilisé correctement sans cette autorisation.</string>
     <string name="storage_permission_request_explanation">c:geo écrira des données sur votre carte SD ou votre téléphone dès que vous sauvegarderez des géocaches pour une utilisation hors-ligne. En outre c:geo utilisera le stockage de votre téléphone pour importer et exporter des fichiers et lire des cartes hors-ligne. Il ne peut être utilisé sans cette autorisation.</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->
@@ -2079,6 +2122,7 @@
     <string name="notification_channel_foreground_description">la notification est affichée lorsque que c:geo travaille en arrière-plan</string>
     <string name="notification_channel_downloader_name">c:geo downloader</string>
     <string name="notification_channel_downloader_description">Notification des résultats de téléchargement (par exemple pour les cartes hors-ligne)</string>
+    <string name="notification_channel_cache_download_name">téléchargeur de cache</string>
     <string name="notification_channel_cache_download_description">notifications des résultats du téléchargement de cache en arrière-plan</string>
     <string name="notification_proximity_title">notification de proximité c:geo</string>
     <string name="notification_download_receiver_title">Téléchargement en cours</string>
@@ -2180,8 +2224,6 @@
     <string name="downloadmap_target_not_writable">La cible sélectionnée \"%s\" n\'est pas accessible en écriture - le fichier de carte téléchargé est sauvegardé dans le dossier de téléchargement du système et doit être déplacé manuellement dans le dossier des cartes.</string>
     <string name="downloadmap_allow_metered_network">Autoriser le téléchargement sur un réseau limité (par exemple : la connexion mobile)</string>
     <string name="download_confirmation">%1$s Télécharger le fichier \"%2$s\" ? %3$s</string>
-    <string name="download_confirmation_updates">Mise à jour trouvée pour :\n%1$s\n\nVoulez-vous mettre à jour ? %2$s</string>
-    <string name="download_warning">Cela peut prendre un certain temps et peut entraîner des coûts significatifs, selon votre connexion réseau.</string>
     <string name="download_error">Le téléchargement a échoué en raison de l’erreur #%d</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
@@ -2193,6 +2235,8 @@
     <string name="downloadmap_mapfile">fichier de carte</string>
     <string name="downloadmap_themefile">fichier de thème</string>
     <string name="downloadmap_tilefile">fichier données de routage</string>
+    <string name="downloadmap_othermapdownload">autre téléchargement de carte</string>
+    <string name="downloadmap_otherthemedownload">autre téléchargement de thème</string>
     <string name="downloadmap_download">télécharger</string>
     <string name="downloadmap_retrieving_directory_data">Récupération des données du dossier …</string>
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
@@ -2200,7 +2244,6 @@
     <string name="downloadtile_info">c:geo ne peut pas calculer la route demandée car il y a un fichier de données de routage manquant. Voulez-vous télécharger les données de routage manquantes ?</string>
     <string name="check_tiles_menu">Vérifier les données de navigation manquantes</string>
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
-    <string name="check_tiles_missing">Des données de navigation sont manquantes :\n%1$s\n\nSouhaitez-vous télécharger ces fichiers ?%2$s</string>
     <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
     <string name="tileupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
@@ -2643,16 +2686,4 @@
     <string name="smiley_approve">Approuvé</string>
     <string name="smiley_disapprove">Désapprouvé</string>
     <string name="smiley_question">Interrogatif(ve)</string>
-    <string name="smiley_cry">En larmes</string>
-    <string name="smiley_embarassed">Embarrassé(e)</string>
-    <string name="smiley_footinmouth">Maladroit(e)</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Bise</string>
-    <string name="smiley_laughing">Rieur(se)</string>
-    <string name="smiley_money">Argent</string>
-    <string name="smiley_sealed">Censuré(e)</string>
-    <string name="smiley_surprised">Étonné(e)</string>
-    <string name="smiley_tongueout">Tire la langue</string>
-    <string name="smiley_undecided">Indécis(e)</string>
-    <string name="smiley_yell">Crier</string>
 </resources>

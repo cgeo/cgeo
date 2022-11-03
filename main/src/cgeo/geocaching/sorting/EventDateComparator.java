@@ -11,7 +11,7 @@ public class EventDateComparator extends DateComparator {
 
     @Override
     protected int sortSameDate(final Geocache left, final Geocache right) {
-        return compare(left.getEventTimeMinutes(), right.getEventTimeMinutes());
+        return compare(left.getEventStartTimeInMinutes(), right.getEventStartTimeInMinutes());
     }
 
     /**

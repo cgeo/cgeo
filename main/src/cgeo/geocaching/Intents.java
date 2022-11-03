@@ -62,7 +62,7 @@ public class Intents {
     public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
     public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
-    public static final String ACTION_GEOCACHE_REFRESHED = PREFIX_ACTION + "GEOCACHE_REFRESHED";
+    public static final String ACTION_GEOCACHE_CHANGED = PREFIX_ACTION + "GEOCACHE_CHANGED";
 
     private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
     public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";
@@ -88,9 +88,6 @@ public class Intents {
     private static final String PREFIX_CREDENTIALS_AUTH = "cgeo.geocaching.intent.credentialsauth.";
     public static final String EXTRA_CREDENTIALS_AUTH_USERNAME = PREFIX_CREDENTIALS_AUTH + "username";
     public static final String EXTRA_CREDENTIALS_AUTH_PASSWORD = PREFIX_CREDENTIALS_AUTH + "password";
-
-    private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
-    public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
 
     /**
      * To be used together with {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}

@@ -352,18 +352,15 @@
         <item quantity="other">%dλεπτά</item>
     </plurals>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
-    <string name="caches_store_all">Αποθήκευση όλων</string>
-    <string name="caches_store_unsaved">Αποθήκευση των μη αποθηκευμένων</string>
+    <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
-    <string name="caches_store_background">Λήψη φόντου (Πειραματικό!)</string>
-    <string name="caches_store_refresh_background">Ανανέωση φόντου (Πειραματικό!)</string>
     <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
     <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
     <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
-    <string name="caches_store_background_result_failed">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
-    <string name="caches_store_background_result_canceled">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
@@ -542,6 +539,7 @@
     <string name="cache_filter_status_select_yes">Ναι</string>
     <string name="cache_filter_status_select_no">Όχι</string>
     <string name="cache_filter_status_select_label_found">Βρέθηκε</string>
+    <string name="cache_filter_status_select_label_dnf">Δεν βρέθηκε</string>
     <string name="cache_filter_status_select_label_owned">Ανήκει</string>
     <string name="cache_filter_status_select_label_stored">Αποθηκευμένα</string>
     <string name="cache_filter_status_select_label_favorite">Ίδια Αγαπημένα</string>
@@ -552,7 +550,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρυπτες γριφου.\n\n Ένας γρίφος θεωρείται «λυμένος» αν έχει αλλάγμενες συντεταγμένες ή ένα έγκυρο τελικό σημείο με συμπληρωμένο συντεταγμένες.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρύπτες μυστηρίου. Αν θέλετε να αποκλείσετε άλλους τύπους κρυπτών, παρακαλούμε να ορίσετε ένα κατάλληλο φίλτρο τύπου κρύπτης.\n\nΈνα; γρίφος θεωρείται «λυμένος» αν έχει αλλάξει συντεταγμένες ή ένα έγκυρο τελικό σημείο που συμπληρώνεται με συντεταγμένες.</string>
     <string name="cache_filter_status_active">Ενεργή</string>
     <string name="cache_filter_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_filter_status_archived">Αρχειοθετημένη</string>
@@ -625,7 +623,35 @@
     <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
     <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
     <string name="debug_user_error_explain_options">Βοηθήστε να διορθώσουμε τα προβλήματα του c:geo αναφέροντας τα μέσω email, συμπεριλαμβάνοντας τις πληροφορίες συστήματος και το αρχείο καταγραφής του c:geo.\nΤο μήνυμα σας να συμπεριλαμβάνει πάντοτε και μια λεπτομερή περιγραφή του σφάλματος!\n\nΠριν από την αποστολή μηνύματος, ελέγξτε τις Συχνές Ερωτήσεις ή/και την παρουσία μας στα μέσα κοινωνικής δικτύωσης για γνωστά προβλήματα.\nΆλλες επιλογές επικοινωνίας μπορούν να βρεθούν στο \'Σχετικά με το c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Τρέχουσες λήψεις</string>
+    <string name="downloader_pending_downloads">Εκκρεμείς λήψεις</string>
+    <string name="downloader_no_pending_downloads">Δεν υπάρχουν λήψεις σε αναμονή αυτήν τη στιγμή</string>
+    <string name="downloader_cancel_download">Ακύρωση λήψης</string>
+    <string name="downloader_cancel_file">Ακύρωση εν αναμονή λήψης του \"%s\" και αφαίρεση κατεβασμένων τμημάτων;</string>
+    <string name="downloader_cancelled_download">Ακυρώθηκε η λήψη για \"%s\"</string>
+    <string name="downloader_pending_info">Υπάρχει τουλάχιστον μία παύση ή αποτυχημένη λήψη. Θέλετε να ανοίξετε τη λίστα των λήψεων που εκκρεμούν;</string>
+    <string name="downloader_retry_download">Επανάληψη λήψης</string>
+    <string name="downloader_retry_download_details">Θέλετε να ξαναπροσπαθήσετε τη λήψη του παρακάτω αρχείου;</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Η λήψη απέτυχε (και δεν θα γίνει επανάληψη)</string>
+    <string name="asdm_status_paused">Η λήψη περιμένει να ξαναπροσπαθήσει ή να συνεχίσετε</string>
+    <string name="asdm_status_pending">Η λήψη είναι σε αναμονή για έναρξη</string>
+    <string name="asdm_status_running">Η λήψη εκτελείται αυτή τη στιγμή</string>
+    <string name="asdm_status_successful">Η διαγραφή έχει ολοκληρωθεί επιτυχώς</string>
+    <string name="asdm_paused_queued_for_wifi">Παύση: Αναμονή για Wifi</string>
+    <string name="asdm_paused_unknown">Παύση για κάποιον άλλο λόγο</string>
+    <string name="asdm_paused_waiting_for_network">Παύση: Αναμονή για να προχωρήσει η σύνδεση δικτύου</string>
+    <string name="asdm_paused_waiting_to_retry">Παύση: Παρουσιάστηκε κάποιο σφάλμα δικτύου και ο διαχειριστής λήψεων περιμένει πριν την επανάληψη της αίτησης</string>
+    <string name="asdm_error_cannot_resume">Σφάλμα: Προέκυψε κάποιο πιθανό μεταβατικό σφάλμα, αλλά δεν μπορούμε να συνεχίσουμε τη λήψη</string>
+    <string name="asdm_error_device_not_found">Σφάλμα: Δεν βρέθηκε εξωτερική συσκευή αποθήκευσης. Η κάρτα SD προσαρτήθηκε;</string>
+    <string name="asdm_error_file_already_exists">Σφάλμα: Το αρχείο προορισμού που ζητήθηκε υπάρχει ήδη, δεν θα αντικατασταθεί</string>
+    <string name="asdm_error_file_error">Σφάλμα: Άγνωστο πρόβλημα αποθήκευσης</string>
+    <string name="asdm_error_http_data_error">Σφάλμα: Σφάλμα επεξεργασίας HTTP σε επίπεδο δεδομένων</string>
+    <string name="asdm_error_insufficient_space">Ανεπαρκής χώρος αποθήκευσης</string>
+    <string name="asdm_error_too_many_redirects">Σφάλμα: Πάρα πολλές ανακατευθύνσεις</string>
+    <string name="asdm_error_unhandled_http_code">Σφάλμα: Μη αντιμετοπίσιμος κώδικας http</string>
+    <string name="asdm_error_unknown">Σφάλμα: Άγνωστο σφάλμα</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Άνοιγμα ρυθμίσεων;</string>
     <string name="settings_title_services">Υπηρεσίες</string>
@@ -641,6 +667,7 @@
     <string name="settings_title_map">Χάρτης</string>
     <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
+    <string name="settings_title_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="settings_title_offline_routing">Δρομολόγηση εκτός σύνδεσης</string>
     <string name="settings_summary_offline_routing">Η σύνδεση δρομολόγησης είναι διαθέσιμη αν είτε η βοηθητική εφαρμογή \"BRouter\" είναι εγκατεστημένη και ρυθμισμένη είτε η εσωτερική δρομολόγηση είναι ενεργοποιημένη.</string>
     <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
@@ -726,6 +753,7 @@
     <string name="init_signature_template_button">Δώστε θέση</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
+    <string name="init_signature_template_day_of_week">Ημέρα της εβδομάδας</string>
     <string name="init_signature_template_datetime">Ημερομηνία &amp; Ώρα</string>
     <string name="init_signature_template_user">Χρήστης</string>
     <string name="init_signature_template_number">Αριθμός</string>
@@ -738,6 +766,7 @@
     <string name="init_signature_template_size">Μέγεθος</string>
     <string name="init_signature_template_type">Τύπος</string>
     <string name="init_signature_template_location">Τοποθεσία</string>
+    <string name="init_signature_template_geocode">Γεωκωδικός</string>
     <string name="init_ratingwanted">Βαθμολογία GCvote</string>
     <string name="init_summary_ratingwanted">Φόρτωση βαθμολογίας από την GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Εμφάνιση φίλων / δικών μου</string>
@@ -935,10 +964,17 @@
     <string name="init_use_native_ua">Πρόγραμμα περιήγησης Android</string>
     <string name="init_summary_use_native_ua">Προσδιορίζουν το πρόγραμμα περιήγησης για Android. Λύνει προβλήματα σύνδεσης όταν χρησιμοποιείτε ορισμένες υπηρεσίες παροχής δικτύου.</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
+    <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
+    <string name="init_mapshading_folder_text">Οι χάρτες εκτός σύνδεσης μπορούν να επικαλυφθούν με υψομετρικές πληροφορίες. Αυτές οι πληροφορίες παρέχονται ως hgt/dem αρχεία που μπορούν να τοποθετηθούν σε αυτόν τον φάκελο.</string>
+    <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
+    <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
+    <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
+    <string name="init_mapShadingScale_description">Αδιαφάνεια του στρώματος σκίασης, από αόρατες έως υψηλότερες τιμές που εντείνουν τη σκίαση, αλλά μπορεί να παράγει οπτικά λαθη</string>
     <string name="init_maintenance">Συντήρηση</string>
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
+    <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
     <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
     <string name="init_location">Γεωτοποθεσία</string>
     <string name="init_location_note">Σε συσκευές που διαθέτουν υπηρεσίες Google Play, το c:geo μπορεί να χρησιμοποιήσει αυτόματα ένα καλύτερο πάροχο γεωτοποθεσίας. Ωστόσο, αυτό εμποδίζει τη χρήση ενός εξωτερικού δέκτη BlueTooth GPS.</string>
@@ -1041,6 +1077,7 @@
     <string name="persistablefolder_base">Βάση</string>
     <string name="persistablefolder_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="persistablefolder_offline_maps_themes">Θέματα Χάρτη</string>
+    <string name="persistablefolder_offline_maps_shading">Φάκελος αρχείων σκίασης χάρτη</string>
     <string name="persistablefolder_backup">Αντίγραφα ασφαλείας</string>
     <string name="persistablefolder_logfiles">Αρχεία καταγραφής</string>
     <string name="persistablefolder_fieldnotes">Σημειώσεις πεδίου</string>
@@ -1163,6 +1200,9 @@
     <string name="cache_personal_note_upload_cancelled">Το ανέβασμα προσωπικής σημείωσης ακυρώθηκε</string>
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
+    <string name="cache_description_rendering">Επεξεργασία  αποτύπωσης, παρακαλώ περιμένετε…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Προειδοποίηση: Η περιγραφή είναι πολύ μεγάλη (%1$d χαρακτήρες). Μόνο οι πρώτοι %2$d%% εμφανίζονται.</string>
+    <string name="cache_description_render_fully">Αποτύπωση πλήρους περιγραφής</string>
     <string name="cache_area_description">Περιγραφή περιοχής</string>
     <string name="cache_cache_description">Περιγραφή κρύπτης</string>
     <string name="cache_virtual_description">Εικονική ερώτηση</string>
@@ -1227,6 +1267,7 @@
     <string name="cache_menu_radar">Ραντάρ</string>
     <string name="cache_menu_map">Χάρτης</string>
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
+    <string name="cache_menu_map_ext_nolabel">Άλλες εξωτερικές εφαρμογές (μόνο για συντεταγμένες)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
     <string name="no_browser_found">Δε βρέθηκε εφαρμογή περιήγησης</string>
@@ -1278,6 +1319,9 @@
     <string name="cache_description_updated">Η περιγραφή της κρύπτης ενημερώθηκε</string>
     <string name="cache_type">Τύπος</string>
     <string name="cache_size">Μέγεθος</string>
+    <string name="cache_mode">Λειτουργία</string>
+    <string name="cache_mode_linear">Γραμμικό</string>
+    <string name="cache_mode_random">Τυχαίο</string>
     <string name="cache_distance">Απόσταση</string>
     <string name="cache_difficulty">Δυσκολία</string>
     <string name="cache_terrain">Έδαφος</string>
@@ -1452,6 +1496,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Απόρριψη</string>
     <string name="calccoord_migrate_infotext_markdown">Βρέθηκε ένας υπολογισμός συντεταγμένων παλαιού τύπου με αυτόν τον τρόπο:\n\n%1$s\n\nΜπορείτε να μετεγκαταστήσετε αυτό στις νέες συντεταγμένες υπολογισμού της προσωρινής μνήμης ως εξής:\n\n%2$s\n\nμε νέο πρότυπο:%3$s\n\nΠαρακαλώ επιλέξτε:\n- %4$s για να εκτελέσετε τη μετεγκατάσταση όπως προτείνεται\n- %5$s για να απορρίψετε τα δεδομένα υπολογισμού που βρέθηκαν \n- %6$s για να συνεχίσετε χωρίς μετατροπη. Θα σας ζητηθεί να τα μετατρέψετε ξανά την επόμενη φορά που θα ανοίξετε το σημείο για επεξεργασία. Σημειώστε, ωστόσο, ότι η επεξεργασία των συντεταγμένων σημείου θα μπορούσε να διαγράψει τοπικά δεδομένα υπολογισμού.</string>
     <!-- Formula -->
+    <string name="formula">Τύπος</string>
     <string name="formula_choose_function">Επιλογή λειτουργίας</string>
     <string name="formula_function_sqrt">Τετραγωνική ρίζα</string>
     <string name="formula_function_sin">Ημίτονο</string>
@@ -2179,10 +2224,11 @@
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου, ο διαχειριστής λήψεων δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
+    <string name="download_none_selected">Δεν επιλέχθηκαν χάρτες για κατέβασμα</string>
     <string name="downloadmap_target_not_writable">Ο επιλεγμένος στόχος \"%s\" δεν είναι εγγράψιμος - ο χάρτης αποθηκεύεται στο φάκελο λήψης του συστήματος και πρέπει να μετακινηθεί χειροκίνητα στο φάκελο χαρτών.</string>
     <string name="downloadmap_allow_metered_network">Να επιτρέπεται η λήψη σε εποπτευόμενα δίκτυα (π.χ.: δίκτυα κινητής)</string>
     <string name="download_confirmation">%1$sΛήψη αρχείου \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:\n%1$s\n\nΘέλετε να ενημερώσετε?%2$s</string>
+    <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:</string>
     <string name="download_warning">Αυτό μπορεί να πάρει αρκετό χρόνο και μπορεί να οδηγήσει σε σημαντικό κόστος, ανάλογα με τη σύνδεση του δικτύου σας.</string>
     <string name="download_error">Η λήψη απέτυχε με σφάλμα: #%d</string>
     <string name="downloadmap_handling">Θα γίνει διαχείριση της λήψης στο παρασκήνιο από το πρόγραμμα διαχείρισης λήψεων του συστήματος σας. Πρέπει να δείτε μια ειδοποίηση μόλις ξεκινήσει η λήψη (μπορεί να καθυστερήσει λίγο).</string>
@@ -2195,6 +2241,8 @@
     <string name="downloadmap_mapfile">Αρχείο χάρτη</string>
     <string name="downloadmap_themefile">αρχείο θέματος</string>
     <string name="downloadmap_tilefile">αρχείο δεδομένων δρομολόγησης</string>
+    <string name="downloadmap_othermapdownload">Λήψη άλλου χάρτη</string>
+    <string name="downloadmap_otherthemedownload">Λήψη άλλου θέματος</string>
     <string name="downloadmap_download">Λήψη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
@@ -2202,7 +2250,7 @@
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
     <string name="check_tiles_menu">Έλεγχος για ελλείποντα δεδομένα δρομολόγησης</string>
     <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
-    <string name="check_tiles_missing">Βρέθηκαν δεδομένα δρομολόγησης:\n%1$s\n\nΘέλετε να κατεβάσετε αυτά τα αρχεία?%2$s</string>
+    <string name="check_tiles_missing">Λείπουν δεδομένα δρομολόγησης:</string>
     <string name="check_tiles_unsupported">Προειδοποίηση: Τα δεδομένα δρομολόγησης τουλάχιστον εν μέρει δεν είναι διαθέσιμα για την επιλεγμένη περιοχή</string>
     <string name="tileupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις των αρχείων δεδομένων δρομολόγησης που έχουν ληφθεί. Πατήστε παρατεταμένα για αναβολή.</string>
     <string name="mapupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος. Πατήστε παρατεταμένα για αναβολή.</string>
@@ -2344,15 +2392,4 @@
     <string name="smiley_approve">Εγκεκριμένο</string>
     <string name="smiley_disapprove">Απορριπτέο</string>
     <string name="smiley_question">Ερώτηση</string>
-    <string name="smiley_cry">Κλάμα</string>
-    <string name="smiley_embarassed">Ντροπή</string>
-    <string name="smiley_footinmouth">Είπα χαζομάρα</string>
-    <string name="smiley_innocent">Αθώος</string>
-    <string name="smiley_kiss">Φιλί</string>
-    <string name="smiley_laughing">Γελάω</string>
-    <string name="smiley_money">Χρήματα</string>
-    <string name="smiley_sealed">Σφραγισμένο</string>
-    <string name="smiley_surprised">Έκπληξη</string>
-    <string name="smiley_tongueout">Βγάζω γλώσσα</string>
-    <string name="smiley_undecided">Αναποφάσιστο</string>
 </resources>

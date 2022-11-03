@@ -100,7 +100,8 @@ public class Settings {
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
 
-    public static final int DAYS_TO_SECONDS = 24 * 60 * 60;
+    public static final int HOURS_TO_SECONDS = 60 * 60;
+    public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
 
     private static final int HISTORY_SIZE = 50;
 
@@ -708,7 +709,7 @@ public class Settings {
     }
 
     public static void setGCMemberStatus(final GCMemberState memberStatus) {
-        putString(R.string.pref_memberstatus, memberStatus.englishWebsite);
+        putString(R.string.pref_memberstatus, memberStatus.id);
     }
 
     @NonNull
@@ -1209,20 +1210,7 @@ public class Settings {
     }
 
     public static boolean mapAutoDownloadsNeedUpdate() {
-        // update check disabled?
-        final int interval = getMapAutoDownloadsInterval();
-        if (interval < 1) {
-            return false;
-        }
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
-        if (lastCheck == 0) {
-            setMapAutoDownloadsLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_mapAutoDownloadsLastCheck, getMapAutoDownloadsInterval() * 24, () -> setMapAutoDownloadsLastCheck(false));
     }
 
     private static int getMapAutoDownloadsInterval() {
@@ -1230,24 +1218,31 @@ public class Settings {
     }
 
     public static void setMapAutoDownloadsLastCheck(final boolean delay) {
-        putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval()));
+        putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval() * 24));
     }
 
     public static boolean dbNeedsCleanup() {
-        final int interval = 1; // check once per day
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_dbCleanupLastCheck, 0);
-        if (lastCheck == 0) {
-            setDbCleanupLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_dbCleanupLastCheck, 24, () -> setDbCleanupLastCheck(false));
     }
 
     public static void setDbCleanupLastCheck(final boolean delay) {
-        putLong(R.string.pref_dbCleanupLastCheck, calculateNewTimestamp(delay, 1));
+        putLong(R.string.pref_dbCleanupLastCheck, calculateNewTimestamp(delay, 24));
+    }
+
+    public static boolean dbNeedsReindex() {
+        return needsIntervalAction(R.string.pref_dbReindexLastCheck, 90 * 24, () -> setDbReindexLastCheck(false));
+    }
+
+    public static void setDbReindexLastCheck(final boolean delay) {
+        putLong(R.string.pref_dbReindexLastCheck, calculateNewTimestamp(delay, 90 * 24));
+    }
+
+    public static boolean pendingDownloadsNeedCheck() {
+        return needsIntervalAction(R.string.pref_pendingDownloadsLastCheck, 12, () -> setPendingDownloadsLastCheck(false));
+    }
+
+    public static void setPendingDownloadsLastCheck(final boolean delay) {
+        putLong(R.string.pref_pendingDownloadsLastCheck, calculateNewTimestamp(delay, 12));
     }
 
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
@@ -1292,7 +1287,7 @@ public class Settings {
     }
 
     private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, isLightSkin() ?
+        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
                 DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
     }
 
@@ -1311,12 +1306,6 @@ public class Settings {
 
     public static boolean isLightSkin(final @NonNull Context context) {
         return !isDarkThemeActive(context, getAppTheme(context));
-    }
-
-    /* use only for migration purposes */
-    @Deprecated
-    private static boolean isLightSkin() {
-        return getBoolean(R.string.old_pref_skin, false);
     }
 
     @NonNull
@@ -1368,20 +1357,7 @@ public class Settings {
     }
 
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
-        // update check disabled?
-        final long interval = getBrouterAutoTileDownloadsInterval();
-        if (interval < 1) {
-            return false;
-        }
-        // initialization on first run
-        final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
-        if (lastCheck == 0) {
-            setBrouterAutoTileDownloadsLastCheck(false);
-            return false;
-        }
-        // check if interval is completed
-        final long now = System.currentTimeMillis() / 1000;
-        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+        return needsIntervalAction(R.string.pref_brouterAutoTileDownloadsLastCheck, getBrouterAutoTileDownloadsInterval() * 24, () -> setBrouterAutoTileDownloadsLastCheck(false));
     }
 
     private static int getBrouterAutoTileDownloadsInterval() {
@@ -1389,7 +1365,7 @@ public class Settings {
     }
 
     public static void setBrouterAutoTileDownloadsLastCheck(final boolean delay) {
-        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, calculateNewTimestamp(delay, getBrouterAutoTileDownloadsInterval()));
+        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, calculateNewTimestamp(delay, getBrouterAutoTileDownloadsInterval() * 24));
     }
 
     public static String getRoutingProfile() {
@@ -1409,10 +1385,27 @@ public class Settings {
     }
 
     // calculate new "last checked" timestamp - either "now" or "now - interval + delay [3 days at most]
-    // used for update checks for maps & route tiles downloaders
-    private static long calculateNewTimestamp(final boolean delay, final int interval) {
+    // used for update checks for maps & route tiles downloaders (and other places)
+    private static long calculateNewTimestamp(final boolean delay, final int intervalInHours) {
         // if delay requested: delay by regular interval, but by three days at most
-        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (long) (interval - 3) * DAYS_TO_SECONDS : 0);
+        return (System.currentTimeMillis() / 1000) - (delay && (intervalInHours > 72) ? (long) (intervalInHours - 72) * HOURS_TO_SECONDS : 0);
+    }
+
+    // checks given timestamp against interval; initializes timestampt, if needed
+    private static boolean needsIntervalAction(final @StringRes int prefTimestamp, final int intervalInHours, final Runnable initAction) {
+        // check disabled?
+        if (intervalInHours < 1) {
+            return false;
+        }
+        // initialization on first run
+        final long lastCheck = getLong(prefTimestamp, 0);
+        if (lastCheck == 0) {
+            initAction.run();
+            return false;
+        }
+        // check if interval is completed
+        final long now = System.currentTimeMillis() / 1000;
+        return (lastCheck + ((long) intervalInHours * HOURS_TO_SECONDS)) <= now;
     }
 
     public static boolean isBigSmileysEnabled() {
@@ -1689,10 +1682,6 @@ public class Settings {
 
     public static int getNearbySearchLimit() {
         return getInt(R.string.pref_nearbySearchLimit, 0);
-    }
-
-    public static boolean getUseNativeUa() {
-        return getBoolean(R.string.pref_nativeUa, false);
     }
 
     @NonNull
@@ -2016,7 +2005,7 @@ public class Settings {
     }
 
     public static void setAutomaticBackupLastCheck(final boolean delay) {
-        putLong(R.string.pref_automaticBackupLastCheck, calculateNewTimestamp(delay, getAutomaticBackupInterval()));
+        putLong(R.string.pref_automaticBackupLastCheck, calculateNewTimestamp(delay, getAutomaticBackupInterval() * 24));
     }
 
     /**
@@ -2280,6 +2269,14 @@ public class Settings {
 
     public static boolean getHintAsRot13() {
         return getBoolean(R.string.pref_rot13_hint, true);
+    }
+
+    public static double getMapShadingScale() {
+        return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
+    }
+
+    public static double getMapShadingLinearity() {
+        return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
     }
 
 }

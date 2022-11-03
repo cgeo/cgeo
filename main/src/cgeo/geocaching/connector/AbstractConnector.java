@@ -267,7 +267,8 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public String getWaypointGpxId(final String prefix, @NonNull final String geocode) {
+    @NonNull
+    public String getWaypointGpxId(@NonNull final String prefix, @NonNull final String geocode) {
         // Default: just return the prefix
         return prefix;
     }

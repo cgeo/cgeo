@@ -76,7 +76,18 @@ public class ImageListFragment extends Fragment {
         if (StringUtils.isNotBlank(image.getTitle())) {
             return image.getTitle();
         }
+        if (imageList.getItemCount() == 1) {
+            return getString(R.string.log_image_titleprefix); // number is unnecessary if only one image is posted
+        }
         return getString(R.string.log_image_titleprefix) + " " + (position + 1);
+    }
+
+    private void rebuildImageTitles() {
+        // The title of the first image will vary depending on whether there is more than one image present.
+        // Therefore we always update the first element if something does change.
+        if (imageList.getItemCount() > 0) {
+            imageList.notifyItemChanged(0);
+        }
     }
 
     /**
@@ -198,6 +209,18 @@ public class ImageListFragment extends Fragment {
             super(new ManagedListAdapter.Config(recyclerView)
                     .setNotifyOnPositionChange(true)
                     .setSupportDragDrop(true));
+
+            registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onItemRangeInserted(final int positionStart, final int itemCount) {
+                    rebuildImageTitles();
+                }
+
+                @Override
+                public void onItemRangeRemoved(final int positionStart, final int itemCount) {
+                    rebuildImageTitles();
+                }
+            });
         }
 
         private void fillViewHolder(final ImageViewHolder holder, final Image image, final int position) {

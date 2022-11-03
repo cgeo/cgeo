@@ -354,14 +354,15 @@
         <item quantity="other">%d 분</item>
     </plurals>
     <string name="caches_store_offline">오프라인으로 저장</string>
-    <string name="caches_store_all">모두 저장</string>
-    <string name="caches_store_unsaved">저장 안된 것 저장</string>
+    <string name="caches_store_offline_map">캐시는 오프라인으로 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
-    <string name="caches_store_background">백그라운드 다운로드(실험적!)</string>
-    <string name="caches_store_refresh_background">백그라운드 새로 고침(실험적!)</string>
     <string name="caches_store_background_title">캐시 다운로드</string>
-    <string name="caches_store_background_result_failed">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
-    <string name="caches_store_background_result_canceled">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
+    <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
+    <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
+    <string name="caches_store_background_option_add_to_list">목록에 추가</string>
+    <string name="caches_store_background_option_refresh">새로 고침 및 목록에 추가</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
     <plurals name="caches_store_background_result">
         <item quantity="other">%d 개 캐시 다운로드했음</item>
     </plurals>
@@ -539,6 +540,7 @@
     <string name="cache_filter_status_select_yes">예</string>
     <string name="cache_filter_status_select_no">아니요</string>
     <string name="cache_filter_status_select_label_found">찾음</string>
+    <string name="cache_filter_status_select_label_dnf">못찾음</string>
     <string name="cache_filter_status_select_label_owned">소유함</string>
     <string name="cache_filter_status_select_label_stored">저장됨</string>
     <string name="cache_filter_status_select_label_favorite">호감점수를 준 캐시</string>
@@ -550,7 +552,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다. 다른 캐시 유형을 제외하려면 적절한 캐시 유형 필터를 정의하십시오.\n\n미스터리는 좌표가 변경되었거나 좌표로 채워진 유효한 최종 지점니 있는 경우 \'해결됨\' 것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
     <string name="cache_filter_status_disabled">일시정지됨</string>
     <string name="cache_filter_status_archived">영구보관됨</string>
@@ -623,7 +625,35 @@
     <string name="debug_user_error_report_title">문제 신고하기</string>
     <string name="debug_user_error_errortext">예상치 못한 문제가 발생하여 신고를 요청합니다.</string>
     <string name="debug_user_error_explain_options">시스템 정보 및 c:geo 로그 파일이 포함 된 이메일을 통해보고하여 c:geo 문제를 해결하도록 도와주세요.\n메일에 항상 자세한 오류 설명을 포함하십시오!\n\n메일을 보내기 전에 알려진 문제에 대한 FAQ 및/또는 소셜 미디어 존재를 확인하십시오.\n다른 연락처 옵션은 \'c:geo 정보\'에서 찾을 수 있습니다.</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">현재 다운로드</string>
+    <string name="downloader_pending_downloads">다운로드 대기 중</string>
+    <string name="downloader_no_pending_downloads">현재 대기 중인 다운로드가 없음</string>
+    <string name="downloader_cancel_download">다운로드 취소</string>
+    <string name="downloader_cancel_file">대기 중인 \"%s\" 다운로드를 취소하고 다운로드한 부분을 제거하시겠습니까?</string>
+    <string name="downloader_cancelled_download">\"%s\" 다운로드가 취소되었습니다.</string>
+    <string name="downloader_pending_info">일시 중지되거나 실패한 다운로드가 하나 이상 있습니다. 대기 중인 다운로드 목록을 여시겠습니까?</string>
+    <string name="downloader_retry_download">다운로드 재시도</string>
+    <string name="downloader_retry_download_details">다음 파일의 다운로드를 다시 시도하시겠습니까?</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">다운로드 실패 (다시 시도하지 않음)</string>
+    <string name="asdm_status_paused">다운로드가 재시도 또는 재개를 기다리고 있습니다.</string>
+    <string name="asdm_status_pending">다운로드 시작 대기 중</string>
+    <string name="asdm_status_running">현재 다운로드가 실행 중입니다.</string>
+    <string name="asdm_status_successful">다운로드가 성공적으로 완료되었습니다</string>
+    <string name="asdm_paused_queued_for_wifi">일시 중지됨: Wi-Fi를 기다리는 중</string>
+    <string name="asdm_paused_unknown">다른 이유로 일시중지됨</string>
+    <string name="asdm_paused_waiting_for_network">일시 중지됨: 네트워크 연결이 계속 진행되기를 기다리는 중</string>
+    <string name="asdm_paused_waiting_to_retry">일시 중지됨: 일부 네트워크 오류가 발생했으며 다운로드 관리자가 요청을 다시 시도하기 전에 대기 중입니다.</string>
+    <string name="asdm_error_cannot_resume">오류: 일시적인 오류일 수 있지만 다운로드를 재개할 수 없습니다.</string>
+    <string name="asdm_error_device_not_found">오류: 외부 저장 장치를 찾을 수 없습니다. SD 카드가 연결되어 있습니까?</string>
+    <string name="asdm_error_file_already_exists">오류: 요청한 대상 파일이 이미 존재하므로 덮어쓰지 않습니다.</string>
+    <string name="asdm_error_file_error">오류: 알 수 없는 저장 문제</string>
+    <string name="asdm_error_http_data_error">오류: 데이터 수준에서 HTTP 처리 오류</string>
+    <string name="asdm_error_insufficient_space">오류: 저장 공간 부족</string>
+    <string name="asdm_error_too_many_redirects">오류: 리다이렉트가 너무 많음</string>
+    <string name="asdm_error_unhandled_http_code">오류: 처리되지 않은 HTTP 코드</string>
+    <string name="asdm_error_unknown">오류: 알 수 없는 오류</string>
     <!-- settings -->
     <string name="settings_title_open_settings">설정 열기?</string>
     <string name="settings_title_services">서비스</string>
@@ -639,6 +669,7 @@
     <string name="settings_title_map">지도</string>
     <string name="settings_summary_map">지도 종류, 오프라인 지도 설정 및 기본지도 등 설정하기</string>
     <string name="settings_title_map_data">지도 데이터</string>
+    <string name="settings_title_offline_maps">오프라인 지도</string>
     <string name="settings_title_offline_routing">오프라인 라우팅</string>
     <string name="settings_summary_offline_routing">도우미 앱 \"BRouter\"가 설치 및 구성되어 있거나 내부 라우팅이 활성화 된 경우 오프라인 라우팅을 사용할 수 있습니다.</string>
     <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
@@ -724,6 +755,7 @@
     <string name="init_signature_template_button">자리 표시자 삽입</string>
     <string name="init_signature_template_date">날짜</string>
     <string name="init_signature_template_time">시간</string>
+    <string name="init_signature_template_day_of_week">요일</string>
     <string name="init_signature_template_datetime">날짜 및 시간</string>
     <string name="init_signature_template_user">사용자</string>
     <string name="init_signature_template_number">찾은 캐시수</string>
@@ -736,6 +768,7 @@
     <string name="init_signature_template_size">크기</string>
     <string name="init_signature_template_type">유형</string>
     <string name="init_signature_template_location">위치</string>
+    <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
@@ -934,10 +967,17 @@
     <string name="init_use_native_ua">안드로이드 브라우저</string>
     <string name="init_summary_use_native_ua">안드로이드 브라우저로 인식하게 합니다. 특정 네트워크를 사용시 로그인 문제를 해결합니다.</string>
     <string name="init_rendertheme_folder">지도 테마 폴더</string>
+    <string name="init_mapshading_folder">지도 음영 파일 폴더</string>
+    <string name="init_mapshading_folder_text">오프라인 지도는 고도 정보와 중첩될 수 있습니다. 이 정보는 이 폴더에 있어야 하는 hgt/dem 파일로 제공됩니다.</string>
+    <string name="init_mapShadingLinearity_title">음영 선형성</string>
+    <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
+    <string name="init_mapShadingScale_title">음영 불투명도</string>
+    <string name="init_mapShadingScale_description">음영 레이어의 불투명도는 보이지 않는 값에서 더 높은 값까지 음영을 강화하지만 아티팩트를 생성할 수 있습니다.</string>
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
     <string name="init_maintenance_start">유지 보수 시작됨</string>
+    <string name="init_maintenance_ongoing">시간이 좀 걸릴 수 있습니다…</string>
     <string name="init_maintenance_finished">유지 보수 완료</string>
     <string name="init_location">위치 정보</string>
     <string name="init_location_note">구글플레이 서비스를 장착한 기기의 경우, c:geo는 자동적으로 더 나은 위치정보 제공자를 사용합니다. 하지만, 이렇게 하면 외부 블루투스 GPS 수신기를 사용할 수 없습니다.</string>
@@ -1040,6 +1080,7 @@
     <string name="persistablefolder_base">기본</string>
     <string name="persistablefolder_offline_maps">오프라인 지도</string>
     <string name="persistablefolder_offline_maps_themes">지도 테마</string>
+    <string name="persistablefolder_offline_maps_shading">지도 음영 파일</string>
     <string name="persistablefolder_backup">백업</string>
     <string name="persistablefolder_logfiles">로그파일</string>
     <string name="persistablefolder_fieldnotes">현장 기록</string>
@@ -1154,6 +1195,9 @@
     <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
     <string name="cache_description">설명</string>
     <string name="cache_description_table_note">설명에는 %s에서 잘 보이도록 테이블 포맷이 포함됩니다.</string>
+    <string name="cache_description_rendering">렌더링 설명, 잠시만 기다려 주십시오…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">경고: 설명이 매우 깁니다(%1$d자). 처음 %2$d%%자만 표시됩니다.</string>
+    <string name="cache_description_render_fully">전체 설명 렌더링</string>
     <string name="cache_area_description">지역 설명</string>
     <string name="cache_cache_description">캐시 설명</string>
     <string name="cache_virtual_description">가상 질문</string>
@@ -1218,6 +1262,7 @@
     <string name="cache_menu_radar">레이더</string>
     <string name="cache_menu_map">지도</string>
     <string name="cache_menu_map_ext">기타 외부 앱</string>
+    <string name="cache_menu_map_ext_nolabel">기타 외부 앱(좌표만 해당)</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
     <string name="no_browser_found">브라우저를 찾을 수 없음</string>
@@ -1269,6 +1314,9 @@
     <string name="cache_description_updated">캐시 설명이 업데이트되었습니다.</string>
     <string name="cache_type">유형</string>
     <string name="cache_size">크기</string>
+    <string name="cache_mode">모드</string>
+    <string name="cache_mode_linear">선형</string>
+    <string name="cache_mode_random">무작위</string>
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
@@ -1442,6 +1490,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">닫았음</string>
     <string name="calccoord_migrate_infotext_markdown">다음과 같이 지점에서 레거시 좌표 계산이 발견되었습니다:\n\n%1$s\n\n다음과 같이 이를 새 캐시 계산 좌표로 이동할 수 있습니다:\n\n%2$s\n\n새로운 캐시 변수 사용:%3$s\n\n다음 중 하나를 선택하십시오:\n- 제안된 대로 이동을 수행하려면 %4$s\n- 찾은 계산 데이터를 영구적으로 닫으려면 %5$s\n- 이동하지 않고 계속하려면 %6$s. 다음에 편집을 위해 지점을 열 때 이동을 다시 요청하게 됩니다. 참고: 그러나 지점 좌표를 편집하면 로컬 계산 데이터가 삭제될 수 있습니다.</string>
     <!-- Formula -->
+    <string name="formula">공식</string>
     <string name="formula_choose_function">기능 선택</string>
     <string name="formula_function_sqrt">제곱근</string>
     <string name="formula_function_sin">사인</string>
@@ -2047,7 +2096,7 @@
     <!-- permission handling -->
     <string name="close_app">앱 닫기</string>
     <string name="ask_again">다시 묻기</string>
-    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
+    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS(특정 위치)에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
@@ -2167,11 +2216,12 @@
     <string name="downloadmap_filename">다운로드 중 %s</string>
     <string name="downloadmanager_not_available">파일을 다운로드 할 수 없습니다. 시스템 다운로드 관리자를 사용할 수 없습니다.</string>
     <string name="download_started">백그라운드에서 다운로드 시작합니다.</string>
+    <string name="download_none_selected">다운로드할 파일을 선택하지 않았습니다.</string>
     <string name="downloadmap_target_not_writable">선택한 대상 \"%s\"에 쓸 수 없습니다. 다운로드한 지도 파일은 시스템 다운로드 폴더에 저장되며 수동으로 지도 폴더로 이동해야합니다.</string>
     <string name="downloadmap_allow_metered_network">종량제 네트워크를 통한 다운로드 허용 (예: 모바일 연결)</string>
     <string name="download_confirmation">%1$s다운로드 파일 \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">발견 된 업데이트:\n%1$s\n\n업데이트 하시겠습니까?%2$s</string>
-    <string name="download_warning">이 작업은 상당한 시간이 소요될 수 있으며 네트워크 연결에 따라 상당한 비용이 발생할 수 있습니다.</string>
+    <string name="download_confirmation_updates">다음에 대한 업데이트를 찾았습니다:</string>
+    <string name="download_warning">다운로드에는 상당한 시간이 소요될 수 있으며 네트워크 연결에 따라 상당한 비용이 발생할 수 있습니다.</string>
     <string name="download_error">오류 #%d로 인해 다운로드에 실패했습니다.</string>
     <string name="downloadmap_handling">다운로드 자체는 백그라운드에서 시스템의 다운로드 관리자에 의해 처리됩니다. 다운로드가 시작되자마자 알림이 표시됩니다 (시간이 걸릴 수 있음).</string>
     <string name="button_continue">계속</string>
@@ -2183,6 +2233,8 @@
     <string name="downloadmap_mapfile">지도 파일</string>
     <string name="downloadmap_themefile">테마 파일</string>
     <string name="downloadmap_tilefile">라우팅 데이터 파일</string>
+    <string name="downloadmap_othermapdownload">다른 지도 다운로드</string>
+    <string name="downloadmap_otherthemedownload">다른 테마 다운로드</string>
     <string name="downloadmap_download">다운로드</string>
     <string name="downloadmap_retrieving_directory_data">폴더 정보 찾는 중…</string>
     <string name="downloadmap_checking_for_updates">업데이트 확인중…</string>
@@ -2190,7 +2242,7 @@
     <string name="downloadtile_info">c:geo는 일부 라우팅 데이터 파일이 누락되어 요청 된 경로를 계산할 수 없습니다. 누락된 라우팅 데이터를 다운로드 하시겠습니까?</string>
     <string name="check_tiles_menu">누락된 라우팅 데이터 확인</string>
     <string name="check_tiles_found">라우팅 데이터가 이미 있음</string>
-    <string name="check_tiles_missing">누락된 라우팅 데이터를 찾았습니다: \n%1$s\n\n해당 파일을 다운로드하시겠습니까?%2$s</string>
+    <string name="check_tiles_missing">누락된 라우팅 데이터를 찾았습니다:</string>
     <string name="check_tiles_unsupported">경고: 선택한 지역에서 라우팅 데이터를 적어도 부분적으로 사용할 수 없습니다.</string>
     <string name="tileupdate_info">다운로드한 라우팅 데이터 파일의 업데이트를 확인하려면 여기를 누르십시오. 연기하려면 길게 누르세요.</string>
     <string name="mapupdate_info">지도 및 테마 파일의 업데이트를 확인하려면 여기를 누르세요. 연기하려면 길게 누르세요.</string>
@@ -2633,16 +2685,4 @@
     <string name="smiley_approve">승인</string>
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
-    <string name="smiley_cry">울음</string>
-    <string name="smiley_embarassed">부끄러움</string>
-    <string name="smiley_footinmouth">입에 발</string>
-    <string name="smiley_innocent">무고함</string>
-    <string name="smiley_kiss">키스</string>
-    <string name="smiley_laughing">웃음</string>
-    <string name="smiley_money">현금</string>
-    <string name="smiley_sealed">봉인</string>
-    <string name="smiley_surprised">놀람</string>
-    <string name="smiley_tongueout">메롱</string>
-    <string name="smiley_undecided">결정하지 못함</string>
-    <string name="smiley_yell">고함</string>
 </resources>

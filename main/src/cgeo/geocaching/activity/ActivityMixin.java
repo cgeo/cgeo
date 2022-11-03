@@ -57,15 +57,6 @@ public final class ActivityMixin {
         }
     }
 
-    public static void showProgress(final AppCompatActivity activity, final boolean show) {
-        if (activity == null) {
-            return;
-        }
-
-        activity.setSupportProgressBarIndeterminateVisibility(show);
-
-    }
-
     private static int getThemeId() {
         return R.style.cgeo;
     }

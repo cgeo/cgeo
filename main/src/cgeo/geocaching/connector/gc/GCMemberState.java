@@ -6,14 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum GCMemberState {
     UNKNOWN(""),
-    BASIC("Basic member"),
+    BASIC("Basic"),
     PREMIUM("Premium"),
     CHARTER("Charter");
 
-    @NonNull public final String englishWebsite;
+    // The id's used in the MemberStates enum match the id's used in https://www.geocaching.com/play/serverparameters/params
+    @NonNull public final String id;
 
-    GCMemberState(@NonNull final String display) {
-        this.englishWebsite = display;
+    GCMemberState(@NonNull final String id) {
+        this.id = id;
     }
 
     public boolean isPremium() {
@@ -21,15 +22,14 @@ public enum GCMemberState {
     }
 
     @NonNull
-    public static GCMemberState fromString(final String website) {
-        if (StringUtils.containsIgnoreCase(website, PREMIUM.englishWebsite)) {
+    public static GCMemberState fromString(final String id) {
+        if (StringUtils.containsIgnoreCase(id, PREMIUM.id)) {
             return PREMIUM;
         }
-        if (StringUtils.containsIgnoreCase(website, CHARTER.englishWebsite)) {
+        if (StringUtils.containsIgnoreCase(id, CHARTER.id)) {
             return CHARTER;
         }
         return GCMemberState.BASIC;
     }
 
 }
-

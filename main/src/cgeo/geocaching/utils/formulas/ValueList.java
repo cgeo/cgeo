@@ -46,7 +46,7 @@ public class ValueList implements Iterable<Value> {
         return isValidIdx(idx) && list.get(idx).isDouble() ? list.get(idx).getAsDouble() : defaultValue;
     }
 
-    public int getAsInt(final int idx, final int defaultValue) {
+    public long getAsInt(final int idx, final int defaultValue) {
         return isValidIdx(idx) && list.get(idx).isInteger() ? list.get(idx).getAsInt() : defaultValue;
     }
 

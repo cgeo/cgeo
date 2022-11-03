@@ -27,6 +27,27 @@
             tools:src="@drawable/cgeo_notification"/>
     </FrameLayout>
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/image_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/image_unavailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/button"
+        android:text="@string/cache_image_information_unavailable"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:id="@+id/imageview_headline"
         android:layout_width="match_parent"
@@ -65,7 +86,8 @@
         <RelativeLayout android:id="@+id/imageview_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBackgroundTransparent">
+            android:background="@color/colorBackgroundTransparent"
+            tools:ignore="UselessParent">
             <TextView android:id="@+id/imageview_information_text"
                 style="@style/text_default"
                 android:layout_toLeftOf="@+id/imageview_information_icon_less"

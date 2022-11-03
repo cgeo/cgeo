@@ -29,6 +29,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     public enum StatusType {
         OWNED(R.string.cache_filter_status_select_label_owned, "owned", ImageParam.id(R.drawable.marker_own)),
         FOUND(R.string.cache_filter_status_select_label_found, "found", ImageParam.id(R.drawable.marker_found)),
+        DNF(R.string.cache_filter_status_select_label_dnf, "dnf", ImageParam.id(R.drawable.marker_not_found_offline)),
         STORED(R.string.cache_filter_status_select_label_stored, "stored", ImageParam.id(R.drawable.ic_menu_save)),
         FAVORITE(R.string.cache_filter_status_select_label_favorite, "favorite", ImageParam.id(R.drawable.filter_favorite)),
         WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.id(R.drawable.ic_menu_watch)),
@@ -68,6 +69,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     private Boolean statusOwned = null;
     private Boolean statusFound = null;
+    private Boolean statusDnf = null;
     private Boolean statusStored = null;
     private Boolean statusFavorite = null;
     private Boolean statusWatchlist = null;
@@ -103,6 +105,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                         (!excludeArchived || !cache.isArchived()) &&
                         (statusOwned == null || (cache.isOwner() == statusOwned)) &&
                         (statusFound == null || cache.isFound() == statusFound) &&
+                        (statusDnf == null || cache.isDNF() == statusDnf) &&
                         (statusStored == null || cache.isOffline() == statusStored) &&
                         (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
                         (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
@@ -154,6 +157,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     public void setStatusFound(final Boolean statusFound) {
         this.statusFound = statusFound;
+    }
+
+    public Boolean getStatusDnf() {
+        return statusDnf;
+    }
+
+    public void setStatusDnf(final Boolean statusDnf) {
+        this.statusDnf = statusDnf;
     }
 
     public Boolean getStatusStored() {
@@ -240,6 +251,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     public void setConfig(final ExpressionConfig config) {
         statusOwned = null;
         statusFound = null;
+        statusDnf = null;
         statusStored = null;
         statusFavorite = null;
         statusWatchlist = null;
@@ -256,6 +268,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         for (String value : config.getDefaultList()) {
             checkAndSetBooleanFlag(value, StatusType.OWNED, b -> statusOwned = b);
             checkAndSetBooleanFlag(value, StatusType.FOUND, b -> statusFound = b);
+            checkAndSetBooleanFlag(value, StatusType.DNF, b -> statusDnf = b);
             checkAndSetBooleanFlag(value, StatusType.STORED, b -> statusStored = b);
             checkAndSetBooleanFlag(value, StatusType.FAVORITE, b -> statusFavorite = b);
             checkAndSetBooleanFlag(value, StatusType.WATCHLIST, b -> statusWatchlist = b);
@@ -291,6 +304,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         final ExpressionConfig result = new ExpressionConfig();
         checkAndAddFlagToDefaultList(statusOwned, StatusType.OWNED, result);
         checkAndAddFlagToDefaultList(statusFound, StatusType.FOUND, result);
+        checkAndAddFlagToDefaultList(statusDnf, StatusType.DNF, result);
         checkAndAddFlagToDefaultList(statusStored, StatusType.STORED, result);
         checkAndAddFlagToDefaultList(statusFavorite, StatusType.FAVORITE, result);
         checkAndAddFlagToDefaultList(statusWatchlist, StatusType.WATCHLIST, result);
@@ -324,7 +338,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public boolean isFiltering() {
-        return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
+        return statusOwned != null || statusFound != null || statusDnf != null || statusStored != null || statusFavorite != null ||
                 statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
                 statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
                 statusSolvedMystery != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
@@ -341,6 +355,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             }
             if (statusFound != null) {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found " + (statusFound ? "= 1" : "<> 1"));
+            }
+            if (statusDnf != null) {
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found " + (statusDnf ? "= -1" : "<> -1"));
             }
             if (statusStored != null && !statusStored) {
                 //this seems stupid, but we have to simply set a condition which is never true
@@ -425,6 +442,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         final StringBuilder sb = new StringBuilder();
         int count = 0;
         count = addIfStillFits(sb, count, statusFound, StatusType.FOUND);
+        count = addIfStillFits(sb, count, statusDnf, StatusType.DNF);
         count = addIfStillFits(sb, count, statusOwned, StatusType.OWNED);
         count = addIfStillFits(sb, count, statusStored, StatusType.STORED);
         count = addIfStillFits(sb, count, statusFavorite, StatusType.FAVORITE);
@@ -454,7 +472,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         if (status != null) {
             if (cnt < USERDISPLAY_MAXELEMENTS) {
                 if (cnt > 0) {
-                    sb.append(",");
+                    sb.append(", ");
                 }
                 sb.append(LocalizationUtils.getString(statusType.labelId)).append("=")
                         .append(LocalizationUtils.getString(status ? R.string.cache_filter_status_select_yes : R.string.cache_filter_status_select_no));
@@ -468,7 +486,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         if (status) {
             if (cnt < USERDISPLAY_MAXELEMENTS) {
                 if (cnt > 0) {
-                    sb.append(",");
+                    sb.append(", ");
                 }
                 sb.append(LocalizationUtils.getString(textId));
             }

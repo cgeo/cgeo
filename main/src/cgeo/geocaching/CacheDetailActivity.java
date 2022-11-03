@@ -58,13 +58,13 @@ import cgeo.geocaching.models.WaypointParser;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -95,7 +95,6 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -118,20 +117,19 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.InputType;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -151,14 +149,15 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -177,6 +176,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -230,6 +230,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     protected ImagesList imagesList;
 
     private ImageGalleryView imageGallery;
+    private int imageGalleryPos = 0;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
@@ -387,14 +388,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
 
-        // get notified on cache changes (e.g.: waypoint creation from map)
-        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, Intents.INTENT_CACHE_CHANGED) {
-            /**
-             * Receives update notifications from asynchronous processes
-             */
+        // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
-            public void onReceive(final Context context, final Intent intent) {
-                notifyDataSetChanged();
+            protected void onReceive(final Context context, final String geocode) {
+                if (cache != null && cache.getGeocode().equals(geocode)) {
+                    notifyDataSetChanged();
+                }
             }
         });
     }
@@ -501,21 +501,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (itemId == R.id.menu_waypoint_visited) {
             if (selectedWaypoint != null) {
                 ensureSaved();
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(final Void... params) {
-                        selectedWaypoint.setVisited(true);
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-
-                    @Override
-                    protected void onPostExecute(final Boolean result) {
-                        if (result) {
-                            notifyDataSetChanged();
-                        }
-                    }
-                }.execute();
+                AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                    selectedWaypoint.setVisited(true);
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                }, this::notifyDataSetChanged);
             }
         } else if (itemId == R.id.menu_waypoint_copy_coordinates) {
             if (selectedWaypoint != null) {
@@ -533,23 +522,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_waypoint_duplicate) {
             ensureSaved();
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    if (cache.duplicateWaypoint(selectedWaypoint, true) != null) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-                    return false;
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                if (cache.duplicateWaypoint(selectedWaypoint, true) != null) {
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                    return true;
                 }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                    }
+                return false;
+            }, result -> {
+                if (result) {
+                    notifyDataSetChanged();
                 }
-            }.execute();
+            });
         } else if (itemId == R.id.menu_waypoint_toclipboard) {
             if (selectedWaypoint != null) {
                 ensureSaved();
@@ -572,24 +555,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_waypoint_delete) {
             ensureSaved();
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    if (cache.deleteWaypoint(selectedWaypoint)) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                        return true;
-                    }
-                    return false;
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                if (cache.deleteWaypoint(selectedWaypoint)) {
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                    return true;
                 }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                        LocalBroadcastManager.getInstance(CacheDetailActivity.this).sendBroadcast(new Intent(Intents.INTENT_CACHE_CHANGED));
-                    }
+                return false;
+            }, result -> {
+                if (result) {
+                    notifyDataSetChanged();
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(CacheDetailActivity.this, cache.getGeocode());
                 }
-            }.execute();
+            });
         } else if (itemId == R.id.menu_waypoint_navigate_default) {
             if (selectedWaypoint != null) {
                 NavigationAppFactory.startDefaultNavigationApplication(1, this, selectedWaypoint);
@@ -755,27 +732,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_toggleWaypointsFromNote) {
             cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
             setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(final Void... params) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    return true;
-                }
-
-                @Override
-                protected void onPostExecute(final Boolean result) {
-                    if (result) {
-                        notifyDataSetChanged();
-                    }
-                }
-            }.execute();
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)), this::notifyDataSetChanged);
         } else if (menuItem == R.id.menu_clear_goto_history) {
             SimpleDialog.of(this).setTitle(R.string.clear_goto_history_title).setMessage(R.string.clear_goto_history).confirm((dialog, which) -> AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::clearGotoHistory, () -> {
                 cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                 notifyDataSetChanged();
             }));
         } else if (menuItem == R.id.menu_export_gpx) {
-            new GpxExport().export(Collections.singletonList(cache), this);
+            new GpxExport().export(Collections.singletonList(cache), this, cache.getName());
         } else if (menuItem == R.id.menu_export_fieldnotes) {
             new FieldNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
@@ -1198,8 +1162,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CacheDetailsCreator details = new CacheDetailsCreator(activity, binding.detailsList);
 
             // cache name (full name), may be editable
-            final SpannableString span = TextUtils.coloredCacheText(cache, cache.getName());
-            final TextView cachename = details.add(R.string.cache_name, span).valueView;
+            // Not using colored cache names at this place to have at least one place without any formatting to support visually impaired users
+            final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
             activity.addContextMenu(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
@@ -1211,6 +1175,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             details.add(R.string.cache_type, cache.getType().getL10n());
+            if (cache.getType() == CacheType.ADVLAB) {
+                details.addAlcMode(cache);
+            }
             details.addSize(cache);
             activity.addContextMenu(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
@@ -1329,7 +1296,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 attributesText.append("<br />");
                             }
                             orderedAttributeNames.add(key);
-                            attributesText.append(attr.getL10n(enabled == null ? true : enabled));
+                            attributesText.append(attr.getL10n(enabled == null || enabled));
                         }
                     }
                 }
@@ -1669,7 +1636,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
+        private static final int DESCRIPTION_MAX_SAFE_LENGTH = 50000;
+
         private Geocache cache;
+
 
         @Override
         public CachedetailDescriptionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -1696,20 +1666,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
-            // reset description
-            binding.description.setText("");
+            // load description
+            reloadDescription(this.getActivity(), cache, binding.description, binding.descriptionRenderFully, true);
 
-            // cache short description
-            if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(activity, cache.getShortDescription(), false, binding.description, null);
-            }
-
-            // long description
-            if (StringUtils.isNotBlank(cache.getDescription()) || cache.supportsDescriptionchange()) {
-                loadLongDescription(activity, container);
-            }
-
-            fixOldGeocheckerLink(activity);
+            //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
             binding.descriptionChecker.setVisibility(checkerUrl == null ? View.GONE : View.VISIBLE);
             if (checkerUrl != null) {
@@ -1848,22 +1808,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }));
         }
 
-        private void loadLongDescription(final CacheDetailActivity activity, final ViewGroup parentView) {
-            binding.loading.setVisibility(View.VISIBLE);
-
-            final String longDescription = cache.getDescription();
-            loadDescription(activity, longDescription, true, binding.description, binding.loading);
-
-            if (cache.supportsDescriptionchange()) {
-                binding.description.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
-                    binding.description.setText(description);
-                    cache.setDescription(description);
-                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                    Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
-                }));
-            }
-        }
-
         private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity, final int personalNoteLength, final int maxPersonalNotesChars, final String connectorName) {
             final int reduceLength = personalNoteLength - maxPersonalNotesChars;
             SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, maxPersonalNotesChars, connectorName).confirm(
@@ -1873,61 +1817,135 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     });
         }
 
-        /**
-         * Load the description in the background.
-         *
-         * @param descriptionString    the HTML description as retrieved from the connector
-         * @param descriptionView      the view to fill
-         * @param loadingIndicatorView the loading indicator view, will be hidden when completed
-         */
-        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
-            try {
-                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
-                activity.addWarning(unknownTagsHandler, description);
-                if (StringUtils.isNotBlank(description)) {
-                    fixRelativeLinks(description);
-                    fixTextColor(description, R.color.colorBackground);
-
-                    // check if short description is contained in long description
-                    boolean longDescriptionContainsShortDescription = false;
-                    final String shortDescription = cache.getShortDescription();
-                    if (StringUtils.isNotBlank(shortDescription)) {
-                        final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
-                        // allow up to 200 characters of HTML formatting
-                        if (index >= 0 && index < 200) {
-                            longDescriptionContainsShortDescription = true;
-                        }
+        /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
+        private static void reloadDescription(final Activity activity, final Geocache cache, final TextView descriptionView, final View descriptionFullLoadButton, final boolean restrictLength) {
+            descriptionFullLoadButton.setVisibility(View.GONE);
+            descriptionView.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            descriptionView.setVisibility(View.VISIBLE);
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
+                createDescriptionContent(activity, cache, restrictLength, descriptionView), p -> {
+                    displayDescription(activity, cache, p.first, descriptionView);
+                    if (p.second) {
+                        descriptionFullLoadButton.setVisibility(View.VISIBLE);
+                        descriptionFullLoadButton.setOnClickListener(v ->
+                                reloadDescription(activity, cache, descriptionView, descriptionFullLoadButton, false));
                     }
-
-                    try {
-                        if (descriptionView.getText().length() == 0 || (longDescriptionContainsShortDescription && isLongDescription)) {
-                            descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                        } else if (!longDescriptionContainsShortDescription) {
-                            descriptionView.append("\n");
-                            descriptionView.append(description);
-                        }
-                    } catch (final Exception e) {
-                        // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                        Log.e("Android bug setting text: ", e);
-                        // remove the formatting by converting to a simple string
-                        descriptionView.append(description.toString());
-                    }
-
-                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    descriptionView.setVisibility(View.VISIBLE);
-                    activity.addContextMenu(descriptionView);
                 }
-                if (loadingIndicatorView != null) {
-                    loadingIndicatorView.setVisibility(View.GONE);
+            );
+        }
+
+        /** displays given description into listing textview */
+        @MainThread
+        private static void displayDescription(final Activity activity, final Geocache cache, final CharSequence renderedDescription, final TextView descriptionView) {
+            try {
+                descriptionView.setText(renderedDescription, TextView.BufferType.SPANNABLE);
+                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                if (cache.supportsDescriptionchange()) {
+                    descriptionView.setOnClickListener(v ->
+                            Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
+                                descriptionView.setText(description);
+                                cache.setDescription(description);
+                                DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                                Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                            }));
+                } else {
+                    descriptionView.setOnClickListener(null);
                 }
             } catch (final RuntimeException ignored) {
-                activity.showToast(getString(R.string.err_load_descr_failed));
+                ActivityMixin.showToast(activity, R.string.err_load_descr_failed);
             }
         }
 
-        private void fixRelativeLinks(final Spannable spannable) {
-            final String baseUrl = ConnectorFactory.getConnector(cache).getHostUrl() + "/";
+        /** CALL IN BACKGROUND ONLY! Renders cache description into an Editable. */
+        // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+        @WorkerThread
+        private static Pair<CharSequence, Boolean> createDescriptionContent(final Activity activity, final Geocache cache, final boolean restrictLength, final TextView descriptionView) {
+
+            try {
+                //combine short and long description to the final description to render
+                String descriptionText = cache.getDescription();
+                final String shortDescriptionText = cache.getShortDescription();
+                if (StringUtils.isNotBlank(shortDescriptionText)) {
+                    final int index = StringUtils.indexOf(descriptionText, shortDescriptionText);
+                    // allow up to 200 characters of HTML formatting
+                    if (index < 0 || index > 200) {
+                        descriptionText = shortDescriptionText + "\n" + descriptionText;
+                    }
+                }
+
+                final int descriptionFullLength = descriptionText.length();
+
+                //check for too-long-listing
+                final boolean textTooLong = descriptionFullLength > DESCRIPTION_MAX_SAFE_LENGTH;
+                if (textTooLong && restrictLength) {
+                    descriptionText = descriptionText.substring(0, DESCRIPTION_MAX_SAFE_LENGTH);
+                }
+
+                //Format to HTML. This takes time on long listings or those with e.g. many images...
+                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionText, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
+
+                if (StringUtils.isNotBlank(description)) {
+                    handleImageClick(activity, cache, description);
+                    //display various fixes
+                    fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
+                    fixTextColor(description, R.color.colorBackground);
+                    final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
+                    fixOldGeocheckerLink(activity, cache, description, gcLinkInfo);
+                }
+
+                // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
+                // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
+                // sometimes technically incorrect.
+                if (unknownTagsHandler.isProblematicDetected()) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (StringUtils.isNotEmpty(cache.getUrl())) {
+                        final Spanned tableNote = HtmlCompat.fromHtml(activity.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
+                        description.append("\n\n").append(TextUtils.setSpan(tableNote, new StyleSpan(Typeface.ITALIC)));
+                    }
+                }
+
+                //add warning on too-long-listing
+                if (textTooLong && restrictLength) {
+                    description.append("\n\n")
+                            .append(TextParam.id(R.string.cache_description_render_restricted_warning, descriptionFullLength, DESCRIPTION_MAX_SAFE_LENGTH * 100 / descriptionFullLength).getText(null), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+
+                return new Pair<>(description, textTooLong);
+            } catch (final RuntimeException re) {
+                return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
+            }
+        }
+
+        private static void handleImageClick(final Activity activity, final Geocache cache, final Spannable spannable) {
+            final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
+            for (final ImageSpan span : spans) {
+                final ClickableSpan clickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(final View textView) {
+                        final String imageUrl = span.getSource();
+                        final List<Image> listingImages = cache.getNonStaticImages();
+                        CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
+
+                        final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));
+
+                        if (Settings.enableFeatureNewImageGallery()) {
+                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
+                        }
+                    }
+
+                    @Override
+                    public void updateDrawState(final TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setUnderlineText(false);
+                    }
+                };
+                spannable.setSpan(clickableSpan, spannable.getSpanStart(span), spannable.getSpanEnd(span), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
@@ -1935,7 +1953,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     final int start = spannable.getSpanStart(span);
                     final int end = spannable.getSpanEnd(span);
                     final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = Uri.parse(baseUrl + uri.toString());
+                    final Uri absoluteUri = Uri.parse(baseUrl + uri);
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
                 }
@@ -1951,9 +1969,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          *
          * @param activity calling activity
          */
-        private void fixOldGeocheckerLink(final Activity activity) {
-            final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
-            final Spannable spannable = (Spannable) binding.description.getText();
+        private static void fixOldGeocheckerLink(final Activity activity, final Geocache cache, final Spannable spannable, final String gcLinkInfo) {
 
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
             for (final URLSpan span : spans) {
@@ -1972,21 +1988,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-    }
-
-    // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
-    // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
-    // sometimes technically incorrect.
-    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Editable description) {
-        if (unknownTagsHandler.isProblematicDetected()) {
-            final int startPos = description.length();
-            final IConnector connector = ConnectorFactory.getConnector(cache);
-            if (StringUtils.isNotEmpty(cache.getUrl())) {
-                final Spanned tableNote = HtmlCompat.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
-                description.append("\n\n").append(tableNote);
-                description.setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
     }
 
     private static void fixTextColor(final Spannable spannable, final int backgroundColor) {
@@ -2009,13 +2010,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.getLists().add(StoredList.STANDARD_LIST_ID);
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(final Void... params) {
-                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                    return null;
-                }
-            }.execute();
+            AndroidRxUtils.computationScheduler.scheduleDirect(() -> DataStore.saveCache(cache, LoadFlags.SAVE_ALL));
             notifyDataSetChanged();
         }
     }
@@ -2098,7 +2093,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setOnScrollListener(new FastScrollListener(v));
 
             //register for changes of variableslist -> calculated waypoints may have changed
-            cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(() -> adapter.notifyDataSetChanged()));
+            cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(adapter::notifyDataSetChanged));
 
             if (v.getHeaderViewsCount() < 1) {
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
@@ -2220,7 +2215,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 noteView.setOnClickListener(new DecryptTextClickListener(noteView));
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
-                    noteView.setText(HtmlCompat.fromHtml(wpt.getNote(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(cache.getGeocode(), noteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+                    noteView.setText(HtmlCompat.fromHtml(wpt.getNote(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, noteView, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 } else {
                     noteView.setText(wpt.getNote());
                 }
@@ -2354,10 +2349,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             binding.getRoot().setVisibility(View.VISIBLE);
 
+            binding.experimental.setOnClickListener(v -> {
+                binding.imageGallery.scrollTo(binding.imageGallery.getImageCount() - 1);
+            });
+
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
-                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages());
+                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages(), true);
                 activity.imageGallery = imageGallery;
+                activity.imageGallery.initializeToPosition(activity.imageGalleryPos);
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
@@ -2424,6 +2424,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (imageGallery != null) {
             imageGallery.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public void onActivityReenter(final int resultCode, final Intent data) {
+        super.onActivityReenter(resultCode, data);
+        this.imageGalleryPos = ImageGalleryView.onActivityReenter(this, this.imageGallery, data);
     }
 
     @Override
@@ -2612,7 +2618,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.IMAGEGALLERY.id) {
             String title = "*" + this.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
-                title += " (" + this.imageGallery.getCount() + ")";
+                title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return  title;
         }  else if (pageId == Page.LOGSFRIENDS.id) {

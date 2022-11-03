@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -116,6 +117,7 @@ public final class SystemInformation {
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
             body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
+            body.append("\n- Geocaching.com website language: ").append(GCLogin.getInstance().getWebsiteLanguage());
         }
         final Pair<String, Long> gcError = Settings.getLastLoginErrorGC();
         if (gcError != null) {
@@ -205,7 +207,7 @@ public final class SystemInformation {
             final boolean isAvailable = ContentStorage.get().ensureFolder(folder);
             final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
-            body.append("\n  - ").append(folder.toString())
+            body.append("\n  - ").append(folder)
                     .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
                     .append(", Av:").append(isAvailable).append(", ").append(folderInfo)
                     .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");

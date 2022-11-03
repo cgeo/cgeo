@@ -77,6 +77,10 @@
                 </item>
             </menu>
         </item>
+        <item
+            android:id="@+id/menu_pending_downloads"
+            android:title="@string/downloader_pending_downloads">
+        </item>
     </group>
     <group android:id="@+id/menu_group_about">
         <item

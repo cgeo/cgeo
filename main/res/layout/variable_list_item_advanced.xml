@@ -52,7 +52,8 @@
                     android:minWidth="@dimen/textSize_buttonsPrimary"
                     android:layout_marginTop="6dp"
                     android:textSize="24sp"
-                    android:text="𝑓" />
+                    android:text="𝑓"
+                    tools:ignore="HardcodedText" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/variable_formula"

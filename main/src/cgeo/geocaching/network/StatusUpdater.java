@@ -3,7 +3,6 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -99,9 +98,8 @@ public class StatusUpdater {
             final Parameters installerParameters = StringUtils.isNotBlank(installer) ? new Parameters("installer", installer) : null;
             final Parameters gcMembershipParameters;
             if (Settings.isGCConnectorActive()) {
-                final GCMemberState memberState = Settings.getGCMemberStatus();
                 gcMembershipParameters = new Parameters("gc_membership",
-                        memberState == GCMemberState.PREMIUM || memberState == GCMemberState.CHARTER ? "premium" : "basic");
+                        Settings.getGCMemberStatus().isPremium() ? "premium" : "basic");
             } else {
                 gcMembershipParameters = null;
             }

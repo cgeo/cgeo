@@ -65,7 +65,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
         stringBuilder.append(ADD_MAP_MARKER);
         if (CollectionUtils.isNotEmpty(parameters)) {
             stringBuilder.append('?');
-            stringBuilder.append(parameters.toString());
+            stringBuilder.append(parameters);
         }
         return new Intent(Intent.ACTION_VIEW, Uri.parse(stringBuilder.toString()));
     }

@@ -356,13 +356,20 @@
         <item quantity="one">%d minut</item>
         <item quantity="other">%d minuts</item>
     </plurals>
-    <string name="caches_store_offline">Desa per usar fora de línia</string>
-    <string name="caches_store_all">Desar-ho tot</string>
-    <string name="caches_store_unsaved">Desa el que manca per desar</string>
+    <string name="caches_store_offline">Desa fora de línia</string>
+    <string name="caches_store_offline_map">Desa els catxés fora de línia</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
-    <string name="caches_store_background">Baixada de fons (experimental!)</string>
-    <string name="caches_store_refresh_background">Actualització de fons (experimental!)</string>
     <string name="caches_store_background_title">Descarregar catxés</string>
+    <string name="caches_store_background_already_stored">Alguns cachés ja estan emmagatzemats. Què hauria de passar amb ells?</string>
+    <string name="caches_store_background_option_nothing">No fer res</string>
+    <string name="caches_store_background_option_add_to_list">Afegir a la llista</string>
+    <string name="caches_store_background_option_refresh">Actualitza i afegeix a la llista</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">La descàrrega ha fallat, s\'han baixat %1$d/%2$d catxés</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">La descàrrega s\'ha cancel·lat, s\'han baixat %1$d/%2$d catxés</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">S\'ha descarregat %d catxécatxé</item>
+        <item quantity="other">S\'ha descarregat %d catxés</item>
+    </plurals>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
@@ -552,7 +559,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Té Registre \"Trobat\" Fora de línia</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misteri Resolt</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Té Punts de ruta definits per l\'usuari</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Aquest paràmetre de filtre només afectarà els catxés misteri.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o bé ha completat un punt de ruta final vàlid.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Aquesta configuració de filtre només afectarà els catxés misteri. Si voleu excloure altres tipus de catxés, definiu un filtre de tipus de catxé adequat.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o un waypoint final vàlid ple de coordenades.</string>
     <string name="cache_filter_status_active">Actiu</string>
     <string name="cache_filter_status_disabled">Desactivat</string>
     <string name="cache_filter_status_archived">Arxivat</string>
@@ -625,7 +632,33 @@
     <string name="debug_user_error_report_title">Informar d\'un problema</string>
     <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
     <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar els problemes de c: geo informant-los per correu electrònic amb informació del sistema i el fitxer de registre inclòs.\nIncloeu sempre una descripció detallada de l’error al vostre correu electrònic!\n\nAbans d’enviar un missatge, consulteu també les nostres FAQ i / o presència a les xarxes socials per problemes coneguts.\nPodeu trobar altres opcions de contacte a \"Quant a c: geo\"</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Descàrregues actuals</string>
+    <string name="downloader_pending_downloads">Descàrregues pendents</string>
+    <string name="downloader_no_pending_downloads">No hi ha baixades pendents actualment</string>
+    <string name="downloader_cancel_download">Cancel·la la descàrrega</string>
+    <string name="downloader_cancel_file">Cancel·lar la baixada pendent de \"%s\" i eliminar les parts baixades?</string>
+    <string name="downloader_cancelled_download">S\'ha cancel·lat la baixada de \"%s\"</string>
+    <string name="downloader_pending_info">Hi ha almenys una descàrrega en pausa o fallada. Vols obrir la llista de baixades pendents?</string>
+    <string name="downloader_retry_download">Torna a provar de descarregar</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">La baixada ha fallat (i no es tornarà a provar)</string>
+    <string name="asdm_status_paused">La baixada està esperant per tornar-ho a provar o reprendre</string>
+    <string name="asdm_status_pending">La descàrrega està esperant per començar</string>
+    <string name="asdm_status_running">La baixada s\'està executant</string>
+    <string name="asdm_status_successful">La baixada s\'ha completat correctament</string>
+    <string name="asdm_paused_queued_for_wifi">En pausa: Esperant Wifi</string>
+    <string name="asdm_paused_unknown">En pausa per algun altre motiu</string>
+    <string name="asdm_paused_waiting_for_network">En pausa: S\'està esperant que la connectivitat de xarxa continuï</string>
+    <string name="asdm_paused_waiting_to_retry">En pausa: S\'ha produït un error de xarxa i el gestor de descàrregues està esperant abans de tornar a provar la sol·licitud</string>
+    <string name="asdm_error_cannot_resume">Error: S\'ha produït algun error possiblement transitori, però no podem reprendre la baixada</string>
+    <string name="asdm_error_device_not_found">Error: No s\'ha trobat cap dispositiu d\'emmagatzematge extern. La targeta SD està muntada?</string>
+    <string name="asdm_error_file_already_exists">Error: El fitxer de destinació sol·licitat ja existeix, no se sobreescriurà</string>
+    <string name="asdm_error_file_error">Error: Problema d\'emmagatzematge desconegut</string>
+    <string name="asdm_error_http_data_error">Error: Error de processament HTTP a nivell de dades</string>
+    <string name="asdm_error_insufficient_space">Error: Espai d\'emmagatzematge insuficient</string>
+    <string name="asdm_error_too_many_redirects">Error: Massa redireccions</string>
+    <string name="asdm_error_unhandled_http_code">Error: Codi HTTP no gestionat</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -641,6 +674,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
+    <string name="settings_title_offline_maps">Mapes fora de línia</string>
     <string name="settings_title_offline_routing">Encaminament fora de línia</string>
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>
@@ -726,6 +760,7 @@
     <string name="init_signature_template_button">Insereix un marcador de posició</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
+    <string name="init_signature_template_day_of_week">Dia de la setmana</string>
     <string name="init_signature_template_datetime">Data i hora</string>
     <string name="init_signature_template_user">Usuari</string>
     <string name="init_signature_template_number">Número</string>
@@ -936,10 +971,17 @@
     <string name="init_use_native_ua">Navegador d\'Android</string>
     <string name="init_summary_use_native_ua">Identifica com a navegador d\'Android. Resol els problemes de connexió quan utilitzeu certs proveïdors de xarxa.</string>
     <string name="init_rendertheme_folder">Carpeta de temes de mapes</string>
+    <string name="init_mapshading_folder">Carpeta de fitxers d\'ombrejat de mapes</string>
+    <string name="init_mapshading_folder_text">Els mapes fora de línia es poden superposar amb informació d\'elevació. Aquesta informació es proporciona com a fitxers hgt/dem que s\'han de col·locar en aquesta carpeta.</string>
+    <string name="init_mapShadingLinearity_title">Linealitat de l\'ombrejat</string>
+    <string name="init_mapShadingLinearity_description">Els valors petits accentuen el contrast en pendents pronunciats però amaguen els canvis en plans, els valors grans el fan més lineal</string>
+    <string name="init_mapShadingScale_title">Opacitat d\'ombrejat</string>
+    <string name="init_mapShadingScale_description">Opacitat de la capa d\'ombrejat, des de valors invisibles fins a valors més alts que intensifiquen l\'ombrejat</string>
     <string name="init_maintenance">Manteniment</string>
     <string name="init_maintenance_directories_note">C: geo emmagatzema imatges i altres fitxers relacionats amb catxés en una carpeta dedicada. En alguns casos (per exemple, quan s’importa / exporta la base de dades), aquesta carpeta pot contenir fitxers obsolets que es poden suprimir aquí.</string>
     <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
     <string name="init_maintenance_start">S\'ha iniciat el manteniment</string>
+    <string name="init_maintenance_ongoing">Això pot trigar una mica…</string>
     <string name="init_maintenance_finished">Manteniment acabat</string>
     <string name="init_location">Geolocalització</string>
     <string name="init_location_note">En dispositius equipats amb Google Play el c:geo pot utilitzar automàticament un proveïdor de geolocalització millor. Tanmateix, això evita l\'ús d\'un receptor GPS BlueTooth extern.</string>
@@ -982,6 +1024,8 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Utilitzeu un mapa unificat</string>
+    <string name="init_summary_useUnifiedMap">Utilitzeu un mapa unificat nou en lloc dels mapes integrats de Google Map/Mapsforge (OSM) (experimentals / lluny d\'estar complets / només per a proves)</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -1040,6 +1084,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapes fora de línia</string>
     <string name="persistablefolder_offline_maps_themes">Temes de mapes</string>
+    <string name="persistablefolder_offline_maps_shading">Fitxers d\'ombrejat de mapes</string>
     <string name="persistablefolder_backup">Còpia de seguretat</string>
     <string name="persistablefolder_logfiles">Arxius de registre</string>
     <string name="persistablefolder_fieldnotes">Notes de camp</string>
@@ -1154,6 +1199,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">No s\'han trobat punts de ruta per guardar</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Eviteu l\'extracció de punts de ruta</string>
     <string name="cache_personal_note_limit">Límit de la nota personal</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Aquesta nota personal es veurà truncada aprox. %1$d caràcters per %3$s (mida màxima %2$d).</string>
     <string name="cache_personal_note_upload">Puja</string>
     <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
     <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
@@ -1225,6 +1271,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_map_ext">Altres aplicacions externes</string>
+    <string name="cache_menu_map_ext_nolabel">Altres aplicacions externes (només Coords)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Obre al navegador</string>
     <string name="no_browser_found">No s\'ha trobat cap navegador</string>
@@ -1276,6 +1323,9 @@
     <string name="cache_description_updated">S\'ha actualitzat la descripció del catxé</string>
     <string name="cache_type">Tipus</string>
     <string name="cache_size">Mida</string>
+    <string name="cache_mode">Mode</string>
+    <string name="cache_mode_linear">Lineal</string>
+    <string name="cache_mode_random">Aleatori</string>
     <string name="cache_distance">Distància</string>
     <string name="cache_difficulty">Dificultat</string>
     <string name="cache_terrain">Terreny</string>
@@ -1296,10 +1346,15 @@
     <string name="cache_remove_from_history">Suprimeix de l\'historial</string>
     <string name="cache_license">Llicència</string>
     <string name="cache_image">Imatge</string>
+    <string name="cache_image_open">Obert</string>
     <string name="cache_image_open_file">Obre com a fitxer</string>
     <string name="cache_image_open_browser">Obre al navegador</string>
+    <string name="cache_image_share">Compartir</string>
     <string name="cache_image_show_description">Mostra descripció</string>
     <string name="cache_image_add_waypoint">Afegeix fita</string>
+    <string name="cache_image_rename">Canvia el nom</string>
+    <string name="cache_image_delete">Suprimeix</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Imatge de fons del geoamagatall</string>
     <string name="cache_share_field">Comparteix</string>
     <string name="cache_time_full_hours">en punt</string>
@@ -1313,6 +1368,13 @@
     <string name="cache_alc_install">Instal·leu el reproductor Adventure Lab per jugar a aquesta aventura</string>
     <string name="context_share_as_text">Compartir text</string>
     <string name="context_share_as_link">Compartir Enllaç</string>
+    <string name="image_category_uncategorized">Sense categoria</string>
+    <string name="image_category_own">Propi</string>
+    <string name="image_category_listing">Descripció</string>
+    <string name="image_category_log">Registre</string>
+    <string name="context_map_add_to_route">Adjuntar a la ruta</string>
+    <string name="context_map_add_to_route_start">Afegiu a la ruta</string>
+    <string name="context_map_show_coords">Mostra les coordenades</string>
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
     <string name="create_internal_cache_short">Nou catxé</string>
     <string name="create_internal_cache_currentlist">Utilitzeu la llista actual</string>
@@ -1414,6 +1476,8 @@
     <string name="variables_deleteall">Eliminar tots</string>
     <string name="variables_deleteall_confirm_text">Realment voleu suprimir totes les variables d\'aquest catxé?</string>
     <string name="variables_info">Ajuda</string>
+    <string name="variables_varname_dialog_title">Nom de la variable</string>
+    <string name="variables_varname_dialog_message">Introduïu el nom de la variable (pot quedar en blanc)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Mode guiat</string>
     <string name="calccoord_guided_edit">Toca un dígit per editar</string>
@@ -1436,6 +1500,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Descartat</string>
     <string name="calccoord_migrate_infotext_markdown">S\'ha trobat un càlcul de coordenades heretades en aquest punt de ruta:\n\n%1$s\n\nPodeu migrar-ho a les noves coordenades de càlcul del catxé de la següent manera:\n\n%2$s\n\namb variables de catxé noves: %3$s\n\nSi us plau, trieu:\n- %4$s per dur a terme la migració tal com s\'ha suggerit\n- %5$s per descartar les dades de càlcul trobades perquè\n- %6$s continuï sense migració. Se us demanarà de nou la migració la propera vegada que obriu el punt de ruta per editar-lo. Tingueu en compte, però, que l\'edició de les coordenades del punt de ruta podria suprimir les dades de càlcul local.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Trieu la funció</string>
     <string name="formula_function_sqrt">Arrel quadrada</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
@@ -1464,6 +1529,10 @@
     <string name="formula_error_empty">Fórmula buida</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">Sense títol</string>
+    <string name="imageview_mimetype">Mimetitzat</string>
+    <string name="imageview_metadata_geopoint">Geopunt</string>
+    <string name="imageview_metadata_comment">Comenta</string>
     <!-- visit -->
     <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->
@@ -1956,6 +2025,7 @@
     <string name="tts_toggle">Activa/Desact. la veu</string>
     <string name="tts_started">S\'ha iniciat el mode parlat</string>
     <string name="tts_stopped">S\'ha aturat el mode parlat</string>
+    <string name="tts_running">El servei de veu està en funcionament…</string>
     <string name="err_tts_lang_not_supported">La llengua actual no és compatible amb la síntesi de veu.</string>
     <string name="tts_one_kilometer">un quilòmetre</string>
     <plurals name="tts_kilometers">
@@ -1984,6 +2054,10 @@
     <plurals name="days_ago">
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">D\'aquí a %d dia</item>
+        <item quantity="other">D\'aquí a %d dies</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
@@ -2045,7 +2119,6 @@
     <!-- permission handling -->
     <string name="close_app">Tanca l\'aplicació</string>
     <string name="ask_again">Torna a preguntar</string>
-    <string name="location_permission_request_explanation">c:geo necessita l\'accés al GPS del dispositiu per localitzar la vostra posició i calcular la distància i la direcció als catxés. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_request_explanation">c:geo escriurà dades al vostre telèfon o a la targeta SD tan bon punt guardeu els catxés per a un ús fora de línia. A més, c:geo utilitzarà l’emmagatzematge del vostre telèfon per a la importació i exportació d’arxius i lectura de mapes fora de línia. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
@@ -2065,6 +2138,8 @@
     <string name="notification_channel_foreground_description">es mostra la notificació mentre C:geo treballa en segon pla</string>
     <string name="notification_channel_downloader_name">descarregador c:geo</string>
     <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
+    <string name="notification_channel_cache_download_name">descàrrega de catxé</string>
+    <string name="notification_channel_cache_download_description">notificacions de resultats per a les baixades de fons de catxés</string>
     <string name="notification_proximity_title">notificació de proximitat de c:geo</string>
     <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
@@ -2150,6 +2225,10 @@
     <string name="receivedownload_cancelled">S\'ha cancel·lat la transferència de fitxers</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
+    <string name="delete_offlinemap_title">Suprimeix el mapa fora de línia</string>
+    <string name="no_deletable_offlinemaps">No es poden esborrar mapes fora de línia</string>
+    <string name="delete_file_confirmation">Vols suprimir %s?</string>
+    <string name="file_deleted_info">%s suprimit</string>
     <string name="download_title">Descarrega l\'arxiu</string>
     <string name="downloadmap_info">Seleccioneu un fitxer de mapa per a la vostra regió tocant la icona \"Desa\".\n\nLa baixada es realitza en segon pla. Quan la transferència s\'hagi completat, el fitxer es copia a la carpeta de mapes de C:geo i es defineix com a mapa actual.\n\nVés amb compte: la descàrrega d\'un mapa pot provocar un gran trànsit a la xarxa.</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
@@ -2158,8 +2237,6 @@
     <string name="downloadmap_target_not_writable">L\'objectiu seleccionat \"%s\" no es pot escriure: el fitxer de mapa descarregat es desa a la carpeta de descàrrega del sistema i s\'ha de moure manualment a la carpeta de mapa.</string>
     <string name="downloadmap_allow_metered_network">Permet la baixada per xarxa (per exemple: connexió mòbil)</string>
     <string name="download_confirmation">%1$sBaixeu el fitxer \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">S\'han trobat actualitzacions de:\n%1$s\n\nVoleu actualitzar?%2$s</string>
-    <string name="download_warning">Això pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.</string>
     <string name="download_error">La descàrrega ha fallat amb l\'error #%d</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
@@ -2171,6 +2248,8 @@
     <string name="downloadmap_mapfile">fitxer de mapa</string>
     <string name="downloadmap_themefile">fitxer de tema</string>
     <string name="downloadmap_tilefile">fitxer de dades d’encaminament</string>
+    <string name="downloadmap_othermapdownload">descarregar altres mapes</string>
+    <string name="downloadmap_otherthemedownload">descarregar un altre tema</string>
     <string name="downloadmap_download">descarregar</string>
     <string name="downloadmap_retrieving_directory_data">Recuperant les dades de la carpeta…</string>
     <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
@@ -2178,7 +2257,6 @@
     <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
     <string name="check_tiles_menu">Comproveu si falten dades d\'encaminament</string>
     <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
-    <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:\n%1$s\n\nVoleu baixar aquests fitxers?%2$s</string>
     <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
     <string name="tileupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de dades d\'encaminament descarregats. Toc llarg per ajornar.</string>
     <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>
@@ -2621,16 +2699,4 @@
     <string name="smiley_approve">Aprovat</string>
     <string name="smiley_disapprove">Desaprovat</string>
     <string name="smiley_question">Pregunta</string>
-    <string name="smiley_cry">Plorar</string>
-    <string name="smiley_embarassed">Avergonyit</string>
-    <string name="smiley_footinmouth">Ficar la pota</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Petó</string>
-    <string name="smiley_laughing">Rient</string>
-    <string name="smiley_money">Diners</string>
-    <string name="smiley_sealed">Segellat</string>
-    <string name="smiley_surprised">Sorprès</string>
-    <string name="smiley_tongueout">Treu la llengua</string>
-    <string name="smiley_undecided">Indecisos</string>
-    <string name="smiley_yell">Crida</string>
 </resources>

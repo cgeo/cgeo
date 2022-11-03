@@ -191,7 +191,7 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
             return LocalizationUtils.getPlural(R.plurals.cache_filter_userdisplay_multi_item, getValues().size());
         }
 
-        return CollectionStream.of(getValues()).map(this::valueToUserDisplayableValue).toJoinedString(",");
+        return CollectionStream.of(getValues()).map(this::valueToUserDisplayableValue).toJoinedString(", ");
     }
 
     protected int getMaxUserDisplayItemCount() {

@@ -204,7 +204,7 @@ public class StringFilter {
             case IS_NOT_PRESENT:
                 return this.filterType.toUserDisplayableString();
             default:
-                return this.filterType.toUserDisplayableString() + (getTextValue() == null ? "" : ":" + getTextValue());
+                return this.filterType.toUserDisplayableString() + (getTextValue() == null ? "" : ": " + getTextValue());
         }
     }
 

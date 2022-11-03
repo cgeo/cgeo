@@ -356,15 +356,15 @@
         <item quantity="other">%d minutos</item>
     </plurals>
     <string name="caches_store_offline">Armazenar para uso offline</string>
-    <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
-    <string name="caches_store_selected">Memorizar seleccionada(s)</string>
+    <string name="caches_store_offline_map">Armazenar as caches para utilização offline</string>
+    <string name="caches_store_selected">Armazenar seleccionada(s)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
     <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
     <string name="caches_store_background_option_refresh">Actualizar e adicionar à lista</string>
-    <string name="caches_store_background_result_failed">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
-    <string name="caches_store_background_result_canceled">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache transferida</item>
         <item quantity="other">%d caches transferidas</item>
@@ -547,6 +547,7 @@
     <string name="cache_filter_status_select_yes">Sim</string>
     <string name="cache_filter_status_select_no">Não</string>
     <string name="cache_filter_status_select_label_found">Encontradas</string>
+    <string name="cache_filter_status_select_label_dnf">Não encontrada</string>
     <string name="cache_filter_status_select_label_owned">Minhas</string>
     <string name="cache_filter_status_select_label_stored">Armazenadas</string>
     <string name="cache_filter_status_select_label_favorite">Meus favoritos</string>
@@ -558,7 +559,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Tendo pontos adicionais definidos pelo utilizador</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">A configuração deste filtro apenas afectará caches mistério. Se pretende excluir outros tipos de cache, por favor especifique um filtro adequado para esse tipo de cache.\n\nUma cache mistério é considerada \'resolvida\' caso tenha as suas coordenadas alteradas ou tenha um ponto adicional \'final\' preenchido com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
     <string name="cache_filter_status_disabled">Desactivadas</string>
     <string name="cache_filter_status_archived">Arquivadas</string>
@@ -631,7 +632,35 @@
     <string name="debug_user_error_report_title">Reportar um problema</string>
     <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
     <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Transferências em curso</string>
+    <string name="downloader_pending_downloads">Transferências em espera</string>
+    <string name="downloader_no_pending_downloads">Sem transferências em espera</string>
+    <string name="downloader_cancel_download">Cancelar transferência</string>
+    <string name="downloader_cancel_file">Cancelar a transferência em espera de \"%s\" e remover partes já transferidas?</string>
+    <string name="downloader_cancelled_download">Transferência de \"%s\" cancelada</string>
+    <string name="downloader_pending_info">Há pelo menos uma transferência em pausa ou com falhas. Deseja abrir a lista de transferências pendentes?</string>
+    <string name="downloader_retry_download">Tentar de novo a transferência</string>
+    <string name="downloader_retry_download_details">Quer tentar novamente a transferência do seguinte ficheiro?</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">A transferência falhou (e não será tentada novamente)</string>
+    <string name="asdm_status_paused">A transferência aguarda por nova tentativa ou ser resumida</string>
+    <string name="asdm_status_pending">A transferência aguarda o seu início</string>
+    <string name="asdm_status_running">A transferência está em curso</string>
+    <string name="asdm_status_successful">A transferência foi concluída com sucesso</string>
+    <string name="asdm_paused_queued_for_wifi">Pausada: A aguardar por Wi-Fi</string>
+    <string name="asdm_paused_unknown">Pausada por qualquer outra razão</string>
+    <string name="asdm_paused_waiting_for_network">Pausada: A aguardar por uma conexão de rede para continuar</string>
+    <string name="asdm_paused_waiting_to_retry">Pausada: Ocorreu algum erro de rede e o gestor de transferências está à espera para voltar a tentar este pedido</string>
+    <string name="asdm_error_cannot_resume">Erro: Ocorreu um erro possivelmente transitório, mas não podemos retomar a transferência</string>
+    <string name="asdm_error_device_not_found">Erro: Nenhum dispositivo de armazenamento externo foi encontrado. O cartão SD está montado?</string>
+    <string name="asdm_error_file_already_exists">Erro: O ficheiro de destino solicitado já existe, não será substituído</string>
+    <string name="asdm_error_file_error">Erro: Problema de armazenamento desconhecido</string>
+    <string name="asdm_error_http_data_error">Erro: Falhou o processamento de HTTP no nível de dados</string>
+    <string name="asdm_error_insufficient_space">Erro: Espaço de armazenamento insuficiente</string>
+    <string name="asdm_error_too_many_redirects">Erro: Demasiados redireccionamentos</string>
+    <string name="asdm_error_unhandled_http_code">Erro: Código HTTP não tratado</string>
+    <string name="asdm_error_unknown">Erro: Erro desconhecido</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Abrir definições?</string>
     <string name="settings_title_services">Serviços</string>
@@ -647,6 +676,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
+    <string name="settings_title_offline_maps">Mapas offline</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
@@ -732,6 +762,7 @@
     <string name="init_signature_template_button">Inserir Espaço Reservado</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
+    <string name="init_signature_template_day_of_week">Dia da semana</string>
     <string name="init_signature_template_datetime">Data &amp; Hora</string>
     <string name="init_signature_template_user">Utilizador</string>
     <string name="init_signature_template_number">Número</string>
@@ -744,6 +775,7 @@
     <string name="init_signature_template_size">Tamanho</string>
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Localização</string>
+    <string name="init_signature_template_geocode">Geo-código</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
@@ -816,7 +848,7 @@
     <string name="init_backup_program_settings">definições de programa</string>
     <string name="init_backup_logins">Incluir dados de contas</string>
     <string name="init_backup_logins_summary">Com esta opção seleccionada, as suas credenciais de início de sessão são guardadas nas cópias de segurança que efectuar.</string>
-    <string name="init_backup">Backup de caches / waypoints</string>
+    <string name="init_backup">Cópia de segurança de caches / pontos adicionais</string>
     <string name="init_backup_backup">Cópia de segurança</string>
     <string name="init_backup_finished">Cópia de segurança concluída</string>
     <string name="init_backup_backup_failed">Erro ao criar a cópia de segurança</string>
@@ -942,10 +974,17 @@
     <string name="init_use_native_ua">Browser do Android</string>
     <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
+    <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
+    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que têm de ser colocados nesta pasta.</string>
+    <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
+    <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
+    <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
+    <string name="init_mapShadingScale_description">A opacidade da camada de sombreado, do invisível para valores mais altos que se intensificam, mas pode produzir artefactos</string>
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
+    <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
@@ -1048,6 +1087,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mapas offline</string>
     <string name="persistablefolder_offline_maps_themes">Temas de mapa</string>
+    <string name="persistablefolder_offline_maps_shading">Ficheiros para sombreado de mapas</string>
     <string name="persistablefolder_backup">Cópia de segurança</string>
     <string name="persistablefolder_logfiles">Ficheiros de registo</string>
     <string name="persistablefolder_fieldnotes">Notas de Campo</string>
@@ -1170,6 +1210,9 @@
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
     <string name="cache_description">Descrição</string>
     <string name="cache_description_table_note">A descrição contém formatação de tabela pelo que pode ser necessário vê-la em %s para ser vista correctamente.</string>
+    <string name="cache_description_rendering">A renderizar descrição, por favor aguarde…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Aviso: A descrição é muito grande (%1$d caracteres). Apenas os primeiros %2$d%% são mostrados.</string>
+    <string name="cache_description_render_fully">Renderizar a descrição completa</string>
     <string name="cache_area_description">Descrição da Área</string>
     <string name="cache_cache_description">Descrição da Cache</string>
     <string name="cache_virtual_description">Questão Virtual</string>
@@ -1234,6 +1277,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mostrar no mapa</string>
     <string name="cache_menu_map_ext">Outras aplicações externas</string>
+    <string name="cache_menu_map_ext_nolabel">Outras aplicações ext. (apenas coordenadas)</string>
     <string name="cache_menu_streetview">Vista de rua</string>
     <string name="cache_menu_browser">Abrir no browser</string>
     <string name="no_browser_found">Não foi encontrado nenhum navegador de Internet</string>
@@ -1285,6 +1329,9 @@
     <string name="cache_description_updated">Descrição da cache actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamanho</string>
+    <string name="cache_mode">Modo</string>
+    <string name="cache_mode_linear">Linear</string>
+    <string name="cache_mode_random">Aleatório</string>
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
@@ -1459,6 +1506,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
     <string name="calccoord_migrate_infotext_markdown">Um cálculo antigo de coordenadas foi encontrado neste ponto adicional:\n\n%1$s\n\nPode migrar isso para o novo cálculo de coordenadas da cache da seguinte forma:\n\n%2$s\n\ncom novas variáveis de cache:%3$s\n\nPor favor, escolha:\n- %4$s para realizar a migração como sugerido\n- %5$s para descartar em definitivo os dados de cálculo encontrados\n- %6$s para continuar sem migração. Será novamente questionado sobre a migração, na próxima vez que abrir o ponto adicional para edição. Note, no entanto, que editar as coordenadas do ponto adicional pode excluir dados de cálculo locais.</string>
     <!-- Formula -->
+    <string name="formula">Fórmula</string>
     <string name="formula_choose_function">Escolher função</string>
     <string name="formula_function_sqrt">Raiz Quadrada</string>
     <string name="formula_function_sin">Seno</string>
@@ -2077,7 +2125,7 @@
     <!-- permission handling -->
     <string name="close_app">Fechar a aplicação</string>
     <string name="ask_again">Voltar a perguntar</string>
-    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
+    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS (localização melhorada) do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
     <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guarde geocaches para uso offline. Além disso, o c:geo utilizará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas offline. A memória não pode ser utilizada sem esta permissão.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
@@ -2193,11 +2241,12 @@
     <string name="downloadmap_filename">A transferir %s</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
+    <string name="download_none_selected">Não há ficheiros selecionados para transferir</string>
     <string name="downloadmap_target_not_writable">O destino seleccionado \"%s\" não é gravável - o mapa transferido será gravado na pasta de transferências do sistema e deve ser movido manualmente para a pasta de mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
     <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Actualizações encontradas para:\n%1$s\n\nDeseja actualizar?%2$s</string>
-    <string name="download_warning">Isso pode demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
+    <string name="download_confirmation_updates">Encontradas actualizações para:</string>
+    <string name="download_warning">As transferências podem demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
     <string name="download_error">Transferência falhou, com o erro #%d</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
@@ -2209,6 +2258,8 @@
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
     <string name="downloadmap_themefile">ficheiro de tema</string>
     <string name="downloadmap_tilefile">ficheiro dos dados de encaminhamento</string>
+    <string name="downloadmap_othermapdownload">outra transferência de mapa</string>
+    <string name="downloadmap_otherthemedownload">outra transferência de tema</string>
     <string name="downloadmap_download">transferir</string>
     <string name="downloadmap_retrieving_directory_data">A receber dados da pasta…</string>
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
@@ -2216,7 +2267,7 @@
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
     <string name="check_tiles_menu">Verificar dados de percurso em falta</string>
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
-    <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
+    <string name="check_tiles_missing">Encontrados dados de encaminhamento em falta:</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
     <string name="tileupdate_info">Toque aqui para verificar por actualizações de ficheiros de encaminhamento transferidos. Toque longo para adiar.</string>
     <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
@@ -2659,16 +2710,4 @@
     <string name="smiley_approve">Aprovado</string>
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
-    <string name="smiley_cry">Chorar</string>
-    <string name="smiley_embarassed">Envergonhado</string>
-    <string name="smiley_footinmouth">Pé na boca</string>
-    <string name="smiley_innocent">Inocente</string>
-    <string name="smiley_kiss">Beijo</string>
-    <string name="smiley_laughing">Gargalhadas</string>
-    <string name="smiley_money">Dinheiro</string>
-    <string name="smiley_sealed">Selado</string>
-    <string name="smiley_surprised">Surpreso</string>
-    <string name="smiley_tongueout">Língua de fora</string>
-    <string name="smiley_undecided">Indeciso</string>
-    <string name="smiley_yell">Gritar</string>
 </resources>

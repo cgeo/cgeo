@@ -84,7 +84,7 @@ public class EventTimeParserTest extends TestCase {
         cache.setType(CacheType.EVENT);
         cache.setDescription(StringUtils.EMPTY);
         cache.setShortDescription("text 14:20 text");
-        assertThat(cache.getEventTimeMinutes()).isEqualTo(14 * 60 + 20);
+        assertThat(cache.getEventStartTimeInMinutes()).isEqualTo(14 * 60 + 20);
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {

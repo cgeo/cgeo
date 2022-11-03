@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -7,24 +7,20 @@
     android:padding="4dip"
     tools:context=".CacheDetailActivity$ImageGalleryCreator">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/experimental"
         android:background="@drawable/mark_orange"
         style="@style/text"
-        android:text="Experimental!"/>
+        android:text="Experimental!" tools:ignore="HardcodedText" />
 
     <cgeo.geocaching.ui.ImageGalleryView
     android:id="@+id/image_gallery"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
 
-    </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

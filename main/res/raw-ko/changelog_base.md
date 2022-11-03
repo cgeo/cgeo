@@ -1,8 +1,26 @@
-- New: Download / update caches in background
-- 신규: 홈 화면에서 위치를 길게 누를 때 현재 좌표를 복사합니다.
-- 변경: 개인 메모에 지점을 저장하는 동안 크기 제한 확인을 제거합니다.
-- 수정: 영구보관된 캐시의 지점에 대한 거리 원을 표시하지 않음
-- 신규: 비어 있는 지도 공간을 누리면 지점 또는 사용자 정의 캐시 생성, 개별 경로에 추가, 좌표 표시 또는 탐색 (컨텍스트에 따라 다름)
-- 신규: 오프라인 지도 삭제 옵션
-- 수정: 검색 결과에서 추적아이템 개수 누락
-- 수정: 편집 후 개별 경로의 어드벤처 랩 항목이 인식되지 않음
+
+### Notice: API level change
+Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+
+### 지도
+- 신규: 트랙의 표시 이름 변경 허용
+
+### 캐시 상세정보
+- 수정: 단일 이미지만 추가된 경우에도 "image 1"이라는 레이블이 지정된 로그 이미지
+- 신규: 지오코드 로그 템플릿 자리 표시자
+- 신규: 정의 목록에 대한 기본 HTML 포맷 지원 (dl/dt/dd)
+- 신규: 목록 이미지를 탭할 때 확대/축소 가능한 이미지 보기 열기
+- 수정: 통합 웹 보기에서 목록의 링크 열기(활성화된 경우)
+- 변경: 백그라운드에서 캐시 설명을 렌더링하고 기본적으로 길이를 50,000자로 제한합니다.
+
+### 일반
+- 신규: 대기 중인 다운로드 보기
+- 신규: GPX 내보내기 시 파일 이름에 캐시 이름/목록 이름 추가
+- 변경: "Android 브라우저로 식별" 설정 제거
+- 신규: 시작 시 보류 중인 다운로드(지도/라우팅 데이터) 확인
+- 신규: 다운로드할 파일 선택 허용
+- 신규: DNF용 상태 필터
+- 신규: 홈 화면에 고도 표시(가능한 경우)
+- 신규: 슬라이더를 사용하여 필터에 값을 수동으로 입력할 수 있습니다.
+- 신규: 캐시에 "ORIGINAL" 유형의 지점이 있을 때 GPX 파일에서 가져온 캐시에 대해 수정된 좌표 업로드를 활성화합니다.
+- 변경: 필터 상태 표시줄 텍스트 개선

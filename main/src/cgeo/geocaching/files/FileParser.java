@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -86,7 +86,7 @@ abstract class FileParser {
 
         // fix potentially bad cache id
         if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
-            cache.setCacheId(String.valueOf(GCConstants.gccodeToGCId(cache.getGeocode())));
+            cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
         }
     }
 }

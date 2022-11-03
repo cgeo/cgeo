@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
@@ -47,7 +48,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     private static volatile boolean shouldStop = false;
     private static final Map<String, DownloadTaskProperties> downloadQuery = new HashMap<>();
 
-    int cachesDownloaded = 0;
+    final AtomicInteger cachesDownloaded = new AtomicInteger();
 
     public static boolean isDownloadPending(final String geocode) {
         return downloadQuery.containsKey(geocode);
@@ -187,7 +188,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 return;
             }
 
-            Log.d("Download #" + cachesDownloaded + " " + geocode + " started");
+            Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " started");
 
             final DownloadTaskProperties properties;
             synchronized (downloadQuery) {
@@ -199,8 +200,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             }
 
             // update foreground service notification
-            notification.setProgress(downloadQuery.size() + cachesDownloaded, cachesDownloaded, false);
-            notification.setContentText(cachesDownloaded + "/" + (downloadQuery.size() + cachesDownloaded));
+            notification.setProgress(downloadQuery.size() + cachesDownloaded.get(), cachesDownloaded.get(), false);
+            notification.setContentText(cachesDownloaded.get() + "/" + (downloadQuery.size() + cachesDownloaded.get()));
             updateForegroundNotification();
 
             // merge current lists and additional lists
@@ -213,7 +214,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             // download...
             if (Geocache.storeCache(null, geocode, combinedListIds, properties.forceDownload, null)) {
                 // send a broadcast so that foreground activities know that they might need to update their content
-                GeocacheRefreshedBroadcastReceiver.sendBroadcast(this, geocode);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(this, geocode);
                 // check whether the download properties are still null,
                 // otherwise there is a new download task...
                 synchronized (downloadQuery) {
@@ -221,10 +222,10 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                         downloadQuery.remove(geocode);
                     }
                 }
-                Log.d("Download #" + cachesDownloaded + " " + geocode + " completed");
-                cachesDownloaded++;
+                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " completed");
+                cachesDownloaded.incrementAndGet();
             } else {
-                Log.d("Download #" + cachesDownloaded + " " + geocode + " failed");
+                Log.d("Download #" + cachesDownloaded.get() + " " + geocode + " failed");
             }
         } catch (Exception ex) {
             Log.e("exception while background download", ex);
@@ -235,9 +236,9 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     public void onDestroy() {
         if (downloadQuery.size() > 0) {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
-                    cachesDownloaded, cachesDownloaded + downloadQuery.size()));
+                    cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else {
-            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded, cachesDownloaded));
+            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
         }
         downloadQuery.clear();
         super.onDestroy();

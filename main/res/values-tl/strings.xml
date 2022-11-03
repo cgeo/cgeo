@@ -251,10 +251,6 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuto</item>
     </plurals>
-    <string name="caches_store_offline">Ang pag-istor ay sarado</string>
-    <string name="caches_store_all">I-istor lahat</string>
-    <string name="caches_store_unsaved">Ang pag-istor ay hindi nai-save</string>
-    <string name="caches_store_selected">Ang istor ay napili</string>
     <string name="caches_history">Ang Kasaysayan</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Ayusin</string>
@@ -326,6 +322,8 @@
     <string name="about_system_info">ang c:geo ay ang sistema ng impormasyon</string>
     <string name="about_system_info_send_chooser">I-send ang sistema ng impormasyon</string>
     <string name="changelog_github">Ang listahan ng lahat ng pagbabago</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Buksan ang mga setting?</string>
     <string name="settings_title_services">Ang mga serbisyo</string>

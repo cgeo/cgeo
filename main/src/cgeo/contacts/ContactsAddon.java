@@ -21,7 +21,7 @@ public class ContactsAddon {
         );
 
         context.startActivity(new Intent(IContacts.INTENT,
-                Uri.parse(IContacts.URI_SCHEME + "://" + IContacts.URI_HOST + "?" + params.toString())));
+                Uri.parse(IContacts.URI_SCHEME + "://" + IContacts.URI_HOST + "?" + params)));
     }
 
     public static boolean isAvailable() {

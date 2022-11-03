@@ -50,7 +50,7 @@
 
          <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="16dip">
+            android:layout_height="wrap_content">
 
              <TextView
                  android:id="@+id/device_heading_label"
@@ -134,7 +134,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="16dip" >
+            android:layout_height="wrap_content" >
 
             <TextView
                 android:id="@+id/nav_type"

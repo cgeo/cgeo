@@ -15,7 +15,7 @@ public class RendererLayer implements ITileLayer {
 
     public RendererLayer(final TileCache tileCache, final MapFile mapDataStore, final IMapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
         this.mapDataStore = mapDataStore;
-        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory);
+        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory, HillShadingLayerHelper.getHillsRenderConfig());
     }
 
     @Override

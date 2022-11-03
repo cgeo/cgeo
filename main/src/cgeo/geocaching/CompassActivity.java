@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
@@ -32,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -309,9 +309,6 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private static final double[] altitudeReadings = {0.0d, 0.0d, 0.0d, 0.0d, 0.0d};
-    private static int altitudeReadingPos = 0;
-
     @SuppressLint("SetTextI18n")
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
@@ -325,19 +322,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                     binding.navAccuracy.setText(null);
                 }
 
-                // remember new altitude reading, and calculate average from past MAX_READINGS readings
-                if (geo.hasAltitude() && (Build.VERSION.SDK_INT < Build.VERSION_CODES.O || geo.getVerticalAccuracyMeters() > 0.0)) {
-                    altitudeReadings[altitudeReadingPos] = geo.getAltitude();
-                    altitudeReadingPos = (++altitudeReadingPos) % altitudeReadings.length;
-                }
-                double averageAltitude = altitudeReadings[0];
-                for (int i = 1; i < altitudeReadings.length; i++) {
-                    averageAltitude += altitudeReadings[i];
-                }
-                if (altitudeReadings.length > 0) {
-                    averageAltitude /= (double) altitudeReadings.length;
-                }
-                binding.navLocation.setText(geo.getCoords().toString() + Formatter.SEPARATOR + Units.getDistanceFromMeters((float) averageAltitude));
+                binding.navLocation.setText(geo.getCoords() + GeoHeightUtils.getAverageHeight(geo, false));
 
                 updateDistanceInfo(geo);
 

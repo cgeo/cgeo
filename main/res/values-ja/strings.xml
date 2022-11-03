@@ -350,9 +350,16 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d 分</item>
     </plurals>
-    <string name="caches_store_offline">オフライン用に保存</string>
-    <string name="caches_store_all">すべて保存</string>
-    <string name="caches_store_selected">選択したキャッシュを保存</string>
+    <string name="caches_store_background_title">キャッシュのダウンロード</string>
+    <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
+    <string name="caches_store_background_option_nothing">何もしない</string>
+    <string name="caches_store_background_option_add_to_list">リストに追加</string>
+    <string name="caches_store_background_option_refresh">更新してリストに追加</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">ダウンロードに失敗しました。%1$d/%2$dキャッシュがダウンロードされました</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">ダウンロードがキャンセルされました。%1$d/%2$dキャッシュがダウンロードされました</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="other">%dキャッシュをダウンロードしました</item>
+    </plurals>
     <string name="caches_history">履歴</string>
     <string name="caches_on_map">地図で表示</string>
     <string name="caches_sort">並び替え</string>
@@ -497,7 +504,7 @@
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
     <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
-    <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定が既に存在します。上書きしますか?</string>
+    <string name="cache_filter_storage_save_confirm_message">フィルタ名「%s」と異なる設定がすでに存在します。上書きしますか?</string>
     <string name="cache_filter_stringfilter_matchcase">大小文字を区別</string>
     <string name="cache_filter_stringfilter_searchtext_hint">検索テキスト</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
@@ -533,7 +540,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">発見(オフラインログ)</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">ユーザー定義ウェイポイントあり</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ設定はミステリーキャッシュにのみ影響します。もし、ほかのキャッシュタイプを除外したい場合は、適切なキャッシュタイプフィルタを定義してください。\n\nミステリーは座標が変更されるか、最終ウェイポイントに有効な座標が設定されると「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
     <string name="cache_filter_status_disabled">一時停止中</string>
     <string name="cache_filter_status_archived">アーカイブ済み</string>
@@ -603,7 +610,9 @@
     <string name="debug_user_error_report_title">問題を報告</string>
     <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">実行中のダウンロード</string>
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
     <string name="settings_title_services">サービス</string>
@@ -1188,6 +1197,7 @@
     <string name="cache_menu_radar">レーダー</string>
     <string name="cache_menu_map">地図</string>
     <string name="cache_menu_map_ext">ほかの外部アプリ</string>
+    <string name="cache_menu_map_ext_nolabel">ほかの外部アプリ(座標値のみ)</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
     <string name="cache_menu_browser">ブラウザで開く</string>
     <string name="no_browser_found">ブラウザが見つかりません</string>
@@ -1239,6 +1249,9 @@
     <string name="cache_description_updated">キャッシュの説明が更新されました</string>
     <string name="cache_type">タイプ</string>
     <string name="cache_size">サイズ</string>
+    <string name="cache_mode">モード</string>
+    <string name="cache_mode_linear">リニア</string>
+    <string name="cache_mode_random">ランダム</string>
     <string name="cache_distance">距離</string>
     <string name="cache_difficulty">難易度</string>
     <string name="cache_terrain">地形</string>
@@ -1263,6 +1276,7 @@
     <string name="cache_image_open_file">ほかのアプリで開く</string>
     <string name="cache_image_open_browser">ブラウザで開く</string>
     <string name="cache_image_share">共有</string>
+    <string name="cache_image_show_description">説明を表示</string>
     <string name="cache_image_add_waypoint">ウェイポイントを追加</string>
     <string name="cache_image_rename">名前の変更</string>
     <string name="cache_image_delete">削除</string>
@@ -1995,7 +2009,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- permission handling -->
     <string name="close_app">アプリを閉じる</string>
     <string name="ask_again">次回も確認する</string>
-    <string name="location_permission_request_explanation">現在地の特定とジオキャッシュまでの距離/方向を計算するためにc:geoはデバイスの位置情報にアクセスする必要があります。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
@@ -2009,6 +2022,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_downloader_name">c:geo ダウンローダー</string>
+    <string name="notification_channel_downloader_description">ダウンロード結果の通知(オフラインマップなど)</string>
+    <string name="notification_channel_cache_download_name">キャッシュダウンローダー</string>
+    <string name="notification_channel_cache_download_description">キャッシュのバックグラウンドダウンロード結果の通知</string>
     <string name="notification_proximity_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
@@ -2075,7 +2092,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="add_setting_preference_type">設定タイプ</string>
     <string name="add_setting_missing_name">設定名を入力してください</string>
     <string name="add_setting_missing_type">設定タイプを選択してください</string>
-    <string name="add_setting_already_exists">同じ設定名が既に存在しています</string>
+    <string name="add_setting_already_exists">同じ設定名がすでに存在しています</string>
     <!-- HandleLocalFilesActivity -->
     <string name="localfile_intenttitle">c:geoローカルファイルハンドラ</string>
     <string name="localfile_title">ローカルファイルを開く</string>
@@ -2102,8 +2119,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_target_not_writable">選択したファルダ「%s」は書き込み可能ではありません。地図ファイルはシステムのダウンロードフォルダに保存されており、地図フォルダに手動で移動する必要があります。</string>
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
-    <string name="download_confirmation_updates">更新が見つかりました:\n%1$s\n\n更新しますか?%2$s</string>
-    <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
     <string name="download_error">ダウンロードできませんでした(エラー#%d)</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
@@ -2122,7 +2137,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="check_tiles_menu">ルート検索データの確認</string>
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
-    <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
     <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
     <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
@@ -2210,4 +2224,14 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="rtl_category_walking_cycling_climbing">ウォーキング、サイクリング、登山</string>
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">笑顔</string>
+    <string name="smiley_big_smile">満面の笑顔</string>
+    <string name="smiley_cool">サングラス</string>
+    <string name="smiley_blush">恥じらい顔</string>
+    <string name="smiley_tongue">あっかんべー</string>
+    <string name="smiley_evil">悪魔</string>
+    <string name="smiley_wink">ウインク</string>
+    <string name="smiley_clown">ピエロ</string>
+    <string name="smiley_8ball">8ボール</string>
+    <string name="smiley_question">疑問</string>
 </resources>

@@ -7,203 +7,214 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip"
     tools:context=".log.LogCacheActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
+            android:padding="4dip"
             android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/type"
-                    style="@style/button_full_spinner"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    tools:text="log type"/>
-
-                <Button
-                    android:id="@+id/date"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    tools:text="log date"/>
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/textinput_edittext"
-                app:counterEnabled="true"
-                app:counterMaxLength="4000">
-                <EditText
-                    android:id="@+id/log"
-                    style="@style/textinput_embedded"
-                    android:hint="@string/log_new_log_text"
-                    android:autofillHints="@string/log_new_log_text"
-                    android:inputType="textMultiLine|textCapSentences"
-                    android:maxLength="4000"
-                    android:minLines="5"
-                    tools:text="The log text is limited to 4000 characters."/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/log_password_box"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-                    <TextView
-                        style="@style/textinput_embedded"
-                        android:padding="10dip"
-                        android:text="@string/log_password_title"
-                        android:textSize="@dimen/textSize_headingPrimary" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-                    <EditText
-                        android:id="@+id/log_password"
-                        style="@style/textinput_embedded"
-                        android:hint="@string/log_hint_log_password"
-                        android:importantForAutofill="no"
-                        tools:ignore="TextFields" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/report_problem_box"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:paddingLeft="10dip"
-                android:paddingRight="10dip"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:text="@string/log_report_problem"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/textSize_detailsPrimary" />
-
-                <TextView
-                    android:id="@+id/report_problem"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical" >
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:textIsSelectable="false"
-                    tools:text="report problem"
-                    android:textSize="@dimen/textSize_detailsPrimary" />
+                    android:baselineAligned="false"
+                    android:orientation="horizontal" >
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/type"
+                        style="@style/button_full_spinner"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        tools:text="log type"/>
 
-            <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <CheckBox
-                android:id="@+id/favorite_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginBottom="5dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:visibility="gone"
-                tools:visibility="visible"
-                />
+                    <Button
+                        android:id="@+id/date"
+                        style="@style/button_full"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        tools:text="log date"/>
+                </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/tweet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="@string/visit_tweet"
-                android:layout_marginBottom="5dip"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:visibility="gone"
-                tools:visibility="visible"                />
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/textinput_edittext"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="4000">
+                    <EditText
+                        android:id="@+id/log"
+                        style="@style/textinput_embedded"
+                        android:hint="@string/log_new_log_text"
+                        android:autofillHints="@string/log_new_log_text"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:maxLength="4000"
+                        android:minLines="5"
+                        tools:text="The log text is limited to 4000 characters."/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/log_password_box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-        <fragment
-            android:id="@+id/imagelist_fragment"
-            class="cgeo.geocaching.ui.ImageListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                    <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                        <TextView
+                            style="@style/textinput_embedded"
+                            android:padding="10dip"
+                            android:text="@string/log_password_title"
+                            android:textSize="@dimen/textSize_headingPrimary" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/inventory_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip"
-            android:layout_marginTop="10dip"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
+                    <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                        <EditText
+                            android:id="@+id/log_password"
+                            style="@style/textinput_embedded"
+                            android:hint="@string/log_hint_log_password"
+                            android:importantForAutofill="no"
+                            tools:ignore="TextFields" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal_heading" />
-                <TextView
-                    style="@style/separator_horizontal_heading_text"
-                    android:text="@string/cache_inventory" />
-            </RelativeLayout>
+                <LinearLayout
+                    android:id="@+id/report_problem_box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
-		    <ListView
-		        android:id="@+id/inventory"
-		        android:layout_width="fill_parent"
-		        android:layout_height="fill_parent"
-		        android:clipToPadding="false"
-		        android:footerDividersEnabled="false"
-		        android:headerDividersEnabled="false"
-		        android:padding="4dip"
-		        android:scrollbars="none"
-		        tools:ignore="NestedScrolling"
-		        tools:listitem="@layout/logcache_trackable_item" >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:text="@string/log_report_problem"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/textSize_detailsPrimary" />
 
-		    </ListView>
+                    <TextView
+                        android:id="@+id/report_problem"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textIsSelectable="false"
+                        tools:text="report problem"
+                        android:textSize="@dimen/textSize_detailsPrimary" />
 
-            <LinearLayout
-                android:id="@+id/inventory_changeall"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                </LinearLayout>
 
-                <Button
-                    android:id="@+id/changebutton"
-                    style="@style/button_full"
+                <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <CheckBox
+                    android:id="@+id/favorite_check"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:layout_marginBottom="5dip"
                     android:layout_marginLeft="10dip"
                     android:layout_marginRight="10dip"
-                    android:layout_weight="1"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    />
+
+                <CheckBox
+                    android:id="@+id/tweet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/visit_tweet"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:visibility="gone"
+                    tools:visibility="visible"                />
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/imagelist_fragment"
+                class="cgeo.geocaching.ui.ImageListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/inventory_box"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <RelativeLayout style="@style/separator_horizontal_layout" >
+                    <View style="@style/separator_horizontal_heading" />
+                    <TextView
+                        style="@style/separator_horizontal_heading_text"
+                        android:text="@string/cache_inventory" />
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/inventory"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:clipToPadding="false"
+                    android:footerDividersEnabled="false"
+                    android:headerDividersEnabled="false"
+                    android:padding="4dip"
+                    android:scrollbars="none"
+                    tools:ignore="NestedScrolling"
+                    tools:listitem="@layout/logcache_trackable_item" >
+
+                </ListView>
+
+                <LinearLayout
+                    android:id="@+id/inventory_changeall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="@string/log_tb_changeall" />
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <Button
+                        android:id="@+id/changebutton"
+                        style="@style/button_full"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginLeft="10dip"
+                        android:layout_marginRight="10dip"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/log_tb_changeall" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:id="@+id/progress_bar"
+            tools:visibility="gone" />
+    </RelativeLayout>
 
 </ScrollView>

@@ -260,10 +260,6 @@
         <item quantity="few">%d minute</item>
         <item quantity="other">%d minut</item>
     </plurals>
-    <string name="caches_store_offline">Shrani</string>
-    <string name="caches_store_all">Shrani vse</string>
-    <string name="caches_store_unsaved">Shrani neshranjene</string>
-    <string name="caches_store_selected">Shrani izbrane</string>
     <string name="caches_history">Zgodovina</string>
     <string name="caches_on_map">Pokaži na zemljevidu</string>
     <string name="caches_sort">Razvrsti</string>
@@ -343,6 +339,8 @@
     <string name="contribution_support">Podpora</string>
     <string name="contribution_documentation">Dokumentacija</string>
     <string name="contribution_graphics">Grafika</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Odprem nastavitve?</string>
     <string name="settings_title_services">Storitve</string>

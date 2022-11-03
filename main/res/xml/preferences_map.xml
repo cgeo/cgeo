@@ -21,15 +21,19 @@
             android:title="@string/settings_hide_tileproviders_title"
             android:summary="@string/settings_hide_tileproviders_summary"
             app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_offline_maps"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_info_offline_maps"
             android:title="@string/settings_info_offline_maps_title"
-            android:text="@string/settings_info_offline_maps"
+            android:summary="@string/settings_info_offline_maps"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_start_downloader"
             android:title="@string/downloadmap_title"
-            android:text="@string/downloadmap_info"
+            android:summary="@string/downloadmap_info"
             app:iconSpaceReserved="false" />
 
         <Preference
@@ -47,9 +51,13 @@
             android:key="@string/pref_persistablefolder_offlinemaps"
             android:title="@string/init_map_directory_description"
             app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_map_themes"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_info_offline_mapthemes"
-            android:text="@string/settings_info_themes"
+            android:summary="@string/settings_info_themes"
             android:title="@string/settings_info_themes_title"
             app:iconSpaceReserved="false" />
         <Preference
@@ -62,13 +70,37 @@
             android:summary="@string/init_summary_renderthemefolder_synctolocal"
             android:title="@string/init_renderthemefolder_synctolocal"
             app:iconSpaceReserved="false" />
-        <ListPreference
-            android:defaultValue="@string/pref_maprotation_manual"
-            android:entries="@array/maprotation"
-            android:entryValues="@array/maprotationValues"
-            android:key="@string/pref_mapRotation"
-            android:summary="%s"
-            android:title="@string/settings_title_map_rotation"
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_title_map_hillshading"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:key="@string/pref_fakekey_info_offline_maphillshading"
+            android:summary="@string/settings_info_hillshading"
+            android:title="@string/settings_info_hillshading_title"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_persistablefolder_offlinemapshading"
+            android:summary="@string/settings_info_themes"
+            android:title="@string/init_mapshading_folder"
+            app:iconSpaceReserved="false" />
+        <SeekBarPreference
+            android:summary="@string/init_mapShadingLinearity_description"
+            android:title="@string/init_mapShadingLinearity_title"
+            android:defaultValue="5"
+            android:key="@string/pref_mapShadingLinearity"
+            android:max="100"
+            android:min="0"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+        <SeekBarPreference
+            android:summary="@string/init_mapShadingScale_description"
+            android:title="@string/init_mapShadingScale_title"
+            android:defaultValue="120"
+            android:key="@string/pref_mapShadingScale"
+            android:max="300"
+            android:min="0"
+            app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
@@ -151,6 +183,14 @@
             android:key="@string/pref_longTapOnMap"
             android:summary="@string/init_summary_longtap_map"
             android:title="@string/init_longtap_map"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="@string/pref_maprotation_manual"
+            android:entries="@array/maprotation"
+            android:entryValues="@array/maprotationValues"
+            android:key="@string/pref_mapRotation"
+            android:summary="%s"
+            android:title="@string/settings_title_map_rotation"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

@@ -42,10 +42,13 @@ public class Waypoint implements IWaypoint {
     private String geocode = "geocode";
     private Geocache parentCache = null;
     private WaypointType waypointType = WaypointType.WAYPOINT;
+    @NonNull
     private String prefix = "";
     private String lookup = "";
     private String name = "";
+    @Nullable
     private Geopoint coords = null;
+    @NonNull
     private String note = "";
     private String userNote = "";
     private int cachedOrder = ORDER_UNDEFINED;
@@ -78,7 +81,7 @@ public class Waypoint implements IWaypoint {
         this.own = own;
     }
 
-    public Waypoint(final String lookup, final Geopoint coords, final String name, final String prefix, final String note, final WaypointType type) {
+    public Waypoint(@NonNull final String lookup, @Nullable final Geopoint coords, @NonNull final String name, @NonNull final String prefix, @NonNull final String note, @NonNull final WaypointType type) {
         this(name, type, false);
         this.prefix = prefix;
         this.lookup = lookup;
@@ -259,6 +262,7 @@ public class Waypoint implements IWaypoint {
         this.coords = coords;
     }
 
+    @NonNull
     public String getNote() {
         return note;
     }

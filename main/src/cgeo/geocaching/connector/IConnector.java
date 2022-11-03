@@ -6,6 +6,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -207,24 +208,28 @@ public interface IConnector {
      * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
      * on the map.
      */
+    @DrawableRes
     int getCacheMapMarkerId();
 
     /**
      * Return the marker background id of the caches for this connector. This creates the different backgrounds for cache markers
      * on the map.
      */
+    @DrawableRes
     int getCacheMapMarkerBackgroundId();
 
     /**
      * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
      * on the map.
      */
+    @DrawableRes
     int getCacheMapDotMarkerId();
 
     /**
      * Return the marker background id of the caches for this connector. This creates the different backgrounds for cache markers
      * on the map.
      */
+    @DrawableRes
     int getCacheMapDotMarkerBackgroundId();
 
     /**
@@ -238,7 +243,8 @@ public interface IConnector {
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'.
      */
-    String getWaypointGpxId(String prefix, @NonNull String geocode);
+    @NonNull
+    String getWaypointGpxId(@NonNull String prefix, @NonNull String geocode);
 
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file

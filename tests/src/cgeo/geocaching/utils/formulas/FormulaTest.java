@@ -41,6 +41,26 @@ public class FormulaTest {
     }
 
     @Test
+    public void bigIntegers() {
+        //Long value
+        final String longMax = String.valueOf(Long.MAX_VALUE); // this should be 9223372036854775807
+        final int longMaxCs = 88; // manually calculated checksum of Long.MAX_VALUE
+
+        assertThat(Formula.evaluate(longMax).isInteger()).isTrue();
+        assertThat(Formula.evaluate(longMax).getAsInt()).isEqualTo(Long.MAX_VALUE);
+        //Beyond Long Value
+        final String longMaxBeyond = longMax + "1";
+        final Value longMaxBeyondValue = Formula.evaluate(longMaxBeyond);
+        assertThat(longMaxBeyondValue.isInteger()).isFalse();
+        assertThat(longMaxBeyondValue.getAsInt()).isEqualTo(0L); // if too long for parsing -> return 0
+
+        //Long value checksums
+        assertThat(Formula.evaluate("cs(" + longMax + ")").getAsInt()).isEqualTo(longMaxCs);
+        assertThat(FormulaUtils.valueChecksum(longMaxBeyondValue, false)).isEqualTo(longMaxCs + 1);
+        assertThat(Formula.evaluate("cs(" + longMaxBeyond + ")").getAsInt()).isEqualTo(longMaxCs + 1);
+    }
+
+    @Test
     public void complex() {
         assertThat(eval("-2.5 + 3 * (4-1) + 3^3")).isEqualTo(33.5d);
     }
@@ -59,7 +79,10 @@ public class FormulaTest {
 
     @Test
     public void singleTestForDebug() {
-        assertThat(eval("A+1 4", "A", 12)).isEqualTo(134d);
+        final Value v = Value.of("345b");
+        v.getAsInt();
+        v.getAsDouble();
+
     }
 
     @Test
@@ -317,6 +340,9 @@ public class FormulaTest {
         assertThat(Value.of("345").isInteger()).isTrue();
         assertThat(Value.of("345b").isInteger()).isFalse();
         assertThat(Value.of("abcd").isInteger()).isFalse();
+
+        assertThat(Formula.evaluate("123.00").isInteger()).isTrue();
+        assertThat(Formula.evaluate("123.00").getAsInt()).isEqualTo(123L);
     }
 
     @Test

@@ -2,14 +2,13 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
-import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
-import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.unifiedmap.LayerHelper;
+import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.graphics.BitmapFactory;
 
@@ -23,42 +22,40 @@ import org.oscim.map.Map;
 
 class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
 
-    ItemizedLayer mMarkerLayer;
+    ItemizedLayer mGeocacheLayer;
+    ItemizedLayer mWaypointLayer;
     MarkerSymbol mDefaultMarkerSymbol;
 
-    MapsforgeGeoitemLayer(final AbstractTileProvider tileProvider, final Map map) {
+    MapsforgeGeoitemLayer(final Map map) {
         final Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
         mDefaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
-        mMarkerLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
-        ((MapsforgeVtmView) tileProvider.getMap()).addLayer(mMarkerLayer);
-        Log.e("addGeoitemLayer");
+        mGeocacheLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_GEOCACHE, mGeocacheLayer);
+        mWaypointLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
+        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_WAYPOINT, mWaypointLayer);
     }
 
     @Override
-    protected MarkerItem add(final Geocache cache) {
-        final Geopoint coords = cache.getCoords();
-        final MarkerItem item = new MarkerItem(cache.getGeocode(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6())); // @todo add marker touch handling
-
-        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
-        final MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
-        item.setMarker(symbol);
-        mMarkerLayer.addItem(item);
-        Log.e("addGeoitem");
-        synchronized (items) {
-            items.put(cache.getGeocode(), item);
+    protected GeoItemCache<MarkerItem> addInternal(final IWaypoint item, final boolean isCache, final Geopoint coords, final RouteItem routeItem, final CacheMarker cm) {
+        final MarkerItem marker = new MarkerItem(routeItem.getIdentifier(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6()));
+        marker.setMarker(new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER));
+        if (isCache) {
+            mGeocacheLayer.addItem(marker);
+        } else {
+            mWaypointLayer.addItem(marker);
         }
-        return item;
+        return new GeoItemCache<>(routeItem, marker);
     }
 
     @Override
     protected void remove(final String geocode) {
-        if (mMarkerLayer != null) {
-            final MarkerItem item;
+        // @todo: waypoints?
+        if (mGeocacheLayer != null) {
             synchronized (items) {
-                item = items.get(geocode);
-            }
-            if (item != null) {
-                mMarkerLayer.removeItem(item);
+                final GeoItemCache<MarkerItem> item = items.get(geocode);
+                if (item != null) {
+                    mGeocacheLayer.removeItem(item.mapItem);
+                }
             }
         }
         super.remove(geocode);

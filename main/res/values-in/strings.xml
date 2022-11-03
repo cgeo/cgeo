@@ -244,10 +244,6 @@
     <plurals name="caches_eta_mins">
         <item quantity="other">%d menit</item>
     </plurals>
-    <string name="caches_store_offline">Toko offline</string>
-    <string name="caches_store_all">Simpan semua</string>
-    <string name="caches_store_unsaved">Simpan yang belum disimpan</string>
-    <string name="caches_store_selected">Toko yang dipilih</string>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>
     <string name="caches_sort">Urutkan</string>
@@ -319,6 +315,8 @@
     <string name="about_system_info">c:geo sistem informasi</string>
     <string name="about_system_info_send_chooser">Mengirimkan sistem informasi</string>
     <string name="changelog_github">Daftar semua perubahan</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Buka pengaturan?</string>
     <string name="settings_title_services">Layanan</string>

@@ -137,7 +137,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return false;
             });
 
-            binding.title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
+            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
 
             addCacheDetails(false);

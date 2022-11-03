@@ -24,7 +24,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
+import android.text.InputType;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import org.apache.commons.lang3.StringUtils;
 
 public class RouteTrackUtils {
 
@@ -182,7 +183,14 @@ public class RouteTrackUtils {
 
         tracks.traverse((key, route) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
-            ((TextView) vt.findViewById(R.id.item_title)).setText(tracks.getDisplayname(key));
+            final TextView displayName = vt.findViewById(R.id.item_title);
+            displayName.setText(tracks.getDisplayname(key));
+            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name")).input(InputType.TYPE_CLASS_TEXT, displayName.getText().toString(), null, null, newName -> {
+                if (StringUtils.isNotBlank(newName)) {
+                    tracks.setDisplayname(key, newName);
+                    displayName.setText(newName);
+                }
+            }));
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
                 if (null != route) {
                     route.setCenter(centerOnPosition);
@@ -251,14 +259,14 @@ public class RouteTrackUtils {
         });
     }
 
-    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final Tracks tracks) {
+    public void updateRouteTrackButtonVisibility(final View button, final IndividualRoute route, final Tracks tracks) {
         final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route) || isTargetSet.call());
         tracks.traverse((key, r) -> {
             if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
                 someTrackAvailable.set(true);
             }
         });
-        anchor.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
+        button.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
     }
 
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {

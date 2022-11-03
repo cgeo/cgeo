@@ -64,7 +64,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.service.CacheDownloaderService;
-import cgeo.geocaching.service.GeocacheRefreshedBroadcastReceiver;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSortContext;
@@ -173,9 +173,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private TextView listFooterLine2 = null;
     private final Progress progress = new Progress();
     private String title = "";
-    private int detailTotal = 0;
     private final AtomicInteger detailProgress = new AtomicInteger(0);
-    private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private int markerId = EmojiUtils.NO_EMOJI;
     private boolean preventAskForDeletion = false;
@@ -501,7 +499,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             importGpxAttachement();
         }
 
-        getLifecycle().addObserver(new GeocacheRefreshedBroadcastReceiver(this) {
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
                 if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
@@ -718,11 +716,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
+            final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
+            setMenuItemLabel(menu, R.id.menu_drop_caches,
+                    removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
+                    removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
-                final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
-                setMenuItemLabel(menu, R.id.menu_drop_caches,
-                        removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
-                        removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
                 setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
@@ -869,7 +867,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
-            new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
+            new GpxExport().export(adapter.getCheckedOrAllCaches(), this, title);
         } else if (menuItem == R.id.menu_export_fieldnotes) {
             new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
@@ -2062,5 +2060,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else {
             sortContext.setListContext(type, null);
         }
+    }
+
+    private void showProgress(final boolean loading) {
+        final View progressBar = findViewById(R.id.loading);
+        progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 }

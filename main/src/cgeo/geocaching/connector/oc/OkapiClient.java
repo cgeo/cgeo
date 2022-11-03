@@ -364,7 +364,7 @@ final class OkapiClient {
         result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
 
         if (finder != null) {
-            result.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, finder);
+            result.setFinder(finder);
         }
         return result;
 

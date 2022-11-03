@@ -31,7 +31,7 @@ public class UnknownTagsHandler implements TagHandler {
             handleStrike(opening, output);
         } else if ("table".equalsIgnoreCase(tag)) {
             handleProblematic();
-        } else if ("td".equalsIgnoreCase(tag)) {
+        } else if ("td".equalsIgnoreCase(tag) || "th".equalsIgnoreCase(tag)) {
             handleTd(opening, output);
         } else if ("tr".equalsIgnoreCase(tag)) {
             handleTr(opening, output);
@@ -41,6 +41,10 @@ public class UnknownTagsHandler implements TagHandler {
             handleOl(opening);
         } else if ("li".equalsIgnoreCase(tag)) {
             handleLi(opening, output);
+        } else if ("dt".equalsIgnoreCase(tag)) {
+            handleDT(opening, output);
+        } else if ("dd".equalsIgnoreCase(tag)) {
+            handleDD(output);
         } else if ("hr".equalsIgnoreCase(tag)) {
             handleHr(opening, output);
         }
@@ -88,6 +92,14 @@ public class UnknownTagsHandler implements TagHandler {
         } else {
             listType = ListType.Unordered;
         }
+    }
+
+    private void handleDT(final boolean opening, final Editable output) {
+        output.append(opening ? "\n>> " : "");
+    }
+
+    private void handleDD(final Editable output) {
+        output.append("\n");
     }
 
     private void handleLi(final boolean opening, final Editable output) {

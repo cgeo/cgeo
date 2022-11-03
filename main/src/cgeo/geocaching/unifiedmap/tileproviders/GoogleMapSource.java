@@ -8,5 +8,6 @@ class GoogleMapSource extends AbstractGoogleTileProvider {
 
     GoogleMapSource() {
         super(GoogleMap.MAP_TYPE_NORMAL, R.string.map_source_google_map);
+        supportsThemes = true;
     }
 }

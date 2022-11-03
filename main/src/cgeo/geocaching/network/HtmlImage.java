@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -57,6 +58,9 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
  */
 
 public class HtmlImage implements Html.ImageGetter {
+
+    //for testing purposes: setting this value will delay every image get by the given amount of milliseconds
+    private static final long TEST_DELAY_TIME_MS = 0;
 
     private static final String[] BLOCKED = {
             "gccounter.de",
@@ -181,7 +185,8 @@ public class HtmlImage implements Html.ImageGetter {
         if (textView != null) {
             result = getContainerDrawable(textView, drawable);
         } else {
-            final Maybe<BitmapDrawable> lastElement = drawable.lastElement();
+            final Maybe<BitmapDrawable> lastElement = drawable.lastElement()
+                    .timeout(5, TimeUnit.SECONDS).onErrorComplete();
             if (!lastElement.isEmpty().blockingGet()) {
                 result = lastElement.blockingGet();
             }
@@ -227,6 +232,8 @@ public class HtmlImage implements Html.ImageGetter {
         final Uri uri = Uri.parse(url);
         if (UriUtils.isContentUri(uri)) {
             return Observable.defer(() -> {
+                delayForTest();
+
                 final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(uri, true, -1);
                 return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) :
                         Observable.just(IMAGE_ERROR_DATA);
@@ -244,6 +251,7 @@ public class HtmlImage implements Html.ImageGetter {
                 disposable.add(aborter);
                 // Canceling this subscription must dispose the data retrieval
                 emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
+                    delayForTest();
                     final ImmutableTriple<BitmapDrawable, Metadata, Boolean> loaded = loadFromDisk();
                     final BitmapDrawable bitmap = loaded.left;
                     if (loaded.right) {
@@ -344,7 +352,7 @@ public class HtmlImage implements Html.ImageGetter {
                     return true;
                 }
             } catch (final Exception e) {
-                Log.w("Exception in HtmlImage.downloadOrRefreshCopy: " + e.toString());
+                Log.w("Exception in HtmlImage.downloadOrRefreshCopy: " + e);
             }
         }
         return false;
@@ -507,6 +515,19 @@ public class HtmlImage implements Html.ImageGetter {
             scale = Math.max(options.outHeight / maxHeight, options.outWidth / maxWidth);
         }
         bfOptions.inSampleSize = scale;
+    }
+
+    private static void delayForTest() {
+        //simulate an image fetch delay for testing purposes
+        if (TEST_DELAY_TIME_MS <= 0) {
+            return;
+        }
+
+        try {
+            Thread.sleep(TEST_DELAY_TIME_MS);
+        } catch (InterruptedException ie) {
+            //do nothing
+        }
     }
 
 }

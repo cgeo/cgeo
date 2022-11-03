@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -330,7 +331,7 @@ public class SimpleDialog {
         //use "setsinglechoiceItems", because otherwise the dialog will close always after selecting an item
         builder.setSingleChoiceItems(adapter, preselectPos, (dialog, clickpos) -> {
             final Integer pos = groupedValues.second.call(clickpos);
-            if (pos == null) {
+            if (pos == null || pos < 0 || pos >= items.size()) {
                 return;
             }
 
@@ -592,7 +593,7 @@ public class SimpleDialog {
      */
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity"})
-    private static <T, G> Pair<List<TextParam>, Func1<Integer, Integer>> createGroupedDisplayValues(final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper) {
+    public static <T, G> Pair<List<TextParam>, Func1<Integer, Integer>> createGroupedDisplayValues(final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper) {
 
         final Map<G, List<Pair<Integer, TextParam>>> groupedMapList = new HashMap<>();
         final List<TextParam> singleList = new ArrayList<>();
@@ -612,7 +613,12 @@ public class SimpleDialog {
 
         if (groupedMapList.size() <= 1) {
             //no items at all or only only group (the later is far more likely) -> don't use groups at all
-            return new Pair<>(groupedMapList.isEmpty() ? Collections.emptyList() : singleList, idx -> idx);
+            return new Pair<>(groupedMapList.isEmpty() ? Collections.emptyList() : singleList, idx -> {
+                if (idx < 0 || idx >= singleList.size()) {
+                    return null;
+                }
+                return idx;
+            });
         }
 
         //sort groups by their display name
@@ -637,5 +643,17 @@ public class SimpleDialog {
         return new Pair<>(result, indexMap::get);
     }
 
-
+    /** checks a float value and restricts it to given bounds, emitting a short warning message if necessary */
+    public static float checkInputRange(final Context context, final float currentValue, final float minValue, final float maxValue) {
+        float newValue = currentValue;
+        if (newValue > maxValue) {
+            newValue = maxValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+        }
+        if (newValue < minValue) {
+            newValue = minValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+        }
+        return newValue;
+    }
 }

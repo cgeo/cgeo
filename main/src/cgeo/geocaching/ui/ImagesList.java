@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -9,6 +8,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
@@ -35,7 +35,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.FileProvider;
 import androidx.core.text.HtmlCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -239,9 +238,7 @@ public class ImagesList {
                 final Waypoint waypoint = new Waypoint(currentImage.getTitle(), WaypointType.WAYPOINT, true);
                 waypoint.setCoords(coords);
                 geocache.addOrChangeWaypoint(waypoint, true);
-                final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
-                intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
-                LocalBroadcastManager.getInstance(activity).sendBroadcast(intent);
+                GeocacheChangedBroadcastReceiver.sendBroadcast(activity, geocode);
             }
         } else if (itemId == R.id.menu_navigate) {
             final Geopoint geopoint = geoPoints.get(currentView.getId());

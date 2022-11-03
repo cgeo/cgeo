@@ -136,7 +136,7 @@ public final class MapMarkerUtils {
                 final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15)); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
                 cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER | Gravity.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
         } else if (doubleSize) {
             // main icon (type icon / custom cache icon)
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true));

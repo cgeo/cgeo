@@ -27,12 +27,10 @@ public class MapDownloaderReceiverSchemeMap extends AbstractActivity {
             DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS.id, newUri, "", "", this::callback, null);
         } else if (host.equals("kartat-dl.hylly.org") && path.endsWith("/mtk_suomi.map")) {
             // check for Hylly maps - mf-v4-map://kartat-dl.hylly.org/2021-04-25/mtk_suomi.map
-            final Uri newUri = Uri.parse("https://" + host + path);
-            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_MAP_HYLLY.id, newUri, "", "", this::callback, null);
+            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_MAP_HYLLY.id, Uri.parse("https://" + host + path), "", "", this::callback, null);
         } else {
-            // generic map download
-            Log.w("MapDownloaderReceiverSchemeMap: Received map download intent from unknown source: " + uri.toString());
-            finish();
+            // generic map download - only pure download supported, no updates
+            DownloaderUtils.triggerDownload(this, R.string.downloadmap_title, Download.DownloadType.DOWNLOADTYPE_MAP_JUSTDOWNLOAD.id, Uri.parse("https://" + host + path), "", "", this::callback, null);
         }
     }
 

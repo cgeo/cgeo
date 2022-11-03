@@ -1,13 +1,11 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CacheMarker;
-import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
-import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.unifiedmap.LayerHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -26,26 +24,24 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
     }
 
     @Override
-    protected Marker add(final Geocache cache) {
+    protected void add(final IWaypoint item) {
         final GoogleMap map = mapRef.get();
         if (map == null) {
-            return null;
+            return;
         }
+        super.add(item);
+    }
 
-        final Geopoint coords = cache.getCoords();
-        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
-        final Marker item = map.addMarker(new MarkerOptions()
+    @Override
+    protected GeoItemCache<Marker> addInternal(final IWaypoint item, final boolean isCache, final Geopoint coords, final RouteItem routeItem, final CacheMarker cm) {
+        final GoogleMap map = mapRef.get();
+        final Marker marker = map.addMarker(new MarkerOptions()
             .position(new LatLng(coords.getLatitude(), coords.getLongitude()))
-            .title(cache.getGeocode())
             .anchor(0.5f, 1f)
             .icon(BitmapDescriptorFactory.fromBitmap(cm.getBitmap()))
+            .zIndex(isCache ? LayerHelper.ZINDEX_GEOCACHE : LayerHelper.ZINDEX_WAYPOINT)
         );
-
-        Log.e("addGeoitem");
-        synchronized (items) {
-            items.put(cache.getGeocode(), item);
-        }
-        return item;
+        return new GeoItemCache<>(routeItem, marker);
     }
 
     @Override
@@ -53,9 +49,9 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
         final GoogleMap map = mapRef.get();
         if (map != null) {
             synchronized (items) {
-                final Marker item = items.get(geocode);
+                final GeoItemCache<Marker> item = items.get(geocode);
                 if (item != null) {
-                    item.remove();
+                    item.mapItem.remove();
                 }
             }
         }

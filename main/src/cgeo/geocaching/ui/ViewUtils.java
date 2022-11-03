@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -341,6 +342,7 @@ public class ViewUtils {
 
     }
 
+    @SuppressLint("AlwaysShowAction")
     public static void extendMenuActionBarDisplayItemCount(final Context ctx, final Menu menu) {
 
         final Configuration config = ctx.getResources().getConfiguration();

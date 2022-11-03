@@ -57,7 +57,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
                     return ">1000";
                 }
                 return "" + Math.round(f);
-            }, 6);
+            }, 6, 1);
             slider.setRange(-0.2f, 1000.2f);
         } else {
             maxValue = 1;
@@ -70,7 +70,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
                     return "100%";
                 }
                 return Math.round(f * 100) + "%";
-            }, 6);
+            }, 6, 100);
             slider.setRange(-0.002f, 1.002f);
         }
     }

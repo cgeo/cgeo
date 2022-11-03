@@ -386,16 +386,16 @@
         <item quantity="other">%d minutes</item>
     </plurals>
 
-    <string name="caches_store_offline">Store Offline</string>
-    <string name="caches_store_all">Store All</string>
-    <string name="caches_store_selected">Store Selected</string>
+    <string name="caches_store_offline">Store offline</string>
+    <string name="caches_store_offline_map">Store caches offline</string>
+    <string name="caches_store_selected">Store selected</string>
     <string name="caches_store_background_title">Download caches</string>
     <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
     <string name="caches_store_background_option_nothing">Do nothing</string>
     <string name="caches_store_background_option_add_to_list">Add to list</string>
     <string name="caches_store_background_option_refresh">Refresh and add to list</string>
-    <string name="caches_store_background_result_failed">Download failed, %1$d/%2$d caches were downloaded</string>
-    <string name="caches_store_background_result_canceled">Download canceled, %1$d/%2$d caches were downloaded</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download failed, %1$d/%2$d caches were downloaded</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download canceled, %1$d/%2$d caches were downloaded</string>
     <plurals name="caches_store_background_result">
         <item quantity="zero">%d caches downloaded</item>
         <item quantity="one">%d cache downloaded</item>
@@ -616,6 +616,7 @@
     <string name="cache_filter_status_select_no">No</string>
 
     <string name="cache_filter_status_select_label_found">Found</string>
+    <string name="cache_filter_status_select_label_dnf">Did not find</string>
     <string name="cache_filter_status_select_label_owned">Owned</string>
     <string name="cache_filter_status_select_label_stored">Stored</string>
     <string name="cache_filter_status_select_label_favorite">Own Favorite</string>
@@ -716,7 +717,38 @@
     <string name="debug_user_error_report_title">Report a problem</string>
     <string name="debug_user_error_errortext">An unexpected problem has occured which we would request you to report to us:</string>
     <string name="debug_user_error_explain_options">Help us fixing c:geo problems by reporting them via email with system information and c:geo logfile included.\nPlease do always also include a detailed error description with your mail!\n\nBefore sending a mail please also check our FAQ and/or social media presence for known problems.\nOther contact options can be found at \'About c:geo\'</string>
+
+    <!-- download manager -->
     <string name="debug_current_downloads">Current downloads</string>
+    <string name="downloader_pending_downloads">Pending downloads</string>
+    <string name="downloader_no_pending_downloads">No pending downloads currently</string>
+    <string name="downloader_cancel_download">Cancel download</string>
+    <string name="downloader_cancel_file">Cancel pending download of "%s" and remove downloaded parts?</string>
+    <string name="downloader_cancelled_download">Cancelled download for "%s"</string>
+    <string name="downloader_pending_info">There is at least one pausing or failed download. Do you want to open the list of pending downloads?</string>
+    <string name="downloader_retry_download">Retry download</string>
+    <string name="downloader_retry_download_details">Do you want to retry the download of the following file?</string>
+
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Download has failed (and will not be retried)</string>
+    <string name="asdm_status_paused">Download is waiting to retry or resume</string>
+    <string name="asdm_status_pending">Download is waiting to start</string>
+    <string name="asdm_status_running">Download is currently running</string>
+    <string name="asdm_status_successful">Download has successfully completed</string>
+
+    <string name="asdm_paused_queued_for_wifi">Paused: Waiting for Wifi</string>
+    <string name="asdm_paused_unknown">Paused for some other reason</string>
+    <string name="asdm_paused_waiting_for_network">Paused: Waiting for network connectivity to proceed</string>
+    <string name="asdm_paused_waiting_to_retry">Paused: Some network error occurred and the download manager is waiting before retrying the request</string>
+    <string name="asdm_error_cannot_resume">Error: Some possibly transient error occurred, but we can\'t resume the download</string>
+    <string name="asdm_error_device_not_found">Error: No external storage device was found. SD card mounted?</string>
+    <string name="asdm_error_file_already_exists">Error: Requested destination file already exists, will not be overwritten</string>
+    <string name="asdm_error_file_error">Error: Unknown storage issue</string>
+    <string name="asdm_error_http_data_error">Error: HTTP processing error at data level</string>
+    <string name="asdm_error_insufficient_space">Error: Insufficient storage space</string>
+    <string name="asdm_error_too_many_redirects">Error: Too many redirects</string>
+    <string name="asdm_error_unhandled_http_code">Error: Unhandled HTTP code</string>
+    <string name="asdm_error_unknown">Error: Unknown error</string>
 
     <!-- settings -->
     <string name="settings_title_open_settings">Open settings?</string>
@@ -733,6 +765,9 @@
     <string name="settings_title_map">Map</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
+    <string name="settings_title_offline_maps">Offline maps</string>
+    <string name="settings_title_map_themes">Offline map themes</string>
+    <string name="settings_title_map_hillshading">Offline maps hillshading</string>
     <string name="settings_title_offline_routing">Offline routing</string>
     <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
     <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
@@ -823,6 +858,7 @@
     <string name="init_signature_template_button">Insert Placeholder</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Time</string>
+    <string name="init_signature_template_day_of_week">Day of week</string>
     <string name="init_signature_template_datetime">Date &amp; Time</string>
     <string name="init_signature_template_user">User</string>
     <string name="init_signature_template_number">Number</string>
@@ -835,6 +871,7 @@
     <string name="init_signature_template_size">Size</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Location</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
@@ -966,6 +1003,8 @@
     <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can obtain maps from different providers or even create your own maps (from OSM data). First you have to select the folder in which offline maps are to be stored.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
+    <string name="settings_info_hillshading_title">Info on Hillshading</string>
+    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nThe source files containing the elevation information have to be obtained manually - click this item for sources - and placed in the sources folder defined below.</string>
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
@@ -1038,10 +1077,17 @@
     <string name="init_use_native_ua">Android browser</string>
     <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
+    <string name="init_mapshading_folder">Map Shading Files Folder</string>
+    <string name="init_mapshading_folder_text">Offline maps can be overlaid with elevation information. This information is provided as hgt/dem files that have to be placed in this folder.</string>
+    <string name="init_mapShadingLinearity_title">Shading Linearity</string>
+    <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
+    <string name="init_mapShadingScale_title">Shading Opacity</string>
+    <string name="init_mapShadingScale_description">Opacity of the shading layer, from invisible to higher values intensifying shading but may produce artifacts</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
     <string name="init_maintenance_start">Maintenance started</string>
+    <string name="init_maintenance_ongoing">This may take some time…</string>
     <string name="init_maintenance_finished">Maintenance finished</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver.</string>
@@ -1150,6 +1196,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Offline Maps</string>
     <string name="persistablefolder_offline_maps_themes">Map Themes</string>
+    <string name="persistablefolder_offline_maps_shading">Map Shading Files</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">Logfiles</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1318,6 +1365,9 @@
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
+    <string name="cache_description_rendering">Rendering description, please wait…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Warning: Description is very large (%1$d chars). Only first %2$d%% are displayed.</string>
+    <string name="cache_description_render_fully">Render complete description</string>
     <string name="cache_area_description">Area Description</string>
     <string name="cache_cache_description">Cache Description</string>
     <string name="cache_virtual_description">Virtual Question</string>
@@ -1382,6 +1432,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Map</string>
     <string name="cache_menu_map_ext">Other external apps</string>
+    <string name="cache_menu_map_ext_nolabel">Other external apps (coords only)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Open in browser</string>
     <string name="no_browser_found">No browser found</string>
@@ -1433,6 +1484,9 @@
     <string name="cache_description_updated">Cache description updated</string>
     <string name="cache_type">Type</string>
     <string name="cache_size">Size</string>
+    <string name="cache_mode">Mode</string>
+    <string name="cache_mode_linear">Linear</string>
+    <string name="cache_mode_random">Random</string>
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulty</string>
     <string name="cache_terrain">Terrain</string>
@@ -1453,6 +1507,7 @@
     <string name="cache_remove_from_history">Remove from history</string>
     <string name="cache_license">License</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_information_unavailable">Image information unavailable</string>
     <string name="cache_image_open">Open</string>
     <string name="cache_image_open_file">Open as file</string>
     <string name="cache_image_open_browser">Open in browser</string>
@@ -1630,6 +1685,7 @@
     <string name="calccoord_migrate_infotext_markdown">A legacy coordinate calculation was found in this waypoint:\n\n%1$s\n\nYou can migrate this to the new cache calculation coordinates as follows:\n\n%2$s\n\nwith new cache variables:%3$s\n\nPlease choose:\n- %4$s to perform migration as suggested\n- %5$s to dismiss the found calculation data for good\n- %6$s to continue without migration. You will be asked for migration again next time you open the waypoint for editing. Note however that editing the waypoint coordinates could delete local calculation data.</string>
 
     <!-- Formula -->
+    <string name="formula">Formula</string>
     <string name="formula_choose_function">Choose function</string>
 
     <string name="formula_function_sqrt">Square Root</string>
@@ -1665,6 +1721,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Untitled</string>
     <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Comment</string>
 
@@ -2333,7 +2390,7 @@
     <!-- permission handling -->
     <string name="close_app">Close app</string>
     <string name="ask_again">Ask me again</string>
-    <string name="location_permission_request_explanation">c:geo needs access to the GPS on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
+    <string name="location_permission_request_explanation">c:geo needs access to the GPS (fine location) on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
 
@@ -2471,11 +2528,12 @@
     <string name="downloadmap_filename">Downloading %s</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
+    <string name="download_none_selected">No files selected for download</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Updates found for:\n%1$s\n\nDo you want to update?%2$s</string>
-    <string name="download_warning">This may take quite some time and can lead to significant costs, depending on your network connection.</string>
+    <string name="download_confirmation_updates">Updates found for:</string>
+    <string name="download_warning">Downloads may take quite some time and can lead to significant costs, depending on your network connection.</string>
     <string name="download_error">Download failed with error #%d</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
@@ -2487,6 +2545,8 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
+    <string name="downloadmap_othermapdownload">other map download</string>
+    <string name="downloadmap_otherthemedownload">other theme download</string>
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
@@ -2494,7 +2554,7 @@
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
-    <string name="check_tiles_missing">Found missing routing data:\n%1$s\n\nDo you want to download those files?%2$s</string>
+    <string name="check_tiles_missing">Found missing routing data:</string>
     <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
@@ -2977,17 +3037,5 @@
     <string name="smiley_approve">Approved</string>
     <string name="smiley_disapprove">Disapproved</string>
     <string name="smiley_question">Question</string>
-    <string name="smiley_cry">Cry</string>
-    <string name="smiley_embarassed">Embarassed</string>
-    <string name="smiley_footinmouth">Foot in mouth</string>
-    <string name="smiley_innocent">Innocent</string>
-    <string name="smiley_kiss">Kiss</string>
-    <string name="smiley_laughing">Laughing</string>
-    <string name="smiley_money">Money</string>
-    <string name="smiley_sealed">Sealed</string>
-    <string name="smiley_surprised">Surprised</string>
-    <string name="smiley_tongueout">Tongue out</string>
-    <string name="smiley_undecided">Undecided</string>
-    <string name="smiley_yell">Yell</string>
 
 </resources>

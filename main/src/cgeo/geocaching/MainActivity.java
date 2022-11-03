@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.downloader.PendingDownloadsActivity;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
@@ -34,6 +35,7 @@ import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -47,21 +49,23 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.wizard.WizardMode;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
@@ -158,7 +162,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             connectorStatus.setText(connInfo);
                             connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
-                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
                                     () -> {
                                         final StringBuilder userFoundCount = new StringBuilder();
 
@@ -235,6 +239,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             }
 
             currentCoords = geo.getCoords();
+            final String averageHeight = GeoHeightUtils.getAverageHeight(geo, true);
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
                     binding.navLocation.setText(R.string.loc_no_addr);
@@ -244,10 +249,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                     final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
                     AndroidRxUtils.bindActivity(MainActivity.this, address)
                             .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(address12 -> binding.navLocation.setText(address12));
+                            .subscribe(address12 -> binding.navLocation.setText(address12 + averageHeight));
                 }
             } else {
-                binding.navLocation.setText(currentCoords.toString());
+                binding.navLocation.setText(currentCoords.toString() + averageHeight);
             }
         }
     }
@@ -435,6 +440,44 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         DataStore.cleanIfNeeded(this);
         updateCacheCounter();
         prepareQuickLaunchItems();
+        checkPendingDownloads();
+    }
+
+    /** prompts user if there's at least one blocked or failed download */
+    private void checkPendingDownloads() {
+        if (Settings.pendingDownloadsNeedCheck()) {
+            final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
+            if (pendingDownloads.size() == 0) {
+                return;
+            }
+
+            final DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            for (PendingDownload.PendingDownloadDescriptor download : pendingDownloads) {
+                final DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(download.id);
+                try (Cursor c = downloadManager.query(query)) {
+                    if (c.isAfterLast()) {
+                        if (download.date < 1665433698000L /* Oct 10th, 2022 */) {
+                            // entry is pretty old and no longer available in system's download manager, so do some housekeeping in our own database
+                            PendingDownload.remove(download.id);
+                            Log.w("removed stale download no longer recognized by download manager: id=" + download.id + ", fn=" + download.filename + ", date=" + Formatter.formatDate(download.date));
+                        }
+                    } else {
+                        while (c.moveToNext()) {
+                            final int colStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                            if (colStatus >= 0) {
+                                final int status = c.getInt(colStatus);
+                                if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
+                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                                    Settings.setPendingDownloadsLastCheck(false);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -578,7 +621,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivity(new Intent(this, UsefulAppsActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
-            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? WizardMode.WIZARDMODE_MIGRATION.id : WizardMode.WIZARDMODE_RETURNING.id);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
             startActivity(wizard);
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
@@ -604,6 +647,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_pending_downloads) {
+            startActivity(new Intent(this, PendingDownloadsActivity.class));
         } else {
             return super.onOptionsItemSelected(item);
         }

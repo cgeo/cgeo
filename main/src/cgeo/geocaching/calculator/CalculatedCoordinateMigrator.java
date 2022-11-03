@@ -314,7 +314,7 @@ public class CalculatedCoordinateMigrator {
         final String newCoordinate = "`" + waypointMigrationData.getLatPattern() + " • " + waypointMigrationData.getLonPattern() + "`";
         final StringBuilder newVariables = new StringBuilder();
         for (Map.Entry<String, String> ve : newCacheVariables.entrySet()) {
-            newVariables.append("\n- `" + ve.getKey() + " = " + ve.getValue() + "`");
+            newVariables.append("\n- `").append(ve.getKey()).append(" = ").append(ve.getValue()).append("`");
         }
 
         final String migrateButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate) + "**";
@@ -368,9 +368,7 @@ public class CalculatedCoordinateMigrator {
                     w.setCalcStateConfig(cc.toConfig());
                     cache.addOrChangeWaypoint(w, true);
                     actionAfterMigration.run();
-                }, (v, i) -> {
-                    actionAfterMigration.run();
-                }, (v, i) -> {
+                }, (v, i) -> actionAfterMigration.run(), (v, i) -> {
                     //dismiss calculated coordinate data
                     w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
                             ":" + mig.getMigrationData().getMigrationNotes());

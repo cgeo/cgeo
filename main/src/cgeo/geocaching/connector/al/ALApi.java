@@ -346,6 +346,8 @@ final class ALApi {
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
+            cache.setVotes(response.get("RatingsTotalCount").asInt());
+            cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
@@ -373,16 +375,25 @@ final class ALApi {
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get(TITLE).asText());
-            cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
+            cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\"></img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
+            cache.setVotes(response.get("RatingsTotalCount").asInt());
+            cache.setRating(response.get("RatingsAverage").floatValue());
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
-            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries")), true);
+            cache.setWaypoints(parseWaypoints((ArrayNode) response.path("GeocacheSummaries"), geocode), true);
+            final boolean isLinear = response.get("IsLinear").asBoolean();
+            if (isLinear) {
+                cache.setAlcMode(1);
+            } else {
+                cache.setAlcMode(0);
+            }
+            Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
@@ -393,48 +404,42 @@ final class ALApi {
     }
 
     @Nullable
-    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
-        if (!Settings.isALCAdvanced()) {
-            return null;
-        }
+    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson, final String geocode) {
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
         for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint(wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final Waypoint wpt = new Waypoint("S" + stageCounter + ": " + wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc = wptResponse.get("Description").asText();
 
-                // For ALCs, waypoints don't have a geocode, of course they have an id (a uuid) though.
-                // We artificially create a geocode and a prefix as at least the prefix is used when
-                // showing waypoints on the map. It seems that the geocode from the parent is used but
-                // prefixed with what we set here. Not clear where the geocode of a waypoint comes into play
-                // but we will eventually figure that out.
-
-                wpt.setGeocode(String.valueOf(stageCounter));
+                wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText();
+                final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
+                if (Settings.isALCAdvanced()) {
+                    note.append("<p><p>").append(wptResponse.get("Question").asText());
+                }
 
                 try {
                     final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
                     if (jn instanceof ArrayNode) { // implicitly covers null case as well
                         final ArrayNode multiChoiceOptions = (ArrayNode) jn;
                         if (!multiChoiceOptions.isEmpty()) {
-                            note += "<ul>";
+                            note.append("<ul>");
                             for (final JsonNode mc : multiChoiceOptions) {
-                                note += "<li>" + mc.get("Text").asText() + "</li>";
+                                note.append("<li>").append(mc.get("Text").asText()).append("</li>");
                             }
-                            note += "</ul>";
+                            note.append("</ul>");
                         }
                     }
                 } catch (Exception ignore) {
                     // ignore exception
                 }
-                wpt.setNote(note);
+                wpt.setNote(note.toString());
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
                 if (!pt.equals(pointZero)) {
@@ -464,4 +469,3 @@ final class ALApi {
         }
     }
 }
-

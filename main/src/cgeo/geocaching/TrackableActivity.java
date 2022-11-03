@@ -442,7 +442,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             binding.getRoot().setVisibility(View.VISIBLE);
 
             if (activity.imageGallery == null) {
-                ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages());
+                ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages(), true);
                 activity.imageGallery = binding.imageGallery;
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
@@ -456,7 +456,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         if (pageId == Page.IMAGEGALLERY.id) {
             String title = "*" + this.getString(Page.find(pageId).resId) + "*";
             if (this.imageGallery != null) {
-                title += " (" + this.imageGallery.getCount() + ")";
+                title += " (" + this.imageGallery.getImageCount() + ")";
             }
             return title;
         }
@@ -592,7 +592,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                 // days since last spotting
                 if (showTimeSpan) {
                     for (final LogEntry log : trackable.getLogs()) {
-                        if (log.getType() == LogType.RETRIEVED_IT || log.getType() == LogType.GRABBED_IT || log.getType() == LogType.DISCOVERED_IT || log.getType() == LogType.PLACED_IT) {
+                        if (log.logType == LogType.RETRIEVED_IT || log.logType == LogType.GRABBED_IT || log.logType == LogType.DISCOVERED_IT || log.logType == LogType.PLACED_IT) {
                             text.append(" (").append(Formatter.formatDaysAgo(log.date)).append(')');
                             break;
                         }

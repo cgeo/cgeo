@@ -17,7 +17,6 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     private String text;
     private String url;
     private String urlButton;
-    private OnPreferenceChangeListener baseOnPrefChangeListener = null;
 
     public CheckBoxWithPopupPreference(final Context context) {
         super(context);

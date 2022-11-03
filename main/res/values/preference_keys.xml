@@ -57,9 +57,6 @@
     <!-- category nearby search -->
     <string translatable="false" name="pref_nearbySearchLimit">nearbySearchLimit</string>
 
-    <!-- category browser -->
-    <string translatable="false" name="pref_nativeUa">nativeUa</string>
-
     <!-- settings for geocaching.com service screen -->
     <string translatable="false" name="preference_screen_gc">preference_screen_gc</string>
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>
@@ -190,6 +187,8 @@
     <string translatable="false" name="pref_persistablefolder_offlinemaps">persistablefolder_offlinemaps</string>
     <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
+    <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
     <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
 
@@ -306,7 +305,8 @@
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
     <string translatable="false" name="pref_navigation_menu_locus">navigationLocus</string>
-    <string translatable="false" name="pref_navigation_menu_google_maps">navigationGoogleMaps</string>
+    <string translatable="false" name="pref_navigation_menu_other">navigationGoogleMaps</string>
+    <string translatable="false" name="pref_navigation_menu_other_nolabel">navigationOtherNolabel</string>
     <string translatable="false" name="pref_navigation_menu_google_navigation">navigationGoogleNav</string>
     <string translatable="false" name="pref_navigation_menu_google_streetview">navigationStreetView</string>
     <string translatable="false" name="pref_navigation_menu_oruxmaps">navigationOruxmaps</string>
@@ -394,6 +394,9 @@
         <item>@string/pref_value_theme_light</item>
         <item>@string/pref_value_theme_dark</item>
     </string-array>
+
+    <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>
+    <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -527,6 +530,8 @@
     <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
     <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
     <string translatable="false" name="pref_dbCleanupLastCheck">dbCleanupLastCheck</string>
+    <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
+    <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

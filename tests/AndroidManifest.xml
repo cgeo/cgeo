@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="28" />
+        android:minSdkVersion="21"
+        android:targetSdkVersion="31" />
 
     <uses-feature
         android:name="android.hardware.screen.portrait"
@@ -29,7 +29,9 @@
             android:name="android.test.runner"
             android:required="false" />
 
-        <activity android:name="CgeoTestsActivity" >
+        <activity
+            android:name="CgeoTestsActivity"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

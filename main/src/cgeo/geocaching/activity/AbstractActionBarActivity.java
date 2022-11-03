@@ -14,7 +14,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUpAction();
-        showProgress(false);
     }
 
 

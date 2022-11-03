@@ -24,7 +24,7 @@
     <string name="mega">Mega event</string>
     <string name="giga">Giga event</string>
     <string name="earth">EarthCache</string>
-    <string name="cito">CITO - Cash in Trash Out Event</string>
+    <string name="cito">CITO - Cache In Trash Out Event</string>
     <string name="webcam">Webcam Cache</string>
     <string name="virtual">Virtuálka</string>
     <string name="wherigo">Wherigo keška</string>
@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Rázcestie</string>
     <string name="wp_waypoint">Referenčný bod</string>
     <string name="wp_original">Pôvodné súradnice</string>
+    <string name="wp_generated">Vygenerované</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finál</string>
     <string name="wpnew_stage">Stage</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Cez</string>
     <string name="wpnew_waypoint">Značka</string>
     <string name="wpnew_original">Pôvodné</string>
+    <string name="wpnew_generated">Vygenerované</string>
     <!-- logs -->
     <string name="log_found">Nájdená</string>
     <string name="log_dnf">Nenájdená</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Pridávajú sa obrázky…</string>
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
+    <string name="log_templates">Nájdené: Šablóna logu…</string>
     <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
     <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
     <string name="log_add">Pridať</string>
@@ -312,6 +315,7 @@
     <string name="loc_trying">zisťovanie polohy</string>
     <string name="loc_no_addr">neznáma adresa</string>
     <string name="loc_gps_disabled">GPS zakázané</string>
+    <string name="loc_copied_clipboard">Aktuálna poloha bola skopírovaná do schránky</string>
     <string name="menu_centerposition">Vycentrovať na moju polohu</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikácii</string>
@@ -340,6 +344,12 @@
     <string name="caches_more_caches_no">Žiadne ďalšie skrýše</string>
     <string name="caches_more_caches_loading">Načítanie skrýš…</string>
     <string name="caches_more_caches_currently">momentálne</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Načítať %1$d ďalšiu kešku</item>
+        <item quantity="few">Načítať %1$d ďalšie kešky</item>
+        <item quantity="many">Načítať %1$d ďalšej kešky</item>
+        <item quantity="other">Načítať %1$d ďalších kešiek</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Načítať zostávajúce kešky (%1$d/%2$d)</string>
     <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
     <string name="caches_eta_ltm">menej než minúta</string>
@@ -350,9 +360,21 @@
         <item quantity="other">%d minút</item>
     </plurals>
     <string name="caches_store_offline">Uložiť offline</string>
-    <string name="caches_store_all">Uložiť všetko</string>
-    <string name="caches_store_unsaved">Uložiť neuložené</string>
-    <string name="caches_store_selected">Uložiť vybraté</string>
+    <string name="caches_store_offline_map">Uložiť kešky offline</string>
+    <string name="caches_store_selected">Uložiť vybrané</string>
+    <string name="caches_store_background_title">Stiahnuť kešky</string>
+    <string name="caches_store_background_already_stored">Niektoré kešky sú už uložené. Čo sa s nimi má stať?</string>
+    <string name="caches_store_background_option_nothing">Nerobiť nič</string>
+    <string name="caches_store_background_option_add_to_list">Pridať do zoznamu</string>
+    <string name="caches_store_background_option_refresh">Obnoviť a pridať do zoznamu</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
+    <plurals name="caches_store_background_result">
+        <item quantity="one">%d keška stiahnutá</item>
+        <item quantity="few">%d kešky stiahnuté</item>
+        <item quantity="many">%d kešky stiahnuté</item>
+        <item quantity="other">%d kešiek stiahnutých</item>
+    </plurals>
     <string name="caches_history">História</string>
     <string name="caches_on_map">Zobraziť na mape</string>
     <string name="caches_sort">Zoradiť</string>
@@ -405,6 +427,8 @@
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
     <string name="caches_show_attributes">Zobraziť prehľad atribútov</string>
+    <string name="caches_set_cache_icon">Nastaviť ikonu kešky</string>
+    <string name="caches_reset_cache_icons_title">Obnoviť ikonu kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
     <string name="caches_askdeletion">Požiadať o odstránenie, ak je prázdne</string>
@@ -482,12 +506,15 @@
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filter_origin">Pôvod</string>
     <string name="cache_filter_stored_since">Posledná aktualizácia podrobností</string>
+    <string name="cache_filter_logical_filter_group">Vložený filter</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
+    <string name="cache_filtergroup_special">Špeciálne</string>
     <string name="cache_filter_contexttype_live_title">Live filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Vložený filter</string>
     <string name="cache_filter_include">Zahrnúť</string>
     <string name="cache_filter_exclude">Vylúčiť</string>
     <string name="cache_filter_userdisplay_complex">Zložité</string>
@@ -544,13 +571,17 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log Nájdené</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyriešená mysterka</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra sa týka len mysteriek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo vyplnený finálny bod trasy so súradnicami.</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">S vlastnými bodmi trasy</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra platí len pre mysterky. Ak chcete vylúčiť iné typy kešiek, definujte vhodný filter typu kešiek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo platný trasový bod fináliek vyplnený súradnicami.</string>
     <string name="cache_filter_status_active">Aktívna</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
     <string name="cache_filter_status_exclude_active">Okrem aktívnych</string>
     <string name="cache_filter_status_exclude_disabled">Okrem deaktivovaných</string>
     <string name="cache_filter_status_exclude_archived">Okrem archivovaných</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Vrátane kešiek bez Obtiažnosti/Terénu</string>
+    <string name="cache_filter_nested_filter_modify">zmeniť</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Subfilter je momentálne prázdny</string>
     <string name="cache_filter_log_entry_foundby">Nájdené kým</string>
     <string name="cache_filter_log_entry_logtext">Text logu</string>
     <string name="cache_filter_stored_since_notstored">Neuložené</string>
@@ -576,6 +607,7 @@
     <string name="about_changelog">Zmeny</string>
     <string name="about_changelog_nightly_build">Nočná verzia</string>
     <string name="about_changelog_next_release">Ďalšie vydanie</string>
+    <string name="about_changelog_bugfix_release">Bugfix release</string>
     <string name="about_system">Systém</string>
     <string name="about_donate">Podporte nás</string>
     <string name="about_donation_more">Informácie nájdete na webovej stránke</string>
@@ -613,7 +645,33 @@
     <string name="debug_user_error_report_title">Nahlásenie problému</string>
     <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomôžte nám opraviť problémy aplikácie c:geo tak, že ich nahlásite cez e-mail s informáciami o systéme a priloženým súborom denníka aplikácie c:geo.\nVo svojej e-mailovej správy vždy uveďte aj podrobný popis chyby!\n\nPred odoslaním e-mailu skontrolujte aj naše Najčastejšie otázky a spoločenské médiá, kde nájdete informácie o známych problémoch.\nĎalšie možnosti kontaktu nájdete v časti „Informácie o aplikácii c:geo“.</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Aktuálne preberania</string>
+    <string name="downloader_pending_downloads">Čaká sa na stiahnutie</string>
+    <string name="downloader_no_pending_downloads">Momentálne nečaká nič na stiahnutie</string>
+    <string name="downloader_cancel_download">Zrušiť sťahovanie</string>
+    <string name="downloader_cancel_file">Zrušiť sťahovanie „%s“ a odstrániť stiahnuté časti?</string>
+    <string name="downloader_cancelled_download">Zrušené sťahovanie „%s“</string>
+    <string name="downloader_pending_info">Je tu aspoň jedno pozastavené alebo neúspešné sťahovanie. Otvoriť zoznam čakajúcich sťahovaní?</string>
+    <string name="downloader_retry_download">Opakovať sťahovanie</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Sťahovanie neúspešné (a nebude sa opakovať)</string>
+    <string name="asdm_status_paused">Sťahovanie čaká na zopakovanie alebo pokračovanie</string>
+    <string name="asdm_status_pending">Sťahovanie čaká na spustenie</string>
+    <string name="asdm_status_running">Sťahovanie práve prebieha</string>
+    <string name="asdm_status_successful">Sťahovanie bolo úspešne dokončené</string>
+    <string name="asdm_paused_queued_for_wifi">Pozastavené: čaká sa na Wi-Fi</string>
+    <string name="asdm_paused_unknown">Pozastavené z nejakého iného dôvodu</string>
+    <string name="asdm_paused_waiting_for_network">Pozastavené: čaká sa na pripojenie siete a pokračovanie</string>
+    <string name="asdm_paused_waiting_to_retry">Pozastavené: vyskytla sa chyba siete a správca sťahovania čaká, potom zopakuje požiadavku</string>
+    <string name="asdm_error_cannot_resume">Chyba: vyskytla sa možná chyba prenosu, ale nemôžeme pokračovať v sťahovaní</string>
+    <string name="asdm_error_device_not_found">Chyba: nenašlo sa žiadne externé ukladacie zariadenie, je karta SD pripojená?</string>
+    <string name="asdm_error_file_already_exists">Chyba: požadovaný cieľový súbor už existuje, ale nedá sa prepísať</string>
+    <string name="asdm_error_file_error">Chyba: neznámy problém s ukladacím priestorom</string>
+    <string name="asdm_error_http_data_error">Chyba: chyba spracovávania cez HTTP na úrovni údajov</string>
+    <string name="asdm_error_insufficient_space">Chyba: nedostatok ukladacieho priestoru</string>
+    <string name="asdm_error_too_many_redirects">Chyba: Príliš veľa presmerovaní</string>
+    <string name="asdm_error_unhandled_http_code">Chyba: nespracovaný kód HTTP</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otvoriť nastavenia?</string>
     <string name="settings_title_services">Služby</string>
@@ -629,6 +687,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavte zdroj mapy, možnosti offline máp a mapových detailov.</string>
     <string name="settings_title_map_data">Mapové podklady</string>
+    <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_offline_routing">Offline navigácia</string>
     <string name="settings_summary_offline_routing">Offline navigácia je k dispozícii, ak je nainštalovaná a nakonfigurovaná pomocná aplikácia \"BRouter\", prípadne aj je povolená interná navigácia.</string>
     <string name="settings_title_map_rotation">Otáčanie mapy (Google Mapy)</string>
@@ -636,6 +695,8 @@
     <string name="settings_title_map_content">Obsah máp</string>
     <string name="settings_title_map_behavior">Nastavenie správania mapy</string>
     <string name="settings_title_map_style">Štýl mapy</string>
+    <string name="settings_hide_tileproviders_title">Skryť zdroje máp</string>
+    <string name="settings_hide_tileproviders_summary">Vylúčte jeden alebo viac zdrojov mapy z výberu zdrojov mapy</string>
     <string name="settings_title_data_dir">Priečinok s údajmi o keškách</string>
     <string name="settings_title_data_dir_usage">Priečinok údajov o keškách (využité %1$s)</string>
     <string name="calculate_dataDir_title">Využitie údajov skrýš</string>
@@ -651,6 +712,9 @@
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
     <string name="settings_category_browser">Prehliadač</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
+    <string name="settings_category_nearbysearch">Hľadať v okolí</string>
+    <string name="init_nearbysearchlimit_title">Limit hľadania v okolí</string>
+    <string name="init_nearbysearchlimit_description">Obmedzuje vzdialenosť, v rámci ktorej sú kešky vrátené pomocou vyhľadávania v okolí (0=neobmedzené)</string>
     <string name="settings_category_geocaching_additionals">Ďalšie služby a doplnok</string>
     <string name="settings_category_social">Sociálne médiá</string>
     <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
@@ -709,6 +773,7 @@
     <string name="init_signature_template_button">Vložiť zástupný znak</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Čas</string>
+    <string name="init_signature_template_day_of_week">Deň v týždni</string>
     <string name="init_signature_template_datetime">Dátum a čas</string>
     <string name="init_signature_template_user">Používateľ</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
@@ -720,6 +785,7 @@
     <string name="init_signature_template_log">Pozícia pre zápis do logu</string>
     <string name="init_signature_template_size">Veľkosť</string>
     <string name="init_signature_template_type">Typ</string>
+    <string name="init_signature_template_location">Poloha</string>
     <string name="init_ratingwanted">GCvote hodnotenie</string>
     <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Logy priateľov a vlastné</string>
@@ -757,6 +823,8 @@
     <string name="init_summary_prevent_cache_note_merge">Ak je toto nastavenie aktivované, c:geo natrvalo odstráni uloženú poznámku a nahradí ju osobnou poznámkou zo servera. Neurobí sa žiadne zlúčenie.</string>
     <string name="init_customtabs_as_browser">Použiť Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externé webové stránky sa budú zobrazovať bez opustenia c:geo (možné len vtedy, ak je nainštalované Chrome)</string>
+    <string name="init_rot13_hint">Zašifrovať nápovedu</string>
+    <string name="init_summary_rot13_hint">Zobrazit text pomôcky ROT-13 zašifrovaný až do ťuknutia</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
     <string name="init_summary_save_log_img">Ukladať obrázky z logov</string>
     <string name="init_units">Imperiálne jednotky</string>
@@ -771,6 +839,8 @@
     <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
+    <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
+    <string name="init_summary_quicklaunchitems">Vyberte jednu alebo viac položiek ako tlačidlá rychlého spustenia na domovskej obrazovke</string>
     <!-- app theme -->
     <string name="settings_theme_title">Téma</string>
     <string-array name="settings_theme_entries">
@@ -778,6 +848,8 @@
         <item>Svetlá</item>
         <item>Tmavá</item>
     </string-array>
+    <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Zobraziť tapetu zariadenia ako pozadie domovskej obrazovky</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
     <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
@@ -803,6 +875,9 @@
     <string name="init_backup_history_length_min">Len najnovšia</string>
     <string name="init_backup_history_length_max">Ponechať všetky</string>
     <string name="init_backup_history_delete_warning">Máte uložených viac záloh, než dovoľuje nakonfigurovaná maximálna hodnota. Naozaj chcete odstrániť všetky zálohy, čo sú nad limit?</string>
+    <string name="init_backup_automatic">Automatické zálohovanie</string>
+    <string name="init_backup_automatic_summary">Vykonáva automatické zálohovanie každých x dní (okrem všetkých manuálne vytvorených záloh), 0=vypnuté</string>
+    <string name="init_backup_automatic_performing">Vytvára sa záloha…</string>
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
@@ -909,10 +984,17 @@
     <string name="init_use_native_ua">Android prehliadač</string>
     <string name="init_summary_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľoch siete.</string>
     <string name="init_rendertheme_folder">Priečinok mapových motívov</string>
+    <string name="init_mapshading_folder">Priečinok súborov pre tieňovanie mapy</string>
+    <string name="init_mapshading_folder_text">Offline mapy môžu byť prekryté informáciami o nadmorskej výške. Tieto informácie sa poskytujú ako súbory hgt/dem, ktoré je potrebné umiestniť do tohto priečinka.</string>
+    <string name="init_mapShadingLinearity_title">Linearita tieňovania</string>
+    <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňujú kontrast v strmých svahoch, ale skrývajú zmeny v plochých, veľké hodnoty ho robia lineárnejším</string>
+    <string name="init_mapShadingScale_title">Nepriehľadnosť tieňovania</string>
+    <string name="init_mapShadingScale_description">Nepriehľadnosť vrstvy tieňovania, od neviditeľnej po vyššie hodnoty, ktoré zintenzívňujú tieňovanie, ale môžu vytvárať artefakty</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">Aplikácia c:geo ukladá obrázky a ďalšie súbory týkajúce sa kešky vo vyhradenom priečinku. V niektorých prípadoch (napríklad pri importe/exporte databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete odstrániť tu.</string>
     <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
     <string name="init_maintenance_start">Údržba spustená</string>
+    <string name="init_maintenance_ongoing">Môže to chvíľu trvať…</string>
     <string name="init_maintenance_finished">Údržba dokončená</string>
     <string name="init_location">Geolokácia</string>
     <string name="init_location_note">Na zariadeniach vybavených službami Google Play môže c:geo automaticky používať lepšiu možnosť geolokácie. Táto možnosť ale zabraňuje používaniu externého bluetooth GPS prijímača. Zároveň, v móde s nízkou spotrebou môže byť zabránené použitiu GPS keď nie je nutná vysoká presnosť zamerania.</string>
@@ -955,6 +1037,8 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Použiť zjednotenú mapu</string>
+    <string name="init_summary_useUnifiedMap">Použite novú zjednotenú mapu namiesto vstavaných máp Google Map/Mapsforge (OSM) (experimentálne/zďaleka nie sú dokončené/iba na testovanie)</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
     <string name="localstorage_migrate_status_major">Verzia %1$d</string>
     <!-- proximity notification -->
@@ -1013,6 +1097,7 @@
     <string name="persistablefolder_base">Hlavný</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Mapové motívy</string>
+    <string name="persistablefolder_offline_maps_shading">Tieňovacie súbory mapy</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Súbory denníkov</string>
     <string name="persistablefolder_fieldnotes">Poznámky</string>
@@ -1095,6 +1180,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Odstrániť všetky vlastné body trasy tejto kešky?\n\nBody trasy budú ihneď vymazané, nie je možné vrátiť do späť.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povolené \"body trasy z poznámky\". Ak máte v osobnej poznámke súradnice rozpoznané programom c:geo, body trasy sa automaticky znova vytvoria. Môžete to zakázať v dialógovom okne úpravy osobnej poznámky.</string>
     <string name="cache_delete_userdefined_waypoints_success">Vlastné body trasy odstránené</string>
+    <string name="cache_delete_generated_waypoints">Odstrániť vygenerované body trasy</string>
+    <string name="cache_delete_generated_waypoints_confirm">Odstrániť všetky vygnerované body trasy z tejto kešky?\n\nBody trasy sa odstránia ihneď, nie je možné vrátiť to späť.</string>
+    <string name="cache_delete_generated_waypoints_success">Vygenerované body trasy odstránené</string>
     <string name="cache_offline_store">Uložiť</string>
     <string name="cache_offline_stored">Uložená v zariadení</string>
     <string name="cache_offline_not_ready">Nie je pripravená\nna použitie offline</string>
@@ -1140,6 +1228,7 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Neboli nájdené žiadne uložiteľné body trasy</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Zabrániť extrakcii bodov trasy</string>
     <string name="cache_personal_note_limit">Limit na osobné poznámky</string>
+    <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Táto osobná poznámka sa skráti približne o %1$d znakov na %3$s (max. veľkosť %2$d).</string>
     <string name="cache_personal_note_upload">Nahrať</string>
     <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
@@ -1211,6 +1300,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mapa</string>
     <string name="cache_menu_map_ext">Ďalšie externé aplikácie</string>
+    <string name="cache_menu_map_ext_nolabel">Iné externé aplikácie (len súradnice)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otvoriť v prehliadači</string>
     <string name="no_browser_found">Nebol nájdený prehliadač</string>
@@ -1224,6 +1314,7 @@
     <string name="menu_caches">Spravovať skrýše</string>
     <string name="cache_menu_event">Pridať do kalendára</string>
     <string name="cache_menu_extract_waypoints">Extrahovať body trasy</string>
+    <string name="cache_menu_scan_calculated_waypoints">Vyhľadať vzorce pre body trasy</string>
     <string name="cache_menu_set_found">Nastaviť ako nájdené</string>
     <string name="cache_menu_set_DNF">Nastaviť ako nenájdené</string>
     <string name="cache_menu_reset_foundstate">Vynulovať stav nájdenia</string>
@@ -1239,6 +1330,7 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Hlasovať</string>
     <string name="cache_menu_challenge_checker">Hľadať challenge checker</string>
+    <string name="cache_menu_log_in_browser">Zalogovať v prehliadači</string>
     <string name="cache_menu_ignore">Ignorovať skrýšu</string>
     <string name="cache_log_menu_decrypt">Šifrovať/Dešifrovať</string>
     <string name="cache_log_menu_popup_title">Logovať %s</string>
@@ -1260,6 +1352,9 @@
     <string name="cache_description_updated">Popis kešky aktualizovaný</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Veľkosť</string>
+    <string name="cache_mode">Režim</string>
+    <string name="cache_mode_linear">Lineárny</string>
+    <string name="cache_mode_random">Náhodne</string>
     <string name="cache_distance">Vzdialenosť</string>
     <string name="cache_difficulty">Náročnosť</string>
     <string name="cache_terrain">Terén</string>
@@ -1280,13 +1375,20 @@
     <string name="cache_remove_from_history">Odstrániť z histórie</string>
     <string name="cache_license">Licencia</string>
     <string name="cache_image">Obrázok</string>
+    <string name="cache_image_open">Otvoriť</string>
     <string name="cache_image_open_file">Otvoriť ako súbor</string>
     <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
+    <string name="cache_image_share">Zdieľať</string>
+    <string name="cache_image_show_description">Zobraziť popis</string>
     <string name="cache_image_add_waypoint">Nový bod trasy</string>
+    <string name="cache_image_rename">Premenovať</string>
+    <string name="cache_image_delete">Odstrániť</string>
+    <string name="cache_image_title_camera_prefix">Fotografia</string>
     <string name="cache_image_background">Obrázok na pozadí listingu</string>
     <string name="cache_share_field">Zdieľať</string>
     <string name="cache_time_full_hours">hodín</string>
     <string name="cache_listed_on">Uvedené na %s</string>
+    <string name="cache_recently_viewed">Nedávno zobrazené</string>
     <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
@@ -1295,6 +1397,13 @@
     <string name="cache_alc_install">Ak chcete hrať túto adventúru, nainštalujte si aplikáciu Adventure Lab</string>
     <string name="context_share_as_text">Zdieľať text</string>
     <string name="context_share_as_link">Zdieľať odkaz</string>
+    <string name="image_category_uncategorized">Nezaradené</string>
+    <string name="image_category_own">Vlastné</string>
+    <string name="image_category_listing">Listing</string>
+    <string name="image_category_log">Log</string>
+    <string name="context_map_add_to_route">Pridať do trasy</string>
+    <string name="context_map_add_to_route_start">Pridať pred trasu</string>
+    <string name="context_map_show_coords">Zobraziť súradnice</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použiť aktuálny zoznam</string>
@@ -1304,6 +1413,9 @@
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
     <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
+    <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku/bod trasy)</string>
+    <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
+    <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
@@ -1344,8 +1456,10 @@
     <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
     <string name="waypoint_calculated_coordinates">Vypočítané súradnice</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Vypočítať súradnice</string>
     <string name="waypoint_custom">vlastný</string>
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
+    <string name="waypoint_my_coordinates_accuracy">Moje súradnice (±%s)</string>
     <string name="waypoint_bearing">Azimut v °</string>
     <string name="waypoint_distance">Vzdialenosť</string>
     <string name="waypoint_name">Názov</string>
@@ -1379,19 +1493,83 @@
     <string name="waypoint_duplicate">Duplikovať bod trasy</string>
     <string name="waypoint_toclipboard">Kopírovať bod trasy do schránky</string>
     <string name="waypoint_copy_of">Kópia</string>
+    <string name="waypoint_open_geochecker">Otvoriť Geochecker</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
     <string name="waypoint_coordinate_formats_plain">Iba text</string>
     <string name="from_clipboard">Zo schránky</string>
     <string name="copy_to_clipboard">Kopírovať do schránky</string>
     <!-- Variables -->
+    <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
+    <string name="variables_scanlisting">Prehľadať listing</string>
+    <string name="variables_scanlisting_choosepattern_title">Vyberte vzor pre nájdené</string>
+    <string name="variables_scanlisting_nopatternfound">Nenašiel sa žiadny vzor</string>
+    <string name="variables_tidyup">Upratať</string>
+    <string name="variables_deleteall">Zmazať všetko</string>
+    <string name="variables_deleteall_confirm_text">Skutočne chcete zmazať všetky premenné pre túto kešku?</string>
+    <string name="variables_info">Nápoveda</string>
+    <string name="variables_varname_dialog_title">Názov premennej</string>
+    <string name="variables_varname_dialog_message">Zadajte názov premennej (môže zostať prázdne)</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Režim navádzania</string>
+    <string name="calccoord_guided_edit">Ťuknutím na číslicu upravte</string>
+    <string name="calccoord_guided_value">Hodnota</string>
+    <string name="calccoord_convert_to_plain">Prevod na obyčajné súradnice</string>
+    <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
+    <string name="calccoord_remove_spaces">Odstrániť medzery</string>
+    <string name="calccoord_paste_from_clipboard">Vložiť zo schránky</string>
+    <string name="calccoord_generate_title">Generovať body trasy</string>
+    <string name="calccoord_generate_showonmap">Zobraziť na mape</string>
+    <string name="calccoord_generate_waypointnameprefix">Vygenerované</string>
+    <string name="calccoord_generate_error_novarwithrange">Nenašla sa žiadna platná premenná s rozsahmi</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Žiadna kombinácia neviedla k platným súradniciam</string>
+    <string name="calccoord_generate_error_nogeopointselected">Nie sú zvolené žiadne súradnice</string>
+    <string name="calccoord_migrate_title">Prenos bodu trasy</string>
+    <string name="calccoord_migrate_migrate">Migrovať</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Presunuté z</string>
+    <string name="calccoord_migrate_cancel">Zrušiť</string>
+    <string name="calccoord_migrate_dismiss">Zamietnuť údaje</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Zamietnuté</string>
+    <string name="calccoord_migrate_infotext_markdown">V tomto bode trasy sa našiel starý výpočet súradníc:\n\n%1$s\n\nMôžete to migrovať na nové súradnice výpočtu kešky takto:\n\n%2$s\n\ns novými premennými kešky: %3$s\n\nVyberte:\n- %4$s na vykonanie migrácie podľa návrhu\n- %5$s na odmietnutie nájdených výpočtových údajov\n- %6$s na pokračovanie bez migrácie. Pri ďalšom otvorení bodu trasy na úpravu budete opäť požiadaní o migráciu. Upozorňujeme však, že úprava súradníc bodu trasy môže vymazať údaje miestneho výpočtu.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Vyberte funkciu</string>
+    <string name="formula_function_sqrt">Odmocnina</string>
+    <string name="formula_function_sin">Sínus</string>
+    <string name="formula_function_cos">Kosínus</string>
+    <string name="formula_function_tan">Tangenta</string>
+    <string name="formula_function_abs">Absolútna hodnota</string>
+    <string name="formula_function_round">Kruh</string>
+    <string name="formula_function_if">Ak</string>
+    <string name="formula_function_length">Dĺžka reťazca</string>
+    <string name="formula_function_substring">Podreťazec</string>
+    <string name="formula_function_rot13">Otočiť znaky o 13</string>
+    <string name="formula_function_rot">Otočiť znaky</string>
+    <string name="formula_function_checksum">Kontrolný súčet</string>
+    <string name="formula_function_ichecksum">Iteratívny kontrolný súčet</string>
+    <string name="formula_function_lettervalue">Hodnota slova</string>
+    <string name="formula_function_roman">Rímske na desatinné</string>
+    <string name="formula_function_vanity">Kód Vanity</string>
+    <string name="formula_function_group_simplenumeric">Jednoduchý číselný</string>
+    <string name="formula_function_group_complexnumeric">Zložitý číselný</string>
+    <string name="formula_function_group_simplestring">Jednoduchý reťazec</string>
+    <string name="formula_function_group_complexstring">Zložitý reťazec</string>
+    <string name="formula_error_unexpectedtoken">Očakávané \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Nesprávny počet parametrov, očakáva sa %1$s až %2$s, prišlo %3$s</string>
+    <string name="formula_error_wrongtype">Nesprávny typ, očakáva sa \'%1$s\', prišlo \'%2$s\' typu \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Chýba: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
+    <string name="formula_error_empty">Prázdny vzorec</string>
+    <string name="formula_error_other">Chyba: \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">Bez názvu</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Komentár</string>
     <!-- visit -->
     <string name="visit_tweet">Informovať o nájdení na Twitteri</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Aktívna mapa</string>
+    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
@@ -1435,6 +1613,13 @@
     <string name="map_show_other_title">Zobraziť iné:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filter kešiek príliš zložitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
+    <string name="map_theme_legend">Legenda témy</string>
+    <string name="map_theme_legend_info">Ťuknutím na názov kategórie otvoríte/zatvoríte kategóriu. Ťuknátím na symbol a podržaním zobrazíte krátke informácie o tomto symbole. Ťuknutím na ikonu informácií navštívite podrobnú legendu online.</string>
+    <string name="google_maps_style_default">Predvolené</string>
+    <string name="google_maps_style_night">Noc</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Vysoký kontrast</string>
+    <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
@@ -1872,6 +2057,7 @@
     <string name="tts_toggle">Prepnúť hlasové pokyny</string>
     <string name="tts_started">Rozprávanie zapnuté</string>
     <string name="tts_stopped">Rozprávanie vypnuté</string>
+    <string name="tts_running">Služba prevodu na reč je spustená…</string>
     <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
     <string name="tts_one_kilometer">jeden kilometer</string>
     <plurals name="tts_kilometers">
@@ -1910,6 +2096,12 @@
         <item quantity="few">pred %d dňami</item>
         <item quantity="many">pred %d dňami</item>
         <item quantity="other">pred %d dňami</item>
+    </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">O %d deň</item>
+        <item quantity="few">O %d dni</item>
+        <item quantity="many">O %d dňa</item>
+        <item quantity="other">O %d dní</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
@@ -1973,6 +2165,7 @@
         <item quantity="other">Bolo extrahovaných %d bodov trasy</item>
     </plurals>
     <string name="link_gc_checker">Overovač súradníc na geocaching.com dostupný cez prehliadač</string>
+    <string name="geochecker_available">Overovač k dispozícii cez prehliadač</string>
     <!-- calendar adder -->
     <string name="event_fail">Nepodarilo sa pridať Event cache do kalendára</string>
     <string name="init_low_disk_space">Málo miesta na ukladanie</string>
@@ -1982,7 +2175,6 @@
     <!-- permission handling -->
     <string name="close_app">Zavrieť aplikáciu</string>
     <string name="ask_again">Opýtať sa znova</string>
-    <string name="location_permission_request_explanation">c.geo vyžaduje prístup ku GPS na vašom zariadení ny vyhľadanie polohy a výpočet vzdialenosti a smeru ku keškám. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
@@ -2002,6 +2194,8 @@
     <string name="notification_channel_foreground_description">upozornenie sa zobrazuje, keď aplikácia c:geo robí činnosť na pozadí</string>
     <string name="notification_channel_downloader_name">preberanie súborov cez c:geo</string>
     <string name="notification_channel_downloader_description">upozornenia na výsledok preberania (napr. offline mapy)</string>
+    <string name="notification_channel_cache_download_name">sťahovanie kešky</string>
+    <string name="notification_channel_cache_download_description">oznámenia o výsledku pre sťahovanie kešiek na pozadí</string>
     <string name="notification_proximity_title">Upozornenie c:geo na blízkosť</string>
     <string name="notification_download_receiver_title">Preberanie importu</string>
     <!-- individual routes -->
@@ -2011,6 +2205,7 @@
     <string name="individual_route_error_toggling_waypoint">chyba pri prepnutí bodu trasy</string>
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
+    <string name="map_export_individual_route">Exportovať individuálnu trasu</string>
     <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
@@ -2034,7 +2229,17 @@
     <!-- individual track -->
     <string name="map_load_track">Načítať stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba pri načítaní stopy/trasy</string>
+    <string name="map_clear_track">Vymazať trasu/stopu</string>
+    <string name="map_clear_track_confirm">Chcete odstrániť trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
+    <string name="routes_tracks_menu">Trasy / stopy</string>
+    <string name="center_on_route_track">Vycentrovať na trasu/stopu</string>
+    <string name="unload_route_track">Zrušiť trasu/stopu</string>
+    <string name="route">Trasa</string>
+    <string name="track">Stopa</string>
+    <string name="make_visible">zviditeľniť</string>
+    <string name="hide">skryť</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2083,16 +2288,21 @@
     <string name="receivedownload_cancelled">Prenos súboru zrušený</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Prevziať offline mapu</string>
+    <string name="delete_offlinemap_title">Odstrániť offline mapu</string>
+    <string name="no_deletable_offlinemaps">Žiadne odstrániteľné offline mapy</string>
+    <string name="delete_file_confirmation">Odstrániť %s?</string>
+    <string name="file_deleted_info">%s odstránené</string>
     <string name="download_title">Prevziať súbor</string>
     <string name="downloadmap_info">Vyberte mapový súbor pre vašu oblasť a ťuknite na ikonu \"Uložiť\".\n\nPrevzatie prebehne na pozadí. Po dokončení prevzatia sa súbor skopíruje do priečinka máp aplikácie c:geo a nastaví sa ako aktuálna mapa.\n\nPozor: pri prevzatí mapy dôjde k prenosu veľkého množstva údajov!</string>
     <string name="downloadmap_filename">Preberá sa %s</string>
     <string name="downloadmanager_not_available">Súbor sa nedá prevziať, systémový správca preberania nie je k dispozícii</string>
     <string name="download_started">Prevzatie spustené na pozadí</string>
+    <string name="download_none_selected">Nie sú vybrané žiadne súbory na stiahnutie</string>
     <string name="downloadmap_target_not_writable">Do vybraného cieľa \"%s\" sa nedá zapisovať – prevzatý mapový súbor je uložený v systémovom priečinku prevzatých súborov a je potrebné ho ručne presunúť do priečinka máp.</string>
     <string name="downloadmap_allow_metered_network">Povoliť prevzatie cez meranú sieť (napr. mobilné pripojenie)</string>
     <string name="download_confirmation">%1$sPrevziať súbor \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Našli sa aktualizácie pre \n%1$s\n\nChcete aktualizovať?%2$s</string>
-    <string name="download_warning">Môže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.</string>
+    <string name="download_confirmation_updates">Nájdené aktualizácie pre:</string>
+    <string name="download_warning">Sťahovanie môže nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.</string>
     <string name="download_error">Nepodarilo sa prevziať, chyba #%d</string>
     <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>
     <string name="button_continue">Ďalej</string>
@@ -2104,6 +2314,8 @@
     <string name="downloadmap_mapfile">mapový súbor</string>
     <string name="downloadmap_themefile">súbor témy</string>
     <string name="downloadmap_tilefile">súbor s údajmi navigácie</string>
+    <string name="downloadmap_othermapdownload">stiahnutie inej mapy</string>
+    <string name="downloadmap_otherthemedownload">stiahnutie inej témy</string>
     <string name="downloadmap_download">prevziať</string>
     <string name="downloadmap_retrieving_directory_data">Načítavajú sa údaje priečinka…</string>
     <string name="downloadmap_checking_for_updates">Kontrolujú sa aktualizácie…</string>
@@ -2111,8 +2323,10 @@
     <string name="downloadtile_info">Aplikácia c:geo nedokáže vypočítať požadovanú trasu, pretože chýba nejaký súbor s údajmi navigácie. Chcete prevziať chýbajúce údaje navigácie?</string>
     <string name="check_tiles_menu">Skontrolovať chýbajúce údaje trás</string>
     <string name="check_tiles_found">Údaje trás už existujú</string>
-    <string name="check_tiles_missing">Našli sa chýbajúce údaje trás.:\n%1$s\n\nChcete prevziať tieto súbory?%2$s</string>
+    <string name="check_tiles_missing">Našli sa chýbajúce údaje navigácie:</string>
     <string name="check_tiles_unsupported">Upozornenie: Údaje trás nie sú minimálne sčasti pre zvolenú oblasť k dispozícii</string>
+    <string name="tileupdate_info">Ťuknutím sem skontrolujte aktualizácie stiahnutých súborov s údajmi trasy. Ťuknutím a podržaním odložíte.</string>
+    <string name="mapupdate_info">Ťuknutím sem skontrolujte aktualizácie súborov máp a tém. Ťuknutím a podržaním odložíte.</string>
     <string name="no_updates_found">Nenašli sa žiadne aktualizácie</string>
     <string name="updates_check">Kontrola aktualizácií</string>
     <string name="mapserver_mapsforge_info">Základné mapy, nie sú potrebné žiadne mapové motívy</string>
@@ -2124,6 +2338,12 @@
     <string name="mapserver_hylly_themes_info">Podrobná mapová téma, zabudovaná pre mapy \"Hylly\"</string>
     <string name="brouter_info">Služba offline navigácie</string>
     <string name="maptheme_elevate_categoryinfo">Týka sa: [A] Oblasti, [P] POI, [R] Trasy, [W] Spôsoby</string>
+    <string name="maptheme_scale_map_title">Mierkový faktor mapy</string>
+    <string name="maptheme_scale_map_summary">Mierka mapy; 100 % = bez mierky</string>
+    <string name="maptheme_scale_text_title">Mierka textu</string>
+    <string name="maptheme_scale_text_summary">Dodatočne zmení mierku textových štítkov na mape; 100 % = žiadna ďalšia mierka</string>
+    <string name="maptheme_scale_symbol_title">Mierka symbolov</string>
+    <string name="maptheme_scale_symbol_summary">Dodatočne zmení mierku symbolov na mape; 100 % = žiadna ďalšia mierka</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
@@ -2185,12 +2405,365 @@
     <string name="back">Späť</string>
     <string name="later">Neskôr</string>
     <string name="cancel">Zrušiť</string>
+    <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
     <string name="touch_again_to_exit">Opakovaným stlačením ukončíte</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Oblasti</string>
+    <string name="rtl_fell_meadow">holina/lúka</string>
+    <string name="rtl_heath">vresovisko</string>
+    <string name="rtl_marsh">močiar</string>
+    <string name="rtl_rock">skala</string>
+    <string name="rtl_scree">suťovisko</string>
+    <string name="rtl_scrub">húština</string>
+    <string name="rtl_wood_mixed">les (zmiešaný)</string>
+    <string name="rtl_wood_coniferous">les (ihličnatý)</string>
+    <string name="rtl_wood_deciduous">les (listnatý)</string>
+    <string name="rtl_glacier">ľadovec</string>
+    <string name="rtl_grass">tráva</string>
+    <string name="rtl_farmland">pole</string>
+    <string name="rtl_orchard">sad</string>
+    <string name="rtl_vineyard">vinica</string>
+    <string name="rtl_water">voda</string>
+    <string name="rtl_water_intermittent">voda (prerušovaná)</string>
+    <string name="rtl_military">vojsko</string>
+    <string name="rtl_nature_reserve">prírodná rezervácia</string>
+    <string name="rtl_nature_reserve_strict">prírodná rezervácia (prísna)</string>
+    <string name="rtl_cliff">útes</string>
+    <string name="rtl_ridge">hrebeň</string>
+    <string name="rtl_reef">útes</string>
+    <string name="rtl_dyke">násyp</string>
+    <string name="rtl_embankment">násyp</string>
+    <string name="rtl_beach">pláž</string>
+    <string name="rtl_beach_gravel">štrková pláž</string>
+    <string name="rtl_spring">prameň</string>
+    <string name="rtl_powerline">elektrické vedenie</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Cesty</string>
+    <string name="rtl_paved_path">spevnená cesta</string>
+    <string name="rtl_paved_path_gravel">spevnená cesta (štrk)</string>
+    <string name="rtl_unpaved_path">nespevnená cesta</string>
+    <string name="rtl_unpaved_path_partly_grown">nespevnená cesta (čiastočne zarastená)</string>
+    <string name="rtl_unpaved_path_grown">nespevnená cesta (zarastená)</string>
+    <string name="rtl_surface_unknown">povrch neznámy</string>
+    <string name="rtl_unpaved_footpath">nespevnená cestička</string>
+    <string name="rtl_paved_footpath">spevnená cesta</string>
+    <string name="rtl_bridleway">cestička pre kone</string>
+    <string name="rtl_access_destination">prístup (cieľ)</string>
+    <string name="rtl_access_private">prístup (súkromný)</string>
+    <string name="rtl_access_agricultural">obmedzené na poľnohospodárske/lesné mechanizmy</string>
+    <string name="rtl_access_no">prístup (nie)</string>
+    <string name="rtl_cycleway">cyklotrasa</string>
+    <string name="rtl_cycleway_steep">cyklotrasa (strmá)</string>
+    <string name="rtl_cycleway_paved">cyklotrasa (spevnená)</string>
+    <string name="rtl_paved_smooth">spevnená (hladká)</string>
+    <string name="rtl_paved_rough">spevnená (hrboľatá)</string>
+    <string name="rtl_surface_compacted">zhutnený povrch</string>
+    <string name="rtl_surface_gravel">povrchový štrk</string>
+    <string name="rtl_surface_raw">surový povrch</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">Chôdza, Cyklistika, Horolezectvo</string>
+    <string name="rtl_hiking_T1">túra T1</string>
+    <string name="rtl_hiking_T2">túra T2</string>
+    <string name="rtl_hiking_T23">túra T2/T3</string>
+    <string name="rtl_hiking_T3">túra T3</string>
+    <string name="rtl_hiking_T4">túra T4</string>
+    <string name="rtl_hiking_T45">túra T4/T5</string>
+    <string name="rtl_hiking_T5">túra T5</string>
+    <string name="rtl_hiking_T6">túra T6</string>
+    <string name="rtl_mtb_S0">MTB S0</string>
+    <string name="rtl_mtb_S1">MTB S1</string>
+    <string name="rtl_mtb_S2">MTB S2</string>
+    <string name="rtl_mtb_S3">MTB S3</string>
+    <string name="rtl_mtb_S4">MTB S4</string>
+    <string name="rtl_mtb_S56">MTB S5/6</string>
+    <string name="rtl_uphill15">stúpanie -15 %</string>
+    <string name="rtl_uphill20">stúpanie -20 %</string>
+    <string name="rtl_uphill25">stúpanie -25 %</string>
+    <string name="rtl_uphill30">stúpanie -30 %</string>
+    <string name="rtl_uphill40">stúpanie -40 %</string>
+    <string name="rtl_uphill_too_steep">príliš strmé stúpanie</string>
+    <string name="rtl_security_rope">zabezpečenie: lano</string>
+    <string name="rtl_security_rungs">zabezpečenie: priečky</string>
+    <string name="rtl_security_ladder">zabezpečenie: rebrík</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_category_poi_symbols">Body záujmu/Symboly</string>
+    <string name="rtl_bench">lavica</string>
+    <string name="rtl_cairn">mohyla</string>
+    <string name="rtl_drinking_water">pitná voda</string>
+    <string name="rtl_guidepost">rozcestník</string>
+    <string name="rtl_info_board">infopanel</string>
+    <string name="rtl_info_office">informačná kancelária</string>
+    <string name="rtl_info_terminal">informačný terminál</string>
+    <string name="rtl_peak">vrchol</string>
+    <string name="rtl_peak_cross">vrcholový kríž</string>
+    <string name="rtl_picnic_site">miesto na piknik</string>
+    <string name="rtl_playground">ihrisko</string>
+    <string name="rtl_playground_private">súkromné ihrisko</string>
+    <string name="rtl_recycling">recyklovanie</string>
+    <string name="rtl_shelter">prístrešok</string>
+    <string name="rtl_shelter_picnic">piknikový prístrešok</string>
+    <string name="rtl_shelter_rock">skalný úkryt</string>
+    <string name="rtl_telephone">telefón</string>
+    <string name="rtl_toilets">toalety</string>
+    <string name="rtl_volcano">sopka</string>
+    <string name="rtl_adit_disused">nepoužívaná štôlňa</string>
+    <string name="rtl_archaeological">archeologické</string>
+    <string name="rtl_artwork">umelecké dielo</string>
+    <string name="rtl_attraction">atrakcia</string>
+    <string name="rtl_boundary_stone">hranica (kameň)</string>
+    <string name="rtl_bunker_disused">bunker (nepoužívaný)</string>
+    <string name="rtl_castle">hrad</string>
+    <string name="rtl_cinema">kino</string>
+    <string name="rtl_cross">kríž</string>
+    <string name="rtl_fountain">fontána</string>
+    <string name="rtl_memorial">pamätník</string>
+    <string name="rtl_memorial_plaque">pamätná doska</string>
+    <string name="rtl_memorial_statue">pamätná socha</string>
+    <string name="rtl_memorial_stolperstein">pamätná dlažobná kocka</string>
+    <string name="rtl_memorial_stone">pamätný kameň</string>
+    <string name="rtl_memorial_war">vojnový pamätník</string>
+    <string name="rtl_monument">monument</string>
+    <string name="rtl_museum">múzeum</string>
+    <string name="rtl_ruins">zrúcaniny</string>
+    <string name="rtl_stone_historic">historický kameň</string>
+    <string name="rtl_theatre">divadlo</string>
+    <string name="rtl_water_well">vodná studňa</string>
+    <string name="rtl_wayside_cross">kríž pri ceste</string>
+    <string name="rtl_wayside_shrine">božia muka</string>
+    <string name="rtl_zoo">zoo</string>
+    <string name="rtl_library">knižnica</string>
+    <string name="rtl_arts_centre">umelecké centrum</string>
+    <string name="rtl_casino">kasíno</string>
+    <string name="rtl_nightclub">nočný klub</string>
+    <string name="rtl_community_centre">komunitné centrum</string>
+    <string name="rtl_social_facility">sociálne zariadenie</string>
+    <string name="rtl_townhall">radnica</string>
+    <string name="rtl_courthouse">súd</string>
+    <string name="rtl_beach_resort">plážový rezort</string>
+    <string name="rtl_cliff_diving">skákanie z útesu</string>
+    <string name="rtl_climbing">horolezectvo</string>
+    <string name="rtl_climbing_adventure">horolezecké dobrodružstvo</string>
+    <string name="rtl_free_flying">púšťanie drakov</string>
+    <string name="rtl_golf">golf</string>
+    <string name="rtl_gym">telocvičňa</string>
+    <string name="rtl_miniature_golf">minigolf</string>
+    <string name="rtl_roller_skating">kolieskové korčule</string>
+    <string name="rtl_shooting">streľba</string>
+    <string name="rtl_skateboard">skateboard</string>
+    <string name="rtl_slipway">sklz</string>
+    <string name="rtl_soccer">futbal</string>
+    <string name="rtl_stadium">štadión</string>
+    <string name="rtl_swimming_area">plavecký areál</string>
+    <string name="rtl_swimming_outdoor">vonkajšie plávanie</string>
+    <string name="rtl_tennis">tenis</string>
+    <string name="rtl_via_ferrata">ferratová cesta</string>
+    <string name="rtl_water_park">vodný park</string>
+    <string name="rtl_aerialway_station">stanica lanovky</string>
+    <string name="rtl_airport">letisko</string>
+    <string name="rtl_cable_car">lanovka</string>
+    <string name="rtl_chair_lift">stoličkový výťah</string>
+    <string name="rtl_drag_lift">dvíhací výťah</string>
+    <string name="rtl_gondola">gondola</string>
+    <string name="rtl_goods_lift">nákladný výťah</string>
+    <string name="rtl_helipad">heliport</string>
+    <string name="rtl_rail_funicular">pozemná lanovka</string>
+    <string name="rtl_parking">parkovanie</string>
+    <string name="rtl_parking_private">súkromné parkovisko</string>
+    <string name="rtl_bicycle_parking">parkovanie pre bicykle</string>
+    <string name="rtl_bicycle_rental">požičovňa bicyklov</string>
+    <string name="rtl_bicycle_shop">obchod s bicyklami</string>
+    <string name="rtl_car_rental">požičovňa áut</string>
+    <string name="rtl_car_sharing">zdieľanie áut</string>
+    <string name="rtl_car_wash">umyváreň áut</string>
+    <string name="rtl_car_shop">predajňa áut</string>
+    <string name="rtl_fuel">palivo</string>
+    <string name="rtl_ferry_terminal">trajektový terminál</string>
+    <string name="rtl_alpine_hut">horská chata</string>
+    <string name="rtl_alpine_hut_private">súkromná alpská chata</string>
+    <string name="rtl_alpine_hut_winter">zimná alpská chata</string>
+    <string name="rtl_apartment">byt</string>
+    <string name="rtl_camp_site">táborisko</string>
+    <string name="rtl_caravan_site">autokemp pre obytné prívesy</string>
+    <string name="rtl_chalet">chatka</string>
+    <string name="rtl_hostel">hostel</string>
+    <string name="rtl_hotel">hotel</string>
+    <string name="rtl_shelter_basic_hut">základný prístrešok</string>
+    <string name="rtl_wilderness_hut">chata v divočine</string>
+    <string name="rtl_wilderness_hut_private">súkromná chata v divočine</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">pivná záhrada</string>
+    <string name="rtl_cafe">kaviareň</string>
+    <string name="rtl_fastfood">fastfood</string>
+    <string name="rtl_ice_cream">zmrzlina</string>
+    <string name="rtl_pub">krčma</string>
+    <string name="rtl_restaurant">reštaurácia</string>
+    <string name="rtl_bbq">Gril</string>
+    <string name="rtl_water_point">vodný bod</string>
+    <string name="rtl_atm">atm</string>
+    <string name="rtl_bakery">pekáreň</string>
+    <string name="rtl_bank">banka</string>
+    <string name="rtl_beverages">nápoje</string>
+    <string name="rtl_books">knihy</string>
+    <string name="rtl_butcher">mäsiar</string>
+    <string name="rtl_chemist">chemik</string>
+    <string name="rtl_convenience">pohodlie</string>
+    <string name="rtl_doityourself">DIY</string>
+    <string name="rtl_farm_shop">farmársky obchod</string>
+    <string name="rtl_laundry">práčovňa</string>
+    <string name="rtl_mall">obchod</string>
+    <string name="rtl_marketplace">trh</string>
+    <string name="rtl_organic">organické</string>
+    <string name="rtl_postbox">poštová schránka</string>
+    <string name="rtl_postoffice">pošta</string>
+    <string name="rtl_sports_shop">športové potreby</string>
+    <string name="rtl_supermarket">supermarket</string>
+    <string name="rtl_travel_agency">cestovná kancelária</string>
+    <string name="rtl_defibrillator">defibrilátor</string>
+    <string name="rtl_doctors">doktori</string>
+    <string name="rtl_embassy">ambasáda</string>
+    <string name="rtl_emergency_phone">tiesňový telefón</string>
+    <string name="rtl_firebrigade">hasičský zbor</string>
+    <string name="rtl_emergency_access_point">núdzový prístupový bod</string>
+    <string name="rtl_hospital">nemocnica</string>
+    <string name="rtl_clinic">klinika</string>
+    <string name="rtl_pharmacy">lekáreň</string>
+    <string name="rtl_police">polícia</string>
+    <string name="rtl_emergency_fire_hydrant">požiarny hydrant</string>
+    <string name="rtl_emergency_suction_point">miesto čerpania vody</string>
+    <string name="rtl_adit">banská štôlňa</string>
+    <string name="rtl_petroleum_well">ropná studňa</string>
+    <string name="rtl_power_coal">elektráreň (uhoľná)</string>
+    <string name="rtl_power_gas">elektráreň (plynová)</string>
+    <string name="rtl_power_nuclear">elektráreň (jadrová)</string>
+    <string name="rtl_power_water">elektráreň (vodná)</string>
+    <string name="rtl_power_wind">elektráreň (veterná)</string>
+    <string name="rtl_wastewater_plant">čistička odpadových vôd</string>
+    <string name="rtl_water_works">vodné diela</string>
+    <string name="rtl_watermill">vodný mlyn</string>
+    <string name="rtl_weir">hrádza</string>
+    <string name="rtl_windmill">veterný mlyn</string>
+    <string name="rtl_windpump">veterná pumpa</string>
+    <string name="rtl_bunker">bunker</string>
+    <string name="rtl_farmyard">družstvo</string>
+    <string name="rtl_hunting_stand">poľovnícky posed</string>
+    <string name="rtl_lighthouse">maják</string>
+    <string name="rtl_tower_communication">telekomunikačná veža</string>
+    <string name="rtl_tower_observation">vyhliadková veža</string>
+    <string name="rtl_kindergarten">materská škola</string>
+    <string name="rtl_school">škola</string>
+    <string name="rtl_university">univerzita</string>
+    <string name="rtl_college">vysoká škola</string>
+    <string name="rtl_buddhist">budhistický</string>
+    <string name="rtl_church">kostol</string>
+    <string name="rtl_hindu">hinduistický</string>
+    <string name="rtl_mosque">mešita</string>
+    <string name="rtl_place_of_worship">posvätné miesto</string>
+    <string name="rtl_shinto">šintoizmus</string>
+    <string name="rtl_synagogue">synagóga</string>
+    <string name="rtl_pow">posvätné miesto</string>
+    <string name="rtl_pow_christian">kreťanské posvätné miesto</string>
+    <string name="rtl_pow_jewish">židovské posvätné miesto</string>
+    <string name="rtl_pow_muslim">moslimské posvätné miesto</string>
+    <string name="rtl_block">blok</string>
+    <string name="rtl_bollard">stĺpik</string>
+    <string name="rtl_border_control">hraničná kontrola</string>
+    <string name="rtl_bridge_movable">posuvný most</string>
+    <string name="rtl_cave_entrance">vchod do jaskyne</string>
+    <string name="rtl_cycle_barrier">cyklistická prekážka</string>
+    <string name="rtl_elevator">výťah</string>
+    <string name="rtl_ford">brod</string>
+    <string name="rtl_ford_small">malý brod</string>
+    <string name="rtl_gate">brána</string>
+    <string name="rtl_gate_private">súkromná brána</string>
+    <string name="rtl_geyser">gejzír</string>
+    <string name="rtl_hot_spring">termálny prameň</string>
+    <string name="rtl_kissing_gate">bozkávacia brána</string>
+    <string name="rtl_ladder">rebrík</string>
+    <string name="rtl_lift_gate">závora</string>
+    <string name="rtl_log">log</string>
+    <string name="rtl_oneway">jednosmerka</string>
+    <string name="rtl_oneway_cycle">jednosmerka (bicykel)</string>
+    <string name="rtl_oneway_cycle_rev">jednosmerka (reverzná pre bicykle)</string>
+    <string name="rtl_oneway_rev">jednosmerka (reverzná)</string>
+    <string name="rtl_peak_small">malý vrchol</string>
+    <string name="rtl_rapids">pereje</string>
+    <string name="rtl_rungs">priečky</string>
+    <string name="rtl_saddle_0">sedlo 0°</string>
+    <string name="rtl_saddle_45">sedlo 45°</string>
+    <string name="rtl_saddle_90">sedlo 90°</string>
+    <string name="rtl_saddle_135">sedlo 135°</string>
+    <string name="rtl_safety_rope">bezpečnostné lano</string>
+    <string name="rtl_stone">kameň</string>
+    <string name="rtl_traffic_signal">semafor</string>
+    <string name="rtl_turnstile">turniket</string>
+    <string name="rtl_viewpoint">vyhliadka</string>
+    <string name="rtl_waterfall">vodopád</string>
+    <string name="rtl_alp">alp</string>
+    <string name="rtl_wetland">mokraď</string>
+    <string name="rtl_moor">slatina</string>
+    <string name="rtl_coppice">porast</string>
+    <string name="rtl_plantation">plantáž</string>
+    <string name="rtl_reed">tŕstie</string>
+    <string name="rtl_mud">mud</string>
+    <string name="rtl_mudflat">blato</string>
+    <string name="rtl_cemetery">cintorín</string>
+    <string name="rtl_cemetery_christian">kresťanský cintorín</string>
+    <string name="rtl_cemetery_jewish">židovský cintorín</string>
+    <string name="rtl_cemetery_muslim">moslimský cintorín</string>
+    <string name="rtl_pedestrian_area">pešia zóna</string>
+    <string name="rtl_trading">obchodovanie</string>
+    <string name="rtl_parking_restricted">obmedzené parkovanie</string>
+    <string name="rtl_prison">väznica</string>
+    <string name="rtl_corral">ohrada</string>
+    <string name="rtl_riding_range">jazdecký areál</string>
+    <string name="rtl_allotment">záhradkárska oblasť</string>
+    <string name="rtl_retention_reservoir">retenčná nádrž</string>
+    <string name="rtl_dump">skládka</string>
+    <string name="rtl_driving_range">autodróm</string>
+    <string name="rtl_ruin">zrúcanina</string>
+    <string name="rtl_saline">solisko</string>
+    <string name="rtl_freeway">diaľnica</string>
+    <string name="rtl_freeway_similar">podobné diaľnici</string>
+    <string name="rtl_interstate">medzištátna/hlavná cesta</string>
+    <string name="rtl_secondary_road">vedľajšia cesta</string>
+    <string name="rtl_district_road">okresná/miestna cesta</string>
+    <string name="rtl_side_street">bočná ulica</string>
+    <string name="rtl_residential_road">obytná ulica</string>
+    <string name="rtl_access_road">prístupová cesta</string>
+    <string name="rtl_traffic_calmed_area">oblasť s obmedzenou premávkou</string>
+    <string name="rtl_pedestrian_road">cesta pre peších</string>
+    <string name="rtl_tunnel">tunel</string>
+    <string name="rtl_bridge">most</string>
+    <string name="rtl_railway">železnica</string>
+    <string name="rtl_path_foot">všeobecný chodník pre peších</string>
+    <string name="rtl_path_bicycle">všeobecná cyklotrasa</string>
+    <string name="rtl_path_combined_bicycle_foot">spoločná cestička pre cyklistov aj peších</string>
+    <string name="rtl_path_narrow">všeobecná cesta alebo chodník, nedostatočne široká pre automobily</string>
+    <string name="rtl_path_badly_visible">zle viditeľná cesta</string>
+    <string name="rtl_path_quality1">kvalita 1 (spevnená: asfalt, …)</string>
+    <string name="rtl_path_quality23">kvalita 2/3 (spevnená: štrk, opravená, …)</string>
+    <string name="rtl_path_quality45">kvalita 4/5 (nespevnená)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Smajlík</string>
+    <string name="smiley_big_smile">Veľký úsmev</string>
+    <string name="smiley_cool">Super</string>
+    <string name="smiley_blush">Červeň</string>
+    <string name="smiley_tongue">Vyplazený jazyk</string>
+    <string name="smiley_evil">Zlý</string>
+    <string name="smiley_shocked">Šokovaný</string>
+    <string name="smiley_wink">Žmurknutie</string>
+    <string name="smiley_clown">Klaun</string>
+    <string name="smiley_blackeye">Čierne oko</string>
+    <string name="smiley_8ball">Osmičková loptička</string>
+    <string name="smiley_frown">Zamračený</string>
+    <string name="smiley_shy">Hanba</string>
+    <string name="smiley_angry">Nahnevaný</string>
+    <string name="smiley_dead">Mŕtvy</string>
+    <string name="smiley_sleepy">Ospalý</string>
+    <string name="smiley_kisses">Bozky</string>
+    <string name="smiley_approve">Schválené</string>
+    <string name="smiley_disapprove">Zamietavý</string>
+    <string name="smiley_question">Otázka</string>
 </resources>

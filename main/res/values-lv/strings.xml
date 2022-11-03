@@ -296,10 +296,6 @@
         <item quantity="one">%d minūte</item>
         <item quantity="other">%d minūtes</item>
     </plurals>
-    <string name="caches_store_offline">Saglabāt bezsaistes lietošanai</string>
-    <string name="caches_store_all">Saglabāt visu</string>
-    <string name="caches_store_unsaved">Saglabāt nesaglabātos</string>
-    <string name="caches_store_selected">Saglabāt atlasīto</string>
     <string name="caches_history">Vēsture</string>
     <string name="caches_on_map">Parādīt kartē</string>
     <string name="caches_sort">Kārtot</string>
@@ -399,6 +395,8 @@
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Ziņot par problēmu</string>
     <string name="debug_user_error_errortext">Notikusi neparedzēta kļūda, par kuru mēs vēlamies, lai Tu ziņotu:</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">Atvērt uzstādījumus?</string>
     <string name="settings_title_services">Servisi</string>

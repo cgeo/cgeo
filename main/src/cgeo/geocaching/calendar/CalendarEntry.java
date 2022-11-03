@@ -29,6 +29,8 @@ class CalendarEntry {
     @NonNull
     private final String shortDesc;
     @NonNull
+    private final String longDesc;
+    @NonNull
     private final Date hiddenDate;
     @NonNull
     private final String url;
@@ -39,27 +41,33 @@ class CalendarEntry {
     @NonNull
     private final String coords;
     private final int startTimeMinutes;
+    private final int endTimeMinutes;
 
     CalendarEntry(@NonNull final Geocache cache, @NonNull final Date hiddenDate) {
         this(TextUtils.stripHtml(StringUtils.defaultString(cache.getShortDescription())),
+                TextUtils.stripHtml(StringUtils.defaultString(cache.getDescription())),
                 hiddenDate,
                 StringUtils.defaultString(cache.getUrl()),
                 StringUtils.defaultString(cache.getPersonalNote()),
                 cache.getName(),
                 cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                cache.getEventTimeMinutes());
+                cache.getEventStartTimeInMinutes(),
+                cache.getEventEndTimeInMinutes()
+                );
     }
 
-    private CalendarEntry(@NonNull final String shortDesc, @NonNull final Date hiddenDate, @NonNull final String url,
+    private CalendarEntry(@NonNull final String shortDesc, @NonNull final String longDesc, @NonNull final Date hiddenDate, @NonNull final String url,
                           @NonNull final String personalNote, @NonNull final String name, @NonNull final String coords,
-                          final int startTimeMinutes) {
+                          final int startTimeMinutes, final int endTimeMinutes) {
         this.shortDesc = shortDesc;
+        this.longDesc = longDesc;
         this.hiddenDate = hiddenDate;
         this.url = url;
         this.personalNote = personalNote;
         this.name = name;
         this.coords = coords;
         this.startTimeMinutes = startTimeMinutes;
+        this.endTimeMinutes = endTimeMinutes;
     }
 
     /**
@@ -88,13 +96,17 @@ class CalendarEntry {
     private String parseDescription() {
         final StringBuilder description = new StringBuilder();
         description.append(url);
-        if (StringUtils.isNotBlank(shortDesc)) {
+
+        // if shortdesc is very short (seems to have no info) use description instead
+        final String eventDesc = shortDesc.length() > 100 ? shortDesc : longDesc;
+
+        if (StringUtils.isNotBlank(eventDesc)) {
             // remove images in short description
-            final Spanned spanned = HtmlCompat.fromHtml(shortDesc, HtmlCompat.FROM_HTML_MODE_LEGACY);
+            final Spanned spanned = HtmlCompat.fromHtml(eventDesc.replaceAll("\n", "<br/>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
             String text = spanned.toString();
             final ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
             for (int i = spans.length - 1; i >= 0; i--) {
-                text = text.substring(0, spanned.getSpanStart(spans[i])) + text.substring(spanned.getSpanEnd(spans[i]));
+                text = text.substring(0, spanned.getSpanStart(spans[i])) + text.substring(spanned.getSpanEnd(spans[i])) + "\n";
             }
             if (StringUtils.isNotBlank(text)) {
                 description.append("\n\n");
@@ -123,6 +135,9 @@ class CalendarEntry {
         final int entryStartTimeMinutes = startTimeMinutes;
         if (entryStartTimeMinutes >= 0) {
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventTime + entryStartTimeMinutes * 60000L);
+            if (endTimeMinutes >= 0) {
+                intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, eventTime + endTimeMinutes * 60000L);
+            }
         } else {
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, eventTime);
             intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);

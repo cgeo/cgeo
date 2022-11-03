@@ -355,16 +355,15 @@
         <item quantity="one">%d minuto</item>
         <item quantity="other">%d minuti</item>
     </plurals>
-    <string name="caches_store_offline">Salva per Offline</string>
-    <string name="caches_store_all">Archiviare tutto</string>
-    <string name="caches_store_selected">Salva selezionati</string>
+    <string name="caches_store_offline">Salva offline</string>
+    <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
     <string name="caches_store_background_option_add_to_list">Aggiungi alla lista</string>
     <string name="caches_store_background_option_refresh">Aggiorna e aggiungi alla lista</string>
-    <string name="caches_store_background_result_failed">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
-    <string name="caches_store_background_result_canceled">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d cache scaricato</item>
         <item quantity="other">%d cache scaricati</item>
@@ -558,7 +557,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Ha un Log \"Trovato\" Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Ha Waypoint Definiti Dall\'Utente</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro riguarderà solo i cache mistery.\n\n Un mistery è considerato \'risolto\' se ha cambiato coordinate o sono state inserite le coordinate di un waypoint finale.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro influirà solo sui mystery cache. Se vuoi escludere altri tipi di cache, definisci un filtro di tipo cache appropriato.\n\nUn mystery è considerato \'risolto\' se ha cambiato coordinate o un waypoint finale valido viene settato con delle coordinate.</string>
     <string name="cache_filter_status_active">Attivo</string>
     <string name="cache_filter_status_disabled">Disabilitato</string>
     <string name="cache_filter_status_archived">Archiviato</string>
@@ -631,7 +630,33 @@
     <string name="debug_user_error_report_title">Segnala un problema</string>
     <string name="debug_user_error_errortext">Si è verificato un problema inatteso che ti chiediamo di segnalarci:</string>
     <string name="debug_user_error_explain_options">Aiutaci a risolvere i problemi c:geo segnalandoli via email con le informazioni di sistema e il file di registro di c:geo incluso.\nPer favore allega sempre una descrizione dettagliata dell\'errore con la tua mail!\n\nPrima di inviare una mail controlla anche le nostre FAQ e/o sui nostri social media per problemi noti.\nAltre opzioni di contatto possono essere trovate su \'Informazioni su c:geo\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Download correnti</string>
+    <string name="downloader_pending_downloads">Download in attesa</string>
+    <string name="downloader_no_pending_downloads">Nessun download in sospeso al momento</string>
+    <string name="downloader_cancel_download">Annulla download</string>
+    <string name="downloader_cancel_file">Annullare il download in attesa di \"%s\" e rimuovere le parti scaricate?</string>
+    <string name="downloader_cancelled_download">Download annullato per \"%s\"</string>
+    <string name="downloader_pending_info">C\'è almeno una pausa o uno scaricamento non riuscito. Vuoi aprire l\'elenco dei download in sospeso?</string>
+    <string name="downloader_retry_download">Ritentare il download</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Download non riuscito (e non verrà ritentato)</string>
+    <string name="asdm_status_paused">Il download è in attesa di riprovare o riprendere</string>
+    <string name="asdm_status_pending">Il download è in attesa di iniziare</string>
+    <string name="asdm_status_running">Il download è attualmente in esecuzione</string>
+    <string name="asdm_status_successful">Download completato con successo</string>
+    <string name="asdm_paused_queued_for_wifi">In pausa: In attesa di Wifi</string>
+    <string name="asdm_paused_unknown">In pausa per qualche altro motivo</string>
+    <string name="asdm_paused_waiting_for_network">In pausa: in attesa di connessione alla rete per procedere</string>
+    <string name="asdm_paused_waiting_to_retry">In pausa: si è verificato un errore di rete e il download è in attesa di riprovare</string>
+    <string name="asdm_error_cannot_resume">Errore: si è verificato un errore transitorio, ma non è possibile riprendere il download</string>
+    <string name="asdm_error_device_not_found">Errore: non è stato trovato alcun dispositivo di archiviazione esterno. La scheda SD è montata?</string>
+    <string name="asdm_error_file_already_exists">Errore: il file di destinazione richiesto esiste già, non verrà sovrascritto</string>
+    <string name="asdm_error_file_error">Errore: Problema di archiviazione sconosciuto</string>
+    <string name="asdm_error_http_data_error">Errore: errore di elaborazione HTTP a livello di dati</string>
+    <string name="asdm_error_insufficient_space">Errore: spazio di archiviazione insufficiente</string>
+    <string name="asdm_error_too_many_redirects">Errore: Troppi reindirizzamenti</string>
+    <string name="asdm_error_unhandled_http_code">Errore: Codice http non gestito</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -647,6 +672,7 @@
     <string name="settings_title_map">Mappa</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
+    <string name="settings_title_offline_maps">Mappe offline</string>
     <string name="settings_title_offline_routing">Navigazione offline</string>
     <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
@@ -732,6 +758,7 @@
     <string name="init_signature_template_button">Inserire segnaposto</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
+    <string name="init_signature_template_day_of_week">Giorno della settimana</string>
     <string name="init_signature_template_datetime">Data e Ora</string>
     <string name="init_signature_template_user">Utente</string>
     <string name="init_signature_template_number">Numero cache</string>
@@ -942,10 +969,17 @@
     <string name="init_use_native_ua">Browser Android</string>
     <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
     <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
+    <string name="init_mapshading_folder">Cartella File Di ombreggiatura della Mappa</string>
+    <string name="init_mapshading_folder_text">Le mappe off-line possono essere sovrepposte da curve di livello. Queste informazioni sono fornite come file hgt/dem che possono essere posizionati in questa cartella.</string>
+    <string name="init_mapShadingLinearity_title">Linearità di Ombreggiatura</string>
+    <string name="init_mapShadingLinearity_description">Piccoli valori accentuano il contrasto in pendii ripidi, ma nascondono cambiamenti nelle zone pianeggianti, grandi valori lo rendono più lineare</string>
+    <string name="init_mapShadingScale_title">Opacità Ombreggiatura</string>
+    <string name="init_mapShadingScale_description">Opacità dello strato di ombreggiatura, da invisibile a valori superiori intensifica l\'ombreggiatura, ma può produrre artefatti</string>
     <string name="init_maintenance">Manutenzione</string>
     <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
     <string name="init_maintenance_directories">Elimina file orfani</string>
     <string name="init_maintenance_start">Manutenzione avviata</string>
+    <string name="init_maintenance_ongoing">Questo potrebbe richiedere un po\' di tempo…</string>
     <string name="init_maintenance_finished">Manutenzione terminata</string>
     <string name="init_location">Geolocalizzazione</string>
     <string name="init_location_note">Su dispositivi con servizi Google Play, c:geo può utilizzare automaticamente un fornitore migliore di geolocalizzazione. Tuttavia, questo impedisce l\'uso di un ricevitore GPS BlueTooth esterno.</string>
@@ -1048,6 +1082,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Mappe Offline</string>
     <string name="persistablefolder_offline_maps_themes">Temi Mappa</string>
+    <string name="persistablefolder_offline_maps_shading">File di ombreggiatura della Mappa</string>
     <string name="persistablefolder_backup">Backup</string>
     <string name="persistablefolder_logfiles">File di log</string>
     <string name="persistablefolder_fieldnotes">Field Notes</string>
@@ -1234,6 +1269,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Mappa c:geo</string>
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
+    <string name="cache_menu_map_ext_nolabel">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
     <string name="no_browser_found">Nessun browser trovato</string>
@@ -1285,6 +1321,9 @@
     <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Dimensione</string>
+    <string name="cache_mode">Modalità</string>
+    <string name="cache_mode_linear">Lineare</string>
+    <string name="cache_mode_random">Casuale</string>
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
@@ -2077,7 +2116,6 @@
     <!-- permission handling -->
     <string name="close_app">Chiudi app</string>
     <string name="ask_again">Chiedimi di nuovo</string>
-    <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la tua posizione e calcolare la distanza e la direzione per le geocache. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
@@ -2201,8 +2239,6 @@
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
     <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
-    <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
     <string name="download_error">Download fallito con errore #%d</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
@@ -2214,6 +2250,8 @@
     <string name="downloadmap_mapfile">file mappa</string>
     <string name="downloadmap_themefile">file del tema</string>
     <string name="downloadmap_tilefile">file dei dati di percorso</string>
+    <string name="downloadmap_othermapdownload">altro download della mappa</string>
+    <string name="downloadmap_otherthemedownload">altro download del tema</string>
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Recupero dati cartella…</string>
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
@@ -2221,7 +2259,6 @@
     <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
     <string name="check_tiles_menu">Controlla i dati di routing mancanti</string>
     <string name="check_tiles_found">Dati di routing già presenti</string>
-    <string name="check_tiles_missing">Trovati dati di routing mancanti:\n%1$s\n\nVuoi scaricare questi file?%2$s</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
     <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>
@@ -2664,16 +2701,4 @@
     <string name="smiley_approve">Approvato</string>
     <string name="smiley_disapprove">Disapprovato</string>
     <string name="smiley_question">Domanda</string>
-    <string name="smiley_cry">Pianto</string>
-    <string name="smiley_embarassed">Imbarazzato</string>
-    <string name="smiley_footinmouth">Piede in bocca</string>
-    <string name="smiley_innocent">Innocente</string>
-    <string name="smiley_kiss">Bacio</string>
-    <string name="smiley_laughing">Risata</string>
-    <string name="smiley_money">Soldi</string>
-    <string name="smiley_sealed">Sigillato</string>
-    <string name="smiley_surprised">Sorpreso</string>
-    <string name="smiley_tongueout">Linguaccia</string>
-    <string name="smiley_undecided">Indeciso</string>
-    <string name="smiley_yell">Urlo</string>
 </resources>

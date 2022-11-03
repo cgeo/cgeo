@@ -360,15 +360,15 @@
         <item quantity="other">%d minut</item>
     </plurals>
     <string name="caches_store_offline">Uložit offline</string>
-    <string name="caches_store_all">Uložit všechny</string>
+    <string name="caches_store_offline_map">Ukládat kešky offline</string>
     <string name="caches_store_selected">Uložit vybrané</string>
     <string name="caches_store_background_title">Stáhnout kešky</string>
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
     <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
     <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
-    <string name="caches_store_background_result_failed">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
-    <string name="caches_store_background_result_canceled">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
+    <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
+    <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
         <item quantity="one">%d keška stažena</item>
         <item quantity="few">%d kešek staženo</item>
@@ -402,7 +402,7 @@
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
-    <string name="caches_remove_all">Odstranit vše ze seznamu</string>
+    <string name="caches_remove_all">Odstranit vše</string>
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
@@ -561,6 +561,7 @@
     <string name="cache_filter_status_select_yes">Ano</string>
     <string name="cache_filter_status_select_no">Ne</string>
     <string name="cache_filter_status_select_label_found">Nalezená</string>
+    <string name="cache_filter_status_select_label_dnf">Nenalezeno</string>
     <string name="cache_filter_status_select_label_owned">Vlastněná</string>
     <string name="cache_filter_status_select_label_stored">Uložená</string>
     <string name="cache_filter_status_select_label_favorite">Vlastní oblíbené</string>
@@ -572,7 +573,7 @@
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
-    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky. Pokud chcete vyloučit ostatní typy kešek, zadejte příslušný filtr typu kešky.\n\nMysterka je považována za \'vyřešenou\', pokud změnila souřadnice nebo platný finální trasový bod vyplněný souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
@@ -645,7 +646,35 @@
     <string name="debug_user_error_report_title">Nahlásit problém</string>
     <string name="debug_user_error_errortext">Došlo k neočekávanému problému a rádi bychom vás požádali, abyste nám jej nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomozte nám vyřešit problémy s c:geo tím, že je nahlásíte e-mailem společně se systémovými informacemi a záznamem chyb c:geo.\nK e-mailu vždy prosím uveďte také podrobný popis chyby.\n\nPřed odesláním e-mailu si prosím také přečtěte naše FAQ a/nebo přítomnost řešení známých problémů na sociálních médiích.\nOstatní možnosti kontaktu naleznete v \'O aplikaci\'</string>
+    <!-- download manager -->
     <string name="debug_current_downloads">Aktuální stahování</string>
+    <string name="downloader_pending_downloads">Čeká na stažení</string>
+    <string name="downloader_no_pending_downloads">Momentálně žádná čekající stahování</string>
+    <string name="downloader_cancel_download">Zrušit stahování</string>
+    <string name="downloader_cancel_file">Zrušit čekající stahování \"%s\" a odstranit stažené části?</string>
+    <string name="downloader_cancelled_download">Zrušené stahování pro \"%s\"</string>
+    <string name="downloader_pending_info">Existuje alespoň jedno pozastavené nebo neúspěšné stahování. Chcete otevřít seznam čekajících stahování?</string>
+    <string name="downloader_retry_download">Opakovat stahování</string>
+    <string name="downloader_retry_download_details">Chcete znovu zkusit stáhnout následující soubor?</string>
+    <!-- Android system download manager status messages -->
+    <string name="asdm_status_failed">Stahování se nezdařilo (a nebude obnoveno)</string>
+    <string name="asdm_status_paused">Stahování čeká na opakování nebo pokračování</string>
+    <string name="asdm_status_pending">Stahování čeká na spuštění</string>
+    <string name="asdm_status_running">Stahování právě probíhá</string>
+    <string name="asdm_status_successful">Stahování bylo úspěšně dokončeno</string>
+    <string name="asdm_paused_queued_for_wifi">Pozastaveno: Čekání na WiFi</string>
+    <string name="asdm_paused_unknown">Pozastaveno z jiného důvodu</string>
+    <string name="asdm_paused_waiting_for_network">Pozastaveno: Čekání na připojení k síti</string>
+    <string name="asdm_paused_waiting_to_retry">Pozastaveno: Došlo k chybě na síti a správce stahování čeká, než se pokusí požadavek zopakovat</string>
+    <string name="asdm_error_cannot_resume">Chyba: Došlo pravděpodobně k přechodné chybě, ale nemůžeme pokračovat ve stahování</string>
+    <string name="asdm_error_device_not_found">Chyba: Nebylo nalezeno žádné externí úložiště. Je SD karta připojena?</string>
+    <string name="asdm_error_file_already_exists">Chyba: Požadovaný cílový soubor již existuje, nebude přepsán</string>
+    <string name="asdm_error_file_error">Chyba: Neznámý problém s úložištěm</string>
+    <string name="asdm_error_http_data_error">Chyba: Chyba zpracování HTTP na úrovni dat</string>
+    <string name="asdm_error_insufficient_space">Chyba: Nedostatek místa v úložišti</string>
+    <string name="asdm_error_too_many_redirects">Chyba: Příliš mnoho přesměrování</string>
+    <string name="asdm_error_unhandled_http_code">Chyba: Nezpracovaný HTTP kód</string>
+    <string name="asdm_error_unknown">Chyba: Neznámá chyba</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Otevřít nastavení?</string>
     <string name="settings_title_services">Služby</string>
@@ -661,6 +690,7 @@
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
+    <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
     <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
@@ -746,6 +776,7 @@
     <string name="init_signature_template_button">Vložit zástupný znak</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Čas</string>
+    <string name="init_signature_template_day_of_week">Den v týdnu</string>
     <string name="init_signature_template_datetime">Datum a čas</string>
     <string name="init_signature_template_user">Uživatel</string>
     <string name="init_signature_template_number">Číslo nálezu</string>
@@ -758,6 +789,7 @@
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
     <string name="init_signature_template_location">Umístění</string>
+    <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
@@ -956,10 +988,17 @@
     <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
     <string name="init_rendertheme_folder">Složka mapových témat</string>
+    <string name="init_mapshading_folder">Složka se soubory stínování map</string>
+    <string name="init_mapshading_folder_text">Offline mapy lze překrýt informacemi o nadmořské výšce. Tyto informace jsou poskytovány ve formě souborů hgt/dem, které je třeba umístit do této složky.</string>
+    <string name="init_mapShadingLinearity_title">Linearita stínování</string>
+    <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
+    <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
+    <string name="init_mapShadingScale_description">Neprůhlednost vrstvy stínování, od neviditelné po vyšší hodnoty, které zintenzivňují stínování, ale mohou vytvářet artefakty</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
     <string name="init_maintenance_start">Údržba zahájena</string>
+    <string name="init_maintenance_ongoing">To může nějakou dobu trvat…</string>
     <string name="init_maintenance_finished">Údržba dokončena</string>
     <string name="init_location">Geolokace</string>
     <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
@@ -1062,6 +1101,7 @@
     <string name="persistablefolder_base">Hlavní</string>
     <string name="persistablefolder_offline_maps">Offline mapy</string>
     <string name="persistablefolder_offline_maps_themes">Motivy mapy</string>
+    <string name="persistablefolder_offline_maps_shading">Soubory se stínováním map</string>
     <string name="persistablefolder_backup">Záloha</string>
     <string name="persistablefolder_logfiles">Soubory protokolů</string>
     <string name="persistablefolder_fieldnotes">Koncepty</string>
@@ -1264,6 +1304,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Zobrazit na mapě</string>
     <string name="cache_menu_map_ext">Další externí aplikace</string>
+    <string name="cache_menu_map_ext_nolabel">Další externí aplikace (pouze souřadnice)</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
@@ -1282,7 +1323,7 @@
     <string name="cache_menu_set_DNF">Nastavit jako nenalezeno</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
-    <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="cache_menu_set_cache_icon">Nastavit ikonu kešky</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
@@ -1315,13 +1356,16 @@
     <string name="cache_description_updated">Popis kešky aktualizován</string>
     <string name="cache_type">Typ</string>
     <string name="cache_size">Velikost</string>
+    <string name="cache_mode">Režim</string>
+    <string name="cache_mode_linear">Lineární</string>
+    <string name="cache_mode_random">Náhodné</string>
     <string name="cache_distance">Vzdálenost</string>
     <string name="cache_difficulty">Obtížnost</string>
     <string name="cache_terrain">Terén</string>
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
-    <string name="cache_favorite">Oblíbená</string>
+    <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
     <string name="cache_event">Datum</string>
@@ -1491,6 +1535,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Zamítnuto</string>
     <string name="calccoord_migrate_infotext_markdown">U tohoto trasového bodu byl nalezen starší výpočet souřadnic:\n\n%1$s\n\nTento výpočet můžete přesunout do nového výpočtu souřadnic kešky následovně:\n\n%2$s\n\ns novými proměnnými kešek:%3$s\n\nProsím vyberte:\n- %4$s pro provedení přesunu doporučeným způsobem \n- %5$s pro zrušení nalezených dat výpočtů navždy\n-%6$spro pokračování bez přesunu. Až znovu otevřete úpravu trasového bodu, budete znovu dotázáni na přesun. Nicméně berte na vědomí, že úprava souřadnic trasového bodu může smazat místní data výpočtů.</string>
     <!-- Formula -->
+    <string name="formula">Vzorec</string>
     <string name="formula_choose_function">Zvolte funkci</string>
     <string name="formula_function_sqrt">Druhá odmocnina</string>
     <string name="formula_function_sin">Sinus</string>
@@ -2135,7 +2180,7 @@
     <!-- permission handling -->
     <string name="close_app">Zavřít aplikaci</string>
     <string name="ask_again">Zeptat se znova</string>
-    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
+    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS (přesná poloha) na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte kešky pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
@@ -2258,11 +2303,12 @@
     <string name="downloadmap_filename">Stahování %s</string>
     <string name="downloadmanager_not_available">Soubor nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
+    <string name="download_none_selected">Nebyly vybrány žádné soubory ke stažení</string>
     <string name="downloadmap_target_not_writable">Vybraný cíl \"%s\" není zapisovatelný - stažený mapový soubor je uložen v systémové složce pro stahování a musí být ručně přesunut do složky s mapami.</string>
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
     <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
-    <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
-    <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
+    <string name="download_confirmation_updates">Aktualizace nalezeny pro:</string>
+    <string name="download_warning">Stahování může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
     <string name="download_error">Stažení se nezdařilo s chybou #%d</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
@@ -2274,6 +2320,8 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
+    <string name="downloadmap_otherthemedownload">další téma ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
     <string name="downloadmap_retrieving_directory_data">Načítání údajů ze složky…</string>
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
@@ -2281,7 +2329,7 @@
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
     <string name="check_tiles_menu">Zkontrolovat chybějící směrovací data</string>
     <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
-    <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
+    <string name="check_tiles_missing">Nalezena chybějící směrovací data:</string>
     <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
     <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
@@ -2724,16 +2772,4 @@
     <string name="smiley_approve">Schváleno</string>
     <string name="smiley_disapprove">Neschváleno</string>
     <string name="smiley_question">Otázka</string>
-    <string name="smiley_cry">Plačící</string>
-    <string name="smiley_embarassed">Vyčerpaný</string>
-    <string name="smiley_footinmouth">Noha v puse</string>
-    <string name="smiley_innocent">Nevinný</string>
-    <string name="smiley_kiss">Polibek</string>
-    <string name="smiley_laughing">Smějící se</string>
-    <string name="smiley_money">Peníze</string>
-    <string name="smiley_sealed">Zapečetěný</string>
-    <string name="smiley_surprised">Překvapený</string>
-    <string name="smiley_tongueout">Vyplazující jazyk</string>
-    <string name="smiley_undecided">Nerozhodný</string>
-    <string name="smiley_yell">Křičící</string>
 </resources>

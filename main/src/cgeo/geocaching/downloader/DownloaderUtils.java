@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -34,6 +35,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import static android.content.Context.DOWNLOAD_SERVICE;
@@ -43,6 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 
@@ -112,8 +115,8 @@ public class DownloaderUtils {
         builder.setTitle(title);
         final View layout = View.inflate(activity, R.layout.downloader_confirmation, null);
         builder.setView(layout);
-        final TextView downloadInfo = layout.findViewById(R.id.download_info);
-        downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
+        ((TextView) layout.findViewById(R.id.download_info1)).setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
+        ((TextView) layout.findViewById(R.id.download_info2)).setVisibility(View.GONE);
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -153,18 +156,30 @@ public class DownloaderUtils {
                 .show();
     }
 
-    public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads) {
-        String updates = "";
-        for (Download download : downloads) {
-            updates += (StringUtils.isNotBlank(updates) ? ", " : "") + download.getName() + (StringUtils.isNotBlank(download.getSizeInfo()) ? " (" + download.getSizeInfo() + ")" : "");
-        }
-
+    @SuppressLint("SetTextI18n")
+    public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads, @Nullable final Action1<Boolean> downloadTriggered) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
         final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
         builder.setView(layout);
-        final TextView downloadInfo = layout.findViewById(R.id.download_info);
-        downloadInfo.setText(String.format(activity.getString(confirmation), updates, "\n\n" + activity.getString(R.string.download_warning)));
+        ((TextView) layout.findViewById(R.id.download_info1)).setText(confirmation);
+        ((TextView) layout.findViewById(R.id.download_info2)).setText(R.string.download_warning);
+
+        final LinearLayout ll = layout.findViewById(R.id.checkbox_placeholder);
+        for (Download download : downloads) {
+            final CheckBox cb = new CheckBox(new ContextThemeWrapper(activity, R.style.checkbox_full));
+            final String sizeinfo = download.getSizeInfo();
+            cb.setText(download.getName() + (StringUtils.isNotBlank(sizeinfo) ? " (" + sizeinfo + ")" : ""));
+            cb.setChecked(true);
+            download.customMarker = true;
+
+            cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                cb.setChecked(isChecked);
+                download.customMarker = isChecked;
+                Log.e(download.getName() + ", checked=" + isChecked);
+            });
+            ll.addView(cb);
+        }
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
@@ -172,24 +187,36 @@ public class DownloaderUtils {
 
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
+                        int numFiles = 0;
                         for (Download download : downloads) {
-                            final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
-                                    .setTitle(download.getName())
-                                    .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
-                                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
-                                    .setAllowedOverMetered(allowMeteredNetwork)
-                                    .setAllowedOverRoaming(allowMeteredNetwork);
-                            Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
-                            AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                            if (download.customMarker) {
+                                numFiles++;
+                                final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
+                                        .setTitle(download.getName())
+                                        .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
+                                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
+                                        .setAllowedOverMetered(allowMeteredNetwork)
+                                        .setAllowedOverRoaming(allowMeteredNetwork);
+                                Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
+                                AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                            }
                         }
-                        ActivityMixin.showShortToast(activity, R.string.download_started);
+                        ActivityMixin.showShortToast(activity, numFiles > 0 ? R.string.download_started : R.string.download_none_selected);
+                        if (downloadTriggered != null) {
+                            downloadTriggered.call(true);
+                        }
                     } else {
                         ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
                     }
                     dialog.dismiss();
                 })
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    if (downloadTriggered != null) {
+                        downloadTriggered.call(false);
+                    }
+                    dialog.dismiss();
+                })
                 .create()
                 .show();
     }
@@ -345,7 +372,7 @@ public class DownloaderUtils {
                 if (result.size() == 0) {
                     Toast.makeText(activity, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
                 } else {
-                    triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result);
+                    triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result, null);
                 }
             }
         }
@@ -426,45 +453,45 @@ public class DownloaderUtils {
                         sb.append(c.getString(column));
                         final int status = c.getInt(column);
                         if (status == DownloadManager.STATUS_FAILED) {
-                            sb.append(" - download has failed (and will not be retried)");
+                            sb.append(" - ").append(R.string.asdm_status_failed);
                         } else if (status == DownloadManager.STATUS_PAUSED) {
-                            sb.append(" - download is waiting to retry or resume");
+                            sb.append(" - ").append(R.string.asdm_status_paused);
                         } else if (status == DownloadManager.STATUS_PENDING) {
-                            sb.append(" - download is waiting to start");
+                            sb.append(" - ").append(R.string.asdm_status_pending);
                         } else if (status == DownloadManager.STATUS_RUNNING) {
-                            sb.append(" - download is currently running");
+                            sb.append(" - ").append(R.string.asdm_status_running);
                         } else if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                            sb.append(" - download has successfully completed");
+                            sb.append(" - ").append(R.string.asdm_status_successful);
                         }
                     } else if (column == columnReason) {
                         final int reason = c.getInt(column);
                         sb.append(reason);
                         if (reason == DownloadManager.PAUSED_QUEUED_FOR_WIFI) {
-                            sb.append(" - paused: download exceeds a size limit for downloads over mobile network / waiting for Wifi");
+                            sb.append(" - ").append(R.string.asdm_paused_queued_for_wifi);
                         } else if (reason == DownloadManager.PAUSED_UNKNOWN) {
-                            sb.append(" - paused: for some other reason");
+                            sb.append(" - ").append(R.string.asdm_paused_unknown);
                         } else if (reason == DownloadManager.PAUSED_WAITING_FOR_NETWORK) {
-                            sb.append(" - paused: waiting for network connectivity to proceed");
+                            sb.append(" - ").append(R.string.asdm_paused_waiting_for_network);
                         } else if (reason == DownloadManager.PAUSED_WAITING_TO_RETRY) {
-                            sb.append(" - paused: some network error occurred and the download manager is waiting before retrying the request");
+                            sb.append(" - ").append(R.string.asdm_paused_waiting_to_retry);
                         } else if (reason == DownloadManager.ERROR_CANNOT_RESUME) {
-                            sb.append(" - error: some possibly transient error occurred but we can't resume the download");
+                            sb.append(" - ").append(R.string.asdm_error_cannot_resume);
                         } else if (reason == DownloadManager.ERROR_DEVICE_NOT_FOUND) {
-                            sb.append(" - error: no external storage device was found. SD card mounted?");
+                            sb.append(" - ").append(R.string.asdm_error_device_not_found);
                         } else if (reason == DownloadManager.ERROR_FILE_ALREADY_EXISTS) {
-                            sb.append(" - error: requested destination file already exists, will not be overwritten");
+                            sb.append(" - ").append(R.string.asdm_error_file_already_exists);
                         } else if (reason == DownloadManager.ERROR_FILE_ERROR) {
-                            sb.append(" - error: unknown storage issue");
+                            sb.append(" - ").append(R.string.asdm_error_file_error);
                         } else if (reason == DownloadManager.ERROR_HTTP_DATA_ERROR) {
-                            sb.append(" - error: HTTP processing error at data level");
+                            sb.append(" - ").append(R.string.asdm_error_http_data_error);
                         } else if (reason == DownloadManager.ERROR_INSUFFICIENT_SPACE) {
-                            sb.append(" - error: insufficient storage space");
+                            sb.append(" - ").append(R.string.asdm_error_insufficient_space);
                         } else if (reason == DownloadManager.ERROR_TOO_MANY_REDIRECTS) {
-                            sb.append(" - error: too many redirects");
+                            sb.append(" - ").append(R.string.asdm_error_too_many_redirects);
                         } else if (reason == DownloadManager.ERROR_UNHANDLED_HTTP_CODE) {
-                            sb.append(" - error: unhandled HTTP cod");
+                            sb.append(" - ").append(R.string.asdm_error_unhandled_http_code);
                         } else if (reason == DownloadManager.ERROR_UNKNOWN) {
-                            sb.append(" - error: unknown error");
+                            sb.append(" - ").append(R.string.asdm_error_unknown);
                         }
 
                     } else {

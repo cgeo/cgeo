@@ -1,6 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.GCUtils;
 import cgeo.geocaching.models.Geocache;
 
 import java.util.Collections;
@@ -26,8 +26,8 @@ abstract class AbstractCacheComparator implements CacheComparator {
     private static int fallbackToGeocode(final Geocache cache1, final Geocache cache2) {
         final int comparePrefix = StringUtils.compareIgnoreCase(StringUtils.substring(cache1.getGeocode(), 0, 2), StringUtils.substring(cache2.getGeocode(), 0, 2));
         if (comparePrefix == 0) {
-            final long l1 = GCConstants.gccodeToGCId(cache1.getGeocode());
-            final long l2 = GCConstants.gccodeToGCId(cache2.getGeocode());
+            final long l1 = GCUtils.gcLikeCodeToGcLikeId(cache1.getGeocode());
+            final long l2 = GCUtils.gcLikeCodeToGcLikeId(cache2.getGeocode());
             if (l1 != l2) {
                 return l1 > l2 ? 1 : -1;
             }

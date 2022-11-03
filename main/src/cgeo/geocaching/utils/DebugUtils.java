@@ -162,7 +162,7 @@ public class DebugUtils {
             sb.append(" NOT EXISTING");
         } catch (Exception ex) {
             //something unexpected happened
-            Log.w("Unexpected exception while trying to get class information for '" + className + "' (gathered so far: " + sb.toString() + ")", ex);
+            Log.w("Unexpected exception while trying to get class information for '" + className + "' (gathered so far: " + sb + ")", ex);
         }
         return sb.toString();
 

@@ -91,7 +91,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                     startButton.setText(activity.getAuthAgain());
                 } else if (msg.what == STATUS_ERROR_EXT_MSG) {
                     String errMsg = activity.getErrAuthInitialize();
-                    errMsg += msg.obj != null ? "\n" + msg.obj.toString() : "";
+                    errMsg += msg.obj != null ? "\n" + msg.obj : "";
                     activity.showToast(errMsg);
                     startButton.setText(activity.getAuthStart());
                 } else {

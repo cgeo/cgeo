@@ -136,15 +136,4 @@
             app:title="@string/init_twitter"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/settings_category_browser"
-        app:iconSpaceReserved="false" >
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_nativeUa"
-            android:summary="@string/init_summary_use_native_ua"
-            android:title="@string/init_use_native_ua"
-            app:iconSpaceReserved="false" />
-    </PreferenceCategory>
 </PreferenceScreen>

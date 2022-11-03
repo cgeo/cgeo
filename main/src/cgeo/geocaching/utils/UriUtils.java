@@ -400,7 +400,7 @@ public final class UriUtils {
                 folders.append("%2F").append(ele[i]);
             }
         }
-        final String common = ele[2] + "%3A" + folders.toString();
+        final String common = ele[2] + "%3A" + folders;
 
         // Construct TREE Uri
         return new Uri.Builder()

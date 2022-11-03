@@ -9,7 +9,20 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/download_info"
+            android:id="@+id/download_info1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="8dp" />
+
+        <LinearLayout
+            android:id="@+id/checkbox_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/download_info2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
@@ -18,8 +31,8 @@
         <CheckBox
             android:id="@+id/allow_metered_network"
             style="@style/checkbox_full"
+            android:textSize="@dimen/textSize_detailsSecondary"
             android:paddingTop="20dp"
-            android:paddingLeft="8dp"
             android:text="@string/downloadmap_allow_metered_network" />
 
         <TextView
