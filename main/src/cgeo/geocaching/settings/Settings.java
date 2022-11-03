@@ -310,7 +310,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
             e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
-            e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
             e.putBoolean(getKey(R.string.old_pref_useenglish), prefsV0.getBoolean(getKey(R.string.old_pref_useenglish), false));
             e.putBoolean(getKey(R.string.pref_usecompass), prefsV0.getInt(getKey(R.string.pref_usecompass), 1) != 0);
@@ -900,7 +899,7 @@ public class Settings {
     }
 
     public static boolean isRatingWanted() {
-        return getBoolean(R.string.pref_ratingwanted, true);
+        return false; // add new voting provider key setting later
     }
 
     public static boolean isGeokretyConnectorActive() {

@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -264,8 +263,6 @@ public class SearchResult implements Parcelable {
 
         final List<Geocache> includedCaches = new ArrayList<>(caches);
         result.addAndPutInCache(includedCaches);
-
-        GCVote.loadRatings(includedCaches);
         return result;
     }
 

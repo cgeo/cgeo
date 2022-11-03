@@ -103,13 +103,6 @@
         android:title="@string/settings_category_geocaching_additionals"
         app:iconSpaceReserved="false" >
 
-        <!-- Gcvote.com -->
-        <Preference
-            android:key="@string/pref_fakekey_gcvote_authorization"
-            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGcvoteComFragment"
-            app:title="@string/init_gcvote"
-            app:iconSpaceReserved="false" />
-
         <!-- Geokrety.org -->
         <Preference
             android:key="@string/pref_fakekey_geokrety_authorization"

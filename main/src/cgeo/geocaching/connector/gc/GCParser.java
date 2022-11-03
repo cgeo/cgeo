@@ -13,8 +13,6 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
-import cgeo.geocaching.gcvote.GCVote;
-import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
@@ -873,9 +871,6 @@ public final class GCParser {
             Log.w("GCParser.searchByNextPage: No cache parsed");
             return new SearchResult(con, StatusCode.CONNECTION_FAILED);
         }
-
-        // search results don't need to be filtered so load GCVote ratings here
-        GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
 
         return searchResult;
     }
@@ -1871,16 +1866,6 @@ public final class GCParser {
                     cache.setVisitedDate(logEntry.date);
                 }
             });
-        }
-
-        if (Settings.isRatingWanted() && !DisposableHandler.isDisposed(handler)) {
-            DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-            final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
-            if (rating != null) {
-                cache.setRating(rating.getRating());
-                cache.setVotes(rating.getVotes());
-                cache.setMyVote(rating.getMyVote());
-            }
         }
 
         // Wait for completion of logs parsing, retrieving and merging

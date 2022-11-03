@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
@@ -941,7 +940,7 @@ class GCWebAPI {
 
         result.addAndPutInCache(foundCaches);
         if (includeGcVote) {
-            GCVote.loadRatings(foundCaches);
+            // add new voting connector later
         }
         return result;
     }

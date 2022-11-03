@@ -795,7 +795,6 @@
     <string name="init_summary_oc_uk">Load caches from opencache.uk</string>
     <string name="init_oc_uk_description">Authorize c:geo with opencache.uk to search for caches and access/filter your found caches.</string>
     <string name="init_summary_su">Load caches from Geocaching.su</string>
-    <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
     <string name="err_vote_send_rating">Error while sending rating.</string>
     <string name="vote_sent">Voting successfully sent</string>
     <string name="init_login_popup">Login</string>
@@ -838,8 +837,6 @@
     <string name="init_signature_template_size">Size</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Location</string>
-    <string name="init_ratingwanted">GCvote Rating</string>
-    <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
@@ -1362,7 +1359,6 @@
     <string name="cache_dialog_loading_details_status_spoilers">Loading spoiler images</string>
     <string name="cache_dialog_loading_details_status_logs">Loading logs</string>
     <string name="cache_dialog_loading_details_status_waypoints">Processing waypoints</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">Render view</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
@@ -1421,7 +1417,6 @@
     <string name="cache_menu_copy_list">Copy to different list</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
-    <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_log_in_browser">Log in browser</string>
     <string name="cache_menu_ignore">Ignore cache</string>

@@ -26,7 +26,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -133,7 +132,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @Override
     public boolean postVote(@NonNull final Geocache cache, final float rating) {
-        return GCVote.setRating(cache, rating);
+        return false; // add new voting connector later
     }
 
     /**
