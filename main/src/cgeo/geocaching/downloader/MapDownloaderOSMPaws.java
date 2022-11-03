@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.SAXException;

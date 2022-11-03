@@ -232,6 +232,6 @@ class ThemeLegendOSMPaws implements ThemeLegend {
     @Override
     public @StringRes
     int getInfoUrl() {
-        return isBasic ? R.string.maptheme_legend_freizeitkarte_base : R.string.maptheme_legend_freizeitkarte_outdoor;
+        return R.string.maptheme_legend_osmpaws;
     }
 }
