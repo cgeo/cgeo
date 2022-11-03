@@ -54,11 +54,11 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
             });
             map.getChild("", "link").setEndTextElementListener(body -> url = body);
             map.getChild("", "size").setEndTextElementListener(body -> size = Long.parseLong(body));
-            map.getChild("", "description").setEndTextElementListener(body -> description = body);
+            map.getChild("", "title").setEndTextElementListener(body -> description = body);
             map.getChild("", "date").setEndTextElementListener(body -> dateInfo = body);
             map.setEndElementListener(() -> {
                 if (StringUtils.isNotBlank(url) && StringUtils.isNotBlank(dateInfo)) {
-                    result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(2, 12), Formatter.formatBytes(size), offlineMapType, ICONRES_MAP));
+                    result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType, ICONRES_MAP));
                 }
             });
 
@@ -97,7 +97,7 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
     @Override
     protected String toVisibleFilename(final String filename) {
         final int posInfix = filename.indexOf(".map");
-        return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix), " (OP)");
+        return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix), "");
     }
 
     @Override

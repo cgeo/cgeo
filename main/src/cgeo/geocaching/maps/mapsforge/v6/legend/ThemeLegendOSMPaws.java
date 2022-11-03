@@ -7,7 +7,7 @@ import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 
-class ThemeLegendFreizeitkarte implements ThemeLegend {
+class ThemeLegendOSMPaws implements ThemeLegend {
 
     boolean isBasic = true;
 

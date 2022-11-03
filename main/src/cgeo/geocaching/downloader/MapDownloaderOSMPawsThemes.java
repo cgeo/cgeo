@@ -49,11 +49,11 @@ public class MapDownloaderOSMPawsThemes extends AbstractThemeDownloader {
             });
             theme.getChild("", "link").setEndTextElementListener(body -> url = body);
             theme.getChild("", "size").setEndTextElementListener(body -> size = Long.parseLong(body));
-            theme.getChild("", "description").setEndTextElementListener(body -> description = body);
+            theme.getChild("", "title").setEndTextElementListener(body -> description = body);
             theme.getChild("", "date").setEndTextElementListener(body -> dateInfo = body);
             theme.setEndElementListener(() -> {
                 if (StringUtils.isNotBlank(url)) {
-                    result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(2, 12), Formatter.formatBytes(size), offlineMapType, ICONRES_THEME));
+                    result.add(new Download(description, Uri.parse(url), false, dateInfo.substring(0, 10), Formatter.formatBytes(size), offlineMapType, ICONRES_THEME));
                 }
             });
 
