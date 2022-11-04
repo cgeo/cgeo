@@ -12,10 +12,10 @@ import cgeo.geocaching.downloader.MapDownloaderHyllyThemes;
 import cgeo.geocaching.downloader.MapDownloaderJustDownload;
 import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
-import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
-import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.downloader.MapDownloaderOSMPaws;
 import cgeo.geocaching.downloader.MapDownloaderOSMPawsThemes;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
+import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.CalendarUtils;
 
