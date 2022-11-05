@@ -15,7 +15,8 @@
         <ImageButton
             android:id="@+id/map_settings_popup"
             android:src="@drawable/map_quick_settings"
-            style="@style/map_quicksettingsbutton" />
+            style="@style/map_quicksettingsbutton"
+            android:hint="@string/quick_settings"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/container_individualroute"
@@ -27,6 +28,7 @@
         <ImageButton
             android:id="@+id/map_individualroute_popup"
             style="@style/map_quicksettingsbutton"
-            android:src="@drawable/map_quick_route" />
+            android:src="@drawable/map_quick_route"
+            android:hint="@string/routes_tracks_dialog_title"/>
     </LinearLayout>
 </RelativeLayout>
