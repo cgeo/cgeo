@@ -39,7 +39,8 @@
                 android:text="@string/cache_filter_stringfilter_matchcase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/item_info"/>
 
             <ImageView
                 android:id="@+id/item_info"
