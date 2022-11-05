@@ -229,6 +229,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
             }
             return positionLayer;
         } else {
+            ((GoogleMapsPositionLayer) positionLayer).destroyLayer(mMap);
             positionLayer = null;
         }
         return null;

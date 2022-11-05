@@ -32,6 +32,13 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
         historyObjs = new GoogleMapObjects(googleMap);
     }
 
+    protected void destroyLayer(final GoogleMap map) {
+        directionObjs.removeAll();
+        positionObjs.removeAll();
+        trackObjs.removeAll();
+        historyObjs.removeAll();
+    }
+
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
         setCurrentPositionAndHeadingHelper(location, heading, (directionLine) -> {
             directionObjs.removeAll();
