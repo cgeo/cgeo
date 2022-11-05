@@ -125,6 +125,7 @@
                 android:textColor="@color/colorText_listsPrimary"
                 android:visibility="gone"
                 tools:visiblity="visible"
+                android:hint="@string/waypoint_note"
                 tools:text="Note"/>
 
             <TextView
@@ -137,6 +138,7 @@
                 android:textColor="@color/colorText_listsPrimary"
                 android:visibility="gone"
                 tools:visiblity="visible"
+                android:hint="@string/waypoint_user_note"
                 tools:text="User Note"/>
         </LinearLayout>
 
@@ -150,7 +152,8 @@
             android:focusable="true"
             android:longClickable="true"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_menu_compass" />
+            android:src="@drawable/ic_menu_compass"
+            android:hint="@string/init_default_navigation_tool"/>
     </LinearLayout>
 
     <View
