@@ -101,6 +101,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
+            android:layout_marginHorizontal="40dp"
             android:baselineAligned="false"
             android:gravity="center_horizontal"
             android:orientation="horizontal" >
@@ -108,7 +109,6 @@
             <Button
                 android:id="@+id/donate"
                 style="@style/button_full"
-                android:layout_width="280dip"
                 android:lines="2"
                 android:text="@string/about_donation_more" />
         </LinearLayout>
