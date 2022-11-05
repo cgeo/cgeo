@@ -298,8 +298,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         tileProvider.getMap().showSpinner();
         if (mapChanged) {
-            routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
-            tracks = new Tracks(routeTrackUtils, this::setTrack);
+            initRouteTrackUtilsAndTracks(true);
 
             // map settings popup
 //        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
@@ -359,6 +358,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
         onResume();
+    }
+
+    private void initRouteTrackUtilsAndTracks(final boolean force) {
+        if (force || routeTrackUtils == null) {
+            routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
+            tracks = new Tracks(routeTrackUtils, this::setTrack);
+        }
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
@@ -546,6 +552,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void setTrack(final String key, final Route route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
+        initRouteTrackUtilsAndTracks(false);
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
     }
 
@@ -553,6 +560,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         individualRoute.reloadRoute((route) -> {
             if (tileProvider.getMap().positionLayer != null) {
                 tileProvider.getMap().positionLayer.updateIndividualRoute(route);
+                initRouteTrackUtilsAndTracks(false);
                 routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
             }
         });
@@ -561,6 +569,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void clearIndividualRoute() {
         individualRoute.clearRoute((route) -> {
             tileProvider.getMap().positionLayer.updateIndividualRoute(route);
+            initRouteTrackUtilsAndTracks(false);
             routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
         });
         showToast(res.getString(R.string.map_individual_route_cleared));
@@ -575,6 +584,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         individualRoute.toggleItem(this, item, tileProvider.getMap().positionLayer);
         // distanceView.showRouteDistance();
+        initRouteTrackUtilsAndTracks(false);
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
     }
 
