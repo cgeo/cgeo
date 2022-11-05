@@ -24,3 +24,4 @@ Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-
 - Neu: Manuelle Eingabe von Werten in Filtern mit Schieberegler
 - Neu: Aktiviere Upload korrigierter Koordinaten für Caches aus GPX-Import, wenn sie Wegpunkte vom Typ "ORIGINAL" enthalten
 - Änderung: Filterstatus verständlicher formuliert
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page

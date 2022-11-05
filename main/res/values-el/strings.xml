@@ -668,6 +668,8 @@
     <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
     <string name="settings_title_offline_maps">Χάρτες χωρίς σύνδεση</string>
+    <string name="settings_title_map_themes">Θέματα χάρτη εκτός σύνδεσης</string>
+    <string name="settings_title_map_hillshading">Σκιάζοντας χωρίς σύνδεση χάρτες</string>
     <string name="settings_title_offline_routing">Δρομολόγηση εκτός σύνδεσης</string>
     <string name="settings_summary_offline_routing">Η σύνδεση δρομολόγησης είναι διαθέσιμη αν είτε η βοηθητική εφαρμογή \"BRouter\" είναι εγκατεστημένη και ρυθμισμένη είτε η εσωτερική δρομολόγηση είναι ενεργοποιημένη.</string>
     <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
@@ -893,6 +895,8 @@
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να αποκτήσετε χάρτες από διαφορετικούς παρόχους ή ακόμα και να δημιουργήσετε δικούς σας χάρτες (από δεδομένα OSM). Πρώτα θα πρέπει να επιλέξετε το φάκελο στον οποίο θα αποθηκεύονται χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
     <string name="settings_info_themes">Το c:geo υποστηρίζει προσαρμοσμένα θέματα για χάρτες εκτός σύνδεσης. Αυτά μπορούν να χρησιμοποιηθούν για την αλλαγή του στυλ χρώματος του χάρτη (π.χ. για να έχετε μια νυχτερινή προβολή χάρτη) ή να επισημάνετε ορισμένα αντικείμενα όπως μονοπάτια κύκλου ή γραμμές ύψους μέσα στο χάρτη.\n\nΗ εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χαρτών. Σε αυτή την περίπτωση, ο φάκελος θεμάτων μπορεί προαιρετικά να συγχρονιστεί σε ένα app-private τοπικό φάκελο για ταχύτερη πρόσβαση (στο κόστος ορισμένων χώρων αποθήκευσης).</string>
+    <string name="settings_info_hillshading_title">Πληροφορίες για το Hillshading</string>
+    <string name="settings_info_hillshading">Το Hillshading ειναι μια τεχνικη για δημιουργία χαρτών που με αλλαγές φωτεινότητας δείχνει την μεταβολή υψομέτρου. Σκοτεινιάζει/φωτίζει πλαγιές για να δημιουργήσει ένα 3D-αποτέλεσμα.\nΤα αρχεία προέλευσης που περιέχουν τις υψομετρικές πληροφορίες πρέπει να ληφθούν με μη αυτόματο τρόπο - κάντε κλικ σε αυτό το στοιχείο για τις πηγές - και τοποθετήστε τα στο φάκελο πηγών που ορίζεται παρακάτω.</string>
     <string name="init_mapsource_select">Επιλογή πηγής χάρτη</string>
     <string name="init_local_file_system">Τοπικό Σύστημα Αρχείων</string>
     <string name="init_base_directory_description">Βασικός Κατάλογος για δημόσια τοπικά δεδομένα</string>
@@ -1342,6 +1346,7 @@
     <string name="cache_remove_from_history">Αφαίρεση από το ιστορικό</string>
     <string name="cache_license">Άδεια χρήσης</string>
     <string name="cache_image">Εικόνα</string>
+    <string name="cache_image_information_unavailable">Μη διαθέσιμες πληροφορίες εικόνας</string>
     <string name="cache_image_open">Άνοιγμα</string>
     <string name="cache_image_open_file">Άνοιγμα ως αρχείο</string>
     <string name="cache_image_open_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
@@ -1528,6 +1533,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Χωρίς τίτλο</string>
     <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Σχόλιο</string>
     <!-- visit -->

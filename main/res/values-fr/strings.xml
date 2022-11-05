@@ -1515,6 +1515,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Sans titre</string>
     <string name="imageview_mimetype">Type MIME</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Commentaire</string>
     <!-- visit -->

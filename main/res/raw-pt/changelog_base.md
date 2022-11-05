@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Aviso: mudança de nível de API
+Devido às próximas restrições na Play Store, actualizámos o nível de API do Android em questão. Isto não deve afectar o uso do c:geo e ainda deve funcionar a partir do Android 5 em diante, mas se notar quaisquer irregularidades, entre em contacto connosco através de support@cgeo.org
 
 ### Mapa
 - Novo: Permitir a mudança do nome do percurso
@@ -9,9 +9,9 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Correcção: A imagem de registo era rotulada de "Imagem 1" mesmo quando só era adicionada uma única imagem
 - Novo: espaço reservado para o modelo de registo de GEO-CÓDIGO
 - Novo: Suporte à formatação básica de HTML para listas definidas (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
+- Novo: Ampliação da imagem em visualização (ao tocar numa imagem da descrição)
+- Correcção: Abrir ligações nas descrições no navegador web integrado (se estiver activo)
+- Alteração: Renderizar a descrição da cache em segundo plano e limitar o seu tamanho a 50.000 caracteres, por defeito
 
 ### Geral
 - Novo: Exibição das transferências pendentes
@@ -22,5 +22,6 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Novo: Filtro para o estado DNF
 - Novo: Exibir elevação no ecrã inicial (se disponível)
 - Novo: Permitir a introdução manual de valores em filtros, usando controles deslizantes
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
+- Novo: Activar o envio de coordenadas modificadas para caches importadas a partir dum ficheiro GPX, quando a cache tem um ponto adicional do tipo "ORIGINAL"
+- Alteração: Melhorar o texto da linha de estado do filtro
+- Alteração: Utilização de uma cor mais legível para o nome, nos títulos, de caches arquivadas e remoção da cor na página de detalhes da cache

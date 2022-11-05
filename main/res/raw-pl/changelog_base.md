@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Uwaga: Zmiana poziomu API
+Ze względu na nadchodzące ograniczenia w Google Play zaktualizowaliśmy docelowy poziom Android API. To nie powinno mieć wpływu na użycie c:geo, i powinno nadal działać od Androida 5, ale jeśli zauważysz jakiekolwiek nieprawidłowości, skontaktuj się z nami przez e-mail support@cgeo.org
 
 ### Mapa
 - Nowość: Zezwalaj na zmianę nazwy wyświetlanego śladu
@@ -24,3 +24,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Nowość: Zezwalaj na ręczne wprowadzanie wartości w filtrach za pomocą suwaków
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
+- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page

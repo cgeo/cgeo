@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Προσοχή: Αλλαγή επιπέδου API
+Λόγω των επερχόμενων περιορισμών στο Play Store έχουμε αναβαθμίσει το στοχευμένο επίπεδο API Android. Αυτό δεν πρέπει να επηρεάσει τη χρήση του c:geo, και θα πρέπει να συνεχίσει να τρέχει από το Android 5 και μετά, αλλά αν παρατηρήσετε δυσλειτουργίες, παρακαλούμε επικοινωνήστε μαζί μας στο support@cgeo.org
 
 ### Χάρτης
 - Νέο: Να επιτρέπεται η αλλαγή του ονόματος του κομματιού
@@ -24,3 +24,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Νέα: Να επιτρέπεται η χειροκίνητη εισαγωγή τιμών στα φίλτρα με χρήση ρυθμιστικών
 - Νέο: Ενεργοποίηση μεταφόρτωσης τροποποιημένων συντεταγμένων για κρύπτες που εισάγονται από το αρχείο GPX, όταν η κρύπτη έχει σημείο του τύπου "ΚΑΤΑΓΩΓΗ"
 - Change: Improve filter status line text
+- Αλλαγή: Ο χρήστης ένα καλύτερο αναγνώσιμο χρώμα για αρχειοθετημένα ονόματα κρυπτών σε τίτλους και αφαίρεση χρωματισμού από τη σελίδα λεπτομερειών κρύπτης
