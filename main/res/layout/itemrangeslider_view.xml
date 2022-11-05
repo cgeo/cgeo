@@ -27,6 +27,7 @@
             android:stepSize="1"
             app:labelBehavior="floating"
             android:layout_weight="8"
+            android:hint="@string/use_slider_adjust_value"
             />
 
         <Space
