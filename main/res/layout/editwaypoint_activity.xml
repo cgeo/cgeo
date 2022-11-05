@@ -27,11 +27,13 @@
             android:orientation="vertical"
             android:importantForAutofill="noExcludeDescendants">
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/textinput_edittext_singleline"
+                android:hint="@string/waypoint_bearing"
+                android:labelFor="@id/bearing">
                 <EditText
                     android:id="@+id/bearing"
                     style="@style/textinput_embedded_singleline"
-                    android:hint="@string/waypoint_bearing"
                     android:inputType="numberDecimal|numberSigned"
                     android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -42,11 +44,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/textinput_edittext_singleline"
-                    android:layout_toLeftOf="@id/distanceUnit">
+                    android:layout_toLeftOf="@id/distanceUnit"
+                    android:hint="@string/waypoint_distance"
+                    android:labelFor="@id/distance">
                     <EditText
                         android:id="@+id/distance"
                         style="@style/textinput_embedded_singleline"
-                        android:hint="@string/waypoint_distance"
                         android:inputType="numberDecimal"
                         android:enabled="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -74,34 +77,30 @@
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-            android:hint="@string/waypoint_name" android:id="@+id/name_layout">
+            android:hint="@string/waypoint_name" android:labelFor="@id/name" android:id="@+id/name_layout">
             <AutoCompleteTextView
                 android:id="@+id/name"
-                style="@style/textinput_embedded_singleline"
-                tools:ignore="LabelFor" />
+                style="@style/textinput_embedded_singleline" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/note_layout"
             style="@style/textinput_edittext"
-            android:hint="@string/waypoint_note">
+            android:hint="@string/waypoint_note" android:labelFor="@id/note">
             <EditText
                 android:id="@+id/note"
                 style="@style/textinput_embedded"
-
                 android:inputType="textMultiLine|textCapSentences"
-                android:minLines="5"
-                tools:ignore="LabelFor" />
+                android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
-            android:hint="@string/waypoint_user_note">
+            android:hint="@string/waypoint_user_note" android:labelFor="@id/user_note">
             <EditText
                 android:id="@+id/user_note"
                 style="@style/textinput_embedded"
                 android:inputType="textMultiLine|textCapSentences"
-                android:minLines="5"
-                tools:ignore="LabelFor" />
+                android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
