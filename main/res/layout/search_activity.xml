@@ -41,7 +41,8 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:hint="@string/tap_icon_more_info"/>
         </RelativeLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
