@@ -39,7 +39,8 @@
                 android:text="@string/cache_filter_stringfilter_matchcase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/item_info"/>
 
             <ImageView
                 android:id="@+id/item_info"
@@ -47,7 +48,8 @@
                 android:layout_height="18dp"
                 app:srcCompat="@drawable/settings_info"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/tap_icon_more_info"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -57,11 +59,12 @@
         style="@style/textinput_autocompletetextview"
         android:layout_below="@+id/filter_options"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:hint="@string/cache_filter_stringfilter_searchtext_hint" android:labelFor="@id/generic_autocomplete_single">
 
         <AutoCompleteTextView
-            style="@style/textinput_embedded_singleline"
-            android:hint="@string/cache_filter_stringfilter_searchtext_hint" />
+            android:id="@+id/generic_autocomplete_single"
+            style="@style/textinput_embedded_singleline" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </RelativeLayout>

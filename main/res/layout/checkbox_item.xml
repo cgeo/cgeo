@@ -34,7 +34,9 @@
             android:layout_marginLeft="6dp"
             android:layout_centerVertical="true"
 	        android:textSize="@dimen/textSize_detailsPrimary"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            android:contentDescription="@string/tap_icon_more_info"
+            android:labelFor="@id/item_info"/>
         <ImageView
             android:id="@+id/item_info"
             android:layout_width="18dp"
