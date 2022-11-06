@@ -13,6 +13,7 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Fix: Open links in listings in integrated web view (if enabled)
 - Change: Render cache description in background and limit length to 50,000 characters by default
 - Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### General
 - New: View for pending downloads
