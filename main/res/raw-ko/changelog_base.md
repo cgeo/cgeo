@@ -24,4 +24,4 @@
 - 신규: 슬라이더를 사용하여 필터에 값을 수동으로 입력할 수 있습니다.
 - 신규: 캐시에 "ORIGINAL" 유형의 지점이 있을 때 GPX 파일에서 가져온 캐시에 대해 수정된 좌표 업로드를 활성화합니다.
 - 변경: 필터 상태 표시줄 텍스트 개선
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
