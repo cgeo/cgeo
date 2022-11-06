@@ -29,6 +29,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
@@ -188,7 +189,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (savedState != null && savedState.trackableActions.containsKey(tLog.trackCode)) {
             tLog.setAction(savedState.trackableActions.get(tLog.trackCode));
         } else {
-            tLog.setAction(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING);
+            tLog.setAction(LastTrackableAction.getNextAction(tLog.brand, tLog.trackCode));
         }
         return tLog;
     }

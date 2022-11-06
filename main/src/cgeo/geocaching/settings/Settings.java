@@ -901,7 +901,7 @@ public class Settings {
     }
 
     public static boolean isRatingWanted() {
-        return getBoolean(R.string.pref_ratingwanted, true);
+        return getBoolean(R.string.pref_ratingwanted, false);
     }
 
     public static boolean isGeokretyConnectorActive() {

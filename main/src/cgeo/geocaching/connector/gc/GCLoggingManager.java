@@ -19,6 +19,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 
@@ -173,6 +174,9 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
         try {
             final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(cache, logType,
                     date.getTime(), log, trackableLogs, addToFavorites);
+            for (TrackableLog trackableLog : trackableLogs) {
+                LastTrackableAction.setAction(trackableLog);
+            }
 
             if (postResult.left == StatusCode.NO_ERROR) {
                 DataStore.saveVisitDate(cache.getGeocode(), date.getTime().getTime());

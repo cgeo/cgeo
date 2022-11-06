@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.3.2</checkstyleVersion>
+    <checkstyleVersion>10.3.4</checkstyleVersion>
     <scanScope>JavaOnlyWithTests</scanScope>
     <scanBeforeCheckin>true</scanBeforeCheckin>
     <option name="thirdPartyClasspath" />
