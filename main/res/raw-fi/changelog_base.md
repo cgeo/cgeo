@@ -24,4 +24,4 @@ Play Storen tulevien rajoitusten vuoksi olemme päivittäneet kohdistettua Andro
 - Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
 - Uusi: Ota käyttöön muokattujen koordinaattien lataaminen GPX-tiedostosta tuoduille kätköille, kun kätkössä on reittipiste "ORIGINAL"
 - Muutos: Paranna suodattimen tilarivin tekstiä
-- Muutos: Käytä paremmin luettavaa väriä arkistoiduille kätkön nimille otsikoissa ja poista väritys kätkön yksityiskohdista
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
