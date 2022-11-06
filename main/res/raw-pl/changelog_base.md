@@ -24,4 +24,4 @@ Ze względu na nadchodzące ograniczenia w Google Play zaktualizowaliśmy docelo
 - Nowość: Zezwalaj na ręczne wprowadzanie wartości w filtrach za pomocą suwaków
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
