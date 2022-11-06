@@ -24,4 +24,4 @@ Als gevolg van aankomende beperkingen in de Play Store hebben we het gerichte An
 - Nieuw: Handmatige invoer van waarden toestaan in filters met behulp van schuifregelaars
 - Nieuw: upload coördinaten inschakelen voor caches geïmporteerd uit GPX bestand, wanneer de cache een waypoint heeft van het type "ORIGINAL"
 - Wijziging: Verbetering van de tekst van de filter statusregel
-- Wijziging: Gebruik een beter leesbare kleur voor gearchiveerde cachenamen in titels en het kleuren van de cache details pagina verwijderen
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
