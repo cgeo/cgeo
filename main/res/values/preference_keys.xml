@@ -121,7 +121,7 @@
 
     <!-- settings for gcvote.com screen -->
     <string translatable="false" name="preference_screen_gcvote">preference_screen_gcvote</string>
-    <string translatable="false" name="pref_ratingwanted">ratingwanted</string>
+    <string translatable="false" name="pref_ratingwanted">useGCVote</string>
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
 

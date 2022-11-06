@@ -9,7 +9,7 @@
         android:title="@string/settings_settings"
         app:iconSpaceReserved="false" >
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="@string/pref_ratingwanted"
             android:summary="@string/init_summary_ratingwanted"
             android:title="@string/init_ratingwanted"
