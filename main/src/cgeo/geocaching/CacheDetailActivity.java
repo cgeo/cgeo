@@ -2092,6 +2092,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setAdapter(adapter);
             v.setOnScrollListener(new FastScrollListener(v));
 
+            if (activity.selectedWaypoint != null) {
+                final int index = IterableUtils.indexOf(sortedWaypoints, waypoint -> waypoint.getId() == activity.selectedWaypoint.getId());
+                if (index >= 0) {
+                    v.setSelection(index);
+                }
+            }
+
             //register for changes of variableslist -> calculated waypoints may have changed
             cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(adapter::notifyDataSetChanged));
 
