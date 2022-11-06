@@ -24,4 +24,4 @@ Vzhledem k nadcházejícím omezením v Obchodě Play jsme aktualizovali cílovo
 - Novinka: Povoleno ruční zadávání hodnot do filtrů pomocí posuvníků
 - Novinka: Povoleno nahrávání upravených souřadnic pro kešky importované ze souboru GPX, pokud má keška waypoint typu "ORIGINAL"
 - Změna: Vylepšení textu v řádku stavového filtru
-- Změna: Uživatelem lépe čitelná barva pro názvy archivovaných kešek v názvech a odstraněno podbarvení ze stránky s podrobnostmi o kešce
+- Změna: Použita lépe čitelná barva pro názvy archivovaných kešek v názvech a odstraněno podbarvení ze stránky s podrobnostmi o kešce
