@@ -2109,6 +2109,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 headerBinding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     EditWaypointActivity.startActivityAddWaypoint(activity, cache);
+                    activity.selectedWaypoint = sortedWaypoints.get(sortedWaypoints.size() - 1); // move to bottom where new waypoint will be created
                     activity.refreshOnResume = true;
                 });
 
