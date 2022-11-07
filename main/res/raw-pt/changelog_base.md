@@ -12,6 +12,8 @@ Devido às próximas restrições na Play Store, actualizámos o nível de API d
 - Novo: Ampliação da imagem em visualização (ao tocar numa imagem da descrição)
 - Correcção: Abrir ligações nas descrições no navegador web integrado (se estiver activo)
 - Alteração: Renderizar a descrição da cache em segundo plano e limitar o seu tamanho a 50.000 caracteres, por defeito
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### Geral
 - Novo: Exibição das transferências pendentes
