@@ -302,6 +302,8 @@
     <string name="more_information">Meer informatie</string>
     <string name="undo">Ongedaan maken</string>
     <string name="dont_show_again">Niet meer weergeven</string>
+    <string name="tap_icon_more_info">Tik op het pictogram voor meer informatie</string>
+    <string name="use_slider_adjust_value">Gebruik de schuifregelaar om de waarde aan te passen</string>
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
