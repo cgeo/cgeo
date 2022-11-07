@@ -12,6 +12,8 @@ Ze względu na nadchodzące ograniczenia w Google Play zaktualizowaliśmy docelo
 - New: Open zoomable image view when tapping on listing images
 - Fix: Open links in listings in integrated web view (if enabled)
 - Change: Render cache description in background and limit length to 50,000 characters by default
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### Ogólne
 - Nowość: Widok oczekujących na pobranie
