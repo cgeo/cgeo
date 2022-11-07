@@ -302,6 +302,8 @@
     <string name="more_information">Daugiau informacijos</string>
     <string name="undo">Atšaukti</string>
     <string name="dont_show_again">Daugiau neberodyti</string>
+    <string name="tap_icon_more_info">Norėdami gauti daugiau informacijos, bakstelėkite piktogramą</string>
+    <string name="use_slider_adjust_value">Norėdami sureguliuoti vertę, naudokite slankiklį</string>
     <string name="warn_gm_not_available">Google Maps neprieinami.</string>
     <string name="switch_to_mf">Jūsų Google Play Service pasenusi. Ar perjungti į Mapsforge žemėlapių tiekėją?</string>
     <string name="switched_to_mf">Numatytasis žemėlapis perjungtas į Mapsforge žemėlapių teikėją. Iš naujo paleiskite žemėlapį dabar.</string>
@@ -933,7 +935,7 @@
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus geoslėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
     <string name="init_maptrail">Rodyti pėdsaką</string>
     <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
-    <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji reikšmė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
+    <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
     <string name="init_trailcolor">Pėdsako linijos spalva</string>
     <string name="init_trailcolor_summary">Pasirinkite pėdsako linijos spalvą ir skaidrumą</string>
@@ -995,9 +997,9 @@
     <string name="init_mapshading_folder">Žemėlapio šešėliavimo failų aplankas</string>
     <string name="init_mapshading_folder_text">Neprisijungus naudojami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
     <string name="init_mapShadingLinearity_title">Šešėlių tiesiškumas</string>
-    <string name="init_mapShadingLinearity_description">Mažos reikšmės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
+    <string name="init_mapShadingLinearity_description">Mažos vertės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
     <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
-    <string name="init_mapShadingScale_description">Šešėlių sluoksnio skaidrumas, nuo nematomo iki didesnių verčių, sustiprinantis šešėlį, bet gali atsirasti artefaktų</string>
+    <string name="init_mapShadingScale_description">Šešėlių sluoksnio skaidrumas, nuo nematomo iki didžiausių verčių, sustiprinantis šešėlį, bet gali atsirasti artefaktų</string>
     <string name="init_maintenance">Priežiūra</string>
     <string name="init_maintenance_directories_note">c:geo vaizdus ir kitus failus, susijusius su slėptuve, saugo tam skirtame aplanke. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame aplanke gali būti pasenusių failų, kuriuos galima ištrinti čia.</string>
     <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
@@ -1524,7 +1526,7 @@
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Valdovo režimas</string>
     <string name="calccoord_guided_edit">Norėdami redaguoti, palieskite skaitmenį</string>
-    <string name="calccoord_guided_value">Reikšmė</string>
+    <string name="calccoord_guided_value">Vertė</string>
     <string name="calccoord_convert_to_plain">Konvertuoti į paprastas koordinates</string>
     <string name="calccoord_plain_tools_title">Paprasti įrankiai</string>
     <string name="calccoord_remove_spaces">Panaikinti tarpus</string>
@@ -1558,7 +1560,7 @@
     <string name="formula_function_rot">Pasukti simbolius</string>
     <string name="formula_function_checksum">Kontrolinė suma</string>
     <string name="formula_function_ichecksum">Iteratyvi kontrolinė suma</string>
-    <string name="formula_function_lettervalue">Žodžio vertė</string>
+    <string name="formula_function_lettervalue">Žodžio reikšmė</string>
     <string name="formula_function_roman">Romėniškus į dešimtainius</string>
     <string name="formula_function_vanity">Tuštybės kodas</string>
     <string name="formula_function_group_simplenumeric">Paprastas skaitmuo</string>
@@ -2198,7 +2200,7 @@
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įvesti vertę nuo %1$s iki %2$s</string>
+    <string name="number_input_title">Įveskite vertę nuo %1$s iki %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2278,7 +2280,7 @@
     <string name="delete_setting_warning">Ištrinti \"%s\" raktą iš nustatymų?\n\nŠios operacijos anuliuoti negalima.</string>
     <string name="edit_setting">Redaguoti \"%s\" nustatymą</string>
     <string name="edit_setting_error_unknown_type">Nežinomas nustatymo tipas - redagavimas nepalaikomas</string>
-    <string name="edit_setting_error_invalid_data">Įvesti neteisingi duomenys - \"%s\". Nustatymo reikšmė nepakeista.</string>
+    <string name="edit_setting_error_invalid_data">Įvesti neteisingi duomenys - \"%s\". Nustatymo vertė nepakeista.</string>
     <string name="activate_editmode_title">Įjungti redagavimo rėžimą</string>
     <string name="activate_editmode_warning">Elkitės atsargiai!\n\nTiesiogiai keičiant nustatymus galima sugadinti c:geo!\n\nAr tikrai norite tęsti ir prisiimti visą atsakomybę sau?</string>
     <string name="add_setting">Pridėti nustatymą</string>
