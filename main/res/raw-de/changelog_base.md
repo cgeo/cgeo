@@ -12,6 +12,8 @@ Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-
 - Neu: Zoombare Bildansicht für Bilder in Cachebeschreibung
 - Korrektur: Öffne Verlinkungen in Cachebeschreibung in integrierter Webansicht (falls aktiviert)
 - Änderung: Cache-Beschreibung im Hintergrund formatieren und standardmäßig auf 50.000 Zeichen begrenzen
+- Änderung: GCVote deaktiviert aufgrund massiver Störungen - Du kannst es bei Bedarf unter Einstellungen - Dienste - GCVote manuell reaktivieren
+- Neu: Loggen von Caches: Letzte Trackable-Aktion pro Trackable merken
 
 ### Allgemein
 - Neu: Ansicht für ausstehende Downloads
@@ -24,4 +26,4 @@ Aufgrund in Kürze geltender Regelungen im Play Store haben wir die Android API-
 - Neu: Manuelle Eingabe von Werten in Filtern mit Schieberegler
 - Neu: Aktiviere Upload korrigierter Koordinaten für Caches aus GPX-Import, wenn sie Wegpunkte vom Typ "ORIGINAL" enthalten
 - Änderung: Filterstatus verständlicher formuliert
-- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
+- Änderung: Verwende besser lesbare Farbe für Namen archivierter Caches, dabei keine Einfärbung des Cachenamens auf der Cachedetailseite
