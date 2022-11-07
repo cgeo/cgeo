@@ -12,6 +12,8 @@ Dėl būsimų apribojimų Play Store atnaujinome tikslinį Android API lygį. Ta
 - Naujiena: Bakstelėdami sąraše esančius vaizdus atidarykite keičiamo dydžio vaizdo rodinį
 - Pataisymas: Atidarykite nuorodas sąrašuose integruotame žiniatinklio rodinyje (jei įjungta)
 - Pakeitimas: Pateikti slėptuvės aprašymą fone ir pagal numatytuosius nustatymus apribota iki 50 000 simbolių
+- Pakeitimas: GCVote paslaugos ryšys išjungtas dėl rimtų veikimo problemų - galite rankiniu būdu iš naujo įjungti naudodami Nustatymai - Paslaugos - GCVote
+- Naujiena: Slėptuvės žurnalas: Išsaugokite paskutinį keliauninko veiksmą kiekvienam keliauninkui
 
 ### Bendras
 - Naujiena: Peržiūrėti laukiančius atsisiuntimus
@@ -21,7 +23,7 @@ Dėl būsimų apribojimų Play Store atnaujinome tikslinį Android API lygį. Ta
 - Naujiena: Leidžiama pasirinkti failus atsisiuntimui
 - Naujiena: DNF būsenos filtras
 - Naujiena: Rodomas aukštis pagrindiniame ekrane (jei galima)
-- Naujiena: Leidžiama rankiniu būdu įvesti reikšmes į filtrus naudojant slankiklius
+- Naujiena: Leidžiama rankiniu būdu įvesti vertes į filtrus naudojant slankiklius
 - Naujiena: Įgalinkite pakeistų slėptuvės koordinačių importuotų iš GPX failo įkėlimą, kai slėptuvėje yra ''ORIGINAL'' tipo kelio taškas
 - Pakeitimas: Patobulintas filtro būsenos eilutės tekstas
-- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
+- Pakeitimas: Naudokite geriau skaitomą archyvuotų slėptuvių pavadinimų spalvą ir pašalinkite spalvas iš slėptuvės informacijos puslapio
