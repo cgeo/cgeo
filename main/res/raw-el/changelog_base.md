@@ -12,6 +12,8 @@
 - Νέο: Ανοίξτε την προβολή μεγέθυνσης εικόνας όταν πατάτε στην λίστα εικόνων
 - Διόρθωση: Άνοιγμα συνδέσμων σε καταχωρήσεις στην ολοκληρωμένη προβολή ιστού (αν είναι ενεργοποιημένο)
 - Αλλαγή: Περιγραφή κρύπτης στο παρασκήνιο και με μήκος 50.000 χαρακτήρων από προεπιλογή
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### General
 - Νέο: Προβολή εκκρεμών λήψεων
@@ -24,4 +26,4 @@
 - Νέα: Να επιτρέπεται η χειροκίνητη εισαγωγή τιμών στα φίλτρα με χρήση ρυθμιστικών
 - Νέο: Ενεργοποίηση μεταφόρτωσης τροποποιημένων συντεταγμένων για κρύπτες που εισάγονται από το αρχείο GPX, όταν η κρύπτη έχει σημείο του τύπου "ΚΑΤΑΓΩΓΗ"
 - Change: Improve filter status line text
-- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
+- Αλλαγή: Χρήση καλύτερα αναγνώσιμου χρώματος για αρχειοθετημένα ονόματα κρυπτών σε τίτλους και αφαίρεση χρωματισμού από τη σελίδα λεπτομερειών κρύπτης
