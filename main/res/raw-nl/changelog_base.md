@@ -12,6 +12,8 @@ Als gevolg van aankomende beperkingen in de Play Store hebben we het gerichte An
 - Nieuw: Open inzoombare afbeeldingsweergave bij het tikken op een lijst met afbeeldingen
 - Oplossing: Open links in lijsten in de geïntegreerde webweergave (indien ingeschakeld)
 - Wijziging: Render cache beschrijving op de achtergrond en limiet lengte standaard tot 50.000 tekens
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### Algemeen
 - Nieuw: Lopende downloads weergave
