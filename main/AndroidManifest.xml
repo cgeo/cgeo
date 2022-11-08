@@ -743,17 +743,9 @@
         <activity
             android:name=".ImageViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/log_image"
-            android:exported="true">
+            android:label="@string/log_image" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:mimeType="image/*"/>
-            </intent-filter>
+		
         </activity>
 
         <service
