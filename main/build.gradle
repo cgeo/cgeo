@@ -322,7 +322,7 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.52'
 
     // Jackson XML processing
-    def jacksonVersion = '2.12.5'
+    def jacksonVersion = '2.14.0'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
