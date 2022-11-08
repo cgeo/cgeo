@@ -315,6 +315,7 @@
     <string name="loc_trying">Yerini bulmaya çalışıyor</string>
     <string name="loc_no_addr">Bilinmeyen adres</string>
     <string name="loc_gps_disabled">GPS devredışı</string>
+    <string name="loc_copied_clipboard">Mevcut konum panoya kopyalandı</string>
     <string name="menu_centerposition">Konumuma göre ortala</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo hakkında</string>
@@ -325,6 +326,7 @@
     <string name="menu_update_routingdata">Yönlendirme verisi</string>
     <string name="menu_update_mapdata">Harita verisi</string>
     <string name="menu_history">Geçmiş</string>
+    <string name="menu_search_clipboard">Geokodu panodan yükle</string>
     <string name="menu_history_longstring">Bulma geçmişi</string>
     <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
     <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
@@ -353,6 +355,9 @@
         <item quantity="one">%d dakika</item>
         <item quantity="other">%d dakika</item>
     </plurals>
+    <string name="caches_store_offline">Çevrimdışı kaydet</string>
+    <string name="caches_store_offline_map">Çevrimdışı kaydedilmiş cache\'ler</string>
+    <string name="caches_store_selected">Seçilenleri kaydet</string>
     <string name="caches_store_background_title">Cache\'leri indir</string>
     <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
     <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
@@ -621,7 +626,16 @@
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Mevcut indirmeler</string>
+    <string name="downloader_cancel_download">İndirmeyi iptal et</string>
+    <string name="downloader_cancelled_download">\'%s\' için indirme iptal edildi</string>
+    <string name="downloader_retry_download">Tekrar indirmeyi dene</string>
     <!-- Android system download manager status messages -->
+    <string name="asdm_status_paused">İndirmeyi yeniden deneyin veya devam ettirin</string>
+    <string name="asdm_status_pending">İndirme bekleniyor</string>
+    <string name="asdm_status_running">İndiriliyor</string>
+    <string name="asdm_status_successful">İndirme başarıyla tamamlandı</string>
+    <string name="asdm_paused_queued_for_wifi">Beklemede: Wifi için bekleniyor</string>
+    <string name="asdm_paused_unknown">Başka bir sebeple beklemeye alındı</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ayarları aç?</string>
     <string name="settings_title_services">Servisler</string>
