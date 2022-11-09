@@ -26,6 +26,8 @@
     <issue id="MissingTranslation" severity="ignore" />
     <!-- old translation will be deleted by the next crowdin import -->
     <issue id="ExtraTranslation" severity="ignore" />
+    <!-- we will take what is given by crowdin - For locale "fr": "many" is missing currently -->
+    <issue id="MissingQuantity" severity="ignore" />
     <!-- treat non use of ellipsis character as error to avoid them on incoming translations -->
     <issue id="TypographyEllipsis" severity="error" />
 
