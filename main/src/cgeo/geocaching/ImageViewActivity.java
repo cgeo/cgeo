@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.ImageviewImageBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
@@ -25,6 +26,7 @@ import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.transition.Transition;
@@ -146,7 +148,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         @Override
         public int getCount() {
-            return realImageSize * ENDLESS_MULTIPLIER;
+            return realImageSize == 1 ? 1 : realImageSize * ENDLESS_MULTIPLIER;
         }
 
         @Override
@@ -251,6 +253,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         // Restore previous state
         if (savedInstanceState != null) {
             restoreState(savedInstanceState);
+        }
+
+        //handle case where Activity is called without intent parameters but with Uri (e.g. from outside c:geo)
+        final Uri uri = AndroidBeam.getUri(getIntent());
+        if (uri != null) {
+            imageList.add(new Image.Builder().setUrl(uri).build());
+        }
+
+        //safeguard for invalid/empty input data
+        if (imageList.isEmpty()) {
+            imageList.add(null);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
 
@@ -527,8 +540,12 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             }
         }
 
+        if (imageList.isEmpty()) {
+            imageList.add(null);
+        }
+        imagePos = Math.max(0, Math.min(imageList.size() - 1, bundle.getInt(PARAM_IMAGE_LIST_POS, 0)));
+
         imageContextCode = bundle.getString(PARAM_IMAGE_CONTEXT_CODE);
-        imagePos = bundle.getInt(PARAM_IMAGE_LIST_POS, 0);
         fullImageView = bundle.getBoolean(PARAM_FULLIMAGEVIEW, false);
         showImageInformation = bundle.getBoolean(PARAM_SHOWIMAGEINFO, true);
     }
