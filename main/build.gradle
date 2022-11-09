@@ -176,7 +176,7 @@ android {
         resultsDir = "$project.buildDir/build/test-results"
     }
 
-    lintOptions {
+    lint {
         // we do not accept lint errors when building
         abortOnError true
         // Warnings shall not fail build
@@ -189,6 +189,8 @@ android {
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
+        // we will take what is given by crowdin - For locale "fr": "many" is missing currently
+        disable 'MissingQuantity'
 
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
