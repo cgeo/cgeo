@@ -22,7 +22,7 @@
         android:nestedScrollingEnabled="true"
         android:orientation="vertical"
         android:padding="4dip"
-        android:scrollbars="none"
+        android:scrollbars="vertical"
         tools:listitem="@layout/image_gallery_image">
 
     </androidx.recyclerview.widget.RecyclerView>

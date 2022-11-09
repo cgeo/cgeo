@@ -230,7 +230,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     protected ImagesList imagesList;
 
     private ImageGalleryView imageGallery;
-    private int imageGalleryPos = 0;
+    private int imageGalleryPos = -1;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
@@ -2348,10 +2348,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
-
-            binding.experimental.setOnClickListener(v -> {
-                binding.imageGallery.scrollTo(binding.imageGallery.getImageCount() - 1);
-            });
 
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
