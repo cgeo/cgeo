@@ -66,6 +66,7 @@ public class ImageGalleryView extends LinearLayout {
     private final CategorizedListHelper categorizedImageListHelper = new CategorizedListHelper();
 
     private boolean allowOpenViewer = true;
+    private boolean activityReenterCalled = false;
 
     private ImageActivityHelper imageHelper = null;
     private final ImageDataMemoryCache imageDataMemoryCache = new ImageDataMemoryCache(2);
@@ -411,8 +412,15 @@ public class ImageGalleryView extends LinearLayout {
     /** Important: include this method in your activity to support activity-related tasks. Necessary for e.g. editable categories */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         allowOpenViewer();
-        onActivityReenter(activity, this, data);
-        return imageHelper.onActivityResult(requestCode, resultCode, data);
+        //in some situations "onActivityReenter" is not called. In these cases -> initialize position here
+        if (!activityReenterCalled) {
+            onActivityReenter(activity, this, data);
+        }
+        activityReenterCalled = false;
+        if (imageHelper != null) {
+            return imageHelper.onActivityResult(requestCode, resultCode, data);
+        }
+        return false;
     }
 
     /** registers a callback which is triggered whenever the count of images displayed in gallery changes */
@@ -420,9 +428,20 @@ public class ImageGalleryView extends LinearLayout {
         this.imageCountChangeCallback = callback;
     }
 
-    /** scrolls the image gallery to the image index given */
-    public void scrollTo(final int contentIndex) {
-        binding.imagegalleryList.scrollToPosition(categorizedImageListHelper.getListIndexForContentIndex(contentIndex));
+    /** scrolls the image gallery to the list index given */
+    private void scrollTo(final int listIndex) {
+        final int realIndex = Math.max(0, Math.min(adapter.getItemCount() - 1, listIndex));
+        final RecyclerView recyclerView = binding.imagegalleryList;
+        final GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+        //check if item is already (completely) visible --> then don't scroll
+        final View viewAtPosition = layoutManager.findViewByPosition(realIndex);
+        if (viewAtPosition == null || layoutManager
+                .isViewPartiallyVisible(viewAtPosition, false, true)) {
+
+            //view is either not or only partially visible --> scroll
+            //use "scrollToPositionWithOffset" since "scollToPosition" behaves strange -> see issue #13586
+            layoutManager.scrollToPositionWithOffset(realIndex, ViewUtils.dpToPixel(50));
+        }
     }
 
     /** returns the image view for given image index (or null if index is invalid) */
@@ -481,6 +500,7 @@ public class ImageGalleryView extends LinearLayout {
             activity.postponeEnterTransition();
             if (imageGallery != null) {
                 imageGallery.initializeToPosition(pos);
+                imageGallery.activityReenterCalled = true;
             }
         }
         return pos;
@@ -489,9 +509,11 @@ public class ImageGalleryView extends LinearLayout {
     /** initializes gallery to a certain position.
      * Use this method directly for gallery recreation if gallery was not available in activity's "onActivityReender" method */
     public void initializeToPosition(final int contentIndex) {
-        final int realPos = Math.max(0, Math.min(adapter.getItemCount() - 1, contentIndex));
+        final int realPos = Math.max(-1, Math.min(adapter.getItemCount() - 1, contentIndex));
         this.allowOpenViewer();
-        this.scrollTo(realPos);
+        if (realPos >= 0) {
+            this.scrollTo(categorizedImageListHelper.getListIndexForContentIndex(realPos));
+        }
         this.post(() -> activity.startPostponedEnterTransition());
     }
 
