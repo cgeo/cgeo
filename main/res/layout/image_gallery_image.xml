@@ -7,12 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <!--
-       General note wrt this layout: width/height sizes (150dp/160dp) will be changed in code
-       according to concrete screen size and layout
-    -->
-
-
     <!-- following LinearLayout is needed so image is centered inside column of gridlayout -->
     <LinearLayout
         android:id="@+id/image_complete"
