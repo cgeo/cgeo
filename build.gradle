@@ -90,9 +90,12 @@ allprojects {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
-                        if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
-                            selection.reject('Release candidate')
-                        }
+                        // deactivate this rule for now, as alpha software is needed as dependency for tests
+                        // from com.android.tools.utp:android-test-plugin-host-additional-test-output:30.3.1,
+                        // see https://github.com/cgeo/cgeo/pull/13634
+                        //if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
+                        //    selection.reject('Release candidate')
+                        //}
 
                         // see https://assertj.github.io/doc/#assertj-core-android
                         // AssertJ Core 3.x is compatible with Android API Level 26+, except for soft assertions and assumptions.
