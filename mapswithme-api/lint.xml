@@ -27,8 +27,8 @@
     <issue id="DrawAllocation" severity="ignore" />
     <issue id="DuplicateActivity" severity="ignore" />
     <issue id="DuplicateDefinition" severity="ignore" />
-    <issue id="DuplicateIds" severity="ignore" />
-    <issue id="DuplicateIncludedIds" severity="ignore" />
+    <issue id="DuplicateIds" severity="error" />
+    <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="DuplicateUsesFeature" severity="ignore" />
     <issue id="EnforceUTF8" severity="ignore" />
     <issue id="ExportedContentProvider" severity="ignore" />
@@ -153,7 +153,7 @@
     <issue id="TooManyViews" severity="ignore" />
     <issue id="TrulyRandom" severity="ignore" />
     <issue id="TypographyDashes" severity="ignore" />
-    <issue id="TypographyEllipsis" severity="ignore" />
+    <issue id="TypographyEllipsis" severity="error" />
     <issue id="TypographyFractions" severity="ignore" />
     <issue id="TypographyOther" severity="ignore" />
     <issue id="Typos" severity="ignore" />
