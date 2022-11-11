@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 android {
     namespace 'com.mapwithme.maps.api'
 
-    compileSdkVersion 32
+    compileSdk 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -11,9 +11,9 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk 21
         //noinspection OldTargetApi
-        targetSdkVersion 31
+        targetSdk 31
     }
 
     sourceSets.main {
