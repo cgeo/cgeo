@@ -113,10 +113,6 @@ allprojects {
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
                 force 'com.google.guava:guava:26.0-jre'
-
-                // force this version because of conflict to our resolutionStrategy from lint-gradle
-                // TODO check necessity after every gradle update (gradlew :main:lintBasicDebug)
-                force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
             }
         }
     }
