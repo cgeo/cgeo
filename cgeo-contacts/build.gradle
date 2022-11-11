@@ -7,7 +7,7 @@ apply plugin: 'com.android.application'
 android {
     namespace 'cgeo.contacts'
 
-    compileSdkVersion 32
+    compileSdk 32
 
     // signing is handled via private.properties
     signingConfigs {
@@ -20,13 +20,13 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk 21
         //noinspection OldTargetApi
-        targetSdkVersion 31
+        targetSdk 31
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
-        resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","zh-rTW"
+        resourceConfigurations += [ 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'zh-rTW' ]
     }
 
     sourceSets {
