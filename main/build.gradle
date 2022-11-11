@@ -19,6 +19,8 @@ if (isContinuousIntegrationServer()) {
 }
 
 android {
+    namespace 'cgeo.geocaching'
+
     compileSdkVersion 32
 
     compileOptions {
