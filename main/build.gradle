@@ -194,6 +194,9 @@ android {
         // we will take what is given by crowdin - For locale "fr": "many" is missing currently
         disable 'MissingQuantity'
 
+        // necessary as we changing locales at runtime (CgeoApplication.initApplicationLocale())
+        disable 'AppBundleLocaleChanges'
+
         // analyze all dependency modules in parallel and produce a single report
         // including issues from the app and all of its dependencies
         checkDependencies true
