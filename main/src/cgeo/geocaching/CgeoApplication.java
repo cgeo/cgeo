@@ -17,11 +17,9 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Looper;
 import android.os.UserManager;
-import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -57,8 +55,6 @@ public class CgeoApplication extends Application {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
                 fixUserManagerMemoryLeak();
             }
-
-            showOverflowMenu();
 
             initApplicationLocale();
 
@@ -97,16 +93,6 @@ public class CgeoApplication extends Application {
         super.onConfigurationChanged(newConfig);
 
         initApplicationLocale();
-    }
-
-    private void showOverflowMenu() {
-        try {
-            final ViewConfiguration config = ViewConfiguration.get(this);
-            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-            menuKeyField.setAccessible(true);
-            menuKeyField.setBoolean(config, false);
-        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignored) {
-        }
     }
 
     @Override
