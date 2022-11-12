@@ -1,11 +1,11 @@
 android {
     namespace 'cgeo.geocaching.test'
 
-    compileSdkVersion 33
+    compileSdk 32
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk 21
         //noinspection OldTargetApi
-        targetSdkVersion 31
+        targetSdk 31
     }
 }
