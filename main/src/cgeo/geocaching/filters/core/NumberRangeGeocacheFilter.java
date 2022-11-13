@@ -65,7 +65,7 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
                                                                   @NonNull final Func1<V, T> valueConverter) {
         boolean foundMinUnlimited = leftValue.compareTo(minValue) <= 0;
         boolean foundMaxUnlimited = rightValue.compareTo(maxValue) >= 0;
-        if ((leftValue == rightValue)
+        if ((leftValue.equals(rightValue))
                 || (leftValue.compareTo(maxValue) >= 0)
                 || (rightValue.compareTo(minValue) <= 0)) {
             foundMinUnlimited = false;
