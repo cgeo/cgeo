@@ -5,8 +5,9 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import cgeo.geocaching.utils.functions.Func1;
 
-import java.util.Collection;
+import androidx.annotation.NonNull;
 
+import java.util.Collection;
 
 public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>> extends BaseGeocacheFilter {
 
@@ -58,6 +59,22 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     public void setMinMaxRange(final T min, final T max) {
         numberRangeFilter.setMinMaxRange(min, max);
     }
+
+    public <V extends Number & Comparable<V>> void setMinMaxRange(@NonNull final V leftValue, @NonNull final V rightValue,
+                                                                  @NonNull final V minValue, @NonNull final V maxValue,
+                                                                  @NonNull final Func1<V, T> valueConverter) {
+        boolean foundMinUnlimited = leftValue.compareTo(minValue) <= 0;
+        boolean foundMaxUnlimited = rightValue.compareTo(maxValue) >= 0;
+        if ((leftValue == rightValue)
+                || (leftValue.compareTo(maxValue) >= 0)
+                || (rightValue.compareTo(minValue) <= 0)) {
+            foundMinUnlimited = false;
+            foundMaxUnlimited = false;
+        }
+        setMinMaxRange(foundMinUnlimited ? null : valueConverter.call(leftValue),
+                foundMaxUnlimited ? null : valueConverter.call(rightValue));
+    }
+
 
     public T getMaxRangeValue() {
         return numberRangeFilter.getMaxRangeValue();

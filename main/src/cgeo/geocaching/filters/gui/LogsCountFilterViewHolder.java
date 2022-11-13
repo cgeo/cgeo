@@ -75,9 +75,8 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
     public LogsCountGeocacheFilter createFilterFromView() {
         final LogsCountGeocacheFilter filter = createFilter();
         final ImmutablePair<Float, Float> range = slider.getRange();
-        filter.setMinMaxRange(
-                range.left < 0 ? null : Math.round(range.left),
-                range.right > 1000 ? null : Math.round(range.right));
+        filter.setMinMaxRange(range.left, range.right , 0f, 1000f, value -> Math.round(value));
+
         filter.setLogType(selectSpinner.get() == UNKNOWN ? null : selectSpinner.get());
         return filter;
     }
