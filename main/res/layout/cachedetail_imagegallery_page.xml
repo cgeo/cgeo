@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<cgeo.geocaching.ui.ImageGalleryView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/image_gallery"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:padding="4dip"
     tools:context=".CacheDetailActivity$ImageGalleryCreator">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/experimental"
-        android:background="@drawable/mark_orange"
-        style="@style/text"
-        android:text="Experimental!" tools:ignore="HardcodedText" />
-
-    <cgeo.geocaching.ui.ImageGalleryView
-    android:id="@+id/image_gallery"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"/>
-
-
-
-</LinearLayout>
+</cgeo.geocaching.ui.ImageGalleryView>

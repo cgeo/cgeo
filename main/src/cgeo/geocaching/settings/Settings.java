@@ -41,7 +41,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -695,7 +694,8 @@ public class Settings {
 
     public static boolean enableFeatureNewImageGallery() {
         if (!contains(R.string.pref_feature_new_image_gallery)) {
-            return !BranchDetectionHelper.isProductionBuild();
+            //return !BranchDetectionHelper.isProductionBuild();
+            return true;
         }
         return getBoolean(R.string.pref_feature_new_image_gallery, false);
     }
