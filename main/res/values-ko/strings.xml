@@ -302,6 +302,8 @@
     <string name="more_information">자세한 정보 보기</string>
     <string name="undo">실행취소</string>
     <string name="dont_show_again">다시 표시하지 않음</string>
+    <string name="tap_icon_more_info">자세한 정보를 보려면 아이콘을 누르세요.</string>
+    <string name="use_slider_adjust_value">슬라이더를 사용하여 값 조정</string>
     <string name="warn_gm_not_available">구글 지도를 사용할 수 없습니다.</string>
     <string name="switch_to_mf">구글 프레이 서비스가 오래되었습니다. 대신 Mapsforge 지도 제공자로 전환 하시겠습니까?</string>
     <string name="switched_to_mf">기본 지도가 Mapsforge 지도 제공자로 전환되었습니다. 지금지도를 다시 시작하세요.</string>
@@ -1341,6 +1343,7 @@
     <string name="cache_remove_from_history">기록에서 제거</string>
     <string name="cache_license">라이센스</string>
     <string name="cache_image">사진</string>
+    <string name="cache_image_information_unavailable">이미지 정보를 사용할 수 없습니다.</string>
     <string name="cache_image_open">열기</string>
     <string name="cache_image_open_file">파일로 열기</string>
     <string name="cache_image_open_browser">브라우저에서 열기</string>
@@ -1526,6 +1529,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">제목 없음</string>
     <string name="imageview_mimetype">MIME형식</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">지오포인트</string>
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->

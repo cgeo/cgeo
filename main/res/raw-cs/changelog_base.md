@@ -12,6 +12,8 @@ Vzhledem k nadcházejícím omezením v Obchodě Play jsme aktualizovali cílovo
 - Novinka: Při klepnutí na seznam obrázků otevřete přiblížené zobrazení obrázků
 - Oprava: Otevírání odkazů v listingách v integrovaném webovém zobrazení (pokud je povoleno)
 - Změna: Vykreslení popisu keše na pozadí a omezení délky na 50 000 znaků ve výchozím nastavení
+- Změna: Připojení ke službě GCVote je zakázáno kvůli vážným problémům s výkonem - můžete jej znovu ručně povolit v Nastavení - Služby - GCVote
+- Novinka: Log kešek: Možnost zachovat poslední sledovatelné akce podle sledovatelného předmětu
 
 ### Obecné
 - Novinka: Zobrazení čekajících stahování

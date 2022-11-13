@@ -12,6 +12,8 @@
 - Νέο: Ανοίξτε την προβολή μεγέθυνσης εικόνας όταν πατάτε στην λίστα εικόνων
 - Διόρθωση: Άνοιγμα συνδέσμων σε καταχωρήσεις στην ολοκληρωμένη προβολή ιστού (αν είναι ενεργοποιημένο)
 - Αλλαγή: Περιγραφή κρύπτης στο παρασκήνιο και με μήκος 50.000 χαρακτήρων από προεπιλογή
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### General
 - Νέο: Προβολή εκκρεμών λήψεων

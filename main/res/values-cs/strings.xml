@@ -302,6 +302,8 @@
     <string name="more_information">Další informace</string>
     <string name="undo">Zpět</string>
     <string name="dont_show_again">Znovu nezobrazovat</string>
+    <string name="tap_icon_more_info">Pro více informací klepněte na ikonu</string>
+    <string name="use_slider_adjust_value">Pomocí posuvníku upravte hodnotu</string>
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
