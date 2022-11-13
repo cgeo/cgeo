@@ -316,7 +316,7 @@ public class GeocacheTest extends CGeoTestCase {
         cache.addOrChangeWaypoint(new Waypoint("", null, "Test 1", "", "", WaypointType.OWN), false);
         saveFreshCacheToDB(cache);
 
-        final String note = "@Test 1 (O) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@Test 1 (O) " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         cache.setPersonalNote(note);
         cache.setPreventWaypointsFromNote(false);
 

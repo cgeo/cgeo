@@ -189,6 +189,8 @@ public class FormulaUtilsTest {
         assertScanCoordinates("N 48° 0B.(2x C)(2x C)(2x C),\n  E 11° BB.(G+H)DF", "N 48° 0B.(2* C)(2* C)(2* C)|E 11° BB.(G+H)DF");
         assertScanCoordinates("N 48° 0B.0[I+J*D],\nE 11° BB.D(J/4)D", "N 48° 0B.0(I+J*D)|E 11° BB.D(J/4)D");
 
+        assertScanCoordinates("N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n", "N 45° A.B(C+D)'|E 9° (A-B).(2*D)EF");
+        assertScanCoordinates("N 45° A.B(C+D!) E 9°(A-B).(2*D)EF", "N 45° A.B(C+D!)|E 9°(A-B).(2*D)EF");
     }
 
     private void assertScanCoordinates(final String textToScan, final String... expectedFindPairs) {

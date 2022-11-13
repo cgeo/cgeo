@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FormulaUtils {
 
-    private static final String F_OPS = "+/:*x-";
+    private static final String F_OPS = "+/!^:*x-";
     private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");

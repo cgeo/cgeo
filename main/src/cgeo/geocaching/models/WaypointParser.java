@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.calculator.CalcStateEvaluator;
 import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
 import cgeo.geocaching.calculator.FormulaParser;
 import cgeo.geocaching.calculator.FormulaWrapper;
@@ -12,12 +11,16 @@ import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
+
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +42,6 @@ public class WaypointParser {
     private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
 
     //Constants for waypoint parsing
-    public static final String PARSING_COORD_FORMULA_PLAIN = "(F-PLAIN)";
     public static final String PARSING_CALCULATED_COORD = "{" + CalculatedCoordinate.CONFIG_KEY + "|";
     private static final String PARSING_NAME_PRAEFIX = "@";
     private static final char PARSING_USERNOTE_DELIM = '"';
@@ -51,6 +53,9 @@ public class WaypointParser {
     private static final String PARSING_TYPE_CLOSE = ")";
     private static final String PARSING_COORD_EMPTY = "(NO-COORD)";
 
+    //Marks legacy calculated coordinat entries. Needed to still parse them from Personal Note
+    public static final String LEGACY_PARSING_COORD_FORMULA = "(F-PLAIN)";
+
     //Constants for variable parsing
 
     private static final String PARSING_VAR_LETTERS_FULL = "\\$([a-zA-Z][a-zA-Z0-9]*)\\s*=([^\\n|]*)[\\n|]";
@@ -59,7 +64,6 @@ public class WaypointParser {
 
     //general members
     private final Geocache cache;
-    private final boolean legacyMode;
 
     //Waypoints
     private Collection<Waypoint> waypoints;
@@ -76,11 +80,6 @@ public class WaypointParser {
      * @param namePrefix Prefix of the name of the waypoint
      */
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
-        this(cache, namePrefix, false);
-    }
-
-    public WaypointParser(final Geocache cache, @NonNull final String namePrefix, final boolean legacyMode) {
-        this.legacyMode = legacyMode;
         this.namePrefix = namePrefix;
         this.cache = cache;
     }
@@ -126,13 +125,13 @@ public class WaypointParser {
         parseWaypointsWithCoords(text);
 
         // search waypoints with empty coordinates
-        parseWaypointsWithSpecificCoords(text, PARSING_COORD_EMPTY, null);
+        parseWaypointsWithSpecificCoords(text, PARSING_COORD_EMPTY);
 
         // search waypoints with formula
-        parseWaypointsWithSpecificCoords(text, PARSING_COORD_FORMULA_PLAIN, Settings.CoordInputFormatEnum.Plain);
+        parseWaypointsWithSpecificCoords(text, LEGACY_PARSING_COORD_FORMULA);
 
         //search calculated waypoints
-        parseWaypointsWithSpecificCoords(text, PARSING_CALCULATED_COORD, null);
+        parseWaypointsWithSpecificCoords(text, PARSING_CALCULATED_COORD);
 
     }
 
@@ -140,7 +139,7 @@ public class WaypointParser {
         final String cleanedText = removeCalculatedCoords(text);
         final Collection<GeopointWrapper> matches = GeopointParser.parseAll(cleanedText);
         for (final GeopointWrapper match : matches) {
-            final Waypoint wp = parseSingleWaypoint(match, null);
+            final Waypoint wp = parseSingleWaypoint(match);
             if (wp != null) {
                 waypoints.add(wp);
                 count++;
@@ -152,12 +151,12 @@ public class WaypointParser {
         return text.replaceAll(Pattern.quote(PARSING_CALCULATED_COORD) + ".*?" + Pattern.quote("}"), "");
     }
 
-    private void parseWaypointsWithSpecificCoords(final String text, final String parsingCoord, final Settings.CoordInputFormatEnum coordFormat) {
+    private void parseWaypointsWithSpecificCoords(final String text, final String parsingCoord) {
         int idxWaypoint = text.indexOf(parsingCoord);
 
         while (idxWaypoint >= 0) {
             final GeopointWrapper match = new GeopointWrapper(null, idxWaypoint, parsingCoord.length(), text);
-            final Waypoint wp = parseSingleWaypoint(match, coordFormat);
+            final Waypoint wp = parseSingleWaypoint(match);
             if (wp != null) {
                 waypoints.add(wp);
                 count++;
@@ -166,7 +165,8 @@ public class WaypointParser {
         }
     }
 
-    private Waypoint parseSingleWaypoint(final GeopointWrapper match, final Settings.CoordInputFormatEnum coordFormat) {
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) //splitting would not help readability
+    private Waypoint parseSingleWaypoint(final GeopointWrapper match) {
         final Geopoint point = match.getGeopoint();
         final Integer start = match.getStart();
         final Integer end = match.getEnd();
@@ -194,32 +194,7 @@ public class WaypointParser {
 
         String afterCoords = TextUtils.getTextAfterIndexUntil(text, end - 1, null);
 
-        if (null != coordFormat) {
-            // try to get a formula
-            final ImmutableTriple<CalculatedCoordinate, String, CalcState> coordFormula = parseFormula(afterCoords, coordFormat);
-            if (this.legacyMode) {
-                final CalcState calcState = coordFormula.right;
-                if (null != calcState) {
-                    waypoint.setCalcStateConfig(calcState.toJSON().toString());
-                    // try to evaluate valid coordinates
-                    final CalcStateEvaluator eval = new CalcStateEvaluator(calcState.equations, calcState.freeVariables, null);
-                    final Geopoint gp = eval.evaluate(calcState.plainLat, calcState.plainLon);
-                    waypoint.setCoords(gp);
-                }
-            } else {
-                final CalculatedCoordinate cc = coordFormula.left;
-                if (null != cc) {
-                    waypoint.setCalcStateConfig(cc.toConfig());
-                    // try to evaluate valid coordinates
-                    if (this.cache != null && this.cache.getVariables() != null) {
-                        waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
-                    }
-                }
-            }
-
-            afterCoords = coordFormula.middle;
-        }
-
+        //parse calculated coordinates
         if (PARSING_CALCULATED_COORD.equals(matchedText)) {
             final String configAndMore = text.substring(start);
             final CalculatedCoordinate cc = new CalculatedCoordinate();
@@ -235,6 +210,46 @@ public class WaypointParser {
             }
 
             afterCoords = configAndMore.substring(parseEnd);
+        }
+
+        // parse calculated coordinates in legacy format
+        if (LEGACY_PARSING_COORD_FORMULA.equals(matchedText)) {
+
+            final List<Pair<String, String>> coords = FormulaUtils.scanForCoordinates(Collections.singleton(afterCoords), null);
+            if (!coords.isEmpty()) {
+                final CalculatedCoordinate cc = new CalculatedCoordinate();
+                String lonString = coords.get(0).second;
+                if (lonString.endsWith("\"")) {
+                    lonString = lonString.substring(0, lonString.length() - 1);
+                }
+                cc.setLatitudePattern(coords.get(0).first);
+                cc.setLongitudePattern(lonString);
+                waypoint.setCalcStateConfig(cc.toConfig());
+                // try to evaluate valid coordinates
+                if (this.cache != null && this.cache.getVariables() != null) {
+                    waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
+                }
+                int idx = afterCoords.indexOf(lonString);
+                if (idx > 0) {
+                    idx += lonString.length();
+                    while (true) {
+                        final int sepIdx = afterCoords.indexOf("|", idx);
+                        if (sepIdx < 0 || sepIdx - idx > 25) {
+                            break;
+                        }
+                        final int equalIdx = afterCoords.indexOf("=", idx);
+                        if (equalIdx >= 0 && equalIdx < sepIdx) {
+                            final String var = afterCoords.substring(idx, equalIdx).trim();
+                            final String value = afterCoords.substring(equalIdx + 1, sepIdx).trim();
+                            if (!StringUtils.isBlank(var)) {
+                                addVariable(var, value, false);
+                            }
+                        }
+                        idx = sepIdx + 1;
+                    }
+                    afterCoords = afterCoords.substring(idx);
+                }
+            }
         }
 
         //try to get a user note
@@ -566,7 +581,7 @@ public class WaypointParser {
     private static String getParseableFormulaString(final CalcState calcState) {
         final StringBuilder sb = new StringBuilder();
         if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
-            sb.append(PARSING_COORD_FORMULA_PLAIN + " ");
+            sb.append(LEGACY_PARSING_COORD_FORMULA + " ");
             sb.append(calcState.plainLat).append(" ").append(calcState.plainLon).append(" ");
         }
         return sb.toString();
