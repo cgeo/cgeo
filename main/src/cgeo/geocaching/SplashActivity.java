@@ -13,12 +13,16 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "SplashActivity.onCreate")) {
+            // Handle the splash screen transition
+            SplashScreen.installSplashScreen(this);
+
             // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
 
