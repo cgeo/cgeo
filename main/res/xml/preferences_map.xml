@@ -80,29 +80,32 @@
             android:title="@string/settings_info_hillshading_title"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_maphillshading"
+            android:defaultValue="false"
             android:title="@string/settings_hillshading_enable"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
+            android:dependency="@string/pref_maphillshading"
             android:summary="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
             app:iconSpaceReserved="false" />
         <SeekBarPreference
+            android:key="@string/pref_mapShadingLinearity"
+            android:dependency="@string/pref_maphillshading"
             android:summary="@string/init_mapShadingLinearity_description"
             android:title="@string/init_mapShadingLinearity_title"
             android:defaultValue="5"
-            android:key="@string/pref_mapShadingLinearity"
             android:max="100"
             android:min="0"
             app:showSeekBarValue="true"
             app:iconSpaceReserved="false" />
         <SeekBarPreference
+            android:key="@string/pref_mapShadingScale"
+            android:dependency="@string/pref_maphillshading"
             android:summary="@string/init_mapShadingScale_description"
             android:title="@string/init_mapShadingScale_title"
             android:defaultValue="120"
-            android:key="@string/pref_mapShadingScale"
             android:max="300"
             android:min="0"
             app:showSeekBarValue="true"
