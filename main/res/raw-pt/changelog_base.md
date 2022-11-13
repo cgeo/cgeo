@@ -12,6 +12,8 @@ Devido às próximas restrições na Play Store, actualizámos o nível de API d
 - Novo: Ampliação da imagem em visualização (ao tocar numa imagem da descrição)
 - Correcção: Abrir ligações nas descrições no navegador web integrado (se estiver activo)
 - Alteração: Renderizar a descrição da cache em segundo plano e limitar o seu tamanho a 50.000 caracteres, por defeito
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### Geral
 - Novo: Exibição das transferências pendentes
@@ -24,4 +26,4 @@ Devido às próximas restrições na Play Store, actualizámos o nível de API d
 - Novo: Permitir a introdução manual de valores em filtros, usando controles deslizantes
 - Novo: Activar o envio de coordenadas modificadas para caches importadas a partir dum ficheiro GPX, quando a cache tem um ponto adicional do tipo "ORIGINAL"
 - Alteração: Melhorar o texto da linha de estado do filtro
-- Alteração: Utilização de uma cor mais legível para o nome, nos títulos, de caches arquivadas e remoção da cor na página de detalhes da cache
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page

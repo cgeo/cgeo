@@ -12,6 +12,8 @@ Ze względu na nadchodzące ograniczenia w Google Play zaktualizowaliśmy docelo
 - New: Open zoomable image view when tapping on listing images
 - Fix: Open links in listings in integrated web view (if enabled)
 - Change: Render cache description in background and limit length to 50,000 characters by default
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### Ogólne
 - Nowość: Widok oczekujących na pobranie
@@ -24,4 +26,4 @@ Ze względu na nadchodzące ograniczenia w Google Play zaktualizowaliśmy docelo
 - Nowość: Zezwalaj na ręczne wprowadzanie wartości w filtrach za pomocą suwaków
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page

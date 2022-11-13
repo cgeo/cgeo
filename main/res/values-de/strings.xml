@@ -302,6 +302,8 @@
     <string name="more_information">Mehr Informationen</string>
     <string name="undo">Rückgängig</string>
     <string name="dont_show_again">Nicht erneut anzeigen</string>
+    <string name="tap_icon_more_info">Für weitere Informationen tippe auf das Symbol</string>
+    <string name="use_slider_adjust_value">Schieberegler verwenden, um den Wert anzupassen</string>
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
@@ -677,6 +679,8 @@
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
     <string name="settings_title_offline_maps">Offline-Karten</string>
+    <string name="settings_title_map_themes">Offline-Kartenthemen</string>
+    <string name="settings_title_map_hillshading">Schattierung für Offline-Karten</string>
     <string name="settings_title_offline_routing">Offline-Routing</string>
     <string name="settings_summary_offline_routing">Offline-Routing ist verfügbar, wenn entweder die Helfer-App \"BRouter\" installiert und konfiguriert ist oder das interne Routing aktiviert ist.</string>
     <string name="settings_title_map_rotation">Kartendrehung (Google Maps)</string>
@@ -903,6 +907,8 @@
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
+    <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
+    <string name="settings_info_hillshading">Hillshading ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie Quelldateien, die die Höheninformationen enthalten, müssen manuell abgerufen (klicken Sie auf dieses Element für Quellen) und im unten definierten Quellordner abgelegt werden.</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>

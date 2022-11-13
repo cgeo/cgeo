@@ -12,6 +12,8 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - New: Open zoomable image view when tapping on listing images
 - Fix: Open links in listings in integrated web view (if enabled)
 - Change: Render cache description in background and limit length to 50,000 characters by default
+- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
+- New: Log caches: Preserve last trackable action per trackable
 
 ### General
 - New: View for pending downloads
@@ -24,4 +26,4 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - New: Allow manual input of values in filters using sliders
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
