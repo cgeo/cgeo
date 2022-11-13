@@ -1769,7 +1769,7 @@ public class Geocache implements IWaypoint {
                 changed |= addOrMergeInfoToExistingWaypoint(updateDb, namePrefix, parsedWaypoint);
             }
             for (Map.Entry<String, String> var : waypointParser.getParsedVariables().entrySet()) {
-                if (getVariables().isBlank(var.getKey())) {
+                if (getVariables().isWorthAddingWithoutLoss(var.getKey(), var.getValue())) {
                     getVariables().addVariable(var.getKey(), var.getValue());
                 }
                 getVariables().saveState();
