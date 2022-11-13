@@ -2630,7 +2630,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final int varCount = cache == null ? 0 : cache.getVariables().size();
             return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         } else if (pageId == Page.IMAGEGALLERY.id) {
-            String title = "*" + this.getString(Page.IMAGEGALLERY.titleStringId);
+            String title = this.getString(Page.IMAGEGALLERY.titleStringId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
