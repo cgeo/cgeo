@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.PersistableFolder;
 
@@ -20,6 +21,10 @@ public class HillShadingLayerHelper {
     }
 
     public static HillsRenderConfig getHillsRenderConfig() {
+        if (!Settings.getBoolean(R.string.pref_maphillshading, false)) {
+            return null;
+        }
+
         final Context context = CgeoApplication.getInstance();
         final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
 

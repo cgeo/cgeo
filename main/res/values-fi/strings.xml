@@ -2254,7 +2254,7 @@
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="download_none_selected">Ladattavia tiedostoja ei ole valittu</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi:</string>
     <string name="download_warning">Lataukset voivat viedä jonkin aikaa ja aiheuttaa huomattavia kustannuksia verkkoyhteydestäsi riippuen.</string>
