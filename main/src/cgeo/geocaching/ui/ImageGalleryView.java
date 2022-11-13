@@ -56,7 +56,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ImageGalleryView extends LinearLayout {
 
-    private static final int IMAGE_TARGET_SIZE_DB = 160;
+    private static final int IMAGE_TARGET_WIDTH_DP = 160;
+    private static final int IMAGE_TARGET_HEIGHT_DP = 200; // without title textview
 
     private Context context;
     private Activity activity;
@@ -153,7 +154,7 @@ public class ImageGalleryView extends LinearLayout {
     private void recalculateLayout(final Configuration newConfig) {
 
         final GridLayoutManager manager = (GridLayoutManager) binding.imagegalleryList.getLayoutManager();
-        final int colCount = Math.max(1, newConfig.screenWidthDp / (IMAGE_TARGET_SIZE_DB + 10));
+        final int colCount = Math.max(1, newConfig.screenWidthDp / (IMAGE_TARGET_WIDTH_DP + 10));
         manager.setSpanCount(colCount);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -439,8 +440,17 @@ public class ImageGalleryView extends LinearLayout {
                 .isViewPartiallyVisible(viewAtPosition, false, true)) {
 
             //view is either not or only partially visible --> scroll
-            //use "scrollToPositionWithOffset" since "scollToPosition" behaves strange -> see issue #13586
-            layoutManager.scrollToPositionWithOffset(realIndex, ViewUtils.dpToPixel(50));
+
+            int offset = 50; //default
+            //try to calculate an offset such that the image to scroll to ends up in the middle of the gallery view
+            final int imageHeight = ViewUtils.dpToPixel(IMAGE_TARGET_HEIGHT_DP);
+            final int height = this.getHeight();
+            if (height >= imageHeight) {
+                offset = (height - imageHeight) / 2;
+            }
+
+            //use "scrollToPositionWithOffset" since "scrollToPosition" behaves strange -> see issue #13586
+            layoutManager.scrollToPositionWithOffset(realIndex, offset);
         }
     }
 
