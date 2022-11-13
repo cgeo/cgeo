@@ -77,10 +77,7 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         filter.setUseCurrentPosition(useCurrentPosition.isChecked());
         filter.setCoordinate(GeopointParser.parse(coordinate.getText().toString(), null));
         final ImmutablePair<Float, Float> range = slider.getRange();
-        filter.setMinMaxRange(
-                range.left < 0 ? null : (float) Math.round(range.left * conversion),
-                range.right > maxDistance ? null : (float) Math.round(range.right * conversion));
+        filter.setMinMaxRange(range.left, range.right , 0f, (float) maxDistance, value -> (float) Math.round(value * conversion));
         return filter;
     }
-
 }

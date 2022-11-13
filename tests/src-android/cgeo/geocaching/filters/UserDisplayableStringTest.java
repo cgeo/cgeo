@@ -13,6 +13,7 @@ import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
+import cgeo.geocaching.filters.core.UserDisplayableStringUtils;
 import cgeo.geocaching.utils.functions.Action2;
 
 import java.text.ParseException;
@@ -158,9 +159,9 @@ public class UserDisplayableStringTest {
                                                     final T minValue, final T maxValue,
                                                     final String minValueOutput, final String maxValueOutput) {
         testSingleUserDisplayStringForRange(filter, filterSetter, null, null, null);
-        testSingleUserDisplayStringForRange(filter, filterSetter, minValue, null, ">" + minValueOutput);
+        testSingleUserDisplayStringForRange(filter, filterSetter, minValue, null, UserDisplayableStringUtils.GREATER_THAN_OR_EQUAL_TO + minValueOutput);
         testSingleUserDisplayStringForRange(filter, filterSetter, minValue, maxValue, minValueOutput + "-" + maxValueOutput);
-        testSingleUserDisplayStringForRange(filter, filterSetter, null, maxValue, "<" + maxValueOutput);
+        testSingleUserDisplayStringForRange(filter, filterSetter, null, maxValue, UserDisplayableStringUtils.LESS_THAN_OR_EQUAL_TO + maxValueOutput);
         testSingleUserDisplayStringForRange(filter, filterSetter, maxValue, maxValue, maxValueOutput);
     }
 }

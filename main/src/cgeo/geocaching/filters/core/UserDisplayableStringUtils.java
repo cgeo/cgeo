@@ -4,7 +4,10 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 
-final class UserDisplayableStringUtils {
+public final class UserDisplayableStringUtils {
+
+    public static final char[] LESS_THAN_OR_EQUAL_TO = Character.toChars(0x2264);
+    public static final char[] GREATER_THAN_OR_EQUAL_TO = Character.toChars(0x2265);
 
     private UserDisplayableStringUtils() {
         // Do not instantiate
@@ -21,10 +24,10 @@ final class UserDisplayableStringUtils {
                 sb.append(minValue).append("-").append(maxValue);
             }
         } else if (StringUtils.isNotEmpty(minValue)) {
-            sb.append(">").append(minValue);
+            sb.append(GREATER_THAN_OR_EQUAL_TO).append(minValue);
         } else {
             // maxValueSet
-            sb.append("<").append(maxValue);
+            sb.append(LESS_THAN_OR_EQUAL_TO).append(maxValue);
         }
         return sb.toString();
     }
