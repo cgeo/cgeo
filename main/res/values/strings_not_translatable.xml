@@ -288,7 +288,7 @@
     <string translatable="false" name="mapserver_freizeitkarte_projecturl">https://www.freizeitkarte-osm.de/android/en/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_themes_name">Freizeitkarte Themes</string>
-    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/2012/</string>
+    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/latest/</string>
 
     <string translatable="false" name="mapserver_hylly_name">Hylly</string>
     <string translatable="false" name="mapserver_hylly_updatecheckurl">https://kartat.hylly.org/</string>

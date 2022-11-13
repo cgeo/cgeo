@@ -56,9 +56,10 @@ public class VariableList {
         return variablesSet.containsKey(var);
     }
 
-    public boolean isBlank(final String var) {
+    /** Returns true if the given 'newValue' for the given variable 'var' can/should be added without overriding existing info in list */
+    public boolean isWorthAddingWithoutLoss(final String var, final String newValue) {
         final VariableMap.VariableState state = getState(var);
-        return state == null || StringUtils.isBlank(state.getFormulaString());
+        return state == null || (StringUtils.isBlank(state.getFormulaString()) && !StringUtils.isBlank(newValue));
     }
 
     @Nullable
