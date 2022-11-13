@@ -64,12 +64,15 @@ public class LooperLogger {
             final long duration = System.currentTimeMillis() - currStartTime;
             totalTime += duration;
 
-            if (duration > 500) {
-                final StringBuilder sb = new StringBuilder("LooperLogger: long process time for " + currMsg + " (" + duration + "ms, " + getStats() + "), " + collectedInfos.size() + "traces:");
-                for (String info : collectedInfos) {
-                    sb.append("\n   ").append(info);
-                }
 
+            if (duration > 500) {
+                final StringBuilder sb = new StringBuilder();
+                synchronized (collectedInfos) {
+                    sb.append("LooperLogger: long process time for " + currMsg + " (" + duration + "ms, " + getStats() + "), " + collectedInfos.size() + "traces:");
+                    for (String info : collectedInfos) {
+                        sb.append("\n   ").append(info);
+                    }
+                }
                 Log.w(sb.toString());
             } else if (Log.isDebug() && totalMsgCount % 1000 == 0) {
                 Log.d("LooperLogger: " + getStats());
