@@ -450,6 +450,9 @@ dependencies {
     // Settings Library
     implementation 'androidx.preference:preference:1.2.0'
 
+    // Support Library for consistent splash screens
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
     // Support Annotations. use same version for the main app and the test app
     def annotationVersion = '1.5.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
