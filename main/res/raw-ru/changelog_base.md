@@ -1,29 +1,29 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Примечание: изменение уровня API
+В связи с предстоящими ограничениями в Play Store мы обновили целевой уровень API Android. Это не должно влиять на использование c:geo, и он по-прежнему должен запускаться на Android 5 и выше, но если вы заметили какие-либо ошибки, пожалуйста, свяжитесь с нами написав на support@cgeo.org
 
 ### Карта
 - Новое: Разрешить смену отображаемого имени трека
 
 ### Детали тайника
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Исправлено: Запись изображения с пометкой "Image 1", даже если только одно изображение добавлено
+- Новый: Заполнение шаблона журнала ГЕОКОДА (GEOCODE)
+- Новое: Поддержка HTML форматирования для списков определений (dl/dt/dd)
+- Новое: Открытие масштабируемого вида изображения при нажатии на список изображений
+- Исправлено: Открытие ссылок в списках во встроенном веб-просмотрщике (если включено)
+- Изменение: Описание визуализации тайника в фоновом режиме и по умолчанию ограничено 50 000 символами
+- Изменение: Служба GCVote отключена в связи с серьезными проблемами производительности - Вы можете вручную включить ее через Настройки - Услуги - GCVote
+- Новое: Журнал тайника: Сохранить последнее отслеживаемое действие по трекаблу
 
 ### Общее
 - Новое: Просмотр ожидающих загрузок
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Новое: Добавление названия тайника или имени списка к имени файла при экспорте GPX
+- Изменение: Удалён параметр «Определить как браузер Android»
+- Новое: Проверка ожидающих загрузки данных (карт/данных маршрутизации) при запуске
+- Новое: Разрешить выбор файлов для загрузки
+- Новое: Статус фильтра для DNF
+- Новое: Показывать высоту на главном экране (если доступно)
+- Новое: Возможность вручную вводить значения в фильтрах, используя ползунки
+- Новое: Включение загрузки измененных координат для тайников, импортированных из GPX файла, когда в тайнике есть путевая точка типа "ORIGINAL"
+- Изменение: Улучшение текстовой строки состояния фильтра
+- Изменение: улучшение читаемости цвета для названий архивных тайников в заголовках и удаление расцвечивания из страницы деталей тайника

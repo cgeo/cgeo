@@ -909,6 +909,7 @@
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
     <string name="settings_info_hillshading">Hillshading ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie Quelldateien, die die Höheninformationen enthalten, müssen manuell abgerufen (klicken Sie auf dieses Element für Quellen) und im unten definierten Quellordner abgelegt werden.</string>
+    <string name="settings_hillshading_enable">Hillshading aktivieren</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>

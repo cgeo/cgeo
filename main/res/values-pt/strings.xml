@@ -302,6 +302,8 @@
     <string name="more_information">Mais informação</string>
     <string name="undo">Anular</string>
     <string name="dont_show_again">Não mostrar novamente</string>
+    <string name="tap_icon_more_info">Toque no ícone para mais informações</string>
+    <string name="use_slider_adjust_value">Use o controle deslizante para ajustar o valor</string>
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
@@ -907,6 +909,7 @@
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Estes podem ser utilizados para alterar o estilo de cor do mapa (por exemplo, para ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo dentro do mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="settings_info_hillshading_title">Informação sobre o Sombreado de elevações</string>
     <string name="settings_info_hillshading">O Sombreado de elevações é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de elevação. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nOs ficheiros fonte, contendo as informações de elevação, devem ser obtidos manualmente - clique neste item para fontes - e colocados na pasta de fontes definida abaixo.</string>
+    <string name="settings_hillshading_enable">Ligar Sombreado</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>

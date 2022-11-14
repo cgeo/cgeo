@@ -303,6 +303,8 @@
     <string name="more_information">Més informació</string>
     <string name="undo">Desfer</string>
     <string name="dont_show_again">No ho tornis a mostrar</string>
+    <string name="tap_icon_more_info">Toqueu la icona per obtenir més informació</string>
+    <string name="use_slider_adjust_value">Utilitzeu el control lliscant per ajustar el valor</string>
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
     <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
@@ -548,6 +550,7 @@
     <string name="cache_filter_status_select_yes">Sí</string>
     <string name="cache_filter_status_select_no">No</string>
     <string name="cache_filter_status_select_label_found">Trobat</string>
+    <string name="cache_filter_status_select_label_dnf">No s\'ha trobat</string>
     <string name="cache_filter_status_select_label_owned">Propietat</string>
     <string name="cache_filter_status_select_label_stored">Emmagatzemat</string>
     <string name="cache_filter_status_select_label_favorite">Propi preferit</string>
@@ -641,6 +644,7 @@
     <string name="downloader_cancelled_download">S\'ha cancel·lat la baixada de \"%s\"</string>
     <string name="downloader_pending_info">Hi ha almenys una descàrrega en pausa o fallada. Vols obrir la llista de baixades pendents?</string>
     <string name="downloader_retry_download">Torna a provar de descarregar</string>
+    <string name="downloader_retry_download_details">Voleu tornar a provar la baixada del fitxer?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">La baixada ha fallat (i no es tornarà a provar)</string>
     <string name="asdm_status_paused">La baixada està esperant per tornar-ho a provar o reprendre</string>
@@ -659,6 +663,7 @@
     <string name="asdm_error_insufficient_space">Error: Espai d\'emmagatzematge insuficient</string>
     <string name="asdm_error_too_many_redirects">Error: Massa redireccions</string>
     <string name="asdm_error_unhandled_http_code">Error: Codi HTTP no gestionat</string>
+    <string name="asdm_error_unknown">Error: Error desconegut</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Obrir la configuració?</string>
     <string name="settings_title_services">Serveis</string>
@@ -675,6 +680,8 @@
     <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
     <string name="settings_title_offline_maps">Mapes fora de línia</string>
+    <string name="settings_title_map_themes">Temes de mapes fora de línia</string>
+    <string name="settings_title_map_hillshading">Mapes ombrejats fora de línia</string>
     <string name="settings_title_offline_routing">Encaminament fora de línia</string>
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
     <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>
@@ -773,6 +780,7 @@
     <string name="init_signature_template_size">Mida</string>
     <string name="init_signature_template_type">Tipus</string>
     <string name="init_signature_template_location">Ubicació</string>
+    <string name="init_signature_template_geocode">Geocodi</string>
     <string name="init_ratingwanted">Valoració del GCvote</string>
     <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
@@ -900,6 +908,9 @@
     <string name="settings_info_offline_maps">C:geo admet mapes per a ús fora de línia. Podeu obtenir mapes de diferents proveïdors o fins i tot crear els vostres propis mapes (a partir de dades OSM). Primer heu de seleccionar la carpeta on es desaran els mapes fora de línia.</string>
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
+    <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nEls fitxers font que contenen la informació d\'elevació s\'han d\'obtenir manualment (feu clic a aquest element per a les fonts) i col·locar-los a la carpeta de fonts que es defineix a continuació.</string>
+    <string name="settings_hillshading_enable">Activa l\'ombrejat</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
@@ -1207,6 +1218,9 @@
     <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
     <string name="cache_description">Descripció</string>
     <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
+    <string name="cache_description_rendering">S\'està mostrant la descripció, espereu…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Avís: la descripció és molt gran (%1$d caràcters). Només es mostren els primers %2$d%%.</string>
+    <string name="cache_description_render_fully">Mostra una descripció completa</string>
     <string name="cache_area_description">Descripció de l’àrea</string>
     <string name="cache_cache_description">Descripció del catxé</string>
     <string name="cache_virtual_description">Pregunta virtual</string>
@@ -1346,6 +1360,7 @@
     <string name="cache_remove_from_history">Suprimeix de l\'historial</string>
     <string name="cache_license">Llicència</string>
     <string name="cache_image">Imatge</string>
+    <string name="cache_image_information_unavailable">La informació de la imatge no està disponible</string>
     <string name="cache_image_open">Obert</string>
     <string name="cache_image_open_file">Obre com a fitxer</string>
     <string name="cache_image_open_browser">Obre al navegador</string>
@@ -1500,6 +1515,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Descartat</string>
     <string name="calccoord_migrate_infotext_markdown">S\'ha trobat un càlcul de coordenades heretades en aquest punt de ruta:\n\n%1$s\n\nPodeu migrar-ho a les noves coordenades de càlcul del catxé de la següent manera:\n\n%2$s\n\namb variables de catxé noves: %3$s\n\nSi us plau, trieu:\n- %4$s per dur a terme la migració tal com s\'ha suggerit\n- %5$s per descartar les dades de càlcul trobades perquè\n- %6$s continuï sense migració. Se us demanarà de nou la migració la propera vegada que obriu el punt de ruta per editar-lo. Tingueu en compte, però, que l\'edició de les coordenades del punt de ruta podria suprimir les dades de càlcul local.</string>
     <!-- Formula -->
+    <string name="formula">Fórmula</string>
     <string name="formula_choose_function">Trieu la funció</string>
     <string name="formula_function_sqrt">Arrel quadrada</string>
     <string name="formula_function_sin">Sinus</string>
@@ -1531,6 +1547,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Sense títol</string>
     <string name="imageview_mimetype">Mimetitzat</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopunt</string>
     <string name="imageview_metadata_comment">Comenta</string>
     <!-- visit -->
@@ -2119,6 +2136,7 @@
     <!-- permission handling -->
     <string name="close_app">Tanca l\'aplicació</string>
     <string name="ask_again">Torna a preguntar</string>
+    <string name="location_permission_request_explanation">C:geo necessita accedir al GPS (ubicació fina) del vostre dispositiu per localitzar la vostra posició i calcular la distància i la direcció dels catxés. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_request_explanation">c:geo escriurà dades al vostre telèfon o a la targeta SD tan bon punt guardeu els catxés per a un ús fora de línia. A més, c:geo utilitzarà l’emmagatzematge del vostre telèfon per a la importació i exportació d’arxius i lectura de mapes fora de línia. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
@@ -2234,9 +2252,12 @@
     <string name="downloadmap_filename">S\'està baixant %s</string>
     <string name="downloadmanager_not_available">El fitxer no es pot descarregar, el gestor de descàrregues del sistema no està disponible</string>
     <string name="download_started">La descàrrega s\'ha iniciat en segon pla</string>
+    <string name="download_none_selected">No s\'ha seleccionat cap fitxer per baixar</string>
     <string name="downloadmap_target_not_writable">L\'objectiu seleccionat \"%s\" no es pot escriure: el fitxer de mapa descarregat es desa a la carpeta de descàrrega del sistema i s\'ha de moure manualment a la carpeta de mapa.</string>
     <string name="downloadmap_allow_metered_network">Permet la baixada per xarxa (per exemple: connexió mòbil)</string>
     <string name="download_confirmation">%1$sBaixeu el fitxer \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Actualitzacions trobades per a:</string>
+    <string name="download_warning">Les descàrregues poden trigar força temps i poden comportar costos importants, depenent de la connexió de xarxa.</string>
     <string name="download_error">La descàrrega ha fallat amb l\'error #%d</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
@@ -2257,6 +2278,7 @@
     <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
     <string name="check_tiles_menu">Comproveu si falten dades d\'encaminament</string>
     <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
+    <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:</string>
     <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
     <string name="tileupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de dades d\'encaminament descarregats. Toc llarg per ajornar.</string>
     <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>

@@ -1,29 +1,29 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Avís: Canvi de nivell de l'API
+A causa de les properes restriccions a Play Store, hem actualitzat el nivell d'API d'Android objectiu. Això no hauria d'afectar l'ús de c:geo, i encara hauria de funcionar a partir d'Android 5, però si observeu alguna irregularitat, poseu-vos en contacte amb nosaltres a support@cgeo.org
 
 ### Mapa
-- New: Allow change of track's display name
+- Nou: Permet canviar el nom de visualització del track
 
 ### Detalls del catxé
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Correcció: Imatge de registre amb l'etiqueta "Imatge 1", encara que només s'hagi afegit una sola imatge
+- Nou: Marcador de posició de la plantilla de registre GEOCODI
+- Nou: Suport bàsic de format HTML per a llistes de definicions (dl/dt/dd)
+- Nou: Obriu la vista d'imatge amb zoom quan toqueu les imatges de llista
+- Correcció: Obrir els enllaços a les llistes a la vista web integrada (si està activat)
+- Canvi: Representa la descripció del catxé en segon pla i limita la longitud a 50.000 caràcters per defecte
+- Canvi: La connexió del servei GCVote s'ha desactivat a causa de problemes greus de rendiment. Podeu tornar-la a habilitar manualment mitjançant Configuració - Serveis - GCVote
+- Nou: El registre del catxé: Conserva l'última acció rastrejable per rastrejar
 
 ### General
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Nou: Visualitza les baixades pendents
+- Nou: Afegiu el nom del catxé/nom de la llista al nom del fitxer a l'exportació GPX
+- Canvi: Sha eliminat la configuració "Identificar com a navegador Android"
+- Nou: Comproveu les descàrregues pendents (mapes/dades d'encaminament) a l'inici
+- Nou: Permet seleccionar fitxers per descarregar
+- Nou: Filtre d'estat per a DNF
+- Nou: Mostra l'elevació a la pantalla d'inici (si està disponible)
+- Nou: Permet l'entrada manual de valors als filtres mitjançant controls lliscants
+- Nou: Habiliteu la càrrega de coordenades modificades pels catxés sl importats des del fitxer GPX, quan el catxé té un waypoint de tipus "ORIGINAL"
+- Canvi: Millora el text de la línia d'estat del filtre
+- Canvi: Utilitzeu un color més llegible per als noms de catxé arxivat als títols i elimineu el color de la pàgina de detalls del catxé

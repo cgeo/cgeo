@@ -302,6 +302,8 @@
     <string name="more_information">Plus d\'informations</string>
     <string name="undo">Annuler</string>
     <string name="dont_show_again">Ne plus afficher</string>
+    <string name="tap_icon_more_info">Appuyez sur l\'icône pour plus d\'informations</string>
+    <string name="use_slider_adjust_value">Utiliser le curseur pour ajuster la valeur</string>
     <string name="warn_gm_not_available">Google Maps n\'est pas disponible.</string>
     <string name="switch_to_mf">Votre version de Google Play Services est obsolète. Voulez-vous basculer vers les cartes Mapsforge ?</string>
     <string name="switched_to_mf">Carte par défaut basculée à Mapsforge. Merci de redémarrer votre carte.</string>
@@ -547,6 +549,7 @@
     <string name="cache_filter_status_select_yes">Oui</string>
     <string name="cache_filter_status_select_no">Non</string>
     <string name="cache_filter_status_select_label_found">Trouvée</string>
+    <string name="cache_filter_status_select_label_dnf">N\'a pas été trouvé</string>
     <string name="cache_filter_status_select_label_owned">Les miennes</string>
     <string name="cache_filter_status_select_label_stored">Enregistrée</string>
     <string name="cache_filter_status_select_label_favorite">Dans mes favoris</string>
@@ -634,20 +637,32 @@
     <!-- download manager -->
     <string name="debug_current_downloads">Téléchargements en cours</string>
     <string name="downloader_pending_downloads">Téléchargements en attente</string>
+    <string name="downloader_no_pending_downloads">Aucun téléchargement en attente pour l\'instant</string>
     <string name="downloader_cancel_download">Annuler le téléchargement</string>
+    <string name="downloader_cancel_file">Annuler le téléchargement en attente de \"%s\" et supprimer les parties téléchargées ?</string>
+    <string name="downloader_cancelled_download">Téléchargement de \"%s\" annulé</string>
+    <string name="downloader_pending_info">Il y a au moins un téléchargement en pause ou en échec. Voulez-vous ouvrir la liste des téléchargements en attente ?</string>
+    <string name="downloader_retry_download">Réessayer le téléchargement</string>
+    <string name="downloader_retry_download_details">Souhaitez-vous ré-essayer le téléchargement du fichier suivant ?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Le téléchargement a échoué (et ne sera pas relancé)</string>
+    <string name="asdm_status_paused">Le téléchargement est en attente de relance ou reprise</string>
     <string name="asdm_status_pending">Le téléchargement est en attente de démarrage</string>
     <string name="asdm_status_running">Le téléchargement est en cours</string>
     <string name="asdm_status_successful">Téléchargement terminé avec succès</string>
     <string name="asdm_paused_queued_for_wifi">En pause : Attente du Wifi</string>
     <string name="asdm_paused_unknown">En pause pour une autre raison</string>
+    <string name="asdm_paused_waiting_for_network">En pause : Attente de la connexion réseau</string>
+    <string name="asdm_paused_waiting_to_retry">En pause : Une erreur de réseau s\'est produite et le gestionnaire de téléchargement est en attente avant de réessayer la requête</string>
+    <string name="asdm_error_cannot_resume">Erreur : Une erreur transitoire est survenue, il n\'est pas possible de poursuivre le téléchargement</string>
+    <string name="asdm_error_device_not_found">Erreur : Aucun périphérique de stockage externe n\'a été trouvé. La carte SD est-elle montée ?</string>
     <string name="asdm_error_file_already_exists">Erreur : Le fichier de destination existe déjà et ne sera pas remplacé</string>
     <string name="asdm_error_file_error">Erreur : Problème inconnu de stockage</string>
     <string name="asdm_error_http_data_error">Erreur : Erreur de traitement HTTP au niveau des données</string>
     <string name="asdm_error_insufficient_space">Erreur : Espace de stockage insuffisant</string>
     <string name="asdm_error_too_many_redirects">Erreur : Trop de redirections</string>
     <string name="asdm_error_unhandled_http_code">Erreur : Code HTTP non géré</string>
+    <string name="asdm_error_unknown">Erreur : Erreur inconnue</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Ouvrir les paramètres ?</string>
     <string name="settings_title_services">Services</string>
@@ -664,6 +679,8 @@
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_offline_maps">Cartes hors-ligne</string>
+    <string name="settings_title_map_themes">Thèmes des cartes hors-ligne</string>
+    <string name="settings_title_map_hillshading">Ombrage du relief des cartes hors-ligne</string>
     <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_summary_offline_routing">Le routage hors ligne est disponible si l\'application \"BRouter\" est installée et configurée ou si le routage interne est activé.</string>
     <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
@@ -762,6 +779,7 @@
     <string name="init_signature_template_size">Taille</string>
     <string name="init_signature_template_type">Type</string>
     <string name="init_signature_template_location">Emplacement</string>
+    <string name="init_signature_template_geocode">Géocode</string>
     <string name="init_ratingwanted">Vote GCvote.com</string>
     <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
@@ -889,6 +907,9 @@
     <string name="settings_info_offline_maps">c:geo prend en charge les cartes pour une utilisation hors ligne. Vous pouvez obtenir des cartes de différents fournisseurs ou même créer vos propres cartes (à partir des données OSM). Vous devez d\'abord sélectionner le dossier dans lequel les cartes hors ligne doivent être stockées.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
+    <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
+    <string name="settings_info_hillshading">L\'ombrage du relief est une technique permettant un relief topographique en ajoutant un effet de lumière sur la carte permettant d\'indiquer les changements d\'altitude. Les pentes seront assombries ou éclaircies afin de générer un effet 3D.\nLes fichiers sources contenant les informations d\'altitude doivent être obtenus manuellement (cliquez sur l\'objet pour les sources) et placés ensuite dans le répertoire des sources défini ci-dessous.</string>
+    <string name="settings_hillshading_enable">Activer l’ombrage du relief</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
@@ -960,6 +981,7 @@
     <string name="init_use_native_ua">Navigateur web Android</string>
     <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
+    <string name="init_mapshading_folder">Dossier des fichiers d\'ombrage de la carte</string>
     <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
     <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
@@ -1069,6 +1091,7 @@
     <string name="persistablefolder_base">Base</string>
     <string name="persistablefolder_offline_maps">Cartes hors-ligne</string>
     <string name="persistablefolder_offline_maps_themes">Thèmes des cartes</string>
+    <string name="persistablefolder_offline_maps_shading">Fichiers d\'ombrage de la carte</string>
     <string name="persistablefolder_backup">Sauvegarde</string>
     <string name="persistablefolder_logfiles">Fichiers journaux</string>
     <string name="persistablefolder_fieldnotes">Notes de terrain</string>
@@ -1191,6 +1214,9 @@
     <string name="cache_personal_note_upload_cancelled">Envoi de la note personnelle annulé</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_table_note">La description peut contenir des mises en forme riches. Consultez le site %s pour visualiser toute la description.</string>
+    <string name="cache_description_rendering">Affichage de la description, veuillez patienter…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Avertissement : La description est très longue (%1$d caractères). Seuls les %2$d%% premiers caractères sont affichés.</string>
+    <string name="cache_description_render_fully">Afficher de la description complète</string>
     <string name="cache_area_description">Description de la zone</string>
     <string name="cache_cache_description">Description de la cache</string>
     <string name="cache_virtual_description">Question virtuelle</string>
@@ -1330,6 +1356,7 @@
     <string name="cache_remove_from_history">Supprimer de l\'historique</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_information_unavailable">Informations sur l\'image non disponibles</string>
     <string name="cache_image_open">Ouvrir</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
@@ -1484,6 +1511,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Rejeté(e)</string>
     <string name="calccoord_migrate_infotext_markdown">Un ancien calcul de coordonnées a été trouvé dans ce waypoint : \n\n%1$s\n\nVous pouvez le migrer vers le nouveau calculateur de coordonnée de cache comme cela : \n\n%2$s\n\navec les nouvelles variables de la cache : %3$s\n\nVeuillez choisir : \n- %4$s pour effectuer la migration comme suggéré\n- %5$s pour rejeter définitivement les données de calcul trouvées\n- %6$s pour continuer sans migration. La migration vous sera à nouveau proposée la prochaine fois que vous ouvrirez le waypoint pour le modifier. Notez cependant que l\'édition des coordonnées du waypoint pourrait supprimer les données de calcul locales.</string>
     <!-- Formula -->
+    <string name="formula">Formule</string>
     <string name="formula_choose_function">Sélectionner une fonction</string>
     <string name="formula_function_sqrt">Racine carrée</string>
     <string name="formula_function_sin">Sinus</string>
@@ -2222,9 +2250,12 @@
     <string name="downloadmap_filename">Téléchargement de %s</string>
     <string name="downloadmanager_not_available">Le fichier ne peut pas être téléchargé, le gestionnaire de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>
+    <string name="download_none_selected">Aucun fichier sélectionné pour le téléchargement</string>
     <string name="downloadmap_target_not_writable">La cible sélectionnée \"%s\" n\'est pas accessible en écriture - le fichier de carte téléchargé est sauvegardé dans le dossier de téléchargement du système et doit être déplacé manuellement dans le dossier des cartes.</string>
     <string name="downloadmap_allow_metered_network">Autoriser le téléchargement sur un réseau limité (par exemple : la connexion mobile)</string>
     <string name="download_confirmation">%1$s Télécharger le fichier \"%2$s\" ? %3$s</string>
+    <string name="download_confirmation_updates">Mises à jour disponibles pour :</string>
+    <string name="download_warning">Les téléchargements peuvent prendre un certain temps et peuvent entraîner des coûts importants, selon votre connexion au réseau.</string>
     <string name="download_error">Le téléchargement a échoué en raison de l’erreur #%d</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
@@ -2245,6 +2276,7 @@
     <string name="downloadtile_info">c:geo ne peut pas calculer la route demandée car il y a un fichier de données de routage manquant. Voulez-vous télécharger les données de routage manquantes ?</string>
     <string name="check_tiles_menu">Vérifier les données de navigation manquantes</string>
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
+    <string name="check_tiles_missing">Données de routage manquantes :</string>
     <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
     <string name="tileupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>

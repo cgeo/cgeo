@@ -923,6 +923,7 @@
     <string name="settings_info_themes">c:geo palaiko pasirinktines temas žemėlapiams naujajamiems neprisijungus. Jas galima naudoti norint pakeisti žemėlapio spalvų stilių (pvz., norint turėti naktinio vaizdo žemėlapį) arba paryškinti tam tikrus objektus, pvz., dviračių takus ar aukščio linijas žemėlapyje.\n\nDirbant su neįtrauktomis žemėlapių temomis gali sumažėti žemėlapio peržiūros priemonės atidarymo našumas. Tokiu atveju temos aplanką galima pasirinktinai sinchronizuoti su programos privačiu vietiniu aplanku, kad būtų galima greičiau pasiekti (už tam tikrą saugyklos vietos kainą).</string>
     <string name="settings_info_hillshading_title">Informacija apie kalvų šešėlius</string>
     <string name="settings_info_hillshading">Reljiefo šešeliai yra topografinių reljefo žemėlapių kūrimo technika, pridedant prie žemėlapio apšvietimo efektą, nurodantį aukščio pokyčius. Šlaitai bus patamsinti / pašviesinti, kad būtų sukurtas 3D efektas.\nŠaltinio failus, kuriuose yra aukščio informacija, reikia gauti rankiniu būdu - spustelėkite šį elementą, kad pamatytumėte šaltinius - ir patalpinkite į toliau nurodytą šaltinių aplanką.</string>
+    <string name="settings_hillshading_enable">Įjungti kalvų šešėlius</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_local_file_system">Vietinė failų sistema</string>
     <string name="init_base_directory_description">Bazinis aplankas viešiems vietiniams duomenims</string>

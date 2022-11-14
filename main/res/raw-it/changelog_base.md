@@ -1,29 +1,29 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Avviso: modifica a livello API
+A causa delle restrizioni imminenti nel Play Store abbiamo aggiornato il livello di API Android. Questo non dovrebbe influenzare l'utilizzo di c:geo, e dovrebbe ancora essere eseguibile da Android 5 in poi, ma se noti eventuali irregolarità, contattaci su support@cgeo.org
 
 ### Mappa
-- New: Allow change of track's display name
+- Nuovo: Consentito il cambio del nome visualizzato della traccia
 
 ### Dettagli del cache
 - Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
+- Nuovo: segnaposto modello di log GEOCODE
+- Nuovo: Supporto di base alla formattazione HTML per le liste di definizione (dl/dt/dd)
 - New: Open zoomable image view when tapping on listing images
 - Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Modifica: Render della descrizione del cache in background e limitazione della lunghezza a 50.000 caratteri per impostazione predefinita
+- Cambiato: Disabilitata connessione al servizio GCVote a causa di gravi problemi di prestazione - È possibile riattivarlo manualmente andando su Impostazioni - Servizi - GCVote
+- Nuovo: Log dei cache: viene mantenuta l'ultima azione per quanto riguarda i tracciabili
 
 ### Generale
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
+- Nuovo: Mostra i download in sospeso
+- Nuovo: Viene aggiunto il nome del cache/elenco a quello del file nell'esportazione GPX
+- Modifica: Rimossa l'impostazione "Identifica come browser Android"
+- Nuovo: Controllo dei download in sospeso (mappe/dati di routing) all'avvio
+- Nuovo: Consente la selezione dei file da scaricare
+- Nuovo: filtro di stato per DNF
+- Nuovo: Mostra la quota nella schermata home (se disponibile)
+- Nuovo: Permesso l'inserimento manuale di valori nei filtri usando i cursori
 - New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
 - Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Cambio: Usato un colore meglio leggibile nei titoli per i nomi di cache archiviati e rimossa la colorazione dalla pagina dettagli cache
