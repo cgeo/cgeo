@@ -2352,6 +2352,8 @@
     <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
     <string name="mapserver_freizeitkarte_info">Podrobné mapy vyžadují jeden z motivů map „freizeitkarte“.</string>
     <string name="mapserver_freizeitkarte_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Freizeitkarte“</string>
+    <string name="mapserver_osmpaws_info">Podrobné mapy, vyžadují mapový motiv \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Podrobný motiv mapy, vytvořený pro mapy \"Paws\"</string>
     <string name="mapserver_hylly_info">Podrobné mapy Finska vyžadují jeden z motivů mapy „Hylly“</string>
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
