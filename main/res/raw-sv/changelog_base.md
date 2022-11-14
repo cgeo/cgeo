@@ -1,6 +1,6 @@
 
-### Notice: API level change
-Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
+### Observera: ändring av API-nivå
+På grund av kommande restriktioner i Play Store har vi uppgraderat den inriktade Android-API-nivån. Detta bör inte påverka med c:geo, och det bör fortfarande köras från Android 5 och framåt, men om du märker några oegentligheter, vänligen kontakta oss på support@cgeo.org
 
 ### Karta
 - Nytt: Tillåt ändring av spårens visningsnamn
@@ -9,11 +9,11 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Fix: Loggbild märkt "Bild 1" även om bara en enda bild har lagts till
 - Nyhet: GEOCODE platshållare för loggmall
 - Nytt: Grundläggande stöd för HTML-formatering för definitionslistor (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Nytt: Öppna zoombar bildvy när du trycker på listning av bilder
+- Fix: Öppna länkar i listor i integrerad webbvy (om aktiverat)
+- Ändra: Rendera cachebeskrivning i bakgrunden och begränsa längden till 50.000 tecken som standard
+- Ändring: GCVote tjänstanslutning inaktiverad på grund av allvarliga prestandaproblem - Du kan manuellt återaktivera genom att använda Inställningar - Tjänster - GCVote
+- Nyhet: Logga cacher: Bevara senaste spårbara åtgärd per spårbart objekt
 
 ### Allmänt
 - Nytt: Visa väntande nedladdningar
@@ -24,6 +24,6 @@ Due to upcoming restrictions in Play Store we have upgraded the targeted Android
 - Nytt: Statusfilter för DNF
 - Nyhet: Visa höjd på startskärmen (om tillgängligt)
 - Nytt: Tillåt manuell inmatning av värden i filter med reglagen
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Nytt: Aktivera uppladdning av modifierade koordinater för cacher som importeras från GPX-fil när cachen har vägpunkt av typen "ORIGINAL"
+- Ändra: Förbättra texten för filterstatusrader
+- Ändra: Använd en mer lättläst färg för arkiverade cachenamn i titlar och ta bort färg från cache-detaljsidan
