@@ -302,6 +302,8 @@
     <string name="more_information">Mer information</string>
     <string name="undo">Ångra</string>
     <string name="dont_show_again">Visa inte igen</string>
+    <string name="tap_icon_more_info">Tryck på ikonen för mer information</string>
+    <string name="use_slider_adjust_value">Använd reglaget för att justera värdet</string>
     <string name="warn_gm_not_available">Google Maps är inte tillgänglig.</string>
     <string name="switch_to_mf">Din Google Play-tjänst är föråldrad. Vill du byta till Mapsforge kartleverantör istället?</string>
     <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
@@ -677,6 +679,8 @@
     <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_maps">Offlinekartor</string>
+    <string name="settings_title_map_themes">Offline kartteman</string>
+    <string name="settings_title_map_hillshading">Offline kartor terrängskuggning</string>
     <string name="settings_title_offline_routing">Offline navigering</string>
     <string name="settings_summary_offline_routing">Offline navigering är tillgänglig om antingen hjälpappen \"BRouter\" är installerad och konfigurerad eller intern routing är aktiverad.</string>
     <string name="settings_title_map_rotation">Kartrotation (Google Maps)</string>
@@ -903,6 +907,9 @@
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
+    <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
+    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nKällfilerna som innehåller höjdinformation måste erhållas manuellt - klicka på detta objekt för källor - och placeras i källmappen nedan.</string>
+    <string name="settings_hillshading_enable">Aktivera terrängskuggning</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
@@ -1209,6 +1216,9 @@
     <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
+    <string name="cache_description_rendering">Återger beskrivning, vänligen vänta…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Varning: Beskrivningen är mycket stor (%1$d tecken). Endast de första %2$d%% visas.</string>
+    <string name="cache_description_render_fully">Rendera fullständig beskrivning</string>
     <string name="cache_area_description">Områdesbeskrivning</string>
     <string name="cache_cache_description">Lång beskrivning</string>
     <string name="cache_virtual_description">Virtuell fråga</string>
@@ -1347,6 +1357,7 @@
     <string name="cache_remove_from_history">Ta bort från historik</string>
     <string name="cache_license">Licens</string>
     <string name="cache_image">Bild</string>
+    <string name="cache_image_information_unavailable">Bildinformation ej tillgänglig</string>
     <string name="cache_image_open">Öppna</string>
     <string name="cache_image_open_file">Öppna som fil</string>
     <string name="cache_image_open_browser">Öppna i webbläsare</string>
@@ -1533,6 +1544,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Namnlös</string>
     <string name="imageview_mimetype">Mime-typ</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentar</string>
     <!-- visit -->
@@ -2273,6 +2285,8 @@
     <string name="mapserver_openandromaps_themes_info">Detaljerat karttema, byggt för \"OpenAndroMaps\" kartor</string>
     <string name="mapserver_freizeitkarte_info">Detaljerade kartor, kräver en av \"freizeitkarte\" kartteman.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detaljerat karttema, byggt för \"Freizeitkarte\" kartor</string>
+    <string name="mapserver_osmpaws_info">Detaljerade kartor, kräver \"paws_4\" karttema.</string>
+    <string name="mapserver_osmpaws_themes_info">Detaljerat karttema, byggt för \"Paws\" kartor</string>
     <string name="mapserver_hylly_info">Detaljerade kartor för Finland, kräver ett av \"Hylly\" kartteman</string>
     <string name="mapserver_hylly_themes_info">Detaljerat karttema, byggt för \"Hylly\" kartor</string>
     <string name="brouter_info">Offline rutt-tjänst</string>
