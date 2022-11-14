@@ -3,27 +3,27 @@
 Due to upcoming restrictions in Play Store we have upgraded the targeted Android API level. This should not affect using c:geo, and it should still run from Android 5 onwards, but if you notice any irregularities, please contact us on support@cgeo.org
 
 ### Mapa
-- New: Allow change of track's display name
+- Nové: Umožňuje zmenu zobrazovaného názvu stopy
 
 ### Detaily kešky
-- Fix: Log image labelled "Image 1" even if only a single image added
-- New: GEOCODE log template placeholder
-- New: Basic HTML formatting support for definition lists (dl/dt/dd)
-- New: Open zoomable image view when tapping on listing images
-- Fix: Open links in listings in integrated web view (if enabled)
-- Change: Render cache description in background and limit length to 50,000 characters by default
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Oprava: Obrázok v logu nazvaný „Obrázok 1“, aj keď sa pridá iba jeden obrázok
+- Nové: Zástupný znak GEOCODE v šablóne logu
+- Nové: Podpora základného formátovania HTML pre definičné zoznamy (dl/dt/dd)
+- Nové: Otvorenie priblížiteľného obrázka pri ťuknutí na obrázky z listingu
+- Oprava: Otváranie odkazov v listingoch v zabudovanom webovom zobrazení (ak je to aktivované)
+- Zmena: Vykreslenie popisu kešky na pozadí a obmedzenie dĺžky štandaradne na 50 000 znakov
+- Zmena: Pripojenie k službe GCVote vypnuté kvôli viacerým problémom s výkonom. Dá sa ručne znova zapnúť cez ponuku Nastavenia – Služby - GCVote
+- Nové Logovanie kešiek – zachovanie posledného úkonu s trackovateľným predmetom pri jednotlivých predmetoch
 
 ### Všeobecné
-- New: View for pending downloads
-- New: Append cache name / list name to file name on GPX export
-- Change: Removed "Identify as Android browser" setting
-- New: Check pending downloads (maps / routing data) on startup
-- New: Allow selection of files to download
-- New: Status filter for DNF
-- New: Display elevation on home screen (if available)
-- New: Allow manual input of values in filters using sliders
-- New: Enable upload of modified coordinates for caches imported from GPX file, when cache has waypoint of type "ORIGINAL"
-- Change: Improve filter status line text
-- Change: User a better readable color for archived cache names in titles and remove coloring from cache details page
+- Nové: Zobrazenie čakajúceho sťahovania
+- Nové: Pridanie názvu kešky/názvu zoznamu do názvu súboru pri exporte GPX
+- Zmena: Odstránené nastavenie „Identifikovať ako prehliadač Android“
+- Nové: Kontrola čakajúcich sťahovaní (mapy/údaje navigácie) pri spustení
+- Nové: Umožnenie výberu súborov na stiahnutie
+- Nové: Filter stavu pre DNF
+- Nové: Zobrazenie nadmorskej výšky na hlavnej obrazovke (ak je k dispozícii)
+- Nové: Umožňuje ručné zadanie hodnôt vo filtroch pomocou posúvačov
+- Nové: Aktivovanie odovzdávania upravených súradníc pre kešky importované zo súboru GPX, ak má keška bod trasy nazvaný "ORIGINAL"
+- Zmena: Vylepšenie textu v riadku so stavom filtra
+- Zmena: Používateľom lepšie čitateľná farba pre názvy archivovaných kešiek v tituloch a odstránenie farebnosti zo stránky listingu kešky
