@@ -12,8 +12,8 @@ Play Storen tulevien rajoitusten vuoksi olemme päivittäneet kohdistettua Andro
 - Uusi: Avaa zoomattava kuvanäkymä kun napautetaan kuvauksessa olevia kuvia
 - Korjaa: Avaa kuvausten linkit sisäisessä selaimessa (jos aktivoitu)
 - Muutos: Renderöi kätkön kuvaus taustalla ja rajaa pituus 50 000 merkkiin oletuksena
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- Muutos: GCVote palveluyhteys poistettu käytöstä vaikeiden suorituskykyongelmien vuoksi - Voit manuaalisesti ottaa sen käyttöön uudelleen Asetukset - Palvelut - GCVote
+- Uusi: Kätköjen kirjaus: Säilytä viimeinen matkaajan toiminto matkaajakohtaisesti
 
 ### Yleinen
 - Uusi: Näkymä odottaville latauksille
@@ -26,4 +26,4 @@ Play Storen tulevien rajoitusten vuoksi olemme päivittäneet kohdistettua Andro
 - Uusi: Salli arvojen manuaalinen syöttö suodattimissa liukusäätimiä käyttäen
 - Uusi: Ota käyttöön muokattujen koordinaattien lataaminen GPX-tiedostosta tuoduille kätköille, kun kätkössä on reittipiste "ORIGINAL"
 - Muutos: Paranna suodattimen tilarivin tekstiä
-- Change: Use a better readable color for archived cache names in titles and remove coloring from cache details page
+- Muutos: Käytä paremmin luettavaa väriä arkistoiduille kätkön nimille otsikoissa ja poista väritys kätkön yksityiskohdista
