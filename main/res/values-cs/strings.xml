@@ -923,6 +923,7 @@
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
     <string name="settings_info_hillshading">Stínování kopců je technika pro tvorbu map topografického reliéfu, která do mapy přidává světelný efekt pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nZdrojové soubory obsahující informace o nadmořské výšce je třeba získat ručně - klikněte na tuto položku pro zdroje - a umístěte je do níže definované složky zdrojů.</string>
+    <string name="settings_hillshading_enable">Povolit stínování kopců</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
