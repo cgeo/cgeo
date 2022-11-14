@@ -12,6 +12,8 @@ import cgeo.geocaching.downloader.MapDownloaderHyllyThemes;
 import cgeo.geocaching.downloader.MapDownloaderJustDownload;
 import cgeo.geocaching.downloader.MapDownloaderJustDownloadThemes;
 import cgeo.geocaching.downloader.MapDownloaderMapsforge;
+import cgeo.geocaching.downloader.MapDownloaderOSMPaws;
+import cgeo.geocaching.downloader.MapDownloaderOSMPawsThemes;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMaps;
 import cgeo.geocaching.downloader.MapDownloaderOpenAndroMapsThemes;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -118,6 +120,8 @@ public class Download {
         DOWNLOADTYPE_THEME_FREIZEITKARTE(5, R.string.downloadmap_themefile),
         DOWNLOADTYPE_MAP_HYLLY(6, R.string.downloadmap_mapfile),
         DOWNLOADTYPE_THEME_HYLLY(7, R.string.downloadmap_themefile),
+        DOWNLOADTYPE_MAP_PAWS(8, R.string.downloadmap_mapfile),
+        DOWNLOADTYPE_THEME_PAWS(9, R.string.downloadmap_themefile),
 
         DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload),
         DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload),
@@ -170,12 +174,14 @@ public class Download {
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_HYLLY, MapDownloaderHyllyThemes.getInstance(), R.string.mapserver_hylly_themes_name));
+                offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_PAWS, MapDownloaderOSMPawsThemes.getInstance(), R.string.mapserver_osmpaws_themes_name));
 
                 // put all file types that should be listed in the downloader here
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_HYLLY, MapDownloaderHylly.getInstance(), R.string.mapserver_hylly_name));
+                offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_PAWS, MapDownloaderOSMPaws.getInstance(), R.string.mapserver_osmpaws_name));
 
                 // all other download types
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile));

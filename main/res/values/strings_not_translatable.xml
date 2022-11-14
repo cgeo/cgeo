@@ -303,9 +303,18 @@
     <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
+    <string translatable="false" name="mapserver_osmpaws_name">Paws</string>
+    <string translatable="false" name="mapserver_osmpaws_downloadurl">https://osm.paws.cz/cgeo.php</string>
+    <string translatable="false" name="mapserver_osmpaws_likeiturl">https://osm.paws.cz/podpora.php</string>
+    <string translatable="false" name="mapserver_osmpaws_projecturl">https://osm.paws.cz</string>
+
+    <string translatable="false" name="mapserver_osmpaws_themes_name">Paws Themes</string>
+    <string translatable="false" name="mapserver_osmpaws_themes_downloadurl">https://osm.paws.cz/paws_themes/</string>
+
     <string translatable="false" name="maptheme_legend_elevate">https://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
+    <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>

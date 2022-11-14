@@ -2568,6 +2568,8 @@
     <string name="mapserver_openandromaps_themes_info">Detailed map theme, built for \"OpenAndroMaps\" maps</string>
     <string name="mapserver_freizeitkarte_info">Detailed maps, require one of the \"freizeitkarte\" map themes.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detailed map theme, built for \"Freizeitkarte\" maps</string>
+    <string name="mapserver_osmpaws_info">Detailed maps, require \"paws_4\" map theme.</string>
+    <string name="mapserver_osmpaws_themes_info">Detailed map theme, built for \"Paws\" maps</string>
     <string name="mapserver_hylly_info">Detailed maps for Finland, require one of the \"Hylly\" map themes</string>
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
