@@ -302,6 +302,8 @@
     <string name="more_information">Lisätietoja</string>
     <string name="undo">Kumoa</string>
     <string name="dont_show_again">Älä näytä uudelleen</string>
+    <string name="tap_icon_more_info">Napauta kuvaketta saadaksesi lisätietoja</string>
+    <string name="use_slider_adjust_value">Säädä arvoa liukusäätimellä</string>
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
@@ -907,6 +909,7 @@
     <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
     <string name="settings_info_hillshading_title">Tietoa rinnevarjostuksesta</string>
     <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nLähdetiedostot, jotka sisältävät korkeustiedon, on ladattava manuaalisesti - napauta tätä lähteiden saamiseksi - ja asetettava alla selostettuun kansioon.</string>
+    <string name="settings_hillshading_enable">Ota rinnevarjostus käyttöön</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -2254,7 +2257,7 @@
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="download_none_selected">Ladattavia tiedostoja ei ole valittu</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi:</string>
     <string name="download_warning">Lataukset voivat viedä jonkin aikaa ja aiheuttaa huomattavia kustannuksia verkkoyhteydestäsi riippuen.</string>
