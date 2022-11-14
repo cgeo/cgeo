@@ -302,6 +302,8 @@
     <string name="more_information">Ulterioni informazioni</string>
     <string name="undo">Annulla</string>
     <string name="dont_show_again">Non mostrare ancora</string>
+    <string name="tap_icon_more_info">Tocca l\'icona per maggiori informazioni</string>
+    <string name="use_slider_adjust_value">Usa il cursore per regolare il valore</string>
     <string name="warn_gm_not_available">Google Maps non disponibile.</string>
     <string name="switch_to_mf">Il tuo servizio Google Play non è aggiornato. Vuoi passare al provider delle mappe di Mapsforge?</string>
     <string name="switched_to_mf">Mappa predefinita convertita al provider della mappa Mapsforge. Riavvia ora la tua mappa.</string>
@@ -357,6 +359,7 @@
     </plurals>
     <string name="caches_store_offline">Salva offline</string>
     <string name="caches_store_offline_map">Salva i cache offline</string>
+    <string name="caches_store_selected">Salva selezionati</string>
     <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
@@ -546,6 +549,7 @@
     <string name="cache_filter_status_select_yes">Sì</string>
     <string name="cache_filter_status_select_no">No</string>
     <string name="cache_filter_status_select_label_found">Trovato</string>
+    <string name="cache_filter_status_select_label_dnf">Non trovato</string>
     <string name="cache_filter_status_select_label_owned">Posseduto</string>
     <string name="cache_filter_status_select_label_stored">Salvato</string>
     <string name="cache_filter_status_select_label_favorite">Proprio Preferito</string>
@@ -639,6 +643,7 @@
     <string name="downloader_cancelled_download">Download annullato per \"%s\"</string>
     <string name="downloader_pending_info">C\'è almeno una pausa o uno scaricamento non riuscito. Vuoi aprire l\'elenco dei download in sospeso?</string>
     <string name="downloader_retry_download">Ritentare il download</string>
+    <string name="downloader_retry_download_details">Vuoi riprovare il download del seguente file?</string>
     <!-- Android system download manager status messages -->
     <string name="asdm_status_failed">Download non riuscito (e non verrà ritentato)</string>
     <string name="asdm_status_paused">Il download è in attesa di riprovare o riprendere</string>
@@ -657,6 +662,7 @@
     <string name="asdm_error_insufficient_space">Errore: spazio di archiviazione insufficiente</string>
     <string name="asdm_error_too_many_redirects">Errore: Troppi reindirizzamenti</string>
     <string name="asdm_error_unhandled_http_code">Errore: Codice http non gestito</string>
+    <string name="asdm_error_unknown">Errore sconosciuto</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Apri le impostazioni?</string>
     <string name="settings_title_services">Servizi</string>
@@ -673,6 +679,8 @@
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
     <string name="settings_title_offline_maps">Mappe offline</string>
+    <string name="settings_title_map_themes">Temi della mappa offline</string>
+    <string name="settings_title_map_hillshading">Ombreggiatura delle Mappe offline</string>
     <string name="settings_title_offline_routing">Navigazione offline</string>
     <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
     <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
@@ -771,6 +779,7 @@
     <string name="init_signature_template_size">Dimensione</string>
     <string name="init_signature_template_type">Tipo</string>
     <string name="init_signature_template_location">Luogo</string>
+    <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">Rating da GCvote.com</string>
     <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
@@ -898,6 +907,9 @@
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
+    <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
+    <string name="settings_info_hillshading">L\'Ombreggiatura è una tecnica per creare mappe topografiche di rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nI file sorgente contenenti le informazioni di elevazione devono essere ottenuti manualmente - fare clic su questo elemento per le sorgenti - e posizionati nella cartella sorgenti definita sotto.</string>
+    <string name="settings_hillshading_enable">Abilita ombreggiamento</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_local_file_system">File System Locale</string>
     <string name="init_base_directory_description">Cartella base per i dati locali pubblici</string>
@@ -1205,6 +1217,9 @@
     <string name="cache_personal_note_upload_cancelled">Caricamento nota personale annullato</string>
     <string name="cache_description">Descrizione</string>
     <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
+    <string name="cache_description_rendering">Rendering della Descrizione, attendere…</string>
+    <string name="cache_description_render_restricted_warning" tools:ignore="PluralsCandidate">Attenzione: la descrizione è molto grande (%1$d caratteri). Solo i primi %2$d%% caratteri saranno visualizzati.</string>
+    <string name="cache_description_render_fully">Rendering della descrizione completato</string>
     <string name="cache_area_description">Descrizione area</string>
     <string name="cache_cache_description">Descrizione cache</string>
     <string name="cache_virtual_description">Domanda virtuale</string>
@@ -1344,6 +1359,7 @@
     <string name="cache_remove_from_history">Rimuovi dalla cronologia</string>
     <string name="cache_license">Licenza</string>
     <string name="cache_image">Immagine</string>
+    <string name="cache_image_information_unavailable">Non sono disponibili informazioni sull\'immagine</string>
     <string name="cache_image_open">Apri</string>
     <string name="cache_image_open_file">Apri come file</string>
     <string name="cache_image_open_browser">Apri nel browser</string>
@@ -1498,6 +1514,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Ignorato</string>
     <string name="calccoord_migrate_infotext_markdown">Un vecchio metodo di calcolo delle coordinate è stato trovato in questo waypoint:\n\n%1$s\n\nÈ possibile migrare al nuovo calcolo di coordinate del cache come segue:\n\n%2$s\n\ncon nuove variabili del cache:%3$s\n\nSi prega di scegliere:\n- %4$s per eseguire la migrazione come suggerito\n- %5$s per rimuovere i dati di calcolo trovati per un buon\n- %6$s per continuare senza migrazione. Ti verrà chiesta nuovamente la migrazione la prossima volta che apri il waypoint per la modifica. Notare tuttavia che la modifica delle coordinate del waypoint potrebbe eliminare i dati di calcolo locali.</string>
     <!-- Formula -->
+    <string name="formula">Formula</string>
     <string name="formula_choose_function">Scegli la funzione</string>
     <string name="formula_function_sqrt">Radice quadrata</string>
     <string name="formula_function_sin">Seno</string>
@@ -1529,6 +1546,7 @@
     <!-- ImageView -->
     <string name="imageview_notitle">Senza titolo</string>
     <string name="imageview_mimetype">Tipo MIME</string>
+    <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Commento</string>
     <!-- visit -->
@@ -2116,6 +2134,7 @@
     <!-- permission handling -->
     <string name="close_app">Chiudi app</string>
     <string name="ask_again">Chiedimi di nuovo</string>
+    <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la posizione e calcolare la distanza e la direzione per i geocache. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
@@ -2236,9 +2255,12 @@
     <string name="downloadmap_filename">Scaricamento di %s</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
+    <string name="download_none_selected">Nessun file selezionato per il download</string>
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
     <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
+    <string name="download_confirmation_updates">Trovato aggiornamenti per:</string>
+    <string name="download_warning">Il download può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
     <string name="download_error">Download fallito con errore #%d</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
@@ -2259,6 +2281,7 @@
     <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
     <string name="check_tiles_menu">Controlla i dati di routing mancanti</string>
     <string name="check_tiles_found">Dati di routing già presenti</string>
+    <string name="check_tiles_missing">Dati di routing mancanti:</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
     <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>
