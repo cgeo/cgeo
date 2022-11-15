@@ -1,5 +1,5 @@
 ### Žemėlapis
-- New: OSM map source osm.paws.cz
+- Naujiena: OSM žemėlapio šaltinis osm.paws.cz
 
 ### Slėptuvės detalės
 
