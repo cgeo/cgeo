@@ -302,6 +302,8 @@
     <string name="more_information">Więcej informacji</string>
     <string name="undo">Cofnij</string>
     <string name="dont_show_again">Nie wyświetlaj ponownie</string>
+    <string name="tap_icon_more_info">Dotknij ikonę, aby uzyskać więcej informacji</string>
+    <string name="use_slider_adjust_value">Użyj suwaka, aby dostosować wartość</string>
     <string name="warn_gm_not_available">Mapy Google niedostępne.</string>
     <string name="switch_to_mf">Usługa Google Play jest nieaktualna. Czy chcesz przełączyć się na dostawcę mapy Mapsforge?</string>
     <string name="switched_to_mf">Domyślna mapa przełączona na dostawcę mapy Mapsforge. Uruchom ponownie mapę.</string>
@@ -2349,6 +2351,8 @@
     <string name="mapserver_openandromaps_themes_info">Szczegółowy motyw mapy, przygotowany dla map „OpenAndroMaps”</string>
     <string name="mapserver_freizeitkarte_info">Szczegółowe mapy, wymagają jednego z motywów map „freizeitkarte”.</string>
     <string name="mapserver_freizeitkarte_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Freizeitkarte”</string>
+    <string name="mapserver_osmpaws_info">Szczegółowe mapy, wymagają motywu mapy „paws_4”.</string>
+    <string name="mapserver_osmpaws_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Paws”</string>
     <string name="mapserver_hylly_info">Szczegółowe mapy dla Finlandii wymagają jednego z tematów mapy „Hylly”</string>
     <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
