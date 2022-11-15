@@ -2350,6 +2350,8 @@
     <string name="mapserver_openandromaps_themes_info">Išsami žemėlapio tema, sukurta \"OpenAndroMaps\" žemėlapiams</string>
     <string name="mapserver_freizeitkarte_info">Detalūs žemėlapiai, reikia vienos iš \"freizeitkarte\" žemėlapių temų.</string>
     <string name="mapserver_freizeitkarte_themes_info">Detali žemėlapio tema, sukurta \"Freizeitkarte\" žemėlapiams</string>
+    <string name="mapserver_osmpaws_info">Detalūs žemėlapiai, reikalinga \"paws_4\" žemėlapio tema.</string>
+    <string name="mapserver_osmpaws_themes_info">Detali žemėlapio tema, sukurta \"Paws\" žemėlapiams</string>
     <string name="mapserver_hylly_info">Detaliems Suomijos žemėlapiams reikia vienos iš \"Hylly\" žemėlapio temų</string>
     <string name="mapserver_hylly_themes_info">Detali žemėlapio tema, sukurta \"Hylly\" žemėlapiams</string>
     <string name="brouter_info">Maršrutizavimo paslauga neprisijungus</string>

@@ -1,5 +1,5 @@
 ### Mapa
-- New: OSM map source osm.paws.cz
+- Nowość: źródło mapy OSM osm.paws.cz
 
 ### Szczegóły skrytki
 
