@@ -79,7 +79,7 @@ public class FormulaParserTest {
     @Test
     public void testParseFullCoordinatesWithFormula() {
         final FormulaParser formulaParser = new FormulaParser();
-        final FormulaWrapper parsedFullCoordinates = formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.[B+C-A]^2  E (B%C)°  38.(D+F)*2 | a = 2) test");
+        final FormulaWrapper parsedFullCoordinates = formulaParser.parse(WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N  AB° 48.[B+C-A]^2  E (B%C)°  38.(D+F)*2 | a = 2) test");
         assertThat(parsedFullCoordinates).isNotNull();
         final String parsedLatitude = parsedFullCoordinates.getFormulaLat();
         final String parsedLongitude = parsedFullCoordinates.getFormulaLon();
@@ -95,7 +95,7 @@ public class FormulaParserTest {
     @Test
     public void testParseFullCoordinatesWithIncompleteFormula() {
         final FormulaParser formulaParser = new FormulaParser();
-        final FormulaWrapper parsedFullCoordinates = formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.B+C-A^2  E (B%C)°  38.(D+F)^2 | a = 2) test");
+        final FormulaWrapper parsedFullCoordinates = formulaParser.parse(WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N  AB° 48.B+C-A^2  E (B%C)°  38.(D+F)^2 | a = 2) test");
         assertThat(parsedFullCoordinates).isNotNull();
         final String parsedLatitude = parsedFullCoordinates.getFormulaLat();
         final String parsedLongitude = parsedFullCoordinates.getFormulaLon();
@@ -112,7 +112,7 @@ public class FormulaParserTest {
     public void testParseFullCoordinatesWithNoValidFormula() {
         try {
             final FormulaParser formulaParser = new FormulaParser();
-            formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.[B+C-A^2  E (B%C)°  38#.(D+F)2 | a = 2) test");
+            formulaParser.parse(WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N  AB° 48.[B+C-A^2  E (B%C)°  38#.(D+F)2 | a = 2) test");
             failBecauseExceptionWasNotThrown(FormulaParser.ParseException.class);
         } catch (final FormulaParser.ParseException e) {
             // expected

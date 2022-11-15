@@ -18,7 +18,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class WaypointParserTest {
 
     private static WaypointParser createParser(final String prefix) {
-        return new WaypointParser(null, prefix, true);
+        return new WaypointParser(null, prefix);
     }
 
     @Test
@@ -106,14 +106,14 @@ public class WaypointParserTest {
         assertWaypoint(waypoint, name, geopoint);
         assertThat(waypoint.getWaypointType()).isEqualTo(wpType);
         if (null != userNote) {
-            assertThat(waypoint.getUserNote()).isEqualTo(userNote);
+            assertThat(waypoint.getUserNote()).as("UserNote").isEqualTo(userNote);
         }
     }
 
 
     private static void assertWaypoint(final Waypoint waypoint, final String name, final Geopoint geopoint) {
         assertThat(waypoint.getName()).isEqualTo(name);
-        assertThat(waypoint.getCoords()).isEqualTo(geopoint);
+        assertThat(waypoint.getCoords()).as("Coords").isEqualTo(geopoint);
     }
 
     @Test
@@ -247,97 +247,20 @@ public class WaypointParserTest {
 
     }
 
-    /**
-     * Parse Waypoint with formula and variables and get parseable text.
-     * Formula and description should be correct.
-     */
-    @Test
-    public void testParseWaypointWithFormulaAndCreateParseableWaypointText() {
-        final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
-        assertThat(waypoints).hasSize(1);
-        final Iterator<Waypoint> iterator = waypoints.iterator();
-        final Waypoint wp = iterator.next();
-
-        final String parseableText = WaypointParser.getParseableText(wp, true);
-        assertThat(parseableText).isEqualTo(
-                "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|a=2| \"this is the description\"");
-    }
-
-    /**
-     * Parse Waypoint with formula and variables and get parseable text.
-     * Formula and description should be correct.
-     */
-    @Test
-    public void testParseWaypointWithCompleteFormulaAndCreateParseableWaypointText() {
-        final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=1|a=2|b=47|C=10|D=4|E=2|F=3| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
-        assertThat(waypoints).hasSize(1);
-        final Iterator<Waypoint> iterator = waypoints.iterator();
-        final Waypoint wp = iterator.next();
-
-        final String parseableText = WaypointParser.getParseableText(wp, true);
-        assertThat(parseableText).isEqualTo(
-                "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|B=1|C=10|D=4|E=2|F=3|a=2|b=47| \"this is the description\"");
-    }
-
-    /**
+  /**
      * Waypoint with formula and variables should be created
      */
     @Test
     public void testParseWaypointWithFormulaWithNameAndDescription() {
-        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + "N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@WPName X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + "N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
         assertWaypoint(wp, "WPName", null, WaypointType.PUZZLE, "this is the description");
-        final String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
-        assertThat(calcState.equations).hasSize(6);
-        assertThat(calcState.freeVariables).hasSize(2);
-    }
-
-    /**
-     * Waypoint with formula with lower case letters and variables should be created without formula
-     * - only upper case letters are supported
-     */
-    @Test
-    public void testParseWaypointWithFormulaWithLowerCase() {
-        final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° a.b(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
-        assertThat(waypoints).hasSize(1);
-        final Iterator<Waypoint> iterator = waypoints.iterator();
-        final Waypoint wp = iterator.next();
-        assertWaypoint(wp, "Prefix 1", null, WaypointType.WAYPOINT, null);
-        final String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNull();
-    }
-
-    /**
-     * Waypoint with calculated Geopoint should be created
-     */
-    @Test
-    public void testParseWaypointWithFormulaEvaluateCoordinates() {
-        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a*b|B=3|C=8|D=4|E=b-a|F=b/3|a=2|b=9| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
-        assertThat(waypoints).hasSize(1);
-        final Iterator<Waypoint> iterator = waypoints.iterator();
-        final Waypoint wp = iterator.next();
-        assertWaypoint(wp, "WPName", new Geopoint("N 45 18.312", "E 9 15.873"), WaypointType.PUZZLE, "this is the description");
-        final String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
+        assertWaypointCalcPart(wp, waypointParser, "N 45° A.B(C+D)", "E 9° (A-B).(2*D)EF",
+        "A=a+b", "B=", "a=2", "b=");
     }
 
     /**
@@ -345,18 +268,30 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaEvaluateIncompleteCoordinates() {
-        final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° 42.ABC  E 9° 7.DEB |A = a*b|B=3|E=b-a|a=2| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@WPName X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° 42.ABC  E 9° 7.DEB |A = a*b|B=3|E=b-a|a=2| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
         assertWaypoint(wp, "WPName", null, WaypointType.PUZZLE, "this is the description");
+        assertWaypointCalcPart(wp, waypointParser, "N 45° 42.ABC", "E 9° 7.DEB",
+                "A=a*b", "B=3", "E=b-a", "a=2");
+    }
+
+    private void assertWaypointCalcPart(final Waypoint wp, final WaypointParser waypointParser, final String expectedLat, final String expectedLon, final String ... expectedVars) {
         final String calcStateJson = wp.getCalcStateConfig();
         assertThat(calcStateJson).isNotNull();
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° 42.ABC'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° 7.DEB'");
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
+        assertThat(cc.getLatitudePattern()).isEqualTo(expectedLat);
+        assertThat(cc.getLongitudePattern()).isEqualTo(expectedLon);
+
+        assertThat(waypointParser.getParsedVariables()).hasSize(expectedVars.length);
+        for (String expectedVar : expectedVars) {
+            final String[] exp = expectedVar.split("=", -1);
+            assertThat(waypointParser.getParsedVariables()).containsEntry(exp[0], exp[1]);
+
+        }
     }
 
     /**
@@ -364,31 +299,21 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseTwoWaypointsWithFormulaAndNameAndDescription() {
-        final String note = "@WPName 1 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n" +
-                "@WPName 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45 C.A(D+B)'  E 9 (D-C).(2*A)EF' |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
+        final String note = "@WPName 1 X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n" +
+                "@WPName 2 X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45 C.A(D+B)'  E 9 (D-C).(2*A)EF' |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         Waypoint wp = iterator.next();
         assertWaypoint(wp, "WPName 1", null, WaypointType.PUZZLE, "");
-        String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
-        assertThat(calcState.equations).hasSize(6);
-        assertThat(calcState.freeVariables).hasSize(0);
+        assertWaypointCalcPart(wp, waypointParser, "N 45° A.B(C+D)'", "E 9° (A-B).(2*D)EF",
+                "A=a+b", "B=", "a=2", "b=");
 
         wp = iterator.next();
         assertWaypoint(wp, "WPName 2", null, WaypointType.PUZZLE, "this is the description for the second point");
-        calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° C.A(D+B)'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° (D-C).(2*A)EF'");
-        assertThat(calcState.equations).hasSize(6);
-        assertThat(calcState.freeVariables).hasSize(2);
+        assertWaypointCalcPart(wp, waypointParser, "N 45 C.A(D+B)'", "E 9 (D-C).(2*A)EF'",
+                "A=a+b", "B=", "a=2", "b=");
     }
 
     /**
@@ -396,7 +321,7 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaPrefix() {
-        final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF \"this is the description\"\n\"this shall NOT be part of the note\"";
+        final String note = "@[S2]Stage 2 X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF \"this is the description\"\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
@@ -413,22 +338,15 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaWithoutDescription() {
-        final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b|B=|a=|b=3|";
+        final String note = "@[S2]Stage 2 X " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b|B=|a=|b=3|";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
         assertWaypoint(wp, "Stage 2", null, WaypointType.PUZZLE, "");
-        final String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.equations).hasSize(6);
-        assertThat(calcState.equations.get(0).getExpression()).isEqualTo("a + b");
-        assertThat(calcState.equations.get(1).getExpression()).isEqualTo("");
-        assertThat(calcState.freeVariables).hasSize(2);
-        assertThat(calcState.freeVariables.get(0).getExpression()).isEqualTo("");
-        assertThat(calcState.freeVariables.get(1).getExpression()).isEqualTo("3");
+        assertWaypointCalcPart(wp, waypointParser, "N 45° A.B(C+D)", "E 9° (A-B).(2*D)EF",
+                "A=a + b", "B=", "a=", "b=3");
     }
 
     /**
@@ -436,26 +354,21 @@ public class WaypointParserTest {
      */
     @Test
     public void testParseWaypointWithFormulaWithoutName() {
-        final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
         assertWaypoint(wp, "Prefix 1", null, WaypointType.WAYPOINT, "this is the description");
-        final String calcStateJson = wp.getCalcStateConfig();
-        assertThat(calcStateJson).isNotNull();
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState.plainLat).isEqualTo("N 45° A.B(C+D)'");
-        assertThat(calcState.plainLon).isEqualTo("E 9° (A-B).(2*D)EF'");
-        assertThat(calcState.equations).hasSize(6);
-        assertThat(calcState.freeVariables).hasSize(2);
+        assertWaypointCalcPart(wp, waypointParser, "N 45° A.B(C+D)", "E 9° (A-B).(2*D)EF",
+               "A=a+b", "B=", "a=2" , "b=");
     }
 
     @Test
     public void testParseWaypointWithFormulaStability() {
         //parse formulas for waypoints which might lead to unexpected fillings (and NEVER to exceptions...)
-        final String formulaTypeStr = " " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " ";
+        final String formulaTypeStr = " " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " ";
         final String formulaStr = " N 45° A.B(C+D) E 9°(A-B).(2*D)EF ";
         final String variableStrWithoutDelim = "A=a+b|B=2|C=3|D=208|a=3|b=40";
         final String variableStrWithDelim = "|" + variableStrWithoutDelim + "|";
