@@ -12,8 +12,8 @@
 - 신규: 목록 이미지를 탭할 때 확대/축소 가능한 이미지 보기 열기
 - 수정: 통합 웹 보기에서 목록의 링크 열기(활성화된 경우)
 - 변경: 백그라운드에서 캐시 설명을 렌더링하고 기본적으로 길이를 50,000자로 제한합니다.
-- Change: GCVote service connection disabled due to severe performance problems - You can manually re-enable it using Settings - Services - GCVote
-- New: Log caches: Preserve last trackable action per trackable
+- 변경: 심각한 성능 문제로 인해 GCVote 서비스 연결이 비활성화됨 - 설정 - 서비스 - GCVote를 사용하여 수동으로 다시 활성화할 수 있습니다.
+- 신규: 로그 캐시들: 추적아이템 행동으로 마지막으로 추적아니템 보존
 
 ### 일반
 - 신규: 대기 중인 다운로드 보기
