@@ -1,5 +1,5 @@
 ### 지도
-- New: OSM map source osm.paws.cz
+- 신규: OSM 지도 소스 osm.paws.cz
 
 ### 캐시 상세정보
 
