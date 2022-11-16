@@ -2292,6 +2292,8 @@
     <string name="mapserver_openandromaps_themes_info">Gedetailleerde kaart thema, gebouwd voor \"OpenAndroMaps\" kaarten</string>
     <string name="mapserver_freizeitkarte_info">Gedetailleerde kaarten, vereisen een van de \"freizeitkarte\" kaartthema\'s.</string>
     <string name="mapserver_freizeitkarte_themes_info">Gedetailleerde kaart thema, gebouwd voor \"Freizeitkarte\" kaarten</string>
+    <string name="mapserver_osmpaws_info">Gedetailleerde kaarten, vereisen het \"paws_4\" map thema.</string>
+    <string name="mapserver_osmpaws_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Paws\" kaarten</string>
     <string name="mapserver_hylly_info">Gedetailleerde kaarten voor Finland, vereisen één van de \"Hylly\" kaart thema\'s</string>
     <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
