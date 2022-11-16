@@ -902,6 +902,7 @@
     <string name="settings_info_themes">c:geo는 오프라인지도에 대한 사용자 지정 테마를 지원합니다. 지도의 색상 스타일을 변경하거나 (예: 야경지도)지도 내의 자전거 경로 또는 높이 선과 같은 특정 개체를 강조 표시하는 데 사용할 수 있습니다.\n\n압축되지 않은 지도 테마로 작업하면 지도 보기 열기 성능이 저하 될 수 있습니다. 이 경우 테마 폴더는 더 빠른 액세스를 위해 선택적으로 앱 전용 로컬 폴더에 동기화 될 수 있습니다 (일부 저장 공간 비용).</string>
     <string name="settings_info_hillshading_title">음영식 정보</string>
     <string name="settings_info_hillshading">음영식은 고도의 변화를 나타내기 위해 지도에 조명 효과를 추가하여 지형 입체 지도를 만드는 기술입니다. 경사지는 3D 효과를 생성하기 위해 어두워지거나 밝아집니다.\n고도 정보가 포함된 소스 파일은 수동으로 가져와야 하며 - 소스에 대해 이 항목을 클릭하고 - 아래에 정의된 소스 폴더에 배치해야 합니다.</string>
+    <string name="settings_hillshading_enable">음영식 활성화</string>
     <string name="init_mapsource_select">지도 선택</string>
     <string name="init_local_file_system">내부 파일 시스템</string>
     <string name="init_base_directory_description">공용 내부 데이터의 기본 폴더</string>
