@@ -53,7 +53,7 @@ android {
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project at https://crowdin.com/project/cgeo
         // not yet enough translations (~50%): "is","iw"(="he"),"lb"
-        def locales = [ 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'uk', 'zh', 'zh-rTW' ]
+        ArrayList<String> locales = [ 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'uk', 'zh', 'zh-rTW' ]
 
         // needed for in-app language selector
         buildConfigField "String[]", "TRANSLATION_ARRAY", "new String[]{\""+locales.join("\",\"")+"\"}"
@@ -88,7 +88,7 @@ android {
             ]
         }
         nightly {
-            def nightlyName = System.getenv('NB') // NB, NB1, ...
+            String nightlyName = System.getenv('NB') // NB, NB1, ...
             versionNameSuffix "-$nightlyName-" + GitCommit.currentShort()
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
@@ -99,7 +99,7 @@ android {
             ]
         }
         rc {
-            def rcName = System.getenv('RC') // RC, RC1, RC2 ...
+            String rcName = System.getenv('RC') // RC, RC1, RC2 ...
             versionNameSuffix "-$rcName"
             signingConfig signingConfigs.release
             // use release version of source code library dependencies
@@ -276,8 +276,8 @@ android {
             }
         }
         if (variant.buildType.name == 'legacy') {
-            def legacyName = System.getenv('LEGACY_VERSION_NAME')
-            def legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
+            String legacyName = System.getenv('LEGACY_VERSION_NAME')
+            Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
             if (legacyName != null && legacyVersion != null) {
                 variant.outputs.all {
                     setVersionNameOverride(legacyName)
@@ -295,7 +295,7 @@ android {
 
 dependencies {
     // AndroidAnnotations, https://github.com/excilys/androidannotations/wiki/building-project-gradle
-    def androidAnnotationsVersion = '4.8.0'
+    String androidAnnotationsVersion = '4.8.0'
     annotationProcessor "org.androidannotations:androidannotations:$androidAnnotationsVersion"
     implementation "org.androidannotations:androidannotations-api:$androidAnnotationsVersion"
 
@@ -326,7 +326,7 @@ dependencies {
     }
 
     // AssertJ for testing, needed both for local unit tests and Android instrumentation tests
-    def assertJVersion = '2.9.1'
+    String assertJVersion = '2.9.1'
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
 
@@ -338,7 +338,7 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.52'
 
     // Jackson XML processing
-    def jacksonVersion = '2.12.5'
+    String jacksonVersion = '2.12.5'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -350,7 +350,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '2.9.1'
+    String leakCanaryVersion = '2.9.1'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
@@ -358,16 +358,16 @@ dependencies {
     implementation "com.asamm:locus-api-android:0.9.32"
 
     // Mapsforge official version
-    //def mapsforgeSource = 'org.mapsforge'
-    //def mapsforgeVersion = '0.18.0'
+    //String mapsforgeSource = 'org.mapsforge'
+    //String mapsforgeVersion = '0.18.0'
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
-    //def mapsforgeSource = 'com.github.mapsforge.mapsforge'
-    //def mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
+    //String mapsforgeSource = 'com.github.mapsforge.mapsforge'
+    //String mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
-    def mapsforgeSource = 'com.github.cgeo.mapsforge'
-    def mapsforgeVersion = 'fbc75a4' // fix for #12210
+    String mapsforgeSource = 'com.github.cgeo.mapsforge'
+    String mapsforgeVersion = 'fbc75a4' // fix for #12210
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
@@ -376,8 +376,8 @@ dependencies {
     implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion"
 
     // Mapsforge VTM implementation
-    def mapsforgeVTMSource = 'org.mapsforge'
-    def mapsforgeVTMVersion = '0.18.0'
+    String mapsforgeVTMSource = 'org.mapsforge'
+    String mapsforgeVTMVersion = '0.18.0'
 
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
@@ -405,7 +405,7 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.18.0'
 
-    def okhttpVersion = '4.10.0'
+    String okhttpVersion = '4.10.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
@@ -427,7 +427,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Support Library Lifecycle Helpers
-    def lifecycleVersion = '2.5.1'
+    String lifecycleVersion = '2.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
@@ -462,7 +462,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
     // Support Annotations. use same version for the main app and the test app
-    def annotationVersion = '1.5.0'
+    String annotationVersion = '1.5.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
@@ -499,15 +499,15 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        def keysFile = file("res/values/keys.xml")
+        File keysFile = file("res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
-            def propertiesFile = rootProject.file("private.properties")
+            File propertiesFile = rootProject.file("private.properties")
             if (propertiesFile.exists()) {
                 copy {
                     from "templates/keys.xml"
                     into ("res/values")
-                    def properties = new Properties()
+                    Properties properties = new Properties()
                     propertiesFile.withInputStream {
                         properties.load(it)
                     }
@@ -523,16 +523,16 @@ tasks.register('verifyCgeoKeys') {
 }
 
 // version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
-static def versionCodeFromDate(offset) {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
+static int versionCodeFromDate(offset) {
+    Date date = new Date()
+    String formattedDate = date.format('yyyyMMdd')
     return Integer.valueOf(formattedDate) + offset
 }
 
 // version name based on current date
-static def versionNameFromDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy.MM.dd')
+static String versionNameFromDate() {
+    Date date = new Date()
+    String formattedDate = date.format('yyyy.MM.dd')
     return formattedDate
 }
 
@@ -557,7 +557,7 @@ class GitCommit {
 }
 
 // check whether this is a local build or a CI server build
-static def isContinuousIntegrationServer() {
+static boolean isContinuousIntegrationServer() {
     return System.getenv('BUILD_NUMBER') != null
 }
 
@@ -570,11 +570,11 @@ android.applicationVariants.all { variant ->
             dependsOn tasks.named(variant.installProvider.name)
 
             doFirst {
-                def classpath = variant.applicationId
+                String classpath = variant.applicationId
                 if (variant.buildType.applicationIdSuffix) {
                     classpath -= "${variant.buildType.applicationIdSuffix}"
                 }
-                def launchClass = "${variant.applicationId}/${classpath}.MainActivity"
+                GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
                     project.exec {
                         executable = project.android.getAdbExe().toString()
@@ -631,7 +631,7 @@ tasks.register('verifyPrivateProperties') {
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
     doFirst {
-        def preferences = file('cgeo.geocaching_preferences.xml')
+        File preferences = file('cgeo.geocaching_preferences.xml')
         if (preferences.exists()) {
             try {
                 project.exec {
