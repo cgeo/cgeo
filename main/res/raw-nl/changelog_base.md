@@ -1,5 +1,5 @@
 ### Kaart
-- New: OSM map source osm.paws.cz
+- Nieuw: OSM kaart bron osm.paws.cz
 
 ### Cache details
 
