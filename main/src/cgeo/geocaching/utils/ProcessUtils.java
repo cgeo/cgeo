@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -57,7 +58,12 @@ public final class ProcessUtils {
 
     /**
      * This will find installed applications even without launch intent (e.g. the streetview plugin).
+     *
+     * Be aware:
+     * Starting with Android 11 getInstalledPackages() will only return packages declared in AndroidManifest.xml
+     * (Add a lint exception, as we have cross-checked our current usages for this method)
      */
+    @SuppressLint("QueryPermissionsNeeded")
     private static boolean hasPackageInstalled(@NonNull final String packageName) {
         final List<PackageInfo> packs = CgeoApplication.getInstance().getPackageManager().getInstalledPackages(0);
         for (final PackageInfo packageInfo : packs) {
