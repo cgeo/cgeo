@@ -72,6 +72,14 @@ public class FormulaUtils {
         return Math.round(value * factor) / factor;
     }
 
+    public static double trunc(final double value, final int digits) {
+        if (digits <= 0) {
+            return Math.floor(value);
+        }
+        final double factor = Math.pow(10, digits);
+        return Math.floor(value * factor) / factor;
+    }
+
     public static String substring(final String value, final int start, final int length) {
         if (value == null || start >= value.length()) {
             return "";
