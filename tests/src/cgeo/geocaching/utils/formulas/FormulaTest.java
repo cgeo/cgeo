@@ -176,28 +176,28 @@ public class FormulaTest {
     @Test
     public void ranges() {
         //assert handling of "normal" formats
-        assertThat(Formula.evaluateWithRanges("[0-9]", 3)).isEqualTo(Value.of(3));
-        assertThat(Formula.compile("[0-9]").getRangeIndexSize()).isEqualTo(10);
+        assertThat(Formula.evaluateWithRanges("[:0-9]", 3)).isEqualTo(Value.of(3));
+        assertThat(Formula.compile("[:0-9]").getRangeIndexSize()).isEqualTo(10);
 
-        assertThat(Formula.compile("[0-3]*[0-4]").getRangeIndexSize()).isEqualTo(20);
-        assertRangeFormula("[1-2]*[3-4]", null, 3, 6, 4, 8);
-        assertRangeFormula("[1-3, ^2]*[10-20, ^11-19]", null, 10, 30, 20, 60);
+        assertThat(Formula.compile("[:0-3]*[:0-4]").getRangeIndexSize()).isEqualTo(20);
+        assertRangeFormula("[:1-2]*[:3-4]", null, 3, 6, 4, 8);
+        assertRangeFormula("[:1-3, ^2]*[:10-20, ^11-19]", null, 10, 30, 20, 60);
 
         //assert graceful handling of "strange" formats
-        assertRangeFormula("[abc1]", null, 1);
-        assertRangeFormula("[2-]", null, 2);
-        assertRangeFormula("[-3]", null, 3);
+        assertRangeFormula("[:abc1]", null, 1);
+        assertRangeFormula("[:2-]", null, 2);
+        assertRangeFormula("[:-3]", null, 3);
 
         //assert
-        assertThatThrownBy(() -> eval("[0-3"))
+        assertThatThrownBy(() -> eval("[:0-3"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
-        assertThatThrownBy(() -> eval("[0-5000]")).as("Too many items in range")
+        assertThatThrownBy(() -> eval("[:0-5000]")).as("Too many items in range")
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
-        assertThatThrownBy(() -> eval("[]"))
+        assertThatThrownBy(() -> eval("[:]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-        assertThatThrownBy(() -> eval("[  ]"))
+        assertThatThrownBy(() -> eval("[:  ]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-        assertThatThrownBy(() -> eval("[^1-2]"))
+        assertThatThrownBy(() -> eval("[:^1-2]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
 
     }
@@ -283,9 +283,20 @@ public class FormulaTest {
     }
 
     @Test
-    public void unclosedParentheses() {
+    public void parenthesis() {
+        assertThat(eval("(1+2)*3")).isEqualTo(9);
+        assertThat(eval("[1+2]*3")).isEqualTo(9);
+        assertThat(eval("[1+(7-4)]*3")).isEqualTo(12);
+
+        //unclosed parenthesis
         assertThatThrownBy(() -> eval("3 * (2 + 4 * 2"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+        //non-matching parenthesis
+        assertThatThrownBy(() -> eval("3 * (2 + 4 * 2]"))
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+        assertThatThrownBy(() -> eval("3 * [2 + 4 * 2)"))
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+
     }
 
     @Test
