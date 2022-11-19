@@ -76,28 +76,6 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         return new GoogleGeoitemLayer(mMap);
     }
 
-    /* retrieve fingerprint with getKeyHash(activity, "SHA")
-    private String getKeyHash(final Activity activity, final String hashStrategy) {
-        final char[] hexChars = "0123456789ABCDEF".toCharArray();
-        final PackageInfo info;
-        try {
-            info = activity.getPackageManager().getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                final MessageDigest md = MessageDigest.getInstance(hashStrategy);
-                md.update(signature.toByteArray());
-                final StringBuilder sb = new StringBuilder();
-                for (byte c : md.digest()) {
-                    sb.append(hexChars[Byte.toUnsignedInt(c) / 16]).append(hexChars[c & 15]).append(' ');
-                }
-                return sb.toString();
-            }
-        } catch (Exception e) {
-            return e.toString();
-        }
-        return null;
-    }
-    */
-
     @Override
     public void onMapReady(@NonNull final GoogleMap googleMap) {
         mMap = googleMap;

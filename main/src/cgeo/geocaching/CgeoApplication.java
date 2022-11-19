@@ -12,6 +12,9 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -21,6 +24,7 @@ import android.os.UserManager;
 import androidx.annotation.NonNull;
 
 import java.lang.reflect.Method;
+import java.security.MessageDigest;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -66,6 +70,9 @@ public class CgeoApplication extends Application {
 
             // Restore cookies
             Cookies.restoreCookies();
+
+            // dump hash key to log, if requested
+            // Log.e("app hashkey: " + getApplicationHashkey(this));
 
             LooperLogger.startLogging(Looper.getMainLooper());
         }
@@ -127,6 +134,29 @@ public class CgeoApplication extends Application {
 
     public AtomicBoolean getHasHighPrioNotification() {
         return hasHighPrioNotification;
+    }
+
+
+    // retrieve fingerprint with getKeyHash(context)
+    @SuppressWarnings("unused")
+    @SuppressLint("PackageManagerGetSignatures")
+    private static String getApplicationHashkey(final Context context) {
+        final char[] hexChars = "0123456789ABCDEF".toCharArray();
+        final StringBuilder sb = new StringBuilder();
+        try {
+            final PackageInfo info;
+            info = context.getPackageManager().getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                final MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                for (byte c : md.digest()) {
+                    sb.append(hexChars[Byte.toUnsignedInt(c) / 16]).append(hexChars[c & 15]).append(' ');
+                }
+            }
+        } catch (Exception e) {
+            return e.toString();
+        }
+        return sb.toString();
     }
 
 }
