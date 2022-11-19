@@ -142,6 +142,7 @@ public class SuParser {
 
 
         final ArrayNode images = (ArrayNode) data.get(CACHE_IMAGES);
+        final List<Image> cacheImages = new ArrayList<>();
         if (images != null) {
             for (final JsonNode imageResponse : images) {
                 String title = "";
@@ -155,11 +156,13 @@ public class SuParser {
                     descriptionBuilder.append("<img src=\"").append(url).append("\"/><br/>");
                 }
 
-                // No idea why all images are called "spoiler" here, just need to make them
-                // available at "Images" tab
-                cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).build());
+                cacheImages.add(new Image.Builder().setUrl(url).setTitle(title).build());
             }
         }
+        // No idea why all images are called "spoiler" here, just need to make them
+        // available at "Images" tab
+        cache.setSpoilers(cacheImages);
+
 
         if (data.has(CACHE_WPTS)) {
             cache.setWaypoints(parseWaypoints((ArrayNode) data.path(CACHE_WPTS)), false);
