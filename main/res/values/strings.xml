@@ -211,7 +211,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Failed Login page parsing</string>
-    <string name="err_captcha">Captcha required. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
+    <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to login with c:geo.</string>
     <string name="err_server">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_lc">Unable to contact labs.geocaching.com. The website may be down or your internet connection not working.</string>
@@ -222,7 +222,7 @@
     <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
     <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_missing_auth">No username and/or password set</string>
-    <string name="err_wrong">Wrong username and/or password</string>
+    <string name="err_wrong">Wrong username and/or password.</string>
     <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
     <string name="err_license">You have not agreed to the Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
     <string name="err_unvalidated_account">You must validate your account on the Geocaching.com website first.</string>
