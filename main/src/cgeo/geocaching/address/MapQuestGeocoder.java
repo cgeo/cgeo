@@ -49,7 +49,7 @@ public class MapQuestGeocoder {
     }
 
     private static Observable<Address> get(@NonNull final String method, @NonNull final Parameters parameters) {
-        return Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
+        return Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/" + method,
                 parameters.put("key", MAPQUEST_KEY))
                 .flatMapObservable((Function<ObjectNode, Observable<Address>>) response -> {
                     final int statusCode = response.path("info").path("statuscode").asInt(-1);
