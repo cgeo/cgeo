@@ -95,7 +95,6 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -2185,6 +2184,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
+        @SuppressLint("SetTextI18n")
         protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.binding.coordinates;
@@ -2198,7 +2198,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
-            calculatedCoordinatesView.setText(cc.isFilled() ? "(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern() : LocalizationUtils.getString(R.string.waypoint_calculated_coordinates));
+            calculatedCoordinatesView.setText("(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern());
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
 
             // info

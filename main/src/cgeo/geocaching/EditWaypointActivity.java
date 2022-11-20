@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.calculator.CalculatedCoordinateMigrator;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.databinding.EditwaypointActivityBinding;
@@ -12,10 +11,10 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.LegacyCalculatedCoordinateMigrator;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -71,7 +70,7 @@ import org.androidannotations.annotations.InstanceState;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -489,19 +488,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    @Override
-    public void saveCalculatorState(final CalcState calcState) {
-        this.calcStateString = null;
-        if (calcState != null && calcState.equations.size() > 0) {
-            this.calcStateString = calcState.toJSON().toString();
-        }
-    }
-
-    @Override
-    public CalcState fetchCalculatorState() {
-        return CalculatedCoordinate.isValidConfig(calcStateString) ? null : CalcState.fromJSON(calcStateString);
-    }
-
     /**
      * Save the current state of the calculator such that it can be restored after screen rotation (or similar)
      */
@@ -724,8 +710,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
 
         final Waypoint wp = cache.getWaypointById(waypointId);
-        if (CalculatedCoordinateMigrator.needsMigration(wp)) {
-            CalculatedCoordinateMigrator.performMigration(context, cache, wp, () -> startActivityEditWaypointInternal(context, cache, waypointId));
+        if (LegacyCalculatedCoordinateMigrator.needsMigration(wp)) {
+            LegacyCalculatedCoordinateMigrator.performMigration(context, cache, wp, () -> startActivityEditWaypointInternal(context, cache, waypointId));
         } else {
             startActivityEditWaypointInternal(context, cache, waypointId);
         }

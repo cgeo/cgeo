@@ -9,7 +9,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
@@ -720,13 +719,6 @@ public class CoordinatesInputDialog extends DialogFragment {
         default void updateCoordinates(CoordinateInputData coordinateInputData) {
             updateCoordinates(coordinateInputData.getGeopoint());
         }
-    }
-
-    // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
-    public interface CalculateState {
-        void saveCalculatorState(CalcState calc);
-
-        CalcState fetchCalculatorState();
     }
 
     private class PadZerosOnFocusLostListener implements OnFocusChangeListener {

@@ -1,15 +1,10 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.calculator.CoordinatesCalculateUtils;
-import cgeo.geocaching.calculator.FormulaParser;
-import cgeo.geocaching.calculator.FormulaWrapper;
-import cgeo.geocaching.calculator.VariableData;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -31,7 +26,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.jetbrains.annotations.NotNull;
 
 public class WaypointParser {
@@ -365,66 +359,6 @@ public class WaypointParser {
         return WaypointType.WAYPOINT;
     }
 
-    /**
-     * try to parse a name out of given words. If not possible, null is returned
-     * Typical example: @Plain Example 1 (W) (F-PLAIN) N 53° 33.AAA E 009° 59.BCD' |A=1|B=2|C=3|D=4| "Plain_example_1"
-     */
-    @NotNull
-    private ImmutableTriple<CalculatedCoordinate, String, CalcState> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
-        try {
-            final FormulaParser formulaParser = new FormulaParser(formulaFormat);
-            final FormulaWrapper parsedFullCoordinates = formulaParser.parse(text);
-            if (null != parsedFullCoordinates) {
-                final String latText = parsedFullCoordinates.getFormulaLat();
-                final String lonText = parsedFullCoordinates.getFormulaLon();
-                final List<VariableData> variables = new ArrayList<>();
-
-                // all text after the formula, keep newline
-                String remainingString = parsedFullCoordinates.getText().substring(parsedFullCoordinates.getEnd());
-
-                final String[] formulaList = remainingString.split(FormulaParser.WPC_DELIM_PATTERN_STRING);
-                for (final String varSplitText : formulaList
-                ) {
-                    final String varText = varSplitText.trim();
-                    boolean removeDelimiter = varText.isEmpty();
-                    final String[] equations = varText.split("=", -1);
-                    if (1 < equations.length) {
-                        final String varName = equations[0].trim();
-                        if (1 == varName.length()) {
-                            removeDelimiter = true;
-                            final String varExpression = equations[1].trim();
-                            if (!varExpression.isEmpty()) {
-                                variables.add(new VariableData(varName.charAt(0), varExpression));
-                            }
-                        }
-                    }
-                    if (removeDelimiter) {
-                        final int idxWpcDelim = remainingString.indexOf(FormulaParser.WPC_DELIM);
-                        remainingString = remainingString.substring(idxWpcDelim + 1);
-                    } else {
-                        break;
-                    }
-                }
-
-                for (VariableData vd : variables) {
-                    addVariable("" + vd.getName(), vd.getExpression(), false);
-                }
-                final CalculatedCoordinate cc = new CalculatedCoordinate();
-                cc.setLatitudePattern(latText);
-                cc.setLongitudePattern(lonText);
-                cc.setType(CalculatedCoordinateType.PLAIN);
-
-                final CalcState calcState = CoordinatesCalculateUtils.createCalcState(latText, lonText, variables);
-
-                return new ImmutableTriple<>(cc, remainingString, calcState);
-            }
-        } catch (final FormulaParser.ParseException ignored) {
-            // no formula
-        }
-
-        return new ImmutableTriple<>(null, text, null);
-    }
-
     private void addVariable(final String name, final String expression, final boolean highPrio) {
         if (StringUtils.isBlank(name)) {
             return;
@@ -486,10 +420,6 @@ public class WaypointParser {
      * @return parseable waypoint text
      */
     public static String getParseableText(final Waypoint wp) {
-        return getParseableText(wp, false);
-    }
-
-    public static String getParseableText(final Waypoint wp, final boolean legacyMode) {
         final StringBuilder sb = new StringBuilder();
         //name
         sb.append(PARSING_NAME_PRAEFIX);
@@ -503,7 +433,7 @@ public class WaypointParser {
                 .append(PARSING_TYPE_CLOSE).append(" ");
 
         // formula
-        final String formulaString = getParseableFormula(wp, legacyMode);
+        final String formulaString = getParseableFormula(wp);
         if (StringUtils.isNotEmpty(formulaString)) {
             sb.append(formulaString);
         } else {
@@ -526,28 +456,12 @@ public class WaypointParser {
         return sb.toString();
     }
 
-    private static String getParseableFormula(final Waypoint wp, final boolean legacyMode) {
+    private static String getParseableFormula(final Waypoint wp) {
         final StringBuilder sb = new StringBuilder();
 
         final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
         if (cc.isFilled()) {
             sb.append(cc.toConfig());
-        } else if (legacyMode) {
-            final String calcStateJson = wp.getCalcStateConfig();
-            if (null != calcStateJson) {
-                final CalcState calcState = CalcState.fromJSON(calcStateJson);
-
-                if (calcState != null) {
-                    final String formulaString = getParseableFormulaString(calcState);
-                    if (!formulaString.isEmpty()) {
-                        sb.append(formulaString);
-                        final String variableString = getParseableVariablesString(calcState);
-                        if (!variableString.isEmpty()) {
-                            sb.append(FormulaParser.WPC_DELIM).append(variableString);
-                        }
-                    }
-                }
-            }
         }
         return sb.toString();
     }
@@ -578,29 +492,4 @@ public class WaypointParser {
         }
     }
 
-    private static String getParseableFormulaString(final CalcState calcState) {
-        final StringBuilder sb = new StringBuilder();
-        if (calcState.format == Settings.CoordInputFormatEnum.Plain) {
-            sb.append(LEGACY_PARSING_COORD_FORMULA + " ");
-            sb.append(calcState.plainLat).append(" ").append(calcState.plainLon).append(" ");
-        }
-        return sb.toString();
-    }
-
-    private static String getParseableVariablesString(final CalcState calcState) {
-        final StringBuilder sb = new StringBuilder();
-        for (VariableData equ : calcState.equations) {
-            final String equExpr = equ.getExpression().trim();
-            if (!equExpr.isEmpty()) {
-                sb.append(equ.getName()).append("=").append(equExpr).append(FormulaParser.WPC_DELIM);
-            }
-        }
-        for (VariableData var : calcState.freeVariables) {
-            final String varExpr = var.getExpression().trim();
-            if (!varExpr.isEmpty()) {
-                sb.append(var.getName()).append("=").append(varExpr).append(FormulaParser.WPC_DELIM);
-            }
-        }
-        return sb.toString();
-    }
 }
