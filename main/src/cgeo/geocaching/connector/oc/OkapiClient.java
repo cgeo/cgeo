@@ -766,15 +766,18 @@ final class OkapiClient {
             cache.setHint(response.get(CACHE_HINT).asText());
             // not used: hints
 
+            //set images
+            final List<Image> cacheImages = new ArrayList<>();
             final ArrayNode images = (ArrayNode) response.get(CACHE_IMAGES);
             if (images != null) {
                 for (final JsonNode imageResponse : images) {
                     final String title = imageResponse.get(CACHE_IMAGE_CAPTION).asText();
                     final String url = absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(), cache.getGeocode());
-                    // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
-                    cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).build());
+                    cacheImages.add(new Image.Builder().setUrl(url).setTitle(title).build());
                 }
             }
+            // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
+            cache.setSpoilers(cacheImages);
 
             cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)));
             //TODO: Store license per cache

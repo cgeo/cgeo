@@ -965,13 +965,6 @@ public class Geocache implements IWaypoint {
         return attributes.getUnderlyingList();
     }
 
-    public void addSpoiler(@NonNull final Image spoiler) {
-        if (spoilers == null) {
-            spoilers = new ArrayList<>();
-        }
-        spoilers.add(spoiler.buildUpon().setCategory(Image.ImageCategory.LISTING).build());
-    }
-
     @NonNull
     public List<Image> getSpoilers() {
         return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
