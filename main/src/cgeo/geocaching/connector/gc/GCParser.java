@@ -620,6 +620,7 @@ public final class GCParser {
         }
 
         // cache spoilers
+        final List<Image> cacheSpoilers = new ArrayList<>();
         try {
             if (DisposableHandler.isDisposed(handler)) {
                 return UNKNOWN_PARSE_ERROR;
@@ -640,7 +641,7 @@ public final class GCParser {
                     description = matcherSpoilersInside.group(3);
                 }
                 if (title != null) {
-                    cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
+                    cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
                 }
             }
         } catch (final RuntimeException e) {
@@ -660,9 +661,10 @@ public final class GCParser {
                 }
             }
             if (!present) {
-                cache.addSpoiler(new Image.Builder().setUrl(url).setTitle(CgeoApplication.getInstance().getString(R.string.cache_image_background)).build());
+                cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(CgeoApplication.getInstance().getString(R.string.cache_image_background)).build());
             }
         }
+        cache.setSpoilers(cacheSpoilers);
 
         // cache inventory
         try {

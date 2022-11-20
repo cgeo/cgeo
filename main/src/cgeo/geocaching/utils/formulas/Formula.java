@@ -650,6 +650,9 @@ public final class Formula {
         if (!p.eat('[')) {
             throw new FormulaException(UNEXPECTED_TOKEN, "[");
         }
+        if (!p.eat(':')) {
+            throw new FormulaException(UNEXPECTED_TOKEN, ":");
+        }
         final String config = p.parseUntil(c -> ']' == c, false, null, false);
         if (config == null) {
             throw new FormulaException(UNEXPECTED_TOKEN, "]");
@@ -672,9 +675,13 @@ public final class Formula {
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
         while (true) {
-            if (p.ch() == '(') {
+            if (p.ch() == '[' && p.peek() == ':') { // RANGE operator
+                level++;
+                nodes.add(parseRangeBlock());
+                level--;
+            } else if (p.chIsIn('(', '[')) { //parenthesis
                 final int parenStartPos = p.pos();
-                final char expectedClosingChar = ')';
+                final char expectedClosingChar = p.ch() == '(' ? ')' : ']';
                 p.next();
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v, ri) -> o.get(0),
@@ -703,10 +710,6 @@ public final class Formula {
                 nodes.add(parseAlphaNumericBlock());
             } else if (p.chIsIn(NUMBERS)) {
                 nodes.add(parseNumber());
-            } else if (p.ch() == '[') {
-                level++;
-                nodes.add(parseRangeBlock());
-                level--;
             } else {
                 break;
             }

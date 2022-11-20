@@ -31,8 +31,9 @@ public enum FormulaFunction {
     ABS("abs", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_abs, "Absolute Value", null, 0,
             singleValueNumericFunction(Math::abs)),
     ROUND(new String[]{"round", "rd"}, FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_round, "Round", null, 0,
-            p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), (int) p.getAsInt(1, 0)))),
-
+            p -> Value.of(FormulaUtils.round(p.getAsDouble(0, 0), (int) p.getAsInt(1, 0)))),
+    TRUNC(new String[]{"trunc", "tr", "floor", "fl"}, FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_trunc, "Trunc", null, 0,
+            p -> Value.of(FormulaUtils.trunc(p.getAsDouble(0, 0), (int) p.getAsInt(1, 0)))),
     IF("if", FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_if, "If", null, 0,
             minMaxParamFunction(2, -1, FormulaUtils::ifFunction)),
 

@@ -1697,6 +1697,7 @@
     <string name="formula_function_tan">Tangent</string>
     <string name="formula_function_abs">Absolute Value</string>
     <string name="formula_function_round">Round</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">If</string>
     <string name="formula_function_length">String Length</string>
     <string name="formula_function_substring">Substring</string>

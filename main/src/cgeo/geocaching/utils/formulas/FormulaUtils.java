@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 public class FormulaUtils {
 
     private static final String F_OPS = "+/!^:*x-";
-    private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
+    private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()\\[\\]]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
 
@@ -36,13 +36,13 @@ public class FormulaUtils {
     };
 
 
-    private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9°'\".,\\s()" + F_OPS + "]";
+    private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9°'\".,\\s()\\[\\]" + F_OPS + "]";
     private static final String COORDINATE_SCAN_DIGIT_PATTERN = "(([a-zA-Z]{0,3})?" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+";
     private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
             "(?<lat>[nNsS](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\s*([a-zA-Z,()-]{2,}\\s+){0,3}(?<lon>[eEwWoO](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
 
-    private static final Pattern DEGREE_TRAILINGSTUFF_REMOVER = Pattern.compile("(\\s+[a-zA-Z]{2,}|[.,(+:*/-])$");
+    private static final Pattern DEGREE_TRAILINGSTUFF_REMOVER = Pattern.compile("(\\s+[a-zA-Z]{2,}|[.,(\\[+:*/-])$");
 
     private static final Map<Character, Integer> SPECIAL_LETTER_VALUE_MAP = new HashMap<>();
 
@@ -70,6 +70,14 @@ public class FormulaUtils {
         }
         final double factor = Math.pow(10, digits);
         return Math.round(value * factor) / factor;
+    }
+
+    public static double trunc(final double value, final int digits) {
+        if (digits <= 0) {
+            return Math.floor(value);
+        }
+        final double factor = Math.pow(10, digits);
+        return Math.floor(value * factor) / factor;
     }
 
     public static String substring(final String value, final int start, final int length) {
@@ -234,7 +242,7 @@ public class FormulaUtils {
 
     private static String preprocessScanText(final String text) {
         return text.replaceAll("\\h|\\s", " ").trim()
-                .replace(',', '.').replace('[', '(').replace(']', ')');
+                .replace(',', '.');
     }
 
     private static String processFoundDegree(final String degree) {
