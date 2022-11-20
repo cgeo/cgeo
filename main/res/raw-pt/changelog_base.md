@@ -1,5 +1,5 @@
 ### Mapa
-- New: OSM map source osm.paws.cz
+- Novo: Fonte de mapa OSM osm.paws.cz
 
 ### Detalhes da cache
 
