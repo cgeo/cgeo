@@ -1,5 +1,5 @@
 ### Карта
-- New: OSM map source osm.paws.cz
+- Новое: источник OSM карт osm.paws.cz
 
 ### Детали тайника
 
