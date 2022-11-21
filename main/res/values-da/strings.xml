@@ -192,7 +192,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login-side kan ikke indlæses</string>
-    <string name="err_captcha">Captcha påkrævet. Se venligst vores <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for vejledning.</string>
     <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
     <string name="err_server_ec">Kan ikke forbinde til Extremecaching.com. Hjemmesiden kan være nede eller du har ikke forbindelse til Internettet.</string>
     <string name="err_server_lc">Kan ikke forbinde til labs.geocaching.com (server- eller forbindelsesfejl?).</string>
@@ -203,7 +202,6 @@
     <string name="err_unknown_address">c:geo kunne ikke tilknytte denne adresse til en eksisterende placering</string>
     <string name="err_comm">Ukendt kommunikationsfejl. Se <a href="https://www.cgeo.org/faq#login-failed">Ofte Stillede Spørgsmål</a> for hjælp til fejlsøgning.</string>
     <string name="err_missing_auth">Intet brugernavn og/eller password konfigureret</string>
-    <string name="err_wrong">Forkert brugernavn og/eller password</string>
     <string name="err_maintenance">Geocaching.com er midlertidigt lukket på grund af vedligeholdelse. c:geo fungerer offline med gemte cacher.</string>
     <string name="err_license">Bruger accepterer betingelser på Geocaching.com</string>
     <string name="err_unvalidated_account">Du skal først validere din konto på geocaching.com.</string>
