@@ -156,7 +156,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
     <string name="err_parse">Не вдалося проаналізувати сторінку входу</string>
-    <string name="err_captcha">Потрібна капча. Будь ласка, зверніться до наших <a href="https://www.cgeo.org/faq#login-failed"> поширених запитань </a>, щоб отримати вказівки.</string>
     <string name="err_server">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_ec">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_su">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
@@ -166,7 +165,6 @@
     <string name="err_unknown_address">c:geo не вдалося відобразити цю адресу в існуюче розташування</string>
     <string name="err_comm">Невідома помилка зв\'язку. Будь ласка, зверніться до наших <a href="https://www.cgeo.org/faq#login-failed"> спільних записів </a>, щоб отримати отримання.</string>
     <string name="err_missing_auth">Ім\'я користувача та / або пароль не встановлено</string>
-    <string name="err_wrong">Неправильне ім’я користувача та / або пароль</string>
     <string name="err_maintenance">Geocaching.com відсутній для технічного обслуговування. c:geo працює в автономному режимі зі збереженими кешами.</string>
     <string name="err_license">Ви не згодні з ліцензійною угодою на Geocaching.com, так що c:geo не може завантажити координати кешу.</string>
     <string name="err_unvalidated_account">Спочатку потрібно перевірити свій обліковий запис на веб-сайті Geocaching.com.</string>
