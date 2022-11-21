@@ -185,7 +185,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">解析登入頁失敗</string>
-    <string name="err_captcha">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
@@ -196,7 +195,6 @@
     <string name="err_unknown_address">c:geo無法顯示這存在的位置。</string>
     <string name="err_comm">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_missing_auth">用户名或密码未设置</string>
-    <string name="err_wrong">错误的用户名或密码</string>
     <string name="err_maintenance">網站Geocaching.com離線中。c:geo正離線執行。</string>
     <string name="err_license">您還未同意geocaching.com的使用允許，所以c:geo無法讀取GPS座標。</string>
     <string name="err_unvalidated_account">您必須在geocaching.com驗證您的帳號</string>
