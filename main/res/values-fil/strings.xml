@@ -127,7 +127,6 @@
     <string name="err_login">Walang naka-imbak na Impormasyon sa Login</string>
     <string name="err_unknown_address">ang c:geo ay hindi nakapag-map sa address ng iyong umiiral na lokasyon</string>
     <string name="err_missing_auth">Walang username at/o password ang naka takda</string>
-    <string name="err_wrong">Maling username at/o password</string>
     <string name="err_maintenance">Ang Geocaching.com ay naka-down para sa pananatili. Ang c:geo na may Nakaimbak na mga cache ay gumagana sa offline.</string>
     <string name="err_license">Ikaw ay hindi sumang-ayon sa kasunduan ng lisensya sa Geocaching.com, kaya hindi nakapag-load ang mga coordianate ng cache.</string>
     <string name="err_unvalidated_account">Dapat mo munang unahin ang pagpapatunay ng iyong account sa website ng Geocaching.com.</string>
