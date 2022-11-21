@@ -123,7 +123,6 @@
     <string name="err_login">Walay pagsulod sa impormasyon nga gitipigan</string>
     <string name="err_unknown_address">ang c:geo wala maka aktibo sa mapa para makit-an ang kasamtangan nga lokasyon</string>
     <string name="err_missing_auth">Walay nabutang nga username ug/o password</string>
-    <string name="err_wrong">Sayop nga username ug/o password</string>
     <string name="err_maintenance">Ang Geocaching.com kay nagpaubos alang sa pagmintinar sa c:geo nagtrabaho bisan offline kauban ang gitipigan nga caches.</string>
     <string name="err_license">Wala ka misugot sa Geocaching.com na lisensya nga kasabutan, mao ang c:geo dili maka load sa cache coordinates.</string>
     <string name="err_unvalidated_account">Imoha dapat gipabalido ang imong account sa Geocaching.com una nga website.</string>
