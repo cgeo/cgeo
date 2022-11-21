@@ -129,7 +129,6 @@
     <string name="err_login">Tidak ada informasi login yang tersimpan</string>
     <string name="err_unknown_address">c: geo tidak dapat memetakan alamat ini ke lokasi yang ada</string>
     <string name="err_missing_auth">Tidak ada nama pengguna dan/atau tetapkan kata sandi</string>
-    <string name="err_wrong">Nama pengguna atau kata sandi salah</string>
     <string name="err_maintenance">Geocaching.com sedang dalam pemeliharaan. c: geo bekerja offline dengan Stored Cache.</string>
     <string name="err_license">Anda belum menyetujui perjanjian lisensi Geocaching.com, jadi c: geo tidak dapat memuat koordinat cache.</string>
     <string name="err_unvalidated_account">Anda harus memvalidasi akun Anda di situs Geocaching.com terlebih dahulu.</string>
