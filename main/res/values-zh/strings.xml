@@ -161,7 +161,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
-    <string name="err_captcha">需填写验证码。请参考 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_server">无法连接 Geocaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_ec">无法连接 Extremcaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_su">无法连接 Geocaching.su。网站可能已经关闭，或者是你的网络连接有问题。</string>
@@ -171,7 +170,6 @@
     <string name="err_unknown_address">c:geo无法将这个地址映射到已有位置上。</string>
     <string name="err_comm">未知通信错误。请参考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a> 。</string>
     <string name="err_missing_auth">用户名和/或密码未设置</string>
-    <string name="err_wrong">错误的用户名和/或密码</string>
     <string name="err_maintenance">Geocaching.com正在停机维护。c:geo 可以使用已保存的藏点离线工作。</string>
     <string name="err_license">由于你尚未同意Geocaching.com的许可协议，c:geo无法加载藏点坐标。</string>
     <string name="err_unvalidated_account">你必须先到Geocaching.com验证你的账户。</string>
