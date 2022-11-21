@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
-    <string name="err_captcha">Απαιτείται Captcha. Παρακαλώ ανατρέξτε στις<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>για οδηγίες.</string>
     <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_lc">Η επικοινωνία με την Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">Το c:geo δεν μπόρεσε να αντιστοιχίσει αυτήν τη διεύθυνση με μια υπάρχουσα τοποθεσία</string>
     <string name="err_comm">Άγνωστο σφάλμα επικοινωνίας. Παρακαλούμε απευθυνθείτε στη σελίδα μας <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> για οδηγίες.</string>
     <string name="err_missing_auth">Δεν έχει οριστεί username ή/και κωδικός</string>
-    <string name="err_wrong">Λάθος username ή/και κωδικός</string>
     <string name="err_maintenance">Το Geocaching.com δεν είναι διαθέσιμο λόγω συντήρησης. Το c:geo δουλεύει εκτός σύνδεσης με τις αποθηκευμένες κρύπτες.</string>
     <string name="err_license">Δεν έχετε αποδεχτεί τους όρους χρήσης του Geocaching.com, οπότε το c:geo δεν μπορεί να φορτώσει τις συντεταγμένες των κρυπτών.</string>
     <string name="err_unvalidated_account">Πρέπει να επαληθεύσετε τον λογαριασμό σας στο Geocaching.com πριν προχωρήσετε.</string>
@@ -1510,6 +1508,7 @@
     <string name="formula_function_tan">Εφαπτομένη</string>
     <string name="formula_function_abs">Απόλυτη τιμή</string>
     <string name="formula_function_round">Κυκλικό</string>
+    <string name="formula_function_trunc">Αφαίρεση δεκαδικών</string>
     <string name="formula_function_if">Αν</string>
     <string name="formula_function_length">Μήκος κειμένου</string>
     <string name="formula_function_substring">Τμήμα κειμένου</string>
