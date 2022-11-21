@@ -193,7 +193,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
-    <string name="err_captcha">CAPTCHAの入力が必要です。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
@@ -204,7 +203,6 @@
     <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
     <string name="err_comm">不明な通信エラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください</string>
     <string name="err_missing_auth">ユーザー名またはパスワードが設定されていません</string>
-    <string name="err_wrong">ユーザー名またはパスワードが間違っています</string>
     <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します</string>
     <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません</string>
     <string name="err_unvalidated_account">Geocaching.comでアカウントを有効化してください</string>
