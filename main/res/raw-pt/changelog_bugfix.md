@@ -1,3 +1,3 @@
-## General
-- Fix: Use updated URL for mapquest geocoding
+## Geral
+- Correcção: Utilização do URL actualizado para a geocodificação do mapquest
 
