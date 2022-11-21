@@ -156,7 +156,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
-    <string name="err_captcha">Captcha néideg. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
     <string name="err_server">Onfäeg Geocaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_ec">Onfäeg Extremcaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_su">Onfäeg Geocaching.su ze kontaktéieren. D\'Website kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
@@ -166,7 +165,6 @@
     <string name="err_unknown_address">c:geo konnt dës Adresse net mat enger Positioun a Verbindung setzen</string>
     <string name="err_comm">Onbekannte Verbindungsfeeler. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
     <string name="err_missing_auth">Kee Benotzernumm an/oder Passwuert definéiert</string>
-    <string name="err_wrong">Falschen Benotzernumm an/oder Passwuert</string>
     <string name="err_maintenance">Geocaching.com ass offline wéinst Maintenance-Aarbechten. c:geo funktionéiert offline mat gespäicherte Cachen.</string>
     <string name="err_license">D\'Notzungsbedingungen vu Geocaching.com goufen net ugeholl, soudatt c:geo keng Cache Koordinaten lueden kann.</string>
     <string name="err_unvalidated_account">De Benotzerkont muss fir d\'éischt op Geocaching.com validéiert ginn.</string>
