@@ -712,7 +712,7 @@ public final class MapMarkerUtils {
 
     private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
-        final int r = Math.max(0, Math.min((int) (Math.round(rating * 2) / 2) * 10, 50));
+        final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
         return DrawableCompat.wrap(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null));
     }
 
