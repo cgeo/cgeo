@@ -1,3 +1,3 @@
-## General
-- Fix: Use updated URL for mapquest geocoding
+## Γενικά
+- Διόρθωση: Χρήση ενημερωμένης διεύθυνσης URL για γεωκωδικοποίηση χάρτη
 
