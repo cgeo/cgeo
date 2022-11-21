@@ -156,7 +156,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
-    <string name="err_captcha">Nepieciešama Captcha autentifikācija. Lūdzu dodieties uz mūsu <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pēc palīdzības.</string>
     <string name="err_server">Nevar sazināties ar Geocaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_ec">Nevar sazināties ar Extremcaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_su">Nav iespējams savienoties ar Geocaching.su. Iespējams mājaslapa vai Jūsu interneta savienojums nestrādā.</string>
@@ -166,7 +165,6 @@
     <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
     <string name="err_comm">Nezināma komunikācijas kļūda. Lūdzu dodieties uz mūsu <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pēc palīdzības.</string>
     <string name="err_missing_auth">Nav uzstādīts lietotājvārds un/vai parole</string>
-    <string name="err_wrong">Tu ievadīji nepareizu lietotājvārdu un/vai paroli</string>
     <string name="err_maintenance">Geocaching.com apkopes dēļ nedarbojas. c:geo strādā bezsaistē ar bezsaistē saglabātajiem slēpņiem.</string>
     <string name="err_license">Jūs neesat piekritis Geocaching.com licences līgumam, tāpēc c:geo nevar ielādēt slēpņu koordinātas.</string>
     <string name="err_unvalidated_account">Vispirms tev jāapstiprina savs konts vietnē Geocaching.com.</string>
