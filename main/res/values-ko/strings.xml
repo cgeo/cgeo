@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
-    <string name="err_captcha">캡차가 필요합니다. 지침은 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>을 참조하세요.</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo는  이 주소를 위치로 바꿀 수 없습니다.</string>
     <string name="err_comm">알 수 없는 통신 오류. 지침은 <a href="https://www.cgeo.org/faq#login-failed"> FAQ </a>을 참조하십시오.</string>
     <string name="err_missing_auth">사용자명/비밀번호가 설정 되지 않음</string>
-    <string name="err_wrong">사용자명/비밀번호가 잘못됨</string>
     <string name="err_maintenance">Geocaching.com 이 다운되어 있습니다. 저장된 캐시를 사용해 오프라인으로 작동합니다.</string>
     <string name="err_license">Geocaching.com 라이센스 계약에 동의하지 않아, 캐시 좌표를 불러올 수 없습니다.</string>
     <string name="err_unvalidated_account">먼저 Geocaching.com 웹사이트에서 계정을 인증받아야 합니다.</string>
