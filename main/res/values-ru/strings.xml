@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
-    <string name="err_captcha">Необходима каптча. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
-    <string name="err_wrong">Неправильное имя пользователя и/или пароль</string>
     <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
     <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
     <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
@@ -1554,6 +1552,7 @@
     <string name="formula_function_tan">Тангенс</string>
     <string name="formula_function_abs">Абсолютное Значение</string>
     <string name="formula_function_round">Округление</string>
+    <string name="formula_function_trunc">Отбросить дробь</string>
     <string name="formula_function_if">Если</string>
     <string name="formula_function_length">Длина строки</string>
     <string name="formula_function_substring">Подстрока</string>
@@ -2114,6 +2113,12 @@
         <item quantity="many">%d дней назад</item>
         <item quantity="other">%d дней назад</item>
     </plurals>
+    <plurals name="days_ahead">
+        <item quantity="one">Через %d день</item>
+        <item quantity="few">Через %d дня</item>
+        <item quantity="many">Через %d дней</item>
+        <item quantity="other">Через %d дней</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>
@@ -2346,6 +2351,8 @@
     <string name="mapserver_openandromaps_themes_info">Подробная тема карты, созданная для карт \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Подробные карты, требуется одна из тем карты \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Подробная тема карты, специально для карт \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Подробные карты, требует тему карты \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Подробная тема карты, созданная для карт «Paws»</string>
     <string name="mapserver_hylly_info">Детальные карты Финляндии, требуют одну из тем карты \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Подробная тема карты, созданная для карт «Hylly»</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>
