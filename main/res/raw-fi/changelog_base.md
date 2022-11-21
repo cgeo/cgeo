@@ -1,5 +1,5 @@
 ### Kartta
-- New: OSM map source osm.paws.cz
+- Uusi: OSM-karttalähde osm.paws.cz
 
 ### Kätkön tiedot
 
