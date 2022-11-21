@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
-    <string name="err_captcha">Captcha is vereist. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
     <string name="err_comm">Onbekende communicatiefout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld</string>
-    <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord</string>
     <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
     <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
     <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
