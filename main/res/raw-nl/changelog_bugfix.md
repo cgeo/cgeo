@@ -1,10 +1,10 @@
-## General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
+## Algemeen
+- Oplossing: Gebruik bijgewerkte URL voor mapquest geocoding
+- Oplossing: Voorkom crash onder bepaalde omstandigheden wanneer je probeert een foto te koppelen aan een log
 
 ## Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+- Oplossing: Voorkom dat spoiler afbeeldingen verdubbeld worden in de galerij bij het vernieuwen van een cache
 
-## Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets
+## Variabele rekenmachine
+- Nieuw: TRUNC functie om decimale waarden af te breken
+- Nieuw: Sta het gebruik van rechte haken toe
