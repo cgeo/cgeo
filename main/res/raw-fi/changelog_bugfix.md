@@ -1,6 +1,7 @@
 ## Yleinen
 - Korjaus: Käytä päivitettyä URL-osoitetta mapquestin geokoodaukseen
 - Korjaa: Estä kaatuminen tietyissä olosuhteissa kun yritetään liittää kuva lokiin
+- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
 ## Kätköt
 - Korjaa: Estä spoilerikuvia tuplautumasta galleriassa kun kätköä päivitetään
@@ -8,3 +9,6 @@
 ## Muuttujalaskin
 - Uusi: TRUNC-toiminto desimaaliarvojen lyhentämiseen
 - Uusi: Salli hakasulkujen käyttö
+
+## Map
+- Fix: Show correct DT marker for D4.0 and D4.5
