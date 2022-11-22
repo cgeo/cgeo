@@ -3,8 +3,8 @@
 - Correcção: Previne uma falha sob certas condições ao tentar anexar uma foto ao registo
 
 ## Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+- Correcção: Previne que as imagens spoiler fiquem em duplicado na galeria ao recarregar uma cache
 
-## Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets
+## Calculadora de variáveis
+- Novo: Função TRUNC para truncar valores decimais
+- Novo: Permitir o uso de parêntesis rectos
