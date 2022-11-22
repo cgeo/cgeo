@@ -146,7 +146,6 @@
     <string name="err_login">Prijavni podatki niso shranjeni</string>
     <string name="err_unknown">Neznana napaka. Več informacij poišči na povezavi <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_missing_auth">Uporabniško ime in geslo še nista nastavljena</string>
-    <string name="err_wrong">Napačno uporabniško ime in/ali geslo</string>
     <string name="err_maintenance">Geocaching.com trenutno ni na voljo zaradi vzdrževanja. c:geo lahko deluje brez povezave s shranjenimi zakladi.</string>
     <string name="err_license">Sprejeti morate pogoje uporabe Geocaching.com, da lahko naložite koordinate.</string>
     <string name="err_unvalidated_account">Aktivirate morate svoj uporabniški račun na spletni strani Geocaching.com.</string>

@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
-    <string name="err_captcha">Būtina \"Captcha\". Norėdami gauti patarimų, skaitykite mūsų <a href="https://www.cgeo.org/faq#login-failed">DUK.</a>.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
     <string name="err_comm">Nežinoma komunikacijos klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
     <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis</string>
-    <string name="err_wrong">Neteisingas prisijungimo vardas arba slaptažodis</string>
     <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
     <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
     <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>

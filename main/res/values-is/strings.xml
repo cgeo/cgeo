@@ -121,7 +121,6 @@
     <string name="err_server_gk">Gat ekki náð sambandi við GeoKrety.org. Vefsíðan gæti legið niðri eða internet tengingin þín virkar ekki.</string>
     <string name="err_login">Engar innskráningarupplýsingar vistaðar</string>
     <string name="err_missing_auth">Ekkert notandanafn og/eða lykilorð skráð</string>
-    <string name="err_wrong">Rangt notandanafn og/eða lykilorð</string>
     <string name="err_maintenance">Geocaching.com liggur niðri vegna viðhalds. Vistuð cache virka í c:geo án netsambands.</string>
     <string name="err_license">Þú hefur ekki samþykkt skilmála Geocaching.com svo c:geo getur ekki sýnt staðsetningarhnit cache-ins.</string>
     <string name="err_unvalidated_account">Þú verður fyrst að staðfesta aðgang þinn á Geocaching.com.</string>

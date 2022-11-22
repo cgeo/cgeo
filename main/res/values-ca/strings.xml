@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
-    <string name="err_captcha">Es requereix captcha. Consulteu les nostres <a href="https://www.cgeo.org/faq#login-failed"> FAQ</a> per obtenir més informació.</string>
     <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_lc">No es pot contactar amb labs.geocaching.com. Pot ser que el lloc web estigui inactiu o la connexió a Internet no funcioni.</string>
@@ -208,7 +207,6 @@
     <string name="err_comm">Error de comunicació desconegut. Consulteu el nostre document
 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> com a orientació.</string>
     <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya</string>
-    <string name="err_wrong">Nom d\'usuari i/o contrasenya incorrectes</string>
     <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
     <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
     <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
