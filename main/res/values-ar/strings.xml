@@ -135,7 +135,6 @@
     <string name="err_login">لا توجد معلومات تسجيل الدخول مخزنة</string>
     <string name="err_unknown_address">c:geo كان غير قادر على تحديد العنوان لهذا الموقع الموجود</string>
     <string name="err_missing_auth">لم يتم تعيين اسم المستخدم و/أو كلمة المرور</string>
-    <string name="err_wrong">خطأ في اسم المستخدم و/أو كلمة المرور</string>
     <string name="err_maintenance">Geocaching.com هو تحت الصيانة الآن. c:geo يعمل في وضع عدم الاتصال باستخدام المخبآت المخزنة.</string>
     <string name="err_license">أنت لم توافق على اتفاقية ترخيص Geocaching.com، لهذا c:geo لا يمكنه تحميل إحداثيات المخبآت.</string>
     <string name="err_unvalidated_account">يجب عليك التحقق من صحة حسابك على موقع Geocaching.com أولاً.</string>

@@ -193,7 +193,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
-    <string name="err_captcha">Captcha szükséges. Útmutatásért tekintse meg a <a href="https://www.cgeo.org/faq#login-failed">GYIK-et</a>.</string>
     <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_lc">Nem sikerült kapcsolatba lépni a labs.geocaching.com oldallal. A webhely leállt vagy az internetkapcsolat nem működik.</string>
@@ -204,7 +203,6 @@
     <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
     <string name="err_comm">Ismeretlen kommunikációs hiba. Kérjük, olvasd el útmutatásként: <a href="https://www.cgeo.org/faq#login-failed">GYIK</a></string>
     <string name="err_missing_auth">Nincs megadva felhasználónév és/vagy jelszó</string>
-    <string name="err_wrong">Hibás felhasználónév és/vagy jelszó</string>
     <string name="err_maintenance">A geocaching.com karbantartás miatt elérhetetlen. A c:geo offline módban fut elmentett ládákkal.</string>
     <string name="err_license">Nem fogadtad el a geocaching.com licencmegállapodását, így a c:geo nem tudja letölteni a ládák koordinátáit.</string>
     <string name="err_unvalidated_account">Előbb aktiválnod kell a fiókod a geocaching.com weboldalon.</string>

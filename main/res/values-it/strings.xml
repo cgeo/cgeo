@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
-    <string name="err_captcha">Captcha richiesto. Si prega di fare riferimento alla nostra <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per una guida.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo non è in grado di mappare questo indirizzo su una posizione gps esistente</string>
     <string name="err_comm">Errore di comunicazione sconosciuto. Fare riferimento alle nostre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per la guida.</string>
     <string name="err_missing_auth">Nome utente e/o password non inserito</string>
-    <string name="err_wrong">Nome utente e/o password sbagliato</string>
     <string name="err_maintenance">Geocaching.com è in manutenzione, riprovare più tardi. Attivata la modalità offline.</string>
     <string name="err_license">L\'utente non ha approvato le condizioni del contratto Geocaching.com. Così c:geo non può caricare le coordinate dei cache.</string>
     <string name="err_unvalidated_account">Come prima cosa devi convalidare il tuo account su Geocaching.com.</string>

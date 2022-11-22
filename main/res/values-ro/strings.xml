@@ -177,7 +177,6 @@
     <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
     <string name="err_comm">Eroare de comunicare necunoscută. Vă rugăm să consultați secțiunea de <a href="https://www.cgeo.org/faq#login-failed">Întrebări Frecvente</a> pentru îndrumare.</string>
     <string name="err_missing_auth">Lipsă nume utilizator şi/sau parolă</string>
-    <string name="err_wrong">Nume utilizator sau parolă greşită</string>
     <string name="err_maintenance">Geocaching.com este oprit temporar pentru lucrări de întreţinere. c:geo funcţionează deconectat cu cutiile stocate local.</string>
     <string name="err_license">Nu ai acceptat termenele si condiţiile de utilizare ale Geocaching.com, în consecinţă c:geo nu poate încărca coordonatele cutiei.</string>
     <string name="err_unvalidated_account">Mai întâi trebuie să îţi validezi contul de pe Geocaching.com.</string>

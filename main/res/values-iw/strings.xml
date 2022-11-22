@@ -143,7 +143,6 @@
     <string name="err_login">אין מידע התחברות שמור</string>
     <string name="err_unknown_address">לc:geo לא היתה אפשרות למפות כתובת זו</string>
     <string name="err_missing_auth">לא הוגדרו שם המשתמש והסיסמה</string>
-    <string name="err_wrong">שם משתמש ו/או סיסמה שגויים</string>
     <string name="err_maintenance">Geocaching.com מושבת לצורך תחזוקה. c:geo עובד במצב לא מקוון עם מטמונים שנשמרו.</string>
     <string name="err_license">לא הסכמת לתנאי הרישיון של Geocaching.com, ולכן לc:geo אין אפשרות לטעון את נקודות ציון המטמון.</string>
     <string name="err_unvalidated_account">ראשית עליך לאמת את החשבון שלך באתר האינטרנט של Geocaching.com.</string>
