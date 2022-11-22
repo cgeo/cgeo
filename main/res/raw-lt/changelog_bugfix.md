@@ -1,10 +1,10 @@
-## General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
+## Bendras
+- Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui
+- Pataisymas: Užkirstas kelias programėlės užstrigimui tam tikromis sąlygomis bandant pridėti nuotrauką prie žurnalo
 
-## Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+## Slėptuvės
+- Pataisymas: Neleidžiama spoilerių vaizdams dubliuotis galerijoje atnaujinant slėptuvę
 
-## Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets
+## Kintamųjų skaičiuoklė
+- Naujiena: Funkcija TRUNC sutrumpina skaičių iki sveikojo skaičiaus, pašalindama trupmeninę skaičiaus dalį
+- Naujiena: Leidžiama naudoti laužtinius skliaustus
