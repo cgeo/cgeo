@@ -7,6 +7,6 @@
     <string name="ask_again">Paklausti dar kartą</string>
     <string name="close">Uždaryti</string>
     <string name="goto_app_details">Atidaryti programos informaciją</string>
-    <string name="contacts_permission_request_denied">Turite suteikti \"c:geo - kontaktai\" teisę skaityti jūsų adresų knygą.</string>
+    <string name="contacts_permission_request_denied">Turite suteikti \"c:geo - kontaktai\" skaitymo leidimą savo adresų knygoms, kad ten galėtumėte ieškoti ieškotojo vardą.</string>
     <string name="contacts_permission_request_explanation">\"c:geo - kontaktai\" gali surasti naudotoją jūsų adresų knygoje ieškant pagal geocaching naudotojo vardą. Norint tai padaryti, turite suteikti programėlei teisę skaityti jūsų duomenis.</string>
 </resources>
