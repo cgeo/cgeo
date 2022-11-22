@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
-    <string name="err_captcha">Wymagana Captcha. Aby uzyskać wskazówki, zapoznaj się z naszym <a href="https://www.cgeo.org/faq#login-failed"> FAQ </a>.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_lc">Nie udało się połączyć z labs.geocaching.com. Strona może być wyłączona, lub twoje połączenie internetowe nie działa.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
     <string name="err_comm">Nieznany błąd komunikacji. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła</string>
-    <string name="err_wrong">Błędna nazwa użytkownika i/lub hasło</string>
     <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrytkami.</string>
     <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrytek.</string>
     <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
@@ -1468,8 +1466,6 @@
     <string name="waypoint">Punkt nawigacji</string>
     <string name="waypoint_coordinates">Współrzędne</string>
     <string name="waypoint_cache_coordinates">Współrzędne skrytki</string>
-    <string name="waypoint_calculated_coordinates">Obliczone współrzędne</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Oblicz współrzędne</string>
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
