@@ -111,7 +111,7 @@
                 android:textSize="@dimen/textSize_listsSecondary"
                 android:textColor="@color/colorText_listsPrimary"
                 android:visibility="gone"
-                android:text="@string/waypoint_calculated_coordinates"
+                android:text="(x)"
                 android:textStyle="italic"
                 tools:visiblity="visible" />
 

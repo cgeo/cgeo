@@ -1,10 +1,6 @@
-package cgeo.geocaching.calculator;
+package cgeo.geocaching.models;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.CalculatedCoordinate;
-import cgeo.geocaching.models.CalculatedCoordinateType;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -26,7 +22,7 @@ import org.json.JSONObject;
 /**
  * An instance of this class represents the state of an OLD calculated waypoint
  */
-public class CalculatedCoordinateMigrator {
+public class LegacyCalculatedCoordinateMigrator {
 
 //    Kept here for reference: legacy code used to read legacy calculated coordinate json data
 //    format = Settings.CoordInputFormatEnum.fromInt(json.optInt("format", Settings.CoordInputFormatEnum.DEFAULT_INT_VALUE));
@@ -279,11 +275,11 @@ public class CalculatedCoordinateMigrator {
         }
     }
 
-    public CalculatedCoordinateMigrator(final Geocache cache, final Waypoint wp) {
+    public LegacyCalculatedCoordinateMigrator(final Geocache cache, final Waypoint wp) {
         this(cache.getVariables().toMap(), WaypointMigrationData.createFromJson(wp.getId(), wp.getName(), wp.getCalcStateConfig()));
     }
 
-    public CalculatedCoordinateMigrator(final Map<String, String> initialVars, final WaypointMigrationData wmd) {
+    public LegacyCalculatedCoordinateMigrator(final Map<String, String> initialVars, final WaypointMigrationData wmd) {
         this.initialVars = initialVars;
         waypointMigrationData = wmd;
         final Map<String, String> cacheVars = new HashMap<>();
@@ -348,7 +344,7 @@ public class CalculatedCoordinateMigrator {
             actionAfterMigration.run();
             return;
         }
-        final CalculatedCoordinateMigrator mig = new CalculatedCoordinateMigrator(cache, w);
+        final LegacyCalculatedCoordinateMigrator mig = new LegacyCalculatedCoordinateMigrator(cache, w);
         SimpleDialog.ofContext(ctx).setTitle(TextParam.id(R.string.calccoord_migrate_title))
                 .setMessage(TextParam.text(mig.getMigrationInformationMarkup()).setMarkdown(true))
                 .setPositiveButton(TextParam.id(R.string.calccoord_migrate_migrate))

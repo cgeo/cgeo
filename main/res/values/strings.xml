@@ -1607,7 +1607,6 @@
         <item>@string/waypoint_duplicate</item>
     </array>
     <string name="waypoint_cache_coordinates">Cache coordinates</string>
-    <string name="waypoint_calculated_coordinates">Calculated coordinates</string> <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calculate coordinate</string>
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>

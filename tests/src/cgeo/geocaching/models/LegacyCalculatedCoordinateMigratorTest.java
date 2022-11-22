@@ -1,6 +1,4 @@
-package cgeo.geocaching.calculator;
-
-import cgeo.geocaching.models.CalculatedCoordinateType;
+package cgeo.geocaching.models;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +7,7 @@ import java.util.Map;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class CalculatedCoordinateMigratorTest {
+public class LegacyCalculatedCoordinateMigratorTest {
 
 //    private static final String JSON_SAMPLE_1 = "{\"format\":2,\"plainLat\":\"N 53° 33.065'\",\"plainLon\":\"E 009° 59.621'\",\"latHemisphere\":78,\"lonHemisphere\":69,\"buttons\":[{\"type\":0,\"inputVal\":53,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":1,\"inputVal\":51,\"autoChar\":65,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":54,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":53,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":57,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":53,\"autoChar\":66,\"customChar\":0},{\"type\":1,\"inputVal\":57,\"autoChar\":66,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":67,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":67,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":67,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":67,\"customChar\":0},{\"type\":0,\"inputVal\":54,\"autoChar\":67,\"customChar\":0},{\"type\":2,\"inputVal\":50,\"autoChar\":67,\"customChar\":0},{\"type\":0,\"inputVal\":49,\"autoChar\":67,\"customChar\":0}],\"equations\":[{\"name\":65,\"expression\":\"a+b\"},{\"name\":66,\"expression\":\"5\"}],\"freeVariables\":[{\"name\":97,\"expression\":\"3\"},{\"name\":98,\"expression\":\"4\"}]}";
 //    private static final String JSON_SAMPLE_2 = "{\"format\":0,\"plainLat\":\"N 53° 33.06A'\",\"plainLon\":\"E 009° 59.B21'\",\"latHemisphere\":78,\"lonHemisphere\":69,\"buttons\":[{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0}],\"equations\":[{\"name\":65,\"expression\":\"a+b\"},{\"name\":66,\"expression\":\"5\"}],\"freeVariables\":[{\"name\":97,\"expression\":\"3\"},{\"name\":98,\"expression\":\"4\"}]}";
@@ -30,7 +28,7 @@ public class CalculatedCoordinateMigratorTest {
     @Test
     public void migrationExamplesBase() {
         for (String[] testData : EXPECTED_DATA) {
-            final CalculatedCoordinateMigrator.WaypointMigrationData ccm = CalculatedCoordinateMigrator.WaypointMigrationData.createFromJson(-1, "", testData[0]);
+            final LegacyCalculatedCoordinateMigrator.WaypointMigrationData ccm = LegacyCalculatedCoordinateMigrator.WaypointMigrationData.createFromJson(-1, "", testData[0]);
             assertThat(ccm.getType().toString()).isEqualTo(testData[1]);
             assertThat(ccm.getLatPattern()).isEqualTo(testData[2]);
             assertThat(ccm.getLonPattern()).isEqualTo(testData[3]);
@@ -43,10 +41,10 @@ public class CalculatedCoordinateMigratorTest {
 
         final Map<String, String> varMap = createMap("A", "B+2", "C", "A-2");
 
-        final CalculatedCoordinateMigrator.WaypointMigrationData wmd =
-                CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE, "ABC", "DEF", varMap);
+        final LegacyCalculatedCoordinateMigrator.WaypointMigrationData wmd =
+                LegacyCalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE, "ABC", "DEF", varMap);
 
-        final CalculatedCoordinateMigrator ccm = new CalculatedCoordinateMigrator(initialVars, wmd);
+        final LegacyCalculatedCoordinateMigrator ccm = new LegacyCalculatedCoordinateMigrator(initialVars, wmd);
         assertThat(ccm.getMigrationData().getLatPattern()).isEqualTo("($A2)BC");
         assertThat(ccm.getMigrationData().getLonPattern()).isEqualTo("DEF");
         assertThat(ccm.getNewCacheVariables().get("A2")).isEqualTo("B+2");
@@ -57,11 +55,11 @@ public class CalculatedCoordinateMigratorTest {
     public void migrateWithSquareParenthesis() {
         final Map<String, String> varMap = createMap("A", "1", "B", "[2+3]*5", "C", "3", "D", "3", "E", "2", "F", "1");
 
-        final CalculatedCoordinateMigrator.WaypointMigrationData wmd =
-                CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE,
+        final LegacyCalculatedCoordinateMigrator.WaypointMigrationData wmd =
+                LegacyCalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE,
                         "N48° 45.[A+B](C+D)[E+F]", "E 009° 05.000", varMap);
 
-        final CalculatedCoordinateMigrator ccm = new CalculatedCoordinateMigrator(Collections.emptyMap(), wmd);
+        final LegacyCalculatedCoordinateMigrator ccm = new LegacyCalculatedCoordinateMigrator(Collections.emptyMap(), wmd);
         assertThat(ccm.getMigrationData().getLatPattern()).isEqualTo("N48° 45.(A+B)(C+D)(E+F)");
         assertThat(ccm.getMigrationData().getLonPattern()).isEqualTo("E 009° 05.000");
         assertThat(ccm.getNewCacheVariables().size()).isEqualTo(6);
