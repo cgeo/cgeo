@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
+    <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
@@ -206,6 +207,7 @@
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
     <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
+    <string name="err_wrong">Nome de utilizador e/ou palavra-passe incorrecta(s).</string>
     <string name="err_maintenance">O sítio \'geocaching.com\' está indisponível para manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em \'Armazenadas\'.</string>
     <string name="err_license">Não fez a aceitação do contrato de utilização de Geocaching.com. Por essa razão, o c:geo não consegue carregar as coordenadas da geocache.</string>
     <string name="err_unvalidated_account">Deverá primeiro validar a sua conta no sítio web \'geocaching.com\'.</string>
@@ -1435,8 +1437,6 @@
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
-    <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
@@ -2286,6 +2286,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema de mapa detalhado, feito para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema de mapa detalhado, feito para mapas \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mapas detalhados, requerem o tema de mapa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema de mapa detalhado, feito para mapas \"Paws\"</string>
     <string name="mapserver_hylly_info">Mapas detalhados para a Finlândia, requer um dos temas de mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
