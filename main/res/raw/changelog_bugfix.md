@@ -8,7 +8,7 @@
 
 ## Variable calculator
 - New: TRUNC function to truncate decimal values 
-- New: Allow usage of square brackets
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
 ## Map
 - Fix: Show correct DT marker for D4.0 and D4.5
