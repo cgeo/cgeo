@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Ogólne
 - Poprawka: Zaktualizowanie adresu URL do geokodowania mapquest
 - Fix: Prevent crash under certain conditions when trying to attach photo to log
