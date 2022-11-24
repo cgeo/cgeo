@@ -184,9 +184,13 @@ public class ContinuousRangeSlider extends LinearLayout {
     }
 
     public void setRange(final float minSelected, final float maxSelected) {
-        final float minValue = Math.max(minSelected, min);
-        final float maxValue = Math.min(maxSelected, max);
-        binding.sliderInternal.setValues(minValue, maxValue);
+        final float minValue = Math.max(Math.min(max, minSelected), min);
+        final float maxValue = Math.min(Math.max(min, maxSelected), max);
+        if (minValue > maxValue) {
+            binding.sliderInternal.setValues(maxValue, minValue);
+        } else {
+            binding.sliderInternal.setValues(minValue, maxValue);
+        }
     }
 
     public ImmutablePair<Float, Float> getRange() {
