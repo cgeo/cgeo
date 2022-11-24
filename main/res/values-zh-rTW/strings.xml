@@ -1139,7 +1139,6 @@
     <string name="waypoint">航點</string>
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">藏寶座標</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">自定</string>
     <string name="waypoint_my_coordinates">我的座標</string>
     <string name="waypoint_distance">距離：</string>
