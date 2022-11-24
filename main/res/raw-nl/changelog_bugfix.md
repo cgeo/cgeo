@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Algemeen
 - Oplossing: Gebruik bijgewerkte URL voor mapquest geocoding
 - Oplossing: Voorkom crash onder bepaalde omstandigheden wanneer je probeert een foto te koppelen aan een log
