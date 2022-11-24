@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Geral
 - Correcção: Utilização do URL actualizado para a geocodificação do mapquest
 - Correcção: Previne uma falha sob certas condições ao tentar anexar uma foto ao registo
