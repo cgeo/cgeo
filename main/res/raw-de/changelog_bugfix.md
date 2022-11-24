@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Allgemein
 - Korrektur: Aktualisierte URL für Mapquest Geokodierung
 - Korrektur: Absturz behoben, wenn ein Foto an ein Log angehängt wird
