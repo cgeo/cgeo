@@ -686,7 +686,6 @@
     <string name="waypoint">Ang Waypoint</string>
     <string name="waypoint_coordinates">Mga koordinado</string>
     <string name="waypoint_cache_coordinates">Mga cache ng koordinado</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Ang pasadya</string>
     <string name="waypoint_my_coordinates">Ang aking mga koordinado</string>
     <string name="waypoint_bearing">Bearing sa °</string>
