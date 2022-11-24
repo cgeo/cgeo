@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Bendras
 - Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui
 - Pataisymas: Užkirstas kelias programėlės užstrigimui tam tikromis sąlygomis bandant pridėti nuotrauką prie žurnalo
