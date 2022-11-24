@@ -422,7 +422,6 @@
     <!-- waypoint -->
     <string name="waypoint_coordinates">נקודות ציון</string>
     <string name="waypoint_cache_coordinates">נקודות ציון של המטמון</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_my_coordinates">נקוודת הציון שלי</string>
     <string name="waypoint_copy_coordinates">העתק נקודות ציון</string>
     <string name="waypoint_added">נקודת ציון נוספה</string>
