@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
+    <string name="err_captcha">Paslaugai reikalinga Captcha. Atidarykite geocaching.com svetainę naudodami savo naršyklę ir išspręskite Captcha, rodomą prisijungiant. Tada bandykite dar kartą prisijungti naudodami c:geo.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -205,7 +206,8 @@
     <string name="err_unknown">Nežinoma klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
     <string name="err_unknown_address">c:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
     <string name="err_comm">Nežinoma komunikacijos klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
-    <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis</string>
+    <string name="err_missing_auth">Nenustatytas vartotojo vardas ir/arba slaptažodis</string>
+    <string name="err_wrong">Neteisingas vartotojo vardas ir/arba slaptažodis.</string>
     <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
     <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
     <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>
@@ -1552,6 +1554,7 @@
     <string name="formula_function_tan">Tangentas</string>
     <string name="formula_function_abs">Absoliučioji vertė</string>
     <string name="formula_function_round">Apvalinti</string>
+    <string name="formula_function_trunc">Trunc (sutrumpinti)</string>
     <string name="formula_function_if">If (Jeigu)</string>
     <string name="formula_function_length">Eilutės ilgis</string>
     <string name="formula_function_substring">Poeilutė</string>
@@ -2293,7 +2296,7 @@
     <string name="localfile_title">Atidaryti vietinį failą</string>
     <string name="localfile_cannot_handle">Nepavyko nuskaityti failo arba c:geo nepalaiko šio failo tipo.</string>
     <!-- ReceiveDownloadActivity -->
-    <string name="receivedownload_intenttitle">Atsidiųstas failas</string>
+    <string name="receivedownload_intenttitle">Atsisiųstas failas</string>
     <string name="receivedownload_success">Failas sėkmingai išsaugotas kaip \'%s\'</string>
     <string name="receivedownload_error">Klaida gaunant failą</string>
     <string name="receivedownload_error_io_exception">Nepavyko įrašyti failo, ar turite rašymo teises kataloge (\"%s\")?</string>

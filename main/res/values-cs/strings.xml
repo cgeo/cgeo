@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
+    <string name="err_captcha">Služba vyžaduje Captchu. Otevřete prosím webovou stránku geocaching.com v prohlížeči a vyřešte Captchu, která se zobrazí při přihlašování. Poté se zkuste znovu přihlásit pomocí c:geo.</string>
     <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_lc">Nelze se připojit k labs.geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
@@ -206,6 +207,7 @@
     <string name="err_unknown_address">c:geo nedokázal tuto adresu najít na mapě</string>
     <string name="err_comm">Neznáma chyba komunikace. Pomoc najdete v našich <a href="https://www.cgeo.org/faq#login-failed">Často kladených otázkách</a>.</string>
     <string name="err_missing_auth">Nenastaveno žádné přihlašovací jméno/heslo</string>
+    <string name="err_wrong">Nesprávné uživatelské jméno a/nebo heslo.</string>
     <string name="err_maintenance">Server Geocaching.com je vypnut kvůli údržbě. c:geo bude pracovat offline s uloženými keškami.</string>
     <string name="err_license">Neodsouhlasil/a jsi licenční smlouvu Geocaching.com, takže c:geo nemůže načíst souřadnice kešky.</string>
     <string name="err_unvalidated_account">Nejdříve je třeba ověřit tvůj účet na Geocaching.com.</string>
