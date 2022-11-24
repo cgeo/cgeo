@@ -898,7 +898,6 @@
     <string name="waypoint">Шляхова Точка</string>
     <string name="waypoint_coordinates">Координати</string>
     <string name="waypoint_cache_coordinates">координати кешу</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">звичай</string>
     <string name="waypoint_my_coordinates">Мої координати</string>
     <string name="waypoint_bearing">несучи в</string>
