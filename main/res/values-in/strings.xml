@@ -681,7 +681,6 @@
     <string name="waypoint">Titik jalan</string>
     <string name="waypoint_coordinates">Koordinat</string>
     <string name="waypoint_cache_coordinates">Koordinat cache</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Tampilan</string>
     <string name="waypoint_my_coordinates">Koordinat saya</string>
     <string name="waypoint_bearing">Bearing dalam °</string>
