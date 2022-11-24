@@ -1436,8 +1436,6 @@
     <string name="waypoint">Fita</string>
     <string name="waypoint_coordinates">Coordenades</string>
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
-    <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calcula la coordenada</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
