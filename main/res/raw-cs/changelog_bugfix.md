@@ -8,7 +8,7 @@
 
 ## Kalkulačka proměnných
 - Novinka: Funkce TRUNC pro zkrácení desetinných hodnot
-- Novinka: Povoleno používání hranatých závorek
+- Novinka: Povoleno používání hranatých závorek pro výpočty. Pro rozsahy proměnných použijte namísto toho např. \[:1-5\].
 
 ## Mapa
 - Oprava: Zobrazení správného označení DT pro D4.0 a D4.5

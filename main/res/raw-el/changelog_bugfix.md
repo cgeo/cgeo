@@ -8,7 +8,7 @@
 
 ## Υπολογιστής μεταβλητών
 - Νέο: συνάρτηση TRUNC για την περικοπή δεκαδικών τιμών
-- Νέο: Να επιτρέπεται η χρήση αγκυλών
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
 ## Χάρτης
 - Διόρθωση: Εμφάνιση σωστού δείκτη DT για D4.0 και D4.5
