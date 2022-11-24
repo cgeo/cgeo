@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Obecné
 - Oprava: Použití aktualizované adresy URL pro geokódování mapquestu
 - Oprava: Za určitých podmínek zabránění pádu aplikace při pokusu o připojení fotografie k logu

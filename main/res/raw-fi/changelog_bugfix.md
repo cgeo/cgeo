@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Yleinen
 - Korjaus: Käytä päivitettyä URL-osoitetta mapquestin geokoodaukseen
 - Korjaa: Estä kaatuminen tietyissä olosuhteissa kun yritetään liittää kuva lokiin
