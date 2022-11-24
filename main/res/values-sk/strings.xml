@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
-    <string name="err_captcha">Potrebné overenie Captcha. Návod nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Najčastejších otázkach</a>.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_lc">Zlyhalo pripojenie k serveru labs.geocaching.com. Webová stránka má výpadok, prípadne nefunguje internetové pripojenie.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
     <string name="err_comm">Neznáma chyba komunikácie. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
     <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
-    <string name="err_wrong">Nesprávne používateľské meno alebo heslo</string>
     <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
     <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
     <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -1469,8 +1467,6 @@
     <string name="waypoint">Bod trasy</string>
     <string name="waypoint_coordinates">Súradnice</string>
     <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
-    <string name="waypoint_calculated_coordinates">Vypočítané súradnice</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Vypočítať súradnice</string>
     <string name="waypoint_custom">vlastný</string>
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
