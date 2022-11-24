@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Yleinen
 - Korjaus: Käytä päivitettyä URL-osoitetta mapquestin geokoodaukseen
 - Korjaa: Estä kaatuminen tietyissä olosuhteissa kun yritetään liittää kuva lokiin
@@ -8,7 +10,7 @@
 
 ## Muuttujalaskin
 - Uusi: TRUNC-toiminto desimaaliarvojen lyhentämiseen
-- Uusi: Salli hakasulkujen käyttö
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
 ## Map
 - Fix: Show correct DT marker for D4.0 and D4.5

@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Allgemein
 - Korrektur: Aktualisierte URL für Mapquest Geokodierung
 - Korrektur: Absturz behoben, wenn ein Foto an ein Log angehängt wird
@@ -8,7 +10,7 @@
 
 ## Variablenrechner
 - Neu: TRUNC-Funktion (Abschneiden) um Dezimalwerte zu kürzen
-- Neu: Verwendung von eckigen Klammern erlauben
+- Neu: Erlaube die Verwendung von eckigen Klammern für Berechnungen. Für Variablenbereiche verwende bitte z.B. \[:1-5\].
 
 ## Karte
 - Korrektur: Zeige richtige DT-Markierung für D4.0 und D4.5 an

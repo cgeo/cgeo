@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## General
 - Fix: Use updated URL for mapquest geocoding
 - Fix: Prevent crash under certain conditions when trying to attach photo to log

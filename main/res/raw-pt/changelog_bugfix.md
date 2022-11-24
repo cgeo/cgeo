@@ -1,3 +1,5 @@
+## 2022.11.25
+
 ## Geral
 - Correcção: Utilização do URL actualizado para a geocodificação do mapquest
 - Correcção: Previne uma falha sob certas condições ao tentar anexar uma foto ao registo
@@ -8,7 +10,7 @@
 
 ## Calculadora de variáveis
 - Novo: Função TRUNC para truncar valores decimais
-- Novo: Permitir o uso de parêntesis rectos
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
 ## Map
 - Fix: Show correct DT marker for D4.0 and D4.5
