@@ -1467,8 +1467,6 @@
     <string name="waypoint">Путевая точка</string>
     <string name="waypoint_coordinates">Координаты</string>
     <string name="waypoint_cache_coordinates">Координаты тайника</string>
-    <string name="waypoint_calculated_coordinates">Вычисленные координаты</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Вычислить координаты</string>
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
@@ -2351,6 +2349,8 @@
     <string name="mapserver_openandromaps_themes_info">Подробная тема карты, созданная для карт \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Подробные карты, требуется одна из тем карты \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Подробная тема карты, специально для карт \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Подробные карты, требует тему карты \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Подробная тема карты, созданная для карт «Paws»</string>
     <string name="mapserver_hylly_info">Детальные карты Финляндии, требуют одну из тем карты \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Подробная тема карты, созданная для карт «Hylly»</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>
