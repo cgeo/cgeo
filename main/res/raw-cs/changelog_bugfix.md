@@ -1,4 +1,4 @@
-## 2022.11.25
+## 25.11.2022
 
 ## Obecné
 - Oprava: Použití aktualizované adresy URL pro geokódování mapquestu
