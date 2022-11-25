@@ -726,7 +726,7 @@ final class OkapiClient {
         final String currentNote = StringUtils.defaultString(cache.getPersonalNote());
 
         final Parameters params = new Parameters("cache_code", cache.getGeocode(), "new_value", currentNote, "old_value", prevNote);
-        final ObjectNode data = getRequest(connector, OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE, params).data;
+        final ObjectNode data = postRequest(connector, OkapiService.SERVICE_UPLOAD_PERSONAL_NOTE, params).data;
 
         if (data == null) {
             return false;
