@@ -63,14 +63,9 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     public <V extends Number & Comparable<V>> void setMinMaxRange(@NonNull final V leftValue, @NonNull final V rightValue,
                                                                   @NonNull final V minValue, @NonNull final V maxValue,
                                                                   @NonNull final Func1<V, T> valueConverter) {
-        boolean foundMinUnlimited = leftValue.compareTo(minValue) <= 0;
-        boolean foundMaxUnlimited = rightValue.compareTo(maxValue) >= 0;
-        if ((leftValue.equals(rightValue))
-                || (leftValue.compareTo(maxValue) >= 0)
-                || (rightValue.compareTo(minValue) <= 0)) {
-            foundMinUnlimited = false;
-            foundMaxUnlimited = false;
-        }
+        final boolean foundMinUnlimited = leftValue.compareTo(minValue) < 0; // leftValue < minValue
+        final boolean foundMaxUnlimited = rightValue.compareTo(maxValue) > 0; // rightValue > maxValue
+
         setMinMaxRange(foundMinUnlimited ? null : valueConverter.call(leftValue),
                 foundMaxUnlimited ? null : valueConverter.call(rightValue));
     }

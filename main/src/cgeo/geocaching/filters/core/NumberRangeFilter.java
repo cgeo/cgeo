@@ -99,12 +99,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
                 max = v;
             }
         }
-
-        if (isEqualValue(min, max)) {
-            foundMinUnlimited = false;
-            foundMaxUnlimited = false;
-        }
-
         setMinMaxRange(foundMinUnlimited ? null : min, foundMaxUnlimited ? null : max);
     }
 
