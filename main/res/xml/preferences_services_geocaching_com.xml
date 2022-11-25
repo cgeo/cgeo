@@ -27,19 +27,23 @@
             app:summary="@string/auth_unconnected"
             app:iconSpaceReserved="false" />
 
-        <PreferenceScreen
-            android:dependency="@string/pref_connectorGCActive"
-            android:key="@string/preference_screen_basicmembers"
-            android:title="@string/settings_title_basicmembers"
-            app:iconSpaceReserved="false">
-            <CheckBoxPreference
-                android:defaultValue="true"
-                android:key="@string/pref_loaddirectionimg"
-                android:summary="@string/init_summary_loaddirectionimg"
-                android:title="@string/init_loaddirectionimg"
-                app:iconSpaceReserved="false" />
-        </PreferenceScreen>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:dependency="@string/pref_connectorGCActive"
+        android:key="@string/preference_screen_basicmembers"
+        android:title="@string/settings_title_basicmembers"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_loaddirectionimg"
+            android:summary="@string/init_summary_loaddirectionimg"
+            android:title="@string/init_loaddirectionimg"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
 
     <PreferenceCategory
         android:title="@string/settings_information"
