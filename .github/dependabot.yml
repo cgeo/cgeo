@@ -11,8 +11,8 @@ updates:
       # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
       - dependency-name: "commons-io:commons-io"
       # Ignore some updates to the apache 'commons-io' package
-      # commons-compress 1.21 uses java.nio.file.Path - which is first contained in Android API26
-      - dependency-name: "commons-compress:commons-compress"
+      # commons-compress 1.21 uses (more) java.nio.file.Path - which is first contained in Android API26
+      - dependency-name: "org.apache.commons:commons-compress"
       # Ignore some updates to the apache 'commons-lang3' package
       # commons-lang3 3.12.0 uses StringJoiner which is first contained in Android API24
       - dependency-name: "org.apache.commons:commons-lang3"
