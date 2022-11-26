@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
@@ -46,8 +47,10 @@ import androidx.annotation.StringRes;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -416,6 +419,8 @@ public class DownloaderUtils {
 
     public static void startReceive(final Context context, final DownloadManager downloadManager, final long id, final PendingDownload pendingDownload) {
         PendingDownload.remove(id);
+
+        /*
         final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
         final Uri uri = downloadManager.getUriForDownloadedFile(id);
         copyFileIntent.setData(uri);
@@ -424,6 +429,19 @@ public class DownloaderUtils {
         copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, pendingDownload.getDate());
         copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, pendingDownload.getOfflineMapTypeId());
         ContextCompat.startForegroundService(context, copyFileIntent);
+        */
+
+        final Data data = new Data.Builder()
+                .putString(Intents.EXTRA_ADDRESS, downloadManager.getUriForDownloadedFile(id).toString())
+                .putString(Intents.EXTRA_FILENAME, pendingDownload.getFilename())
+                .putString(DownloaderUtils.RESULT_CHOSEN_URL, pendingDownload.getRemoteUrl())
+                .putLong(DownloaderUtils.RESULT_DATE, pendingDownload.getDate())
+                .putInt(DownloaderUtils.RESULT_TYPEID, pendingDownload.getOfflineMapTypeId())
+                .build();
+        final OneTimeWorkRequest copyJob = new OneTimeWorkRequest.Builder(ReceiveDownloadWorker.class)
+                .setInputData(data)
+                .build();
+        WorkManager.getInstance(CgeoApplication.getInstance()).enqueue(copyJob);
     }
 
     public static void dumpDownloadmanagerInfos(@NonNull final Activity activity) {
