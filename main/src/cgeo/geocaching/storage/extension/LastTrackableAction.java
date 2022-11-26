@@ -34,10 +34,8 @@ public class LastTrackableAction extends DataStore.DBExtension {
             if (lastAction == LogTypeTrackable.VISITED || lastAction == LogTypeTrackable.NOTE || lastAction == LogTypeTrackable.DISCOVERED_IT) {
                 return lastAction;
             }
-            if (lastAction == LogTypeTrackable.RETRIEVED_IT || lastAction == LogTypeTrackable.GRABBED_IT) {
-                return LogTypeTrackable.VISITED;
-            }
             // default DO_NOTHING for
+            // RETRIEVED_IT, GRABBED_IT (autoVisit is handled above)
             // DO_NOTHING, DROPPED_OFF, ARCHIVED, MOVE_COLLECTION, MOVE_INVENTORY
         } else {
             Log.d("get tb: key=" + key + " (not found)");
