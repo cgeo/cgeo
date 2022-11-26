@@ -301,7 +301,12 @@ dependencies {
 
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
-    implementation 'org.apache.commons:commons-compress:1.22'
+
+    // commons.compress 1.21+ relies on java.nio which is only supported on API26+
+    // See https://github.com/cgeo/cgeo/issues/13730 / 13731
+    //noinspection GradleDependency
+    implementation 'org.apache.commons:commons-compress:1.20'
+
     // commons-lang3 3.12.0 uses StringJoiner which is first contained in Android API24
     // See https://github.com/cgeo/cgeo/issues/12577
     //noinspection GradleDependency
