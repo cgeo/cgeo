@@ -60,7 +60,7 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
 
     void initBasicMemberPreferences() {
         findPreference(getString((R.string.preference_screen_basicmembers)))
-                .setEnabled(!Settings.isGCPremiumMember());
+                .setVisible(!Settings.isGCPremiumMember());
         findPreference(getString((R.string.pref_loaddirectionimg)))
                 .setEnabled(!Settings.isGCPremiumMember());
     }
