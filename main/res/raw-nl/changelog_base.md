@@ -9,4 +9,5 @@
 ### Algemeen
 - API niveau wijzigen (compileSDK 32)
 - Enkele afhankelijke bibliotheken bijwerken
-- Gebruik de Android ingebouwde splash screen functie bij opstarten 
+- Gebruik de Android ingebouwde splash screen functie bij opstarten
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
