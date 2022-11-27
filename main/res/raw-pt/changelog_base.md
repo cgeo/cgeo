@@ -9,4 +9,5 @@
 ### Geral
 - API level change (compileSDK 32)
 - Update some dependant libraries
-- Use Android built-in splash screen feature on startup 
+- Use Android built-in splash screen feature on startup
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
