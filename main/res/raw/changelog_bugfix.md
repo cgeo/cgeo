@@ -1,3 +1,8 @@
+
+### General
+- Fix: New TB set to visit mode automatically 
+- Fix: gc.com basic member settings not displayed
+
 ## 2022.11.25
 
 ### General
