@@ -9,4 +9,5 @@
 ### Allgemein
 - Änderung des API-Levels (CompileSDK 32)
 - Einige abhängige Bibliotheken aktualisiert
-- Den eingebauten Android SplashScreen benutzen 
+- Den eingebauten Android SplashScreen benutzen
+- Änderung: Verwende einen anderen Android-Mechanismus um Downloads zu empfangen (für bessere Kompatibilität mit Android 12+)
