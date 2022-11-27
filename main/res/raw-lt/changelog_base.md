@@ -9,4 +9,5 @@
 ### Bendras
 - API lygio pakeitimas (sudarytas SDK 32)
 - Atnaujinkite kai kurias priklausomas bibliotekas
-- Paleisties metu naudokite Android įtaisytąją paleidimo ekrano funkciją 
+- Paleisties metu naudokite Android įtaisytąją paleidimo ekrano funkciją
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
