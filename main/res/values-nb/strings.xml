@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
-    <string name="err_captcha">Captcha kreves. Se vår <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for veiledning.</string>
     <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
     <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
     <string name="err_server_lc">Klarte ikke koble til land.geocaching.com. Nettsiden er nede eller din internettforbindelse virker ikke.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
     <string name="err_comm">Ukjent kommunikasjonsfeil. Se på vår <a href="https://www.cgeo.org/faq#login-failed">Ofte Stilte Spørsmål</a> for hjelp.</string>
     <string name="err_missing_auth">Brukernavn og/eller passord er ikke oppgitt</string>
-    <string name="err_wrong">Feil brukernavn og/eller passord</string>
     <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo fungerer offline med lokalt lagrede cacher.</string>
     <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
     <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -1313,8 +1311,6 @@
     <string name="waypoint">Veipunkt</string>
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cachens koordinater</string>
-    <string name="waypoint_calculated_coordinates">Beregnet koordinater</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Regn ut koordinater</string>
     <string name="waypoint_custom">Eget veipunkt</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
