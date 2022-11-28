@@ -1,7 +1,7 @@
 
 ### Yleinen
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Korjaus: Uusi TB asetetaan Vieraili-tilaan automaattisesti
+- Korjaus: gc.com perusasetukset eivät näkyneet
 
 ## 2022.11.25
 
