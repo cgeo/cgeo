@@ -1,7 +1,7 @@
 
 ### Γενικά
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Διόρθωση: Αυτόματη ρύθμιση για ΤΒ σε "επίσκεψη"
+- Διόρθωση: Δεν εμφανίζονται οι βασικές ρυθμίσεις μέλους στην gc.com
 
 ## 25.11.2022
 
