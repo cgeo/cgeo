@@ -696,7 +696,7 @@
     <string name="settings_title_offline_routing">Маршрутизация офлайн</string>
     <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
     <string name="settings_title_map_rotation">Вращение карты (Google Maps)</string>
-    <string name="settings_title_waypoints">Путевые точки</string>
+    <string name="settings_title_waypoints">Точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
     <string name="settings_title_map_style">Стиль карты</string>
