@@ -196,7 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
-    <string name="err_captcha">캡차가 필요합니다. 지침은 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>을 참조하세요.</string>
+    <string name="err_captcha">이 서비스에는 Captcha가 필요합니다. 브라우저에서 geocaching.com 웹 사이트를 열고 로그인할 때 표시되는 Captcha를 해결하십시오. 다음에는 c:geo로 다시 로그인을 시도하십시오.</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -1421,8 +1421,6 @@
     <string name="waypoint">지점</string>
     <string name="waypoint_coordinates">좌표</string>
     <string name="waypoint_cache_coordinates">캐시 좌표</string>
-    <string name="waypoint_calculated_coordinates">계산된 좌표</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">좌표 계산</string>
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
@@ -1506,6 +1504,7 @@
     <string name="formula_function_tan">탄젠트</string>
     <string name="formula_function_abs">절댓값</string>
     <string name="formula_function_round">반올림</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">만약</string>
     <string name="formula_function_length">스트링 길이</string>
     <string name="formula_function_substring">부스트링</string>
