@@ -1,7 +1,7 @@
 
 ### Bendras
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
+- Pataisymas: Nerodomi bazinio gc.com nario nustatymai
 
 ## 2022.11.25
 
