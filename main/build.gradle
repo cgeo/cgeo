@@ -335,7 +335,7 @@ dependencies {
     implementation 'com.github.spotbugs:spotbugs-annotations:4.7.3'
 
     // GeographicLib
-    implementation 'net.sf.geographiclib:GeographicLib-Java:1.52'
+    implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
 
     // Jackson XML processing
     String jacksonVersion = '2.12.5'
