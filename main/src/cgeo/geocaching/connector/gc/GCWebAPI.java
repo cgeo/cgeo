@@ -918,6 +918,7 @@ class GCWebAPI {
 
                 c.setFavoritePoints(r.favoritePoints);
                 c.setDisabled(r.cacheStatus == 1);
+                c.setArchived(r.cacheStatus == 2);
                 if (r.owner != null) {
                     c.setOwnerDisplayName(r.owner.username);
                     c.setOwnerUserId(r.owner.username);
