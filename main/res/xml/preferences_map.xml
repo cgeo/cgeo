@@ -45,6 +45,7 @@
             android:key="@string/pref_mapAutoDownloadsInterval"
             android:defaultValue="@integer/map_updateinterval_default"
             app:max="@integer/map_updateinterval_max"
+            app:logScaling="true"
             app:iconSpaceReserved="false" />
 
         <Preference
@@ -125,6 +126,7 @@
             android:defaultValue="@integer/waypoint_threshold_default"
             app:min="0"
             app:max="@integer/waypoint_threshold_max"
+            app:logScaling="true"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
@@ -168,6 +170,8 @@
             android:defaultValue="@integer/historytrack_length_default"
             app:min="100"
             app:max="@integer/historytrack_length_max"
+            app:stepSize="100"
+            app:logScaling="true"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
