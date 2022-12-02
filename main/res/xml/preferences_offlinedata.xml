@@ -34,6 +34,8 @@
         android:defaultValue="@integer/list_load_limit_default"
         app:min="0"
         app:max="@integer/list_load_limit_max"
+        app:stepSize="100"
+        app:logScaling="true"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory

@@ -25,8 +25,10 @@
     <declare-styleable name="SeekbarPreference">
         <attr name="min" format="integer" />
         <attr name="max" format="integer" />
+        <attr name="stepSize" format="integer" />
         <attr name="label" format="string" />
         <attr name="hasDecimals" format="boolean" />
+        <attr name="logScaling" format="boolean" />
     </declare-styleable>
 
     <!-- custom attributes for ProximityPreference -->

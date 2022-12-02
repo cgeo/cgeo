@@ -25,9 +25,11 @@ public class SeekbarPreference extends Preference {
     private TextView valueView;
     protected int minProgress = 0;
     protected int maxProgress = 100;
+    protected int stepSize = 0;
     protected int startProgress = 0;
     protected final int defaultValue = 10;
     protected boolean hasDecimals = false;
+    protected boolean useLogScaling = false;
     protected String label = "";
     protected String unitValue = "";
     protected Context context = null;
@@ -95,11 +97,13 @@ public class SeekbarPreference extends Preference {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekbarPreference);
         minProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_min, minProgress));
         maxProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_max, maxProgress));
+        stepSize = valueToProgress(a.getInt(R.styleable.SeekbarPreference_stepSize, stepSize));
         final String temp = a.getString(R.styleable.SeekbarPreference_label);
         if (null != temp) {
             label = temp;
         }
         hasDecimals = a.getBoolean(R.styleable.SeekbarPreference_hasDecimals, useDecimals());
+        useLogScaling = a.getBoolean(R.styleable.SeekbarPreference_logScaling, useLogScaling);
         a.recycle();
 
         init();
@@ -166,6 +170,14 @@ public class SeekbarPreference extends Preference {
         return true;
     }
 
+    private int applyStepSizeAndLogScaling(final int rawValue) {
+        final int scaledValue = useLogScaling ? (int) (((long) rawValue * rawValue) / maxProgress) : rawValue; // Approximate an exponential curve with x^2 or use linear curve x
+        if (stepSize > 0) {
+            return scaledValue / stepSize * stepSize;
+        }
+        return scaledValue;
+    }
+
     protected void saveSetting(final int progress) {
         if (callChangeListener(progress)) {
             persistInt(progressToValue(progress));
@@ -202,7 +214,7 @@ public class SeekbarPreference extends Preference {
         // set initial value
         final int threshold = startProgress;
         valueView.setText(getValueString(threshold));
-        seekBar.setProgress(threshold);
+        seekBar.setProgress(useLogScaling ? (int) Math.sqrt((long) threshold * maxProgress) : threshold); // apply scaling as chosen
 
         // set label (if given)
         if (null != label && !label.isEmpty()) {
@@ -214,8 +226,8 @@ public class SeekbarPreference extends Preference {
         seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                if (fromUser && atLeastMin(seekBar, progress)) {
-                    valueView.setText(getValueString(progress));
+                if (fromUser && atLeastMin(seekBar, applyStepSizeAndLogScaling(progress))) {
+                    valueView.setText(getValueString(applyStepSizeAndLogScaling(progress)));
                 }
             }
 
@@ -226,8 +238,8 @@ public class SeekbarPreference extends Preference {
 
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                if (atLeastMin(seekBar, seekBar.getProgress())) {
-                    saveSetting(seekBar.getProgress());
+                if (atLeastMin(seekBar, applyStepSizeAndLogScaling(seekBar.getProgress()))) {
+                    saveSetting(applyStepSizeAndLogScaling(seekBar.getProgress()));
                 }
             }
         });
