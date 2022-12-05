@@ -1,7 +1,7 @@
 
 ### Algemeen
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Oplossing: Nieuwe TB automatisch ingesteld op bezoek modus
+- Oplossing: gc.com basis lid instellingen werden niet weergegeven
 
 ## 2022.11.25
 
