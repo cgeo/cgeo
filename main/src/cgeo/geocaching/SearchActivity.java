@@ -351,7 +351,8 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             final String geocode = (String) parent.getItemAtPosition(position);
             // as we directly start the cache details activity on item selection,
             // reset the edit text to not confuse the user and to provide a better workflow.
-            editText.setText("");
+            // use the current cache's prefix as new prefix
+            editText.setText(geocode.substring(0, 2));
             findByGeocodeFn(geocode);
         });
         button.setOnClickListener(arg0 -> runnable.run());
