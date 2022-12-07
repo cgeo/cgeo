@@ -232,6 +232,7 @@
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
+    <string translatable="false" name="pref_fakekey_unifiedmap">fakekey_unifiedmap</string>
     <string translatable="false" name="pref_useUnifiedMap">useUnifiedMap</string>
 
 

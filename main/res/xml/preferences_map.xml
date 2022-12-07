@@ -16,11 +16,6 @@
             android:summary="%s"
             android:title="@string/init_mapsource_select"
             app:iconSpaceReserved="false" />
-        <MultiSelectListPreference
-            android:key="@string/pref_tileprovider_hidden"
-            android:title="@string/settings_hide_tileproviders_title"
-            android:summary="@string/settings_hide_tileproviders_summary"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_title_offline_maps"
@@ -366,6 +361,24 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/pref_fakekey_unifiedmap"
+        android:title="@string/category_unifiedMap"
+        android:summary="@string/experimental"
+        app:iconSpaceReserved="false">
+        <MultiSelectListPreference
+            android:key="@string/pref_tileprovider_hidden"
+            android:title="@string/settings_hide_tileproviders_title"
+            android:summary="@string/settings_hide_tileproviders_summary"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_useUnifiedMap"
+            android:summary="@string/init_summary_useUnifiedMap"
+            android:title="@string/init_title_useUnifiedMap"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/init_map_other"
         app:iconSpaceReserved="false">
         <CheckBoxPreference
@@ -373,12 +386,6 @@
             android:key="@string/pref_map_osm_multithreaded"
             android:summary="@string/init_summary_map_osm_multithreaded"
             android:title="@string/init_map_osm_multithreaded"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_useUnifiedMap"
-            android:summary="@string/init_summary_useUnifiedMap"
-            android:title="@string/init_title_useUnifiedMap"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
