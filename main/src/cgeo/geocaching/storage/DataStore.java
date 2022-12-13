@@ -3294,7 +3294,7 @@ public class DataStore {
         }
     }
 
-    public static void saveIndividualRoute(final ArrayList<RouteItem> routeItems) {
+    public static void saveIndividualRoute(final List<RouteItem> routeItems) {
         init();
 
         database.beginTransaction();

@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.databinding.RouteSortItemBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -13,52 +14,105 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
+import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.google.android.material.button.MaterialButton;
-import com.mobeta.android.dslv.DragSortController;
-import com.mobeta.android.dslv.DragSortListView;
-import com.mobeta.android.dslv.SimpleFloatViewManager;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RouteSortActivity extends AbstractActionBarActivity {
 
-    private ArrayAdapter<RouteItem> routeItemAdapter;
-    private ArrayList<RouteItem> routeItems;
-    private DragSortListView listView;
-    private boolean changed = false;
+    private RouteItemListAdapter routeItemAdapter;
+    private ArrayList<RouteItem> originalRouteItems;
+    private RecyclerView listView;
 
-    private final DragSortListView.DropListener onDrop = new DragSortListView.DropListener() {
-        @Override
-        public void drop(final int from, final int to) {
-            if (from != to) {
-                routeItems.add(to, routeItems.remove(from));
-                routeItemAdapter.notifyDataSetChanged();
-                changed = true;
-                invalidateOptionsMenu();
+    protected static class RouteItemViewHolder extends AbstractRecyclerViewHolder {
+        private final RouteSortItemBinding binding;
+
+        public RouteItemViewHolder(final View rowView) {
+            super(rowView);
+            binding = RouteSortItemBinding.bind(rowView);
+        }
+    }
+
+    private final class RouteItemListAdapter extends ManagedListAdapter<RouteItem, RouteItemViewHolder> {
+
+        private RouteItemListAdapter(final RecyclerView recyclerView) {
+            super(new ManagedListAdapter.Config(recyclerView)
+                    .setSupportDragDrop(true));
+        }
+
+        private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem, final int position) {
+            final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
+            final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
+
+            if (null == data && cacheOrWaypointType) {
+                holder.binding.title.setText(routeItem.getShortGeocode());
+                holder.binding.detail.setText(R.string.route_item_not_yet_loaded);
+            } else {
+                holder.binding.title.setText(null == data ? "" : data.getName());
+                switch (routeItem.getType()) {
+                    case GEOCACHE:
+                        assert data instanceof Geocache;
+                        holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                        break;
+                    case WAYPOINT:
+                        assert data instanceof Waypoint;
+                        final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                        holder.binding.detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
+                        break;
+                    case COORDS:
+                        // title.setText("Coordinates");
+                        holder.binding.detail.setText(GeopointFormatter.format(LAT_LON_DECMINUTE, routeItem.getPoint()));
+                        holder.binding.title.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
+                        break;
+                    default:
+                        throw new IllegalStateException("unknown RouteItemType in RouteSortActivity");
+                }
+                if (data != null) {
+                    holder.binding.title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
+                    holder.binding.detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
+                }
             }
         }
-    };
+
+        @NonNull
+        @Override
+        public RouteItemViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+            final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.route_sort_item, parent, false);
+            final RouteItemViewHolder viewHolder = new RouteItemViewHolder(view);
+            viewHolder.binding.delete.setOnClickListener(v -> removeItem(viewHolder.getBindingAdapterPosition()));
+            viewHolder.binding.title.setOnLongClickListener(v1 -> setAsStart(viewHolder.getBindingAdapterPosition()));
+            viewHolder.binding.detail.setOnLongClickListener(v1 -> setAsStart(viewHolder.getBindingAdapterPosition()));
+            registerStartDrag(viewHolder, viewHolder.binding.drag);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final RouteItemViewHolder holder, final int position) {
+            fillViewHolder(holder, getItem(position), position);
+        }
+    }
 
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -66,114 +120,32 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         setTheme();
         setTitle(getString(R.string.map_sort_individual_route));
 
-        routeItems = DataStore.loadIndividualRoute();
-        listView = new DragSortListView(this, null);
-        final DragSortController controller = new DragSortController(listView);
-
-        routeItemAdapter = new ArrayAdapter<RouteItem>(this, 0, routeItems) {
-            @SuppressLint("SetTextI18n")
-            @NonNull
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                View v = convertView;
-                if (null == convertView) {
-                    v = getLayoutInflater().inflate(R.layout.twotexts_button_image_item, parent, false);
-                }
-
-                final RouteItem routeItem = routeItems.get(position);
-                final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
-                final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
-
-                final TextView title = v.findViewById(R.id.title);
-                final TextView detail = v.findViewById(R.id.detail);
-                if (null == data && cacheOrWaypointType) {
-                    title.setText(routeItem.getShortGeocode());
-                    detail.setText(R.string.route_item_not_yet_loaded);
-                } else {
-                    title.setText(null == data ? "" : data.getName());
-                    switch (routeItem.getType()) {
-                        case GEOCACHE:
-                            assert data instanceof Geocache;
-                            detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
-                            title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
-                            break;
-                        case WAYPOINT:
-                            assert data instanceof Waypoint;
-                            final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                            detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                            title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
-                            break;
-                        case COORDS:
-                            // title.setText("Coordinates");
-                            detail.setText(GeopointFormatter.format(LAT_LON_DECMINUTE, routeItem.getPoint()));
-                            title.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
-                            break;
-                        default:
-                            throw new IllegalStateException("unknown RouteItemType in RouteSortActivity");
-                    }
-                    title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
-                    detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
-                    title.setOnLongClickListener(v1 -> setAsStart(position));
-                    detail.setOnLongClickListener(v1 -> setAsStart(position));
-                }
-
-                final MaterialButton buttonDelete = v.findViewById(R.id.button_left);
-                buttonDelete.setIconResource(R.drawable.ic_menu_delete);
-                buttonDelete.setVisibility(View.VISIBLE);
-                buttonDelete.setOnClickListener(vUp -> delete(position));
-
-                final ImageView imgReorder = v.findViewById(R.id.img_right);
-                imgReorder.setImageResource(R.drawable.ic_menu_reorder);
-                imgReorder.setVisibility(View.VISIBLE);
-                imgReorder.setOnTouchListener(controller);
-
-                return v;
-            }
-        };
-
+        originalRouteItems = DataStore.loadIndividualRoute();
+        listView = new RecyclerView(this, null);
+        routeItemAdapter = new RouteItemListAdapter(listView);
+        routeItemAdapter.setItems(originalRouteItems);
         setContentView(listView);
-        listView.setAdapter(routeItemAdapter);
-        listView.setDropListener(onDrop);
-
-        controller.setDragHandleId(R.id.img_right);
-        controller.setRemoveEnabled(false);
-        controller.setSortEnabled(true);
-        controller.setDragInitMode(1);
-        listView.setFloatViewManager(controller);
-        listView.setOnTouchListener(controller);
-        listView.setDragEnabled(true);
-
-        final SimpleFloatViewManager simpleFloatViewManager = new SimpleFloatViewManager(listView);
-        simpleFloatViewManager.setBackgroundColor(getResources().getColor(R.color.colorBackgroundSelected));
-        listView.setFloatViewManager(simpleFloatViewManager);
-    }
-
-    private void delete(final int position) {
-        routeItems.remove(position);
-        routeItemAdapter.notifyDataSetChanged();
-        changed = true;
     }
 
     private void invertOrder() {
-        Collections.reverse(routeItems);
-        routeItemAdapter.notifyDataSetChanged();
-        changed = true;
+        final ArrayList<RouteItem> newRouteItems = new ArrayList<>(routeItemAdapter.getItems());
+        Collections.reverse(newRouteItems);
+        routeItemAdapter.setItems(newRouteItems);
     }
 
     private boolean setAsStart(final int position) {
-        if (position < 1 || position >= routeItems.size()) {
+        if (position < 1 || position >= routeItemAdapter.getItems().size()) {
             return false;
         }
         SimpleDialog.ofContext(this).setTitle(TextParam.id(R.string.individual_route_set_as_start_title)).setMessage(TextParam.id(R.string.individual_route_set_as_start_message)).confirm((d, v) -> {
             final ArrayList<RouteItem> newRouteItems = new ArrayList<>();
-            for (int i = position; i < routeItems.size(); i++) {
-                newRouteItems.add(routeItems.get(i));
+            for (int i = position; i < routeItemAdapter.getItems().size(); i++) {
+                newRouteItems.add(routeItemAdapter.getItems().get(i));
             }
             for (int i = 0; i < position; i++) {
-                newRouteItems.add(routeItems.get(i));
+                newRouteItems.add(routeItemAdapter.getItems().get(i));
             }
-            routeItems = newRouteItems;
-            routeItemAdapter.notifyDataSetChanged();
-            changed = true;
+            routeItemAdapter.setItems(newRouteItems);
         });
         return true;
     }
@@ -189,8 +161,8 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_item_save) {
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItems), () -> {
-                changed = false;
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItemAdapter.getItems()), () -> {
+                originalRouteItems = new ArrayList<>(routeItemAdapter.getItems());
                 invalidateOptionsMenu();
                 Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
                 finish();
@@ -211,7 +183,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        if (changed) {
+        if (!originalRouteItems.equals(routeItemAdapter.getItems())) {
             SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
         } else {
             finish();
