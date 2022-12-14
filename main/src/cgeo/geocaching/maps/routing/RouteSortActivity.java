@@ -44,6 +44,9 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     private ArrayList<RouteItem> originalRouteItems;
     private RecyclerView listView;
 
+    private static final String SAVED_STATE_ROUTEITEMS = "cgeo.geocaching.saved_state_routeitems";
+
+
     protected static class RouteItemViewHolder extends AbstractRecyclerViewHolder {
         private final RouteSortItemBinding binding;
 
@@ -120,11 +123,23 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         setTheme();
         setTitle(getString(R.string.map_sort_individual_route));
 
-        originalRouteItems = DataStore.loadIndividualRoute();
         listView = new RecyclerView(this, null);
+        setContentView(listView);
+
+        originalRouteItems = DataStore.loadIndividualRoute();
+
         routeItemAdapter = new RouteItemListAdapter(listView);
         routeItemAdapter.setItems(originalRouteItems);
-        setContentView(listView);
+
+        if (savedInstanceState != null) {
+            routeItemAdapter.setItems(savedInstanceState.getParcelableArrayList(SAVED_STATE_ROUTEITEMS));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(SAVED_STATE_ROUTEITEMS, new ArrayList<>(routeItemAdapter.getItems()));
     }
 
     private void invertOrder() {
