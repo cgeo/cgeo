@@ -63,7 +63,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     .setSupportDragDrop(true));
         }
 
-        private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem, final int position) {
+        private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem) {
             final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
             final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
 
@@ -113,7 +113,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
 
         @Override
         public void onBindViewHolder(@NonNull final RouteItemViewHolder holder, final int position) {
-            fillViewHolder(holder, getItem(position), position);
+            fillViewHolder(holder, getItem(position));
         }
     }
 
