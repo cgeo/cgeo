@@ -470,9 +470,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    // Drag n drop for listview
-    implementation 'asia.ivity.android:drag-sort-listview:1.0'
-
     // needed for chrome custom tabs
     implementation 'androidx.browser:browser:1.4.0'
 
