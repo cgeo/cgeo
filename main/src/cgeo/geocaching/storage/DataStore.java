@@ -792,8 +792,12 @@ public class DataStore {
     }
 
     private static final Single<Integer> allCachesCountObservable = Single.create((SingleOnSubscribe<Integer>) emitter -> {
-        if (isInitialized()) {
-            emitter.onSuccess(getAllCachesCount());
+        try {
+            if (isInitialized()) {
+                emitter.onSuccess(getAllCachesCount());
+            }
+        } catch (RuntimeException re) {
+            emitter.onError(re);
         }
     }).timeout(500, TimeUnit.MILLISECONDS).retry(10).subscribeOn(Schedulers.io());
 
