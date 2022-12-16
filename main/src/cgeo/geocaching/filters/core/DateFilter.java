@@ -1,7 +1,6 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import java.text.DateFormat;
@@ -44,17 +43,37 @@ public class DateFilter {
     }
 
     public Date getMinDate() {
-        if (isRelative && minDateOffset > -1) {
-            return DateUtils.addDays(new Date(), -1 * minDateOffset);
+        if (isRelative) {
+            return minDateOffset == Integer.MIN_VALUE ? null : DateUtils.addDays(new Date(), minDateOffset);
         }
         return minDate;
     }
 
     public Date getMaxDate() {
-        if (isRelative && maxDateOffset > -1) {
-            return DateUtils.addDays(new Date(), minDateOffset);
+        if (isRelative) {
+            return maxDateOffset == Integer.MAX_VALUE ? null :  DateUtils.addDays(new Date(), maxDateOffset);
         }
         return maxDate;
+    }
+
+    public Date getConfiguredMinDate() {
+        return minDate;
+    }
+
+    public Date getConfiguredMaxDate() {
+        return maxDate;
+    }
+
+    public boolean isRelative() {
+        return isRelative;
+    }
+
+    public int getMinDateOffset() {
+        return minDateOffset;
+    }
+
+    public int getMaxDateOffset() {
+        return maxDateOffset;
     }
 
     public int getDaysSinceMinDate() {
@@ -161,22 +180,17 @@ public class DateFilter {
         String minValueString = null;
         String maxValueString = null;
 
-        if (isRelative) {
-            if (minDateOffset != -1) {
-                minValueString = Formatter.formatDaysAgo(minDateOffset);
-            }
-            if (maxDateOffset != -1) {
-                maxValueString = Formatter.formatDaysAgo(maxDateOffset);
-            }
-        } else {
-            if (minDate != null) {
-                minValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(minDate);
-            }
-            if (maxDate != null) {
-                maxValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(maxDate);
-            }
+       if (getMinDate() != null) {
+            minValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(getMinDate());
+        }
+        if (getMaxDate() != null) {
+            maxValueString = DAY_DATE_FORMAT_USER_DISPLAY.format(getMaxDate());
         }
 
-        return UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
+        String value = UserDisplayableStringUtils.getUserDisplayableConfig(minValueString, maxValueString);
+        if (isRelative) {
+            value += "(r)";
+        }
+        return value;
     }
 }

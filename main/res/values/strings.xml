@@ -599,6 +599,8 @@
     <string name="cache_filter_stringfilter_type_ends_with">Ends With</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
 
+    <string name="cache_filter_datefilter_absolute">Absolute</string>
+    <string name="cache_filter_datefilter_relative">Relative to today</string>
     <string name="cache_filter_datefilter_label_from">From:</string>
     <string name="cache_filter_datefilter_label_to">To:</string>
 
@@ -673,6 +675,39 @@
     <string name="cache_filter_stored_since_stored_max">the dawn of time</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
 
+    <integer-array name="cache_filter_hidden_since_stored_values_d" translatable="false">
+        <item>-100000</item> <!-- forever in the past -->
+        <item>-365</item> <!-- a year ago -->
+        <item>-180</item> <!-- half a year ago -->
+        <item>-90</item> <!-- 3 months ago -->
+        <item>-30</item> <!-- a month ago -->
+        <item>-14</item> <!-- 2 weeks ago -->
+        <item>-7</item> <!-- a week ago -->
+        <item>-3</item> <!-- three days ago -->
+        <item>100000</item> <!-- forever in the future -->
+    </integer-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>more than a year ago</item>
+        <item>a year ago</item>
+        <item>180 days ago</item>
+        <item>90 days ago</item>
+        <item>30 days ago</item>
+        <item>2 weeks ago</item>
+        <item>a week ago</item>
+        <item>3 days ago</item>
+        <item>less than 3 days ago</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1y</item>
+        <item>1y</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2w</item>
+        <item>1w</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
 
     <!-- about -->
     <string name="about_version">Version</string>

@@ -20,6 +20,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.app.Activity;
@@ -97,10 +98,17 @@ public class FilterViewHolderCreator {
                 result = new DistanceFilterViewHolder();
                 break;
             case HIDDEN:
-                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>();
+                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
+                        LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
                 break;
             case LAST_FOUND:
-                result = new DateRangeFilterViewHolder<LastFoundGeocacheFilter>();
+                final int[] values = LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d);
+                result = new DateRangeFilterViewHolder<LastFoundGeocacheFilter>(true,
+                        values,
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
                 break;
             case LOGS_COUNT:
                 result = new LogsCountFilterViewHolder();
