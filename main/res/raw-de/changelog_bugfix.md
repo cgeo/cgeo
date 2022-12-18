@@ -2,6 +2,8 @@
 ### Allgemein
 - Korrektur: Neue TB wurden automatisch auf besucht gesetzt
 - Korrektur: Optionen für Basis-Mitglieder für gc.com wurden im Menü nicht angezeigt
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 
 ## 2022.11.25
 
