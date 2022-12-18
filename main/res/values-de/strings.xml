@@ -394,7 +394,7 @@
     <string name="caches_sort_storage">Speicherdatum</string>
     <string name="caches_sort_eventdate">Event-Datum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
-    <string name="caches_select_next">Nächste 20 Caches auswählen</string>
+    <string name="caches_select_next20">Nächste 20 Caches auswählen</string>
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>

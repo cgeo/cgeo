@@ -699,7 +699,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
             updateSelectSwitchMenuItem(menu.findItem(R.id.menu_switch_select_mode));
             setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
-            setVisible(menu, R.id.menu_select_next, adapter.isSelectMode()); // same here
+            setVisible(menu, R.id.menu_select_next20, adapter.isSelectMode()); // same here
+            setVisible(menu, R.id.menu_select_next100, adapter.isSelectMode()); // same here
 
             setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_cache_list_app, listNavigationApps.size() == 1, !isEmpty);
@@ -860,8 +861,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_invert_selection) {
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
-        } else if (menuItem == R.id.menu_select_next) {
-            adapter.selectNextCaches();
+        } else if (menuItem == R.id.menu_select_next20) {
+            adapter.selectNextCaches(20);
+        } else if (menuItem == R.id.menu_select_next100) {
+            adapter.selectNextCaches(100);
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu();
         } else if (menuItem == R.id.menu_import_web) {

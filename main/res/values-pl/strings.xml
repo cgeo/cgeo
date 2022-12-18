@@ -400,7 +400,7 @@
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
-    <string name="caches_select_next">Wybierz następne 20 skrytek</string>
+    <string name="caches_select_next20">Wybierz następne 20 skrytek</string>
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>

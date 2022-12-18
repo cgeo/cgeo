@@ -400,7 +400,7 @@
     <string name="caches_sort_storage">Išsaugojimo įrenginyje data</string>
     <string name="caches_sort_eventdate">Renginio data</string>
     <string name="caches_select_mode">Pasirinkti</string>
-    <string name="caches_select_next">Pasirinkti sekančias 20 slėptuvių</string>
+    <string name="caches_select_next20">Pasirinkti sekančias 20 slėptuvių</string>
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>

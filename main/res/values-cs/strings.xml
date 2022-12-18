@@ -400,7 +400,7 @@
     <string name="caches_sort_storage">Datum uložení do zařízení</string>
     <string name="caches_sort_eventdate">Datum události</string>
     <string name="caches_select_mode">Režim výběru</string>
-    <string name="caches_select_next">Vybrat dalších 20 kešek</string>
+    <string name="caches_select_next20">Vybrat dalších 20 kešek</string>
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>

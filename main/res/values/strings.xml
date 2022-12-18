@@ -429,7 +429,8 @@
     <string name="caches_sort_storage">Date stored on device</string>
     <string name="caches_sort_eventdate">Event date</string>
     <string name="caches_select_mode">Select mode</string>
-    <string name="caches_select_next">Select next 20 caches</string>
+    <string name="caches_select_next20">Select next 20 caches</string>
+    <string name="caches_select_next100">Select next 100 caches</string>
     <string name="caches_select_mode_exit">Exit select mode</string>
     <string name="caches_select_invert">Invert selection</string>
     <string name="caches_nearby">Nearby</string>
