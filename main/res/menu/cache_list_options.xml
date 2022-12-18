@@ -30,9 +30,14 @@
         android:title="@string/caches_select_invert"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_select_next"
+        android:id="@+id/menu_select_next20"
         android:icon="@drawable/ic_menu_select_next"
-        android:title="@string/caches_select_next"
+        android:title="@string/caches_select_next20"
+        app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_select_next100"
+        android:icon="@drawable/ic_menu_select_next"
+        android:title="@string/caches_select_next100"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_list_app"

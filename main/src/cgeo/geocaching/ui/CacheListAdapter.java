@@ -259,8 +259,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         notifyDataSetChanged();
     }
 
-    public void selectNextCaches() {
-        int remaining = 20; // how many caches are left to check?
+    public void selectNextCaches(final int amount) {
+        int remaining = amount; // how many caches are left to check?
         final int max = list.size();
         for (int i = 0; i < max && remaining > 0; i++) {
             final Geocache cache = list.get(i);

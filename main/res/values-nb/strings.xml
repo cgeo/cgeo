@@ -374,7 +374,7 @@
     <string name="caches_sort_storage">Dato lagret i c:geo</string>
     <string name="caches_sort_eventdate">Eventdato</string>
     <string name="caches_select_mode">Velge-modus</string>
-    <string name="caches_select_next">Velg neste 20 cacher</string>
+    <string name="caches_select_next20">Velg neste 20 cacher</string>
     <string name="caches_select_mode_exit">Avslutt velge-modus</string>
     <string name="caches_select_invert">Inverter merking</string>
     <string name="caches_nearby">I nærheten</string>
