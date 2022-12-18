@@ -2,6 +2,8 @@
 ### Geral
 - Correção: Novo TB definido para o modo de visita automaticamente
 - Correção: configurações básicas de membros do gc.com não eram exibidas
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 
 ## 2022.11.25
 
