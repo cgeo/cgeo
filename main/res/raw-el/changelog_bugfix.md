@@ -2,6 +2,8 @@
 ### Γενικά
 - Διόρθωση: Αυτόματη ρύθμιση για ΤΒ σε "επίσκεψη"
 - Διόρθωση: Δεν εμφανίζονται οι βασικές ρυθμίσεις μέλους στην gc.com
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 
 ## 25.11.2022
 
