@@ -711,7 +711,7 @@
     <string name="settings_data_dir_item">%1$s (%2$s laisva)</string>
     <string name="confirm_data_dir_move_title">Perkelti slėptuvių duomenų aplanką?</string>
     <string name="confirm_data_dir_move">Slėptuvių duomenų perkėlimas gali užtrukti, priklausomai nuo jūsų įrenginio ir duomenų apimties.</string>
-    <string name="settings_title_basicmembers">Pagrindinių narių parinktys</string>
+    <string name="settings_title_basicmembers">Bazinių narių parinktys</string>
     <string name="settings_title_navigation">Maršrutas / Navigacija</string>
     <string name="settings_summary_navigation">Konfigūruokite maršrutą neprisijungus, pasirinkite pageidaujamus navigavimo būdus ir išorines navigacijos programas.</string>
     <string name="settings_title_system">Sistema</string>
@@ -969,7 +969,7 @@
     <string name="init_offlinelogs_homescreen">Rodyti išsaugotus įrašus</string>
     <string name="init_summary_offlinelogs_homescreen">Įrašų neprisijungus skaičiuoklė (pvz.: \"+ 1\") bus vaizduojama šalia jūsų radimų skaičiaus, jei jūs turite neįkeltų įrašų.</string>
     <string name="init_loaddirectionimg">Krypties paveikslėlis</string>
-    <string name="init_summary_loaddirectionimg">Jei reikia, atsisiųskite krypties rodyklės paveikslėlius (reikia tik pagrindiniams nariams)</string>
+    <string name="init_summary_loaddirectionimg">Jei reikia, atsisiųskite krypties rodyklės paveikslėlius (reikia tik baziniams nariams)</string>
     <string name="init_default_navigation_tool">Numatytoji navigacija</string>
     <string name="init_secondary_navigation_tool">Antrinė navigacija</string>
     <string name="init_default_navigation_tool_description">Čia galite pasirinkti jūsų pageidaujamą navigacijos įrankį.</string>
