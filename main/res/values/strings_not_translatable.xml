@@ -43,7 +43,6 @@
     <string translatable="false" name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
-    <string translatable="false" name="map_source_mapy_cz">Mapy.cz</string>
 
     <!-- edit waypoint -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
@@ -59,7 +58,6 @@
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_cyclosm_html"><![CDATA[© <a href="https://www.cyclosm.org/">CyclOSM</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
-    <string translatable="false" name="map_attribution_mapy_cz_html"><![CDATA[© <a href="https://o.seznam.cz/">Seznam.cz, a.s.</a> and the <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors]]></string>
 
     <!-- links to manual pages -->
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
@@ -161,7 +159,7 @@
     - [Geocoding courtesy of MapQuest](https://www.mapquest.com/)\n
     - [Geocoding data from OpenStreetMap](https://www.openstreetmap.org/)\n
     - OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data [licensed](http://www.openstreetmap.org/copyright/en) under Creative Commons 2.0 BY-SA.\n
-    - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/), © [cyclosm.org](https://www.cyclosm.org/) and Mapy.cz by © [Seznam.cz, a.s.](https://o.seznam.cz/).\n
+    - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/) and © [cyclosm.org](https://www.cyclosm.org/).\n
     - Map Downloader supports maps from [Mapsforge](https://github.com/mapsforge), [OpenAndroMaps](https://www.openandromaps.org), [Freizeitkarte](https://www.freizeitkarte-osm.de/) and [Hylly](https://kartat.hylly.org/).\n
     - Routing © 2019 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE))\n
 	</string>

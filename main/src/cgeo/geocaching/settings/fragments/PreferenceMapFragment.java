@@ -35,8 +35,12 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
         initMapSourcePreference();
 
         final boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false);
+
+        final Preference catUnifiedMap = findPreference(getString(R.string.pref_fakekey_unifiedmap));
+        catUnifiedMap.setVisible(showUnifiedMap);
+
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
-        hideTileprovidersPref.setVisible(showUnifiedMap);
+        // hideTileprovidersPref.setVisible(showUnifiedMap);
         if (showUnifiedMap) {
             // new unified map providers
             final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
