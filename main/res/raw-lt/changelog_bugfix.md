@@ -2,6 +2,8 @@
 ### Bendras
 - Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
 - Pataisymas: Nerodomi bazinio gc.com nario nustatymai
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 
 ## 2022.11.25
 
