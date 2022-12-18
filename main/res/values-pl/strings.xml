@@ -1396,7 +1396,7 @@
     <string name="cache_image_rename">Zmień nazwę</string>
     <string name="cache_image_delete">Usuń</string>
     <string name="cache_image_title_camera_prefix">Zdjęcie</string>
-    <string name="cache_image_background">Obrazek tła listy skrytek</string>
+    <string name="cache_image_background">Obrazek tła opisu skrytki</string>
     <string name="cache_share_field">Udostępnij</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
