@@ -26,6 +26,10 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
         return dateFilter.getMinDate();
     }
 
+    public DateFilter getDateFilter() {
+        return dateFilter;
+    }
+
     public Date getMaxDate() {
         return dateFilter.getMaxDate();
     }
