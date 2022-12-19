@@ -63,6 +63,12 @@ public class GPXTrackOrRouteImporter {
             if (null == route) {
                 route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
             }
+            if (null == route) {
+                route = parse(new GPXWptAsTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
+            }
+            if (null == route) {
+                route = parse(new GPXWptAsTrackParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
+            }
             if (null != route) {
                 route.calculateNavigationRoute();
             }
