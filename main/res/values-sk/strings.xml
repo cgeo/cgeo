@@ -1046,6 +1046,8 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
+    <string name="category_unifiedMap">Jednotná mapa</string>
+    <string name="experimental">(experimentálne)</string>
     <string name="init_title_useUnifiedMap">Použiť zjednotenú mapu</string>
     <string name="init_summary_useUnifiedMap">Použite novú zjednotenú mapu namiesto vstavaných máp Google Map/Mapsforge (OSM) (experimentálne/zďaleka nie sú dokončené/iba na testovanie)</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
