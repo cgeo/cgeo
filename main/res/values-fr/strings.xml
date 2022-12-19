@@ -1433,8 +1433,6 @@
     <string name="waypoint">Point de passage</string>
     <string name="waypoint_coordinates">Coordonnées</string>
     <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
-    <string name="waypoint_calculated_coordinates">Coordonnées calculées</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calculer les coordonnées</string>
     <string name="waypoint_custom">Personnalisé</string>
     <string name="waypoint_my_coordinates">Ma position</string>
