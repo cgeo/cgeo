@@ -523,6 +523,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Ξεκινάει με</string>
     <string name="cache_filter_stringfilter_type_ends_with">Τελειώνει σε</string>
     <string name="cache_filter_stringfilter_type_pattern">Μοτίβο</string>
+    <string name="cache_filter_datefilter_absolute">Απόλυτη</string>
+    <string name="cache_filter_datefilter_relative">Σχετικά με σήμερα</string>
     <string name="cache_filter_datefilter_label_from">Από:</string>
     <string name="cache_filter_datefilter_label_to">Έως:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων</string>
@@ -578,6 +580,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">την αυγή του χρόνου</string>
     <string name="cache_filter_stored_since_stored_max_short">μέγιστο</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>Περισσότερο από ένα χρόνο πριν</item>
+        <item>πριν ένα χρόνο</item>
+        <item>180 ημέρες πριν</item>
+        <item>πριν από 90 ημέρες</item>
+        <item>30 ημέρες πριν</item>
+        <item>Πριν από 2 εβδομάδες</item>
+        <item>πριν μια εβδομάδα</item>
+        <item>3 ημέρες πριν</item>
+        <item>λιγότερο από 3 ημέρες πριν</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1ε</item>
+        <item>1χρ</item>
+        <item>180μ</item>
+        <item>90μ</item>
+        <item>30μ</item>
+        <item>2εβδ</item>
+        <item>1εβ</item>
+        <item>3μ</item>
+        <item>&lt;3μ</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -1020,6 +1044,8 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
+    <string name="category_unifiedMap">Ενοποιημένος Χάρτης</string>
+    <string name="experimental">(Πειραματικό)</string>
     <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
     <string name="init_summary_useUnifiedMap">Χρήση νέου ενοποιημένου χάρτη αντί για ενσωματωμένους χάρτες Google Map / Mapsforge (OSM) (πειραματικό / μακριά από το να είναι πλήρες / μόνο για δοκιμή)</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
@@ -1423,8 +1449,6 @@
     <string name="waypoint">Σημείο αναφοράς</string>
     <string name="waypoint_coordinates">Συντεταγμένες</string>
     <string name="waypoint_cache_coordinates">Συντεταγμένες κρύπτης</string>
-    <string name="waypoint_calculated_coordinates">Υπολογισμένες συντεταγμένες</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Υπολογιστής συντεταγμένων</string>
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
