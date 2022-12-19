@@ -652,7 +652,6 @@
     <!-- waypoint -->
     <string name="waypoint_coordinates">Mga Koordinetor</string>
     <string name="waypoint_cache_coordinates">Mga koordinetor sa cache</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Kustom</string>
     <string name="waypoint_my_coordinates">Akong mga koordinetor</string>
     <string name="waypoint_bearing">Bearing in</string>
