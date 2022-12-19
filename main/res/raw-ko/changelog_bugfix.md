@@ -2,6 +2,8 @@
 ### 일반
 - 수정: 자동으로 방문 모드로 설정된 새로운 추적아이템
 - 수정: gc.com 기본 회원 설정이 표시되지 않음
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 
 ## 2022.11.25
 
