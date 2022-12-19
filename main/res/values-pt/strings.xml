@@ -1034,6 +1034,8 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="category_unifiedMap">Mapa unificado</string>
+    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
     <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
@@ -1437,8 +1439,6 @@
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
-    <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
@@ -2021,7 +2021,7 @@
     <string name="support_title">Suporte</string>
     <string name="website_title">Página Web</string>
     <string name="facebook_link"><a href="">Página do c:geo</a></string>
-    <string name="fangroup_link"><a href="">Grupo de utilizadores alemão</a></string>
+    <string name="fangroup_link"><a href="">Comunidade alemã</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
@@ -2288,6 +2288,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema de mapa detalhado, feito para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema de mapa detalhado, feito para mapas \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mapas detalhados, requerem o tema de mapa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema de mapa detalhado, feito para mapas \"Paws\"</string>
     <string name="mapserver_hylly_info">Mapas detalhados para a Finlândia, requer um dos temas de mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
