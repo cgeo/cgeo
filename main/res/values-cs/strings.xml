@@ -1048,6 +1048,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="category_unifiedMap">Jednotná mapa</string>
+    <string name="experimental">(experimentální)</string>
     <string name="init_title_useUnifiedMap">Použít jednotnou mapu</string>
     <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
