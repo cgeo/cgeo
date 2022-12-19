@@ -346,11 +346,16 @@ public class DegreeFormula {
         if (hasDigits) {
             final String digits = v.getAsString();
             final Pair<CharSequence, Boolean> digitsAfter = padDigits(vAfter.getAsString(), precision);
-            final double result = Double.parseDouble(digits + "." + digitsAfter.first);
-            if (checker.test(result)) {
-                add(css, digits, ".", digitsAfter.first);
-                return new Pair<>(result, digitsAfter.second);
-            } else {
+            try {
+                final double result = Double.parseDouble(digits + "." + digitsAfter.first);
+                if (checker.test(result)) {
+                    add(css, digits, ".", digitsAfter.first);
+                    return new Pair<>(result, digitsAfter.second);
+                } else {
+                    addError(css, digits, ".", digitsAfter.first);
+                    return new Pair<>(null, digitsAfter.second);
+                }
+            } catch (NumberFormatException nfe) {
                 addError(css, digits, ".", digitsAfter.first);
                 return new Pair<>(null, digitsAfter.second);
             }
