@@ -1045,8 +1045,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="init_title_useUnifiedMap">Użyj zunifikowanej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
+    <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
