@@ -92,7 +92,10 @@ public class DegreeFormulaTest {
 
     @Test
     public void parseNonparseable() {
+        //tests both stability for non-parseable formulats (-> no exceptions allowed!) and correct error text
         assertThat(DegreeFormula.compile("E 053° 33.06(4**A)'", true).evaluateToString(null)).isEqualTo("E053°33.06(4**A)'?");
+        assertThat(DegreeFormula.compile("E 053 33.06A", true).evaluateToString(v -> Value.of("."))).isEqualTo("E053°33.06.'");
+
     }
 
     @Test
