@@ -860,7 +860,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint">Starpposms</string>
     <string name="waypoint_coordinates">Koordinātas</string>
     <string name="waypoint_cache_coordinates">Slēpņa koordinātas</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Uzstādīt</string>
     <string name="waypoint_my_coordinates">Manas koordinātas</string>
     <string name="waypoint_bearing">Pagrieziena leņķis °</string>
