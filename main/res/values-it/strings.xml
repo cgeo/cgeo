@@ -1435,8 +1435,6 @@
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coordinate</string>
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
-    <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calcola coordinate</string>
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
