@@ -393,7 +393,6 @@
     <string name="caches_sort_storage">Data d\'emmagatzemat al dispositiu</string>
     <string name="caches_sort_eventdate">Data de la trobada</string>
     <string name="caches_select_mode">Mode seleccionar</string>
-    <string name="caches_select_next">Seleccioneu els 20 catxés següents</string>
     <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
     <string name="caches_select_invert">Inverteix la selecció</string>
     <string name="caches_nearby">Propers</string>
