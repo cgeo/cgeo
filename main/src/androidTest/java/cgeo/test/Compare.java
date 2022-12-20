@@ -31,7 +31,7 @@ public abstract class Compare {
         assertThat(actual.getGuid()).as(cacheStr + "guid").isEqualTo(expected.getGuid());
         assertThat(actual.getFavoritePoints()).as(cacheStr + "fav points").isGreaterThanOrEqualTo(expected.getFavoritePoints());
         final Date hiddenDate = actual.getHiddenDate();
-        assertThat(hiddenDate).isNotNull();
+        assertThat(hiddenDate).as(cacheStr + " hidden date").isNotNull();
         assertThat(hiddenDate).as(cacheStr + " hidden date").isEqualTo(expected.getHiddenDate());
         assertThat(actual.isPremiumMembersOnly()).as(cacheStr + "premium only").isEqualTo(expected.isPremiumMembersOnly());
 
@@ -40,7 +40,7 @@ public abstract class Compare {
             assertThat(actual.isOwner()).as(cacheStr + "owning status").isEqualTo(expected.isOwner());
             assertThat(actual.getOwnerUserId()).as(cacheStr + "owner user id").isEqualTo(expected.getOwnerUserId());
             assertThat(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();
-            assertThat(actual.getDescription()).as("description").startsWith(expected.getDescription());
+            assertThat(actual.getDescription()).as(cacheStr + "description").startsWith(expected.getDescription());
             assertThat(actual.getShortDescription()).as(cacheStr + "short description").isEqualTo(expected.getShortDescription());
             assertThat(actual.getCacheId()).as(cacheStr + "cache id").isEqualTo(expected.getCacheId());
             assertThat(actual.getLocation()).as(cacheStr + "location").isEqualTo(expected.getLocation());

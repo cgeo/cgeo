@@ -154,24 +154,22 @@ android {
         }
         // local unit tests, which can be executed without a device
         test {
-            setRoot("src/test")
+            setRoot("src/test/java")
             manifest.srcFile 'src/test/AndroidManifest.xml'
             java.srcDir 'src/test/java'
+            //Test Resources need to access test/java because this dir contains Mock cache HTMLs.
             resources.srcDirs = ['src/test/res']
             res.srcDirs = ['src/test/res']
         }
         // device/emulator based instrumentation tests in source set "androidTest"
         androidTest{
-            // map tests to the Eclipse style test project instead of the default app/src/androidTest/java
             setRoot("src/androidTest")
             manifest.srcFile 'src/androidTest/AndroidManifest.xml'
-            java {
-                srcDir 'src/androidTest/java'
-            }
+            java.srcDir 'src/androidTest/java'
             resources.srcDirs = ['src/androidTest/res']
             res.srcDirs = ['src/androidTest/res']
         }
-        // TODO: the package cgeo.geocaching.test.mock is currently duplicated in both "src" and "src-android". if a shared source folder is used instead, then we get java.lang.VerificationExceptions, because the 2 unit test frameworks modify the classes in different ways
+        // TODO: the package cgeo.geocaching.test.mock is currently duplicated in both "androidTest" and "test". -> should be placed into a common module/place
     }
 
     testOptions {
@@ -691,9 +689,9 @@ tasks.register('checkstyle', Checkstyle) {
     group 'verification'
     description 'Check code standard'
 
-    source 'src'
-    source '../tests/src'
-    source '../tests/src-android'
+    source 'src/main/java'
+    source 'src/test/java'
+    source 'src/androidTest/java'
     include '**/*.java'
 
     classpath = files()

@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -22,6 +23,7 @@ import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.test.Compare;
 
 import androidx.annotation.Nullable;
@@ -30,6 +32,7 @@ import androidx.test.filters.SmallTest;
 
 import java.util.GregorianCalendar;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
@@ -48,6 +51,13 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(GCLogin.getInstance().login()).as("User and password must be provided").isEqualTo(StatusCode.NO_ERROR);
         assertThat(Settings.isGCPremiumMember()).as("User must be premium member for some of the tests to succeed").isTrue();
     }
+
+    @Test
+    public void testRegEx() {
+        final String page = MockedCache.readCachePage("GC2CJPF");
+        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
+    }
+
 
     /**
      * Test {@link GCParser#searchTrackable(String, String, String)}
@@ -280,6 +290,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test cache parsing. Esp. useful after a GC.com update
      */
     @MediumTest
+    @Test
     public void testSearchByGeocodeBasis() {
         for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
