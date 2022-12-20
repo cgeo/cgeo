@@ -147,29 +147,29 @@ android {
         // application sources in source set "main"
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
-            res.srcDirs = ['res', 'res.maplegends/elevate', 'res.maplegends/fzk', 'res.maplegends/fzk-outdoor']
-            assets.srcDirs = ['assets']
-            aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
+            java.srcDirs = ['src/main/java', 'thirdparty', '../common/src'] // no need for annotation generated sources
+            res.srcDirs = ['src/main/res', 'src/main/res.maplegends/elevate', 'src/main/res.maplegends/fzk', 'src/main/res.maplegends/fzk-outdoor']
+            assets.srcDirs = ['src/main/assets']
+            aidl.srcDirs = ['src/main/java'] // default src/main/aidl creates package name conflicts in Eclipse
         }
         // local unit tests, which can be executed without a device
         test {
-            setRoot("../tests")
-            manifest.srcFile '../tests/AndroidManifest.xml'
-            java.srcDir '../tests/src'
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
+            setRoot("src/test")
+            manifest.srcFile 'src/test/AndroidManifest.xml'
+            java.srcDir 'src/test/java'
+            resources.srcDirs = ['src/test/res']
+            res.srcDirs = ['src/test/res']
         }
         // device/emulator based instrumentation tests in source set "androidTest"
         androidTest{
             // map tests to the Eclipse style test project instead of the default app/src/androidTest/java
-            setRoot("../tests")
-            manifest.srcFile '../tests/AndroidManifest.xml'
+            setRoot("src/androidTest")
+            manifest.srcFile 'src/androidTest/AndroidManifest.xml'
             java {
-                srcDir '../tests/src-android'
+                srcDir 'src/androidTest/java'
             }
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
+            resources.srcDirs = ['src/androidTest/res']
+            res.srcDirs = ['src/androidTest/res']
         }
         // TODO: the package cgeo.geocaching.test.mock is currently duplicated in both "src" and "src-android". if a shared source folder is used instead, then we get java.lang.VerificationExceptions, because the 2 unit test frameworks modify the classes in different ways
     }
@@ -496,14 +496,14 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        File keysFile = file("res/values/keys.xml")
+        File keysFile = file("src/main/res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
             File propertiesFile = rootProject.file("private.properties")
             if (propertiesFile.exists()) {
                 copy {
                     from "templates/keys.xml"
-                    into ("res/values")
+                    into ("src/main/res/values")
                     Properties properties = new Properties()
                     propertiesFile.withInputStream {
                         properties.load(it)
