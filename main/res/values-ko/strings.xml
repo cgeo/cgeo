@@ -391,7 +391,6 @@
     <string name="caches_sort_storage">기기에 저장된 데이터</string>
     <string name="caches_sort_eventdate">이벤트 날짜</string>
     <string name="caches_select_mode">선택 모드</string>
-    <string name="caches_select_next">다음 20개 캐시 선택</string>
     <string name="caches_select_mode_exit">선택 모드 나오기</string>
     <string name="caches_select_invert">선택 반전</string>
     <string name="caches_nearby">인근 캐시</string>
