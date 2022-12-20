@@ -4,6 +4,7 @@
 - Korrektur: Optionen für Basis-Mitglieder für gc.com wurden im Menü nicht angezeigt
 - Änderung: Kartenanbieter mapy.cz entfernt (wegen Änderung der Lizenz)
 - Korrektur: Das Cache-Suchfeld wird nach der Trefferauswahl geleert
+- Fix: Crash for degree formulas with multiple dots
 
 ## 2022.11.25
 
