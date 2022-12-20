@@ -392,7 +392,6 @@
     <string name="caches_sort_storage">Data salvataggio</string>
     <string name="caches_sort_eventdate">Data Evento</string>
     <string name="caches_select_mode">Modo Selezione</string>
-    <string name="caches_select_next">Seleziona i prossimi 20 cache</string>
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
