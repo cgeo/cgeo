@@ -382,7 +382,8 @@
     <string name="caches_sort_storage">Ημερομηνία αποθήκευσης στη συσκευή</string>
     <string name="caches_sort_eventdate">Ημερομηνία εκδήλωσης</string>
     <string name="caches_select_mode">Επιλογή</string>
-    <string name="caches_select_next">Επιλογή των επόμενων 20 κρυπτών</string>
+    <string name="caches_select_next20">Επιλογή των επόμενων 20 κρυπτών</string>
+    <string name="caches_select_next100">Επιλογή των επόμενων 100 κρυπτών</string>
     <string name="caches_select_mode_exit">Έξοδος από τη λειτουργία επιλογής</string>
     <string name="caches_select_invert">Αντιστροφή επιλογής</string>
     <string name="caches_nearby">Σε κοντινή απόσταση</string>
