@@ -394,7 +394,8 @@
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
     <string name="caches_sort_eventdate">Data do evento</string>
     <string name="caches_select_mode">Modo de selecção</string>
-    <string name="caches_select_next">Seleccionar as próximas 20 caches</string>
+    <string name="caches_select_next20">Seleccionar as próximas 20 caches</string>
+    <string name="caches_select_next100">Seleccionar as próximas 100 caches</string>
     <string name="caches_select_mode_exit">Sair do modo de selecção</string>
     <string name="caches_select_invert">Inverter selecção</string>
     <string name="caches_nearby">Por perto</string>
@@ -535,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
+    <string name="cache_filter_datefilter_absolute">Absoluto</string>
+    <string name="cache_filter_datefilter_relative">Relativo a hoje</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
@@ -591,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">desde o amanhecer</string>
     <string name="cache_filter_stored_since_stored_max_short">máx</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>há mais de um ano</item>
+        <item>um ano atrás</item>
+        <item>180 dias atrás</item>
+        <item>90 dias atrás</item>
+        <item>30 dias atrás</item>
+        <item>2 semanas atrás</item>
+        <item>uma semana atrás</item>
+        <item>há 3 dias</item>
+        <item>há menos de 3 dias</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1a</item>
+        <item>1a</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2sem</item>
+        <item>1sem</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -846,7 +871,7 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
+    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados, mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
