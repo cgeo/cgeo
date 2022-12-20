@@ -4,6 +4,7 @@
 - Correção: configurações básicas de membros do gc.com não eram exibidas
 - Alteração: Foi removida a cartografia mapy.cz (devido à mudança no licenciamento)
 - Correcção: Campo de pesquisa de caches é limpo após a sua selecção
+- Correcção: A aplicação falhava ao inserir fórmulas de graus com vários pontos
 
 ## 2022.11.25
 
