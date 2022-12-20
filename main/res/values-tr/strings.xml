@@ -389,7 +389,6 @@
     <string name="caches_sort_storage">Cihaza kaydedilen tarih</string>
     <string name="caches_sort_eventdate">Etkinlik tarihi</string>
     <string name="caches_select_mode">Seçim modu</string>
-    <string name="caches_select_next">Sonraki 20 Geocache\'i seç</string>
     <string name="caches_select_mode_exit">Seçim modundan çıkın</string>
     <string name="caches_select_invert">Seçimi tersine çevir</string>
     <string name="caches_nearby">Yakınlarda</string>
