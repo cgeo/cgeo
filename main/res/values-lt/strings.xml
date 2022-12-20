@@ -400,7 +400,8 @@
     <string name="caches_sort_storage">Išsaugojimo įrenginyje data</string>
     <string name="caches_sort_eventdate">Renginio data</string>
     <string name="caches_select_mode">Pasirinkti</string>
-    <string name="caches_select_next">Pasirinkti sekančias 20 slėptuvių</string>
+    <string name="caches_select_next20">Pasirinkti sekančias 20 slėptuvių</string>
+    <string name="caches_select_next100">Pasirinkti sekančias 100 slėptuvių</string>
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>
@@ -549,6 +550,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Prasideda su</string>
     <string name="cache_filter_stringfilter_type_ends_with">Baigiasi su</string>
     <string name="cache_filter_stringfilter_type_pattern">Ruošinys</string>
+    <string name="cache_filter_datefilter_absolute">Absoliutus</string>
+    <string name="cache_filter_datefilter_relative">Palyginti su šiandiena</string>
     <string name="cache_filter_datefilter_label_from">Nuo:</string>
     <string name="cache_filter_datefilter_label_to">Iki:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>
@@ -605,6 +608,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">laiko pradžia</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>daugiau nei prieš metus</item>
+        <item>prieš metus</item>
+        <item>prieš 180 dienų</item>
+        <item>prieš 90 dienų</item>
+        <item>prieš 30 dienų</item>
+        <item>prieš 2 savaites</item>
+        <item>prieš savaitę</item>
+        <item>prieš 3 dienas</item>
+        <item>mažiau nei prieš 3 dienas</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1m</item>
+        <item>1m.</item>
+        <item>180d.</item>
+        <item>90d.</item>
+        <item>30d.</item>
+        <item>2sav.</item>
+        <item>1sav.</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -1048,6 +1073,8 @@
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
+    <string name="category_unifiedMap">Vieningas žemėlapis</string>
+    <string name="experimental">(eksperimentinis)</string>
     <string name="init_title_useUnifiedMap">Naudokite vieningą žemėlapį</string>
     <string name="init_summary_useUnifiedMap">Naudokite naują vieningą žemėlapį, o ne įtaisytuosius Google Map / Mapsforge (OSM) žemėlapius (eksperimentiniai / toli gražu nebaigti / tik bandymams)</string>
     <string name="localstorage_migrate_title">Vietinių failų perkėlimas</string>
