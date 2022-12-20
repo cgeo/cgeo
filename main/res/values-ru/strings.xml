@@ -398,7 +398,6 @@
     <string name="caches_sort_storage">Дата сохранения</string>
     <string name="caches_sort_eventdate">Дата события</string>
     <string name="caches_select_mode">Режим выделения</string>
-    <string name="caches_select_next">Выбрать следующие 20 тайников</string>
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
