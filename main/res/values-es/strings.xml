@@ -386,7 +386,6 @@
     <string name="caches_sort_storage">Fecha de guardado en dispositivo</string>
     <string name="caches_sort_eventdate">Fecha del evento</string>
     <string name="caches_select_mode">Modo selección</string>
-    <string name="caches_select_next">Seleccionar los siguientes 20 cachés</string>
     <string name="caches_select_mode_exit">Salir de modo selección</string>
     <string name="caches_select_invert">Invertir selección</string>
     <string name="caches_nearby">Cercanos</string>
