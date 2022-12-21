@@ -3,8 +3,8 @@ pull_request_labels: ["Translation"]
 commit_message: "%original_file_name% - %language% translation [skip ci]"
 append_commit_message: false
 files:
-  - source: /main/res/values/strings.xml
-    translation: /main/res/values-%two_letters_code%/%original_file_name%
+  - source: /app/src/main/res/values/strings.xml
+    translation: /app/src/main/res/values-%two_letters_code%/%original_file_name%
     translate_attributes: 0
     content_segmentation: 0
   - source: /cgeo-contacts/res/values/strings.xml
@@ -14,12 +14,12 @@ files:
   - source: /cgeo-contacts/project/playstore/description/_source/*.txt
     translation: /cgeo-contacts/project/playstore/description/translated/%language%/%original_file_name%
     content_segmentation: 1
-  - source: /main/project/playstore/description/_source/*.txt
-    translation: /main/project/playstore/description/translated/%language%/%original_file_name%
+  - source: /app/project/playstore/description/_source/*.txt
+    translation: /app/project/playstore/description/translated/%language%/%original_file_name%
     content_segmentation: 1
-  - source: /main/res/raw/changelog_base.md
-    translation: /main/res/raw-%two_letters_code%/%original_file_name%
+  - source: /app/src/main/res/raw/changelog_base.md
+    translation: /app/src/main/res/raw-%two_letters_code%/%original_file_name%
     content_segmentation: 1
-  - source: /main/res/raw/changelog_bugfix.md
-    translation: /main/res/raw-%two_letters_code%/%original_file_name%
+  - source: /app/src/main/res/raw/changelog_bugfix.md
+    translation: /app/src/main/res/raw-%two_letters_code%/%original_file_name%
     content_segmentation: 1

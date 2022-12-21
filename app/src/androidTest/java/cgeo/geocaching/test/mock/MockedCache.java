@@ -68,7 +68,7 @@ public abstract class MockedCache extends Geocache {
         InputStream is = null;
         BufferedReader br = null;
         try {
-            is = MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
+            is = MockedCache.class.getResourceAsStream("/raw/mock/" + geocode + ".html");
             br = new BufferedReader(new InputStreamReader(is), 150000);
 
             final StringBuilder buffer = new StringBuilder();
