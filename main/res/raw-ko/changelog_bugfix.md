@@ -1,3 +1,4 @@
+##
 
 ### 일반
 - 수정: 자동으로 방문 모드로 설정된 새로운 추적아이템
@@ -6,7 +7,7 @@
 - Fix: Cache search field emptied after selecting search hit
 - Fix: Crash for degree formulas with multiple dots
 
-## 2022.11.25
+##
 
 ### 일반
 - 수정: 맵퀘스트 지오코딩에 업데이트된 URL 사용
