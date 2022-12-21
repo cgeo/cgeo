@@ -1,3 +1,4 @@
+##
 
 ### Geral
 - Correção: Novo TB definido para o modo de visita automaticamente
@@ -6,7 +7,7 @@
 - Correcção: Campo de pesquisa de caches é limpo após a sua selecção
 - Correcção: A aplicação falhava ao inserir fórmulas de graus com vários pontos
 
-## 2022.11.25
+##
 
 ### Geral
 - Correcção: Utilização do URL actualizado para a geocodificação do mapquest
