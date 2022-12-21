@@ -1,9 +1,13 @@
+##
 
 ### General
 - Fix: New TB set to visit mode automatically
 - Fix: gc.com basic member settings not displayed
+- Zmena: poskytovateľ máp mapy.cz odstránený (kvôli zmene v licencovaní)
+- Fix: Cache search field emptied after selecting search hit
+- Fix: Crash for degree formulas with multiple dots
 
-## 2022.11.25
+##
 
 ### General
 - Fix: Use updated URL for mapquest geocoding

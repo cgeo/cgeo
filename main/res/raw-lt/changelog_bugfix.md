@@ -1,9 +1,13 @@
+##
 
 ### Bendras
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
+- Pataisymas: Nerodomi bazinio gc.com nario nustatymai
+- Pakeitimas: pašalintas mapy.cz žemėlapio teikėjas (dėl licencijavimo pakeitimo)
+- Pataisymas: Slėptuvės paieškos laukas išvalomas atlikus paiešką
+- Pataisymas: Laipsnių formulių su keliais taškais strigtis
 
-## 2022.11.25
+##
 
 ### Bendras
 - Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui

@@ -1,9 +1,13 @@
+##
 
 ### Yleinen
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Korjaus: Uusi TB asetetaan Vieraili-tilaan automaattisesti
+- Korjaus: gc.com perusasetukset eivät näkyneet
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
+- Fix: Crash for degree formulas with multiple dots
 
-## 2022.11.25
+##
 
 ### Yleinen
 - Korjaus: Käytä päivitettyä URL-osoitetta mapquestin geokoodaukseen

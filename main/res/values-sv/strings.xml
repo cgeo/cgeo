@@ -392,7 +392,6 @@
     <string name="caches_sort_storage">Tid för sparandet i enheten</string>
     <string name="caches_sort_eventdate">Eventdatum</string>
     <string name="caches_select_mode">Markeringsläge</string>
-    <string name="caches_select_next">Välj nästa 20 cacher</string>
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>

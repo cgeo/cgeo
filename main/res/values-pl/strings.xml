@@ -398,7 +398,6 @@
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
-    <string name="caches_select_next">Wybierz następne 20 skrytek</string>
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>
@@ -1045,8 +1044,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="init_title_useUnifiedMap">Użyj zunifikowanej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
+    <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1396,7 +1396,7 @@
     <string name="cache_image_rename">Zmień nazwę</string>
     <string name="cache_image_delete">Usuń</string>
     <string name="cache_image_title_camera_prefix">Zdjęcie</string>
-    <string name="cache_image_background">Obrazek tła listy skrytek</string>
+    <string name="cache_image_background">Obrazek tła opisu skrytki</string>
     <string name="cache_share_field">Udostępnij</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>

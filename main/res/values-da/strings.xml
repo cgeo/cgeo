@@ -371,7 +371,6 @@
     <string name="caches_sort_storage">Dato for lagring på enhed</string>
     <string name="caches_sort_eventdate">Arrangementsdato</string>
     <string name="caches_select_mode">Markér</string>
-    <string name="caches_select_next">Vælg de næste 20 caches</string>
     <string name="caches_select_mode_exit">Afslut markering</string>
     <string name="caches_select_invert">Omvend markering</string>
     <string name="caches_nearby">I nærheden</string>

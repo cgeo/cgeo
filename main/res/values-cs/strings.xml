@@ -400,7 +400,6 @@
     <string name="caches_sort_storage">Datum uložení do zařízení</string>
     <string name="caches_sort_eventdate">Datum události</string>
     <string name="caches_select_mode">Režim výběru</string>
-    <string name="caches_select_next">Vybrat dalších 20 kešek</string>
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
@@ -1048,6 +1047,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="category_unifiedMap">Jednotná mapa</string>
+    <string name="experimental">(experimentální)</string>
     <string name="init_title_useUnifiedMap">Použít jednotnou mapu</string>
     <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>

@@ -393,7 +393,6 @@
     <string name="caches_sort_storage">Date d\'enregistrement dans l\'appareil</string>
     <string name="caches_sort_eventdate">Date de l\'événement</string>
     <string name="caches_select_mode">Activer le mode sélection</string>
-    <string name="caches_select_next">Sélectionner les 20 caches suivantes</string>
     <string name="caches_select_mode_exit">Désactiver le mode sélection</string>
     <string name="caches_select_invert">Inverser la sélection</string>
     <string name="caches_nearby">Proches</string>

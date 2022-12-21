@@ -394,7 +394,6 @@
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
-    <string name="caches_select_next">Valitse seuraavat 20 kätköä</string>
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>

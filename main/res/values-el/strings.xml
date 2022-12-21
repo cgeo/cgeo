@@ -1020,6 +1020,8 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
+    <string name="category_unifiedMap">Ενοποιημένος Χάρτης</string>
+    <string name="experimental">(Πειραματικό)</string>
     <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
     <string name="init_summary_useUnifiedMap">Χρήση νέου ενοποιημένου χάρτη αντί για ενσωματωμένους χάρτες Google Map / Mapsforge (OSM) (πειραματικό / μακριά από το να είναι πλήρες / μόνο για δοκιμή)</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>

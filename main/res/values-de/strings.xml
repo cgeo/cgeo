@@ -1034,6 +1034,8 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
+    <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
     <string name="init_summary_useUnifiedMap">Verwende die neue einheitliche Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten (experimentell / bei weitem nicht komplett / nur zum Testen)</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>

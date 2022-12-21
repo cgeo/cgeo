@@ -381,7 +381,6 @@
     <string name="caches_sort_storage">オフライン用に保存した日時</string>
     <string name="caches_sort_eventdate">イベント日</string>
     <string name="caches_select_mode">選択モード</string>
-    <string name="caches_select_next">次の20個のキャッシュを選択</string>
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
     <string name="caches_nearby">現在地の近く</string>
