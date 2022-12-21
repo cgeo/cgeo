@@ -1,3 +1,4 @@
+##
 
 ### Algemeen
 - Oplossing: Nieuwe TB automatisch ingesteld op bezoek modus
@@ -6,7 +7,7 @@
 - Fix: Cache search field emptied after selecting search hit
 - Fix: Crash for degree formulas with multiple dots
 
-## 2022.11.25
+##
 
 ### Algemeen
 - Oplossing: Gebruik bijgewerkte URL voor mapquest geocoding
