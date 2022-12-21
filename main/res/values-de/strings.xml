@@ -394,6 +394,8 @@
     <string name="caches_sort_storage">Speicherdatum</string>
     <string name="caches_sort_eventdate">Event-Datum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
+    <string name="caches_select_next20">Nächste 20 Caches auswählen</string>
+    <string name="caches_select_next100">Nächste 100 Caches auswählen</string>
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>
@@ -534,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
+    <string name="cache_filter_datefilter_absolute">Absolut</string>
+    <string name="cache_filter_datefilter_relative">Relativ zu heute</string>
     <string name="cache_filter_datefilter_label_from">Von:</string>
     <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
@@ -590,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">Anbeginn der Zeit</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>Vor mehr als einem Jahr</item>
+        <item>Vor einem Jahr</item>
+        <item>Vor 180 Tagen</item>
+        <item>Vor 90 Tagen</item>
+        <item>Vor 30 Tagen</item>
+        <item>Vor zwei Wochen</item>
+        <item>Vor einer Woche</item>
+        <item>Vor 3 Tagen</item>
+        <item>Vor weniger als drei Tagen</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1J</item>
+        <item>1J</item>
+        <item>180T</item>
+        <item>90T</item>
+        <item>30T</item>
+        <item>2W</item>
+        <item>1W</item>
+        <item>3T</item>
+        <item>&lt;3T</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
