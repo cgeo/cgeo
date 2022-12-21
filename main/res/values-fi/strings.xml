@@ -196,7 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
-    <string name="err_captcha">Captcha vaaditaan. Ole hyvä ja katso <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> saadaksesi opastusta.</string>
+    <string name="err_captcha">Palvelu edellyttää Captchaa. Ole hyvä ja avaa geocaching.com sivusto selaimellasi ja ratkaise näkyvä Captcha kun kirjaudut sinne. Yritä sitten uudelleen kirjautua c:geoon.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -207,7 +207,7 @@
     <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
     <string name="err_comm">Tuntematon kommunikaatiovirhe. Vilkaise <a href="https://www.cgeo.org/faq#login-failed">usein kysytyt kysymykset (englanniksi)</a> avun saamiseksi.</string>
     <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu</string>
-    <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana</string>
+    <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana.</string>
     <string name="err_maintenance">Geocaching.com on huollettavana. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt.</string>
     <string name="err_license">Et ole hyväksynyt Geocaching.com-käyttöoikeussopimusta, joten c:geo ei voi ladata kätköjen koordinaatteja.</string>
     <string name="err_unvalidated_account">Sinun on ensin vahvistettava tilisi Geocaching.com-sivustolla.</string>
@@ -394,7 +394,6 @@
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
-    <string name="caches_select_next20">Valitse seuraavat 20 kätköä</string>
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
@@ -1437,8 +1436,6 @@
     <string name="waypoint">Reittipiste</string>
     <string name="waypoint_coordinates">Koordinaatit</string>
     <string name="waypoint_cache_coordinates">Kätkön koordinaatit</string>
-    <string name="waypoint_calculated_coordinates">Lasketut koordinaatit</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Laske koordinaatit</string>
     <string name="waypoint_custom">Oma</string>
     <string name="waypoint_my_coordinates">Sijaintini</string>
@@ -1522,6 +1519,7 @@
     <string name="formula_function_tan">Tangentti</string>
     <string name="formula_function_abs">Itseisarvo</string>
     <string name="formula_function_round">Pyöristä</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Jos</string>
     <string name="formula_function_length">Merkkijonon pituus</string>
     <string name="formula_function_substring">Alamerkkijono</string>
@@ -2292,6 +2290,8 @@
     <string name="mapserver_openandromaps_themes_info">Yksityiskohtainen karttateema, rakennettu \"OpenAndroMaps\" karttoja varten</string>
     <string name="mapserver_freizeitkarte_info">Yksityiskohtaiset kartat, vaativat yhden \"freizeitkarte\" kartan teemoista.</string>
     <string name="mapserver_freizeitkarte_themes_info">Yksityiskohtainen karttateema, rakennettu \"Freizeitkarte\" karttoja varten</string>
+    <string name="mapserver_osmpaws_info">Yksityiskohtaiset kartat, vaativat \"paws_4\" karttateeman.</string>
+    <string name="mapserver_osmpaws_themes_info">Yksityiskohtainen kartan teema, rakennettu \"Paws\"-kartoille</string>
     <string name="mapserver_hylly_info">Yksityiskohtaiset kartat Suomea varten, vaativat yhden \"Hylly\" karttateemoista</string>
     <string name="mapserver_hylly_themes_info">Yksityiskohtainen karttateema, rakennettu \"Hylly\" karttoja varten</string>
     <string name="brouter_info">Offline-reitityspalvelu</string>
