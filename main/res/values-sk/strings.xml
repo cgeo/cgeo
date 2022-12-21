@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
-    <string name="err_captcha">Potrebné overenie Captcha. Návod nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Najčastejších otázkach</a>.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_lc">Zlyhalo pripojenie k serveru labs.geocaching.com. Webová stránka má výpadok, prípadne nefunguje internetové pripojenie.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
     <string name="err_comm">Neznáma chyba komunikácie. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
     <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
-    <string name="err_wrong">Nesprávne používateľské meno alebo heslo</string>
     <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
     <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
     <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -400,7 +398,6 @@
     <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
     <string name="caches_sort_eventdate">Dátum Eventu</string>
     <string name="caches_select_mode">Mód výberu</string>
-    <string name="caches_select_next20">Vybrať ďalších 20 kešiek</string>
     <string name="caches_select_mode_exit">Opustiť mód výberu</string>
     <string name="caches_select_invert">Inverzný výber</string>
     <string name="caches_nearby">V okolí</string>
@@ -549,6 +546,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Začína na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
+    <string name="cache_filter_datefilter_absolute">Absolútne</string>
+    <string name="cache_filter_datefilter_relative">Relatívne ku dnešku</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrať všetko</string>
@@ -605,6 +604,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">úsvit</string>
     <string name="cache_filter_stored_since_stored_max_short">max.</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>pred viac než rokom</item>
+        <item>pred rokom</item>
+        <item>pred 180 dňami</item>
+        <item>pred 90 dňami</item>
+        <item>pred 30 dňami</item>
+        <item>pred 2 týždňami</item>
+        <item>pred týždňom</item>
+        <item>pred 3 dňami</item>
+        <item>pred menej než 3 dňami</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1r</item>
+        <item>1r</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2t</item>
+        <item>1t</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
@@ -1048,6 +1069,8 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
+    <string name="category_unifiedMap">Jednotná mapa</string>
+    <string name="experimental">(experimentálne)</string>
     <string name="init_title_useUnifiedMap">Použiť zjednotenú mapu</string>
     <string name="init_summary_useUnifiedMap">Použite novú zjednotenú mapu namiesto vstavaných máp Google Map/Mapsforge (OSM) (experimentálne/zďaleka nie sú dokončené/iba na testovanie)</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
@@ -1469,8 +1492,6 @@
     <string name="waypoint">Bod trasy</string>
     <string name="waypoint_coordinates">Súradnice</string>
     <string name="waypoint_cache_coordinates">Súradnice skrýše</string>
-    <string name="waypoint_calculated_coordinates">Vypočítané súradnice</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Vypočítať súradnice</string>
     <string name="waypoint_custom">vlastný</string>
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
