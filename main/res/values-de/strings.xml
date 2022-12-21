@@ -196,7 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
-    <string name="err_captcha">Captcha erforderlich. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> für weitere Hilfe.</string>
+    <string name="err_captcha">Der Dienst benötigt ein Captcha. Bitte öffne die geocaching.com-Webseite mit deinem Browser und löse das Captcha, welches dort beim Anmelden angezeigt wird. Dann versuche erneut die Anmeldung in c:geo.</string>
     <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_lc">Verbindung zu labs.geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
@@ -207,7 +207,7 @@
     <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
     <string name="err_comm">Unbekannter Kommunikationsfehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
     <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt</string>
-    <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
+    <string name="err_wrong">Benutzername und/oder Passwort falsch.</string>
     <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
     <string name="err_license">Die Geocaching.com-Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
     <string name="err_unvalidated_account">Die Anmeldedaten müssen zuerst auf Geocaching.com validiert werden.</string>
@@ -395,6 +395,7 @@
     <string name="caches_sort_eventdate">Event-Datum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
     <string name="caches_select_next20">Nächste 20 Caches auswählen</string>
+    <string name="caches_select_next100">Nächste 100 Caches auswählen</string>
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>
@@ -535,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
+    <string name="cache_filter_datefilter_absolute">Absolut</string>
+    <string name="cache_filter_datefilter_relative">Relativ zu heute</string>
     <string name="cache_filter_datefilter_label_from">Von:</string>
     <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
@@ -591,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">Anbeginn der Zeit</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>Vor mehr als einem Jahr</item>
+        <item>Vor einem Jahr</item>
+        <item>Vor 180 Tagen</item>
+        <item>Vor 90 Tagen</item>
+        <item>Vor 30 Tagen</item>
+        <item>Vor zwei Wochen</item>
+        <item>Vor einer Woche</item>
+        <item>Vor 3 Tagen</item>
+        <item>Vor weniger als drei Tagen</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1J</item>
+        <item>1J</item>
+        <item>180T</item>
+        <item>90T</item>
+        <item>30T</item>
+        <item>2W</item>
+        <item>1W</item>
+        <item>3T</item>
+        <item>&lt;3T</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
@@ -1034,6 +1059,8 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
+    <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
     <string name="init_summary_useUnifiedMap">Verwende die neue einheitliche Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten (experimentell / bei weitem nicht komplett / nur zum Testen)</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
@@ -1437,8 +1464,6 @@
     <string name="waypoint">Wegpunkt</string>
     <string name="waypoint_coordinates">Koordinaten</string>
     <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
-    <string name="waypoint_calculated_coordinates">Berechnete Koordinaten</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Koordinate berechnen</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
@@ -1522,6 +1547,7 @@
     <string name="formula_function_tan">Tangens</string>
     <string name="formula_function_abs">Absoluter Wert</string>
     <string name="formula_function_round">Runden</string>
+    <string name="formula_function_trunc">Abschneiden</string>
     <string name="formula_function_if">Wenn</string>
     <string name="formula_function_length">Zeichenlänge</string>
     <string name="formula_function_substring">Teilzeichenfolge</string>
