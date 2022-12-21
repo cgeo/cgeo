@@ -1,3 +1,4 @@
+##
 
 ### Yleinen
 - Korjaus: Uusi TB asetetaan Vieraili-tilaan automaattisesti
@@ -6,7 +7,7 @@
 - Fix: Cache search field emptied after selecting search hit
 - Fix: Crash for degree formulas with multiple dots
 
-## 2022.11.25
+##
 
 ### Yleinen
 - Korjaus: Käytä päivitettyä URL-osoitetta mapquestin geokoodaukseen
