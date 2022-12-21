@@ -745,7 +745,6 @@
     <string name="waypoint">Punct</string>
     <string name="waypoint_coordinates">Coordonate</string>
     <string name="waypoint_cache_coordinates">Coordonate cutie</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Personalizat</string>
     <string name="waypoint_my_coordinates">Coordonatele mele</string>
     <string name="waypoint_bearing">Azimut în °</string>
