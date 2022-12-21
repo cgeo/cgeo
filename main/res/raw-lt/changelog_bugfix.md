@@ -1,3 +1,4 @@
+##
 
 ### Bendras
 - Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
@@ -6,7 +7,7 @@
 - Pataisymas: Slėptuvės paieškos laukas išvalomas atlikus paiešką
 - Pataisymas: Laipsnių formulių su keliais taškais strigtis
 
-## 2022.11.25
+##
 
 ### Bendras
 - Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui
