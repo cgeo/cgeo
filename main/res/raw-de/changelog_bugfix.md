@@ -1,12 +1,13 @@
+##
 
 ### Allgemein
 - Korrektur: Neue TB wurden automatisch auf besucht gesetzt
 - Korrektur: Optionen für Basis-Mitglieder für gc.com wurden im Menü nicht angezeigt
 - Änderung: Kartenanbieter mapy.cz entfernt (wegen Änderung der Lizenz)
 - Korrektur: Das Cache-Suchfeld wird nach der Trefferauswahl geleert
-- Fix: Crash for degree formulas with multiple dots
+- Korrektur: Absturz bei Grad-Formeln mit mehreren Punkten
 
-## 2022.11.25
+##
 
 ### Allgemein
 - Korrektur: Aktualisierte URL für Mapquest Geokodierung
