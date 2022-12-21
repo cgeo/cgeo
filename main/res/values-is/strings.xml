@@ -492,7 +492,6 @@
     <string name="popup_more">Fleiri upplýsingar</string>
     <!-- waypoint -->
     <string name="waypoint">Vegpunktur</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Sérsniðinn</string>
     <string name="waypoint_my_coordinates">Hnitin mín</string>
     <string name="waypoint_bearing">Lega í °</string>
