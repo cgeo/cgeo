@@ -1,9 +1,13 @@
+##
 
 ### Obecné
 - Oprava: Nový TB je automaticky nastaven do režimu návštěvy
 - Oprava: nezobrazuje se základní nastavení člena gc.com
+- Změna: odstraněn poskytovatel map mapy.cz (z důvodu změny licencování)
+- Oprava: Vyhledávací pole kešek vyprázdněno po kliknutí na hledání
+- Fix: Crash for degree formulas with multiple dots
 
-## 25.11.2022
+##
 
 ### Obecné
 - Oprava: Použití aktualizované adresy URL pro geokódování mapquestu
