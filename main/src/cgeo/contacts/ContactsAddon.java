@@ -9,7 +9,14 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+/** This class "connects" cgeo with the cgeo-contacts addon */
 public class ContactsAddon {
+
+    //Connector constants
+    private static final String CONTACTS_INTENT = "cgeo.contacts.FIND";
+    private static final String CONTACTS_URI_SCHEME = "find";
+    private static final String CONTACTS_URI_HOST = "cgeo.org";
+    private static final String CONTACTS_PARAM_NAME = "name"; // user name
 
     private ContactsAddon() {
         // utility class
@@ -17,15 +24,15 @@ public class ContactsAddon {
 
     public static void openContactCard(@NonNull final Context context, @NonNull final String userName) {
         final Parameters params = new Parameters(
-                IContacts.PARAM_NAME, userName
+                CONTACTS_PARAM_NAME, userName
         );
 
-        context.startActivity(new Intent(IContacts.INTENT,
-                Uri.parse(IContacts.URI_SCHEME + "://" + IContacts.URI_HOST + "?" + params)));
+        context.startActivity(new Intent(CONTACTS_INTENT,
+                Uri.parse(CONTACTS_URI_SCHEME + "://" + CONTACTS_URI_HOST + "?" + params)));
     }
 
     public static boolean isAvailable() {
-        return ProcessUtils.isIntentAvailable(IContacts.INTENT, Uri.parse(IContacts.URI_SCHEME + "://" + IContacts.URI_HOST));
+        return ProcessUtils.isIntentAvailable(CONTACTS_INTENT, Uri.parse(CONTACTS_URI_SCHEME + "://" + CONTACTS_URI_HOST));
     }
 
 }

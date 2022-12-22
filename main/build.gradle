@@ -147,7 +147,7 @@ android {
         // application sources in source set "main"
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src', 'thirdparty', '../common/src'] // no need for annotation generated sources
+            java.srcDirs = ['src', 'thirdparty'] // no need for annotation generated sources
             res.srcDirs = ['res', 'res.maplegends/elevate', 'res.maplegends/fzk', 'res.maplegends/fzk-outdoor']
             assets.srcDirs = ['assets']
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
