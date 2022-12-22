@@ -83,7 +83,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public String getDescription() {
-        return "<img src=\"http://img.geocaching.com/cache/large/1711f8a1-796a-405b-82ba-8685f2e9f024.jpg\" />";
+        return "<img src=\"http://img.geocaching.com/cache/large/1711f8a1-796a-405b-82ba-8685f2e9f024.jpg\">";
     }
 
     @Override

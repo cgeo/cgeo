@@ -1,55 +1,17 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.text.SpannableString;
 import android.util.Pair;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.IOUtils;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-
 public class TextUtilsTest {
-
-    private static String readCachePage(final String geocode) {
-        InputStream is = null;
-        BufferedReader br = null;
-        try {
-            is = TextUtilsTest.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
-            br = new BufferedReader(new InputStreamReader(is), 150000);
-
-            final StringBuilder buffer = new StringBuilder();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                buffer.append(line).append('\n');
-            }
-
-            return TextUtils.replaceWhitespace(buffer.toString());
-        } catch (final IOException e) {
-            Assertions.fail("cannot read cache page", e);
-        } finally {
-            IOUtils.closeQuietly(is);
-            IOUtils.closeQuietly(br);
-        }
-        return null;
-    }
-
-    @Test
-    public void regEx() {
-        final String page = readCachePage("GC2CJPF");
-        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
-    }
 
     @Test
     public void replaceWhitespaces() {
