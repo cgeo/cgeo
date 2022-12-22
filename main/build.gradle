@@ -157,21 +157,19 @@ android {
             setRoot("../tests")
             manifest.srcFile '../tests/AndroidManifest.xml'
             java.srcDir '../tests/src'
-            resources.srcDirs = ['../tests/src']
-            res.srcDirs = ['../tests/res']
+            //currently, unit tests don't use any ressources
+            resources.srcDirs = ['../tests/none']
+            res.srcDirs = ['../tests/none']
         }
         // device/emulator based instrumentation tests in source set "androidTest"
         androidTest{
             // map tests to the Eclipse style test project instead of the default app/src/androidTest/java
             setRoot("../tests")
             manifest.srcFile '../tests/AndroidManifest.xml'
-            java {
-                srcDir '../tests/src-android'
-            }
-            resources.srcDirs = ['../tests/src']
+            java.srcDir '../tests/src-android'
+            resources.srcDirs = ['../tests/res']
             res.srcDirs = ['../tests/res']
         }
-        // TODO: the package cgeo.geocaching.test.mock is currently duplicated in both "src" and "src-android". if a shared source folder is used instead, then we get java.lang.VerificationExceptions, because the 2 unit test frameworks modify the classes in different ways
     }
 
     testOptions {
