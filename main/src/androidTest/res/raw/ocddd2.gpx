@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cgeo="http://www.cgeo.org/wptext/1/0" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache listing generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>contact@opencaching.de</email>
+  <url>http://www.opencaching.de</url>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Oesterreich und der Schweiz</urlname>
+  <time>2013-11-10T14:52:05Z</time>
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+  <wpt lat="48.88417" lon="9.17660">
+    <time>2012-03-23T00:00:00Z</time>
+    <name>OCDDD2</name>
+    <desc>Kaiserstein und Grabhügel Ludwigsburg</desc>
+    <src>www.opencaching.de</src>
+    <url>http://www.opencaching.de/viewcache.php?cacheid=159890</url>
+    <urlname>Kaiserstein und Grabhügel Ludwigsburg</urlname>
+    <sym>Geocache</sym>
+    <type>Geocache|Virtual Cache</type>
+    <groundspeak:cache id="159890" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+      <groundspeak:name>Kaiserstein und Grabhügel Ludwigsburg</groundspeak:name>
+      <groundspeak:placed_by>Emmett</groundspeak:placed_by>
+      <groundspeak:owner id="114440">Emmett</groundspeak:owner>
+      <groundspeak:type>Virtual Cache</groundspeak:type>
+      <groundspeak:container>Virtual</groundspeak:container>
+      <groundspeak:attributes>
+ 	      <groundspeak:attribute id="106" inc="1">Only loggable at Opencaching</groundspeak:attribute>
+ 	      <groundspeak:attribute id="25" inc="1">Parking available</groundspeak:attribute>
+ 	      <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
+ 	      <groundspeak:attribute id="62" inc="0">Seasonal access</groundspeak:attribute>
+      </groundspeak:attributes>
+      <groundspeak:difficulty>1.5</groundspeak:difficulty>
+      <groundspeak:terrain>1.5</groundspeak:terrain>
+      <groundspeak:country>Germany</groundspeak:country>
+      <groundspeak:state>Baden-Württemberg</groundspeak:state>
+      <groundspeak:short_description html="True">Virtueller Cache am Römerhügelweg Ludwigsburg</groundspeak:short_description>
+      <groundspeak:long_description html="True">Im Süden der Stadt Ludwigsburg am heutigen Römerhügelweg liegen zwei Stellen, an denen zum Gedenken an zu ihrer Zeit gesellschaftlich bedeutende Menschen gebaut wurde.&lt;br /&gt;
+&lt;br /&gt;
+Zum einen der inzwischen abgetragene Grabhügel aus der späten Hallstattzeit, 6. Jahrhundert v. Chr. Informationen über ihn findet Ihr vor Ort.&lt;br /&gt;
+&lt;br /&gt;
+Zum anderen gegenüber ein Kaiserstein. Zwischen 1867 und 1918 wurden im deutschsprachigen Raum mehr als 1000 Kaiser-Wilhelm-Denkmäler errichtet.&lt;br /&gt;
+&lt;br /&gt;
+Um den Code zum Loggen zu erhalten, sucht vor Ort die Antworten auf folgende Fragen:&lt;br /&gt;
+1. Am Kaiserstein (N 48 53.050 E 009 10.596) ist eine metallene Tafel angebracht. Wieviele Buchstaben hat die letzte Zeile ihrer Inschrift?&lt;br /&gt;
+2. Südlich des Wasserturms ist eine Tafel mit 2 numerierten Abbildungen zu sehen (N 48 53.070 E 009 10.594). Was ist das 2. Wort der 8. Zeile des (unteren) Abschnittes links der Abbildung 2?&lt;br /&gt;
+3. An der Rückseite des Kaisersteins steht eine Sitzgelegenheit. Wieviele Beine hat sie?&lt;br /&gt;
+Der Code besteht aus den 3 Antworten, direkt hintereinandergeschrieben (Beispiel für das Format: 48Cache9 ).&lt;br /&gt;
+&lt;br /&gt;
+Parkmöglichkeiten: N 48 53.125 E 009 10.224 oder N 48 53.023 E 009 10.870 abends und am Wochenende, siehe Beschilderung&lt;br /&gt;
+&lt;br /&gt;
+Viel Spaß!&lt;p&gt;&lt;em&gt;© &lt;a href='http://www.opencaching.de/viewprofile.php?userid=114440' target='_blank'&gt;Emmett&lt;/a&gt;, &lt;a href='http://www.opencaching.de/viewcache.php?cacheid=159890' target='_blank'&gt;Opencaching.de&lt;/a&gt;, &lt;a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/' target='_blank'&gt;CC BY-NC-ND&lt;/a&gt;, Stand: 10.11.2013; alle Logeinträge © jeweiliger Autor&lt;/em&gt;&lt;/p&gt;
+&lt;br /&gt;</groundspeak:long_description>
+      <groundspeak:logs>
+      <groundspeak:log id="871676">
+        <groundspeak:date>2013-03-05T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="253417">andierdbeere</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;Dankeschön für die Suche!&lt;/p&gt;
+&lt;p&gt;Habe den Cache am ersten schönen Frühlingstag gemacht!&lt;/p&gt;
+&lt;p&gt;Andi&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="855833">
+        <groundspeak:date>2012-10-20T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="248085">Lazumako</groundspeak:finder>
+        <groundspeak:text encoded="False">Geschafft!!! &lt;br /&gt;
+:-)</groundspeak:text>
+      </groundspeak:log>
+      <groundspeak:log id="821979">
+        <groundspeak:date>2012-05-12T00:00:00Z</groundspeak:date>
+        <groundspeak:type>Found it</groundspeak:type>
+        <groundspeak:finder id="233619">R2-D2</groundspeak:finder>
+        <groundspeak:text encoded="False">&lt;p&gt;War mein erster Cache überhaupt.&lt;/p&gt;
+&lt;p&gt;Hat echt Spaß gemacht. Gut für Grundschulkinder geeignet.&lt;/p&gt;
+&lt;p&gt;12.05.2012&lt;/p&gt;
+&lt;p&gt;R2-D2&lt;/p&gt;</groundspeak:text>
+      </groundspeak:log>
+      </groundspeak:logs>
+      <groundspeak:travelbugs>
+      </groundspeak:travelbugs>
+    </groundspeak:cache>
+  </wpt>
+  <wpt lat="48.88542" lon="9.17040">
+    <time>2012-03-23T00:00:00Z</time>
+    <name>OCDDD2-1</name>
+    <cmt>Parkmöglichkeit</cmt>
+    <desc>Parkplatz</desc>
+    <url>http://www.opencaching.de/viewcache.php?cacheid=159890</url>
+    <urlname>OCDDD2 Kaiserstein und Grabhügel Ludwigsburg</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>OCDDD2</gsak:Parent>
+    </gsak:wptExtension>
+  </wpt>
+  <wpt lat="48.88372" lon="9.18117">
+    <time>2012-03-23T00:00:00Z</time>
+    <name>OCDDD2-2</name>
+    <cmt>Parkmöglichkeit abends und am Wochenende</cmt>
+    <desc>Parkplatz</desc>
+    <url>http://www.opencaching.de/viewcache.php?cacheid=159890</url>
+    <urlname>OCDDD2 Kaiserstein und Grabhügel Ludwigsburg</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>OCDDD2</gsak:Parent>
+    </gsak:wptExtension>
+  </wpt>
+  <wpt lat="48.88450" lon="9.17657">
+    <time>2012-03-23T00:00:00Z</time>
+    <name>OCDDD2-3</name>
+    <cmt>Tafel</cmt>
+    <desc>Station oder Referenzpunkt</desc>
+    <url>http://www.opencaching.de/viewcache.php?cacheid=159890</url>
+    <urlname>OCDDD2 Kaiserstein und Grabhügel Ludwigsburg</urlname>
+    <sym>Flag, Green</sym>
+    <type>Waypoint|Flag, Green</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>OCDDD2</gsak:Parent>
+    </gsak:wptExtension>
+  </wpt>
+  <wpt lat="48.885" lon="9.174999999999999">
+    <name>01</name>
+    <cmt>Ttt</cmt>
+    <desc>Wegpunkt 4</desc>
+    <sym>Question to Answer</sym>
+    <type>Waypoint|Question to Answer</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>OCDDD2</gsak:Parent>
+    </gsak:wptExtension>
+    <cgeo:userdefined>true</cgeo:userdefined>
+  </wpt>
+</gpx>

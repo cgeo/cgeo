@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Cache Listing Generated from Opencaching.de</name>
+  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <author>Opencaching.de</author>
+  <email>info@opencaching.de</email>
+  <url>http://www.opencaching.de</url>
+  <urlname>Geocaching in Deutschland, Oesterreich und der Schweiz</urlname>
+  <time>2011-09-18T09:31:09Z</time>
+  <keywords>cache, geocache, opencaching, waypoint, opencachingnetwork</keywords>  <wpt lat="48.85968" lon="9.18740">
+	<time>2008-01-09T00:00:00Z</time>
+	<name>OC5952</name>
+	<desc>Die Schatzinsel / treasure island  </desc>
+	<src>www.opencaching.de</src>
+	<url>http://www.opencaching.de/viewcache.php?cacheid=125931</url>
+	<urlname>Die Schatzinsel / treasure island  </urlname>
+	<sym>Geocache</sym>
+	<type>Geocache|Traditional Cache</type>
+	<groundspeak:cache  id="125931" available="True" archived="False" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+	  <groundspeak:name>Die Schatzinsel / treasure island  </groundspeak:name>
+	  <groundspeak:placed_by>Die unbesiegbaren Geo - Geparden</groundspeak:placed_by>
+	  <groundspeak:owner id="122926">Die unbesiegbaren Geo - Geparden</groundspeak:owner>
+	  <groundspeak:type>Traditional Cache</groundspeak:type>
+	  <groundspeak:container>Small</groundspeak:container>
+	  <groundspeak:attributes>
+	  </groundspeak:attributes>
+	  <groundspeak:difficulty>1</groundspeak:difficulty>
+	  <groundspeak:terrain>4</groundspeak:terrain>
+	  <groundspeak:country>Germany</groundspeak:country>
+	  <groundspeak:state>Baden-Württemberg</groundspeak:state>
+	  <groundspeak:short_description html="True">Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is</groundspeak:short_description>
+	  <groundspeak:long_description html="True">&lt;span&gt;Startinhalt:&lt;br /&gt;
+Logbuch&lt;br /&gt;
+Taschenmesser&lt;br /&gt;
+Feuerzeug&lt;br /&gt;
+Ziege&lt;br /&gt;
+Walross&lt;br /&gt;
+L&amp;ouml;we
+&lt;p&gt;Bitte achtet am Uferbereich auf br&amp;uuml;tende V&amp;ouml;gel, passt auch auf
+eure Kinder auf.&lt;/p&gt;&lt;/span&gt;</groundspeak:long_description>
+	  
+	  <groundspeak:logs>
+		<groundspeak:log id="408288">
+		  <groundspeak:date>2009-01-12T00:00:00Z</groundspeak:date>
+		  <groundspeak:type>Found it</groundspeak:type>
+		  <groundspeak:finder id="128075">bommel-abg</groundspeak:finder>
+		  <groundspeak:text encoded="False">Bei günstigen Witterungsbedingung, der See war zugefrorenen, hab ich die Chance genutzt diesen Cache zu loggen. Danke für diesen einfachen T4.&lt;br /&gt;
+bommel-abg</groundspeak:text>
+		</groundspeak:log>
+		<groundspeak:log id="489974">
+		  <groundspeak:date>2009-01-11T00:00:00Z</groundspeak:date>
+		  <groundspeak:type>Found it</groundspeak:type>
+		  <groundspeak:finder id="141464">bambuz</groundspeak:finder>
+		  <groundspeak:text encoded="False">Juhu, mein erster T5. Erstaunlich leicht wenn man nur lange genug wartet. Die Wathosen hätten auch schon bereit gelegen, aber so wars dann doch leichter.&lt;br /&gt;
+&lt;br /&gt;
+TFTC&lt;br /&gt;
+&lt;br /&gt;
+Ist die Schatzdose für Kuchen oder für Käse gedacht gewesen? *grübel*</groundspeak:text>
+		</groundspeak:log>
+		<groundspeak:log id="312033">
+		  <groundspeak:date>2008-04-29T00:00:00Z</groundspeak:date>
+		  <groundspeak:type>Found it</groundspeak:type>
+		  <groundspeak:finder id="103700">Schulze&amp;Schultze</groundspeak:finder>
+		  <groundspeak:text encoded="False">Punkt 13:13 näherten sich unauffällig mehrere Personen aus verschiedenen Richtungen dem Ort des Geschehens.[8D]&lt;br /&gt;
+Unter den Augen der Owner wurde das Schlauchboot ordnungsgemäß aufgepumpt und zu Wasser gelassen. Paddel wären zwar durchaus hilfreich gewesen, aber echte Kerle lassen sich davon nicht abhalten.[:D]&lt;br /&gt;
+Sorgen um die brütenden Vögel mussten wir uns an der ausgewählten Einstiegstelle in das Gewässer nicht machen. Die Wasserqualität ist dort so anrüchig, dass sogar die Teichbewohner diese Gegend meiden.[:(]&lt;br /&gt;
+Das Schlauchboot war klein, so waren für die Schatzsuche mehrere Runden nötig. Wobei die hilfreichen Herren netterweise dafür sorgten, dass meine im Moment ohnehin angeschickerte Bandscheibe nicht weiter beansprucht wurde und ich nicht paddeln musste. Vielen Dank![:D]&lt;br /&gt;
+Von störenden Muggels blieben wir wundersamer Weise weitgehend verschont, obwohl halb Kornwestheim heute den Stadtpark frequentierte.&lt;br /&gt;
+&lt;br /&gt;
+TFTC&lt;br /&gt;
+&lt;br /&gt;
+ &lt;br /&gt;
+</groundspeak:text>
+		</groundspeak:log>
+	  </groundspeak:logs>
+	  <groundspeak:travelbugs>
+	  </groundspeak:travelbugs>
+	</groundspeak:cache>
+  </wpt>
+</gpx>

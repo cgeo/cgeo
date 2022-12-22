@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Groundspeak, Inc. All Rights Reserved. http://www.groundspeak.com" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>GPX Lite Waymark List Generated from Waymarking.com</name>
+  <desc>A list of waymarks generated from Waymarking.com</desc>
+  <author />
+  <email>contact@waymarking.com</email>
+  <url>http://www.waymarking.com</url>
+  <urlname>Waymarking - Unique and Interesting Locations</urlname>
+  <time>2013-06-08T07:06:36.3821125Z</time>
+  <keywords>waymark</keywords>
+  <bounds minlat="48.86422" minlon="9.1836" maxlat="48.86422" maxlon="9.1836" />
+  <wpt lat="48.86422" lon="9.1836">
+    <name>WM7BM7</name>
+    <desc>Roman water pipe Kornwestheim - A water fountain from an originally Roman water pipe.</desc>
+    <url>http://www.waymarking.com/waymarks/WM7BM7_Roman_water_pipe_Kornwestheim</url>
+    <urlname>Roman water pipe Kornwestheim</urlname>
+    <sym>Waymark</sym>
+    <type>Ancient Roman Civilization</type>
+  </wpt>
+</gpx>
