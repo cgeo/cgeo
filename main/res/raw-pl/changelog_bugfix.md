@@ -1,6 +1,6 @@
 ##
 
-### Ogólne
+### General
 - Fix: New TB set to visit mode automatically
 - Fix: gc.com basic member settings not displayed
 - Change: mapy.cz map provider removed (due to change in licensing)
@@ -9,10 +9,10 @@
 
 ##
 
-### Ogólne
-- Poprawka: Zaktualizowanie adresu URL do geokodowania mapquest
+### General
+- Fix: Use updated URL for mapquest geocoding
 - Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Zmiana: Lepszy komunikat o błędzie, informującym o Captcha wymaganym przy logowaniu do geocaching.com
+- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
 ### Caches
 - Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
