@@ -98,7 +98,6 @@
     <string name="log_posting_image">Biller gi publizéiert…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d gëtt publizéiert</string>
     <string name="log_clear">Läschen</string>
-    <string name="log_post_not_possible">Erofluden vun den Daten ass am gaang…\n Wgl., versicht et spéider nach eng Kéier oder iwwerpréift d\'Internet Verbindung.</string>
     <string name="log_date_future_not_allowed">Zukünfteg Log Datume sinn net erlaabt.</string>
     <string name="log_add">Dobäifügen</string>
     <string name="log_repeat">Leschten Log widderhuelen</string>
@@ -593,7 +592,6 @@
     <!-- colors -->
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
