@@ -91,7 +91,6 @@
     <string name="log_posting_twitter">מפרסם ציוץ&#8230;</string>
     <string name="log_posting_generic_trackable">מפרסם %1$s %2$d %3$d</string>
     <string name="log_clear">נקה</string>
-    <string name="log_post_not_possible">הורדת נתונים&#8230;\n נסו שוב בעוד מספר שניות או בדקו את החיבור לרשת.</string>
     <string name="log_date_future_not_allowed">תאריכי רישום עתידיים אסורים.</string>
     <string name="log_add">הוסף</string>
     <string name="log_repeat">נא לחוזר על היומן אחרון</string>
