@@ -129,6 +129,7 @@
     <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
+    <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
     <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
     <string name="log_add">Tilføj</string>
     <string name="log_repeat">Gentag sidste logbesked</string>
@@ -455,6 +456,7 @@
     <string name="cache_filter_owner">Cacheejer</string>
     <string name="cache_filter_difficulty">Sværhedsgrad</string>
     <string name="cache_filter_terrain">Terræn</string>
+    <string name="cache_filter_difficulty_terrain">Sværhedsgrad / Terræn</string>
     <string name="cache_filter_rating">Vurdering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cacheattributter</string>
@@ -551,6 +553,7 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjælp</string>
+    <string name="about_system_collecting">Systemoplysninger er indsamlet, vent venligst…</string>
     <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
     <string name="about_system_info_send_button">Send via mail…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -576,6 +579,8 @@
     <string name="contribution_documentation">dokumentation</string>
     <string name="contribution_projectleader">open source projektleder</string>
     <string name="contribution_graphics">grafik</string>
+    <string name="debug_user_error_report_title">Rapportér et problem</string>
+    <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
     <string name="debug_user_error_explain_options">Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo.\nSkriv også en detaljeret fejlbeskrivelse i mailen.\n\nFør du indberetter en fejl beder vi dig om at checke vores FAQ og/eller vores profil på de sociale medier.\nAndre kontakt-måder findes under \'Om c:geo\'</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
@@ -764,6 +769,7 @@
     <string name="init_backup_settings_restore">Gendan opsætning</string>
     <string name="settings_readingerror">Fejl ved indlæsning af indstillinger</string>
     <string name="settings_restart">c:geo skal genstartes før at de indlæste indstillinger tager effekt</string>
+    <string name="settings_folder_changed">Mappen\"%1$s\" vil blive ændret til \"%2$s\" under genoprettelsen.\n\nTryk på \"%4$s\" for at fortsætte. I så fald vil du blive bedt om at give c:geo adgang til mappen.\n\nTryk på \"%3$s\" for at beholde den nuværende mappeindstilling i stedet.</string>
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
@@ -1189,6 +1195,7 @@
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_showc_found_offline">Fundet (offline)</string>
+    <string name="onetime_mapthemefixslow_title">Fix langsom gengivelse af korttema</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
@@ -1676,6 +1683,7 @@
     <string name="preference_colorpicker_select_opaqueness">Vælg uigennemsigtighed</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
+    <string name="number_input_title">Indtast en værdi mellem %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Den indtastede værdi er for lav og er blevet erstattet af minimumsværdien</string>
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
