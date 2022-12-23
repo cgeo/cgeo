@@ -1,5 +1,6 @@
 ### Map
 - New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### Cache details
 - New: New more sophisticated image gallery
