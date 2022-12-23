@@ -1,12 +1,12 @@
-### Map
+### Kartta
 - Uusi: OSM-karttalähde osm.paws.cz
 
-### Cache details
+### Kätkön tiedot
 - Uusi: Uusi hienostunut kuvagalleria
 - Korjaa: Palauta sijainti reittipisteluettelossa päivityksen tai reittipisteen poistamisen jälkeen
 - Korjaa: Siirry alareunaan luotaessa uutta reittipistettä
 
-### General
+### Yleinen
 - API-tason muutos (compileSDK 32)
 - Päivitettiin joitakin riippuvaisuuskirjastoja
 - Käytä Androidin sisäänrakennettua käynnistysnäytön toimintoa käynnistettäessä
