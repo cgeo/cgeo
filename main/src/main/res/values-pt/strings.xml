@@ -39,7 +39,6 @@
     <string name="userdefined">Cache definida pelo utilizador</string>
     <string name="unknown">Tipo Desconhecido</string>
     <string name="all_types_short">Todos</string>
-    <string name="traditional_short">Tradi.</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mistério</string>
     <string name="letterbox_short">Letter</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_templates">Encontrada: Modelo de registo…</string>
-    <string name="log_post_not_possible">Transferência de dados em curso…\nPor favor tente novamente dentro de alguns segundos ou verifique a sua ligação à Internet.</string>
     <string name="log_date_future_not_allowed">Não são permitidos registos com datas futuras.</string>
     <string name="log_add">Adicionar</string>
     <string name="log_repeat">Repetir último registo</string>
@@ -196,7 +194,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
-    <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
     <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
@@ -207,7 +204,6 @@
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
     <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_missing_auth">Não foi definido utilizador e/ou palavra-passe</string>
-    <string name="err_wrong">Nome de utilizador e/ou palavra-passe incorrecta(s).</string>
     <string name="err_maintenance">O sítio \'geocaching.com\' está indisponível para manutenção. No modo offline, o c:geo funciona com as geocaches guardadas em \'Armazenadas\'.</string>
     <string name="err_license">Não fez a aceitação do contrato de utilização de Geocaching.com. Por essa razão, o c:geo não consegue carregar as coordenadas da geocache.</string>
     <string name="err_unvalidated_account">Deverá primeiro validar a sua conta no sítio web \'geocaching.com\'.</string>
@@ -428,7 +424,6 @@
     <string name="caches_reset_cache_icons_title">Repor ícone da cache</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
-    <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
     <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
     <plurals name="user_finds">
@@ -459,7 +454,6 @@
     <string name="list_dialog_remove_title">Remover lista</string>
     <string name="list_dialog_remove_description">Pretende remover a lista actual de caches? Todas as caches presentes na lista serão movidas para a \"Lista geral\".</string>
     <string name="list_dialog_remove_nowempty">Esta lista está vazia. Você quer removê-la?</string>
-    <string name="list_dialog_do_not_ask_me_again">Não me voltar a perguntar para esta lista</string>
     <string name="list_dialog_remove">Remover</string>
     <string name="list_dialog_rename_title">Mudar o nome da lista</string>
     <string name="list_dialog_rename">Mudar o nome</string>
@@ -483,7 +477,6 @@
     <string name="cache_filter_owner">Proprietário da cache</string>
     <string name="cache_filter_difficulty">Dificuldade</string>
     <string name="cache_filter_terrain">Terreno</string>
-    <string name="cache_filter_difficulty_terrain">Dificuldade / Terreno</string>
     <string name="cache_filter_rating">Avaliação</string>
     <string name="cache_filter_status">Estado</string>
     <string name="cache_filter_attributes">Atributos da cache</string>
@@ -518,10 +511,8 @@
     <string name="cache_filter_storage_delete_button">Eliminar</string>
     <string name="cache_filter_storage_clear_button">Limpar</string>
     <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
-    <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
     <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
     <string name="cache_filter_storage_delete_message">Tem a certeza que quer eliminar esta configuração de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
     <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
     <string name="cache_filter_storage_save_confirm_title">Guardar e substituir filtro</string>
@@ -542,7 +533,6 @@
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
     <string name="cache_filter_checkboxlist_add_items">Adicionar mais itens</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Adicionar todos os itens</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Adicionar itens</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Percentagem</string>
@@ -621,7 +611,6 @@
     <string name="about_changelog">Registo de alterações</string>
     <string name="about_changelog_nightly_build">Compilação diária (Nightly build)</string>
     <string name="about_changelog_next_release">Próxima versão</string>
-    <string name="about_changelog_bugfix_release">Versão de manutenção (correcção de erros)</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
     <string name="about_donation_more">Visite o website p/ saber mais</string>
@@ -629,7 +618,6 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_system_collecting">As informações do sistema estão recolhidas, por favor aguarde…</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -656,8 +644,6 @@
     <string name="contribution_infrastructure">infra-estrutura</string>
     <string name="contribution_projectleader">líder do projecto opensource</string>
     <string name="contribution_graphics">grafismo</string>
-    <string name="debug_user_error_report_title">Reportar um problema</string>
-    <string name="debug_user_error_errortext">Ocorreu um problema inesperado que gostaríamos que nos reportasse:</string>
     <string name="debug_user_error_explain_options">Ajude-nos a corrigir problemas do c:geo ao reportá-los por e-mail, incluindo as informações do sistema e o ficheiro de depuração.\nPor favor, inclua no mail a descrição detalhada do erro!\n\nAntes de enviar um mail, por favor consulte as nossas \"FAQ\" (Perguntas Frequentes) e/ou verifique nas páginas das redes sociais em que temos presença, por problemas que já sejam conhecidos.\nOutras opções de contacto podem ser encontradas em \'Acerca do c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Transferências em curso</string>
@@ -858,8 +844,6 @@
     <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
-    <string name="init_quicklaunchitems">Botões de início rápido</string>
-    <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -868,7 +852,6 @@
         <item>Escuro</item>
     </string-array>
     <string name="init_wallpaper">Imagem de fundo</string>
-    <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados, mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
@@ -927,14 +910,12 @@
     <string name="init_backup_settings_restore">Restaurar definições</string>
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
-    <string name="settings_folder_changed">A pasta \"%1$s\" será alterada para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a essa pasta.\n\nToque em \"%3$s\" para manter a pasta actual na configuração.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Estes podem ser utilizados para alterar o estilo de cor do mapa (por exemplo, para ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo dentro do mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="settings_info_hillshading_title">Informação sobre o Sombreado de elevações</string>
     <string name="settings_info_hillshading">O Sombreado de elevações é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de elevação. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nOs ficheiros fonte, contendo as informações de elevação, devem ser obtidos manualmente - clique neste item para fontes - e colocados na pasta de fontes definida abaixo.</string>
-    <string name="settings_hillshading_enable">Ligar Sombreado</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
     <string name="init_base_directory_description">Pasta base para dados locais públicos</string>
@@ -1059,8 +1040,6 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
-    <string name="category_unifiedMap">Mapa unificado</string>
-    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
     <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
@@ -1263,7 +1242,6 @@
     <string name="cache_advanced">Avançadas</string>
     <string name="cache_waypoints">Pontos adicionais</string>
     <string name="cache_variables">Variáveis</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Pontos adicionais (%d)</string>
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
@@ -1501,7 +1479,6 @@
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
     <string name="waypoint_toclipboard">Copiar waypoint p/ área de transferência</string>
     <string name="waypoint_copy_of">Cópia de</string>
-    <string name="waypoint_open_geochecker">Abrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
@@ -1580,7 +1557,6 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa (ligado)</string>
-    <string name="map_offline">Mapa (desligado)</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -1597,8 +1573,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar continuamente o conteúdo da pasta Temas de Mapa numa pasta privada da aplicação para acesso mais rápido aos ficheiros. Certifique-se de que a pasta do tema apenas contém os seus temas, mas nenhum dado adicional (grande) antes de activar esta funcionalidade.\n\nA sua pasta do tema \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
-    <string name="onetime_mapthemefixslow_title">Corrigir renderização lenta do tema de mapa</string>
-    <string name="onetime_mapthemefixslow_message">Trabalhar com temas de mapa não compactados pode diminuir o desempenho da abertura do visualizador de mapa. Pode compactar ou sincronizar os seus temas para obter um desempenho mais rápido e reduzir o atraso ao iniciar o mapa.</string>
     <string name="init_hidewp">Ocultar pontos adicionais</string>
     <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
@@ -2092,10 +2066,6 @@
     <string name="tts_oclock">%s horas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
-    <plurals name="days_ago">
-        <item quantity="one">Há %d dia</item>
-        <item quantity="other">Há %d dias</item>
-    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Dentro de %d dia</item>
         <item quantity="other">Dentro de %d dias</item>
@@ -2169,7 +2139,6 @@
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
-    <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
     <string name="number_input_err_boundarymin">O valor introduzido é demasiado pequeno - redefinido para o valor mínimo</string>
     <string name="number_input_err_boundarymax">O valor introduzido é demasiado grande - redefinido para o valor máximo</string>
     <string name="number_input_err_format">Formato de número inválido</string>
@@ -2217,7 +2186,6 @@
     <string name="map_clear_track_confirm">Deseja remover a rota/percurso \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
-    <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
