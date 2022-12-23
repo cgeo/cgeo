@@ -9,16 +9,16 @@
 
 ##
 
-### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
+### Geral
+- Correcção: Utilização do URL actualizado para a geocodificação do mapquest
+- Correcção: Previne uma falha sob certas condições ao tentar anexar uma foto ao registo
 - Alteração: Melhor mensagem de erro sobre como resolver o requisito de validação Captcha no início de sessão em geocaching.com
 
 ### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+- Correcção: Previne que as imagens spoiler fiquem em duplicado na galeria ao recarregar uma cache
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
+### Calculadora de variáveis
+- Novo: Função TRUNC para truncar valores decimais
 - Novo: Permitir o uso de parêntesis rectos para cálculos. Para intervalos de variáveis use por exemplo, \[:1-5\].
 
 ### Mapa
