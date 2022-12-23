@@ -98,6 +98,7 @@
     <string name="log_posting_image">Publicē attēlu…</string>
     <string name="log_posting_generic_trackable">Publicē %1$s %2$d/%3$d</string>
     <string name="log_clear">Notīrīt</string>
+    <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
     <string name="log_date_future_not_allowed">Nākotnē veikti ieraksti nav atļauti.</string>
     <string name="log_add">Pievienot</string>
     <string name="log_repeat">Atkārtot iepriekšējo ierakstu</string>
@@ -390,6 +391,8 @@
     <string name="contribution_documentation">Dokumentācija</string>
     <string name="contribution_projectleader">\"atvērtā pirmkoda\" (open source) projekta līderis</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Ziņot par problēmu</string>
+    <string name="debug_user_error_errortext">Notikusi neparedzēta kļūda, par kuru mēs vēlamies, lai Tu ziņotu:</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
