@@ -39,7 +39,6 @@
     <string name="userdefined">Käyttäjän määrittämä kätkö</string>
     <string name="unknown">Tuntematon kätkötyyppi</string>
     <string name="all_types_short">Kaikki</string>
-    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysteeri</string>
     <string name="letterbox_short">Lodju</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
     <string name="log_templates">Löytyi: Lokimalline…</string>
-    <string name="log_post_not_possible">Datan lataus käynnissä…\nYritäthän hetken kuluttua uudelleen tai tarkista internet yhteytesi.</string>
     <string name="log_date_future_not_allowed">Tulevaisuuden päivämäärät eivät ole sallittuja lokissa.</string>
     <string name="log_add">Lisää</string>
     <string name="log_repeat">Toista edellinen loki</string>
@@ -196,7 +194,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
-    <string name="err_captcha">Palvelu edellyttää Captchaa. Ole hyvä ja avaa geocaching.com sivusto selaimellasi ja ratkaise näkyvä Captcha kun kirjaudut sinne. Yritä sitten uudelleen kirjautua c:geoon.</string>
     <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -207,7 +204,6 @@
     <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
     <string name="err_comm">Tuntematon kommunikaatiovirhe. Vilkaise <a href="https://www.cgeo.org/faq#login-failed">usein kysytyt kysymykset (englanniksi)</a> avun saamiseksi.</string>
     <string name="err_missing_auth">Käyttäjätunnusta ja/tai salasanaa ei ole asetettu</string>
-    <string name="err_wrong">Väärä käyttäjätunnus ja/tai salasana.</string>
     <string name="err_maintenance">Geocaching.com on huollettavana. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt.</string>
     <string name="err_license">Et ole hyväksynyt Geocaching.com-käyttöoikeussopimusta, joten c:geo ei voi ladata kätköjen koordinaatteja.</string>
     <string name="err_unvalidated_account">Sinun on ensin vahvistettava tilisi Geocaching.com-sivustolla.</string>
@@ -426,7 +422,6 @@
     <string name="caches_reset_cache_icons_title">Nollaa kätkökuvake</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
-    <string name="caches_askdeletion">Kysy poistamista, jos tyhjä</string>
     <string name="select_icon">Valitse kuvake</string>
     <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
     <plurals name="user_finds">
@@ -457,7 +452,6 @@
     <string name="list_dialog_remove_title">Poista lista</string>
     <string name="list_dialog_remove_description">Haluatko poistaa nykyisen listan? Kaikki jäljelle jäävät kätköt listassa siirretään \"Tallennettuihin\".</string>
     <string name="list_dialog_remove_nowempty">Lista on tyhjä. Haluatko poistaa nykyisen listan?</string>
-    <string name="list_dialog_do_not_ask_me_again">Älä kysy minulta uudelleen tähän listaan liittyen</string>
     <string name="list_dialog_remove">Poista</string>
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
@@ -481,7 +475,6 @@
     <string name="cache_filter_owner">Kätkön omistaja</string>
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
-    <string name="cache_filter_difficulty_terrain">Vaikeus / Maasto</string>
     <string name="cache_filter_rating">Arvostelu</string>
     <string name="cache_filter_status">Tila</string>
     <string name="cache_filter_attributes">Kätkön attribuutit</string>
@@ -516,10 +509,8 @@
     <string name="cache_filter_storage_delete_button">Poista</string>
     <string name="cache_filter_storage_clear_button">Tyhjennä</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
-    <string name="cache_filter_storage_select_title">Valitse suodatin</string>
     <string name="cache_filter_storage_delete_title">Poista suodatin</string>
     <string name="cache_filter_storage_delete_message">Haluatko varmasti poistaa tämän suodatinmäärityksen?</string>
-    <string name="cache_filter_storage_select_clear_title">Valitse suodatin tai tyhjennä nykyinen suodatin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
     <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
     <string name="cache_filter_storage_save_confirm_title">Tallenna suodattimen ylikirjoitus</string>
@@ -538,7 +529,6 @@
     <string name="cache_filter_datefilter_label_to">Mihin:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki</string>
     <string name="cache_filter_checkboxlist_add_items">Lisää vielä kohteita</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Lisää kaikki kohteet</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lisää kohteita</string>
     <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
@@ -595,7 +585,6 @@
     <string name="about_changelog">Muutoshistoria</string>
     <string name="about_changelog_nightly_build">Yöllinen koontiversio</string>
     <string name="about_changelog_next_release">Seuraava julkaisu</string>
-    <string name="about_changelog_bugfix_release">Virheenkorjausversio</string>
     <string name="about_system">Järjestelmä</string>
     <string name="about_donate">Tue meitä</string>
     <string name="about_donation_more">Webbisivuilla on lisää tietoa</string>
@@ -603,7 +592,6 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_system_collecting">Kerätään järjestelmätietoja, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -630,8 +618,6 @@
     <string name="contribution_infrastructure">Infrastruktuuri</string>
     <string name="contribution_projectleader">avoimen lähdekoodin projektin johtaja</string>
     <string name="contribution_graphics">grafiikat</string>
-    <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
-    <string name="debug_user_error_errortext">Tapahtui odottamaton virhe, ja haluaisimme pyytää sinua raportoimaan siitä meille:</string>
     <string name="debug_user_error_explain_options">Auta meitä korjaamaan c:geon ongelmia raportoimalla ne sähköpostin kautta. Raportti sisältää järjestelmätietoja sekä c:geon lokitiedoston.\n Lisääthän sähköpostiin myös yksityiskohtaisen virheselosteen!\n\nEnnen sähköpostin lähetystä, tarkistathan FAQmme ja/tai sosiaalisen median tilimme tiedossa olevien ongelmien varalta.\nMuita yhteydenottotapoja löydät kohdasta \'Tietoja c:geosta\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Nykyiset lataukset</string>
@@ -832,8 +818,6 @@
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
-    <string name="init_quicklaunchitems">Pikapainikkeet</string>
-    <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
@@ -842,7 +826,6 @@
         <item>Tumma</item>
     </string-array>
     <string name="init_wallpaper">Taustakuva</string>
-    <string name="init_summary_wallpaper">Näytä laitteen taustakuva aloitusnäytön taustakuvana</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Luo varmuuskopio</string>
     <string name="init_backup_summary">Huomaa, että tämä ominaisuus voi varmuuskopioida kätköjä, reittipisteitä &amp; asetuksia, mutta ei kätköjen kuvia. \nVoidaksesi palauttaa tiedot myös sen jälkeen, kun olet kadottanut puhelimesi, varmuuskopioidut tiedostot tulee kopioida ulkoiseen sijaintiin.</string>
@@ -901,14 +884,12 @@
     <string name="init_backup_settings_restore">Palauta asetukset</string>
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
-    <string name="settings_folder_changed">Kansio \"%1$s\" vaihdetaan \"%2$s\"ksi palautuksen aikana.\n\nNapauta \"%4$s\" jatkaaksesi. Tässä tapauksessa sinua pyydetään antamaan c:geolle pääsy kyseiseen kansioon\n\nNapauta \"%3$s\" pitääksesi kansion asetuksen ennallaan.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
     <string name="settings_info_hillshading_title">Tietoa rinnevarjostuksesta</string>
     <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nLähdetiedostot, jotka sisältävät korkeustiedon, on ladattava manuaalisesti - napauta tätä lähteiden saamiseksi - ja asetettava alla selostettuun kansioon.</string>
-    <string name="settings_hillshading_enable">Ota rinnevarjostus käyttöön</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
     <string name="init_base_directory_description">Juurikansio julkiselle paikalliselle datalle</string>
@@ -1235,7 +1216,6 @@
     <string name="cache_advanced">Lisäasetukset</string>
     <string name="cache_waypoints">Reittipisteet</string>
     <string name="cache_variables">Muuttujat</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Reittipisteet (%d)</string>
     <string name="cache_waypoints_add">Lisää reittipiste</string>
     <string name="cache_waypoints_add_currentLocation">Lisää nykyinen sijainti</string>
     <string name="cache_waypoints_add_fromclipboard">Liitä leikepöydältä</string>
@@ -1473,7 +1453,6 @@
     <string name="waypoint_duplicate">Monista reittipiste</string>
     <string name="waypoint_toclipboard">Kopioi reittipiste leikepöydälle</string>
     <string name="waypoint_copy_of">Kopio</string>
-    <string name="waypoint_open_geochecker">Avaa Geochecker</string>
     <string name="waypointcalc_notes_prompt">Kirjoita muistiinpano…</string>
     <string name="waypoint_coordinate_formats_plain">Yksinkertainen</string>
     <string name="from_clipboard">Leikepöydältä</string>
@@ -1552,7 +1531,6 @@
     <!-- map -->
     <string name="map_map">Kartta</string>
     <string name="map_live">Live-kartta</string>
-    <string name="map_offline">Offline-kartta</string>
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
@@ -1569,8 +1547,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
-    <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
-    <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
     <string name="init_hidewp">Piilota reittipisteet</string>
     <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
     <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
@@ -2064,10 +2040,6 @@
     <string name="tts_oclock">kello %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopioitu leikepöydälle</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d päivä sitten</item>
-        <item quantity="other">%d päivää sitten</item>
-    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">%d päivässä</item>
         <item quantity="other">%d päivässä</item>
@@ -2141,7 +2113,6 @@
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
     <string name="reset_to_default">Oletus</string>
     <!-- number input -->
-    <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
     <string name="number_input_err_boundarymin">Syötetty arvo liian pieni - asetettu minimiarvoksi</string>
     <string name="number_input_err_boundarymax">Syötetty arvo liian iso - asetettu maksimiarvoksi</string>
     <string name="number_input_err_format">Väärä numeromuoto</string>
@@ -2189,7 +2160,6 @@
     <string name="map_clear_track_confirm">Poistetaanko reitti/jälki \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
-    <string name="routes_tracks_menu">Reitit / Polut</string>
     <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
     <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
