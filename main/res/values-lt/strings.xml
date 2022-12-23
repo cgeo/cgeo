@@ -400,7 +400,6 @@
     <string name="caches_sort_storage">Išsaugojimo įrenginyje data</string>
     <string name="caches_sort_eventdate">Renginio data</string>
     <string name="caches_select_mode">Pasirinkti</string>
-    <string name="caches_select_next">Pasirinkti sekančias 20 slėptuvių</string>
     <string name="caches_select_mode_exit">Nebesirinkti</string>
     <string name="caches_select_invert">Žymėti priešingai</string>
     <string name="caches_nearby">Netoliese</string>
@@ -1757,7 +1756,7 @@
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paliete ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo geoslėptuvėse. c:geo gali automatiškai suaktyvinti kasečių atsisiuntimą šioje programoje.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp geoslėptuvėms.</string>
     <string name="helper_alc_description">Adventure Lab Player programa jūsų telefonui ar planšetiniam kompiuteriui.</string>
     <string name="helper_gcwizard_description">GC vedlys turi daugybę įrankių, skirtų paprastam kriptografiniam, geodeziniam ir moksliniams skaičiavimams, taip pat šimtus įvairių simbolių rinkinių.</string>
