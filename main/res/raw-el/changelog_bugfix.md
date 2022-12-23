@@ -1,25 +1,25 @@
 ##
 
-### Γενικά
-- Διόρθωση: Αυτόματη ρύθμιση για ΤΒ σε "επίσκεψη"
-- Διόρθωση: Δεν εμφανίζονται οι βασικές ρυθμίσεις μέλους στην gc.com
+### General
+- Fix: New TB set to visit mode automatically
+- Fix: gc.com basic member settings not displayed
 - Αλλαγή: ο πάροχος χάρτη mapy.cz αφαιρέθηκε (λόγω αλλαγής στην αδειοδότηση)
 - Διόρθωση: Καθαρισμός του πεδίου αναζήτησης μετά την επιλογή Αναζήτηση
-- Διόρθωση: Κατάρρευση για τύπους συντεταγμένων με πολλαπλές τελείες
+- Fix: Crash for degree formulas with multiple dots
 
 ##
 
-### Γενικά
-- Διόρθωση: Χρήση ενημερωμένης διεύθυνσης URL για γεωκωδικοποίηση χάρτη
-- Διόρθωση: Αποτροπή συντριβής υπό ορισμένες συνθήκες κατά την προσπάθεια επισύναψης φωτογραφίας για καταγραφή
-- Αλλαγή: Καλύτερο μήνυμα σφάλματος σχετικά με το πώς να επιλύσετε μια απαίτηση Captcha κατά τη σύνδεση στο geocaching.com
+### General
+- Fix: Use updated URL for mapquest geocoding
+- Fix: Prevent crash under certain conditions when trying to attach photo to log
+- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
-### Κρύπτες
-- Διόρθωση: Αποτρέψτε το διπλασιασμό των εικόνων spoiler στη συλλογή κατά την ανανέωση μιας κρύπτης
+### Caches
+- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
 
-### Υπολογιστής μεταβλητών
-- Νέο: συνάρτηση TRUNC για την περικοπή δεκαδικών τιμών
-- Νέο: Να επιτρέπεται η χρήση αγκυλών για υπολογισμούς. Για εύρος μεταβλητών παρακαλώ χρησιμοποιήστε π.χ. \[:1-5\].
+### Variable calculator
+- New: TRUNC function to truncate decimal values
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
-### Χάρτης
-- Διόρθωση: Εμφάνιση σωστού δείκτη DT για D4.0 και D4.5
+### Map
+- Fix: Show correct DT marker for D4.0 and D4.5
