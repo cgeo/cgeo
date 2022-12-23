@@ -3,70 +3,703 @@
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
+    <string name="detail">Upplýsingar</string>
+    <string name="search">Leit</string>
+    <string name="helpers">Hjálparöpp</string>
+    <string name="about">Um c:geo</string>
+    <string name="latitude">Breiddargráða</string>
+    <string name="longitude">Lengdargráða</string>
     <!-- actionbar -->
+    <string name="settings_titlebar">Stillingar fyrir c:geo</string>
     <!-- caches -->
+    <string name="all_types">Allar cache týpur</string>
+    <string name="traditional">Hefðbundið cache</string>
+    <string name="multi">Halarófu-cache</string>
+    <string name="mystery">Ráðgátucache</string>
+    <string name="letterbox">Letterbox blendingur</string>
+    <string name="event">Viðburðar-cache</string>
+    <string name="mega">Stórviðburðar-cache</string>
+    <string name="cito">Staðsetja cache, fjarlægja rusl - viðburður</string>
+    <string name="webcam">Vefmyndavélar cache</string>
+    <string name="virtual">Sýndarfjársjóður</string>
+    <string name="wherigo">Wherigo fjársjóður</string>
+    <string name="ape">Fjársjóður APE verkefnisins</string>
+    <string name="unknown">Tegund ókunn</string>
     <!-- cache sizes -->
+    <string name="cache_size_micro">Örsmátt</string>
+    <string name="cache_size_small">Lítið</string>
+    <string name="cache_size_regular">Meðalstórt</string>
+    <string name="cache_size_large">Stórt</string>
+    <string name="cache_size_other">Annað</string>
+    <string name="cache_size_virtual">Sýndar</string>
+    <string name="cache_size_notchosen">Ekki valið</string>
+    <string name="cache_size_unknown">Óþekkt</string>
+    <string name="cache_size_very_large">Risastórt</string>
     <!-- waypoints -->
+    <string name="wp_final">Áfangastaður</string>
+    <string name="wp_puzzle">Spurningar</string>
+    <string name="wp_pkg">Bílastæði</string>
+    <string name="wp_trailhead">Byrjun slóða</string>
+    <string name="wp_waypoint">Viðmiðunarpunktur</string>
+    <string name="wp_original">Upprunanleg hnit</string>
     <!-- waypoints short names for new waypoints -->
     <!-- logs -->
+    <string name="log_found">Fundið</string>
+    <string name="log_dnf">Fannst ekki</string>
+    <string name="log_note">Skrifa orðsendingu</string>
+    <string name="log_published">Opinberað</string>
+    <string name="log_enabled">Virkt</string>
+    <string name="log_disabled">Óvirkt</string>
+    <string name="log_attend">Tek þátt</string>
+    <string name="log_attended">Tók þátt</string>
+    <string name="log_retrieved">Fjarlægt</string>
+    <string name="log_placed">Komið fyrir</string>
+    <string name="log_grabbed">Tekinn einhversstaðar</string>
+    <string name="log_movecollection">Færa í safn</string>
+    <string name="log_moveinventory">Taka í vörslu</string>
+    <string name="log_maintained">Viðhald hefur farið fram</string>
+    <string name="log_maintenance_needed">Þarfnast viðhalds</string>
+    <string name="log_update">Uppfærð staðsetningarhnit</string>
+    <string name="log_archived">Í geymslu</string>
+    <string name="log_unarchived">Úr geymslu</string>
+    <string name="log_needs_archived">Þarfnast geymslu</string>
+    <string name="log_discovered">Uppgötvað</string>
+    <string name="log_submit_for_review">Setja í skoðun</string>
+    <string name="log_marked_missing">Vantar merki</string>
+    <string name="log_tb_nothing">Sleppa aðgerð</string>
+    <string name="log_tb_visit">Heimsótt</string>
+    <string name="log_tb_drop">Skilið eftir</string>
+    <string name="log_tb_changeall">Breyta öllu</string>
+    <string name="log_tb_note">Athugasemd</string>
+    <string name="log_tb_archived">Í geymslu</string>
+    <string name="log_saving">Færsla í innsendingu…</string>
+    <string name="log_posting_log">Set færslu inn…</string>
+    <string name="log_posting_twitter">Set tíst inn…</string>
+    <string name="log_posting_generic_trackable">Set inn %1$s %2$d/%3$d</string>
+    <string name="log_clear">Hreinsa</string>
+    <string name="log_post_not_possible">Niðurhal gagna er í gangi…\nVinsamlegast reyndu aftur eftir nokkrar sekúndur eða skoðaðu internet tenginguna þína.</string>
+    <string name="log_date_future_not_allowed">Dagsetningar í framtíðinni eru ekki leyfðar.</string>
+    <string name="log_add">Bæta við</string>
+    <string name="log_repeat">Endurtaka síðustu færslu</string>
+    <string name="log_no_rating">Engin einkunn gefin</string>
+    <string name="log_stars_1_description">Óspennandi</string>
+    <string name="log_stars_15_description">Frekar óspennandi</string>
+    <string name="log_stars_2_description">Undir meðallagi</string>
+    <string name="log_stars_25_description">Allt í lagi</string>
+    <string name="log_stars_3_description">Í meðallagi</string>
+    <string name="log_stars_35_description">Ágætt</string>
+    <string name="log_stars_4_description">Yfir meðallagi</string>
+    <string name="log_stars_45_description">Mjög spennandi</string>
+    <string name="log_stars_5_description">Frábært</string>
+    <string name="log_webcam">Mynd tekin með vefmyndavél</string>
+    <string name="log_new_log">Skrá færslu</string>
+    <string name="log_new_log_text">Settu inn færslu</string>
+    <string name="log_announcement">Tilkynning</string>
+    <string name="log_today">Í dag</string>
+    <string name="log_yesterday">Í gær</string>
+    <string name="log_smilies">Broskarlar</string>
+    <string name="log_image">Mynd</string>
+    <string name="log_image_attach">Festa mynd við</string>
+    <string name="log_image_stored">úr safni</string>
+    <string name="log_image_camera">Ný</string>
+    <string name="log_image_caption">Fyrirsögn</string>
+    <string name="log_image_description">Lýsing</string>
+    <string name="log_image_scale">Breyta stærð</string>
+    <string name="log_password_title">Lykilorð fyrir skráningu:</string>
+    <string name="log_hint_log_password">Sláðu inn lykilorð fyrir skráningu</string>
+    <string name="log_your_saved_log">Vistaða færslan þín</string>
+    <string name="log_empty_logbook">Dagbók þessa kassa er tóm.</string>
+    <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
+    <string name="log_problem_other_label">Annað</string>
     <!-- translation -->
+    <string name="translate_to_sys_lang">Þýtt að %s</string>
+    <string name="translate_to_english">Þýða yfir á ensku</string>
+    <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
     <!-- errors, warnings, info toasts -->
+    <string name="err_server">Næ ekki sambandi við Geocaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
+    <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
+    <string name="err_server_gk">Gat ekki náð sambandi við GeoKrety.org. Vefsíðan gæti legið niðri eða internet tengingin þín virkar ekki.</string>
+    <string name="err_login">Engar innskráningarupplýsingar vistaðar</string>
+    <string name="err_missing_auth">Ekkert notandanafn og/eða lykilorð skráð</string>
+    <string name="err_maintenance">Geocaching.com liggur niðri vegna viðhalds. Vistuð cache virka í c:geo án netsambands.</string>
+    <string name="err_license">Þú hefur ekki samþykkt skilmála Geocaching.com svo c:geo getur ekki sýnt staðsetningarhnit cache-ins.</string>
+    <string name="err_unvalidated_account">Þú verður fyrst að staðfesta aðgang þinn á Geocaching.com.</string>
+    <string name="err_unpublished">Umbeðinn kassi hefur ekki verið birtur.</string>
+    <string name="err_cache_not_found">Umbeðni kassinn fannst ekki.</string>
+    <string name="err_premium_only">Þetta cache er eingöngu í boði fyrir Premium áskrifendur Geocaching.com.</string>
+    <string name="err_detail_open">c:geo getur ekki opnað geocatch upplýsingar.</string>
+    <string name="err_detail_cache">c:geo getur ekki sýnt geokassann sem þú vilt. Er þetta í alvörunni geokassi?</string>
+    <string name="err_detail_cache_find">c:geo finnur ekki geocatch</string>
+    <string name="err_detail_cache_find_some">c:geo finnur ekki þetta geocatch.</string>
+    <string name="err_detail_cache_find_any">c:geo finnur ekki nein geocatch.</string>
+    <string name="err_detail_still_working">Er enn að vinna í öðru verki.</string>
+    <string name="err_application_no">c:geo finnur ekki forrit við hæfi.</string>
+    <string name="err_auth_initialize">c:geo gat ekki upphafsstillt heimildarveitingarferlið.</string>
+    <string name="err_download_fail">c:geo gat ekki náð í kassa.</string>
+    <string name="err_load_descr_failed">c:geo getur ekki náð í lýsingu.</string>
+    <string name="err_location_unknown">c:geo veit ekki staðsetningu kassans.</string>
+    <string name="err_acquire_image_failed">Gat ekki náð í mynd.</string>
+    <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
+    <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
+    <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
+    <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
+    <string name="err_point_bear_and_dist">Skráðu inn bæði legu og vegalengd. Lega er horn frá 0 til 360 gráðum frá norðri. Vegalengd þarfnast ekki mælieiningar.</string>
+    <string name="err_log_load_data">c:geo gat ekki náð í nauðsynleg gögn til að skrá heimsókn þína.</string>
+    <string name="err_log_post_missing_coordinates">Hnit vantar.</string>
+    <string name="err_parse_lat">c:geo getur ekki þáttað lengdargráðu.</string>
+    <string name="err_parse_lon">c:geo getur ekki þáttað breiddargráðu.</string>
+    <string name="err_parse_dist">c:geo getur ekki þáttað vegalengd.</string>
+    <string name="err_parse_lat_lon">c:geo getur hvorki þáttað lengdargráðu né breiddargráðu.</string>
+    <string name="warn_save_nothing">Það er ekkert sem þarf að vista.</string>
+    <string name="warn_no_coordinates">Engin hnit gefin.</string>
+    <string name="warn_no_keyword">Lykilorð vantar.</string>
+    <string name="warn_no_username">Notandanafn vantar.</string>
+    <string name="warn_no_connector">Engin virk geocaching þjónusta býður upp á þessa leit.</string>
+    <string name="warn_search_help_title">Þarftu aðstoð?</string>
+    <string name="warn_log_text_fill">Settu inn einhvern texta í færsluna þína.</string>
+    <string name="warn_load_images">c:geo gat ekki náð í myndir.</string>
+    <string name="err_read_pocket_query_list">Villa kom upp við að lesa vasafyrirspurnarlista.</string>
+    <string name="info_log_posted">c:geo hefur tekist að setja færsluna inn.</string>
+    <string name="info_log_saved">c:geo hefur tekist að vista færsluna.</string>
+    <string name="info_log_post_failed">Gat ekki sett færslu inn.</string>
+    <string name="info_log_post_failed_reason">Ástæða: %s</string>
+    <string name="info_log_post_retry">Reyna aftur</string>
+    <string name="info_log_post_save">Vista utan netsambands</string>
+    <string name="info_log_cleared">Færsla var hreinsuð.</string>
+    <string name="confirm_unsaved_changes_title">Óvistaðar breytingar</string>
+    <string name="confirm_discard_wp_changes">Henda óvistuðum breytingum á vörðum?</string>
     <!-- location service -->
+    <string name="loc_last">Síðasta staðsetning</string>
+    <string name="loc_net">Netkerfi</string>
+    <string name="loc_fused">Sameinað</string>
+    <string name="loc_low_power">Lítil orka</string>
+    <string name="loc_home">Heimahnit</string>
+    <string name="loc_sat">Gervitungl</string>
+    <string name="loc_trying">Staðsetning í gangi</string>
+    <string name="loc_no_addr">Óþekkt heimilisfang</string>
+    <string name="loc_gps_disabled">GPS óvirkt</string>
     <!-- standard menu -->
+    <string name="menu_about">Um c:geo</string>
+    <string name="menu_settings">Stillingar</string>
+    <string name="menu_history">Saga</string>
     <!-- main screen -->
+    <string name="caches_nearby_button">Í nánd</string>
+    <string name="advanced_search_button">Leit</string>
+    <string name="stored_caches_button">Vistað</string>
+    <string name="any_button">Fara til</string>
     <!-- caches -->
+    <string name="caches_no_cache">Engir kassar hér</string>
+    <string name="caches_more_caches">Hlaða fleiri kössum</string>
+    <string name="caches_more_caches_no">Ekki fleiri fjársjóðir</string>
+    <string name="caches_more_caches_loading">Hleður inn fjársjóðum…</string>
+    <string name="caches_more_caches_currently">nú</string>
+    <string name="caches_downloading">Hleð niður kössum…\nTími eftir: </string>
+    <string name="caches_eta_ltm">Minna en mínúta</string>
+    <plurals name="caches_eta_mins">
+        <item quantity="one">%d mínúta</item>
+        <item quantity="other">%d mínútur</item>
+    </plurals>
+    <string name="caches_history">Ferill</string>
+    <string name="caches_on_map">Sýna á korti</string>
+    <string name="caches_sort">Flokka niður</string>
+    <string name="caches_sort_distance">Fjarlægð</string>
+    <string name="caches_sort_difficulty">Erfiðleikastig</string>
+    <string name="caches_sort_terrain">Landslag</string>
+    <string name="caches_sort_size">Stærð</string>
+    <string name="caches_sort_favorites">Uppáhalds</string>
+    <string name="caches_sort_favorites_ratio">Uppáhalds [%]</string>
+    <string name="caches_sort_name">Nafn</string>
+    <string name="caches_sort_rating">Einkunnagjöf</string>
+    <string name="caches_sort_vote">Gefa einkunn</string>
+    <string name="caches_sort_date_hidden">Hvenær komið fyrir</string>
+    <string name="caches_sort_date_logged">Hvenær skráð</string>
+    <string name="caches_sort_finds">Fundir</string>
+    <string name="caches_sort_state">Staða</string>
+    <string name="caches_sort_storage">Hvenær vistað í tæki</string>
+    <string name="caches_sort_eventdate">Dagur viðburðar</string>
+    <string name="caches_select_mode">Valstilling</string>
+    <string name="caches_select_mode_exit">Fara úr valstillingu</string>
+    <string name="caches_select_invert">Snúa vali við</string>
+    <string name="caches_nearby">Í nánd</string>
+    <string name="caches_delete_events">Eyða fyrri viðburðum</string>
+    <string name="caches_refresh_selected">Uppfæra það sem er valið</string>
+    <string name="caches_refresh_all">Uppfæra allt</string>
+    <string name="caches_move_selected">Færa valið</string>
+    <string name="caches_move_all">Færa allt</string>
+    <string name="caches_copy_selected">Afrita valda</string>
+    <string name="caches_copy_all">Afrita alla</string>
+    <string name="caches_map_locus_export">Flytja út í Locus</string>
+    <string name="caches_filter_title">Sía eftir</string>
+    <string name="caches_removing_from_history">Fjarlægi af ferli…</string>
+    <string name="caches_clear_offlinelogs">Hreinsa „án nets“ færslur</string>
+    <string name="caches_clear_offlinelogs_message">Viltu hreinsa „án nets“ færslurnar?</string>
+    <string name="caches_clear_offlinelogs_progress">Hreinsa „án nets“ færslur</string>
     <!-- caches lists -->
+    <string name="list_menu_create">Búa til nýjan lista</string>
+    <string name="list_menu_drop">Fjarlægja núverandi lista</string>
+    <string name="list_menu_rename">Endurnefna núverandi lista</string>
+    <string name="list_menu_import">Innflytja</string>
+    <string name="list_title">Veldu lista</string>
+    <string name="list_inbox">Vistað</string>
+    <string name="list_all_lists">Allir kassar</string>
+    <string name="list_dialog_create_title">Nýr listi</string>
+    <string name="list_dialog_create">Búa til</string>
+    <string name="list_dialog_create_err">c:geo gat ekki búið til nýja listann</string>
+    <string name="list_dialog_remove_title">Fjarlægja lista</string>
+    <string name="list_dialog_remove_description">Viltu eyða þessum lista? Öll cache sem hann inniheldur verða færð í \"geymslu\".</string>
+    <string name="list_dialog_remove_nowempty">Listinn er tómur. Viltu fjarlægja þennan lista?</string>
+    <string name="list_dialog_remove">Eyða</string>
+    <string name="list_dialog_rename_title">Endurnefna lista</string>
+    <string name="list_dialog_rename">Endurnefna</string>
+    <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
     <!-- caches lists filter -->
     <!-- about -->
+    <string name="about_version">Útgáfa</string>
+    <string name="about_changelog">Breytingaskrá</string>
+    <string name="about_system">Kerfi</string>
+    <string name="about_contributors">Þátttakendur</string>
+    <string name="about_license">Leyfi</string>
+    <string name="about_help">Hjálp</string>
+    <string name="about_system_info_send_button">Senda með tölvupósti…</string>
+    <string name="about_system_info">Kerfisupplýsingar c:geo</string>
+    <string name="about_system_info_send_chooser">Senda kerfisupplýsingar</string>
+    <string name="changelog_github">Listi af öllum breytingum</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
+    <string name="settings_title_open_settings">Opna stillingar?</string>
+    <string name="settings_title_services">Þjónustur</string>
+    <string name="settings_title_appearance">Útlit</string>
+    <string name="settings_summary_appearance">Stilla mælieiningar, tungumál og liti á appi.</string>
+    <string name="settings_title_cachedetails">Upplýsingar kassa</string>
+    <string name="settings_title_map">kort</string>
+    <string name="settings_title_map_data">Kortaupplýsingar</string>
+    <string name="settings_title_map_content">Innihald korts</string>
+    <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
+    <string name="settings_title_system">Kerfi</string>
+    <string name="settings_category_browser">Vafri</string>
+    <string name="settings_category_social">Samfélagsmiðlar</string>
+    <string name="settings_goto_url_button">meira &#8230;</string>
+    <string name="settings_service_activate">Virkja</string>
+    <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
+    <string name="settings_authorize">Veita c:geo umboð</string>
+    <string name="settings_gc_description">Veita c:geo aðgang að geocaching.com til að leita að kössum.</string>
+    <string name="settings_ec_description">Veita c:geo aðgang að extremcaching.com til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
+    <string name="settings_su_description">Veita c:geo aðgang að geocaching.su til að leita að kössum.</string>
+    <string name="init_summary_oc_de">Hlaða niður kössum frá opencaching.de</string>
+    <string name="init_summary_oc_pl">Hlaða niður kössum frá opencaching.pl</string>
+    <string name="init_summary_oc_nl">Hlaða niður kössum frá opencaching.nl</string>
+    <string name="init_summary_oc_us">Hlaða niður kössum frá opencaching.us</string>
+    <string name="init_summary_oc_ro">Hlaða niður kössum frá opencaching.ro</string>
+    <string name="init_summary_oc_uk">Hlaða niður kössum frá opencache.uk</string>
+    <string name="init_oc_uk_description">Veita c:geo aðgang að opencache.uk til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
+    <string name="init_summary_su">Hlaða niður kössum frá Geocaching.su</string>
+    <string name="init_login_popup">Skrá inn</string>
+    <string name="init_login_popup_working">Innskráning í gangi…</string>
+    <string name="init_login_popup_ok">Innskráning tókst</string>
+    <string name="init_login_popup_failed">Innskráning mistókst</string>
+    <string name="init_login_popup_failed_reason">Innskráning mistókst: %s</string>
+    <string name="init_authorization_credential_username">Notandanafn</string>
+    <string name="init_authorization_credential_password">Lykilorð</string>
+    <string name="settings_navigation_disabled">Það lítur út fyrir að þetta app sé ekki uppsett</string>
+    <string name="init_signature">Undirskrift</string>
+    <string name="init_signature_template_date">Dagsetning</string>
+    <string name="init_signature_template_time">Tími</string>
+    <string name="init_signature_template_datetime">Dagsetning og tími</string>
+    <string name="init_signature_template_user">Nafn þitt</string>
+    <string name="init_signature_template_number">Númer</string>
+    <string name="init_signature_template_owner">Eigandi</string>
+    <string name="init_signature_template_name">Nafn</string>
+    <string name="init_signature_template_log">Færslutexti</string>
+    <string name="init_ratingwanted">GCvote mat</string>
+    <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
+    <string name="init_address">Sýna heimilisfang</string>
+    <string name="init_save_log_img">Vista myndir</string>
+    <string name="init_summary_save_log_img">Vista myndir úr færslum</string>
+    <string name="init_units">Nota breskar mælieiningar</string>
+    <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
+    <string name="init_log_offline">Skráning án netsambands</string>
+    <string name="init_livelist">Sýna átt</string>
     <!-- app theme -->
     <!-- backup / restore -->
+    <string name="init_backup_backup">Öryggisafrit</string>
+    <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>
+    <string name="init_backup_restore">Endurheimta</string>
+    <string name="init_backup_failed">Það mistókst að taka afrit af gagnagrunni c:geo.</string>
+    <string name="init_backup_no_backup_available">Það er engin öryggisafritsskrá tiltæk.</string>
+    <string name="init_restore_success">Endurheimt lokið.</string>
+    <string name="settings_info_offline_maps_title">Upplýsingar um kort án nettengingar</string>
+    <string name="settings_info_themes_title">Upplýsingar um kortaþemu</string>
+    <string name="init_sigautoinsert">Setja inn sjálfkrafa</string>
+    <string name="init_default_navigation_tool_select">Velja tól</string>
+    <string name="init_debug_title">Aflúsunarupplýsingar</string>
+    <string name="init_debug">Virkja aflúsunarskráningu</string>
+    <string name="init_dbmove_dbmove">Færi gagnagrunn</string>
+    <string name="init_dbmove_running">Færi gagnagrunn</string>
+    <string name="init_dbmove_success">Flutningur gagnagrunns tókst.</string>
+    <string name="init_dbmove_failed">Flutningur gagnagrunns mistókst</string>
+    <string name="init_use_native_ua">Android vafri</string>
+    <string name="init_maintenance">Viðhald</string>
+    <string name="settings_open_website">Opna heimasíðu</string>
+    <string name="settings_settings">Stillingar</string>
+    <string name="settings_information">Upplýsingar</string>
+    <string name="settings_advanced">Ítarlegar stillingar</string>
+    <string name="init_ec_icons">Kortatákn</string>
+    <string name="settings_features">Studdir eiginleikar</string>
+    <string name="feature_watch_list">Vaktlisti</string>
+    <string name="feature_search_keyword">Leita eftir aðalatriðum</string>
+    <string name="feature_search_live_map">Virkt kort</string>
+    <string name="feature_search_center">Leita eftir staðsetningu</string>
+    <string name="feature_search_geocode">Leita eftir geokóða</string>
+    <string name="feature_search_owner">Leita eftir eiganda</string>
+    <string name="feature_search_finder">Leita eftir þátttakanda</string>
     <!-- proximity notification -->
     <!-- map sources -->
+    <string name="map_source_google_map">Google: Kort</string>
+    <string name="map_source_google_satellite">Google: Loftmynd</string>
+    <string name="map_source_osm_offline">Utan netsambands</string>
+    <string name="init_sendToCgeo">Senda til c:geo</string>
+    <string name="settings_info_send2cgeo_title">Upplýsingar um að senda til c:geo</string>
+    <string name="init_sendToCgeo_name">Nafn tækisins þíns</string>
+    <string name="init_sendToCgeo_register">Óska eftir skráningu</string>
     <!-- Content Storage -->
     <!-- Persistable Folders and Uris -->
     <!-- FolderUtils: async processing -->
     <!-- FolderUtils: copy/move -->
     <!-- auth generic -->
+    <string name="auth_authorize">Samþykkja c:geo</string>
+    <string name="auth_again">Byrja upp á nýtt</string>
+    <string name="auth_register">Búa til reikning</string>
+    <string name="auth_connected">Tengdur</string>
+    <string name="auth_dialog_waiting">Bíð eftir %s…</string>
     <!-- auth credentials -->
     <!-- auth token -->
     <!-- auth Twitter -->
+    <string name="auth_dialog_completed_twitter">c:geo má núna setja inn á Twitter.</string>
     <!-- auth opencaching -->
+    <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
     <!-- auth geokrety -->
+    <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="one">%1$d kassi</item>
+        <item quantity="other">%1$d kassar</item>
+    </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d dagur eftir</item>
+        <item quantity="other">%1$d dagar eftir</item>
+    </plurals>
+    <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
+    <string name="cache_offline_refresh">Endurhlaða</string>
+    <string name="cache_offline_store">Vista</string>
+    <string name="cache_offline_stored">Vistað í tæki</string>
+    <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
+    <string name="cache_offline_time_mins_few">Fyrir nokkrum mínútum</string>
+    <plurals name="cache_offline_about_time_mins">
+        <item quantity="one">fyrir um %d mínútu síðan</item>
+        <item quantity="other">fyrir um %d mínútum síðan</item>
+    </plurals>
+    <plurals name="cache_offline_about_time_hours">
+        <item quantity="one">fyrir um %d klukkutíma síðan</item>
+        <item quantity="other">fyrir um %d klukkutímum síðan</item>
+    </plurals>
+    <plurals name="cache_offline_about_time_days">
+        <item quantity="one">fyrir um %d degi síðan</item>
+        <item quantity="other">fyrir um %d dögum síðan</item>
+    </plurals>
+    <string name="cache_log_image_default_title">Mynd</string>
+    <string name="cache_personal_note_edit">Breyta</string>
+    <string name="cache_personal_note_upload">Senda inn</string>
+    <string name="cache_description">Lýsing</string>
+    <string name="cache_watchlist_on">Þessi kassi er á vaktlistanum þínum.</string>
+    <string name="cache_watchlist_on_extra">Þessi kassi er á vaktlistanum þínum (Vaktarar: %1d).</string>
+    <string name="cache_watchlist_not_on">Þessi kassi er ekki á vaktlistanum þínum.</string>
+    <string name="cache_watchlist_not_on_extra">Þessi kassi er ekki á vaktlistanum þínum (Vaktarar: %1d).</string>
+    <string name="cache_favpoint_on">Þessi kassi er einn af þínum uppáhalds.</string>
+    <string name="cache_favpoint_not_on">Þessi kassi er ekki einn af þínum uppáhalds.</string>
+    <string name="cache_list_select_last">Síðasta val</string>
+    <string name="cache_images">Myndir</string>
+    <string name="cache_hint">Vísbending</string>
+    <string name="cache_hint_not_available">Engin vísbending í boði</string>
+    <string name="cache_logs">Færslubók</string>
+    <string name="cache_dialog_offline_drop_message">Fjarlægja cache úr minni tækis…</string>
+    <string name="cache_menu_navigation_drive">Leiðsögn (keyrandi)</string>
+    <string name="cache_menu_navigation_walk">Leiðsögn (gangandi)</string>
+    <string name="cache_menu_navigation_transit">Leiðsögn (almenningssamgöngur)</string>
+    <string name="cache_menu_navigation_bike">Leiðsögn (hjólandi)</string>
+    <string name="cache_menu_sygic_walk">Sygic (gangandi)</string>
+    <string name="cache_menu_sygic_drive">Sygic (keyrandi)</string>
+    <string name="cache_menu_map">Kort</string>
+    <string name="cache_menu_visit">Skrá heimsókn</string>
+    <string name="cache_menu_around">Kassar í kring</string>
+    <string name="around">Í kring um %s</string>
+    <string name="cache_menu_event">Bæta við á dagatalið</string>
+    <string name="cache_menu_extract_waypoints">Draga út vegpunkta</string>
+    <string name="cache_menu_details">Upplýsingar</string>
+    <string name="cache_menu_refresh">Endurhlaða</string>
+    <string name="cache_menu_share">Deila kassa</string>
+    <string name="cache_menu_move_list">Færa í annan lista</string>
+    <string name="cache_menu_oruxmaps_online">OruxMaps (með neti)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (án nets)</string>
+    <string name="cache_menu_vote">Kjósa</string>
+    <string name="cache_menu_ignore">Hunsa kassa</string>
+    <string name="ignore_confirm_title">Varaðu þig</string>
+    <string name="cache_status_offline_log">Vistuð skráning</string>
+    <string name="cache_status_found">Fundið</string>
+    <string name="cache_not_status_found">Ekki fundinn</string>
+    <string name="cache_status_archived">Vistað</string>
+    <string name="cache_status_disabled">Óvirkt</string>
+    <string name="cache_status_premium">Aðeins fyrir Premium Members</string>
+    <string name="cache_name">Nafn</string>
+    <string name="cache_type">Tegund</string>
+    <string name="cache_size">Stærð</string>
+    <string name="cache_distance">Vegalengd</string>
+    <string name="cache_difficulty">Erfiðleikastig</string>
+    <string name="cache_terrain">Landslag</string>
+    <string name="cache_rating">Dómar</string>
+    <string name="cache_own_rating">Þinn dómur</string>
+    <string name="cache_favorite">Eftirlætis</string>
+    <string name="cache_owner">Eigandi</string>
+    <string name="cache_hidden">Komið fyrir</string>
+    <string name="cache_event">Dags</string>
+    <string name="cache_location">Staðsetning</string>
+    <string name="cache_coordinates">Staðsetningarhnit</string>
+    <string name="cache_coordinates_original">Upphafleg staðsetningarhnit</string>
+    <string name="cache_spoiler_images_title">Spillandi myndir</string>
+    <string name="cache_log_types">Færslutegundir</string>
+    <string name="cache_coordinates_no">Þetta cache hefur engin staðsetningarhnit.</string>
+    <string name="cache_clear_history">Hreinsa sögu</string>
+    <string name="cache_remove_from_history">Fjarlægja úr sögu</string>
+    <string name="cache_license">Leyfi</string>
+    <string name="cache_image">Mynd</string>
+    <string name="cache_image_open_file">Opna sem skrá</string>
+    <string name="cache_image_open_browser">Opna í vafra</string>
+    <string name="cache_share_field">Deila</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
+    <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
+    <string name="gpx_import_loading_waypoints_with_filename">Hleð vegpunktum úr %1$s</string>
+    <string name="gpx_import_title_reading_file">Les skrá</string>
+    <string name="gpx_import_title">Flytja inn GPX</string>
+    <string name="gpx_import_title_caches_imported">Niðurstaða</string>
+    <string name="gpx_import_title_caches_import_failed">Innflutningur tókst ekki</string>
+    <string name="gpx_import_error_io">Get ekki lesið skrá</string>
+    <string name="gpx_import_error_unexpected">Óvænt villa</string>
     <!-- import -->
+    <string name="web_downloading">Hleð niður</string>
     <!-- popup -->
+    <string name="popup_more">Fleiri upplýsingar</string>
     <!-- waypoint -->
+    <string name="waypoint">Vegpunktur</string>
+    <string name="waypoint_custom">Sérsniðinn</string>
+    <string name="waypoint_my_coordinates">Hnitin mín</string>
+    <string name="waypoint_bearing">Lega í °</string>
+    <string name="waypoint_distance">Fjarlægð</string>
+    <string name="waypoint_name">Nafn</string>
+    <string name="waypoint_edit">Breyta</string>
+    <string name="waypoint_copy_coordinates">Afrita hnit</string>
+    <string name="waypoint_delete">Eyða</string>
+    <string name="waypoint_edit_title">Breyta vegpunkti</string>
+    <string name="waypoint_add_title">Bæta við vegpunkti</string>
+    <string name="waypoint_note">Athugasemd</string>
+    <string name="waypoint_visited">Heimsótt</string>
+    <string name="waypoint_save">Vista</string>
+    <string name="waypoint_set_as_cache_coords">Setja sem hnit kassa í c:geo</string>
+    <string name="waypoint_save_and_modify_on_website">Setja sem hnit kassa í c:geo og á vefsíðunni</string>
+    <string name="waypoint_reset">Endurstilla</string>
+    <string name="waypoint_localy_reset_cache_coords">Endurstilla í c:geo</string>
+    <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
+    <string name="waypoint_done">Lokið</string>
+    <string name="waypoint_copy_of">Afrit af</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- visit -->
+    <string name="visit_tweet">Tilkynna fundinn á Twitter</string>
     <!-- map -->
+    <string name="map_map">Kort</string>
+    <string name="map_theme_select">Velja kortaþema</string>
+    <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
+    <string name="search_coordinates_button">Leita eftir hnitum</string>
+    <string name="search_address">Heimilisfang</string>
+    <string name="search_address_button">Leita eftir heimilisfangi</string>
+    <string name="search_kw_prefill">Leitarorð</string>
+    <string name="search_kw_button">Leita eftir leitarorðum</string>
+    <string name="search_hbu_prefill">Eigandi</string>
+    <string name="search_hbu_button">Leita eftir nafni eiganda</string>
+    <string name="search_tb_button">Leita að ferðalangi</string>
     <!-- trackable -->
+    <string name="trackable_details_loading">Sæki upplýsingar um ferðalang…</string>
+    <string name="trackable_browser_open">Opna í vafra</string>
+    <string name="trackable_refresh">Endurhlaða</string>
+    <string name="trackable_goal">Markmið</string>
+    <string name="trackable_details">Upplýsingar</string>
+    <string name="trackable_image">Mynd</string>
+    <string name="trackable_name">Nafn</string>
+    <string name="trackable_type">Tegund</string>
+    <string name="trackable_owner">Eigandi</string>
+    <string name="trackable_spotted">Sást síðast</string>
+    <string name="trackable_spotted_in_cache">Í</string>
+    <string name="trackable_spotted_at_user">Í höndum</string>
+    <string name="trackable_spotted_unknown_location">Staðsetning ókunn</string>
+    <string name="trackable_spotted_owner">Í höndum eiganda</string>
+    <string name="trackable_released">Sleppt</string>
+    <string name="trackable_distance">Ferðast</string>
+    <string name="trackable_not_activated">Ferðalangur ekki virkur</string>
     <!-- user -->
+    <string name="user_menu_title">Um</string>
+    <string name="user_menu_open_browser">Opna prófíl í vafra</string>
+    <string name="user_menu_send_message">Senda skilaboð</string>
+    <string name="user_unknown">Óþekktur notandi</string>
     <!-- navigation -->
+    <string name="compass_title">Áttaviti</string>
+    <string name="use_gps">Aðeins nota GPS</string>
+    <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
     <!-- license -->
+    <string name="license">Leyfi</string>
+    <string name="license_show">Sýna leyfi</string>
+    <string name="license_dismiss">Loka</string>
     <!-- helpers -->
+    <string name="helper_calendar_pastevent_question">Dagsetning viðburðar er í fortíðinni. Viltu samt bæta honum við?</string>
+    <string name="helper_sendtocgeo_title">Senda í c:geo</string>
+    <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
+    <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
+    <string name="helper_bluetoothgps_description">Leyfir þér að nota utanáliggjandi GPS móttakara til þess að fá nákvæmari staðsetningarupplýsingar, og getur sparað rafhlöðuna í tækinu þínu.</string>
     <!-- export -->
+    <string name="export">Flytja út</string>
+    <string name="export_failed">Útflutningur tókst ekki</string>
+    <string name="export_fieldnotes_uploading">Hleð upp…</string>
+    <string name="export_fieldnotes_onlynew">Aðeins að síðasta útflutningi</string>
+    <string name="export_confirm_title">Flyt út %1$s</string>
+    <string name="export_persnotes">Mínir minnispunktar</string>
+    <string name="export_persnotes_uploading">Hleð upp þínum minnispunktum %1$d</string>
     <!-- GC attributes -->
+    <string name="attribute_dogs_yes">Hundar leyfðir</string>
+    <string name="attribute_dogs_no">Hundar ekki leyfðir</string>
+    <string name="attribute_bicycles_yes">Reiðhjól leyfð</string>
+    <string name="attribute_bicycles_no">Reiðhjól ekki leyfð</string>
+    <string name="attribute_motorcycles_yes">Mótorhjól leyfð</string>
+    <string name="attribute_motorcycles_no">Mótorhjól ekki leyfð</string>
+    <string name="attribute_quads_yes">Fjórhjól leyfð</string>
+    <string name="attribute_quads_no">Fjórhjól ekki leyfð</string>
+    <string name="attribute_jeeps_yes">Torfærutæki leyfð</string>
+    <string name="attribute_jeeps_no">Torfærutæki ekki leyfð</string>
+    <string name="attribute_snowmobiles_yes">Vélsleðar leyfðir</string>
+    <string name="attribute_snowmobiles_no">Vélsleðar ekki leyfðir</string>
+    <string name="attribute_horses_yes">Hestar leyfðir</string>
+    <string name="attribute_horses_no">Hestar ekki leyfðir</string>
+    <string name="attribute_campfires_yes">Varðeldar leyfðir</string>
+    <string name="attribute_campfires_no">Varðeldar bannaðir</string>
+    <string name="attribute_winter_yes">Í boði yfir veturinn</string>
+    <string name="attribute_winter_no">Ekki í boði yfir veturinn</string>
+    <string name="attribute_firstaid_yes">Þarfnast viðhalds</string>
+    <string name="attribute_firstaid_no">Þarfnast ekki viðhalds</string>
+    <string name="attribute_cow_yes">Fylgist með búfé</string>
+    <string name="attribute_cow_no">Ekkert búfé</string>
+    <string name="attribute_nightcache_yes">Næturkassi</string>
+    <string name="attribute_nightcache_no">Ekki næturkassi</string>
+    <string name="attribute_parkngrab_yes">Leggja og grípa</string>
+    <string name="attribute_abandonedbuilding_yes">Yfirgefið mannvirki</string>
+    <string name="attribute_abandonedbuilding_no">Ekki yfirgefið mannvirki</string>
+    <string name="attribute_hike_short_yes">Stutt gönguferð (innan við 1 km)</string>
+    <string name="attribute_hike_short_no">Ekki stutt gönguferð</string>
+    <string name="attribute_hike_med_yes">Miðlungs gönguferð (1 km til 10 km)</string>
+    <string name="attribute_hike_med_no">Ekki miðlungs gönguferð</string>
+    <string name="attribute_hike_long_yes">Löng gönguferð (meira en 10 km)</string>
+    <string name="attribute_hike_long_no">Ekki löng gönguferð</string>
+    <string name="attribute_seasonal_yes">Árstíðabundinn aðgangur</string>
+    <string name="attribute_seasonal_no">Ekki árstíðabundinn aðgangur</string>
+    <string name="attribute_touristok_yes">Ferðamannavænn</string>
+    <string name="attribute_touristok_no">Ekki ferðamannavænn</string>
+    <string name="attribute_teamwork_yes">Krefst teymisvinnu</string>
+    <string name="attribute_teamwork_no">Krefst ekki teymisvinnu</string>
+    <string name="attribute_fee_yes">Aðgangs- eða bílastæðagjald</string>
+    <string name="attribute_fee_no">Aðgangs- eða bílastæðagjalds ekki krafist</string>
+    <string name="attribute_rappelling_yes">Krefst klifurbúnaðar</string>
+    <string name="attribute_rappelling_no">Krefst ekki klifurbúnaðar</string>
+    <string name="attribute_boat_yes">Krefst báts</string>
+    <string name="attribute_boat_no">Báts ekki krafist</string>
+    <string name="attribute_flashlight_yes">Krefst vasaljóss</string>
+    <string name="attribute_flashlight_no">Krefst ekki vasaljóss</string>
+    <string name="attribute_uv_yes">Krefst útfjólublás ljóss</string>
+    <string name="attribute_uv_no">Krefst ekki útfjólublás ljóss</string>
+    <string name="attribute_ticks_yes">Mítlar</string>
+    <string name="attribute_ticks_no">Engir mítlar</string>
+    <string name="attribute_danger_yes">Hættulegt svæði</string>
+    <string name="attribute_stroller_yes">Aðgengilegt barnavögnum</string>
+    <string name="attribute_stroller_no">Ekki aðgengilegt barnavögnum</string>
+    <string name="attribute_fuel_yes">Eldsneyti nálægt</string>
+    <string name="attribute_fuel_no">Ekkert eldsneyti nálægt</string>
+    <string name="attribute_food_yes">Matur nálægt</string>
+    <string name="attribute_food_no">Enginn matur nálægt</string>
+    <string name="attribute_no_gps_no">Með GPS</string>
     <!-- cache attribute categories -->
     <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support_title">Aðstoð</string>
+    <string name="website_title">Vefsíða</string>
+    <string name="market_link"><a href="">c:geo á Google Play</a></string>
+    <string name="about_twitter">Á <b>c:geo</b> að setja inn nýja færslu á Twitter í hvert skipti sem þú skráir heimsókn þína?</string>
+    <string name="faq_title">Algengar spurningar</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
+    <string name="tts_service">Talandi áttaviti</string>
+    <string name="tts_one_kilometer">einn kílómeter</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s kílómeter</item>
+        <item quantity="other">%s kílómetrar</item>
+    </plurals>
+    <string name="tts_one_meter">einn metri</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s metri</item>
+        <item quantity="other">%s metrar</item>
+    </plurals>
+    <string name="tts_one_mile">ein míla</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s míla</item>
+        <item quantity="other">%s mílur</item>
+    </plurals>
     <!-- various -->
+    <string name="clipboard_copy_ok">Afritað á klemmuspjaldið</string>
     <!-- shortcuts -->
+    <string name="cgeo_shortcut">c:geo flýtileið</string>
+    <string name="create_shortcut">Búa til flýtileið</string>
+    <string name="send">Senda</string>
     <!-- Geokrety -->
+    <string name="init_geokrety_description">Heimila c:geo með GeoKrety.org að skrá GeoKrety ferðalanga.</string>
+    <string name="init_geokrety_userid">Notandaauðkenni: %s</string>
+    <string name="trackable_title_log_without_geocode">Geokóði ekki skilgreindur</string>
+    <string name="do_not_ask_me_again">Ekki spyrja mig aftur</string>
+    <string name="geokrety_parsing_failed">Gat ekki þáttað svarið frá GeoKrety.</string>
+    <string name="command_move_caches_progress">Færi kassa í listann %1s</string>
+    <plurals name="command_move_caches_result">
+        <item quantity="one">Færði %d kassa</item>
+        <item quantity="other">Færði %d kassa</item>
+    </plurals>
+    <plurals name="command_copy_caches_result">
+        <item quantity="one">Afritaði %d kassa</item>
+        <item quantity="other">Afritaði %d kassa</item>
+    </plurals>
+    <string name="command_delete_caches_progress">Eyði kössum</string>
+    <plurals name="command_delete_caches_result">
+        <item quantity="one">Eyddi %d kassa</item>
+        <item quantity="other">Eyddi %d kössum</item>
+    </plurals>
+    <string name="command_rename_list_result">Endurnefndur listi</string>
+    <string name="command_delete_list_result">Eyddur listi</string>
+    <string name="caches_refresh_all_warning">Þessi aðgerð getur leitt til mikillar netnotkunar. Ertu viss um að þú viljir endurhlaða alla kassa?</string>
+    <string name="list_list_headline">Listar:</string>
+    <plurals name="extract_waypoints_result">
+        <item quantity="one">%d vegpunktur dreginn út</item>
+        <item quantity="other">%d vegpunktar dregnir út</item>
+    </plurals>
     <!-- calendar adder -->
+    <string name="event_fail">Gat ekki bætt viðburðarkassa á dagatalið</string>
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
@@ -75,6 +708,8 @@
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
+    <string name="unit_ft">fet</string>
+    <string name="unit_mi">mílur</string>
     <!-- switch settings -->
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
@@ -86,6 +721,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Hætta við</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
