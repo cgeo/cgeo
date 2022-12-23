@@ -39,6 +39,7 @@
     <string name="userdefined">Vartotojo nustatyta slėptuvė</string>
     <string name="unknown">Nežinomo tipo</string>
     <string name="all_types_short">Visos</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
+    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
     <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
     <string name="log_add">Pridėti</string>
     <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -194,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
+    <string name="err_captcha">Paslaugai reikalinga Captcha. Atidarykite geocaching.com svetainę naudodami savo naršyklę ir išspręskite Captcha, rodomą prisijungiant. Tada bandykite dar kartą prisijungti naudodami c:geo.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -204,6 +207,7 @@
     <string name="err_unknown_address">c:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
     <string name="err_comm">Nežinoma komunikacijos klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
     <string name="err_missing_auth">Nenustatytas vartotojo vardas ir/arba slaptažodis</string>
+    <string name="err_wrong">Neteisingas vartotojo vardas ir/arba slaptažodis.</string>
     <string name="err_maintenance">Geocaching.com svetainė neveikia dėl priežiūros darbų. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis.</string>
     <string name="err_license">Jūs dar nesutikote su Geocaching.com licenciniu susitarimu, todėl c:geo negali įkelti slėptuvės koordinačių.</string>
     <string name="err_unvalidated_account">Jums pirmiausia reikia patvirtinti savo vartotojo paskyrą Geocaching.com svetainėje.</string>
@@ -430,6 +434,7 @@
     <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
+    <string name="caches_askdeletion">Prašyti ištrinti, jei tuščia</string>
     <string name="select_icon">Pasirinkite piktogramą</string>
     <string name="onetime_missing_unicode_info">Jūsų Android versija nepalaiko automatinio palaikomų piktogramų aptikimo - gali trūkti kai kurių simbolių</string>
     <plurals name="user_finds">
@@ -466,6 +471,7 @@
     <string name="list_dialog_remove_title">Pašalinti sąrašą</string>
     <string name="list_dialog_remove_description">Ar norite pašalinti dabartinį sąrašą? Visos slėptuvės likusios sąraše bus perkeltos į \"Išsaugota\".</string>
     <string name="list_dialog_remove_nowempty">Sąrašas tuščias. Ar norite pašalinti pasirinktą sąrašą?</string>
+    <string name="list_dialog_do_not_ask_me_again">Daugiau manęs neklausti šiam sąrašui</string>
     <string name="list_dialog_remove">Pašalinti</string>
     <string name="list_dialog_rename_title">Pervadinti sąrašą</string>
     <string name="list_dialog_rename">Pervadinti</string>
@@ -489,6 +495,7 @@
     <string name="cache_filter_owner">Slėptuvės savininkas</string>
     <string name="cache_filter_difficulty">Sunkumas</string>
     <string name="cache_filter_terrain">Vietovė</string>
+    <string name="cache_filter_difficulty_terrain">Sunkumas / Vietovė</string>
     <string name="cache_filter_rating">Reitingas</string>
     <string name="cache_filter_status">Būsena</string>
     <string name="cache_filter_attributes">Slėptuvės savybės</string>
@@ -525,8 +532,10 @@
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
     <string name="cache_filter_storage_clear_button">Išvalyti</string>
     <string name="cache_filter_storage_load_delete_title">Įkelkite arba ištrinkite esamą filtrą</string>
+    <string name="cache_filter_storage_select_title">Pasirinkite filtrą</string>
     <string name="cache_filter_storage_delete_title">Ištrinti failą</string>
     <string name="cache_filter_storage_delete_message">Ar tikrai norite ištrinti šią filtro konfigūraciją?</string>
+    <string name="cache_filter_storage_select_clear_title">Pasirinkite filtrą arba išvalykite esamą filtrą</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Filtras dar nėra išsaugotas.</string>
     <string name="cache_filter_storage_save_title">Išsaugoti filtrą su pavadinimu</string>
     <string name="cache_filter_storage_save_confirm_title">Išsaugoti filtro perrašymą</string>
@@ -547,6 +556,7 @@
     <string name="cache_filter_datefilter_label_to">Iki:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>
     <string name="cache_filter_checkboxlist_add_items">Pridėti daugiau elementų</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Pridėti visus elementus</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridėti elementus</string>
     <string name="cache_filter_favorites_absolute">Skaičius</string>
     <string name="cache_filter_favorites_percentage">Procentas</string>
@@ -625,6 +635,7 @@
     <string name="about_changelog">Pakeitimų žurnalas</string>
     <string name="about_changelog_nightly_build">Naktinis leidimas</string>
     <string name="about_changelog_next_release">Kitas leidimas</string>
+    <string name="about_changelog_bugfix_release">Klaidų taisymo leidimas</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Paremkite mus</string>
     <string name="about_donation_more">Dėl informacijos apsilankykite svetainėje</string>
@@ -632,6 +643,7 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
+    <string name="about_system_collecting">Sistemos informacija renkama, palaukite…</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
     <string name="about_system_info">c:geo sistemos informacija</string>
@@ -658,6 +670,8 @@
     <string name="contribution_infrastructure">infrastruktūra</string>
     <string name="contribution_projectleader">atvirojo kodo projekto vadovas</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Pranešti apie problemą</string>
+    <string name="debug_user_error_errortext">Įvyko netikėta problema, dėl kurios paprašysime pranešti mums:</string>
     <string name="debug_user_error_explain_options">Padėkite mums išspręsti c:geo problemas pranešdami apie jas el. paštu su sistemos informacija ir c:geo žurnalo failu.\nVisada kartu su el. paštu pridėkite ir išsamų klaidos aprašymą!\n\nPrieš siųsdami laišką, taip pat peržiūrėkite mūsų DUK ir/arba socialinėje žiniasklaidoje dėl žinomų problemų.\nKitas kontaktų parinktis rasite „Apie c:geo“</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Esami siuntiniai</string>
@@ -858,6 +872,8 @@
     <string name="init_summary_listdisplay">Rodyti slėptuvių narių papildomus sąrašus slėptuvės sąraše</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Rodyti rodyklę su kompaso kryptimi slėptuvių sąraše</string>
+    <string name="init_quicklaunchitems">Greito paleidimo mygtukai</string>
+    <string name="init_summary_quicklaunchitems">Pasirinkite vieną ar daugiau elementų kaip greito paleidimo mygtukus pagrindiniame ekrane</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -866,6 +882,7 @@
         <item>Tamsi</item>
     </string-array>
     <string name="init_wallpaper">Ekrano fonas</string>
+    <string name="init_summary_wallpaper">Pradžios ekrano foną rodyti kaip įrengino ekrano fonas</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Kurti atsarginę kopiją</string>
     <string name="init_backup_summary">Atminkite, kad ši funkcija gali sukurti slėptuvių, kelio taškų ir nustatymų atsargines kopijas bet ne slėptuvės vaizdus. \nKad galėtumėte atkurti duomenis net pametę telefoną, atsarginės kopijos failai turėtų būti nukopijuoti į nepriklausomą vietą.</string>
@@ -924,12 +941,14 @@
     <string name="init_backup_settings_restore">Atkurti nustatymus</string>
     <string name="settings_readingerror">Skaitant nustatymus įvyko klaida</string>
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
+    <string name="settings_folder_changed">Atkuriant \"%1$s\" bus pakeista į \"%2$s\". \n\nNorėdami tęsti bakstelėkite \"%4$s\". Tokiu atveju jūsų bus paprašyta iš naujo nustatyti c:geo prieigą prie to aplanko. \n\nBakstelėkite \"%3$s\", jei norite palikti dabartinį nustatymą.</string>
     <string name="settings_info_offline_maps_title">Informacija apie žemėlapius naudojimui neprisijungus</string>
     <string name="settings_info_offline_maps">c:geo palaiko žemėlapius, skirtus naudoti neprisijungus. Žemėlapius galite gauti iš skirtingų tiekėjų arba net sukurti savo žemėlapius (iš OSM duomenų). Pirmiausia turite pasirinkti aplanką, kuriame bus saugomi žemėlapiai naudojimui neprisijungus.</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
     <string name="settings_info_themes">c:geo palaiko pasirinktines temas žemėlapiams naujajamiems neprisijungus. Jas galima naudoti norint pakeisti žemėlapio spalvų stilių (pvz., norint turėti naktinio vaizdo žemėlapį) arba paryškinti tam tikrus objektus, pvz., dviračių takus ar aukščio linijas žemėlapyje.\n\nDirbant su neįtrauktomis žemėlapių temomis gali sumažėti žemėlapio peržiūros priemonės atidarymo našumas. Tokiu atveju temos aplanką galima pasirinktinai sinchronizuoti su programos privačiu vietiniu aplanku, kad būtų galima greičiau pasiekti (už tam tikrą saugyklos vietos kainą).</string>
     <string name="settings_info_hillshading_title">Informacija apie kalvų šešėlius</string>
     <string name="settings_info_hillshading">Reljiefo šešeliai yra topografinių reljefo žemėlapių kūrimo technika, pridedant prie žemėlapio apšvietimo efektą, nurodantį aukščio pokyčius. Šlaitai bus patamsinti / pašviesinti, kad būtų sukurtas 3D efektas.\nŠaltinio failus, kuriuose yra aukščio informacija, reikia gauti rankiniu būdu - spustelėkite šį elementą, kad pamatytumėte šaltinius - ir patalpinkite į toliau nurodytą šaltinių aplanką.</string>
+    <string name="settings_hillshading_enable">Įjungti kalvų šešėlius</string>
     <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
     <string name="init_local_file_system">Vietinė failų sistema</string>
     <string name="init_base_directory_description">Bazinis aplankas viešiems vietiniams duomenims</string>
@@ -1054,6 +1073,8 @@
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
+    <string name="category_unifiedMap">Vieningas žemėlapis</string>
+    <string name="experimental">(eksperimentinis)</string>
     <string name="init_title_useUnifiedMap">Naudokite vieningą žemėlapį</string>
     <string name="init_summary_useUnifiedMap">Naudokite naują vieningą žemėlapį, o ne įtaisytuosius Google Map / Mapsforge (OSM) žemėlapius (eksperimentiniai / toli gražu nebaigti / tik bandymams)</string>
     <string name="localstorage_migrate_title">Vietinių failų perkėlimas</string>
@@ -1272,6 +1293,7 @@
     <string name="cache_advanced">Išplėstiniai</string>
     <string name="cache_waypoints">Kelio taškai</string>
     <string name="cache_variables">Kintamieji</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Kelio taškai (%d)</string>
     <string name="cache_waypoints_add">Pridėti kelio tašką</string>
     <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
@@ -1511,6 +1533,7 @@
     <string name="waypoint_duplicate">Kopijuoti kelio tašką</string>
     <string name="waypoint_toclipboard">Kopijuoti kelio tašką į iškarpinę</string>
     <string name="waypoint_copy_of">Kopija</string>
+    <string name="waypoint_open_geochecker">Atidaryti Geochecker</string>
     <string name="waypointcalc_notes_prompt">Įrašykite pastabas čia…</string>
     <string name="waypoint_coordinate_formats_plain">Paprastas</string>
     <string name="from_clipboard">Iš iškarpinės</string>
@@ -1589,6 +1612,7 @@
     <!-- map -->
     <string name="map_map">Žemėlapis</string>
     <string name="map_live">Žemėlapis gyvai</string>
+    <string name="map_offline">Žemėlapis neprisijungus</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio pasukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
@@ -1605,6 +1629,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Tai sinchronizuos jūsų temos į privatų programos aplanką, kad pagerintumėte žemėlapių peržiūros priemonės atidarymo našumą, nes tai kainuoja šiek tiek įrenginio saugyklos vietos.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Įjunkite temos aplanko sinchronizavimą</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
+    <string name="onetime_mapthemefixslow_title">Pataisykite lėtą žemėlapio temos atvaizdavimą</string>
+    <string name="onetime_mapthemefixslow_message">Dirbant su nesupakuotomis žemėlapių temomis, gali sumažėti žemėlapių peržiūros priemonės atidarymo našumas. Galite supakuoti arba sinchronizuoti savo temas, kad padidintumėte našumą ir sumažintumėte žemėlapio paleidimo delsą.</string>
     <string name="init_hidewp">Slėpti kelio taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius kelio taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
@@ -2108,6 +2134,12 @@
     <string name="tts_oclock">%s valandos</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Nukopijuota į iškarpinę</string>
+    <plurals name="days_ago">
+        <item quantity="one">Prieš %d dieną</item>
+        <item quantity="few">Prieš %d dienas</item>
+        <item quantity="many">Prieš %d dienų</item>
+        <item quantity="other">Prieš %d dienų</item>
+    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Per %d dieną</item>
         <item quantity="few">Per %d dienas</item>
@@ -2195,6 +2227,7 @@
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
+    <string name="number_input_title">Įveskite vertę nuo %1$s iki %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2244,6 +2277,7 @@
     <string name="map_clear_track_confirm">Ar norite pašalinti maršrutą/pedsaką \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
+    <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
