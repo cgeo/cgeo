@@ -1,4 +1,4 @@
-### Map
+### Kaart
 - Nieuw: OSM kaart bron osm.paws.cz
 
 ### Cache details
@@ -6,7 +6,7 @@
 - Oplossing: Herstel de positie in de lijst van waypoints na het bijwerken of verwijderen van waypoint
 - Oplossing: Naar beneden verplaatsen bij het maken van nieuw waypoint
 
-### General
+### Algemeen
 - API niveau wijzigen (compileSDK 32)
 - Enkele afhankelijke bibliotheken bijwerken
 - Gebruik de Android ingebouwde splash screen functie bij opstarten
