@@ -39,6 +39,7 @@
     <string name="userdefined">Skrytka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
     <string name="all_types_short">Wszystkie</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Zagadkowa</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_templates">Znaleziono: Szablon wpisu…</string>
+    <string name="log_post_not_possible">Pobieranie danych w toku…\nProszę spróbować ponownie za parę sekund albo sprawdzić połączenie z internetem.</string>
     <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
     <string name="log_add">Dodaj</string>
     <string name="log_repeat">Powtórz ostatni wpis</string>
@@ -428,6 +430,7 @@
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
     <plurals name="user_finds">
@@ -464,6 +467,7 @@
     <string name="list_dialog_remove_title">Usuń listę</string>
     <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrytek? Wszystkie skrytki z tej listy zostaną przeniesione do listy „Zapisane”.</string>
     <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nie pytaj ponownie o tę listę</string>
     <string name="list_dialog_remove">Usuń</string>
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
@@ -487,6 +491,7 @@
     <string name="cache_filter_owner">Właściciel skrytki</string>
     <string name="cache_filter_difficulty">Trudność</string>
     <string name="cache_filter_terrain">Teren</string>
+    <string name="cache_filter_difficulty_terrain">Trudność / Teren</string>
     <string name="cache_filter_rating">Ocena</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Atrybuty skrytki</string>
@@ -523,8 +528,10 @@
     <string name="cache_filter_storage_delete_button">Usuń</string>
     <string name="cache_filter_storage_clear_button">Wyczyść</string>
     <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
+    <string name="cache_filter_storage_select_title">Wybierz filtr</string>
     <string name="cache_filter_storage_delete_title">Usuń filtr</string>
     <string name="cache_filter_storage_delete_message">Czy na pewno chcesz usunąć tę konfigurację filtra?</string>
+    <string name="cache_filter_storage_select_clear_title">Wybierz filtr lub wyczyść bieżący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
     <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
     <string name="cache_filter_storage_save_confirm_title">Nadpisz zapisany filtr</string>
@@ -543,6 +550,7 @@
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Zaznacz wszystkie</string>
     <string name="cache_filter_checkboxlist_add_items">Dodaj więcej elementów</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Dodaj wszystkie elementy</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Dodaj elementy</string>
     <string name="cache_filter_favorites_absolute">Bezwzględne</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
@@ -599,6 +607,7 @@
     <string name="about_changelog">Zmiany</string>
     <string name="about_changelog_nightly_build">Kompilacja nocna</string>
     <string name="about_changelog_next_release">Następne wydanie</string>
+    <string name="about_changelog_bugfix_release">Wersja z poprawkami błędów</string>
     <string name="about_system">System</string>
     <string name="about_donate">Wesprzyj nas</string>
     <string name="about_donation_more">Więcej informacji na stronie</string>
@@ -606,6 +615,7 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Informacje systemowe są zbierane, proszę czekać…</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
@@ -632,6 +642,8 @@
     <string name="contribution_infrastructure">infrastruktura</string>
     <string name="contribution_projectleader">lider projektu open source</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Zgłoś problem</string>
+    <string name="debug_user_error_errortext">Wystąpił nieoczekiwany problem, prosimy o przesłanie zgłoszenia:</string>
     <string name="debug_user_error_explain_options">Pomóż nam naprawiać problemy z c:geo, zgłaszając je poprzez wiadomość e-mail z załączonymi informacjami systemowymi i plikiem dziennika c:geo.\nProsimy, aby w wiadomości zawsze znajdował się szczegółowy opis błędu!\n\nProsimy również o sprawdzenie naszej sekcji FAQ i/lub mediów społecznościowych pod kątem znanych problemów, zanim wyślesz wiadomość.\nInne możliwości kontaktu można znaleźć w sekcji „O c:geo”</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Bieżące pobierania</string>
@@ -832,6 +844,8 @@
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
+    <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
+    <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motyw</string>
     <string-array name="settings_theme_entries">
@@ -840,6 +854,7 @@
         <item>Ciemny</item>
     </string-array>
     <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrytek, punktów nawigacji i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -898,6 +913,7 @@
     <string name="init_backup_settings_restore">Przywróć ustawienia</string>
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
+    <string name="settings_folder_changed">Folder \"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu c:geo do tego folderu.\n\nDotknij \"%3$s\", aby zachować ustawienia bieżącego folderu.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
@@ -1028,6 +1044,7 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
     <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
@@ -1246,6 +1263,7 @@
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
     <string name="cache_variables">Zmienne</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punkty nawigacji (%d)</string>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
@@ -1485,6 +1503,7 @@
     <string name="waypoint_duplicate">Duplikuj punkt nawigacji</string>
     <string name="waypoint_toclipboard">Skopiuj punkt nawigacyjny do schowka</string>
     <string name="waypoint_copy_of">Kopiuj z</string>
+    <string name="waypoint_open_geochecker">Otwórz Geochecker</string>
     <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
@@ -1562,6 +1581,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa online</string>
+    <string name="map_offline">Mapa offline</string>
     <string name="map_view_map">Widok mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
@@ -1578,6 +1598,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Spowoduje to synchronizację Twoich motywów w prywatnym folderze aplikacji, aby poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu Map Theme w folderze prywatnym dla szybszego dostępu do plików. Upewnij się, że folder twojego motywu zawiera tylko pliki dotyczące motywu, ale nie zawiera dodatkowych (dużych) danych przed włączeniem tej funkcji.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderu?</string>
+    <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
+    <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
     <string name="init_hidewp">Ukryj punkty nawigacji</string>
     <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
     <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
@@ -2081,6 +2103,12 @@
     <string name="tts_oclock">%s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d dzień temu</item>
+        <item quantity="few">%d dni temu</item>
+        <item quantity="many">%d dni temu</item>
+        <item quantity="other">%d dni temu</item>
+    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Za %d dzień</item>
         <item quantity="few">Za %d dni</item>
@@ -2168,6 +2196,7 @@
     <string name="preference_colorpicker_select_opaqueness">Wybierz nieprzezroczystość</string>
     <string name="reset_to_default">Domyślny</string>
     <!-- number input -->
+    <string name="number_input_title">Wprowadź wartość między %1$s a %2$s</string>
     <string name="number_input_err_boundarymin">Wprowadzona wartość jest zbyt mała - zresetuj do wartości minimalnej</string>
     <string name="number_input_err_boundarymax">Wprowadzona wartość jest zbyt duża - zresetuj do wartości maksymalnej</string>
     <string name="number_input_err_format">Nieprawidłowy format numeru</string>
@@ -2217,6 +2246,7 @@
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad „%s”?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
+    <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
