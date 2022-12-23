@@ -103,7 +103,6 @@
     <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">正在发布 %1$s %2$d/%3$d</string>
     <string name="log_clear">清除</string>
-    <string name="log_post_not_possible">正在下载数据…\n请几秒钟后再试一次或检查您的网络连接。</string>
     <string name="log_date_future_not_allowed">不允许未来的日志日期。</string>
     <string name="log_add">添加</string>
     <string name="log_repeat">重复上次日志</string>
@@ -401,8 +400,6 @@
     <string name="contribution_documentation">文档</string>
     <string name="contribution_projectleader">开源项目带头人</string>
     <string name="contribution_graphics">图形</string>
-    <string name="debug_user_error_report_title">报告问题</string>
-    <string name="debug_user_error_errortext">出现了一个意外的问题，我们请求您向我们报告：</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
