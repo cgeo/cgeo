@@ -1,6 +1,6 @@
 ##
 
-### General
+### Общее
 - Исправлено: для новых трекабл(геокротов) автоматически ставится режим посещен
 - Исправлено: не отображались настройки для базового аккаунта gc.com
 - Change: mapy.cz map provider removed (due to change in licensing)
@@ -9,16 +9,16 @@
 
 ##
 
-### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
+### Общее
+- Исправлено: используется обновленный URL для геокодирования mapquest
+- Исправлено: Предотвращен сбой при попытке прикрепить фото к отзыву тайника
 - Изменение: обновленное сообщение об ошибке для разрешения требования капчи при входе в geocaching.com
 
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+### Тайники
+- Исправлено: предотвращено удвоение изображений спойлеров в галерее при обновлении тайника
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
+### Калькулятор переменных
+- Новое: функция TRUNC для усечения десятичных значений. Остается только целое число.
 - Новое: Разрешить использование квадратных скобок для вычислений. Для диапазонов переменных, пожалуйста, используйте, например, \[:1-5\] вместо этого.
 
 ### Карта
