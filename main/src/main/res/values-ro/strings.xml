@@ -111,6 +111,7 @@
     <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
+    <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>
     <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
     <string name="log_add">Adaugă</string>
     <string name="log_repeat">Repetă ultima însemnare</string>
@@ -332,6 +333,7 @@
     <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
     <string name="caches_clear_offlinelogs_progress">Ştergere însemnări stocate local</string>
     <string name="caches_make_list_unique">Marchează lista unică</string>
+    <string name="caches_askdeletion">Cere ștergerea dacă este goală</string>
     <!-- caches lists -->
     <string name="menu_lists">Gestiune liste</string>
     <string name="list_menu_create">Crează listă nouă</string>
@@ -347,11 +349,16 @@
     <string name="list_dialog_remove_title">Şterge listă</string>
     <string name="list_dialog_remove_description">Vrei să ştergi lista curentă? Toate cutiile din listă vor fi mutate în lista \"Salvate\".</string>
     <string name="list_dialog_remove_nowempty">Lista este goală. Vrei să o ştergi?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nu mă mai întreba pentru această listă</string>
     <string name="list_dialog_remove">Şterge</string>
     <string name="list_dialog_rename_title">Redenumeşte lista</string>
     <string name="list_dialog_rename">Redenumește</string>
     <string name="list_not_available">Lista nu mai există, revenire la lista standard</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_difficulty_terrain">Dificultate / Teren</string>
+    <string name="cache_filter_storage_select_title">Selectare filtru</string>
+    <string name="cache_filter_storage_select_clear_title">Selectaţi filtrul sau ştergeţi filtrul curent</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Adaugă toate elementele</string>
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
@@ -359,11 +366,14 @@
     <string name="about_contributors">Contribuitori</string>
     <string name="about_license">Licenţă</string>
     <string name="about_help">Ajutor</string>
+    <string name="about_system_collecting">Informațiile de sistem sunt colectate, vă rugăm să așteptați…</string>
     <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
     <string name="about_system_info_send_button">Trimite prin E-Mail…</string>
     <string name="about_system_info">c:geo - informaţii despre sistem</string>
     <string name="about_system_info_send_chooser">Trimite informaţiile despre sistem</string>
     <string name="changelog_github">Afişează toate modificările</string>
+    <string name="debug_user_error_report_title">Raportează o problemă</string>
+    <string name="debug_user_error_errortext">A apărut o problemă neașteptată pe care v-am ruga să ne-o raportați:</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
@@ -461,6 +471,7 @@
     <string name="init_restore_confirm">Baza de date este goală. Vrei să restaurezi dintr-o salvare de siguranţă?</string>
     <string name="init_backup_last">Salvare de siguranţă disponibilă de la</string>
     <string name="init_backup_last_no">Nu există nici un fişier cu salvare de siguranţă.</string>
+    <string name="settings_folder_changed">Dosarul \"%1$s\" va fi schimbat în \"%2$s\" în timpul restaurării.\n\nApăsați \"%4$s\" pentru a continua. În acest caz vi se va cere să acordați aplicației c:geo accesul la acel folder.\n\nApăsați \"%3$s\" pentru a păstra actualele setări de dosar.</string>
     <string name="settings_info_offline_maps_title">Despre hărţile predefinite</string>
     <string name="settings_info_themes_title">Despre stilurile hărţilor</string>
     <string name="init_mapsource_select">Alege hărţi din sursa</string>
@@ -617,6 +628,7 @@
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Puncte Intermediare (%d)</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
     <string name="cache_logs">Jurnal</string>
@@ -777,6 +789,7 @@
     <string name="map_map">Hartă</string>
     <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
+    <string name="onetime_mapthemefixslow_title">Repară randarea înceată a tematicii hărții</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
     <string name="map_live_enable">Ia de pe net</string>
     <string name="map_live_disable">Fără internet</string>
@@ -1203,6 +1216,7 @@
     <!-- permission handling -->
     <!-- colors -->
     <!-- number input -->
+    <string name="number_input_title">Introduceți o valoare între %1$s și %2$s</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
