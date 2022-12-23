@@ -395,6 +395,7 @@
     <string name="caches_sort_eventdate">Data do evento</string>
     <string name="caches_select_mode">Modo de selecção</string>
     <string name="caches_select_next20">Seleccionar as próximas 20 caches</string>
+    <string name="caches_select_next100">Seleccionar as próximas 100 caches</string>
     <string name="caches_select_mode_exit">Sair do modo de selecção</string>
     <string name="caches_select_invert">Inverter selecção</string>
     <string name="caches_nearby">Por perto</string>
@@ -535,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
+    <string name="cache_filter_datefilter_absolute">Absoluto</string>
+    <string name="cache_filter_datefilter_relative">Relativo a hoje</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
@@ -591,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">desde o amanhecer</string>
     <string name="cache_filter_stored_since_stored_max_short">máx</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>há mais de um ano</item>
+        <item>um ano atrás</item>
+        <item>180 dias atrás</item>
+        <item>90 dias atrás</item>
+        <item>30 dias atrás</item>
+        <item>2 semanas atrás</item>
+        <item>uma semana atrás</item>
+        <item>há 3 dias</item>
+        <item>há menos de 3 dias</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1a</item>
+        <item>1a</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2sem</item>
+        <item>1sem</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versão</string>
     <string name="about_changelog">Registo de alterações</string>
@@ -846,7 +871,7 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
+    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados, mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -1034,6 +1059,8 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="category_unifiedMap">Mapa unificado</string>
+    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
     <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
@@ -1437,8 +1464,6 @@
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
-    <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
@@ -2021,7 +2046,7 @@
     <string name="support_title">Suporte</string>
     <string name="website_title">Página Web</string>
     <string name="facebook_link"><a href="">Página do c:geo</a></string>
-    <string name="fangroup_link"><a href="">Grupo de utilizadores alemão</a></string>
+    <string name="fangroup_link"><a href="">Comunidade alemã</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo no Google Play</a></string>
     <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que regista uma cache?</string>
@@ -2288,6 +2313,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema de mapa detalhado, feito para mapas \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mapas detalhados, exigem um dos temas de mapa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema de mapa detalhado, feito para mapas \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mapas detalhados, requerem o tema de mapa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema de mapa detalhado, feito para mapas \"Paws\"</string>
     <string name="mapserver_hylly_info">Mapas detalhados para a Finlândia, requer um dos temas de mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>

@@ -371,7 +371,6 @@
     <string name="caches_sort_storage">Dato for lagring på enhed</string>
     <string name="caches_sort_eventdate">Arrangementsdato</string>
     <string name="caches_select_mode">Markér</string>
-    <string name="caches_select_next20">Vælg de næste 20 caches</string>
     <string name="caches_select_mode_exit">Afslut markering</string>
     <string name="caches_select_invert">Omvend markering</string>
     <string name="caches_nearby">I nærheden</string>
@@ -1144,7 +1143,6 @@
     <string name="waypoint">Rutepunkt</string>
     <string name="waypoint_coordinates">Position</string>
     <string name="waypoint_cache_coordinates">Cacheposition</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Tilpasset</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_bearing">Kompasretning</string>

@@ -196,7 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
-    <string name="err_captcha">캡차가 필요합니다. 지침은 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>을 참조하세요.</string>
+    <string name="err_captcha">이 서비스에는 Captcha가 필요합니다. 브라우저에서 geocaching.com 웹 사이트를 열고 로그인할 때 표시되는 Captcha를 해결하십시오. 다음에는 c:geo로 다시 로그인을 시도하십시오.</string>
     <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -392,6 +392,7 @@
     <string name="caches_sort_eventdate">이벤트 날짜</string>
     <string name="caches_select_mode">선택 모드</string>
     <string name="caches_select_next20">다음 20개 캐시 선택</string>
+    <string name="caches_select_next100">다음 100개 캐시 선택</string>
     <string name="caches_select_mode_exit">선택 모드 나오기</string>
     <string name="caches_select_invert">선택 반전</string>
     <string name="caches_nearby">인근 캐시</string>
@@ -528,6 +529,7 @@
     <string name="cache_filter_stringfilter_type_starts_with">다음으로 시작</string>
     <string name="cache_filter_stringfilter_type_ends_with">다음으로 끝남</string>
     <string name="cache_filter_stringfilter_type_pattern">패턴</string>
+    <string name="cache_filter_datefilter_relative">오늘 기준</string>
     <string name="cache_filter_datefilter_label_from">시작일:</string>
     <string name="cache_filter_datefilter_label_to">종료일:</string>
     <string name="cache_filter_checkboxlist_selectallnone">모두 선택</string>
@@ -584,6 +586,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">시간의 여명</string>
     <string name="cache_filter_stored_since_stored_max_short">최대</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>1년 이상</item>
+        <item>1년 전</item>
+        <item>180일 전</item>
+        <item>90일 전</item>
+        <item>30일 전</item>
+        <item>2주 전</item>
+        <item>1 주일 전</item>
+        <item>3 일 전</item>
+        <item>3일 이내</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1년</item>
+        <item>1년</item>
+        <item>180일</item>
+        <item>90일</item>
+        <item>30일</item>
+        <item>2주</item>
+        <item>1주</item>
+        <item>3일</item>
+        <item>&lt;3일</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">버전</string>
     <string name="about_changelog">변경내역</string>
@@ -1027,6 +1051,8 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
+    <string name="category_unifiedMap">통합 지도</string>
+    <string name="experimental">(실험적)</string>
     <string name="init_title_useUnifiedMap">통합 지도 사용</string>
     <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도 사용(실험 기능/완전하지 않음/테스트 전용)</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
@@ -1421,8 +1447,6 @@
     <string name="waypoint">지점</string>
     <string name="waypoint_coordinates">좌표</string>
     <string name="waypoint_cache_coordinates">캐시 좌표</string>
-    <string name="waypoint_calculated_coordinates">계산된 좌표</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">좌표 계산</string>
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
@@ -1506,6 +1530,7 @@
     <string name="formula_function_tan">탄젠트</string>
     <string name="formula_function_abs">절댓값</string>
     <string name="formula_function_round">반올림</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">만약</string>
     <string name="formula_function_length">스트링 길이</string>
     <string name="formula_function_substring">부스트링</string>

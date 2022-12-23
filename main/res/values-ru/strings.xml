@@ -398,7 +398,6 @@
     <string name="caches_sort_storage">Дата сохранения</string>
     <string name="caches_sort_eventdate">Дата события</string>
     <string name="caches_select_mode">Режим выделения</string>
-    <string name="caches_select_next20">Выбрать следующие 20 тайников</string>
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
@@ -696,7 +695,7 @@
     <string name="settings_title_offline_routing">Маршрутизация офлайн</string>
     <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
     <string name="settings_title_map_rotation">Вращение карты (Google Maps)</string>
-    <string name="settings_title_waypoints">Путевые точки</string>
+    <string name="settings_title_waypoints">Точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
     <string name="settings_title_map_style">Стиль карты</string>
@@ -1467,8 +1466,6 @@
     <string name="waypoint">Путевая точка</string>
     <string name="waypoint_coordinates">Координаты</string>
     <string name="waypoint_cache_coordinates">Координаты тайника</string>
-    <string name="waypoint_calculated_coordinates">Вычисленные координаты</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Вычислить координаты</string>
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
@@ -2351,6 +2348,8 @@
     <string name="mapserver_openandromaps_themes_info">Подробная тема карты, созданная для карт \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Подробные карты, требуется одна из тем карты \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Подробная тема карты, специально для карт \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Подробные карты, требует тему карты \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Подробная тема карты, созданная для карт «Paws»</string>
     <string name="mapserver_hylly_info">Детальные карты Финляндии, требуют одну из тем карты \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Подробная тема карты, созданная для карт «Hylly»</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>

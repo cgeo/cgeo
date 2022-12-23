@@ -10,4 +10,4 @@
 - Αλλαγή επιπέδου API (compileSDK 32)
 - Ενημέρωση κάποιων εξαρτημένων βιβλιοθηκών
 - Χρήση της ενσωματωμένης οθόνης εκκίνησης Android κατά την εκκίνηση
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Αλλαγή: Χρησιμοποιήστε διαφορετικό μηχανισμό Android για να λαμβάνετε λήψεις (για καλύτερη συμβατότητα με το Android 12+)

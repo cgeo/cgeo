@@ -887,7 +887,6 @@
     <string name="waypoint">Útpont</string>
     <string name="waypoint_coordinates">Koordináták</string>
     <string name="waypoint_cache_coordinates">A láda koordinátái</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Egyedi</string>
     <string name="waypoint_my_coordinates">Az én koordinátáim</string>
     <string name="waypoint_bearing">Irány</string>

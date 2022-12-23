@@ -381,7 +381,6 @@
     <string name="caches_sort_storage">オフライン用に保存した日時</string>
     <string name="caches_sort_eventdate">イベント日</string>
     <string name="caches_select_mode">選択モード</string>
-    <string name="caches_select_next20">次の20個のキャッシュを選択</string>
     <string name="caches_select_mode_exit">選択モードを終わる</string>
     <string name="caches_select_invert">選択を反転</string>
     <string name="caches_nearby">現在地の近く</string>
@@ -1344,8 +1343,6 @@
     <string name="waypoint">ウェイポイント</string>
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
-    <string name="waypoint_calculated_coordinates">計算済み座標</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">座標計算</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>

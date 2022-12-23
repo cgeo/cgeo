@@ -2,12 +2,12 @@
 - Novo: Fonte de mapa OSM osm.paws.cz
 
 ### Detalhes da cache
-- New: New more sophisticated image gallery
-- Fix: Restore position in waypoint list after updating or deleting waypoint
-- Fix: Move to bottom when creating new waypoint
+- Novo: Nova galeria de imagens mais sofisticada
+- Correcção: Restaurar posição na lista de pontos adicionais, após actualizar ou excluir um deles
+- Correcção: Mover para baixo ao criar um novo ponto adicional
 
 ### Geral
-- API level change (compileSDK 32)
-- Update some dependant libraries
-- Use Android built-in splash screen feature on startup
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Alteração do nível da API (compileSDK 32)
+- Actualização de algumas bibliotecas dependentes
+- Usar o recurso de ecrã inicial do Android na inicialização
+- Alteração: Usa outro mecanismo do Android para receber transferências (para melhor compatibilidade com o Android 12+)

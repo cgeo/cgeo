@@ -196,7 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
-    <string name="err_captcha">Captcha is vereist. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
+    <string name="err_captcha">Deze service vereist een Captcha. Open de geocaching.com website met je browser en los de captcha op die getoond wordt tijdens het inloggen. Probeer daarna opnieuw in te loggen met c:geo.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
@@ -207,7 +207,7 @@
     <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
     <string name="err_comm">Onbekende communicatiefout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld</string>
-    <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord</string>
+    <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord.</string>
     <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
     <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
     <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
@@ -394,7 +394,6 @@
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
     <string name="caches_select_mode">Selectie modus</string>
-    <string name="caches_select_next20">Selecteer volgende 20 caches</string>
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
@@ -1437,8 +1436,6 @@
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coördinaten</string>
     <string name="waypoint_cache_coordinates">Cache coördinaten</string>
-    <string name="waypoint_calculated_coordinates">Berekende coördinaten</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Coördinaat berekenen</string>
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
@@ -1522,6 +1519,7 @@
     <string name="formula_function_tan">Tangens</string>
     <string name="formula_function_abs">Absolute waarde</string>
     <string name="formula_function_round">Afronden</string>
+    <string name="formula_function_trunc">Afronden op heel getal</string>
     <string name="formula_function_if">Als</string>
     <string name="formula_function_length">String Lengte</string>
     <string name="formula_function_substring">Substring</string>

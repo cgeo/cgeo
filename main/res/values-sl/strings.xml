@@ -649,7 +649,6 @@
     <!-- waypoint -->
     <string name="waypoint">Dodatna točka</string>
     <string name="waypoint_cache_coordinates">Koordinate zaklada</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Posebno</string>
     <string name="waypoint_my_coordinates">Moje koordinate</string>
     <string name="waypoint_bearing">Smer v stopinjah</string>

@@ -678,7 +678,6 @@
     <string name="waypoint">إحداثية الطريق</string>
     <string name="waypoint_coordinates">الإحداثيات</string>
     <string name="waypoint_cache_coordinates">إحداثيات المخبئ</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">مخصص</string>
     <string name="waypoint_my_coordinates">إحداثياتي</string>
     <string name="waypoint_bearing">الاتجاه بالدرجة °</string>

@@ -196,7 +196,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
-    <string name="err_captcha">Captcha gerekli. Lütfen rehberlik için <a href="https://www.cgeo.org/faq#login-failed"> SSS </a> bölümümüze bakın.</string>
     <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_lc">labs.geocaching.com\'a bağlanılamıyor. Sitede sorun olabilir veya internet bağlantınız çalışmıyor olabilir.</string>
@@ -207,7 +206,6 @@
     <string name="err_unknown_address">c: geo bu adresi mevcut bir yere eşleyemedi</string>
     <string name="err_comm">Bilinmeyen bağlantı hatası. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
     <string name="err_missing_auth">Kullanıcı adı ve/veya parola belirlenmedi</string>
-    <string name="err_wrong">Yanlış kullanıcı adı ve/veya parola</string>
     <string name="err_maintenance">Geocaching.com bakım sebebiyle çalışmıyor. c:geo, kaydedilen Geocache\'ler ile çevrimdışı çalışıyor.</string>
     <string name="err_license">Geocaching.com lisans sözleşmesini kabul etmediniz, bu nedenle c:geo Geocache koordinatlarını yükleyemiyor.</string>
     <string name="err_unvalidated_account">Öncelikle hesabınızı Geocaching.com web sitesinde doğrulamanız gerekir.</string>
@@ -391,7 +389,6 @@
     <string name="caches_sort_storage">Cihaza kaydedilen tarih</string>
     <string name="caches_sort_eventdate">Etkinlik tarihi</string>
     <string name="caches_select_mode">Seçim modu</string>
-    <string name="caches_select_next20">Sonraki 20 Geocache\'i seç</string>
     <string name="caches_select_mode_exit">Seçim modundan çıkın</string>
     <string name="caches_select_invert">Seçimi tersine çevir</string>
     <string name="caches_nearby">Yakınlarda</string>
@@ -1364,8 +1361,6 @@
     <string name="waypoint">Yol noktası</string>
     <string name="waypoint_coordinates">Koordinatlar</string>
     <string name="waypoint_cache_coordinates">Geocache koordinatları</string>
-    <string name="waypoint_calculated_coordinates">Hesaplanmış koordinatlar</string>
-    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_calculated_coordinates_global">Koordinatları hesapla</string>
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
