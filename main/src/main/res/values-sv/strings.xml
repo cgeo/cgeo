@@ -39,7 +39,6 @@
     <string name="userdefined">Användardefinierad cache</string>
     <string name="unknown">Okänd typ</string>
     <string name="all_types_short">Alla</string>
-    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Myst</string>
     <string name="letterbox_short">Letterbox</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
     <string name="log_templates">Hittade det: Loggmall…</string>
-    <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
     <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
     <string name="log_add">Lägg till</string>
     <string name="log_repeat">Upprepa senaste loggen</string>
@@ -424,7 +422,6 @@
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
-    <string name="caches_askdeletion">Fråga om borttagning om tom</string>
     <string name="select_icon">Välj ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version stöder inte automatisk detektering av ikoner - vissa tecken kan saknas</string>
     <plurals name="user_finds">
@@ -455,7 +452,6 @@
     <string name="list_dialog_remove_title">Ta bort lista</string>
     <string name="list_dialog_remove_description">Vill du ta bort den här listan? Alla cacher som finns i listan kommer att flyttas till \"Sparade\".</string>
     <string name="list_dialog_remove_nowempty">Listan är tom. Vill du ta bort den aktuella listan?</string>
-    <string name="list_dialog_do_not_ask_me_again">Fråga mig inte igen för denna lista</string>
     <string name="list_dialog_remove">Ta bort</string>
     <string name="list_dialog_rename_title">Byt namn på listan</string>
     <string name="list_dialog_rename">Byt namn</string>
@@ -479,7 +475,6 @@
     <string name="cache_filter_owner">Cacheägare</string>
     <string name="cache_filter_difficulty">Svårighetsgrad</string>
     <string name="cache_filter_terrain">Terräng</string>
-    <string name="cache_filter_difficulty_terrain">Svårighetsgrad / Terräng</string>
     <string name="cache_filter_rating">Betyg</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-attribut</string>
@@ -514,10 +509,8 @@
     <string name="cache_filter_storage_delete_button">Ta bort</string>
     <string name="cache_filter_storage_clear_button">Rensa</string>
     <string name="cache_filter_storage_load_delete_title">Ladda eller ta bort ett befintligt filter</string>
-    <string name="cache_filter_storage_select_title">Välj filter</string>
     <string name="cache_filter_storage_delete_title">Ta bort filter</string>
     <string name="cache_filter_storage_delete_message">Vill du verkligen ta bort den här filterkonfigurationen?</string>
-    <string name="cache_filter_storage_select_clear_title">Välj filter eller rensa nuvarande filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Inga filter har sparats än.</string>
     <string name="cache_filter_storage_save_title">Spara filter med namn</string>
     <string name="cache_filter_storage_save_confirm_title">Överskrivning av filter</string>
@@ -536,7 +529,6 @@
     <string name="cache_filter_datefilter_label_to">Till:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Markera alla</string>
     <string name="cache_filter_checkboxlist_add_items">Lägg till fler objekt</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Lägg till alla objekt</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lägg till objekt</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
@@ -593,7 +585,6 @@
     <string name="about_changelog">Historik</string>
     <string name="about_changelog_nightly_build">Nattligt bygge</string>
     <string name="about_changelog_next_release">Nästa version</string>
-    <string name="about_changelog_bugfix_release">Bugfix Release</string>
     <string name="about_system">System</string>
     <string name="about_donate">Stöd oss</string>
     <string name="about_donation_more">Besök hemsidan för info</string>
@@ -601,7 +592,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
-    <string name="about_system_collecting">Systeminformation samlas in, vänta…</string>
     <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
     <string name="about_system_info_send_button">Skicka via e-post…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -628,8 +618,6 @@
     <string name="contribution_infrastructure">infrastruktur</string>
     <string name="contribution_projectleader">open source projektledare</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Rapportera ett problem</string>
-    <string name="debug_user_error_errortext">Ett oväntat problem har uppstått som vi ber er att rapportera till oss:</string>
     <string name="debug_user_error_explain_options">Hjälp oss att fixa c:geo-problem genom att rapportera dem via e-post med systeminformation och c:geo-loggfil inkluderad.\nVänligen inkludera alltid en detaljerad felbeskrivning med din e-post!\n\nInnan du skickar ett mail vänligen kontrollera också vår FAQ och/eller sociala medier närvaro för kända problem.\nAndra kontaktalternativ hittar du på \'Om c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Aktuella nedladdningar</string>
@@ -830,8 +818,6 @@
     <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
-    <string name="init_quicklaunchitems">Snabbstartsknappar</string>
-    <string name="init_summary_quicklaunchitems">Välj en eller flera objekt som snabbstartsknappar på startskärmen</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -840,7 +826,6 @@
         <item>Mörkt</item>
     </string-array>
     <string name="init_wallpaper">Bakgrund</string>
-    <string name="init_summary_wallpaper">Visa enhetens bakgrundsbild som startskärmens bakgrund</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
@@ -899,14 +884,12 @@
     <string name="init_backup_settings_restore">Återställ inställningar</string>
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
-    <string name="settings_folder_changed">Mappen%1$s\" kommer att ändras till \"%2$s\" under återställning.\n\nTryck på \"%4$s\" för att fortsätta. I så fall blir du ombedd att ge c:geo åtkomst till mappen.\n\nTryck på \"%3$s\" för att behålla den aktuella mappinställningen istället.</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
     <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nKällfilerna som innehåller höjdinformation måste erhållas manuellt - klicka på detta objekt för källor - och placeras i källmappen nedan.</string>
-    <string name="settings_hillshading_enable">Aktivera terrängskuggning</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
@@ -1232,7 +1215,6 @@
     <string name="cache_advanced">Avancerat</string>
     <string name="cache_waypoints">Punkter</string>
     <string name="cache_variables">Variabler</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Lägg till waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
     <string name="cache_waypoints_add_fromclipboard">Lägg till från urklipp</string>
@@ -1469,7 +1451,6 @@
     <string name="waypoint_duplicate">Duplicera punkt</string>
     <string name="waypoint_toclipboard">Kopiera vägpunkt till urklipp</string>
     <string name="waypoint_copy_of">Kopia av</string>
-    <string name="waypoint_open_geochecker">Öppna Geochecker</string>
     <string name="waypointcalc_notes_prompt">Skriv anteckningar här&#8230;</string>
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
@@ -1547,7 +1528,6 @@
     <!-- map -->
     <string name="map_map">Karta</string>
     <string name="map_live">Live karta</string>
-    <string name="map_offline">Offline-kartor</string>
     <string name="map_view_map">Karttyp</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
@@ -1564,8 +1544,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
-    <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
-    <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
     <string name="init_hidewp">Dölj vägpunkter</string>
     <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
     <string name="init_summary_hidewp_parking">Dölj vägpunkter för parkering på kartan</string>
@@ -2059,10 +2037,6 @@
     <string name="tts_oclock">Klockan %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopierat till urklipp</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d dag sedan</item>
-        <item quantity="other">%d dagar sedan</item>
-    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">om %d dag</item>
         <item quantity="other">om %d dagar</item>
@@ -2136,7 +2110,6 @@
     <string name="preference_colorpicker_select_opaqueness">Välj ogenomskinlighet</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Ange ett värde mellan %1$s och %2$s</string>
     <string name="number_input_err_boundarymin">Angivet värde är för litet - återställ till minsta värde</string>
     <string name="number_input_err_boundarymax">Angivet värde är för stort - återställ till max värde</string>
     <string name="number_input_err_format">Ogiltigt nummerformat</string>
@@ -2184,7 +2157,6 @@
     <string name="map_clear_track_confirm">Vill du ta bort rutt/spår \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Rutter / spåralternativ</string>
-    <string name="routes_tracks_menu">Rutter / spår</string>
     <string name="center_on_route_track">Centrera på rutt/spår</string>
     <string name="unload_route_track">Rensa rutt/spår</string>
     <string name="route">Rutt</string>
