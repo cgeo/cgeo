@@ -1,25 +1,25 @@
 ##
 
-### Bendras
-- Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
-- Pataisymas: Nerodomi bazinio gc.com nario nustatymai
-- Pakeitimas: pašalintas mapy.cz žemėlapio teikėjas (dėl licencijavimo pakeitimo)
-- Pataisymas: Slėptuvės paieškos laukas išvalomas atlikus paiešką
-- Pataisymas: Laipsnių formulių su keliais taškais strigtis
+### General
+- Fix: New TB set to visit mode automatically
+- Fix: gc.com basic member settings not displayed
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
+- Fix: Crash for degree formulas with multiple dots
 
 ##
 
-### Bendras
-- Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui
-- Pataisymas: Užkirstas kelias programėlės užstrigimui tam tikromis sąlygomis bandant pridėti nuotrauką prie žurnalo
-- Pakeitimas: Geresnis klaidos pranešimas apie tai, kaip išspręsti Captcha reikalavimą prisijungus prie geocaching.com
+### General
+- Fix: Use updated URL for mapquest geocoding
+- Fix: Prevent crash under certain conditions when trying to attach photo to log
+- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
-### Slėptuvės
-- Pataisymas: Neleidžiama spoilerių vaizdams dubliuotis galerijoje atnaujinant slėptuvę
+### Caches
+- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
 
-### Kintamųjų skaičiuoklė
-- Naujiena: Funkcija TRUNC sutrumpina skaičių iki sveikojo skaičiaus, pašalindama trupmeninę skaičiaus dalį
-- Naujiena: Leidžiama skaičiavimams naudoti laužtinius skliaustus. Kintamiems diapazonams naudokite pvz. \[:1-5\].
+### Variable calculator
+- New: TRUNC function to truncate decimal values
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
-### Žemėlapis
-- Pataisymas: Rodomas teisingas S4.0 ir S4.5 SV žymeklis
+### Map
+- Fix: Show correct DT marker for D4.0 and D4.5
