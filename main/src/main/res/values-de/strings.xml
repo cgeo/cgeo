@@ -39,7 +39,6 @@
     <string name="userdefined">Benutzerdefinierter Cache</string>
     <string name="unknown">Unbekannter Typ</string>
     <string name="all_types_short">Alle</string>
-    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
-    <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
     <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
     <string name="log_add">Hinzufügen</string>
     <string name="log_repeat">Verwende das letzte Log erneut</string>
@@ -196,7 +194,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
-    <string name="err_captcha">Der Dienst benötigt ein Captcha. Bitte öffne die geocaching.com-Webseite mit deinem Browser und löse das Captcha, welches dort beim Anmelden angezeigt wird. Dann versuche erneut die Anmeldung in c:geo.</string>
     <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_lc">Verbindung zu labs.geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
@@ -207,7 +204,6 @@
     <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
     <string name="err_comm">Unbekannter Kommunikationsfehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
     <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt</string>
-    <string name="err_wrong">Benutzername und/oder Passwort falsch.</string>
     <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
     <string name="err_license">Die Geocaching.com-Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
     <string name="err_unvalidated_account">Die Anmeldedaten müssen zuerst auf Geocaching.com validiert werden.</string>
@@ -428,7 +424,6 @@
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
-    <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
     <plurals name="user_finds">
@@ -459,7 +454,6 @@
     <string name="list_dialog_remove_title">Liste entfernen</string>
     <string name="list_dialog_remove_description">Soll die aktuelle Liste gelöscht werden? Alle Caches dieser Liste werden in die Standardliste verschoben.</string>
     <string name="list_dialog_remove_nowempty">Die Liste ist leer. Soll sie gelöscht werden?</string>
-    <string name="list_dialog_do_not_ask_me_again">Nicht erneut fragen für diese Liste</string>
     <string name="list_dialog_remove">Entfernen</string>
     <string name="list_dialog_rename_title">Liste umbenennen</string>
     <string name="list_dialog_rename">Umbenennen</string>
@@ -483,7 +477,6 @@
     <string name="cache_filter_owner">Cache-Besitzer</string>
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
-    <string name="cache_filter_difficulty_terrain">Schwierigkeit / Gelände</string>
     <string name="cache_filter_rating">Bewertung</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-Attribute</string>
@@ -518,10 +511,8 @@
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_clear_button">Leeren</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
-    <string name="cache_filter_storage_select_title">Filter auswählen</string>
     <string name="cache_filter_storage_delete_title">Filter löschen</string>
     <string name="cache_filter_storage_delete_message">Möchtest du diese Filterkonfiguration wirklich löschen?</string>
-    <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
     <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
     <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>
@@ -542,7 +533,6 @@
     <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
     <string name="cache_filter_checkboxlist_add_items">Weitere Elemente hinzufügen</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Alle Elemente hinzufügen</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Elemente hinzufügen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
@@ -621,7 +611,6 @@
     <string name="about_changelog">Änderungen</string>
     <string name="about_changelog_nightly_build">Nightly-Build</string>
     <string name="about_changelog_next_release">Nächste Version</string>
-    <string name="about_changelog_bugfix_release">Bugfix-Release</string>
     <string name="about_system">System</string>
     <string name="about_donate">Unterstütze uns</string>
     <string name="about_donation_more">Besuche Webseite für Infos</string>
@@ -629,7 +618,6 @@
     <string name="about_license">Lizenz</string>
     <string name="about_apache_license"><a href="">Apache Lizenz, Version 2.0</a></string>
     <string name="about_help">Hilfe</string>
-    <string name="about_system_collecting">Systeminformationen werden gesammelt, bitte warten…</string>
     <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
     <string name="about_system_info_send_button">Per E-Mail versenden…</string>
     <string name="about_system_info">c:geo Systeminformationen</string>
@@ -656,8 +644,6 @@
     <string name="contribution_infrastructure">Infrastruktur</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
     <string name="contribution_graphics">Grafiken</string>
-    <string name="debug_user_error_report_title">Problem melden</string>
-    <string name="debug_user_error_errortext">Ein unerwartetes Problem ist aufgetreten, bitte melde es uns:</string>
     <string name="debug_user_error_explain_options">Hilf uns dabei Probleme in c:geo zu beheben, indem du diese per E-Mail zusammen deinen Systeminformationen und einer c:geo Logdatei meldest.\nBitte füge der E-Mail auch immer eine detaillierte Fehlerbeschreibung hinzu!\n\nBevor du eine Mail schickst, prüfe bitte auch unsere FAQ und/oder die sozialen Netzwerke nach bereits bekannten Problemen.\nAndere Kontaktmöglichkeiten findest du in \'Über c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Aktuelle Downloads</string>
@@ -858,8 +844,6 @@
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
-    <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
-    <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
@@ -868,7 +852,6 @@
         <item>Dunkel</item>
     </string-array>
     <string name="init_wallpaper">Hintergrundbild</string>
-    <string name="init_summary_wallpaper">Geräte-Hintergrund als Hintergrund für den Startbildschirm anzeigen</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -927,14 +910,12 @@
     <string name="init_backup_settings_restore">Einstellungen wiederherstellen</string>
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
-    <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
     <string name="settings_info_hillshading">Hillshading ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie Quelldateien, die die Höheninformationen enthalten, müssen manuell abgerufen (klicken Sie auf dieses Element für Quellen) und im unten definierten Quellordner abgelegt werden.</string>
-    <string name="settings_hillshading_enable">Hillshading aktivieren</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
@@ -1059,8 +1040,6 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
-    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
-    <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
     <string name="init_summary_useUnifiedMap">Verwende die neue einheitliche Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten (experimentell / bei weitem nicht komplett / nur zum Testen)</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
@@ -1263,7 +1242,6 @@
     <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
     <string name="cache_variables">Variablen</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Wegpunkte (%d)</string>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
@@ -1501,7 +1479,6 @@
     <string name="waypoint_duplicate">Wegpunkt duplizieren</string>
     <string name="waypoint_toclipboard">Wegpunkt in die Zwischenablage kopieren</string>
     <string name="waypoint_copy_of">Kopie von</string>
-    <string name="waypoint_open_geochecker">Öffne Geochecker</string>
     <string name="waypointcalc_notes_prompt">Notizen hier eingeben…</string>
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
@@ -1580,7 +1557,6 @@
     <!-- map -->
     <string name="map_map">Karte</string>
     <string name="map_live">Live-Karte</string>
-    <string name="map_offline">Offline-Karte</string>
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
@@ -1597,8 +1573,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Dies wird deine Designs in einen app-internen Ordner synchronisieren, um die Startgeschwindigkeit der Karte zu verbessern auf Kosten von etwas Gerätespeicher.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Dies wird den Inhalt des Kartendesign-Ordners kontinuierlich in einen app-internen Ordner synchronisieren, um den Dateizugriff zu beschleunigen. Stelle vor dem Aktivieren dieser Funktion sicher, dass dein Designordner nur deine Designs enthält, aber keine zusätzlichen (großen) Daten.\n\nDein Kartendesign-Ordner \'%1$s\' hat derzeit %2$s, %3$s und eine Größe von %4$s.\n\nMöchtest du die Ordnersynchronisierung aktivieren?</string>
-    <string name="onetime_mapthemefixslow_title">Langsame Kartendarstellung beheben</string>
-    <string name="onetime_mapthemefixslow_message">Die Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. Du kannst die Designs zippen oder synchronisieren, um schnellere Leistung zu erreichen und die Verzögerung beim Start der Karte zu reduzieren.</string>
     <string name="init_hidewp">Wegpunkte verbergen</string>
     <string name="init_summary_hidewp_original">Original-Wegpunkte auf der Karte verbergen</string>
     <string name="init_summary_hidewp_parking">Park-Wegpunkte auf der Karte verbergen</string>
@@ -2092,10 +2066,6 @@
     <string name="tts_oclock">%s Uhr</string>
     <!-- various -->
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
-    <plurals name="days_ago">
-        <item quantity="one">vor %d Tag</item>
-        <item quantity="other">vor %d Tagen</item>
-    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">In %d Tag</item>
         <item quantity="other">In %d Tagen</item>
@@ -2169,7 +2139,6 @@
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
-    <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
     <string name="number_input_err_boundarymin">Der eingegebene Wert ist zu klein - auf den minimalen Wert zurückgesetzt</string>
     <string name="number_input_err_boundarymax">Der eingegebene Wert ist zu groß - auf den maximalen Wert zurückgesetzt</string>
     <string name="number_input_err_format">Ungültiges Zahlenformat</string>
@@ -2217,7 +2186,6 @@
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
-    <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
