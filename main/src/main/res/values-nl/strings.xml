@@ -39,6 +39,7 @@
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysterie</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
+    <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
     <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
     <string name="log_add">Toevoegen</string>
     <string name="log_repeat">Herhaal laatste log</string>
@@ -194,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
+    <string name="err_captcha">Deze service vereist een Captcha. Open de geocaching.com website met je browser en los de captcha op die getoond wordt tijdens het inloggen. Probeer daarna opnieuw in te loggen met c:geo.</string>
     <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
@@ -204,6 +207,7 @@
     <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
     <string name="err_comm">Onbekende communicatiefout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld</string>
+    <string name="err_wrong">Verkeerde gebruikersnaam en/of wachtwoord.</string>
     <string name="err_maintenance">Geocaching.com is offline voor onderhoud. c:geo werkt offline met opgeslagen caches.</string>
     <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd en kan daarom geen coördinaten laden.</string>
     <string name="err_unvalidated_account">Je dient je account eerst te valideren op de Geocaching.com website.</string>
@@ -422,6 +426,7 @@
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
+    <string name="caches_askdeletion">Om verwijdering vragen indien leeg</string>
     <string name="select_icon">Pictogram selecteren</string>
     <string name="onetime_missing_unicode_info">Je Android versie ondersteunt geen automatische detectie van ondersteunde pictogrammen - sommige tekens kunnen ontbreken</string>
     <plurals name="user_finds">
@@ -452,6 +457,7 @@
     <string name="list_dialog_remove_title">Verwijder lijst</string>
     <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Opgeslagen\".</string>
     <string name="list_dialog_remove_nowempty">Lijst is leeg. Wil je de huidige lijst verwijderen?</string>
+    <string name="list_dialog_do_not_ask_me_again">Niet nogmaals vragen voor deze lijst</string>
     <string name="list_dialog_remove">Verwijder</string>
     <string name="list_dialog_rename_title">Hernoem lijst</string>
     <string name="list_dialog_rename">Hernoem</string>
@@ -475,6 +481,7 @@
     <string name="cache_filter_owner">Cache eigenaar</string>
     <string name="cache_filter_difficulty">Moeilijkheid</string>
     <string name="cache_filter_terrain">Terrein</string>
+    <string name="cache_filter_difficulty_terrain">Moeilijkheidsgraad / Terrein</string>
     <string name="cache_filter_rating">Waardering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache attributen</string>
@@ -509,8 +516,10 @@
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
     <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
+    <string name="cache_filter_storage_select_title">Filter selecteren</string>
     <string name="cache_filter_storage_delete_title">Filter verwijderen</string>
     <string name="cache_filter_storage_delete_message">Weet je zeker dat je dit filtersjabloon wilt verwijderen?</string>
+    <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
     <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
@@ -529,6 +538,7 @@
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
     <string name="cache_filter_checkboxlist_add_items">Meer items toevoegen</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Alle items toevoegen</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Items toevoegen</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
@@ -585,6 +595,7 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_changelog_nightly_build">Nachtelijke build</string>
     <string name="about_changelog_next_release">Volgende release</string>
+    <string name="about_changelog_bugfix_release">Bugfix release</string>
     <string name="about_system">Systeem</string>
     <string name="about_donate">Steun ons</string>
     <string name="about_donation_more">Bezoek de website voor info</string>
@@ -592,6 +603,7 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_system_collecting">Systeeminformatie wordt verzameld, even geduld aub…</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
     <string name="about_system_info">c:geo systeeminformatie</string>
@@ -618,6 +630,8 @@
     <string name="contribution_infrastructure">infrastructuur</string>
     <string name="contribution_projectleader">open source projectleider</string>
     <string name="contribution_graphics">graphics</string>
+    <string name="debug_user_error_report_title">Probleem melden</string>
+    <string name="debug_user_error_errortext">Er is een onverwacht probleem opgetreden, gelieve deze aan ons te rapporteren:</string>
     <string name="debug_user_error_explain_options">Help ons c:geo problemen op te lossen door ze via e-mail te melden met systeeminformatie en het c:geo logbestand.\nGelieve altijd een gedetailleerde foutbeschrijving toe te voegen aan je mail!\n\nLees onze FAQ en/of sociale media voor bekende problemen voordat je een e-mail verstuurt.\nAndere contactopties zijn te vinden onder \'Over c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Huidige downloads</string>
@@ -818,6 +832,8 @@
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <string name="init_quicklaunchitems">Snelstartknoppen</string>
+    <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
@@ -826,6 +842,7 @@
         <item>Donker</item>
     </string-array>
     <string name="init_wallpaper">Achtergrond</string>
+    <string name="init_summary_wallpaper">Toon apparaat achtergrond als startscherm achtergrond</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -884,12 +901,14 @@
     <string name="init_backup_settings_restore">Instellingen terugzetten</string>
     <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
     <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
+    <string name="settings_folder_changed">Map \"%1$s\" zal worden gewijzigd in \"%2$s\" tijdens herstel.\n\nTik op \"%4$s\" om verder te gaan. In dat geval word je gevraagd om c:geo toegang te geven tot die map.\n\nTik op \"%3$s\" om in plaats daarvan de huidige mapinstelling te behouden.</string>
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="settings_info_hillshading_title">Informatie over reliëf tonen</string>
     <string name="settings_info_hillshading">Reliëf tonen is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
+    <string name="settings_hillshading_enable">Heuvelarcering inschakelen</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
@@ -1216,6 +1235,7 @@
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
     <string name="cache_variables">Variabelen</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
@@ -1453,6 +1473,7 @@
     <string name="waypoint_duplicate">Dubbel waypoint</string>
     <string name="waypoint_toclipboard">Kopieer waypoint naar klembord</string>
     <string name="waypoint_copy_of">Kopie van</string>
+    <string name="waypoint_open_geochecker">Open Geochecker</string>
     <string name="waypointcalc_notes_prompt">Voer hier notities in…</string>
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
@@ -1531,6 +1552,7 @@
     <!-- map -->
     <string name="map_map">Kaart</string>
     <string name="map_live">Live kaart</string>
+    <string name="map_offline">Offline kaart</string>
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
@@ -1547,6 +1569,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaartthema-map continu synchroniseren in een app-specifieke map voor snellere toegang tot het bestand. Zorg ervoor dat je thema map alleen je thema\'s bevat maar geen extra (grote) gegevens voordat u deze functie inschakelt.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
+    <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
+    <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="init_hidewp">Waypoints verbergen</string>
     <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
     <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
@@ -2040,6 +2064,10 @@
     <string name="tts_oclock">%s uur</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d dag geleden</item>
+        <item quantity="other">%d dagen geleden</item>
+    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Over %d dag</item>
         <item quantity="other">Over %d dagen</item>
@@ -2113,6 +2141,7 @@
     <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
+    <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
     <string name="number_input_err_boundarymin">Ingevoerde waarde is te klein - herstel naar minimale waarde</string>
     <string name="number_input_err_boundarymax">De ingevoerde waarde is te groot - herstel naar maximale waarde</string>
     <string name="number_input_err_format">Ongeldig numeriek formaat</string>
@@ -2160,6 +2189,7 @@
     <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
+    <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
