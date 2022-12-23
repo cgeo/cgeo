@@ -1,13 +1,14 @@
-### Mapa
-- Novinka: Mapy OSM, zdroj osm.paws.cz
+### Map
+- New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
-### Detaily kešky
-- Novinka: Nová důmyslnější galerie obrázků
-- Oprava: Obnovení polohy v seznamu trasových bodů po aktualizaci nebo odstranění trasového bodu
-- Oprava: Přesun do spodní části při vytváření nového trasového bodu
+### Cache details
+- New: New more sophisticated image gallery
+- Fix: Restore position in waypoint list after updating or deleting waypoint
+- Fix: Move to bottom when creating new waypoint
 
-### Obecné
-- Změna úrovně API (compileSDK 32)
-- Aktualizace některých závislých knihoven
-- Použití vestavěné funkce úvodní obrazovky při spuštění systému Android
-- Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
+### General
+- API level change (compileSDK 32)
+- Update some dependant libraries
+- Use Android built-in splash screen feature on startup
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
