@@ -3,8 +3,8 @@
 ### Obecné
 - Oprava: Nový TB je automaticky nastaven do režimu návštěvy
 - Oprava: nezobrazuje se základní nastavení člena gc.com
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
+- Změna: odstraněn poskytovatel map mapy.cz (z důvodu změny licencování)
+- Oprava: Vyhledávací pole kešek vyprázdněno po kliknutí na hledání
 - Oprava: Pád u vzorců stupňů s více tečkami
 
 ##
