@@ -1,11 +1,11 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Generale
+- Corretto: Nuova impostazione per la modalità di visita dei TB
+- Corretto: impostazioni account base gc.com non visualizzate
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Corretto: Crash per le formule con i gradi con punti multipli
 
 ##
 
