@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="EasyGPS 4.29" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.topografix.com/GPX/gpx_overlay/0/3 http://www.topografix.com/GPX/gpx_overlay/0/3/gpx_overlay.xsd http://www.topografix.com/GPX/gpx_modified/0/1 http://www.topografix.com/GPX/gpx_modified/0/1/gpx_modified.xsd">
+<metadata>
+<bounds minlat="33.23580184" minlon="-83.95870466" maxlat="33.24745160" maxlon="-83.94473756"/>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:25:07.006Z</time>
+</extensions>
+</metadata>
+<wpt lat="33.24308329" lon="-83.94859994">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>12</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:30.512Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>12</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24391662" lon="-83.94701660">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>14</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>14</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.23580184" lon="-83.95303782">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>22</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>22</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.23861850" lon="-83.94748766">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>24</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>24</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24745160" lon="-83.95662125">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>32</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>32</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24496662" lon="-83.95683331">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>34</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:24:25.797Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>34</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24423328" lon="-83.94773333">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>42</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>42</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24543332" lon="-83.94983333">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>44</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>44</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24029999" lon="-83.94995001">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>MAIN</name>
+<cmt>10TH ANNUAL GGA GEO-CHALLENGE</cmt>
+<sym>Campground</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:25:07.006Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>MAIN</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.23896844" lon="-83.94473756">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>WILD-1</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>WILD-1</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.23768517" lon="-83.94800432">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>WILD-2</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>WILD-2</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24701825" lon="-83.95870466">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>WILD-3</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:23:45.154Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>WILD-3</label_text>
+</label>
+</extensions>
+</wpt>
+<wpt lat="33.24601829" lon="-83.94810431">
+<time>2011-10-09T14:22:22.212Z</time>
+<name>WILD-4</name>
+<sym>Geocache</sym>
+<type>Geocache Found</type>
+<extensions>
+<time xmlns="http://www.topografix.com/GPX/gpx_modified/0/1">2011-10-09T14:24:25.797Z</time>
+<label xmlns="http://www.topografix.com/GPX/gpx_overlay/0/3">
+<label_text>WILD-4</label_text>
+</label>
+</extensions>
+</wpt>
+<extensions>
+</extensions>
+</gpx>
