@@ -1,14 +1,13 @@
 ### Map
-- New: OSM map source osm.paws.cz
-- New: Enable reading flopp.net GPX files as tracks
+- Naujiena: OSM žemėlapio šaltinis osm.paws.cz
 
 ### Cache details
-- New: New more sophisticated image gallery
-- Fix: Restore position in waypoint list after updating or deleting waypoint
-- Fix: Move to bottom when creating new waypoint
+- Naujiena: Nauja įmantresnė vaizdų galerija
+- Pataisymas: Atnaujinę arba ištrynę kelio tašką, atkurkite paziciją kelio taškų sąraše
+- Pataisymas: Kuriant naują kelio tašką pereinama į apačią
 
 ### General
-- API level change (compileSDK 32)
-- Update some dependant libraries
-- Use Android built-in splash screen feature on startup
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- API lygio pakeitimas (sudarytas SDK 32)
+- Atnaujinkite kai kurias priklausomas bibliotekas
+- Paleisties metu naudokite Android įtaisytąją paleidimo ekrano funkciją
+- Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
