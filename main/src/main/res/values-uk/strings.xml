@@ -98,7 +98,6 @@
     <string name="log_posting_image">Розміщення зображень…</string>
     <string name="log_posting_generic_trackable">Постинг %1$s %2$d/%3$d</string>
     <string name="log_clear">Чистий</string>
-    <string name="log_post_not_possible">Триває завантаження даних… \nБудь ласка, спробуйте ще раз за кілька секунд або перевірте підключення до Інтернету.</string>
     <string name="log_date_future_not_allowed">Майбутні дати не дозволені.</string>
     <string name="log_add">Додати</string>
     <string name="log_repeat">Повторити останній журнал</string>
@@ -1402,7 +1401,6 @@
     <string name="preference_colorpicker_select_opaqueness">Вибрати непрозорість</string>
     <string name="reset_to_default">за замовчуванням</string>
     <!-- number input -->
-    <string name="number_input_title">Виберіть час між %1$s та %2$s</string>
     <string name="number_input_err_boundarymin">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_boundarymax">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_format">Неприпустимий час формат</string>
