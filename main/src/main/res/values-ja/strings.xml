@@ -39,6 +39,7 @@
     <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
     <string name="all_types_short">すべて</string>
+    <string name="traditional_short">トラディショナル</string>
     <string name="multi_short">マルチ</string>
     <string name="mystery_short">ミステリー</string>
     <string name="letterbox_short">レターボックス</string>
@@ -129,6 +130,7 @@
     <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
+    <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
     <string name="log_date_future_not_allowed">ログには未来の日付けを設定できません</string>
     <string name="log_add">挿入</string>
     <string name="log_repeat">最後のログを繰り返す</string>
@@ -410,6 +412,7 @@
     <string name="caches_reset_cache_icons_title">キャッシュアイコンをリセット</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
+    <string name="caches_askdeletion">空の時に削除確認する</string>
     <string name="select_icon">アイコンの選択</string>
     <string name="onetime_missing_unicode_info">お使いのAndroidバージョンは、アイコンの自動検出をサポートしていません。一部の文字が欠落している可能性があります</string>
     <plurals name="user_finds">
@@ -437,6 +440,7 @@
     <string name="list_dialog_remove_title">リスト削除</string>
     <string name="list_dialog_remove_description">このキャッシュリストを削除しますか? このリストに含まれるキャッシュは「保存済み」リストに移動します</string>
     <string name="list_dialog_remove_nowempty">このリストは空です。リストを削除しますか?</string>
+    <string name="list_dialog_do_not_ask_me_again">このリストには次回から確認しない</string>
     <string name="list_dialog_remove">削除</string>
     <string name="list_dialog_rename_title">リスト名の変更</string>
     <string name="list_dialog_rename">変更</string>
@@ -460,6 +464,7 @@
     <string name="cache_filter_owner">キャッシュオーナー</string>
     <string name="cache_filter_difficulty">難易度</string>
     <string name="cache_filter_terrain">地形</string>
+    <string name="cache_filter_difficulty_terrain">難易度/地形</string>
     <string name="cache_filter_rating">評価</string>
     <string name="cache_filter_status">状態</string>
     <string name="cache_filter_attributes">キャッシュ属性</string>
@@ -511,6 +516,7 @@
     <string name="cache_filter_datefilter_label_to">終了日:</string>
     <string name="cache_filter_checkboxlist_selectallnone">すべて選択</string>
     <string name="cache_filter_checkboxlist_add_items">追加</string>
+    <string name="cache_filter_checkboxlist_add_all_items">すべて追加</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
@@ -571,6 +577,7 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
+    <string name="about_system_collecting">システム情報を収集しています。しばらくお待ちください…</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -597,6 +604,8 @@
     <string name="contribution_infrastructure">インフラ</string>
     <string name="contribution_projectleader">オープンソース プロジェクト リーダー</string>
     <string name="contribution_graphics">グラフィックス</string>
+    <string name="debug_user_error_report_title">問題を報告</string>
+    <string name="debug_user_error_errortext">予期しない問題が発生しました。報告をお願いします:</string>
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
     <!-- download manager -->
     <string name="debug_current_downloads">実行中のダウンロード</string>
@@ -763,6 +772,8 @@
     <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
+    <string name="init_quicklaunchitems">クイック起動ボタン</string>
+    <string name="init_summary_quicklaunchitems">ホーム画面に表示するクイック起動ボタンの選択</string>
     <!-- app theme -->
     <string name="settings_theme_title">テーマ</string>
     <string-array name="settings_theme_entries">
@@ -771,6 +782,7 @@
         <item>ダーク</item>
     </string-array>
     <string name="init_wallpaper">壁紙</string>
+    <string name="init_summary_wallpaper">端末の壁紙をホーム画面の背景として表示</string>
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
     <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルをほかの場所にコピーしておく必要があります</string>
@@ -829,6 +841,7 @@
     <string name="init_backup_settings_restore">復元の設定</string>
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
+    <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図に対応しています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
@@ -1134,6 +1147,7 @@
     <string name="cache_advanced">その他</string>
     <string name="cache_waypoints">ウェイポイント</string>
     <string name="cache_variables">変数</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
@@ -1366,6 +1380,7 @@
     <string name="waypoint_duplicate">ウェイポイントを複製</string>
     <string name="waypoint_toclipboard">クリップボードにウェイポイントをコピー</string>
     <string name="waypoint_copy_of">コピー ～ </string>
+    <string name="waypoint_open_geochecker">ジオチェッカーを開く</string>
     <string name="waypointcalc_notes_prompt">ここにメモを入力…</string>
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
@@ -1444,6 +1459,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
+    <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
+    <string name="onetime_mapthemefixslow_message">zip圧縮されてないテーマファイルでは表示が遅くなる時があります。zip圧縮するかテーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
     <string name="init_hidewp">ウェイポイントを非表示</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
@@ -1930,6 +1947,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="tts_oclock">%s時</string>
     <!-- various -->
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
+    <plurals name="days_ago">
+        <item quantity="other">%d日前</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
     <string name="create_shortcut">ショートカットを作成</string>
@@ -1992,6 +2012,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="preference_colorpicker_select_opaqueness">不透明度の選択</string>
     <string name="reset_to_default">デフォルト</string>
     <!-- number input -->
+    <string name="number_input_title">%1$s と %2$s の間で数値を入力してください</string>
     <string name="number_input_err_boundarymin">入力した数値が小さすぎます: 最小値にリセットします</string>
     <string name="number_input_err_boundarymax">入力した数値が大きすぎます: 最大値にリセットします</string>
     <string name="number_input_err_format">数値の書式が正しくありません</string>
@@ -2031,6 +2052,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
+    <string name="routes_tracks_menu">ルート/トラック</string>
     <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
