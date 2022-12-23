@@ -1,12 +1,13 @@
-### Карта
-- Новое: источник OSM карт osm.paws.cz
+### Map
+- New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
-### Детали тайника
+### Cache details
 - New: New more sophisticated image gallery
 - Fix: Restore position in waypoint list after updating or deleting waypoint
 - Fix: Move to bottom when creating new waypoint
 
-### Общее
+### General
 - API level change (compileSDK 32)
 - Update some dependant libraries
 - Use Android built-in splash screen feature on startup
