@@ -9,17 +9,17 @@
 
 ##
 
-### General
+### Général
 - Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+- Correction : Empêcher le plantage sous certaines conditions lors de la tentative de rattachement d'une photo au journal
+- Changement : Meilleur message d'erreur sur la façon de résoudre une exigence de Captcha lors de la connexion à geocaching.com
 
 ### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+- Correction : Empêcher le doublement des images du spoiler dans la galerie lors du rafraîchissement d'une cache
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+### Caclculateur de variables
+- Nouveau : fonction TRUNC pour tronquer les valeurs décimales
+- Nouveau : Permettre l'utilisation de crochets pour les calculs. Pour les plages de variables, veuillez utiliser par exemple \[:1-5\] à la place.
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Carte
+- Correction : Afficher le marqueur DT correct pour D4.0 et D4.5
