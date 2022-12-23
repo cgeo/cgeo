@@ -1,11 +1,11 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Ogólne
+- Poprawka: Nowe ustawienie dla TB (przedmiotów podróżnych) do automatycznego trybu odwiedzin
+- Poprawka: podstawowe ustawienia użytkownika gc.com nie wyświetlają się
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Poprawka: Awaria przy wzorach na stopnie z wieloma kropkami
 
 ##
 
@@ -19,7 +19,7 @@
 
 ### Variable calculator
 - New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+- Nowość: Zezwalaj na użycie nawiasów kwadratowych do obliczeń. Dla zakresów zmiennych użyj np. \[:1-5\].
 
 ### Map
 - Fix: Show correct DT marker for D4.0 and D4.5
