@@ -83,6 +83,7 @@
     <string name="log_posting_twitter">Pagpapaskil ng tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Nakapaskil na %1$s %2$d/%3$d</string>
     <string name="log_clear">Malinaw</string>
+    <string name="log_post_not_possible">Ang download ng datos ay naka progreso&#8230;\nPakiusap muling subukan sa ilang mga segundo o ribesahin ang koneksyon ng internet.</string>
     <string name="log_date_future_not_allowed">Ang hinaharap na petsa ng log ay hindi pinapayagan.</string>
     <string name="log_add">Idagdag</string>
     <string name="log_repeat">Ulitin ang huling log</string>
