@@ -89,7 +89,6 @@
     <string name="log_posting_twitter">Ang pag-post ng tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Ang pag-popost ay %1$s%2$d%3$d</string>
     <string name="log_clear">Malinaw</string>
-    <string name="log_post_not_possible">Ang pag-download ng datos ay nasa pag-unlad&#8230;\nMaaaring subukang muli makalipas ang ilang minuto o suriin ang iyong internet koneksiyon.</string>
     <string name="log_date_future_not_allowed">Ang paparating na petsa ng sulat ay hindi maaaring pumasok.</string>
     <string name="log_add">Dagdagan</string>
     <string name="log_repeat">Ulitin ang huling log</string>
