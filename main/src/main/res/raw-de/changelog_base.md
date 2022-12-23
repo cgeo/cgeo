@@ -1,13 +1,14 @@
-### Karte
-- Neu: OSM-Kartenquelle osm.paws.cz
+### Map
+- New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
-### Cache-Details
-- Neu: Neue ausgeklügeltere Bilder-Galerie
-- Korrektur: Nach Aktualisierung oder Löschen eines Wegpunktes gelangt man zur vorherigen Position in der Wegpunktliste
-- Korrektur: Springe nach unten beim Erstellen eines neuen Wegpunktes
+### Cache details
+- New: New more sophisticated image gallery
+- Fix: Restore position in waypoint list after updating or deleting waypoint
+- Fix: Move to bottom when creating new waypoint
 
-### Allgemein
-- Änderung des API-Levels (CompileSDK 32)
-- Einige abhängige Bibliotheken aktualisiert
-- Den eingebauten Android SplashScreen benutzen
-- Änderung: Verwende einen anderen Android-Mechanismus um Downloads zu empfangen (für bessere Kompatibilität mit Android 12+)
+### General
+- API level change (compileSDK 32)
+- Update some dependant libraries
+- Use Android built-in splash screen feature on startup
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
