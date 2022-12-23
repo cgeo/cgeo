@@ -39,6 +39,7 @@
     <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
     <string name="all_types_short">Όλες</string>
+    <string name="traditional_short">Κοινή</string>
     <string name="multi_short">Πολλαπλές</string>
     <string name="mystery_short">Μυστηρίου</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_templates">Πρότυπο καταγραφής: Βρέθηκε…</string>
+    <string name="log_post_not_possible">Γίνεται λήψη δεδομένων…\nΠαρακαλώ δοκιμάστε ξανά σε λίγα δευτερόλεπτα ή ελέγξτε τη σύνδεσή σας στο internet.</string>
     <string name="log_date_future_not_allowed">Δεν επιτρέπεται η μελλοντική ημερομηνία καταγραφής.</string>
     <string name="log_add">Προσθήκη</string>
     <string name="log_repeat">Επανάληψη τελευταίου αρχείου καταγραφής</string>
@@ -414,6 +416,7 @@
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίου κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
+    <string name="caches_askdeletion">Ερώτηση για διαγραφή αν είναι κενό</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
     <string name="onetime_missing_unicode_info">Η έκδοση Android σας δεν υποστηρίζει την αυτόματη ανίχνευση εικονιδίων που υποστηρίζονται - ορισμένοι χαρακτήρες μπορεί να λείπουν</string>
     <plurals name="user_finds">
@@ -444,6 +447,7 @@
     <string name="list_dialog_remove_title">Διαγραφή λίστας</string>
     <string name="list_dialog_remove_description">Θέλετε να καταργήσετε την τρέχουσα λίστα; Όλες οι κρύπτες που απομένουν στη λίστα θα μεταφερθούν στη λίστα «Αποθηκευμένες».</string>
     <string name="list_dialog_remove_nowempty">Η λίστα είναι κενή. Θέλετε να καταργήσετε την τρέχουσα λίστα;</string>
+    <string name="list_dialog_do_not_ask_me_again">Να μην ερωτηθώ ξανά για αυτή τη λίστα</string>
     <string name="list_dialog_remove">Διαγραφή</string>
     <string name="list_dialog_rename_title">Μετονομασία λίστας</string>
     <string name="list_dialog_rename">Μετονομασία</string>
@@ -467,6 +471,7 @@
     <string name="cache_filter_owner">Ιδιοκτήτης κρύπτης</string>
     <string name="cache_filter_difficulty">Δυσκολία</string>
     <string name="cache_filter_terrain">Έδαφος</string>
+    <string name="cache_filter_difficulty_terrain">Δυσκολία / Έδαφος</string>
     <string name="cache_filter_rating">Βαθμολογία</string>
     <string name="cache_filter_status">Κατάσταση</string>
     <string name="cache_filter_attributes">Χαρακτηριστικά κρύπτης</string>
@@ -501,8 +506,10 @@
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
+    <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
     <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
     <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
+    <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
     <string name="cache_filter_storage_save_confirm_title">Αποθήκευση φίλτρου κατά την έξοδο</string>
@@ -523,6 +530,7 @@
     <string name="cache_filter_datefilter_label_to">Έως:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων</string>
     <string name="cache_filter_checkboxlist_add_items">Προσθέστε περισσότερα αντικείμενα</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Προσθήκη όλων των αντικειμένων</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Προσθήκη αντικειμένων</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
@@ -600,6 +608,7 @@
     <string name="about_changelog">Τι νέο υπάρχει;</string>
     <string name="about_changelog_nightly_build">Νυχτερινή έκδοση</string>
     <string name="about_changelog_next_release">Επόμενη έκδοση</string>
+    <string name="about_changelog_bugfix_release">Έκδοση Bugfix</string>
     <string name="about_system">Σύστημα</string>
     <string name="about_donate">Υποστηρίξτε μας</string>
     <string name="about_donation_more">Επισκεφθείτε την ιστοσελίδα για πληροφορίες</string>
@@ -607,6 +616,7 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
+    <string name="about_system_collecting">Οι πληροφορίες συστήματος συλλέγονται, παρακαλώ περιμένετε…</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -633,6 +643,8 @@
     <string name="contribution_infrastructure">υποδομή</string>
     <string name="contribution_projectleader">επικεφαλής έργου ανοικτού κώδικα</string>
     <string name="contribution_graphics">γραφικά</string>
+    <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
+    <string name="debug_user_error_errortext">Ένα αναπάντεχο σφάλμα συνέβη, το οποίο θα θέλαμε να μας το γνωστοποιήσετε:</string>
     <string name="debug_user_error_explain_options">Βοηθήστε να διορθώσουμε τα προβλήματα του c:geo αναφέροντας τα μέσω email, συμπεριλαμβάνοντας τις πληροφορίες συστήματος και το αρχείο καταγραφής του c:geo.\nΤο μήνυμα σας να συμπεριλαμβάνει πάντοτε και μια λεπτομερή περιγραφή του σφάλματος!\n\nΠριν από την αποστολή μηνύματος, ελέγξτε τις Συχνές Ερωτήσεις ή/και την παρουσία μας στα μέσα κοινωνικής δικτύωσης για γνωστά προβλήματα.\nΆλλες επιλογές επικοινωνίας μπορούν να βρεθούν στο \'Σχετικά με το c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Τρέχουσες λήψεις</string>
@@ -833,6 +845,8 @@
     <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
+    <string name="init_quicklaunchitems">Πλήκτρα ταχείας εκκίνησης</string>
+    <string name="init_summary_quicklaunchitems">Επιλέξτε ένα ή περισσότερα αντικείμενα ως κουμπιά γρήγορης εκκίνησης στην αρχική οθόνη</string>
     <!-- app theme -->
     <string name="settings_theme_title">Θέμα</string>
     <string-array name="settings_theme_entries">
@@ -841,6 +855,7 @@
         <item>Σκούρο</item>
     </string-array>
     <string name="init_wallpaper">Ταπετσαρία</string>
+    <string name="init_summary_wallpaper">Εμφάνιση ταπετσαρίας συσκευής ως φόντο στην αρχική οθόνη</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -898,12 +913,14 @@
     <string name="init_backup_settings_restore">Επαναφορά ρυθμίσεων</string>
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
+    <string name="settings_folder_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να αποκτήσετε χάρτες από διαφορετικούς παρόχους ή ακόμα και να δημιουργήσετε δικούς σας χάρτες (από δεδομένα OSM). Πρώτα θα πρέπει να επιλέξετε το φάκελο στον οποίο θα αποθηκεύονται χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
     <string name="settings_info_themes">Το c:geo υποστηρίζει προσαρμοσμένα θέματα για χάρτες εκτός σύνδεσης. Αυτά μπορούν να χρησιμοποιηθούν για την αλλαγή του στυλ χρώματος του χάρτη (π.χ. για να έχετε μια νυχτερινή προβολή χάρτη) ή να επισημάνετε ορισμένα αντικείμενα όπως μονοπάτια κύκλου ή γραμμές ύψους μέσα στο χάρτη.\n\nΗ εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χαρτών. Σε αυτή την περίπτωση, ο φάκελος θεμάτων μπορεί προαιρετικά να συγχρονιστεί σε ένα app-private τοπικό φάκελο για ταχύτερη πρόσβαση (στο κόστος ορισμένων χώρων αποθήκευσης).</string>
     <string name="settings_info_hillshading_title">Πληροφορίες για το Hillshading</string>
     <string name="settings_info_hillshading">Το Hillshading ειναι μια τεχνικη για δημιουργία χαρτών που με αλλαγές φωτεινότητας δείχνει την μεταβολή υψομέτρου. Σκοτεινιάζει/φωτίζει πλαγιές για να δημιουργήσει ένα 3D-αποτέλεσμα.\nΤα αρχεία προέλευσης που περιέχουν τις υψομετρικές πληροφορίες πρέπει να ληφθούν με μη αυτόματο τρόπο - κάντε κλικ σε αυτό το στοιχείο για τις πηγές - και τοποθετήστε τα στο φάκελο πηγών που ορίζεται παρακάτω.</string>
+    <string name="settings_hillshading_enable">Ενεργοποίηση υψομετρικών σκιών</string>
     <string name="init_mapsource_select">Επιλογή πηγής χάρτη</string>
     <string name="init_local_file_system">Τοπικό Σύστημα Αρχείων</string>
     <string name="init_base_directory_description">Βασικός Κατάλογος για δημόσια τοπικά δεδομένα</string>
@@ -1028,6 +1045,8 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
+    <string name="category_unifiedMap">Ενοποιημένος Χάρτης</string>
+    <string name="experimental">(Πειραματικό)</string>
     <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
     <string name="init_summary_useUnifiedMap">Χρήση νέου ενοποιημένου χάρτη αντί για ενσωματωμένους χάρτες Google Map / Mapsforge (OSM) (πειραματικό / μακριά από το να είναι πλήρες / μόνο για δοκιμή)</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
@@ -1230,6 +1249,7 @@
     <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
     <string name="cache_variables">Μεταβλητές</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
     <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
@@ -1467,6 +1487,7 @@
     <string name="waypoint_duplicate">Δημιουργία διπλού σημείου αναφοράς</string>
     <string name="waypoint_toclipboard">Αντιγραφή ενδιαμέσου σημείου στο πρόχειρο</string>
     <string name="waypoint_copy_of">Αντίγραφο του</string>
+    <string name="waypoint_open_geochecker">Άνοιγμα Geochecker</string>
     <string name="waypointcalc_notes_prompt">Εισάγετε σημειώσεις εδώ…</string>
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
@@ -1545,6 +1566,7 @@
     <!-- map -->
     <string name="map_map">Χάρτης</string>
     <string name="map_live">Live Χάρτης</string>
+    <string name="map_offline">Χάρτες χωρίς σύνδεση</string>
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
@@ -1561,6 +1583,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Αυτό θα συγχρονίσει τα θέματα σας σε έναν ιδιωτικό φάκελο εφαρμογών για να βελτιώσει την απόδοση ανοίγματος των χαρτών με κόστος κάποιο χώρο αποθήκευσης ατην συσκευή.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτό θα συγχρονίζει συνεχώς το περιεχόμενο του φακέλου ΄΄θέμα χάρτη΄΄ σε αποκλειστικό φάκελο για ταχύτερη πρόσβαση. Σιγουρευτείτε ότι ο φάκελος θεμάτων σας περιέχει μόνο τα θέματα και όχι πρόσθετα (μεγάλα) αρχεία πριν ενεργοποιήσετε αυτή τη δυνατότητα.\n\nΟ φάκελος χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s.\n\nΘέλετε να ενεργοποιήσετε το συγχρονισμό φακέλων;</string>
+    <string name="onetime_mapthemefixslow_title">Διόρθωση αποτύπωσης αργού θέματος χάρτη</string>
+    <string name="onetime_mapthemefixslow_message">Εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χάρτη. Μπορείτε να συμπιεσετε ή να συγχρονίσετε τα θέματα σας για να πάρετε ταχύτερη απόδοση και να μειώσετε την καθυστέρηση στην προβολή του χάρτη.</string>
     <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
     <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
     <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
@@ -2054,6 +2078,10 @@
     <string name="tts_oclock">%s η ώρα</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Αντιγραφή στο πρόχειρο</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d ημέρα πριν</item>
+        <item quantity="other">πριν %d μέρες</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
@@ -2123,6 +2151,7 @@
     <string name="preference_colorpicker_select_opaqueness">Επιλογή ποσοστού αδιαφάνειας</string>
     <string name="reset_to_default">Προεπιλογή</string>
     <!-- number input -->
+    <string name="number_input_title">Δώστε τιμή ανάμεσα %1$s και %2$s</string>
     <string name="number_input_err_boundarymin">Δώσατε πολύ μικρή - Δώστε την ελάχιστη</string>
     <string name="number_input_err_boundarymax">Δώσατε πολύ μεγάλη - Μειώστε στην Μέγιστη επιτρεπτή</string>
     <string name="number_input_err_format">Λάθος μορφή αριθμών</string>
@@ -2168,6 +2197,7 @@
     <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
     <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
     <string name="make_visible">Να γίνει ορατό</string>
