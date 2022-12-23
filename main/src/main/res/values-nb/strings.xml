@@ -39,7 +39,6 @@
     <string name="userdefined">Brukerdefinert cache</string>
     <string name="unknown">Ukjent Type</string>
     <string name="all_types_short">Alle</string>
-    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
     <string name="log_templates">Fant den: Logg mal…</string>
-    <string name="log_post_not_possible">Nedlastning pågår…\nPrøv igjen om noen sekunder eller kontroller Internett-tilkoblingen.</string>
     <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
     <string name="log_add">Legg til</string>
     <string name="log_repeat">Gjenta siste logg</string>
@@ -404,7 +402,6 @@
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikon</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
     <string name="caches_set_listmarker">Sett listemarkering</string>
-    <string name="caches_askdeletion">Spør om sletting hvis tom</string>
     <string name="select_icon">Velg ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-versjon støtter ikke automatisk deteksjon av støttede ikoner - noen tegn kan mangle</string>
     <plurals name="user_finds">
@@ -435,7 +432,6 @@
     <string name="list_dialog_remove_title">Fjern liste</string>
     <string name="list_dialog_remove_description">Vil du slette den gjeldende listen? Alle gjenværende cacher i listen blir flyttet til \"Lagret\".</string>
     <string name="list_dialog_remove_nowempty">Listen er tom. Vil du slette denne listen?</string>
-    <string name="list_dialog_do_not_ask_me_again">Ikke spør meg igjen for denne listen</string>
     <string name="list_dialog_remove">Fjern</string>
     <string name="list_dialog_rename_title">Endre listenavn</string>
     <string name="list_dialog_rename">Endre listenavn</string>
@@ -459,7 +455,6 @@
     <string name="cache_filter_owner">Cacheeier</string>
     <string name="cache_filter_difficulty">Vankelighetsgrad</string>
     <string name="cache_filter_terrain">Terrenggrad</string>
-    <string name="cache_filter_difficulty_terrain">Vanskelighetsgrad / Terreng</string>
     <string name="cache_filter_rating">Rangering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cacheattributter</string>
@@ -491,10 +486,8 @@
     <string name="cache_filter_storage_delete_button">Slett</string>
     <string name="cache_filter_storage_clear_button">Tøm</string>
     <string name="cache_filter_storage_load_delete_title">Last eller slett et eksisterende filter</string>
-    <string name="cache_filter_storage_select_title">Velg filter</string>
     <string name="cache_filter_storage_delete_title">Slett filter</string>
     <string name="cache_filter_storage_delete_message">Vil du virkelig slette denne filterkonfigurasjonen?</string>
-    <string name="cache_filter_storage_select_clear_title">Velg filter eller nullstill gjeldende filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filter er lagret ennå.</string>
     <string name="cache_filter_storage_save_title">Lagre filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Lagre filter med overskriving</string>
@@ -512,7 +505,6 @@
     <string name="cache_filter_datefilter_label_to">Til:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Velg alle</string>
     <string name="cache_filter_checkboxlist_add_items">Legg til flere elementer</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Legg til alle elementer</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Legg til elementer</string>
     <string name="cache_filter_favorites_absolute">Absolutt</string>
     <string name="cache_filter_favorites_percentage">Prosent</string>
@@ -571,7 +563,6 @@
     <string name="about_license">Lisens</string>
     <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
     <string name="about_help">Hjelp</string>
-    <string name="about_system_collecting">Systeminformasjon er samlet inn, vennligst vent…</string>
     <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
     <string name="about_system_info_send_button">Send på e-post…</string>
     <string name="about_system_info">Systeminformasjon for c:geo</string>
@@ -598,8 +589,6 @@
     <string name="contribution_infrastructure">infrastruktur</string>
     <string name="contribution_projectleader">open kildekode prosjektleder</string>
     <string name="contribution_graphics">grafikk</string>
-    <string name="debug_user_error_report_title">Rapporter et problem</string>
-    <string name="debug_user_error_errortext">Det oppsto et uventet problem som vi ønsker at du melder ifra til oss:</string>
     <string name="debug_user_error_explain_options">Hjelp oss å fikse c:geo problemer ved å rapportere dem via e-post med systeminformasjonen og loggfilen til c:geo.\nVennligst legg til en detaljert feilbeskrivelse i e-posten\n\nFør du sender en e-post, vennligst også sjekk vår FAQ og/eller sosiale medier for kjente problemer.\nAndre kontaktalternativer finner du på \'Om c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Pågående nedlastinger</string>
@@ -1131,7 +1120,6 @@
     <string name="cache_advanced">Avansert</string>
     <string name="cache_waypoints">Veipunkter</string>
     <string name="cache_variables">Variabler</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Veipunkter (%d)</string>
     <string name="cache_waypoints_add">Legg til veipunkt</string>
     <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
@@ -1405,7 +1393,6 @@
     <!-- map -->
     <string name="map_map">Kart</string>
     <string name="map_live">Live-kart</string>
-    <string name="map_offline">Offline-kart</string>
     <string name="map_view_map">Kart</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
@@ -1420,7 +1407,6 @@
     <string name="map_showwp_visited">Besøkt</string>
     <string name="init_renderthemefolder_synctolocal">Synkroniser temaer</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av temamappe</string>
-    <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsveipunkter på kartet</string>
@@ -1903,10 +1889,6 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopiert til utklippstavlen</string>
-    <plurals name="days_ago">
-        <item quantity="one">%d dag siden</item>
-        <item quantity="other">%d dager siden</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo-snartvei</string>
     <string name="create_shortcut">Opprett snarvei</string>
@@ -1974,7 +1956,6 @@
     <string name="preference_colorpicker_select_opaqueness">Velg gjennomsiktighet</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
-    <string name="number_input_title">Skriv inn en verdi mellom %1$s og %2$s</string>
     <string name="number_input_err_boundarymin">Verdien er for lav - settes til minimumsverdien</string>
     <string name="number_input_err_boundarymax">Verdien er for stor - settes til maksimalverdien</string>
     <string name="number_input_err_format">Feil tallformat</string>
@@ -2016,7 +1997,6 @@
     <string name="map_clear_track_confirm">Ønsker du å fjerne rute/spor \"%s?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
-    <string name="routes_tracks_menu">Ruter / Spor</string>
     <string name="center_on_route_track">Midtstill på rute/spor</string>
     <string name="unload_route_track">Slett rute/spor</string>
     <string name="route">Rute</string>
