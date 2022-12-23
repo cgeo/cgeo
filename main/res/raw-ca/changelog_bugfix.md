@@ -1,11 +1,11 @@
 ##
 
 ### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Correcció: La nova TB configurada en mode de visita automàticament
+- Correcció: La configuració bàsica dels membres de gc.com no es mostra
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Correcció: Bloqueig de fórmules de grau amb diversos punts
 
 ##
 
