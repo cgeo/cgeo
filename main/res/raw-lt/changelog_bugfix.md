@@ -1,25 +1,25 @@
 ##
 
 ### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+- Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
+- Pataisymas: Nerodomi bazinio gc.com nario nustatymai
 - Pakeitimas: pašalintas mapy.cz žemėlapio teikėjas (dėl licencijavimo pakeitimo)
 - Pataisymas: Slėptuvės paieškos laukas išvalomas atlikus paiešką
-- Fix: Crash for degree formulas with multiple dots
+- Pataisymas: Laipsnių formulių su keliais taškais strigtis
 
 ##
 
-### General
+### Bendras
 - Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+- Pataisymas: Užkirstas kelias programėlės užstrigimui tam tikromis sąlygomis bandant pridėti nuotrauką prie žurnalo
+- Pakeitimas: Geresnis klaidos pranešimas apie tai, kaip išspręsti Captcha reikalavimą prisijungus prie geocaching.com
 
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+### Slėptuvės
+- Pataisymas: Neleidžiama spoilerių vaizdams dubliuotis galerijoje atnaujinant slėptuvę
 
-### Variable calculator
+### Kintamųjų skaičiuoklė
 - New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+- Naujiena: Leidžiama skaičiavimams naudoti laužtinius skliaustus. Kintamiems diapazonams naudokite pvz. \[:1-5\].
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Žemėlapis
+- Pataisymas: Rodomas teisingas D4.0 ir D4.5 DT žymeklis
