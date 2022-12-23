@@ -39,6 +39,7 @@
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <string name="all_types_short">Tümü</string>
+    <string name="traditional_short">Gelenek</string>
     <string name="multi_short">Çoklu</string>
     <string name="mystery_short">Gizemli</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
     <string name="log_templates">Buldum: Şablon…</string>
+    <string name="log_post_not_possible">Verilerin indirilmesi devam ediyor…\nLütfen birkaç saniye içinde tekrar deneyin veya internet bağlantınızı kontrol edin.</string>
     <string name="log_date_future_not_allowed">Gelecekteki kayıt tarihlerine izin verilmez.</string>
     <string name="log_add">Ekle</string>
     <string name="log_repeat">Son kayıdı tekrarla</string>
@@ -419,6 +421,7 @@
     <string name="caches_reset_cache_icons_title">Cache simgesini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
+    <string name="caches_askdeletion">Boş ise silmeyi öner</string>
     <string name="select_icon">Simge seç</string>
     <string name="onetime_missing_unicode_info">Android sürümünüz, desteklenen simgelerin otomatik olarak algılanmasını desteklemiyor - bazı karakterler eksik olabilir</string>
     <plurals name="user_finds">
@@ -449,6 +452,7 @@
     <string name="list_dialog_remove_title">Listeyi kaldır</string>
     <string name="list_dialog_remove_description">Geçerli listeyi kaldırmak istiyor musunuz? Listede kalan tüm Geocache\'ler \"Kaydedilen\" klasörüne taşınacak.</string>
     <string name="list_dialog_remove_nowempty">Liste boş. Geçerli listeyi kaldırmak istiyor musunuz?</string>
+    <string name="list_dialog_do_not_ask_me_again">Bu liste için yeniden sorma</string>
     <string name="list_dialog_remove">Kaldır</string>
     <string name="list_dialog_rename_title">Listeyi yeniden adlandır</string>
     <string name="list_dialog_rename">Yeniden Adlandır</string>
@@ -472,6 +476,7 @@
     <string name="cache_filter_owner">Geocache Sahibi</string>
     <string name="cache_filter_difficulty">Zorluk</string>
     <string name="cache_filter_terrain">Arazi</string>
+    <string name="cache_filter_difficulty_terrain">Zorluk / Arazi</string>
     <string name="cache_filter_rating">Puanlama</string>
     <string name="cache_filter_status">Durum</string>
     <string name="cache_filter_attributes">Geocache Özellikleri</string>
@@ -503,8 +508,10 @@
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
+    <string name="cache_filter_storage_select_title">Filtre seçin</string>
     <string name="cache_filter_storage_delete_title">Filtreyi sil</string>
     <string name="cache_filter_storage_delete_message">Gerçekten bu filtre şablonunu silmek istiyor musunuz?</string>
+    <string name="cache_filter_storage_select_clear_title">Filtre seçin veya mevcut filtreyi temizleyin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
     <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
     <string name="cache_filter_storage_save_confirm_title">Filtreyi üzerine yazarak kaydet</string>
@@ -523,6 +530,7 @@
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tümünü seç</string>
     <string name="cache_filter_checkboxlist_add_items">Daha fazla öğe ekle</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Tüm öğeleri ekle</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Öğe Ekle</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
@@ -575,6 +583,7 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_changelog_nightly_build">Son sürüm</string>
     <string name="about_changelog_next_release">Sonraki sürüm</string>
+    <string name="about_changelog_bugfix_release">Hata Düzeltme Sürümü</string>
     <string name="about_system">Sistem</string>
     <string name="about_donate">Bizi destekleyin</string>
     <string name="about_donation_more">Bilgi için web sitesini ziyaret edin</string>
@@ -582,6 +591,7 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
+    <string name="about_system_collecting">Sistem verisi toplandı, lütfen bekleyin…</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
@@ -609,6 +619,7 @@
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Sorun bildir</string>
+    <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Mevcut indirmeler</string>
@@ -778,6 +789,8 @@
     <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
+    <string name="init_quicklaunchitems">Hızlı başlatma düğmeleri</string>
+    <string name="init_summary_quicklaunchitems">Ana ekranda hızlı başlatma düğmeleri olarak bir veya daha fazla öğe seçin</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -786,6 +799,7 @@
         <item>Koyu</item>
     </string-array>
     <string name="init_wallpaper">Duvar kağıdı</string>
+    <string name="init_summary_wallpaper">Cihaz arka planını ana ekran arka planı olarak göster</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -843,6 +857,7 @@
     <string name="init_backup_settings_restore">Ayarları geri yükle</string>
     <string name="settings_readingerror">Ayarları okuma hatası</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
+    <string name="settings_folder_changed">\"%1$s\" klasörü, geri yükleme sırasında \"%2$s\" olarak değişecek.\n\nDevam etmek için \"%4$s\" seçeneğine dokunun.Bu durum sonucunda, bu klasör için c:geo\'ya yeniden yetki vermeniz istenecek.\n\nMevcut klasör ayarlarını tutmak için \"%3$s\" seçeneğine dokunun.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -1154,6 +1169,7 @@
     <string name="cache_advanced">Gelişmiş</string>
     <string name="cache_waypoints">Yol noktaları</string>
     <string name="cache_variables">Değişkenler</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Yol noktaları (%d)</string>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
     <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
     <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
@@ -1382,6 +1398,7 @@
     <string name="waypoint_duplicate">Yol noktasını yinele</string>
     <string name="waypoint_toclipboard">Yol noktasını panoya kopyala</string>
     <string name="waypoint_copy_of">Kopyası</string>
+    <string name="waypoint_open_geochecker">Geochecker\'ı aç</string>
     <string name="waypointcalc_notes_prompt">Notları buraya giriniz…</string>
     <string name="waypoint_coordinate_formats_plain">Açık koordinat</string>
     <string name="from_clipboard">Panodan</string>
@@ -1422,6 +1439,7 @@
     <!-- map -->
     <string name="map_map">Harita</string>
     <string name="map_live">Canlı Harita</string>
+    <string name="map_offline">Çevrimdışı harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
@@ -1438,6 +1456,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek, harita görüntüleyicisinin açılış performansını arttırmak için temalarınızı uygulamaya özel bir klasöre, depolama alanınızın birazını kullanarak, senkronize eder.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Bu seçenek Harita Temaları klasöründeki dosyaları, dosyalara daha hızlı ulaşabilmek için uygulamaya özel bir klasöre senkronize eder. Bu seçeneği etkinleştirmeden önce tema klasörünüzün sadece temalarınızı içerdiğini, fazladan (büyük) dosya içermediğine emin olun.\n\nSizin harita dosyanız \'%1$s\' %4$s boyutunda %2$s, %3$s dosyaya sahip.\n\nKlasör senkronizasyonunu etkinleştirmek istediğinize emin misiniz?</string>
+    <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
+    <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
     <string name="init_hidewp">Yol noktalarını gizle</string>
     <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
     <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
@@ -1926,6 +1946,10 @@
     <string name="tts_oclock">saat %s yönü</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Panoya kopyalandı</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d gün önce</item>
+        <item quantity="other">%d gün önce</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
     <string name="create_shortcut">Kısayol oluştur</string>
@@ -1993,6 +2017,7 @@
     <string name="preference_colorpicker_select_opaqueness">Saydamlığı ayarla</string>
     <string name="reset_to_default">Varsayılan</string>
     <!-- number input -->
+    <string name="number_input_title">%1$s ve %2$s arasında bir değer girin</string>
     <string name="number_input_err_boundarymin">Girilen rakam çok küçük-en küçük rakama ayarla</string>
     <string name="number_input_err_boundarymax">Girilen rakam çok büyük-en büyük rakama ayarla</string>
     <string name="number_input_err_format">Geçersiz sayı biçimi</string>
@@ -2035,6 +2060,7 @@
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="route">Rota</string>
     <string name="track">İz</string>
     <string name="make_visible">görünür yap</string>
