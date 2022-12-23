@@ -14,8 +14,9 @@ androidannotations.log
 local.properties
 private.properties
 /crowdin/credentials
-/main/res/values/mapsapikey.xml
+/main/**/values/mapsapikey.xml
 /main/cgeo.geocaching_preferences.xml
+/main/**/values/keys.xml
 # but do not ignore the settings from the template directories
 !main/templates/*
 !templates/*
