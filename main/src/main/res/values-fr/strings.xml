@@ -39,6 +39,7 @@
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
     <string name="all_types_short">Toutes</string>
+    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystère</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
+    <string name="log_post_not_possible">Téléchargement des données en cours…\nRé-essayez dans quelques secondes ou vérifiez votre connexion à Internet.</string>
     <string name="log_date_future_not_allowed">Les visites dans le futur sont interdites.</string>
     <string name="log_add">Ajouter</string>
     <string name="log_repeat">Recopier la dernière visite</string>
@@ -204,6 +206,7 @@
     <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
     <string name="err_comm">Erreur de communication non identifiée. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour obtenir de l\'aide.</string>
     <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant</string>
+    <string name="err_wrong">Nom d\'utilisateur et/ou mot de passe incorrect.</string>
     <string name="err_maintenance">Le site de Geocaching.com est en cours de maintenance, essayez plus tard. c:geo fonctionne en mode hors-ligne.</string>
     <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
     <string name="err_unvalidated_account">Vous devez d\'abord confirmer votre compte sur le site web Geocaching.com</string>
@@ -422,6 +425,7 @@
     <string name="caches_reset_cache_icons_title">Réinitialiser l\'icône de la cache</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
     <string name="caches_set_listmarker">Définir le marqueur de liste</string>
+    <string name="caches_askdeletion">Demande de suppression si vide</string>
     <string name="select_icon">Sélectionnez l\'icône</string>
     <string name="onetime_missing_unicode_info">Votre version d\'Android ne prend pas en charge la détection automatique des icônes - certains caractères peuvent manquer</string>
     <plurals name="user_finds">
@@ -452,6 +456,7 @@
     <string name="list_dialog_remove_title">Supprimer la liste</string>
     <string name="list_dialog_remove_description">Voulez-vous supprimer la liste courante ? Toutes les caches restantes seront déplacées dans \"Enregistrées\".</string>
     <string name="list_dialog_remove_nowempty">La liste est vide. Voulez vous la supprimer ?</string>
+    <string name="list_dialog_do_not_ask_me_again">Ne plus me demander pour cette liste</string>
     <string name="list_dialog_remove">Supprimer</string>
     <string name="list_dialog_rename_title">Renommer la liste</string>
     <string name="list_dialog_rename">Renommer</string>
@@ -475,6 +480,7 @@
     <string name="cache_filter_owner">Propriétaire de la cache</string>
     <string name="cache_filter_difficulty">Difficulté</string>
     <string name="cache_filter_terrain">Terrain</string>
+    <string name="cache_filter_difficulty_terrain">Difficulté / Terrain</string>
     <string name="cache_filter_rating">Évaluation</string>
     <string name="cache_filter_status">Statut</string>
     <string name="cache_filter_attributes">Attributs de la cache</string>
@@ -509,8 +515,10 @@
     <string name="cache_filter_storage_delete_button">Supprimer</string>
     <string name="cache_filter_storage_clear_button">Effacer</string>
     <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
+    <string name="cache_filter_storage_select_title">Sélectionner un filtre</string>
     <string name="cache_filter_storage_delete_title">Supprimer le filtre</string>
     <string name="cache_filter_storage_delete_message">Voulez-vous vraiment supprimer ce filtre ?</string>
+    <string name="cache_filter_storage_select_clear_title">Sélectionner un filtre ou effacer le filtre courant</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Aucun filtre n\'a encore été enregistré.</string>
     <string name="cache_filter_storage_save_title">Enregistrer et nommer le filtre</string>
     <string name="cache_filter_storage_save_confirm_title">Écraser le filtre</string>
@@ -529,6 +537,7 @@
     <string name="cache_filter_datefilter_label_to">Jusqu\'au :</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tout sélectionner</string>
     <string name="cache_filter_checkboxlist_add_items">Ajouter plus d\'éléments</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Ajouter tous les éléments</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Ajouter des éléments</string>
     <string name="cache_filter_favorites_absolute">Absolu</string>
     <string name="cache_filter_favorites_percentage">Pourcentage</string>
@@ -585,6 +594,7 @@
     <string name="about_changelog">Versions</string>
     <string name="about_changelog_nightly_build">Nightly Build</string>
     <string name="about_changelog_next_release">Prochaine version</string>
+    <string name="about_changelog_bugfix_release">Version de maintenance</string>
     <string name="about_system">Système</string>
     <string name="about_donate">Nous soutenir</string>
     <string name="about_donation_more">Visitez le site web pour plus d\'informations</string>
@@ -592,6 +602,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
+    <string name="about_system_collecting">Les informations systèmes sont en cours de collecte, merci de patienter…</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
@@ -618,6 +629,8 @@
     <string name="contribution_infrastructure">infrastructure</string>
     <string name="contribution_projectleader">chef de projet open source</string>
     <string name="contribution_graphics">graphiques</string>
+    <string name="debug_user_error_report_title">Signaler un problème</string>
+    <string name="debug_user_error_errortext">Une erreur est survenue, merci de nous la signaler :</string>
     <string name="debug_user_error_explain_options">Aidez nous à corriger les problèmes de c:geo en nous les signalant par email avec les informations systèmes de votre téléphone et le journal de log.\nRajoutez aussi une description détaillé de l\'erreur dans l\'email.\n\nVérifiez également notre FAQ et/ou les réseaux sociaux pour des problèmes déjà identifiés.\nD\'autres possibilités de contact sont disponibles dans «À propos de c:geo »</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Téléchargements en cours</string>
@@ -818,6 +831,8 @@
     <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
+    <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
+    <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thème</string>
     <string-array name="settings_theme_entries">
@@ -826,6 +841,7 @@
         <item>Sombre</item>
     </string-array>
     <string name="init_wallpaper">Fond d\'écran</string>
+    <string name="init_summary_wallpaper">Afficher le fond d\'écran de l\'appareil comme fond d\'écran d\'accueil</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_backup_summary">Veuillez noter que cette fonctionnalité peut sauvegarder les caches, les waypoints &amp; les paramètres, mais pas les images de cache. \nAfin de pouvoir restaurer les données même après avoir perdu votre téléphone, les fichiers de sauvegarde doivent être copiés dans un emplacement indépendant.</string>
@@ -884,12 +900,14 @@
     <string name="init_backup_settings_restore">Restaurer les paramètres</string>
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
+    <string name="settings_folder_changed">Le dossier \"%1$s\" sera changé en \"%2$s\" pendant la restauration.\n\nAppuyez sur \"%4$s\" pour continuer. Dans ce cas, il vous sera demandé d\'accorder à nouveau l\'accès à ce dossier à c:geo.\n\nAppuyez sur \"%3$s\" pour conserver la configuration actuelle du dossier à la place.</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
     <string name="settings_info_offline_maps">c:geo prend en charge les cartes pour une utilisation hors ligne. Vous pouvez obtenir des cartes de différents fournisseurs ou même créer vos propres cartes (à partir des données OSM). Vous devez d\'abord sélectionner le dossier dans lequel les cartes hors ligne doivent être stockées.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
     <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
     <string name="settings_info_hillshading">L\'ombrage du relief est une technique permettant un relief topographique en ajoutant un effet de lumière sur la carte permettant d\'indiquer les changements d\'altitude. Les pentes seront assombries ou éclaircies afin de générer un effet 3D.\nLes fichiers sources contenant les informations d\'altitude doivent être obtenus manuellement (cliquez sur l\'objet pour les sources) et placés ensuite dans le répertoire des sources défini ci-dessous.</string>
+    <string name="settings_hillshading_enable">Activer l’ombrage du relief</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
@@ -1213,6 +1231,7 @@
     <string name="cache_advanced">Avancé</string>
     <string name="cache_waypoints">Points de passage</string>
     <string name="cache_variables">Calculateur</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Points de passage (%d)</string>
     <string name="cache_waypoints_add">Ajouter un point de passage</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
@@ -1450,6 +1469,7 @@
     <string name="waypoint_duplicate">Dupliquer le point de passage</string>
     <string name="waypoint_toclipboard">Copier le point de passage dans le presse-papiers</string>
     <string name="waypoint_copy_of">Copie de</string>
+    <string name="waypoint_open_geochecker">Ouvrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Entrez les notes ici…</string>
     <string name="waypoint_coordinate_formats_plain">Texte</string>
     <string name="from_clipboard">Depuis le presse-papiers</string>
@@ -1527,6 +1547,7 @@
     <!-- map -->
     <string name="map_map">Carte</string>
     <string name="map_live">Carte temps réel</string>
+    <string name="map_offline">Carte hors ligne</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
@@ -1543,6 +1564,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Cela synchronisera vos thèmes de cartes dans un dossier d\'une application privée pour améliorer les performances d\'ouverture de la carte au détriment de l\'espace de stockage du téléphone.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier Thèmes des cartes dans un dossier d\'application privée pour un accès plus rapide aux fichiers. Soyez certain que le dossier des thèmes contient seulement vos thèmes, mais pas de données supplémentaires (volumineuses, avant d\'activer cette fonctionnalité.\n\nVotre dossier de thème “%1$s” a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous vraiment activer la synchronisation ?</string>
+    <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
+    <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
     <string name="init_hidewp">Masquer tous les points de passage</string>
     <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
     <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
@@ -2036,6 +2059,10 @@
     <string name="tts_oclock">%s heures</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+    <plurals name="days_ago">
+        <item quantity="one">il y a %d jour</item>
+        <item quantity="other">il y a %d jours</item>
+    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">Dans %d jour</item>
         <item quantity="other">Dans %d jours</item>
@@ -2109,6 +2136,7 @@
     <string name="preference_colorpicker_select_opaqueness">Sélectionner l\'opacité</string>
     <string name="reset_to_default">Par défaut</string>
     <!-- number input -->
+    <string name="number_input_title">Saisissez une valeur entre %1$s et %2$s</string>
     <string name="number_input_err_boundarymin">La valeur saisie est trop faible - réinitialisée à la valeur minimale</string>
     <string name="number_input_err_boundarymax">La valeur saisie est trop grande - réinitialisée à la valeur maximale</string>
     <string name="number_input_err_format">Format de nombre non valide</string>
@@ -2156,6 +2184,7 @@
     <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Options des itinéraires / traces</string>
+    <string name="routes_tracks_menu">Itinéraires / Traces</string>
     <string name="center_on_route_track">Centrer sur l\'itinéraire</string>
     <string name="unload_route_track">Décharger la trace</string>
     <string name="route">Itinéraire</string>
