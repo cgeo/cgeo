@@ -1,13 +1,14 @@
-### Kartta
-- Uusi: OSM-karttalähde osm.paws.cz
+### Map
+- New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
-### Kätkön tiedot
-- Uusi: Uusi hienostunut kuvagalleria
-- Korjaa: Palauta sijainti reittipisteluettelossa päivityksen tai reittipisteen poistamisen jälkeen
-- Korjaa: Siirry alareunaan luotaessa uutta reittipistettä
+### Cache details
+- New: New more sophisticated image gallery
+- Fix: Restore position in waypoint list after updating or deleting waypoint
+- Fix: Move to bottom when creating new waypoint
 
-### Yleinen
-- API-tason muutos (compileSDK 32)
-- Päivitettiin joitakin riippuvaisuuskirjastoja
-- Käytä Androidin sisäänrakennettua käynnistysnäytön toimintoa käynnistettäessä
-- Muutos: Käytä eri Android-mekanismia latauksien vastaanottamiseen (paremman yhteensopivuuden Android 12+:n kanssa)
+### General
+- API level change (compileSDK 32)
+- Update some dependant libraries
+- Use Android built-in splash screen feature on startup
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
