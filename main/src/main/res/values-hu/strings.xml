@@ -39,7 +39,6 @@
     <string name="userdefined">Felhasználó által meghatározott láda</string>
     <string name="unknown">Ismeretlen típus</string>
     <string name="all_types_short">Összes</string>
-    <string name="traditional_short">Hagyományos</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Rejtély</string>
     <string name="letterbox_short">Levelesláda</string>
@@ -130,7 +129,6 @@
     <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
     <string name="log_clear">Törlés</string>
-    <string name="log_post_not_possible">Az adatok letöltése folyamatban van…\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
     <string name="log_date_future_not_allowed">Jövőbeli log dátum nem lehetséges.</string>
     <string name="log_add">Hozzáadás</string>
     <string name="log_repeat">Utolsó log ismétlése</string>
@@ -369,7 +367,6 @@
     <string name="caches_clear_offlinelogs_progress">Offline logok törlése folyamatban</string>
     <string name="caches_make_list_unique">Törlés más listákról</string>
     <string name="caches_set_listmarker">Lista jelző beállítása</string>
-    <string name="caches_askdeletion">Törlés kérése, ha üres</string>
     <!-- caches lists -->
     <string name="menu_lists">Listák kezelése</string>
     <string name="list_menu_create">Lista létrehozása</string>
@@ -386,7 +383,6 @@
     <string name="list_dialog_remove_title">Lista törlése</string>
     <string name="list_dialog_remove_description">Szeretnéd törölni a listát? A listáról minden láda a Mentettek közé kerül.</string>
     <string name="list_dialog_remove_nowempty">A lista üres. El akarod távolítani a listát?</string>
-    <string name="list_dialog_do_not_ask_me_again">Ne kérd még egyszer ennél a listánál</string>
     <string name="list_dialog_remove">Törlés</string>
     <string name="list_dialog_rename_title">Lista átnevezése</string>
     <string name="list_dialog_rename">Átnevezés</string>
@@ -400,7 +396,6 @@
     <string name="cache_filter_owner">Ládatulajdonos</string>
     <string name="cache_filter_difficulty">Nehézség</string>
     <string name="cache_filter_terrain">Terep</string>
-    <string name="cache_filter_difficulty_terrain">Nehézség / Terep</string>
     <string name="cache_filter_rating">Értékelés</string>
     <string name="cache_filter_status">Állapot</string>
     <string name="cache_filter_attributes">Ládatulajdonságok</string>
@@ -428,10 +423,8 @@
     <string name="cache_filter_storage_delete_button">Törlés</string>
     <string name="cache_filter_storage_clear_button">Törlés</string>
     <string name="cache_filter_storage_load_delete_title">Meglévő szűrő betöltése vagy törlése</string>
-    <string name="cache_filter_storage_select_title">Szűrő kiválasztása</string>
     <string name="cache_filter_storage_delete_title">Szűrő törlése</string>
     <string name="cache_filter_storage_delete_message">Biztosan törölni szeretnéd ezt a szűrőkonfigurációt?</string>
-    <string name="cache_filter_storage_select_clear_title">Szűrő kiválasztása vagy a jelenlegi szűrő törlése</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Még nincs tárolva szűrő.</string>
     <string name="cache_filter_storage_save_title">Szűrő mentése névvel</string>
     <string name="cache_filter_storage_save_confirm_title">Szűrő felülírásának mentése</string>
@@ -442,7 +435,6 @@
     <string name="cache_filter_stringfilter_type_contains">Tartalmaz</string>
     <string name="cache_filter_stringfilter_type_does_not_contain">Nem tartalmaz</string>
     <string name="cache_filter_stringfilter_type_starts_with">Ezzel kezdődik</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Az összes elem hozzáadása</string>
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>
@@ -453,7 +445,6 @@
     <string name="about_license">Licenc</string>
     <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
     <string name="about_help">Segítség</string>
-    <string name="about_system_collecting">A rendszeradatok összegyűjtése megtörtént, kérjük, várjon…</string>
     <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
     <string name="about_system_info">c:geo rendszeradatok</string>
@@ -471,8 +462,6 @@
     <string name="contribution_documentation">dokumentáció</string>
     <string name="contribution_projectleader">nyílt forráskódú projekt vezetője</string>
     <string name="contribution_graphics">grafika</string>
-    <string name="debug_user_error_report_title">Probléma jelentése</string>
-    <string name="debug_user_error_errortext">Váratlan probléma lépett fel, amelyet légyszi jelents nekünk:</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
@@ -598,7 +587,6 @@
     <string name="init_backup_settings_restore">Beállítások visszaállítása</string>
     <string name="settings_readingerror">Hiba a beállítások olvasásakor</string>
     <string name="settings_restart">A c:geo-t most újra kell indítani a betöltött beállítások használatához</string>
-    <string name="settings_folder_changed">A „%1$s” mappa a következőre módosul: „%2$s” a visszaállítás során.\n\nA folytatáshoz kattints „%4$s” ide. Ebben az esetben újból meg kell adnod a c:geo hozzáférést az adott mappához.\n\nA jelenlegi mappabeállítás megtartásához kattints „%3$s” ide.</string>
     <string name="settings_info_offline_maps_title">Offline térképek adatai</string>
     <string name="settings_info_themes_title">Térkép megjelenítési stílusok</string>
     <string name="init_mapsource_select">Térkép választása</string>
@@ -770,7 +758,6 @@
     <string name="cache_list_select_last">Utolsó választás</string>
     <string name="cache_images">Képek</string>
     <string name="cache_waypoints">Útpontok</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Útpontok (%d)</string>
     <string name="cache_hint">Segítség</string>
     <string name="cache_hint_not_available">Nincs segítség megadva</string>
     <string name="cache_logs">Logok</string>
@@ -933,8 +920,6 @@
     <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
-    <string name="onetime_mapthemefixslow_title">A lassú térképtéma-megjelenítés javítása</string>
-    <string name="onetime_mapthemefixslow_message">A nem tömörített térképtémákkal való munka csökkentheti a térképnézegető megnyitási teljesítményét. A témáit tömörítheti vagy szinkronizálhatja, hogy gyorsabb teljesítményt érjen el és csökkentse a térkép indításának késését.</string>
     <string name="map_theme_select">Térképstílusok</string>
     <string name="map_theme_options">Térképstílus beállítások</string>
     <string name="map_live_enable">Élő mód</string>
@@ -1367,7 +1352,6 @@
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->
     <!-- number input -->
-    <string name="number_input_title">Adj meg egy értéket %1$s és %2$s között</string>
     <string name="number_input_err_boundarymax">A megadott érték túl nagy - állítsd vissza a megengedett maximális értékre</string>
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
