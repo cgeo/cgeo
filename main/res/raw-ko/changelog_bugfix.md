@@ -3,9 +3,9 @@
 ### 일반
 - 수정: 자동으로 방문 모드로 설정된 새로운 추적아이템
 - 수정: gc.com 기본 회원 설정이 표시되지 않음
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- 변경: mapy.cz 지도 공급자 제거됨(라이선스 변경으로 인해)
+- 수정: 검색 적중을 선택한 후 캐시 검색 필드가 비워짐
+- 수정: 점이 여러 개인 도 수식의 실패
 
 ##
 

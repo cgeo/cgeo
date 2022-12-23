@@ -391,6 +391,7 @@
     <string name="caches_sort_storage">기기에 저장된 데이터</string>
     <string name="caches_sort_eventdate">이벤트 날짜</string>
     <string name="caches_select_mode">선택 모드</string>
+    <string name="caches_select_next">다음 20개 캐시 선택</string>
     <string name="caches_select_mode_exit">선택 모드 나오기</string>
     <string name="caches_select_invert">선택 반전</string>
     <string name="caches_nearby">인근 캐시</string>
@@ -1026,6 +1027,8 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
+    <string name="category_unifiedMap">통합 지도</string>
+    <string name="experimental">(실험적)</string>
     <string name="init_title_useUnifiedMap">통합 지도 사용</string>
     <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도 사용(실험 기능/완전하지 않음/테스트 전용)</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
