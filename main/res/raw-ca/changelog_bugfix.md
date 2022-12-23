@@ -10,16 +10,16 @@
 ##
 
 ### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+- Correcció: Utilitzeu l'URL actualitzat per a la geocodificació de mapquest
+- Correcció: Evitar l'errors en determinades condicions quan s'intenta adjuntar una foto al registre
+- Canvi: Millor missatge d'error sobre com resoldre un requisit de Captcha en iniciar sessió a geocaching.com
 
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+### Catxés
+- Correcció: Evita que les imatges spoiler es dupliquin a la galeria en actualitzar un catxé
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+### Calculadora de variables
+- Novetat: Funció TRUNC per truncar valors decimals
+- Nou: Permet l'ús de claudàtors per als càlculs. Per a intervals variables, utilitzeu p. \[:1-5\] en canvi.
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Mapa
+- Correcció: Mostra el marcador DT correcte per a D4.0 i D4.5
