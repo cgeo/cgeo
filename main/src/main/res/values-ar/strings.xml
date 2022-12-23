@@ -89,7 +89,6 @@
     <string name="log_posting_twitter">جاري نشر التغريدة&#8230;</string>
     <string name="log_posting_generic_trackable">نشر %1$s %2$d/%3$d</string>
     <string name="log_clear">مسح</string>
-    <string name="log_post_not_possible">جاري تحميل البيانات&#8230;\nيرجى المحاولة مرة أخر بعد ثوان أو تحقق من إتصالك بالإنترنات.</string>
     <string name="log_date_future_not_allowed">التواريخ المستقبلية للسجل غير مسموح بها.</string>
     <string name="log_add">أضف</string>
     <string name="log_repeat">إعادة السجل الأخير</string>
