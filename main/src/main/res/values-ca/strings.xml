@@ -39,7 +39,6 @@
     <string name="userdefined">Catxé definit per l’usuari</string>
     <string name="unknown">Desconegut</string>
     <string name="all_types_short">Tots</string>
-    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Misteri</string>
     <string name="letterbox_short">Letter</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
     <string name="log_clear">Esborra</string>
     <string name="log_templates">Trobat: Plantilla de registre…</string>
-    <string name="log_post_not_possible">Descàrrega de dades en procés…\nProva-ho una altra vegada en uns segons o comprova la connexió a internet.</string>
     <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
     <string name="log_add">Afegeix</string>
     <string name="log_repeat">Repeteix l\'últim registre</string>
@@ -425,7 +423,6 @@
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
-    <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
     <plurals name="user_finds">
@@ -456,7 +453,6 @@
     <string name="list_dialog_remove_title">Elimina la llista</string>
     <string name="list_dialog_remove_description">Voleu eliminar la llista actual? Tots els catxés de la llista es desplaçaran a \"Desats\".</string>
     <string name="list_dialog_remove_nowempty">La llista és buida. Voleu eliminar-la?</string>
-    <string name="list_dialog_do_not_ask_me_again">No em tornis a demanar aquesta llista</string>
     <string name="list_dialog_remove">Elimina</string>
     <string name="list_dialog_rename_title">Canvia el nom de la llista</string>
     <string name="list_dialog_rename">Canvia el nom</string>
@@ -480,7 +476,6 @@
     <string name="cache_filter_owner">Propietari del Catxé</string>
     <string name="cache_filter_difficulty">Dificultat</string>
     <string name="cache_filter_terrain">Terreny</string>
-    <string name="cache_filter_difficulty_terrain">Dificultat / Terreny</string>
     <string name="cache_filter_rating">Puntuació</string>
     <string name="cache_filter_status">Estat</string>
     <string name="cache_filter_attributes">Atributs del Catxé</string>
@@ -515,10 +510,8 @@
     <string name="cache_filter_storage_delete_button">Esborra</string>
     <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
-    <string name="cache_filter_storage_select_title">Seleccioneu Filtre</string>
     <string name="cache_filter_storage_delete_title">Esborrar el filtre</string>
     <string name="cache_filter_storage_delete_message">Confirmes que vols suprimir aquesta configuració del filtre?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccioneu el filtre o esborreu el filtre actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
     <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
     <string name="cache_filter_storage_save_confirm_title">Desa la sobreescriptura del filtre</string>
@@ -537,7 +530,6 @@
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar tot</string>
     <string name="cache_filter_checkboxlist_add_items">Afegiu més elements</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Afegiu tots els elements</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Afegeix elements</string>
     <string name="cache_filter_favorites_absolute">Complet</string>
     <string name="cache_filter_favorites_percentage">Percentatge</string>
@@ -594,7 +586,6 @@
     <string name="about_changelog">Historial de canvis</string>
     <string name="about_changelog_nightly_build">Versions Nightly</string>
     <string name="about_changelog_next_release">Pròxima versió</string>
-    <string name="about_changelog_bugfix_release">Correcció d\'errors</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Dona\'ns suport</string>
     <string name="about_donation_more">Visiteu el lloc web per obtenir informació</string>
@@ -602,7 +593,6 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_system_collecting">Es recopila la informació del sistema, espereu…</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -629,8 +619,6 @@
     <string name="contribution_infrastructure">infraestructures</string>
     <string name="contribution_projectleader">Projecte de codi obert</string>
     <string name="contribution_graphics">Gràfics</string>
-    <string name="debug_user_error_report_title">Informar d\'un problema</string>
-    <string name="debug_user_error_errortext">S\'ha produït un problema inesperat que us sol·licitaríem que ens comuniqueu:</string>
     <string name="debug_user_error_explain_options">Ajudeu-nos a solucionar els problemes de c: geo informant-los per correu electrònic amb informació del sistema i el fitxer de registre inclòs.\nIncloeu sempre una descripció detallada de l’error al vostre correu electrònic!\n\nAbans d’enviar un missatge, consulteu també les nostres FAQ i / o presència a les xarxes socials per problemes coneguts.\nPodeu trobar altres opcions de contacte a \"Quant a c: geo\"</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Descàrregues actuals</string>
@@ -831,8 +819,6 @@
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
-    <string name="init_quicklaunchitems">Botons d\'inici ràpid</string>
-    <string name="init_summary_quicklaunchitems">Seleccioneu un o més elements com a botons d\'inici ràpid a la pantalla d\'inici</string>
     <!-- app theme -->
     <string name="settings_theme_title">Aspecte</string>
     <string-array name="settings_theme_entries">
@@ -841,7 +827,6 @@
         <item>Fosc</item>
     </string-array>
     <string name="init_wallpaper">Fons de pantalla</string>
-    <string name="init_summary_wallpaper">Mostra el fons de pantalla del dispositiu com a fons de la pantalla d\'inici</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -900,14 +885,12 @@
     <string name="init_backup_settings_restore">Restablir la configuració</string>
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
-    <string name="settings_folder_changed">La carpeta \"%1$s\" es canviarà a \"%2$s\" durant la restauració.\n\nToca \"%4$s\" per continuar. En aquest cas, se us demanarà que retornar l\'accés c: geo a aquesta carpeta.\n\nToca \"%3$s\" per mantenir la configuració de carpeta actual.</string>
     <string name="settings_info_offline_maps_title">Informació als mapes fora línia</string>
     <string name="settings_info_offline_maps">C:geo admet mapes per a ús fora de línia. Podeu obtenir mapes de diferents proveïdors o fins i tot crear els vostres propis mapes (a partir de dades OSM). Primer heu de seleccionar la carpeta on es desaran els mapes fora de línia.</string>
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
     <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nEls fitxers font que contenen la informació d\'elevació s\'han d\'obtenir manualment (feu clic a aquest element per a les fonts) i col·locar-los a la carpeta de fonts que es defineix a continuació.</string>
-    <string name="settings_hillshading_enable">Activa l\'ombrejat</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
@@ -1234,7 +1217,6 @@
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
     <string name="cache_variables">Variables</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
     <string name="cache_waypoints_add">Afegeix punt de ruta</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
@@ -1472,7 +1454,6 @@
     <string name="waypoint_duplicate">Duplica punt de ruta</string>
     <string name="waypoint_toclipboard">Copia els punts de ruta al porta-retalls</string>
     <string name="waypoint_copy_of">Còpia de</string>
-    <string name="waypoint_open_geochecker">Obre el Geochecker</string>
     <string name="waypointcalc_notes_prompt">Afegeix aquí les notes…</string>
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
@@ -1550,7 +1531,6 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa en viu</string>
-    <string name="map_offline">Mapa fora de línia</string>
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
@@ -1567,8 +1547,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Això sincronitzarà contínuament el contingut de la carpeta del tema del mapa amb una carpeta privada de l’aplicació per accedir més ràpidament als fitxers. Assegureu-vos que la carpeta de temes només contingui els vostres temes, però no hi hagi dades addicionals (grans) abans d’activar aquesta funció.\n\nLa carpeta de temes del mapa \"%1$s\" té actualment %2$s, %3$s i té una mida de %4$s.\n\nVoleu activar la sincronització de carpetes?</string>
-    <string name="onetime_mapthemefixslow_title">Corregiu la representació del tema del mapa lent</string>
-    <string name="onetime_mapthemefixslow_message">Treballar amb temes de mapes no comprimits pot reduir el rendiment d\'obertura del visor de mapes. Podeu comprimir o sincronitzar els temes per obtenir un rendiment més ràpid i reduir el retard en iniciar el mapa.</string>
     <string name="init_hidewp">Amaga els punts de ruta</string>
     <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
     <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>
@@ -2063,10 +2041,6 @@
     <string name="tts_oclock">%s en punt</string>
     <!-- various -->
     <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
-    <plurals name="days_ago">
-        <item quantity="one">fa %d dia</item>
-        <item quantity="other">fa %d dies</item>
-    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">D\'aquí a %d dia</item>
         <item quantity="other">D\'aquí a %d dies</item>
@@ -2140,7 +2114,6 @@
     <string name="preference_colorpicker_select_opaqueness">Seleccioneu opacitat</string>
     <string name="reset_to_default">Per defecte</string>
     <!-- number input -->
-    <string name="number_input_title">Entra un valor entre %1$s i %2$s</string>
     <string name="number_input_err_boundarymin">El valor introduït és massa petit: restableix el valor mínim</string>
     <string name="number_input_err_boundarymax">El valor introduït és massa gran: restableix el valor màxim</string>
     <string name="number_input_err_format">Format de número incorrecte</string>
@@ -2188,7 +2161,6 @@
     <string name="map_clear_track_confirm">Voleu eliminar la ruta/track \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcions de rutes / tracks</string>
-    <string name="routes_tracks_menu">Rutes / Tracks</string>
     <string name="center_on_route_track">Centre de la ruta/track</string>
     <string name="unload_route_track">Descarregar ruta/track</string>
     <string name="route">Ruta</string>
