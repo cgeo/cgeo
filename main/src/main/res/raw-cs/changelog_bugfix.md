@@ -1,25 +1,25 @@
 ##
 
-### Obecné
-- Oprava: Nový TB je automaticky nastaven do režimu návštěvy
-- Oprava: nezobrazuje se základní nastavení člena gc.com
-- Změna: odstraněn poskytovatel map mapy.cz (z důvodu změny licencování)
-- Oprava: Vyhledávací pole kešek vyprázdněno po kliknutí na hledání
+### General
+- Fix: New TB set to visit mode automatically
+- Fix: gc.com basic member settings not displayed
+- Change: mapy.cz map provider removed (due to change in licensing)
+- Fix: Cache search field emptied after selecting search hit
 - Fix: Crash for degree formulas with multiple dots
 
 ##
 
-### Obecné
-- Oprava: Použití aktualizované adresy URL pro geokódování mapquestu
-- Oprava: Za určitých podmínek zabránění pádu aplikace při pokusu o připojení fotografie k logu
-- Změna: Srozumitelnější chybová zpráva o tom, jak vyřešit požadavek na Captchu při přihlášení na geocaching.com
+### General
+- Fix: Use updated URL for mapquest geocoding
+- Fix: Prevent crash under certain conditions when trying to attach photo to log
+- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
-### Kešky
-- Oprava: Zabráněno zdvojování spoilerových obrázků v galerii při aktualizaci informací o kešce
+### Caches
+- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
 
-### Kalkulačka proměnných
-- Novinka: Funkce TRUNC pro zkrácení desetinných hodnot
-- Novinka: Povoleno používání hranatých závorek pro výpočty. Pro rozsahy proměnných použijte namísto toho např. \[:1-5\].
+### Variable calculator
+- New: TRUNC function to truncate decimal values
+- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
 
-### Mapa
-- Oprava: Zobrazení správného označení DT pro D4.0 a D4.5
+### Map
+- Fix: Show correct DT marker for D4.0 and D4.5
