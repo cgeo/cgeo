@@ -39,7 +39,6 @@
     <string name="userdefined">Caché definido por el usuario</string>
     <string name="unknown">De tipo desconocido</string>
     <string name="all_types_short">Todos</string>
-    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Misterio</string>
     <string name="letterbox_short">Letterbox</string>
@@ -133,7 +132,6 @@
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_templates">Encontrado: Plantilla de registro…</string>
-    <string name="log_post_not_possible">Descarga de datos en curso…\nPor favor, inténtalo de nuevo en unos segundos o comprueba tu conexión a internet.</string>
     <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
     <string name="log_add">Añadir</string>
     <string name="log_repeat">Repetir el último registro</string>
@@ -418,7 +416,6 @@
     <string name="caches_reset_cache_icons_title">Resetear icono de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
-    <string name="caches_askdeletion">Solicitar borrado si está vacío</string>
     <string name="select_icon">Seleccionar icono</string>
     <string name="onetime_missing_unicode_info">Tu versión de Android no es compatible con la detección automática de iconos - puede que falten algunos caracteres</string>
     <plurals name="user_finds">
@@ -449,7 +446,6 @@
     <string name="list_dialog_remove_title">Borrar lista</string>
     <string name="list_dialog_remove_description">¿Quieres borrar la lista actual? Todos los cachés de la lista serán movidos a \"Guardados\".</string>
     <string name="list_dialog_remove_nowempty">La lista está vacía. ¿Quieres borrarla?</string>
-    <string name="list_dialog_do_not_ask_me_again">No volver a preguntarme por esta lista</string>
     <string name="list_dialog_remove">Borrar</string>
     <string name="list_dialog_rename_title">Renombrar lista</string>
     <string name="list_dialog_rename">Renombrar</string>
@@ -473,7 +469,6 @@
     <string name="cache_filter_owner">Propietario del caché</string>
     <string name="cache_filter_difficulty">Dificultad</string>
     <string name="cache_filter_terrain">Terreno</string>
-    <string name="cache_filter_difficulty_terrain">Dificultad / Terreno</string>
     <string name="cache_filter_rating">Puntuación</string>
     <string name="cache_filter_status">Estado</string>
     <string name="cache_filter_attributes">Atributos del caché</string>
@@ -508,10 +503,8 @@
     <string name="cache_filter_storage_delete_button">Borrar</string>
     <string name="cache_filter_storage_clear_button">Limpiar</string>
     <string name="cache_filter_storage_load_delete_title">Cargar o eliminar un filtro existente</string>
-    <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
     <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
     <string name="cache_filter_storage_delete_message">¿Está seguro de que quiere borrar esta configuración de filtro?</string>
-    <string name="cache_filter_storage_select_clear_title">Seleccionar filtro o borrar el filtro actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ningún filtro ha sido almacenado todavía.</string>
     <string name="cache_filter_storage_save_title">Guardar filtro con nombre</string>
     <string name="cache_filter_storage_save_confirm_title">Guardar filtro y sobrescribir</string>
@@ -530,7 +523,6 @@
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar todo</string>
     <string name="cache_filter_checkboxlist_add_items">Añadir más elementos</string>
-    <string name="cache_filter_checkboxlist_add_all_items">Añadir todos los elementos</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Añadir elementos</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Porcentaje</string>
@@ -594,7 +586,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
     <string name="about_help">Ayuda</string>
-    <string name="about_system_collecting">Información del sistema recopilado, por favor espere…</string>
     <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar por correo…</string>
     <string name="about_system_info">Información del sistema c:geo</string>
@@ -621,8 +612,6 @@
     <string name="contribution_infrastructure">infraestructura</string>
     <string name="contribution_projectleader">líder del proyecto de código abierto</string>
     <string name="contribution_graphics">gráficos</string>
-    <string name="debug_user_error_report_title">Reportar un problema</string>
-    <string name="debug_user_error_errortext">Ha ocurrido un problema inesperado que le pediremos que nos lo comunique:</string>
     <string name="debug_user_error_explain_options">Ayúdanos a solucionar los problemas de c:geo informándolos por correo electrónico con información del sistema e incluyendo el archivo de registro de c:geo.\nPor favor, ¡incluya siempre una descripción de error detallada con su correo!\n\nAntes de enviar un correo, por favor consulte nuestras preguntas frecuentes y/o la presencia en las redes sociales sobre problemas conocidos.\nOtras opciones de contacto se pueden encontrar en \'Acerca de c:geo\'</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Descargas actuales</string>
@@ -870,7 +859,6 @@
     <string name="init_backup_settings_restore">Restablecer ajustes</string>
     <string name="settings_readingerror">Error leyendo los ajustes</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
-    <string name="settings_folder_changed">La carpeta \"%1$s\" se cambiará a \"%2$s\" durante la restauración.\n\nPulse \"%4$s\" para continuar. En ese caso se le pedirá que vuelva a conceder acceso a c:geo a esa carpeta.\n\nPulse \"%3$s\" para mantener la configuración de la carpeta actual en su lugar.</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_offline_maps">c:geo soporta mapas para utilizarse sin conexión. Puedes obtener mapas de diferentes proveedores o incluso crear tus propios mapas (a partir de datos OSM). Primero tiene que seleccionar la carpeta en la que se almacenarán los mapas sin conexión.</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
@@ -1184,7 +1172,6 @@
     <string name="cache_advanced">Avanzado</string>
     <string name="cache_waypoints">Waypoints</string>
     <string name="cache_variables">Variables</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Añadir waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
@@ -1474,8 +1461,6 @@
     <string name="init_summary_renderthemefolder_synctolocal">Esto sincronizará sus temas en una carpeta privada de la aplicación para mejorar el rendimiento del visor de mapas a costa de algún espacio de almacenamiento del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronización de la carpeta de temas</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Esto sincronizará continuamente el contenido de la carpeta Temas del Mapa en una carpeta de aplicación privada para un acceso más rápido a los archivos. Asegúrese de que la carpeta de temas sólo contiene sus temas y no hay datos adicionales (grandes) antes de activar esta función.\n\nLa carpeta de temas de tu mapa \'%1$s\' tiene actualmente %2$s, %3$s y un tamaño de %4$s.\n\n¿Desea activar la sincronización de carpetas?</string>
-    <string name="onetime_mapthemefixslow_title">Corrige el procesamiento lento del tema del mapa</string>
-    <string name="onetime_mapthemefixslow_message">Trabajar con temas de mapas no comprimidos puede disminuir el rendimiento del visor de mapas. Puede comprimir o sincronizar sus temas para obtener un rendimiento más rápido y reducir el retraso al iniciar el mapa.</string>
     <string name="init_hidewp">Ocultar waypoints</string>
     <string name="init_summary_hidewp_original">Ocultar waypoints originales en el mapa</string>
     <string name="init_summary_hidewp_parking">Ocultar waypoints de estacionamiento en el mapa</string>
@@ -1959,10 +1944,6 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
-    <plurals name="days_ago">
-        <item quantity="one">hace %d día</item>
-        <item quantity="other">hace %d días</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
@@ -2030,7 +2011,6 @@ Nombre de archivo:%2$s</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidad</string>
     <string name="reset_to_default">Por defecto</string>
     <!-- number input -->
-    <string name="number_input_title">Introduce un valor entre %1$s y %2$s</string>
     <string name="number_input_err_boundarymin">El valor introducido es demasiado pequeño - restablecido al valor mínimo</string>
     <string name="number_input_err_boundarymax">El valor introducido es demasiado grande - restablecido al valor máximo</string>
     <string name="number_input_err_format">Formato de número incorrecto</string>
