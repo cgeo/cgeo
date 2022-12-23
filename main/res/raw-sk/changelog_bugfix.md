@@ -1,11 +1,11 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Všeobecné
+- Oprava: Nové nastavenie TB automaticky na režim návštevy
+- Oprava: Nastavenia základného člena na gc.com sa nezobrazujú
 - Zmena: poskytovateľ máp mapy.cz odstránený (kvôli zmene v licencovaní)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Oprava: Zlyhanie pri vzorcoch stupňov s viacerými bodkami
 
 ##
 
