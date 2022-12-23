@@ -39,6 +39,7 @@
     <string name="userdefined">Používateľom definovaná keška</string>
     <string name="unknown">Neznámy typ</string>
     <string name="all_types_short">Všetko</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysterka</string>
     <string name="letterbox_short">Letterbox</string>
@@ -132,6 +133,7 @@
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
     <string name="log_templates">Nájdené: Šablóna logu…</string>
+    <string name="log_post_not_possible">Prebieha sťahovanie dát…\nProsím, skúste to o chvíľu znova alebo skontrolujte internetové pripojenie.</string>
     <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
     <string name="log_add">Pridať</string>
     <string name="log_repeat">Zopakovať posledný log</string>
@@ -428,6 +430,7 @@
     <string name="caches_reset_cache_icons_title">Obnoviť ikonu kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
+    <string name="caches_askdeletion">Požiadať o odstránenie, ak je prázdne</string>
     <string name="select_icon">Vybrať ikonu</string>
     <string name="onetime_missing_unicode_info">Vaša verzia systému Android nepodporuje automatické zisťovanie podporovaných ikon – niektoré znaky môžu chýbať</string>
     <plurals name="user_finds">
@@ -464,6 +467,7 @@
     <string name="list_dialog_remove_title">Odstrániť zoznam</string>
     <string name="list_dialog_remove_description">Chcete odstrániť aktuálny zoznam skrýš? Všetky skrýše, ktoré sa nachádzajú v zozname budú presunuté do „Uložené“.</string>
     <string name="list_dialog_remove_nowempty">Zoznam je prázdny. Chcete odstrániť aktuálny zoznam?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nepýtať sa nabudúce pre tento zoznam</string>
     <string name="list_dialog_remove">Odstrániť</string>
     <string name="list_dialog_rename_title">Premenovať zoznam</string>
     <string name="list_dialog_rename">Premenovať</string>
@@ -487,6 +491,7 @@
     <string name="cache_filter_owner">Vlastník kešky</string>
     <string name="cache_filter_difficulty">Náročnosť</string>
     <string name="cache_filter_terrain">Terén</string>
+    <string name="cache_filter_difficulty_terrain">Náročnosť/Terén</string>
     <string name="cache_filter_rating">Hodnotenie</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atribúty kešky</string>
@@ -523,8 +528,10 @@
     <string name="cache_filter_storage_delete_button">Odstrániť</string>
     <string name="cache_filter_storage_clear_button">Vyčistiť</string>
     <string name="cache_filter_storage_load_delete_title">Načítať alebo odstrániť existujúci filter</string>
+    <string name="cache_filter_storage_select_title">Vyberte filter</string>
     <string name="cache_filter_storage_delete_title">Odstrániť filter</string>
     <string name="cache_filter_storage_delete_message">Naozaj chcete odstrániť túto konfiguráciu filtra?</string>
+    <string name="cache_filter_storage_select_clear_title">Vyberte filter alebo vymažte aktuálny filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatiaľ nie je uložený žiadny filter.</string>
     <string name="cache_filter_storage_save_title">Uložiť filter s názvom</string>
     <string name="cache_filter_storage_save_confirm_title">Uložiť filter a prepísať</string>
@@ -545,6 +552,7 @@
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrať všetko</string>
     <string name="cache_filter_checkboxlist_add_items">Pridať ďalšie položky</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Pridať všetky položky</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridať položky</string>
     <string name="cache_filter_favorites_absolute">Absolútne</string>
     <string name="cache_filter_favorites_percentage">Percentuálne</string>
@@ -623,6 +631,7 @@
     <string name="about_changelog">Zmeny</string>
     <string name="about_changelog_nightly_build">Nočná verzia</string>
     <string name="about_changelog_next_release">Ďalšie vydanie</string>
+    <string name="about_changelog_bugfix_release">Bugfix release</string>
     <string name="about_system">Systém</string>
     <string name="about_donate">Podporte nás</string>
     <string name="about_donation_more">Informácie nájdete na webovej stránke</string>
@@ -630,6 +639,7 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Informácie o systéme sa zhromažďujú, čakajte…</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -656,6 +666,8 @@
     <string name="contribution_infrastructure">infraštruktúra</string>
     <string name="contribution_projectleader">líder projektu otvoreného zdrojového kódu</string>
     <string name="contribution_graphics">grafika</string>
+    <string name="debug_user_error_report_title">Nahlásenie problému</string>
+    <string name="debug_user_error_errortext">Vyskytol sa nečakaný problém a radi by sme vás požiadali, aby ste nám ho nahlásili:</string>
     <string name="debug_user_error_explain_options">Pomôžte nám opraviť problémy aplikácie c:geo tak, že ich nahlásite cez e-mail s informáciami o systéme a priloženým súborom denníka aplikácie c:geo.\nVo svojej e-mailovej správy vždy uveďte aj podrobný popis chyby!\n\nPred odoslaním e-mailu skontrolujte aj naše Najčastejšie otázky a spoločenské médiá, kde nájdete informácie o známych problémoch.\nĎalšie možnosti kontaktu nájdete v časti „Informácie o aplikácii c:geo“.</string>
     <!-- download manager -->
     <string name="debug_current_downloads">Aktuálne preberania</string>
@@ -856,6 +868,8 @@
     <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
+    <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
+    <string name="init_summary_quicklaunchitems">Vyberte jednu alebo viac položiek ako tlačidlá rychlého spustenia na domovskej obrazovke</string>
     <!-- app theme -->
     <string name="settings_theme_title">Téma</string>
     <string-array name="settings_theme_entries">
@@ -864,6 +878,7 @@
         <item>Tmavá</item>
     </string-array>
     <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Zobraziť tapetu zariadenia ako pozadie domovskej obrazovky</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvoriť zálohu</string>
     <string name="init_backup_summary">Majte na pamäti, že pomocou tejto funkcie je možné zálohovať kešky, body trasy a nastavenia, ale nie obrázky z kešiek. \nAk chcete mať možnosť obnoviť údaje aj po strate telefónu, súbory so zálohou musia byť skopírované na nezávislé miesto.</string>
@@ -922,12 +937,14 @@
     <string name="init_backup_settings_restore">Obnoviť nastavenia</string>
     <string name="settings_readingerror">Chyba pri čítaní nastavení</string>
     <string name="settings_restart">Aplikácia c:geo sa musí teraz reštartovať, aby sa použili načítané nastavenia</string>
+    <string name="settings_folder_changed">Priečinok \"%1$s\" bude počas obnovenia zmenený na \"%2$s\".\n\nPokračujte ťuknutím na \"%4$s\". V takom prípade sa objaví výzva na opätovné udelenie prístupu aplikácii c:geo k danému priečinku.\n\nŤuknutím na \"%3$s\" ponecháte namiesto toho aktuálne nastavenie priečinka.</string>
     <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
     <string name="settings_info_offline_maps">Aplikácia c:geo podporuje mapy na použitie offline. Mapy môžete získať od rozličných poskytovateľov, prípadne môžete dokonca vytvoriť vlastné mapy (z údajov OSM). Najprv je potrebné vybrať priečinok, do ktorého sa budú mapy offline ukladať.</string>
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">Aplikácia c:geo podporuje vlastné t=my pre offline mapy. Tie sa dajú použiť na zmenu štýlu farieb mapy (napr. môžete mať nočnú mapu), prípadne na zvýraznenie určitých objektov, ako sú napríklad cyklotrasy alebo vrstevnice na mape.\n\nPráca s nezbalenými mapovými témami môže znížiť výkon otvárania prezerača. V takom prípade môže byť priečinok s témou voliteľne synchronizovaný do lokálneho súkromného priečinka aplikácie pre rýchlejší prístup (na úkor nejakého miesta v ukladacom priestore).</string>
     <string name="settings_info_hillshading_title">Informácie o tieňovaní kopcov</string>
     <string name="settings_info_hillshading">Tieňovanie kopcov je technika na vytváranie topografických máp reliéfu pridaním svetelného efektu do mapy, ktorý označuje zmeny nadmorskej výšky. Svahy sa stmavia/zosvetlia, aby sa vygeneroval 3D efekt.\nZdrojové súbory obsahujúce informácie o nadmorskej výške je potrebné získať ručne – kliknutím na túto položku zobrazíte zdroje – a umiestniť ich do priečinka zdrojov definovaného nižšie.</string>
+    <string name="settings_hillshading_enable">Povoliť tieňovanie kopcov</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_local_file_system">Lokálne systémové súbory</string>
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
@@ -1052,6 +1069,8 @@
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
+    <string name="category_unifiedMap">Jednotná mapa</string>
+    <string name="experimental">(experimentálne)</string>
     <string name="init_title_useUnifiedMap">Použiť zjednotenú mapu</string>
     <string name="init_summary_useUnifiedMap">Použite novú zjednotenú mapu namiesto vstavaných máp Google Map/Mapsforge (OSM) (experimentálne/zďaleka nie sú dokončené/iba na testovanie)</string>
     <string name="localstorage_migrate_title">Prenos lokálnych súborov</string>
@@ -1270,6 +1289,7 @@
     <string name="cache_advanced">Rozšírené</string>
     <string name="cache_waypoints">Body trasy</string>
     <string name="cache_variables">Premenné</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Body trasy (%d)</string>
     <string name="cache_waypoints_add">Pridať bod trasy</string>
     <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>
@@ -1509,6 +1529,7 @@
     <string name="waypoint_duplicate">Duplikovať bod trasy</string>
     <string name="waypoint_toclipboard">Kopírovať bod trasy do schránky</string>
     <string name="waypoint_copy_of">Kópia</string>
+    <string name="waypoint_open_geochecker">Otvoriť Geochecker</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
     <string name="waypoint_coordinate_formats_plain">Iba text</string>
     <string name="from_clipboard">Zo schránky</string>
@@ -1586,6 +1607,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Aktívna mapa</string>
+    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
@@ -1602,6 +1624,8 @@
     <string name="init_summary_renderthemefolder_synctolocal">Tým synchronizujete svoje motívy do súkromného priečinka aplikácie a vylepšíte tak výkon otvárania prezerača mapy na úkor určitého ukladacieho miesta v zariadení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnúť synchronizáciu priečinka s témou</string>
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tým sa bude nepretržite synchronizovať obsah priečinka s mapovými motívmi do súkromného priečinka aplikácie pre rýchlejší prístup k súborom. Pred aktivovaním tejto funkcie zaistite, aby priečinok s motívmi obsahoval len vaše motívy a žiadne ďalšie (veľké) dáta.\n\nVáš priečinok s mapovými motívmi \'%1$s\' má momentálne %2$s, %3$s a veľkosť %4$s.\n\nChcete povoliť synchronizáciu priečinka?</string>
+    <string name="onetime_mapthemefixslow_title">Oprava pomalého vykresľovania mapového motívu</string>
+    <string name="onetime_mapthemefixslow_message">Práca s nezbalenými mapovými motívmi môže znižovať výkon otvárania zobrazovača mapy. Motívy môžete zbaliť alebo synchronizovať a dosiahnuť tak rýchlejší výkon a skrátiť oneskorenie pri spúšťaní mapy.</string>
     <string name="init_hidewp">Skryť body trasy</string>
     <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
     <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
@@ -2105,6 +2129,12 @@
     <string name="tts_oclock">%s hodín</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopírované do schránky</string>
+    <plurals name="days_ago">
+        <item quantity="one">pred %d dňom</item>
+        <item quantity="few">pred %d dňami</item>
+        <item quantity="many">pred %d dňami</item>
+        <item quantity="other">pred %d dňami</item>
+    </plurals>
     <plurals name="days_ahead">
         <item quantity="one">O %d deň</item>
         <item quantity="few">O %d dni</item>
@@ -2192,6 +2222,7 @@
     <string name="preference_colorpicker_select_opaqueness">Vyberte priehľadnosť</string>
     <string name="reset_to_default">Predvolené</string>
     <!-- number input -->
+    <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
     <string name="number_input_err_boundarymin">Zadaná hodnota je príliš malá – obnovené na min. hodnotu</string>
     <string name="number_input_err_boundarymax">Zadaná hodnota je príliš veľká – obnovené na max. hodnotu.</string>
     <string name="number_input_err_format">Neplatný formát čísla</string>
@@ -2241,6 +2272,7 @@
     <string name="map_clear_track_confirm">Chcete odstrániť trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
+    <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="center_on_route_track">Vycentrovať na trasu/stopu</string>
     <string name="unload_route_track">Zrušiť trasu/stopu</string>
     <string name="route">Trasa</string>
