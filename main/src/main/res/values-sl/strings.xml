@@ -90,6 +90,7 @@
     <string name="log_posting_log">Pošiljam zapis…</string>
     <string name="log_posting_twitter">Pošiljam na Twitter…</string>
     <string name="log_clear">Počisti</string>
+    <string name="log_post_not_possible">Prenos podatkov je v teku…\nPoskusite znova čez nekaj sekund ali preverite vašo povezavo z internetom.</string>
     <string name="log_date_future_not_allowed">Vnaprejšnji datumi niso dovoljeni.</string>
     <string name="log_add">Dodaj</string>
     <string name="log_repeat">Ponovi prejšnji zapis</string>
