@@ -79,6 +79,7 @@
     <string name="log_posting_twitter">Ang pag-post sa tweet…</string>
     <string name="log_posting_generic_trackable">Nagpost sa %1$s %2$d/%3$d</string>
     <string name="log_clear">Tin-aw</string>
+    <string name="log_post_not_possible">Giproseso ang pag-download sa datos…\nPalihug suway og balik human sa pipila ka mga segundo o suta-a ang imoha nga koneksyon sa internet.</string>
     <string name="log_date_future_not_allowed">Ang umaabot nga mga petsa sa log kay dili tugotan.</string>
     <string name="log_add">Dugangan</string>
     <string name="log_repeat">Ang katapusang log kay usba</string>
