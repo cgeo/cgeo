@@ -529,6 +529,7 @@
     <string name="cache_filter_stringfilter_type_starts_with">다음으로 시작</string>
     <string name="cache_filter_stringfilter_type_ends_with">다음으로 끝남</string>
     <string name="cache_filter_stringfilter_type_pattern">패턴</string>
+    <string name="cache_filter_datefilter_absolute">절대값</string>
     <string name="cache_filter_datefilter_relative">오늘 기준</string>
     <string name="cache_filter_datefilter_label_from">시작일:</string>
     <string name="cache_filter_datefilter_label_to">종료일:</string>
