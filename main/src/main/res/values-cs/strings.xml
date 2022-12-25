@@ -400,6 +400,8 @@
     <string name="caches_sort_storage">Datum uložení do zařízení</string>
     <string name="caches_sort_eventdate">Datum události</string>
     <string name="caches_select_mode">Režim výběru</string>
+    <string name="caches_select_next20">Vybrat dalších 20 kešek</string>
+    <string name="caches_select_next100">Vybrat dalších 100 kešek</string>
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
@@ -548,6 +550,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Začíná na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
+    <string name="cache_filter_datefilter_absolute">Absolutní</string>
+    <string name="cache_filter_datefilter_relative">Relativní k dnešku</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrat vše</string>
@@ -604,6 +608,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">úsvit</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>před více než rokem</item>
+        <item>před rokem</item>
+        <item>před 180 dny</item>
+        <item>před 90 dny</item>
+        <item>před 30 dny</item>
+        <item>před 2 týdny</item>
+        <item>před týdnem</item>
+        <item>před 3 dny</item>
+        <item>před méně než 3 dny</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1r</item>
+        <item>1r</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2t</item>
+        <item>1t</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
