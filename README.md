@@ -1,4 +1,4 @@
-<img align="right" src="main/res/mipmap-xxhdpi/ic_launcher_round.png">
+<img align="right" src="main/src/main/res/mipmap-xxhdpi/ic_launcher_round.png">
 
 # c:geo
 
@@ -85,12 +85,12 @@ Keys are generated manually on request.
 For c:geo we have a semi-automatic configuration:
 1. Copy `./templates/private.properties` to `./`
 2. Edit `private.properties` with your keys
-3. The `./main/res/values/keys.xml` is created on the gradle build and filled with the data from `private.properties`
+3. The `./main/src/main/res/values/keys.xml` is created on the gradle build and filled with the data from `private.properties`
 
 The third point works only if the file `keys.xml` does not exist.
 When changing your API keys, you have to delete the `keys.xml` file.
 
-If you want to fill the `keys.xml` by hand, copy `./main/templates/keys.xml` to `./main/res/values/`, then edit the copied `keys.xml`.
+If you want to fill the `keys.xml` by hand, copy `./main/templates/keys.xml` to `./main/src/main/res/values/`, then edit the copied `keys.xml`.
 For each key, replace the value starting with `@` and ending with `@` (inclusive) with the key.
 If a key is missing, remove the value and the leading and trailing `@`.
 
@@ -130,7 +130,7 @@ You can create several profiles for a physical device attached via USB, as well 
 c:geo is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 This product includes software developed by the c:geo team and contributors as well as parts developed elsewhere.
-See the references in main/res/values/strings_not_translatable.xml for details (or "about: contributors" page in the app).
+See the references in main/src/main/res/values/strings_not_translatable.xml for details (or "about: contributors" page in the app).
 
 ## Contact
 
