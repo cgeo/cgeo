@@ -1,5 +1,6 @@
 ### Χάρτης
 - Νέο: OSM χάρτη πηγή osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### Λεπτομέρειες κρύπτης
 - Νέο: Νέα πιο εξελιγμένη συλλογή εικόνων
@@ -9,5 +10,4 @@
 ### Γενικά
 - Αλλαγή επιπέδου API (compileSDK 32)
 - Ενημέρωση κάποιων εξαρτημένων βιβλιοθηκών
-- Χρήση της ενσωματωμένης οθόνης εκκίνησης Android κατά την εκκίνηση
-- Αλλαγή: Χρησιμοποιήστε διαφορετικό μηχανισμό Android για να λαμβάνετε λήψεις (για καλύτερη συμβατότητα με το Android 12+)
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
