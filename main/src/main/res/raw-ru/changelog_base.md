@@ -2,12 +2,12 @@
 - Новое: источник OSM карт osm.paws.cz
 
 ### Детали тайника
-- New: New more sophisticated image gallery
-- Fix: Restore position in waypoint list after updating or deleting waypoint
-- Fix: Move to bottom when creating new waypoint
+- Новое: Новая более проработанная галерея изображений
+- Исправлено: Восстановление позиции в списке путевых точек после обновления или удаления путевой точки
+- Исправлено: Перемещение вниз при создании новой путевой точки
 
 ### Общее
-- API level change (compileSDK 32)
-- Update some dependant libraries
-- Use Android built-in splash screen feature on startup
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Изменение уровня API (compileSDK 32)
+- Обновление некоторых зависимых библиотек
+- Использование встроенной функции заставки Android при запуске
+- Изменение: Использован иной механизм Android для скачивания (для лучшей совместимости с Android 12+)
