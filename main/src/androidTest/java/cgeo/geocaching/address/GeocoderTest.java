@@ -1,6 +1,5 @@
 package cgeo.geocaching.address;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
@@ -15,9 +14,10 @@ import java.util.Locale;
 import io.reactivex.rxjava3.core.Single;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.data.Offset;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeocoderTest extends CGeoTestCase {
+public class GeocoderTest {
 
     private static final String TEST_ADDRESS = "46 rue Barrault, Paris, France";
     private static final double TEST_LATITUDE = 48.82677;
@@ -25,7 +25,8 @@ public class GeocoderTest extends CGeoTestCase {
     private static final Geopoint TEST_COORDS = new Geopoint(TEST_LATITUDE, TEST_LONGITUDE);
     private static final Offset<Double> TEST_OFFSET = Offset.offset(0.00050);
 
-    public static void testAndroidGeocoder() {
+    @Test
+    public void testAndroidGeocoder() {
         final Locale locale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -43,7 +44,8 @@ public class GeocoderTest extends CGeoTestCase {
     }
 
     @Suppress // Do not run test on MapQuest, quotas are very low and exhaust easily.
-    public static void testMapQuestGeocoder() {
+    @Test
+    public void testMapQuestGeocoder() {
         final Locale locale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -54,7 +56,7 @@ public class GeocoderTest extends CGeoTestCase {
         }
     }
 
-    public static void testGeocoder(final Single<Address> addressObservable, final String geocoder, final boolean withAddress) {
+    private void testGeocoder(final Single<Address> addressObservable, final String geocoder, final boolean withAddress) {
         try {
             final Address address = addressObservable.blockingGet();
             assertThat(address.getLatitude()).as(describe("latitude", geocoder)).isCloseTo(TEST_LATITUDE, TEST_OFFSET);

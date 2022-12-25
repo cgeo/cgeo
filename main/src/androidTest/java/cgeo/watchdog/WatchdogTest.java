@@ -1,6 +1,5 @@
 package cgeo.watchdog;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -14,6 +13,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.test.NotForIntegrationTests;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
@@ -24,35 +24,41 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * </p>
  */
 
-public class WatchdogTest extends CGeoTestCase {
+public class WatchdogTest {
 
     @NotForIntegrationTests
-    public static void testOpenCachingDE() {
+    @Test
+    public void testOpenCachingDE() {
         downloadOpenCaching("OC1234");
     }
 
     @NotForIntegrationTests
-    public static void testOpenCachingNL() {
+    @Test
+    public void testOpenCachingNL() {
         downloadOpenCaching("OB1AF6");
     }
 
     @NotForIntegrationTests
-    public static void testOpenCachingPL() {
+    @Test
+    public void testOpenCachingPL() {
         downloadOpenCaching("OP89HC");
     }
 
     @NotForIntegrationTests
-    public static void testOpenCachingRO() {
+    @Test
+    public void testOpenCachingRO() {
         downloadOpenCaching("OR011D");
     }
 
     @NotForIntegrationTests
-    public static void testOpenCacheUK() {
+    @Test
+    public void testOpenCacheUK() {
         downloadOpenCaching("OK0384");
     }
 
     @NotForIntegrationTests
-    public static void testOpenCachingUS() {
+    @Test
+    public void testOpenCachingUS() {
         downloadOpenCaching("OU0331");
     }
 
@@ -86,7 +92,8 @@ public class WatchdogTest extends CGeoTestCase {
     }
 
     @NotForIntegrationTests
-    public static void testTrackableWebsites() {
+    @Test
+    public void testTrackableWebsites() {
         for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
             if (!trackableConnector.equals(ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR)) {
                 checkWebsite("trackable website " + trackableConnector.getHost(), trackableConnector.getTestUrl());
@@ -98,7 +105,8 @@ public class WatchdogTest extends CGeoTestCase {
     }
 
     @NotForIntegrationTests
-    public static void testGeocachingWebsites() {
+    @Test
+    public void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector) && !(connector instanceof ECConnector)) {
                 checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());

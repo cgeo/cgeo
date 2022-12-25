@@ -1,7 +1,6 @@
 package cgeo.geocaching.export;
 
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
@@ -21,11 +20,13 @@ import java.util.concurrent.ExecutionException;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class ExportTest extends CGeoTestCase {
+public class ExportTest {
 
-    public static void testGSAKExport() {
+    @Test
+    public void testGSAKExport() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         final LogEntry log = new LogEntry.Builder()
@@ -35,10 +36,11 @@ public class ExportTest extends CGeoTestCase {
                 .build();
         final FieldNotes fieldNotes = new FieldNotes();
         fieldNotes.add(cache, log);
-        assertEquals("Non matching export " + fieldNotes.getContent(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", fieldNotes.getContent());
+        assertThat("GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n").as("Non matching export " + fieldNotes.getContent()).isEqualTo(fieldNotes.getContent());
     }
 
-    public static void testGpxExportSmilies() throws InterruptedException, ExecutionException, IOException {
+    @Test
+    public void testGpxExportSmilies() throws InterruptedException, ExecutionException, IOException {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
@@ -52,7 +54,8 @@ public class ExportTest extends CGeoTestCase {
         assertCanExport(cache);
     }
 
-    public static void testGpxExportUnknownConnector() throws InterruptedException, ExecutionException, IOException {
+    @Test
+    public void testGpxExportUnknownConnector() throws InterruptedException, ExecutionException, IOException {
         final Geocache cache = new Geocache();
         cache.setGeocode("ABC123");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));

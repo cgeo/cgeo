@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class WaypointsTest extends CGeoTestCase {
+public class WaypointsTest {
 
     private static Geocache downloadCache(final String geocode) {
         final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, true, null);
@@ -16,7 +16,8 @@ public class WaypointsTest extends CGeoTestCase {
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
     }
 
-    public static void testDownloadWaypoints() {
+    @Test
+    public void testDownloadWaypoints() {
         // Check that repeated loads of geocache hold the right number of waypoints (issue #2430).
         final String geocode = "GC3KE70";
         DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);

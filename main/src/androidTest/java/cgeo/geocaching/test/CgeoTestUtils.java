@@ -1,38 +1,29 @@
-package cgeo;
+package cgeo.geocaching.test;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
-import android.test.ApplicationTestCase;
-
 import java.util.EnumSet;
 
-public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> {
+public final class CgeoTestUtils {
 
-    public CGeoTestCase() {
-        super(CgeoApplication.class);
-    }
-
-    @SuppressWarnings("EmptyMethod")
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    private CgeoTestUtils() {
+        //no instance of utils class
     }
 
     /**
      * Remove cache from DB and cache to ensure that the cache is not loaded from the database
      */
-    protected static void deleteCacheFromDB(final String geocode) {
+    public static void deleteCacheFromDB(final String geocode) {
         DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
     }
 
     /**
      * remove cache from database and file system
      */
-    protected static void removeCacheCompletely(final String geocode) {
+    public static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
         flags.add(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING);
         DataStore.removeCache(geocode, flags);
@@ -44,7 +35,7 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
      *
      * @param cache the fresh cache to save
      */
-    protected static void saveFreshCacheToDB(final Geocache cache) {
+    public static void saveFreshCacheToDB(final Geocache cache) {
         removeCacheCompletely(cache.getGeocode());
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
     }

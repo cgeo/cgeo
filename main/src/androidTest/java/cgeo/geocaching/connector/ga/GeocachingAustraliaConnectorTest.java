@@ -6,10 +6,10 @@ import cgeo.geocaching.connector.IConnector;
 
 import java.util.Set;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeocachingAustraliaConnectorTest extends TestCase {
+public class GeocachingAustraliaConnectorTest {
 
     private static IConnector getGeocachingAustraliaConnector() {
         final IConnector gaConnector = ConnectorFactory.getConnector("GA1234");
@@ -17,7 +17,8 @@ public class GeocachingAustraliaConnectorTest extends TestCase {
         return gaConnector;
     }
 
-    public static void testCanHandle() {
+    @Test
+    public void testCanHandle() {
         final IConnector wmConnector = getGeocachingAustraliaConnector();
 
         assertThat(wmConnector.canHandle("GA1234")).isTrue();
@@ -26,7 +27,8 @@ public class GeocachingAustraliaConnectorTest extends TestCase {
         assertThat(wmConnector.canHandle("TPAB12")).isFalse();
     }
 
-    public static void testHandledGeocodes() {
+    @Test
+    public void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getGeocachingAustraliaConnector().handledGeocodes(geocodes)).containsOnly("GA1234", "TP1234", "GA5678", "TP5678");
     }

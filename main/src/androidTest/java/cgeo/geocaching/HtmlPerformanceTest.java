@@ -4,21 +4,22 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.os.SystemClock;
-import android.test.AndroidTestCase;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.text.StringEscapeUtils;
+import org.junit.Before;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class HtmlPerformanceTest extends AndroidTestCase {
+public class HtmlPerformanceTest {
     private String input;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         input = "Wei&#223;er Tiger";
     }
 
+    @Test
     public void testUnescape() {
         assertThat(unescapeAndroid()).isEqualTo("Weißer Tiger");
         assertThat(unescapeApache()).isEqualTo("Weißer Tiger");
@@ -32,6 +33,7 @@ public class HtmlPerformanceTest extends AndroidTestCase {
         return TextUtils.stripHtml(input);
     }
 
+    @Test
     public void testUnescapePerformance() {
         final int runs = 100;
         measure("unescape Apache", () -> {

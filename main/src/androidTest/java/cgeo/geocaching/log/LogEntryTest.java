@@ -1,6 +1,5 @@
 package cgeo.geocaching.log;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
@@ -13,14 +12,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * LogEntry and OfflineLogEntry unit tests
  */
-public class LogEntryTest extends CGeoTestCase {
+public class LogEntryTest {
 
-    public static void testLogEntry() {
+    @Test
+    public void testLogEntry() {
         final LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
 
         assertThat(logEntry.date).isEqualTo(100);
@@ -28,7 +29,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry.log).isEqualTo("LOGENTRY");
     }
 
-    public static void testEquals() {
+    @Test
+    public void testEquals() {
         final LogEntry logEntry1 = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY1").build();
         final LogEntry logEntry2 = new LogEntry.Builder().setDate(200).setLogType(LogType.DISCOVERED_IT).setLog("LOGENTRY2").build();
 
@@ -37,7 +39,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry1).isNotEqualTo(logEntry2);
     }
 
-    public static void testGetAddLogImage() {
+    @Test
+    public void testGetAddLogImage() {
         final Image mockedImage1 = Image.NONE;
         final LogEntry logEntry1 = new LogEntry.Builder()
                 .addLogImage(mockedImage1)
@@ -55,7 +58,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry2.logImages.get(0)).isEqualTo(mockedImage2.buildUpon().setCategory(Image.ImageCategory.LOG).build());
     }
 
-    public static void testGetImageTitles() {
+    @Test
+    public void testGetImageTitles() {
         final String defaultTitle = "• " + CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title);
 
         LogEntry logEntry = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
@@ -79,7 +83,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry.getImageTitles()).isEqualTo(titlesWanted);
     }
 
-    public static void testGetDisplayText() {
+    @Test
+    public void testGetDisplayText() {
 
         final Boolean oldValue = Settings.getPlainLogs();
 
@@ -103,7 +108,8 @@ public class LogEntryTest extends CGeoTestCase {
         Settings.setPlainLogs(oldValue);
     }
 
-    public static void testIsOwn() {
+    @Test
+    public void testIsOwn() {
         final LogEntry logEntry1 = new LogEntry.Builder().setAuthor("userthatisnotthedefaultuser").setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry2 = new LogEntry.Builder().setAuthor(Settings.getUserName()).setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
         final LogEntry logEntry3 = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("LOGENTRY").build();
@@ -113,7 +119,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry3.isOwn()).isTrue();
     }
 
-    public static void testComparator() {
+    @Test
+    public void testComparator() {
         final LogEntry logEntry1 = new LogEntry.Builder().setDate(100).setLogType(LogType.FOUND_IT).setLog("logEntry1 is older than logEntry2").build();
         final LogEntry logEntry2 = new LogEntry.Builder().setDate(200).setLogType(LogType.FOUND_IT).setLog("logEntry2 is more recent than logEntry1").build();
 
@@ -126,7 +133,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logList).containsExactly(logEntry2, logEntry1);
     }
 
-    public static void testOfflineLogEntry() {
+    @Test
+    public void testOfflineLogEntry() {
 
         final OfflineLogEntry.Builder<?> oleBuilder = new OfflineLogEntry.Builder<>()
                 //set a LogEntry-specific property
@@ -158,7 +166,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(logEntry.imageTitlePraefix).isEqualTo("ImagePraefix2");
     }
 
-    public static void testOfflineLogParcelable() {
+    @Test
+    public void testOfflineLogParcelable() {
 
         //initialize a fully-fledged OfflineLogEntry
         final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
@@ -199,7 +208,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(otherLogEntry.trackableActions.get("TBFake1")).isEqualTo(LogTypeTrackable.DROPPED_OFF);
     }
 
-    public static void testEmptyOfflineLogParcelable() {
+    @Test
+    public void testEmptyOfflineLogParcelable() {
 
         //initialize a fully-fledged OfflineLogEntry
         final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>().build();
