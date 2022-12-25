@@ -1,5 +1,6 @@
 ### Mapa
 - Novinka: Mapy OSM, zdroj osm.paws.cz
+- Novinka: Povolit čtení GPX souborů flopp.net jako stop
 
 ### Detaily kešky
 - Novinka: Nová důmyslnější galerie obrázků
@@ -9,5 +10,4 @@
 ### Obecné
 - Změna úrovně API (compileSDK 32)
 - Aktualizace některých závislých knihoven
-- Použití vestavěné funkce úvodní obrazovky při spuštění systému Android
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
