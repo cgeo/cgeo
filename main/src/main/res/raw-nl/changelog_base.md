@@ -1,5 +1,6 @@
 ### Kaart
 - Nieuw: OSM kaart bron osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### Cache details
 - Nieuw: Nieuwe meer geavanceerde afbeeldingen galerij
@@ -9,5 +10,4 @@
 ### Algemeen
 - API niveau wijzigen (compileSDK 32)
 - Enkele afhankelijke bibliotheken bijwerken
-- Gebruik de Android ingebouwde splash screen functie bij opstarten
-- Wijziging: Gebruik een verschillend Android mechanisme voor het ontvangen van downloads (voor een betere compatibiliteit met Android 12+)
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
