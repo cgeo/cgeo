@@ -149,6 +149,9 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     protected void repaintRouteAndTracks() {
         trackLayer.clear();
         repaintRouteAndTracksHelper((segment, isTrack) -> {
+            if (segment.size() < 2) {
+                return; // no line can be drawn from a single point
+            }
             final LineDrawable path = new LineDrawable(segment, isTrack ? trackStyle : routeStyle);
             trackLayer.add(path);
         });
