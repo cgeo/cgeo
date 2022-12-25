@@ -1,5 +1,6 @@
 ### 지도
 - 신규: OSM 지도 소스 osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### 캐시 상세정보
 - 신규: 새로운 고급 이미지 갤러리
@@ -9,5 +10,4 @@
 ### 일반
 - API 레벨 변경(compileSDK 32)
 - 일부 종속 라이브러리 업데이트
-- 시작 시 안드로이드 내장 화면 기능 사용
-- 변경: 다른 안드로이드 메커니즘을 사용하여 다운로드 받기(안드로이드 12+와의 더 나은 호환성을 위해)
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
