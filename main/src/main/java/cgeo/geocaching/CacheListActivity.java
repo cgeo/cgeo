@@ -126,6 +126,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -495,6 +496,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             if (extras != null && !StringUtils.isBlank(extras.getString(Intents.EXTRA_NAME))) {
                 listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
+            } else {
+                final String data = ContentStorage.get().getName(getIntent().getData());
+                listNameMemento.rememberTerm(StringUtils.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
             }
             importGpxAttachement();
         }
