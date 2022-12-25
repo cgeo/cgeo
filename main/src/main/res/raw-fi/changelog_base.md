@@ -1,5 +1,6 @@
 ### Kartta
 - Uusi: OSM-karttalähde osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### Kätkön tiedot
 - Uusi: Uusi hienostunut kuvagalleria
@@ -9,5 +10,4 @@
 ### Yleinen
 - API-tason muutos (compileSDK 32)
 - Päivitettiin joitakin riippuvaisuuskirjastoja
-- Käytä Androidin sisäänrakennettua käynnistysnäytön toimintoa käynnistettäessä
-- Muutos: Käytä eri Android-mekanismia latauksien vastaanottamiseen (paremman yhteensopivuuden Android 12+:n kanssa)
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
