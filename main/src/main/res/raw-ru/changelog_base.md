@@ -1,5 +1,6 @@
 ### Карта
 - Новое: источник OSM карт osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
 
 ### Детали тайника
 - Новое: Новая более проработанная галерея изображений
@@ -9,5 +10,4 @@
 ### Общее
 - Изменение уровня API (compileSDK 32)
 - Обновление некоторых зависимых библиотек
-- Использование встроенной функции заставки Android при запуске
-- Изменение: Использован иной механизм Android для скачивания (для лучшей совместимости с Android 12+)
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
