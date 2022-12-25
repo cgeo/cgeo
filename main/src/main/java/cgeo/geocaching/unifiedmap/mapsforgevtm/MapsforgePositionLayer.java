@@ -155,6 +155,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
             final LineDrawable path = new LineDrawable(segment, isTrack ? trackStyle : routeStyle);
             trackLayer.add(path);
         });
+        trackLayer.update();
     }
 
 }
