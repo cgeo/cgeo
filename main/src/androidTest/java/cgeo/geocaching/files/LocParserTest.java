@@ -27,7 +27,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class LocParserTest {
 
     @Rule
-    private final CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
+    public final CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
 
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(tempList.getListId());

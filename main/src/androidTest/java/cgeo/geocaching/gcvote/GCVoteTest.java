@@ -17,7 +17,7 @@ public class GCVoteTest {
     private InputStream responseStream;
 
     @Before
-    protected void setUp() throws Exception {
+    public void setUp() throws Exception {
         responseStream = new ByteArrayInputStream(CgeoTestUtils.getFileContent(R.raw.gcvote).getBytes());
         responseStream.mark(CgeoTestUtils.getFileContent(R.raw.gcvote).getBytes().length + 1);
     }

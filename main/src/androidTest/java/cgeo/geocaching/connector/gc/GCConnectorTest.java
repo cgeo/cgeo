@@ -39,12 +39,12 @@ public class GCConnectorTest  {
             // redo search with a smaller viewport completely contained in the last one - should lead to an identical searchResult due to caching
             final Viewport viewport2 = new Viewport(new Geopoint("N 51° 36.500 E 7° 51.200"), new Geopoint("N 51° 36.750 E7° 51.400"));
             final SearchResult searchResult2 = ConnectorFactory.searchByViewport(viewport2);
-            assertThat(searchResult.equals(searchResult2)).isTrue();
+            assertThat(searchResult.equals(searchResult2));
 
             // redo search with a way bigger viewport - caching does not help here, so a new searchResult should be delivered
             final Viewport viewport3 = new Viewport(new Geopoint("N 51° 35.000 E 7° 50.000"), new Geopoint("N 51° 38.000 E7° 52.000"));
             final SearchResult searchResult3 = ConnectorFactory.searchByViewport(viewport3);
-            assertThat(!searchResult.equals(searchResult3)).isTrue();
+            assertThat(!searchResult.equals(searchResult3));
         }
     }
 

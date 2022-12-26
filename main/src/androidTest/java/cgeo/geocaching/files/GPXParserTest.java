@@ -47,7 +47,7 @@ public class GPXParserTest  {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
 
     @Rule
-    private CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
+    public CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
 
     @Test
     public void testGPXVersion100() throws Exception {
