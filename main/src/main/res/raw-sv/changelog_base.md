@@ -10,4 +10,4 @@
 ### Allmänt
 - API level change (compileSDK 32)
 - Update some dependant libraries
-- Ändra: Använd olika Android-mekanismer för att ta emot nedladdningar (för bättre kompatibilitet med Android 12+)
+- Förändring: Använd olika Android-mekanismer för att ta emot nedladdningar (för bättre kompatibilitet med Android 12+)
