@@ -10,18 +10,20 @@ import cgeo.geocaching.settings.TestSettings;
 
 import java.util.Calendar;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class LogTemplateProviderTest extends TestCase {
+public class LogTemplateProviderTest {
 
-    public static void testApplyTemplatesNone() {
+    @Test
+    public void testApplyTemplatesNone() {
         final String noTemplates = " no templates ";
         final String signature = LogTemplateProvider.applyTemplates(noTemplates, new LogContext(null, null, true));
         assertThat(signature).isEqualTo(noTemplates);
     }
 
-    public static void testApplyTemplates() {
+    @Test
+    public void testApplyTemplates() {
         // This test can occasionally fail if the current year changes right after the next line.
         final String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
         final String signature = LogTemplateProvider.applyTemplates("[DATE]", new LogContext(null, null, true));
@@ -31,7 +33,8 @@ public class LogTemplateProviderTest extends TestCase {
     /**
      * signature itself can contain templates, therefore nested applying is necessary
      */
-    public static void testApplySignature() {
+    @Test
+    public void testApplySignature() {
         final String oldSignature = Settings.getSignature();
         try {
             TestSettings.setSignature("[DATE]");
@@ -50,7 +53,8 @@ public class LogTemplateProviderTest extends TestCase {
     /**
      * signature must not contain itself as template
      */
-    public static void testApplyInvalidSignature() {
+    @Test
+    public void testApplyInvalidSignature() {
         final String oldSignature = Settings.getSignature();
         try {
             final String signatureTemplate = "[SIGNATURE]";
@@ -62,7 +66,8 @@ public class LogTemplateProviderTest extends TestCase {
         }
     }
 
-    public static void testNoNumberIncrement() {
+    @Test
+    public void testNoNumberIncrement() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC45GGA");
         final LogContext context = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.FOUND_IT).build());
@@ -74,7 +79,8 @@ public class LogTemplateProviderTest extends TestCase {
         assertThat(Integer.parseInt(withIncrement) - Integer.parseInt(withoutIncrement)).isEqualTo(1);
     }
 
-    public static void testNumberLogTypeIncrement() {
+    @Test
+    public void testNumberLogTypeIncrement() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC45GGA");
         final LogContext context = new LogContext(cache, new LogEntry.Builder().setLogType(LogType.FOUND_IT).build());
@@ -93,14 +99,16 @@ public class LogTemplateProviderTest extends TestCase {
         return new LogContext(cache, new LogEntry.Builder().build());
     }
 
-    public static void testSizeTemplate() {
+    @Test
+    public void testSizeTemplate() {
         final LogContext context = createCache();
         context.getCache().setSize(CacheSize.VERY_LARGE);
         final String log = LogTemplateProvider.applyTemplates("[SIZE]", context);
         assertThat(log).isEqualTo(CacheSize.VERY_LARGE.getL10n());
     }
 
-    public static void testLocationTemplate() {
+    @Test
+    public void testLocationTemplate() {
         final LogContext context = createCache();
         Sensors.getInstance().currentGeo().reset();
         final String distance = Units.getDistanceFromMeters(0);

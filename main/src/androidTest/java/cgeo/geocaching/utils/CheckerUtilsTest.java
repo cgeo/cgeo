@@ -2,12 +2,13 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.models.Geocache;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class CheckerUtilsTest extends TestCase {
+public class CheckerUtilsTest {
 
-    public static void testGetCheckerUrl() throws Exception {
+    @Test
+    public void testGetCheckerUrl() {
         assertUrl("<p style=\"text-align:center;\"><a href=\"http://geocheck.org/geo_inputchkcoord.php?gid=618932716cc7e68-c4bb-4f41-8bb1-3e0a3e374a1f\" target=\"_blank\"><img", "http://geocheck.org/geo_inputchkcoord.php?gid=618932716cc7e68-c4bb-4f41-8bb1-3e0a3e374a1f");
         assertUrl("<p style=\"text-align:center;\"><a href=\"http://google.com/geo_inputchkcoord.php?gid=618932716cc7e68-c4bb-4f41-8bb1-3e0a3e374a1f\" target=\"_blank\"><img", null);
         assertUrl("http://www.certitudes.org/certitude?wp=GC5MVX7", "http://www.certitudes.org/certitude?wp=GC5MVX7");
@@ -17,7 +18,8 @@ public class CheckerUtilsTest extends TestCase {
         assertUrl("Deine Lösung für die Koordinaten dieses Multis kannst du auf geochecker.com überprüfen. <a href=\"http://www.geochecker.com/index.php?code=3a08a604fe68fd8d09417ae530bb671a&amp;action=check&amp;wp=4743354d523847&amp;name=4e534720556e74657265732046657565726261636874616c&amp;language=german\">GeoChecker.com</a>", "http://www.geochecker.com/index.php?code=3a08a604fe68fd8d09417ae530bb671a&action=check&wp=4743354d523847&name=4e534720556e74657265732046657565726261636874616c&language=german");
     }
 
-    public static void testAvoidNonLink() {
+    @Test
+    public void testAvoidNonLink() {
         assertUrl("some text... geochecker.com ... some more text", null);
     }
 

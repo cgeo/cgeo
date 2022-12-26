@@ -8,7 +8,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.CgeoTestUtils;
 
 import androidx.test.filters.Suppress;
 
@@ -38,6 +37,7 @@ public class DataStoreTestHelpers {
      */
     @Suppress
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     public void testCreateDummyCaches() {
 
         //add a manual guard to be extra sure that this is not executed by default!
@@ -55,12 +55,11 @@ public class DataStoreTestHelpers {
             final String geocode = dummyCaches.get(i).getGeocode();
             DataStore.saveLogs(geocode, createDummyLogsForCache(geocode, 30), true);
         }
-        CgeoTestUtils.assertDoesNotThrow(() -> {
-        });
     }
 
     @Suppress
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     public void testRemoveDummyCaches() {
         //add a manual guard to be extra sure that this is not executed by default!
         if (!EXECUTE_METHODS) {
@@ -73,8 +72,6 @@ public class DataStoreTestHelpers {
         }
         DataStore.removeCaches(dummyCacheCodes, EnumSet.of(LoadFlags.RemoveFlag.DB));
 
-        CgeoTestUtils.assertDoesNotThrow(() -> {
-        });
     }
 
 

@@ -6,10 +6,10 @@ import cgeo.geocaching.connector.IConnector;
 
 import java.util.Set;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeopeitusConnectorTest extends TestCase {
+public class GeopeitusConnectorTest {
 
     private static IConnector getGeopeitusConnector() {
         final IConnector geopeitusConnector = ConnectorFactory.getConnector("GE1234");
@@ -17,14 +17,16 @@ public class GeopeitusConnectorTest extends TestCase {
         return geopeitusConnector;
     }
 
-    public static void testCanHandle() {
+    @Test
+    public void testCanHandle() {
         final IConnector wmConnector = getGeopeitusConnector();
 
         assertThat(wmConnector.canHandle("GE1234")).isTrue();
         assertThat(wmConnector.canHandle("GEAB12")).isFalse();
     }
 
-    public static void testHandledGeocodes() {
+    @Test
+    public void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getGeopeitusConnector().handledGeocodes(geocodes)).containsOnly("GE1234", "GE5678");
     }

@@ -8,45 +8,52 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class TrackableTest extends TestCase {
+public class TrackableTest  {
 
-    public static void testGetGeocode() {
+    @Test
+    public void testGetGeocode() {
         final Trackable trackable = createTrackable("tb1234");
         assertThat(trackable.getGeocode()).isEqualTo("TB1234");
     }
 
-    public static void testGetUniqueID() {
+    @Test
+    public void testGetUniqueID() {
         final Trackable trackable = createTrackable("tb1234");
         assertThat(trackable.getUniqueID()).isEqualTo("TB1234");
         trackable.setGuid("1234-567-890");
         assertThat(trackable.getUniqueID()).isEqualTo("1234-567-890");
     }
 
-    public static void testSetLogsNull() {
+    @Test
+    public void testSetLogsNull() {
         final Trackable trackable = new Trackable();
         trackable.setLogs(null);
         assertThat(trackable.getLogs()).as("Trackable logs").isNotNull();
     }
 
-    public static void testTrackableUrl() {
+    @Test
+    public void testTrackableUrl() {
         final Trackable trackable = createTrackable("TB1234");
         assertThat(trackable.getUrl()).isEqualTo("https://www.geocaching.com//track/details.aspx?tracker=TB1234");
     }
 
-    public static void testGeokretUrl() {
+    @Test
+    public void testGeokretUrl() {
         final Trackable geokret = createTrackable("GK82A2");
         assertThat(geokret.getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=33442");
     }
 
-    public static void testLoggable() {
+    @Test
+    public void testLoggable() {
         assertThat(createTrackable("TB1234").isLoggable()).isTrue();
         assertThat(createTrackable("GK1234").isLoggable()).isTrue();
     }
 
-    public static void testMergeTrackable() {
+    @Test
+    public void testMergeTrackable() {
         final Trackable trackable1 = createTrackable("TB1234");
         final AbstractList<LogEntry> logEntryList1 = new ArrayList<>(1);
         final LogEntry logEntry1 = new LogEntry.Builder()

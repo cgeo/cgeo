@@ -33,11 +33,6 @@ public final class CgeoTestUtils {
         //no instance of utils class
     }
 
-    /** Replacement for JUNit 5 assert "does not Throw" */
-    public static void assertDoesNotThrow(final Runnable r) {
-        r.run();
-    }
-
     /**
      * Remove cache from DB and cache to ensure that the cache is not loaded from the database
      */
@@ -102,7 +97,7 @@ public final class CgeoTestUtils {
         }
     }
 
-    public static final Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
+    public static Geocache loadCacheFromResource(@RawRes final int resourceId) throws IOException, ParserException {
         final InputStream instream = getResourceStream(resourceId);
         try {
             final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);

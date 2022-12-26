@@ -8,7 +8,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
@@ -26,11 +25,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
+public class GpxSerializerTest {
 
-    public static void testWriteEmptyGPX() throws Exception {
+    @Test
+    public void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.emptyList(), writer, null);
         assertThat(removeWhitespaces(writer.getBuffer().toString())).isEqualTo(removeWhitespaces("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
@@ -48,6 +49,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
     }
 
+    @Test
     public void testProgressReporting() throws IOException, ParserException {
         final AtomicReference<Integer> importedCount = new AtomicReference<>(0);
         final StringWriter writer = new StringWriter();
@@ -56,12 +58,13 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache).isNotNull();
 
         new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, importedCount::set);
-        assertEquals("Progress listener not called", 1, importedCount.get().intValue());
+        assertThat(1).as("Progress listener not called").isEqualTo(importedCount.get().intValue());
     }
 
     /**
      * This test verifies that a loop of import, export, import leads to the same cache information.
      */
+    @Test
     public void testStableExportImportExport() throws IOException, ParserException {
         final String geocode = "GC1BKP3";
         final int cacheResource = R.raw.gc1bkp3_gpx101;
@@ -93,27 +96,32 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         return writer.toString();
     }
 
-    public static void testStateFromStateCountry() throws Exception {
+    @Test
+    public void testStateFromStateCountry() throws Exception {
         final Geocache cache = withLocation("state, country");
         assertThat(GpxSerializer.getState(cache)).isEqualTo("state");
     }
 
-    public static void testCountryFromStateCountry() throws Exception {
+    @Test
+    public void testCountryFromStateCountry() throws Exception {
         final Geocache cache = withLocation("state, country");
         assertThat(GpxSerializer.getCountry(cache)).isEqualTo("country");
     }
 
-    public static void testCountryFromCountryOnly() throws Exception {
+    @Test
+    public void testCountryFromCountryOnly() throws Exception {
         final Geocache cache = withLocation("somewhere");
         assertThat(GpxSerializer.getCountry(cache)).isEqualTo("somewhere");
     }
 
-    public static void testStateFromCountryOnly() throws Exception {
+    @Test
+    public void testStateFromCountryOnly() throws Exception {
         final Geocache cache = withLocation("somewhere");
         assertThat(GpxSerializer.getState(cache)).isEmpty();
     }
 
-    public static void testCountryFromExternalCommaString() throws Exception {
+    @Test
+    public void testCountryFromExternalCommaString() throws Exception {
         final Geocache cache = withLocation("first,second"); // this was not created by c:geo, therefore don't split it
         assertThat(GpxSerializer.getState(cache)).isEmpty();
     }
@@ -124,6 +132,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         return cache;
     }
 
+    @Test
     public void testWaypointSym() throws IOException, ParserException {
         final String geocode = "GC1BKP3";
         try {
@@ -139,6 +148,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    @Test
     public void testDTNumbersAreIntegers() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
         CgeoTestUtils.loadCacheFromResource(cacheResource);
@@ -149,6 +159,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertEqualTags(imported, exported, "groundspeak:terrain");
     }
 
+    @Test
     public void testStatusSameCaseAfterExport() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
         CgeoTestUtils.loadCacheFromResource(cacheResource);
@@ -158,6 +169,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertEqualTags(imported, exported, "groundspeak:type");
     }
 
+    @Test
     public void testSameFieldsAfterExport() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
         CgeoTestUtils.loadCacheFromResource(cacheResource);
@@ -185,6 +197,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertEqualTags(imported, exported, "groundspeak:date");
     }
 
+    @Test
     public void testUserDefinedCacheEmpty() throws IOException, ParserException {
         final String geocode = "ZZ1000";
         try {
@@ -199,6 +212,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    @Test
     public void testWaypointEmpty() throws IOException, ParserException {
         final String geocode = "GC31J2H";
         try {
@@ -216,6 +230,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    @Test
     public void testDNFState() throws IOException, ParserException {
         final String geocode = "GC3T1XG";
         try {

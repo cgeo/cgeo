@@ -15,7 +15,6 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.test.CgeoTestUtils;
 import static cgeo.geocaching.enumerations.LoadFlags.REMOVE_ALL;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -110,9 +108,10 @@ public class DataStoreTest {
 
     // Check that queries don't throw an exception (see issue #1429).
     @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
     public void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
-        CgeoTestUtils.assertDoesNotThrow(() -> DataStore.loadWaypoints(viewport));
+        DataStore.loadWaypoints(viewport);
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)

@@ -19,30 +19,30 @@ public class LogicalGeocacheFilterTest {
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void andFilter() {
-        testLogicFilter(new AndGeocacheFilter(), true, getConstantFilter(true), getConstantFilter(true));
-        testLogicFilter(new AndGeocacheFilter(), false, getConstantFilter(false), getConstantFilter(true));
-        testLogicFilter(new AndGeocacheFilter(), null, getConstantFilter(null), getConstantFilter(true));
+        assertLogicFilter(new AndGeocacheFilter(), true, getConstantFilter(true), getConstantFilter(true));
+        assertLogicFilter(new AndGeocacheFilter(), false, getConstantFilter(false), getConstantFilter(true));
+        assertLogicFilter(new AndGeocacheFilter(), null, getConstantFilter(null), getConstantFilter(true));
     }
 
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void orFilter() {
-        testLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(true), getConstantFilter(true));
-        testLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(false), getConstantFilter(true));
-        testLogicFilter(new OrGeocacheFilter(), false, getConstantFilter(false), getConstantFilter(false));
-        testLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(null), getConstantFilter(true));
-        testLogicFilter(new OrGeocacheFilter(), null, getConstantFilter(null), getConstantFilter(false));
+        assertLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(true), getConstantFilter(true));
+        assertLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(false), getConstantFilter(true));
+        assertLogicFilter(new OrGeocacheFilter(), false, getConstantFilter(false), getConstantFilter(false));
+        assertLogicFilter(new OrGeocacheFilter(), true, getConstantFilter(null), getConstantFilter(true));
+        assertLogicFilter(new OrGeocacheFilter(), null, getConstantFilter(null), getConstantFilter(false));
     }
 
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void notFilter() {
-        testLogicFilter(new NotGeocacheFilter(), false, getConstantFilter(true));
-        testLogicFilter(new NotGeocacheFilter(), true, getConstantFilter(false));
-        testLogicFilter(new NotGeocacheFilter(), null, getConstantFilter(null));
+        assertLogicFilter(new NotGeocacheFilter(), false, getConstantFilter(true));
+        assertLogicFilter(new NotGeocacheFilter(), true, getConstantFilter(false));
+        assertLogicFilter(new NotGeocacheFilter(), null, getConstantFilter(null));
     }
 
-    private static void testLogicFilter(final LogicalGeocacheFilter filter, final Boolean expectedResult, final IGeocacheFilter... children) {
+    private static void assertLogicFilter(final LogicalGeocacheFilter filter, final Boolean expectedResult, final IGeocacheFilter... children) {
         for (IGeocacheFilter child : children) {
             filter.addChild(child);
         }

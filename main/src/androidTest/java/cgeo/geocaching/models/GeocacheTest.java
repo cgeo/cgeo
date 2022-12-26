@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.test.CgeoTestUtils;
 import static cgeo.geocaching.test.CgeoTestUtils.removeCacheCompletely;
 import static cgeo.geocaching.test.CgeoTestUtils.saveFreshCacheToDB;
 
@@ -25,6 +24,7 @@ import java.util.ListIterator;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@SuppressWarnings("PMD.ExcessiveClassLength")
 public class GeocacheTest {
 
     private static final class MockedEventCache extends Geocache {
@@ -183,7 +183,7 @@ public class GeocacheTest {
         wpList.add(new Waypoint("", null, "Personal note 2", "", "", WaypointType.OWN));
         assertWaypointsParsed(cache, "Test N51 13.888 E007 03.444\nTest (NO-COORD)", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -219,7 +219,7 @@ public class GeocacheTest {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.555"), "Personal note 1", "", "User Note", WaypointType.OWN));
         assertWaypointsParsed(cache, "N51 13.888 E007 03.555 \"User Note\" \n N51 13.888 E007 03.666", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -247,7 +247,7 @@ public class GeocacheTest {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.444"), "Test", "", "NewNote", WaypointType.OWN));
         assertWaypointsParsed(cache, "@Test N51 13.888 E007 03.444 \"NewNote\"", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -272,7 +272,7 @@ public class GeocacheTest {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.444"), "Test", "", "UserNote", WaypointType.OWN));
         assertWaypointsParsed(cache, "@Test N51 13.888 E007 03.444 \"NewNote\"", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -297,7 +297,7 @@ public class GeocacheTest {
         wpList.add(createWaypointWithUserNote(userWpGeopoint, "Test", "", "NewNote", WaypointType.OWN));
         assertWaypointsParsed(cache, "@Test (NO-COORD) \"NewNote\"", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -324,7 +324,7 @@ public class GeocacheTest {
         final String parseableText = WaypointParser.getParseableText(wpList, null, false);
         assertWaypointsParsed(cache, parseableText, wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     @Test
@@ -348,7 +348,7 @@ public class GeocacheTest {
         assertThat(calcStateJson).isNotNull();
         assertThat(calcStateJson).contains("N 45° A.B(C+D)");
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -374,7 +374,7 @@ public class GeocacheTest {
         wpList.add(new Waypoint("", null, "Test", "", "", WaypointType.FINAL));
         assertWaypointsParsed(cache, "@Test (F) (NO-COORD)", wpList);
 
-        CgeoTestUtils.removeCacheCompletely(geocode);
+        removeCacheCompletely(geocode);
     }
 
     /**
@@ -894,6 +894,7 @@ public class GeocacheTest {
     }
 
     @Test
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
     public void testMergeInventory() {
         final Geocache cache = new Geocache();
 

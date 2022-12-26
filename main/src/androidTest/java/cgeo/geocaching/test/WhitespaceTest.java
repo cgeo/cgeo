@@ -7,20 +7,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.
  * It does not test semantical correctness.
  */
-public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
+public class WhitespaceTest {
 
     private static final int EXPECTED_SIZE = 122476;
     private String data;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         data = CgeoTestUtils.getFileContent(R.raw.gc2cjpf_html);
     }
 
@@ -52,6 +53,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         return StringUtils.join(StringUtils.split(data, " \n\r\t"), " ");
     }
 
+    @Test
     public void testRegex() {
         final Pattern pattern = Pattern.compile("\\s+");
         final long start = System.currentTimeMillis();
@@ -62,6 +64,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         Log.d((end - start) + " ms regex");
     }
 
+    @Test
     public void testReplaceAll() {
         final long start = System.currentTimeMillis();
         final String result = data.replaceAll("\\s+", " ");
@@ -70,6 +73,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         Log.d((end - start) + " ms replaceAll");
     }
 
+    @Test
     public void testActualImplementation() {
         final String result;
         final long start = System.currentTimeMillis();
@@ -79,6 +83,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         Log.d((end - start) + " ms actual implementation");
     }
 
+    @Test
     public void testManually() {
         final String result;
         final long start = System.currentTimeMillis();
@@ -88,6 +93,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         Log.d((end - start) + " ms manually");
     }
 
+    @Test
     public void testStringUtils() {
         final String result;
         final long start = System.currentTimeMillis();

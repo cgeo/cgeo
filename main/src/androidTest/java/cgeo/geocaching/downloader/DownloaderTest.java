@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 import android.net.Uri;
 
@@ -14,9 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
+public class DownloaderTest {
 
     private static List<Download> getList(final AbstractDownloader downloader, final String url) {
         final String page = Network.getResponseData(Network.getRequest(url));
@@ -47,7 +47,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         return null;
     }
 
-    public static void testMapsforge() {
+    @Test
+    public void testMapsforge() {
         final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
@@ -70,7 +71,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(sizeInfoInt).isBetween(200, 250);
     }
 
-    public static void testOpenAndroMaps() {
+    @Test
+public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderOpenAndroMaps.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
@@ -93,7 +95,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(sizeInfoFloat).isBetween(1.6F, 2.0F);
     }
 
-    public static void testOpenAndroMapsThemes() {
+    @Test
+    public void testOpenAndroMapsThemes() {
         final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl));
 
         // number of themes
@@ -111,7 +114,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(d.getSizeInfo()).isBlank(); // no size info available
     }
 
-    public static void testFreizeitkarte() {
+    @Test
+    public void testFreizeitkarte() {
         final List<Download> list = getList(MapDownloaderFreizeitkarte.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of maps found
@@ -131,7 +135,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(sizeInfoFloat).isBetween(17.8F, 20.0F);
     }
 
-    public static void testFreizeitkarteThemes() {
+    @Test
+    public void testFreizeitkarteThemes() {
         final List<Download> list = getList(MapDownloaderFreizeitkarteThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of themes
@@ -151,7 +156,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(sizeInfoFloat).isBetween(350.0F, 360.0F);
     }
 
-    public static void testBRouterTiles() {
+    @Test
+    public void testBRouterTiles() {
         final List<Download> list = getList(BRouterTileDownloader.getInstance(), CgeoApplication.getInstance().getString(R.string.brouter_downloadurl));
 
         // number of tiles

@@ -3,7 +3,6 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.CgeoTemporaryListRule;
 import cgeo.geocaching.test.CgeoTestUtils;
 import static cgeo.geocaching.enumerations.CacheSize.MICRO;
@@ -22,16 +21,17 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class LocParserTest extends AbstractResourceInstrumentationTestCase {
+public class LocParserTest {
 
     @Rule
-    private CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
+    private final CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
 
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
         final LocParser parser = new LocParser(tempList.getListId());
-        Collection<Geocache> caches = null;
+        final Collection<Geocache> caches;
         final InputStream instream = CgeoTestUtils.getResourceStream(resourceId);
         try {
             caches = parser.parse(instream, null);
@@ -44,6 +44,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         return new ArrayList<>(caches);
     }
 
+    @Test
     public void testOCLoc() throws IOException, ParserException {
         final List<Geocache> caches = readLoc(oc5952_loc);
         assertThat(caches).hasSize(1);
@@ -55,6 +56,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.85968, 9.18740));
     }
 
+    @Test
     public void testGCLoc() throws IOException, ParserException {
         final List<Geocache> caches = readLoc(gc1bkp3_loc);
         assertThat(caches).hasSize(1);
@@ -69,6 +71,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getSize()).isEqualTo(MICRO);
     }
 
+    @Test
     public void testWaymarkingLoc() throws IOException, ParserException {
         final List<Geocache> waymarks = readLoc(waymarking_loc);
         assertThat(waymarks).hasSize(1);

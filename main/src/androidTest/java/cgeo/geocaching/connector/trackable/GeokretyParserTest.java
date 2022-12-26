@@ -5,7 +5,6 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -18,11 +17,13 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.junit.Test;
 import org.xml.sax.InputSource;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
+public class GeokretyParserTest  {
 
+    @Test
     public void testParse() throws Exception {
         final Application app = CgeoApplication.getInstance();
 
@@ -46,7 +47,8 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable2.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_post));
     }
 
-    public void testParseResponse() throws Exception {
+    @Test
+    public void testParseResponse() {
         final ImmutablePair<Integer, List<String>> response1 = GeokretyParser.parseResponse(CgeoTestUtils.getFileContent(R.raw.geokret142_xml));
         assertThat(response1).isNotNull();
         assertThat(response1.getLeft()).isNotNull();
@@ -71,7 +73,8 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(response3.getRight().get(1)).isEqualTo("Wrond date or time"); // sic
     }
 
-    public static void testGetType() throws Exception {
+    @Test
+    public void testGetType() throws Exception {
         final Application app = CgeoApplication.getInstance();
         assertThat(GeokretyParser.getType(0)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
         assertThat(GeokretyParser.getType(1)).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
@@ -82,7 +85,8 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(GeokretyParser.getType(42)).isNull();
     }
 
-    public void testParseNoValueFields() throws Exception {
+    @Test
+    public void testParseNoValueFields() {
         final Application app = CgeoApplication.getInstance();
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret146_xml)));
@@ -100,6 +104,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
     }
 
+    @Test
     public void testParseDescription() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret145_xml)));
         assertThat(trackables).hasSize(1);
@@ -116,6 +121,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
                 "Bitte ignorieren.");
     }
 
+    @Test
     public void testMissing() throws Exception {
         final List<Trackable> trackables1 = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret145_xml)));
         assertThat(trackables1).hasSize(1);
@@ -139,6 +145,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable4.isMissing()).isTrue();
     }
 
+    @Test
     public void testFullDetails() throws Exception {
         final Application app = CgeoApplication.getInstance();
 
@@ -163,6 +170,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getSpottedName()).isEqualTo("gueta");
     }
 
+    @Test
     public void testLogs() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret47496_details_xml)));
         assertThat(trackables).hasSize(1);
@@ -244,7 +252,8 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(image2.getUrl()).isEqualTo("https://geokrety.org/obrazki/1462213331lhaiu.png");
     }
 
-    public static void testGetLastSpottedUsername() throws Exception {
+    @Test
+    public void testGetLastSpottedUsername() throws Exception {
 
         final LogEntry note = new LogEntry.Builder()
                 .setLogType(LogType.NOTE)
@@ -330,6 +339,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(GeokretyParser.getLastSpottedUsername(logsEntries11)).isEqualTo(userUnknown);
     }
 
+    @Test
     public void testLogsWithComments() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret46072_details_xml)));
         assertThat(trackables).hasSize(1);

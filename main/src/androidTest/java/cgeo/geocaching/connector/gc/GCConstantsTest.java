@@ -3,16 +3,17 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.TextUtils;
 
-import android.test.AndroidTestCase;
-
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.Assert.fail;
 
-public class GCConstantsTest extends AndroidTestCase {
+public class GCConstantsTest {
 
     // adapt the following after downloading new mock html files
     public static final int MOCK_CACHES_FOUND = 5890;
 
-    public static void testLocation() {
+    @Test
+    public void testLocation() {
         // GC37GFJ
         assertThat(parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />")).isEqualTo("Bretagne, France");
         // GCV2R9
@@ -23,7 +24,8 @@ public class GCConstantsTest extends AndroidTestCase {
         return TextUtils.getMatch(html, GCConstants.PATTERN_LOCATION, true, "");
     }
 
-    public static void testCacheCount() {
+    @Test
+    public void testCacheCount() {
         assertCacheCount(MOCK_CACHES_FOUND, MockedCache.readCachePage("GC2CJPF"));
     }
 
@@ -42,20 +44,23 @@ public class GCConstantsTest extends AndroidTestCase {
      * </p>
      */
 
-    public static void testCacheCountOnline() {
+    @Test
+    public void testCacheCountOnline() {
         GCLogin.getInstance().logout();
         GCLogin.getInstance().setActualCachesFound(0);
         GCLogin.getInstance().login();
         assertThat(GCLogin.getInstance().getActualCachesFound()).isGreaterThan(0);
     }
 
-    public static void testConstants() {
+    @Test
+    public void testConstants() {
         final String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
         assertThat(TextUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, "")).isEqualTo("aKWZ");
         assertThat(TextUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK")).isTrue();
     }
 
-    public static void testTBWithSpecialChar() {
+    @Test
+    public void testTBWithSpecialChar() {
         // Incidentally, the site incorrectly escapes the "&" into "&amp;"
         final String page = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&amp;ravestorm</span>";
         assertThat(TextUtils.stripHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, ""))).isEqualTo("Schlauchen&ravestorm");

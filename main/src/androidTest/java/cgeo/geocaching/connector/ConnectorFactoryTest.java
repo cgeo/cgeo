@@ -5,31 +5,34 @@ import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
+public class ConnectorFactoryTest {
 
-    public static void testGetConnectors() {
+    @Test
+    public void testGetConnectors() {
         final Collection<IConnector> connectors = ConnectorFactory.getConnectors();
         assertThat(connectors).isNotNull();
         assertThat(connectors).isNotEmpty(); // unknown connector must exist
     }
 
-    public static void testCanHandle() {
+    @Test
+    public void testCanHandle() {
         assertThat(ConnectorFactory.canHandle("")).isFalse();
         assertThat(ConnectorFactory.canHandle("GC12345")).isTrue();
         assertThat(ConnectorFactory.canHandle("some string")).isTrue(); // using unknown connector
         assertThat(ConnectorFactory.canHandle("[/start with special char")).isFalse();
     }
 
-    public static void testGeocodeOpenCaching() {
+    @Test
+    public void testGeocodeOpenCaching() {
         assertThat(ConnectorFactory.getConnector("OZ12345")).isInstanceOf(OCConnector.class); // opencaching CZ
         assertThat(ConnectorFactory.getConnector("OC12345")).isInstanceOf(OCConnector.class); // opencaching DE
         assertThat(ConnectorFactory.getConnector("OU12345")).isInstanceOf(OCConnector.class); // opencaching US
@@ -38,7 +41,8 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getConnector("OP12345")).isInstanceOf(OCConnector.class); // opencaching PL
     }
 
-    public static void testGeocodeInvalidFormat() {
+    @Test
+    public void testGeocodeInvalidFormat() {
         // all codes are invalid
         assertThat(ConnectorFactory.getConnector("GC")).isInstanceOf(UnknownConnector.class);
         assertThat(ConnectorFactory.getConnector("OC")).isInstanceOf(UnknownConnector.class);
@@ -51,22 +55,26 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getConnector("OX-1234")).isInstanceOf(UnknownConnector.class);
     }
 
-    public static void testGetConnectorCgCache() {
+    @Test
+    public void testGetConnectorCgCache() {
         assertThat(ConnectorFactory.getConnector(new GC1ZXX2())).isEqualTo(GCConnector.getInstance());
     }
 
-    public static void testGetConnectorString() {
+    @Test
+    public void testGetConnectorString() {
         final IConnector connector = ConnectorFactory.getConnector("GC12345");
         assertThat(connector).isNotNull();
         assertThat(connector.getName()).isEqualTo(GCConnector.getInstance().getName());
     }
 
-    public static void testTrim() {
+    @Test
+    public void testTrim() {
         assertThat(ConnectorFactory.getConnector("   OZ12345   ")).isInstanceOf(OCConnector.class); // opencaching CZ
         assertThat(ConnectorFactory.getConnector("   OZ 12345   ")).isInstanceOf(UnknownConnector.class);
     }
 
-    public static void testGetGeocodeFromUrl() {
+    @Test
+    public void testGetGeocodeFromUrl() {
         assertThat(ConnectorFactory.getGeocodeFromURL("https://coord.info/GC34PJN")).isEqualTo("GC34PJN");
         assertThat(ConnectorFactory.getGeocodeFromURL("https://www.coord.info/GC34PJN")).isEqualTo("GC34PJN");
 
@@ -98,7 +106,8 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertThat(ConnectorFactory.getGeocodeFromURL("https://coord.info/gc77")).isEqualTo("GC77");
     }
 
-    public static void testGetTrackableFromURL() throws Exception {
+    @Test
+    public void testGetTrackableFromURL() throws Exception {
         assertThat(ConnectorFactory.getTrackableFromURL("https://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("https://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("https://geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");

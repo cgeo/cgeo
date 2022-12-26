@@ -2,12 +2,13 @@ package cgeo.geocaching.list;
 
 import cgeo.geocaching.storage.DataStore;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class StoredListTest extends TestCase {
+public class StoredListTest {
 
-    public static void testStandardListExists() {
+    @Test
+    public void testStandardListExists() {
         final StoredList list = getStandardList();
         assertThat(list).isNotNull();
     }
@@ -16,17 +17,20 @@ public class StoredListTest extends TestCase {
         return DataStore.getList(StoredList.STANDARD_LIST_ID);
     }
 
-    public static void testEquals() {
+    @Test
+    public void testEquals() {
         final StoredList list1 = getStandardList();
         final StoredList list2 = getStandardList();
         assertThat(list2).isEqualTo(list1);
     }
 
-    public static void testConcrete() {
+    @Test
+    public void testConcrete() {
         assertThat(getStandardList().isConcrete()).isTrue();
     }
 
-    public static void testTitleAndCountContainsTitle() {
+    @Test
+    public void testTitleAndCountContainsTitle() {
         assertThat(getStandardList().getTitleAndCount()).startsWith(getStandardList().getTitle());
     }
 }

@@ -1,17 +1,18 @@
 package cgeo.geocaching.files;
 
 import android.sax.RootElement;
-import android.test.AndroidTestCase;
 import android.util.Xml;
 
 import java.io.StringReader;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
+public class InvalidXMLCharacterFilterReaderTest {
 
-    public static void testFilterInvalid() throws Exception {
+    @Test
+    public void testFilterInvalid() throws Exception {
         final RootElement root = new RootElement("desc");
         final AtomicReference<String> description = new AtomicReference<>();
         root.setEndTextElementListener(description::set);
@@ -20,7 +21,8 @@ public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
         assertThat(description.get()).isEqualTo("Invaliddescription");
     }
 
-    public static void testGC5AYC6() throws Exception {
+    @Test
+    public void testGC5AYC6() throws Exception {
         final RootElement root = new RootElement("desc");
         final AtomicReference<String> description = new AtomicReference<>();
         root.setEndTextElementListener(description::set);

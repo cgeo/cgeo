@@ -1,19 +1,20 @@
 package cgeo.geocaching.enumerations;
 
-import android.test.AndroidTestCase;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class WaypointTypeTest extends AndroidTestCase {
+public class WaypointTypeTest {
 
-    public static void testFindById() {
+    @Test
+    public void testFindById() {
         assertThat(WaypointType.findById("random garbage")).isEqualTo(WaypointType.WAYPOINT);
     }
 
-    public static void testConvertWaypointSym2Type() {
+    @Test
+    public void testConvertWaypointSym2Type() {
         assertThat(WaypointType.fromGPXString("unknown sym")).isEqualTo(WaypointType.WAYPOINT);
 
         assertThat(WaypointType.fromGPXString("Parking area")).isEqualTo(WaypointType.PARKING);
@@ -33,7 +34,8 @@ public class WaypointTypeTest extends AndroidTestCase {
         assertThat(WaypointType.fromGPXString("unknown sym", "Virtual Stage")).isEqualTo(WaypointType.PUZZLE);
     }
 
-    public static void testUniqueShortId() {
+    @Test
+    public void testUniqueShortId() {
         final Set<String> shortIds = new HashSet<>();
         for (final WaypointType wpType : WaypointType.values()) {
             assertThat(shortIds.contains(wpType.getShortId())).isFalse();

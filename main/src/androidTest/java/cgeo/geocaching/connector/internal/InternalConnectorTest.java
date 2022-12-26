@@ -6,29 +6,32 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 import java.util.EnumSet;
 import java.util.Set;
 
 import org.assertj.core.api.AbstractBooleanAssert;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class InternalConnectorTest extends AbstractResourceInstrumentationTestCase {
+public class InternalConnectorTest {
 
-    public static void testPrefix() {
+    @Test
+    public void testPrefix() {
         assertThat(InternalConnector.PREFIX).isEqualTo("ZZ");
         assertThat(InternalConnector.GEOCODE_HISTORY_CACHE).isEqualTo("ZZ0");
         assertThat(InternalConnector.geocodeFromId(7)).isEqualTo("ZZ7");
     }
 
-    public static void testCanHandle() {
+    @Test
+    public void testCanHandle() {
         assertCanHandle("ZZ0").isTrue();
         assertCanHandle("GC12345").isFalse();
         assertCanHandle("ZZ1000").isTrue();
     }
 
-    public static void testInvalidChars() {
+    @Test
+    public void testInvalidChars() {
         assertCanHandle("ZZ123!").overridingErrorMessage("! is not allowed in UDC codes").isFalse();
     }
 
@@ -36,11 +39,13 @@ public class InternalConnectorTest extends AbstractResourceInstrumentationTestCa
         return assertThat(InternalConnector.getInstance().canHandle(geocode));
     }
 
-    public static void testHandledGeocodes() {
+    @Test
+    public void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(InternalConnector.getInstance().handledGeocodes(geocodes)).containsOnly("ZZ1");
     }
 
+    @Test
     public void testCreateZZ0() {
         InternalConnector.assertHistoryCacheExists(CgeoApplication.getInstance());
         final Geocache minimalCache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));

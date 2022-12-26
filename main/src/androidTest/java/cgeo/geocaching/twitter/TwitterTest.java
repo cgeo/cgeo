@@ -7,12 +7,13 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class TwitterTest extends TestCase {
+public class TwitterTest {
 
-    public static void testTrackableMessage() {
+    @Test
+    public void testTrackableMessage() {
         final String oldMessage = Settings.getTrackableTwitterMessage();
         try {
             TestSettings.setTrackableTwitterMessage("I touched [NAME] ([URL]).");
@@ -25,7 +26,8 @@ public class TwitterTest extends TestCase {
         }
     }
 
-    public static void testCacheMessage() {
+    @Test
+    public void testCacheMessage() {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("I found [NAME] ([URL]).");
@@ -38,7 +40,8 @@ public class TwitterTest extends TestCase {
         }
     }
 
-    public static void testCacheMessageWithLogContent() {
+    @Test
+    public void testCacheMessageWithLogContent() {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("[LOG]");
@@ -50,7 +53,8 @@ public class TwitterTest extends TestCase {
         }
     }
 
-    public static void testTrackableMessageWithLogContent() {
+    @Test
+    public void testTrackableMessageWithLogContent() {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setTrackableTwitterMessage("[LOG]");
@@ -62,7 +66,8 @@ public class TwitterTest extends TestCase {
         }
     }
 
-    public static void testAvoidDuplicateTags() {
+    @Test
+    public void testAvoidDuplicateTags() {
         final String oldMessage = Settings.getCacheTwitterMessage();
         try {
             TestSettings.setCacheTwitterMessage("[NAME] #cgeo #mytag");

@@ -2,12 +2,13 @@ package cgeo.geocaching.location;
 
 import android.os.Bundle;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeopointAndroidTest extends TestCase {
+public class GeopointAndroidTest {
 
-    public static void testParcelable() {
+    @Test
+    public void testParcelable() {
         final Geopoint gp = new Geopoint(1.2, 3.4);
         final String key = "geopoint";
         final Bundle bundle = new Bundle();

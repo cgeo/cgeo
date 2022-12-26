@@ -7,13 +7,15 @@ import cgeo.geocaching.settings.TestSettings;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.test.AndroidTestCase;
 
 import java.util.Locale;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class TextFactoryTest extends AndroidTestCase {
+public class TextFactoryTest {
 
     private static final Geopoint MY_POSITION = new Geopoint(15, -86);
     private static final Geopoint NORTH_6100M = new Geopoint(15.054859, -86);
@@ -28,9 +30,8 @@ public class TextFactoryTest extends AndroidTestCase {
     private Locale defaultLocale2;
     private boolean defaultMetric;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         final Resources resources = CgeoApplication.getInstance().getResources();
         final Configuration config = resources.getConfiguration();
         defaultLocale1 = config.locale;
@@ -38,13 +39,13 @@ public class TextFactoryTest extends AndroidTestCase {
         defaultMetric = !Settings.useImperialUnits();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() {
         setLocale(defaultLocale1, defaultLocale2, defaultMetric);
     }
 
-    public static void testGetTextEn() {
+    @Test
+    public void testGetTextEn() {
         setLocale(Locale.UK, true);
         assertThat(TextFactory.getText(MY_POSITION, NORTH_6100M, 330)).isEqualTo("one o'clock. 6 kilometers");
         assertThat(TextFactory.getText(MY_POSITION, WEST_1MILE, 0)).isEqualTo("9 o'clock. 1.6 kilometers");
@@ -64,7 +65,8 @@ public class TextFactoryTest extends AndroidTestCase {
         assertThat(TextFactory.getText(MY_POSITION, MY_POSITION, 0)).isEqualTo("12 o'clock. 0 feet");
     }
 
-    public static void testGetTextDe() {
+    @Test
+    public void testGetTextDe() {
         setLocale(Locale.GERMANY, true);
         assertThat(TextFactory.getText(MY_POSITION, NORTH_6100M, 330)).isEqualTo("ein Uhr. 6 Kilometer");
         assertThat(TextFactory.getText(MY_POSITION, WEST_1MILE, 0)).isEqualTo("9 Uhr. 1,6 Kilometer");
@@ -84,7 +86,8 @@ public class TextFactoryTest extends AndroidTestCase {
         assertThat(TextFactory.getText(MY_POSITION, MY_POSITION, 0)).isEqualTo("12 Uhr. 0 Fuß");
     }
 
-    public static void testGetTextFr() {
+    @Test
+    public void testGetTextFr() {
         setLocale(Locale.FRANCE, true);
         assertThat(TextFactory.getText(MY_POSITION, NORTH_6100M, 330)).isEqualTo("une heure. 6 kilomètres");
         assertThat(TextFactory.getText(MY_POSITION, WEST_1MILE, 0)).isEqualTo("9 heures. 1,6 kilomètres");
@@ -104,7 +107,8 @@ public class TextFactoryTest extends AndroidTestCase {
         assertThat(TextFactory.getText(MY_POSITION, MY_POSITION, 0)).isEqualTo("12 heures. 0 pied");
     }
 
-    public static void testGetTextIt() {
+    @Test
+    public void testGetTextIt() {
         setLocale(Locale.ITALY, true);
         assertThat(TextFactory.getText(MY_POSITION, NORTH_6100M, 330)).isEqualTo("a ore una. 6 chilometri");
         assertThat(TextFactory.getText(MY_POSITION, WEST_1MILE, 0)).isEqualTo("a ore 9. 1,6 chilometri");
@@ -124,7 +128,8 @@ public class TextFactoryTest extends AndroidTestCase {
         assertThat(TextFactory.getText(MY_POSITION, MY_POSITION, 0)).isEqualTo("a ore 12. 0 piedi");
     }
 
-    public static void testGetTextSv() {
+    @Test
+    public void testGetTextSv() {
         setLocale(new Locale("sv", "SE"), true);
         assertThat(TextFactory.getText(MY_POSITION, NORTH_6100M, 330)).isEqualTo("Klockan ett. 6 kilometer");
         assertThat(TextFactory.getText(MY_POSITION, WEST_1MILE, 0)).isEqualTo("Klockan 9. 1,6 kilometer");

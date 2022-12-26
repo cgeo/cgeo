@@ -24,6 +24,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * </p>
  */
 
+@SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
 public class WatchdogTest {
 
     @NotForIntegrationTests
