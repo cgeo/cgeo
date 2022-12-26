@@ -4,6 +4,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTemporaryListRule;
+import cgeo.geocaching.test.CgeoTestUtils;
 import static cgeo.geocaching.enumerations.CacheSize.MICRO;
 import static cgeo.geocaching.enumerations.CacheSize.UNKNOWN;
 import static cgeo.geocaching.test.R.raw.gc1bkp3_loc;
@@ -19,13 +21,18 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Rule;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LocParserTest extends AbstractResourceInstrumentationTestCase {
+
+    @Rule
+    private CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
+
     private List<Geocache> readLoc(@RawRes final int resourceId) throws IOException, ParserException {
-        final LocParser parser = new LocParser(getTemporaryListId());
+        final LocParser parser = new LocParser(tempList.getListId());
         Collection<Geocache> caches = null;
-        final InputStream instream = getResourceStream(resourceId);
+        final InputStream instream = CgeoTestUtils.getResourceStream(resourceId);
         try {
             caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();

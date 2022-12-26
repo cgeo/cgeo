@@ -5,6 +5,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -87,7 +88,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private Trackable parseTrackable(final int trackablePage) {
-        final String pageContent = getFileContent(trackablePage);
+        final String pageContent = CgeoTestUtils.getFileContent(trackablePage);
         return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
     }
 
@@ -106,7 +107,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableNotExisting() {
-        final Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
+        final Trackable trackable = GCParser.parseTrackable(CgeoTestUtils.getFileContent(R.raw.tb_not_existing), null);
         assertThat(trackable).isNull();
     }
 

@@ -9,6 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final AtomicReference<Integer> importedCount = new AtomicReference<>(0);
         final StringWriter writer = new StringWriter();
 
-        final Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);
+        final Geocache cache = CgeoTestUtils.loadCacheFromResource(R.raw.gc1bkp3_gpx101);
         assertThat(cache).isNotNull();
 
         new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, importedCount::set);
@@ -64,7 +65,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     public void testStableExportImportExport() throws IOException, ParserException {
         final String geocode = "GC1BKP3";
         final int cacheResource = R.raw.gc1bkp3_gpx101;
-        final Geocache cache = loadCacheFromResource(cacheResource);
+        final Geocache cache = CgeoTestUtils.loadCacheFromResource(cacheResource);
         assertThat(cache).isNotNull();
 
         final String gpxFirst = getGPXFromCache(geocode);
@@ -127,7 +128,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final String geocode = "GC1BKP3";
         try {
             final int cacheResource = R.raw.gc1bkp3_gpx101;
-            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Geocache cache = CgeoTestUtils.loadCacheFromResource(cacheResource);
             final Waypoint waypoint = new Waypoint("WP", WaypointType.PARKING, false);
             waypoint.setCoords(cache.getCoords());
             cache.addOrChangeWaypoint(waypoint, true);
@@ -140,29 +141,29 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
     public void testDTNumbersAreIntegers() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
-        loadCacheFromResource(cacheResource);
+        CgeoTestUtils.loadCacheFromResource(cacheResource);
 
         final String exported = getGPXFromCache("GC31J2H");
-        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
+        final String imported = IOUtils.toString(CgeoTestUtils.getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
         assertEqualTags(imported, exported, "groundspeak:difficulty");
         assertEqualTags(imported, exported, "groundspeak:terrain");
     }
 
     public void testStatusSameCaseAfterExport() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
-        loadCacheFromResource(cacheResource);
+        CgeoTestUtils.loadCacheFromResource(cacheResource);
 
         final String exported = getGPXFromCache("GC31J2H");
-        final String imported = IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
+        final String imported = IOUtils.toString(CgeoTestUtils.getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8);
         assertEqualTags(imported, exported, "groundspeak:type");
     }
 
     public void testSameFieldsAfterExport() throws IOException, ParserException {
         final int cacheResource = R.raw.gc31j2h;
-        loadCacheFromResource(cacheResource);
+        CgeoTestUtils.loadCacheFromResource(cacheResource);
 
         final String exported = extractWaypoint(getGPXFromCache("GC31J2H"));
-        final String imported = extractWaypoint(IOUtils.toString(getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8));
+        final String imported = extractWaypoint(IOUtils.toString(CgeoTestUtils.getResourceStream(R.raw.gc31j2h), StandardCharsets.UTF_8));
 
         assertEqualTags(imported, exported, "time");
         assertEqualTags(imported, exported, "name");
@@ -188,7 +189,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final String geocode = "ZZ1000";
         try {
             final int cacheResource = R.raw.zz1000;
-            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Geocache cache = CgeoTestUtils.loadCacheFromResource(cacheResource);
             assertThat(cache.getCoords()).isNull();
 
             final String gpxFromCache = getGPXFromCache(geocode);
@@ -202,7 +203,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final String geocode = "GC31J2H";
         try {
             final int cacheResource = R.raw.gc31j2h;
-            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Geocache cache = CgeoTestUtils.loadCacheFromResource(cacheResource);
             final Waypoint waypoint = new Waypoint("WP", WaypointType.FINAL, false);
             waypoint.setOriginalCoordsEmpty(true);
             cache.addOrChangeWaypoint(waypoint, true);
@@ -220,7 +221,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         try {
             final int cacheResource = R.raw.gc3t1xg_gsak_dnf;
 
-            final Geocache cache = loadCacheFromResource(cacheResource);
+            final Geocache cache = CgeoTestUtils.loadCacheFromResource(cacheResource);
             assertThat(cache.isDNF()).isTrue();
 
             final String gpxString = getGPXFromCache(geocode);

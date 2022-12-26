@@ -6,6 +6,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
@@ -25,7 +26,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     public void testParse() throws Exception {
         final Application app = CgeoApplication.getInstance();
 
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
 
         // Check first GK in list
@@ -46,7 +47,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testParseResponse() throws Exception {
-        final ImmutablePair<Integer, List<String>> response1 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret142_xml));
+        final ImmutablePair<Integer, List<String>> response1 = GeokretyParser.parseResponse(CgeoTestUtils.getFileContent(R.raw.geokret142_xml));
         assertThat(response1).isNotNull();
         assertThat(response1.getLeft()).isNotNull();
         assertThat(response1.getLeft()).isEqualTo(0);
@@ -55,14 +56,14 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(response1.getRight().get(0)).isEqualTo("Identical log has been submited.");
         assertThat(response1.getRight().get(1)).isEqualTo("There is an entry with this date. Correct the date or the hour.");
 
-        final ImmutablePair<Integer, List<String>> response2 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret143_xml));
+        final ImmutablePair<Integer, List<String>> response2 = GeokretyParser.parseResponse(CgeoTestUtils.getFileContent(R.raw.geokret143_xml));
         assertThat(response2).isNotNull();
         assertThat(response2.getLeft()).isNotNull();
         assertThat(response2.getLeft()).isEqualTo(27334);
         assertThat(response2.getRight()).isNotNull();
         assertThat(response2.getRight()).hasSize(0);
 
-        final ImmutablePair<Integer, List<String>> response3 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret144_xml));
+        final ImmutablePair<Integer, List<String>> response3 = GeokretyParser.parseResponse(CgeoTestUtils.getFileContent(R.raw.geokret144_xml));
         assertThat(response3).isNotNull();
         assertThat(response3.getLeft()).isNotNull().isEqualTo(0);
         assertThat(response3.getRight()).isNotNull().hasSize(2);
@@ -84,7 +85,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     public void testParseNoValueFields() throws Exception {
         final Application app = CgeoApplication.getInstance();
 
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret146_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret146_xml)));
         assertThat(trackables).hasSize(1);
 
         final Trackable trackable1 = trackables.get(0);
@@ -100,7 +101,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testParseDescription() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret145_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret145_xml)));
         assertThat(trackables).hasSize(1);
 
         // Check first GK in list
@@ -116,19 +117,19 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testMissing() throws Exception {
-        final List<Trackable> trackables1 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret145_xml)));
+        final List<Trackable> trackables1 = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret145_xml)));
         assertThat(trackables1).hasSize(1);
         final Trackable trackable1 = trackables1.get(0);
         assertThat(trackable1).isNotNull();
         assertThat(trackable1.isMissing()).isTrue();
 
-        final List<Trackable> trackables2 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret146_xml)));
+        final List<Trackable> trackables2 = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret146_xml)));
         assertThat(trackables2).hasSize(1);
         final Trackable trackable2 = trackables2.get(0);
         assertThat(trackable2).isNotNull();
         assertThat(trackable2.isMissing()).isFalse();
 
-        final List<Trackable> trackables3 = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        final List<Trackable> trackables3 = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables3).hasSize(2);
         final Trackable trackable3 = trackables3.get(0);
         assertThat(trackable3).isNotNull();
@@ -141,7 +142,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     public void testFullDetails() throws Exception {
         final Application app = CgeoApplication.getInstance();
 
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret47496_details_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret47496_details_xml)));
         assertThat(trackables).hasSize(1);
 
         final Trackable trackable1 = trackables.get(0);
@@ -163,7 +164,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testLogs() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret47496_details_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret47496_details_xml)));
         assertThat(trackables).hasSize(1);
         final Trackable trackable1 = trackables.get(0);
 
@@ -330,7 +331,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testLogsWithComments() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret46072_details_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret46072_details_xml)));
         assertThat(trackables).hasSize(1);
         final Trackable trackable1 = trackables.get(0);
 

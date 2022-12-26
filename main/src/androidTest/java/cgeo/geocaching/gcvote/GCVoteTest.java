@@ -1,6 +1,7 @@
 package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
 import java.io.ByteArrayInputStream;
@@ -17,8 +18,8 @@ public class GCVoteTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        responseStream = new ByteArrayInputStream(getFileContent(R.raw.gcvote).getBytes());
-        responseStream.mark(getFileContent(R.raw.gcvote).getBytes().length + 1);
+        responseStream = new ByteArrayInputStream(CgeoTestUtils.getFileContent(R.raw.gcvote).getBytes());
+        responseStream.mark(CgeoTestUtils.getFileContent(R.raw.gcvote).getBytes().length + 1);
     }
 
     private InputStream responseStream() {

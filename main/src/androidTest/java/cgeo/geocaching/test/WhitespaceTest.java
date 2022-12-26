@@ -21,7 +21,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        data = getFileContent(R.raw.gc2cjpf_html);
+        data = CgeoTestUtils.getFileContent(R.raw.gc2cjpf_html);
     }
 
     /**

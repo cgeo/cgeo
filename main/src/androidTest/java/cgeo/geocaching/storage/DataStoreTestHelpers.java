@@ -8,6 +8,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.test.CgeoTestUtils;
 
 import androidx.test.filters.Suppress;
 
@@ -54,6 +55,8 @@ public class DataStoreTestHelpers {
             final String geocode = dummyCaches.get(i).getGeocode();
             DataStore.saveLogs(geocode, createDummyLogsForCache(geocode, 30), true);
         }
+        CgeoTestUtils.assertDoesNotThrow(() -> {
+        });
     }
 
     @Suppress
@@ -69,6 +72,9 @@ public class DataStoreTestHelpers {
             dummyCacheCodes.add(getArtificialGeocode(i));
         }
         DataStore.removeCaches(dummyCacheCodes, EnumSet.of(LoadFlags.RemoveFlag.DB));
+
+        CgeoTestUtils.assertDoesNotThrow(() -> {
+        });
     }
 
 

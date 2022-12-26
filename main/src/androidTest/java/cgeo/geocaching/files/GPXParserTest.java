@@ -16,6 +16,8 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sorting.GeocodeComparator;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTemporaryListRule;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -35,10 +37,14 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.compress.utils.IOUtils;
+import org.junit.Rule;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
+
+    @Rule
+    private CgeoTemporaryListRule tempList = new CgeoTemporaryListRule();
 
     public void testGPXVersion100() throws Exception {
         final Geocache cache = readAndAssertTreasureIsland(R.raw.gc1bkp3_gpx100);
@@ -92,7 +98,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGc31j2h() throws IOException, ParserException {
-        removeCacheCompletely("GC31J2H");
+        CgeoTestUtils.removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h);
         assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
@@ -105,7 +111,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGc31j2hWpts() throws IOException, ParserException {
-        removeCacheCompletely("GC31J2H");
+        CgeoTestUtils.removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
         assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
@@ -114,7 +120,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGc31j2hWptsEmptyCoord() throws IOException, ParserException {
-        removeCacheCompletely("GC31J2H");
+        CgeoTestUtils.removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts_empty_coord);
         assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
@@ -131,7 +137,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testGc31j2hWptsOriginal() throws IOException, ParserException {
-        removeCacheCompletely("GC31J2H");
+        CgeoTestUtils.removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts_original);
         assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
@@ -147,7 +153,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testOCddd2WptsEmptyCoord() throws IOException, ParserException {
-        removeCacheCompletely("OCDDD2");
+        CgeoTestUtils.removeCacheCompletely("OCDDD2");
         final List<Geocache> caches = readGPX10(R.raw.ocddd2, R.raw.ocddd2_empty_coord);
         assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
@@ -289,19 +295,19 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private List<Geocache> readGPX10(@RawRes final int... resourceIds) throws IOException, ParserException {
-        final GPX10Parser parser = new GPX10Parser(getTemporaryListId());
+        final GPX10Parser parser = new GPX10Parser(tempList.getListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
     private List<Geocache> readGPX11(final int... resourceIds) throws IOException, ParserException {
-        final GPX11Parser parser = new GPX11Parser(getTemporaryListId());
+        final GPX11Parser parser = new GPX11Parser(tempList.getListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
     private List<Geocache> readVersionedGPX(final GPXParser parser, @RawRes final int... resourceIds) throws IOException, ParserException {
         final Set<String> result = new HashSet<>();
         for (final int resourceId : resourceIds) {
-            final InputStream instream = getResourceStream(resourceId);
+            final InputStream instream = CgeoTestUtils.getResourceStream(resourceId);
             try {
                 final Collection<Geocache> caches = parser.parse(instream, null);
                 assertThat(caches).isNotNull();
@@ -340,7 +346,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     public void testLazyLogLoading() throws IOException, ParserException {
         // this test should be in CacheTest, but it is easier to create here due to the GPX import abilities
         final String geocode = "GC31J2H";
-        removeCacheCompletely(geocode);
+        CgeoTestUtils.removeCacheCompletely(geocode);
         final List<Geocache> caches = readGPX10(R.raw.lazy);
         assertThat(caches).hasSize(1);
         DataStore.removeAllFromCache();
@@ -353,12 +359,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(minimalCache.getAttributes()).isNotEmpty();
         assertThat(minimalCache.getLogs()).isNotEmpty();
 
-        removeCacheCompletely(geocode);
+        CgeoTestUtils.removeCacheCompletely(geocode);
     }
 
     public void testDuplicateImport() throws IOException, ParserException {
         final String geocode = "GC31J2H";
-        removeCacheCompletely(geocode);
+        CgeoTestUtils.removeCacheCompletely(geocode);
 
         // first import
         List<Geocache> caches = readGPX10(R.raw.lazy);
@@ -370,7 +376,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(caches).hasSize(1);
         assertThat(caches.get(0).getLogs()).hasSize(6);
 
-        removeCacheCompletely(geocode);
+        CgeoTestUtils.removeCacheCompletely(geocode);
     }
 
     public void testWaymarking() throws Exception {

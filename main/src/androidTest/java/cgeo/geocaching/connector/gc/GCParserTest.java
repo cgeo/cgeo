@@ -13,6 +13,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -43,7 +44,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private void assertUnpublished(final int cache) {
-        final String page = getFileContent(cache);
+        final String page = CgeoTestUtils.getFileContent(cache);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isTrue();
@@ -61,7 +62,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private void assertPublishedCache(final int cachePage, final String cacheName) {
-        final String page = getFileContent(cachePage);
+        final String page = CgeoTestUtils.getFileContent(cachePage);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.getCount()).isEqualTo(1);
@@ -249,7 +250,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     @Nullable
     private Geocache parseCache(@RawRes final int resourceId) {
-        final String page = getFileContent(resourceId);
+        final String page = CgeoTestUtils.getFileContent(resourceId);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isFalse();
@@ -258,7 +259,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     @MediumTest
     public void testTrackableNotActivated() {
-        final String page = getFileContent(R.raw.tb123e_html);
+        final String page = CgeoTestUtils.getFileContent(R.raw.tb123e_html);
         final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
         assertThat(trackable).isNotNull();
         assertThat(trackable.getGeocode()).isEqualTo("TB123E");

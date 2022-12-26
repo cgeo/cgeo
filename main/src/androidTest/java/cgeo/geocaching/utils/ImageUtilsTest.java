@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
 import java.io.ByteArrayOutputStream;
@@ -19,7 +20,7 @@ public class ImageUtilsTest extends AbstractResourceInstrumentationTestCase {
         final byte[] decodedImage = outputStream.toByteArray();
         outputStream.close();
         assertThat(decodedImage.length).as("decoded image size").isEqualTo(409);
-        final InputStream originalStream = getResourceStream(R.raw.small_file);
+        final InputStream originalStream = CgeoTestUtils.getResourceStream(R.raw.small_file);
         final byte[] originalImage = new byte[409];
         assertEquals("original image has the right size (consistency check)", 409, originalStream.read(originalImage));
         originalStream.close();

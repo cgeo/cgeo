@@ -1,6 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
 import android.content.ContentResolver;
@@ -46,7 +47,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
     }
 
     private void assertFileType(@RawRes final int resourceId, @NonNull final FileType fileType) {
-        final Uri resourceURI = getResourceURI(resourceId);
+        final Uri resourceURI = CgeoTestUtils.getResourceURI(resourceId);
         final FileContentResolver contentResolver = new FileContentResolver(getInstrumentation().getContext());
         assertThat(new FileTypeDetector(resourceURI, contentResolver).getFileType()).isEqualTo(fileType);
     }

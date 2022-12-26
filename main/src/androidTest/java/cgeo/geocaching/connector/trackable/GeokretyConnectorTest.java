@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     }
 
     public void testGetUrl() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
         assertThat(trackables.get(0).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46464");
         assertThat(trackables.get(1).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46465");
@@ -81,7 +82,7 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
     }
 
     public void testGetIconBrand() throws Exception {
-        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
         assertThat(trackables).extracting("brand").containsOnly(TrackableBrand.GEOKRETY, TrackableBrand.GEOKRETY);
     }
