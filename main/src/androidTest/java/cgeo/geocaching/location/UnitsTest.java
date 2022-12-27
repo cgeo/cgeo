@@ -1,13 +1,14 @@
 package cgeo.geocaching.location;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.Assert.fail;
 
-public class UnitsTest extends CGeoTestCase {
+public class UnitsTest {
 
     private static void assertDistance(final String expected, final float distance) {
         final String actual = Units.getDistanceFromKilometers(distance);
@@ -19,6 +20,7 @@ public class UnitsTest extends CGeoTestCase {
     }
 
     // Make method non-static so that Settings is initialized
+    @Test
     public void testDistance() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.useImperialUnits();
@@ -40,6 +42,7 @@ public class UnitsTest extends CGeoTestCase {
         }
     }
 
+    @Test
     public void testSpeed() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.useImperialUnits();

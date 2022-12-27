@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.CgeoApplicationTest;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -12,7 +13,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -32,18 +33,20 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GCParserTest extends AbstractResourceInstrumentationTestCase {
+public class GCParserTest {
 
     @SmallTest
+    @Test
     public void testUnpublishedCacheNotOwner() {
         final int cache = R.raw.cache_unpublished;
         assertUnpublished(cache);
     }
 
     private void assertUnpublished(final int cache) {
-        final String page = getFileContent(cache);
+        final String page = CgeoTestUtils.getFileContent(cache);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isTrue();
@@ -51,17 +54,19 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @SmallTest
+    @Test
     public void testPublishedCacheWithUnpublishedInDescription1() {
         assertPublishedCache(R.raw.gc430fm_published, "Cache is Unpublished");
     }
 
     @SmallTest
+    @Test
     public void testPublishedCacheWithUnpublishedInDescription2() {
         assertPublishedCache(R.raw.gc431f2_published, "Needle in a Haystack");
     }
 
     private void assertPublishedCache(final int cachePage, final String cacheName) {
-        final String page = getFileContent(cachePage);
+        final String page = CgeoTestUtils.getFileContent(cachePage);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.getCount()).isEqualTo(1);
@@ -71,13 +76,14 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testOwnCache() {
         final Geocache cache = parseCache(R.raw.own_cache);
         assertThat(cache).isNotNull();
         assertThat(cache.getSpoilers()).as("spoilers").hasSize(2);
         final Image spoiler = cache.getSpoilers().get(1);
-        assertEquals("First spoiler image url wrong", "http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg", spoiler.getUrl());
-        assertEquals("First spoiler image text wrong", "SPOILER", spoiler.getTitle());
+        assertThat("http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg").as("First spoiler image url wrong").isEqualTo(spoiler.getUrl());
+        assertThat("SPOILER").as("First spoiler image text wrong").isEqualTo(spoiler.getTitle());
         assertThat(spoiler.getDescription()).as("First spoiler image description").isNull();
     }
 
@@ -103,9 +109,10 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     /**
-     * Test {@link GCParser#parseAndSaveCacheFromText(String, DisposableHandler)} with "mocked" data
+     * Test {@link GCParser#parseAndSaveCacheFromText(IConnector, String, DisposableHandler)} with "mocked" data
      */
     @MediumTest
+    @Test
     public void testParseCacheFromTextWithMockedData() {
         final String gcCustomDate = Settings.getGcCustomDate();
         try {
@@ -128,6 +135,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testWaypointsFromNote() {
         final Geocache cache = createCache(0);
 
@@ -176,6 +184,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testEditModifiedCoordinates() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC2ZN4G");
@@ -208,6 +217,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testWaypointParsing() {
         Geocache cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
@@ -219,6 +229,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testWaypointParsingEmptyCoords() {
         final Geocache cache = parseCache(R.raw.gc366bq);
         assertThat(cache).isNotNull();
@@ -233,6 +244,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testNoteParsingWaypointTypes() {
         final Geocache cache = new Geocache();
         cache.setWaypoints(new ArrayList<>(), false);
@@ -249,7 +261,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     @Nullable
     private Geocache parseCache(@RawRes final int resourceId) {
-        final String page = getFileContent(resourceId);
+        final String page = CgeoTestUtils.getFileContent(resourceId);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isFalse();
@@ -257,8 +269,9 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testTrackableNotActivated() {
-        final String page = getFileContent(R.raw.tb123e_html);
+        final String page = CgeoTestUtils.getFileContent(R.raw.tb123e_html);
         final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
         assertThat(trackable).isNotNull();
         assertThat(trackable.getGeocode()).isEqualTo("TB123E");
@@ -267,21 +280,25 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testOnlineCacheUrl() {
         assertThat(StringUtils.right(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC5EF16")).getDescription(), 150)).as("related web page appended to description").contains("http://eventimgruenen.de/");
     }
 
     @MediumTest
+    @Test
     public void testOnlineEventDate() {
         assertThat(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC68TJE")).getHiddenDate()).isEqualTo("2016-01-23");
     }
 
     @MediumTest
+    @Test
     public void testOnlineWatchCount() {
         assertThat(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GCK25B")).getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
     }
 
     @MediumTest
+    @Test
     public void testSpoilerDescriptionForOwner() {
         final Geocache cache = parseCache(R.raw.gc352y3_owner_view);
         assertThat(cache).isNotNull();
@@ -298,6 +315,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testSpoilerWithoutTitleAndLinkToLargerImage() {
         final Geocache cache = parseCache(R.raw.gc6xyb6);
         assertThat(cache).isNotNull();
@@ -312,6 +330,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testSpoilerBackgroundImage() {
         final Geocache cache = parseCache(R.raw.gc45w92);
         assertThat(cache).isNotNull();
@@ -322,6 +341,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testFullScaleImageUrl() {
         assertThat(GCParser.fullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
@@ -330,6 +350,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
+    @Test
     public void testGetUsername() {
         assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("abft");
     }

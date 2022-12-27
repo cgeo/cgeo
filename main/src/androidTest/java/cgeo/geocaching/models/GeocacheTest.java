@@ -1,6 +1,5 @@
 package cgeo.geocaching.models;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -9,6 +8,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import static cgeo.geocaching.test.CgeoTestUtils.removeCacheCompletely;
+import static cgeo.geocaching.test.CgeoTestUtils.saveFreshCacheToDB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +21,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GeocacheTest extends CGeoTestCase {
+@SuppressWarnings("PMD.ExcessiveClassLength")
+public class GeocacheTest {
 
     private static final class MockedEventCache extends Geocache {
         MockedEventCache(final Date date) {
@@ -31,7 +34,8 @@ public class GeocacheTest extends CGeoTestCase {
         }
     }
 
-    public static void testIsPastEvent() {
+    @Test
+    public void testIsPastEvent() {
         final Date today = new Date();
         final Geocache cacheToday = new MockedEventCache(today);
         assertThat(cacheToday.isPastEvent()).isFalse();
@@ -41,7 +45,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cacheYesterday.isPastEvent()).isTrue();
     }
 
-    public static void testEquality() {
+    @Test
+    public void testEquality() {
         final Geocache one = new Geocache();
         final Geocache two = new Geocache();
 
@@ -58,7 +63,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(one).isEqualTo(two);
     }
 
-    public static void testGeocodeUppercase() {
+    @Test
+    public void testGeocodeUppercase() {
         final Geocache cache = new Geocache();
         cache.setGeocode("gc1234");
         assertThat(cache.getGeocode()).isEqualTo("GC1234");
@@ -68,7 +74,8 @@ public class GeocacheTest extends CGeoTestCase {
      * The waypoint with valid coordinates.
      * Waypoint should be extracted, so expected size is 1.
      */
-    public final void testUpdateWaypointFromNote() {
+    @Test
+    public void testUpdateWaypointFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         assertWaypointsParsed("Test N51 13.888 E007 03.444", wpList);
@@ -78,7 +85,8 @@ public class GeocacheTest extends CGeoTestCase {
      * Waypoints in a single line with valid coordinates.
      * Waypoints should be extracted, but the user-note contains the following text, so expected size is 3 with different user-notes.
      */
-    public final void testUpdateWaypointsFromNoteSingleLine() {
+    @Test
+    public void testUpdateWaypointsFromNoteSingleLine() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.444"), "", "", "Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", WaypointType.OWN));
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.233 E007 03.444"), "", "", "Test N51 09.123 E007 03.444", WaypointType.OWN));
@@ -90,7 +98,8 @@ public class GeocacheTest extends CGeoTestCase {
      * Waypoints in different lines with valid coordinates.
      * Waypoints should be extracted, the user-note does not contain the following text, so expected size is 3 with empty user-notes.
      */
-    public final void testUpdateWaypointsFromNote() {
+    @Test
+    public void testUpdateWaypointsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", new Geopoint("N51 13.233 E007 03.444"), "", "", "", WaypointType.OWN));
@@ -102,7 +111,8 @@ public class GeocacheTest extends CGeoTestCase {
      * The first and the third waypoints are identical.
      * Duplicates should be ignored, so expected size is 2.
      */
-    public final void testUpdateWaypointsFromNoteWithDuplicates() {
+    @Test
+    public void testUpdateWaypointsFromNoteWithDuplicates() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", new Geopoint("N51 13.233 E007 03.444"), "", "", "", WaypointType.OWN));
@@ -113,7 +123,8 @@ public class GeocacheTest extends CGeoTestCase {
      * The second waypoint has empty coordinates.
      * Waypoint with empty coordinates should be created, so expected size is 2.
      */
-    public final void testUpdateWaypointsWithEmptyCoordsFromNote() {
+    @Test
+    public void testUpdateWaypointsWithEmptyCoordsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", null, "", "", "", WaypointType.OWN));
@@ -124,7 +135,8 @@ public class GeocacheTest extends CGeoTestCase {
      * The second and the third waypoints have different names.
      * So expected size is 3.
      */
-    public final void testUpdateWaypointsWithTwoEmptyCoordsFromNote() {
+    @Test
+    public void testUpdateWaypointsWithTwoEmptyCoordsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", null, "", "", "", WaypointType.OWN));
@@ -136,7 +148,8 @@ public class GeocacheTest extends CGeoTestCase {
      * The second and the third waypoints have same names.
      * So expected size is 2.
      */
-    public final void testUpdateWaypointsWithDuplicateEmptyCoordsFromNote() {
+    @Test
+    public void testUpdateWaypointsWithDuplicateEmptyCoordsFromNote() {
         final List<Waypoint> wpList = new ArrayList<>();
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", null, "Test", "", "", WaypointType.OWN));
@@ -152,7 +165,8 @@ public class GeocacheTest extends CGeoTestCase {
      * - new waypoint with auto generated name and coordinates.
      * - new waypoint with auto generated name and with empty coordinates.
      */
-    public final void testUpdateExistingWaypointFromNote() {
+    @Test
+    public void testUpdateExistingWaypointFromNote() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -185,7 +199,8 @@ public class GeocacheTest extends CGeoTestCase {
      * - second waypoint with auto generated name and coordinates.
      * - new waypoint with auto generated name and coordinates.
      */
-    public final void testUpdateAndAddNewWaypointFromNote() {
+    @Test
+    public void testUpdateAndAddNewWaypointFromNote() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -215,7 +230,8 @@ public class GeocacheTest extends CGeoTestCase {
      * - existing waypoint with original coordinates and old note.
      * - new waypoint with new coordinates and new note.
      */
-    public final void testUpdateExistingWaypointFromNoteWithSameNameAndCoords() {
+    @Test
+    public void testUpdateExistingWaypointFromNoteWithSameNameAndCoords() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -240,7 +256,8 @@ public class GeocacheTest extends CGeoTestCase {
      * So expected size is 1:
      * - existing waypoint with new coordinates and original note.
      */
-    public final void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSameName() {
+    @Test
+    public void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSameName() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -264,7 +281,8 @@ public class GeocacheTest extends CGeoTestCase {
      * So expected size is 1:
      * - existing waypoint with new coordinates and original note.
      */
-    public final void testUpdateExistingWaypointFromNoteWithSameNameWithEmptyCoordsAndNewNote() {
+    @Test
+    public void testUpdateExistingWaypointFromNoteWithSameNameWithEmptyCoordsAndNewNote() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -286,7 +304,8 @@ public class GeocacheTest extends CGeoTestCase {
      * Recreate waypoints from note. Waypoints with same name and different coordinates should be considered.
      * So expected size is 2.
      */
-    public final void testUpdateWaypointFromParseableWaypointText() {
+    @Test
+    public void testUpdateWaypointFromParseableWaypointText() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -308,7 +327,8 @@ public class GeocacheTest extends CGeoTestCase {
         removeCacheCompletely(geocode);
     }
 
-    public final void testUpdateExistingWaypointWithFormulaFromNoteWithSameName() {
+    @Test
+    public void testUpdateExistingWaypointWithFormulaFromNoteWithSameName() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -338,7 +358,8 @@ public class GeocacheTest extends CGeoTestCase {
      * - existing waypoint with empty coordinates.
      * - new waypoint with new coordinates.
      */
-    public final void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSameNameDifferentType() {
+    @Test
+    public void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSameNameDifferentType() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -362,7 +383,8 @@ public class GeocacheTest extends CGeoTestCase {
      * So expected size is 1:
      * - existing waypoint with original name and coordinates.
      */
-    public final void testUpdateExistingWaypointFromNoteWithSamePrefix() {
+    @Test
+    public void testUpdateExistingWaypointFromNoteWithSamePrefix() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -387,7 +409,8 @@ public class GeocacheTest extends CGeoTestCase {
      * So expected size is 1:
      * - existing waypoint with original name, but new coordinates.
      */
-    public final void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSamePrefix() {
+    @Test
+    public void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithSamePrefix() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -412,7 +435,8 @@ public class GeocacheTest extends CGeoTestCase {
      * - existing waypoint unchanged
      * - new waypoint with prefix is added.
      */
-    public final void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithNewPrefix() {
+    @Test
+    public void testUpdateExistingWaypointWithEmptyCoordsFromNoteWithNewPrefix() {
         final Geocache cache = new Geocache();
         final String geocode = "Test" + System.nanoTime();
         cache.setGeocode(geocode);
@@ -472,7 +496,8 @@ public class GeocacheTest extends CGeoTestCase {
         }
     }
 
-    public static void testDisabledArchivedCombinations() {
+    @Test
+    public void testDisabledArchivedCombinations() {
         final Geocache cache = new Geocache();
         assertThat(cache.isDisabled()).isFalse();
         assertThat(cache.isArchived()).isFalse();
@@ -487,7 +512,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.isArchived()).isFalse();
     }
 
-    public static void testMergeDownloaded() {
+    @Test
+    public void testMergeDownloaded() {
         final Geocache previous = new Geocache();
         previous.setGeocode("GC12345");
         previous.setDetailed(true);
@@ -520,7 +546,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getHint()).as("merged hint").isEmpty();
     }
 
-    public static void testMergeDownloadedStored() {
+    @Test
+    public void testMergeDownloadedStored() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
         stored.setDetailed(true);
@@ -554,7 +581,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getHint()).as("merged hint").isEmpty();
     }
 
-    public static void testMergeLocalUserModifiedCoordsNotServerSideModified() {
+    @Test
+    public void testMergeLocalUserModifiedCoordsNotServerSideModified() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
         stored.setUserModifiedCoords(true);
@@ -576,7 +604,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getOriginalWaypoint().getCoords()).as("merged original wp").isEqualTo(new Geopoint(41.0, 9.0));
     }
 
-    public static void testMergeLocalUserModifiedCoordsAndServerSideModified() {
+    @Test
+    public void testMergeLocalUserModifiedCoordsAndServerSideModified() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
         stored.setUserModifiedCoords(true);
@@ -602,7 +631,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getOriginalWaypoint().getCoords()).as("merged original wp").isEqualTo(new Geopoint(43.0, 11.0));
     }
 
-    public static void testMergeLivemap() {
+    @Test
+    public void testMergeLivemap() {
         final Geocache previous = new Geocache();
         previous.setGeocode("GC12345");
         previous.setDetailed(true);
@@ -622,7 +652,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0, 8.0));
     }
 
-    public static void testMergeLivemapStored() {
+    @Test
+    public void testMergeLivemapStored() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
         stored.setDetailed(true);
@@ -642,7 +673,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0, 8.0));
     }
 
-    public static void testMergeLivemapBMSearched() {
+    @Test
+    public void testMergeLivemapBMSearched() {
         final Geocache bmsearched = new Geocache();
         bmsearched.setGeocode("GC12345");
 
@@ -658,7 +690,8 @@ public class GeocacheTest extends CGeoTestCase {
     /**
      * distance circle should be shown for some cache-types only for GC- and internal connector.
      */
-    public final void testShowDistanceCircleForCaches() {
+    @Test
+    public void testShowDistanceCircleForCaches() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC12345");
 
@@ -686,7 +719,8 @@ public class GeocacheTest extends CGeoTestCase {
     /**
      * distance circle should be shown for some cache-types with user-modified-coordinates.
      */
-    public final void testShowDistanceCircleForCacheWithUsermodifiedCoordinates() {
+    @Test
+    public void testShowDistanceCircleForCacheWithUsermodifiedCoordinates() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC12345");
         cache.setUserModifiedCoords(true);
@@ -707,7 +741,8 @@ public class GeocacheTest extends CGeoTestCase {
     /**
      * distance circle must not be shown for archived caches.
      */
-    public final void testShowDistanceCircleNotForArchivedCaches() {
+    @Test
+    public void testShowDistanceCircleNotForArchivedCaches() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC12345");
         cache.setArchived(true);
@@ -737,7 +772,8 @@ public class GeocacheTest extends CGeoTestCase {
     /**
      * distance circle should be shown for some waypoint-types.
      */
-    public final void testShowDistanceCircleForWaypoint() {
+    @Test
+    public void testShowDistanceCircleForWaypoint() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC12345");
         saveFreshCacheToDB(cache);
@@ -770,7 +806,8 @@ public class GeocacheTest extends CGeoTestCase {
     /**
      * distance circle must not be shown for waypoints of archived caches.
      */
-    public final void testShowDistanceCircleForArchivedWaypoint() {
+    @Test
+    public void testShowDistanceCircleForArchivedWaypoint() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC12345");
         cache.setArchived(true);
@@ -791,13 +828,15 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(ownWaypoint.applyDistanceRule()).as("don't show for own waypoint").isFalse();
     }
 
-    public static void testNameForSorting() {
+    @Test
+    public void testNameForSorting() {
         final Geocache cache = new Geocache();
         cache.setName("GR8 01-01");
         assertThat(cache.getNameForSorting()).isEqualTo("GR000008 000001-000001");
     }
 
-    public static void testGetPossibleLogTypes() throws Exception {
+    @Test
+    public void testGetPossibleLogTypes() {
         final Geocache gcCache = new Geocache();
         gcCache.setGeocode("GC123");
         gcCache.setType(CacheType.WEBCAM);
@@ -810,18 +849,21 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log types").doesNotContain(LogType.NEEDS_MAINTENANCE);
     }
 
-    public static void testLogTypeEventPast() throws Exception {
+    @Test
+    public void testLogTypeEventPast() {
         final Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, -1);
         assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
     }
 
-    public static void testLogTypeEventToday() throws Exception {
+    @Test
+    public void testLogTypeEventToday() {
         final Calendar today = Calendar.getInstance();
         assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
     }
 
-    public static void testLogTypeEventFuture() throws Exception {
+    @Test
+    public void testLogTypeEventFuture() {
         final Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
         assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.WILL_ATTEND);
@@ -834,13 +876,15 @@ public class GeocacheTest extends CGeoTestCase {
         return cache;
     }
 
-    public static void testInventoryItems() {
+    @Test
+    public void testInventoryItems() {
         final Geocache cache = new Geocache();
         cache.setInventoryItems(5);
         assertThat(cache.getInventoryItems()).isEqualTo(5);
     }
 
-    public static void testInventory() {
+    @Test
+    public void testInventory() {
         final Geocache cache = new Geocache();
         final Trackable trackable = new Trackable();
         final List<Trackable> inventory = new ArrayList<>(Collections.singletonList(trackable));
@@ -849,7 +893,9 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache.getInventoryItems()).isEqualTo(inventory.size());
     }
 
-    public static void testMergeInventory() {
+    @Test
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
+    public void testMergeInventory() {
         final Geocache cache = new Geocache();
 
         final List<Trackable> inventory1 = new ArrayList<>(4);
@@ -971,7 +1017,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(cache1.getInventory().get(0).getBrand()).isEqualTo(TrackableBrand.TRAVELBUG);
     }
 
-    public static void testAddInventoryItem() {
+    @Test
+    public void testAddInventoryItem() {
         final Geocache cache = new Geocache();
         assertThat(cache.getInventory()).isEmpty();
         assertThat(cache.getInventoryItems()).isEqualTo(0);
@@ -1029,24 +1076,28 @@ public class GeocacheTest extends CGeoTestCase {
 
     }
 
-    public static void testIsOfflineNoList() {
+    @Test
+    public void testIsOfflineNoList() {
         final Geocache cache = new Geocache();
         assertThat(cache.isOffline()).isFalse();
     }
 
-    public static void testIsOfflineStandardList() {
+    @Test
+    public void testIsOfflineStandardList() {
         final Geocache cache = new Geocache();
         cache.setLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         assertThat(cache.isOffline()).isTrue();
     }
 
-    public static void testIsOfflineTemporaryList() {
+    @Test
+    public void testIsOfflineTemporaryList() {
         final Geocache cache = new Geocache();
         cache.setLists(Collections.singleton(StoredList.TEMPORARY_LIST.id));
         assertThat(cache.isOffline()).isFalse();
     }
 
-    public static void testIsOfflineMultipleLists() {
+    @Test
+    public void testIsOfflineMultipleLists() {
         final Geocache cache = new Geocache();
         cache.setLists(new HashSet<>(Arrays.asList(StoredList.TEMPORARY_LIST.id, 42)));
         assertThat(cache.isOffline()).isTrue();

@@ -26,7 +26,7 @@ public class DateRangeGeocacheFilterTest {
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void simple() throws Exception {
         final Date d = FORMATTER.parse("2022-04-06");
-        testSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(d, d), true);
+        assertSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(d, d), true);
     }
 
     @Test
@@ -38,14 +38,14 @@ public class DateRangeGeocacheFilterTest {
         final Date dDayBefore = new Date(d.getTime() - 1);
         assertThat(FORMATTER.format(dDayBefore)).isEqualTo("2022-04-05");
 
-        testSingle(c -> c.setHidden(dDayBefore), dd -> dd.setMinMaxDate(d, null), false);
-        testSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(null, dDayBefore), false);
+        assertSingle(c -> c.setHidden(dDayBefore), dd -> dd.setMinMaxDate(d, null), false);
+        assertSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(null, dDayBefore), false);
 
-        testSingle(c -> c.setHidden(dDaySameLater), dd -> dd.setMinMaxDate(null, d), true);
-        testSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(dDaySameLater, null), true);
+        assertSingle(c -> c.setHidden(dDaySameLater), dd -> dd.setMinMaxDate(null, d), true);
+        assertSingle(c -> c.setHidden(d), dd -> dd.setMinMaxDate(dDaySameLater, null), true);
     }
 
-    private void testSingle(final Action1<Geocache> cacheSetter, final Action1<DateRangeGeocacheFilter> filterSetter, final Boolean expectedResult) {
+    private void assertSingle(final Action1<Geocache> cacheSetter, final Action1<DateRangeGeocacheFilter> filterSetter, final Boolean expectedResult) {
         GeocacheFilterTestUtils.testSingle(GeocacheFilterType.HIDDEN, cacheSetter, filterSetter, expectedResult);
     }
 }

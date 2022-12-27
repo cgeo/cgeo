@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
-
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class IConnectorTest extends AbstractResourceInstrumentationTestCase {
+public class IConnectorTest {
 
-    public static void testName() {
+    @Test
+    public void testName() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector != ConnectorFactory.UNKNOWN_CONNECTOR) {
                 assertThat(connector.getName()).isNotEmpty().isNotBlank();

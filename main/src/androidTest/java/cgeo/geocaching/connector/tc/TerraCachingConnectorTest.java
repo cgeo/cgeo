@@ -6,10 +6,10 @@ import cgeo.geocaching.connector.IConnector;
 
 import java.util.Set;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class TerraCachingConnectorTest extends TestCase {
+public class TerraCachingConnectorTest {
 
     private static IConnector getTerraCachingConnector() {
         final IConnector tcConnector = ConnectorFactory.getConnector("TCABC");
@@ -17,7 +17,8 @@ public class TerraCachingConnectorTest extends TestCase {
         return tcConnector;
     }
 
-    public static void testHandleTerraCaches() {
+    @Test
+    public void testHandleTerraCaches() {
         final IConnector tcConnector = getTerraCachingConnector();
 
         assertThat(tcConnector.canHandle("TCABC")).isTrue();
@@ -27,7 +28,8 @@ public class TerraCachingConnectorTest extends TestCase {
         assertThat(tcConnector.canHandle("GC1234")).isFalse();
     }
 
-    public static void testHandleCyberCaches() {
+    @Test
+    public void testHandleCyberCaches() {
         final IConnector tcConnector = getTerraCachingConnector();
 
         assertThat(tcConnector.canHandle("CC6KVG")).isTrue();
@@ -35,14 +37,16 @@ public class TerraCachingConnectorTest extends TestCase {
         assertThat(tcConnector.canHandle("CC9")).isTrue();
     }
 
-    public static void testHandleLocationLessCaches() {
+    @Test
+    public void testHandleLocationLessCaches() {
         final IConnector tcConnector = getTerraCachingConnector();
 
         assertThat(tcConnector.canHandle("LC5U28")).isTrue();
         assertThat(tcConnector.canHandle("LC9")).isTrue();
     }
 
-    public static void testHandledGeocodes() {
+    @Test
+    public void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(getTerraCachingConnector().handledGeocodes(geocodes)).containsOnly("TCABC", "TC2JP");
     }

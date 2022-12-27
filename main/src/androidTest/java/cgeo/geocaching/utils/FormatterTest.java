@@ -13,32 +13,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
-public class FormatterTest extends TestCase {
+public class FormatterTest  {
 
     /**
      * The pattern we get from {@link Formatter#getShortDateFormat()} should be the one used by {@link Formatter#formatShortDate(long)}.
      */
-    public static void testShortDateFormat() {
+    @Test
+    public void testShortDateFormat() {
         final long currentTimeMillis = System.currentTimeMillis();
         final String formattedDate = Formatter.formatShortDate(currentTimeMillis);
         final String pattern = Formatter.getShortDateFormat();
         assertThat(new SimpleDateFormat(pattern, Locale.getDefault()).format(currentTimeMillis)).isEqualTo(formattedDate);
     }
 
-    public static void testParkingWaypoint() {
+    @Test
+    public void testParkingWaypoint() {
         assertFormatting(new Waypoint("you can park here", WaypointType.PARKING, false), WaypointType.PARKING.getL10n());
     }
 
-    public static void testOriginalWaypoint() {
+    @Test
+    public void testOriginalWaypoint() {
         assertFormatting(new Waypoint("an original", WaypointType.ORIGINAL, false), WaypointType.ORIGINAL.getL10n());
     }
 
-    public static void testOwnWaypoint() {
+    @Test
+    public void testOwnWaypoint() {
         final Waypoint own = new Waypoint("my own", WaypointType.OWN, true);
         own.setPrefix(Waypoint.PREFIX_OWN);
         assertFormatting(own, CgeoApplication.getInstance().getString(R.string.waypoint_custom));
@@ -49,7 +53,8 @@ public class FormatterTest extends TestCase {
     }
 
     @SuppressLint("SdCardPath")
-    public static void testTruncateCommonSubdir() {
+    @Test
+    public void testTruncateCommonSubdir() {
         final List<CharSequence> dirs = new ArrayList<>();
         dirs.add("/sdcard/Android/data/cgeo.geocaching/files");
         dirs.add("/storage/emulated/0/Android/data/cgeo.geocaching/files");
@@ -66,7 +71,8 @@ public class FormatterTest extends TestCase {
     }
 
     @SuppressLint("SdCardPath")
-    public static void testTruncateDuplicate() {
+    @Test
+    public void testTruncateDuplicate() {
         final List<CharSequence> dirs = new ArrayList<>();
         dirs.add("/data/data/cgeo.geocaching/files");
         dirs.add("/data/data/cgeo.geocaching/files");
@@ -75,7 +81,8 @@ public class FormatterTest extends TestCase {
         assertThat(truncated.get(0)).isEqualTo("/\u2026");
     }
 
-    public static void testTruncateNothingInCommon() {
+    @Test
+    public void testTruncateNothingInCommon() {
         final List<CharSequence> dirs = new ArrayList<>();
         dirs.add("/one/directory/files");
         dirs.add("/some/other/directory");
@@ -86,7 +93,8 @@ public class FormatterTest extends TestCase {
     }
 
     @SuppressLint("SdCardPath")
-    public static void testTruncateCommonSubdirSingleEntry() {
+    @Test
+    public void testTruncateCommonSubdirSingleEntry() {
         final List<CharSequence> dirs = new ArrayList<>();
         dirs.add("/data/data/cgeo.geocaching/files");
 
@@ -94,7 +102,8 @@ public class FormatterTest extends TestCase {
         assertThat(truncated.get(0)).isEqualTo("/data/data/cgeo.geocaching/files");
     }
 
-    public static void testFormatStoredAgo() {
+    @Test
+    public void testFormatStoredAgo() {
         // skip test on non english device
         if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
             return;

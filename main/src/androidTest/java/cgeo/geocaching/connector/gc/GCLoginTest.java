@@ -5,17 +5,17 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.TextUtils;
 
-import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GCLoginTest extends TestCase {
+public class GCLoginTest {
 
     private final GCLogin instance = GCLogin.getInstance();
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         assertThat(instance.login()).isEqualTo(StatusCode.NO_ERROR);
     }
 
@@ -23,20 +23,24 @@ public class GCLoginTest extends TestCase {
         return GCLogin.retrieveHomeLocation().blockingGet();
     }
 
-    public static void testRetrieveHomeLocation() {
+    @Test
+    public void testRetrieveHomeLocation() {
         assertThat(StringUtils.isNotBlank(blockingHomeLocation())).isTrue();
     }
 
-    public static void testValidHomeLocation() {
+    @Test
+    public void testValidHomeLocation() {
         assertThat(new Geopoint(blockingHomeLocation())).isInstanceOf(Geopoint.class);
     }
 
-    public static void testNoHtmlInHomeLocation() {
+    @Test
+    public void testNoHtmlInHomeLocation() {
         final String homeLocation = blockingHomeLocation();
         assertThat(homeLocation).isEqualTo(TextUtils.stripHtml(homeLocation));
     }
 
-    public static void testLanguageSwitch() {
+    @Test
+    public void testLanguageSwitch() {
         final String userLanguage = GCLogin.getInstance().getWebsiteLanguage();
         assertThat(userLanguage).isNotNull();
 
@@ -55,6 +59,7 @@ public class GCLoginTest extends TestCase {
         assertThat(GCLogin.getInstance().getWebsiteLanguage()).isEqualTo(userLanguage);
     }
 
+    @Test
     public void testAvatar() {
         instance.resetServerParameters();
         AvatarUtils.changeAvatar(GCConnector.getInstance(), null);

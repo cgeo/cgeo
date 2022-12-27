@@ -1,6 +1,5 @@
 package cgeo.geocaching.storage;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.JsonUtils;
@@ -32,9 +31,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class ContentStorageTest extends CGeoTestCase {
+public class ContentStorageTest {
 
     private String testFolderConfig = null;
 
@@ -44,6 +46,7 @@ public class ContentStorageTest extends CGeoTestCase {
     //note: must be sorted alphabetically for comparison to work out!
     private static final String COMPLEX_FOLDER_STRUCTURE = "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": [ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": [ \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, \"ccc-ddd.txt\" ] }, \"ddd.txt\"]";
 
+    @Test
     public void testSimpleExample() throws IOException {
 
         //This is a simple example for usage of contentstore
@@ -95,28 +98,28 @@ public class ContentStorageTest extends CGeoTestCase {
 
     }
 
-    public void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() {
         //save TEST-FOLDER Uri if there is a user-defined one for later restoring
         if (PersistableFolder.TEST_FOLDER.isUserDefined()) {
             testFolderConfig = PersistableFolder.TEST_FOLDER.getFolder().toConfig();
         }
     }
 
-    public void tearDown() throws Exception {
+    @After
+    public void tearDown() {
         cleanup();
         //restore test folder user-defined uri
         PersistableFolder.TEST_FOLDER.setUserDefinedFolder(Folder.fromConfig(testFolderConfig), false);
-
-        //call super.teardown AFTER all own cleanup (because this seems to reset all members vars including testUri)
-        super.tearDown();
     }
 
     //a first small test to see how CI handles it
+    @Test
     public void testFileSimpleCreateDelete() {
         performSimpleCreateDelete(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentSimpleCreateDelete() {
         performSimpleCreateDelete(Folder.FolderType.DOCUMENT);
     }
@@ -134,6 +137,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().delete(uri2)).isTrue();
     }
 
+    @Test
     public void testFileStrangeNames() {
         final Folder folder = createTestFolder(Folder.FolderType.FILE, "strangeNames");
         ContentStorage.get().ensureFolder(folder, true);
@@ -150,10 +154,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(files.get(0).name).isEqualTo("a b c");
     }
 
+    @Test
     public void testFileCopyAll() {
         performCopyAll(Folder.FolderType.FILE, Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCopyAll() {
         performCopyAll(Folder.FolderType.DOCUMENT, Folder.FolderType.DOCUMENT);
     }
@@ -180,10 +186,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
 
+    @Test
     public void testFileCopyAllAbortAndStatus() {
         performCopyAllAbortAndStatus(Folder.FolderType.FILE, Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCopyAllAbortAndStatus() {
         performCopyAllAbortAndStatus(Folder.FolderType.DOCUMENT, Folder.FolderType.DOCUMENT);
     }
@@ -244,10 +252,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertFileDirCount(targetFolder2, result.filesModified, result.dirsModified);
     }
 
+    @Test
     public void testFileCopyAllSameDir() {
         performCopyAllSameDir(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCopyAllSameDir() {
         performCopyAllSameDir(Folder.FolderType.DOCUMENT);
     }
@@ -265,10 +275,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceTargetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
     }
 
+    @Test
     public void testFileCopyAllTargetInSource() {
         performCopyAllTargetInSource(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCopyAllTargetInSource() {
         performCopyAllTargetInSource(Folder.FolderType.DOCUMENT);
     }
@@ -304,10 +316,12 @@ public class ContentStorageTest extends CGeoTestCase {
                         COMPLEX_FOLDER_STRUCTURE + "} ] } ]");
     }
 
+    @Test
     public void testFileCopyAllSourceInTarget() {
         performCopyAllSourceInTarget(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCopyAllSourceInTarget() {
         performCopyAllSourceInTarget(Folder.FolderType.DOCUMENT);
     }
@@ -337,10 +351,12 @@ public class ContentStorageTest extends CGeoTestCase {
         );
     }
 
+    @Test
     public void testFileGetAllFiles() {
         performGetAllFiles(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentGetAllFiles() {
         performGetAllFiles(Folder.FolderType.DOCUMENT);
     }
@@ -366,10 +382,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertFileInfo(allFiles.get(9), "ddd.txt", false, "/ddd.txt");
     }
 
+    @Test
     public void testFileGetFolderInfo() {
         performGetFolderInfo(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentGetFolderInfo() {
         performGetFolderInfo(Folder.FolderType.DOCUMENT);
     }
@@ -407,10 +425,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(entry.right).isEqualTo(path);
     }
 
+    @Test
     public void testFileSynchronizeFolder() throws IOException {
         performSynchronizeFolder(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentSynchronizeFolder() throws IOException {
         performSynchronizeFolder(Folder.FolderType.DOCUMENT);
     }
@@ -512,10 +532,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(value.replaceAll("[\\s]", "")).isEqualTo(expected.replaceAll("[\\s]", ""));
     }
 
+    @Test
     public void testFileCreateUniqueFilenames() {
         performCreateUniqueFilenames(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentCreateUniqueFilenames() {
         performCreateUniqueFilenames(Folder.FolderType.DOCUMENT);
     }
@@ -543,10 +565,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(UriUtils.getLastPathSegment(uriWithSuffix2)).endsWith(".txt");
     }
 
+    @Test
     public void testFileWriteReadFile() throws IOException {
         performWriteReadFile(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentWriteReadFile() throws IOException {
         performWriteReadFile(Folder.FolderType.DOCUMENT);
     }
@@ -588,10 +612,12 @@ public class ContentStorageTest extends CGeoTestCase {
         }
     }
 
+    @Test
     public void testFileBasicFolderOperations() throws IOException {
         performBasicFolderOperations(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentBasicFolderOperations() throws IOException {
         performBasicFolderOperations(Folder.FolderType.DOCUMENT);
     }
@@ -688,6 +714,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().getFileInfo(testFolder, "subfolder/subfolder-test.txt").name).isEqualTo("subfolder-test.txt");
     }
 
+    @Test
     public void testPersistableFolderChangeNotification() {
 
         //create Location based on test folder. Several subfolders.
@@ -711,10 +738,12 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(notificationMessages.contains("two:" + PersistableFolder.TEST_FOLDER.name()));
     }
 
+    @Test
     public void testFileMimeType() {
         performMimeType(Folder.FolderType.FILE);
     }
 
+    @Test
     public void testDocumentMimeType() {
         performMimeType(Folder.FolderType.DOCUMENT);
     }

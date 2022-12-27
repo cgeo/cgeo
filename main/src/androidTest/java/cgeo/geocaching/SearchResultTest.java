@@ -1,15 +1,17 @@
 package cgeo.geocaching;
 
 import android.os.Parcel;
-import android.test.AndroidTestCase;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class SearchResultTest extends AndroidTestCase {
-    public static void testCreateFromGeocodes() {
+public class SearchResultTest  {
+
+    @Test
+    public void testCreateFromGeocodes() {
         final HashSet<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");
@@ -19,7 +21,8 @@ public class SearchResultTest extends AndroidTestCase {
         assertThat(searchResult.getGeocodes()).contains("GC12345");
     }
 
-    public static void testParcel() {
+    @Test
+    public void testParcel() {
         final Set<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");
@@ -50,7 +53,8 @@ public class SearchResultTest extends AndroidTestCase {
         assertThat(receive.getFinder()).isEqualTo("test");
     }
 
-    public static void testAddSearchResult() {
+    @Test
+    public void testAddSearchResult() {
         final Set<String> geocodes = new HashSet<>();
         geocodes.add("GC12345");
         geocodes.add("GC23456");

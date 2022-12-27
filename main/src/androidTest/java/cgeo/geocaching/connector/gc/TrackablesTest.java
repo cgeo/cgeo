@@ -4,16 +4,18 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.TextUtils;
 
 import java.util.List;
 
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
+public class TrackablesTest {
 
+    @Test
     public void testTrackable() {
         final Trackable trackable = getTB2R124();
         assertThat(trackable.getGeocode()).isEqualTo("TB2R124");
@@ -21,12 +23,14 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getOwner()).isEqualTo("Spiridon Lui");
     }
 
+    @Test
     public void testTrackableWithoutImage() {
         final Trackable trackable = getTB2R124();
         assertThat(trackable.getImage()).isNull();
         assertThat(trackable.getDetails()).isNotNull();
     }
 
+    @Test
     public void testTrackableWithLogImages() {
         final Trackable trackable = parseTrackable(R.raw.tbxatg);
         assertThat(trackable.getGeocode()).isEqualTo("TBXATG");
@@ -47,6 +51,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log.get(1).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
     }
 
+    @Test
     public void testParseTrackableWithoutReleaseDate() {
         final Trackable trackable = parseTrackable(R.raw.tb14wfv);
         assertThat(trackable).isNotNull();
@@ -60,6 +65,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getOrigin()).isNull();
     }
 
+    @Test
     public void testParseTrackableWithRetrievedDate() {
         final Trackable trackable = parseTrackable(R.raw.tb11jzk);
         assertThat(trackable).isNotNull();
@@ -68,6 +74,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getLogGuid()).isEqualTo("2758cb91-a3b4-489f-9d99-1f5dd708c39f");
     }
 
+    @Test
     public void testParseTrackableWithDiscoveredDate() {
         final Trackable trackable = parseTrackable(R.raw.tb84bz5);
         assertThat(trackable).isNotNull();
@@ -76,6 +83,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getLogGuid()).isEqualTo("c8093cd3-db0d-40db-b9f3-3d1671309d34");
     }
 
+    @Test
     public void testParseRelativeLink() {
         final Trackable trackable = parseTrackable(R.raw.tb4cwjx);
         assertThat(trackable).isNotNull();
@@ -87,10 +95,11 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private Trackable parseTrackable(final int trackablePage) {
-        final String pageContent = getFileContent(trackablePage);
+        final String pageContent = CgeoTestUtils.getFileContent(trackablePage);
         return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
     }
 
+    @Test
     public void testParseMarkMissing() {
         final Trackable trackable = parseTrackable(R.raw.tb3f206);
         assertThat(trackable).isNotNull();
@@ -105,8 +114,9 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         return parseTrackable(R.raw.trackable_tb2r124);
     }
 
+    @Test
     public void testParseTrackableNotExisting() {
-        final Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
+        final Trackable trackable = GCParser.parseTrackable(CgeoTestUtils.getFileContent(R.raw.tb_not_existing), null);
         assertThat(trackable).isNull();
     }
 

@@ -8,17 +8,18 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 import java.util.Set;
 
 import org.assertj.core.api.AbstractBooleanAssert;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
-public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
+public class GCConnectorTest  {
 
-    public static void testGetViewport() {
+    @Test
+    public void testGetViewport() {
 
         {
             final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
@@ -47,14 +48,16 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
-    public static void testCanHandle() {
+    @Test
+    public void testCanHandle() {
         assertCanHandle("GC2MEGA").isTrue();
         assertCanHandle("GCAAAAAAAAAAAAA").isFalse();
         assertCanHandle("OXZZZZZ").isFalse();
         assertCanHandle("gc77").isTrue();
     }
 
-    public static void testGeocodeForbiddenChars() {
+    @Test
+    public void testGeocodeForbiddenChars() {
         assertCanHandle("GC123").isTrue();
         assertCanHandle("GC123M").isTrue();
         assertCanHandle("GC123L").overridingErrorMessage("L is not allowed in GC codes").isFalse();
@@ -67,11 +70,13 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     /**
      * functionality moved to {@link TravelBugConnector}
      */
-    public static void testCanNotHandleTrackablesAnymore() {
+    @Test
+    public void testCanNotHandleTrackablesAnymore() {
         assertCanHandle("TB3F651").isFalse();
     }
 
-    public static void testGetGeocodeFromUrl() {
+    @Test
+    public void testGetGeocodeFromUrl() {
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("some string")).isNull();
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC")).isEqualTo("GC12ABC");
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC?test")).isEqualTo("GC12ABC");
@@ -89,7 +94,8 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/gc77")).isEqualTo("gc77");
     }
 
-    public static void testGetGeocodeFromText() {
+    @Test
+    public void testGetGeocodeFromText() {
         // Matching a geocode in text
         assertThat(GCConnector.getInstance().getGeocodeFromText("https://coord.info/GC123 tset")).isEqualTo("GC123");
         assertThat(GCConnector.getInstance().getGeocodeFromText("GC123asddd")).isNull();
@@ -105,12 +111,14 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GCConnector.getInstance().getGeocodeFromText("Do you have a hint for GC123?")).isEqualTo("GC123");
     }
 
-    public static void testHandledGeocodes() {
+    @Test
+    public void testHandledGeocodes() {
         final Set<String> geocodes = ConnectorFactoryTest.getGeocodeSample();
         assertThat(GCConnector.getInstance().handledGeocodes(geocodes)).containsOnly("GC1234", "GC5678");
     }
 
-    public static void testIsChallengeCache() {
+    @Test
+    public void testIsChallengeCache() {
         assertIsChallengeCache("Some Challenge Cache", CacheType.MYSTERY).isTrue();
         assertIsChallengeCache("Some None Challenge Traditional", CacheType.TRADITIONAL).isFalse();
         assertIsChallengeCache("Some ordinary Mystery", CacheType.MYSTERY).isFalse();

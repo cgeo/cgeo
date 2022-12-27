@@ -1,6 +1,5 @@
 package cgeo.geocaching.storage;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -28,15 +27,17 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class DataStoreTest extends CGeoTestCase {
+public class DataStoreTest {
 
     static final String ARTIFICIAL_GEOCODE = "TEST";
 
     private static final long MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
-    public static void testStoredLists() {
+    @Test
+    public void testStoredLists() {
         int listId1 = StoredList.STANDARD_LIST_ID;
         int listId2 = StoredList.STANDARD_LIST_ID;
 
@@ -106,13 +107,16 @@ public class DataStoreTest extends CGeoTestCase {
     }
 
     // Check that queries don't throw an exception (see issue #1429).
-    public static void testLoadWaypoints() {
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+    public void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
         DataStore.loadWaypoints(viewport);
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)
-    public static void testSaveWithoutLogs() {
+    @Test
+    public void testSaveWithoutLogs() {
 
         // create cache and trackable
         final Geocache cache = new Geocache();
@@ -137,7 +141,8 @@ public class DataStoreTest extends CGeoTestCase {
     }
 
     // Check that loading a cache by case insensitive geo code works correctly (see #3139)
-    public static void testGeocodeCaseInsensitive() {
+    @Test
+    public void testGeocodeCaseInsensitive() {
 
         final String upperCase = ARTIFICIAL_GEOCODE;
         final String lowerCase = StringUtils.lowerCase(upperCase);
@@ -165,14 +170,16 @@ public class DataStoreTest extends CGeoTestCase {
     }
 
     // Loading logs for an empty geocode should return an empty list, not null!
-    public static void testLoadLogsFromEmptyGeocode() {
+    @Test
+    public void testLoadLogsFromEmptyGeocode() {
         final List<LogEntry> logs = DataStore.loadLogs("");
 
         assertThat(logs).as("Logs for empty geocode").isNotNull();
         assertThat(logs).as("Logs for empty geocode").isEmpty();
     }
 
-    public static void testLog() {
+    @Test
+    public void testLog() {
         //ensure that we don't overwrite anything in database before starting this test
         DataStore.removeCache(ARTIFICIAL_GEOCODE, REMOVE_ALL);
         assertThat(DataStore.loadLogs(ARTIFICIAL_GEOCODE)).isEmpty();
@@ -187,7 +194,8 @@ public class DataStoreTest extends CGeoTestCase {
         assertThat(logsLoadeded).containsExactlyInAnyOrderElementsOf(logs);
     }
 
-    public static void testLoadCacheHistory() {
+    @Test
+    public void testLoadCacheHistory() {
         final SearchResult history = DataStore.getBatchOfStoredCaches(null, PseudoList.HISTORY_LIST.id);
         assertThat(history).isNotNull();
 
@@ -195,7 +203,8 @@ public class DataStoreTest extends CGeoTestCase {
         assertThat(history.getCount()).isEqualTo(DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id));
     }
 
-    public static void testOfflineLog() {
+    @Test
+    public void testOfflineLog() {
         final String geocode = ARTIFICIAL_GEOCODE + "-O";
         final Date logDate = new Date(new Date().getTime() - MILLISECONDS_PER_DAY * 3);
         //ensure that we don't overwrite anything in database before starting this test
@@ -262,7 +271,8 @@ public class DataStoreTest extends CGeoTestCase {
         }
     }
 
-    public static void testEmptyOfflineLog() {
+    @Test
+    public void testEmptyOfflineLog() {
         final String geocode = ARTIFICIAL_GEOCODE + "-O";
 
         //ensure that we don't overwrite anything in database before starting this test

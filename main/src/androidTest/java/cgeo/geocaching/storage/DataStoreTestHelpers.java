@@ -1,6 +1,5 @@
 package cgeo.geocaching.storage;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -19,12 +18,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Test;
+
 /**
  * Methods (modelled as test cases) helping to set up (artificial) test data for development
  * <p>
  * It is vital that these methods are IGNORED/SUPPRESSED by default!
  */
-public class DataStoreTestHelpers extends CGeoTestCase {
+public class DataStoreTestHelpers {
 
     private static final boolean EXECUTE_METHODS = false;
 
@@ -35,7 +36,9 @@ public class DataStoreTestHelpers extends CGeoTestCase {
      * Method creates dummy caches in the database
      */
     @Suppress
-    public static void testCreateDummyCaches() {
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+    public void testCreateDummyCaches() {
 
         //add a manual guard to be extra sure that this is not executed by default!
         if (!EXECUTE_METHODS) {
@@ -55,7 +58,9 @@ public class DataStoreTestHelpers extends CGeoTestCase {
     }
 
     @Suppress
-    public static void testRemoveDummyCaches() {
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+    public void testRemoveDummyCaches() {
         //add a manual guard to be extra sure that this is not executed by default!
         if (!EXECUTE_METHODS) {
             return;
@@ -66,6 +71,7 @@ public class DataStoreTestHelpers extends CGeoTestCase {
             dummyCacheCodes.add(getArtificialGeocode(i));
         }
         DataStore.removeCaches(dummyCacheCodes, EnumSet.of(LoadFlags.RemoveFlag.DB));
+
     }
 
 

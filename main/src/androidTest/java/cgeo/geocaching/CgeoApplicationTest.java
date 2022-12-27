@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -19,6 +18,7 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3FJ5F;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -39,7 +39,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * The c:geo application test. It can be used for tests that require an
  * application and/or context.
  */
-public class CgeoApplicationTest extends CGeoTestCase {
+public class CgeoApplicationTest {
 
     @Test
     @MediumTest
@@ -54,6 +54,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * any and all failures in other tests. This is not guaranteed to run before
      * other tests, as junit uses reflection to find the tests.
      */
+    @Test
     @SmallTest
     public void testPreconditions() {
         assertThat(GCLogin.getInstance().login()).as("User and password must be provided").isEqualTo(StatusCode.NO_ERROR);
@@ -63,6 +64,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Test {@link GCParser#searchTrackable(String, String, String)}
      */
+    @Test
     @MediumTest
     public void testSearchTrackableNotExisting() {
         final Trackable tb = GCParser.searchTrackable("123456", null, null);
@@ -72,6 +74,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Test {@link GCParser#searchTrackable(String, String, String)}
      */
+    @Test
     @MediumTest
     public void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
@@ -117,6 +120,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test log and spotted states for {@link GCParser#searchTrackable(String, String, String)}
      * Other parameters are not fully covered in this test case, as we already have {@link CgeoApplicationTest#testSearchTrackable()}
      */
+    @Test
     @MediumTest
     public void testSearchTrackableSpottedLogState() {
         final Trackable tb = GCParser.searchTrackable("TB4BPQK", null, null);
@@ -162,6 +166,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
+    @Test
     @MediumTest
     public void testSearchByGeocodeNotExisting() {
         final SearchResult search = Geocache.searchByGeocode("GC1", null, true, null);
@@ -190,6 +195,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
+    @Test
     public void testSearchByGeocodeNotLoggedIn() {
         withMockedLoginDo(() -> {
             // non premium cache
@@ -234,6 +240,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     @MediumTest
+    @Test
     public void testSearchByCoords() {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByCoords(GCConnector.getInstance(), new Geopoint("N 50° 06.654 E 008° 39.777"));
@@ -244,6 +251,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     @MediumTest
+    @Test
     public void testSearchByOwner() {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByOwner(GCConnector.getInstance(), "Lineflyer");
@@ -254,6 +262,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     @MediumTest
+    @Test
     public void testSearchByUsername() {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByUsername(GCConnector.getInstance(), "blafoo", null, false);
@@ -267,11 +276,12 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link ConnectorFactory#searchByViewport(Viewport)}
      */
     @MediumTest
+    @Test
     public void testSearchByViewport() {
         withMockedFilters(() -> {
 
             final GC3FJ5F mockedCache = new GC3FJ5F();
-            deleteCacheFromDB(mockedCache.getGeocode());
+            CgeoTestUtils.deleteCacheFromDB(mockedCache.getGeocode());
 
             final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
@@ -291,6 +301,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test cache parsing. Esp. useful after a GC.com update
      */
     @MediumTest
+    @Test
     public void testSearchByGeocodeBasis() {
         for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
@@ -308,6 +319,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Caches that are good test cases
      */
     @MediumTest
+    @Test
     public void testSearchByGeocodeSpecialties() {
         final Geocache gcv2r9 = new CgeoApplicationTest().searchByGeocode("GCV2R9");
         assertThat(gcv2r9).isNotNull();
@@ -323,7 +335,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Remove cache from DB and cache to ensure that the cache is not loaded from the database
      */
     private void deleteCacheFromDBAndLogout(final String geocode) {
-        deleteCacheFromDB(geocode);
+        CgeoTestUtils.deleteCacheFromDB(geocode);
 
         GCLogin.getInstance().logout();
         // Modify login data to avoid an automatic login again

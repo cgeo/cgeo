@@ -7,7 +7,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.utils.JsonUtils;
 
 import java.text.SimpleDateFormat;
@@ -16,9 +15,10 @@ import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class SuParserTest extends AbstractResourceInstrumentationTestCase {
+public class SuParserTest {
 
     private static UserInfo user;
     private static final String userJson = "{\"status\":{\"code\":\"OK\"},\"data\":{\"id\":68451,\"name\":\"lega4\",\"foundCaches\":594,\"hiddenCaches\":28}}";
@@ -129,116 +129,139 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         return SuParser.parseCaches(actualObj);
     }
 
+    @Test
     public void testCanParseCacheJsonCacheId() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getCacheId()).isEqualTo("3749");
     }
 
+    @Test
     public void testCanParseCacheJsonCacheName() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getName()).isEqualTo("Крестовоздвиженский монастырь");
     }
 
+    @Test
     public void testCanParseCacheJsonCoords() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getCoords()).isEqualTo(new Geopoint(55.51, 37.853333));
     }
 
+    @Test
     public void testCanParseCacheJsonDescriptionArea() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDescription()).contains("area description");
     }
 
+    @Test
     public void testCanParseCacheJsonDescriptionCache() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDescription()).contains("благодарность");
     }
 
+    @Test
     public void testCanParseCacheJsonDescriptionTrCache() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDescription()).contains("Спрятан");
     }
 
+    @Test
     public void testCanParseCacheJsonDescriptionViCache() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDescription()).contains("Значение");
     }
 
+    @Test
     public void testCanParseCacheJsonDescriptionContains() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDescription()).contains("Карандаш");
     }
 
+    @Test
     public void testCanParseCacheJsonTerrain() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getTerrain()).isEqualTo(5f);
     }
 
+    @Test
     public void testCanParseCacheJsonDifficulty() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getDifficulty()).isEqualTo(1f);
     }
 
+    @Test
     public void testCanParseCacheJsonAuthorName() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getOwnerDisplayName()).isEqualTo("Инструктор");
     }
 
+    @Test
     public void testCanParseCacheJsonAuthorId() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getOwnerUserId()).isEqualTo("20");
     }
 
+    @Test
     public void testCanParseCacheJsonCode() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getGeocode()).isEqualTo("TR3749");
     }
 
+    @Test
     public void testCanParseCacheJsonSize() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
     }
 
+    @Test
     public void testCanParseFounds() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogCounts().get(LogType.FOUND_IT)).isEqualTo(23);
     }
 
+    @Test
     public void testCanParseNotFounds() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogCounts().get(LogType.DIDNT_FIND_IT)).isEqualTo(12);
     }
 
+    @Test
     public void testCanParseLogs() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs()).hasSize(7);
     }
 
+    @Test
     public void testCanParseNoLogs() throws Exception {
         parseCache(simpleCache);
         assertThat(cache.getLogs()).isEmpty();
     }
 
+    @Test
     public void testCanParseLogAuthor() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(0).author).isEqualTo("LE");
     }
 
+    @Test
     public void testCanParseLogServiceLogId() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(0).serviceLogId).isEqualTo("407324");
     }
 
+    @Test
     public void testCanParseLogText() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(0).log).contains("Рыть глубоко");
     }
 
+    @Test
     public void testCanParseLogType() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(2).logType).isEqualTo(LogType.OWNER_MAINTENANCE);
     }
 
+    @Test
     public void testCanParseLogDateTime() throws Exception {
         parseCache(cacheJson);
 
@@ -246,27 +269,32 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(new Date(cache.getLogs().get(0).date)).isEqualTo(isoFormat.parse("2018-10-20 18:12:46"));
     }
 
+    @Test
     public void testCanParseOwnLogs() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(1).friend).isTrue();
     }
 
+    @Test
     public void testCanByDefaultLogsNotOwned() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getLogs().get(0).friend).isFalse();
     }
 
+    @Test
     public void testCanParseRecommendations() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getFavoritePoints()).isEqualTo(44);
     }
 
+    @Test
     public void testCanParseImages() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getImages()).hasSize(6);
     }
 
 
+    @Test
     public void testCanParseImageText() throws Exception {
         parseCache(cacheJson);
         boolean found = false;
@@ -280,12 +308,14 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(found).isTrue();
     }
 
+    @Test
     public void testCanParseImageUrl() throws Exception {
         parseCache(cacheJson);
         final String imgUrl = ((Image) cache.getImages().toArray()[1]).getUrl();
         assertThat(imgUrl).contains("areas/15090.jpg");
     }
 
+    @Test
     public void testCacheImageInSpoiler() throws Exception {
         parseCache(cacheJson);
 
@@ -293,77 +323,92 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(imgUrl).contains("caches/3749.jpg");
     }
 
+    @Test
     public void testCanParseStatus() throws Exception {
         parseCache(cacheJson);
         cache.setArchived(false); // make sure the cache is not archived, otherwise disabled will allways return false
         assertThat(cache.isDisabled()).isTrue();
     }
 
+    @Test
     public void testCanParseArchivedStatus() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.isArchived()).isTrue();
     }
 
+    @Test
     public void testCanParseWaypoints() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getWaypoints()).hasSize(2);
     }
 
+    @Test
     public void testCanParseWaypointCoords() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getWaypoints().get(0).getCoords()).isEqualTo(new Geopoint(1.23, 2.132));
     }
 
+    @Test
     public void testCanParseWaypointName() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getWaypoints().get(0).getName()).isEqualTo("Имя точки");
     }
 
+    @Test
     public void testCanParseWaypointType() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getWaypoints().get(0).getWaypointType()).isEqualTo(WaypointType.PUZZLE);
     }
 
+    @Test
     public void testCanParseWaypointDescription() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getWaypoints().get(0).getNote()).contains("point some nice descripti");
     }
 
+    @Test
     public void testCanParseVotes() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getVotes()).isEqualTo(23);
     }
 
+    @Test
     public void testCanParseRating() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getRating()).isEqualTo(4.3f);
     }
 
+    @Test
     public void testCanParsePersonalNote() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.getPersonalNote()).isEqualTo("My note");
     }
 
+    @Test
     public void testCanParseCachesList() throws Exception {
         final List<Geocache> caches = parseCaches(cachesListJson);
         assertThat(caches).hasSize(3);
     }
 
+    @Test
     public void testCanParseCacheInTheList() throws Exception {
         final List<Geocache> caches = parseCaches(cachesListJson);
         assertThat(caches.get(0).getGeocode()).isEqualTo("VI6989");
     }
 
+    @Test
     public void testCanParseUserName() throws Exception {
         parseUser(userJson);
         assertThat(user.getName()).isEqualTo("lega4");
     }
 
+    @Test
     public void testCanParseUserFinds() throws Exception {
         parseUser(userJson);
         assertThat(user.getFinds()).isEqualTo(594);
     }
 
+    @Test
     public void testCanParseFindDate() throws Exception {
         parseCache(simpleCache);
 
@@ -371,17 +416,20 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(new Date(cache.getVisitedDate())).isEqualTo(isoFormat.parse("2018-04-05"));
     }
 
+    @Test
     public void testCanParseWatchStatus() throws Exception {
         parseCache(cacheJson);
         assertThat(cache.isOnWatchlist()).isTrue();
     }
 
+    @Test
     public void testCanHandleWrongUserJson() throws Exception {
         parseUser(emptyUserJson);
 
         assertThat(user.getStatus()).isEqualTo(UserInfo.UserInfoStatus.FAILED);
     }
 
+    @Test
     public void testCanParseUserSuccessfully() throws Exception {
         parseUser(userJson);
         assertThat(user.getStatus()).isEqualTo(UserInfo.UserInfoStatus.SUCCESSFUL);
