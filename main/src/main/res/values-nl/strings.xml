@@ -394,6 +394,8 @@
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
     <string name="caches_select_mode">Selectie modus</string>
+    <string name="caches_select_next20">Selecteer de volgende 20 caches</string>
+    <string name="caches_select_next100">Selecteer de volgende 100 caches</string>
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
@@ -534,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Begint met</string>
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
+    <string name="cache_filter_datefilter_absolute">Absoluut</string>
+    <string name="cache_filter_datefilter_relative">Ten opzichte van vandaag</string>
     <string name="cache_filter_datefilter_label_from">Van:</string>
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
@@ -590,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">het begin der tijden</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>meer dan 1 jaar geleden</item>
+        <item>een jaar geleden</item>
+        <item>180 dagen geleden</item>
+        <item>90 dagen geleden</item>
+        <item>30 dagen geleden</item>
+        <item>2 weken geleden</item>
+        <item>een week geleden</item>
+        <item>3 dagen geleden</item>
+        <item>minder dan 3 dagen geleden</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1j</item>
+        <item>1jr</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2w</item>
+        <item>1w</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -1033,6 +1059,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="category_unifiedMap">Gecombineerde Kaart</string>
+    <string name="experimental">(experimenteel)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
     <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten (experimenteel / verre van compleet / alleen voor test)</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
