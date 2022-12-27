@@ -133,7 +133,7 @@
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
-    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
+    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto ryšį.</string>
     <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
     <string name="log_add">Pridėti</string>
     <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -616,7 +616,7 @@
         <item>prieš 30 dienų</item>
         <item>prieš 2 savaites</item>
         <item>prieš savaitę</item>
-        <item>prieš 3 dienas</item>
+        <item>Prieš 3 dienas</item>
         <item>mažiau nei prieš 3 dienas</item>
     </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label_short">
@@ -2227,7 +2227,7 @@
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įveskite vertę nuo %1$s iki %2$s</string>
+    <string name="number_input_title">Įveskite vertę tarp %1$s ir %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2285,6 +2285,8 @@
     <string name="make_visible">padaryti matomą</string>
     <string name="hide">slėpti</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>
