@@ -52,10 +52,10 @@ import org.apache.commons.lang3.StringUtils;
 
 public class AboutActivity extends TabbedViewPagerActivity {
 
-    private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
+    public static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
     public static final Pattern VERSION_PLACEHOLDER_PATTERN = Pattern.compile("((^|[\\r\\n]+)[ \\t]*##[ \\t]*[\\r\\n]+)");
 
-    private enum Page {
+    public enum Page {
         VERSION(R.string.about_version),
         CHANGELOG(R.string.about_changelog),
         SYSTEM(R.string.about_system),
@@ -64,7 +64,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
         @StringRes
         final int resourceId;
-        final long id;
+        public final long id;
 
         Page(@StringRes final int resourceId) {
             this.resourceId = resourceId;

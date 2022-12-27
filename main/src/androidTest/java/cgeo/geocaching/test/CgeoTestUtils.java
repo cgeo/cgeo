@@ -1,5 +1,6 @@
 package cgeo.geocaching.test;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
@@ -8,12 +9,18 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 
+import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 
 import androidx.annotation.AnyRes;
 import androidx.annotation.RawRes;
+import androidx.core.util.Consumer;
+import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import java.io.File;
@@ -33,21 +40,35 @@ public final class CgeoTestUtils {
         //no instance of utils class
     }
 
+    public static Geocache createTestCache() {
+        final Geocache testCache = new Geocache();
+        testCache.setGeocode("TEST");
+        testCache.setType(CacheType.TRADITIONAL);
+        return testCache;
+    }
+
     /**
      * Remove cache from DB and cache to ensure that the cache is not loaded from the database
      */
-    public static void deleteCacheFromDB(final String geocode) {
-        DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
+    public static void removeCache(final String geocode) {
+        removeCache(geocode, false);
     }
 
     /**
      * remove cache from database and file system
      */
     public static void removeCacheCompletely(final String geocode) {
+        removeCache(geocode, true);
+    }
+
+    private static void removeCache(final String geocode, final boolean completely) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
-        flags.add(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING);
+        if (completely) {
+            flags.add(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING);
+        }
         DataStore.removeCache(geocode, flags);
     }
+
 
     /**
      * Remove completely the previous instance of a cache, then save this object into the database
@@ -113,5 +134,21 @@ public final class CgeoTestUtils {
     public static Uri getResourceURI(@AnyRes final int resId) {
         final Resources resources = InstrumentationRegistry.getInstrumentation().getContext().getResources();
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(resId) + '/' + resources.getResourceTypeName(resId) + '/' + resources.getResourceEntryName(resId));
+    }
+
+    /** Helper to start activity scenario with modified intent and execute test code on it */
+    public static <A extends Activity> void executeForActivity(final Class<A> activityClass, final Consumer<Intent> modifyIntent, final Consumer<ActivityScenario<A>> testCode) {
+        final Intent intent = new Intent(ApplicationProvider.getApplicationContext(), activityClass);
+        if (modifyIntent != null) {
+            modifyIntent.accept(intent);
+        }
+
+        try (ActivityScenario<A> scenario = ActivityScenario.launch(intent)) {
+            scenario.moveToState(Lifecycle.State.RESUMED);
+            if (testCode != null) {
+                testCode.accept(scenario);
+            }
+        }
+
     }
 }

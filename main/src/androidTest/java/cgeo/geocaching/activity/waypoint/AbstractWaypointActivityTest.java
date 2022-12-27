@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity.waypoint;
 
-import cgeo.geocaching.EditWaypointActivity_;
+import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.activity.AbstractEspressoTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -12,12 +12,12 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<EditWaypointActivity_> {
+public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<EditWaypointActivity> {
 
     private Geocache cache;
 
     public AbstractWaypointActivityTest() {
-        super(EditWaypointActivity_.class);
+        super(EditWaypointActivity.class);
     }
 
     @Override
