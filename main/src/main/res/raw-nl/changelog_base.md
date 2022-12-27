@@ -1,6 +1,6 @@
 ### Kaart
 - Nieuw: OSM kaart bron osm.paws.cz
-- New: Enable reading flopp.net GPX files as tracks
+- Nieuw: Lezen van flopp.net GPX bestanden als tracks inschakelen
 
 ### Cache details
 - Nieuw: Nieuwe meer geavanceerde afbeeldingen galerij
@@ -10,4 +10,4 @@
 ### Algemeen
 - API niveau wijzigen (compileSDK 32)
 - Enkele afhankelijke bibliotheken bijwerken
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Wijziging: Gebruik een verschillend Android mechanisme voor het ontvangen van downloads (voor een betere compatibiliteit met Android 12+)
