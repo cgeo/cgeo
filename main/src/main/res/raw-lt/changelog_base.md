@@ -1,6 +1,6 @@
 ### Žemėlapis
 - Naujiena: OSM žemėlapio šaltinis osm.paws.cz
-- New: Enable reading flopp.net GPX files as tracks
+- Naujiena: Įgalinkite flopp.net GPX failų skaitymą kaip pėdsakus
 
 ### Slėptuvės detalės
 - Naujiena: Nauja įmantresnė vaizdų galerija
@@ -10,4 +10,4 @@
 ### Bendras
 - API lygio pakeitimas (sudarytas SDK 32)
 - Atnaujinkite kai kurias priklausomas bibliotekas
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
