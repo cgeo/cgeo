@@ -394,6 +394,7 @@
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
     <string name="caches_select_mode">Selectie modus</string>
+    <string name="caches_select_next">Selecteer volgende 20 caches</string>
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
@@ -1033,6 +1034,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="category_unifiedMap">Gecombineerde Kaart</string>
+    <string name="experimental">(experimenteel)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
     <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten (experimenteel / verre van compleet / alleen voor test)</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
