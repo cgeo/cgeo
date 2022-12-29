@@ -11,3 +11,4 @@
 - API 레벨 변경(compileSDK 32)
 - 일부 종속 라이브러리 업데이트
 - 변경: 다른 안드로이드 메커니즘을 사용하여 다운로드 받기(안드로이드 12+와의 더 나은 호환성을 위해)
+- New: Preset list name with GPX filename on import
