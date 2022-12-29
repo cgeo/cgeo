@@ -11,3 +11,4 @@
 - API level change (compileSDK 32)
 - Update some dependant libraries
 - Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- New: Preset list name with GPX filename on import
