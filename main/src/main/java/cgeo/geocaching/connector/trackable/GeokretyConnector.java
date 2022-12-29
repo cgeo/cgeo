@@ -60,9 +60,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      */
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
     private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([1-9A-NP-Z]{6})");
-    private static final String HOST = "geokrety.org";
+    private static final String HOST = "new-theme.staging.geokrety.org";
     public static final String URL = "https://" + HOST;
-    private static final String URLPROXY = "https://api." + HOST;
+    private static final String URLPROXY = "https://api.geokrety.org";
 
     @Override
     @NonNull

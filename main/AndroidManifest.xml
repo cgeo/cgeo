@@ -454,6 +454,7 @@
                 <data android:scheme="https" />
                 <data android:host="geokrety.org" />
                 <data android:host="www.geokrety.org" />
+                <data android:host="new-theme.staging.geokrety.org" />
                 <data android:pathPrefix="/m/qr.php" />
             </intent-filter>
         </activity>
@@ -712,6 +713,7 @@
                 <data android:host="geokrety.org" />
                 <data android:host="api.geokrety.org" />
                 <data android:host="www.geokrety.org" />
+                <data android:host="new-theme.staging.geokrety.org" />
                 <data android:pathPrefix="/konkret.php" />
                 <data android:pathPrefix="/m/qr.php" />
                 <data android:pathPrefix="/GK" />

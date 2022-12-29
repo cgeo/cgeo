@@ -59,8 +59,8 @@ public class GeokretyConnectorTest  {
     public void testGetUrl() throws Exception {
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(CgeoTestUtils.getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
-        assertThat(trackables.get(0).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46464");
-        assertThat(trackables.get(1).getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=46465");
+        assertThat(trackables.get(0).getUrl()).isEqualTo("https://new-theme.staging.geokrety.org/konkret.php?id=46464");
+        assertThat(trackables.get(1).getUrl()).isEqualTo("https://new-theme.staging.geokrety.org/konkret.php?id=46465");
     }
 
     @Test

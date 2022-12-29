@@ -103,7 +103,7 @@ class GeokretyParser {
                     }
                     final String imageName = attributes.getValue("image");
                     if (StringUtils.isNotBlank(imageName)) {
-                        trackable.setImage("https://geokrety.org/obrazki/" + imageName);
+                        trackable.setImage("https://new-theme.staging.geokrety.org/obrazki/" + imageName);
                     }
                     final String ownerId = attributes.getValue("owner_id");
                     if (StringUtils.isNotBlank(ownerId)) {
@@ -226,11 +226,11 @@ class GeokretyParser {
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("image")) {
                     if (isInMoves) {
-                        imageBuilder.setUrl("https://geokrety.org/obrazki/" + content);
+                        imageBuilder.setUrl("https://new-theme.staging.geokrety.org/obrazki/" + content);
                         logEntryBuilder.addLogImage(imageBuilder.build());
                     } else if (!isInImages) {
                         // TODO: Trackable doesn't support multiple image yet, so ignore other image tags if we're not in moves
-                        trackable.setImage("https://geokrety.org/obrazki/" + content);
+                        trackable.setImage("https://new-theme.staging.geokrety.org/obrazki/" + content);
                     }
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {

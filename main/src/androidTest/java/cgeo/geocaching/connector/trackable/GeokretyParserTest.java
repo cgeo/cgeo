@@ -246,10 +246,10 @@ public class GeokretyParserTest  {
         assertThat(logImages1).hasSize(2);
         final Image image1 = logImages1.get(0);
         assertThat(image1.getTitle()).isEqualTo("test logo 2");
-        assertThat(image1.getUrl()).isEqualTo("https://geokrety.org/obrazki/14622133503lxv2.png");
+        assertThat(image1.getUrl()).isEqualTo("https://new-theme.staging.geokrety.org/obrazki/14622133503lxv2.png");
         final Image image2 = logImages1.get(1);
         assertThat(image2.getTitle()).isEqualTo("test 1");
-        assertThat(image2.getUrl()).isEqualTo("https://geokrety.org/obrazki/1462213331lhaiu.png");
+        assertThat(image2.getUrl()).isEqualTo("https://new-theme.staging.geokrety.org/obrazki/1462213331lhaiu.png");
     }
 
     @Test

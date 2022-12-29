@@ -19,7 +19,7 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
 
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_geokrety_website));
-        final String urlOrHost = "https://geokrety.org";
+        final String urlOrHost = "https://new-theme.staging.geokrety.org";
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
