@@ -11,3 +11,4 @@
 - Změna úrovně API (compileSDK 32)
 - Aktualizace některých závislých knihoven
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
+- New: Preset list name with GPX filename on import
