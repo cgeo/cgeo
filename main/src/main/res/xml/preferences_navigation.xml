@@ -58,10 +58,12 @@
             android:summary="@string/init_updateinterval_description"
             app:allowDividerBelow="false"
             app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.SeekbarPreference0Off
+        <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_brouterAutoTileDownloadsInterval"
             android:defaultValue="@integer/brouter_updateinterval_default"
             app:max="@integer/brouter_updateinterval_max"
+            app:minValueDescription="@string/switch_off"
+            app:logScaling="true"
             app:iconSpaceReserved="false" />
 
         <ListPreference

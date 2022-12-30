@@ -30,16 +30,6 @@ public class BackupSeekbarPreference extends SeekbarPreference {
     }
 
     @Override
-    protected String getValueString(final int progress) {
-        if (progress == minProgress) {
-            return context.getString(R.string.init_backup_history_length_min);
-        } else if (progress == maxProgress) {
-            return context.getString(R.string.init_backup_history_length_max);
-        }
-        return super.getValueString(progress + 1);
-    }
-
-    @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 

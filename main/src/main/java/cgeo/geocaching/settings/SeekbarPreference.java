@@ -25,6 +25,8 @@ public class SeekbarPreference extends Preference {
     private TextView valueView;
     protected int minProgress = 0;
     protected int maxProgress = 100;
+    protected String minValueDescription;
+    protected String maxValueDescription;
     protected int stepSize = 0;
     protected int startProgress = 0;
     protected final int defaultValue = 10;
@@ -97,6 +99,8 @@ public class SeekbarPreference extends Preference {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekbarPreference);
         minProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_min, minProgress));
         maxProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_max, maxProgress));
+        minValueDescription = a.getString(R.styleable.SeekbarPreference_minValueDescription);
+        maxValueDescription = a.getString(R.styleable.SeekbarPreference_maxValueDescription);
         stepSize = valueToProgress(a.getInt(R.styleable.SeekbarPreference_stepSize, stepSize));
         final String temp = a.getString(R.styleable.SeekbarPreference_label);
         if (null != temp) {
@@ -140,6 +144,12 @@ public class SeekbarPreference extends Preference {
     }
 
     protected String getValueString(final int progress) {
+        if (progress == minProgress && minValueDescription != null) {
+            return minValueDescription;
+        }
+        if (progress == maxProgress && maxValueDescription != null) {
+            return maxValueDescription;
+        }
         return valueToShownValue(progressToValue(progress)) + getUnitString();
     }
 

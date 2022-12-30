@@ -20,6 +20,8 @@
             android:defaultValue="@integer/backup_history_length_default"
             app:min="0"
             app:max="@integer/backup_history_length_max"
+            app:minValueDescription="@string/init_backup_history_length_min"
+            app:maxValueDescription="@string/init_backup_history_length_max"
             app:hasDecimals="false"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
@@ -57,10 +59,12 @@
             android:title="@string/init_backup_automatic"
             android:summary="@string/init_backup_automatic_summary"
             app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.SeekbarPreference0Off
+        <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_backup_interval"
             android:defaultValue="@integer/backup_interval_default"
             app:max="@integer/backup_interval_max"
+            app:logScaling="true"
+            app:minValueDescription="@string/switch_off"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
