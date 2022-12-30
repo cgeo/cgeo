@@ -281,7 +281,7 @@ public class CgeoApplicationTest {
         withMockedFilters(() -> {
 
             final GC3FJ5F mockedCache = new GC3FJ5F();
-            CgeoTestUtils.deleteCacheFromDB(mockedCache.getGeocode());
+            CgeoTestUtils.removeCache(mockedCache.getGeocode());
 
             final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
@@ -335,7 +335,7 @@ public class CgeoApplicationTest {
      * Remove cache from DB and cache to ensure that the cache is not loaded from the database
      */
     private void deleteCacheFromDBAndLogout(final String geocode) {
-        CgeoTestUtils.deleteCacheFromDB(geocode);
+        CgeoTestUtils.removeCache(geocode);
 
         GCLogin.getInstance().logout();
         // Modify login data to avoid an automatic login again

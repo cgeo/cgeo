@@ -39,6 +39,7 @@ import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -64,12 +65,9 @@ import java.util.List;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
-import org.androidannotations.annotations.InstanceState;
 import org.apache.commons.lang3.StringUtils;
 
-@EActivity
+
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     public static final int SUCCESS = 0;
@@ -80,14 +78,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int SAVE_ERROR = 5;
 
     private static final String CALC_STATE_JSON = "calc_state_json";
+    private static final String WP_TYPE_SELECTOR_POS = "wp_type_selector_pos";
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_ORIGINAL_AND_GENERATED);
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES_WITH_GENERATED = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
-    @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
-    @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
-    @Extra(Intents.EXTRA_COORDS) protected Geopoint initialCoords = null;
+    private String geocode = null;
+    private int waypointId = -1;
+    private Geopoint initialCoords = null;
 
-    @InstanceState protected int waypointTypeSelectorPosition = -1;
+    private int waypointTypeSelectorPosition = -1;
 
     private ProgressDialog waitDialog = null;
     private Waypoint waypoint = null;
@@ -187,10 +186,19 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     @Override
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = EditwaypointActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
+
+        // get parameters
+        final Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
+            waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+            initialCoords = extras.getParcelable(Intents.EXTRA_COORDS);
+        }
 
         if (StringUtils.isBlank(geocode) && waypointId <= 0) {
             showToast(res.getString(R.string.err_waypoint_cache_unknown));
@@ -219,6 +227,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         if (savedInstanceState != null) {
             initViews = false;
             calcStateString = savedInstanceState.getString(CALC_STATE_JSON);
+            waypointTypeSelectorPosition = savedInstanceState.getInt(WP_TYPE_SELECTOR_POS);
         } else {
             calcStateString = null;
         }
@@ -495,6 +504,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(CALC_STATE_JSON, calcStateString);
+        outState.putInt(WP_TYPE_SELECTOR_POS, waypointTypeSelectorPosition);
+
     }
 
     private WaypointType getSelectedWaypointType() {
@@ -718,16 +729,23 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private static void startActivityEditWaypointInternal(final Context context, final Geocache cache, final int waypointId) {
-
-        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).waypointId(waypointId).start();
+        final Intent intent = new Intent(context, EditWaypointActivity.class)
+                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
+                .putExtra(Intents.EXTRA_WAYPOINT_ID, waypointId);
+        context.startActivity(intent);
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
-        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).start();
+        final Intent intent = new Intent(context, EditWaypointActivity.class)
+                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
+        context.startActivity(intent);
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache, final Geopoint initialCoords) {
-        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).initialCoords(initialCoords).start();
+        final Intent intent = new Intent(context, EditWaypointActivity.class)
+                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
+                .putExtra(Intents.EXTRA_COORDS, initialCoords);
+        context.startActivity(intent);
     }
 
     @Override
