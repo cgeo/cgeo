@@ -185,6 +185,7 @@
     <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_nodateset_display">未設定</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">翻訳</string>
     <string name="translate_to_sys_lang">%sに翻訳</string>
