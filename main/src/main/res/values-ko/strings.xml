@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">번역</string>
     <string name="translate_to_sys_lang">%s로 번역하기</string>
