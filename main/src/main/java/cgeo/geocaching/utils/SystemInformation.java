@@ -13,10 +13,10 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.playservices.GooglePlayServices;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -83,7 +83,7 @@ public final class SystemInformation {
                 .append("\nSensor and location:")
                 .append("\n-------")
                 .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-                .append("\n- Compass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+                .append("\n- Compass capabilities: ").append(LocationDataProvider.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\n- Rotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
                 .append("\n- Orientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\n- Magnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))

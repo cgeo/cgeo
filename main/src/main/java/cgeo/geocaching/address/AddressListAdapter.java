@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.AddresslistItemBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 
 import android.location.Address;
@@ -38,7 +38,7 @@ class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.Address
     AddressListAdapter(@NonNull final List<Address> addresses, @NonNull final AddressClickListener addressClickListener) {
         this.addresses = addresses;
         this.clickListener = addressClickListener;
-        location = Sensors.getInstance().currentGeo().getCoords();
+        location = LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
     @Override

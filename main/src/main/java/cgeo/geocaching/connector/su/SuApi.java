@@ -22,7 +22,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -183,7 +183,7 @@ public class SuApi {
         }
 
         //by default, search around current position
-        return searchByCenter(Sensors.getInstance().currentGeo().getCoords(), 20f, connector);
+        return searchByCenter(LocationDataProvider.getInstance().currentGeo().getCoords(), 20f, connector);
     }
 
     private static String getSuLogType(final LogType logType) {

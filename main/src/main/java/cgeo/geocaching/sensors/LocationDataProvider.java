@@ -1,7 +1,7 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.playservices.LocationProvider;
+import cgeo.geocaching.playservices.GoogleLocationProvider;
 import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
@@ -20,7 +20,16 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 
-public class Sensors {
+/**
+ * Provides access to Location data (GPS and direction).
+ *
+ * This class is responsible for fusing different available Location providers of Android
+ * system according to their availability and user preference. Examples for different providers:
+ * * Google Play Location provider such as FusedLocationProvider (if Google Play Service is available)
+ * * Location via Android Low-Level APIs (LocationManager from Service Context.LOCATION_SERVICE)
+ * * Differentiation between LowPower-optimized and precision-optimized location data
+ */
+public class LocationDataProvider {
 
     private Observable<GeoData> geoDataObservable;
     private Observable<GeoData> geoDataObservableLowPower;
@@ -31,14 +40,14 @@ public class Sensors {
     private final boolean hasCompassCapabilities;
 
     private static class InstanceHolder {
-        static final Sensors INSTANCE = new Sensors();
+        static final LocationDataProvider INSTANCE = new LocationDataProvider();
     }
 
     private final Consumer<GeoData> rememberGeodataAction = geoData -> currentGeo = geoData;
 
     private final Consumer<DirectionData> onNextrememberDirectionAction = direction -> currentDirection = direction;
 
-    private Sensors() {
+    private LocationDataProvider() {
         final Application application = CgeoApplication.getInstance();
         gpsStatusObservable = GnssStatusProvider.create(application).replay(1).refCount();
         final Context context = application.getApplicationContext();
@@ -47,7 +56,7 @@ public class Sensors {
                 MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context);
     }
 
-    public static Sensors getInstance() {
+    public static LocationDataProvider getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
@@ -68,9 +77,9 @@ public class Sensors {
         }
         final Application application = CgeoApplication.getInstance();
         if (useGooglePlayServices) {
-            geoDataObservable = LocationProvider.getMostPrecise(application).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
+            geoDataObservable = GoogleLocationProvider.getMostPrecise(application).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
             if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(application).doOnNext(rememberGeodataAction).onErrorResumeWith(geoDataObservable);
+                geoDataObservableLowPower = GoogleLocationProvider.getLowPower(application).doOnNext(rememberGeodataAction).onErrorResumeWith(geoDataObservable);
             } else {
                 geoDataObservableLowPower = geoDataObservable;
             }

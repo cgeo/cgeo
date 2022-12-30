@@ -12,7 +12,7 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.GlobalGPSDistanceComparator;
@@ -116,7 +116,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType, final GeocacheSortContext sortContext) {
         super(activity, 0, list);
-        final GeoData currentGeo = Sensors.getInstance().currentGeo();
+        final GeoData currentGeo = LocationDataProvider.getInstance().currentGeo();
         coords = currentGeo.getCoords();
         this.sortContext = sortContext;
         this.res = activity.getResources();

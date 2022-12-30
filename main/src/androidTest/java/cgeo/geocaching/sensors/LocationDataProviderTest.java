@@ -10,14 +10,14 @@ import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-public class SensorsTest {
+public class LocationDataProviderTest {
 
-    private Sensors sensors;
+    private LocationDataProvider locationDataProvider;
 
     @Before
     public void setUp() throws Exception {
-        sensors = Sensors.getInstance();
-        sensors.initialize();
+        locationDataProvider = LocationDataProvider.getInstance();
+        locationDataProvider.initialize();
     }
 
     @Test
@@ -36,13 +36,13 @@ public class SensorsTest {
 
     @Test
     public void testDirectionObservable() {
-        assertDataAvailability(sensors.directionDataObservable());
+        assertDataAvailability(locationDataProvider.directionDataObservable());
     }
 
     @Test
     public void testGeodataObservable() {
-        assertDataAvailability(sensors.geoDataObservable(false));
-        assertDataAvailability(sensors.geoDataObservable(true));
+        assertDataAvailability(locationDataProvider.geoDataObservable(false));
+        assertDataAvailability(locationDataProvider.geoDataObservable(true));
     }
 
 }

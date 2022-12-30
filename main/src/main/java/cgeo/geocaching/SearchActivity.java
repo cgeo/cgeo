@@ -15,7 +15,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
@@ -376,7 +376,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         String[] latlonText = getCoordText();
 
         if (latlonText.length < 2) {
-            final Geopoint gp = Sensors.getInstance().currentGeo().getCoords();
+            final Geopoint gp = LocationDataProvider.getInstance().currentGeo().getCoords();
             if (gp.isValid()) {
                 updateCoordinates(gp);
                 latlonText = getCoordText();

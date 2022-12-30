@@ -64,7 +64,7 @@ import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
@@ -2127,7 +2127,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 headerBinding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                    newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                    newWaypoint.setCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
                     newWaypoint.setGeocode(cache.getGeocode());
                     if (cache.addOrChangeWaypoint(newWaypoint, true)) {
                         addWaypointAndSort(sortedWaypoints, newWaypoint);

@@ -47,7 +47,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CollectionStream;
@@ -479,7 +479,7 @@ final class OkapiClient {
     }
 
     public static void fillSearchParameterCenter(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Geopoint center, final String radius) {
-        final Geopoint usedCenter = center != null ? center : Sensors.getInstance().currentGeo().getCoords();
+        final Geopoint usedCenter = center != null ? center : LocationDataProvider.getInstance().currentGeo().getCoords();
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
         valueMap.put("center", centerString);
         valueMap.put("radius", radius);

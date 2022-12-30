@@ -2442,8 +2442,6 @@
     <string name="permission_contacts_read_explanation">c:geo can search for contacts in your address book using cacher names. To do this, you must authorize c:geo to read your address book. Otherwise, usage of this function is not possible.</string>
     <string name="permission_location_explanation_title">Location permission</string>
     <string name="permission_location_explanation">c:geo is optimized for usage with GPS data (fine location) to locate your position and calculate distance and direction to geocaches. Without this permission, location-based functions will not work as expected.</string>
-    <string name="permission_write_external_storage_explanation_title">Storage permission</string>
-    <string name="permission_write_external_storage_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. Without media access permission some functionality may not work as expected.</string>
 
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
 

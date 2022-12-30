@@ -54,7 +54,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private enum WizardStep {
         WIZARD_START,
-        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_STORAGE, WIZARD_PERMISSIONS_LOCATION,
+        WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_LOCATION,
         WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER, WIZARD_PERMISSIONS_BROUTERTILESFOLDER,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
@@ -70,8 +70,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
     private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
-    private final PermissionAction askWriteExternalStoragePermissionAction = PermissionAction.register(this, PermissionContext.WRITE_EXTERNAL_STORAGE, b -> gotoNext());
-
 
     // dialog elements
     private ImageView logo = null;
@@ -172,12 +170,6 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setNavigation(this::gotoPrevious, 0, null, 0, this::gotoNext, 0);
                 break;
             }
-            case WIZARD_PERMISSIONS_STORAGE:
-                title.setText(PermissionContext.WRITE_EXTERNAL_STORAGE.getExplanationTitle());
-                PermissionContext.WRITE_EXTERNAL_STORAGE.getExplanation().applyTo(text);
-                //text.setText(R.string.storage_permission_request_explanation);
-                setNavigation(this::gotoPrevious, 0, null, 0, this::requestStorage, 0);
-                break;
             case WIZARD_PERMISSIONS_LOCATION:
                 title.setText(PermissionContext.LOCATION.getExplanationTitle());
                 PermissionContext.LOCATION.getExplanation().applyTo(text);
@@ -247,7 +239,6 @@ public class InstallWizardActivity extends AppCompatActivity {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
-                        .append(getString(R.string.permission_write_external_storage_explanation_title)).append(": ").append(hasStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                         .append(getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                         .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                         .append(getString(R.string.wizard_status_platform));
@@ -367,8 +358,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private boolean stepCanBeSkipped() {
-        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission() && hasLocationPermission())))
-                || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission()))
+        return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
                 || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission()))
                 || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
@@ -396,7 +386,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     public static boolean isConfigurationOk() {
         final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
-        return hasStoragePermission() && hasLocationPermission() && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
+        return hasLocationPermission() && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
     }
 
     public static boolean needsFolderMigration() {
@@ -406,17 +396,8 @@ public class InstallWizardActivity extends AppCompatActivity {
     // -------------------------------------------------------------------
     // old Android permissions related methods
 
-    private static boolean hasStoragePermission() {
-        return PermissionContext.WRITE_EXTERNAL_STORAGE.hasAllPermissions();
-    }
-
     private static boolean hasLocationPermission() {
         return PermissionContext.LOCATION.hasAllPermissions();
-    }
-
-    private void requestStorage() {
-        setSkip(this::gotoNext, 0);
-        askWriteExternalStoragePermissionAction.launch(null, true);
     }
 
     private void requestLocation() {

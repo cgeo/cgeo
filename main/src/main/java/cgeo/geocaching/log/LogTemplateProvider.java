@@ -9,7 +9,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
@@ -383,7 +383,7 @@ public final class LogTemplateProvider {
         templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
             @Override
             public String getValue(final LogContext context) {
-                final GeoData geo = Sensors.getInstance().currentGeo();
+                final GeoData geo = LocationDataProvider.getInstance().currentGeo();
                 return String.format(TEMPLATE_LOCATION_ACCURACY_FORMAT, geo.getCoords(), Units.getDistanceFromMeters(geo.getAccuracy()));
             }
         });

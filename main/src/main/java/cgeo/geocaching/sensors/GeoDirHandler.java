@@ -96,17 +96,17 @@ public abstract class GeoDirHandler {
     public Disposable start(final int flags, final long windowDuration, final TimeUnit unit) {
         final CompositeDisposable disposables = new CompositeDisposable();
         final boolean lowPower = (flags & LOW_POWER) != 0;
-        final Sensors sensors = Sensors.getInstance();
+        final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
 
         if ((flags & UPDATE_GEODATA) != 0) {
-            disposables.add(throttleIfNeeded(sensors.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateGeoData));
+            disposables.add(throttleIfNeeded(locationDataProvider.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateGeoData));
         }
         if ((flags & UPDATE_DIRECTION) != 0) {
-            disposables.add(throttleIfNeeded(sensors.directionDataObservable().observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateDirectionData));
+            disposables.add(throttleIfNeeded(locationDataProvider.directionDataObservable().observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(this::updateDirectionData));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
             // combineOnLatest() does not implement backpressure handling, so we need to explicitly use a backpressure operator there.
-            disposables.add(throttleIfNeeded(Observable.combineLatest(sensors.geoDataObservable(lowPower), sensors.directionDataObservable(), ImmutablePair::of).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(geoDir -> updateGeoDirData(geoDir.left, geoDir.right)));
+            disposables.add(throttleIfNeeded(Observable.combineLatest(locationDataProvider.geoDataObservable(lowPower), locationDataProvider.directionDataObservable(), ImmutablePair::of).observeOn(AndroidSchedulers.mainThread()), windowDuration, unit).subscribe(geoDir -> updateGeoDirData(geoDir.left, geoDir.right)));
         }
         return disposables;
     }

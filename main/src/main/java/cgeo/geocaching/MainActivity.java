@@ -23,7 +23,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GnssStatusProvider;
 import cgeo.geocaching.sensors.GnssStatusProvider.Status;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
@@ -117,13 +117,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
         binding.locationStatus.updatePermissions();
     });
-
-    private final PermissionAction askWriteExternalStoragePermissionAction = PermissionAction.register(this, PermissionContext.WRITE_EXTERNAL_STORAGE, b -> {
-        //nothing to do
-    });
-
-    private static boolean checkedWriteExternalStoragePermissionOnStartup = false;
-
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -264,11 +257,11 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
-            final Sensors sensors = Sensors.getInstance();
-            sensors.initialize();
+            final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
+            locationDataProvider.initialize();
 
             // Attempt to acquire an initial location before any real activity happens.
-            sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+            locationDataProvider.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
 
             cLog.add("ph");
 
@@ -313,13 +306,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             binding.locationStatus.setPermissionRequestCallback(() -> {
                 this.askLocationPermissionAction.launch(null);
             });
-
-            //check for WRITE_EXTERNAL_STORAGE Permission once at c:geo startup
-            if (!checkedWriteExternalStoragePermissionOnStartup) {
-                askWriteExternalStoragePermissionAction.launch();
-                checkedWriteExternalStoragePermissionOnStartup = true;
-            }
-
 
         }
 
@@ -465,7 +451,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             super.onResume();
 
             resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
-            resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+            resumeDisposables.add(LocationDataProvider.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
 
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");

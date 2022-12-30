@@ -24,7 +24,7 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
@@ -119,7 +119,7 @@ public class GCMap {
     private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
-        search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
+        search.setOrigin(LocationDataProvider.getInstance().currentGeo().getCoords());
         search.setPage(take, skip);
 
         //special case: if origin filter is present and excludes GCConnector, then skip search

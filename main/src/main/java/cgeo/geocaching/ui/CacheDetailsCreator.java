@@ -9,7 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -162,7 +162,7 @@ public final class CacheDetailsCreator {
         if (target.getCoords() == null) {
             return null;
         }
-        return Sensors.getInstance().currentGeo().getCoords().distanceTo(target);
+        return LocationDataProvider.getInstance().currentGeo().getCoords().distanceTo(target);
     }
 
     @SuppressLint("SetTextI18n")

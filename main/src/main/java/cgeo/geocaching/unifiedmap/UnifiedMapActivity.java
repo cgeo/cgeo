@@ -22,7 +22,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
@@ -123,7 +123,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
         @NonNull
-        Location currentLocation = Sensors.getInstance().currentGeo();
+        Location currentLocation = LocationDataProvider.getInstance().currentGeo();
         float currentHeading;
 
         /**
