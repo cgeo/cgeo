@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">non ridotta</string>
     <string name="log_image_titleprefix">Immagine</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Traduci</string>
     <string name="translate_to_sys_lang">Traduci in %s</string>
