@@ -177,6 +177,7 @@
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">翻譯</string>
     <string name="translate_to_sys_lang">翻译为 %s</string>
