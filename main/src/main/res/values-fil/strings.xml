@@ -114,6 +114,7 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
