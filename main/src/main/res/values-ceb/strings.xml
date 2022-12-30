@@ -111,6 +111,7 @@
     <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
     <string name="translate_to_english">Ang paghubad sa Inglis</string>
