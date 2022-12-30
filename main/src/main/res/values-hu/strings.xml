@@ -185,6 +185,7 @@
     <string name="log_image_info_notscaled">nem átméretezett</string>
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Fordítás</string>
     <string name="translate_to_sys_lang">Fordítás erre: %s</string>
