@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Vertalen</string>
     <string name="translate_to_sys_lang">%s</string>
