@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Çeviri</string>
     <string name="translate_to_sys_lang">%s\'e çevir</string>
