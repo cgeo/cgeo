@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">не масштабировано</string>
     <string name="log_image_titleprefix">Фотография</string>
     <string name="datetime_nodateset_display">Дата не установлена</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Переводить</string>
     <string name="translate_to_sys_lang">Перевести на %s</string>
