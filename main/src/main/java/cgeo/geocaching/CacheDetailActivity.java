@@ -246,8 +246,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
-    private final PermissionAction<String> openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, user -> {
-        new ContactsHelper(this).openContactCard(user);
+    private final String CONTACT_USER_KEY = "user";
+
+    private final PermissionAction openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, bundle -> {
+        new ContactsHelper(this).openContactCard(bundle.getString(CONTACT_USER_KEY));
     });
 
     @Override
@@ -618,7 +620,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public void showContactCard(final String userName) {
-        openContactCardAction.launch(userName);
+        final Bundle param = new Bundle();
+        param.putString(CONTACT_USER_KEY, userName);
+        openContactCardAction.launch(param);
     }
 
     private abstract static class AbstractWaypointModificationCommand extends AbstractCommand {

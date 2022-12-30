@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -16,9 +15,10 @@ import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -49,7 +49,6 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -96,7 +95,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
@@ -127,6 +125,16 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     private BackupUtils backupUtils = null;
+
+    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
+        binding.locationStatus.updatePermissions();
+    });
+
+    private final PermissionAction askWriteExternalStoragePermissionAction = PermissionAction.register(this, PermissionContext.WRITE_EXTERNAL_STORAGE, b -> {
+        //nothing to do
+    });
+
+    private static boolean checkedWriteExternalStoragePermissionOnStartup = false;
 
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
@@ -228,44 +236,14 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         @Override
         @SuppressLint("SetTextI18n")
         public void updateGeoData(final GeoData geo) {
-
-            binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
-
-            if (geo.getAccuracy() >= 0) {
-                final int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
-                binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
-            } else {
-                binding.navAccuracy.setText(null);
-            }
-
-            currentCoords = geo.getCoords();
-            final String averageHeight = GeoHeightUtils.getAverageHeight(geo, true);
-            if (Settings.isShowAddress()) {
-                if (addCoords == null) {
-                    binding.navLocation.setText(R.string.loc_no_addr);
-                }
-                if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
-                    addCoords = currentCoords;
-                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
-                    AndroidRxUtils.bindActivity(MainActivity.this, address)
-                            .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(address12 -> binding.navLocation.setText(address12 + averageHeight));
-                }
-            } else {
-                binding.navLocation.setText(currentCoords.toString() + averageHeight);
-            }
+            binding.locationStatus.updateGeoData(geo);
         }
     }
 
     private final Consumer<GnssStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
         @Override
-        @SuppressLint("SetTextI18n")
         public void accept(final Status gnssStatus) {
-            if (gnssStatus.gnssEnabled) {
-                binding.navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gnssStatus.satellitesFixed + '/' + gnssStatus.satellitesVisible);
-            } else {
-                binding.navSatellites.setText(res.getString(R.string.loc_gps_disabled));
-            }
+            binding.locationStatus.updateSatelliteStatus(gnssStatus);
         }
     };
 
@@ -361,6 +339,17 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             // check for finished, but unreceived downloads
             DownloaderUtils.checkPendingDownloads(this);
+
+            binding.locationStatus.setPermissionRequestCallback(() -> {
+                this.askLocationPermissionAction.launch(null);
+            });
+
+            //check for WRITE_EXTERNAL_STORAGE Permission once at c:geo startup
+            if (!checkedWriteExternalStoragePermissionOnStartup) {
+                askWriteExternalStoragePermissionAction.launch();
+                checkedWriteExternalStoragePermissionOnStartup = true;
+            }
+
 
         }
 
@@ -494,17 +483,19 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         } else {
             final Activity activity = this;
             final PermissionRequestContext perm = PermissionRequestContext.fromRequestCode(requestCode);
-            Dialogs.newBuilder(this)
-                    .setMessage(perm.getAskAgainResource())
-                    .setCancelable(false)
-                    .setPositiveButton(R.string.ask_again, (dialog, which) -> PermissionHandler.askAgainFor(permissions, activity, perm))
-                    .setNegativeButton(R.string.close_app, (dialog, which) -> {
-                        activity.finish();
-                        System.exit(0);
-                    })
-                    .setIcon(R.drawable.ic_menu_preferences)
-                    .create()
-                    .show();
+            if (perm != null) {
+                Dialogs.newBuilder(this)
+                        .setMessage(perm.getAskAgainResource())
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.ask_again, (dialog, which) -> PermissionHandler.askAgainFor(permissions, activity, perm))
+                        .setNegativeButton(R.string.close_app, (dialog, which) -> {
+                            activity.finish();
+                            System.exit(0);
+                        })
+                        .setIcon(R.drawable.ic_menu_preferences)
+                        .create()
+                        .show();
+            }
         }
     }
 
@@ -589,7 +580,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
 
             // initialize menu items
-            menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
+            menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk());
             menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
 
             final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();

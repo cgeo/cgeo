@@ -1,6 +1,9 @@
 package cgeo.geocaching.sensors;
 
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.location.GnssStatus;
@@ -38,7 +41,7 @@ public class GnssStatusProvider {
 
     @RequiresApi(VERSION_CODES.N)
     private static Observable<Status> createGNSSObservable(final Context context) {
-        return Observable.create(subscriber -> {
+        return Observable.create(emitter -> {
             final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             final Callback callback = new Callback() {
                 Status latest = NO_GNSS;
@@ -56,24 +59,29 @@ public class GnssStatusProvider {
                         return;
                     }
                     latest = new Status(true, visible, fixed);
-                    subscriber.onNext(latest);
+                    emitter.onNext(latest);
                 }
 
                 @Override
                 public void onStarted() {
                     latest = new Status(true, 0, 0);
-                    subscriber.onNext(latest);
+                    emitter.onNext(latest);
                 }
 
                 @Override
                 public void onStopped() {
                     latest = NO_GNSS;
-                    subscriber.onNext(latest);
+                    emitter.onNext(latest);
                 }
             };
-            subscriber.onNext(NO_GNSS);
-            geoManager.registerGnssStatusCallback(callback);
-            subscriber.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> geoManager.unregisterGnssStatusCallback(callback)));
+            emitter.onNext(NO_GNSS);
+            if (PermissionContext.LOCATION.hasAllPermissions()) {
+                Log.d("GnssStatusProvider: registering callback");
+                geoManager.registerGnssStatusCallback(callback);
+            } else {
+                Log.d("GnssStatusProvider: Could not register provider, no Location permission available");
+            }
+            emitter.setDisposable(AndroidRxUtils.disposeOnCallbacksScheduler(() -> geoManager.unregisterGnssStatusCallback(callback)));
         });
     }
 

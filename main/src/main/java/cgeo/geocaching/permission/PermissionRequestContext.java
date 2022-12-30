@@ -44,7 +44,7 @@ public enum PermissionRequestContext {
                 return perm;
             }
         }
-
-        throw new IndexOutOfBoundsException("Unknown request code " + requestCode);
+        return null;
+        //throw new IndexOutOfBoundsException("Unknown request code " + requestCode);
     }
 }

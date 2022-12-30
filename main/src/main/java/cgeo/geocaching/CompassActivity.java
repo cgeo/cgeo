@@ -10,6 +10,8 @@ import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -25,7 +27,6 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
@@ -65,6 +66,11 @@ public class CompassActivity extends AbstractActionBarActivity {
     private ProximityNotificationByCoords proximityNotification = null;
     private final TextSpinner<DirectionData.DeviceOrientation> deviceOrientationMode = new TextSpinner<>();
     private CompassActivityBinding binding;
+
+    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
+        binding.locationStatus.updatePermissions();
+    });
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -125,6 +131,10 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        binding.locationStatus.setPermissionRequestCallback(() -> {
+            askLocationPermissionAction.launch();
+        });
     }
 
     @Override
@@ -301,11 +311,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
         public void accept(final Status gpsStatus) {
-            if (gpsStatus.satellitesVisible >= 0) {
-                binding.navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + "/" + gpsStatus.satellitesVisible);
-            } else {
-                binding.navSatellites.setText("");
-            }
+            binding.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
 
@@ -314,15 +320,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         @Override
         public void updateGeoDirData(@NonNull final GeoData geo, final DirectionData dir) {
             try {
-                binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
-
-                if (geo.getAccuracy() >= 0) {
-                    binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
-                } else {
-                    binding.navAccuracy.setText(null);
-                }
-
-                binding.navLocation.setText(geo.getCoords() + GeoHeightUtils.getAverageHeight(geo, false));
+                binding.locationStatus.updateGeoData(geo);
 
                 updateDistanceInfo(geo);
 

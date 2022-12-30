@@ -26,60 +26,60 @@ public class PermissionHandler {
         final String[] locationPermissions = {Manifest.permission.ACCESS_FINE_LOCATION};
         final PermissionKey pk = new PermissionKey(locationPermissions);
 
-        if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED) {
-            if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<>());
-                ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
-            }
-
-            boolean callbackHasAlreadyBeenRegistered = false;
-            for (final PermissionGrantedCallback permissionGrantedCallback : callbackRegistry.get(pk)) {
-                if (permissionGrantedCallback.getRequestCode() == callback.getRequestCode()) {
-                    callbackHasAlreadyBeenRegistered = true;
-                    break;
-                }
-            }
-            if (!callbackHasAlreadyBeenRegistered) {
-                callbackRegistry.get(pk).add(callback);
-            }
-        } else {
+//        if (ContextCompat.checkSelfPermission(activity, locationPermissions[0]) != PackageManager.PERMISSION_GRANTED) {
+//            if (!callbackRegistry.containsKey(pk)) {
+//                callbackRegistry.put(pk, new ArrayList<>());
+//                ActivityCompat.requestPermissions(activity, locationPermissions, callback.getRequestCode());
+//            }
+//
+//            boolean callbackHasAlreadyBeenRegistered = false;
+//            for (final PermissionGrantedCallback permissionGrantedCallback : callbackRegistry.get(pk)) {
+//                if (permissionGrantedCallback.getRequestCode() == callback.getRequestCode()) {
+//                    callbackHasAlreadyBeenRegistered = true;
+//                    break;
+//                }
+//            }
+//            if (!callbackHasAlreadyBeenRegistered) {
+//                callbackRegistry.get(pk).add(callback);
+//            }
+//        } else {
             callback.execute();
             executeCallbacksFor(locationPermissions);
-        }
+//        }
     }
 
     public static void requestStoragePermission(final Activity activity, final PermissionGrantedCallback requestContext) {
         final String[] storagePermission = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        final PermissionKey pk = new PermissionKey(storagePermission);
-
-        if (ContextCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
-            if (!callbackRegistry.containsKey(pk)) {
-                callbackRegistry.put(pk, new ArrayList<>());
-                ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());
-            }
-
-            boolean callbackHasAlreadyBeenRegistered = false;
-            for (final PermissionGrantedCallback permissionGrantedCallback : callbackRegistry.get(pk)) {
-                if (permissionGrantedCallback.getRequestCode() == requestContext.getRequestCode()) {
-                    callbackHasAlreadyBeenRegistered = true;
-                    break;
-                }
-            }
-            if (!callbackHasAlreadyBeenRegistered) {
-                callbackRegistry.get(pk).add(requestContext);
-
-                final PermissionGrantedCallback pgc = new PermissionGrantedCallback(requestContext.getContext()) {
-                    @Override
-                    protected void execute() {
-                        LocalStorage.resetExternalPublicCgeoDirectory();
-                    }
-                };
-                callbackRegistry.get(pk).add(pgc);
-            }
-        } else {
+//        final PermissionKey pk = new PermissionKey(storagePermission);
+//
+//        if (ContextCompat.checkSelfPermission(activity, storagePermission[0]) != PackageManager.PERMISSION_GRANTED) {
+//            if (!callbackRegistry.containsKey(pk)) {
+//                callbackRegistry.put(pk, new ArrayList<>());
+//                ActivityCompat.requestPermissions(activity, storagePermission, requestContext.getRequestCode());
+//            }
+//
+//            boolean callbackHasAlreadyBeenRegistered = false;
+//            for (final PermissionGrantedCallback permissionGrantedCallback : callbackRegistry.get(pk)) {
+//                if (permissionGrantedCallback.getRequestCode() == requestContext.getRequestCode()) {
+//                    callbackHasAlreadyBeenRegistered = true;
+//                    break;
+//                }
+//            }
+//            if (!callbackHasAlreadyBeenRegistered) {
+//                callbackRegistry.get(pk).add(requestContext);
+//
+//                final PermissionGrantedCallback pgc = new PermissionGrantedCallback(requestContext.getContext()) {
+//                    @Override
+//                    protected void execute() {
+//                        LocalStorage.resetExternalPublicCgeoDirectory();
+//                    }
+//                };
+//                callbackRegistry.get(pk).add(pgc);
+//            }
+//        } else {
             requestContext.execute();
             executeCallbacksFor(storagePermission);
-        }
+//        }
     }
 
     public static void executeCallbacksFor(final String[] permissions) {
