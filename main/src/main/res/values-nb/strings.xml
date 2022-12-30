@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">ikke skalert</string>
     <string name="log_image_titleprefix">Bilde</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Oversett</string>
     <string name="translate_to_sys_lang">Oversett til %s</string>
