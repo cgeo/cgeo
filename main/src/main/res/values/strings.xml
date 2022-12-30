@@ -841,6 +841,7 @@
     <string name="settings_category_nearbysearch">Nearby search</string>
     <string name="init_nearbysearchlimit_title">Nearby search limit</string>
     <string name="init_nearbysearchlimit_description">Limits the distance up to which caches are returned for with nearby search (0=unlimited)</string>
+    <string name="init_settings_description_unlimited">unlimited</string>
 
     <string name="settings_category_geocaching_additionals">Further services and addon</string>
     <string name="settings_category_social">Social media</string>

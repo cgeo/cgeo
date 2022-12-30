@@ -95,6 +95,7 @@
             android:defaultValue="0"
             app:min="0"
             app:max="999"
+            app:minValueDescription="@string/init_settings_description_unlimited"
             app:highRes="false"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
