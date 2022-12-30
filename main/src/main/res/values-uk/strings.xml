@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
     <string name="log_image_titleprefix">Імідж</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
     <string name="translate_to_english">Переклад англійською мовою</string>
