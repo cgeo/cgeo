@@ -10,6 +10,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 
 /** This class "connects" cgeo with the cgeo-contacts addon */
+//TODO: class can be deleted when minSDK=23, see #13777
 public class ContactsAddon {
 
     //Connector constants

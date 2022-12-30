@@ -12,6 +12,8 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
+import cgeo.geocaching.contacts.ContactsHelper;
+import cgeo.geocaching.contacts.IContactCardProvider;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
@@ -20,6 +22,9 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ClipboardUtils;
+
+import android.app.Activity;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -355,8 +360,18 @@ public abstract class AbstractConnector implements IConnector {
     @NonNull
     public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
-        if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, R.drawable.ic_menu_contactcard, context -> ContactsAddon.openContactCard(context.getContext(), context.userName)));
+
+        if (ContactsHelper.LEGACY_MODE) {
+            if (ContactsAddon.isAvailable()) {
+                actions.add(new UserAction(R.string.user_menu_open_contact, R.drawable.ic_menu_contactcard, context -> ContactsAddon.openContactCard(context.getContext(), context.userName)));
+            }
+        } else {
+            actions.add(new UserAction(R.string.user_menu_open_contact, R.drawable.ic_menu_contactcard, context -> {
+                final Context ctx = context.contextRef.get();
+                if (ctx instanceof IContactCardProvider && ctx instanceof Activity) {
+                    ((IContactCardProvider) ctx).showContactCard(StringUtils.isBlank(context.userName) ? context.displayName : context.userName);
+                }
+            }));
         }
 
         return actions;

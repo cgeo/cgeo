@@ -202,6 +202,10 @@
 
     <string name="datetime_nodateset_display">No date set</string>
 
+    <!-- Contacts -->
+    <string name="contact_not_found">Contact with alias/nickname %s not found. Add it in your contacts app first.</string>
+    <string name="contact_multiple_matches">Contact: Multiple matches</string>
+
     <!-- translation -->
     <string name="translate">Translate</string>
     <string name="translate_to_sys_lang">Translate to %s</string>
@@ -2429,11 +2433,16 @@
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
 
     <!-- permission handling -->
+    <string name="permission_dialog_title">Permission Request</string>
     <string name="close_app">Close app</string>
     <string name="ask_again">Ask me again</string>
+    <string name="goto_app_details">Open Application Info</string>
+    <string name="contacts_permission_request_explanation">c:geo can search for contacts in your address book using cacher names. To do this, you must authorize c:geo to read your address book. Otherwise, usage of this function is not possible.</string>
     <string name="location_permission_request_explanation">c:geo needs access to the GPS (fine location) on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
     <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
+
+
 
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Select color scheme</string>
