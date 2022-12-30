@@ -122,6 +122,7 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
