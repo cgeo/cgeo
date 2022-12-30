@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Tłumacz</string>
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
