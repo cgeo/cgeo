@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
     <string name="translate_to_english">Iwwersetzen op Englesch</string>
