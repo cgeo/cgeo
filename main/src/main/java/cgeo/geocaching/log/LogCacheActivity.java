@@ -22,9 +22,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -301,13 +298,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     public void onResume() {
         super.onResume();
         // Resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.LogCacheActivity) {
-                    @Override
-                    protected void executeAfter() {
-                        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-                    }
-                });
+        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     @Override

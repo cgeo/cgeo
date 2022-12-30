@@ -57,7 +57,12 @@ public class Sensors {
         return GeoDataProvider.create(CgeoApplication.getInstance());
     };
 
-    public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+    public void initialize() {
+        setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+        setupDirectionObservable();
+    }
+
+    private void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
         if (geoDataObservable != null) {
             return;
         }
@@ -77,7 +82,7 @@ public class Sensors {
 
     private static final Function<GeoData, DirectionData> GPS_TO_DIRECTION = geoData -> DirectionData.createFor(AngleUtils.reverseDirectionNow(geoData.getBearing()));
 
-    public void setupDirectionObservable() {
+    private void setupDirectionObservable() {
         if (directionDataObservable != null) {
             return;
         }

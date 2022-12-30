@@ -12,9 +12,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -142,15 +139,8 @@ public class CompassActivity extends AbstractActionBarActivity {
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CompassActivity) {
-
-                    @Override
-                    public void executeAfter() {
-                        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
-                                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
-                    }
-                });
+        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
+                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
 
         forceRefresh();
     }

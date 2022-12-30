@@ -96,6 +96,7 @@ public class LocationStatusView extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public void updateGeoData(@Nullable final GeoData geo) {
 
         this.currentCoords = geo == null ? null : geo.getCoords();

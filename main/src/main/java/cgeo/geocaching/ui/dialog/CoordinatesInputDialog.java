@@ -13,9 +13,6 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -172,12 +169,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     public void onResume() {
         super.onResume();
         // Resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this.getActivity(), new RestartLocationPermissionGrantedCallback(PermissionRequestContext.EditWaypointActivity) {
-            @Override
-            protected void executeAfter() {
-                resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-            }
-        });
+        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     @Override

@@ -62,9 +62,6 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -246,17 +243,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
-    private final String CONTACT_USER_KEY = "user";
+    private static final String CONTACT_USER_KEY = "user";
 
     private final PermissionAction openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, bundle -> {
         new ContactsHelper(this).openContactCard(bundle.getString(CONTACT_USER_KEY));
     });
-
-    @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -359,13 +350,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             requireGeodata = currentPageId == Page.DETAILS.id;
             // resume location access
-            PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
-
-                @Override
-                public void executeAfter() {
-                    startOrStopGeoDataListener(false);
-                }
-            });
+            startOrStopGeoDataListener(false);
 
             // dispose contextual actions on page change
             if (currentActionMode != null) {
@@ -444,13 +429,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
-
-            @Override
-            public void executeAfter() {
-                startOrStopGeoDataListener(true);
-            }
-        });
+        startOrStopGeoDataListener(true);
 
         if (refreshOnResume) {
             notifyDataSetChanged();

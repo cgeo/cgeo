@@ -13,15 +13,10 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.PendingDownloadsActivity;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
-import cgeo.geocaching.permission.PermissionGrantedCallback;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
 import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.sensors.GeoData;
@@ -56,16 +51,13 @@ import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -88,7 +80,6 @@ import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import com.google.android.material.button.MaterialButton;
@@ -110,9 +101,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
      */
     private SearchView searchView;
     private MenuItem searchItem;
-
-    private Geopoint addCoords = null;
-    private Geopoint currentCoords = null;
 
     private boolean initialized = false;
     private boolean restoreMessageShown = false;
@@ -276,23 +264,12 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
-            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
-                @Override
-                protected void execute() {
-                    PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
-                        // TODO: go directly into execute if the device api level is below 26
-                        @Override
-                        public void execute() {
-                            final Sensors sensors = Sensors.getInstance();
-                            sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                            sensors.setupDirectionObservable();
+            final Sensors sensors = Sensors.getInstance();
+            sensors.initialize();
 
-                            // Attempt to acquire an initial location before any real activity happens.
-                            sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
-                        }
-                    });
-                }
-            });
+            // Attempt to acquire an initial location before any real activity happens.
+            sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+
             cLog.add("ph");
 
             init();
@@ -308,13 +285,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             binding.infoNotloggedin.setOnClickListener(v ->
                     SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
-
-            binding.locationArea.setOnClickListener(v -> openNavSettings());
-            binding.locationArea.setOnLongClickListener(v -> {
-                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(currentCoords.toString()));
-                showToast(R.string.loc_copied_clipboard);
-                return true;
-            });
 
             //do file migrations if necessary
             LocalStorage.migrateLocalStorage(this);
@@ -475,30 +445,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
     }
 
-    @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            PermissionHandler.executeCallbacksFor(permissions);
-        } else {
-            final Activity activity = this;
-            final PermissionRequestContext perm = PermissionRequestContext.fromRequestCode(requestCode);
-            if (perm != null) {
-                Dialogs.newBuilder(this)
-                        .setMessage(perm.getAskAgainResource())
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.ask_again, (dialog, which) -> PermissionHandler.askAgainFor(permissions, activity, perm))
-                        .setNegativeButton(R.string.close_app, (dialog, which) -> {
-                            activity.finish();
-                            System.exit(0);
-                        })
-                        .setIcon(R.drawable.ic_menu_preferences)
-                        .create()
-                        .show();
-            }
-        }
-    }
-
     private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
             SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
@@ -518,20 +464,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             super.onResume();
 
-            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
-                @Override
-                protected void execute() {
-                    PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
-
-                        @Override
-                        public void execute() {
-                            resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
-                            resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
-
-                        }
-                    });
-                }
-            });
+            resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
+            resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
 
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
@@ -731,29 +665,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         } else {
             binding.infoNotloggedin.setVisibility(View.GONE);
         }
-    }
-
-    private static String formatAddress(final Address address) {
-        final List<String> addressParts = new ArrayList<>();
-
-        final String countryName = address.getCountryName();
-        if (countryName != null) {
-            addressParts.add(countryName);
-        }
-        final String locality = address.getLocality();
-        if (locality != null) {
-            addressParts.add(locality);
-        } else {
-            final String adminArea = address.getAdminArea();
-            if (adminArea != null) {
-                addressParts.add(adminArea);
-            }
-        }
-        return StringUtils.join(addressParts, ", ");
-    }
-
-    private void openNavSettings() {
-        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 
     @Override

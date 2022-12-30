@@ -247,8 +247,8 @@ public class InstallWizardActivity extends AppCompatActivity {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
-                        .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                        .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                        .append(getString(R.string.permission_write_external_storage_explanation_title)).append(": ").append(hasStoragePermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                        .append(getString(R.string.permission_location_explanation_title)).append(": ").append(hasLocationPermission() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                         .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
                         .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
@@ -408,43 +408,22 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private static boolean hasStoragePermission() {
         return PermissionContext.WRITE_EXTERNAL_STORAGE.hasAllPermissions();
-        //return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
     private static boolean hasLocationPermission() {
         return PermissionContext.LOCATION.hasAllPermissions();
-//        return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-//                || (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestStorage() {
         setSkip(this::gotoNext, 0);
         askWriteExternalStoragePermissionAction.launch(null, true);
-//
-//        if (!hasStoragePermission(this)) {
-//            LocalStorage.resetExternalPublicCgeoDirectory(); // workaround for permission handler callback not being called, see #9850, needs to be investigated further
-//            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.InstallWizardActivity) {
-//                @Override
-//                protected void execute() {
-//                    LocalStorage.resetExternalPublicCgeoDirectory();
-//                }
-//            });
-//        }
     }
 
     private void requestLocation() {
         setSkip(this::gotoNext, 0);
         askLocationPermissionAction.launch(null, true);
-//        if (!hasLocationPermission(this)) {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PermissionRequestContext.InstallWizardActivity.getRequestCode());
-//        }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        gotoNext();
-//    }
 
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods

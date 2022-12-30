@@ -20,9 +20,9 @@ import java.util.Set;
 
 public enum PermissionContext {
 
-    LOCATION(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, R.string.location_data_permission_request_explanation, R.string.location_data_permission_request_explanation_title),
-    WRITE_EXTERNAL_STORAGE(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, R.string.external_storage_permission_request_explanation, R.string.external_storage_permission_request_explanation_title),
-    SEARCH_USER_IN_CONTACTS(new String[]{Manifest.permission.READ_CONTACTS}, R.string.contacts_read_permission_request_explanation, R.string.contacts_read_permission_request_explanation_title);
+    LOCATION(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, R.string.permission_location_explanation, R.string.permission_location_explanation_title),
+    WRITE_EXTERNAL_STORAGE(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, R.string.permission_write_external_storage_explanation, R.string.permission_write_external_storage_explanation_title),
+    SEARCH_USER_IN_CONTACTS(new String[]{Manifest.permission.READ_CONTACTS}, R.string.permission_contacts_read_explanation, R.string.permission_contacts_read_explanation_title);
 
 
     private final String[] permissions;

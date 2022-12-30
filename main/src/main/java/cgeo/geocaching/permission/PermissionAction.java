@@ -95,9 +95,9 @@ public class PermissionAction {
             //-> we still don't have necessary permissions -> show explanation and ask user again
             SimpleDialog.of(activity).setTitle(TextParam.text(permissionContext.getExplanationTitle()))
                     .setMessage(permissionContext.getExplanation())
-                    .setPositiveButton(TextParam.id(R.string.ask_again))
+                    .setPositiveButton(TextParam.id(R.string.permission_ask_again))
                     .setNegativeButton(TextParam.id(R.string.cancel))
-                    .setNeutralButton(TextParam.id(R.string.goto_app_details))
+                    .setNeutralButton(TextParam.id(R.string.permission_goto_app_details))
                     .show((d, c) -> launchPermissionRequest(parameter),
                             (d, c) -> d.dismiss(),
                             (d, c) -> openApplicationSettings());

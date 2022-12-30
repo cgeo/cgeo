@@ -53,9 +53,6 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -832,14 +829,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
-
-                    @Override
-                    public void executeAfter() {
-                        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
-                    }
-                });
+        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }
 
     @Override

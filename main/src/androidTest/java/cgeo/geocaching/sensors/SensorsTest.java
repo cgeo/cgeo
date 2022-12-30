@@ -1,6 +1,5 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -18,8 +17,7 @@ public class SensorsTest {
     @Before
     public void setUp() throws Exception {
         sensors = Sensors.getInstance();
-        sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-        sensors.setupDirectionObservable();
+        sensors.initialize();
     }
 
     @Test
