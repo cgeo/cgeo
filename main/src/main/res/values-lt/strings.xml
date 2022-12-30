@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">nesumažintas</string>
     <string name="log_image_titleprefix">Vaizdas</string>
     <string name="datetime_nodateset_display">Nenustatyta data</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Išversti</string>
     <string name="translate_to_sys_lang">Išversti į %s</string>
