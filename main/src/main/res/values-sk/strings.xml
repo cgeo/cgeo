@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">nezmenená veľkosť</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Preložiť</string>
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
