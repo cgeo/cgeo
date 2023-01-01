@@ -9,9 +9,6 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.permission.PermissionGrantedCallback;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -255,21 +252,16 @@ public class DownloaderUtils {
     }
 
     public static void checkTargetDirectory(final Activity activity, final PersistableFolder folder, final boolean beforeDownload, final DirectoryWritable callback) {
-        PermissionHandler.requestStoragePermission(activity, new PermissionGrantedCallback(PermissionRequestContext.ReceiveMapFileActivity) {
-            @Override
-            protected void execute() {
-                final boolean mapDirIsReady = ContentStorage.get().ensureFolder(folder);
+        final boolean mapDirIsReady = ContentStorage.get().ensureFolder(folder);
 
-                if (mapDirIsReady) {
-                    callback.run(folder, true);
-                } else if (beforeDownload) {
-                    SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).setPositiveButton(TextParam.id(R.string.button_continue)).confirm(
-                            (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
-                } else {
-                    SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show((dialog, which) -> callback.run(folder, false));
-                }
-            }
-        });
+        if (mapDirIsReady) {
+            callback.run(folder, true);
+        } else if (beforeDownload) {
+            SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).setPositiveButton(TextParam.id(R.string.button_continue)).confirm(
+                    (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
+        } else {
+            SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show((dialog, which) -> callback.run(folder, false));
+        }
     }
 
     /**

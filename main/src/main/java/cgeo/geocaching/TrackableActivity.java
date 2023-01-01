@@ -17,9 +17,6 @@ import cgeo.geocaching.log.TrackableLogsViewCreator;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -222,16 +219,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.TrackableActivity) {
-
-                    @Override
-                    public void executeAfter() {
-                        if (!Settings.useLowPowerMode()) {
-                            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
-                        }
-                    }
-                });
+        geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     @Override

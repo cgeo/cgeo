@@ -17,7 +17,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
@@ -235,7 +235,7 @@ final class ALApi {
             radius = df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000;
         } else {
             // by default, search around current position
-            searchCoords = Sensors.getInstance().currentGeo().getCoords();
+            searchCoords = LocationDataProvider.getInstance().currentGeo().getCoords();
             radius = DEFAULT_RADIUS;
         }
 

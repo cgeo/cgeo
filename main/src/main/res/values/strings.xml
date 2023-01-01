@@ -340,6 +340,8 @@
     <string name="loc_gps_disabled">GPS disabled</string>
     <string name="loc_copied_clipboard">Current location was copied to clipboard</string>
     <string name="menu_centerposition">Center on my position</string>
+    <string name="location_no_permission">Warning: no permission to get location</string>
+    <string name="location_only_coarse_permission">Warning: only approximate location permission</string>
 
 
     <!-- standard menu -->
@@ -2433,16 +2435,15 @@
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
 
     <!-- permission handling -->
-    <string name="permission_dialog_title">Permission Request</string>
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="goto_app_details">Open Application Info</string>
-    <string name="contacts_permission_request_explanation">c:geo can search for contacts in your address book using cacher names. To do this, you must authorize c:geo to read your address book. Otherwise, usage of this function is not possible.</string>
-    <string name="location_permission_request_explanation">c:geo needs access to the GPS (fine location) on your device to locate your position and calculate distance and direction to geocaches. It cannot be used without this permission.</string>
-    <string name="storage_permission_request_explanation">c:geo will write data onto your phone storage or SD card as soon as you save geocaches for offline use. Furthermore c:geo will use your phone storage for import and export of files and reading of offline maps. It cannot be used without this permission.</string>
+    <string name="permission_ask_again">Ask me again</string>
+    <string name="permission_goto_app_details">Open Application Info</string>
+
+    <string name="permission_contacts_read_explanation_title">Contacts read permission</string>
+    <string name="permission_contacts_read_explanation">c:geo can search for contacts in your address book using cacher names. To do this, you must authorize c:geo to read your address book. Otherwise, usage of this function is not possible.</string>
+    <string name="permission_location_explanation_title">Location permission</string>
+    <string name="permission_location_explanation">c:geo is optimized for usage with GPS data (fine location) to locate your position and calculate distance and direction to geocaches. Without this permission, location-based functions will not work as expected.</string>
+
     <string name="storage_permission_needed">This function is not possible without storage permission.</string>
-
-
 
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Select color scheme</string>
@@ -2675,8 +2676,6 @@
     <string name="wizard_advanced_restore_info">If you have a backup of a previous installation you can restore settings and/or geocache data.</string>
     <string name="status_not_ok">ERROR</string>
     <string name="wizard_status_title">Configuration status</string>
-    <string name="wizard_status_storage_permission">Storage permission</string>
-    <string name="wizard_status_location_permission">Location permission</string>
     <string name="wizard_status_basefolder">Base folder</string>
     <string name="wizard_status_platform">Geocaching services</string>
     <string name="wizard_not_now">Not now</string>

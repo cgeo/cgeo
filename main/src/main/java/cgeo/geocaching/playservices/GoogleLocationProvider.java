@@ -23,7 +23,11 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 
-public class LocationProvider extends LocationCallback {
+/**
+ * Encapsulates Google's location services, especially its FusedLocationProvider,
+ * as described here: https://developers.google.com/location-context/fused-location-provider
+ */
+public class GoogleLocationProvider extends LocationCallback {
 
     private static final LocationRequest LOCATION_REQUEST =
             LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(2000).setFastestInterval(250);
@@ -31,13 +35,13 @@ public class LocationProvider extends LocationCallback {
             LocationRequest.create().setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY).setInterval(10000).setFastestInterval(5000);
     private static final AtomicInteger mostPreciseCount = new AtomicInteger(0);
     private static final AtomicInteger lowPowerCount = new AtomicInteger(0);
-    private static LocationProvider instance = null;
+    private static GoogleLocationProvider instance = null;
     private static final ReplaySubject<GeoData> subject = ReplaySubject.createWithSize(1);
     private final FusedLocationProviderClient fusedLocationClient;
 
-    private static synchronized LocationProvider getInstance(final Context context) {
+    private static synchronized GoogleLocationProvider getInstance(final Context context) {
         if (instance == null) {
-            instance = new LocationProvider(context);
+            instance = new GoogleLocationProvider(context);
         }
         return instance;
     }
@@ -68,7 +72,7 @@ public class LocationProvider extends LocationCallback {
     }
 
     private static Observable<GeoData> get(final Context context, final AtomicInteger reference) {
-        final LocationProvider instance = getInstance(context);
+        final GoogleLocationProvider instance = getInstance(context);
 
         return Observable.create(emitter -> {
             if (reference.incrementAndGet() == 1) {
@@ -132,7 +136,7 @@ public class LocationProvider extends LocationCallback {
      *
      * @param context the context used to retrieve the system services
      */
-    private LocationProvider(final Context context) {
+    private GoogleLocationProvider(final Context context) {
         final GeoData initialLocation = GeoData.getInitialLocation(context);
         subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
 

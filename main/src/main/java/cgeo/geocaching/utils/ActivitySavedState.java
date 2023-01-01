@@ -64,7 +64,9 @@ public class ActivitySavedState implements SavedStateRegistry.SavedStateProvider
 
     public void set(final Bundle state) {
         this.data.clear();
-        this.data.putAll(state);
+        if (state != null) {
+            this.data.putAll(state);
+        }
     }
 
     public void clear() {

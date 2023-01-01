@@ -13,12 +13,9 @@ import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.storage.DataStore;
@@ -108,7 +105,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     @NonNull
     private static Geopoint currentCoords() {
-        return Sensors.getInstance().currentGeo().getCoords();
+        return LocationDataProvider.getInstance().currentGeo().getCoords();
     }
 
     public static void show(final FragmentManager mgr, @Nullable final Geocache cache, @Nullable final Geopoint gp) {
@@ -172,12 +169,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     public void onResume() {
         super.onResume();
         // Resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this.getActivity(), new RestartLocationPermissionGrantedCallback(PermissionRequestContext.EditWaypointActivity) {
-            @Override
-            protected void executeAfter() {
-                resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-            }
-        });
+        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
     }
 
     @Override

@@ -4,7 +4,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
@@ -49,7 +49,7 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     @Override
     protected Float getValue(final Geocache cache) {
         final Geopoint gp = (useCurrentPosition || coordinate == null) ?
-                Sensors.getInstance().currentGeo().getCoords() : coordinate;
+                LocationDataProvider.getInstance().currentGeo().getCoords() : coordinate;
 
         return gp.distanceTo(cache.getCoords());
     }
@@ -60,7 +60,7 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     @NonNull
     public Geopoint getEffectiveCoordinate() {
         return (useCurrentPosition || coordinate == null) ?
-                Sensors.getInstance().currentGeo().getCoords() : coordinate;
+                LocationDataProvider.getInstance().currentGeo().getCoords() : coordinate;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final Geopoint gp = (useCurrentPosition || coordinate == null) ?
-                Sensors.getInstance().currentGeo().getCoords() : coordinate;
+                LocationDataProvider.getInstance().currentGeo().getCoords() : coordinate;
         final String sql = DataStore.getSqlDistanceSquare(
                 sqlBuilder.getMainTableId() + ".latitude", sqlBuilder.getMainTableId() + ".longitude", gp);
 

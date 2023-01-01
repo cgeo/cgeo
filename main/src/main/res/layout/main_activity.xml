@@ -118,34 +118,11 @@
             tools:text="1234 caches stored offline"/>
         <View style="@style/separator_horizontal" />
 
-        <TextView
-            android:id="@+id/nav_location"
-            style="@style/location_current"
-            android:textIsSelectable="false"
-            android:text="@string/loc_trying" />
+        <cgeo.geocaching.ui.LocationStatusView
+            android:id="@+id/location_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/nav_type"
-                style="@style/location_current_type"
-                android:textIsSelectable="false"
-                tools:text="GPS?" />
-
-            <TextView
-                android:id="@+id/nav_accuracy"
-                style="@style/location_current_accuracy"
-                android:textIsSelectable="false"
-                tools:text="+/-123 meters" />
-
-            <TextView
-                android:id="@+id/nav_satellites"
-                style="@style/location_current_satellites"
-                android:textIsSelectable="false"
-                tools:text="123 satellites" />
-        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

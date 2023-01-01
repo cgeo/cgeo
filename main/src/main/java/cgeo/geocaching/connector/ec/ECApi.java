@@ -18,7 +18,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -138,7 +138,7 @@ final class ECApi {
         }
 
         //by default, search around current position
-        return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
+        return searchByCenter(LocationDataProvider.getInstance().currentGeo().getCoords());
     }
 
     @NonNull

@@ -53,12 +53,9 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
@@ -832,14 +829,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
-
-                    @Override
-                    public void executeAfter() {
-                        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
-                    }
-                });
+        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }
 
     @Override
@@ -950,7 +940,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void switchMyLocationButton() {
         myLocSwitch.setChecked(followMyLocation);
         if (followMyLocation) {
-            myLocationInMiddle(Sensors.getInstance().currentGeo());
+            myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
         }
     }
 
@@ -1146,7 +1136,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
         @NonNull
-        Location currentLocation = Sensors.getInstance().currentGeo();
+        Location currentLocation = LocationDataProvider.getInstance().currentGeo();
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;

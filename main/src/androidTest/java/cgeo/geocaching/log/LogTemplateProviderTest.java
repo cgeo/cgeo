@@ -4,7 +4,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
@@ -110,7 +110,7 @@ public class LogTemplateProviderTest {
     @Test
     public void testLocationTemplate() {
         final LogContext context = createCache();
-        Sensors.getInstance().currentGeo().reset();
+        LocationDataProvider.getInstance().currentGeo().reset();
         final String distance = Units.getDistanceFromMeters(0);
         final String log = LogTemplateProvider.applyTemplates("[LOCATION]", context);
         assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±" + distance + ")");

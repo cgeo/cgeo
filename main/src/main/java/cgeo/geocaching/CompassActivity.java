@@ -10,14 +10,13 @@ import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.sensors.DirectionData;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GnssStatusProvider.Status;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -25,7 +24,6 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.annotation.SuppressLint;
@@ -65,6 +63,11 @@ public class CompassActivity extends AbstractActionBarActivity {
     private ProximityNotificationByCoords proximityNotification = null;
     private final TextSpinner<DirectionData.DeviceOrientation> deviceOrientationMode = new TextSpinner<>();
     private CompassActivityBinding binding;
+
+    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
+        binding.locationStatus.updatePermissions();
+    });
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -125,6 +128,10 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        binding.locationStatus.setPermissionRequestCallback(() -> {
+            askLocationPermissionAction.launch();
+        });
     }
 
     @Override
@@ -132,15 +139,8 @@ public class CompassActivity extends AbstractActionBarActivity {
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CompassActivity) {
-
-                    @Override
-                    public void executeAfter() {
-                        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
-                                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
-                    }
-                });
+        resumeDisposables(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
+                LocationDataProvider.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
 
         forceRefresh();
     }
@@ -163,8 +163,8 @@ public class CompassActivity extends AbstractActionBarActivity {
     private void forceRefresh() {
         reconfigureGui();
 
-        final Sensors sensors = Sensors.getInstance();
-        geoDirHandler.updateGeoDir(sensors.currentGeo(), sensors.currentDirection());
+        final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
+        geoDirHandler.updateGeoDir(locationDataProvider.currentGeo(), locationDataProvider.currentDirection());
     }
 
     /**
@@ -172,20 +172,20 @@ public class CompassActivity extends AbstractActionBarActivity {
      */
     private void reconfigureGui() {
         // Force a refresh of location and direction when data is available.
-        final Sensors sensors = Sensors.getInstance();
+        final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
 
         // reset the visibility of the compass toggle button if the device does not support it.
-        if (sensors.hasCompassCapabilities()) {
+        if (locationDataProvider.hasCompassCapabilities()) {
             binding.useCompass.setChecked(Settings.isUseCompass());
             binding.useCompass.setOnClickListener(view -> {
                 Settings.setUseCompass(((ToggleButton) view).isChecked());
-                findViewById(R.id.device_orientation_mode).setVisibility(sensors.hasCompassCapabilities() && binding.useCompass.isChecked() ? View.VISIBLE : View.GONE);
+                findViewById(R.id.device_orientation_mode).setVisibility(locationDataProvider.hasCompassCapabilities() && binding.useCompass.isChecked() ? View.VISIBLE : View.GONE);
             });
         } else {
             binding.useCompass.setVisibility(View.GONE);
         }
         deviceOrientationMode.setTextView(findViewById(R.id.device_orientation_mode)).set(Settings.getDeviceOrientationMode());
-        findViewById(R.id.device_orientation_mode).setVisibility(sensors.hasCompassCapabilities() && binding.useCompass.isChecked() ? View.VISIBLE : View.GONE);
+        findViewById(R.id.device_orientation_mode).setVisibility(locationDataProvider.hasCompassCapabilities() && binding.useCompass.isChecked() ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -247,7 +247,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
         setDestCoords(coords);
         setTargetDescription(newDescription);
-        updateDistanceInfo(Sensors.getInstance().currentGeo());
+        updateDistanceInfo(LocationDataProvider.getInstance().currentGeo());
 
         Log.d("destination set: " + newDescription + " (" + dstCoords + ")");
     }
@@ -301,11 +301,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
         public void accept(final Status gpsStatus) {
-            if (gpsStatus.satellitesVisible >= 0) {
-                binding.navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + "/" + gpsStatus.satellitesVisible);
-            } else {
-                binding.navSatellites.setText("");
-            }
+            binding.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
 
@@ -314,15 +310,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         @Override
         public void updateGeoDirData(@NonNull final GeoData geo, final DirectionData dir) {
             try {
-                binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
-
-                if (geo.getAccuracy() >= 0) {
-                    binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
-                } else {
-                    binding.navAccuracy.setText(null);
-                }
-
-                binding.navLocation.setText(geo.getCoords() + GeoHeightUtils.getAverageHeight(geo, false));
+                binding.locationStatus.updateGeoData(geo);
 
                 updateDistanceInfo(geo);
 

@@ -11,11 +11,12 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.playservices.GooglePlayServices;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
-import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -24,7 +25,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.UriPermission;
 import android.content.pm.PackageManager;
@@ -83,7 +83,7 @@ public final class SystemInformation {
                 .append("\nSensor and location:")
                 .append("\n-------")
                 .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-                .append("\n- Compass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+                .append("\n- Compass capabilities: ").append(LocationDataProvider.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\n- Rotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
                 .append("\n- Orientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\n- Magnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
@@ -130,10 +130,11 @@ public final class SystemInformation {
         body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
         appendAddons(body);
 
-        body.append("\n")
-                .append("\nPermissions & paths:")
-                .append("\n-------");
         appendPermissions(context, body);
+
+        body.append("\n")
+                .append("\nPaths")
+                .append("\n-------");
         appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
@@ -277,13 +278,19 @@ public final class SystemInformation {
         return present ? "present" : "absent";
     }
 
-    private static void appendPermission(final Context context, final StringBuilder body, final String name, final String permission) {
-        body.append('\n').append(name).append(" permission: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+    private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
+        body.append("\n-").append(permission).append(":: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {
-        appendPermission(context, body, "- Fine location", Manifest.permission.ACCESS_FINE_LOCATION);
-        appendPermission(context, body, "- Write external storage", Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        body.append("\n")
+                .append("\nPermissions")
+                .append("\n-------");
+        for (PermissionContext pc : PermissionContext.values()) {
+            for (String permission : pc.getPermissions()) {
+                appendPermission(context, body, permission);
+            }
+        }
     }
 
     private static void appendGooglePlayServicesVersion(final Context context, final StringBuilder body) {

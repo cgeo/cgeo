@@ -17,6 +17,9 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Provides access to Location Data (GNSS) via Android's Location Manager (Context.LOCATION_SERVICE)
+ */
 public class GeoDataProvider {
 
     private GeoDataProvider() {

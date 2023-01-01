@@ -45,12 +45,9 @@ import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
@@ -629,15 +626,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this.activity,
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CGeoMap) {
-
-                    @Override
-                    public void executeAfter() {
-                        mapView.onResume();
-                        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
-                    }
-                });
+        mapView.onResume();
+        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
@@ -1030,7 +1020,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
-        Location currentLocation = Sensors.getInstance().currentGeo();
+        Location currentLocation = LocationDataProvider.getInstance().currentGeo();
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
@@ -1520,7 +1510,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (myLocSwitch != null) {
             myLocSwitch.setChecked(followMyLocation);
             if (followMyLocation) {
-                myLocationInMiddle(Sensors.getInstance().currentGeo());
+                myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
             }
         }
     }

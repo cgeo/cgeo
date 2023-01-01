@@ -13,7 +13,7 @@ import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
 import cgeo.geocaching.ui.TextParam;
@@ -148,7 +148,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         initFromBundle(savedInstanceState);
         initFromBundle(getArguments());
         if (geopoint == null) {
-            geopoint = Sensors.getInstance().currentGeo().getCoords();
+            geopoint = LocationDataProvider.getInstance().currentGeo().getCoords();
         }
     }
 

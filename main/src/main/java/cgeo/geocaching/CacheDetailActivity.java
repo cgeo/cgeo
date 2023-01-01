@@ -62,12 +62,9 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
-import cgeo.geocaching.permission.PermissionHandler;
-import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
@@ -246,15 +243,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
-    private final PermissionAction<String> openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, user -> {
-        new ContactsHelper(this).openContactCard(user);
+    private static final String CONTACT_USER_KEY = "user";
+
+    private final PermissionAction openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, bundle -> {
+        new ContactsHelper(this).openContactCard(bundle.getString(CONTACT_USER_KEY));
     });
-
-    @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -357,13 +350,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             requireGeodata = currentPageId == Page.DETAILS.id;
             // resume location access
-            PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
-
-                @Override
-                public void executeAfter() {
-                    startOrStopGeoDataListener(false);
-                }
-            });
+            startOrStopGeoDataListener(false);
 
             // dispose contextual actions on page change
             if (currentActionMode != null) {
@@ -442,13 +429,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         super.onResume();
 
         // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
-
-            @Override
-            public void executeAfter() {
-                startOrStopGeoDataListener(true);
-            }
-        });
+        startOrStopGeoDataListener(true);
 
         if (refreshOnResume) {
             notifyDataSetChanged();
@@ -618,7 +599,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public void showContactCard(final String userName) {
-        openContactCardAction.launch(userName);
+        final Bundle param = new Bundle();
+        param.putString(CONTACT_USER_KEY, userName);
+        openContactCardAction.launch(param);
     }
 
     private abstract static class AbstractWaypointModificationCommand extends AbstractCommand {
@@ -2144,7 +2127,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 headerBinding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     final Waypoint newWaypoint = new Waypoint(Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                    newWaypoint.setCoords(Sensors.getInstance().currentGeo().getCoords());
+                    newWaypoint.setCoords(LocationDataProvider.getInstance().currentGeo().getCoords());
                     newWaypoint.setGeocode(cache.getGeocode());
                     if (cache.addOrChangeWaypoint(newWaypoint, true)) {
                         addWaypointAndSort(sortedWaypoints, newWaypoint);
