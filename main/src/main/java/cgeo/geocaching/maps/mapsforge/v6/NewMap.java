@@ -19,6 +19,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
+import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
@@ -38,6 +39,7 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemLayer;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.maps.mapsforge.v6.layers.GeoObjectLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.NavigationLayer;
@@ -59,8 +61,10 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -70,6 +74,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.GeoJsonUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
@@ -110,10 +115,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
 
+import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -132,6 +140,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
 import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
+import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.model.common.Observer;
@@ -154,6 +163,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private TapHandlerLayer tapHandlerLayer;
     private RouteLayer routeLayer;
     private TrackLayer trackLayer;
+    private GeoObjectLayer geoObjectLayer;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
@@ -736,8 +746,31 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (tracks != null) {
             tracks.resumeAllTracks(this::resumeTrack);
         }
+        resumeGeoObjects();
         mapView.getModel().mapViewPosition.addObserver(this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
+    }
+
+    private void resumeGeoObjects() {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+            final Map<String, Layer> layers = new HashMap<>();
+            for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.GPX)) {
+                if (fi.name.endsWith(".json")) {
+                    try (InputStream is = ContentStorage.get().openForRead(fi.uri)) {
+                        final List<GeoObject> objects = GeoJsonUtils.parseGeoJson(is);
+                        layers.put(fi.name, GeoObjectLayer.createGeoObjectLayer(objects, this.geoObjectLayer.getDisplayModel()));
+                    } catch (Exception ex) {
+                        Log.w("Problem reading file '" + fi.name + "'", ex);
+                    }
+                }
+            }
+            return layers;
+        }, map -> {
+            for (Map.Entry<String, Layer> entry : map.entrySet()) {
+                this.geoObjectLayer.addGeoObjectLayer(entry.getKey(), entry.getValue());
+            }
+        });
+
     }
 
     @Override
@@ -763,6 +796,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             }
         });
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
+
+        //GeoobjectLayer
+        this.geoObjectLayer = new GeoObjectLayer();
+        this.mapView.getLayerManager().getLayers().add(this.geoObjectLayer);
 
         // TrackLayer
         this.trackLayer = new TrackLayer();
@@ -862,6 +899,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.navigationLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.routeLayer);
         this.routeLayer = null;
+        this.mapView.getLayerManager().getLayers().remove(this.geoObjectLayer);
+        this.geoObjectLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.trackLayer);
         this.trackLayer = null;
         this.mapView.getLayerManager().getLayers().remove(this.historyLayer);
