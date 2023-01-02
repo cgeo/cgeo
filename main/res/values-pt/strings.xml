@@ -394,6 +394,7 @@
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
     <string name="caches_sort_eventdate">Data do evento</string>
     <string name="caches_select_mode">Modo de selecção</string>
+    <string name="caches_select_next">Seleccionar as próximas 20 caches</string>
     <string name="caches_select_mode_exit">Sair do modo de selecção</string>
     <string name="caches_select_invert">Inverter selecção</string>
     <string name="caches_nearby">Por perto</string>
@@ -2201,6 +2202,11 @@
     <string name="make_visible">tornar visível</string>
     <string name="hide">ocultar</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
     <string name="switch_on">Ligado</string>
