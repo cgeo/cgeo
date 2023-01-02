@@ -587,9 +587,6 @@
     <string name="list_list_headline">Lëschten:</string>
     <!-- calendar adder -->
     <!-- permission handling -->
-    <string name="close_app">App zoumaachen</string>
-    <string name="ask_again">Fro mech nach emol</string>
-    <string name="storage_permission_request_explanation">c:geo wäert Daten op de Späicher vum Handy oder der SD Kaart späichere soubal\'s du Geocache späichers fir offline ze benotzen. Ausserdeem wäert c:geo de Späicher fir den Import, Export an dem Liese vun Offline Kaarte benotzen. Se kann net ouni des Erlabnis benotzt ginn.</string>
     <string name="storage_permission_needed">Des Funktioun ass ouni d\'Zougangsberechtegung op de Späicher net méiglech.</string>
     <!-- colors -->
     <string name="reset_to_default">Standard</string>
