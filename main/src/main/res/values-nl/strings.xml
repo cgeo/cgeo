@@ -630,7 +630,6 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="about_system_collecting">Systeeminformatie wordt verzameld, even geduld aub…</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
     <string name="about_system_info">c:geo systeeminformatie</string>
@@ -2159,10 +2158,6 @@
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
     <!-- permission handling -->
-    <string name="close_app">App sluiten</string>
-    <string name="ask_again">Opnieuw vragen</string>
-    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS (precieze locatie) op je apparaat om je positie te vinden en afstand en richting van geocaches te berekenen. Het kan niet worden gebruikt zonder deze toestemming.</string>
-    <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
@@ -2375,8 +2370,6 @@
     <string name="wizard_advanced_restore_info">Als je een backup van een eerdere installatie hebt, kun je instellingen en/of geocache gegevens herstellen.</string>
     <string name="status_not_ok">FOUT</string>
     <string name="wizard_status_title">Configuratie status</string>
-    <string name="wizard_status_storage_permission">Opslag permissie</string>
-    <string name="wizard_status_location_permission">Locatie permissie</string>
     <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
     <string name="wizard_not_now">Niet nu</string>
