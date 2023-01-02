@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">이미지</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
     <!-- Contacts -->
+    <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
+    <string name="contact_multiple_matches">연락처: 여러 일치 항목</string>
     <!-- translation -->
     <string name="translate">번역</string>
     <string name="translate_to_sys_lang">%s로 번역하기</string>
@@ -320,6 +322,8 @@
     <string name="loc_gps_disabled">GPS 비활성화</string>
     <string name="loc_copied_clipboard">현재 위치가 클립보드에 복사되었습니다.</string>
     <string name="menu_centerposition">내위치를 중심으로</string>
+    <string name="location_no_permission">경고: 위치를 가져올 권한이 없습니다.</string>
+    <string name="location_only_coarse_permission">경고: 대략적인 위치 권한만 허용</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo에 대해</string>
     <string name="menu_helpers">보조 프로그램</string>
@@ -623,7 +627,6 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
-    <string name="about_system_collecting">시스템 정보를 수집 중입니다. 잠시 기다려주십시오…</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
@@ -2130,10 +2133,12 @@
     <string name="init_confirm_debug">c:geo가 디버그 모드에서 실행됩니다!</string>
     <string name="list_confirm_debug_message">디버그 모드는 불안정해질 수 있습니다. 정상 모드로 돌아가시겠습니까?</string>
     <!-- permission handling -->
-    <string name="close_app">앱 닫기</string>
-    <string name="ask_again">다시 묻기</string>
-    <string name="location_permission_request_explanation">c:geo는 위치를 찾고 캐시까지의 거리 및 방향을 계산하기 위해 GPS(특정 위치)에 대한 접근이 필요합니다. 이 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
-    <string name="storage_permission_request_explanation">c:geo는 오프라인용으로 지오캐시를 저장할 때, 데이터를 휴대폰 저장장치 혹은 SD 카드에 데이터를 기록합니다. 또한 c:geo는 파일을 불러오거나 내보낼때, 지도를 읽어들일 때에도 휴대폰 저장장치를 사용합니다. 이러한 접근 권한 없이 c:geo를 사용할 수 없습니다.</string>
+    <string name="permission_ask_again">다시 묻기</string>
+    <string name="permission_goto_app_details">응용 프로그램 정보 열기</string>
+    <string name="permission_contacts_read_explanation_title">연락처 읽기 권한</string>
+    <string name="permission_contacts_read_explanation">c:geo는 캐셔 이름을 사용하여 주소록에서 연락처를 검색할 수 있습니다. 이렇게 하려면 주소록을 읽을 수 있도록 c:geo에 권한을 부여해야 합니다. 그렇지 않으면 이 기능을 사용할 수 없습니다.</string>
+    <string name="permission_location_explanation_title">위치 정보 액세스 권한</string>
+    <string name="permission_location_explanation">c:geo는 위치를 찾고 지오캐시까지의 거리와 방향을 계산하기 위해 GPS 데이터(정밀한 위치)와 함께 사용하는 데 최적화되어 있습니다. 이 권한이 없으면 위치 기반 기능이 예상대로 작동하지 않습니다.</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
@@ -2345,8 +2350,6 @@
     <string name="wizard_advanced_restore_info">이전 설치의 백업이있는 경우 설정 및 / 또는 지오캐시 데이터를 복원 할 수 있습니다.</string>
     <string name="status_not_ok">오류</string>
     <string name="wizard_status_title">구성 상태</string>
-    <string name="wizard_status_storage_permission">저장소 권한</string>
-    <string name="wizard_status_location_permission">위치 정보 액세스 권한</string>
     <string name="wizard_status_basefolder">기본 폴더</string>
     <string name="wizard_status_platform">지오캐싱 서비스</string>
     <string name="wizard_not_now">지금은 아닙니다</string>
