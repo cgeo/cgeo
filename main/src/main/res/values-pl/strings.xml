@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
+    <string name="contact_multiple_matches">Kontakt: wiele pasujących</string>
     <!-- translation -->
     <string name="translate">Tłumacz</string>
     <string name="translate_to_sys_lang">Przetłumacz na %s</string>
@@ -197,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
+    <string name="err_captcha">Usługa wymaga Captcha. Proszę otworzyć stronę geocaching.com w przeglądarce i rozwiązać Captcha, który wyświetla się podczas logowania. Następnie spróbuj ponownie zalogować się za pomocą c:geo.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_lc">Nie udało się połączyć z labs.geocaching.com. Strona może być wyłączona, lub twoje połączenie internetowe nie działa.</string>
@@ -207,6 +210,7 @@
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
     <string name="err_comm">Nieznany błąd komunikacji. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła</string>
+    <string name="err_wrong">Błędna nazwa użytkownika i/lub hasło.</string>
     <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrytkami.</string>
     <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrytek.</string>
     <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
@@ -318,6 +322,8 @@
     <string name="loc_gps_disabled">GPS wyłączony</string>
     <string name="loc_copied_clipboard">Bieżąca lokalizacja została skopiowana do schowka</string>
     <string name="menu_centerposition">Wyśrodkuj na moje położenie</string>
+    <string name="location_no_permission">Ostrzeżenie: brak uprawnień do uzyskania lokalizacji</string>
+    <string name="location_only_coarse_permission">Ostrzeżenie: uprawnienia tylko do przybliżonej lokalizacji</string>
     <!-- standard menu -->
     <string name="menu_about">O c:geo</string>
     <string name="menu_helpers">Przydatne programy</string>
@@ -399,6 +405,8 @@
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
+    <string name="caches_select_next20">Wybierz następne 20 skrytek</string>
+    <string name="caches_select_next100">Wybierz następne 100 skrytek</string>
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>
@@ -547,6 +555,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Zaczyna się od</string>
     <string name="cache_filter_stringfilter_type_ends_with">Kończy się na</string>
     <string name="cache_filter_stringfilter_type_pattern">Wzorzec</string>
+    <string name="cache_filter_datefilter_absolute">Bezwzględne</string>
+    <string name="cache_filter_datefilter_relative">W stosunku do dzisiaj</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Zaznacz wszystkie</string>
@@ -603,6 +613,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">początek czasu</string>
     <string name="cache_filter_stored_since_stored_max_short">maks</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>więcej niż rok temu</item>
+        <item>rok temu</item>
+        <item>180 dni temu</item>
+        <item>90 dni temu</item>
+        <item>30 dni temu</item>
+        <item>2 tygodnie temu</item>
+        <item>tydzień temu</item>
+        <item>3 dni temu</item>
+        <item>mniej niż 3 dni temu</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1 roku</item>
+        <item>1 rok</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2t</item>
+        <item>1t</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -616,7 +648,6 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_system_collecting">Informacje systemowe są zbierane, proszę czekać…</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
@@ -921,6 +952,7 @@
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
     <string name="settings_info_hillshading">Cieniowanie (hillshading) jest techniką tworzenia map pomocy topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nPliki źródłowe zawierające informacje o wysokości muszą być uzyskane ręcznie – kliknij ten element dla źródeł – i umieść w folderze źródłowym określonym poniżej.</string>
+    <string name="settings_hillshading_enable">Włącz cieniowanie terenu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
@@ -1046,6 +1078,7 @@
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="category_unifiedMap">Ujednolicona mapa</string>
+    <string name="experimental">(eksperymentalna)</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
     <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
@@ -1550,6 +1583,7 @@
     <string name="formula_function_tan">Tangens</string>
     <string name="formula_function_abs">Wartość bezwzględna</string>
     <string name="formula_function_round">Zaokrąglij</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Jeżeli</string>
     <string name="formula_function_length">Długość ciągu</string>
     <string name="formula_function_substring">Podciąg</string>
@@ -2186,10 +2220,12 @@
     <string name="init_confirm_debug">c:geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
     <!-- permission handling -->
-    <string name="close_app">Zamknij aplikację</string>
-    <string name="ask_again">Zapytaj mnie ponownie</string>
-    <string name="location_permission_request_explanation">c:geo potrzebuje dostępu do GPS (dokładna lokalizacja) na twoim urządzeniu, aby określić twoją pozycję i obliczyć odległość i kierunek do skrytek. Dane z GPS nie mogą być używane bez twojej zgody.</string>
-    <string name="storage_permission_request_explanation">c:geo będzie zapisywał dane w pamięci telefonu lub na karcie SD, gdy wybierzesz zapis skrytek do użycia w trybie offline. Ponadto c:geo będzie używać pamięci telefonu do importowania i eksportowania plików oraz czytania map offline. Wszystkie te działania nie są możliwe bez udzielenia tego zezwolenia.</string>
+    <string name="permission_ask_again">Zapytaj mnie ponownie</string>
+    <string name="permission_goto_app_details">Otwórz informacje o aplikacji</string>
+    <string name="permission_contacts_read_explanation_title">Uprawnienia dostępu do kontaktów</string>
+    <string name="permission_contacts_read_explanation">c:geo może szukać kontaktów w książce adresowej używając nazw keszerów. Aby to zrobić, musisz autoryzować c:geo do odczytu książki adresowej. W przeciwnym razie użycie tej funkcji nie jest możliwe.</string>
+    <string name="permission_location_explanation_title">Uprawnienie do lokalizacji</string>
+    <string name="permission_location_explanation">c:geo jest zoptymalizowany do użycia danych GPS (dokładna lokalizacja), aby zlokalizować swoją pozycję oraz obliczyć odległość i kierunek do skrzynek. Bez tego zezwolenia funkcje oparte na lokalizacji nie będą działać zgodnie z oczekiwaniami.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Wybierz schemat kolorów</string>
@@ -2404,8 +2440,6 @@
     <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
     <string name="status_not_ok">BŁĄD</string>
     <string name="wizard_status_title">Status konfiguracji</string>
-    <string name="wizard_status_storage_permission">Uprawnienia do przechowywania danych</string>
-    <string name="wizard_status_location_permission">Dostęp do lokalizacji</string>
     <string name="wizard_status_basefolder">Folder podstawowy</string>
     <string name="wizard_status_platform">Usługi Geocaching</string>
     <string name="wizard_not_now">Nie teraz</string>
