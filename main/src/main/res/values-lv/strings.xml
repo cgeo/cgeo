@@ -1352,8 +1352,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="init_confirm_debug">c:geo darbojas atkļūdošanas režīmā!</string>
     <string name="list_confirm_debug_message">Atkļūdošanas režīms var izraisīt nestabilu aplikācijas darbību! Vai vēlies šo režīmu deaktivizēt?</string>
     <!-- permission handling -->
-    <string name="close_app">Aizvērt lietotni</string>
-    <string name="ask_again">Jautāt vēlreiz</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Izvēlies krāsu shēmu</string>
     <!-- number input -->
