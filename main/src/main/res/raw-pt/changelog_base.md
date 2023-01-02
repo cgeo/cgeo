@@ -1,6 +1,6 @@
 ### Mapa
 - Novo: Fonte de mapa OSM osm.paws.cz
-- New: Enable reading flopp.net GPX files as tracks
+- Novo: Activar a leitura de ficheiros GPX flopp.net como percursos
 
 ### Detalhes da cache
 - Novo: Nova galeria de imagens mais sofisticada
@@ -10,5 +10,5 @@
 ### Geral
 - Alteração do nível da API (compileSDK 32)
 - Actualização de algumas bibliotecas dependentes
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
-- New: Preset list name with GPX filename on import
+- Alteração: Usa outro mecanismo do Android para receber transferências (para melhor compatibilidade com o Android 12+)
+- Novo: Predefinir o nome das listas com o nome do ficheiro GPX ao importar
