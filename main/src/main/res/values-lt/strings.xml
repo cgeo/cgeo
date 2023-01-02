@@ -644,7 +644,6 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
-    <string name="about_system_collecting">Sistemos informacija renkama, palaukite…</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
     <string name="about_system_info">c:geo sistemos informacija</string>
@@ -1062,7 +1061,7 @@
     <string name="feature_log_images">Pridėti vaizdus prie įrašų</string>
     <string name="feature_watch_list">Peržiūrėti įrašus</string>
     <string name="feature_own_coordinates">Pakeistų koordinačių išsaugojimas</string>
-    <string name="feature_search_keyword">Paieška pagal raktinį žodžį</string>
+    <string name="feature_search_keyword">Paieška pagal raktinį žodį</string>
     <string name="feature_search_live_map">Žemėlapis gyvai</string>
     <string name="feature_search_center">Paieška pagal poziciją</string>
     <string name="feature_search_geocode">Paieška pagal geo kodą</string>
@@ -1677,7 +1676,7 @@
     <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
-    <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
+    <string name="search_kw_button">Paieška pagal raktinį žodį</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
@@ -2217,10 +2216,6 @@
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
     <!-- permission handling -->
-    <string name="close_app">Uždaryti programėlę</string>
-    <string name="ask_again">Paklausti dar kartą</string>
-    <string name="location_permission_request_explanation">c:geo reikia prieigos prie GPS (tikslios vietos) jūsų įrenginyje, kad nustatytų jūsų padėtį ir apskaičiuotų atstumą bei kryptį iki geoslėptuvių. Ji negali būti naudojamas be šio leidimo.</string>
-    <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
@@ -2435,8 +2430,6 @@
     <string name="wizard_advanced_restore_info">Jei turite ankstesnio diegimo atsarginę kopiją, galite atkurti nustatymus ir (arba) geoslėptuvių duomenis.</string>
     <string name="status_not_ok">KLAIDA</string>
     <string name="wizard_status_title">Konfigūracijos būsena</string>
-    <string name="wizard_status_storage_permission">Saugyklos leidimas</string>
-    <string name="wizard_status_location_permission">Vietos leidimas</string>
     <string name="wizard_status_basefolder">Pagrindinis aplankas</string>
     <string name="wizard_status_platform">Geocaching paslaugos</string>
     <string name="wizard_not_now">Ne dabar</string>
