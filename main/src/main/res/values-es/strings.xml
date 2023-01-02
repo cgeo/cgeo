@@ -595,7 +595,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
     <string name="about_help">Ayuda</string>
-    <string name="about_system_collecting">Información del sistema recopilado, por favor espere…</string>
     <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar por correo…</string>
     <string name="about_system_info">Información del sistema c:geo</string>
@@ -2021,9 +2020,6 @@ Nombre de archivo:%2$s</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
     <!-- permission handling -->
-    <string name="close_app">Cerrar aplicación</string>
-    <string name="ask_again">Preguntarme de nuevo</string>
-    <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccionar esquema de color</string>
@@ -2207,8 +2203,6 @@ Nombre de archivo:%2$s</string>
     <string name="wizard_advanced_restore_info">Si tienes una copia de seguridad de una instalación anterior puedes restaurar la configuración y/o los datos del caché.</string>
     <string name="status_not_ok">ERROR</string>
     <string name="wizard_status_title">Estado de configuración</string>
-    <string name="wizard_status_storage_permission">Permiso de almacenamiento</string>
-    <string name="wizard_status_location_permission">Permiso de ubicación</string>
     <string name="wizard_status_basefolder">Carpeta base</string>
     <string name="wizard_status_platform">Servicios de geocaching</string>
     <string name="wizard_not_now">Ahora no</string>
