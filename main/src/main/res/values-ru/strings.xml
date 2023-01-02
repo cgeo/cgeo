@@ -616,7 +616,6 @@
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
-    <string name="about_system_collecting">Собирается системная информация, подождите…</string>
     <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
     <string name="about_system_info">Служебная информация c:geo</string>
@@ -2187,10 +2186,6 @@
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
     <!-- permission handling -->
-    <string name="close_app">Закрыть приложение</string>
-    <string name="ask_again">Спросить снова</string>
-    <string name="location_permission_request_explanation">c:geo необходим доступ к GPS (точное местоположение), чтобы определять ваше местоположение и рассчитывать расстояния до тайников. Приложение не может быть использовано без этого разрешения.</string>
-    <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
     <string name="storage_permission_needed">Эта функция невозможна без разрешения на хранение.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Выберите цветовую схему</string>
@@ -2405,8 +2400,6 @@
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
     <string name="status_not_ok">ОШИБКА</string>
     <string name="wizard_status_title">Состояние настройки</string>
-    <string name="wizard_status_storage_permission">Доступ к хранилищу</string>
-    <string name="wizard_status_location_permission">Доступ к местоположению</string>
     <string name="wizard_status_basefolder">\"Основная\" папка</string>
     <string name="wizard_status_platform">Геокешинг-сервисы</string>
     <string name="wizard_not_now">Не сейчас</string>
