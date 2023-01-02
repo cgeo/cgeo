@@ -603,7 +603,6 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_system_collecting">Es recopila la informació del sistema, espereu…</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -2130,10 +2129,6 @@
     <string name="init_confirm_debug">c:Geo s\'està executant en mode de depuració!</string>
     <string name="list_confirm_debug_message">El mode de depuració provoca inestabilitat! Voleu desactivar el mode de depuració?</string>
     <!-- permission handling -->
-    <string name="close_app">Tanca l\'aplicació</string>
-    <string name="ask_again">Torna a preguntar</string>
-    <string name="location_permission_request_explanation">C:geo necessita accedir al GPS (ubicació fina) del vostre dispositiu per localitzar la vostra posició i calcular la distància i la direcció dels catxés. No es pot utilitzar sense aquest permís.</string>
-    <string name="storage_permission_request_explanation">c:geo escriurà dades al vostre telèfon o a la targeta SD tan bon punt guardeu els catxés per a un ús fora de línia. A més, c:geo utilitzarà l’emmagatzematge del vostre telèfon per a la importació i exportació d’arxius i lectura de mapes fora de línia. No es pot utilitzar sense aquest permís.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccioneu l\'esquema de color</string>
@@ -2339,8 +2334,6 @@
     <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
     <string name="status_not_ok">ERROR</string>
     <string name="wizard_status_title">Estat de la configuració</string>
-    <string name="wizard_status_storage_permission">Permís d\'emmagatzematge</string>
-    <string name="wizard_status_location_permission">Permís d\'ubicació</string>
     <string name="wizard_status_basefolder">Carpeta base</string>
     <string name="wizard_status_platform">Serveis de geocaching</string>
     <string name="wizard_not_now">Ara no</string>
