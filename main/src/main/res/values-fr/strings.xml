@@ -319,6 +319,8 @@
     <string name="loc_gps_disabled">GPS désactivé</string>
     <string name="loc_copied_clipboard">La position actuelle a été copiée dans le presse-papiers</string>
     <string name="menu_centerposition">Centrer sur ma position</string>
+    <string name="location_no_permission">Avertissement : aucune autorisation d\'utiliser la localisation</string>
+    <string name="location_only_coarse_permission">Avertissement : autorisation uniquement pour la position approximative</string>
     <!-- standard menu -->
     <string name="menu_about">À propos de c:geo</string>
     <string name="menu_helpers">Outils</string>
@@ -603,7 +605,6 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
-    <string name="about_system_collecting">Les informations systèmes sont en cours de collecte, merci de patienter…</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
@@ -2126,10 +2127,12 @@
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
     <!-- permission handling -->
-    <string name="close_app">Fermer l\'application</string>
-    <string name="ask_again">Demander plus tard</string>
-    <string name="location_permission_request_explanation">c:geo requiert l\'accès au GPS (localisation précise) de votre appareil pour calculer votre position ainsi que la distance et la direction des géocaches. c:geo ne peut pas être utilisé correctement sans cette autorisation.</string>
-    <string name="storage_permission_request_explanation">c:geo écrira des données sur votre carte SD ou votre téléphone dès que vous sauvegarderez des géocaches pour une utilisation hors-ligne. En outre c:geo utilisera le stockage de votre téléphone pour importer et exporter des fichiers et lire des cartes hors-ligne. Il ne peut être utilisé sans cette autorisation.</string>
+    <string name="permission_ask_again">Me demander plus tard</string>
+    <string name="permission_goto_app_details">Ouvrir les informations de l\'application</string>
+    <string name="permission_contacts_read_explanation_title">Autorisation de lecture des contacts</string>
+    <string name="permission_contacts_read_explanation">c:geo peut rechercher des contacts dans votre carnet d\'adresses en utilisant les noms des géocacheurs. Pour ce faire, vous devez autoriser c:geo à accéder à votre carnet d\'adresses. Sinon, l\'utilisation de cette fonctionnalité ne sera pas possible.</string>
+    <string name="permission_location_explanation_title">Autorisation d\'accès à la position</string>
+    <string name="permission_location_explanation">c:geo est optimisé pour utiliser les données GPS (localisation précise) afin de déterminer votre position et de calculer la distance et la direction des géocaches. Sans cette autorisation, les fonctionnalités basées sur la localisation ne fonctionneront pas correctement.</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
@@ -2338,8 +2341,6 @@
     <string name="wizard_advanced_restore_info">Si vous avez une sauvegarde d\'une installation précédente, vous pouvez restaurer les paramètres et/ou les données des géocaches.</string>
     <string name="status_not_ok">ERREUR</string>
     <string name="wizard_status_title">État de la configuration</string>
-    <string name="wizard_status_storage_permission">Autorisation d\'accès au stockage</string>
-    <string name="wizard_status_location_permission">Autorisation de localisation</string>
     <string name="wizard_status_basefolder">Dossier de base</string>
     <string name="wizard_status_platform">Services de Geocaching</string>
     <string name="wizard_not_now">Pas maintenant</string>
