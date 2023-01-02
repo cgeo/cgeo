@@ -602,7 +602,6 @@
     <string name="about_license">Licenza</string>
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
-    <string name="about_system_collecting">Informazioni di sistema raccolte, attendere…</string>
     <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
     <string name="about_system_info_send_button">Invia per email…</string>
     <string name="about_system_info">informazioni di sistema di c:geo</string>
@@ -2128,10 +2127,6 @@
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
     <!-- permission handling -->
-    <string name="close_app">Chiudi app</string>
-    <string name="ask_again">Chiedimi di nuovo</string>
-    <string name="location_permission_request_explanation">c:geo ha bisogno dell\'accesso al GPS sul tuo dispositivo per localizzare la posizione e calcolare la distanza e la direzione per i geocache. Non può essere utilizzato senza questo permesso.</string>
-    <string name="storage_permission_request_explanation">c:geo scriverà dati sulla tua memoria del telefono o scheda SD non appena salvi geocache per uso offline. Inoltre c:geo userà la tua memoria telefonica per importare ed esportare file e leggere mappe offline. Non può essere utilizzato senza questo permesso.</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
@@ -2342,8 +2337,6 @@
     <string name="wizard_advanced_restore_info">Se si dispone di un backup di un\'installazione precedente è possibile ripristinare le impostazioni e/o i dati cache.</string>
     <string name="status_not_ok">ERRORE</string>
     <string name="wizard_status_title">Stato della configurazione</string>
-    <string name="wizard_status_storage_permission">Permesso di archiviazione</string>
-    <string name="wizard_status_location_permission">Permesso localizzazione</string>
     <string name="wizard_status_basefolder">Cartella base</string>
     <string name="wizard_status_platform">Servizi di geocaching</string>
     <string name="wizard_not_now">Non ora</string>
