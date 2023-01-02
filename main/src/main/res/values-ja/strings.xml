@@ -578,7 +578,6 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
-    <string name="about_system_collecting">システム情報を収集しています。しばらくお待ちください…</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -2003,9 +2002,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_confirm_debug">c:geoをデバッグモードで実行しています!</string>
     <string name="list_confirm_debug_message">デバッグモードは不安定の原因になります! デバッグモードを無効にしますか?</string>
     <!-- permission handling -->
-    <string name="close_app">アプリを閉じる</string>
-    <string name="ask_again">次回も確認する</string>
-    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">配色の選択</string>
@@ -2191,8 +2187,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
     <string name="wizard_status_title">設定情報</string>
-    <string name="wizard_status_storage_permission">ストレージの権限</string>
-    <string name="wizard_status_location_permission">位置情報の権限</string>
     <string name="wizard_status_basefolder">ベースフォルダ</string>
     <string name="wizard_status_platform">ジオキャッシングサイト</string>
     <string name="wizard_not_now">今はしない</string>
