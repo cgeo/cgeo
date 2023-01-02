@@ -646,7 +646,6 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
-    <string name="about_system_collecting">Shromažďují se systémové informace, čekejte prosím…</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
@@ -2219,13 +2218,6 @@
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
     <!-- permission handling -->
-    <string name="permission_dialog_title">Žádost o oprávnění</string>
-    <string name="close_app">Zavřít aplikaci</string>
-    <string name="ask_again">Zeptat se znova</string>
-    <string name="goto_app_details">Otevřít informace o aplikaci</string>
-    <string name="contacts_permission_request_explanation">c:geo může vyhledávat kontakty v adresáři pomocí jmen geocacherů. K tomu je nutné, abyste c:geo povolili čtení adresáře kontaktů. V opačném případě není použití této funkce možné.</string>
-    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS (přesná poloha) na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
-    <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte kešky pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
@@ -2440,8 +2432,6 @@
     <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
     <string name="status_not_ok">CHYBA</string>
     <string name="wizard_status_title">Stav nastavení</string>
-    <string name="wizard_status_storage_permission">Povolení k úložišti</string>
-    <string name="wizard_status_location_permission">Povolení k poloze</string>
     <string name="wizard_status_basefolder">Základní složka</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
     <string name="wizard_not_now">Nyní ne</string>
