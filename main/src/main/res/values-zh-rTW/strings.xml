@@ -514,7 +514,6 @@
     <string name="about_license">许可</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">帮助</string>
-    <string name="about_system_collecting">已收集系統資訊，請稍待。</string>
     <string name="about_system_include">當回報bug或要求更多c:geo的資訊時，請同時回報下列系統資訊。</string>
     <string name="about_system_info_send_button">通过邮件发送…</string>
     <string name="about_system_info">c:geo 系统信息</string>
@@ -1590,8 +1589,6 @@
     <string name="init_low_disk_space">磁盘空间过低</string>
     <string name="init_confirm_debug">c:geo正在除錯模式中</string>
     <!-- permission handling -->
-    <string name="close_app">關閉app</string>
-    <string name="ask_again">下次詢問我</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">選擇顏色圖案</string>
     <string name="preference_colorpicker_select_color">選擇顏色</string>
@@ -1696,8 +1693,6 @@
     <string name="wizard_advanced_restore_label">還原</string>
     <string name="status_not_ok">錯誤</string>
     <string name="wizard_status_title">配置狀態:</string>
-    <string name="wizard_status_storage_permission">儲存空間權限</string>
-    <string name="wizard_status_location_permission">位置資訊權限</string>
     <string name="wizard_status_basefolder">基礎資料夾</string>
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>
