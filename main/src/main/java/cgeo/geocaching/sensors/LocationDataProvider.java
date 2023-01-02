@@ -141,6 +141,9 @@ public class LocationDataProvider {
     }
 
     public Observable<GeoData> geoDataObservable(final boolean lowPower) {
+        if (geoDataObservable == null || geoDataObservableLowPower == null) {
+            initialize();
+        }
         return lowPower ? geoDataObservableLowPower : geoDataObservable;
     }
 
