@@ -1393,9 +1393,6 @@
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
     <!-- permission handling -->
-    <string name="close_app">Закрити додаток</string>
-    <string name="ask_again">Запитайте ще раз</string>
-    <string name="storage_permission_request_explanation">c:geo випише дані на накопичувачі телефону або SD-карту, як тільки Ви збережете геокеші для використання в автономному режимі. Додатково:geo буде використовувати ваш телефон для імпорту та експорту файлів та читання автономних карт. Не можна використовувати без цього дозволу.</string>
     <string name="storage_permission_needed">Ця функція неможлива без дозволу на зберігання.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Виберіть колірну схему</string>
@@ -1491,8 +1488,6 @@
     <string name="wizard_advanced_restore_label">Відновити</string>
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>
-    <string name="wizard_status_storage_permission">Дозвіл на зберігання</string>
-    <string name="wizard_status_location_permission">Дозвіл на доступ до геоданих</string>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Попередній</string>
