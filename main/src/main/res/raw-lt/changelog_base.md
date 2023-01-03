@@ -11,4 +11,4 @@
 - API lygio pakeitimas (sudarytas SDK 32)
 - Atnaujinkite kai kurias priklausomas bibliotekas
 - Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
-- New: Preset list name with GPX filename on import
+- Naujiena: Iš anksto nustatytas sąrašo pavadinimas su GPX failo pavadinimu importuojant
