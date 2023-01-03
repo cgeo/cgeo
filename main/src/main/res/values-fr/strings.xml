@@ -605,6 +605,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
+    <string name="about_system_collecting">Collecte des informations systèmes, veuillez patienter…</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
