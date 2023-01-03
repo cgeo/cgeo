@@ -23,7 +23,12 @@ public class SystemInformationViewModel extends AndroidViewModel {
         super(application);
 
         systemInformation = LiveDataReactiveStreams.fromPublisher(
-            Flowable.fromCallable(() -> SystemInformation.getSystemInformation(application)).subscribeOn(Schedulers.io())
+            Flowable.fromCallable(() -> SystemInformation.getSystemInformation(application))
+                    .subscribeOn(Schedulers.io())
+                    .onErrorReturn(throwable -> {
+                        Log.e("Could not load system information", throwable);
+                        return null;
+                    })
         );
     }
 
