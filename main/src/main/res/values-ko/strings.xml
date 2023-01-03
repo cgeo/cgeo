@@ -627,6 +627,7 @@
     <string name="about_license">라이센스</string>
     <string name="about_apache_license"><a href="">Apache 라이센스, 버전 2.0</a></string>
     <string name="about_help">도움말</string>
+    <string name="about_system_collecting">시스템 정보를 수집하는 중입니다. 잠시만 기다려 주십시오…</string>
     <string name="about_system_include">오류 신고나 c:geo에 대한 추가정보 요청시, 다음 시스템 정보를 포함시켜 주세요.</string>
     <string name="about_system_info_send_button">메일로 보내기…</string>
     <string name="about_system_info">c:geo 시스템 정보</string>
