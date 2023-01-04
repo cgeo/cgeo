@@ -193,6 +193,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
+    <string name="err_captcha">このサービスにはCaptchaが必要です。ブラウザでgeocaching.comを開き、そこに表示されるCaptchaを解いてログインしてください。その後、再度c:geoでログインを試みてください。</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
@@ -609,6 +610,10 @@
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
     <!-- download manager -->
     <string name="debug_current_downloads">実行中のダウンロード</string>
+    <string name="downloader_pending_downloads">ダウンロード一覧</string>
+    <string name="downloader_cancel_download">ダウンロードのキャンセル</string>
+    <string name="downloader_cancel_file">「%s」のダウンロードをキャンセルして、ダウンロードした一時ファイルを削除しますか?</string>
+    <string name="downloader_cancelled_download">「%s」のダウンロードはキャンセルされました</string>
     <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
@@ -1128,7 +1133,7 @@
     <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
     <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
-    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
+    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルされました</string>
     <string name="cache_description">説明</string>
     <string name="cache_description_table_note">キャッシュの説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
     <string name="cache_area_description">エリアの説明</string>
@@ -2116,6 +2121,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_target_not_writable">選択したファルダ「%s」は書き込み可能ではありません。地図ファイルはシステムのダウンロードフォルダに保存されており、地図フォルダに手動で移動する必要があります。</string>
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
+    <string name="download_confirmation_updates">更新ファイル:</string>
+    <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
     <string name="download_error">ダウンロードできませんでした(エラー#%d)</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
