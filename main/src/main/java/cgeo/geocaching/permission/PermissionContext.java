@@ -21,7 +21,9 @@ import java.util.Set;
 public enum PermissionContext {
 
     LOCATION(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, R.string.permission_location_explanation, R.string.permission_location_explanation_title),
-    SEARCH_USER_IN_CONTACTS(new String[]{Manifest.permission.READ_CONTACTS}, R.string.permission_contacts_read_explanation, R.string.permission_contacts_read_explanation_title);
+    SEARCH_USER_IN_CONTACTS(new String[]{Manifest.permission.READ_CONTACTS}, R.string.permission_contacts_read_explanation, R.string.permission_contacts_read_explanation_title),
+    SHOW_WALLPAPER(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, R.string.permission_read_external_storage_explanation, R.string.permission_read_external_storage_explanation_title);
+
 
 
     private final String[] permissions;

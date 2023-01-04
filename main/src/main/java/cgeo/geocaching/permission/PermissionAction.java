@@ -5,20 +5,26 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ActivitySavedState;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ParcelableValue;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.activity.ComponentActivity;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
+import androidx.lifecycle.LifecycleOwner;
 import static androidx.lifecycle.Lifecycle.State.INITIALIZED;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A launcher for Actions which depend on Permissions.
@@ -27,24 +33,37 @@ import java.util.Map;
  * Therefore instances MUST be created as part of Activity initialization, ideally in the variable init part.
  * See e.g. https://developer.android.com/training/basics/intents/result for more details
  */
-public class PermissionAction {
+public class PermissionAction<T> {
 
-    private final Activity activity;
+    private static final String PARAMETER_KEY = "param_key";
+
+    private final ComponentActivity activity;
     private final PermissionContext permissionContext;
-    private final Consumer<Bundle> callback;
+    private final Consumer<T> callback;
     private final ActivitySavedState savedState;
     private final ActivityResultLauncher<String[]> permissionLauncher;
 
 
     /** creates and registers a permission action with an Activity */
-    public static PermissionAction register(final ComponentActivity activity, final PermissionContext pCtx, final Consumer<Bundle> callback) {
-        if (activity.getLifecycle().getCurrentState() != INITIALIZED) {
-            throw new IllegalStateException("Activity must be in state INITIALIZED when creating launchers: " + activity.getClass().getName());
-        }
-        return new PermissionAction(activity, pCtx, callback);
+    public static <T> PermissionAction<T> register(@NonNull final ComponentActivity activity, @NonNull final PermissionContext pCtx, @Nullable final Consumer<T> callback) {
+        checkActivityObject(activity);
+        return new PermissionAction<>(activity, pCtx, callback);
     }
 
-    private PermissionAction(final ComponentActivity activity, final PermissionContext pCtx, final Consumer<Bundle> callback) {
+    private static void checkActivityObject(@Nullable final ComponentActivity activity) {
+        Objects.requireNonNull(activity);
+        final List<Class<?>> neededClasses = Arrays.asList(LifecycleOwner.class, Context.class);
+        for (Class<?> nc : neededClasses) {
+            if (!nc.isAssignableFrom(activity.getClass())) {
+                throw new IllegalStateException("Subject must implement all of: " + neededClasses + " but doesn't implement: " + nc);
+            }
+        }
+        if (((LifecycleOwner) activity).getLifecycle().getCurrentState() != INITIALIZED) {
+            throw new IllegalStateException("Lifecycle must be in state INITIALIZED when creating launchers: " + activity.getClass().getName());
+        }
+    }
+
+    private PermissionAction(final ComponentActivity activity, final PermissionContext pCtx, final Consumer<T> callback) {
         this.activity = activity;
         this.permissionContext = pCtx;
         this.callback = callback;
@@ -60,7 +79,7 @@ public class PermissionAction {
         launch(null);
     }
 
-    public void launch(final Bundle parameter) {
+    public void launch(final T parameter) {
         launch(parameter, false);
     }
 
@@ -68,7 +87,7 @@ public class PermissionAction {
      * launches the formerly registered permission action with a user-defined parameter.
      * The parameter will be passed to the action code
      */
-    public void launch(final Bundle parameter, final boolean forceSkipPreExplanation) {
+    public void launch(final T parameter, final boolean forceSkipPreExplanation) {
         //check: should we show an explanation BEFORE requesting permission?
         if (!forceSkipPreExplanation && this.permissionContext.shouldShowRequestPermissionRationale(activity)) {
             SimpleDialog.of(activity).setTitle(TextParam.text(permissionContext.getExplanationTitle()))
@@ -79,17 +98,20 @@ public class PermissionAction {
         }
     }
 
-    private void launchPermissionRequest(final Bundle parameter) {
-        this.savedState.set(parameter);
+    private void launchPermissionRequest(final T parameter) {
+        this.savedState.get().putParcelable(PARAMETER_KEY, new ParcelableValue<>().set(parameter));
         this.permissionLauncher.launch(this.permissionContext.getPermissions());
     }
 
     private void handlePermissionResult(final Map<String, Boolean> result) {
         Log.d("PermissionAction result:" + result);
-        final Bundle parameter = this.savedState.get();
+        final ParcelableValue<T> parameterHolder = this.savedState.get().getParcelable(PARAMETER_KEY);
+        final T parameter = parameterHolder == null ? null : parameterHolder.get();
         if (this.permissionContext.hasAllPermissions()) {
             //-> we have permissions now, execute callback
-            callback.accept(parameter);
+            if (callback != null) {
+                callback.accept(parameter);
+            }
             this.savedState.clear();
         } else {
             //-> we still don't have necessary permissions -> show explanation and ask user again
