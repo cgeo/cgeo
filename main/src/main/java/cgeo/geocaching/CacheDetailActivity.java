@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
+import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cachelist.MapsMeCacheListApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.calendar.CalendarAdder;
@@ -1571,7 +1572,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateWhereYouGoBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
+            final boolean isEnabled = new WhereYouGoApp().isEnabled(cache);
             binding.whereyougoBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             binding.whereyougoText.setText(isWhereYouGoInstalled() ? R.string.cache_whereyougo_start : R.string.cache_whereyougo_install);
             if (isEnabled) {

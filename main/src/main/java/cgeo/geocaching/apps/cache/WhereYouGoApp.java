@@ -20,7 +20,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
-    private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("(https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=[-0-9a-zA-Z]*)");
+    private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
+    private static final String URL_BASE = "https://www.wherigo.com/cartridge/details.aspx?CGUID=";
 
     public WhereYouGoApp() {
         super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
@@ -44,12 +45,12 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     @Nullable
     public static String getWhereIGoUrl(final Geocache cache) {
         final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
-        final Set<String> urls = new HashSet<>();
+        final Set<String> cartridgeGuids = new HashSet<>();
         while (matcher.find()) {
-            urls.add(matcher.group(1));
+            cartridgeGuids.add(matcher.group(1));
         }
-        if (urls.size() == 1) {
-            return urls.iterator().next();
+        if (cartridgeGuids.size() == 1) {
+            return URL_BASE + cartridgeGuids.iterator().next();
         }
         return null;
     }
