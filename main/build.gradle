@@ -376,10 +376,10 @@ dependencies {
     implementation "org.locationtech.jts:jts-core:1.16.1"
 
     implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion"
-    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-armeabi-v7a"
-    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-arm64-v8a"
-    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86"
-    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86_64"
+    runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-armeabi-v7a"
+    runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-arm64-v8a"
+    runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86"
+    runtimeOnly "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86_64"
 
     implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
