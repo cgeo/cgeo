@@ -43,7 +43,7 @@ public class GeoObjectLayer extends GroupLayer {
             final Layer goLayer;
             switch (go.getType()) {
                 case POINT:
-                    goLayer = new FixedPixelCircle(latLong(go.getPoints()[0]), 5f, strokePaint, strokePaint);
+                    goLayer = new FixedPixelCircle(latLong(go.getPoints().get(0)), 5f, strokePaint, strokePaint);
                     break;
                 case POLYLINE:
                     final Polyline pl = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);

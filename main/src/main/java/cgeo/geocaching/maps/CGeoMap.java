@@ -16,6 +16,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -831,7 +832,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
-                    route.calculateNavigationRoute();
+                    if (route instanceof Route) {
+                        ((Route) route).calculateNavigationRoute();
+                    }
                     ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
                 }), () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
             } catch (RejectedExecutionException e) {
@@ -848,7 +851,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void setTrack(final String key, final Route route) {
+    public void setTrack(final String key, final IGeoDataProvider route) {
         mapActivity.getTracks().setRoute(key, route);
         resumeTrack(key, null == route);
         mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());

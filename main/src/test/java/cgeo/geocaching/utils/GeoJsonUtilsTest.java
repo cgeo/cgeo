@@ -24,8 +24,8 @@ public class GeoJsonUtilsTest {
         final GeoObject go = list.get(0);
         assertThat(go.getType()).isEqualTo(GeoObject.GeoType.POLYLINE);
         assertThat(go.getPoints()).hasSize(2);
-        assertThat(go.getPoints()[0]).isEqualTo(new Geopoint(45.1, 10.2));
-        assertThat(go.getPoints()[1]).isEqualTo(new Geopoint(46.8, 11.9));
+        assertThat(go.getPoints().get(0)).isEqualTo(new Geopoint(45.1, 10.2));
+        assertThat(go.getPoints().get(1)).isEqualTo(new Geopoint(46.8, 11.9));
         assertThat(go.getStrokeColor()).isEqualTo(Color.BLACK);
         assertThat(go.getFillColor()).isEqualTo(Color.TRANSPARENT);
     }
@@ -41,7 +41,7 @@ public class GeoJsonUtilsTest {
         final GeoObject go = list.get(0);
         assertThat(go.getType()).isEqualTo(GeoObject.GeoType.POINT);
         assertThat(go.getPoints()).hasSize(1);
-        assertThat(go.getPoints()[0]).isEqualTo(new Geopoint(45.1, 10.2));
+        assertThat(go.getPoints().get(0)).isEqualTo(new Geopoint(45.1, 10.2));
         assertThat(go.getStrokeColor()).isEqualTo(7 + (int) (1000 * 0.5f));
         assertThat(go.getFillColor()).isEqualTo(Color.TRANSPARENT);
     }

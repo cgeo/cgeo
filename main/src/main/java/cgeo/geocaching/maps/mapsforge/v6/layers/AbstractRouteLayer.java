@@ -1,12 +1,15 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
+import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
@@ -38,7 +41,11 @@ abstract class AbstractRouteLayer extends Layer {
         width = MapLineUtils.getDefaultThinLineWidth();
     }
 
-    public void updateRoute(final String key, final Route route) {
+    public void updateRoute(final String key, final IGeoDataProvider r) {
+        if (!(r instanceof Route)) {
+            return;
+        }
+        final Route route = (Route) r;
         resetColor();
         synchronized (cache) {
             CachedRoute c = cache.get(key);
@@ -49,10 +56,19 @@ abstract class AbstractRouteLayer extends Layer {
             c.track = null;
             c.path = null;
             if (route != null) {
-                c.track = route.getAllPoints();
+                c.track = getAllPoints(route);
                 c.isHidden = route.isHidden();
             }
         }
+    }
+
+    private static ArrayList<ArrayList<Geopoint>> getAllPoints(final Route route) {
+        final List<GeoObject> gos = route.getGeoData();
+        final ArrayList<ArrayList<Geopoint>> result = new ArrayList<>();
+        for (GeoObject go : gos) {
+            result.add(new ArrayList<>(go.getPoints()));
+        }
+        return result;
     }
 
     public void removeRoute(final String key) {

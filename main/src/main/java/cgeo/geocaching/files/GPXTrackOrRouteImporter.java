@@ -1,9 +1,13 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectList;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.GeoJsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -14,11 +18,14 @@ import androidx.annotation.NonNull;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
 
 public class GPXTrackOrRouteImporter {
 
@@ -29,8 +36,8 @@ public class GPXTrackOrRouteImporter {
         final AtomicBoolean success = new AtomicBoolean(false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
-                final Route value = doInBackground(uri);
-                success.set(null != value && value.getNumSegments() > 0);
+                final IGeoDataProvider value = doInBackground(uri);
+                success.set(null != value && value.hasData());
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                         try {
@@ -51,7 +58,7 @@ public class GPXTrackOrRouteImporter {
         });
     }
 
-    private static Route doInBackground(final Uri uri) {
+    private static IGeoDataProvider doInBackground(final Uri uri) {
         try {
             Route route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
             if (null == route) {
@@ -71,6 +78,9 @@ public class GPXTrackOrRouteImporter {
             }
             if (null != route) {
                 route.calculateNavigationRoute();
+            }
+            if (null == route) {
+                return parseAsGeoJson(uri);
             }
             return route;
         } catch (IOException e) {
@@ -93,6 +103,21 @@ public class GPXTrackOrRouteImporter {
             return null;
         } finally {
             IOUtils.closeQuietly(stream);
+        }
+    }
+
+    private static IGeoDataProvider parseAsGeoJson(final Uri uri) throws IOException {
+        try (InputStream is = ContentStorage.get().openForRead(uri)) {
+            if (is == null) {
+                return null;
+            }
+            final List<GeoObject> gos = GeoJsonUtils.parseGeoJson(is);
+            final GeoObjectList gg = new GeoObjectList();
+            gg.addAll(gos);
+            return gg;
+        } catch (JSONException e) {
+            Log.w("Problem parsing GeoJson file '" + uri + "': " + e);
+            return null;
         }
     }
 

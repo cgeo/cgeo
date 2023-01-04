@@ -19,8 +19,9 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
-import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LoggingUI;
@@ -55,16 +56,13 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -74,7 +72,6 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.GeoJsonUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
@@ -115,13 +112,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
 
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -518,8 +512,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             caches.invalidate();
         }
         if (null != trackLayer) {
-//            trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();
+        }
+        if (null != geoObjectLayer) {
+            geoObjectLayer.requestRedraw();
         }
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
@@ -533,8 +529,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
-                    if (route != null) {
-                        route.calculateNavigationRoute();
+                    if (route instanceof Route) {
+                        ((Route) route).calculateNavigationRoute();
                     }
                     trackLayer.updateRoute(key, route);
                 }), () -> trackLayer.requestRedraw());
@@ -729,10 +725,23 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void resumeTrack(final String key, final boolean preventReloading) {
-        if (null == tracks && !preventReloading) {
-            this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
-        } else if (null != trackLayer && null != tracks) {
-            trackLayer.updateRoute(key, tracks.getRoute(key));
+        if (null == tracks) {
+            if (!preventReloading) {
+                this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
+            }
+        } else {
+            final IGeoDataProvider gdp = tracks.getRoute(key);
+            if (trackLayer != null && (gdp == null || gdp instanceof Route)) {
+                trackLayer.updateRoute(key, gdp);
+            }
+            if (null != geoObjectLayer && (gdp == null || gdp instanceof GeoObjectList)) {
+                if (gdp == null || gdp.isHidden()) {
+                    geoObjectLayer.removeGeoObjectLayer(key);
+                } else {
+                    final Layer l = GeoObjectLayer.createGeoObjectLayer(((GeoObjectList) gdp).getGeodata(), geoObjectLayer.getDisplayModel());
+                    geoObjectLayer.addGeoObjectLayer(key, l);
+                }
+            }
         }
     }
 
@@ -746,31 +755,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (tracks != null) {
             tracks.resumeAllTracks(this::resumeTrack);
         }
-        resumeGeoObjects();
         mapView.getModel().mapViewPosition.addObserver(this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
-    }
-
-    private void resumeGeoObjects() {
-        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-            final Map<String, Layer> layers = new HashMap<>();
-            for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.GPX)) {
-                if (fi.name.endsWith(".json")) {
-                    try (InputStream is = ContentStorage.get().openForRead(fi.uri)) {
-                        final List<GeoObject> objects = GeoJsonUtils.parseGeoJson(is);
-                        layers.put(fi.name, GeoObjectLayer.createGeoObjectLayer(objects, this.geoObjectLayer.getDisplayModel()));
-                    } catch (Exception ex) {
-                        Log.w("Problem reading file '" + fi.name + "'", ex);
-                    }
-                }
-            }
-            return layers;
-        }, map -> {
-            for (Map.Entry<String, Layer> entry : map.entrySet()) {
-                this.geoObjectLayer.addGeoObjectLayer(entry.getKey(), entry.getValue());
-            }
-        });
-
     }
 
     @Override
@@ -1019,7 +1005,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     // Set center of map to my location if appropriate.
-    private void myLocationInMiddle(final GeoData geo) {
+    private void myLocationInMiddle(final cgeo.geocaching.sensors.GeoData geo) {
         if (followMyLocation) {
             centerMap(geo.getCoords());
         }
@@ -1191,7 +1177,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
 
         @Override
-        public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
+        public void updateGeoDir(@NonNull final cgeo.geocaching.sensors.GeoData geo, final float dir) {
             currentLocation = geo;
             currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();
@@ -1481,7 +1467,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTrack(final String key, final Route route) {
+    private void setTrack(final String key, final IGeoDataProvider route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);

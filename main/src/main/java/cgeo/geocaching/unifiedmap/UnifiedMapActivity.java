@@ -10,6 +10,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
@@ -18,7 +19,6 @@ import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -546,7 +546,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return false; // @todo
     }
 
-    private void setTrack(final String key, final Route route) {
+    private void setTrack(final String key, final IGeoDataProvider route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
         initRouteTrackUtilsAndTracks(false);

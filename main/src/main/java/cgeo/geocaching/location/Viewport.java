@@ -219,46 +219,76 @@ public final class Viewport {
      */
     @Nullable
     private static Viewport containing(final Collection<? extends ICoordinates> points, final boolean withWaypoints, final boolean gcLiveOnly) {
-        boolean valid = false;
-        double latMin = Double.MAX_VALUE;
-        double latMax = -Double.MAX_VALUE;
-        double lonMin = Double.MAX_VALUE;
-        double lonMax = -Double.MAX_VALUE;
+        final ContainingViewportBuilder cb = new ContainingViewportBuilder();
         final GCConnector conn = GCConnector.getInstance();
         for (final ICoordinates point : points) {
             if (point != null && (!gcLiveOnly || (conn.canHandle(((Geocache) point).getGeocode()) && !((Geocache) point).inDatabase()))) {
-                final Geopoint coords = point.getCoords();
-                if (coords != null) {
-                    valid = true;
-                    final double latitude = coords.getLatitude();
-                    final double longitude = coords.getLongitude();
-                    latMin = Math.min(latMin, latitude);
-                    latMax = Math.max(latMax, latitude);
-                    lonMin = Math.min(lonMin, longitude);
-                    lonMax = Math.max(lonMax, longitude);
-                }
+                cb.add(point);
                 if (withWaypoints && ((Geocache) point).hasWaypoints()) {
                     for (final Waypoint waypoint : ((Geocache) point).getWaypoints()) {
                         if (waypoint != null) {
-                            final Geopoint wpcoords = waypoint.getCoords();
-                            if (wpcoords != null) {
-                                valid = true;
-                                final double latitude = wpcoords.getLatitude();
-                                final double longitude = wpcoords.getLongitude();
-                                latMin = Math.min(latMin, latitude);
-                                latMax = Math.max(latMax, latitude);
-                                lonMin = Math.min(lonMin, longitude);
-                                lonMax = Math.max(lonMax, longitude);
-                            }
+                            cb.add(waypoint.getCoords());
                         }
                     }
                 }
             }
         }
-        if (!valid) {
-            return null;
+        return cb.getViewport();
+    }
+
+    /** Helper class to build Viewports without instanciating too many helper objects */
+    public static class ContainingViewportBuilder {
+        private boolean valid = false;
+        private double latMin = Double.MAX_VALUE;
+        private double latMax = -Double.MAX_VALUE;
+        private double lonMin = Double.MAX_VALUE;
+        private double lonMax = -Double.MAX_VALUE;
+        private Viewport viewport = null;
+
+        public ContainingViewportBuilder add(final ICoordinates ... points) {
+            if (points != null) {
+                for (ICoordinates p : points) {
+                    add(p);
+                }
+            }
+            return this;
         }
-        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+
+        public ContainingViewportBuilder add(final Collection<? extends ICoordinates> coll) {
+            if (coll != null) {
+                for (ICoordinates p : coll) {
+                    add(p);
+                }
+            }
+            return this;
+        }
+
+        private ContainingViewportBuilder add(final ICoordinates point) {
+            if (point == null) {
+                return this;
+            }
+            viewport = null;
+            final Geopoint coords = point.getCoords();
+            if (coords != null) {
+                valid = true;
+                final double latitude = coords.getLatitude();
+                final double longitude = coords.getLongitude();
+                latMin = Math.min(latMin, latitude);
+                latMax = Math.max(latMax, latitude);
+                lonMin = Math.min(lonMin, longitude);
+                lonMax = Math.max(lonMax, longitude);
+            }
+            return this;
+        }
+
+        public Viewport getViewport() {
+            if (viewport == null && valid) {
+                viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+            }
+            return viewport;
+        }
+
+
     }
 
     @Override
