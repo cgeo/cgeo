@@ -4,6 +4,8 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
+import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.os.Bundle;
 
@@ -69,6 +71,13 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_appearance);
+
+        setPrefClick(this, R.string.pref_wallpaper, () -> {
+            if (Settings.isWallpaper()) {
+                ((SettingsActivity) this.getActivity()).askShowWallpaperPermission();
+            }
+        });
+
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {

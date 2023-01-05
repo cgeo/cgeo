@@ -69,7 +69,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
-    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
+    private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
 
     // dialog elements
     private ImageView logo = null;

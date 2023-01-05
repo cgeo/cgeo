@@ -64,7 +64,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final TextSpinner<DirectionData.DeviceOrientation> deviceOrientationMode = new TextSpinner<>();
     private CompassActivityBinding binding;
 
-    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
+    private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
         binding.locationStatus.updatePermissions();
     });
 

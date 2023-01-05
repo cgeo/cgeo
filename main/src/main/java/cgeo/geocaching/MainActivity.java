@@ -58,6 +58,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -114,9 +115,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     private BackupUtils backupUtils = null;
 
-    private final PermissionAction askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
-        binding.locationStatus.updatePermissions();
-    });
+    private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.locationStatus.updatePermissions());
+    private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, b -> setWallpaper());
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -307,6 +307,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 this.askLocationPermissionAction.launch(null);
             });
 
+            if (Settings.isWallpaper()) {
+                askShowWallpaperPermissionAction.launch();
+            }
+
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
@@ -456,7 +460,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
 
-            ((ImageView) findViewById(R.id.background)).setImageDrawable(Settings.isWallpaper() ? WallpaperManager.getInstance(this).getDrawable() : null);
+            setWallpaper();
 
             init();
         }
@@ -464,6 +468,12 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
             binding.getRoot().post(() -> Log.d("Post after MainActivity.onResume"));
         }
+    }
+
+    private void setWallpaper() {
+        final Drawable wallpaper =  (Settings.isWallpaper() && PermissionContext.SHOW_WALLPAPER.hasAllPermissions()) ?
+                WallpaperManager.getInstance(this).getDrawable() : null;
+            ((ImageView) findViewById(R.id.background)).setImageDrawable(wallpaper);
     }
 
     @Override

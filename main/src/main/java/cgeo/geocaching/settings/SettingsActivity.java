@@ -4,6 +4,8 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.permission.PermissionAction;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.search.BaseSearchSuggestionCursor;
 import cgeo.geocaching.search.BaseSuggestionsAdapter;
 import cgeo.geocaching.search.SearchUtils;
@@ -86,6 +88,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
 
+    private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, null);
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
@@ -127,6 +131,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     public BackupUtils getBackupUtils() {
         return backupUtils;
+    }
+
+    public void askShowWallpaperPermission() {
+        this.askShowWallpaperPermissionAction.launch();
     }
 
     private void handleIntent(final Bundle savedInstanceState) {
