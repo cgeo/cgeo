@@ -2169,6 +2169,8 @@
     <string name="permission_contacts_read_explanation">c:geo kann Kontakte in deinem Adressbuch mit Cacher-Namen suchen. Um dies zu tun, musst du c:geo erlauben, dein Adressbuch zu lesen. Andernfalls ist die Nutzung dieser Funktion nicht möglich.</string>
     <string name="permission_location_explanation_title">Standortberechtigung</string>
     <string name="permission_location_explanation">c:geo ist optimiert für die Nutzung mit GPS-Daten (genauer Standort) um deine Position zu lokalisieren und Distanz und Richtung zu Geocaches zu berechnen. Ohne diese Berechtigung funktionieren ortungsbasierte Funktionen nicht wie erwartet.</string>
+    <string name="permission_read_external_storage_explanation_title">Leseberechtigung für externen Speicher</string>
+    <string name="permission_read_external_storage_explanation">c:geo kann dein System-Hintergrund als Hintergrund für die App verwenden. Um dies zu tun, benötigt c:geo die Erlaubnis, deine Mediendaten auf externem Speicher zu lesen.</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
