@@ -2,7 +2,7 @@
  * Enterprise plugin replaces Build scan plugin from gradle 6, see https://docs.gradle.com/enterprise/gradle-plugin/
  */
 plugins {
-    id 'com.gradle.enterprise' version '3.11.4'
+    id 'com.gradle.enterprise' version '3.12.2'
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.
