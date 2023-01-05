@@ -648,6 +648,7 @@
     <string name="about_license">Licencja</string>
     <string name="about_apache_license"><a href="">Licencja Apache, wersja 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Zbieranie informacji systemowych, proszę czekać…</string>
     <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
     <string name="about_system_info_send_button">Wyślij mailem…</string>
     <string name="about_system_info">c:geo informacje systemowe</string>
@@ -2226,6 +2227,8 @@
     <string name="permission_contacts_read_explanation">c:geo może szukać kontaktów w książce adresowej używając nazw keszerów. Aby to zrobić, musisz autoryzować c:geo do odczytu książki adresowej. W przeciwnym razie użycie tej funkcji nie jest możliwe.</string>
     <string name="permission_location_explanation_title">Uprawnienie do lokalizacji</string>
     <string name="permission_location_explanation">c:geo jest zoptymalizowany do użycia danych GPS (dokładna lokalizacja), aby zlokalizować swoją pozycję oraz obliczyć odległość i kierunek do skrzynek. Bez tego zezwolenia funkcje oparte na lokalizacji nie będą działać zgodnie z oczekiwaniami.</string>
+    <string name="permission_read_external_storage_explanation_title">Uprawnienia do odczytu pamięci zewnętrznej</string>
+    <string name="permission_read_external_storage_explanation">c:geo może używać tapety systemowej jako tła aplikacji. Aby to zrobić, c:geo potrzebuje uprawnień do odczytu Twoich danych multimedialnych z pamięci zewnętrznej.</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Wybierz schemat kolorów</string>
