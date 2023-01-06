@@ -932,8 +932,10 @@ abstract class GPXParser extends FileParser {
             // a geocode should not be part of a word
             if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
                 final IConnector foundConnector = ConnectorFactory.getConnector(geocode);
-                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) || useUnknownConnector) {
+                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
                     cache.setGeocode(geocode);
+                } else if (useUnknownConnector) {
+                    cache.setGeocode(trimmed);
                 }
             }
         }
