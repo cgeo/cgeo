@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx
+ xmlns="http://www.topografix.com/GPX/1/1"
+ creator="OziExplorer Version 3956f - http://www.oziexplorer.com"
+ version="1.1"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+ <time>2022-12-25T09:03:59Z</time>
+ <bounds minlat="55.917333" minlon="92.275015" maxlat="56.021194" maxlon="92.978554"/>
+</metadata>
+<wpt lat="56.0051300" lon="92.8536300">
+ <time>2021-07-04T00:00:00.000Z</time>
+ <name>268591 1</name>
+</wpt>
+<wpt lat="56.0067300" lon="92.8726700">
+ <time>2021-07-04T00:00:00.000Z</time>
+ <name>268591 2</name>
+</wpt>
+<wpt lat="56.0051300" lon="92.8536300">
+ <time>2021-07-04T00:00:00.000Z</time>
+ <name>268591</name>
+</wpt>
+<wpt lat="56.0067300" lon="92.8726700">
+ <time>2021-07-04T00:00:00.000Z</time>
+ <name>268591</name>
+</wpt>
+<wpt lat="56.0067300" lon="92.8726700">
+ <time>2021-07-04T00:00:00.000Z</time>
+ <name>268591-1</name>
+</wpt>
+</gpx>
