@@ -2227,6 +2227,8 @@
     <string name="permission_contacts_read_explanation">c:geo gali ieškoti kontaktų jūsų adresų knygoje naudodamas slėpėjų vardus. Norėdami tai padaryti, turite leisti c:geo nuskaityti jūsų adresų knygą. Priešingu atveju šia funkcija naudotis negalėsite.</string>
     <string name="permission_location_explanation_title">Vietos leidimas</string>
     <string name="permission_location_explanation">c:geo yra optimizuotas veikti su GPS duomenimis (tiksli vieta), kad būtų galima nustatyti jūsų padėtį ir apskaičiuoti atstumą bei kryptį iki geoslėptuvių. Be šio leidimo vieta pagrįstos funkcijos neveiks taip, kaip tikėtasi.</string>
+    <string name="permission_read_external_storage_explanation_title">Leidimas skaityti išorinę saugyklą</string>
+    <string name="permission_read_external_storage_explanation">c:geo gali naudoti jūsų sistemos foną kaip programos foną. Kad tai padarytų, c:geo reikia leidimo nuskaityti medijos duomenis išorinėje saugykloje.</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
