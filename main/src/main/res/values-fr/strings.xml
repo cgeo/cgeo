@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Image</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
+    <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- translation -->
     <string name="translate">Traduire</string>
     <string name="translate_to_sys_lang">Traduire en %s</string>
