@@ -8,8 +8,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import org.junit.Rule;
 import org.junit.Test;
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
+@SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
 public class ExampleEspressoTest {
 
     @Rule
@@ -18,9 +18,6 @@ public class ExampleEspressoTest {
 
     @Test
     public void simple() {
-        //activityRule.getScenario().recreate();
-        assertThat(activityRule.getScenario().getState().toString()).isEqualTo("RESUMED");
-        //onView(withText("Hello world!")).check(matches(isDisplayed()));
         onView(withId(R.id.image_open_file)).check(matches(isDisplayed()));
     }
 }

@@ -18,7 +18,6 @@ import android.net.Uri;
 import androidx.annotation.AnyRes;
 import androidx.annotation.RawRes;
 import androidx.core.util.Consumer;
-import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -144,7 +143,6 @@ public final class CgeoTestUtils {
         }
 
         try (ActivityScenario<A> scenario = ActivityScenario.launch(intent)) {
-            scenario.moveToState(Lifecycle.State.RESUMED);
             if (testCode != null) {
                 testCode.accept(scenario);
             }
