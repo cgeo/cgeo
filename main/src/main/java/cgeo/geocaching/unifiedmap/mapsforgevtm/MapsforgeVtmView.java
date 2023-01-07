@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
@@ -55,6 +57,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
+    protected final HashMap<Integer, ArrayList<Layer>> layerGroupLayers = new HashMap<>(); // group index, layer
     protected Map.UpdateListener mapUpdateListener;
     protected MapsforgeThemeHelper themeHelper;
 
@@ -130,6 +133,29 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
             }
         }
         mMap.layers().set(index, layer);
+    }
+
+    /**
+     * call next three methods for handling of layers in layer groups
+     */
+
+    public synchronized void addGroup(final int groupIndex) {
+        mMap.layers().addGroup(groupIndex);
+        layerGroupLayers.put(groupIndex, new ArrayList<>());
+    }
+
+    public synchronized void addLayerToGroup(final Layer layer, final int groupIndex) {
+        Objects.requireNonNull(layerGroupLayers.get(groupIndex)).add(layer);
+        mMap.layers().add(layer, groupIndex);
+    }
+
+    public synchronized void clearGroup(final int groupIndex) {
+        final ArrayList<Layer> group = layerGroupLayers.get(groupIndex);
+        assert group != null;
+        for (Layer layer : group) {
+            mMap.layers().remove(layer);
+        }
+        group.clear();
     }
 
     private void removeBaseMap() {

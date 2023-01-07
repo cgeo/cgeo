@@ -21,7 +21,6 @@ import org.oscim.layers.marker.MarkerSymbol;
 import org.oscim.layers.vector.PathLayer;
 import org.oscim.layers.vector.VectorLayer;
 import org.oscim.layers.vector.geometries.CircleDrawable;
-import org.oscim.layers.vector.geometries.LineDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
@@ -43,7 +42,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
             .build();
 
     // position history
-    private final ClearableVectorLayer historyLayer;
     final Style historyStyle = Style.builder()
             .strokeWidth(MapLineUtils.getHistoryLineWidth(true))
             .strokeColor(MapLineUtils.getTrailColor())
@@ -51,7 +49,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     // individual route, routes & tracks
     private final PathLayer navigationLayer;
-    private final ClearableVectorLayer trackLayer;
     final Style routeStyle = Style.builder()
             .strokeWidth(MapLineUtils.getRouteLineWidth(true))
             .strokeColor(MapLineUtils.getRouteColor())
@@ -72,25 +69,23 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_POSITION, arrowLayer);
         repaintPosition();
 
-        // history
-        historyLayer = new ClearableVectorLayer(map);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_HISTORY, historyLayer);
+        // history (group)
+        MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_HISTORY);
 
         // direction line & navigation
         navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
         MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_DIRECTION_LINE, navigationLayer);
 
-        // tracks & routes
-        trackLayer = new ClearableVectorLayer(map);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_TRACK_ROUTE, trackLayer);
+        // tracks & routes (group)
+        MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
     protected void destroyLayer(final Map map) {
         map.layers().remove(accuracyCircleLayer);
         map.layers().remove(arrowLayer);
-        map.layers().remove(historyLayer);
+        map.layers().remove(LayerHelper.ZINDEX_HISTORY);
         map.layers().remove(navigationLayer);
-        map.layers().remove(trackLayer);
+        map.layers().remove(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
@@ -139,24 +134,28 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     protected void repaintHistory() {
-        historyLayer.clear();
+        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_HISTORY);
         repaintHistoryHelper((points) -> {
-            final LineDrawable path = new LineDrawable(points, historyStyle);
-            historyLayer.add(path);
+            if (points.size() < 2) {
+                return; // no line can be drawn from a single point
+            }
+            final PathLayer historyLayer = new PathLayer(map, historyStyle);
+            MAP_MAPSFORGE.addLayerToGroup(historyLayer, LayerHelper.ZINDEX_HISTORY);
+            historyLayer.setPoints(points);
         });
     }
 
     @Override
     protected void repaintRouteAndTracks() {
-        trackLayer.clear();
+        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
         repaintRouteAndTracksHelper((segment, isTrack) -> {
             if (segment.size() < 2) {
                 return; // no line can be drawn from a single point
             }
-            final LineDrawable path = new LineDrawable(segment, isTrack ? trackStyle : routeStyle);
-            trackLayer.add(path);
+            final PathLayer segmentLayer = new PathLayer(map, isTrack ? trackStyle : routeStyle);
+            MAP_MAPSFORGE.addLayerToGroup(segmentLayer, LayerHelper.ZINDEX_TRACK_ROUTE);
+            segmentLayer.setPoints(segment);
         });
-        trackLayer.update();
     }
 
 }
