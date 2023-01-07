@@ -76,7 +76,7 @@ body:
     attributes:
       label: c:geo Version
       description: What version of c:geo are you using? You will find it in c:geo Menu -> About c:geo.
-      placeholder: 2021.07.15
+      placeholder: 2022.12.21
     validations:
       required: true
   - type: textarea
