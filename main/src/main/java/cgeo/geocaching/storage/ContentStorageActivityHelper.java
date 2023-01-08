@@ -431,7 +431,7 @@ public class ContentStorageActivityHelper {
         if (askUserForCopyMove) {
             folderInfoBeforeRaw = FolderUtils.get().getFolderInfo(before, -1);
             //suppress asking user to copy/move if source has 0 files
-            if (folderInfoBeforeRaw.fileCount == 0 && folderInfoBeforeRaw.resultIsIncomplete) {
+            if (folderInfoBeforeRaw.fileCount == 0 && !folderInfoBeforeRaw.resultIsIncomplete) {
                 askUserForCopyMove = false;
             }
         }
