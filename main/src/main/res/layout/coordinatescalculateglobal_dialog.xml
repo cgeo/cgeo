@@ -45,6 +45,14 @@
                 tools:listitem="@android:layout/simple_spinner_item" />
 
             <Button
+                android:id="@+id/cc_paste"
+                style="@style/button_icon_accent"
+                android:layout_toLeftOf="@id/cc_plain_tools"
+                android:tooltipText="@string/calccoord_paste_from_clipboard"
+                app:icon="@drawable/ic_menu_paste"
+                android:layout_centerVertical="true"/>
+
+            <Button
                 android:id="@+id/cc_plain_tools"
                 style="@style/button_icon_accent"
                 android:layout_alignParentRight="true"
