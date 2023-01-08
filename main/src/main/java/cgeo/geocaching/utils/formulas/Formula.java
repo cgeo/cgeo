@@ -481,6 +481,10 @@ public final class Formula {
         //check if there are blocks to concat separated by whitespace
         while (!p.eof() && (Character.isWhitespace(p.ch()) || Character.isWhitespace((char) p.previous()))) {
             p.skipWhitespaces();
+            //certain characters should STOP the looking for whitespace-separated concat blocks
+            if (p.chIsIn(')', ']')) {
+                break;
+            }
             if (multiResult == null) {
                 multiResult = new ArrayList<>();
                 multiResult.add(singleResult);
