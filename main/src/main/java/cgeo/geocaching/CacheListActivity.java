@@ -495,7 +495,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
             } else {
                 final String data = ContentStorage.get().getName(getIntent().getData());
-                listNameMemento.rememberTerm(StringUtils.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
+                listNameMemento.rememberTerm(StringUtils.isNotBlank(data) && StringUtils.endsWith(data.toLowerCase(Locale.ROOT), ".gpx") ? StringUtils.substring(data, 0, -4) : data);
             }
             importGpxAttachement();
         }
