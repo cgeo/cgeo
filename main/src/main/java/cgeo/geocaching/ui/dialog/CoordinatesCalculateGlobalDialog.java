@@ -47,7 +47,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -251,22 +250,24 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             }
         });
 
+        binding.ccPaste.setOnClickListener(v -> {
+            final String clip = ClipboardUtils.getText();
+            final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);
+            if (patterns.isEmpty()) {
+                ActivityMixin.showShortToast(this.getActivity(), R.string.variables_scanlisting_nopatternfound);
+            } else {
+                binding.PlainLat.setText(patterns.get(0).first);
+                binding.PlainLon.setText(patterns.get(0).second);
+            }
+        });
+
         binding.ccPlainTools.setOnClickListener(v -> {
-            final List<Integer> options = Arrays.asList(R.string.calccoord_remove_spaces, R.string.calccoord_paste_from_clipboard);
+            final List<Integer> options = Collections.singletonList(R.string.calccoord_remove_spaces);
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
                     .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
                         if (o == R.string.calccoord_remove_spaces) {
                             binding.PlainLat.setText(DegreeFormula.removeSpaces(binding.PlainLat.getText().toString()));
                             binding.PlainLon.setText(DegreeFormula.removeSpaces(binding.PlainLon.getText().toString()));
-                        } else if (o == R.string.calccoord_paste_from_clipboard) {
-                            final String clip = ClipboardUtils.getText();
-                            final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);
-                            if (patterns.isEmpty()) {
-                                ActivityMixin.showShortToast(this.getActivity(), R.string.variables_scanlisting_nopatternfound);
-                            } else {
-                                binding.PlainLat.setText(patterns.get(0).first);
-                                binding.PlainLon.setText(patterns.get(0).second);
-                            }
                         }
                     });
         });
@@ -315,6 +316,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             displayType.set(newType);
         }
         binding.ccPlainTools.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
+
+        binding.ccPaste.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccPaste.setEnabled(!FormulaUtils.scanForCoordinates(Collections.singleton(ClipboardUtils.getText()), null).isEmpty());
 
         if (newType == PLAIN) {
             if (initialLoad) {
