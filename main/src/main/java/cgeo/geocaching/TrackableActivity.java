@@ -442,7 +442,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.IMAGEGALLERY.id) {
-            String title = "*" + this.getString(Page.find(pageId).resId) + "*";
+            String title = this.getString(Page.find(pageId).resId);
             if (this.imageGallery != null) {
                 title += " (" + this.imageGallery.getImageCount() + ")";
             }
@@ -458,7 +458,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
                 pages.add(Page.LOGS.id);
             }
-            if (CollectionUtils.isNotEmpty(trackable.getImages())) {
+            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(trackable.getImages())) {
                 pages.add(Page.IMAGES.id);
             }
             if (Settings.enableFeatureNewImageGallery()) {
