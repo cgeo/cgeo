@@ -111,9 +111,12 @@ public class Waypoint implements IWaypoint {
         if (coords == null) {
             coords = old.coords;
         }
-        if (StringUtils.isBlank(note)) {
+
+        // keep note only for user-defined waypoints
+        if (StringUtils.isBlank(note) && isUserDefined()) {
             note = old.note;
         }
+
         if (StringUtils.isBlank(userNote)) {
             userNote = old.userNote;
         }

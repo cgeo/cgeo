@@ -153,6 +153,17 @@ public class WaypointTest {
     }
 
     @Test
+    public void testMergeNoteEmptyServerNote() {
+        final Waypoint local = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        local.setNote("Old Note");
+        local.setUserNote("Local User Note");
+        final Waypoint server = new Waypoint("Stage 1", WaypointType.STAGE, false);
+        server.merge(local);
+        assertThat(server.getNote()).isEqualTo("");
+        assertThat(server.getUserNote()).isEqualTo("Local User Note");
+    }
+
+    @Test
     public void testGetDefaultWaypointName() {
         final Geocache cache = new Geocache();
         // all test cases check numbering across different waypoint types
