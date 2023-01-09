@@ -52,7 +52,7 @@ public class DownloaderTest {
         final List<Download> list = getList(MapDownloaderMapsforge.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_mapsforge_downloadurl) + "europe/");
 
         // europe starting page currently has ... entries (including the "up" entry)
-        assertThat(list.size()).isBetween(52, 56);
+        assertThat(list.size()).isBetween(53, 57);
 
         // first entry has to be the "up" entry
         assertThat(list.get(0).getIsDir()).isTrue();
@@ -61,14 +61,14 @@ public class DownloaderTest {
         assertThat(count(list, true)).isEqualTo(5);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isBetween(47, 51);
+        assertThat(count(list, false)).isBetween(49, 53);
 
         // check one named entry
         final Download d = findByName(list, "Portugal");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 220M
+        final String sizeInfoString = d.getSizeInfo(); // 297M
         final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
-        assertThat(sizeInfoInt).isBetween(200, 250);
+        assertThat(sizeInfoInt).isBetween(280, 350);
     }
 
     @Test
