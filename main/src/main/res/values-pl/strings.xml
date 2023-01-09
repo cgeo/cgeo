@@ -752,6 +752,7 @@
     <string name="settings_category_nearbysearch">Szukaj w pobliżu</string>
     <string name="init_nearbysearchlimit_title">Limit szukania w pobliżu</string>
     <string name="init_nearbysearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania w pobliżu (0=nieograniczona)</string>
+    <string name="init_settings_description_unlimited">bez ograniczeń</string>
     <string name="settings_category_geocaching_additionals">Dalsze usługi i dodatki</string>
     <string name="settings_category_social">Portale społecznościowe</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
