@@ -738,6 +738,7 @@
     <string name="settings_category_nearbysearch">Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_title">Limit für Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_description">Begrenzt die Distanz, bis zu der Caches für die Suche in der Nähe zurückgegeben werden (0=unbegrenzt)</string>
+    <string name="init_settings_description_unlimited">unbegrenzt</string>
     <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
     <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
