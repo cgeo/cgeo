@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Immagine</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
+    <string name="contact_multiple_matches">Contatto: risultati multipli</string>
     <!-- translation -->
     <string name="translate">Traduci</string>
     <string name="translate_to_sys_lang">Traduci in %s</string>
@@ -197,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
+    <string name="err_captcha">Il servizio richiede un Captcha. Aprire il sito web geocaching.com con il proprio browser e risolvere il Captcha mostrato durante il login. Quindi riprovare il login con c:geo.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
@@ -207,6 +210,7 @@
     <string name="err_unknown_address">c:geo non è in grado di mappare questo indirizzo su una posizione gps esistente</string>
     <string name="err_comm">Errore di comunicazione sconosciuto. Fare riferimento alle nostre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per la guida.</string>
     <string name="err_missing_auth">Nome utente e/o password non inserito</string>
+    <string name="err_wrong">Nome utente e/o password errati.</string>
     <string name="err_maintenance">Geocaching.com è in manutenzione, riprovare più tardi. Attivata la modalità offline.</string>
     <string name="err_license">L\'utente non ha approvato le condizioni del contratto Geocaching.com. Così c:geo non può caricare le coordinate dei cache.</string>
     <string name="err_unvalidated_account">Come prima cosa devi convalidare il tuo account su Geocaching.com.</string>
@@ -318,6 +322,8 @@
     <string name="loc_gps_disabled">GPS non attivo</string>
     <string name="loc_copied_clipboard">La posizione attuale è stata copiata negli appunti</string>
     <string name="menu_centerposition">Centra sulla mia posizione</string>
+    <string name="location_no_permission">Attenzione: nessun permesso per ottenere la posizione</string>
+    <string name="location_only_coarse_permission">Attenzione: autorizzazione della sola posizione approssimativa</string>
     <!-- standard menu -->
     <string name="menu_about">Info su c:geo</string>
     <string name="menu_helpers">Programmi utili</string>
@@ -393,6 +399,8 @@
     <string name="caches_sort_storage">Data salvataggio</string>
     <string name="caches_sort_eventdate">Data Evento</string>
     <string name="caches_select_mode">Modo Selezione</string>
+    <string name="caches_select_next20">Seleziona i prossimi 20 cache</string>
+    <string name="caches_select_next100">Seleziona i prossimi 100 cache</string>
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
@@ -533,6 +541,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Inizia con</string>
     <string name="cache_filter_stringfilter_type_ends_with">Finisce con</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
+    <string name="cache_filter_datefilter_absolute">Assoluto</string>
+    <string name="cache_filter_datefilter_relative">Relativo ad oggi</string>
     <string name="cache_filter_datefilter_label_from">Da:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto</string>
@@ -589,6 +599,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">l\'alba dei tempi</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>più di un anno fa</item>
+        <item>un anno fa</item>
+        <item>180 giorni fa</item>
+        <item>90 giorni fa</item>
+        <item>30 giorni fa</item>
+        <item>2 settimane fa</item>
+        <item>una settimana fa</item>
+        <item>3 giorni fa</item>
+        <item>meno di 3 giorni fa</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1anno</item>
+        <item>1 anno</item>
+        <item>180 gg</item>
+        <item>90gg</item>
+        <item>30gg</item>
+        <item>2 sett</item>
+        <item>1 set</item>
+        <item>3gg</item>
+        <item>&lt;3gg</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -602,6 +634,7 @@
     <string name="about_license">Licenza</string>
     <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
     <string name="about_help">Guida</string>
+    <string name="about_system_collecting">Raccolta informazioni di sistema, attendere…</string>
     <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
     <string name="about_system_info_send_button">Invia per email…</string>
     <string name="about_system_info">informazioni di sistema di c:geo</string>
@@ -705,6 +738,7 @@
     <string name="settings_category_nearbysearch">Ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_title">Limite di ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_description">Limita la distanza fino alla quale vengono mostrati i cache con la ricerca nelle vicinanze (0=illimitato)</string>
+    <string name="init_settings_description_unlimited">illimitato</string>
     <string name="settings_category_geocaching_additionals">Ulteriori servizi e addon</string>
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Altre opzioni di log</string>
@@ -1031,6 +1065,8 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
+    <string name="category_unifiedMap">Mappa Unificata</string>
+    <string name="experimental">(sperimentale)</string>
     <string name="init_title_useUnifiedMap">Usa mappa unificata</string>
     <string name="init_summary_useUnifiedMap">Usa la nuova mappa unificata invece delle mappe integrate di Google Map / Mapsforge (OSM) (sperimentale / lungi dall\'essere completo / solo per test)</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
@@ -1517,6 +1553,7 @@
     <string name="formula_function_tan">Tangente</string>
     <string name="formula_function_abs">Valore Assoluto</string>
     <string name="formula_function_round">Circolare</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Se</string>
     <string name="formula_function_length">Lunghezza della stringa</string>
     <string name="formula_function_substring">Sottostringa</string>
@@ -2127,6 +2164,14 @@
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Chiedimi di nuovo</string>
+    <string name="permission_goto_app_details">Apri Informazioni Applicazione</string>
+    <string name="permission_contacts_read_explanation_title">Permesso per la lettura dei contatti</string>
+    <string name="permission_contacts_read_explanation">c:geo può cercare i contatti nella rubrica usando il nome da cacher. Per fare questo, devi autorizzare c:geo a leggere la tua rubrica. Altrimenti, non sarà possibile utilizzare questa funzione.</string>
+    <string name="permission_location_explanation_title">Permesso geolocalizzazione</string>
+    <string name="permission_location_explanation">c:geo è ottimizzato per l\'utilizzo con i dati GPS (posizione fine) per individuare la posizione e calcolare la distanza e la direzione per i geocache. Senza questo permesso, le funzioni basate sulla posizione non funzioneranno come previsto.</string>
+    <string name="permission_read_external_storage_explanation_title">Permessi di lettura memoria esterna</string>
+    <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
@@ -2283,6 +2328,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema mappa dettagliato, creato per le mappe \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Mappe dettagliate, richiedono uno dei temi della mappa \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema mappa dettagliato, creato per le mappe \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mappe dettagliate, è richiesto il tema mappa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema mappa dettagliato, creato per le mappe \"Paws\"</string>
     <string name="mapserver_hylly_info">Le mappe dettagliate per la Finlandia, richiedono uno dei temi mappa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
