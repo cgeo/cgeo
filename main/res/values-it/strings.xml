@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
+    <string name="err_captcha">Il servizio richiede un Captcha. Si prega di aprire il sito web geocaching.com con il bproprio browser e risolvere il Captcha mostrato durante il login. quindi riprovare il login con c:geo.</string>
     <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
@@ -206,6 +207,7 @@
     <string name="err_unknown_address">c:geo non è in grado di mappare questo indirizzo su una posizione gps esistente</string>
     <string name="err_comm">Errore di comunicazione sconosciuto. Fare riferimento alle nostre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per la guida.</string>
     <string name="err_missing_auth">Nome utente e/o password non inserito</string>
+    <string name="err_wrong">Nome utente e/o password errati.</string>
     <string name="err_maintenance">Geocaching.com è in manutenzione, riprovare più tardi. Attivata la modalità offline.</string>
     <string name="err_license">L\'utente non ha approvato le condizioni del contratto Geocaching.com. Così c:geo non può caricare le coordinate dei cache.</string>
     <string name="err_unvalidated_account">Come prima cosa devi convalidare il tuo account su Geocaching.com.</string>
@@ -392,6 +394,7 @@
     <string name="caches_sort_storage">Data salvataggio</string>
     <string name="caches_sort_eventdate">Data Evento</string>
     <string name="caches_select_mode">Modo Selezione</string>
+    <string name="caches_select_next">Seleziona i prossimi 20 cache</string>
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
@@ -1031,6 +1034,8 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
+    <string name="category_unifiedMap">Mappa Unificata</string>
+    <string name="experimental">(sperimentale)</string>
     <string name="init_title_useUnifiedMap">Usa mappa unificata</string>
     <string name="init_summary_useUnifiedMap">Usa la nuova mappa unificata invece delle mappe integrate di Google Map / Mapsforge (OSM) (sperimentale / lungi dall\'essere completo / solo per test)</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
@@ -1519,6 +1524,7 @@
     <string name="formula_function_tan">Tangente</string>
     <string name="formula_function_abs">Valore Assoluto</string>
     <string name="formula_function_round">Circolare</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Se</string>
     <string name="formula_function_length">Lunghezza della stringa</string>
     <string name="formula_function_substring">Sottostringa</string>
