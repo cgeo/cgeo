@@ -12,3 +12,4 @@
 - Actualização de algumas bibliotecas dependentes
 - Alteração: Usa outro mecanismo do Android para receber transferências (para melhor compatibilidade com o Android 12+)
 - Novo: Predefinir o nome das listas com o nome do ficheiro GPX ao importar
+- Fix (nightly version): Crash on GPX import
