@@ -2,7 +2,9 @@ package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.Tracks;
@@ -25,6 +27,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -199,7 +202,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void updateRoute(final String key, final Route track) {
+    public void updateRoute(final String key, final IGeoDataProvider track) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -208,11 +211,27 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             }
             c.track = null;
             if (track != null) {
-                c.track = track.getAllPointsLatLng();
+                c.track = toLatLng(track);
                 c.isHidden = track.isHidden();
             }
         }
         repaintRequired();
+    }
+
+    private static ArrayList<ArrayList<LatLng>> toLatLng(final IGeoDataProvider gg) {
+        final ArrayList<ArrayList<LatLng>> list = new ArrayList<>();
+        for (GeoObject go : gg.getGeoData()) {
+            list.add(toLatLng(go.getPoints()));
+        }
+        return list;
+    }
+
+    private static ArrayList<LatLng> toLatLng(final Collection<Geopoint> gcs) {
+        final ArrayList<LatLng> list = new ArrayList<>();
+        for (Geopoint gc : gcs) {
+            list.add(new LatLng(gc.getLatitude(), gc.getLongitude()));
+        }
+        return list;
     }
 
     public void removeRoute(final String key) {

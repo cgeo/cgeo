@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.models.Route;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.functions.Action2;
@@ -19,7 +19,7 @@ public class Tracks {
 
     private static class Track {
         private final Trackfiles trackfile;
-        private Route route;
+        private IGeoDataProvider route;
 
         Track(final Trackfiles trackfile) {
             this.trackfile = trackfile;
@@ -28,7 +28,7 @@ public class Tracks {
     }
 
     public interface UpdateTrack {
-        void updateRoute(String key, Route route);
+        void updateRoute(String key, IGeoDataProvider route);
     }
 
     public Tracks() {
@@ -55,7 +55,7 @@ public class Tracks {
         });
     }
 
-    public void setRoute(@NonNull final String key, final Route route) {
+    public void setRoute(@NonNull final String key, final IGeoDataProvider route) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 track.route = route;
@@ -69,7 +69,7 @@ public class Tracks {
         }
     }
 
-    public void traverse(final Action2<String, Route> action) {
+    public void traverse(final Action2<String, IGeoDataProvider> action) {
         for (Track track : data) {
             action.call(track.trackfile.getKey(), track.route);
         }
@@ -113,7 +113,7 @@ public class Tracks {
         }
     }
 
-    public Route getRoute(@NonNull final String key) {
+    public IGeoDataProvider getRoute(@NonNull final String key) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 return track.route;

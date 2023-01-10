@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
@@ -101,12 +102,12 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateIndividualRoute(route, Route::getAllPointsGeoPoint);
+        super.updateIndividualRoute(route, MapsforgeMapsUtils::toGeoPoint);
     }
 
     @Override
-    public void updateTrack(final String key, final Route track) {
-        super.updateTrack(key, track, Route::getAllPointsGeoPoint);
+    public void updateTrack(final String key, final IGeoDataProvider track) {
+        super.updateTrack(key, track, MapsforgeMapsUtils::toGeoPoint);
     }
 
     // ========================================================================

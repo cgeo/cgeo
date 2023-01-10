@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.maps.google.v2.GoogleMapObjects;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
@@ -56,12 +57,12 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateIndividualRoute(route, Route::getAllPointsLatLng);
+        super.updateIndividualRoute(route, GoogleMapsUtils::toLatLng);
     }
 
     @Override
-    public void updateTrack(final String key, final Route track) {
-        super.updateTrack(key, track, Route::getAllPointsLatLng);
+    public void updateTrack(final String key, final IGeoDataProvider track) {
+        super.updateTrack(key, track, GoogleMapsUtils::toLatLng);
     }
 
     // ========================================================================

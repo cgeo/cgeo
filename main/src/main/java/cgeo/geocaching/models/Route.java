@@ -1,6 +1,8 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
 
@@ -8,11 +10,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import com.google.android.gms.maps.model.LatLng;
-import org.oscim.core.GeoPoint;
-
-public class Route implements Parcelable {
+public class Route implements IGeoDataProvider, Parcelable {
     private String name = "";
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
     private final boolean routeable;
@@ -28,11 +28,21 @@ public class Route implements Parcelable {
     }
 
     public interface UpdateRoute {
-        void updateRoute(Route route);
+        void updateRoute(IGeoDataProvider route);
+    }
+
+    @Override
+    public boolean hasData() {
+        return getNumSegments() > 0;
     }
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getId() {
+        return name;
     }
 
     public void add(final RouteSegment segment) {
@@ -64,59 +74,33 @@ public class Route implements Parcelable {
         this.isHidden = hide;
     }
 
-    public ArrayList<ArrayList<Geopoint>> getAllPoints() {
-        final ArrayList<ArrayList<Geopoint>> allPoints = new ArrayList<>();
-        if (segments != null) {
-            for (RouteSegment segment : segments) {
-                // extend existing list of points, if linking of segments is requested - otherwise add new segment
-                if (allPoints.size() > 0 && segment.getLinkToPreviousSegment()) {
-                    allPoints.get(allPoints.size() - 1).addAll(segment.getPoints());
+    @Override
+    public List<GeoObject> getGeoData() {
+        final List<GeoObject> result = new ArrayList<>();
+        final List<Geopoint> points = new ArrayList<>();
+        if (getSegments() != null) {
+            for (RouteSegment rs : getSegments()) {
+                if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
+                    points.addAll(rs.getPoints());
                 } else {
-                    allPoints.add(new ArrayList<>(segment.getPoints()));
+                    result.add(GeoObject.createPolyline(points, null, null));
+                    points.clear();
                 }
             }
         }
-        return allPoints;
+        if (!points.isEmpty()) {
+            result.add(GeoObject.createPolyline(points, null, null));
+        }
+        return result;
     }
 
-    public ArrayList<ArrayList<LatLng>> getAllPointsLatLng() {
-        final ArrayList<ArrayList<LatLng>> allPoints = new ArrayList<>();
-        if (segments != null) {
-            for (RouteSegment segment : segments) {
-                // convert to list of LatLng
-                final ArrayList<LatLng> points = new ArrayList<>();
-                for (Geopoint point : segment.getPoints()) {
-                    points.add(new LatLng(point.getLatitude(), point.getLongitude()));
-                }
-                // extend existing list of points, if linking of segments is requested - otherwise add new segment
-                if (allPoints.size() > 0 && segment.getLinkToPreviousSegment()) {
-                    allPoints.get(allPoints.size() - 1).addAll(points);
-                } else {
-                    allPoints.add(points);
-                }
-            }
+    @Override
+    public Viewport getViewport() {
+        final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
+        for (RouteSegment rs : getSegments()) {
+            cvb.add(rs.getPoints());
         }
-        return allPoints;
-    }
-
-    public ArrayList<ArrayList<GeoPoint>> getAllPointsGeoPoint() {
-        final ArrayList<ArrayList<GeoPoint>> allPoints = new ArrayList<>();
-        if (segments != null) {
-            for (RouteSegment segment : segments) {
-                // convert to list of GeoPoint
-                final ArrayList<GeoPoint> points = new ArrayList<>();
-                for (Geopoint point : segment.getPoints()) {
-                    points.add(new GeoPoint(point.getLatitude(), point.getLongitude()));
-                }
-                // extend existing list of points, if linking of segments is requested - otherwise add new segment
-                if (allPoints.size() > 0 && segment.getLinkToPreviousSegment()) {
-                    allPoints.get(allPoints.size() - 1).addAll(points);
-                } else {
-                    allPoints.add(points);
-                }
-            }
-        }
-        return allPoints;
+        return cvb.getViewport();
     }
 
     public RouteSegment[] getSegments() {

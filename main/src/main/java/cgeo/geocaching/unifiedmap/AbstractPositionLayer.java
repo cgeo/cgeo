@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
@@ -119,7 +120,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     // ========================================================================
     // route / track handling
 
-    private void updateRoute(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final Func1<K, ArrayList<ArrayList<T>>> getAllPoints) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (track == null) {
@@ -140,7 +141,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     public abstract void updateIndividualRoute(Route route);
 
-    public abstract void updateTrack(String key, Route track);
+    public abstract void updateTrack(String key, IGeoDataProvider track);
 
     public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
@@ -149,7 +150,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
     }
 
-    public void updateTrack(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+    public void updateTrack(final String key, final IGeoDataProvider track, final Func1<IGeoDataProvider, ArrayList<ArrayList<T>>> getAllPoints) {
         updateRoute(key, track, getAllPoints);
         repaintRouteAndTracks();
     }

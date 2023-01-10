@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -13,7 +14,6 @@ import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
@@ -103,7 +103,7 @@ public abstract class AbstractMap {
 
     public abstract void onLowMemory();
 
-    public void setTrack(final String key, final Route track) {
+    public void setTrack(final String key, final IGeoDataProvider track) {
         //
     }
 

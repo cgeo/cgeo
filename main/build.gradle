@@ -337,6 +337,9 @@ dependencies {
     // Jsoup HTML parsing
     implementation 'org.jsoup:jsoup:1.14.3'
 
+     // GeoJson parsing: https://github.com/cocoahero/android-geojson
+    implementation 'com.cocoahero.android:geojson:1.0.1@jar'
+
     // Junit only needed for local unit tests
     testImplementation 'junit:junit:4.13.2'
 

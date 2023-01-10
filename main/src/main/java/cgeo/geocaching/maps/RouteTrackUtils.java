@@ -6,6 +6,8 @@ import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IGeoDataProvider;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
@@ -181,7 +183,7 @@ public class RouteTrackUtils {
         tracklist.removeAllViews();
         dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> fileSelectorTrack.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
-        tracks.traverse((key, route) -> {
+        tracks.traverse((key, geoData) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
             final TextView displayName = vt.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
@@ -192,22 +194,23 @@ public class RouteTrackUtils {
                 }
             }));
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
-                if (null != route) {
-                    route.setCenter(centerOnPosition);
+                if (null != geoData) {
+                    final Viewport vp = geoData.getViewport();
+                    centerOnPosition.centerOnPosition(vp.getCenter().getLatitude(), vp.getCenter().getLongitude(), vp);
                 }
             });
 
             final ImageButton vVisibility = vt.findViewById(R.id.item_visibility);
-            if (route == null) {
+            if (geoData == null) {
                 vVisibility.setVisibility(View.GONE);
             } else {
                 vVisibility.setVisibility(View.VISIBLE);
-                setVisibilityInfo(vVisibility, route.isHidden());
+                setVisibilityInfo(vVisibility, geoData.isHidden());
                 vVisibility.setOnClickListener(v -> {
-                    final boolean newValue = !route.isHidden();
+                    final boolean newValue = !geoData.isHidden();
                     setVisibilityInfo(vVisibility, newValue);
-                    route.setHidden(newValue);
-                    updateTrack.updateRoute(key, route);
+                    geoData.setHidden(newValue);
+                    updateTrack.updateRoute(key, geoData);
                     tracks.hide(key, newValue);
                 });
             }
@@ -240,8 +243,8 @@ public class RouteTrackUtils {
         });
     }
 
-    private boolean isRouteNonEmpty(final Route route) {
-        return route != null && route.getNumSegments() > 0;
+    private boolean isRouteNonEmpty(final IGeoDataProvider route) {
+        return route != null && (!(route instanceof Route) || ((Route) route).getNumSegments() > 0);
     }
 
     public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
