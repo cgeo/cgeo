@@ -738,6 +738,7 @@
     <string name="settings_category_nearbysearch">Zoeken in de buurt</string>
     <string name="init_nearbysearchlimit_title">Zoeken in de buurt limiet</string>
     <string name="init_nearbysearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met zoeken in de buurt (0=ongelimiteerd)</string>
+    <string name="init_settings_description_unlimited">onbeperkt</string>
     <string name="settings_category_geocaching_additionals">Overige diensten en addons</string>
     <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
