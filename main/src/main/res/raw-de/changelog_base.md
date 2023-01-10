@@ -12,3 +12,4 @@
 - Einige abhängige Bibliotheken aktualisiert
 - Änderung: Verwende einen anderen Android-Mechanismus, um Downloads zu empfangen (für bessere Kompatibilität mit Android 12+)
 - Neu: Beim Import Listenname mit dem Namen der GPX-Datei vorbelegen
+- Fix (nightly version): Crash on GPX import
