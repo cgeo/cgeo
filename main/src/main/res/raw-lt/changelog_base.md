@@ -12,3 +12,4 @@
 - Atnaujinkite kai kurias priklausomas bibliotekas
 - Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
 - Naujiena: Iš anksto nustatytas sąrašo pavadinimas su GPX failo pavadinimu importuojant
+- Pataisymas (naktinė versija): GPX importavimo gedimas
