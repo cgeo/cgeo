@@ -12,3 +12,4 @@
 - Zaktualizowano niektóre zależne biblioteki
 - Zmiana: Użyj innego mechanizmu Androida do otrzymywania plików do pobrania (aby uzyskać lepszą kompatybilność z Androidem 12+)
 - Nowość: Wstępnie ustawiona nazwa listy z nazwą pliku GPX przy imporcie
+- Poprawka (wersja nocna): Awaria przy imporcie GPX
