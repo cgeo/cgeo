@@ -752,6 +752,7 @@
     <string name="settings_category_nearbysearch">Paieška netoliase</string>
     <string name="init_nearbysearchlimit_title">Paieškos netoliase limitas</string>
     <string name="init_nearbysearchlimit_description">Apriboja atstumą, iki kurio slėptuvės rodomos atliekant paiešką netoliese (0= neribotas)</string>
+    <string name="init_settings_description_unlimited">neribotas</string>
     <string name="settings_category_geocaching_additionals">Kitos paslaugos ir priedai</string>
     <string name="settings_category_social">Socialiniai tinklai</string>
     <string name="settings_category_logging_other">Kitos registravimo parinktys</string>
