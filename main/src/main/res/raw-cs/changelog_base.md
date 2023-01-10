@@ -12,3 +12,4 @@
 - Aktualizace některých závislých knihoven
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
 - Novinka: Název seznamu předvoleb s názvem souboru GPX při importu
+- Fix (nightly version): Crash on GPX import
