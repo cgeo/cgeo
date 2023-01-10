@@ -12,3 +12,4 @@
 - Enkele afhankelijke bibliotheken bijwerken
 - Wijziging: Gebruik een verschillend Android mechanisme voor het ontvangen van downloads (voor een betere compatibiliteit met Android 12+)
 - Nieuw: Gebruik GPX bestandsnaam als lijstnaam bij import
+- Fix (nightly version): Crash on GPX import
