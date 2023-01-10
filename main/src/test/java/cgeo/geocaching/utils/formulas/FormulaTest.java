@@ -75,14 +75,16 @@ public class FormulaTest {
         assertThat(eval("3+5")).isEqualTo(8d);
         assertThat(eval(" 3 + 5 ")).isEqualTo(8d);
         assertThat(eval("\t\n 3\t\n +\t\n 5\t\n ")).isEqualTo(8d);
+        assertThat(eval("(3 + 5)")).isEqualTo(8d);
+        assertThat(eval("(3 + 5 )")).isEqualTo(8d);
+        assertThat(eval("(3 + A)", "A", "5")).isEqualTo(8d);
+        assertThat(eval("(3 + A )", "A", "5")).isEqualTo(8d);
+        assertThat(eval("(3 + A ) * 4", "A", "5")).isEqualTo(32d);
     }
 
     @Test
     public void singleTestForDebug() {
-        final Value v = Value.of("345b");
-        v.getAsInt();
-        v.getAsDouble();
-
+        assertThat(eval("(3 + 5 )")).isEqualTo(8d);
     }
 
     @Test
