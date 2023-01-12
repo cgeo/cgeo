@@ -432,7 +432,7 @@ dependencies {
     implementation "androidx.work:work-runtime:2.7.1"
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
 
     // Support Library core (used for eg. HtmlCompat)
     implementation 'androidx.core:core:1.8.0'
