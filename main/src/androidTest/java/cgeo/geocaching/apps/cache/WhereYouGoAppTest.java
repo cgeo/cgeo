@@ -12,7 +12,7 @@ public class WhereYouGoAppTest {
     public void testGetWhereIGoUrl() {
         final Geocache cache = new Geocache();
         cache.setDescription("<p style=\"max-width:670px;\"><a href=\"http://www.wherigo.com/cartridge/details.aspx?CGUID=c4577c31-09e9-44f0-ae48-83737e57adbd\"><img class=\"InsideTable\"");
-        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("https://www.wherigo.com/cartridge/download.aspx?CGUID=c4577c31-09e9-44f0-ae48-83737e57adbd");
+        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo(WhereYouGoApp.URL_BASE + "c4577c31-09e9-44f0-ae48-83737e57adbd");
     }
 
     // from GC461KF (URL with "download.aspx")
@@ -20,7 +20,7 @@ public class WhereYouGoAppTest {
     public void testGetWhereIGoUrlDownload() {
         final Geocache cache = new Geocache();
         cache.setDescription("<a href=\"http://www.wherigo.com/cartridge/download.aspx?CGUID=ec53c2bc-98dc-4d5f-bf9b-0709931d53bc\">Download Cartridge</a><br>");
-        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("https://www.wherigo.com/cartridge/download.aspx?CGUID=ec53c2bc-98dc-4d5f-bf9b-0709931d53bc");
+        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo(WhereYouGoApp.URL_BASE + "ec53c2bc-98dc-4d5f-bf9b-0709931d53bc");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class WhereYouGoAppTest {
     public void testGetWherIGoURLHttps() {
         final Geocache cache = new Geocache();
         cache.setDescription("Da kannsch da die Cartridge oaladn:<br>\n<br>\n<a target=\"_blank\" href=\"https://www.wherigo.com/cartridge/details.aspx?CGUID=a482bfed-47f0-4b2c-a9f9-c1e3c4ef48c6\"><img src=\"https://imgproxy.geocaching.com/5e0c76c4b8cccbb11eecc36b322a9177d6820421?url=https%3A%2F%2Fwww.muggelfrei.at%2Fcaches%2Fi-heart-innsbruck%2Fcartridge.png\"></a><br>");
-        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("https://www.wherigo.com/cartridge/download.aspx?CGUID=a482bfed-47f0-4b2c-a9f9-c1e3c4ef48c6");
+        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo(WhereYouGoApp.URL_BASE + "a482bfed-47f0-4b2c-a9f9-c1e3c4ef48c6");
     }
 
     // from GC7WDB4
@@ -43,7 +43,7 @@ public class WhereYouGoAppTest {
     public void testGetWhereIGoUrlSameURLTwice() {
         final Geocache cache = new Geocache();
         cache.setDescription("<p><strong><a href=\"http://www.wherigo.com/cartridge/details.aspx?CGUID=bb9a7000-c59c-4822-9e10-d779c752345f\">http://www.wherigo.com/cartridge/download.aspx?CGUID=bb9a7000-c59c-4822-9e10-d779c752345f</a></strong></p>");
-        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo("https://www.wherigo.com/cartridge/download.aspx?CGUID=bb9a7000-c59c-4822-9e10-d779c752345f");
+        assertThat(WhereYouGoApp.getWhereIGoUrl(cache)).isEqualTo(WhereYouGoApp.URL_BASE + "bb9a7000-c59c-4822-9e10-d779c752345f");
     }
 
     // from GC7WDB4 (modified)

@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
     private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
-    private static final String URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
+    protected static final String URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
 
     public WhereYouGoApp() {
         super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
