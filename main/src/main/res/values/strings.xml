@@ -1580,6 +1580,7 @@
     <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can install Chirp Wolf.</string>
     <string name="cache_alc_start">Open Adventure Lab to start playing this adventure</string>
+    <string name="cache_alc_related_start">Open Adventure Lab to start playing related adventure</string>
     <string name="cache_alc_install">Install Adventure Lab player to play this adventure</string>
 
     <string name="context_share_as_text">Share text</string>

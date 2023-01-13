@@ -175,6 +175,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -1618,15 +1620,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateALCBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = cache.getType() == CacheType.ADVLAB && StringUtils.isNotEmpty(cache.getUrl());
+            final boolean isLabListing = cache.getType() == CacheType.ADVLAB && StringUtils.isNotEmpty(cache.getUrl());
+            final boolean isEnabled = isLabListing || (cache.getType() == CacheType.MYSTERY && findAdvLabUrl(cache) != null);
             final Intent alc = ProcessUtils.getLaunchIntent(getString(R.string.package_alc));
             binding.alcBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-            binding.alcText.setText(alc != null ? R.string.cache_alc_start : R.string.cache_alc_install);
+            binding.alcText.setText(alc != null ? (isLabListing ? R.string.cache_alc_start : R.string.cache_alc_related_start) : R.string.cache_alc_install);
             if (isEnabled) {
+                final String advLabUrl = isLabListing ? cache.getUrl() : findAdvLabUrl(cache);
                 binding.sendToAlc.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
                     if (alc != null) {
-                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl()));
+                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(advLabUrl));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
                     } else {
@@ -1634,6 +1638,24 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
             }
+        }
+
+        @Nullable
+        /**
+         * Find links to Adventure Labs in Listing of a cache. Returns URL if exactly 1 link target is found, else null.
+         * 3 types of URLs possible: https://adventurelab.page.link/Cw3L, https://labs.geocaching.com/goto/Theater, https://labs.geocaching.com/goto/a4b45b7b-fa76-4387-a54f-045875ffee0c
+         */
+        private static String findAdvLabUrl(final Geocache cache) {
+            final Pattern patternAdvLabUrl = Pattern.compile("(https?://labs.geocaching.com/goto/[a-zA-Z0-9-_]{1,36}|https?://adventurelab.page.link/[a-zA-Z0-9]{4})");
+            final Matcher matcher = patternAdvLabUrl.matcher(cache.getShortDescription() + " " + cache.getDescription());
+            final Set<String> urls = new HashSet<>();
+            while (matcher.find()) {
+                urls.add(matcher.group(1));
+            }
+            if (urls.size() == 1) {
+                return urls.iterator().next();
+            }
+            return null;
         }
     }
 
