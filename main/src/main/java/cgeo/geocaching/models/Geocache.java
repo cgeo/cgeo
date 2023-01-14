@@ -41,6 +41,7 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
@@ -72,7 +73,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -1738,39 +1741,88 @@ public class Geocache implements IWaypoint {
         return null;
     }
 
-    /**
-     * Detect coordinates in the personal note and add them to user-defined waypoints.
-     */
-    public boolean addWaypointsFromNote() {
-        return addWaypointsFromText(getPersonalNote(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note), false);
+    /** Convenience method for {@link #addCacheArtefactsFromNotes(String)} with parameter null */
+    public boolean addCacheArtefactsFromNotes() {
+        return addCacheArtefactsFromNotes(null);
     }
 
     /**
-     * Detect waypoints (identified by coordinates) in the given text and add them to user-defined waypoints
+     * Detect cache artefacts (waypoints+variables) in the user's notes (cache + waypoints) and add them to user-defined waypoints/variables.
+     * @param previousAllUserNotes if given, then a parse of previous notes is used to help in deciding which values potentially to overwrite
+     */
+    public boolean addCacheArtefactsFromNotes(@Nullable final String previousAllUserNotes) {
+        return addCacheArtefactsFromText(getAllUserNotes(), false, CgeoApplication.getInstance().getString(R.string.cache_personal_note), false, previousAllUserNotes);
+    }
+
+    /** returns a concatenation of all user notes (Cache + waypoints) */
+    @NonNull
+    public String getAllUserNotes() {
+        final StringBuilder sb = new StringBuilder();
+        for (Waypoint w : getWaypoints()) {
+            if (!StringUtils.isBlank(w.getUserNote())) {
+                sb.append(w.getUserNote()).append("\n");
+            }
+        }
+        return sb.append(StringUtils.defaultString(getPersonalNote(), "")).toString();
+
+    }
+
+
+    /**
+     * Detect cache artefacts (waypoints+variables) in the given text and add them to user-defined waypoints
      * or updates existing ones with meta information.
      *
      * @param text            text which might contain coordinates
      * @param updateDb        if true the added waypoints are stored in DB right away
      * @param namePrefix      prefix for default waypoint names (if names cannot be extracted from text)
      * @param forceExtraction if extraction should be enforced, regardless of cache setting
+     * @param previousAllUserNotes if given, then a parse of previous notes is used to help in deciding which values potentially to overwrite
      */
-    public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
+    public boolean addCacheArtefactsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction, @Nullable final String previousAllUserNotes) {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
-            final WaypointParser waypointParser = new WaypointParser(this, namePrefix);
-            for (final Waypoint parsedWaypoint : waypointParser.parseWaypoints(StringUtils.defaultString(text))) {
+            final CacheArtefactParser previousParser = previousAllUserNotes == null ? null : new CacheArtefactParser(this, namePrefix).parse(previousAllUserNotes);
+
+            final CacheArtefactParser cacheArtefactParser = new CacheArtefactParser(this, namePrefix).parse(StringUtils.defaultString(text));
+            for (final Waypoint parsedWaypoint : cacheArtefactParser.getWaypoints()) {
                 changed |= addOrMergeInfoToExistingWaypoint(updateDb, namePrefix, parsedWaypoint);
             }
-            for (Map.Entry<String, String> var : waypointParser.getParsedVariables().entrySet()) {
-                if (getVariables().isWorthAddingWithoutLoss(var.getKey(), var.getValue())) {
-                    getVariables().addVariable(var.getKey(), var.getValue());
+            final Map<String, String> newVars = new HashMap<>();
+            for (Map.Entry<String, String> var : cacheArtefactParser.getVariables().entrySet()) {
+                if (getVariables().isWorthAddingWithoutLoss(var.getKey(), var.getValue(), previousParser == null ? null : previousParser.getVariables().get(var.getKey()))) {
+                    newVars.put(var.getKey(), var.getValue());
                 }
-                getVariables().saveState();
-                getVariables().recalculateWaypoints(this); //need to do this because new wps are not saved to DB yet
             }
+            changeVariables(newVars);
         }
         return changed;
     }
+
+    /** Returns a map of variables which differ from list and parsing user notes */
+    @NonNull
+    public Map<String, Pair<String, String>> getVariableDifferencesFromUserNotes() {
+        final Map<String, String> noteVars = new CacheArtefactParser(this, "").parse(getAllUserNotes()).getVariables();
+        final Map<String, String> cacheVars = getVariables().toMap();
+        final Map<String, Pair<String, String>> result = CommonUtils.compare(noteVars, cacheVars);
+        final Iterator<Map.Entry<String, Pair<String, String>>> it = result.entrySet().iterator();
+        while (it.hasNext()) {
+            final Map.Entry<String, Pair<String, String>> entry = it.next();
+            if (StringUtils.isBlank(entry.getValue().first)) {
+                it.remove();
+            }
+        }
+        return result;
+    }
+
+    /** changes this cache's variables with the given one's. Change is forced! */
+    public void changeVariables(final Map<String, String> newVars) {
+        for (Map.Entry<String, String> var : newVars.entrySet()) {
+            getVariables().addVariable(var.getKey(), var.getValue());
+            getVariables().saveState();
+            getVariables().recalculateWaypoints(this); //need to do this because new wps are not saved to DB yet
+        }
+    }
+
 
     private boolean addOrMergeInfoToExistingWaypoint(final boolean updateDb, @NonNull final String namePrefix, final Waypoint wpCandidate) {
         boolean changed = false;

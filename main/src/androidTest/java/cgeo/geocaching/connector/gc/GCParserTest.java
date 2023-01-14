@@ -208,7 +208,7 @@ public class GCParserTest {
     private void assertWaypointsFromNote(final Geocache cache, final Geopoint[] expected, final String note) {
         cache.setPersonalNote(note);
         cache.setWaypoints(new ArrayList<>(), false);
-        cache.addWaypointsFromNote();
+        cache.addCacheArtefactsFromNotes();
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints).hasSize(expected.length);
         for (int i = 0; i < expected.length; i++) {
@@ -250,7 +250,7 @@ public class GCParserTest {
         cache.setWaypoints(new ArrayList<>(), false);
         cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" + "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" + "Get some ice cream at N 50° 40.555E 006° 58.000\"");
 
-        cache.addWaypointsFromNote();
+        cache.addCacheArtefactsFromNotes();
         final List<Waypoint> waypoints = cache.getWaypoints();
 
         assertThat(waypoints).hasSize(3);

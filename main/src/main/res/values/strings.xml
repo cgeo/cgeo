@@ -1411,6 +1411,9 @@
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
     <string name="cache_personal_note_upload_error">Error uploading personal note</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
+    <string name="cache_personal_note_vars_out_of_sync">Variables in notes are out of sync (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Check variables whose value should be overwritten from notes</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
     <string name="cache_description_rendering">Rendering description, please wait…</string>

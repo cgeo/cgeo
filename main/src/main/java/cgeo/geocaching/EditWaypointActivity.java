@@ -662,7 +662,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             finishHandler.sendEmptyMessage(SAVE_ERROR);
             return;
         }
+        final String oldAllUserNotes = cache.getAllUserNotes();
         if (cache.addOrChangeWaypoint(waypoint, true)) {
+            cache.addCacheArtefactsFromNotes(oldAllUserNotes);
             if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
                 if (!cache.hasUserModifiedCoords()) {
                     final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
