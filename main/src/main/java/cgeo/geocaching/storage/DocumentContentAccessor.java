@@ -206,6 +206,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             try {
                 return listInternal(folder, true);
             } catch (IllegalArgumentException iae2) {
+                Log.d("Exception while trying to list '" + folder + "'", iae2);
                 return Collections.emptyList();
             }
         }
@@ -260,6 +261,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
             try {
                 return getFolderUri(folder, false, false, true);
             } catch (IllegalArgumentException iae2) {
+                Log.d("Exception while trying to getUriForFolder '" + folder + "'", iae2);
                 return null;
             }
         }
@@ -277,6 +279,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
                     c -> fileInfoFromCursor(c, uri, null, folder));
         } catch (IllegalArgumentException iae) {
             //this means that the uri does not exist or is not accessible. Return null
+            Log.d("Exception trying to get file info for '" + uri + "' / '" + folder + "'", iae);
             return null;
         }
     }
@@ -299,11 +302,13 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
             final Uri treeUri = folder.getBaseUri();
             if (!checkUriPermissions(treeUri, needsWrite)) {
+                Log.d("Uri failed permission check: '" + treeUri + "', nw =" + needsWrite);
                 return null;
             }
             final Uri baseUri = DocumentsContract.buildDocumentUriUsingTree(treeUri, DocumentsContract.getTreeDocumentId(treeUri));
 
             if (validateCache && !isValidDirectoryUri(baseUri, needsWrite)) {
+                Log.d("Uri not a valid directory uri: '" + baseUri + "', nw =" + needsWrite);
                 return null;
             }
             cLog.add("got base");
@@ -319,6 +324,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
                             (!needsWrite || (c.getInt(1) & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0));
         } catch (IllegalArgumentException iae) {
             //this is thrown if dirUri does not exist
+            Log.d("Exception in isValidDirectoryUri for uri '" + dirUri + "', nw=" + needsWrite);
             return false;
         }
     }
@@ -421,7 +427,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         try {
             c = resolver.query(docUri, columns, null, null, null);
             if (c == null) {
-                throw new IllegalArgumentException("Cursor is null");
+                throw new IllegalArgumentException("Cursor is null when querying Uri '" + docUri + "'");
             }
             if (c.moveToFirst()) {
                 return consumer.call(c);
