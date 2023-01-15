@@ -711,6 +711,7 @@
     <string name="settings_category_nearbysearch">Recherche à proximité</string>
     <string name="init_nearbysearchlimit_title">Rayon pour la recherche à proximité</string>
     <string name="init_nearbysearchlimit_description">Distance maximale pour la recherche de caches à proximité (0=illimité)</string>
+    <string name="init_settings_description_unlimited">illimité</string>
     <string name="settings_category_geocaching_additionals">Autres services et addons</string>
     <string name="settings_category_social">Réseaux sociaux</string>
     <string name="settings_category_logging_other">Options de visite supplémentaires</string>
