@@ -556,7 +556,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         individualRoute.clearRoute(routeLayer);
         individualRoute.clearRoute((route) -> {
             routeLayer.updateIndividualRoute(route);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            updateRouteTrackButtonVisibility();
         });
         distanceView.showRouteDistance();
         showToast(res.getString(R.string.map_individual_route_cleared));
@@ -974,6 +974,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTapLatLong().latitude, tapHandlerLayer.getLongTapLatLong().longitude),
                             (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
+                            this::updateRouteTrackButtonVisibility,
                             getCurrentTargetCache(), mapOptions)
                     .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();
@@ -1385,7 +1386,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
         individualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        updateRouteTrackButtonVisibility();
     }
 
     @Nullable
@@ -1470,7 +1471,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void setTrack(final String key, final IGeoDataProvider route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        updateRouteTrackButtonVisibility();
     }
 
     private void reloadIndividualRoute() {
@@ -1480,12 +1481,16 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void reloadIndividualRouteFollowUp(final Route route) {
         if (null != routeLayer) {
             routeLayer.updateIndividualRoute(route);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            updateRouteTrackButtonVisibility();
         } else {
             // try again in 0.25 seconds
             new Handler(Looper.getMainLooper()).postDelayed(() -> reloadIndividualRouteFollowUp(route), 250);
         }
     }
+
+    private void updateRouteTrackButtonVisibility() {
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+    };
 
     private Boolean isTargetSet() {
         return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;
