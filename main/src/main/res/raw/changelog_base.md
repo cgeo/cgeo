@@ -13,3 +13,4 @@
 - Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
 - New: Preset list name with GPX filename on import
 - Fix (nightly version): Crash on GPX import
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
