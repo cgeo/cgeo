@@ -57,6 +57,7 @@ android {
 dependencies {
     // Apache Commons
     // commons-lang3 3.12.0 uses StringJoiner which is first contained in API24. See https://github.com/cgeo/cgeo/issues/12577
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-lang3:3.11'
     // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
     // could be replaced by Storage Access Framework
