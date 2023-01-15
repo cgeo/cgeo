@@ -84,7 +84,7 @@ public class FormulaTest {
 
     @Test
     public void singleTestForDebug() {
-        assertThat(eval("(3 + 5 )")).isEqualTo(8d);
+        assertThat(eval("4 x 5", "x", 1)).as("x is multiply here").isEqualTo(20);
     }
 
     @Test
@@ -108,6 +108,7 @@ public class FormulaTest {
 
         assertThat(eval("3 A + 1 4.3", "A", 2)).isEqualTo(334.3d);
         assertThat(eval("3 (A+1 A + 2) 4.3", "A", 2)).isEqualTo(3344.3d);
+        assertThat(eval("3 + 5 1 * 6 1")).isEqualTo(861d);
 
         //issue #12610
         assertThat(eval("2+ 3 4 +5")).isEqualTo(59d);
@@ -494,6 +495,20 @@ public class FormulaTest {
         assertThat(eval("4! #comment")).isEqualTo(4 * 3 * 2);
         assertThat(eval("4^2 #comment")).isEqualTo(4 * 4);
         assertThat(eval("2 * (3 + 4) #comment")).isEqualTo(2 * (3 + 4));
+    }
+
+    @Test
+    public void xAsMultiplier() {
+        assertThat(eval("4x5", "x", 1)).isEqualTo(415);
+        assertThat(eval("4x 5", "x", 1)).isEqualTo(415);
+        assertThat(eval("4 x5", "x", 1)).isEqualTo(415);
+
+        assertThat(eval("4 x 5", "x", 1)).as("x is multiply here").isEqualTo(20);
+        assertThat(eval("4 $x 5", "x", 1)).as("x is variable here").isEqualTo(415);
+
+        assertThat(eval("x x x", "x", 3)).isEqualTo(9);
+
+        assertThat(eval("(xx x x ) x x", "x", 2)).as("complex x usage: (22 x 2) x 2").isEqualTo(88);
     }
 
 }

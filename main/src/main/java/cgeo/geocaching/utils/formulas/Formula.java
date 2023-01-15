@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func3;
 import cgeo.geocaching.utils.functions.Func4;
+import static cgeo.geocaching.utils.TextParser.isFormulaWhitespace;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.EMPTY_FORMULA;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
@@ -442,7 +443,7 @@ public final class Formula {
         return compiledExpression.getNeededVars();
     }
 
-    protected void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
+    private void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
         this.p = new TextParser(rawExpression, stopChecker == null ? null :
                 (c) -> level == 0 && stopChecker.call(c));
 
@@ -566,7 +567,7 @@ public final class Formula {
     private FormulaNode parseMultiplyDivision() {
         FormulaNode x = parseFactor();
         for (; ; ) {
-            if (p.eat('*') || p.eat('•')) {
+            if (p.eat('*') || p.eat('•') || eatXMultiplier()) {
                 x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
             } else if (p.eat('/') || p.eat(':') || p.eat('÷')) {
                 x = createNumeric("/", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
@@ -576,6 +577,16 @@ public final class Formula {
                 return x;
             }
         }
+    }
+
+    private boolean eatXMultiplier() {
+        p.skipWhitespaces();
+        //'x' (lowercase) is considered a multiplier symbol (and not a variable) if it is surrounded by whitespace
+        if (p.ch() == 'x' && isFormulaWhitespace(p.peek()) && isFormulaWhitespace(p.previous())) {
+            p.next();
+            return true;
+        }
+        return false;
     }
 
     private FormulaNode parseFactor() {
