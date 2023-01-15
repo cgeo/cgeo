@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.Polyline;
 
 public class GoogleMapObjectsQueue {
@@ -76,6 +77,8 @@ public class GoogleMapObjectsQueue {
             ((Circle) obj).remove();
         } else if (obj instanceof Polyline) {
             ((Polyline) obj).remove();
+        } else if (obj instanceof Polygon) {
+            ((Polygon) obj).remove();
         } else {
             throw new IllegalStateException();
         }

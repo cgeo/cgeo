@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import androidx.annotation.ColorInt;
 
@@ -35,10 +36,10 @@ public class GeoObjectLayer extends GroupLayer {
         final GroupLayer gl = new GroupLayer();
         gl.setDisplayModel(displayModel);
         for (GeoObject go : objects) {
-            final Paint strokePaint = createPaint(go.getStrokeColor());
-            strokePaint.setStrokeWidth(go.getStrokeWidth());
+            final Paint strokePaint = createPaint(go.getStyle().getStrokeColor());
+            strokePaint.setStrokeWidth(MapLineUtils.getAdjustedWidth(go.getStyle().getStrokeWidth(), false));
             strokePaint.setStyle(Style.STROKE);
-            final Paint fillPaint = createPaint(go.getFillColor());
+            final Paint fillPaint = createPaint(go.getStyle().getFillColor());
             fillPaint.setStyle(Style.FILL);
             final Layer goLayer;
             switch (go.getType()) {

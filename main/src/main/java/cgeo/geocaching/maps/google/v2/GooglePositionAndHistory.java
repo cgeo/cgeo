@@ -13,6 +13,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
@@ -20,7 +21,6 @@ import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
-import android.graphics.Bitmap;
 import android.location.Location;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class GooglePositionAndHistory implements PositionAndHistory, Tracks.UpdateTrack, IndividualRoute.UpdateIndividualRoute {
@@ -78,15 +79,13 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 
-    private static Bitmap locationIcon;
-
     private Viewport lastViewport = null;
 
-    private final HashMap<String, CachedRoute> cache = new HashMap<>();
+    private final HashMap<String, GeoObjectCache> cache = new HashMap<>();
 
-    private static class CachedRoute {
-        private boolean isHidden = false;
-        private ArrayList<ArrayList<LatLng>> track = null;
+    private static class GeoObjectCache {
+        //private boolean isHidden = false;
+        private final List<MapObjectOptions> googleObjects = new ArrayList<>();
     }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -203,35 +202,37 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     @Override
     public void updateRoute(final String key, final IGeoDataProvider track) {
+        final boolean isIndividualRoute = KEY_INDIVIDUAL_ROUTE.equals(key);
         synchronized (cache) {
-            CachedRoute c = cache.get(key);
+            GeoObjectCache c = cache.get(key);
             if (c == null) {
-                c = new CachedRoute();
+                c = new GeoObjectCache();
                 cache.put(key, c);
             }
-            c.track = null;
-            if (track != null) {
-                c.track = toLatLng(track);
+            final List<MapObjectOptions> newObjects = createGoogleObjects(track, isIndividualRoute ? ZINDEX_ROUTE : ZINDEX_TRACK);
+            final List<MapObjectOptions> oldObjects = c.googleObjects;
+            final GoogleMapObjects layer = isIndividualRoute ? routeObjs : trackObjs;
+            layer.removeAll();
+            layer.addAll(newObjects);
+            c.geoobjects.clear();
+            if (track != null && track.getGeoData() != null) {
+                c.geoobjects.addAll(track.getGeoData());
                 c.isHidden = track.isHidden();
             }
         }
         repaintRequired();
     }
 
-    private static ArrayList<ArrayList<LatLng>> toLatLng(final IGeoDataProvider gg) {
-        final ArrayList<ArrayList<LatLng>> list = new ArrayList<>();
-        for (GeoObject go : gg.getGeoData()) {
-            list.add(toLatLng(go.getPoints()));
+    private static ArrayList<LatLng> toLatLng(final Collection<Geopoint> gcs) {
+        final ArrayList<LatLng> list = new ArrayList<>();
+        for (Geopoint gc : gcs) {
+            list.add(toLatLng(gc));
         }
         return list;
     }
 
-    private static ArrayList<LatLng> toLatLng(final Collection<Geopoint> gcs) {
-        final ArrayList<LatLng> list = new ArrayList<>();
-        for (Geopoint gc : gcs) {
-            list.add(new LatLng(gc.getLatitude(), gc.getLongitude()));
-        }
-        return list;
+    private static LatLng toLatLng(final Geopoint gp) {
+        return new LatLng(gp.getLatitude(), gp.getLongitude());
     }
 
     public void removeRoute(final String key) {
@@ -240,14 +241,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
     }
 
-    public void setHidden(final String key, final boolean isHidden) {
-        synchronized (cache) {
-            final CachedRoute c = cache.get(key);
-            if (c != null) {
-                c.isHidden = isHidden;
-            }
-        }
-    }
+//    public void setHidden(final String key, final boolean isHidden) {
+//        synchronized (cache) {
+//            final GeoObjectGroup c = cache.get(key);
+//            if (c != null) {
+//                c.isHidden = isHidden;
+//            }
+//        }
+//    }
 
     @Override
     public void repaintRequired() {
@@ -396,34 +397,53 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private synchronized void drawRouteAndTracks() {
         // draw individual route
         routeObjs.removeAll();
-        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
-            for (ArrayList<LatLng> segment : individualRoute.track) {
-                routeObjs.addPolyline(new PolylineOptions()
-                        .addAll(segment)
-                        .color(MapLineUtils.getRouteColor())
-                        .width(MapLineUtils.getRouteLineWidth(false))
-                        .zIndex(ZINDEX_ROUTE)
-                );
-            }
-        }
+        final GeoObjectCache individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
+        drawGeoObjects(individualRoute, routeObjs, ZINDEX_ROUTE);
         // draw tracks
         trackObjs.removeAll();
         synchronized (cache) {
-            for (CachedRoute c : cache.values()) {
-                // route hidden, no route or route too short?
-                if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
-                    for (ArrayList<LatLng> segment : c.track) {
-                        trackObjs.addPolyline(new PolylineOptions()
-                                .addAll(segment)
-                                .color(MapLineUtils.getTrackColor())
-                                .width(MapLineUtils.getTrackLineWidth(false))
-                                .zIndex(ZINDEX_TRACK)
-                        );
-                    }
-                }
+            for (GeoObjectCache c : cache.values()) {
+                drawGeoObjects(c, trackObjs, ZINDEX_TRACK);
+           }
+        }
+    }
+
+    private static List<MapObjectOptions> createGoogleObjects(final IGeoDataProvider provider, final float zLevel) {
+        final List<MapObjectOptions> target = new ArrayList<>();
+        // objectgroup hidden or no objects?
+        if (provider == null || provider.isHidden() || provider.getGeoData() == null || provider.getGeoData().isEmpty()) {
+            return target;
+        }
+        for (GeoObject go : provider.getGeoData()) {
+            switch (go.getType()) {
+                case POLYLINE:
+                    target.add(MapObjectOptions.from(new PolylineOptions()
+                            .addAll(toLatLng(go.getPoints()))
+                            .color(go.getStyle().getStrokeColor())
+                            .width(MapLineUtils.getAdjustedWidth(go.getStyle().getStrokeWidth(), false))
+                            .zIndex(zLevel)
+                    ));
+                    break;
+                case POINT:
+                    target.add(MapObjectOptions.from(new CircleOptions()
+                            .center(toLatLng(go.getPoints().get(0)))
+                            .radius(MapLineUtils.getAdjustedWidth(go.getStyle().getStrokeWidth(), false))
+                            .fillColor(go.getStyle().getStrokeColor())
+                            .zIndex(zLevel)
+                    ));
+                    break;
+                case POLYGON:
+                default:
+                    target.add(MapObjectOptions.from(new PolygonOptions()
+                            .addAll(toLatLng(go.getPoints()))
+                            .strokeColor(go.getStyle().getStrokeColor())
+                            .strokeWidth(MapLineUtils.getAdjustedWidth(go.getStyle().getStrokeWidth(), false))
+                            .fillColor(go.getStyle().getFillColor())
+                            .zIndex(zLevel)
+                    ));
             }
         }
+        return target;
     }
 
     private synchronized void drawLongTapMarker() {

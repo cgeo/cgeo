@@ -1,10 +1,12 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -83,15 +85,19 @@ public class Route implements IGeoDataProvider, Parcelable {
                 if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
                     points.addAll(rs.getPoints());
                 } else {
-                    result.add(GeoObject.createPolyline(points, null, null));
+                    result.add(GeoObject.createPolyline(points, getLineStyle()));
                     points.clear();
                 }
             }
         }
         if (!points.isEmpty()) {
-            result.add(GeoObject.createPolyline(points, null, null));
+            result.add(GeoObject.createPolyline(points, getLineStyle()));
         }
         return result;
+    }
+
+    protected GeoObjectStyle getLineStyle() {
+        return new GeoObjectStyle(MapLineUtils.getTrackColor(), MapLineUtils.getRawTrackLineWidth(), -1);
     }
 
     @Override

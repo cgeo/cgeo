@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
 
 import android.graphics.Color;
@@ -96,17 +97,17 @@ public class GeoJsonUtils {
     }
 
     private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPoint(posToGeopoint(point.getPosition()), props.strokeColor, props.strokeWidth));
+        list.add(GeoObject.createPoint(posToGeopoint(point.getPosition()), propsToStyle(props)));
     }
 
     private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoObject> list) {
         for (Position p : multiPoint.getPositions()) {
-            list.add(GeoObject.createPoint(posToGeopoint(p), props.strokeColor, props.strokeWidth));
+            list.add(GeoObject.createPoint(posToGeopoint(p), propsToStyle(props)));
         }
     }
 
     private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPolyline(CollectionStream.of(lineString.getPositions()).map(GeoJsonUtils::posToGeopoint).toList(), props.strokeColor, props.strokeWidth));
+        list.add(GeoObject.createPolyline(CollectionStream.of(lineString.getPositions()).map(GeoJsonUtils::posToGeopoint).toList(), propsToStyle(props)));
     }
 
     private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoObject> list) {
@@ -118,7 +119,7 @@ public class GeoJsonUtils {
     private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoObject> list) {
         //as of now, polygon rings are parsed as separate polygons
         for (Ring r : polygon.getRings()) {
-            list.add(GeoObject.createPolygon(posToGeopoints(r.getPositions()), props.strokeColor, props.strokeWidth, props.fillColor));
+            list.add(GeoObject.createPolygon(posToGeopoints(r.getPositions()), propsToStyle(props)));
         }
     }
 
@@ -149,6 +150,14 @@ public class GeoJsonUtils {
         result.fillColor = colorFromJson(result.fillColor, json, "fill", "fill-opacity");
         result.strokeWidth = floatFromJson(result.strokeWidth, json, "stroke-width");
         return result;
+    }
+
+    private static GeoObjectStyle propsToStyle(final GeoJsonProperties props) {
+        return new GeoObjectStyle(
+          props.strokeColor == null ? Color.BLACK : props.strokeColor,
+          props.strokeWidth == null ? 2f : props.strokeWidth,
+          props.fillColor == null ? Color.TRANSPARENT : props.fillColor
+        );
     }
 
     private static Float floatFromJson(final Float currentFloat, final JSONObject json, final String key) {

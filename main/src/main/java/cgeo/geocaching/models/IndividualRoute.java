@@ -1,11 +1,13 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -178,6 +180,11 @@ public class IndividualRoute extends Route implements Parcelable {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected GeoObjectStyle getLineStyle() {
+        return new GeoObjectStyle(MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth(), -1);
     }
 
     // Parcelable methods

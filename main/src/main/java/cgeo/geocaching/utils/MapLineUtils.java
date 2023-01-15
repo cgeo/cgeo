@@ -33,6 +33,10 @@ public class MapLineUtils {
 
     // route line
 
+    public static int getRawRouteLineWidth() {
+        return Settings.getMapLineValue(R.string.pref_mapline_routewidth, R.integer.default_routewidth);
+    }
+
     public static float getRouteLineWidth(final boolean unifiedMap) {
         return getWidth(R.string.pref_mapline_routewidth, R.integer.default_routewidth, unifiedMap);
     }
@@ -42,6 +46,10 @@ public class MapLineUtils {
     }
 
     // track line
+
+    public static int getRawTrackLineWidth() {
+        return Settings.getMapLineValue(R.string.pref_mapline_trackwidth, R.integer.default_trackwidth);
+    }
 
     public static float getTrackLineWidth(final boolean unifiedMap) {
         return getWidth(R.string.pref_mapline_trackwidth, R.integer.default_trackwidth, unifiedMap);
@@ -82,10 +90,14 @@ public class MapLineUtils {
         return THIN_LINE * DisplayUtils.getDisplayDensity();
     }
 
+    public static float getAdjustedWidth(final float width, final boolean unifiedMap) {
+        return (width / (unifiedMap ? 4.0f : 2.0f) + 1.0f) * DisplayUtils.getDisplayDensity();
+    }
+
     // helper methods
 
     private static float getWidth(final int prefKeyId, final int defaultValueKeyId, final boolean unifiedMap) {
-        return (Settings.getMapLineValue(prefKeyId, defaultValueKeyId) / (unifiedMap ? 4.0f : 2.0f) + 1.0f) * DisplayUtils.getDisplayDensity();
+        return getAdjustedWidth(Settings.getMapLineValue(prefKeyId, defaultValueKeyId), unifiedMap);
     }
 
 }
