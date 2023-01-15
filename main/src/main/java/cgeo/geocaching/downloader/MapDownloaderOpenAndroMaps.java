@@ -19,7 +19,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     private static final Pattern PATTERN_MAP = Pattern.compile("<a href=\"([A-Za-z0-9_-]+\\.zip)\">([A-Za-z0-9_-]+)\\.zip<\\/a>[ ]*([0-9]{2}-[A-Za-z]{3}-[0-9]{4}) [0-9]{2}:[0-9]{2}[ ]*([0-9]+)"); // 1:file name, 2:display name, 3:date DD-MMM-YYYY, 4:size (bytes)
     private static final Pattern PATTERN_DIR = Pattern.compile("<a href=\"([A-Z-a-z0-9]+\\/)\">([A-Za-z0-9]+)\\/<\\/a>");  // 1:file name, 2:display name
     private static final Pattern PATTERN_UP = Pattern.compile("<a href=\"(\\.\\.\\/)\">(\\.\\.)\\/<\\/a>"); // 1:relative dir, 2:..
-    private static final String[] THEME_FILES = {"Elevate.zip"};
+    private static final String[] THEME_FILES = {"Elevate.zip", MapDownloaderOpenAndroMapsThemes.FILENAME_VOLUNTARY};
     private static final MapDownloaderOpenAndroMaps INSTANCE = new MapDownloaderOpenAndroMaps();
 
     private MapDownloaderOpenAndroMaps() {

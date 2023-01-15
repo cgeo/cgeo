@@ -100,13 +100,13 @@ public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderOpenAndroMapsThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_updatecheckurl));
 
         // number of themes
-        assertThat(list.size()).isEqualTo(1);
+        assertThat(list.size()).isEqualTo(2);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(1);
+        assertThat(count(list, false)).isEqualTo(2);
 
         // check one named entry
         final Download d = findByName(list, "Elevate");
