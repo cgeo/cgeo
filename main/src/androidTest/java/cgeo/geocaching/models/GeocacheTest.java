@@ -321,7 +321,7 @@ public class GeocacheTest {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.555"), "Final", "", "", WaypointType.FINAL));
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.666"), "Final", "", "", WaypointType.FINAL));
 
-        final String parseableText = WaypointParser.getParseableText(wpList, null, false);
+        final String parseableText = CacheArtefactParser.getParseableText(wpList, null, false);
         assertWaypointsParsed(cache, parseableText, wpList);
 
         removeCacheCompletely(geocode);
@@ -336,11 +336,11 @@ public class GeocacheTest {
         cache.addOrChangeWaypoint(new Waypoint("", null, "Test 1", "", "", WaypointType.OWN), false);
         saveFreshCacheToDB(cache);
 
-        final String note = "@Test 1 (O) " + WaypointParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
+        final String note = "@Test 1 (O) " + CacheArtefactParser.LEGACY_PARSING_COORD_FORMULA + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         cache.setPersonalNote(note);
         cache.setPreventWaypointsFromNote(false);
 
-        cache.addWaypointsFromNote();
+        cache.addCacheArtefactsFromNotes();
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints.size()).isEqualTo(1);
         final Waypoint wp = waypoints.iterator().next();
@@ -476,7 +476,7 @@ public class GeocacheTest {
 
     private void assertWaypointsParsed(final Geocache cache, final String note, final List<Waypoint> expectedWaypoints) {
         cache.setPersonalNote(note);
-        cache.addWaypointsFromNote();
+        cache.addCacheArtefactsFromNotes();
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints).isNotNull();
         assertThat(waypoints).hasSize(expectedWaypoints.size());

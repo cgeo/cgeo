@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.formulas.VariableList;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,8 +29,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
-public class WaypointParser {
-
+/**
+ * Parses texts for cache artefacts. Currently supports:
+ * * Waypoints
+ * * Variables
+ */
+public class CacheArtefactParser {
 
     //constants for general note parsing
     private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
@@ -40,7 +45,6 @@ public class WaypointParser {
     private static final String PARSING_NAME_PRAEFIX = "@";
     private static final char PARSING_USERNOTE_DELIM = '"';
     private static final char PARSING_USERNOTE_ESCAPE = '\\';
-    private static final String PARSING_USERNOTE_CONTINUED = "...";
     private static final String PARSING_PREFIX_OPEN = "[";
     private static final String PARSING_PREFIX_CLOSE = "]";
     private static final String PARSING_TYPE_OPEN = "(";
@@ -58,14 +62,13 @@ public class WaypointParser {
 
     //general members
     private final Geocache cache;
-
-    //Waypoints
-    private Collection<Waypoint> waypoints;
     private final String namePrefix;
-    private int count;
 
-    //Variables
-    private Map<String, String> variables;
+    //parsed Waypoints
+    private final Collection<Waypoint> waypoints = new LinkedList<>();
+
+    //parsed Variables
+    private final Map<String, String> variables = new HashMap<>();
 
     /**
      * Detect coordinates in the given text and converts them to user-defined waypoints.
@@ -73,44 +76,46 @@ public class WaypointParser {
      *
      * @param namePrefix Prefix of the name of the waypoint
      */
-    public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
+    public CacheArtefactParser(final Geocache cache, @NonNull final String namePrefix) {
         this.namePrefix = namePrefix;
         this.cache = cache;
     }
 
     /**
-     * Detect coordinates in the given text and converts them to user-defined waypoints.
+     * Parses given text for cache artefacts and stores them internally.
      * Works by rule of thumb.
      *
      * @param text Text to parse for waypoints
      * @return a collection of found waypoints
      */
-    public Collection<Waypoint> parseWaypoints(@NonNull final String text) {
-        this.count = 1;
-        if (null == waypoints) {
-            waypoints = new LinkedList<>();
-        } else {
-            waypoints.clear();
-        }
-        if (null == variables) {
-            variables = new HashMap<>();
-        } else {
-            variables.clear();
+    @NonNull
+    public CacheArtefactParser parse(@Nullable final String text) {
+        waypoints.clear();
+        variables.clear();
+
+        if (text != null) {
+            //if a backup is found, we parse it first
+            for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
+                parseWaypointsFromString(backup);
+                parseVariablesFromString(backup);
+            }
+            final String remainder = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "");
+            parseWaypointsFromString(remainder);
+            parseVariablesFromString(remainder);
         }
 
-        //if a backup is found, we parse it first
-        for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
-            parseWaypointsFromString(backup);
-            parseVariablesFromString(backup);
-        }
-        final String remainder = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "");
-        parseWaypointsFromString(remainder);
-        parseVariablesFromString(remainder);
+        return this;
+    }
 
+    /** returns waypoints previously parsed using {@link #parse(String)} */
+    @NonNull
+    public Collection<Waypoint> getWaypoints() {
         return waypoints;
     }
 
-    public Map<String, String> getParsedVariables() {
+    /** returns waypoints previously parsed using {@link #parse(String)} */
+    @NonNull
+    public Map<String, String> getVariables() {
         return variables;
     }
 
@@ -133,10 +138,9 @@ public class WaypointParser {
         final String cleanedText = removeCalculatedCoords(text);
         final Collection<GeopointWrapper> matches = GeopointParser.parseAll(cleanedText);
         for (final GeopointWrapper match : matches) {
-            final Waypoint wp = parseSingleWaypoint(match);
+            final Waypoint wp = parseSingleWaypoint(match, waypoints.size() + 1);
             if (wp != null) {
                 waypoints.add(wp);
-                count++;
             }
         }
     }
@@ -150,17 +154,16 @@ public class WaypointParser {
 
         while (idxWaypoint >= 0) {
             final GeopointWrapper match = new GeopointWrapper(null, idxWaypoint, parsingCoord.length(), text);
-            final Waypoint wp = parseSingleWaypoint(match);
+            final Waypoint wp = parseSingleWaypoint(match, waypoints.size() + 1);
             if (wp != null) {
                 waypoints.add(wp);
-                count++;
             }
             idxWaypoint = text.indexOf(parsingCoord, idxWaypoint + parsingCoord.length());
         }
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) //splitting would not help readability
-    private Waypoint parseSingleWaypoint(final GeopointWrapper match) {
+    private Waypoint parseSingleWaypoint(final GeopointWrapper match, final int counter) {
         final Geopoint point = match.getGeopoint();
         final Integer start = match.getStart();
         final Integer end = match.getEnd();
@@ -178,7 +181,7 @@ public class WaypointParser {
         String name = parsedNameAndPrefix.getLeft();
         final String prefix = parsedNameAndPrefix.getRight();
         if (StringUtils.isBlank(name)) {
-            name = namePrefix + " " + count;
+            name = namePrefix + " " + counter;
         }
 
         //create the waypoint
@@ -272,24 +275,24 @@ public class WaypointParser {
             return new ImmutablePair<>("", "");
         }
         //first word handling
-        String name = words[0].substring(PARSING_NAME_PRAEFIX.length());
+        StringBuilder name = new StringBuilder(words[0].substring(PARSING_NAME_PRAEFIX.length()));
         String prefix = "";
         final int idx = name.indexOf(PARSING_PREFIX_CLOSE);
-        if (idx > 0 && name.startsWith(PARSING_PREFIX_OPEN)) {
+        if (idx > 0 && name.toString().startsWith(PARSING_PREFIX_OPEN)) {
             prefix = name.substring(PARSING_PREFIX_OPEN.length(), idx).trim();
-            name = name.substring(idx + 1);
+            name = new StringBuilder(name.substring(idx + 1));
         }
 
         //handle additional words if any
         for (int i = 1; i < words.length; i++) {
             if (useWordForParsedName(words[i], i == words.length - 1, wpType)) {
                 if (name.length() > 0) {
-                    name += " ";
+                    name.append(" ");
                 }
-                name += words[i];
+                name.append(words[i]);
             }
         }
-        return new ImmutablePair<>(StringUtils.isBlank(name) ? "" : name.trim(), prefix);
+        return new ImmutablePair<>(StringUtils.isBlank(name.toString()) ? "" : name.toString().trim(), prefix);
     }
 
     private boolean useWordForParsedName(final String word, final boolean isLast, final WaypointType wpType) {

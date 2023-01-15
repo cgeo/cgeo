@@ -192,6 +192,11 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
 
+            <Button style="@style/button_full"
+                android:id="@+id/personalnote_vars_out_of_sync"
+                tools:text="Warning: variables are out of sync"
+                android:visibility="gone"/>
+
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">

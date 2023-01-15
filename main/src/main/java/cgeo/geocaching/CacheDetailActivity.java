@@ -52,12 +52,12 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.CacheLogsViewCreator;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
+import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.models.WaypointParser;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
@@ -91,12 +91,14 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -165,11 +167,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -179,6 +183,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.text.StringEscapeUtils;
 
 /**
@@ -397,6 +402,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         });
     }
+
 
     @Override
     @Nullable
@@ -1038,7 +1044,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         cache.deleteWaypoint(waypoint);
                     }
                 }
-                if (cache.addWaypointsFromNote()) {
+                if (cache.addCacheArtefactsFromNotes()) {
                     Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
                 }
                 ActivityMixin.showShortToast(this, R.string.cache_delete_userdefined_waypoints_success);
@@ -1716,6 +1722,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.ensureSaved();
                 activity.removeWaypointsFromPersonalNote(cache);
             });
+            binding.personalnoteVarsOutOfSync.setOnClickListener(v -> {
+                handleVariableOutOfSync();
+            });
+            activity.adjustPersonalNoteVarsOutOfSyncButton();
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
@@ -1790,6 +1800,38 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hintSpoilerlink.setClickable(true);
                 binding.hintSpoilerlink.setOnClickListener(null);
             }
+
+            //register for changes of variableslist -> state of variable sync may change
+            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton());
+
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            if (cache != null && cache.getVariables() != null) {
+                cache.getVariables().removeChangeListener(this);
+            }
+        }
+
+
+        private void handleVariableOutOfSync() {
+            final Map<String, Pair<String, String>> diff = cache.getVariableDifferencesFromUserNotes();
+            if (diff.isEmpty()) {
+                return;
+            }
+            final List<ImmutableTriple<String, String, String>> items = CollectionStream.of(diff.entrySet())
+                    .map(e -> new ImmutableTriple<>(e.getKey(), e.getValue().first, e.getValue().second)).toList();
+            TextUtils.sortListLocaleAware(items, i -> i.left);
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
+                    .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, sel -> {
+                           final Map<String, String> toChange = new HashMap<>();
+                           for (ImmutableTriple<String, String, String> e : sel) {
+                               toChange.put(e.left, e.middle);
+                           }
+                           cache.changeVariables(toChange);
+                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton();
+                    });
         }
 
         private void uploadPersonalNote(final CacheDetailActivity activity) {
@@ -2117,7 +2159,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 headerBinding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     EditWaypointActivity.startActivityAddWaypoint(activity, cache);
-                    activity.selectedWaypoint = sortedWaypoints.get(sortedWaypoints.size() - 1); // move to bottom where new waypoint will be created
+                    if (sortedWaypoints != null && !sortedWaypoints.isEmpty()) {
+                        activity.selectedWaypoint = sortedWaypoints.get(sortedWaypoints.size() - 1); // move to bottom where new waypoint will be created
+                    }
                     activity.refreshOnResume = true;
                 });
 
@@ -2875,7 +2919,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public void removeWaypointsFromPersonalNote(final Geocache cache) {
         final String note = cache.getPersonalNote() == null ? "" : cache.getPersonalNote();
-        final String newNote = WaypointParser.removeParseableWaypointsFromText(note);
+        final String newNote = CacheArtefactParser.removeParseableWaypointsFromText(note);
         if (newNote != null) {
             setNewPersonalNote(newNote);
         }
@@ -2897,7 +2941,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return;
         }
 
-        final String newNote = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables());
+        final String newNote = CacheArtefactParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables());
         setNewPersonalNote(newNote);
         showShortToast(R.string.cache_personal_note_storewaypoints_success);
     }
@@ -2916,9 +2960,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // trim note to avoid unnecessary uploads for whitespace only changes
         final String trimmedNote = StringUtils.trim(newNote);
 
+        final String oldAllUserNotes = cache.getAllUserNotes();
+
         cache.setPersonalNote(trimmedNote);
         cache.setPreventWaypointsFromNote(newPreventWaypointsFromNote);
-        if (cache.addWaypointsFromNote()) {
+
+        if (cache.addCacheArtefactsFromNotes(oldAllUserNotes)) {
             reinitializePage(Page.WAYPOINTS.id);
             /* @todo mb Does above line work?
             final PageViewCreator wpViewCreator = getViewCreator(Page.WAYPOINTS);
@@ -2936,8 +2983,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else {
             reinitializePage(Page.DESCRIPTION.id);
         }
+        adjustPersonalNoteVarsOutOfSyncButton();
 
         Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
+    }
+
+    private void adjustPersonalNoteVarsOutOfSyncButton() {
+        final Map<String, Pair<String, String>> varsOutOfSync = cache.getVariableDifferencesFromUserNotes();
+        final TextView personalNotOutOfSync = findViewById(R.id.personalnote_vars_out_of_sync);
+        personalNotOutOfSync.setVisibility(varsOutOfSync.isEmpty() ? View.GONE : View.VISIBLE);
+        personalNotOutOfSync.setText(LocalizationUtils.getString(R.string.cache_personal_note_vars_out_of_sync, varsOutOfSync.size()));
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final View separator, final String personalNote) {

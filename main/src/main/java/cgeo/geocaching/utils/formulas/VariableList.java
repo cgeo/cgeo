@@ -57,9 +57,18 @@ public class VariableList {
     }
 
     /** Returns true if the given 'newValue' for the given variable 'var' can/should be added without overriding existing info in list */
-    public boolean isWorthAddingWithoutLoss(final String var, final String newValue) {
+    public boolean isWorthAddingWithoutLoss(final String var, final String newValue, @Nullable final String oldValue) {
         final VariableMap.VariableState state = getState(var);
-        return state == null || (StringUtils.isBlank(state.getFormulaString()) && !StringUtils.isBlank(newValue));
+        //if new value is blank, it is not worth adding
+        if (StringUtils.isBlank(newValue)) {
+            return false;
+        }
+        //if there's a new value but not an old value, then it IS worth adding
+        if (state == null || StringUtils.isBlank(state.getFormulaString())) {
+            return true;
+        }
+        //if the previous parsing value is known and it is identical to current value, then it is ok to overwrite the old value with the new one
+        return oldValue != null && oldValue.equals(state.getFormulaString());
     }
 
     @Nullable

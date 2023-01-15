@@ -246,7 +246,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {
         if (cache != null) {
             final int previousNumberOfWaypoints = cache.getWaypoints().size();
-            final boolean success = cache.addWaypointsFromText(HtmlUtils.extractText(text), true, res.getString(R.string.cache_description), true);
+            final boolean success = cache.addCacheArtefactsFromText(HtmlUtils.extractText(text), true, res.getString(R.string.cache_description), true, null);
             final int waypointsAdded = cache.getWaypoints().size() - previousNumberOfWaypoints;
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, waypointsAdded, waypointsAdded));
             if (success) {
