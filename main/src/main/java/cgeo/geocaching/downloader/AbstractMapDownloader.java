@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.FileUtils;
 
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.List;
@@ -29,8 +30,20 @@ abstract class AbstractMapDownloader extends AbstractDownloader {
         MapsforgeMapProvider.getInstance().updateOfflineMaps(result);
     }
 
-    // check if any of the given file exists in the given path
-    // if none exists: return descriptor for it
+    /**
+     * Check if any of the given files already exists in the given path
+     *
+     * @param filenames
+     *      Array of filenames to check for
+     * @param baseUrl
+     *      Base URL for the first filename
+     * @param offlineMapType
+     *      Descriptor type to return
+     * @return
+     *      Returns null, if any of the given files found.
+     *      Returns a download descriptor for the first entry (so baseUrl must be valid for that entry)
+     */
+    @Nullable
     public DownloaderUtils.DownloadDescriptor getExtrafile(final String[] filenames, final String baseUrl, final Download.DownloadType offlineMapType) {
         final List<ContentStorage.FileInformation> dirContent = ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_THEMES);
         for (ContentStorage.FileInformation fi : dirContent) {
