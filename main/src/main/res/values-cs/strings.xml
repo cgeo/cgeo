@@ -322,6 +322,8 @@
     <string name="loc_gps_disabled">GPS zakázáno</string>
     <string name="loc_copied_clipboard">Aktuální poloha byla zkopírována do schránky</string>
     <string name="menu_centerposition">Vycentrovat na mou polohu</string>
+    <string name="location_no_permission">Varování: není oprávnění k získání polohy</string>
+    <string name="location_only_coarse_permission">Upozornění: pouze přibližné povolení k poloze</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikaci</string>
     <string name="menu_helpers">Užitečné aplikace</string>
@@ -646,6 +648,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
+    <string name="about_system_collecting">Shromažďování systémových informací, čekejte prosím…</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
@@ -749,6 +752,7 @@
     <string name="settings_category_nearbysearch">Hledat v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hledání v okolí</string>
     <string name="init_nearbysearchlimit_description">Omezí vzdálenost, do které jsou zobrazeny kešky hledané v okolí (0=neomezeno)</string>
+    <string name="init_settings_description_unlimited">neomezený</string>
     <string name="settings_category_geocaching_additionals">Další služby a doplňky</string>
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
@@ -2218,6 +2222,14 @@
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Zeptat se znova</string>
+    <string name="permission_goto_app_details">Otevřít informace o aplikaci</string>
+    <string name="permission_contacts_read_explanation_title">Oprávnění ke čtení kontaktů</string>
+    <string name="permission_contacts_read_explanation">c:geo může vyhledávat kontakty v adresáři pomocí jmen geocacherů. K tomu je nutné, abyste c:geo povolili čtení adresáře kontaktů. V opačném případě není použití této funkce možné.</string>
+    <string name="permission_location_explanation_title">Povolení k poloze</string>
+    <string name="permission_location_explanation">c:geo je optimalizován pro použití s daty GPS (přesná poloha) k určení vaší polohy a výpočtu vzdálenosti a směru ke keškám. Bez tohoto povolení nebudou funkce založené na poloze fungovat podle očekávání.</string>
+    <string name="permission_read_external_storage_explanation_title">Oprávnění ke čtení externího úložiště</string>
+    <string name="permission_read_external_storage_explanation">c:geo může jako pozadí aplikace použít tapetu vašeho systému. K tomu potřebuje c:geo oprávnění ke čtení multimediálních dat v externím úložišti.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
