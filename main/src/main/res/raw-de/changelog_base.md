@@ -13,3 +13,5 @@
 - Änderung: Verwende einen anderen Android-Mechanismus, um Downloads zu empfangen (für bessere Kompatibilität mit Android 12+)
 - Neu: Beim Import Listenname mit dem Namen der GPX-Datei vorbelegen
 - Fix (nightly version): Crash on GPX import
+- Neu: Erlaube den Import von GPX-Track-Dateien, die kein xmlns-Namensraum-Tag enthalten
+- New: Add monochrome launcher icon for Android 13
