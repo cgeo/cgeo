@@ -302,6 +302,9 @@ dependencies {
     // See https://github.com/cgeo/cgeo/issues/12577
     //noinspection GradleDependency
     implementation 'org.apache.commons:commons-lang3:3.11'
+
+    // commons-text 1.10.0 uses commons-lang3 3.12.0 and commons-io 2.11.0, wait for updating both
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-text:1.9'
 
     // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
