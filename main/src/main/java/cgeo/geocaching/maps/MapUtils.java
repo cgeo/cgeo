@@ -183,7 +183,7 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Geocache currentTargetCache, final MapOptions mapOptions) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
@@ -209,8 +209,14 @@ public class MapUtils {
                     textview.set(dialog.findViewById(android.R.id.message));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
                 })
-                .addItemClickListener(R.id.menu_add_to_route, item -> individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false))
-                .addItemClickListener(R.id.menu_add_to_route_start, item -> individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true))
+                .addItemClickListener(R.id.menu_add_to_route, item -> {
+                    individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false);
+                    updateRouteTrackButtonVisibility.run();
+                })
+                .addItemClickListener(R.id.menu_add_to_route_start, item -> {
+                    individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true);
+                    updateRouteTrackButtonVisibility.run();
+                })
                 .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
     }
 }
