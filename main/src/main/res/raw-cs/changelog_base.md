@@ -12,4 +12,6 @@
 - Aktualizace některých závislých knihoven
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
 - Novinka: Název seznamu předvoleb s názvem souboru GPX při importu
-- Fix (nightly version): Crash on GPX import
+- Oprava (noční sestavení): Chyba při importu GPX
+- Novinka: Povolen import souborů stopy GPX, které neobsahují značku jmenného prostoru xmlns
+- Novinka: Přidána monochromatická ikona launcheru pro Android 13
