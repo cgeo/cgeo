@@ -1,17 +1,17 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Général
+- Correction : Nouvelle Configuration TB pour un mode de visite automatique
+- Correction : les paramètres des membres Basic de gc.com ne sont pas affichés
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
 - Fix: Crash for degree formulas with multiple dots
 
 ##
 
-### General
+### Général
 - Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
+- Correction : Empêcher le plantage sous certaines conditions lors de la tentative de rattachement d'une photo au journal
 - Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
 
 ### Caches
