@@ -328,6 +328,9 @@
     <string name="switch_to_mf">Your Google Play Service is outdated. Do you want to switch to Mapsforge map provider instead?</string>
     <string name="switched_to_mf">Default map switched to Mapsforge map provider. Restart your map now.</string>
 
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Basic</string>
+
     <!-- location service -->
     <string name="loc_last">Last known</string>
     <string name="loc_net">Network</string>
