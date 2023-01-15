@@ -148,10 +148,13 @@ public class IndividualRoute extends Route implements Parcelable {
             if (segment.hasPoint()) {
                 if (addToRouteStart) {
                     segments.add(0, segment);
+                    if (segments.size() > 1) {
+                        calculateNavigationRoute(1);
+                    }
                 } else {
                     segments.add(segment);
+                    calculateNavigationRoute(segments.size() - 1);
                 }
-                calculateNavigationRoute(segments.size() - 1);
                 return ToggleItemState.ADDED;
             } else {
                 return ToggleItemState.ERROR_NO_POINT;
