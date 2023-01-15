@@ -13,3 +13,5 @@
 - Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
 - Naujiena: Iš anksto nustatytas sąrašo pavadinimas su GPX failo pavadinimu importuojant
 - Pataisymas (naktinė versija): GPX importavimo gedimas
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
