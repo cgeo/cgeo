@@ -6,6 +6,7 @@
 - Nouveau : nouvelle galerie d'images plus sophistiquée
 - Correction : Restaurer la position dans la liste des points de passage après la mise à jour ou la suppression du waypoint
 - Correction : Déplacer vers le bas lors de la création d'un nouveau waypoint
+- New: Recognize variables entered in waypoint user notes
 
 ### Général
 - Changement de niveau de l'API (compileSDK 32)
