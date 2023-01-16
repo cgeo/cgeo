@@ -6,6 +6,7 @@
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji
+- New: Recognize variables entered in waypoint user notes
 
 ### Ogólne
 - Zmiana poziomu API (kompilacja SDK 32)
