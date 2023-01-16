@@ -1278,6 +1278,9 @@
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
     <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
+    <string name="cache_personal_note_vars_out_of_sync">Proměnné v poznámkách nejsou synchronizovány (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Zkontrolujte proměnné, jejichž hodnota má být přepsána z poznámek</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
     <string name="cache_description_rendering">Vykreslování popisu, čekejte prosím…</string>
