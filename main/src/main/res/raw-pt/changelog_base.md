@@ -6,6 +6,7 @@
 - Novo: Nova galeria de imagens mais sofisticada
 - Correcção: Restaurar posição na lista de pontos adicionais, após actualizar ou excluir um deles
 - Correcção: Mover para baixo ao criar um novo ponto adicional
+- New: Recognize variables entered in waypoint user notes
 
 ### Geral
 - Alteração do nível da API (compileSDK 32)
