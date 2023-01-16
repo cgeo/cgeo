@@ -857,7 +857,7 @@
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
     <string name="init_global_wp_extraction_disable">Išjungti kelio taškų išskleidimą</string>
-    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų.</string>
+    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių pastabų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių pastabų.</string>
     <string name="init_prevent_cache_note_merge">Perrašyti asmeninės slėptuvės pastabą</string>
     <string name="init_summary_prevent_cache_note_merge">Jei šis nustatymas įjungtas, c:geo visam laikui ištrins vietoje saugomą pastabą ir pakeis ją asmenine pastaba serveryje. Joks suliejimas nebus atliktas.</string>
     <string name="init_customtabs_as_browser">Naudokite Chrome WebView</string>
@@ -1144,7 +1144,7 @@
     <string name="persistablefolder_offline_maps_shading">Žemėlapio šešėliavimo failai</string>
     <string name="persistablefolder_backup">Atsarginė kopija</string>
     <string name="persistablefolder_logfiles">Įrašai</string>
-    <string name="persistablefolder_fieldnotes">Lauko užrašai</string>
+    <string name="persistablefolder_fieldnotes">Lauko pastabos</string>
     <string name="persistablefolder_spoilerimages">Užuominos vaizdai</string>
     <string name="persistablefolder_routingbase">Maršrutizavimas</string>
     <string name="persistablefolder_routingtiles">Maršruto duomenys</string>
@@ -1278,6 +1278,9 @@
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
     <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
+    <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
     <string name="cache_description_rendering">Pateikiamas aprašymas, palaukite…</string>
@@ -1796,13 +1799,13 @@
     <string name="export_progress">Eksportuojama: %1$s</string>
     <string name="export_exportedto">eksportuota į</string>
     <string name="export_failed">Eksportuoti nepavyko</string>
-    <string name="export_fieldnotes">Lauko užrašai</string>
-    <string name="export_fieldnotes_info">Lauko užrašai bus eksportuojami į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
+    <string name="export_fieldnotes">Lauko pastabos</string>
+    <string name="export_fieldnotes_info">Lauko pastabos bus eksportuojamos į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_fieldnotes_upload">Įkelti į geocaching.com</string>
     <string name="export_fieldnotes_uploading">Įkeliama…</string>
     <string name="export_fieldnotes_upload_success">Įkėlimas į geocaching.com sėkmingas</string>
     <string name="export_fieldnotes_onlynew">Tik nuo paskutinio eksportavimo</string>
-    <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
+    <string name="export_fieldnotes_creating">Kuriamos Lauko pastabos…</string>
     <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_confirm_title">Eksportuojama %1$s</string>
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
