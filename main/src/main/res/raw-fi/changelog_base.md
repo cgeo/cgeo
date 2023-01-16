@@ -6,6 +6,7 @@
 - Uusi: Uusi hienostunut kuvagalleria
 - Korjaa: Palauta sijainti reittipisteluettelossa päivityksen tai reittipisteen poistamisen jälkeen
 - Korjaa: Siirry alareunaan luotaessa uutta reittipistettä
+- New: Recognize variables entered in waypoint user notes
 
 ### Yleinen
 - API-tason muutos (compileSDK 32)
