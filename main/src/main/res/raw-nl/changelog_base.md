@@ -6,6 +6,7 @@
 - Nieuw: Nieuwe meer geavanceerde afbeeldingen galerij
 - Oplossing: Herstel de positie in de lijst van waypoints na het bijwerken of verwijderen van waypoint
 - Oplossing: Naar beneden verplaatsen bij het maken van nieuw waypoint
+- Nieuw: Herken variabelen ingevoerd in waypoint gebruikersnotities
 
 ### Algemeen
 - API niveau wijzigen (compileSDK 32)
