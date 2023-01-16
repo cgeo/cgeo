@@ -6,6 +6,7 @@
 - New: New more sophisticated image gallery
 - Fix: Restore position in waypoint list after updating or deleting waypoint
 - Fix: Move to bottom when creating new waypoint
+- New: Recognize variables entered in waypoint user notes
 
 ### General
 - API level change (compileSDK 32)
