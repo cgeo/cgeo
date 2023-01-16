@@ -6,6 +6,7 @@
 - Neu: Neue ausgeklügeltere Bilder-Galerie
 - Korrektur: Nach Aktualisierung oder Löschen eines Wegpunktes gelangt man zur vorherigen Position in der Wegpunktliste
 - Korrektur: Springe nach unten beim Erstellen eines neuen Wegpunktes
+- New: Recognize variables entered in waypoint user notes
 
 ### Allgemein
 - Änderung des API-Levels (CompileSDK 32)
