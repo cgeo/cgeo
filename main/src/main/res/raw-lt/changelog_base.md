@@ -6,6 +6,7 @@
 - Naujiena: Nauja įmantresnė vaizdų galerija
 - Pataisymas: Atnaujinę arba ištrynę kelio tašką, atkurkite paziciją kelio taškų sąraše
 - Pataisymas: Kuriant naują kelio tašką pereinama į apačią
+- Naujiena: Atpažįsta kintamuosius, įvestus į kelio taško naudotojo pastabas
 
 ### Bendras
 - API lygio pakeitimas (sudarytas SDK 32)
@@ -13,5 +14,5 @@
 - Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
 - Naujiena: Iš anksto nustatytas sąrašo pavadinimas su GPX failo pavadinimu importuojant
 - Pataisymas (naktinė versija): GPX importavimo gedimas
-- New: Allow import of GPX track files that do not provide a xmlns namespace tag
-- New: Add monochrome launcher icon for Android 13
+- Naujiena: Leidžiama importuoti GPX pėdsako failus, kuriuose nėra xmlns vardų erdvės žymos
+- Naujiena: Pridėta vienspalvė paleidimo piktograma, skirta Android 13
