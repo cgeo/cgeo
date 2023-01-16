@@ -6,6 +6,7 @@
 - Novinka: Nová důmyslnější galerie obrázků
 - Oprava: Obnovení polohy v seznamu trasových bodů po aktualizaci nebo odstranění trasového bodu
 - Oprava: Přesun do spodní části při vytváření nového trasového bodu
+- Novinka: Rozpoznávání proměnných zadaných v uživatelských poznámkách k trasovému bodu
 
 ### Obecné
 - Změna úrovně API (compileSDK 32)
