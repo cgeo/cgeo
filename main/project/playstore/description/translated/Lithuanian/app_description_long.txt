@@ -20,7 +20,7 @@ Keliaukite link slėptuvės ar jos kelio taško naudodami integruotą kompaso fu
 Išsaugokite slėptuvės informaciją savo įrenginyje tiesiai iš geocaching.com, taip pat importuodami GPX failą, kad galėtumėte ją pasiekti bet kada.
 Galite tvarkyti saugomas slėptuves įvairiuose sąrašuose ir jas rūšiuoti bei filtruoti pagal savo poreikius.
 Išsaugotos slėptuvės kartu su neprisijungus naudojamais žemėlapių failais arba statiniais žemėlapiais gali būti naudojami ieškant slėptuvių be interneto ryšio (pvz. tarptinklinio ryšio metu).
-Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko užrašus.
+Įrašus galima paskelbti internetu, išsaugoti paskelbimui vėliau ar eksportuoti per lauko pastabas.
 
 Ieškokite ir atraskite keliauninkus, tvarkykite savo keliauninkų inventorių ir palikite keliauninką skelbdami slėptuvės įraše.
 
