@@ -48,6 +48,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.util.Arrays;
@@ -328,18 +329,20 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), user);
     }
 
+    @WorkerThread
     @Override
     public boolean addToWatchlist(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToWatchlist(cache);
+        final boolean added = GCParser.addToWatchlist(cache).blockingGet();
         if (added) {
             DataStore.saveChangedCache(cache);
         }
         return added;
     }
 
+    @WorkerThread
     @Override
     public boolean removeFromWatchlist(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromWatchlist(cache);
+        final boolean removed = GCParser.removeFromWatchlist(cache).blockingGet();
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
@@ -354,9 +357,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * @param cache the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
+    @WorkerThread
     @Override
     public boolean addToFavorites(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToFavorites(cache);
+        final boolean added = GCParser.addToFavorites(cache).blockingGet();
         if (added) {
             DataStore.saveChangedCache(cache);
         }
@@ -373,34 +377,37 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @Override
     public boolean removeFromFavorites(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromFavorites(cache);
+        final boolean removed = GCParser.removeFromFavorites(cache).blockingGet();
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
         return removed;
     }
 
+    @WorkerThread
     @Override
     public boolean uploadModifiedCoordinates(@NonNull final Geocache cache, @NonNull final Geopoint wpt) {
-        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt);
+        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt).blockingGet();
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }
         return uploaded;
     }
 
+    @WorkerThread
     @Override
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
-        final boolean deleted = GCParser.deleteModifiedCoordinates(cache);
+        final boolean deleted = GCParser.deleteModifiedCoordinates(cache).blockingGet();
         if (deleted) {
             DataStore.saveChangedCache(cache);
         }
         return deleted;
     }
 
+    @WorkerThread
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
-        final boolean uploaded = GCParser.uploadPersonalNote(cache);
+        final boolean uploaded = GCParser.uploadPersonalNote(cache).blockingGet();
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }

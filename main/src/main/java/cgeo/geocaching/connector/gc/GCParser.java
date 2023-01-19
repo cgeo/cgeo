@@ -66,9 +66,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1102,8 +1104,8 @@ public final class GCParser {
      *
      * @return successful?
      */
-    @WorkerThread
-    public static boolean addCachesToBookmarkList(final String listGuid, final List<Geocache> geocaches) {
+    @NonNull
+    public static Single<Boolean> addCachesToBookmarkList(final String listGuid, final List<Geocache> geocaches) {
         final ArrayNode arrayNode = JsonUtils.createArrayNode();
 
         for (Geocache geocache : geocaches) {
@@ -1114,14 +1116,15 @@ public final class GCParser {
 
         Log.d(arrayNode.toString());
 
-        try {
-            Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode));
-            Log.i("GCParser.addCachesToBookmarkList - caches uploaded to GC.com bookmark list");
-            return true;
-        } catch (final Exception ignored) {
-            Log.e("GCParser.uploadPersonalNote - cannot upload caches to GC.com bookmark list", ignored);
-            return false;
-        }
+        return Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode))
+            .toSingle(() -> {
+                Log.i("GCParser.addCachesToBookmarkList - caches uploaded to GC.com bookmark list");
+                return true;
+            })
+            .onErrorReturn((throwable) -> {
+                Log.e("GCParser.uploadPersonalNote - cannot upload caches to GC.com bookmark list", throwable);
+                return false;
+            });
     }
 
     /**
@@ -1283,39 +1286,43 @@ public final class GCParser {
      * @param cache the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    @WorkerThread
-    static boolean addToWatchlist(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> addToWatchlist(@NonNull final Geocache cache) {
         return addToOrRemoveFromWatchlist(cache, true);
     }
 
     /**
      * internal method to handle add to / remove from watchlist
      */
-    @WorkerThread
-    private static boolean addToOrRemoveFromWatchlist(@NonNull final Geocache cache, final boolean doAdd) {
+    @NonNull
+    private static Single<Boolean> addToOrRemoveFromWatchlist(@NonNull final Geocache cache, final boolean doAdd) {
 
         final String logContext = "GCParser.addToOrRemoveFromWatchlist(cache = " + cache.getGeocode() + ", add = " + doAdd + ")";
 
         final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("geocacheId", cache.getCacheId());
         final String uri = "https://www.geocaching.com/api/proxy/web/v1/watchlists/" + (doAdd ? "add" : "remove") + "?geocacheId=" + cache.getCacheId();
 
-        try {
-            if (doAdd) {
-                Network.completeWithSuccess(Network.postJsonRequest(uri, jo));
-            } else {
-                Network.completeWithSuccess(Network.deleteJsonRequest(uri, jo));
-            }
-            Log.i(logContext + ": success");
-        } catch (final Exception ex) {
-            Log.e(logContext + ": error", ex);
-            return false;
-        }
-
-        // Set cache properties
-        cache.setOnWatchlist(doAdd);
-        final String watchListPage = GCLogin.getInstance().postRequestLogged(cache.getLongUrl(), null);
-        cache.setWatchlistCount(getWatchListCount(watchListPage));
-        return true;
+        final Single<Response> request = doAdd
+            ? Network.postJsonRequest(uri, jo)
+            : Network.deleteJsonRequest(uri, jo);
+        return Network.completeWithSuccess(request)
+            .toSingle(() -> {
+                Log.i(logContext + ": success");
+                return true;
+            })
+            .onErrorReturn((ex) -> {
+                Log.e(logContext + ": error", ex);
+                return false;
+            })
+            .map((successful) -> {
+                if (successful) {
+                    // Set cache properties
+                    cache.setOnWatchlist(doAdd);
+                    final String watchListPage = GCLogin.getInstance().postRequestLogged(cache.getLongUrl(), null);
+                    cache.setWatchlistCount(getWatchListCount(watchListPage));
+                }
+                return successful;
+            });
     }
 
     /**
@@ -1343,8 +1350,8 @@ public final class GCParser {
      * @param cache the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    @WorkerThread
-    static boolean removeFromWatchlist(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> removeFromWatchlist(@NonNull final Geocache cache) {
         return addToOrRemoveFromWatchlist(cache, false);
     }
 
@@ -1370,28 +1377,36 @@ public final class GCParser {
      * @param cache the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean addToFavorites(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> addToFavorites(@NonNull final Geocache cache) {
         return changeFavorite(cache, true);
     }
 
-    private static boolean changeFavorite(@NonNull final Geocache cache, final boolean add) {
+    @NonNull
+    private static Single<Boolean> changeFavorite(@NonNull final Geocache cache, final boolean add) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
-            return false;
+            return Single.just(false);
         }
 
         final String uri = "https://www.geocaching.com/datastore/favorites.svc/update?u=" + userToken + "&f=" + add;
 
-        try {
-            Network.completeWithSuccess(Network.postRequest(uri, null));
-            Log.i("GCParser.changeFavorite: cache added/removed to/from favorites");
-            cache.setFavorite(add);
-            cache.setFavoritePoints(cache.getFavoritePoints() + (add ? 1 : -1));
-            return true;
-        } catch (final Exception ignored) {
-            Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites");
-            return false;
-        }
+        return Network.completeWithSuccess(Network.postRequest(uri, null))
+            .toSingle(() -> {
+                Log.i("GCParser.changeFavorite: cache added/removed to/from favorites");
+                return true;
+            })
+            .onErrorReturn((throwable) -> {
+                Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites", throwable);
+                return false;
+            })
+            .map((successful) -> {
+                if (successful) {
+                    cache.setFavorite(add);
+                    cache.setFavoritePoints(cache.getFavoritePoints() + (add ? 1 : -1));
+                }
+                return successful;
+            });
     }
 
     private static String getUserToken(@NonNull final Geocache cache) {
@@ -1410,7 +1425,8 @@ public final class GCParser {
      * @param cache the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
-    static boolean removeFromFavorites(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> removeFromFavorites(@NonNull final Geocache cache) {
         return changeFavorite(cache, false);
     }
 
@@ -1908,18 +1924,21 @@ public final class GCParser {
         }
     }
 
-    static boolean uploadModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
+    @NonNull
+    static Single<Boolean> uploadModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
         return editModifiedCoordinates(cache, wpt);
     }
 
-    static boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> deleteModifiedCoordinates(@NonNull final Geocache cache) {
         return editModifiedCoordinates(cache, null);
     }
 
-    static boolean editModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
+    @NonNull
+    static Single<Boolean> editModifiedCoordinates(@NonNull final Geocache cache, final Geopoint wpt) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
-            return false;
+            return Single.just(false);
         }
 
         final ObjectNode jo = new ObjectNode(JsonUtils.factory);
@@ -1932,20 +1951,22 @@ public final class GCParser {
 
         final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
 
-        try {
-            Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo));
-            Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
-            return true;
-        } catch (final Exception ignored) {
-            Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords");
-            return false;
-        }
+        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
+            .toSingle(() -> {
+                Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
+                return true;
+            })
+            .onErrorReturn((throwable) -> {
+                Log.e("GCParser.deleteModifiedCoordinates - cannot delete modified coords", throwable);
+                return false;
+            });
     }
 
-    static boolean uploadPersonalNote(@NonNull final Geocache cache) {
+    @NonNull
+    static Single<Boolean> uploadPersonalNote(@NonNull final Geocache cache) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
-            return false;
+            return Single.just(false);
         }
 
         final ObjectNode jo = new ObjectNode(JsonUtils.factory);
@@ -1955,14 +1976,15 @@ public final class GCParser {
 
         final String uriPrefix = "https://www.geocaching.com/seek/cache_details.aspx/";
 
-        try {
-            Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo));
-            Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
-            return true;
-        } catch (final Exception ignored) {
-            Log.e("GCParser.uploadPersonalNote - cannot upload personal note");
-            return false;
-        }
+        return Network.completeWithSuccess(Network.postJsonRequest(uriPrefix + uriSuffix, jo))
+            .toSingle(() -> {
+                Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
+                return true;
+            })
+            .onErrorReturn((throwable) -> {
+                Log.e("GCParser.uploadPersonalNote - cannot upload personal note", throwable);
+                return false;
+            });
     }
 
     @WorkerThread
@@ -1990,7 +2012,7 @@ public final class GCParser {
     }
 
     @Nullable
-    public static String getUsername(@Nullable final String page) {
+    public static String getUsername(@NonNull final String page) {
         final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
@@ -2003,7 +2025,7 @@ public final class GCParser {
         return StringUtils.isNotEmpty(usernameOld) ? usernameOld : null;
     }
 
-    public static int getCachesCount(final String page) {
+    public static int getCachesCount(@Nullable final String page) {
         int cachesCount = -1;
         try {
             final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, ""));
@@ -2017,8 +2039,8 @@ public final class GCParser {
         return cachesCount;
     }
 
-    @Nullable
-    private static String removeDotAndComma(@Nullable final String str) {
+    @NonNull
+    private static String removeDotAndComma(@NonNull final String str) {
         return StringUtils.replaceChars(str, ".,", null);
     }
 }

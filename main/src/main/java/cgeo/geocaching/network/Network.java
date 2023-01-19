@@ -654,8 +654,9 @@ public final class Network {
      *
      * @param response the response to check
      */
-    public static void completeWithSuccess(final Single<Response> response) {
-        Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
+    @NonNull
+    public static Completable completeWithSuccess(final Single<Response> response) {
+        return Completable.fromSingle(response.flatMap(withSuccess));
     }
 
     public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(TextUtils::replaceWhitespace);
