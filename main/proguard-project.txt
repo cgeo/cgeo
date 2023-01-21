@@ -140,3 +140,6 @@
 
 # keep Emma code coverage during debug builds, and ignore related warnings
 -dontwarn com.vladium.**
+
+# transitive needed using R8 (minifyEnabled)
+-dontwarn org.slf4j.impl.StaticLoggerBinder
