@@ -483,7 +483,7 @@ dependencies {
 apply plugin: 'de.mobilej.unmock'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
-project.afterEvaluate{
+project.afterEvaluate {
     preBuild.dependsOn("verifyCgeoKeys")
 }
 
