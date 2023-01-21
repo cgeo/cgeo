@@ -9,6 +9,7 @@
 - Fix: Restore position in waypoint list after updating or deleting waypoint
 - Fix: Move to bottom when creating new waypoint
 - New: Recognize variables entered in waypoint user notes
+- New: Display lab adventure button in mystery cache details if link to lab adventure detected
 
 ### General
 - API level change (compileSDK 32)
