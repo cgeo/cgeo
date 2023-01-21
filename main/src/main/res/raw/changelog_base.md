@@ -20,3 +20,4 @@
 - Fix (nightly version): Crash on GPX import
 - New: Allow import of GPX track files that do not provide a xmlns namespace tag
 - New: Add monochrome launcher icon for Android 13
+- New: Display geocaching.com member status on home screen
