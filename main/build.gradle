@@ -477,7 +477,7 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        def keysFile = file("res/values/keys.xml")
+        def keysFile = rootProject.file("res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
             def propertiesFile = rootProject.file("private.properties")
