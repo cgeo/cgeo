@@ -21,3 +21,4 @@
 - New: Allow import of GPX track files that do not provide a xmlns namespace tag
 - New: Add monochrome launcher icon for Android 13
 - New: Display geocaching.com member status on home screen
+- Change: GPX-Import: Use name as geocode for 'unknown' connector
