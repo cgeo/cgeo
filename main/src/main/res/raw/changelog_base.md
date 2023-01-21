@@ -11,6 +11,7 @@
 - Fix: Move to bottom when creating new waypoint
 - New: Recognize variables entered in waypoint user notes
 - New: Display lab adventure button in mystery cache details if link to lab adventure detected
+- Fix: Removal of waypoint description not synced for server-side waypoints
 
 ### General
 - API level change (compileSDK 32)
