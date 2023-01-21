@@ -1233,6 +1233,9 @@
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
     <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
+    <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">메모에서 값을 덮어써야 하는 변수 확인</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">설명</string>
     <string name="cache_description_table_note">설명에는 %s에서 잘 보이도록 테이블 포맷이 포함됩니다.</string>
     <string name="cache_description_rendering">렌더링 설명, 잠시만 기다려 주십시오…</string>
