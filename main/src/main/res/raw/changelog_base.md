@@ -1,6 +1,7 @@
 ### Map
 - New: OSM map source osm.paws.cz
 - New: Enable reading flopp.net GPX files as tracks
+- Fix: Missing routing symbol after 'append to route'
 
 ### Cache details
 - New: New more sophisticated image gallery
