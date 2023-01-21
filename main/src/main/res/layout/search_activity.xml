@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".SearchActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_filter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/search_filter"
+                style="@style/button_full"
+                android:text="@string/search_filter_button"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/search_filter_info"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/search_filter_info"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/settings_info"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:hint="@string/tap_icon_more_info"/>
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_geo" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/geocode_input_layout"
+            style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_geo" android:labelFor="@id/geocode">
+            <AutoCompleteTextView
+                android:id="@+id/geocode"
+                style="@style/textinput_embedded_singleline_go"
+                android:inputType="textVisiblePassword"
+                android:text="GC"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/display_geocode"
+            style="@style/button_full"
+            android:text="@string/search_geo_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_coordinates" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/buttonLatLongitude"
+            style="@style/button_full_double"
+            android:hint="@string/latlongitude" />
+
+        <Button
+            android:id="@+id/search_coordinates"
+            style="@style/button_full"
+            android:text="@string/search_coordinates_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_address" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_address" android:labelFor="@id/address">
+            <AutoCompleteTextView
+                android:id="@+id/address"
+                style="@style/textinput_embedded_singleline_go" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_address"
+            style="@style/button_full"
+            android:text="@string/search_address_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_kw" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_kw_prefill" android:labelFor="@id/keyword">
+            <AutoCompleteTextView
+                android:id="@+id/keyword"
+                style="@style/textinput_embedded_singleline_go" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_keyword"
+            style="@style/button_full"
+            android:text="@string/search_kw_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_hbu" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_hbu_prefill" android:labelFor="@id/owner">
+            <AutoCompleteTextView
+                android:id="@+id/owner"
+                style="@style/textinput_embedded_singleline_go" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_owner"
+            style="@style/button_full"
+            android:text="@string/search_hbu_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_finder" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_finder_prefill" android:labelFor="@id/finder">
+            <AutoCompleteTextView
+                android:id="@+id/finder"
+                style="@style/textinput_embedded_singleline_go" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_finder"
+            style="@style/button_full"
+            android:text="@string/search_finder_button" />
+        <!-- ** -->
+
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="@string/search_tb" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/search_tb_hint" android:labelFor="@id/trackable">
+            <AutoCompleteTextView
+                android:id="@+id/trackable"
+                style="@style/textinput_embedded_singleline_go"
+                android:inputType="textVisiblePassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/display_trackable"
+            style="@style/button_full"
+            android:text="@string/search_tb_button" />
+    </LinearLayout>
+
+</ScrollView>

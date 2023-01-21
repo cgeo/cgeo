@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace 'com.mapwithme.maps.api'
 
-    compileSdkVersion 31
+    compileSdk 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -10,8 +11,9 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdk 21
+        //noinspection OldTargetApi
+        targetSdk 31
     }
 
     sourceSets.main {
@@ -20,7 +22,7 @@ android {
         res.srcDirs = ['res']
     }
 
-    lintOptions {
+    lint {
         // generally we accept lint errors when building
         abortOnError false
 
@@ -30,6 +32,6 @@ android {
 
     dependencies {
         // Android annotations
-        implementation 'androidx.annotation:annotation:1.4.0'
+        implementation 'androidx.annotation:annotation:1.5.0'
     }
 }

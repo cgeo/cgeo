@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40sp"
+    android:paddingTop="3dp"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="3dip"
+        android:paddingTop="5dip"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        tools:text="title" />
+    <TextView
+        android:id="@+id/detail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left"
+        android:layout_marginRight="110dip"
+        android:layout_below="@id/title"
+        android:ellipsize="end"
+        android:paddingBottom="5dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        tools:text="detail info" />
+
+    <Button
+        android:id="@+id/delete"
+        style="@style/button_icon"
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@id/drag"
+        app:icon="@drawable/ic_menu_delete" />
+
+    <ImageView
+        android:id="@+id/drag"
+        android:layout_width="@dimen/buttonSize_iconButton"
+        android:layout_height="@dimen/buttonSize_iconButton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="left"
+        app:srcCompat="@drawable/ic_menu_reorder"
+        tools:src="@drawable/ic_menu_reorder"/>
+
+</RelativeLayout>

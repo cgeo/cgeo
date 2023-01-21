@@ -7,12 +7,18 @@ updates:
     # no limit :)
     open-pull-requests-limit: 30
     ignore:
-      # Ignore some updates to the apache 'commons-io' package
+      # Ignore updates to the apache 'commons-io' package
       # commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
       - dependency-name: "commons-io:commons-io"
-      # Ignore some updates to the apache 'commons-lang3' package
+      # Ignore updates to the apache 'commons-io' package
+      # commons-compress 1.21 uses (more) java.nio.file.Path - which is first contained in Android API26
+      - dependency-name: "org.apache.commons:commons-compress"
+      # Ignore updates to the apache 'commons-lang3' package
       # commons-lang3 3.12.0 uses StringJoiner which is first contained in Android API24
       - dependency-name: "org.apache.commons:commons-lang3"
+      # Ignore updates to the apache 'commons-text' package
+      # commons-text 1.10.0 uses commons-lang3 3.12.0 and commons-io 2.11.0, wait for updating both
+      - dependency-name: "org.apache.commons:commons-text"
       # Ignore some updates to the 'assertj' package
       # Ignore only new versions for >= 3.x
       - dependency-name: "org.assertj:assertj-core"

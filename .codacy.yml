@@ -1,4 +1,4 @@
 ---
 exclude_paths:
-  - "main/res/raw/*.md"
-  - "main/res/raw-*/*.md"
+  - "main/src/main/res/raw/*.md"
+  - "main/src/main/res/raw-*/*.md"

@@ -5,7 +5,9 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    namespace 'cgeo.contacts'
+
+    compileSdk 32
 
     // signing is handled via private.properties
     signingConfigs {
@@ -18,25 +20,25 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk 21
         //noinspection OldTargetApi
-        targetSdkVersion 30
+        targetSdk 31
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
-        resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","zh-rTW"
+        resourceConfigurations += [ 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'zh-rTW' ]
     }
 
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src', '../common/src']
+            java.srcDirs = ['src']
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
         }
     }
 
-    lintOptions {
+    lint {
         // generally we accept lint errors when building
         abortOnError false
 
@@ -55,6 +57,7 @@ android {
 dependencies {
     // Apache Commons
     // commons-lang3 3.12.0 uses StringJoiner which is first contained in API24. See https://github.com/cgeo/cgeo/issues/12577
+    //noinspection GradleDependency
     implementation 'org.apache.commons:commons-lang3:3.11'
     // commons-io 2.6 uses java.nio.file.Path - which is first contained in Android API26
     // could be replaced by Storage Access Framework
@@ -62,10 +65,10 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 
     // Android annotations
-    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation 'androidx.annotation:annotation:1.5.0'
 }
 
 /*

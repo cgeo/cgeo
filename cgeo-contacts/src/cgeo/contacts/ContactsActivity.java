@@ -27,6 +27,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 public final class ContactsActivity extends Activity {
+
+    private static final String PARAM_NAME = "name";
+
     static final String LOG_TAG = "cgeo.contacts";
 
     private String nickName;
@@ -41,7 +44,7 @@ public final class ContactsActivity extends Activity {
             return;
         }
 
-        nickName = getParameter(uri, IContacts.PARAM_NAME);
+        nickName = getParameter(uri, PARAM_NAME);
         if (StringUtils.isEmpty(nickName)) {
             finish();
             return;

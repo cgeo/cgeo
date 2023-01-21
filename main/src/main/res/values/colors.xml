@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <!--
+        common colors
+
+        for light theme-specific colors see values/colors_light.xml
+        for dark theme-specific colors see values-night/colors.xml
+    -->
+
+    <color name="colorAccent">#F5981D</color>
+
+    <color name="just_white">#FFFFFFFF</color>
+    <color name="just_black">#FF000000</color>
+    <color name="text_icon">#FFFFFFFF</color>
+    <color name="shortcut_background">#FFF5F5F5</color>
+
+    <color name="colorText_listsPrimary">@color/colorText</color>
+    <color name="colorText_listsSecondary">@color/colorTextHint</color>
+    <color name="colorTextActionBar">#FFE4E4E4</color>
+
+    <color name="osm_zoomcontrol">#FF666666</color>
+    <color name="osm_zoomcontrolbackground">#C0FFFFFF</color>
+    <color name="osm_zoomcontroldivider">#C0666666</color>
+
+    <!-- values needed only until settings activity is based on AppCompatActivity -->
+    <color name="settings_colorTextDark">@color/just_white</color>
+    <color name="settings_colorTextLight">@color/just_black</color>
+    <color name="settings_colorTextSecondaryDark">#AAFFFFFF</color>
+    <color name="settings_colorTextSecondaryLight">#AA000000</color>
+    <color name="settings_colorBackgroundDark">@color/just_black</color>
+    <color name="settings_colorBackgroundLight">@color/just_white</color>
+
+    <!-- default colors for map lines -->
+
+    <color name="default_trailcolor">#80000000</color>
+    <color name="default_routecolor">#800000FF</color>
+    <color name="default_trackcolor">#80008000</color>
+    <color name="default_directioncolor">#80FF3333</color>
+    <color name="default_circlecolor">#44BB0000</color>
+    <color name="default_circlefillcolor">#66BB0000</color>
+    <color name="default_accuracycirclecolor">#66000000</color>
+    <color name="default_accuracycirclefillcolor">#08000000</color>
+
+    <color name="cacheMarker_icon">#ffffffff</color>
+    <color name="cacheMarker_background">#ffffffff</color>
+    <color name="cacheMarker_border">#ff383838</color>
+    <color name="cacheMarker_archived">#ffb71c1c</color>
+
+    <color name="cacheType_lab">#ff7b1fa2</color>
+    <color name="cacheType_virtual">#ff0288d1</color>
+    <color name="cacheType_mystery">#ff303f9f</color>
+    <color name="cacheType_event">#ffd32f2f</color>
+    <color name="cacheType_traditional">#ff388E3C</color>
+    <color name="cacheType_multi">#ffF57C00</color>
+    <color name="cacheType_cgeo">#fff7991d</color>
+    <color name="cacheType_unknown">#ff616161</color>
+    <color name="cacheType_special">#ffafb42b</color>
+    <color name="cacheType_disabled">#ff90a4ae</color>
+
+    <color name="dotBg_found">#fffdd835</color>
+    <color name="dotBg_foundOffline">#ffF57C00</color>
+    <color name="dotBg_notFound">#ff448AFF</color>
+    <color name="dotBg_calendar">#ffD32F2F</color>
+    <color name="dotBg_offlineLogNote">#ff4e342e</color>
+    <color name="dotBg_offlineLogArchive">#ffD32F2F</color>
+    <color name="dotBg_offlineLogMaintanance">#ffC62828</color>
+    <color name="dotBg_waypointOutline">#ff999999</color>
+    <color name="dotBg_waypointBg">#ffffffff</color>
+
+    <color name="marker_rating_0">@color/cacheMarker_background</color>
+    <color name="marker_rating_5">#ff388E3C</color>
+    <color name="marker_rating_10">#ff388E3C</color>
+    <color name="marker_rating_15">#ff388E3C</color>
+    <color name="marker_rating_20">#ff689f38</color>
+    <color name="marker_rating_25">#ff9e9d24</color>
+    <color name="marker_rating_30">#ffffa000</color>
+    <color name="marker_rating_35">#fff57c00</color>
+    <color name="marker_rating_40">#ffef6c00</color>
+    <color name="marker_rating_45">#ffe64a19</color>
+    <color name="marker_rating_50">#ffd32f2f</color>
+
+    <color name="attribute_category_tools">#ff7f0000</color>
+    <color name="attribute_category_tools_negative">#ff000000</color>
+    <color name="attribute_category_type">#ff4e342e</color>
+    <color name="attribute_category_location">#ff1b5e20</color>
+    <color name="attribute_category_duration">#ff00257a</color>
+    <color name="attribute_category_surroundings">#ff324148</color>
+    <color name="attribute_category_transport">#ff000000</color>
+    <color name="attribute_strikethrough">#ffb71c1c</color>
+</resources>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".AboutActivity$VersionViewCreator" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/about_version_icon"
+                    android:layout_width="200dip"
+                    android:layout_height="200dip"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dip"
+                    android:layout_marginBottom="10dip"
+                    android:gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:layout_marginTop="5dip"
+                    android:text="@string/quote"
+                    android:textColor="@color/just_white"
+                    android:textSize="@dimen/textSize_detailsPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="10dip"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/just_white"
+                    android:textSize="@dimen/textSize_detailsPrimary" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_version" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/about_version_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textIsSelectable="true"
+            style="@style/about_base"
+            android:textStyle="bold"
+            tools:text="version string is determined by the gradle build"/>
+
+        <TextView
+            android:id="@+id/about_special_build"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textIsSelectable="true"
+            style="@style/about_base"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="additional text in case of deprecated eclipse build"
+            tools:visibility="visible"/>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_donate" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginHorizontal="40dp"
+            android:baselineAligned="false"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/donate"
+                style="@style/button_full"
+                android:lines="2"
+                android:text="@string/about_donation_more" />
+        </LinearLayout>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_help" />
+        </RelativeLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/faq_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/faq"
+                    android:text="@string/faq_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/about_nutshellmanual"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/nutshellmanual"
+                    android:text="@string/manual_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/facebook_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/facebook"
+                    android:text="@string/facebook_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/facebook_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/fangroup"
+                    android:text="@string/fangroup_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/twitter_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/twitter"
+                    android:text="@string/twitter_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/support_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/support"
+                    android:text="@string/support_mail"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/website_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/website"
+                    android:text="@string/website_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/github_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/github"
+                    android:text="@string/github_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:text="@string/market_title"
+                    style="@style/about_info_title" />
+
+                <TextView
+                    android:id="@+id/market"
+                    android:text="@string/market_link"
+                    style="@style/about_info_content" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>

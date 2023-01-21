@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_gcvote"
+    android:title="@string/init_gcvote" >
+
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_ratingwanted"
+            android:summary="@string/init_summary_ratingwanted"
+            android:title="@string/init_ratingwanted"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:dependency="@string/pref_ratingwanted"
+            app:summary="@string/init_gcvote_password_description"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.CredentialsPreference
+            android:dependency="@string/pref_ratingwanted"
+            android:summary="@string/auth_unconnected"
+            android:key="@string/pref_fakekey_gcvote_authorization"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
+        <Preference
+            android:key="@string/pref_fakekey_gcvote_website"
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

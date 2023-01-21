@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageview_viewroot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    tools:context=".ImageViewActivity">
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/image_full"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:padding="1dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/cgeo_notification"/>
+    </FrameLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/image_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/image_unavailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/button"
+        android:text="@string/cache_image_information_unavailable"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/imageview_headline"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorBackgroundTransparent">
+
+        <TextView android:id="@+id/imageview_position"
+            style="@style/text_label"
+            android:textSize="@dimen/textSize_buttonsDouble"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="5dp"
+            android:paddingLeft="55dp"
+            android:gravity="center_vertical"
+            tools:text="4/25"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView android:id="@+id/imageview_category"
+            style="@style/text_label"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize_buttonsDouble"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="5dp"
+            tools:text="Listing"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+    <!-- encapsulate the info box with a Frame Layout so translation Y will lead to "fade out of view" instead of "overlay view under it" -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageview_action_space">
+        <RelativeLayout android:id="@+id/imageview_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundTransparent"
+            tools:ignore="UselessParent">
+            <TextView android:id="@+id/imageview_information_text"
+                style="@style/text_default"
+                android:layout_toLeftOf="@+id/imageview_information_icon_less"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView android:id="@+id/imageview_information_icon_less"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/expand_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+            <ImageView android:id="@+id/imageview_information_icon_more"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/expand_less"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- placeholder to cover the space occupied by action buttons -->
+    <View
+        android:id="@+id/imageview_action_space"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:background="@color/colorBackgroundTransparent"
+        android:layout_alignParentBottom="true"/>
+
+
+
+</RelativeLayout>
+
+

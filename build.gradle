@@ -7,7 +7,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.3.1'
 
         // un-mocking of portable Android classes
         classpath 'com.github.bjoernq:unmockplugin:0.7.9'
@@ -27,12 +27,12 @@ plugins {
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
-    id 'com.github.spotbugs' version '4.7.6'
+    id 'com.github.spotbugs' version '4.7.8'
 
     // adds gradle tasks 'tiTree' (print a task dependency graph), 'tiOrder' (display the execution queue),
     // 'tiJson' (export as a JSON file), see https://gitlab.com/barfuin/gradle-taskinfo
     // they need cmdline parameter, e.g. gradlew tiTree assembleBasicDebug
-    id 'org.barfuin.gradle.taskinfo' version '1.4.0'
+    id 'org.barfuin.gradle.taskinfo' version '2.0.0'
 }
 
 /*
@@ -90,9 +90,12 @@ allprojects {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
-                        if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
-                            selection.reject('Release candidate')
-                        }
+                        // deactivate this rule for now, as alpha software is needed as dependency for tests
+                        // from com.android.tools.utp:android-test-plugin-host-additional-test-output:30.3.1,
+                        // see https://github.com/cgeo/cgeo/pull/13634
+                        //if (['alpha', 'beta', 'rc', 'cr', 'm', 'pr'].any { qualifier -> selection.candidate.version.contains(qualifier)}) {
+                        //    selection.reject('Release candidate')
+                        //}
 
                         // see https://assertj.github.io/doc/#assertj-core-android
                         // AssertJ Core 3.x is compatible with Android API Level 26+, except for soft assertions and assumptions.
@@ -110,10 +113,6 @@ allprojects {
                 }
                 // new versions of checkstyle use guava 27, which has troublesome dependencies: https://groups.google.com/forum/#!topic/guava-announce/Km82fZG68Sw
                 force 'com.google.guava:guava:26.0-jre'
-
-                // force this version because of conflict to our resolutionStrategy from lint-gradle
-                // TODO check necessity after every gradle update (gradlew :main:lintBasicDebug)
-                force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
             }
         }
     }
