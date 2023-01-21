@@ -2,6 +2,7 @@
 - New: OSM map source osm.paws.cz
 - New: Enable reading flopp.net GPX files as tracks
 - Fix: Missing routing symbol after 'append to route'
+- Fix: Missing route calculation for prepended points
 
 ### Cache details
 - New: New more sophisticated image gallery
