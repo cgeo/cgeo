@@ -67,7 +67,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(d).isNotNull();
         final String sizeInfoString = d.getSizeInfo(); // 220M
         final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
-        assertThat(sizeInfoInt).isBetween(200, 250);
+        assertThat(sizeInfoInt).isBetween(275, 350);
     }
 
     public static void testOpenAndroMaps() {
