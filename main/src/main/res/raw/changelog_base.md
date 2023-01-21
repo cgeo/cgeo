@@ -3,6 +3,7 @@
 - New: Enable reading flopp.net GPX files as tracks
 - Fix: Missing routing symbol after 'append to route'
 - Fix: Missing route calculation for prepended points
+- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
 
 ### Cache details
 - New: New more sophisticated image gallery
