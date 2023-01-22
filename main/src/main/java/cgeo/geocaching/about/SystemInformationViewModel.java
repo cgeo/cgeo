@@ -1,5 +1,6 @@
 package cgeo.geocaching.about;
 
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SystemInformation;
 
 import android.app.Application;
