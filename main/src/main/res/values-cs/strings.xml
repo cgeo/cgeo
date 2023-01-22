@@ -310,6 +310,8 @@
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Základní</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -1445,6 +1447,7 @@
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete nainstalovat aplikaci Chirp Wolf.</string>
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
+    <string name="cache_alc_related_start">Otevřete Adventure Lab a začněte hrát související dobrodružství</string>
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
