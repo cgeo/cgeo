@@ -310,6 +310,8 @@
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Basis</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>
