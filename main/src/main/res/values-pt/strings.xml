@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
+    <string name="contact_multiple_matches">Contacto: Múltiplas correspondências</string>
     <!-- translation -->
     <string name="translate">Traduzir</string>
     <string name="translate_to_sys_lang">Traduzir para %s</string>
@@ -319,6 +322,8 @@
     <string name="loc_gps_disabled">GPS desactivado</string>
     <string name="loc_copied_clipboard">A localização actual foi copiada para a área de transferência</string>
     <string name="menu_centerposition">Centrar na minha posição</string>
+    <string name="location_no_permission">Aviso: falta a permissão para obter a localização</string>
+    <string name="location_only_coarse_permission">Aviso: apenas existe permissão de localização aproximada</string>
     <!-- standard menu -->
     <string name="menu_about">Acerca do c:geo</string>
     <string name="menu_helpers">Utilitários</string>
@@ -629,7 +634,7 @@
     <string name="about_license">Licença</string>
     <string name="about_apache_license"><a href="">Apache License, Versão 2.0</a></string>
     <string name="about_help">Ajuda</string>
-    <string name="about_system_collecting">As informações do sistema estão recolhidas, por favor aguarde…</string>
+    <string name="about_system_collecting">A colectar informação de sistema, por favor aguarde…</string>
     <string name="about_system_include">Por favor inclua as seguintes informações de sistema quando reportar um erro ou pedir mais informações acerca do c:geo:</string>
     <string name="about_system_info_send_button">Enviar por e-mail…</string>
     <string name="about_system_info">Informação do sistema c:geo</string>
@@ -733,6 +738,7 @@
     <string name="settings_category_nearbysearch">Pesquisa nas proximidades</string>
     <string name="init_nearbysearchlimit_title">Limite de pesquisa próxima</string>
     <string name="init_nearbysearchlimit_description">Limita a distância até à qual as caches são mostradas com a pesquisa nas proximidades (0=ilimitada)</string>
+    <string name="init_settings_description_unlimited">ilimitado</string>
     <string name="settings_category_geocaching_additionals">Outros serviços e suplementos</string>
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
@@ -1242,6 +1248,9 @@
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
     <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
+    <string name="cache_personal_note_vars_out_of_sync">Variáveis nas notas estão fora de sincronização (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Verificar variáveis cujo valor deve ser substituído a partir das notas</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Descrição</string>
     <string name="cache_description_table_note">A descrição contém formatação de tabela pelo que pode ser necessário vê-la em %s para ser vista correctamente.</string>
     <string name="cache_description_rendering">A renderizar descrição, por favor aguarde…</string>
@@ -2158,10 +2167,14 @@
     <string name="init_confirm_debug">O c:geo está a ser executado no modo de depuração!</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
     <!-- permission handling -->
-    <string name="close_app">Fechar a aplicação</string>
-    <string name="ask_again">Voltar a perguntar</string>
-    <string name="location_permission_request_explanation">O c:geo precisa de aceder ao GPS (localização melhorada) do seu dispositivo para localizar a sua posição e calcular a distância e direcção para as geocaches. O mesmo não pode ser utilizado sem esta permissão.</string>
-    <string name="storage_permission_request_explanation">O c:geo irá escrever dados no armazenamento interno ou cartão SD assim que guarde geocaches para uso offline. Além disso, o c:geo utilizará o armazenamento interno para importar/exportar ficheiros e para a leitura de mapas offline. A memória não pode ser utilizada sem esta permissão.</string>
+    <string name="permission_ask_again">Perguntar-me novamente</string>
+    <string name="permission_goto_app_details">Abrir a informação da aplicação</string>
+    <string name="permission_contacts_read_explanation_title">Permissão de leitura de contactos</string>
+    <string name="permission_contacts_read_explanation">O c:geo pode procurar por contactos na lista telefónica, usando os nomes dos GeoCachers. Para fazer isso, deve autorizar o c:geo a ler a sua lista. Caso contrário, o uso desta função não será possível.</string>
+    <string name="permission_location_explanation_title">Permissão de localização</string>
+    <string name="permission_location_explanation">O c:geo está optimizado para usar dados GPS (localização apurada), para localizar a sua posição e calcular a distância e direcção para as geocaches. Sem esta permissão, as funções baseadas na localização não funcionarão como esperado.</string>
+    <string name="permission_read_external_storage_explanation_title">Permissão de leitura para o armazenamento externo</string>
+    <string name="permission_read_external_storage_explanation">O c:geo pode usar o papel de parede do seu sistema como fundo para a aplicação. Para fazer isso, o c:geo precisa de permissão para ler os seus dados de fotos no armazenamento externo.</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
@@ -2225,6 +2238,11 @@
     <string name="make_visible">tornar visível</string>
     <string name="hide">ocultar</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
     <string name="switch_on">Ligado</string>
@@ -2369,8 +2387,6 @@
     <string name="wizard_advanced_restore_info">Se tiver uma cópia de segurança de uma instalação anterior, pode restaurar configurações e/ou dados de geocaches.</string>
     <string name="status_not_ok">ERRO</string>
     <string name="wizard_status_title">Estado da configuração</string>
-    <string name="wizard_status_storage_permission">Permissão de armazenamento</string>
-    <string name="wizard_status_location_permission">Permissão de localização</string>
     <string name="wizard_status_basefolder">Pasta base</string>
     <string name="wizard_status_platform">Serviços de geocaching</string>
     <string name="wizard_not_now">Agora não</string>
