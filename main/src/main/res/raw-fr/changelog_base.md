@@ -1,13 +1,25 @@
 ### Carte
-- New: OSM map source osm.paws.cz
+- Nouveau : source de carte OSM osm.paws.cz
+- Nouveau: Autoriser la lecture de fichiers GPX flopp.net en tant que traces
+- Fix: Missing routing symbol after 'append to route'
+- Fix: Missing route calculation for prepended points
+- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
 
 ### Détails de la cache
-- New: New more sophisticated image gallery
-- Fix: Restore position in waypoint list after updating or deleting waypoint
-- Fix: Move to bottom when creating new waypoint
+- Nouveau : nouvelle galerie d'images plus sophistiquée
+- Correction : Restaurer la position dans la liste des points de passage après la mise à jour ou la suppression du waypoint
+- Correction : Déplacer vers le bas lors de la création d'un nouveau waypoint
+- New: Recognize variables entered in waypoint user notes
+- New: Display lab adventure button in mystery cache details if link to lab adventure detected
+- Fix: Removal of waypoint description not synced for server-side waypoints
 
 ### Général
-- API level change (compileSDK 32)
-- Update some dependant libraries
-- Use Android built-in splash screen feature on startup
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Changement de niveau de l'API (compileSDK 32)
+- Mise à jour de bibliothèques dépendantes
+- Changement : Utilisation d'un mécanisme Android différent pour recevoir les téléchargements (pour une meilleure compatibilité avec Android 12+)
+- Nouveau : Nom de la liste prédéfinie avec le nom du fichier GPX lors de l'importation
+- Correction (version nuit) : Crash lors de l'importation GPX
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
+- New: Display geocaching.com member status on home screen
+- Change: GPX-Import: Use name as geocode for 'unknown' connector
