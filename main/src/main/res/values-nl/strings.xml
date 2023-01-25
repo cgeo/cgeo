@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
+    <string name="contact_multiple_matches">Contact: Meerdere overeenkomsten</string>
     <!-- translation -->
     <string name="translate">Vertalen</string>
     <string name="translate_to_sys_lang">%s</string>
@@ -319,6 +322,8 @@
     <string name="loc_gps_disabled">GPS uitgeschakeld</string>
     <string name="loc_copied_clipboard">Huidige locatie is gekopieerd naar klembord</string>
     <string name="menu_centerposition">Centreer op mijn positie</string>
+    <string name="location_no_permission">Waarschuwing: geen permissie om locatie te verkrijgen</string>
+    <string name="location_only_coarse_permission">Waarschuwing: alleen geschatte locatie permissie</string>
     <!-- standard menu -->
     <string name="menu_about">Over c:geo</string>
     <string name="menu_helpers">Hulpprogramma\'s</string>
@@ -394,6 +399,8 @@
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
     <string name="caches_select_mode">Selectie modus</string>
+    <string name="caches_select_next20">Selecteer de volgende 20 caches</string>
+    <string name="caches_select_next100">Selecteer de volgende 100 caches</string>
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
@@ -534,6 +541,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Begint met</string>
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
+    <string name="cache_filter_datefilter_absolute">Absoluut</string>
+    <string name="cache_filter_datefilter_relative">Ten opzichte van vandaag</string>
     <string name="cache_filter_datefilter_label_from">Van:</string>
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
@@ -590,6 +599,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">het begin der tijden</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>meer dan 1 jaar geleden</item>
+        <item>een jaar geleden</item>
+        <item>180 dagen geleden</item>
+        <item>90 dagen geleden</item>
+        <item>30 dagen geleden</item>
+        <item>2 weken geleden</item>
+        <item>een week geleden</item>
+        <item>3 dagen geleden</item>
+        <item>minder dan 3 dagen geleden</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1j</item>
+        <item>1jr</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2w</item>
+        <item>1w</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versie</string>
     <string name="about_changelog">Changelog</string>
@@ -603,7 +634,7 @@
     <string name="about_license">Licentie</string>
     <string name="about_apache_license"><a href="">Apache License, Versie 2.0</a></string>
     <string name="about_help">Help</string>
-    <string name="about_system_collecting">Systeeminformatie wordt verzameld, even geduld aub…</string>
+    <string name="about_system_collecting">Systeeminformatie ophalen, even geduld…</string>
     <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
     <string name="about_system_info_send_button">Verzenden via mail…</string>
     <string name="about_system_info">c:geo systeeminformatie</string>
@@ -707,6 +738,7 @@
     <string name="settings_category_nearbysearch">Zoeken in de buurt</string>
     <string name="init_nearbysearchlimit_title">Zoeken in de buurt limiet</string>
     <string name="init_nearbysearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met zoeken in de buurt (0=ongelimiteerd)</string>
+    <string name="init_settings_description_unlimited">onbeperkt</string>
     <string name="settings_category_geocaching_additionals">Overige diensten en addons</string>
     <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
@@ -1033,6 +1065,8 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="category_unifiedMap">Gecombineerde Kaart</string>
+    <string name="experimental">(experimenteel)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
     <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten (experimenteel / verre van compleet / alleen voor test)</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
@@ -1214,6 +1248,9 @@
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
     <string name="cache_personal_note_upload_error">Fout bij uploaden persoonlijke notitie</string>
     <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
+    <string name="cache_personal_note_vars_out_of_sync">Variabelen in notities zijn niet gesynchroniseerd (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Controleer variabelen waarvan de waarde uit notities moet worden overschreven</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Omschrijving</string>
     <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
     <string name="cache_description_rendering">Omschrijving genereren, even geduld…</string>
@@ -2130,10 +2167,14 @@
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
     <!-- permission handling -->
-    <string name="close_app">App sluiten</string>
-    <string name="ask_again">Opnieuw vragen</string>
-    <string name="location_permission_request_explanation">c:geo heeft toegang nodig tot de GPS (precieze locatie) op je apparaat om je positie te vinden en afstand en richting van geocaches te berekenen. Het kan niet worden gebruikt zonder deze toestemming.</string>
-    <string name="storage_permission_request_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart zodra je geocaches voor offline gebruik opslaat. Bovendien zal c:geo je telefoon opslag gebruiken voor het importeren en exporteren van bestanden en het lezen van offline kaarten. Het kan niet worden gebruikt zonder deze toestemming.</string>
+    <string name="permission_ask_again">Opnieuw vragen</string>
+    <string name="permission_goto_app_details">Open Applicatie Info</string>
+    <string name="permission_contacts_read_explanation_title">Contacten leesmachtiging</string>
+    <string name="permission_contacts_read_explanation">c:geo kan zoeken naar contacten in je adresboek met behulp van cachernamen. Om dit te doen, dien je c:geo te autoriseren om je adresboek te lezen, anders is het gebruik van deze functie niet mogelijk.</string>
+    <string name="permission_location_explanation_title">Locatie permissie</string>
+    <string name="permission_location_explanation">c:geo is geoptimaliseerd voor gebruik met GPS-gegevens (detail locatie) om je positie te vinden en afstand en richting van geocaches te berekenen. Zonder deze permissie zullen locatie-gebaseerde functies niet werken zoals verwacht.</string>
+    <string name="permission_read_external_storage_explanation_title">Externe Opslag leespermissie</string>
+    <string name="permission_read_external_storage_explanation">c:geo kan je systeem achtergrond gebruiken als achtergrond voor de app. Hiervoor heeft c:geo toestemming nodig om je media gegevens te lezen op externe opslag.</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
@@ -2346,8 +2387,6 @@
     <string name="wizard_advanced_restore_info">Als je een backup van een eerdere installatie hebt, kun je instellingen en/of geocache gegevens herstellen.</string>
     <string name="status_not_ok">FOUT</string>
     <string name="wizard_status_title">Configuratie status</string>
-    <string name="wizard_status_storage_permission">Opslag permissie</string>
-    <string name="wizard_status_location_permission">Locatie permissie</string>
     <string name="wizard_status_basefolder">Basismap</string>
     <string name="wizard_status_platform">Geocaching diensten</string>
     <string name="wizard_not_now">Niet nu</string>
