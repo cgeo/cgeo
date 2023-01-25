@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">ikke skalert</string>
     <string name="log_image_titleprefix">Bilde</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Oversett</string>
     <string name="translate_to_sys_lang">Oversett til %s</string>
@@ -571,7 +572,6 @@
     <string name="about_license">Lisens</string>
     <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
     <string name="about_help">Hjelp</string>
-    <string name="about_system_collecting">Systeminformasjon er samlet inn, vennligst vent…</string>
     <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
     <string name="about_system_info_send_button">Send på e-post…</string>
     <string name="about_system_info">Systeminformasjon for c:geo</string>
@@ -1964,9 +1964,6 @@
     <string name="init_confirm_debug">c:geo kjører i feilsøkingsmodus!</string>
     <string name="list_confirm_debug_message">Feilsøkingsmodus vil gjøre c:geo ustabil. Vil du deaktivere feilsøkingsmodusen?</string>
     <!-- permission handling -->
-    <string name="close_app">Lukk app</string>
-    <string name="ask_again">Spør igjen</string>
-    <string name="storage_permission_request_explanation">c:geo skriver data til internt lagringsområde eller SD-kort når du lagrer geocacher for offline bruk. Videre bruker c:geo lagringsområdet til importering og eksportering av filer og for å lese offline-kart. Appen kan ikke brukes uten denne tilgangen.</string>
     <string name="storage_permission_needed">Denne funksjonen er ikke tilgjengelig uten lagringstilatelse.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Velg fargeoppsett</string>
@@ -2125,8 +2122,6 @@
     <string name="wizard_advanced_restore_info">Hvis du har en sikkerhetskopi av en tidligere installasjon, kan du gjenopprette innstillinger og/eller geocache-data.</string>
     <string name="status_not_ok">FEIL</string>
     <string name="wizard_status_title">Konfigurasjon-status</string>
-    <string name="wizard_status_storage_permission">Tillatelse for lagring</string>
-    <string name="wizard_status_location_permission">Posisjonstillatelse</string>
     <string name="wizard_status_basefolder">Standard mappe</string>
     <string name="wizard_status_platform">Geocaching-tjenester</string>
     <string name="wizard_not_now">Ikke nå</string>
