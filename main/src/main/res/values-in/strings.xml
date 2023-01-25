@@ -117,6 +117,7 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
