@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">χωρίς κλιμάκωση</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Μετάφραση</string>
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -616,7 +617,6 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
-    <string name="about_system_collecting">Οι πληροφορίες συστήματος συλλέγονται, παρακαλώ περιμένετε…</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -2140,10 +2140,6 @@
     <string name="init_confirm_debug">Το c:geo εκτελείται σε λειτουργία εντοπισμού σφαλμάτων!</string>
     <string name="list_confirm_debug_message">Η λειτουργία εντοπισμού σφαλμάτων προκαλεί αστάθεια! Θέλετε να απενεργοποιήσετε την κατάσταση λειτουργίας εντοπισμού σφαλμάτων;</string>
     <!-- permission handling -->
-    <string name="close_app">Κλείσιμο εφαρμογής</string>
-    <string name="ask_again">Ερώτηση ξανά</string>
-    <string name="location_permission_request_explanation">Το c:geo χρειάζεται πρόσβαση στο GPS της συσκευής σας για να εντοπίσει την τοποθεσία σας και να υπολογίσει την απόσταση και την κατεύθυνση προς τις κρύπτες. Η χρήση του είναι αδύνατη χωρίς αυτήν την άδεια.</string>
-    <string name="storage_permission_request_explanation">Το c:geo θα αποθηκεύσει δεδομένα στη μνήμη του τηλεφώνου σας ή στην κάρτα SD καθώς αποθηκεύετε κρύπτες για χρήση εκτός σύνδεσης. Επιπλέον το c:geo θα χρησιμοποιήσει τη μνήμη του τηλεφώνου σας για την εισαγωγή και εξαγωγή αρχείων και χαρτών εκτός σύνδεσης. Η χρήση του δεν είναι δυνατή χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_needed">Μη επιτρεπτή λειτουργία χωρίς άδεια αποθήκευσης.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Επιλογή συνδυασμού χρωμάτων</string>
@@ -2346,8 +2342,6 @@
     <string name="wizard_advanced_restore_info">Εάν έχετε ένα αντίγραφο ασφαλείας μιας προηγούμενης εγκατάστασης, μπορείτε να επαναφέρετε τις ρυθμίσεις και/ή geocache δεδομένα.</string>
     <string name="status_not_ok">ΛΑΘΟΣ</string>
     <string name="wizard_status_title">Κατάσταση διαμόρφωσης</string>
-    <string name="wizard_status_storage_permission">Άδεια αποθήκευσης</string>
-    <string name="wizard_status_location_permission">Άδεια τοποθεσίας</string>
     <string name="wizard_status_basefolder">ΒασικόςΦάκελος</string>
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
     <string name="wizard_not_now">Όχι τώρα</string>
