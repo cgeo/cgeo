@@ -1,25 +1,25 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Všeobecné
+- Oprava: Nové nastavenie TB automaticky na režim návštevy
+- Oprava: Nastavenia základného člena na gc.com sa nezobrazujú
 - Zmena: poskytovateľ máp mapy.cz odstránený (kvôli zmene v licencovaní)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Oprava: Zlyhanie pri vzorcoch stupňov s viacerými bodkami
 
 ##
 
-### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+### Všeobecné
+- Oprava: Použitie aktualizovanej URL adresy na geokódy mapquest
+- Oprava: Prevencia pred zlyhaním za určitých podmienok pri pokuse o priloženie fotky k logu
+- Zmena: Lepšie chybové hlásenie o tom, ako riešiť požiadavku Captcha pri prihlásení na geocaching.com
 
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+### Kešky
+- Oprava: Prevencia pred zdvojením spoilerových obrázkov v galérii pri obnovení kešky
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+### Kalkulačka premenných
+- Nové: Funkcia TRUNC na skrátenie desatinných hodnôt
+- Nové: Umožnenie použitia hranatých zátvoriek pre výpočty. Pri premenlivých rozsahoch použite namiesto toho napr. \[:1-5\].
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Mapa
+- Oprava: Zobrazenie správnej značky D/T pre D4 a D4,5
