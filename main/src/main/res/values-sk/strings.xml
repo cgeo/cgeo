@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">nezmenená veľkosť</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Preložiť</string>
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
@@ -639,7 +640,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_system_collecting">Informácie o systéme sa zhromažďujú, čakajte…</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -2211,10 +2211,6 @@
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
     <!-- permission handling -->
-    <string name="close_app">Zavrieť aplikáciu</string>
-    <string name="ask_again">Opýtať sa znova</string>
-    <string name="location_permission_request_explanation">c.geo vyžaduje prístup ku GPS (presná poloha) na vašom zariadení na vyhľadanie polohy a výpočet vzdialenosti a smeru ku keškám. Nedá sa používať bez tohto povolenia.</string>
-    <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte farebnú schému</string>
@@ -2429,8 +2425,6 @@
     <string name="wizard_advanced_restore_info">Ak máte zálohu predchádzajúcej inštalácie, môžete obnoviť nastavenia a/alebo údaje kešiek.</string>
     <string name="status_not_ok">CHYBA</string>
     <string name="wizard_status_title">Stav konfigurácie</string>
-    <string name="wizard_status_storage_permission">Povolenie prístupu k súborom</string>
-    <string name="wizard_status_location_permission">Povolenie k polohe</string>
     <string name="wizard_status_basefolder">Hlavný priečinok</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
     <string name="wizard_not_now">Teraz nie</string>
