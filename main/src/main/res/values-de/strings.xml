@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
+    <string name="contact_multiple_matches">Kontakt: Mehrere Treffer</string>
     <!-- translation -->
     <string name="translate">Übersetzen</string>
     <string name="translate_to_sys_lang">Übersetze in %s</string>
@@ -307,6 +310,8 @@
     <string name="warn_gm_not_available">Google Maps ist nicht verfügbar.</string>
     <string name="switch_to_mf">Dein Google Play Service ist veraltet. Daher kannst du Google Maps nicht nutzen. Möchtest Du stattdessen zu \"OSM: Karte\" wechseln?</string>
     <string name="switched_to_mf">Die Standardkarte wurde auf \"OSM: Karte\" umgestellt. Bitte starte die Kartenansicht neu.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Basis</string>
     <!-- location service -->
     <string name="loc_last">Letzte Position</string>
     <string name="loc_net">Netzwerk</string>
@@ -319,6 +324,8 @@
     <string name="loc_gps_disabled">GPS nicht aktiv</string>
     <string name="loc_copied_clipboard">Aktuelle Position wurde in die Zwischenablage kopiert</string>
     <string name="menu_centerposition">Zentriere meine Position</string>
+    <string name="location_no_permission">Warnung: Keine Berechtigung für den Standort</string>
+    <string name="location_only_coarse_permission">Warnung: Nur ungefähre Standortberechtigung</string>
     <!-- standard menu -->
     <string name="menu_about">Über c:geo</string>
     <string name="menu_helpers">Nützliche Apps</string>
@@ -733,6 +740,7 @@
     <string name="settings_category_nearbysearch">Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_title">Limit für Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_description">Begrenzt die Distanz, bis zu der Caches für die Suche in der Nähe zurückgegeben werden (0=unbegrenzt)</string>
+    <string name="init_settings_description_unlimited">unbegrenzt</string>
     <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
     <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
@@ -2158,10 +2166,14 @@
     <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
     <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
     <!-- permission handling -->
-    <string name="close_app">App beenden</string>
-    <string name="ask_again">Erneut nachfragen</string>
-    <string name="location_permission_request_explanation">c:geo benötigt Zugriff auf das GPS auf deinem Gerät (genauer Standort), um deine Position zu finden und Entfernung und Richtung zu Geocaches zu berechnen. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
-    <string name="storage_permission_request_explanation">c:geo wird Daten in Telefonspeicher oder SD-Karte schreiben, sobald du Geocaches für Offline-Nutzung speicherst. Außerdem wird c:geo deinen Telefonspeicher für den Import und Export von Dateien und das Lesen von Offline-Karten verwenden. Es kann nicht ohne diese Berechtigung verwendet werden.</string>
+    <string name="permission_ask_again">Erneut fragen</string>
+    <string name="permission_goto_app_details">\"App-Info\" öffnen</string>
+    <string name="permission_contacts_read_explanation_title">Leseberechtigung für Kontakte</string>
+    <string name="permission_contacts_read_explanation">c:geo kann Kontakte in deinem Adressbuch mit Cacher-Namen suchen. Um dies zu tun, musst du c:geo erlauben, dein Adressbuch zu lesen. Andernfalls ist die Nutzung dieser Funktion nicht möglich.</string>
+    <string name="permission_location_explanation_title">Standortberechtigung</string>
+    <string name="permission_location_explanation">c:geo ist optimiert für die Nutzung mit GPS-Daten (genauer Standort) um deine Position zu lokalisieren und Distanz und Richtung zu Geocaches zu berechnen. Ohne diese Berechtigung funktionieren ortungsbasierte Funktionen nicht wie erwartet.</string>
+    <string name="permission_read_external_storage_explanation_title">Leseberechtigung für externen Speicher</string>
+    <string name="permission_read_external_storage_explanation">c:geo kann dein System-Hintergrund als Hintergrund für die App verwenden. Um dies zu tun, benötigt c:geo die Erlaubnis, deine Mediendaten auf externem Speicher zu lesen.</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
@@ -2374,8 +2386,6 @@
     <string name="wizard_advanced_restore_info">Wenn du eine Sicherung einer vorherigen Installation hast, kannst du Einstellungen und/oder Geocache-Daten wiederherstellen.</string>
     <string name="status_not_ok">FEHLER</string>
     <string name="wizard_status_title">Konfigurationsstatus</string>
-    <string name="wizard_status_storage_permission">Speicherberechtigung</string>
-    <string name="wizard_status_location_permission">Standortberechtigung</string>
     <string name="wizard_status_basefolder">Basisordner</string>
     <string name="wizard_status_platform">Geocaching-Dienste</string>
     <string name="wizard_not_now">Jetzt nicht</string>
