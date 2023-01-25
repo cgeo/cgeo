@@ -154,6 +154,7 @@
     <string name="log_problem_archive_text">这个寻宝者报告此藏点应该被存档。已经通知了一个社区志愿审核人。</string>
     <string name="log_image_scale_option_noscaling">无缩放</string>
     <string name="log_image_titleprefix">图片</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
     <string name="translate_to_english">翻译为英语</string>
