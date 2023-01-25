@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Nieudany odczyt strony logowania.</string>
+    <string name="err_captcha">Usługa wymaga Captcha. Proszę otworzyć stronę geocaching.com w przeglądarce i rozwiązać Captcha, który wyświetla się podczas logowania. Następnie spróbuj ponownie zalogować się za pomocą c:geo.</string>
     <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_lc">Nie udało się połączyć z labs.geocaching.com. Strona może być wyłączona, lub twoje połączenie internetowe nie działa.</string>
@@ -206,6 +207,7 @@
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
     <string name="err_comm">Nieznany błąd komunikacji. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła</string>
+    <string name="err_wrong">Błędna nazwa użytkownika i/lub hasło.</string>
     <string name="err_maintenance">Trwają prace serwisowe w Geocaching.com. c:geo pracuje offline z zapisanymi skrytkami.</string>
     <string name="err_license">Użytkownik nie zaakceptował jeszcze regulaminu Geocaching.com, więc c:geo nie może załadować współrzędnych skrytek.</string>
     <string name="err_unvalidated_account">Musisz najpierw zatwierdzić swoje konto na stronie Geocaching.com.</string>
@@ -398,6 +400,7 @@
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
+    <string name="caches_select_next">Wybierz następne 20 skrytek</string>
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>
@@ -920,6 +923,7 @@
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
     <string name="settings_info_hillshading">Cieniowanie (hillshading) jest techniką tworzenia map pomocy topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nPliki źródłowe zawierające informacje o wysokości muszą być uzyskane ręcznie – kliknij ten element dla źródeł – i umieść w folderze źródłowym określonym poniżej.</string>
+    <string name="settings_hillshading_enable">Włącz cieniowanie terenu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
@@ -1045,6 +1049,7 @@
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
     <string name="category_unifiedMap">Ujednolicona mapa</string>
+    <string name="experimental">(eksperymentalna)</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
     <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
@@ -1551,6 +1556,7 @@
     <string name="formula_function_tan">Tangens</string>
     <string name="formula_function_abs">Wartość bezwzględna</string>
     <string name="formula_function_round">Zaokrąglij</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Jeżeli</string>
     <string name="formula_function_length">Długość ciągu</string>
     <string name="formula_function_substring">Podciąg</string>
