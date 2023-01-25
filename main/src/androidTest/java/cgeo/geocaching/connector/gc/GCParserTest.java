@@ -189,7 +189,7 @@ public class GCParserTest {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
-        editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
+        editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566")).blockingSubscribe();
         cache.dropSynchronous();
         final String page = requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache2 = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
@@ -197,7 +197,7 @@ public class GCParserTest {
         assertThat(cache2.hasUserModifiedCoords()).isTrue();
         assertThat(cache2.getCoords()).isEqualTo(new Geopoint("N51 21.544", "E07 02.566"));
         // delete coordinates
-        deleteModifiedCoordinates(cache2);
+        deleteModifiedCoordinates(cache2).blockingSubscribe();
         cache2.dropSynchronous();
         final String page2 = requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache3 = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
