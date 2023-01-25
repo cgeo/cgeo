@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">не масштабировано</string>
     <string name="log_image_titleprefix">Фотография</string>
     <string name="datetime_nodateset_display">Дата не установлена</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
+    <string name="contact_multiple_matches">Контакт: Несколько совпадений</string>
     <!-- translation -->
     <string name="translate">Переводить</string>
     <string name="translate_to_sys_lang">Перевести на %s</string>
@@ -196,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
+    <string name="err_captcha">Сервис требует капчу. Пожалуйста, откройте в браузере сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
     <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -206,6 +210,7 @@
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
+    <string name="err_wrong">Неверное имя пользователя и/или пароль.</string>
     <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
     <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
     <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
@@ -305,6 +310,8 @@
     <string name="warn_gm_not_available">Карты Google недоступны.</string>
     <string name="switch_to_mf">Ваш Google Play устарел. Хотите перейти на карты от Mapsforge?</string>
     <string name="switched_to_mf">Карта по умолчанию переключена на Mapsforge. Перезапустите карту.</string>
+    <string name="gc_premium">Премиум</string>
+    <string name="gc_basic">Базовый</string>
     <!-- location service -->
     <string name="loc_last">Последнее местоположение</string>
     <string name="loc_net">Сеть</string>
@@ -317,6 +324,8 @@
     <string name="loc_gps_disabled">GPS отключен</string>
     <string name="loc_copied_clipboard">Текущее местоположение скопировано в буфер обмена</string>
     <string name="menu_centerposition">Центр на моей позиции</string>
+    <string name="location_no_permission">Предупреждение: нет разрешения на получение местоположения</string>
+    <string name="location_only_coarse_permission">Предупреждение: разрешение только на определение приблизительного местоположения</string>
     <!-- standard menu -->
     <string name="menu_about">О c:geo</string>
     <string name="menu_helpers">Полезные приложения</string>
@@ -398,6 +407,8 @@
     <string name="caches_sort_storage">Дата сохранения</string>
     <string name="caches_sort_eventdate">Дата события</string>
     <string name="caches_select_mode">Режим выделения</string>
+    <string name="caches_select_next20">Выбрать следующие 20 тайников</string>
+    <string name="caches_select_next100">Выберите следующие 100 тайников</string>
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
@@ -546,6 +557,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Начинается с</string>
     <string name="cache_filter_stringfilter_type_ends_with">Заканчивается на</string>
     <string name="cache_filter_stringfilter_type_pattern">Шаблон</string>
+    <string name="cache_filter_datefilter_absolute">Абсолютная</string>
+    <string name="cache_filter_datefilter_relative">Относительно сегодня</string>
     <string name="cache_filter_datefilter_label_from">От:</string>
     <string name="cache_filter_datefilter_label_to">До:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Выбрать всё</string>
@@ -602,6 +615,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">с незапамятных времен</string>
     <string name="cache_filter_stored_since_stored_max_short">макс</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>более года назад</item>
+        <item>год назад</item>
+        <item>180 дней назад</item>
+        <item>90 дней назад</item>
+        <item>30 дней назад</item>
+        <item>2 недели назад</item>
+        <item>неделю назад</item>
+        <item>3 дня назад</item>
+        <item>менее 3 дней назад</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1г</item>
+        <item>1г</item>
+        <item>180д</item>
+        <item>90 д</item>
+        <item>30д</item>
+        <item>2н</item>
+        <item>1н</item>
+        <item>3д</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -615,7 +650,7 @@
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
-    <string name="about_system_collecting">Собирается системная информация, подождите…</string>
+    <string name="about_system_collecting">Сбор информации о системе, подождите…</string>
     <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
     <string name="about_system_info">Служебная информация c:geo</string>
@@ -719,6 +754,7 @@
     <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
+    <string name="init_settings_description_unlimited">неограниченно</string>
     <string name="settings_category_geocaching_additionals">Дополнительные плагины и приложения</string>
     <string name="settings_category_social">Социальные сети</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
@@ -1045,6 +1081,8 @@
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
+    <string name="category_unifiedMap">Универсальная карта</string>
+    <string name="experimental">(экспериментальный)</string>
     <string name="init_title_useUnifiedMap">Использовать единую карту</string>
     <string name="init_summary_useUnifiedMap">Использовать новую единую карту вместо встроенных карт Google Map / Mapsforge (OSM) (экспериментальные / только для тестирования)</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
@@ -1242,6 +1280,9 @@
     <string name="cache_personal_note_upload_done">Личная заметка загружена</string>
     <string name="cache_personal_note_upload_error">Ошибка отправки персональной заметки</string>
     <string name="cache_personal_note_upload_cancelled">Загрузка личной заметки отменена</string>
+    <string name="cache_personal_note_vars_out_of_sync">Переменные в заметках не синхронизированы (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Проверьте переменные, значения которых должны быть перезаписаны из заметок</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Описание</string>
     <string name="cache_description_table_note">Описание содержит табличное форматирование, для корректного просмотра вам может понадобиться %s.</string>
     <string name="cache_description_rendering">Работаю над визуализацией. Подождите немного…</string>
@@ -1263,7 +1304,7 @@
     <string name="cache_advanced">Продвинутые</string>
     <string name="cache_waypoints">Путевые точки</string>
     <string name="cache_variables">Переменные</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Путевые точки (%d)</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Точки (%d)</string>
     <string name="cache_waypoints_add">Добавить точку</string>
     <string name="cache_waypoints_add_currentLocation">Добавить текущее местоположение</string>
     <string name="cache_waypoints_add_fromclipboard">Добавить из буфера обмена</string>
@@ -1406,6 +1447,7 @@
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Этот кэш может использовать либо chirp передатчик, либо другой тип беспроводного маяка. Для чтения данных chirp вы можете установить Chirp Wolf.</string>
     <string name="cache_alc_start">Откройте Adventure Lab, чтобы начать играть в это приключение</string>
+    <string name="cache_alc_related_start">Открыть Лабораторию Приключений, чтобы начать играть в связанные приключения</string>
     <string name="cache_alc_install">Установите игрока Adventure Lab, чтобы играть в это приключение</string>
     <string name="context_share_as_text">Поделиться текстом</string>
     <string name="context_share_as_link">Поделиться ссылкой</string>
@@ -2186,10 +2228,14 @@
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
     <!-- permission handling -->
-    <string name="close_app">Закрыть приложение</string>
-    <string name="ask_again">Спросить снова</string>
-    <string name="location_permission_request_explanation">c:geo необходим доступ к GPS (точное местоположение), чтобы определять ваше местоположение и рассчитывать расстояния до тайников. Приложение не может быть использовано без этого разрешения.</string>
-    <string name="storage_permission_request_explanation">c:geo необходим доступ к памяти телефона или SD карте, чтобы сохранять тайники, а также для чтения оффлайн карт и экспорта\импорта тайников. Приложение не может быть использовано без этого разрешения.</string>
+    <string name="permission_ask_again">Спросить снова</string>
+    <string name="permission_goto_app_details">Открыть инфо о приложении</string>
+    <string name="permission_contacts_read_explanation_title">Права на чтение контактов</string>
+    <string name="permission_contacts_read_explanation">c:geo может искать контакты в адресной книге используя имена геокешеров. Для этого необходимо разрешить c:geo читать вашу адресную книгу. В противном случае, использование этой функции невозможно.</string>
+    <string name="permission_location_explanation_title">Разрешение на доступ к определению местоположения</string>
+    <string name="permission_location_explanation">c:geo оптимизирован для использования данных GPS (точное местоположение) для определения местоположения, а также расчета расстояния и направления на тайник. Без этого разрешения функции на основе определения местоположения работать не будут.</string>
+    <string name="permission_read_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
+    <string name="permission_read_external_storage_explanation">c:geo может использовать ваши системные обои в качестве фона для приложения. Для этого c:geo требуется разрешение на чтение ваших медиа данных на внешнем накопителе.</string>
     <string name="storage_permission_needed">Эта функция невозможна без разрешения на хранение.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Выберите цветовую схему</string>
@@ -2404,8 +2450,6 @@
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
     <string name="status_not_ok">ОШИБКА</string>
     <string name="wizard_status_title">Состояние настройки</string>
-    <string name="wizard_status_storage_permission">Доступ к хранилищу</string>
-    <string name="wizard_status_location_permission">Доступ к местоположению</string>
     <string name="wizard_status_basefolder">\"Основная\" папка</string>
     <string name="wizard_status_platform">Геокешинг-сервисы</string>
     <string name="wizard_not_now">Не сейчас</string>
