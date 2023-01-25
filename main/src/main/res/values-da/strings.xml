@@ -184,6 +184,7 @@
     <string name="log_image_info_notscaled">ikke skaleret</string>
     <string name="log_image_titleprefix">Billede</string>
     <string name="datetime_nodateset_display">Ingen dato angivet</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Oversæt</string>
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -553,7 +554,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjælp</string>
-    <string name="about_system_collecting">Systemoplysninger er indsamlet, vent venligst…</string>
     <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
     <string name="about_system_info_send_button">Send via mail…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -1673,9 +1673,6 @@
     <string name="init_confirm_debug">c:geo kører i fejlfindingstilstand!</string>
     <string name="list_confirm_debug_message">Fejlfindingstilstand kan forårsage ustabilitet! Ønsker du at deaktivere fejlfindingstilstand?</string>
     <!-- permission handling -->
-    <string name="close_app">Luk app</string>
-    <string name="ask_again">Spørg igen</string>
-    <string name="storage_permission_request_explanation">c:geo vil skrive data til din telefons lager eller SD-kort, så snart du gemmer geocacher til offlinebrug. Desuden vil c:geo bruge din telefons lagerplads til import og eksport af filer og læsning af offline kort. c:geo kan ikke fungere uden denne tilladelse.</string>
     <string name="storage_permission_needed">Den funktion kan ikke bruges uden lagringstilladelse.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vælg farveskema</string>
@@ -1793,8 +1790,6 @@
     <string name="wizard_advanced_restore_info">Hvis du har en sikkerhedskopi af en tidligere installation, kan du gendanne indstillinger og/eller geocache-data.</string>
     <string name="status_not_ok">FEJL</string>
     <string name="wizard_status_title">Konfigurations status</string>
-    <string name="wizard_status_storage_permission">Adgang til lagerplads</string>
-    <string name="wizard_status_location_permission">Placeringstilladelse</string>
     <string name="wizard_status_platform">Geocaching tjenester</string>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
