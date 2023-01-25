@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
+    <string name="err_captcha">Сервис требует Капчи. Пожалуйста, откройте сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
     <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -206,6 +207,7 @@
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
+    <string name="err_wrong">Неверное имя пользователя и/или пароль.</string>
     <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
     <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
     <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
@@ -398,6 +400,7 @@
     <string name="caches_sort_storage">Дата сохранения</string>
     <string name="caches_sort_eventdate">Дата события</string>
     <string name="caches_select_mode">Режим выделения</string>
+    <string name="caches_select_next">Выбрать следующие 20 тайников</string>
     <string name="caches_select_mode_exit">Выйти из режима выделения</string>
     <string name="caches_select_invert">Инвертировать выделение</string>
     <string name="caches_nearby">Поблизости</string>
@@ -1045,6 +1048,8 @@
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
+    <string name="category_unifiedMap">Универсальная карта</string>
+    <string name="experimental">(экспериментальный)</string>
     <string name="init_title_useUnifiedMap">Использовать единую карту</string>
     <string name="init_summary_useUnifiedMap">Использовать новую единую карту вместо встроенных карт Google Map / Mapsforge (OSM) (экспериментальные / только для тестирования)</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
