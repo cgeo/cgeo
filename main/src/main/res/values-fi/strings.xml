@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Käännä</string>
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -603,7 +604,6 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_system_collecting">Kerätään järjestelmätietoja, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -2130,10 +2130,6 @@
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
     <!-- permission handling -->
-    <string name="close_app">Sulje sovellus</string>
-    <string name="ask_again">Kysy uudelleen</string>
-    <string name="location_permission_request_explanation">c:geo tarvitsee luvan käyttää laitteesi GPS:ää (tarkka sijainti) sijaintisi paikallistamiseen sekä etäisyyden ja suunnan geokätköihin. Sitä ei voida käyttää ilman tätä lupaa.</string>
-    <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
@@ -2346,8 +2342,6 @@
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>
     <string name="wizard_status_title">Määrityksen tila</string>
-    <string name="wizard_status_storage_permission">Tallennustilan käyttöoikeus</string>
-    <string name="wizard_status_location_permission">Sijainnin käyttöoikeus</string>
     <string name="wizard_status_basefolder">Juurikansio</string>
     <string name="wizard_status_platform">Geokätköilypalvelut</string>
     <string name="wizard_not_now">Ei nyt</string>
