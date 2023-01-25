@@ -1,25 +1,25 @@
 ##
 
-### General
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
+### Generale
+- Corretto: Nuova impostazione per la modalità di visita dei TB
+- Corretto: impostazioni account base gc.com non visualizzate
 - Change: mapy.cz map provider removed (due to change in licensing)
 - Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Corretto: Crash per le formule con i gradi con punti multipli
 
 ##
 
-### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+### Generale
+- Corretto: utilizza l'URL aggiornato per la geocodifica di mapquest
+- Correttto: Prevenuto il crash in determinate condizioni quando si tenta di allegare la foto al log
+- Cambio: migliore messaggio di errore su come risolvere un Captcha sul login in geocaching.com
 
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache
+### Cache
+- Corretto: Impedito il raddoppio delle immagini spoiler nella galleria quando si aggiorna un cache
 
-### Variable calculator
-- New: TRUNC function to truncate decimal values
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+### Calcolatore di variabili
+- Nuovo: funzione TRUNC per troncare i valori decimali
+- Nuovo: Consenti l'uso di parentesi quadre per i calcoli. Per gli intervalli di variabili, si prega di utilizzare ad esempio \[:1-5\].
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Mappa
+- Corretto: Mostra il marcatore DT corretto per D4.0 e D4.5
