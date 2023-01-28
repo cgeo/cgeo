@@ -88,7 +88,7 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
     private void recalculateMetadata() {
         final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
         for (GeoObject go : this.objects) {
-            cvb.add(go.getPoints());
+            cvb.add(go.points);
         }
         this.viewport = cvb.getViewport();
     }

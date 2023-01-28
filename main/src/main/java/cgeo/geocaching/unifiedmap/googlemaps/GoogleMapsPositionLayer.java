@@ -1,5 +1,7 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.maps.google.v2.GoogleMapObjects;
 import cgeo.geocaching.models.Route;
@@ -24,6 +26,11 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     private final GoogleMapObjects positionObjs;
     private final GoogleMapObjects trackObjs;
     private final GoogleMapObjects historyObjs;
+
+    private static final GeopointConverter<LatLng> GP_CONVERTER = new GeopointConverter<>(
+            gc -> new LatLng(gc.getLatitude(), gc.getLongitude()),
+            ll -> new Geopoint(ll.latitude, ll.longitude)
+    );
 
     GoogleMapsPositionLayer(final GoogleMap googleMap, final View root) {
         super(root, LatLng::new);
@@ -57,12 +64,12 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateIndividualRoute(route, GoogleMapsUtils::toLatLng);
+        super.updateIndividualRoute(route, GP_CONVERTER::toListList);
     }
 
     @Override
     public void updateTrack(final String key, final IGeoDataProvider track) {
-        super.updateTrack(key, track, GoogleMapsUtils::toLatLng);
+        super.updateTrack(key, track, GP_CONVERTER::toListList);
     }
 
     // ========================================================================

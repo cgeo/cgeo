@@ -1,5 +1,7 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
@@ -25,6 +27,11 @@ import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
 class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
+
+    private static final GeopointConverter<GeoPoint> GP_CONVERTER = new GeopointConverter<>(
+            gp -> new GeoPoint(gp.getLatitude(), gp.getLongitude()),
+            gp -> new Geopoint(gp.getLatitude(), gp.getLongitude())
+    );
 
     final Map map;
 
@@ -97,12 +104,12 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateIndividualRoute(route, MapsforgeMapsUtils::toGeoPoint);
+        super.updateIndividualRoute(route, GP_CONVERTER::toListList);
     }
 
     @Override
     public void updateTrack(final String key, final IGeoDataProvider track) {
-        super.updateTrack(key, track, MapsforgeMapsUtils::toGeoPoint);
+        super.updateTrack(key, track, GP_CONVERTER::toListList);
     }
 
     // ========================================================================

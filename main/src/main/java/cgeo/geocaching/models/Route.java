@@ -83,13 +83,13 @@ public class Route implements IGeoDataProvider, Parcelable {
                 if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
                     points.addAll(rs.getPoints());
                 } else {
-                    result.add(GeoObject.createPolyline(points, null, null));
+                    result.add(GeoObject.createPolyline(points, null));
                     points.clear();
                 }
             }
         }
         if (!points.isEmpty()) {
-            result.add(GeoObject.createPolyline(points, null, null));
+            result.add(GeoObject.createPolyline(points, null));
         }
         return result;
     }

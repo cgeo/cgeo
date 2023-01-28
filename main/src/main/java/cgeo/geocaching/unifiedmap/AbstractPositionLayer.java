@@ -83,7 +83,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     private class CachedRoute {
         private boolean isHidden = false;
-        private ArrayList<ArrayList<T>> track = null;
+        private List<List<T>> track = null;
     }
 
     protected AbstractPositionLayer(final View root, final Func2<Double, Double, T> createNewPoint) {
@@ -120,7 +120,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     // ========================================================================
     // route / track handling
 
-    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final Func1<K, ArrayList<ArrayList<T>>> getAllPoints) {
+    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final Func1<K, List<List<T>>> getAllPoints) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (track == null) {
@@ -143,14 +143,14 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     public abstract void updateTrack(String key, IGeoDataProvider track);
 
-    public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+    public void updateIndividualRoute(final Route route, final Func1<Route, List<List<T>>> getAllPoints) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
         repaintRouteAndTracks();
         individualRouteDistance = route.getDistance();
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
     }
 
-    public void updateTrack(final String key, final IGeoDataProvider track, final Func1<IGeoDataProvider, ArrayList<ArrayList<T>>> getAllPoints) {
+    public void updateTrack(final String key, final IGeoDataProvider track, final Func1<IGeoDataProvider, List<List<T>>> getAllPoints) {
         updateRoute(key, track, getAllPoints);
         repaintRouteAndTracks();
     }
@@ -286,7 +286,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
                 final boolean isTrack = c != individualRoute;
                 // route hidden, no route or route too short?
                 if (!c.isHidden && c.track != null && c.track.size() > 0) {
-                    for (ArrayList<T> segment : c.track) {
+                    for (List<T> segment : c.track) {
                         addSegment.call(segment, isTrack);
                     }
                 }
