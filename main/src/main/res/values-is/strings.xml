@@ -111,6 +111,7 @@
     <string name="log_empty_logbook">Dagbók þessa kassa er tóm.</string>
     <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
     <string name="log_problem_other_label">Annað</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Þýtt að %s</string>
     <string name="translate_to_english">Þýða yfir á ensku</string>

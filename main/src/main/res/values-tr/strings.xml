@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Çeviri</string>
     <string name="translate_to_sys_lang">%s\'e çevir</string>
@@ -591,7 +592,6 @@
     <string name="about_license">Lisans</string>
     <string name="about_apache_license"><a href=""> Apache Lisansı, Sürüm 2.0 </a></string>
     <string name="about_help">Yardım</string>
-    <string name="about_system_collecting">Sistem verisi toplandı, lütfen bekleyin…</string>
     <string name="about_system_include">Bir hata raporu gönderirken ya da c:geo hakkında daha fazla bilgi almak istediğinizde lütfen aşağıdaki sistem bilgilerini de ekleyin:</string>
     <string name="about_system_info_send_button">E-posta ile gönder…</string>
     <string name="about_system_info">c:geo sistem bilgisi</string>
@@ -2007,9 +2007,6 @@
     <string name="init_confirm_debug">c:geo hata ayıklama modunda çalışıyor!</string>
     <string name="list_confirm_debug_message">Hata ayıklama modu dengesizliklere sebep oluyor! Bu modu devre dışı bırakmak ister misiniz?</string>
     <!-- permission handling -->
-    <string name="close_app">Aplikasyonu kapat</string>
-    <string name="ask_again">Bana yine sor</string>
-    <string name="storage_permission_request_explanation">Çevrimdışı kullanmak üzere Geocache\'leri kayıt ettiğinizde c:geo telefonunuzun hafızasına veya SD kartınıza veri kaydedecektir. Ek olarak c:geo içe-dışa veri aktarımı için, çevrimdışı harita kullanımı için cihaz hafızanızı kullanacaktır. İzinsiz çalıştırılamaz.</string>
     <string name="storage_permission_needed">Depolama izni olmaksızın bu özellik kullanılamıyor.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Renk şemasını seç</string>
@@ -2194,8 +2191,6 @@
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
     <string name="wizard_status_title">Yapılandırma durumu</string>
-    <string name="wizard_status_storage_permission">Bellek izni</string>
-    <string name="wizard_status_location_permission">Konum izni</string>
     <string name="wizard_status_basefolder">Temel klasör</string>
     <string name="wizard_status_platform">Geocaching servisleri</string>
     <string name="wizard_not_now">Henüz değil</string>

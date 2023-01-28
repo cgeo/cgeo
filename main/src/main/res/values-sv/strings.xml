@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">inte skalad</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="datetime_nodateset_display">Inget datum angivet</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Ingen kontakt med aliaset/smeknamnet %s hittades. Lägg till den i dina kontakter först.</string>
+    <string name="contact_multiple_matches">Kontakta: flera lokaler</string>
     <!-- translation -->
     <string name="translate">Översätt</string>
     <string name="translate_to_sys_lang">Översätt till %s</string>
@@ -601,7 +604,6 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
-    <string name="about_system_collecting">Systeminformation samlas in, vänta…</string>
     <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
     <string name="about_system_info_send_button">Skicka via e-post…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -2125,10 +2127,6 @@
     <string name="init_confirm_debug">c:geo körs i debugläge!</string>
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
     <!-- permission handling -->
-    <string name="close_app">Stäng appen</string>
-    <string name="ask_again">Fråga igen</string>
-    <string name="location_permission_request_explanation">c:geo behöver tillgång till GPS på enheten för att hitta din position och beräkna avstånd och riktning till geocacher. Det kan inte användas utan detta tillstånd.</string>
-    <string name="storage_permission_request_explanation">c:geo kommer att skriva data på din telefonlagring eller SD-kortet så snart du sparar geocacher för användning offline. Vidare kommer c:geo att använda din telefonlagring för import och export av filer och läsning av offlinekartor. Det kan inte användas utan detta tillstånd.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
@@ -2336,8 +2334,6 @@
     <string name="wizard_advanced_restore_info">Om du har en säkerhetskopia av en tidigare installation kan du återställa inställningar och/eller geocache-data.</string>
     <string name="status_not_ok">FEL</string>
     <string name="wizard_status_title">Konfigurationsstatus</string>
-    <string name="wizard_status_storage_permission">Behörighet för lagring</string>
-    <string name="wizard_status_location_permission">Behörighet för plats</string>
     <string name="wizard_status_basefolder">Bas-mapp</string>
     <string name="wizard_status_platform">Geocachingtjänster</string>
     <string name="wizard_not_now">Inte nu</string>

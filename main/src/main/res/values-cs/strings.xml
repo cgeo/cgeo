@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">nezmenšen</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
+    <string name="contact_multiple_matches">Kontakt: Více shod</string>
     <!-- translation -->
     <string name="translate">Přeložit</string>
     <string name="translate_to_sys_lang">Přeložit do %s</string>
@@ -307,6 +310,8 @@
     <string name="warn_gm_not_available">Mapy Google nejsou k dispozici.</string>
     <string name="switch_to_mf">Vaše služba Google Play je zastaralá. Chcete namísto toho přepnout na poskytovatele map Mapsforge?</string>
     <string name="switched_to_mf">Výchozí mapa byla přepnuta na poskytovatele map Mapsforge. Nyní restartujte mapu.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Základní</string>
     <!-- location service -->
     <string name="loc_last">Poslední známá</string>
     <string name="loc_net">Síť</string>
@@ -319,6 +324,8 @@
     <string name="loc_gps_disabled">GPS zakázáno</string>
     <string name="loc_copied_clipboard">Aktuální poloha byla zkopírována do schránky</string>
     <string name="menu_centerposition">Vycentrovat na mou polohu</string>
+    <string name="location_no_permission">Varování: není oprávnění k získání polohy</string>
+    <string name="location_only_coarse_permission">Upozornění: pouze přibližné povolení k poloze</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikaci</string>
     <string name="menu_helpers">Užitečné aplikace</string>
@@ -400,6 +407,8 @@
     <string name="caches_sort_storage">Datum uložení do zařízení</string>
     <string name="caches_sort_eventdate">Datum události</string>
     <string name="caches_select_mode">Režim výběru</string>
+    <string name="caches_select_next20">Vybrat dalších 20 kešek</string>
+    <string name="caches_select_next100">Vybrat dalších 100 kešek</string>
     <string name="caches_select_mode_exit">Opustit režim výběru</string>
     <string name="caches_select_invert">Invertovat výběr</string>
     <string name="caches_nearby">Nejbližší</string>
@@ -548,6 +557,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Začíná na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
+    <string name="cache_filter_datefilter_absolute">Absolutní</string>
+    <string name="cache_filter_datefilter_relative">Relativní k dnešku</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrat vše</string>
@@ -604,6 +615,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">úsvit</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>před více než rokem</item>
+        <item>před rokem</item>
+        <item>před 180 dny</item>
+        <item>před 90 dny</item>
+        <item>před 30 dny</item>
+        <item>před 2 týdny</item>
+        <item>před týdnem</item>
+        <item>před 3 dny</item>
+        <item>před méně než 3 dny</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1r</item>
+        <item>1r</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2t</item>
+        <item>1t</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Verze</string>
     <string name="about_changelog">Změny</string>
@@ -617,7 +650,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
     <string name="about_help">Nápověda</string>
-    <string name="about_system_collecting">Shromažďují se systémové informace, čekejte prosím…</string>
+    <string name="about_system_collecting">Shromažďování systémových informací, čekejte prosím…</string>
     <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
     <string name="about_system_info_send_button">Odeslat e-mailem…</string>
     <string name="about_system_info">c:geo systémové informace</string>
@@ -721,6 +754,7 @@
     <string name="settings_category_nearbysearch">Hledat v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hledání v okolí</string>
     <string name="init_nearbysearchlimit_description">Omezí vzdálenost, do které jsou zobrazeny kešky hledané v okolí (0=neomezeno)</string>
+    <string name="init_settings_description_unlimited">neomezený</string>
     <string name="settings_category_geocaching_additionals">Další služby a doplňky</string>
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
@@ -1246,6 +1280,9 @@
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
     <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
+    <string name="cache_personal_note_vars_out_of_sync">Proměnné v poznámkách nejsou synchronizovány (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Zkontrolujte proměnné, jejichž hodnota má být přepsána z poznámek</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>
     <string name="cache_description_rendering">Vykreslování popisu, čekejte prosím…</string>
@@ -1410,6 +1447,7 @@
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete nainstalovat aplikaci Chirp Wolf.</string>
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
+    <string name="cache_alc_related_start">Otevřete Adventure Lab a začněte hrát související dobrodružství</string>
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
@@ -2190,10 +2228,14 @@
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
     <!-- permission handling -->
-    <string name="close_app">Zavřít aplikaci</string>
-    <string name="ask_again">Zeptat se znova</string>
-    <string name="location_permission_request_explanation">c:geo potřebuje přístup k GPS (přesná poloha) na vašem zařízení, aby určilo vaší polohu a vypočítalo vzdálenost a směr ke keškám. Nelze ho používat bez tohoto oprávnění.</string>
-    <string name="storage_permission_request_explanation">c:geo zapíše data do úložiště vašeho telefonu nebo na SD kartu jakmile uložíte kešky pro použití offline. c:geo bude dále používat úložiště k importu a exportu souborů a čtení offline map. Nelze ho používat bez tohoto oprávnění.</string>
+    <string name="permission_ask_again">Zeptat se znova</string>
+    <string name="permission_goto_app_details">Otevřít informace o aplikaci</string>
+    <string name="permission_contacts_read_explanation_title">Oprávnění ke čtení kontaktů</string>
+    <string name="permission_contacts_read_explanation">c:geo může vyhledávat kontakty v adresáři pomocí jmen geocacherů. K tomu je nutné, abyste c:geo povolili čtení adresáře kontaktů. V opačném případě není použití této funkce možné.</string>
+    <string name="permission_location_explanation_title">Povolení k poloze</string>
+    <string name="permission_location_explanation">c:geo je optimalizován pro použití s daty GPS (přesná poloha) k určení vaší polohy a výpočtu vzdálenosti a směru ke keškám. Bez tohoto povolení nebudou funkce založené na poloze fungovat podle očekávání.</string>
+    <string name="permission_read_external_storage_explanation_title">Oprávnění ke čtení externího úložiště</string>
+    <string name="permission_read_external_storage_explanation">c:geo může jako pozadí aplikace použít tapetu vašeho systému. K tomu potřebuje c:geo oprávnění ke čtení multimediálních dat v externím úložišti.</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
@@ -2408,8 +2450,6 @@
     <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
     <string name="status_not_ok">CHYBA</string>
     <string name="wizard_status_title">Stav nastavení</string>
-    <string name="wizard_status_storage_permission">Povolení k úložišti</string>
-    <string name="wizard_status_location_permission">Povolení k poloze</string>
     <string name="wizard_status_basefolder">Základní složka</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
     <string name="wizard_not_now">Nyní ne</string>

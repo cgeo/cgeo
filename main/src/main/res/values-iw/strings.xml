@@ -130,6 +130,7 @@
     <string name="log_problem_damaged_label">המיכל פגום</string>
     <string name="log_problem_missing_label">ייתכן והמטמון נעלם</string>
     <string name="log_problem_other_label">אחר</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">תרגם ל%s</string>
     <string name="translate_to_english">תרגם לאנגלית</string>
