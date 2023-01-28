@@ -133,7 +133,7 @@
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
-    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
+    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto ryšį.</string>
     <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
     <string name="log_add">Pridėti</string>
     <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -433,7 +433,7 @@
     <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
-    <string name="caches_askdeletion">Prašyti ištrinti, jei tuščia</string>
+    <string name="caches_askdeletion">Prašyti ištrinti, jei tuščias</string>
     <string name="select_icon">Pasirinkite piktogramą</string>
     <string name="onetime_missing_unicode_info">Jūsų Android versija nepalaiko automatinio palaikomų piktogramų aptikimo - gali trūkti kai kurių simbolių</string>
     <plurals name="user_finds">
@@ -826,7 +826,7 @@
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
     <string name="init_global_wp_extraction_disable">Išjungti kelio taškų išskleidimą</string>
-    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų.</string>
+    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių pastabų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių pastabų.</string>
     <string name="init_prevent_cache_note_merge">Perrašyti asmeninės slėptuvės pastabą</string>
     <string name="init_summary_prevent_cache_note_merge">Jei šis nustatymas įjungtas, c:geo visam laikui ištrins vietoje saugomą pastabą ir pakeis ją asmenine pastaba serveryje. Joks suliejimas nebus atliktas.</string>
     <string name="init_customtabs_as_browser">Naudokite Chrome WebView</string>
@@ -1113,7 +1113,7 @@
     <string name="persistablefolder_offline_maps_shading">Žemėlapio šešėliavimo failai</string>
     <string name="persistablefolder_backup">Atsarginė kopija</string>
     <string name="persistablefolder_logfiles">Įrašai</string>
-    <string name="persistablefolder_fieldnotes">Lauko užrašai</string>
+    <string name="persistablefolder_fieldnotes">Lauko pastabos</string>
     <string name="persistablefolder_spoilerimages">Užuominos vaizdai</string>
     <string name="persistablefolder_routingbase">Maršrutizavimas</string>
     <string name="persistablefolder_routingtiles">Maršruto duomenys</string>
@@ -1653,7 +1653,7 @@
     <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
-    <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
+    <string name="search_kw_button">Paieška pagal raktinį žodį</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
@@ -1757,7 +1757,7 @@
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paliete ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo geoslėptuvėse. c:geo gali automatiškai suaktyvinti kasečių atsisiuntimą šioje programoje.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp geoslėptuvėms.</string>
     <string name="helper_alc_description">Adventure Lab Player programa jūsų telefonui ar planšetiniam kompiuteriui.</string>
     <string name="helper_gcwizard_description">GC vedlys turi daugybę įrankių, skirtų paprastam kriptografiniam, geodeziniam ir moksliniams skaičiavimams, taip pat šimtus įvairių simbolių rinkinių.</string>
@@ -1767,13 +1767,13 @@
     <string name="export_progress">Eksportuojama: %1$s</string>
     <string name="export_exportedto">eksportuota į</string>
     <string name="export_failed">Eksportuoti nepavyko</string>
-    <string name="export_fieldnotes">Lauko užrašai</string>
-    <string name="export_fieldnotes_info">Lauko užrašai bus eksportuojami į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
+    <string name="export_fieldnotes">Lauko pastabos</string>
+    <string name="export_fieldnotes_info">Lauko pastabos bus eksportuojamos į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_fieldnotes_upload">Įkelti į geocaching.com</string>
     <string name="export_fieldnotes_uploading">Įkeliama…</string>
     <string name="export_fieldnotes_upload_success">Įkėlimas į geocaching.com sėkmingas</string>
     <string name="export_fieldnotes_onlynew">Tik nuo paskutinio eksportavimo</string>
-    <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
+    <string name="export_fieldnotes_creating">Kuriamos Lauko pastabos…</string>
     <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_confirm_title">Eksportuojama %1$s</string>
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
@@ -2204,7 +2204,7 @@
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įveskite vertę nuo %1$s iki %2$s</string>
+    <string name="number_input_title">Įveskite vertę tarp %1$s ir %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2262,6 +2262,8 @@
     <string name="make_visible">padaryti matomą</string>
     <string name="hide">slėpti</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>

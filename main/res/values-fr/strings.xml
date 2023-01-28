@@ -196,6 +196,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
+    <string name="err_captcha">Le service nécessite de résoudre un Captcha. Veuillez vous connecter au site geocaching.com en utilisant votre navigateur web puis en résolvant le Captcha. Enfin essayez à nouveau de vous connecter avec c:geo.</string>
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
@@ -393,6 +394,7 @@
     <string name="caches_sort_storage">Date d\'enregistrement dans l\'appareil</string>
     <string name="caches_sort_eventdate">Date de l\'événement</string>
     <string name="caches_select_mode">Activer le mode sélection</string>
+    <string name="caches_select_next">Sélectionner les 20 caches suivantes</string>
     <string name="caches_select_mode_exit">Désactiver le mode sélection</string>
     <string name="caches_select_invert">Inverser la sélection</string>
     <string name="caches_nearby">Proches</string>
@@ -981,7 +983,10 @@
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
     <string name="init_mapshading_folder">Dossier des fichiers d\'ombrage de la carte</string>
     <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
+    <string name="init_mapShadingLinearity_title">Opacité de l\'ombrage du relief</string>
+    <string name="init_mapShadingLinearity_description">Les petites valeurs accentuent le contraste dans les pentes abruptes mais masquent les changements dans les plages, les grandes valeurs le rendent plus linéaire</string>
     <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
+    <string name="init_mapShadingScale_description">Opacité du calque d\'ombrage, de l\'invisible à des valeurs plus élevées intensifiant l\'ombrage mais pouvant produire des artefacts</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
@@ -1029,6 +1034,8 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
+    <string name="category_unifiedMap">Carte unifiée</string>
+    <string name="experimental">(expérimental)</string>
     <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
     <string name="init_summary_useUnifiedMap">Utiliser la nouvelle carte unifiée plutôt que les cartes Google Map / Mapsforge (OSM) (carte expérimentale loin d\'être complète, à utiliser seulement pour test)</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
@@ -1517,6 +1524,7 @@
     <string name="formula_function_tan">tangente</string>
     <string name="formula_function_abs">Valeur absolue</string>
     <string name="formula_function_round">Arrondi</string>
+    <string name="formula_function_trunc">Tronquer</string>
     <string name="formula_function_if">Si</string>
     <string name="formula_function_length">longueur de la chaine de caractère</string>
     <string name="formula_function_substring">sous-chaine</string>
@@ -2194,6 +2202,8 @@
     <string name="make_visible">afficher</string>
     <string name="hide">masquer</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
     <string name="unit_mi">miles</string>
