@@ -394,6 +394,7 @@
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
+    <string name="caches_select_next">Valitse seuraavat 20 kätköä</string>
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
@@ -1033,6 +1034,8 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="category_unifiedMap">Yhdistetty kartta</string>
+    <string name="experimental">(kokeellinen)</string>
     <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
     <string name="init_summary_useUnifiedMap">Käytä uutta yhtenäistä karttaa sisäänrakennettujen Google Map / Mapsforge (OSM) -karttojen sijaan (kokeellinen / kaukana täydellisestä / vain testaukseen)</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
