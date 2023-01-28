@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -35,7 +36,8 @@ public class MapObjectOptions {
         if (!(
                 options instanceof MarkerOptions ||
                         options instanceof CircleOptions ||
-                        options instanceof PolylineOptions
+                        options instanceof PolylineOptions ||
+                        options instanceof PolygonOptions
         )) {
             throw new IllegalArgumentException("Options not valid google maps object options, instance of " + options.getClass().getName());
         }
@@ -58,6 +60,8 @@ public class MapObjectOptions {
             return equals((CircleOptions) opts1, (CircleOptions) opts2);
         } else if (opts1 instanceof PolylineOptions) {
             return equals((PolylineOptions) opts1, (PolylineOptions) opts2);
+        } else if (opts1 instanceof PolygonOptions) {
+            return equals((PolygonOptions) opts1, (PolygonOptions) opts2);
         } else {
             return false;
         }
@@ -97,9 +101,20 @@ public class MapObjectOptions {
 
     protected static boolean equals(final PolylineOptions a, final PolylineOptions b) {
         return a.getZIndex() == b.getZIndex() &&
-                a.getColor() == b.getZIndex() &&
+                a.getColor() == b.getColor() &&
                 objEquals(a.getPoints(), b.getPoints()) &&
                 a.getWidth() == b.getWidth() &&
+                a.isClickable() == b.isClickable() &&
+                a.isVisible() == b.isVisible() &&
+                a.isGeodesic() == b.isGeodesic();
+    }
+
+    protected static boolean equals(final PolygonOptions a, final PolygonOptions b) {
+        return a.getZIndex() == b.getZIndex() &&
+                a.getStrokeColor() == b.getStrokeColor() &&
+                a.getFillColor() == b.getFillColor() &&
+                objEquals(a.getPoints(), b.getPoints()) &&
+                a.getStrokeWidth() == b.getStrokeWidth() &&
                 a.isClickable() == b.isClickable() &&
                 a.isVisible() == b.isVisible() &&
                 a.isGeodesic() == b.isGeodesic();
@@ -126,6 +141,8 @@ public class MapObjectOptions {
                 hashCode = hashCode((CircleOptions) options);
             } else if (options instanceof PolylineOptions) {
                 hashCode = hashCode((PolylineOptions) options);
+            } else if (options instanceof PolygonOptions) {
+                hashCode = hashCode((PolygonOptions) options);
             } else {
                 throw new IllegalStateException();
             }
@@ -139,6 +156,19 @@ public class MapObjectOptions {
                 .append(options.getColor())
                 .append(options.getPoints())
                 .append(options.getWidth())
+                .append(options.isClickable())
+                .append(options.isGeodesic())
+                .append(options.isVisible())
+                .toHashCode();
+    }
+
+    private int hashCode(final PolygonOptions options) {
+        return new HashCodeBuilder()
+                .append(options.getZIndex())
+                .append(options.getStrokeColor())
+                .append(options.getFillColor())
+                .append(options.getPoints())
+                .append(options.getStrokeWidth())
                 .append(options.isClickable())
                 .append(options.isGeodesic())
                 .append(options.isVisible())
@@ -184,6 +214,8 @@ public class MapObjectOptions {
             return googleMap.addCircle((CircleOptions) options);
         } else if (options instanceof PolylineOptions) {
             return googleMap.addPolyline((PolylineOptions) options);
+        } else if (options instanceof PolygonOptions) {
+            return googleMap.addPolygon((PolygonOptions) options);
         } else {
             throw new IllegalStateException("Invalid options type, check should be performed constructor, this should not happpen");
         }
