@@ -3,9 +3,9 @@
 ### Yleinen
 - Korjaus: Uusi TB asetetaan Vieraili-tilaan automaattisesti
 - Korjaus: gc.com perusasetukset eivät näkyneet
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Muutos: mapy.cz kartantarjoaja poistettu (johtuen lisenssinmuutoksesta)
+- Korjaa: Kätköjen hakukenttä tyhjentyi hakutuloksen valinnan jälkeen
+- Fix: Kaatuminen useita pisteitä sisältävien asteyhtälöiden yhteydessä
 
 ##
 
