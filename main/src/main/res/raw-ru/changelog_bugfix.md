@@ -1,25 +1,25 @@
 ##
 
 ### Общее
-- Fix: New TB set to visit mode automatically
-- Fix: gc.com basic member settings not displayed
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Исправлено: для новых трекабл(геокротов) автоматически ставится режим посещен
+- Исправлено: не отображались настройки для базового аккаунта gc.com
+- Изменение: карта mapy.cz удалена (из-за изменения лицензирования)
+- Исправлено: поле поиска тайника очищалось после поиска
+- Исправлено: Сбой формул градусов с несколькими точками
 
 ##
 
 ### Общее
 - Исправлено: используется обновленный URL для геокодирования mapquest
 - Исправлено: Предотвращен сбой при попытке прикрепить фото к отзыву тайника
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
+- Изменение: обновленное сообщение об ошибке для разрешения требования капчи при входе в geocaching.com
 
 ### Тайники
 - Исправлено: предотвращено удвоение изображений спойлеров в галерее при обновлении тайника
 
 ### Калькулятор переменных
 - Новое: функция TRUNC для усечения десятичных значений. Остается только целое число.
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
+- Новое: Разрешить использование квадратных скобок для вычислений. Для диапазонов переменных, пожалуйста, используйте, например, \[:1-5\] вместо этого.
 
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+### Карта
+- Исправлено: Показывать корректный маркер DT для D4.0 и D4.5

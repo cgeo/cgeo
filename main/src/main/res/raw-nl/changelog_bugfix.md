@@ -21,5 +21,5 @@
 - Nieuw: TRUNC functie om decimale waarden af te breken
 - Nieuw: Het gebruik van rechte haken toestaan voor berekeningen. Gebruik voor variabele bereiken bijvoorbeeld \[:1-5\].
 
-### Kaart
+### Toon op kaart
 - Oplossing: Toon juiste DT-marker voor D4.0 en D4.5

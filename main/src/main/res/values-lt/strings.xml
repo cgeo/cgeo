@@ -441,7 +441,7 @@
     <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramą</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
-    <string name="caches_askdeletion">Prašyti ištrinti, jei tuščia</string>
+    <string name="caches_askdeletion">Prašyti ištrinti, jei tuščias</string>
     <string name="select_icon">Pasirinkite piktogramą</string>
     <string name="onetime_missing_unicode_info">Jūsų Android versija nepalaiko automatinio palaikomų piktogramų aptikimo - gali trūkti kai kurių simbolių</string>
     <plurals name="user_finds">
