@@ -135,6 +135,15 @@ public class GCMap {
             }
             fillForBasicFilter(baseFilter, search);
         }
+
+        //special case (see #13891): if we search for owner AND archived caches are not excluded
+        // -> then remove status from filter (otherwise archived caches are not returned from gc.com on Owner search)
+        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), StatusGeocacheFilter.class);
+        final OwnerGeocacheFilter ownerFilter = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OwnerGeocacheFilter.class);
+        if (ownerFilter != null && ownerFilter.isFiltering() && statusFilter != null && !statusFilter.isExcludeArchived()) {
+            search.setStatusEnabled(null);
+        }
+
         return new Pair<>(search, null);
 
     }
