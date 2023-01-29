@@ -52,6 +52,8 @@ public final class TextUtils {
 
     private static final Pattern PATTERN_REMOVE_SPECIAL = Pattern.compile("[^a-z0-9]");
 
+    private static final Pattern PATTERN_CONTAINS_HTML = Pattern.compile(
+            "<(/\\s*)?[a-zA-Z]+\\s*([a-zA-Z]+\\s*=\\s*['\"][^'\"]*['\"]\\s*)*(/\\s*)?>|&#?[a-zA-Z0-9]{1,10};");
 
     /**
      * Internal cache for created Patterns (avoids parsing them unnecessarily often)
@@ -223,7 +225,7 @@ public final class TextUtils {
         if (StringUtils.isBlank(str)) {
             return false;
         }
-        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
+        return PATTERN_CONTAINS_HTML.matcher(str).find();
     }
 
     /**
