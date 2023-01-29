@@ -493,6 +493,7 @@
     <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>
     <string translatable="false" name="pref_mapAutoDownloadsLastCheck">mapAutoDownloadsLastCheck</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
+    <string translatable="false" name="pref_vtm_default">vtm_default</string>
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_google_map_theme">google_map_theme</string>

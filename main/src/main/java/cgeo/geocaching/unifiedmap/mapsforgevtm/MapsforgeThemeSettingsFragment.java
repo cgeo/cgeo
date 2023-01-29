@@ -62,6 +62,10 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
             themeStylePrefKey = Settings.RENDERTHEMESCALE_DEFAULTKEY;
         }
 
+        if (Settings.isDefaultMapRenderTheme()) {
+            this.renderthemeMenu.addPreference(VtmThemes.getPreference(activity));
+        }
+
         //scale preferences for theme
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.MAP),
                 R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);

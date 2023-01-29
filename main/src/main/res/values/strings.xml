@@ -2638,6 +2638,7 @@
     <string name="maptheme_scale_text_summary">Additionally scales text labels in map; 100% = no extra scaling</string>
     <string name="maptheme_scale_symbol_title">Symbol Scale factor</string>
     <string name="maptheme_scale_symbol_summary">Additionally scales symbol sizes in map; 100% = no extra scaling</string>
+    <string name="vtm_theme_variant">Theme Variant</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>
