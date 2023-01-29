@@ -18,6 +18,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
+import static cgeo.geocaching.maps.google.v2.MapObjectOptions.circle;
+import static cgeo.geocaching.maps.google.v2.MapObjectOptions.marker;
+import static cgeo.geocaching.maps.google.v2.MapObjectOptions.polyline;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
@@ -293,22 +296,22 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         final LatLng latLng = new LatLng(coordinates.getLatitude(), coordinates.getLongitude());
 
         // accuracy circle
-        positionObjs.addCircle(new CircleOptions()
+        positionObjs.add(circle(new CircleOptions()
                 .center(latLng)
                 .strokeColor(MapLineUtils.getAccuracyCircleColor())
                 .strokeWidth(3)
                 .fillColor(MapLineUtils.getAccuracyCircleFillColor())
                 .radius(coordinates.getAccuracy())
-                .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
+                .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE))
         );
 
-        positionObjs.addMarker(new MarkerOptions()
+        positionObjs.add(marker(new MarkerOptions()
                 .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null)))
                 .position(latLng)
                 .rotation(heading)
                 .anchor(0.5f, 0.5f)
                 .flat(true)
-                .zIndex(ZINDEX_POSITION)
+                .zIndex(ZINDEX_POSITION))
         );
 
         final Geopoint destCoords = mapView.getDestinationCoords();
@@ -316,7 +319,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             final Geopoint currentCoords = new Geopoint(coordinates);
             if (Settings.isMapDirection()) {
                 // draw direction line
-                positionObjs.addPolyline(getDirectionPolyline(currentCoords, destCoords));
+                positionObjs.add(polyline(getDirectionPolyline(currentCoords, destCoords)));
             } else if (null != postRealDistance) {
                 postRealDistance.postRealDistance(destCoords.distanceTo(currentCoords));
             }
@@ -357,11 +360,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                     }
                     if (points.size() > 1) {
                         // history line
-                        historyObjs.addPolyline(new PolylineOptions()
+                        historyObjs.add(polyline(new PolylineOptions()
                                 .addAll(points)
                                 .color(MapLineUtils.getTrailColor())
                                 .width(MapLineUtils.getHistoryLineWidth(false))
-                                .zIndex(ZINDEX_HISTORY)
+                                .zIndex(ZINDEX_HISTORY))
                         );
                     }
                 }
@@ -386,7 +389,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 .add(new LatLng(viewport.getLatitudeMax(), viewport.getLongitudeMin()))
                 .add(new LatLng(viewport.getLatitudeMin(), viewport.getLongitudeMin()));
 
-        positionObjs.addPolyline(options);
+        positionObjs.add(polyline(options));
         lastViewport = viewport;
     }
 
@@ -396,11 +399,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
         if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
             for (List<LatLng> segment : individualRoute.track) {
-                routeObjs.addPolyline(new PolylineOptions()
+                routeObjs.add(polyline(new PolylineOptions()
                         .addAll(segment)
                         .color(MapLineUtils.getRouteColor())
                         .width(MapLineUtils.getRouteLineWidth(false))
-                        .zIndex(ZINDEX_ROUTE)
+                        .zIndex(ZINDEX_ROUTE))
                 );
             }
         }
@@ -411,11 +414,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 // route hidden, no route or route too short?
                 if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
                     for (List<LatLng> segment : c.track) {
-                        trackObjs.addPolyline(new PolylineOptions()
+                        trackObjs.add(polyline(new PolylineOptions()
                                 .addAll(segment)
                                 .color(MapLineUtils.getTrackColor())
                                 .width(MapLineUtils.getTrackLineWidth(false))
-                                .zIndex(ZINDEX_TRACK)
+                                .zIndex(ZINDEX_TRACK))
                         );
                     }
                 }
@@ -426,11 +429,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private synchronized void drawLongTapMarker() {
         longTapObjs.removeAll();
         if (longTapLatLng != null) {
-            positionObjs.addMarker(new MarkerOptions()
+            positionObjs.add(marker(new MarkerOptions()
                     .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.map_pin, null)))
                     .position(longTapLatLng)
                     .anchor(0.5f, 1f)
-                    .zIndex(ZINDEX_POSITION)
+                    .zIndex(ZINDEX_POSITION))
             );
         }
     }

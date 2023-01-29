@@ -46,15 +46,15 @@ public class GoogleCachesList {
         }
         if (this.options == null) {
             this.options = options;
-            mapObjects.requestAdd(this.options);
+            mapObjects.add(this.options);
         } else {
             final Collection<MapObjectOptions> toRemove = diff(this.options, options);
             final Collection<MapObjectOptions> toAdd = toRemove.size() == this.options.size() ? options : diff(options, this.options);
 //            Log.i("From original " + this.options.size()  + " items will be " + toAdd.size() + " added and " + toRemove.size() + " removed to match new count " + options.size());
             this.options = options;
 
-            mapObjects.requestRemove(toRemove);
-            mapObjects.requestAdd(toAdd);
+            mapObjects.remove(toRemove);
+            mapObjects.add(toAdd);
         }
     }
 

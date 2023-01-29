@@ -72,9 +72,9 @@ public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectO
                     .radius(GoogleCachesList.CIRCLE_RADIUS)
                     .zIndex(GoogleCachesList.ZINDEX_CIRCLE);
 
-            return new MapObjectOptions[]{MapObjectOptions.from(marker), MapObjectOptions.from(circle)};
+            return new MapObjectOptions[]{MapObjectOptions.marker(marker), MapObjectOptions.circle(circle)};
         } else {
-            return new MapObjectOptions[]{MapObjectOptions.from(marker)};
+            return new MapObjectOptions[]{MapObjectOptions.marker(marker)};
         }
     }
 

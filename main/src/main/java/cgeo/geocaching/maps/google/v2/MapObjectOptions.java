@@ -3,14 +3,24 @@ package cgeo.geocaching.maps.google.v2;
 import java.util.Objects;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * simple wrapper of googlemaps *Options, implements equals() and hashCode()
+ * This class wraps instances of GoogleMaps diverse *Options classes for different drawable objects
+ * such as Markers, Circles, Polylines and Polygons.
+ *
+ * This class implements equals() and hashCode() for these Option classes.
+ *
+ * CAREFUL: instances of this class assume the *Option objects to remain immutable once they are wrapped!
+ * (e.g. it caches once calculated hashCode!)
  */
 public class MapObjectOptions {
 
@@ -24,12 +34,66 @@ public class MapObjectOptions {
      */
     int hashCode = 0;
 
-    public MapObjectOptions(final Object options) {
+    private MapObjectOptions(final Object options) {
         checkInstance(options);
         this.options = options;
     }
 
-    protected static void checkInstance(final Object options) {
+    public static MapObjectOptions marker(final MarkerOptions marker) {
+        return from(marker);
+    }
+
+    public static MapObjectOptions circle(final CircleOptions circle) {
+        return from(circle);
+    }
+
+    public static MapObjectOptions polyline(final PolylineOptions polyline) {
+        return from(polyline);
+    }
+
+    public static MapObjectOptions polygon(final PolygonOptions polygon) {
+        return from(polygon);
+    }
+
+    /** adds the drawable object wrapped by this instance to given google map and returns the google map object */
+    public Object addToGoogleMap(final GoogleMap googleMap) {
+        if (options instanceof MarkerOptions) {
+            return googleMap.addMarker((MarkerOptions) options);
+        } else if (options instanceof CircleOptions) {
+            return googleMap.addCircle((CircleOptions) options);
+        } else if (options instanceof PolylineOptions) {
+            return googleMap.addPolyline((PolylineOptions) options);
+        } else if (options instanceof PolygonOptions) {
+            return googleMap.addPolygon((PolygonOptions) options);
+        } else {
+            throw new IllegalStateException("Invalid options type, check should be performed constructor, this should not happpen");
+        }
+    }
+
+    /** removes the given google map object from its associated map */
+    public static void removeFromGoogleMap(final Object googleObject) {
+        if (googleObject == null) {
+            return; // failsafe
+        }
+        if (googleObject instanceof Marker) {
+            ((Marker) googleObject).remove();
+        } else if (googleObject instanceof Circle) {
+            ((Circle) googleObject).remove();
+        } else if (googleObject instanceof Polyline) {
+            ((Polyline) googleObject).remove();
+        } else if (googleObject instanceof Polygon) {
+            ((Polygon) googleObject).remove();
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
+    /** Returns the original Google Options object encapsulated by this wrapper */
+    public Object getOptions() {
+        return options;
+    }
+
+    private static void checkInstance(final Object options) {
         if (options == null) {
             throw new IllegalArgumentException("Options cannot be null");
         }
@@ -43,14 +107,16 @@ public class MapObjectOptions {
         }
     }
 
-    public static MapObjectOptions from(final Object opts) {
+
+
+    private static MapObjectOptions from(final Object opts) {
         if (opts instanceof MapObjectOptions) {
             return (MapObjectOptions) opts;
         }
         return new MapObjectOptions(opts);
     }
 
-    protected static boolean equalsOptions(final Object opts1, final Object opts2) {
+    private static boolean equalsOptions(final Object opts1, final Object opts2) {
         if (opts1.getClass() != opts2.getClass()) {
             return false;
         }
@@ -67,11 +133,11 @@ public class MapObjectOptions {
         }
     }
 
-    protected static boolean objEquals(final Object a, final Object b) {
+    private static boolean objEquals(final Object a, final Object b) {
         return Objects.equals(a, b);
     }
 
-    protected static boolean equals(final MarkerOptions a, final MarkerOptions b) {
+    private static boolean equals(final MarkerOptions a, final MarkerOptions b) {
         return a.getAlpha() == b.getAlpha() &&
                 a.getAnchorU() == b.getAnchorU() &&
                 a.getAnchorV() == b.getAnchorV() &&
@@ -88,7 +154,7 @@ public class MapObjectOptions {
                 a.isVisible() == b.isVisible();
     }
 
-    protected static boolean equals(final CircleOptions a, final CircleOptions b) {
+    private static boolean equals(final CircleOptions a, final CircleOptions b) {
         return a.getZIndex() == b.getZIndex() &&
                 objEquals(a.getCenter(), b.getCenter()) &&
                 a.getFillColor() == b.getFillColor() &&
@@ -99,7 +165,7 @@ public class MapObjectOptions {
                 a.isClickable() == b.isClickable();
     }
 
-    protected static boolean equals(final PolylineOptions a, final PolylineOptions b) {
+    private static boolean equals(final PolylineOptions a, final PolylineOptions b) {
         return a.getZIndex() == b.getZIndex() &&
                 a.getColor() == b.getColor() &&
                 objEquals(a.getPoints(), b.getPoints()) &&
@@ -109,7 +175,7 @@ public class MapObjectOptions {
                 a.isGeodesic() == b.isGeodesic();
     }
 
-    protected static boolean equals(final PolygonOptions a, final PolygonOptions b) {
+    private static boolean equals(final PolygonOptions a, final PolygonOptions b) {
         return a.getZIndex() == b.getZIndex() &&
                 a.getStrokeColor() == b.getStrokeColor() &&
                 a.getFillColor() == b.getFillColor() &&
@@ -207,21 +273,4 @@ public class MapObjectOptions {
                 .toHashCode();
     }
 
-    public Object addToGoogleMap(final GoogleMap googleMap) {
-        if (options instanceof MarkerOptions) {
-            return googleMap.addMarker((MarkerOptions) options);
-        } else if (options instanceof CircleOptions) {
-            return googleMap.addCircle((CircleOptions) options);
-        } else if (options instanceof PolylineOptions) {
-            return googleMap.addPolyline((PolylineOptions) options);
-        } else if (options instanceof PolygonOptions) {
-            return googleMap.addPolygon((PolygonOptions) options);
-        } else {
-            throw new IllegalStateException("Invalid options type, check should be performed constructor, this should not happpen");
-        }
-    }
-
-    public Object getOptions() {
-        return options;
-    }
 }
