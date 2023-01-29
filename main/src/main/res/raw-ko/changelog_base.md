@@ -1,17 +1,17 @@
 ### 지도
 - 신규: OSM 지도 소스 osm.paws.cz
 - 신규: flopp.net의 GPX 파일을 트랙으로 읽기 활성화
-- Fix: Missing routing symbol after 'append to route'
-- Fix: Missing route calculation for prepended points
-- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- 수정: '경로에 추가' 후 라우팅 기호 누락
+- 수정: 추가 지점에 대한 누락된 경로 계산
+- 신규: 'Voluntary MF5' OpenAndroMaps 테마 지원 추가
 
 ### 캐시 상세정보
 - 신규: 새로운 고급 이미지 갤러리
 - 수정: 지점 업데이트 또는 삭제 후 지점 목록에서 위치 복원
 - 수정: 새 지점을 만들 때 맨 아래로 이동
 - 신규: 지점 사용자 메모에 입력된 변수 인식
-- New: Display lab adventure button in mystery cache details if link to lab adventure detected
-- Fix: Removal of waypoint description not synced for server-side waypoints
+- 신규: 어드벤처 랩 링크가 감지되면 미스터리 캐시 세부 정보에 어드벤처 랩 버튼 표시
+- 수정: 서버 측 지점에 대해 동기화되지 않은 지점 설명 제거
 
 ### 일반
 - API 레벨 변경(compileSDK 32)
@@ -21,5 +21,5 @@
 - 수정(야간 버전): GPX 가져오기 시 충돌
 - 신규: xmlns 네임스페이스 태그를 제공하지 않는 GPX 트랙 파일 가져오기 허용
 - 신규: Android 13용 흑백 런처 아이콘 추가
-- New: Display geocaching.com member status on home screen
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- 신규: 홈 화면에 geocaching.com 회원 상태 표시
+- 변경: GPX-가져오기: '알 수 없는' 커넥터에 대한 지오코드로 이름 사용
