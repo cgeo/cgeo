@@ -176,7 +176,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private void applyDefaultTheme(final Map map, final AbstractTileProvider tileProvider) {
         if (tileProvider.supportsThemes()) {
-            mTheme = map.setTheme(VtmThemes.OSMARENDER);
+            mTheme = map.setTheme(VtmThemes.getDefaultVariant());
         }
         applyScales(Settings.RENDERTHEMESCALE_DEFAULTKEY);
     }

@@ -1621,6 +1621,15 @@ public class Settings {
         return getString(R.string.pref_renderthemefile, "");
     }
 
+    public static boolean isDefaultMapRenderTheme() {
+        return StringUtils.isBlank(getSelectedMapRenderTheme());
+    }
+
+    /** to be called by {@link cgeo.geocaching.unifiedmap.mapsforgevtm.VtmThemes} solely! */
+    public static String getVtmDefaultVariantName() {
+        return getString(R.string.pref_vtm_default, "");
+    }
+
     /**
      * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
      */

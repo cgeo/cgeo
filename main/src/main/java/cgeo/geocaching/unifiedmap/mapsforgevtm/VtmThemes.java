@@ -22,8 +22,16 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
+
+import android.content.Context;
+
+import androidx.preference.ListPreference;
+
 import java.io.InputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.backend.AssetAdapter;
 import org.oscim.theme.IRenderTheme.ThemeException;
 import org.oscim.theme.ThemeFile;
@@ -87,5 +95,39 @@ public enum VtmThemes implements ThemeFile {
     @Override
     public void setResourceProvider(final XmlThemeResourceProvider resourceProvider) {
         // intentionally left empty
+    }
+
+    /** returns ListPreference to select one of the built-in themes from */
+    public static ListPreference getPreference(final Context context) {
+        final ListPreference themeVariants = new ListPreference(context);
+        themeVariants.setTitle(R.string.vtm_theme_variant);
+        themeVariants.setSummary(getDefaultVariant().name());
+        themeVariants.setKey(context.getString(R.string.pref_vtm_default));
+        final CharSequence[] variants = new CharSequence[VtmThemes.values().length];
+        int i = 0;
+        for (VtmThemes vtmTheme : VtmThemes.values()) {
+            variants[i] = vtmTheme.name();
+            i++;
+        }
+        themeVariants.setEntries(variants);
+        themeVariants.setEntryValues(variants);
+        themeVariants.setOnPreferenceChangeListener((preference, newValue) -> {
+            themeVariants.setSummary(newValue.toString());
+            return true;
+        });
+        themeVariants.setDefaultValue(VtmThemes.OSMARENDER.name());
+        themeVariants.setIconSpaceReserved(false);
+        return themeVariants;
+    }
+
+    /** returns currently selected theme or default theme, if none configured */
+    public static VtmThemes getDefaultVariant() {
+        final String vtmDefaultVariantName = Settings.getVtmDefaultVariantName();
+        for (VtmThemes vtmTheme : VtmThemes.values()) {
+            if (StringUtils.equals(vtmTheme.name(), vtmDefaultVariantName)) {
+                return vtmTheme;
+            }
+        }
+        return OSMARENDER; // for compatibility reasons return this instead of DEFAULT
     }
 }
