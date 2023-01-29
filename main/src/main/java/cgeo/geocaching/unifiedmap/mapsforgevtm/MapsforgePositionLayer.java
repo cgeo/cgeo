@@ -77,22 +77,24 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         repaintPosition();
 
         // history (group)
-        MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_HISTORY);
+        // group already created in MapsforgeVtmView.init, layers will be added later
+        // MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_HISTORY);
 
         // direction line & navigation
         navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
         MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_DIRECTION_LINE, navigationLayer);
 
         // tracks & routes (group)
-        MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
+        // group already created in MapsforgeVtmView.init, layers will be added later
+        // MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
     protected void destroyLayer(final Map map) {
         map.layers().remove(accuracyCircleLayer);
         map.layers().remove(arrowLayer);
-        map.layers().remove(LayerHelper.ZINDEX_HISTORY);
+        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_HISTORY);
         map.layers().remove(navigationLayer);
-        map.layers().remove(LayerHelper.ZINDEX_TRACK_ROUTE);
+        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
