@@ -32,7 +32,7 @@ abstract class AbstractRouteLayer extends Layer {
 
     private static class CachedRoute {
         private boolean isHidden = false;
-        private ArrayList<ArrayList<Geopoint>> track = null;
+        private List<List<Geopoint>> track = null;
         private Path path = null;
         private Point topLeftPoint = null;
     }
@@ -62,11 +62,11 @@ abstract class AbstractRouteLayer extends Layer {
         }
     }
 
-    private static ArrayList<ArrayList<Geopoint>> getAllPoints(final Route route) {
+    private static List<List<Geopoint>> getAllPoints(final Route route) {
         final List<GeoObject> gos = route.getGeoData();
-        final ArrayList<ArrayList<Geopoint>> result = new ArrayList<>();
+        final List<List<Geopoint>> result = new ArrayList<>();
         for (GeoObject go : gos) {
-            result.add(new ArrayList<>(go.getPoints()));
+            result.add(new ArrayList<>(go.points));
         }
         return result;
     }
@@ -117,13 +117,13 @@ abstract class AbstractRouteLayer extends Layer {
         c.topLeftPoint = topLeftPoint;
         c.path = null;
 
-        final Iterator<ArrayList<Geopoint>> segmentIterator = c.track.iterator();
+        final Iterator<List<Geopoint>> segmentIterator = c.track.iterator();
         if (!segmentIterator.hasNext()) {
             return;
         }
 
         c.path = AndroidGraphicFactory.INSTANCE.createPath();
-        ArrayList<Geopoint> segment = segmentIterator.next();
+        List<Geopoint> segment = segmentIterator.next();
         while (segment != null) {
             final Iterator<Geopoint> geopointIterator = segment.iterator();
             Geopoint geopoint = geopointIterator.next();

@@ -1,100 +1,128 @@
 package cgeo.geocaching.location;
 
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-/** An abstract GeoObject */
+/** Represents a drawable GeoObject such as a point, polyline or polygon */
 public class GeoObject implements Parcelable {
 
     public enum GeoType { POINT, POLYLINE, POLYGON }
 
-    @ColorInt private static final int STROKE_COLOR_DEFAULT = Color.BLACK;
-    @ColorInt private static final int FILL_COLOR_DEFAULT = Color.TRANSPARENT;
+    //immutable
+    @NonNull public final GeoType type;
+    @NonNull public final List<Geopoint> points;
+    @Nullable public final GeoObjectStyle style;
 
-    private final GeoType type;
-    private final List<Geopoint> points = new ArrayList<>();
-    private final List<Geopoint> pointsReadOnly = Collections.unmodifiableList(points);
-
+    //lazy-calculated
     private Viewport viewport;
 
-    @ColorInt private final int strokeColor;
-    private final float strokeWidth;
-    @ColorInt private final int fillColor;
-
-    private GeoObject(final GeoType type, final Collection<Geopoint> points, final Integer strokeColor, final Float strokeWidth, final Integer fillColor) {
+    private GeoObject(@Nullable final GeoType type, @NonNull final List<Geopoint> points, @Nullable final GeoObjectStyle style) {
         this.type = type == null ? GeoType.POLYLINE : type;
-        if (points != null) {
-            this.points.addAll(points);
-        }
-        this.strokeColor = strokeColor == null ? STROKE_COLOR_DEFAULT : strokeColor;
-        this.strokeWidth = strokeWidth == null ? 2f : strokeWidth;
-        this.fillColor = fillColor == null ? FILL_COLOR_DEFAULT : fillColor;
+        this.points = Collections.unmodifiableList(points);
+        this.style = style;
     }
 
-    public GeoType getType() {
-        return type;
-    }
-
-    public List<Geopoint> getPoints() {
-        return pointsReadOnly;
-    }
-
-    @ColorInt
-    public int getStrokeColor() {
-        return strokeColor;
-    }
-
-    public float getStrokeWidth() {
-        return strokeWidth;
-    }
-
-    @ColorInt
-    public int getFillColor() {
-        return fillColor;
-    }
-
+    @Nullable
     public Viewport getViewport() {
         if (viewport == null) {
-            viewport = Viewport.containing(getPoints());
+            viewport = Viewport.containing(this.points);
         }
         return viewport;
     }
 
+    @Nullable
     public Geopoint getCenter() {
-        if (viewport == null) {
-            viewport = Viewport.containing(getPoints());
+        final Viewport vp = getViewport();
+        return vp == null ? null : vp.getCenter();
+    }
+
+    public Builder buildUpon() {
+        return new Builder().setType(type).addPoints(points).setStyle(style);
+    }
+
+    public static GeoObject createPoint(final Geopoint p, final GeoObjectStyle style) {
+        return new Builder().setType(GeoType.POINT).addPoints(p).setStyle(style).build();
+    }
+
+    public static GeoObject createPolyline(final Collection<Geopoint> p, final GeoObjectStyle style) {
+        return new Builder().setType(GeoType.POLYLINE).addPoints(p).setStyle(style).build();
+    }
+
+    public static GeoObject createPolygon(final Collection<Geopoint> p, final GeoObjectStyle style) {
+        return new Builder().setType(GeoType.POLYGON).addPoints(p).setStyle(style).build();
+    }
+
+    //equals/HashCode
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof GeoObject)) {
+            return false;
         }
-        return viewport == null ? null : viewport.getCenter();
+        final GeoObject other = (GeoObject) o;
+        return
+            Objects.equals(type, other.type) &&
+            Objects.equals(points, other.points) &&
+            Objects.equals(style, other.style);
     }
 
-    public static GeoObject createPoint(final Geopoint p, final Integer strokeColor, final Float strokeWidth) {
-        return new GeoObject(GeoType.POINT, Collections.singleton(p), strokeColor, strokeWidth, null);
+    @Override
+    public int hashCode() {
+        return type.ordinal() * 13 + (points.isEmpty() || points.get(0) == null ? 7 : points.get(0).hashCode());
     }
 
-    public static GeoObject createPolyline(final Collection<Geopoint> p, final Integer strokeColor, final Float strokeWidth) {
-        return new GeoObject(GeoType.POLYLINE, p, strokeColor, strokeWidth, null);
+    //implements Builder
+
+    public static class Builder {
+        private GeoType type;
+        private final List<Geopoint> points = new ArrayList<>();
+        private GeoObjectStyle style;
+
+        public Builder setType(final GeoType type) {
+            this.type = type;
+            return this;
+        }
+
+        public Builder addPoints(final Collection<Geopoint> gps) {
+            points.addAll(gps);
+            return this;
+        }
+
+        public Builder addPoints(final Geopoint ... gps) {
+            points.addAll(Arrays.asList(gps));
+            return this;
+        }
+
+        public Builder setStyle(final GeoObjectStyle style) {
+            this.style = style;
+            return this;
+        }
+
+        public GeoObject build() {
+            return new GeoObject(type, points, style);
+        }
+
     }
 
-    public static GeoObject createPolygon(final Collection<Geopoint> p, final Integer strokeColor, final Float strokeWidth, final Integer fillColor) {
-        return new GeoObject(GeoType.POLYGON, p, strokeColor, strokeWidth, fillColor);
-    }
 
     // implements Parcelable
 
     protected GeoObject(final Parcel in) {
         type = GeoType.values()[in.readInt()];
-        in.readList(points, Geopoint.class.getClassLoader());
-        strokeColor = in.readInt();
-        strokeWidth = in.readFloat();
-        fillColor = in.readInt();
+        final List<Geopoint> pointsReadWrite = new ArrayList<>();
+        in.readList(pointsReadWrite, Geopoint.class.getClassLoader());
+        points = Collections.unmodifiableList(pointsReadWrite);
+        style = in.readParcelable(GeoObjectStyle.class.getClassLoader());
     }
 
     public static final Creator<GeoObject> CREATOR = new Creator<GeoObject>() {
@@ -118,9 +146,7 @@ public class GeoObject implements Parcelable {
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(type.ordinal());
         dest.writeList(points);
-        dest.writeInt(strokeColor);
-        dest.writeFloat(strokeWidth);
-        dest.writeInt(fillColor);
+        dest.writeParcelable(style, flags);
     }
 
 

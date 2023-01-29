@@ -2,7 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointConverter;
 
 import android.graphics.Color;
 
@@ -11,7 +13,6 @@ import androidx.annotation.ColorInt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.cocoahero.android.geojson.Feature;
@@ -35,6 +36,10 @@ import org.json.JSONObject;
 public class GeoJsonUtils {
 
     private static final boolean UNIT_TEST_MODE = CgeoApplication.getInstance() == null;
+
+    private static final GeopointConverter<Position> GP_CONVERTER = new GeopointConverter<>(
+            gp -> new Position(gp.getLatitude(), gp.getLongitude()),
+            p -> new Geopoint(p.getLatitude(), p.getLongitude()));
 
     //for storage of intermediate values
     private static class GeoJsonProperties {
@@ -96,17 +101,17 @@ public class GeoJsonUtils {
     }
 
     private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPoint(posToGeopoint(point.getPosition()), props.strokeColor, props.strokeWidth));
+        list.add(GeoObject.createPoint(GP_CONVERTER.from(point.getPosition()), toGeoStyle(props)));
     }
 
     private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoObject> list) {
         for (Position p : multiPoint.getPositions()) {
-            list.add(GeoObject.createPoint(posToGeopoint(p), props.strokeColor, props.strokeWidth));
+            list.add(GeoObject.createPoint(GP_CONVERTER.from(p), toGeoStyle(props)));
         }
     }
 
     private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPolyline(CollectionStream.of(lineString.getPositions()).map(GeoJsonUtils::posToGeopoint).toList(), props.strokeColor, props.strokeWidth));
+        list.add(GeoObject.createPolyline(GP_CONVERTER.fromList(lineString.getPositions()), toGeoStyle(props)));
     }
 
     private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoObject> list) {
@@ -118,7 +123,7 @@ public class GeoJsonUtils {
     private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoObject> list) {
         //as of now, polygon rings are parsed as separate polygons
         for (Ring r : polygon.getRings()) {
-            list.add(GeoObject.createPolygon(posToGeopoints(r.getPositions()), props.strokeColor, props.strokeWidth, props.fillColor));
+            list.add(GeoObject.createPolygon(GP_CONVERTER.fromList(r.getPositions()), toGeoStyle(props)));
         }
     }
 
@@ -134,12 +139,8 @@ public class GeoJsonUtils {
         }
     }
 
-    private static Geopoint posToGeopoint(final Position pos) {
-        return new Geopoint(pos.getLatitude(), pos.getLongitude());
-    }
-
-    private static List<Geopoint> posToGeopoints(final Collection<Position> pos) {
-        return CollectionStream.of(pos).map(GeoJsonUtils::posToGeopoint).toList();
+    private static GeoObjectStyle toGeoStyle(final GeoJsonProperties props) {
+        return new GeoObjectStyle.Builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
     }
 
     private static GeoJsonProperties parseProperties(final JSONObject json) {

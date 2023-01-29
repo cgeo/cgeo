@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
@@ -27,7 +28,6 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +55,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
      */
     private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
+
+    private static final GeopointConverter<LatLng> GP_CONVERTER = new GeopointConverter<>(
+            gc -> new LatLng(gc.getLatitude(), gc.getLongitude()),
+            ll -> new Geopoint(ll.latitude, ll.longitude)
+    );
 
     private Location coordinates;
     private float heading;
@@ -86,7 +91,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private static class CachedRoute {
         private boolean isHidden = false;
-        private ArrayList<ArrayList<LatLng>> track = null;
+        private List<List<LatLng>> track = null;
     }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -218,18 +223,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         repaintRequired();
     }
 
-    private static ArrayList<ArrayList<LatLng>> toLatLng(final IGeoDataProvider gg) {
-        final ArrayList<ArrayList<LatLng>> list = new ArrayList<>();
+    private static ArrayList<List<LatLng>> toLatLng(final IGeoDataProvider gg) {
+        final ArrayList<List<LatLng>> list = new ArrayList<>();
         for (GeoObject go : gg.getGeoData()) {
-            list.add(toLatLng(go.getPoints()));
-        }
-        return list;
-    }
-
-    private static ArrayList<LatLng> toLatLng(final Collection<Geopoint> gcs) {
-        final ArrayList<LatLng> list = new ArrayList<>();
-        for (Geopoint gc : gcs) {
-            list.add(new LatLng(gc.getLatitude(), gc.getLongitude()));
+            list.add(GP_CONVERTER.toList(go.points));
         }
         return list;
     }
@@ -398,7 +395,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         routeObjs.removeAll();
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
         if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
-            for (ArrayList<LatLng> segment : individualRoute.track) {
+            for (List<LatLng> segment : individualRoute.track) {
                 routeObjs.addPolyline(new PolylineOptions()
                         .addAll(segment)
                         .color(MapLineUtils.getRouteColor())
@@ -413,7 +410,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
                 if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
-                    for (ArrayList<LatLng> segment : c.track) {
+                    for (List<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)
                                 .color(MapLineUtils.getTrackColor())

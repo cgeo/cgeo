@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.CollectionStream;
 
@@ -35,25 +36,25 @@ public class GeoObjectLayer extends GroupLayer {
         final GroupLayer gl = new GroupLayer();
         gl.setDisplayModel(displayModel);
         for (GeoObject go : objects) {
-            final Paint strokePaint = createPaint(go.getStrokeColor());
-            strokePaint.setStrokeWidth(go.getStrokeWidth());
+            final Paint strokePaint = createPaint(GeoObjectStyle.getStrokeColor(go.style));
+            strokePaint.setStrokeWidth(GeoObjectStyle.getStrokeWidth(go.style));
             strokePaint.setStyle(Style.STROKE);
-            final Paint fillPaint = createPaint(go.getFillColor());
+            final Paint fillPaint = createPaint(GeoObjectStyle.getFillColor(go.style));
             fillPaint.setStyle(Style.FILL);
             final Layer goLayer;
-            switch (go.getType()) {
+            switch (go.type) {
                 case POINT:
-                    goLayer = new FixedPixelCircle(latLong(go.getPoints().get(0)), 5f, strokePaint, strokePaint);
+                    goLayer = new FixedPixelCircle(latLong(go.points.get(0)), 5f, strokePaint, strokePaint);
                     break;
                 case POLYLINE:
                     final Polyline pl = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
-                    pl.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
+                    pl.addPoints(CollectionStream.of(go.points).map(GeoObjectLayer::latLong).toList());
                     goLayer = pl;
                     break;
                 case POLYGON:
                 default:
                     final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
-                    po.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
+                    po.addPoints(CollectionStream.of(go.points).map(GeoObjectLayer::latLong).toList());
                     goLayer = po;
                     break;
             }
