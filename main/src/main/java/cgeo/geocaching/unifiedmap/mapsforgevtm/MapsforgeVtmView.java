@@ -74,6 +74,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         themeHelper = new MapsforgeThemeHelper(activity);
+
+        // add all layer groups once only
+        addGroup(LayerHelper.ZINDEX_HISTORY);
+        addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
+
         onMapReadyTasks.run();
     }
 
