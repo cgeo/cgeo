@@ -6,6 +6,7 @@ import java.util.Collection;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
@@ -41,6 +42,10 @@ public class GoogleMapObjects {
     }
 
     public void addPolyline(final PolylineOptions opts) {
+        addOptions(opts);
+    }
+
+    public void addPolygon(final PolygonOptions opts) {
         addOptions(opts);
     }
 
