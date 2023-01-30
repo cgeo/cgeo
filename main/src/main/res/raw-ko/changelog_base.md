@@ -23,3 +23,5 @@
 - 신규: Android 13용 흑백 런처 아이콘 추가
 - 신규: 홈 화면에 geocaching.com 회원 상태 표시
 - 변경: GPX-가져오기: '알 수 없는' 커넥터에 대한 지오코드로 이름 사용
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
