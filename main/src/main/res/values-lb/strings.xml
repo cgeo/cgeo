@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fixes -->
+    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <!-- basics -->
+    <string name="cache">Cache</string>
+    <string name="detail">Detailer</string>
+    <string name="search">Sichen</string>
+    <string name="helpers">Nëtzlech Apps</string>
+    <string name="about">Iwwert den c:geo</string>
+    <string name="latitude">Breitengrad</string>
+    <string name="longitude">Längengrad</string>
+    <!-- actionbar -->
+    <string name="settings_titlebar">Astellungen vum c:geo</string>
+    <!-- caches -->
+    <string name="all_types">All Zorten Cachen</string>
+    <string name="traditional">Traditionell Cachen</string>
+    <string name="multi">Multi-cache</string>
+    <string name="mystery">Mystery Cache</string>
+    <string name="letterbox">Bréifboîte Hybrid</string>
+    <string name="event">Event Cache</string>
+    <string name="mega">Mega-Event Cache</string>
+    <string name="giga">Giga-Event Cache</string>
+    <string name="earth">Äerd-Cache</string>
+    <string name="cito">Cache in Dreck out Event</string>
+    <string name="webcam">Webcam Cache</string>
+    <string name="virtual">Virtuellen Cache</string>
+    <string name="wherigo">Wherigo Cache</string>
+    <string name="communceleb">Gemeinschafts-Feier Event</string>
+    <string name="ape">Projet APE Cache</string>
+    <string name="gchq">Geocaching HQ</string>
+    <string name="gchqceleb">Geocaching HQ Feier</string>
+    <string name="gps">GPS Aventuren Presentatioun</string>
+    <string name="block">Geocaching HQ Block Party</string>
+    <string name="locationless">Ouni Veranstaltungs-Plaz (Hannerzeg) Cache</string>
+    <string name="userdefined">Benotzerdefinéierten Cache</string>
+    <string name="unknown">Onbekannten Typ</string>
+    <!-- cache sizes -->
+    <string name="cache_size_micro">Micro</string>
+    <string name="cache_size_small">Kleng</string>
+    <string name="cache_size_regular">Normal</string>
+    <string name="cache_size_large">Grouss</string>
+    <string name="cache_size_other">Aneren</string>
+    <string name="cache_size_virtual">Virtuell</string>
+    <string name="cache_size_notchosen">Net ausgewielt</string>
+    <string name="cache_size_unknown">Onbekannt</string>
+    <string name="cache_size_nano">Nano</string>
+    <string name="cache_size_very_large">Ganz grouss</string>
+    <!-- waypoints -->
+    <string name="wp_final">Endgülteg Positioun</string>
+    <string name="wp_stage">Etapp vun engem Multicache</string>
+    <string name="wp_puzzle">Fro fir ze beäntweren</string>
+    <string name="wp_pkg">Parkplaz</string>
+    <string name="wp_trailhead">Ufank vum Trail</string>
+    <string name="wp_waypoint">Referenzpunkt</string>
+    <string name="wp_original">Original Koordinaten</string>
+    <!-- waypoints short names for new waypoints -->
+    <!-- logs -->
+    <string name="log_found">Fonnt</string>
+    <string name="log_dnf">Net fonnt</string>
+    <string name="log_note">Notiz schreiwen</string>
+    <string name="log_published">Publizéiert</string>
+    <string name="log_enabled">Aktivéiert</string>
+    <string name="log_disabled">Desaktivéiert</string>
+    <string name="log_attend">Wäert deelhuelen</string>
+    <string name="log_attended">Deelgeholl</string>
+    <string name="log_retrieved">Erëmfonnt</string>
+    <string name="log_placed">Placéiert</string>
+    <string name="log_grabbed">Iergendwou geholl</string>
+    <string name="log_movecollection">An d\'Sammlung réckelen</string>
+    <string name="log_moveinventory">An den Inventar réckelen</string>
+    <string name="log_maintained">Entretien duerchfgefouert</string>
+    <string name="log_maintenance_needed">Entretien néideg</string>
+    <string name="log_update">Aktualiséiert Koordinaten</string>
+    <string name="log_archived">Archivéiert</string>
+    <string name="log_unarchived">Zréck aus dem Archiv</string>
+    <string name="log_needs_archived">Muss archivéiert ginn</string>
+    <string name="log_discovered">Entdeckt</string>
+    <string name="log_reviewer">Notiz revidéieren</string>
+    <string name="log_submit_for_review">Fir eng Iwwerpréiwung ofschécken</string>
+    <string name="log_retractlisting">Publikatioun zréckhuelen</string>
+    <string name="log_marked_missing">Als vermësst markéieren</string>
+    <string name="log_tb_nothing">Näischt maachen</string>
+    <string name="log_tb_visit">Besicht</string>
+    <string name="log_tb_drop">Hannerlooss</string>
+    <string name="log_tb_sortby">Trackable sortéieren</string>
+    <string name="log_tb_changeall">Alles änneren</string>
+    <string name="log_tb_grabbed">Iergendwou geholl</string>
+    <string name="log_tb_note">Notiz</string>
+    <string name="log_tb_discovered">Entdeckt</string>
+    <string name="log_tb_archived">Archivéiert</string>
+    <string name="log_save">Offline späicheren</string>
+    <string name="log_saving">Log gëtt geschéckt…</string>
+    <string name="log_saving_and_uploading">Log gëtt publizéiert an d\'Biller eropgelueden…</string>
+    <string name="log_posting_log">Log gëtt publizéiert…</string>
+    <string name="log_posting_twitter">Tweet gëtt publizéiert…</string>
+    <string name="log_posting_vote">Cache Bewäertung gëtt publizéiert…</string>
+    <string name="log_posting_image">Biller gi publizéiert…</string>
+    <string name="log_posting_generic_trackable">%1$s %2$d/%3$d gëtt publizéiert</string>
+    <string name="log_clear">Läschen</string>
+    <string name="log_post_not_possible">Erofluden vun den Daten ass am gaang…\n Wgl., versicht et spéider nach eng Kéier oder iwwerpréift d\'Internet Verbindung.</string>
+    <string name="log_date_future_not_allowed">Zukünfteg Log Datume sinn net erlaabt.</string>
+    <string name="log_add">Dobäifügen</string>
+    <string name="log_repeat">Leschten Log widderhuelen</string>
+    <string name="log_no_rating">Keng Bewäertung</string>
+    <string name="log_stars_1_description">Schlecht</string>
+    <string name="log_stars_15_description">Zimmlech schlecht</string>
+    <string name="log_stars_2_description">Ënnerduerchschnëttlech</string>
+    <string name="log_stars_25_description">Net sou schlecht</string>
+    <string name="log_stars_3_description">duerchschnëttlech</string>
+    <string name="log_stars_35_description">Guer net schlecht</string>
+    <string name="log_stars_4_description">Besser als den Duerchschnëtt</string>
+    <string name="log_stars_45_description">Ganz gutt</string>
+    <string name="log_stars_5_description">Genial</string>
+    <string name="log_webcam">Webcam Foto geholl</string>
+    <string name="log_new_log">Log</string>
+    <string name="log_new_log_text">Text loggen</string>
+    <string name="log_announcement">Annonce</string>
+    <string name="log_today">Haut</string>
+    <string name="log_yesterday">Gëschter</string>
+    <string name="log_smilies">Smilieen</string>
+    <string name="log_image">Bild</string>
+    <string name="log_images">Biller</string>
+    <string name="log_image_attach">Bild unhänken</string>
+    <string name="log_image_stored">Bestoend</string>
+    <string name="log_image_camera">Nei</string>
+    <string name="log_image_delete">Läschen</string>
+    <string name="log_image_caption">Ënnertitel</string>
+    <string name="log_image_description">Beschreiwung</string>
+    <string name="log_image_scale">Scaléieren</string>
+    <string name="log_password_title">Log Passwuert:</string>
+    <string name="log_report_problem">Problem mellen:</string>
+    <string name="log_hint_log_password">Äert Log Passwuert aginn</string>
+    <string name="log_oc_team_comment">Kommentar vum OC Team</string>
+    <string name="log_your_saved_log">Äeren gespeicherten Log</string>
+    <string name="log_empty_logbook">D\'Logbuch vu dësem Cache ass eidel.</string>
+    <string name="log_problem_none">Kee Problem</string>
+    <string name="log_problem_needs_maintenance_label">Muss ënnerhalen ginn</string>
+    <string name="log_problem_needs_maintenance_text">Dëse Geocacher huet gemellt, datt et e Problem mat dësem Cache gëtt.</string>
+    <string name="log_problem_log_full_label">D\'Logbuch as voll</string>
+    <string name="log_problem_log_full_text">Dëse Geocacher huet gemellt, datt d\'Logbuch voll ass.</string>
+    <string name="log_problem_damaged_label">Behälter ass beschiedegt</string>
+    <string name="log_problem_damaged_text">Dëse Geocacher huet gemellt, datt d\'Behälter beschiedegt ass.</string>
+    <string name="log_problem_missing_label">De Cache kéint verschwonne sinn</string>
+    <string name="log_problem_missing_text">Dëse Geocacher huet gemellt, datt de Cache verschwonne kéint sinn.</string>
+    <string name="log_problem_other_label">Soss</string>
+    <string name="log_problem_other_text">Dëse Geocacher huet gemellt, datt et ee Problem mat dësem Cache gëtt.</string>
+    <string name="log_problem_archive_label">Cache misst archivéiert ginn</string>
+    <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
+    <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
+    <string name="log_image_titleprefix">Bild</string>
+    <!-- Contacts -->
+    <!-- translation -->
+    <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
+    <string name="translate_to_english">Iwwersetzen op Englesch</string>
+    <string name="translate_length_warning">D\'Iwwersetzung kéint feelschloen mat ze vill Text.</string>
+    <!-- errors, warnings, info toasts -->
+    <string name="err_none">Ok</string>
+    <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
+    <string name="err_server">Onfäeg Geocaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
+    <string name="err_server_ec">Onfäeg Extremcaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
+    <string name="err_server_su">Onfäeg Geocaching.su ze kontaktéieren. D\'Website kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
+    <string name="err_server_gk">Onfäeg GeoKrety.org ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
+    <string name="err_login">Keng Zougangsdaten gespäichert</string>
+    <string name="err_unknown">Onbekannte Feeler. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
+    <string name="err_unknown_address">c:geo konnt dës Adresse net mat enger Positioun a Verbindung setzen</string>
+    <string name="err_comm">Onbekannte Verbindungsfeeler. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
+    <string name="err_missing_auth">Kee Benotzernumm an/oder Passwuert definéiert</string>
+    <string name="err_maintenance">Geocaching.com ass offline wéinst Maintenance-Aarbechten. c:geo funktionéiert offline mat gespäicherte Cachen.</string>
+    <string name="err_license">D\'Notzungsbedingungen vu Geocaching.com goufen net ugeholl, soudatt c:geo keng Cache Koordinaten lueden kann.</string>
+    <string name="err_unvalidated_account">De Benotzerkont muss fir d\'éischt op Geocaching.com validéiert ginn.</string>
+    <string name="err_unpublished">De gefuerderte Cache ass nach net publizéiert ginn.</string>
+    <string name="err_cache_not_found">De gefuerderte Cache konnt net fonnt ginn.</string>
+    <string name="err_premium_only">Dëse Cache ass nëmmen fir Premium Membere vu Geocaching.com zougänglech.</string>
+    <string name="err_detail_open">c:geo kann d\'Detailer vum Cache net lueden.</string>
+    <string name="err_detail_cache">c:geo kann de Cache net uweisen deen dir wëllt. Ass et wierklech ee Geocache?</string>
+    <string name="err_detail_cache_find">c:geo ka keng Cachen fannen</string>
+    <string name="err_detail_cache_find_some">c:geo kann dëse Cache net fannen.</string>
+    <string name="err_detail_cache_find_any">c:geo ka keng Cachen fannen.</string>
+    <string name="err_detail_no_spoiler">c:geo huet keng Hiweisbiller fonnt fir dëse Cache.</string>
+    <string name="err_detail_still_working">Schafft nach ëmmer un enger anerer Aufgab.</string>
+    <string name="err_detail_premium_log_found">Dëse Cache ass just zougänglech fir Premium Membere vu Geocaching.com. Dowéinst kënne keng Informatiounen ugewisen ginn.\n\nWa dir de Cache awer scho fonnt hutt, da kënnt dir en hei loggen.</string>
+    <string name="err_watchlist_still_managing">Verwalten nach ëmmer d\'Beobachtungslëscht.</string>
+    <string name="err_watchlist_failed">Ee Feeler ass opgetruden beim Änneren vun der Beobachtungslëscht.</string>
+    <string name="err_application_no">c:geo ka keng passend App fannen.</string>
+    <string name="err_auth_initialize">c:geo konnt d\'Autorisatioun net starten.</string>
+    <string name="err_auth_process">Autorisatiouns Prozess feelgeschloen.</string>
+    <string name="err_cannot_log_visit">c:geo kann d\'Visite net loggen. Maacht de Log iwwert d\'Schlatfläch mat all de Cache Detailer.</string>
+    <string name="err_download_fail">c:geo konnt d\'Detailer vum Cache net eroflueden.</string>
+    <string name="err_dwld_details_failed">c:geo konnt d\'Detailer vum Cache net eroflueden.</string>
+    <string name="err_load_descr_failed">c:geo kann d\'Beschreiwung net lueden.</string>
+    <string name="err_location_unknown">c:geo kennt d\'Positioun vum Cache net.</string>
+    <string name="err_missing_device_name">Benennt wgl. d\'Gerät éier dir iech registréiert.</string>
+    <string name="err_favorite_failed">Änneren vum Favoriten-Status feelgeschloen.</string>
+    <string name="err_select_logimage_failed">D\'Eraussichen vun engem Bild fir de Log ass feelgeschloen.</string>
+    <string name="err_acquire_image_failed">Erstellen vun engem Bild feelgeschloen.</string>
+    <string name="err_tb_display">c:geo kann den Trackable net uweisen deen dir wëllt. Ass et wierklech ee Trackable?</string>
+    <string name="err_tb_details_open">c:geo kann d\'Detailer vum Trackable net lueden.</string>
+    <string name="err_tb_not_loggable">Dësen Trackable ka net geloggt ginn.</string>
+    <string name="err_tb_find_that">c:geo kann dësen Trackable net fannen.</string>
+    <string name="err_waypoint_cache_unknown">c:geo weess net zu wéi engem Cache\'s du e Weepunkt bäisetze wëlls.</string>
+    <string name="err_waypoint_add_failed">c:geo konnt de Weepunkt net dobäisetzen.</string>
+    <string name="err_point_bear_and_dist_title">Brauchs du Hëllef?</string>
+    <string name="err_point_bear_and_dist">Fëll béid Peilung an Distanz an. Peilung ass e Wénkel tëscht 0 an 360 Grad relativ zu Norden. Distanz verlaangt keng Unitéit.</string>
+    <string name="err_log_load_data">c:geo kann d\'erfuerdert Daten net lueden fir är Visitt ze loggen.</string>
+    <string name="err_log_post_missing_tracking_code">Tracking code feelt.</string>
+    <string name="err_log_post_missing_coordinates">Koordinate feelen.</string>
+    <string name="err_log_post_failed">Et schéngt als gouf äre Log net gepost. Iwwerpréift et iwwert de Website vum Cache.</string>
+    <string name="err_log_post_failed_ec">Et schéngt als gouf äre Log net gepost. Iwwerpréift et op Extremcaching.com.</string>
+    <string name="err_log_post_failed_gk">Et schéngt als gouf äre Log net gepost. Iwwerpréift et op GeoKrety.org.</string>
+    <string name="err_logimage_post_failed">Et schéngt als gouf är Foto net eropgelueden. Iwwerpréift et iwwert de Website vum Cache.</string>
+    <string name="err_parse_lat">c:geo kann d\'Breitengrade net bestëmmen.</string>
+    <string name="err_parse_lon">c:geo kann d\'Längengrade net bestëmmen.</string>
+    <string name="err_parse_dist">c:geo kann d\'Distanz net bestëmmen.</string>
+    <string name="err_parse_lat_lon">c:geo kann d\'Längengrade oder d\'Breitengrade net bestëmmen.</string>
+    <string name="err_rendertheme_file_unreadable">Kann déi gewënschte Kaartenduerstellung net lueden. D\'Standardduerstellung gëtt nees gelueden.</string>
+    <string name="err_rendertheme_invalid">Déi gewielte Kaartenduerstellung ass net dës mapsforge-Versioun gülteg. Déi Standardduerstellung gëtt nees gelueden.</string>
+    <string name="err_invalid_filename_char">Zeechen \'%c\' net erlaabt</string>
+    <string name="warn_save_nothing">Et gëtt näischt fir ze späicheren.</string>
+    <string name="warn_no_cache_coord">Hei ginn et keng Cachen mat Koordinaten.</string>
+    <string name="warn_no_coordinates">Keng Koordinaten uginn.</string>
+    <string name="warn_no_keyword">Kee Stéchwuert uginn.</string>
+    <string name="warn_no_username">Kee Benotzernumm uginn.</string>
+    <string name="warn_no_connector">Keng vun den momentan aktivéierten Déngschter ënnerstëtzt dës Sich.</string>
+    <string name="warn_search_help_title">Brauchs du Hëllef?</string>
+    <string name="warn_search_help_address">Gitt eng Adresse oder een Uertsnumm un, wéi z.B. d\'Adresse „17 Krautmaart, Lëtzebuerg“, een Uertsnumm „Mäerzeg“ oder de Numm vun enger Plaz wéi „Stauséi“.</string>
+    <string name="warn_search_help_gccode">Tipp de Code fir ee Geocache an. Zum Beispill \" GC5PZQF\".</string>
+    <string name="warn_search_help_keyword">Gëff een Deel oder de ganze Numm vum Geocache un. Zum Beispill \"Protokoll\".</string>
+    <string name="warn_search_help_user">Tipp en Usernumm vu Geocaching.com an.</string>
+    <string name="warn_search_help_tb">Tipp de Code fir en Trackable an. Zum Beispill \"TB29QMZ\".</string>
+    <string name="warn_log_text_fill">Tipp wgl. en Text fir däi Log an.</string>
+    <string name="warn_load_images">c:geo konnt d\'Biller net eroflueden.</string>
+    <string name="warn_pocket_query_select">Kee Pocket Query ausgewielt.</string>
+    <string name="warn_no_pocket_query_found">Kee Pocket Query online fonnt.</string>
+    <string name="warn_invalid_character">De Charakter muss e Buschtaf oder eng Ziffer sinn</string>
+    <string name="warn_notloggedin_title">Offline modus</string>
+    <string name="warn_notloggedin_long">(Nach) net ageloggt. D\'Live-Kaart weist nëmmen lokal gespäichert Cachen an Onlinefunktiounen sti net zur Verfügung.\n\nEntweder gëtt et keng Internetverbindung, ee Server-Problem oder du muss deng Geocaching-Déngschter nees konfiguréieren.\n\nWëlls du d\'Déngschter elo konfiguréieren?</string>
+    <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
+    <string name="info_log_posted">c:geo huet de Log erfollegräich iwwermëttelt.</string>
+    <string name="info_log_saved">c:geo huet de Log erfollegräich gespäichert.</string>
+    <string name="info_log_post_failed">Publizéieren vum Log feelgeschloen.</string>
+    <string name="info_log_post_failed_reason">Grond: %s</string>
+    <string name="info_log_post_retry">Nees probéieren</string>
+    <string name="info_log_post_save">Offline späicheren</string>
+    <string name="info_log_cleared">Log ass geläscht.</string>
+    <string name="info_waypoint_coordinates_cleared">Koordinaten si geläscht.</string>
+    <string name="info_log_type_changed">Den Typ vu Log huet geännert!</string>
+    <string name="info_select_logimage_cancelled">D\'Auswal vu Biller oder d\'Opnam gouf annuléiert.</string>
+    <string name="info_cache_saved">De Cache gouf lokal gespäichert</string>
+    <string name="warn_calculator_state_save">Vergiess net de Waypoint ze späicheren fir d\'Berechnung ze halen.</string>
+    <string name="err_trackable_log_not_anonymous">D\'Loggen vun %1$s ka net anonym erfollegen. Wëllt der d\'Astellungen opmaachen fir d\'Benotzerdaten vun %2$s anzeginn?</string>
+    <string name="err_trackable_no_preference_activity">Et deet eis Leed, mä mir fannen net dee passende Astellungsmenü.</string>
+    <string name="confirm_unsaved_changes_title">Ongespäichert Changementer</string>
+    <string name="confirm_discard_wp_changes">Ongespäichert Weepunkter verwerfen?</string>
+    <string name="warn_log_load_additional_data">c:geo konnt keng zousätzlech Donnéeë (Trackables/Favorit Punkte) fir d\'Loggen lueden.</string>
+    <string name="more_information">weider Informatiounen</string>
+    <string name="undo">Réckgängeg</string>
+    <string name="dont_show_again">Net méi uweisen</string>
+    <string name="warn_gm_not_available">Google Maps ass net verfügbar.</string>
+    <string name="switch_to_mf">De Google Play Service ass veraltert. Wëlls du op Mapsforge Kaarten ëmschalten?</string>
+    <string name="switched_to_mf">D\'Standard Kaart gouf op d\'Mapsforge Kaart ëmgeschalt. D\'Kaart wgl. nees nei starten.</string>
+    <!-- location service -->
+    <string name="loc_last">Läscht Positioun</string>
+    <string name="loc_net">Netzwierk</string>
+    <string name="loc_fused">Kombinéiert</string>
+    <string name="loc_low_power">Energiespueren</string>
+    <string name="loc_home">Koordinaten vun Doheem</string>
+    <string name="loc_sat">Satelitte</string>
+    <string name="loc_trying">Lokaliséieren</string>
+    <string name="loc_no_addr">Onbekannten Adresse</string>
+    <string name="loc_gps_disabled">GPS desaktivéiert</string>
+    <string name="menu_centerposition">Op meng Positioun zentréieren</string>
+    <!-- standard menu -->
+    <string name="menu_about">Iwwert c:geo</string>
+    <string name="menu_helpers">Nëtzlech Apps</string>
+    <string name="menu_settings">Astellungen</string>
+    <string name="menu_backup">Sécheren / Restauréieren</string>
+    <string name="menu_history">Historique</string>
+    <!-- main screen -->
+    <string name="caches_nearby_button">Nobäi</string>
+    <string name="advanced_search_button">Sichen</string>
+    <string name="stored_caches_button">Geséchert</string>
+    <string name="any_button">Wiesselen op</string>
+    <string name="unknown_scan">Keng Geocoden fonnt wärend dem Scan.</string>
+    <!-- caches -->
+    <string name="caches_no_cache">Kee Cache</string>
+    <string name="caches_more_caches">Méi Cachen lueden</string>
+    <string name="caches_more_caches_no">Keng aner Cachen</string>
+    <string name="caches_more_caches_loading">Cachen gi gelueden…</string>
+    <string name="caches_more_caches_currently">aktuell</string>
+    <string name="caches_downloading">Cachen gi gelueden…\nGeschätzten Zäit: </string>
+    <string name="caches_eta_ltm">Manner wéi eng Minutt</string>
+    <plurals name="caches_eta_mins">
+        <item quantity="one">%d Minutt</item>
+        <item quantity="other">%d Minutten</item>
+    </plurals>
+    <string name="caches_history">Historique</string>
+    <string name="caches_on_map">Op der Kaart uweisen</string>
+    <string name="caches_sort">Sortéieren</string>
+    <string name="caches_sort_distance">Distanz</string>
+    <string name="caches_sort_difficulty">Schwieregkeet</string>
+    <string name="caches_sort_terrain">Terrain</string>
+    <string name="caches_sort_size">Gréisst</string>
+    <string name="caches_sort_favorites">Favoritten</string>
+    <string name="caches_sort_favorites_ratio">Favoritten [%]</string>
+    <string name="caches_sort_name">Numm</string>
+    <string name="caches_sort_rating">Bewäertung</string>
+    <string name="caches_sort_vote">Eege Bewäertung</string>
+    <string name="caches_sort_inventory">Zieler vum Inventaire</string>
+    <string name="caches_sort_date_hidden">Datum Verstoppt</string>
+    <string name="caches_sort_date_logged">Datum Geloggt</string>
+    <string name="caches_sort_finds">Fonnt</string>
+    <string name="caches_sort_state">Zoustand</string>
+    <string name="caches_sort_storage">Speicherdatum</string>
+    <string name="caches_sort_eventdate">Event Datum</string>
+    <string name="caches_select_mode">Selektiounsmodus</string>
+    <string name="caches_select_mode_exit">Selektiounsmodus zoumaachen</string>
+    <string name="caches_select_invert">Selektioun invertéieren</string>
+    <string name="caches_nearby">Nobäi</string>
+    <string name="caches_delete_events">Vergaangen Eventer läschen</string>
+    <string name="caches_upload_modifiedcoords">Geännert Koordinaten eroplueden</string>
+    <string name="caches_upload_modifiedcoords_warning">Solle déi modifizéiert Koordinaten fir alle (ausgewielten) Cachen eropgelueden ginn an déi aktuell Koordinaten um Server iwwerschriwwen ginn? Dëst ka net réckgängeg gemaach ginn.</string>
+    <string name="caches_upload_allcoords">Koordinaten fir all Cachen eroplueden</string>
+    <string name="caches_upload_allcoords_dialogtitle">WARNUNG - Lueden all d\'Koordinaten rop</string>
+    <string name="caches_upload_allcoords_warning">Dëst wäert all existéierend Koordinaten um Server fir all (bzw. déi ausgewielten) Cachen vun denger Lëscht duerch déi aktuell Listing-Koordinaten am c:geo ersetzen! Dëst soll just a speziellen Fäll verwennt ginn, z.B. wann du eng GPX-Datei mat verbesserten Koordinaten als Listing-Koordinaten importéiert hues. Dëst kann net réckgängeg gemaach ginn an du sollts dës Funktioun nëmmen benotzen, wann du weess, wat du mëss. An normale Fäll sollts du amplaz Funktioun \"Geännert Koordinaten eroplueden\" benotzen.</string>
+    <string name="caches_refresh_selected">Ausgewielten aktualiséieren</string>
+    <string name="caches_refresh_all">All aktualiséieren</string>
+    <string name="caches_move_selected">Auswal réckelen</string>
+    <string name="caches_move_all">Alles réckelen</string>
+    <string name="caches_copy_selected">Auswal kopéieren</string>
+    <string name="caches_copy_all">Alles kopéieren</string>
+    <string name="caches_map_locus_export">Op Locus exportéieren</string>
+    <string name="caches_filter_title">Filter no</string>
+    <string name="caches_removing_from_history">Aus dem Historique läschen…</string>
+    <string name="caches_clear_offlinelogs">Offline Logs läschen</string>
+    <string name="caches_clear_offlinelogs_message">Sollen d\'Offline-Logs geläscht ginn?</string>
+    <string name="caches_clear_offlinelogs_progress">Offline Logs gi geläscht</string>
+    <string name="caches_make_list_unique">All d\'Cachen op eng Lëscht</string>
+    <string name="caches_set_listmarker">Lëschtenmarkéierung setzen</string>
+    <!-- caches lists -->
+    <string name="menu_lists">Lëschten verwalten</string>
+    <string name="list_menu_create">Nei Lëscht erstellen</string>
+    <string name="list_menu_drop">Aktuell Lëscht läschen</string>
+    <string name="list_menu_rename">Aktuell Lëscht ëmbenennen</string>
+    <string name="list_menu_import">Importéieren</string>
+    <string name="list_title">Lëscht eraussichen</string>
+    <string name="lists_title">Lëschten eraussichen</string>
+    <string name="list_inbox">Geséchert</string>
+    <string name="list_all_lists">All d\'Cachen</string>
+    <string name="list_dialog_create_title">Nei Lëscht</string>
+    <string name="list_dialog_create">Erstellen</string>
+    <string name="list_dialog_create_err">c:geo konnt keng nei Lëscht erstellen</string>
+    <string name="list_dialog_remove_title">Lëscht läschen</string>
+    <string name="list_dialog_remove_description">Soll déi aktuell Lëscht geläscht ginn? All d\'Caches vun dëser Lëscht ginn an d\'Standardlëscht verréckelt.</string>
+    <string name="list_dialog_remove_nowempty">D\'Lëscht ass eidel. Soll déi aktuell Lëscht geläscht ginn?</string>
+    <string name="list_dialog_remove">Läschen</string>
+    <string name="list_dialog_rename_title">Lëscht ëmbenennen</string>
+    <string name="list_dialog_rename">Ëmbenennen</string>
+    <string name="list_not_available">D\'Lëscht ass net méi disponibel. D\'Standard-Lëscht gëtt nees agefouert</string>
+    <!-- caches lists filter -->
+    <!-- about -->
+    <string name="about_version">Versioun</string>
+    <string name="about_changelog">Ännerungshiwäiser</string>
+    <string name="about_system">System</string>
+    <string name="about_donate">Hëlleft eis</string>
+    <string name="about_donation_more">Besicht d\'Websäit fir méi Infoen</string>
+    <string name="about_contributors">Mataarbechter</string>
+    <string name="about_license">Lizenz</string>
+    <string name="about_apache_license"><a href="">Apache Lizenz, Versioun 2.0</a></string>
+    <string name="about_help">Hëllef</string>
+    <string name="about_system_include">Schéck wgl. folgend Systeminformatiuonen an all Fehlerbericht mat oder bei Informationufroen u c:geo matschécken:</string>
+    <string name="about_system_info_send_button">Als E-mail verschécken…</string>
+    <string name="about_system_info">c:geo System Informatiounen</string>
+    <string name="about_system_info_send_chooser">System Informatiounen schécken</string>
+    <string name="about_system_write_logcat">Logdatei erstellen</string>
+    <string name="about_system_write_logcat_type">Standard- oder erweidert Logdatei erstellen?\n\nStandard-Logdateien ginn an de meeschten Fäll duer.\nBenotz erweitert Logdateien nëmmen, wenn du dofir gefrot gëss.</string>
+    <string name="about_system_write_logcat_type_standard">Standard</string>
+    <string name="about_system_write_logcat_type_extended">Erweidert</string>
+    <string name="about_system_write_logcat_error">Feeler beim Schreiwe vun der Logdatei</string>
+    <string name="changelog_github">Lëscht mat allen Ännerungen</string>
+    <string name="about_nutshellmanual">Onlinehandbuch</string>
+    <string name="about_contributors_carnerodetails">als Papp vum c:geo</string>
+    <string name="about_contributors_recent">Rezent Mataarbechter</string>
+    <string name="about_contributors_specialthanks">Ee grousse Merci un</string>
+    <string name="about_contributors_other">Aner Mataarbechter</string>
+    <string name="about_components">Komponenten</string>
+    <string name="contribution_code">code</string>
+    <string name="contribution_tester">Tester</string>
+    <string name="contribution_support">Hëllef</string>
+    <string name="contribution_documentation">Dokumentatioun</string>
+    <string name="contribution_projectleader">Open Source Projektmanager</string>
+    <string name="contribution_graphics">Grafik</string>
+    <!-- download manager -->
+    <!-- Android system download manager status messages -->
+    <!-- settings -->
+    <string name="settings_title_open_settings">Astellungen opmaachen?</string>
+    <string name="settings_title_services">Servicer</string>
+    <string name="settings_summary_services">Zouganksdonnéeën an den Zougrëff op optional Servicer konfiguréieren.</string>
+    <string name="settings_title_appearance">Ausgesinn</string>
+    <string name="settings_summary_appearance">Astellungen fir d\'Eenheeten, d\'Sprooch an d\'Faarwen.</string>
+    <string name="settings_title_cachedetails">Detailer vum Cache</string>
+    <string name="settings_summary_cachedetails">D\'Ausgesinn vun den Cache-Informatiounen personaliséieren.</string>
+    <string name="settings_title_offlinedata">Offline Daten</string>
+    <string name="settings_title_logging">Loggen</string>
+    <string name="settings_summary_logging">Astellungen fir d\'Ënnerschrëft an Log-Optiounen.</string>
+    <string name="settings_title_map">Kaart</string>
+    <string name="settings_summary_map">Kaartenquellen, Offline-Kaarten an Kaartendetailer konfiguréieren.</string>
+    <string name="settings_title_map_data">Kaartendaten</string>
+    <string name="settings_title_map_rotation">Kaart dréinen (Google Maps)</string>
+    <string name="settings_title_waypoints">Weepunkte</string>
+    <string name="settings_title_map_content">Kaarteninhalt</string>
+    <string name="settings_title_map_behavior">Kaartenverhalen</string>
+    <string name="calculate_dataDir_title">Geocahce Datebenotzung</string>
+    <string name="calculate_dataDir">Geocache Date-Späicherplaatz berechnen</string>
+    <string name="settings_data_dir_item">%1$s (%2$s fräi)</string>
+    <string name="confirm_data_dir_move">D\'Geocache Daten ze beweegen kann zimmlech laang daueren, jee no Gerät an dem Montant un Daten.</string>
+    <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
+    <string name="settings_title_system">System</string>
+    <string name="settings_title_navigation_menu">Navigationsmenu</string>
+    <string name="settings_category_browser">Browser</string>
+    <string name="settings_category_geocaching_platform">Geocaching Plattform</string>
+    <string name="settings_category_geocaching_additionals">Aner Servicer an Addons</string>
+    <string name="settings_category_social">Sozial Netzwierker</string>
+    <string name="settings_category_logging_other">Aner Logging Optiounen</string>
+    <string name="settings_goto_url_button">méi …</string>
+    <string name="settings_service_activate">Aktivéieren</string>
+    <string name="settings_gc_legal_note">Mam benotzen vun de Servicer vu geocaching.com, akzeptéiers du d\'Benotzungsbedéngungen vu Groundspeak.</string>
+    <string name="settings_info_facebook_login_title">Login mat Facebook oder Google</string>
+    <string name="settings_info_facebook_login">c:geo kann sech net iwwert den Facebook oder Google-Konto bei Geocaching.com umellen. Et gëtt awer eng einfach Léisung…</string>
+    <string name="settings_authorize">c:geo autoriséieren</string>
+    <string name="settings_reauthorize">Autorisatioun aktualiséieren oder suppriméieren</string>
+    <string name="settings_gc_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
+    <string name="settings_ec_description">c:geo erlaben op Extremcaching.com zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="settings_su_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
+    <string name="init_summary_oc_de">Lued Caches vun opencaching.de</string>
+    <string name="init_oc_de_description">c:geo erlaben op opencaching.de zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_oc_pl">Cachen vun opencaching.pl lueden</string>
+    <string name="init_oc_pl_description">c:geo erlaben op opencaching.pl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_oc_nl">Cachen vun opencaching.nl lueden</string>
+    <string name="init_oc_nl_description">c:geo erlaben op opencaching.nl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_oc_us">Cachen vun opencaching.us lueden</string>
+    <string name="init_oc_us_description">c:geo erlaben op opencaching.us zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_oc_ro">Cachen vun opencaching.ro lueden</string>
+    <string name="init_oc_ro_description">c:geo erlaben op opencaching.ro zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_oc_uk">Cachen vun opencaching.uk lueden</string>
+    <string name="init_oc_uk_description">c:geo erlaben op opencaching.uk zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
+    <string name="init_summary_su">Cachen vu Geocaching.su lueden</string>
+    <string name="init_gcvote_password_description">Fir ee Cache bewäerten ze kënnen, folleg d\'Uleedung op GCVote.com a tipp däin GCVote-Passwort hei.</string>
+    <string name="err_vote_send_rating">Feeler beim Verschécken vun der Bewäertung.</string>
+    <string name="vote_sent">Bewäertung erfollegräich verschéckt</string>
+    <string name="init_login_popup">Umellen</string>
+    <string name="init_login_popup_working">Umeldung…</string>
+    <string name="init_login_popup_ok">Umellen OK</string>
+    <string name="init_login_popup_failed">Umeldung feelgeschloen</string>
+    <string name="init_login_popup_failed_reason">Umeldung feelgeschloen: %s</string>
+    <string name="init_login_popup_not_authorized">Net autoriséiert</string>
+    <string name="init_login_popup_invalid_timestamp">Lokal Zäit ongülteg, d\'Zäit um Gerät astellen</string>
+    <string name="init_login_popup_invalid_token">Autoriséieren feelgeschloen, erneit autoriséieren</string>
+    <string name="init_authorization_credential_username">Usernumm</string>
+    <string name="init_authorization_credential_password">Passwuert</string>
+    <string name="settings_service_active">Aktiv</string>
+    <string name="settings_navigation_disabled">Dës App schéngt net installéiert ze sinn</string>
+    <string name="init_signature">Ënnerschrëft</string>
+    <string name="init_signature_template_date">Datum</string>
+    <string name="init_signature_template_time">Zäit</string>
+    <string name="init_signature_template_datetime">Datum &amp; Zäit</string>
+    <string name="init_signature_template_user">User</string>
+    <string name="init_signature_template_number">Nummer</string>
+    <string name="init_signature_template_number_legacy">Nummer (Offline-Logs ignoréieren)</string>
+    <string name="init_signature_template_owner">Besëtzer</string>
+    <string name="init_signature_template_name">Numm</string>
+    <string name="init_signature_template_difficulty">Schwieregkeet</string>
+    <string name="init_signature_template_terrain">Terrain</string>
+    <string name="init_signature_template_log">Log Text</string>
+    <string name="init_signature_template_size">Gréisst</string>
+    <string name="init_signature_template_type">Typ</string>
+    <string name="init_ratingwanted">GCVote-Bewäertung</string>
+    <string name="init_summary_ratingwanted">Cache-Bewertung vu GCVote.com lueden</string>
+    <string name="init_friends_and_own_logs_wanted">Eegen Logs a Logs vu Frënn uweisen</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Zousätzlech Logbuchsäite fir Logs vun dir an denge Frënn uweisen</string>
+    <string name="init_openlastdetailspage">Detailer uweisen vun der leschter Säit déi besicht gouf</string>
+    <string name="init_summary_openlastdetailspage">Detailer opmaachen un der leschter Säit déi besicht gouf</string>
+    <string name="init_address">Adress uweisen</string>
+    <string name="init_summary_address">Adress uweisen amplaz vun den Koordinaten op mengem Bildschierm</string>
+    <string name="init_showwaypoint_description">Falls manner Cachen op der Kaart ugewisen ginn als annoncéiert, da ginn d\'Waypoints zousätzlech ugewisen.</string>
+    <string name="init_zoomincludingwaypoints">Zoom beinhalt Waypoints</string>
+    <string name="init_zoomincludingwaypoints_description">Wann eng Kaart fir een eenzelen Cache opgemaach gëtt: Soll de Zoom esou agestallt ginn, datt all Waypoints ugewisen ginn?</string>
+    <string name="init_brouterThreshold">Wee berechnen</string>
+    <string name="init_brouterShowBothDistances">Entfernung an der Loftlinn uweisen</string>
+    <string name="brouter_recalculating">Wee gëtt am Hannergrond nei berechent…</string>
+    <string name="init_summary_brouterShowBothDistances">Wann d\'Navigatioun aktiv ass: D\'Entfernung an der Loftlinn gëtt nieft der Längt vum berechenten Wee ugewisen.</string>
+    <string name="init_save_log_img">Biller späicheren</string>
+    <string name="init_summary_save_log_img">Biller vun de Logs späicheren</string>
+    <string name="init_units">Imperial Eenheeten</string>
+    <string name="init_summary_units">Imperial Eenheeten amplaz vu metreschen Eenheeten benotzen</string>
+    <string name="init_log_offline">Offline loggen</string>
+    <string name="init_summary_log_offline">Offline loggen aktivéieren (Dialog fir Online-Log gëtt beim Loggen net ugewisen, Logs gi net eropgelueden)</string>
+    <string name="init_choose_list">No Lëscht froen</string>
+    <string name="init_summary_choose_list">Nofroen a wat fir enger Lëscht d\'Cache solle gespäichert ginn</string>
+    <string name="init_listdisplay">Zousätzlech Lëschten</string>
+    <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
+    <string name="init_livelist">Richtung uweisen</string>
+    <!-- app theme -->
+    <!-- backup / restore -->
+    <string name="init_backup_title">Backup erstellen</string>
+    <string name="init_restore_title">Backup restauréieren</string>
+    <string name="init_backup_caches">Cachen a Waypoints</string>
+    <string name="init_backup_program_settings">Astellungen vum Programm</string>
+    <string name="init_backup">Ee Backup vu Cachen / Waypoints erstellen</string>
+    <string name="init_backup_backup">Backup</string>
+    <string name="init_backup_finished">Backup ofgeschloss</string>
+    <string name="init_backup_now">Backup starten</string>
+    <string name="init_backup_running">Backup vun der Cache-Datebank gëtt erstallt…</string>
+    <string name="init_backup_restore">Restauréieren</string>
+    <string name="init_restore_restored">Restauratioun ofgeschloss</string>
+    <string name="init_backup_start_restore">Restauréierung starten</string>
+    <string name="init_backup_backup_history">Historique vun de Backups</string>
+    <string name="init_user_confirmation">Ech weess wat ech maachen</string>
+    <!-- proximity notification -->
+    <!-- map sources -->
+    <!-- Content Storage -->
+    <!-- Persistable Folders and Uris -->
+    <!-- FolderUtils: async processing -->
+    <!-- FolderUtils: copy/move -->
+    <!-- auth generic -->
+    <!-- auth credentials -->
+    <!-- auth token -->
+    <!-- auth Twitter -->
+    <!-- auth opencaching -->
+    <!-- auth geokrety -->
+    <!-- cache -->
+    <!-- days remaining -->
+    <!-- coordinate calculator hints -->
+    <!-- gpx -->
+    <!-- import -->
+    <!-- popup -->
+    <!-- waypoint -->
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
+    <!-- ImageView -->
+    <!-- visit -->
+    <!-- map -->
+    <!-- search -->
+    <!-- trackable -->
+    <!-- user -->
+    <!-- navigation -->
+    <!-- device orientation types -->
+    <!-- license -->
+    <!-- helpers -->
+    <!-- export -->
+    <!-- GC attributes -->
+    <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
+    <!-- next things -->
+    <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
+    <string name="support_title">Hëllef</string>
+    <string name="market_title">Google Play</string>
+    <!-- status (used via string based resource loading) -->
+    <!-- text-to-speech for compass view -->
+    <string name="tts_one_kilometer">ee Kilometer</string>
+    <plurals name="tts_kilometers">
+        <item quantity="one">%s Kilometer</item>
+        <item quantity="other">%s Kilometer</item>
+    </plurals>
+    <string name="tts_one_meter">Ee Meter</string>
+    <plurals name="tts_meters">
+        <item quantity="one">%s Meter</item>
+        <item quantity="other">%s Meter</item>
+    </plurals>
+    <string name="tts_one_mile">Eng Mile</string>
+    <plurals name="tts_miles">
+        <item quantity="one">%s Mile</item>
+        <item quantity="other">%s Milen</item>
+    </plurals>
+    <string name="tts_one_foot">ee Fouss</string>
+    <plurals name="tts_feet">
+        <item quantity="one">%s Fouss</item>
+        <item quantity="other">%s Fouss</item>
+    </plurals>
+    <!-- various -->
+    <!-- shortcuts -->
+    <string name="send">Schécken</string>
+    <string name="confirm_report_problem_title">Problem mellen</string>
+    <!-- Geokrety -->
+    <string name="do_not_ask_me_again">Fro mech net nach emol</string>
+    <string name="list_list_headline">Lëschten:</string>
+    <!-- calendar adder -->
+    <!-- permission handling -->
+    <string name="storage_permission_needed">Des Funktioun ass ouni d\'Zougangsberechtegung op de Späicher net méiglech.</string>
+    <!-- colors -->
+    <string name="reset_to_default">Standard</string>
+    <!-- number input -->
+    <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
+    <!-- notification / channel texts -->
+    <!-- individual routes -->
+    <!-- individual track -->
+    <!-- route/track commons -->
+    <!-- distance units -->
+    <!-- switch settings -->
+    <string name="switch_off">Aus</string>
+    <string name="switch_on">Un</string>
+    <string name="switch_manual">Manuell</string>
+    <string name="switch_auto">Automatesch</string>
+    <string name="switch_default">(Standard)</string>
+    <!-- view settings -->
+    <string name="view_settings">Astellunge kucken</string>
+    <string name="delete_setting">Astellunge läschen</string>
+    <!-- HandleLocalFilesActivity -->
+    <!-- ReceiveDownloadActivity -->
+    <!-- Download map preference and menu entry -->
+    <!-- history track -->
+    <!-- history track export -->
+    <!-- individual route export -->
+    <!-- install wizard -->
+    <!-- Map Theme helper -->
+    <!-- default actions in dialogs -->
+    <!-- ChipChoiceGroup -->
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
+    <!-- Smileys GC / OC -->
+</resources>
