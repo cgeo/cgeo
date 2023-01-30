@@ -199,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
+    <string name="err_captcha">Tjänsten kräver en Captcha. Vänligen öppna websidan geocaching.com med din webbläsare och lös den Captcha som visas medan du loggar in där. Försök sedan igen för att logga in med c:geo.</string>
     <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
     <string name="err_server_lc">Det går inte att kontakta labs.geocaching.com. Webbplatsen kan vara nere eller så fungerar inte din internetanslutning.</string>
@@ -209,6 +210,7 @@
     <string name="err_unknown_address">c:geo kunde inte associera adressen till en plats</string>
     <string name="err_comm">Okänt kommunikationsfel: Vänligen läs i vår <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> för tips och hjälp.</string>
     <string name="err_missing_auth">Användarnamn och/eller lösenord saknas</string>
+    <string name="err_wrong">Fel användarnamn och/eller lösenord.</string>
     <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
     <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
     <string name="err_unvalidated_account">Du måste verifiera ditt konto på Geocaching.com\'s hemsida först.</string>
@@ -308,6 +310,8 @@
     <string name="warn_gm_not_available">Google Maps är inte tillgänglig.</string>
     <string name="switch_to_mf">Din Google Play-tjänst är föråldrad. Vill du byta till Mapsforge kartleverantör istället?</string>
     <string name="switched_to_mf">Standardkartan bytte till Mapsforge kartleverantör. Starta om kartan nu.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Grundläggande</string>
     <!-- location service -->
     <string name="loc_last">Senast kända</string>
     <string name="loc_net">Nätverk</string>
@@ -320,6 +324,8 @@
     <string name="loc_gps_disabled">GPS avstängd</string>
     <string name="loc_copied_clipboard">Nuvarande plats kopierades till urklipp</string>
     <string name="menu_centerposition">Centrera på min plats</string>
+    <string name="location_no_permission">Varning: ingen behörighet att hämta plats</string>
+    <string name="location_only_coarse_permission">Varning: endast ungefärlig platsbehörighet</string>
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_helpers">Tilläggsprogram</string>
@@ -395,6 +401,8 @@
     <string name="caches_sort_storage">Tid för sparandet i enheten</string>
     <string name="caches_sort_eventdate">Eventdatum</string>
     <string name="caches_select_mode">Markeringsläge</string>
+    <string name="caches_select_next20">Välj nästa 20 cacher</string>
+    <string name="caches_select_next100">Välj nästa 100 cacher</string>
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
@@ -535,6 +543,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Börjar med</string>
     <string name="cache_filter_stringfilter_type_ends_with">Slutar med</string>
     <string name="cache_filter_stringfilter_type_pattern">Mönster</string>
+    <string name="cache_filter_datefilter_absolute">Absolut</string>
+    <string name="cache_filter_datefilter_relative">Relativt till idag</string>
     <string name="cache_filter_datefilter_label_from">Från:</string>
     <string name="cache_filter_datefilter_label_to">Till:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Markera alla</string>
@@ -591,6 +601,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">Tidernas begynnelse</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>mer än ett år sedan</item>
+        <item>ett år sedan</item>
+        <item>180 dagar sedan</item>
+        <item>90 dagar sedan</item>
+        <item>30 dagar sedan</item>
+        <item>2 veckor sedan</item>
+        <item>en vecka sedan</item>
+        <item>3 dagar sedan</item>
+        <item>mindre än 3 dagar sedan</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1år</item>
+        <item>1år</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2v</item>
+        <item>1v</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>
@@ -604,6 +636,7 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjälp</string>
+    <string name="about_system_collecting">Samlar in systeminformation, vänta…</string>
     <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
     <string name="about_system_info_send_button">Skicka via e-post…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -707,6 +740,7 @@
     <string name="settings_category_nearbysearch">Närliggande sökning</string>
     <string name="init_nearbysearchlimit_title">Närliggande sökgräns</string>
     <string name="init_nearbysearchlimit_description">Begränsar avståndet upp till vilka cacher som returneras med sökning i närheten (0=obegränsat)</string>
+    <string name="init_settings_description_unlimited">obegränsad</string>
     <string name="settings_category_geocaching_additionals">Vidare tjänster och tillägg</string>
     <string name="settings_category_social">Sociala media</string>
     <string name="settings_category_logging_other">Andra loggningsinställningar</string>
@@ -981,6 +1015,7 @@
     <string name="init_summary_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
     <string name="init_rendertheme_folder">Mapp för kartteman</string>
     <string name="init_mapshading_folder">Filmapp för kartskuggning</string>
+    <string name="init_mapshading_folder_text">Offlinekartor kan innehålla höjdinformation. Denna information tillhandahålls som hgt/dem-filer som måste placeras i den här mappen.</string>
     <string name="init_mapShadingLinearity_title">Skuggning linjäritet</string>
     <string name="init_mapShadingLinearity_description">Små värden förstärker kontrast i branta sluttningar men döljer förändringar på plana ytor, stora värden gör det mer linjär</string>
     <string name="init_mapShadingScale_title">Skuggning opacitet</string>
@@ -1032,6 +1067,8 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
+    <string name="category_unifiedMap">Enhetlig karta</string>
+    <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Använd enhetlig karta</string>
     <string name="init_summary_useUnifiedMap">Använd ny enhetlig karta istället för inbyggd Google Map / Mapsforge (OSM) kartor (experimentell / långt ifrån att vara komplett / endast för testning)</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
@@ -1213,6 +1250,9 @@
     <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
     <string name="cache_personal_note_upload_error">Fel vid uppladdning av personlig anteckning</string>
     <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
+    <string name="cache_personal_note_vars_out_of_sync">Variabler i anteckningar är ur synk (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Kontrollera variabler vars värde ska skrivas över från anteckningar</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Beskrivning</string>
     <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
     <string name="cache_description_rendering">Återger beskrivning, vänligen vänta…</string>
@@ -1282,6 +1322,7 @@
     <string name="cache_menu_radar">Radar</string>
     <string name="cache_menu_map">Visa på karta</string>
     <string name="cache_menu_map_ext">Andra externa program</string>
+    <string name="cache_menu_map_ext_nolabel">Andra externa appar (endast koord)</string>
     <string name="cache_menu_streetview">Gatuvy</string>
     <string name="cache_menu_browser">Öppna i webbläsare</string>
     <string name="no_browser_found">Hittade ingen webbläsare</string>
@@ -1376,6 +1417,7 @@
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
     <string name="cache_alc_start">Öppna Adventure Lab för att börja med detta äventyr</string>
+    <string name="cache_alc_related_start">Öppna Adventure Lab för att börja med detta äventyr</string>
     <string name="cache_alc_install">Installera Adventure Lab appen för att spela detta äventyr</string>
     <string name="context_share_as_text">Dela som text</string>
     <string name="context_share_as_link">Dela länk</string>
@@ -1517,6 +1559,7 @@
     <string name="formula_function_tan">Tangens</string>
     <string name="formula_function_abs">Absolut värde</string>
     <string name="formula_function_round">Avrunda</string>
+    <string name="formula_function_trunc">Trunc</string>
     <string name="formula_function_if">Om</string>
     <string name="formula_function_length">Stränglängd</string>
     <string name="formula_function_substring">Substräng</string>
@@ -2127,6 +2170,14 @@
     <string name="init_confirm_debug">c:geo körs i debugläge!</string>
     <string name="list_confirm_debug_message">Debug-läge kan orsaka instabilitet! Vill du återgå till normalläge?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Fråga mig igen</string>
+    <string name="permission_goto_app_details">Öppna applikationsinformation</string>
+    <string name="permission_contacts_read_explanation_title">Behörighet för att läsa kontakter</string>
+    <string name="permission_contacts_read_explanation">c:geo kan söka efter kontakter i din adressbok med cacharens namn. För att göra detta måste du tillåta c:geo att läsa din adressbok. Annars är det inte möjligt att använda denna funktion.</string>
+    <string name="permission_location_explanation_title">Behörighet för plats</string>
+    <string name="permission_location_explanation">c:geo är optimerad för användning med GPS-data (noggrann) för att lokalisera din position och beräkna avstånd och riktning till geocacher. Utan denna behörighet kommer platsbaserade funktioner inte att fungera som förväntat.</string>
+    <string name="permission_read_external_storage_explanation_title">Läs extern lagringsbehörighet</string>
+    <string name="permission_read_external_storage_explanation">c:geo kan använda systemets bakgrundsbild som bakgrund för appen. För att göra detta behöver c:geo tillåtelse att läsa dina mediedata på extern lagring.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
@@ -2190,6 +2241,11 @@
     <string name="make_visible">Gör synlig</string>
     <string name="hide">dölj</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">fot</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mile</string>
     <!-- switch settings -->
     <string name="switch_off">Av</string>
     <string name="switch_on">På</string>
