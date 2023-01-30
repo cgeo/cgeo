@@ -23,3 +23,5 @@
 - Nowość: Dodaj monochromatyczną ikonę launchera dla Androida 13
 - Nowość: Wyświetlaj status członka geocaching.com na ekranie głównym
 - Zmiana: GPX-Import: Użyj nazwy jako geokodu dla konektora 'unknown'
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
