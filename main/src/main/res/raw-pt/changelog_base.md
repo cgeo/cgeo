@@ -23,3 +23,5 @@
 - Novo: Adiciona um ícone monocromático da aplicação para Android 13
 - New: Display geocaching.com member status on home screen
 - Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log

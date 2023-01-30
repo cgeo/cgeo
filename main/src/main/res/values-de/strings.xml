@@ -1250,6 +1250,9 @@
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_personal_note_upload_error">Fehler beim Hochladen der persönlichen Notiz</string>
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
+    <string name="cache_personal_note_vars_out_of_sync">Variablen in Notizen sind nicht synchronisiert (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Wähle die Variablen, die aus den Notizen überschrieben werden sollen</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Beschreibung</string>
     <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>
     <string name="cache_description_rendering">Formatiere Beschreibung, bitte warten…</string>
@@ -1414,6 +1417,7 @@
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
     <string name="cache_chirpwolf_install">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf installieren.</string>
     <string name="cache_alc_start">Öffne Adventure Lab um dieses Adventure zu spielen</string>
+    <string name="cache_alc_related_start">Öffne Adventure Lab um das zugehörige Adventure zu spielen</string>
     <string name="cache_alc_install">Installiere den Adventure Lab-Player um dieses Adventure zu spielen</string>
     <string name="context_share_as_text">Text teilen</string>
     <string name="context_share_as_link">Link teilen</string>

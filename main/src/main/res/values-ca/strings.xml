@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Imatge</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- Contacts -->
+    <string name="contact_not_found">No s\'ha trobat el contacte amb l\'àlies/àlies %s. Afegiu-lo primer a l\'aplicació de contactes.</string>
+    <string name="contact_multiple_matches">Contacte: múltiples partits</string>
     <!-- translation -->
     <string name="translate">Tradueix</string>
     <string name="translate_to_sys_lang">Tradueix a %s</string>
@@ -197,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">D\'acord</string>
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
+    <string name="err_captcha">El servei requereix un Captcha. Obriu el lloc web geocaching.com amb el vostre navegador i resol el Captcha que es mostra mentre inicieu sessió allà. A continuació, torneu a intentar iniciar sessió amb C:geo.</string>
     <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_lc">No es pot contactar amb labs.geocaching.com. Pot ser que el lloc web estigui inactiu o la connexió a Internet no funcioni.</string>
@@ -208,6 +211,7 @@
     <string name="err_comm">Error de comunicació desconegut. Consulteu el nostre document
 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> com a orientació.</string>
     <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya</string>
+    <string name="err_wrong">Nom d\'usuari i/o contrasenya incorrectes.</string>
     <string name="err_maintenance">Geocaching.com no funciona per motius de manteniment. El c:geo funcionarà amb els catxés desats.</string>
     <string name="err_license">No heu acceptat l\'acord de llicència de Geocaching.com, per tant el c:geo no pot carregar les coordenades.</string>
     <string name="err_unvalidated_account">Primer heu de validar el vostre compte a la pàgina web de Geocaching.com.</string>
@@ -307,6 +311,8 @@
     <string name="warn_gm_not_available">Google Maps no està disponible.</string>
     <string name="switch_to_mf">El vostre servei de Google Play no està actualitzat. Voleu canviar al proveïdor de mapes de Mapsforge?</string>
     <string name="switched_to_mf">El mapa per defecte ha canviat al proveïdor Mapsforge. Reinicieu el mapa.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Bàsic</string>
     <!-- location service -->
     <string name="loc_last">Última coneguda</string>
     <string name="loc_net">Xarxa</string>
@@ -319,6 +325,8 @@
     <string name="loc_gps_disabled">El GPS està desactivat</string>
     <string name="loc_copied_clipboard">La ubicació actual s\'ha copiat al porta-retalls</string>
     <string name="menu_centerposition">Centra a la meva posició</string>
+    <string name="location_no_permission">Avís: No hi ha permís per obtenir la ubicació</string>
+    <string name="location_only_coarse_permission">Avís: Només permís d\'ubicació aproximat</string>
     <!-- standard menu -->
     <string name="menu_about">Quant al c:geo</string>
     <string name="menu_helpers">Programes d\'utilitat</string>
@@ -394,6 +402,8 @@
     <string name="caches_sort_storage">Data d\'emmagatzemat al dispositiu</string>
     <string name="caches_sort_eventdate">Data de la trobada</string>
     <string name="caches_select_mode">Mode seleccionar</string>
+    <string name="caches_select_next20">Seleccioneu els 20 catxés següents</string>
+    <string name="caches_select_next100">Seleccioneu els 100 catxés següents</string>
     <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
     <string name="caches_select_invert">Inverteix la selecció</string>
     <string name="caches_nearby">Propers</string>
@@ -534,6 +544,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Comença amb</string>
     <string name="cache_filter_stringfilter_type_ends_with">Acaba amb</string>
     <string name="cache_filter_stringfilter_type_pattern">Patró</string>
+    <string name="cache_filter_datefilter_absolute">Complet</string>
+    <string name="cache_filter_datefilter_relative">Relatiu a l\'actualitat</string>
     <string name="cache_filter_datefilter_label_from">De:</string>
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar tot</string>
@@ -590,6 +602,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">l\'inici dels temps</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>fa més d\'un any</item>
+        <item>fa un any</item>
+        <item>fa 180 dies</item>
+        <item>fa 90 dies</item>
+        <item>fa 30 dies</item>
+        <item>fa 2 setmanes</item>
+        <item>fa una setmana</item>
+        <item>fa 3 dies</item>
+        <item>fa menys de 3 dies</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1any</item>
+        <item>1any</item>
+        <item>180d</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2set</item>
+        <item>1set</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -603,6 +637,7 @@
     <string name="about_license">Llicència</string>
     <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
     <string name="about_help">Ajuda</string>
+    <string name="about_system_collecting">S\'està recopilant informació del sistema, espereu…</string>
     <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar per correu…</string>
     <string name="about_system_info">Informació del sistema de c:geo</string>
@@ -706,6 +741,7 @@
     <string name="settings_category_nearbysearch">Cerca propers</string>
     <string name="init_nearbysearchlimit_title">Límit de cerca propers</string>
     <string name="init_nearbysearchlimit_description">Limita la distància fins a la qual es retornen els catxés amb la cerca propera (0=il·limitat)</string>
+    <string name="init_settings_description_unlimited">il·limitat</string>
     <string name="settings_category_geocaching_additionals">Serveis addicionals i addon</string>
     <string name="settings_category_social">Xarxes socials</string>
     <string name="settings_category_logging_other">Altres opcions de registre</string>
@@ -1032,6 +1068,8 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
+    <string name="category_unifiedMap">Mapa unificat</string>
+    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilitzeu un mapa unificat</string>
     <string name="init_summary_useUnifiedMap">Utilitzeu un mapa unificat nou en lloc dels mapes integrats de Google Map/Mapsforge (OSM) (experimentals / lluny d\'estar complets / només per a proves)</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
@@ -1213,6 +1251,9 @@
     <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
     <string name="cache_personal_note_upload_error">Error carregant nota personal</string>
     <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
+    <string name="cache_personal_note_vars_out_of_sync">Les variables de les notes no estan sincronitzades (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Comproveu les variables el valor de les quals s\'ha de sobreescriure de les notes</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Descripció</string>
     <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
     <string name="cache_description_rendering">S\'està mostrant la descripció, espereu…</string>
@@ -1377,6 +1418,7 @@
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir dades de xip podeu instal·lar Chirp Wolf.</string>
     <string name="cache_alc_start">Obriu Adventure Lab per començar a jugar a aquesta aventura</string>
+    <string name="cache_alc_related_start">Obriu Adventure Lab per començar a jugar una aventura relacionada</string>
     <string name="cache_alc_install">Instal·leu el reproductor Adventure Lab per jugar a aquesta aventura</string>
     <string name="context_share_as_text">Compartir text</string>
     <string name="context_share_as_link">Compartir Enllaç</string>
@@ -1518,6 +1560,7 @@
     <string name="formula_function_tan">Tangent</string>
     <string name="formula_function_abs">Valor absolut</string>
     <string name="formula_function_round">Circular</string>
+    <string name="formula_function_trunc">Truncar</string>
     <string name="formula_function_if">Si</string>
     <string name="formula_function_length">Longitud de la corda</string>
     <string name="formula_function_substring">Subcadena</string>
@@ -2129,6 +2172,14 @@
     <string name="init_confirm_debug">c:Geo s\'està executant en mode de depuració!</string>
     <string name="list_confirm_debug_message">El mode de depuració provoca inestabilitat! Voleu desactivar el mode de depuració?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Pregunta\'m de nou</string>
+    <string name="permission_goto_app_details">Obre la informació de l\'aplicació</string>
+    <string name="permission_contacts_read_explanation_title">Permís de lectura dels contactes</string>
+    <string name="permission_contacts_read_explanation">C:geo pot cercar contactes a la vostra llibreta d\'adreces mitjançant els noms del catxé. Per fer-ho, heu d\'autoritzar c:geo a llegir la vostra llibreta d\'adreces. En cas contrari, l\'ús d\'aquesta funció no és possible.</string>
+    <string name="permission_location_explanation_title">Permís d\'ubicació</string>
+    <string name="permission_location_explanation">C:geo està optimitzat per utilitzar-lo amb dades GPS (ubicació fina) per localitzar la vostra posició i calcular la distància i la direcció cap als geocatxés. Sense aquest permís, les funcions basades en la ubicació no funcionaran com s\'esperava.</string>
+    <string name="permission_read_external_storage_explanation_title">Llegir el permís d\'emmagatzematge extern</string>
+    <string name="permission_read_external_storage_explanation">C:geo pot utilitzar el fons de pantalla del vostre sistema com a fons de l\'aplicació. Per fer-ho, c:geo necessita permís per llegir les vostres dades multimèdia a l\'emmagatzematge extern.</string>
     <string name="storage_permission_needed">Aquesta funció no és possible sense el permís d\'emmagatzematge.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccioneu l\'esquema de color</string>
@@ -2192,6 +2243,11 @@
     <string name="make_visible">fer visible</string>
     <string name="hide">Ocultar</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_yd">yd</string>
+    <string name="unit_mi">mi</string>
     <!-- switch settings -->
     <string name="switch_off">Apagar</string>
     <string name="switch_on">Activar</string>
@@ -2280,6 +2336,8 @@
     <string name="mapserver_openandromaps_themes_info">Tema detallat del mapa, creat per als mapes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Els mapes detallats requereixen un dels temes de mapes \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Tema detallat del mapa, creat per als mapes \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Mapes detallats, requereixen el tema del mapa \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Tema de mapa detallat, creat per a mapes \"Paws\"</string>
     <string name="mapserver_hylly_info">Els mapes detallats de Finlàndia requereixen un dels temes de mapes \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema detallat del mapa, creat per als mapes \"Hylly\"</string>
     <string name="brouter_info">Servei d’encaminament fora de línia</string>

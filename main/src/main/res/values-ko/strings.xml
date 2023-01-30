@@ -310,6 +310,8 @@
     <string name="warn_gm_not_available">구글 지도를 사용할 수 없습니다.</string>
     <string name="switch_to_mf">구글 프레이 서비스가 오래되었습니다. 대신 Mapsforge 지도 제공자로 전환 하시겠습니까?</string>
     <string name="switched_to_mf">기본 지도가 Mapsforge 지도 제공자로 전환되었습니다. 지금지도를 다시 시작하세요.</string>
+    <string name="gc_premium">프리미엄</string>
+    <string name="gc_basic">기본</string>
     <!-- location service -->
     <string name="loc_last">마지막 알려진</string>
     <string name="loc_net">네트워크</string>
@@ -1400,6 +1402,7 @@
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
     <string name="cache_chirpwolf_install">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 설치할 수 있습니다.</string>
     <string name="cache_alc_start">이 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
+    <string name="cache_alc_related_start">연결한 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
