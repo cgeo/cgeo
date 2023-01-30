@@ -20,6 +20,8 @@
 - Neu: Beim Import Listenname mit dem Namen der GPX-Datei vorbelegen
 - Korrektur (nightly-Version): Absturz bei GPX-Import
 - Neu: Erlaube den Import von GPX-Track-Dateien, die kein xmlns-Namensraum-Tag enthalten
-- New: Add monochrome launcher icon for Android 13
+- Neu: Monochromes Launcher-Icon für Android 13 hinzugefügt
 - Neu: Mitgliedsstatus von geocaching.com auf dem Startbildschirm anzeigen
 - Änderung: GPX-Import: Name als Geocode für 'unbekannten' Dienst verwenden
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
