@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Obrázok</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Kontakt s aliasom/prezývkou %s sa nenašiel. Najprv si ho pridaj do kontaktov.</string>
+    <string name="contact_multiple_matches">Kontakt: Viac zhôd</string>
     <!-- translation -->
     <string name="translate">Preložiť</string>
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
@@ -197,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
+    <string name="err_captcha">Služba vyžaduje overenie cez Captcha. Treba v prehliadači otvoriť stránku geocaching.com a počas prihlasovania prejsť overením Captcha. Potom sa znova skúste prihlásiť cez c:geo.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_lc">Zlyhalo pripojenie k serveru labs.geocaching.com. Webová stránka má výpadok, prípadne nefunguje internetové pripojenie.</string>
@@ -207,6 +210,7 @@
     <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
     <string name="err_comm">Neznáma chyba komunikácie. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
     <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
+    <string name="err_wrong">Nesprávne používateľské meno a/alebo heslo.</string>
     <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
     <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
     <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -306,6 +310,8 @@
     <string name="warn_gm_not_available">Mapy Google sú nedostupné.</string>
     <string name="switch_to_mf">Vaša služba Google Play je zastaraná. Chcete namiesto toho prepnúť na poskytovateľa mapy Mapsforge?</string>
     <string name="switched_to_mf">Predvolená mapa zmenená na poskytovateľa Mapsforge. Teraz mapu reštartujte.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Základný</string>
     <!-- location service -->
     <string name="loc_last">posledná známa</string>
     <string name="loc_net">sieť</string>
@@ -318,6 +324,8 @@
     <string name="loc_gps_disabled">GPS zakázané</string>
     <string name="loc_copied_clipboard">Aktuálna poloha bola skopírovaná do schránky</string>
     <string name="menu_centerposition">Vycentrovať na moju polohu</string>
+    <string name="location_no_permission">Upozornenie: žiadne povolenie na určenie polohy</string>
+    <string name="location_only_coarse_permission">Upozornenie: povolenie len na približnú polohu</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikácii</string>
     <string name="menu_helpers">Pomocné programy</string>
@@ -399,6 +407,8 @@
     <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
     <string name="caches_sort_eventdate">Dátum Eventu</string>
     <string name="caches_select_mode">Mód výberu</string>
+    <string name="caches_select_next20">Vybrať ďalších 20 kešiek</string>
+    <string name="caches_select_next100">Vybrať ďalších 100 kešiek</string>
     <string name="caches_select_mode_exit">Opustiť mód výberu</string>
     <string name="caches_select_invert">Inverzný výber</string>
     <string name="caches_nearby">V okolí</string>
@@ -640,6 +650,7 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
+    <string name="about_system_collecting">Zhromažďujú sa systémové informácie, čakajte…</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -743,6 +754,7 @@
     <string name="settings_category_nearbysearch">Hľadať v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hľadania v okolí</string>
     <string name="init_nearbysearchlimit_description">Obmedzuje vzdialenosť, v rámci ktorej sú kešky vrátené pomocou vyhľadávania v okolí (0=neobmedzené)</string>
+    <string name="init_settings_description_unlimited">neobmedzené</string>
     <string name="settings_category_geocaching_additionals">Ďalšie služby a doplnok</string>
     <string name="settings_category_social">Sociálne médiá</string>
     <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
@@ -1268,6 +1280,9 @@
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
     <string name="cache_personal_note_upload_error">Chyba nahrávania osobnej poznámky</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
+    <string name="cache_personal_note_vars_out_of_sync">Premenné v poznámkach sú nesynchronizované (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Skontrolujte premenné, ktorých hodnota sa má prepísať z poznámok</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky. Pre správne zobrazenie bude možno potrebné otvoriť popis v %s.</string>
     <string name="cache_description_rendering">Vykresľuje sa popis, čakajte…</string>
@@ -1432,6 +1447,7 @@
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu si môžete nainštalovať Chirp Wolf.</string>
     <string name="cache_alc_start">Otvorte aplikáciu Adventure Lab a začnite hrať túto adventúru</string>
+    <string name="cache_alc_related_start">Otvoriť aplikáciu Adventure Lab a začať hrať súvisiacu adventúru</string>
     <string name="cache_alc_install">Ak chcete hrať túto adventúru, nainštalujte si aplikáciu Adventure Lab</string>
     <string name="context_share_as_text">Zdieľať text</string>
     <string name="context_share_as_link">Zdieľať odkaz</string>
@@ -1575,6 +1591,7 @@
     <string name="formula_function_tan">Tangenta</string>
     <string name="formula_function_abs">Absolútna hodnota</string>
     <string name="formula_function_round">Kruh</string>
+    <string name="formula_function_trunc">Skrátiť</string>
     <string name="formula_function_if">Ak</string>
     <string name="formula_function_length">Dĺžka reťazca</string>
     <string name="formula_function_substring">Podreťazec</string>
@@ -2211,6 +2228,14 @@
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Opýtať sa znova</string>
+    <string name="permission_goto_app_details">Otvoriť info o aplikácii</string>
+    <string name="permission_contacts_read_explanation_title">Povolenie na čítanie kontaktov</string>
+    <string name="permission_contacts_read_explanation">c:geo dokáže vyhľadávať kontakty vo vašom adresári pomocou mien kešerov. Ak to chcete urobiť, je potrebné povoliť aplikácii c:geo čítanie vášho adresára. V opačnom prípade nie je možné túto funkciu použiť.</string>
+    <string name="permission_location_explanation_title">Povolenie k polohe</string>
+    <string name="permission_location_explanation">Aplikácia c:geo je optimalizovaná na použitie s údajmi GPS (presná poloha) na určenie polohy a výpočet vzdialenosti a smeru ku keške. Bez tohto povolenia nebudú funkcie založené na polohe fungovať podľa očakávania.</string>
+    <string name="permission_read_external_storage_explanation_title">Povolenie na čítanie externého úložiska</string>
+    <string name="permission_read_external_storage_explanation">Aplikácia c:geo môžeš použiť vašu systémovú tapetu ako pozadie v aplikácii. Na to potrebuje aplikácia c:geo povolenie na čítanie mediálnych údajov na externom úložisku.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte farebnú schému</string>
