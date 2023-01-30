@@ -23,3 +23,5 @@
 - Uusi: Lisää yksivärinen käynnistinkuvake Android 13:lle
 - Uusi: Näytä geocaching.com-jäsenen tila aloitusnäytössä
 - Muutos: GPX-tuonti: Käytä nimeä geokoodina 'tuntematon'-liittimelle
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
