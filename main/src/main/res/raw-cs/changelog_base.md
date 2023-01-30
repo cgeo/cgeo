@@ -23,3 +23,5 @@
 - Novinka: Přidána monochromatická ikona launcheru pro Android 13
 - Novinka: Zobrazení stavu členství geocaching.com na domovské obrazovce
 - Změna: GPX-Import: Použít název jako geokód pro 'neznámý' konektor
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log

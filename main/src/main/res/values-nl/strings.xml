@@ -310,6 +310,8 @@
     <string name="warn_gm_not_available">Google Maps is niet beschikbaar.</string>
     <string name="switch_to_mf">Je Google Play Service is verouderd. Wil je overschakelen naar de Mapsforge kaart provider?</string>
     <string name="switched_to_mf">De standaard kaart is overgeschakeld naar de Mapsforge kaart provider. Herstart je kaart.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Basis</string>
     <!-- location service -->
     <string name="loc_last">Laatst bekende</string>
     <string name="loc_net">Netwerk</string>
@@ -1415,6 +1417,7 @@
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
     <string name="cache_chirpwolf_install">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf installeren.</string>
     <string name="cache_alc_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
+    <string name="cache_alc_related_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
     <string name="cache_alc_install">Installeer de Adventure Lab speler om dit avontuur te spelen</string>
     <string name="context_share_as_text">Tekst delen</string>
     <string name="context_share_as_link">Link delen</string>

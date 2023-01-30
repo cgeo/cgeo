@@ -189,6 +189,8 @@
     <string name="log_image_titleprefix">Kuva</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
     <!-- Contacts -->
+    <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
+    <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
     <!-- translation -->
     <string name="translate">Käännä</string>
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -308,6 +310,8 @@
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Perus</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
     <string name="loc_net">Verkko</string>
@@ -320,6 +324,8 @@
     <string name="loc_gps_disabled">GPS ei käytössä</string>
     <string name="loc_copied_clipboard">Nykyinen sijainti kopioitiin leikepöydälle</string>
     <string name="menu_centerposition">Keskitä omaan sijaintiini</string>
+    <string name="location_no_permission">Varoitus: lupaa ei annettu sijainnin hakemiseen</string>
+    <string name="location_only_coarse_permission">Varoitus: lupa saatu vain karkeaan sijaintiin</string>
     <!-- standard menu -->
     <string name="menu_about">Tietoja c:geosta</string>
     <string name="menu_helpers">Apuohjelmat</string>
@@ -395,6 +401,8 @@
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
+    <string name="caches_select_next20">Valitse seuraavat 20 kätköä</string>
+    <string name="caches_select_next100">Valitse seuraavat 100 kätköä</string>
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
@@ -535,6 +543,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Alkaa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
+    <string name="cache_filter_datefilter_absolute">Absoluuttinen</string>
+    <string name="cache_filter_datefilter_relative">Suhteellinen tähän päivään</string>
     <string name="cache_filter_datefilter_label_from">Mistä:</string>
     <string name="cache_filter_datefilter_label_to">Mihin:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki</string>
@@ -591,6 +601,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">ajan alkamisen jälkeen</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>yli vuosi sitten</item>
+        <item>vuosi sitten</item>
+        <item>180 päivää sitten</item>
+        <item>90 päivää sitten</item>
+        <item>30 päivää sitten</item>
+        <item>2 viikkoa sitten</item>
+        <item>viikko sitten</item>
+        <item>3 päivää sitten</item>
+        <item>alle 3 päivää sitten</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1v</item>
+        <item>1v</item>
+        <item>180p</item>
+        <item>90p</item>
+        <item>30p</item>
+        <item>2vk</item>
+        <item>1vk</item>
+        <item>3p</item>
+        <item>&lt;3p</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -604,6 +636,7 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
+    <string name="about_system_collecting">Kerätään järjestelmätietoja, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -707,6 +740,7 @@
     <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
     <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
+    <string name="init_settings_description_unlimited">rajoittamaton</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut kirjausasetukset</string>
@@ -1033,6 +1067,8 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="category_unifiedMap">Yhdistetty kartta</string>
+    <string name="experimental">(kokeellinen)</string>
     <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
     <string name="init_summary_useUnifiedMap">Käytä uutta yhtenäistä karttaa sisäänrakennettujen Google Map / Mapsforge (OSM) -karttojen sijaan (kokeellinen / kaukana täydellisestä / vain testaukseen)</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
@@ -1214,6 +1250,9 @@
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
+    <string name="cache_personal_note_vars_out_of_sync">Muistiinpanoissa olevat muuttujia ei ole synkronoitu (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Tarkista muuttujat, joiden arvo tulee korvata muistiinpanoista</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
     <string name="cache_description_rendering">Muodostetaan kuvausta, odota…</string>
@@ -1378,6 +1417,7 @@
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
     <string name="cache_chirpwolf_install">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit asentaa Chirp Wolf -sovelluksen lukeaksesi Chirp-dataa.</string>
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
+    <string name="cache_alc_related_start">Avaa Adventure Lab -sovellus aloittaaksesi liittyvän seikkailun</string>
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
@@ -2130,6 +2170,14 @@
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
     <!-- permission handling -->
+    <string name="permission_ask_again">Kysy uudelleen</string>
+    <string name="permission_goto_app_details">Näytä ohjelman tiedot</string>
+    <string name="permission_contacts_read_explanation_title">Yhteystietojen lukuoikeus</string>
+    <string name="permission_contacts_read_explanation">c:geo voi etsiä yhteystietoja osoitekirjassasi käyttäen kätköilijän nimikerkkiä. Tehdäksesi tämän, sinun tulee valtuuttaa c:geo lukemaan osoitekirjaasi. Muuten tämän toiminnon käyttö ei ole mahdollista.</string>
+    <string name="permission_location_explanation_title">Sijainnin käyttöoikeus</string>
+    <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
+    <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
+    <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>

@@ -617,6 +617,7 @@
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
+    <string name="init_settings_description_unlimited">ubegrænset</string>
     <string name="settings_category_geocaching_additionals">Yderligere tjenester og tilføjelser</string>
     <string name="settings_category_social">Sociale medier</string>
     <string name="settings_category_logging_other">Andre logningsmuligheder</string>
