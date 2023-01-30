@@ -23,3 +23,5 @@
 - Новое: Добавлена монохромная иконка лаунчера для Android 13
 - Новое: Отображение статуса участника geocaching.com на домашнем экране
 - Изменение: GPX-импорт: Использовано имя как геокод для коннектора 'неизвестно'
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
