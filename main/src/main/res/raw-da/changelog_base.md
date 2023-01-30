@@ -9,7 +9,7 @@
 - New: New more sophisticated image gallery
 - Fix: Restore position in waypoint list after updating or deleting waypoint
 - Fix: Move to bottom when creating new waypoint
-- New: Recognize variables entered in waypoint user notes
+- Nyt: Genkender variable indtastet i waypoint brugernoter
 - New: Display lab adventure button in mystery cache details if link to lab adventure detected
 - Fix: Removal of waypoint description not synced for server-side waypoints
 
@@ -19,7 +19,9 @@
 - Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
 - New: Preset list name with GPX filename on import
 - Fix (nightly version): Crash on GPX import
-- New: Allow import of GPX track files that do not provide a xmlns namespace tag
-- New: Add monochrome launcher icon for Android 13
+- Nyt: Tillad import af GPX sporfiler, der ikke indeholderer et xmlns namespace tag
+- Nyt: Tilføj monokromt startikon til Android 13
 - New: Display geocaching.com member status on home screen
 - Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
