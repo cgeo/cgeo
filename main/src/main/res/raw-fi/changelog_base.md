@@ -1,25 +1,27 @@
 ### Kartta
 - Uusi: OSM-karttalähde osm.paws.cz
-- New: Enable reading flopp.net GPX files as tracks
-- Fix: Missing routing symbol after 'append to route'
-- Fix: Missing route calculation for prepended points
-- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- Uusi: Ota käyttöön flopp.net GPX-tiedostojen lukeminen reitteinä
+- Korjaa: Puuttuva reitityssymboli reittiin lisäyksen jälkeen
+- Fix: Puuttuva reitinlaskenta ennalta määrätyille pisteille
+- Uusi: Lisää tuki 'Voluntary MF5' OpenAndroMaps teemalle
 
 ### Kätkön tiedot
 - Uusi: Uusi hienostunut kuvagalleria
 - Korjaa: Palauta sijainti reittipisteluettelossa päivityksen tai reittipisteen poistamisen jälkeen
 - Korjaa: Siirry alareunaan luotaessa uutta reittipistettä
-- New: Recognize variables entered in waypoint user notes
-- New: Display lab adventure button in mystery cache details if link to lab adventure detected
-- Fix: Removal of waypoint description not synced for server-side waypoints
+- Uusi: Tunnista reittipisteen käyttäjän muistiinpanoissa olevat muuttujat
+- Uusi: Näytä Adventure Lab -painike mysteerikätkön tiedoissa, jos linkki Adventure Labiin havaittu
+- Korjaus: Reittipisteen kuvauksen poistoa ei synkronoitu serverin puolella oleviin reittipisteisiin
 
 ### Yleinen
 - API-tason muutos (compileSDK 32)
 - Päivitettiin joitakin riippuvaisuuskirjastoja
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
-- New: Preset list name with GPX filename on import
-- Fix (nightly version): Crash on GPX import
-- New: Allow import of GPX track files that do not provide a xmlns namespace tag
-- New: Add monochrome launcher icon for Android 13
-- New: Display geocaching.com member status on home screen
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Muutos: Käytä eri Android-mekanismia latauksien vastaanottamiseen (paremman yhteensopivuuden Android 12+:n kanssa)
+- Uusi: Aseta tuotavan GPX-tiedoston nimi listan nimeksi
+- Korjaa (yöllinen versio): Kaatuminen GPX:n tuonnissa
+- Uusi: Salli sellaisten GPX-reittien tuonti, jotka eivät tarjoa xmlns nimiavaruustagia
+- Uusi: Lisää yksivärinen käynnistinkuvake Android 13:lle
+- Uusi: Näytä geocaching.com-jäsenen tila aloitusnäytössä
+- Muutos: GPX-tuonti: Käytä nimeä geokoodina 'tuntematon'-liittimelle
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
