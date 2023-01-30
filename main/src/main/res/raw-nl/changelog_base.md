@@ -23,3 +23,5 @@
 - Nieuw: Voeg monochrome launcher icoon toe voor Android 13
 - Nieuw: Toon de geocaching.com lidstatus op het startscherm
 - Wijziging: GPX-Import: Gebruik naam als geocode voor 'onbekend' connector
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
