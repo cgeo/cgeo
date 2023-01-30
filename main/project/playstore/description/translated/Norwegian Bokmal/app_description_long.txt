@@ -2,7 +2,7 @@ c:geo er en åpen kildekode, fullfunksjon, alltid klar-til-bruk uoffisiell klien
 
 Hovedegenskaper:
 - Vis cacher på et Livekart
-- Use Google Maps or OpenStreetMap
+- Bruk Google Maps eller OpenStreetMap
 - Søk etter cacher ved hjelp av kriterier
 - Logg dine funn online eller offline
 - Lagre cacheinformasjon lokalt på telefonen din
