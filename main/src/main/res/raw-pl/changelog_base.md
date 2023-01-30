@@ -10,7 +10,7 @@
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji
 - Nowość: Rozpoznawanie zmiennych wpisanych w notatkach punktów nawigacji
-- New: Display lab adventure button in mystery cache details if link to lab adventure detected
+- Nowość: Wyświetl przycisk Adventure Lab w szczegółach skrytki zagadkowej, jeśli wykryto link do skrytki lab
 - Poprawka: Usunięcie opisu punktu nawigacji nie synchronizowało się z punktami nawigacyjnymi po stronie serwera
 
 ### Ogólne
@@ -23,3 +23,5 @@
 - Nowość: Dodaj monochromatyczną ikonę launchera dla Androida 13
 - Nowość: Wyświetlaj status członka geocaching.com na ekranie głównym
 - Zmiana: GPX-Import: Użyj nazwy jako geokodu dla konektora 'unknown'
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
