@@ -200,7 +200,6 @@
     <string name="warn_load_images">c:geo فشل في تحميل الصورة.</string>
     <string name="warn_pocket_query_select">لم يتم تحديد أي إستفسارات.</string>
     <string name="warn_no_pocket_query_found">لم يتم العثور على أية استفسارات على الانترنات.</string>
-    <string name="warn_invalid_character">الرمز يجب أن يكون حرف أو رقم</string>
     <string name="err_read_pocket_query_list">خطأ في قراءة قائمة Pocket query.</string>
     <string name="info_log_posted">c:geo قام بنجاح بتقديم سجل زيارتك.</string>
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
@@ -246,8 +245,6 @@
     <string name="caches_more_caches_no">لا مزيد من المخبآت</string>
     <string name="caches_more_caches_loading">تحميل المزيد من المخبآت&#8230;</string>
     <string name="caches_more_caches_currently">حالياً</string>
-    <string name="caches_downloading">تحميل المخبآت&#8230;\nETA: </string>
-    <string name="caches_eta_ltm">أقل من دقيقة</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>
     <string name="caches_sort">الفرز</string>
@@ -343,7 +340,6 @@
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
     <string name="settings_title_system">النظام</string>
     <string name="settings_title_navigation_menu">الملاحة</string>
-    <string name="settings_category_browser">المتصفح</string>
     <string name="settings_category_social">وسائل التواصل الإجتماعي</string>
     <string name="settings_category_logging_other">خيارات أخر ى لتسجيل الزيارات</string>
     <string name="settings_goto_url_button">المزيد &#8230;</string>
@@ -447,8 +443,6 @@
     <string name="init_dbmove_failed">فشل في نقل قاعدة البيانات</string>
     <string name="init_plain_logs">سجلات بسيطة</string>
     <string name="init_summary_plain_logs">عرض إدخالات السجل بدون ألوان</string>
-    <string name="init_use_native_ua">متصفح أندرويد</string>
-    <string name="init_summary_use_native_ua">تحديد كمتصفح أندرويد. يحل مشاكل تسجيل الدخول عند استخدام مزودي شبكة معينة.</string>
     <string name="init_maintenance">الصيانة</string>
     <string name="init_maintenance_directories">حذف الملفات المعزولة</string>
     <string name="init_location">تحديد الموقع الجغرافي</string>
