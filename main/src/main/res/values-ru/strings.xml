@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
-    <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
     <string name="warn_notloggedin_title">Оффлайн-режим</string>
     <string name="warn_notloggedin_short">Вы не вошли. Карта будет показывать только сохраненные тайники. Нажмите здесь для детальной информации.</string>
     <string name="warn_notloggedin_long">Пользователь пока не авторизован. Карта покажет только тайники, сохраненные локально и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокешинга.\n\nХотите настроить сервисы сейчас?</string>
@@ -360,14 +359,6 @@
         <item quantity="other">Загрузить следующие %1$d тайников</item>
     </plurals>
     <string name="caches_more_caches_remaining">Загрузить оставшиеся тайники (%1$d / %2$d)</string>
-    <string name="caches_downloading">Загружаю тайники…\nETA: </string>
-    <string name="caches_eta_ltm">меньше минуты</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d минута</item>
-        <item quantity="few">%d минуты</item>
-        <item quantity="many">%d минут</item>
-        <item quantity="other">%d минут</item>
-    </plurals>
     <string name="caches_store_offline">Сохранить оффлайн</string>
     <string name="caches_store_offline_map">Сохранить тайники оффлайн</string>
     <string name="caches_store_selected">Сохранить выбранное</string>
@@ -749,7 +740,6 @@
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
-    <string name="settings_category_browser">Браузер</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
     <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
@@ -918,7 +908,6 @@
     <string name="init_backup_history_delete_warning">У вас больше резервных копий, нежели установленное максимальное значение. Вы точно хотите удалить все \"лишние\" резервные копии?</string>
     <string name="init_backup_automatic">Автоматическое резервное копирование</string>
     <string name="init_backup_automatic_summary">Автоматически создавать резервные копии каждые X дней (0 — выключить). Это работает дополнительно к копиям, созданным вручную</string>
-    <string name="init_backup_automatic_performing">Создание резервной копии…</string>
     <string name="init_user_confirmation">Я точно уверен в том, что делаю</string>
     <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
@@ -1025,11 +1014,8 @@
     <string name="init_datadirmove_failed">Перемещение папки с данными тайников частично или полностью не удалось. Проверьте старые и новые папки и переместите недостающие данные вручную.</string>
     <string name="init_plain_logs">Простые записи</string>
     <string name="init_summary_plain_logs">Отображать записи в блокноте без цветов</string>
-    <string name="init_use_native_ua">Android браузер</string>
-    <string name="init_summary_use_native_ua">Представляться как браузер. Может решить проблемы входа для некоторых интернет провайдеров.</string>
     <string name="init_rendertheme_folder">Папка с темами карт</string>
     <string name="init_mapshading_folder">Папка для затененных файлов карты</string>
-    <string name="init_mapshading_folder_text">Офлайн-карты могут быть дополнены информацией о высоте. Эта информация содержится в файлах hgt/dem, которые могут быть помещены в эту папку.</string>
     <string name="init_mapShadingLinearity_title">Линейность Затенения</string>
     <string name="init_mapShadingLinearity_description">Маленькие значения подчеркивают контрастность крутых склонов, но скрывают изменения в плоскостях, большие значения делают его более линейным</string>
     <string name="init_mapShadingScale_title">Прозрачность затенения</string>
@@ -2463,12 +2449,10 @@
     <string name="done">Готово</string>
     <string name="finish">Завершить</string>
     <string name="back">Назад</string>
-    <string name="later">Позже</string>
     <string name="cancel">Отмена</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Выбрать всё</string>
-    <string name="touch_again_to_exit">Нажмите еще раз для выхода</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>
