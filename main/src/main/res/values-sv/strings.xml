@@ -278,7 +278,6 @@
     <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
-    <string name="warn_invalid_character">Tecknet måste vara en bokstav eller en siffra</string>
     <string name="warn_notloggedin_title">Offline läge</string>
     <string name="warn_notloggedin_short">Inte inloggad. Livekartan kommer bara att visa cacher som är lagrade lokalt. Tryck här för mer information.</string>
     <string name="warn_notloggedin_long">Inte inloggad (ännu). Livekartan visar bara cacher lagrade lokalt och online-funktioner fungerar inte.\n\nAntingen finns det ingen nätverksanslutning, ett serverproblem eller så måste du (åter)konfigurera dina geocachingtjänster.\n\nVill du konfigurera tjänster nu?</string>
@@ -358,12 +357,6 @@
         <item quantity="other">Ladda nästa %1$d cacher</item>
     </plurals>
     <string name="caches_more_caches_remaining">Ladda återstående cacher (%1$d / %2$d)</string>
-    <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
-    <string name="caches_eta_ltm">mindre än en minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="other">%d minuter</item>
-    </plurals>
     <string name="caches_store_offline">Spara offline</string>
     <string name="caches_store_offline_map">Spara cacher offline</string>
     <string name="caches_store_selected">Spara valda</string>
@@ -735,7 +728,6 @@
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifika inställningar och felsökningsalternativ.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
-    <string name="settings_category_browser">Webbläsare</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
     <string name="settings_category_nearbysearch">Närliggande sökning</string>
     <string name="init_nearbysearchlimit_title">Närliggande sökgräns</string>
@@ -904,7 +896,6 @@
     <string name="init_backup_history_delete_warning">Du har sparat fler säkerhetskopior än vad den konfigurerade gränsen tillåter. Vill du verkligen ta bort alla överflödiga säkerhetskopior?</string>
     <string name="init_backup_automatic">Automatisk säkerhetskopiering</string>
     <string name="init_backup_automatic_summary">Utför en automatisk säkerhetskopiering varje x dagar (utöver eventuella manuellt skapade säkerhetskopior), 0=ingen</string>
-    <string name="init_backup_automatic_performing">Skapar säkerhetskopia…</string>
     <string name="init_user_confirmation">Jag vet vad jag gör</string>
     <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
     <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
@@ -1011,11 +1002,8 @@
     <string name="init_datadirmove_failed">Det gick inte att flytta datamappen för geocache delvis eller helt. Kontrollera gamla och nya mappar och flytta saknade data för hand.</string>
     <string name="init_plain_logs">Loggfärger</string>
     <string name="init_summary_plain_logs">Visa loggar utan färger</string>
-    <string name="init_use_native_ua">Identifiering</string>
-    <string name="init_summary_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
     <string name="init_rendertheme_folder">Mapp för kartteman</string>
     <string name="init_mapshading_folder">Filmapp för kartskuggning</string>
-    <string name="init_mapshading_folder_text">Offlinekartor kan innehålla höjdinformation. Denna information tillhandahålls som hgt/dem-filer som måste placeras i den här mappen.</string>
     <string name="init_mapShadingLinearity_title">Skuggning linjäritet</string>
     <string name="init_mapShadingLinearity_description">Små värden förstärker kontrast i branta sluttningar men döljer förändringar på plana ytor, stora värden gör det mer linjär</string>
     <string name="init_mapShadingScale_title">Skuggning opacitet</string>
@@ -2403,12 +2391,10 @@
     <string name="done">Klar</string>
     <string name="finish">Slutför</string>
     <string name="back">Tillbaka</string>
-    <string name="later">Senare</string>
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Markera alla</string>
-    <string name="touch_again_to_exit">Vänligen tryck igen för att avsluta</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områden</string>
     <string name="rtl_fell_meadow">kalhygge / äng</string>
