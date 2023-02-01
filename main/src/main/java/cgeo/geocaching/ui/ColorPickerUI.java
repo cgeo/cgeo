@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -57,13 +58,12 @@ public class ColorPickerUI {
     /** fires up ColorPicker UI */
     public ColorPickerUI(final Context context, final int originalColor, final boolean hasDefaultValue, final int defaultColor, final boolean showOpaquenessSlider) {
         this.context = context;
-        if (hasDefaultValue) {
-            color = defaultColor;
-        }
+        color = originalColor;
         this.originalColor = originalColor;
         this.hasDefaultValue = hasDefaultValue;
         this.defaultColor = defaultColor;
         this.showOpaquenessSlider = showOpaquenessSlider;
+        Log.e("color=" + (color & 0xffffff) + ", scheme=" + getColorScheme() + ", opaqueness=" + getOpaqueness());
 
         // set icon size dynamically, based on screen dimensions
         iconSize = Math.max(50, Math.min(ColorPickerUI.dm.widthPixels, dm.heightPixels) / 10);
@@ -110,58 +110,7 @@ public class ColorPickerUI {
         opaquenessValue = v.findViewById(R.id.colorpicker_opaqueness_value);
 
         if (showOpaquenessSlider) {
-            v.findViewById(R.id.colorpicker_opaqueness_items).setVisibility(View.VISIBLE);
-            opaquenessSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                @Override
-                public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                    selectOpaqueness(progress);
-                }
-
-                @Override
-                public void onStartTrackingTouch(final SeekBar seekBar) {
-                    // nothing to do
-                }
-
-                @Override
-                public void onStopTrackingTouch(final SeekBar seekBar) {
-                    // nothing to do
-                }
-            });
-
-            opaquenessValue.setOnClickListener(v2 -> {
-                final EditText editText = new EditText(context);
-                editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
-                editText.setText(String.valueOf(opaquenessSlider.getProgress()));
-
-                final int min = 0;
-                final int max = 255;
-
-                Dialogs.newBuilder(context)
-                        .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
-                        .setView(editText)
-                        .setPositiveButton(android.R.string.ok, (dialog2, whichButton) -> {
-                            int newValue;
-                            try {
-                                newValue = Integer.parseInt(editText.getText().toString());
-                                if (newValue > max) {
-                                    newValue = max;
-                                    Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
-                                }
-                                if (newValue < min) {
-                                    newValue = min;
-                                    Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
-                                }
-                                opaquenessSlider.setProgress(newValue);
-                                selectOpaqueness(opaquenessSlider.getProgress());
-                            } catch (NumberFormatException e) {
-                                Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> {
-                        })
-                        .show()
-                ;
-            });
+            configureOpaquenessSlider(v);
         } else {
             // without opaqueness slider don't use fully transparent colors
             if (opaqueness == 0) {
@@ -171,6 +120,61 @@ public class ColorPickerUI {
 
         opaquenessSlider.setProgress(opaqueness);
         selectOpaqueness(opaqueness);
+    }
+
+    private void configureOpaquenessSlider(final View v) {
+        v.findViewById(R.id.colorpicker_opaqueness_items).setVisibility(View.VISIBLE);
+        opaquenessSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
+                selectOpaqueness(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(final SeekBar seekBar) {
+                // nothing to do
+            }
+
+            @Override
+            public void onStopTrackingTouch(final SeekBar seekBar) {
+                // nothing to do
+            }
+        });
+
+        opaquenessValue.setOnClickListener(v2 -> {
+            final EditText editText = new EditText(context);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
+            editText.setText(String.valueOf(opaquenessSlider.getProgress()));
+
+            final int min = 0;
+            final int max = 255;
+
+            Dialogs.newBuilder(context)
+                    .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
+                    .setView(editText)
+                    .setPositiveButton(android.R.string.ok, (dialog2, whichButton) -> {
+                        int newValue;
+                        try {
+                            newValue = Integer.parseInt(editText.getText().toString());
+                            if (newValue > max) {
+                                newValue = max;
+                                Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                            }
+                            if (newValue < min) {
+                                newValue = min;
+                                Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                            }
+                            opaquenessSlider.setProgress(newValue);
+                            selectOpaqueness(opaquenessSlider.getProgress());
+                        } catch (NumberFormatException e) {
+                            Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> {
+                    })
+                    .show()
+            ;
+        });
     }
 
     private void initColorSchemeGrid() {

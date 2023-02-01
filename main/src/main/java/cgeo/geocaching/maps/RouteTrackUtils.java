@@ -18,6 +18,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.Trackfiles;
+import cgeo.geocaching.ui.ColorPickerUI;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -97,7 +98,7 @@ public class RouteTrackUtils {
                     Log.d("[RouteTrackDebug] Finished import of track " + uri + ": " + (route == null ? "null returned" : "updating map"));
                     final String key = tracks.add(activity, uri, updateTrack);
                     tracks.setRoute(key, route);
-                    updateTrack.updateRoute(key, route);
+                    updateTrack.updateRoute(key, route, tracks.getColor(key));
                     updateDialogTracks(popup, tracks);
                 });
             }
@@ -219,6 +220,17 @@ public class RouteTrackUtils {
                     displayName.setText(newName);
                 }
             }));
+
+            final int currentColor = tracks.getColor(key);
+            final ImageButton vColor = vt.findViewById(R.id.item_color);
+            ColorPickerUI.setViewColor(vColor, currentColor, false);
+            vColor.setVisibility(View.VISIBLE);
+            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), currentColor, false, 0, true).show(newColor -> {
+                tracks.setColor(key, newColor);
+                ColorPickerUI.setViewColor(vColor, newColor, false);
+                updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key));
+            }));
+
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
                 if (null != geoData) {
                     final Viewport vp = geoData.getViewport();
@@ -236,7 +248,7 @@ public class RouteTrackUtils {
                     final boolean newValue = !geoData.isHidden();
                     setVisibilityInfo(vVisibility, newValue);
                     geoData.setHidden(newValue);
-                    updateTrack.updateRoute(key, geoData);
+                    updateTrack.updateRoute(key, geoData, tracks.getColor(key));
                     tracks.hide(key, newValue);
                 });
             }
@@ -244,7 +256,7 @@ public class RouteTrackUtils {
             vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm((d, w) -> {
                 tracks.remove(key);
                 updateDialogTracks(dialog, tracks);
-                updateTrack.updateRoute(key, null);
+                updateTrack.updateRoute(key, null, tracks.getColor(key));
             }));
             tracklist.addView(vt);
         });
@@ -281,7 +293,7 @@ public class RouteTrackUtils {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " finished, updating map");
                 route.setHidden(trackfile.isHidden());
                 updateDialogTracks(popup, tracks);
-                updateTrack.updateRoute(trackfile.getKey(), route);
+                updateTrack.updateRoute(trackfile.getKey(), route, trackfile.getColor());
             } else {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " returned null");
             }

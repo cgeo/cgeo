@@ -3,7 +3,9 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -12,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Tracks {
 
@@ -28,7 +32,7 @@ public class Tracks {
     }
 
     public interface UpdateTrack {
-        void updateRoute(String key, IGeoDataProvider route);
+        void updateRoute(String key, IGeoDataProvider route, int color);
     }
 
     public Tracks() {
@@ -66,6 +70,12 @@ public class Tracks {
     public void resumeAllTracks(final Action2<String, Boolean> resumeTrack) {
         for (Track track : data) {
             resumeTrack.call(track.trackfile.getKey(), false);
+        }
+    }
+
+    public void traverse(final Action3<String, IGeoDataProvider, Integer> action) {
+        for (Track track : data) {
+            action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor());
         }
     }
 
@@ -109,6 +119,23 @@ public class Tracks {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 track.trackfile.setDisplayname(newName);
+            }
+        }
+    }
+
+    public int getColor(@NonNull final String key) {
+        for (Track track : data) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
+                return track.trackfile.getColor();
+            }
+        }
+        return MapLineUtils.getTrackColor();
+    }
+
+    public void setColor(@NonNull final String key, final int newColor) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setColor(newColor);
             }
         }
     }

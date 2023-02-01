@@ -92,6 +92,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private static class CachedRoute {
         private boolean isHidden = false;
         private List<List<LatLng>> track = null;
+        private int color;
     }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -200,14 +201,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route);
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor());
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
         }
     }
 
     @Override
-    public void updateRoute(final String key, final IGeoDataProvider track) {
+    public void updateRoute(final String key, final IGeoDataProvider track, final int color) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -219,6 +220,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 c.track = toLatLng(track);
                 c.isHidden = track.isHidden();
             }
+            c.color = color;
         }
         repaintRequired();
     }
@@ -413,7 +415,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                     for (List<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)
-                                .color(MapLineUtils.getTrackColor())
+                                .color(c.color)
                                 .width(MapLineUtils.getTrackLineWidth(false))
                                 .zIndex(ZINDEX_TRACK)
                         );
