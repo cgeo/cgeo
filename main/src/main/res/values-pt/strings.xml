@@ -278,7 +278,6 @@
     <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
-    <string name="warn_invalid_character">O carácter deve ser uma LETRA ou um DÍGITO</string>
     <string name="warn_notloggedin_title">Modo Offline</string>
     <string name="warn_notloggedin_short">Não tem sessão iniciada. O mapa ao vivo só mostrará as caches armazenadas localmente. Toque aqui para obter mais informações.</string>
     <string name="warn_notloggedin_long">Não tem a sessão iniciada (ainda). O mapa em tempo real mostrará apenas as caches armazenadas localmente e as funções on-line não funcionarão.\n\nPode dever-se a não existir uma ligação à rede, a um problema com o servidor ou ter de (re)configurar os seus serviços de geocaching.\n\nPretende configurar os serviços agora?</string>
@@ -356,12 +355,6 @@
         <item quantity="other">Carregar as próximas %1$d caches</item>
     </plurals>
     <string name="caches_more_caches_remaining">Carregar as caches restantes (%1$d / %2$d)</string>
-    <string name="caches_downloading">A transferir caches…\nTempo estimado: </string>
-    <string name="caches_eta_ltm">Menos de um minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d minutos</item>
-    </plurals>
     <string name="caches_store_offline">Armazenar para uso offline</string>
     <string name="caches_store_offline_map">Armazenar as caches para utilização offline</string>
     <string name="caches_store_selected">Armazenar seleccionada(s)</string>
@@ -733,7 +726,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
     <string name="settings_category_nearbysearch">Pesquisa nas proximidades</string>
     <string name="init_nearbysearchlimit_title">Limite de pesquisa próxima</string>
@@ -902,7 +894,6 @@
     <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
     <string name="init_backup_automatic">Cópia de segurança automática</string>
     <string name="init_backup_automatic_summary">Executa uma cópia de segurança automática a cada x dias (para além de outras criadas manualmente), 0=off</string>
-    <string name="init_backup_automatic_performing">A criar cópia de segurança…</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
@@ -1009,11 +1000,8 @@
     <string name="init_datadirmove_failed">Ao mover a pasta de dados de Geocaches houve uma falha parcial ou total. Por favor, verifique as pastas antigas e novas e mova os dados que faltam à mão.</string>
     <string name="init_plain_logs">Sem cores nos registos</string>
     <string name="init_summary_plain_logs">Mostra os registos sem a sinalização colorida</string>
-    <string name="init_use_native_ua">Browser do Android</string>
-    <string name="init_summary_use_native_ua">Identificar como um browser Android. Resolve os problemas de início de sessão em alguns fornecedores de Internet.</string>
     <string name="init_rendertheme_folder">Pasta de Temas de Mapa</string>
     <string name="init_mapshading_folder">Pasta com os Ficheiros para sombreado de mapas</string>
-    <string name="init_mapshading_folder_text">Mapas offline podem ser sobrepostos com informação de altitude. Esta informação é fornecida por ficheiros hgt/dem que têm de ser colocados nesta pasta.</string>
     <string name="init_mapShadingLinearity_title">Linearidade do sombreado</string>
     <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
     <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
@@ -2400,12 +2388,10 @@
     <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
-    <string name="later">Mais tarde</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
-    <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
