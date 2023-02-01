@@ -278,7 +278,6 @@
     <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
-    <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
     <string name="warn_notloggedin_title">Offline režim</string>
     <string name="warn_notloggedin_short">Neprihlásené. Live mapa ukazuje len lokálne uložené kešky. Ťuknutím sem zobrazíte ďalšie informácie.</string>
     <string name="warn_notloggedin_long">Zatiaľ neprihlásené. Live mapa ukazuje len lokálne uložené kešky a online funkcie nie sú aktívne.\n\nMožno nie je pripojenie k sieti, prípadne ide o problém na serveri alebo je potrebné znova nakonfigurovať služby geoacachingu.\n\nChcete teraz konfigurovať služby?</string>
@@ -360,14 +359,6 @@
         <item quantity="other">Načítať %1$d ďalších kešiek</item>
     </plurals>
     <string name="caches_more_caches_remaining">Načítať zostávajúce kešky (%1$d/%2$d)</string>
-    <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
-    <string name="caches_eta_ltm">menej než minúta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minúta</item>
-        <item quantity="few">%d minúty</item>
-        <item quantity="many">%d minút</item>
-        <item quantity="other">%d minút</item>
-    </plurals>
     <string name="caches_store_offline">Uložiť offline</string>
     <string name="caches_store_offline_map">Uložiť kešky offline</string>
     <string name="caches_store_selected">Uložiť vybrané</string>
@@ -749,7 +740,6 @@
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Systémové nastavenia a možnosti ladenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
-    <string name="settings_category_browser">Prehliadač</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
     <string name="settings_category_nearbysearch">Hľadať v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hľadania v okolí</string>
@@ -918,7 +908,6 @@
     <string name="init_backup_history_delete_warning">Máte uložených viac záloh, než dovoľuje nakonfigurovaná maximálna hodnota. Naozaj chcete odstrániť všetky zálohy, čo sú nad limit?</string>
     <string name="init_backup_automatic">Automatické zálohovanie</string>
     <string name="init_backup_automatic_summary">Vykonáva automatické zálohovanie každých x dní (okrem všetkých manuálne vytvorených záloh), 0=vypnuté</string>
-    <string name="init_backup_automatic_performing">Vytvára sa záloha…</string>
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
@@ -1025,11 +1014,8 @@
     <string name="init_datadirmove_failed">Presúvanie priečinka s údajmi o keškách čiastočne alebo úplne neúspešné. Skontrolujte starý a nový priečinok a presuňte chýbajúce údaje ručne.</string>
     <string name="init_plain_logs">Jednoduché logy</string>
     <string name="init_summary_plain_logs">Zobraziť záznamy logu bez farieb</string>
-    <string name="init_use_native_ua">Android prehliadač</string>
-    <string name="init_summary_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľoch siete.</string>
     <string name="init_rendertheme_folder">Priečinok mapových motívov</string>
     <string name="init_mapshading_folder">Priečinok súborov pre tieňovanie mapy</string>
-    <string name="init_mapshading_folder_text">Offline mapy môžu byť prekryté informáciami o nadmorskej výške. Tieto informácie sa poskytujú ako súbory hgt/dem, ktoré je potrebné umiestniť do tohto priečinka.</string>
     <string name="init_mapShadingLinearity_title">Linearita tieňovania</string>
     <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňujú kontrast v strmých svahoch, ale skrývajú zmeny v plochých, veľké hodnoty ho robia lineárnejším</string>
     <string name="init_mapShadingScale_title">Nepriehľadnosť tieňovania</string>
@@ -2463,12 +2449,10 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
-    <string name="later">Neskôr</string>
     <string name="cancel">Zrušiť</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
-    <string name="touch_again_to_exit">Opakovaným stlačením ukončíte</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>
