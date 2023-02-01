@@ -274,7 +274,6 @@
     <string name="warn_load_images">Error al cargar las imágenes.</string>
     <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>
     <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
-    <string name="warn_invalid_character">El carácter debe ser una LETRA o un DÍGITO</string>
     <string name="warn_notloggedin_title">Modo sin conexión</string>
     <string name="warn_notloggedin_short">Sesión no iniciada. El mapa en vivo sólo mostrará cachés almacenados localmente. Pulsa aquí para más información.</string>
     <string name="warn_notloggedin_long">No conectado (todavía). El mapa en vivo sólo mostrará cachés almacenados localmente y las funciones en línea no funcionarán.\n\nNo hay conexión de red, un problema con el servidor o tienes que (re)configurar tus servicios de geocaching.\n\n¿Desea configurar los servicios ahora?</string>
@@ -344,12 +343,6 @@
     <string name="caches_more_caches_loading">Cargando cachés…</string>
     <string name="caches_more_caches_currently">actualmente</string>
     <string name="caches_more_caches_remaining">Cargar cachés restantes (%1$d / %2$d)</string>
-    <string name="caches_downloading">Descargando cachés…\nFaltan: </string>
-    <string name="caches_eta_ltm">Menos de un minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d minutos</item>
-    </plurals>
     <string name="caches_store_offline">Guardar en el dispositivo</string>
     <string name="caches_store_offline_map">Almacenar cachés en el dispositivo</string>
     <string name="caches_store_selected">Almacenamiento seleccionado</string>
@@ -685,7 +678,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuración específica del sistema y opciones de depuración.</string>
     <string name="settings_title_navigation_menu">Menú de navegación</string>
-    <string name="settings_category_browser">Navegador</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
     <string name="settings_category_geocaching_additionals">Servicios adicionales y addon</string>
     <string name="settings_category_social">Redes sociales</string>
@@ -943,8 +935,6 @@
     <string name="init_datadirmove_failed">Error al mover la carpeta de datos de Geocache. Por favor, compruebe las carpetas antiguas y nuevas y mueva los datos que faltan manualmente si es necesario.</string>
     <string name="init_plain_logs">Registros sencillos</string>
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
-    <string name="init_use_native_ua">Navegador de Android</string>
-    <string name="init_summary_use_native_ua">Identificarse como usuario Android. Resuelve algunos problemas de acceso cuando se usan ciertos proveedores de red.</string>
     <string name="init_rendertheme_folder">Carpeta de temas del mapa</string>
     <string name="init_maintenance">Mantenimiento</string>
     <string name="init_maintenance_directories_note">c:geo almacena imágenes y otros archivos relacionados con un caché en una carpeta dedicada. En algunos casos (al importar/exportar la base de datos) esta carpeta puede contener archivos obsoletos que se pueden eliminar aquí.</string>
@@ -2216,12 +2206,10 @@ Nombre de archivo:%2$s</string>
     <string name="done">Hecho</string>
     <string name="finish">Finalizar</string>
     <string name="back">Atrás</string>
-    <string name="later">Más tarde</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todo</string>
-    <string name="touch_again_to_exit">Por favor toque de nuevo para salir</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>
