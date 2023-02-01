@@ -4,6 +4,7 @@
 - Oprava: Chybějící symbol směrování pro 'přidat do trasy'
 - Oprava: Chybějící výpočet trasy pro předem přidané body
 - Novinka: Přidání podpory pro téma OpenAndroMaps 'Voluntary MF5'
+- New: Add support for GeoJSON data
 
 ### Detaily kešky
 - Novinka: Nová důmyslnější galerie obrázků
@@ -12,16 +13,16 @@
 - Novinka: Rozpoznávání proměnných zadaných v uživatelských poznámkách k trasovému bodu
 - Novinka: Zobrazení tlačítka Lab Adventure v detailech mystery kešky, pokud je zjištěn odkaz na Lab Adventure
 - Oprava: Odstranění popisu trasového bodu, který nebyl synchronizován pro trasové body na straně serveru
+- Fix: Waypoint list not updated after scan
 
 ### Obecné
 - Změna úrovně API (compileSDK 32)
 - Aktualizace některých závislých knihoven
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
 - Novinka: Název seznamu předvoleb s názvem souboru GPX při importu
-- Oprava (noční sestavení): Chyba při importu GPX
-- Novinka: Povolen import souborů stopy GPX, které neobsahují značku jmenného prostoru xmlns
-- Novinka: Přidána monochromatická ikona launcheru pro Android 13
-- Novinka: Zobrazení stavu členství geocaching.com na domovské obrazovce
-- Změna: GPX-Import: Použít název jako geokód pro 'neznámý' konektor
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
+- New: Display geocaching.com member status on home screen
+- Change: GPX-Import: Use name as geocode for 'unknown' connector
 - Fix: Allow filtering for archived caches in owner search
 - Fix: Line breaks sometimes missing in logbook view directly after posting a log
