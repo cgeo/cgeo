@@ -42,9 +42,7 @@ public class Trackfiles extends DataStore.DBExtension {
         return long1 != 0;
     }
 
-    /**
-     * to be called by Tracks only, not intended for direct usage
-     */
+    /** to be called by Tracks only, not intended for direct usage */
     public static String createTrackfile(final Activity activity, final Uri uri) {
         // copy file to c:geo internal storage
         final String fn = FileNameCreator.TRACKFILE.createName();
@@ -62,44 +60,32 @@ public class Trackfiles extends DataStore.DBExtension {
         return fn;
     }
 
-    /**
-     * to be called by Tracks only, not intended for direct usage
-     */
+    /** to be called by Tracks only, not intended for direct usage */
     public void setDisplayname(@NonNull final String newName) {
         string1 = newName;
         removeAll(type, key);
-        add(type, key, 0, 0, 0, 0, newName, "", "", "");
+        add(type, key, long1, long2, long3, long4, newName, string2, string3, string4);
     }
 
-    /**
-     * to be called by Tracks only, not intended for direct usage
-     */
+    public void setHidden(final boolean hide) {
+        long1 = hide ? 1 : 0;
+        removeAll(type, key);
+        add(type, key, long1, long2, long3, long4, string1, string2, string3, string4);
+    }
+
+    /** to be called by Tracks only, not intended for direct usage */
     public static void removeTrackfile(@NonNull final String filename) {
         removeAll(type, filename);
         FileUtils.delete(new File(LocalStorage.getTrackfilesDir(), filename));
     }
 
-    /**
-     * to be called by Tracks only, not intended for direct usage
-     */
+    /** to be called by Tracks only, not intended for direct usage */
     public static ArrayList<Trackfiles> getTrackfiles() {
         final ArrayList<Trackfiles> result = new ArrayList<>();
         for (DataStore.DBExtension item : getAll(type, null)) {
             result.add(new Trackfiles(item));
         }
         return result;
-    }
-
-    public static void hide(@NonNull final String filename, final boolean hide) {
-        final DataStore.DBExtension itemRaw = load(type, filename);
-        if (itemRaw != null) {
-            final Trackfiles item = new Trackfiles(itemRaw);
-            if (item.isHidden() != hide) {
-                item.long1 = hide ? 1 : 0;
-                removeAll(type, filename);
-                add(type, item.key, item.long1, item.long2, item.long3, item.long4, item.string1, item.string2, item.string3, item.string4);
-            }
-        }
     }
 
 }
