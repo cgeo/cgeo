@@ -196,11 +196,6 @@
     <string translatable="false" name="ellipsis">…</string>
     <string translatable="false" name="triple_dash_vertical">┆</string>
 
-    <string translatable="false" name="equation_hint">a + b</string>
-    <string translatable="false" name="free_variable_hint">2 + 2</string>
-    <string translatable="false" name="empty_equation_result">_</string>
-    <string translatable="false" name="equation_error_result">*</string>
-
     <!-- websites and product names -->
     <string translatable="false" name="caches_map_locus">Locus</string>
     <string translatable="false" name="settings_title_gc">Geocaching.com</string>

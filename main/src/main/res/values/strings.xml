@@ -294,7 +294,6 @@
     <string name="warn_load_images">c:geo failed to load images.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
-    <string name="warn_invalid_character">Character must be a LETTER or a DIGIT</string>
     <string name="warn_notloggedin_title">Offline mode</string>
     <string name="warn_notloggedin_short">Not logged in. Live map will only show caches stored locally. Tap here for more information.</string>
     <string name="warn_notloggedin_long">Not logged in (yet). Live map will only show caches stored locally and online functions will not work.\n\nEither there is no network connection, a server problem or you have to (re)configure your geocaching services.\n\nDo you want to configure services now?</string>
@@ -385,17 +384,6 @@
         <item quantity="other">Load next %1$d caches</item>
     </plurals>
     <string name="caches_more_caches_remaining">Load remaining caches (%1$d / %2$d)</string>
-    <string name="caches_downloading">Downloading caches…\nETA: </string>
-    <string name="caches_eta_ltm">Less than a minute</string>
-
-    <plurals name="caches_eta_mins">
-        <item quantity="zero">%d minutes</item>
-        <item quantity="one">%d minute</item>
-        <item quantity="two">%d minutes</item>
-        <item quantity="few">%d minutes</item>
-        <item quantity="many">%d minutes</item>
-        <item quantity="other">%d minutes</item>
-    </plurals>
 
     <string name="caches_store_offline">Store offline</string>
     <string name="caches_store_offline_map">Store caches offline</string>
@@ -839,7 +827,6 @@
     <string name="settings_summary_system">System specific settings and debugging options.</string>
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
     <string name="settings_category_nearbysearch">Nearby search</string>
     <string name="init_nearbysearchlimit_title">Nearby search limit</string>
@@ -1013,7 +1000,6 @@
     <string name="init_backup_history_delete_warning">You have saved more backups than your configured maximum value allows. Do you really want to remove all excess backups?</string>
     <string name="init_backup_automatic">Automatic backup</string>
     <string name="init_backup_automatic_summary">Performs an automatic backup every x days (in addition to any manually created backups), 0=off</string>
-    <string name="init_backup_automatic_performing">Creating backup…</string>
     <string name="init_user_confirmation">I know what I\'m doing</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
@@ -1123,11 +1109,8 @@
     <string name="init_datadirmove_failed">Moving the Geocache data folder partly or completely failed. Please check old and new folders and move missing data by hand.</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
-    <string name="init_use_native_ua">Android browser</string>
-    <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Folder</string>
     <string name="init_mapshading_folder">Map Shading Files Folder</string>
-    <string name="init_mapshading_folder_text">Offline maps can be overlaid with elevation information. This information is provided as hgt/dem files that have to be placed in this folder.</string>
     <string name="init_mapShadingLinearity_title">Shading Linearity</string>
     <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
     <string name="init_mapShadingScale_title">Shading Opacity</string>
@@ -2701,14 +2684,11 @@
     <string name="done">Done</string>
     <string name="finish">Finish</string>
     <string name="back">Back</string>
-    <string name="later">Later</string>
     <string name="cancel">Cancel</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
 
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Select All</string>
-
-    <string name="touch_again_to_exit">Please touch again to exit</string>
 
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Areas</string>
