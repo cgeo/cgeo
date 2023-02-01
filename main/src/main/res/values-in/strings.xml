@@ -194,7 +194,6 @@
     <string name="warn_load_images">c: geo gagal memuat gambar.</string>
     <string name="warn_pocket_query_select">Tidak ada permintaan Pocket yang dipilih.</string>
     <string name="warn_no_pocket_query_found">Tidak ada kantong pertanyaan yang ditemukan secara online.</string>
-    <string name="warn_invalid_character">Karakter wajib berupa surat atau angka</string>
     <string name="err_read_pocket_query_list">Kesalahan membaca daftar permintaan pocket.</string>
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
@@ -239,11 +238,6 @@
     <string name="caches_more_caches_no">Tidak ada lagi cache</string>
     <string name="caches_more_caches_loading">Memuat cache&#8230;</string>
     <string name="caches_more_caches_currently">saat ini</string>
-    <string name="caches_downloading">Mengunduh cache&#8230;\nEta: </string>
-    <string name="caches_eta_ltm">Kurang dari satu menit</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d menit</item>
-    </plurals>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>
     <string name="caches_sort">Urutkan</string>
@@ -339,7 +333,6 @@
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
-    <string name="settings_category_browser">Peramban</string>
     <string name="settings_category_social">Media sosial</string>
     <string name="settings_category_logging_other">Pilihan login lainnya</string>
     <string name="settings_goto_url_button">lebih banyak &#8230;</string>
@@ -441,8 +434,6 @@
     <string name="init_dbmove_failed">Gagal memindahkan database</string>
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
-    <string name="init_use_native_ua">Peramban Android</string>
-    <string name="init_summary_use_native_ua">Identifikasi sebagai browser Android. Mengatasi masalah login saat menggunakan penyedia jaringan tertentu.</string>
     <string name="init_maintenance">Pemeliharaan</string>
     <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
