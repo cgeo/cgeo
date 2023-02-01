@@ -232,7 +232,6 @@
     <string name="warn_load_images">c:geo konnt d\'Biller net eroflueden.</string>
     <string name="warn_pocket_query_select">Kee Pocket Query ausgewielt.</string>
     <string name="warn_no_pocket_query_found">Kee Pocket Query online fonnt.</string>
-    <string name="warn_invalid_character">De Charakter muss e Buschtaf oder eng Ziffer sinn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
     <string name="warn_notloggedin_long">(Nach) net ageloggt. D\'Live-Kaart weist nëmmen lokal gespäichert Cachen an Onlinefunktiounen sti net zur Verfügung.\n\nEntweder gëtt et keng Internetverbindung, ee Server-Problem oder du muss deng Geocaching-Déngschter nees konfiguréieren.\n\nWëlls du d\'Déngschter elo konfiguréieren?</string>
     <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
@@ -288,12 +287,6 @@
     <string name="caches_more_caches_no">Keng aner Cachen</string>
     <string name="caches_more_caches_loading">Cachen gi gelueden…</string>
     <string name="caches_more_caches_currently">aktuell</string>
-    <string name="caches_downloading">Cachen gi gelueden…\nGeschätzten Zäit: </string>
-    <string name="caches_eta_ltm">Manner wéi eng Minutt</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d Minutt</item>
-        <item quantity="other">%d Minutten</item>
-    </plurals>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
     <string name="caches_sort">Sortéieren</string>
@@ -417,7 +410,6 @@
     <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
     <string name="settings_title_system">System</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Plattform</string>
     <string name="settings_category_geocaching_additionals">Aner Servicer an Addons</string>
     <string name="settings_category_social">Sozial Netzwierker</string>
