@@ -244,7 +244,6 @@
     <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
-    <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
     <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
@@ -290,13 +289,6 @@
     <string name="caches_more_caches_no">Nu mai sunt alte cutii</string>
     <string name="caches_more_caches_loading">Încarcare cutii…</string>
     <string name="caches_more_caches_currently">până acum</string>
-    <string name="caches_downloading">Descărcare cutii…\nMai durează: </string>
-    <string name="caches_eta_ltm">Mai puţin de un minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="few">%d minute</item>
-        <item quantity="other">%d minute</item>
-    </plurals>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
     <string name="caches_sort">Sortare</string>
@@ -499,8 +491,6 @@
     <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
-    <string name="init_use_native_ua">Browser Android</string>
-    <string name="init_summary_use_native_ua">Identifică c:geo ca fiind browser-ul integrat în sistemul Android. Rezolvă unele probleme de autentificare atunci când sunt folosite anumiţi furnizori de internet.</string>
     <string name="init_maintenance">Întreţinere</string>
     <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
