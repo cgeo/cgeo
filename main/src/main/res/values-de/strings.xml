@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
-    <string name="warn_invalid_character">Das Zeichen muss ein BUCHSTABE oder eine ZIFFER sein</string>
     <string name="warn_notloggedin_title">Offlinemodus</string>
     <string name="warn_notloggedin_short">Nicht angemeldet. Live-Karte zeigt nur lokal gespeicherte Caches an. Tippe hier für weitere Informationen.</string>
     <string name="warn_notloggedin_long">(Noch) nicht eingeloggt. Die Live-Karte wird nur lokal gespeicherte Caches zeigen und Onlinefunktionen werden nicht verfügbar sein.\n\nEntweder gibt es keine Netzwerkverbindung, ein Server-Problem oder du musst deine Geocaching-Dienste (neu) konfigurieren.\n\nMöchtest du die Dienste jetzt konfigurieren?</string>
@@ -358,12 +357,6 @@
         <item quantity="other">Nächste %1$d Caches laden</item>
     </plurals>
     <string name="caches_more_caches_remaining">Verbleibende Caches laden (%1$d / %2$d)</string>
-    <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
-    <string name="caches_eta_ltm">Weniger als eine Minute</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d Minute</item>
-        <item quantity="other">%d Minuten</item>
-    </plurals>
     <string name="caches_store_offline">Offline speichern</string>
     <string name="caches_store_offline_map">Caches offline speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
@@ -735,7 +728,6 @@
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemeinstellungen und Optionen zur Fehlersuche.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
     <string name="settings_category_nearbysearch">Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_title">Limit für Suche in der Nähe</string>
@@ -904,7 +896,6 @@
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_backup_automatic">Automatische Sicherung</string>
     <string name="init_backup_automatic_summary">Führt alle x Tage eine automatische Sicherung durch (zusätzlich zu manuell erstellten Backups), 0=off</string>
-    <string name="init_backup_automatic_performing">Erstelle Sicherung…</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -1011,11 +1002,8 @@
     <string name="init_datadirmove_failed">Das Verschieben des Geocache-Datenordners ist teilweise oder komplett fehlgeschlagen. Bitte prüfe den alten und neuen Ordner und verschiebe fehlende Daten manuell.</string>
     <string name="init_plain_logs">Logs ohne Farben</string>
     <string name="init_summary_plain_logs">Logeinträge ohne Farben anzeigen</string>
-    <string name="init_use_native_ua">Android-Browser</string>
-    <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Anmeldeprobleme einiger Netzanbieter.</string>
     <string name="init_rendertheme_folder">Ordner für Kartendesigns</string>
     <string name="init_mapshading_folder">Ordner für Kartenschattierungs-Dateien</string>
-    <string name="init_mapshading_folder_text">Offline-Karten können mit Höheninformationen überlagert werden, bereitgestellt durch hgt/dem-Dateien, die in diesem Ordner abgelegt werden müssen.</string>
     <string name="init_mapShadingLinearity_title">Schattierungslinearität</string>
     <string name="init_mapShadingLinearity_description">Kleine Werte betonen den Kontrast in steilen Hängen aber verbergen Unterschiede in der Ebene, große Werte sind linearer</string>
     <string name="init_mapShadingScale_title">Schattierungsdeckkraft</string>
@@ -2403,12 +2391,10 @@
     <string name="done">Fertig</string>
     <string name="finish">Fertig</string>
     <string name="back">Zurück</string>
-    <string name="later">Später</string>
     <string name="cancel">Abbrechen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
-    <string name="touch_again_to_exit">Zum Beenden erneut tippen</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebiet</string>
     <string name="rtl_fell_meadow">Wiese</string>
