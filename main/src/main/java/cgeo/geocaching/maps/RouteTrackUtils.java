@@ -11,6 +11,9 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteSegment;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -35,7 +38,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.TooltipCompat;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -143,6 +148,27 @@ public class RouteTrackUtils {
             final View vEdit = dialog.findViewById(R.id.item_edit);
             vEdit.setVisibility(View.VISIBLE);
             vEdit.setOnClickListener(v1 -> activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE));
+
+            final View vRefresh = dialog.findViewById(R.id.item_refresh);
+            vRefresh.setVisibility(View.VISIBLE);
+            vRefresh.setOnClickListener(v1 -> {
+                // create list of geocodes contained in individual route (including geocodes for contained waypoints)
+                final Set<String> geocodes = new HashSet<>();
+                final RouteSegment[] segments = individualRoute.getSegments();
+                for (RouteSegment segment : segments) {
+                    if (segment != null) {
+                        final RouteItem item = segment.getItem();
+                        if (item != null) {
+                            final String geocode = item.getGeocode();
+                            if (StringUtils.isNotBlank(geocode)) {
+                                geocodes.add(geocode);
+                            }
+                        }
+                    }
+                }
+                // refresh those caches
+                CacheDownloaderService.downloadCaches(activity, geocodes, true, true, null);
+            });
 
             dialog.findViewById(R.id.item_center).setOnClickListener(v1 -> individualRoute.setCenter(centerOnPosition));
 
