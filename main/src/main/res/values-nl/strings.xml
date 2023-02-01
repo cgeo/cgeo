@@ -278,7 +278,6 @@
     <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
-    <string name="warn_invalid_character">Teken moet een LETTER of een CIJFER zijn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
     <string name="warn_notloggedin_short">Niet ingelogd. Live kaart zal alleen lokaal opgeslagen caches tonen. Tik hier voor meer informatie.</string>
     <string name="warn_notloggedin_long">Nog niet ingelogd. Live-kaart toont alleen de lokaal opgeslagen caches en online functies zullen niet werken.\n\nEr is geen netwerkverbinding, een serverprobleem of het is nodig de geocaching diensten te (her) configureren.\n\nDiensten nu configureren?</string>
@@ -358,12 +357,6 @@
         <item quantity="other">Volgende %1$d caches laden</item>
     </plurals>
     <string name="caches_more_caches_remaining">Laad resterende caches (%1$d / %2$d)</string>
-    <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
-    <string name="caches_eta_ltm">Minder dan een minuut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuut</item>
-        <item quantity="other">%d minuten</item>
-    </plurals>
     <string name="caches_store_offline">Offline opslaan</string>
     <string name="caches_store_offline_map">Caches offline opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
@@ -735,7 +728,6 @@
     <string name="settings_title_system">Systeem</string>
     <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
     <string name="settings_category_nearbysearch">Zoeken in de buurt</string>
     <string name="init_nearbysearchlimit_title">Zoeken in de buurt limiet</string>
@@ -904,7 +896,6 @@
     <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
     <string name="init_backup_automatic">Automatische back-up</string>
     <string name="init_backup_automatic_summary">Voert elke x dagen een automatische backup uit (in aanvulling op handmatig gemaakte backups), 0=uit</string>
-    <string name="init_backup_automatic_performing">Back-up aan het maken…</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
@@ -1011,11 +1002,8 @@
     <string name="init_datadirmove_failed">Het verplaatsen van de Geocache gegevensmap is gedeeltelijk of volledig mislukt. Controleer de oude en nieuwe mappen en verplaats de ontbrekende gegevens handmatig.</string>
     <string name="init_plain_logs">Logs zonder opmaak tonen</string>
     <string name="init_summary_plain_logs">Laat logs zien zonder kleuren.</string>
-    <string name="init_use_native_ua">Identificeer als Android browser</string>
-    <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
     <string name="init_rendertheme_folder">Kaart Thema\'s Map</string>
     <string name="init_mapshading_folder">Kaart Arcering Bestanden Map</string>
-    <string name="init_mapshading_folder_text">Offline kaarten kunnen worden gearceerd met hoogte informatie. Deze informatie wordt verstrekt als hgt/dem bestanden die in deze map geplaatst dienen te worden.</string>
     <string name="init_mapShadingLinearity_title">Arcering Lineariteit</string>
     <string name="init_mapShadingLinearity_description">Kleine waarden accentueren contrast in steile hellingen, maar verbergen veranderingen in vlakten, grote waarden maken het meer lineair</string>
     <string name="init_mapShadingScale_title">Arcering Doorzichtigheid</string>
@@ -2403,12 +2391,10 @@
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
-    <string name="later">Later</string>
     <string name="cancel">Annuleren</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
-    <string name="touch_again_to_exit">Nogmaals aanraken om af te sluiten</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebieden</string>
     <string name="rtl_fell_meadow">heuvel / weide</string>
