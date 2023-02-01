@@ -232,7 +232,6 @@
     <string name="warn_load_images">Не вдалося завантажити зображення.</string>
     <string name="warn_pocket_query_select">Кишеньковий запит не вибрано.</string>
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
-    <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
     <string name="warn_notloggedin_title">Офлайн режим</string>
     <string name="warn_notloggedin_long">Вхід в систему (поки що). Жива карта покаже лише збережені локальні та онлайн-функції не працюватимуть.\n\nАбо немає підключення до мережі, або проблема з сервером, або ви повинні (з пере)налаштувати свої сервіси геокешингу.\n\nВи хочете налаштувати сервіси зараз?</string>
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
@@ -288,14 +287,6 @@
     <string name="caches_more_caches_no">Немає більше сторінок</string>
     <string name="caches_more_caches_loading">Завантаження кешу…</string>
     <string name="caches_more_caches_currently">зараз</string>
-    <string name="caches_downloading">Завантаження кеш-пам’яті \ \nETA: </string>
-    <string name="caches_eta_ltm">Менше хвилини</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d хвилина</item>
-        <item quantity="few">%d хвилини</item>
-        <item quantity="many">%d хвилин</item>
-        <item quantity="other">%d хвилини</item>
-    </plurals>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>
     <string name="caches_sort">Сортувати</string>
@@ -420,7 +411,6 @@
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Параметри особливих налаштувань і відлагодження.</string>
     <string name="settings_title_navigation_menu">Навігаційне меню</string>
-    <string name="settings_category_browser">Браузер</string>
     <string name="settings_category_geocaching_platform">Платформа геокешингу</string>
     <string name="settings_category_geocaching_additionals">Додаткові послуги та аддон</string>
     <string name="settings_category_social">Соціальні медіа</string>
@@ -605,8 +595,6 @@
     <string name="init_dbmove_failed">Не вдалося перемістити базу даних</string>
     <string name="init_plain_logs">Звичайні журнали</string>
     <string name="init_summary_plain_logs">Відображати записи журналу без кольорів</string>
-    <string name="init_use_native_ua">Браузер для Android</string>
-    <string name="init_summary_use_native_ua">Ідентифікувати як браузер Android. Вирікає проблеми авторизації при використанні певних мережевих провайдерів.</string>
     <string name="init_maintenance">Технічне обслуговування</string>
     <string name="init_maintenance_directories">осиротіли файли</string>
     <string name="init_location">геолокація</string>
