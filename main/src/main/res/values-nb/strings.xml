@@ -274,7 +274,6 @@
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
     <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
-    <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
     <string name="warn_notloggedin_short">Du er ikke innlogget. Live-kart viser bare cacher som er lagret lokalt. Trykk her for mer informasjon.</string>
     <string name="warn_notloggedin_long">Ikke logget inn (ennå). Live-kartet vil bare viser cacher som er lagret lokalt og online-funksjoner vil ikke virke.\n\nEnten mangler du nettverksforbindelse, det er et serverproblem eller så må du endre geocaching-tjenestene i Innstillinger.\n\nVil du endre tjenestene nå?</string>
@@ -343,12 +342,6 @@
     <string name="caches_more_caches_loading">Laster cacher…</string>
     <string name="caches_more_caches_currently">for øyeblikket</string>
     <string name="caches_more_caches_remaining">Last gjenværende cacher (%1$d / %2$d)</string>
-    <string name="caches_downloading">Laster ned cacher…\nETA: </string>
-    <string name="caches_eta_ltm">Mindre enn ett minutt</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minutt</item>
-        <item quantity="other">%d minutter</item>
-    </plurals>
     <string name="caches_store_background_title">Last ned cacher</string>
     <string name="caches_history">Historikk</string>
     <string name="caches_on_map">Vis på kartet</string>
@@ -639,7 +632,6 @@
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspesifikke instillinger og debugging alternativer.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
-    <string name="settings_category_browser">Nettleser</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
     <string name="settings_category_nearbysearch">Søk i nærheten</string>
     <string name="init_nearbysearchlimit_title">Søk i nærheten avgrensning</string>
@@ -789,7 +781,6 @@
     <string name="init_backup_history_length_max">Behold alle</string>
     <string name="init_backup_history_delete_warning">Du har lagret flere sikkerhetskopier enn din angitt maksimalverdi tillater. Vil du virkelig fjerne alle overskytende sikkerhetskopier?</string>
     <string name="init_backup_automatic">Automatisk backup</string>
-    <string name="init_backup_automatic_performing">Lager sikkerhetskopi…</string>
     <string name="init_user_confirmation">Jeg vet hva jeg gjør</string>
     <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
     <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
@@ -892,8 +883,6 @@
     <string name="init_datadirmove_failed">Flytting av mappe for geocache-data mislyktes delvis eller helt. Du må sjekke gammel og ny mappe og flytte manglende data manuelt om nødvendig.</string>
     <string name="init_plain_logs">Ren tekst i logger</string>
     <string name="init_summary_plain_logs">Vis ren tekst i loggene (ikke farger og annen formatering)</string>
-    <string name="init_use_native_ua">Android-nettleser</string>
-    <string name="init_summary_use_native_ua">Identifiserer som Android-nettleser. Løser innloggingsproblemer som kan oppstå hos enkelte nettverksoperatører.</string>
     <string name="init_rendertheme_folder">Mappe for karttemaer</string>
     <string name="init_maintenance">Vedlikehold</string>
     <string name="init_maintenance_directories_note">c:geo lagrer bilder og andre filer relatert til en cache i en dedikert mappe. I enkelte tilfeller (f.eks. når du importerer/eksporterer databasen) kan denne mappen inneholde foreldede filer som kan slettes her.</string>
@@ -2135,12 +2124,10 @@
     <string name="done">Ferdig</string>
     <string name="finish">Fullfør</string>
     <string name="back">Tilbake</string>
-    <string name="later">Senere</string>
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Velg alle</string>
-    <string name="touch_again_to_exit">Vennligst trykk igjen for å avslutte</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områder</string>
     <string name="rtl_heath">varme</string>
