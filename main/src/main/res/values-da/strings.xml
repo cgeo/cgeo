@@ -270,7 +270,6 @@
     <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
-    <string name="warn_invalid_character">Tegn skal være bogstaver eller tal</string>
     <string name="warn_notloggedin_title">Offline-tilstand</string>
     <string name="warn_notloggedin_short">Du er ikke logget ind. Live-kort vil kun vise caches der er gemt lokalt. Tryk her for mere information.</string>
     <string name="warn_notloggedin_long">Du er endnu ikke logget på. Kun cacher, som er gemt lokalt, vil blive vist på live-kortet og online-funktioner vil ikke kunne bruges.\n\nManglende logon kan skyldes netværks- eller serverproblemer eller at konfigurationen af dine geocachingtjenester ikke er korrekt.\n\nVil du indstille geocachingtjenester nu?</string>
@@ -343,12 +342,6 @@
         <item quantity="other">Indlæs næste %1$d caches</item>
     </plurals>
     <string name="caches_more_caches_remaining">Indlæs resterende caches (%1$d / %2$d)</string>
-    <string name="caches_downloading">Indlæser cacher…\nETA: </string>
-    <string name="caches_eta_ltm">Under et minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="other">%d minutter</item>
-    </plurals>
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
@@ -615,7 +608,6 @@
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifikke indstillinger og fejlfindingsindstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
     <string name="init_settings_description_unlimited">ubegrænset</string>
     <string name="settings_category_geocaching_additionals">Yderligere tjenester og tilføjelser</string>
@@ -820,8 +812,6 @@
     <string name="init_dbmove_failed">Flytning af database fejlede</string>
     <string name="init_plain_logs">Simple logbeskeder</string>
     <string name="init_summary_plain_logs">Vis logbeskeder uden farver</string>
-    <string name="init_use_native_ua">Android-browser</string>
-    <string name="init_summary_use_native_ua">Identificér som Android-browser. Løser login problemer ved brug af nogle netværksudbydere.</string>
     <string name="init_maintenance">Oprydning</string>
     <string name="init_maintenance_directories">Slet ubrugte filer</string>
     <string name="init_location">Geolokation</string>
@@ -1799,7 +1789,6 @@
     <string name="next">Næste</string>
     <string name="done">Færdig</string>
     <string name="finish">Afslut</string>
-    <string name="later">Senere</string>
     <string name="cancel">Annullér</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
