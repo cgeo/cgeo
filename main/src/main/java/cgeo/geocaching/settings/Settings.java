@@ -1910,6 +1910,14 @@ public class Settings {
         putString(R.string.pref_home_location, homeLocation);
     }
 
+    public static boolean getFollowMyLocation() {
+        return getBoolean(R.string.pref_followMyLocation, true);
+    }
+
+    public static void setFollowMyLocation(final boolean activated) {
+        putBoolean(R.string.pref_followMyLocation, activated);
+    }
+
     public static void setForceOrientationSensor(final boolean forceOrientationSensor) {
         putBoolean(R.string.pref_force_orientation_sensor, forceOrientationSensor);
     }

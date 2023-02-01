@@ -186,7 +186,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
 
-    private static boolean followMyLocation = true;
+    private static boolean followMyLocation = Settings.getFollowMyLocation();
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
@@ -963,6 +963,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     // switch My Location button image
     private void switchMyLocationButton() {
+        Settings.setFollowMyLocation(followMyLocation);
         myLocSwitch.setChecked(followMyLocation);
         if (followMyLocation) {
             myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
