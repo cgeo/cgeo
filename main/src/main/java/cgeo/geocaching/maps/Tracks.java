@@ -123,7 +123,11 @@ public class Tracks {
     }
 
     public void hide(@NonNull final String key, final boolean hide) {
-        Trackfiles.hide(key, hide);
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setHidden(hide);
+            }
+        }
     }
 
     @Nullable
