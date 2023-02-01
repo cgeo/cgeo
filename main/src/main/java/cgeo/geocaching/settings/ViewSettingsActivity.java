@@ -147,7 +147,7 @@ public class ViewSettingsActivity extends AbstractActivity {
                     if (StringUtils.isBlank(constraint)) {
                         filtered = allItems;
                     } else {
-                        final String check = constraint.toString().toLowerCase().trim();
+                        final String check = constraint.toString().toLowerCase(Locale.getDefault()).trim();
                         final int max = allItems.size();
                         for (int i = 0; i < max; i++) {
                             final KeyValue data = allItems.get(i);
