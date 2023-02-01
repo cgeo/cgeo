@@ -2469,6 +2469,7 @@
     <string name="individual_route_error_toggling_waypoint">error toggling waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
     <string name="map_sort_individual_route">Sort individual route</string>
+    <string name="map_refresh_individual_route">Refresh</string>
     <string name="map_export_individual_route">Export individual route</string>
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
