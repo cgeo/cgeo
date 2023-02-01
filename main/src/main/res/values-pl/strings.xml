@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
-    <string name="warn_invalid_character">Znak musi być liter lub cyfrą</string>
     <string name="warn_notloggedin_title">Tryb offline</string>
     <string name="warn_notloggedin_short">Nie zalogowano. Mapa na żywo pokaże tylko skrytki przechowywane lokalnie. Dotknij tutaj, aby uzyskać więcej informacji.</string>
     <string name="warn_notloggedin_long">Nie zalogowano (jeszcze). Mapa na żywo pokaże tylko skrytki przechowywane lokalnie, a funkcje online nie będą działać.\n\nAlbo nie ma połączenia z siecią, wystąpił problem z serwerem lub powinieneś skonfigurować swoje usługi geocachingowe.\n\nCzy chcesz teraz skonfigurować usługi?</string>
@@ -360,14 +359,6 @@
         <item quantity="other">Wczytaj następne %1$d skrytek</item>
     </plurals>
     <string name="caches_more_caches_remaining">Wczytaj pozostałe skrytki (%1$d / %2$d)</string>
-    <string name="caches_downloading">Pobieram skrytki…\nSzacowany czas: </string>
-    <string name="caches_eta_ltm">Mniej niż minuta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuta</item>
-        <item quantity="few">%d minuty</item>
-        <item quantity="many">%d minut</item>
-        <item quantity="other">%d minut</item>
-    </plurals>
     <string name="caches_store_offline">Zapisz lokalnie</string>
     <string name="caches_store_offline_map">Zapisz skrytki lokalnie</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
@@ -749,7 +740,6 @@
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
-    <string name="settings_category_browser">Przeglądarka</string>
     <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
     <string name="settings_category_nearbysearch">Szukaj w pobliżu</string>
     <string name="init_nearbysearchlimit_title">Limit szukania w pobliżu</string>
@@ -918,7 +908,6 @@
     <string name="init_backup_history_delete_warning">Zapisałeś więcej kopii zapasowych niż skonfigurowana maksymalna wartość dozwolona. Czy na pewno chcesz usunąć wszystkie nadwyżki kopii zapasowych?</string>
     <string name="init_backup_automatic">Automatyczna kopia zapasowa</string>
     <string name="init_backup_automatic_summary">Wykonuje automatyczną kopię zapasową co x dni (oprócz każdej ręcznie utworzonej kopii zapasowej), 0 = wyłączone</string>
-    <string name="init_backup_automatic_performing">Tworzenie kopii zapasowej…</string>
     <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
@@ -1025,11 +1014,8 @@
     <string name="init_datadirmove_failed">Przenoszenie folderu z danymi skrytek częściowo lub całkowicie nie powiodło się. Sprawdź stare i nowe foldery i w razie potrzeby przenieś je ręcznie.</string>
     <string name="init_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
     <string name="init_summary_plain_logs">Wyświetlaj wpisy dziennika bez kolorów</string>
-    <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
-    <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
     <string name="init_rendertheme_folder">Folder z motywami mapy</string>
     <string name="init_mapshading_folder">Folder z plikami cieniowania map</string>
-    <string name="init_mapshading_folder_text">Na mapy offline mogą być nakładane informacje o wysokości. Te informacje są dostarczane w postaci plików hgt/dem, które mogą być umieszczone w tym folderze.</string>
     <string name="init_mapShadingLinearity_title">Cieniowanie liniowości</string>
     <string name="init_mapShadingLinearity_description">Małe wartości akcentują kontrast na stromych nachyleniach, ale ukrywają zmiany w płaskich; duże wartości sprawiają, że jest bardziej liniowy</string>
     <string name="init_mapShadingScale_title">Nieprzezroczystość cieniowania</string>
@@ -2463,12 +2449,10 @@
     <string name="done">Zrobione</string>
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
-    <string name="later">Później</string>
     <string name="cancel">Anuluj</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
-    <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Obszar</string>
     <string name="rtl_fell_meadow">łąka</string>
