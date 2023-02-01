@@ -278,7 +278,6 @@
     <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
-    <string name="warn_invalid_character">문자 또는 숫자만 허용됩니다.</string>
     <string name="warn_notloggedin_title">오프라인 모드</string>
     <string name="warn_notloggedin_short">로그인하지 않았습니다. 라이브 지도는 로컬에 저장된 캐시 만 표시합니다. 자세한 내용을 보려면 여기를 누르십시오.</string>
     <string name="warn_notloggedin_long">로그인하지 않았습니다 (아직). 라이브 지도는 로컬에 저장된 캐시 만 표시하며 온라인 기능은 작동하지 않습니다.\n\n네트워크 연결이 없거나 서버 문제가 있거나 지오 캐싱 서비스를 다시 구성해야합니다.\n\n지금 서비스를 구성 하시겠습니까?</string>
@@ -357,11 +356,6 @@
         <item quantity="other">다음 %1$d 개 캐시 보기</item>
     </plurals>
     <string name="caches_more_caches_remaining">남은 캐시 보기 (%1$d / %2$d)</string>
-    <string name="caches_downloading">캐시 다운로드 중…\n남은시간: </string>
-    <string name="caches_eta_ltm">1분 이내</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 분</item>
-    </plurals>
     <string name="caches_store_offline">오프라인으로 저장</string>
     <string name="caches_store_offline_map">캐시는 오프라인으로 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
@@ -728,7 +722,6 @@
     <string name="settings_title_system">시스템</string>
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
-    <string name="settings_category_browser">브라우저</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
     <string name="settings_category_nearbysearch">주변 검색</string>
     <string name="init_nearbysearchlimit_title">주변 검색 제한</string>
@@ -897,7 +890,6 @@
     <string name="init_backup_history_delete_warning">구성된 최대 값이 허용하는 것보다 더 많은 백업을 저장했습니다. 초과 백업을 모두 제거 하시겠습니까?</string>
     <string name="init_backup_automatic">자동 백업</string>
     <string name="init_backup_automatic_summary">X일마다 자동 백업을 수행합니다(수동으로 생성된 백업 외에), 0=해제</string>
-    <string name="init_backup_automatic_performing">백업 생성 중…</string>
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
@@ -1004,11 +996,8 @@
     <string name="init_datadirmove_failed">지오캐시 데이터 폴더 이동중 일부 혹은 전부 실패했습니다. 이전 폴더와 새 폴더를 확인하고 누락 된 데이터를 직접 이동하십시오.</string>
     <string name="init_plain_logs">간단한 로그</string>
     <string name="init_summary_plain_logs">색이 없이 로그 내용을 표시합니다.</string>
-    <string name="init_use_native_ua">안드로이드 브라우저</string>
-    <string name="init_summary_use_native_ua">안드로이드 브라우저로 인식하게 합니다. 특정 네트워크를 사용시 로그인 문제를 해결합니다.</string>
     <string name="init_rendertheme_folder">지도 테마 폴더</string>
     <string name="init_mapshading_folder">지도 음영 파일 폴더</string>
-    <string name="init_mapshading_folder_text">오프라인 지도는 고도 정보와 중첩될 수 있습니다. 이 정보는 이 폴더에 있어야 하는 hgt/dem 파일로 제공됩니다.</string>
     <string name="init_mapShadingLinearity_title">음영 선형성</string>
     <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
     <string name="init_mapShadingScale_title">음영 불투명도</string>
@@ -2373,12 +2362,10 @@
     <string name="done">완료</string>
     <string name="finish">마침</string>
     <string name="back">뒤로가기</string>
-    <string name="later">나중에</string>
     <string name="cancel">취소 </string>
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
-    <string name="touch_again_to_exit">종료하려면 다시 누르십시오</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>
