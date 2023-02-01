@@ -262,7 +262,6 @@
     <string name="warn_load_images">读取图片失败。</string>
     <string name="warn_pocket_query_select">沒有選擇攜帶需求</string>
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
     <string name="warn_notloggedin_short">尚未登錄，即時地圖只能顯示儲存在裝置上的寶藏，點選此處以便獲得更多資訊</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
@@ -324,11 +323,6 @@
     <string name="caches_more_caches_no">载入更多答案</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下載藏寶資訊中</string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -574,7 +568,6 @@
     <string name="settings_title_system">系統</string>
     <string name="settings_summary_system">系統的特殊設定和除錯選擇。</string>
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
-    <string name="settings_category_browser">瀏覽器</string>
     <string name="settings_category_geocaching_platform">地理藏寶平台</string>
     <string name="settings_category_geocaching_additionals">未來的服務與軟體plug-in</string>
     <string name="settings_category_social">社群媒體</string>
@@ -787,7 +780,6 @@
     <string name="init_datadirmove_success">成功移動地理藏寶資料夾</string>
     <string name="init_plain_logs">圖像日誌</string>
     <string name="init_summary_plain_logs">顯示輸入的日誌(無顏色)</string>
-    <string name="init_use_native_ua">Android 瀏覽器</string>
     <string name="init_rendertheme_folder">地圖主題資料夾</string>
     <string name="init_maintenance">維護</string>
     <string name="init_location">地理位置</string>
