@@ -94,7 +94,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private static boolean followMyLocation = Settings.isLiveMap();
+    private static boolean followMyLocation = Settings.getFollowMyLocation();
     private MenuItem followMyLocationItem = null;
 
     private RouteTrackUtils routeTrackUtils = null;
@@ -462,6 +462,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     private void initFollowMyLocationButton() {
+        Settings.setFollowMyLocation(followMyLocation);
         if (followMyLocationItem != null) {
             followMyLocationItem.setIcon(followMyLocation ? R.drawable.ic_menu_mylocation : R.drawable.ic_menu_mylocation_off);
         }

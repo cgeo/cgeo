@@ -160,7 +160,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
     // map status data
-    private static boolean followMyLocation = true;
+    private static boolean followMyLocation = Settings.getFollowMyLocation();
     // threads
     private Disposable loadTimer;
     /**
@@ -1513,6 +1513,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     // switch My Location button image
     private void switchMyLocationButton() {
+        Settings.setFollowMyLocation(followMyLocation);
         // FIXME: temporary workaround for the absence of "follow my location" on Android 3.x (see issue #4289).
         if (myLocSwitch != null) {
             myLocSwitch.setChecked(followMyLocation);
