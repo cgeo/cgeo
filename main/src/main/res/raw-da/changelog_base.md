@@ -4,6 +4,7 @@
 - Fix: Missing routing symbol after 'append to route'
 - Fix: Missing route calculation for prepended points
 - New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- New: Add support for GeoJSON data
 
 ### Cache details
 - New: New more sophisticated image gallery
@@ -12,15 +13,15 @@
 - Nyt: Genkender variable indtastet i waypoint brugernoter
 - New: Display lab adventure button in mystery cache details if link to lab adventure detected
 - Fix: Removal of waypoint description not synced for server-side waypoints
+- Fix: Waypoint list not updated after scan
 
 ### General
 - API level change (compileSDK 32)
 - Update some dependant libraries
 - Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
 - New: Preset list name with GPX filename on import
-- Fix (nightly version): Crash on GPX import
-- Nyt: Tillad import af GPX sporfiler, der ikke indeholderer et xmlns namespace tag
-- Nyt: Tilføj monokromt startikon til Android 13
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
 - New: Display geocaching.com member status on home screen
 - Change: GPX-Import: Use name as geocode for 'unknown' connector
 - Fix: Allow filtering for archived caches in owner search
