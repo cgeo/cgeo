@@ -188,7 +188,6 @@
     <string name="warn_load_images">c:geo napakyas sa pag-load ug mga larawan.</string>
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>
     <string name="warn_no_pocket_query_found">Walay bulsa na query ang nakita online.</string>
-    <string name="warn_invalid_character">Ang karakter kinahanglan nga usa ka LETRA o usa ka NUMERO</string>
     <string name="err_read_pocket_query_list">Nasayop og basa sa Pocket query na lista.</string>
     <string name="info_log_posted">ang c:geo malamposon nga naghatag sa log.</string>
     <string name="info_log_saved">ang c:geo malamposon sa pag salbar sa log.</string>
@@ -232,12 +231,6 @@
     <string name="caches_more_caches_no">Wala nay mga cache</string>
     <string name="caches_more_caches_loading">Nag-load ang mga cache…</string>
     <string name="caches_more_caches_currently">karon</string>
-    <string name="caches_downloading">Nag-download ang mga cache…\nETA: </string>
-    <string name="caches_eta_ltm">Ubos sa usa ka minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d mga minuto</item>
-    </plurals>
     <string name="caches_history">Ang mga niaagi</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Han-ayon</string>
@@ -428,7 +421,6 @@
     <string name="init_dbmove_failed">Napakyas ang pag isbog sa database</string>
     <string name="init_plain_logs">Yano na logs</string>
     <string name="init_summary_plain_logs">I-balandra and log entri nga walay kolor</string>
-    <string name="init_summary_use_native_ua">Ilha isip Android browser. Pagsulbad sa mga problema sa pag-login kon gamiton ang pipila ka mga provider sa network.</string>
     <string name="init_maintenance">Pag-mintinar</string>
     <string name="init_maintenance_directories">Tangtanga ang mga naulahi nga mga file</string>
     <string name="init_location_note">Sa mga kagamitan nga adunay mga Google Play Services, ang c:geo mahimong gamiton sa usa ka mas maayo nga geolocation provider. Hinoon, kini nagpugong sa paggamit sa usa ka eksternal nga GPS receiver sa GPS.</string>
