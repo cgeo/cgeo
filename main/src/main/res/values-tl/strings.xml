@@ -199,7 +199,6 @@
     <string name="warn_load_images">ang c:geo ay nabigo sa pag-load ng mga imahe.</string>
     <string name="warn_pocket_query_select">Walang napiling Pocket query.</string>
     <string name="warn_no_pocket_query_found">Walang mahanap na Pocket query sa online.</string>
-    <string name="warn_invalid_character">Ang karakter ay dapat LETRA O NUMERO</string>
     <string name="err_read_pocket_query_list">Nagproblema sa pagbasa ng pakete sa listahan ng query.</string>
     <string name="info_log_posted">ang c:geo ay matagumpay na isinumite ang log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na na-save ang log.</string>
@@ -245,12 +244,6 @@
     <string name="caches_more_caches_no">Wala ng mga cache</string>
     <string name="caches_more_caches_loading">Naglo-load ng mga cache&#8230;</string>
     <string name="caches_more_caches_currently">kasalukuyan</string>
-    <string name="caches_downloading">Ang pagdownload ng mga cache&#8230;\nETA: </string>
-    <string name="caches_eta_ltm">Wala pang isang minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d minuto</item>
-    </plurals>
     <string name="caches_history">Ang Kasaysayan</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Ayusin</string>
@@ -345,7 +338,6 @@
     <string name="settings_title_basicmembers">Ang mga opsyon sa mga baguhang miyembro</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu ng Nabigasyon</string>
-    <string name="settings_category_browser">Ang browser</string>
     <string name="settings_category_social">Sosyal Medya</string>
     <string name="settings_category_logging_other">Iba pang mga Logging na pagpipilian</string>
     <string name="settings_goto_url_button">higit pa &#8230;</string>
@@ -445,8 +437,6 @@
     <string name="init_dbmove_failed">Pumalya ang paglipat sa database</string>
     <string name="init_plain_logs">Ang mga plain na log</string>
     <string name="init_summary_plain_logs">Ipakita ang mga ipapadalang log na walang mga kulay</string>
-    <string name="init_use_native_ua">Brawser ng android</string>
-    <string name="init_summary_use_native_ua">Kilalanin bilang android na brawser. Nasagot ang problema sa pag-login sa paggamit ng tiyak na mga network provider.</string>
     <string name="init_maintenance">Pagpapanatili</string>
     <string name="init_maintenance_directories">Burahin ang inabandong mga payl</string>
     <string name="init_location">Ang geolocation</string>
