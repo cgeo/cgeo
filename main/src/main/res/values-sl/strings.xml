@@ -208,7 +208,6 @@
     <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
     <string name="warn_no_pocket_query_found">Noben Pocket Query ni bil najden online.</string>
-    <string name="warn_invalid_character">Znak mora biti ČRKA ali ŠTEVILO</string>
     <string name="err_read_pocket_query_list">Napaka pri branju Pocket query seznama.</string>
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
@@ -252,14 +251,6 @@
     <string name="caches_more_caches_no">Ni več zakladov</string>
     <string name="caches_more_caches_loading">Nalagam zaklade…</string>
     <string name="caches_more_caches_currently">trenutno</string>
-    <string name="caches_downloading">Nalagam zaklade…\nČas do konca: </string>
-    <string name="caches_eta_ltm">manj kot minuta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuta</item>
-        <item quantity="two">%d minuti</item>
-        <item quantity="few">%d minute</item>
-        <item quantity="other">%d minut</item>
-    </plurals>
     <string name="caches_history">Zgodovina</string>
     <string name="caches_on_map">Pokaži na zemljevidu</string>
     <string name="caches_sort">Razvrsti</string>
@@ -358,7 +349,6 @@
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
-    <string name="settings_category_browser">Brskalnik</string>
     <string name="settings_category_social">Socialni vtičniki</string>
     <string name="settings_category_logging_other">Druge možnosti zapisa</string>
     <string name="settings_goto_url_button">več …</string>
@@ -448,8 +438,6 @@
     <string name="init_dbmove_failed">Premikanje baze ni uspelo</string>
     <string name="init_plain_logs">Osnovni zapisih</string>
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
-    <string name="init_use_native_ua">Android brskalnik</string>
-    <string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
     <string name="init_maintenance">Vzdrževanje</string>
     <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
     <string name="init_location">Geolokacija</string>
