@@ -528,11 +528,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         reloadIndividualRoute();
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route, color) -> {
                     if (route instanceof Route) {
                         ((Route) route).calculateNavigationRoute();
                     }
-                    trackLayer.updateRoute(key, route);
+                    trackLayer.updateRoute(key, route, color);
                 }), () -> trackLayer.requestRedraw());
             } catch (RejectedExecutionException e) {
                 Log.e("NewMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -732,7 +732,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else {
             final IGeoDataProvider gdp = tracks.getRoute(key);
             if (trackLayer != null && (gdp == null || gdp instanceof Route)) {
-                trackLayer.updateRoute(key, gdp);
+                trackLayer.updateRoute(key, gdp, tracks.getColor(key));
             }
             if (null != geoObjectLayer && (gdp == null || gdp instanceof GeoObjectList)) {
                 if (gdp == null || gdp.isHidden()) {
@@ -1469,7 +1469,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTrack(final String key, final IGeoDataProvider route) {
+    private void setTrack(final String key, final IGeoDataProvider route, final int unused) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
         updateRouteTrackButtonVisibility();

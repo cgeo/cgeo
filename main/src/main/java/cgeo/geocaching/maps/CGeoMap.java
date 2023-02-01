@@ -617,7 +617,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (null == tracks && !preventReloading) {
             mapActivity.getRouteTrackUtils().reloadTrack(tracks.getTrackfile(key), this::setTrack);
         } else if (null != tracks && null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
-            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key));
+            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key), tracks.getColor(key));
         }
     }
 
@@ -833,11 +833,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         reloadIndividualRoute();
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route, color) -> {
                     if (route instanceof Route) {
                         ((Route) route).calculateNavigationRoute();
                     }
-                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
+                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route, color);
                 }), () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
             } catch (RejectedExecutionException e) {
                 Log.e("CGeoMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -853,7 +853,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void setTrack(final String key, final IGeoDataProvider route) {
+    public void setTrack(final String key, final IGeoDataProvider route, final int unused) {
         mapActivity.getTracks().setRoute(key, route);
         resumeTrack(key, null == route);
         updateRouteTrackButtonVisibility();

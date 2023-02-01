@@ -23,8 +23,6 @@ import org.mapsforge.map.layer.Layer;
 
 abstract class AbstractRouteLayer extends Layer {
     protected float width;
-    private Paint paint = null;
-    protected int lineColor = 0xD00000A0;
 
     // used for caching
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
@@ -35,18 +33,19 @@ abstract class AbstractRouteLayer extends Layer {
         private List<List<Geopoint>> track = null;
         private Path path = null;
         private Point topLeftPoint = null;
+        private Paint paint = null;
+        protected int lineColor = 0xD00000A0;
     }
 
     protected AbstractRouteLayer() {
         width = MapLineUtils.getDefaultThinLineWidth();
     }
 
-    public void updateRoute(final String key, final IGeoDataProvider r) {
+    public void updateRoute(final String key, final IGeoDataProvider r, final int color) {
         if (!(r instanceof Route)) {
             return;
         }
         final Route route = (Route) r;
-        resetColor();
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -55,6 +54,10 @@ abstract class AbstractRouteLayer extends Layer {
             }
             c.track = null;
             c.path = null;
+            if (c.lineColor != color) {
+                c.paint = resetColor(color);
+                c.lineColor = color;
+            }
             if (route != null) {
                 c.track = getAllPoints(route);
                 c.isHidden = route.isHidden();
@@ -77,12 +80,13 @@ abstract class AbstractRouteLayer extends Layer {
         }
     }
 
-    public void resetColor() {
-        paint = AndroidGraphicFactory.INSTANCE.createPaint();
+    public Paint resetColor(final int lineColor) {
+        final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
         paint.setStrokeWidth(width);
         paint.setStyle(Style.STROKE);
         paint.setColor(lineColor);
         paint.setTextSize(20);
+        return paint;
     }
 
     public void setHidden(final String key, final boolean isHidden) {
@@ -105,7 +109,7 @@ abstract class AbstractRouteLayer extends Layer {
                         translateRouteToPath(mapSize, topLeftPoint, c);
                     }
                     if (null != c.path) {
-                        canvas.drawPath(c.path, paint);
+                        canvas.drawPath(c.path, c.paint);
                     }
                 }
             }

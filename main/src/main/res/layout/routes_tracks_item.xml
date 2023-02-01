@@ -17,10 +17,20 @@
         android:id="@+id/item_edit"
         style="@style/button_icon"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_refresh"
+        android:layout_toLeftOf="@id/item_color"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_menu_edit"
         android:tooltipText="@string/map_sort_individual_route"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/item_color"
+        style="@style/button_icon"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_refresh"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/downloader_theme"
+        android:tooltipText="@string/routes_tracks_color"
         android:visibility="gone" />
 
     <ImageButton

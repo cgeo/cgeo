@@ -6,6 +6,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -42,6 +43,10 @@ public class Trackfiles extends DataStore.DBExtension {
         return long1 != 0;
     }
 
+    public int getColor() {
+        return long2 != 0 ? (int) long2 : MapLineUtils.getTrackColor();
+    }
+
     /** to be called by Tracks only, not intended for direct usage */
     public static String createTrackfile(final Activity activity, final Uri uri) {
         // copy file to c:geo internal storage
@@ -71,6 +76,13 @@ public class Trackfiles extends DataStore.DBExtension {
         long1 = hide ? 1 : 0;
         removeAll(type, key);
         add(type, key, long1, long2, long3, long4, string1, string2, string3, string4);
+    }
+
+    /** to be called by Tracks only, not intended for direct usage */
+    public void setColor(final int newColor) {
+        long2 = newColor;
+        removeAll(type, key);
+        add(type, key, long1, newColor, long3, long4, string1, string2, string3, string4);
     }
 
     /** to be called by Tracks only, not intended for direct usage */
