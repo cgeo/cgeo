@@ -274,7 +274,6 @@
     <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
-    <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
     <string name="warn_notloggedin_title">Λειτουργία χωρίς σύνδεση</string>
     <string name="warn_notloggedin_short">Δεν είστε συνδεδεμένοι. Ο ζωντανός χάρτης θα εμφανίζει μόνο τις ηδη αποθηκευμένες κρύπτες. Πατήστε εδώ για περισσότερες πληροφορίες.</string>
     <string name="warn_notloggedin_long">Δεν έχετε συνδεθεί (ακόμη). Ο ζωντανός χάρτης θα εμφανίζει μόνο τις τοπικά αποθηκευμένες κρύπτες και οι λειτουργίες που απαιτούν σύνδεση δεν θα είναι διαθέσιμες.\n\nΕίτε δεν υπάρχει σύνδεση σε δίκτυο ή υπάρχει πρόβλημα με τον server ή πρέπει να ρυθμίσετε τις υπηρεσίες σας στο geocaching. \n\nΘέλετε να ρυθμίσετε τις υπηρεσίες τώρα;</string>
@@ -344,12 +343,6 @@
     <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
     <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
-    <string name="caches_downloading">Λήψη κρυπτών…\nETA: </string>
-    <string name="caches_eta_ltm">Λιγότερο από ένα λεπτό</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d λεπτό</item>
-        <item quantity="other">%dλεπτά</item>
-    </plurals>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
     <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
@@ -715,7 +708,6 @@
     <string name="settings_title_system">Σύστημα</string>
     <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
-    <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
     <string name="settings_category_nearbysearch">Κοντινή αναζήτηση</string>
     <string name="init_nearbysearchlimit_title">Όρια αναζήτησης αποτελεσμάτων</string>
@@ -882,7 +874,6 @@
     <string name="init_backup_history_length_max">Διατήρηση όλων</string>
     <string name="init_backup_history_delete_warning">Έχετε αποθηκεύσει περισσότερα αρχεία ασφαλείας από το μέγιστο επιτρεπτό όριο. Θέλετε να διαγραφούν όλα τα πλεονάζοντα αρχεία ασφαλείας;</string>
     <string name="init_backup_automatic_summary">Εκτελεί ένα αυτόματο αντίγραφο ασφαλείας κάθε x ημέρες (επιπλέον των τυχόν χειροκίνητα δημιουργημένων αντιγράφων ασφαλείας), 0=off</string>
-    <string name="init_backup_automatic_performing">Δημιουργία αντιγράφου ασφαλείας…</string>
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
@@ -989,11 +980,8 @@
     <string name="init_datadirmove_failed">Η μετακίνηση του καταλόγου δεδομένων κρυπτών απέτυχε εν μέρει ή συνολικά. Παρακαλώ ελέγξτε τους παλιούς και νέους καταλόγους και μετακινήστε χειροκίνητα εάν χρειαστεί.</string>
     <string name="init_plain_logs">Απλές καταγραφές</string>
     <string name="init_summary_plain_logs">Καταχωρήσεις των αρχείων καταγραφής χωρίς χρώματα</string>
-    <string name="init_use_native_ua">Πρόγραμμα περιήγησης Android</string>
-    <string name="init_summary_use_native_ua">Προσδιορίζουν το πρόγραμμα περιήγησης για Android. Λύνει προβλήματα σύνδεσης όταν χρησιμοποιείτε ορισμένες υπηρεσίες παροχής δικτύου.</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
     <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
-    <string name="init_mapshading_folder_text">Οι χάρτες εκτός σύνδεσης μπορούν να επικαλυφθούν με υψομετρικές πληροφορίες. Αυτές οι πληροφορίες παρέχονται ως hgt/dem αρχεία που μπορούν να τοποθετηθούν σε αυτόν τον φάκελο.</string>
     <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
     <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
     <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
@@ -2355,12 +2343,10 @@
     <string name="done">Ολοκληρώθηκε</string>
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
-    <string name="later">Αργότερα</string>
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
-    <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Περιοχές</string>
     <string name="rtl_fell_meadow">Λιβάδι</string>
