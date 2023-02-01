@@ -4,6 +4,7 @@
 - Fix: Missing routing symbol after 'append to route'
 - Fix: Missing route calculation for prepended points
 - New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- New: Add support for GeoJSON data
 
 ### Cache details
 - New: New more sophisticated image gallery
@@ -12,6 +13,7 @@
 - New: Recognize variables entered in waypoint user notes
 - New: Display lab adventure button in mystery cache details if link to lab adventure detected
 - Fix: Removal of waypoint description not synced for server-side waypoints
+- Fix: Waypoint list not updated after scan
 
 ### General
 - API level change (compileSDK 32)
