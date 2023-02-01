@@ -270,7 +270,6 @@
     <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
     <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
     <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
-    <string name="warn_invalid_character">A karakter BETŰ vagy SZÁMJEGY lehet</string>
     <string name="warn_notloggedin_title">Offline mód</string>
     <string name="warn_notloggedin_long">Nem vagy (még) bejelentkezve. Az Élő térképen csak a letöltött ládák láthatóak és nem működnek az online funkciók.\n\nNincs hálózati kapcsolat, vagy probléma van a szerverrel, vagy be kell állítanod (újra) a szolgáltatásokat.\n\nBeállítod most a szolgáltatásokat?</string>
     <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
@@ -321,12 +320,6 @@
     <string name="caches_more_caches_no">Ez az összes. Nincs több láda.</string>
     <string name="caches_more_caches_loading">Ládák betöltése…</string>
     <string name="caches_more_caches_currently">jelenleg</string>
-    <string name="caches_downloading">Ládák letöltése…\n</string>
-    <string name="caches_eta_ltm">Kevesebb, mint egy perc</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d perc</item>
-        <item quantity="other">%d perc</item>
-    </plurals>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
     <string name="caches_sort">Rendezés</string>
@@ -498,7 +491,6 @@
     <string name="settings_title_basicmembers">Normál tagok beállításai</string>
     <string name="settings_title_system">Rendszer</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
-    <string name="settings_category_browser">Böngésző</string>
     <string name="settings_category_geocaching_platform">Geocaching platformok</string>
     <string name="settings_category_geocaching_additionals">További szolgáltatások és addonok</string>
     <string name="settings_category_social">Közösségi média</string>
@@ -626,8 +618,6 @@
     <string name="init_dbmove_failed">Az adatbázis mozgatása sikertelen</string>
     <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
-    <string name="init_use_native_ua">Azonosítás Android böngészőként.</string>
-    <string name="init_summary_use_native_ua">Azonosítás Android böngészőként. Ez megoldja a bejelentkezési problémákat bizonyos szolgáltatóknál.</string>
     <string name="init_maintenance">Karbantartás</string>
     <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
     <string name="init_location">Helymeghatározás</string>
