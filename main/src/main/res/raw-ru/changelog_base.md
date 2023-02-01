@@ -4,6 +4,7 @@
 - Исправлено: Отсутствовал символ маршрутизации после 'добавить в маршрут'
 - Исправлено: Отсутствовал расчет маршрута для добавленных точек
 - Новое: Добавлена поддержка темы 'Voluntary MF5' OpenAndroMaps
+- New: Add support for GeoJSON data
 
 ### Детали тайника
 - Новое: Новая более проработанная галерея изображений
@@ -12,16 +13,16 @@
 - Новое: Распознавание переменных, введенных в заметки пользователя
 - Новое: Отображение кнопки Лаборатории Приключений в логических тайниках, если необходимо
 - Исправлено: Удаление описания точки, не синхронизировалось для заметок на сервере
+- Fix: Waypoint list not updated after scan
 
 ### Общее
 - Изменение уровня API (compileSDK 32)
 - Обновление некоторых зависимых библиотек
 - Изменение: Использован другой механизм Android для получения загрузок (для лучшей совместимости с Android 12+)
 - Новое: Имя списка пресетов с именем файла GPX при импорте
-- Исправлено (ночная версия): Сбой при импорте GPX
-- Новое: Разрешен импорт файлов GPX, без тэга xmlns
-- Новое: Добавлена монохромная иконка лаунчера для Android 13
-- Новое: Отображение статуса участника geocaching.com на домашнем экране
-- Изменение: GPX-импорт: Использовано имя как геокод для коннектора 'неизвестно'
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
+- New: Display geocaching.com member status on home screen
+- Change: GPX-Import: Use name as geocode for 'unknown' connector
 - Fix: Allow filtering for archived caches in owner search
 - Fix: Line breaks sometimes missing in logbook view directly after posting a log
