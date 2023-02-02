@@ -1,3 +1,4 @@
+import com.getkeepsafe.dexcount.OutputFormat
 import org.apache.tools.ant.filters.ReplaceTokens
 
 /*
@@ -9,14 +10,6 @@ import org.apache.tools.ant.filters.ReplaceTokens
  * Android plugin, http://developer.android.com/tools/building/plugin-for-gradle.html
  */
 apply plugin: 'com.android.application'
-
-/*
- * https://github.com/KeepSafe/dexcount-gradle-plugin
- * dex counting can take several seconds, therefore do this only on the CI server
- */
-if (isContinuousIntegrationServer()) {
-    apply plugin: 'com.getkeepsafe.dexcount'
-}
 
 android {
     namespace 'cgeo.geocaching'
@@ -479,9 +472,6 @@ dependencies {
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 }
 
-// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
-apply plugin: 'de.mobilej.unmock'
-
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
     preBuild.dependsOn("verifyCgeoKeys")
@@ -546,11 +536,6 @@ class GitCommit {
     static String currentShort() {
         return current().substring(0, 7)
     }
-}
-
-// check whether this is a local build or a CI server build
-static boolean isContinuousIntegrationServer() {
-    return System.getenv('BUILD_NUMBER') != null
 }
 
 // have a run task for our builds to launch the app directly from gradle
@@ -665,6 +650,28 @@ tasks.whenTaskAdded { theTask ->
         theTask.dependsOn "copyDefaultPreferencesToAndroid"
     }
 }
+
+/*
+ * https://github.com/KeepSafe/dexcount-gradle-plugin
+ * dex counting can take several seconds, therefore do this only on the CI server
+ */
+if (isContinuousIntegrationServer()) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+
+    dexcount {
+        format = OutputFormat.LIST
+        includeClassCount = true
+        includeTotalMethodCount = true
+    }
+}
+
+// check whether this is a local build or a CI server build
+static boolean isContinuousIntegrationServer() {
+    return System.getenv('BUILD_NUMBER') != null
+}
+
+// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
+apply plugin: 'de.mobilej.unmock'
 
 /*
  * own checkstyle configuration
