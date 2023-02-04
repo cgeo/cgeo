@@ -2334,6 +2334,7 @@
     <string name="maptheme_scale_text_summary">Skaliert zusätzlich angezeigte Texte in der Karte; 100% = keine zusätzliche Skalierung</string>
     <string name="maptheme_scale_symbol_title">Symbolskalierungsfaktor</string>
     <string name="maptheme_scale_symbol_summary">Skaliert zusätzlich angezeigte Symbole in der Karte; 100% = keine zusätzliche Skalierung</string>
+    <string name="vtm_theme_variant">Design-Variante</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
