@@ -752,7 +752,10 @@ public class BackupUtils {
             return null; // We don't want to overwrite an existing backup
         }
         final Folder subfolder = Folder.fromFolder(folder, subfoldername);
-        ContentStorage.get().ensureFolder(subfolder, true);
+        if (!ContentStorage.get().ensureFolder(subfolder, true)) {
+            Log.w("Could not create/find new folder " + subfolder);
+            return null;
+        }
         return subfolder;
     }
 
