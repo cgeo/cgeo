@@ -2458,9 +2458,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         @Override
         public boolean onMenuItemClick(final MenuItem menuItem) {
+            if (selectedTextView == null || selectedTextView.getText() == null) {
+                return false;
+            }
+            final CharSequence text = selectedTextView.getText();
             final int startSelection = selectedTextView.getSelectionStart();
             final int endSelection = selectedTextView.getSelectionEnd();
-            clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
+            clickedItemText = startSelection >= 0 && endSelection >= startSelection && endSelection <= text.length() ?
+                    text.subSequence(startSelection, endSelection) : text;
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText, cache);
         }
     }
