@@ -5,6 +5,7 @@
 - Исправлено: Отсутствовал расчет маршрута для добавленных точек
 - Новое: Добавлена поддержка темы 'Voluntary MF5' OpenAndroMaps
 - New: Add support for GeoJSON data
+- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
 
 ### Детали тайника
 - Новое: Новая более проработанная галерея изображений
@@ -26,3 +27,4 @@
 - Change: GPX-Import: Use name as geocode for 'unknown' connector
 - Fix: Allow filtering for archived caches in owner search
 - Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
