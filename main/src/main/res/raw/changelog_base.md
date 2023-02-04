@@ -27,3 +27,4 @@
 - Change: GPX-Import: Use name as geocode for 'unknown' connector
 - Fix: Allow filtering for archived caches in owner search
 - Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
