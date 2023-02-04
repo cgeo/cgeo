@@ -964,6 +964,7 @@
         <package android:name="com.webmajstr.pebble_gc" />
         <package android:name="de.wolffire.chirpwolf" />
         <package android:name="googoo.android.btgps" />
+        <package android:name="gr.talent.cruiser" />
         <package android:name="menion.android.locus" />
         <package android:name="menion.android.locus.free.amazon" />
         <package android:name="menion.android.locus.free.samsung" />
