@@ -279,7 +279,6 @@
     <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
-    <string name="warn_invalid_character">El caràcter ha de ser una LLETRA o un DÍGIT</string>
     <string name="warn_notloggedin_title">Fora de línia</string>
     <string name="warn_notloggedin_short">No heu iniciat la sessió. El mapa en viu només mostrarà catxés emmagatzemats localment. Toqueu aquí per obtenir més informació.</string>
     <string name="warn_notloggedin_long">No heu iniciat la sessió. El mapa en viu només mostrarà els catxés emmagatzemats localment i les funcions en línia no funcionaran. \n\n Si no hi ha connexió de xarxa, no hi ha cap problema de servidor o heu de (tornar) configurar els vostres serveis de geocatxing. \n\n Voleu configurar els serveis ara?</string>
@@ -359,12 +358,6 @@
         <item quantity="other">Carregueu els següents %1$d catxés</item>
     </plurals>
     <string name="caches_more_caches_remaining">Carrega els catxés restants (%1$d / %2$d)</string>
-    <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
-    <string name="caches_eta_ltm">Menys d\'un minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="other">%d minuts</item>
-    </plurals>
     <string name="caches_store_offline">Desa fora de línia</string>
     <string name="caches_store_offline_map">Desa els catxés fora de línia</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
@@ -736,7 +729,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
-    <string name="settings_category_browser">Navegador</string>
     <string name="settings_category_geocaching_platform">Plataformes de Geocatxing</string>
     <string name="settings_category_nearbysearch">Cerca propers</string>
     <string name="init_nearbysearchlimit_title">Límit de cerca propers</string>
@@ -905,7 +897,6 @@
     <string name="init_backup_history_delete_warning">Heu desat més còpies de seguretat de les que permet el màxim configurat. Confirmes que vols eliminar el excés de les còpies de seguretat?</string>
     <string name="init_backup_automatic">Còpia de seguretat automàtica</string>
     <string name="init_backup_automatic_summary">Realitza una còpia de seguretat automàtica cada x dies (a més de qualsevol còpia de seguretat creada manualment), 0=desactivat</string>
-    <string name="init_backup_automatic_performing">S\'està creant una còpia de seguretat…</string>
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
@@ -1012,11 +1003,8 @@
     <string name="init_datadirmove_failed">Error en moure la carpeta de dades Geocatxés parcialment o completament. Comproveu les carpetes antigues i les noves i moveu les dades que falten a mà.</string>
     <string name="init_plain_logs">Registres sense colors</string>
     <string name="init_summary_plain_logs">Veure els registres sense colors</string>
-    <string name="init_use_native_ua">Navegador d\'Android</string>
-    <string name="init_summary_use_native_ua">Identifica com a navegador d\'Android. Resol els problemes de connexió quan utilitzeu certs proveïdors de xarxa.</string>
     <string name="init_rendertheme_folder">Carpeta de temes de mapes</string>
     <string name="init_mapshading_folder">Carpeta de fitxers d\'ombrejat de mapes</string>
-    <string name="init_mapshading_folder_text">Els mapes fora de línia es poden superposar amb informació d\'elevació. Aquesta informació es proporciona com a fitxers hgt/dem que s\'han de col·locar en aquesta carpeta.</string>
     <string name="init_mapShadingLinearity_title">Linealitat de l\'ombrejat</string>
     <string name="init_mapShadingLinearity_description">Els valors petits accentuen el contrast en pendents pronunciats però amaguen els canvis en plans, els valors grans el fan més lineal</string>
     <string name="init_mapShadingScale_title">Opacitat d\'ombrejat</string>
@@ -2405,12 +2393,10 @@
     <string name="done">Fet</string>
     <string name="finish">Acabar</string>
     <string name="back">Enrere</string>
-    <string name="later">Més tard</string>
     <string name="cancel">Cancel•la</string>
     <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
-    <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Àrees</string>
     <string name="rtl_fell_meadow">prat</string>

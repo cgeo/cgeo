@@ -277,7 +277,6 @@
     <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
-    <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
     <string name="warn_notloggedin_title">Mode hors-ligne</string>
     <string name="warn_notloggedin_short">Non connecté. Seules les caches enregistrées localement seront affichées. Appuyez pour plus d\'informations.</string>
     <string name="warn_notloggedin_long">Non (encore) connecté. La carte en temps réel n\'affichera que les caches stockées localement et les fonctions en ligne ne fonctionneront pas.\n\nSoit il n\'y a pas de connexion réseau, soit il y a un problème de serveur ou bien vous devez (re)configurer vos services geocaching.\n\nSouhaitez-vous configurer les services maintenant ?</string>
@@ -355,12 +354,6 @@
         <item quantity="other">Charger les %1$d caches suivantes</item>
     </plurals>
     <string name="caches_more_caches_remaining">Charger les caches restantes (%1$d / %2$d)</string>
-    <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
-    <string name="caches_eta_ltm">Moins d\'une minute</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minute</item>
-        <item quantity="other">%d minutes</item>
-    </plurals>
     <string name="caches_store_offline">Stocker localement</string>
     <string name="caches_store_offline_map">Stocker les caches localement</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
@@ -706,7 +699,6 @@
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Paramètres spécifiques au système et options de débogage.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
-    <string name="settings_category_browser">Navigateur</string>
     <string name="settings_category_geocaching_platform">Plateforme de Géocaching</string>
     <string name="settings_category_nearbysearch">Recherche à proximité</string>
     <string name="init_nearbysearchlimit_title">Rayon pour la recherche à proximité</string>
@@ -875,7 +867,6 @@
     <string name="init_backup_history_delete_warning">Vous avez enregistré plus de sauvegardes que la valeur maximale que vous avez configurée autorise. Voulez-vous vraiment supprimer toutes les sauvegardes excédentaires ?</string>
     <string name="init_backup_automatic">Sauvegarde automatique</string>
     <string name="init_backup_automatic_summary">Effectue une sauvegarde automatique tous les x jours (en plus des sauvegardes créées manuellement), 0=off</string>
-    <string name="init_backup_automatic_performing">Création d\'une sauvegarde…</string>
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
@@ -982,11 +973,8 @@
     <string name="init_datadirmove_failed">Des erreurs se sont produites lors du déplacement du dossier de données des géocaches. Veuillez vérifier l\'ancien et le nouveau dossiers et déplacer manuellement les données manquantes.</string>
     <string name="init_plain_logs">Texte brut</string>
     <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
-    <string name="init_use_native_ua">Navigateur web Android</string>
-    <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
     <string name="init_mapshading_folder">Dossier des fichiers d\'ombrage de la carte</string>
-    <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
     <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
@@ -2358,12 +2346,10 @@
     <string name="done">Terminé</string>
     <string name="finish">Terminer</string>
     <string name="back">Retour</string>
-    <string name="later">Plus tard</string>
     <string name="cancel">Annuler</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
-    <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>

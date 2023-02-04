@@ -238,7 +238,6 @@
     <string name="warn_load_images">c:geo 读取图片失败。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">离线模式</string>
     <string name="warn_notloggedin_short">未登录。实时地图只会显示本地存储的藏点。点击此处获取更多信息。</string>
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
@@ -294,11 +293,6 @@
     <string name="caches_more_caches_no">没有更多藏点</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下载藏点…\nETA: </string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -438,7 +432,6 @@
     <string name="settings_title_system">系统</string>
     <string name="settings_summary_system">系统特定设置和调试选项。</string>
     <string name="settings_title_navigation_menu">导航菜单</string>
-    <string name="settings_category_browser">浏览器</string>
     <string name="settings_category_geocaching_platform">地理藏宝平台</string>
     <string name="settings_category_geocaching_additionals">更多服务和插件</string>
     <string name="settings_category_social">社交媒体</string>
@@ -635,8 +628,6 @@
     <string name="init_dbmove_failed">移动数据库失败</string>
     <string name="init_plain_logs">普通日志</string>
     <string name="init_summary_plain_logs">显示不带颜色的日志条目</string>
-    <string name="init_use_native_ua">安卓浏览器</string>
-    <string name="init_summary_use_native_ua">识别为安卓浏览器。在使用某些网络提供商时解决登录问题。</string>
     <string name="init_maintenance">维护</string>
     <string name="init_maintenance_directories">删除孤立的文件</string>
     <string name="init_location">地理位置</string>

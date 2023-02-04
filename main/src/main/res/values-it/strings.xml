@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
-    <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
     <string name="warn_notloggedin_short">Non loggato. La mappa live mostrerà solo i cache memorizzati localmente. Tocca qui per ulteriori informazioni.</string>
     <string name="warn_notloggedin_long">Non connesso (ancora). La mappa live mostrerà solo i cache memorizzati localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
@@ -358,12 +357,6 @@
         <item quantity="other">Carica i prossimi %1$d cache</item>
     </plurals>
     <string name="caches_more_caches_remaining">Carica i (%1$d / %2$d) cache rimanenti</string>
-    <string name="caches_downloading">Download cache in corso…\nETA: </string>
-    <string name="caches_eta_ltm">Meno di un minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d minuti</item>
-    </plurals>
     <string name="caches_store_offline">Salva offline</string>
     <string name="caches_store_offline_map">Salva i cache offline</string>
     <string name="caches_store_selected">Salva selezionati</string>
@@ -735,7 +728,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
     <string name="settings_category_nearbysearch">Ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_title">Limite di ricerca nelle vicinanze</string>
@@ -904,7 +896,6 @@
     <string name="init_backup_history_delete_warning">Hai salvato più backup di quelli permessi dal valore massimo configurato. Vuoi davvero rimuovere tutti i backup in eccesso?</string>
     <string name="init_backup_automatic">Backup automatico</string>
     <string name="init_backup_automatic_summary">Esegue un backup automatico ogni x giorni (in aggiunta a qualsiasi backup creato manualmente), 0=off</string>
-    <string name="init_backup_automatic_performing">Creazione Backup…</string>
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
@@ -1011,11 +1002,8 @@
     <string name="init_datadirmove_failed">Spostamento parziale o totale della cartella dati Geocache non riuscito. Controllare le vecchie e le nuove cartelle e spostare manualmente i dati mancanti.</string>
     <string name="init_plain_logs">LOG semplificati</string>
     <string name="init_summary_plain_logs">Visualizza i LOG senza colori</string>
-    <string name="init_use_native_ua">Browser Android</string>
-    <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
     <string name="init_rendertheme_folder">Cartella Temi Mappa</string>
     <string name="init_mapshading_folder">Cartella File Di ombreggiatura della Mappa</string>
-    <string name="init_mapshading_folder_text">Le mappe off-line possono essere sovrepposte da curve di livello. Queste informazioni sono fornite come file hgt/dem che possono essere posizionati in questa cartella.</string>
     <string name="init_mapShadingLinearity_title">Linearità di Ombreggiatura</string>
     <string name="init_mapShadingLinearity_description">Piccoli valori accentuano il contrasto in pendii ripidi, ma nascondono cambiamenti nelle zone pianeggianti, grandi valori lo rendono più lineare</string>
     <string name="init_mapShadingScale_title">Opacità Ombreggiatura</string>
@@ -2403,12 +2391,10 @@
     <string name="done">Fatto</string>
     <string name="finish">Fine</string>
     <string name="back">Indietro</string>
-    <string name="later">Dopo</string>
     <string name="cancel">Annulla</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
-    <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>

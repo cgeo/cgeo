@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo nepavyko įkelti vaizdo.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
-    <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
     <string name="warn_notloggedin_title">Darbas neprisijungus</string>
     <string name="warn_notloggedin_short">Neprisijungta. Gyvame žemėlapyje bus rodomos tik išsaugotos slėptuvės. Norėdami gauti daugiau informacijos, bakstelėkite čia.</string>
     <string name="warn_notloggedin_long">(Dar) neprisijungta. Gyvame žemėlapyje bus rodomos tik išsaugotos slėptuvės bei internetinės funkcijos neveiks.\n\nGali būti bėda su ryšiu, bėda su serveriu ar su paslaugų konfigūracija.\n\nAr norite konfigūruoti paslaugas?</string>
@@ -360,14 +359,6 @@
         <item quantity="other">Įkelti kitas %1$d slėptuvių</item>
     </plurals>
     <string name="caches_more_caches_remaining">Įkelti likusias slėptuves (%1$d / %2$d)</string>
-    <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks: </string>
-    <string name="caches_eta_ltm">mažiau nei minutę</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minutė</item>
-        <item quantity="few">%d minutės</item>
-        <item quantity="many">%d minučių</item>
-        <item quantity="other">%d minučių</item>
-    </plurals>
     <string name="caches_store_offline">Saugoti naudojimui neprisijungus</string>
     <string name="caches_store_offline_map">Saugoti slėptuves naudojimui neprisijungus</string>
     <string name="caches_store_selected">Saugoti pasirinktas</string>
@@ -749,7 +740,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Specifiniai sistemos nustatymai ir derinimo parinktys.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
-    <string name="settings_category_browser">Naršyklė</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
     <string name="settings_category_nearbysearch">Paieška netoliase</string>
     <string name="init_nearbysearchlimit_title">Paieškos netoliase limitas</string>
@@ -918,7 +908,6 @@
     <string name="init_backup_history_delete_warning">Išsaugojote daugiau atsarginių kopijų, nei leidžia jūsų sukonfigūruota didžiausia vertė. Ar tikrai norite pašalinti visas perteklines atsargines kopijas?</string>
     <string name="init_backup_automatic">Automatinė atsarginė kopija</string>
     <string name="init_backup_automatic_summary">Atlieka automatinę atsarginę kopiją kas x dienų (be rankiniu būdu sukurtų atsarginių kopijų), 0= išjungta</string>
-    <string name="init_backup_automatic_performing">Kuriama atsarginė kopija…</string>
     <string name="init_user_confirmation">Aš žinau, ką darau</string>
     <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
@@ -1025,11 +1014,8 @@
     <string name="init_datadirmove_failed">Slėptuvių duomenų katalogo perkėlimas dalinai/visiškai nepavyko. Patikrinkite senus bei naujus aplankus ir perkelkite trūkstamus duomenis rankiniu būdu.</string>
     <string name="init_plain_logs">Nespalvoti įrašai</string>
     <string name="init_summary_plain_logs">Rodyti žurnalo įrašus be spalvų</string>
-    <string name="init_use_native_ua">\"Android\" naršyklė</string>
-    <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
     <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
     <string name="init_mapshading_folder">Žemėlapio šešėliavimo failų aplankas</string>
-    <string name="init_mapshading_folder_text">Neprisijungus naudojami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
     <string name="init_mapShadingLinearity_title">Šešėlių tiesiškumas</string>
     <string name="init_mapShadingLinearity_description">Mažos vertės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
     <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
@@ -2462,12 +2448,10 @@
     <string name="done">Atlikta</string>
     <string name="finish">Baigta</string>
     <string name="back">Atgal</string>
-    <string name="later">Vėliau</string>
     <string name="cancel">Atšaukti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Pažymėti viską</string>
-    <string name="touch_again_to_exit">Palieskite dar kartą, kad išeitumėte</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Plotai</string>
     <string name="rtl_fell_meadow">kirtimas / pieva</string>

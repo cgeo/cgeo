@@ -272,7 +272,6 @@
     <string name="warn_load_images">画像を読み込むことができませんでした</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
-    <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
     <string name="warn_notloggedin_short">ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
@@ -345,11 +344,6 @@
         <item quantity="other">次の%1$dキャッシュを読み込む</item>
     </plurals>
     <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
-    <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
-    <string name="caches_eta_ltm">1分以内</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分</item>
-    </plurals>
     <string name="caches_store_background_title">キャッシュのダウンロード</string>
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>
@@ -650,7 +644,6 @@
     <string name="settings_title_system">システム</string>
     <string name="settings_summary_system">システム固有の設定とデバッグオプション</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
-    <string name="settings_category_browser">ブラウザ</string>
     <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
     <string name="settings_category_nearbysearch">近くの検索</string>
     <string name="init_nearbysearchlimit_title">近くの検索の範囲</string>
@@ -815,7 +808,6 @@
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
     <string name="init_backup_automatic">自動バックアップ</string>
     <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象)にします。0にするとオフになります</string>
-    <string name="init_backup_automatic_performing">バックアップを作成中…</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
@@ -919,8 +911,6 @@
     <string name="init_datadirmove_failed">ジオキャッシュ データフォルダの移動に失敗しました。新旧のフォルダを確認して必要に応じて手動で移動ください</string>
     <string name="init_plain_logs">プレーンログ</string>
     <string name="init_summary_plain_logs">ログブックのフォントカラーを無効化</string>
-    <string name="init_use_native_ua">Androidブラウザ</string>
-    <string name="init_summary_use_native_ua">OSにブラウザとして認識させる\n特定のインターネットプロバイダでログインできない場合にチェックしてください</string>
     <string name="init_rendertheme_folder">地図テーマフォルダ</string>
     <string name="init_maintenance">メンテナンス</string>
     <string name="init_maintenance_directories_note">c:geoは画像、ログの画像、キャッシュ関係ファイルを別々のフォルダに保存しますが、古いファイルが残っている時があります(例えば、データベースをインポート/エクスポートする時など)。その不必要なファイルを削除できます</string>
@@ -2207,12 +2197,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="back">戻る</string>
-    <string name="later">後で</string>
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
-    <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->

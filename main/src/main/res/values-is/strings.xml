@@ -194,12 +194,6 @@
     <string name="caches_more_caches_no">Ekki fleiri fjársjóðir</string>
     <string name="caches_more_caches_loading">Hleður inn fjársjóðum…</string>
     <string name="caches_more_caches_currently">nú</string>
-    <string name="caches_downloading">Hleð niður kössum…\nTími eftir: </string>
-    <string name="caches_eta_ltm">Minna en mínúta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d mínúta</item>
-        <item quantity="other">%d mínútur</item>
-    </plurals>
     <string name="caches_history">Ferill</string>
     <string name="caches_on_map">Sýna á korti</string>
     <string name="caches_sort">Flokka niður</string>
@@ -278,7 +272,6 @@
     <string name="settings_title_map_content">Innihald korts</string>
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
     <string name="settings_title_system">Kerfi</string>
-    <string name="settings_category_browser">Vafri</string>
     <string name="settings_category_social">Samfélagsmiðlar</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
     <string name="settings_service_activate">Virkja</string>
@@ -339,7 +332,6 @@
     <string name="init_dbmove_running">Færi gagnagrunn</string>
     <string name="init_dbmove_success">Flutningur gagnagrunns tókst.</string>
     <string name="init_dbmove_failed">Flutningur gagnagrunns mistókst</string>
-    <string name="init_use_native_ua">Android vafri</string>
     <string name="init_maintenance">Viðhald</string>
     <string name="settings_open_website">Opna heimasíðu</string>
     <string name="settings_settings">Stillingar</string>

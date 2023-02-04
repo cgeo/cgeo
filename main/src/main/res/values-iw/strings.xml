@@ -205,7 +205,6 @@
     <string name="warn_load_images">c:geo נכשלה בטעינת התמונות.</string>
     <string name="warn_pocket_query_select">לא נבחר Pocket Query.</string>
     <string name="warn_no_pocket_query_found">לא נמצא pocket query ברשת.</string>
-    <string name="warn_invalid_character">התו חייב להיות אות או ספרה</string>
     <string name="warn_notloggedin_title">מצב לא מקוון</string>
     <string name="err_read_pocket_query_list">שגיאה בקריאת רשימת Pocket Query.</string>
     <string name="info_log_posted">c:geo פרסם לוג זה בהצלחה.</string>
@@ -255,14 +254,6 @@
     <string name="caches_more_caches_no">אין עוד מטמונים</string>
     <string name="caches_more_caches_loading">טוען מטמונים&#8230;</string>
     <string name="caches_more_caches_currently">מוצג כעת</string>
-    <string name="caches_downloading">הורדת \n מטמונים. זמן צפוי: </string>
-    <string name="caches_eta_ltm">פחות מדקה</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d דקות</item>
-        <item quantity="two">%d דקות</item>
-        <item quantity="many">%d דקות</item>
-        <item quantity="other">%d דקות</item>
-    </plurals>
     <string name="caches_history">היסטוריה</string>
     <string name="caches_on_map">הצג במפה</string>
     <string name="caches_sort">מיין</string>
@@ -349,7 +340,6 @@
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
-    <string name="settings_category_browser">דפדפן</string>
     <string name="settings_category_social">רשתות חבריות</string>
     <string name="settings_category_logging_other">אפשרויות לוג אחרות</string>
     <string name="settings_goto_url_button">עוד&#8230;</string>

@@ -232,7 +232,6 @@
     <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
     <string name="warn_pocket_query_select">Nav atlasīta Slēpņu atlase (PQ).</string>
     <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasta neviena Slēpņu atlase (PQ).</string>
-    <string name="warn_invalid_character">Rakstzīmei jābūt BURTAM vai CIPARAM</string>
     <string name="warn_notloggedin_title">Bezsaistes režīms</string>
     <string name="warn_notloggedin_long">Neizdevās ielogoties (vēl). Tiešsaistes karte uzrādīs tikai saglabātos slēpņus un tiešsaistes funkcijas nedarbosies. \n\nProblēma var būt tīkla savienojuma vai servera kļūdas dēļ, vai arī Jums ir jāmaina geocaching iestatījumi. \n\nVai vēlaties mainīt iestatījumus?</string>
     <string name="err_read_pocket_query_list">Kļūda nolasot slēpņu atlašu (PQ) sarakstu.</string>
@@ -288,13 +287,6 @@
     <string name="caches_more_caches_no">Vairs nav slēpņu</string>
     <string name="caches_more_caches_loading">Ielādē slēpņus…</string>
     <string name="caches_more_caches_currently">pašlaik</string>
-    <string name="caches_downloading">Lejupielādē slēpņus…\nETA: </string>
-    <string name="caches_eta_ltm">Mazāk nekā minūte</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="zero">%d minūte</item>
-        <item quantity="one">%d minūte</item>
-        <item quantity="other">%d minūtes</item>
-    </plurals>
     <string name="caches_history">Vēsture</string>
     <string name="caches_on_map">Parādīt kartē</string>
     <string name="caches_sort">Kārtot</string>
@@ -421,7 +413,6 @@
     <string name="settings_title_basicmembers">Iestatījumi bezmaksas lietotājiem</string>
     <string name="settings_title_system">Sistēma</string>
     <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
-    <string name="settings_category_browser">Pārlūkprogramma</string>
     <string name="settings_category_geocaching_platform">Slēpņošanas platforma</string>
     <string name="settings_category_geocaching_additionals">Citi pakalpojumi un addon</string>
     <string name="settings_category_social">Sociālie mēdiji</string>
@@ -567,8 +558,6 @@
     <string name="init_dbmove_failed">Neizdevās pārvietot datu bāzi</string>
     <string name="init_plain_logs">Vienkārši ieraksti</string>
     <string name="init_summary_plain_logs">Attēlot ierakstus bezkrāsainus</string>
-    <string name="init_use_native_ua">Android pārlūkprogramma</string>
-    <string name="init_summary_use_native_ua">Identificēt kā Android pārlūkprogrammu. Atrisina pieteikšanās problēmas, lietojot noteiktus tīkla pakalpojumu sniedzējus.</string>
     <string name="init_maintenance">Uzturēšana</string>
     <string name="init_maintenance_directories">Dzēst failus, kas palikuši nevajadzīgi (novecojuši)</string>
     <string name="init_location">Ģeolokācija</string>

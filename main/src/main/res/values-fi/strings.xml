@@ -278,7 +278,6 @@
     <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
-    <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
     <string name="warn_notloggedin_short">Et ole kirjautunut sisään. Live-kartta näyttää vain paikallisesti tallennetut kätköt. Napauta tästä saadaksesi lisätietoja.</string>
     <string name="warn_notloggedin_long">Et ole kirjautunut sisään (vielä). Livekartta näyttää vain paikallisesti tallennetut kätköt ja online-toiminnot eivät toimi.\n\nJoko laitteessa ei ole verkkoyhteyttä, on ilmennyt palvelunongelma, tai sinun tulee (uudelleen)määrittäägeokätköilypalvelusi.\n\nHaluatko määrittää palvelut nyt?</string>
@@ -358,12 +357,6 @@
         <item quantity="other">Lataa seuraavat %1$d kätköä</item>
     </plurals>
     <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
-    <string name="caches_downloading">Ladataan kätköjä…\nETA: </string>
-    <string name="caches_eta_ltm">Alle minuutissa</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuutti</item>
-        <item quantity="other">%d minuuttia</item>
-    </plurals>
     <string name="caches_store_offline">Tallenna offline-tilassa</string>
     <string name="caches_store_offline_map">Tallenna kätköt offline-tilassa</string>
     <string name="caches_store_selected">Tallenna valitut</string>
@@ -735,7 +728,6 @@
     <string name="settings_title_system">Järjestelmä</string>
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
-    <string name="settings_category_browser">Selain</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
     <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
     <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
@@ -904,7 +896,6 @@
     <string name="init_backup_history_delete_warning">Olet tallentanut enemmän varmuuskopioita kuin määritetty maksimiarvo sallii. Haluatko varmasti poistaa kaikki ylimääräiset varmuuskopiot?</string>
     <string name="init_backup_automatic">Automaattinen varmuuskopiointi</string>
     <string name="init_backup_automatic_summary">Suorittaa automaattisen varmuuskopioinnin joka x päivä (minkä tahansa manuaalisesti luotujen varmuuskopioiden lisäksi), 0=pois</string>
-    <string name="init_backup_automatic_performing">Luodaan varmuuskopiota…</string>
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
@@ -1011,11 +1002,8 @@
     <string name="init_datadirmove_failed">Geokätköjen tiedot sisältävän kansion siirto epäonnistui osittain tai kokonaan. Tarkista vanha ja uusi kansio ja tee siirto tarvittaessa itse.</string>
     <string name="init_plain_logs">Yksinkertaiset lokit</string>
     <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
-    <string name="init_use_native_ua">Android-selain</string>
-    <string name="init_summary_use_native_ua">Näyttäydy Android-selaimena. Ratkaisee kirjautumisongelmia eräillä sivustoilla.</string>
     <string name="init_rendertheme_folder">Karttateemat sisältävä kansio</string>
     <string name="init_mapshading_folder">Karttavarjostustiedostojen kansio</string>
-    <string name="init_mapshading_folder_text">Offline-kartat voidaan päällystää korkeustiedoilla. Nämä tiedot annetaan hgt/dem tiedostoina, jotka on sijoitettava tähän kansioon.</string>
     <string name="init_mapShadingLinearity_title">Varjostuksen lineaarisuus</string>
     <string name="init_mapShadingLinearity_description">Pienet arvot korostavat kontrastia jyrkillä rinteillä, mutta piilottavat muutokset loivissa, suuret arvot tekevät siitä lineaarisemman</string>
     <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
@@ -2403,12 +2391,10 @@
     <string name="done">Valmis</string>
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
-    <string name="later">Myöhemmin</string>
     <string name="cancel">Peruuta</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
-    <string name="touch_again_to_exit">Ole hyvä ja kosketa uudelleen poistuaksesi</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alueet</string>
     <string name="rtl_fell_meadow">tunturi / niitty</string>

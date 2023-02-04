@@ -274,7 +274,6 @@
     <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
-    <string name="warn_invalid_character">Karakter bir HARF veya RAKAM olmalıdır</string>
     <string name="warn_notloggedin_title">Çevrimdışı mod</string>
     <string name="warn_notloggedin_short">Giriş yapılmadı. Canlı harita, sadece yerel olarak depolanmış cache\'leri gösterecek. Daha fazla bilgi için buraya dokunun.</string>
     <string name="warn_notloggedin_long">Giriş yapılmadı (henüz). Canlı harita sadece cihaza kaydedilen Cacheleri gösterecektir ve çevrimiçi özelllikler çalışmayacaktır.\n\nŞebeke bağlantınız olmasa da, sunucu problemi olsa da Geocaching hizmetlerini yeniden yapılandırmanız gerekmektedir.\n\nServisi şimdi yapılandırmak ister misiniz?</string>
@@ -348,12 +347,6 @@
         <item quantity="other">Sonraki %1$d cache\'i yükle</item>
     </plurals>
     <string name="caches_more_caches_remaining">Kalan cacheleri yükle (%1$d / %2$d)</string>
-    <string name="caches_downloading">Geocache\'ler indiriliyor…\nETA: </string>
-    <string name="caches_eta_ltm">Bir dakikadan az</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d dakika</item>
-        <item quantity="other">%d dakika</item>
-    </plurals>
     <string name="caches_store_offline">Çevrimdışı kaydet</string>
     <string name="caches_store_offline_map">Çevrimdışı kaydedilmiş cache\'ler</string>
     <string name="caches_store_selected">Seçilenleri kaydet</string>
@@ -669,7 +662,6 @@
     <string name="settings_title_system">Sistem</string>
     <string name="settings_summary_system">Sisteme özgül ayarlar ve hata ayıklama seçenekleri.</string>
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
-    <string name="settings_category_browser">Tarayıcı</string>
     <string name="settings_category_geocaching_platform">Geocaching Platformu</string>
     <string name="settings_category_nearbysearch">Yakınlarda ara</string>
     <string name="init_nearbysearchlimit_title">Yakınları arama limiti</string>
@@ -826,7 +818,6 @@
     <string name="init_backup_history_length_max">Hepsini tut</string>
     <string name="init_backup_history_delete_warning">Yapılandırdığınız maksimum değerin izin verdiğinden daha fazla yedekleme kaydettiniz. Tüm fazla yedeklemeleri gerçekten kaldırmak istiyor musunuz?</string>
     <string name="init_backup_automatic">Otomatik yedekleme</string>
-    <string name="init_backup_automatic_performing">Yedek oluşturuluyor…</string>
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
     <string name="init_backup_failed">c:geo\'nun veritabanı yedeklemesi başarısız oldu.</string>
@@ -929,8 +920,6 @@
     <string name="init_datadirmove_failed">Geocache veri klasörünün taşınması kısmen ya da tamamen başarısız oldu. Lütfen eski ve yeni klasörleri kontrol edin ve kayıp verileri elle taşıyınız.</string>
     <string name="init_plain_logs">Kayıtları Düz Göster</string>
     <string name="init_summary_plain_logs">Giriş kayıtlarını renksiz olarak görüntüle</string>
-    <string name="init_use_native_ua">Android tarayıcı</string>
-    <string name="init_summary_use_native_ua">Android tarayıcı olarak tanımlayın. Belirli ağ sağlayıcılarını kullanırken giriş problemlerini çözer.</string>
     <string name="init_rendertheme_folder">Harita Temaları Klasörü</string>
     <string name="init_maintenance">Bakım</string>
     <string name="init_maintenance_directories_note">c:geo resimleri ve kutuyla ilgili diğer dosyaları belirli bir klasörde saklar. Bazı durumlarda (örn. veri tabanını içe/dışa aktarmak gerektiğinde) bu klasör, buradan silinebilecek eski veriler içerebilir.</string>
@@ -2204,12 +2193,10 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
-    <string name="later">Sonra</string>
     <string name="cancel">İptal</string>
     <string name="ok" tools:ignore="ButtonCase">Tamam</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
-    <string name="touch_again_to_exit">Çıkmak için lütfen yeniden dokunun</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alanlar</string>
     <string name="rtl_fell_meadow">otlak / çayırlık</string>
