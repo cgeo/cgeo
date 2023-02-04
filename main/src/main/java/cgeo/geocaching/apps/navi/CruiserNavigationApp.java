@@ -2,6 +2,8 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.LocationDataProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +20,12 @@ public class CruiserNavigationApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(final @NonNull Context context, final @NonNull Geopoint coords) {
+        final GeoData geo = LocationDataProvider.getInstance().currentGeo();
         final Intent intent = new Intent();
         intent.setAction(ACTION);
         intent.setPackage(getString(R.string.package_cruiser));
-        intent.putExtra("LATITUDE", new double[]{coords.getLatitude()});
-        intent.putExtra("LONGITUDE", new double[]{coords.getLongitude()});
+        intent.putExtra("LATITUDE", new double[]{geo.getLatitude(), coords.getLatitude()});
+        intent.putExtra("LONGITUDE", new double[]{geo.getLongitude(), coords.getLongitude()});
         context.startActivity(intent);
     }
 
