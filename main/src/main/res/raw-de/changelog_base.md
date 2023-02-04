@@ -5,6 +5,7 @@
 - Korrektur: Fehlende Routenberechnung für vorne eingefügte Punkte
 - Neu: Unterstützung für das "Voluntary MF5" OpenAndroMaps Theme ergänzt
 - Neu: Unterstützung für GeoJSON-Daten
+- Änderung: Nutze letzte bekannte Kartenposition, falls kein GPS verfügbar und "folge meinem Standort" inaktiv
 
 ### Cache-Details
 - Neu: Neue ausgeklügeltere Bilder-Galerie
@@ -22,7 +23,8 @@
 - Neu: Beim Import Listenname mit dem Namen der GPX-Datei vorbelegen
 - Neu: Erlaube den Import von GPX-Track-Dateien, die kein xmlns-Namensraum-Tag enthalten
 - Neu: Monochromes Launcher-Icon für Android 13 hinzugefügt
-- New: Display geocaching.com member status on home screen
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
-- Fix: Allow filtering for archived caches in owner search
-- Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Neu: Mitgliedsstatus von geocaching.com auf dem Startbildschirm anzeigen
+- Änderung: GPX-Import: Name als Geocode für 'unbekannten' Dienst verwenden
+- Korrektur: Filtern von archivierten Caches in der Suche nach Besitzer erlauben
+- Korrektur: Zeilenumbrüche in der Logbuchansicht fehlen manchmal direkt nach dem Senden eines Logs
+- Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
