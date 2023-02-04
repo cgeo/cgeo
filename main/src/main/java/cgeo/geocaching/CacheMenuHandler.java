@@ -51,7 +51,8 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged, final boolean fromPopup) {
+    // Note for parameter "cache": this can be null if menu is clicked before cache was loaded in CacheDetailsActivity
+    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, @Nullable final Geocache cache, @Nullable final Runnable notifyDataSetChanged, final boolean fromPopup) {
         final Activity activity;
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;
@@ -77,22 +78,34 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             BookmarkUtils.askAndUploadCachesToBookmarkList(activity, Collections.singletonList(cache));
             return true;
         } else if (menuItem == R.id.menu_show_in_browser) {
-            cache.openInBrowser(activity);
+            if (cache != null) {
+                cache.openInBrowser(activity);
+            }
             return true;
         } else if (menuItem == R.id.menu_log_in_browser) {
-            cache.openCreateNewLogInBrowser(activity);
+            if (cache != null) {
+                cache.openCreateNewLogInBrowser(activity);
+            }
             return true;
         } else if (menuItem == R.id.menu_share || menuItem == R.id.menu_share_from_popup) {
-            cache.shareCache(activity, res);
+            if (cache != null && activity != null) {
+                cache.shareCache(activity, res);
+            }
             return true;
         } else if (menuItem == R.id.menu_calendar) {
-            CalendarAdder.addToCalendar(activity, cache);
+            if (cache != null && activity != null) {
+                CalendarAdder.addToCalendar(activity, cache);
+            }
             return true;
         } else if (menuItem == R.id.menu_set_found) {
-            setFoundState(activity, cache, true, false, notifyDataSetChanged);
+            if (cache != null) {
+                setFoundState(activity, cache, true, false, notifyDataSetChanged);
+            }
         } else if (menuItem == R.id.menu_set_DNF) {
-            setFoundState(activity, cache, false, true, notifyDataSetChanged);
-        } else if (menuItem == R.id.menu_reset_foundstate) {
+            if (cache != null) {
+                setFoundState(activity, cache, false, true, notifyDataSetChanged);
+            }
+        } else if (menuItem == R.id.menu_reset_foundstate && cache != null) {
             setFoundState(activity, cache, false, false, notifyDataSetChanged);
         }
         return false;
