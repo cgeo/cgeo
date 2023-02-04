@@ -2392,6 +2392,7 @@
     <string name="maptheme_scale_text_summary">Dodatečně škáluje textové popisky v mapě; 100% = žádné další škálování</string>
     <string name="maptheme_scale_symbol_title">Měřítko symbolu</string>
     <string name="maptheme_scale_symbol_summary">Dodatečně škáluje velikosti symbolů v mapě; 100% = žádné další škálování</string>
+    <string name="vtm_theme_variant">Varianta motivu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
