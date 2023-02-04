@@ -133,16 +133,10 @@
             android:text="@null"
             android:textSize="@dimen/textSize_compassTargeting" />
 
-        <TextView
-            android:id="@+id/nav_location"
-            style="@style/location_current"
-            android:layout_above="@+id/status"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="95dp"
-            android:text="@string/loc_trying" />
+        <cgeo.geocaching.ui.LocationStatusView
+            android:id="@+id/location_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:id="@+id/status"
