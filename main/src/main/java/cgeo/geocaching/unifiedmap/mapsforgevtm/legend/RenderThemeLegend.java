@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeThemeHelper;
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.android.canvas.AndroidGraphics;
+import org.oscim.backend.canvas.Bitmap;
 import org.oscim.theme.XmlThemeResourceProvider;
 import static org.oscim.backend.CanvasAdapter.getBitmapAsset;
 
@@ -56,6 +58,9 @@ public class RenderThemeLegend {
                 break;
             case RTT_PAWS:
                 legend = new ThemeLegendOSMPaws();
+                break;
+            case RTT_VOLUNTARY:
+                legend = new ThemeLegendVoluntary();
                 break;
             default:
                 SimpleDialog.of(activity).setMessage(TextParam.text("No legend available for current theme")).show();
@@ -199,7 +204,12 @@ public class RenderThemeLegend {
             if (entry.drawable == 0) {
                 if (resourceProvider != null) {
                     try {
-                        im.setImageBitmap(AndroidGraphics.getBitmap(getBitmapAsset(entry.relativePath, entry.filename, resourceProvider, 0, height, 100)));
+                        final Bitmap b = getBitmapAsset(entry.relativePath, entry.filename, resourceProvider, 0, height, 100);
+                        if (b != null) {
+                            im.setImageBitmap(AndroidGraphics.getBitmap(b));
+                        } else {
+                            Log.w("UnifiedMap.RenderThemeLegend: missing bitmap at position " + position);
+                        }
                     } catch (IOException ignore) {
                     }
                 }
@@ -219,6 +229,7 @@ public class RenderThemeLegend {
             case RTT_FZK_OUTDOOR_CONTRAST:
             case RTT_FZK_OUTDOOR_SOFT:
             case RTT_PAWS:
+            case RTT_VOLUNTARY:
                 return true;
             default:
                 return false;

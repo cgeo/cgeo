@@ -127,7 +127,8 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         RTT_FZK_BASE("freizeitkarte-v5", new String[]{"freizeitkarte"}),
         RTT_FZK_OUTDOOR_CONTRAST("fzk-outdoor-contrast-v5", new String[]{"fzk-outdoor-contrast"}),
         RTT_FZK_OUTDOOR_SOFT("fzk-outdoor-soft-v5", new String[]{"fzk-outdoor-soft"}),
-        RTT_PAWS("paws_4", new String[]{"paws_4"});
+        RTT_PAWS("paws_4", new String[]{"paws_4"}),
+        RTT_VOLUNTARY("", new String[]{"voluntary v5", "velocity v5"});
 
         public final String relPath;
         public final String[] searchPaths;
