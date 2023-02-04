@@ -4,7 +4,8 @@
 - Oprava: Chybějící symbol směrování pro 'přidat do trasy'
 - Oprava: Chybějící výpočet trasy pro předem přidané body
 - Novinka: Přidání podpory pro téma OpenAndroMaps 'Voluntary MF5'
-- New: Add support for GeoJSON data
+- Novinka: Přidána podpora pro data GeoJSON
+- Změna: Jako záložní řešení použít poslední známou polohu na mapě (když není k dispozici GPS a funkce "sledovat mou polohu" je neaktivní)
 
 ### Detaily kešky
 - Novinka: Nová důmyslnější galerie obrázků
@@ -13,16 +14,17 @@
 - Novinka: Rozpoznávání proměnných zadaných v uživatelských poznámkách k trasovému bodu
 - Novinka: Zobrazení tlačítka Lab Adventure v detailech mystery kešky, pokud je zjištěn odkaz na Lab Adventure
 - Oprava: Odstranění popisu trasového bodu, který nebyl synchronizován pro trasové body na straně serveru
-- Fix: Waypoint list not updated after scan
+- Oprava: Seznam trasových bodů se po vyhledávání neaktualizuje
 
 ### Obecné
 - Změna úrovně API (compileSDK 32)
 - Aktualizace některých závislých knihoven
 - Změna: Použit jiný mechanismus Androidu pro příjem stahování (pro lepší kompatibilitu s Androidem 12+)
 - Novinka: Název seznamu předvoleb s názvem souboru GPX při importu
-- New: Allow import of GPX track files that do not provide a xmlns namespace tag
-- New: Add monochrome launcher icon for Android 13
-- New: Display geocaching.com member status on home screen
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
-- Fix: Allow filtering for archived caches in owner search
-- Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Novinka: Povolen import souborů stopy GPX, které neobsahují značku xmlns namespace
+- Novinka: Přidána monochromatická ikona launcheru pro Android 13
+- Novinka: Zobrazení stavu členství geocaching.com na domovské obrazovce
+- Změna: GPX-Import: Použít název jako geokód pro 'neznámý' konektor
+- Oprava: Umožněno filtrování archivovaných kešek ve vyhledávání vlastníka
+- Oprava: Občasné chybějící zalomení řádků v logbooku hned po přidání logu
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
