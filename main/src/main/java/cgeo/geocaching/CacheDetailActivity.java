@@ -1747,7 +1747,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.personalnoteVarsOutOfSync.setOnClickListener(v -> {
                 handleVariableOutOfSync();
             });
-            activity.adjustPersonalNoteVarsOutOfSyncButton();
+            activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
@@ -1824,7 +1824,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             //register for changes of variableslist -> state of variable sync may change
-            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton());
+            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
         }
 
@@ -1852,7 +1852,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                toChange.put(e.left, e.middle);
                            }
                            cache.changeVariables(toChange);
-                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton();
+                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
                     });
         }
 
@@ -3011,8 +3011,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void adjustPersonalNoteVarsOutOfSyncButton() {
+        adjustPersonalNoteVarsOutOfSyncButton(findViewById(R.id.personalnote_vars_out_of_sync));
+    }
+
+    private void adjustPersonalNoteVarsOutOfSyncButton(@Nullable final TextView personalNotOutOfSync) {
+        if (personalNotOutOfSync == null) {
+            return;
+        }
         final Map<String, Pair<String, String>> varsOutOfSync = cache.getVariableDifferencesFromUserNotes();
-        final TextView personalNotOutOfSync = findViewById(R.id.personalnote_vars_out_of_sync);
         personalNotOutOfSync.setVisibility(varsOutOfSync.isEmpty() ? View.GONE : View.VISIBLE);
         personalNotOutOfSync.setText(LocalizationUtils.getString(R.string.cache_personal_note_vars_out_of_sync, varsOutOfSync.size()));
     }
