@@ -313,6 +313,7 @@
     <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
     <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
+    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>
