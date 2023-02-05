@@ -2195,6 +2195,7 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
+    <string name="map_refresh_individual_route">Päivitä</string>
     <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
@@ -2334,6 +2335,7 @@
     <string name="maptheme_scale_text_summary">Skaalaa automaattisesti tekstejä kartalla, 100% = ei ylimääräistä skaalausta</string>
     <string name="maptheme_scale_symbol_title">Symbolien skaalauskerroin</string>
     <string name="maptheme_scale_symbol_summary">Skaalaa automaattisesti symboleja kartalla, 100% = ei ylimääräistä skaalausta</string>
+    <string name="vtm_theme_variant">Teeman muunnelmat</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
