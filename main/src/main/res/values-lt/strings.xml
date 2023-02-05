@@ -1653,7 +1653,6 @@
     <string name="map_show_other_title">Rodyti kitus:</string>
     <string name="map_settings_cache_filter_too_complex_title">Slėptuvės filtras per sudėtingas</string>
     <string name="map_settings_cache_filter_too_complex_message">Dabartinis slėptuvės filtras yra per sudėtingas, kad čia būtų galima pritaikyti papildomas parinktis. Paprastai tai reiškia, kad slėptuvės filtre vietoj paprastos IR logikos yra išraiškų NE arba ARBA.</string>
-    <string name="map_theme_legend">Temos legenda</string>
     <string name="map_theme_legend_info">Norėdami atidaryti / uždaryti kategoriją, bakstelėkite kategorijos pavadinimą. Norėdami gauti trumpos informacijos apie simbolį, ilgai palieskite simbolį. Bakstelėkite informacijos piktogramą, kad aplankytumėte išsamią legendą internete.</string>
     <string name="google_maps_style_default">Numatyta</string>
     <string name="google_maps_style_night">Naktis</string>
