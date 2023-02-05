@@ -1636,7 +1636,6 @@
     <string name="map_show_other_title">Visa övriga:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cachefiltret är för komplext</string>
     <string name="map_settings_cache_filter_too_complex_message">Det aktuella cachefiltret är för komplext för att lägga till ytterligare alternativ här. Vanligtvis innebär detta att cache-filtret innehåller NOT eller OR uttryck istället för enkel logik med AND.</string>
-    <string name="map_theme_legend">Tematecken</string>
     <string name="map_theme_legend_info">Tryck på kategorins titel för att öppna/stänga kategorin. Långtryck på en symbol för kort information om den symbolen. Tryck på info-ikonen för att besöka en detaljerad legend online.</string>
     <string name="google_maps_style_default">Standard</string>
     <string name="google_maps_style_night">Natt</string>
