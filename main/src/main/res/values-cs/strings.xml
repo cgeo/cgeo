@@ -2251,6 +2251,7 @@
     <string name="individual_route_error_toggling_waypoint">chyba při přepínání trasového bodu</string>
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
+    <string name="map_refresh_individual_route">Obnovit</string>
     <string name="map_export_individual_route">Exportovat individuální trasu</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
@@ -2280,6 +2281,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
+    <string name="routes_tracks_color">Vyberte barvu</string>
     <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
