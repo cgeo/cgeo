@@ -1625,7 +1625,6 @@
     <string name="map_show_other_title">Mostra altres:</string>
     <string name="map_settings_cache_filter_too_complex_title">El filtre de catxé és massa complex</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
-    <string name="map_theme_legend">Llegenda del tema</string>
     <string name="map_theme_legend_info">Toqueu el títol de la categoria per obrir/tancar la categoria. Toqueu llargament un símbol per obtenir informació breu sobre aquest símbol. Toqueu la icona d\'informació per visitar una llegenda detallada en línia.</string>
     <string name="google_maps_style_default">Per defecte</string>
     <string name="google_maps_style_night">Nit</string>
