@@ -200,7 +200,7 @@ public final class NavigationAppFactory {
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
          * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
-        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, items);
+        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, R.layout.select_dialog_item, items);
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
