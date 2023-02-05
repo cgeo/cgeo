@@ -26,3 +26,4 @@
 - Zmiana: GPX-Import: Użyj nazwy jako geokodu dla konektora 'unknown'
 - Poprawka: Zezwalaj na filtrowanie skrytek zarchiwizowanych w wyszukiwaniu właściciela
 - Poprawka: Niekiedy brakowało odstepów w widoku dziennika bezpośrednio po wysłaniu wpisu
+- Poprawka: Kilka awarii
