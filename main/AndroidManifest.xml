@@ -723,6 +723,23 @@
 
         </activity>
         <activity
+            android:name="cgeo.geocaching.connector.gc.ImportBookmarkLinks"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="geocaching.com" />
+                <data android:host="www.geocaching.com" />
+                <data android:pathPrefix="/plan/lists/" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".CompassActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/compass_title" >
