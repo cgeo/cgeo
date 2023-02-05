@@ -1444,7 +1444,6 @@
     <string name="map_show_waypoints_title">Vis veipunkter:</string>
     <string name="map_show_other_title">Vis annet:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cachefilter for komplisert</string>
-    <string name="map_theme_legend">Tema forklaring</string>
     <string name="google_maps_style_default">Standard</string>
     <string name="google_maps_style_night">Natt</string>
     <string name="google_maps_style_retro">Retro</string>
