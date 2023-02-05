@@ -1668,7 +1668,6 @@
     <string name="map_show_other_title">Zobraziť iné:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filter kešiek príliš zložitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
-    <string name="map_theme_legend">Legenda témy</string>
     <string name="map_theme_legend_info">Ťuknutím na názov kategórie otvoríte/zatvoríte kategóriu. Ťuknátím na symbol a podržaním zobrazíte krátke informácie o tomto symbole. Ťuknutím na ikonu informácií navštívite podrobnú legendu online.</string>
     <string name="google_maps_style_default">Predvolené</string>
     <string name="google_maps_style_night">Noc</string>

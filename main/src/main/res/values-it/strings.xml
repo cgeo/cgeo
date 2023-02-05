@@ -1636,7 +1636,6 @@
     <string name="map_show_other_title">Mostra altro:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro cache troppo complesso</string>
     <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
-    <string name="map_theme_legend">Legenda del tema</string>
     <string name="map_theme_legend_info">Tocca il titolo della categoria per aprire/chiudere la categoria. Tocca a lungo un simbolo per avere brevi informazioni su quel simbolo. Tocca l\'icona delle informazioni per visitare una leggenda dettagliata online.</string>
     <string name="google_maps_style_default">Predefinito</string>
     <string name="google_maps_style_night">Notte</string>

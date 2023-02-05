@@ -4,6 +4,7 @@
 - Korjaa: Puuttuva reitityssymboli reittiin lisäyksen jälkeen
 - Fix: Puuttuva reitinlaskenta ennalta määrätyille pisteille
 - Uusi: Lisää tuki 'Voluntary MF5' OpenAndroMaps teemalle
+- Uusi: Lisää tuki GeoJSON-datalle
 
 ### Kätkön tiedot
 - Uusi: Uusi hienostunut kuvagalleria
@@ -12,16 +13,17 @@
 - Uusi: Tunnista reittipisteen käyttäjän muistiinpanoissa olevat muuttujat
 - Uusi: Näytä Adventure Lab -painike mysteerikätkön tiedoissa, jos linkki Adventure Labiin havaittu
 - Korjaus: Reittipisteen kuvauksen poistoa ei synkronoitu serverin puolella oleviin reittipisteisiin
+- Korjaa: Reittipisteluetteloa ei ole päivitetty skannauksen jälkeen
 
 ### Yleinen
 - API-tason muutos (compileSDK 32)
 - Päivitettiin joitakin riippuvaisuuskirjastoja
 - Muutos: Käytä eri Android-mekanismia latauksien vastaanottamiseen (paremman yhteensopivuuden Android 12+:n kanssa)
 - Uusi: Aseta tuotavan GPX-tiedoston nimi listan nimeksi
-- Korjaa (yöllinen versio): Kaatuminen GPX:n tuonnissa
 - Uusi: Salli sellaisten GPX-reittien tuonti, jotka eivät tarjoa xmlns nimiavaruustagia
 - Uusi: Lisää yksivärinen käynnistinkuvake Android 13:lle
 - Uusi: Näytä geocaching.com-jäsenen tila aloitusnäytössä
 - Muutos: GPX-tuonti: Käytä nimeä geokoodina 'tuntematon'-liittimelle
-- Fix: Allow filtering for archived caches in owner search
-- Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Korjaa: Salli arkistoitujen kätköjen suodatus omistajan haussa
+- Korjaus: Rivivaihto joskus puuttuu lokikirjan näkymästä heti lokin lähettämisen jälkeen
+- Korjaa: Useita kaatumisia
