@@ -1491,7 +1491,6 @@
     <string name="map_show_other_title">他の表示:</string>
     <string name="map_settings_cache_filter_too_complex_title">キャッシュフィルタが複雑すぎます</string>
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
-    <string name="map_theme_legend">地図の凡例</string>
     <string name="map_theme_legend_info">カテゴリをタップするとカテゴリを開いたり閉じたりできます。各凡例をロングタップすると短い情報が表示されます。 詳細な凡例をオンラインで見るには情報アイコンをタップしてください</string>
     <string name="google_maps_style_default">デフォルト</string>
     <string name="google_maps_style_night">ダークモード</string>
