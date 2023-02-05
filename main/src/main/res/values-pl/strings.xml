@@ -2251,6 +2251,7 @@
     <string name="individual_route_error_toggling_waypoint">błąd przełączenia punktu nawigacji</string>
     <string name="individual_route_error_single_waypoint_mode">Niedostępne w trybie pojedynczego punktu nawigacji</string>
     <string name="map_sort_individual_route">Sortuj indywidualną trasę</string>
+    <string name="map_refresh_individual_route">Odśwież</string>
     <string name="map_export_individual_route">Eksportuj indywidualną trasę</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
@@ -2280,6 +2281,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
+    <string name="routes_tracks_color">Wybierz kolor</string>
     <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
@@ -2392,6 +2394,7 @@
     <string name="maptheme_scale_text_summary">Dodatkowo skaluje etykiety tekstowe na mapie; 100% = bez dodatkowego skalowania</string>
     <string name="maptheme_scale_symbol_title">Współczynnik skali symboli</string>
     <string name="maptheme_scale_symbol_summary">Dodatkowo skaluje rozmiary symboli na mapie; 100% = brak dodatkowego skalowania</string>
+    <string name="vtm_theme_variant">Wariant motywu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię śladu</string>
     <string name="map_trailhistory_cleared">Wyczyszczono historię śladu</string>
