@@ -6,6 +6,8 @@
 - Novinka: Přidání podpory pro téma OpenAndroMaps 'Voluntary MF5'
 - Novinka: Přidána podpora pro data GeoJSON
 - Změna: Jako záložní řešení použít poslední známou polohu na mapě (když není k dispozici GPS a funkce "sledovat mou polohu" je neaktivní)
+- Novinka: Obnovení kešek na trase
+- Novinka: Individuální obarvení stop
 
 ### Detaily kešky
 - Novinka: Nová důmyslnější galerie obrázků
@@ -27,4 +29,5 @@
 - Změna: GPX-Import: Použít název jako geokód pro 'neznámý' konektor
 - Oprava: Umožněno filtrování archivovaných kešek ve vyhledávání vlastníka
 - Oprava: Občasné chybějící zalomení řádků v logbooku hned po přidání logu
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Oprava: Tlačítko Náhled se zobrazuje pouze s nastavením filtru "zobrazit vše" v seznamu PQ
+- Oprava: Několik pádů
