@@ -26,3 +26,4 @@
 - Změna: GPX-Import: Použít název jako geokód pro 'neznámý' konektor
 - Oprava: Umožněno filtrování archivovaných kešek ve vyhledávání vlastníka
 - Oprava: Občasné chybějící zalomení řádků v logbooku hned po přidání logu
+- Oprava: Několik pádů
