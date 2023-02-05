@@ -2167,6 +2167,7 @@
     <string name="individual_route_error_toggling_waypoint">지점 토글 오류</string>
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
+    <string name="map_refresh_individual_route">새로 고침</string>
     <string name="map_export_individual_route">개별 경로 내보내기</string>
     <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
@@ -2193,6 +2194,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
+    <string name="routes_tracks_color">색상 선택</string>
     <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
@@ -2305,6 +2307,7 @@
     <string name="maptheme_scale_text_summary">그리고 지도에서 문자 레이블의 크기를 축척합니다. 100% = 추가 축척 없음</string>
     <string name="maptheme_scale_symbol_title">기호 축척 비율</string>
     <string name="maptheme_scale_symbol_summary">그리고 지도에서 기호 크기의 크기를 축척합니다. 100% = 추가 축척 없음</string>
+    <string name="vtm_theme_variant">테마 변형</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
