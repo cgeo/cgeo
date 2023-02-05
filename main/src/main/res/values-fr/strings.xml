@@ -1585,7 +1585,6 @@
     <string name="map_show_other_title">Autres options :</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
-    <string name="map_theme_legend">Légende du thème</string>
     <string name="map_theme_legend_info">Appuyer sur le titre de la catégorie pour l\'ouvrir ou la fermer. Appuyer longuement sur un symbole pour de courtes informations à leur sujet. Appuyez sur l\'icône info pour accéder à une légende détaillée en ligne.</string>
     <string name="google_maps_style_default">Par défaut</string>
     <string name="google_maps_style_night">Nuit</string>
