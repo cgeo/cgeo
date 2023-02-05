@@ -5,7 +5,9 @@
 - Poprawka: Brakujące obliczenie trasy dla poprzednich punktów
 - Nowość: Dodano wsparcie dla motywu „Voluntary MF5” OpenAndroMaps
 - Nowość: Dodano wsparcie dla danych GeoJSON
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
+- Zmiana: Użyj ostatnio znanej pozycji na mapie jako rezerwowej (gdy GPS nie jest dostępny i opcja „podążaj za moją lokalizacją” jest nieaktywna)
+- Nowość: Odśwież skrytki na trasie
+- Nowość: Indywidualne kolory śladów
 
 ### Szczegóły skrytki
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
@@ -27,4 +29,5 @@
 - Zmiana: GPX-Import: Użyj nazwy jako geokodu dla konektora 'unknown'
 - Poprawka: Zezwalaj na filtrowanie skrytek zarchiwizowanych w wyszukiwaniu właściciela
 - Poprawka: Niekiedy brakowało odstepów w widoku dziennika bezpośrednio po wysłaniu wpisu
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Poprawka: Przycisk podglądu wyświetlany tylko z ustawieniem filtru „Pokaż wszystko” na liście PQ
+- Poprawka: Kilka awarii

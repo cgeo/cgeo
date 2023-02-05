@@ -6,6 +6,8 @@
 - New: Add support for 'Voluntary MF5' OpenAndroMaps theme
 - New: Add support for GeoJSON data
 - Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
+- New: Refresh caches in route
+- New: Individual coloring of tracks
 
 ### Détails de la cache
 - Nouveau : nouvelle galerie d'images plus sophistiquée
@@ -28,3 +30,4 @@
 - Fix: Allow filtering for archived caches in owner search
 - Fix: Line breaks sometimes missing in logbook view directly after posting a log
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Fix: Several crashes

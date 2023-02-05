@@ -1624,7 +1624,6 @@
     <string name="map_show_other_title">Toon andere:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cache filter te complex</string>
     <string name="map_settings_cache_filter_too_complex_message">Het huidige cachefilter is te complex om hier extra opties op toe te passen. Meestal betekent dit dat het cachefilter NIET of OF uitdrukkingen bevat in plaats van eenvoudige EN logica.</string>
-    <string name="map_theme_legend">Thema legenda</string>
     <string name="map_theme_legend_info">Tik op de categorietitel om de categorie te openen/sluiten. Druk lang op een symbool voor korte info over dat symbool. Tik op het info pictogram om online een gedetailleerde legenda te bekijken.</string>
     <string name="google_maps_style_default">Standaard</string>
     <string name="google_maps_style_night">Nacht</string>

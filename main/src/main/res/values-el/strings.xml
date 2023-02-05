@@ -1598,7 +1598,6 @@
     <string name="map_show_other_title">Εμφάνιση άλλων:</string>
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
-    <string name="map_theme_legend">Υπόμνημα Θεμάτων</string>
     <string name="map_theme_legend_info">Πατήστε στον τίτλο της κατηγορίας για να ανοίξετε/κλείσετε. Πατήστε παρατεταμένα ένα σύμβολο για μικρές πληροφορίες σχετικά με αυτό το σύμβολο. Πατήστε στο εικονίδιο πληροφοριών για να επισκεφθείτε ένα λεπτομερές υπόμνημα online.</string>
     <string name="google_maps_style_default">Προεπιλογή</string>
     <string name="google_maps_style_night">Νύχτα</string>

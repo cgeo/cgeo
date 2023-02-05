@@ -6,6 +6,8 @@
 - Neu: Unterstützung für das "Voluntary MF5" OpenAndroMaps Theme ergänzt
 - Neu: Unterstützung für GeoJSON-Daten
 - Änderung: Nutze letzte bekannte Kartenposition, falls kein GPS verfügbar und "folge meinem Standort" inaktiv
+- New: Refresh caches in route
+- New: Individual coloring of tracks
 
 ### Cache-Details
 - Neu: Neue ausgeklügeltere Bilder-Galerie
@@ -28,3 +30,4 @@
 - Korrektur: Filtern von archivierten Caches in der Suche nach Besitzer erlauben
 - Korrektur: Zeilenumbrüche in der Logbuchansicht fehlen manchmal direkt nach dem Senden eines Logs
 - Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
+- Fix: Several crashes

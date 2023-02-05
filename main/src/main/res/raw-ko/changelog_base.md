@@ -5,7 +5,9 @@
 - 수정: 추가 지점에 대한 누락된 경로 계산
 - 신규: 'Voluntary MF5' OpenAndroMaps 테마 지원 추가
 - 신규: GeoJSON 데이터 지원 추가
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
+- 변경: 마지막으로 알려진 지도 위치를 폴백으로 사용(GPS를 사용할 수 없고 "내 위치 추적"이 비활성화된 경우)
+- 신규: 경로의 캐시 새로고침
+- 신규: 트랙의 개별 색상 지정
 
 ### 캐시 상세정보
 - 신규: 새로운 고급 이미지 갤러리
@@ -27,4 +29,5 @@
 - 변경: GPX-가져오기: '알 수 없는' 커넥터에 대한 지오코드로 이름 사용
 - 수정: 소유자 검색에서 영구보관된 캐시에 대한 필터링 허용
 - 수정: 로그를 게시한 직후 로그북 보기에서 줄바꿈이 누락되는 경우가 있습니다.
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- 수정: PQ 목록에서 "모두 표시" 필터 설정으로만 표시되는 미리보기 버튼
+- 수정: 여러 충돌
