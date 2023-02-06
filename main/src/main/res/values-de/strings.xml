@@ -1624,6 +1624,7 @@
     <string name="map_show_other_title">Weiteres anzeigen:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cache-Filter zu komplex</string>
     <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
+    <string name="map_theme_legend">Design-Legende</string>
     <string name="map_theme_legend_info">Tippe auf den Kategorietitel um die Kategorie zu öffnen/schließen. Tippe lange auf ein Symbol für kurze Informationen über darüber. Tippe auf das Info-Symbol, um eine detaillierte Legende online zu besuchen.</string>
     <string name="google_maps_style_default">Standard</string>
     <string name="google_maps_style_night">Nacht</string>
@@ -2194,6 +2195,7 @@
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
+    <string name="map_refresh_individual_route">Aktualisieren</string>
     <string name="map_export_individual_route">Exportiere individuelle Route</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
@@ -2221,6 +2223,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
+    <string name="routes_tracks_color">Farbe auswählen</string>
     <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
