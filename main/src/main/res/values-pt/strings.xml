@@ -309,6 +309,8 @@
     <string name="warn_gm_not_available">O Google Maps não está disponível.</string>
     <string name="switch_to_mf">O seu serviço do Google Play está desactualizado. Quer mudar para o fornecedor de mapas Mapsforge?</string>
     <string name="switched_to_mf">Mapa padrão alterado para o fornecedor de mapa Mapsforge. Reinicie agora o seu mapa.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Básico</string>
     <!-- location service -->
     <string name="loc_last">Última conhecida</string>
     <string name="loc_net">Rede</string>
@@ -1403,6 +1405,7 @@
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode instalar a aplicação Chirp Wolf.</string>
     <string name="cache_alc_start">Abrir a aplicação Adventure Lab para iniciar a aventura</string>
+    <string name="cache_alc_related_start">Abrir a aplicação \"Adventure Lab\" para iniciar a aventura</string>
     <string name="cache_alc_install">Instale a aplicação Adventure Lab para dar início a esta aventura</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
@@ -1621,6 +1624,7 @@
     <string name="map_show_other_title">Mostrar outro:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de cache muito complexo</string>
     <string name="map_settings_cache_filter_too_complex_message">O filtro de cache actual é muito complexo para se aplicarem aqui as opções adicionais. Geralmente, isso significa que o filtro de cache contém expressões do tipo \"NOT\" (não) ou \"OR\" (ou) em vez de expressões simples lógicas do tipo \"AND\" (e).</string>
+    <string name="map_theme_legend">Legenda do tema</string>
     <string name="map_theme_legend_info">Toque no título da categoria para abrir/fechar a categoria. Toque longo num símbolo para breves informações sobre esse símbolo. Toque no ícone de informações para visitar uma legenda detalhada online.</string>
     <string name="google_maps_style_default">Padrão</string>
     <string name="google_maps_style_night">Noite</string>
@@ -2191,6 +2195,7 @@
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
+    <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_individual_route">Exportar rota individual</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
@@ -2218,6 +2223,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
+    <string name="routes_tracks_color">Seleccionar cor</string>
     <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
@@ -2330,6 +2336,7 @@
     <string name="maptheme_scale_text_summary">Adicionalmente, permite redimensionar o texto das etiquetas no mapa; 100% = sem dimensionamento extra</string>
     <string name="maptheme_scale_symbol_title">Factor de escala do símbolo</string>
     <string name="maptheme_scale_symbol_summary">Adicionalmente, permite redimensionar o tamanho dos símbolos no mapa; 100% = sem dimensionamento extra</string>
+    <string name="vtm_theme_variant">Variante de Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
