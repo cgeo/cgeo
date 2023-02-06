@@ -6,7 +6,7 @@
 - Nowość: Dodano wsparcie dla motywu „Voluntary MF5” OpenAndroMaps
 - Nowość: Dodano wsparcie dla danych GeoJSON
 
-### Szczegóły skrytki
+### Cache details
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji
