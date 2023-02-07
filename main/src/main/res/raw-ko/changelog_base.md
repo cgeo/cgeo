@@ -1,9 +1,9 @@
 ### 지도
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
+- 변경: 마지막으로 알려진 지도 위치를 폴백으로 사용(GPS를 사용할 수 없고 "내 위치 추적"이 비활성화된 경우)
+- 신규: 경로의 캐시 새로고침
+- 신규: 트랙의 개별 색상 지정
 
 ### 캐시 상세정보
 
 ### 일반
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- 수정: PQ 목록에서 "모두 표시" 필터 설정으로만 표시되는 미리보기 버튼
