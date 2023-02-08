@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
@@ -66,10 +66,10 @@ abstract class AbstractRouteLayer extends Layer {
     }
 
     private static List<List<Geopoint>> getAllPoints(final Route route) {
-        final List<GeoObject> gos = route.getGeoData();
+        final List<GeoPrimitive> gos = route.getGeoData();
         final List<List<Geopoint>> result = new ArrayList<>();
-        for (GeoObject go : gos) {
-            result.add(new ArrayList<>(go.points));
+        for (GeoPrimitive go : gos) {
+            result.add(new ArrayList<>(go.getPoints()));
         }
         return result;
     }

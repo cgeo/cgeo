@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.location.GeoObject;
-import cgeo.geocaching.location.GeoObjectStyle;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 
@@ -52,19 +52,19 @@ public class GeoJsonUtils {
         //no instance
     }
 
-    public static List<GeoObject> parseGeoJson(final InputStream is) throws JSONException, IOException {
-        final List<GeoObject> result = new ArrayList<>();
+    public static List<GeoPrimitive> parseGeoJson(final InputStream is) throws JSONException, IOException {
+        final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(is), null, result);
         return result;
     }
 
-    public static List<GeoObject> parseGeoJson(final String string) throws JSONException {
-        final List<GeoObject> result = new ArrayList<>();
+    public static List<GeoPrimitive> parseGeoJson(final String string) throws JSONException {
+        final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(string), null, result);
         return result;
     }
 
-    private static void parseGeoJson(final GeoJSONObject geoJson, final GeoJsonProperties props, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJson(final GeoJSONObject geoJson, final GeoJsonProperties props, final List<GeoPrimitive> list) throws JSONException {
         if (geoJson instanceof Feature) {
             parseGeoJsonFeature((Feature) geoJson, list);
         } else if (geoJson instanceof FeatureCollection) {
@@ -89,58 +89,58 @@ public class GeoJsonUtils {
 
     }
 
-    private static void parseGeoJsonFeature(final Feature feature, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonFeature(final Feature feature, final List<GeoPrimitive> list) throws JSONException {
         final GeoJsonProperties p = parseProperties(feature.getProperties());
         parseGeoJson(feature.getGeometry(), p, list);
     }
 
-    private static void parseGeoJsonFeatureCollection(final FeatureCollection featureCollection, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonFeatureCollection(final FeatureCollection featureCollection, final List<GeoPrimitive> list) throws JSONException {
         for (Feature feature : featureCollection.getFeatures()) {
             parseGeoJsonFeature(feature, list);
         }
     }
 
-    private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPoint(GP_CONVERTER.from(point.getPosition()), toGeoStyle(props)));
+    private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoPrimitive> list) {
+        list.add(GeoPrimitive.createPoint(GP_CONVERTER.from(point.getPosition()), toGeoStyle(props)));
     }
 
-    private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (Position p : multiPoint.getPositions()) {
-            list.add(GeoObject.createPoint(GP_CONVERTER.from(p), toGeoStyle(props)));
+            list.add(GeoPrimitive.createPoint(GP_CONVERTER.from(p), toGeoStyle(props)));
         }
     }
 
-    private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPolyline(GP_CONVERTER.fromList(lineString.getPositions()), toGeoStyle(props)));
+    private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoPrimitive> list) {
+        list.add(GeoPrimitive.createPolyline(GP_CONVERTER.fromList(lineString.getPositions()), toGeoStyle(props)));
     }
 
-    private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (LineString ls : multiLineString.getLineStrings()) {
             parseGeoJsonLineString(ls, props, list);
         }
     }
 
-    private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         //as of now, polygon rings are parsed as separate polygons
         for (Ring r : polygon.getRings()) {
-            list.add(GeoObject.createPolygon(GP_CONVERTER.fromList(r.getPositions()), toGeoStyle(props)));
+            list.add(GeoPrimitive.createPolygon(GP_CONVERTER.fromList(r.getPositions()), toGeoStyle(props)));
         }
     }
 
-    private static void parseGeoJsonMultiPolygon(final MultiPolygon multiPolygon, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiPolygon(final MultiPolygon multiPolygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (Polygon polygon : multiPolygon.getPolygons()) {
             parseGeoJsonPolygon(polygon, props, list);
         }
     }
 
-    private static void parseGeoJsonGeometryCollection(final GeometryCollection geometryCollection, final GeoJsonProperties props, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonGeometryCollection(final GeometryCollection geometryCollection, final GeoJsonProperties props, final List<GeoPrimitive> list) throws JSONException {
         for (Geometry g : geometryCollection.getGeometries()) {
             parseGeoJson(g, props, list);
         }
     }
 
-    private static GeoObjectStyle toGeoStyle(final GeoJsonProperties props) {
-        return new GeoObjectStyle.Builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
+    private static GeoStyle toGeoStyle(final GeoJsonProperties props) {
+        return new GeoStyle.Builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
     }
 
     private static GeoJsonProperties parseProperties(final JSONObject json) {
