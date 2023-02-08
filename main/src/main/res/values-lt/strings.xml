@@ -1433,6 +1433,7 @@
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
+    <string name="cache_alc_related_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti susijusius nuotykius</string>
     <string name="cache_alc_install">Įdiekite Adventure Lab grotuvą, kad galėtumėte žaisti šį nuotykį</string>
     <string name="context_share_as_text">Bendrinti tekstą</string>
     <string name="context_share_as_link">Bendrinti nuorodą</string>
@@ -1653,6 +1654,7 @@
     <string name="map_show_other_title">Rodyti kitus:</string>
     <string name="map_settings_cache_filter_too_complex_title">Slėptuvės filtras per sudėtingas</string>
     <string name="map_settings_cache_filter_too_complex_message">Dabartinis slėptuvės filtras yra per sudėtingas, kad čia būtų galima pritaikyti papildomas parinktis. Paprastai tai reiškia, kad slėptuvės filtre vietoj paprastos IR logikos yra išraiškų NE arba ARBA.</string>
+    <string name="map_theme_legend">Temos legenda</string>
     <string name="map_theme_legend_info">Norėdami atidaryti / uždaryti kategoriją, bakstelėkite kategorijos pavadinimą. Norėdami gauti trumpos informacijos apie simbolį, ilgai palieskite simbolį. Bakstelėkite informacijos piktogramą, kad aplankytumėte išsamią legendą internete.</string>
     <string name="google_maps_style_default">Numatyta</string>
     <string name="google_maps_style_night">Naktis</string>
@@ -2249,6 +2251,7 @@
     <string name="individual_route_error_toggling_waypoint">klaida perjungiant kelio tašką</string>
     <string name="individual_route_error_single_waypoint_mode">Negalima naudoti vieno kelio taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
+    <string name="map_refresh_individual_route">Atnaujinti</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
@@ -2278,6 +2281,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
+    <string name="routes_tracks_color">Pasirinkite spalvą</string>
     <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
@@ -2390,6 +2394,7 @@
     <string name="maptheme_scale_text_summary">Papildomai keičia teksto etiketes žemėlapyje; 100% = nepakeistas dydis</string>
     <string name="maptheme_scale_symbol_title">Simbolių dydžio koeficientas</string>
     <string name="maptheme_scale_symbol_summary">Papildomai sumažina simbolių dydžius žemėlapyje; 100% = nepakeistas dydis</string>
+    <string name="vtm_theme_variant">Temos variantai</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Išvalyti pėdsaką</string>
     <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
