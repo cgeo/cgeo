@@ -1,9 +1,9 @@
 ### Žemėlapis
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
+- Pakeitimas: Naudojama paskutinė žinoma žemėlapio padėtis kaip atsarginė vieta (kai GPS nepasiekiamas ir „sekti mano vietą“ neaktyvus)
+- Naujiena: atnaujinkite slėptuves maršrute
+- Naujiena: Individualus takelių spalvinimas
 
 ### Slėptuvės detalės
 
 ### Bendras
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Pataisymas: Peržiūros mygtukas rodomas tik su filtro nustatymu „rodyti viską“ PQ sąraše
