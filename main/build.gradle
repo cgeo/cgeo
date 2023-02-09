@@ -444,7 +444,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.3.5'
+    implementation 'androidx.exifinterface:exifinterface:1.3.6'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
