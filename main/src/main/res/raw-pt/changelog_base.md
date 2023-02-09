@@ -1,9 +1,9 @@
 ### Mapa
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
+- Alteração: Usar a última posição conhecida do mapa como alternativa (quando não há GPS disponível e "seguir a minha localização" está inactivo)
+- Novo: Actualizar caches na rota
+- Novo: Coloração individual para os percursos
 
 ### Detalhes da cache
 
 ### Geral
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Correcção: Botão de pré-visualização exibido apenas com a configuração de filtro "mostrar todos" na lista de PQ
