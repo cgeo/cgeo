@@ -432,7 +432,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.7.1"
+    implementation "androidx.work:work-runtime:2.8.0"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.5.1'
