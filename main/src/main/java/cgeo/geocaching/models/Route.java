@@ -1,6 +1,6 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
@@ -75,21 +75,21 @@ public class Route implements IGeoDataProvider, Parcelable {
     }
 
     @Override
-    public List<GeoObject> getGeoData() {
-        final List<GeoObject> result = new ArrayList<>();
+    public List<GeoPrimitive> getGeoData() {
+        final List<GeoPrimitive> result = new ArrayList<>();
         final List<Geopoint> points = new ArrayList<>();
         if (getSegments() != null) {
             for (RouteSegment rs : getSegments()) {
                 if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
                     points.addAll(rs.getPoints());
                 } else {
-                    result.add(GeoObject.createPolyline(points, null));
+                    result.add(GeoPrimitive.createPolyline(points, null));
                     points.clear();
                 }
             }
         }
         if (!points.isEmpty()) {
-            result.add(GeoObject.createPolyline(points, null));
+            result.add(GeoPrimitive.createPolyline(points, null));
         }
         return result;
     }

@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.IGeoDataProvider;
@@ -227,8 +227,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private static ArrayList<List<LatLng>> toLatLng(final IGeoDataProvider gg) {
         final ArrayList<List<LatLng>> list = new ArrayList<>();
-        for (GeoObject go : gg.getGeoData()) {
-            list.add(GP_CONVERTER.toList(go.points));
+        for (GeoPrimitive go : gg.getGeoData()) {
+            list.add(GP_CONVERTER.toList(go.getPoints()));
         }
         return list;
     }

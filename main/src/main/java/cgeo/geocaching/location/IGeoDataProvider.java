@@ -1,5 +1,7 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+
 import java.util.Collection;
 
 public interface IGeoDataProvider {
@@ -12,7 +14,7 @@ public interface IGeoDataProvider {
 
     boolean hasData();
 
-    Collection<GeoObject> getGeoData();
+    Collection<GeoPrimitive> getGeoData();
 
     Viewport getViewport();
 

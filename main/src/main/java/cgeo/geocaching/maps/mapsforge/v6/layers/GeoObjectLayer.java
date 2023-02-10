@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.location.GeoObject;
-import cgeo.geocaching.location.GeoObjectStyle;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.utils.CollectionStream;
 
 import androidx.annotation.ColorInt;
@@ -32,29 +32,29 @@ public class GeoObjectLayer extends GroupLayer {
         this.layers.add(goLayer);
     }
 
-    public static Layer createGeoObjectLayer(final List<GeoObject> objects, final DisplayModel displayModel) {
+    public static Layer createGeoObjectLayer(final List<GeoPrimitive> objects, final DisplayModel displayModel) {
         final GroupLayer gl = new GroupLayer();
         gl.setDisplayModel(displayModel);
-        for (GeoObject go : objects) {
-            final Paint strokePaint = createPaint(GeoObjectStyle.getStrokeColor(go.style));
-            strokePaint.setStrokeWidth(GeoObjectStyle.getStrokeWidth(go.style));
+        for (GeoPrimitive go : objects) {
+            final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(go.getStyle()));
+            strokePaint.setStrokeWidth(GeoStyle.getStrokeWidth(go.getStyle()));
             strokePaint.setStyle(Style.STROKE);
-            final Paint fillPaint = createPaint(GeoObjectStyle.getFillColor(go.style));
+            final Paint fillPaint = createPaint(GeoStyle.getFillColor(go.getStyle()));
             fillPaint.setStyle(Style.FILL);
             final Layer goLayer;
-            switch (go.type) {
-                case POINT:
-                    goLayer = new FixedPixelCircle(latLong(go.points.get(0)), 5f, strokePaint, strokePaint);
+            switch (go.getType()) {
+                case MARKER:
+                    goLayer = new FixedPixelCircle(latLong(go.getPoints().get(0)), 5f, strokePaint, strokePaint);
                     break;
                 case POLYLINE:
                     final Polyline pl = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
-                    pl.addPoints(CollectionStream.of(go.points).map(GeoObjectLayer::latLong).toList());
+                    pl.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
                     goLayer = pl;
                     break;
                 case POLYGON:
                 default:
                     final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
-                    po.addPoints(CollectionStream.of(go.points).map(GeoObjectLayer::latLong).toList());
+                    po.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
                     goLayer = po;
                     break;
             }

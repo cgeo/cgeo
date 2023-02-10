@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.GeoObject;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.GeoObjectList;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
@@ -117,7 +117,7 @@ public class GPXTrackOrRouteImporter {
             if (is == null) {
                 return null;
             }
-            final List<GeoObject> gos = GeoJsonUtils.parseGeoJson(is);
+            final List<GeoPrimitive> gos = GeoJsonUtils.parseGeoJson(is);
             final GeoObjectList gg = new GeoObjectList();
             gg.addAll(gos);
             return gg;

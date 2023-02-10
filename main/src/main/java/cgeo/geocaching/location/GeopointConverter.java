@@ -1,5 +1,6 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
@@ -54,8 +55,8 @@ public class GeopointConverter<T> {
 
     public List<List<T>> toListList(final IGeoDataProvider gg) {
         final List<List<T>> list = new ArrayList<>();
-        for (GeoObject go : gg.getGeoData()) {
-            list.add(toList(go.points));
+        for (GeoPrimitive go : gg.getGeoData()) {
+            list.add(toList(go.getPoints()));
         }
         return list;
     }

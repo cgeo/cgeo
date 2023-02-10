@@ -1,4 +1,4 @@
-package cgeo.geocaching.location;
+package cgeo.geocaching.models.geoitem;
 
 import android.graphics.Color;
 import android.os.Parcel;
@@ -10,22 +10,39 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * Immutable value class for GeoObjectStyle info. Includes some helpers to deal with these objects.
+ * Immutable value class for GeoItem Style info. Includes some helpers to deal with these objects.
  */
-public class GeoObjectStyle implements Parcelable {
+public class GeoStyle implements Parcelable {
 
-    @ColorInt @Nullable public final Integer strokeColor;
-    @Nullable public final Float strokeWidth;
-    @ColorInt @Nullable public final Integer fillColor;
+    @ColorInt @Nullable private final Integer strokeColor;
+    @Nullable private final Float strokeWidth;
+    @ColorInt @Nullable private final Integer fillColor;
 
-    private GeoObjectStyle(@Nullable @ColorInt final Integer strokeColor, @Nullable final Float strokeWidth, @Nullable @ColorInt final Integer fillColor) {
+    private GeoStyle(@Nullable @ColorInt final Integer strokeColor, @Nullable final Float strokeWidth, @Nullable @ColorInt final Integer fillColor) {
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;
         this.fillColor = fillColor;
     }
 
+    @ColorInt
+    @Nullable
+    public Integer getStrokeColor() {
+        return strokeColor;
+    }
+
+    @Nullable
+    public Float getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    @ColorInt
+    @Nullable
+    public Integer getFillColor() {
+        return fillColor;
+    }
+
     /** Returns a non-null strokecolor. If color for this object is null then given defaults are used */
-    public static int getStrokeColor(@Nullable final GeoObjectStyle style, @ColorInt final Integer ... defaults) {
+    public static int getStrokeColor(@Nullable final GeoStyle style, @ColorInt final Integer ... defaults) {
         if (style != null && style.strokeColor != null) {
             return style.strokeColor;
         }
@@ -34,7 +51,7 @@ public class GeoObjectStyle implements Parcelable {
     }
 
     /** Returns a non-null strokewidth. If width for this object is null then given defaults are used */
-    public static float getStrokeWidth(@Nullable final GeoObjectStyle style, final Float ... defaults) {
+    public static float getStrokeWidth(@Nullable final GeoStyle style, final Float ... defaults) {
         if (style != null && style.strokeWidth != null) {
             return style.strokeWidth;
         }
@@ -43,7 +60,7 @@ public class GeoObjectStyle implements Parcelable {
     }
 
     /** Returns a non-null fillcolor. If color for this object is null then given defaults are used */
-    public static int getFillColor(@Nullable final GeoObjectStyle style, @ColorInt final Integer ... defaults) {
+    public static int getFillColor(@Nullable final GeoStyle style, @ColorInt final Integer ... defaults) {
         if (style != null && style.fillColor != null) {
             return style.fillColor;
         }
@@ -71,10 +88,10 @@ public class GeoObjectStyle implements Parcelable {
 
     @Override
     public boolean equals(final Object o) {
-        if (!(o instanceof GeoObjectStyle)) {
+        if (!(o instanceof GeoStyle)) {
             return false;
         }
-        final GeoObjectStyle other = (GeoObjectStyle) o;
+        final GeoStyle other = (GeoStyle) o;
         return
             Objects.equals(strokeColor, other.strokeColor) &&
             Objects.equals(strokeWidth, other.strokeWidth) &&
@@ -110,14 +127,14 @@ public class GeoObjectStyle implements Parcelable {
             return this;
         }
 
-        public GeoObjectStyle build() {
-            return new GeoObjectStyle(strokeColor, strokeWidth, fillColor);
+        public GeoStyle build() {
+            return new GeoStyle(strokeColor, strokeWidth, fillColor);
         }
     }
 
     // parcelable stuff
 
-    protected GeoObjectStyle(final Parcel in) {
+    protected GeoStyle(final Parcel in) {
         strokeColor = (Integer) in.readValue(getClass().getClassLoader());
         strokeWidth = (Float) in.readValue(getClass().getClassLoader());
         fillColor = (Integer) in.readValue(getClass().getClassLoader());
@@ -135,15 +152,15 @@ public class GeoObjectStyle implements Parcelable {
         return 0;
     }
 
-    public static final Creator<GeoObjectStyle> CREATOR = new Creator<GeoObjectStyle>() {
+    public static final Creator<GeoStyle> CREATOR = new Creator<GeoStyle>() {
         @Override
-        public GeoObjectStyle createFromParcel(final Parcel in) {
-            return new GeoObjectStyle(in);
+        public GeoStyle createFromParcel(final Parcel in) {
+            return new GeoStyle(in);
         }
 
         @Override
-        public GeoObjectStyle[] newArray(final int size) {
-            return new GeoObjectStyle[size];
+        public GeoStyle[] newArray(final int size) {
+            return new GeoStyle[size];
         }
     };
 }
