@@ -7,3 +7,5 @@
 
 ### Obecné
 - Oprava: Tlačítko Náhled se zobrazuje pouze s nastavením filtru "zobrazit vše" v seznamu PQ
+- Nový: Přidat Cruiser jako navigační aplikaci (vyžaduje Cruiser 3.0.9 nebo novější)
+- Novinka: Import seznamů záložek z odkazů z geocaching.com
