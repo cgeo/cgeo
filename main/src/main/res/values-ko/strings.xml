@@ -1291,6 +1291,7 @@
     <string name="cache_menu_navigation_bike">길찾기(자전거)</string>
     <string name="cache_menu_maps_directions">구글맵 길찾기</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic(도보)</string>
     <string name="cache_menu_sygic_drive">Sygic(자동차)</string>
     <string name="cache_menu_radar">레이더</string>
