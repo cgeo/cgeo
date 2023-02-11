@@ -1,9 +1,11 @@
 ### Karte
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
+- Änderung: Nutze letzte bekannte Kartenposition, falls kein GPS verfügbar und "folge meinem Standort" inaktiv
+- Neu: Caches in individueller Route aktualisieren
+- Neu: Individuelle Farben für Tracks
 
 ### Cache-Details
 
 ### Allgemein
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
