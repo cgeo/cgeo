@@ -7,3 +7,4 @@
 
 ### General
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
