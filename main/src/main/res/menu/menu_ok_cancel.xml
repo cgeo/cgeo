@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/menu_optimize"
+        android:icon="@drawable/ic_menu_auto_fix_high"
+        android:title="Optimize"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
+    </item>
+    <item
         android:id="@+id/menu_invert_order"
         android:icon="@drawable/ic_menu_swap_vert"
         android:title="@string/menu_invert_order"
