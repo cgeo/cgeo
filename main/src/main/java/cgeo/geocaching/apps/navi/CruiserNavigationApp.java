@@ -17,7 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CruiserNavigationApp extends AbstractPointNavigationApp {
 
-    static final String ACTION = "com.devemux86.NAVIGATION";
+    static final String ACTION = "com.devemux86.intent.action.NAVIGATION";
 
     protected CruiserNavigationApp() {
         super(getString(R.string.cache_menu_cruiser), null, getString(R.string.package_cruiser));
