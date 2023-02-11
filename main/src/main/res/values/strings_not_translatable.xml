@@ -257,6 +257,7 @@
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
     <string translatable="false" name="package_gcwizward">de.sman42.gc_wizard</string>
+    <string translatable="false" name="package_cruiser">gr.talent.cruiser</string>
 
 
     <!-- map server & other download urls -->
