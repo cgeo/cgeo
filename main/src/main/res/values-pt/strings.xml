@@ -1305,6 +1305,7 @@
     <string name="cache_menu_navigation_bike">Navegação (Bicicleta)</string>
     <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (Caminhar)</string>
     <string name="cache_menu_sygic_drive">Sygic (Conduzir)</string>
     <string name="cache_menu_radar">Radar</string>
