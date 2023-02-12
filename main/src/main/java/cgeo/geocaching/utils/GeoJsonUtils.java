@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 
 import android.graphics.Color;
 

@@ -1,10 +1,10 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 
 import android.os.Parcel;
 import android.os.Parcelable;

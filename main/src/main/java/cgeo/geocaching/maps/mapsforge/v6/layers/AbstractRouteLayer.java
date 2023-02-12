@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import java.util.ArrayList;
