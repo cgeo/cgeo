@@ -1,10 +1,10 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.GeoObjectList;
 import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.GeoJsonUtils;

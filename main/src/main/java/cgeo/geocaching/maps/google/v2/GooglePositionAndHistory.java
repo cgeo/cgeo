@@ -2,7 +2,6 @@ package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.IGeoDataProvider;
@@ -14,6 +13,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
