@@ -26,4 +26,4 @@
 - Änderung: GPX-Import: Name als Geocode für 'unbekannten' Dienst verwenden
 - Korrektur: Filtern von archivierten Caches in der Suche nach Besitzer erlauben
 - Korrektur: Zeilenumbrüche in der Logbuchansicht fehlen manchmal direkt nach dem Senden eines Logs
-- Fix: Several crashes
+- Korrektur: Mehrere Abstürze
