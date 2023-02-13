@@ -7,5 +7,5 @@
 
 ### Algemeen
 - Oplossing: Voorbeeldknop alleen weergegeven met filterinstelling "alles weergeven" in PQ lijst
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
+- Nieuw: Voeg Cruiser toe als navigatie-app (vereist Cruiser 3.0.9 of nieuwer)
+- Nieuw: Importeer geocaching.com bookmarklijsten van links
