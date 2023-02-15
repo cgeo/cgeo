@@ -11,6 +11,8 @@ import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
@@ -74,6 +76,11 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
         return new GoogleGeoitemLayer(mMap);
+    }
+
+    @Override
+    protected IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
+        return new GoogleV2GeoItemLayer(mMap);
     }
 
     @Override

@@ -700,6 +700,10 @@ public class Settings {
         return getBoolean(R.string.pref_feature_new_image_gallery, false);
     }
 
+    public static boolean enableFeatureUnifiedGeoItemLayer() {
+        return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
+    }
+
     public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
     }

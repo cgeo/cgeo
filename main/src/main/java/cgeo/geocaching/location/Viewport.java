@@ -90,11 +90,14 @@ public final class Viewport {
      */
     public boolean contains(@NonNull final ICoordinates point) {
         final Geopoint coords = point.getCoords();
-        return coords != null
-                && coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
-                && coords.getLongitudeE6() <= topRight.getLongitudeE6()
-                && coords.getLatitudeE6() >= bottomLeft.getLatitudeE6()
-                && coords.getLatitudeE6() <= topRight.getLatitudeE6();
+        return coords != null && contains(coords.getLatitudeE6(), coords.getLongitudeE6());
+    }
+
+    public boolean contains(final int latE6, final int lonE6) {
+        return lonE6 >= bottomLeft.getLongitudeE6()
+                && lonE6 <= topRight.getLongitudeE6()
+                && latE6 >= bottomLeft.getLatitudeE6()
+                && latE6 <= topRight.getLatitudeE6();
     }
 
     /**
@@ -142,6 +145,12 @@ public final class Viewport {
      */
     public boolean includes(@NonNull final Viewport vp) {
         return contains(vp.bottomLeft) && contains(vp.topRight);
+    }
+
+    public boolean intersects(@NonNull final Viewport vp) {
+        return contains(vp.bottomLeft) || contains(vp.topRight) ||
+                contains(vp.bottomLeft.getLatitudeE6(), vp.topRight.getLongitudeE6()) ||
+                contains(vp.topRight.getLatitudeE6(), vp.bottomLeft.getLongitudeE6());
     }
 
     /**
@@ -259,6 +268,14 @@ public final class Viewport {
                 for (ICoordinates p : coll) {
                     add(p);
                 }
+            }
+            return this;
+        }
+
+        public ContainingViewportBuilder add(final Viewport vp) {
+            if (vp != null) {
+                add(vp.bottomLeft);
+                add(vp.topRight);
             }
             return this;
         }

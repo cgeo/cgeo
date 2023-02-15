@@ -30,7 +30,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     private Viewport viewport;
 
     private GeoPrimitive(@Nullable final GeoItem.GeoType type, @NonNull final List<Geopoint> points, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style) {
-        this.type = type == null ? GeoItem.GeoType.POLYLINE : type;
+        this.type = type == null || type == GeoType.GROUP ? GeoItem.GeoType.POLYLINE : type;
         this.points = Collections.unmodifiableList(points);
         this.icon = icon;
         this.radius = radius;
@@ -70,12 +70,80 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         return viewport;
     }
 
+    @Nullable
+    @Override
+    public Geopoint getCenter() {
+        //shortcut for markers
+        if (getPoints().size() == 1) {
+            return getPoints().get(0);
+        }
+        final Viewport vp = getViewport();
+        return vp == null ? null : vp.getCenter();
+    }
+
+    @Override
+    public boolean isValid() {
+
+        if (getIcon() != null && getCenter() == null) {
+            return false;
+        }
+
+        switch (getType()) {
+            case GROUP:
+                return false;
+            case MARKER:
+                return getCenter() != null && getCenter().isValid();
+            case CIRCLE:
+                return getCenter() != null && getCenter().isValid() && getRadius() > 0;
+            case POLYGON:
+            case POLYLINE:
+            default:
+                return getPoints().size() >= 2;
+        }
+    }
+
+    public boolean intersects(final Viewport box, final float yPerLat, final float xPerLon) {
+        switch (getType()) {
+            case MARKER:
+                if (box.contains(getPoints().get(0))) {
+                    return true;
+                }
+                break;
+            default:
+                //do nothing
+                break;
+        }
+
+        //handle icon
+        if (yPerLat > 0 && xPerLon > 0 && icon != null) {
+            final Viewport iconViewport = icon.getViewport(getPoints().get(0), yPerLat, xPerLon);
+            if (iconViewport != null && iconViewport.intersects(box)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     public Builder buildUpon() {
         return new Builder().setType(type).addPoints(points).setIcon(icon).setRadius(radius).setStyle(style);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static GeoPrimitive createPoint(final Geopoint p, final GeoStyle style) {
-        return new Builder().setType(GeoItem.GeoType.MARKER).addPoints(p).setStyle(style).build();
+        return createCircle(p, 0.1f, style);
+    }
+
+    public static GeoPrimitive createMarker(final Geopoint p, final GeoIcon icon) {
+        return new Builder().setType(GeoItem.GeoType.MARKER).addPoints(p).setIcon(icon).build();
+    }
+
+    public static GeoPrimitive createCircle(final Geopoint p, final float radiusKm, final GeoStyle style) {
+        return new Builder().setType(GeoItem.GeoType.CIRCLE).addPoints(p).setRadius(radiusKm).setStyle(style).build();
     }
 
     public static GeoPrimitive createPolyline(final Collection<Geopoint> p, final GeoStyle style) {
@@ -107,6 +175,12 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         return type.ordinal() * 13 + (points.isEmpty() || points.get(0) == null ? 7 : points.get(0).hashCode());
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return getType() + ": " + getPoints().size() + "points in " + getViewport();
+    }
+
     //implements Builder
 
     public static class Builder {
@@ -115,6 +189,10 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         private GeoIcon icon;
         private float radius;
         private GeoStyle style;
+
+        private Builder() {
+            //no free instantiation
+        }
 
         public Builder setType(final GeoItem.GeoType type) {
             this.type = type;

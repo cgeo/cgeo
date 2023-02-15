@@ -4,6 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -24,6 +26,8 @@ public abstract class AbstractUnifiedMapView<T> {
     protected WeakReference<UnifiedMapActivity> activityRef;
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
+
+    private final GeoItemTestLayer testLayer = new GeoItemTestLayer();
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
     protected Runnable resetFollowMyLocationListener = null;
     protected int mapRotation = Settings.MAPROTATION_OFF;
@@ -45,6 +49,7 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public void prepareForTileSourceChange() {
         positionLayer = configPositionLayer(false);
+        testLayer.destroy();
     }
 
     public void setTileSource(final AbstractTileProvider newSource) {
@@ -193,15 +198,19 @@ public abstract class AbstractUnifiedMapView<T> {
     protected void onResume() {
         positionLayer = configPositionLayer(true);
         configMapChangeListener(true);
+        testLayer.init(createGeoItemProviderLayer());
     }
 
     protected void onPause() {
         positionLayer = configPositionLayer(false);
         configMapChangeListener(false);
+        testLayer.destroy();
     }
 
     protected void onDestroy() {
         // default is empty
     }
+
+    protected abstract IProviderGeoItemLayer<?> createGeoItemProviderLayer();
 
 }

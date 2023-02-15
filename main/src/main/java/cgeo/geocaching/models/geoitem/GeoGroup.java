@@ -1,6 +1,7 @@
 package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -52,6 +53,15 @@ public class GeoGroup implements GeoItem, Parcelable {
         return viewport;
     }
 
+    public static Builder builder() {
+        return new GeoGroup.Builder();
+    }
+
+    public Builder buildUpon() {
+        return builder().addItems(getItems());
+    }
+
+
     private void calculateViewport(final Viewport.ContainingViewportBuilder builder, final GeoItem item) {
         if (item instanceof GeoGroup) {
             for (GeoItem child : ((GeoGroup) item).items) {
@@ -61,6 +71,36 @@ public class GeoGroup implements GeoItem, Parcelable {
             builder.add(((GeoPrimitive) item).getPoints());
         }
     }
+
+    @Override
+    public boolean isValid() {
+        for (GeoItem item : getItems()) {
+            if (!item.isValid()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+        public boolean intersects(final Viewport box, final float yPerLat, final float xPerLon) {
+        for (GeoItem item : getItems()) {
+            if (item.intersects(box, yPerLat, xPerLon)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void forAllPrimitives(final GeoItem item, final Action1<GeoPrimitive> action) {
+        if (item instanceof GeoPrimitive) {
+            action.call((GeoPrimitive) item);
+        } else if (item instanceof GeoGroup) {
+            for (GeoItem child : ((GeoGroup) item).getItems()) {
+                forAllPrimitives(child, action);
+            }
+        }
+    }
+
 
     //equals/HashCode
 
@@ -79,10 +119,21 @@ public class GeoGroup implements GeoItem, Parcelable {
         return items.hashCode();
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return getType() + "[" + getItems() + "]";
+    }
+
     //implements Builder
 
     public static class Builder {
         private final List<GeoItem> items = new ArrayList<>();
+
+
+        private Builder() {
+            // no free instantiation
+        }
 
         public Builder addItems(final Collection<GeoItem> items) {
             this.items.addAll(items);
