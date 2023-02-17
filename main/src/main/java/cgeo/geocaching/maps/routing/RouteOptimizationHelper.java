@@ -11,6 +11,11 @@ import cgeo.geocaching.utils.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -36,25 +41,44 @@ public class RouteOptimizationHelper {
             Toast.makeText(context, "Route optimization works for routes between 3 and 100 points", Toast.LENGTH_LONG).show();
             return;
         }
-        AndroidRxUtils.andThenOnUi(Schedulers.newThread(), this::generateDistanceMatrix, () -> {
-            Log.e("generating distance matrix finished");
-            final int[] newRoute = new int[routeSize + 1];
-            AndroidRxUtils.andThenOnUi(Schedulers.newThread(), () -> {
+
+        final ExecutorService executor = Executors.newFixedThreadPool(14);
+        generateDistanceMatrix(executor);
+        runTSP(executor);
+        executor.shutdown();
+    }
+
+    private void runTSP(final ExecutorService executor) {
+        final List<Future<Object>> taskList = new ArrayList<>(); //Tasks to be executed
+
+        try {
+            // simulated annealing
+            taskList.add(executor.submit(() -> {
+                final int[] newRoute = new int[routeSize + 1];
                 final int[] temp = simulatedAnnealing();
                 System.arraycopy(temp, 0, newRoute, 0, routeSize + 1);
-            }, () -> {
                 Log.e("found a calculation with simulated annealing");
                 logRoute(newRoute);
+                return 1;
+            }));
 
-                AndroidRxUtils.andThenOnUi(Schedulers.newThread(), () -> {
-                    final int[] temp = hillClimbing();
-                    System.arraycopy(temp, 0, newRoute, 0, routeSize + 1);
-                }, () -> {
-                    Log.e("found a calculation with hill climbing");
-                    logRoute(newRoute);
-                });
-            });
-        });
+            // hill climbing
+            taskList.add(executor.submit(() -> {
+                final int[] newRoute = new int[routeSize + 1];
+                final int[] temp = hillClimbing();
+                System.arraycopy(temp, 0, newRoute, 0, routeSize + 1);
+                Log.e("found a calculation with hill climbing");
+                logRoute(newRoute);
+                return 1;
+            }));
+
+            //Awaiting completion of all tasks
+            for (Future<Object> future : taskList) {
+                future.get();
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     /** print route to log */
@@ -69,7 +93,8 @@ public class RouteOptimizationHelper {
     }
 
     /** generate matrix of all distances between pairs */
-    private void generateDistanceMatrix() {
+    private void generateDistanceMatrix(final ExecutorService executor) {
+        /*
         for (int i = 0; i < routeSize; i++) {
             Log.e("distance(" + i + ",*): calculation started");
             for (int j = 0; j < routeSize; j++) {
@@ -89,6 +114,43 @@ public class RouteOptimizationHelper {
 //                    Log.e("distance(" + i + "," + j + ") = " + distanceMatrix[i][j]);
                 }
             }
+        }
+        */
+
+        final List<Future<Object>> taskList = new ArrayList<>(); //Tasks to be executed
+        try {
+            for (int i = 0; i < routeSize; i++) {
+                final int col = i;
+                taskList.add(executor.submit(() -> {
+                    Log.e("distance(" + col + ",*): calculation started");
+                    for (int j = 0; j < routeSize; j++) {
+                        if (col != j) {
+                            final Geopoint[] track = Routing.getTrackNoCaching(
+                                    new Geopoint(initialRoute.get(col).getPoint().getLatitude(), initialRoute.get(col).getPoint().getLongitude()),
+                                    new Geopoint(initialRoute.get(j).getPoint().getLatitude(), initialRoute.get(j).getPoint().getLongitude()));
+                            float distance = 0.0f;
+                            if (track.length > 0) {
+                                Geopoint last = track[0];
+                                for (Geopoint point : track) {
+                                    distance += last.distanceTo(point);
+                                    last = point;
+                                }
+                            }
+                            distanceMatrix[col][j] = (int) (1000.0f * distance);
+                        }
+                    }
+                    Log.e("distance(" + col + ",*): calculation finished");
+                    return 1;
+                }));
+            }
+
+            //Awaiting completion of all tasks
+            for (Future<Object> future : taskList) {
+                future.get();
+            }
+            Log.e("generating distance matrix finished");
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
