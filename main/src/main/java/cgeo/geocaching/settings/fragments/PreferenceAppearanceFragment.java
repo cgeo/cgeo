@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.settings.Settings;
@@ -49,6 +50,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
             Settings.putUserLanguage(newValue.toString());
             setLanguageSummary(languagePref, newValue.toString());
+            CgeoApplication.getInstance().initApplicationLocale();
             return true;
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
