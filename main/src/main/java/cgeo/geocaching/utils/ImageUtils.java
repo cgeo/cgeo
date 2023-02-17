@@ -340,6 +340,16 @@ public final class ImageUtils {
         return null;
     }
 
+    public static float getImageRotationDegrees(@NonNull final Uri imageUri) {
+        final int orientation = getImageOrientation(imageUri);
+        for (int i = 0; i < ORIENTATIONS.length; i++) {
+            if (orientation == ORIENTATIONS[i]) {
+                return ROTATION[i];
+            }
+        }
+        return 0;
+    }
+
     private static int getImageOrientation(@NonNull final Uri imageUri) {
         int orientation = ExifInterface.ORIENTATION_NORMAL;
         try (InputStream imageStream = openImageStream(imageUri)) {
