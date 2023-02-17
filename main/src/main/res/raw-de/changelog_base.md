@@ -29,5 +29,9 @@
 - Änderung: GPX-Import: Name als Geocode für 'unbekannten' Dienst verwenden
 - Korrektur: Filtern von archivierten Caches in der Suche nach Besitzer erlauben
 - Korrektur: Zeilenumbrüche in der Logbuchansicht fehlen manchmal direkt nach dem Senden eines Logs
+<<<<<<< HEAD
 - Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
 - Fix: Several crashes
+=======
+- Korrektur: Mehrere Abstürze
+>>>>>>> release

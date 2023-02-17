@@ -9,7 +9,7 @@
 - Nowość: Odśwież skrytki na trasie
 - Nowość: Indywidualne kolory śladów
 
-### Szczegóły skrytki
+### Cache details
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji

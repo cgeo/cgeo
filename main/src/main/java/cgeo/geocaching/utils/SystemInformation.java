@@ -25,6 +25,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.UriPermission;
 import android.content.pm.PackageManager;
@@ -79,6 +80,7 @@ public final class SystemInformation {
         appendScreenResolution(context, body);
         body.append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
+        appendMemoryInfo(context, body);
         body.append("\n")
                 .append("\nSensor and location:")
                 .append("\n-------")
@@ -147,6 +149,19 @@ public final class SystemInformation {
 
         body.append("\n\n--- End of system information ---\n");
         return body.toString();
+    }
+
+    private static void appendMemoryInfo(@NonNull final Context context, @NonNull final StringBuilder body) {
+        body.append("\n- Memory: ");
+        final ActivityManager.MemoryInfo memoryInfo = EnvironmentUtils.getMemoryInfo(context);
+        if (memoryInfo == null) {
+            body.append("null");
+        } else {
+            body.append(" Available:" + Formatter.formatBytes(memoryInfo.availMem) +
+                    ", Total:" + Formatter.formatBytes(memoryInfo.totalMem) +
+                    ", Threshold: " + Formatter.formatBytes(memoryInfo.threshold) +
+                    ", low:" + memoryInfo.lowMemory);
+        }
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {

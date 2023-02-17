@@ -7,6 +7,8 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.EnvironmentUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.GeoJsonUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -36,7 +38,7 @@ public class GPXTrackOrRouteImporter {
         final AtomicBoolean success = new AtomicBoolean(false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
-                final IGeoDataProvider value = doInBackground(uri);
+                final IGeoDataProvider value = doInBackground(context, uri);
                 success.set(null != value && value.hasData());
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
@@ -58,7 +60,9 @@ public class GPXTrackOrRouteImporter {
         });
     }
 
-    private static IGeoDataProvider doInBackground(final Uri uri) {
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    private static IGeoDataProvider doInBackground(final Context context, final Uri uri) {
         try {
             // default: import properly formatted routes or tracks
             Route route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
@@ -86,7 +90,7 @@ public class GPXTrackOrRouteImporter {
                 route.calculateNavigationRoute();
             }
             if (null == route) {
-                return parseAsGeoJson(uri);
+                return parseAsGeoJson(context, uri);
             }
             return route;
         } catch (IOException e) {
@@ -112,7 +116,15 @@ public class GPXTrackOrRouteImporter {
         }
     }
 
-    private static IGeoDataProvider parseAsGeoJson(final Uri uri) throws IOException {
+    private static IGeoDataProvider parseAsGeoJson(final Context context, final Uri uri) throws IOException {
+        final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(uri);
+        final long freeMem = EnvironmentUtils.getFreeMemory(context);
+        if (fi == null || freeMem < 0 || fi.size * 10 > freeMem) {
+            Log.w("Won't import '" + uri + "' as json due to limited memory (filesize: " +
+                    Formatter.formatBytes(fi == null ? 0 : fi.size) + ", freeMem: " + Formatter.formatBytes(freeMem));
+            return null;
+        }
+
         try (InputStream is = ContentStorage.get().openForRead(uri)) {
             if (is == null) {
                 return null;
