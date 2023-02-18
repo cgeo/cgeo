@@ -42,7 +42,7 @@ public class CgeoApplication extends Application {
         instance = application;
     }
 
-    public static Application getInstance() {
+    public static CgeoApplication getInstance() {
         return instance;
     }
 
@@ -121,7 +121,7 @@ public class CgeoApplication extends Application {
     /**
      * Enforce a specific language if the user decided so.
      */
-    private void initApplicationLocale() {
+    public void initApplicationLocale() {
         final Configuration config = getResources().getConfiguration();
         config.locale = Settings.getApplicationLocale();
         final Resources resources = getResources();
