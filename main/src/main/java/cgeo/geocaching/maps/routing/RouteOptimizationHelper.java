@@ -1,23 +1,19 @@
 package cgeo.geocaching.maps.routing;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+
+import android.content.Context;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RouteOptimizationHelper {
 
@@ -26,8 +22,8 @@ public class RouteOptimizationHelper {
     private final int routeSize;
 
     public RouteOptimizationHelper(final ArrayList<RouteItem> route) {
-        initialRoute = route;
-        routeSize = route.size();
+        initialRoute = route.subList(0, 14);
+        routeSize = initialRoute.size();
         distanceMatrix = new int[routeSize][routeSize];
         for (int i = 0; i < routeSize; i++) {
             for (int j = 0; j < routeSize; j++) {
@@ -44,6 +40,11 @@ public class RouteOptimizationHelper {
 
         final ExecutorService executor = Executors.newFixedThreadPool(14);
         generateDistanceMatrix(executor);
+
+        final int[] best = new int[routeSize + 1];
+        initBest(best);
+        logRoute("calculated initial route", best);
+
         runTSP(executor);
         executor.shutdown();
     }
@@ -57,8 +58,7 @@ public class RouteOptimizationHelper {
                 final int[] newRoute = new int[routeSize + 1];
                 final int[] temp = simulatedAnnealing();
                 System.arraycopy(temp, 0, newRoute, 0, routeSize + 1);
-                Log.e("found a calculation with simulated annealing");
-                logRoute(newRoute);
+                logRoute("found a calculation with simulated annealing", newRoute);
                 return 1;
             }));
 
@@ -67,8 +67,7 @@ public class RouteOptimizationHelper {
                 final int[] newRoute = new int[routeSize + 1];
                 final int[] temp = hillClimbing();
                 System.arraycopy(temp, 0, newRoute, 0, routeSize + 1);
-                Log.e("found a calculation with hill climbing");
-                logRoute(newRoute);
+                logRoute("found a calculation with hill climbing", newRoute);
                 return 1;
             }));
 
@@ -82,9 +81,9 @@ public class RouteOptimizationHelper {
     }
 
     /** print route to log */
-    private void logRoute(final int[] route) {
-        final StringBuilder s = new StringBuilder();
-        s.append("length=").append(calculateRouteLength(route)).append(") route: (");
+    private void logRoute(final String info, final int[] route) {
+        final StringBuilder s = new StringBuilder(info);
+        s.append(": length=").append(calculateRouteLength(route)).append(", route=(");
         for (int i = 0; i < routeSize; i++) {
             s.append(initialRoute.get(route[i]).getIdentifier()).append(" - ");
         }
@@ -157,7 +156,7 @@ public class RouteOptimizationHelper {
     /** TSP calculation using hill climbing */
     private int[] hillClimbing() {
         final int[] best = new int[routeSize + 1];
-        double bestFitness = initBest(best);
+        int bestFitness = initBest(best);
         int[] savedState;
 
         for (int i = 0; i < 10000; i++) {
@@ -165,7 +164,7 @@ public class RouteOptimizationHelper {
             System.arraycopy(best, 0, savedState, 0, routeSize + 1);
 
             swapRandomPoints(best);
-            final double currentFitness = - calculateRouteLength(best);
+            final int currentFitness = - calculateRouteLength(best);
             if (currentFitness > bestFitness) {
                 bestFitness = currentFitness;
             } else {
@@ -178,7 +177,7 @@ public class RouteOptimizationHelper {
     /** TSP calculation using simulated annealing */
     private int[] simulatedAnnealing() {
         final int[] best = new int[routeSize + 1];
-        double bestFitness = initBest(best);
+        int bestFitness = initBest(best);
         int[] savedState;
 
         final double epsilon = 0.01;
@@ -189,7 +188,7 @@ public class RouteOptimizationHelper {
             System.arraycopy(best, 0, savedState, 0, routeSize + 1);
 
             swapRandomPoints(best);
-            final double currentFitness = - calculateRouteLength(best);
+            final int currentFitness = - calculateRouteLength(best);
             if (currentFitness > bestFitness || (new Random().nextDouble() < Math.exp((currentFitness - bestFitness) / temperature))) {
                 bestFitness = currentFitness;
             } else {
@@ -217,7 +216,7 @@ public class RouteOptimizationHelper {
 
     /** initializes initial vector, returns its fitness */
     @SuppressWarnings("checkstyle:FinalParameters")
-    private double initBest(int[] best) {
+    private int initBest(int[] best) {
         for (int i = 0; i < routeSize; i++) {
             best[i] = i;
         }
@@ -231,10 +230,11 @@ public class RouteOptimizationHelper {
     }
 
     /** returns length in meters for the given route */
-    public double calculateRouteLength(final int[] route) {
-        double length = 0.0;
+    public int calculateRouteLength(final int[] route) {
+        int length = 0;
         for (int i = 0; i < route.length - 2; i++) {
-            length += initialRoute.get(route[i]).getPoint().distanceTo(initialRoute.get(route[i + 1]).getPoint());
+            // length += initialRoute.get(route[i]).getPoint().distanceTo(initialRoute.get(route[i + 1]).getPoint());
+            length += distanceMatrix[route[i]][route[i + 1]];
         }
         return length;
     }
