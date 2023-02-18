@@ -7,5 +7,5 @@
 
 ### Allgemein
 - Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
+- Neu: Cruiser als Navigations-App hinzugefügt (erfordert Cruiser 3.0.9 oder neuer)
+- Neu: Importiere geocaching.com Bookmark-Listen von Links
