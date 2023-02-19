@@ -1,2 +1,3 @@
 ##
-- Correcção: Eram ignorados alguns pontos adicionais criados pelo utilizador na importação de um GPX
+- Fix: Skipping some user-created waypoints on GPX import
+- Fix: List of extended filters not translated when language is set to non-default within c:geo
