@@ -369,11 +369,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         if (!currentImage.isImageOrUnknownUri()) {
             binding.imageFull.setImageResource(UriUtils.getMimeTypeIcon(currentImage.getMimeType()));
+            binding.imageFull.setRotation(0);
             showImage(pagerPos, binding);
         } else {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
                 binding.imageFull.setImageDrawable(p.first);
+                binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(currentImage.getUri()));
                 binding.imageProgressBar.setVisibility(View.GONE);
 
                 final int bmHeight = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getHeight();
@@ -406,6 +408,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
             }, () -> {
                 binding.imageFull.setImageResource(R.drawable.mark_transparent);
+                binding.imageFull.setRotation(0);
                 binding.imageFull.setVisibility(View.GONE);
                 binding.imageProgressBar.setVisibility(View.VISIBLE);
             });

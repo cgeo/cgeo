@@ -202,6 +202,7 @@ public class ImageGalleryView extends LinearLayout {
         if (!img.isImageOrUnknownUri()) {
             binding.imageTitle.setText(TextUtils.concat(binding.imageTitle.getText(), " (" + UriUtils.getMimeFileExtension(img.getUri()) + ")"));
             binding.imageImage.setImageResource(UriUtils.getMimeTypeIcon(img.getMimeType()));
+            binding.imageImage.setRotation(0);
             binding.imageImage.setVisibility(View.VISIBLE);
             binding.imageGeoOverlay.setVisibility(View.GONE);
             binding.imageProgressBar.setVisibility(View.GONE);
@@ -216,6 +217,7 @@ public class ImageGalleryView extends LinearLayout {
                 }
 
                 binding.imageImage.setImageDrawable(p.first);
+                binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(currentEntry.image.getUri()));
                 binding.imageImage.setVisibility(View.VISIBLE);
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
@@ -230,7 +232,7 @@ public class ImageGalleryView extends LinearLayout {
             }, () -> {
                 binding.imageProgressBar.setVisibility(View.VISIBLE);
                 binding.imageImage.setImageResource(R.drawable.mark_transparent);
-                //binding.imageImage.setVisibility(View.GONE);
+                binding.imageImage.setRotation(0);
                 binding.imageGeoOverlay.setVisibility(View.GONE);
             });
         }
