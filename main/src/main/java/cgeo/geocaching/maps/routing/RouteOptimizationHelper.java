@@ -94,7 +94,7 @@ public class RouteOptimizationHelper {
     }
 
     public RouteOptimizationHelper(final ArrayList<RouteItem> route) {
-        initialRoute = route.subList(0, 14);
+        initialRoute = route; //.subList(0, 14);
         routeSize = initialRoute.size();
         distanceMatrix = new int[routeSize][routeSize];
         for (int i = 0; i < routeSize; i++) {
@@ -120,7 +120,7 @@ public class RouteOptimizationHelper {
             generateDistanceMatrix(dialog, executor);
         }, () -> {
             final int[] best = new int[routeSize + 1];
-            initBest(best);
+            initBest(dialog, best, true);
             // logRoute("calculated initial route", best);
             dialog.foundNewRoute(best);
             dialog.setTypeIndeterminate();
@@ -183,7 +183,7 @@ public class RouteOptimizationHelper {
             for (int i = 0; i < routeSize; i++) {
                 final int col = i;
                 taskList.add(executor.submit(() -> {
-                    Log.e("distance(" + col + ",*): calculation started");
+//                    Log.e("distance(" + col + ",*): calculation started");
                     for (int j = 0; j < routeSize; j++) {
                         if (col != j) {
                             final Geopoint[] track = Routing.getTrackNoCaching(
@@ -201,12 +201,12 @@ public class RouteOptimizationHelper {
                             progress.set(progress.get() + 1);
                             dialog.postProgress(progress.get() + 1);
                             if (Thread.currentThread().isInterrupted()) {
-                                Log.e("distance(" + col + ",*): calculation cancelled");
+//                                 Log.e("distance(" + col + ",*): calculation cancelled");
                                 return 1;
                             }
                         }
                     }
-                    Log.e("distance(" + col + ",*): calculation finished");
+//                    Log.e("distance(" + col + ",*): calculation finished");
                     return 1;
                 }));
             }
@@ -223,7 +223,7 @@ public class RouteOptimizationHelper {
     /** TSP calculation using hill climbing */
     private void hillClimbing(final TSPDialog dialog) {
         final int[] best = new int[routeSize + 1];
-        int bestFitness = initBest(best);
+        int bestFitness = initBest(dialog, best, false);
         int[] savedState;
         for (int i = 0; i < 10000; i++) {
             savedState = new int[routeSize + 1];
@@ -242,7 +242,7 @@ public class RouteOptimizationHelper {
     /** TSP calculation using simulated annealing */
     private void simulatedAnnealing(final TSPDialog dialog) {
         final int[] best = new int[routeSize + 1];
-        int bestFitness = initBest(best);
+        int bestFitness = initBest(dialog, best, false);
         int[] savedState;
         final double epsilon = 0.01;
         double temperature = 1538.0;
@@ -279,11 +279,16 @@ public class RouteOptimizationHelper {
 
     /** initializes initial vector, returns its fitness */
     @SuppressWarnings("checkstyle:FinalParameters")
-    private int initBest(int[] best) {
-        for (int i = 0; i < routeSize; i++) {
-            best[i] = i;
+    private int initBest(final TSPDialog dialog, int[] best, final boolean forceDefault) {
+        if (forceDefault) {
+            for (int i = 0; i < routeSize; i++) {
+                best[i] = i;
+            }
+            best[routeSize] = 0;
+        } else {
+            final int[] temp = dialog.getRoute();
+            System.arraycopy(temp, 0, best, 0, routeSize + 1);
         }
-        best[routeSize] = 0;
         return - calculateRouteLength(best);
     }
 
