@@ -152,7 +152,10 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     /** experimental function for optimizing a route by using tsp-specific algorithm */
     private void optimizeRoute() {
         final RouteOptimizationHelper roh = new RouteOptimizationHelper(new ArrayList<>(routeItemAdapter.getItems()));
-        roh.start(this);
+        roh.start(this, (newRouteItems) -> {
+            routeItemAdapter.setItems(newRouteItems);
+            routeItemAdapter.notifyDataSetChanged();
+        });
     }
 
     private boolean setAsStart(final int position) {

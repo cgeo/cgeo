@@ -5,6 +5,7 @@ import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
 import android.view.View;
@@ -37,7 +38,7 @@ public class RouteOptimizationHelper {
         private final AtomicInteger initialLength = new AtomicInteger(Integer.MAX_VALUE);
         private final int[] best;
 
-        TSPDialog(final Context context, final ExecutorService executor, final int routeSize) {
+        TSPDialog(final Context context, final ExecutorService executor, final int routeSize, final Action1<ArrayList<RouteItem>> updateRoute) {
             super(context, "Route optimization");
             best = new int[routeSize + 1];
 
@@ -48,7 +49,11 @@ public class RouteOptimizationHelper {
             super.setButton(BUTTON_POSITIVE, "Use", ((dialogInterface, i) -> {
                 executor.shutdownNow();
                 dismiss();
-                // @todo: use result
+                final ArrayList<RouteItem> newRoute = new ArrayList<>();
+                for (int r = 0; r < routeSize; r++) {
+                    newRoute.add(initialRoute.get(best[r]));
+                }
+                updateRoute.call(newRoute);
             }));
             // will be set further down
             super.setButton(BUTTON_NEUTRAL, "Redo", (((dialogInterface, i) -> { })));
@@ -104,14 +109,14 @@ public class RouteOptimizationHelper {
         }
     }
 
-    public void start(final Context context) {
+    public void start(final Context context, final Action1<ArrayList<RouteItem>> updateRoute) {
         if (routeSize < 3 || routeSize > 100) {
             Toast.makeText(context, "Route optimization works for routes between 3 and 100 points", Toast.LENGTH_LONG).show();
             return;
         }
 
         final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() - 1);
-        final TSPDialog dialog = new TSPDialog(context, executor, routeSize);
+        final TSPDialog dialog = new TSPDialog(context, executor, routeSize, updateRoute);
         dialog.show();
 
         dialog.setMessage("Generating distance matrix");
