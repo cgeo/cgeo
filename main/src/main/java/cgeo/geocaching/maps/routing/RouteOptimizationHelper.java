@@ -1,12 +1,15 @@
 package cgeo.geocaching.maps.routing;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -39,14 +42,14 @@ public class RouteOptimizationHelper {
         private final int[] best;
 
         TSPDialog(final Context context, final ExecutorService executor, final int routeSize, final Action1<ArrayList<RouteItem>> updateRoute) {
-            super(context, "Route optimization");
+            super(context, TextParam.id(R.string.route_optimization));
             best = new int[routeSize + 1];
 
-            super.setButton(BUTTON_NEGATIVE, "Cancel", (dialogInterface, i) -> {
+            setButton(BUTTON_NEGATIVE, TextParam.id(R.string.cancel), (dialogInterface, i) -> {
                 executor.shutdownNow();
                 dismiss();
             });
-            super.setButton(BUTTON_POSITIVE, "Use", ((dialogInterface, i) -> {
+            setButton(BUTTON_POSITIVE, TextParam.id(R.string.use), ((dialogInterface, i) -> {
                 executor.shutdownNow();
                 dismiss();
                 final ArrayList<RouteItem> newRoute = new ArrayList<>();
@@ -56,7 +59,7 @@ public class RouteOptimizationHelper {
                 updateRoute.call(newRoute);
             }));
             // will be set further down
-            super.setButton(BUTTON_NEUTRAL, "Redo", (((dialogInterface, i) -> { })));
+            setButton(BUTTON_NEUTRAL, TextParam.id(R.string.redo), (((dialogInterface, i) -> { })));
         }
 
         @Override
@@ -86,8 +89,8 @@ public class RouteOptimizationHelper {
                 synchronized (best) {
                     System.arraycopy(route, 0, best, 0, routeSize + 1);
                 }
-                postAdditionalInfo("Initial route length: " + initialLength.get()
-                        + (length != initialLength.get() ? "\nOptimized route length: " + length : "")
+                postAdditionalInfo(TextParam.text(String.format(dialog.getContext().getString(R.string.initial_route_length), initialLength.get())
+                        + (length != initialLength.get() ? "\n" + String.format(dialog.getContext().getString(R.string.optimized_route_length), length) : ""))
                 );
                 dialog.getButton(BUTTON_POSITIVE).setEnabled(true);
             }
@@ -111,35 +114,36 @@ public class RouteOptimizationHelper {
 
     public void start(final Context context, final Action1<ArrayList<RouteItem>> updateRoute) {
         if (routeSize < 3 || routeSize > 100) {
-            Toast.makeText(context, "Route optimization works for routes between 3 and 100 points", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.route_optimization_out_of_bounds, Toast.LENGTH_LONG).show();
             return;
         }
 
-        final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() - 1);
-        final TSPDialog dialog = new TSPDialog(context, executor, routeSize, updateRoute);
-        dialog.show();
+        SimpleDialog.of((Activity) context).setTitle(TextParam.id(R.string.route_optimization)).setMessage(TextParam.id(R.string.route_optimization_info)).confirm((d, which) -> {
+            final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+            final TSPDialog dialog = new TSPDialog(context, executor, routeSize, updateRoute);
+            dialog.show();
 
-        dialog.setMessage("Generating distance matrix");
-        dialog.setTypeDeterminate(routeSize * (routeSize - 1));
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
-            generateDistanceMatrix(dialog, executor);
-        }, () -> {
-            final int[] best = new int[routeSize + 1];
-            initBest(dialog, best, true);
-            // logRoute("calculated initial route", best);
-            dialog.foundNewRoute(best);
-            dialog.setTypeIndeterminate();
-            runTSPWrapper(dialog, executor);
+            dialog.setMessage(TextParam.id(R.string.generating_distance_matrix));
+            dialog.setTypeDeterminate(routeSize * (routeSize - 1));
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
+                generateDistanceMatrix(dialog, executor);
+            }, () -> {
+                final int[] best = new int[routeSize + 1];
+                initBest(dialog, best, true);
+                dialog.foundNewRoute(best);
+                dialog.setTypeIndeterminate();
+                runTSPWrapper(dialog, executor);
+            });
         });
     }
 
     private void runTSPWrapper(final TSPDialog dialog, final ExecutorService executor) {
-        dialog.setMessage("Running route optimizations");
+        dialog.setMessage(TextParam.id(R.string.running_route_optimizations));
         dialog.setProgressVisibility(View.VISIBLE);
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
             runTSP(dialog, executor);
         }, () -> {
-            dialog.setMessage("Route optimization finished");
+            dialog.setMessage(TextParam.id(R.string.route_optimization_finished));
             dialog.setProgressVisibility(View.GONE);
             dialog.updateButton(BUTTON_NEUTRAL, view -> {
                 runTSPWrapper(dialog, executor);
@@ -152,6 +156,7 @@ public class RouteOptimizationHelper {
         try {
             taskList.add(executor.submit(() -> {
                 simulatedAnnealing(dialog);
+                hillClimbing(dialog);
                 return 1;
             }));
             taskList.add(executor.submit(() -> {
@@ -166,29 +171,14 @@ public class RouteOptimizationHelper {
         }
     }
 
-    /** print route to log */
-    /*
-    private void logRoute(final String info, final int[] route) {
-        final StringBuilder s = new StringBuilder(info);
-        s.append(": length=").append(calculateRouteLength(route)).append(", route=(");
-        for (int i = 0; i < routeSize; i++) {
-            s.append(initialRoute.get(route[i]).getIdentifier()).append(" - ");
-        }
-        s.append(initialRoute.get(route[0]).getIdentifier()).append(")");
-        Log.e(s.toString());
-    }
-    */
-
     /** generate matrix of all distances between pairs */
     private void generateDistanceMatrix(final SimpleProgressDialog dialog, final ExecutorService executor) {
         final AtomicInteger progress = new AtomicInteger(0);
-        Log.e("Start generateDistanceMatrix");
         final List<Future<Object>> taskList = new ArrayList<>();
         try {
             for (int i = 0; i < routeSize; i++) {
                 final int col = i;
                 taskList.add(executor.submit(() -> {
-//                    Log.e("distance(" + col + ",*): calculation started");
                     for (int j = 0; j < routeSize; j++) {
                         if (col != j) {
                             final Geopoint[] track = Routing.getTrackNoCaching(
@@ -206,23 +196,19 @@ public class RouteOptimizationHelper {
                             progress.set(progress.get() + 1);
                             dialog.postProgress(progress.get() + 1);
                             if (Thread.currentThread().isInterrupted()) {
-//                                 Log.e("distance(" + col + ",*): calculation cancelled");
                                 return 1;
                             }
                         }
                     }
-//                    Log.e("distance(" + col + ",*): calculation finished");
                     return 1;
                 }));
             }
             for (Future<Object> future : taskList) {
                 future.get();
             }
-            Log.e("generating distance matrix finished");
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        Log.e("End generateDistanceMatrix");
     }
 
     /** TSP calculation using hill climbing */
@@ -230,7 +216,7 @@ public class RouteOptimizationHelper {
         final int[] best = new int[routeSize + 1];
         int bestFitness = initBest(dialog, best, false);
         int[] savedState;
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 15000; i++) {
             savedState = new int[routeSize + 1];
             System.arraycopy(best, 0, savedState, 0, routeSize + 1);
             swapRandomPoints(best);
@@ -254,7 +240,6 @@ public class RouteOptimizationHelper {
         while (temperature > epsilon) {
             savedState = new int[routeSize + 1];
             System.arraycopy(best, 0, savedState, 0, routeSize + 1);
-
             swapRandomPoints(best);
             final int currentFitness = - calculateRouteLength(best);
             if (currentFitness > bestFitness || (new Random().nextDouble() < Math.exp((currentFitness - bestFitness) / temperature))) {
@@ -271,8 +256,8 @@ public class RouteOptimizationHelper {
     @SuppressWarnings("checkstyle:FinalParameters")
     private void swapRandomPoints(int[] route) {
         while (true) {
-            final int posA = rand(1, routeSize - 2);
-            final int posB = rand(1, routeSize - 2);
+            final int posA = rand(1, routeSize - 1);
+            final int posB = rand(1, routeSize - 1);
             if (posA != posB) {
                 final int temp = route[posA];
                 route[posA] = route[posB];

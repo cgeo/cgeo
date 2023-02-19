@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.TextParam;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,17 +28,18 @@ public class SimpleProgressDialog {
         handler = new Handler(Looper.getMainLooper());
     }
 
-    public SimpleProgressDialog(final Context context, final String title) {
+    public SimpleProgressDialog(final Context context, final TextParam title) {
         this(context);
-        builder.setTitle(title);
+        builder.setTitle(title.getText(context));
     }
 
-    public void setButton(final int whichButton, final CharSequence label, final DialogInterface.OnClickListener listener) {
+    public void setButton(final int whichButton, final TextParam label, final DialogInterface.OnClickListener listener) {
         if (dialog == null) {
             dialog = builder.create();
         }
-        dialog.setButton(whichButton, label, listener);
+        dialog.setButton(whichButton, label.getText(dialog.getContext()), listener);
     }
+
     public AlertDialog show() {
         if (dialog == null) {
             dialog = builder.create();
@@ -56,7 +58,7 @@ public class SimpleProgressDialog {
         progressBar = null;
     }
 
-    public void setMessage(final String message) {
+    public void setMessage(final TextParam message) {
         if (dialog == null) {
             return;
         }
@@ -64,11 +66,11 @@ public class SimpleProgressDialog {
             textViewMessage = dialog.findViewById(R.id.message);
         }
         if (textViewMessage != null) {
-            textViewMessage.setText(message);
+            message.applyTo(textViewMessage);
         }
     }
 
-    public void postAdditionalInfo(final String message) {
+    public void postAdditionalInfo(final TextParam message) {
         handler.post(() -> {
             if (dialog == null) {
                 return;
@@ -77,7 +79,7 @@ public class SimpleProgressDialog {
                 textViewAdditionalInfo = dialog.findViewById(R.id.additionalinfo);
             }
             if (textViewAdditionalInfo != null) {
-                textViewAdditionalInfo.setText(message);
+                message.applyTo(textViewAdditionalInfo);
             }
         });
     }

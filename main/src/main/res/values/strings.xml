@@ -2494,6 +2494,15 @@
     <string name="individual_route_set_as_start_title">Set as route start</string>
     <string name="individual_route_set_as_start_message">Set this item as route start and move all subsequent items to the top of the current route?</string>
 
+    <string name="route_optimization">Route optimization</string>
+    <string name="route_optimization_info">Route optimization is an experimental feature for optimizing a route for shorter distance. As it is not possible to evaluate all possible solutions due to time and calculation power restrains on a mobile device, it uses approximation algorithms to calculate possible optimizations.\n\nCalculating is done in a two-step process: Calculate distances between each two pairs of the route, then try to find an acceptable route. This may not be the shortest possible route, so you may repeat step two as often as you want.</string>
+    <string name="initial_route_length">Initial route length: %d</string>
+    <string name="optimized_route_length">Optimized route length: %d</string>
+    <string name="route_optimization_out_of_bounds">Route optimization works for routes between 3 and 100 points</string>
+    <string name="generating_distance_matrix">Generating distance matrix</string>
+    <string name="running_route_optimizations">Running route optimizations</string>
+    <string name="route_optimization_finished">Route optimization finished</string>
+
     <!-- individual track -->
     <string name="map_load_track">Load track/route from GPX</string>
     <string name="load_track_error">Error loading track/route</string>
@@ -2688,6 +2697,8 @@
     <string name="finish">Finish</string>
     <string name="back">Back</string>
     <string name="cancel">Cancel</string>
+    <string name="use">Use</string>
+    <string name="redo">Redo</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
 
     <!-- ChipChoiceGroup -->
