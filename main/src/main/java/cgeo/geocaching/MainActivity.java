@@ -394,6 +394,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         updateCacheCounter();
         prepareQuickLaunchItems();
         checkPendingDownloads();
+        binding.locationStatus.setShowAddress(Settings.isShowAddress());
     }
 
     /** prompts user if there's at least one blocked or failed download */
