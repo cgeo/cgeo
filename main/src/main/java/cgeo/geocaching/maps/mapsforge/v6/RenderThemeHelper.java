@@ -158,7 +158,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         final TileRendererLayer rendererLayer = (TileRendererLayer) tileLayer.getTileLayer();
 
         //try to apply stored value
-        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
+        ThemeData selectedTheme = setSelectedMapTheme(Settings.getSelectedMapRenderTheme());
 
 
         if (selectedTheme == null) {
@@ -340,11 +340,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
      */
-    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
-        return setSelectedMapThemeInternal(themeIdCandidate) != null;
-    }
-
-    private static ThemeData setSelectedMapThemeInternal(final String themeIdCandidate) {
+    private static ThemeData setSelectedMapTheme(final String themeIdCandidate) {
 
         //try to apply stored value
         ThemeData selectedTheme = null;
