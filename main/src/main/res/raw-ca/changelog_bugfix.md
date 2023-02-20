@@ -3,4 +3,4 @@
 - Fix: List of extended filters not translated when language is set to non-default within c:geo
 - Fix: Downloading/updating routing tiles or maps no longer possible on older devices
 - Fix: Location name shown in compass instead of coordinates
-- Fix: c:geo hangs on adding waypoint when certain formulars have been copied to clipboard
+- Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
