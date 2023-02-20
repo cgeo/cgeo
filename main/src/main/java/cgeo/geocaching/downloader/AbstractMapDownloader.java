@@ -30,8 +30,8 @@ abstract class AbstractMapDownloader extends AbstractDownloader {
 
     @Override
     protected void onSuccessfulReceive(final Uri result) {
-        // update offline maps
-        MapsforgeMapProvider.getInstance().updateOfflineMaps(result);
+        // update list of offline maps
+        MapsforgeMapProvider.getInstance().updateOfflineMaps(null);
         LocalBroadcastManager.getInstance(CgeoApplication.getInstance()).sendBroadcast(new Intent(ACTION_INVALIDATE_MAPLIST));
     }
 
