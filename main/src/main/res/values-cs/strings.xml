@@ -2236,6 +2236,8 @@
     <string name="permission_location_explanation">c:geo je optimalizován pro použití s daty GPS (přesná poloha) k určení vaší polohy a výpočtu vzdálenosti a směru ke keškám. Bez tohoto povolení nebudou funkce založené na poloze fungovat podle očekávání.</string>
     <string name="permission_read_external_storage_explanation_title">Oprávnění ke čtení externího úložiště</string>
     <string name="permission_read_external_storage_explanation">c:geo může jako pozadí aplikace použít tapetu vašeho systému. K tomu potřebuje c:geo oprávnění ke čtení multimediálních dat v externím úložišti.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo bude zapisovat data do úložiště telefonu nebo na SD kartu, např. při ukládání keškek pro offline použití, importu nebo exportu souborů a dalších funkcích. V některých verzích systému Android je třeba pro tyto akce udělit další oprávnění.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Starší oprávnění pro zápis do externího úložiště</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
