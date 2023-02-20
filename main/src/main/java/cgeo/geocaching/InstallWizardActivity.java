@@ -40,7 +40,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private static final String BUNDLE_CSAH = "csah";
     private static final String BUNDLE_BACKUPUTILS = "backuputils";
 
-    private static final boolean DO_LEGACY_WRITE_STORAGE = android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.Q; // <= SDK29
+    private static final boolean DO_LEGACY_WRITE_STORAGE = android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.Q; // < SDK29
 
     public enum WizardMode {
         WIZARDMODE_DEFAULT(0),
