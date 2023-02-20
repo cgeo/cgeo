@@ -33,6 +33,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -217,7 +218,7 @@ public class ImageGalleryView extends LinearLayout {
                 }
 
                 binding.imageImage.setImageDrawable(p.first);
-                binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(currentEntry.image.getUri()));
+                binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(Uri.parse(currentEntry.image.getPath())));
                 binding.imageImage.setVisibility(View.VISIBLE);
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);

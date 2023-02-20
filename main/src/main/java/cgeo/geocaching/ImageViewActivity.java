@@ -375,7 +375,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
                 binding.imageFull.setImageDrawable(p.first);
-                binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(currentImage.getUri()));
+                binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(Uri.parse(currentImage.getPath())));
                 binding.imageProgressBar.setVisibility(View.GONE);
 
                 final int bmHeight = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getHeight();
