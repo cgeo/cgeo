@@ -73,7 +73,9 @@ import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -354,6 +356,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 caches.invalidate(Collections.singleton(geocode));
             }
         });
+
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INVALIDATE_MAPLIST) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                invalidateOptionsMenu();
+            }
+        });
+
     }
 
     private void postZoomToViewport(final Viewport viewport) {
