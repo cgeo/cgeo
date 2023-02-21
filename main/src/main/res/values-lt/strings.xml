@@ -2251,6 +2251,7 @@
     <string name="individual_route_error_toggling_waypoint">klaida perjungiant kelio tašką</string>
     <string name="individual_route_error_single_waypoint_mode">Negalima naudoti vieno kelio taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
+    <string name="map_refresh_individual_route">Atnaujinti</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
@@ -2280,6 +2281,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
+    <string name="routes_tracks_color">Pasirinkite spalvą</string>
     <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
@@ -2392,6 +2394,7 @@
     <string name="maptheme_scale_text_summary">Papildomai keičia teksto etiketes žemėlapyje; 100% = nepakeistas dydis</string>
     <string name="maptheme_scale_symbol_title">Simbolių dydžio koeficientas</string>
     <string name="maptheme_scale_symbol_summary">Papildomai sumažina simbolių dydžius žemėlapyje; 100% = nepakeistas dydis</string>
+    <string name="vtm_theme_variant">Temos variantai</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Išvalyti pėdsaką</string>
     <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
