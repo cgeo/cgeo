@@ -4,3 +4,4 @@
 - Fix: Downloading/updating routing tiles or maps no longer possible on older devices
 - Fix: Location name shown in compass instead of coordinates
 - Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
+- Fix: Wrong image orientation for own images in portrait mode
