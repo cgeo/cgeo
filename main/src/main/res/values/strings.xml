@@ -1398,6 +1398,7 @@
     <string name="cache_personal_note_upload_error">Error uploading personal note</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_personal_note_vars_out_of_sync">Variables in notes are out of sync (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sync variables</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Check variables whose value should be overwritten from notes</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Description</string>

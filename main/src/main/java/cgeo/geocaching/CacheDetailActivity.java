@@ -1845,7 +1845,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final List<ImmutableTriple<String, String, String>> items = CollectionStream.of(diff.entrySet())
                     .map(e -> new ImmutableTriple<>(e.getKey(), e.getValue().first, e.getValue().second)).toList();
             TextUtils.sortListLocaleAware(items, i -> i.left);
-            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_dialog_title))
+                    .setMessage(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
                     .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, sel -> {
                            final Map<String, String> toChange = new HashMap<>();
                            for (ImmutableTriple<String, String, String> e : sel) {
