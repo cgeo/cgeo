@@ -1305,6 +1305,7 @@
     <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
     <string name="cache_menu_maps_directions">Google Maps aanwijzigen</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (wandelen)</string>
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2195,6 +2196,7 @@
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
+    <string name="map_refresh_individual_route">Verversen</string>
     <string name="map_export_individual_route">Exporteer individuele route</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
@@ -2222,6 +2224,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
+    <string name="routes_tracks_color">Kleur selecteren</string>
     <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
@@ -2334,6 +2337,7 @@
     <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
     <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
     <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
