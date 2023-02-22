@@ -301,7 +301,7 @@ public final class ImageUtils {
     @Nullable
     private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
 
-        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(imageUri));
+        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStreamIfLocal(imageUri));
         if (sizeOnlyOptions == null) {
             return null;
         }
@@ -319,7 +319,7 @@ public final class ImageUtils {
     private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions) {
         final int orientation = getImageOrientation(imageUri);
 
-        try (InputStream imageStream = openImageStream(imageUri)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
             }
@@ -352,7 +352,7 @@ public final class ImageUtils {
 
     private static int getImageOrientation(@NonNull final Uri imageUri) {
         int orientation = ExifInterface.ORIENTATION_NORMAL;
-        try (InputStream imageStream = openImageStream(imageUri)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream != null) {
                 final ExifInterface exif = new ExifInterface(imageStream);
                 orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -388,7 +388,7 @@ public final class ImageUtils {
         if (imageData == null) {
             return null;
         }
-        try (InputStream imageStream = openImageStream(imageData)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageData)) {
             if (imageStream == null) {
                 return null;
             }
@@ -657,8 +657,11 @@ public final class ImageUtils {
     }
 
     @Nullable
-    private static InputStream openImageStream(final Uri imageUri) {
-        return ContentStorage.get().openForRead(imageUri);
+    private static InputStream openImageStreamIfLocal(final Uri imageUri) {
+        if (UriUtils.isFileUri(imageUri) || UriUtils.isContentUri(imageUri)) {
+            return ContentStorage.get().openForRead(imageUri, true);
+        }
+        return null;
     }
 
     public static boolean deleteImage(final Uri uri) {
