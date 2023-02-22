@@ -2167,6 +2167,8 @@
     <string name="permission_location_explanation">O c:geo está optimizado para usar dados GPS (localização apurada), para localizar a sua posição e calcular a distância e direcção para as geocaches. Sem esta permissão, as funções baseadas na localização não funcionarão como esperado.</string>
     <string name="permission_read_external_storage_explanation_title">Permissão de leitura para o armazenamento externo</string>
     <string name="permission_read_external_storage_explanation">O c:geo pode usar o papel de parede do seu sistema como fundo para a aplicação. Para fazer isso, o c:geo precisa de permissão para ler os seus dados de fotos no armazenamento externo.</string>
+    <string name="permission_legacy_write_external_storage_explanation">O c:geo escreverá dados no armazenamento do seu telefone ou cartão SD, por exemplo, quando guardar geocaches para utilização off-line, importar ou exportar ficheiros e outras funções. Em algumas versões do Android, terá de conceder uma permissão adicional para essas acções.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Permissão de escrita em armazenamento externo antiga</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
