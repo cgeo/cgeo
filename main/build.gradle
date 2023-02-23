@@ -456,7 +456,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
 
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.5.0'
+    String annotationVersion = '1.6.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
