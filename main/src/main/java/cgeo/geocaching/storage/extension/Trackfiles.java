@@ -47,6 +47,11 @@ public class Trackfiles extends DataStore.DBExtension {
         return long2 != 0 ? (int) long2 : MapLineUtils.getTrackColor();
     }
 
+    public int getWidth() {
+        return long3 != 0 ? (int) long3 : MapLineUtils.getRawTrackLineWidth();
+    }
+
+
     /** to be called by Tracks only, not intended for direct usage */
     public static String createTrackfile(final Activity activity, final Uri uri) {
         // copy file to c:geo internal storage
@@ -83,6 +88,13 @@ public class Trackfiles extends DataStore.DBExtension {
         long2 = newColor;
         removeAll(type, key);
         add(type, key, long1, newColor, long3, long4, string1, string2, string3, string4);
+    }
+
+    /** to be called by Tracks only, not intended for direct usage */
+    public void setWidth(final int newWidth) {
+        long3 = newWidth;
+        removeAll(type, key);
+        add(type, key, long1, long2, newWidth, long4, string1, string2, string3, string4);
     }
 
     /** to be called by Tracks only, not intended for direct usage */

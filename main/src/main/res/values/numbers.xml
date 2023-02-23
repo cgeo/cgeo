@@ -5,6 +5,7 @@
     <integer name="default_directionwidth">7</integer>
     <integer name="default_routewidth">7</integer>
     <integer name="default_trackwidth">7</integer>
+    <integer name="max_width">100</integer>
 
     <!-- seekbar preference default & max values -->
     <integer name="brouter_threshold_default">10</integer>

@@ -103,7 +103,7 @@ public abstract class AbstractMap {
 
     public abstract void onLowMemory();
 
-    public void setTrack(final String key, final IGeoDataProvider track, final int color) {
+    public void setTrack(final String key, final IGeoDataProvider track, final int color, final int width) {
         //
     }
 
