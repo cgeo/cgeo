@@ -547,7 +547,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return false; // @todo
     }
 
-    private void setTrack(final String key, final IGeoDataProvider route, final int unused) {
+    private void setTrack(final String key, final IGeoDataProvider route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
         initRouteTrackUtilsAndTracks(false);

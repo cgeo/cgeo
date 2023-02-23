@@ -5,7 +5,6 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import org.mapsforge.core.graphics.Canvas;
-import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.Point;
 
@@ -23,18 +22,12 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
     public RouteLayer(final PostRealDistance postRealRouteDistance) {
         super();
         this.postRealRouteDistance = postRealRouteDistance;
-        resetColor(MapLineUtils.getRouteColor());
-        width = MapLineUtils.getRouteLineWidth(false);
-    }
-
-    @Override
-    public Paint resetColor(final int lineColor) {
-        return super.resetColor(lineColor);
+        resetPaint(MapLineUtils.getRouteColor(), MapLineUtils.getRouteLineWidth(false));
     }
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateRoute(KEY, route, MapLineUtils.getRouteColor());
+        super.updateRoute(KEY, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth());
         this.distance = route.getDistance();
 
         if (postRealRouteDistance != null) {

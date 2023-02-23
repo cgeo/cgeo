@@ -93,6 +93,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         private boolean isHidden = false;
         private List<List<LatLng>> track = null;
         private int color;
+        private int width;
     }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -201,14 +202,14 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor());
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth());
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
         }
     }
 
     @Override
-    public void updateRoute(final String key, final IGeoDataProvider track, final int color) {
+    public void updateRoute(final String key, final IGeoDataProvider track, final int color, final int width) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -221,6 +222,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 c.isHidden = track.isHidden();
             }
             c.color = color;
+            c.width = width;
         }
         repaintRequired();
     }
@@ -416,7 +418,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)
                                 .color(c.color)
-                                .width(MapLineUtils.getTrackLineWidth(false))
+                                .width(MapLineUtils.getWidthFromRaw(c.width, false))
                                 .zIndex(ZINDEX_TRACK)
                         );
                     }

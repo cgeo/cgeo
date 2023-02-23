@@ -2448,6 +2448,7 @@
     <string name="preference_colorpicker_select_color_scheme">Select color scheme</string>
     <string name="preference_colorpicker_select_color">Select color</string>
     <string name="preference_colorpicker_select_opaqueness">Select opaqueness</string>
+    <string name="preference_colorpicker_select_width">Select line width</string>
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->

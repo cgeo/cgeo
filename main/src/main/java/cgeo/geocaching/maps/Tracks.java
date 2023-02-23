@@ -5,7 +5,7 @@ import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Action2;
-import cgeo.geocaching.utils.functions.Action3;
+import cgeo.geocaching.utils.functions.Action4;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -32,7 +32,7 @@ public class Tracks {
     }
 
     public interface UpdateTrack {
-        void updateRoute(String key, IGeoDataProvider route, int color);
+        void updateRoute(String key, IGeoDataProvider route, int color, int width);
     }
 
     public Tracks() {
@@ -73,9 +73,9 @@ public class Tracks {
         }
     }
 
-    public void traverse(final Action3<String, IGeoDataProvider, Integer> action) {
+    public void traverse(final Action4<String, IGeoDataProvider, Integer, Integer> action) {
         for (Track track : data) {
-            action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor());
+            action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor(), track.trackfile.getWidth());
         }
     }
 
@@ -136,6 +136,23 @@ public class Tracks {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 track.trackfile.setColor(newColor);
+            }
+        }
+    }
+
+    public int getWidth(@NonNull final String key) {
+        for (Track track : data) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
+                return track.trackfile.getWidth();
+            }
+        }
+        return MapLineUtils.getRawTrackLineWidth();
+    }
+
+    public void setWidth(@NonNull final String key, final int newWidth) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setWidth(newWidth);
             }
         }
     }

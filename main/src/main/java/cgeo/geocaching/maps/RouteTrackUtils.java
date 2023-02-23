@@ -98,7 +98,7 @@ public class RouteTrackUtils {
                     Log.d("[RouteTrackDebug] Finished import of track " + uri + ": " + (route == null ? "null returned" : "updating map"));
                     final String key = tracks.add(activity, uri, updateTrack);
                     tracks.setRoute(key, route);
-                    updateTrack.updateRoute(key, route, tracks.getColor(key));
+                    updateTrack.updateRoute(key, route, tracks.getColor(key), tracks.getWidth(key));
                     updateDialogTracks(popup, tracks);
                 });
             }
@@ -224,10 +224,10 @@ public class RouteTrackUtils {
             final ImageButton vColor = vt.findViewById(R.id.item_color);
             ColorPickerUI.setViewColor(vColor, tracks.getColor(key), false);
             vColor.setVisibility(View.VISIBLE);
-            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), tracks.getColor(key), false, 0, true).show(newColor -> {
+            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), tracks.getColor(key), false, 0, true).enableWidthSelection(tracks.getWidth(key), newWidth -> tracks.setWidth(key, newWidth)).show(newColor -> {
                 tracks.setColor(key, newColor);
                 ColorPickerUI.setViewColor(vColor, newColor, false);
-                updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key));
+                updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
             }));
 
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
@@ -247,7 +247,7 @@ public class RouteTrackUtils {
                     final boolean newValue = !geoData.isHidden();
                     setVisibilityInfo(vVisibility, newValue);
                     geoData.setHidden(newValue);
-                    updateTrack.updateRoute(key, geoData, tracks.getColor(key));
+                    updateTrack.updateRoute(key, geoData, tracks.getColor(key), tracks.getWidth(key));
                     tracks.hide(key, newValue);
                 });
             }
@@ -255,7 +255,7 @@ public class RouteTrackUtils {
             vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm((d, w) -> {
                 tracks.remove(key);
                 updateDialogTracks(dialog, tracks);
-                updateTrack.updateRoute(key, null, tracks.getColor(key));
+                updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
             }));
             tracklist.addView(vt);
         });
@@ -292,7 +292,7 @@ public class RouteTrackUtils {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " finished, updating map");
                 route.setHidden(trackfile.isHidden());
                 updateDialogTracks(popup, tracks);
-                updateTrack.updateRoute(trackfile.getKey(), route, trackfile.getColor());
+                updateTrack.updateRoute(trackfile.getKey(), route, trackfile.getColor(), trackfile.getWidth());
             } else {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " returned null");
             }

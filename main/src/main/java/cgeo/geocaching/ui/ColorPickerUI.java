@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.util.Consumer;
 
 import java.util.Locale;
 
@@ -33,14 +34,20 @@ public class ColorPickerUI {
     private int colorScheme = 0;                    // currently selected color scheme
     private int color = 0xffff0000;                 // currently selected color (incl. opaqueness)
     private int originalColor = 0xffff0000;         // remember color on instantiating or ok-ing the dialog
+    private int originalWidth = 0;                  // remember width on instantiating or ok-ing the dialog
     private int defaultColor = 0xffff0000;          // default value (for reset)
     private boolean hasDefaultValue = false;
     private boolean showOpaquenessSlider = false;
+
+    private boolean showWidthSlider = false;
 
     private GridLayout colorSchemeGrid = null;
     private GridLayout colorGrid = null;
     private TextView opaquenessValue = null;
     private SeekBar opaquenessSlider = null;
+    private TextView widthValue = null;
+    private SeekBar widthSlider = null;
+    private Consumer<Integer> widthCallback = null;
     private final Context context;
 
     private int iconSize = 0;
@@ -69,11 +76,21 @@ public class ColorPickerUI {
         iconSize = Math.max(50, Math.min(ColorPickerUI.dm.widthPixels, dm.heightPixels) / 10);
     }
 
+    public ColorPickerUI enableWidthSelection(final int originalWidth, final Consumer<Integer> widthCallback) {
+        this.originalWidth = originalWidth;
+        this.widthCallback = widthCallback;
+        showWidthSlider = true;
+        return this;
+    }
+
     public void show(final Action1<Integer> setValue) {
         final View v = LayoutInflater.from(context).inflate(R.layout.preference_colorpicker, null);
         final AlertDialog.Builder builder = Dialogs.newBuilder(context);
         builder.setView(v);
         builder.setPositiveButton(android.R.string.ok, (dialog1, which) -> {
+                if (widthCallback != null) {
+                    widthCallback.accept(widthSlider.getProgress());
+                }
                 setValue.call(color);
                 if (null != opaquenessSlider) {
                     opaquenessSlider.setProgress(getOpaqueness());
@@ -110,7 +127,8 @@ public class ColorPickerUI {
         opaquenessValue = v.findViewById(R.id.colorpicker_opaqueness_value);
 
         if (showOpaquenessSlider) {
-            configureOpaquenessSlider(v);
+            v.findViewById(R.id.colorpicker_opaqueness_items).setVisibility(View.VISIBLE);
+            configureSlider(opaquenessSlider, opaquenessValue, this::selectOpaqueness);
         } else {
             // without opaqueness slider don't use fully transparent colors
             if (opaqueness == 0) {
@@ -120,14 +138,24 @@ public class ColorPickerUI {
 
         opaquenessSlider.setProgress(opaqueness);
         selectOpaqueness(opaqueness);
+
+        widthSlider = v.findViewById(R.id.colorpicker_width_slider);
+        widthValue = v.findViewById(R.id.colorpicker_width_value);
+
+        if (showWidthSlider) {
+            v.findViewById(R.id.colorpicker_width_items).setVisibility(View.VISIBLE);
+            configureSlider(widthSlider, widthValue, this::selectWidth);
+        }
+
+        widthSlider.setProgress(originalWidth);
+        selectWidth(originalWidth);
     }
 
-    private void configureOpaquenessSlider(final View v) {
-        v.findViewById(R.id.colorpicker_opaqueness_items).setVisibility(View.VISIBLE);
-        opaquenessSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    private void configureSlider(final SeekBar slider, final TextView value, final Consumer<Integer> progressChangedCallback) {
+        slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                selectOpaqueness(progress);
+                progressChangedCallback.accept(progress);
             }
 
             @Override
@@ -141,13 +169,13 @@ public class ColorPickerUI {
             }
         });
 
-        opaquenessValue.setOnClickListener(v2 -> {
+        value.setOnClickListener(v2 -> {
             final EditText editText = new EditText(context);
             editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
-            editText.setText(String.valueOf(opaquenessSlider.getProgress()));
+            editText.setText(String.valueOf(slider.getProgress()));
 
             final int min = 0;
-            final int max = 255;
+            final int max = slider.getMax();
 
             Dialogs.newBuilder(context)
                     .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
@@ -164,8 +192,8 @@ public class ColorPickerUI {
                                 newValue = min;
                                 Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
                             }
-                            opaquenessSlider.setProgress(newValue);
-                            selectOpaqueness(opaquenessSlider.getProgress());
+                            slider.setProgress(newValue);
+                            progressChangedCallback.accept(slider.getProgress());
                         } catch (NumberFormatException e) {
                             Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                         }
@@ -250,6 +278,10 @@ public class ColorPickerUI {
         colorScheme = getColorScheme();
         initColorSchemeGrid();
         initColorGrid(colorScheme);
+    }
+
+    private void selectWidth(final int width) {
+        widthValue.setText(String.format(Locale.getDefault(), "%d", width));
     }
 
 }

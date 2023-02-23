@@ -267,7 +267,7 @@
             android:key="@string/pref_mapline_trailwidth"
             android:defaultValue="@integer/default_trailwidth"
             app:min="0"
-            app:max="100"
+            app:max="@integer/max_width"
             app:hasDecimals="false"
             app:iconSpaceReserved="false" />
 
@@ -288,7 +288,7 @@
                 android:defaultValue="@integer/default_directionwidth"
                 android:layout="@layout/preference_seekbar"
                 app:min="0"
-                app:max="100"
+                app:max="@integer/max_width"
                 app:hasDecimals="false"
                 app:iconSpaceReserved="false" />
 
@@ -309,7 +309,7 @@
                 android:defaultValue="@integer/default_routewidth"
                 android:layout="@layout/preference_seekbar"
                 app:min="0"
-                app:max="100"
+                app:max="@integer/max_width"
                 app:hasDecimals="false"
                 app:iconSpaceReserved="false" />
 
@@ -330,7 +330,7 @@
                 android:defaultValue="@integer/default_trackwidth"
                 android:layout="@layout/preference_seekbar"
                 app:min="0"
-                app:max="100"
+                app:max="@integer/max_width"
                 app:hasDecimals="false"
                 app:iconSpaceReserved="false" />
 

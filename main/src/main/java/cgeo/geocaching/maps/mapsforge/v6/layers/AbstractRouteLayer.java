@@ -22,7 +22,6 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 
 abstract class AbstractRouteLayer extends Layer {
-    protected float width;
 
     // used for caching
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
@@ -37,11 +36,9 @@ abstract class AbstractRouteLayer extends Layer {
         protected int lineColor = 0xD00000A0;
     }
 
-    protected AbstractRouteLayer() {
-        width = MapLineUtils.getDefaultThinLineWidth();
-    }
+    protected AbstractRouteLayer() { }
 
-    public void updateRoute(final String key, final IGeoDataProvider r, final int color) {
+    public void updateRoute(final String key, final IGeoDataProvider r, final int color, final int width) {
         if (!(r instanceof Route)) {
             return;
         }
@@ -54,10 +51,8 @@ abstract class AbstractRouteLayer extends Layer {
             }
             c.track = null;
             c.path = null;
-            if (c.lineColor != color) {
-                c.paint = resetColor(color);
-                c.lineColor = color;
-            }
+            c.paint = resetPaint(color, MapLineUtils.getWidthFromRaw(width, false));
+            c.lineColor = color;
             if (route != null) {
                 c.track = getAllPoints(route);
                 c.isHidden = route.isHidden();
@@ -80,7 +75,7 @@ abstract class AbstractRouteLayer extends Layer {
         }
     }
 
-    public Paint resetColor(final int lineColor) {
+    public Paint resetPaint(final int lineColor, final float width) {
         final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
         paint.setStrokeWidth(width);
         paint.setStyle(Style.STROKE);
