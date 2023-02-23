@@ -89,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/preference_colorpicker_select_opaqueness"
-                    android:layout_weight="7"
+                    android:layout_weight="5"
                     android:gravity="right"
                     android:layout_gravity="right"
                     android:paddingRight="16dp"/>

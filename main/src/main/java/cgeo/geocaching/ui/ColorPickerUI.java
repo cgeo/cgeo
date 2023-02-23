@@ -245,7 +245,7 @@ public class ColorPickerUI {
     }
 
     private void selectOpaqueness(final int opaqueness) {
-        opaquenessValue.setText(String.format(Locale.getDefault(), "%d", opaqueness));
+        opaquenessValue.setText(String.format(Locale.getDefault(), "%d%%", opaqueness * 100 / 255)); // format as percentage value
         color = ((opaqueness & 0xff) << 24) + (color & 0xffffff);
         colorScheme = getColorScheme();
         initColorSchemeGrid();
