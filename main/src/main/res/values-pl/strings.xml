@@ -1267,6 +1267,7 @@
     <string name="cache_personal_note_upload_error">Błąd podczas wysyłania notatki osobistej</string>
     <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
     <string name="cache_personal_note_vars_out_of_sync">Zmienne w notatkach nie są zsynchronizowane (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizuj zmienne</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Sprawdź zmienne, których wartość powinna być nadpisana z notatek</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Opis</string>
