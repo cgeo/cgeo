@@ -63,7 +63,7 @@ public class ColorPickerUI {
         this.hasDefaultValue = hasDefaultValue;
         this.defaultColor = defaultColor;
         this.showOpaquenessSlider = showOpaquenessSlider;
-        Log.e("color=" + (color & 0xffffff) + ", scheme=" + getColorScheme() + ", opaqueness=" + getOpaqueness());
+        Log.i("color=" + (color & 0xffffff) + ", scheme=" + getColorScheme() + ", opaqueness=" + getOpaqueness());
 
         // set icon size dynamically, based on screen dimensions
         iconSize = Math.max(50, Math.min(ColorPickerUI.dm.widthPixels, dm.heightPixels) / 10);
