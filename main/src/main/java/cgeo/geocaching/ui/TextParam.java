@@ -139,7 +139,7 @@ public class TextParam {
      * Applies the current settings of this TextParam to a textview.
      * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
      * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
-     * * Sets text returned by {@link #getText(Co ntext)}
+     * * Sets text returned by {@link #getText(Context)}
      * * Calls {@link #adjust(TextView, boolean)} on the textview
      */
     public void applyTo(@Nullable final TextView view, final boolean forceNoMovement) {
@@ -158,7 +158,6 @@ public class TextParam {
      * creates text (CharSequence) to assign to a TextView according to this TextParam settings
      */
     // splitting up that method would not help improve readability
-    @SuppressWarnings({"PMD.NPathComplexity"})
     public CharSequence getText(@Nullable final Context ctx) {
         final Context context = ctx == null && CgeoApplication.getInstance() != null ? CgeoApplication.getInstance().getApplicationContext() : ctx;
         CharSequence text;

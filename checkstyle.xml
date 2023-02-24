@@ -79,6 +79,9 @@
         <module name="NeedBraces">
             <property name="severity" value="info" />
         </module>
+        <module name="NPathComplexity">
+            <property name="severity" value="info" />
+        </module>
         <module name="OuterTypeFilename">
             <property name="severity" value="info" />
         </module>
