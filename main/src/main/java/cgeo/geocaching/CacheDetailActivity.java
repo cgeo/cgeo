@@ -1985,7 +1985,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private static void handleImageClick(final Activity activity, final Geocache cache, final Spannable spannable) {
-            final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
+            //don't make images clickable which are surrounded by a clickable span, this would suppress the "original" click
+            //(most prominent example: <a href> links with an <img> tag inside, e.g. for challenge checkers)
+            final List<URLSpan> links = new ArrayList<>(Arrays.asList(spannable.getSpans(0, spannable.length(), URLSpan.class)));
+            Collections.sort(links, (l1, l2) -> Integer.compare(spannable.getSpanStart(l1), spannable.getSpanStart(l2)));
+            int start = 0;
+            for (URLSpan link : links) {
+                final int end = spannable.getSpanStart(link);
+                registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, end, ImageSpan.class));
+                start = spannable.getSpanEnd(link);
+            }
+            registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, spannable.length(), ImageSpan.class));
+        }
+
+        private static void registerImageClickListener(final Activity activity, final Geocache cache, final Spannable spannable, final ImageSpan[] spans) {
+
             for (final ImageSpan span : spans) {
                 final ClickableSpan clickableSpan = new ClickableSpan() {
                     @Override
@@ -2013,13 +2027,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+            String baseScheme = Uri.parse(baseUrl).getScheme();
+            if (StringUtils.isBlank(baseScheme)) {
+                baseScheme = "https";
+            }
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
-                if (uri.getScheme() == null && uri.getHost() == null) {
+                if (uri.getScheme() == null) {
                     final int start = spannable.getSpanStart(span);
                     final int end = spannable.getSpanEnd(span);
                     final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = Uri.parse(baseUrl + uri);
+                    final Uri absoluteUri = uri.getHost() == null ? Uri.parse(baseUrl + uri) :
+                            uri.buildUpon().scheme(baseScheme).build();
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
                 }

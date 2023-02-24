@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
@@ -374,8 +375,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         } else {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
-                binding.imageFull.setImageDrawable(p.first);
-                binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(currentImage.getUri()));
+                if (p.first == null) {
+                    binding.imageFull.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
+                    binding.imageFull.setRotation(0);
+                } else {
+                    binding.imageFull.setImageDrawable(p.first);
+                    binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(currentImage.getUri()));
+                }
                 binding.imageProgressBar.setVisibility(View.GONE);
 
                 final int bmHeight = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getHeight();
@@ -384,7 +390,11 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 //enhance description with metadata
                 final List<CharSequence> imageInfosNew = new ArrayList<>();
                 imageInfosNew.add(binding.imageviewInformationText.getText());
-                imageInfosNew.add(LocalizationUtils.getString(R.string.imageview_width_height, bmWidth, bmHeight));
+                if (bmHeight > 0 || bmWidth > 0) {
+                    imageInfosNew.add(LocalizationUtils.getString(R.string.imageview_width_height, bmWidth, bmHeight));
+                } else {
+                    imageInfosNew.add(LocalizationUtils.getString(R.string.imageview_error, bmWidth, bmHeight));
+                }
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
                 if (gp != null) {
