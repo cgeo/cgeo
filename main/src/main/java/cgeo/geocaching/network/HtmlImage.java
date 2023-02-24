@@ -307,7 +307,11 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     private BitmapDrawable getErrorImage() {
-        if (returnErrorImage) {
+        return getErrorImage(resources, returnErrorImage);
+    }
+
+    public static BitmapDrawable getErrorImage(final Resources resources, final boolean nonTransparent) {
+        if (nonTransparent) {
             return new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded));
         }
         return ImageUtils.getTransparent1x1Drawable(resources);
