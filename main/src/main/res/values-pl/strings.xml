@@ -1605,6 +1605,7 @@
     <string name="imageview_notitle">Bez nazwy</string>
     <string name="imageview_mimetype">Typ MIME</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Nie udało się załadować obrazu</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentarz</string>
     <!-- visit -->
@@ -2277,6 +2278,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
+    <string name="route_optimization">Optymalizacja trasy</string>
+    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy na krótszą odległość. Ponieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
+    <string name="initial_route_length">Początkowa długość trasy: %d</string>
+    <string name="optimized_route_length">Zoptymalizowana długość trasy: %d</string>
+    <string name="route_optimization_out_of_bounds">Optymalizacja trasy działa dla tras pomiędzy 3 a 100 punktami</string>
+    <string name="generating_distance_matrix">Generowanie matrycy odległości</string>
+    <string name="running_route_optimizations">Uruchamianie optymalizacji trasy</string>
+    <string name="route_optimization_finished">Zakończono optymalizację trasy</string>
     <!-- individual track -->
     <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania śladu/trasy</string>
@@ -2457,6 +2466,8 @@
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
     <string name="cancel">Anuluj</string>
+    <string name="use">Użyj</string>
+    <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
