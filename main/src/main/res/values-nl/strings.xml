@@ -1239,6 +1239,7 @@
     <string name="cache_personal_note_upload_error">Fout bij uploaden persoonlijke notitie</string>
     <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
     <string name="cache_personal_note_vars_out_of_sync">Variabelen in notities zijn niet gesynchroniseerd (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchroniseer variabelen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Controleer variabelen waarvan de waarde uit notities moet worden overschreven</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Omschrijving</string>
@@ -1574,6 +1575,7 @@
     <string name="imageview_notitle">Naamloos</string>
     <string name="imageview_mimetype">Mimetype</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Kon afbeelding niet laden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Opmerking</string>
     <!-- visit -->
@@ -2167,6 +2169,8 @@
     <string name="permission_location_explanation">c:geo is geoptimaliseerd voor gebruik met GPS-gegevens (detail locatie) om je positie te vinden en afstand en richting van geocaches te berekenen. Zonder deze permissie zullen locatie-gebaseerde functies niet werken zoals verwacht.</string>
     <string name="permission_read_external_storage_explanation_title">Externe Opslag leespermissie</string>
     <string name="permission_read_external_storage_explanation">c:geo kan je systeem achtergrond gebruiken als achtergrond voor de app. Hiervoor heeft c:geo toestemming nodig om je media gegevens te lezen op externe opslag.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart, b.v. wanneer je geocaches opslaat voor offline gebruik, importeren of exporteren van bestanden en andere functies. Op sommige Android-versies, dien je extra toestemming te geven voor deze acties.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Oude schrijfrechten voor externe opslag</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
@@ -2216,6 +2220,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
+    <string name="route_optimization">Route optimalisatie</string>
+    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. Omdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd en rekenkracht op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een acceptabele weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als gewenst herhalen.</string>
+    <string name="initial_route_length">Initiële routelengte: %d</string>
+    <string name="optimized_route_length">Geoptimaliseerde route lengte: %d</string>
+    <string name="route_optimization_out_of_bounds">Routeoptimalisatie werkt voor routes tussen 3 en 100 punten</string>
+    <string name="generating_distance_matrix">Afstandsmatrix genereren</string>
+    <string name="running_route_optimizations">Routes optimaliseren</string>
+    <string name="route_optimization_finished">Route optimalisatie voltooid</string>
     <!-- individual track -->
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
@@ -2396,6 +2408,8 @@
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
     <string name="cancel">Annuleren</string>
+    <string name="use">Gebruik</string>
+    <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
