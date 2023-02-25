@@ -148,6 +148,15 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         routeItemAdapter.setItems(newRouteItems);
     }
 
+    /** experimental function for optimizing a route by using tsp-specific algorithm */
+    private void optimizeRoute() {
+        final RouteOptimizationHelper roh = new RouteOptimizationHelper(new ArrayList<>(routeItemAdapter.getItems()));
+        roh.start(this, (newRouteItems) -> {
+            routeItemAdapter.setItems(newRouteItems);
+            routeItemAdapter.notifyDataSetChanged();
+        });
+    }
+
     private boolean setAsStart(final int position) {
         if (position < 1 || position >= routeItemAdapter.getItems().size()) {
             return false;
@@ -168,6 +177,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        menu.findItem(R.id.menu_optimize).setVisible(true);
         menu.findItem(R.id.menu_invert_order).setVisible(true);
         return true;
     }
@@ -188,6 +198,9 @@ public class RouteSortActivity extends AbstractActionBarActivity {
             return true;
         } else if (itemId == R.id.menu_invert_order) {
             invertOrder();
+            return true;
+        } else if (itemId == R.id.menu_optimize) {
+            optimizeRoute();
             return true;
         } else if (itemId == android.R.id.home) {
             onBackPressed();
