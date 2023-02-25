@@ -7,3 +7,4 @@
 - Korrektur: Falsche Ausrichtung von Hochformatbildern bei eigenen Bildern zu Caches
 - Korrektur: Listingbilder mit Adressen ohne Protokollangabe nicht korrekt gehandhabt
 - Korrektur: Absturz beim Zeichnen der Markierung für Kartenausrichtung
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
