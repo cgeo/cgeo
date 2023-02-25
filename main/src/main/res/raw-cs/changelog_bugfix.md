@@ -5,6 +5,6 @@
 - Oprava: Zobrazení názvu místa v kompasu namísto souřadnic
 - Oprava: c:geo se při přidávání trasového bodu zasekne, když jsou určité vzorce zkopírovány do schránky
 - Oprava: Chybná orientace vlastních obrázků v režimu na výšku
-- Fix: Listing images having urls without protocol not being handled correctly
-- Fix: Crash on drawing position marker
-- Fix: Loading GPX tracks/routes may lead to unconnected segments
+- Oprava: Výpis obrázků s adresami URL bez protokolu není správně zpracován
+- Oprava: Pád při vykreslování značky polohy
+- Oprava: Načítání GPX stop/tras může vést k nespojitým segmentům
