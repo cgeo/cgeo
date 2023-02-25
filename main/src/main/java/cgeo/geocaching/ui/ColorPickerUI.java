@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,6 +35,7 @@ public class ColorPickerUI {
     private int originalColor = 0xffff0000;         // remember color on instantiating or ok-ing the dialog
     private int originalWidth = 0;                  // remember width on instantiating or ok-ing the dialog
     private int defaultColor = 0xffff0000;          // default value (for reset)
+    private int defaultWidth = 0;                   // default value (for reset)
     private boolean hasDefaultValue = false;
     private boolean showOpaquenessSlider = false;
 
@@ -47,7 +47,6 @@ public class ColorPickerUI {
     private SeekBar opaquenessSlider = null;
     private TextView widthValue = null;
     private SeekBar widthSlider = null;
-    private Consumer<Integer> widthCallback = null;
     private final Context context;
 
     private int iconSize = 0;
@@ -63,42 +62,35 @@ public class ColorPickerUI {
     }
 
     /** fires up ColorPicker UI */
-    public ColorPickerUI(final Context context, final int originalColor, final boolean hasDefaultValue, final int defaultColor, final boolean showOpaquenessSlider) {
+    public ColorPickerUI(final Context context, final int originalColor, final int originalWidth, final boolean hasDefaultValue, final int defaultColor, final int defaultWidth, final boolean showOpaquenessSlider, final boolean showWidthSlider) {
         this.context = context;
         color = originalColor;
         this.originalColor = originalColor;
+        this.originalWidth = originalWidth;
         this.hasDefaultValue = hasDefaultValue;
         this.defaultColor = defaultColor;
+        this.defaultWidth = defaultWidth;
         this.showOpaquenessSlider = showOpaquenessSlider;
+        this.showWidthSlider = showWidthSlider;
         Log.i("color=" + (color & 0xffffff) + ", scheme=" + getColorScheme() + ", opaqueness=" + getOpaqueness());
 
         // set icon size dynamically, based on screen dimensions
         iconSize = Math.max(50, Math.min(ColorPickerUI.dm.widthPixels, dm.heightPixels) / 10);
     }
 
-    public ColorPickerUI enableWidthSelection(final int originalWidth, final Consumer<Integer> widthCallback) {
-        this.originalWidth = originalWidth;
-        this.widthCallback = widthCallback;
-        showWidthSlider = true;
-        return this;
-    }
-
-    public void show(final Action1<Integer> setValue) {
+    public void show(final ColorPickerResult valueCallback) {
         final View v = LayoutInflater.from(context).inflate(R.layout.preference_colorpicker, null);
         final AlertDialog.Builder builder = Dialogs.newBuilder(context);
         builder.setView(v);
         builder.setPositiveButton(android.R.string.ok, (dialog1, which) -> {
-                if (widthCallback != null) {
-                    widthCallback.accept(widthSlider.getProgress());
-                }
-                setValue.call(color);
-                if (null != opaquenessSlider) {
-                    opaquenessSlider.setProgress(getOpaqueness());
-                }
+            valueCallback.setColor(color, widthSlider.getProgress());
+            if (null != opaquenessSlider) {
+                opaquenessSlider.setProgress(getOpaqueness());
+            }
         });
         builder.setNegativeButton(android.R.string.cancel, ((dialog1, which) -> color = originalColor));
         if (hasDefaultValue) {
-            builder.setNeutralButton(R.string.reset_to_default, (((dialog1, which) -> color = defaultColor)));
+            builder.setNeutralButton(R.string.reset_to_default, null);
         }
 
         final AlertDialog dialog = builder.show();
@@ -106,6 +98,7 @@ public class ColorPickerUI {
             // override onClick listener to prevent closing dialog on pressing the "default" button
             dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v2 -> {
                 color = defaultColor;
+                widthSlider.setProgress(defaultWidth);
                 final int opaqueness = getOpaqueness();
                 if (null != opaquenessSlider) {
                     opaquenessSlider.setProgress(opaqueness);
@@ -282,6 +275,10 @@ public class ColorPickerUI {
 
     private void selectWidth(final int width) {
         widthValue.setText(String.format(Locale.getDefault(), "%d", width));
+    }
+
+    public interface ColorPickerResult {
+        void setColor(int color, int width);
     }
 
 }
