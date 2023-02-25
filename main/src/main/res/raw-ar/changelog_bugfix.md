@@ -7,3 +7,4 @@
 - Fix: Wrong image orientation for own images in portrait mode
 - Fix: Listing images having urls without protocol not being handled correctly
 - Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
