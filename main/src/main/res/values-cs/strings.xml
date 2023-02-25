@@ -1605,6 +1605,7 @@
     <string name="imageview_notitle">Bez názvu</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Obrázek nelze načíst</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentář</string>
     <!-- visit -->
@@ -2277,6 +2278,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
+    <string name="route_optimization">Optimalizace trasy</string>
+    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Protože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
+    <string name="initial_route_length">Počáteční délka trasy: %d</string>
+    <string name="optimized_route_length">Optimalizovaná délka trasy: %d</string>
+    <string name="route_optimization_out_of_bounds">Optimalizace trasy funguje pro trasy mezi 3 a 100 body</string>
+    <string name="generating_distance_matrix">Generování matice vzdálenosti</string>
+    <string name="running_route_optimizations">Probíhá optimalizace trasy</string>
+    <string name="route_optimization_finished">Optimalizace trasy dokončena</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
@@ -2457,6 +2466,8 @@
     <string name="finish">Dokončit</string>
     <string name="back">Zpět</string>
     <string name="cancel">Zrušit</string>
+    <string name="use">Použít</string>
+    <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
