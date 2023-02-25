@@ -7,3 +7,4 @@
 - 수정: 세로 모드에서 자신의 이미지에 대한 잘못된 이미지 방향
 - Fix: Listing images having urls without protocol not being handled correctly
 - Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
