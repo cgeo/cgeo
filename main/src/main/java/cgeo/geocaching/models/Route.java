@@ -80,12 +80,11 @@ public class Route implements IGeoDataProvider, Parcelable {
         final List<Geopoint> points = new ArrayList<>();
         if (getSegments() != null) {
             for (RouteSegment rs : getSegments()) {
-                if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
-                    points.addAll(rs.getPoints());
-                } else {
+                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
                     result.add(GeoObject.createPolyline(points, null));
                     points.clear();
                 }
+                points.addAll(rs.getPoints());
             }
         }
         if (!points.isEmpty()) {
