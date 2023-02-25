@@ -6,3 +6,4 @@
 - Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
 - Fix: Wrong image orientation for own images in portrait mode
 - Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
