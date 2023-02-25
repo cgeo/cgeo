@@ -1762,6 +1762,7 @@
     <string name="imageview_notitle">Untitled</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Couldn\'t load image</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Comment</string>
 

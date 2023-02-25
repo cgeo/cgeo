@@ -12,6 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
@@ -216,8 +217,13 @@ public class ImageGalleryView extends LinearLayout {
                     return;
                 }
 
-                binding.imageImage.setImageDrawable(p.first);
-                binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(currentEntry.image.getUri()));
+                if (p.first == null) {
+                    binding.imageImage.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
+                    binding.imageImage.setRotation(0);
+                } else {
+                    binding.imageImage.setImageDrawable(p.first);
+                    binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(currentEntry.image.getUri()));
+                }
                 binding.imageImage.setVisibility(View.VISIBLE);
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);

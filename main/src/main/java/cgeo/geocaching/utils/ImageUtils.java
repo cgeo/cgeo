@@ -479,7 +479,7 @@ public final class ImageUtils {
         forEachImageUrlInHtml(source -> {
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
-                            .setUrl(source)
+                            .setUrl(source, "https")
                             .setTitle(StringUtils.defaultString(geocode))
                             .setCategory(Image.ImageCategory.LISTING)
                             .build());
