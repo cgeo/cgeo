@@ -7,3 +7,4 @@
 - Oplossing: Verkeerde beeldoriëntatie voor eigen afbeeldingen in portretmodus
 - Oplossing: Het weergeven van afbeeldingen met URL's zonder protocol dat niet correct wordt behandeld
 - Oplossing: Crash bij tekenen positiemarker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
