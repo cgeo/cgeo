@@ -1,5 +1,5 @@
 ##
-- Poprawka: Podczas importowanie GPX pomijane były niektóre punktów nawigacji utworzone przez użytkownika
+- Poprawka: Podczas importowania GPX pomijane były niektóre punktów nawigacji utworzone przez użytkownika
 - Poprawka: Lista rozszerzonych filtrów nie była przetłumaczona, gdy język był ustawiony jako niedomyślny w c:geo
 - Poprawka: pobieranie/aktualizowanie kafelków lub map nie jest już możliwe na starszych urządzeniach
 - Poprawka: Nazwa lokalizacji wyświetlana w kompasie zamiast współrzędnych
