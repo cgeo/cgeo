@@ -5,3 +5,6 @@
 - Correcção: Era mostrado na bússola o nome da localização ao invés das coordenadas
 - Correcção: O c:geo congelava ao adicionar um ponto adicional quando determinadas fórmulas eram copiadas da área de transferência
 - Correcção: Da orientação errada de imagem no modo retrato, para imagens que lhe pertencessem
+- Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
