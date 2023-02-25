@@ -1573,6 +1573,7 @@
     <string name="imageview_notitle">Naamloos</string>
     <string name="imageview_mimetype">Mimetype</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Kon afbeelding niet laden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Opmerking</string>
     <!-- visit -->
@@ -2166,6 +2167,8 @@
     <string name="permission_location_explanation">c:geo is geoptimaliseerd voor gebruik met GPS-gegevens (detail locatie) om je positie te vinden en afstand en richting van geocaches te berekenen. Zonder deze permissie zullen locatie-gebaseerde functies niet werken zoals verwacht.</string>
     <string name="permission_read_external_storage_explanation_title">Externe Opslag leespermissie</string>
     <string name="permission_read_external_storage_explanation">c:geo kan je systeem achtergrond gebruiken als achtergrond voor de app. Hiervoor heeft c:geo toestemming nodig om je media gegevens te lezen op externe opslag.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart, b.v. wanneer je geocaches opslaat voor offline gebruik, importeren of exporteren van bestanden en andere functies. Op sommige Android-versies, dien je extra toestemming te geven voor deze acties.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Oude schrijfrechten voor externe opslag</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>

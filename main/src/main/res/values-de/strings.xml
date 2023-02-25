@@ -1573,6 +1573,7 @@
     <string name="imageview_notitle">Ohne Titel</string>
     <string name="imageview_mimetype">MIME-Typ</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Bild konnte nicht geladen werden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentar</string>
     <!-- visit -->
@@ -2166,6 +2167,8 @@
     <string name="permission_location_explanation">c:geo ist optimiert für die Nutzung mit GPS-Daten (genauer Standort) um deine Position zu lokalisieren und Distanz und Richtung zu Geocaches zu berechnen. Ohne diese Berechtigung funktionieren ortungsbasierte Funktionen nicht wie erwartet.</string>
     <string name="permission_read_external_storage_explanation_title">Leseberechtigung für externen Speicher</string>
     <string name="permission_read_external_storage_explanation">c:geo kann dein System-Hintergrund als Hintergrund für die App verwenden. Um dies zu tun, benötigt c:geo die Erlaubnis, deine Mediendaten auf externem Speicher zu lesen.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo schreibt Daten auf den Telefonspeicher oder die SD-Karte, beispielsweise beim Speichern von Geocaches zur Offline-Nutzung, beim Import oder Export und weiteren Funktionen. Manche Android-Versionen benötigen hierfür eine zusätzliche Berechtigung.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Schreibberechtigung für externen Speicher</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>

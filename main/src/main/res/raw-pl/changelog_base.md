@@ -1,4 +1,4 @@
-### Mapa
+### Map
 - Nowość: źródło mapy OSM osm.paws.cz
 - Nowość: Włączenie czytania plików GPX z serwisu flopp.net jako śladów
 - Poprawka: Brak symbolu prowadzenia po 'dołącz do trasy'
@@ -9,7 +9,7 @@
 - Nowość: Odśwież skrytki na trasie
 - Nowość: Indywidualne kolory śladów
 
-### Cache details
+### Szczegóły skrytki
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji
