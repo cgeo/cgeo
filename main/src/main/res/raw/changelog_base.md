@@ -4,6 +4,7 @@
 - New: Individual coloring of tracks
 - New: Update map list on receiving map file
 - Change: Do not install downloaded map/theme automatically
+- New: Individual route optimization (experimental)
 
 ### Cache details
 
