@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Matrix;
@@ -76,17 +77,20 @@ public class PositionLayer extends Layer {
             arrowNative = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
             rotateArrow();
         }
-
-        final int left = centerX - widthArrowHalf;
-        final int top = centerY - heightArrowHalf;
-        final int right = left + this.arrow.getWidth();
-        final int bottom = top + this.arrow.getHeight();
-        final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);
-        final Rectangle canvasRectangle = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-        if (!canvasRectangle.intersects(bitmapRectangle)) {
-            return;
+        if (arrow != null) {
+            final int left = centerX - widthArrowHalf;
+            final int top = centerY - heightArrowHalf;
+            final int right = left + this.arrow.getWidth();
+            final int bottom = top + this.arrow.getHeight();
+            final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);
+            final Rectangle canvasRectangle = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
+            if (!canvasRectangle.intersects(bitmapRectangle)) {
+                return;
+            }
+            canvas.drawBitmap(arrow, left, top);
+        } else {
+            Log.d("PositionLayer.draw: arrow=null, arrowNative=" + arrowNative);
         }
-        canvas.drawBitmap(arrow, left, top);
     }
 
     private void rotateArrow() {
