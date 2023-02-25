@@ -7,3 +7,4 @@
 - Poprawka: Niewłaściwa orientacja obrazu dla własnych obrazów w trybie pionowym
 - Fix: Listing images having urls without protocol not being handled correctly
 - Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
