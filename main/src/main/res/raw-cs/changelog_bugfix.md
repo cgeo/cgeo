@@ -5,3 +5,5 @@
 - Oprava: Zobrazení názvu místa v kompasu namísto souřadnic
 - Oprava: c:geo se při přidávání trasového bodu zasekne, když jsou určité vzorce zkopírovány do schránky
 - Oprava: Chybná orientace vlastních obrázků v režimu na výšku
+- Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
