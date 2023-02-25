@@ -1055,20 +1055,14 @@
     <string name="init_maptrail_length">History track max. length</string>
     <string name="init_maptrail_length_summary">Set maximum length of history track (enforced on each startup of c:geo). Default value is 700 points - adjust according to available memory.</string>
     <string name="init_summary_maptrail">When activated (and GPS is on) c:geo saves the history of your movements as a track and displays it on the map.</string>
-    <string name="init_trailcolor">History track line color</string>
-    <string name="init_trailcolor_summary">Select color and opaqueness for history track line</string>
-    <string name="init_trailwidth">History track line width</string>
-    <string name="init_trailwidth_summary">Select width for history track line</string>
-    <string name="init_directioncolor">Direction line color</string>
-    <string name="init_directioncolor_summary">Select color and opaqueness for direction line. Direction line shows a straight line to your selected navigation target, or the specific routed navigation path, if routing is enabled by installing the BRouter app.</string>
-    <string name="init_directionwidth">Direction line width</string>
-    <string name="init_directionwidth_summary">Select width for direction line</string>
-    <string name="init_routecolor">Individual route line color</string>
-    <string name="init_routecolor_summary">Select color and opaqueness for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-tapping on the waypoint/cache. (You need to enable the long tap function first, see map settings.)</string>
-    <string name="init_routewidth">Individual route line width</string>
-    <string name="init_routewidth_summary">Select width for individual route line</string>
-    <string name="init_trackcolor">GPX track/route line color</string>
-    <string name="init_trackcolor_summary">Select color and opaqueness for track/route line. A track/route consists of several waypoints and can be loaded via a GPX track/route file.</string>
+    <string name="init_trailappearance">History track appearance</string>
+    <string name="init_trailappearance_summary">Select color, opaqueness and line width for history track line</string>
+    <string name="init_directionappearance">Direction appearance</string>
+    <string name="init_directionappearance_summary">Select color, opaqueness and line width for direction line. Direction line shows a straight line to your selected navigation target, or the specific routed navigation path, if routing is enabled by installing the BRouter app.</string>
+    <string name="init_routeappearance">Individual route appearance</string>
+    <string name="init_routeappearance_summary">Select color, opaqueness and line width for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-tapping on the waypoint/cache. (You need to enable the long tap function first, see map settings.)</string>
+    <string name="init_trackappearance">GPX track/route appearance</string>
+    <string name="init_trackappearance_summary">Select color, opaqueness and line width for track/route line. A track/route consists of several waypoints and can be loaded via a GPX track/route file.</string>
     <string name="init_trackwidth">GPX track/route line width</string>
     <string name="init_trackwidth_summary">Select width for GPX track/route line</string>
     <string name="init_circlecolor">Circle line color</string>
@@ -2449,6 +2443,7 @@
     <string name="preference_colorpicker_select_color">Select color</string>
     <string name="preference_colorpicker_select_opaqueness">Select opaqueness</string>
     <string name="preference_colorpicker_select_width">Select line width</string>
+    <string name="preference_colorpicker_show_width">width: %d</string>
     <string name="reset_to_default">Default</string>
 
     <!-- number input -->

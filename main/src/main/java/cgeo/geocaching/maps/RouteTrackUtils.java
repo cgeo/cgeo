@@ -224,8 +224,9 @@ public class RouteTrackUtils {
             final ImageButton vColor = vt.findViewById(R.id.item_color);
             ColorPickerUI.setViewColor(vColor, tracks.getColor(key), false);
             vColor.setVisibility(View.VISIBLE);
-            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), tracks.getColor(key), false, 0, true).enableWidthSelection(tracks.getWidth(key), newWidth -> tracks.setWidth(key, newWidth)).show(newColor -> {
+            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), tracks.getColor(key), tracks.getWidth(key), false, 0, 0, true, true).show((newColor, newWidth) -> {
                 tracks.setColor(key, newColor);
+                tracks.setWidth(key, newWidth);
                 ColorPickerUI.setViewColor(vColor, newColor, false);
                 updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
             }));
