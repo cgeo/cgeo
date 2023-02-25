@@ -1,4 +1,4 @@
-### Mapa
+### Map
 - Nowość: źródło mapy OSM osm.paws.cz
 - Nowość: Włączenie czytania plików GPX z serwisu flopp.net jako śladów
 - Poprawka: Brak symbolu prowadzenia po 'dołącz do trasy'
@@ -6,7 +6,7 @@
 - Nowość: Dodano wsparcie dla motywu „Voluntary MF5” OpenAndroMaps
 - Nowość: Dodano wsparcie dla danych GeoJSON
 
-### Cache details
+### Szczegóły skrytki
 - Nowość: Nowa bardziej zaawansowana galeria zdjęć
 - Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
 - Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji

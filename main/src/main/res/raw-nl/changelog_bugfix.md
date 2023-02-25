@@ -1,6 +1,10 @@
 ##
-- Fix: Skipping some user-created waypoints on GPX import
-- Fix: List of extended filters not translated when language is set to non-default within c:geo
-- Fix: Downloading/updating routing tiles or maps no longer possible on older devices
-- Fix: Location name shown in compass instead of coordinates
-- Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
+- Fix: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
+- Fix: Lijst met uitgebreide filters niet vertaald wanneer taal is ingesteld op niet-standaard binnen c:geo
+- Oplossing: Downloaden/bijwerken van routing tegels of kaarten die niet meer mogelijk zijn op oudere apparaten
+- Oplossing: locatienaam weergegeven in kompas in plaats van coördinaten
+- Oplossing: c:geo hangt bij het toevoegen van waypoint wanneer bepaalde formules naar klembord zijn gekopieerd
+- Oplossing: Verkeerde beeldoriëntatie voor eigen afbeeldingen in portretmodus
+- Oplossing: Het weergeven van afbeeldingen met URL's zonder protocol dat niet correct wordt behandeld
+- Oplossing: Crash bij tekenen positiemarker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
