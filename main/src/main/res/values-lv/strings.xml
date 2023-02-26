@@ -527,12 +527,6 @@
     <string name="init_dataDir_note">Tu vari izvēlēties uzglabāt slēpņu papildu datus (spoileru bildes, ierakstu attēli, …) ārējā atmiņā (emulēta vai reāla ārējā SD karte, atkarībā no tavas ierīces).</string>
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
-    <string name="init_directioncolor">Virziena līnijas krāsa</string>
-    <string name="init_directionwidth">Virziena līnijas platums</string>
-    <string name="init_directionwidth_summary">Izvēlaties virziena līnijas platumu</string>
-    <string name="init_routecolor">Individuāla maršruta līnijas krāsa</string>
-    <string name="init_routewidth">Individuāla maršruta līnijas platums</string>
-    <string name="init_routewidth_summary">Izvēlaties individuāla maršruta līnijas platumu</string>
     <string name="init_circlecolor">Apļa līnijas krāsa</string>
     <string name="init_circlefillcolor">Apļa aizpildījuma krāsa</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
