@@ -948,20 +948,6 @@
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
     <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos — ajustar conforme a memória disponível.</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
-    <string name="init_trailcolor">Cor da linha do histórico de percurso</string>
-    <string name="init_trailcolor_summary">Seleccionar a cor e opacidade para a linha do histórico de percurso</string>
-    <string name="init_trailwidth">Largura da linha do histórico de percurso</string>
-    <string name="init_trailwidth_summary">Seleccionar a largura para a linha do histórico de percurso</string>
-    <string name="init_directioncolor">Cor da linha de direcção</string>
-    <string name="init_directioncolor_summary">Seleccionar a cor e opacidade para a linha de direcção. A linha de direcção mostra uma linha recta para o alvo de navegação seleccionado, ou o caminho de navegação específico, se o encaminhamento estiver activado instalando a app BRouter.</string>
-    <string name="init_directionwidth">Largura da linha de direcção</string>
-    <string name="init_directionwidth_summary">Seleccionar a largura para a linha de direcção</string>
-    <string name="init_routecolor">Cor da linha do percurso individual</string>
-    <string name="init_routecolor_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (É necessário, em primeiro lugar, que active a função \"toque sem soltar no mapa\". Consulte as definições de mapa.)</string>
-    <string name="init_routewidth">Largura da linha do percurso individual</string>
-    <string name="init_routewidth_summary">Seleccionar a largura para a linha de rota individual</string>
-    <string name="init_trackcolor">Cor da linha do percurso/rota GPX</string>
-    <string name="init_trackcolor_summary">Seleccionar a cor e a opacidade para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
     <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
     <string name="init_trackwidth_summary">Seleccionar a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
@@ -1239,6 +1225,7 @@
     <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
     <string name="cache_personal_note_vars_out_of_sync">Variáveis nas notas estão fora de sincronização (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variáveis de sincronização</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Verificar variáveis cujo valor deve ser substituído a partir das notas</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Descrição</string>
@@ -1305,6 +1292,7 @@
     <string name="cache_menu_navigation_bike">Navegação (Bicicleta)</string>
     <string name="cache_menu_maps_directions">Direcções pelo Google Maps</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (Caminhar)</string>
     <string name="cache_menu_sygic_drive">Sygic (Conduzir)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2197,6 +2185,7 @@
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
+    <string name="map_refresh_individual_route">Actualizar</string>
     <string name="map_export_individual_route">Exportar rota individual</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
@@ -2224,6 +2213,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
+    <string name="routes_tracks_color">Seleccionar cor</string>
     <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
@@ -2336,6 +2326,7 @@
     <string name="maptheme_scale_text_summary">Adicionalmente, permite redimensionar o texto das etiquetas no mapa; 100% = sem dimensionamento extra</string>
     <string name="maptheme_scale_symbol_title">Factor de escala do símbolo</string>
     <string name="maptheme_scale_symbol_summary">Adicionalmente, permite redimensionar o tamanho dos símbolos no mapa; 100% = sem dimensionamento extra</string>
+    <string name="vtm_theme_variant">Variante de Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
