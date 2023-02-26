@@ -2377,6 +2377,7 @@
     <string name="downloadmap_mapfile">plik mapy</string>
     <string name="downloadmap_themefile">plik motywu</string>
     <string name="downloadmap_tilefile">plik danych nawigowania</string>
+    <string name="downloadmap_checking">Sprawdzanie dostępnych danych nawigowania…</string>
     <string name="downloadmap_othermapdownload">inne pobieranie mapy</string>
     <string name="downloadmap_otherthemedownload">inne pobieranie motywu</string>
     <string name="downloadmap_download">pobieranie</string>
