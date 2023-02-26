@@ -960,20 +960,14 @@
     <string name="init_maptrail_length">Maks. długość historii śladu</string>
     <string name="init_maptrail_length_summary">Ustaw maksymalną długość historii śladu (wymuszaną przy każdym uruchomieniu c:geo). Wartość domyślna to 700 punktów – dostosuj w zależności od dostępnej pamięci.</string>
     <string name="init_summary_maptrail">Gdy funkcja jest aktywna (i GPS jest włączony) c:geo zapisuje historię twoich ruchów jako ślad i wyświetla go na mapie.</string>
-    <string name="init_trailcolor">Kolor linii historii śladu</string>
-    <string name="init_trailcolor_summary">Wybierz kolor i nieprzezroczystość dla linii historii śladu</string>
-    <string name="init_trailwidth">Grubość linii historii śladu</string>
-    <string name="init_trailwidth_summary">Wybierz grubość dla linii historii śladu</string>
-    <string name="init_directioncolor">Kolor linii kierunku</string>
-    <string name="init_directioncolor_summary">Wybierz kolor i nieprzezroczystość dla linii kierunku. Kierunek pokazuje linię prostą do wybranego celu nawigacyjnego lub określoną ścieżkę nawigacyjną, jeśli włączone jest wyznaczanie trasy poprzez zainstalowanie aplikacji BRouter.</string>
-    <string name="init_directionwidth">Grubość linii kierunku</string>
-    <string name="init_directionwidth_summary">Wybierz grubość dla linii kierunku</string>
-    <string name="init_routecolor">Kolor linii indywidualnej trasy</string>
-    <string name="init_routecolor_summary">Wybierz kolor i nieprzezroczystość dla poszczególnych linii trasy. Indywidualna trasa to zbiór punktów trasy i/lub skrytek wybranych przez długie dotknięcie na punkt nawigacyjny/skrytkę. (Musisz najpierw włączyć funkcję długiego naciśnięcia, zobacz ustawienia mapy.)</string>
-    <string name="init_routewidth">Grubość linii indywidualnej trasy</string>
-    <string name="init_routewidth_summary">Wybierz grubość dla linii indywidualnej trasy</string>
-    <string name="init_trackcolor">Kolor linii trasy/śladu GPX</string>
-    <string name="init_trackcolor_summary">Wybierz kolor i nieprzezroczystość dla linii śladu/trasy. Ślad/trasa składa się z kilku punktów i można ją załadować za pomocą pliku GPX ze śladem/trasą.</string>
+    <string name="init_trailappearance">Wygląd historii śladu</string>
+    <string name="init_trailappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla linii historii śladu</string>
+    <string name="init_directionappearance">Wygląd kierunku</string>
+    <string name="init_directionappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość dla linii kierunku. Kierunek pokazuje linię prostą do wybranego celu nawigacji lub określoną ścieżkę nawigacyjną, jeśli włączone jest wyznaczanie trasy poprzez zainstalowanie aplikacji BRouter.</string>
+    <string name="init_routeappearance">Wygląd indywidualnej trasy</string>
+    <string name="init_routeappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla indywiduwalnej trasy. Indywidualna trasa jest kolekcją punktów i/lub skrzynek wybranych przez długie stuknięcie na punkt nawigacji lub skrytkę. (Musisz najpierw włączyć funkcję długiego stuknięcia, zobacz ustawienia mapy.)</string>
+    <string name="init_trackappearance">Wygląd ścieżki/trasy GPX</string>
+    <string name="init_trackappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla śladu/trasy. Ślad/trasa składa się z kilku punktów nawigacji i może być załadowana przez plik śladu/trasy GPX.</string>
     <string name="init_trackwidth">Grubość linii trasy/śladu GPX</string>
     <string name="init_trackwidth_summary">Wybierz grubość dla linii trasy/śladu GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
@@ -1267,6 +1261,7 @@
     <string name="cache_personal_note_upload_error">Błąd podczas wysyłania notatki osobistej</string>
     <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
     <string name="cache_personal_note_vars_out_of_sync">Zmienne w notatkach nie są zsynchronizowane (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizuj zmienne</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Sprawdź zmienne, których wartość powinna być nadpisana z notatek</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Opis</string>
@@ -1333,6 +1328,7 @@
     <string name="cache_menu_navigation_bike">Nawigacja (rower)</string>
     <string name="cache_menu_maps_directions">Mapy Google</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (pieszo)</string>
     <string name="cache_menu_sygic_drive">Sygic (jazda)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2230,6 +2226,8 @@
     <string name="preference_colorpicker_select_color_scheme">Wybierz schemat kolorów</string>
     <string name="preference_colorpicker_select_color">Wybierz kolor</string>
     <string name="preference_colorpicker_select_opaqueness">Wybierz nieprzezroczystość</string>
+    <string name="preference_colorpicker_select_width">Wybierz szerokość linii</string>
+    <string name="preference_colorpicker_show_width">szerokość: %d</string>
     <string name="reset_to_default">Domyślny</string>
     <!-- number input -->
     <string name="number_input_title">Wprowadź wartość między %1$s a %2$s</string>
@@ -2276,6 +2274,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
+    <string name="route_optimization">Optymalizacja trasy</string>
+    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy na krótszą odległość. Ponieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
+    <string name="initial_route_length">Początkowa długość trasy: %d</string>
+    <string name="optimized_route_length">Zoptymalizowana długość trasy: %d</string>
+    <string name="route_optimization_out_of_bounds">Optymalizacja trasy działa dla tras pomiędzy 3 a 100 punktami</string>
+    <string name="generating_distance_matrix">Generowanie matrycy odległości</string>
+    <string name="running_route_optimizations">Uruchamianie optymalizacji trasy</string>
+    <string name="route_optimization_finished">Zakończono optymalizację trasy</string>
     <!-- individual track -->
     <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania śladu/trasy</string>
@@ -2365,6 +2371,7 @@
     <string name="downloadmap_mapfile">plik mapy</string>
     <string name="downloadmap_themefile">plik motywu</string>
     <string name="downloadmap_tilefile">plik danych nawigowania</string>
+    <string name="downloadmap_checking">Sprawdzanie dostępnych danych nawigowania…</string>
     <string name="downloadmap_othermapdownload">inne pobieranie mapy</string>
     <string name="downloadmap_otherthemedownload">inne pobieranie motywu</string>
     <string name="downloadmap_download">pobieranie</string>
@@ -2456,6 +2463,8 @@
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
     <string name="cancel">Anuluj</string>
+    <string name="use">Użyj</string>
+    <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
