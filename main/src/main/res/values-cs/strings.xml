@@ -2377,6 +2377,7 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_checking">Kontrola dostupných směrovacích dat…</string>
     <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
     <string name="downloadmap_otherthemedownload">další motiv ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
