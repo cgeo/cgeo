@@ -960,20 +960,6 @@
     <string name="init_maptrail_length">Max. délka historie trasy</string>
     <string name="init_maptrail_length_summary">Nastavte maximální délku historie trasy (potřebné při každém spuštění c:geo). Výchozí hodnota je 700 bodů - upravte podle dostupné paměti.</string>
     <string name="init_summary_maptrail">Když je to aktivováno (a GPS zapnuta), c:geo ukládá historii pohybů jako trasu a zobrazuje ji na mapě.</string>
-    <string name="init_trailcolor">Barva čáry historie trasy</string>
-    <string name="init_trailcolor_summary">Vyberte barvu a neprůhlednost pro čáru historie trasy</string>
-    <string name="init_trailwidth">Šířka čáry historie trasy</string>
-    <string name="init_trailwidth_summary">Vyberte šířku pro čáru historie trasy</string>
-    <string name="init_directioncolor">Barva směrové čáry</string>
-    <string name="init_directioncolor_summary">Vyberte barvu a neprůhlednost pro směrovou čáru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je směrování povoleno, po instalaci aplikace BRouter.</string>
-    <string name="init_directionwidth">Šířka směrové čáry</string>
-    <string name="init_directionwidth_summary">Vyberte šířku pro směrovou čáru</string>
-    <string name="init_routecolor">Barva čáry individuální trasy</string>
-    <string name="init_routecolor_summary">Vyberte barvu a neprůhlednost čáry pro individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
-    <string name="init_routewidth">Šířka čáry individuální trasy</string>
-    <string name="init_routewidth_summary">Vyberte šířku čáry pro individuální trasy</string>
-    <string name="init_trackcolor">Barva čáry GPX stopy/trasy</string>
-    <string name="init_trackcolor_summary">Vyberte barvu a neprůhlednost čáry stopy/trasy. Stopa/trasa se skládá z několika trasových bodů a lze ji načíst pomocí GPX souboru.</string>
     <string name="init_trackwidth">Šířka čáry GPX stopy/trasy</string>
     <string name="init_trackwidth_summary">Vyberte šířku čáry pro GPX stopy/trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
@@ -1267,6 +1253,7 @@
     <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
     <string name="cache_personal_note_vars_out_of_sync">Proměnné v poznámkách nejsou synchronizovány (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizovat proměnné</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Zkontrolujte proměnné, jejichž hodnota má být přepsána z poznámek</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
@@ -1333,6 +1320,7 @@
     <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
     <string name="cache_menu_maps_directions">Směry podle Google Maps</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (chůze)</string>
     <string name="cache_menu_sygic_drive">Sygic (řízení)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2276,6 +2264,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
+    <string name="route_optimization">Optimalizace trasy</string>
+    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Protože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
+    <string name="initial_route_length">Počáteční délka trasy: %d</string>
+    <string name="optimized_route_length">Optimalizovaná délka trasy: %d</string>
+    <string name="route_optimization_out_of_bounds">Optimalizace trasy funguje pro trasy mezi 3 a 100 body</string>
+    <string name="generating_distance_matrix">Generování matice vzdálenosti</string>
+    <string name="running_route_optimizations">Probíhá optimalizace trasy</string>
+    <string name="route_optimization_finished">Optimalizace trasy dokončena</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
@@ -2365,6 +2361,7 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_checking">Kontrola dostupných směrovacích dat…</string>
     <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
     <string name="downloadmap_otherthemedownload">další motiv ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>
@@ -2456,6 +2453,8 @@
     <string name="finish">Dokončit</string>
     <string name="back">Zpět</string>
     <string name="cancel">Zrušit</string>
+    <string name="use">Použít</string>
+    <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
