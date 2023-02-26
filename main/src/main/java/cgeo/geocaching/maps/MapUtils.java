@@ -121,7 +121,7 @@ public class MapUtils {
     // check whether routing tile data is available for the whole viewport given
     // and offer to download missing routing data
     public static void checkRoutingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
-        ActivityMixin.showToast(activity, "Checking available routing data...");
+        ActivityMixin.showToast(activity, R.string.downloadmap_checking);
 
         final HashMap<String, String> missingTiles = new HashMap<>();
         final ArrayList<Download> missingDownloads = new ArrayList<>();

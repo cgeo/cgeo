@@ -2606,6 +2606,7 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
+    <string name="downloadmap_checking">Checking available routing data…</string>
     <string name="downloadmap_othermapdownload">other map download</string>
     <string name="downloadmap_otherthemedownload">other theme download</string>
     <string name="downloadmap_download">download</string>
