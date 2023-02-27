@@ -942,6 +942,7 @@
     <string name="init_maptrail_length">역사 트랙 최대 길이</string>
     <string name="init_maptrail_length_summary">역사 트랙의 최대 길이를 설정합니다 (c:geo를 시작할 때마다 적용됨) 기본값은 700 포인트입니다. 사용 가능한 메모리에 따라 조정하십시오.</string>
     <string name="init_summary_maptrail">활성화되면 (및 GPS가 켜짐) c:geo는 이동 기록을 트랙으로 저장하고 지도에 표시합니다.</string>
+    <string name="init_trailappearance">경로 역사 모습</string>
     <string name="init_trackwidth">GPX 경로 선 색상</string>
     <string name="init_trackwidth_summary">개별 경로선의 너비 선택</string>
     <string name="init_circlecolor">원형선 색상</string>
@@ -1545,6 +1546,7 @@
     <string name="imageview_notitle">제목 없음</string>
     <string name="imageview_mimetype">MIME형식</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">이미지를 로드할 수 없습니다</string>
     <string name="imageview_metadata_geopoint">지오포인트</string>
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->
@@ -2355,6 +2357,8 @@
     <string name="finish">마침</string>
     <string name="back">뒤로가기</string>
     <string name="cancel">취소 </string>
+    <string name="use">사용</string>
+    <string name="redo">다시 실행</string>
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
