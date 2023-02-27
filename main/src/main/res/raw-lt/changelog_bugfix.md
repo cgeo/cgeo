@@ -1,10 +1,10 @@
 ##
-- Fix: Skipping some user-created waypoints on GPX import
-- Fix: List of extended filters not translated when language is set to non-default within c:geo
-- Fix: Downloading/updating routing tiles or maps no longer possible on older devices
-- Fix: Location name shown in compass instead of coordinates
-- Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
-- Fix: Wrong image orientation for own images in portrait mode
-- Fix: Listing images having urls without protocol not being handled correctly
-- Fix: Crash on drawing position marker
-- Fix: Loading GPX tracks/routes may lead to unconnected segments
+- Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
+- Pataisymas: Išplėstinių filtrų sąrašas neišverčiamas, kai c:geo kalba nustatyta kaip nenumatytoji
+- Pataisymas: Senesniuose įrenginiuose nebegalima atsisiųsti/atnaujinti maršruto plytelių arba žemėlapių
+- Pataisymas: Vietos pavadinimas rodomas kompase, o ne koordinatėse
+- Pataisymas: c:geo prideda kelio tašką, kai tam tikros formulės buvo nukopijuotos į mainų sritį
+- Pataisymas: Neteisinga savų vaizdų orientacija portreto režimu
+- Pataisymas: Netinkamai tvarkomi vaizdai su URL be protokolo
+- Pataisymas: Brėžinio padėties žymeklio gedimas
+- Pataisymas: Įkeliant GPX takelius/maršrutus gali atsirasti nesusietų segmentų
