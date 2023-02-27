@@ -960,6 +960,14 @@
     <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
     <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
+    <string name="init_trailappearance">Istorijos pėdsako išvaizda</string>
+    <string name="init_trailappearance_summary">Pasirinkite istorijos pėdsako linijos spalvą, skaidrumą ir linijos plotį</string>
+    <string name="init_directionappearance">Krypties išvaizda</string>
+    <string name="init_directionappearance_summary">Pasirinkite krypties linijos spalvą, skaidrumą ir linijos plotį. Krypties linija rodo tiesią liniją į pasirinktą navigacijos tikslą arba konkretų nukreiptą navigacijos kelią, jei maršrutas įgalintas įdiegus programą BRuter.</string>
+    <string name="init_routeappearance">Asmeninio maršruto išvaizda</string>
+    <string name="init_routeappearance_summary">Pasirinkite atskiros maršruto linijos spalvą, skaidrumą ir linijos plotį. Individualus maršrutas yra kelio taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai bakstelėdami maršruto tašką/slėptuvę. (Pirmiausia turite įjungti ilgo bakstelėjimo funkciją, žr. žemėlapio nustatymus.)</string>
+    <string name="init_trackappearance">GPX pėdsako/maršruto išvaizda</string>
+    <string name="init_trackappearance_summary">Pasirinkite pėdsako/maršruto linijos spalvą, skaidrumą ir linijos plotį. Pėdsakas/maršrutas susideda iš kelių tarpinių taškų ir gali būti įkeliamas naudojant GPX pėdsako/maršruto failą.</string>
     <string name="init_trackwidth">GPX pėdsako/maršruto linijos plotis</string>
     <string name="init_trackwidth_summary">Pasirinkite GPX pėdsako/maršruto linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
@@ -1253,6 +1261,7 @@
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
     <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
     <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sinchronizuoti kintamuosius</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Aprašymas</string>
@@ -1319,6 +1328,7 @@
     <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
     <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
     <string name="cache_menu_sygic_drive">Sygic (vairavimas)</string>
     <string name="cache_menu_radar">Radaras</string>
@@ -1589,6 +1599,7 @@
     <string name="imageview_notitle">Be pavadinimo</string>
     <string name="imageview_mimetype">Mime tipas</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Nepavyko įkelti vaizdo</string>
     <string name="imageview_metadata_geopoint">Geo taškas</string>
     <string name="imageview_metadata_comment">Komentaras</string>
     <!-- visit -->
@@ -2208,11 +2219,15 @@
     <string name="permission_location_explanation">c:geo yra optimizuotas veikti su GPS duomenimis (tiksli vieta), kad būtų galima nustatyti jūsų padėtį ir apskaičiuoti atstumą bei kryptį iki geoslėptuvių. Be šio leidimo vieta pagrįstos funkcijos neveiks taip, kaip tikėtasi.</string>
     <string name="permission_read_external_storage_explanation_title">Leidimas skaityti išorinę saugyklą</string>
     <string name="permission_read_external_storage_explanation">c:geo gali naudoti jūsų sistemos foną kaip programos foną. Kad tai padarytų, c:geo reikia leidimo nuskaityti medijos duomenis išorinėje saugykloje.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo įrašys duomenis į jūsų telefono atmintį arba SD kortelę, pvz. kai išsaugote slėptuves naudojimui neprisijungus, importuojate ar eksportuojate failus ir kitas funkcijas. Kai kuriose „Android“ versijose šiems veiksmams turite suteikti papildomą leidimą.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Pasenęs išorinės saugyklos rašymo leidimas</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
     <string name="preference_colorpicker_select_color">Pasirinkite spalvą</string>
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
+    <string name="preference_colorpicker_select_width">Pasirinkite linijos plotį</string>
+    <string name="preference_colorpicker_show_width">plotis: %d</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
     <string name="number_input_title">Įveskite vertę tarp %1$s ir %2$s</string>
@@ -2259,6 +2274,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
+    <string name="route_optimization">Maršruto optimizavimas</string>
+    <string name="route_optimization_info">Maršruto optimizavimas yra eksperimentinė funkcija, skirta optimizuoti maršrutą trumpesniam atstumui. Kadangi dėl laiko ir skaičiavimo galios apribojimų mobiliajame įrenginyje neįmanoma įvertinti visų galimų sprendimų, jis naudoja aproksimavimo algoritmus apskaičiuoti galimam optimizavimui.\n\nSkaičiavimas atliekamas dviem etapais: Apskaičiuokite atstumus tarp dviejų maršruto porų, tada pabandoma rasti priimtiną maršrutą. Tai gali būti ne trumpiausias įmanomas maršrutas, todėl antrą veiksmą galite kartoti tiek kartų, kiek norite.</string>
+    <string name="initial_route_length">Pradinis maršruto ilgis: %d</string>
+    <string name="optimized_route_length">Optimizuotas maršruto ilgis: %d</string>
+    <string name="route_optimization_out_of_bounds">Maršruto optimizavimas veikia maršrutams nuo 3 iki 100 taškų</string>
+    <string name="generating_distance_matrix">Generavima atstumo matrica</string>
+    <string name="running_route_optimizations">Atliekamas maršruto optimizavimas</string>
+    <string name="route_optimization_finished">Maršruto optimizavimas baigtas</string>
     <!-- individual track -->
     <string name="map_load_track">Įkelti pėdsaką/maršrutą iš GPX</string>
     <string name="load_track_error">Klaida įkeliant pėdsaką/maršrutą</string>
@@ -2348,6 +2371,7 @@
     <string name="downloadmap_mapfile">žemėlapio failas</string>
     <string name="downloadmap_themefile">temos failas</string>
     <string name="downloadmap_tilefile">maršrutizavimo duomenų failas</string>
+    <string name="downloadmap_checking">Tikrinami galimi maršruto duomenys…</string>
     <string name="downloadmap_othermapdownload">kitas žemėlapio atsisiuntimas</string>
     <string name="downloadmap_otherthemedownload">kitas temos atsisiuntimas</string>
     <string name="downloadmap_download">atsisiųsti</string>
@@ -2439,6 +2463,8 @@
     <string name="finish">Baigta</string>
     <string name="back">Atgal</string>
     <string name="cancel">Atšaukti</string>
+    <string name="use">Naudoti</string>
+    <string name="redo">Grąžinti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Pažymėti viską</string>
