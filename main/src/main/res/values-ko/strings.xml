@@ -1569,6 +1569,7 @@
     <string name="imageview_notitle">제목 없음</string>
     <string name="imageview_mimetype">MIME형식</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">이미지를 로드할 수 없습니다</string>
     <string name="imageview_metadata_geopoint">지오포인트</string>
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->
