@@ -2162,6 +2162,7 @@
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
     <string name="preference_colorpicker_select_color">Farbe auswählen</string>
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
+    <string name="preference_colorpicker_show_width">Breite: %d</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
@@ -2303,6 +2304,7 @@
     <string name="downloadmap_mapfile">Karte</string>
     <string name="downloadmap_themefile">Kartendesign-Datei</string>
     <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_checking">Prüfe verfügbare Routingdaten…</string>
     <string name="downloadmap_othermapdownload">Anderer Kartendownload</string>
     <string name="downloadmap_otherthemedownload">Anderer Designdownload</string>
     <string name="downloadmap_download">Download</string>
