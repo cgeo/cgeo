@@ -943,6 +943,13 @@
     <string name="init_maptrail_length_summary">역사 트랙의 최대 길이를 설정합니다 (c:geo를 시작할 때마다 적용됨) 기본값은 700 포인트입니다. 사용 가능한 메모리에 따라 조정하십시오.</string>
     <string name="init_summary_maptrail">활성화되면 (및 GPS가 켜짐) c:geo는 이동 기록을 트랙으로 저장하고 지도에 표시합니다.</string>
     <string name="init_trailappearance">경로 역사 모습</string>
+    <string name="init_trailappearance_summary">역사 경로선의 색상, 불투명도 및 선폭 선택</string>
+    <string name="init_directionappearance">방향 모습</string>
+    <string name="init_directionappearance_summary">방향선의 색상, 불투명도, 선폭을 선택합니다. 방향선은 BRouter 앱을 설치하여 라우팅을 활성화한 경우 선택한 탐색 대상 또는 특정 라우팅 된 탐색 경로에 대한 직선을 표시합니다.</string>
+    <string name="init_routeappearance">개인 경로 모습</string>
+    <string name="init_routeappearance_summary">개인 경로선의 색상, 불투명도 및 선폭을 선택합니다. 개별 경로는 경유지 / 캐시를 길게 눌러 선택한 경유지 및 / 또는 캐시 모음입니다. (먼저 길게 누르기 기능을 활성화해야합니다. 지도 설정을 참조하십시오.)</string>
+    <string name="init_trackappearance">GPX 트랙/경로 모습</string>
+    <string name="init_trackappearance_summary">트랙/경로선의 색상, 불투명도 및 선폭을 선택합니다. 경로는 여러 지점으로 구성되며 GPX 경로 파일을 통해 로딩할 수 있습니다.</string>
     <string name="init_trackwidth">GPX 경로 선 색상</string>
     <string name="init_trackwidth_summary">개별 경로선의 너비 선택</string>
     <string name="init_circlecolor">원형선 색상</string>
@@ -1212,6 +1219,7 @@
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
     <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
     <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">변수 동기화</string>
     <string name="cache_personal_note_vars_out_of_sync_title">메모에서 값을 덮어써야 하는 변수 확인</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">설명</string>
@@ -2134,6 +2142,8 @@
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
     <string name="preference_colorpicker_select_color">색상 선택</string>
     <string name="preference_colorpicker_select_opaqueness">불투명체 선택</string>
+    <string name="preference_colorpicker_select_width">선폭 선택</string>
+    <string name="preference_colorpicker_show_width">폭: %d</string>
     <string name="reset_to_default">기본 설정</string>
     <!-- number input -->
     <string name="number_input_title">%1$s에서 %2$s 사이의 값을 입력하세요</string>
@@ -2177,6 +2187,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">경로 시작 위치로 지정</string>
     <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
+    <string name="route_optimization">경로 최적화</string>
+    <string name="route_optimization_info">경로 최적화는 더 짧은 거리에 대한 경로를 최적화하기 위한 실험적 기능입니다. 모바일 장치의 시간 및 계산 능력 제한으로 인해 가능한 모든 솔루션을 평가할 수 없으므로 근사 알고리즘을 사용하여 가능한 최적화를 계산합니다.\n\n계산은 다음 두 단계 프로세스를 사용하여 수행됩니다. 경로의 각 두 쌍 사이의 거리를 계산한 다음 허용 가능한 경로를 찾으려고 시도합니다. 이것은 가능한 가장 짧은 경로가 아닐 수 있으므로 원하는 만큼 2단계를 반복할 수 있습니다.</string>
+    <string name="initial_route_length">초기 경로 길이: %d</string>
+    <string name="optimized_route_length">최적화된 경로 길이: %d</string>
+    <string name="route_optimization_out_of_bounds">경로 최적화는 3~100개 지점 사이의 경로에서 작동합니다.</string>
+    <string name="generating_distance_matrix">거리 행렬 생성</string>
+    <string name="running_route_optimizations">경로 최적화 실행</string>
+    <string name="route_optimization_finished">경로 최적화 완료</string>
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
@@ -2266,6 +2284,7 @@
     <string name="downloadmap_mapfile">지도 파일</string>
     <string name="downloadmap_themefile">테마 파일</string>
     <string name="downloadmap_tilefile">라우팅 데이터 파일</string>
+    <string name="downloadmap_checking">사용 가능한 경로 데이터 확인 중…</string>
     <string name="downloadmap_othermapdownload">다른 지도 다운로드</string>
     <string name="downloadmap_otherthemedownload">다른 테마 다운로드</string>
     <string name="downloadmap_download">다운로드</string>
