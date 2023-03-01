@@ -310,7 +310,7 @@ public class ImageActivityHelper {
 
         final String mimeType = context.getContentResolver().getType(imageUri);
         if (checkMimeType && (!("image/jpeg".equals(mimeType) || "image/png".equals(mimeType) || "image/gif".equals(mimeType)))) {
-            ActivityMixin.showToast(context, R.string.err_acquire_image_failed);
+            ActivityMixin.showToast(context, R.string.err_acquire_image_unsupported_format);
             return false;
         }
         return true;
