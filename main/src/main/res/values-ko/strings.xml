@@ -2287,6 +2287,7 @@
     <string name="downloadmap_mapfile">지도 파일</string>
     <string name="downloadmap_themefile">테마 파일</string>
     <string name="downloadmap_tilefile">라우팅 데이터 파일</string>
+    <string name="downloadmap_checking">사용 가능한 경로 데이터 확인 중…</string>
     <string name="downloadmap_othermapdownload">다른 지도 다운로드</string>
     <string name="downloadmap_otherthemedownload">다른 테마 다운로드</string>
     <string name="downloadmap_download">다운로드</string>
