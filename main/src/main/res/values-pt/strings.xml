@@ -948,6 +948,14 @@
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
     <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos — ajustar conforme a memória disponível.</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
+    <string name="init_trailappearance">Aparência do histórico de percurso</string>
+    <string name="init_trailappearance_summary">Seleccionar cor, opacidade e largura para a linha do histórico de percurso</string>
+    <string name="init_directionappearance">Aparência da direcção</string>
+    <string name="init_directionappearance_summary">Seleccionar a cor, opacidade e largura para a linha de direcção. A linha de direcção mostra uma linha recta para o alvo de navegação seleccionado, ou o caminho específico a seguir, se o encaminhamento estiver activado, instalando a app BRouter.</string>
+    <string name="init_routeappearance">Aparência da rota individual</string>
+    <string name="init_routeappearance_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota individual é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (É necessário, em primeiro lugar, activar a função \"toque sem soltar no mapa\". Consulte as definições de mapa.)</string>
+    <string name="init_trackappearance">Aparência do percurso/rota GPX</string>
+    <string name="init_trackappearance_summary">Seleccionar a cor, a opacidade e largura para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
     <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
     <string name="init_trackwidth_summary">Seleccionar a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
@@ -1561,6 +1569,7 @@
     <string name="imageview_notitle">Sem título</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Não foi possível carregar a imagem</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Comentário</string>
     <!-- visit -->
@@ -2161,6 +2170,8 @@
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
     <string name="preference_colorpicker_select_color">Seleccionar cor</string>
     <string name="preference_colorpicker_select_opaqueness">Seleccionar opacidade</string>
+    <string name="preference_colorpicker_select_width">Seleccionar largura da linha</string>
+    <string name="preference_colorpicker_show_width">largura: %d</string>
     <string name="reset_to_default">Predefinição</string>
     <!-- number input -->
     <string name="number_input_title">Introduza um valor entre %1$s e %2$s</string>
@@ -2205,6 +2216,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Definir como início da rota</string>
     <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
+    <string name="route_optimization">Optimização de rota</string>
+    <string name="route_optimization_info">A optimização de rota é um recurso experimental para optimizar uma rota com uma distância mais curta. Uma vez que não é possível avaliar todas as soluções possíveis, devido a restrições de tempo e energia para fazer o cálculo num dispositivo móvel, são usados algoritmos aproximados para calcular possíveis optimizações.\n\nO cálculo é feito em dois passos: Calcula as distâncias entre cada dois pares da rota, depois tenta encontrar uma rota viável. Esta pode não ser a rota mais curta possível, portanto pode repetir o segundo passo as vezes que quiser.</string>
+    <string name="initial_route_length">Tamanho inicial da rota: %d</string>
+    <string name="optimized_route_length">Tamanho optimizado da rota: %d</string>
+    <string name="route_optimization_out_of_bounds">A optimização de rota funciona para rotas entre 3 e 100 pontos</string>
+    <string name="generating_distance_matrix">A gerar matriz de distância</string>
+    <string name="running_route_optimizations">Optimização de rota em curso</string>
+    <string name="route_optimization_finished">Optimização de rota concluída</string>
     <!-- individual track -->
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
@@ -2294,6 +2313,7 @@
     <string name="downloadmap_mapfile">Ficheiro de mapa</string>
     <string name="downloadmap_themefile">ficheiro de tema</string>
     <string name="downloadmap_tilefile">ficheiro dos dados de encaminhamento</string>
+    <string name="downloadmap_checking">A verificar dados de encaminhamento disponíveis…</string>
     <string name="downloadmap_othermapdownload">outra transferência de mapa</string>
     <string name="downloadmap_otherthemedownload">outra transferência de tema</string>
     <string name="downloadmap_download">transferir</string>
@@ -2385,6 +2405,8 @@
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
     <string name="cancel">Cancelar</string>
+    <string name="use">Utilizar</string>
+    <string name="redo">Refazer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
