@@ -2,9 +2,9 @@
 - Alteração: Usar a última posição conhecida do mapa como alternativa (quando não há GPS disponível e "seguir a minha localização" está inactivo)
 - Novo: Actualizar caches na rota
 - Novo: Coloração individual para os percursos
-- New: Update map list on receiving map file
-- Change: Do not install downloaded map/theme automatically
-- New: Individual route optimization (experimental)
+- Novo: Actualiza a lista de mapas ao receber um ficheiro de mapa
+- Alteração: Não instala automaticamente o mapa/tema transferido
+- Novo: Optimização da rota individual (experimental)
 
 ### Detalhes da cache
 
