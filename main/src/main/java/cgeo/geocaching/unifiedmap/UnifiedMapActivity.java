@@ -33,6 +33,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -794,7 +795,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         Log.e("touched elements (" + result.size() + "): " + result);
 
         if (result.size() == 0) {
-            // @todo: open context popup for coordinates
+            if (isLongTap) {
+                // @todo: open context popup for coordinates
+            } else {
+                FilterUtils.toggleActionBar(this);
+            }
         } else if (result.size() == 1) {
             handleTap(result.get(0), isLongTap);
         } else {

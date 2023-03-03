@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -22,6 +23,7 @@ import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
@@ -215,7 +217,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         getMapAsync(this);
-        gestureDetector = new GestureDetector(context, new GestureListener());
+        gestureDetector = new GestureDetector(context, new GestureListener((AbstractBottomNavigationActivity) context));
     }
 
 
@@ -395,6 +397,13 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     private class GestureListener extends SimpleOnGestureListener {
+
+        private final WeakReference<AbstractBottomNavigationActivity> activityRef;
+
+        GestureListener(final AbstractBottomNavigationActivity activity) {
+            super();
+            this.activityRef = new WeakReference<>(activity);
+        }
         @Override
         public boolean onDoubleTap(final MotionEvent e) {
             // no need to move to new location, google maps will do it for us
@@ -416,11 +425,22 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                         final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
                         if (insideCachePointDrawable(p, waypointPoint, closest.getMarker(0).getDrawable())) {
                             onCacheTapListener.onCacheTap(closest.getCoord());
+                        } else {
+                            toggleActionBar();
                         }
+                    } else {
+                        toggleActionBar();
                     }
                 }
             }
             return false;
+        }
+
+        private void toggleActionBar() {
+            final AbstractBottomNavigationActivity activity = activityRef.get();
+            if (activity != null) {
+                FilterUtils.toggleActionBar(activity);
+            }
         }
 
         @Override

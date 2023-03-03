@@ -47,6 +47,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
+        activity.setStableLayout();
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
         mMapView = activity.findViewById(R.id.mapViewGM);
