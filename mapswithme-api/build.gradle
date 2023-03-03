@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 
 android {
     namespace 'com.mapwithme.maps.api'
+    compileSdk 33
 
-    compileSdk 32
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
