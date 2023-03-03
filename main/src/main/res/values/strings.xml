@@ -2704,6 +2704,7 @@
     <string name="use">Use</string>
     <string name="redo">Redo</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimize</string>
 
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Select All</string>
