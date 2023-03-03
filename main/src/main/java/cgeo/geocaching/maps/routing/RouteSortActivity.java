@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,6 +64,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     .setSupportDragDrop(true));
         }
 
+        @SuppressLint("SetTextI18n")
         private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem) {
             final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
             final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
@@ -81,7 +83,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     case WAYPOINT:
                         assert data instanceof Waypoint;
                         final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        holder.binding.detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
+                        holder.binding.detail.setText(data.getGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
                         holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
                         break;
                     case COORDS:
