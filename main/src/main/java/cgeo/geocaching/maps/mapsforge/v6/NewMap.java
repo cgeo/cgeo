@@ -263,6 +263,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         ActivityMixin.setTheme(this);
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
+        setStableLayout();
         setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
 
         setTitle();
@@ -1297,6 +1298,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty()) {
+            FilterUtils.toggleActionBar(this);
             return;
         }
 

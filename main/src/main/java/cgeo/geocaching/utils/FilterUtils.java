@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -82,6 +83,11 @@ public class FilterUtils {
         final View filterView = activity.findViewById(R.id.filter_bar);
         filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());
         filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
+    }
+
+    public static void toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
+        final boolean actionBarShown = activity.toggleActionBar();
+        activity.findViewById(R.id.actionBarSpacer).setVisibility(actionBarShown ? View.VISIBLE : View.GONE);
     }
 
     public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
