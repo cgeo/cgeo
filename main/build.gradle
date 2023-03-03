@@ -20,8 +20,8 @@ if (isContinuousIntegrationServer()) {
 
 android {
     namespace 'cgeo.geocaching'
+    compileSdk 33
 
-    compileSdk 32
 
     compileOptions {
         // use the diamond operator and some other goodies in Android
