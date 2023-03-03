@@ -6,7 +6,7 @@
     <item
         android:id="@+id/menu_optimize"
         android:icon="@drawable/ic_menu_auto_fix_high"
-        android:title="Optimize"
+        android:title="@string/optimize"
         android:visible="false"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">
