@@ -5,6 +5,8 @@
 - Naujiena: Atnaujinamas žemėlapių sąrašas gavus žemėlapio failą
 - Pakeitimas: Neįdiegiamas atsisiųstas žemėlapis/tema automatiškai
 - Naujiena: Individualus maršruto optimizavimas (eksperimentinis)
+- New: Support for "Google: Terrain" maps
+- New: Setting line-width per track
 
 ### Slėptuvės detalės
 
