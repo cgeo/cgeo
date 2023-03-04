@@ -5,6 +5,8 @@
 - 신규: 지도 파일 수신 시 지도 목록 업데이트
 - 변경: 다운로드한 맵/테마를 자동으로 설치하지 않음
 - 신규: 개별 경로 최적화(실험적)
+- New: Support for "Google: Terrain" maps
+- New: Setting line-width per track
 
 ### 캐시 상세정보
 
