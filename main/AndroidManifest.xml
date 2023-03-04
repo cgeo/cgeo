@@ -469,7 +469,7 @@
         </activity>
         <activity
             android:name=".CacheDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="wikitudeapi.arcallback" />
