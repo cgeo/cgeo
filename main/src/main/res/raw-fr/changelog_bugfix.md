@@ -1,4 +1,8 @@
 ##
+- Fix: Widen log description column in landscape mode
+- Fix: Make image format error message clearer
+
+##
 - Fix: Skipping some user-created waypoints on GPX import
 - Fix: List of extended filters not translated when language is set to non-default within c:geo
 - Fix: Downloading/updating routing tiles or maps no longer possible on older devices
