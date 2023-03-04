@@ -320,9 +320,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (googleMap == null) {
             return;
         }
-        final boolean satellite = GoogleMapProvider.isSatelliteSource(Settings.getMapSource());
-        googleMap.setMapType(satellite ? GoogleMap.MAP_TYPE_HYBRID : GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setIndoorEnabled(!satellite);
+        final GoogleMapProvider.AbstractGoogleMapSource mapSource = (GoogleMapProvider.AbstractGoogleMapSource) Settings.getMapSource();
+        googleMap.setMapType(mapSource.mapType);
+        googleMap.setIndoorEnabled(mapSource.indoorEnabled);
     }
 
     @Override
