@@ -12,6 +12,8 @@ import android.content.res.Resources;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.GoogleMap;
+
 public final class GoogleMapProvider extends AbstractMapProvider {
 
     public static final String GOOGLE_MAP_ID = "GOOGLE_MAP";
@@ -24,6 +26,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
         registerMapSource(new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
         registerMapSource(new GoogleSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));
+        registerMapSource(new GoogleTerrainSource(this, resources.getString(R.string.map_source_google_terrain)));
 
         mapItemFactory = new GoogleMapItemFactory();
     }
@@ -34,10 +37,6 @@ public final class GoogleMapProvider extends AbstractMapProvider {
 
     public static GoogleMapProvider getInstance() {
         return Holder.INSTANCE;
-    }
-
-    public static boolean isSatelliteSource(final MapSource mapSource) {
-        return mapSource instanceof GoogleSatelliteSource;
     }
 
     @Override
@@ -60,10 +59,16 @@ public final class GoogleMapProvider extends AbstractMapProvider {
         return true;
     }
 
-    private abstract static class AbstractGoogleMapSource extends AbstractMapSource {
+    public abstract static class AbstractGoogleMapSource extends AbstractMapSource {
+        public final boolean indoorEnabled;
+        public final boolean supportsTheming;
+        public final int mapType;
 
-        protected AbstractGoogleMapSource(final MapProvider mapProvider, final String name) {
+        protected AbstractGoogleMapSource(final MapProvider mapProvider, final String name, final int mapType, final boolean supportsTheming, final boolean indoorEnabled) {
             super(mapProvider, name);
+            this.mapType = mapType;
+            this.supportsTheming = supportsTheming;
+            this.indoorEnabled = indoorEnabled;
         }
 
     }
@@ -71,7 +76,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     private static final class GoogleMapSource extends AbstractGoogleMapSource {
 
         GoogleMapSource(final MapProvider mapProvider, final String name) {
-            super(mapProvider, name);
+            super(mapProvider, name, GoogleMap.MAP_TYPE_NORMAL, true, true);
         }
 
     }
@@ -79,7 +84,15 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     private static final class GoogleSatelliteSource extends AbstractGoogleMapSource {
 
         GoogleSatelliteSource(final MapProvider mapProvider, final String name) {
-            super(mapProvider, name);
+            super(mapProvider, name, GoogleMap.MAP_TYPE_HYBRID, false, false);
+        }
+
+    }
+
+    private static final class GoogleTerrainSource extends AbstractGoogleMapSource {
+
+        GoogleTerrainSource(final MapProvider mapProvider, final String name) {
+            super(mapProvider, name, GoogleMap.MAP_TYPE_TERRAIN, false, false);
         }
 
     }
