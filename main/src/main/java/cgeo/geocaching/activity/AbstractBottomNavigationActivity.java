@@ -6,6 +6,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -131,6 +132,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         Dialogs.newBuilder(this)
                 .setTitle(R.string.cache_recently_viewed)
                 .setAdapter(adapter, (dialog, which) -> CacheDetailActivity.startActivity(this, lastCaches.get(which).getGeocode()))
+                .setPositiveButton(R.string.map_as_list, (d, w) -> {
+                    CacheListActivity.startActivityLastViewed(this, new SearchResult(lastCaches));
+                    ActivityMixin.overrideTransitionToFade(this);
+                })
                 .show();
         return true;
     }

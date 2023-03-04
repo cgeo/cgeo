@@ -1777,6 +1777,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityLastViewed(final Context context, final SearchResult search) {
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
+        Intents.putListType(cachesIntent, CacheListType.LAST_VIEWED);
+        context.startActivity(cachesIntent);
+    }
+
     public static void startActivityPocketDownload(@NonNull final Context context, @NonNull final GCList pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
@@ -1911,6 +1918,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
                 case MAP:
                     title = res.getString(R.string.map_map);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
+                    replaceCacheListFromSearch();
+                    loadCachesHandler.sendMessage(Message.obtain());
+                    loader = new NullGeocacheListLoader(this, search);
+                    break;
+                case LAST_VIEWED:
+                    title = res.getString(R.string.cache_recently_viewed);
                     markerId = EmojiUtils.NO_EMOJI;
                     search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                     replaceCacheListFromSearch();
