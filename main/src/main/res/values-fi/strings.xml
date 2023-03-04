@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
+    <string name="err_acquire_image_unsupported_format">Kuvamuodon on oltava JPEG/JPG, PNG tai GIF</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -948,6 +949,14 @@
     <string name="init_maptrail_length">Jälkihistorian maksimipituus</string>
     <string name="init_maptrail_length_summary">Aseta jälkihistorian maksimipituus (pakotetaan jokaisen c:geon käynnistyksen yhteydessä). Oletusarvo on 700 - säädä saatavilla olevan muistin mukaisesti.</string>
     <string name="init_summary_maptrail">Kun tämä (sekä GPS) on aktivoitu, c:geo tallettaa liikkeidesi historian jälkenä ja näyttää sen kartalla.</string>
+    <string name="init_trailappearance">Historiajäljen ulkoasu</string>
+    <string name="init_trailappearance_summary">Valitse väri, läpinäkyvyys ja viivan leveys historiajäljelle</string>
+    <string name="init_directionappearance">Suunnan ulkonäkö</string>
+    <string name="init_directionappearance_summary">Valitse suuntaviivan väri, läpinäkyvyys ja viivan paksuus. Suuntaviiva näyttää suoran viivan valitsemaasi navigointikohteeseen, tai reititetyn navigointiviivan, jos reititys on käytettävissä BRouter-sovelluksen avulla.</string>
+    <string name="init_routeappearance">Yksittäisen reitin ulkonäkö</string>
+    <string name="init_routeappearance_summary">Valitse yksittäisen reittiviivan väri, läpinäkyvyys ja viivan leveys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
+    <string name="init_trackappearance">GPX reitin/jäljen ulkonäkö</string>
+    <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
     <string name="init_trackwidth">GPX-jäljen/reitin viivan leveys</string>
     <string name="init_trackwidth_summary">Valitse GPX-jäljen/reitin viivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
@@ -1062,6 +1071,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
+    <string name="map_source_google_terrain">Google: Maasto</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartan attribuutiot</string>
@@ -1225,6 +1235,7 @@
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
     <string name="cache_personal_note_vars_out_of_sync">Muistiinpanoissa olevat muuttujia ei ole synkronoitu (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronoi muuttujat</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Tarkista muuttujat, joiden arvo tulee korvata muistiinpanoista</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Kuvaus</string>
@@ -1291,6 +1302,7 @@
     <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (kävely)</string>
     <string name="cache_menu_sygic_drive">Sygic (ajo)</string>
     <string name="cache_menu_radar">Tutka</string>
@@ -1559,6 +1571,7 @@
     <string name="imageview_notitle">Nimetön</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d pikseliä</string>
+    <string name="imageview_error">Kuvan lataaminen epäonnistui</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- visit -->
@@ -2152,11 +2165,15 @@
     <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
     <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
     <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
     <string name="preference_colorpicker_select_color">Valitse väri</string>
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
+    <string name="preference_colorpicker_select_width">Valitse viivan leveys</string>
+    <string name="preference_colorpicker_show_width">leveys: %d</string>
     <string name="reset_to_default">Oletus</string>
     <!-- number input -->
     <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
@@ -2201,6 +2218,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
+    <string name="route_optimization">Reitin optimointi</string>
+    <string name="route_optimization_info">Reitin optimointi on kokeellinen ominaisuus reitin optimoimiseksi lyhyemmällä etäisyydellä. Koska kaikkia mahdollisia ratkaisuja ei ole mahdollista arvioida mobiililaitteen ajasta ja laskentatehosta johtuvien rajoitteiden vuoksi, se käyttää arviointialgoritmeja laskeakseen mahdolliset optimoinnit.\n\nLaskeminen on tehty kaksivaiheisessa prosessissa: Laske etäisyydet kullekin reittiparille, sitten yritä löytää hyväksyttävä reitti. Tämä ei ehkä ole lyhin mahdollinen reitti, joten voit toistaa kaksi vaihetta niin usein kuin haluat.</string>
+    <string name="initial_route_length">Alkuperäinen reitin pituus: %d</string>
+    <string name="optimized_route_length">Optimoitu reitin pituus: %d</string>
+    <string name="route_optimization_out_of_bounds">Reitin optimointi toimii 3-100 pisteen välisillä reiteillä</string>
+    <string name="generating_distance_matrix">Luodaan etäisyysmatriksia</string>
+    <string name="running_route_optimizations">Reitin optimointi</string>
+    <string name="route_optimization_finished">Reitin optimointi valmis</string>
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
@@ -2209,6 +2234,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
+    <string name="routes_tracks_color">Valitse väri</string>
     <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
     <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
@@ -2289,6 +2315,7 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_checking">Tarkistetaan saatavilla olevia reititystietoja…</string>
     <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
     <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>
@@ -2380,7 +2407,10 @@
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
     <string name="cancel">Peruuta</string>
+    <string name="use">Käytä</string>
+    <string name="redo">Toista</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimoi</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
     <!-- render theme legend: category "areas" -->
