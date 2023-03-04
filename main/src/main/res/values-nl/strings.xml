@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Wijzigen favorieten status is mislukt.</string>
     <string name="err_select_logimage_failed">Selecteren van een foto voor het log is mislukt.</string>
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
+    <string name="err_acquire_image_unsupported_format">Afbeeldingsformaat moet van JPEG/JPG, PNG of GIF zijn</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
@@ -948,6 +949,14 @@
     <string name="init_maptrail_length">Geschiedenisspoor max. lengte</string>
     <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 punten - aanpassen aan het beschikbare geheugen.</string>
     <string name="init_summary_maptrail">Wanneer geactiveerd (en GPS is ingeschakeld) bewaart c:geo de geschiedenis van je bewegingen als een spoor en geeft het weer op de kaart.</string>
+    <string name="init_trailappearance">Geschiedenisspoor gewist</string>
+    <string name="init_trailappearance_summary">Selecteer kleur, doorzichtigheid en lijnbreedte voor geschiedenis spoor lijn</string>
+    <string name="init_directionappearance">Richting uiterlijk</string>
+    <string name="init_directionappearance_summary">Selecteer kleur en doorzichtigheid voor richtingslijn. Richtingslijn toont een rechte lijn naar je geselecteerde navigatiedoel, of het specifieke gerouteerde navigatiepad als routering is ingeschakeld door de BRouter app te installeren.</string>
+    <string name="init_routeappearance">Individueel route uiterlijk</string>
+    <string name="init_routeappearance_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
+    <string name="init_trackappearance">GPX track/route uiterlijk</string>
+    <string name="init_trackappearance_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
     <string name="init_trackwidth">GPX spoor/route lijnbreedte</string>
     <string name="init_trackwidth_summary">Selecteer breedte voor GPX spoor/route lijn</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
@@ -1062,6 +1071,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
+    <string name="map_source_google_terrain">Google: Terrein</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
@@ -2162,6 +2172,8 @@
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
     <string name="preference_colorpicker_select_color">Kleur selecteren</string>
     <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
+    <string name="preference_colorpicker_select_width">Selecteer lijndikte</string>
+    <string name="preference_colorpicker_show_width">breedte: %d</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
     <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
@@ -2303,6 +2315,7 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_themefile">themabestand</string>
     <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_checking">Controleren beschikbare routeringsgegevens…</string>
     <string name="downloadmap_othermapdownload">andere kaart downloaden</string>
     <string name="downloadmap_otherthemedownload">ander thema downloaden</string>
     <string name="downloadmap_download">downloaden</string>
@@ -2397,6 +2410,7 @@
     <string name="use">Gebruik</string>
     <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimaliseren</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
     <!-- render theme legend: category "areas" -->
