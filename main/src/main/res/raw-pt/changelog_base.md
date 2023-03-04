@@ -5,6 +5,8 @@
 - Novo: Actualiza a lista de mapas ao receber um ficheiro de mapa
 - Alteração: Não instala automaticamente o mapa/tema transferido
 - Novo: Optimização da rota individual (experimental)
+- New: Support for "Google: Terrain" maps
+- New: Setting line-width per track
 
 ### Detalhes da cache
 
