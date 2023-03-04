@@ -594,6 +594,17 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">la nuit des temps</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1y</item>
+        <item>1y</item>
+        <item>180 j</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2w</item>
+        <item>1w</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
