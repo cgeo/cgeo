@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
     <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
     <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
+    <string name="err_acquire_image_unsupported_format">Bildformat muss eines von JPEG/JPG, PNG oder GIF sein</string>
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
     <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
