@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Zmiana statusu ulubionych nie powiodła się.</string>
     <string name="err_select_logimage_failed">Nie można wybrać obrazu.</string>
     <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
+    <string name="err_acquire_image_unsupported_format">Dopuszczalne formaty obrazu to JPEG/JPG, PNG lub GIF</string>
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
     <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
@@ -1082,6 +1083,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
+    <string name="map_source_google_terrain">Google: Teren</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Połączone (offline)</string>
     <string name="map_source_attribution_dialog_title">Przypisania mapy</string>
@@ -2466,6 +2468,7 @@
     <string name="use">Użyj</string>
     <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
+    <string name="optimize">Optymalizuj</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
     <!-- render theme legend: category "areas" -->
