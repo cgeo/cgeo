@@ -5,6 +5,8 @@
 - New: Update map list on receiving map file
 - Change: Do not install downloaded map/theme automatically
 - New: Individual route optimization (experimental)
+- New: Support for "Google: Terrain" maps
+- New: Setting line-width per track
 
 ### Детали тайника
 
