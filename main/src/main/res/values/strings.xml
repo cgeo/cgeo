@@ -1180,6 +1180,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
+    <string name="map_source_google_terrain">Google: Terrain</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Combined (Offline)</string>
     <string name="map_source_attribution_dialog_title">Map Attributions</string>
