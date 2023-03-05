@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
     <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
+    <string name="err_acquire_image_unsupported_format">Formát obrázku musí být JPEG/JPG, PNG nebo GIF</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
@@ -960,6 +961,14 @@
     <string name="init_maptrail_length">Max. délka historie trasy</string>
     <string name="init_maptrail_length_summary">Nastavte maximální délku historie trasy (potřebné při každém spuštění c:geo). Výchozí hodnota je 700 bodů - upravte podle dostupné paměti.</string>
     <string name="init_summary_maptrail">Když je to aktivováno (a GPS zapnuta), c:geo ukládá historii pohybů jako trasu a zobrazuje ji na mapě.</string>
+    <string name="init_trailappearance">Vzhled historie trasy</string>
+    <string name="init_trailappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry pro historii trasy</string>
+    <string name="init_directionappearance">Vzhled směru</string>
+    <string name="init_directionappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry směru. Směrová čára zobrazuje přímou čáru k vybranému cíli navigace nebo konkrétní dráhu navigace trasy, pokud je směrování povoleno, po instalaci aplikace BRouter.</string>
+    <string name="init_routeappearance">Vzhled infividuální trasy</string>
+    <string name="init_routeappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
+    <string name="init_trackappearance">Vzhled GPX stopy/trasy</string>
+    <string name="init_trackappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry stopy/trasy. Stopa/trasa se skládá z několika trasových bodů a lze ji načíst pomocí GPX souboru.</string>
     <string name="init_trackwidth">Šířka čáry GPX stopy/trasy</string>
     <string name="init_trackwidth_summary">Vyberte šířku čáry pro GPX stopy/trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
@@ -1074,6 +1083,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
+    <string name="map_source_google_terrain">Google: Terén</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
@@ -2218,6 +2228,8 @@
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
     <string name="preference_colorpicker_select_color">Zvolit barvu</string>
     <string name="preference_colorpicker_select_opaqueness">Zvolit neprůhlednost</string>
+    <string name="preference_colorpicker_select_width">Vyberte šířku čáry</string>
+    <string name="preference_colorpicker_show_width">šířka: %d</string>
     <string name="reset_to_default">Výchozí</string>
     <!-- number input -->
     <string name="number_input_title">Zadejte hodnotu od %1$s do %2$s</string>
@@ -2456,6 +2468,7 @@
     <string name="use">Použít</string>
     <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimalizovat</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
     <!-- render theme legend: category "areas" -->
