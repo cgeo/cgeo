@@ -1,6 +1,7 @@
 ##
 - Fix: Widen log description column in landscape mode
 - Fix: Make image format error message clearer
+- Fix: User-created waypoints not being displayed on OSM map
 
 ##
 - Poprawka: Podczas importowania GPX pomijane były niektóre punktów nawigacji utworzone przez użytkownika
