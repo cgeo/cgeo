@@ -5,8 +5,9 @@
 - Novinka: Aktualizace seznamu map při přijetí mapového souboru
 - Změna: Staženou mapu/téma neinstalovat automaticky
 - Novinka: Individuální optimalizace trasy (experimentální)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
+- Novinka: Podpora služby "Google: Terénní mapy"
+- Novinka: Nastavení šířky řádku na stopu
+- New: Hide map's action bar on demand (tap on empty space on map)
 
 ### Detaily kešky
 
