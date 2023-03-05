@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">호감캐시 상태를 바꾸지 못했습니다.</string>
     <string name="err_select_logimage_failed">찾지못함 로그에 대한 사진을 선택하는 중</string>
     <string name="err_acquire_image_failed">사진 가져오기 실패</string>
+    <string name="err_acquire_image_unsupported_format">이미지 형식은 JPEG/JPG, PNG 또는 GIF 중 하나여야 합니다.</string>
     <string name="err_tb_display">원하시는 추적아이템을 표시할 수 없습니다. 정말 추적아이템이 맞나요?</string>
     <string name="err_tb_details_open">추적아이템 상세정보를 열 수 없습니다.</string>
     <string name="err_tb_not_loggable">이 추적아이템은 로그할 수 없습니다.</string>
