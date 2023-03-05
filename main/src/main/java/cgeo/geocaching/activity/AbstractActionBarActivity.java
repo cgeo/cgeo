@@ -12,6 +12,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        setTheme();
         super.onCreate(savedInstanceState);
         initUpAction();
     }

@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/filterbar"
-    android:background="@color/colorBackgroundActionBar">
+    android:background="?colorBackgroundActionBar">
 
     <Space
         android:id="@+id/actionBarSpacer"

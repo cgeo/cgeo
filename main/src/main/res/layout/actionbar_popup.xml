@@ -6,5 +6,5 @@
     android:theme="@style/tool_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackgroundActionBar"
+    android:background="?colorBackgroundActionBar"
     app:contentInsetStart="8dp" />

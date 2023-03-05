@@ -47,4 +47,7 @@
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />
 
+    <!-- themeable colors (only those not yet included in Android/Material defaults -->
+    <attr name="colorBackgroundActionBar" format="color" />
+
 </resources>

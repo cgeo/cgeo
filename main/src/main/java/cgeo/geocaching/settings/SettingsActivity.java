@@ -2,6 +2,8 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.permission.PermissionAction;
@@ -73,7 +75,7 @@ import org.apache.commons.lang3.StringUtils;
  * guidelines and the <a href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for
  * more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends AbstractActionBarActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "preferencesActivityTitle";
     private static final String INTENT_OPEN_SCREEN = "OPEN_SCREEN";
@@ -92,7 +94,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, null);
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
         super.onCreate(savedInstanceState);
 
@@ -250,7 +252,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         Log.i("Requesting settings backup with settings manager");
         BackupManager.dataChanged(getPackageName());
         super.onPause();

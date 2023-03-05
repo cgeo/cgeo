@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.Log;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -66,11 +67,19 @@ public final class ActivityMixin {
     }
 
     public static void setTheme(final Activity activity, final boolean isDialog) {
-        activity.setTheme(isDialog ? getDialogTheme() : getThemeId());
+//        activity.setTheme(isDialog ? getDialogTheme() : getThemeId());
+        if (isDialog) {
+            activity.setTheme((getDialogTheme()));
+        } else {
+            // @todo: customize based on settings
+            activity.setTheme(R.style.ThemeOverlay_App_Blue);
+        }
+
     }
 
     public static int getDialogTheme() {
-        return R.style.Theme_AppCompat_Transparent_NoActionBar;
+        // return R.style.Theme_AppCompat_Transparent_NoActionBar;
+        return R.style.ThemeOverlay_App_Blue;
     }
 
     /**

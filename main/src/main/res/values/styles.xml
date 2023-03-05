@@ -78,7 +78,7 @@
     <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
         <item name="android:textColor">@color/colorTextActionBar</item>
-        <item name="background">@color/colorBackgroundActionBar</item>
+        <item name="background">?colorBackgroundActionBar</item>
         <item name="titleTextStyle">@style/action_bar_title</item>
         <item name="subtitleTextStyle">@style/action_bar_subtitle</item>
     </style>
