@@ -273,7 +273,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/settings_titlebar"
             android:parentActivityName="cgeo.geocaching.MainActivity"
-            android:theme="@style/settings"
+            android:theme="@style/cgeo"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

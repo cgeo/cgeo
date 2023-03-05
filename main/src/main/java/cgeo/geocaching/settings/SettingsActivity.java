@@ -93,7 +93,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
-        setTheme(Settings.isLightSkin(this) ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));

@@ -68,45 +68,6 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <!-- theme for settings (temporary workaround, needed only as long as SettingsActivity is not derived from AppCompatActivity) -->
-
-    <style name="settings" parent="cgeo">
-        <item name="android:textColor">@color/settings_primary_selector_night</item>
-        <item name="android:textColorSecondary">@color/settings_secondary_selector_night</item>
-        <item name="android:colorBackground">@color/settings_colorBackgroundDark</item>
-        <item name="android:dialogTheme">@style/settings.DialogTheme</item>
-        <item name="android:alertDialogTheme">@style/settings.DialogTheme</item>
-    </style>
-
-    <style name="settings.light" parent="cgeo">
-        <item name="android:textColor">@color/settings_primary_selector_light</item>
-        <item name="android:textColorSecondary">@color/settings_secondary_selector_light</item>
-        <item name="android:colorBackground">@color/settings_colorBackgroundLight</item>
-        <item name="android:dialogTheme">@style/settings.DialogTheme.light</item>
-        <item name="android:alertDialogTheme">@style/settings.DialogTheme.light</item>
-    </style>
-
-    <style name="settings.DialogTheme" parent="@style/Theme.AppCompat.Dialog.Alert">
-        <item name="android:textColor">@color/settings_primary_selector_night</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorOnSurface">@color/colorAccent</item>
-        <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
-        <item name="android:background">@color/settings_colorBackgroundDark</item>
-    </style>
-
-    <style name="settings.DialogTheme.light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">@color/settings_primary_selector_light</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorOnSurface">@color/colorAccent</item>
-        <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
-    </style>
-
-    <style name="settings.buttons" parent="@style/button">
-        <item name="android:textColor">@color/colorAccent</item>
-    </style>
-
     <!-- theme for splash screen -->
 
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
