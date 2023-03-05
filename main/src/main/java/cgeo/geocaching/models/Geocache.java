@@ -1535,7 +1535,7 @@ public class Geocache implements IWaypoint {
     public boolean addOrChangeWaypoint(final Waypoint waypoint, final boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
 
-        if (waypoint.getId() < 0) { // this is a new waypoint
+        if (waypoint.isNewWaypoint()) {
             if (StringUtils.isBlank(waypoint.getPrefix())) {
                 assignUniquePrefix(waypoint);
             }
@@ -1664,7 +1664,7 @@ public class Geocache implements IWaypoint {
         if (waypoint == null) {
             return false;
         }
-        if (waypoint.getId() < 0) {
+        if (waypoint.isNewWaypoint()) {
             return false;
         }
         if (waypoint.getWaypointType() != WaypointType.ORIGINAL || waypoint.belongsToUserDefinedCache()) {
