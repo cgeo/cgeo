@@ -1,6 +1,7 @@
 ##
 - Fix: Widen log description column in landscape mode
 - Fix: Make image format error message clearer
+- Fix: User-created waypoints not being displayed on OSM map
 
 ##
 - Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
