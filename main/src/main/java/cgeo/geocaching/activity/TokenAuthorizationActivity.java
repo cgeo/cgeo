@@ -88,6 +88,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
+        setUpNavigationEnabled(true);
         binding = AuthorizationTokenActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
