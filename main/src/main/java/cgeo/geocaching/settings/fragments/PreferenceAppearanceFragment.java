@@ -11,7 +11,6 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
-import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 
 import java.util.Locale;
@@ -55,17 +54,9 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
 
-        final MultiSelectListPreference quickLaunchItemsPref = findPreference(getString(R.string.pref_quicklaunchitems));
-        final String[] qlEntries = new String[QuickLaunchItem.values().length];
-        final String[] qlValues = new String[QuickLaunchItem.values().length];
-        int i = 0;
-        for (QuickLaunchItem qlItem : QuickLaunchItem.values()) {
-            qlEntries[i] = getString(qlItem.info);
-            qlValues[i] = qlItem.name();
-            i++;
-        }
-        quickLaunchItemsPref.setEntries(qlEntries);
-        quickLaunchItemsPref.setEntryValues(qlValues);
+        setPrefClick(this, R.string.pref_quicklaunchitems, () -> {
+            QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems);
+        });
 
     }
 

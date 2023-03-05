@@ -24,6 +24,8 @@ public class Intents {
     public static final String EXTRA_BRAND = PREFIX + "brand";
     public static final String EXTRA_IMAGE = PREFIX + "image";
     public static final String EXTRA_INDEX = PREFIX + "index";
+    public static final String EXTRA_CLASS = PREFIX + "class";
+    public static final String EXTRA_FIELD = PREFIX + "field";
     public static final String EXTRA_DELETE_FLAG = PREFIX + "deleteflag";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_MAX_IMAGE_UPLOAD_SIZE = PREFIX + "max-image-upload-size";
