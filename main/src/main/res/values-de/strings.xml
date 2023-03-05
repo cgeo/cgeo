@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
     <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
     <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
+    <string name="err_acquire_image_unsupported_format">Bildformat muss eines von JPEG/JPG, PNG oder GIF sein</string>
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
     <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
@@ -948,20 +949,14 @@
     <string name="init_maptrail_length">Länge des Positionsverlaufs</string>
     <string name="init_maptrail_length_summary">Lege die maximale Länge des Positionsverlaufs fest (erzwungen bei jedem Start von c:geo). Standardwert ist 700 Punkte - je nach verfügbarem Speicher anpassen.</string>
     <string name="init_summary_maptrail">Wenn aktiviert (und GPS eingeschaltet ist) speichert c:geo den Verlauf deiner Bewegung als Track und zeigt ihn auf der Karte an.</string>
-    <string name="init_trailcolor">Farbe der Positionsverlaufs-Linie</string>
-    <string name="init_trailcolor_summary">Farbe und Deckkraft für den Positionsverlauf einstellen</string>
-    <string name="init_trailwidth">Breite der Positionsverlaufs-Linie</string>
-    <string name="init_trailwidth_summary">Breite des Positionsverlaufs einstellen</string>
-    <string name="init_directioncolor">Farbe der Richtungslinie</string>
-    <string name="init_directioncolor_summary">Farbe und Deckkraft für die Navigationslinie einstellen. Die Navigationslinie ist entweder eine direkte Linie zum aktuellen Navigationsziel oder die errechnete Navigationsroute, sofern die BRouter App installiert ist.</string>
-    <string name="init_directionwidth">Breite der Richtungslinie</string>
-    <string name="init_directionwidth_summary">Breite der Navigationslinie einstellen</string>
-    <string name="init_routecolor">Farbe der individuellen Route</string>
-    <string name="init_routecolor_summary">Farbe und Deckkraft der individuellen Route einstellen. Eine individuelle Route besteht aus mehreren Wegpunkten und/oder Caches, die du in der Karte durch einen langes Tippen auf den Wegpunkt/Cache ausgewählt hast. (\"Langes Tippen\" muss zuvor in den Karteneinstellungen aktiviert worden sein.)</string>
-    <string name="init_routewidth">Breite der individuellen Route</string>
-    <string name="init_routewidth_summary">Breite für individuelle Routenlinie auswählen</string>
-    <string name="init_trackcolor">Linienfarbe für GPX-Track/Route</string>
-    <string name="init_trackcolor_summary">Farbe und Deckkraft für Tracks/Routen einstellen. Ein(e) Track/Route besteht aus mehreren Wegpunkten und kann über eine GPX-Track-/Routen-Datei geladen werden.</string>
+    <string name="init_trailappearance">Erscheinungsbild des Positionsverlaufs</string>
+    <string name="init_trailappearance_summary">Wählen Sie Farbe, Deckkraft und Linienbreite für den Positionsverlauf</string>
+    <string name="init_directionappearance">Erscheinungsbild der Richtungsanzeige</string>
+    <string name="init_directionappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Navigationslinie. Die Navigationslinie ist eine Gerade zu deinem Ziel oder ein Navigationspfad, wenn die BRouter App installiert ist.</string>
+    <string name="init_routeappearance">Erscheinungsbild der individuellen Route</string>
+    <string name="init_routeappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die individuelle Route. Eine individuelle Route ist eine Liste von Wegpunkten und/oder Caches, die durch langes Tippen auf den Wegpunkt/Cache selektiert wurde. (Die Funktion \'langes Tippen\' muss dafür in den Karteneinstellungen aktiviert sein.)</string>
+    <string name="init_trackappearance">Erscheinungsbild des GPX Tracks/Route</string>
+    <string name="init_trackappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Track-Linie. Ein Track besteht aus mehreren Wegpunkten und kann aus einer GPX-Datei geladen werden.</string>
     <string name="init_trackwidth">Linienbreite für GPX-Track/Route</string>
     <string name="init_trackwidth_summary">Linienbreite für GPX-Track/Route auswählen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
@@ -1076,6 +1071,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
+    <string name="map_source_google_terrain">Google: Terrain</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombiniert (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartenlizenzen</string>
@@ -1239,6 +1235,7 @@
     <string name="cache_personal_note_upload_error">Fehler beim Hochladen der persönlichen Notiz</string>
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
     <string name="cache_personal_note_vars_out_of_sync">Variablen in Notizen sind nicht synchronisiert (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronisiere Variablen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Wähle die Variablen, die aus den Notizen überschrieben werden sollen</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Beschreibung</string>
@@ -1305,6 +1302,7 @@
     <string name="cache_menu_navigation_bike">Navigation (Fahrrad)</string>
     <string name="cache_menu_maps_directions">Google Maps Route</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (Gehen)</string>
     <string name="cache_menu_sygic_drive">Sygic (Fahren)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2174,6 +2172,8 @@
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
     <string name="preference_colorpicker_select_color">Farbe auswählen</string>
     <string name="preference_colorpicker_select_opaqueness">Deckkraft auswählen</string>
+    <string name="preference_colorpicker_select_width">Wähle die Linienbreite</string>
+    <string name="preference_colorpicker_show_width">Breite: %d</string>
     <string name="reset_to_default">Standardwert</string>
     <!-- number input -->
     <string name="number_input_title">Gib einen Wert zwischen %1$s und %2$s ein</string>
@@ -2198,6 +2198,7 @@
     <string name="individual_route_error_toggling_waypoint">Fehler beim Wechsel des Wegpunktes</string>
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
+    <string name="map_refresh_individual_route">Aktualisieren</string>
     <string name="map_export_individual_route">Exportiere individuelle Route</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
@@ -2217,6 +2218,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
+    <string name="route_optimization">Routenoptimierung</string>
+    <string name="route_optimization_info">Die Routenoptimierung ist ein experimentelles Feature, um eine kürze Route zu ermitteln. Auf mobilen Endgeräten ist es aufgrund begrenzter Rechenleistung nicht möglich, immer die optimale Lösung zu errechnen, daher werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne alle paarweisen Distanzen zwischen zwei Punkten der Route, dann versuche eine akzeptable Route zu finden. Für weitere Optimierungen kann Schritt 2 beliebig oft wiederholt werden.</string>
+    <string name="initial_route_length">Ursprüngliche Routenlänge: %d</string>
+    <string name="optimized_route_length">Optimierte Routenlänge: %d</string>
+    <string name="route_optimization_out_of_bounds">Routenoptimierung funktioniert für Routen zwischen 3 und 100 Punkten</string>
+    <string name="generating_distance_matrix">Erstelle Distanzmatrix</string>
+    <string name="running_route_optimizations">Optimiere Route</string>
+    <string name="route_optimization_finished">Routenoptimierung abgeschlossen</string>
     <!-- individual track -->
     <string name="map_load_track">Lade Track/Route aus GPX</string>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
@@ -2225,6 +2234,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
+    <string name="routes_tracks_color">Farbe auswählen</string>
     <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
@@ -2305,6 +2315,7 @@
     <string name="downloadmap_mapfile">Karte</string>
     <string name="downloadmap_themefile">Kartendesign-Datei</string>
     <string name="downloadmap_tilefile">Routendaten-Datei</string>
+    <string name="downloadmap_checking">Prüfe verfügbare Routingdaten…</string>
     <string name="downloadmap_othermapdownload">Anderer Kartendownload</string>
     <string name="downloadmap_otherthemedownload">Anderer Designdownload</string>
     <string name="downloadmap_download">Download</string>
@@ -2396,7 +2407,10 @@
     <string name="finish">Fertig</string>
     <string name="back">Zurück</string>
     <string name="cancel">Abbrechen</string>
+    <string name="use">Verwenden</string>
+    <string name="redo">Wiederholen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
+    <string name="optimize">Optimieren</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
     <!-- render theme legend: category "areas" -->

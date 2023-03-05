@@ -556,17 +556,6 @@
     <string name="init_maptrail_length">Максимальна довжина історії тексту</string>
     <string name="init_maptrail_length_summary">Максимальна довжина історії маршрутів (примусово при кожному запуску c:geo). Значення за замовчуванням 700 балів - налаштувати відповідно до доступної пам\'яті.</string>
     <string name="init_summary_maptrail">При активації (а GPS увімкнено) c: geo зберігає історію ваших рухів як доріжку та відображає її на карті.</string>
-    <string name="init_trailcolor">Колір рядка доріжки історії</string>
-    <string name="init_trailcolor_summary">Вибрати колір і непрозорість для лінії треку історії</string>
-    <string name="init_trailwidth">Ширина рядка доріжки історії</string>
-    <string name="init_trailwidth_summary">Виберіть ширину для лінії відстеження історії</string>
-    <string name="init_directioncolor">напрямок кольору лінії</string>
-    <string name="init_directioncolor_summary">Виберіть колір і непрозорість для лінії напрямку. Лінія напрямку показує пряму лінію до вибраної цілі навігації або конкретного маршруту навігаційного шляху, якщо маршрутизацію ввімкнено шляхом встановлення програми BRouter.</string>
-    <string name="init_directionwidth">Ширина лінії напрямку</string>
-    <string name="init_directionwidth_summary">Обрати ширину для напрямку</string>
-    <string name="init_routecolor">Колір окремої лінії маршруту</string>
-    <string name="init_routewidth">Ширина окремої лінії маршруту</string>
-    <string name="init_routewidth_summary">Виберіть ширину для окремої лінії маршруту</string>
     <string name="init_circlecolor">коло лінії кола</string>
     <string name="init_circlecolor_summary">Вибирати колір і непрозорість для лінії круга. Кола використовуються як візуальне представлення мінімального радіусу навколо кешу або фізичної точки пошуку, де немає іншого кешу чи фізичної шляхової точки. (Застосовується до geocaching.com)</string>
     <string name="init_circlefillcolor">коло заливки кольору</string>

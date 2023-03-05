@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Wijzigen favorieten status is mislukt.</string>
     <string name="err_select_logimage_failed">Selecteren van een foto voor het log is mislukt.</string>
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
+    <string name="err_acquire_image_unsupported_format">Afbeeldingsformaat moet van JPEG/JPG, PNG of GIF zijn</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
@@ -948,20 +949,14 @@
     <string name="init_maptrail_length">Geschiedenisspoor max. lengte</string>
     <string name="init_maptrail_length_summary">Stel de maximale lengte van het geschiedenisspoor in (afgedwongen bij het opstarten van c:geo). Standaard waarde is 700 punten - aanpassen aan het beschikbare geheugen.</string>
     <string name="init_summary_maptrail">Wanneer geactiveerd (en GPS is ingeschakeld) bewaart c:geo de geschiedenis van je bewegingen als een spoor en geeft het weer op de kaart.</string>
-    <string name="init_trailcolor">Geschiedenisspoor lijnkleur</string>
-    <string name="init_trailcolor_summary">Selecteer kleur en doorzichtigheid voor geschiedenisspoor</string>
-    <string name="init_trailwidth">Geschiedenisspoor lijndikte</string>
-    <string name="init_trailwidth_summary">Selecteer breedte voor geschiedenisspoor</string>
-    <string name="init_directioncolor">Richting lijnkleur</string>
-    <string name="init_directioncolor_summary">Selecteer kleur en doorzichtigheid voor richting lijn. Richtingslijn toont een rechte lijn naar je geselecteerde navigatiedoel, of het specifieke gerouteerde navigatiepad als routering is ingeschakeld door de BRouter app te installeren.</string>
-    <string name="init_directionwidth">Richting lijndikte</string>
-    <string name="init_directionwidth_summary">Selecteer breedte voor richting lijn</string>
-    <string name="init_routecolor">Individuele route lijnkleur</string>
-    <string name="init_routecolor_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
-    <string name="init_routewidth">Individuele routelijnbreedte</string>
-    <string name="init_routewidth_summary">Selecteer breedte voor individuele routelijn</string>
-    <string name="init_trackcolor">GPX spoor/route lijnkleur</string>
-    <string name="init_trackcolor_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
+    <string name="init_trailappearance">Geschiedenisspoor gewist</string>
+    <string name="init_trailappearance_summary">Selecteer kleur, doorzichtigheid en lijnbreedte voor geschiedenis spoor lijn</string>
+    <string name="init_directionappearance">Richting uiterlijk</string>
+    <string name="init_directionappearance_summary">Selecteer kleur en doorzichtigheid voor richtingslijn. Richtingslijn toont een rechte lijn naar je geselecteerde navigatiedoel, of het specifieke gerouteerde navigatiepad als routering is ingeschakeld door de BRouter app te installeren.</string>
+    <string name="init_routeappearance">Individueel route uiterlijk</string>
+    <string name="init_routeappearance_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
+    <string name="init_trackappearance">GPX track/route uiterlijk</string>
+    <string name="init_trackappearance_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
     <string name="init_trackwidth">GPX spoor/route lijnbreedte</string>
     <string name="init_trackwidth_summary">Selecteer breedte voor GPX spoor/route lijn</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
@@ -1076,6 +1071,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
+    <string name="map_source_google_terrain">Google: Terrein</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Gecombineerd (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kaart copyright</string>
@@ -1239,6 +1235,7 @@
     <string name="cache_personal_note_upload_error">Fout bij uploaden persoonlijke notitie</string>
     <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
     <string name="cache_personal_note_vars_out_of_sync">Variabelen in notities zijn niet gesynchroniseerd (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchroniseer variabelen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Controleer variabelen waarvan de waarde uit notities moet worden overschreven</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Omschrijving</string>
@@ -1305,6 +1302,7 @@
     <string name="cache_menu_navigation_bike">Navigeer (fiets)</string>
     <string name="cache_menu_maps_directions">Google Maps aanwijzigen</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (wandelen)</string>
     <string name="cache_menu_sygic_drive">Sygic (rijden)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -2174,6 +2172,8 @@
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
     <string name="preference_colorpicker_select_color">Kleur selecteren</string>
     <string name="preference_colorpicker_select_opaqueness">Selecteer doorzichtigheid</string>
+    <string name="preference_colorpicker_select_width">Selecteer lijndikte</string>
+    <string name="preference_colorpicker_show_width">breedte: %d</string>
     <string name="reset_to_default">Standaard</string>
     <!-- number input -->
     <string name="number_input_title">Voer een waarde in tussen %1$s en %2$s</string>
@@ -2198,6 +2198,7 @@
     <string name="individual_route_error_toggling_waypoint">fout bij aan-/uit-zetten waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
+    <string name="map_refresh_individual_route">Verversen</string>
     <string name="map_export_individual_route">Exporteer individuele route</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
@@ -2217,6 +2218,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
+    <string name="route_optimization">Route optimalisatie</string>
+    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. Omdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd en rekenkracht op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een acceptabele weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als gewenst herhalen.</string>
+    <string name="initial_route_length">Initiële routelengte: %d</string>
+    <string name="optimized_route_length">Geoptimaliseerde route lengte: %d</string>
+    <string name="route_optimization_out_of_bounds">Routeoptimalisatie werkt voor routes tussen 3 en 100 punten</string>
+    <string name="generating_distance_matrix">Afstandsmatrix genereren</string>
+    <string name="running_route_optimizations">Routes optimaliseren</string>
+    <string name="route_optimization_finished">Route optimalisatie voltooid</string>
     <!-- individual track -->
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
@@ -2225,6 +2234,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
+    <string name="routes_tracks_color">Kleur selecteren</string>
     <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
@@ -2305,6 +2315,7 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_themefile">themabestand</string>
     <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_checking">Controleren beschikbare routeringsgegevens…</string>
     <string name="downloadmap_othermapdownload">andere kaart downloaden</string>
     <string name="downloadmap_otherthemedownload">ander thema downloaden</string>
     <string name="downloadmap_download">downloaden</string>
@@ -2337,6 +2348,7 @@
     <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
     <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
     <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
@@ -2395,7 +2407,10 @@
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
     <string name="cancel">Annuleren</string>
+    <string name="use">Gebruik</string>
+    <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimaliseren</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
     <!-- render theme legend: category "areas" -->
