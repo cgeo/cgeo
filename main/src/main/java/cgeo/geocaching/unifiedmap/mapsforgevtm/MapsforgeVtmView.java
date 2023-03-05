@@ -10,6 +10,8 @@ import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
+import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -111,6 +113,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
         return new MapsforgeGeoitemLayer(mMap);
+    }
+
+    @Override
+    protected IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
+        return new MapsforgeVtmGeoItemLayer(mMap);
     }
 
     /**

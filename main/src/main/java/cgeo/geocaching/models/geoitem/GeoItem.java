@@ -27,5 +27,13 @@ public interface GeoItem {
         return vp == null ? null : vp.getCenter();
     }
 
+    boolean isValid();
+
+    boolean intersects(Viewport box, float yPerLat, float xPerLon);
+
+    default boolean intersects(final Viewport box) {
+        return intersects(box, 0, 0);
+    }
+
 
 }

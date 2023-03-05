@@ -43,7 +43,7 @@ public class GeoJsonUtilsTest {
                         "}");
         assertThat(list).hasSize(1);
         final GeoPrimitive go = list.get(0);
-        assertThat(go.getType()).isEqualTo(GeoItem.GeoType.MARKER);
+        assertThat(go.getType()).isEqualTo(GeoItem.GeoType.CIRCLE);
         assertThat(go.getPoints()).hasSize(1);
         assertThat(go.getPoints().get(0)).isEqualTo(new Geopoint(45.1, 10.2));
         assertThat(go.getStyle().getStrokeColor()).isEqualTo(7 + (int) (1000 * 0.5f));

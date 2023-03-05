@@ -15,6 +15,8 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
@@ -79,6 +81,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private final GoogleMapObjects historyObjs;
     private final GoogleMapObjects routeObjs;
     private final GoogleMapObjects trackObjs;
+
+    private final GeoItemTestLayer testLayer = new GeoItemTestLayer();
     private final GoogleMapView mapView;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
@@ -103,6 +107,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
+        testLayer.init(new GoogleV2GeoItemLayer(googleMap));
         this.mapView = mapView;
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;

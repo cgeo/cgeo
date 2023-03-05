@@ -913,4 +913,16 @@ public final class ImageUtils {
         //Workaround END
     }
 
+    @Nullable
+    public static Bitmap rotateBitmap(@Nullable final Bitmap bm, final float angleInDegree) {
+        if (bm == null || angleInDegree == 0f || angleInDegree % 360 == 0f) {
+            return bm;
+        }
+        final int h = bm.getHeight();
+        final int w = bm.getWidth();
+        final Matrix matrix = new Matrix();
+        matrix.setRotate(angleInDegree, w / 2f, h / 2f);
+        return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
+    }
+
 }

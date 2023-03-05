@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,10 +32,12 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     private final IMapChangeExecutor<K, V, C> changeExecutor;
 
+    private final AtomicBoolean isDestroyed = new AtomicBoolean(false);
+
     //Command process queue
     private final Queue<Runnable> changeCommandQueue = new LinkedList<>();
     private final CommandRunner commandRunner = new CommandRunner();
-    private boolean commandExecutionRequested = false;
+    private boolean commandExecutionRunRequested = false;
     private final Lock commandLock = new ReentrantLock();
 
     //Runner instance which performs updates on map asynchronous
@@ -59,7 +62,7 @@ public class AsynchronousMapWrapper<K, V, C> {
     private final Lock lock = new ReentrantLock();
 
     //Executor of commands.
-    protected interface IMapChangeExecutor<K, V, C> {
+    public interface IMapChangeExecutor<K, V, C> {
         C add(K key, V value);
         default C replace(K key, V oldValue, C oldContext, V newValue) {
             remove(key, oldValue, oldContext);
@@ -74,6 +77,10 @@ public class AsynchronousMapWrapper<K, V, C> {
         }
         default boolean continueMapChangeExecutions(long startTime, int queueLength) {
             return true;
+        }
+
+        default void destroy() {
+            //empty on purpose
         }
     }
 
@@ -97,6 +104,10 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     public void add(final K key) {
         put(key, null);
+    }
+
+    public void remove(final K key) {
+        requestChange(() -> removeSingle(key));
     }
 
     /** removes objects to this Set */
@@ -123,10 +134,32 @@ public class AsynchronousMapWrapper<K, V, C> {
         });
     }
 
+    public boolean isDestroyed() {
+        return isDestroyed.get();
+    }
+
+    public void destroy() {
+        isDestroyed.set(true);
+        commandLock.lock();
+        try {
+            changeCommandQueue.clear();
+            commandExecutionRunRequested = false;
+        } finally {
+            commandLock.unlock();
+        }
+        requestChange(() -> {
+            //clear all existing requests to add/remove
+            requestedToAdd.clear();
+            requestedToRemove.clear();
+            mapChangeProcessQueue.clear();
+            mapChangeRequested = false;
+        });
+        changeExecutor.destroy();
+    }
+
     public void replace(final Collection<? extends K> newKeys) {
         replace(newKeys, k -> null);
     }
-
 
     /**
      * replaces objects in this Map completely with given objects
@@ -214,23 +247,12 @@ public class AsynchronousMapWrapper<K, V, C> {
         commandLock.lock();
         try {
             changeCommandQueue.add(changeAction);
-            if (!commandExecutionRequested) {
+            if (!commandExecutionRunRequested && !isDestroyed.get()) {
+                commandExecutionRunRequested = true;
                 this.changeExecutor.runCommandChain(this.commandRunner);
-                commandExecutionRequested = true;
             }
         } finally {
             commandLock.unlock();
-        }
-
-        lock.lock();
-        try {
-            changeAction.run();
-            if (!mapChangeRequested) {
-                mapChangeRequested = true;
-                changeExecutor.runMapChanges(mapChangeRunner);
-            }
-        } finally {
-            lock.unlock();
         }
     }
 
@@ -238,7 +260,7 @@ public class AsynchronousMapWrapper<K, V, C> {
         lock.lock();
         try {
             changeAction.run();
-            if (!mapChangeRequested) {
+            if (!mapChangeRequested && !isDestroyed.get()) {
                 mapChangeRequested = true;
                 changeExecutor.runMapChanges(mapChangeRunner);
             }
@@ -253,7 +275,7 @@ public class AsynchronousMapWrapper<K, V, C> {
         private boolean processQueue() {
             final long time = System.currentTimeMillis();
             Pair<K, Boolean> request;
-            while ((request = mapChangeProcessQueue.poll()) != null) {
+            while ((request = mapChangeProcessQueue.poll()) != null && !isDestroyed.get()) {
                 if (request.second) {
                     //ADD request
                     processAddCommand(request.first);
@@ -272,6 +294,9 @@ public class AsynchronousMapWrapper<K, V, C> {
 
         //CALL ONLY WITH ACQUIRED LOCK!!!
         private void processRemoveCommand(final K key) {
+            if (isDestroyed.get()) {
+                return;
+            }
             final boolean stillValid = requestedToRemove.remove(key);
             //if stillValid = false, then the process command was outdated by later changes to requestedToRemove -> in this case ignore it
             if (stillValid) {
@@ -287,6 +312,9 @@ public class AsynchronousMapWrapper<K, V, C> {
         }
         //CALL ONLY WITH ACQUIRED LOCK!!!
         private void processAddCommand(final K key) {
+            if (isDestroyed.get()) {
+                return;
+            }
             final boolean stillValid = requestedToAdd.containsKey(key);
             //if stillValid = false, then the process command was outdated by later changes to requestedToRemove -> in this case ignore it
             if (stillValid) {
@@ -305,9 +333,10 @@ public class AsynchronousMapWrapper<K, V, C> {
 
         @Override
         public void run() {
+            Log.iForce("AsyncMapWrapper: run Thread");
             lock.lock();
             try {
-                if (mapChangeRequested && processQueue()) {
+                if (!isDestroyed.get() && mapChangeRequested && processQueue()) {
                     // repaint successful, set flag to false
                     mapChangeRequested = false;
                 }
@@ -327,7 +356,7 @@ public class AsynchronousMapWrapper<K, V, C> {
                 try {
                     changeAction = changeCommandQueue.poll();
                     if (changeAction == null) {
-                        commandExecutionRequested = false;
+                        commandExecutionRunRequested = false;
                     }
                 } finally {
                     commandLock.unlock();
