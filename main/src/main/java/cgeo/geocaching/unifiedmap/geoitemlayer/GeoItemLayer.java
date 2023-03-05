@@ -7,8 +7,11 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsynchronousMapWrapper;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 
+import android.graphics.Point;
 import android.util.Pair;
 
 import java.util.HashMap;
@@ -24,6 +27,7 @@ public class GeoItemLayer<K> {
     //private final Lock lock = new ReentrantLock(); //-> locking is done via synchronized
 
     private AsynchronousMapWrapper<MapWriterKey<K>, GeoPrimitive, Object> mapWriter;
+    private IProviderGeoItemLayer<?> providerLayer = null;
 
     public static final IProviderGeoItemLayer<Object> NOOP_GEOITEM_LAYER = new IProviderGeoItemLayer<Object>() {
 
@@ -35,6 +39,11 @@ public class GeoItemLayer<K> {
         @Override
         public void destroy() {
             //do nothing
+        }
+
+        @Override
+        public Func1<Geopoint, Point> getScreenCoordCalculator() {
+            return null;
         }
 
         @Override
@@ -76,7 +85,7 @@ public class GeoItemLayer<K> {
 
     private static class MapWriter<T> implements AsynchronousMapWrapper.IMapChangeExecutor<MapWriterKey<T>, GeoPrimitive, Object> {
 
-        private final IProviderGeoItemLayer<Object> providerLayer;
+        public final IProviderGeoItemLayer<Object> providerLayer;
 
         @SuppressWarnings("unchecked")
         MapWriter(final IProviderGeoItemLayer<?> providerLayer) {
@@ -142,12 +151,14 @@ public class GeoItemLayer<K> {
             this.mapWriter.destroy();
             this.mapWriter = null;
         }
+        this.providerLayer = null;
     }
 
     public synchronized void setProvider(final IProviderGeoItemLayer<?> newProviderLayer, final int zLevel) {
         destroy();
         final IProviderGeoItemLayer<?>  providerLayer = newProviderLayer == null ? NOOP_GEOITEM_LAYER : newProviderLayer;
         providerLayer.init(zLevel);
+        this.providerLayer = providerLayer;
         this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter<>(providerLayer));
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (entry.getValue().second) {
@@ -184,6 +195,15 @@ public class GeoItemLayer<K> {
                 removeFromMap(key, value.first);
             }
         }
+    }
+
+    public synchronized GeoItem get(final K key) {
+        final Pair<GeoItem, Boolean> entry = itemMap.get(key);
+        return entry == null ? null : entry.first;
+    }
+
+    public synchronized Set<K> keySet() {
+        return new HashSet<>(itemMap.keySet());
     }
 
     private void putToMap(final K key, final GeoItem item, final GeoItem previousItem) {
@@ -246,21 +266,26 @@ public class GeoItemLayer<K> {
         return vpBuilder.getViewport();
     }
 
-    public synchronized Set<K> getTouched(final Geopoint gp, final Viewport mapShown, final int viewWidth, final int viewHeight) {
-        final int bb = 20;
-        final Viewport box = new Viewport(
-                new Geopoint(gp.getLatitudeE6() - bb, gp.getLongitudeE6()  - bb),
-                new Geopoint(gp.getLatitudeE6() + bb, gp.getLongitudeE6()  + bb));
-
-        final float yPerLatL6 = viewHeight / (float) Math.abs(mapShown.bottomLeft.getLatitudeE6() - mapShown.topRight.getLatitudeE6());
-        final float xPerLonL6 = viewWidth / (float) Math.abs(mapShown.bottomLeft.getLongitudeE6() - mapShown.topRight.getLongitudeE6());
-
-        final Set<K> result = new HashSet<>();
-        for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
-            if (entry.getValue().first.intersects(box, yPerLatL6, xPerLonL6)) {
-                result.add(entry.getKey());
+    public synchronized Set<K> getTouched(final Geopoint tapped) {
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GeoItemLayer.getTouched")) {
+            final Func1<Geopoint, Point> toCoordFct;
+            final IProviderGeoItemLayer<?> pl = this.providerLayer;
+            if (pl != null) {
+                toCoordFct = pl.getScreenCoordCalculator();
+                Log.d("Touched: " + tapped + " at " + (toCoordFct == null ? "-" : toCoordFct.call(tapped)));
+            } else {
+                toCoordFct = null;
             }
+            cLog.add("scc=" + (toCoordFct != null));
+
+            final Set<K> result = new HashSet<>();
+            for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
+                if (entry.getValue().first.touches(tapped, toCoordFct)) {
+                    result.add(entry.getKey());
+                }
+            }
+            cLog.add("t:" + result.size() + "/" + this, itemMap.size());
+            return result;
         }
-        return result;
     }
 }

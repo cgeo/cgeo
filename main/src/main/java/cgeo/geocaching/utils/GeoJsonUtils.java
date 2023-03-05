@@ -140,7 +140,7 @@ public class GeoJsonUtils {
     }
 
     private static GeoStyle toGeoStyle(final GeoJsonProperties props) {
-        return new GeoStyle.Builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
+        return GeoStyle.builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
     }
 
     private static GeoJsonProperties parseProperties(final JSONObject json) {

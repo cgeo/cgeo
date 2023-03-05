@@ -790,8 +790,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapView.getLayerManager().getLayers().add(this.historyLayer);
 
         //Test Layer
-        testItemLayer.init(new MapsforgeV6GeoItemLayer(this.mapView.getLayerManager()));
-
+        testItemLayer.init(new MapsforgeV6GeoItemLayer(this.mapView.getLayerManager(), this.mapView.getMapViewProjection()));
 
         // RouteLayer
         this.routeLayer = new RouteLayer(realRouteDistance -> {
@@ -831,7 +830,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         GeoitemLayer.resetColors();
 
         // TapHandler
-        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
+        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler(), this.testItemLayer, this);
         this.mapView.getLayerManager().getLayers().add(this.tapHandlerLayer);
 
         // Caches bundle

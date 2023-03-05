@@ -2,7 +2,10 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.utils.functions.Func1;
 
+import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -102,29 +105,40 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         }
     }
 
-    public boolean intersects(final Viewport box, final float yPerLat, final float xPerLon) {
+    @Override
+    public boolean touches(@NonNull final Geopoint tapped, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
+        if (!isValid()) {
+            return false;
+        }
+
+        final float lineWidthDp = GeoStyle.getStrokeWidth(getStyle());
         switch (getType()) {
-            case MARKER:
-                if (box.contains(getPoints().get(0))) {
+            case POLYLINE:
+                if (GeoItemUtils.touchesMultiLine(getPoints(), tapped, lineWidthDp, toScreenCoordFunc)) {
+                    return true;
+                }
+                break;
+            case POLYGON:
+                if (GeoItemUtils.touchesPolygon(getPoints(), tapped, lineWidthDp, toScreenCoordFunc)) {
+                    return true;
+                }
+                break;
+            case CIRCLE:
+                final boolean isFilled = Color.alpha(GeoStyle.getFillColor(getStyle())) > 0;
+                if (GeoItemUtils.touchesCircle(tapped, getCenter(), getRadius(), lineWidthDp, isFilled, toScreenCoordFunc)) {
                     return true;
                 }
                 break;
             default:
-                //do nothing
                 break;
         }
 
-        //handle icon
-        if (yPerLat > 0 && xPerLon > 0 && icon != null) {
-            final Viewport iconViewport = icon.getViewport(getPoints().get(0), yPerLat, xPerLon);
-            if (iconViewport != null && iconViewport.intersects(box)) {
-                return true;
-            }
+        if (getIcon() != null) {
+            return getIcon().touchesIcon(tapped, getCenter(), toScreenCoordFunc);
         }
 
         return false;
     }
-
 
     public Builder buildUpon() {
         return new Builder().setType(type).addPoints(points).setIcon(icon).setRadius(radius).setStyle(style);
@@ -178,7 +192,26 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return getType() + ": " + getPoints().size() + "points in " + getViewport();
+        final StringBuilder sb = new StringBuilder(String.valueOf(getType()));
+        if (!isValid()) {
+            sb.append("!");
+        }
+        sb.append(":");
+        switch (getType()) {
+            case POLYGON:
+            case POLYLINE:
+                sb.append(getPoints().size()).append(" pts [").append(getViewport()).append("]");
+                break;
+            case CIRCLE:
+                sb.append(getCenter()).append(",r:").append(getRadius());
+                break;
+            default:
+                break;
+        }
+        if (getIcon() != null) {
+            sb.append(",icon[").append(getCenter()).append("]:").append(getIcon());
+        }
+        return sb.toString();
     }
 
     //implements Builder

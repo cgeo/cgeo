@@ -772,6 +772,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public void onTap(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
         Log.e("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
 
+        if (handleTestLayerTapped(Geopoint.forE6(latitudeE6, longitudeE6))) {
+            return;
+        }
+
         // numbers of cache markers fitting into width/height
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         final View v = tileProvider.getMap().mMapView;
@@ -826,6 +830,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             }
         }
 
+    }
+
+    private boolean handleTestLayerTapped(final Geopoint tapped) {
+        if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
+            return false;
+        }
+
+        return tileProvider.getMap().getTestLayer().handleTap(this, tapped);
     }
 
     private void handleTap(final RouteItem item, final boolean isLongTap) {

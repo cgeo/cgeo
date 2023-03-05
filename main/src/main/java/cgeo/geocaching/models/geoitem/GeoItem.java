@@ -2,6 +2,9 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.utils.functions.Func1;
+
+import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +32,6 @@ public interface GeoItem {
 
     boolean isValid();
 
-    boolean intersects(Viewport box, float yPerLat, float xPerLon);
-
-    default boolean intersects(final Viewport box) {
-        return intersects(box, 0, 0);
-    }
-
+    boolean touches(@NonNull Geopoint tapped, @Nullable Func1<Geopoint, Point> toScreenCoordFunc);
 
 }

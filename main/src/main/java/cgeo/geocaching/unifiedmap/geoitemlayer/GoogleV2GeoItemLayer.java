@@ -8,12 +8,16 @@ import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,7 +50,14 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
 
     @Override
     public void init(final int zLevel) {
+
         this.zLevel = zLevel;
+        if (map != null) {
+            map.setOnMarkerClickListener(m -> {
+                Log.iForce("GoogleV2: Clicked on marker: " + m);
+                return true;
+            });
+        }
     }
 
     @Override
@@ -77,7 +88,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
                         .strokeColor(strokeColor)
                         .fillColor(fillColor)
                         .center(GP_CONVERTER.to(item.getCenter()))
-                        .radius(item.getRadius())
+                        .radius(item.getRadius() * 1000)
                         .zIndex(zLevel));
                 break;
             case POLYGON:
@@ -128,6 +139,12 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
         } else if (context instanceof Marker) {
             ((Marker) context).remove();
         }
+    }
+
+    @Override
+    public Func1<Geopoint, Point> getScreenCoordCalculator() {
+        final Projection proj = map.getProjection();
+        return gp -> proj.toScreenLocation(GP_CONVERTER.to(gp));
     }
 
 }
