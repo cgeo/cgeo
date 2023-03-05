@@ -108,6 +108,7 @@ public class ConnectorFactoryTest {
 
     @Test
     public void testGetTrackableFromURL() throws Exception {
+        ConnectorFactory.updateTBConnectorsList(true); // make sure GK connector is included
         assertThat(ConnectorFactory.getTrackableFromURL("https://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("https://www.geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
         assertThat(ConnectorFactory.getTrackableFromURL("https://geokrety.org/konkret.php?id=30970")).isEqualTo("GK78FA");
