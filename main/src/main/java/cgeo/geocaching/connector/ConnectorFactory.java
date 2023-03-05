@@ -88,11 +88,11 @@ public final class ConnectorFactory {
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
 
     @NonNull
-    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = getTbConnectors();
+    private static Collection<TrackableConnector> trackableConnectors = getTbConnectors(false);
 
-    private static Collection<TrackableConnector> getTbConnectors() {
+    private static Collection<TrackableConnector> getTbConnectors(final boolean forceAllConnectors) {
         final List<TrackableConnector> connectors = new ArrayList<>();
-        if (Settings.isGeokretyConnectorActive()) {
+        if (forceAllConnectors || Settings.isGeokretyConnectorActive()) {
             connectors.add(new GeokretyConnector());
         }
         // travel bugs second to last, as their secret codes overlap with other connectors
@@ -100,6 +100,11 @@ public final class ConnectorFactory {
         // unknown trackable connector must be last
         connectors.add(UNKNOWN_TRACKABLE_CONNECTOR);
         return Collections.unmodifiableCollection(connectors);
+    }
+
+    /* being used in tests only */
+    public static void updateTBConnectorsList(final boolean forceAllConnectors) {
+        trackableConnectors = getTbConnectors(forceAllConnectors);
     }
 
     @NonNull
@@ -209,7 +214,7 @@ public final class ConnectorFactory {
     }
 
     public static boolean anyTrackableConnectorActive() {
-        for (final TrackableConnector conn : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector conn : trackableConnectors) {
             if (conn.isActive()) {
                 return true;
             }
@@ -271,7 +276,7 @@ public final class ConnectorFactory {
 
     @NonNull
     public static TrackableConnector getTrackableConnector(final String geocode, final TrackableBrand brand) {
-        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector connector : trackableConnectors) {
             if (connector.canHandleTrackable(geocode, brand)) {
                 return connector;
             }
@@ -286,7 +291,7 @@ public final class ConnectorFactory {
      */
     public static List<TrackableConnector> getGenericTrackablesConnectors() {
         final List<TrackableConnector> trackableConnectors = new ArrayList<>();
-        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector connector : ConnectorFactory.trackableConnectors) {
             if (connector.isActive()) {
                 trackableConnectors.add(connector);
             }
@@ -398,7 +403,7 @@ public final class ConnectorFactory {
 
     @NonNull
     public static Collection<TrackableConnector> getTrackableConnectors() {
-        return TRACKABLE_CONNECTORS;
+        return trackableConnectors;
     }
 
     /**
@@ -411,7 +416,7 @@ public final class ConnectorFactory {
         if (url == null) {
             return null;
         }
-        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector connector : trackableConnectors) {
             final String geocode = connector.getTrackableCodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return geocode;
@@ -430,7 +435,7 @@ public final class ConnectorFactory {
         if (url == null) {
             return TrackableTrackingCode.EMPTY;
         }
-        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+        for (final TrackableConnector connector : trackableConnectors) {
             final String trackableCode = connector.getTrackableTrackingCodeFromUrl(url);
             if (StringUtils.isNotBlank(trackableCode)) {
                 return new TrackableTrackingCode(trackableCode, connector.getBrand());

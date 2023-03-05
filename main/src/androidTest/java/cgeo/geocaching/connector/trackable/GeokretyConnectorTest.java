@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
@@ -17,6 +18,7 @@ public class GeokretyConnectorTest  {
 
     @Test
     public void testCanHandleTrackable() {
+        ConnectorFactory.updateTBConnectorsList(true); // make sure GK connector is included
         assertThat(getConnector().canHandleTrackable("GK82A2")).isTrue();
         assertThat(getConnector().canHandleTrackable("TB1234")).isFalse();
         assertThat(getConnector().canHandleTrackable("UNKNOWN")).isFalse();
