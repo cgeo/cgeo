@@ -88,11 +88,19 @@ public final class ConnectorFactory {
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
 
     @NonNull
-    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector>asList(
-            new GeokretyConnector(),
-            TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
-            UNKNOWN_TRACKABLE_CONNECTOR // must be last
-    ));
+    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = getTbConnectors();
+
+    private static Collection<TrackableConnector> getTbConnectors() {
+        final List<TrackableConnector> connectors = new ArrayList<>();
+        if (Settings.isGeokretyConnectorActive()) {
+            connectors.add(new GeokretyConnector());
+        }
+        // travel bugs second to last, as their secret codes overlap with other connectors
+        connectors.add(TravelBugConnector.getInstance());
+        // unknown trackable connector must be last
+        connectors.add(UNKNOWN_TRACKABLE_CONNECTOR);
+        return Collections.unmodifiableCollection(connectors);
+    }
 
     @NonNull
     private static final Collection<ISearchByViewPort> searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
