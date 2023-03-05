@@ -7,6 +7,7 @@
 - Uusi: Yksilöllinen reitin optimointi (kokeellinen)
 - New: Support for "Google: Terrain" maps
 - New: Setting line-width per track
+- New: Hide map's action bar on demand (tap on empty space on map)
 
 ### Kätkön tiedot
 
