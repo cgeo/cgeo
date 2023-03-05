@@ -7,6 +7,7 @@
 - Neu: Optimierung individueller Routen (experimentell)
 - Neu: Unterstützung für "Google: Gelände" Karten
 - Neu: Einstellen der Linienbreite pro Track
+- New: Hide map's action bar on demand (tap on empty space on map)
 
 ### Cache-Details
 
