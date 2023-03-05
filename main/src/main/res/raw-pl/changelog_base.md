@@ -7,6 +7,7 @@
 - Nowość: Optymalizacja trasy (opcja eksperymentalna)
 - Nowość: Wsparcie dla map „Google: Teren”
 - Nowość: Ustawianie szerokości linii dla śladów
+- New: Hide map's action bar on demand (tap on empty space on map)
 
 ### Szczegóły skrytki
 
