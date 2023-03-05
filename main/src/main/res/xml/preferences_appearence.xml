@@ -42,7 +42,7 @@
         android:summary="@string/init_summary_units"
         android:title="@string/init_units"
         app:iconSpaceReserved="false" />
-    <MultiSelectListPreference
+    <Preference
         android:key="@string/pref_quicklaunchitems"
         android:title="@string/init_quicklaunchitems"
         android:summary="@string/init_summary_quicklaunchitems"

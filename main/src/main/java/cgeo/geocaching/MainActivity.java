@@ -82,7 +82,7 @@ import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -329,12 +329,13 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dimSize, dimSize);
         lp.setMargins(dimMargin, 0, dimMargin, 0);
 
-        final Set<String> quicklaunchitems = Settings.getQuicklaunchitems();
+        final List<Integer> quicklaunchitems = Settings.getInfoItems(R.string.pref_quicklaunchitems);
         binding.quicklaunchitems.removeAllViews();
         binding.quicklaunchitems.setVisibility(View.GONE);
-        for (QuickLaunchItem item : QuickLaunchItem.values()) {
-            if (quicklaunchitems.contains(item.name()) && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> launchQuickLaunchItem(item), getString(item.info));
+        for (int i : quicklaunchitems) {
+            final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
+            if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
+                addButton(item.iconRes, lp, () -> launchQuickLaunchItem(item.getId()), getString(item.getTitleResId()));
             }
         }
 
@@ -355,27 +356,27 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         binding.quicklaunchitems.setVisibility(View.VISIBLE);
     }
 
-    private void launchQuickLaunchItem(final QuickLaunchItem which) {
-        if (which == QuickLaunchItem.GOTO) {
+    private void launchQuickLaunchItem(final int which) {
+        if (which == QuickLaunchItem.VALUES.GOTO.id) {
             InternalConnector.assertHistoryCacheExists(this);
             CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-        } else if (which == QuickLaunchItem.POCKETQUERY) {
+        } else if (which == QuickLaunchItem.VALUES.POCKETQUERY.id) {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
             }
-        } else if (which == QuickLaunchItem.BOOKMARKLIST) {
+        } else if (which == QuickLaunchItem.VALUES.BOOKMARKLIST.id) {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, BookmarkListActivity.class));
             }
-        } else if (which == QuickLaunchItem.SETTINGS) {
+        } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
-        } else if (which == QuickLaunchItem.BACKUPRESTORE) {
+        } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
             SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
-        } else if (which == QuickLaunchItem.MANUAL) {
+        } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
             ShareUtils.openUrl(this, getString(R.string.manual_link_full));
-        } else if (which == QuickLaunchItem.FAQ) {
+        } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
             ShareUtils.openUrl(this, getString(R.string.faq_link_full));
-        } else if (which == QuickLaunchItem.VIEWSETTINGS) {
+        } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {
             startActivity(new Intent(this, ViewSettingsActivity.class));
         } else {
             throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");

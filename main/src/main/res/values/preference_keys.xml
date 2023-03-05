@@ -156,7 +156,7 @@
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
     <string translatable="false" name="pref_units_imperial">units</string>
-    <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems</string>
+    <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
 
 
     <!-- ============================================================================================================================================================================== -->

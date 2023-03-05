@@ -746,6 +746,7 @@
             android:label="@string/compass_title" >
         </activity>
         <activity android:name=".maps.routing.RouteSortActivity" />
+        <activity android:name=".ui.CheckableItemSelectActivity" />
         <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"

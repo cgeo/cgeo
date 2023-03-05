@@ -1971,12 +1971,27 @@ public class Settings {
         putString(R.string.pref_selected_language, language);
     }
 
-    public static Set<String> getQuicklaunchitems() {
-        final Set<String> empty = Collections.emptySet();
-        if (sharedPrefs == null) {
-            return empty;
+    public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey) {
+        final ArrayList<Integer> result = new ArrayList<>();
+        for (String s : getString(prefKey, "").split(",")) {
+            try {
+                result.add(Integer.parseInt(s));
+            } catch (NumberFormatException ignore) {
+                //
+            }
         }
-        return sharedPrefs.getStringSet(getKey(R.string.pref_quicklaunchitems), empty);
+        return result;
+    }
+
+    public static void setInfoItems(final @StringRes int prefKey, final ArrayList<Integer> items) {
+        final StringBuilder s = new StringBuilder();
+        for (int i : items) {
+            if (s.length() > 0) {
+                s.append(",");
+            }
+            s.append(i);
+        }
+        putString(prefKey, s.toString());
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
