@@ -1,7 +1,7 @@
 ##
 - Oprava: Rozšíření sloupce s popisem logu v režimu na šířku
 - Oprava: Zřetelnější hlášení o chybě formátu obrázku
-- Fix: User-created waypoints not being displayed on OSM map
+- Oprava: Trasové body vytvořené uživatelem se nezobrazují na mapě OSM
 
 ##
 - Oprava: Přeskočení některých uživatelsky vytvořených trasových bodů při importu GPX
