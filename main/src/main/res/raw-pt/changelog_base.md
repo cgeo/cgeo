@@ -15,3 +15,4 @@
 - Correcção: Botão de pré-visualização exibido apenas com a configuração de filtro "mostrar todos" na lista de PQ
 - Novo: Adicionado Cruiser como aplicação de navegação (requer Cruiser 3.0.9 ou superior)
 - Novo: Importar as listas de favoritos de geocaching.com a partir de hiperligações
+- New: Allow opening recently viewed caches as list
