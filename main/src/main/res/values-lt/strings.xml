@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgstamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti vaizdo slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Vaizdo gauti nepavyko.</string>
+    <string name="err_acquire_image_unsupported_format">Vaizdo formatas turi būti JPEG/JPG, PNG arba GIF</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
