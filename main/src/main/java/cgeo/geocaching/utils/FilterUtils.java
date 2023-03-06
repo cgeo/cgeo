@@ -79,10 +79,11 @@ public class FilterUtils {
     /**
      * filterView must exist
      */
-    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
+    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity, final boolean showSpacer) {
         final View filterView = activity.findViewById(R.id.filter_bar);
         filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());
         filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
+        activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
     }
 
     public static void toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {

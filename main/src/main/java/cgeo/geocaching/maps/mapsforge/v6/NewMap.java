@@ -346,7 +346,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(this, this, true);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
