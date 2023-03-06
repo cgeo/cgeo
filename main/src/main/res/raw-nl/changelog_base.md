@@ -5,9 +5,9 @@
 - Nieuw: Update kaart lijst tijdens ontvangen kaart bestand
 - Wijziging: Gedownloade map/thema niet automatisch installeren
 - Nieuw: Individuele route optimalisatie (experimenteel)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
+- Nieuw: Ondersteuning voor "Google: Terrein" kaarten
+- Nieuw: Lijnbreedte instellen per track
+- Nieuw: Verberg op verzoek de actiebalk van de kaart (klik op lege ruimte op de kaart)
 
 ### Cache details
 
@@ -15,3 +15,4 @@
 - Oplossing: Voorbeeldknop alleen weergegeven met filterinstelling "alles weergeven" in PQ lijst
 - Nieuw: Voeg Cruiser toe als navigatie-app (vereist Cruiser 3.0.9 of nieuwer)
 - Nieuw: Importeer geocaching.com bookmarklijsten van links
+- Nieuw: Het openen van onlangs bekeken caches toestaan als lijst
