@@ -56,7 +56,11 @@ public abstract class AbstractUnifiedMapView<T> {
         currentTileProvider = newSource;
     }
 
-    protected abstract AbstractGeoitemLayer createGeoitemLayers(AbstractTileProvider tileProvider);
+    public GeoItemTestLayer getTestLayer() {
+        return testLayer;
+    }
+
+    protected abstract AbstractGeoitemLayer<?> createGeoitemLayers(AbstractTileProvider tileProvider);
 
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;

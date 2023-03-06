@@ -8,6 +8,7 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -33,16 +34,19 @@ import org.mapsforge.map.layer.overlay.Circle;
 import org.mapsforge.map.layer.overlay.Marker;
 import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
+import org.mapsforge.map.util.MapViewProjection;
 
 public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLayer<Pair<Layer, Layer>> {
 
     private LayerManager layerManager;
+    private MapViewProjection projection;
 
     public final List<Layer> layers = new ArrayList<>();
     public final Lock layerLock = new ReentrantLock();
 
-    public MapsforgeV6GeoItemLayer(final LayerManager layerManager) {
+    public MapsforgeV6GeoItemLayer(final LayerManager layerManager, final MapViewProjection projection) {
         this.layerManager = layerManager;
+        this.projection = projection;
     }
 
     @Override
@@ -168,4 +172,13 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             layerLock.unlock();
         }
     }
+
+    @Override
+    public Func1<Geopoint, android.graphics.Point> getScreenCoordCalculator() {
+        return gp -> {
+            final Point pt = projection.toPixels(latLong(gp));
+            return new android.graphics.Point((int) pt.x, (int) pt.y);
+        };
+    }
+
 }

@@ -1,8 +1,11 @@
 package cgeo.geocaching.models.geoitem;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 
+import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -82,9 +85,10 @@ public class GeoGroup implements GeoItem, Parcelable {
         return true;
     }
 
-        public boolean intersects(final Viewport box, final float yPerLat, final float xPerLon) {
+    @Override
+    public boolean touches(@NonNull final Geopoint tapped, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
         for (GeoItem item : getItems()) {
-            if (item.intersects(box, yPerLat, xPerLon)) {
+            if (item.touches(tapped, toScreenCoordFunc)) {
                 return true;
             }
         }

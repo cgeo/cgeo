@@ -81,7 +81,11 @@ public class GeoStyle implements Parcelable {
     }
 
     public Builder buildUpon() {
-        return new Builder().setStrokeColor(strokeColor).setStrokeWidth(strokeWidth).setFillColor(fillColor);
+        return builder().setStrokeColor(strokeColor).setStrokeWidth(strokeWidth).setFillColor(fillColor);
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     //equals/hashCode
@@ -111,6 +115,10 @@ public class GeoStyle implements Parcelable {
         @ColorInt @Nullable private Integer strokeColor;
         @Nullable private Float strokeWidth;
         @ColorInt @Nullable public Integer fillColor;
+
+        private Builder() {
+            //limit creation
+        }
 
         public Builder setStrokeColor(@ColorInt @Nullable final Integer strokeColor) {
             this.strokeColor = strokeColor;

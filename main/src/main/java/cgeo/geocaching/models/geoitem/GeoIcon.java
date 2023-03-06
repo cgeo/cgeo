@@ -1,16 +1,19 @@
 package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
+
+import io.reactivex.rxjava3.annotations.NonNull;
 
 /**
  * Immutable value class for GeoItem Style info. Includes some helpers to deal with these objects.
@@ -21,6 +24,10 @@ public class GeoIcon implements Parcelable {
     private final float xAnchor;
     private final float yAnchor;
     private final float angle;
+
+    //lazy initialized
+    private int bmWidth = -1;
+    private int bmHeight = -1;
 
     /**
      * complex image caches etc may implement this interface on their own
@@ -89,6 +96,12 @@ public class GeoIcon implements Parcelable {
         public int hashCode() {
             return Objects.hashCode(bitmap);
         }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px");
+        }
     }
 
     /**
@@ -130,7 +143,9 @@ public class GeoIcon implements Parcelable {
 
     @Nullable
     public Bitmap getRotatedBitmap() {
-        return bitmapProvider == null ? null : bitmapProvider.getRotatedBitmap(getAngle());
+        final Bitmap bm = bitmapProvider == null ? null : bitmapProvider.getRotatedBitmap(getAngle());
+        ensureBmSizes(bm);
+        return bm;
     }
 
 
@@ -146,19 +161,31 @@ public class GeoIcon implements Parcelable {
         return angle;
     }
 
-    public Viewport getViewport(final Geopoint base, final float yPerLat, final float xPerLon) {
-        final Bitmap bm = getBitmap();
-        if (bm == null) {
-            return null;
+    public boolean touchesIcon(final Geopoint tap, final Geopoint iconBase, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
+        if (tap == null || iconBase == null || toScreenCoordFunc == null) {
+            return false;
         }
-        final int h = bm.getHeight();
-        final int w = bm.getWidth();
-        final int minLat = base.getLatitudeE6() + (int) (h * (yAnchor - 0.5f) / yPerLat);
-        final int maxLat = base.getLatitudeE6() + (int) (h * (yAnchor + 0.5f) / yPerLat);
-        final int minLon = base.getLongitudeE6() + (int) (w * (xAnchor - 0.5f) / xPerLon);
-        final int maxLon = base.getLongitudeE6() + (int) (w * (xAnchor + 0.5f) / xPerLon);
+        ensureBmSizes();
+        return GeoItemUtils.touchesPixelArea(tap, iconBase, bmWidth, bmHeight, xAnchor, yAnchor, toScreenCoordFunc);
+    }
 
-        return new Viewport(new Geopoint(minLat, minLon), new Geopoint(maxLat, maxLon));
+    private void ensureBmSizes() {
+        if (bmHeight >= 0) {
+            return;
+        }
+        ensureBmSizes(getRotatedBitmap());
+    }
+    private void ensureBmSizes(final Bitmap bm) {
+        if (bmHeight >= 0) {
+            return;
+        }
+        if (bm == null) {
+            bmHeight = 0;
+            bmWidth = 0;
+        } else {
+            bmHeight = bm.getHeight();
+            bmWidth = bm.getWidth();
+        }
     }
 
     public static Builder builder() {
@@ -188,6 +215,12 @@ public class GeoIcon implements Parcelable {
     @Override
     public int hashCode() {
         return (bitmapProvider == null ? 7 : bitmapProvider.hashCode()) ^ (int) angle;
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        return "bm:" + bitmapProvider + ", angle:" + getAngle() + ", x/yAnchor:" + xAnchor + "/" + yAnchor;
     }
 
 

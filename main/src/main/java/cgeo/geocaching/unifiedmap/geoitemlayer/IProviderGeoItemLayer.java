@@ -1,6 +1,10 @@
 package cgeo.geocaching.unifiedmap.geoitemlayer;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.utils.functions.Func1;
+
+import android.graphics.Point;
 
 /** Interface to be implemented by a map-specific provider of geoitem layers */
 public interface IProviderGeoItemLayer<C> {
@@ -38,4 +42,6 @@ public interface IProviderGeoItemLayer<C> {
      * will be called. Framework will dispose all instances of this class after calling "destroy"
      */
     void destroy();
+
+    Func1<Geopoint, Point> getScreenCoordCalculator();
 }

@@ -9,6 +9,7 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.BitmapFactory;
 import android.util.Pair;
@@ -16,6 +17,7 @@ import android.util.Pair;
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.core.GeoPoint;
+import org.oscim.core.Point;
 import org.oscim.layers.marker.ItemizedLayer;
 import org.oscim.layers.marker.MarkerInterface;
 import org.oscim.layers.marker.MarkerItem;
@@ -133,4 +135,19 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         vectorLayer = null;
         defaultMarkerSymbol = null;
     }
+
+    @Override
+    public Func1<Geopoint, android.graphics.Point> getScreenCoordCalculator() {
+
+          return gp -> {
+              if (map == null || map.viewport() == null) {
+                  return null;
+              }
+              final Point pt = new Point();
+              map.viewport().toScreenPoint(GP_CONVERTER.to(gp), false, pt);
+              return new android.graphics.Point((int) pt.x, (int) pt.y);
+        };
+    }
+
 }
+
