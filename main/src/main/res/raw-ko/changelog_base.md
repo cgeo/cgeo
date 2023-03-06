@@ -15,3 +15,4 @@
 - 수정: PQ 목록에서 "모두 표시" 필터 설정으로만 표시되는 미리보기 버튼
 - 신규: Cruiser를 내비게이션 앱으로 추가(Cruiser 3.0.9 이상 필요)
 - 신규: 링크에서 geocaching.com 북마크 목록 가져오기
+- New: Allow opening recently viewed caches as list
