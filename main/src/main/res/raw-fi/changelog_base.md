@@ -15,3 +15,4 @@
 - Korjaa: Esikatsele painiketta näkyi vain suodatinasetuksella "näytä kaikki" PQ-luettelossa
 - Uusi: Lisää Cruiser navigointisovellukseksi (vaatii Cruiser 3.0.9 tai uudemman)
 - Uusi: Tuo geocaching.com kirjanmerkkilistat linkeistä
+- New: Allow opening recently viewed caches as list
