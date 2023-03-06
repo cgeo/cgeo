@@ -7,7 +7,7 @@
 - Novinka: Individuální optimalizace trasy (experimentální)
 - Novinka: Podpora služby "Google: Terénní mapy"
 - Novinka: Nastavení šířky řádku na stopu
-- New: Hide map's action bar on demand (tap on empty space on map)
+- Novinka: Skrytí akčního panelu mapy na vyžádání (klepnutím do prázdného místa na mapě)
 
 ### Detaily kešky
 
@@ -15,3 +15,4 @@
 - Oprava: Tlačítko Náhled se zobrazuje pouze s nastavením filtru "zobrazit vše" v seznamu PQ
 - Nový: Přidat Cruiser jako navigační aplikaci (vyžaduje Cruiser 3.0.9 nebo novější)
 - Novinka: Import seznamů záložek z odkazů z geocaching.com
+- Novinka: Povolit otevření nedávno zobrazených kešek jako seznam
