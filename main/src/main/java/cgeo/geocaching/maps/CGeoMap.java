@@ -568,7 +568,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
-        FilterUtils.initializeFilterBar(activity, mapActivity);
+        FilterUtils.initializeFilterBar(activity, mapActivity, true);
         MapUtils.updateFilterBar(activity, mapOptions.filterContext);
 
         AndroidBeam.disable(activity);

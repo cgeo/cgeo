@@ -480,7 +480,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        FilterUtils.initializeFilterBar(this, this);
+        FilterUtils.initializeFilterBar(this, this, false);
         updateFilterBar();
 
         if (type.canSwitch) {
