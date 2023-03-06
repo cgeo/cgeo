@@ -1,7 +1,7 @@
 ##
 - Korrektur: Breitere Infospalte in der Logansicht im Querformat
 - Korrektur: Klarere Fehlermeldung bei nicht unterstütztem Bildformat
-- Fix: User-created waypoints not being displayed on OSM map
+- Korrektur: Benutzerdefinierte Wegpunkte wurden nicht auf der OSM-Karte angezeigt
 
 ##
 - Korrektur: Manche benutzerdefinierte Wegpunkte werden beim GPX-Import übersprungen
