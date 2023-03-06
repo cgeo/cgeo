@@ -15,3 +15,4 @@
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
 - New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
 - New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
