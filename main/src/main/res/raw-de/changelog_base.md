@@ -7,7 +7,7 @@
 - Neu: Optimierung individueller Routen (experimentell)
 - Neu: Unterstützung für "Google: Gelände" Karten
 - Neu: Einstellen der Linienbreite pro Track
-- New: Hide map's action bar on demand (tap on empty space on map)
+- Neu: Actionbar der Karte auf Wunsch ausblenden (Tippe auf einen leeren Bereich auf der Karte)
 
 ### Cache-Details
 
@@ -15,3 +15,4 @@
 - Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
 - Neu: Cruiser als Navigations-App hinzugefügt (erfordert Cruiser 3.0.9 oder neuer)
 - Neu: Importiere geocaching.com Bookmark-Listen von Links
+- New: Allow opening recently viewed caches as list
