@@ -15,4 +15,4 @@
 - Poprawka: Przycisk podglądu wyświetlany tylko z ustawieniem filtru „Pokaż wszystko” na liście PQ
 - Nowość: Dodano Cruisera jako aplikację nawigacyjną (wymaga Cruisera w wersji 3.0.9 lub nowszej)
 - Nowość: Importowanie listy zakładek geocaching.com z linków
-- New: Allow opening recently viewed caches as list
+- Nowość: Zezwalaj na otwieranie ostatnio oglądanych skrytek jako listy
