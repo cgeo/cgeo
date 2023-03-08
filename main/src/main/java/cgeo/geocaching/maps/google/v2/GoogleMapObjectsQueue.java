@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.google.v2;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Pair;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,8 +25,8 @@ public class GoogleMapObjectsQueue {
 
     private boolean repaintRequested = false;
 
-    private final ConcurrentLinkedQueue<MapObjectOptions> requestedToAdd = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<MapObjectOptions> requestedToRemove = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Pair<MapObjectOptions, Boolean>> requested = new ConcurrentLinkedQueue<>();
+   // private final ConcurrentLinkedQueue<MapObjectOptions> requestedToRemove = new ConcurrentLinkedQueue<>();
 
     private final RepaintRunner repaintRunner = new RepaintRunner();
 
@@ -37,17 +38,21 @@ public class GoogleMapObjectsQueue {
     }
 
     public void requestAdd(final Collection<? extends MapObjectOptions> toAdd) {
-        requestedToAdd.addAll(toAdd);
+        for (MapObjectOptions mo : toAdd) {
+            requested.add(new Pair<>(mo, true));
+        }
         requestRepaint();
     }
 
     public void requestAdd(final MapObjectOptions toAdd) {
-        requestedToAdd.add(toAdd);
+        requested.add(new Pair<>(toAdd, true));
         requestRepaint();
     }
 
     public void requestRemove(final Collection<? extends MapObjectOptions> toRemove) {
-        requestedToRemove.addAll(toRemove);
+        for (MapObjectOptions mo : toRemove) {
+            requested.add(new Pair<>(mo, false));
+        }
         requestRepaint();
     }
 
@@ -94,19 +99,25 @@ public class GoogleMapObjectsQueue {
         private final Map<MapObjectOptions, Object> drawObjects = new HashMap<>();
         private final Map<Object, MapObjectOptions> drawnBy = new HashMap<>();
 
-        private boolean removeRequested() {
+        private boolean processRequested() {
             final long time = System.currentTimeMillis();
-            MapObjectOptions options;
-            while ((options = requestedToRemove.poll()) != null) {
-                final Object obj = drawObjects.get(options);
-                if (obj != null) {
-                    removeDrawnObject(obj);
-                    drawnBy.remove(obj);
+            Pair<MapObjectOptions, Boolean> command;
+            while ((command = requested.poll()) != null) {
+                final MapObjectOptions options = command.first;
+                if (command.second) {
+                    //add
+                    // avoid redrawing exactly the same accuracy circle, as sometimes consecutive identical circles remain on the map
+                    if (!(options.options instanceof CircleOptions) || ((CircleOptions) options.options).getZIndex() != GooglePositionAndHistory.ZINDEX_POSITION_ACCURACY_CIRCLE || !drawObjects.containsKey(options)) {
+                        final Object drawn = options.addToGoogleMap(googleMap);
+                        drawnBy.put(drawn, options);
+                        drawObjects.put(options, drawn);
+                    }
                 } else {
-                    // could not remove, is it enqueued to be draw?
-                    if (requestedToAdd.contains(options)) {
-                        // if yes, it is not anymore
-                        requestedToAdd.remove(options);
+                    //remove
+                    final Object obj = drawObjects.get(options);
+                    if (obj != null) {
+                        removeDrawnObject(obj);
+                        drawnBy.remove(obj);
                     }
                 }
                 if (System.currentTimeMillis() - time >= TIME_MAX) {
@@ -121,30 +132,11 @@ public class GoogleMapObjectsQueue {
         @Override
         public void run() {
             lock.lock();
-            if (repaintRequested && removeRequested() && addRequested()) {
+            if (repaintRequested && processRequested()) {
                 // repaint successful, set flag to false
                 repaintRequested = false;
             }
             lock.unlock();
-        }
-
-        private boolean addRequested() {
-            final long time = System.currentTimeMillis();
-            MapObjectOptions options;
-            while ((options = requestedToAdd.poll()) != null) {
-                // avoid redrawing exactly the same accuracy circle, as sometimes consecutive identical circles remain on the map
-                if (!(options.options instanceof CircleOptions) || ((CircleOptions) options.options).getZIndex() != GooglePositionAndHistory.ZINDEX_POSITION_ACCURACY_CIRCLE || !drawObjects.containsKey(options)) {
-                    final Object drawn = options.addToGoogleMap(googleMap);
-                    drawnBy.put(drawn, options);
-                    drawObjects.put(options, drawn);
-                }
-                if (System.currentTimeMillis() - time >= TIME_MAX) {
-                    // removing and adding markers are time costly operations and we dont want to block UI thread
-                    runOnUIThread(this);
-                    return false;
-                }
-            }
-            return true;
         }
 
     }
