@@ -8,6 +8,7 @@
 - 신규: "Google: Terrain" 지도 지원
 - 신규: 트랙당 선폭 설정
 - New: Hide map's action bar on demand (tap on empty space on map)
+- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 
 ### 캐시 상세정보
 
@@ -16,3 +17,4 @@
 - 신규: Cruiser를 내비게이션 앱으로 추가(Cruiser 3.0.9 이상 필요)
 - 신규: 링크에서 geocaching.com 북마크 목록 가져오기
 - New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
