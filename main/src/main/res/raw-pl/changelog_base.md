@@ -8,6 +8,7 @@
 - Nowość: Wsparcie dla map „Google: Teren”
 - Nowość: Ustawianie szerokości linii dla śladów
 - Nowość: Ukryj pasek akcji mapy na żądanie (dotknij pustego miejsca na mapie)
+- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 
 ### Szczegóły skrytki
 
@@ -16,3 +17,4 @@
 - Nowość: Dodano Cruisera jako aplikację nawigacyjną (wymaga Cruisera w wersji 3.0.9 lub nowszej)
 - Nowość: Importowanie listy zakładek geocaching.com z linków
 - Nowość: Zezwalaj na otwieranie ostatnio oglądanych skrytek jako listy
+- New: Make quicklaunch buttons sortable
