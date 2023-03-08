@@ -8,6 +8,7 @@
 - Novinka: Podpora služby "Google: Terénní mapy"
 - Novinka: Nastavení šířky řádku na stopu
 - Novinka: Skrytí akčního panelu mapy na vyžádání (klepnutím do prázdného místa na mapě)
+- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 
 ### Detaily kešky
 
@@ -16,3 +17,4 @@
 - Nový: Přidat Cruiser jako navigační aplikaci (vyžaduje Cruiser 3.0.9 nebo novější)
 - Novinka: Import seznamů záložek z odkazů z geocaching.com
 - Novinka: Povolit otevření nedávno zobrazených kešek jako seznam
+- New: Make quicklaunch buttons sortable
