@@ -1,7 +1,7 @@
 ##
 - Pataisymas: Išplėstas žurnalo aprašo stulpelis gulsčiojo ekrano režimu
 - Pataisymas: Padarėme vaizdo formato klaidos pranešimą aiškesniu
-- Fix: User-created waypoints not being displayed on OSM map
+- Pataisymas: Vartotojo sukurti kelio taškai nerodomi OSM žemėlapyje
 
 ##
 - Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
