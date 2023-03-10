@@ -18,3 +18,4 @@
 - New: Import geocaching.com bookmark lists from links
 - New: Allow opening recently viewed caches as list
 - New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
