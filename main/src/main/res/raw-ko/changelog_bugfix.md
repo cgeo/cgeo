@@ -1,7 +1,7 @@
 ##
 - 수정: 가로 모드에서 로그 설명 열 확대
 - 수정: 이미지 형식 오류 메시지를 더 명확하게 만듭니다
-- Fix: User-created waypoints not being displayed on OSM map
+- 수정: OSM 지도에 표시되지 않는 사용자 생성 지점
 
 ##
 - 수정: GPX 가져오기에서 일부 사용자 생성 웨이포인트 건너뛰기
