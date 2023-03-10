@@ -8,7 +8,7 @@
 - Naujiena: „Google: Terrain“ žemėlapių palaikymas
 - Naujiena: Linijos pločio nustatymas kiekvienam takeliui
 - Naujiena: Slėpiama žemėlapio veiksmų juostą pagal poreikį (palietus tuščią vietą žemėlapyje)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- Pakeitimas: Perkėlėme greitųjų nustatymų mygtukus į kairę gulsčiojo ekrano režimu, kad gautumėte daugiau vertikalios vietos
 
 ### Slėptuvės detalės
 
@@ -17,4 +17,5 @@
 - Naujiena: Pridėta „Cruiser“ navigacijos programa (reikia „Cruiser 3.0.9“ ar naujesnės versijos)
 - Naujiena: Importuokite geocaching.com žymių sąrašus iš nuorodų
 - Nauja: Galima atidaryti neseniai peržiūrėtas talpyklas kaip sąrašą
-- New: Make quicklaunch buttons sortable
+- Naujiena: Padarėme greitojo paleidimo mygtukus rūšiuojamais
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
