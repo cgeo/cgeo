@@ -18,3 +18,4 @@
 - Nowość: Importowanie listy zakładek geocaching.com z linków
 - Nowość: Zezwalaj na otwieranie ostatnio oglądanych skrytek jako listy
 - Nowość: Możliwość sortowania przycisków szybkiego uruchamiania
+- Nowość: Obejście dla konfliktu przestrzeni nazw przedmiotu podróżnego (działa dla wyłączonego konektora GeoKreta)
