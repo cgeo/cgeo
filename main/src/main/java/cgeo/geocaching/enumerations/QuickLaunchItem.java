@@ -19,10 +19,10 @@ public class QuickLaunchItem extends InfoItem {
         POCKETQUERY(2),
         BOOKMARKLIST(3),
         SETTINGS(4),
+        VIEWSETTINGS(8),
         BACKUPRESTORE(5),
         MANUAL(6),
-        FAQ(7),
-        VIEWSETTINGS(8);
+        FAQ(7);
 
         public final int id;
         VALUES(final int id) {
@@ -35,10 +35,10 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.POCKETQUERY, R.string.menu_lists_pocket_queries, R.drawable.ic_menu_pocket_query, true),
         new QuickLaunchItem(VALUES.BOOKMARKLIST, R.string.menu_lists_bookmarklists, R.drawable.ic_menu_bookmarks, true),
         new QuickLaunchItem(VALUES.SETTINGS, R.string.menu_settings, R.drawable.settings_nut, false),
+        new QuickLaunchItem(VALUES.VIEWSETTINGS, R.string.view_settings, R.drawable.settings_eye, false),
         new QuickLaunchItem(VALUES.BACKUPRESTORE, R.string.menu_backup, R.drawable.settings_backup, false),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, false),
-        new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false),
-        new QuickLaunchItem(VALUES.VIEWSETTINGS, R.string.view_settings, R.drawable.settings_eye, false)
+        new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false)
     ));
 
     @DrawableRes public int iconRes;
