@@ -18,3 +18,4 @@
 - Uusi: Tuo geocaching.com kirjanmerkkilistat linkeistä
 - New: Allow opening recently viewed caches as list
 - New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
