@@ -7,8 +7,8 @@
 - 신규: 개별 경로 최적화(실험적)
 - 신규: "Google: Terrain" 지도 지원
 - 신규: 트랙당 선폭 설정
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- 신규: 요청 시 지도의 작업 표시줄 숨기기(지도의 빈 공간 탭)
+- 변경: 더 많은 세로 공간을 확보하기 위해 가로 모드에서 빠른 설정 버튼을 왼쪽으로 이동
 
 ### 캐시 상세정보
 
@@ -16,5 +16,6 @@
 - 수정: PQ 목록에서 "모두 표시" 필터 설정으로만 표시되는 미리보기 버튼
 - 신규: Cruiser를 내비게이션 앱으로 추가(Cruiser 3.0.9 이상 필요)
 - 신규: 링크에서 geocaching.com 북마크 목록 가져오기
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
+- 신규: 최근 본 캐시를 목록으로 열기 허용
+- 신규: 이제 빠른 실행 버튼을 정렬할 수 있습니다.
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
