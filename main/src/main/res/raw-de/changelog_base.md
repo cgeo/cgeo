@@ -8,7 +8,7 @@
 - Neu: Unterstützung für "Google: Gelände" Karten
 - Neu: Einstellen der Linienbreite pro Track
 - Neu: Actionbar der Karte auf Wunsch ausblenden (Tippe auf einen leeren Bereich auf der Karte)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- Änderung: Schnelleinstellungs-Buttons auf Karten im Querformat links anzeigen, um mehr vertikalen Raum zu erhalten
 
 ### Cache-Details
 
@@ -17,4 +17,5 @@
 - Neu: Cruiser als Navigations-App hinzugefügt (erfordert Cruiser 3.0.9 oder neuer)
 - Neu: Importiere geocaching.com Bookmark-Listen von Links
 - Neu: Erlaube das Öffnen der kürzlich angesehenen Caches als Liste
-- New: Make quicklaunch buttons sortable
+- Neu: Schnellstart-Schaltflächen sortierbar
+- Neu: Workaround für Trackable-Namenskonflikte (funktioniert für deaktivierten GeoKrety Connector)
