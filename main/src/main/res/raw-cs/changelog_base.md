@@ -18,3 +18,4 @@
 - Novinka: Import seznamů záložek z odkazů z geocaching.com
 - Novinka: Povolit otevření nedávno zobrazených kešek jako seznam
 - New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
