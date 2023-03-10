@@ -112,7 +112,7 @@ public class CheckableItemSelectActivity extends AbstractActionBarActivity {
         final RecyclerView listView = new RecyclerView(this, null);
         setContentView(listView);
 
-        final ArrayList<Integer> includedItems = Settings.getInfoItems(prefKey);
+        final ArrayList<Integer> includedItems = Settings.getInfoItems(prefKey, 0);
 
         final ArrayList<Element> allItems = new ArrayList<>();
         for (int i : includedItems) {

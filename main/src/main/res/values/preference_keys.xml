@@ -260,7 +260,8 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
-    <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
+    <string translatable="false" name="pref_cacheListInfo1">cacheListInfo1</string>
+    <string translatable="false" name="pref_cacheListInfo2">cacheListInfo2</string>
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
 
     <!-- category gpx -->
@@ -552,5 +553,7 @@
     <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="old_pref_mapAutoDownloads">mapAutoDownloads</string>
     <string translatable="false" name="old_pref_skin">skin</string>
+    <string translatable="false" name="old_pref_quicklaunchitems">quicklaunchitems</string>
+    <string translatable="false" name="old_pref_showListsInCacheList">showListsInCacheList</string>
 
 </resources>

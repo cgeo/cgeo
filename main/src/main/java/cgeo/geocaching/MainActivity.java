@@ -329,7 +329,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dimSize, dimSize);
         lp.setMargins(dimMargin, 0, dimMargin, 0);
 
-        final List<Integer> quicklaunchitems = Settings.getInfoItems(R.string.pref_quicklaunchitems);
+        final List<Integer> quicklaunchitems = Settings.getInfoItems(R.string.pref_quicklaunchitems, 1);
         binding.quicklaunchitems.removeAllViews();
         binding.quicklaunchitems.setVisibility(View.GONE);
         for (int i : quicklaunchitems) {

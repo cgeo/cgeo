@@ -11,6 +11,8 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -1013,14 +1015,6 @@ public class Settings {
         return getInt(R.string.pref_maptrail_length, getKeyInt(R.integer.historytrack_length_default));
     }
 
-    public static boolean showListsInCacheList() {
-        return getBoolean(R.string.pref_showListsInCacheList, true);
-    }
-
-    public static void setShowListsInCacheList(final boolean showListsInCacheList) {
-        putBoolean(R.string.pref_showListsInCacheList, showListsInCacheList);
-    }
-
     public static int getMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
         return getInt(prefKeyId, getKeyInt(defaultValueKeyId));
     }
@@ -1971,13 +1965,54 @@ public class Settings {
         putString(R.string.pref_selected_language, language);
     }
 
-    public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey) {
+    /**
+     * get comma-delimited list of info items for given key
+     *
+     * defaultSource: 0=empty, 1=migrate quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
+     */
+    public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey, final int defaultSource) {
         final ArrayList<Integer> result = new ArrayList<>();
-        for (String s : getString(prefKey, "").split(",")) {
-            try {
-                result.add(Integer.parseInt(s));
-            } catch (NumberFormatException ignore) {
-                //
+        final String pref = getString(prefKey, "-");
+        if (StringUtils.equals(pref, "-")) {
+            if (defaultSource == 1) {
+                // migrate quicklaunchitem setting
+                final Set<String> empty = Collections.emptySet();
+                if (sharedPrefs != null) {
+                    for (String s : sharedPrefs.getStringSet(getKey(R.string.old_pref_quicklaunchitems), empty)) {
+                        for (QuickLaunchItem.VALUES item : QuickLaunchItem.VALUES.values()) {
+                            if (StringUtils.equals(s, item.name())) {
+                                result.add(item.id);
+                            }
+                        }
+                    }
+                }
+                putString(prefKey, StringUtils.join(result, ","));
+                Log.i("migrated quicklaunch: " + result);
+            } else if (defaultSource == 2) {
+                // migrate Formatter.formatCacheInfoLong
+                result.add(CacheListInfoItem.VALUES.GCCODE.id);
+                result.add(CacheListInfoItem.VALUES.DIFFICULTY.id);
+                result.add(CacheListInfoItem.VALUES.TERRAIN.id);
+                result.add(CacheListInfoItem.VALUES.SIZE.id);
+                result.add(CacheListInfoItem.VALUES.EVENTDATE.id);
+                result.add(CacheListInfoItem.VALUES.MEMBERSTATE.id);
+                putString(prefKey, StringUtils.join(result, ","));
+                Log.i("migrated infoline1: " + result);
+            } else if (defaultSource == 3) {
+                // migrate showListsInCacheList setting
+                if (getBoolean(R.string.old_pref_showListsInCacheList, false)) {
+                    result.add(CacheListInfoItem.VALUES.LISTS.id);
+                }
+                putString(prefKey, StringUtils.join(result, ","));
+                Log.i("migrated infoline2: " + result);
+            }
+        } else {
+            for (String s : pref.split(",")) {
+                try {
+                    result.add(Integer.parseInt(s));
+                } catch (NumberFormatException ignore) {
+                    //
+                }
             }
         }
         return result;

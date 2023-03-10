@@ -17,13 +17,6 @@
         android:summary="@string/init_summary_choose_list"
         android:title="@string/init_choose_list"
         app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="@string/pref_showListsInCacheList"
-        android:summary="@string/init_summary_listdisplay"
-        android:title="@string/init_listdisplay"
-        app:iconSpaceReserved="false" />
-
     <Preference
         android:title="@string/init_list_initial_load_limit"
         android:summary="@string/init_summary_list_initial_load_limit"
@@ -37,6 +30,17 @@
         app:minValueDescription="@string/init_settings_description_unlimited"
         app:stepSize="100"
         app:logScaling="true"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="@string/pref_cacheListInfo1"
+        android:title="@string/init_title_cacheListInfo1"
+        android:summary="@string/init_summary_cacheListInfo"
+        app:iconSpaceReserved="false" />
+    <Preference
+        android:key="@string/pref_cacheListInfo2"
+        android:title="@string/init_title_cacheListInfo2"
+        android:summary="@string/init_summary_cacheListInfo"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory

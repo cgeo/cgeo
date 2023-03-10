@@ -77,7 +77,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                 switch (routeItem.getType()) {
                     case GEOCACHE:
                         assert data instanceof Geocache;
-                        holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
+                        holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data, null, null));
                         holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
                         break;
                     case WAYPOINT:

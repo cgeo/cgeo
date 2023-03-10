@@ -959,10 +959,23 @@
     <string name="init_list_initial_load_limit">List Load limit</string>
     <string name="init_summary_list_initial_load_limit">Maximum number of caches to load from database initially when displaying stored lists. Choose 0 for \'unlimited\'</string>
     <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
+    <string name="init_title_cacheListInfo1">Show infos in cache list (Line 1)</string>
+    <string name="init_title_cacheListInfo2">Show infos in cache list (Line 2)</string>
+    <string name="init_summary_cacheListInfo">Select one or more items to be displayed for each cache in cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
     <string name="init_quicklaunchitems">Quick launch buttons</string>
     <string name="init_summary_quicklaunchitems">Select one or more items as quick launch buttons on home screen</string>
+
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_GCCode">GC Code</string>
+    <string name="cacheListInfoItem_Difficulty">Difficulty</string>
+    <string name="cacheListInfoItem_Terrain">Terrain</string>
+    <string name="cacheListInfoItem_MemberState">Member State</string>
+    <string name="cacheListInfoItem_Size">Size</string>
+    <string name="cacheListInfoItem_Lists">Lists</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Event Date</string>
 
     <!-- app theme -->
     <string name="settings_theme_title">Theme</string>

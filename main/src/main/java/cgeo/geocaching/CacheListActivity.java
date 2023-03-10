@@ -1182,7 +1182,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         registerForContextMenu(listView);
 
         adapter = new CacheListAdapter(this, adapter == null ? new ArrayList<>() : adapter.getList(), type, sortContext);
-        adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
+        adapter.setStoredLists(StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id));
         applyAdapterFilter();
 
         if (listFooter == null) {

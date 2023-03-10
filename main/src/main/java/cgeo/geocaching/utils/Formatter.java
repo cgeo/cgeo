@@ -2,11 +2,14 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -109,6 +113,17 @@ public final class Formatter {
     }
 
     /**
+     * Generate a numeric date string with date format "yyyy-MM"
+     *
+     * @param date milliseconds since the epoch
+     * @return the formatted string
+     */
+    @NonNull
+    public static String formatDateYYYYMM(final long date) {
+        return new SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(date);
+    }
+
+    /**
      * Generate a numeric date string with date format "yyyy-MM-dd HH-mm"
      *
      * @param date milliseconds since the epoch
@@ -189,18 +204,68 @@ public final class Formatter {
     }
 
     @NonNull
-    public static String formatCacheInfoLong(final Geocache cache) {
+    public static String formatCacheInfoLong(final Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList) {
         final List<String> infos = new ArrayList<>();
-        if (StringUtils.isNotBlank(cache.getGeocode())) {
-            infos.add(cache.getShortGeocode());
+        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo1, 2), storedLists, excludeList, infos);
+        final String result1 = StringUtils.join(infos, SEPARATOR);
+
+        infos.clear();
+        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo2, 3), storedLists, excludeList, infos);
+        final String result2 = StringUtils.join(infos, SEPARATOR);
+
+        return result1 + (StringUtils.isNotBlank(result1) && StringUtils.isNotBlank(result2) ? "\n" : "") + result2;
+    }
+
+    private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<String> infos) {
+        for (int item : configuredItems) {
+            if (item == CacheListInfoItem.VALUES.GCCODE.id) {
+                if (StringUtils.isNotBlank(cache.getGeocode())) {
+                    infos.add(cache.getShortGeocode());
+                }
+            } else if (item == CacheListInfoItem.VALUES.DIFFICULTY.id) {
+                if (cache.hasDifficulty()) {
+                    infos.add("D " + formatDT(cache.getDifficulty()));
+                }
+            } else if (item == CacheListInfoItem.VALUES.TERRAIN.id) {
+                if (cache.hasTerrain()) {
+                    infos.add("T " + formatDT(cache.getTerrain()));
+                }
+            } else if (item == CacheListInfoItem.VALUES.MEMBERSTATE.id) {
+                if (cache.isPremiumMembersOnly()) {
+                    infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
+                }
+            } else if (item == CacheListInfoItem.VALUES.SIZE.id) {
+                if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
+                    infos.add(cache.getSize().getL10n());
+                }
+            } else if (item == CacheListInfoItem.VALUES.LISTS.id) {
+                formatCacheLists(cache, storedLists, excludeList, infos);
+            } else if (item == CacheListInfoItem.VALUES.EVENTDATE.id) {
+                if (cache.isEventCache()) {
+                    final Date hiddenDate = cache.getHiddenDate();
+                    if (hiddenDate != null) {
+                        infos.add(formatShortDateIncludingWeekday(hiddenDate.getTime()));
+                    }
+                }
+            } else if (item == CacheListInfoItem.VALUES.JASMER.id) {
+                final Date hiddenDate = cache.getHiddenDate();
+                if (hiddenDate != null) {
+                    infos.add(formatDateYYYYMM(hiddenDate.getTime()));
+                }
+            }
         }
 
-        addShortInfos(cache, infos);
+    }
 
-        if (cache.isPremiumMembersOnly()) {
-            infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
+    public static void formatCacheLists(final @NonNull Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<String> infos) {
+        if (null != storedLists) {
+            final Set<Integer> lists = cache.getLists();
+            for (final AbstractList temp : storedLists) {
+                if (lists.contains(temp.id) && !temp.title.equals(excludeList)) {
+                    infos.add(temp.title);
+                }
+            }
         }
-        return StringUtils.join(infos, SEPARATOR);
     }
 
     @NonNull
@@ -217,7 +282,6 @@ public final class Formatter {
         if (cache.hasTerrain()) {
             infos.add("T " + formatDT(cache.getTerrain()));
         }
-
         // don't show "not chosen" for events and virtuals, that should be the normal case
         if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
             infos.add(cache.getSize().getL10n());
