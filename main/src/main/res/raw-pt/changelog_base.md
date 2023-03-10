@@ -18,3 +18,4 @@
 - Novo: Importar as listas de favoritos de geocaching.com a partir de hiperligações
 - Novo: Permitir abertura de caches visualizadas recentemente como lista
 - Novo: Poder ordenar os botões de início rápido
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
