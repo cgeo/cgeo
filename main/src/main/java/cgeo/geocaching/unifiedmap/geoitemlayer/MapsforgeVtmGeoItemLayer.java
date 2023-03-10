@@ -7,9 +7,9 @@ import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.BitmapFactory;
 import android.util.Pair;
@@ -105,7 +105,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
                     icon.getXAnchor(), icon.getYAnchor(), true));
-            marker.setRotation(item.getIcon().getAngle());
+            marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItem(marker);
             markerLayer.update();
         }
@@ -137,7 +137,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
     @Override
-    public Func1<Geopoint, android.graphics.Point> getScreenCoordCalculator() {
+    public ToScreenProjector getScreenCoordCalculator() {
 
           return gp -> {
               if (map == null || map.viewport() == null) {
@@ -145,7 +145,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
               }
               final Point pt = new Point();
               map.viewport().toScreenPoint(GP_CONVERTER.to(gp), false, pt);
-              return new android.graphics.Point((int) pt.x, (int) pt.y);
+              return new int[]{(int) pt.x, (int) pt.y};
         };
     }
 

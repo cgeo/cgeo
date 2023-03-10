@@ -2,18 +2,16 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Objects;
-
-import io.reactivex.rxjava3.annotations.NonNull;
 
 /**
  * Immutable value class for GeoItem Style info. Includes some helpers to deal with these objects.
@@ -23,7 +21,7 @@ public class GeoIcon implements Parcelable {
     @Nullable private final BitmapProvider bitmapProvider;
     private final float xAnchor;
     private final float yAnchor;
-    private final float angle;
+    private final float rotation;
 
     //lazy initialized
     private int bmWidth = -1;
@@ -31,17 +29,30 @@ public class GeoIcon implements Parcelable {
 
     /**
      * complex image caches etc may implement this interface on their own
-     * Implementors shall also implement Parcelable as well as equals() and hashCode()
+     * Implementors shall also implement Parcelable as well as equals() and hashCode()!
      */
     public interface BitmapProvider extends Parcelable {
 
+        /** Gets the "raw" (unrotated) bitmap */
         Bitmap getBitmap();
 
+        /** Gets the rotated bitmap. This bitmap is actually used for the marker */
         default Bitmap getRotatedBitmap(float angleInDegree) {
             return ImageUtils.rotateBitmap(getBitmap(), angleInDegree);
         }
+
+        /** Gets the dimensions (width + height) in pixels of the rotated bitmap. used to calculated touching */
+        default Pair<Integer, Integer> getRotatedBitmapDimensions(float angleInDegree) {
+            final Bitmap bm = getRotatedBitmap(angleInDegree);
+            return bm == null ? null : new Pair<>(bm.getWidth(), bm.getHeight());
+        }
+
     }
 
+    /**
+     * A simple bitmap provider which solely encapsulates a Bitmap object.
+     * No caching or other optimization is done.
+     */
     public static class SimpleBitmapProvider implements BitmapProvider {
 
         private final Bitmap bitmap;
@@ -129,11 +140,11 @@ public class GeoIcon implements Parcelable {
 
     }
 
-    private GeoIcon(@Nullable final BitmapProvider bitmapProvider, final float xAnchor, final float yAnchor, final float angle) {
+    private GeoIcon(@Nullable final BitmapProvider bitmapProvider, final float xAnchor, final float yAnchor, final float rotation) {
         this.bitmapProvider = bitmapProvider;
         this.xAnchor = xAnchor;
         this.yAnchor = yAnchor;
-        this.angle = angle;
+        this.rotation = rotation;
     }
 
     @Nullable
@@ -143,25 +154,28 @@ public class GeoIcon implements Parcelable {
 
     @Nullable
     public Bitmap getRotatedBitmap() {
-        final Bitmap bm = bitmapProvider == null ? null : bitmapProvider.getRotatedBitmap(getAngle());
-        ensureBmSizes(bm);
+        final Bitmap bm = bitmapProvider == null ? null : bitmapProvider.getRotatedBitmap(getRotation());
+        ensureBmSizes(bm == null ? null : new Pair<>(bm.getWidth(), bm.getHeight()));
         return bm;
     }
 
 
+    /** Horizontal distance, normalized to [0, 1], of the anchor from the left edge */
     public float getXAnchor() {
         return xAnchor;
     }
 
+    /** Vertical distance, normalized to [0, 1], of the anchor from the top edge. */
     public float getYAnchor() {
         return yAnchor;
     }
 
-    public float getAngle() {
-        return angle;
+    /** Rotation angle for this icon in degrees (0-360°) */
+    public float getRotation() {
+        return rotation;
     }
 
-    public boolean touchesIcon(final Geopoint tap, final Geopoint iconBase, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
+    public boolean touchesIcon(final Geopoint tap, final Geopoint iconBase, @Nullable final ToScreenProjector toScreenCoordFunc) {
         if (tap == null || iconBase == null || toScreenCoordFunc == null) {
             return false;
         }
@@ -173,18 +187,18 @@ public class GeoIcon implements Parcelable {
         if (bmHeight >= 0) {
             return;
         }
-        ensureBmSizes(getRotatedBitmap());
+        ensureBmSizes(bitmapProvider == null ? null : bitmapProvider.getRotatedBitmapDimensions(getRotation()));
     }
-    private void ensureBmSizes(final Bitmap bm) {
+    private void ensureBmSizes(final Pair<Integer, Integer> bmSizes) {
         if (bmHeight >= 0) {
             return;
         }
-        if (bm == null) {
-            bmHeight = 0;
+        if (bmSizes == null) {
             bmWidth = 0;
+            bmHeight = 0;
         } else {
-            bmHeight = bm.getHeight();
-            bmWidth = bm.getWidth();
+            bmWidth = bmSizes.first;
+            bmHeight = bmSizes.second;
         }
     }
 
@@ -194,7 +208,7 @@ public class GeoIcon implements Parcelable {
 
 
     public Builder buildUpon() {
-        return builder().setBitmapProvider(bitmapProvider).setXAnchor(xAnchor).setYAnchor(yAnchor).setAngle(angle);
+        return builder().setBitmapProvider(bitmapProvider).setXAnchor(xAnchor).setYAnchor(yAnchor).setRotation(rotation);
     }
 
     //equals/hashCode
@@ -209,18 +223,18 @@ public class GeoIcon implements Parcelable {
             Objects.equals(bitmapProvider, other.bitmapProvider) &&
             Objects.equals(xAnchor, other.xAnchor) &&
             Objects.equals(yAnchor, other.yAnchor) &&
-            Objects.equals(angle, other.angle);
+            Objects.equals(rotation, other.rotation);
     }
 
     @Override
     public int hashCode() {
-        return (bitmapProvider == null ? 7 : bitmapProvider.hashCode()) ^ (int) angle;
+        return (bitmapProvider == null ? 7 : bitmapProvider.hashCode()) ^ (int) rotation;
     }
 
     @Override
     @NonNull
     public String toString() {
-        return "bm:" + bitmapProvider + ", angle:" + getAngle() + ", x/yAnchor:" + xAnchor + "/" + yAnchor;
+        return "bm:" + bitmapProvider + ", angle:" + getRotation() + ", x/yAnchor:" + xAnchor + "/" + yAnchor;
     }
 
 
@@ -231,7 +245,7 @@ public class GeoIcon implements Parcelable {
         @Nullable private BitmapProvider bitmapProvider;
         private float xAnchor;
         private float yAnchor;
-        private float angle;
+        private float rotation;
 
         private Builder() {
             setHotspot(Hotspot.CENTER);
@@ -247,28 +261,27 @@ public class GeoIcon implements Parcelable {
         }
 
         public Builder setXAnchor(final float xAnchor) {
-            this.xAnchor = xAnchor;
+            this.xAnchor = Math.min(1f, Math.max(0f, xAnchor));
             return this;
         }
 
+        /** Convenience method to set x/yAnchor to commonly used hotspots */
         public Builder setHotspot(final Hotspot hotspot) {
-            this.xAnchor = hotspot.xAnchor;
-            this.yAnchor = hotspot.yAnchor;
-            return this;
+            return setXAnchor(hotspot.xAnchor).setYAnchor(hotspot.yAnchor);
         }
 
         public Builder setYAnchor(final float yAnchor) {
-            this.yAnchor = yAnchor;
+            this.yAnchor = Math.min(1f, Math.max(0f, yAnchor));
             return this;
         }
 
-        public Builder setAngle(final float angle) {
-            this.angle = angle;
+        public Builder setRotation(final float rotation) {
+            this.rotation = rotation;
             return this;
         }
 
         public GeoIcon build() {
-            return new GeoIcon(bitmapProvider, xAnchor, yAnchor, angle);
+            return new GeoIcon(bitmapProvider, xAnchor, yAnchor, rotation);
         }
     }
 
@@ -278,7 +291,7 @@ public class GeoIcon implements Parcelable {
         bitmapProvider = in.readParcelable(BitmapProvider.class.getClassLoader());
         xAnchor = in.readFloat();
         yAnchor = in.readFloat();
-        angle = in.readFloat();
+        rotation = in.readFloat();
     }
 
     @Override
@@ -286,7 +299,7 @@ public class GeoIcon implements Parcelable {
         dest.writeParcelable(bitmapProvider, flags);
         dest.writeFloat(xAnchor);
         dest.writeFloat(yAnchor);
-        dest.writeFloat(angle);
+        dest.writeFloat(rotation);
     }
 
     @Override

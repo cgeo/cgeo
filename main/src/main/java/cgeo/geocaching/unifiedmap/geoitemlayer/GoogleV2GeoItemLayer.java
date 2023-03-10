@@ -7,9 +7,9 @@ import cgeo.geocaching.maps.google.v2.BitmapDescriptorCache;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -114,7 +114,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
         if (icon != null && item.getCenter() != null && icon.getBitmap() != null) {
             marker = map.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorCache.toBitmapDescriptor(new BitmapDrawable(resources, icon.getBitmap())))
-                .rotation(icon.getAngle())
+                .rotation(icon.getRotation())
                 .position(GP_CONVERTER.to(item.getCenter()))
                 .anchor(icon.getXAnchor(), icon.getYAnchor())
                 .zIndex(zLevel));
@@ -142,9 +142,12 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
     }
 
     @Override
-    public Func1<Geopoint, Point> getScreenCoordCalculator() {
+    public ToScreenProjector getScreenCoordCalculator() {
         final Projection proj = map.getProjection();
-        return gp -> proj.toScreenLocation(GP_CONVERTER.to(gp));
+        return gp -> {
+            final Point pt = proj.toScreenLocation(GP_CONVERTER.to(gp));
+            return new int[]{pt.x, pt.y};
+        };
     }
 
 }

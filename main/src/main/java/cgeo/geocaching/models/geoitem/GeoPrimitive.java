@@ -2,10 +2,7 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.utils.functions.Func1;
 
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -31,6 +28,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     //lazy-calculated
     private Viewport viewport;
+    private int hashCode = Integer.MIN_VALUE;
 
     private GeoPrimitive(@Nullable final GeoItem.GeoType type, @NonNull final List<Geopoint> points, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style) {
         this.type = type == null || type == GeoType.GROUP ? GeoItem.GeoType.POLYLINE : type;
@@ -106,26 +104,26 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     }
 
     @Override
-    public boolean touches(@NonNull final Geopoint tapped, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
+    public boolean touches(@NonNull final Geopoint tapped, @Nullable final ToScreenProjector projector) {
         if (!isValid()) {
             return false;
         }
 
         final float lineWidthDp = GeoStyle.getStrokeWidth(getStyle());
+        final boolean isFilled = GeoStyle.getAlpha(GeoStyle.getFillColor(getStyle())) > 0;
         switch (getType()) {
             case POLYLINE:
-                if (GeoItemUtils.touchesMultiLine(getPoints(), tapped, lineWidthDp, toScreenCoordFunc)) {
+                if (GeoItemUtils.touchesMultiLine(getPoints(), tapped, lineWidthDp, projector)) {
                     return true;
                 }
                 break;
             case POLYGON:
-                if (GeoItemUtils.touchesPolygon(getPoints(), tapped, lineWidthDp, toScreenCoordFunc)) {
+                if (GeoItemUtils.touchesPolygon(getPoints(), tapped, lineWidthDp, isFilled, projector)) {
                     return true;
                 }
                 break;
             case CIRCLE:
-                final boolean isFilled = Color.alpha(GeoStyle.getFillColor(getStyle())) > 0;
-                if (GeoItemUtils.touchesCircle(tapped, getCenter(), getRadius(), lineWidthDp, isFilled, toScreenCoordFunc)) {
+                if (GeoItemUtils.touchesCircle(tapped, getCenter(), getRadius(), lineWidthDp, isFilled, projector)) {
                     return true;
                 }
                 break;
@@ -134,7 +132,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         }
 
         if (getIcon() != null) {
-            return getIcon().touchesIcon(tapped, getCenter(), toScreenCoordFunc);
+            return getIcon().touchesIcon(tapped, getCenter(), projector);
         }
 
         return false;
@@ -186,7 +184,14 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     @Override
     public int hashCode() {
-        return type.ordinal() * 13 + (points.isEmpty() || points.get(0) == null ? 7 : points.get(0).hashCode());
+        if (hashCode == Integer.MIN_VALUE) {
+            hashCode = calculateHashCode();
+        }
+        return hashCode;
+    }
+
+    private int calculateHashCode() {
+        return type.ordinal() * 13 + Objects.hashCode(points) ^ (int) radius ^ Objects.hashCode(icon) ^ Objects.hashCode(style);
     }
 
     @NonNull

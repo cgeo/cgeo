@@ -5,14 +5,16 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.utils.AsynchronousMapWrapper;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Func1;
 
-import android.graphics.Point;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +22,19 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * An abstracted Map Layer which allows to handle a group of related geo objects on a map layer
+ * together.
+ *
+ * Methods of this class allow adding, removing, hiding/showing, ... of objects onto the layer in
+ * a map-like fashion (means: using a key-GeoItem-concept).
+ * Touch handling is also provided.
+ *
+ * The abstract layer is connected towards a concrete map layer implementation by using the
+ * setProvider method
+ *
+ * @param <K> key class to use when placing and handling map geo objects on this layer
+ */
 public class GeoItemLayer<K> {
 
     private final String id;
@@ -42,7 +57,7 @@ public class GeoItemLayer<K> {
         }
 
         @Override
-        public Func1<Geopoint, Point> getScreenCoordCalculator() {
+        public ToScreenProjector getScreenCoordCalculator() {
             return null;
         }
 
@@ -81,6 +96,12 @@ public class GeoItemLayer<K> {
         public int hashCode() {
             return Objects.hashCode(key) ^ index;
         }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return key + "-" + index;
+        }
     }
 
     private static class MapWriter<T> implements AsynchronousMapWrapper.IMapChangeExecutor<MapWriterKey<T>, GeoPrimitive, Object> {
@@ -112,17 +133,16 @@ public class GeoItemLayer<K> {
 
         @Override
         public void runCommandChain(final Runnable runnable) {
-            AndroidRxUtils.computationScheduler.scheduleDirect(runnable);
+            if (providerLayer != null) {
+                providerLayer.runCommandChain(runnable);
+            }
         }
 
         @Override
         public void runMapChanges(final Runnable runnable) {
-            // inspired by http://stackoverflow.com/questions/12850143/android-basics-running-code-in-the-ui-thread/25250494#25250494
-            // modifications of google map must be run on main (UI) thread
-            //new Handler(Looper.getMainLooper()).post(runnable);
-            Log.iForce("AsyncMapWrapper: request Thread for: " + runnable.getClass().getName());
-
-            AndroidRxUtils.runOnUi(runnable);
+            if (providerLayer != null) {
+                providerLayer.runMapChanges(runnable);
+            }
         }
 
         @Override
@@ -134,10 +154,15 @@ public class GeoItemLayer<K> {
 
         @Override
         public boolean continueMapChangeExecutions(final long startTime, final  int queueLength) {
-            return System.currentTimeMillis() - startTime < 40;
+            return providerLayer != null && providerLayer.continueMapChangeExecutions(startTime, queueLength);
         }
     }
 
+    /** Creates a new GeoItemLayer.
+     *
+     * Constructor is designed to be usable in a "final" fashion on construction of any Android object
+     * (e.g. Activities or Views). Means: it doesn't need anything to be set up GUI-wise to be called.
+     */
     public GeoItemLayer(final String id) {
         this.id = id;
     }
@@ -146,6 +171,10 @@ public class GeoItemLayer<K> {
         return id;
     }
 
+    /**
+     * Destroys this layer and cleans up any resouces held by it. Do not use this object again
+     * after calling destroy()!
+     */
     public synchronized void destroy() {
         if (this.mapWriter != null) {
             this.mapWriter.destroy();
@@ -154,6 +183,10 @@ public class GeoItemLayer<K> {
         this.providerLayer = null;
     }
 
+    /**
+     * Sets a concrete map provider for this layer.
+     * Provider can also be changed to another later by using this method.
+     */
     public synchronized void setProvider(final IProviderGeoItemLayer<?> newProviderLayer, final int zLevel) {
         destroy();
         final IProviderGeoItemLayer<?>  providerLayer = newProviderLayer == null ? NOOP_GEOITEM_LAYER : newProviderLayer;
@@ -167,10 +200,15 @@ public class GeoItemLayer<K> {
         }
     }
 
+    /** Puts a new GeoItem onto the layer. If an object for same key already exists, it is replaced */
     public synchronized void put(final K key, final GeoItem item) {
         put(key, item, true);
     }
 
+    /**
+     * Puts a new GeoItem onto the layer. If an object for same key already exists, it is replaced.
+     * If "show" is false, the item is added to the layer but not (yet) shown.
+     */
     public synchronized void put(final K key, final GeoItem item, final boolean show) {
 
         final Pair<GeoItem, Boolean> previousItem = itemMap.get(key);
@@ -187,6 +225,7 @@ public class GeoItemLayer<K> {
         }
     }
 
+    /** Removes an object from this layer */
     public synchronized void remove(final K key) {
         final Pair<GeoItem, Boolean> value = itemMap.get(key);
         if (value != null) {
@@ -197,33 +236,104 @@ public class GeoItemLayer<K> {
         }
     }
 
+    /** Gets the object associated with the given key */
     public synchronized GeoItem get(final K key) {
         final Pair<GeoItem, Boolean> entry = itemMap.get(key);
         return entry == null ? null : entry.first;
     }
 
+    /** Returns true if an object with given key exists in the map AND is currently shown */
+    public synchronized boolean isShown(final K key) {
+        final Pair<GeoItem, Boolean> entry = itemMap.get(key);
+        return entry != null && entry.second;
+    }
+
+    /** Returns all keys for which layer objects are currently registered. The returned set
+     * is a COPY of all keys NOT backed by the layer. */
     public synchronized Set<K> keySet() {
         return new HashSet<>(itemMap.keySet());
     }
 
-    private void putToMap(final K key, final GeoItem item, final GeoItem previousItem) {
-        //shortcut for replacements of GeoPrimitives
-        if (item instanceof GeoPrimitive && previousItem instanceof GeoPrimitive) {
+    private void putToMap(final K key, final GeoItem item, final GeoItem oldItem) {
+
+        if (item == null && oldItem == null) {
+            throw new IllegalArgumentException("Progamming bug: either item or oldItem must be non-null for: " + key);
+        }
+
+        //GeoPrimitives are handled different from GeoGroups
+        //- Primitives are inserted with one element with index 0
+        //- for GeoGroups, the contained primitives are inserted with an index matching their hashcode (this makes replacements more efficient)
+        //=> if for same key a switch is done between primitive and geogroup, this requires special handling
+
+        final boolean itemIsPrimitive = item instanceof GeoPrimitive;
+        final boolean oldItemIsPrimitive = oldItem instanceof GeoPrimitive;
+
+        if (itemIsPrimitive && (oldItem == null || oldItemIsPrimitive)) {
+            //->insert or replace one GeoPrimitive with another
+            mapWriter.put(new MapWriterKey<>(key, 0), (GeoPrimitive) item);
+        } else if (item == null && oldItemIsPrimitive) {
+            //->remove a GeoPrimitive
+            mapWriter.remove(new MapWriterKey<>(key, 0));
+        } else if (!itemIsPrimitive && !oldItemIsPrimitive) {
+            //->insert or replace a GeoGroup with another, or remove a GeoGroup
+            replaceGroupInMap(key, oldItem, item);
+        } else if (itemIsPrimitive) {
+            //->replace a GeoGroup with a GeoPrimitive
+            replaceGroupInMap(key, oldItem, null);
             mapWriter.put(new MapWriterKey<>(key, 0), (GeoPrimitive) item);
         } else {
-            if (previousItem != null) {
-                removeFromMap(key, previousItem);
-            }
-            final int[] index = {0};
-            GeoGroup.forAllPrimitives(item, p -> mapWriter.put(new MapWriterKey<>(key, index[0]++), p));
+            //->replace a GeoPrimitive with a GeoGroup
+            mapWriter.remove(new MapWriterKey<>(key, 0));
+            replaceGroupInMap(key, null, item);
         }
     }
 
     private void removeFromMap(final K key, final GeoItem oldItem) {
-        final int[] index = { 0 };
-        GeoGroup.forAllPrimitives(oldItem, p -> mapWriter.remove(new MapWriterKey<>(key, index[0]++)));
+        putToMap(key, null, oldItem);
     }
 
+    private void replaceGroupInMap(final K key, @Nullable final GeoItem oldItem, @Nullable final GeoItem newItem) {
+
+        mapWriter.multiChange(() -> {
+            final Map<Integer, GeoPrimitive> toRemove = CommonUtils.getTempLocalMap();
+            final Map<Integer, GeoPrimitive> toPut = CommonUtils.getTempLocalMap2();
+
+            //get elements from old and new group
+            fillMapFromGroup(oldItem, toRemove);
+            fillMapFromGroup(newItem, toPut);
+            //everything which is both in old and new group must not be removed
+            for (Integer i : toPut.keySet()) {
+                toRemove.remove(i);
+            }
+            final Map<MapWriterKey<K>, GeoPrimitive> result = new HashMap<>();
+            for (Map.Entry<Integer, GeoPrimitive> entry : toRemove.entrySet()) {
+                result.put(new MapWriterKey<>(key, entry.getKey()), null);
+            }
+            for (Map.Entry<Integer, GeoPrimitive> entry : toPut.entrySet()) {
+                result.put(new MapWriterKey<>(key, entry.getKey()), entry.getValue());
+            }
+            toPut.clear();
+            toRemove.clear();
+            return result;
+        });
+    }
+
+    private static void fillMapFromGroup(@Nullable final GeoItem item, final Map<Integer, GeoPrimitive> map) {
+        map.clear();
+        if (item == null) {
+            return;
+        }
+        GeoGroup.forAllPrimitives(item, p -> {
+            //create unique index. Use hashCode as base so similar objects get similar indexes very often
+            int idx = Objects.hashCode(p);
+            while (map.containsKey(idx)) {
+                idx++;
+            }
+            map.put(idx, p);
+        });
+    }
+
+    /** If an object for given key exists on the layer, it is made visible */
     public synchronized void show(final K key) {
         final Pair<GeoItem, Boolean> value = itemMap.get(key);
         if (value != null && !value.second) {
@@ -232,6 +342,7 @@ public class GeoItemLayer<K> {
         }
     }
 
+    /** If an object for given key exists on the layer, it is made invisible */
     public synchronized void hide(final K key) {
         final Pair<GeoItem, Boolean> value = itemMap.get(key);
         if (value != null && value.second) {
@@ -240,24 +351,28 @@ public class GeoItemLayer<K> {
         }
     }
 
+
+    /** All objects in this layer are made visible */
     public synchronized void showAll() {
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (!entry.getValue().second) {
-                itemMap.put(entry.getKey(), new Pair<>(entry.getValue().first, true));
+                entry.setValue(new Pair<>(entry.getValue().first, true));
                 putToMap(entry.getKey(), entry.getValue().first, null);
             }
         }
     }
 
+    /** All objects in this layer are made invisible */
     public synchronized void hideAll() {
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (entry.getValue().second) {
-                itemMap.put(entry.getKey(), new Pair<>(entry.getValue().first, false));
+                entry.setValue(new Pair<>(entry.getValue().first, false));
                 removeFromMap(entry.getKey(), entry.getValue().first);
             }
         }
     }
 
+    /** Gets the overall viewport for all objects in this layer (visible or invisible) */
     public synchronized Viewport getViewport() {
         final Viewport.ContainingViewportBuilder vpBuilder = new Viewport.ContainingViewportBuilder();
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
@@ -266,13 +381,14 @@ public class GeoItemLayer<K> {
         return vpBuilder.getViewport();
     }
 
+    /** Gets a list of all objects touched by a given geopoint. Only visible objects are considered */
     public synchronized Set<K> getTouched(final Geopoint tapped) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GeoItemLayer.getTouched")) {
-            final Func1<Geopoint, Point> toCoordFct;
+            final ToScreenProjector toCoordFct;
             final IProviderGeoItemLayer<?> pl = this.providerLayer;
             if (pl != null) {
                 toCoordFct = pl.getScreenCoordCalculator();
-                Log.d("Touched: " + tapped + " at " + (toCoordFct == null ? "-" : toCoordFct.call(tapped)));
+                Log.d("Touched: " + tapped + " at " + (toCoordFct == null ? "-" : toCoordFct.project(tapped)));
             } else {
                 toCoordFct = null;
             }
@@ -280,7 +396,7 @@ public class GeoItemLayer<K> {
 
             final Set<K> result = new HashSet<>();
             for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
-                if (entry.getValue().first.touches(tapped, toCoordFct)) {
+                if (entry.getValue().second && entry.getValue().first.touches(tapped, toCoordFct)) {
                     result.add(entry.getKey());
                 }
             }

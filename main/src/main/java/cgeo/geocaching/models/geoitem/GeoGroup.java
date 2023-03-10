@@ -3,9 +3,7 @@ package cgeo.geocaching.models.geoitem;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Func1;
 
-import android.graphics.Point;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -56,6 +54,10 @@ public class GeoGroup implements GeoItem, Parcelable {
         return viewport;
     }
 
+    public static GeoGroup create(final GeoItem ... items) {
+        return builder().addItems(items).build();
+    }
+
     public static Builder builder() {
         return new GeoGroup.Builder();
     }
@@ -86,7 +88,7 @@ public class GeoGroup implements GeoItem, Parcelable {
     }
 
     @Override
-    public boolean touches(@NonNull final Geopoint tapped, @Nullable final Func1<Geopoint, Point> toScreenCoordFunc) {
+    public boolean touches(@NonNull final Geopoint tapped, @Nullable final ToScreenProjector toScreenCoordFunc) {
         for (GeoItem item : getItems()) {
             if (item.touches(tapped, toScreenCoordFunc)) {
                 return true;

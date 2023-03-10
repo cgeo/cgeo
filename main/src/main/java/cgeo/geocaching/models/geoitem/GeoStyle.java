@@ -24,17 +24,20 @@ public class GeoStyle implements Parcelable {
         this.fillColor = fillColor;
     }
 
+    /** Stroke color as Android Color int (which includes rgb as well as alpha value) */
     @ColorInt
     @Nullable
     public Integer getStrokeColor() {
         return strokeColor;
     }
 
+    /** Stroke width in DP (not pixels) */
     @Nullable
     public Float getStrokeWidth() {
         return strokeWidth;
     }
 
+    /** Fill color as Android Color int (which includes rgb as well as alpha value) */
     @ColorInt
     @Nullable
     public Integer getFillColor() {
@@ -42,6 +45,7 @@ public class GeoStyle implements Parcelable {
     }
 
     /** Returns a non-null strokecolor. If color for this object is null then given defaults are used */
+    @ColorInt
     public static int getStrokeColor(@Nullable final GeoStyle style, @ColorInt final Integer ... defaults) {
         if (style != null && style.strokeColor != null) {
             return style.strokeColor;
@@ -60,12 +64,18 @@ public class GeoStyle implements Parcelable {
     }
 
     /** Returns a non-null fillcolor. If color for this object is null then given defaults are used */
+    @ColorInt
     public static int getFillColor(@Nullable final GeoStyle style, @ColorInt final Integer ... defaults) {
         if (style != null && style.fillColor != null) {
             return style.fillColor;
         }
         final Integer dv = firstNonNull(defaults);
         return dv == null ? Color.TRANSPARENT : dv;
+    }
+
+    public static int getAlpha(@ColorInt final int color) {
+        //copied from Android Color class
+        return color >>> 24;
     }
 
     @Nullable
