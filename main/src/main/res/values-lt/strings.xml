@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgstamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti vaizdo slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Vaizdo gauti nepavyko.</string>
+    <string name="err_acquire_image_unsupported_format">Vaizdo formatas turi būti JPEG/JPG, PNG arba GIF</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
@@ -1082,6 +1083,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
+    <string name="map_source_google_terrain">Google: Reljefas</string>
     <string name="map_source_osm_offline">Neprisijungus</string>
     <string name="map_source_osm_offline_combined">Sujungtas (Neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio savybės</string>
@@ -2466,6 +2468,7 @@
     <string name="use">Naudoti</string>
     <string name="redo">Grąžinti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
+    <string name="optimize">Optimizuoti</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Pažymėti viską</string>
     <!-- render theme legend: category "areas" -->

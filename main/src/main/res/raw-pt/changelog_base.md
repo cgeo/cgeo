@@ -5,8 +5,10 @@
 - Novo: Actualiza a lista de mapas ao receber um ficheiro de mapa
 - Alteração: Não instala automaticamente o mapa/tema transferido
 - Novo: Optimização da rota individual (experimental)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
+- Novo: Suporte para mapas "Google: Terreno"
+- Novo: Definir largura de linha por percurso
+- Novo: Ocultar barra de acção do mapa a pedido (tocar num espaço vazio no mapa)
+- Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
 
 ### Detalhes da cache
 
@@ -14,3 +16,6 @@
 - Correcção: Botão de pré-visualização exibido apenas com a configuração de filtro "mostrar todos" na lista de PQ
 - Novo: Adicionado Cruiser como aplicação de navegação (requer Cruiser 3.0.9 ou superior)
 - Novo: Importar as listas de favoritos de geocaching.com a partir de hiperligações
+- Novo: Permitir abertura de caches visualizadas recentemente como lista
+- Novo: Poder ordenar os botões de início rápido
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)

@@ -7,6 +7,8 @@
 - Uusi: Yksilöllinen reitin optimointi (kokeellinen)
 - New: Support for "Google: Terrain" maps
 - New: Setting line-width per track
+- New: Hide map's action bar on demand (tap on empty space on map)
+- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 
 ### Kätkön tiedot
 
@@ -14,3 +16,6 @@
 - Korjaa: Esikatsele painiketta näkyi vain suodatinasetuksella "näytä kaikki" PQ-luettelossa
 - Uusi: Lisää Cruiser navigointisovellukseksi (vaatii Cruiser 3.0.9 tai uudemman)
 - Uusi: Tuo geocaching.com kirjanmerkkilistat linkeistä
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)

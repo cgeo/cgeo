@@ -1,6 +1,7 @@
 ##
 - Oplossing: Log beschrijvingskolom verbreden in liggende modus
 - Oplossing: Maak foutmelding bij afbeeldingsformaat duidelijker
+- Oplossing: Gebruikersgemaakte waypoints worden niet weergegeven op OSM kaart
 
 ##
 - Fix: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
