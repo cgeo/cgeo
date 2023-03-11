@@ -19,3 +19,5 @@
 - Novo: Permitir abertura de caches visualizadas recentemente como lista
 - Novo: Poder ordenar os botões de início rápido
 - New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
