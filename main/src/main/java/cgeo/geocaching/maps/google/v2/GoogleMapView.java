@@ -21,6 +21,7 @@ import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.FilterUtils;
@@ -83,6 +84,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
+    private WeakReference<AbstractBottomNavigationActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
 
@@ -149,6 +151,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 }
             }
         });
+        adaptLayoutForActionbar(true);
         googleMap.setOnCameraChangeListener(cameraPosition -> {
             // check for tap on compass rose, which resets bearing to 0.0
             // only active, if it has been not equal to 0.0 before
@@ -200,6 +203,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (isInEditMode()) {
             return;
         }
+
+        activityRef = new WeakReference<>((AbstractBottomNavigationActivity) context);
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
@@ -436,13 +441,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return false;
         }
 
-        private void toggleActionBar() {
-            final AbstractBottomNavigationActivity activity = activityRef.get();
-            if (activity != null) {
-                FilterUtils.toggleActionBar(activity);
-            }
-        }
-
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2,
                                 final float distanceX, final float distanceY) {
@@ -450,6 +448,24 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 onDragListener.onDrag();
             }
             return false;
+        }
+    }
+
+    private void toggleActionBar() {
+        final AbstractBottomNavigationActivity activity = activityRef.get();
+        if (activity != null) {
+            adaptLayoutForActionbar(FilterUtils.toggleActionBar(activity));
+        }
+    }
+
+    private void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        if (googleMap != null) {
+            try {
+                final View mapView = findViewById(R.id.map);
+                final View compass = mapView.findViewWithTag("GoogleMapCompass");
+                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+            } catch (Exception ignore) {
+            }
         }
     }
 
