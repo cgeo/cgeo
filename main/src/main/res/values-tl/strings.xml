@@ -398,6 +398,7 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung saan ang listahan para mai-tabi ang mga cache sa</string>
     <string name="init_livelist">Ipakita ang mga direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">I-backup</string>
