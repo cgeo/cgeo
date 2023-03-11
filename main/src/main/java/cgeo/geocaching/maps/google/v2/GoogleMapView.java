@@ -39,6 +39,8 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -83,10 +85,12 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
+    private WeakReference<AbstractBottomNavigationActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
 
     private int fromList = StoredList.TEMPORARY_LIST.id;
+    private static int[] compassOffset = { -1, -1 };
 
     public interface PostRealDistance {
         void postRealDistance(float realDistance);
@@ -200,6 +204,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (isInEditMode()) {
             return;
         }
+
+        activityRef = new WeakReference<>((AbstractBottomNavigationActivity) context);
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
@@ -436,13 +442,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return false;
         }
 
-        private void toggleActionBar() {
-            final AbstractBottomNavigationActivity activity = activityRef.get();
-            if (activity != null) {
-                FilterUtils.toggleActionBar(activity);
-            }
-        }
-
         @Override
         public boolean onScroll(final MotionEvent e1, final MotionEvent e2,
                                 final float distanceX, final float distanceY) {
@@ -450,6 +449,46 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 onDragListener.onDrag();
             }
             return false;
+        }
+    }
+
+    private void toggleActionBar() {
+        final AbstractBottomNavigationActivity activity = activityRef.get();
+        if (activity != null) {
+            final boolean actionBarShowing = FilterUtils.toggleActionBar(activity);
+
+            if (googleMap != null) {
+                try {
+                    final View mapView = findViewById(R.id.map);
+                    final ViewGroup parent = (ViewGroup) mapView.findViewWithTag("GoogleMapCompass").getParent();
+                    final View compass = mapView.findViewWithTag("GoogleMapCompass");
+                    final int[] location = new int[2];
+                    final int whichOffset = (actionBarShowing ? 1 : 0);
+                    if (compassOffset[whichOffset] < 0) {
+                        compass.getLocationOnScreen(location);
+                        compassOffset[whichOffset] = location[1];
+                    }
+                    final View elementOnTop = mapView.getRootView().findViewById(R.id.sort_bar);
+                    if (elementOnTop != null) {
+                        elementOnTop.getLocationOnScreen(location);
+                    }
+
+                    parent.post(() -> {
+                        try {
+                            for (int i = 0, n = parent.getChildCount(); i < n; i++) {
+                                final View view = parent.getChildAt(i);
+                                final RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                                rlp.topMargin = compassOffset[whichOffset] + location[1];
+                                view.requestLayout();
+                            }
+
+                        } catch (Exception ignore) {
+                        }
+                    });
+                } catch (Exception ignore) {
+                }
+            }
+
         }
     }
 
