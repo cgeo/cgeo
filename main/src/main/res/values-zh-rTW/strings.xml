@@ -661,6 +661,7 @@
     <string name="init_summary_listdisplay">在附加列表裡顯示地理藏寶的會員資訊</string>
     <string name="init_livelist">顯示方向</string>
     <string name="init_summary_livelist">顯示羅盤箭頭</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">佈景主題</string>
     <string-array name="settings_theme_entries">
