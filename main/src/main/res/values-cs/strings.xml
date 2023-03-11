@@ -869,10 +869,22 @@
     <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
     <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
+    <string name="init_title_cacheListInfo1">Zobrazit informace v seznamu kešek (1. řádek)</string>
+    <string name="init_title_cacheListInfo2">Zobrazit informace v seznamu kešek (2. řádek)</string>
+    <string name="init_summary_cacheListInfo">Vyberte jednu nebo více položek, které mají být zobrazeny pro každou kešku v seznamu kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_GCCode">GC kód</string>
+    <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
+    <string name="cacheListInfoItem_Terrain">Terén</string>
+    <string name="cacheListInfoItem_MemberState">Stav členství</string>
+    <string name="cacheListInfoItem_Size">Velikost</string>
+    <string name="cacheListInfoItem_Lists">Seznamy</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Datum eventu</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motiv</string>
     <string-array name="settings_theme_entries">
@@ -1426,6 +1438,8 @@
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
     <string name="cache_recently_viewed">Naposledy zobrazené</string>
+    <string name="cache_recently_viewed_empty">Žádné nedávno zobrazené kešky</string>
+    <string name="cache_clear_recently_viewed">vymazat</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -2277,7 +2291,6 @@
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <string name="route_optimization">Optimalizace trasy</string>
-    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Protože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
     <string name="initial_route_length">Počáteční délka trasy: %d</string>
     <string name="optimized_route_length">Optimalizovaná délka trasy: %d</string>
     <string name="route_optimization_out_of_bounds">Optimalizace trasy funguje pro trasy mezi 3 a 100 body</string>
