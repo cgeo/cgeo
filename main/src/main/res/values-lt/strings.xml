@@ -873,6 +873,7 @@
     <string name="init_summary_livelist">Rodyti rodyklę su kompaso kryptimi slėptuvių sąraše</string>
     <string name="init_quicklaunchitems">Greito paleidimo mygtukai</string>
     <string name="init_summary_quicklaunchitems">Pasirinkite vieną ar daugiau elementų kaip greito paleidimo mygtukus pagrindiniame ekrane</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -2277,7 +2278,6 @@
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
     <string name="route_optimization">Maršruto optimizavimas</string>
-    <string name="route_optimization_info">Maršruto optimizavimas yra eksperimentinė funkcija, skirta optimizuoti maršrutą trumpesniam atstumui. Kadangi dėl laiko ir skaičiavimo galios apribojimų mobiliajame įrenginyje neįmanoma įvertinti visų galimų sprendimų, jis naudoja aproksimavimo algoritmus apskaičiuoti galimam optimizavimui.\n\nSkaičiavimas atliekamas dviem etapais: Apskaičiuokite atstumus tarp dviejų maršruto porų, tada pabandoma rasti priimtiną maršrutą. Tai gali būti ne trumpiausias įmanomas maršrutas, todėl antrą veiksmą galite kartoti tiek kartų, kiek norite.</string>
     <string name="initial_route_length">Pradinis maršruto ilgis: %d</string>
     <string name="optimized_route_length">Optimizuotas maršruto ilgis: %d</string>
     <string name="route_optimization_out_of_bounds">Maršruto optimizavimas veikia maršrutams nuo 3 iki 100 taškų</string>
