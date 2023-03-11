@@ -800,6 +800,7 @@
     <string name="init_summary_listdisplay">Mostrar pertenencia de cachés a listas adicionales en una lista de cachés</string>
     <string name="init_livelist">Mostrar dirección</string>
     <string name="init_summary_livelist">Mostrar una flecha con la dirección de la brújula para los cachés de una lista</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
