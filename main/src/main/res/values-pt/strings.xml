@@ -861,6 +861,7 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -2219,7 +2220,6 @@
     <string name="individual_route_set_as_start_title">Definir como início da rota</string>
     <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <string name="route_optimization">Optimização de rota</string>
-    <string name="route_optimization_info">A optimização de rota é um recurso experimental para optimizar uma rota com uma distância mais curta. Uma vez que não é possível avaliar todas as soluções possíveis, devido a restrições de tempo e energia para fazer o cálculo num dispositivo móvel, são usados algoritmos aproximados para calcular possíveis optimizações.\n\nO cálculo é feito em dois passos: Calcula as distâncias entre cada dois pares da rota, depois tenta encontrar uma rota viável. Esta pode não ser a rota mais curta possível, portanto pode repetir o segundo passo as vezes que quiser.</string>
     <string name="initial_route_length">Tamanho inicial da rota: %d</string>
     <string name="optimized_route_length">Tamanho optimizado da rota: %d</string>
     <string name="route_optimization_out_of_bounds">A optimização de rota funciona para rotas entre 3 e 100 pontos</string>
