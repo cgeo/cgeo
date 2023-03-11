@@ -872,6 +872,7 @@
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
     <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu alebo viac položiek ako tlačidlá rychlého spustenia na domovskej obrazovke</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Téma</string>
     <string-array name="settings_theme_entries">
