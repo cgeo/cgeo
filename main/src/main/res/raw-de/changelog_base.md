@@ -19,3 +19,5 @@
 - Neu: Erlaube das Öffnen der kürzlich angesehenen Caches als Liste
 - Neu: Schnellstart-Schaltflächen sortierbar
 - Neu: Workaround für Trackable-Namenskonflikte (funktioniert für deaktivierten GeoKrety Connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
