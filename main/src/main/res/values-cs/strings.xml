@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Označení oblíbenosti keše selhalo.</string>
     <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
+    <string name="err_acquire_image_unsupported_format">Formát obrázku musí být JPEG/JPG, PNG nebo GIF</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
@@ -2377,6 +2378,7 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_checking">Kontrola dostupných směrovacích dat…</string>
     <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
     <string name="downloadmap_otherthemedownload">další motiv ke stažení</string>
     <string name="downloadmap_download">stáhnout</string>

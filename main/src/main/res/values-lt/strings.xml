@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgstamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti vaizdo slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Vaizdo gauti nepavyko.</string>
+    <string name="err_acquire_image_unsupported_format">Vaizdo formatas turi būti JPEG/JPG, PNG arba GIF</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
@@ -1617,6 +1618,7 @@
     <string name="imageview_notitle">Be pavadinimo</string>
     <string name="imageview_mimetype">Mime tipas</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Nepavyko įkelti vaizdo</string>
     <string name="imageview_metadata_geopoint">Geo taškas</string>
     <string name="imageview_metadata_comment">Komentaras</string>
     <!-- visit -->
@@ -2236,6 +2238,8 @@
     <string name="permission_location_explanation">c:geo yra optimizuotas veikti su GPS duomenimis (tiksli vieta), kad būtų galima nustatyti jūsų padėtį ir apskaičiuoti atstumą bei kryptį iki geoslėptuvių. Be šio leidimo vieta pagrįstos funkcijos neveiks taip, kaip tikėtasi.</string>
     <string name="permission_read_external_storage_explanation_title">Leidimas skaityti išorinę saugyklą</string>
     <string name="permission_read_external_storage_explanation">c:geo gali naudoti jūsų sistemos foną kaip programos foną. Kad tai padarytų, c:geo reikia leidimo nuskaityti medijos duomenis išorinėje saugykloje.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo įrašys duomenis į jūsų telefono atmintį arba SD kortelę, pvz. kai išsaugote slėptuves naudojimui neprisijungus, importuojate ar eksportuojate failus ir kitas funkcijas. Kai kuriose „Android“ versijose šiems veiksmams turite suteikti papildomą leidimą.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Pasenęs išorinės saugyklos rašymo leidimas</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
@@ -2374,6 +2378,7 @@
     <string name="downloadmap_mapfile">žemėlapio failas</string>
     <string name="downloadmap_themefile">temos failas</string>
     <string name="downloadmap_tilefile">maršrutizavimo duomenų failas</string>
+    <string name="downloadmap_checking">Tikrinami galimi maršruto duomenys…</string>
     <string name="downloadmap_othermapdownload">kitas žemėlapio atsisiuntimas</string>
     <string name="downloadmap_otherthemedownload">kitas temos atsisiuntimas</string>
     <string name="downloadmap_download">atsisiųsti</string>

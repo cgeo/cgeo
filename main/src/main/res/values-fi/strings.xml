@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
+    <string name="err_acquire_image_unsupported_format">Kuvamuodon on oltava JPEG/JPG, PNG tai GIF</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -1585,6 +1586,7 @@
     <string name="imageview_notitle">Nimetön</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d pikseliä</string>
+    <string name="imageview_error">Kuvan lataaminen epäonnistui</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- visit -->
@@ -2178,6 +2180,8 @@
     <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
     <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
     <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
@@ -2314,6 +2318,7 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_checking">Tarkistetaan saatavilla olevia reititystietoja…</string>
     <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
     <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>

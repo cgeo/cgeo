@@ -1,4 +1,9 @@
 ##
+- Korrektur: Breitere Infospalte in der Logansicht im Querformat
+- Korrektur: Klarere Fehlermeldung bei nicht unterstütztem Bildformat
+- Korrektur: Benutzerdefinierte Wegpunkte wurden nicht auf der OSM-Karte angezeigt
+
+##
 - Korrektur: Manche benutzerdefinierte Wegpunkte werden beim GPX-Import übersprungen
 - Korrektur: Liste der erweiterten Filter wird nicht übersetzt, wenn Spracheinstellung in c:geo auf Nicht-Standardwert gesetzt
 - Korrektur: Herunterladen / Aktualisieren von Routingdaten oder Karten auf älteren Geräten nicht mehr möglich

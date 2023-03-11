@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Wijzigen favorieten status is mislukt.</string>
     <string name="err_select_logimage_failed">Selecteren van een foto voor het log is mislukt.</string>
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
+    <string name="err_acquire_image_unsupported_format">Afbeeldingsformaat moet van JPEG/JPG, PNG of GIF zijn</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
     <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
@@ -2317,6 +2318,7 @@
     <string name="downloadmap_mapfile">kaart bestand</string>
     <string name="downloadmap_themefile">themabestand</string>
     <string name="downloadmap_tilefile">routeringsdatabestand</string>
+    <string name="downloadmap_checking">Controleren beschikbare routeringsgegevens…</string>
     <string name="downloadmap_othermapdownload">andere kaart downloaden</string>
     <string name="downloadmap_otherthemedownload">ander thema downloaden</string>
     <string name="downloadmap_download">downloaden</string>

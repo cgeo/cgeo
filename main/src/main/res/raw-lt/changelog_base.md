@@ -23,7 +23,7 @@
 - Naujiena: Leidžiama importuoti GPX pėdsako failus, kuriuose nėra xmlns vardų erdvės žymos
 - Naujiena: Pridėta vienspalvė paleidimo piktograma, skirta Android 13
 - Naujiena: Pagrindiniame ekrane rodyma geocaching.com nario būsena
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Pakeitimas: GPX importas: Naudokite geoslėptuvės pavadinimą kaip 'nežinoma' jungtis
 - Pataisymas: Leidžiama filtruoti archyvuotas slėptuves savininko paieškoje
-- Fix: Line breaks sometimes missing in logbook view directly after posting a log
-- Fix: Several crashes
+- Pataisymas: Eilučių lūžių kartais trūksta žurnalo rodinyje iškart paskelbus žurnalą
+- Pataisyta: Keli gedimai
