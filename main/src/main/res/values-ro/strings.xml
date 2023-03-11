@@ -451,6 +451,7 @@
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
     <string name="init_livelist">Arată direcţia</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
