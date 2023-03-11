@@ -839,6 +839,7 @@
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
     <string name="init_quicklaunchitems">Πλήκτρα ταχείας εκκίνησης</string>
     <string name="init_summary_quicklaunchitems">Επιλέξτε ένα ή περισσότερα αντικείμενα ως κουμπιά γρήγορης εκκίνησης στην αρχική οθόνη</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Θέμα</string>
     <string-array name="settings_theme_entries">
