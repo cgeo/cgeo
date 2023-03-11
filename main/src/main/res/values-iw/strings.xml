@@ -369,6 +369,7 @@
     <string name="init_ratingwanted">דירוג GCvote</string>
     <string name="init_address">הצג כתובת</string>
     <string name="init_summary_address">הצגת כתובת במקום נקודות ציון על המסך הראשי</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creating backup of cache database&#8230;</string>
