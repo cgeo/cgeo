@@ -381,6 +381,7 @@
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Tabang</string>
