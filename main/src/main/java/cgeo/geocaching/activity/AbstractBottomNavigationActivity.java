@@ -122,6 +122,12 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     private boolean onSearchLongClicked() {
         final ArrayList<Geocache> lastCaches = new ArrayList<>(DataStore.getLastOpenedCaches());
+
+        if (lastCaches.isEmpty()) {
+            showToast(R.string.cache_recently_viewed_empty);
+            return true;
+        }
+
         final ListAdapter adapter = new ArrayAdapter<Geocache>(this, R.layout.cacheslist_item_select, lastCaches) {
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
@@ -136,6 +142,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                     CacheListActivity.startActivityLastViewed(this, new SearchResult(lastCaches));
                     ActivityMixin.overrideTransitionToFade(this);
                 })
+                .setNegativeButton(R.string.cache_clear_recently_viewed, (d, w) -> Settings.clearRecentlyViewedHistory())
                 .show();
         return true;
     }
