@@ -872,6 +872,7 @@
     <string name="init_summary_livelist">Показывать стрелку с направлением компаса для тайников в списке</string>
     <string name="init_quicklaunchitems">Кнопки быстрого запуска</string>
     <string name="init_summary_quicklaunchitems">Выберите пункты для быстрого запуска на главном экране</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Тема</string>
     <string-array name="settings_theme_entries">
