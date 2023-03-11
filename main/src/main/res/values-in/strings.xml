@@ -394,6 +394,7 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
