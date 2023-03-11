@@ -522,6 +522,7 @@
     <string name="init_summary_listdisplay">在藏点列表中显示藏点所属的其他列表</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
