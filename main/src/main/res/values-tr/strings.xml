@@ -783,6 +783,7 @@
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
     <string name="init_quicklaunchitems">Hızlı başlatma düğmeleri</string>
     <string name="init_summary_quicklaunchitems">Ana ekranda hızlı başlatma düğmeleri olarak bir veya daha fazla öğe seçin</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
