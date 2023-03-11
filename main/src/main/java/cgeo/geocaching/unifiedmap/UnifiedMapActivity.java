@@ -940,7 +940,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (null == tracks && !preventReloading) {
             this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
         } else if (null != tracks) {
-            tileProvider.getMap().positionLayer.updateTrack(key, tracks.getRoute(key));
+            tileProvider.getMap().positionLayer.updateTrack(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
         }
     }
 

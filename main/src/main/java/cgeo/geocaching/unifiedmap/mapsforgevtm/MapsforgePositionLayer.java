@@ -56,14 +56,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     // individual route, routes & tracks
     private final PathLayer navigationLayer;
-    final Style routeStyle = Style.builder()
-            .strokeWidth(MapLineUtils.getRouteLineWidth(true))
-            .strokeColor(MapLineUtils.getRouteColor())
-            .build();
-    final Style trackStyle = Style.builder()
-            .strokeWidth(MapLineUtils.getTrackLineWidth(true))
-            .strokeColor(MapLineUtils.getTrackColor())
-            .build();
 
     MapsforgePositionLayer(final Map map, final View root) {
         super(root, GeoPoint::new);
@@ -110,8 +102,8 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     }
 
     @Override
-    public void updateTrack(final String key, final IGeoDataProvider track) {
-        super.updateTrack(key, track, GP_CONVERTER::toListList);
+    public void updateTrack(final String key, final IGeoDataProvider track, final int color, final int width) {
+        super.updateTrack(key, track, color, width, GP_CONVERTER::toListList);
     }
 
     // ========================================================================
@@ -157,11 +149,14 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     @Override
     protected void repaintRouteAndTracks() {
         MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
-        repaintRouteAndTracksHelper((segment, isTrack) -> {
+        repaintRouteAndTracksHelper((segment, color, width) -> {
             if (segment.size() < 2) {
                 return; // no line can be drawn from a single point
             }
-            final PathLayer segmentLayer = new PathLayer(map, isTrack ? trackStyle : routeStyle);
+            final PathLayer segmentLayer = new PathLayer(map, Style.builder()
+                    .strokeWidth(MapLineUtils.getWidthFromRaw(width, true))
+                    .strokeColor(color)
+                    .build());
             MAP_MAPSFORGE.addLayerToGroup(segmentLayer, LayerHelper.ZINDEX_TRACK_ROUTE);
             segmentLayer.setPoints(segment);
         });
