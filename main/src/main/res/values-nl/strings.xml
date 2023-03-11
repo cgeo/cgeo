@@ -861,6 +861,7 @@
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
@@ -2219,7 +2220,6 @@
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <string name="route_optimization">Route optimalisatie</string>
-    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. Omdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd en rekenkracht op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een acceptabele weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als gewenst herhalen.</string>
     <string name="initial_route_length">Initiële routelengte: %d</string>
     <string name="optimized_route_length">Geoptimaliseerde route lengte: %d</string>
     <string name="route_optimization_out_of_bounds">Routeoptimalisatie werkt voor routes tussen 3 en 100 punten</string>
