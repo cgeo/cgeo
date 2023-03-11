@@ -861,6 +861,7 @@
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
@@ -2219,7 +2220,6 @@
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <string name="route_optimization">Routenoptimierung</string>
-    <string name="route_optimization_info">Die Routenoptimierung ist ein experimentelles Feature, um eine kürze Route zu ermitteln. Auf mobilen Endgeräten ist es aufgrund begrenzter Rechenleistung nicht möglich, immer die optimale Lösung zu errechnen, daher werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne alle paarweisen Distanzen zwischen zwei Punkten der Route, dann versuche eine akzeptable Route zu finden. Für weitere Optimierungen kann Schritt 2 beliebig oft wiederholt werden.</string>
     <string name="initial_route_length">Ursprüngliche Routenlänge: %d</string>
     <string name="optimized_route_length">Optimierte Routenlänge: %d</string>
     <string name="route_optimization_out_of_bounds">Routenoptimierung funktioniert für Routen zwischen 3 und 100 Punkten</string>
