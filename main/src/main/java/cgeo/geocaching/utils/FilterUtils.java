@@ -86,9 +86,11 @@ public class FilterUtils {
         activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
     }
 
-    public static void toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
-        final boolean actionBarShown = activity.toggleActionBar();
-        activity.findViewById(R.id.actionBarSpacer).setVisibility(actionBarShown ? View.VISIBLE : View.GONE);
+    public static boolean toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
+        final boolean actionBarShowing = activity.toggleActionBar();
+        final View spacer = activity.findViewById(R.id.actionBarSpacer);
+        activity.findViewById(R.id.filterbar).animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start();
+        return actionBarShowing;
     }
 
     public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
