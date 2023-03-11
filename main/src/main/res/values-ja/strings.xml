@@ -772,6 +772,7 @@
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
     <string name="init_quicklaunchitems">クイック起動ボタン</string>
     <string name="init_summary_quicklaunchitems">ホーム画面に表示するクイック起動ボタンの選択</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">テーマ</string>
     <string-array name="settings_theme_entries">
