@@ -1881,6 +1881,10 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
+    public static void clearRecentlyViewedHistory() {
+        putStringList(R.string.pref_caches_history, new ArrayList<>());
+    }
+
     private static boolean outdatedPhoneModelOrSdk() {
         return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }

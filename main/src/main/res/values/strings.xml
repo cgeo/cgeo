@@ -1557,6 +1557,8 @@
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listed on %s</string>
     <string name="cache_recently_viewed">Recently viewed</string>
+    <string name="cache_recently_viewed_empty">No recently viewed caches</string>
+    <string name="cache_clear_recently_viewed">clear</string>
 
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
