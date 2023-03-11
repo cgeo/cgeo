@@ -861,6 +861,7 @@
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
     <string name="init_quicklaunchitems">Botons d\'inici ràpid</string>
     <string name="init_summary_quicklaunchitems">Seleccioneu un o més elements com a botons d\'inici ràpid a la pantalla d\'inici</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Aspecte</string>
     <string-array name="settings_theme_entries">
