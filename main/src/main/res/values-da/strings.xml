@@ -701,6 +701,7 @@
     <string name="init_summary_listdisplay">Vis cachers tilhørsforhold til andre lister i cachelisterne</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis kompasretningen til caches i en liste</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string-array name="settings_theme_entries">
         <item>System Default</item>
