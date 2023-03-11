@@ -497,6 +497,7 @@
     <string name="init_listdisplay">Додаткові списки</string>
     <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Створити резервну копію</string>
