@@ -568,6 +568,7 @@
     <string name="init_choose_list">Listaválasztás</string>
     <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
