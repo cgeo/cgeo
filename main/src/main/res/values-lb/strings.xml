@@ -492,6 +492,7 @@
     <string name="init_listdisplay">Zousätzlech Lëschten</string>
     <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
     <string name="init_livelist">Richtung uweisen</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
