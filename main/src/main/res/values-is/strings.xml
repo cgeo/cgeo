@@ -314,6 +314,7 @@
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
     <string name="init_log_offline">Skráning án netsambands</string>
     <string name="init_livelist">Sýna átt</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Öryggisafrit</string>
