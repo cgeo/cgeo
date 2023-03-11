@@ -13,8 +13,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Action3;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -84,6 +85,8 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     private class CachedRoute {
         private boolean isHidden = false;
         private List<List<T>> track = null;
+        private int color;
+        private int width;
     }
 
     protected AbstractPositionLayer(final View root, final Func2<Double, Double, T> createNewPoint) {
@@ -120,7 +123,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     // ========================================================================
     // route / track handling
 
-    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final Func1<K, List<List<T>>> getAllPoints) {
+    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final int color, final int width, final Func1<K, List<List<T>>> getAllPoints) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (track == null) {
@@ -134,6 +137,8 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
                 }
                 c.track = getAllPoints.call(track);
                 c.isHidden = track.isHidden();
+                c.color = color;
+                c.width = width;
             }
         }
         repaintRouteAndTracks();
@@ -141,17 +146,17 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     public abstract void updateIndividualRoute(Route route);
 
-    public abstract void updateTrack(String key, IGeoDataProvider track);
+    public abstract void updateTrack(String key, IGeoDataProvider track, int color, int width);
 
     public void updateIndividualRoute(final Route route, final Func1<Route, List<List<T>>> getAllPoints) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth(), getAllPoints);
         repaintRouteAndTracks();
         individualRouteDistance = route.getDistance();
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
     }
 
-    public void updateTrack(final String key, final IGeoDataProvider track, final Func1<IGeoDataProvider, List<List<T>>> getAllPoints) {
-        updateRoute(key, track, getAllPoints);
+    public void updateTrack(final String key, final IGeoDataProvider track, final int color, final int width, final Func1<IGeoDataProvider, List<List<T>>> getAllPoints) {
+        updateRoute(key, track, color, width, getAllPoints);
         repaintRouteAndTracks();
     }
 
@@ -279,15 +284,14 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
         }
     }
 
-    protected void repaintRouteAndTracksHelper(final Action2<List<T>, Boolean> addSegment) {
+    protected void repaintRouteAndTracksHelper(final Action3<List<T>, Integer, Integer> addSegment) {
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
-                final boolean isTrack = c != individualRoute;
                 // route hidden, no route or route too short?
                 if (!c.isHidden && c.track != null && c.track.size() > 0) {
                     for (List<T> segment : c.track) {
-                        addSegment.call(segment, isTrack);
+                        addSegment.call(segment, c.color, c.width);
                     }
                 }
             }

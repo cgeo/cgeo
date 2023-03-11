@@ -68,8 +68,8 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     }
 
     @Override
-    public void updateTrack(final String key, final IGeoDataProvider track) {
-        super.updateTrack(key, track, GP_CONVERTER::toListList);
+    public void updateTrack(final String key, final IGeoDataProvider track, final int color, final int width) {
+        super.updateTrack(key, track, color, width, GP_CONVERTER::toListList);
     }
 
     // ========================================================================
@@ -124,10 +124,10 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     @Override
     protected void repaintRouteAndTracks() {
         trackObjs.removeAll();
-        repaintRouteAndTracksHelper((segment, isTrack) -> trackObjs.addPolyline(new PolylineOptions()
+        repaintRouteAndTracksHelper((segment, color, width) -> trackObjs.addPolyline(new PolylineOptions()
                 .addAll(segment)
-                .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
-                .width(isTrack ? MapLineUtils.getTrackLineWidth(true) : MapLineUtils.getRouteLineWidth(true))
+                .color(color)
+                .width(MapLineUtils.getWidthFromRaw(width, true))
                 .zIndex(LayerHelper.ZINDEX_TRACK_ROUTE)
         ));
     }
