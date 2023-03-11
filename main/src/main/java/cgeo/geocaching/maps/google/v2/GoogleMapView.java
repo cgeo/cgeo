@@ -83,6 +83,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
+    private WeakReference<AbstractBottomNavigationActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
 
@@ -120,6 +121,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(this::recognizePositionChange);
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
+        googleMap.setOnMapClickListener(latLng -> {
+            if (activityRef.get() != null) {
+                FilterUtils.toggleActionBar(activityRef.get());
+            }
+        });
         googleMap.setOnMarkerClickListener(marker -> {
             // onCacheTapListener will fire on onSingleTapUp event, not here, because this event
             // is fired 300 ms after map tap, which is too slow for UI
@@ -200,6 +206,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (isInEditMode()) {
             return;
         }
+
+        activityRef = new WeakReference<>((AbstractBottomNavigationActivity) context);
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
@@ -425,22 +433,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                         final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
                         if (insideCachePointDrawable(p, waypointPoint, closest.getMarker(0).getDrawable())) {
                             onCacheTapListener.onCacheTap(closest.getCoord());
-                        } else {
-                            toggleActionBar();
                         }
-                    } else {
-                        toggleActionBar();
                     }
                 }
             }
             return false;
-        }
-
-        private void toggleActionBar() {
-            final AbstractBottomNavigationActivity activity = activityRef.get();
-            if (activity != null) {
-                FilterUtils.toggleActionBar(activity);
-            }
         }
 
         @Override
