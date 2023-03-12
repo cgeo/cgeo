@@ -18,6 +18,6 @@
 - 신규: 링크에서 geocaching.com 북마크 목록 가져오기
 - 신규: 최근 본 캐시를 목록으로 열기 허용
 - 신규: 이제 빠른 실행 버튼을 정렬할 수 있습니다.
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
+- 신규: 추적 아이템 네임스페이스 충돌에 대한 해결 방법(비활성화된 GeoKrety 커넥터에서 작동)
+- 신규: 캐시 목록 정보 항목 구성 가능
+- 신규: 최근에 본 캐시 지우기
