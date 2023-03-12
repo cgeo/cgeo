@@ -144,7 +144,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
         repaintRouteAndTracks();
     }
 
-    public abstract void updateIndividualRoute(Route route);
+    public abstract void updateIndividualRoute(IndividualRoute route);
 
     public abstract void updateTrack(String key, IGeoDataProvider track, int color, int width);
 
