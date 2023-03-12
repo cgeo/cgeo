@@ -1309,8 +1309,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
-        if (items.isEmpty()) {
+        if (items.isEmpty() && !longPressMode) {
             FilterUtils.toggleActionBar(this);
+        }
+        if (items.isEmpty()) {
             return;
         }
 
