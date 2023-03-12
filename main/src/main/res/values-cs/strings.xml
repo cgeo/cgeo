@@ -2291,6 +2291,7 @@
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <string name="route_optimization">Optimalizace trasy</string>
+    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Protože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
     <string name="initial_route_length">Počáteční délka trasy: %d</string>
     <string name="optimized_route_length">Optimalizovaná délka trasy: %d</string>
     <string name="route_optimization_out_of_bounds">Optimalizace trasy funguje pro trasy mezi 3 a 100 body</string>
