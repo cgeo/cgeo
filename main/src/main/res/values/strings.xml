@@ -1604,6 +1604,8 @@
     <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_map">Long tap on map</string>
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user-defined cache / waypoint)</string>
+    <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
+    <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="onetime_info_longtap_disabled">By long tapping on map you can create individual routes and user-defined caches / waypoints.\n\nLong tap on map is currently disabled.\n\nYou can change this in Settings → Map → Map behavior</string>
     <string name="onetime_info_longtap_enabled">By long tapping on map you can create individual routes and user-defined caches / waypoints.\n\nLong tap on map is currently enabled.\n\nYou can change this in Settings → Map → Map behavior</string>
     <string name="goto_targets_list">User-defined caches</string>

@@ -7,6 +7,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
@@ -87,6 +88,9 @@ public class FilterUtils {
     }
 
     public static boolean toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
+        if (!Settings.getMapActionbarAutohide()) {
+            return true;
+        }
         final boolean actionBarShowing = activity.toggleActionBar();
         final View spacer = activity.findViewById(R.id.actionBarSpacer);
         activity.findViewById(R.id.filterbar).animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start();

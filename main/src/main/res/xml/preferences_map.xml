@@ -200,6 +200,12 @@
             android:summary="%s"
             android:title="@string/settings_title_map_rotation"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_mapActionbarAutohide"
+            android:summary="@string/init_summary_ActionbarAutohide"
+            android:title="@string/init_ActionbarAutohide"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
