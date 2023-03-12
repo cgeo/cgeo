@@ -35,7 +35,7 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public interface UpdateIndividualRoute {
-        void updateIndividualRoute(Route route);
+        void updateIndividualRoute(IndividualRoute route);
     }
 
     public interface SetTarget {
@@ -181,6 +181,16 @@ public class IndividualRoute extends Route implements Parcelable {
             }
         }
         return -1;
+    }
+
+    public ArrayList<RouteItem> getRouteItems () {
+        final ArrayList<RouteItem> items = new ArrayList<>();
+        if (segments != null) {
+            for (RouteSegment segment : segments) {
+                items.add(segment.getItem());
+            }
+        }
+        return items;
     }
 
     // Parcelable methods

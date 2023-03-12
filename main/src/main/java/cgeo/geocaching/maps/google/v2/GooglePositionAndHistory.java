@@ -10,7 +10,6 @@ import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
@@ -206,7 +205,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void updateIndividualRoute(final Route route) {
+    public void updateIndividualRoute(final IndividualRoute route) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth());
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
