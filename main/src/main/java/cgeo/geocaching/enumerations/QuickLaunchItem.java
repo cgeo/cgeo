@@ -51,6 +51,6 @@ public class QuickLaunchItem extends InfoItem {
     }
 
     public static void startActivity(final Activity caller, final @StringRes int title, @StringRes final int prefKey) {
-        InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey);
+        InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey, 1);
     }
 }
