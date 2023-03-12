@@ -47,8 +47,8 @@ public class CacheListInfoItem extends InfoItem {
         super(id, titleResId);
     }
 
-    public static void startActivity(final Activity caller, final @StringRes int title, @StringRes final int prefKey) {
-        InfoItem.startActivity(caller, CacheListInfoItem.class.getCanonicalName(), "ITEMS", title, prefKey);
+    public static void startActivity(final Activity caller, final @StringRes int title, @StringRes final int prefKey, final int defaultSource) {
+        InfoItem.startActivity(caller, CacheListInfoItem.class.getCanonicalName(), "ITEMS", title, prefKey, defaultSource);
     }
 
 }

@@ -28,10 +28,10 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         setPreferencesFromResource(R.xml.preferences_offlinedata, rootKey);
 
         setPrefClick(this, R.string.pref_cacheListInfo1, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo1);
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo1, 2);
         });
         setPrefClick(this, R.string.pref_cacheListInfo2, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo2, R.string.pref_cacheListInfo2);
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo2, R.string.pref_cacheListInfo2, 3);
         });
 
         findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)).setOnPreferenceClickListener(preference -> {

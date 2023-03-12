@@ -1,6 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CheckableItemSelectActivity;
 
 import android.app.Activity;
@@ -37,7 +38,10 @@ public abstract class InfoItem {
         return null;
     }
 
-    public static void startActivity(final Activity caller, final String className, final String fieldName, final @StringRes int title, @StringRes final int prefKey) {
+    public static void startActivity(final Activity caller, final String className, final String fieldName, final @StringRes int title, @StringRes final int prefKey, final int defaultSource) {
+        // make sure preference items are read once, so that default values are recognized
+        final ArrayList<Integer> unused = Settings.getInfoItems(prefKey, defaultSource);
+        // now run selector
         final Intent intent = new Intent(caller, CheckableItemSelectActivity.class);
         intent.putExtra(Intents.EXTRA_TITLE, title);
         intent.putExtra(Intents.EXTRA_ID, prefKey);
