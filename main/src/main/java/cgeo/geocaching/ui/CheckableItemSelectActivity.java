@@ -139,7 +139,6 @@ public class CheckableItemSelectActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
-            finish();
             return true;
         }
         return false;
@@ -154,5 +153,6 @@ public class CheckableItemSelectActivity extends AbstractActionBarActivity {
             }
         }
         Settings.setInfoItems(prefKey, selected);
+        finish();
     }
 }
