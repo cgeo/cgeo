@@ -851,11 +851,22 @@
     <string name="init_list_initial_load_limit">목록 부하 제한</string>
     <string name="init_summary_list_initial_load_limit">저장된 목록을 표시 할 때 처음에 데이터베이스에서 로드할 최대 캐시 수입니다. \'무제한\'으로 0을 선택하십시오.</string>
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
+    <string name="init_title_cacheListInfo1">캐시 목록에 정보 표시 (1행)</string>
+    <string name="init_title_cacheListInfo2">캐시 목록에 정보 표시 (2행)</string>
+    <string name="init_summary_cacheListInfo">캐시 목록의 각 캐시에 대해 표시할 항목을 하나 이상 선택하세요.</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_GCCode">GC 코드</string>
+    <string name="cacheListInfoItem_Difficulty">난이도</string>
+    <string name="cacheListInfoItem_Terrain">지형</string>
+    <string name="cacheListInfoItem_MemberState">회원국</string>
+    <string name="cacheListInfoItem_Size">크기</string>
+    <string name="cacheListInfoItem_Lists">목록</string>
+    <string name="cacheListInfoItem_Jasmer">자스머</string>
+    <string name="cacheListInfoItem_EventDate">이벤트 날짜</string>
     <!-- app theme -->
     <string name="settings_theme_title">테마</string>
     <string-array name="settings_theme_entries">
@@ -1385,6 +1396,8 @@
     <string name="cache_time_full_hours">시</string>
     <string name="cache_listed_on">%s에 등록됨</string>
     <string name="cache_recently_viewed">최근에 조회됨</string>
+    <string name="cache_recently_viewed_empty">최근 본 캐시 없음</string>
+    <string name="cache_clear_recently_viewed">지우기</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -2191,6 +2204,7 @@
     <string name="individual_route_set_as_start_title">경로 시작 위치로 지정</string>
     <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
     <string name="route_optimization">경로 최적화</string>
+    <string name="route_optimization_info">경로 최적화는 더 짧은 거리에 대한 경로를 최적화하기 위한 실험적 기능입니다. 모바일 장치의 시간 및 계산 능력 제한으로 인해 가능한 모든 솔루션을 평가할 수 없으므로 근사 알고리즘을 사용하여 가능한 최적화를 계산합니다.\n\n계산은 다음 두 단계 프로세스를 사용하여 수행됩니다. 경로의 각 두 쌍 사이의 거리를 계산한 다음 허용 가능한 경로를 찾으려고 시도합니다. 이것은 가능한 가장 짧은 경로가 아닐 수 있으므로 원하는 만큼 2단계를 반복할 수 있습니다.</string>
     <string name="initial_route_length">초기 경로 길이: %d</string>
     <string name="optimized_route_length">최적화된 경로 길이: %d</string>
     <string name="route_optimization_out_of_bounds">경로 최적화는 3~100개 지점 사이의 경로에서 작동합니다.</string>
