@@ -137,7 +137,7 @@ public class GeoItemTestLayer {
                 GeoIcon.builder()
                         .setXAnchor(xAnchor)
                         .setYAnchor(yAnchor)
-                        .setAngle(angle)
+                        .setRotation(angle)
                         .setBitmap(createBitmap(R.drawable.cgeo_borderless)).build());
 
         return GeoGroup.builder().addItems(poly, marker).build();
@@ -182,7 +182,7 @@ public class GeoItemTestLayer {
 
         final GeoItem flowMarker = GeoPrimitive.createMarker(center.project(angle, distance * 0.8), GeoIcon.builder()
                 .setBitmap(createBitmap(R.drawable.type_event))
-                .setAngle(angle).build());
+                .setRotation(angle).build());
         layer.put("testFlowMarker", flowMarker);
 
     }

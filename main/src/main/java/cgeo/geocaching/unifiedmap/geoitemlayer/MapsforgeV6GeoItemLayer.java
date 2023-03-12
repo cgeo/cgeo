@@ -5,10 +5,10 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -174,10 +174,10 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     }
 
     @Override
-    public Func1<Geopoint, android.graphics.Point> getScreenCoordCalculator() {
+    public ToScreenProjector getScreenCoordCalculator() {
         return gp -> {
             final Point pt = projection.toPixels(latLong(gp));
-            return new android.graphics.Point((int) pt.x, (int) pt.y);
+            return new int[]{(int) pt.x, (int) pt.y};
         };
     }
 

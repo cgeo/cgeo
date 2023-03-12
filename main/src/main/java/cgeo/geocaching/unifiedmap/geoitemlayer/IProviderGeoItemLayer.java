@@ -1,10 +1,9 @@
 package cgeo.geocaching.unifiedmap.geoitemlayer;
 
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
-import cgeo.geocaching.utils.functions.Func1;
-
-import android.graphics.Point;
+import cgeo.geocaching.models.geoitem.ToScreenProjector;
+import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 /** Interface to be implemented by a map-specific provider of geoitem layers */
 public interface IProviderGeoItemLayer<C> {
@@ -43,5 +42,23 @@ public interface IProviderGeoItemLayer<C> {
      */
     void destroy();
 
-    Func1<Geopoint, Point> getScreenCoordCalculator();
+    /** Provides a function which maps lat-lon-geopoints to actual screen pixel coordinates */
+    ToScreenProjector getScreenCoordCalculator();
+
+    default void runCommandChain(final Runnable runnable) {
+        AndroidRxUtils.computationScheduler.scheduleDirect(runnable);
+    }
+
+    default void runMapChanges(final Runnable runnable) {
+        // inspired by http://stackoverflow.com/questions/12850143/android-basics-running-code-in-the-ui-thread/25250494#25250494
+        // modifications of google map must be run on main (UI) thread
+        //new Handler(Looper.getMainLooper()).post(runnable);
+        Log.iForce("AsyncMapWrapper: request Thread for: " + runnable.getClass().getName());
+
+        AndroidRxUtils.runOnUi(runnable);
+    }
+
+    default boolean continueMapChangeExecutions(final long startTime, final  int queueLength) {
+        return System.currentTimeMillis() - startTime < 40;
+    }
 }

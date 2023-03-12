@@ -2,9 +2,6 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.utils.functions.Func1;
-
-import android.graphics.Point;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +29,6 @@ public interface GeoItem {
 
     boolean isValid();
 
-    boolean touches(@NonNull Geopoint tapped, @Nullable Func1<Geopoint, Point> toScreenCoordFunc);
+    boolean touches(@NonNull Geopoint tapped, @Nullable ToScreenProjector toScreenCoordFunc);
 
 }

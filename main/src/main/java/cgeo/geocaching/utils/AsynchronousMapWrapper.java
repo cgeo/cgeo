@@ -4,6 +4,8 @@ import cgeo.geocaching.utils.functions.Func1;
 
 import android.util.Pair;
 
+import androidx.core.util.Supplier;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -82,6 +84,7 @@ public class AsynchronousMapWrapper<K, V, C> {
         default void destroy() {
             //empty on purpose
         }
+
     }
 
     public AsynchronousMapWrapper(final IMapChangeExecutor<K, V, C> changeExecutor) {
@@ -100,6 +103,25 @@ public class AsynchronousMapWrapper<K, V, C> {
     /** adds object to this Map */
     public void put(final K key, final V value) {
         requestChange(() -> putSingle(key, value));
+    }
+
+    /**
+     * Performs a multi-change
+     *
+     * The given supplier is supposed to provide a map with key-values.
+     * Each key-value-pair with a null value is removed, each one with a non-null-value is put
+     */
+    public void multiChange(final Supplier<Map<K, V>> changeSupplier) {
+        requestChange(() -> {
+           final Map<K, V> changes = changeSupplier.get();
+            for (Map.Entry<K, V> entry : changes.entrySet()) {
+                if (entry.getValue() == null) {
+                    removeSingle(entry.getKey());
+                } else {
+                    putSingle(entry.getKey(), entry.getValue());
+                }
+            }
+        });
     }
 
     public void add(final K key) {
