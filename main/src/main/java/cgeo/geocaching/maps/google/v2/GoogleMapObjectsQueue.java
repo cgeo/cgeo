@@ -92,7 +92,6 @@ public class GoogleMapObjectsQueue {
         protected static final long TIME_MAX = 40;
 
         private final Map<MapObjectOptions, Object> drawObjects = new HashMap<>();
-        private final Map<Object, MapObjectOptions> drawnBy = new HashMap<>();
 
         private boolean removeRequested() {
             final long time = System.currentTimeMillis();
@@ -101,7 +100,7 @@ public class GoogleMapObjectsQueue {
                 final Object obj = drawObjects.get(options);
                 if (obj != null) {
                     removeDrawnObject(obj);
-                    drawnBy.remove(obj);
+                    drawObjects.remove(options);
                 } else {
                     // could not remove, is it enqueued to be draw?
                     if (requestedToAdd.contains(options)) {
@@ -135,7 +134,6 @@ public class GoogleMapObjectsQueue {
                 // avoid redrawing exactly the same accuracy circle, as sometimes consecutive identical circles remain on the map
                 if (!(options.options instanceof CircleOptions) || ((CircleOptions) options.options).getZIndex() != GooglePositionAndHistory.ZINDEX_POSITION_ACCURACY_CIRCLE || !drawObjects.containsKey(options)) {
                     final Object drawn = options.addToGoogleMap(googleMap);
-                    drawnBy.put(drawn, options);
                     drawObjects.put(options, drawn);
                 }
                 if (System.currentTimeMillis() - time >= TIME_MAX) {
