@@ -1605,7 +1605,7 @@
     <string name="init_longtap_map">Long tap on map</string>
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user-defined cache / waypoint)</string>
     <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
-    <string name="init_summary_ActionbarAutohide">Tap the map to hide/show the toolbar</string>
+    <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="onetime_info_longtap_disabled">By long tapping on map you can create individual routes and user-defined caches / waypoints.\n\nLong tap on map is currently disabled.\n\nYou can change this in Settings → Map → Map behavior</string>
     <string name="onetime_info_longtap_enabled">By long tapping on map you can create individual routes and user-defined caches / waypoints.\n\nLong tap on map is currently enabled.\n\nYou can change this in Settings → Map → Map behavior</string>
     <string name="goto_targets_list">User-defined caches</string>
