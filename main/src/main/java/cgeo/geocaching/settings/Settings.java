@@ -2354,4 +2354,8 @@ public class Settings {
         return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
     }
 
+    public static boolean getMapActionbarAutohide() {
+        return getBoolean(R.string.pref_mapActionbarAutohide, false);
+    }
+
 }

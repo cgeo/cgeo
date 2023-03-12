@@ -208,6 +208,7 @@
 
     <!-- category map behavior -->
     <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
+    <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
 
     <!-- category proximity notfication -->
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
