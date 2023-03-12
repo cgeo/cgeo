@@ -124,7 +124,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
         googleMap.setOnMapClickListener(latLng -> {
             if (activityRef.get() != null) {
-                FilterUtils.toggleActionBar(activityRef.get());
+                adaptLayoutForActionbar(FilterUtils.toggleActionBar(activityRef.get()));
             }
         });
         googleMap.setOnMarkerClickListener(marker -> {
@@ -185,6 +185,17 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             mapReadyCallback = null;
         }
         redraw();
+    }
+
+    private void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        if (googleMap != null) {
+            try {
+                final View mapView = findViewById(R.id.map);
+                final View compass = mapView.findViewWithTag("GoogleMapCompass");
+                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+            } catch (Exception ignore) {
+            }
+        }
     }
 
     @Override
@@ -449,24 +460,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 onDragListener.onDrag();
             }
             return false;
-        }
-    }
-
-    private void toggleActionBar() {
-        final AbstractBottomNavigationActivity activity = activityRef.get();
-        if (activity != null) {
-            adaptLayoutForActionbar(FilterUtils.toggleActionBar(activity));
-        }
-    }
-
-    private void adaptLayoutForActionbar(final boolean actionBarShowing) {
-        if (googleMap != null) {
-            try {
-                final View mapView = findViewById(R.id.map);
-                final View compass = mapView.findViewWithTag("GoogleMapCompass");
-                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
-            } catch (Exception ignore) {
-            }
         }
     }
 
