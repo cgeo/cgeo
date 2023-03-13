@@ -2,10 +2,8 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
-import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.IndividualRoute;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.AngleUtils;

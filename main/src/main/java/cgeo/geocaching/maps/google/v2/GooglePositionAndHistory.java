@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
@@ -89,6 +90,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private static Bitmap locationIcon;
 
     private Viewport lastViewport = null;
+
+    public final ArrayList<RouteItem> individualRoutePoints = new ArrayList<>();
 
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
 
@@ -206,6 +209,12 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     @Override
     public void updateIndividualRoute(final IndividualRoute route) {
+        individualRoutePoints.clear();
+        for (RouteItem item : route.getRouteItems()) {
+            if (item.getType() == RouteItem.RouteItemType.COORDS) {
+                individualRoutePoints.add(item);
+            }
+        }
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth());
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
@@ -410,6 +419,12 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                         .width(MapLineUtils.getRouteLineWidth(false))
                         .zIndex(ZINDEX_ROUTE)
                 );
+            }
+            for (RouteItem item : individualRoutePoints) {
+                routeObjs.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.marker_routepoint, null)))
+                        .position(GP_CONVERTER.to(item.getPoint()))
+                        .anchor(0.5f, 0.5f));
             }
         }
         // draw tracks
