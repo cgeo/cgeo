@@ -590,6 +590,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         overlayPositionAndScale.repaintRequired();
     }
 
+    public void toggleRouteItem(final Geopoint geopoint) {
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);
+        }
+        individualRoute.toggleItem(this.mapView.getContext(), new RouteItem(geopoint), overlayPositionAndScale);
+        updateRouteTrackButtonVisibility();
+        overlayPositionAndScale.repaintRequired();
+    }
+
     private void setNavigationTargetFromIndividualRoute(@Nullable final Geopoint geopoint, final String geocode) {
         if (geopoint != null) {
             setTarget(geopoint, geocode);
