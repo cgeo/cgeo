@@ -857,11 +857,22 @@
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
+    <string name="init_title_cacheListInfo1">Näytä tiedot kätkölistassa (rivi 1)</string>
+    <string name="init_title_cacheListInfo2">Näytä tiedot kätkölistassa (rivi 2)</string>
+    <string name="init_summary_cacheListInfo">Valitse yksi tai useampi kohde joka näytetään kätkölistan jokaiselle kätkölle</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_GCCode">Geokoodi</string>
+    <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
+    <string name="cacheListInfoItem_Terrain">Maasto</string>
+    <string name="cacheListInfoItem_MemberState">Jäsenyyden tila</string>
+    <string name="cacheListInfoItem_Size">Koko</string>
+    <string name="cacheListInfoItem_Lists">Listat</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Tapahtumapäivä</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
@@ -1399,6 +1410,8 @@
     <string name="cache_time_full_hours">Kello</string>
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_recently_viewed">Äskettäin katsottu</string>
+    <string name="cache_recently_viewed_empty">Ei äskettäin katsottuja kätköjä</string>
+    <string name="cache_clear_recently_viewed">tyhjennä</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
@@ -1425,6 +1438,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö/reittipiste)</string>
+    <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
+    <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
     <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
@@ -2220,6 +2235,7 @@
     <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <string name="route_optimization">Reitin optimointi</string>
+    <string name="route_optimization_info">Reitin optimointi on kokeellinen ominaisuus reitin optimoimiseksi lyhyemmällä etäisyydellä. Koska kaikkia mahdollisia ratkaisuja ei ole mahdollista arvioida mobiililaitteen ajasta ja laskentatehosta johtuvien rajoitteen vuoksi, se käyttää arviointialgoritmeja laskeakseen mahdolliset optimoinnit.\n\nLaskeminen on tehty kaksivaiheisessa prosessissa: Laske etäisyydet kullekin reittiparille, sitten yritä löytää hyväksyttävä reitti. Tämä ei ehkä ole lyhin mahdollinen reitti, joten voit toistaa kaksi vaihetta niin usein kuin haluat.</string>
     <string name="initial_route_length">Alkuperäinen reitin pituus: %d</string>
     <string name="optimized_route_length">Optimoitu reitin pituus: %d</string>
     <string name="route_optimization_out_of_bounds">Reitin optimointi toimii 3-100 pisteen välisillä reiteillä</string>
