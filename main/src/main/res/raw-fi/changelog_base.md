@@ -5,10 +5,10 @@
 - Uusi: Päivitä karttaluettelo karttatiedoston vastaanotossa
 - Muutos: Älä asenna ladattua karttaa/teemaa automaattisesti
 - Uusi: Yksilöllinen reitin optimointi (kokeellinen)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- Uusi: Tuki "Google: Terrain" karttoille
+- Uusi: Viivan leveys jälkeä kohden
+- Uusi: Piilota kartan toimintapalkki vaadittaessa (napauta tyhjää tilaa kartalla)
+- Muutos: Siirrä pika-asetukset painikkeet vasemmalle vaakatilassa saadaksesi lisää pystytilaa
 
 ### Kätkön tiedot
 
@@ -16,8 +16,8 @@
 - Korjaa: Esikatsele painiketta näkyi vain suodatinasetuksella "näytä kaikki" PQ-luettelossa
 - Uusi: Lisää Cruiser navigointisovellukseksi (vaatii Cruiser 3.0.9 tai uudemman)
 - Uusi: Tuo geocaching.com kirjanmerkkilistat linkeistä
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
+- Uusi: Salli äskettäin katsottujen kätköjen avaaminen listana
+- Uusi: Tee pikakäynnistys painikkeet lajiteltavaksi
+- Uusi: Väliaikainen korjaus matkaajien nimiavaruuskonfliktin varalta (toimii poissa käytöstä olevalla GeoKretyn liittimellä)
+- Uusi: Tee kätköluettelon tietokentät konfiguroitaviksi
+- Uusi: Tyhjennä äskettäin katsotut kätköt
