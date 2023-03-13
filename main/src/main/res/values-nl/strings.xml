@@ -857,11 +857,22 @@
     <string name="init_list_initial_load_limit">Laadlimiet lijst</string>
     <string name="init_summary_list_initial_load_limit">Maximum aantal caches om te laden uit de database bij het initieel weergeven van opgeslagen lijsten. Kies 0 voor \'ongelimiteerd\'</string>
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
+    <string name="init_title_cacheListInfo1">Toon info in de cachelijst (Regel 1)</string>
+    <string name="init_title_cacheListInfo2">Toon info in de cachelijst (Regel 2)</string>
+    <string name="init_summary_cacheListInfo">Selecteer een of meer items die getoond moeten worden voor elke cache in de cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_GCCode">Geo code</string>
+    <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
+    <string name="cacheListInfoItem_Terrain">Terrein</string>
+    <string name="cacheListInfoItem_MemberState">Lidmaatschap status</string>
+    <string name="cacheListInfoItem_Size">Grootte</string>
+    <string name="cacheListInfoItem_Lists">Lijsten</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Evenement datum</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
@@ -1399,6 +1410,8 @@
     <string name="cache_time_full_hours">uur</string>
     <string name="cache_listed_on">Opgenomen in %s</string>
     <string name="cache_recently_viewed">Recent bekeken</string>
+    <string name="cache_recently_viewed_empty">Geen recent bekeken caches</string>
+    <string name="cache_clear_recently_viewed">wissen</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
@@ -1425,6 +1438,8 @@
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>
     <string name="init_longtap_map">Lang drukken op kaart</string>
     <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
+    <string name="init_ActionbarAutohide">Werkbalk verbergen bij tik</string>
+    <string name="init_summary_ActionbarAutohide">Tik op vrije kaart ruimte om de werkbalk te verbergen/tonen</string>
     <string name="onetime_info_longtap_disabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
     <string name="onetime_info_longtap_enabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
@@ -2220,6 +2235,7 @@
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <string name="route_optimization">Route optimalisatie</string>
+    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. Omdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd- en rekenvermogen beperkingen op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een aanvaardbare weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als je wilt herhalen.</string>
     <string name="initial_route_length">Initiële routelengte: %d</string>
     <string name="optimized_route_length">Geoptimaliseerde route lengte: %d</string>
     <string name="route_optimization_out_of_bounds">Routeoptimalisatie werkt voor routes tussen 3 en 100 punten</string>
