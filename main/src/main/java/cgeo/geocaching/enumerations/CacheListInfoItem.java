@@ -14,7 +14,7 @@ public class CacheListInfoItem extends InfoItem {
 
     // item id must not be changed, order can be adjusted
     public enum VALUES {
-        GCCODE(1, R.string.cacheListInfoItem_GCCode),
+        GCCODE(1, R.string.cacheListInfoItem_Geocode),
         DIFFICULTY(2, R.string.cacheListInfoItem_Difficulty),
         TERRAIN(3, R.string.cacheListInfoItem_Terrain),
         MEMBERSTATE(4, R.string.cacheListInfoItem_MemberState),
@@ -33,7 +33,7 @@ public class CacheListInfoItem extends InfoItem {
     }
 
     public static final ArrayList<InfoItem> ITEMS = new ArrayList<>(Arrays.asList(
-        new CacheListInfoItem(VALUES.GCCODE.id, R.string.cacheListInfoItem_GCCode),
+        new CacheListInfoItem(VALUES.GCCODE.id, R.string.cacheListInfoItem_Geocode),
         new CacheListInfoItem(VALUES.DIFFICULTY.id, R.string.cacheListInfoItem_Difficulty),
         new CacheListInfoItem(VALUES.TERRAIN.id, R.string.cacheListInfoItem_Terrain),
         new CacheListInfoItem(VALUES.MEMBERSTATE.id, R.string.cacheListInfoItem_MemberState),
