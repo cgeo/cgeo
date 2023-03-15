@@ -977,6 +977,9 @@
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Event date</string>
 
+    <string name="active_elements">Active Elements</string>
+    <string name="disabled_elements">Disabled Elements</string>
+
     <!-- app theme -->
     <string name="settings_theme_title">Theme</string>
     <string-array name="settings_theme_entries">

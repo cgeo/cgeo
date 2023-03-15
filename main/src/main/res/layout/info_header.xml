@@ -16,28 +16,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginRight="110dip"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:paddingRight="3dip"
         android:paddingTop="5dip"
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
-        android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsSecondary"
+        android:textSize="@dimen/textSize_headingPrimary"
+        android:textColor="@color/colorText_listsPrimary"
         tools:text="title" />
 
-    <ImageView
-        android:id="@+id/drag"
-        android:layout_width="@dimen/buttonSize_iconButton"
-        android:layout_height="@dimen/buttonSize_iconButton"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"
-        android:scaleType="centerInside"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="left"
-        app:srcCompat="@drawable/ic_menu_reorder"
-        tools:src="@drawable/ic_menu_reorder"/>
+    <!-- Dummy entries to keep layout compatible to info_header to make databinding work -->
+    <ImageView android:id="@+id/drag"   style="@style/button_icon" android:visibility="gone" />
 
 </RelativeLayout>
