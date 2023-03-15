@@ -951,6 +951,7 @@
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
+    <string name="init_cachelists">Cache Lists</string>
     <string name="init_log_offline">Offline Logging</string>
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>

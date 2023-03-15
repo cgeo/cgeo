@@ -2,7 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
@@ -10,7 +9,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SettingsUtils;
-import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -26,13 +24,6 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_offlinedata, rootKey);
-
-        setPrefClick(this, R.string.pref_cacheListInfo1, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo1, 2);
-        });
-        setPrefClick(this, R.string.pref_cacheListInfo2, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo2, R.string.pref_cacheListInfo2, 3);
-        });
 
         findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)).setOnPreferenceClickListener(preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time

@@ -158,6 +158,10 @@
     <string translatable="false" name="pref_units_imperial">units</string>
     <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
 
+    <!-- category cache lists -->
+    <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
+    <string translatable="false" name="pref_cacheListInfo1">cacheListInfo1</string>
+    <string translatable="false" name="pref_cacheListInfo2">cacheListInfo2</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for cachedetails screen -->
@@ -261,9 +265,6 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
-    <string translatable="false" name="pref_cacheListInfo1">cacheListInfo1</string>
-    <string translatable="false" name="pref_cacheListInfo2">cacheListInfo2</string>
-    <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
 
     <!-- category gpx -->
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
