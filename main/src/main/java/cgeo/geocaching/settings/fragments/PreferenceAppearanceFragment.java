@@ -3,6 +3,7 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -56,6 +57,13 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
         setPrefClick(this, R.string.pref_quicklaunchitems, () -> {
             QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems);
+        });
+
+        setPrefClick(this, R.string.pref_cacheListInfo1, () -> {
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo1, 2);
+        });
+        setPrefClick(this, R.string.pref_cacheListInfo2, () -> {
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo2, R.string.pref_cacheListInfo2, 3);
         });
 
     }
