@@ -857,22 +857,15 @@
     <string name="init_list_initial_load_limit">Laadlimiet lijst</string>
     <string name="init_summary_list_initial_load_limit">Maximum aantal caches om te laden uit de database bij het initieel weergeven van opgeslagen lijsten. Kies 0 voor \'ongelimiteerd\'</string>
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
-    <string name="init_title_cacheListInfo1">Toon info in de cachelijst (Regel 1)</string>
-    <string name="init_title_cacheListInfo2">Toon info in de cachelijst (Regel 2)</string>
-    <string name="init_summary_cacheListInfo">Selecteer een of meer items die getoond moeten worden voor elke cache in de cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- names for CacheListInfoItem -->
-    <string name="cacheListInfoItem_GCCode">Geo code</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
     <string name="cacheListInfoItem_Terrain">Terrein</string>
-    <string name="cacheListInfoItem_MemberState">Lidmaatschap status</string>
     <string name="cacheListInfoItem_Size">Grootte</string>
-    <string name="cacheListInfoItem_Lists">Lijsten</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
-    <string name="cacheListInfoItem_EventDate">Evenement datum</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
