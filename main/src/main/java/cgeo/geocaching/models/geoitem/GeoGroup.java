@@ -58,6 +58,10 @@ public class GeoGroup implements GeoItem, Parcelable {
         return builder().addItems(items).build();
     }
 
+    public static GeoGroup create(final Collection<? extends GeoItem> items) {
+        return builder().addItems(items).build();
+    }
+
     public static Builder builder() {
         return new GeoGroup.Builder();
     }
@@ -141,7 +145,7 @@ public class GeoGroup implements GeoItem, Parcelable {
             // no free instantiation
         }
 
-        public Builder addItems(final Collection<GeoItem> items) {
+        public Builder addItems(final Collection<? extends GeoItem> items) {
             this.items.addAll(items);
             return this;
         }

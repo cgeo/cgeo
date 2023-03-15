@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public final class GeoItemUtils {
 
@@ -15,6 +16,24 @@ public final class GeoItemUtils {
 
     private GeoItemUtils() {
         //no instance
+    }
+
+    /** returns an item identical to the given item but with the defaultStyle's applied for all empty style attributes */
+    public static GeoItem applyDefaultStyle(final GeoItem item, final GeoStyle defaultStyle) {
+        if (item instanceof GeoPrimitive) {
+            if (Objects.equals(((GeoPrimitive) item).getStyle(), defaultStyle)) {
+                return item;
+            }
+            return ((GeoPrimitive) item).buildUpon().setStyle(GeoStyle.applyAsDefault(((GeoPrimitive) item).getStyle(), defaultStyle)).build();
+        }
+        if (item instanceof GeoGroup) {
+            final GeoGroup.Builder ggb = GeoGroup.builder();
+            for (GeoItem child : ((GeoGroup) item).getItems()) {
+                ggb.addItems(applyDefaultStyle(child, defaultStyle));
+            }
+            return ggb.build();
+        }
+        return item;
     }
 
     public static int getMinPixelTouchWidth() {

@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.Tracks;
@@ -14,6 +13,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
@@ -214,7 +214,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void updateRoute(final String key, final IGeoDataProvider track, final int color, final int width) {
+    public void updateRoute(final String key, final IGeoItemSupplier track, final int color, final int width) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -232,7 +232,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         repaintRequired();
     }
 
-    private static ArrayList<List<LatLng>> toLatLng(final IGeoDataProvider gg) {
+    private static ArrayList<List<LatLng>> toLatLng(final IGeoItemSupplier gg) {
         final ArrayList<List<LatLng>> list = new ArrayList<>();
         for (GeoPrimitive go : gg.getGeoData()) {
             list.add(GP_CONVERTER.toList(go.getPoints()));

@@ -3,12 +3,12 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -123,7 +123,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     // ========================================================================
     // route / track handling
 
-    private <K extends IGeoDataProvider> void updateRoute(final String key, final K track, final int color, final int width, final Func1<K, List<List<T>>> getAllPoints) {
+    private <K extends IGeoItemSupplier> void updateRoute(final String key, final K track, final int color, final int width, final Func1<K, List<List<T>>> getAllPoints) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (track == null) {
@@ -146,7 +146,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     public abstract void updateIndividualRoute(Route route);
 
-    public abstract void updateTrack(String key, IGeoDataProvider track, int color, int width);
+    public abstract void updateTrack(String key, IGeoItemSupplier track, int color, int width);
 
     public void updateIndividualRoute(final Route route, final Func1<Route, List<List<T>>> getAllPoints) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth(), getAllPoints);
@@ -155,7 +155,7 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
     }
 
-    public void updateTrack(final String key, final IGeoDataProvider track, final int color, final int width, final Func1<IGeoDataProvider, List<List<T>>> getAllPoints) {
+    public void updateTrack(final String key, final IGeoItemSupplier track, final int color, final int width, final Func1<IGeoItemSupplier, List<List<T>>> getAllPoints) {
         updateRoute(key, track, color, width, getAllPoints);
         repaintRouteAndTracks();
     }

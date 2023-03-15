@@ -44,6 +44,17 @@ public class GeoStyle implements Parcelable {
         return fillColor;
     }
 
+    public static GeoStyle applyAsDefault(final GeoStyle style, final GeoStyle defaultStyle) {
+        if (Objects.equals(style, defaultStyle)) {
+            return style;
+        }
+        return builder()
+                .setStrokeColor(getStrokeColor(style, defaultStyle.strokeColor))
+                .setStrokeWidth(getStrokeWidth(style, defaultStyle.strokeWidth))
+                .setFillColor(getFillColor(style, defaultStyle.fillColor))
+                .build();
+    }
+
     /** Returns a non-null strokecolor. If color for this object is null then given defaults are used */
     @ColorInt
     public static int getStrokeColor(@Nullable final GeoStyle style, @ColorInt final Integer ... defaults) {

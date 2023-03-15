@@ -1,6 +1,9 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 /** A list of geoobjects */
-public class GeoObjectList implements IGeoDataProvider, Parcelable {
+public class GeoObjectList implements IGeoItemSupplier, Parcelable {
 
     private final List<GeoPrimitive> objects = new ArrayList<>();
     private final List<GeoPrimitive> objectsReadOnly = Collections.unmodifiableList(objects);
@@ -81,6 +84,11 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
             recalculateMetadata();
         }
         return viewport == null ? null : viewport.getCenter();
+    }
+
+    @Override
+    public GeoItem getItem() {
+        return GeoGroup.create(objectsReadOnly);
     }
 
     public List<GeoPrimitive> getGeodata() {
