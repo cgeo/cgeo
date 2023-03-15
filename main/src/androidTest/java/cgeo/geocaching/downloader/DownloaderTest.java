@@ -66,9 +66,9 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Portugal");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 297M
+        final String sizeInfoString = d.getSizeInfo(); // 261M as of 2023-03-15
         final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
-        assertThat(sizeInfoInt).isBetween(275, 350);
+        assertThat(sizeInfoInt).isBetween(250, 350);
     }
 
     @Test
