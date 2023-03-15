@@ -857,22 +857,15 @@
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
-    <string name="init_title_cacheListInfo1">Näytä tiedot kätkölistassa (rivi 1)</string>
-    <string name="init_title_cacheListInfo2">Näytä tiedot kätkölistassa (rivi 2)</string>
-    <string name="init_summary_cacheListInfo">Valitse yksi tai useampi kohde joka näytetään kätkölistan jokaiselle kätkölle</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
     <!-- names for CacheListInfoItem -->
-    <string name="cacheListInfoItem_GCCode">Geokoodi</string>
     <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
     <string name="cacheListInfoItem_Terrain">Maasto</string>
-    <string name="cacheListInfoItem_MemberState">Jäsenyyden tila</string>
     <string name="cacheListInfoItem_Size">Koko</string>
-    <string name="cacheListInfoItem_Lists">Listat</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
-    <string name="cacheListInfoItem_EventDate">Tapahtumapäivä</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
