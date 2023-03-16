@@ -864,6 +864,7 @@
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
     <string name="cacheListInfoItem_Terrain">Gelände</string>
+    <string name="cacheListInfoItem_Size">Größe</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
