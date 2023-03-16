@@ -1,10 +1,11 @@
-package cgeo.geocaching.location;
+package cgeo.geocaching.models.geoitem;
 
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 
 import java.util.Collection;
 
-public interface IGeoDataProvider {
+public interface IGeoItemSupplier {
 
     String getId();
 
@@ -16,10 +17,14 @@ public interface IGeoDataProvider {
 
     Collection<GeoPrimitive> getGeoData();
 
-    Viewport getViewport();
+    default Viewport getViewport() {
+        return getItem().getViewport();
+    }
 
     default Geopoint getCenter() {
         return getViewport().getCenter();
     }
+
+    GeoItem getItem();
 
 }

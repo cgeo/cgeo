@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.location.IGeoDataProvider;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.MapLineUtils;
@@ -23,7 +23,7 @@ public class Tracks {
 
     private static class Track {
         private final Trackfiles trackfile;
-        private IGeoDataProvider route;
+        private IGeoItemSupplier route;
 
         Track(final Trackfiles trackfile) {
             this.trackfile = trackfile;
@@ -32,7 +32,7 @@ public class Tracks {
     }
 
     public interface UpdateTrack {
-        void updateRoute(String key, IGeoDataProvider route, int color, int width);
+        void updateRoute(String key, IGeoItemSupplier route, int color, int width);
     }
 
     public Tracks() {
@@ -59,7 +59,7 @@ public class Tracks {
         });
     }
 
-    public void setRoute(@NonNull final String key, final IGeoDataProvider route) {
+    public void setRoute(@NonNull final String key, final IGeoItemSupplier route) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 track.route = route;
@@ -73,13 +73,13 @@ public class Tracks {
         }
     }
 
-    public void traverse(final Action4<String, IGeoDataProvider, Integer, Integer> action) {
+    public void traverse(final Action4<String, IGeoItemSupplier, Integer, Integer> action) {
         for (Track track : data) {
             action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor(), track.trackfile.getWidth());
         }
     }
 
-    public void traverse(final Action2<String, IGeoDataProvider> action) {
+    public void traverse(final Action2<String, IGeoItemSupplier> action) {
         for (Track track : data) {
             action.call(track.trackfile.getKey(), track.route);
         }
@@ -157,7 +157,7 @@ public class Tracks {
         }
     }
 
-    public IGeoDataProvider getRoute(@NonNull final String key) {
+    public IGeoItemSupplier getRoute(@NonNull final String key) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 return track.route;

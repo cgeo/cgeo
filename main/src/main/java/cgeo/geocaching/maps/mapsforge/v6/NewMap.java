@@ -21,7 +21,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.GeoObjectList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LoggingUI;
@@ -56,6 +55,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -745,7 +745,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
             }
         } else {
-            final IGeoDataProvider gdp = tracks.getRoute(key);
+            final IGeoItemSupplier gdp = tracks.getRoute(key);
             if (trackLayer != null && (gdp == null || gdp instanceof Route)) {
                 trackLayer.updateRoute(key, gdp, tracks.getColor(key), tracks.getWidth(key));
             }
@@ -1495,7 +1495,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTrack(final String key, final IGeoDataProvider route, final int unused1, final int unused2) {
+    private void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
         updateRouteTrackButtonVisibility();

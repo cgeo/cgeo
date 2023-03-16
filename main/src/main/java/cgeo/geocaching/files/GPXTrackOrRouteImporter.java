@@ -2,9 +2,9 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.GeoObjectList;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.EnvironmentUtils;
@@ -38,7 +38,7 @@ public class GPXTrackOrRouteImporter {
         final AtomicBoolean success = new AtomicBoolean(false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
-                final IGeoDataProvider value = doInBackground(context, uri);
+                final IGeoItemSupplier value = doInBackground(context, uri);
                 success.set(null != value && value.hasData());
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
@@ -62,7 +62,7 @@ public class GPXTrackOrRouteImporter {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private static IGeoDataProvider doInBackground(final Context context, final Uri uri) {
+    private static IGeoItemSupplier doInBackground(final Context context, final Uri uri) {
         try {
             // default: import properly formatted routes or tracks
             Route route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
@@ -116,7 +116,7 @@ public class GPXTrackOrRouteImporter {
         }
     }
 
-    private static IGeoDataProvider parseAsGeoJson(final Context context, final Uri uri) throws IOException {
+    private static IGeoItemSupplier parseAsGeoJson(final Context context, final Uri uri) throws IOException {
         final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(uri);
         final long freeMem = EnvironmentUtils.getFreeMemory(context);
         if (fi == null || freeMem < 0 || fi.size * 10 > freeMem) {

@@ -6,13 +6,13 @@ import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -281,7 +281,7 @@ public class RouteTrackUtils {
         });
     }
 
-    private boolean isRouteNonEmpty(final IGeoDataProvider route) {
+    private boolean isRouteNonEmpty(final IGeoItemSupplier route) {
         return route != null && (!(route instanceof Route) || ((Route) route).getNumSegments() > 0);
     }
 

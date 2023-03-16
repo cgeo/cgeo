@@ -1,10 +1,10 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.util.Pair;
-
-import androidx.core.util.Supplier;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -108,20 +108,12 @@ public class AsynchronousMapWrapper<K, V, C> {
     /**
      * Performs a multi-change
      *
-     * The given supplier is supposed to provide a map with key-values.
-     * Each key-value-pair with a null value is removed, each one with a non-null-value is put
+     * The given action is supposed to execute the action. It gets passed two action parameter:
+     * * the first one takes a key-value-pair and will PUT this pair to the map when called
+     * * the second one takes a key and will REMOVE this key from the map when called
      */
-    public void multiChange(final Supplier<Map<K, V>> changeSupplier) {
-        requestChange(() -> {
-           final Map<K, V> changes = changeSupplier.get();
-            for (Map.Entry<K, V> entry : changes.entrySet()) {
-                if (entry.getValue() == null) {
-                    removeSingle(entry.getKey());
-                } else {
-                    putSingle(entry.getKey(), entry.getValue());
-                }
-            }
-        });
+    public void multiChange(final Action2<Action2<K, V>, Action1<K>> changeAction) {
+        requestChange(() -> changeAction.call(this::putSingle, this::removeSingle));
     }
 
     public void add(final K key) {

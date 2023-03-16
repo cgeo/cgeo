@@ -37,11 +37,14 @@ import java.util.Set;
  */
 public class GeoItemLayer<K> {
 
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP = CommonUtils.threadLocalWithInitial(HashMap::new);
+    private static final ThreadLocal<Map<Integer, GeoPrimitive>> LOCAL_MAP_2 = CommonUtils.threadLocalWithInitial(HashMap::new);
     private final String id;
     private final Map<K, Pair<GeoItem, Boolean>> itemMap = new HashMap<>();
     //private final Lock lock = new ReentrantLock(); //-> locking is done via synchronized
 
-    private AsynchronousMapWrapper<MapWriterKey<K>, GeoPrimitive, Object> mapWriter;
+    //Key of mapWriter is always instance of either K or GeoGroupKey<K>
+    private AsynchronousMapWrapper<Object, GeoPrimitive, Object> mapWriter;
     private IProviderGeoItemLayer<?> providerLayer = null;
 
     public static final IProviderGeoItemLayer<Object> NOOP_GEOITEM_LAYER = new IProviderGeoItemLayer<Object>() {
@@ -73,22 +76,23 @@ public class GeoItemLayer<K> {
 
     };
 
-    private static class MapWriterKey<T> {
+    /** Key class to be used for entries in MapWriter from a GeoGroup */
+    private static class MapWriterGeoGroupKey<T> {
 
         public final T key;
         public final int index;
 
-        MapWriterKey(final T key, final int index) {
+        MapWriterGeoGroupKey(final T key, final int index) {
             this.key = key;
             this.index = index;
         }
 
         @Override
         public boolean equals(final Object o) {
-            if (!(o instanceof MapWriterKey<?>)) {
+            if (!(o instanceof GeoItemLayer.MapWriterGeoGroupKey<?>)) {
                 return false;
             }
-            final MapWriterKey<?> other = (MapWriterKey<?>) o;
+            final MapWriterGeoGroupKey<?> other = (MapWriterGeoGroupKey<?>) o;
             return Objects.equals(key, other.key) && index == other.index;
         }
 
@@ -104,7 +108,7 @@ public class GeoItemLayer<K> {
         }
     }
 
-    private static class MapWriter<T> implements AsynchronousMapWrapper.IMapChangeExecutor<MapWriterKey<T>, GeoPrimitive, Object> {
+    private static class MapWriter implements AsynchronousMapWrapper.IMapChangeExecutor<Object, GeoPrimitive, Object> {
 
         public final IProviderGeoItemLayer<Object> providerLayer;
 
@@ -114,7 +118,7 @@ public class GeoItemLayer<K> {
         }
 
         @Override
-        public Object add(final MapWriterKey<T> key, final GeoPrimitive value) {
+        public Object add(final Object key, final GeoPrimitive value) {
             if (value != null && value.isValid()) {
                 return providerLayer.add(value);
             }
@@ -122,12 +126,12 @@ public class GeoItemLayer<K> {
         }
 
         @Override
-        public void remove(final MapWriterKey<T> key, final GeoPrimitive value, final Object context) {
+        public void remove(final Object key, final GeoPrimitive value, final Object context) {
             providerLayer.remove(value, context);
         }
 
         @Override
-        public Object replace(final MapWriterKey<T> key, final GeoPrimitive oldValue, final Object oldContext, final GeoPrimitive newValue) {
+        public Object replace(final Object key, final GeoPrimitive oldValue, final Object oldContext, final GeoPrimitive newValue) {
             return providerLayer.replace(oldValue, oldContext, newValue);
         }
 
@@ -192,7 +196,7 @@ public class GeoItemLayer<K> {
         final IProviderGeoItemLayer<?>  providerLayer = newProviderLayer == null ? NOOP_GEOITEM_LAYER : newProviderLayer;
         providerLayer.init(zLevel);
         this.providerLayer = providerLayer;
-        this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter<>(providerLayer));
+        this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter(providerLayer));
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (entry.getValue().second) {
                 putToMap(entry.getKey(), entry.getValue().first, null);
@@ -270,20 +274,20 @@ public class GeoItemLayer<K> {
 
         if (itemIsPrimitive && (oldItem == null || oldItemIsPrimitive)) {
             //->insert or replace one GeoPrimitive with another
-            mapWriter.put(new MapWriterKey<>(key, 0), (GeoPrimitive) item);
+            mapWriter.put(key, (GeoPrimitive) item);
         } else if (item == null && oldItemIsPrimitive) {
             //->remove a GeoPrimitive
-            mapWriter.remove(new MapWriterKey<>(key, 0));
+            mapWriter.remove(key);
         } else if (!itemIsPrimitive && !oldItemIsPrimitive) {
             //->insert or replace a GeoGroup with another, or remove a GeoGroup
             replaceGroupInMap(key, oldItem, item);
         } else if (itemIsPrimitive) {
             //->replace a GeoGroup with a GeoPrimitive
             replaceGroupInMap(key, oldItem, null);
-            mapWriter.put(new MapWriterKey<>(key, 0), (GeoPrimitive) item);
+            mapWriter.put(key, (GeoPrimitive) item);
         } else {
             //->replace a GeoPrimitive with a GeoGroup
-            mapWriter.remove(new MapWriterKey<>(key, 0));
+            mapWriter.remove(key);
             replaceGroupInMap(key, null, item);
         }
     }
@@ -294,27 +298,25 @@ public class GeoItemLayer<K> {
 
     private void replaceGroupInMap(final K key, @Nullable final GeoItem oldItem, @Nullable final GeoItem newItem) {
 
-        mapWriter.multiChange(() -> {
-            final Map<Integer, GeoPrimitive> toRemove = CommonUtils.getTempLocalMap();
-            final Map<Integer, GeoPrimitive> toPut = CommonUtils.getTempLocalMap2();
+        mapWriter.multiChange((putAction, removeAction) -> {
+            final Map<Integer, GeoPrimitive> toRemove = LOCAL_MAP.get();
+            final Map<Integer, GeoPrimitive> toPut = LOCAL_MAP_2.get();
 
             //get elements from old and new group
-            fillMapFromGroup(oldItem, toRemove);
-            fillMapFromGroup(newItem, toPut);
+            fillMapFromGroup(oldItem, Objects.requireNonNull(toRemove));
+            fillMapFromGroup(newItem, Objects.requireNonNull(toPut));
             //everything which is both in old and new group must not be removed
             for (Integer i : toPut.keySet()) {
                 toRemove.remove(i);
             }
-            final Map<MapWriterKey<K>, GeoPrimitive> result = new HashMap<>();
             for (Map.Entry<Integer, GeoPrimitive> entry : toRemove.entrySet()) {
-                result.put(new MapWriterKey<>(key, entry.getKey()), null);
+                removeAction.call(new MapWriterGeoGroupKey<>(key, entry.getKey()));
             }
             for (Map.Entry<Integer, GeoPrimitive> entry : toPut.entrySet()) {
-                result.put(new MapWriterKey<>(key, entry.getKey()), entry.getValue());
+                putAction.call(new MapWriterGeoGroupKey<>(key, entry.getKey()), entry.getValue());
             }
             toPut.clear();
             toRemove.clear();
-            return result;
         });
     }
 
@@ -348,6 +350,14 @@ public class GeoItemLayer<K> {
         if (value != null && value.second) {
             itemMap.put(key, new Pair<>(value.first, false));
             removeFromMap(key, value.first);
+        }
+    }
+
+    public synchronized void setVisibility(final K key, final boolean show) {
+        if (show) {
+            show(key);
+        } else {
+            hide(key);
         }
     }
 
