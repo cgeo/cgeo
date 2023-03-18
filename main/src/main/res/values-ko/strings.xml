@@ -851,15 +851,24 @@
     <string name="init_list_initial_load_limit">목록 부하 제한</string>
     <string name="init_summary_list_initial_load_limit">저장된 목록을 표시 할 때 처음에 데이터베이스에서 로드할 최대 캐시 수입니다. \'무제한\'으로 0을 선택하십시오.</string>
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
+    <string name="init_title_cacheListInfo1">목록 정보 라인 구성 (라인 1)</string>
+    <string name="init_title_cacheListInfo2">목록 정보 라인 구성 (라인 2)</string>
+    <string name="init_summary_cacheListInfo">캐시 목록의 각 캐시에 대해 표시할 추가 정보를 선택합니다.</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">지오코드</string>
     <string name="cacheListInfoItem_Difficulty">난이도</string>
     <string name="cacheListInfoItem_Terrain">지형</string>
+    <string name="cacheListInfoItem_MemberState">프리미엄 상태</string>
     <string name="cacheListInfoItem_Size">크기</string>
+    <string name="cacheListInfoItem_Lists">기타 목록</string>
     <string name="cacheListInfoItem_Jasmer">자스머</string>
+    <string name="cacheListInfoItem_EventDate">이벤트 날짜</string>
+    <string name="active_elements">활성 부분</string>
+    <string name="disabled_elements">비활성화 부분</string>
     <!-- app theme -->
     <string name="settings_theme_title">테마</string>
     <string-array name="settings_theme_entries">
@@ -1417,6 +1426,8 @@
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시/지점 작성) 길게 탭하는 게 활동시킵니다.</string>
+    <string name="init_ActionbarAutohide">누를 때 툴바 숨기기</string>
+    <string name="init_summary_ActionbarAutohide">툴바를 숨기거나 표시하려면 빈 지도 공간을 누르세요.</string>
     <string name="onetime_info_longtap_disabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 비활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="onetime_info_longtap_enabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="goto_targets_list">사용자 정의 캐시</string>
