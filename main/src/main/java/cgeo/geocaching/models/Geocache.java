@@ -350,13 +350,11 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (waypoints.isEmpty()) {
-            this.setWaypoints(other.waypoints, false);
-        } else {
-            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
-            Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
-            this.setWaypoints(newPoints, false);
-        }
+
+        final List<Waypoint> newPoints = new ArrayList<>(waypoints);
+        Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
+        this.setWaypoints(newPoints, false);
+
         if (spoilers == null) {
             spoilers = other.spoilers;
         }

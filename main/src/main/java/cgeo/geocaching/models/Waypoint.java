@@ -136,6 +136,10 @@ public class Waypoint implements IWaypoint {
     }
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
+        if (oldPoints.isEmpty()) {
+            return;
+        }
+
         // Build a map of new waypoints for faster subsequent lookups
         final Map<String, Waypoint> newPrefixes = new HashMap<>(newPoints.size());
         for (final Waypoint waypoint : newPoints) {
