@@ -314,7 +314,7 @@ dependencies {
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation('com.github.k3b:k3b-geoHelper:v1.1.11') {
+    implementation('com.github.k3b:k3b-geoHelper:v1.1.12') {
         // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
         exclude group: 'commons-io', module: 'commons-io'
     }
