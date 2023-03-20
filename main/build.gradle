@@ -477,6 +477,10 @@ dependencies {
     // Loupe for ImageGallery and zoomable ImageViews
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
+
+    //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
+    //See https://github.com/guardian/toolargetool 
+    implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray

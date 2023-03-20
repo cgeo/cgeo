@@ -48,6 +48,7 @@ public final class Log {
      * Whether to throw an exception when an error is logged. Value should be true or false
      */
     public static final String PROP_THROW_ON_ERROR_LOG = "logging.throwonerror";
+    public static final String PROP_LOG_TRANSACTION_SIZES = "logging.transactionsizes";
     /**
      * Logfile to log to
      */
@@ -62,13 +63,17 @@ public final class Log {
     private static boolean isDebug = true;
 
     private static LogLevel minLogLevel = LogLevel.WARN;
+    private static LogLevel effectiveMinLogLevel = minLogLevel;
     private static boolean logThrowExceptionOnError = false;
+    private static boolean logTransactionSizes = false;
+    private static boolean effectiveLogTransactionSizes = false;
     private static LogLevel minLogAddCallerInfo = LogLevel.NONE;
+    private static LogLevel effectiveMinLogAddCallerInfo = LogLevel.NONE;
     private static int addCallerInfoMaxDepth = 8;
     private static PrintWriter logFileWriter = null;
 
     private static final boolean[] SETTING_DO_LOGGING = new boolean[LogLevel.values().length];
-    private static boolean settingThrowExceptionOnError = true;
+    private static boolean effectiveThrowExceptionOnError = true;
     private static final boolean[] SETTING_ADD_CLASSINFO = new boolean[LogLevel.values().length];
 
     static {
@@ -136,6 +141,7 @@ public final class Log {
                 }
             }
             logThrowExceptionOnError = "true".equalsIgnoreCase(logProps.getProperty(PROP_THROW_ON_ERROR_LOG));
+            logTransactionSizes = "true".equalsIgnoreCase(logProps.getProperty(PROP_LOG_TRANSACTION_SIZES));
             if (logProps.containsKey(PROP_LOGFILE)) {
                 final String logfileNamePraefix = logProps.getProperty(PROP_LOGFILE).trim();
                 if (StringUtils.isNotBlank(logfileNamePraefix)) {
@@ -168,13 +174,22 @@ public final class Log {
     }
 
     private static void adjustSettings() {
-        final LogLevel minDoLogging = isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel;
-        final LogLevel minAddCallerInfo = isDebug() && minLogAddCallerInfo.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogAddCallerInfo;
-        setLevel(SETTING_DO_LOGGING, minDoLogging);
-        setLevel(SETTING_ADD_CLASSINFO, minAddCallerInfo);
-        settingThrowExceptionOnError = logThrowExceptionOnError || isDebug;
-        android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minDoLogging + ", minAddCallerInfo=" + minAddCallerInfo +
-                ", addCallerInfoMaxDepth=" + addCallerInfoMaxDepth + ", throwOnError=" + logThrowExceptionOnError);
+        effectiveMinLogLevel = isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel;
+        effectiveMinLogAddCallerInfo = isDebug() && minLogAddCallerInfo.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogAddCallerInfo;
+        setLevel(SETTING_DO_LOGGING, effectiveMinLogLevel);
+        setLevel(SETTING_ADD_CLASSINFO, effectiveMinLogAddCallerInfo);
+
+        effectiveThrowExceptionOnError = logThrowExceptionOnError;
+        effectiveLogTransactionSizes = logTransactionSizes || isDebug;
+        TransactionSizeLogger.get().setEnabled(effectiveLogTransactionSizes);
+
+        android.util.Log.i(TAG, "[Log] Logging set: " + getLogSettingsForDisplay());
+    }
+
+    public static String getLogSettingsForDisplay() {
+        return "debug=" + isDebug() + ", minLevel=" + effectiveMinLogLevel + ", minAddCallerInfo=" + effectiveMinLogAddCallerInfo +
+                ", addCallerInfoMaxDepth=" + addCallerInfoMaxDepth + ", throwOnError=" + logThrowExceptionOnError + ", transactionSizes=" + effectiveLogTransactionSizes;
+
     }
 
     private static void setLevel(final boolean[] settings, final LogLevel level) {
@@ -340,7 +355,7 @@ public final class Log {
             if (logFileWriter != null) {
                 logToFile("E", message, null);
             }
-            if (settingThrowExceptionOnError) {
+            if (effectiveThrowExceptionOnError) {
                 throw new RuntimeException("Aborting on Log.e()");
             }
         }
@@ -353,7 +368,7 @@ public final class Log {
             if (logFileWriter != null) {
                 logToFile("E", message, t);
             }
-            if (settingThrowExceptionOnError) {
+            if (effectiveThrowExceptionOnError) {
                 if (t instanceof RuntimeException) {
                     throw (RuntimeException) t;
                 }

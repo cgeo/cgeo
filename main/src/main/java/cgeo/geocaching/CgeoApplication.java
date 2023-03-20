@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import cgeo.geocaching.utils.TransactionSizeLogger;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -51,6 +52,8 @@ public class CgeoApplication extends Application {
         Log.iForce("---------------- CGeoApplication: startup -------------");
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
             super.onCreate();
+
+            TransactionSizeLogger.get().setRequested();
 
             OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 

@@ -100,6 +100,7 @@ public final class SystemInformation {
                 .append("\n- System date format: ").append(Formatter.getShortDateFormat())
                 .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
+                .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
                 .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
                 .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
                 .append("\n- Live map mode: ").append(Settings.isLiveMap())
