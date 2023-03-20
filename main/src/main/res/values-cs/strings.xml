@@ -869,15 +869,24 @@
     <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
     <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
+    <string name="init_title_cacheListInfo1">Konfigurace seznamu do řádků (1. řádek)</string>
+    <string name="init_title_cacheListInfo2">Konfigurace seznamu do řádků (2. řádek)</string>
+    <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokód</string>
     <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
     <string name="cacheListInfoItem_Terrain">Terén</string>
+    <string name="cacheListInfoItem_MemberState">Prémiový stav</string>
     <string name="cacheListInfoItem_Size">Velikost</string>
+    <string name="cacheListInfoItem_Lists">Ostatní seznamy</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Datum události</string>
+    <string name="active_elements">Aktivní prvky</string>
+    <string name="disabled_elements">Zakázané prvky</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motiv</string>
     <string-array name="settings_theme_entries">
@@ -1459,6 +1468,8 @@
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku / trasový bod)</string>
+    <string name="init_ActionbarAutohide">Klepnutím skrýt panel nástrojů</string>
+    <string name="init_summary_ActionbarAutohide">Klepnutím na volné místo na mapě skryjete/zobrazíte panel nástrojů</string>
     <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="onetime_info_longtap_enabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky / trasové body.\n\nDlouhé klepnutí na mapu je aktuálně povoleno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
