@@ -48,7 +48,7 @@ public class Send2CgeoDownloader {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {
                         handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADING, response));
-                        Geocache.storeCache(null, response, Collections.singleton(listId), false, null);
+                        Geocache.storeCache(null, response, Collections.singleton(listId), true, null);
                         handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADED, response));
                         baseTime = System.currentTimeMillis();
                         worker.schedule(this);
