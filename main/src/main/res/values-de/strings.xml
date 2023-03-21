@@ -857,15 +857,24 @@
     <string name="init_list_initial_load_limit">Ladelimit für Listen</string>
     <string name="init_summary_list_initial_load_limit">Maximale Anzahl der zu ladenden Caches aus der Datenbank, wenn gespeicherte Listen angezeigt werden. Wähle 0 für \"unbegrenzt\"</string>
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
+    <string name="init_title_cacheListInfo1">Infozeilen für Cachelisten konfigurieren (Zeile 1)</string>
+    <string name="init_title_cacheListInfo2">Infozeilen für Cachelisten konfigurieren (Zeile 2)</string>
+    <string name="init_summary_cacheListInfo">Wähle die zusätzlichen Informationen, die in Cachelisten zu jedem Cache angezeigt werden sollen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
     <string name="cacheListInfoItem_Terrain">Gelände</string>
+    <string name="cacheListInfoItem_MemberState">Premium-Status</string>
     <string name="cacheListInfoItem_Size">Größe</string>
+    <string name="cacheListInfoItem_Lists">Andere Listen</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Event-Datum</string>
+    <string name="active_elements">Aktive Elemente</string>
+    <string name="disabled_elements">Deaktivierte Elemente</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
