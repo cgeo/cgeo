@@ -27,7 +27,7 @@ plugins {
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
-    id 'com.github.spotbugs' version '4.7.8'
+    id 'com.github.spotbugs' version '5.0.14'
 
     // adds gradle tasks 'tiTree' (print a task dependency graph), 'tiOrder' (display the execution queue),
     // 'tiJson' (export as a JSON file), see https://gitlab.com/barfuin/gradle-taskinfo
