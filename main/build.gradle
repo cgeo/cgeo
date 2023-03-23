@@ -424,7 +424,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // Support Library Lifecycle Helpers
-    String lifecycleVersion = '2.5.1'
+    String lifecycleVersion = '2.6.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
