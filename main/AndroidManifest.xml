@@ -460,10 +460,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImagesActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity
             android:name=".ImageGalleryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
