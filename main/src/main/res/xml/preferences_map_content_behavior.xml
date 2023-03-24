@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="@drawable/settings_map"
+    android:summary="@string/settings_summary_map_content_behavior"
+    android:title="@string/settings_title_map_content_behavior"
+    app:key="@string/preference_screen_map_content_behavior">
+
+    <PreferenceCategory
+        android:title="@string/settings_title_map_content"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_maptrail"
+            android:summary="@string/init_summary_maptrail"
+            android:title="@string/init_maptrail"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:title="@string/init_maptrail_length"
+            android:summary="@string/init_maptrail_length_summary"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_maptrail_length"
+            android:defaultValue="@integer/historytrack_length_default"
+            app:min="100"
+            app:max="@integer/historytrack_length_max"
+            app:stepSize="100"
+            app:logScaling="true"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_bigSmileysOnMap"
+            android:summary="@string/init_summary_bigSmileysOnMap"
+            android:title="@string/init_bigSmileysOnMap"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_dtMarkerOnCacheIcon"
+            android:summary="@string/init_summary_dtMarkerOnCacheIcon"
+            android:title="@string/init_dtMarkerOnCacheIcon"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_title_waypoints"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:summary="@string/init_showwaypoint_description"
+            android:title="@string/init_showwaypoints"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_showwaypointsthreshold"
+            android:defaultValue="@integer/waypoint_threshold_default"
+            app:min="0"
+            app:max="@integer/waypoint_threshold_max"
+            app:logScaling="true"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_excludeWpOriginal"
+            android:summary="@string/init_summary_hidewp_original"
+            android:title="@string/init_hidewp"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_excludeWpParking"
+            android:summary="@string/init_summary_hidewp_parking"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_excludeWpVisited"
+            android:summary="@string/init_summary_hidewp_visited"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_zoomincludingwaypoints"
+            android:summary="@string/init_zoomincludingwaypoints_description"
+            android:title="@string/init_zoomincludingwaypoints"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_title_map_behavior"
+        app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_longTapOnMap"
+            android:summary="@string/init_summary_longtap_map"
+            android:title="@string/init_longtap_map"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="@string/pref_maprotation_manual"
+            android:entries="@array/maprotation"
+            android:entryValues="@array/maprotationValues"
+            android:key="@string/pref_mapRotation"
+            android:summary="%s"
+            android:title="@string/settings_title_map_rotation"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_mapActionbarAutohide"
+            android:summary="@string/init_summary_ActionbarAutohide"
+            android:title="@string/init_ActionbarAutohide"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_title_proximityNotification"
+        app:allowDividerBelow="false"
+        app:iconSpaceReserved="false">
+        <cgeo.geocaching.settings.ProximityPreference
+            android:key="@string/pref_proximityDistanceFar"
+            android:defaultValue="@integer/proximitynotification_far_default"
+            app:min="1"
+            app:max="@integer/proximitynotification_distance_max"
+            app:label="@string/far_distance"
+            app:highRes="true"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ProximityPreference
+            android:key="@string/pref_proximityDistanceNear"
+            android:defaultValue="@integer/proximitynotification_near_default"
+            app:min="1"
+            app:max="@integer/proximitynotification_distance_max"
+            app:label="@string/near_distance"
+            app:highRes="true"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_proximityNotificationGeneral"
+            android:summary="@string/init_summary_proximityNotificationGeneral"
+            android:title="@string/init_proximityNotificationGeneral"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_proximityNotificationSpecific"
+            android:summary="@string/init_summary_proximityNotificationSpecific"
+            android:title="@string/init_proximityNotificationSpecific"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_pn_tone_only"
+            android:entries="@array/proximity_notification_types"
+            android:entryValues="@array/proximity_notification_values"
+            android:key="@string/pref_proximityNotificationType"
+            android:summary="%s"
+            android:title="@string/init_proximity_notification_type"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

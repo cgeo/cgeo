@@ -798,6 +798,12 @@
     <string name="settings_summary_offlinedata">Configure the data to be saved for offline use, the storage location and folders for GPX files.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Configure your signature and set logging options.</string>
+    <string name="settings_title_map_sources">Map Sources</string>
+    <string name="settings_summary_map_sources">Set map source and offline map settings.</string>
+    <string name="settings_title_map_content_behavior">Map Content &amp; Behavior</string>
+    <string name="settings_summary_map_content_behavior">Configure what information to show on maps and interaction options.</string>
+    <string name="settings_title_map_colors">Map color customization</string>
+    <string name="settings_summary_map_colors">Configure colors of elements drawn on the map.</string>
     <string name="settings_title_map">Map</string>
     <string name="settings_summary_map">Set map source, offline map settings and map details.</string>
     <string name="settings_title_map_data">Map Data</string>
@@ -1170,7 +1176,8 @@
     <string name="feature_search_finder">Search by finder</string>
     <string name="feature_favorite">Adding cache to favorites</string>
     <string name="feature_voting">Voting for caches</string>
-    <string name="init_maplines_title">Map lines customization</string>
+    <string name="init_appearance_general">General appearance</string>
+    <string name="init_maplines_title">Map colors customization</string>
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>

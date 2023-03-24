@@ -24,12 +24,19 @@
         app:summary="@string/settings_summary_cachedetails"
         app:title="@string/settings_title_cachedetails" />
 
-    <!-- Map -->
+    <!-- Map Sources -->
     <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapFragment"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment"
         app:icon="@drawable/settings_map"
-        app:summary="@string/settings_summary_map"
-        app:title="@string/settings_title_map" />
+        app:summary="@string/settings_summary_map_sources"
+        app:title="@string/settings_title_map_sources" />
+
+    <!-- Map Content / Behavior -->
+    <Preference
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment"
+        app:icon="@drawable/settings_map_content"
+        app:summary="@string/settings_summary_map_content_behavior"
+        app:title="@string/settings_title_map_content_behavior" />
 
     <!-- Logging -->
     <Preference
