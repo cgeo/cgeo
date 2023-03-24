@@ -1,10 +1,10 @@
 package cgeo.geocaching.settings.fragments;
 
-import android.os.Bundle;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.MapMarkerUtils;
+
+import android.os.Bundle;
 
 public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment {
 
