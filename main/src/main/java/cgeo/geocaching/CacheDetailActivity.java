@@ -29,7 +29,6 @@ import cgeo.geocaching.contacts.IContactCardProvider;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
-import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
@@ -76,7 +75,6 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
@@ -234,8 +232,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
-
-    protected ImagesList imagesList;
 
     private ImageGalleryView imageGallery;
     private int imageGalleryPos = -1;
@@ -482,10 +478,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
             menu.findItem(R.id.menu_waypoint_open_geochecker).setVisible(CheckerUtils.getCheckerUrl(cache) != null);
-        } else {
-            if (imagesList != null) {
-                imagesList.onCreateContextMenu(menu, view);
-            }
         }
     }
 
@@ -598,8 +590,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
-        } else if (imagesList == null || !imagesList.onContextItemSelected(item)) {
-            return onOptionsItemSelected(item);
         }
         return true;
     }
@@ -915,7 +905,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         setIsContentRefreshable(cache.supportsRefresh());
 
         // reset imagesList so Images view page will be redrawn
-        imagesList = null;
         imageGallery = null;
         setOrderedPages(getOrderedPages());
         reinitializeViewPager();
@@ -978,7 +967,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images),
         IMAGEGALLERY(R.string.cache_images),
         VARIABLES(R.string.cache_variables),
         ;
@@ -2010,10 +1998,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
 
                         final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));
-
-                        if (Settings.enableFeatureNewImageGallery()) {
-                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
-                        }
+                        ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
                     }
 
                     @Override
@@ -2394,38 +2379,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
-
-        @Override
-        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return CachedetailImagesPageBinding.inflate(inflater, container, false);
-        }
-
-        @Override
-        public long getPageId() {
-            return Page.IMAGES.id;
-        }
-
-        @Override
-        public void setContent() {
-            // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-            if (activity == null) {
-                return;
-            }
-            final Geocache cache = activity.getCache();
-            if (cache == null) {
-                return;
-            }
-            binding.getRoot().setVisibility(View.VISIBLE);
-
-            if (activity.imagesList == null) {
-                activity.imagesList = new ImagesList(activity, cache.getGeocode(), cache);
-                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), cache.getNonStaticImages()));
-            }
-        }
-    }
-
     public static class ImageGalleryCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
 
         @Override
@@ -2749,12 +2702,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
                 pages.add(Page.INVENTORY.id);
             }
-            if (Settings.enableFeatureNewImageGallery()) {
-                pages.add(Page.IMAGEGALLERY.id);
-            }
-            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
-                pages.add(Page.IMAGES.id);
-            }
+            pages.add(Page.IMAGEGALLERY.id);
         }
 
         final long[] result = new long[pages.size()];
@@ -2779,8 +2727,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {
             return new InventoryViewCreator();
-        } else if (pageId == Page.IMAGES.id) {
-            return new ImagesViewCreator();
         } else if (pageId == Page.IMAGEGALLERY.id) {
             return new ImageGalleryCreator();
         } else if (pageId == Page.VARIABLES.id) {

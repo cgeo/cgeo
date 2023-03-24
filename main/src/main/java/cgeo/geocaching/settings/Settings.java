@@ -694,14 +694,6 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
-    public static boolean enableFeatureNewImageGallery() {
-        if (!contains(R.string.pref_feature_new_image_gallery)) {
-            //return !BranchDetectionHelper.isProductionBuild();
-            return true;
-        }
-        return getBoolean(R.string.pref_feature_new_image_gallery, false);
-    }
-
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
