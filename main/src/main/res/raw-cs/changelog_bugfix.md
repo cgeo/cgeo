@@ -2,6 +2,7 @@
 - Oprava: Rozšíření sloupce s popisem logu v režimu na šířku
 - Oprava: Zřetelnější hlášení o chybě formátu obrázku
 - Oprava: Trasové body vytvořené uživatelem se nezobrazují na mapě OSM
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Oprava: Přeskočení některých uživatelsky vytvořených trasových bodů při importu GPX
