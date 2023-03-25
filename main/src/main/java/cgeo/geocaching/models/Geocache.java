@@ -351,9 +351,7 @@ public class Geocache implements IWaypoint {
             myVote = other.myVote;
         }
 
-        final List<Waypoint> newPoints = new ArrayList<>(waypoints);
-        Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
-        this.setWaypoints(newPoints, false);
+        mergeWaypoints(other.waypoints, false);
 
         if (spoilers == null) {
             spoilers = other.spoilers;
@@ -404,6 +402,16 @@ public class Geocache implements IWaypoint {
 
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
         return isEqualTo(other);
+    }
+
+    public void mergeWaypoints(final List<Waypoint> otherWaypoints, final boolean forceMerge) {
+        if (waypoints.isEmpty()) {
+            this.setWaypoints(otherWaypoints, false);
+        } else {
+            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
+            Waypoint.mergeWayPoints(newPoints, otherWaypoints, forceMerge);
+            this.setWaypoints(newPoints, false);
+        }
     }
 
     /**

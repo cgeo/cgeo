@@ -783,9 +783,7 @@ final class OkapiClient {
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
 
-            final List<Waypoint> waypointsOfResponse = parseWaypoints((ArrayNode) response.path(CACHE_WPTS));
-            Waypoint.mergeWayPoints(waypointsOfResponse, cache.getWaypoints(), false);
-            cache.setWaypoints(waypointsOfResponse, false);
+            cache.mergeWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), true);
 
             cache.mergeInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)), EnumSet.of(TrackableBrand.GEOKRETY));
 
