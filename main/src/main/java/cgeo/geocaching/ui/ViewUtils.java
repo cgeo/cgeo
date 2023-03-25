@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
@@ -534,5 +535,12 @@ public class ViewUtils {
 
         return nextView[0];
 
+    }
+
+    /** null-safe call to view */
+    public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
+        if (view != null) {
+            applyMethod.call(view);
+        }
     }
 }

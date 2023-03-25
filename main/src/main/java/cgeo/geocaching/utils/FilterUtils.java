@@ -9,6 +9,7 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -87,13 +88,21 @@ public class FilterUtils {
         activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
     }
 
+    /** temporary helper until UnifiedMap uses initializeFilterBar */
+    @Deprecated
+    public static void showActionBarSpacer(@NonNull final Activity activity) {
+        activity.findViewById(R.id.actionBarSpacer).setVisibility(View.VISIBLE);
+    }
+
     public static boolean toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
         if (!Settings.getMapActionbarAutohide()) {
             return true;
         }
         final boolean actionBarShowing = activity.toggleActionBar();
         final View spacer = activity.findViewById(R.id.actionBarSpacer);
-        activity.findViewById(R.id.filterbar).animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start();
+        ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
+        ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
+        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
         return actionBarShowing;
     }
 

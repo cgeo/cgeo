@@ -241,8 +241,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // temporary workaround to show spacer; will be replaced by
         // FilterUtils.initializeFilterBar(this, this, true);
         // as soon as filtering gets integrated into UnifiedMapActivity
-        FilterUtils.toggleActionBar(this);
-        FilterUtils.toggleActionBar(this);
+        FilterUtils.showActionBarSpacer(this);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
