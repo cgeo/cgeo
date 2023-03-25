@@ -849,6 +849,7 @@
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
     <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
+    <string name="init_cachelists">Kätkölistat</string>
     <string name="init_log_offline">Offlinekirjaus</string>
     <string name="init_summary_log_offline">Käytä offlinekirjausta (Online-kirjausnäyttöä ei näytetä kirjatessa, kirjauksia ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
@@ -857,15 +858,24 @@
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
     <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
+    <string name="init_title_cacheListInfo1">Määritä listan inforivit (rivi 1)</string>
+    <string name="init_title_cacheListInfo2">Määritä listan inforivit (rivi 2)</string>
+    <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokoodi</string>
     <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
     <string name="cacheListInfoItem_Terrain">Maasto</string>
+    <string name="cacheListInfoItem_MemberState">Premium-tila</string>
     <string name="cacheListInfoItem_Size">Koko</string>
+    <string name="cacheListInfoItem_Lists">Muut listat</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Tapahtuman päivämäärä</string>
+    <string name="active_elements">Aktiiviset elementit</string>
+    <string name="disabled_elements">Ei-aktiiviset elementit</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
