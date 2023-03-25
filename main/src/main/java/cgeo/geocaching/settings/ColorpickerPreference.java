@@ -58,6 +58,7 @@ public class ColorpickerPreference extends Preference {
     @Override
     public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        holder.setDividerAllowedAbove(false);
 
         originalColor = getPersistedInt(defaultColor);
         originalWidth = getSharedPreferences().getInt(lineWidthPreferenceKey, defaultWidth);
