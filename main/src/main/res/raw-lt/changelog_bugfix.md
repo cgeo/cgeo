@@ -2,6 +2,7 @@
 - Pataisymas: Išplėstas žurnalo aprašo stulpelis gulsčiojo ekrano režimu
 - Pataisymas: Padarėme vaizdo formato klaidos pranešimą aiškesniu
 - Pataisymas: Vartotojo sukurti kelio taškai nerodomi OSM žemėlapyje
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
