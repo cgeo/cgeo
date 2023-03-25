@@ -21,3 +21,4 @@
 - 신규: 추적 아이템 네임스페이스 충돌에 대한 해결 방법(비활성화된 GeoKrety 커넥터에서 작동)
 - 신규: 캐시 목록 정보 항목 구성 가능
 - 신규: 최근에 본 캐시 지우기
+- New: Add 'recently viewed caches' to quicklaunch options
