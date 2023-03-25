@@ -21,3 +21,4 @@
 - Neu: Workaround für Trackable-Namenskonflikte (funktioniert für deaktivierten GeoKrety Connector)
 - Neu: Infos in Cachelisten konfigurierbar machen
 - Neu: Kürzlich angesehene Caches leeren
+- New: Add 'recently viewed caches' to quicklaunch options
