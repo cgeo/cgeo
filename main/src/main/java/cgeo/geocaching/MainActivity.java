@@ -368,6 +368,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, BookmarkListActivity.class));
             }
+        } else if (which == QuickLaunchItem.VALUES.RECENTLY_VIEWED.id) {
+            CacheListActivity.startActivityLastViewed(this, new SearchResult(DataStore.getLastOpenedCaches()));
         } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
