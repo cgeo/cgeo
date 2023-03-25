@@ -2,6 +2,7 @@
 - Korjaus: Laajenna lokikuvauksen saraketta vaakatilassa
 - Korjaa: Tee kuvanmuodon virheilmoituksesta selkeämpi
 - Korjaa: Käyttäjän luomia reittipisteitä ei näytetä OSM-kartassa
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Korjaa: Ohitettiin joitakin käyttäjän luomia reittipisteitä GPX:n tuonnissa
