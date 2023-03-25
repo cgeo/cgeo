@@ -21,3 +21,4 @@
 - Novinka: Řešení konfliktu sledovatelného prostoru názvů (funguje pro vypnutý konektor GeoKrety)
 - Novinka: Položky informací v seznamu kešek jsou nyní konfigurovatelné
 - Novinka: Vymazání nedávno zobrazených kešek
+- Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
