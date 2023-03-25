@@ -2,6 +2,7 @@
 - Correcção: Ampliar a coluna de descrição do registo, no modo paisagem
 - Correcção: A mensagem de erro acerca do formato de imagem ficou mais clara
 - Correcção: Pontos adicionais criados pelo utilizador não eram exibidos no mapa OSM
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Correcção: Eram ignorados alguns pontos adicionais criados pelo utilizador na importação do GPX
