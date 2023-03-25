@@ -7,6 +7,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.03.25 Bugfix Release
+
+### General
+- Fix: Multiple navigation lines on Google Maps map
+- Fix: User-created waypoints not being displayed on OSM map
+- Fix: Widen log description column in landscape mode
+- Fix: Make image format error message clearer
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.02.25 Bugfix Release
 
 ### General
