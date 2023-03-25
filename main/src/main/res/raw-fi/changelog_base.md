@@ -21,3 +21,4 @@
 - Uusi: Väliaikainen korjaus matkaajien nimiavaruuskonfliktin varalta (toimii poissa käytöstä olevalla GeoKretyn liittimellä)
 - Uusi: Tee kätköluettelon tietokentät konfiguroitaviksi
 - Uusi: Tyhjennä äskettäin katsotut kätköt
+- Uusi: Lisää 'äskettäin katsotut kätköt' pikakäynnistyksen valintoihin
