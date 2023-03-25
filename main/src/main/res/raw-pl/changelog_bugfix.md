@@ -2,6 +2,7 @@
 - Poprawka: Szersza kolumna opisu wpisu w trybie poziomym
 - Poprawka: Bardzej zrozumiały komunikat o błędzie dotyczący formatu obrazu
 - Poprawka: Punkty nawigacji utworzone przez użytkownika nie były wyświetlane na mapie OSM
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Poprawka: Podczas importowania GPX pomijane były niektóre punktów nawigacji utworzone przez użytkownika

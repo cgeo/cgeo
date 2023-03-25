@@ -1,7 +1,8 @@
 ##
 - Korjaus: Laajenna lokikuvauksen saraketta vaakatilassa
 - Korjaa: Tee kuvanmuodon virheilmoituksesta selkeämpi
-- Fix: User-created waypoints not being displayed on OSM map
+- Korjaa: Käyttäjän luomia reittipisteitä ei näytetä OSM-kartassa
+- Fix: Multiple navigation lines on Google Maps map
 
 ##
 - Korjaa: Ohitettiin joitakin käyttäjän luomia reittipisteitä GPX:n tuonnissa

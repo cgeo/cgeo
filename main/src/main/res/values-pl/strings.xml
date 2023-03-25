@@ -1684,7 +1684,7 @@
     <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtru** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
     <string name="search_tb">Przedmioty podróżne</string>
-    <string name="search_tb_hint">Identyfikacja przedmiotu podróżnego</string>
+    <string name="search_tb_hint">Identyfikator przedmiotu podróżnego</string>
     <string name="search_tb_button">Szukaj przedmiotów podróżnych</string>
     <string name="search_destination">Otwórz miejsce docelowe w c:geo</string>
     <string name="add_target_to">Dodaj cel do</string>
