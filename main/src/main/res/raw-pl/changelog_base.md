@@ -21,3 +21,4 @@
 - Nowość: Obejście dla konfliktu przestrzeni nazw przedmiotu podróżnego (działa dla wyłączonego konektora GeoKreta)
 - Nowość: Elementy na liście skrytek są konfigurowalne
 - Nowość: Czyszczenie listy ostatnio oglądanych skrytek
+- Nowość: Dodano „ostatnio oglądane skrytki” do opcji szybkiego uruchamiania
