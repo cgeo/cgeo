@@ -21,3 +21,4 @@
 - Nieuw: Workaround voor trackable namespace conflict (werkt voor uitgeschakelde GeoKrety connector)
 - Nieuw: Maak cache lijst info items configureerbaar
 - Nieuw: Recent bekeken caches wissen
+- New: Add 'recently viewed caches' to quicklaunch options
