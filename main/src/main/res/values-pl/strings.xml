@@ -861,6 +861,7 @@
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
+    <string name="init_cachelists">Listy skrytek</string>
     <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
@@ -885,6 +886,8 @@
     <string name="cacheListInfoItem_Lists">Inne listy</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
+    <string name="active_elements">Aktywne elementy</string>
+    <string name="disabled_elements">Wyłączone elementy</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motyw</string>
     <string-array name="settings_theme_entries">
