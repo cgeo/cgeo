@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Introduza o nome de um geocacher.</string>
     <string name="warn_search_help_tb">Introduza o código do trackable. Por exemplo \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Por favor, insira algum texto para o registo.</string>
-    <string name="warn_load_images">O c:geo falhou o carregamento de imagens.</string>
     <string name="warn_pocket_query_select">Nenhuma Pocket Query seleccionada.</string>
     <string name="warn_no_pocket_query_found">Não foram encontradas Pocket Queries on-line.</string>
     <string name="warn_notloggedin_title">Modo Offline</string>
@@ -853,10 +852,8 @@
     <string name="init_summary_log_offline">Activa os registos offline (não será mostrada a vista de registos online, não os podendo publicar)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
-    <string name="init_listdisplay">Listas adicionais</string>
     <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de caches que são inicialmente carregadas, a partir do banco de dados, quando é exibida uma lista de caches armazenadas. Escolha 0 para \'ilimitado\'</string>
-    <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
@@ -958,8 +955,6 @@
     <string name="init_routeappearance_summary">Seleccionar a cor e opacidade para a linha de rota individual. Uma rota individual é uma colecção de pontos e/ou caches que seleccionou, com um toque sem soltar no ponto/cache. (É necessário, em primeiro lugar, activar a função \"toque sem soltar no mapa\". Consulte as definições de mapa.)</string>
     <string name="init_trackappearance">Aparência do percurso/rota GPX</string>
     <string name="init_trackappearance_summary">Seleccionar a cor, a opacidade e largura para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
-    <string name="init_trackwidth">Largura da linha do percurso/rota GPX</string>
-    <string name="init_trackwidth_summary">Seleccionar a largura para a linha do percurso/rota GPX</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
     <string name="init_circlecolor_summary">Seleccionar a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
     <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
@@ -1215,7 +1210,6 @@
     <string name="cache_offline_about_time_year">há mais de um ano</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventário</string>
-    <string name="cache_log_images_title">Imagens do registo</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota pessoal</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
@@ -1377,7 +1371,6 @@
     <string name="cache_location">Localização</string>
     <string name="cache_coordinates">Coordenadas</string>
     <string name="cache_coordinates_original">Coordenadas originais</string>
-    <string name="cache_spoiler_images_title">Imagens spoiler</string>
     <string name="cache_log_types">Tipos de registo</string>
     <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
     <string name="cache_clear_history">Limpar histórico</string>
