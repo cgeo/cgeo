@@ -275,7 +275,6 @@
     <string name="warn_search_help_user">Inserisci il nome dell\'utente di Geocaching.com.</string>
     <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
-    <string name="warn_load_images">c:geo non riesce a caricare immagini.</string>
     <string name="warn_pocket_query_select">Nessuna Pocket query selezionata.</string>
     <string name="warn_no_pocket_query_found">Nessuna Pocket query trovata online.</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
@@ -852,10 +851,8 @@
     <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
     <string name="init_choose_list">Chiedi lista</string>
     <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
-    <string name="init_listdisplay">Altre liste</string>
     <string name="init_list_initial_load_limit">Limite massimo di caricamento lista</string>
     <string name="init_summary_list_initial_load_limit">Numero massimo di cache da caricare inizialmente dal database quando vengono visualizzate le liste memorizzate. Scegli 0 per \'illimitato\'</string>
-    <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
@@ -949,8 +946,6 @@
     <string name="init_maptrail_length">Lunghezza massima traccia cronologia</string>
     <string name="init_maptrail_length_summary">Imposta la lunghezza massima della traccia di cronologia (forzata ad ogni avvio di c:geo). Il valore predefinito è 700 punti - regolato in base alla memoria disponibile.</string>
     <string name="init_summary_maptrail">Quando attivato (e il GPS è acceso) c:geo salva la cronologia dei tuoi movimenti come traccia e la visualizza sulla mappa.</string>
-    <string name="init_trackwidth">Spessore linea traccia/percorso GPX</string>
-    <string name="init_trackwidth_summary">Seleziona la larghezza per la linea di traccia/percorso GPX</string>
     <string name="init_circlecolor">Colore del cerchio</string>
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
     <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
@@ -1205,7 +1200,6 @@
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Oggetti</string>
-    <string name="cache_log_images_title">Immagini Log</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Note personali</string>
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
@@ -1365,7 +1359,6 @@
     <string name="cache_location">Luogo</string>
     <string name="cache_coordinates">Coordinate</string>
     <string name="cache_coordinates_original">Coordinate originali</string>
-    <string name="cache_spoiler_images_title">Immagini spoiler</string>
     <string name="cache_log_types">Tipi di Log</string>
     <string name="cache_coordinates_no">Questo cache non ha coordinate.</string>
     <string name="cache_clear_history">Cancella cronologia</string>
