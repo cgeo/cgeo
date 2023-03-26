@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Syötä Geocaching.com -sivuston käyttäjätunnus.</string>
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
-    <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
@@ -854,10 +853,8 @@
     <string name="init_summary_log_offline">Käytä offlinekirjausta (Online-kirjausnäyttöä ei näytetä kirjatessa, kirjauksia ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
-    <string name="init_listdisplay">Toiset listat</string>
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
-    <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
     <string name="init_title_cacheListInfo1">Määritä listan inforivit (rivi 1)</string>
     <string name="init_title_cacheListInfo2">Määritä listan inforivit (rivi 2)</string>
     <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
@@ -972,8 +969,6 @@
     <string name="init_routeappearance_summary">Valitse yksittäisen reittiviivan väri, läpinäkyvyys ja viivan leveys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_trackappearance">GPX reitin/jäljen ulkonäkö</string>
     <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
-    <string name="init_trackwidth">GPX-jäljen/reitin viivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse GPX-jäljen/reitin viivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
@@ -1229,7 +1224,6 @@
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Tavaraluettelo</string>
-    <string name="cache_log_images_title">Lokikuvat</string>
     <string name="cache_log_image_default_title">Kuva</string>
     <string name="cache_personal_note">Omat merkinnät</string>
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
@@ -1391,7 +1385,6 @@
     <string name="cache_location">Sijainti</string>
     <string name="cache_coordinates">Koordinaatit</string>
     <string name="cache_coordinates_original">Alkuperäiset koordinaatit</string>
-    <string name="cache_spoiler_images_title">Spoiler-kuvat</string>
     <string name="cache_log_types">Lokityypit</string>
     <string name="cache_coordinates_no">Tällä kätköllä ei ole koordinaatteja.</string>
     <string name="cache_clear_history">Tyhjennä historiatiedot</string>
