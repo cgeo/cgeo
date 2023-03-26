@@ -1083,7 +1083,7 @@
     <string name="cache_location">Lokation</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_coordinates_original">Oprindelig position</string>
-    <string name="cache_spoiler_images_title">Spoiler-billeder</string>
+    <string name="cache_spoiler_images_title">Spoilerbilleder</string>
     <string name="cache_log_types">Logbeskedtyper</string>
     <string name="cache_coordinates_no">Denne cache har ingen position.</string>
     <string name="cache_clear_history">Slet historik</string>
