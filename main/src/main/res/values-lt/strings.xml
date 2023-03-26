@@ -1421,7 +1421,7 @@
     <string name="cache_location">Vieta</string>
     <string name="cache_coordinates">Koordinatės</string>
     <string name="cache_coordinates_original">Originaliosios koordinatės</string>
-    <string name="cache_spoiler_images_title">Užuominų vaizdai</string>
+    <string name="cache_spoiler_images_title">Užuominos vaizdai</string>
     <string name="cache_log_types">Įrašų tipai</string>
     <string name="cache_coordinates_no">Ši slėptuvė neturi koordinačių.</string>
     <string name="cache_clear_history">Išvalyti istoriją</string>
