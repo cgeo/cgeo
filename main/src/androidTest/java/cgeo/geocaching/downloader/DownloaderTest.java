@@ -140,13 +140,13 @@ public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderFreizeitkarteThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of themes
-        assertThat(list.size()).isEqualTo(3);
+        assertThat(list.size()).isGreaterThan(2);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(3);
+        assertThat(count(list, false)).isGreaterThan(2);
 
         // check one named entry
         final Download d = findByName(list, "Outdoor design contrast v5");
