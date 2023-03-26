@@ -205,7 +205,6 @@
     <string name="warn_search_help_user">Vnesite uporabniško ime iz Geocaching.com.</string>
     <string name="warn_search_help_tb">Vnesite kodo sledljivčka, na primer: \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
-    <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
     <string name="warn_no_pocket_query_found">Noben Pocket Query ni bil najden online.</string>
     <string name="err_read_pocket_query_list">Napaka pri branju Pocket query seznama.</string>
@@ -516,7 +515,6 @@
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
     <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Slike</string>
     <string name="cache_log_image_default_title">Slika</string>
     <string name="cache_personal_note">Lastna opomba</string>
     <string name="cache_personal_note_edit">Uredi</string>
@@ -602,7 +600,6 @@
     <string name="cache_location">Lokacija</string>
     <string name="cache_coordinates">Koordinate</string>
     <string name="cache_coordinates_original">Originalne koordiante</string>
-    <string name="cache_spoiler_images_title">Spoiler slike</string>
     <string name="cache_log_types">Tipi zapisov</string>
     <string name="cache_coordinates_no">Zaklad nima koordinat.</string>
     <string name="cache_clear_history">Počisti zgodovino</string>
