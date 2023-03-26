@@ -271,7 +271,6 @@
     <string name="warn_search_help_user">Εισάγετε ένα όνομα χρήστη από το Geocaching.com.</string>
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
-    <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
     <string name="warn_notloggedin_title">Λειτουργία χωρίς σύνδεση</string>
@@ -831,10 +830,8 @@
     <string name="init_summary_log_offline">Ενεργοποίηση καταγραφής εκτός σύνδεσης (Δεν θα εμφανιστεί η οθόνη ηλεκτρονικού αρχείου κατά την καταγραφή, δεν θα μεταφορτωθούν αρχεία καταγραφής)</string>
     <string name="init_choose_list">Ζητήστε τη λίστα</string>
     <string name="init_summary_choose_list">Να ερωτώμαι σε ποια λίστα θα αποθηκεύονται οι κρύπτες</string>
-    <string name="init_listdisplay">Πρόσθετες λίστες</string>
     <string name="init_list_initial_load_limit">Όριο φόρτωσης λίστας</string>
     <string name="init_summary_list_initial_load_limit">Μέγιστος αριθμός κρυπτών που θα φορτωθούν αρχικά από τη βάση δεδομένων όταν εμφανίζονται οι αποθηκευμένες λίστες. Επιλέξτε 0 για \'απεριόριστη\'</string>
-    <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
     <string name="init_quicklaunchitems">Πλήκτρα ταχείας εκκίνησης</string>
@@ -927,8 +924,6 @@
     <string name="init_maptrail_length">Μέγιστο μήκος ιστορικών διαδρομών</string>
     <string name="init_maptrail_length_summary">Ορίστε το μέγιστο μήκος των ιστορικών διαδρομών (θα επιβάλλεται σε κάθε εκκίνηση του c:geo). Η προεπιλεγμένη τιμή είναι 700 - ρυθμίστε την ανάλογα με την διαθέσιμη μνήμη.</string>
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
-    <string name="init_trackwidth">Πλάτος γραμμής διαδρομής GPX</string>
-    <string name="init_trackwidth_summary">Επιλέξτε πλάτος γραμμής ίχνους GPX / διαδρομής</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
     <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
@@ -1183,7 +1178,6 @@
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Απόθεμα</string>
-    <string name="cache_log_images_title">Αρχείο καταγραφής εικόνων</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
     <string name="cache_personal_note">Προσωπική Σημείωση</string>
     <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>
@@ -1340,7 +1334,6 @@
     <string name="cache_location">Τοποθεσία</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
     <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
-    <string name="cache_spoiler_images_title">Εικόνες spoiler</string>
     <string name="cache_log_types">Τύποι αρχείων καταγραφής</string>
     <string name="cache_coordinates_no">Αυτή η κρύπτη δεν έχει συντεταγμένες.</string>
     <string name="cache_clear_history">Εκκαθάριση ιστορικού</string>
