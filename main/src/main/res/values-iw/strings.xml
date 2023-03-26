@@ -202,7 +202,6 @@
     <string name="warn_search_help_user">הזן שם משתמש מGeocaching.com.</string>
     <string name="warn_search_help_tb">הכנס קוד ל-trackable. לדוגמא TB29QMZ.</string>
     <string name="warn_log_text_fill">אנא הכנס טקסט בלוג שלך.</string>
-    <string name="warn_load_images">c:geo נכשלה בטעינת התמונות.</string>
     <string name="warn_pocket_query_select">לא נבחר Pocket Query.</string>
     <string name="warn_no_pocket_query_found">לא נמצא pocket query ברשת.</string>
     <string name="warn_notloggedin_title">מצב לא מקוון</string>
