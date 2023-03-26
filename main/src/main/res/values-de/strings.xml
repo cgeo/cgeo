@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
-    <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_notloggedin_title">Offlinemodus</string>
@@ -853,10 +852,8 @@
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
-    <string name="init_listdisplay">Zusätzliche Listen</string>
     <string name="init_list_initial_load_limit">Ladelimit für Listen</string>
     <string name="init_summary_list_initial_load_limit">Maximale Anzahl der zu ladenden Caches aus der Datenbank, wenn gespeicherte Listen angezeigt werden. Wähle 0 für \"unbegrenzt\"</string>
-    <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_title_cacheListInfo1">Infozeilen für Cachelisten konfigurieren (Zeile 1)</string>
     <string name="init_title_cacheListInfo2">Infozeilen für Cachelisten konfigurieren (Zeile 2)</string>
     <string name="init_summary_cacheListInfo">Wähle die zusätzlichen Informationen, die in Cachelisten zu jedem Cache angezeigt werden sollen</string>
@@ -971,8 +968,6 @@
     <string name="init_routeappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die individuelle Route. Eine individuelle Route ist eine Liste von Wegpunkten und/oder Caches, die durch langes Tippen auf den Wegpunkt/Cache selektiert wurde. (Die Funktion \'langes Tippen\' muss dafür in den Karteneinstellungen aktiviert sein.)</string>
     <string name="init_trackappearance">Erscheinungsbild des GPX Tracks/Route</string>
     <string name="init_trackappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Track-Linie. Ein Track besteht aus mehreren Wegpunkten und kann aus einer GPX-Datei geladen werden.</string>
-    <string name="init_trackwidth">Linienbreite für GPX-Track/Route</string>
-    <string name="init_trackwidth_summary">Linienbreite für GPX-Track/Route auswählen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
@@ -1228,7 +1223,6 @@
     <string name="cache_offline_about_time_year">vor über einem Jahr</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Logbild</string>
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
@@ -1390,7 +1384,6 @@
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
     <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
-    <string name="cache_spoiler_images_title">Hinweisbilder</string>
     <string name="cache_log_types">Logs</string>
     <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
     <string name="cache_clear_history">Verlauf leeren</string>
