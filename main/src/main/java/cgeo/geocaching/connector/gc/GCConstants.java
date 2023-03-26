@@ -186,6 +186,7 @@ public final class GCConstants {
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
+    static final Pattern PATTERN_REQUESTVERIFICATIONTOKEN = Pattern.compile("__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"");
 
     /**
      * downloadable PQs
