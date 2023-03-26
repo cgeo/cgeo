@@ -652,7 +652,7 @@
     <string name="cache_location">Ang lokasyon</string>
     <string name="cache_coordinates">Ang mga Koordineyt</string>
     <string name="cache_coordinates_original">Ang orihinal na mga Koordineyt</string>
-    <string name="cache_spoiler_images_title">Ang mga imaheng spoiler</string>
+    <string name="cache_spoiler_images_title">Mga imahe ng spoiler</string>
     <string name="cache_log_types">Klase ng mga log</string>
     <string name="cache_coordinates_no">Walang koordineyt ang mga cathe na ito.</string>
     <string name="cache_clear_history">Ang kasaysayan ay linisin</string>
