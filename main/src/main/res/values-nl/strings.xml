@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Voer een gebruikersnaam in van een Geocaching.com gebruiker.</string>
     <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
-    <string name="warn_load_images">Sorry, c:geo kon de afbeeldingen niet laden.</string>
     <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
     <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
     <string name="warn_notloggedin_title">Offline modus</string>
@@ -853,10 +852,8 @@
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
-    <string name="init_listdisplay">Extra lijsten</string>
     <string name="init_list_initial_load_limit">Laadlimiet lijst</string>
     <string name="init_summary_list_initial_load_limit">Maximum aantal caches om te laden uit de database bij het initieel weergeven van opgeslagen lijsten. Kies 0 voor \'ongelimiteerd\'</string>
-    <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
@@ -962,8 +959,6 @@
     <string name="init_routeappearance_summary">Selecteer kleur en doorzichtigheid voor de individuele route lijn. Een individuele route is een collectie van waypoints en/of caches die je hebt geselecteerd door lang op het waypoint te drukken. (Je dient de lang drukken-functie eerst in te schakelen, zie de kaartinstellingen.)</string>
     <string name="init_trackappearance">GPX track/route uiterlijk</string>
     <string name="init_trackappearance_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
-    <string name="init_trackwidth">GPX spoor/route lijnbreedte</string>
-    <string name="init_trackwidth_summary">Selecteer breedte voor GPX spoor/route lijn</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
     <string name="init_circlefillcolor">Cirkel opvulkleur</string>
@@ -1219,7 +1214,6 @@
     <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventaris</string>
-    <string name="cache_log_images_title">Logafbeelding</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Persoonlijke notitie</string>
     <string name="cache_menu_preventWaypointsFromNote">Waypoints uit notitie voorkomen</string>
@@ -1381,7 +1375,6 @@
     <string name="cache_location">Locatie</string>
     <string name="cache_coordinates">Coördinaten</string>
     <string name="cache_coordinates_original">Originele coordinaten</string>
-    <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
     <string name="cache_log_types">Log types</string>
     <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string>
     <string name="cache_clear_history">Geschiedenis verwijderen</string>
