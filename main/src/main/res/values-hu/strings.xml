@@ -267,7 +267,6 @@
     <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalról!</string>
     <string name="warn_search_help_tb">Írd be az utazó kódját! Például \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
-    <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
     <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
     <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
     <string name="warn_notloggedin_title">Offline mód</string>
@@ -735,7 +734,6 @@
     <string name="cache_offline_about_time_year">több mint egy évvel ezelőtt</string>
     <string name="cache_premium">Prémium</string>
     <string name="cache_inventory">Utazók</string>
-    <string name="cache_log_images_title">Logfotók</string>
     <string name="cache_log_image_default_title">Fotó</string>
     <string name="cache_personal_note">Személyes megjegyzés</string>
     <string name="cache_personal_note_edit">Szerkesztés</string>
@@ -838,7 +836,6 @@
     <string name="cache_location">Helyszín</string>
     <string name="cache_coordinates">Koordináták</string>
     <string name="cache_coordinates_original">Eredeti koordináták</string>
-    <string name="cache_spoiler_images_title">Spoiler képek</string>
     <string name="cache_log_types">Bejegyzéstípusok</string>
     <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
     <string name="cache_clear_history">Előzmények törlése</string>
