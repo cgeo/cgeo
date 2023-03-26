@@ -11,6 +11,8 @@
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 
 ### Cache details
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
 
 ### General
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
@@ -22,4 +24,3 @@
 - New: Make cache list info items configurable
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
