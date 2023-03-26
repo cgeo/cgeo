@@ -160,8 +160,7 @@
 
     <!-- category cache lists -->
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
-    <string translatable="false" name="pref_cacheListInfo1">cacheListInfo1</string>
-    <string translatable="false" name="pref_cacheListInfo2">cacheListInfo2</string>
+    <string translatable="false" name="pref_cacheListInfo">cacheListInfo</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for cachedetails screen -->

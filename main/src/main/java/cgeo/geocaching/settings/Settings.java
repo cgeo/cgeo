@@ -1992,15 +1992,13 @@ public class Settings {
                 result.add(CacheListInfoItem.VALUES.SIZE.id);
                 result.add(CacheListInfoItem.VALUES.EVENTDATE.id);
                 result.add(CacheListInfoItem.VALUES.MEMBERSTATE.id);
-                putString(prefKey, StringUtils.join(result, ","));
-                Log.i("migrated infoline1: " + result);
-            } else if (defaultSource == 3) {
                 // migrate showListsInCacheList setting
                 if (getBoolean(R.string.old_pref_showListsInCacheList, false)) {
+                    result.add(CacheListInfoItem.VALUES.NEWLINE1.id);
                     result.add(CacheListInfoItem.VALUES.LISTS.id);
                 }
                 putString(prefKey, StringUtils.join(result, ","));
-                Log.i("migrated infoline2: " + result);
+                Log.i("migrated infoline: " + result);
             }
         } else {
             for (String s : pref.split(",")) {

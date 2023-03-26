@@ -963,8 +963,7 @@
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_list_initial_load_limit">List Load limit</string>
     <string name="init_summary_list_initial_load_limit">Maximum number of caches to load from database initially when displaying stored lists. Choose 0 for \'unlimited\'</string>
-    <string name="init_title_cacheListInfo1">Configure list info lines (Line 1)</string>
-    <string name="init_title_cacheListInfo2">Configure list info lines (Line 2)</string>
+    <string name="init_title_cacheListInfo1">Configure list info lines</string>
     <string name="init_summary_cacheListInfo">Select the additional information to be shown for each cache in cache lists</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
@@ -980,6 +979,7 @@
     <string name="cacheListInfoItem_Lists">Other lists</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Event date</string>
+    <string name="newline">Newline</string>
 
     <string name="active_elements">Active Elements</string>
     <string name="disabled_elements">Disabled Elements</string>

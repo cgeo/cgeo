@@ -22,7 +22,13 @@ public class CacheListInfoItem extends InfoItem {
         JASMER(7, R.string.cacheListInfoItem_Jasmer),
         EVENTDATE(8, R.string.cacheListInfoItem_EventDate),
         LISTS(6, R.string.cacheListInfoItem_Lists),
-        RECENT_LOGS(9, R.string.cache_latest_logs);
+        RECENT_LOGS(9, R.string.cache_latest_logs),
+
+        // insert additional items before those
+        NEWLINE1(101, R.string.newline),
+        NEWLINE2(102, R.string.newline),
+        NEWLINE3(103, R.string.newline),
+        NEWLINE4(104, R.string.newline);
 
         public final int id;
         @StringRes public final int info;
@@ -42,7 +48,13 @@ public class CacheListInfoItem extends InfoItem {
         new CacheListInfoItem(VALUES.JASMER.id, R.string.cacheListInfoItem_Jasmer),
         new CacheListInfoItem((VALUES.EVENTDATE.id), R.string.cacheListInfoItem_EventDate),
         new CacheListInfoItem(VALUES.LISTS.id, R.string.cacheListInfoItem_Lists),
-        new CacheListInfoItem(VALUES.RECENT_LOGS.id, R.string.cache_latest_logs)
+        new CacheListInfoItem(VALUES.RECENT_LOGS.id, R.string.cache_latest_logs),
+
+        // insert additional items before those
+        new CacheListInfoItem(VALUES.NEWLINE1.id, R.string.newline),
+        new CacheListInfoItem(VALUES.NEWLINE2.id, R.string.newline),
+        new CacheListInfoItem(VALUES.NEWLINE3.id, R.string.newline),
+        new CacheListInfoItem(VALUES.NEWLINE4.id, R.string.newline)
     ));
 
     CacheListInfoItem(final int id, final @StringRes int titleResId) {
