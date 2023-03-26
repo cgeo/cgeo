@@ -141,8 +141,8 @@ public final class SystemInformation {
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendDirectory(body, "\n- Internal theme sync (is turned " + (RenderThemeHelper.isThemeSynchronizationActive() ? "ON" : "off") + "): ", LocalStorage.getMapThemeInternalSyncDir());
-        appendPublicFolders(body);
         body.append("\n- Map render theme path: ").append(Settings.getSelectedMapRenderTheme());
+        appendPublicFolders(body);
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
@@ -266,7 +266,7 @@ public final class SystemInformation {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector.isActive()) {
                 connectorCount++;
-                connectors.append("\n   ").append(connector.getName());
+                connectors.append("\n   - ").append(connector.getName());
                 if (connector instanceof ILogin) {
                     final ILogin login = (ILogin) connector;
                     connectors.append(": ").append(login.isLoggedIn() ? "Logged in" : "Not logged in")
@@ -294,7 +294,7 @@ public final class SystemInformation {
     }
 
     private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
-        body.append("\n-").append(permission).append(":: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+        body.append("\n- ").append(permission).append(":: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {
