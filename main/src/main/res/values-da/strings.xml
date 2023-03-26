@@ -267,7 +267,6 @@
     <string name="warn_search_help_user">Indtast et brugernavn til geocaching.com.</string>
     <string name="warn_search_help_tb">Indtast koden på en Trackable. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
-    <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
     <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
     <string name="warn_no_pocket_query_found">Det blev ikke fundet nogen Pocket Query online.</string>
     <string name="warn_notloggedin_title">Offline-tilstand</string>
@@ -697,8 +696,6 @@
     <string name="init_summary_log_offline">Aktivér offline logning (online logbeskeder vises ikke og logbeskeder uploades ikke)</string>
     <string name="init_choose_list">Listevalg</string>
     <string name="init_summary_choose_list">Spørg hvilken liste cacher skal gemmes i</string>
-    <string name="init_listdisplay">Vis yderligere lister i cacheliste</string>
-    <string name="init_summary_listdisplay">Vis cachers tilhørsforhold til andre lister i cachelisterne</string>
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis kompasretningen til caches i en liste</string>
     <!-- names for CacheListInfoItem -->
@@ -937,7 +934,6 @@
     <string name="cache_offline_about_time_year">over et år siden</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Logbeskedbilleder</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Personlig note</string>
     <string name="cache_menu_preventWaypointsFromNote">Undgå rutepunkter fra note</string>
@@ -1062,7 +1058,6 @@
     <string name="cache_location">Lokation</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_coordinates_original">Oprindelig position</string>
-    <string name="cache_spoiler_images_title">Spoiler-billeder</string>
     <string name="cache_log_types">Logbeskedtyper</string>
     <string name="cache_coordinates_no">Denne cache har ingen position.</string>
     <string name="cache_clear_history">Slet historik</string>
