@@ -275,7 +275,6 @@
     <string name="warn_search_help_user">Введите имя пользователя Geocaching.com.</string>
     <string name="warn_search_help_tb">Введите код трекабла. Например, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
-    <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_notloggedin_title">Оффлайн-режим</string>
@@ -864,10 +863,8 @@
     <string name="init_summary_log_offline">Не показывать экран онлайн записи и не отправлять записи по умолчанию</string>
     <string name="init_choose_list">Спрашивать про список</string>
     <string name="init_summary_choose_list">Спрашивать, в какой список вы хотите сохранить тайники</string>
-    <string name="init_listdisplay">Дополнительные списки</string>
     <string name="init_list_initial_load_limit">Ограничения загрузки из списков</string>
     <string name="init_summary_list_initial_load_limit">Максимальное число тайников для загрузки из базы данных изначально при отображении сохраненных списков. Выберите 0 для \'неограниченного\'</string>
-    <string name="init_summary_listdisplay">Показать принадлежность тайников к другим спискам в списке тайников</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать стрелку с направлением компаса для тайников в списке</string>
     <string name="init_quicklaunchitems">Кнопки быстрого запуска</string>
@@ -961,8 +958,6 @@
     <string name="init_maptrail_length">Максимальная длина истории трека</string>
     <string name="init_maptrail_length_summary">Установите максимальную длину трека (требуется при каждом запуске c:geo). По умолчанию значение 700 точек - вы можете это изменить в зависимости от доступной памяти.</string>
     <string name="init_summary_maptrail">Когда активирован (и GPS включен) c:geo сохраняет историю Ваших движений в виде трека и отображает его на карте.</string>
-    <string name="init_trackwidth">Толщина линии трека/маршрута</string>
-    <string name="init_trackwidth_summary">Выберите толщину линии GPX трека/маршрута</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
     <string name="init_circlefillcolor">Цвет заливки круга</string>
@@ -1233,7 +1228,6 @@
     <string name="cache_offline_about_time_year">больше года назад</string>
     <string name="cache_premium">Премиум</string>
     <string name="cache_inventory">Инвентарь</string>
-    <string name="cache_log_images_title">Фотографии в блокноте</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_personal_note">Персональные заметки</string>
     <string name="cache_menu_preventWaypointsFromNote">Не создавать точки из текста</string>
@@ -1393,7 +1387,6 @@
     <string name="cache_location">Место</string>
     <string name="cache_coordinates">Координаты</string>
     <string name="cache_coordinates_original">Оригинальные координаты</string>
-    <string name="cache_spoiler_images_title">Фото в спойлере</string>
     <string name="cache_log_types">Типы записей</string>
     <string name="cache_coordinates_no">Этот тайник не содержит координат.</string>
     <string name="cache_clear_history">Очистить историю</string>
