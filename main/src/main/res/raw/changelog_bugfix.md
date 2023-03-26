@@ -1,4 +1,7 @@
 ##
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+
+##
 - Fix: Widen log description column in landscape mode
 - Fix: Make image format error message clearer
 - Fix: User-created waypoints not being displayed on OSM map
