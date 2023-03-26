@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Introduïu el nom d\'usuari de Geocaching.com.</string>
     <string name="warn_search_help_tb">Introduïu el codi d\'un traçable. Per exemple, \"LPAYKV\".</string>
     <string name="warn_log_text_fill">Introduïu un text per al vostre registre.</string>
-    <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
     <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
     <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
     <string name="warn_notloggedin_title">Fora de línia</string>
@@ -853,10 +852,8 @@
     <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
     <string name="init_choose_list">Demana una llista</string>
     <string name="init_summary_choose_list">Demana a quina llista cal desar els catxés</string>
-    <string name="init_listdisplay">Llistes addicionals</string>
     <string name="init_list_initial_load_limit">Llista de límit de càrrega</string>
     <string name="init_summary_list_initial_load_limit">Nombre màxim de catxés que es carreguen inicialment de la base de dades quan es mostren les llistes emmagatzemades. Trieu 0 per a \"il·limitat\"</string>
-    <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
     <string name="init_quicklaunchitems">Botons d\'inici ràpid</string>
@@ -950,8 +947,6 @@
     <string name="init_maptrail_length">Màxima llargada del traçat</string>
     <string name="init_maptrail_length_summary">Estableix la longitud màxima del  recorregut del traçat (aplicada a cada inici de c: geo). El valor per defecte és de 700 punts: ajusteu-lo segons la memòria disponible.</string>
     <string name="init_summary_maptrail">Quan està activat (i el GPS en funcionament) c: geo desa l\'historial dels vostres moviments com a un traçat i el mostra al mapa.</string>
-    <string name="init_trackwidth">Amplada de línia del GPX track/ruta</string>
-    <string name="init_trackwidth_summary">Seleccioneu l\'amplada per a la línia del GPX track/ruta</string>
     <string name="init_circlecolor">Color de la línia del cercle</string>
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de dins del cercle</string>
@@ -1206,7 +1201,6 @@
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventari</string>
-    <string name="cache_log_images_title">Imatges del registre</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
@@ -1366,7 +1360,6 @@
     <string name="cache_location">Ubicació</string>
     <string name="cache_coordinates">Coordenades</string>
     <string name="cache_coordinates_original">Coordenades originals</string>
-    <string name="cache_spoiler_images_title">Imatges d\'ajuda</string>
     <string name="cache_log_types">Tipus de registre</string>
     <string name="cache_coordinates_no">Aquest catxé no té coordenades.</string>
     <string name="cache_clear_history">Neteja l\'historial</string>
