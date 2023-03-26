@@ -241,7 +241,6 @@
     <string name="warn_search_help_user">Introdu numele de utilizator al unui membru Geocaching.com.</string>
     <string name="warn_search_help_tb">Introdu codul pentru obiectul călător. De exemplu \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
-    <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
     <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
@@ -598,7 +597,6 @@
         <item quantity="other">acum %d zile</item>
     </plurals>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Imagini însemnare</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
@@ -697,7 +695,6 @@
     <string name="cache_location">Locaţie</string>
     <string name="cache_coordinates">Coordonate</string>
     <string name="cache_coordinates_original">Coordonatele iniţiale</string>
-    <string name="cache_spoiler_images_title">Imagini (indicii?)</string>
     <string name="cache_log_types">Tipuri de însemnări</string>
     <string name="cache_coordinates_no">Această cutie nu are coordonate.</string>
     <string name="cache_clear_history">Goleşte istoric</string>
