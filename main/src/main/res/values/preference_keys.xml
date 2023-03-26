@@ -178,7 +178,8 @@
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for map screen -->
-    <string translatable="false" name="preference_screen_map">preference_screen_map</string>
+    <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
+    <string translatable="false" name="preference_screen_map_content_behavior">preference_screen_map_content_behavior</string>
     <!-- ============================================================================================================================================================================== -->
 
     <!-- category map data -->

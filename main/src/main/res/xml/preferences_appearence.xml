@@ -6,47 +6,52 @@
     android:key="@string/preference_screen_appearance"
     android:title="@string/settings_title_appearance"
     android:summary="@string/settings_summary_appearance" >
-    <ListPreference
-        android:defaultValue="@string/pref_value_theme_dark"
-        android:entries="@array/settings_theme_entries"
-        android:entryValues="@array/pref_theme_values"
-        android:key="@string/pref_theme_setting"
-        android:title="@string/settings_theme_title"
-        android:summary="%s"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_wallpaper"
-        android:summary="@string/init_summary_wallpaper"
-        android:title="@string/init_wallpaper"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="@string/pref_showaddress"
-        android:summary="@string/init_summary_address"
-        android:title="@string/init_address"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_plainLogs"
-        android:summary="@string/init_summary_plain_logs"
-        android:title="@string/init_plain_logs"
-        app:iconSpaceReserved="false" />
-    <ListPreference
-        android:key="@string/pref_selected_language"
-        android:title="@string/init_select_language"
-        app:iconSpaceReserved="false" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="@string/pref_units_imperial"
-        android:summary="@string/init_summary_units"
-        android:title="@string/init_units"
-        app:iconSpaceReserved="false" />
-    <Preference
-        android:key="@string/pref_quicklaunchitems"
-        android:title="@string/init_quicklaunchitems"
-        android:summary="@string/init_summary_quicklaunchitems"
-        app:iconSpaceReserved="false" />
+
+    <PreferenceCategory
+        android:title="@string/init_appearance_general"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="@string/pref_value_theme_dark"
+            android:entries="@array/settings_theme_entries"
+            android:entryValues="@array/pref_theme_values"
+            android:key="@string/pref_theme_setting"
+            android:title="@string/settings_theme_title"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_wallpaper"
+            android:summary="@string/init_summary_wallpaper"
+            android:title="@string/init_wallpaper"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_showaddress"
+            android:summary="@string/init_summary_address"
+            android:title="@string/init_address"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_plainLogs"
+            android:summary="@string/init_summary_plain_logs"
+            android:title="@string/init_plain_logs"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:key="@string/pref_selected_language"
+            android:title="@string/init_select_language"
+            app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_units_imperial"
+            android:summary="@string/init_summary_units"
+            android:title="@string/init_units"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_quicklaunchitems"
+            android:title="@string/init_quicklaunchitems"
+            android:summary="@string/init_summary_quicklaunchitems"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/init_cachelists"
@@ -74,6 +79,81 @@
             android:key="@string/pref_cacheListInfo2"
             android:title="@string/init_title_cacheListInfo2"
             android:summary="@string/init_summary_cacheListInfo"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_maplines_title"
+        app:iconSpaceReserved="false">
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_trailcolor"
+            android:title="@string/init_trailappearance"
+            android:summary="@string/init_trailappearance_summary"
+            app:defaultColor="@color/default_trailcolor"
+            app:showOpaquenessSlider="true"
+            app:lineWidthKey="@string/pref_mapline_trailwidth"
+            app:defaultLineWidth="@integer/default_trailwidth"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_directioncolor"
+            android:title="@string/init_directionappearance"
+            android:summary="@string/init_directionappearance_summary"
+            app:defaultColor="@color/default_directioncolor"
+            app:showOpaquenessSlider="true"
+            app:lineWidthKey="@string/pref_mapline_directionwidth"
+            app:defaultLineWidth="@integer/default_directionwidth"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_routecolor"
+            android:title="@string/init_routeappearance"
+            android:summary="@string/init_routeappearance_summary"
+            app:defaultColor="@color/default_routecolor"
+            app:showOpaquenessSlider="true"
+            app:lineWidthKey="@string/pref_mapline_routewidth"
+            app:defaultLineWidth="@integer/default_routewidth"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_trackcolor"
+            android:title="@string/init_trackappearance"
+            android:summary="@string/init_trackappearance_summary"
+            app:defaultColor="@color/default_trackcolor"
+            app:showOpaquenessSlider="true"
+            app:lineWidthKey="@string/pref_mapline_trackwidth"
+            app:defaultLineWidth="@integer/default_trackwidth"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_circlecolor"
+            android:title="@string/init_circlecolor"
+            android:summary="@string/init_circlecolor_summary"
+            app:defaultColor="@color/default_circlecolor"
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_circlefillcolor"
+            android:summary="@string/init_circlefillcolor_summary"
+            android:title="@string/init_circlefillcolor"
+            app:defaultColor="@color/default_circlefillcolor"
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_accuracycirclecolor"
+            android:title="@string/init_accuracycirclecolor"
+            android:summary="@string/init_accuracycirclecolor_summary"
+            app:defaultColor="@color/default_accuracycirclecolor"
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_accuracycirclefillcolor"
+            android:summary="@string/init_accuracycirclefillcolor_summary"
+            android:title="@string/init_accuracycirclefillcolor"
+            app:defaultColor="@color/default_accuracycirclefillcolor"
+            app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

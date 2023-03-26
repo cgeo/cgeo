@@ -9,7 +9,6 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -24,12 +23,12 @@ import androidx.preference.Preference;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class PreferenceMapFragment extends BasePreferenceFragment {
+public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     private ListPreference prefMapSources;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_map, rootKey);
+        setPreferencesFromResource(R.xml.preferences_map_sources, rootKey);
         prefMapSources = findPreference(getString(R.string.pref_mapsource));
 
         initMapSourcePreference();
@@ -63,23 +62,13 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
         super.onResume();
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
-        activity.setTitle(R.string.settings_title_map);
+        activity.setTitle(R.string.settings_title_map_sources);
         setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_maphillshading, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_hillshading)));
 
         initPublicFolders(this, activity.getCsah());
-
-        // Clear icon cache when modifying settings that influence icon appearance
-        findPreference(getString(R.string.pref_dtMarkerOnCacheIcon)).setOnPreferenceChangeListener((preference, newValue) -> {
-            MapMarkerUtils.clearCachedItems();
-            return true;
-        });
-        findPreference(getString(R.string.pref_bigSmileysOnMap)).setOnPreferenceChangeListener((preference, newValue) -> {
-            MapMarkerUtils.clearCachedItems();
-            return true;
-        });
 
         // display checkbox pref for unified map, if showUnifiedMap is enabled
         final Preference p = findPreference(activity.getString(R.string.pref_useUnifiedMap));

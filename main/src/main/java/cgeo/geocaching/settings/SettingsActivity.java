@@ -14,7 +14,8 @@ import cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment;
 import cgeo.geocaching.settings.fragments.PreferenceBackupFragment;
 import cgeo.geocaching.settings.fragments.PreferenceCachedetailsFragment;
 import cgeo.geocaching.settings.fragments.PreferenceLoggingFragment;
-import cgeo.geocaching.settings.fragments.PreferenceMapFragment;
+import cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment;
+import cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment;
 import cgeo.geocaching.settings.fragments.PreferenceNavigationFragment;
 import cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment;
@@ -207,10 +208,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             preferenceFragment = new PreferenceAppearanceFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
             preferenceFragment = new PreferenceCachedetailsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map))) {
-            preferenceFragment = new PreferenceMapFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map))) {
-            preferenceFragment = new PreferenceMapFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_sources))) {
+            preferenceFragment = new PreferenceMapSourcesFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map_content_behavior))) {
+            preferenceFragment = new PreferenceMapContentBehaviorFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_logging))) {
             preferenceFragment = new PreferenceLoggingFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_offlinedata))) {
@@ -316,7 +317,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         fragments.add(new PreferenceServicesFragment().setIcon(R.drawable.settings_cloud));
         fragments.add(new PreferenceAppearanceFragment().setIcon(R.drawable.settings_eye));
         fragments.add(new PreferenceCachedetailsFragment().setIcon(R.drawable.settings_details));
-        fragments.add(new PreferenceMapFragment().setIcon(R.drawable.settings_map));
+        fragments.add(new PreferenceMapSourcesFragment().setIcon(R.drawable.settings_map));
+        fragments.add(new PreferenceMapContentBehaviorFragment().setIcon(R.drawable.settings_map_content));
         fragments.add(new PreferenceLoggingFragment().setIcon(R.drawable.settings_pen));
         fragments.add(new PreferenceOfflinedataFragment().setIcon(R.drawable.settings_sdcard));
         fragments.add(new PreferenceNavigationFragment().setIcon(R.drawable.settings_arrow));
