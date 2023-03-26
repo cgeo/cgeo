@@ -185,7 +185,6 @@
     <string name="warn_search_help_user">Pagpasulod ug username gikan sa Geocaching.com.</string>
     <string name="warn_search_help_tb">Pagpasulod ug code para sa trackable. Pananglitan \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Palihug sa pag-input ug pipila ka mga teksto para sa imong log.</string>
-    <string name="warn_load_images">c:geo napakyas sa pag-load ug mga larawan.</string>
     <string name="warn_pocket_query_select">Walay gipili na bulsa na query.</string>
     <string name="warn_no_pocket_query_found">Walay bulsa na query ang nakita online.</string>
     <string name="err_read_pocket_query_list">Nasayop og basa sa Pocket query na lista.</string>
@@ -381,6 +380,7 @@
     <string name="init_choose_list">Pangyo og lista</string>
     <string name="init_summary_choose_list">Pangutan-a kung unsa nga lista ang ibutang sa mga caches sa</string>
     <string name="init_livelist">Ipakita ang Direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Tabang</string>
@@ -515,7 +515,6 @@
         <item quantity="other">mahitungod sa %d nga mga adlaw na ang milabay</item>
     </plurals>
     <string name="cache_inventory">Imbentaryo</string>
-    <string name="cache_log_images_title">Mga imahe sa Log</string>
     <string name="cache_log_image_default_title">Litrato</string>
     <string name="cache_personal_note">Personal nga sulat</string>
     <string name="cache_personal_note_edit">I-edit</string>
@@ -607,7 +606,6 @@
     <string name="cache_location">Lokasyon</string>
     <string name="cache_coordinates">Mga coordinates</string>
     <string name="cache_coordinates_original">Orihinal nga coordinates</string>
-    <string name="cache_spoiler_images_title">Spoiler nga imahe</string>
     <string name="cache_log_types">Klase sa log</string>
     <string name="cache_coordinates_no">Ang kani nga cache kay walay coordinates.</string>
     <string name="cache_clear_history">Hawanon ang kasaysayan</string>

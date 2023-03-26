@@ -196,7 +196,6 @@
     <string name="warn_search_help_user">Ipason ang username mula sa Geocaching.com.</string>
     <string name="warn_search_help_tb">Ipasok ang code na trackable. Halimbawa \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Mangyaring pakilagay ng iilang teksto para sa iyong log.</string>
-    <string name="warn_load_images">ang c:geo ay nabigo sa pag-load ng mga imahe.</string>
     <string name="warn_pocket_query_select">Walang napiling Pocket query.</string>
     <string name="warn_no_pocket_query_found">Walang mahanap na Pocket query sa online.</string>
     <string name="err_read_pocket_query_list">Nagproblema sa pagbasa ng pakete sa listahan ng query.</string>
@@ -398,6 +397,7 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung saan ang listahan para mai-tabi ang mga cache sa</string>
     <string name="init_livelist">Ipakita ang mga direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">I-backup</string>
@@ -540,7 +540,6 @@
         <item quantity="other">tungkol sa %d araw na nakalipas</item>
     </plurals>
     <string name="cache_inventory">Imbentaryo</string>
-    <string name="cache_log_images_title">Mga nai-log na mga imahe</string>
     <string name="cache_log_image_default_title">Larawan</string>
     <string name="cache_personal_note">Ang pansariling tala</string>
     <string name="cache_personal_note_edit">Baguhin</string>
@@ -638,7 +637,6 @@
     <string name="cache_location">Ang lokasyon</string>
     <string name="cache_coordinates">Mga koordinado</string>
     <string name="cache_coordinates_original">Orihinal na mga koordinado</string>
-    <string name="cache_spoiler_images_title">Mga imahe ng spoiler</string>
     <string name="cache_log_types">Mag uri ng log</string>
     <string name="cache_coordinates_no">Ang cache na ito ay walang mga koordinado.</string>
     <string name="cache_clear_history">Linisin ang kasaysayan</string>

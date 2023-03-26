@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Syötä Geocaching.com -sivuston käyttäjätunnus.</string>
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
-    <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
@@ -849,18 +848,31 @@
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
     <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
+    <string name="init_cachelists">Kätkölistat</string>
     <string name="init_log_offline">Offlinekirjaus</string>
     <string name="init_summary_log_offline">Käytä offlinekirjausta (Online-kirjausnäyttöä ei näytetä kirjatessa, kirjauksia ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
-    <string name="init_listdisplay">Toiset listat</string>
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
-    <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
+    <string name="init_title_cacheListInfo1">Määritä listan inforivit (rivi 1)</string>
+    <string name="init_title_cacheListInfo2">Määritä listan inforivit (rivi 2)</string>
+    <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokoodi</string>
+    <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
+    <string name="cacheListInfoItem_Terrain">Maasto</string>
+    <string name="cacheListInfoItem_MemberState">Premium-tila</string>
+    <string name="cacheListInfoItem_Size">Koko</string>
+    <string name="cacheListInfoItem_Lists">Muut listat</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Tapahtuman päivämäärä</string>
+    <string name="active_elements">Aktiiviset elementit</string>
+    <string name="disabled_elements">Ei-aktiiviset elementit</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
@@ -957,8 +969,6 @@
     <string name="init_routeappearance_summary">Valitse yksittäisen reittiviivan väri, läpinäkyvyys ja viivan leveys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_trackappearance">GPX reitin/jäljen ulkonäkö</string>
     <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
-    <string name="init_trackwidth">GPX-jäljen/reitin viivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse GPX-jäljen/reitin viivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
@@ -1214,7 +1224,6 @@
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Tavaraluettelo</string>
-    <string name="cache_log_images_title">Lokikuvat</string>
     <string name="cache_log_image_default_title">Kuva</string>
     <string name="cache_personal_note">Omat merkinnät</string>
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
@@ -1376,7 +1385,6 @@
     <string name="cache_location">Sijainti</string>
     <string name="cache_coordinates">Koordinaatit</string>
     <string name="cache_coordinates_original">Alkuperäiset koordinaatit</string>
-    <string name="cache_spoiler_images_title">Spoiler-kuvat</string>
     <string name="cache_log_types">Lokityypit</string>
     <string name="cache_coordinates_no">Tällä kätköllä ei ole koordinaatteja.</string>
     <string name="cache_clear_history">Tyhjennä historiatiedot</string>
@@ -1398,6 +1406,8 @@
     <string name="cache_time_full_hours">Kello</string>
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_recently_viewed">Äskettäin katsottu</string>
+    <string name="cache_recently_viewed_empty">Ei äskettäin katsottuja kätköjä</string>
+    <string name="cache_clear_recently_viewed">tyhjennä</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
@@ -1424,6 +1434,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö/reittipiste)</string>
+    <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
+    <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
     <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
@@ -2219,7 +2231,7 @@
     <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <string name="route_optimization">Reitin optimointi</string>
-    <string name="route_optimization_info">Reitin optimointi on kokeellinen ominaisuus reitin optimoimiseksi lyhyemmällä etäisyydellä. Koska kaikkia mahdollisia ratkaisuja ei ole mahdollista arvioida mobiililaitteen ajasta ja laskentatehosta johtuvien rajoitteiden vuoksi, se käyttää arviointialgoritmeja laskeakseen mahdolliset optimoinnit.\n\nLaskeminen on tehty kaksivaiheisessa prosessissa: Laske etäisyydet kullekin reittiparille, sitten yritä löytää hyväksyttävä reitti. Tämä ei ehkä ole lyhin mahdollinen reitti, joten voit toistaa kaksi vaihetta niin usein kuin haluat.</string>
+    <string name="route_optimization_info">Reitin optimointi on kokeellinen ominaisuus reitin optimoimiseksi lyhyemmällä etäisyydellä. Koska kaikkia mahdollisia ratkaisuja ei ole mahdollista arvioida mobiililaitteen ajasta ja laskentatehosta johtuvien rajoitteen vuoksi, se käyttää arviointialgoritmeja laskeakseen mahdolliset optimoinnit.\n\nLaskeminen on tehty kaksivaiheisessa prosessissa: Laske etäisyydet kullekin reittiparille, sitten yritä löytää hyväksyttävä reitti. Tämä ei ehkä ole lyhin mahdollinen reitti, joten voit toistaa kaksi vaihetta niin usein kuin haluat.</string>
     <string name="initial_route_length">Alkuperäinen reitin pituus: %d</string>
     <string name="optimized_route_length">Optimoitu reitin pituus: %d</string>
     <string name="route_optimization_out_of_bounds">Reitin optimointi toimii 3-100 pisteen välisillä reiteillä</string>

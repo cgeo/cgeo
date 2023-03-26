@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
     <string name="warn_search_help_tb">Code des Trackables eingeben, z. B. „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Bitte Text einfügen.</string>
-    <string name="warn_load_images">c:geo konnte die Bilder nicht laden.</string>
     <string name="warn_pocket_query_select">Kein Pocket-Query ausgewählt.</string>
     <string name="warn_no_pocket_query_found">Kein Pocket-Query online gefunden.</string>
     <string name="warn_notloggedin_title">Offlinemodus</string>
@@ -853,14 +852,26 @@
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
     <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
-    <string name="init_listdisplay">Zusätzliche Listen</string>
     <string name="init_list_initial_load_limit">Ladelimit für Listen</string>
     <string name="init_summary_list_initial_load_limit">Maximale Anzahl der zu ladenden Caches aus der Datenbank, wenn gespeicherte Listen angezeigt werden. Wähle 0 für \"unbegrenzt\"</string>
-    <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
+    <string name="init_title_cacheListInfo1">Infozeilen für Cachelisten konfigurieren (Zeile 1)</string>
+    <string name="init_title_cacheListInfo2">Infozeilen für Cachelisten konfigurieren (Zeile 2)</string>
+    <string name="init_summary_cacheListInfo">Wähle die zusätzlichen Informationen, die in Cachelisten zu jedem Cache angezeigt werden sollen</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocode</string>
+    <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
+    <string name="cacheListInfoItem_Terrain">Gelände</string>
+    <string name="cacheListInfoItem_MemberState">Premium-Status</string>
+    <string name="cacheListInfoItem_Size">Größe</string>
+    <string name="cacheListInfoItem_Lists">Andere Listen</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Event-Datum</string>
+    <string name="active_elements">Aktive Elemente</string>
+    <string name="disabled_elements">Deaktivierte Elemente</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
@@ -957,8 +968,6 @@
     <string name="init_routeappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die individuelle Route. Eine individuelle Route ist eine Liste von Wegpunkten und/oder Caches, die durch langes Tippen auf den Wegpunkt/Cache selektiert wurde. (Die Funktion \'langes Tippen\' muss dafür in den Karteneinstellungen aktiviert sein.)</string>
     <string name="init_trackappearance">Erscheinungsbild des GPX Tracks/Route</string>
     <string name="init_trackappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Track-Linie. Ein Track besteht aus mehreren Wegpunkten und kann aus einer GPX-Datei geladen werden.</string>
-    <string name="init_trackwidth">Linienbreite für GPX-Track/Route</string>
-    <string name="init_trackwidth_summary">Linienbreite für GPX-Track/Route auswählen</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
     <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
@@ -1214,7 +1223,6 @@
     <string name="cache_offline_about_time_year">vor über einem Jahr</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Logbild</string>
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
     <string name="cache_menu_preventWaypointsFromNote">Wegpunkte aus Notiz verhindern</string>
@@ -1376,7 +1384,6 @@
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
     <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
-    <string name="cache_spoiler_images_title">Hinweisbilder</string>
     <string name="cache_log_types">Logs</string>
     <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
     <string name="cache_clear_history">Verlauf leeren</string>
@@ -1398,6 +1405,8 @@
     <string name="cache_time_full_hours">Uhr</string>
     <string name="cache_listed_on">Geführt auf %s</string>
     <string name="cache_recently_viewed">Zuletzt angesehen</string>
+    <string name="cache_recently_viewed_empty">Keine kürzlich angesehenen Caches</string>
+    <string name="cache_clear_recently_viewed">Leeren</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
@@ -1424,6 +1433,8 @@
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache / Wegpunkt)</string>
+    <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
+    <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches /Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches / Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert.\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
@@ -2219,7 +2230,7 @@
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <string name="route_optimization">Routenoptimierung</string>
-    <string name="route_optimization_info">Die Routenoptimierung ist ein experimentelles Feature, um eine kürze Route zu ermitteln. Auf mobilen Endgeräten ist es aufgrund begrenzter Rechenleistung nicht möglich, immer die optimale Lösung zu errechnen, daher werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne alle paarweisen Distanzen zwischen zwei Punkten der Route, dann versuche eine akzeptable Route zu finden. Für weitere Optimierungen kann Schritt 2 beliebig oft wiederholt werden.</string>
+    <string name="route_optimization_info">Die Routenoptimierung ist ein experimentelles Feature, um eine kürze Route zu ermitteln. Auf mobilen Endgeräten ist es aufgrund begrenzter Rechenleistung nicht möglich, immer die optimale Lösung zu errechnen, daher werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne alle paarweisen Distanzen zwischen zwei Punkten der Route, dann versuche eine akzeptable Route zu finden. Für weitere Optimierungen kannst du Schritt 2 beliebig oft wiederholen.</string>
     <string name="initial_route_length">Ursprüngliche Routenlänge: %d</string>
     <string name="optimized_route_length">Optimierte Routenlänge: %d</string>
     <string name="route_optimization_out_of_bounds">Routenoptimierung funktioniert für Routen zwischen 3 und 100 Punkten</string>

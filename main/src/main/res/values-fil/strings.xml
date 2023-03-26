@@ -189,7 +189,6 @@
     <string name="warn_search_help_user">Ilagay ang username mula sa Geocaching.com.</string>
     <string name="warn_search_help_tb">Ilagay ang code para sa pagsusubaybay. Halimbawa \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Mangyaring maglagay ng ilang teskto para sa iyong log.</string>
-    <string name="warn_load_images">ang c:geo ay nabigo sa pagload ng mga imahe.</string>
     <string name="warn_pocket_query_select">Walang piniling query Pocket.</string>
     <string name="warn_no_pocket_query_found">Walang natagpuang query sa Pocket online.</string>
     <string name="err_read_pocket_query_list">Hindi nabasa ng maayus ang listahan ng Pocket query.</string>
@@ -392,6 +391,7 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung alin sa listahan inimbak ang mga cache sa</string>
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
@@ -536,7 +536,6 @@
     </plurals>
     <string name="cache_premium">Ang Premyum</string>
     <string name="cache_inventory">Ang Imbentaryo</string>
-    <string name="cache_log_images_title">Ang mga imahe sa log</string>
     <string name="cache_log_image_default_title">Ang Larawan</string>
     <string name="cache_personal_note">Pansariling tala</string>
     <string name="cache_personal_note_edit">I-edit</string>
@@ -638,7 +637,6 @@
     <string name="cache_location">Ang lokasyon</string>
     <string name="cache_coordinates">Ang mga Koordineyt</string>
     <string name="cache_coordinates_original">Ang orihinal na mga Koordineyt</string>
-    <string name="cache_spoiler_images_title">Ang mga imaheng spoiler</string>
     <string name="cache_log_types">Klase ng mga log</string>
     <string name="cache_coordinates_no">Walang koordineyt ang mga cathe na ito.</string>
     <string name="cache_clear_history">Ang kasaysayan ay linisin</string>

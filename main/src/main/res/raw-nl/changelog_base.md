@@ -18,4 +18,7 @@
 - Nieuw: Importeer geocaching.com bookmarklijsten van links
 - Nieuw: Het openen van onlangs bekeken caches toestaan als lijst
 - Nieuw: Maak snelstartknoppen sorteerbaar
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- Nieuw: Workaround voor trackable namespace conflict (werkt voor uitgeschakelde GeoKrety connector)
+- Nieuw: Maak cache lijst info items configureerbaar
+- Nieuw: Recent bekeken caches wissen
+- New: Add 'recently viewed caches' to quicklaunch options
