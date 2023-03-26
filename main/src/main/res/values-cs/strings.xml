@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Zadej jméno uživatele z Geocaching.com.</string>
     <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
-    <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_notloggedin_title">Offline režim</string>
@@ -866,10 +865,8 @@
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení kešky</string>
-    <string name="init_listdisplay">Další seznamy</string>
     <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
     <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
-    <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_title_cacheListInfo1">Konfigurace seznamu do řádků (1. řádek)</string>
     <string name="init_title_cacheListInfo2">Konfigurace seznamu do řádků (2. řádek)</string>
     <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
@@ -984,8 +981,6 @@
     <string name="init_routeappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_trackappearance">Vzhled GPX stopy/trasy</string>
     <string name="init_trackappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry stopy/trasy. Stopa/trasa se skládá z několika trasových bodů a lze ji načíst pomocí GPX souboru.</string>
-    <string name="init_trackwidth">Šířka čáry GPX stopy/trasy</string>
-    <string name="init_trackwidth_summary">Vyberte šířku čáry pro GPX stopy/trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
     <string name="init_circlecolor_summary">Vyberte barvu a neprůhlednost kruhu. Kruhy se používají jako vizuální znázornění pro minimálního okruh kolem kešky nebo fyzického trasového bodu, v němž nejsou povoleny žádná jiné kešky nebo fyzické trasové body. (Platí pro geocaching.com)</string>
     <string name="init_circlefillcolor">Barva výplně kruhu</string>
@@ -1257,7 +1252,6 @@
     <string name="cache_offline_about_time_year">před více než rokem</string>
     <string name="cache_premium">Prémiový účet</string>
     <string name="cache_inventory">Inventář</string>
-    <string name="cache_log_images_title">Obrázky z logů</string>
     <string name="cache_log_image_default_title">Fotografie</string>
     <string name="cache_personal_note">Osobní poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Blokovat trasové body z poznámky</string>
@@ -1419,7 +1413,6 @@
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
     <string name="cache_coordinates_original">Původní souřadnice</string>
-    <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
     <string name="cache_log_types">Typy zápisů</string>
     <string name="cache_coordinates_no">Tato keška nemá souřadnice.</string>
     <string name="cache_clear_history">Vymazat historii</string>
