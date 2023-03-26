@@ -212,20 +212,19 @@ public final class Formatter {
         final SpannableStringBuilder sb = new SpannableStringBuilder();
 
         final ArrayList<SpannableString> infos = new ArrayList<>();
-        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo1, 2), storedLists, excludeList, infos);
+        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo, 2), storedLists, excludeList, infos);
+        boolean newlineRequested = false;
         for (SpannableString s : infos) {
             if (s.length() > 0) {
-                sb.append(sb.length() > 0 ? SEPARATOR : "").append(s);
-            }
-        }
+                if (StringUtils.equals(s, "\n")) {
+                    if (sb.length() > 0) {
+                        newlineRequested = true;
+                    }
+                } else {
+                    sb.append(sb.length() > 0 ? newlineRequested ? "\n" : SEPARATOR : "").append(s);
+                    newlineRequested = false;
+                }
 
-        infos.clear();
-        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo2, 3), storedLists, excludeList, infos);
-        boolean needsNewline = (sb.length() > 0);
-        for (SpannableString s : infos) {
-            if (s.length() > 0) {
-                sb.append(sb.length() > 0 ? needsNewline ? "\n" : SEPARATOR : "").append(s);
-                needsNewline = false;
             }
         }
         return sb;
@@ -279,6 +278,10 @@ public final class Formatter {
                     }
                     infos.add(new SpannableString(s.subSequence(0, count)));
                 }
+
+            // newline items should be last in list
+            } else if (item == CacheListInfoItem.VALUES.NEWLINE1.id || item == CacheListInfoItem.VALUES.NEWLINE2.id || item == CacheListInfoItem.VALUES.NEWLINE3.id || item == CacheListInfoItem.VALUES.NEWLINE4.id) {
+                infos.add(new SpannableString("\n"));
             }
         }
     }

@@ -71,13 +71,8 @@
             app:logScaling="true"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_cacheListInfo1"
+            android:key="@string/pref_cacheListInfo"
             android:title="@string/init_title_cacheListInfo1"
-            android:summary="@string/init_summary_cacheListInfo"
-            app:iconSpaceReserved="false" />
-        <Preference
-            android:key="@string/pref_cacheListInfo2"
-            android:title="@string/init_title_cacheListInfo2"
             android:summary="@string/init_summary_cacheListInfo"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>

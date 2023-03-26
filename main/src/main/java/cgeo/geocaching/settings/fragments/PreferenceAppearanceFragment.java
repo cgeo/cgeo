@@ -59,11 +59,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems);
         });
 
-        setPrefClick(this, R.string.pref_cacheListInfo1, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo1, 2);
-        });
-        setPrefClick(this, R.string.pref_cacheListInfo2, () -> {
-            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo2, R.string.pref_cacheListInfo2, 3);
+        setPrefClick(this, R.string.pref_cacheListInfo, () -> {
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2);
         });
 
     }
