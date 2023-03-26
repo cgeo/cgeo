@@ -271,7 +271,6 @@
     <string name="warn_search_help_user">Geocaching.com\'dan bir kullanıcı adı girin.</string>
     <string name="warn_search_help_tb">Trackable için kodu girin. Örneğin; \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Lütfen kaydınız için metin girin.</string>
-    <string name="warn_load_images">c:geo görüntüleri yükleyemedi.</string>
     <string name="warn_pocket_query_select">Sorgulama kaydı seçilmedi.</string>
     <string name="warn_no_pocket_query_found">Çevrimiçi sorgulama kaydı bulunamadı.</string>
     <string name="warn_notloggedin_title">Çevrimdışı mod</string>
@@ -775,10 +774,8 @@
     <string name="init_summary_log_offline">Çevrimdışı oturum açmayı etkinleştir (oturum açılırken çevrimiçi kayıt ekranı gösterilmez ve kayıtlar yüklenmez)</string>
     <string name="init_choose_list">Listelemek İçin Sor</string>
     <string name="init_summary_choose_list">Geocache\'lerin hangi listede depolanacağını sor</string>
-    <string name="init_listdisplay">Diğer listeler</string>
     <string name="init_list_initial_load_limit">Liste Yükleme Limiti</string>
     <string name="init_summary_list_initial_load_limit">Kaydedilmiş listeleri görüntülerken veritabanından ilk olarak yüklenecek en fazla cache sayısı. \'Limitsiz\' olması için 0\'ı seçin</string>
-    <string name="init_summary_listdisplay">Geocache listesindeki ek listelere Geocache üyeliğini göster</string>
     <string name="init_livelist">Yön göster</string>
     <string name="init_summary_livelist">Listedeki kutular için pusula yönü olan bir ok göster</string>
     <string name="init_quicklaunchitems">Hızlı başlatma düğmeleri</string>
@@ -867,8 +864,6 @@
     <string name="init_maptrail_length">İz geçmişi maksimum uzunluğu</string>
     <string name="init_maptrail_length_summary">İz geçmişi maksimum uzunluğunu ayarlayın (c:geo\'nun her yeniden açılışında yeniden uygulanır) Mevcut hafızanıza göre ayarlanmak üzere varsayılan değer 700\'dür.</string>
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
-    <string name="init_trackwidth">GPX yol/rota çizgisi genişliği</string>
-    <string name="init_trackwidth_summary">GPX iz/rota çizgisi için kalınlık seçin</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
     <string name="init_circlefillcolor">Daire dolgu rengi</string>
@@ -1108,7 +1103,6 @@
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Envanter</string>
-    <string name="cache_log_images_title">Kayıt görselleri</string>
     <string name="cache_log_image_default_title">Görsel</string>
     <string name="cache_personal_note">Kişisel not</string>
     <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
@@ -1259,7 +1253,6 @@
     <string name="cache_location">Konum</string>
     <string name="cache_coordinates">Koordinatlar</string>
     <string name="cache_coordinates_original">Orjinal koordinatlar</string>
-    <string name="cache_spoiler_images_title">İpucu görselleri</string>
     <string name="cache_log_types">Kayıt türleri</string>
     <string name="cache_coordinates_no">Bu Geocache\'in koordinatı yok.</string>
     <string name="cache_clear_history">Geçmişi temizle</string>
