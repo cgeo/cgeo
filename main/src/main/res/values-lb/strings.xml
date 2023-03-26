@@ -229,7 +229,6 @@
     <string name="warn_search_help_user">Tipp en Usernumm vu Geocaching.com an.</string>
     <string name="warn_search_help_tb">Tipp de Code fir en Trackable an. Zum Beispill \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Tipp wgl. en Text fir däi Log an.</string>
-    <string name="warn_load_images">c:geo konnt d\'Biller net eroflueden.</string>
     <string name="warn_pocket_query_select">Kee Pocket Query ausgewielt.</string>
     <string name="warn_no_pocket_query_found">Kee Pocket Query online fonnt.</string>
     <string name="warn_notloggedin_title">Offline modus</string>
@@ -489,8 +488,6 @@
     <string name="init_summary_log_offline">Offline loggen aktivéieren (Dialog fir Online-Log gëtt beim Loggen net ugewisen, Logs gi net eropgelueden)</string>
     <string name="init_choose_list">No Lëscht froen</string>
     <string name="init_summary_choose_list">Nofroen a wat fir enger Lëscht d\'Cache solle gespäichert ginn</string>
-    <string name="init_listdisplay">Zousätzlech Lëschten</string>
-    <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
     <string name="init_livelist">Richtung uweisen</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
