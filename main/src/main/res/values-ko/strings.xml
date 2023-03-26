@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Geocaching.com 사용자명 (ID)를 입력하세요.</string>
     <string name="warn_search_help_tb">추적아이템 코드를 입력하세요. 예 : \"TB29QMZ\"</string>
     <string name="warn_log_text_fill">로그에 내용을 입력해 주세요.</string>
-    <string name="warn_load_images">이미지를 불러오지 못했습니다.</string>
     <string name="warn_pocket_query_select">포켓쿼리를 선택하지 않았습니다.</string>
     <string name="warn_no_pocket_query_found">온라인에 포켓쿼리가 없습니다.</string>
     <string name="warn_notloggedin_title">오프라인 모드</string>
@@ -847,10 +846,8 @@
     <string name="init_summary_log_offline">오프라인 로그를 활성화합니다.(로그할 때, 온라인 로그 화면이 표시되지 않고, 로그가 전송되지 않습니다)</string>
     <string name="init_choose_list">목록 물어보기</string>
     <string name="init_summary_choose_list">캐시를 저장할 때 어느 목록에 저장할지 물어봅니다.</string>
-    <string name="init_listdisplay">추가 목록</string>
     <string name="init_list_initial_load_limit">목록 부하 제한</string>
     <string name="init_summary_list_initial_load_limit">저장된 목록을 표시 할 때 처음에 데이터베이스에서 로드할 최대 캐시 수입니다. \'무제한\'으로 0을 선택하십시오.</string>
-    <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_title_cacheListInfo1">목록 정보 라인 구성 (라인 1)</string>
     <string name="init_title_cacheListInfo2">목록 정보 라인 구성 (라인 2)</string>
     <string name="init_summary_cacheListInfo">캐시 목록의 각 캐시에 대해 표시할 추가 정보를 선택합니다.</string>
@@ -965,8 +962,6 @@
     <string name="init_routeappearance_summary">개인 경로선의 색상, 불투명도 및 선폭을 선택합니다. 개별 경로는 경유지 / 캐시를 길게 눌러 선택한 경유지 및 / 또는 캐시 모음입니다. (먼저 길게 누르기 기능을 활성화해야합니다. 지도 설정을 참조하십시오.)</string>
     <string name="init_trackappearance">GPX 트랙/경로 모습</string>
     <string name="init_trackappearance_summary">트랙/경로선의 색상, 불투명도 및 선폭을 선택합니다. 경로는 여러 지점으로 구성되며 GPX 경로 파일을 통해 로딩할 수 있습니다.</string>
-    <string name="init_trackwidth">GPX 경로 선 색상</string>
-    <string name="init_trackwidth_summary">개별 경로선의 너비 선택</string>
     <string name="init_circlecolor">원형선 색상</string>
     <string name="init_circlecolor_summary">원형선의 색상과 불투명도를 선택합니다. 원형은 캐시 또는 물리적 지점 주변의 최소 반경에 대한 시각적 표현으로 사용되며 다른 캐시 또는 물리적 지점은 허용되지 않습니다. (geocaching.com에 적용)</string>
     <string name="init_circlefillcolor">원형 내부 색상</string>
@@ -1214,7 +1209,6 @@
     <string name="cache_offline_about_time_year">1년 이상 이전</string>
     <string name="cache_premium">프리미엄</string>
     <string name="cache_inventory">보관함</string>
-    <string name="cache_log_images_title">로그 사진</string>
     <string name="cache_log_image_default_title">사진</string>
     <string name="cache_personal_note">개인 메모</string>
     <string name="cache_menu_preventWaypointsFromNote">지점이 메모에서 방지하기</string>
@@ -1376,7 +1370,6 @@
     <string name="cache_location">위치</string>
     <string name="cache_coordinates">좌표</string>
     <string name="cache_coordinates_original">원래 좌표</string>
-    <string name="cache_spoiler_images_title">스포일러 사진</string>
     <string name="cache_log_types">로그 유형</string>
     <string name="cache_coordinates_no">이 캐시에는 좌표가 없습니다.</string>
     <string name="cache_clear_history">기록 지우기</string>
