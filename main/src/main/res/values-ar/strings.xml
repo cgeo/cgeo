@@ -197,7 +197,6 @@
     <string name="warn_search_help_user">أدخل اسم المستخدم من Geocaching.com.</string>
     <string name="warn_search_help_tb">أدخل كود للأمتعة السفر. مثلاً \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">الرجاء إدخال نص لتسجيل زيارتك.</string>
-    <string name="warn_load_images">c:geo فشل في تحميل الصورة.</string>
     <string name="warn_pocket_query_select">لم يتم تحديد أي إستفسارات.</string>
     <string name="warn_no_pocket_query_found">لم يتم العثور على أية استفسارات على الانترنات.</string>
     <string name="err_read_pocket_query_list">خطأ في قراءة قائمة Pocket query.</string>
@@ -533,7 +532,6 @@
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
     <string name="cache_inventory">المخزون</string>
-    <string name="cache_log_images_title">صور تسجيل الزيارات</string>
     <string name="cache_log_image_default_title">صورة</string>
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>
@@ -635,7 +633,6 @@
     <string name="cache_location">الموقع</string>
     <string name="cache_coordinates">الإحداثيات</string>
     <string name="cache_coordinates_original">الإحدثيات الأصلية</string>
-    <string name="cache_spoiler_images_title">الصور المفسدة</string>
     <string name="cache_log_types">أنوع تسجيل الزيارات</string>
     <string name="cache_coordinates_no">هذا المخبئ ليس لديه إحدثيات.</string>
     <string name="cache_clear_history">مسح التأريخ</string>
