@@ -292,7 +292,6 @@
     <string name="warn_search_help_user">Enter a username from Geocaching.com.</string>
     <string name="warn_search_help_tb">Enter the code for a trackable. For example \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Please input some text for your log.</string>
-    <string name="warn_load_images">c:geo failed to load images.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
     <string name="warn_notloggedin_title">Offline mode</string>
@@ -956,10 +955,8 @@
     <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
-    <string name="init_listdisplay">Additional lists</string>
     <string name="init_list_initial_load_limit">List Load limit</string>
     <string name="init_summary_list_initial_load_limit">Maximum number of caches to load from database initially when displaying stored lists. Choose 0 for \'unlimited\'</string>
-    <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
     <string name="init_title_cacheListInfo1">Configure list info lines (Line 1)</string>
     <string name="init_title_cacheListInfo2">Configure list info lines (Line 2)</string>
     <string name="init_summary_cacheListInfo">Select the additional information to be shown for each cache in cache lists</string>
@@ -1081,8 +1078,6 @@
     <string name="init_routeappearance_summary">Select color, opaqueness and line width for individual route line. An individual route is a collection of waypoints and/or caches you selected by long-tapping on the waypoint/cache. (You need to enable the long tap function first, see map settings.)</string>
     <string name="init_trackappearance">GPX track/route appearance</string>
     <string name="init_trackappearance_summary">Select color, opaqueness and line width for track/route line. A track/route consists of several waypoints and can be loaded via a GPX track/route file.</string>
-    <string name="init_trackwidth">GPX track/route line width</string>
-    <string name="init_trackwidth_summary">Select width for GPX track/route line</string>
     <string name="init_circlecolor">Circle line color</string>
     <string name="init_circlecolor_summary">Select color and opaqueness for circle line. Circles are used as a visual representation for the minimum radius around a cache or physical waypoint, wherein no other cache or physical waypoint is allowed. (Applies to geocaching.com)</string>
     <string name="init_circlefillcolor">Circle fill color</string>
@@ -1390,7 +1385,6 @@
     <string name="cache_offline_about_time_year">over a year ago</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventory</string>
-    <string name="cache_log_images_title">Log images</string>
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Personal note</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
@@ -1552,7 +1546,6 @@
     <string name="cache_location">Location</string>
     <string name="cache_coordinates">Coordinates</string>
     <string name="cache_coordinates_original">Original Coordinates</string>
-    <string name="cache_spoiler_images_title">Spoiler images</string>
     <string name="cache_log_types">Log types</string>
     <string name="cache_coordinates_no">This cache has no coordinates.</string>
     <string name="cache_clear_history">Clear history</string>
