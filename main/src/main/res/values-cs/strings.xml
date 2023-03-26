@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Zadej jméno uživatele z Geocaching.com.</string>
     <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
-    <string name="warn_load_images">c:geo nedokázalo načíst obrázky.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
     <string name="warn_notloggedin_title">Offline režim</string>
@@ -861,18 +860,31 @@
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
+    <string name="init_cachelists">Seznamy kešek</string>
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení kešky</string>
-    <string name="init_listdisplay">Další seznamy</string>
     <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
     <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
-    <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
+    <string name="init_title_cacheListInfo1">Konfigurace seznamu do řádků (1. řádek)</string>
+    <string name="init_title_cacheListInfo2">Konfigurace seznamu do řádků (2. řádek)</string>
+    <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokód</string>
+    <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
+    <string name="cacheListInfoItem_Terrain">Terén</string>
+    <string name="cacheListInfoItem_MemberState">Prémiový stav</string>
+    <string name="cacheListInfoItem_Size">Velikost</string>
+    <string name="cacheListInfoItem_Lists">Ostatní seznamy</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Datum události</string>
+    <string name="active_elements">Aktivní prvky</string>
+    <string name="disabled_elements">Zakázané prvky</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motiv</string>
     <string-array name="settings_theme_entries">
@@ -969,8 +981,6 @@
     <string name="init_routeappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry individuální trasy. Individuální trasa je soubor trasových bodů a / nebo kešek, které jste vybrali dlouhým přidržením trasových bodů / kešky. (Nejprve musíte povolit funkci dlouhého přidržení, viz nastavení mapy.)</string>
     <string name="init_trackappearance">Vzhled GPX stopy/trasy</string>
     <string name="init_trackappearance_summary">Vyberte barvu, neprůhlednost a šířku čáry stopy/trasy. Stopa/trasa se skládá z několika trasových bodů a lze ji načíst pomocí GPX souboru.</string>
-    <string name="init_trackwidth">Šířka čáry GPX stopy/trasy</string>
-    <string name="init_trackwidth_summary">Vyberte šířku čáry pro GPX stopy/trasy</string>
     <string name="init_circlecolor">Barva obrysu kruhu</string>
     <string name="init_circlecolor_summary">Vyberte barvu a neprůhlednost kruhu. Kruhy se používají jako vizuální znázornění pro minimálního okruh kolem kešky nebo fyzického trasového bodu, v němž nejsou povoleny žádná jiné kešky nebo fyzické trasové body. (Platí pro geocaching.com)</string>
     <string name="init_circlefillcolor">Barva výplně kruhu</string>
@@ -1242,7 +1252,6 @@
     <string name="cache_offline_about_time_year">před více než rokem</string>
     <string name="cache_premium">Prémiový účet</string>
     <string name="cache_inventory">Inventář</string>
-    <string name="cache_log_images_title">Obrázky z logů</string>
     <string name="cache_log_image_default_title">Fotografie</string>
     <string name="cache_personal_note">Osobní poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Blokovat trasové body z poznámky</string>
@@ -1404,7 +1413,6 @@
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
     <string name="cache_coordinates_original">Původní souřadnice</string>
-    <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
     <string name="cache_log_types">Typy zápisů</string>
     <string name="cache_coordinates_no">Tato keška nemá souřadnice.</string>
     <string name="cache_clear_history">Vymazat historii</string>
@@ -1426,6 +1434,8 @@
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
     <string name="cache_recently_viewed">Naposledy zobrazené</string>
+    <string name="cache_recently_viewed_empty">Žádné nedávno zobrazené kešky</string>
+    <string name="cache_clear_recently_viewed">vymazat</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1452,6 +1462,8 @@
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku / trasový bod)</string>
+    <string name="init_ActionbarAutohide">Klepnutím skrýt panel nástrojů</string>
+    <string name="init_summary_ActionbarAutohide">Klepnutím na volné místo na mapě skryjete/zobrazíte panel nástrojů</string>
     <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="onetime_info_longtap_enabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky / trasové body.\n\nDlouhé klepnutí na mapu je aktuálně povoleno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
