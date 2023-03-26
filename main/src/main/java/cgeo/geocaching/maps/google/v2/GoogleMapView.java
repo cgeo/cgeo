@@ -395,6 +395,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     private class GestureListener extends SimpleOnGestureListener {
+
+        private static final String GOOGLEMAP_ZOOMIN_BUTTON = "GoogleMapZoomInButton";
+        private static final String GOOGLEMAP_ZOOMOUT_BUTTON = "GoogleMapZoomOutButton";
+        private static final String GOOGLEMAP_COMPASS = "GoogleMapCompass";
+
         @Override
         public boolean onDoubleTap(final MotionEvent e) {
             // no need to move to new location, google maps will do it for us
@@ -409,6 +414,20 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // is map already initialized?
             if (googleMap != null) {
                 final Point p = new Point((int) e.getX(), (int) e.getY());
+
+                // check for zoom controls and compass rose
+                final int[] mapLocation = new int[2];
+                final View vMap = findViewById(R.id.map);
+                vMap.getLocationOnScreen(mapLocation);
+
+                if (isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_ZOOMIN_BUTTON))
+                 || isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_ZOOMOUT_BUTTON))
+                 || isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_COMPASS))
+                ) {
+                    return false;
+                }
+
+                // hit something else
                 final LatLng latLng = googleMap.getProjection().fromScreenLocation(p);
                 if (latLng != null && onCacheTapListener != null) {
                     final GoogleCacheOverlayItem closest = closest(new Geopoint(latLng.latitude, latLng.longitude));
@@ -421,6 +440,15 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 }
             }
             return false;
+        }
+
+        private boolean isHit(final int x, final int y, final View v) {
+            if (v == null) {
+                return false;
+            }
+            final int[] location = new int[2];
+            v.getLocationOnScreen(location);
+            return (x >= location[0]) && (x <= location[0] + v.getWidth()) && (y >= location[1]) && (y <= location[1] + v.getHeight());
         }
 
         @Override
