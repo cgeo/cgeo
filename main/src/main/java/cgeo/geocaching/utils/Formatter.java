@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -13,7 +14,10 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
+import android.text.style.ImageSpan;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
 import androidx.annotation.NonNull;
@@ -204,39 +208,50 @@ public final class Formatter {
     }
 
     @NonNull
-    public static String formatCacheInfoLong(final Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList) {
-        final List<String> infos = new ArrayList<>();
+    public static SpannableStringBuilder formatCacheInfoLong(final Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList) {
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+
+        final ArrayList<SpannableString> infos = new ArrayList<>();
         addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo1, 2), storedLists, excludeList, infos);
-        final String result1 = StringUtils.join(infos, SEPARATOR);
+        for (SpannableString s : infos) {
+            if (s.length() > 0) {
+                sb.append(sb.length() > 0 ? SEPARATOR : "").append(s);
+            }
+        }
 
         infos.clear();
         addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo2, 3), storedLists, excludeList, infos);
-        final String result2 = StringUtils.join(infos, SEPARATOR);
-
-        return result1 + (StringUtils.isNotBlank(result1) && StringUtils.isNotBlank(result2) ? "\n" : "") + result2;
+        boolean needsNewline = (sb.length() > 0);
+        for (SpannableString s : infos) {
+            if (s.length() > 0) {
+                sb.append(sb.length() > 0 ? needsNewline ? "\n" : SEPARATOR : "").append(s);
+                needsNewline = false;
+            }
+        }
+        return sb;
     }
 
-    private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<String> infos) {
+    private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
         for (int item : configuredItems) {
             if (item == CacheListInfoItem.VALUES.GCCODE.id) {
                 if (StringUtils.isNotBlank(cache.getGeocode())) {
-                    infos.add(cache.getShortGeocode());
+                    infos.add(new SpannableString(cache.getShortGeocode()));
                 }
             } else if (item == CacheListInfoItem.VALUES.DIFFICULTY.id) {
                 if (cache.hasDifficulty()) {
-                    infos.add("D " + formatDT(cache.getDifficulty()));
+                    infos.add(new SpannableString("D " + formatDT(cache.getDifficulty())));
                 }
             } else if (item == CacheListInfoItem.VALUES.TERRAIN.id) {
                 if (cache.hasTerrain()) {
-                    infos.add("T " + formatDT(cache.getTerrain()));
+                    infos.add(new SpannableString("T " + formatDT(cache.getTerrain())));
                 }
             } else if (item == CacheListInfoItem.VALUES.MEMBERSTATE.id) {
                 if (cache.isPremiumMembersOnly()) {
-                    infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
+                    infos.add(new SpannableString(CgeoApplication.getInstance().getString(R.string.cache_premium)));
                 }
             } else if (item == CacheListInfoItem.VALUES.SIZE.id) {
                 if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
-                    infos.add(cache.getSize().getL10n());
+                    infos.add(new SpannableString(cache.getSize().getL10n()));
                 }
             } else if (item == CacheListInfoItem.VALUES.LISTS.id) {
                 formatCacheLists(cache, storedLists, excludeList, infos);
@@ -244,25 +259,36 @@ public final class Formatter {
                 if (cache.isEventCache()) {
                     final Date hiddenDate = cache.getHiddenDate();
                     if (hiddenDate != null) {
-                        infos.add(formatShortDateIncludingWeekday(hiddenDate.getTime()));
+                        infos.add(new SpannableString(formatShortDateIncludingWeekday(hiddenDate.getTime())));
                     }
                 }
             } else if (item == CacheListInfoItem.VALUES.JASMER.id) {
                 final Date hiddenDate = cache.getHiddenDate();
                 if (hiddenDate != null) {
-                    infos.add(formatDateYYYYMM(hiddenDate.getTime()));
+                    infos.add(new SpannableString(formatDateYYYYMM(hiddenDate.getTime())));
+                }
+            } else if (item == CacheListInfoItem.VALUES.RECENT_LOGS.id) {
+                final List<LogEntry> logs = cache.getLogs();
+                if (logs.size() > 0) {
+                    int count = 0;
+                    final SpannableString s = new SpannableString("        ");
+                    for (int i = 0; i < Math.min(logs.size(), 8); i++) {
+                        final ImageSpan is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay());
+                        s.setSpan(is, i, i + 1, 0);
+                        count++;
+                    }
+                    infos.add(new SpannableString(s.subSequence(0, count)));
                 }
             }
         }
-
     }
 
-    public static void formatCacheLists(final @NonNull Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<String> infos) {
+    public static void formatCacheLists(final @NonNull Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
         if (null != storedLists) {
             final Set<Integer> lists = cache.getLists();
             for (final AbstractList temp : storedLists) {
                 if (lists.contains(temp.id) && !temp.title.equals(excludeList)) {
-                    infos.add(temp.title);
+                    infos.add(new SpannableString(temp.title));
                 }
             }
         }

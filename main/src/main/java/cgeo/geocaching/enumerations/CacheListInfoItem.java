@@ -21,7 +21,8 @@ public class CacheListInfoItem extends InfoItem {
         SIZE(5, R.string.cacheListInfoItem_Size),
         JASMER(7, R.string.cacheListInfoItem_Jasmer),
         EVENTDATE(8, R.string.cacheListInfoItem_EventDate),
-        LISTS(6, R.string.cacheListInfoItem_Lists);
+        LISTS(6, R.string.cacheListInfoItem_Lists),
+        RECENT_LOGS(9, R.string.cache_latest_logs);
 
         public final int id;
         @StringRes public final int info;
@@ -40,7 +41,8 @@ public class CacheListInfoItem extends InfoItem {
         new CacheListInfoItem(VALUES.SIZE.id, R.string.cacheListInfoItem_Size),
         new CacheListInfoItem(VALUES.JASMER.id, R.string.cacheListInfoItem_Jasmer),
         new CacheListInfoItem((VALUES.EVENTDATE.id), R.string.cacheListInfoItem_EventDate),
-        new CacheListInfoItem(VALUES.LISTS.id, R.string.cacheListInfoItem_Lists)
+        new CacheListInfoItem(VALUES.LISTS.id, R.string.cacheListInfoItem_Lists),
+        new CacheListInfoItem(VALUES.RECENT_LOGS.id, R.string.cache_latest_logs)
     ));
 
     CacheListInfoItem(final int id, final @StringRes int titleResId) {
