@@ -275,7 +275,6 @@
     <string name="warn_search_help_user">Zadajte meno používateľa z Geocaching.com.</string>
     <string name="warn_search_help_tb">Zadajte kód trasovateľného predmetu. Napríklad „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
-    <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
     <string name="warn_notloggedin_title">Offline režim</string>
@@ -864,10 +863,8 @@
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_choose_list">Požiadať o zoznam</string>
     <string name="init_summary_choose_list">Opýtať sa, v ktorom zozname uložiť skrýše</string>
-    <string name="init_listdisplay">Zobraziť v zozname kešiek ďalšie zoznamy</string>
     <string name="init_list_initial_load_limit">Limit načítania zoznamu</string>
     <string name="init_summary_list_initial_load_limit">Maximálny počet kešiek, ktoré načítať prvotne z databázy pri zobrazení uložených zoznamov. Vyberte hodnotu 0 pre „neobmedzené“.</string>
-    <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
     <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
@@ -961,8 +958,6 @@
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
     <string name="init_maptrail_length_summary">Nastavte maximálnu dĺžku histórie trasy (potrebné pri každom spustení c:geo). Predvolená hodnota je 700 – upravte podľa dostupnej pamäte.</string>
     <string name="init_summary_maptrail">Keď je to aktivované (a GPS zapnuté), c:geo ukladá históriu pohybov ako trasu a zobrazuje ju na mape.</string>
-    <string name="init_trackwidth">Šírka čiary GPX stopy/trasy</string>
-    <string name="init_trackwidth_summary">Vyberte šírku čiary pre GPX stopu/trasu</string>
     <string name="init_circlecolor">Farba linky kruhu</string>
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
     <string name="init_circlefillcolor">Farba výplne kruhu</string>
@@ -1233,7 +1228,6 @@
     <string name="cache_offline_about_time_year">pred viac ako rokom</string>
     <string name="cache_premium">Platený účet</string>
     <string name="cache_inventory">Obsah</string>
-    <string name="cache_log_images_title">Obrázky z logov</string>
     <string name="cache_log_image_default_title">Fotografia</string>
     <string name="cache_personal_note">Osobná poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Neurčovať body trasy z poznámky</string>
@@ -1393,7 +1387,6 @@
     <string name="cache_location">Miesto</string>
     <string name="cache_coordinates">Súradnice</string>
     <string name="cache_coordinates_original">Pôvodné súradnice</string>
-    <string name="cache_spoiler_images_title">Obrázky s nápovedou</string>
     <string name="cache_log_types">Typy záznamov</string>
     <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
     <string name="cache_clear_history">Vymazať históriu</string>
