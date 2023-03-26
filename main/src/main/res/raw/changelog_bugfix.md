@@ -1,5 +1,6 @@
 ##
 - Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+- Fix: Error on adding caches to / removing caches from bookmark lists
 
 ##
 - Fix: Widen log description column in landscape mode
