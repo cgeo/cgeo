@@ -615,7 +615,7 @@
     <string name="cache_location">Lokasyon</string>
     <string name="cache_coordinates">Mga coordinates</string>
     <string name="cache_coordinates_original">Orihinal nga coordinates</string>
-    <string name="cache_spoiler_images_title">Spoiler nga imahe</string>
+    <string name="cache_spoiler_images_title">Spoiler nga mga imahe</string>
     <string name="cache_log_types">Klase sa log</string>
     <string name="cache_coordinates_no">Ang kani nga cache kay walay coordinates.</string>
     <string name="cache_clear_history">Hawanon ang kasaysayan</string>
