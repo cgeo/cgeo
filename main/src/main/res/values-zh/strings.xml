@@ -235,7 +235,6 @@
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
     <string name="warn_log_text_fill">请为您的日志添加一些文字。</string>
-    <string name="warn_load_images">c:geo 读取图片失败。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
     <string name="warn_notloggedin_title">离线模式</string>
@@ -518,8 +517,6 @@
     <string name="init_summary_log_offline">启用离线日志记录 (记录时将不会显示在线日志，将不会上传日志)</string>
     <string name="init_choose_list">询问列表</string>
     <string name="init_summary_choose_list">询问哪个列表来存储藏点</string>
-    <string name="init_listdisplay">附加列表</string>
-    <string name="init_summary_listdisplay">在藏点列表中显示藏点所属的其他列表</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
     <!-- names for CacheListInfoItem -->
@@ -582,8 +579,6 @@
     <string name="init_maptrail_length">历史轨迹最大长度</string>
     <string name="init_maptrail_length_summary">设置历史轨迹最大长度 (c:geo 每次启动时强制执行)。默认值为 700点 - 根据可用内存进行调整。</string>
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
-    <string name="init_trackwidth">GPX 航迹/航线的线条宽度</string>
-    <string name="init_trackwidth_summary">选择 GPX 航迹/航线线条的宽度</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
     <string name="init_circlefillcolor">圆环填充颜色</string>
