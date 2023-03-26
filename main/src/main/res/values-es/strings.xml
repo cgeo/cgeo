@@ -271,7 +271,6 @@
     <string name="warn_search_help_user">Escribe el nombre de usuario de Geocaching.com.</string>
     <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
-    <string name="warn_load_images">Error al cargar las imágenes.</string>
     <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>
     <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
     <string name="warn_notloggedin_title">Modo sin conexión</string>
@@ -794,10 +793,8 @@
     <string name="init_summary_log_offline">Permitir el registro sin conexión (No se mostrará la pantalla de registro en línea ni se enviarán los logs)</string>
     <string name="init_choose_list">Preguntar lista</string>
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
-    <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_list_initial_load_limit">Límite de carga de lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de cachés que son cargados inicialmente al mostrar las listas almacenadas. Elija 0 para \'ilimitado\'</string>
-    <string name="init_summary_listdisplay">Mostrar pertenencia de cachés a listas adicionales en una lista de cachés</string>
     <string name="init_livelist">Mostrar dirección</string>
     <string name="init_summary_livelist">Mostrar una flecha con la dirección de la brújula para los cachés de una lista</string>
     <!-- names for CacheListInfoItem -->
@@ -882,8 +879,6 @@
     <string name="init_maptrail_length">Longitud máxima de la pista de historial</string>
     <string name="init_maptrail_length_summary">Establece la longitud máxima de la pista de historia (ejecutada en cada inicio de c:geo). El valor predeterminado es de 700 puntos - ajuste de acuerdo a la memoria disponible.</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
-    <string name="init_trackwidth">Ancho de la línea/ruta GPX</string>
-    <string name="init_trackwidth_summary">Seleccione el ancho para la línea de pista/ruta GPX</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de relleno de círculo</string>
@@ -1124,7 +1119,6 @@
     <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventario</string>
-    <string name="cache_log_images_title">Imágenes de registros</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Evitar waypoints de la nota</string>
@@ -1271,7 +1265,6 @@
     <string name="cache_location">Ubicación</string>
     <string name="cache_coordinates">Coordenadas</string>
     <string name="cache_coordinates_original">Coordenadas originales</string>
-    <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
     <string name="cache_log_types">Tipos de registro</string>
     <string name="cache_coordinates_no">Este caché no tiene coordenadas.</string>
     <string name="cache_clear_history">Borrar historial</string>
