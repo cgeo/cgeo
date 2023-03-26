@@ -229,7 +229,6 @@
     <string name="warn_search_help_user">Введіть ім\'я користувача з Geocaching.com.</string>
     <string name="warn_search_help_tb">Введіть код для відстеження. Наприклад, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Будь ласка, введіть текст для вашого журналу.</string>
-    <string name="warn_load_images">Не вдалося завантажити зображення.</string>
     <string name="warn_pocket_query_select">Кишеньковий запит не вибрано.</string>
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
     <string name="warn_notloggedin_title">Офлайн режим</string>
@@ -494,8 +493,6 @@
     <string name="init_summary_log_offline">Увімкнути автономні журнали (Не показувати екран журналу онлайн під час входу, журнали не завантажувати)</string>
     <string name="init_choose_list">Запитати про список</string>
     <string name="init_summary_choose_list">Запитувати, який список зберігати кеші в</string>
-    <string name="init_listdisplay">Додаткові списки</string>
-    <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
@@ -697,7 +694,6 @@
     <string name="cache_offline_about_time_year">більше року тому</string>
     <string name="cache_premium">Преміум</string>
     <string name="cache_inventory">Інвентар</string>
-    <string name="cache_log_images_title">журнальні зображення</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_personal_note">Особиста нотатка</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
@@ -819,7 +815,6 @@
     <string name="cache_location">Розташування</string>
     <string name="cache_coordinates">Координати</string>
     <string name="cache_coordinates_original">Оригінальні координати</string>
-    <string name="cache_spoiler_images_title">Зображення спойлера</string>
     <string name="cache_log_types">Типи журналiв</string>
     <string name="cache_coordinates_no">Цей кеш не має координат.</string>
     <string name="cache_clear_history">Очистити історію</string>
