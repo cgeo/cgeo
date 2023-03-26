@@ -18,13 +18,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.TooltipCompat;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -87,40 +82,12 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             countview1 = null;
         }
 
-        final Map<LogType, Integer> logCounts = getCache().getLogCounts();
-        if (logCounts != null) {
-            final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
-            for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
-                // it may happen that the label is unknown -> then avoid any output for this type
-                if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getValue() != 0) {
-                    sortedLogCounts.add(entry);
-                }
-            }
-
-            if (!sortedLogCounts.isEmpty()) {
-                // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                Collections.sort(sortedLogCounts, (logCountItem1, logCountItem2) -> logCountItem1.getKey().compareTo(logCountItem2.getKey()));
-
-                final List<String> labels = new ArrayList<>(sortedLogCounts.size());
-                for (final Entry<LogType, Integer> pair : sortedLogCounts) {
-                    labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
-                }
-
-                countview1 = new LinearLayout(getActivity());
-                final TextView logtypes = new TextView(getActivity());
-                logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
-                countview1.addView(logtypes);
-                for (final Entry<LogType, Integer> pair : sortedLogCounts) {
-                    final TextView tv = new TextView(getActivity());
-                    tv.setText(pair.getValue().toString());
-                    tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
-                    tv.setCompoundDrawablePadding(4);
-                    tv.setPadding(0, 0, 10, 0);
-                    TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
-                    countview1.addView(tv);
-                }
-                binding.getRoot().addHeaderView(countview1, null, false);
-            }
+        countview1 = new LinearLayout(getActivity());
+        final TextView logtypes = new TextView(getActivity());
+        logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
+        countview1.addView(logtypes);
+        if (getCache().getLogCountView(getActivity(), (int) (res.getDimensionPixelSize(R.dimen.textSize_detailsSecondary)), countview1)) {
+            binding.getRoot().addHeaderView(countview1, null, false);
         }
     }
 

@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -252,29 +251,25 @@ public final class CacheDetailsCreator {
 
     public void addLatestLogs(final Geocache cache) {
         final Context context = parentView.getContext();
+        final int smileySize = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
 
         final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
-        final TextView nameView = layout.findViewById(R.id.name);
-        nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);
-
-        final int smileySize = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
-        final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
-        lp.setMargins(0, 0, 5, 0);
-
-        final List<LogEntry> logs = cache.getLogs();
-        int i = 0;
-        while (i < logs.size() && markers.getChildCount() < 8) {
-            final int marker = logs.get(i++).logType.getLogOverlay();
-            final ImageView logIcon = new ImageView(context);
-            logIcon.setLayoutParams(lp);
-            logIcon.setBackgroundResource(marker);
-            markers.addView(logIcon);
-        }
-        if (markers.getChildCount() > 0) {
+        if (cache.getRecentLogView(context, smileySize, markers)) {
+            final TextView nameView = layout.findViewById(R.id.name);
+            nameView.setText(res.getString(R.string.cache_latest_logs));
             parentView.addView(layout);
             layout.findViewById(R.id.value).setVisibility(GONE);
             layout.findViewById(R.id.addition).setVisibility(GONE);
+        }
+
+        final View layout2 = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+        final LinearLayout markers2 = layout2.findViewById(R.id.linearlayout);
+        if (cache.getLogCountView(context, smileySize, markers2)) {
+            final TextView nameView2 = layout2.findViewById(R.id.name);
+            nameView2.setText(res.getString(R.string.cache_log_types));
+            parentView.addView(layout2);
+            layout2.findViewById(R.id.value).setVisibility(GONE);
         }
     }
 }

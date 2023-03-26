@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -449,6 +450,11 @@ public final class Formatter {
         final String pre = Character.toString("KMGTPE".charAt(exp - 1));
 
         return String.format(Locale.getDefault(), "%.1f %sB", bytes / Math.pow(1024, exp), pre);
+    }
+
+    public static String formatDecimal(final long value) {
+        final NumberFormat numberFormat = NumberFormat.getInstance(Locale.getDefault());
+        return numberFormat.format(value);
     }
 
     public static String formatDuration(final long milliseconds) {

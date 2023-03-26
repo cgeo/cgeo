@@ -44,6 +44,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
@@ -58,11 +59,16 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -2440,5 +2446,60 @@ public class Geocache implements IWaypoint {
             this.start = null;
             this.end = null;
         }
+    }
+
+    /** fill given viewHolder with images of up to 8 most recent logs; returns true, when > 0 logs */
+    public boolean getRecentLogView(final Context context, final int smileySize, final LinearLayout viewHolder) {
+        final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
+        lp.setMargins(0, 0, 5, 0);
+
+        final List<LogEntry> logs = getLogs();
+        int i = 0;
+        while (i < logs.size() && viewHolder.getChildCount() < 8) {
+            final int marker = logs.get(i++).logType.getLogOverlay();
+            final ImageView logIcon = new ImageView(context);
+            logIcon.setLayoutParams(lp);
+            logIcon.setBackgroundResource(marker);
+            viewHolder.addView(logIcon);
+        }
+        return viewHolder.getChildCount() > 0;
+    }
+
+    /** fill given viewHolder with log stats; returns true on success / false if no logs are available */
+    public boolean getLogCountView(final Context context, final int smileySize, final LinearLayout viewHolder) {
+        final Map<LogType, Integer> logCounts = getLogCounts();
+        final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
+        for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
+            // it may happen that the label is unknown -> then avoid any output for this type
+            if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getValue() != 0) {
+                sortedLogCounts.add(entry);
+            }
+        }
+
+        if (!sortedLogCounts.isEmpty()) {
+            final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
+            lp.gravity = Gravity.CENTER_VERTICAL;
+            lp.setMargins(0, 0, 5, 0);
+
+            // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
+            Collections.sort(sortedLogCounts, (logCountItem1, logCountItem2) -> logCountItem1.getKey().compareTo(logCountItem2.getKey()));
+
+            for (final Entry<LogType, Integer> pair : sortedLogCounts) {
+                final int marker = pair.getKey().getLogOverlay();
+                final ImageView logIcon = new ImageView(context);
+                logIcon.setLayoutParams(lp);
+                logIcon.setBackgroundResource(marker);
+                TooltipCompat.setTooltipText(logIcon, pair.getKey().getL10n());
+                viewHolder.addView(logIcon);
+
+                final TextView tv = new TextView(context);
+                tv.setText(Formatter.formatDecimal(pair.getValue()));
+                tv.setPadding(0, 0, 10, 0);
+                TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
+                viewHolder.addView(tv);
+            }
+            return true;
+        }
+        return false;
     }
 }
