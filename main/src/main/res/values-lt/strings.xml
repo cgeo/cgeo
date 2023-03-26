@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Įrašykite Geocaching.com vartotojo vardą.</string>
     <string name="warn_search_help_tb">Įveskite keliauninko kodą. Pvz. \"TB5303E\".</string>
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
-    <string name="warn_load_images">c:geo nepavyko įkelti vaizdo.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
     <string name="warn_notloggedin_title">Darbas neprisijungus</string>
@@ -865,10 +864,8 @@
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
-    <string name="init_listdisplay">Papildomi sąrašai</string>
     <string name="init_list_initial_load_limit">Sąrašo įkėlimo apribojimas</string>
     <string name="init_summary_list_initial_load_limit">Maksimalus slėptuvių skaičius, kurias iš pradžių reikia įkelti iš duomenų bazės, rodant saugomus sąrašus. Pasirinkite 0, jei norite „neribotai“</string>
-    <string name="init_summary_listdisplay">Rodyti slėptuvių narių papildomus sąrašus slėptuvės sąraše</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Rodyti rodyklę su kompaso kryptimi slėptuvių sąraše</string>
     <string name="init_quicklaunchitems">Greito paleidimo mygtukai</string>
@@ -970,8 +967,6 @@
     <string name="init_routeappearance_summary">Pasirinkite atskiros maršruto linijos spalvą, skaidrumą ir linijos plotį. Individualus maršrutas yra kelio taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai bakstelėdami maršruto tašką/slėptuvę. (Pirmiausia turite įjungti ilgo bakstelėjimo funkciją, žr. žemėlapio nustatymus.)</string>
     <string name="init_trackappearance">GPX pėdsako/maršruto išvaizda</string>
     <string name="init_trackappearance_summary">Pasirinkite pėdsako/maršruto linijos spalvą, skaidrumą ir linijos plotį. Pėdsakas/maršrutas susideda iš kelių tarpinių taškų ir gali būti įkeliamas naudojant GPX pėdsako/maršruto failą.</string>
-    <string name="init_trackwidth">GPX pėdsako/maršruto linijos plotis</string>
-    <string name="init_trackwidth_summary">Pasirinkite GPX pėdsako/maršruto linijos plotį</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo linijos spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis minimalaus spindulio aplink slėptuvę arba kelio tarpinį tašką atvaizdavimas, kai neleidžiama jokia kita slėptuvė arba fizinis kelio taškas. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
@@ -1243,7 +1238,6 @@
     <string name="cache_offline_about_time_year">daugiau nei prieš metus</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventorius</string>
-    <string name="cache_log_images_title">Įrašo vaizdai</string>
     <string name="cache_log_image_default_title">Nuotrauka</string>
     <string name="cache_personal_note">Asmeninė pastaba</string>
     <string name="cache_menu_preventWaypointsFromNote">Neleisti kelio taškų iš pastabų</string>
@@ -1405,7 +1399,6 @@
     <string name="cache_location">Vieta</string>
     <string name="cache_coordinates">Koordinatės</string>
     <string name="cache_coordinates_original">Originaliosios koordinatės</string>
-    <string name="cache_spoiler_images_title">Užuominų vaizdai</string>
     <string name="cache_log_types">Įrašų tipai</string>
     <string name="cache_coordinates_no">Ši slėptuvė neturi koordinačių.</string>
     <string name="cache_clear_history">Išvalyti istoriją</string>
