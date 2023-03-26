@@ -19,3 +19,6 @@
 - New: Allow opening recently viewed caches as list
 - New: Make quicklaunch buttons sortable
 - New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
+- New: Add 'recently viewed caches' to quicklaunch options
