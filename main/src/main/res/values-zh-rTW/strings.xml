@@ -259,7 +259,6 @@
     <string name="warn_search_help_user">輸入Geocaching.com的使用者名稱</string>
     <string name="warn_search_help_tb">輸入旅行蟲/地理錢幣的追蹤號碼。例如GCVCAZ。</string>
     <string name="warn_log_text_fill">請對日誌輸入一些文字</string>
-    <string name="warn_load_images">读取图片失败。</string>
     <string name="warn_pocket_query_select">沒有選擇攜帶需求</string>
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
     <string name="warn_notloggedin_title">離線模式</string>
@@ -657,8 +656,6 @@
     <string name="init_summary_log_offline">開啟離線輸入日誌</string>
     <string name="init_choose_list">要求列表</string>
     <string name="init_summary_choose_list">要求列表去儲存地理藏寶</string>
-    <string name="init_listdisplay">附加的列表</string>
-    <string name="init_summary_listdisplay">在附加列表裡顯示地理藏寶的會員資訊</string>
     <string name="init_livelist">顯示方向</string>
     <string name="init_summary_livelist">顯示羅盤箭頭</string>
     <!-- names for CacheListInfoItem -->
@@ -738,8 +735,6 @@
     <string name="init_maptrail_length">歷史軌跡的最大長度</string>
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
-    <string name="init_trackwidth">GPX航跡線寬</string>
-    <string name="init_trackwidth_summary">選擇GPX軌跡的線寬</string>
     <string name="init_circlecolor">圓邊框顏色</string>
     <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
@@ -933,7 +928,6 @@
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
     <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
-    <string name="cache_log_images_title">日誌圖片</string>
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_personal_note">個人筆記</string>
     <string name="cache_menu_preventWaypointsFromNote">不允許註解裡加上航點</string>
@@ -1060,7 +1054,6 @@
     <string name="cache_location">地點</string>
     <string name="cache_coordinates">坐標</string>
     <string name="cache_coordinates_original">原始座標</string>
-    <string name="cache_spoiler_images_title">提示圖片</string>
     <string name="cache_log_types">藏寶類型</string>
     <string name="cache_coordinates_no">這個地理藏寶沒有座標。</string>
     <string name="cache_clear_history">清除瀏覽歷史紀錄</string>
