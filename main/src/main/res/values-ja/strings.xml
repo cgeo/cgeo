@@ -269,7 +269,6 @@
     <string name="warn_search_help_user">Geocaching.comのユーザー名を入力してください</string>
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」</string>
     <string name="warn_log_text_fill">ログの本文を入力してください</string>
-    <string name="warn_load_images">画像を読み込むことができませんでした</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
@@ -764,10 +763,8 @@
     <string name="init_summary_log_offline">ログ書きをオフライン専用にする(ログを書く際にオンラインでの投稿をしない)\nこのチェックを外してもオフライン用に保存することはできます</string>
     <string name="init_choose_list">リストを選択</string>
     <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
-    <string name="init_listdisplay">キャッシュリストでリスト名を表示</string>
     <string name="init_list_initial_load_limit">リストの初回読み込み数</string>
     <string name="init_summary_list_initial_load_limit">保存されたリストを表示するときにデータベースから最初に読み込むキャッシュの最大数。 0にすると無制限になります。</string>
-    <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
     <string name="init_quicklaunchitems">クイック起動ボタン</string>
@@ -858,8 +855,6 @@
     <string name="init_maptrail_length">GPSログの最大ポイント数</string>
     <string name="init_maptrail_length_summary">GPSログを記録する際の(c:geo起動時からの)最大ポイント数。デフォルト値は700ポイント。空きメモリーに応じて調整してください</string>
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
-    <string name="init_trackwidth">GPXトラック/ルートの線幅</string>
-    <string name="init_trackwidth_summary">GPXトラック/ルートの線幅を選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度を選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
@@ -1092,7 +1087,6 @@
     <string name="cache_offline_about_time_year">一年以上前</string>
     <string name="cache_premium">プレミアム会員</string>
     <string name="cache_inventory">目録</string>
-    <string name="cache_log_images_title">ログの添付画像</string>
     <string name="cache_log_image_default_title">写真</string>
     <string name="cache_personal_note">パーソナルノート</string>
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
@@ -1244,7 +1238,6 @@
     <string name="cache_location">所在地</string>
     <string name="cache_coordinates">座標</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
-    <string name="cache_spoiler_images_title">スポイラー画像</string>
     <string name="cache_log_types">ログタイプ</string>
     <string name="cache_coordinates_no">このキャッシュに座標値はありません</string>
     <string name="cache_clear_history">全履歴を削除</string>
