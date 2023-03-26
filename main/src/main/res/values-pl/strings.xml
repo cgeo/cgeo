@@ -276,7 +276,6 @@
     <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
     <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład „TB29QMZ”.</string>
     <string name="warn_log_text_fill">Proszę uzupełnij tekst wpisu.</string>
-    <string name="warn_load_images">c:geo nie był w stanie załadować obrazów.</string>
     <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
     <string name="warn_notloggedin_title">Tryb offline</string>
@@ -861,18 +860,31 @@
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
+    <string name="init_cachelists">Listy skrytek</string>
     <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrytek</string>
-    <string name="init_listdisplay">Pokaż dodatkowe listy na liście skrytek</string>
     <string name="init_list_initial_load_limit">Ograniczenie wczytywania listy</string>
     <string name="init_summary_list_initial_load_limit">Maksymalna liczba skrytek do wczytania z bazy danych podczas wyświetlania przechowywanych list. Wybierz 0 dla \'nieograniczone\'</string>
-    <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
+    <string name="init_title_cacheListInfo1">Skonfiguruj linie informacji listy (Linia 1)</string>
+    <string name="init_title_cacheListInfo2">Skonfiguruj linie informacji listy (Linia 2)</string>
+    <string name="init_summary_cacheListInfo">Wybierz dodatkowe informacje, które mają być wyświetlane dla każdej skrytki na listach skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
     <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
     <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokod</string>
+    <string name="cacheListInfoItem_Difficulty">Trudność</string>
+    <string name="cacheListInfoItem_Terrain">Teren</string>
+    <string name="cacheListInfoItem_MemberState">Status Premium</string>
+    <string name="cacheListInfoItem_Size">Rozmiar</string>
+    <string name="cacheListInfoItem_Lists">Inne listy</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
+    <string name="active_elements">Aktywne elementy</string>
+    <string name="disabled_elements">Wyłączone elementy</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motyw</string>
     <string-array name="settings_theme_entries">
@@ -969,8 +981,6 @@
     <string name="init_routeappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla indywiduwalnej trasy. Indywidualna trasa jest kolekcją punktów i/lub skrzynek wybranych przez długie stuknięcie na punkt nawigacji lub skrytkę. (Musisz najpierw włączyć funkcję długiego stuknięcia, zobacz ustawienia mapy.)</string>
     <string name="init_trackappearance">Wygląd ścieżki/trasy GPX</string>
     <string name="init_trackappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla śladu/trasy. Ślad/trasa składa się z kilku punktów nawigacji i może być załadowana przez plik śladu/trasy GPX.</string>
-    <string name="init_trackwidth">Grubość linii trasy/śladu GPX</string>
-    <string name="init_trackwidth_summary">Wybierz grubość dla linii trasy/śladu GPX</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgu. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrytki lub fizycznego punktu nawigacji, gdzie nie jest dozwolona żadna inna skrytka lub fizyczny punkt nawigacji. (Dotyczy geocaching.com)</string>
     <string name="init_circlefillcolor">Kolor wypełnienia koła</string>
@@ -1242,7 +1252,6 @@
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inwentarz</string>
-    <string name="cache_log_images_title">Zdjęcie z wpisu</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
     <string name="cache_personal_note">Notatka osobista</string>
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
@@ -1404,7 +1413,6 @@
     <string name="cache_location">Położenie</string>
     <string name="cache_coordinates">Współrzędne</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
-    <string name="cache_spoiler_images_title">Zdjęcia ze spoilerami</string>
     <string name="cache_log_types">Rodzaje wpisów</string>
     <string name="cache_coordinates_no">Ta skrytka nie ma współrzędnych GPS.</string>
     <string name="cache_clear_history">Usuń historię</string>
@@ -1426,6 +1434,8 @@
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
     <string name="cache_recently_viewed">Ostatnio oglądane</string>
+    <string name="cache_recently_viewed_empty">Brak ostatnio oglądanych skrytek</string>
+    <string name="cache_clear_recently_viewed">wyczyść</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -1452,6 +1462,8 @@
     <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele „Idź do”. Jest ona automatycznie tworzona po użyciu funkcji „Idź do” w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacji. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrytkę zdefiniowaną przez użytkownika)</string>
+    <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
+    <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
     <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
@@ -2277,7 +2289,7 @@
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <string name="route_optimization">Optymalizacja trasy</string>
-    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy na krótszą odległość. Ponieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
+    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy dla najkrótszej odległości. Ponieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
     <string name="initial_route_length">Początkowa długość trasy: %d</string>
     <string name="optimized_route_length">Zoptymalizowana długość trasy: %d</string>
     <string name="route_optimization_out_of_bounds">Optymalizacja trasy działa dla tras pomiędzy 3 a 100 punktami</string>
