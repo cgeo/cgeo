@@ -275,7 +275,6 @@
     <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
     <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
-    <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
     <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
     <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
     <string name="warn_notloggedin_title">Offline läge</string>
@@ -852,10 +851,8 @@
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
-    <string name="init_listdisplay">Visa ytterligare listor i cachelistan</string>
     <string name="init_list_initial_load_limit">Ange lastbegränsning</string>
     <string name="init_summary_list_initial_load_limit">Maximalt antal cacher att initialt ladda från databasen när du visar lagrade listor. Välj 0 för \"obegränsat\"</string>
-    <string name="init_summary_listdisplay">Visa cachernas tillhörighet till andra listor i cachelistan</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
     <string name="init_quicklaunchitems">Snabbstartsknappar</string>
@@ -949,8 +946,6 @@
     <string name="init_maptrail_length">Historiskspår max. längd</string>
     <string name="init_maptrail_length_summary">Ange maximal längd på historikspår (tillämpas vid varje start av c:geo). Standardvärdet är 700 - justera efter tillgängligt minne.</string>
     <string name="init_summary_maptrail">När den aktiveras (och GPS är på) sparar c:geo historiken över dina rörelser som ett spår och visar den på kartan.</string>
-    <string name="init_trackwidth">GPX spår/rutt linjebredd</string>
-    <string name="init_trackwidth_summary">Välj bredd för GPX-spår/ruttlinje</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
     <string name="init_circlefillcolor">Färg inuti cirklar</string>
@@ -1205,7 +1200,6 @@
     <string name="cache_offline_about_time_year">över ett år sedan</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Innehåll</string>
-    <string name="cache_log_images_title">Loggbild</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Personlig anteckning</string>
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
@@ -1365,7 +1359,6 @@
     <string name="cache_location">Plats</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_coordinates_original">Ursprungliga koordinater</string>
-    <string name="cache_spoiler_images_title">Spoiler bilder</string>
     <string name="cache_log_types">Loggtyper</string>
     <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
     <string name="cache_clear_history">Rensa historik</string>
