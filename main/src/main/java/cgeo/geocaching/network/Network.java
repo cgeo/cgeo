@@ -278,6 +278,22 @@ public final class Network {
     }
 
     /**
+     * PUT HTTP request with Json POST DATA
+     *
+     * @param uri  the URI to request
+     * @param headers    http headers
+     * @param json the json object to add to the POST request
+     * @return a single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> putJsonRequest(final String uri, final Parameters headers, final BaseJsonNode json) {
+        final Builder request = new Request.Builder().url(uri).put(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                json.toString()));
+        addHeaders(request, headers, null);
+        return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+    }
+
+    /**
      * Multipart POST HTTP request
      *
      * @param uri             the URI to request
