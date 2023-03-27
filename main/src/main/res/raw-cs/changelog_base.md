@@ -11,14 +11,16 @@
 - Změna: Přesunutí tlačítek rychlého nastavení doleva v režimu na šířku, aby se získalo více místa na výšku
 
 ### Detaily kešky
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
 
 ### Obecné
-- Oprava: Tlačítko Náhled se zobrazuje pouze s nastavením filtru "zobrazit vše" v seznamu PQ
-- Nový: Přidat Cruiser jako navigační aplikaci (vyžaduje Cruiser 3.0.9 nebo novější)
-- Novinka: Import seznamů záložek z odkazů z geocaching.com
-- Novinka: Povolit otevření nedávno zobrazených kešek jako seznam
-- Novinka: Tlačítka rychlého nastavení se dají seřadit
-- Novinka: Řešení konfliktu sledovatelného prostoru názvů (funguje pro vypnutý konektor GeoKrety)
-- Novinka: Položky informací v seznamu kešek jsou nyní konfigurovatelné
-- Novinka: Vymazání nedávno zobrazených kešek
-- Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
+- New: Add 'recently viewed caches' to quicklaunch options
