@@ -700,6 +700,12 @@
     <string name="settings_summary_offlinedata">Configurar os dados a serem guardados para uso offline, o local de armazenamento e as pastas para ficheiros GPX.</string>
     <string name="settings_title_logging">Registos</string>
     <string name="settings_summary_logging">Configurar a sua assinatura e as opções de registo.</string>
+    <string name="settings_title_map_sources">Provedores de mapas</string>
+    <string name="settings_summary_map_sources">Definir o provedor de mapa e configurações do mapa em modo offline.</string>
+    <string name="settings_title_map_content_behavior">Conteúdo &amp; Comportamento do mapa</string>
+    <string name="settings_summary_map_content_behavior">Configure que informações sejam mostradas nos mapas e as opções de interacção.</string>
+    <string name="settings_title_map_colors">Personalização das cores do mapa</string>
+    <string name="settings_summary_map_colors">Configure as cores dos elementos desenhados no mapa.</string>
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
@@ -848,17 +854,31 @@
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar Unidades Imperiais</string>
     <string name="init_summary_units">Utiliza as unidades no Sistema Imperial em vez do Sistema Métrico</string>
+    <string name="init_cachelists">Listas de Caches</string>
     <string name="init_log_offline">Registos Offline</string>
     <string name="init_summary_log_offline">Activa os registos offline (não será mostrada a vista de registos online, não os podendo publicar)</string>
     <string name="init_choose_list">Pedir a escolha de lista</string>
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de caches que são inicialmente carregadas, a partir do banco de dados, quando é exibida uma lista de caches armazenadas. Escolha 0 para \'ilimitado\'</string>
+    <string name="init_title_cacheListInfo1">Configurar linhas de informação da lista (Linha 1)</string>
+    <string name="init_title_cacheListInfo2">Configurar linhas de informação da lista (Linha 2)</string>
+    <string name="init_summary_cacheListInfo">Selecione as informações adicionais a serem mostradas para cada cache nas listas de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocódigo</string>
+    <string name="cacheListInfoItem_Difficulty">Dificuldade</string>
+    <string name="cacheListInfoItem_Terrain">Terreno</string>
+    <string name="cacheListInfoItem_MemberState">Estatuto Premium</string>
+    <string name="cacheListInfoItem_Size">Tamanho</string>
+    <string name="cacheListInfoItem_Lists">Outras listas</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Data do evento</string>
+    <string name="active_elements">Elementos Activos</string>
+    <string name="disabled_elements">Elementos Desactivados</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -1042,7 +1062,8 @@
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
     <string name="feature_voting">Dar votação a caches</string>
-    <string name="init_maplines_title">Personalização das linhas do mapa</string>
+    <string name="init_appearance_general">Aparência geral</string>
+    <string name="init_maplines_title">Personalização das cores do mapa</string>
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
@@ -1392,6 +1413,8 @@
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listada em %s</string>
     <string name="cache_recently_viewed">Visualizadas recentemente</string>
+    <string name="cache_recently_viewed_empty">Não há caches visualizadas recentemente</string>
+    <string name="cache_clear_recently_viewed">Limpar</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
@@ -1418,6 +1441,8 @@
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
+    <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
+    <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
     <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está activada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
@@ -2213,6 +2238,7 @@
     <string name="individual_route_set_as_start_title">Definir como início da rota</string>
     <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <string name="route_optimization">Optimização de rota</string>
+    <string name="route_optimization_info">A optimização de rota é um recurso experimental para optimizar uma rota com uma distância mais curta. Uma vez que não é possível avaliar todas as soluções possíveis, devido a restrições de tempo e energia para fazer o cálculo num dispositivo móvel, são usados algoritmos aproximados para calcular possíveis optimizações.\n\nO cálculo é feito em dois passos: Calcula as distâncias entre cada dois pares da rota, depois tenta encontrar uma rota viável. Esta pode não ser a rota mais curta possível, portanto pode repetir o segundo passo as vezes que quiser.</string>
     <string name="initial_route_length">Tamanho inicial da rota: %d</string>
     <string name="optimized_route_length">Tamanho optimizado da rota: %d</string>
     <string name="route_optimization_out_of_bounds">A optimização de rota funciona para rotas entre 3 e 100 pontos</string>
