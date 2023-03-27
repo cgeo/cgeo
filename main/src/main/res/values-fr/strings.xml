@@ -681,6 +681,8 @@
     <string name="settings_summary_offlinedata">Configurer les données à sauvegarder pour un usage hors ligne, l\'emplacement de stockage et les dossiers pour les fichiers GPX.</string>
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
+    <string name="settings_summary_map_content_behavior">Configurer les informations à afficher sur les cartes et les actions possibles.</string>
+    <string name="settings_summary_map_colors">Configurer les couleurs des objets dessinés sur la carte.</string>
     <string name="settings_title_map">Carte</string>
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
@@ -1012,7 +1014,6 @@
     <string name="feature_search_finder">Rechercher par découvreur</string>
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
-    <string name="init_maplines_title">Personnalisation des traits de la carte</string>
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
