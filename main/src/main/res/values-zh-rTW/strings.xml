@@ -799,7 +799,6 @@
     <string name="feature_search_finder">打寶者搜尋</string>
     <string name="feature_favorite">把寶加入我的最愛</string>
     <string name="feature_voting">對cache來投票</string>
-    <string name="init_maplines_title">客製化地圖的線條。</string>
     <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多執行緒 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多執行緒來渲染OSM</string>
