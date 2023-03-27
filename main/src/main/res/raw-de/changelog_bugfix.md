@@ -1,4 +1,8 @@
 ##
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+- Fix: Error on adding caches to / removing caches from bookmark lists
+
+##
 - Korrektur: Breitere Infospalte in der Logansicht im Querformat
 - Korrektur: Klarere Fehlermeldung bei nicht unterstütztem Bildformat
 - Korrektur: Benutzerdefinierte Wegpunkte wurden nicht auf der OSM-Karte angezeigt
