@@ -1049,7 +1049,6 @@
     <string name="feature_search_finder">찾은분으로 검색</string>
     <string name="feature_favorite">호감캐시로 추가중…</string>
     <string name="feature_voting">캐시 투표하기</string>
-    <string name="init_maplines_title">지도선 맞춤</string>
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
