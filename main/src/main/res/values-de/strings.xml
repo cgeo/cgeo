@@ -700,6 +700,7 @@
     <string name="settings_summary_offlinedata">Konfiguriere die zu speichernden Daten für Offline-Nutzung, den Speicherort und Ordner für GPX-Dateien.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Einstellungen für Signatur und Log-Optionen.</string>
+    <string name="settings_title_map_sources">Kartenquellen</string>
     <string name="settings_title_map">Karte</string>
     <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
@@ -1055,7 +1056,6 @@
     <string name="feature_search_finder">Suche nach Finder</string>
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
     <string name="feature_voting">Cache bewerten</string>
-    <string name="init_maplines_title">Anpassung der Kartenlinien</string>
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
