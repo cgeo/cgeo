@@ -1054,7 +1054,6 @@
     <string name="feature_search_finder">Paieška pagal radėją</string>
     <string name="feature_favorite">Pridėti slėptuvę prie mėgstamų</string>
     <string name="feature_voting">Balsuojama už slėptuves</string>
-    <string name="init_maplines_title">Žemėlapio linijų konfigūracija</string>
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
