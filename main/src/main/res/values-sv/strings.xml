@@ -1033,7 +1033,6 @@
     <string name="feature_search_finder">Sök baserat på hittare</string>
     <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
     <string name="feature_voting">Rösta på cacher</string>
-    <string name="init_maplines_title">Anpassa linjer på kartan</string>
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
