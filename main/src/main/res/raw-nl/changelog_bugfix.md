@@ -1,8 +1,12 @@
 ##
+- Oplossing: Google Maps: cache/waypoint popup opent bij het tikken van zoom control/kompas met cache/waypoint eronder
+- Fix: Error on adding caches to / removing caches from bookmark lists
+
+##
 - Oplossing: Log beschrijvingskolom verbreden in liggende modus
 - Oplossing: Maak foutmelding bij afbeeldingsformaat duidelijker
 - Oplossing: Gebruikersgemaakte waypoints worden niet weergegeven op OSM kaart
-- Fix: Multiple navigation lines on Google Maps map
+- Oplossing: Meerdere navigatielijnen op Google Maps kaart
 
 ##
 - Fix: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
