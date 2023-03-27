@@ -11,14 +11,16 @@
 - Wijziging: Verplaats snelle-instellingen knoppen naar links in liggende modus om meer verticale ruimte te krijgen
 
 ### Cache details
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
 
 ### Algemeen
-- Oplossing: Voorbeeldknop alleen weergegeven met filterinstelling "alles weergeven" in PQ lijst
-- Nieuw: Voeg Cruiser toe als navigatie-app (vereist Cruiser 3.0.9 of nieuwer)
-- Nieuw: Importeer geocaching.com bookmarklijsten van links
-- Nieuw: Het openen van onlangs bekeken caches toestaan als lijst
-- Nieuw: Maak snelstartknoppen sorteerbaar
-- Nieuw: Workaround voor trackable namespace conflict (werkt voor uitgeschakelde GeoKrety connector)
-- Nieuw: Maak cache lijst info items configureerbaar
-- Nieuw: Recent bekeken caches wissen
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
