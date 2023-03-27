@@ -837,7 +837,6 @@
     <string name="feature_search_finder">Søg efter finder</string>
     <string name="feature_favorite">Tilføjer cache til favoritter</string>
     <string name="feature_voting">Afstemning på cacher</string>
-    <string name="init_maplines_title">Tilpasning af kortlinjer</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">Afstandsnotifikation</string>
     <string name="init_proximityNotificationGeneral">Generel afstandsnotifikation på kort</string>
