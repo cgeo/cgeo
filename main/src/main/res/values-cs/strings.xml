@@ -1068,7 +1068,6 @@
     <string name="feature_search_finder">Hledat podle nálezce</string>
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
-    <string name="init_maplines_title">Přizpůsobení čar na mapě</string>
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
