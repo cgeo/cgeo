@@ -1,6 +1,6 @@
 ##
 - Poprawka: Google Maps: okienko skrytki/punktu nawigacji otwiera się po dotknięciu kontroli powiększenia/kompasu ze skrytką/punktem nawigacji pod nią
-- Fix: Error on adding caches to / removing caches from bookmark lists
+- Poprawka: Błąd podczas dodawania skrytek do / usuwania skrytek z zakładek
 
 ##
 - Poprawka: Szersza kolumna opisu wpisu w trybie poziomym
