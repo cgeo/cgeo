@@ -960,7 +960,6 @@
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="feature_favorite">Añadiendo caché a favoritos</string>
     <string name="feature_voting">Votando por cachés</string>
-    <string name="init_maplines_title">Personalización de líneas de mapa</string>
     <string name="init_map_other">Otro</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar múltiples capas para dibujar mapas de OpenStreetMap</string>
