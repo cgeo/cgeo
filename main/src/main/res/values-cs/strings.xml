@@ -712,6 +712,12 @@
     <string name="settings_summary_offlinedata">Nakonfigurujte data, která mají být uložena pro offline použití, umístění úložiště a složky pro soubory GPX.</string>
     <string name="settings_title_logging">Logování</string>
     <string name="settings_summary_logging">Nastavení podpisu a možností logování.</string>
+    <string name="settings_title_map_sources">Zdroje map</string>
+    <string name="settings_summary_map_sources">Nastavení zdroje mapy a nastavení offline mapy.</string>
+    <string name="settings_title_map_content_behavior">Obsah mapy &amp; Chování</string>
+    <string name="settings_summary_map_content_behavior">Nakonfigurujte, které informace se mají zobrazovat na mapách, a možnosti interakce.</string>
+    <string name="settings_title_map_colors">Přizpůsobení barvy mapy</string>
+    <string name="settings_summary_map_colors">Konfigurace barev prvků vykreslených na mapě.</string>
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
@@ -1068,6 +1074,8 @@
     <string name="feature_search_finder">Hledat podle nálezce</string>
     <string name="feature_favorite">Přidání kešky do oblíbených</string>
     <string name="feature_voting">Hlasování pro kešky</string>
+    <string name="init_appearance_general">Obecný vzhled</string>
+    <string name="init_maplines_title">Přizpůsobení barev mapy</string>
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
