@@ -1,6 +1,6 @@
 ##
 - Oplossing: Google Maps: cache/waypoint popup opent bij het tikken van zoom control/kompas met cache/waypoint eronder
-- Fix: Error on adding caches to / removing caches from bookmark lists
+- Oplossing: Fout bij het toevoegen van caches aan / verwijderen van caches uit bladwijzerlijsten
 
 ##
 - Oplossing: Log beschrijvingskolom verbreden in liggende modus
