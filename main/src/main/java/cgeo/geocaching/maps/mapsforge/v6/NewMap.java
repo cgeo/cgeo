@@ -71,6 +71,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
+import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -949,6 +950,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
         if (individualRoute != null) {
+            if (Log.isEnabled(Log.LogLevel.DEBUG)) {
+                Log.d("NewMap: storing IndividualRoute: " + individualRoute + " (size:" + BundleUtils.getParcelSize(individualRoute) + ")");
+            }
             outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
         if (mapOptions.filterContext != null) {

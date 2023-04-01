@@ -52,7 +52,7 @@ public class RouteSegment implements Parcelable {
     }
 
     public int getSize() {
-        return points.size();
+        return points == null ? 0 : points.size();
     }
 
     public Geopoint getPoint() {

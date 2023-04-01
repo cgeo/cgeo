@@ -11,6 +11,8 @@ import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,5 +223,19 @@ public class Route implements IGeoItemSupplier, Parcelable {
         dest.writeInt(routeable ? 1 : 0);
         dest.writeFloat(distance);
         dest.writeInt(isHidden ? 1 : 0);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        final int segmentCount = segments == null ? -1 : segments.size();
+        int pointCount = 0;
+        if (segments != null) {
+            for (RouteSegment s : segments) {
+                pointCount += s == null ? 0 : s.getSize();
+            }
+        }
+        return "[" + getClass().getSimpleName() + "]name=" + name + ",routable=" + routeable + ",distance=" + distance + ",isHidden=" + isHidden +
+                ",#segments=" + segmentCount + ",#points=" + pointCount;
     }
 }

@@ -1,6 +1,8 @@
 package cgeo.geocaching.utils;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
@@ -17,5 +19,18 @@ public class BundleUtils {
             return res;
         }
         return defaultValue;
+    }
+
+    public static int getParcelSize(final Parcelable parcelable) {
+        if (parcelable == null) {
+            return 0;
+        }
+        final Parcel p = Parcel.obtain();
+        try {
+            parcelable.writeToParcel(p, 0);
+            return p.dataSize();
+        } finally {
+            p.recycle();
+        }
     }
 }
