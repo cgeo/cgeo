@@ -11,16 +11,16 @@
 - Änderung: Schnelleinstellungs-Buttons auf Karten im Querformat links anzeigen, um mehr vertikalen Raum zu erhalten
 
 ### Cache-Details
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Änderung: Erzwinge das erneute Herunterladen des Caches beim Importieren über send2cgeo
+- Änderung: Unterscheide zwischen Größe "nicht gewählt" und "andere" für geocaching.com (kann unterschiedliche Filterergebnisse für einige Caches älter als 2013 ergeben)
 
 ### Allgemein
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
+- Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
+- Neu: Cruiser als Navigations-App hinzugefügt (erfordert Cruiser 3.0.9 oder neuer)
+- Neu: Importiere geocaching.com Bookmark-Listen von Links
+- Neu: Erlaube das Öffnen der kürzlich angesehenen Caches als Liste
+- Neu: Schnellstart-Schaltflächen sortierbar
+- Neu: Workaround für Trackable-Namenskonflikte (funktioniert für deaktivierten GeoKrety Connector)
+- Neu: Infos in Cachelisten konfigurierbar machen
+- Neu: Kürzlich angesehene Caches leeren
+- Neu: 'Zuletzt angesehene Caches' als Option für Schnellstart-Schaltflächen ergänzt
