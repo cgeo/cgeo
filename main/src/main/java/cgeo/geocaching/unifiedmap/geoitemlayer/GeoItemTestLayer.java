@@ -30,7 +30,7 @@ import java.util.Set;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /** This is a test layer to experiment with unified geoitem layers. It is only activated with a specific developer setting */
-public class GeoItemTestLayer {
+public class GeoItemTestLayer implements ILayer {
 
     private static final Geopoint CENTER = new Geopoint(40, 10);
 
@@ -61,6 +61,7 @@ public class GeoItemTestLayer {
         }
     }
 
+    @Override
     public boolean handleTap(final Context ctx, final Geopoint gp) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
             return false;

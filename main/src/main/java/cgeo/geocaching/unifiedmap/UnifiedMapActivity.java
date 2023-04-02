@@ -34,7 +34,6 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
-import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -69,6 +68,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -89,6 +89,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
+    private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
     private AbstractGeoitemLayer geoitemLayer = null;
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
@@ -170,7 +171,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             if (mapActivity.tileProvider.getMap().positionLayer != null) {
-                                mapActivity.tileProvider.getMap().positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                                mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
                             }
                             // @todo: check if proximity notification needs an update
                         }
@@ -206,6 +207,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(UnifiedMapViewModel.class);
 
         // get data from intent
         final Bundle extras = getIntent().getExtras();
@@ -716,8 +719,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
-        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
-                || DownloaderUtils.onOptionsItemSelected(this, id, true)) {
+        } else if (/*TODO HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
+                || */DownloaderUtils.onOptionsItemSelected(this, id, true)) {
             return true;
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
@@ -777,11 +780,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Map tap handling
 
     public void onTap(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
-        Log.e("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
-
-        if (handleTestLayerTapped(Geopoint.forE6(latitudeE6, longitudeE6))) {
-            return;
-        }
 
         // numbers of cache markers fitting into width/height
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -841,14 +839,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             }
         }
 
-    }
-
-    private boolean handleTestLayerTapped(final Geopoint tapped) {
-        if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
-            return false;
-        }
-
-        return tileProvider.getMap().getTestLayer().handleTap(this, tapped);
     }
 
     private void handleTap(final RouteItem item, final boolean isLongTap) {
