@@ -1697,7 +1697,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.getRoot().setVisibility(View.VISIBLE);
 
             // load description
-            reloadDescription(this.getActivity(), cache, binding.description, binding.descriptionRenderFully, true);
+            reloadDescription(this.getActivity(), cache, true, 0);
 
             //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
@@ -1885,19 +1885,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
-        private static void reloadDescription(final Activity activity, final Geocache cache, final TextView descriptionView, final View descriptionFullLoadButton, final boolean restrictLength) {
-            descriptionFullLoadButton.setVisibility(View.GONE);
-            descriptionView.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
-            descriptionView.setVisibility(View.VISIBLE);
+        private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll) {
+            binding.descriptionRenderFully.setVisibility(View.GONE);
+            binding.description.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            binding.description.setVisibility(View.VISIBLE);
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
-                createDescriptionContent(activity, cache, restrictLength, descriptionView), p -> {
-                    displayDescription(activity, cache, p.first, descriptionView);
-                    if (p.second) {
-                        descriptionFullLoadButton.setVisibility(View.VISIBLE);
-                        descriptionFullLoadButton.setOnClickListener(v ->
-                                reloadDescription(activity, cache, descriptionView, descriptionFullLoadButton, false));
+                createDescriptionContent(activity, cache, restrictLength, binding.description), p -> {
+                    displayDescription(activity, cache, p.first, binding.description);
+                    // we need to use post, so that the textview is layouted before scrolling gets called
+                    if (initialScroll != 0) {
+                        binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                     }
-                }
+                    if (p.second) {
+                            binding.descriptionRenderFully.setVisibility(View.VISIBLE);
+                            binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY()));
+                        }
+                    }
             );
         }
 
@@ -1979,7 +1982,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             .append(TextParam.id(R.string.cache_description_render_restricted_warning, descriptionFullLength, DESCRIPTION_MAX_SAFE_LENGTH * 100 / descriptionFullLength).getText(null), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                return new Pair<>(description, textTooLong);
+                return new Pair<>(description, textTooLong && restrictLength);
             } catch (final RuntimeException re) {
                 return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
             }
