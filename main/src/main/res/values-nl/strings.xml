@@ -861,8 +861,7 @@
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
     <string name="init_list_initial_load_limit">Laadlimiet lijst</string>
     <string name="init_summary_list_initial_load_limit">Maximum aantal caches om te laden uit de database bij het initieel weergeven van opgeslagen lijsten. Kies 0 voor \'ongelimiteerd\'</string>
-    <string name="init_title_cacheListInfo1">Configureer de lijst info regels (regel 1)</string>
-    <string name="init_title_cacheListInfo2">Configureren lijst info regels (regel 2)</string>
+    <string name="init_title_cacheListInfo1">Configureren lijst info regels</string>
     <string name="init_summary_cacheListInfo">Selecteer de extra informatie die getoond moet worden voor elke cache in cache lijsten</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
@@ -877,6 +876,7 @@
     <string name="cacheListInfoItem_Lists">Andere lijsten</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Event datum</string>
+    <string name="newline">Nieuwe regel</string>
     <string name="active_elements">Actieve elementen</string>
     <string name="disabled_elements">Uitgeschakelde elementen</string>
     <!-- app theme -->
