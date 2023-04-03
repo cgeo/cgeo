@@ -861,8 +861,6 @@
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de caches que são inicialmente carregadas, a partir do banco de dados, quando é exibida uma lista de caches armazenadas. Escolha 0 para \'ilimitado\'</string>
-    <string name="init_title_cacheListInfo1">Configurar linhas de informação da lista (Linha 1)</string>
-    <string name="init_title_cacheListInfo2">Configurar linhas de informação da lista (Linha 2)</string>
     <string name="init_summary_cacheListInfo">Selecione as informações adicionais a serem mostradas para cada cache nas listas de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
