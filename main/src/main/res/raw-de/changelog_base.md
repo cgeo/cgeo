@@ -13,6 +13,7 @@
 ### Cache-Details
 - Änderung: Erzwinge das erneute Herunterladen des Caches beim Importieren über send2cgeo
 - Änderung: Unterscheide zwischen Größe "nicht gewählt" und "andere" für geocaching.com (kann unterschiedliche Filterergebnisse für einige Caches älter als 2013 ergeben)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Allgemein
 - Korrektur: Vorschau Button wird in der PQ Liste nur mit der Filtereinstellung "Alle zeigen" angezeigt
@@ -24,3 +25,4 @@
 - Neu: Infos in Cachelisten konfigurierbar machen
 - Neu: Kürzlich angesehene Caches leeren
 - Neu: 'Zuletzt angesehene Caches' als Option für Schnellstart-Schaltflächen ergänzt
+- New: Add last logs smiley row to configurable info items
