@@ -13,6 +13,7 @@
 ### Cache details
 - Wijziging: Forceer herdownloaden van de cache bij het importeren via send2cgeo
 - Wijziging: Verschil tussen grootte "niet gekozen" en "overig" voor geocaching.com caches (kan verschillende filters geven voor sommige caches ouder dan 2013)
+- Oplossing: Behoud scrollpositie wanneer de "render complete beschrijving" knop word gebruikt
 
 ### Algemeen
 - Oplossing: Voorbeeldknop alleen weergegeven met filterinstelling "alles weergeven" in PQ lijst
@@ -24,3 +25,4 @@
 - Nieuw: Maak cache lijst info items configureerbaar
 - Nieuw: Recent bekeken caches wissen
 - Nieuw: Voeg 'recent bekeken caches' toe aan quicklaunch opties
+- Nieuw: Voeg laatste logs smiley rij toe aan configureerbare info items
