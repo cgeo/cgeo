@@ -873,8 +873,7 @@
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrytek</string>
     <string name="init_list_initial_load_limit">Ograniczenie wczytywania listy</string>
     <string name="init_summary_list_initial_load_limit">Maksymalna liczba skrytek do wczytania z bazy danych podczas wyświetlania przechowywanych list. Wybierz 0 dla \'nieograniczone\'</string>
-    <string name="init_title_cacheListInfo1">Skonfiguruj linie informacji listy (Linia 1)</string>
-    <string name="init_title_cacheListInfo2">Skonfiguruj linie informacji listy (Linia 2)</string>
+    <string name="init_title_cacheListInfo1">Skonfiguruj linie informacji</string>
     <string name="init_summary_cacheListInfo">Wybierz dodatkowe informacje, które mają być wyświetlane dla każdej skrytki na listach skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
@@ -889,6 +888,7 @@
     <string name="cacheListInfoItem_Lists">Inne listy</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
+    <string name="newline">Nowa linia</string>
     <string name="active_elements">Aktywne elementy</string>
     <string name="disabled_elements">Wyłączone elementy</string>
     <!-- app theme -->
