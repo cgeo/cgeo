@@ -873,8 +873,6 @@
     <string name="init_summary_choose_list">Ptát se na seznam pro uložení kešky</string>
     <string name="init_list_initial_load_limit">Seznam omezení zatížení</string>
     <string name="init_summary_list_initial_load_limit">Maximální počet kešek, které se mají načíst z databáze při zobrazení uložených seznamů. Zvolte 0 pro „neomezený“</string>
-    <string name="init_title_cacheListInfo1">Konfigurace seznamu do řádků (1. řádek)</string>
-    <string name="init_title_cacheListInfo2">Konfigurace seznamu do řádků (2. řádek)</string>
     <string name="init_summary_cacheListInfo">Vyberte doplňkové informace, které se mají zobrazit pro každou kešku v seznamech kešek</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
