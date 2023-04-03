@@ -13,6 +13,7 @@
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
 - Změna: Rozlišování mezi velikostí "Nezvolená" a "Ostatní" u kešek na geocaching.com (u některých kešek starších než 2013 může být filtrování odlišné)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Obecné
 - Oprava: Tlačítko Náhled se zobrazuje pouze s nastavením filtru "zobrazit vše" v seznamu PQ
@@ -24,3 +25,4 @@
 - Novinka: Položky informací v seznamu kešek jsou nyní konfigurovatelné
 - Novinka: Vymazání nedávno zobrazených kešek
 - Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
+- New: Add last logs smiley row to configurable info items
