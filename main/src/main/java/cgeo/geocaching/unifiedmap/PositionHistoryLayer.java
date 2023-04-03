@@ -29,7 +29,7 @@ public class PositionHistoryLayer implements ILayer {
 
     Location lastPos = null;
 
-    protected PositionHistory history = null;
+    final UnifiedMapViewModel viewModel;
 
 
     private final GeoStyle lineStyle = GeoStyle.builder()
@@ -38,15 +38,11 @@ public class PositionHistoryLayer implements ILayer {
             .build();
 
     public PositionHistoryLayer(final AppCompatActivity activity) {
-        final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getPositionHistory().observe(activity, positionHistory -> {
-            history = positionHistory;
-            drawHistory();
-        });
+        viewModel.getPositionHistory().observe(activity, positionHistory -> drawHistory());
 
         viewModel.getPositionAndHeading().observe(activity, positionAndHeading -> {
-
             if (!positionAndHeading.first.equals(lastPos)) {
                 lastPos = positionAndHeading.first;
                 drawHistory();
@@ -55,6 +51,7 @@ public class PositionHistoryLayer implements ILayer {
     }
 
     private void drawHistory() {
+        PositionHistory history = viewModel.getPositionHistory().getValue();
 
         // only draw if position history is currently enabled. Remove possible old history line if not.
         if (history == null || history.getHistory().isEmpty()) {
