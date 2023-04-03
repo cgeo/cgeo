@@ -9,7 +9,7 @@
 - Oplossing: Meerdere navigatielijnen op Google Maps kaart
 
 ##
-- Fix: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
+- Oplossing: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
 - Oplossing: Lijst met uitgebreide filters niet vertaald wanneer taal is ingesteld op niet-standaard binnen c:geo
 - Oplossing: Downloaden/bijwerken van routing tegels of kaarten die niet meer mogelijk zijn op oudere apparaten
 - Oplossing: locatienaam weergegeven in kompas in plaats van coördinaten
