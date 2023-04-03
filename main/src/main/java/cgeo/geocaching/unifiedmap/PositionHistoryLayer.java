@@ -6,7 +6,6 @@ import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -30,7 +29,7 @@ public class PositionHistoryLayer implements ILayer {
 
     Location lastPos = null;
 
-    protected final PositionHistory history = new PositionHistory();
+    protected PositionHistory history = null;
 
 
     private final GeoStyle lineStyle = GeoStyle.builder()
@@ -40,33 +39,49 @@ public class PositionHistoryLayer implements ILayer {
 
     public PositionHistoryLayer(final AppCompatActivity activity) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
+
+        viewModel.getPositionHistory().observe(activity, positionHistory -> {
+            history = positionHistory;
+            drawHistory();
+        });
+
         viewModel.getPositionAndHeading().observe(activity, positionAndHeading -> {
 
-            if (!positionAndHeading.first.equals(lastPos) && Settings.isMapTrail()) {
+            if (!positionAndHeading.first.equals(lastPos)) {
                 lastPos = positionAndHeading.first;
-                history.rememberTrailPosition(positionAndHeading.first);
-
-                final ArrayList<TrailHistoryElement> historyElements = history.getHistory();
-                final GeoGroup.Builder geoGroup = GeoGroup.builder();
-
-                ArrayList<Geopoint> segmentPoints = new ArrayList<>();
-
-                segmentPoints.add(new Geopoint(historyElements.get(0).getLocation()));
-                for (int i = 1; i < historyElements.size(); i++) {
-                    if (historyElements.get(i).getLocation().distanceTo(historyElements.get(i - 1).getLocation()) > LINE_MAXIMUM_DISTANCE_METERS) {
-                        geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle));
-                        segmentPoints = new ArrayList<>();
-                    }
-                    segmentPoints.add(new Geopoint(historyElements.get(i).getLocation()));
-                }
-                // always add current position
-                segmentPoints.add(new Geopoint(positionAndHeading.first));
-                geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle));
-
-                geoItemLayer.put("historyLine", geoGroup.build());
-
+                drawHistory();
             }
         });
+    }
+
+    private void drawHistory() {
+
+        // only draw if position history is currently enabled. Remove possible old history line if not.
+        if (history == null || history.getHistory().isEmpty()) {
+            geoItemLayer.remove("historyLine");
+            return;
+        }
+
+        final ArrayList<TrailHistoryElement> historyElements = history.getHistory();
+        final GeoGroup.Builder geoGroup = GeoGroup.builder();
+
+        ArrayList<Geopoint> segmentPoints = new ArrayList<>();
+
+        segmentPoints.add(new Geopoint(historyElements.get(0).getLocation()));
+        for (int i = 1; i < historyElements.size(); i++) {
+            if (historyElements.get(i).getLocation().distanceTo(historyElements.get(i - 1).getLocation()) > LINE_MAXIMUM_DISTANCE_METERS) {
+                geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle));
+                segmentPoints = new ArrayList<>();
+            }
+            segmentPoints.add(new Geopoint(historyElements.get(i).getLocation()));
+        }
+        // always add current position
+        if (lastPos != null) {
+            segmentPoints.add(new Geopoint(lastPos));
+        }
+        geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle));
+
+        geoItemLayer.put("historyLine", geoGroup.build());
     }
 
     @Override

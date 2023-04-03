@@ -13,6 +13,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
+import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.routing.Routing;
@@ -34,6 +35,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -612,6 +614,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         final boolean result = super.onPrepareOptionsMenu(menu);
         TileProviderFactory.addMapViewLanguageMenuItems(menu);
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
+        HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
@@ -719,8 +722,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
-        } else if (/*TODO HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
-                || */DownloaderUtils.onOptionsItemSelected(this, id, true)) {
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.getPositionHistory().setValue(Settings.isMapTrail() ? new PositionHistory() : null), () -> {
+            PositionHistory positionHistory = viewModel.getPositionHistory().getValue();
+            if (positionHistory == null) {
+                positionHistory = new PositionHistory();
+            }
+            positionHistory.reset();
+        })
+                || DownloaderUtils.onOptionsItemSelected(this, id, true)) {
             return true;
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
