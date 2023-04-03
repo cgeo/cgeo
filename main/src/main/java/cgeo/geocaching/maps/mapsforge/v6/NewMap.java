@@ -196,7 +196,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
-    private static final String BUNDLE_ROUTE = "route";
     private static final String BUNDLE_FILTERCONTEXT = "filterContext";
 
     // Handler messages
@@ -246,7 +245,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
             if (mapOptions.mapState != null) {
@@ -254,9 +252,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             } else {
                 followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             }
-            individualRoute = null;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
+        individualRoute = null;
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(this);
         }
@@ -947,9 +945,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         outState.putParcelable(BUNDLE_MAP_STATE, state);
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
-        }
-        if (individualRoute != null) {
-            outState.putParcelable(BUNDLE_ROUTE, individualRoute);
         }
         if (mapOptions.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);

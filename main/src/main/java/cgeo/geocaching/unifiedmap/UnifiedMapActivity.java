@@ -84,7 +84,6 @@ import org.oscim.core.GeoPoint;
 public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
-    private static final String BUNDLE_ROUTE = "route";
     private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
@@ -221,7 +220,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             }
             overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
 //            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
 //            if (mapOptions.mapState != null) {
@@ -229,9 +227,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //            } else {
 //                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
 //            }
-            individualRoute = null;
 //            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
+        individualRoute = null;
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
             mapType = new UnifiedMapType();
@@ -883,9 +881,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //        if (proximityNotification != null) {
 //            outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
 //        }
-        if (individualRoute != null) {
-            outState.putParcelable(BUNDLE_ROUTE, individualRoute);
-        }
         outState.putBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, true);
     }
 
