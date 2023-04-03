@@ -13,6 +13,7 @@
 ### Szczegóły skrytki
 - Zmiana: Wymuszenie ponownego pobrania skrytki podczas importowania przez send2cgeo
 - Zmiana: Zróżnicowanie między rozmiarami „nie wybrano” i „inny” dla skrytek z geocaching.com (może dawać inne wyniki filtrowanie dla niektórych skrytek starszych niż 2013 rok)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Ogólne
 - Poprawka: Przycisk podglądu wyświetlany tylko z ustawieniem filtru „Pokaż wszystko” na liście PQ
@@ -24,3 +25,4 @@
 - Nowość: Elementy na liście skrytek są konfigurowalne
 - Nowość: Czyszczenie listy ostatnio oglądanych skrytek
 - Nowość: Dodano „ostatnio oglądane skrytki” do opcji szybkiego uruchamiania
+- Nowość: Dodaj wiersz ostatnich logowań do konfigurowalnych elementów informacji
