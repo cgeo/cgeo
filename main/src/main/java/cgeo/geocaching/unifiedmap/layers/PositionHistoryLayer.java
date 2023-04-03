@@ -1,4 +1,4 @@
-package cgeo.geocaching.unifiedmap;
+package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
@@ -6,6 +6,8 @@ import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -51,7 +53,7 @@ public class PositionHistoryLayer implements ILayer {
     }
 
     private void drawHistory() {
-        PositionHistory history = viewModel.getPositionHistory().getValue();
+        final PositionHistory history = viewModel.getPositionHistory().getValue();
 
         // only draw if position history is currently enabled. Remove possible old history line if not.
         if (history == null || history.getHistory().isEmpty()) {

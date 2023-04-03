@@ -1,4 +1,4 @@
-package cgeo.geocaching.unifiedmap;
+package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -6,6 +6,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
