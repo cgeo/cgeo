@@ -13,6 +13,7 @@
 ### Détails de la cache
 - Change: Force redownload of cache when importing via send2cgeo
 - Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Général
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
@@ -24,3 +25,4 @@
 - New: Make cache list info items configurable
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
+- New: Add last logs smiley row to configurable info items
