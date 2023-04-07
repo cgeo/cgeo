@@ -11,18 +11,18 @@
 - Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
 
 ### Detalhes da cache
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
+- Alteração: Diferencie entre o tamanho "não especificado" e "outro" para caches em geocaching.com (pode dar uma filtragem diferente para algumas caches mais antigas que 2013)
+- Correcção: Preservada a posição de deslocamento quando utilizado o botão "renderizar descrição completa"
 
 ### Geral
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
+- Correcção: Botão de pré-visualização exibido apenas com a configuração de filtro "mostrar todos" na lista de PQ
+- Novo: Adicionado Cruiser como aplicação de navegação (requer Cruiser 3.0.9 ou superior)
+- Novo: Importar as listas de marcadores de geocaching.com a partir de hiperligações
+- Novo: Permitir abertura de caches visualizadas recentemente como lista
+- Novo: Poder ordenar os botões de início rápido
+- Novo: Solução alternativa para conflito de "namespace" de TB (funciona para o conector GeoKrety desactivado)
+- Novo: A informação das listas de caches passou a ser configurável
+- Novo: Remover caches visualizadas recentemente
+- Novo: Opção 'caches visualizadas recentemente' adicionada às opções de início rápido
 - New: Add last logs smiley row to configurable info items
