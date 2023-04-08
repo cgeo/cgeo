@@ -290,7 +290,7 @@ public class RouteOptimizationHelper {
     /** returns length in meters for the given route */
     public int calculateRouteLength(final int[] route) {
         int length = 0;
-        for (int i = 0; i < route.length - 2; i++) {
+        for (int i = 0; i < route.length - 1; i++) {
             length += distanceMatrix[route[i]][route[i + 1]];
         }
         return length;
