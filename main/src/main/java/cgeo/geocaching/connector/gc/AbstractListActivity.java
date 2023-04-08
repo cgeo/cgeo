@@ -146,7 +146,7 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
 
     public void returnResult(final GCList pocketQuery) {
         setResult(RESULT_OK, new Intent()
-                .setDataAndType(pocketQuery.getUri(), "application/zip"));
+                .setDataAndType(pocketQuery.getUri(), pocketQuery.isBookmarkList() ? "application/xml" : "application/zip"));
         finish();
     }
 

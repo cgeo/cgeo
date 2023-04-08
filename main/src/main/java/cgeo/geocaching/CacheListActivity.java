@@ -1798,7 +1798,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static void startActivityWithAttachment(@NonNull final Context context, @NonNull final GCList pocketQuery) {
         final Uri uri = pocketQuery.getUri();
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
-        cachesIntent.setDataAndType(uri, "application/zip");
+        cachesIntent.setDataAndType(uri, pocketQuery.isBookmarkList() ? "application/xml" : "application/zip");
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
         context.startActivity(cachesIntent);
     }
