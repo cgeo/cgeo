@@ -34,7 +34,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
                 final Uri uri = Uri.parse("https://www.geocaching.com/plan/api/gpx/list/" + matcher.group(2));
                 Log.i("starting import of bookmark list with id=" + matcher.group(2));
                 final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
-                cachesIntent.setDataAndType(uri, "application/zip");
+                cachesIntent.setDataAndType(uri, "application/xml");
                 cachesIntent.putExtra(Intents.EXTRA_NAME, matcher.group(2));
                 startActivity(cachesIntent);
             }
