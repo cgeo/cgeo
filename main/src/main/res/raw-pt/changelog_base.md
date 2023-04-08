@@ -25,4 +25,4 @@
 - Novo: A informação das listas de caches passou a ser configurável
 - Novo: Remover caches visualizadas recentemente
 - Novo: Opção 'caches visualizadas recentemente' adicionada às opções de início rápido
-- New: Add last logs smiley row to configurable info items
+- Novo: Adicionados aos itens de informação configuráveis a linha dos emoji utilizados nos últimos registos
