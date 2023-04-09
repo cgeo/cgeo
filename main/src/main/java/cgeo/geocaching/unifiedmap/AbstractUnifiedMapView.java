@@ -5,8 +5,12 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
+import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
+import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -17,6 +21,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.oscim.core.BoundingBox;
 
@@ -26,8 +32,7 @@ public abstract class AbstractUnifiedMapView<T> {
     protected WeakReference<UnifiedMapActivity> activityRef;
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
-
-    private final GeoItemTestLayer testLayer = new GeoItemTestLayer();
+    private final List<ILayer> layers = new ArrayList<>();
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
     protected Runnable resetFollowMyLocationListener = null;
     protected int mapRotation = Settings.MAPROTATION_OFF;
@@ -45,19 +50,23 @@ public abstract class AbstractUnifiedMapView<T> {
         this.delayedZoomTo = delayedZoomTo;
         this.delayedCenterTo = delayedCenterTo;
         this.onMapReadyTasks = onMapReadyTasks;
+
+        // layers
+        layers.clear();
+        layers.add(new GeoItemTestLayer());
+        layers.add(new PositionLayer(activity));
+        layers.add(new PositionHistoryLayer(activity));
     }
 
     public void prepareForTileSourceChange() {
         positionLayer = configPositionLayer(false);
-        testLayer.destroy();
+        for (ILayer layer : layers) {
+            layer.destroy();
+        }
     }
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;
-    }
-
-    public GeoItemTestLayer getTestLayer() {
-        return testLayer;
     }
 
     protected abstract AbstractGeoitemLayer<?> createGeoitemLayers(AbstractTileProvider tileProvider);
@@ -144,7 +153,9 @@ public abstract class AbstractUnifiedMapView<T> {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
     }
 
-    /** adjust zoom to be in allowed zoom range for current map */
+    /**
+     * adjust zoom to be in allowed zoom range for current map
+     */
     protected void setDelayedZoomTo() {
         if (delayedZoomTo != -1) {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
@@ -180,11 +191,20 @@ public abstract class AbstractUnifiedMapView<T> {
     // ========================================================================
     // Tap handling methods
 
-    /** transmits tap on map to activity */
+    /**
+     * transmits tap on map to activity
+     */
     protected void onTapCallback(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
+        Log.d("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
+
         final UnifiedMapActivity activity = activityRef.get();
         if (activity == null) {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
+        }
+        for (ILayer layer : layers) {
+            if (layer.handleTap(activity, Geopoint.forE6(latitudeE6, longitudeE6))) {
+                return;
+            }
         }
         activity.onTap(latitudeE6, longitudeE6, isLongTap);
     }
@@ -202,13 +222,17 @@ public abstract class AbstractUnifiedMapView<T> {
     protected void onResume() {
         positionLayer = configPositionLayer(true);
         configMapChangeListener(true);
-        testLayer.init(createGeoItemProviderLayer());
+        for (ILayer layer : layers) {
+            layer.init(createGeoItemProviderLayer());
+        }
     }
 
     protected void onPause() {
         positionLayer = configPositionLayer(false);
         configMapChangeListener(false);
-        testLayer.destroy();
+        for (ILayer layer : layers) {
+            layer.destroy();
+        }
     }
 
     protected void onDestroy() {

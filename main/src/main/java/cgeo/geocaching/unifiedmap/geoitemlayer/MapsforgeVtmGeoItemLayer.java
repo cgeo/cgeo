@@ -128,8 +128,10 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     @Override
     public void destroy() {
         Log.iForce(LOG_PRAEFIX + "destroy");
-        map.layers().remove(markerLayer);
-        map.layers().remove(vectorLayer);
+        if (map != null) {
+            map.layers().remove(markerLayer);
+            map.layers().remove(vectorLayer);
+        }
         map = null;
         markerLayer = null;
         vectorLayer = null;
@@ -150,4 +152,3 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
 }
-

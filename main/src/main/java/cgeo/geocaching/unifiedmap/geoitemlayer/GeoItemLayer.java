@@ -264,6 +264,11 @@ public class GeoItemLayer<K> {
             throw new IllegalArgumentException("Progamming bug: either item or oldItem must be non-null for: " + key);
         }
 
+        if (mapWriter == null) {
+            Log.d("Map writer not yet initialized");
+            return;
+        }
+
         //GeoPrimitives are handled different from GeoGroups
         //- Primitives are inserted with one element with index 0
         //- for GeoGroups, the contained primitives are inserted with an index matching their hashcode (this makes replacements more efficient)
