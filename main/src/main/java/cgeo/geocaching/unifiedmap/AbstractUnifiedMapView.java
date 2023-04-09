@@ -9,6 +9,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
+import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
@@ -56,6 +57,7 @@ public abstract class AbstractUnifiedMapView<T> {
         layers.add(new GeoItemTestLayer());
         layers.add(new PositionLayer(activity));
         layers.add(new PositionHistoryLayer(activity));
+        layers.add(new TracksLayer(activity));
     }
 
     public void prepareForTileSourceChange() {

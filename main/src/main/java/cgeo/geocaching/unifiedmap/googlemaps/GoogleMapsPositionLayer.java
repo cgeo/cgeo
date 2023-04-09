@@ -4,7 +4,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.maps.google.v2.GoogleMapObjects;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.MapLineUtils;
@@ -38,11 +37,6 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     @Override
     public void updateIndividualRoute(final IndividualRoute route) {
         super.updateIndividualRoute(route, GP_CONVERTER::toListList);
-    }
-
-    @Override
-    public void updateTrack(final String key, final IGeoItemSupplier track, final int color, final int width) {
-        super.updateTrack(key, track, color, width, GP_CONVERTER::toListList);
     }
 
     // ========================================================================

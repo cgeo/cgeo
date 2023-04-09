@@ -102,18 +102,11 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
 
     public abstract void updateIndividualRoute(IndividualRoute route);
 
-    public abstract void updateTrack(String key, IGeoItemSupplier track, int color, int width);
-
     public void updateIndividualRoute(final Route route, final Func1<Route, List<List<T>>> getAllPoints) {
         updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth(), getAllPoints);
         repaintRouteAndTracks();
         individualRouteDistance = route.getDistance();
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
-    }
-
-    public void updateTrack(final String key, final IGeoItemSupplier track, final int color, final int width, final Func1<IGeoItemSupplier, List<List<T>>> getAllPoints) {
-        updateRoute(key, track, color, width, getAllPoints);
-        repaintRouteAndTracks();
     }
 
     // ========================================================================

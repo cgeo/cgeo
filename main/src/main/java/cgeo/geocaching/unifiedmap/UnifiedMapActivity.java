@@ -15,12 +15,10 @@ import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
-import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -85,6 +83,8 @@ import org.oscim.core.GeoPoint;
 
 public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
+    // Activity should only contain display logic, everything else goes into the ViewModel
+
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
 
@@ -102,7 +102,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private RouteTrackUtils routeTrackUtils = null;
     private IndividualRoute individualRoute = null;
-    private Tracks tracks = null;
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
@@ -234,6 +233,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //            }
 //            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
+
+        routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
+
+        viewModel.getTrackUpdater().observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
+
         individualRoute = null;
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
@@ -304,7 +308,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         tileProvider.getMap().showSpinner();
         if (mapChanged) {
-            initRouteTrackUtilsAndTracks(true);
+            viewModel.onMapChanged(routeTrackUtils);
 
             // map settings popup
 //        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
@@ -364,13 +368,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
         onResume();
-    }
-
-    private void initRouteTrackUtilsAndTracks(final boolean force) {
-        if (force || routeTrackUtils == null) {
-            routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
-            tracks = new Tracks(routeTrackUtils, this::setTrack);
-        }
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
@@ -556,19 +553,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return false; // @todo
     }
 
-    private void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
-        tracks.setRoute(key, route);
-        resumeTrack(key, null == route);
-        initRouteTrackUtilsAndTracks(false);
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
-    }
-
     private void reloadIndividualRoute() {
         individualRoute.reloadRoute((route) -> {
             if (tileProvider.getMap().positionLayer != null) {
                 tileProvider.getMap().positionLayer.updateIndividualRoute(route);
-                initRouteTrackUtilsAndTracks(false);
-                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
             }
         });
     }
@@ -576,8 +565,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void clearIndividualRoute() {
         individualRoute.clearRoute((route) -> {
             tileProvider.getMap().positionLayer.updateIndividualRoute(route);
-            initRouteTrackUtilsAndTracks(false);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
         });
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
@@ -591,8 +579,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         individualRoute.toggleItem(this, item, tileProvider.getMap().positionLayer);
         // distanceView.showRouteDistance();
-        initRouteTrackUtilsAndTracks(false);
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
     }
 
     // ========================================================================
@@ -914,9 +901,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         tileProvider.getMap().onResume();
         configMapChangeListener(true);
         resumeRoute(false);
-        if (tracks != null) {
-            tracks.resumeAllTracks(this::resumeTrack);
-        }
 //        MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
 
@@ -926,14 +910,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             reloadIndividualRoute();
         } else if (tileProvider.getMap().positionLayer != null) {
             individualRoute.updateRoute((route) -> tileProvider.getMap().positionLayer.updateIndividualRoute(route));
-        }
-    }
-
-    private void resumeTrack(final String key, final boolean preventReloading) {
-        if (null == tracks && !preventReloading) {
-            this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
-        } else if (null != tracks) {
-            tileProvider.getMap().positionLayer.updateTrack(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
         }
     }
 

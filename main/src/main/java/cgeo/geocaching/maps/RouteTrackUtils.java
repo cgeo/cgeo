@@ -300,13 +300,19 @@ public class RouteTrackUtils {
         });
     }
 
+    public void updateRouteTrackButtonVisibility(final View button, final IndividualRoute route) {
+        updateRouteTrackButtonVisibility(button, route, tracks);
+    }
+
     public void updateRouteTrackButtonVisibility(final View button, final IndividualRoute route, final Tracks tracks) {
         final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route) || isTargetSet.call());
-        tracks.traverse((key, r) -> {
-            if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
-                someTrackAvailable.set(true);
-            }
-        });
+        if (tracks != null) {
+            tracks.traverse((key, r) -> {
+                if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
+                    someTrackAvailable.set(true);
+                }
+            });
+        }
         button.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
     }
 
