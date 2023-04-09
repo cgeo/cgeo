@@ -20,6 +20,7 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -148,8 +149,15 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     }
                 }
                 if (!hitWaypoint && null != positionAndHistoryRef) {
-                    final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+                    final GooglePositionAndHistory positionAndHistory = (GooglePositionAndHistory) positionAndHistoryRef.get();
                     if (null != positionAndHistory) {
+                        for (RouteItem item : positionAndHistory.individualRoutePoints) {
+                            final Point itemPoint = googleMap.getProjection().toScreenLocation(new LatLng(item.getPoint().getLatitude(), item.getPoint().getLongitude()));
+                            if (Math.abs(itemPoint.x - tappedPoint.x) < ViewUtils.dpToPixel(8) && Math.abs(itemPoint.y - tappedPoint.y) < ViewUtils.dpToPixel(8)) {
+                                ((CGeoMap) onCacheTapListener).toggleRouteItem(item.getPoint());
+                                return;
+                            }
+                        }
                         positionAndHistory.setLongTapLatLng(tapLatLong);
                         ((CGeoMap) onCacheTapListener).triggerLongTapContextMenu(tappedPoint);
                     }

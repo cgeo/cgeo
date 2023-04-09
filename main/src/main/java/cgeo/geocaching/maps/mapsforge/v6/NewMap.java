@@ -796,7 +796,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             if (null != this.distanceView) {
                 this.distanceView.setRouteDistance(realRouteDistance);
             }
-        });
+        }, this.mapHandlers.getTapHandler(), mapView.getLayerManager());
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         //GeoobjectLayer
@@ -1411,6 +1411,15 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         updateRouteTrackButtonVisibility();
     }
 
+    public void toggleRouteItem(final LatLong latLong) {
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setTarget);
+        }
+        individualRoute.toggleItem(this, new RouteItem(new Geopoint(latLong.latitude, latLong.longitude)), routeLayer);
+        distanceView.showRouteDistance();
+        updateRouteTrackButtonVisibility();
+    }
+
     @Nullable
     private Geocache getSingleModeCache() {
         if (StringUtils.isNotBlank(mapOptions.geocode)) {
@@ -1500,7 +1509,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
     }
 
-    private void reloadIndividualRouteFollowUp(final Route route) {
+    private void reloadIndividualRouteFollowUp(final IndividualRoute route) {
         if (null != routeLayer) {
             routeLayer.updateIndividualRoute(route);
             updateRouteTrackButtonVisibility();
