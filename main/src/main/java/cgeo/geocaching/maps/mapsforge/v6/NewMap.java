@@ -1497,7 +1497,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void reloadIndividualRoute() {
-        individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
+        if (individualRoute != null) {
+            individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
+        }
     }
 
     private void reloadIndividualRouteFollowUp(final Route route) {

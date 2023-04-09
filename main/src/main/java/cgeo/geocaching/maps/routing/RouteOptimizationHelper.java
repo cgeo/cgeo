@@ -71,6 +71,9 @@ public class RouteOptimizationHelper {
         }
 
         public void updateButton(final int whichButton, final View.OnClickListener listener) {
+            if (dialog == null) {
+                return;
+            }
             final Button button = dialog.getButton(whichButton);
             if (button != null) {
                 button.setVisibility(View.VISIBLE);
