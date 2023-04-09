@@ -1,6 +1,7 @@
 ##
 - Korrektur: Google Maps: Cache/Wegpunkt-Popup öffnet sich beim Tippen auf Zoom-Steuerung/Kompass, wenn darunter ein Cache/Wegpunkt liegt
 - Korrektur: Fehler beim Hinzufügen von Caches zu / Entfernen von Caches von Lesezeichenlisten
+- Korrektur: Fehler beim Herunterladen von Lesezeichenlisten
 
 ##
 - Korrektur: Breitere Infospalte in der Logansicht im Querformat
