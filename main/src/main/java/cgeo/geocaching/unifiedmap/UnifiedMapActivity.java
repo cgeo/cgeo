@@ -336,6 +336,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
 
             // create geoitem layers
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);

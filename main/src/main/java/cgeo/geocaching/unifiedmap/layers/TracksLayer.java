@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.layers;
 
+import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
@@ -22,9 +23,10 @@ public class TracksLayer implements ILayer {
     public TracksLayer(final AppCompatActivity activity) {
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getTrackUpdater().observe(activity, event -> event.ifNotHandled((track -> {
-            if (track.getRoute().isHidden()) {
-                geoItemLayer.remove(track.getTrackfile().getKey());
+        viewModel.getTrackUpdater().observe(activity, event -> event.ifNotHandled((key -> {
+            Tracks.Track track = viewModel.getTracks().getTrack(key);
+            if (track == null || track.getRoute().isHidden()) {
+                geoItemLayer.remove(key);
             } else {
                 final GeoStyle lineStyle = GeoStyle.builder()
                         .setStrokeColor(track.getTrackfile().getColor())
@@ -35,7 +37,7 @@ public class TracksLayer implements ILayer {
                 for (GeoPrimitive segment : track.getRoute().getGeoData()) {
                     geoGroup.addItems(GeoPrimitive.createPolyline(segment.getPoints(), lineStyle));
                 }
-                geoItemLayer.put(track.getTrackfile().getKey(), geoGroup.build());
+                geoItemLayer.put(key, geoGroup.build());
             }
         })));
 

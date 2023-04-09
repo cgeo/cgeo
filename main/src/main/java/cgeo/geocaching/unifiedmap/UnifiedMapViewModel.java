@@ -19,7 +19,7 @@ public class UnifiedMapViewModel extends ViewModel {
     // ViewModels will survive config changes, no savedInstanceState is needed
 
     private Tracks tracks = null;
-    private final MutableLiveData<Event<Tracks.Track>> trackUpdater = new MutableLiveData<>();
+    private final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
     private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>();
     private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
 
@@ -50,8 +50,12 @@ public class UnifiedMapViewModel extends ViewModel {
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
-        trackUpdater.setValue(new Event<>(tracks.getTrack(key)));
+        trackUpdater.setValue(new Event<>(key));
         //send event to layer/rtutils
+    }
+
+    public Tracks getTracks() {
+        return tracks;
     }
 
     public void init(final RouteTrackUtils routeTrackUtils) {
@@ -62,7 +66,7 @@ public class UnifiedMapViewModel extends ViewModel {
      * Event based LiveData notifying about track updates
      */
     @NonNull
-    public MutableLiveData<Event<Tracks.Track>> getTrackUpdater() {
+    public MutableLiveData<Event<String>> getTrackUpdater() {
         return trackUpdater;
     }
 }
