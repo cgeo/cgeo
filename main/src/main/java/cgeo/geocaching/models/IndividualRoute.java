@@ -67,7 +67,7 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public void reloadRoute(final UpdateIndividualRoute updateRoute) {
-        clearRouteInternal(updateRoute, false);
+        clearRouteInternal(null, false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), this::loadRouteInternal, () -> updateRoute(updateRoute));
     }
 
