@@ -14,9 +14,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
@@ -224,13 +227,13 @@ public final class Formatter {
                     sb.append(sb.length() > 0 ? newlineRequested ? "\n" : SEPARATOR : "").append(s);
                     newlineRequested = false;
                 }
-
             }
         }
         return sb;
     }
 
     private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
+        final int backgroundColor = CgeoApplication.getInstance().getResources().getColor(R.color.colorBackground);
         for (int item : configuredItems) {
             if (item == CacheListInfoItem.VALUES.GCCODE.id) {
                 if (StringUtils.isNotBlank(cache.getGeocode())) {
@@ -270,13 +273,21 @@ public final class Formatter {
                 final List<LogEntry> logs = cache.getLogs();
                 if (logs.size() > 0) {
                     int count = 0;
-                    final SpannableString s = new SpannableString("        ");
+                    // mitigation to make displaying ImageSpans work even in wrapping lines, see #14163
+                    // ImageSpans need to be separated by different span, use small text in background color for this
+                    final SpannableString s = new SpannableString(" . . . . . . . .");
                     for (int i = 0; i < Math.min(logs.size(), 8); i++) {
-                        final ImageSpan is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay());
-                        s.setSpan(is, i, i + 1, 0);
+                        final ImageSpan is;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay(), ImageSpan.ALIGN_CENTER);
+                        } else {
+                            is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay());
+                        }
+                        s.setSpan(is, i * 2, i * 2 + 1, 0);
+                        s.setSpan(new ForegroundColorSpan(backgroundColor), i * 2 + 1, i * 2 + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         count++;
                     }
-                    infos.add(new SpannableString(s.subSequence(0, count)));
+                    infos.add(new SpannableString(s.subSequence(0, 2 * count)));
                 }
 
             // newline items should be last in list
