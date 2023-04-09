@@ -9,6 +9,7 @@
 - 신규: 트랙당 선폭 설정
 - 신규: 요청 시 지도의 작업 표시줄 숨기기(지도의 빈 공간 탭)
 - 변경: 더 많은 세로 공간을 확보하기 위해 가로 모드에서 빠른 설정 버튼을 왼쪽으로 이동
+- New: Visualize coords-only-points of individual route
 
 ### 캐시 상세정보
 - Change: Force redownload of cache when importing via send2cgeo
