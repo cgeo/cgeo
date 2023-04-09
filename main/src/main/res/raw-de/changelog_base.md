@@ -9,6 +9,7 @@
 - Neu: Einstellen der Linienbreite pro Track
 - Neu: Actionbar der Karte auf Wunsch ausblenden (Tippe auf einen leeren Bereich auf der Karte)
 - Änderung: Schnelleinstellungs-Buttons auf Karten im Querformat links anzeigen, um mehr vertikalen Raum zu erhalten
+- New: Visualize coords-only-points of individual route
 
 ### Cache-Details
 - Änderung: Erzwinge das erneute Herunterladen des Caches beim Importieren über send2cgeo
