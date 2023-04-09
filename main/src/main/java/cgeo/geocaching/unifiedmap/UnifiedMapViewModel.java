@@ -54,7 +54,7 @@ public class UnifiedMapViewModel extends ViewModel {
         //send event to layer/rtutils
     }
 
-    public void onMapChanged(final RouteTrackUtils routeTrackUtils) {
+    public void init(final RouteTrackUtils routeTrackUtils) {
         tracks = new Tracks(routeTrackUtils, this::setTrack);
     }
 

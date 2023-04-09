@@ -27,6 +27,11 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
+import cgeo.geocaching.unifiedmap.layers.PositionLayer;
+import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
@@ -74,6 +79,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -93,6 +99,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
     private AbstractGeoitemLayer geoitemLayer = null;
+
+    private final List<ILayer> layers = new ArrayList<>();
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -243,6 +251,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
             mapType = new UnifiedMapType();
         }
+
+        // initialize layers
+        layers.clear();
+        layers.add(new GeoItemTestLayer());
+        layers.add(new PositionLayer(this));
+        layers.add(new PositionHistoryLayer(this));
+        layers.add(new TracksLayer(this));
+
+        viewModel.init(routeTrackUtils);
+
         changeMapSource(Settings.getTileProvider());
 
         // temporary workaround to show spacer; will be replaced by
@@ -264,6 +282,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         });
         */
 
+    }
+
+    public List<ILayer> getLayers() {
+        return layers;
     }
 
     private void setMapModeFromMapType() {
@@ -308,7 +330,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         tileProvider.getMap().showSpinner();
         if (mapChanged) {
-            viewModel.onMapChanged(routeTrackUtils);
 
             // map settings popup
 //        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));

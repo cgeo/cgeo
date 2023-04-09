@@ -80,7 +80,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     }
 
     @Override
-    protected IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
+    public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
         return new GoogleV2GeoItemLayer(mMap);
     }
 

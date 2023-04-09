@@ -4,12 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
-import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
-import cgeo.geocaching.unifiedmap.layers.PositionLayer;
-import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
@@ -20,10 +16,9 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.oscim.core.BoundingBox;
 
@@ -33,7 +28,6 @@ public abstract class AbstractUnifiedMapView<T> {
     protected WeakReference<UnifiedMapActivity> activityRef;
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
-    private final List<ILayer> layers = new ArrayList<>();
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
     protected Runnable resetFollowMyLocationListener = null;
     protected int mapRotation = Settings.MAPROTATION_OFF;
@@ -51,20 +45,11 @@ public abstract class AbstractUnifiedMapView<T> {
         this.delayedZoomTo = delayedZoomTo;
         this.delayedCenterTo = delayedCenterTo;
         this.onMapReadyTasks = onMapReadyTasks;
-
-        // layers
-        layers.clear();
-        layers.add(new GeoItemTestLayer());
-        layers.add(new PositionLayer(activity));
-        layers.add(new PositionHistoryLayer(activity));
-        layers.add(new TracksLayer(activity));
     }
 
     public void prepareForTileSourceChange() {
         positionLayer = configPositionLayer(false);
-        for (ILayer layer : layers) {
-            layer.destroy();
-        }
+        forEveryLayer(ILayer::destroy);
     }
 
     public void setTileSource(final AbstractTileProvider newSource) {
@@ -203,11 +188,11 @@ public abstract class AbstractUnifiedMapView<T> {
         if (activity == null) {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
         }
-        for (ILayer layer : layers) {
-            if (layer.handleTap(activity, Geopoint.forE6(latitudeE6, longitudeE6))) {
-                return;
-            }
-        }
+//        for (ILayer layer : layers) {
+//            if (layer.handleTap(activity, Geopoint.forE6(latitudeE6, longitudeE6))) {
+//                return;
+//            }
+//        }
         activity.onTap(latitudeE6, longitudeE6, isLongTap);
     }
 
@@ -224,23 +209,28 @@ public abstract class AbstractUnifiedMapView<T> {
     protected void onResume() {
         positionLayer = configPositionLayer(true);
         configMapChangeListener(true);
-        for (ILayer layer : layers) {
-            layer.init(createGeoItemProviderLayer());
-        }
+        forEveryLayer(layer -> layer.init(createGeoItemProviderLayer()));
     }
 
     protected void onPause() {
         positionLayer = configPositionLayer(false);
         configMapChangeListener(false);
-        for (ILayer layer : layers) {
-            layer.destroy();
-        }
+        forEveryLayer(ILayer::destroy);
     }
 
     protected void onDestroy() {
         // default is empty
     }
 
-    protected abstract IProviderGeoItemLayer<?> createGeoItemProviderLayer();
+    private void forEveryLayer(Consumer<ILayer> consumer) {
+        UnifiedMapActivity activity = activityRef.get();
+        if (activity != null) {
+            for (ILayer layer : activityRef.get().getLayers()) {
+                consumer.accept(layer);
+            }
+        }
+    }
+
+    public abstract IProviderGeoItemLayer<?> createGeoItemProviderLayer();
 
 }

@@ -117,7 +117,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     }
 
     @Override
-    protected IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
+    public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
         return new MapsforgeVtmGeoItemLayer(mMap);
     }
 
