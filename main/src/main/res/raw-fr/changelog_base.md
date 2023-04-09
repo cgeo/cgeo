@@ -9,6 +9,7 @@
 - New: Setting line-width per track
 - New: Hide map's action bar on demand (tap on empty space on map)
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- New: Visualize coords-only-points of individual route
 
 ### Détails de la cache
 - Change: Force redownload of cache when importing via send2cgeo
