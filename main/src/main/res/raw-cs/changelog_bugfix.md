@@ -1,6 +1,7 @@
 ##
 - Oprava: Mapy Google: při klepnutí na ovládací prvek zoomu/kompasovou růžici, pod kterou se nachází keška/trasový bod, se otevře vyskakovací okno kešky/trasového bodu
 - Oprava: Chyba při přidávání kešek do seznamu záložek a jejich odstraňování z nich
+- Oprava: Chyba při stahování seznamů záložek
 
 ##
 - Oprava: Rozšíření sloupce s popisem logu v režimu na šířku
