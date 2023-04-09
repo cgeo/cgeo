@@ -9,6 +9,7 @@
 - Nieuw: Lijnbreedte instellen per track
 - Nieuw: Verberg op verzoek de actiebalk van de kaart (klik op lege ruimte op de kaart)
 - Wijziging: Verplaats snelle-instellingen knoppen naar links in liggende modus om meer verticale ruimte te krijgen
+- New: Visualize coords-only-points of individual route
 
 ### Cache details
 - Wijziging: Forceer herdownloaden van de cache bij het importeren via send2cgeo
