@@ -944,7 +944,6 @@
     <string name="feature_search_finder">Bulanlara göre ara</string>
     <string name="feature_favorite">Favorilere Geocache ekleme</string>
     <string name="feature_voting">Geocache\'ler için oylama</string>
-    <string name="init_maplines_title">Harita çizgilerinin özelleştirilmesi</string>
     <string name="init_map_other">Diğer</string>
     <string name="init_map_osm_multithreaded">Çok kanallı (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap haritalarını işlemek için çoklu çekirdek özelliğini kullanın</string>

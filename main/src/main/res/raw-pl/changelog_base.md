@@ -1,4 +1,4 @@
-### Map
+### Mapa
 - Zmiana: Użyj ostatnio znanej pozycji na mapie jako rezerwowej (gdy GPS nie jest dostępny i opcja „podążaj za moją lokalizacją” jest nieaktywna)
 - Nowość: Odśwież skrytki na trasie
 - Nowość: Indywidualne kolory śladów
@@ -9,8 +9,12 @@
 - Nowość: Ustawianie szerokości linii dla śladów
 - Nowość: Ukryj pasek akcji mapy na żądanie (dotknij pustego miejsca na mapie)
 - Zmiana: Przeniesienie przycisków szybkich ustawień na lewą stronę w trybie poziomym, aby zyskać więcej miejsca w pionie
+- New: Visualize coords-only-points of individual route
 
 ### Szczegóły skrytki
+- Zmiana: Wymuszenie ponownego pobrania skrytki podczas importowania przez send2cgeo
+- Zmiana: Zróżnicowanie między rozmiarami „nie wybrano” i „inny” dla skrytek z geocaching.com (może dawać inne wyniki filtrowanie dla niektórych skrytek starszych niż 2013 rok)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Ogólne
 - Poprawka: Przycisk podglądu wyświetlany tylko z ustawieniem filtru „Pokaż wszystko” na liście PQ
@@ -22,3 +26,4 @@
 - Nowość: Elementy na liście skrytek są konfigurowalne
 - Nowość: Czyszczenie listy ostatnio oglądanych skrytek
 - Nowość: Dodano „ostatnio oglądane skrytki” do opcji szybkiego uruchamiania
+- Nowość: Dodaj wiersz ostatnich logowań do konfigurowalnych elementów informacji

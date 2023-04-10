@@ -908,7 +908,6 @@
     <string name="feature_search_finder">Søk med finner</string>
     <string name="feature_favorite">Legger cachen til dine favoritter</string>
     <string name="feature_voting">Avstemming for cacher</string>
-    <string name="init_maplines_title">Tilpassing av kartlinjer</string>
     <string name="init_map_other">Andre</string>
     <string name="init_map_osm_multithreaded">Flertrådet (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Bruk flere prosessortråder for å gjengi OpenStreetMap kart</string>

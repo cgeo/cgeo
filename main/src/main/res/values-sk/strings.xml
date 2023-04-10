@@ -1045,7 +1045,6 @@
     <string name="feature_search_finder">Vyhľadávanie podľa nálezcu</string>
     <string name="feature_favorite">Pridanie skrýše medzi obľúbené</string>
     <string name="feature_voting">Hlasovanie pre kešky</string>
-    <string name="init_maplines_title">Prispôsobenie čiar na mape</string>
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>

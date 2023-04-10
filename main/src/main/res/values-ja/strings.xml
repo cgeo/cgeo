@@ -936,7 +936,6 @@
     <string name="feature_search_finder">発見したユーザー名で検索</string>
     <string name="feature_favorite">お気に入りに追加する</string>
     <string name="feature_voting">キャッシュを評価</string>
-    <string name="init_maplines_title">地図の線表示の設定</string>
     <string name="init_map_other">そのほか</string>
     <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMapをレンダリングするためにマルチスレッドを使用する</string>

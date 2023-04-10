@@ -700,6 +700,12 @@
     <string name="settings_summary_offlinedata">Configureer de gegevens die moeten worden opgeslagen voor offline gebruik, de opslaglocatie en mappen voor GPX bestanden.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Configureer handtekening en stel log-opties in.</string>
+    <string name="settings_title_map_sources">Kaartbronnen</string>
+    <string name="settings_summary_map_sources">Stel kaartbron en offline kaartinstellingen in.</string>
+    <string name="settings_title_map_content_behavior">Kaart inhoud &amp; gedrag</string>
+    <string name="settings_summary_map_content_behavior">Configureer welke informatie moet worden weergegeven op kaarten en interactieopties.</string>
+    <string name="settings_title_map_colors">Kaart kleur aanpassen</string>
+    <string name="settings_summary_map_colors">Kleuren van elementen getekend op de kaart configureren.</string>
     <string name="settings_title_map">Kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
@@ -848,21 +854,31 @@
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
+    <string name="init_cachelists">Cache lijsten</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
     <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
     <string name="init_list_initial_load_limit">Laadlimiet lijst</string>
     <string name="init_summary_list_initial_load_limit">Maximum aantal caches om te laden uit de database bij het initieel weergeven van opgeslagen lijsten. Kies 0 voor \'ongelimiteerd\'</string>
+    <string name="init_title_cacheListInfo1">Configureren lijst info regels</string>
+    <string name="init_summary_cacheListInfo">Selecteer de extra informatie die getoond moet worden voor elke cache in cache lijsten</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
     <string name="cacheListInfoItem_Terrain">Terrein</string>
+    <string name="cacheListInfoItem_MemberState">Premium status</string>
     <string name="cacheListInfoItem_Size">Grootte</string>
+    <string name="cacheListInfoItem_Lists">Andere lijsten</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Event datum</string>
+    <string name="newline">Nieuwe regel</string>
+    <string name="active_elements">Actieve elementen</string>
+    <string name="disabled_elements">Uitgeschakelde elementen</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
@@ -1046,7 +1062,8 @@
     <string name="feature_search_finder">Zoek op vinder</string>
     <string name="feature_favorite">Cache wordt toegevoegd aan favorieten</string>
     <string name="feature_voting">Stemmen op caches</string>
-    <string name="init_maplines_title">Kaartlijn aanpassingen</string>
+    <string name="init_appearance_general">Algemeen uiterlijk</string>
+    <string name="init_maplines_title">Kaart kleuren aanpassen</string>
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>

@@ -9,16 +9,21 @@
 - Naujiena: Linijos pločio nustatymas kiekvienam takeliui
 - Naujiena: Slėpiama žemėlapio veiksmų juostą pagal poreikį (palietus tuščią vietą žemėlapyje)
 - Pakeitimas: Perkėlėme greitųjų nustatymų mygtukus į kairę gulsčiojo ekrano režimu, kad gautumėte daugiau vertikalios vietos
+- New: Visualize coords-only-points of individual route
 
 ### Slėptuvės detalės
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Bendras
-- Pataisymas: Peržiūros mygtukas rodomas tik su filtro nustatymu „rodyti viską“ PQ sąraše
-- Naujiena: Pridėta „Cruiser“ navigacijos programa (reikia „Cruiser 3.0.9“ ar naujesnės versijos)
-- Naujiena: Importuokite geocaching.com žymių sąrašus iš nuorodų
-- Nauja: Galima atidaryti neseniai peržiūrėtas talpyklas kaip sąrašą
-- Naujiena: Padarėme greitojo paleidimo mygtukus rūšiuojamais
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
 - New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
 - New: Make cache list info items configurable
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
+- New: Add last logs smiley row to configurable info items

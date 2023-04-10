@@ -621,7 +621,6 @@
     <string name="feature_search_finder">пошук за допомогою шукача</string>
     <string name="feature_favorite">Додавання кешу до вибраного</string>
     <string name="feature_voting">голосування за кеші</string>
-    <string name="init_maplines_title">налаштування ліній карт</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">повідомлення про близькість</string>
     <string name="init_proximityNotificationGeneral">Загальне сповіщення про близькість на карті</string>

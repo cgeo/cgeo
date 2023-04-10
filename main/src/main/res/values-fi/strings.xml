@@ -855,8 +855,6 @@
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
-    <string name="init_title_cacheListInfo1">Määritä listan inforivit (rivi 1)</string>
-    <string name="init_title_cacheListInfo2">Määritä listan inforivit (rivi 2)</string>
     <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
@@ -1056,7 +1054,6 @@
     <string name="feature_search_finder">Etsi löytäjän mukaan</string>
     <string name="feature_favorite">Kätköjen lisäys suosikkeihin</string>
     <string name="feature_voting">Kätköjen arvostelu</string>
-    <string name="init_maplines_title">Kartan viivojen muokkaus</string>
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>

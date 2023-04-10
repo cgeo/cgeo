@@ -9,8 +9,12 @@
 - New: Setting line-width per track
 - New: Hide map's action bar on demand (tap on empty space on map)
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- New: Visualize coords-only-points of individual route
 
 ### Cachedetaljer
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Generelt
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
@@ -22,3 +26,4 @@
 - New: Make cache list info items configurable
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
+- New: Add last logs smiley row to configurable info items

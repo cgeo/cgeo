@@ -712,6 +712,12 @@
     <string name="settings_summary_offlinedata">Skonfiguruj dane do zapisywania w trybie offline, lokalizację i foldery na pliki GPX.</string>
     <string name="settings_title_logging">Logowanie</string>
     <string name="settings_summary_logging">Skonfiguruj swój podpis i ustaw opcje logowania.</string>
+    <string name="settings_title_map_sources">Źródła mapy</string>
+    <string name="settings_summary_map_sources">Ustaw źródło mapy i ustawienia mapy offline.</string>
+    <string name="settings_title_map_content_behavior">Zawartość mapy i zachowanie</string>
+    <string name="settings_summary_map_content_behavior">Skonfiguruj jakie informacje mają być wyświetlane na mapach i opcjach interakcji.</string>
+    <string name="settings_title_map_colors">Dostosowanie koloru mapy</string>
+    <string name="settings_summary_map_colors">Skonfiguruj kolory elementów rysowanych na mapie.</string>
     <string name="settings_title_map">Mapa</string>
     <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
@@ -867,8 +873,7 @@
     <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrytek</string>
     <string name="init_list_initial_load_limit">Ograniczenie wczytywania listy</string>
     <string name="init_summary_list_initial_load_limit">Maksymalna liczba skrytek do wczytania z bazy danych podczas wyświetlania przechowywanych list. Wybierz 0 dla \'nieograniczone\'</string>
-    <string name="init_title_cacheListInfo1">Skonfiguruj linie informacji listy (Linia 1)</string>
-    <string name="init_title_cacheListInfo2">Skonfiguruj linie informacji listy (Linia 2)</string>
+    <string name="init_title_cacheListInfo1">Skonfiguruj linie informacji</string>
     <string name="init_summary_cacheListInfo">Wybierz dodatkowe informacje, które mają być wyświetlane dla każdej skrytki na listach skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrytek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
@@ -883,6 +888,7 @@
     <string name="cacheListInfoItem_Lists">Inne listy</string>
     <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
+    <string name="newline">Nowa linia</string>
     <string name="active_elements">Aktywne elementy</string>
     <string name="disabled_elements">Wyłączone elementy</string>
     <!-- app theme -->
@@ -1068,7 +1074,8 @@
     <string name="feature_search_finder">Szukanie wg znalazcy</string>
     <string name="feature_favorite">Dodaję skrytkę do ulubionych</string>
     <string name="feature_voting">Ocenianie skrytek</string>
-    <string name="init_maplines_title">Dostosowanie linii mapy</string>
+    <string name="init_appearance_general">Ogólny wygląd</string>
+    <string name="init_maplines_title">Dostosowanie kolorów mapy</string>
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
