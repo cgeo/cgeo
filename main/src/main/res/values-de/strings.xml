@@ -1391,7 +1391,7 @@
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
     <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
-    <string name="cache_spoiler_images_title">Hinweisbilder</string>
+    <string name="cache_spoiler_images_title">Hinweisbild</string>
     <string name="cache_log_types">Logs</string>
     <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string>
     <string name="cache_clear_history">Verlauf leeren</string>

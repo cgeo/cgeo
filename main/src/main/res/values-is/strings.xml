@@ -467,7 +467,6 @@
     <string name="cache_location">Staðsetning</string>
     <string name="cache_coordinates">Staðsetningarhnit</string>
     <string name="cache_coordinates_original">Upphafleg staðsetningarhnit</string>
-    <string name="cache_spoiler_images_title">Spillandi myndir</string>
     <string name="cache_log_types">Færslutegundir</string>
     <string name="cache_coordinates_no">Þetta cache hefur engin staðsetningarhnit.</string>
     <string name="cache_clear_history">Hreinsa sögu</string>

@@ -1241,7 +1241,7 @@
     <string name="cache_location">Sted</string>
     <string name="cache_coordinates">Koordinater</string>
     <string name="cache_coordinates_original">Opprinnelige koordinater</string>
-    <string name="cache_spoiler_images_title">Spoiler-bilder</string>
+    <string name="cache_spoiler_images_title">Bilder</string>
     <string name="cache_log_types">Loggtyper</string>
     <string name="cache_coordinates_no">Denne cacher har ingen koordinater.</string>
     <string name="cache_clear_history">Slett historikk</string>

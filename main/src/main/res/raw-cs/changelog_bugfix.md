@@ -1,8 +1,13 @@
 ##
+- Oprava: Mapy Google: při klepnutí na ovládací prvek zoomu/kompasovou růžici, pod kterou se nachází keška/trasový bod, se otevře vyskakovací okno kešky/trasového bodu
+- Oprava: Chyba při přidávání kešek do seznamu záložek a jejich odstraňování z nich
+- Oprava: Chyba při stahování seznamů záložek
+
+##
 - Oprava: Rozšíření sloupce s popisem logu v režimu na šířku
 - Oprava: Zřetelnější hlášení o chybě formátu obrázku
 - Oprava: Trasové body vytvořené uživatelem se nezobrazují na mapě OSM
-- Fix: Multiple navigation lines on Google Maps map
+- Oprava: Více navigačních linek na mapě Mapy Google
 
 ##
 - Oprava: Přeskočení některých uživatelsky vytvořených trasových bodů při importu GPX

@@ -1,4 +1,4 @@
-### Map
+### Mapa
 - Nowość: źródło mapy OSM osm.paws.cz
 - Nowość: Włączenie czytania plików GPX z serwisu flopp.net jako śladów
 - Poprawka: Brak symbolu prowadzenia po 'dołącz do trasy'

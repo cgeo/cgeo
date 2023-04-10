@@ -1,11 +1,16 @@
 ##
+- Oplossing: Google Maps: cache/waypoint popup opent bij het tikken van zoom control/kompas met cache/waypoint eronder
+- Oplossing: Fout bij het toevoegen van caches aan / verwijderen van caches uit bladwijzerlijsten
+- Oplossing: Fout bij het downloaden van bladwijzerlijsten
+
+##
 - Oplossing: Log beschrijvingskolom verbreden in liggende modus
 - Oplossing: Maak foutmelding bij afbeeldingsformaat duidelijker
 - Oplossing: Gebruikersgemaakte waypoints worden niet weergegeven op OSM kaart
-- Fix: Multiple navigation lines on Google Maps map
+- Oplossing: Meerdere navigatielijnen op Google Maps kaart
 
 ##
-- Fix: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
+- Oplossing: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
 - Oplossing: Lijst met uitgebreide filters niet vertaald wanneer taal is ingesteld op niet-standaard binnen c:geo
 - Oplossing: Downloaden/bijwerken van routing tegels of kaarten die niet meer mogelijk zijn op oudere apparaten
 - Oplossing: locatienaam weergegeven in kompas in plaats van coördinaten
