@@ -23,7 +23,6 @@ import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
-import android.graphics.Bitmap;
 import android.location.Location;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -86,8 +85,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private final GoogleMapView mapView;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
-
-    private static Bitmap locationIcon;
 
     private Viewport lastViewport = null;
 

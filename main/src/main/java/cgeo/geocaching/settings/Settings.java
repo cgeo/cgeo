@@ -1875,10 +1875,6 @@ public class Settings {
         return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }
 
-    private static void storePhoneModelAndSdk() {
-        putString(R.string.pref_phone_model_and_sdk, PHONE_MODEL_AND_SDK);
-    }
-
     public static String getLastCacheLog() {
         return getString(R.string.pref_last_cache_log, StringUtils.EMPTY);
     }

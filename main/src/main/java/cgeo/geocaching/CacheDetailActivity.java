@@ -1274,7 +1274,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
-            final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
             final ArrayList<String> orderedAttributeNames = new ArrayList<>();
             final StringBuilder attributesText = new StringBuilder();
