@@ -81,8 +81,8 @@ public class IndividualRouteLayer implements ILayer {
     }
 
     @Override
-    public boolean handleTap(Context context, Geopoint tapped) {
-        Set<String> items = geoItemLayer.getTouched(tapped);
+    public boolean handleTap(final Context context, final Geopoint tapped) {
+        final Set<String> items = geoItemLayer.getTouched(tapped);
         if (items.size() <= 2) { // route line + coords marker
             for (String item : items) {
                 if (!KEY_INDIVIDUAL_ROUTE.equals(item)) {

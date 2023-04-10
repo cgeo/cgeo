@@ -27,7 +27,13 @@ public class PositionLayer implements ILayer {
     private final GeoItemLayer<String> positionLayer = new GeoItemLayer<>("position");
     private final GeoItemLayer<String> accuracyLayer = new GeoItemLayer<>("accuracy");
 
-    private final Bitmap marker = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
+    private static final String KEY_POSITION = "positionMarker";
+    private static final String KEY_ACCURACY = "accuracy";
+    private static final String KEY_LONG_TAP = "longtapmarker";
+
+
+    private final Bitmap markerPosition = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
+    private final Bitmap markerLongTap = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.map_pin, null));
 
     private final GeoStyle accuracyStyle = GeoStyle.builder()
             .setStrokeWidth(1.0f)
@@ -45,13 +51,24 @@ public class PositionLayer implements ILayer {
             if (!positionAndHeading.equals(lastPos)) {
                 lastPos = positionAndHeading;
 
-                accuracyLayer.put("accuracy", GeoPrimitive.createCircle(new Geopoint(positionAndHeading.first),
+                accuracyLayer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(positionAndHeading.first),
                         positionAndHeading.first.getAccuracy() / 1000.0f, accuracyStyle));
 
-                positionLayer.put("positionMarker",
+                positionLayer.put(KEY_POSITION,
                         GeoPrimitive.createMarker(new Geopoint(positionAndHeading.first), GeoIcon.builder()
                                 .setRotation(positionAndHeading.second)
-                                .setBitmap(marker).build()));
+                                .setBitmap(markerPosition).build()));
+            }
+        });
+
+        // todo: hmm, better move to different layer?
+        viewModel.getLongTapCoords().observe(activity, gp -> {
+            if (gp == null) {
+                positionLayer.remove(KEY_LONG_TAP);
+            } else {
+                positionLayer.put(KEY_LONG_TAP, GeoPrimitive.createMarker(gp, GeoIcon.builder()
+                        .setYAnchor(markerLongTap.getHeight())
+                        .setBitmap(markerLongTap).build()));
             }
         });
 

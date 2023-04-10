@@ -14,7 +14,6 @@ import cgeo.geocaching.utils.Event;
 import android.content.Context;
 import android.location.Location;
 
-import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,7 +26,10 @@ public class UnifiedMapViewModel extends ViewModel {
     private Tracks tracks = null;
     private final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
     private final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
-    private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>();
+    private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
+    private final MutableLiveData<Target> target = new MutableLiveData<>();
+
+    private final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
@@ -41,16 +43,17 @@ public class UnifiedMapViewModel extends ViewModel {
     /**
      * Current location and heading of the user
      */
-    @NonNull
     public MutableLiveData<Pair<Location, Float>> getPositionAndHeading() {
-
         return positionAndHeading;
+    }
+
+    public MutableLiveData<Geopoint> getLongTapCoords() {
+        return longTapCoords;
     }
 
     /**
      * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
      */
-    @NonNull
     public MutableLiveData<PositionHistory> getPositionHistory() {
         return positionHistory;
     }
@@ -61,8 +64,12 @@ public class UnifiedMapViewModel extends ViewModel {
         //send event to layer/rtutils
     }
 
-    private void setTarget(Geopoint geopoint, String s) {
-        //todo
+    public void setTarget(final Geopoint geopoint, final String geocode) {
+        target.setValue(new Target(geopoint, geocode));
+    }
+
+    public MutableLiveData<Target> getTarget() {
+        return target;
     }
 
     public void reloadIndividualRoute() {
@@ -92,8 +99,21 @@ public class UnifiedMapViewModel extends ViewModel {
     /**
      * Event based LiveData notifying about track updates
      */
-    @NonNull
     public MutableLiveData<Event<String>> getTrackUpdater() {
         return trackUpdater;
+    }
+
+
+    // ========================================================================
+    // Inner classes for wrapping data which strictly belongs together
+
+    public static class Target {
+        public final Geopoint geopoint;
+        public final String geocode;
+
+        public Target(final Geopoint geopoint, final String geocode) {
+            this.geopoint = geopoint;
+            this.geocode = geocode;
+        }
     }
 }

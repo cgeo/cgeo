@@ -334,11 +334,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         public boolean onGesture(final Gesture g, final MotionEvent e) {
             if (g instanceof Gesture.Tap) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                onTapCallback(p.latitudeE6, p.longitudeE6, false);
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), false);
                 return true;
             } else if (g instanceof Gesture.LongPress) {
                 final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-                onTapCallback(p.latitudeE6, p.longitudeE6, true);
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), true);
                 return true;
             }
             return false;

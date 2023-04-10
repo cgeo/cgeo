@@ -211,11 +211,15 @@ public class MapUtils {
                 })
                 .addItemClickListener(R.id.menu_add_to_route, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false);
-                    updateRouteTrackButtonVisibility.run();
+                    if (updateRouteTrackButtonVisibility != null) {
+                        updateRouteTrackButtonVisibility.run();
+                    }
                 })
                 .addItemClickListener(R.id.menu_add_to_route_start, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true);
-                    updateRouteTrackButtonVisibility.run();
+                    if (updateRouteTrackButtonVisibility != null) {
+                        updateRouteTrackButtonVisibility.run();
+                    }
                 })
                 .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
     }

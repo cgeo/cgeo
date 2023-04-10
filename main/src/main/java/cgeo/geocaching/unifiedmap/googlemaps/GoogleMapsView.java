@@ -230,7 +230,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
             lastTouchStart = System.currentTimeMillis();
         } else if (MotionEvent.ACTION_UP == event.getAction()) {
             final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
             lastTouchStart = -1;
         }
 
