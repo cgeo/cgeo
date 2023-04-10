@@ -188,11 +188,6 @@ public abstract class AbstractUnifiedMapView<T> {
         if (activity == null) {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
         }
-//        for (ILayer layer : layers) {
-//            if (layer.handleTap(activity, Geopoint.forE6(latitudeE6, longitudeE6))) {
-//                return;
-//            }
-//        }
         activity.onTap(latitudeE6, longitudeE6, isLongTap);
     }
 
@@ -222,8 +217,8 @@ public abstract class AbstractUnifiedMapView<T> {
         // default is empty
     }
 
-    private void forEveryLayer(Consumer<ILayer> consumer) {
-        UnifiedMapActivity activity = activityRef.get();
+    private void forEveryLayer(final Consumer<ILayer> consumer) {
+        final UnifiedMapActivity activity = activityRef.get();
         if (activity != null) {
             for (ILayer layer : activityRef.get().getLayers()) {
                 consumer.accept(layer);

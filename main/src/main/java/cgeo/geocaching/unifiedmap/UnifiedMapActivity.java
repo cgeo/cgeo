@@ -17,7 +17,6 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -29,6 +28,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
@@ -109,7 +109,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private MenuItem followMyLocationItem = null;
 
     private RouteTrackUtils routeTrackUtils = null;
-    private IndividualRoute individualRoute = null;
+
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
@@ -242,11 +242,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
-        routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
+        routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
 
-        viewModel.getTrackUpdater().observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
+        viewModel.getTrackUpdater().observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.getIndividualRoute().getValue()));
+        viewModel.getIndividualRoute().observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
 
-        individualRoute = null;
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
             mapType = new UnifiedMapType();
@@ -258,6 +258,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         layers.add(new PositionLayer(this));
         layers.add(new PositionHistoryLayer(this));
         layers.add(new TracksLayer(this));
+        layers.add(new IndividualRouteLayer(this));
 
         viewModel.init(routeTrackUtils);
 
@@ -268,7 +269,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // as soon as filtering gets integrated into UnifiedMapActivity
         FilterUtils.showActionBarSpacer(this);
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
+        Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.getIndividualRoute().notifyDataChanged(), this);
+        viewModel.reloadIndividualRoute();
+
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
 //        MapUtils.showMapOneTimeMessages(this, mapMode);
@@ -335,8 +338,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
             // routes / tracks popup
-            findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
+            findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.getIndividualRoute().getValue(), this::setTarget));
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.getIndividualRoute().getValue());
 
             // create geoitem layers
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
@@ -575,35 +578,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return false; // @todo
     }
 
-    private void reloadIndividualRoute() {
-        individualRoute.reloadRoute((route) -> {
-            if (tileProvider.getMap().positionLayer != null) {
-                tileProvider.getMap().positionLayer.updateIndividualRoute(route);
-                routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
-            }
-        });
-    }
-
-    private void clearIndividualRoute() {
-        individualRoute.clearRoute((route) -> {
-            tileProvider.getMap().positionLayer.updateIndividualRoute(route);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
-        });
-        showToast(res.getString(R.string.map_individual_route_cleared));
-    }
-
-    private void toggleRouteItem(final RouteItem item) {
-        if (item == null || StringUtils.isEmpty(item.getGeocode())) {
-            return;
-        }
-        if (individualRoute == null) {
-            individualRoute = new IndividualRoute(this::setTarget);
-        }
-        individualRoute.toggleItem(this, item, tileProvider.getMap().positionLayer);
-        // distanceView.showRouteDistance();
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute);
-    }
-
     // ========================================================================
     // Bottom navigation methods
 
@@ -742,7 +716,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_theme_options) {
             tileProvider.getMap().selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(individualRoute, this::setTarget);
+            routeTrackUtils.showPopup(viewModel.getIndividualRoute().getValue(), this::setTarget);
         } else if (id == R.id.menu_select_mapview) {
             // dynamically create submenu to reflect possible changes in map sources
             final View v = findViewById(R.id.menu_select_mapview);
@@ -795,6 +769,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Map tap handling
 
     public void onTap(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
+        for (ILayer layer : layers) {
+            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6))) {
+                return;
+            }
+        }
 
         // numbers of cache markers fitting into width/height
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -860,7 +839,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (isLongTap) {
             // toggle route item
             if (Settings.isLongTapOnMapActivated()) {
-                toggleRouteItem(item);
+                viewModel.toggleRouteItem(this, item);
             }
         } else {
             // open popup for element
@@ -922,17 +901,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         super.onResume();
         tileProvider.getMap().onResume();
         configMapChangeListener(true);
-        resumeRoute(false);
 //        MapUtils.updateFilterBar(this, mapOptions.filterContext);
-    }
-
-    private void resumeRoute(final boolean force) {
-        if (null == individualRoute || force) {
-            individualRoute = new IndividualRoute(this::setTarget);
-            reloadIndividualRoute();
-        } else if (tileProvider.getMap().positionLayer != null) {
-            individualRoute.updateRoute((route) -> tileProvider.getMap().positionLayer.updateIndividualRoute(route));
-        }
     }
 
     @Override

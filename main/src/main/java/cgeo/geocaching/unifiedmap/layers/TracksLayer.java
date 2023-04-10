@@ -24,7 +24,7 @@ public class TracksLayer implements ILayer {
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
         viewModel.getTrackUpdater().observe(activity, event -> event.ifNotHandled((key -> {
-            Tracks.Track track = viewModel.getTracks().getTrack(key);
+            final Tracks.Track track = viewModel.getTracks().getTrack(key);
             if (track == null || track.getRoute().isHidden()) {
                 geoItemLayer.remove(key);
             } else {

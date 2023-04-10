@@ -1,8 +1,5 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointConverter;
-import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.MapLineUtils;
@@ -12,15 +9,9 @@ import android.view.View;
 
 import org.oscim.core.GeoPoint;
 import org.oscim.layers.vector.PathLayer;
-import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
 class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
-
-    private static final GeopointConverter<GeoPoint> GP_CONVERTER = new GeopointConverter<>(
-            gp -> new GeoPoint(gp.getLatitude(), gp.getLongitude()),
-            gp -> new Geopoint(gp.getLatitude(), gp.getLongitude())
-    );
 
     final Map map;
 
@@ -49,33 +40,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     protected void destroyLayer(final Map map) {
         map.layers().remove(navigationLayer);
         MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
-    }
-
-    // ========================================================================
-    // route / track handling
-
-    @Override
-    public void updateIndividualRoute(final IndividualRoute route) {
-        super.updateIndividualRoute(route, GP_CONVERTER::toListList);
-    }
-
-    // ========================================================================
-    // repaint methods
-
-    @Override
-    protected void repaintRouteAndTracks() {
-        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
-        repaintRouteAndTracksHelper((segment, color, width) -> {
-            if (segment.size() < 2) {
-                return; // no line can be drawn from a single point
-            }
-            final PathLayer segmentLayer = new PathLayer(map, Style.builder()
-                    .strokeWidth(MapLineUtils.getWidthFromRaw(width, true))
-                    .strokeColor(color)
-                    .build());
-            MAP_MAPSFORGE.addLayerToGroup(segmentLayer, LayerHelper.ZINDEX_TRACK_ROUTE);
-            segmentLayer.setPoints(segment);
-        });
     }
 
 }

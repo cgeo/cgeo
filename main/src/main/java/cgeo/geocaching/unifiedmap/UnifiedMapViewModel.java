@@ -1,12 +1,17 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
+import cgeo.geocaching.models.IndividualRoute;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ConstantLiveData;
 import cgeo.geocaching.utils.Event;
 
+import android.content.Context;
 import android.location.Location;
 
 import androidx.annotation.NonNull;
@@ -17,8 +22,10 @@ import androidx.lifecycle.ViewModel;
 public class UnifiedMapViewModel extends ViewModel {
 
     // ViewModels will survive config changes, no savedInstanceState is needed
+    // Don't hold an activity references inside the ViewModel!
 
     private Tracks tracks = null;
+    private final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
     private final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
     private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>();
     private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
@@ -54,8 +61,28 @@ public class UnifiedMapViewModel extends ViewModel {
         //send event to layer/rtutils
     }
 
+    private void setTarget(Geopoint geopoint, String s) {
+        //todo
+    }
+
+    public void reloadIndividualRoute() {
+        individualRoute.getValue().reloadRoute(route -> individualRoute.notifyDataChanged());
+    }
+
+    public void clearIndividualRoute() {
+        individualRoute.getValue().clearRoute(route -> individualRoute.notifyDataChanged());
+    }
+
+    public void toggleRouteItem(final Context context, final RouteItem item) {
+        individualRoute.getValue().toggleItem(context, item, route -> individualRoute.notifyDataChanged());
+    }
+
     public Tracks getTracks() {
         return tracks;
+    }
+
+    public ConstantLiveData<IndividualRoute> getIndividualRoute() {
+        return individualRoute;
     }
 
     public void init(final RouteTrackUtils routeTrackUtils) {
