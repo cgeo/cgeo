@@ -62,7 +62,6 @@ public final class DirectWeaver extends ByteDataWriter {
             nodes[n] = node;
         }
 
-        final int netdatasize = bc.decodeNoisyNumber(10); // (not needed for direct weaving)
         ab = dataBuffers.bbuf1;
         aboffset = 0;
 

@@ -95,7 +95,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     //current Theme style menu settings
     private XmlRenderThemeStyleMenu themeStyleMenu;
-    private String prefThemeOptionMapStyle = "";
     private String prefThemeStyleKey = "";
 
     //the last used Zip Resource Provider is cached.
@@ -316,7 +315,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     @Override
     public Set<String> getCategories(final XmlRenderThemeStyleMenu menu) {
         themeStyleMenu = menu;
-        prefThemeOptionMapStyle = menu.getId();
         final String id = this.sharedPreferences.getString(themeStyleMenu.getId(), themeStyleMenu.getDefaultValue());
         prefThemeStyleKey = menu.getId() + "-" + id;
         final XmlRenderThemeStyleLayer baseLayer = themeStyleMenu.getLayer(id);
