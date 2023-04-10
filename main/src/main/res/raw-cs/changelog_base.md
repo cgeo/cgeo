@@ -9,7 +9,7 @@
 - Novinka: Nastavení šířky řádku na stopu
 - Novinka: Skrytí akčního panelu mapy na vyžádání (klepnutím do prázdného místa na mapě)
 - Změna: Přesunutí tlačítek rychlého nastavení doleva v režimu na šířku, aby se získalo více místa na výšku
-- New: Visualize coords-only-points of individual route
+- Novinka: Vizualizace pouze souřadnicových bodů jednotlivých tras
 
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
