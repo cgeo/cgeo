@@ -9,21 +9,21 @@
 - 신규: 트랙당 선폭 설정
 - 신규: 요청 시 지도의 작업 표시줄 숨기기(지도의 빈 공간 탭)
 - 변경: 더 많은 세로 공간을 확보하기 위해 가로 모드에서 빠른 설정 버튼을 왼쪽으로 이동
-- New: Visualize coords-only-points of individual route
+- 신규: 개별 경로의 좌표 전용 지점 시각화
 
 ### 캐시 상세정보
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- 변경: send2cgeo를 통해 가져올 때 캐시를 강제로 다시 다운로드
+- 변경: geocaching.com 캐시에 대해 "선택되지 않은" 크기와 "기타" 크기를 구분합니다. (2013년 이전의 일부 캐시에 대해 다른 필터링을 제공할 수 있음)
+- 수정: "완전한 설명 렌더링" 버튼을 사용할 때 스크롤 위치 유지
 
 ### 일반
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
-- New: Add last logs smiley row to configurable info items
+- 수정: PQ 목록에서 "모두 표시" 필터 설정으로만 표시되는 미리보기 버튼
+- 신규: Cruiser를 내비게이션 앱으로 추가(Cruiser 3.0.9 이상 필요)
+- 신규: 링크에서 geocaching.com 북마크 목록 가져오기
+- 신규: 최근 본 캐시를 목록으로 열기 허용
+- 신규: 이제 빠른 실행 버튼을 정렬할 수 있습니다.
+- 신규: 추적 아이템 네임스페이스 충돌에 대한 해결 방법(비활성화된 GeoKrety 커넥터에서 작동)
+- 신규: 캐시 목록 정보 항목 구성 가능
+- 신규: 최근에 본 캐시 지우기
+- 신규: 빠른 실행 옵션에 '최근 본 캐시' 추가
+- 신규: 구성 가능한 정보 항목에 마지막 로그 스마일리 추가
