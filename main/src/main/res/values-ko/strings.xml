@@ -694,6 +694,12 @@
     <string name="settings_summary_offlinedata">오프라인 사용을 위해 저장 될 데이터, GPX 파일의 저장 위치 및 폴더를 구성하세요.</string>
     <string name="settings_title_logging">로그하기</string>
     <string name="settings_summary_logging">서명 및 로그 옵션 설정하기</string>
+    <string name="settings_title_map_sources">지도 소스</string>
+    <string name="settings_summary_map_sources">지도 소스 및 오프라인 지도 설정을 설정합니다.</string>
+    <string name="settings_title_map_content_behavior">지도 콘텐츠 &amp; 행동</string>
+    <string name="settings_summary_map_content_behavior">지도 및 상호 작용 옵션에 표시할 정보를 구성합니다.</string>
+    <string name="settings_title_map_colors">지도 색상 사용자 정의</string>
+    <string name="settings_summary_map_colors">지도에 그려진 것의 색상을 설정합니다.</string>
     <string name="settings_title_map">지도</string>
     <string name="settings_summary_map">지도 종류, 오프라인 지도 설정 및 기본지도 등 설정하기</string>
     <string name="settings_title_map_data">지도 데이터</string>
@@ -842,12 +848,14 @@
     <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
     <string name="init_units">영미식 단위 사용하기</string>
     <string name="init_summary_units">십진 단위 대신 영미식 단위를 사용합니다.</string>
+    <string name="init_cachelists">캐시 목록</string>
     <string name="init_log_offline">오프라인 로그하기</string>
     <string name="init_summary_log_offline">오프라인 로그를 활성화합니다.(로그할 때, 온라인 로그 화면이 표시되지 않고, 로그가 전송되지 않습니다)</string>
     <string name="init_choose_list">목록 물어보기</string>
     <string name="init_summary_choose_list">캐시를 저장할 때 어느 목록에 저장할지 물어봅니다.</string>
     <string name="init_list_initial_load_limit">목록 부하 제한</string>
     <string name="init_summary_list_initial_load_limit">저장된 목록을 표시 할 때 처음에 데이터베이스에서 로드할 최대 캐시 수입니다. \'무제한\'으로 0을 선택하십시오.</string>
+    <string name="init_title_cacheListInfo1">목록 정보 선 구성</string>
     <string name="init_summary_cacheListInfo">캐시 목록의 각 캐시에 대해 표시할 추가 정보를 선택합니다.</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
@@ -862,6 +870,7 @@
     <string name="cacheListInfoItem_Lists">기타 목록</string>
     <string name="cacheListInfoItem_Jasmer">자스머</string>
     <string name="cacheListInfoItem_EventDate">이벤트 날짜</string>
+    <string name="newline">새로운 줄</string>
     <string name="active_elements">활성 부분</string>
     <string name="disabled_elements">비활성화 부분</string>
     <!-- app theme -->
@@ -1047,6 +1056,8 @@
     <string name="feature_search_finder">찾은분으로 검색</string>
     <string name="feature_favorite">호감캐시로 추가중…</string>
     <string name="feature_voting">캐시 투표하기</string>
+    <string name="init_appearance_general">일반 설정</string>
+    <string name="init_maplines_title">지도 색상 사용자 정의</string>
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
