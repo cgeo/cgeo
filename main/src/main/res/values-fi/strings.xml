@@ -867,7 +867,6 @@
     <string name="cacheListInfoItem_MemberState">Premium-tila</string>
     <string name="cacheListInfoItem_Size">Koko</string>
     <string name="cacheListInfoItem_Lists">Muut listat</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
     <string name="cacheListInfoItem_EventDate">Tapahtuman päivämäärä</string>
     <string name="active_elements">Aktiiviset elementit</string>
     <string name="disabled_elements">Ei-aktiiviset elementit</string>
