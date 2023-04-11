@@ -264,7 +264,7 @@ public final class Formatter {
                         infos.add(new SpannableString(formatShortDateIncludingWeekday(hiddenDate.getTime())));
                     }
                 }
-            } else if (item == CacheListInfoItem.VALUES.JASMER.id) {
+            } else if (item == CacheListInfoItem.VALUES.HIDDEN_MONTH.id) {
                 final Date hiddenDate = cache.getHiddenDate();
                 if (hiddenDate != null) {
                     infos.add(new SpannableString(formatDateYYYYMM(hiddenDate.getTime())));
