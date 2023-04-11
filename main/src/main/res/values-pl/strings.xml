@@ -886,7 +886,7 @@
     <string name="cacheListInfoItem_MemberState">Status Premium</string>
     <string name="cacheListInfoItem_Size">Rozmiar</string>
     <string name="cacheListInfoItem_Lists">Inne listy</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_HiddenMonth">Miesiąc ukrycia</string>
     <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
     <string name="newline">Nowa linia</string>
     <string name="active_elements">Aktywne elementy</string>
