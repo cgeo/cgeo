@@ -7,6 +7,15 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.04.11 Bugfix Release
+
+### General
+- Fix: Error on downloading bookmark lists
+- Fix: Error on adding caches to / removing caches from bookmark lists
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.03.25 Bugfix Release
 
 ### General
