@@ -41,9 +41,9 @@ public class RouteOptimizationHelper {
         private final AtomicInteger initialLength = new AtomicInteger(Integer.MAX_VALUE);
         private final int[] best;
 
-        TSPDialog(final Context context, final ExecutorService executor, final int routeSize, final Action1<ArrayList<RouteItem>> updateRoute) {
+        TSPDialog(final Context context, final ExecutorService executor, final Action1<ArrayList<RouteItem>> updateRoute) {
             super(context, TextParam.id(R.string.route_optimization));
-            best = new int[routeSize + 1];
+            best = new int[routeSize];
 
             setButton(BUTTON_NEGATIVE, TextParam.id(R.string.cancel), (dialogInterface, i) -> {
                 executor.shutdownNow();
@@ -87,7 +87,7 @@ public class RouteOptimizationHelper {
             if (length < this.length.get()) {
                 this.length.set(length);
                 synchronized (best) {
-                    System.arraycopy(route, 0, best, 0, routeSize + 1);
+                    System.arraycopy(route, 0, best, 0, routeSize);
                 }
                 postAdditionalInfo(TextParam.text(String.format(dialog.getContext().getString(R.string.initial_route_length), initialLength.get())
                         + (length != initialLength.get() ? "\n" + String.format(dialog.getContext().getString(R.string.optimized_route_length), length) : ""))
@@ -102,7 +102,7 @@ public class RouteOptimizationHelper {
     }
 
     public RouteOptimizationHelper(final ArrayList<RouteItem> route) {
-        initialRoute = route; //.subList(0, 14);
+        initialRoute = route;
         routeSize = initialRoute.size();
         distanceMatrix = new int[routeSize][routeSize];
         for (int i = 0; i < routeSize; i++) {
@@ -120,7 +120,7 @@ public class RouteOptimizationHelper {
 
         SimpleDialog.of((Activity) context).setTitle(TextParam.id(R.string.route_optimization)).setMessage(TextParam.id(R.string.route_optimization_info)).confirm((d, which) -> {
             final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-            final TSPDialog dialog = new TSPDialog(context, executor, routeSize, updateRoute);
+            final TSPDialog dialog = new TSPDialog(context, executor, updateRoute);
             dialog.show();
 
             dialog.setMessage(TextParam.id(R.string.generating_distance_matrix));
@@ -128,7 +128,7 @@ public class RouteOptimizationHelper {
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
                 generateDistanceMatrix(dialog, executor);
             }, () -> {
-                final int[] best = new int[routeSize + 1];
+                final int[] best = new int[routeSize];
                 initBest(dialog, best, true);
                 dialog.foundNewRoute(best);
                 dialog.setTypeIndeterminate();
@@ -213,40 +213,40 @@ public class RouteOptimizationHelper {
 
     /** TSP calculation using hill climbing */
     private void hillClimbing(final TSPDialog dialog) {
-        final int[] best = new int[routeSize + 1];
+        final int[] best = new int[routeSize];
         int bestFitness = initBest(dialog, best, false);
         int[] savedState;
         for (int i = 0; i < 15000; i++) {
-            savedState = new int[routeSize + 1];
-            System.arraycopy(best, 0, savedState, 0, routeSize + 1);
+            savedState = new int[routeSize];
+            System.arraycopy(best, 0, savedState, 0, routeSize);
             swapRandomPoints(best);
             final int currentFitness = - calculateRouteLength(best);
             if (currentFitness > bestFitness) {
                 bestFitness = currentFitness;
                 dialog.foundNewRoute(best);
             } else {
-                System.arraycopy(savedState, 0, best, 0, routeSize + 1);
+                System.arraycopy(savedState, 0, best, 0, routeSize);
             }
         }
     }
 
     /** TSP calculation using simulated annealing */
     private void simulatedAnnealing(final TSPDialog dialog) {
-        final int[] best = new int[routeSize + 1];
+        final int[] best = new int[routeSize];
         int bestFitness = initBest(dialog, best, false);
         int[] savedState;
         final double epsilon = 0.01;
         double temperature = 1538.0;
         while (temperature > epsilon) {
-            savedState = new int[routeSize + 1];
-            System.arraycopy(best, 0, savedState, 0, routeSize + 1);
+            savedState = new int[routeSize];
+            System.arraycopy(best, 0, savedState, 0, routeSize);
             swapRandomPoints(best);
             final int currentFitness = - calculateRouteLength(best);
             if (currentFitness > bestFitness || (new Random().nextDouble() < Math.exp((currentFitness - bestFitness) / temperature))) {
                 bestFitness = currentFitness;
                 dialog.foundNewRoute(best);
             } else {
-                System.arraycopy(savedState, 0, best, 0, routeSize + 1);
+                System.arraycopy(savedState, 0, best, 0, routeSize);
             }
             temperature -= epsilon;
         }
@@ -256,8 +256,8 @@ public class RouteOptimizationHelper {
     @SuppressWarnings("checkstyle:FinalParameters")
     private void swapRandomPoints(int[] route) {
         while (true) {
-            final int posA = rand(1, routeSize - 1);
-            final int posB = rand(1, routeSize - 1);
+            final int posA = rand(1, routeSize - 2);
+            final int posB = rand(1, routeSize - 2);
             if (posA != posB) {
                 final int temp = route[posA];
                 route[posA] = route[posB];
@@ -274,10 +274,9 @@ public class RouteOptimizationHelper {
             for (int i = 0; i < routeSize; i++) {
                 best[i] = i;
             }
-            best[routeSize] = 0;
         } else {
             final int[] temp = dialog.getRoute();
-            System.arraycopy(temp, 0, best, 0, routeSize + 1);
+            System.arraycopy(temp, 0, best, 0, routeSize);
         }
         return - calculateRouteLength(best);
     }
