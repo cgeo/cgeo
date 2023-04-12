@@ -868,6 +868,7 @@
     <string name="cacheListInfoItem_MemberState">프리미엄 상태</string>
     <string name="cacheListInfoItem_Size">크기</string>
     <string name="cacheListInfoItem_Lists">기타 목록</string>
+    <string name="cacheListInfoItem_HiddenMonth">숨겨진 달</string>
     <string name="cacheListInfoItem_EventDate">이벤트 날짜</string>
     <string name="newline">새로운 줄</string>
     <string name="active_elements">활성 부분</string>
