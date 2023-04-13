@@ -85,6 +85,7 @@
 
     <style name="actionBarActionOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/three_dot_vertical</item>
+        <item name="tint">@color/colorTextActionBar</item>
     </style>
 
     <style name="tool_bar" parent="actionBarStyle">
