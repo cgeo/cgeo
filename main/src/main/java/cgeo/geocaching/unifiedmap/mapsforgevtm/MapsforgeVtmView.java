@@ -201,9 +201,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     @Override
     public void setCenter(final Geopoint geopoint) {
-        final MapPosition pos = mMap.getMapPosition();
-        pos.setPosition(geopoint.getLatitude(), geopoint.getLongitude());
-        mMap.setMapPosition(pos);
+        mMap.animator().animateTo(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
     }
 
     @Override
@@ -285,8 +283,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     }
 
     private void zoomInOut(final boolean zoomIn) {
-        final int zoom = getCurrentZoom();
-        setZoom(zoomIn ? zoom + 1 : zoom - 1);
+        mMap.animator().animateZoom(300, zoomIn ? 2 : 0.5, 0f, 0f);
     }
 
     @Override

@@ -569,7 +569,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // can be removed when removing CGeoMap and NewMap, routeTrackUtils need to be adapted then
     @SuppressWarnings("unused")
     private void centerMap(final double latitude, final double longitude, final Viewport viewport) {
-        centerMap(new Geopoint(latitude, longitude));
+        centerMap(new Geopoint(latitude, longitude)); // todo consider viewport
     }
 
     private boolean isTargetSet() {
