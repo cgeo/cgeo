@@ -2,14 +2,8 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Action3;
-import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.location.Location;
@@ -18,7 +12,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.oscim.core.GeoPoint;
@@ -34,7 +27,7 @@ import org.oscim.core.GeoPoint;
  *
  * T is the type the map expects its coordinates in (LatLng for Google Maps, GeoPoint for Mapsforge)
  */
-public abstract class AbstractPositionLayer<T> implements IndividualRoute.UpdateIndividualRoute {
+public abstract class AbstractPositionLayer<T> {
 
     protected Location currentLocation = null;
     protected float currentHeading = 0.0f;
@@ -47,17 +40,6 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
     protected float individualRouteDistance = 0.0f;
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
     public final UnifiedTargetAndDistancesHandler mapDistanceDrawer;
-
-    // routes & tracks
-    private static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
-    private final HashMap<String, CachedRoute> cache = new HashMap<>();
-
-    private class CachedRoute {
-        private boolean isHidden = false;
-        private List<List<T>> track = null;
-        private int color;
-        private int width;
-    }
 
     protected AbstractPositionLayer(final View root, final Func2<Double, Double, T> createNewPoint) {
         mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(root);
@@ -76,60 +58,14 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
         repaintDestinationHelper(null);
     }
 
-    // ========================================================================
-    // route / track handling
-
-    private <K extends IGeoItemSupplier> void updateRoute(final String key, final K track, final int color, final int width, final Func1<K, List<List<T>>> getAllPoints) {
-        synchronized (cache) {
-            CachedRoute c = cache.get(key);
-            if (track == null) {
-                if (c != null) {
-                    cache.remove(key);
-                }
-            } else {
-                if (c == null) {
-                    c = new CachedRoute();
-                    cache.put(key, c);
-                }
-                c.track = getAllPoints.call(track);
-                c.isHidden = track.isHidden();
-                c.color = color;
-                c.width = width;
-            }
-        }
-        repaintRouteAndTracks();
-    }
-
-    public abstract void updateIndividualRoute(IndividualRoute route);
-
-    public abstract void updateTrack(String key, IGeoItemSupplier track, int color, int width);
-
-    public void updateIndividualRoute(final Route route, final Func1<Route, List<List<T>>> getAllPoints) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth(), getAllPoints);
-        repaintRouteAndTracks();
-        individualRouteDistance = route.getDistance();
-        mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
-    }
-
-    public void updateTrack(final String key, final IGeoItemSupplier track, final int color, final int width, final Func1<IGeoItemSupplier, List<List<T>>> getAllPoints) {
-        updateRoute(key, track, color, width, getAllPoints);
-        repaintRouteAndTracks();
-    }
 
     // ========================================================================
     // repaint methods
-
-    public void repaintRequired() {
-        repaintPosition();
-        repaintRouteAndTracks();
-    }
 
     protected void repaintPosition() { //TODO re-enable MapDistanceDrawer
         mapDistanceDrawer.drawDistance(showBothDistances, directDistance, routedDistance);
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
     }
-
-    protected abstract void repaintRouteAndTracks();
 
     private void repaintDestinationHelper(final @Nullable Action1<List<T>> drawSegment) {
         if (currentLocation != null && destination != null) {
@@ -148,20 +84,6 @@ public abstract class AbstractPositionLayer<T> implements IndividualRoute.Update
                 }
             }
             mapDistanceDrawer.drawDistance(showBothDistances, directDistance, routedDistance);
-        }
-    }
-
-    protected void repaintRouteAndTracksHelper(final Action3<List<T>, Integer, Integer> addSegment) {
-        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        synchronized (cache) {
-            for (CachedRoute c : cache.values()) {
-                // route hidden, no route or route too short?
-                if (!c.isHidden && c.track != null && c.track.size() > 0) {
-                    for (List<T> segment : c.track) {
-                        addSegment.call(segment, c.color, c.width);
-                    }
-                }
-            }
         }
     }
 }

@@ -21,13 +21,21 @@ public class Tracks {
 
     private final ArrayList<Track> data = new ArrayList<>();
 
-    private static class Track {
+    public static class Track {
         private final Trackfiles trackfile;
         private IGeoItemSupplier route;
 
         Track(final Trackfiles trackfile) {
             this.trackfile = trackfile;
             this.route = null;
+        }
+
+        public IGeoItemSupplier getRoute() {
+            return route;
+        }
+
+        public Trackfiles getTrackfile() {
+            return trackfile;
         }
     }
 
@@ -104,6 +112,15 @@ public class Tracks {
                 break;
             }
         }
+    }
+
+    public Track getTrack(@NonNull final String key) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                return track;
+            }
+        }
+        return null;
     }
 
     public String getDisplayname(@NonNull final String key) {

@@ -9,7 +9,7 @@ public interface ILayer {
 
     void destroy();
 
-    default boolean handleTap(Context context, Geopoint location) {
+    default boolean handleTap(Context context, Geopoint tapped) {
         return false;
     }
 }

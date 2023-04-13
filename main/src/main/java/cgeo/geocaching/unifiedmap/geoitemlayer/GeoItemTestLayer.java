@@ -62,12 +62,12 @@ public class GeoItemTestLayer implements ILayer {
     }
 
     @Override
-    public boolean handleTap(final Context ctx, final Geopoint gp) {
+    public boolean handleTap(final Context ctx, final Geopoint tapped) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
             return false;
         }
 
-        final Set<String> touched = testLayer.getTouched(gp);
+        final Set<String> touched = testLayer.getTouched(tapped);
         if (touched.isEmpty()) {
             return false;
         }
