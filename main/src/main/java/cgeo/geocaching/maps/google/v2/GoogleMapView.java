@@ -25,7 +25,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
@@ -125,7 +125,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
         googleMap.setOnMapClickListener(latLng -> {
             if (activityRef.get() != null) {
-                adaptLayoutForActionbar(FilterUtils.toggleActionBar(activityRef.get()));
+                adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(activityRef.get()));
             }
         });
         googleMap.setOnMarkerClickListener(marker -> {

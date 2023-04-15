@@ -15,6 +15,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.HideActionBarUtils;
 
 import android.app.Activity;
 import android.view.MenuItem;
@@ -66,8 +67,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
-        activity.setStableLayout();
-        activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
+        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_mapsforgevtm, true);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         super.mMapView = mMapView;

@@ -38,7 +38,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
-import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -264,10 +264,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         changeMapSource(Settings.getTileProvider());
 
-        // temporary workaround to show spacer; will be replaced by
-        // FilterUtils.initializeFilterBar(this, this, true);
-        // as soon as filtering gets integrated into UnifiedMapActivity
-        FilterUtils.showActionBarSpacer(this);
+        // FilterUtils.initializeFilterBar(this, this);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.getIndividualRoute().notifyDataChanged(), this);
         viewModel.reloadIndividualRoute();
@@ -802,7 +799,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         .setOnDismissListener(d -> viewModel.getLongTapCoords().setValue(null))
                         .show();
             } else {
-                FilterUtils.toggleActionBar(this);
+                HideActionBarUtils.toggleActionBar(this);
             }
         } else if (result.size() == 1) {
             handleTap(result.get(0), isLongTap);

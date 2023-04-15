@@ -1,15 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -81,29 +78,10 @@ public class FilterUtils {
     /**
      * filterView must exist
      */
-    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity, final boolean showSpacer) {
+    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
         final View filterView = activity.findViewById(R.id.filter_bar);
         filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());
         filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
-        activity.findViewById(R.id.actionBarSpacer).setVisibility(showSpacer ? View.VISIBLE : View.GONE);
-    }
-
-    /** temporary helper until UnifiedMap uses initializeFilterBar */
-    @Deprecated
-    public static void showActionBarSpacer(@NonNull final Activity activity) {
-        activity.findViewById(R.id.actionBarSpacer).setVisibility(View.VISIBLE);
-    }
-
-    public static boolean toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
-        if (!Settings.getMapActionbarAutohide()) {
-            return true;
-        }
-        final boolean actionBarShowing = activity.toggleActionBar();
-        final View spacer = activity.findViewById(R.id.actionBarSpacer);
-        ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
-        return actionBarShowing;
     }
 
     public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
