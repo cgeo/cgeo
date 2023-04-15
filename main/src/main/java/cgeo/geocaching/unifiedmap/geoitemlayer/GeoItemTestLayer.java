@@ -128,6 +128,15 @@ public class GeoItemTestLayer implements ILayer {
                 staticPolygon, 10, 0, 0, 3, 0, 3, 1, 2, 1, 2, 2, 3, 2, 3, 3, 1, 3, 0, 2
         ), GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build()));
 
+
+        final Geopoint zLevelStuff = staticPolygon.project(180, 50);
+        final GeoPrimitive one = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
+        final GeoPrimitive two = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
+        final GeoPrimitive three = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
+
+        layer.put("zOne", one.buildUpon().setZLevel(0).build());
+        layer.put("zTwo", two.buildUpon().setZLevel(2).build());
+        layer.put("zThree", three.buildUpon().setZLevel(1).build());
     }
 
     private static GeoGroup testIconWithPoly(final Geopoint point, final int polyColor, final float xAnchor, final float yAnchor, final float angle) {

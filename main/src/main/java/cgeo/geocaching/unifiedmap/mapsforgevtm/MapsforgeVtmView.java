@@ -15,6 +15,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.HideActionBarUtils;
 
 import android.app.Activity;
@@ -23,8 +24,6 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
@@ -37,8 +36,8 @@ import org.oscim.event.GestureListener;
 import org.oscim.event.MotionEvent;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
-import org.oscim.layers.vector.VectorLayer;
-import org.oscim.map.Layers;
+import org.oscim.layers.tile.vector.OsmTileLayer;
+import org.oscim.layers.tile.vector.VectorTileLayer;
 import org.oscim.map.Map;
 import org.oscim.renderer.BitmapRenderer;
 import org.oscim.renderer.GLViewport;
@@ -57,10 +56,10 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     private MapView mMapView;
     private Map mMap;
+    private GroupedList<Layer> mMapLayers;
 
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
-    protected final HashMap<Integer, ArrayList<Layer>> layerGroupLayers = new HashMap<>(); // group index, layer
     protected Map.UpdateListener mapUpdateListener;
     protected MapsforgeThemeHelper themeHelper;
 
@@ -72,15 +71,12 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         mMapView = activity.findViewById(R.id.mapViewVTM);
         super.mMapView = mMapView;
         mMap = mMapView.map();
+        mMapLayers = new GroupedList<>(mMap.layers(), 4);
         setMapRotation(mapRotation);
         usesOwnBearingIndicator = false; // let UnifiedMap handle bearing indicator
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         themeHelper = new MapsforgeThemeHelper(activity);
-
-        // add all layer groups once only
-        addGroup(LayerHelper.ZINDEX_HISTORY);
-        addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
 
         onMapReadyTasks.run();
     }
@@ -93,7 +89,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
             for (Layer layer : layers) {
                 layer.setEnabled(false);
                 try {
-                    mMap.layers().remove(layer);
+                    mMapLayers.remove(layer);
                 } catch (IndexOutOfBoundsException ignore) {
                     // ignored
                 }
@@ -118,7 +114,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     @Override
     public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
-        return new MapsforgeVtmGeoItemLayer(mMap);
+        return new MapsforgeVtmGeoItemLayer(mMap, mMapLayers);
     }
 
     /**
@@ -126,7 +122,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
      */
     public synchronized TileLayer setBaseMap(final TileSource tileSource) {
         removeBaseMap();
-        baseMap = mMap.setBaseMap(tileSource);
+
+        final VectorTileLayer l = new OsmTileLayer(mMap);
+        l.setTileSource(tileSource);
+        addLayerToGroup(l, LayerHelper.ZINDEX_BASEMAP);
+        baseMap = l;
         return baseMap;
     }
 
@@ -135,49 +135,24 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
      */
     public synchronized void addLayer(final int index, final Layer layer) {
         layers.add(layer);
-
-        final Layers temp = mMap.layers();
-        if (temp.size() <= index) {
-            // fill gaps with empty dummy layers
-            for (int i = temp.size(); i <= index; i++) {
-                final VectorLayer emptyLayer = new VectorLayer(mMap);
-                emptyLayer.setEnabled(false);
-                temp.add(emptyLayer);
-            }
-        }
-        mMap.layers().set(index, layer);
+        mMapLayers.addToGroup(layer, index);
     }
 
     /**
-     * call next three methods for handling of layers in layer groups
+     * call next methods for handling of layers in layer groups
      */
 
-    public synchronized void addGroup(final int groupIndex) {
-        mMap.layers().addGroup(groupIndex);
-        layerGroupLayers.put(groupIndex, new ArrayList<>());
-    }
-
     public synchronized void addLayerToGroup(final Layer layer, final int groupIndex) {
-        Objects.requireNonNull(layerGroupLayers.get(groupIndex)).add(layer);
-        mMap.layers().add(layer, groupIndex);
+        mMapLayers.addToGroup(layer, groupIndex);
     }
 
     public synchronized void clearGroup(final int groupIndex) {
-        final ArrayList<Layer> group = layerGroupLayers.get(groupIndex);
-        assert group != null;
-        for (Layer layer : group) {
-            mMap.layers().remove(layer);
-        }
-        group.clear();
+        mMapLayers.removeGroup(groupIndex);
     }
 
     private void removeBaseMap() {
         if (baseMap != null) {
-            try {
-                mMap.layers().remove(LayerHelper.ZINDEX_BASEMAP);
-            } catch (IndexOutOfBoundsException ignore) {
-                // ignored
-            }
+            mMapLayers.removeGroup(LayerHelper.ZINDEX_BASEMAP);
         }
         baseMap = null;
     }
@@ -312,7 +287,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
             }
             return positionLayer;
         } else if (positionLayer != null) {
-            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
+            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMapLayers);
             positionLayer = null;
         }
         return null;
@@ -362,7 +337,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
         super.onResume();
         applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
         mMapView.onResume();
-        mMap.layers().add(new MapEventsReceiver(mMap));
+        mMapLayers.add(new MapEventsReceiver(mMap));
     }
 
     @Override

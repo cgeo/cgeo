@@ -5,6 +5,10 @@ import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.util.Pair;
+
+import java.util.Collection;
+
 /** Interface to be implemented by a map-specific provider of geoitem layers */
 public interface IProviderGeoItemLayer<C> {
 
@@ -40,7 +44,7 @@ public interface IProviderGeoItemLayer<C> {
      * Framework guarantees that this method is only called once and that after this call no other method
      * will be called. Framework will dispose all instances of this class after calling "destroy"
      */
-    void destroy();
+    void destroy(Collection<Pair<GeoPrimitive, C>> values);
 
     /** Provides a function which maps lat-lon-geopoints to actual screen pixel coordinates */
     ToScreenProjector getScreenCoordCalculator();

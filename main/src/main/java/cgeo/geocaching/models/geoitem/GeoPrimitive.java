@@ -26,16 +26,19 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     private final float radius;
     @Nullable private final GeoStyle style;
 
+    private final int zLevel;
+
     //lazy-calculated
     private Viewport viewport;
     private int hashCode = Integer.MIN_VALUE;
 
-    private GeoPrimitive(@Nullable final GeoItem.GeoType type, @NonNull final List<Geopoint> points, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style) {
+    private GeoPrimitive(@Nullable final GeoItem.GeoType type, @NonNull final List<Geopoint> points, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style, final int zLevel) {
         this.type = type == null || type == GeoType.GROUP ? GeoItem.GeoType.POLYLINE : type;
         this.points = Collections.unmodifiableList(points);
         this.icon = icon;
         this.radius = radius;
         this.style = style;
+        this.zLevel = Math.max(-1, zLevel);
     }
 
     @NonNull
@@ -61,6 +64,10 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     @Nullable
     public GeoStyle getStyle() {
         return style;
+    }
+
+    public int getZLevel() {
+        return zLevel;
     }
 
     @Nullable
@@ -216,6 +223,9 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         if (getIcon() != null) {
             sb.append(",icon[").append(getCenter()).append("]:").append(getIcon());
         }
+        if (zLevel >= 0) {
+            sb.append(",zLevel:").append(zLevel);
+        }
         return sb.toString();
     }
 
@@ -227,6 +237,8 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         private GeoIcon icon;
         private float radius;
         private GeoStyle style;
+
+        private int zLevel = -1;
 
         private Builder() {
             //no free instantiation
@@ -262,8 +274,13 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             return this;
         }
 
+        public Builder setZLevel(final int zLevel) {
+            this.zLevel = zLevel;
+            return this;
+        }
+
         public GeoPrimitive build() {
-            return new GeoPrimitive(type, points, icon, radius, style);
+            return new GeoPrimitive(type, points, icon, radius, style, zLevel);
         }
 
     }
@@ -279,6 +296,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         icon = in.readParcelable(GeoIcon.class.getClassLoader());
         radius = in.readFloat();
         style = in.readParcelable(GeoStyle.class.getClassLoader());
+        zLevel = Math.max(-1, in.readInt());
     }
 
     public static final Creator<GeoPrimitive> CREATOR = new Creator<GeoPrimitive>() {
@@ -305,6 +323,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         dest.writeParcelable(icon, flags);
         dest.writeFloat(radius);
         dest.writeParcelable(style, flags);
+        dest.writeInt(zLevel);
     }
 
 
