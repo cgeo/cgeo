@@ -83,6 +83,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -459,7 +460,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-        setContentView(R.layout.cacheslist_activity);
+        HideActionBarUtils.setContentView(this, R.layout.cacheslist_activity, false);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -480,7 +481,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        FilterUtils.initializeFilterBar(this, this, false);
+        FilterUtils.initializeFilterBar(this, this);
         updateFilterBar();
 
         if (type.canSwitch) {

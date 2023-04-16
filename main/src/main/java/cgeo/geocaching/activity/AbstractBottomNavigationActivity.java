@@ -260,25 +260,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         return true;
     }
 
-    /** prerequisite for toggleActionBar without moving content around; call it before setContentView() */
-    public void setStableLayout() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-    }
-
-    public boolean toggleActionBar() {
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar == null) {
-            return false;
-        }
-        if (actionBar.isShowing()) {
-            actionBar.hide();
-            return false;
-        } else {
-            actionBar.show();
-            return true;
-        }
-    }
-
     private final class ConnectivityChangeReceiver extends BroadcastReceiver {
         private boolean isConnected = Network.isConnected();
 

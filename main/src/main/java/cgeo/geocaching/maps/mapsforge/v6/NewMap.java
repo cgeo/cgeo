@@ -74,6 +74,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
@@ -265,8 +266,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         ActivityMixin.setTheme(this);
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        setStableLayout();
-        setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
+        HideActionBarUtils.setContentView(this, MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot(), true);
 
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
@@ -344,7 +344,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
 
-        FilterUtils.initializeFilterBar(this, this, true);
+        FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true), this);
@@ -1305,7 +1305,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty() && !longPressMode) {
-            FilterUtils.toggleActionBar(this);
+            HideActionBarUtils.toggleActionBar(this);
         }
         if (items.isEmpty()) {
             return;
