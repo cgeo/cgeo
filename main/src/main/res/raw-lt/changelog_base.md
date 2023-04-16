@@ -10,6 +10,7 @@
 - Naujiena: Slėpiama žemėlapio veiksmų juostą pagal poreikį (palietus tuščią vietą žemėlapyje)
 - Pakeitimas: Perkėlėme greitųjų nustatymų mygtukus į kairę gulsčiojo ekrano režimu, kad gautumėte daugiau vertikalios vietos
 - New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
 
 ### Slėptuvės detalės
 - Change: Force redownload of cache when importing via send2cgeo
