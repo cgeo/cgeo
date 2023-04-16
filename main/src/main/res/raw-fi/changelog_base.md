@@ -10,6 +10,7 @@
 - Uusi: Piilota kartan toimintapalkki vaadittaessa (napauta tyhjää tilaa kartalla)
 - Muutos: Siirrä pika-asetukset painikkeet vasemmalle vaakatilassa saadaksesi lisää pystytilaa
 - New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
 
 ### Kätkön tiedot
 - Change: Force redownload of cache when importing via send2cgeo
