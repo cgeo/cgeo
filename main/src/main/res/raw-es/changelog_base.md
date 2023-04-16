@@ -10,6 +10,7 @@
 - New: Hide map's action bar on demand (tap on empty space on map)
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 - New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
 
 ### Detalles del caché
 - Change: Force redownload of cache when importing via send2cgeo
