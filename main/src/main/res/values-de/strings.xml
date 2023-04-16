@@ -874,6 +874,7 @@
     <string name="cacheListInfoItem_MemberState">Premium-Status</string>
     <string name="cacheListInfoItem_Size">Größe</string>
     <string name="cacheListInfoItem_Lists">Andere Listen</string>
+    <string name="cacheListInfoItem_HiddenMonth">Versteckmonat</string>
     <string name="cacheListInfoItem_EventDate">Event-Datum</string>
     <string name="newline">Neue Zeile</string>
     <string name="active_elements">Aktive Elemente</string>
@@ -2237,6 +2238,7 @@
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <string name="route_optimization">Routenoptimierung</string>
+    <string name="route_optimization_info">Die Routenoptimierung ist eine experimentelle Funktion zur Längenoptimierung einer Route. Erster und letzter Punkt der Route sind fest, die anderen Punkte werden in einer optimierten Reihenfolge besucht.\n\nDa es aufgrund von Beschränkungen von Zeit und Rechenleistung auf mobilen Geräten nicht möglich ist, alle möglichen Lösungen zu ermitteln, werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne die Entfernungen zwischen allen Paaren der Route und versuche anschließend eine akzeptable Route zu finden. Dies ist möglicherweise nicht die kürzeste Route, daher kann Schritt zwei beliebig oft wiederholt werden.</string>
     <string name="initial_route_length">Ursprüngliche Routenlänge: %d</string>
     <string name="optimized_route_length">Optimierte Routenlänge: %d</string>
     <string name="route_optimization_out_of_bounds">Routenoptimierung funktioniert für Routen zwischen 3 und 100 Punkten</string>
