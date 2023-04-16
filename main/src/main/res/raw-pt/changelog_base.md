@@ -10,6 +10,7 @@
 - Novo: Ocultar barra de acção do mapa a pedido (tocar num espaço vazio no mapa)
 - Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
 - New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
 
 ### Detalhes da cache
 - Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
