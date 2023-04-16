@@ -77,19 +77,20 @@ public class PositionLayer extends Layer {
             arrowNative = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
             rotateArrow();
         }
-        if (arrow != null) {
+        final Bitmap localArrow = arrow;
+        if (localArrow != null) {
             final int left = centerX - widthArrowHalf;
             final int top = centerY - heightArrowHalf;
-            final int right = left + this.arrow.getWidth();
-            final int bottom = top + this.arrow.getHeight();
+            final int right = left + localArrow.getWidth();
+            final int bottom = top + localArrow.getHeight();
             final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);
             final Rectangle canvasRectangle = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
             if (!canvasRectangle.intersects(bitmapRectangle)) {
                 return;
             }
-            canvas.drawBitmap(arrow, left, top);
+            canvas.drawBitmap(localArrow, left, top);
         } else {
-            Log.d("PositionLayer.draw: arrow=null, arrowNative=" + arrowNative);
+            Log.d("PositionLayer.draw: localArrow=null, arrowNative=" + arrowNative);
         }
     }
 
