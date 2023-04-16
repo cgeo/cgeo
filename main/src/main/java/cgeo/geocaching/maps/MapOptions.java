@@ -110,7 +110,7 @@ public class MapOptions {
         intent.putExtra(Intents.EXTRA_LIVE_ENABLED, isLiveEnabled);
         intent.putExtra(Intents.EXTRA_STORED_ENABLED, isStoredEnabled);
         intent.putExtra(Intents.EXTRA_SEARCH, searchResult);
-        intent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        intent.putExtra(Intents.EXTRA_GEOCODE, mapState != null && StringUtils.isNotBlank(mapState.getTargetGeocode()) ? mapState.getTargetGeocode() : geocode);
         intent.putExtra(Intents.EXTRA_COORDS, coords);
         intent.putExtra(Intents.EXTRA_WPTTYPE, waypointType);
         intent.putExtra(Intents.EXTRA_MAPSTATE, mapState);

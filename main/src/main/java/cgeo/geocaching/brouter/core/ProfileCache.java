@@ -16,7 +16,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 public final class ProfileCache {
 
     private static long lastLookupTimestamp = 0;
-    private static ProfileCache[] apc = new ProfileCache[1];
+    private static ProfileCache[] apc = new ProfileCache[10];
     private static final boolean debug = Boolean.getBoolean("debugProfileCache");
     private BExpressionContextWay expctxWay;
     private BExpressionContextNode expctxNode;

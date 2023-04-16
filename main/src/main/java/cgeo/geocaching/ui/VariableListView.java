@@ -131,7 +131,7 @@ public class VariableListView extends LinearLayout {
             if (this.viewVariableFormulaText != null) {
                 final String currentText = this.viewVariableFormulaText.getText().toString();
                 if (!currentText.equals(variableState == null ? "" : variableState.getFormulaString())) {
-                    this.viewVariableFormulaText.setText(variableState == null ? "" : variableState.getFormulaString());
+                    this.viewVariableFormulaText.setText(variableState == null || StringUtils.isBlank(variableState.getFormulaString()) ? "" : variableState.getFormulaString());
                 }
                 if (listAdapter.currentFocusKeep && Objects.equals(listAdapter.currentFocusVar, this.varName)) {
                     // we come here if listview changed due to added view (due to filter being changed)

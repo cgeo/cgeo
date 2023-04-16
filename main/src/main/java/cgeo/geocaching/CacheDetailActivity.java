@@ -29,7 +29,6 @@ import cgeo.geocaching.contacts.IContactCardProvider;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
-import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
@@ -76,7 +75,6 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
@@ -175,6 +173,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -232,8 +232,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
-
-    protected ImagesList imagesList;
 
     private ImageGalleryView imageGallery;
     private int imageGalleryPos = -1;
@@ -480,10 +478,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
             menu.findItem(R.id.menu_waypoint_open_geochecker).setVisible(CheckerUtils.getCheckerUrl(cache) != null);
-        } else {
-            if (imagesList != null) {
-                imagesList.onCreateContextMenu(menu, view);
-            }
         }
     }
 
@@ -596,8 +590,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
-        } else if (imagesList == null || !imagesList.onContextItemSelected(item)) {
-            return onOptionsItemSelected(item);
         }
         return true;
     }
@@ -913,7 +905,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         setIsContentRefreshable(cache.supportsRefresh());
 
         // reset imagesList so Images view page will be redrawn
-        imagesList = null;
         imageGallery = null;
         setOrderedPages(getOrderedPages());
         reinitializeViewPager();
@@ -976,7 +967,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images),
         IMAGEGALLERY(R.string.cache_images),
         VARIABLES(R.string.cache_variables),
         ;
@@ -1284,7 +1274,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
-            final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
             final ArrayList<String> orderedAttributeNames = new ArrayList<>();
             final StringBuilder attributesText = new StringBuilder();
@@ -1618,15 +1607,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateALCBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = cache.getType() == CacheType.ADVLAB && StringUtils.isNotEmpty(cache.getUrl());
+            final boolean isLabListing = cache.getType() == CacheType.ADVLAB && StringUtils.isNotEmpty(cache.getUrl());
+            final boolean isEnabled = isLabListing || (cache.getType() == CacheType.MYSTERY && findAdvLabUrl(cache) != null);
             final Intent alc = ProcessUtils.getLaunchIntent(getString(R.string.package_alc));
             binding.alcBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-            binding.alcText.setText(alc != null ? R.string.cache_alc_start : R.string.cache_alc_install);
+            binding.alcText.setText(alc != null ? (isLabListing ? R.string.cache_alc_start : R.string.cache_alc_related_start) : R.string.cache_alc_install);
             if (isEnabled) {
+                final String advLabUrl = isLabListing ? cache.getUrl() : findAdvLabUrl(cache);
                 binding.sendToAlc.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
                     if (alc != null) {
-                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl()));
+                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(advLabUrl));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         activity.startActivity(intent);
                     } else {
@@ -1634,6 +1625,24 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
             }
+        }
+
+        @Nullable
+        /**
+         * Find links to Adventure Labs in Listing of a cache. Returns URL if exactly 1 link target is found, else null.
+         * 3 types of URLs possible: https://adventurelab.page.link/Cw3L, https://labs.geocaching.com/goto/Theater, https://labs.geocaching.com/goto/a4b45b7b-fa76-4387-a54f-045875ffee0c
+         */
+        private static String findAdvLabUrl(final Geocache cache) {
+            final Pattern patternAdvLabUrl = Pattern.compile("(https?://labs.geocaching.com/goto/[a-zA-Z0-9-_]{1,36}|https?://adventurelab.page.link/[a-zA-Z0-9]{4})");
+            final Matcher matcher = patternAdvLabUrl.matcher(cache.getShortDescription() + " " + cache.getDescription());
+            final Set<String> urls = new HashSet<>();
+            while (matcher.find()) {
+                urls.add(matcher.group(1));
+            }
+            if (urls.size() == 1) {
+                return urls.iterator().next();
+            }
+            return null;
         }
     }
 
@@ -1675,7 +1684,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.getRoot().setVisibility(View.VISIBLE);
 
             // load description
-            reloadDescription(this.getActivity(), cache, binding.description, binding.descriptionRenderFully, true);
+            reloadDescription(this.getActivity(), cache, true, 0);
 
             //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
@@ -1725,7 +1734,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.personalnoteVarsOutOfSync.setOnClickListener(v -> {
                 handleVariableOutOfSync();
             });
-            activity.adjustPersonalNoteVarsOutOfSyncButton();
+            activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
@@ -1802,7 +1811,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             //register for changes of variableslist -> state of variable sync may change
-            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton());
+            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
         }
 
@@ -1823,14 +1832,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final List<ImmutableTriple<String, String, String>> items = CollectionStream.of(diff.entrySet())
                     .map(e -> new ImmutableTriple<>(e.getKey(), e.getValue().first, e.getValue().second)).toList();
             TextUtils.sortListLocaleAware(items, i -> i.left);
-            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_dialog_title))
+                    .setMessage(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
                     .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, sel -> {
                            final Map<String, String> toChange = new HashMap<>();
                            for (ImmutableTriple<String, String, String> e : sel) {
                                toChange.put(e.left, e.middle);
                            }
                            cache.changeVariables(toChange);
-                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton();
+                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
                     });
         }
 
@@ -1862,19 +1872,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
-        private static void reloadDescription(final Activity activity, final Geocache cache, final TextView descriptionView, final View descriptionFullLoadButton, final boolean restrictLength) {
-            descriptionFullLoadButton.setVisibility(View.GONE);
-            descriptionView.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
-            descriptionView.setVisibility(View.VISIBLE);
+        private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll) {
+            binding.descriptionRenderFully.setVisibility(View.GONE);
+            binding.description.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            binding.description.setVisibility(View.VISIBLE);
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
-                createDescriptionContent(activity, cache, restrictLength, descriptionView), p -> {
-                    displayDescription(activity, cache, p.first, descriptionView);
-                    if (p.second) {
-                        descriptionFullLoadButton.setVisibility(View.VISIBLE);
-                        descriptionFullLoadButton.setOnClickListener(v ->
-                                reloadDescription(activity, cache, descriptionView, descriptionFullLoadButton, false));
+                createDescriptionContent(activity, cache, restrictLength, binding.description), p -> {
+                    displayDescription(activity, cache, p.first, binding.description);
+                    // we need to use post, so that the textview is layouted before scrolling gets called
+                    if (initialScroll != 0) {
+                        binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                     }
-                }
+                    if (p.second) {
+                            binding.descriptionRenderFully.setVisibility(View.VISIBLE);
+                            binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY()));
+                        }
+                    }
             );
         }
 
@@ -1956,14 +1969,28 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             .append(TextParam.id(R.string.cache_description_render_restricted_warning, descriptionFullLength, DESCRIPTION_MAX_SAFE_LENGTH * 100 / descriptionFullLength).getText(null), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                return new Pair<>(description, textTooLong);
+                return new Pair<>(description, textTooLong && restrictLength);
             } catch (final RuntimeException re) {
                 return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
             }
         }
 
         private static void handleImageClick(final Activity activity, final Geocache cache, final Spannable spannable) {
-            final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
+            //don't make images clickable which are surrounded by a clickable span, this would suppress the "original" click
+            //(most prominent example: <a href> links with an <img> tag inside, e.g. for challenge checkers)
+            final List<URLSpan> links = new ArrayList<>(Arrays.asList(spannable.getSpans(0, spannable.length(), URLSpan.class)));
+            Collections.sort(links, (l1, l2) -> Integer.compare(spannable.getSpanStart(l1), spannable.getSpanStart(l2)));
+            int start = 0;
+            for (URLSpan link : links) {
+                final int end = spannable.getSpanStart(link);
+                registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, end, ImageSpan.class));
+                start = spannable.getSpanEnd(link);
+            }
+            registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, spannable.length(), ImageSpan.class));
+        }
+
+        private static void registerImageClickListener(final Activity activity, final Geocache cache, final Spannable spannable, final ImageSpan[] spans) {
+
             for (final ImageSpan span : spans) {
                 final ClickableSpan clickableSpan = new ClickableSpan() {
                     @Override
@@ -1973,10 +2000,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
 
                         final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));
-
-                        if (Settings.enableFeatureNewImageGallery()) {
-                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
-                        }
+                        ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
                     }
 
                     @Override
@@ -1991,13 +2015,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+            String baseScheme = Uri.parse(baseUrl).getScheme();
+            if (StringUtils.isBlank(baseScheme)) {
+                baseScheme = "https";
+            }
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
-                if (uri.getScheme() == null && uri.getHost() == null) {
+                if (uri.getScheme() == null) {
                     final int start = spannable.getSpanStart(span);
                     final int end = spannable.getSpanEnd(span);
                     final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = Uri.parse(baseUrl + uri);
+                    final Uri absoluteUri = uri.getHost() == null ? Uri.parse(baseUrl + uri) :
+                            uri.buildUpon().scheme(baseScheme).build();
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
                 }
@@ -2352,38 +2381,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
-
-        @Override
-        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return CachedetailImagesPageBinding.inflate(inflater, container, false);
-        }
-
-        @Override
-        public long getPageId() {
-            return Page.IMAGES.id;
-        }
-
-        @Override
-        public void setContent() {
-            // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-            if (activity == null) {
-                return;
-            }
-            final Geocache cache = activity.getCache();
-            if (cache == null) {
-                return;
-            }
-            binding.getRoot().setVisibility(View.VISIBLE);
-
-            if (activity.imagesList == null) {
-                activity.imagesList = new ImagesList(activity, cache.getGeocode(), cache);
-                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), cache.getNonStaticImages()));
-            }
-        }
-    }
-
     public static class ImageGalleryCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
 
         @Override
@@ -2436,9 +2433,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         @Override
         public boolean onMenuItemClick(final MenuItem menuItem) {
+            if (selectedTextView == null || selectedTextView.getText() == null) {
+                return false;
+            }
+            final CharSequence text = selectedTextView.getText();
             final int startSelection = selectedTextView.getSelectionStart();
             final int endSelection = selectedTextView.getSelectionEnd();
-            clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
+            clickedItemText = startSelection >= 0 && endSelection >= startSelection && endSelection <= text.length() ?
+                    text.subSequence(startSelection, endSelection) : text;
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText, cache);
         }
     }
@@ -2702,12 +2704,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
                 pages.add(Page.INVENTORY.id);
             }
-            if (Settings.enableFeatureNewImageGallery()) {
-                pages.add(Page.IMAGEGALLERY.id);
-            }
-            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
-                pages.add(Page.IMAGES.id);
-            }
+            pages.add(Page.IMAGEGALLERY.id);
         }
 
         final long[] result = new long[pages.size()];
@@ -2732,8 +2729,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {
             return new InventoryViewCreator();
-        } else if (pageId == Page.IMAGES.id) {
-            return new ImagesViewCreator();
         } else if (pageId == Page.IMAGEGALLERY.id) {
             return new ImageGalleryCreator();
         } else if (pageId == Page.VARIABLES.id) {
@@ -2989,8 +2984,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void adjustPersonalNoteVarsOutOfSyncButton() {
+        adjustPersonalNoteVarsOutOfSyncButton(findViewById(R.id.personalnote_vars_out_of_sync));
+    }
+
+    private void adjustPersonalNoteVarsOutOfSyncButton(@Nullable final TextView personalNotOutOfSync) {
+        if (personalNotOutOfSync == null) {
+            return;
+        }
         final Map<String, Pair<String, String>> varsOutOfSync = cache.getVariableDifferencesFromUserNotes();
-        final TextView personalNotOutOfSync = findViewById(R.id.personalnote_vars_out_of_sync);
         personalNotOutOfSync.setVisibility(varsOutOfSync.isEmpty() ? View.GONE : View.VISIBLE);
         personalNotOutOfSync.setText(LocalizationUtils.getString(R.string.cache_personal_note_vars_out_of_sync, varsOutOfSync.size()));
     }

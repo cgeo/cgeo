@@ -14,6 +14,9 @@
     <!-- fastscroll extra padding -->
     <dimen name="paddingRight_fastscroll">5dp</dimen>
 
+    <!-- log item view -->
+    <dimen name="logItemLeftColumnOuterWidth">102dp</dimen>
+    <dimen name="logItemLeftColumnInnerWidth">100dp</dimen>
 
     <!-- font size dimensions ====================================== -->
 

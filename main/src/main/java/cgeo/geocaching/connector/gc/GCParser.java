@@ -101,6 +101,8 @@ public final class GCParser {
     @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
+    private static final String HEADER_VERIFICATION_TOKEN = "X-Verification-Token";
+
     private GCParser() {
         // Utility class
     }
@@ -1071,12 +1073,13 @@ public final class GCParser {
      */
     @Nullable
     @WorkerThread
-    public static String createBookmarkList(final String name) {
+    public static String createBookmarkList(final String name, final Geocache geocache) {
         final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("name", name);
         jo.putObject("type").put("code", "bm");
 
         try {
-            final String result = Network.getResponseData(Network.postJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists", jo));
+            final Parameters headers = new Parameters(HEADER_VERIFICATION_TOKEN, getRequestVerificationToken(geocache));
+            final String result = Network.getResponseData(Network.postJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists", headers, jo));
 
             if (StringUtils.isBlank(result)) {
                 Log.e("GCParser.createBookmarkList: No response from server");
@@ -1114,8 +1117,9 @@ public final class GCParser {
         }
 
         Log.d(arrayNode.toString());
+        final Parameters headers = new Parameters(HEADER_VERIFICATION_TOKEN, getRequestVerificationToken(geocaches.get(0)));
 
-        return Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode))
+        return Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", headers, arrayNode))
             .toSingle(() -> {
                 Log.i("GCParser.addCachesToBookmarkList - caches uploaded to GC.com bookmark list");
                 return true;
@@ -1414,6 +1418,14 @@ public final class GCParser {
 
     private static String parseUserToken(final String page) {
         return TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+    }
+
+    private static String getRequestVerificationToken(@NonNull final Geocache cache) {
+        return parseRequestVerificationToken(requestHtmlPage(cache.getGeocode(), null, "n"));
+    }
+
+    private static String parseRequestVerificationToken(final String page) {
+        return TextUtils.getMatch(page, GCConstants.PATTERN_REQUESTVERIFICATIONTOKEN, "");
     }
 
     /**

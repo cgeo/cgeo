@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
     <string name="translate_to_english">Iwwersetzen op Englesch</string>
@@ -228,10 +229,8 @@
     <string name="warn_search_help_user">Tipp en Usernumm vu Geocaching.com an.</string>
     <string name="warn_search_help_tb">Tipp de Code fir en Trackable an. Zum Beispill \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Tipp wgl. en Text fir däi Log an.</string>
-    <string name="warn_load_images">c:geo konnt d\'Biller net eroflueden.</string>
     <string name="warn_pocket_query_select">Kee Pocket Query ausgewielt.</string>
     <string name="warn_no_pocket_query_found">Kee Pocket Query online fonnt.</string>
-    <string name="warn_invalid_character">De Charakter muss e Buschtaf oder eng Ziffer sinn</string>
     <string name="warn_notloggedin_title">Offline modus</string>
     <string name="warn_notloggedin_long">(Nach) net ageloggt. D\'Live-Kaart weist nëmmen lokal gespäichert Cachen an Onlinefunktiounen sti net zur Verfügung.\n\nEntweder gëtt et keng Internetverbindung, ee Server-Problem oder du muss deng Geocaching-Déngschter nees konfiguréieren.\n\nWëlls du d\'Déngschter elo konfiguréieren?</string>
     <string name="err_read_pocket_query_list">Feeler beim Liesen vun der Pocket Query Lëscht.</string>
@@ -287,12 +286,6 @@
     <string name="caches_more_caches_no">Keng aner Cachen</string>
     <string name="caches_more_caches_loading">Cachen gi gelueden…</string>
     <string name="caches_more_caches_currently">aktuell</string>
-    <string name="caches_downloading">Cachen gi gelueden…\nGeschätzten Zäit: </string>
-    <string name="caches_eta_ltm">Manner wéi eng Minutt</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d Minutt</item>
-        <item quantity="other">%d Minutten</item>
-    </plurals>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Op der Kaart uweisen</string>
     <string name="caches_sort">Sortéieren</string>
@@ -416,7 +409,6 @@
     <string name="settings_title_basicmembers">Optioune fir net-premium Membere</string>
     <string name="settings_title_system">System</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
-    <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Plattform</string>
     <string name="settings_category_geocaching_additionals">Aner Servicer an Addons</string>
     <string name="settings_category_social">Sozial Netzwierker</string>
@@ -496,9 +488,8 @@
     <string name="init_summary_log_offline">Offline loggen aktivéieren (Dialog fir Online-Log gëtt beim Loggen net ugewisen, Logs gi net eropgelueden)</string>
     <string name="init_choose_list">No Lëscht froen</string>
     <string name="init_summary_choose_list">Nofroen a wat fir enger Lëscht d\'Cache solle gespäichert ginn</string>
-    <string name="init_listdisplay">Zousätzlech Lëschten</string>
-    <string name="init_summary_listdisplay">Affiliatioun vu Cachen a weideren Lëschten uweisen</string>
     <string name="init_livelist">Richtung uweisen</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
@@ -586,9 +577,6 @@
     <string name="list_list_headline">Lëschten:</string>
     <!-- calendar adder -->
     <!-- permission handling -->
-    <string name="close_app">App zoumaachen</string>
-    <string name="ask_again">Fro mech nach emol</string>
-    <string name="storage_permission_request_explanation">c:geo wäert Daten op de Späicher vum Handy oder der SD Kaart späichere soubal\'s du Geocache späichers fir offline ze benotzen. Ausserdeem wäert c:geo de Späicher fir den Import, Export an dem Liese vun Offline Kaarte benotzen. Se kann net ouni des Erlabnis benotzt ginn.</string>
     <string name="storage_permission_needed">Des Funktioun ass ouni d\'Zougangsberechtegung op de Späicher net méiglech.</string>
     <!-- colors -->
     <string name="reset_to_default">Standard</string>

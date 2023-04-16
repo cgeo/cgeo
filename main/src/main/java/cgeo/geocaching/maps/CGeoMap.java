@@ -6,6 +6,7 @@ import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.MapGoogleBinding;
@@ -16,7 +17,6 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -45,6 +45,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -61,6 +62,7 @@ import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
@@ -89,7 +91,6 @@ import android.widget.ViewSwitcher.ViewFactory;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -138,12 +139,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
-    private static final String BUNDLE_ROUTE = "route";
     private static final String BUNDLE_FILTERCONTEXT = "filterContext";
 
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
-    private AppCompatActivity activity;
+    private AbstractBottomNavigationActivity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
     private MapSource mapSource;
@@ -160,7 +160,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
     // map status data
-    private static boolean followMyLocation = true;
+    private static boolean followMyLocation = Settings.getFollowMyLocation();
     // threads
     private Disposable loadTimer;
     /**
@@ -367,9 +367,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
-        if (individualRoute != null) {
-            outState.putParcelable(BUNDLE_ROUTE, individualRoute);
-        }
         if (mapOptions.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
         }
@@ -479,7 +476,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // class init
         res = this.getResources();
-        activity = this.getActivity();
+        activity = (AbstractBottomNavigationActivity) this.getActivity();
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
@@ -501,12 +498,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
-            individualRoute = null;
         }
+        individualRoute = null;
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(activity);
         }
@@ -516,7 +512,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        activity.setContentView(MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot());
+        HideActionBarUtils.setContentView(activity, MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot(), true);
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
@@ -585,7 +581,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);
         }
         individualRoute.toggleItem(this.mapView.getContext(), new RouteItem(item), overlayPositionAndScale);
-        mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+        updateRouteTrackButtonVisibility();
+        overlayPositionAndScale.repaintRequired();
+    }
+
+    public void toggleRouteItem(final Geopoint geopoint) {
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);
+        }
+        individualRoute.toggleItem(this.mapView.getContext(), new RouteItem(geopoint), overlayPositionAndScale);
+        updateRouteTrackButtonVisibility();
         overlayPositionAndScale.repaintRequired();
     }
 
@@ -617,7 +622,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (null == tracks && !preventReloading) {
             mapActivity.getRouteTrackUtils().reloadTrack(tracks.getTrackfile(key), this::setTrack);
         } else if (null != tracks && null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
-            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key));
+            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
         }
     }
 
@@ -719,7 +724,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getGeocodesForCachesInViewport()));
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(!GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
+            final GoogleMapProvider.AbstractGoogleMapSource mapSource = (GoogleMapProvider.AbstractGoogleMapSource) Settings.getMapSource();
+            menu.findItem(R.id.menu_theme_mode).setVisible(mapSource.supportsTheming);
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
@@ -783,7 +789,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return true;
         } else if (id == R.id.menu_check_routingdata) {
             final Viewport bb = mapView.getViewport();
-            MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
+            if (bb != null) {
+                MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
+            }
         } else if (HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
                 || DownloaderUtils.onOptionsItemSelected(activity, id, false)) {
             return true;
@@ -804,7 +812,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
             MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTapLatLng().latitude, overlayPositionAndScale.getLongTapLatLng().longitude),
-                            tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, getCurrentTargetCache(), mapOptions)
+                            tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), mapOptions)
                     .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTapLatLng())
                     .show();
         }
@@ -831,11 +839,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         reloadIndividualRoute();
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route, color, width) -> {
                     if (route instanceof Route) {
                         ((Route) route).calculateNavigationRoute();
                     }
-                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
+                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route, color, width);
                 }), () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
             } catch (RejectedExecutionException e) {
                 Log.e("CGeoMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -851,10 +859,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void setTrack(final String key, final IGeoDataProvider route) {
+    public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         mapActivity.getTracks().setRoute(key, route);
         resumeTrack(key, null == route);
-        mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+        updateRouteTrackButtonVisibility();
     }
 
     @Override
@@ -868,7 +876,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void reloadIndividualRoute() {
         individualRoute.reloadRoute((route) -> {
             overlayPositionAndScale.updateIndividualRoute(route);
-            mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+            updateRouteTrackButtonVisibility();
             mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
         });
     }
@@ -884,9 +892,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void clearIndividualRoute() {
         individualRoute.clearRoute((route) -> {
             overlayPositionAndScale.repaintRequired();
-            mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
+            updateRouteTrackButtonVisibility();
             ActivityMixin.showToast(activity, res.getString(R.string.map_individual_route_cleared));
         });
+    }
+
+    private void updateRouteTrackButtonVisibility() {
+        mapActivity.getRouteTrackUtils().updateRouteTrackButtonVisibility(activity.findViewById(R.id.container_individualroute), individualRoute, mapActivity.getTracks());
     }
 
     private void setMapRotation(final MenuItem item, final int rotation) {
@@ -1509,6 +1521,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     // switch My Location button image
     private void switchMyLocationButton() {
+        Settings.setFollowMyLocation(followMyLocation);
         // FIXME: temporary workaround for the absence of "follow my location" on Android 3.x (see issue #4289).
         if (myLocSwitch != null) {
             myLocSwitch.setChecked(followMyLocation);
@@ -1623,7 +1636,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return;
         }
 
-        if (coordType == CoordinatesType.WAYPOINT && waypoint.getId() >= 0) {
+        if (coordType == CoordinatesType.WAYPOINT && !((Waypoint) waypoint).isNewWaypoint()) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
             WaypointPopup.startActivityAllowTarget(getActivity(), waypoint.getId(), waypoint.getGeocode());
         }

@@ -4,7 +4,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -13,6 +16,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 
 import java.lang.ref.WeakReference;
 
@@ -45,13 +49,14 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public void prepareForTileSourceChange() {
         positionLayer = configPositionLayer(false);
+        forEveryLayer(ILayer::destroy);
     }
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;
     }
 
-    protected abstract AbstractGeoitemLayer createGeoitemLayers(AbstractTileProvider tileProvider);
+    protected abstract AbstractGeoitemLayer<?> createGeoitemLayers(AbstractTileProvider tileProvider);
 
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;
@@ -135,7 +140,9 @@ public abstract class AbstractUnifiedMapView<T> {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
     }
 
-    /** adjust zoom to be in allowed zoom range for current map */
+    /**
+     * adjust zoom to be in allowed zoom range for current map
+     */
     protected void setDelayedZoomTo() {
         if (delayedZoomTo != -1) {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
@@ -171,13 +178,17 @@ public abstract class AbstractUnifiedMapView<T> {
     // ========================================================================
     // Tap handling methods
 
-    /** transmits tap on map to activity */
-    protected void onTapCallback(final int latitudeE6, final int longitudeE6, final boolean isLongTap) {
+    /**
+     * transmits tap on map to activity
+     */
+    protected void onTapCallback(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
+        Log.d("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
+
         final UnifiedMapActivity activity = activityRef.get();
         if (activity == null) {
             throw new IllegalStateException("map tap handler: lost connection to map activity");
         }
-        activity.onTap(latitudeE6, longitudeE6, isLongTap);
+        activity.onTap(latitudeE6, longitudeE6, x, y, isLongTap);
     }
 
     // ========================================================================
@@ -193,15 +204,28 @@ public abstract class AbstractUnifiedMapView<T> {
     protected void onResume() {
         positionLayer = configPositionLayer(true);
         configMapChangeListener(true);
+        forEveryLayer(layer -> layer.init(createGeoItemProviderLayer()));
     }
 
     protected void onPause() {
         positionLayer = configPositionLayer(false);
         configMapChangeListener(false);
+        forEveryLayer(ILayer::destroy);
     }
 
     protected void onDestroy() {
         // default is empty
     }
+
+    private void forEveryLayer(final Consumer<ILayer> consumer) {
+        final UnifiedMapActivity activity = activityRef.get();
+        if (activity != null) {
+            for (ILayer layer : activity.getLayers()) {
+                consumer.accept(layer);
+            }
+        }
+    }
+
+    public abstract IProviderGeoItemLayer<?> createGeoItemProviderLayer();
 
 }

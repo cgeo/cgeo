@@ -15,14 +15,14 @@
 
         <LinearLayout
             android:id="@+id/detail_box"
-            android:layout_width="102dip"
+            android:layout_width="@dimen/logItemLeftColumnOuterWidth"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_gravity="left|top"
             android:orientation="horizontal" >
 
             <LinearLayout
-                android:layout_width="100dip"
+                android:layout_width="@dimen/logItemLeftColumnInnerWidth"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|top"
                 android:orientation="vertical"

@@ -21,7 +21,6 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.GeoObjectList;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LoggingUI;
@@ -56,6 +55,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -66,14 +66,19 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -161,6 +166,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
+    private final GeoItemTestLayer testItemLayer = new GeoItemTestLayer();
+
     private RenderThemeHelper renderThemeHelper = null; //must be initialized in onCreate();
 
     private DistanceView distanceView;
@@ -186,11 +193,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
 
-    private static boolean followMyLocation = true;
+    private static boolean followMyLocation = Settings.getFollowMyLocation();
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
-    private static final String BUNDLE_ROUTE = "route";
     private static final String BUNDLE_FILTERCONTEXT = "filterContext";
 
     // Handler messages
@@ -240,7 +246,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
             if (mapOptions.mapState != null) {
@@ -248,9 +253,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             } else {
                 followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             }
-            individualRoute = null;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
+        individualRoute = null;
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(this);
         }
@@ -261,7 +266,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         ActivityMixin.setTheme(this);
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
+        HideActionBarUtils.setContentView(this, MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot(), true);
 
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
@@ -354,6 +359,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 caches.invalidate(Collections.singleton(geocode));
             }
         });
+
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INVALIDATE_MAPLIST) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                invalidateOptionsMenu();
+            }
+        });
+
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -528,11 +541,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         reloadIndividualRoute();
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route, color, width) -> {
                     if (route instanceof Route) {
                         ((Route) route).calculateNavigationRoute();
                     }
-                    trackLayer.updateRoute(key, route);
+                    trackLayer.updateRoute(key, route, color, width);
                 }), () -> trackLayer.requestRedraw());
             } catch (RejectedExecutionException e) {
                 Log.e("NewMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -556,7 +569,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         individualRoute.clearRoute(routeLayer);
         individualRoute.clearRoute((route) -> {
             routeLayer.updateIndividualRoute(route);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            updateRouteTrackButtonVisibility();
         });
         distanceView.showRouteDistance();
         showToast(res.getString(R.string.map_individual_route_cleared));
@@ -730,9 +743,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
             }
         } else {
-            final IGeoDataProvider gdp = tracks.getRoute(key);
+            final IGeoItemSupplier gdp = tracks.getRoute(key);
             if (trackLayer != null && (gdp == null || gdp instanceof Route)) {
-                trackLayer.updateRoute(key, gdp);
+                trackLayer.updateRoute(key, gdp, tracks.getColor(key), tracks.getWidth(key));
             }
             if (null != geoObjectLayer && (gdp == null || gdp instanceof GeoObjectList)) {
                 if (gdp == null || gdp.isHidden()) {
@@ -775,12 +788,15 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.historyLayer = new HistoryLayer(trailHistory);
         this.mapView.getLayerManager().getLayers().add(this.historyLayer);
 
+        //Test Layer
+        testItemLayer.init(new MapsforgeV6GeoItemLayer(this.mapView.getLayerManager(), this.mapView.getMapViewProjection()));
+
         // RouteLayer
         this.routeLayer = new RouteLayer(realRouteDistance -> {
             if (null != this.distanceView) {
                 this.distanceView.setRouteDistance(realRouteDistance);
             }
-        });
+        }, this.mapHandlers.getTapHandler(), mapView.getLayerManager());
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         //GeoobjectLayer
@@ -813,7 +829,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         GeoitemLayer.resetColors();
 
         // TapHandler
-        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler());
+        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler(), this.testItemLayer, this);
         this.mapView.getLayerManager().getLayers().add(this.tapHandlerLayer);
 
         // Caches bundle
@@ -874,6 +890,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void terminateLayers() {
+
+        //test
+        testItemLayer.destroy();
+
+
         this.resumeDisposables.clear();
 
         this.caches.onDestroy();
@@ -925,9 +946,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (proximityNotification != null) {
             outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
         }
-        if (individualRoute != null) {
-            outState.putParcelable(BUNDLE_ROUTE, individualRoute);
-        }
         if (mapOptions.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
         }
@@ -963,6 +981,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     // switch My Location button image
     private void switchMyLocationButton() {
+        Settings.setFollowMyLocation(followMyLocation);
         myLocSwitch.setChecked(followMyLocation);
         if (followMyLocation) {
             myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
@@ -974,6 +993,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTapLatLong().latitude, tapHandlerLayer.getLongTapLatLong().longitude),
                             (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
+                            this::updateRouteTrackButtonVisibility,
                             getCurrentTargetCache(), mapOptions)
                     .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();
@@ -1284,6 +1304,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
+        if (items.isEmpty() && !longPressMode) {
+            HideActionBarUtils.toggleActionBar(this);
+        }
         if (items.isEmpty()) {
             return;
         }
@@ -1385,7 +1408,16 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
         individualRoute.toggleItem(this, new RouteItem(item), routeLayer);
         distanceView.showRouteDistance();
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        updateRouteTrackButtonVisibility();
+    }
+
+    public void toggleRouteItem(final LatLong latLong) {
+        if (individualRoute == null) {
+            individualRoute = new IndividualRoute(this::setTarget);
+        }
+        individualRoute.toggleItem(this, new RouteItem(new Geopoint(latLong.latitude, latLong.longitude)), routeLayer);
+        distanceView.showRouteDistance();
+        updateRouteTrackButtonVisibility();
     }
 
     @Nullable
@@ -1467,25 +1499,31 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTrack(final String key, final IGeoDataProvider route) {
+    private void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
-        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+        updateRouteTrackButtonVisibility();
     }
 
     private void reloadIndividualRoute() {
-        individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
+        if (individualRoute != null) {
+            individualRoute.reloadRoute(this::reloadIndividualRouteFollowUp);
+        }
     }
 
-    private void reloadIndividualRouteFollowUp(final Route route) {
+    private void reloadIndividualRouteFollowUp(final IndividualRoute route) {
         if (null != routeLayer) {
             routeLayer.updateIndividualRoute(route);
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+            updateRouteTrackButtonVisibility();
         } else {
             // try again in 0.25 seconds
             new Handler(Looper.getMainLooper()).postDelayed(() -> reloadIndividualRouteFollowUp(route), 250);
         }
     }
+
+    private void updateRouteTrackButtonVisibility() {
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
+    };
 
     private Boolean isTargetSet() {
         return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;

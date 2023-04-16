@@ -129,6 +129,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
+        setUpNavigationEnabled(true);
         binding = AuthorizationActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

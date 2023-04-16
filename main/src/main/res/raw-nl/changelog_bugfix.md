@@ -1,25 +1,21 @@
 ##
-
-### Algemeen
-- Oplossing: Nieuwe TB automatisch ingesteld op bezoek modus
-- Oplossing: gc.com basis lid instellingen werden niet weergegeven
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Oplossing: Google Maps: cache/waypoint popup opent bij het tikken van zoom control/kompas met cache/waypoint eronder
+- Oplossing: Fout bij het toevoegen van caches aan / verwijderen van caches uit bladwijzerlijsten
+- Oplossing: Fout bij het downloaden van bladwijzerlijsten
 
 ##
+- Oplossing: Log beschrijvingskolom verbreden in liggende modus
+- Oplossing: Maak foutmelding bij afbeeldingsformaat duidelijker
+- Oplossing: Gebruikersgemaakte waypoints worden niet weergegeven op OSM kaart
+- Oplossing: Meerdere navigatielijnen op Google Maps kaart
 
-### Algemeen
-- Oplossing: Gebruik bijgewerkte URL voor mapquest geocoding
-- Oplossing: Voorkom crash onder bepaalde omstandigheden wanneer je probeert een foto te koppelen aan een log
-- Wijziging: Betere foutmelding over het oplossen van een Captcha vereiste om in te loggen op geocaching.com
-
-### Caches
-- Oplossing: Voorkom dat spoiler afbeeldingen verdubbeld worden in de galerij bij het vernieuwen van een cache
-
-### Variabele rekenmachine
-- Nieuw: TRUNC functie om decimale waarden af te breken
-- Nieuw: Het gebruik van rechte haken toestaan voor berekeningen. Gebruik voor variabele bereiken bijvoorbeeld \[:1-5\].
-
-### Kaart
-- Oplossing: Toon juiste DT-marker voor D4.0 en D4.5
+##
+- Oplossing: Enkele door gebruiker aangemaakte waypoints overslaan bij GPX import
+- Oplossing: Lijst met uitgebreide filters niet vertaald wanneer taal is ingesteld op niet-standaard binnen c:geo
+- Oplossing: Downloaden/bijwerken van routing tegels of kaarten die niet meer mogelijk zijn op oudere apparaten
+- Oplossing: locatienaam weergegeven in kompas in plaats van coördinaten
+- Oplossing: c:geo hangt bij het toevoegen van waypoint wanneer bepaalde formules naar klembord zijn gekopieerd
+- Oplossing: Verkeerde beeldoriëntatie voor eigen afbeeldingen in portretmodus
+- Oplossing: Het weergeven van afbeeldingen met URL's zonder protocol werd niet correct wordt behandeld
+- Oplossing: Crash bij tekenen positiemarker
+- Oplossing: Laden van GPX tracks/routes kan leiden tot niet-verbonden segmenten

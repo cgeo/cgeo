@@ -2393,7 +2393,7 @@ public class DataStore {
             for (final Waypoint waypoint : waypoints) {
                 final ContentValues values = createWaypointValues(geocode, waypoint);
 
-                if (waypoint.getId() < 0) {
+                if (waypoint.isNewWaypoint()) {
                     final long rowId = database.insert(dbTableWaypoints, null, values);
                     waypoint.setId((int) rowId);
                 } else {

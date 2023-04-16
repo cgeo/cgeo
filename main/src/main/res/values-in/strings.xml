@@ -117,6 +117,7 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
@@ -190,10 +191,8 @@
     <string name="warn_search_help_user">Masukkan nama pengguna dari Geocaching.com.</string>
     <string name="warn_search_help_tb">Masukkan kode yang bisa dilacak. Misalnya \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Tolong masukan beberapa teks untuk log anda.</string>
-    <string name="warn_load_images">c: geo gagal memuat gambar.</string>
     <string name="warn_pocket_query_select">Tidak ada permintaan Pocket yang dipilih.</string>
     <string name="warn_no_pocket_query_found">Tidak ada kantong pertanyaan yang ditemukan secara online.</string>
-    <string name="warn_invalid_character">Karakter wajib berupa surat atau angka</string>
     <string name="err_read_pocket_query_list">Kesalahan membaca daftar permintaan pocket.</string>
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
@@ -238,11 +237,6 @@
     <string name="caches_more_caches_no">Tidak ada lagi cache</string>
     <string name="caches_more_caches_loading">Memuat cache&#8230;</string>
     <string name="caches_more_caches_currently">saat ini</string>
-    <string name="caches_downloading">Mengunduh cache&#8230;\nEta: </string>
-    <string name="caches_eta_ltm">Kurang dari satu menit</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d menit</item>
-    </plurals>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>
     <string name="caches_sort">Urutkan</string>
@@ -338,7 +332,6 @@
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
-    <string name="settings_category_browser">Peramban</string>
     <string name="settings_category_social">Media sosial</string>
     <string name="settings_category_logging_other">Pilihan login lainnya</string>
     <string name="settings_goto_url_button">lebih banyak &#8230;</string>
@@ -400,6 +393,7 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
@@ -440,8 +434,6 @@
     <string name="init_dbmove_failed">Gagal memindahkan database</string>
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
-    <string name="init_use_native_ua">Peramban Android</string>
-    <string name="init_summary_use_native_ua">Identifikasi sebagai browser Android. Mengatasi masalah login saat menggunakan penyedia jaringan tertentu.</string>
     <string name="init_maintenance">Pemeliharaan</string>
     <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
@@ -545,7 +537,6 @@
     </plurals>
     <string name="cache_premium">Meningkatkan</string>
     <string name="cache_inventory">Persediaan</string>
-    <string name="cache_log_images_title">Gambar log</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Catatan pribadi</string>
     <string name="cache_personal_note_edit">Sunting</string>
@@ -642,7 +633,6 @@
     <string name="cache_location">Lokasi</string>
     <string name="cache_coordinates">Koordinat</string>
     <string name="cache_coordinates_original">Koordinat Asli</string>
-    <string name="cache_spoiler_images_title">Gambar spoiler</string>
     <string name="cache_log_types">Tipe log</string>
     <string name="cache_coordinates_no">Cache ini tidak memiliki koordinat.</string>
     <string name="cache_clear_history">Hapus riwayat</string>

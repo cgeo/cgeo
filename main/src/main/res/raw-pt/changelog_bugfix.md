@@ -1,25 +1,21 @@
 ##
-
-### Geral
-- Correção: Novo TB definido para o modo de visita automaticamente
-- Correção: configurações básicas de membros do gc.com não eram exibidas
-- Alteração: Foi removida a cartografia mapy.cz (devido à mudança no licenciamento)
-- Correcção: Campo de pesquisa de caches é limpo após a sua selecção
-- Correcção: A aplicação falhava ao inserir fórmulas de graus com vários pontos
+- Correcção: Google Maps - Abertura de um pop-up da cache ou ponto adicional quando tocado na rosa do compasso ou controle do zoom tendo a cache ou ponto adicional debaixo desses elementos
+- Correcção: Erro ao adicionar/remover caches nas listas de marcadores
+- Fix: Error on downloading bookmark lists
 
 ##
+- Correcção: Ampliar a coluna de descrição do registo, no modo paisagem
+- Correcção: A mensagem de erro acerca do formato de imagem ficou mais clara
+- Correcção: Pontos adicionais criados pelo utilizador não eram exibidos no mapa OSM
+- Correcção: Várias linhas de navegação no mapa do Google Maps
 
-### Geral
-- Correcção: Utilização do URL actualizado para a geocodificação do mapquest
-- Correcção: Previne uma falha sob certas condições ao tentar anexar uma foto ao registo
-- Alteração: Melhor mensagem de erro sobre como resolver o requisito de validação Captcha no início de sessão em geocaching.com
-
-### Caches
-- Correcção: Previne que as imagens spoiler fiquem em duplicado na galeria ao recarregar uma cache
-
-### Calculadora de variáveis
-- Novo: Função TRUNC para truncar valores decimais
-- Novo: Permitir o uso de parêntesis rectos para cálculos. Para intervalos de variáveis use por exemplo, \[:1-5\].
-
-### Mapa
-- Correcção: Mostrar marcador DT correto para D4.0 e D4.5
+##
+- Correcção: Eram ignorados alguns pontos adicionais criados pelo utilizador na importação do GPX
+- Correcção: Lista estendida de filtros não era traduzida quando o idioma escolhido para a aplicação c:geo não era o pré-definido
+- Correcção: Descarga/envio de percursos ou mapas não é mais possível em dispositivos antigos
+- Correcção: Era mostrado na bússola o nome da localização ao invés das coordenadas
+- Correcção: O c:geo congelava ao adicionar um ponto adicional quando determinadas fórmulas eram copiadas da área de transferência
+- Correcção: Imagens próprias eram mostradas com a orientação errada no modo retrato
+- Correcção: Imagens na descrição contendo endereços web sem protocolo não eram processadas correctamente
+- Correcção: Bloqueio da aplicação ao desenhar o marcador de posição
+- Correcção: Carregar percursos/rotas GPX podia originar segmentos não conectados

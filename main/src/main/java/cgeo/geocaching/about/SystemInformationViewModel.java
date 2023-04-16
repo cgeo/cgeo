@@ -1,5 +1,6 @@
 package cgeo.geocaching.about;
 
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SystemInformation;
 
 import android.app.Application;
@@ -23,7 +24,12 @@ public class SystemInformationViewModel extends AndroidViewModel {
         super(application);
 
         systemInformation = LiveDataReactiveStreams.fromPublisher(
-            Flowable.fromCallable(() -> SystemInformation.getSystemInformation(application)).subscribeOn(Schedulers.io())
+            Flowable.fromCallable(() -> SystemInformation.getSystemInformation(application))
+                    .subscribeOn(Schedulers.io())
+                    .onErrorReturn(throwable -> {
+                        Log.e("Could not load system information", throwable);
+                        return null;
+                    })
         );
     }
 

@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">nezmenená veľkosť</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Kontakt s aliasom/prezývkou %s sa nenašiel. Najprv si ho pridaj do kontaktov.</string>
+    <string name="contact_multiple_matches">Kontakt: Viac zhôd</string>
     <!-- translation -->
     <string name="translate">Preložiť</string>
     <string name="translate_to_sys_lang">Preložiť do jaz. %s</string>
@@ -196,6 +199,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
+    <string name="err_captcha">Služba vyžaduje overenie cez Captcha. Treba v prehliadači otvoriť stránku geocaching.com a počas prihlasovania prejsť overením Captcha. Potom sa znova skúste prihlásiť cez c:geo.</string>
     <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_ec">Zlyhalo pripojenie k serveru Extremcaching.com. Nefunguje internetové pripojenie alebo server nie je funkčný.</string>
     <string name="err_server_lc">Zlyhalo pripojenie k serveru labs.geocaching.com. Webová stránka má výpadok, prípadne nefunguje internetové pripojenie.</string>
@@ -206,6 +210,7 @@
     <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
     <string name="err_comm">Neznáma chyba komunikácie. Pomoc nájdete v našich <a href="https://www.cgeo.org/faq#login-failed">Častých otázkach</a>.</string>
     <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo</string>
+    <string name="err_wrong">Nesprávne používateľské meno a/alebo heslo.</string>
     <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
     <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať súradnice skrýše.</string>
     <string name="err_unvalidated_account">Najprv musíte overiť svoj účet na internetových stránkach Geocaching.com.</string>
@@ -270,10 +275,8 @@
     <string name="warn_search_help_user">Zadajte meno používateľa z Geocaching.com.</string>
     <string name="warn_search_help_tb">Zadajte kód trasovateľného predmetu. Napríklad „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
-    <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
     <string name="warn_pocket_query_select">Najprv vyber pocket query.</string>
     <string name="warn_no_pocket_query_found">Na webe sa nenašlo žiadne Pocket query.</string>
-    <string name="warn_invalid_character">Znak musí byť PÍSMENO alebo ČÍSLICA</string>
     <string name="warn_notloggedin_title">Offline režim</string>
     <string name="warn_notloggedin_short">Neprihlásené. Live mapa ukazuje len lokálne uložené kešky. Ťuknutím sem zobrazíte ďalšie informácie.</string>
     <string name="warn_notloggedin_long">Zatiaľ neprihlásené. Live mapa ukazuje len lokálne uložené kešky a online funkcie nie sú aktívne.\n\nMožno nie je pripojenie k sieti, prípadne ide o problém na serveri alebo je potrebné znova nakonfigurovať služby geoacachingu.\n\nChcete teraz konfigurovať služby?</string>
@@ -305,6 +308,8 @@
     <string name="warn_gm_not_available">Mapy Google sú nedostupné.</string>
     <string name="switch_to_mf">Vaša služba Google Play je zastaraná. Chcete namiesto toho prepnúť na poskytovateľa mapy Mapsforge?</string>
     <string name="switched_to_mf">Predvolená mapa zmenená na poskytovateľa Mapsforge. Teraz mapu reštartujte.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Základný</string>
     <!-- location service -->
     <string name="loc_last">posledná známa</string>
     <string name="loc_net">sieť</string>
@@ -317,6 +322,8 @@
     <string name="loc_gps_disabled">GPS zakázané</string>
     <string name="loc_copied_clipboard">Aktuálna poloha bola skopírovaná do schránky</string>
     <string name="menu_centerposition">Vycentrovať na moju polohu</string>
+    <string name="location_no_permission">Upozornenie: žiadne povolenie na určenie polohy</string>
+    <string name="location_only_coarse_permission">Upozornenie: povolenie len na približnú polohu</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikácii</string>
     <string name="menu_helpers">Pomocné programy</string>
@@ -351,14 +358,6 @@
         <item quantity="other">Načítať %1$d ďalších kešiek</item>
     </plurals>
     <string name="caches_more_caches_remaining">Načítať zostávajúce kešky (%1$d/%2$d)</string>
-    <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
-    <string name="caches_eta_ltm">menej než minúta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minúta</item>
-        <item quantity="few">%d minúty</item>
-        <item quantity="many">%d minút</item>
-        <item quantity="other">%d minút</item>
-    </plurals>
     <string name="caches_store_offline">Uložiť offline</string>
     <string name="caches_store_offline_map">Uložiť kešky offline</string>
     <string name="caches_store_selected">Uložiť vybrané</string>
@@ -398,6 +397,8 @@
     <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
     <string name="caches_sort_eventdate">Dátum Eventu</string>
     <string name="caches_select_mode">Mód výberu</string>
+    <string name="caches_select_next20">Vybrať ďalších 20 kešiek</string>
+    <string name="caches_select_next100">Vybrať ďalších 100 kešiek</string>
     <string name="caches_select_mode_exit">Opustiť mód výberu</string>
     <string name="caches_select_invert">Inverzný výber</string>
     <string name="caches_nearby">V okolí</string>
@@ -639,7 +640,7 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
     <string name="about_help">Pomoc</string>
-    <string name="about_system_collecting">Informácie o systéme sa zhromažďujú, čakajte…</string>
+    <string name="about_system_collecting">Zhromažďujú sa systémové informácie, čakajte…</string>
     <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
     <string name="about_system_info_send_button">Poslať e-mailom…</string>
     <string name="about_system_info">c:geo systémové informácie</string>
@@ -738,11 +739,11 @@
     <string name="settings_title_system">Systém</string>
     <string name="settings_summary_system">Systémové nastavenia a možnosti ladenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
-    <string name="settings_category_browser">Prehliadač</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
     <string name="settings_category_nearbysearch">Hľadať v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hľadania v okolí</string>
     <string name="init_nearbysearchlimit_description">Obmedzuje vzdialenosť, v rámci ktorej sú kešky vrátené pomocou vyhľadávania v okolí (0=neobmedzené)</string>
+    <string name="init_settings_description_unlimited">neobmedzené</string>
     <string name="settings_category_geocaching_additionals">Ďalšie služby a doplnok</string>
     <string name="settings_category_social">Sociálne médiá</string>
     <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
@@ -862,14 +863,13 @@
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_choose_list">Požiadať o zoznam</string>
     <string name="init_summary_choose_list">Opýtať sa, v ktorom zozname uložiť skrýše</string>
-    <string name="init_listdisplay">Zobraziť v zozname kešiek ďalšie zoznamy</string>
     <string name="init_list_initial_load_limit">Limit načítania zoznamu</string>
     <string name="init_summary_list_initial_load_limit">Maximálny počet kešiek, ktoré načítať prvotne z databázy pri zobrazení uložených zoznamov. Vyberte hodnotu 0 pre „neobmedzené“.</string>
-    <string name="init_summary_listdisplay">Zobraziť v zozname kešiek členstvo kešiek v ďalších zoznamoch</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
     <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu alebo viac položiek ako tlačidlá rychlého spustenia na domovskej obrazovke</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Téma</string>
     <string-array name="settings_theme_entries">
@@ -906,7 +906,6 @@
     <string name="init_backup_history_delete_warning">Máte uložených viac záloh, než dovoľuje nakonfigurovaná maximálna hodnota. Naozaj chcete odstrániť všetky zálohy, čo sú nad limit?</string>
     <string name="init_backup_automatic">Automatické zálohovanie</string>
     <string name="init_backup_automatic_summary">Vykonáva automatické zálohovanie každých x dní (okrem všetkých manuálne vytvorených záloh), 0=vypnuté</string>
-    <string name="init_backup_automatic_performing">Vytvára sa záloha…</string>
     <string name="init_user_confirmation">Viem, čo robím</string>
     <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
     <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
@@ -959,22 +958,6 @@
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
     <string name="init_maptrail_length_summary">Nastavte maximálnu dĺžku histórie trasy (potrebné pri každom spustení c:geo). Predvolená hodnota je 700 – upravte podľa dostupnej pamäte.</string>
     <string name="init_summary_maptrail">Keď je to aktivované (a GPS zapnuté), c:geo ukladá históriu pohybov ako trasu a zobrazuje ju na mape.</string>
-    <string name="init_trailcolor">Farba čiary histórie trasy</string>
-    <string name="init_trailcolor_summary">Vyberte farbu a priehľadnosť čiary histórie trasy</string>
-    <string name="init_trailwidth">Šírka čiary histórie trasy</string>
-    <string name="init_trailwidth_summary">Vyberte šírku čiary histórie trasy</string>
-    <string name="init_directioncolor">Farba čiary smeru</string>
-    <string name="init_directioncolor_summary">Vyberte farbu a priehľadnosť čiary smeru. Čiara smeru ukazuje rovnú čiaru k vybranému cieľu navigácie, prípadne špecifickú dráhu navigácie trasy, ak je trasovanie aktivované inštaláciou aplikácie BRouter.</string>
-    <string name="init_directionwidth">Šírka čiary smeru</string>
-    <string name="init_directionwidth_summary">Vyberte šírku čiary smeru</string>
-    <string name="init_routecolor">Farba čiary individuálnej trasy</string>
-    <string name="init_routecolor_summary">Vyberte farbu a priehľadnosť pre čiaru individuálnej trasy. Individuálna trasa je zbierka bodov trasy a/alebo kešiek, ktoré ste zvolili ťuknutím a podržaním bodu trasy/kešky. (Najprv je potrebné povoliť funkciu ťuknutia a podržania, pozrite nastavenia mapy.)</string>
-    <string name="init_routewidth">Šírka čiary individuálnej trasy</string>
-    <string name="init_routewidth_summary">Vyberte šírku čiary individuálnej trasy</string>
-    <string name="init_trackcolor">Farba čiary GPX stopy/trasy</string>
-    <string name="init_trackcolor_summary">Vyberte farbu a priehľadnosť čiary stopy/trasy. Stopa/trasa pozostáva z viacerých bodov a možno ju načítať cez súbor GPX pre stopu/trasu.</string>
-    <string name="init_trackwidth">Šírka čiary GPX stopy/trasy</string>
-    <string name="init_trackwidth_summary">Vyberte šírku čiary pre GPX stopu/trasu</string>
     <string name="init_circlecolor">Farba linky kruhu</string>
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
     <string name="init_circlefillcolor">Farba výplne kruhu</string>
@@ -1013,11 +996,8 @@
     <string name="init_datadirmove_failed">Presúvanie priečinka s údajmi o keškách čiastočne alebo úplne neúspešné. Skontrolujte starý a nový priečinok a presuňte chýbajúce údaje ručne.</string>
     <string name="init_plain_logs">Jednoduché logy</string>
     <string name="init_summary_plain_logs">Zobraziť záznamy logu bez farieb</string>
-    <string name="init_use_native_ua">Android prehliadač</string>
-    <string name="init_summary_use_native_ua">Ohlásiť sa ako prehliadač Android. Pomôže vyriešiť problémy pri niektorých poskytovateľoch siete.</string>
     <string name="init_rendertheme_folder">Priečinok mapových motívov</string>
     <string name="init_mapshading_folder">Priečinok súborov pre tieňovanie mapy</string>
-    <string name="init_mapshading_folder_text">Offline mapy môžu byť prekryté informáciami o nadmorskej výške. Tieto informácie sa poskytujú ako súbory hgt/dem, ktoré je potrebné umiestniť do tohto priečinka.</string>
     <string name="init_mapShadingLinearity_title">Linearita tieňovania</string>
     <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňujú kontrast v strmých svahoch, ale skrývajú zmeny v plochých, veľké hodnoty ho robia lineárnejším</string>
     <string name="init_mapShadingScale_title">Nepriehľadnosť tieňovania</string>
@@ -1065,7 +1045,6 @@
     <string name="feature_search_finder">Vyhľadávanie podľa nálezcu</string>
     <string name="feature_favorite">Pridanie skrýše medzi obľúbené</string>
     <string name="feature_voting">Hlasovanie pre kešky</string>
-    <string name="init_maplines_title">Prispôsobenie čiar na mape</string>
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
@@ -1248,7 +1227,6 @@
     <string name="cache_offline_about_time_year">pred viac ako rokom</string>
     <string name="cache_premium">Platený účet</string>
     <string name="cache_inventory">Obsah</string>
-    <string name="cache_log_images_title">Obrázky z logov</string>
     <string name="cache_log_image_default_title">Fotografia</string>
     <string name="cache_personal_note">Osobná poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Neurčovať body trasy z poznámky</string>
@@ -1268,6 +1246,9 @@
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
     <string name="cache_personal_note_upload_error">Chyba nahrávania osobnej poznámky</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
+    <string name="cache_personal_note_vars_out_of_sync">Premenné v poznámkach sú nesynchronizované (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Skontrolujte premenné, ktorých hodnota sa má prepísať z poznámok</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
     <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky. Pre správne zobrazenie bude možno potrebné otvoriť popis v %s.</string>
     <string name="cache_description_rendering">Vykresľuje sa popis, čakajte…</string>
@@ -1405,7 +1386,6 @@
     <string name="cache_location">Miesto</string>
     <string name="cache_coordinates">Súradnice</string>
     <string name="cache_coordinates_original">Pôvodné súradnice</string>
-    <string name="cache_spoiler_images_title">Obrázky s nápovedou</string>
     <string name="cache_log_types">Typy záznamov</string>
     <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
     <string name="cache_clear_history">Vymazať históriu</string>
@@ -1432,6 +1412,7 @@
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu si môžete nainštalovať Chirp Wolf.</string>
     <string name="cache_alc_start">Otvorte aplikáciu Adventure Lab a začnite hrať túto adventúru</string>
+    <string name="cache_alc_related_start">Otvoriť aplikáciu Adventure Lab a začať hrať súvisiacu adventúru</string>
     <string name="cache_alc_install">Ak chcete hrať túto adventúru, nainštalujte si aplikáciu Adventure Lab</string>
     <string name="context_share_as_text">Zdieľať text</string>
     <string name="context_share_as_link">Zdieľať odkaz</string>
@@ -1575,6 +1556,7 @@
     <string name="formula_function_tan">Tangenta</string>
     <string name="formula_function_abs">Absolútna hodnota</string>
     <string name="formula_function_round">Kruh</string>
+    <string name="formula_function_trunc">Skrátiť</string>
     <string name="formula_function_if">Ak</string>
     <string name="formula_function_length">Dĺžka reťazca</string>
     <string name="formula_function_substring">Podreťazec</string>
@@ -1651,7 +1633,6 @@
     <string name="map_show_other_title">Zobraziť iné:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filter kešiek príliš zložitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
-    <string name="map_theme_legend">Legenda témy</string>
     <string name="map_theme_legend_info">Ťuknutím na názov kategórie otvoríte/zatvoríte kategóriu. Ťuknátím na symbol a podržaním zobrazíte krátke informácie o tomto symbole. Ťuknutím na ikonu informácií navštívite podrobnú legendu online.</string>
     <string name="google_maps_style_default">Predvolené</string>
     <string name="google_maps_style_night">Noc</string>
@@ -2211,10 +2192,14 @@
     <string name="init_confirm_debug">c:geo je spustené v režime ladenia!</string>
     <string name="list_confirm_debug_message">V režime ladenia dochádza k nestabilnému správaniu aplikácie! Chcete deaktivovať režim ladenia?</string>
     <!-- permission handling -->
-    <string name="close_app">Zavrieť aplikáciu</string>
-    <string name="ask_again">Opýtať sa znova</string>
-    <string name="location_permission_request_explanation">c.geo vyžaduje prístup ku GPS (presná poloha) na vašom zariadení na vyhľadanie polohy a výpočet vzdialenosti a smeru ku keškám. Nedá sa používať bez tohto povolenia.</string>
-    <string name="storage_permission_request_explanation">c:geo zapisuje údaje do ukladacieho priestoru v telefóne alebo na karte SD pri ukladaní kešiek pre použitie off-line. Okrem toho c:geo používa ukladací priestor telefónu na import a export súborov a čítanie máp off-line. Nedá sa používať bez tohto povolenia.</string>
+    <string name="permission_ask_again">Opýtať sa znova</string>
+    <string name="permission_goto_app_details">Otvoriť info o aplikácii</string>
+    <string name="permission_contacts_read_explanation_title">Povolenie na čítanie kontaktov</string>
+    <string name="permission_contacts_read_explanation">c:geo dokáže vyhľadávať kontakty vo vašom adresári pomocou mien kešerov. Ak to chcete urobiť, je potrebné povoliť aplikácii c:geo čítanie vášho adresára. V opačnom prípade nie je možné túto funkciu použiť.</string>
+    <string name="permission_location_explanation_title">Povolenie k polohe</string>
+    <string name="permission_location_explanation">Aplikácia c:geo je optimalizovaná na použitie s údajmi GPS (presná poloha) na určenie polohy a výpočet vzdialenosti a smeru ku keške. Bez tohto povolenia nebudú funkcie založené na polohe fungovať podľa očakávania.</string>
+    <string name="permission_read_external_storage_explanation_title">Povolenie na čítanie externého úložiska</string>
+    <string name="permission_read_external_storage_explanation">Aplikácia c:geo môžeš použiť vašu systémovú tapetu ako pozadie v aplikácii. Na to potrebuje aplikácia c:geo povolenie na čítanie mediálnych údajov na externom úložisku.</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte farebnú schému</string>
@@ -2429,8 +2414,6 @@
     <string name="wizard_advanced_restore_info">Ak máte zálohu predchádzajúcej inštalácie, môžete obnoviť nastavenia a/alebo údaje kešiek.</string>
     <string name="status_not_ok">CHYBA</string>
     <string name="wizard_status_title">Stav konfigurácie</string>
-    <string name="wizard_status_storage_permission">Povolenie prístupu k súborom</string>
-    <string name="wizard_status_location_permission">Povolenie k polohe</string>
     <string name="wizard_status_basefolder">Hlavný priečinok</string>
     <string name="wizard_status_platform">Geocachingové služby</string>
     <string name="wizard_not_now">Teraz nie</string>
@@ -2444,12 +2427,10 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
-    <string name="later">Neskôr</string>
     <string name="cancel">Zrušiť</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
-    <string name="touch_again_to_exit">Opakovaným stlačením ukončíte</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>

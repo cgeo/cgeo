@@ -62,7 +62,7 @@ public class BookmarkUtils {
         if (selection.getGuid().equals(NEW_LIST_GUID)) {
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(-1, null, null, null,
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                        final String guid = GCParser.createBookmarkList(name);
+                        final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
                         if (guid == null) {
                             ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
                             return;

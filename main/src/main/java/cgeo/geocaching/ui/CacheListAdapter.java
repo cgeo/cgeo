@@ -502,21 +502,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (isHistory() && cache.getVisitedDate() > 0) {
             holder.binding.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
-            holder.binding.info.setText(Formatter.formatCacheInfoLong(cache));
-        }
-
-        // optionally show list infos
-        if (null != storedLists) {
-            final List<String> infos = new ArrayList<>();
-            final Set<Integer> lists = cache.getLists();
-            for (final AbstractList temp : storedLists) {
-                if (lists.contains(temp.id) && !temp.title.equals(currentListTitle)) {
-                    infos.add(temp.title);
-                }
-            }
-            if (!infos.isEmpty()) {
-                holder.binding.info.append("\n" + StringUtils.join(infos, Formatter.SEPARATOR));
-            }
+            holder.binding.info.setText(Formatter.formatCacheInfoLong(cache, storedLists, currentListTitle));
         }
 
         return v;

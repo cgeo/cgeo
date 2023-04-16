@@ -83,6 +83,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -459,7 +460,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-        setContentView(R.layout.cacheslist_activity);
+        HideActionBarUtils.setContentView(this, R.layout.cacheslist_activity, false);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -1182,7 +1183,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         registerForContextMenu(listView);
 
         adapter = new CacheListAdapter(this, adapter == null ? new ArrayList<>() : adapter.getList(), type, sortContext);
-        adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
+        adapter.setStoredLists(StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id));
         applyAdapterFilter();
 
         if (listFooter == null) {
@@ -1777,6 +1778,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityLastViewed(final Context context, final SearchResult search) {
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
+        Intents.putListType(cachesIntent, CacheListType.LAST_VIEWED);
+        context.startActivity(cachesIntent);
+    }
+
     public static void startActivityPocketDownload(@NonNull final Context context, @NonNull final GCList pocketQuery) {
         final String guid = pocketQuery.getGuid();
         if (guid == null) {
@@ -1798,7 +1806,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static void startActivityWithAttachment(@NonNull final Context context, @NonNull final GCList pocketQuery) {
         final Uri uri = pocketQuery.getUri();
         final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, context, CacheListActivity.class);
-        cachesIntent.setDataAndType(uri, "application/zip");
+        cachesIntent.setDataAndType(uri, pocketQuery.isBookmarkList() ? "application/xml" : "application/zip");
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
         context.startActivity(cachesIntent);
     }
@@ -1911,6 +1919,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
                 case MAP:
                     title = res.getString(R.string.map_map);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
+                    replaceCacheListFromSearch();
+                    loadCachesHandler.sendMessage(Message.obtain());
+                    loader = new NullGeocacheListLoader(this, search);
+                    break;
+                case LAST_VIEWED:
+                    title = res.getString(R.string.cache_recently_viewed);
                     markerId = EmojiUtils.NO_EMOJI;
                     search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                     replaceCacheListFromSearch();

@@ -11,6 +11,8 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -692,12 +694,8 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
-    public static boolean enableFeatureNewImageGallery() {
-        if (!contains(R.string.pref_feature_new_image_gallery)) {
-            //return !BranchDetectionHelper.isProductionBuild();
-            return true;
-        }
-        return getBoolean(R.string.pref_feature_new_image_gallery, false);
+    public static boolean enableFeatureUnifiedGeoItemLayer() {
+        return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
     public static String getALCLauncher() {
@@ -1007,14 +1005,6 @@ public class Settings {
 
     public static int getMaximumMapTrailLength() {
         return getInt(R.string.pref_maptrail_length, getKeyInt(R.integer.historytrack_length_default));
-    }
-
-    public static boolean showListsInCacheList() {
-        return getBoolean(R.string.pref_showListsInCacheList, true);
-    }
-
-    public static void setShowListsInCacheList(final boolean showListsInCacheList) {
-        putBoolean(R.string.pref_showListsInCacheList, showListsInCacheList);
     }
 
     public static int getMapLineValue(final int prefKeyId, final int defaultValueKeyId) {
@@ -1621,6 +1611,15 @@ public class Settings {
         return getString(R.string.pref_renderthemefile, "");
     }
 
+    public static boolean isDefaultMapRenderTheme() {
+        return StringUtils.isBlank(getSelectedMapRenderTheme());
+    }
+
+    /** to be called by {@link cgeo.geocaching.unifiedmap.mapsforgevtm.VtmThemes} solely! */
+    public static String getVtmDefaultVariantName() {
+        return getString(R.string.pref_vtm_default, "");
+    }
+
     /**
      * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
      */
@@ -1868,12 +1867,12 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
-    private static boolean outdatedPhoneModelOrSdk() {
-        return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
+    public static void clearRecentlyViewedHistory() {
+        putStringList(R.string.pref_caches_history, new ArrayList<>());
     }
 
-    private static void storePhoneModelAndSdk() {
-        putString(R.string.pref_phone_model_and_sdk, PHONE_MODEL_AND_SDK);
+    private static boolean outdatedPhoneModelOrSdk() {
+        return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }
 
     public static String getLastCacheLog() {
@@ -1899,6 +1898,14 @@ public class Settings {
 
     public static void setHomeLocation(@NonNull final String homeLocation) {
         putString(R.string.pref_home_location, homeLocation);
+    }
+
+    public static boolean getFollowMyLocation() {
+        return getBoolean(R.string.pref_followMyLocation, true);
+    }
+
+    public static void setFollowMyLocation(final boolean activated) {
+        putBoolean(R.string.pref_followMyLocation, activated);
     }
 
     public static void setForceOrientationSensor(final boolean forceOrientationSensor) {
@@ -1950,12 +1957,66 @@ public class Settings {
         putString(R.string.pref_selected_language, language);
     }
 
-    public static Set<String> getQuicklaunchitems() {
-        final Set<String> empty = Collections.emptySet();
-        if (sharedPrefs == null) {
-            return empty;
+    /**
+     * get comma-delimited list of info items for given key
+     *
+     * defaultSource: 0=empty, 1=migrate quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
+     */
+    public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey, final int defaultSource) {
+        final ArrayList<Integer> result = new ArrayList<>();
+        final String pref = getString(prefKey, "-");
+        if (StringUtils.equals(pref, "-")) {
+            if (defaultSource == 1) {
+                // migrate quicklaunchitem setting
+                final Set<String> empty = Collections.emptySet();
+                if (sharedPrefs != null) {
+                    for (String s : sharedPrefs.getStringSet(getKey(R.string.old_pref_quicklaunchitems), empty)) {
+                        for (QuickLaunchItem.VALUES item : QuickLaunchItem.VALUES.values()) {
+                            if (StringUtils.equals(s, item.name())) {
+                                result.add(item.id);
+                            }
+                        }
+                    }
+                }
+                putString(prefKey, StringUtils.join(result, ","));
+                Log.i("migrated quicklaunch: " + result);
+            } else if (defaultSource == 2) {
+                // migrate Formatter.formatCacheInfoLong
+                result.add(CacheListInfoItem.VALUES.GCCODE.id);
+                result.add(CacheListInfoItem.VALUES.DIFFICULTY.id);
+                result.add(CacheListInfoItem.VALUES.TERRAIN.id);
+                result.add(CacheListInfoItem.VALUES.SIZE.id);
+                result.add(CacheListInfoItem.VALUES.EVENTDATE.id);
+                result.add(CacheListInfoItem.VALUES.MEMBERSTATE.id);
+                // migrate showListsInCacheList setting
+                if (getBoolean(R.string.old_pref_showListsInCacheList, false)) {
+                    result.add(CacheListInfoItem.VALUES.NEWLINE1.id);
+                    result.add(CacheListInfoItem.VALUES.LISTS.id);
+                }
+                putString(prefKey, StringUtils.join(result, ","));
+                Log.i("migrated infoline: " + result);
+            }
+        } else {
+            for (String s : pref.split(",")) {
+                try {
+                    result.add(Integer.parseInt(s));
+                } catch (NumberFormatException ignore) {
+                    //
+                }
+            }
         }
-        return sharedPrefs.getStringSet(getKey(R.string.pref_quicklaunchitems), empty);
+        return result;
+    }
+
+    public static void setInfoItems(final @StringRes int prefKey, final ArrayList<Integer> items) {
+        final StringBuilder s = new StringBuilder();
+        for (int i : items) {
+            if (s.length() > 0) {
+                s.append(",");
+            }
+            s.append(i);
+        }
+        putString(prefKey, s.toString());
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
@@ -2277,6 +2338,10 @@ public class Settings {
 
     public static double getMapShadingLinearity() {
         return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
+    }
+
+    public static boolean getMapActionbarAutohide() {
+        return getBoolean(R.string.pref_mapActionbarAutohide, false);
     }
 
 }

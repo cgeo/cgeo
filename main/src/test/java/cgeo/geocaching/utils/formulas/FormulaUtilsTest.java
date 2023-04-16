@@ -193,6 +193,12 @@ public class FormulaUtilsTest {
         assertScanCoordinates("N 45° A.B(C+D!) E 9°(A-B).(2*D)EF", "N 45° A.B(C+D!)|E 9°(A-B).(2*D)EF");
     }
 
+    @Test
+    public void scanLongText() {
+        assertScanCoordinates("N 50° 00.A + B + C + D + E + F + G + H + I + J + K + L + M\nE 009° 00.A * B * C * ( N + O ) + P + Q + R + S - T - U - V - W",
+                "N 50° 00.A + B + C + D + E + F + G + H + I + J + K + L + M|E 009° 00.A * B * C * ( N + O ) + P + Q + R + S - T - U - V - W");
+    }
+
     private void assertScanCoordinates(final String textToScan, final String... expectedFindPairs) {
         final List<Pair<String, String>> result = FormulaUtils.scanForCoordinates(Collections.singleton(textToScan), null);
         if (expectedFindPairs == null || expectedFindPairs.length == 0) {

@@ -124,13 +124,13 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         }
     }
 
-    private Uri createInternal(@NonNull final Folder folder, @NonNull final String name, final boolean validateCache) throws IOException {
+    private Uri createInternal(@NonNull final Folder folder, @NonNull final String name, final boolean validateCache) throws IOException, IllegalArgumentException {
         final Uri folderUri = getFolderUri(folder, true, true, validateCache);
         if (folderUri == null) {
             return null;
         }
         final String docName = FileUtils.createUniqueFilename(name, queryDir(folderUri, new String[]{DocumentsContract.Document.COLUMN_DISPLAY_NAME}, c -> c.getString(0)));
-        try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
+        try (ContextLogger ignore = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
             return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, guessMimeTypeFor(docName), docName);
         }
     }
@@ -212,7 +212,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         }
     }
 
-    private List<ContentStorage.FileInformation> listInternal(@NonNull final Folder folder, final boolean validateCache) throws IOException {
+    private List<ContentStorage.FileInformation> listInternal(@NonNull final Folder folder, final boolean validateCache) throws IOException, IllegalArgumentException {
         final Uri dir = getFolderUri(folder, false, false, validateCache);
         if (dir == null) {
             return Collections.emptyList();
@@ -231,7 +231,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     }
 
     /**
-     * retrieves a FileInformation object from the current cursor row retrieved by using {@Link } columns
+     * retrieves a FileInformation object from the current cursor row retrieved by using {@link #queryDir(Uri, String[], Func1)} columns
      */
     private static ContentStorage.FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
         final String documentId = c.getString(0);
@@ -249,8 +249,13 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
     @Override
     public boolean ensureFolder(@NonNull final Folder folder, final boolean needsWrite) throws IOException {
-        //we have to validate cache for this one, otherwise outdated entries may lead to a false-positive
-        return getFolderUri(folder, needsWrite, true, true) != null;
+        try {
+            //we have to validate cache for this one, otherwise outdated entries may lead to a false-positive
+            return getFolderUri(folder, needsWrite, true, true) != null;
+        } catch (IllegalArgumentException iae) {
+            Log.w("Problem ensuring folder '" + folder + "' nw=" + needsWrite, iae);
+            return false;
+        }
     }
 
     @Override
@@ -293,7 +298,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
      * @param folder folder to get file for
      * @return file folder, or null if creation/retrieving was not at all possible
      */
-    private Uri getFolderUri(final Folder folder, final boolean needsWrite, final boolean createIfNeeded, final boolean validateCache) throws IOException {
+    private Uri getFolderUri(final Folder folder, final boolean needsWrite, final boolean createIfNeeded, final boolean validateCache) throws IOException, IllegalArgumentException {
         if (folder == null) {
             return null;
         }
@@ -386,7 +391,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         return null;
     }
 
-    private <T> List<T> queryDir(final Uri dirUri, final String[] columns, final Func1<Cursor, T> consumer) throws IOException {
+    private <T> List<T> queryDir(final Uri dirUri, final String[] columns, final Func1<Cursor, T> consumer) throws IOException, IllegalArgumentException {
 
         if (dirUri == null) {
             return Collections.emptyList();

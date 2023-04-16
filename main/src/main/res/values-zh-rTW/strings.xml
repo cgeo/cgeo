@@ -177,6 +177,7 @@
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">翻譯</string>
     <string name="translate_to_sys_lang">翻译为 %s</string>
@@ -258,10 +259,8 @@
     <string name="warn_search_help_user">輸入Geocaching.com的使用者名稱</string>
     <string name="warn_search_help_tb">輸入旅行蟲/地理錢幣的追蹤號碼。例如GCVCAZ。</string>
     <string name="warn_log_text_fill">請對日誌輸入一些文字</string>
-    <string name="warn_load_images">读取图片失败。</string>
     <string name="warn_pocket_query_select">沒有選擇攜帶需求</string>
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
     <string name="warn_notloggedin_short">尚未登錄，即時地圖只能顯示儲存在裝置上的寶藏，點選此處以便獲得更多資訊</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
@@ -323,11 +322,6 @@
     <string name="caches_more_caches_no">载入更多答案</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下載藏寶資訊中</string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -513,7 +507,6 @@
     <string name="about_license">许可</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">帮助</string>
-    <string name="about_system_collecting">已收集系統資訊，請稍待。</string>
     <string name="about_system_include">當回報bug或要求更多c:geo的資訊時，請同時回報下列系統資訊。</string>
     <string name="about_system_info_send_button">通过邮件发送…</string>
     <string name="about_system_info">c:geo 系统信息</string>
@@ -574,7 +567,6 @@
     <string name="settings_title_system">系統</string>
     <string name="settings_summary_system">系統的特殊設定和除錯選擇。</string>
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
-    <string name="settings_category_browser">瀏覽器</string>
     <string name="settings_category_geocaching_platform">地理藏寶平台</string>
     <string name="settings_category_geocaching_additionals">未來的服務與軟體plug-in</string>
     <string name="settings_category_social">社群媒體</string>
@@ -664,10 +656,9 @@
     <string name="init_summary_log_offline">開啟離線輸入日誌</string>
     <string name="init_choose_list">要求列表</string>
     <string name="init_summary_choose_list">要求列表去儲存地理藏寶</string>
-    <string name="init_listdisplay">附加的列表</string>
-    <string name="init_summary_listdisplay">在附加列表裡顯示地理藏寶的會員資訊</string>
     <string name="init_livelist">顯示方向</string>
     <string name="init_summary_livelist">顯示羅盤箭頭</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">佈景主題</string>
     <string-array name="settings_theme_entries">
@@ -744,21 +735,6 @@
     <string name="init_maptrail_length">歷史軌跡的最大長度</string>
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
-    <string name="init_trailcolor">歷史軌跡的顏色</string>
-    <string name="init_trailcolor_summary">選擇歷史軌跡的顏色(不透明)</string>
-    <string name="init_trailwidth">歷史軌跡的寬度</string>
-    <string name="init_trailwidth_summary">選擇歷史軌跡寬度</string>
-    <string name="init_directioncolor">方向線顏色</string>
-    <string name="init_directioncolor_summary">選擇方向線的顏色(不透明)。方向線將會是直接指向你的目標的直線或是特殊的導航路徑(如果您有安裝BRouter app)。</string>
-    <string name="init_directionwidth">方向線寬度</string>
-    <string name="init_directionwidth_summary">選擇方向線寬度</string>
-    <string name="init_routecolor">各自的繞線顏色</string>
-    <string name="init_routecolor_summary">為各別的航線選擇顏色和不透明度。各別航線是您通過長按航點或是cache。 （您需要先啟用長按功能，請參考地圖設定。）</string>
-    <string name="init_routewidth">各自的繞線線寬</string>
-    <string name="init_routewidth_summary">選擇各自的繞線線寬</string>
-    <string name="init_trackcolor">GPX航跡顏色</string>
-    <string name="init_trackwidth">GPX航跡線寬</string>
-    <string name="init_trackwidth_summary">選擇GPX軌跡的線寬</string>
     <string name="init_circlecolor">圓邊框顏色</string>
     <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
@@ -787,7 +763,6 @@
     <string name="init_datadirmove_success">成功移動地理藏寶資料夾</string>
     <string name="init_plain_logs">圖像日誌</string>
     <string name="init_summary_plain_logs">顯示輸入的日誌(無顏色)</string>
-    <string name="init_use_native_ua">Android 瀏覽器</string>
     <string name="init_rendertheme_folder">地圖主題資料夾</string>
     <string name="init_maintenance">維護</string>
     <string name="init_location">地理位置</string>
@@ -824,7 +799,6 @@
     <string name="feature_search_finder">打寶者搜尋</string>
     <string name="feature_favorite">把寶加入我的最愛</string>
     <string name="feature_voting">對cache來投票</string>
-    <string name="init_maplines_title">客製化地圖的線條。</string>
     <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多執行緒 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多執行緒來渲染OSM</string>
@@ -953,7 +927,6 @@
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
     <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
-    <string name="cache_log_images_title">日誌圖片</string>
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_personal_note">個人筆記</string>
     <string name="cache_menu_preventWaypointsFromNote">不允許註解裡加上航點</string>
@@ -1080,7 +1053,6 @@
     <string name="cache_location">地點</string>
     <string name="cache_coordinates">坐標</string>
     <string name="cache_coordinates_original">原始座標</string>
-    <string name="cache_spoiler_images_title">提示圖片</string>
     <string name="cache_log_types">藏寶類型</string>
     <string name="cache_coordinates_no">這個地理藏寶沒有座標。</string>
     <string name="cache_clear_history">清除瀏覽歷史紀錄</string>
@@ -1589,8 +1561,6 @@
     <string name="init_low_disk_space">磁盘空间过低</string>
     <string name="init_confirm_debug">c:geo正在除錯模式中</string>
     <!-- permission handling -->
-    <string name="close_app">關閉app</string>
-    <string name="ask_again">下次詢問我</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">選擇顏色圖案</string>
     <string name="preference_colorpicker_select_color">選擇顏色</string>
@@ -1695,8 +1665,6 @@
     <string name="wizard_advanced_restore_label">還原</string>
     <string name="status_not_ok">錯誤</string>
     <string name="wizard_status_title">配置狀態:</string>
-    <string name="wizard_status_storage_permission">儲存空間權限</string>
-    <string name="wizard_status_location_permission">位置資訊權限</string>
     <string name="wizard_status_basefolder">基礎資料夾</string>
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>

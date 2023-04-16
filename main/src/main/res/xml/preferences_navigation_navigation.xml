@@ -125,4 +125,10 @@
         android:key="@string/pref_navigation_menu_mapswithme"
         android:title="@string/cache_menu_mapswithme"
         app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_cruiser"
+        android:title="@string/cache_menu_cruiser"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>

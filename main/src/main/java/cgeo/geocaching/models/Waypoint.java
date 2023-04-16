@@ -38,7 +38,9 @@ public class Waypoint implements IWaypoint {
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int ORDER_UNDEFINED = -2;
 
-    private int id = -1;
+    public static final int NEW_ID = -1;
+
+    private int id = NEW_ID;
     private String geocode = "geocode";
     private Geocache parentCache = null;
     private WaypointType waypointType = WaypointType.WAYPOINT;
@@ -95,7 +97,7 @@ public class Waypoint implements IWaypoint {
     public Waypoint(final Waypoint other) {
         merge(other);
         this.waypointType = other.waypointType;
-        id = -1;
+        id = NEW_ID;
     }
 
     public void merge(final Waypoint old) {
@@ -111,9 +113,12 @@ public class Waypoint implements IWaypoint {
         if (coords == null) {
             coords = old.coords;
         }
-        if (StringUtils.isBlank(note)) {
+
+        // keep note only for user-defined waypoints
+        if (StringUtils.isBlank(note) && isUserDefined()) {
             note = old.note;
         }
+
         if (StringUtils.isBlank(userNote)) {
             userNote = old.userNote;
         }
@@ -131,6 +136,10 @@ public class Waypoint implements IWaypoint {
     }
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
+        if (oldPoints.isEmpty()) {
+            return;
+        }
+
         // Build a map of new waypoints for faster subsequent lookups
         final Map<String, Waypoint> newPrefixes = new HashMap<>(newPoints.size());
         for (final Waypoint waypoint : newPoints) {
@@ -199,6 +208,10 @@ public class Waypoint implements IWaypoint {
     @Override
     public int getId() {
         return id;
+    }
+
+    public boolean isNewWaypoint() {
+        return id == NEW_ID;
     }
 
     public void setId(final int id) {

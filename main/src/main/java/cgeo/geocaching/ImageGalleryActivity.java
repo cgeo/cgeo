@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.utils.ImageUtils;
 
@@ -57,11 +56,6 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
     }
 
     public static void startActivity(final Context fromActivity, final String geocode, final List<Image> images) {
-
-        if (!Settings.enableFeatureNewImageGallery()) {
-            ImagesActivity.startActivity(fromActivity, geocode, images);
-            return;
-        }
 
         final Intent logImgIntent = new Intent(fromActivity, ImageGalleryActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, geocode);

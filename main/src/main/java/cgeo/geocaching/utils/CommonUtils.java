@@ -1,6 +1,9 @@
 package cgeo.geocaching.utils;
 
+import android.os.Build;
 import android.util.Pair;
+
+import androidx.core.util.Supplier;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,5 +40,23 @@ public class CommonUtils {
             }
         }
         return result;
+    }
+
+    /** Returns a ThreadLocal with initial value given by passed Supplier.
+     * Use this method instead of ThreadLocal.withInitial() for SDK<26;
+     */
+    public static <T> ThreadLocal<T> threadLocalWithInitial(final Supplier<T> supplier) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return ThreadLocal.withInitial(supplier::get);
+        }
+
+        return new ThreadLocal<T>() {
+
+            @Override
+            protected T initialValue() {
+                return supplier.get();
+            }
+        };
     }
 }

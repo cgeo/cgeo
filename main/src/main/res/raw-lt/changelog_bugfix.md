@@ -1,25 +1,21 @@
 ##
-
-### Bendras
-- Pataisymas: Naujas keliauninkas nustatomas į apsilankymo režimą automatiškai
-- Pataisymas: Nerodomi bazinio gc.com nario nustatymai
-- Pakeitimas: pašalintas mapy.cz žemėlapio teikėjas (dėl licencijavimo pakeitimo)
-- Pataisymas: Slėptuvės paieškos laukas išvalomas atlikus paiešką
-- Pataisymas: Laipsnių formulių su keliais taškais strigtis
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+- Fix: Error on adding caches to / removing caches from bookmark lists
+- Fix: Error on downloading bookmark lists
 
 ##
+- Fix: Widen log description column in landscape mode
+- Fix: Make image format error message clearer
+- Fix: User-created waypoints not being displayed on OSM map
+- Fix: Multiple navigation lines on Google Maps map
 
-### Bendras
-- Pataisymas: Naudokite atnaujintą URL Mapquest geokodavimui
-- Pataisymas: Užkirstas kelias programėlės užstrigimui tam tikromis sąlygomis bandant pridėti nuotrauką prie žurnalo
-- Pakeitimas: Geresnis klaidos pranešimas apie tai, kaip išspręsti Captcha reikalavimą prisijungus prie geocaching.com
-
-### Slėptuvės
-- Pataisymas: Neleidžiama spoilerių vaizdams dubliuotis galerijoje atnaujinant slėptuvę
-
-### Kintamųjų skaičiuoklė
-- Naujiena: Funkcija TRUNC sutrumpina skaičių iki sveikojo skaičiaus, pašalindama trupmeninę skaičiaus dalį
-- Naujiena: Leidžiama skaičiavimams naudoti laužtinius skliaustus. Kintamiems diapazonams naudokite pvz. \[:1-5\].
-
-### Žemėlapis
-- Pataisymas: Rodomas teisingas S4.0 ir S4.5 SV žymeklis
+##
+- Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
+- Fix: List of extended filters not translated when language is set to non-default within c:geo
+- Pataisymas: Senesniuose įrenginiuose nebegalima atsisiųsti/atnaujinti maršruto plytelių arba žemėlapių
+- Pataisymas: Vietos pavadinimas rodomas kompase, o ne koordinatėse
+- Pataisymas: c:geo prideda kelio tašką, kai tam tikros formulės buvo nukopijuotos į mainų sritį
+- Fix: Wrong image orientation for own images in portrait mode
+- Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
+- Pataisymas: Įkeliant GPX takelius/maršrutus gali atsirasti nesusietų segmentų

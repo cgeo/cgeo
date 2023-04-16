@@ -24,6 +24,8 @@ public class Intents {
     public static final String EXTRA_BRAND = PREFIX + "brand";
     public static final String EXTRA_IMAGE = PREFIX + "image";
     public static final String EXTRA_INDEX = PREFIX + "index";
+    public static final String EXTRA_CLASS = PREFIX + "class";
+    public static final String EXTRA_FIELD = PREFIX + "field";
     public static final String EXTRA_DELETE_FLAG = PREFIX + "deleteflag";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_MAX_IMAGE_UPLOAD_SIZE = PREFIX + "max-image-upload-size";
@@ -63,6 +65,7 @@ public class Intents {
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
     public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
     public static final String ACTION_GEOCACHE_CHANGED = PREFIX_ACTION + "GEOCACHE_CHANGED";
+    public static final String ACTION_INVALIDATE_MAPLIST = PREFIX_ACTION + "INVALIDATE_MAPLIST";
 
     private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
     public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";

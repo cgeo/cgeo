@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">χωρίς κλιμάκωση</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Μετάφραση</string>
     <string name="translate_to_sys_lang">Μετάφραση στα %s</string>
@@ -270,10 +271,8 @@
     <string name="warn_search_help_user">Εισάγετε ένα όνομα χρήστη από το Geocaching.com.</string>
     <string name="warn_search_help_tb">Εισαγάγετε τον κωδικό του ανιχνεύσιμου. Για παράδειγμα, «TB29QMZ».</string>
     <string name="warn_log_text_fill">Παρακαλώ εισάγετε κάποιο κείμενο για το αρχείο καταγραφής.</string>
-    <string name="warn_load_images">Απέτυχε η φόρτωση εικόνων στο c:geo.</string>
     <string name="warn_pocket_query_select">Δεν έχει επιλεγεί καμία Προσωπική Αναζήτηση.</string>
     <string name="warn_no_pocket_query_found">Δεν βρέθηκε καμία Προσωπική Αναζήτηση online.</string>
-    <string name="warn_invalid_character">Ο χαρακτήρας πρέπει να είναι ΓΡΑΜΜΑ ή ΑΡΙΘΜΟΣ</string>
     <string name="warn_notloggedin_title">Λειτουργία χωρίς σύνδεση</string>
     <string name="warn_notloggedin_short">Δεν είστε συνδεδεμένοι. Ο ζωντανός χάρτης θα εμφανίζει μόνο τις ηδη αποθηκευμένες κρύπτες. Πατήστε εδώ για περισσότερες πληροφορίες.</string>
     <string name="warn_notloggedin_long">Δεν έχετε συνδεθεί (ακόμη). Ο ζωντανός χάρτης θα εμφανίζει μόνο τις τοπικά αποθηκευμένες κρύπτες και οι λειτουργίες που απαιτούν σύνδεση δεν θα είναι διαθέσιμες.\n\nΕίτε δεν υπάρχει σύνδεση σε δίκτυο ή υπάρχει πρόβλημα με τον server ή πρέπει να ρυθμίσετε τις υπηρεσίες σας στο geocaching. \n\nΘέλετε να ρυθμίσετε τις υπηρεσίες τώρα;</string>
@@ -343,12 +342,6 @@
     <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
     <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
-    <string name="caches_downloading">Λήψη κρυπτών…\nETA: </string>
-    <string name="caches_eta_ltm">Λιγότερο από ένα λεπτό</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d λεπτό</item>
-        <item quantity="other">%dλεπτά</item>
-    </plurals>
     <string name="caches_store_offline">Αποθήκευση εκτός σύνδεσης</string>
     <string name="caches_store_offline_map">Αποθήκευση κρυπτών εκτός σύνδεσης</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
@@ -616,7 +609,6 @@
     <string name="about_license">Άδεια χρήσης</string>
     <string name="about_apache_license"><a href="">Άδεια Apache, Έκδοση 2.0</a></string>
     <string name="about_help">Βοήθεια</string>
-    <string name="about_system_collecting">Οι πληροφορίες συστήματος συλλέγονται, παρακαλώ περιμένετε…</string>
     <string name="about_system_include">Παρακαλούμε να συμπεριλάβετε τις ακόλουθες πληροφορίες συστήματος κατά την αποστολή μιας αναφοράς σφάλματος ή όταν ζητάτε περισσότερες πληροφορίες σχετικά με το c:geo:</string>
     <string name="about_system_info_send_button">Αποστολή με e-mail…</string>
     <string name="about_system_info">πληροφορίες συστήματος c:geo</string>
@@ -715,7 +707,6 @@
     <string name="settings_title_system">Σύστημα</string>
     <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
-    <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
     <string name="settings_category_nearbysearch">Κοντινή αναζήτηση</string>
     <string name="init_nearbysearchlimit_title">Όρια αναζήτησης αποτελεσμάτων</string>
@@ -839,14 +830,13 @@
     <string name="init_summary_log_offline">Ενεργοποίηση καταγραφής εκτός σύνδεσης (Δεν θα εμφανιστεί η οθόνη ηλεκτρονικού αρχείου κατά την καταγραφή, δεν θα μεταφορτωθούν αρχεία καταγραφής)</string>
     <string name="init_choose_list">Ζητήστε τη λίστα</string>
     <string name="init_summary_choose_list">Να ερωτώμαι σε ποια λίστα θα αποθηκεύονται οι κρύπτες</string>
-    <string name="init_listdisplay">Πρόσθετες λίστες</string>
     <string name="init_list_initial_load_limit">Όριο φόρτωσης λίστας</string>
     <string name="init_summary_list_initial_load_limit">Μέγιστος αριθμός κρυπτών που θα φορτωθούν αρχικά από τη βάση δεδομένων όταν εμφανίζονται οι αποθηκευμένες λίστες. Επιλέξτε 0 για \'απεριόριστη\'</string>
-    <string name="init_summary_listdisplay">Εμφάνιση ιδιότητας μέλους των κρυπτών και σε άλλες λίστες, σε μια λίστα κρυπτών</string>
     <string name="init_livelist">Εμφάνιση κατεύθυνσης</string>
     <string name="init_summary_livelist">Εμφάνιση βέλους με κατεύθυνση πυξίδας για κρύπτες σε μια λίστα</string>
     <string name="init_quicklaunchitems">Πλήκτρα ταχείας εκκίνησης</string>
     <string name="init_summary_quicklaunchitems">Επιλέξτε ένα ή περισσότερα αντικείμενα ως κουμπιά γρήγορης εκκίνησης στην αρχική οθόνη</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Θέμα</string>
     <string-array name="settings_theme_entries">
@@ -882,7 +872,6 @@
     <string name="init_backup_history_length_max">Διατήρηση όλων</string>
     <string name="init_backup_history_delete_warning">Έχετε αποθηκεύσει περισσότερα αρχεία ασφαλείας από το μέγιστο επιτρεπτό όριο. Θέλετε να διαγραφούν όλα τα πλεονάζοντα αρχεία ασφαλείας;</string>
     <string name="init_backup_automatic_summary">Εκτελεί ένα αυτόματο αντίγραφο ασφαλείας κάθε x ημέρες (επιπλέον των τυχόν χειροκίνητα δημιουργημένων αντιγράφων ασφαλείας), 0=off</string>
-    <string name="init_backup_automatic_performing">Δημιουργία αντιγράφου ασφαλείας…</string>
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
@@ -935,22 +924,6 @@
     <string name="init_maptrail_length">Μέγιστο μήκος ιστορικών διαδρομών</string>
     <string name="init_maptrail_length_summary">Ορίστε το μέγιστο μήκος των ιστορικών διαδρομών (θα επιβάλλεται σε κάθε εκκίνηση του c:geo). Η προεπιλεγμένη τιμή είναι 700 - ρυθμίστε την ανάλογα με την διαθέσιμη μνήμη.</string>
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
-    <string name="init_trailcolor">Χρώμα γραμμής ιστορικού διαδρομών</string>
-    <string name="init_trailcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής των ιστορικών διαδρομών</string>
-    <string name="init_trailwidth">Πλάτος γραμμής ιστορικού διαδρομών</string>
-    <string name="init_trailwidth_summary">Επιλέξτε το πλάτος για την γραμμή ιστορικών διαδρομών</string>
-    <string name="init_directioncolor">Χρώμα γραμμής κίνησης</string>
-    <string name="init_directioncolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής κατεύθυνσης. Η γραμμή κατεύθυνσης είναι μια ευθεία γραμμή μέχρι το επιλεγμένο σημείο στόχου, ή είναι μια διαδρομή δρομολόγησης εάν η δρομολόγηση είναι ενεργή έχοντας εγκαταστήσει την εφαρμογή BRouter.</string>
-    <string name="init_directionwidth">Πλάτος γραμμής κίνησης</string>
-    <string name="init_directionwidth_summary">Επιλέξτε το πλάτος για την γραμμή κατεύθυνσης</string>
-    <string name="init_routecolor">Χρώμα γραμμής ξεχωριστής διαδρομής</string>
-    <string name="init_routecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την γραμμή της ξεχωριστής διαδρομής. Μια ξεχωριστή διαδρομή είναι μια συλλογή από ενδιάμεσα σημεία και/ή κρύπτες που εσείς επιλέξατε πατώντας παρατεταμένα πάνω στο ενδιάμεσο σημείο/κρύπτη. (Αρχικά πρέπει να ενεργοποιήσετε την δυνατότητα παρατεταμένου πατήματος, δείτε στις ρυθμίσεις χάρτη.)</string>
-    <string name="init_routewidth">Πλάτος γραμμής ξεχωριστής διαδρομής</string>
-    <string name="init_routewidth_summary">Επιλέξτε το πλάτος γραμμής της ξεχωριστής διαδρομής</string>
-    <string name="init_trackcolor">Χρώμα γραμμής κομματιού/διαδρομής GPX</string>
-    <string name="init_trackcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της γραμμής ίχνους. Το ίχνος αποτελείται από πολλαπλά ενδιάμεσα σημεία και μπορεί να φορτωθεί μέσω ενός αρχείου GPX ίχνους.</string>
-    <string name="init_trackwidth">Πλάτος γραμμής διαδρομής GPX</string>
-    <string name="init_trackwidth_summary">Επιλέξτε πλάτος γραμμής ίχνους GPX / διαδρομής</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
     <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
@@ -989,11 +962,8 @@
     <string name="init_datadirmove_failed">Η μετακίνηση του καταλόγου δεδομένων κρυπτών απέτυχε εν μέρει ή συνολικά. Παρακαλώ ελέγξτε τους παλιούς και νέους καταλόγους και μετακινήστε χειροκίνητα εάν χρειαστεί.</string>
     <string name="init_plain_logs">Απλές καταγραφές</string>
     <string name="init_summary_plain_logs">Καταχωρήσεις των αρχείων καταγραφής χωρίς χρώματα</string>
-    <string name="init_use_native_ua">Πρόγραμμα περιήγησης Android</string>
-    <string name="init_summary_use_native_ua">Προσδιορίζουν το πρόγραμμα περιήγησης για Android. Λύνει προβλήματα σύνδεσης όταν χρησιμοποιείτε ορισμένες υπηρεσίες παροχής δικτύου.</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
     <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
-    <string name="init_mapshading_folder_text">Οι χάρτες εκτός σύνδεσης μπορούν να επικαλυφθούν με υψομετρικές πληροφορίες. Αυτές οι πληροφορίες παρέχονται ως hgt/dem αρχεία που μπορούν να τοποθετηθούν σε αυτόν τον φάκελο.</string>
     <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
     <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
     <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
@@ -1041,7 +1011,6 @@
     <string name="feature_search_finder">Αναζήτηση ανά άτομα που τη βρήκαν</string>
     <string name="feature_favorite">Προσθήκη της κρύπτης στις αγαπημένες</string>
     <string name="feature_voting">Ψηφοφορία κρυπτών</string>
-    <string name="init_maplines_title">Προσαρμογή γραμμών χάρτη</string>
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
@@ -1208,7 +1177,6 @@
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Απόθεμα</string>
-    <string name="cache_log_images_title">Αρχείο καταγραφής εικόνων</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
     <string name="cache_personal_note">Προσωπική Σημείωση</string>
     <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>
@@ -1365,7 +1333,6 @@
     <string name="cache_location">Τοποθεσία</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
     <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
-    <string name="cache_spoiler_images_title">Εικόνες spoiler</string>
     <string name="cache_log_types">Τύποι αρχείων καταγραφής</string>
     <string name="cache_coordinates_no">Αυτή η κρύπτη δεν έχει συντεταγμένες.</string>
     <string name="cache_clear_history">Εκκαθάριση ιστορικού</string>
@@ -1610,7 +1577,6 @@
     <string name="map_show_other_title">Εμφάνιση άλλων:</string>
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
-    <string name="map_theme_legend">Υπόμνημα Θεμάτων</string>
     <string name="map_theme_legend_info">Πατήστε στον τίτλο της κατηγορίας για να ανοίξετε/κλείσετε. Πατήστε παρατεταμένα ένα σύμβολο για μικρές πληροφορίες σχετικά με αυτό το σύμβολο. Πατήστε στο εικονίδιο πληροφοριών για να επισκεφθείτε ένα λεπτομερές υπόμνημα online.</string>
     <string name="google_maps_style_default">Προεπιλογή</string>
     <string name="google_maps_style_night">Νύχτα</string>
@@ -2140,10 +2106,6 @@
     <string name="init_confirm_debug">Το c:geo εκτελείται σε λειτουργία εντοπισμού σφαλμάτων!</string>
     <string name="list_confirm_debug_message">Η λειτουργία εντοπισμού σφαλμάτων προκαλεί αστάθεια! Θέλετε να απενεργοποιήσετε την κατάσταση λειτουργίας εντοπισμού σφαλμάτων;</string>
     <!-- permission handling -->
-    <string name="close_app">Κλείσιμο εφαρμογής</string>
-    <string name="ask_again">Ερώτηση ξανά</string>
-    <string name="location_permission_request_explanation">Το c:geo χρειάζεται πρόσβαση στο GPS της συσκευής σας για να εντοπίσει την τοποθεσία σας και να υπολογίσει την απόσταση και την κατεύθυνση προς τις κρύπτες. Η χρήση του είναι αδύνατη χωρίς αυτήν την άδεια.</string>
-    <string name="storage_permission_request_explanation">Το c:geo θα αποθηκεύσει δεδομένα στη μνήμη του τηλεφώνου σας ή στην κάρτα SD καθώς αποθηκεύετε κρύπτες για χρήση εκτός σύνδεσης. Επιπλέον το c:geo θα χρησιμοποιήσει τη μνήμη του τηλεφώνου σας για την εισαγωγή και εξαγωγή αρχείων και χαρτών εκτός σύνδεσης. Η χρήση του δεν είναι δυνατή χωρίς αυτήν την άδεια.</string>
     <string name="storage_permission_needed">Μη επιτρεπτή λειτουργία χωρίς άδεια αποθήκευσης.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Επιλογή συνδυασμού χρωμάτων</string>
@@ -2346,8 +2308,6 @@
     <string name="wizard_advanced_restore_info">Εάν έχετε ένα αντίγραφο ασφαλείας μιας προηγούμενης εγκατάστασης, μπορείτε να επαναφέρετε τις ρυθμίσεις και/ή geocache δεδομένα.</string>
     <string name="status_not_ok">ΛΑΘΟΣ</string>
     <string name="wizard_status_title">Κατάσταση διαμόρφωσης</string>
-    <string name="wizard_status_storage_permission">Άδεια αποθήκευσης</string>
-    <string name="wizard_status_location_permission">Άδεια τοποθεσίας</string>
     <string name="wizard_status_basefolder">ΒασικόςΦάκελος</string>
     <string name="wizard_status_platform">Υπηρεσίες Geocaching</string>
     <string name="wizard_not_now">Όχι τώρα</string>
@@ -2361,12 +2321,10 @@
     <string name="done">Ολοκληρώθηκε</string>
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
-    <string name="later">Αργότερα</string>
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
-    <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Περιοχές</string>
     <string name="rtl_fell_meadow">Λιβάδι</string>

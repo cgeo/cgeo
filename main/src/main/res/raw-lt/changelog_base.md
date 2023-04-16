@@ -1,13 +1,29 @@
 ### Žemėlapis
-- Naujiena: OSM žemėlapio šaltinis osm.paws.cz
+- Pakeitimas: Naudojama paskutinė žinoma žemėlapio padėtis kaip atsarginė vieta (kai GPS nepasiekiamas ir „sekti mano vietą“ neaktyvus)
+- Naujiena: atnaujinkite slėptuves maršrute
+- Naujiena: Individualus takelių spalvinimas
+- Naujiena: Atnaujinamas žemėlapių sąrašas gavus žemėlapio failą
+- Pakeitimas: Neįdiegiamas atsisiųstas žemėlapis/tema automatiškai
+- Naujiena: Individualus maršruto optimizavimas (eksperimentinis)
+- Naujiena: „Google: Terrain“ žemėlapių palaikymas
+- Naujiena: Linijos pločio nustatymas kiekvienam takeliui
+- Naujiena: Slėpiama žemėlapio veiksmų juostą pagal poreikį (palietus tuščią vietą žemėlapyje)
+- Pakeitimas: Perkėlėme greitųjų nustatymų mygtukus į kairę gulsčiojo ekrano režimu, kad gautumėte daugiau vertikalios vietos
+- New: Visualize coords-only-points of individual route
 
 ### Slėptuvės detalės
-- Naujiena: Nauja įmantresnė vaizdų galerija
-- Pataisymas: Atnaujinę arba ištrynę kelio tašką, atkurkite paziciją kelio taškų sąraše
-- Pataisymas: Kuriant naują kelio tašką pereinama į apačią
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Fix: Preserve scroll position when using "render complete description" button
 
 ### Bendras
-- API lygio pakeitimas (sudarytas SDK 32)
-- Atnaujinkite kai kurias priklausomas bibliotekas
-- Paleisties metu naudokite Android įtaisytąją paleidimo ekrano funkciją
-- Pakeitimas: Naudojamas kitas Android mechanizmas, kad gautumėte atsisiuntimus (geresniam suderinamumi su Android 12+)
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
+- New: Add 'recently viewed caches' to quicklaunch options
+- New: Add last logs smiley row to configurable info items

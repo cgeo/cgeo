@@ -2,7 +2,6 @@ package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.settings.Settings;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,7 +21,6 @@ public class RenderThemeSettings extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        setTheme(Settings.isLightSkin(this) ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
         ActivityMixin.setDisplayHomeAsUpEnabled(this, true);

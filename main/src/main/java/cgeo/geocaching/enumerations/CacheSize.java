@@ -24,9 +24,9 @@ public enum CacheSize {
     REGULAR("Regular", 3, R.string.cache_size_regular, "regular", new int[]{3}, "M"),
     LARGE("Large", 4, R.string.cache_size_large, "large", new int[]{4}, "L"),
     VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge", null, "XL"), // used by OC only
-    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", null, "-"),
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, "", new int[]{1}, "-"), // e.g. EC
     VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none", new int[]{5}, "V"), //gc:
-    OTHER("Other", 8, R.string.cache_size_other, "other", new int[]{6, 1}, "O"), //6="normal" other, 1=earth cache
+    OTHER("Other", 8, R.string.cache_size_other, "other", new int[]{6}, "O"),
     UNKNOWN("Unknown", -1, R.string.cache_size_unknown, "", null, "?"); // CacheSize not init. yet
 
     @NonNull

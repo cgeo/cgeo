@@ -103,6 +103,11 @@ public class Image implements Parcelable {
          */
         @NonNull
         public Builder setUrl(@NonNull final String url) {
+            return setUrl(url, null);
+        }
+
+        @NonNull
+        public Builder setUrl(@NonNull final String url, @Nullable final String defaultScheme) {
             if (StringUtils.isEmpty(url)) {
                 uri = Uri.EMPTY;
                 return this;
@@ -111,8 +116,13 @@ public class Image implements Parcelable {
             // Assume uri has a scheme
             uri = Uri.parse(url);
             if (uri.isRelative()) {
-                // If not the case treat it as a file
-                uri = Uri.fromFile(new File(url));
+                // If not the case use default
+                if (defaultScheme != null) {
+                    uri = uri.buildUpon().scheme(defaultScheme).build();
+                } else {
+                    //if defaultScheme is null, then assume file
+                    uri = Uri.fromFile(new File(url));
+                }
             }
             return this;
         }

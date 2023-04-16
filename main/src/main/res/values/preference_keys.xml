@@ -156,8 +156,11 @@
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
     <string translatable="false" name="pref_units_imperial">units</string>
-    <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems</string>
+    <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
 
+    <!-- category cache lists -->
+    <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
+    <string translatable="false" name="pref_cacheListInfo">cacheListInfo</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for cachedetails screen -->
@@ -174,7 +177,8 @@
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for map screen -->
-    <string translatable="false" name="preference_screen_map">preference_screen_map</string>
+    <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
+    <string translatable="false" name="preference_screen_map_content_behavior">preference_screen_map_content_behavior</string>
     <!-- ============================================================================================================================================================================== -->
 
     <!-- category map data -->
@@ -208,6 +212,7 @@
 
     <!-- category map behavior -->
     <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
+    <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
 
     <!-- category proximity notfication -->
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
@@ -260,8 +265,6 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
     <string translatable="false" name="pref_choose_list">choose_list</string>
-    <string translatable="false" name="pref_showListsInCacheList">showListsInCacheList</string>
-    <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
 
     <!-- category gpx -->
     <string translatable="false" name="pref_persistablefolder_gpx">persistablefolder_gpx</string>
@@ -323,6 +326,7 @@
     <string translatable="false" name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string translatable="false" name="pref_navigation_menu_pebble">navigationPebble</string>
     <string translatable="false" name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>
+    <string translatable="false" name="pref_navigation_menu_cruiser">navigationCruiser</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -473,7 +477,7 @@
     <string translatable="false" name="pref_user_vote">user-vote</string>
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
-    <string translatable="false" name="pref_feature_new_image_gallery">feature_new_image_gallery</string>
+    <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
 
     <!-- additional map settings -->
     <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
@@ -493,6 +497,7 @@
     <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>
     <string translatable="false" name="pref_mapAutoDownloadsLastCheck">mapAutoDownloadsLastCheck</string>
     <string translatable="false" name="pref_renderthemefile">renderthemefile</string>
+    <string translatable="false" name="pref_vtm_default">vtm_default</string>
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_google_map_theme">google_map_theme</string>
@@ -540,6 +545,7 @@
     <string translatable="false" name="pref_last_cache_log">last_cache_log</string>
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>
     <string translatable="false" name="pref_home_location">home_location</string>
+    <string translatable="false" name="pref_followMyLocation">followMyLocation</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -548,5 +554,7 @@
     <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="old_pref_mapAutoDownloads">mapAutoDownloads</string>
     <string translatable="false" name="old_pref_skin">skin</string>
+    <string translatable="false" name="old_pref_quicklaunchitems">quicklaunchitems</string>
+    <string translatable="false" name="old_pref_showListsInCacheList">showListsInCacheList</string>
 
 </resources>

@@ -301,6 +301,10 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
         public void accept(final Status gpsStatus) {
+            if (binding == null || binding.locationStatus == null) {
+                //activity is not initialized yet, ignore update
+                return;
+            }
             binding.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
@@ -309,6 +313,10 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDirData(@NonNull final GeoData geo, final DirectionData dir) {
+            if (binding == null || binding.locationStatus == null) {
+                //activity is not initialized yet, ignore update
+                return;
+            }
             try {
                 binding.locationStatus.updateGeoData(geo);
 

@@ -188,6 +188,7 @@
     <string name="log_image_info_notscaled">Sin escalar</string>
     <string name="log_image_titleprefix">Imagen</string>
     <string name="datetime_nodateset_display">No hay fecha fijada</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Traducir</string>
     <string name="translate_to_sys_lang">Traducir al %s</string>
@@ -270,10 +271,8 @@
     <string name="warn_search_help_user">Escribe el nombre de usuario de Geocaching.com.</string>
     <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
-    <string name="warn_load_images">Error al cargar las imágenes.</string>
     <string name="warn_pocket_query_select">No ha seleccionado ninguna Pocket Query.</string>
     <string name="warn_no_pocket_query_found">No se ha encontrado ninguna Pocket Query en Geocaching.com.</string>
-    <string name="warn_invalid_character">El carácter debe ser una LETRA o un DÍGITO</string>
     <string name="warn_notloggedin_title">Modo sin conexión</string>
     <string name="warn_notloggedin_short">Sesión no iniciada. El mapa en vivo sólo mostrará cachés almacenados localmente. Pulsa aquí para más información.</string>
     <string name="warn_notloggedin_long">No conectado (todavía). El mapa en vivo sólo mostrará cachés almacenados localmente y las funciones en línea no funcionarán.\n\nNo hay conexión de red, un problema con el servidor o tienes que (re)configurar tus servicios de geocaching.\n\n¿Desea configurar los servicios ahora?</string>
@@ -343,12 +342,6 @@
     <string name="caches_more_caches_loading">Cargando cachés…</string>
     <string name="caches_more_caches_currently">actualmente</string>
     <string name="caches_more_caches_remaining">Cargar cachés restantes (%1$d / %2$d)</string>
-    <string name="caches_downloading">Descargando cachés…\nFaltan: </string>
-    <string name="caches_eta_ltm">Menos de un minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto</item>
-        <item quantity="other">%d minutos</item>
-    </plurals>
     <string name="caches_store_offline">Guardar en el dispositivo</string>
     <string name="caches_store_offline_map">Almacenar cachés en el dispositivo</string>
     <string name="caches_store_selected">Almacenamiento seleccionado</string>
@@ -594,7 +587,6 @@
     <string name="about_license">Licencia</string>
     <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
     <string name="about_help">Ayuda</string>
-    <string name="about_system_collecting">Información del sistema recopilado, por favor espere…</string>
     <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
     <string name="about_system_info_send_button">Enviar por correo…</string>
     <string name="about_system_info">Información del sistema c:geo</string>
@@ -685,7 +677,6 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Configuración específica del sistema y opciones de depuración.</string>
     <string name="settings_title_navigation_menu">Menú de navegación</string>
-    <string name="settings_category_browser">Navegador</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
     <string name="settings_category_geocaching_additionals">Servicios adicionales y addon</string>
     <string name="settings_category_social">Redes sociales</string>
@@ -802,12 +793,11 @@
     <string name="init_summary_log_offline">Permitir el registro sin conexión (No se mostrará la pantalla de registro en línea ni se enviarán los logs)</string>
     <string name="init_choose_list">Preguntar lista</string>
     <string name="init_summary_choose_list">Preguntar en qué lista guardar el caché</string>
-    <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_list_initial_load_limit">Límite de carga de lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de cachés que son cargados inicialmente al mostrar las listas almacenadas. Elija 0 para \'ilimitado\'</string>
-    <string name="init_summary_listdisplay">Mostrar pertenencia de cachés a listas adicionales en una lista de cachés</string>
     <string name="init_livelist">Mostrar dirección</string>
     <string name="init_summary_livelist">Mostrar una flecha con la dirección de la brújula para los cachés de una lista</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -889,22 +879,6 @@
     <string name="init_maptrail_length">Longitud máxima de la pista de historial</string>
     <string name="init_maptrail_length_summary">Establece la longitud máxima de la pista de historia (ejecutada en cada inicio de c:geo). El valor predeterminado es de 700 puntos - ajuste de acuerdo a la memoria disponible.</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
-    <string name="init_trailcolor">Color de la línea del histórico de la ruta</string>
-    <string name="init_trailcolor_summary">Seleccionar color y opacidad para la línea del historial</string>
-    <string name="init_trailwidth">Ancho de la línea del histórico de la ruta</string>
-    <string name="init_trailwidth_summary">Seleccionar ancho para la línea del historial</string>
-    <string name="init_directioncolor">Color de línea de dirección</string>
-    <string name="init_directioncolor_summary">Seleccione el color y la opacidad para la línea de dirección. La línea de dirección muestra una línea recta al objetivo de navegación seleccionado, o la ruta de navegación especifica, si la ruta está habilitada instalando la aplicación BRouter.</string>
-    <string name="init_directionwidth">Ancho de línea de dirección</string>
-    <string name="init_directionwidth_summary">Seleccionar ancho para la línea de dirección</string>
-    <string name="init_routecolor">Color de línea de ruta individual</string>
-    <string name="init_routecolor_summary">Seleccione el color y la opacidad para una línea de ruta individual. Una ruta individual es una colección de waypoints y/o cachés que seleccionó al mantener pulsado el waypoint/caché. (Necesitas activar primero la función de toque largo, mira la configuración del mapa.)</string>
-    <string name="init_routewidth">Ancho de la línea de ruta individual</string>
-    <string name="init_routewidth_summary">Seleccione el ancho para la línea de ruta individual</string>
-    <string name="init_trackcolor">Color de línea de la pista/ruta GPX</string>
-    <string name="init_trackcolor_summary">Seleccione el color y la opacidad de la línea de la pista/ruta. Una pista/ruta consiste en varios waypoints y puede ser cargada mediante un fichero GPX de pista/ruta.</string>
-    <string name="init_trackwidth">Ancho de la línea/ruta GPX</string>
-    <string name="init_trackwidth_summary">Seleccione el ancho para la línea de pista/ruta GPX</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
     <string name="init_circlefillcolor">Color de relleno de círculo</string>
@@ -943,8 +917,6 @@
     <string name="init_datadirmove_failed">Error al mover la carpeta de datos de Geocache. Por favor, compruebe las carpetas antiguas y nuevas y mueva los datos que faltan manualmente si es necesario.</string>
     <string name="init_plain_logs">Registros sencillos</string>
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
-    <string name="init_use_native_ua">Navegador de Android</string>
-    <string name="init_summary_use_native_ua">Identificarse como usuario Android. Resuelve algunos problemas de acceso cuando se usan ciertos proveedores de red.</string>
     <string name="init_rendertheme_folder">Carpeta de temas del mapa</string>
     <string name="init_maintenance">Mantenimiento</string>
     <string name="init_maintenance_directories_note">c:geo almacena imágenes y otros archivos relacionados con un caché en una carpeta dedicada. En algunos casos (al importar/exportar la base de datos) esta carpeta puede contener archivos obsoletos que se pueden eliminar aquí.</string>
@@ -988,7 +960,6 @@
     <string name="feature_search_finder">Buscar por quien lo ha encontrado</string>
     <string name="feature_favorite">Añadiendo caché a favoritos</string>
     <string name="feature_voting">Votando por cachés</string>
-    <string name="init_maplines_title">Personalización de líneas de mapa</string>
     <string name="init_map_other">Otro</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar múltiples capas para dibujar mapas de OpenStreetMap</string>
@@ -1147,7 +1118,6 @@
     <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventario</string>
-    <string name="cache_log_images_title">Imágenes de registros</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Nota personal</string>
     <string name="cache_menu_preventWaypointsFromNote">Evitar waypoints de la nota</string>
@@ -1294,7 +1264,6 @@
     <string name="cache_location">Ubicación</string>
     <string name="cache_coordinates">Coordenadas</string>
     <string name="cache_coordinates_original">Coordenadas originales</string>
-    <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
     <string name="cache_log_types">Tipos de registro</string>
     <string name="cache_coordinates_no">Este caché no tiene coordenadas.</string>
     <string name="cache_clear_history">Borrar historial</string>
@@ -2020,9 +1989,6 @@ Nombre de archivo:%2$s</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
     <!-- permission handling -->
-    <string name="close_app">Cerrar aplicación</string>
-    <string name="ask_again">Preguntarme de nuevo</string>
-    <string name="storage_permission_request_explanation">c:geo escribirá datos en el almacenamiento de tu teléfono o tarjeta SD en el momento en que guardes geocachés para su uso sin conexión. Además c:geo utilizará el almacenamiento de tu teléfono para importar y exportar archivos y leer mapas sin conexión. No puede ser usado sin este permiso.</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccionar esquema de color</string>
@@ -2206,8 +2172,6 @@ Nombre de archivo:%2$s</string>
     <string name="wizard_advanced_restore_info">Si tienes una copia de seguridad de una instalación anterior puedes restaurar la configuración y/o los datos del caché.</string>
     <string name="status_not_ok">ERROR</string>
     <string name="wizard_status_title">Estado de configuración</string>
-    <string name="wizard_status_storage_permission">Permiso de almacenamiento</string>
-    <string name="wizard_status_location_permission">Permiso de ubicación</string>
     <string name="wizard_status_basefolder">Carpeta base</string>
     <string name="wizard_status_platform">Servicios de geocaching</string>
     <string name="wizard_not_now">Ahora no</string>
@@ -2221,12 +2185,10 @@ Nombre de archivo:%2$s</string>
     <string name="done">Hecho</string>
     <string name="finish">Finalizar</string>
     <string name="back">Atrás</string>
-    <string name="later">Más tarde</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todo</string>
-    <string name="touch_again_to_exit">Por favor toque de nuevo para salir</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>

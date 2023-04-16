@@ -245,4 +245,27 @@ public class TextUtilsTest {
                 o -> new Pair<>("[", "]"))).isEqualTo("[[te][s]t]");
     }
 
+    @Test
+    public void containsHtml() {
+        assertThat(TextUtils.containsHtml("This is a test \n with linebreak")).isFalse();
+        assertThat(TextUtils.containsHtml("This is a test <br> with linebreak")).isTrue();
+        assertThat(TextUtils.containsHtml("This is a test <br/> with linebreak")).isTrue();
+        assertThat(TextUtils.containsHtml("This is a strange test </br> with strange linebreak")).isTrue();
+        assertThat(TextUtils.containsHtml("This is a test <img src=\"abc\" > with an image")).isTrue();
+
+        assertThat(TextUtils.containsHtml("For sure a<b in many cases")).isFalse();
+        assertThat(TextUtils.containsHtml("For sure a<b and b>c in many cases")).isFalse();
+        assertThat(TextUtils.containsHtml("For sure a<b and e=1 and b>c in many cases")).isFalse();
+        assertThat(TextUtils.containsHtml("For sure a<b e='182ab' > can be interpreted as HTML")).isTrue();
+
+        assertThat(TextUtils.containsHtml("Special char &nbsp; exists")).isTrue();
+        assertThat(TextUtils.containsHtml("Special char &there4; exists")).isTrue();
+        assertThat(TextUtils.containsHtml("Special char &#8736; exists")).isTrue();
+        assertThat(TextUtils.containsHtml("Special char &Prime; exists")).isTrue();
+        assertThat(TextUtils.containsHtml("Special char &thetasym; exists")).isTrue();
+
+        assertThat(TextUtils.containsHtml("Special char &; doesn't exist")).isFalse();
+
+    }
+
 }

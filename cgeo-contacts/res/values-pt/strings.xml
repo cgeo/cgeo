@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">c:geo - contactos (add-on)</string>
-    <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
+    <string name="contact_not_found">O contacto com este apelido/alcunha (%s) não foi encontrado. Adicione-o antes na sua aplicação de contactos.</string>
     <string name="multiple_matches">Várias correspondências</string>
     <!-- permission handling -->
     <string name="ask_again">Perguntar de novo</string>

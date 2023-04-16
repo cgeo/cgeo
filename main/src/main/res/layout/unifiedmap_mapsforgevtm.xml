@@ -1,52 +1,45 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/unifiedmap_vtm"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:layout_height="fill_parent" >
 
-    <include layout="@layout/filter_sort_bar" />
-
-    <RelativeLayout
+    <org.oscim.android.MapView
+        android:id="@+id/mapViewVTM"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent" />
 
-        <org.oscim.android.MapView
-            android:id="@+id/mapViewVTM"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+    <include layout="@layout/map_bearingindicator" />
+    <include layout="@layout/filter_sort_bar" />
+    <include layout="@layout/map_distanceinfo" />
+    <include layout="@layout/map_settings_button" />
+    <include layout="@layout/map_progressbar" />
 
-        <include layout="@layout/map_bearingindicator" />
-        <include layout="@layout/map_distanceinfo" />
-        <include layout="@layout/map_settings_button" />
-        <include layout="@layout/map_progressbar" />
-
-        <LinearLayout
-            android:id="@+id/container_zoomin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_above="@id/container_zoomout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="13dp">
-            <ImageButton
-                android:id="@+id/map_zoomin"
-                android:src="@drawable/map_zoomin"
-                style="@style/map_quicksettingsbutton" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/container_zoomout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="13dp"
-            android:layout_marginBottom="18dp">
-            <ImageButton
-                android:id="@+id/map_zoomout"
-                android:src="@drawable/map_zoomout"
-                style="@style/map_quicksettingsbutton" />
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/container_zoomin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/container_zoomout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="13dp">
+        <ImageButton
+            android:id="@+id/map_zoomin"
+            android:src="@drawable/map_zoomin"
+            style="@style/map_quicksettingsbutton" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/container_zoomout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginBottom="18dp">
+        <ImageButton
+            android:id="@+id/map_zoomout"
+            android:src="@drawable/map_zoomout"
+            style="@style/map_quicksettingsbutton" />
+    </LinearLayout>
+</RelativeLayout>

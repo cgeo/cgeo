@@ -162,6 +162,7 @@
     <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
     <string name="log_image_titleprefix">Imagine</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -240,10 +241,8 @@
     <string name="warn_search_help_user">Introdu numele de utilizator al unui membru Geocaching.com.</string>
     <string name="warn_search_help_tb">Introdu codul pentru obiectul călător. De exemplu \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
-    <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
-    <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
     <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
@@ -289,13 +288,6 @@
     <string name="caches_more_caches_no">Nu mai sunt alte cutii</string>
     <string name="caches_more_caches_loading">Încarcare cutii…</string>
     <string name="caches_more_caches_currently">până acum</string>
-    <string name="caches_downloading">Descărcare cutii…\nMai durează: </string>
-    <string name="caches_eta_ltm">Mai puţin de un minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="few">%d minute</item>
-        <item quantity="other">%d minute</item>
-    </plurals>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
     <string name="caches_sort">Sortare</string>
@@ -366,7 +358,6 @@
     <string name="about_contributors">Contribuitori</string>
     <string name="about_license">Licenţă</string>
     <string name="about_help">Ajutor</string>
-    <string name="about_system_collecting">Informațiile de sistem sunt colectate, vă rugăm să așteptați…</string>
     <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
     <string name="about_system_info_send_button">Trimite prin E-Mail…</string>
     <string name="about_system_info">c:geo - informaţii despre sistem</string>
@@ -459,6 +450,7 @@
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
     <string name="init_livelist">Arată direcţia</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
@@ -499,8 +491,6 @@
     <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
-    <string name="init_use_native_ua">Browser Android</string>
-    <string name="init_summary_use_native_ua">Identifică c:geo ca fiind browser-ul integrat în sistemul Android. Rezolvă unele probleme de autentificare atunci când sunt folosite anumiţi furnizori de internet.</string>
     <string name="init_maintenance">Întreţinere</string>
     <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
@@ -607,7 +597,6 @@
         <item quantity="other">acum %d zile</item>
     </plurals>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Imagini însemnare</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
@@ -706,7 +695,6 @@
     <string name="cache_location">Locaţie</string>
     <string name="cache_coordinates">Coordonate</string>
     <string name="cache_coordinates_original">Coordonatele iniţiale</string>
-    <string name="cache_spoiler_images_title">Imagini (indicii?)</string>
     <string name="cache_log_types">Tipuri de însemnări</string>
     <string name="cache_coordinates_no">Această cutie nu are coordonate.</string>
     <string name="cache_clear_history">Goleşte istoric</string>

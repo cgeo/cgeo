@@ -19,6 +19,8 @@
     <declare-styleable name="ColorpickerPreference">
         <attr name="showOpaquenessSlider" format="boolean" />
         <attr name="defaultColor" format="color" />
+        <attr name="lineWidthKey" format="string" />
+        <attr name="defaultLineWidth" format="integer" />
     </declare-styleable>
 
     <!-- attributes for SeekbarPreference -->

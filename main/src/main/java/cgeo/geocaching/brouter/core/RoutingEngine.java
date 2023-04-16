@@ -454,8 +454,6 @@ public class RoutingEngine extends Thread {
 
 
     private OsmTrack findTrackHelper(final String operationName, final MatchedWaypoint startWp, final MatchedWaypoint endWp, final OsmTrack costCuttingTrack, final OsmTrack refTrack, boolean fastPartialRecalc) {
-        final boolean verbose = guideTrack != null;
-
         int maxTotalCost = guideTrack != null ? guideTrack.cost + 5000 : 1000000000;
         int firstMatchCost = 1000000000;
 

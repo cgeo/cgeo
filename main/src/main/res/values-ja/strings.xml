@@ -185,6 +185,7 @@
     <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_nodateset_display">未設定</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">翻訳</string>
     <string name="translate_to_sys_lang">%sに翻訳</string>
@@ -193,6 +194,7 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
+    <string name="err_captcha">このサービスにはCaptchaが必要です。ブラウザでgeocaching.comを開き、そこに表示されるCaptchaを解いてログインしてください。その後、再度c:geoでログインを試みてください。</string>
     <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
@@ -267,10 +269,8 @@
     <string name="warn_search_help_user">Geocaching.comのユーザー名を入力してください</string>
     <string name="warn_search_help_tb">トラッカブルのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」</string>
     <string name="warn_log_text_fill">ログの本文を入力してください</string>
-    <string name="warn_load_images">画像を読み込むことができませんでした</string>
     <string name="warn_pocket_query_select">ポケット・クエリが選択されていません</string>
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
-    <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
     <string name="warn_notloggedin_short">ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
@@ -343,11 +343,6 @@
         <item quantity="other">次の%1$dキャッシュを読み込む</item>
     </plurals>
     <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
-    <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
-    <string name="caches_eta_ltm">1分以内</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分</item>
-    </plurals>
     <string name="caches_store_background_title">キャッシュのダウンロード</string>
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>
@@ -577,7 +572,6 @@
     <string name="about_license">ライセンス</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">ヘルプ</string>
-    <string name="about_system_collecting">システム情報を収集しています。しばらくお待ちください…</string>
     <string name="about_system_include">バグ報告や問い合わせの際は以下のシステム情報もお知らせください</string>
     <string name="about_system_info_send_button">メールで送信…</string>
     <string name="about_system_info">c:geoシステム情報</string>
@@ -609,6 +603,10 @@
     <string name="debug_user_error_explain_options">システム情報とc:geoログファイルを添付してeメールで報告していただければ、c:geoの問題を解決するのに役立ちます。\nその際はエラーの詳細も必ず含めてください。\n\nメールを送る前にFAQやSNSで既知の問題かどうか確認をお願いします。\nその他の連絡先などは「c:geoについて」をご覧ください。</string>
     <!-- download manager -->
     <string name="debug_current_downloads">実行中のダウンロード</string>
+    <string name="downloader_pending_downloads">ダウンロード一覧</string>
+    <string name="downloader_cancel_download">ダウンロードのキャンセル</string>
+    <string name="downloader_cancel_file">「%s」のダウンロードをキャンセルして、ダウンロードした一時ファイルを削除しますか?</string>
+    <string name="downloader_cancelled_download">「%s」のダウンロードはキャンセルされました</string>
     <!-- Android system download manager status messages -->
     <!-- settings -->
     <string name="settings_title_open_settings">設定を開きますか?</string>
@@ -645,7 +643,6 @@
     <string name="settings_title_system">システム</string>
     <string name="settings_summary_system">システム固有の設定とデバッグオプション</string>
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
-    <string name="settings_category_browser">ブラウザ</string>
     <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
     <string name="settings_category_nearbysearch">近くの検索</string>
     <string name="init_nearbysearchlimit_title">近くの検索の範囲</string>
@@ -766,14 +763,13 @@
     <string name="init_summary_log_offline">ログ書きをオフライン専用にする(ログを書く際にオンラインでの投稿をしない)\nこのチェックを外してもオフライン用に保存することはできます</string>
     <string name="init_choose_list">リストを選択</string>
     <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
-    <string name="init_listdisplay">キャッシュリストでリスト名を表示</string>
     <string name="init_list_initial_load_limit">リストの初回読み込み数</string>
     <string name="init_summary_list_initial_load_limit">保存されたリストを表示するときにデータベースから最初に読み込むキャッシュの最大数。 0にすると無制限になります。</string>
-    <string name="init_summary_listdisplay">キャッシュリスト中にリスト名も表示</string>
     <string name="init_livelist">方向を表示</string>
     <string name="init_summary_livelist">キャッシュの一覧で方向の矢印を表示</string>
     <string name="init_quicklaunchitems">クイック起動ボタン</string>
     <string name="init_summary_quicklaunchitems">ホーム画面に表示するクイック起動ボタンの選択</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">テーマ</string>
     <string-array name="settings_theme_entries">
@@ -810,7 +806,6 @@
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
     <string name="init_backup_automatic">自動バックアップ</string>
     <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象)にします。0にするとオフになります</string>
-    <string name="init_backup_automatic_performing">バックアップを作成中…</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
@@ -860,22 +855,6 @@
     <string name="init_maptrail_length">GPSログの最大ポイント数</string>
     <string name="init_maptrail_length_summary">GPSログを記録する際の(c:geo起動時からの)最大ポイント数。デフォルト値は700ポイント。空きメモリーに応じて調整してください</string>
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
-    <string name="init_trailcolor">軌跡の色</string>
-    <string name="init_trailcolor_summary">軌跡の色と不透明度を選択</string>
-    <string name="init_trailwidth">軌跡の線幅</string>
-    <string name="init_trailwidth_summary">軌跡の線幅を選択</string>
-    <string name="init_directioncolor">ナビルートの色</string>
-    <string name="init_directioncolor_summary">ナビルートの色と不透明度を選択。ナビルートは目的地までの直線か、ナビゲーションのルート(BRouterアプリがインストール済みでルート検索が有効の場合)です</string>
-    <string name="init_directionwidth">ナビルートの線幅</string>
-    <string name="init_directionwidth_summary">ナビルートの線幅を選択</string>
-    <string name="init_routecolor">個別ルートの色</string>
-    <string name="init_routecolor_summary">個別ルートの色と不透明度を選択。個別ルートはウェイポイント/キャッシュをロングタップで選択して作成したルートです(「地図の動作」でロングタップを有効にする必要があります)</string>
-    <string name="init_routewidth">個別ルートの線幅</string>
-    <string name="init_routewidth_summary">個別ルートの線幅を選択</string>
-    <string name="init_trackcolor">GPXトラック/ルートの色</string>
-    <string name="init_trackcolor_summary">トラック/ルートの色と不透明度を選択。トラック/ルートはトラックポイントの集まりで、GPXトラック/ルートファイルから読み込めます</string>
-    <string name="init_trackwidth">GPXトラック/ルートの線幅</string>
-    <string name="init_trackwidth_summary">GPXトラック/ルートの線幅を選択</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度を選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
     <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
@@ -914,8 +893,6 @@
     <string name="init_datadirmove_failed">ジオキャッシュ データフォルダの移動に失敗しました。新旧のフォルダを確認して必要に応じて手動で移動ください</string>
     <string name="init_plain_logs">プレーンログ</string>
     <string name="init_summary_plain_logs">ログブックのフォントカラーを無効化</string>
-    <string name="init_use_native_ua">Androidブラウザ</string>
-    <string name="init_summary_use_native_ua">OSにブラウザとして認識させる\n特定のインターネットプロバイダでログインできない場合にチェックしてください</string>
     <string name="init_rendertheme_folder">地図テーマフォルダ</string>
     <string name="init_maintenance">メンテナンス</string>
     <string name="init_maintenance_directories_note">c:geoは画像、ログの画像、キャッシュ関係ファイルを別々のフォルダに保存しますが、古いファイルが残っている時があります(例えば、データベースをインポート/エクスポートする時など)。その不必要なファイルを削除できます</string>
@@ -959,7 +936,6 @@
     <string name="feature_search_finder">発見したユーザー名で検索</string>
     <string name="feature_favorite">お気に入りに追加する</string>
     <string name="feature_voting">キャッシュを評価</string>
-    <string name="init_maplines_title">地図の線表示の設定</string>
     <string name="init_map_other">そのほか</string>
     <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMapをレンダリングするためにマルチスレッドを使用する</string>
@@ -1110,7 +1086,6 @@
     <string name="cache_offline_about_time_year">一年以上前</string>
     <string name="cache_premium">プレミアム会員</string>
     <string name="cache_inventory">目録</string>
-    <string name="cache_log_images_title">ログの添付画像</string>
     <string name="cache_log_image_default_title">写真</string>
     <string name="cache_personal_note">パーソナルノート</string>
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
@@ -1128,7 +1103,7 @@
     <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
     <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
-    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
+    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルされました</string>
     <string name="cache_description">説明</string>
     <string name="cache_description_table_note">キャッシュの説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
     <string name="cache_area_description">エリアの説明</string>
@@ -1262,7 +1237,6 @@
     <string name="cache_location">所在地</string>
     <string name="cache_coordinates">座標</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
-    <string name="cache_spoiler_images_title">スポイラー画像</string>
     <string name="cache_log_types">ログタイプ</string>
     <string name="cache_coordinates_no">このキャッシュに座標値はありません</string>
     <string name="cache_clear_history">全履歴を削除</string>
@@ -1486,7 +1460,6 @@
     <string name="map_show_other_title">他の表示:</string>
     <string name="map_settings_cache_filter_too_complex_title">キャッシュフィルタが複雑すぎます</string>
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
-    <string name="map_theme_legend">地図の凡例</string>
     <string name="map_theme_legend_info">カテゴリをタップするとカテゴリを開いたり閉じたりできます。各凡例をロングタップすると短い情報が表示されます。 詳細な凡例をオンラインで見るには情報アイコンをタップしてください</string>
     <string name="google_maps_style_default">デフォルト</string>
     <string name="google_maps_style_night">ダークモード</string>
@@ -2002,9 +1975,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_confirm_debug">c:geoをデバッグモードで実行しています!</string>
     <string name="list_confirm_debug_message">デバッグモードは不安定の原因になります! デバッグモードを無効にしますか?</string>
     <!-- permission handling -->
-    <string name="close_app">アプリを閉じる</string>
-    <string name="ask_again">次回も確認する</string>
-    <string name="storage_permission_request_explanation">オフライン用にジオキャッシュを保存するためにデバイスのストレージまたはSDカードを使用します。 また、ファイルのインポート/エクスポートやオフライン地図の読み込みにも使います。この権限がないとc:geoを使用することはできません</string>
     <string name="storage_permission_needed">この機能はストレージの権限がないと使用できません</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">配色の選択</string>
@@ -2114,6 +2084,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_target_not_writable">選択したファルダ「%s」は書き込み可能ではありません。地図ファイルはシステムのダウンロードフォルダに保存されており、地図フォルダに手動で移動する必要があります。</string>
     <string name="downloadmap_allow_metered_network">従量制課金ネットワーク経由のダウンロードを許可(例:モバイル接続)</string>
     <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
+    <string name="download_confirmation_updates">更新ファイル:</string>
+    <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
     <string name="download_error">ダウンロードできませんでした(エラー#%d)</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
@@ -2190,8 +2162,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
     <string name="wizard_status_title">設定情報</string>
-    <string name="wizard_status_storage_permission">ストレージの権限</string>
-    <string name="wizard_status_location_permission">位置情報の権限</string>
     <string name="wizard_status_basefolder">ベースフォルダ</string>
     <string name="wizard_status_platform">ジオキャッシングサイト</string>
     <string name="wizard_not_now">今はしない</string>
@@ -2205,12 +2175,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="back">戻る</string>
-    <string name="later">後で</string>
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
-    <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->

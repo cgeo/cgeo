@@ -40,6 +40,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
+        setUpNavigationEnabled(true);
         binding = AuthorizationCredentialsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

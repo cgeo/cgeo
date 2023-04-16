@@ -729,13 +729,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
         final Intent intent = new Intent(context, EditWaypointActivity.class)
-                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
+                .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
+                .putExtra(Intents.EXTRA_WAYPOINT_ID, Waypoint.NEW_ID);
         context.startActivity(intent);
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache, final Geopoint initialCoords) {
         final Intent intent = new Intent(context, EditWaypointActivity.class)
                 .putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode())
+                .putExtra(Intents.EXTRA_WAYPOINT_ID, Waypoint.NEW_ID)
                 .putExtra(Intents.EXTRA_COORDS, initialCoords);
         context.startActivity(intent);
     }

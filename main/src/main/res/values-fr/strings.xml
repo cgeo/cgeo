@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
+    <string name="contact_multiple_matches">Contact : correspondances multiples</string>
     <!-- translation -->
     <string name="translate">Traduire</string>
     <string name="translate_to_sys_lang">Traduire en %s</string>
@@ -271,10 +274,8 @@
     <string name="warn_search_help_user">Veuillez remplir le nom d\'utilisateur utilisé sur Geocaching.com.</string>
     <string name="warn_search_help_tb">Veuillez entrer le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
-    <string name="warn_load_images">c:geo n\'a pas pu charger les images.</string>
     <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
     <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
-    <string name="warn_invalid_character">Le caractère doit être une LETTRE ou un CHIFFRE</string>
     <string name="warn_notloggedin_title">Mode hors-ligne</string>
     <string name="warn_notloggedin_short">Non connecté. Seules les caches enregistrées localement seront affichées. Appuyez pour plus d\'informations.</string>
     <string name="warn_notloggedin_long">Non (encore) connecté. La carte en temps réel n\'affichera que les caches stockées localement et les fonctions en ligne ne fonctionneront pas.\n\nSoit il n\'y a pas de connexion réseau, soit il y a un problème de serveur ou bien vous devez (re)configurer vos services geocaching.\n\nSouhaitez-vous configurer les services maintenant ?</string>
@@ -318,6 +319,8 @@
     <string name="loc_gps_disabled">GPS désactivé</string>
     <string name="loc_copied_clipboard">La position actuelle a été copiée dans le presse-papiers</string>
     <string name="menu_centerposition">Centrer sur ma position</string>
+    <string name="location_no_permission">Avertissement : aucune autorisation d\'utiliser la localisation</string>
+    <string name="location_only_coarse_permission">Avertissement : autorisation uniquement pour la position approximative</string>
     <!-- standard menu -->
     <string name="menu_about">À propos de c:geo</string>
     <string name="menu_helpers">Outils</string>
@@ -350,12 +353,6 @@
         <item quantity="other">Charger les %1$d caches suivantes</item>
     </plurals>
     <string name="caches_more_caches_remaining">Charger les caches restantes (%1$d / %2$d)</string>
-    <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
-    <string name="caches_eta_ltm">Moins d\'une minute</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minute</item>
-        <item quantity="other">%d minutes</item>
-    </plurals>
     <string name="caches_store_offline">Stocker localement</string>
     <string name="caches_store_offline_map">Stocker les caches localement</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
@@ -589,6 +586,17 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">la nuit des temps</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1y</item>
+        <item>1y</item>
+        <item>180 j</item>
+        <item>90d</item>
+        <item>30d</item>
+        <item>2w</item>
+        <item>1w</item>
+        <item>3d</item>
+        <item>&lt;3d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
@@ -602,7 +610,7 @@
     <string name="about_license">Licence</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Aide</string>
-    <string name="about_system_collecting">Les informations systèmes sont en cours de collecte, merci de patienter…</string>
+    <string name="about_system_collecting">Collecte des informations systèmes, veuillez patienter…</string>
     <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
     <string name="about_system_info_send_button">Envoyer par courriel…</string>
     <string name="about_system_info">Informations système de c:geo</string>
@@ -673,6 +681,8 @@
     <string name="settings_summary_offlinedata">Configurer les données à sauvegarder pour un usage hors ligne, l\'emplacement de stockage et les dossiers pour les fichiers GPX.</string>
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
+    <string name="settings_summary_map_content_behavior">Configurer les informations à afficher sur les cartes et les actions possibles.</string>
+    <string name="settings_summary_map_colors">Configurer les couleurs des objets dessinés sur la carte.</string>
     <string name="settings_title_map">Carte</string>
     <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
@@ -701,11 +711,11 @@
     <string name="settings_title_system">Système</string>
     <string name="settings_summary_system">Paramètres spécifiques au système et options de débogage.</string>
     <string name="settings_title_navigation_menu">Menu de navigation</string>
-    <string name="settings_category_browser">Navigateur</string>
     <string name="settings_category_geocaching_platform">Plateforme de Géocaching</string>
     <string name="settings_category_nearbysearch">Recherche à proximité</string>
     <string name="init_nearbysearchlimit_title">Rayon pour la recherche à proximité</string>
     <string name="init_nearbysearchlimit_description">Distance maximale pour la recherche de caches à proximité (0=illimité)</string>
+    <string name="init_settings_description_unlimited">illimité</string>
     <string name="settings_category_geocaching_additionals">Autres services et addons</string>
     <string name="settings_category_social">Réseaux sociaux</string>
     <string name="settings_category_logging_other">Options de visite supplémentaires</string>
@@ -825,14 +835,13 @@
     <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne pour les visites (même si vous êtes connecté, vos visites ne seront pas envoyées automatiquement)</string>
     <string name="init_choose_list">Demander la liste</string>
     <string name="init_summary_choose_list">Demander dans quelle liste enregistrer les caches</string>
-    <string name="init_listdisplay">Listes supplémentaires</string>
     <string name="init_list_initial_load_limit">Limite de chargement pour la liste</string>
     <string name="init_summary_list_initial_load_limit">Nombre maximum de caches à charger initialement à partir de la base de données lors de l\'affichage des listes enregistrées. \'0\' signifie \'illimité\'.</string>
-    <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
     <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
     <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">Thème</string>
     <string-array name="settings_theme_entries">
@@ -869,7 +878,6 @@
     <string name="init_backup_history_delete_warning">Vous avez enregistré plus de sauvegardes que la valeur maximale que vous avez configurée autorise. Voulez-vous vraiment supprimer toutes les sauvegardes excédentaires ?</string>
     <string name="init_backup_automatic">Sauvegarde automatique</string>
     <string name="init_backup_automatic_summary">Effectue une sauvegarde automatique tous les x jours (en plus des sauvegardes créées manuellement), 0=off</string>
-    <string name="init_backup_automatic_performing">Création d\'une sauvegarde…</string>
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
@@ -922,22 +930,6 @@
     <string name="init_maptrail_length">Longueur max. de la trace de l\'historique</string>
     <string name="init_maptrail_length_summary">Définir la longueur maximale de l\'historique (obligatoire à chaque démarrage de c:geo). La valeur par défaut est de 700 - à ajuster en fonction de la mémoire disponible.</string>
     <string name="init_summary_maptrail">Lorsqu\'il est activé (et que le GPS est activé), c:geo enregistre l\'historique de vos mouvements en tant que piste et l\'affiche sur la carte.</string>
-    <string name="init_trailcolor">Couleur de la ligne de suivi du parcours</string>
-    <string name="init_trailcolor_summary">Sélectionner la couleur et l\'opacité de la ligne de suivi du parcours</string>
-    <string name="init_trailwidth">Largeur de la ligne de suivi du parcours</string>
-    <string name="init_trailwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
-    <string name="init_directioncolor">Couleur du trait de direction</string>
-    <string name="init_directioncolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de direction. La ligne de direction montre une ligne droite vers la cible de navigation sélectionnée, ou le chemin de navigation routé spécifique, dans le cas où le routage est activé en installant l\'application BRouter.</string>
-    <string name="init_directionwidth">Largeur du trait de direction</string>
-    <string name="init_directionwidth_summary">Sélectionner la largeur de la ligne de suivi du parcours</string>
-    <string name="init_routecolor">Couleur de la ligne de route individuelle</string>
-    <string name="init_routecolor_summary">Sélectionnez la couleur et l\'opacité des itinéraires individuels. Un itinéraire individuel est une collection de points de passage et/ou de caches que vous avez sélectionnés en appuyant longuement sur le point de passage/la cache. (Vous devez d\'abord activer la fonction d\'appui long, voir les paramètres de la carte.)</string>
-    <string name="init_routewidth">Largeur de la ligne d\'itinéraire individuelle</string>
-    <string name="init_routewidth_summary">Sélectionnez la largeur pour les itinéraires individuels</string>
-    <string name="init_trackcolor">Couleur de ligne pour la trace GPX</string>
-    <string name="init_trackcolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de trace GPX. Une trace est constituée de plusieurs points de passage et peut être chargée depuis un fichier GPX.</string>
-    <string name="init_trackwidth">Largeur de ligne pour la trace GPX</string>
-    <string name="init_trackwidth_summary">Sélectionnez la largeur de la trace GPX</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
     <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
     <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
@@ -976,11 +968,8 @@
     <string name="init_datadirmove_failed">Des erreurs se sont produites lors du déplacement du dossier de données des géocaches. Veuillez vérifier l\'ancien et le nouveau dossiers et déplacer manuellement les données manquantes.</string>
     <string name="init_plain_logs">Texte brut</string>
     <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
-    <string name="init_use_native_ua">Navigateur web Android</string>
-    <string name="init_summary_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles / fournisseurs d\'accès au réseau.</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
     <string name="init_mapshading_folder">Dossier des fichiers d\'ombrage de la carte</string>
-    <string name="init_mapshading_folder_text">Les cartes hors-ligne peuvent être enrichies avec des informations d\'altitude. Ces informations sont fournies par des fichiers hgt/dem qui doivent être placés dans ce dossier.</string>
     <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
@@ -1025,7 +1014,6 @@
     <string name="feature_search_finder">Rechercher par découvreur</string>
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
-    <string name="init_maplines_title">Personnalisation des traits de la carte</string>
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
@@ -1190,7 +1178,6 @@
     <string name="cache_offline_about_time_year">il y a plus d\'un an</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventaire</string>
-    <string name="cache_log_images_title">Image de la visite</string>
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Note personnelle</string>
     <string name="cache_menu_preventWaypointsFromNote">Empêcher les points de passage depuis la note</string>
@@ -1347,7 +1334,6 @@
     <string name="cache_location">Localisation</string>
     <string name="cache_coordinates">Coordonnées</string>
     <string name="cache_coordinates_original">Coordonnées d\'origine</string>
-    <string name="cache_spoiler_images_title">Images indices</string>
     <string name="cache_log_types">Types de visite</string>
     <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
     <string name="cache_clear_history">Supprimer l\'historique</string>
@@ -1591,7 +1577,6 @@
     <string name="map_show_other_title">Autres options :</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
-    <string name="map_theme_legend">Légende du thème</string>
     <string name="map_theme_legend_info">Appuyer sur le titre de la catégorie pour l\'ouvrir ou la fermer. Appuyer longuement sur un symbole pour de courtes informations à leur sujet. Appuyez sur l\'icône info pour accéder à une légende détaillée en ligne.</string>
     <string name="google_maps_style_default">Par défaut</string>
     <string name="google_maps_style_night">Nuit</string>
@@ -2125,10 +2110,12 @@
     <string name="init_confirm_debug">c:geo s’exécute en mode de débogage !</string>
     <string name="list_confirm_debug_message">Le mode débogage génère de l\'instabilité ! Souhaitez-vous désactiver le mode débogage ?</string>
     <!-- permission handling -->
-    <string name="close_app">Fermer l\'application</string>
-    <string name="ask_again">Demander plus tard</string>
-    <string name="location_permission_request_explanation">c:geo requiert l\'accès au GPS (localisation précise) de votre appareil pour calculer votre position ainsi que la distance et la direction des géocaches. c:geo ne peut pas être utilisé correctement sans cette autorisation.</string>
-    <string name="storage_permission_request_explanation">c:geo écrira des données sur votre carte SD ou votre téléphone dès que vous sauvegarderez des géocaches pour une utilisation hors-ligne. En outre c:geo utilisera le stockage de votre téléphone pour importer et exporter des fichiers et lire des cartes hors-ligne. Il ne peut être utilisé sans cette autorisation.</string>
+    <string name="permission_ask_again">Me demander plus tard</string>
+    <string name="permission_goto_app_details">Ouvrir les informations de l\'application</string>
+    <string name="permission_contacts_read_explanation_title">Autorisation de lecture des contacts</string>
+    <string name="permission_contacts_read_explanation">c:geo peut rechercher des contacts dans votre carnet d\'adresses en utilisant les noms des géocacheurs. Pour ce faire, vous devez autoriser c:geo à accéder à votre carnet d\'adresses. Sinon, l\'utilisation de cette fonctionnalité ne sera pas possible.</string>
+    <string name="permission_location_explanation_title">Autorisation d\'accès à la position</string>
+    <string name="permission_location_explanation">c:geo est optimisé pour utiliser les données GPS (localisation précise) afin de déterminer votre position et de calculer la distance et la direction des géocaches. Sans cette autorisation, les fonctionnalités basées sur la localisation ne fonctionneront pas correctement.</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
@@ -2337,8 +2324,6 @@
     <string name="wizard_advanced_restore_info">Si vous avez une sauvegarde d\'une installation précédente, vous pouvez restaurer les paramètres et/ou les données des géocaches.</string>
     <string name="status_not_ok">ERREUR</string>
     <string name="wizard_status_title">État de la configuration</string>
-    <string name="wizard_status_storage_permission">Autorisation d\'accès au stockage</string>
-    <string name="wizard_status_location_permission">Autorisation de localisation</string>
     <string name="wizard_status_basefolder">Dossier de base</string>
     <string name="wizard_status_platform">Services de Geocaching</string>
     <string name="wizard_not_now">Pas maintenant</string>
@@ -2352,12 +2337,10 @@
     <string name="done">Terminé</string>
     <string name="finish">Terminer</string>
     <string name="back">Retour</string>
-    <string name="later">Plus tard</string>
     <string name="cancel">Annuler</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
-    <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>

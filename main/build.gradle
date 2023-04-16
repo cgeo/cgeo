@@ -20,8 +20,8 @@ if (isContinuousIntegrationServer()) {
 
 android {
     namespace 'cgeo.geocaching'
+    compileSdk 33
 
-    compileSdk 32
 
     compileOptions {
         // use the diamond operator and some other goodies in Android
@@ -420,7 +420,7 @@ dependencies {
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.6'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // Support Library Lifecycle Helpers
@@ -444,7 +444,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.3.5'
+    implementation 'androidx.exifinterface:exifinterface:1.3.6'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
@@ -462,7 +462,7 @@ dependencies {
 
     // Testing Support Libraries
     androidTestImplementation 'androidx.test:core:1.5.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     // needed for chrome custom tabs
@@ -477,13 +477,17 @@ dependencies {
     // Loupe for ImageGallery and zoomable ImageViews
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
+
+    //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
+    //See https://github.com/guardian/toolargetool 
+    implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
 apply plugin: 'de.mobilej.unmock'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
-project.afterEvaluate{
+project.afterEvaluate {
     preBuild.dependsOn("verifyCgeoKeys")
 }
 
@@ -491,7 +495,7 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        File keysFile = file("src/main/res/values/keys.xml")
+        File keysFile = project.file("src/main/res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
             File propertiesFile = rootProject.file("private.properties")

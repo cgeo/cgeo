@@ -23,14 +23,6 @@
     <color name="osm_zoomcontrolbackground">#C0FFFFFF</color>
     <color name="osm_zoomcontroldivider">#C0666666</color>
 
-    <!-- values needed only until settings activity is based on AppCompatActivity -->
-    <color name="settings_colorTextDark">@color/just_white</color>
-    <color name="settings_colorTextLight">@color/just_black</color>
-    <color name="settings_colorTextSecondaryDark">#AAFFFFFF</color>
-    <color name="settings_colorTextSecondaryLight">#AA000000</color>
-    <color name="settings_colorBackgroundDark">@color/just_black</color>
-    <color name="settings_colorBackgroundLight">@color/just_white</color>
-
     <!-- default colors for map lines -->
 
     <color name="default_trailcolor">#80000000</color>

@@ -1,25 +1,21 @@
 ##
-
-### General
-- Fix: New TB set to visit mode automatically 
-- Fix: gc.com basic member settings not displayed
-- Change: mapy.cz map provider removed (due to change in licensing)
-- Fix: Cache search field emptied after selecting search hit
-- Fix: Crash for degree formulas with multiple dots
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+- Fix: Error on adding caches to / removing caches from bookmark lists
+- Fix: Error on downloading bookmark lists
 
 ##
+- Fix: Widen log description column in landscape mode
+- Fix: Make image format error message clearer
+- Fix: User-created waypoints not being displayed on OSM map
+- Fix: Multiple navigation lines on Google Maps map
 
-### General
-- Fix: Use updated URL for mapquest geocoding
-- Fix: Prevent crash under certain conditions when trying to attach photo to log
-- Change: Better error message about how to resolve a Captcha requirement on login to geocaching.com
-
-### Caches
-- Fix: Prevent spoiler images from being doubled in gallery when refreshing a cache 
-
-### Variable calculator
-- New: TRUNC function to truncate decimal values 
-- New: Allow usage of square brackets for calculations. For variable ranges please use e.g. \[:1-5\] instead.
-
-### Map
-- Fix: Show correct DT marker for D4.0 and D4.5
+##
+- Fix: Skipping some user-created waypoints on GPX import
+- Fix: List of extended filters not translated when language is set to non-default within c:geo
+- Fix: Downloading/updating routing tiles or maps no longer possible on older devices
+- Fix: Location name shown in compass instead of coordinates
+- Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
+- Fix: Wrong image orientation for own images in portrait mode
+- Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments

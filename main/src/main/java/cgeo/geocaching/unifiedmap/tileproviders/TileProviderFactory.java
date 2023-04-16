@@ -138,6 +138,7 @@ public class TileProviderFactory {
         if (isGoogleMapsInstalled()) {
             registerTileProvider(new GoogleMapSource());
             registerTileProvider(new GoogleSatelliteSource());
+            registerTileProvider(new GoogleTerrainSource());
         }
 
         // OSM online tile providers

@@ -154,6 +154,7 @@
     <string name="log_problem_archive_text">这个寻宝者报告此藏点应该被存档。已经通知了一个社区志愿审核人。</string>
     <string name="log_image_scale_option_noscaling">无缩放</string>
     <string name="log_image_titleprefix">图片</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
     <string name="translate_to_english">翻译为英语</string>
@@ -234,10 +235,8 @@
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
     <string name="warn_log_text_fill">请为您的日志添加一些文字。</string>
-    <string name="warn_load_images">c:geo 读取图片失败。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">离线模式</string>
     <string name="warn_notloggedin_short">未登录。实时地图只会显示本地存储的藏点。点击此处获取更多信息。</string>
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
@@ -293,11 +292,6 @@
     <string name="caches_more_caches_no">没有更多藏点</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下载藏点…\nETA: </string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -437,7 +431,6 @@
     <string name="settings_title_system">系统</string>
     <string name="settings_summary_system">系统特定设置和调试选项。</string>
     <string name="settings_title_navigation_menu">导航菜单</string>
-    <string name="settings_category_browser">浏览器</string>
     <string name="settings_category_geocaching_platform">地理藏宝平台</string>
     <string name="settings_category_geocaching_additionals">更多服务和插件</string>
     <string name="settings_category_social">社交媒体</string>
@@ -524,10 +517,9 @@
     <string name="init_summary_log_offline">启用离线日志记录 (记录时将不会显示在线日志，将不会上传日志)</string>
     <string name="init_choose_list">询问列表</string>
     <string name="init_summary_choose_list">询问哪个列表来存储藏点</string>
-    <string name="init_listdisplay">附加列表</string>
-    <string name="init_summary_listdisplay">在藏点列表中显示藏点所属的其他列表</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
@@ -587,21 +579,6 @@
     <string name="init_maptrail_length">历史轨迹最大长度</string>
     <string name="init_maptrail_length_summary">设置历史轨迹最大长度 (c:geo 每次启动时强制执行)。默认值为 700点 - 根据可用内存进行调整。</string>
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
-    <string name="init_trailcolor">历史轨迹线颜色</string>
-    <string name="init_trailcolor_summary">选择历史轨迹的颜色和不透明度</string>
-    <string name="init_trailwidth">历史轨迹线宽度</string>
-    <string name="init_trailwidth_summary">选择历史轨迹线宽度</string>
-    <string name="init_directioncolor">指引线颜色</string>
-    <string name="init_directioncolor_summary">选择指引线的颜色和不透明度。指引线显示为一条到您选定的导航目标的直线，或者如果已安装 BRouter 应用程序并启用了路线规划，则为指定的导航路径。</string>
-    <string name="init_directionwidth">指引线宽度</string>
-    <string name="init_directionwidth_summary">为指引线选择宽度</string>
-    <string name="init_routecolor">单个路线线条颜色</string>
-    <string name="init_routewidth">单个路线线条宽度</string>
-    <string name="init_routewidth_summary">选择单个路线的宽度</string>
-    <string name="init_trackcolor">GPX 航迹/航线线条颜色</string>
-    <string name="init_trackcolor_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些航点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
-    <string name="init_trackwidth">GPX 航迹/航线的线条宽度</string>
-    <string name="init_trackwidth_summary">选择 GPX 航迹/航线线条的宽度</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
     <string name="init_circlefillcolor">圆环填充颜色</string>
@@ -634,8 +611,6 @@
     <string name="init_dbmove_failed">移动数据库失败</string>
     <string name="init_plain_logs">普通日志</string>
     <string name="init_summary_plain_logs">显示不带颜色的日志条目</string>
-    <string name="init_use_native_ua">安卓浏览器</string>
-    <string name="init_summary_use_native_ua">识别为安卓浏览器。在使用某些网络提供商时解决登录问题。</string>
     <string name="init_maintenance">维护</string>
     <string name="init_maintenance_directories">删除孤立的文件</string>
     <string name="init_location">地理位置</string>

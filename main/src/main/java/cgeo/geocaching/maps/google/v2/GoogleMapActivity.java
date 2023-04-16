@@ -18,6 +18,8 @@ import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -26,6 +28,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -82,6 +85,13 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
                 mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
         tracks = new Tracks(routeTrackUtils, mapBase::setTrack);
+
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INVALIDATE_MAPLIST) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                invalidateOptionsMenu();
+            }
+        });
     }
 
     @Override

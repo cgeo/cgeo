@@ -316,7 +316,17 @@ abstract class GPXParser extends FileParser {
                         }
                         waypoint.setId(-1);
                         waypoint.setGeocode(parentCacheCode);
-                        waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cache.getName()));
+                        String cacheName = cache.getName();
+                        if (wptUserDefined) {
+                            // try to deduct original prefix from wpt name
+                            if (StringUtils.endsWithIgnoreCase(cacheName, parentCacheCode.substring(2))) {
+                                cacheName = cacheName.substring(0, cacheName.length() - parentCacheCode.length() + 2);
+                            }
+                            if (StringUtils.startsWithIgnoreCase(cacheName, Waypoint.PREFIX_OWN + "-")) {
+                                cacheName = cacheName.substring(4);
+                            }
+                        }
+                        waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cacheName));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
 
@@ -932,8 +942,10 @@ abstract class GPXParser extends FileParser {
             // a geocode should not be part of a word
             if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
                 final IConnector foundConnector = ConnectorFactory.getConnector(geocode);
-                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) || useUnknownConnector) {
+                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
                     cache.setGeocode(geocode);
+                } else if (useUnknownConnector) {
+                    cache.setGeocode(trimmed);
                 }
             }
         }

@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.DialogCustomTitleContentBinding;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -218,6 +219,21 @@ public class SimpleDialog {
         }
     }
 
+    private void applyCommonsForSelectionDialogs(final AlertDialog.Builder builder) {
+        // By default message is not supported if a listview is shown, therefore we need to build the dialog ourselves and set it as header
+        if (message != null) {
+            final DialogCustomTitleContentBinding header = DialogCustomTitleContentBinding.inflate(LayoutInflater.from(getContext()));
+            if (title != null) {
+                title.applyTo(header.dialogTitle);
+            }
+            message.applyTo(header.dialogMessage);
+
+            builder.setCustomTitle(header.getRoot());
+        } else {
+            applyCommons(builder);
+        }
+    }
+
     /**
      * adjusts common dialog settings for the created dialog (e.g. title and message). Call this method after calling dialog.show()!
      */
@@ -315,7 +331,7 @@ public class SimpleDialog {
     public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
-        applyCommons(builder);
+        applyCommonsForSelectionDialogs(builder);
         builder.setCancelable(true);
 
         final int preselectPos = preselect < 0 || preselect >= items.size() ? -1 : preselect;
@@ -413,9 +429,8 @@ public class SimpleDialog {
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext(), R.style.cgeo_compactDialogs);
-        applyCommons(builder);
+        applyCommonsForSelectionDialogs(builder);
 
-        //final ListView[] listViewHolder = new ListView[]{null};
         builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
             final ListView lv = ((AlertDialog) d).getListView();
 

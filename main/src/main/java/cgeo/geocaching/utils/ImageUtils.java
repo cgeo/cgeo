@@ -301,7 +301,7 @@ public final class ImageUtils {
     @Nullable
     private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
 
-        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(imageUri));
+        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStreamIfLocal(imageUri));
         if (sizeOnlyOptions == null) {
             return null;
         }
@@ -319,7 +319,7 @@ public final class ImageUtils {
     private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions) {
         final int orientation = getImageOrientation(imageUri);
 
-        try (InputStream imageStream = openImageStream(imageUri)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
             }
@@ -340,9 +340,19 @@ public final class ImageUtils {
         return null;
     }
 
+    public static float getImageRotationDegrees(@NonNull final Uri imageUri) {
+        final int orientation = getImageOrientation(imageUri);
+        for (int i = 0; i < ORIENTATIONS.length; i++) {
+            if (orientation == ORIENTATIONS[i]) {
+                return ROTATION[i];
+            }
+        }
+        return 0;
+    }
+
     private static int getImageOrientation(@NonNull final Uri imageUri) {
         int orientation = ExifInterface.ORIENTATION_NORMAL;
-        try (InputStream imageStream = openImageStream(imageUri)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream != null) {
                 final ExifInterface exif = new ExifInterface(imageStream);
                 orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -378,7 +388,7 @@ public final class ImageUtils {
         if (imageData == null) {
             return null;
         }
-        try (InputStream imageStream = openImageStream(imageData)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageData)) {
             if (imageStream == null) {
                 return null;
             }
@@ -469,7 +479,7 @@ public final class ImageUtils {
         forEachImageUrlInHtml(source -> {
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
-                            .setUrl(source)
+                            .setUrl(source, "https")
                             .setTitle(StringUtils.defaultString(geocode))
                             .setCategory(Image.ImageCategory.LISTING)
                             .build());
@@ -647,8 +657,11 @@ public final class ImageUtils {
     }
 
     @Nullable
-    private static InputStream openImageStream(final Uri imageUri) {
-        return ContentStorage.get().openForRead(imageUri);
+    private static InputStream openImageStreamIfLocal(final Uri imageUri) {
+        if (UriUtils.isFileUri(imageUri) || UriUtils.isContentUri(imageUri)) {
+            return ContentStorage.get().openForRead(imageUri, true);
+        }
+        return null;
     }
 
     public static boolean deleteImage(final Uri uri) {
@@ -898,6 +911,18 @@ public final class ImageUtils {
             });
         }
         //Workaround END
+    }
+
+    @Nullable
+    public static Bitmap rotateBitmap(@Nullable final Bitmap bm, final float angleInDegree) {
+        if (bm == null || angleInDegree == 0f || angleInDegree % 360 == 0f) {
+            return bm;
+        }
+        final int h = bm.getHeight();
+        final int w = bm.getWidth();
+        final Matrix matrix = new Matrix();
+        matrix.setRotate(angleInDegree, w / 2f, h / 2f);
+        return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
     }
 
 }

@@ -188,6 +188,9 @@
     <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Aliaksen/nimimerkin %s yhteystietoja ei löytynyt. Lisää se ensin yhteystiedot-sovellukseen.</string>
+    <string name="contact_multiple_matches">Yhteystiedot: Useita osumia</string>
     <!-- translation -->
     <string name="translate">Käännä</string>
     <string name="translate_to_sys_lang">Käännä kielelle %s</string>
@@ -236,6 +239,7 @@
     <string name="err_favorite_failed">Suosikki-tilan muuttaminen epäonnistui.</string>
     <string name="err_select_logimage_failed">Kuvan valitseminen lokiin epäonnistui.</string>
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
+    <string name="err_acquire_image_unsupported_format">Kuvamuodon on oltava JPEG/JPG, PNG tai GIF</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
     <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
@@ -272,10 +276,8 @@
     <string name="warn_search_help_user">Syötä Geocaching.com -sivuston käyttäjätunnus.</string>
     <string name="warn_search_help_tb">Syötä reissaajan koodi. Esimerkiksi \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Ole hyvä ja syötä jotain tekstiä lokiisi.</string>
-    <string name="warn_load_images">c:geo epäonnistui kuvien latauksessa.</string>
     <string name="warn_pocket_query_select">Ei pocket queryja valittuna.</string>
     <string name="warn_no_pocket_query_found">Yhtään Pocket querya ei löydetty.</string>
-    <string name="warn_invalid_character">Merkin täytyy olla kirjain tai numero</string>
     <string name="warn_notloggedin_title">Offline-tila</string>
     <string name="warn_notloggedin_short">Et ole kirjautunut sisään. Live-kartta näyttää vain paikallisesti tallennetut kätköt. Napauta tästä saadaksesi lisätietoja.</string>
     <string name="warn_notloggedin_long">Et ole kirjautunut sisään (vielä). Livekartta näyttää vain paikallisesti tallennetut kätköt ja online-toiminnot eivät toimi.\n\nJoko laitteessa ei ole verkkoyhteyttä, on ilmennyt palvelunongelma, tai sinun tulee (uudelleen)määrittäägeokätköilypalvelusi.\n\nHaluatko määrittää palvelut nyt?</string>
@@ -307,6 +309,8 @@
     <string name="warn_gm_not_available">Google Maps ei saatavilla.</string>
     <string name="switch_to_mf">Google Play Palvelusi on vanhentunut. Haluatko vaihtaa sen sijaan Mapsforge-kartan tarjoajaan?</string>
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Perus</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
     <string name="loc_net">Verkko</string>
@@ -319,6 +323,8 @@
     <string name="loc_gps_disabled">GPS ei käytössä</string>
     <string name="loc_copied_clipboard">Nykyinen sijainti kopioitiin leikepöydälle</string>
     <string name="menu_centerposition">Keskitä omaan sijaintiini</string>
+    <string name="location_no_permission">Varoitus: lupaa ei annettu sijainnin hakemiseen</string>
+    <string name="location_only_coarse_permission">Varoitus: lupa saatu vain karkeaan sijaintiin</string>
     <!-- standard menu -->
     <string name="menu_about">Tietoja c:geosta</string>
     <string name="menu_helpers">Apuohjelmat</string>
@@ -351,12 +357,6 @@
         <item quantity="other">Lataa seuraavat %1$d kätköä</item>
     </plurals>
     <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
-    <string name="caches_downloading">Ladataan kätköjä…\nETA: </string>
-    <string name="caches_eta_ltm">Alle minuutissa</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuutti</item>
-        <item quantity="other">%d minuuttia</item>
-    </plurals>
     <string name="caches_store_offline">Tallenna offline-tilassa</string>
     <string name="caches_store_offline_map">Tallenna kätköt offline-tilassa</string>
     <string name="caches_store_selected">Tallenna valitut</string>
@@ -394,6 +394,8 @@
     <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
+    <string name="caches_select_next20">Valitse seuraavat 20 kätköä</string>
+    <string name="caches_select_next100">Valitse seuraavat 100 kätköä</string>
     <string name="caches_select_mode_exit">Poistu valintatilasta</string>
     <string name="caches_select_invert">Käänteinen valinta</string>
     <string name="caches_nearby">Lähistöllä</string>
@@ -534,6 +536,8 @@
     <string name="cache_filter_stringfilter_type_starts_with">Alkaa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
+    <string name="cache_filter_datefilter_absolute">Absoluuttinen</string>
+    <string name="cache_filter_datefilter_relative">Suhteellinen tähän päivään</string>
     <string name="cache_filter_datefilter_label_from">Mistä:</string>
     <string name="cache_filter_datefilter_label_to">Mihin:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki</string>
@@ -590,6 +594,28 @@
     </string-array>
     <string name="cache_filter_stored_since_stored_max">ajan alkamisen jälkeen</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>yli vuosi sitten</item>
+        <item>vuosi sitten</item>
+        <item>180 päivää sitten</item>
+        <item>90 päivää sitten</item>
+        <item>30 päivää sitten</item>
+        <item>2 viikkoa sitten</item>
+        <item>viikko sitten</item>
+        <item>3 päivää sitten</item>
+        <item>alle 3 päivää sitten</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label_short">
+        <item>&gt;1v</item>
+        <item>1v</item>
+        <item>180p</item>
+        <item>90p</item>
+        <item>30p</item>
+        <item>2vk</item>
+        <item>1vk</item>
+        <item>3p</item>
+        <item>&lt;3p</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versio</string>
     <string name="about_changelog">Muutoshistoria</string>
@@ -702,11 +728,11 @@
     <string name="settings_title_system">Järjestelmä</string>
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
-    <string name="settings_category_browser">Selain</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
     <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
     <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
+    <string name="init_settings_description_unlimited">rajoittamaton</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut kirjausasetukset</string>
@@ -822,18 +848,29 @@
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
     <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
+    <string name="init_cachelists">Kätkölistat</string>
     <string name="init_log_offline">Offlinekirjaus</string>
     <string name="init_summary_log_offline">Käytä offlinekirjausta (Online-kirjausnäyttöä ei näytetä kirjatessa, kirjauksia ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
-    <string name="init_listdisplay">Toiset listat</string>
     <string name="init_list_initial_load_limit">Listan latausraja</string>
     <string name="init_summary_list_initial_load_limit">Enimmäismäärä kätköjä ladattaessa tietokannasta kun näytetään tallennetut listat. Valitse 0, valitaksesi \'rajoittamaton\'</string>
-    <string name="init_summary_listdisplay">Näytä liitännäisyys muihin listoihin kätkölistalla</string>
+    <string name="init_summary_cacheListInfo">Valitse lisätiedot, jotka on esitettävä kunkin kätkön kohdalla kätkölistoilla</string>
     <string name="init_livelist">Näytä suunta</string>
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokoodi</string>
+    <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
+    <string name="cacheListInfoItem_Terrain">Maasto</string>
+    <string name="cacheListInfoItem_MemberState">Premium-tila</string>
+    <string name="cacheListInfoItem_Size">Koko</string>
+    <string name="cacheListInfoItem_Lists">Muut listat</string>
+    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_EventDate">Tapahtuman päivämäärä</string>
+    <string name="active_elements">Aktiiviset elementit</string>
+    <string name="disabled_elements">Ei-aktiiviset elementit</string>
     <!-- app theme -->
     <string name="settings_theme_title">Teema</string>
     <string-array name="settings_theme_entries">
@@ -870,7 +907,6 @@
     <string name="init_backup_history_delete_warning">Olet tallentanut enemmän varmuuskopioita kuin määritetty maksimiarvo sallii. Haluatko varmasti poistaa kaikki ylimääräiset varmuuskopiot?</string>
     <string name="init_backup_automatic">Automaattinen varmuuskopiointi</string>
     <string name="init_backup_automatic_summary">Suorittaa automaattisen varmuuskopioinnin joka x päivä (minkä tahansa manuaalisesti luotujen varmuuskopioiden lisäksi), 0=pois</string>
-    <string name="init_backup_automatic_performing">Luodaan varmuuskopiota…</string>
     <string name="init_user_confirmation">Tiedän mitä olen tekemässä</string>
     <string name="init_backup_success">c:geon tietokanta kopioitu onnistuneesti:</string>
     <string name="init_backup_failed">c:geon tietokannan varmuuskopiointi epäonnistui.</string>
@@ -923,22 +959,14 @@
     <string name="init_maptrail_length">Jälkihistorian maksimipituus</string>
     <string name="init_maptrail_length_summary">Aseta jälkihistorian maksimipituus (pakotetaan jokaisen c:geon käynnistyksen yhteydessä). Oletusarvo on 700 - säädä saatavilla olevan muistin mukaisesti.</string>
     <string name="init_summary_maptrail">Kun tämä (sekä GPS) on aktivoitu, c:geo tallettaa liikkeidesi historian jälkenä ja näyttää sen kartalla.</string>
-    <string name="init_trailcolor">Jälkihistorian viivan väri</string>
-    <string name="init_trailcolor_summary">Valitse jälkihistorian väri ja läpinäkyvyys</string>
-    <string name="init_trailwidth">Jälkihistorian viivan leveys</string>
-    <string name="init_trailwidth_summary">Valitse jälkihistorian viivan leveys</string>
-    <string name="init_directioncolor">Suuntaviivan väri</string>
-    <string name="init_directioncolor_summary">Valitse suuntaviivan väri ja läpinäkyvyys. Suuntaviiva näyttää suoran viivan valitsemaasi navigointikohteeseen, tai reititetyn navigointiviivan, jos reititys on käytettävissä BRouter-sovelluksen avulla.</string>
-    <string name="init_directionwidth">Suuntaviivan leveys</string>
-    <string name="init_directionwidth_summary">Valitse suuntaviivan leveys</string>
-    <string name="init_routecolor">Yksittäisen reittiviivan väri</string>
-    <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
-    <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
-    <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
-    <string name="init_trackcolor">GPX-jäljen/reitin viivan väri</string>
-    <string name="init_trackcolor_summary">Valitse jälki/reittiviivan väri ja läpinäkyvyys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
-    <string name="init_trackwidth">GPX-jäljen/reitin viivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse GPX-jäljen/reitin viivan leveys</string>
+    <string name="init_trailappearance">Historiajäljen ulkoasu</string>
+    <string name="init_trailappearance_summary">Valitse väri, läpinäkyvyys ja viivan leveys historiajäljelle</string>
+    <string name="init_directionappearance">Suunnan ulkonäkö</string>
+    <string name="init_directionappearance_summary">Valitse suuntaviivan väri, läpinäkyvyys ja viivan paksuus. Suuntaviiva näyttää suoran viivan valitsemaasi navigointikohteeseen, tai reititetyn navigointiviivan, jos reititys on käytettävissä BRouter-sovelluksen avulla.</string>
+    <string name="init_routeappearance">Yksittäisen reitin ulkonäkö</string>
+    <string name="init_routeappearance_summary">Valitse yksittäisen reittiviivan väri, läpinäkyvyys ja viivan leveys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
+    <string name="init_trackappearance">GPX reitin/jäljen ulkonäkö</string>
+    <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
@@ -977,11 +1005,8 @@
     <string name="init_datadirmove_failed">Geokätköjen tiedot sisältävän kansion siirto epäonnistui osittain tai kokonaan. Tarkista vanha ja uusi kansio ja tee siirto tarvittaessa itse.</string>
     <string name="init_plain_logs">Yksinkertaiset lokit</string>
     <string name="init_summary_plain_logs">Näytä loki ilman värejä</string>
-    <string name="init_use_native_ua">Android-selain</string>
-    <string name="init_summary_use_native_ua">Näyttäydy Android-selaimena. Ratkaisee kirjautumisongelmia eräillä sivustoilla.</string>
     <string name="init_rendertheme_folder">Karttateemat sisältävä kansio</string>
     <string name="init_mapshading_folder">Karttavarjostustiedostojen kansio</string>
-    <string name="init_mapshading_folder_text">Offline-kartat voidaan päällystää korkeustiedoilla. Nämä tiedot annetaan hgt/dem tiedostoina, jotka on sijoitettava tähän kansioon.</string>
     <string name="init_mapShadingLinearity_title">Varjostuksen lineaarisuus</string>
     <string name="init_mapShadingLinearity_description">Pienet arvot korostavat kontrastia jyrkillä rinteillä, mutta piilottavat muutokset loivissa, suuret arvot tekevät siitä lineaarisemman</string>
     <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
@@ -1029,10 +1054,11 @@
     <string name="feature_search_finder">Etsi löytäjän mukaan</string>
     <string name="feature_favorite">Kätköjen lisäys suosikkeihin</string>
     <string name="feature_voting">Kätköjen arvostelu</string>
-    <string name="init_maplines_title">Kartan viivojen muokkaus</string>
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="category_unifiedMap">Yhdistetty kartta</string>
+    <string name="experimental">(kokeellinen)</string>
     <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
     <string name="init_summary_useUnifiedMap">Käytä uutta yhtenäistä karttaa sisäänrakennettujen Google Map / Mapsforge (OSM) -karttojen sijaan (kokeellinen / kaukana täydellisestä / vain testaukseen)</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
@@ -1052,6 +1078,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
+    <string name="map_source_google_terrain">Google: Maasto</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Yhdistetty (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartan attribuutiot</string>
@@ -1194,7 +1221,6 @@
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Tavaraluettelo</string>
-    <string name="cache_log_images_title">Lokikuvat</string>
     <string name="cache_log_image_default_title">Kuva</string>
     <string name="cache_personal_note">Omat merkinnät</string>
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
@@ -1214,6 +1240,10 @@
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
     <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
+    <string name="cache_personal_note_vars_out_of_sync">Muistiinpanoissa olevat muuttujia ei ole synkronoitu (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronoi muuttujat</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Tarkista muuttujat, joiden arvo tulee korvata muistiinpanoista</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Kuvaus</string>
     <string name="cache_description_table_note">Kuvaus sisältää taulukkoja, joita saattaa joutua katselemaan %s jotta ne näkyvät oikein.</string>
     <string name="cache_description_rendering">Muodostetaan kuvausta, odota…</string>
@@ -1278,6 +1308,7 @@
     <string name="cache_menu_navigation_bike">Navigointi (pyöräily)</string>
     <string name="cache_menu_maps_directions">Google Maps ajo-ohjeet</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (kävely)</string>
     <string name="cache_menu_sygic_drive">Sygic (ajo)</string>
     <string name="cache_menu_radar">Tutka</string>
@@ -1351,7 +1382,6 @@
     <string name="cache_location">Sijainti</string>
     <string name="cache_coordinates">Koordinaatit</string>
     <string name="cache_coordinates_original">Alkuperäiset koordinaatit</string>
-    <string name="cache_spoiler_images_title">Spoiler-kuvat</string>
     <string name="cache_log_types">Lokityypit</string>
     <string name="cache_coordinates_no">Tällä kätköllä ei ole koordinaatteja.</string>
     <string name="cache_clear_history">Tyhjennä historiatiedot</string>
@@ -1373,11 +1403,14 @@
     <string name="cache_time_full_hours">Kello</string>
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_recently_viewed">Äskettäin katsottu</string>
+    <string name="cache_recently_viewed_empty">Ei äskettäin katsottuja kätköjä</string>
+    <string name="cache_clear_recently_viewed">tyhjennä</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
     <string name="cache_chirpwolf_install">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit asentaa Chirp Wolf -sovelluksen lukeaksesi Chirp-dataa.</string>
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
+    <string name="cache_alc_related_start">Avaa Adventure Lab -sovellus aloittaaksesi liittyvän seikkailun</string>
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
@@ -1398,6 +1431,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö/reittipiste)</string>
+    <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
+    <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
     <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
@@ -1545,6 +1580,7 @@
     <string name="imageview_notitle">Nimetön</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d pikseliä</string>
+    <string name="imageview_error">Kuvan lataaminen epäonnistui</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- visit -->
@@ -2130,15 +2166,23 @@
     <string name="init_confirm_debug">c:geo on vianmääritystilassa!</string>
     <string name="list_confirm_debug_message">Vianmääritystila aiheuttaa epävakautta! Haluatko poistaa sen käytöstä?</string>
     <!-- permission handling -->
-    <string name="close_app">Sulje sovellus</string>
-    <string name="ask_again">Kysy uudelleen</string>
-    <string name="location_permission_request_explanation">c:geo tarvitsee luvan käyttää laitteesi GPS:ää (tarkka sijainti) sijaintisi paikallistamiseen sekä etäisyyden ja suunnan geokätköihin. Sitä ei voida käyttää ilman tätä lupaa.</string>
-    <string name="storage_permission_request_explanation">c:geo kirjoittaa tietoja puhelimesi tallennustilaan tai SD-kortille kun tallennat geokätköjä offline-käyttöön. Lisäksi c:geo käyttää puhelimesi tallennustilaa tiedostojen tuomiseen ja viemiseen sekä offline-karttojen lukemiseen. Sitä ei voida käyttää ilman tätä lupaa.</string>
+    <string name="permission_ask_again">Kysy uudelleen</string>
+    <string name="permission_goto_app_details">Näytä ohjelman tiedot</string>
+    <string name="permission_contacts_read_explanation_title">Yhteystietojen lukuoikeus</string>
+    <string name="permission_contacts_read_explanation">c:geo voi etsiä yhteystietoja osoitekirjassasi käyttäen kätköilijän nimikerkkiä. Tehdäksesi tämän, sinun tulee valtuuttaa c:geo lukemaan osoitekirjaasi. Muuten tämän toiminnon käyttö ei ole mahdollista.</string>
+    <string name="permission_location_explanation_title">Sijainnin käyttöoikeus</string>
+    <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
+    <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
+    <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Valitse väriteema</string>
     <string name="preference_colorpicker_select_color">Valitse väri</string>
     <string name="preference_colorpicker_select_opaqueness">Valitse läpinäkyvyys</string>
+    <string name="preference_colorpicker_select_width">Valitse viivan leveys</string>
+    <string name="preference_colorpicker_show_width">leveys: %d</string>
     <string name="reset_to_default">Oletus</string>
     <!-- number input -->
     <string name="number_input_title">Syötä arvo välillä %1$s ja %2$s</string>
@@ -2163,6 +2207,7 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
+    <string name="map_refresh_individual_route">Päivitä</string>
     <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
@@ -2182,6 +2227,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
+    <string name="route_optimization">Reitin optimointi</string>
+    <string name="route_optimization_info">Reitin optimointi on kokeellinen ominaisuus reitin optimoimiseksi lyhyemmällä etäisyydellä. Koska kaikkia mahdollisia ratkaisuja ei ole mahdollista arvioida mobiililaitteen ajasta ja laskentatehosta johtuvien rajoitteen vuoksi, se käyttää arviointialgoritmeja laskeakseen mahdolliset optimoinnit.\n\nLaskeminen on tehty kaksivaiheisessa prosessissa: Laske etäisyydet kullekin reittiparille, sitten yritä löytää hyväksyttävä reitti. Tämä ei ehkä ole lyhin mahdollinen reitti, joten voit toistaa kaksi vaihetta niin usein kuin haluat.</string>
+    <string name="initial_route_length">Alkuperäinen reitin pituus: %d</string>
+    <string name="optimized_route_length">Optimoitu reitin pituus: %d</string>
+    <string name="route_optimization_out_of_bounds">Reitin optimointi toimii 3-100 pisteen välisillä reiteillä</string>
+    <string name="generating_distance_matrix">Luodaan etäisyysmatriksia</string>
+    <string name="running_route_optimizations">Reitin optimointi</string>
+    <string name="route_optimization_finished">Reitin optimointi valmis</string>
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
@@ -2190,6 +2243,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
+    <string name="routes_tracks_color">Valitse väri</string>
     <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
     <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
@@ -2270,6 +2324,7 @@
     <string name="downloadmap_mapfile">karttatiedosto</string>
     <string name="downloadmap_themefile">teematiedosto</string>
     <string name="downloadmap_tilefile">reititysdatatiedosto</string>
+    <string name="downloadmap_checking">Tarkistetaan saatavilla olevia reititystietoja…</string>
     <string name="downloadmap_othermapdownload">muiden karttojen lataus</string>
     <string name="downloadmap_otherthemedownload">muiden teemojen lataus</string>
     <string name="downloadmap_download">lataa</string>
@@ -2302,6 +2357,7 @@
     <string name="maptheme_scale_text_summary">Skaalaa automaattisesti tekstejä kartalla, 100% = ei ylimääräistä skaalausta</string>
     <string name="maptheme_scale_symbol_title">Symbolien skaalauskerroin</string>
     <string name="maptheme_scale_symbol_summary">Skaalaa automaattisesti symboleja kartalla, 100% = ei ylimääräistä skaalausta</string>
+    <string name="vtm_theme_variant">Teeman muunnelmat</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
@@ -2346,8 +2402,6 @@
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>
     <string name="wizard_status_title">Määrityksen tila</string>
-    <string name="wizard_status_storage_permission">Tallennustilan käyttöoikeus</string>
-    <string name="wizard_status_location_permission">Sijainnin käyttöoikeus</string>
     <string name="wizard_status_basefolder">Juurikansio</string>
     <string name="wizard_status_platform">Geokätköilypalvelut</string>
     <string name="wizard_not_now">Ei nyt</string>
@@ -2361,12 +2415,13 @@
     <string name="done">Valmis</string>
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
-    <string name="later">Myöhemmin</string>
     <string name="cancel">Peruuta</string>
+    <string name="use">Käytä</string>
+    <string name="redo">Toista</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimoi</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
-    <string name="touch_again_to_exit">Ole hyvä ja kosketa uudelleen poistuaksesi</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alueet</string>
     <string name="rtl_fell_meadow">tunturi / niitty</string>

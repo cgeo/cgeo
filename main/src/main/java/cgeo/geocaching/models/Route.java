@@ -1,10 +1,12 @@
 package cgeo.geocaching.models;
 
-import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,7 +14,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route implements IGeoDataProvider, Parcelable {
+public class Route implements IGeoItemSupplier, Parcelable {
     private String name = "";
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
     private final boolean routeable;
@@ -28,7 +30,7 @@ public class Route implements IGeoDataProvider, Parcelable {
     }
 
     public interface UpdateRoute {
-        void updateRoute(IGeoDataProvider route);
+        void updateRoute(IGeoItemSupplier route);
     }
 
     @Override
@@ -75,21 +77,20 @@ public class Route implements IGeoDataProvider, Parcelable {
     }
 
     @Override
-    public List<GeoObject> getGeoData() {
-        final List<GeoObject> result = new ArrayList<>();
+    public List<GeoPrimitive> getGeoData() {
+        final List<GeoPrimitive> result = new ArrayList<>();
         final List<Geopoint> points = new ArrayList<>();
         if (getSegments() != null) {
             for (RouteSegment rs : getSegments()) {
-                if (points.isEmpty() || rs.getLinkToPreviousSegment()) {
-                    points.addAll(rs.getPoints());
-                } else {
-                    result.add(GeoObject.createPolyline(points, null, null));
+                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
+                    result.add(GeoPrimitive.createPolyline(points, null));
                     points.clear();
                 }
+                points.addAll(rs.getPoints());
             }
         }
         if (!points.isEmpty()) {
-            result.add(GeoObject.createPolyline(points, null, null));
+            result.add(GeoPrimitive.createPolyline(points, null));
         }
         return result;
     }
@@ -101,6 +102,11 @@ public class Route implements IGeoDataProvider, Parcelable {
             cvb.add(rs.getPoints());
         }
         return cvb.getViewport();
+    }
+
+    @Override
+    public GeoItem getItem() {
+        return GeoGroup.create(getGeoData());
     }
 
     public RouteSegment[] getSegments() {

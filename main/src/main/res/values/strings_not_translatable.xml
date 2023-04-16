@@ -196,11 +196,6 @@
     <string translatable="false" name="ellipsis">…</string>
     <string translatable="false" name="triple_dash_vertical">┆</string>
 
-    <string translatable="false" name="equation_hint">a + b</string>
-    <string translatable="false" name="free_variable_hint">2 + 2</string>
-    <string translatable="false" name="empty_equation_result">_</string>
-    <string translatable="false" name="equation_error_result">*</string>
-
     <!-- websites and product names -->
     <string translatable="false" name="caches_map_locus">Locus</string>
     <string translatable="false" name="settings_title_gc">Geocaching.com</string>
@@ -262,6 +257,7 @@
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
     <string translatable="false" name="package_gcwizward">de.sman42.gc_wizard</string>
+    <string translatable="false" name="package_cruiser">gr.talent.cruiser</string>
 
 
     <!-- map server & other download urls -->
@@ -278,6 +274,7 @@
     <string translatable="false" name="mapserver_openandromaps_themes_name">OpenAndroMaps Theme</string>
     <string translatable="false" name="mapserver_openandromaps_themes_downloadurl">https://www.openandromaps.org/wp-content/users/tobias/</string>
     <string translatable="false" name="mapserver_openandromaps_themes_updatecheckurl">https://www.openandromaps.org/kartenlegende/elevation-hike-theme</string>
+    <string translatable="false" name="mapserver_openandromaps_themes_voluntary_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/voluntary/downloads/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
     <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string>
@@ -312,6 +309,7 @@
     <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
     <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
+    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>

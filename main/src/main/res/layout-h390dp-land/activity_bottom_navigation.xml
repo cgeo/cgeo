@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_below="@id/actionBarSpacer"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>

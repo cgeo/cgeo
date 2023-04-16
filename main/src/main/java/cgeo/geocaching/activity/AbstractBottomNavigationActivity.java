@@ -6,6 +6,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -121,6 +122,12 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     private boolean onSearchLongClicked() {
         final ArrayList<Geocache> lastCaches = new ArrayList<>(DataStore.getLastOpenedCaches());
+
+        if (lastCaches.isEmpty()) {
+            showToast(R.string.cache_recently_viewed_empty);
+            return true;
+        }
+
         final ListAdapter adapter = new ArrayAdapter<Geocache>(this, R.layout.cacheslist_item_select, lastCaches) {
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
@@ -131,6 +138,11 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         Dialogs.newBuilder(this)
                 .setTitle(R.string.cache_recently_viewed)
                 .setAdapter(adapter, (dialog, which) -> CacheDetailActivity.startActivity(this, lastCaches.get(which).getGeocode()))
+                .setPositiveButton(R.string.map_as_list, (d, w) -> {
+                    CacheListActivity.startActivityLastViewed(this, new SearchResult(lastCaches));
+                    ActivityMixin.overrideTransitionToFade(this);
+                })
+                .setNegativeButton(R.string.cache_clear_recently_viewed, (d, w) -> Settings.clearRecentlyViewedHistory())
                 .show();
         return true;
     }
@@ -243,11 +255,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         // Clear activity stack if the user actively navigates via the bottom navigation
         clearBackStack();
 
-        // avoid weired transitions
+        // avoid weird transitions
         ActivityMixin.overrideTransitionToFade(this);
         return true;
     }
-
 
     private final class ConnectivityChangeReceiver extends BroadcastReceiver {
         private boolean isConnected = Network.isConnected();

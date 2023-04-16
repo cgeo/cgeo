@@ -11,9 +11,12 @@ import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
@@ -45,7 +48,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
-        activity.setContentView(R.layout.unifiedmap_googlemaps);
+        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_googlemaps, true);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
         mMapView = activity.findViewById(R.id.mapViewGM);
 
@@ -74,6 +77,11 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
         return new GoogleGeoitemLayer(mMap);
+    }
+
+    @Override
+    public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
+        return new GoogleV2GeoItemLayer(mMap);
     }
 
     @Override
@@ -222,7 +230,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
             lastTouchStart = System.currentTimeMillis();
         } else if (MotionEvent.ACTION_UP == event.getAction()) {
             final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
             lastTouchStart = -1;
         }
 

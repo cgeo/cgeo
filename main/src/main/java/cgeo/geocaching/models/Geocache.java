@@ -350,13 +350,9 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (waypoints.isEmpty()) {
-            this.setWaypoints(other.waypoints, false);
-        } else {
-            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
-            Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
-            this.setWaypoints(newPoints, false);
-        }
+
+        mergeWaypoints(other.waypoints, false);
+
         if (spoilers == null) {
             spoilers = other.spoilers;
         }
@@ -406,6 +402,16 @@ public class Geocache implements IWaypoint {
 
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
         return isEqualTo(other);
+    }
+
+    public void mergeWaypoints(final List<Waypoint> otherWaypoints, final boolean forceMerge) {
+        if (waypoints.isEmpty()) {
+            this.setWaypoints(otherWaypoints, false);
+        } else {
+            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
+            Waypoint.mergeWayPoints(newPoints, otherWaypoints, forceMerge);
+            this.setWaypoints(newPoints, false);
+        }
     }
 
     /**
@@ -1535,7 +1541,7 @@ public class Geocache implements IWaypoint {
     public boolean addOrChangeWaypoint(final Waypoint waypoint, final boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
 
-        if (waypoint.getId() < 0) { // this is a new waypoint
+        if (waypoint.isNewWaypoint()) {
             if (StringUtils.isBlank(waypoint.getPrefix())) {
                 assignUniquePrefix(waypoint);
             }
@@ -1664,7 +1670,7 @@ public class Geocache implements IWaypoint {
         if (waypoint == null) {
             return false;
         }
-        if (waypoint.getId() < 0) {
+        if (waypoint.isNewWaypoint()) {
             return false;
         }
         if (waypoint.getWaypointType() != WaypointType.ORIGINAL || waypoint.belongsToUserDefinedCache()) {

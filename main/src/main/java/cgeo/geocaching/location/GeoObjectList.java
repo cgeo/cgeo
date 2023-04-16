@@ -1,5 +1,10 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,10 +15,10 @@ import java.util.Collections;
 import java.util.List;
 
 /** A list of geoobjects */
-public class GeoObjectList implements IGeoDataProvider, Parcelable {
+public class GeoObjectList implements IGeoItemSupplier, Parcelable {
 
-    private final List<GeoObject> objects = new ArrayList<>();
-    private final List<GeoObject> objectsReadOnly = Collections.unmodifiableList(objects);
+    private final List<GeoPrimitive> objects = new ArrayList<>();
+    private final List<GeoPrimitive> objectsReadOnly = Collections.unmodifiableList(objects);
     private String name;
     private boolean isHidden;
 
@@ -44,12 +49,12 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
         return !objects.isEmpty();
     }
 
-    public void addAll(final Collection<GeoObject> objects) {
+    public void addAll(final Collection<GeoPrimitive> objects) {
         invalidateMetadata();
         this.objects.addAll(objects);
     }
 
-    public void add(final GeoObject ... objects) {
+    public void add(final GeoPrimitive... objects) {
         invalidateMetadata();
         if (objects == null || objects.length == 0) {
             return;
@@ -62,7 +67,7 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
     }
 
     @Override
-    public List<GeoObject> getGeoData() {
+    public List<GeoPrimitive> getGeoData() {
         return objectsReadOnly;
     }
 
@@ -81,13 +86,18 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
         return viewport == null ? null : viewport.getCenter();
     }
 
-    public List<GeoObject> getGeodata() {
+    @Override
+    public GeoItem getItem() {
+        return GeoGroup.create(objectsReadOnly);
+    }
+
+    public List<GeoPrimitive> getGeodata() {
         return this.objectsReadOnly;
     }
 
     private void recalculateMetadata() {
         final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
-        for (GeoObject go : this.objects) {
+        for (GeoPrimitive go : this.objects) {
             cvb.add(go.getPoints());
         }
         this.viewport = cvb.getViewport();
@@ -102,7 +112,7 @@ public class GeoObjectList implements IGeoDataProvider, Parcelable {
     protected GeoObjectList(final Parcel in) {
         name = in.readString();
         isHidden = in.readByte() != 0;
-        in.readList(objects, GeoObject.class.getClassLoader());
+        in.readList(objects, GeoPrimitive.class.getClassLoader());
     }
 
     public static final Creator<GeoObjectList> CREATOR = new Creator<GeoObjectList>() {

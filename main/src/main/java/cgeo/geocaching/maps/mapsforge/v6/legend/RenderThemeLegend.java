@@ -58,6 +58,9 @@ public class RenderThemeLegend {
             case RTT_PAWS:
                 legend = new ThemeLegendOSMPaws();
                 break;
+            case RTT_VOLUNTARY:
+                legend = new ThemeLegendVoluntary();
+                break;
             default:
                 SimpleDialog.of(activity).setMessage(TextParam.text("No legend available for current theme")).show();
                 return;
@@ -222,6 +225,7 @@ public class RenderThemeLegend {
             case RTT_FZK_OUTDOOR_CONTRAST:
             case RTT_FZK_OUTDOOR_SOFT:
             case RTT_PAWS:
+            case RTT_VOLUNTARY:
                 return true;
             default:
                 return false;

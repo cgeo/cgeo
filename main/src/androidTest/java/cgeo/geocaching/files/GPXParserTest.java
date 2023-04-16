@@ -670,4 +670,20 @@ public class GPXParserTest  {
         final Geocache cache = caches.get(0);
         assertThat(cache.getSize()).isEqualTo(CacheSize.NANO);
     }
+
+    /**
+     * import 5 waypoints with duplicates and similar names:
+     * "268591", "268591", "268591 1", "268591 2", "268591-1"
+     * -> 4 waypoints should be imported
+     */
+    @Test
+    public void testIgnoreDuplicateCache() throws Exception {
+        final List<Geocache> caches = readGPX11(R.raw.no_connector_dupliactes);
+        assertThat(caches).hasSize(4);
+
+        assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591")).count()).isEqualTo(1);
+        assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591 1")).count()).isEqualTo(1);
+        assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591 2")).count()).isEqualTo(1);
+        assertThat(caches.stream().filter(cache -> cache.getGeocode().equals("268591-1")).count()).isEqualTo(1);
+    }
 }

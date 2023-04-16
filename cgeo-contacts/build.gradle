@@ -6,8 +6,8 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'cgeo.contacts'
+    compileSdk 33
 
-    compileSdk 32
 
     // signing is handled via private.properties
     signingConfigs {

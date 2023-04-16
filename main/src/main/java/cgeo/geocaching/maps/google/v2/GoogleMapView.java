@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -19,9 +20,12 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
@@ -81,6 +85,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
+    private WeakReference<AbstractBottomNavigationActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
 
@@ -118,6 +123,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(this::recognizePositionChange);
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
+        googleMap.setOnMapClickListener(latLng -> {
+            if (activityRef.get() != null) {
+                adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(activityRef.get()));
+            }
+        });
         googleMap.setOnMarkerClickListener(marker -> {
             // onCacheTapListener will fire on onSingleTapUp event, not here, because this event
             // is fired 300 ms after map tap, which is too slow for UI
@@ -139,14 +149,22 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     }
                 }
                 if (!hitWaypoint && null != positionAndHistoryRef) {
-                    final PositionAndHistory positionAndHistory = positionAndHistoryRef.get();
+                    final GooglePositionAndHistory positionAndHistory = (GooglePositionAndHistory) positionAndHistoryRef.get();
                     if (null != positionAndHistory) {
+                        for (RouteItem item : positionAndHistory.individualRoutePoints) {
+                            final Point itemPoint = googleMap.getProjection().toScreenLocation(new LatLng(item.getPoint().getLatitude(), item.getPoint().getLongitude()));
+                            if (Math.abs(itemPoint.x - tappedPoint.x) < ViewUtils.dpToPixel(8) && Math.abs(itemPoint.y - tappedPoint.y) < ViewUtils.dpToPixel(8)) {
+                                ((CGeoMap) onCacheTapListener).toggleRouteItem(item.getPoint());
+                                return;
+                            }
+                        }
                         positionAndHistory.setLongTapLatLng(tapLatLong);
                         ((CGeoMap) onCacheTapListener).triggerLongTapContextMenu(tappedPoint);
                     }
                 }
             }
         });
+        adaptLayoutForActionbar(true);
         googleMap.setOnCameraChangeListener(cameraPosition -> {
             // check for tap on compass rose, which resets bearing to 0.0
             // only active, if it has been not equal to 0.0 before
@@ -177,6 +195,17 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         redraw();
     }
 
+    private void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        if (googleMap != null) {
+            try {
+                final View mapView = findViewById(R.id.map);
+                final View compass = mapView.findViewWithTag("GoogleMapCompass");
+                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+            } catch (Exception ignore) {
+            }
+        }
+    }
+
     @Override
     public void setListId(final int listId) {
         fromList = listId;
@@ -199,6 +228,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return;
         }
 
+        activityRef = new WeakReference<>((AbstractBottomNavigationActivity) context);
+
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
             SimpleDialog.of((Activity) context).setTitle(R.string.warn_gm_not_available).setMessage(R.string.switch_to_mf).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> {
@@ -215,7 +246,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         getMapAsync(this);
-        gestureDetector = new GestureDetector(context, new GestureListener());
+        gestureDetector = new GestureDetector(context, new GestureListener((AbstractBottomNavigationActivity) context));
     }
 
 
@@ -320,9 +351,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (googleMap == null) {
             return;
         }
-        final boolean satellite = GoogleMapProvider.isSatelliteSource(Settings.getMapSource());
-        googleMap.setMapType(satellite ? GoogleMap.MAP_TYPE_HYBRID : GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.setIndoorEnabled(!satellite);
+        final GoogleMapProvider.AbstractGoogleMapSource mapSource = (GoogleMapProvider.AbstractGoogleMapSource) Settings.getMapSource();
+        googleMap.setMapType(mapSource.mapType);
+        googleMap.setIndoorEnabled(mapSource.indoorEnabled);
     }
 
     @Override
@@ -395,6 +426,18 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     private class GestureListener extends SimpleOnGestureListener {
+
+        private static final String GOOGLEMAP_ZOOMIN_BUTTON = "GoogleMapZoomInButton";
+        private static final String GOOGLEMAP_ZOOMOUT_BUTTON = "GoogleMapZoomOutButton";
+        private static final String GOOGLEMAP_COMPASS = "GoogleMapCompass";
+
+        private final WeakReference<AbstractBottomNavigationActivity> activityRef;
+
+        GestureListener(final AbstractBottomNavigationActivity activity) {
+            super();
+            this.activityRef = new WeakReference<>(activity);
+        }
+
         @Override
         public boolean onDoubleTap(final MotionEvent e) {
             // no need to move to new location, google maps will do it for us
@@ -409,6 +452,20 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // is map already initialized?
             if (googleMap != null) {
                 final Point p = new Point((int) e.getX(), (int) e.getY());
+
+                // check for zoom controls and compass rose
+                final int[] mapLocation = new int[2];
+                final View vMap = findViewById(R.id.map);
+                vMap.getLocationOnScreen(mapLocation);
+
+                if (isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_ZOOMIN_BUTTON))
+                 || isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_ZOOMOUT_BUTTON))
+                 || isHit(p.x + mapLocation[0], p.y + mapLocation[1], findViewWithTag(GOOGLEMAP_COMPASS))
+                ) {
+                    return false;
+                }
+
+                // hit something else
                 final LatLng latLng = googleMap.getProjection().fromScreenLocation(p);
                 if (latLng != null && onCacheTapListener != null) {
                     final GoogleCacheOverlayItem closest = closest(new Geopoint(latLng.latitude, latLng.longitude));
@@ -421,6 +478,15 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 }
             }
             return false;
+        }
+
+        private boolean isHit(final int x, final int y, final View v) {
+            if (v == null) {
+                return false;
+            }
+            final int[] location = new int[2];
+            v.getLocationOnScreen(location);
+            return (x >= location[0]) && (x <= location[0] + v.getWidth()) && (y >= location[1]) && (y <= location[1] + v.getHeight());
         }
 
         @Override

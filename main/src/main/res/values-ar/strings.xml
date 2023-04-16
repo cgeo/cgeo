@@ -122,6 +122,7 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
@@ -196,10 +197,8 @@
     <string name="warn_search_help_user">أدخل اسم المستخدم من Geocaching.com.</string>
     <string name="warn_search_help_tb">أدخل كود للأمتعة السفر. مثلاً \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">الرجاء إدخال نص لتسجيل زيارتك.</string>
-    <string name="warn_load_images">c:geo فشل في تحميل الصورة.</string>
     <string name="warn_pocket_query_select">لم يتم تحديد أي إستفسارات.</string>
     <string name="warn_no_pocket_query_found">لم يتم العثور على أية استفسارات على الانترنات.</string>
-    <string name="warn_invalid_character">الرمز يجب أن يكون حرف أو رقم</string>
     <string name="err_read_pocket_query_list">خطأ في قراءة قائمة Pocket query.</string>
     <string name="info_log_posted">c:geo قام بنجاح بتقديم سجل زيارتك.</string>
     <string name="info_log_saved">c:geo قام بنجاح بحفظ سجل زيارتك.</string>
@@ -245,8 +244,6 @@
     <string name="caches_more_caches_no">لا مزيد من المخبآت</string>
     <string name="caches_more_caches_loading">تحميل المزيد من المخبآت&#8230;</string>
     <string name="caches_more_caches_currently">حالياً</string>
-    <string name="caches_downloading">تحميل المخبآت&#8230;\nETA: </string>
-    <string name="caches_eta_ltm">أقل من دقيقة</string>
     <string name="caches_history">التأريخ</string>
     <string name="caches_on_map">الإظهار على الخريطة</string>
     <string name="caches_sort">الفرز</string>
@@ -342,7 +339,6 @@
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
     <string name="settings_title_system">النظام</string>
     <string name="settings_title_navigation_menu">الملاحة</string>
-    <string name="settings_category_browser">المتصفح</string>
     <string name="settings_category_social">وسائل التواصل الإجتماعي</string>
     <string name="settings_category_logging_other">خيارات أخر ى لتسجيل الزيارات</string>
     <string name="settings_goto_url_button">المزيد &#8230;</string>
@@ -405,6 +401,7 @@
     <string name="init_choose_list">اطلب القائمة</string>
     <string name="init_summary_choose_list">اسأل أي قائمة لتخزين المخبآت</string>
     <string name="init_livelist">عرض الاتجاه</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
@@ -446,8 +443,6 @@
     <string name="init_dbmove_failed">فشل في نقل قاعدة البيانات</string>
     <string name="init_plain_logs">سجلات بسيطة</string>
     <string name="init_summary_plain_logs">عرض إدخالات السجل بدون ألوان</string>
-    <string name="init_use_native_ua">متصفح أندرويد</string>
-    <string name="init_summary_use_native_ua">تحديد كمتصفح أندرويد. يحل مشاكل تسجيل الدخول عند استخدام مزودي شبكة معينة.</string>
     <string name="init_maintenance">الصيانة</string>
     <string name="init_maintenance_directories">حذف الملفات المعزولة</string>
     <string name="init_location">تحديد الموقع الجغرافي</string>
@@ -537,7 +532,6 @@
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
     <string name="cache_inventory">المخزون</string>
-    <string name="cache_log_images_title">صور تسجيل الزيارات</string>
     <string name="cache_log_image_default_title">صورة</string>
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>
@@ -639,7 +633,6 @@
     <string name="cache_location">الموقع</string>
     <string name="cache_coordinates">الإحداثيات</string>
     <string name="cache_coordinates_original">الإحدثيات الأصلية</string>
-    <string name="cache_spoiler_images_title">الصور المفسدة</string>
     <string name="cache_log_types">أنوع تسجيل الزيارات</string>
     <string name="cache_coordinates_no">هذا المخبئ ليس لديه إحدثيات.</string>
     <string name="cache_clear_history">مسح التأريخ</string>

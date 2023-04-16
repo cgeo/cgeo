@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
-import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
@@ -19,11 +18,9 @@ import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -72,7 +69,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     public enum Page {
         DETAILS(R.string.detail),
         LOGS(R.string.cache_logs),
-        IMAGES(R.string.cache_images),
         IMAGEGALLERY(R.string.cache_images);
 
         @StringRes
@@ -104,7 +100,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     private TrackableBrand brand = null;
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
-    private ImagesList imagesList = null;
     private ImageGalleryView imageGallery = null;
     private String fallbackKeywordSearch = null;
     private final CompositeDisposable createDisposables = new CompositeDisposable();
@@ -232,7 +227,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         trackable = newTrackable;
         displayTrackable();
         // reset imagelist // @todo mb: more to do?
-        imagesList = null;
         imageGallery = null;
     }
 
@@ -365,44 +359,10 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             return new DetailsViewCreator();
         } else if (pageId == Page.LOGS.id) {
             return new TrackableLogsViewCreator();
-        } else if (pageId == Page.IMAGES.id) {
-            return new ImagesViewCreator();
         } else if (pageId == Page.IMAGEGALLERY.id) {
             return new ImageGalleryViewCreator();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
-    }
-
-    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
-
-        @Override
-        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return CachedetailImagesPageBinding.inflate(inflater, container, false);
-        }
-
-        @Override
-        public long getPageId() {
-            return Page.IMAGES.id;
-        }
-
-        @Override
-        public void setContent() {
-            final TrackableActivity activity = (TrackableActivity) getActivity();
-            if (activity == null) {
-                return;
-            }
-            final Trackable trackable = activity.getTrackable();
-            if (trackable == null) {
-                return;
-            }
-            binding.getRoot().setVisibility(View.VISIBLE);
-
-            if (activity.imagesList == null) {
-                activity.imagesList = new ImagesList(activity, trackable.getGeocode(), null);
-                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), trackable.getImages()));
-            }
-        }
-
     }
 
     public static class ImageGalleryViewCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
@@ -458,12 +418,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
                 pages.add(Page.LOGS.id);
             }
-            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(trackable.getImages())) {
-                pages.add(Page.IMAGES.id);
-            }
-            if (Settings.enableFeatureNewImageGallery()) {
-                pages.add(Page.IMAGEGALLERY.id);
-            }
+            pages.add(Page.IMAGEGALLERY.id);
         }
         final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
@@ -652,12 +607,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
 
-                if (Settings.enableFeatureNewImageGallery()) {
-                    trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
-                } else {
-                    trackableImage.setOnClickListener(view -> ShareUtils.openUrl(activity, trackable.getImage()));
-                }
-
+                trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
 
                 AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
