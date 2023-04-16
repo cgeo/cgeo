@@ -10,6 +10,7 @@
 - Nieuw: Verberg op verzoek de actiebalk van de kaart (klik op lege ruimte op de kaart)
 - Wijziging: Verplaats snelle-instellingen knoppen naar links in liggende modus om meer verticale ruimte te krijgen
 - Nieuw: Visualiseer coords-only-punten van individuele route
+- Fix: Preserve target geocode on mapsource change
 
 ### Cache details
 - Wijziging: Forceer herdownloaden van de cache bij het importeren via send2cgeo
