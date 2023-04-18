@@ -868,7 +868,6 @@
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
     <!-- names for CacheListInfoItem -->
-    <string name="cacheListInfoItem_Geocode">Geocódigo</string>
     <string name="cacheListInfoItem_Difficulty">Dificuldade</string>
     <string name="cacheListInfoItem_Terrain">Terreno</string>
     <string name="cacheListInfoItem_MemberState">Estatuto Premium</string>
