@@ -9,8 +9,8 @@
 - Novo: Definir largura de linha por percurso
 - Novo: Ocultar barra de acção do mapa a pedido (tocar num espaço vazio no mapa)
 - Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
-- New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
+- Novo: Visualize pontos apenas com coordenadas, de uma rota individual
+- Correção: Preservar o geo-código do alvo numa alteração da fonte do mapa
 
 ### Detalhes da cache
 - Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
