@@ -1,7 +1,7 @@
 ##
 - Correcção: Google Maps - Abertura de um pop-up da cache ou ponto adicional quando tocado na rosa do compasso ou controle do zoom tendo a cache ou ponto adicional debaixo desses elementos
 - Correcção: Erro ao adicionar/remover caches nas listas de marcadores
-- Fix: Error on downloading bookmark lists
+- Correcção: Erro ao transferir as listas de marcadores
 
 ##
 - Correcção: Ampliar a coluna de descrição do registo, no modo paisagem
