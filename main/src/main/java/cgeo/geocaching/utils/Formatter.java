@@ -15,11 +15,9 @@ import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
@@ -274,8 +272,8 @@ public final class Formatter {
                 if (logs.size() > 0) {
                     int count = 0;
                     // mitigation to make displaying ImageSpans work even in wrapping lines, see #14163
-                    // ImageSpans need to be separated by different span, use small text in background color for this
-                    final SpannableString s = new SpannableString(" . . . . . . . .");
+                    // ImageSpans are separated by a zero-width space character (\u200b)
+                    final SpannableString s = new SpannableString(" \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b");
                     for (int i = 0; i < Math.min(logs.size(), 8); i++) {
                         final ImageSpan is;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -284,7 +282,6 @@ public final class Formatter {
                             is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay());
                         }
                         s.setSpan(is, i * 2, i * 2 + 1, 0);
-                        s.setSpan(new ForegroundColorSpan(backgroundColor), i * 2 + 1, i * 2 + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         count++;
                     }
                     infos.add(new SpannableString(s.subSequence(0, 2 * count)));
