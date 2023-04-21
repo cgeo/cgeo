@@ -23,7 +23,7 @@
 - Novo: Permitir a importação de ficheiros de rotas GPX que não fornecem dados de xmlns
 - Novo: Adicionado ícone monocromático da aplicação para Android 13
 - Novo: Exibir estado de membro geocaching.com no ecrã inicial
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Alteração: Importação de GPX: Usar o nome como geo-código para conector 'desconhecido'
 - Correcção: Permitir filtragem para caches arquivadas, na pesquisa por proprietário
 - Correcção: Por vezes faltam quebras de linha na visualização dos registos, logo após ser feito um registo
 - Correcção: Vários encerramentos abruptos
