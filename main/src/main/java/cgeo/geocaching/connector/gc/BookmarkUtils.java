@@ -67,11 +67,11 @@ public class BookmarkUtils {
                             ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
                             return;
                         }
-                        showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches));
+                        showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches).blockingGet());
                     }));
         } else {
             AndroidRxUtils.networkScheduler.scheduleDirect(
-                    () -> showResult(context, GCParser.addCachesToBookmarkList(selection.getGuid(), geocaches)));
+                    () -> showResult(context, GCParser.addCachesToBookmarkList(selection.getGuid(), geocaches).blockingGet()));
         }
     }
 

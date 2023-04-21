@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,6 +30,7 @@ public final class Twitter {
         // Utility class
     }
 
+    @WorkerThread
     public static void postTweetCache(final String geocode, @Nullable final LogEntry logEntry) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (cache != null) {
@@ -36,6 +38,7 @@ public final class Twitter {
         }
     }
 
+    @WorkerThread
     public static void postTweetTrackable(final String geocode, @Nullable final LogEntry logEntry) {
         final Trackable trackable = DataStore.loadTrackable(geocode);
         if (trackable != null) {
@@ -43,6 +46,7 @@ public final class Twitter {
         }
     }
 
+    @WorkerThread
     private static void postTweet(final String status) {
         if (!Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
             return;
@@ -56,7 +60,7 @@ public final class Twitter {
             OAuth.signOAuth("api.twitter.com", "/1.1/statuses/update.json", "POST", true, parameters,
                     new OAuthTokens(Settings.getTokenPublic(), Settings.getTokenSecret()), Settings.getTwitterKeyConsumerPublic(), Settings.getTwitterKeyConsumerSecret());
             try {
-                Network.completeWithSuccess(Network.postRequest("https://api.twitter.com/1.1/statuses/update.json", parameters));
+                Network.completeWithSuccess(Network.postRequest("https://api.twitter.com/1.1/statuses/update.json", parameters)).blockingAwait();
                 Log.i("Tweet posted");
             } catch (final Exception ignored) {
                 Log.e("Tweet could not be posted");
