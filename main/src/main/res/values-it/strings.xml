@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Errore nella modifica dello stato preferiti.</string>
     <string name="err_select_logimage_failed">La selezione dell\'immagine per il log è fallita.</string>
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
+    <string name="err_acquire_image_unsupported_format">Il formato immagine deve essere uno dei file JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
     <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
@@ -1585,6 +1586,7 @@
     <string name="imageview_notitle">Senza titolo</string>
     <string name="imageview_mimetype">Tipo MIME</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Impossibile caricare immagine</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Commento</string>
     <!-- visit -->
@@ -1636,6 +1638,7 @@
     <string name="map_show_other_title">Mostra altro:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro cache troppo complesso</string>
     <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
+    <string name="map_theme_legend">Legenda del tema</string>
     <string name="map_theme_legend_info">Tocca il titolo della categoria per aprire/chiudere la categoria. Tocca a lungo un simbolo per avere brevi informazioni su quel simbolo. Tocca l\'icona delle informazioni per visitare una leggenda dettagliata online.</string>
     <string name="google_maps_style_default">Predefinito</string>
     <string name="google_maps_style_night">Notte</string>
@@ -2177,6 +2180,8 @@
     <string name="permission_location_explanation">c:geo è ottimizzato per l\'utilizzo con i dati GPS (posizione fine) per individuare la posizione e calcolare la distanza e la direzione per i geocache. Senza questo permesso, le funzioni basate sulla posizione non funzioneranno come previsto.</string>
     <string name="permission_read_external_storage_explanation_title">Permessi di lettura memoria esterna</string>
     <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo scriverà dati sulla memoria del telefono o sulla scheda SD, ad es. quando si salvano geocache per l\'uso offline, importare o esportare file e altre funzioni. Su alcune versioni di Android, è necessario concedere un permesso aggiuntivo per queste azioni.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Permessi di lettura memoria esterna (legacy)</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
@@ -2313,6 +2318,7 @@
     <string name="downloadmap_mapfile">file mappa</string>
     <string name="downloadmap_themefile">file del tema</string>
     <string name="downloadmap_tilefile">file dei dati di percorso</string>
+    <string name="downloadmap_checking">Controllo dei dati di routing disponibili…</string>
     <string name="downloadmap_othermapdownload">altro download della mappa</string>
     <string name="downloadmap_otherthemedownload">altro download del tema</string>
     <string name="downloadmap_download">download</string>
