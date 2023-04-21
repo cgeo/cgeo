@@ -10,7 +10,7 @@
 - Novinka: Skrytí akčního panelu mapy na vyžádání (klepnutím do prázdného místa na mapě)
 - Změna: Přesunutí tlačítek rychlého nastavení doleva v režimu na šířku, aby se získalo více místa na výšku
 - Novinka: Vizualizace pouze souřadnicových bodů jednotlivých tras
-- Fix: Preserve target geocode on mapsource change
+- Oprava: Zachování cílového geokódu při změně zdroje mapy
 
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
