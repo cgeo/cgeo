@@ -16,6 +16,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class GeoItemLayer<K> {
         }
 
         @Override
-        public void destroy() {
+        public void destroy(final Collection<Pair<GeoPrimitive, Object>> values) {
             //do nothing
         }
 
@@ -111,14 +112,17 @@ public class GeoItemLayer<K> {
     private static class MapWriter implements AsynchronousMapWrapper.IMapChangeExecutor<Object, GeoPrimitive, Object> {
 
         public final IProviderGeoItemLayer<Object> providerLayer;
+        private final String logPraefix;
 
         @SuppressWarnings("unchecked")
-        MapWriter(final IProviderGeoItemLayer<?> providerLayer) {
+        MapWriter(final String logPraefix, final IProviderGeoItemLayer<?> providerLayer) {
             this.providerLayer = (IProviderGeoItemLayer<Object>) providerLayer;
+            this.logPraefix = logPraefix;
         }
 
         @Override
         public Object add(final Object key, final GeoPrimitive value) {
+            Log.d(this.logPraefix + "add '" + key + "'");
             if (value != null && value.isValid()) {
                 return providerLayer.add(value);
             }
@@ -127,11 +131,13 @@ public class GeoItemLayer<K> {
 
         @Override
         public void remove(final Object key, final GeoPrimitive value, final Object context) {
+            Log.d(this.logPraefix + "remove '" + key + "'");
             providerLayer.remove(value, context);
         }
 
         @Override
         public Object replace(final Object key, final GeoPrimitive oldValue, final Object oldContext, final GeoPrimitive newValue) {
+            Log.d(this.logPraefix + "replace '" + key + "'");
             return providerLayer.replace(oldValue, oldContext, newValue);
         }
 
@@ -150,9 +156,11 @@ public class GeoItemLayer<K> {
         }
 
         @Override
-        public void destroy() {
+        public void destroy(final Collection<Pair<GeoPrimitive, Object>> values) {
+            Log.d(this.logPraefix + "destroy " + values.size() + " values");
+
             if (providerLayer != null) {
-                providerLayer.destroy();
+                providerLayer.destroy(values);
             }
         }
 
@@ -193,10 +201,13 @@ public class GeoItemLayer<K> {
      */
     public synchronized void setProvider(final IProviderGeoItemLayer<?> newProviderLayer, final int zLevel) {
         destroy();
+
         final IProviderGeoItemLayer<?>  providerLayer = newProviderLayer == null ? NOOP_GEOITEM_LAYER : newProviderLayer;
+        final String logPraefix = "GeoItemLayer:" + getId() + "(" + providerLayer.getClass().getSimpleName() + "):";
+        Log.d(logPraefix + " init " + zLevel);
         providerLayer.init(zLevel);
         this.providerLayer = providerLayer;
-        this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter(providerLayer));
+        this.mapWriter = new AsynchronousMapWrapper<>(new MapWriter(logPraefix, providerLayer));
         for (Map.Entry<K, Pair<GeoItem, Boolean>> entry : this.itemMap.entrySet()) {
             if (entry.getValue().second) {
                 putToMap(entry.getKey(), entry.getValue().first, null);

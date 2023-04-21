@@ -2,12 +2,14 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.view.View;
 
 import org.oscim.core.GeoPoint;
+import org.oscim.layers.Layer;
 import org.oscim.layers.vector.PathLayer;
 import org.oscim.map.Map;
 
@@ -37,8 +39,8 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         // MAP_MAPSFORGE.addGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
-    protected void destroyLayer(final Map map) {
-        map.layers().remove(navigationLayer);
+    protected void destroyLayer(final GroupedList<Layer> mapLayers) {
+        mapLayers.remove(navigationLayer);
         MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 

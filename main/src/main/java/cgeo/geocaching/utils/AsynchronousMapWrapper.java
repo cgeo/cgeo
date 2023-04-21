@@ -81,7 +81,7 @@ public class AsynchronousMapWrapper<K, V, C> {
             return true;
         }
 
-        default void destroy() {
+        default void destroy(final Collection<Pair<V, C>> valuesOnMap) {
             //empty on purpose
         }
 
@@ -93,16 +93,16 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     /** adds objects to this Map */
     public void put(final Map<K, V> toAdd) {
-        requestChange(() -> {
+        multiChange((putAction, removeAction) -> {
             for (Map.Entry<K, V> entry : toAdd.entrySet()) {
-                putSingle(entry.getKey(), entry.getValue());
+                putAction.call(entry.getKey(), entry.getValue());
             }
         });
     }
 
     /** adds object to this Map */
     public void put(final K key, final V value) {
-        requestChange(() -> putSingle(key, value));
+        multiChange((putAction, removeAction) -> putAction.call(key, value));
     }
 
     /**
@@ -121,14 +121,14 @@ public class AsynchronousMapWrapper<K, V, C> {
     }
 
     public void remove(final K key) {
-        requestChange(() -> removeSingle(key));
+        multiChange((putAction, removeAction) -> removeAction.call(key));
     }
 
     /** removes objects to this Set */
     public void remove(final Collection<? extends K> toRemove) {
-        requestChange(() -> {
+        multiChange((putAction, removeAction) -> {
             for (K opt : toRemove) {
-                removeSingle(opt);
+                removeAction.call(opt);
             }
         });
     }
@@ -154,6 +154,8 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     public void destroy() {
         isDestroyed.set(true);
+
+        //delete all existing waiting commands
         commandLock.lock();
         try {
             changeCommandQueue.clear();
@@ -161,14 +163,20 @@ public class AsynchronousMapWrapper<K, V, C> {
         } finally {
             commandLock.unlock();
         }
-        requestChange(() -> {
+        lock.lock();
+        try {
             //clear all existing requests to add/remove
             requestedToAdd.clear();
             requestedToRemove.clear();
             mapChangeProcessQueue.clear();
             mapChangeRequested = false;
-        });
-        changeExecutor.destroy();
+
+            //execute a last action, a "destroy" request:
+            changeExecutor.runMapChanges(() -> changeExecutor.destroy(objectMap.values()));
+
+        } finally {
+            lock.unlock();
+        }
     }
 
     public void replace(final Collection<? extends K> newKeys) {

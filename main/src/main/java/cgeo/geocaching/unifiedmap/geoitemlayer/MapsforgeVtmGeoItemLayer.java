@@ -9,15 +9,24 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.GroupedList;
 
 import android.graphics.BitmapFactory;
 import android.util.Pair;
 
+import androidx.core.util.Supplier;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
+import org.oscim.backend.canvas.Color;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.Point;
+import org.oscim.layers.Layer;
 import org.oscim.layers.marker.ItemizedLayer;
 import org.oscim.layers.marker.MarkerInterface;
 import org.oscim.layers.marker.MarkerItem;
@@ -37,46 +46,87 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             ll -> new Geopoint(ll.latitudeE6, ll.longitudeE6)
     );
 
-    private static final String LOG_PRAEFIX = "MfVtmGeoItemLayer:";
-
     private Map map;
+    private GroupedList<Layer> mapLayers;
 
-    //for markers
-    private ItemizedLayer markerLayer;
+    private final java.util.Map<Integer, ItemizedLayer> markerLayerMap = new HashMap<>();
+    private final java.util.Map<Integer, VectorLayer> vectorLayerMap = new HashMap<>();
+    private final Lock layerMapLock = new ReentrantLock();
+
     private MarkerSymbol defaultMarkerSymbol;
 
-    //for geometries
-    private VectorLayer vectorLayer;
+    private int defaultZLevel = 0;
 
-    public MapsforgeVtmGeoItemLayer(final Map map) {
+    public MapsforgeVtmGeoItemLayer(final Map map, final GroupedList<Layer> mapLayers) {
         this.map = map;
+        this.mapLayers = mapLayers;
     }
 
     @Override
     public void init(final int zLevel) {
-        Log.iForce(LOG_PRAEFIX + "init");
+        defaultZLevel = Math.max(0, zLevel);
 
-        //initialize marker layer
+        //initialize marker layer stuff
         final Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
         defaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
-        markerLayer = new ItemizedLayer(map, defaultMarkerSymbol);
-        this.map.layers().add(zLevel, markerLayer);
 
-        //initialize vector layer
-        vectorLayer = new VectorLayer(this.map);
-        this.map.layers().add(zLevel, vectorLayer);
+    }
 
+    @SuppressWarnings("unchecked")
+    private <T extends Layer> T getZLevelLayer(final int zLevel, final java.util.Map<Integer, T> layerMap, final Class<T> layerClass, final Supplier<T> layerCreator) {
+        layerMapLock.lock();
+        try {
+            T zLayer = layerMap.get(zLevel);
+            if (zLayer != null || layerCreator == null) {
+                return zLayer;
+            }
+
+            //search for an existing layer, create if not existing
+            synchronized (mapLayers) {
+                final int layerIdx = mapLayers.groupIndexOf(zLevel, c -> layerClass.isAssignableFrom(c.getClass()));
+                if (layerIdx > 0) {
+                    zLayer = (T) mapLayers.get(layerIdx);
+                } else {
+                    zLayer = layerCreator.get();
+                    mapLayers.addToGroup(zLayer, zLevel);
+                }
+            }
+
+            layerMap.put(zLevel, zLayer);
+
+            return zLayer;
+
+        } finally {
+            layerMapLock.unlock();
+        }
+    }
+
+    private ItemizedLayer getMarkerLayer(final int zLevel, final boolean createIfNonexisting) {
+        return getZLevelLayer(zLevel, markerLayerMap, ItemizedLayer.class, createIfNonexisting ? () -> new ItemizedLayer(map, defaultMarkerSymbol) : null);
+    }
+
+    private VectorLayer getVectorLayer(final int zLevel, final boolean createIfNonexisting) {
+        return getZLevelLayer(zLevel, vectorLayerMap, VectorLayer.class, createIfNonexisting ? () -> new VectorLayer(map) : null);
+    }
+
+    private int getZLevel(final GeoPrimitive item) {
+        if (item != null && item.getZLevel() >= 0) {
+            return item.getZLevel() + 20;
+        }
+        return defaultZLevel + 20;
     }
 
     @Override
     public Pair<Drawable, MarkerInterface> add(final GeoPrimitive item) {
-        Log.iForce(LOG_PRAEFIX + "add " + item);
 
+        final int fillColor = GeoStyle.getFillColor(item.getStyle());
         final Style style = Style.builder()
                 .strokeWidth(ViewUtils.dpToPixel(GeoStyle.getStrokeWidth(item.getStyle()) / 2f))
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
-                .fillColor(GeoStyle.getFillColor(item.getStyle()))
+                .fillAlpha(Color.aToFloat(fillColor))
+                .fillColor(fillColor)
                 .build();
+        final int zLevel = getZLevel(item);
 
         Drawable drawable = null;
         switch (item.getType()) {
@@ -95,12 +145,14 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         }
 
         if (drawable != null) {
+            final VectorLayer vectorLayer = getVectorLayer(zLevel, true);
             vectorLayer.add(drawable);
             vectorLayer.update();
         }
 
         MarkerItem marker = null;
         if (item.getIcon() != null) {
+            final ItemizedLayer markerLayer = getMarkerLayer(zLevel, true);
             final GeoIcon icon = item.getIcon();
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
@@ -115,26 +167,33 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
     @Override
     public void remove(final GeoPrimitive item, final Pair<Drawable, MarkerInterface> context) {
-        Log.iForce(LOG_PRAEFIX + "remove");
+        final int zLevel = getZLevel(item);
         if (context.first != null) {
-            vectorLayer.remove(context.first);
-            vectorLayer.update();
+            final VectorLayer vectorLayer = getVectorLayer(zLevel, false);
+            if (vectorLayer != null) {
+                vectorLayer.remove(context.first);
+                vectorLayer.update();
+            }
         }
         if (context.second != null) {
-            markerLayer.removeItem(context.second);
+            final ItemizedLayer markerLayer = getMarkerLayer(zLevel, false);
+            if (markerLayer != null) {
+                markerLayer.removeItem(context.second);
+            }
         }
     }
 
     @Override
-    public void destroy() {
-        Log.iForce(LOG_PRAEFIX + "destroy");
-        if (map != null) {
-            map.layers().remove(markerLayer);
-            map.layers().remove(vectorLayer);
+    public void destroy(final Collection<Pair<GeoPrimitive, Pair<Drawable, MarkerInterface>>> values) {
+
+        for (Pair<GeoPrimitive, Pair<Drawable, MarkerInterface>> v : values) {
+            remove(v.first, v.second);
         }
+
         map = null;
-        markerLayer = null;
-        vectorLayer = null;
+        mapLayers = null;
+        markerLayerMap.clear();
+        vectorLayerMap.clear();
         defaultMarkerSymbol = null;
     }
 

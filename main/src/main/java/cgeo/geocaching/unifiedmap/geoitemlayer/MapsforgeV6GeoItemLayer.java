@@ -17,6 +17,7 @@ import android.util.Pair;
 import androidx.annotation.ColorInt;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -56,7 +57,7 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     }
 
     @Override
-    public void destroy() {
+    public void destroy(final Collection<Pair<GeoPrimitive, Pair<Layer, Layer>>> values) {
         Log.iForce("Destroy Layer");
         if (this.layerManager != null) {
             this.layerManager.getLayers().remove(this);

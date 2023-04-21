@@ -16,6 +16,8 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
+import java.util.Collection;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.Circle;
@@ -37,7 +39,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
 
     private GoogleMap map;
     private Resources resources;
-    private int zLevel;
+    private int defaultZLevel;
 
     public GoogleV2GeoItemLayer(final GoogleMap map, final Resources resources) {
         this.map = map;
@@ -49,9 +51,9 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
     }
 
     @Override
-    public void init(final int zLevel) {
+    public void init(final int defaultZLevel) {
 
-        this.zLevel = zLevel;
+        this.defaultZLevel = defaultZLevel;
         if (map != null) {
             map.setOnMarkerClickListener(m -> {
                 Log.iForce("GoogleV2: Clicked on marker: " + m);
@@ -61,7 +63,11 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
     }
 
     @Override
-    public void destroy() {
+    public void destroy(final Collection<Pair<GeoPrimitive, Pair<Object, Object>>> values) {
+        for (Pair<GeoPrimitive, Pair<Object, Object>> v : values) {
+            remove(v.first, v.second);
+        }
+
         this.map = null;
         this.resources = null;
     }
@@ -73,6 +79,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             return null;
         }
 
+        final int zLevel = item.getZLevel() >= 0 ? item.getZLevel() : Math.max(0, defaultZLevel);
         final int strokeColor = GeoStyle.getStrokeColor(item.getStyle());
         final int fillColor = GeoStyle.getFillColor(item.getStyle());
         final float strokeWidth = ViewUtils.dpToPixel(GeoStyle.getStrokeWidth(item.getStyle()));

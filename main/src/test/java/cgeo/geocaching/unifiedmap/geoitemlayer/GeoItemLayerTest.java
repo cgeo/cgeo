@@ -6,10 +6,13 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.test.AssertUtils;
 
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +124,7 @@ public class GeoItemLayerTest {
         }
 
         @Override
-        public void destroy() {
+        public void destroy(final Collection<Pair<GeoPrimitive, Integer>> values) {
             if (!initCalled || destroyCalled) {
                 fail("destroy called out of lifecycle!");
             }
