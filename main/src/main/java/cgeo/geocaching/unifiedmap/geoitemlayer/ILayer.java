@@ -9,7 +9,7 @@ public interface ILayer {
 
     void destroy();
 
-    default boolean handleTap(Context context, Geopoint tapped) {
+    default boolean handleTap(Context context, Geopoint tapped, final boolean isLongTap) {
         return false;
     }
 }

@@ -56,7 +56,7 @@ public class TapHandlerLayer extends Layer {
 
         final Context ctx = wrContext.get();
         if (testItemLayer != null && ctx != null) {
-            testItemLayer.handleTap(ctx, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            testItemLayer.handleTap(ctx, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), false);
         }
 
         return true;
