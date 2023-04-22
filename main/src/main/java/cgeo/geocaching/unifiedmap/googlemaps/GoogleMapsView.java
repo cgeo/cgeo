@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.ui.TouchableWrapper;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
@@ -22,9 +23,12 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import android.app.Activity;
 import android.graphics.Point;
 import android.view.MotionEvent;
+import android.view.View;
 import static android.view.ViewConfiguration.getLongPressTimeout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -95,7 +99,28 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         GoogleMapsThemeHelper.setTheme(activityRef.get(), mMap);
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
         ((TouchableWrapper) (rootView.findViewById(R.id.mapViewGMWrapper))).setOnTouch(this::onTouchEvent);
+
+        googleMap.setOnMapClickListener(latLng -> {
+            if (activityRef.get() != null) {
+                final ActionBar actionBar = activityRef.get().getSupportActionBar();
+                if (actionBar != null) {
+                    adaptLayoutForActionbar(activityRef.get(), googleMap, actionBar.isShowing());
+                }
+            }
+        });
+        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
         onMapReadyTasks.run();
+    }
+
+    private void adaptLayoutForActionbar(@Nullable final Activity activity, @Nullable final GoogleMap googleMap, final boolean actionBarShowing) {
+        if (activity != null && googleMap != null) {
+            try {
+                final View mapView = activity.findViewById(R.id.mapViewGM);
+                final View compass = mapView.findViewWithTag("GoogleMapCompass");
+                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+            } catch (Exception ignore) {
+            }
+        }
     }
 
     // ========================================================================
