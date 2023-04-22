@@ -768,7 +768,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
         for (ILayer layer : layers) {
-            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6))) {
+            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap)) {
                 return;
             }
         }

@@ -62,7 +62,7 @@ public class GeoItemTestLayer implements ILayer {
     }
 
     @Override
-    public boolean handleTap(final Context ctx, final Geopoint tapped) {
+    public boolean handleTap(final Context ctx, final Geopoint tapped, final boolean isLongTap) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
             return false;
         }

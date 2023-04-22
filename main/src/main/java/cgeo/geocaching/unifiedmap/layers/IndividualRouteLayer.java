@@ -81,11 +81,11 @@ public class IndividualRouteLayer implements ILayer {
     }
 
     @Override
-    public boolean handleTap(final Context context, final Geopoint tapped) {
+    public boolean handleTap(final Context context, final Geopoint tapped, final boolean isLongTap) {
         final Set<String> items = geoItemLayer.getTouched(tapped);
         if (items.size() <= 2) { // route line + coords marker
             for (String item : items) {
-                if (!KEY_INDIVIDUAL_ROUTE.equals(item)) {
+                if (isLongTap && !KEY_INDIVIDUAL_ROUTE.equals(item)) {
                     viewModel.toggleRouteItem(context, new RouteItem(geoItemLayer.get(item).getCenter()));
                     return true;
                 }
