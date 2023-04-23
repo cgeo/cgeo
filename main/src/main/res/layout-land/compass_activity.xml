@@ -136,7 +136,8 @@
         <cgeo.geocaching.ui.LocationStatusView
             android:id="@+id/location_status"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
         <RelativeLayout
             android:id="@+id/status"
