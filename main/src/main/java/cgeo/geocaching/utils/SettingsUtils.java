@@ -84,7 +84,7 @@ public class SettingsUtils {
         } else if (value instanceof Float) {
             return SettingsType.TYPE_FLOAT;
         }
-        Log.e("Unknown settings type: value=" + value + ", type=" + value.getClass().getCanonicalName());
+        Log.w("Unknown settings type: value=" + value + (value != null ? ", type=" + value.getClass().getCanonicalName() : ""));
         return SettingsType.TYPE_UNKNOWN;
     }
 
