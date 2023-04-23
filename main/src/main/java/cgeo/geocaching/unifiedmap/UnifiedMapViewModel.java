@@ -18,7 +18,7 @@ import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class UnifiedMapViewModel extends ViewModel {
+public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
 
     // ViewModels will survive config changes, no savedInstanceState is needed
     // Don't hold an activity references inside the ViewModel!
@@ -78,6 +78,11 @@ public class UnifiedMapViewModel extends ViewModel {
 
     public void clearIndividualRoute() {
         individualRoute.getValue().clearRoute(route -> individualRoute.notifyDataChanged());
+    }
+
+    @Override
+    public void updateIndividualRoute(final IndividualRoute route) {
+        individualRoute.notifyDataChanged();
     }
 
     public void toggleRouteItem(final Context context, final RouteItem item) {

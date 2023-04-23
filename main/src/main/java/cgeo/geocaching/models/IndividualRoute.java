@@ -47,6 +47,14 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     public void toggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater, final boolean addToRouteStart) {
+        addOrToggleItem(context, item, routeUpdater, false, addToRouteStart);
+    }
+
+    public void addItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater, final boolean addToRouteStart) {
+        addOrToggleItem(context, item, routeUpdater, true, addToRouteStart);
+    }
+
+    private void addOrToggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater, final boolean forceAdd, final boolean addToRouteStart) {
         if (loadingRoute) {
             Log.d("[RouteTrackDebug] Individual route: Cannot toggle item, route still loading");
             return;
@@ -57,11 +65,18 @@ public class IndividualRoute extends Route implements Parcelable {
             return;
         }
 
-        final ToggleItemState result = toggleItemInternal(item, addToRouteStart);
+        final ToggleItemState result = toggleItemInternal(item, forceAdd, addToRouteStart);
         if (result == ToggleItemState.REMOVED) {
             Log.d("[RouteTrackDebug] Individual route: Removed first element from route (" + item.getIdentifier() + ")");
         }
         Toast.makeText(context, result == ToggleItemState.ADDED ? R.string.individual_route_added : result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
+        updateRoute(routeUpdater);
+        saveRoute();
+    }
+
+    public void removeItem(final Context context, final int pos, final UpdateIndividualRoute routeUpdater) {
+        final ToggleItemState result = removeItem(pos);
+        Toast.makeText(context, result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
         updateRoute(routeUpdater);
         saveRoute();
     }
@@ -111,7 +126,7 @@ public class IndividualRoute extends Route implements Parcelable {
         final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();
         for (int i = 0; i < routeItems.size(); i++) {
             Log.d("[RouteTrackDebug] Individual route: Add item #" + i + " (" + routeItems.get(i).getIdentifier() + ")");
-            toggleItemInternal(routeItems.get(i), false);
+            toggleItemInternal(routeItems.get(i), true, false);
         }
         Log.d("[RouteTrackDebug] Individual route: Finished loading from database");
         loadingRoute = false;
@@ -138,11 +153,11 @@ public class IndividualRoute extends Route implements Parcelable {
      * @param item item to be added or removed
      * @return ToggleItemState
      */
-    private ToggleItemState toggleItemInternal(final RouteItem item, final boolean addToRouteStart) {
+    private ToggleItemState toggleItemInternal(final RouteItem item, final boolean forceAdd, final boolean addToRouteStart) {
         if (segments == null) {
             segments = new ArrayList<>();
         }
-        final int pos = pos(item);
+        final int pos = (forceAdd ? -1 : pos(item));
         if (pos == -1) {
             final RouteSegment segment = new RouteSegment(item, null, true);
             if (segment.hasPoint()) {
@@ -160,14 +175,21 @@ public class IndividualRoute extends Route implements Parcelable {
                 return ToggleItemState.ERROR_NO_POINT;
             }
         } else {
-            distance -= segments.get(pos).getDistance();
-            segments.remove(pos);
-            calculateNavigationRoute(pos);
-            if (pos < segments.size()) {
-                calculateNavigationRoute(pos + 1);
-            }
-            return ToggleItemState.REMOVED;
+            return removeItem(pos);
         }
+    }
+
+    private ToggleItemState removeItem(final int pos) {
+        if (pos < 0 || pos >= segments.size()) {
+            return ToggleItemState.ERROR_NO_POINT;
+        }
+        distance -= segments.get(pos).getDistance();
+        segments.remove(pos);
+        calculateNavigationRoute(pos);
+        if (pos < segments.size()) {
+            calculateNavigationRoute(pos + 1);
+        }
+        return ToggleItemState.REMOVED;
     }
 
     private int pos(final RouteItem item) {
