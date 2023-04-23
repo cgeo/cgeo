@@ -12,14 +12,18 @@ import android.view.ViewGroup;
 import androidx.annotation.IdRes;
 import androidx.annotation.MenuRes;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.util.Pair;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SimplePopupMenu {
     private final Context context;
 
     private final Map<Integer, OnItemClickListener> itemListeners = new HashMap<>();
+    private final List<Pair<Integer, CharSequence>> additionalMenuItems = new ArrayList<>();
 
     private Activity activity;
     private Point point;
@@ -63,6 +67,11 @@ public class SimplePopupMenu {
         return this;
     }
 
+    public SimplePopupMenu addMenuItem(final int uniqueId, final CharSequence title) {
+        this.additionalMenuItems.add(new Pair<>(uniqueId, title));
+        return this;
+    }
+
     public SimplePopupMenu setMenuContent(final @MenuRes int menuRes) {
         this.menuRes = menuRes;
         return this;
@@ -83,6 +92,7 @@ public class SimplePopupMenu {
         return this;
     }
 
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public void show() {
         final ViewGroup root = activity.getWindow().getDecorView().findViewById(android.R.id.content);
 
@@ -110,6 +120,9 @@ public class SimplePopupMenu {
             onCreateListener.onCreatePopupMenu(popupMenu.getMenu());
         }
 
+        for (Pair<Integer, CharSequence> item : additionalMenuItems) {
+            popupMenu.getMenu().add(Menu.NONE, item.first, Menu.NONE, item.second);
+        }
 
         popupMenu.setOnDismissListener(menu -> {
             if (view == null) {

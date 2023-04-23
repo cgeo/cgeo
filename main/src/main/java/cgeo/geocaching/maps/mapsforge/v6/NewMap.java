@@ -55,6 +55,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -134,6 +135,7 @@ import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
@@ -990,7 +992,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
-
             MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTapLatLong().latitude, tapHandlerLayer.getLongTapLatLong().longitude),
                             (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
                             this::updateRouteTrackButtonVisibility,
@@ -1314,7 +1315,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (items.size() == 1) {
             if (longPressMode) {
                 if (Settings.isLongTapOnMapActivated()) {
-                    toggleRouteItem(items.get(0));
+                    triggerCacheWaypointLongTapContextMenu(items.get(0));
                 }
             } else {
                 showPopup(items.get(0));
@@ -1346,6 +1347,36 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
+    private void triggerCacheWaypointLongTapContextMenu(final GeoitemRef item) {
+        final long mapSize = MercatorProjection.getMapSize(mapView.getModel().mapViewPosition.getZoomLevel(), mapView.getModel().displayModel.getTileSize());
+        Geopoint geopoint = null;
+        if (item.getType() == CoordinatesType.CACHE) {
+            final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null) {
+                geopoint = cache.getCoords();
+            }
+        } else {
+            final Waypoint waypoint = DataStore.loadWaypoint(item.getId());
+            if (waypoint != null) {
+                geopoint = waypoint.getCoords();
+            }
+        }
+        if (geopoint == null) {
+            geopoint = mapView.getViewport().center;
+        }
+
+        final RouteItem routeItem = new RouteItem(item);
+        if (MapUtils.isPartOfRoute(routeItem, individualRoute)) {
+            final int tapX = (int) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - MercatorProjection.longitudeToPixelX(mapView.getViewport().bottomLeft.getLongitude(), mapSize));
+            final int tapY = (int) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - MercatorProjection.latitudeToPixelY(mapView.getViewport().topRight.getLatitude(), mapSize));
+            MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, individualRoute, routeLayer, this::updateRouteTrackButtonVisibility)
+                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
+                    .show();
+        } else {
+            toggleRouteItem(item);
+        }
+    }
+
     private class SelectionClickListener implements DialogInterface.OnClickListener {
 
         @NonNull
@@ -1363,7 +1394,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 final GeoitemRef item = items.get(which);
                 if (longPressMode) {
                     if (Settings.isLongTapOnMapActivated()) {
-                        toggleRouteItem(item);
+                        triggerCacheWaypointLongTapContextMenu(item);
                     }
                 } else {
                     showPopup(item);

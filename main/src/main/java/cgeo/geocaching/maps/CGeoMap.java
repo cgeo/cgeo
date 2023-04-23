@@ -585,6 +585,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         overlayPositionAndScale.repaintRequired();
     }
 
+    public void handleCacheWaypointLongTap(final IWaypoint item, final int tapX, final int tapY) {
+        final RouteItem routeItem = new RouteItem(item);
+        if (MapUtils.isPartOfRoute(routeItem, individualRoute)) {
+            MapUtils.createCacheWaypointLongClickPopupMenu(activity, routeItem, tapX, tapY, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility)
+//                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
+                    .show();
+        } else {
+            toggleRouteItem(item);
+        }
+    }
+
     public void toggleRouteItem(final Geopoint geopoint) {
         if (individualRoute == null) {
             individualRoute = new IndividualRoute(this::setNavigationTargetFromIndividualRoute);

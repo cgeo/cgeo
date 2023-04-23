@@ -1596,6 +1596,10 @@
 
     <string name="context_map_add_to_route">Append to route</string>
     <string name="context_map_add_to_route_start">Prepend to route</string>
+    <string name="context_map_remove_from_route">Remove from route</string>
+    <string name="context_map_remove_from_route_start">Remove from start</string>
+    <string name="context_map_remove_from_route_pos">Remove from position %d</string>
+    <string name="context_map_remove_from_route_end">Remove from end</string>
     <string name="context_map_show_coords">Show coordinates</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>

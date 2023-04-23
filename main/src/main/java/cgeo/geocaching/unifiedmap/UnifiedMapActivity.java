@@ -802,7 +802,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 HideActionBarUtils.toggleActionBar(this);
             }
         } else if (result.size() == 1) {
-            handleTap(result.get(0), isLongTap);
+            handleTap(result.get(0), isLongTap, x, y);
         } else {
             try {
                 final ArrayList<RouteItem> sorted = new ArrayList<>(result);
@@ -821,7 +821,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     .setTitle(res.getString(R.string.map_select_multiple_items))
                     .setAdapter(adapter, (dialog1, which) -> {
                         if (which >= 0 && which < sorted.size()) {
-                            handleTap(sorted.get(which), isLongTap);
+                            handleTap(sorted.get(which), isLongTap, x, y);
                         }
                     })
                     .create();
@@ -834,11 +834,17 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     }
 
-    private void handleTap(final RouteItem item, final boolean isLongTap) {
+    private void handleTap(final RouteItem item, final boolean isLongTap, final int tapX, final int tapY) {
         if (isLongTap) {
             // toggle route item
             if (Settings.isLongTapOnMapActivated()) {
-                viewModel.toggleRouteItem(this, item);
+                if (MapUtils.isPartOfRoute(item, viewModel.getIndividualRoute().getValue())) {
+                    MapUtils.createCacheWaypointLongClickPopupMenu(this, item, tapX, tapY, viewModel.getIndividualRoute().getValue(), viewModel, null)
+//                            .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
+                            .show();
+                } else {
+                    viewModel.toggleRouteItem(this, item);
+                }
             }
         } else {
             // open popup for element

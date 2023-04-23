@@ -145,7 +145,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                     final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
                     if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
                         hitWaypoint = true;
-                        ((CGeoMap) onCacheTapListener).toggleRouteItem(closest.getCoord());
+                        ((CGeoMap) onCacheTapListener).handleCacheWaypointLongTap(closest.getCoord(), waypointPoint.x, waypointPoint.y);
                     }
                 }
                 if (!hitWaypoint && null != positionAndHistoryRef) {
