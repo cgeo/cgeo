@@ -1,4 +1,7 @@
 ##
+- Fix: Alignment of compass status view in landscape mode
+
+##
 - Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
 - Fix: Error on adding caches to / removing caches from bookmark lists
 - Fix: Error on downloading bookmark lists
