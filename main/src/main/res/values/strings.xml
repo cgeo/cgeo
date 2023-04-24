@@ -392,7 +392,8 @@
     <string name="caches_store_background_already_stored">Some caches are already stored. What should happen with them?</string>
     <string name="caches_store_background_option_nothing">Do nothing</string>
     <string name="caches_store_background_option_add_to_list">Add to list</string>
-    <string name="caches_store_background_option_refresh">Refresh and add to list</string>
+    <string name="caches_store_background_option_refresh_and_add">Refresh and add to list</string>
+    <string name="caches_store_background_option_refresh_and_keep">Refresh and keep list</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download failed, %1$d/%2$d caches were downloaded</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download canceled, %1$d/%2$d caches were downloaded</string>
     <plurals name="caches_store_background_result">
