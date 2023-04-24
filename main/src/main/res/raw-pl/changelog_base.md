@@ -10,7 +10,7 @@
 - Nowość: Ukryj pasek akcji mapy na żądanie (dotknij pustego miejsca na mapie)
 - Zmiana: Przeniesienie przycisków szybkich ustawień na lewą stronę w trybie poziomym, aby zyskać więcej miejsca w pionie
 - Nowość: Wizualizacja tylko punktów ze współrzędnymi dla indywidualnej trasy
-- Fix: Preserve target geocode on mapsource change
+- Poprawka: Zachowaj docelowy geokod po zmianie źródła mapy
 
 ### Szczegóły skrytki
 - Zmiana: Wymuszenie ponownego pobrania skrytki podczas importowania przez send2cgeo
