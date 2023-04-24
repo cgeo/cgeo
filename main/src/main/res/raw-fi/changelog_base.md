@@ -9,22 +9,22 @@
 - Uusi: Viivan leveys jälkeä kohden
 - Uusi: Piilota kartan toimintapalkki vaadittaessa (napauta tyhjää tilaa kartalla)
 - Muutos: Siirrä pika-asetukset painikkeet vasemmalle vaakatilassa saadaksesi lisää pystytilaa
-- New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
+- Uusi: Visualisoi yksittäisten reittipisteiden pisteet, jotka sisältävät vain koordinaatit
+- Fix: Säilytä kohteen geokoodi vaihdettaessa karttalähdettä
 
 ### Kätkön tiedot
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Muutos: Pakota kätkön uudelleenlataus tuotaessa kätköä send2cgeon kautta
+- Muutos: Ero koon "ei valittu" ja "muu" välillä geocaching.com kätköille (saattaa antaa eri suodatus joillekin kätköille, jotka ovat vanhempia kuin 2013)
+- Korjaa: Säilytä vierityspaikka käytettäessä "renderöi täydellinen kuvaus" -painiketta
 
 ### Yleinen
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
-- New: Add last logs smiley row to configurable info items
+- Korjaa: Esikatsele painiketta näkyi vain suodatinasetuksella "näytä kaikki" PQ-luettelossa
+- Uusi: Lisää Cruiser navigointisovellukseksi (vaatii Cruiser 3.0.9 tai uudemman)
+- Uusi: Tuo geocaching.com kirjanmerkkilistat linkeistä
+- Uusi: Salli äskettäin katsottujen kätköjen avaaminen listana
+- Uusi: Tee pikakäynnistys painikkeet lajiteltavaksi
+- Uusi: Väliaikainen korjaus matkaajien nimiavaruuskonfliktin varalta (toimii poissa käytöstä olevalla GeoKretyn liittimellä)
+- Uusi: Tee kätköluettelon tietokentät konfiguroitaviksi
+- Uusi: Tyhjennä äskettäin katsotut kätköt
+- Uusi: Lisää 'äskettäin katsotut kätköt' pikakäynnistyksen valintoihin
+- Uusi: Lisää viimeisten lokikirjauksissa käytettyjen hymiöiden rivi muutettaviin tietokenttiin
