@@ -366,7 +366,6 @@
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
     <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
-    <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
