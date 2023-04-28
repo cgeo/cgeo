@@ -349,7 +349,6 @@
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
     <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
-    <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
