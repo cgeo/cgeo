@@ -82,8 +82,10 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 .setTitle(R.string.caches_store_background_title)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     final int id = radioGroup.getCheckedRadioButtonId();
-                    if (id == R.id.radio_button_refresh) {
+                    if (id == R.id.radio_button_refresh_and_add) {
                         askForListsIfNecessaryAndDownload(context, geocodes, true, false, onStartCallback);
+                    } else if (id == R.id.radio_button_refresh_and_keep) {
+                        downloadCachesInternal(context, geocodes, null, true, onStartCallback);
                     } else if (id == R.id.radio_button_add_to_list) {
                         askForListsIfNecessaryAndDownload(context, geocodes, false, false, onStartCallback);
                     } else {
