@@ -371,7 +371,6 @@
     <string name="caches_store_background_already_stored">Vissa cacher är redan lagrade. Vad ska göras med dessa?</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>
-    <string name="caches_store_background_option_refresh">Uppdatera och lägg till i lista</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Nedladdningen misslyckades, %1$d/%2$d cacher hämtades</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Nedladdningen avbruten, %1$d/%2$d cacher hämtades</string>
     <plurals name="caches_store_background_result">
