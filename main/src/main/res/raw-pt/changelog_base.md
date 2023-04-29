@@ -11,6 +11,7 @@
 - Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
 - Novo: Visualize pontos apenas com coordenadas, de uma rota individual
 - Correção: Preservar o geo-código do alvo numa alteração da fonte do mapa
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Detalhes da cache
 - Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
@@ -28,3 +29,4 @@
 - Novo: Remover caches visualizadas recentemente
 - Novo: Opção 'caches visualizadas recentemente' adicionada às opções de início rápido
 - Novo: Adicionados aos itens de informação configuráveis a linha dos emoji utilizados nos últimos registos
+- New: Added "add to individual route" to cache list menu
