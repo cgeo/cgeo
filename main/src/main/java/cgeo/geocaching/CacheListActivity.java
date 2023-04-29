@@ -78,6 +78,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -708,6 +709,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
+            setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
             setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
             setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
             setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
@@ -832,6 +835,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_refresh_stored) {
             refreshInBackground(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_add_to_route) {
+            appendInBackground(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_caches) {
             deleteCaches(adapter.getCheckedOrAllCaches());
@@ -1358,6 +1364,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else {
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList);
         }
+    }
+
+    private void appendInBackground(final Collection<Geocache> caches) {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.appendToIndividualRoute(caches), () -> ActivityMixin.showShortToast(this, R.string.caches_appended_to_route));
+        adapter.setSelectMode(false);
     }
 
     public void removeFromHistoryCheck() {
