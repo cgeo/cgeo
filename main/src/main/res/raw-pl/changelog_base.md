@@ -11,6 +11,7 @@
 - Zmiana: Przeniesienie przycisków szybkich ustawień na lewą stronę w trybie poziomym, aby zyskać więcej miejsca w pionie
 - Nowość: Wizualizacja tylko punktów ze współrzędnymi dla indywidualnej trasy
 - Poprawka: Zachowaj docelowy geokod po zmianie źródła mapy
+- Zmiana: Długie dotknięcie na skrytkę/punkt nawigacji, który jest częścią indywidualnej trasy, wywoła menu kontekstowego
 
 ### Szczegóły skrytki
 - Zmiana: Wymuszenie ponownego pobrania skrytki podczas importowania przez send2cgeo
@@ -28,3 +29,4 @@
 - Nowość: Czyszczenie listy ostatnio oglądanych skrytek
 - Nowość: Dodano „ostatnio oglądane skrytki” do opcji szybkiego uruchamiania
 - Nowość: Dodaj wiersz ostatnich logowań do konfigurowalnych elementów informacji
+- Nowość: Dodano „Dodaj do indywidualnej trasy” do menu listy skrytek
