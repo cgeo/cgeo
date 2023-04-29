@@ -11,6 +11,7 @@
 - Muutos: Siirrä pika-asetukset painikkeet vasemmalle vaakatilassa saadaksesi lisää pystytilaa
 - Uusi: Visualisoi yksittäisten reittipisteiden pisteet, jotka sisältävät vain koordinaatit
 - Fix: Säilytä kohteen geokoodi vaihdettaessa karttalähdettä
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Kätkön tiedot
 - Muutos: Pakota kätkön uudelleenlataus tuotaessa kätköä send2cgeon kautta
@@ -28,3 +29,4 @@
 - Uusi: Tyhjennä äskettäin katsotut kätköt
 - Uusi: Lisää 'äskettäin katsotut kätköt' pikakäynnistyksen valintoihin
 - Uusi: Lisää viimeisten lokikirjauksissa käytettyjen hymiöiden rivi muutettaviin tietokenttiin
+- New: Added "add to individual route" to cache list menu
