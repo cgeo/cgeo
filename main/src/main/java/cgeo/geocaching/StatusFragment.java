@@ -6,6 +6,7 @@ import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -40,6 +41,7 @@ public class StatusFragment extends Fragment {
                     final String packageName = getActivity().getPackageName();
 
                     if (status.icon != null) {
+                        @SuppressLint("DiscouragedApi") // use of getIdentifier is intended to interact with our notification server
                         final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
                         if (iconId != 0) {
                             binding.statusIcon.setImageResource(iconId);
@@ -54,6 +56,7 @@ public class StatusFragment extends Fragment {
 
                     String message = status.message;
                     if (status.messageId != null) {
+                        @SuppressLint("DiscouragedApi") // use of getIdentifier is intended to interact with our notification server
                         final int messageId = res.getIdentifier(status.messageId, "string", packageName);
                         if (messageId != 0) {
                             message = res.getString(messageId);
