@@ -2,11 +2,12 @@ package cgeo.geocaching.brouter.codec;
 
 import cgeo.geocaching.brouter.util.BitCoderContext;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public final class StatCoderContext extends BitCoderContext {
     private static final int[] noisy_bits = new int[1024];
-    private static TreeMap<String, long[]> statsPerName;
+    private static Map<String, long[]> statsPerName;
 
     static {
         // noisybits lookup

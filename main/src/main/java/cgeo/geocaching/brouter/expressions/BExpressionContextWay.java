@@ -10,7 +10,7 @@ import cgeo.geocaching.brouter.codec.TagValueValidator;
 
 public final class BExpressionContextWay extends BExpressionContext implements TagValueValidator {
     private static final String[] buildInVariables =
-            {"costfactor", "turncost", "uphillcostfactor", "downhillcostfactor", "initialcost", "nodeaccessgranted", "initialclassifier", "trafficsourcedensity", "istrafficbackbone", "priorityclassifier", "classifiermask", "maxspeed"};
+            {"costfactor", "turncost", "uphillcostfactor", "downhillcostfactor", "initialcost", "nodeaccessgranted", "initialclassifier", "trafficsourcedensity", "istrafficbackbone", "priorityclassifier", "classifiermask", "maxspeed", "uphillcost", "downhillcost", "uphillcutoff", "downhillcutoff"};
     private boolean decodeForbidden = true;
 
     public BExpressionContextWay(final BExpressionMetaData meta) {
@@ -76,6 +76,22 @@ public final class BExpressionContextWay extends BExpressionContext implements T
 
     public float getMaxspeed() {
         return getBuildInVariable(11);
+    }
+
+    public float getUphillcost() {
+        return getBuildInVariable(12);
+    }
+
+    public float getDownhillcost() {
+        return getBuildInVariable(13);
+    }
+
+    public float getUphillcutoff() {
+        return getBuildInVariable(14);
+    }
+
+    public float getDownhillcutoff() {
+        return getBuildInVariable(15);
     }
 
     @Override

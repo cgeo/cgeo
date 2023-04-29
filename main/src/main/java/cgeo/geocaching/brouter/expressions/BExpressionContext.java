@@ -37,9 +37,9 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private BufferedReader br = null;
     private boolean readerDone = false;
     private final Map<String, Integer> lookupNumbers = new HashMap<>();
-    private final ArrayList<BExpressionLookupValue[]> lookupValues = new ArrayList<>();
-    private final ArrayList<String> lookupNames = new ArrayList<>();
-    private final ArrayList<int[]> lookupHistograms = new ArrayList<>();
+    private final List<BExpressionLookupValue[]> lookupValues = new ArrayList<>();
+    private final List<String> lookupNames = new ArrayList<>();
+    private final List<int[]> lookupHistograms = new ArrayList<>();
     private boolean[] lookupIdxUsed;
     private boolean lookupDataFrozen = false;
     private int[] lookupData = new int[0];
@@ -586,8 +586,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         if (i == values.length) {
             if (lookupData2 != null) {
                 // do not create unknown value for external data array,
-                // record as 'other' instead
-                lookupData2[inum] = 0;
+                // record as 'unkown' instead
+                lookupData2[inum] = 1; // 1 == unknown
                 if (bFoundAsterix) {
                     // found value for lookup *
                     //System.out.println( "add unknown " + name + "  " + value );
@@ -858,8 +858,17 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public void setVariableValue(String name, float value, boolean create) {
-        final Integer num = variableNumbers.get(name);
+        Integer num = variableNumbers.get(name);
         if (num != null) {
+            variableData[num] = value;
+        } else if (create) {
+            num = getVariableIdx(name, create);
+            final float[] readOnlyData = variableData;
+            final int minWriteIdx = readOnlyData.length;
+            variableData = new float[variableNumbers.size()];
+            for (int i = 0; i < minWriteIdx; i++) {
+                variableData[i] = readOnlyData[i];
+            }
             variableData[num] = value;
         }
     }
@@ -883,7 +892,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                 return -1;
             }
         }
-        return num.intValue();
+        return num;
     }
 
     public int getMinWriteIdx() {

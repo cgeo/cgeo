@@ -26,20 +26,19 @@ public final class PhysicalFile implements Closeable {
     long[] fileIndex = new long[25];
     int[] fileHeaderCrcs;
     String fileName;
-    private final int fileIndexCrc;
 
-    public PhysicalFile(final String fileName, final FileInputStream fis, final DataBuffers dataBuffers, final int lookupVersion) throws Exception {
+    public PhysicalFile(final String fileName, final FileInputStream fis, final DataBuffers dataBuffers, final int lookupVersion) throws IOException {
         this.fileName = fileName;
         final byte[] iobuffer = dataBuffers.iobuffer;
         fbr = new FileByteReader(fis);
         fbr.readFully(0, 200, iobuffer);
-        fileIndexCrc = Crc32Utils.crc(iobuffer, 0, 200);
+        final int fileIndexCrc = Crc32Utils.crc(iobuffer, 0, 200);
         ByteDataReader dis = new ByteDataReader(iobuffer);
         for (int i = 0; i < 25; i++) {
             final long lv = dis.readLong();
             final short readVersion = (short) (lv >> 48);
             if (i == 0 && lookupVersion != -1 && readVersion != lookupVersion) {
-                throw new IllegalArgumentException("lookup version mismatch (old rd5?) lookups.dat="
+                throw new IOException("lookup version mismatch (old rd5?) lookups.dat="
                         + lookupVersion + " " + fileName + "=" + readVersion);
             }
             fileIndex[i] = lv & 0xffffffffffffL;
