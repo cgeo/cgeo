@@ -25,7 +25,7 @@ public class OsmNode extends OsmLink implements OsmPos {
     /**
      * The elevation
      */
-    public short selev;
+    public short selev = Short.MIN_VALUE;
 
     /**
      * The node-tags, if any
@@ -98,7 +98,7 @@ public class OsmNode extends OsmLink implements OsmPos {
     }
 
     public final int calcDistance(final OsmPos p) {
-        return (int) (CheapRulerHelper.distance(ilon, ilat, p.getILon(), p.getILat()) + 1.0);
+        return (int) Math.max(1.0, Math.round(CheapRulerHelper.distance(ilon, ilat, p.getILon(), p.getILat())));
     }
 
     public String toString() {

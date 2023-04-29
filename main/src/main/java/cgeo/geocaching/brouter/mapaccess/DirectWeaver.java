@@ -28,7 +28,8 @@ public final class DirectWeaver extends ByteDataWriter {
 
     private final long id64Base;
 
-    public DirectWeaver(final StatCoderContext bc, final DataBuffers dataBuffers, final int lonIdx, final int latIdx, final int divisor, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher, final OsmNodesMap hollowNodes) throws Exception {
+    @SuppressWarnings("PMD.NPathComplexity") // external code, do not split
+    public DirectWeaver(final StatCoderContext bc, final DataBuffers dataBuffers, final int lonIdx, final int latIdx, final int divisor, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher, final OsmNodesMap hollowNodes) {
         super(null);
         final int cellsize = 1000000 / divisor;
         id64Base = ((long) (lonIdx * cellsize)) << 32 | (latIdx * cellsize);

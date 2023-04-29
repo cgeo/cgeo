@@ -1,6 +1,6 @@
 package cgeo.geocaching.brouter.util;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Memory efficient Map to map a long-key to an object-value
@@ -238,7 +238,7 @@ public class CompactLongMap<V> {
         return false;
     }
 
-    protected void moveToFrozenArrays(final long[] faid, final ArrayList<V> flv) {
+    protected void moveToFrozenArrays(final long[] faid, final List<V> flv) {
         for (int i = 1; i < MAXLISTS; i++) {
             pa[i] = 0;
         }

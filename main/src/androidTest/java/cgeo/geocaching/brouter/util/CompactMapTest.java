@@ -49,8 +49,8 @@ public class CompactMapTest {
             final String s = hmap.get(kk);
 
             final boolean contained = hmap.containsKey(kk);
-            Assert.assertTrue("containsKey missmatch (slow)", contained == cmapSlow.contains(k));
-            Assert.assertTrue("containsKey missmatch (fast)", contained == cmapFast.contains(k));
+            Assert.assertEquals("containsKey missmatch (slow)", contained, cmapSlow.contains(k));
+            Assert.assertEquals("containsKey missmatch (fast)", contained, cmapFast.contains(k));
 
             if (contained) {
                 Assert.assertEquals("object missmatch (fast)", s, cmapFast.get(k));

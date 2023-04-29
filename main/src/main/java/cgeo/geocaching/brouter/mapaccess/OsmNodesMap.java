@@ -9,6 +9,8 @@ import cgeo.geocaching.brouter.util.ByteArrayUnifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class OsmNodesMap {
     public int nodesCreated;
@@ -21,11 +23,11 @@ public final class OsmNodesMap {
     public OsmNode endNode1;
     public OsmNode endNode2;
     public int cleanupMode = 0;
-    private final HashMap<OsmNode, OsmNode> hmap = new HashMap<>(4096);
+    private final Map<OsmNode, OsmNode> hmap = new HashMap<>(4096);
     private final ByteArrayUnifier abUnifier = new ByteArrayUnifier(16384, false);
     private final OsmNode testKey = new OsmNode();
     private long currentmaxmem = 4000000; // start with 4 MB
-    private ArrayList<OsmNode> nodes2check;
+    private List<OsmNode> nodes2check;
 
     private static void addLinks(final OsmNode[] nodes, final int idx, final boolean isBorder, final int[] links) {
         final OsmNode n = nodes[idx];
@@ -168,12 +170,6 @@ public final class OsmNodesMap {
         return total <= currentmaxmem;
     }
 
-    private void addActiveNode(final ArrayList<OsmNode> nodes2check, final OsmNode n) {
-        n.visitID = lastVisitID;
-        nodesCreated++;
-        nodes2check.add(n);
-    }
-
     // is there an escape from this node
     // to a hollow node (or destination node) ?
     public boolean canEscape(final OsmNode n0) {
@@ -213,6 +209,12 @@ public final class OsmNodesMap {
         }
 
         return false;
+    }
+
+    private void addActiveNode(List<OsmNode> nodes2check, OsmNode n) {
+        n.visitID = lastVisitID;
+        nodesCreated++;
+        nodes2check.add(n);
     }
 
     public void clearTemp() {

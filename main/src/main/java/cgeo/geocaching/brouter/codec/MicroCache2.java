@@ -11,7 +11,7 @@ public final class MicroCache2 extends MicroCache {
     private final int latBase;
     private final int cellsize;
 
-    public MicroCache2(final int size, final byte[] databuffer, final int lonIdx, final int latIdx, final int divisor) throws Exception {
+    public MicroCache2(final int size, final byte[] databuffer, final int lonIdx, final int latIdx, final int divisor) {
         super(databuffer); // sets ab=databuffer, aboffset=0
 
         faid = new int[size];
@@ -22,7 +22,8 @@ public final class MicroCache2 extends MicroCache {
         latBase = latIdx * cellsize;
     }
 
-    public MicroCache2(final StatCoderContext bc, final DataBuffers dataBuffers, final int lonIdx, final int latIdx, final int divisor, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher) throws Exception {
+    @SuppressWarnings("PMD.NPathComplexity") // external code, do not split
+    public MicroCache2(final StatCoderContext bc, final DataBuffers dataBuffers, final int lonIdx, final int latIdx, final int divisor, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher) {
         super(null);
         cellsize = 1000000 / divisor;
         lonBase = lonIdx * cellsize;

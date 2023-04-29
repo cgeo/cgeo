@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class FrozenLongMap<V> extends CompactLongMap<V> {
     private final long[] faid;
-    private final ArrayList<V> flv;
+    private final List<V> flv;
     private int size = 0;
     private int p2size; // next power of 2 of size
 

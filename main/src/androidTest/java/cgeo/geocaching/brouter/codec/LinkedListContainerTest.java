@@ -24,18 +24,14 @@ public class LinkedListContainerTest {
 
         for (int ln = 0; ln < nlists; ln++) {
             final int cnt = llc.initList(ln);
-            Assert.assertTrue("list size test", cnt == 20);
+            Assert.assertEquals("list size test", 20, cnt);
 
             for (int i = 19; i >= 0; i--) {
                 final int data = llc.getDataElement();
-                Assert.assertTrue("data value test", data == ln * (i % 10));
+                Assert.assertEquals("data value test", data, ln * (i % 10));
             }
         }
 
-        try {
-            llc.getDataElement();
-            Assert.fail("no more elements expected");
-        } catch (IllegalArgumentException e) {
-        }
+        Assert.assertThrows("no more elements expected", IllegalArgumentException.class, llc::getDataElement);
     }
 }
