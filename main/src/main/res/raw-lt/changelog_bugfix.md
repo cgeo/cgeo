@@ -4,13 +4,13 @@
 ##
 - Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
 - Fix: Error on adding caches to / removing caches from bookmark lists
-- Fix: Error on downloading bookmark lists
+- Pataisymas: Klaida atsisiunčiant žymių sąrašus
 
 ##
 - Fix: Widen log description column in landscape mode
 - Fix: Make image format error message clearer
 - Fix: User-created waypoints not being displayed on OSM map
-- Fix: Multiple navigation lines on Google Maps map
+- Pataisymas: Kelios navigacijos linijos „Google Maps“ žemėlapyje
 
 ##
 - Pataisymas: Kai kurių vartotojo sukurtų kelio taškų praleidimas importuojant GPX
