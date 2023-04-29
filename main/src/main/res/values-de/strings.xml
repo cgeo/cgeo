@@ -372,6 +372,7 @@
     <string name="caches_store_background_already_stored">Einige Caches sind bereits gespeichert. Was soll mit ihnen geschehen?</string>
     <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
     <string name="caches_store_background_option_add_to_list">Zur Liste hinzufügen</string>
+    <string name="caches_store_background_option_refresh">Aktualisieren und zur Liste hinzufügen</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <plurals name="caches_store_background_result">
