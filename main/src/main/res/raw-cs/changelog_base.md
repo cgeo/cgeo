@@ -11,6 +11,7 @@
 - Změna: Přesunutí tlačítek rychlého nastavení doleva v režimu na šířku, aby se získalo více místa na výšku
 - Novinka: Vizualizace pouze souřadnicových bodů jednotlivých tras
 - Oprava: Zachování cílového geokódu při změně zdroje mapy
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
@@ -28,3 +29,4 @@
 - Novinka: Vymazání nedávno zobrazených kešek
 - Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
 - Novinka: Přidání řádku s posledním smajlíkem do konfigurovatelných informačních položek
+- New: Added "add to individual route" to cache list menu
