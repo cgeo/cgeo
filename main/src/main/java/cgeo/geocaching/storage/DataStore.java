@@ -3317,6 +3317,29 @@ public class DataStore {
         }
     }
 
+    public static void appendToIndividualRoute(@NonNull final Collection<Geocache> caches) {
+        init();
+        database.beginTransaction();
+        try {
+            // get max existing precedence
+            int maxPrecedence = -1;
+            try {
+                maxPrecedence = (int) PreparedStatement.MAX_ROUTE_PRECEDENCE.getStatement().simpleQueryForLong();
+            } catch (Exception ignore) {
+            }
+            // append new items
+            final SQLiteStatement insertRouteItem = PreparedStatement.INSERT_ROUTEITEM.getStatement();
+            for (Geocache cache : caches) {
+                insertRouteItemHelper(insertRouteItem, new RouteItem(cache), ++maxPrecedence);
+            }
+            database.setTransactionSuccessful();
+        } catch (final Exception e) {
+            Log.e("Appending to individual route failed", e);
+        } finally {
+            database.endTransaction();
+        }
+    }
+
     private static void insertRouteItemHelper(final SQLiteStatement statement, final RouteItem item, final int precedence) throws Exception {
         final Geopoint point = item.getPoint();
         statement.bindLong(1, precedence);
@@ -4671,6 +4694,7 @@ public class DataStore {
         GEOCODE_FROM_TITLE("SELECT geocode FROM " + dbTableCaches + " WHERE name = ?"),
         INSERT_TRAILPOINT("INSERT INTO " + dbTableTrailHistory + " (latitude, longitude, altitude, timestamp) VALUES (?, ?, ?, ?)"),
         INSERT_ROUTEITEM("INSERT INTO " + dbTableRoute + " (precedence, type, id, latitude, longitude) VALUES (?, ?, ?, ?, ?)"),
+        MAX_ROUTE_PRECEDENCE("SELECT MAX(precedence) AS maxPrecedence FROM " + dbTableRoute),
         COUNT_TYPE_ALL_LIST("SELECT COUNT(DISTINCT(c._id)) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l  WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(DISTINCT(c._id)) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.geocode = l.geocode AND l.list_id  > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("SELECT COUNT(c._id) FROM " + dbTableCaches + " c, " + dbTableCachesLists + " l WHERE c.type = ? AND c.geocode = l.geocode AND l.list_id = ?"),
