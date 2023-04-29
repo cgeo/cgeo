@@ -11,6 +11,7 @@
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 - New: Visualize coords-only-points of individual route
 - Fix: Preserve target geocode on mapsource change
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Детали тайника
 - Change: Force redownload of cache when importing via send2cgeo
@@ -28,3 +29,4 @@
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
+- New: Added "add to individual route" to cache list menu
