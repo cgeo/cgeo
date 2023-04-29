@@ -19,15 +19,17 @@
         android:gravity="right"
         android:hint=""
         android:textSize="22dp"
+        tools:ignore="SpUsage"
         /><!-- hint intentionally left empty to keep layout intact, see #13616 -->
+          <!-- intended use of dp text size and of hardcoded size -->
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textSize="22dp"
         android:text=" = "
-        tools:ignore="HardcodedText"
-        />
+        tools:ignore="HardcodedText,SpUsage"
+        /><!-- intended use of dp text size and of hardcoded size -->
 
 
     <EditText
