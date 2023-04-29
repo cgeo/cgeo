@@ -717,7 +717,7 @@ public final class MapMarkerUtils {
         final int marker = StringUtils.equals(ratingLetter, "d") ? r == 0 ? R.drawable.marker_rating_d_0 : r == 5 ? R.drawable.marker_rating_d_5 : r == 10 ? R.drawable.marker_rating_d_10 : r == 15 ? R.drawable.marker_rating_d_15 : r == 20 ? R.drawable.marker_rating_d_20 : r == 25 ? R.drawable.marker_rating_d_25 : r == 30 ? R.drawable.marker_rating_d_30 : r == 35 ? R.drawable.marker_rating_d_35 : r == 40 ? R.drawable.marker_rating_d_40 : r == 45 ? R.drawable.marker_rating_d_45 : r == 50 ? R.drawable.marker_rating_d_50 : 0
                          : StringUtils.equals(ratingLetter, "t") ? r == 0 ? R.drawable.marker_rating_t_0 : r == 5 ? R.drawable.marker_rating_t_5 : r == 10 ? R.drawable.marker_rating_t_10 : r == 15 ? R.drawable.marker_rating_t_15 : r == 20 ? R.drawable.marker_rating_t_20 : r == 25 ? R.drawable.marker_rating_t_25 : r == 30 ? R.drawable.marker_rating_t_30 : r == 35 ? R.drawable.marker_rating_t_35 : r == 40 ? R.drawable.marker_rating_t_40 : r == 45 ? R.drawable.marker_rating_t_45 : r == 50 ? R.drawable.marker_rating_t_50 : 0
                          : 0;
-        final Drawable d = ResourcesCompat.getDrawable(res, marker != 0 ? marker : res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null);
+        final Drawable d = marker != 0 ? ResourcesCompat.getDrawable(res, marker, null) : null;
         return (d != null) ? DrawableCompat.wrap(d) : null;
     }
 
