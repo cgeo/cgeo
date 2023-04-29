@@ -404,6 +404,9 @@
     <string name="caches_remove_selected">Ausgewählte aus Liste entfernen</string>
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
+    <string name="caches_append_to_route_selected">Ausgewählte an Route anhängen</string>
+    <string name="caches_append_to_route_all">Alle an Route anhängen</string>
+    <string name="caches_appended_to_route">Caches an Route angehängt</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
@@ -1431,6 +1434,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">An Route anhängen</string>
     <string name="context_map_add_to_route_start">Vor Route einfügen</string>
+    <string name="context_map_remove_from_route">Von Route entfernen</string>
+    <string name="context_map_remove_from_route_start">Vom Start entfernen</string>
+    <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
+    <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
