@@ -11,6 +11,7 @@
 - Wijziging: Verplaats snelle-instellingen knoppen naar links in liggende modus om meer verticale ruimte te krijgen
 - Nieuw: Visualiseer coords-only-punten van individuele route
 - Oplossing: Behoud geocode bij wijziging van kaartbron
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Cache details
 - Wijziging: Forceer herdownloaden van de cache bij het importeren via send2cgeo
@@ -28,3 +29,4 @@
 - Nieuw: Recent bekeken caches wissen
 - Nieuw: Voeg 'recent bekeken caches' toe aan quicklaunch opties
 - Nieuw: Voeg laatste logs smiley rij toe aan configureerbare info items
+- New: Added "add to individual route" to cache list menu
