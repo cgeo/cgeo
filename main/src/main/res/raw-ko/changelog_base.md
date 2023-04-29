@@ -11,6 +11,7 @@
 - 변경: 더 많은 세로 공간을 확보하기 위해 가로 모드에서 빠른 설정 버튼을 왼쪽으로 이동
 - 신규: 개별 경로의 좌표 전용 지점 시각화
 - 수정: 지도 원점 변경 시 대상 지오코드 유지
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### 캐시 상세정보
 - 변경: send2cgeo를 통해 가져올 때 캐시를 강제로 다시 다운로드
@@ -28,3 +29,4 @@
 - 신규: 최근에 본 캐시 지우기
 - 신규: 빠른 실행 옵션에 '최근 본 캐시' 추가
 - 신규: 구성 가능한 정보 항목에 마지막 로그 스마일리 추가
+- New: Added "add to individual route" to cache list menu
