@@ -406,6 +406,9 @@
     <string name="caches_remove_selected">Usuń wybrane z listy</string>
     <string name="caches_remove_all_completely">Usuń wszystkie z urządzenia</string>
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
+    <string name="caches_append_to_route_selected">Dołącz wybrane do indywidualnej trasy</string>
+    <string name="caches_append_to_route_all">Dołącz wszystkie do indywidualnej trasy</string>
+    <string name="caches_appended_to_route">Skrytki dołączone do trasy</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
@@ -1457,6 +1460,9 @@
     <string name="image_category_log">Z dziennika</string>
     <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
     <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
+    <string name="context_map_remove_from_route">Usuń z trasy</string>
+    <string name="context_map_remove_from_route_start">Usuń z początku</string>
+    <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
