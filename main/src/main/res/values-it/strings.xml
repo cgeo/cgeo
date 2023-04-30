@@ -703,10 +703,6 @@
     <string name="settings_summary_map_sources">Configura i sorgenti della mappa e le impostazioni delle mappe offline.</string>
     <string name="settings_title_map_content_behavior">Contenuto mappa &amp; Comportamento</string>
     <string name="settings_summary_map_content_behavior">Configura le informazioni mostrare sulle mappe e le opzioni di interazione.</string>
-    <string name="settings_title_map_colors">Personalizzazione colore mappa</string>
-    <string name="settings_summary_map_colors">Configura i colori degli elementi disegnati sulla mappa.</string>
-    <string name="settings_title_map">Mappa</string>
-    <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
     <string name="settings_title_offline_maps">Mappe offline</string>
     <string name="settings_title_map_themes">Temi della mappa offline</string>
