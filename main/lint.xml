@@ -63,4 +63,7 @@
     </issue>
 
     <issue id="MissingDefaultResource" severity="informational"/>
+    
+    <!-- We've decided to stay with our slim splashscreen -->
+    <issue id="CustomSplashScreen" severity="ignore"/>
 </lint>
