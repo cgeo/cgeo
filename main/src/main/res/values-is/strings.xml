@@ -266,7 +266,6 @@
     <string name="settings_title_appearance">Útlit</string>
     <string name="settings_summary_appearance">Stilla mælieiningar, tungumál og liti á appi.</string>
     <string name="settings_title_cachedetails">Upplýsingar kassa</string>
-    <string name="settings_title_map">kort</string>
     <string name="settings_title_map_data">Kortaupplýsingar</string>
     <string name="settings_title_map_content">Innihald korts</string>
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
