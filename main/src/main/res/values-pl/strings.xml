@@ -718,10 +718,6 @@
     <string name="settings_summary_map_sources">Ustaw źródło mapy i ustawienia mapy offline.</string>
     <string name="settings_title_map_content_behavior">Zawartość mapy i zachowanie</string>
     <string name="settings_summary_map_content_behavior">Skonfiguruj jakie informacje mają być wyświetlane na mapach i opcjach interakcji.</string>
-    <string name="settings_title_map_colors">Dostosowanie koloru mapy</string>
-    <string name="settings_summary_map_colors">Skonfiguruj kolory elementów rysowanych na mapie.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
     <string name="settings_title_map_themes">Motywy map offline</string>
