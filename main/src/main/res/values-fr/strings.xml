@@ -681,9 +681,6 @@
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
     <string name="settings_summary_map_content_behavior">Configurer les informations à afficher sur les cartes et les actions possibles.</string>
-    <string name="settings_summary_map_colors">Configurer les couleurs des objets dessinés sur la carte.</string>
-    <string name="settings_title_map">Carte</string>
-    <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_offline_maps">Cartes hors-ligne</string>
     <string name="settings_title_map_themes">Thèmes des cartes hors-ligne</string>
