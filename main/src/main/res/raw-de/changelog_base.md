@@ -30,3 +30,4 @@
 - Neu: 'Zuletzt angesehene Caches' als Option für Schnellstart-Schaltflächen ergänzt
 - Neu: Die Smilies für die letzten Logs sind jetzt ein konfigurierbares Info Item
 - Neu: "Anhängen an individuelle Route" in Cacheliste
+- Neu: Internen BRouter auf v1.7.0 aktualisiert
