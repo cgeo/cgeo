@@ -678,8 +678,6 @@
     <string name="settings_summary_offlinedata">Ρυθμίστε ποια δεδομένα θα αποθηκεύονται για εκτός σύνδεσης χρήση, την θέση αποθήκευσης και τους φακέλους για τα αρχεία GPX.</string>
     <string name="settings_title_logging">Καταγραφή</string>
     <string name="settings_summary_logging">Ρύθμιση παραμέτρων υπογραφής και των επιλογών σας.</string>
-    <string name="settings_title_map">Χάρτης</string>
-    <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
     <string name="settings_title_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="settings_title_map_themes">Θέματα χάρτη εκτός σύνδεσης</string>
