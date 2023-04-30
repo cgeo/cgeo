@@ -715,10 +715,6 @@
     <string name="settings_summary_map_sources">Nastavení zdroje mapy a nastavení offline mapy.</string>
     <string name="settings_title_map_content_behavior">Obsah mapy &amp; Chování</string>
     <string name="settings_summary_map_content_behavior">Nakonfigurujte, které informace se mají zobrazovat na mapách, a možnosti interakce.</string>
-    <string name="settings_title_map_colors">Přizpůsobení barvy mapy</string>
-    <string name="settings_summary_map_colors">Konfigurace barev prvků vykreslených na mapě.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_map_themes">Offline mapové motivy</string>
