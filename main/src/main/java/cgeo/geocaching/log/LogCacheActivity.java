@@ -543,13 +543,30 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void sendLogInternal() {
         lastSavedState = getEntryFromView();
-        new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading),
-                loggingManager,
-                cache, trackables,
-                binding, logType.get(), reportProblem.get(), imageListFragment, cacheVotingBar,
-                date,
-                this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
+        final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
+        taskInterface.loggingManager = loggingManager;
+        taskInterface.geocache = cache;
+        taskInterface.trackables = trackables;
+        taskInterface.binding = binding;
+        taskInterface.logType = logType.get();
+        taskInterface.reportProblemType = reportProblem.get();
+        taskInterface.imageListFragment = imageListFragment;
+        taskInterface.cacheVotingBar = cacheVotingBar;
+        taskInterface.date = date;
+        new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
+    }
+
+    protected static class LogCacheTaskInterface {
+        public ILoggingManager loggingManager;
+        public Geocache geocache;
+        public Set<TrackableLog> trackables;
+        public LogcacheActivityBinding binding;
+        public LogType logType;
+        public ReportProblemType reportProblemType;
+        public ImageListFragment imageListFragment;
+        public CacheVotingBar cacheVotingBar;
+        public DateTimeEditor date;
     }
 
     private void onPostExecuteInternal(final StatusCode status) {
