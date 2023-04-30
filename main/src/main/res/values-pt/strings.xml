@@ -364,6 +364,7 @@
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
     <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
+    <string name="caches_store_background_option_refresh_and_add">Actualizar e adicionar à lista</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
     <plurals name="caches_store_background_result">
@@ -402,6 +403,9 @@
     <string name="caches_remove_selected">Remover as caches seleccionadas da lista</string>
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
+    <string name="caches_append_to_route_selected">Incluir seleccionadas à rota individual</string>
+    <string name="caches_append_to_route_all">Incluir todas à rota individual</string>
+    <string name="caches_appended_to_route">Caches incluídas na rota</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
     <string name="caches_upload_bookmarklist">Adicionar aos marcadores</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
@@ -703,10 +707,6 @@
     <string name="settings_summary_map_sources">Definir o provedor de mapa e configurações do mapa em modo offline.</string>
     <string name="settings_title_map_content_behavior">Conteúdo &amp; Comportamento do mapa</string>
     <string name="settings_summary_map_content_behavior">Configure que informações sejam mostradas nos mapas e as opções de interacção.</string>
-    <string name="settings_title_map_colors">Personalização das cores do mapa</string>
-    <string name="settings_summary_map_colors">Configure as cores dos elementos desenhados no mapa.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Definir o fornecedor, configurações offline e detalhes do mapa.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_maps">Mapas offline</string>
     <string name="settings_title_map_themes">Temas de mapas offline</string>
@@ -1429,6 +1429,10 @@
     <string name="image_category_log">Registar</string>
     <string name="context_map_add_to_route">Acrescentar à rota</string>
     <string name="context_map_add_to_route_start">Acrescentar ao início da rota</string>
+    <string name="context_map_remove_from_route">Remover da rota</string>
+    <string name="context_map_remove_from_route_start">Remover do início</string>
+    <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
+    <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
