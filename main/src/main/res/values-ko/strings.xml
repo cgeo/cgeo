@@ -363,6 +363,8 @@
     <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
     <string name="caches_store_background_option_add_to_list">목록에 추가</string>
+    <string name="caches_store_background_option_refresh_and_add">새로 고침 및 목록에 추가</string>
+    <string name="caches_store_background_option_refresh_and_keep">현재 목록 할당 새로 고침 및 유지</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
     <plurals name="caches_store_background_result">
@@ -400,6 +402,9 @@
     <string name="caches_remove_selected">목록에서 선택한 것을 제거 하시겠습니까?</string>
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
+    <string name="caches_append_to_route_selected">선택한 것을 개별 경로에 추가</string>
+    <string name="caches_append_to_route_all">모든 것을 개별 경로에 추가</string>
+    <string name="caches_appended_to_route">경로에 추가된 캐시</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
@@ -697,10 +702,6 @@
     <string name="settings_summary_map_sources">지도 소스 및 오프라인 지도 설정을 설정합니다.</string>
     <string name="settings_title_map_content_behavior">지도 콘텐츠 &amp; 행동</string>
     <string name="settings_summary_map_content_behavior">지도 및 상호 작용 옵션에 표시할 정보를 구성합니다.</string>
-    <string name="settings_title_map_colors">지도 색상 사용자 정의</string>
-    <string name="settings_summary_map_colors">지도에 그려진 것의 색상을 설정합니다.</string>
-    <string name="settings_title_map">지도</string>
-    <string name="settings_summary_map">지도 종류, 오프라인 지도 설정 및 기본지도 등 설정하기</string>
     <string name="settings_title_map_data">지도 데이터</string>
     <string name="settings_title_offline_maps">오프라인 지도</string>
     <string name="settings_title_map_themes">오프라인 지도 테마</string>
@@ -1415,6 +1416,10 @@
     <string name="image_category_log">로그</string>
     <string name="context_map_add_to_route">경로 후에 추가</string>
     <string name="context_map_add_to_route_start">경로 전에 추가</string>
+    <string name="context_map_remove_from_route">경로에서 제거</string>
+    <string name="context_map_remove_from_route_start">시작에서 제거</string>
+    <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
+    <string name="context_map_remove_from_route_end">끝에서 제거</string>
     <string name="context_map_show_coords">좌표 보기</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
