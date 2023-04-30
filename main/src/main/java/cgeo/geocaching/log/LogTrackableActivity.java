@@ -4,7 +4,6 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -23,14 +22,12 @@ import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 
 import android.R.string;
@@ -400,81 +397,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         }
     }
 
-    private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
-
-        Poster(final Activity activity, final String progressMessage) {
-            super(activity, null, progressMessage, true);
-        }
-
-        @Override
-        protected StatusCode doInBackgroundInternal(final String[] params) {
-            final String logMsg = params[0];
-            try {
-                // Set selected action
-                final TrackableLog trackableLog = new TrackableLog(trackable.getGeocode(), trackable.getTrackingcode(), trackable.getName(), 0, 0, trackable.getBrand());
-                trackableLog.setAction(typeSelected);
-                // Real call to post log
-                final LogResult logResult = loggingManager.postLog(geocache, trackableLog, date.getCalendar(), logMsg);
-
-                // Now posting tweet if log is OK
-                if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
-                    addLocalTrackableLog(logMsg);
-                    if (binding.tweet.isChecked() && binding.tweetBox.getVisibility() == View.VISIBLE) {
-                        // TODO oldLogType as a temp workaround...
-                        final LogEntry logNow = new LogEntry.Builder()
-                                .setDate(date.getDate().getTime())
-                                .setLogType(typeSelected.oldLogtype)
-                                .setLog(logMsg)
-                                .build();
-                        Twitter.postTweetTrackable(trackable.getGeocode(), logNow);
-                    }
-                }
-                // Display errors to the user
-                if (StringUtils.isNotEmpty(logResult.getLogId())) {
-                    showToast(logResult.getLogId());
-                }
-
-                // Return request status
-                return logResult.getPostLogResult();
-            } catch (final RuntimeException e) {
-                Log.e("LogTrackableActivity.Poster.doInBackgroundInternal", e);
-            }
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        @Override
-        protected void onPostExecuteInternal(final StatusCode status) {
-            if (status == StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.info_log_posted));
-                finish();
-            } else if (status == StatusCode.LOG_SAVED) {
-                // is this part of code really reachable? Didn't see StatusCode.LOG_SAVED in postLog()
-                showToast(res.getString(R.string.info_log_saved));
-                finish();
-            } else {
-                showToast(status.getErrorString(res));
-            }
-        }
-
-        /**
-         * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable
-         * activity.
-         */
-        private void addLocalTrackableLog(final String logText) {
-            // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
-            final LogEntry logEntry = new LogEntry.Builder()
-                    .setDate(date.getDate().getTime())
-                    .setLogType(typeSelected.oldLogtype)
-                    .setLog(logText)
-                    .build();
-            final List<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
-            modifiedLogs.add(0, logEntry);
-            trackable.setLogs(modifiedLogs);
-            DataStore.saveTrackable(trackable);
-        }
-
-    }
-
     public static Intent getIntent(final Context context, final Trackable trackable) {
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.getGeocode());
@@ -554,9 +476,38 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Post Log in Background
      */
     private void postLog() {
-        new Poster(this, res.getString(R.string.log_saving)).execute(binding.log.getText().toString());
+        final LogTrackableTaskInterface taskInterface = new LogTrackableTaskInterface();
+        taskInterface.loggingManager = loggingManager;
+        taskInterface.geocache = geocache;
+        taskInterface.trackable = trackable;
+        taskInterface.typeSelected = typeSelected;
+        taskInterface.binding = binding;
+        taskInterface.date = date;
+        new LogTrackableTask(this, res.getString(R.string.log_saving), taskInterface, this::onPostExecuteInternal).execute(binding.log.getText().toString());
         Settings.setTrackableAction(typeSelected.id);
         Settings.setLastTrackableLog(binding.log.getText().toString());
+    }
+
+    protected static class LogTrackableTaskInterface {
+        public AbstractTrackableLoggingManager loggingManager;
+        public Geocache geocache;
+        public Trackable trackable;
+        public LogTypeTrackable typeSelected;
+        public LogtrackableActivityBinding binding;
+        public DateTimeEditor date;
+    }
+
+    private void onPostExecuteInternal(final StatusCode status) {
+        if (status == StatusCode.NO_ERROR) {
+            showToast(res.getString(R.string.info_log_posted));
+            finish();
+        } else if (status == StatusCode.LOG_SAVED) {
+            // is this part of code really reachable? Didn't see StatusCode.LOG_SAVED in postLog()
+            showToast(res.getString(R.string.info_log_saved));
+            finish();
+        } else {
+            showToast(status.getErrorString(res));
+        }
     }
 
     @Override
