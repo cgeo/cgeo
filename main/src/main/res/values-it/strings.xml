@@ -707,7 +707,7 @@
     <string name="settings_summary_offlinedata">Configurare i dati da salvare per l\'uso fuori rete (offline), la posizione di archiviazione e le cartelle per i file GPX.</string>
     <string name="settings_title_logging">Registro Log</string>
     <string name="settings_summary_logging">Configura la tua firma e imposta le opzioni di logging.</string>
-    <string name="settings_title_map">Mappa</string>
+    <string name="settings_title_map">Mappa c:geo</string>
     <string name="settings_summary_map">Sceglie la mappa online, le opzioni delle mappe offline ed i dettagli di mappa.</string>
     <string name="settings_title_map_data">Dati mappa</string>
     <string name="settings_title_offline_maps">Mappe offline</string>
