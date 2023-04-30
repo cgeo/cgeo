@@ -16,9 +16,6 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 import android.app.Activity;
 import android.net.Uri;
 
-import org.apache.commons.io.IOUtils;
-import org.xmlpull.v1.XmlSerializer;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,6 +25,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import org.apache.commons.io.IOUtils;
+import org.xmlpull.v1.XmlSerializer;
 
 public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryElement, Uri> {
 

@@ -81,4 +81,5 @@ public class GpxExportTask extends AsyncTaskWithProgress<String, Uri> {
                 ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
             }
         }
-    }}
+    }
+}

@@ -1,12 +1,5 @@
 package cgeo.geocaching.export;
 
-import android.app.Activity;
-import android.content.Context;
-
-import androidx.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -16,6 +9,13 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
+
+import android.app.Activity;
+import android.content.Context;
+
+import androidx.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class PersonalNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     /**
