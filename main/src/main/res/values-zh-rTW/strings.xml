@@ -547,8 +547,6 @@
     <string name="settings_summary_offlinedata">設定GPX檔案離線使用的資料、儲存的位置和資料夾。</string>
     <string name="settings_title_logging">登陆</string>
     <string name="settings_summary_logging">設定你的簽名和日誌選項。</string>
-    <string name="settings_title_map">地圖</string>
-    <string name="settings_summary_map">設定地圖來源，離線地圖設定，地圖的詳細設定。</string>
     <string name="settings_title_map_data">地圖資料</string>
     <string name="settings_title_offline_routing">離線導航</string>
     <string name="settings_title_map_rotation">旋轉地圖方向(Google地圖)</string>
