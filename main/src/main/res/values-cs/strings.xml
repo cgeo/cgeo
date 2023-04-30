@@ -721,7 +721,7 @@
     <string name="settings_summary_offlinedata">Nakonfigurujte data, která mají být uložena pro offline použití, umístění úložiště a složky pro soubory GPX.</string>
     <string name="settings_title_logging">Logování</string>
     <string name="settings_summary_logging">Nastavení podpisu a možností logování.</string>
-    <string name="settings_title_map">Mapa</string>
+    <string name="settings_title_map">Zobrazit na mapě</string>
     <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
