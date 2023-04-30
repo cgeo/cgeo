@@ -372,6 +372,7 @@
     <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
     <string name="caches_store_background_option_nothing">Niets doen</string>
     <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
+    <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
     <plurals name="caches_store_background_result">
@@ -707,7 +708,7 @@
     <string name="settings_summary_offlinedata">Configureer de gegevens die moeten worden opgeslagen voor offline gebruik, de opslaglocatie en mappen voor GPX bestanden.</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Configureer handtekening en stel log-opties in.</string>
-    <string name="settings_title_map">Kaart</string>
+    <string name="settings_title_map">Toon op kaart</string>
     <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
     <string name="settings_title_offline_maps">Offline kaarten</string>
