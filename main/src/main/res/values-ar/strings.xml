@@ -328,8 +328,6 @@
     <string name="settings_title_offlinedata">البيانات في وضع عدم الاتصال</string>
     <string name="settings_title_logging">تسجيل الدخول</string>
     <string name="settings_summary_logging">تهيئة توقيعك و ظبط خيارات تسجيل الزيارات.</string>
-    <string name="settings_title_map">خريطة</string>
-    <string name="settings_summary_map">ظبط خريطة المصدر و إعدادات الخريطة في وضع عدم الاتصال و كل تفاصيل الخريطة.</string>
     <string name="settings_title_map_data">بيانات الخريطة</string>
     <string name="settings_title_map_content">محتوى الخريطة</string>
     <string name="calculate_dataDir_title">استخدام بيانات العلبة المخبئة</string>
