@@ -31,4 +31,4 @@
 - Neu: Die Smilies für die letzten Logs sind jetzt ein konfigurierbares Info Item
 - Neu: "Anhängen an individuelle Route" in Cacheliste
 - Neu: Internen BRouter auf v1.7.0 aktualisiert
-- Fix: Alignment of compass status view in landscape mode
+- Korrektur: Ausrichtung der Kompass-Statusansicht im Querformat
