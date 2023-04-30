@@ -318,8 +318,6 @@
     <string name="settings_title_offlinedata">Ang Datos na Offline</string>
     <string name="settings_title_logging">Pagla-log</string>
     <string name="settings_summary_logging">Magkumpigura ng iyong pirma at itakda ang mga opsyon sa pagla-log.</string>
-    <string name="settings_title_map">Ang Mapa</string>
-    <string name="settings_summary_map">Ang pagtakda ng pinagmumulan ng mapa, mga setting sa mapang naka-offline at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
