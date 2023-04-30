@@ -711,8 +711,6 @@
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
     <string name="settings_summary_map_sources">Источник карты, настройки офлайн-карты</string>
-    <string name="settings_title_map">Карта</string>
-    <string name="settings_summary_map">Источник карт, настройки офлайн-карт, настройки отображения карты</string>
     <string name="settings_title_map_data">Данные карты</string>
     <string name="settings_title_offline_maps">Карты офлайн</string>
     <string name="settings_title_map_themes">Темы офлайновых карт</string>
