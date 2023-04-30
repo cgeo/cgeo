@@ -30,3 +30,4 @@
 - Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
 - Novinka: Přidání řádku s posledním smajlíkem do konfigurovatelných informačních položek
 - New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
