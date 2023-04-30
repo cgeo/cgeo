@@ -30,3 +30,4 @@
 - Novo: Opção 'caches visualizadas recentemente' adicionada às opções de início rápido
 - Novo: Adicionados aos itens de informação configuráveis a linha dos emoji utilizados nos últimos registos
 - New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
