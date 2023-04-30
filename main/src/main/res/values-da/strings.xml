@@ -595,7 +595,7 @@
     <string name="settings_title_offlinedata">Offline data</string>
     <string name="settings_title_logging">Logning</string>
     <string name="settings_summary_logging">Konfigurér signatur og indstillinger for logbeskeder.</string>
-    <string name="settings_title_map">Kort</string>
+    <string name="settings_title_map">Vis på kort</string>
     <string name="settings_summary_map">Vælg kortkilde samt offline kortindstillinger og -detaljer.</string>
     <string name="settings_title_map_data">Kortdata</string>
     <string name="settings_title_map_rotation">Kortrotation (Google Maps)</string>
