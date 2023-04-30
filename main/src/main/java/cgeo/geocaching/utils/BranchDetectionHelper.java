@@ -5,11 +5,11 @@ import cgeo.geocaching.BuildConfig;
 public class BranchDetectionHelper {
 
     // should contain the version name of the last feature release
-    public static final String FEATURE_VERSION_NAME = "2023.02.12";
+    public static final String FEATURE_VERSION_NAME = "2023.04.30-RC";
 
     // should contain version names of active bugfix releases since last feature release, oldest first
     // empty the part within curly brackets when creating a new release branch from master
-    public static final String[] BUGFIX_VERSION_NAME = new String[]{"2023.02.25", "2023.03.25", "2023.04.11"};
+    public static final String[] BUGFIX_VERSION_NAME = new String[]{};
 
     private BranchDetectionHelper() {
         // utility class
