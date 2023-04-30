@@ -321,8 +321,6 @@
     <string name="settings_title_offlinedata">Data Offline</string>
     <string name="settings_title_logging">Log</string>
     <string name="settings_summary_logging">Mengkonfigurasi tanda tangan anda dan mengatur pembukuan pilihan.</string>
-    <string name="settings_title_map">Peta</string>
-    <string name="settings_summary_map">Menetapkan sumber peta, pengaturan peta offline dan rincian peta.</string>
     <string name="settings_title_map_data">Data Peta</string>
     <string name="settings_title_map_content">Konten Peta</string>
     <string name="calculate_dataDir_title">Pemakaian data Geocache</string>
