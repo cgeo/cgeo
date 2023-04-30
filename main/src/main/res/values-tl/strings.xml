@@ -327,8 +327,6 @@
     <string name="settings_title_offlinedata">Saradong linya ng datos</string>
     <string name="settings_title_logging">Ang paglo-log</string>
     <string name="settings_summary_logging">I-kunpigura ang iyong pirma at itakda ang mga opsyon ng pag-log.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Itakda ang pinagmulan ng mapa, offline na mga setting at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang datos ng mapa</string>
     <string name="settings_title_map_content">Nilalaman ng mapa</string>
     <string name="calculate_dataDir_title">Ang nagamit na datos ng Geocache</string>
