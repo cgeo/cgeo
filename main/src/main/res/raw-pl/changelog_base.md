@@ -31,3 +31,4 @@
 - Nowość: Dodaj wiersz ostatnich logowań do konfigurowalnych elementów informacji
 - Nowość: Dodano „Dodaj do indywidualnej trasy” do menu listy skrytek
 - Nowość: zaktualizowano zintegrowany BRouter do wersji 1.7.0
+- Fix: Alignment of compass status view in landscape mode
