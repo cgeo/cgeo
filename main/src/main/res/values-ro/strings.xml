@@ -378,8 +378,6 @@
     <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
     <string name="settings_title_logging">Jurnal</string>
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
-    <string name="settings_title_map">Hartă</string>
-    <string name="settings_summary_map">Alege sursele pentru hărţi, setări pentru hărţile salvate local şi alte detalii.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
     <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
