@@ -340,8 +340,6 @@
     <string name="settings_title_cachedetails">Podrobnosti zaklada</string>
     <string name="settings_title_offlinedata">Podatki brez povezave</string>
     <string name="settings_title_logging">Zapisovanje</string>
-    <string name="settings_title_map">Zemljevid</string>
-    <string name="settings_summary_map">Nastavi izvorno mapo za zemljevide brez povezave.</string>
     <string name="settings_title_map_data">Podatki zemljevida</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
