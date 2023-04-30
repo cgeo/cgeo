@@ -699,8 +699,6 @@
     <string name="settings_summary_offlinedata">Configureu les dades per a ús fora de línia, la ubicació d’emmagatzematge i les carpetes dels fitxers GPX.</string>
     <string name="settings_title_logging">Registre</string>
     <string name="settings_summary_logging">Configura la signatura i el conjunt d\'opcions de connexió.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Font del mapa, configuració del mapa de fora de línia  i detalls del mapa.</string>
     <string name="settings_title_map_data">Dades del mapa</string>
     <string name="settings_title_offline_maps">Mapes fora de línia</string>
     <string name="settings_title_map_themes">Temes de mapes fora de línia</string>
