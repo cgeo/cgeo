@@ -30,3 +30,4 @@
 - Nowość: Dodano „ostatnio oglądane skrytki” do opcji szybkiego uruchamiania
 - Nowość: Dodaj wiersz ostatnich logowań do konfigurowalnych elementów informacji
 - Nowość: Dodano „Dodaj do indywidualnej trasy” do menu listy skrytek
+- Nowość: zaktualizowano zintegrowany BRouter do wersji 1.7.0
