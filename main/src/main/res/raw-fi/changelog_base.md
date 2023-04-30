@@ -30,3 +30,4 @@
 - Uusi: Lisää 'äskettäin katsotut kätköt' pikakäynnistyksen valintoihin
 - Uusi: Lisää viimeisten lokikirjauksissa käytettyjen hymiöiden rivi muutettaviin tietokenttiin
 - New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
