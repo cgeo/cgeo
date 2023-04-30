@@ -478,8 +478,6 @@
     <string name="settings_title_offlinedata">Offline adatok</string>
     <string name="settings_title_logging">Logolás</string>
     <string name="settings_summary_logging">Aláírásod és egyéb logolási opciók beállítása</string>
-    <string name="settings_title_map">Térkép</string>
-    <string name="settings_summary_map">Térképválasztás, offline térképek opcióinak beállítása</string>
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_waypoints">Útpontok</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
