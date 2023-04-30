@@ -31,3 +31,4 @@
 - 신규: 구성 가능한 정보 항목에 마지막 로그 스마일리 추가
 - 신규: 캐시 목록 메뉴에 "개별 경로에 추가" 추가
 - 신규: 통합 BRouter를 v1.7.0으로 업데이트
+- Fix: Alignment of compass status view in landscape mode
