@@ -349,7 +349,6 @@
     <string name="caches_store_background_already_stored">Κάποιες κρύπτες είναι ήδη αποθηκευμένες. Τι πρέπει να συμβεί με αυτές;</string>
     <string name="caches_store_background_option_nothing">Καμία ενέργεια</string>
     <string name="caches_store_background_option_add_to_list">Προσθήκη σε λίστα</string>
-    <string name="caches_store_background_option_refresh">Ανανέωση και προσθήκη στη λίστα</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Η λήψη απέτυχε, λήφθηκαν %1$d/%2$d κρύπτες</string>
     <string name="caches_history">Ιστορικό</string>
@@ -679,8 +678,6 @@
     <string name="settings_summary_offlinedata">Ρυθμίστε ποια δεδομένα θα αποθηκεύονται για εκτός σύνδεσης χρήση, την θέση αποθήκευσης και τους φακέλους για τα αρχεία GPX.</string>
     <string name="settings_title_logging">Καταγραφή</string>
     <string name="settings_summary_logging">Ρύθμιση παραμέτρων υπογραφής και των επιλογών σας.</string>
-    <string name="settings_title_map">Χάρτης</string>
-    <string name="settings_summary_map">Ορισμός βασικού χάρτη, ρυθμίσεις χάρτη εκτός σύνδεσης και λεπτομέρειες χάρτη.</string>
     <string name="settings_title_map_data">Δεδομένα χάρτη</string>
     <string name="settings_title_offline_maps">Χάρτες χωρίς σύνδεση</string>
     <string name="settings_title_map_themes">Θέματα χάρτη εκτός σύνδεσης</string>

@@ -608,8 +608,6 @@
     <string name="settings_summary_offlinedata">Konfigurer data som skal lagres for frakoblet bruk, lagringssted og mappe for GPX-filer.</string>
     <string name="settings_title_logging">Logging</string>
     <string name="settings_summary_logging">Endre signatur og loggingsalternativer.</string>
-    <string name="settings_title_map">Vis på kartet</string>
-    <string name="settings_summary_map">Angi kartkilde, innstillinger for lokalt lagrede kart og kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_routing">Frakoblet ruting</string>
     <string name="settings_summary_offline_routing">Frakoblet ruting er tilgjengelig hvis enten hjelper-appen \"BRouter\" er installert og konfigurert, eller intern ruting er aktivert.</string>

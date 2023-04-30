@@ -366,7 +366,6 @@
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
     <string name="caches_store_background_option_add_to_list">Dodaj do listy</string>
-    <string name="caches_store_background_option_refresh">Odśwież i dodaj do listy</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
     <plurals name="caches_store_background_result">
@@ -407,6 +406,9 @@
     <string name="caches_remove_selected">Usuń wybrane z listy</string>
     <string name="caches_remove_all_completely">Usuń wszystkie z urządzenia</string>
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
+    <string name="caches_append_to_route_selected">Dołącz wybrane do indywidualnej trasy</string>
+    <string name="caches_append_to_route_all">Dołącz wszystkie do indywidualnej trasy</string>
+    <string name="caches_appended_to_route">Skrytki dołączone do trasy</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
     <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
     <string name="caches_upload_modifiedcoords">Prześlij zmodyfikowane współrzędne</string>
@@ -716,10 +718,6 @@
     <string name="settings_summary_map_sources">Ustaw źródło mapy i ustawienia mapy offline.</string>
     <string name="settings_title_map_content_behavior">Zawartość mapy i zachowanie</string>
     <string name="settings_summary_map_content_behavior">Skonfiguruj jakie informacje mają być wyświetlane na mapach i opcjach interakcji.</string>
-    <string name="settings_title_map_colors">Dostosowanie koloru mapy</string>
-    <string name="settings_summary_map_colors">Skonfiguruj kolory elementów rysowanych na mapie.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Ustaw źródło mapy, ustawienia mapy offline oraz szczegóły mapy.</string>
     <string name="settings_title_map_data">Dane mapy</string>
     <string name="settings_title_offline_maps">Mapy offline</string>
     <string name="settings_title_map_themes">Motywy map offline</string>
@@ -886,7 +884,7 @@
     <string name="cacheListInfoItem_MemberState">Status Premium</string>
     <string name="cacheListInfoItem_Size">Rozmiar</string>
     <string name="cacheListInfoItem_Lists">Inne listy</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_HiddenMonth">Miesiąc ukrycia</string>
     <string name="cacheListInfoItem_EventDate">Data wydarzenia</string>
     <string name="newline">Nowa linia</string>
     <string name="active_elements">Aktywne elementy</string>
@@ -1458,6 +1456,9 @@
     <string name="image_category_log">Z dziennika</string>
     <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
     <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
+    <string name="context_map_remove_from_route">Usuń z trasy</string>
+    <string name="context_map_remove_from_route_start">Usuń z początku</string>
+    <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
@@ -2296,7 +2297,7 @@
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <string name="route_optimization">Optymalizacja trasy</string>
-    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy dla najkrótszej odległości. Ponieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
+    <string name="route_optimization_info">Optymalizacja trasy jest funkcją eksperymentalną do optymalizacji trasy dla najkrótszej odległości. Trasa zostanie obliczona od pierwszego punktu listy do ostatniego punktu listy, odwiedzanie innych punktów wzdłuż tej trasy w zoptymalizowanej kolejności.\n\nPonieważ nie jest możliwe dokonanie oceny wszystkich możliwych rozwiązań ze względu na czasowe i obliczeniowe ograniczenia mocy na urządzeniu mobilnym, wykorzystuje algorytmy przybliżenia do obliczenia możliwych optymalizacji.\n\nObliczanie odbywa się w procesie dwuetapowym: Obliczanie odległości między dwoma parami trasy, następnie próba znalezienia akceptowalnej trasy. Może to nie być najkrótsza możliwa droga, więc możesz powtarzać krok drugi tak często, jak chcesz.</string>
     <string name="initial_route_length">Początkowa długość trasy: %d</string>
     <string name="optimized_route_length">Zoptymalizowana długość trasy: %d</string>
     <string name="route_optimization_out_of_bounds">Optymalizacja trasy działa dla tras pomiędzy 3 a 100 punktami</string>

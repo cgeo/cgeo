@@ -364,7 +364,8 @@
     <string name="caches_store_background_already_stored">Einige Caches sind bereits gespeichert. Was soll mit ihnen geschehen?</string>
     <string name="caches_store_background_option_nothing">Nichts unternehmen</string>
     <string name="caches_store_background_option_add_to_list">Zur Liste hinzufügen</string>
-    <string name="caches_store_background_option_refresh">Aktualisieren und zur Liste hinzufügen</string>
+    <string name="caches_store_background_option_refresh_and_add">Aktualisieren und zur Liste hinzufügen</string>
+    <string name="caches_store_background_option_refresh_and_keep">Aktualisieren und aktuelle Listenzuordnungen beibehalten</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download fehlgeschlagen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download abgebrochen, %1$d/%2$d Caches wurden heruntergeladen</string>
     <plurals name="caches_store_background_result">
@@ -403,6 +404,9 @@
     <string name="caches_remove_selected">Ausgewählte aus Liste entfernen</string>
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
+    <string name="caches_append_to_route_selected">Ausgewählte an Route anhängen</string>
+    <string name="caches_append_to_route_all">Alle an Route anhängen</string>
+    <string name="caches_appended_to_route">Caches an Route angehängt</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
@@ -704,10 +708,6 @@
     <string name="settings_summary_map_sources">Kartenquelle und Offline-Karteneinstellungen festlegen.</string>
     <string name="settings_title_map_content_behavior">Karteninhalt &amp; Verhalten</string>
     <string name="settings_summary_map_content_behavior">Konfiguriere anzuzeigende Karteninformationen und Interaktionsoptionen.</string>
-    <string name="settings_title_map_colors">Farbeinstellungen für die Karte</string>
-    <string name="settings_summary_map_colors">Konfiguriere Farben der Kartenelemente.</string>
-    <string name="settings_title_map">Karte</string>
-    <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
     <string name="settings_title_offline_maps">Offline-Karten</string>
     <string name="settings_title_map_themes">Offline-Kartenthemen</string>
@@ -874,7 +874,7 @@
     <string name="cacheListInfoItem_MemberState">Premium-Status</string>
     <string name="cacheListInfoItem_Size">Größe</string>
     <string name="cacheListInfoItem_Lists">Andere Listen</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_HiddenMonth">Versteckmonat</string>
     <string name="cacheListInfoItem_EventDate">Event-Datum</string>
     <string name="newline">Neue Zeile</string>
     <string name="active_elements">Aktive Elemente</string>
@@ -914,7 +914,7 @@
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_backup_automatic">Automatische Sicherung</string>
-    <string name="init_backup_automatic_summary">Führt alle x Tage eine automatische Sicherung durch (zusätzlich zu manuell erstellten Backups), 0=off</string>
+    <string name="init_backup_automatic_summary">Führt alle x Tage eine automatische Sicherung durch (zusätzlich zu manuell erstellten Backups), 0=deaktiviert</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -1430,6 +1430,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">An Route anhängen</string>
     <string name="context_map_add_to_route_start">Vor Route einfügen</string>
+    <string name="context_map_remove_from_route">Von Route entfernen</string>
+    <string name="context_map_remove_from_route_start">Vom Start entfernen</string>
+    <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
+    <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
@@ -2238,7 +2242,7 @@
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <string name="route_optimization">Routenoptimierung</string>
-    <string name="route_optimization_info">Die Routenoptimierung ist ein experimentelles Feature, um eine kürze Route zu ermitteln. Auf mobilen Endgeräten ist es aufgrund begrenzter Rechenleistung nicht möglich, immer die optimale Lösung zu errechnen, daher werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne alle paarweisen Distanzen zwischen zwei Punkten der Route, dann versuche eine akzeptable Route zu finden. Für weitere Optimierungen kannst du Schritt 2 beliebig oft wiederholen.</string>
+    <string name="route_optimization_info">Die Routenoptimierung ist eine experimentelle Funktion zur Längenoptimierung einer Route. Erster und letzter Punkt der Route sind fest, die anderen Punkte werden in einer optimierten Reihenfolge besucht.\n\nDa es aufgrund von Beschränkungen von Zeit und Rechenleistung auf mobilen Geräten nicht möglich ist, alle möglichen Lösungen zu ermitteln, werden Näherungsalgorithmen verwendet.\n\nDie Berechnung erfolgt in einem zweistufigen Prozess: Berechne die Entfernungen zwischen allen Paaren der Route und versuche anschließend eine akzeptable Route zu finden. Dies ist möglicherweise nicht die kürzeste Route, daher kann Schritt zwei beliebig oft wiederholt werden.</string>
     <string name="initial_route_length">Ursprüngliche Routenlänge: %d</string>
     <string name="optimized_route_length">Optimierte Routenlänge: %d</string>
     <string name="route_optimization_out_of_bounds">Routenoptimierung funktioniert für Routen zwischen 3 und 100 Punkten</string>

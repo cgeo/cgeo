@@ -9,7 +9,9 @@
 - Neu: Einstellen der Linienbreite pro Track
 - Neu: Actionbar der Karte auf Wunsch ausblenden (Tippe auf einen leeren Bereich auf der Karte)
 - Änderung: Schnelleinstellungs-Buttons auf Karten im Querformat links anzeigen, um mehr vertikalen Raum zu erhalten
-- New: Visualize coords-only-points of individual route
+- Neu: Reine Koordinaten-Punkte individueller Routen auf Karte anzeigen
+- Korrektur: Geocode des Ziels bei Änderung der Kartenquelle beibehalten
+- Änderung: Langes Tippen auf Cache/Wegpunkt einer individuellen Route öffnet Kontextmenü
 
 ### Cache-Details
 - Änderung: Erzwinge das erneute Herunterladen des Caches beim Importieren über send2cgeo
@@ -27,3 +29,6 @@
 - Neu: Kürzlich angesehene Caches leeren
 - Neu: 'Zuletzt angesehene Caches' als Option für Schnellstart-Schaltflächen ergänzt
 - Neu: Die Smilies für die letzten Logs sind jetzt ein konfigurierbares Info Item
+- Neu: "Anhängen an individuelle Route" in Cacheliste
+- Neu: Internen BRouter auf v1.7.0 aktualisiert
+- Korrektur: Ausrichtung der Kompass-Statusansicht im Querformat

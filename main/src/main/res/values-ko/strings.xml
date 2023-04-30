@@ -363,7 +363,8 @@
     <string name="caches_store_background_already_stored">일부 캐시는 이미 저장되어 있습니다. 이러한 저장된 캐시는 어떻게 해야 합니까?</string>
     <string name="caches_store_background_option_nothing">아무것도 하지 않음</string>
     <string name="caches_store_background_option_add_to_list">목록에 추가</string>
-    <string name="caches_store_background_option_refresh">새로 고침 및 목록에 추가</string>
+    <string name="caches_store_background_option_refresh_and_add">새로 고침 및 목록에 추가</string>
+    <string name="caches_store_background_option_refresh_and_keep">현재 목록 할당 새로 고침 및 유지</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">다운로드 실패, %1$d/%2$d 캐시 다운로드했음</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">다운로드 취소, %1$d/%2$d 캐시 다운로드했음</string>
     <plurals name="caches_store_background_result">
@@ -401,6 +402,9 @@
     <string name="caches_remove_selected">목록에서 선택한 것을 제거 하시겠습니까?</string>
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
+    <string name="caches_append_to_route_selected">선택한 것을 개별 경로에 추가</string>
+    <string name="caches_append_to_route_all">모든 것을 개별 경로에 추가</string>
+    <string name="caches_appended_to_route">경로에 추가된 캐시</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
@@ -698,10 +702,6 @@
     <string name="settings_summary_map_sources">지도 소스 및 오프라인 지도 설정을 설정합니다.</string>
     <string name="settings_title_map_content_behavior">지도 콘텐츠 &amp; 행동</string>
     <string name="settings_summary_map_content_behavior">지도 및 상호 작용 옵션에 표시할 정보를 구성합니다.</string>
-    <string name="settings_title_map_colors">지도 색상 사용자 정의</string>
-    <string name="settings_summary_map_colors">지도에 그려진 것의 색상을 설정합니다.</string>
-    <string name="settings_title_map">지도</string>
-    <string name="settings_summary_map">지도 종류, 오프라인 지도 설정 및 기본지도 등 설정하기</string>
     <string name="settings_title_map_data">지도 데이터</string>
     <string name="settings_title_offline_maps">오프라인 지도</string>
     <string name="settings_title_map_themes">오프라인 지도 테마</string>
@@ -868,7 +868,7 @@
     <string name="cacheListInfoItem_MemberState">프리미엄 상태</string>
     <string name="cacheListInfoItem_Size">크기</string>
     <string name="cacheListInfoItem_Lists">기타 목록</string>
-    <string name="cacheListInfoItem_Jasmer">자스머</string>
+    <string name="cacheListInfoItem_HiddenMonth">숨겨진 달</string>
     <string name="cacheListInfoItem_EventDate">이벤트 날짜</string>
     <string name="newline">새로운 줄</string>
     <string name="active_elements">활성 부분</string>
@@ -1416,6 +1416,10 @@
     <string name="image_category_log">로그</string>
     <string name="context_map_add_to_route">경로 후에 추가</string>
     <string name="context_map_add_to_route_start">경로 전에 추가</string>
+    <string name="context_map_remove_from_route">경로에서 제거</string>
+    <string name="context_map_remove_from_route_start">시작에서 제거</string>
+    <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
+    <string name="context_map_remove_from_route_end">끝에서 제거</string>
     <string name="context_map_show_coords">좌표 보기</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
@@ -2209,7 +2213,7 @@
     <string name="individual_route_set_as_start_title">경로 시작 위치로 지정</string>
     <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
     <string name="route_optimization">경로 최적화</string>
-    <string name="route_optimization_info">경로 최적화는 더 짧은 거리에 대한 경로를 최적화하기 위한 실험적 기능입니다. 모바일 장치의 시간 및 계산 능력 제한으로 인해 가능한 모든 솔루션을 평가할 수 없으므로 근사 알고리즘을 사용하여 가능한 최적화를 계산합니다.\n\n계산은 다음 두 단계 프로세스를 사용하여 수행됩니다. 경로의 각 두 쌍 사이의 거리를 계산한 다음 허용 가능한 경로를 찾으려고 시도합니다. 이것은 가능한 가장 짧은 경로가 아닐 수 있으므로 원하는 만큼 2단계를 반복할 수 있습니다.</string>
+    <string name="route_optimization_info">경로 최적화는 더 짧은 거리에 대한 경로를 최적화하기 위한 실험적 기능입니다. 경로는 목록의 첫 번째 지점에서 목록의 마지막 지점까지 계산되며 최적화된 순서로 이 경로를 따라 다른 지점을 방문합니다.\n\n모바일 장치의 시간 및 계산 능력 제한으로 인해 가능한 모든 솔루션을 평가할 수 없으므로 근사 알고리즘을 사용하여 가능한 최적화를 계산합니다.\n\n계산은 다음 두 단계 프로세스를 사용하여 수행됩니다. 경로의 각 두 쌍 사이의 거리를 계산한 다음 허용 가능한 경로를 찾으려고 시도합니다. 이것은 가능한 가장 짧은 경로가 아닐 수 있으므로 원하는 만큼 2단계를 반복할 수 있습니다.</string>
     <string name="initial_route_length">초기 경로 길이: %d</string>
     <string name="optimized_route_length">최적화된 경로 길이: %d</string>
     <string name="route_optimization_out_of_bounds">경로 최적화는 3~100개 지점 사이의 경로에서 작동합니다.</string>

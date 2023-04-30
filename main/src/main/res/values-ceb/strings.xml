@@ -311,8 +311,6 @@
     <string name="settings_title_cachedetails">Ang mga detalye sa cache</string>
     <string name="settings_summary_cachedetails">Disenyohi ang pagpakita sa impormasyon sa cache.</string>
     <string name="settings_summary_logging">I-kompigyur ang imong pirma ug itakda ang mga kapilian sa pag-log.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Ibutang ang tinubdan sa mapa, mga setting sa offline nga mapa ug mga detalye sa mapa.</string>
     <string name="settings_title_map_data">Datos sa mapa</string>
     <string name="settings_title_map_content">Ang kontento sa mapa</string>
     <string name="calculate_dataDir_title">Ang ginamit na data sa geocache</string>

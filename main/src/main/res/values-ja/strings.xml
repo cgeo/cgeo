@@ -347,7 +347,6 @@
     <string name="caches_store_background_already_stored">すでに保存されているキャッシュがあります。それらはどうしますか?</string>
     <string name="caches_store_background_option_nothing">何もしない</string>
     <string name="caches_store_background_option_add_to_list">リストに追加</string>
-    <string name="caches_store_background_option_refresh">更新してリストに追加</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">ダウンロードに失敗しました。%1$d/%2$dキャッシュがダウンロードされました</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">ダウンロードがキャンセルされました。%1$d/%2$dキャッシュがダウンロードされました</string>
     <plurals name="caches_store_background_result">
@@ -620,8 +619,6 @@
     <string name="settings_summary_offlinedata">オフライン用のデータの設定、ストレージ設定、GPXファイルのフォルダ設定</string>
     <string name="settings_title_logging">ログ</string>
     <string name="settings_summary_logging">署名やログのオプションの設定</string>
-    <string name="settings_title_map">地図</string>
-    <string name="settings_summary_map">地図の選択、オフライン地図の設定、地図の詳細設定</string>
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_offline_routing">オフライン ルート検索</string>
     <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっていると使用できます</string>

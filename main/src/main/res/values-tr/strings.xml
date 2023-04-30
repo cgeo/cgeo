@@ -352,7 +352,6 @@
     <string name="caches_store_background_title">Cache\'leri indir</string>
     <string name="caches_store_background_option_nothing">Hiçbir şey yapma</string>
     <string name="caches_store_background_option_add_to_list">Listeye ekle</string>
-    <string name="caches_store_background_option_refresh">Yenile ve listeye ekle</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">İndirme başarısız, %1$d/%2$d cache indirildi</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">İndirme iptal edildi, %1$d/%2$d cache indirildi</string>
     <plurals name="caches_store_background_result">
@@ -637,8 +636,6 @@
     <string name="settings_summary_offlinedata">Çevrimdışı kullanım için kaydedilecek verileri, depolama konumunu ve GPX dosyaları için klasörleri yapılandırın.</string>
     <string name="settings_title_logging">Kayıt</string>
     <string name="settings_summary_logging">İmzanızı yapılandırın ve kayıt seçeneklerini ayarlayın.</string>
-    <string name="settings_title_map">Harita</string>
-    <string name="settings_summary_map">Harita kaynağını, çevrimdışı harita ayarlarını ve harita detaylarını ayarlayın.</string>
     <string name="settings_title_map_data">Harita verileri</string>
     <string name="settings_title_offline_maps">Çevrimdışı haritalar</string>
     <string name="settings_title_offline_routing">Çevrimdışı yönlendirme</string>

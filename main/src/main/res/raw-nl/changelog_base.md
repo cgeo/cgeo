@@ -10,6 +10,8 @@
 - Nieuw: Verberg op verzoek de actiebalk van de kaart (klik op lege ruimte op de kaart)
 - Wijziging: Verplaats snelle-instellingen knoppen naar links in liggende modus om meer verticale ruimte te krijgen
 - Nieuw: Visualiseer coords-only-punten van individuele route
+- Oplossing: Behoud geocode bij wijziging van kaartbron
+- Wijziging: lang tikken op cache/waypoint, wat deel uitmaakt van individuele route, zal contextmenu openen
 
 ### Cache details
 - Wijziging: Forceer herdownloaden van de cache bij het importeren via send2cgeo
@@ -27,3 +29,6 @@
 - Nieuw: Recent bekeken caches wissen
 - Nieuw: Voeg 'recent bekeken caches' toe aan quicklaunch opties
 - Nieuw: Voeg laatste logs smiley rij toe aan configureerbare info items
+- Nieuw: "voeg toe aan individuele route" aan het cachelijstmenu toegevoegd
+- Nieuw: geïntegreerde BRouter bijgewerkt naar v1.7.0
+- Fix: Alignment of compass status view in landscape mode

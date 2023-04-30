@@ -10,6 +10,8 @@
 - New: Hide map's action bar on demand (tap on empty space on map)
 - Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
 - New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Geocache ayrıntıları
 - Change: Force redownload of cache when importing via send2cgeo
@@ -27,3 +29,6 @@
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
+- New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
+- Fix: Alignment of compass status view in landscape mode

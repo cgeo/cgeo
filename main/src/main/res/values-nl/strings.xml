@@ -364,7 +364,8 @@
     <string name="caches_store_background_already_stored">Sommige caches zijn al opgeslagen. Wat moet er met deze gebeuren?</string>
     <string name="caches_store_background_option_nothing">Niets doen</string>
     <string name="caches_store_background_option_add_to_list">Toevoegen aan lijst</string>
-    <string name="caches_store_background_option_refresh">Vernieuw en voeg toe aan de lijst</string>
+    <string name="caches_store_background_option_refresh_and_add">Vernieuw en voeg toe aan de lijst</string>
+    <string name="caches_store_background_option_refresh_and_keep">Vernieuwen en behoud huidige lijst van opdrachten</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Downloaden mislukt, %1$d/%2$d caches zijn gedownload</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download geannuleerd, %1$d/%2$d caches zijn gedownload</string>
     <plurals name="caches_store_background_result">
@@ -403,6 +404,9 @@
     <string name="caches_remove_selected">Geselecteerde uit lijst verwijderen</string>
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
+    <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
+    <string name="caches_append_to_route_all">Voeg alle geselecteerden aan individuele route toe</string>
+    <string name="caches_appended_to_route">Caches toegevoegd aan route</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
@@ -704,10 +708,6 @@
     <string name="settings_summary_map_sources">Stel kaartbron en offline kaartinstellingen in.</string>
     <string name="settings_title_map_content_behavior">Kaart inhoud &amp; gedrag</string>
     <string name="settings_summary_map_content_behavior">Configureer welke informatie moet worden weergegeven op kaarten en interactieopties.</string>
-    <string name="settings_title_map_colors">Kaart kleur aanpassen</string>
-    <string name="settings_summary_map_colors">Kleuren van elementen getekend op de kaart configureren.</string>
-    <string name="settings_title_map">Kaart</string>
-    <string name="settings_summary_map">Configureer bron, offline-instellingen en details van kaarten.</string>
     <string name="settings_title_map_data">Kaartgegevens</string>
     <string name="settings_title_offline_maps">Offline kaarten</string>
     <string name="settings_title_map_themes">Offline kaart thema\'s</string>
@@ -874,7 +874,7 @@
     <string name="cacheListInfoItem_MemberState">Premium status</string>
     <string name="cacheListInfoItem_Size">Grootte</string>
     <string name="cacheListInfoItem_Lists">Andere lijsten</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_HiddenMonth">Verborgen in maand</string>
     <string name="cacheListInfoItem_EventDate">Event datum</string>
     <string name="newline">Nieuwe regel</string>
     <string name="active_elements">Actieve elementen</string>
@@ -1430,6 +1430,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Toevoegen aan route</string>
     <string name="context_map_add_to_route_start">Toevoegen aan route (vooraan)</string>
+    <string name="context_map_remove_from_route">Verwijder uit de route</string>
+    <string name="context_map_remove_from_route_start">Verwijder vanaf begin</string>
+    <string name="context_map_remove_from_route_pos">Verwijder vanaf positie %d</string>
+    <string name="context_map_remove_from_route_end">Verwijder vanaf het eind</string>
     <string name="context_map_show_coords">Coördinaten tonen</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
@@ -2238,7 +2242,7 @@
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <string name="route_optimization">Route optimalisatie</string>
-    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. Omdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd- en rekenvermogen beperkingen op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een aanvaardbare weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als je wilt herhalen.</string>
+    <string name="route_optimization_info">Routeoptimalisatie is een experimentele functie voor het optimaliseren van een route voor kortere afstand. De route wordt berekend van het eerste tot het laatste punt op de lijst, gaande langs alle overige punten in een geoptimaliseerde volgorde.\n\nOmdat het niet mogelijk is om alle mogelijke oplossingen te evalueren vanwege tijd- en rekenvermogen beperkingen op een mobiel apparaat, gebruikt het benaderingsalgoritmen om mogelijke optimalisaties te berekenen.\n\nBerekening wordt uitgevoerd in een tweestapsproces: Bereken afstanden tussen elke twee paren van de route, probeer dan een aanvaardbare weg te vinden. Dit is misschien niet de kortst mogelijke weg, dus je kunt stap twee zo vaak als je wilt herhalen.</string>
     <string name="initial_route_length">Initiële routelengte: %d</string>
     <string name="optimized_route_length">Geoptimaliseerde route lengte: %d</string>
     <string name="route_optimization_out_of_bounds">Routeoptimalisatie werkt voor routes tussen 3 en 100 punten</string>

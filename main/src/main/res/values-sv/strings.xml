@@ -363,7 +363,6 @@
     <string name="caches_store_background_already_stored">Vissa cacher är redan lagrade. Vad ska göras med dessa?</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>
-    <string name="caches_store_background_option_refresh">Uppdatera och lägg till i lista</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Nedladdningen misslyckades, %1$d/%2$d cacher hämtades</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Nedladdningen avbruten, %1$d/%2$d cacher hämtades</string>
     <plurals name="caches_store_background_result">
@@ -699,8 +698,6 @@
     <string name="settings_summary_offlinedata">Konfigurera data som ska sparas för offline-användning, lagringsplats och mappar för GPX-filer.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
-    <string name="settings_title_map">Karta</string>
-    <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_maps">Offlinekartor</string>
     <string name="settings_title_map_themes">Offline kartteman</string>

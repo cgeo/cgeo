@@ -395,8 +395,6 @@
     <string name="settings_title_offlinedata">Offline Daten</string>
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Astellungen fir d\'Ënnerschrëft an Log-Optiounen.</string>
-    <string name="settings_title_map">Kaart</string>
-    <string name="settings_summary_map">Kaartenquellen, Offline-Kaarten an Kaartendetailer konfiguréieren.</string>
     <string name="settings_title_map_data">Kaartendaten</string>
     <string name="settings_title_map_rotation">Kaart dréinen (Google Maps)</string>
     <string name="settings_title_waypoints">Weepunkte</string>

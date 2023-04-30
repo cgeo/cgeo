@@ -411,8 +411,6 @@
     <string name="settings_summary_offlinedata">配置需要保存以供离线使用的数据，存储位置以及 GPX 文件的目录。</string>
     <string name="settings_title_logging">登陆</string>
     <string name="settings_summary_logging">配置您的签名并设置日志选项。</string>
-    <string name="settings_title_map">地图</string>
-    <string name="settings_summary_map">设置地图来源、离线地图设置和地图详细信息。</string>
     <string name="settings_title_map_data">地图数据</string>
     <string name="settings_title_offline_routing">离线路线规划</string>
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>

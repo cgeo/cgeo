@@ -366,7 +366,6 @@
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
     <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
-    <string name="caches_store_background_option_refresh">Aktualizovat a přidat na seznam</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
@@ -716,10 +715,6 @@
     <string name="settings_summary_map_sources">Nastavení zdroje mapy a nastavení offline mapy.</string>
     <string name="settings_title_map_content_behavior">Obsah mapy &amp; Chování</string>
     <string name="settings_summary_map_content_behavior">Nakonfigurujte, které informace se mají zobrazovat na mapách, a možnosti interakce.</string>
-    <string name="settings_title_map_colors">Přizpůsobení barvy mapy</string>
-    <string name="settings_summary_map_colors">Konfigurace barev prvků vykreslených na mapě.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Nastavení mapových zdrojů, detailů a offline map.</string>
     <string name="settings_title_map_data">Data map</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_map_themes">Offline mapové motivy</string>
@@ -886,7 +881,7 @@
     <string name="cacheListInfoItem_MemberState">Prémiový stav</string>
     <string name="cacheListInfoItem_Size">Velikost</string>
     <string name="cacheListInfoItem_Lists">Ostatní seznamy</string>
-    <string name="cacheListInfoItem_Jasmer">Jasmer</string>
+    <string name="cacheListInfoItem_HiddenMonth">Skrytý měsíc</string>
     <string name="cacheListInfoItem_EventDate">Datum události</string>
     <string name="newline">Nový řádek</string>
     <string name="active_elements">Aktivní prvky</string>
@@ -2296,7 +2291,7 @@
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <string name="route_optimization">Optimalizace trasy</string>
-    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Protože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
+    <string name="route_optimization_info">Optimalizace trasy je experimentální funkce pro optimalizaci trasy na kratší vzdálenost. Trasa bude vypočítána od prvního bodu vašeho seznamu k poslednímu bodu vašeho seznamu, přičemž ostatní body na této trase navštívíte v optimalizovaném pořadí.\n\nProtože není možné vyhodnotit všechna možná řešení z důvodu časových a výpočetních omezení mobilního zařízení, používá k výpočtu možných optimalizací aproximační algoritmy.\n\nVýpočet probíhá ve dvou krocích: Vypočítají se vzdálenosti mezi každými dvěma páry trasy a poté se pokusí najít přijatelnou trasu. Nemusí se jednat o nejkratší možnou trasu, proto můžete druhý krok opakovat tak často, jak jen chcete.</string>
     <string name="initial_route_length">Počáteční délka trasy: %d</string>
     <string name="optimized_route_length">Optimalizovaná délka trasy: %d</string>
     <string name="route_optimization_out_of_bounds">Optimalizace trasy funguje pro trasy mezi 3 a 100 body</string>

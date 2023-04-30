@@ -360,7 +360,6 @@
     <string name="caches_store_background_already_stored">Certaines caches sont déjà enregistrées. Que souhaitez-vous faire ?</string>
     <string name="caches_store_background_option_nothing">Ne rien faire</string>
     <string name="caches_store_background_option_add_to_list">Ajouter à la liste</string>
-    <string name="caches_store_background_option_refresh">Actualiser et ajouter à la liste</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Le téléchargement a échoué, %1$d/%2$d caches ont été téléchargées</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Téléchargement annulé, %1$d/%2$d caches ont été téléchargées</string>
     <plurals name="caches_store_background_result">
@@ -682,9 +681,6 @@
     <string name="settings_title_logging">Visites</string>
     <string name="settings_summary_logging">Configurer votre signature et les options des visites.</string>
     <string name="settings_summary_map_content_behavior">Configurer les informations à afficher sur les cartes et les actions possibles.</string>
-    <string name="settings_summary_map_colors">Configurer les couleurs des objets dessinés sur la carte.</string>
-    <string name="settings_title_map">Carte</string>
-    <string name="settings_summary_map">Définir le type, les paramètres hors connexion et les détails pour la carte.</string>
     <string name="settings_title_map_data">Données cartographiques</string>
     <string name="settings_title_offline_maps">Cartes hors-ligne</string>
     <string name="settings_title_map_themes">Thèmes des cartes hors-ligne</string>

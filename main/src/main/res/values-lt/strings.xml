@@ -366,7 +366,6 @@
     <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
     <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
-    <string name="caches_store_background_option_refresh">Atnaujinti ir pridėti prie sąrašo</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
@@ -712,8 +711,6 @@
     <string name="settings_summary_offlinedata">Sukonfigūruokite duomenis, kurie bus išsaugoti naudoti neprisijungę, saugojimo vietą ir GPX failų aplankus.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
-    <string name="settings_title_map">Žemėlapis</string>
-    <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
     <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos</string>
