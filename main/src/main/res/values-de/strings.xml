@@ -708,10 +708,6 @@
     <string name="settings_summary_map_sources">Kartenquelle und Offline-Karteneinstellungen festlegen.</string>
     <string name="settings_title_map_content_behavior">Karteninhalt &amp; Verhalten</string>
     <string name="settings_summary_map_content_behavior">Konfiguriere anzuzeigende Karteninformationen und Interaktionsoptionen.</string>
-    <string name="settings_title_map_colors">Farbeinstellungen für die Karte</string>
-    <string name="settings_summary_map_colors">Konfiguriere Farben der Kartenelemente.</string>
-    <string name="settings_title_map">Karte</string>
-    <string name="settings_summary_map">Konfiguriere Kartenquellen, Offline-Karten und Kartendetails.</string>
     <string name="settings_title_map_data">Kartendaten</string>
     <string name="settings_title_offline_maps">Offline-Karten</string>
     <string name="settings_title_map_themes">Offline-Kartenthemen</string>
