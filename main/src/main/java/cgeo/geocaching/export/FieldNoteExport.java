@@ -42,7 +42,7 @@ public class FieldNoteExport extends AbstractExport {
         if (activity == null) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
-            new FieldNoteExportExportTask(null, false, false, getProgressTitle(), fileName, getName()).execute(caches);
+            new FieldNoteExportTask(null, false, false, getProgressTitle(), fileName, getName()).execute(caches);
         } else {
             // Show configuration dialog
             getExportOptionsDialog(caches, activity).show();
@@ -75,7 +75,7 @@ public class FieldNoteExport extends AbstractExport {
             Settings.setFieldNoteExportUpload(upload);
             Settings.setFieldNoteExportOnlyNew(onlyNew);
             dialog.dismiss();
-            new FieldNoteExportExportTask(activity, upload, onlyNew, getProgressTitle(), fileName, getName()).execute(caches);
+            new FieldNoteExportTask(activity, upload, onlyNew, getProgressTitle(), fileName, getName()).execute(caches);
         });
 
         return builder.create();

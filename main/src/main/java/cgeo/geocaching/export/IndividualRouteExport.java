@@ -54,7 +54,7 @@ public class IndividualRouteExport {
                     final String temp = StringUtils.trim(editFilename.getText().toString());
                     filename = (StringUtils.isNotBlank(temp) ? temp : filename) + FileUtils.GPX_FILE_EXTENSION;
                     dialog.dismiss();
-                    new IndividualRouteExportExportTask(activity, filename, exportAsTrack).execute(route.getSegments());
+                    new IndividualRouteExportTask(activity, filename, exportAsTrack).execute(route.getSegments());
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
                 .create()

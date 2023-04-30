@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class TrailHistoryExportExportTask extends AsyncTaskWithProgress<TrailHistoryElement, Uri> {
+public class TrailHistoryExportTask extends AsyncTaskWithProgress<TrailHistoryElement, Uri> {
 
     private static final String PREFIX_GPX = "";
     private static final String NS_GPX = "http://www.topografix.com/GPX/1/1";
@@ -41,7 +41,7 @@ public class TrailHistoryExportExportTask extends AsyncTaskWithProgress<TrailHis
     private final String filename;
     private final Runnable clearTrailHistory;
 
-    TrailHistoryExportExportTask(final Activity activity, final Runnable clearTrailHistory, final String filename) {
+    TrailHistoryExportTask(final Activity activity, final Runnable clearTrailHistory, final String filename) {
         super(activity, activity.getString(R.string.export_trailhistory_title));
         this.clearTrailHistory = clearTrailHistory;
         this.filename = filename;

@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 
-public class GpxExportExportTask extends AsyncTaskWithProgress<String, Uri> {
+public class GpxExportTask extends AsyncTaskWithProgress<String, Uri> {
     private final String filename;
     private final String name;
 
@@ -33,7 +33,7 @@ public class GpxExportExportTask extends AsyncTaskWithProgress<String, Uri> {
      *
      * @param activity optional: Show a progress bar and toasts
      */
-    public GpxExportExportTask(final Activity activity, final String title, final String filename, final String name) {
+    public GpxExportTask(final Activity activity, final String title, final String filename, final String name) {
         super(activity, title);
         this.filename = filename;
         this.name = name;

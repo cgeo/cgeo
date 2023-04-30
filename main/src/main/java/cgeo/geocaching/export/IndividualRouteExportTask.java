@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import org.apache.commons.io.IOUtils;
 import org.xmlpull.v1.XmlSerializer;
 
-public class IndividualRouteExportExportTask extends AsyncTaskWithProgress<RouteSegment, Uri> {
+public class IndividualRouteExportTask extends AsyncTaskWithProgress<RouteSegment, Uri> {
     private final String filename;
     private final boolean exportAsTrack;
 
@@ -41,7 +41,7 @@ public class IndividualRouteExportExportTask extends AsyncTaskWithProgress<Route
     private static final String PREFIX_XSI = "xsi";
     private static final String NS_XSI = "http://www.w3.org/2001/XMLSchema-instance";
 
-    IndividualRouteExportExportTask(final Activity activity, final String filename, final boolean exportAsTrack) {
+    IndividualRouteExportTask(final Activity activity, final String filename, final boolean exportAsTrack) {
         super(activity, activity.getString(R.string.export_individualroute_title));
         this.filename = filename;
         this.exportAsTrack = exportAsTrack;

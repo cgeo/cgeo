@@ -44,7 +44,7 @@ public class GpxExport extends AbstractExport {
         if (activity == null) {
             // No activity given, so no user interaction possible.
             // Start export with default parameters.
-            new GpxExportExportTask(null, getProgressTitle(), fileName, getName()).execute(geocodes);
+            new GpxExportTask(null, getProgressTitle(), fileName, getName()).execute(geocodes);
 
         } else {
             // Show configuration dialog
@@ -87,7 +87,7 @@ public class GpxExport extends AbstractExport {
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
             Settings.setIncludeFoundStatus(includeFoundStatus.isChecked());
             dialog.dismiss();
-            new GpxExportExportTask(activity, getProgressTitle(), fileName, getName()).execute(geocodes);
+            new GpxExportTask(activity, getProgressTitle(), fileName, getName()).execute(geocodes);
         });
 
         return builder.create();

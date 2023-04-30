@@ -22,7 +22,7 @@ public class PersonalNoteExport extends AbstractExport {
     @Override
     public void export(@NonNull final List<Geocache> cachesList, @Nullable final Activity activity) {
         final Geocache[] caches = cachesList.toArray(new Geocache[0]);
-        new PersonalNoteExportExportTask(activity, getProgressTitle()).execute(caches);
+        new PersonalNoteExportTask(activity, getProgressTitle()).execute(caches);
     }
 
 }

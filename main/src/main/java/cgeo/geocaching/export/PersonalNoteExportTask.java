@@ -17,14 +17,14 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 
-public class PersonalNoteExportExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
+public class PersonalNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     /**
      * Instantiates and configures the task for exporting personal notes.
      */
 
     private int persNotesCount = 0;
 
-    PersonalNoteExportExportTask(@Nullable final Activity activity, final String title) {
+    PersonalNoteExportTask(@Nullable final Activity activity, final String title) {
         super(activity, title, CgeoApplication.getInstance().getString(R.string.export_persnotes));
     }
 

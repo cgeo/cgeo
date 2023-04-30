@@ -25,7 +25,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 
-class FieldNoteExportExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
+class FieldNoteExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     private final boolean upload;
     private final boolean onlyNew;
     private Uri exportUri;
@@ -42,7 +42,7 @@ class FieldNoteExportExportTask extends AsyncTaskWithProgress<Geocache, Boolean>
      * @param upload   Upload the Field Note to geocaching.com
      * @param onlyNew  Upload/export only new logs since last export
      */
-    FieldNoteExportExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew, final String title, final String filename, final String name) {
+    FieldNoteExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew, final String title, final String filename, final String name) {
         super(activity, title, CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
         this.upload = upload;
         this.onlyNew = onlyNew;

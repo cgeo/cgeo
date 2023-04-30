@@ -41,7 +41,7 @@ public class TrailHistoryExport {
         builder.setPositiveButton(R.string.export, (dialog, which) -> {
             Settings.setClearTrailAfterExportStatus(clearAfterExport.isChecked());
             dialog.dismiss();
-            new TrailHistoryExportExportTask(activity, clearTrailHistory, filename).execute(DataStore.loadTrailHistoryAsArray());
+            new TrailHistoryExportTask(activity, clearTrailHistory, filename).execute(DataStore.loadTrailHistoryAsArray());
         });
 
         builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss());

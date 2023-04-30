@@ -14,7 +14,7 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
-public class BatchUploadModifiedCoordinatesExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
+public class BatchUploadModifiedCoordinatesTask extends AsyncTaskWithProgress<Geocache, Boolean> {
     /**
      * Instantiates and configures the task for uploading modified cache coords.
      */
@@ -23,7 +23,7 @@ public class BatchUploadModifiedCoordinatesExportTask extends AsyncTaskWithProgr
     private int uploadOk = 0;
     private int uploadFailed = 0;
 
-    BatchUploadModifiedCoordinatesExportTask(@Nullable final Activity activity, final String title, final boolean modifiedOnly) {
+    BatchUploadModifiedCoordinatesTask(@Nullable final Activity activity, final String title, final boolean modifiedOnly) {
         super(activity, title, CgeoApplication.getInstance().getString(R.string.export_modifiedcoords));
         this.modifiedOnly = modifiedOnly;
     }
