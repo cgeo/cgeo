@@ -653,8 +653,6 @@
     <string name="settings_summary_offlinedata">Configure los datos que se guardarán para el uso sin conexión, la ubicación de almacenamiento y las carpetas de los archivos GPX.</string>
     <string name="settings_title_logging">Registro</string>
     <string name="settings_summary_logging">Configura tu firma y las opciones de registro.</string>
-    <string name="settings_title_map">Mapa</string>
-    <string name="settings_summary_map">Elige proveedor de mapas, detalles, y opciones de mapas sin conexión.</string>
     <string name="settings_title_map_data">Datos del mapa</string>
     <string name="settings_title_offline_routing">Ruta sin conexión</string>
     <string name="settings_summary_offline_routing">La ruta sin conexión está disponible si la aplicación de ayuda \"BRouter\" está instalada y configurada o si está habilitada la ruta interna.</string>
