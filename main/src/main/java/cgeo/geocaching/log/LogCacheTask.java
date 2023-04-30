@@ -94,8 +94,8 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
                 logResult = loggingManager.postLog(logType, date.getCalendar(),
                         log, logPwd, new ArrayList<>(trackables), reportProblemType);
             }
-            ImageResult imageResult = null;
 
+            ImageResult imageResult = null;
             if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                 // update geocache in DB
                 if (logType.isFoundLog()) {
@@ -124,100 +124,10 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
                     }
                 }
 
-                // Posting image
-                if (!imageListFragment.getImages().isEmpty()) {
-                    publishProgress(res.getString(R.string.log_posting_image));
-                    int pos = 0;
-                    for (Image img : imageListFragment.getImages()) {
-
-                        //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
-                        final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale, 75);
-                        final Image imgToSend;
-                        if (imageFileForUpload == null) {
-                            imgToSend = null;
-                            imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
-                        } else {
-                            imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
-                            imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
-                        }
-                        if (!isOkResult(imageResult)) {
-                            break;
-                        }
-
-                        final String uploadedImageUrl = imageResult.getImageUri();
-                        if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                            logBuilder.addLogImage(imgToSend.buildUpon()
-                                    .setUrl(uploadedImageUrl)
-                                    .build());
-                        }
-                        //delete temp file for upload
-                        if (!imageFileForUpload.delete()) {
-                            Log.i("Temporary image not deleted: " + imageFileForUpload);
-                        }
-                    }
-
-                    if (isOkResult(imageResult)) {
-                        //delete all images in list (this will work for legacy images)
-                        for (Image img : imageListFragment.getImages()) {
-                            ImageUtils.deleteImage(img.getUri());
-                        }
-                    }
-                }
-
-                // update logs in DB
-                final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
-                final LogEntry logNow = logBuilder.build();
-                newLogs.add(0, logNow);
-                if (reportProblemType != ReportProblemType.NO_PROBLEM) {
-                    final LogEntry logProblem = logBuilder.setLog(res.getString(reportProblemType.textId)).setLogImages(Collections.emptyList()).setLogType(reportProblemType.logType).build();
-                    newLogs.add(0, logProblem);
-                }
-                DataStore.saveLogs(cache.getGeocode(), newLogs, true);
-
-                // update offline log in DB
-                cache.clearOfflineLog();
-
-                if (logType == LogType.FOUND_IT && binding.tweet.isChecked() && binding.tweet.getVisibility() == View.VISIBLE) {
-                    publishProgress(res.getString(R.string.log_posting_twitter));
-                    Twitter.postTweetCache(cache.getGeocode(), logNow);
-                }
-
-                // Post cache rating
-                if (cacheConnector instanceof IVotingCapability) {
-                    final IVotingCapability votingConnector = (IVotingCapability) cacheConnector;
-                    if (votingConnector.supportsVoting(cache) && votingConnector.isValidRating(cacheVotingBar.getRating())) {
-                        publishProgress(res.getString(R.string.log_posting_vote));
-                        if (votingConnector.postVote(cache, cacheVotingBar.getRating())) {
-                            cache.setMyVote(cacheVotingBar.getRating());
-                            DataStore.saveChangedCache(cache);
-                        } else {
-                            ActivityMixin.showToast(activity, res.getString(R.string.err_vote_send_rating));
-                        }
-                    }
-                }
-
-
-                // Posting Generic Trackables
-                for (final TrackableConnector connector : ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
-                    final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
-                    if (manager != null) {
-                        // Filter trackables logs by action and brand
-                        final Set<TrackableLog> trackablesMoved = new HashSet<>();
-                        for (final TrackableLog trackableLog : trackables) {
-                            if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
-                                trackablesMoved.add(trackableLog);
-                            }
-                        }
-
-                        // Posting trackables logs
-                        int trackableLogcounter = 1;
-                        for (final TrackableLog trackableLog : trackablesMoved) {
-                            publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
-                            manager.postLog(cache, trackableLog, date.getCalendar(), log);
-                            trackableLogcounter++;
-                        }
-                    }
-                }
+                imageResult = postImages(logBuilder, logResult);
+                storeLogInDatabaseAndTwitter(logBuilder);
+                postCacheRating(cacheConnector);
+                postTrackables(log);
             }
 
             // if an image could not be uploaded, use its error as final state
@@ -233,6 +143,111 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
         }
 
         return StatusCode.LOG_POST_ERROR;
+    }
+
+    private ImageResult postImages(final LogEntry.Builder logBuilder, final LogResult logResult) {
+        ImageResult imageResult = null;
+        // Posting image
+        if (!imageListFragment.getImages().isEmpty()) {
+            publishProgress(res.getString(R.string.log_posting_image));
+            int pos = 0;
+            for (Image img : imageListFragment.getImages()) {
+
+                //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
+                final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale, 75);
+                final Image imgToSend;
+                if (imageFileForUpload == null) {
+                    imgToSend = null;
+                    imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
+                } else {
+                    imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
+                    imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                }
+                if (!isOkResult(imageResult)) {
+                    break;
+                }
+
+                final String uploadedImageUrl = imageResult.getImageUri();
+                if (StringUtils.isNotEmpty(uploadedImageUrl)) {
+                    logBuilder.addLogImage(imgToSend.buildUpon()
+                            .setUrl(uploadedImageUrl)
+                            .build());
+                }
+                //delete temp file for upload
+                if (!imageFileForUpload.delete()) {
+                    Log.i("Temporary image not deleted: " + imageFileForUpload);
+                }
+            }
+
+            if (isOkResult(imageResult)) {
+                //delete all images in list (this will work for legacy images)
+                for (Image img : imageListFragment.getImages()) {
+                    ImageUtils.deleteImage(img.getUri());
+                }
+            }
+        }
+
+        return imageResult;
+    }
+
+    private void storeLogInDatabaseAndTwitter(final LogEntry.Builder logBuilder) {
+        // update logs in DB
+        final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
+        final LogEntry logNow = logBuilder.build();
+        newLogs.add(0, logNow);
+        if (reportProblemType != ReportProblemType.NO_PROBLEM) {
+            final LogEntry logProblem = logBuilder.setLog(res.getString(reportProblemType.textId)).setLogImages(Collections.emptyList()).setLogType(reportProblemType.logType).build();
+            newLogs.add(0, logProblem);
+        }
+        DataStore.saveLogs(cache.getGeocode(), newLogs, true);
+
+        // update offline log in DB
+        cache.clearOfflineLog();
+
+        if (logType == LogType.FOUND_IT && binding.tweet.isChecked() && binding.tweet.getVisibility() == View.VISIBLE) {
+            publishProgress(res.getString(R.string.log_posting_twitter));
+            Twitter.postTweetCache(cache.getGeocode(), logNow);
+        }
+    }
+
+    private void postCacheRating(final IConnector cacheConnector) {
+        // Post cache rating
+        if (cacheConnector instanceof IVotingCapability) {
+            final IVotingCapability votingConnector = (IVotingCapability) cacheConnector;
+            if (votingConnector.supportsVoting(cache) && votingConnector.isValidRating(cacheVotingBar.getRating())) {
+                publishProgress(res.getString(R.string.log_posting_vote));
+                if (votingConnector.postVote(cache, cacheVotingBar.getRating())) {
+                    cache.setMyVote(cacheVotingBar.getRating());
+                    DataStore.saveChangedCache(cache);
+                } else {
+                    ActivityMixin.showToast(activity, res.getString(R.string.err_vote_send_rating));
+                }
+            }
+        }
+    }
+
+    private void postTrackables(final String log) {
+        // Posting Generic Trackables
+        for (final TrackableConnector connector : ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
+            final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
+            if (manager != null) {
+                // Filter trackables logs by action and brand
+                final Set<TrackableLog> trackablesMoved = new HashSet<>();
+                for (final TrackableLog trackableLog : trackables) {
+                    if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
+                        trackablesMoved.add(trackableLog);
+                    }
+                }
+
+                // Posting trackables logs
+                int trackableLogcounter = 1;
+                for (final TrackableLog trackableLog : trackablesMoved) {
+                    publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
+                    manager.postLog(cache, trackableLog, date.getCalendar(), log);
+                    trackableLogcounter++;
+                }
+            }
+        }
     }
 
     private boolean isOkResult(final ImageResult imageResult) {
