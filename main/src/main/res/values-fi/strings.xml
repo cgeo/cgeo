@@ -703,10 +703,6 @@
     <string name="settings_summary_map_sources">Aseta karttalähde ja offline-kartan asetukset.</string>
     <string name="settings_title_map_content_behavior">Kartan sisältö &amp; käyttäytyminen</string>
     <string name="settings_summary_map_content_behavior">Määritä mitä tietoja kartoissa ja vuorovaikutusvaihtoehdoissa näytetään.</string>
-    <string name="settings_title_map_colors">Kartan värien räätälöinti</string>
-    <string name="settings_summary_map_colors">Määritä karttaan piirrettyjen elementtien värit.</string>
-    <string name="settings_title_map">Kartta</string>
-    <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
     <string name="settings_title_offline_maps">Offline-kartat</string>
     <string name="settings_title_map_themes">Offlinekarttojen teemat</string>
