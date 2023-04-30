@@ -706,7 +706,7 @@
     <string name="settings_summary_offlinedata">Konfigurera data som ska sparas för offline-användning, lagringsplats och mappar för GPX-filer.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
-    <string name="settings_title_map">Karta</string>
+    <string name="settings_title_map">Visa på karta</string>
     <string name="settings_summary_map">Inställningar för kartkälla, offline kartor och kartdetaljer.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_maps">Offlinekartor</string>
