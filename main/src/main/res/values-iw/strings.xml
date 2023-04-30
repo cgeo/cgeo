@@ -342,7 +342,6 @@
     <string name="settings_title_offlinedata">נתונים לא מקוונים</string>
     <string name="settings_title_logging">כתיבת לוג</string>
     <string name="settings_summary_logging">הגדר חתימה וקבע אפשרויות כתיבת לוג.</string>
-    <string name="settings_title_map">מפה</string>
     <string name="settings_summary_map">קבע מקור מפה, הגדרות מפה לא-מקוונת ופרטי מפה.</string>
     <string name="settings_title_map_data">נתוני מפה</string>
     <string name="settings_title_map_content">תוכן מפה</string>
