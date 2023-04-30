@@ -30,3 +30,4 @@
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
 - New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
