@@ -398,8 +398,6 @@
     <string name="settings_title_offlinedata">Bezsaistes dati</string>
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
-    <string name="settings_title_map">Karte</string>
-    <string name="settings_summary_map">Uzstādiet karšu avotu, bezsaistes karšu uzstādījumus un karšu detaļas.</string>
     <string name="settings_title_map_data">Karšu dati</string>
     <string name="settings_title_map_rotation">Kartes sagriešana (Google Maps)</string>
     <string name="settings_title_waypoints">Ceļa punkti</string>
