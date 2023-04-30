@@ -83,7 +83,7 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     public void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
-                mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
+                mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet, findViewById(R.id.map));
         tracks = new Tracks(routeTrackUtils, mapBase::setTrack);
 
         this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INVALIDATE_MAPLIST) {

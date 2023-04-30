@@ -222,7 +222,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         Log.d("NewMap: onCreate");
 
-        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
+        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet, findViewById(R.id.mfmapv5));
         tracks = new Tracks(routeTrackUtils, this::setTrack);
 
         ResourceBitmapCacheMonitor.addRef();

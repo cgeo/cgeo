@@ -32,6 +32,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -66,8 +67,9 @@ public class RouteTrackUtils {
     private final Route.CenterOnPosition centerOnPosition;
 
     private final Func0<Boolean> isTargetSet;
+    private final ViewGroup rootView;
 
-    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet) {
+    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet, final ViewGroup rootView) {
         Log.d("[RouteTrackDebug] RouteTrackUtils initialized");
         this.activity = activity;
         this.centerOnPosition = centerOnPosition;
@@ -75,6 +77,7 @@ public class RouteTrackUtils {
         this.reloadIndividualRoute = reloadIndividualRoute;
         this.updateTrack = updateTrack;
         this.isTargetSet = isTargetSet;
+        this.rootView = rootView;
 
         this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
@@ -113,7 +116,7 @@ public class RouteTrackUtils {
      * Shows a popup menu for individual route related items
      */
     public void showPopup(final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
-        this.popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
+        this.popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, rootView);
         updateDialog(this.popup, individualRoute, tracks, setTarget);
         final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, this.popup, R.string.routes_tracks_dialog_title);
         dialog.setOnDismissListener(dialog1 -> popup = null);
@@ -211,7 +214,7 @@ public class RouteTrackUtils {
         dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> fileSelectorTrack.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
         tracks.traverse((key, geoData) -> {
-            final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
+            final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, rootView);
             final TextView displayName = vt.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
             displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name")).input(InputType.TYPE_CLASS_TEXT, displayName.getText().toString(), null, null, newName -> {
