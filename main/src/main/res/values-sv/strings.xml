@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Misslyckades att ändra favoritstatus.</string>
     <string name="err_select_logimage_failed">Misslyckades att välja bild till loggen.</string>
     <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
+    <string name="err_acquire_image_unsupported_format">Bildformatet måste vara en av JPEG/JPG, PNG eller GIF</string>
     <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
     <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
     <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
@@ -363,6 +364,8 @@
     <string name="caches_store_background_already_stored">Vissa cacher är redan lagrade. Vad ska göras med dessa?</string>
     <string name="caches_store_background_option_nothing">Gör ingenting</string>
     <string name="caches_store_background_option_add_to_list">Lägg till i lista</string>
+    <string name="caches_store_background_option_refresh_and_add">Uppdatera och lägg till i listan</string>
+    <string name="caches_store_background_option_refresh_and_keep">Uppdatera och behåll aktuella listuppgifter</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Nedladdningen misslyckades, %1$d/%2$d cacher hämtades</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Nedladdningen avbruten, %1$d/%2$d cacher hämtades</string>
     <plurals name="caches_store_background_result">
@@ -698,6 +701,10 @@
     <string name="settings_summary_offlinedata">Konfigurera data som ska sparas för offline-användning, lagringsplats och mappar för GPX-filer.</string>
     <string name="settings_title_logging">Loggning</string>
     <string name="settings_summary_logging">Konfigurera din signatur och andra loggningsinställningar.</string>
+    <string name="settings_title_map_sources">Kartkällor</string>
+    <string name="settings_summary_map_sources">Ange kartkälla och offline-kartinställningar.</string>
+    <string name="settings_title_map_content_behavior">Karta innehåll &amp; Beteende</string>
+    <string name="settings_summary_map_content_behavior">Konfigurera vilken information som ska visas på kartor och interaktionsalternativ.</string>
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_maps">Offlinekartor</string>
     <string name="settings_title_map_themes">Offline kartteman</string>
@@ -844,17 +851,30 @@
     <string name="init_summary_save_log_img">Spara bilder från loggar</string>
     <string name="init_units">Enheter</string>
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
+    <string name="init_cachelists">Cache-listor</string>
     <string name="init_log_offline">Snabbloggning</string>
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
     <string name="init_summary_choose_list">Fråga efter lista när cacher sparas</string>
     <string name="init_list_initial_load_limit">Ange lastbegränsning</string>
     <string name="init_summary_list_initial_load_limit">Maximalt antal cacher att initialt ladda från databasen när du visar lagrade listor. Välj 0 för \"obegränsat\"</string>
+    <string name="init_summary_cacheListInfo">Välj den ytterligare information som ska visas för varje cache i cachelistor</string>
     <string name="init_livelist">Riktning</string>
     <string name="init_summary_livelist">Visa en pil med kompassriktning för cacher i en lista</string>
     <string name="init_quicklaunchitems">Snabbstartsknappar</string>
     <string name="init_summary_quicklaunchitems">Välj en eller flera objekt som snabbstartsknappar på startskärmen</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocode</string>
+    <string name="cacheListInfoItem_Difficulty">Svårighetsgrad</string>
+    <string name="cacheListInfoItem_Terrain">Terräng</string>
+    <string name="cacheListInfoItem_MemberState">Premium-användarstatus</string>
+    <string name="cacheListInfoItem_Size">Storlek</string>
+    <string name="cacheListInfoItem_Lists">Andra listor</string>
+    <string name="cacheListInfoItem_HiddenMonth">Dold månad</string>
+    <string name="cacheListInfoItem_EventDate">Eventdatum</string>
+    <string name="newline">Ny rad</string>
+    <string name="active_elements">Aktiva element</string>
+    <string name="disabled_elements">Inaktiverade element</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -943,6 +963,14 @@
     <string name="init_maptrail_length">Historiskspår max. längd</string>
     <string name="init_maptrail_length_summary">Ange maximal längd på historikspår (tillämpas vid varje start av c:geo). Standardvärdet är 700 - justera efter tillgängligt minne.</string>
     <string name="init_summary_maptrail">När den aktiveras (och GPS är på) sparar c:geo historiken över dina rörelser som ett spår och visar den på kartan.</string>
+    <string name="init_trailappearance">Utseende för historikspår</string>
+    <string name="init_trailappearance_summary">Välj färg, genomskinlighet och linjebredd för historikspår</string>
+    <string name="init_directionappearance">Utseende för riktning</string>
+    <string name="init_directionappearance_summary">Välj färg, genomskinlighet och linjebredd för riktningslinje. Riktningslinje visar en rak linje till ditt valda navigationsmål, eller den specifika navigationsvägen, om routing är aktiverad genom att installera BRouter appen.</string>
+    <string name="init_routeappearance">Individuellt utseende på rutten</string>
+    <string name="init_routeappearance_summary">Välj färg, ogenomskinlighet och linjebredd för individuell ruttlinje. En enskild rutt är en samling av waypoints och/eller cacher du valt genom att långtrycka på waypoint/cache. (Du måste aktivera funktionen långtryck först, se kartinställningar.)</string>
+    <string name="init_trackappearance">GPX spår/rutt utseende</string>
+    <string name="init_trackappearance_summary">Välj färg, ogenomskinlighet och linjebredd för spår/ruttlinje. En spår/rutt består av flera waypoints och kan laddas via en GPX-spår/ruttfil.</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
     <string name="init_circlefillcolor">Färg inuti cirklar</string>
@@ -1030,6 +1058,8 @@
     <string name="feature_search_finder">Sök baserat på hittare</string>
     <string name="feature_favorite">Lägger till cachen till dina favoriter</string>
     <string name="feature_voting">Rösta på cacher</string>
+    <string name="init_appearance_general">Allmänt utseende</string>
+    <string name="init_maplines_title">Anpassning av kartfärger</string>
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
@@ -1054,6 +1084,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
+    <string name="map_source_google_terrain">Google: Terräng</string>
     <string name="map_source_osm_offline">Frånkopplad</string>
     <string name="map_source_osm_offline_combined">Kombinerad (Offline)</string>
     <string name="map_source_attribution_dialog_title">Kartattribut</string>
@@ -1216,6 +1247,7 @@
     <string name="cache_personal_note_upload_error">Fel vid uppladdning av personlig anteckning</string>
     <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
     <string name="cache_personal_note_vars_out_of_sync">Variabler i anteckningar är ur synk (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronisera variabler</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Kontrollera variabler vars värde ska skrivas över från anteckningar</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Beskrivning</string>
@@ -1282,6 +1314,7 @@
     <string name="cache_menu_navigation_bike">Navigering (med cykel)</string>
     <string name="cache_menu_maps_directions">Google Maps Navigering</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (vandring)</string>
     <string name="cache_menu_sygic_drive">Sygic (körning)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -1376,6 +1409,8 @@
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
     <string name="cache_recently_viewed">Nyligen visade</string>
+    <string name="cache_recently_viewed_empty">Inga nyligen visade cacher</string>
+    <string name="cache_clear_recently_viewed">Rensa</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -1402,6 +1437,8 @@
     <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
     <string name="init_longtap_map">Långtryck på kartan</string>
     <string name="init_summary_longtap_map">Aktivera långtryck på kart-ikonen (för att skapa en egen rutt) eller på själva kartan (för att skapa en egendefinierad cache / vägpunkt)</string>
+    <string name="init_ActionbarAutohide">Dölj verktygsfältet vid tryck</string>
+    <string name="init_summary_ActionbarAutohide">Tryck på tomt kartutrymme för att dölja/visa verktygsfältet</string>
     <string name="onetime_info_longtap_disabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher / vägpunkter.\n\nLångtryck på kartan är för närvarande avaktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
     <string name="onetime_info_longtap_enabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher / vägpunkter.\n\nLångtryck på kartan är för närvarande aktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
     <string name="goto_targets_list">Interna cacher</string>
@@ -1549,6 +1586,7 @@
     <string name="imageview_notitle">Namnlös</string>
     <string name="imageview_mimetype">Mime-typ</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Det gick inte att ladda bilden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentar</string>
     <!-- visit -->
@@ -1600,6 +1638,7 @@
     <string name="map_show_other_title">Visa övriga:</string>
     <string name="map_settings_cache_filter_too_complex_title">Cachefiltret är för komplext</string>
     <string name="map_settings_cache_filter_too_complex_message">Det aktuella cachefiltret är för komplext för att lägga till ytterligare alternativ här. Vanligtvis innebär detta att cache-filtret innehåller NOT eller OR uttryck istället för enkel logik med AND.</string>
+    <string name="map_theme_legend">Tematecken</string>
     <string name="map_theme_legend_info">Tryck på kategorins titel för att öppna/stänga kategorin. Långtryck på en symbol för kort information om den symbolen. Tryck på info-ikonen för att besöka en detaljerad legend online.</string>
     <string name="google_maps_style_default">Standard</string>
     <string name="google_maps_style_night">Natt</string>
@@ -2141,11 +2180,14 @@
     <string name="permission_location_explanation">c:geo är optimerad för användning med GPS-data (noggrann) för att lokalisera din position och beräkna avstånd och riktning till geocacher. Utan denna behörighet kommer platsbaserade funktioner inte att fungera som förväntat.</string>
     <string name="permission_read_external_storage_explanation_title">Läs extern lagringsbehörighet</string>
     <string name="permission_read_external_storage_explanation">c:geo kan använda systemets bakgrundsbild som bakgrund för appen. För att göra detta behöver c:geo tillåtelse att läsa dina mediedata på extern lagring.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo kommer att skriva data till din telefons lagring eller SD-kort t.ex. när du sparar geocacher för offline-användning, import eller export av filer och andra funktioner. På vissa Android-versioner måste du bevilja ytterligare tillstånd för dessa åtgärder.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Välj färgschema</string>
     <string name="preference_colorpicker_select_color">Välj färg</string>
     <string name="preference_colorpicker_select_opaqueness">Välj ogenomskinlighet</string>
+    <string name="preference_colorpicker_select_width">Välj linjebredd</string>
+    <string name="preference_colorpicker_show_width">bredd: %d</string>
     <string name="reset_to_default">Standard</string>
     <!-- number input -->
     <string name="number_input_title">Ange ett värde mellan %1$s och %2$s</string>
@@ -2170,6 +2212,7 @@
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
+    <string name="map_refresh_individual_route">Uppdatera</string>
     <string name="map_export_individual_route">Exportera individuell rutt</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
@@ -2189,6 +2232,13 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Ange som ruttstart</string>
     <string name="individual_route_set_as_start_message">Ange detta objekt som ruttstart och flytta alla efterföljande objekt till toppen av den aktuella rutten?</string>
+    <string name="route_optimization">Optimering av rutt</string>
+    <string name="initial_route_length">Ursprunglig ruttlängd: %d</string>
+    <string name="optimized_route_length">Optimerad ruttlängd: %d</string>
+    <string name="route_optimization_out_of_bounds">Ruttoptimering fungerar för rutter mellan 3 och 100 punkter</string>
+    <string name="generating_distance_matrix">Genererar distansmatris</string>
+    <string name="running_route_optimizations">Optimering av körrutt</string>
+    <string name="route_optimization_finished">Optimering av rutt slutförd</string>
     <!-- individual track -->
     <string name="map_load_track">Ladda spår/rutt från GPX</string>
     <string name="load_track_error">Fel uppstod när spåret/rutten laddades</string>
@@ -2197,6 +2247,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Rutter / spåralternativ</string>
     <string name="routes_tracks_menu">Rutter / spår</string>
+    <string name="routes_tracks_color">Välj färg</string>
     <string name="center_on_route_track">Centrera på rutt/spår</string>
     <string name="unload_route_track">Rensa rutt/spår</string>
     <string name="route">Rutt</string>
@@ -2277,6 +2328,7 @@
     <string name="downloadmap_mapfile">kartfil</string>
     <string name="downloadmap_themefile">temafil</string>
     <string name="downloadmap_tilefile">rutt-datafil</string>
+    <string name="downloadmap_checking">Kontrollerar tillgängliga rutt-data…</string>
     <string name="downloadmap_othermapdownload">nedladdning av annan karta</string>
     <string name="downloadmap_otherthemedownload">nedladdning av annat tema</string>
     <string name="downloadmap_download">ladda ner</string>
@@ -2309,6 +2361,7 @@
     <string name="maptheme_scale_text_summary">Skalar dessutom textetiketter i kartan; 100% = ingen extra skalning</string>
     <string name="maptheme_scale_symbol_title">Skalfaktor symboler</string>
     <string name="maptheme_scale_symbol_summary">Skalar dessutom symboler i kartan; 100% = ingen extra skalning</string>
+    <string name="vtm_theme_variant">Temavariant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Rensa historikspår</string>
     <string name="map_trailhistory_cleared">Historikspåret rensat</string>
@@ -2367,7 +2420,10 @@
     <string name="finish">Slutför</string>
     <string name="back">Tillbaka</string>
     <string name="cancel">Avbryt</string>
+    <string name="use">Använd</string>
+    <string name="redo">Gör om</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Optimera</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Markera alla</string>
     <!-- render theme legend: category "areas" -->
