@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Изменение рекомендации не удалось.</string>
     <string name="err_select_logimage_failed">Выбор изображения для записи не удался.</string>
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
+    <string name="err_acquire_image_unsupported_format">Формат изображения должен быть JPEG/JPG, PNG или GIF</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
@@ -365,6 +366,8 @@
     <string name="caches_store_background_already_stored">Некоторые тайники уже сохранены. Что с ними должно случиться?</string>
     <string name="caches_store_background_option_nothing">Ничего не делать</string>
     <string name="caches_store_background_option_add_to_list">Добавить в список</string>
+    <string name="caches_store_background_option_refresh_and_add">Обновить и добавить в список</string>
+    <string name="caches_store_background_option_refresh_and_keep">Обновить и сохранить текущий список заданий</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Не удалось загрузить, скачано %1$d/%2$d тайников</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Загрузка отменена, скачано %1$d/%2$d тайников</string>
     <plurals name="caches_store_background_result">
@@ -405,6 +408,9 @@
     <string name="caches_remove_selected">Удалить выбранные из списка</string>
     <string name="caches_remove_all_completely">Удалить все с устройства</string>
     <string name="caches_remove_selected_completely">Удалить выбранное с устройства</string>
+    <string name="caches_append_to_route_selected">Добавить выбранное в индивидуальный маршрут</string>
+    <string name="caches_append_to_route_all">Добавить все в индивидуальный маршрут</string>
+    <string name="caches_appended_to_route">Тайники добавленные в маршрут</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
     <string name="caches_upload_bookmarklist">Добавить в закладки</string>
     <string name="caches_upload_modifiedcoords">Загрузить измененные координаты</string>
@@ -710,7 +716,10 @@
     <string name="settings_summary_offlinedata">Настройка информации, сохраняемой при загрузке тайников, используемых носителей и папок для GPX файлов.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
+    <string name="settings_title_map_sources">Источники карт</string>
     <string name="settings_summary_map_sources">Источник карты, настройки офлайн-карты</string>
+    <string name="settings_title_map_content_behavior">Содержимое карты &amp; Действие</string>
+    <string name="settings_summary_map_content_behavior">Настройте какую информацию отображать на картах и опции взаимодействия.</string>
     <string name="settings_title_map_data">Данные карты</string>
     <string name="settings_title_offline_maps">Карты офлайн</string>
     <string name="settings_title_map_themes">Темы офлайновых карт</string>
@@ -857,17 +866,31 @@
     <string name="init_summary_save_log_img">Сохранять фотографии из блокнотов</string>
     <string name="init_units">Английские единицы</string>
     <string name="init_summary_units">Использовать английскую систему (мили) вместо метрической (км)</string>
+    <string name="init_cachelists">Списки тайников</string>
     <string name="init_log_offline">Записи офлайн</string>
     <string name="init_summary_log_offline">Не показывать экран онлайн записи и не отправлять записи по умолчанию</string>
     <string name="init_choose_list">Спрашивать про список</string>
     <string name="init_summary_choose_list">Спрашивать, в какой список вы хотите сохранить тайники</string>
     <string name="init_list_initial_load_limit">Ограничения загрузки из списков</string>
     <string name="init_summary_list_initial_load_limit">Максимальное число тайников для загрузки из базы данных изначально при отображении сохраненных списков. Выберите 0 для \'неограниченного\'</string>
+    <string name="init_title_cacheListInfo1">Настройка строк информационных списков</string>
+    <string name="init_summary_cacheListInfo">Выберите дополнительную информацию для отображения для каждого тайника в списках тайников</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать стрелку с направлением компаса для тайников в списке</string>
     <string name="init_quicklaunchitems">Кнопки быстрого запуска</string>
     <string name="init_summary_quicklaunchitems">Выберите пункты для быстрого запуска на главном экране</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Геокод</string>
+    <string name="cacheListInfoItem_Difficulty">Сложность</string>
+    <string name="cacheListInfoItem_Terrain">Местность</string>
+    <string name="cacheListInfoItem_MemberState">Премиум-статус</string>
+    <string name="cacheListInfoItem_Size">Размер</string>
+    <string name="cacheListInfoItem_Lists">Другие списки</string>
+    <string name="cacheListInfoItem_HiddenMonth">Скрытый месяц</string>
+    <string name="cacheListInfoItem_EventDate">Дата события</string>
+    <string name="newline">Новая строка</string>
+    <string name="active_elements">Активные Элементы</string>
+    <string name="disabled_elements">Отключенные элементы</string>
     <!-- app theme -->
     <string name="settings_theme_title">Тема</string>
     <string-array name="settings_theme_entries">
@@ -956,6 +979,14 @@
     <string name="init_maptrail_length">Максимальная длина истории трека</string>
     <string name="init_maptrail_length_summary">Установите максимальную длину трека (требуется при каждом запуске c:geo). По умолчанию значение 700 точек - вы можете это изменить в зависимости от доступной памяти.</string>
     <string name="init_summary_maptrail">Когда активирован (и GPS включен) c:geo сохраняет историю Ваших движений в виде трека и отображает его на карте.</string>
+    <string name="init_trailappearance">Внешний вид истории трека</string>
+    <string name="init_trailappearance_summary">Выберите цвет, непрозрачность и ширину линии для истории трека</string>
+    <string name="init_directionappearance">Внешний вид направления</string>
+    <string name="init_directionappearance_summary">Выберите цвет, непрозрачность и ширину линии для линии направления. Линия направления показывает прямую линию к выбранной цели навигации, или определенный маршрут навигации, если маршрутизация включена путем установки BRouter.</string>
+    <string name="init_routeappearance">Внешний вид индивидуального маршрута</string>
+    <string name="init_routeappearance_summary">Выберите цвет, непрозрачность и ширину линии для индивидуальных маршрутов. Индивидуальный маршрут - это набор путевых точек и/или тайников, выбранных длительным нажатием на путевую точку/тайник. (Функция долгого нажатия сначала должна быть включена, см. настройки карты.)</string>
+    <string name="init_trackappearance">Внешний вид GPX трека/маршрута</string>
+    <string name="init_trackappearance_summary">Выберите цвет, степень прозрачность и толщину линии для трека/муршрута. Трек/маршрут состоит из нескольких путевых точек и может быть загружен через файл GPX.</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
     <string name="init_circlefillcolor">Цвет заливки круга</string>
@@ -1043,6 +1074,8 @@
     <string name="feature_search_finder">Поиск по посетителям</string>
     <string name="feature_favorite">Рекомендации тайников</string>
     <string name="feature_voting">Оценка тайников</string>
+    <string name="init_appearance_general">Общий вид</string>
+    <string name="init_maplines_title">Настройка цветов карты</string>
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
@@ -1067,6 +1100,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
+    <string name="map_source_google_terrain">Google: ландшафт</string>
     <string name="map_source_osm_offline">Офлайн</string>
     <string name="map_source_osm_offline_combined">Совмещённые (офлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
@@ -1245,6 +1279,7 @@
     <string name="cache_personal_note_upload_error">Ошибка отправки персональной заметки</string>
     <string name="cache_personal_note_upload_cancelled">Загрузка личной заметки отменена</string>
     <string name="cache_personal_note_vars_out_of_sync">Переменные в заметках не синхронизированы (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Синхронизация переменных</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Проверьте переменные, значения которых должны быть перезаписаны из заметок</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Описание</string>
@@ -1311,6 +1346,7 @@
     <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>
     <string name="cache_menu_maps_directions">Построить маршрут на картах Google</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (пешком)</string>
     <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
     <string name="cache_menu_radar">Радар</string>
@@ -1405,6 +1441,8 @@
     <string name="cache_time_full_hours">часов</string>
     <string name="cache_listed_on">Упомянут на %s</string>
     <string name="cache_recently_viewed">Недавно просмотренные</string>
+    <string name="cache_recently_viewed_empty">Нет недавно просмотренных тайников</string>
+    <string name="cache_clear_recently_viewed">очистить</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
@@ -1420,6 +1458,10 @@
     <string name="image_category_log">Запись</string>
     <string name="context_map_add_to_route">Добавить в маршрут</string>
     <string name="context_map_add_to_route_start">Добавить в начале маршрута</string>
+    <string name="context_map_remove_from_route">Исключить из маршрута</string>
+    <string name="context_map_remove_from_route_start">Удалить из начала маршрута</string>
+    <string name="context_map_remove_from_route_pos">Удалить из позиции %d</string>
+    <string name="context_map_remove_from_route_end">Удалить из конца маршрута</string>
     <string name="context_map_show_coords">Показывать координаты</string>
     <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="create_internal_cache_short">Новый тайник</string>
@@ -1431,6 +1473,8 @@
     <string name="internal_goto_targets_description">Этот тайник сохраняет ваши последние цели «Перейти к». Он автоматически создается после использования функции «Перейти к» в главном меню. Введенные координаты будут сохранены в путевых точках этого тайника. Если Вам больше не нужны эти координаты, Вы можете удалить этот тайник или любую из его путевых точек. Также Вы можете переместить тайник в любой другой список по Вашему выбору.</string>
     <string name="init_longtap_map">Долгое нажатие на карте</string>
     <string name="init_summary_longtap_map">Активировать долгое нажатие на иконке карты (создание личного маршрута) или на пустом месте на карте (создание пользовательского тайника или путевой точки)</string>
+    <string name="init_ActionbarAutohide">Скрыть панель инструментов при нажатии</string>
+    <string name="init_summary_ActionbarAutohide">Нажмите на свободное место на карте, чтобы скрыть/показать панель инструментов</string>
     <string name="onetime_info_longtap_disabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте в настоящее время отключено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="onetime_info_longtap_enabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте сейчас включено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="goto_targets_list">Внутренние тайники</string>
@@ -1580,6 +1624,7 @@
     <string name="imageview_notitle">Без названия</string>
     <string name="imageview_mimetype">Mime-тип</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Не удалось загрузить изображение</string>
     <string name="imageview_metadata_geopoint">Геоточка</string>
     <string name="imageview_metadata_comment">Комментарий</string>
     <!-- visit -->
@@ -1631,6 +1676,7 @@
     <string name="map_show_other_title">Показать другое:</string>
     <string name="map_settings_cache_filter_too_complex_title">Слишком сложные условия фильтра тайников</string>
     <string name="map_settings_cache_filter_too_complex_message">Текущий фильтр тайников слишком сложен для дополнительных условий. Обычно это означает, что фильтр содержит выражения НЕ или ИЛИ, а не обычное И.</string>
+    <string name="map_theme_legend">Описание темы</string>
     <string name="map_theme_legend_info">Нажмите на название категории, чтобы открыть/закрыть категорию. Длительное нажатие на символ для краткой информации об этом символе. Нажмите на иконку с информацией, чтобы увидеть подробные легенды онлайн.</string>
     <string name="google_maps_style_default">По умолчанию</string>
     <string name="google_maps_style_night">Ночь</string>
@@ -2198,11 +2244,15 @@
     <string name="permission_location_explanation">c:geo оптимизирован для использования данных GPS (точное местоположение) для определения местоположения, а также расчета расстояния и направления на тайник. Без этого разрешения функции на основе определения местоположения работать не будут.</string>
     <string name="permission_read_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="permission_read_external_storage_explanation">c:geo может использовать ваши системные обои в качестве фона для приложения. Для этого c:geo требуется разрешение на чтение ваших медиа данных на внешнем накопителе.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo запишет данные на ваше устройство или SD-карту, например когда вы сохраняете тайники для использования в автономном режиме, импортируйте или экспортируйте файлы, а также для других функций. В некоторых версиях Android вам нужно предоставить дополнительные разрешения для этих действий.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="storage_permission_needed">Эта функция невозможна без разрешения на хранение.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Выберите цветовую схему</string>
     <string name="preference_colorpicker_select_color">Выберите цвет</string>
     <string name="preference_colorpicker_select_opaqueness">Выберите прозрачность</string>
+    <string name="preference_colorpicker_select_width">Выберите ширину линии</string>
+    <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
     <string name="number_input_title">Введите значение между %1$s и %2$s</string>
@@ -2227,6 +2277,7 @@
     <string name="individual_route_error_toggling_waypoint">ошибка включения точки</string>
     <string name="individual_route_error_single_waypoint_mode">Недоступно в режиме одной точки</string>
     <string name="map_sort_individual_route">Сортировать личный маршрут</string>
+    <string name="map_refresh_individual_route">Обновить</string>
     <string name="map_export_individual_route">Экспорт индивидуального маршрута</string>
     <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
@@ -2248,6 +2299,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Установить, как начало маршрута</string>
     <string name="individual_route_set_as_start_message">Установить этот пункт в качестве начала маршрута и переместить все последующие пункты наверх текущего маршрута?</string>
+    <string name="route_optimization">Оптимизация маршрута</string>
+    <string name="route_optimization_info">Оптимизация маршрута - это экспериментальная возможность оптимизации маршрута для получения кратчайших расстояний. Маршрут будет рассчитан от первой точки вашего списка до последней точки с посещением других точек вдоль этого маршрута в оптимизированном порядке.\n\nПоскольку невозможно оценить все возможные решения с учетом времени и ограничений мощности на мобильном устройстве, используются аппроксимационные алгоритмы для расчета возможной оптимизации.\n\nРасчет выполняется в два этапа: расчет расстояний между двумя парами маршрута, затем попытка найти приемлемый маршрут. Это может быть не самый короткий из возможных маршрутов, поэтому вы можете повторять второй шаг так часто, как вы хотите.</string>
+    <string name="initial_route_length">Начальная длина маршрута: %d</string>
+    <string name="optimized_route_length">Оптимизированная длина маршрута: %d</string>
+    <string name="route_optimization_out_of_bounds">Оптимизация маршрутов работает для маршрутов имеющих от 3 до 100 точек</string>
+    <string name="generating_distance_matrix">Создание матрицы расстояния</string>
+    <string name="running_route_optimizations">Выполняется оптимизация маршрута</string>
+    <string name="route_optimization_finished">Оптимизация маршрута завершена</string>
     <!-- individual track -->
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>
@@ -2256,6 +2315,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Параметры маршрутов / треков</string>
     <string name="routes_tracks_menu">Маршруты / Треки</string>
+    <string name="routes_tracks_color">Выберите цвет</string>
     <string name="center_on_route_track">Центр на маршрут/трек</string>
     <string name="unload_route_track">Выгрузить маршрут/трек</string>
     <string name="route">Маршрут</string>
@@ -2336,6 +2396,7 @@
     <string name="downloadmap_mapfile">файл карты</string>
     <string name="downloadmap_themefile">файл темы</string>
     <string name="downloadmap_tilefile">файл данных маршрутизации</string>
+    <string name="downloadmap_checking">Проверка доступных данных маршрутизации…</string>
     <string name="downloadmap_othermapdownload">загрузка другой карты</string>
     <string name="downloadmap_otherthemedownload">скачать другую тему</string>
     <string name="downloadmap_download">скачать</string>
@@ -2368,6 +2429,7 @@
     <string name="maptheme_scale_text_summary">Дополнительно масштабирует текстовые метки на карте; 100% = без дополнительного масштабирования</string>
     <string name="maptheme_scale_symbol_title">Масштаб символов</string>
     <string name="maptheme_scale_symbol_summary">Дополнительно масштабирует размер символа на карте; 100% = без дополнительного масштабирования</string>
+    <string name="vtm_theme_variant">Вариация темы оформления</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистить историю трека</string>
     <string name="map_trailhistory_cleared">История трека очищена</string>
@@ -2426,7 +2488,10 @@
     <string name="finish">Завершить</string>
     <string name="back">Назад</string>
     <string name="cancel">Отмена</string>
+    <string name="use">Применить</string>
+    <string name="redo">Повторить</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Оптимизация</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Выбрать всё</string>
     <!-- render theme legend: category "areas" -->
