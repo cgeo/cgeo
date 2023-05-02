@@ -10,8 +10,8 @@
 - Naujiena: Slėpiama žemėlapio veiksmų juostą pagal poreikį (palietus tuščią vietą žemėlapyje)
 - Pakeitimas: Perkėlėme greitųjų nustatymų mygtukus į kairę gulsčiojo ekrano režimu, kad gautumėte daugiau vertikalios vietos
 - New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- Pataisymas: išsaugomas tikslinis geokodas keičiant žemėlapio šaltinį
+- Pakeitimas: ilgai bakstelėjus talpyklą/maršruto tašką, kuris yra atskiro maršruto dalis, atsivers kontekstinis meniu
 
 ### Slėptuvės detalės
 - Change: Force redownload of cache when importing via send2cgeo
@@ -29,6 +29,6 @@
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
-- New: Added "add to individual route" to cache list menu
+- Naujiena: talpyklos sąrašo meniu pridėta „pridėti prie individualaus maršruto“
 - New: Updated integrated BRouter to v1.7.0
 - Fix: Alignment of compass status view in landscape mode
