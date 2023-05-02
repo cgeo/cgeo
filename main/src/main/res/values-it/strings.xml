@@ -364,6 +364,8 @@
     <string name="caches_store_background_already_stored">Alcuni cache sono già memorizzati. Cosa vorresti fare con essi?</string>
     <string name="caches_store_background_option_nothing">Non fare nulla</string>
     <string name="caches_store_background_option_add_to_list">Aggiungi alla lista</string>
+    <string name="caches_store_background_option_refresh_and_add">Aggiorna e aggiungi alla lista</string>
+    <string name="caches_store_background_option_refresh_and_keep">Aggiorna e mantiene le assegnazioni della lista corrente</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Download non riuscito, %1$d/%2$d cache sono stati scaricati</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Download annullato, %1$d/%2$d cache sono stati scaricati</string>
     <plurals name="caches_store_background_result">
@@ -402,6 +404,9 @@
     <string name="caches_remove_selected">Rimuovi selezionati dalla lista</string>
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
+    <string name="caches_append_to_route_selected">Aggiungi quanto selezionato al percorso individuale</string>
+    <string name="caches_append_to_route_all">Aggiungi tutto al percorso individuale</string>
+    <string name="caches_appended_to_route">Cache allegate al percorso</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
@@ -1425,6 +1430,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Aggiungi al percorso</string>
     <string name="context_map_add_to_route_start">Anteporre al percorso</string>
+    <string name="context_map_remove_from_route">Rimuovi dal percorso</string>
+    <string name="context_map_remove_from_route_start">Rimuovi dall\'inizio</string>
+    <string name="context_map_remove_from_route_pos">Rimuovi dalla posizione %d</string>
+    <string name="context_map_remove_from_route_end">Rimuovi dalla fine</string>
     <string name="context_map_show_coords">Mostra le coordinate</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="create_internal_cache_short">Nuova cache</string>
