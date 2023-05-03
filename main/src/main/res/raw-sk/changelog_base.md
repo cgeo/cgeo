@@ -1,34 +1,34 @@
 ### Mapa
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
-- New: Update map list on receiving map file
-- Change: Do not install downloaded map/theme automatically
-- New: Individual route optimization (experimental)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
-- New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- Zmena: Použitie poslednej známej polohy na mape ako záložnej (keď nie je k dispozícii GPS a funkcia „Sledovať moju polohu“ je neaktívna)
+- Nové: Obnovenie kešiek na trase
+- Nové: Individuálne sfarbenie stôp
+- Nové: Aktualizácia zoznamu máp pri prijímaní mapového súboru
+- Zmena: Neinštalovanie prevzatej mapy/motívu automaticky
+- Nové: Optimalizácia individuálnej trasy (experimentálne)
+- Nové: Podpora máp "Google: Terén"
+- Nové: Nastavenie šírky čiary na stopu
+- Nové: Skrytie panela akcií na mape na požiadanie (ťuknutim na prázdne miesto na mape)
+- Zmena: Presun tlačidiel rýchlych nastavení do+ava v režime našírku a získanie väčšieho zvieslého miesta
+- Nové: Vizualizácia bodov len so súradnicami na individuálnej trase
+- Oprava: Zachovanie cieľového geokódu pri zmene zdroja mapy
+- Zmena: Ťuknutia a podržanie na keške/bode trasy, ktoré sú časťou individuálnej trasy, otvorí kontextovú ponuku
 
 ### Detaily kešky
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Zmena: Vynútenie opätovného stiahnutia kešky pri importe cez send2cgeo
+- Zmena: Rozlíšenie medzi veľkosťami „Nezvolená“ a „Iná“ pre kešky na geocaching.com (môže dať rozdielne filtrovanie pre niektoré kešky staršie než ročník 2013)
+- Oprava: Zachovanie pozácie posúvania pri použití tlačidla „popis dokončenia vykresľovania“
 
 ### Všeobecné
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
-- New: Add last logs smiley row to configurable info items
-- New: Added "add to individual route" to cache list menu
-- New: Updated integrated BRouter to v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Oprava: Tlačidlo ukážky zobrazené len s nastavením fltra „Zobraziť všetko“ v zozname PQ
+- Nové: Pridanie navigačnej aplikácie Cruiser (vyžaduje Cruiser 3.0.9 alebo novší)
+- Nové: Import zoznamov záložiek na geocaching.com z odkazov
+- Nové: Umožnenie otvárania nedávno prezeraných kešiek ako zoznamu
+- Nové: Tlačidlá rýchleho spustenia sa dajú zoradiť
+- Nové: Postup pri konflikte namespace pre trasovateľný predmet (funguje pre deaktivovaný konektor GeoKrety)
+- Nové: Informačné položky zoznamu kešiek sú konfigurovateľné
+- Nové: Vymazanie nedávno prezeraných kešiek
+- Nové: Pridanie položky „Nedávno prezerané kešky“ medzi voľby rýchleho spustenia
+- Nové: Pridanie riadka posledných logovo so smajlíkom do konfigurovateľných položiek informácií
+- Nové: Pridanie položky „Pridať do individuálnej trasy“ do ponuky v zozname kešiek
+- Nové: Aktualizované zabudované BRouter na v1.7.0
+- Oprava: Zarovnanie zobrazenia stavu kompasu v režime na šírku

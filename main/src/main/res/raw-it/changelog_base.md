@@ -1,17 +1,17 @@
 ### Mappa
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
-- New: Update map list on receiving map file
-- Change: Do not install downloaded map/theme automatically
+- Cambio: usa l'ultima posizione nota della mappa come fallback (quando non c'è GPS disponibile e "segui la mia posizione" inattivo)
+- Nuovo: Aggiorna cache nel percorso
+- Nuovo: Colorazione delle singole tracce
+- Nuovo: aggiorna l'elenco delle mappe sulla ricezione del file della mappa
+- Cambio: non installa automaticamente map/tema scaricato
 - New: Individual route optimization (experimental)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- Nuovo: Supporto per mappe "Google: Terrain"
+- Nuovo: Impostazione della larghezza del tratto per la traccia
+- Nuovo: nasconde la barra delle azioni della mappa su richiesta (tocca lo spazio vuoto sulla mappa)
+- Cambiato: Spostati i pulsanti delle impostazioni rapide a sinistra in modalità orizzontale per guadagnare più spazio verticale
 - New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- Corretto: Preserva il geocode di destinazione nel cambio di mappa
+- Cambio: Un tocco prolungato sul cache/waypoint, che fa parte del percorso individuale, aprirà il menu contestuale
 
 ### Dettagli del cache
 - Change: Force redownload of cache when importing via send2cgeo
@@ -29,6 +29,6 @@
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
-- New: Added "add to individual route" to cache list menu
+- Nuovo: Aggiunto "aggiungi al percorso individuale" al menu lista cache
 - New: Updated integrated BRouter to v1.7.0
 - Fix: Alignment of compass status view in landscape mode

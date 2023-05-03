@@ -31,4 +31,4 @@
 - Nieuw: Voeg laatste logs smiley rij toe aan configureerbare info items
 - Nieuw: "voeg toe aan individuele route" aan het cachelijstmenu toegevoegd
 - Nieuw: geïntegreerde BRouter bijgewerkt naar v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Oplossing: Uitlijning van de kompas status weergave in landschap modus

@@ -1,22 +1,22 @@
 ### Karta
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
-- New: Update map list on receiving map file
-- Change: Do not install downloaded map/theme automatically
-- New: Individual route optimization (experimental)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
-- New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
+- Förändring: Använd senast kända kartposition som plats (när ingen GPS finns och "följ min plats" inaktiv)
+- Nyhet: Uppdatera cacher i rutt
+- Nyhet: Individuell färg på spår
+- Nytt: Uppdatera kartlistan vid mottagande av kartfil
+- Ändring: Installera inte nedladdad karta/tema automatiskt
+- Nytt: Individuell ruttoptimering (experimentell)
+- Nytt: Stöd för kartan "Google: Terräng"
+- Nyhet: Ställa in linebredden per spår
+- Nyhet: Dölj kartans åtgärdsfält vid behov (tryck på tomt utrymme på karta)
+- Ändra: Flytta snabbinställningsknappar till vänster i landskapsläge för att få mer vertikalt utrymme
+- Nytt: Visualisera punkter med endast koordinater i en individuell rutt
+- Fix: Bevara geocode-mål vid förändring av kartkälla
 - Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
 ### Cachedetaljer
 - Change: Force redownload of cache when importing via send2cgeo
 - Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Fix: Bevara scroll-position när du använder knappen "renderr fullständig beskrivning"
 
 ### Allmänt
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
@@ -30,5 +30,5 @@
 - New: Add 'recently viewed caches' to quicklaunch options
 - New: Add last logs smiley row to configurable info items
 - New: Added "add to individual route" to cache list menu
-- New: Updated integrated BRouter to v1.7.0
+- Nyhet: Uppdaterad integrerad BRouter till v1.7.0
 - Fix: Alignment of compass status view in landscape mode

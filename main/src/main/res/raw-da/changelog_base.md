@@ -1,4 +1,4 @@
-### Map
+### Kort
 - Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
 - New: Refresh caches in route
 - New: Individual coloring of tracks
@@ -13,7 +13,7 @@
 - Fix: Preserve target geocode on mapsource change
 - Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
 
-### Cache details
+### Cachedetaljer
 - Change: Force redownload of cache when importing via send2cgeo
 - Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
 - Fix: Preserve scroll position when using "render complete description" button
