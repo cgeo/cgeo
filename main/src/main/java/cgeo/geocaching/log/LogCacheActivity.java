@@ -502,10 +502,15 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            if (TextUtils.getNormalizedStringLength(binding.log.getText().toString()) <= LOG_MAX_LENGTH) {
-                sendLogAndConfirm();
+            final int logLength = TextUtils.getNormalizedStringLength(binding.log.getText().toString());
+            if (logLength > 0) {
+                if (logLength <= LOG_MAX_LENGTH) {
+                    sendLogAndConfirm();
+                } else {
+                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                }
             } else {
-                Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
             }
         } else if (itemId == R.id.menu_image) {
             imageListFragment.startAddImageDialog();
