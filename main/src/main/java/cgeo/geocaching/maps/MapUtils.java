@@ -278,7 +278,7 @@ public class MapUtils {
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title);
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_delete);
         menu.addItemClickListener(uniqueId, item -> {
             individualRoute.removeItem(activity, uniqueId, routeUpdater);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
@@ -286,7 +286,7 @@ public class MapUtils {
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final RouteItem routeItem, final boolean addToRouteStart, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title);
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_add);
         menu.addItemClickListener(uniqueId, item -> {
             individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
