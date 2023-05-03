@@ -1637,7 +1637,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         CharSequence message = HtmlCompat.fromHtml(attribution, HtmlCompat.FROM_HTML_MODE_LEGACY);
         if (linkify) {
             final SpannableString s = new SpannableString(message);
-            Linkify.addLinks(s, Linkify.ALL);
+            ViewUtils.safeAddLinks(s, Linkify.ALL);
             message = s;
         }
 

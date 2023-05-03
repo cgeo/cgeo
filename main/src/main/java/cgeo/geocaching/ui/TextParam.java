@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -195,7 +194,7 @@ public class TextParam {
         //linkify
         if (this.linkifyMask != 0) {
             final SpannableString linkifyString = SpannableString.valueOf(text);
-            Linkify.addLinks(linkifyString, this.linkifyMask);
+            ViewUtils.safeAddLinks(linkifyString, this.linkifyMask);
             text = linkifyString;
         }
 
