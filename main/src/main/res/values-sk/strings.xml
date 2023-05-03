@@ -239,6 +239,7 @@
     <string name="err_favorite_failed">Zmena stavu \"Obľúbená\" zlyhala.</string>
     <string name="err_select_logimage_failed">Výber obrázka pre log zlyhal.</string>
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
+    <string name="err_acquire_image_unsupported_format">Formát obrázka musí byť JPEG/JPG, PNG alebo GIF</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
     <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
@@ -365,6 +366,8 @@
     <string name="caches_store_background_already_stored">Niektoré kešky sú už uložené. Čo sa s nimi má stať?</string>
     <string name="caches_store_background_option_nothing">Nerobiť nič</string>
     <string name="caches_store_background_option_add_to_list">Pridať do zoznamu</string>
+    <string name="caches_store_background_option_refresh_and_add">Obnoviť a pridať do zoznamu</string>
+    <string name="caches_store_background_option_refresh_and_keep">Obnoviť a ponechať aktuálne priradenie do zoznamov</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Sťahovanie neúspešné, stiahnuté kešky: %1$d/%2$d</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Sťahovanie zrušené, stiahnuté kešky: %1$d/%2$d</string>
     <plurals name="caches_store_background_result">
@@ -405,6 +408,9 @@
     <string name="caches_remove_selected">Odstrániť vybrané zo zoznamu</string>
     <string name="caches_remove_all_completely">Odstrániť všetko zo zariadenia</string>
     <string name="caches_remove_selected_completely">Odstrániť zvolené zo zariadenia</string>
+    <string name="caches_append_to_route_selected">Priložiť vybrané do individuálnej trasy</string>
+    <string name="caches_append_to_route_all">Priložiť všetky do individuálnej trasy</string>
+    <string name="caches_appended_to_route">Zrušiť priložené z trasy</string>
     <string name="caches_delete_events">Odstrániť minulé Eventy</string>
     <string name="caches_upload_bookmarklist">Pridať do záložiek</string>
     <string name="caches_upload_modifiedcoords">Nahrať upravené súradnice</string>
@@ -710,6 +716,10 @@
     <string name="settings_summary_offlinedata">Konfigurácia údajov ukladaných na použitie offline, umiestnenia ukladacieho priestoru a priečinkov na súbory GPX.</string>
     <string name="settings_title_logging">Zápis logu</string>
     <string name="settings_summary_logging">Nastavte svoj podpis a možnosti logovania.</string>
+    <string name="settings_title_map_sources">Zdroje máp</string>
+    <string name="settings_summary_map_sources">Nastavte zdroj máp a urobte nastavenia offline mapy.</string>
+    <string name="settings_title_map_content_behavior">Obsah mapy a správanie</string>
+    <string name="settings_summary_map_content_behavior">Nakonfigurujte, ktoré informácie sa zobrazujú na mapách, a možnosti interakcie.</string>
     <string name="settings_title_map_data">Mapové podklady</string>
     <string name="settings_title_offline_maps">Offline mapy</string>
     <string name="settings_title_map_themes">Motívy offline mapy</string>
@@ -856,17 +866,31 @@
     <string name="init_summary_save_log_img">Ukladať obrázky z logov</string>
     <string name="init_units">Imperiálne jednotky</string>
     <string name="init_summary_units">Používať imperiálne namiesto metrických jednotiek vzdialenosti</string>
+    <string name="init_cachelists">Zoznamy kešiek</string>
     <string name="init_log_offline">Offline logovanie</string>
     <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
     <string name="init_choose_list">Požiadať o zoznam</string>
     <string name="init_summary_choose_list">Opýtať sa, v ktorom zozname uložiť skrýše</string>
     <string name="init_list_initial_load_limit">Limit načítania zoznamu</string>
     <string name="init_summary_list_initial_load_limit">Maximálny počet kešiek, ktoré načítať prvotne z databázy pri zobrazení uložených zoznamov. Vyberte hodnotu 0 pre „neobmedzené“.</string>
+    <string name="init_title_cacheListInfo1">Konfigurácia riadkov zoznamu informácií</string>
+    <string name="init_summary_cacheListInfo">Vyberte ďalšie údaje, ktoré sa budú zobrazovať pri jednotlivých keškách v zoznamoch kešiek</string>
     <string name="init_livelist">Zobrazovať smer</string>
     <string name="init_summary_livelist">Zobraziť šípku so smerom kompasu pre kešky v zozname</string>
     <string name="init_quicklaunchitems">Tlačidlá rýchleho spustenia</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu alebo viac položiek ako tlačidlá rychlého spustenia na domovskej obrazovke</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokód</string>
+    <string name="cacheListInfoItem_Difficulty">Náročnosť</string>
+    <string name="cacheListInfoItem_Terrain">Terén</string>
+    <string name="cacheListInfoItem_MemberState">Prémiový stav</string>
+    <string name="cacheListInfoItem_Size">Veľkosť</string>
+    <string name="cacheListInfoItem_Lists">Ostatné zoznamy</string>
+    <string name="cacheListInfoItem_HiddenMonth">Mesiac skrytia</string>
+    <string name="cacheListInfoItem_EventDate">Dátum eventu</string>
+    <string name="newline">Nový riadok</string>
+    <string name="active_elements">Aktívne prvky</string>
+    <string name="disabled_elements">Zakázané prvky</string>
     <!-- app theme -->
     <string name="settings_theme_title">Téma</string>
     <string-array name="settings_theme_entries">
@@ -955,6 +979,14 @@
     <string name="init_maptrail_length">Max. dĺžka histórie trasy</string>
     <string name="init_maptrail_length_summary">Nastavte maximálnu dĺžku histórie trasy (potrebné pri každom spustení c:geo). Predvolená hodnota je 700 – upravte podľa dostupnej pamäte.</string>
     <string name="init_summary_maptrail">Keď je to aktivované (a GPS zapnuté), c:geo ukladá históriu pohybov ako trasu a zobrazuje ju na mape.</string>
+    <string name="init_trailappearance">Vzhľad histórie trasy</string>
+    <string name="init_trailappearance_summary">Vyberte farbu, nepriehľadnosť a šírku čiary pre históriu trasy</string>
+    <string name="init_directionappearance">Vzhľad smeru</string>
+    <string name="init_directionappearance_summary">Vyberte farbu, nepriehľadnosť a šírku čiary smeru. Čiara smeru ukazuje rovnú čiaru k vybranému cieľu navigácie, prípadne špecifickú dráhu navigácie trasy, ak je trasovanie aktivované inštaláciou aplikácie BRouter.</string>
+    <string name="init_routeappearance">Vzhľad individuálnej trasy</string>
+    <string name="init_routeappearance_summary">Vyberte farbu, nepriehľadnosť a šírku čiary individuálnej trasy. Individuálna trasa je zbierka bodov trasy a/alebo kešiek, ktoré ste zvolili ťuknutím a podržaním bodu trasy/kešky. (Najprv je potrebné povoliť funkciu ťuknutia a podržania, pozrite nastavenia mapy.)</string>
+    <string name="init_trackappearance">Vzhľad GPS stopy/trasy</string>
+    <string name="init_trackappearance_summary">Vyberte farbu., nepriehľadnosť a šírku čiary stopy/trasy. Stopa/trasa pozostáva z viacerých bodov a možno ju načítať cez súbor GPX pre stopu/trasu.</string>
     <string name="init_circlecolor">Farba linky kruhu</string>
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
     <string name="init_circlefillcolor">Farba výplne kruhu</string>
@@ -1042,6 +1074,8 @@
     <string name="feature_search_finder">Vyhľadávanie podľa nálezcu</string>
     <string name="feature_favorite">Pridanie skrýše medzi obľúbené</string>
     <string name="feature_voting">Hlasovanie pre kešky</string>
+    <string name="init_appearance_general">Všeobecný vzhľad</string>
+    <string name="init_maplines_title">Prispôsobenie farieb mapy</string>
     <string name="init_map_other">Iná</string>
     <string name="init_map_osm_multithreaded">Viacvláknová (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použiť viaceré vlákna na vykreslenie máp OpenStreetMap</string>
@@ -1066,6 +1100,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelit</string>
+    <string name="map_source_google_terrain">Google: Terén</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (offline)</string>
     <string name="map_source_attribution_dialog_title">Autori máp</string>
@@ -1244,6 +1279,7 @@
     <string name="cache_personal_note_upload_error">Chyba nahrávania osobnej poznámky</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
     <string name="cache_personal_note_vars_out_of_sync">Premenné v poznámkach sú nesynchronizované (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizácia premenných</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Skontrolujte premenné, ktorých hodnota sa má prepísať z poznámok</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Popis</string>
@@ -1310,6 +1346,7 @@
     <string name="cache_menu_navigation_bike">Navigácia (bicykel)</string>
     <string name="cache_menu_maps_directions">Navigovanie na Google mape</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (chôdza)</string>
     <string name="cache_menu_sygic_drive">Sygic (autom)</string>
     <string name="cache_menu_radar">Radar</string>
@@ -1404,6 +1441,8 @@
     <string name="cache_time_full_hours">hodín</string>
     <string name="cache_listed_on">Uvedené na %s</string>
     <string name="cache_recently_viewed">Nedávno zobrazené</string>
+    <string name="cache_recently_viewed_empty">Žiadne nedávno prezerané kešky</string>
+    <string name="cache_clear_recently_viewed">vymazať</string>
     <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
@@ -1419,6 +1458,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Pridať do trasy</string>
     <string name="context_map_add_to_route_start">Pridať pred trasu</string>
+    <string name="context_map_remove_from_route">Odstrániť z trasy</string>
+    <string name="context_map_remove_from_route_start">Odstrániť zo štartu</string>
+    <string name="context_map_remove_from_route_pos">Odstrániť z pozície %d</string>
+    <string name="context_map_remove_from_route_end">Odstrániť z konca</string>
     <string name="context_map_show_coords">Zobraziť súradnice</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
@@ -1430,6 +1473,8 @@
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
     <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
     <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku/bod trasy)</string>
+    <string name="init_ActionbarAutohide">Ťuknutím skryť panel nástrojov</string>
+    <string name="init_summary_ActionbarAutohide">Ťuknutím na voľné miesto na mape skryť/zobraziť panel nástrojov</string>
     <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
@@ -1579,6 +1624,7 @@
     <string name="imageview_notitle">Bez názvu</string>
     <string name="imageview_mimetype">MimeType</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Nebolo možné načítať obrázok</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentár</string>
     <!-- visit -->
@@ -1630,6 +1676,7 @@
     <string name="map_show_other_title">Zobraziť iné:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filter kešiek príliš zložitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
+    <string name="map_theme_legend">Motív Legenda</string>
     <string name="map_theme_legend_info">Ťuknutím na názov kategórie otvoríte/zatvoríte kategóriu. Ťuknátím na symbol a podržaním zobrazíte krátke informácie o tomto symbole. Ťuknutím na ikonu informácií navštívite podrobnú legendu online.</string>
     <string name="google_maps_style_default">Predvolené</string>
     <string name="google_maps_style_night">Noc</string>
@@ -2197,11 +2244,15 @@
     <string name="permission_location_explanation">Aplikácia c:geo je optimalizovaná na použitie s údajmi GPS (presná poloha) na určenie polohy a výpočet vzdialenosti a smeru ku keške. Bez tohto povolenia nebudú funkcie založené na polohe fungovať podľa očakávania.</string>
     <string name="permission_read_external_storage_explanation_title">Povolenie na čítanie externého úložiska</string>
     <string name="permission_read_external_storage_explanation">Aplikácia c:geo môžeš použiť vašu systémovú tapetu ako pozadie v aplikácii. Na to potrebuje aplikácia c:geo povolenie na čítanie mediálnych údajov na externom úložisku.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo zapísuje údaje do pamäte telefónu alebo na SD kartu, napr. keď ukladáte kešky na použitie offline, importujete alebo exportujete súbory a pri ďalších funkciách. V niektorých verziách systému Androidu je potrebné na tieto úkony udeliť dodatočné povolenie.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Staršie povolenie na zápis do externého úložiska</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte farebnú schému</string>
     <string name="preference_colorpicker_select_color">Vyberte farbu</string>
     <string name="preference_colorpicker_select_opaqueness">Vyberte priehľadnosť</string>
+    <string name="preference_colorpicker_select_width">Vyberte šírku čiary</string>
+    <string name="preference_colorpicker_show_width">šírka: %d</string>
     <string name="reset_to_default">Predvolené</string>
     <!-- number input -->
     <string name="number_input_title">Zadajte hodnotu od %1$s do %2$s</string>
@@ -2226,6 +2277,7 @@
     <string name="individual_route_error_toggling_waypoint">chyba pri prepnutí bodu trasy</string>
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
+    <string name="map_refresh_individual_route">Obnoviť</string>
     <string name="map_export_individual_route">Exportovať individuálnu trasu</string>
     <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
@@ -2247,6 +2299,14 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Nastaviť ako začiatok trasy</string>
     <string name="individual_route_set_as_start_message">Nastaviť túto položku ako začiatok trasy a presunúť všetky následné položky navrch aktuálnej trasy?</string>
+    <string name="route_optimization">Optimalizácia trasy</string>
+    <string name="route_optimization_info">Optimalizácia trasy je experimentálna funkcia na optimalizáciu trasy na kratšiu vzdialenosť. Trasa sa vypočíta od prvého bodu vášho zoznamu po posledný bod vášho zoznamu, pričom ostatné body na tejto trase navštívi v optimalizovanom poradí.\n\nKeďže nie je možné vyhodnotiť všetky možné riešenia z dôvodu časových a výpočtových obmedzení na mobilnom zariadení, používa aproximačné algoritmy na výpočet možných optimalizácií.\n\nVýpočet prebieha v dvoch krokoch: Vypočítajte vzdialenosti medzi každým dvoma pármi trasy, potom sa pokúste nájsť prijateľnú trasu. Toto nemusí byť najkratšia možná trasa, takže druhý krok môžete opakovať tak často, ako chcete.</string>
+    <string name="initial_route_length">Prvotná dĺžka trasy: %d</string>
+    <string name="optimized_route_length">Optimalizovaná dĺžka trasy: %d</string>
+    <string name="route_optimization_out_of_bounds">Optimalizácia trasy funguje pre trasy s 3 až 100 bodmi</string>
+    <string name="generating_distance_matrix">Generuje sa matica vzdialenosti</string>
+    <string name="running_route_optimizations">Sú v činnosti optimalizácie trasy</string>
+    <string name="route_optimization_finished">Optimalizácia trasy dokončená</string>
     <!-- individual track -->
     <string name="map_load_track">Načítať stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba pri načítaní stopy/trasy</string>
@@ -2255,6 +2315,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
+    <string name="routes_tracks_color">Vyberte farbu</string>
     <string name="center_on_route_track">Vycentrovať na trasu/stopu</string>
     <string name="unload_route_track">Zrušiť trasu/stopu</string>
     <string name="route">Trasa</string>
@@ -2335,6 +2396,7 @@
     <string name="downloadmap_mapfile">mapový súbor</string>
     <string name="downloadmap_themefile">súbor témy</string>
     <string name="downloadmap_tilefile">súbor s údajmi navigácie</string>
+    <string name="downloadmap_checking">Overujú sa dostupné údaje navigácie…</string>
     <string name="downloadmap_othermapdownload">stiahnutie inej mapy</string>
     <string name="downloadmap_otherthemedownload">stiahnutie inej témy</string>
     <string name="downloadmap_download">prevziať</string>
@@ -2367,6 +2429,7 @@
     <string name="maptheme_scale_text_summary">Dodatočne zmení mierku textových štítkov na mape; 100 % = žiadna ďalšia mierka</string>
     <string name="maptheme_scale_symbol_title">Mierka symbolov</string>
     <string name="maptheme_scale_symbol_summary">Dodatočne zmení mierku symbolov na mape; 100 % = žiadna ďalšia mierka</string>
+    <string name="vtm_theme_variant">Variant motívu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
@@ -2425,7 +2488,10 @@
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
     <string name="cancel">Zrušiť</string>
+    <string name="use">Použiť</string>
+    <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
+    <string name="optimize">Optimalizovať</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
     <!-- render theme legend: category "areas" -->

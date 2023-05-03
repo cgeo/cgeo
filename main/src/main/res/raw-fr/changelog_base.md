@@ -1,22 +1,22 @@
 ### Carte
-- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
-- New: Refresh caches in route
-- New: Individual coloring of tracks
-- New: Update map list on receiving map file
-- Change: Do not install downloaded map/theme automatically
-- New: Individual route optimization (experimental)
-- New: Support for "Google: Terrain" maps
-- New: Setting line-width per track
-- New: Hide map's action bar on demand (tap on empty space on map)
-- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- Changement : Utiliser la dernière position de la carte connue comme valeur affichée (quand aucun GPS n'est disponible et "suivre ma localisation" inactif)
+- Nouveau: Rafraîchir les caches en route
+- Nouveau : Coloriage individuel des pistes
+- Nouveau: Mettre à jour la liste des cartes lors de la réception du fichier de carte
+- Changement : Ne pas installer automatiquement la carte/le thème téléchargé
+- Nouveau : Optimisation de route individuelle (expérimental)
+- Nouveau: Support des cartes "Google: Terrain"
+- Nouveau : Réglage de la largeur de ligne par piste
+- Nouveau : masquer la barre d'action de la carte à la demande (appuyer sur un espace vide sur la carte)
+- Changement : Déplacez les boutons de configuration rapide vers la gauche en mode paysage pour gagner plus d'espace vertical
 - New: Visualize coords-only-points of individual route
-- Fix: Preserve target geocode on mapsource change
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- Correction : Conserver le géocode cible lors du changement de carte
+- Changement: Appui long sur une cache ou un waypoint, qui fait partie de la route individuelle, ouvrira le menu contextuel
 
 ### Détails de la cache
 - Change: Force redownload of cache when importing via send2cgeo
 - Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Correction : Conserver la position du défilement en utilisant le bouton « Afficher la description complète»
 
 ### Général
 - Fix: Preview button displayed only with filter setting "show all" in PQ list
@@ -28,7 +28,7 @@
 - New: Make cache list info items configurable
 - New: Clear recently viewed caches
 - New: Add 'recently viewed caches' to quicklaunch options
-- New: Add last logs smiley row to configurable info items
-- New: Added "add to individual route" to cache list menu
-- New: Updated integrated BRouter to v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Nouveau : Ajouter la ligne des derniers logs smiley aux éléments d'information configurables
+- Nouveau : Ajout de "ajouter à un itinéraire individuel" au menu de la liste des caches
+- Nouveau : Mise à jour du BRouter intégré en version 1.7.0
+- Correction : Alignement du statut de la boussole en mode paysage

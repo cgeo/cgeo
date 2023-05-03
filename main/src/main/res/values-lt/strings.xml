@@ -366,6 +366,8 @@
     <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
     <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
+    <string name="caches_store_background_option_refresh_and_add">Atnaujinti ir pridėti prie sąrašo</string>
+    <string name="caches_store_background_option_refresh_and_keep">Atnaujinti ir palikti dabartines sąrašo užduotis</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
@@ -406,6 +408,9 @@
     <string name="caches_remove_selected">Pašalinti pasirinktą iš sąrašo</string>
     <string name="caches_remove_all_completely">Pašalinti viską iš įrenginio</string>
     <string name="caches_remove_selected_completely">Pašalinti pasirinktus iš įrenginio</string>
+    <string name="caches_append_to_route_selected">Pridėti pasirinktą prie individualaus maršruto</string>
+    <string name="caches_append_to_route_all">Pridėkite viską prie individualaus maršruto</string>
+    <string name="caches_appended_to_route">Prie maršruto pridėtos talpyklos</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
     <string name="caches_upload_bookmarklist">Pridėti į žymių sąrašą</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
@@ -711,6 +716,10 @@
     <string name="settings_summary_offlinedata">Sukonfigūruokite duomenis, kurie bus išsaugoti naudoti neprisijungę, saugojimo vietą ir GPX failų aplankus.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
+    <string name="settings_title_map_sources">Žemėlapio šaltiniai</string>
+    <string name="settings_summary_map_sources">Nustatykite žemėlapio šaltinio ir neprisijungus pasiekiamo žemėlapio nustatymus.</string>
+    <string name="settings_title_map_content_behavior">Žemėlapio turinys &amp; Elgsena</string>
+    <string name="settings_summary_map_content_behavior">Konfigūruokite, kokią informaciją rodyti žemėlapių ir sąveikos parinktyse.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
     <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos</string>
@@ -857,17 +866,31 @@
     <string name="init_summary_save_log_img">Išsaugoti vaizdus iš įrašų</string>
     <string name="init_units">Imperiniai vienetai</string>
     <string name="init_summary_units">Vietoje metrinių vienetų naudoti imperinius vienetus</string>
+    <string name="init_cachelists">Slėptuvių sąrašai</string>
     <string name="init_log_offline">Registravimas neprisijungus</string>
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
     <string name="init_list_initial_load_limit">Sąrašo įkėlimo apribojimas</string>
     <string name="init_summary_list_initial_load_limit">Maksimalus slėptuvių skaičius, kurias iš pradžių reikia įkelti iš duomenų bazės, rodant saugomus sąrašus. Pasirinkite 0, jei norite „neribotai“</string>
+    <string name="init_title_cacheListInfo1">Konfigūruoti sąrašo informacijos eilutes</string>
+    <string name="init_summary_cacheListInfo">Pasirinkite papildomą informaciją, kuri bus rodoma kiekvienai slėptuvei slėptuvių sąrašuose</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Rodyti rodyklę su kompaso kryptimi slėptuvių sąraše</string>
     <string name="init_quicklaunchitems">Greito paleidimo mygtukai</string>
     <string name="init_summary_quicklaunchitems">Pasirinkite vieną ar daugiau elementų kaip greito paleidimo mygtukus pagrindiniame ekrane</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocodas</string>
+    <string name="cacheListInfoItem_Difficulty">Sudėtingumas</string>
+    <string name="cacheListInfoItem_Terrain">Reljefas</string>
+    <string name="cacheListInfoItem_MemberState">Premium statusas</string>
+    <string name="cacheListInfoItem_Size">Dydis</string>
+    <string name="cacheListInfoItem_Lists">Kiti sąrašai</string>
+    <string name="cacheListInfoItem_HiddenMonth">Paslėptas mėnuo</string>
+    <string name="cacheListInfoItem_EventDate">Renginio data</string>
+    <string name="newline">Nauja eilutė</string>
+    <string name="active_elements">Aktyvūs elementai</string>
+    <string name="disabled_elements">Išjungti elementai</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -1051,6 +1074,8 @@
     <string name="feature_search_finder">Paieška pagal radėją</string>
     <string name="feature_favorite">Pridėti slėptuvę prie mėgstamų</string>
     <string name="feature_voting">Balsuojama už slėptuves</string>
+    <string name="init_appearance_general">Bendra išvaizda</string>
+    <string name="init_maplines_title">Žemėlapio spalvų konfigūracija</string>
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
@@ -1416,6 +1441,8 @@
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
     <string name="cache_recently_viewed">Neseniai peržiūrėta</string>
+    <string name="cache_recently_viewed_empty">Nėra neseniai peržiūrėtų slėptuvių</string>
+    <string name="cache_clear_recently_viewed">išvalyti</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
@@ -1431,6 +1458,10 @@
     <string name="image_category_log">Įrašas</string>
     <string name="context_map_add_to_route">Pridėti prie maršruto</string>
     <string name="context_map_add_to_route_start">Įterpti į maršrutą</string>
+    <string name="context_map_remove_from_route">Pašalinti iš maršruto</string>
+    <string name="context_map_remove_from_route_start">Pašalinti iš pradžios</string>
+    <string name="context_map_remove_from_route_pos">Pašalinti iš pozicijos %d</string>
+    <string name="context_map_remove_from_route_end">Pašalinti iš pabaigos</string>
     <string name="context_map_show_coords">Rodyti koordinates</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="create_internal_cache_short">Nauja slėptuvė</string>
@@ -1442,6 +1473,8 @@
     <string name="internal_goto_targets_description">Šioje slėptuvėje saugomi naujausi \'\'Eiti į\'\' tikslai. Jis sukuriamas automatiškai, kai pagrindiniame meniu naudojate funkciją \'\'Eiti į\'\'. Ten įvestos koordinatės bus saugomos šios slėptuvės kelio taškuose. Jei jums nebereikia šių koordinačių, galite saugiai ištrinti šią slėptuvę arba bet kurį iš jos kelio taškų. Taip pat galite perkelti slėptuvę į bet kurį kitą pasirinktą sąrašą.</string>
     <string name="init_longtap_map">Ilgas žemėlapio palietimas</string>
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
+    <string name="init_ActionbarAutohide">Slėpti įrankių juostą bakstelėjus</string>
+    <string name="init_summary_ActionbarAutohide">Bakstelėkite laisvą vietą žemėlapyje norėdami slėpti/rodyti įrankių juostą</string>
     <string name="onetime_info_longtap_disabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu išjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
@@ -2267,6 +2300,7 @@
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
     <string name="route_optimization">Maršruto optimizavimas</string>
+    <string name="route_optimization_info">Maršruto optimizavimas yra eksperimentinė funkcija, skirta optimizuoti maršrutą trumpesniam atstumui. Maršrutas bus skaičiuojamas nuo pirmo sąrašo taško iki paskutinio sąrašo taško, lankant kitus šio maršruto taškus optimizuota tvarka.\n\nKadangi visų galimų sprendimų įvertinti neįmanoma dėl laiko ir skaičiavimo galios apribojimų mobiliajame įrenginyje, jis naudoja apytikslius algoritmus, kad apskaičiuotų galimus optimizavimus.\n\nSkaičiavimas atliekamas dviem etapais: Apskaičiuojamas atstumus tarp dviejų maršruto porų, tada pabandoma rasti priimtiną maršrutą. Tai gali būti ne trumpiausias įmanomas maršrutas, todėl antrą veiksmą galite kartoti tiek kartų, kiek norite.</string>
     <string name="initial_route_length">Pradinis maršruto ilgis: %d</string>
     <string name="optimized_route_length">Optimizuotas maršruto ilgis: %d</string>
     <string name="route_optimization_out_of_bounds">Maršruto optimizavimas veikia maršrutams nuo 3 iki 100 taškų</string>
