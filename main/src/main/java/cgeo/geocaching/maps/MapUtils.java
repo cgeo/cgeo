@@ -260,7 +260,7 @@ public class MapUtils {
             }
             for (int i = 1; i < segments.length - 1; i++) {
                 if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
-                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
                 }
             }
             isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
@@ -278,7 +278,7 @@ public class MapUtils {
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title);
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_delete);
         menu.addItemClickListener(uniqueId, item -> {
             individualRoute.removeItem(activity, uniqueId, routeUpdater);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
@@ -286,7 +286,7 @@ public class MapUtils {
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final RouteItem routeItem, final boolean addToRouteStart, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title);
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_add);
         menu.addItemClickListener(uniqueId, item -> {
             individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
