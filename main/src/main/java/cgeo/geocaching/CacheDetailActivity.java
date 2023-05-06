@@ -79,6 +79,7 @@ import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
@@ -3001,7 +3002,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);
-            Linkify.addLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
+            ViewUtils.safeAddLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
         } else {
             personalNoteView.setVisibility(View.GONE);
             separator.setVisibility(View.GONE);

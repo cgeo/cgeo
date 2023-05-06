@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -25,6 +26,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -48,6 +50,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.text.util.LinkifyCompat;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
@@ -541,6 +544,26 @@ public class ViewUtils {
     public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
         if (view != null) {
             applyMethod.call(view);
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static boolean safeAddLinks(@NonNull final TextView textView, @LinkifyCompat.LinkifyMask final int mask) {
+        try {
+            return Linkify.addLinks(textView, mask);
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re);
+            return false;
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static boolean safeAddLinks(@NonNull final Spannable sp, @LinkifyCompat.LinkifyMask final int mask) {
+        try {
+            return Linkify.addLinks(sp, mask);
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re);
+            return false;
         }
     }
 }
