@@ -207,7 +207,7 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected final boolean addItem(final Waypoint waypoint, final boolean isDotMode) {
-        final GeoEntry entry = new GeoEntry(waypoint.getGpxId(), overlayId);
+        final GeoEntry entry = new GeoEntry(waypoint.getFullGpxId(), overlayId);
         final GeoitemLayer waypointItem = getWaypointItem(waypoint, this.mapHandlers.getTapHandler(), isDotMode);
         if (waypointItem != null && geoEntries.add(entry)) {
             layerList.add(waypointItem);
