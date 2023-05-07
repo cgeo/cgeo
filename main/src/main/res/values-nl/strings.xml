@@ -401,7 +401,7 @@
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
     <string name="caches_remove_all">Alles uit lijst verwijderen</string>
-    <string name="caches_remove_selected">Geselecteerde uit lijst verwijderen</string>
+    <string name="caches_remove_selected">Verwijder geselecteerden</string>
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
@@ -1331,6 +1331,7 @@
     <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
     <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
+    <string name="cache_empty_log">Sorry, c:geo kon je log niet indienen omdat het leeg is.</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
     <string name="cache_menu_around">Caches rondom</string>
