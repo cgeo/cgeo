@@ -366,6 +366,8 @@
     <string name="caches_store_background_already_stored">Některé kešky jsou již uloženy. Co by se s nimi mělo stát?</string>
     <string name="caches_store_background_option_nothing">Nedělat nic</string>
     <string name="caches_store_background_option_add_to_list">Přidat na seznam</string>
+    <string name="caches_store_background_option_refresh_and_add">Aktualizovat a přidat na seznam</string>
+    <string name="caches_store_background_option_refresh_and_keep">Aktualizovat a zachovat aktuální přiřazení do seznamů</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Stahování selhalo, %1$d/%2$d kešek bylo staženo</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Stahování zrušeno, %1$d/%2$d kešek bylo staženo</string>
     <plurals name="caches_store_background_result">
@@ -406,6 +408,9 @@
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
+    <string name="caches_append_to_route_selected">Připojit vybrané k individuální trase</string>
+    <string name="caches_append_to_route_all">Připojit všechny k individuální trase</string>
+    <string name="caches_appended_to_route">Kešky připojené k trase</string>
     <string name="caches_delete_events">Odstranit staré události</string>
     <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
@@ -1354,6 +1359,7 @@
     <string name="cache_menu_open_with">Otevřít pomocí…</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
     <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
+    <string name="cache_empty_log">c:geo nemohl odeslat váš log, protože je prázdný.</string>
     <string name="cache_menu_visit_offline">Rychlý offline log</string>
     <string name="cache_menu_spoilers">Obrázky</string>
     <string name="cache_menu_around">Kešky v okolí</string>
@@ -1453,6 +1459,10 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Přidat na trasu</string>
     <string name="context_map_add_to_route_start">Přidat před trasu</string>
+    <string name="context_map_remove_from_route">Odstranit z trasy</string>
+    <string name="context_map_remove_from_route_start">Odstranit ze začátku trasy</string>
+    <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
+    <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
     <string name="context_map_show_coords">Zobrazit souřadnice</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
