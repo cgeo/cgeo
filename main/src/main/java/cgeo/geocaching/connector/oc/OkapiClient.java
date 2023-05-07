@@ -189,11 +189,11 @@ final class OkapiClient {
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2";
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count|owner|founds|notfounds|rating|rating_votes|recommendations|region|country2|attr_acodes|attrnames";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found|is_recommended";
     private static final String SERVICE_CACHE_CORE_CURRENT_L3_FIELDS = "is_watched";
-    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
-    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends|short_description";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "description|hint|images|latest_logs|alt_wpts|req_passwd|trackables";
+    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|willattends|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "";
 
@@ -779,7 +779,6 @@ final class OkapiClient {
             // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
             cache.setSpoilers(cacheImages);
 
-            cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)));
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
 
@@ -866,6 +865,8 @@ final class OkapiClient {
         //set basic properties which are constant / not used for OC platforms
         cache.setPremiumMembersOnly(false);
         cache.setUserModifiedCoords(false);
+
+        cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)));
 
         DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
     }
