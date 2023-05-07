@@ -11,7 +11,7 @@
 - Změna: Přesunutí tlačítek rychlého nastavení doleva v režimu na šířku, aby se získalo více místa na výšku
 - Novinka: Vizualizace pouze souřadnicových bodů jednotlivých tras
 - Oprava: Zachování cílového geokódu při změně zdroje mapy
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- Změna: Stisknutí a podržení na kešce/trasovém bodu, která/ý je součástí individuální trasy, otevře možnosti.
 
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
@@ -29,6 +29,6 @@
 - Novinka: Vymazání nedávno zobrazených kešek
 - Novinka: Přidání položky "nedávno zobrazené kešky" do možností rychlého spuštění
 - Novinka: Přidání řádku s posledním smajlíkem do konfigurovatelných informačních položek
-- New: Added "add to individual route" to cache list menu
-- New: Updated integrated BRouter to v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Novinka: Do nabídky seznamu kešek byla přidána možnost "přidat do individuální trasy"
+- Novinka: integrovaný BRouter byl aktualizován na verzi 1.7.0
+- Oprava: Zarovnání zobrazení stavu kompasu v režimu na šířku
