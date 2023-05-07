@@ -2309,6 +2309,11 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
+    public String getFullWaypointGpxId(@NonNull final String prefix) {
+        return getConnector().getFullWaypointGpxId(prefix, geocode);
+    }
+
+    @NonNull
     public String getWaypointPrefix(final String name) {
         return getConnector().getWaypointPrefix(name);
     }

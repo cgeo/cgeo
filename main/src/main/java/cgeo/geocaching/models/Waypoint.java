@@ -342,6 +342,20 @@ public class Waypoint implements IWaypoint {
         return gpxId;
     }
 
+    /** similar to getGpxId, but includes geocode to be unique across different caches */
+    public String getFullGpxId() {
+        String gpxId = geocode + prefix;
+
+        if (StringUtils.isNotBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null) {
+                gpxId = cache.getFullWaypointGpxId(prefix);
+            }
+        }
+
+        return gpxId;
+    }
+
     public boolean mergeFromParsedText(final Waypoint parsedWaypoint, final String parsePraefix) {
         boolean changed = false;
 
@@ -393,7 +407,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
+        return new GeoitemRef(getFullGpxId(), getCoordType(), getGeocode(), getId(), getName(), getWaypointType().markerId);
     }
 
     public String getUserNote() {
