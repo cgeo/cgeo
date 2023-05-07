@@ -467,7 +467,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             caches.handleLiveLayers(this, mapOptions);
             ActivityMixin.invalidateOptionsMenu(this);
             if (mapOptions.mapMode == MapMode.SINGLE) {
-                setTarget(mapOptions.coords, mapOptions.geocode);
+                // reset target cache on single mode map
+                targetGeocode = mapOptions.geocode;
             }
             mapOptions.mapMode = MapMode.LIVE;
             updateSelectedBottomNavItemId();
