@@ -12,6 +12,8 @@
 - Nytt: Visualisera punkter med endast koordinater i en individuell rutt
 - Fix: Bevara geocode-mål vid förändring av kartkälla
 - Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Cachedetaljer
 - Change: Force redownload of cache when importing via send2cgeo
