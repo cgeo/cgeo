@@ -12,6 +12,8 @@
 - Nové: Vizualizácia bodov len so súradnicami na individuálnej trase
 - Oprava: Zachovanie cieľového geokódu pri zmene zdroja mapy
 - Zmena: Ťuknutia a podržanie na keške/bode trasy, ktoré sú časťou individuálnej trasy, otvorí kontextovú ponuku
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Detaily kešky
 - Zmena: Vynútenie opätovného stiahnutia kešky pri importe cez send2cgeo
