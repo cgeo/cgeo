@@ -12,6 +12,8 @@
 - Nowość: Wizualizacja tylko punktów ze współrzędnymi dla indywidualnej trasy
 - Poprawka: Zachowaj docelowy geokod po zmianie źródła mapy
 - Zmiana: Długie dotknięcie na skrytkę/punkt nawigacji, który jest częścią indywidualnej trasy, wywoła menu kontekstowego
+- Nowość: Dodano filtrowanie atrybutów online dla usług opencaching
+- Poprawka: Punkty nawigacji Adventure Labs czasami nie były wyświetlane
 
 ### Szczegóły skrytki
 - Zmiana: Wymuszenie ponownego pobrania skrytki podczas importowania przez send2cgeo
