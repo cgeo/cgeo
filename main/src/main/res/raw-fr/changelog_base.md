@@ -12,6 +12,8 @@
 - New: Visualize coords-only-points of individual route
 - Correction : Conserver le géocode cible lors du changement de carte
 - Changement: Appui long sur une cache ou un waypoint, qui fait partie de la route individuelle, ouvrira le menu contextuel
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Détails de la cache
 - Change: Force redownload of cache when importing via send2cgeo
