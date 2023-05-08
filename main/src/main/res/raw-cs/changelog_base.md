@@ -12,6 +12,8 @@
 - Novinka: Vizualizace pouze souřadnicových bodů jednotlivých tras
 - Oprava: Zachování cílového geokódu při změně zdroje mapy
 - Změna: Stisknutí a podržení na kešce/trasovém bodu, která/ý je součástí individuální trasy, otevře možnosti.
+- Novinka: Přidáno online filtrování atributů pro služby opencaching
+- Oprava: Občas se nezobrazují terasové body v Adventure Labs
 
 ### Detaily kešky
 - Změna: Vynucení opětovného stažení kešky při importu přes send2cgeo
