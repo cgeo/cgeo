@@ -12,6 +12,8 @@
 - Novo: Visualize pontos apenas com coordenadas, de uma rota individual
 - Correção: Preservar o geo-código do alvo numa alteração da fonte do mapa
 - Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Detalhes da cache
 - Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
