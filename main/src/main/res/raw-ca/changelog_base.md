@@ -12,6 +12,8 @@
 - Novetat: Visualitzeu punts de només coordenades de la ruta individual
 - Correcció: Conservar el geocodi de destinació al canvi de font del mapa
 - Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Detalls del catxé
 - Canvi: Força la baixada del catxé quan s'importa mitjançant send2cgeo
