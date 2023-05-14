@@ -12,8 +12,8 @@
 - Neu: Reine Koordinaten-Punkte individueller Routen auf Karte anzeigen
 - Korrektur: Geocode des Ziels bei Änderung der Kartenquelle beibehalten
 - Änderung: Langes Tippen auf Cache/Wegpunkt einer individuellen Route öffnet Kontextmenü
-- New: Add online attribute filtering for opencaching services
-- Fix: Waypoints of Adventure Labs sometimes not being displayed
+- Neu: Unterstützung für Attributfilter bei Suche in Opencaching-Diensten
+- Korrektur: Wegpunkte von Adventure Labs werden manchmal nicht angezeigt
 
 ### Cache-Details
 - Änderung: Erzwinge das erneute Herunterladen des Caches beim Importieren über send2cgeo
