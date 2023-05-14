@@ -365,6 +365,7 @@
     <string name="caches_store_background_option_nothing">Não fazer nada</string>
     <string name="caches_store_background_option_add_to_list">Adicionar à lista</string>
     <string name="caches_store_background_option_refresh_and_add">Actualizar e adicionar à lista</string>
+    <string name="caches_store_background_option_refresh_and_keep">Actualizar e manter as atribuições da lista actual</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">A transferência falhou, %1$d/%2$d caches foram transferidas</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">A transferência foi cancelada, %1$d/%2$d caches foram transferidas</string>
     <plurals name="caches_store_background_result">
@@ -1330,6 +1331,7 @@
     <string name="cache_menu_open_with">Abrir com…</string>
     <string name="cache_menu_visit">Registar visita</string>
     <string name="cache_log_too_long">O c:geo não pôde enviar o seu registo por ser muito longo. Mas obrigado por tentar escrever um registo tão extenso ;-)</string>
+    <string name="cache_empty_log">c:geo não pôde enviar o seu registo porque está vazio.</string>
     <string name="cache_menu_visit_offline">Registo rápido sem ligação</string>
     <string name="cache_menu_spoilers">Imagens spoiler</string>
     <string name="cache_menu_around">Caches próximas</string>
