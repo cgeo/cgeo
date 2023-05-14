@@ -11,9 +11,9 @@
 - Alteração: Mover os botões de definições rápidas para a esquerda, no modo paisagem, para ganhar mais espaço vertical
 - Novo: Visualize pontos apenas com coordenadas, de uma rota individual
 - Correção: Preservar o geo-código do alvo numa alteração da fonte do mapa
-- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
-- New: Add online attribute filtering for opencaching services
-- Fix: Waypoints of Adventure Labs sometimes not being displayed
+- Alteração: Toque longo sob a cache / o ponto adicional, que façam parte da rota individual, abrirá o menu de contexto
+- Novo: Adicionada filtragem de atributos em tempo real para serviços de opencaching
+- Correcção: Pontos das "Adventure Labs" por vezes não eram exibidos
 
 ### Detalhes da cache
 - Alteração: Forçar nova transferência da cache ao importar via "send2cgeo"
@@ -31,6 +31,6 @@
 - Novo: Remover caches visualizadas recentemente
 - Novo: Opção 'caches visualizadas recentemente' adicionada às opções de início rápido
 - Novo: Adicionados aos itens de informação configuráveis a linha dos emoji utilizados nos últimos registos
-- New: Added "add to individual route" to cache list menu
-- New: Updated integrated BRouter to v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Novo: Adicionado "Adicionar à rota individual" à lista de menu da cache
+- Novo: Actualizado o BRouter integrado para v1.7.0
+- Correcção: Alinhamento da vista do estado da bússola, em modo paisagem
