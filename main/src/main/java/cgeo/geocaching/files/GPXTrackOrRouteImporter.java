@@ -50,7 +50,7 @@ public class GPXTrackOrRouteImporter {
                     });
                 }
             } catch (final Exception e) {
-                //
+                Log.w("Exception on doImport", e);
             }
         }, () -> {
             if (!success.get()) {

@@ -79,6 +79,8 @@ import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapLineUtils;
+import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
@@ -92,6 +94,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -754,7 +757,15 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 if (gdp == null || gdp.isHidden()) {
                     geoObjectLayer.removeGeoObjectLayer(key);
                 } else {
-                    final Layer l = GeoObjectLayer.createGeoObjectLayer(((GeoObjectList) gdp).getGeodata(), geoObjectLayer.getDisplayModel());
+                    //settings... this will be implemented more beautiful in unified map
+                    final float widthFactor = 2f;
+                    final float defaultWidth = tracks.getWidth(key) / widthFactor;
+                    final int defaultStrokeColor = tracks.getColor(key);
+                    final int defaultFillColor = Color.argb(32, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
+                    final Func1<Float, Float> widthAdjuster = w -> MapLineUtils.getWidthFromRaw(w == null ? 1 : w.intValue(), false) * widthFactor;
+
+                    final Layer l = GeoObjectLayer.createGeoObjectLayer(((GeoObjectList) gdp).getGeodata(), geoObjectLayer.getDisplayModel(),
+                            defaultWidth, defaultStrokeColor, defaultFillColor, widthAdjuster);
                     geoObjectLayer.addGeoObjectLayer(key, l);
                 }
             }

@@ -401,7 +401,7 @@
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
     <string name="caches_remove_all">Alles uit lijst verwijderen</string>
-    <string name="caches_remove_selected">Geselecteerde uit lijst verwijderen</string>
+    <string name="caches_remove_selected">Verwijder geselecteerden</string>
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
