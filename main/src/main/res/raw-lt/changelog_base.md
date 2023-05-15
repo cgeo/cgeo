@@ -12,6 +12,8 @@
 - New: Visualize coords-only-points of individual route
 - Pataisymas: išsaugomas tikslinis geokodas keičiant žemėlapio šaltinį
 - Pakeitimas: ilgai bakstelėjus talpyklą/maršruto tašką, kuris yra atskiro maršruto dalis, atsivers kontekstinis meniu
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
 
 ### Slėptuvės detalės
 - Change: Force redownload of cache when importing via send2cgeo
