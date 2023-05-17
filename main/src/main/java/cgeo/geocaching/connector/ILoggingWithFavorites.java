@@ -44,4 +44,6 @@ public interface ILoggingWithFavorites extends ILoggingManager {
      * @return true if there was loading error, false otherwise.
      */
     boolean hasFavPointLoadError();
+
+    int getFavoriteCheckboxText();
 }

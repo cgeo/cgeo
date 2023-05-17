@@ -181,7 +181,8 @@ final class OkapiClient {
     private static final String USER_USERNAME = "username";
     private static final String USER_CACHES_FOUND = "caches_found";
     private static final String USER_INTERNAL_ID = "internal_id";
-    private static final String USER_INFO_FIELDS = "username|caches_found";
+    private static final String USER_FAV_LEFT = "rcmds_left";
+    private static final String USER_INFO_FIELDS = "username|caches_found|rcmds_left";
 
     private static final String IMAGE_CAPTION = "caption";
     private static final String IMAGE_URL = "url";
@@ -589,7 +590,7 @@ final class OkapiClient {
 
     @NonNull
     @WorkerThread
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem) {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.ocType);
         params.add("comment", log);
@@ -603,6 +604,9 @@ final class OkapiClient {
         }
         if (reportProblem == ReportProblemType.NEEDS_MAINTENANCE) { // OKAPI only knows this one problem type
             params.add("needs_maintenance2", "true");
+        }
+        if (logType == LogType.FOUND_IT && addToFavorites) {
+            params.add("recommend", "true");
         }
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
@@ -1315,7 +1319,7 @@ final class OkapiClient {
         if (!result.isSuccess) {
             final OkapiError error = new OkapiError(result.data);
             Log.w("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
-            return new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.getFromOkapiError(error.getResult()));
+            return new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.getFromOkapiError(error.getResult()), UNKNOWN_FINDS);
         }
 
         final ObjectNode data = result.data;
@@ -1323,8 +1327,9 @@ final class OkapiClient {
         final String name = data.path(USER_USERNAME).asText();
         final boolean successFinds = data.has(USER_CACHES_FOUND);
         final int finds = data.path(USER_CACHES_FOUND).asInt();
+        final int remainingFavoritePoints = data.path(USER_FAV_LEFT).asInt();
 
-        return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
+        return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED, remainingFavoritePoints);
     }
 
     /**

@@ -357,7 +357,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
             if (favoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
-                binding.favoriteCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, favoritePoints, favoritePoints));
+                binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
