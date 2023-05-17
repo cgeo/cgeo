@@ -1359,6 +1359,7 @@
     <string name="cache_menu_open_with">Открыть с помощью…</string>
     <string name="cache_menu_visit">Записаться</string>
     <string name="cache_log_too_long">c:geo не смог отправить вашу запись, так как она слишком длинная. Но спасибо за то, что вы пытались написать такой объемный комментарий ;-)</string>
+    <string name="cache_empty_log">c:geo не удалось отправить вашу запись, потому что она пуста.</string>
     <string name="cache_menu_visit_offline">Быстрая офлайн-запись</string>
     <string name="cache_menu_spoilers">Фото в спойлере</string>
     <string name="cache_menu_around">Тайники неподалеку</string>
