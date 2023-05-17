@@ -1317,6 +1317,7 @@
     <string name="cache_menu_open_with">다른 프로그램으로 열기…</string>
     <string name="cache_menu_visit">로그하기</string>
     <string name="cache_log_too_long">c:geo가 로그가 너무 길어서 제출할 수 없습니다. 하지만 이렇게 광범위한 로그를 작성 해주셔서 감사합니다 ;-)</string>
+    <string name="cache_empty_log">c:geo는 로그가 비어 있어서 제출할 수 없습니다.</string>
     <string name="cache_menu_visit_offline">빠른 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
     <string name="cache_menu_around">주변의 캐시</string>
@@ -1825,8 +1826,8 @@
     <string name="attribute_night_no">야간에 권장하지 않음</string>
     <string name="attribute_winter_yes">겨울에도 가능</string>
     <string name="attribute_winter_no">겨울에는 불가</string>
-    <string name="attribute_stealth_yes">눈에 띄지 않도록 찾을 것</string>
-    <string name="attribute_stealth_no">조심할 필요없음</string>
+    <string name="attribute_stealth_yes">은밀함이 필요</string>
+    <string name="attribute_stealth_no">은밀함이 필요 없음</string>
     <string name="attribute_firstaid_yes">유지보수가 필요함</string>
     <string name="attribute_firstaid_no">유지보수 필요없음</string>
     <string name="attribute_cow_yes">가축 조심</string>
