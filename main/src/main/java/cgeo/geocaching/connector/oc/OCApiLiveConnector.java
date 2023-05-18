@@ -5,6 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
+import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
@@ -16,6 +17,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -33,13 +35,13 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability, IFavoriteCapability {
 
     private final String cS;
     private final int isActivePrefKeyId;
     private final int tokenPublicPrefKeyId;
     private final int tokenSecretPrefKeyId;
-    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED);
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED, UNKNOWN_FINDS);
 
     public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation) {
         super(name, host, https, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport, abbreviation);
@@ -141,7 +143,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
         } else {
-            userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_SUPPORTED);
+            userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_SUPPORTED, UNKNOWN_FINDS);
         }
         // update cache counter
         FoundNumCounter.getAndUpdateFoundNum(this);
@@ -162,6 +164,10 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public int getCachesFound() {
         return userInfo.getFinds();
+    }
+
+    public int getRemainingFavoritePoints() {
+        return userInfo.getRemainingFavoritePoints();
     }
 
     @Override
@@ -245,4 +251,27 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
         return false;
     }
 
+    @Override
+    public boolean addToFavorites(@NonNull final Geocache cache) {
+        // Not supported in OKAPI
+        return false;
+    }
+
+    @Override
+    public boolean removeFromFavorites(@NonNull final Geocache cache) {
+        // Not supported in OKAPI
+        return false;
+    }
+
+    @Override
+    public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
+        // In OKAPI is only possible to add cache as favorite when new entry to log is added.
+        // So setting this to false to disable favorite button that appears in cache description.
+        return false;
+    }
+
+    @Override
+    public boolean supportsAddToFavorite(@NonNull final Geocache cache, final LogType type) {
+        return type == LogType.FOUND_IT;
+    }
 }

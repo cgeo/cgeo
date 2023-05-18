@@ -237,6 +237,11 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
+    public int getFavoriteCheckboxText() {
+        return R.plurals.fav_points_remaining;
+    }
+
+    @Override
     @NonNull
     public List<TrackableLog> getTrackables() {
         if (hasLoaderError || hasTrackableLoadError) {

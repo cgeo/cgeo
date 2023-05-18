@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.su;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
@@ -120,6 +121,11 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
     @Override
     public boolean hasFavPointLoadError() {
         return hasFavPointLoadError;
+    }
+
+    @Override
+    public int getFavoriteCheckboxText() {
+        return R.plurals.fav_points_remaining;
     }
 
     static class SuLoggingLoader extends AsyncTaskLoader<Integer> {

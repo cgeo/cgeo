@@ -2411,6 +2411,14 @@
     <string name="command_rename_list_result">Renamed list</string>
     <string name="command_delete_list_result">Deleted list</string>
     <string name="command_unique_list_result">Deleted caches from other lists</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="zero">Recommend this cache (%d remaining)</item>
+        <item quantity="one">Recommend this cache (%d remaining)</item>
+        <item quantity="two">Recommend this cache (%d remaining)</item>
+        <item quantity="few">Recommend this cache (%d remaining)</item>
+        <item quantity="many">Recommend this cache (%d remaining)</item>
+        <item quantity="other">Recommend this cache (%d remaining)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="zero">Add this cache to favorites (%d remaining)</item>
         <item quantity="one">Add this cache to favorites (%d remaining)</item>
