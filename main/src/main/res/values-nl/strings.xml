@@ -1331,6 +1331,7 @@
     <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
     <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
+    <string name="cache_empty_log">Sorry, c:geo kon je log niet indienen omdat het leeg is.</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
     <string name="cache_menu_around">Caches rondom</string>
@@ -2156,6 +2157,10 @@
     <string name="command_rename_list_result">Lijst hernoemd</string>
     <string name="command_delete_list_result">Lijst verwijderd</string>
     <string name="command_unique_list_result">Verwijderde caches uit andere lijsten</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Deze cache aanbevelen (%d resterend)</item>
+        <item quantity="other">Deze caches aanbevelen (%d resterend)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Deze cache toevoegen aan favorieten (%d resterend)</item>
         <item quantity="other">Deze cache toevoegen aan favorieten (%d resterend)</item>
