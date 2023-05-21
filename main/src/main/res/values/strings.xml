@@ -500,6 +500,7 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="lists_title">Pick the lists</string>
+    <string name="lists_title_new_caches">Pick the list (new caches)</string>
     <string name="list_inbox">Stored</string>
     <string name="list_all_lists">All caches</string>
     <string name="list_dialog_create_title">New list</string>

@@ -351,9 +351,15 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (googleMap == null) {
             return;
         }
-        final GoogleMapProvider.AbstractGoogleMapSource mapSource = (GoogleMapProvider.AbstractGoogleMapSource) Settings.getMapSource();
-        googleMap.setMapType(mapSource.mapType);
-        googleMap.setIndoorEnabled(mapSource.indoorEnabled);
+        final MapSource mapSource = Settings.getMapSource();
+        if (mapSource instanceof GoogleMapProvider.AbstractGoogleMapSource) {
+            final GoogleMapProvider.AbstractGoogleMapSource gMapSource = (GoogleMapProvider.AbstractGoogleMapSource) mapSource;
+            googleMap.setMapType(gMapSource.mapType);
+            googleMap.setIndoorEnabled(gMapSource.indoorEnabled);
+        } else {
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            googleMap.setIndoorEnabled(true);
+        }
     }
 
     @Override
