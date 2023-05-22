@@ -463,6 +463,7 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Wybierz listę</string>
     <string name="lists_title">Wybierz listy</string>
+    <string name="lists_title_new_caches">Wybierz listę (nowe skrytki)</string>
     <string name="list_inbox">Zapisane</string>
     <string name="list_all_lists">Wszystkie skrytki</string>
     <string name="list_dialog_create_title">Nowa lista</string>
