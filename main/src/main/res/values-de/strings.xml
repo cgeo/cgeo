@@ -455,6 +455,7 @@
     <string name="list_menu_import">Importieren</string>
     <string name="list_title">Liste wählen</string>
     <string name="lists_title">Listen wählen</string>
+    <string name="lists_title_new_caches">Wähle die Liste (neue Caches)</string>
     <string name="list_inbox">Standardliste</string>
     <string name="list_all_lists">Alle</string>
     <string name="list_dialog_create_title">Neue Liste</string>
@@ -2157,6 +2158,10 @@
     <string name="command_rename_list_result">Liste umbenannt</string>
     <string name="command_delete_list_result">Liste gelöscht</string>
     <string name="command_unique_list_result">Caches wurden von anderen Listen entfernt</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Diesen Cache empfehlen (%d verbleibend)</item>
+        <item quantity="other">Diesen Cache empfehlen (%d verbleibend)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
         <item quantity="other">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
