@@ -2157,6 +2157,10 @@
     <string name="command_rename_list_result">Lista renomeada</string>
     <string name="command_delete_list_result">Lista apagada</string>
     <string name="command_unique_list_result">Caches eliminadas de outras listas</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Recomendar esta cache (%d restantes)</item>
+        <item quantity="other">Recomendar esta cache (%d restantes)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Adicionar esta cache aos favoritos (%d restante)</item>
         <item quantity="other">Adicionar esta cache aos favoritos (%d restantes)</item>
