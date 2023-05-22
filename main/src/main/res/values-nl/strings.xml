@@ -455,6 +455,7 @@
     <string name="list_menu_import">Importeer</string>
     <string name="list_title">Selecteer een lijst</string>
     <string name="lists_title">Kies de lijsten</string>
+    <string name="lists_title_new_caches">Kies de lijst (nieuwe caches)</string>
     <string name="list_inbox">Opgeslagen</string>
     <string name="list_all_lists">Alle caches</string>
     <string name="list_dialog_create_title">Nieuwe lijst</string>
