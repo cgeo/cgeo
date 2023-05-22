@@ -455,6 +455,7 @@
     <string name="list_menu_import">Importieren</string>
     <string name="list_title">Liste wählen</string>
     <string name="lists_title">Listen wählen</string>
+    <string name="lists_title_new_caches">Wähle die Liste (neue Caches)</string>
     <string name="list_inbox">Standardliste</string>
     <string name="list_all_lists">Alle</string>
     <string name="list_dialog_create_title">Neue Liste</string>
