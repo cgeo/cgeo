@@ -3,4 +3,4 @@
 ### Detalhes da cache
 
 ### Geral
-- New: Add more number emojis (separate category)
+- Novo: Adicionados mais emojis (categoria separada)
