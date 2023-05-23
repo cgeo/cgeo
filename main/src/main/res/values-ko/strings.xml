@@ -450,6 +450,7 @@
     <string name="list_menu_import">가져오기</string>
     <string name="list_title">목록 선택</string>
     <string name="lists_title">목록 선택</string>
+    <string name="lists_title_new_caches">목록 선택 (새 캐시)</string>
     <string name="list_inbox">저장된 캐시</string>
     <string name="list_all_lists">모든 캐시</string>
     <string name="list_dialog_create_title">새 목록</string>
