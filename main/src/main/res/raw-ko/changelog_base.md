@@ -3,4 +3,4 @@
 ### 캐시 상세정보
 
 ### 일반
-- New: Add more number emojis (separate category)
+- 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
