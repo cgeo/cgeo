@@ -8,18 +8,20 @@ import cgeo.geocaching.settings.Settings;
 import android.app.Activity;
 
 public class PocketGeocacheListLoader extends AbstractSearchLoader {
-    private final String guid;
+    private final String shortGuid;
+    private final String pqHash;
 
-    public PocketGeocacheListLoader(final Activity activity, final String guid) {
+    public PocketGeocacheListLoader(final Activity activity, final String shortGuid, final String pqHash) {
         super(activity);
-        this.guid = guid;
+        this.shortGuid = shortGuid;
+        this.pqHash = pqHash;
     }
 
     @Override
     public SearchResult runSearch() {
 
         if (Settings.isGCConnectorActive()) {
-            return GCParser.searchByPocketQuery(GCConnector.getInstance(), guid);
+            return GCParser.searchByPocketQuery(GCConnector.getInstance(), shortGuid, pqHash);
         }
 
         return new SearchResult();

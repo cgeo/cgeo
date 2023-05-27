@@ -59,6 +59,7 @@ public class Intents {
     public static final String EXTRA_USERNAME = PREFIX + "username";
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";
     public static final String EXTRA_POCKET_GUID = PREFIX + "pocket_guid";
+    public static final String EXTRA_POCKET_HASH = PREFIX + "pocket_hash";
 
     private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
     public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";
