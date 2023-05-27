@@ -62,6 +62,7 @@ import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -105,6 +106,44 @@ public final class GCParser {
 
     private GCParser() {
         // Utility class
+    }
+
+    private static SearchResult parseMap(final IConnector con, final String url, final String pageContent, final int alreadyTaken) throws JsonProcessingException {
+        if (StringUtils.isBlank(pageContent)) {
+            Log.e("GCParser.parseSearch: No page given");
+            return null;
+        }
+
+        final List<Geocache> caches = new ArrayList<>();
+
+        final JsonNode json = JsonUtils.reader.readTree(pageContent);
+        final JsonNode features = json.get("data").get("layer").get("features");
+        for (int i = 0; i < features.size(); i++) {
+            final JsonNode properties = features.get(i).get("properties");
+            final Geocache cache = new Geocache();
+            cache.setName(properties.get("name").asText());
+            cache.setGeocode(properties.get("key").asText());
+            cache.setType(CacheType.getByWaypointType(properties.get("wptid").asText()));
+            cache.setArchived(properties.get("archived").asBoolean());
+            cache.setDisabled(!properties.get("available").asBoolean());
+            cache.setCoords(new Geopoint(properties.get("lat").asDouble(), properties.get("lng").asDouble()));
+            final String icon = properties.get("icon").asText();
+            if ("MyHide".equals(icon)) {
+                cache.setOwnerUserId(Settings.getUserName());
+            } else if ("MyFind".equals(icon)) {
+                cache.setFound(true);
+            } else if (icon.startsWith("solved")) {
+                cache.setUserModifiedCoords(true);
+            }
+            caches.add(cache);
+        }
+
+        final SearchResult searchResult = new SearchResult();
+        searchResult.setUrl(con, url);
+        searchResult.addAndPutInCache(caches);
+        searchResult.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, alreadyTaken + caches.size()));
+
+        return searchResult;
     }
 
     @Nullable
@@ -891,6 +930,42 @@ public final class GCParser {
         return searchByAny(con, params, null, false);
     }
 
+    private static SearchResult searchByMap(final IConnector con, final Parameters params) {
+        final String page = GCLogin.getInstance().getRequestLogged(GCConstants.URL_LIVE_MAP, params);
+
+        if (StringUtils.isBlank(page)) {
+            Log.w("GCParser.searchByMap: No data from server");
+            return null;
+        }
+
+        final String sessionToken = TextUtils.getMatch(page, GCConstants.PATTERN_SESSIONTOKEN, "");
+        if (StringUtils.isBlank(sessionToken)) {
+            Log.w("GCParser.searchByMap: Failed to retrieve session token");
+            return null;
+        }
+
+        params.add("st", sessionToken);
+
+        final String pqJson = GCLogin.getInstance().getRequestLogged("https://tiles01.geocaching.com/map.pq", params);
+
+        SearchResult searchResult;
+        try {
+            searchResult = parseMap(con, "https://tiles01.geocaching.com/map.pq" + "?" + params, pqJson, 0);
+        } catch (JsonProcessingException e) {
+            searchResult = null;
+        }
+        if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
+            Log.w("GCParser.searchByAny: No cache parsed");
+            return searchResult;
+        }
+
+        final SearchResult search = searchResult.putInCacheAndLoadRating();
+
+        GCLogin.getInstance().getLoginStatus(page);
+
+        return search;
+    }
+
     @WorkerThread
     private static SearchResult searchByAny(final IConnector con, final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
@@ -956,15 +1031,14 @@ public final class GCParser {
         return sr;
     }
 
-    public static SearchResult searchByPocketQuery(final IConnector con, final String pocketGuid) {
-        if (StringUtils.isBlank(pocketGuid)) {
+    public static SearchResult searchByPocketQuery(final IConnector con, final String shortGuid, final String pqHash) {
+        if (StringUtils.isBlank(pqHash)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
         }
 
-        final Parameters params = new Parameters("pq", pocketGuid);
-
-        return searchByAny(con, params);
+        final Parameters params = new Parameters("pq", shortGuid, "hash", pqHash);
+        return searchByMap(con, params);
     }
 
     public static SearchResult searchByOwner(final IConnector con, final String userName) {
@@ -1055,7 +1129,7 @@ public final class GCParser {
                     Log.d("parsing bookmark list: fallback needed for '" + lastUpdateUtc + "'");
                 }
 
-                final GCList pocketQuery = new GCList(guid, name, count, true, date.getTime(), -1, true);
+                final GCList pocketQuery = new GCList(guid, name, count, true, date.getTime(), -1, true, null, null);
                 list.add(pocketQuery);
             }
 
@@ -1157,10 +1231,17 @@ public final class GCParser {
                 final Element link = row.select("td:eq(3) > a").first();
                 final Uri uri = Uri.parse(link.attr("href"));
                 final String guid = uri.getQueryParameter("guid");
+                final Uri mapUri = Uri.parse(row.select("td:eq(2) > a").get(1).attr("href"));
+                final String shortGuid = mapUri.getQueryParameter("pq");
+                final String pqHash = mapUri.getQueryParameter("hash");
                 if (!downloadablePocketQueries.containsKey(guid)) {
                     final String name = link.attr("title");
-                    final GCList pocketQuery = new GCList(guid, name, -1, false, 0, -1, false);
+                    final GCList pocketQuery = new GCList(guid, name, -1, false, 0, -1, false, shortGuid, pqHash);
                     list.add(pocketQuery);
+                } else {
+                    final GCList pq = downloadablePocketQueries.get(guid);
+                    pq.setPqHash(pqHash);
+                    pq.setShortGuid(shortGuid);
                 }
             }
             return list;
@@ -1218,7 +1299,7 @@ public final class GCParser {
                 }
             }
 
-            final GCList pocketQuery = new GCList(guid, name, count, true, lastGeneration, daysRemaining, false);
+            final GCList pocketQuery = new GCList(guid, name, count, true, lastGeneration, daysRemaining, false, null, null);
             downloadablePocketQueries.put(guid, pocketQuery);
         }
 

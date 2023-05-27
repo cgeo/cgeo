@@ -34,7 +34,7 @@ public class BookmarkUtils {
         final List<GCList> lists = new ArrayList<>();
 
         // add "<create new list>" PseudoList
-        lists.add(0, new GCList(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false));
+        lists.add(0, new GCList(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false, null, null));
 
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
 

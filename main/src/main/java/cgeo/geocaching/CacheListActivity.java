@@ -1826,7 +1826,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, cacheListType);
         cachesIntent.putExtra(Intents.EXTRA_NAME, pocketQuery.getName());
-        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, pocketQuery.getGuid());
+        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, pocketQuery.getShortGuid());
+        cachesIntent.putExtra(Intents.EXTRA_POCKET_HASH, pocketQuery.getPqHash());
         context.startActivity(cachesIntent);
     }
 
@@ -1945,10 +1946,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     loader = new NullGeocacheListLoader(this, search);
                     break;
                 case POCKET:
-                    final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
+                    final String shortGuid = extras.getString(Intents.EXTRA_POCKET_GUID);
+                    final String pqHash = extras.getString(Intents.EXTRA_POCKET_HASH);
                     title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new PocketGeocacheListLoader(this, guid);
+                    loader = new PocketGeocacheListLoader(this, shortGuid, pqHash);
                     break;
                 default:
                     //can never happen, makes Codacy happy
