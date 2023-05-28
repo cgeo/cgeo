@@ -1,7 +1,8 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsFragment;
 
 import androidx.annotation.StringRes;
 
@@ -23,8 +24,9 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider {
         }
     }
 
-    public AbstractUnifiedMapView getMap() {
-        return TileProviderFactory.MAP_GOOGLE;
+    @Override
+    public AbstractMapFragment createMapFragment() {
+        return new GoogleMapsFragment();
     }
 
 }

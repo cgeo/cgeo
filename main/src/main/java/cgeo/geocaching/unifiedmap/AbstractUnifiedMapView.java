@@ -22,6 +22,12 @@ import java.lang.ref.WeakReference;
 
 import org.oscim.core.BoundingBox;
 
+/*
+
+TODO: WARNING! THis class is outdated and should be removed!  Don't use it anymore! The successor is {@link AbstractMapFragment}
+
+ */
+
 
 public abstract class AbstractUnifiedMapView<T> {
 

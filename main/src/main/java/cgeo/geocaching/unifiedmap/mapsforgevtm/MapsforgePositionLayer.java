@@ -1,10 +1,8 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
-import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.MapLineUtils;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.view.View;
 
@@ -32,7 +30,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
         // direction line & navigation
         navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth(true));
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_DIRECTION_LINE, navigationLayer);
+//        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_DIRECTION_LINE, navigationLayer);
 
         // tracks & routes (group)
         // group already created in MapsforgeVtmView.init, layers will be added later
@@ -41,7 +39,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     protected void destroyLayer(final GroupedList<Layer> mapLayers) {
         mapLayers.remove(navigationLayer);
-        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
+//        MAP_MAPSFORGE.clearGroup(LayerHelper.ZINDEX_TRACK_ROUTE);
     }
 
 }

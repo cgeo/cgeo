@@ -17,7 +17,6 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.HideActionBarUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
@@ -39,6 +38,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import org.oscim.core.BoundingBox;
 
+
+/*
+
+TODO: WARNING! THis class is outdated and should be removed!  Don't use it anymore! The successor is {@link GoogleMapsFragment}
+
+ */
+
+
 /**
  * GoogleMapsView - Contains the view handling parts specific to Google Maps
  * To be called by UnifiedMapActivity (mostly)
@@ -52,8 +59,8 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     @Override
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
-        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_googlemaps, true);
-        rootView = activity.findViewById(R.id.unifiedmap_gm);
+//        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_googlemaps, true);
+        rootView = null;//activity.findViewById(R.id.unifiedmap_gm);
         mMapView = activity.findViewById(R.id.mapViewGM);
 
         // add map fragment

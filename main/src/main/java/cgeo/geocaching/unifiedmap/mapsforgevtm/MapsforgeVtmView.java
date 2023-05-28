@@ -13,10 +13,8 @@ import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
-import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.GroupedList;
-import cgeo.geocaching.utils.HideActionBarUtils;
 
 import android.app.Activity;
 import android.view.MenuItem;
@@ -48,6 +46,16 @@ import org.oscim.scalebar.MapScaleBarLayer;
 import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.tiling.TileSource;
 
+
+
+/*
+
+TODO: WARNING! THis class is outdated and should be removed!  Don't use it anymore! The successor is {@link MapsforgeVtmFragment}
+
+ */
+
+
+
 /**
  * MapsforgeVtmView - Contains the view handling parts specific to MapsforgeVtm
  * To be called by UnifiedMapActivity (mostly)
@@ -66,7 +74,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
-        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_mapsforgevtm, true);
+//        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_mapsforgevtm, true);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         super.mMapView = mMapView;
@@ -103,7 +111,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
-        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(mMap);
+//        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(mMap);
         startMap();
     }
 

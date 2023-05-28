@@ -2,7 +2,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
@@ -26,7 +26,7 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
     }
 
     @Override
-    public void addTileLayer(final Map map) {
+    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
         final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
         final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
         httpBuilder.cache(cache);
@@ -37,8 +37,8 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
                 .zoomMin(zoomMin)
                 .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
-        tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BASEMAP, new BitmapTileLayer(map, tileSource));
+        tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "cgeo-android"));
+        fragment.addLayer(LayerHelper.ZINDEX_BASEMAP, new BitmapTileLayer(map, tileSource));
     }
 
 }

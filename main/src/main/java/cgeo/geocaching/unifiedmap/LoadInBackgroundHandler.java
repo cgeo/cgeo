@@ -139,7 +139,7 @@ class LoadInBackgroundHandler {
         if (tileProvider == null) {
             return null;
         }
-        return tileProvider.getMap();
+        return null;//tileProvider.getMap();
     }
 
     public void onDestroy() {

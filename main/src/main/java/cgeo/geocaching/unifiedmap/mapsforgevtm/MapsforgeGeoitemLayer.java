@@ -7,8 +7,6 @@ import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
-import cgeo.geocaching.unifiedmap.LayerHelper;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.graphics.BitmapFactory;
 
@@ -30,9 +28,9 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
         final Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
         mDefaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
         mGeocacheLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_GEOCACHE, mGeocacheLayer);
+//        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_GEOCACHE, mGeocacheLayer);
         mWaypointLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_WAYPOINT, mWaypointLayer);
+//        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_WAYPOINT, mWaypointLayer);
     }
 
     @Override
