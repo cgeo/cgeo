@@ -450,7 +450,7 @@
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
     <string name="about_system_info">c:geo rendszeradatok</string>
     <string name="about_system_info_send_chooser">Rendszeradatok küldése</string>
-    <string name="changelog_github">Összes változtatás listázása</string>
+    <string name="about_changelog_full">Összes változtatás listázása</string>
     <string name="about_nutshellmanual">Online kézikönyv</string>
     <string name="about_contributors_carnerodetails">mint a c:geo szülőatyja</string>
     <string name="about_contributors_recent">2018/2019-es közreműködők</string>
