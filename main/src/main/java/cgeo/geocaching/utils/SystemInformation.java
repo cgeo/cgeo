@@ -234,7 +234,7 @@ public final class SystemInformation {
     private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
         body.append("\n- PersistedDocumentUris: #").append(PersistableUri.values().length);
         for (PersistableUri persDocUri : PersistableUri.values()) {
-            body.append("\n- ").append(persDocUri);
+            body.append("\n  - ").append(persDocUri);
         }
     }
 
