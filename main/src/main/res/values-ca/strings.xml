@@ -641,7 +641,7 @@
     <string name="about_system_write_logcat_success">Fitxer de registre \"%1$s\" escrit a la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error en el Fitxer de registre</string>
     <string name="about_system_write_infos_downloadmanager">Veure descàrregues</string>
-    <string name="changelog_github">Llista de tots els canvis</string>
+    <string name="about_changelog_full">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
     <string name="about_contributors_recent">Col·laboradors recents</string>
