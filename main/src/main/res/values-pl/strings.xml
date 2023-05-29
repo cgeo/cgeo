@@ -656,7 +656,7 @@
     <string name="about_system_write_logcat_success">Plik dziennika „%1$s” zapisany do folderu „%2$s”</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
-    <string name="changelog_github">Lista wszystkich zmian</string>
+    <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
     <string name="about_contributors_recent">Ostatni współpracownicy</string>
