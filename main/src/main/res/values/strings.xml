@@ -737,7 +737,7 @@
     <string name="about_system_write_logcat_success">Logfile \"%1$s\" written to folder \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error writing logfile</string>
     <string name="about_system_write_infos_downloadmanager">View downloads</string>
-    <string name="changelog_github">List of all changes</string>
+    <string name="about_changelog_full">List of all changes</string>
     <string name="about_nutshellmanual">Online manual</string>
 
     <string name="about_contributors_carnerodetails">as the father of c:geo</string>

@@ -24,7 +24,7 @@
         <Button
             android:id="@+id/changelog_github"
             style="@style/button_full"
-            android:text="@string/changelog_github" />
+            android:text="@string/about_changelog_full" />
     </LinearLayout>
 
 </ScrollView>

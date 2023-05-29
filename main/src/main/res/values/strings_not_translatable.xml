@@ -195,6 +195,7 @@
     <string translatable="false" name="github_link"><a href="">github.com/cgeo/cgeo/issues</a></string>
     <string translatable="false" name="faq_link_full">https://faq.cgeo.org</string>
     <string translatable="false" name="manual_link_full">https://manual.cgeo.org</string>
+    <string translatable="false" name="changelog_full">https://github.com/cgeo/cgeo/blob/master/main/src/main/res/raw/changelog_full.md</string>
 
     <string translatable="false" name="ellipsis">…</string>
     <string translatable="false" name="triple_dash_vertical">┆</string>
