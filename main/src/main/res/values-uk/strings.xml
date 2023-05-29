@@ -369,7 +369,7 @@
     <string name="about_system_write_logcat_type_standard">Стандарт</string>
     <string name="about_system_write_logcat_type_extended">розширений</string>
     <string name="about_system_write_logcat_error">Помилка записування вмісту</string>
-    <string name="changelog_github">Список всіх змін</string>
+    <string name="about_changelog_full">Список всіх змін</string>
     <string name="about_nutshellmanual">Онлайн допомога</string>
     <string name="about_contributors_carnerodetails">як батько c:geo</string>
     <string name="about_contributors_recent">Останні учасники</string>
