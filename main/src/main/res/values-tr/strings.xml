@@ -594,7 +594,7 @@
     <string name="about_system_write_logcat_success">\'\'%1$s\'\' kayıt dosyası \'\'%2$s\'\' klasörüne kaydedildi</string>
     <string name="about_system_write_logcat_error">Kayıt dosyasına yazılırken hata oluştu</string>
     <string name="about_system_write_infos_downloadmanager">İndirmeleri Görüntüle</string>
-    <string name="changelog_github">Tüm değişiklikler listesi</string>
+    <string name="about_changelog_full">Tüm değişiklikler listesi</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
