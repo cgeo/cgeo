@@ -698,8 +698,8 @@ public class BackupUtils {
     }
 
     @NonNull
-    public static String getNewestBackupDateTime() {
-        return getBackupDateTime(newestBackupFolder());
+    public static String getNewestBackupDateTime(final boolean autobackup) {
+        return getBackupDateTime(newestBackupFolder(autobackup));
     }
 
     @NonNull
@@ -712,8 +712,8 @@ public class BackupUtils {
     }
 
     @Nullable
-    public static Folder newestBackupFolder() {
-        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(false);
+    public static Folder newestBackupFolder(final boolean autoback) {
+        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(autoback);
         return dirs == null ? null : dirs.get(dirs.size() - 1).dirLocation;
     }
 

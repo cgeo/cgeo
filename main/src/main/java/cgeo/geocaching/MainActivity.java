@@ -638,7 +638,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
 
-            if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
+            if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
 
                 restoreMessageShown = true;
                 Dialogs.newBuilder(this)
@@ -648,7 +648,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                         .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
                             dialog.dismiss();
                             DataStore.resetNewlyCreatedDatabase();
-                            backupUtils.restore(BackupUtils.newestBackupFolder());
+                            backupUtils.restore(BackupUtils.newestBackupFolder(false));
                         })
                         .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
                             dialog.cancel();
