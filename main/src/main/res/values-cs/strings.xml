@@ -657,7 +657,7 @@
     <string name="about_system_write_logcat_success">Soubor protokolu \"%1$s\" zapsán do složky \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
     <string name="about_system_write_infos_downloadmanager">Zobrazit stažené</string>
-    <string name="changelog_github">Seznam všech změn</string>
+    <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
     <string name="about_contributors_recent">Nedávní přispěvatelé</string>
