@@ -645,7 +645,7 @@
     <string name="about_system_write_logcat_success">Fichier journal \"%1$s\" écrit dans le dossier \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
     <string name="about_system_write_infos_downloadmanager">Afficher les téléchargements</string>
-    <string name="changelog_github">Liste de toutes les modifications</string>
+    <string name="about_changelog_full">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
     <string name="about_contributors_recent">Contributeurs récents</string>
