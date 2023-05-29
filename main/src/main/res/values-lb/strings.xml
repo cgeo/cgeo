@@ -369,7 +369,7 @@
     <string name="about_system_write_logcat_type_standard">Standard</string>
     <string name="about_system_write_logcat_type_extended">Erweidert</string>
     <string name="about_system_write_logcat_error">Feeler beim Schreiwe vun der Logdatei</string>
-    <string name="changelog_github">Lëscht mat allen Ännerungen</string>
+    <string name="about_changelog_full">Lëscht mat allen Ännerungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Papp vum c:geo</string>
     <string name="about_contributors_recent">Rezent Mataarbechter</string>
