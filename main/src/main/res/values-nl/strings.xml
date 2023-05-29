@@ -646,7 +646,7 @@
     <string name="about_system_write_logcat_success">Logbestand \"%1$s\" geschreven naar map \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fout bij schrijven naar logbestand</string>
     <string name="about_system_write_infos_downloadmanager">Bekijk downloads</string>
-    <string name="changelog_github">Lijst met alle wijzigingen</string>
+    <string name="about_changelog_full">Lijst met alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
     <string name="about_contributors_recent">Recente bijdragers</string>
