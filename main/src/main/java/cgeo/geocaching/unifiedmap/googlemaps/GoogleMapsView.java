@@ -60,7 +60,7 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
     public void init(final UnifiedMapActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
 //        HideActionBarUtils.setContentView(activity, R.layout.unifiedmap_googlemaps, true);
-        rootView = null;//activity.findViewById(R.id.unifiedmap_gm);
+        rootView = null; //activity.findViewById(R.id.unifiedmap_gm);
         mMapView = activity.findViewById(R.id.mapViewGM);
 
         // add map fragment

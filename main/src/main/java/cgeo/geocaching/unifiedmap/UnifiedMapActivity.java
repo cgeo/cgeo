@@ -187,7 +187,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (mapActivity == null) {
                 return false;
             }
-            Pair<Location, Float> positionAndHeading = mapActivity.viewModel.getPositionAndHeading().getValue();
+            final Pair<Location, Float> positionAndHeading = mapActivity.viewModel.getPositionAndHeading().getValue();
             if (positionAndHeading == null) {
                 return true;
             }

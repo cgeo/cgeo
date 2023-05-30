@@ -24,7 +24,7 @@ public abstract class AbstractMapFragment extends Fragment {
     protected AbstractTileProvider currentTileProvider;
 
 
-    public AbstractMapFragment(@LayoutRes int contentLayoutId) {
+    public AbstractMapFragment(final @LayoutRes int contentLayoutId) {
         super(contentLayoutId);
     }
 
@@ -33,7 +33,7 @@ public abstract class AbstractMapFragment extends Fragment {
         currentTileProvider = newSource;
     }
 
-    public abstract boolean supportsTileSource(final AbstractTileProvider newSource);
+    public abstract boolean supportsTileSource(AbstractTileProvider newSource);
 
     public void init(final int initialZoomLevel, @Nullable final Geopoint initialPosition, final Runnable onMapReadyTasks) {
         zoomLevel = initialZoomLevel;

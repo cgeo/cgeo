@@ -50,7 +50,6 @@ import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.tiling.TileSource;
 
 public class MapsforgeVtmFragment extends AbstractMapFragment {
-    private MapView mMapView;
     private Map mMap;
     private GroupedList<Layer> mMapLayers;
     protected TileLayer baseMap;
@@ -69,10 +68,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mMapView = requireView().findViewById(R.id.mapViewVTM);
+        final MapView mMapView = requireView().findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
         mMapLayers = new GroupedList<>(mMap.layers(), 4);
         setMapRotation(Settings.getMapRotation());
@@ -98,23 +97,23 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         super.onResume();
         initLayers();
         applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
-//        mMapView.onResume(); needed?
+//        mMapView.onResume(); needed? probably not, as the view receives the normal lifecycle
     }
 
     @Override
     public void onDestroy() {
-//        mMapView.onDestroy(); needed?
+//        mMapView.onDestroy(); needed? probably not, as the view receives the normal lifecycle
         themeHelper.disposeTheme();
         super.onDestroy();
     }
 
     @Override
-    public boolean supportsTileSource(AbstractTileProvider newSource) {
+    public boolean supportsTileSource(final AbstractTileProvider newSource) {
         return newSource instanceof AbstractMapsforgeTileProvider;
     }
 
     @Override
-    public void setTileSource(AbstractTileProvider newSource) {
+    public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
         ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
         startMap();
@@ -175,7 +174,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void setCenter(Geopoint geopoint) {
+    public void setCenter(final Geopoint geopoint) {
         mMap.animator().animateTo(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
     }
 
@@ -191,7 +190,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void zoomToBounds(Viewport bounds) {
+    public void zoomToBounds(final Viewport bounds) {
         zoomToBounds(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()));
     }
 
@@ -207,7 +206,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void setZoom(int zoomLevel) {
+    public void setZoom(final int zoomLevel) {
         final MapPosition pos = mMap.getMapPosition();
         pos.setZoomLevel(zoomLevel);
         mMap.setMapPosition(pos);
@@ -218,7 +217,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void setMapRotation(int mapRotation) {
+    public void setMapRotation(final int mapRotation) {
         mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
         super.setMapRotation(mapRotation);
     }
@@ -229,7 +228,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void setBearing(float bearing) {
+    public void setBearing(final float bearing) {
         final MapPosition pos = mMap.getMapPosition();
         pos.setBearing(bearing);
         mMap.setMapPosition(pos);

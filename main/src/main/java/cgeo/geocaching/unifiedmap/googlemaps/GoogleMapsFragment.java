@@ -40,7 +40,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         // add map fragment
@@ -55,7 +55,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(final @NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -102,7 +102,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //    }
 
     @Override
-    public boolean supportsTileSource(AbstractTileProvider newSource) {
+    public boolean supportsTileSource(final AbstractTileProvider newSource) {
         return newSource instanceof AbstractGoogleTileProvider;
     }
 
@@ -118,7 +118,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void setCenter(Geopoint geopoint) {
+    public void setCenter(final Geopoint geopoint) {
         if (mMap != null) {
             mapController.animateTo(new GoogleGeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6()));
         }
@@ -178,7 +178,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //    }
 
     @Override
-    public void zoomToBounds(Viewport bounds) {
+    public void zoomToBounds(final Viewport bounds) {
         if (mMap != null) {
             mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
             mapController.animateTo(new GoogleGeoPoint(bounds.getCenter().getLatitudeE6(), bounds.getCenter().getLongitudeE6()));
@@ -195,7 +195,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void setZoom(int zoomLevel) {
+    public void setZoom(final int zoomLevel) {
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
         } else {
@@ -215,7 +215,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void setBearing(float bearing) {
+    public void setBearing(final float bearing) {
         // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
 
