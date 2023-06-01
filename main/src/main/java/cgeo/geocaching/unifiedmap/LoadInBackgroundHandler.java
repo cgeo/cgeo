@@ -49,7 +49,7 @@ class LoadInBackgroundHandler {
             if (activity == null) {
                 return;
             }
-            AbstractMapFragment map = activity.getMapFragment();
+            final AbstractMapFragment map = activity.getMapFragment();
             if (map == null) {
                 return;
             }

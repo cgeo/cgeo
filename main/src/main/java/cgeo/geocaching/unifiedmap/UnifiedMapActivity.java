@@ -467,15 +467,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         mapFragment.setCenter(geopoint);
     }
 
-    private Location getLocation() {
-        final Geopoint center = mapFragment.getCenter();
-        final Location loc = new Location("UnifiedMap");
-        loc.setLatitude(center.getLatitude());
-        loc.setLongitude(center.getLongitude());
-        return loc;
-    }
-
-    private void initFollowMyLocation(boolean followMyLocation) {
+    private void initFollowMyLocation(final boolean followMyLocation) {
         Settings.setFollowMyLocation(followMyLocation);
         if (followMyLocationItem != null) {
             followMyLocationItem.setIcon(followMyLocation ? R.drawable.ic_menu_mylocation : R.drawable.ic_menu_mylocation_off);
@@ -485,6 +477,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
             currentMapPosition.resetFollowMyLocation = false;
         }
+    }
+
+    private Location getLocation() {
+        final Geopoint center = mapFragment.getCenter();
+        final Location loc = new Location("UnifiedMap");
+        loc.setLatitude(center.getLatitude());
+        loc.setLongitude(center.getLongitude());
+        return loc;
     }
 
     // ========================================================================
