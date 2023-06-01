@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -16,6 +17,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -33,6 +35,7 @@ import org.oscim.core.BoundingBox;
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private final GoogleMapController mapController = new GoogleMapController();
+    private long lastTouchStart = -1;
 
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
@@ -66,7 +69,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         }
         setZoom(zoomLevel);
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
-//        ((TouchableWrapper) (requireView().findViewById(R.id.mapViewGMWrapper))).setOnTouch(this::onTouchEvent);
+        ((TouchableWrapper) (requireView().findViewById(R.id.mapViewGMWrapper))).setOnTouch(this::onTouchEvent);
 
 //        googleMap.setOnMapClickListener(latLng -> {
 //            if (activityRef.get() != null) {
@@ -77,6 +80,19 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //            }
 //        });
 //        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
+
+        mMap.setOnCameraMoveStartedListener(reason -> {
+            if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue())) {
+                viewModel.getFollowMyLocation().setValue(false);
+            }
+        });
+//        mMap.setOnCameraIdleListener(() -> {
+//            if (activityMapChangeListener != null) {
+//                final CameraPosition pos = mMap.getCameraPosition();
+//                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
+//            }
+//        });
+
         //todo more to come...
         initLayers();
         onMapReadyTasks.run();
@@ -221,16 +237,16 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     }
 
-//    private void onTouchEvent(final MotionEvent event) {
-//        if (MotionEvent.ACTION_DOWN == event.getAction()) {
-//            lastTouchStart = System.currentTimeMillis();
-//        } else if (MotionEvent.ACTION_UP == event.getAction()) {
+    private void onTouchEvent(final MotionEvent event) {
+        if (MotionEvent.ACTION_DOWN == event.getAction()) {
+            lastTouchStart = System.currentTimeMillis();
+        } else if (MotionEvent.ACTION_UP == event.getAction()) {
 //            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
 //            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
-//            lastTouchStart = -1;
-//        }
-//
-//    }
+            lastTouchStart = -1;
+        }
+
+    }
 
 
 }

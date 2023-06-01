@@ -32,9 +32,7 @@ import java.util.ArrayList;
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
-import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
-import org.oscim.core.Tile;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
 import org.oscim.layers.tile.vector.OsmTileLayer;
@@ -57,10 +55,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     protected MapsforgeThemeHelper themeHelper;
     protected Map.UpdateListener mapUpdateListener;
 
-
-    protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
-    protected int rotationWidth = rotationIndicator.getWidth();
-    protected int rotationHeight = rotationIndicator.getHeight();
+    private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
+    private final int rotationWidth = rotationIndicator.getWidth();
+    private final int rotationHeight = rotationIndicator.getHeight();
 
 
     public MapsforgeVtmFragment() {
@@ -83,9 +80,15 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
         setZoom(zoomLevel);
         mapUpdateListener = (event, mapPosition) -> {
-            if ((/*event == Map.POSITION_EVENT || */event == Map.ROTATE_EVENT)) {
+            if (event == Map.ROTATE_EVENT) {
                 repaintRotationIndicator(mapPosition.bearing);
             }
+            if (event == Map.MOVE_EVENT && Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue())) {
+                viewModel.getFollowMyLocation().setValue(false);
+            }
+//            if (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT) {
+//                activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));
+//            }
         };
         mMap.events.bind(mapUpdateListener);
 
@@ -98,6 +101,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         initLayers();
         applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
 //        mMapView.onResume(); needed? probably not, as the view receives the normal lifecycle
+//        mMapLayers.add(new MapsforgeVtmView.MapEventsReceiver(mMap));
     }
 
     @Override
@@ -175,7 +179,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     @Override
     public void setCenter(final Geopoint geopoint) {
-        mMap.animator().animateTo(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
+        final MapPosition pos = mMap.getMapPosition();
+        pos.setPosition(geopoint.getLatitude(), geopoint.getLongitude());
+        mMap.setMapPosition(pos);
     }
 
     @Override
@@ -195,9 +201,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     public void zoomToBounds(final BoundingBox bounds) {
-        final MapPosition pos = new MapPosition();
-        pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);
-        mMap.setMapPosition(pos);
+        mMap.animator().animateTo(bounds);
     }
 
     @Override
@@ -305,4 +309,31 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
         return false;
     }
+
+
+
+//    // ========================================================================
+//    // Tap handling methods
+//
+//    class MapEventsReceiver extends Layer implements GestureListener {
+//
+//        MapEventsReceiver(final Map map) {
+//            super(map);
+//        }
+//
+//        @Override
+//        public boolean onGesture(final Gesture g, final MotionEvent e) {
+//            if (g instanceof Gesture.Tap) {
+//                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+//                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), false);
+//                return true;
+//            } else if (g instanceof Gesture.LongPress) {
+//                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+//                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), true);
+//                return true;
+//            }
+//            return false;
+//        }
+//    }
+
 }

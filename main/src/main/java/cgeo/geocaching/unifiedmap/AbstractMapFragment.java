@@ -8,11 +8,13 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.oscim.core.BoundingBox;
 
@@ -22,6 +24,7 @@ public abstract class AbstractMapFragment extends Fragment {
     protected Runnable onMapReadyTasks = null;
 
     protected AbstractTileProvider currentTileProvider;
+    protected UnifiedMapViewModel viewModel;
 
 
     public AbstractMapFragment(final @LayoutRes int contentLayoutId) {
@@ -47,6 +50,12 @@ public abstract class AbstractMapFragment extends Fragment {
 
     public void prepareForTileSourceChange() {
         forEveryLayer(ILayer::destroy);
+    }
+
+    @Override
+    public void onCreate(final @Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(UnifiedMapViewModel.class);
     }
 
     @Override
@@ -151,28 +160,6 @@ public abstract class AbstractMapFragment extends Fragment {
         // default: do nothing
     }
 
-//    // ========================================================================
-//    // Map progressbar handling
-//
-//    public void showSpinner() { //todo should be handled inside UnifiedMapActivity
-//        final UnifiedMapActivity activity = activityRef.get();
-//        if (activity != null) {
-//            final View spinner = activity.findViewById(R.id.map_progressbar);
-//            if (spinner != null) {
-//                spinner.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
-//
-//    public void hideSpinner() { //todo should be handled inside UnifiedMapActivity
-//        final UnifiedMapActivity activity = activityRef.get();
-//        if (activity != null) {
-//            final View spinner = activity.findViewById(R.id.map_progressbar);
-//            if (spinner != null) {
-//                spinner.setVisibility(View.GONE);
-//            }
-//        }
-//    }
 //
 //    // ========================================================================
 //    // Tap handling methods

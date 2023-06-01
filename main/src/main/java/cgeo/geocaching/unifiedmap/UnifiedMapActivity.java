@@ -101,7 +101,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private static boolean followMyLocation = Settings.getFollowMyLocation();
     private MenuItem followMyLocationItem = null;
 
     private RouteTrackUtils routeTrackUtils = null;
@@ -166,13 +165,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
+                        if (needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(mapActivity.viewModel.getFollowMyLocation().getValue())) {
                             mapActivity.mapFragment.setCenter(new Geopoint(currentLocation));
                             mapActivity.currentMapPosition.resetFollowMyLocation = false;
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                                mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                            mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
                             // @todo: check if proximity notification needs an update
                         }
                     }
@@ -212,7 +211,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.unifiedmap_activity); // todo use HideActionBarUtils.setContentView?
+        HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
 
         viewModel = new ViewModelProvider(this).get(UnifiedMapViewModel.class);
 
@@ -244,6 +243,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         viewModel.getTrackUpdater().observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.getIndividualRoute().getValue()));
         viewModel.getIndividualRoute().observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
+        viewModel.getFollowMyLocation().observe(this, this::initFollowMyLocation);
 
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
@@ -282,6 +282,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     }
 
+    public AbstractMapFragment getMapFragment() {
+        return mapFragment;
+    }
+
     public List<ILayer> getLayers() {
         return layers;
     }
@@ -310,17 +314,17 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         tileProvider = newSource;
 //        if (oldFragment == null || !oldFragment.supportsTileSource(tileProvider)) {
-            mapFragment = tileProvider.createMapFragment();
+        mapFragment = tileProvider.createMapFragment();
 
-            if (oldFragment != null) {
-                mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true));
-            } else {
-                mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true));
-            }
+        if (oldFragment != null) {
+            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true));
+        } else {
+            mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true));
+        }
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.mapViewFragment, mapFragment)
-                    .commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.mapViewFragment, mapFragment)
+                .commit();
 //        } else {
 //            onMapReadyTasks(newSource, false);
 //        }
@@ -386,13 +390,23 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (loadInBackgroundHandler != null) {
                 loadInBackgroundHandler.onDestroy();
             }
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this, tileProvider);
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
-//        tileProvider.getMap().hideSpinner(); - should be handled from UnifiedMapActivity instead
+        hideProgressSpinner();
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
 //        onResume();
+    }
+
+    public void showProgressSpinner() {
+        final View spinner = findViewById(R.id.map_progressbar);
+        spinner.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressSpinner() {
+        final View spinner = findViewById(R.id.map_progressbar);
+        spinner.setVisibility(View.GONE);
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
@@ -449,8 +463,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
      * centers map on coords given + resets "followMyLocation" state
      **/
     private void centerMap(final Geopoint geopoint) {
-        followMyLocation = false;
-        initFollowMyLocationButton();
+        viewModel.getFollowMyLocation().setValue(false);
         mapFragment.setCenter(geopoint);
     }
 
@@ -462,10 +475,15 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return loc;
     }
 
-    private void initFollowMyLocationButton() {
+    private void initFollowMyLocation(boolean followMyLocation) {
         Settings.setFollowMyLocation(followMyLocation);
         if (followMyLocationItem != null) {
             followMyLocationItem.setIcon(followMyLocation ? R.drawable.ic_menu_mylocation : R.drawable.ic_menu_mylocation_off);
+        }
+        if (followMyLocation) {
+            final Location currentLocation = geoDirUpdate.getCurrentLocation();
+            mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+            currentMapPosition.resetFollowMyLocation = false;
         }
     }
 
@@ -547,6 +565,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
+        // init followMyLocation
+        initFollowMyLocation(Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue()));
+
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
         if (Settings.isLiveMap()) {
@@ -556,7 +577,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
             itemMapLive.setTitle(res.getString(R.string.map_live_enable));
         }
-/* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */ itemMapLive.setVisible(true);
+        /* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */
+        itemMapLive.setVisible(true);
 
         // map rotation state
         menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always (xml definition) when CGeoMap/NewMap is removed
@@ -587,10 +609,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-
         followMyLocationItem = menu.findItem(R.id.menu_toggle_mypos);
-        initFollowMyLocationButton();
-
         return result;
     }
 
@@ -636,14 +655,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             setTitle();
             */
         } else if (id == R.id.menu_toggle_mypos) {
-            followMyLocation = !followMyLocation;
-            Settings.setLiveMap(followMyLocation);
-            if (followMyLocation) {
-                final Location currentLocation = geoDirUpdate.getCurrentLocation();
-                mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
-                currentMapPosition.resetFollowMyLocation = false;
-            }
-            initFollowMyLocationButton();
+            viewModel.getFollowMyLocation().setValue(Boolean.FALSE.equals(viewModel.getFollowMyLocation().getValue()));
         } else if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
@@ -774,13 +786,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 };
 
                 final AlertDialog dialog = Dialogs.newBuilder(this)
-                    .setTitle(res.getString(R.string.map_select_multiple_items))
-                    .setAdapter(adapter, (dialog1, which) -> {
-                        if (which >= 0 && which < sorted.size()) {
-                            handleTap(sorted.get(which), isLongTap, x, y);
-                        }
-                    })
-                    .create();
+                        .setTitle(res.getString(R.string.map_select_multiple_items))
+                        .setAdapter(adapter, (dialog1, which) -> {
+                            if (which >= 0 && which < sorted.size()) {
+                                handleTap(sorted.get(which), isLongTap, x, y);
+                            }
+                        })
+                        .create();
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
             } catch (final Resources.NotFoundException e) {

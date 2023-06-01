@@ -32,6 +32,9 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     private final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
 
+    private final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
+
+
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
         final PositionHistory ph = positionHistory.getValue();
         if (ph != null) {
@@ -108,6 +111,9 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         return trackUpdater;
     }
 
+    public MutableLiveData<Boolean> getFollowMyLocation() {
+        return followMyLocation;
+    }
 
     // ========================================================================
     // Inner classes for wrapping data which strictly belongs together
