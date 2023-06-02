@@ -465,6 +465,7 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Vyber seznam</string>
     <string name="lists_title">Vyber seznamy</string>
+    <string name="lists_title_new_caches">Vybrat seznam (nové keše)</string>
     <string name="list_inbox">Uložené</string>
     <string name="list_all_lists">Všechny kešky</string>
     <string name="list_dialog_create_title">Nový seznam</string>
@@ -2207,6 +2208,12 @@
     <string name="command_rename_list_result">Seznam přejmenován</string>
     <string name="command_delete_list_result">Seznam odstraněn</string>
     <string name="command_unique_list_result">Kešky smazány z ostatních seznamů</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Doporučit tuto kešku (zbýbá %d)</item>
+        <item quantity="few">Doporučit tyto kešky (zbývá %d)</item>
+        <item quantity="many">Doporučit tyto kešky (zbývá %d)</item>
+        <item quantity="other">Doporučit tyto kešky (zbývá %d)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Přidat tuto kešku do oblíbených (zbývá %d)</item>
         <item quantity="few">Přidat tuto kešku do oblíbených (zbývá %d)</item>
