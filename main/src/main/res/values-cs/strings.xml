@@ -465,6 +465,7 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Vyber seznam</string>
     <string name="lists_title">Vyber seznamy</string>
+    <string name="lists_title_new_caches">Vybrat seznam (nové keše)</string>
     <string name="list_inbox">Uložené</string>
     <string name="list_all_lists">Všechny kešky</string>
     <string name="list_dialog_create_title">Nový seznam</string>
