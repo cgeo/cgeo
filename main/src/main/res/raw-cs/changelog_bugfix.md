@@ -1,4 +1,4 @@
 ##
-- Fix: Crash in Google Maps on certain map source changes
-- New: Display geocaching.com login error messages on home screen
-- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
+- Oprava: Pád v Mapách Google při určitých změnách zdroje mapy
+- Novinka: Zobrazení chybových hlášení na domovské obrazovce při přihlášení na geocaching.com
+- Oprava: Ukládání kešek - možnost "obnovit a zachovat přiřazení seznamu" neukládá nové kešky
