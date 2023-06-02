@@ -3,4 +3,4 @@
 ### Detaily kešky
 
 ### Obecné
-- New: Add more number emojis (separate category)
+- Novinka: Přidány další číselné emotikony (samostatná kategorie)
