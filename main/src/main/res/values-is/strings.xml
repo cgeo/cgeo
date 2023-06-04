@@ -257,7 +257,6 @@
     <string name="about_system_info_send_button">Senda með tölvupósti…</string>
     <string name="about_system_info">Kerfisupplýsingar c:geo</string>
     <string name="about_system_info_send_chooser">Senda kerfisupplýsingar</string>
-    <string name="about_changelog_full">Listi af öllum breytingum</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
