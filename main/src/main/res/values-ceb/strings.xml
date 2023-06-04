@@ -299,7 +299,6 @@
     <string name="about_system_info_send_button">Ihatag pama-agi sa mail…</string>
     <string name="about_system_info">impormasyon sa sistemang c:geo</string>
     <string name="about_system_info_send_chooser">Ihatag ang impormasyon sa sistema</string>
-    <string name="about_changelog_full">Ang listahan sa tanang kausaban</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
