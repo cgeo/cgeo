@@ -321,7 +321,6 @@
     <string name="about_system_info_send_button">Pošlji sporočilo…</string>
     <string name="about_system_write_logcat">Ustvari dnevnik napak</string>
     <string name="about_system_write_logcat_error">Napaka pri pisanju zapisa</string>
-    <string name="about_changelog_full">Seznam vseh sprememb</string>
     <string name="about_nutshellmanual">Spletni priročnik</string>
     <string name="about_contributors_specialthanks">Posebne zahvale</string>
     <string name="contribution_code">Koda</string>
