@@ -101,7 +101,8 @@ public final class SystemInformation {
                 .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
                 .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
-                .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
+                .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
+                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never")
                 .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
                 .append("\n- Live map mode: ").append(Settings.isLiveMap())
                 .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
@@ -234,7 +235,7 @@ public final class SystemInformation {
     private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
         body.append("\n- PersistedDocumentUris: #").append(PersistableUri.values().length);
         for (PersistableUri persDocUri : PersistableUri.values()) {
-            body.append("\n- ").append(persDocUri);
+            body.append("\n  - ").append(persDocUri);
         }
     }
 

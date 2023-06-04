@@ -243,7 +243,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
                 markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogBase);
                 markwon.setMarkdown(binding.changelogRelease, changelogBugfix);
             }
-            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
+            binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, getString(R.string.changelog_full)));
         }
     }
 

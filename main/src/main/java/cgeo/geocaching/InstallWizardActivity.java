@@ -235,8 +235,8 @@ public class InstallWizardActivity extends AppCompatActivity {
                 setButton(button3, R.string.wizard_advanced_restore_label, v -> {
                     setButtonToDone();
                     DataStore.resetNewlyCreatedDatabase();
-                    if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
-                        backupUtils.restore(BackupUtils.newestBackupFolder());
+                    if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+                        backupUtils.restore(BackupUtils.newestBackupFolder(false));
                     } else {
                         backupUtils.selectBackupDirIntent();
                     }
