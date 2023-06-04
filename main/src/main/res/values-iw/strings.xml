@@ -319,7 +319,6 @@
     <string name="about_help">עזרה</string>
     <string name="about_system_include">נא לכלול את פרטי המערכת הבאים בעת שליחת דוח באגים או בקשת מידע נוסף אודות c:geo:</string>
     <string name="about_system_info_send_button">Send by mail&#8230;</string>
-    <string name="about_changelog_full">פירוט כל השינויים</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
