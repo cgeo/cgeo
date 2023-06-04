@@ -657,7 +657,6 @@
     <string name="about_system_write_logcat_success">Súbor denníka \"%1$s\" zapísaný do priečinka \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="about_system_write_infos_downloadmanager">Zobraziť prevzaté súbory</string>
-    <string name="about_changelog_full">Zoznam všetkých zmien</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
     <string name="about_contributors_recent">Nedávni prispievatelia</string>
