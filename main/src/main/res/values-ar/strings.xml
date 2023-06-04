@@ -314,7 +314,6 @@
     <string name="about_system_info_send_button">إرسال بالبريد الإلكتروني&#8230;</string>
     <string name="about_system_info">معلومات نظام الـ c:geo</string>
     <string name="about_system_info_send_chooser">إرسال معلومات النظام</string>
-    <string name="about_changelog_full">قائمة جميع التغييرات</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
