@@ -518,7 +518,6 @@
     <string name="about_system_write_logcat_success">日誌檔案 \"%1$s\" 已寫入資料夾 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">檔案寫入錯誤</string>
     <string name="about_system_write_infos_downloadmanager">查看下載的東西</string>
-    <string name="about_changelog_full">所有改變的列表</string>
     <string name="about_nutshellmanual">線上手冊</string>
     <string name="about_contributors_carnerodetails">當成是c:geo的爸爸XD</string>
     <string name="about_contributors_recent">當前的貢獻者</string>
