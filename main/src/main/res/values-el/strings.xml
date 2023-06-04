@@ -619,7 +619,6 @@
     <string name="about_system_write_logcat_success">Αρχείο καταγραφής \"%1$s\" γράφτηκε στο φάκελο \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
     <string name="about_system_write_infos_downloadmanager">Προβολή λήψεων</string>
-    <string name="about_changelog_full">Λίστα με όλες τις αλλαγές</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
     <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
