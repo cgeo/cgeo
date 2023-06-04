@@ -39,6 +39,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.core.util.Supplier;
 import androidx.exifinterface.media.ExifInterface;
 
 import java.io.BufferedOutputStream;
@@ -61,6 +62,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.caverock.androidsvg.SVG;
 import com.igreenwood.loupe.Loupe;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -923,6 +925,61 @@ public final class ImageUtils {
         final Matrix matrix = new Matrix();
         matrix.setRotate(angleInDegree, w / 2f, h / 2f);
         return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
+    }
+
+    /** tries to read an image from a stream supplier. Returns null if this fails. Supports normal Android bitmaps and SVG. */
+    @Nullable
+    public static Bitmap readImageFromStream(@NonNull final Supplier<InputStream> streamSupplier, @Nullable final BitmapFactory.Options bfOptions, @Nullable final Object logId) {
+        Bitmap image = null;
+        //try reading as normal bitmap first
+        try (InputStream is = streamSupplier.get()) {
+            if (is == null) {
+                Log.w("Can't open '" + logId + "' for image reading, maybe is doesn't exist?");
+                return null;
+            }
+            image = BitmapFactory.decodeStream(is, null, bfOptions);
+        } catch (Exception ex) {
+            Log.w("Error processing '" + logId + "'", ex);
+        }
+
+        if (image == null) {
+            //try to read as SVG
+            try (InputStream is = streamSupplier.get()) {
+                if (is == null) {
+                    Log.w("Can't open '" + logId + "' for image reading, maybe is doesn't exist?");
+                    return null;
+                }
+                image = ImageUtils.readSVGImageFromStream(is, logId);
+            } catch (Exception ex) {
+                Log.w("Error processing '" + logId + "'", ex);
+            }
+        }
+        return image;
+    }
+
+    /** Reads an Inputstream as SVG image. Stream is NOT CLOSED! If an error happens on read, null is returned */
+    @Nullable
+    private static Bitmap readSVGImageFromStream(@NonNull final InputStream is, @Nullable final Object logId) {
+        //For documentation of SVG lib see https://bigbadaboom.github.io/androidsvg/
+        try {
+            final SVG svg = SVG.getFromInputStream(is);
+
+            // Create a canvas to draw onto
+            final int width = svg.getDocumentWidth() == -1 ? 200 : (int) Math.ceil(svg.getDocumentWidth());
+            final int height = svg.getDocumentHeight() == -1 ? 200 : (int) Math.ceil(svg.getDocumentHeight());
+            final Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            final Canvas bmcanvas = new Canvas(image);
+
+            // Clear background to white
+            bmcanvas.drawRGB(255, 255, 255);
+
+            // Render our document onto our canvas
+            svg.renderToCanvas(bmcanvas);
+            return image;
+        } catch (Exception es) {
+            Log.w("Problem parsing '" + logId + "' as SVG", es);
+        }
+        return null;
     }
 
 }
