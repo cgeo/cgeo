@@ -640,7 +640,6 @@
     <string name="about_system_write_logcat_success">Lokitiedosto \"%1$s\" kirjoitettu kansioon \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
     <string name="about_system_write_infos_downloadmanager">Näytä lataukset</string>
-    <string name="changelog_github">Kaikki muutokset</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
     <string name="about_contributors_recent">Viimeisimmät avustajat</string>
