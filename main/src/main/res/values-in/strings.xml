@@ -307,7 +307,6 @@
     <string name="about_system_info_send_button">Kirim melalui surel&#8230;</string>
     <string name="about_system_info">c:geo sistem informasi</string>
     <string name="about_system_info_send_chooser">Mengirimkan sistem informasi</string>
-    <string name="about_changelog_full">Daftar semua perubahan</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
