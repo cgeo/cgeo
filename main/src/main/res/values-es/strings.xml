@@ -597,7 +597,6 @@
     <string name="about_system_write_logcat_success">Archivo de registro \"%1$s\" escrito en la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
     <string name="about_system_write_infos_downloadmanager">Ver Descargas</string>
-    <string name="about_changelog_full">Lista de todos los cambios</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
     <string name="about_contributors_recent">Contribuyentes recientes</string>
