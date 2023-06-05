@@ -4,4 +4,4 @@
 
 ### Algemeen
 - Nieuw: Voeg meer nunmer emojis toe (aparte categorie)
-- Change: Use different source for preview of pocket queries
+- Wijziging: gebruik een andere bron voor voorbeeld van pocket queries
