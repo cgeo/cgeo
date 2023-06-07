@@ -4,4 +4,4 @@
 
 ### Allgemein
 - Neu: Zusätzliche Zahlen-Emojis (eigene Kategorie)
-- Change: Use different source for preview of pocket queries
+- Änderung: Verwende eine andere Quelle für die Vorschau von Pocket-Queries
