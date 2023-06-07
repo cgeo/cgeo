@@ -78,7 +78,7 @@ public class PositionLayer extends Layer {
             rotateArrow();
         }
         final Bitmap localArrow = arrow;
-        if (localArrow != null) {
+        if (localArrow != null && !localArrow.isDestroyed()) {
             final int left = centerX - widthArrowHalf;
             final int top = centerY - heightArrowHalf;
             final int right = left + localArrow.getWidth();
@@ -90,7 +90,7 @@ public class PositionLayer extends Layer {
             }
             canvas.drawBitmap(localArrow, left, top);
         } else {
-            Log.d("PositionLayer.draw: localArrow=null, arrowNative=" + arrowNative);
+            Log.d("PositionLayer.draw: localArrow=null or destroyed, arrowNative=" + arrowNative);
         }
     }
 
