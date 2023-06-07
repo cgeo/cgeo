@@ -463,6 +463,7 @@
     <string name="list_menu_import">Import</string>
     <string name="list_title">Wybierz listę</string>
     <string name="lists_title">Wybierz listy</string>
+    <string name="lists_title_new_caches">Wybierz listę (nowe skrytki)</string>
     <string name="list_inbox">Zapisane</string>
     <string name="list_all_lists">Wszystkie skrytki</string>
     <string name="list_dialog_create_title">Nowa lista</string>
@@ -655,7 +656,7 @@
     <string name="about_system_write_logcat_success">Plik dziennika „%1$s” zapisany do folderu „%2$s”</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
     <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
-    <string name="changelog_github">Lista wszystkich zmian</string>
+    <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
     <string name="about_contributors_recent">Ostatni współpracownicy</string>
@@ -1357,6 +1358,7 @@
     <string name="cache_menu_open_with">Otwórz za pomocą…</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
     <string name="cache_log_too_long">c:geo nie mógł przesłać twojego wpisu, gdyż jest zbyt długi. Ale dziękujemy za próbę zapisu tak obszernego wpisu ;-)</string>
+    <string name="cache_empty_log">c:geo nie mógł przesłać twojego wpisu wizyty, ponieważ jest pusty.</string>
     <string name="cache_menu_visit_offline">Szybki log offline</string>
     <string name="cache_menu_spoilers">Zdjęcia ze spoilerami</string>
     <string name="cache_menu_around">Skrytki w pobliżu</string>

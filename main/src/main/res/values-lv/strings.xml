@@ -370,7 +370,6 @@
     <string name="about_system_write_logcat_type_standard">Standarta</string>
     <string name="about_system_write_logcat_type_extended">Detalizēts</string>
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
-    <string name="changelog_github">Visu izmaiņu saraksts</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
     <string name="about_contributors_carnerodetails">kā c:geo tēvs</string>
     <string name="about_contributors_recent">Pēdējie atbalstītāji</string>

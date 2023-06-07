@@ -450,6 +450,7 @@
     <string name="list_menu_import">가져오기</string>
     <string name="list_title">목록 선택</string>
     <string name="lists_title">목록 선택</string>
+    <string name="lists_title_new_caches">목록 선택 (새 캐시)</string>
     <string name="list_inbox">저장된 캐시</string>
     <string name="list_all_lists">모든 캐시</string>
     <string name="list_dialog_create_title">새 목록</string>
@@ -639,7 +640,6 @@
     <string name="about_system_write_logcat_success">\"%2$s\"폴더에 로그 파일 \"%1$s\"이 기록되었습니다.</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
     <string name="about_system_write_infos_downloadmanager">다운로드보기</string>
-    <string name="changelog_github">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
     <string name="about_contributors_recent">최근 기고자</string>
@@ -2132,6 +2132,9 @@
     <string name="command_rename_list_result">목록 이름 변경됨</string>
     <string name="command_delete_list_result">목록 삭제됨</string>
     <string name="command_unique_list_result">다른 목록에서 캐시 삭제함</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="other">이 캐시 추천 (%d개 남음)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="other">이 캐시를 호감캐시에 추가 (%d 남음)</item>
     </plurals>

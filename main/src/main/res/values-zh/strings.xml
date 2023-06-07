@@ -382,7 +382,6 @@
     <string name="about_system_write_logcat_type_extended">扩展的</string>
     <string name="about_system_write_logcat_success">日志文件\"%1$s\"已写入文件夹 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">写入日志文件出错</string>
-    <string name="changelog_github">全部标签列表</string>
     <string name="about_nutshellmanual">在线手册</string>
     <string name="about_contributors_carnerodetails">作为 c:geo 的创始人</string>
     <string name="about_contributors_recent">最近贡献者</string>

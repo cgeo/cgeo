@@ -313,7 +313,6 @@
     <string name="about_system_info_send_button">Si-nend sa pamamagitan ng sulat&#8230;</string>
     <string name="about_system_info">ang c:geo ay ang sistema ng impormasyon</string>
     <string name="about_system_info_send_chooser">I-send ang sistema ng impormasyon</string>
-    <string name="changelog_github">Ang listahan ng lahat ng pagbabago</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->

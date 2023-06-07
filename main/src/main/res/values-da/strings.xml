@@ -558,7 +558,6 @@
     <string name="about_system_write_logcat_success">Logfil \"%1$s\" skrevet til mappen \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="about_system_write_infos_downloadmanager">Se downloads</string>
-    <string name="changelog_github">Liste over alle ændringer</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
     <string name="about_contributors_recent">Seneste bidragsydere</string>
