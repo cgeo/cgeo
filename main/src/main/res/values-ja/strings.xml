@@ -582,7 +582,6 @@
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
-    <string name="changelog_github">すべての更新履歴</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>

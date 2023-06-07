@@ -362,7 +362,6 @@
     <string name="about_system_info_send_button">Trimite prin E-Mail…</string>
     <string name="about_system_info">c:geo - informaţii despre sistem</string>
     <string name="about_system_info_send_chooser">Trimite informaţiile despre sistem</string>
-    <string name="changelog_github">Afişează toate modificările</string>
     <string name="debug_user_error_report_title">Raportează o problemă</string>
     <string name="debug_user_error_errortext">A apărut o problemă neașteptată pe care v-am ruga să ne-o raportați:</string>
     <!-- download manager -->
