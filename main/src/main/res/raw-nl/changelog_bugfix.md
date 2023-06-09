@@ -3,3 +3,4 @@
 - Nieuw: Toon geocaching.com foutmeldingen op het startscherm
 - Oplossing: Opslaan caches - "Vernieuwen en bewaren van lijst toewijzingen" optie slaat geen nieuwe caches op
 - Oplossing: enkele zoekbalk problemen
+- Fix: SVG geochecker images not being displayed
