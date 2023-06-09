@@ -3,3 +3,4 @@
 - Neu: Login-Fehlermeldungen von geocaching.com auf dem Startbildschirm anzeigen
 - Korrektur: Caches speichern - die Option "Aktualisieren und aktuelle Listenzuordnungen beibehalten" speichert keine neuen Caches
 - Korrektur: Einige Suchleisten-Fehler
+- Fix: SVG geochecker images not being displayed
