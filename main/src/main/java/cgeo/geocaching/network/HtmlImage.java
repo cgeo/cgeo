@@ -467,19 +467,13 @@ public class HtmlImage implements Html.ImageGetter {
         bfOptions.inTempStorage = new byte[16 * 1024];
         bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
         setSampleSize(uri, bfOptions);
-        InputStream imageStream = ContentStorage.get().openForRead(uri);
-        if (imageStream == null) {
-            Log.i("Cannot open file from " + uri + ", maybe it doesnt exist");
-            return ImmutableTriple.of((Bitmap) null, null, false);
-        }
-        final Bitmap image = BitmapFactory.decodeStream(imageStream, null, bfOptions);
+        final Bitmap image = ImageUtils.readImageFromStream(() -> ContentStorage.get().openForRead(uri), bfOptions, uri);
         if (image == null) {
-            Log.w("Cannot decode bitmap from " + uri);
             return ImmutableTriple.of((Bitmap) null, null, false);
         }
         Metadata metadata = null;
         if (loadMetadata) {
-            imageStream = ContentStorage.get().openForRead(uri);
+            final InputStream imageStream = ContentStorage.get().openForRead(uri);
             if (imageStream == null) {
                 Log.i("Cannot open file from " + uri + " again for metadata, maybe it doesnt exist");
                 return ImmutableTriple.of(image, null, true);
