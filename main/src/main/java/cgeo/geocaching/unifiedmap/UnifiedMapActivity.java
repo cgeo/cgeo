@@ -53,6 +53,7 @@ import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -763,7 +764,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (isLongTap) {
                 final Geopoint gp = Geopoint.forE6(latitudeE6, longitudeE6);
                 viewModel.longTapCoords.setValue(gp);
-                MapUtils.createMapLongClickPopupMenu(this, gp, x, y, viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), null, null, new MapOptions() /*todo: params are currently just placeholder*/)
+                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), null, null, new MapOptions(), (geopoint, string) -> { } /*todo: params are currently just placeholder*/)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {

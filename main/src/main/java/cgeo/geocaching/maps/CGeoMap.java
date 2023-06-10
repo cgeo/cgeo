@@ -823,7 +823,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
             MapUtils.createMapLongClickPopupMenu(activity, new Geopoint(overlayPositionAndScale.getLongTapLatLng().latitude, overlayPositionAndScale.getLongTapLatLng().longitude),
-                            tapXY.x, tapXY.y, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), mapOptions)
+                            tapXY, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), mapOptions, this::setTarget)
                     .setOnDismissListener(menu -> overlayPositionAndScale.resetLongTapLatLng())
                     .show();
         }

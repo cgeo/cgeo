@@ -31,6 +31,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
@@ -187,12 +188,12 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
-                .setPosition(new Point(tapX, tapY - offset), (int) (offset * 1.25))
+                .setPosition(new Point(tapXY.x, tapXY.y - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
@@ -220,6 +221,10 @@ public class MapUtils {
                 .addItemClickListener(R.id.menu_add_to_route_start, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true);
                     updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
+                })
+                .addItemClickListener(R.id.menu_target, item -> {
+                    setTarget.call(longClickGeopoint, null);
+                    updateRouteTrackButtonVisibility.run();
                 })
                 .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
     }

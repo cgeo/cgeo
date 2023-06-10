@@ -1005,9 +1005,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     public void triggerLongTapContextMenu(final Point tapXY) {
         if (Settings.isLongTapOnMapActivated()) {
             MapUtils.createMapLongClickPopupMenu(this, new Geopoint(tapHandlerLayer.getLongTapLatLong().latitude, tapHandlerLayer.getLongTapLatLong().longitude),
-                            (int) tapXY.x, (int) tapXY.y, individualRoute, routeLayer,
+                            new android.graphics.Point((int) tapXY.x, (int) tapXY.y), individualRoute, routeLayer,
                             this::updateRouteTrackButtonVisibility,
-                            getCurrentTargetCache(), mapOptions)
+                            getCurrentTargetCache(), mapOptions, this::setTarget)
                     .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();
         }
@@ -1569,7 +1569,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     };
 
     private Boolean isTargetSet() {
-        return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;
+        return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;
     }
 
     private static class ResourceBitmapCacheMonitor {
