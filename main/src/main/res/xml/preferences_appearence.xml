@@ -51,6 +51,14 @@
             android:title="@string/init_quicklaunchitems"
             android:summary="@string/init_summary_quicklaunchitems"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_startscreen_home"
+            android:entries="@array/settings_startscreen"
+            android:entryValues="@array/pref_startscreen_values"
+            android:key="@string/pref_startscreen"
+            android:title="@string/settings_startscreen_title"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

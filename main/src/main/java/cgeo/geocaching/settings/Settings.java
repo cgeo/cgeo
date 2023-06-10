@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -48,7 +49,9 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
@@ -1296,6 +1299,21 @@ public class Settings {
 
     public static boolean isLightSkin(final @NonNull Context context) {
         return !isDarkThemeActive(context, getAppTheme(context));
+    }
+
+    public static Intent getStartscreenIntent(final @NonNull Activity activity) {
+        final String startscreen = getString(R.string.pref_startscreen, activity.getString(R.string.pref_value_startscreen_home));
+        if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_stored))) {
+            return AbstractBottomNavigationActivity.getBottomNavigationIntent(activity, AbstractBottomNavigationActivity.MENU_LIST);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_map))) {
+            return AbstractBottomNavigationActivity.getBottomNavigationIntent(activity, AbstractBottomNavigationActivity.MENU_MAP);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_search))) {
+            return AbstractBottomNavigationActivity.getBottomNavigationIntent(activity, AbstractBottomNavigationActivity.MENU_SEARCH);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_nearby))) {
+            return AbstractBottomNavigationActivity.getBottomNavigationIntent(activity, AbstractBottomNavigationActivity.MENU_NEARBY);
+        } else {
+            return AbstractBottomNavigationActivity.getBottomNavigationIntent(activity, AbstractBottomNavigationActivity.MENU_HOME);
+        }
     }
 
     @NonNull

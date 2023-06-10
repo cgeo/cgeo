@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -232,24 +233,24 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         return onNavigationItemSelectedDefaultBehaviour(item);
     }
 
-    public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {
-        final int id = item.getItemId();
-        final Intent launchIntent;
-
+    public static Intent getBottomNavigationIntent(final Activity fromActivity, final int id) {
         if (id == MENU_MAP) {
-            launchIntent = DefaultMap.getLiveMapIntent(this);
+            return DefaultMap.getLiveMapIntent(fromActivity);
         } else if (id == MENU_LIST) {
-            launchIntent = CacheListActivity.getActivityOfflineIntent(this);
+            return CacheListActivity.getActivityOfflineIntent(fromActivity);
         } else if (id == MENU_SEARCH) {
-            launchIntent = new Intent(this, SearchActivity.class);
+            return new Intent(fromActivity, SearchActivity.class);
         } else if (id == MENU_NEARBY) {
-            launchIntent = CacheListActivity.getNearestIntent(this);
+            return CacheListActivity.getNearestIntent(fromActivity);
         } else if (id == MENU_HOME) {
-            launchIntent = new Intent(this, MainActivity.class);
+            return new Intent(fromActivity, MainActivity.class);
         } else {
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
+    }
 
+    public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {
+        final Intent launchIntent = getBottomNavigationIntent(this, item.getItemId());
         startActivity(launchIntent);
 
         // Clear activity stack if the user actively navigates via the bottom navigation
