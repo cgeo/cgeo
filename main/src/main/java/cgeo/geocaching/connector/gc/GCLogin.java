@@ -316,6 +316,15 @@ public class GCLogin extends AbstractLogin {
         }
     }
 
+    public String getPublicGuid() {
+        try {
+            final ServerParameters params = getServerParameters();
+            return params.userInfo.publicGuid;
+        } catch (final Exception e) {
+            return "UNKNOWN";
+        }
+    }
+
     /**
      * Ensure that the website is presented in the specified language.
      *
