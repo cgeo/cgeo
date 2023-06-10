@@ -42,7 +42,7 @@ class InternalMap extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
         DefaultMap.startActivityGeoCode(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), cache.getGeocode());
     }
 
