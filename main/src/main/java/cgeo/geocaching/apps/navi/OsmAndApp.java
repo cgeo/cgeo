@@ -35,7 +35,7 @@ public class OsmAndApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         assert coords != null; // guaranteed by super class
         navigate(context, coords, cache.getName());
