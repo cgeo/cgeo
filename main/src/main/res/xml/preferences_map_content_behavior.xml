@@ -90,6 +90,12 @@
             android:summary="@string/init_summary_longtap_map"
             android:title="@string/init_longtap_map"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_showRouteMenu"
+            android:summary="@string/init_summary_show_routing_menu"
+            android:title="@string/init_show_routing_menu"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_maprotation_manual"
             android:entries="@array/maprotation"

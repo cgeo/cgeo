@@ -1432,6 +1432,10 @@ public class Settings {
         return getBoolean(R.string.pref_longTapOnMap, true);
     }
 
+    public static boolean isShowRouteMenu() {
+        return getBoolean(R.string.pref_showRouteMenu, true);
+    }
+
     public static boolean getCreateUDCuseGivenList() {
         return getBoolean(R.string.pref_createUDCuseGivenList, false);
     }
