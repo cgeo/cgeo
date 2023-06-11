@@ -587,7 +587,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     public void handleCacheWaypointLongTap(final IWaypoint item, final int tapX, final int tapY) {
         final RouteItem routeItem = new RouteItem(item);
-        if (MapUtils.isPartOfRoute(routeItem, individualRoute)) {
+        if (Settings.isShowRouteMenu()) {
             MapUtils.createCacheWaypointLongClickPopupMenu(activity, routeItem, tapX, tapY, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility)
 //                    .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();

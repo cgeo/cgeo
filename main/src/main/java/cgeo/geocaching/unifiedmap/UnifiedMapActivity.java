@@ -838,7 +838,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (isLongTap) {
             // toggle route item
             if (Settings.isLongTapOnMapActivated()) {
-                if (MapUtils.isPartOfRoute(item, viewModel.getIndividualRoute().getValue())) {
+                if (Settings.isShowRouteMenu()) {
                     MapUtils.createCacheWaypointLongClickPopupMenu(this, item, tapX, tapY, viewModel.getIndividualRoute().getValue(), viewModel, null)
 //                            .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                             .show();
