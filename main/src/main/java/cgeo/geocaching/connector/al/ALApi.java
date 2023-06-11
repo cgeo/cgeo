@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.al;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -201,6 +202,7 @@ final class ALApi {
         query.setTake(100);
         query.setRadiusInMeters(distanceInMeters);
         query.setRecentlyPublishedDays(daysSincePublish);
+        query.setCallingUserPublicGuid(GCLogin.getInstance().getPublicGuid());
         try {
             final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
@@ -350,7 +352,7 @@ final class ALApi {
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
+            cache.setFound(response.get("IsComplete").asBoolean());
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
