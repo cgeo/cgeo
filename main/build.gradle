@@ -714,7 +714,7 @@ pmd {
 tasks.register('pmd', Pmd) {
     group 'verification'
     description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
-    ruleSetFiles = rootProject.files("pmd.xml")
+    ruleSetFiles = rootProject.files("pmd-ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
     exclude '**/gen/**'
