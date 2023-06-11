@@ -43,7 +43,7 @@ public class IndividualRouteLayer implements ILayer {
     public IndividualRouteLayer(final AppCompatActivity activity) {
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getIndividualRoute().observe(activity, individualRoute -> {
+        viewModel.individualRoute.observe(activity, individualRoute -> {
 
             for (String key : geoItemLayer.keySet()) {
                 if (!KEY_INDIVIDUAL_ROUTE.equals(key)) {

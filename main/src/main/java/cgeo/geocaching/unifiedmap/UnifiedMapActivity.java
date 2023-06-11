@@ -165,7 +165,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(mapActivity.viewModel.getFollowMyLocation().getValue())) {
+                        if (needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(mapActivity.viewModel.followMyLocation.getValue())) {
                             mapActivity.mapFragment.setCenter(new Geopoint(currentLocation));
                             mapActivity.currentMapPosition.resetFollowMyLocation = false;
                         }
@@ -186,7 +186,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (mapActivity == null) {
                 return false;
             }
-            final Pair<Location, Float> positionAndHeading = mapActivity.viewModel.getPositionAndHeading().getValue();
+            final Pair<Location, Float> positionAndHeading = mapActivity.viewModel.positionAndHeading.getValue();
             if (positionAndHeading == null) {
                 return true;
             }
@@ -241,9 +241,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
 
-        viewModel.getTrackUpdater().observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.getIndividualRoute().getValue()));
-        viewModel.getIndividualRoute().observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
-        viewModel.getFollowMyLocation().observe(this, this::initFollowMyLocation);
+        viewModel.trackUpdater.observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue()));
+        viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
+        viewModel.followMyLocation.observe(this, this::initFollowMyLocation);
 
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
@@ -264,7 +264,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // FilterUtils.initializeFilterBar(this, this);
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.getIndividualRoute().notifyDataChanged(), this);
+        Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.individualRoute.notifyDataChanged(), this);
         viewModel.reloadIndividualRoute();
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
@@ -342,8 +342,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
             // routes / tracks popup
-            findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.getIndividualRoute().getValue(), viewModel::setTarget));
-            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.getIndividualRoute().getValue());
+            findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
+            routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue());
 
             // create geoitem layers
 //            geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
@@ -463,7 +463,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
      * centers map on coords given + resets "followMyLocation" state
      **/
     private void centerMap(final Geopoint geopoint) {
-        viewModel.getFollowMyLocation().setValue(false);
+        viewModel.followMyLocation.setValue(false);
         mapFragment.setCenter(geopoint);
     }
 
@@ -492,7 +492,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     @Nullable
     private Geocache getCurrentTargetCache() {
-        final UnifiedMapViewModel.Target target = viewModel.getTarget().getValue();
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
         if (target != null && StringUtils.isNotBlank(target.geocode)) {
             return DataStore.loadCache(target.geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
@@ -544,7 +544,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     private boolean isTargetSet() {
-        return viewModel.getTarget() != null;
+        return viewModel.target != null;
     }
 
     // ========================================================================
@@ -566,7 +566,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
         // init followMyLocation
-        initFollowMyLocation(Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue()));
+        initFollowMyLocation(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()));
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
@@ -655,7 +655,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             setTitle();
             */
         } else if (id == R.id.menu_toggle_mypos) {
-            viewModel.getFollowMyLocation().setValue(Boolean.FALSE.equals(viewModel.getFollowMyLocation().getValue()));
+            viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
         } else if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
@@ -665,8 +665,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapFragment.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
-        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.getPositionHistory().setValue(Settings.isMapTrail() ? new PositionHistory() : null), () -> {
-            PositionHistory positionHistory = viewModel.getPositionHistory().getValue();
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(Settings.isMapTrail() ? new PositionHistory() : null), () -> {
+            PositionHistory positionHistory = viewModel.positionHistory.getValue();
             if (positionHistory == null) {
                 positionHistory = new PositionHistory();
             }
@@ -679,7 +679,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_theme_options) {
             mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(viewModel.getIndividualRoute().getValue(), viewModel::setTarget);
+            routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
         } else if (id == R.id.menu_select_mapview) {
             // dynamically create submenu to reflect possible changes in map sources
             final View v = findViewById(R.id.menu_select_mapview);
@@ -762,9 +762,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (result.size() == 0) {
             if (isLongTap) {
                 final Geopoint gp = Geopoint.forE6(latitudeE6, longitudeE6);
-                viewModel.getLongTapCoords().setValue(gp);
-                MapUtils.createMapLongClickPopupMenu(this, gp, x, y, viewModel.getIndividualRoute().getValue(), route -> viewModel.getIndividualRoute().notifyDataChanged(), null, null, new MapOptions() /*todo: params are currently just placeholder*/)
-                        .setOnDismissListener(d -> viewModel.getLongTapCoords().setValue(null))
+                viewModel.longTapCoords.setValue(gp);
+                MapUtils.createMapLongClickPopupMenu(this, gp, x, y, viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), null, null, new MapOptions() /*todo: params are currently just placeholder*/)
+                        .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
                 HideActionBarUtils.toggleActionBar(this);
@@ -806,8 +806,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (isLongTap) {
             // toggle route item
             if (Settings.isLongTapOnMapActivated()) {
-                if (MapUtils.isPartOfRoute(item, viewModel.getIndividualRoute().getValue())) {
-                    MapUtils.createCacheWaypointLongClickPopupMenu(this, item, tapX, tapY, viewModel.getIndividualRoute().getValue(), viewModel, null)
+                if (MapUtils.isPartOfRoute(item, viewModel.individualRoute.getValue())) {
+                    MapUtils.createCacheWaypointLongClickPopupMenu(this, item, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null)
 //                            .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                             .show();
                 } else {

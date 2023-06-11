@@ -83,8 +83,8 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
             if (event == Map.ROTATE_EVENT) {
                 repaintRotationIndicator(mapPosition.bearing);
             }
-            if (event == Map.MOVE_EVENT && Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue())) {
-                viewModel.getFollowMyLocation().setValue(false);
+            if (event == Map.MOVE_EVENT && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
+                viewModel.followMyLocation.setValue(false);
             }
 //            if (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT) {
 //                activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));

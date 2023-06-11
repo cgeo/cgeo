@@ -23,16 +23,23 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     // ViewModels will survive config changes, no savedInstanceState is needed
     // Don't hold an activity references inside the ViewModel!
 
+    // We might want to try LiveDataReactiveStreams as well
+
     private Tracks tracks = null;
-    private final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
-    private final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
-    private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
-    private final MutableLiveData<Target> target = new MutableLiveData<>();
+    public final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
+    /**
+     * Event based LiveData notifying about track updates
+     */
+    public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
+    public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
+    public final MutableLiveData<Target> target = new MutableLiveData<>();
 
-    private final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
-    private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
-
-    private final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
+    public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
+    /**
+     * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
+     */
+    public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
+    public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
 
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
@@ -43,24 +50,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         positionAndHeading.setValue(new Pair<>(location, heading));
     }
 
-    /**
-     * Current location and heading of the user
-     */
-    public MutableLiveData<Pair<Location, Float>> getPositionAndHeading() {
-        return positionAndHeading;
-    }
-
-    public MutableLiveData<Geopoint> getLongTapCoords() {
-        return longTapCoords;
-    }
-
-    /**
-     * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
-     */
-    public MutableLiveData<PositionHistory> getPositionHistory() {
-        return positionHistory;
-    }
-
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
         trackUpdater.setValue(new Event<>(key));
@@ -69,10 +58,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     public void setTarget(final Geopoint geopoint, final String geocode) {
         target.setValue(new Target(geopoint, geocode));
-    }
-
-    public MutableLiveData<Target> getTarget() {
-        return target;
     }
 
     public void reloadIndividualRoute() {
@@ -96,23 +81,8 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         return tracks;
     }
 
-    public ConstantLiveData<IndividualRoute> getIndividualRoute() {
-        return individualRoute;
-    }
-
     public void init(final RouteTrackUtils routeTrackUtils) {
         tracks = new Tracks(routeTrackUtils, this::setTrack);
-    }
-
-    /**
-     * Event based LiveData notifying about track updates
-     */
-    public MutableLiveData<Event<String>> getTrackUpdater() {
-        return trackUpdater;
-    }
-
-    public MutableLiveData<Boolean> getFollowMyLocation() {
-        return followMyLocation;
     }
 
     // ========================================================================

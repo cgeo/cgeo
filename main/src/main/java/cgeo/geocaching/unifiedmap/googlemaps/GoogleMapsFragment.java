@@ -82,8 +82,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
 
         mMap.setOnCameraMoveStartedListener(reason -> {
-            if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.getFollowMyLocation().getValue())) {
-                viewModel.getFollowMyLocation().setValue(false);
+            if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
+                viewModel.followMyLocation.setValue(false);
             }
         });
 //        mMap.setOnCameraIdleListener(() -> {
