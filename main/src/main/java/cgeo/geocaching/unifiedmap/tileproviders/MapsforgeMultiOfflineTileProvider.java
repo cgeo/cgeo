@@ -5,7 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
@@ -34,7 +34,7 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
     }
 
     @Override
-    public void addTileLayer(final Map map) {
+    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
         // collect metadata first: languages, zoom level range and bounding boxes
         final ArrayList<String> languages = new ArrayList<>();
         BoundingBox boundingBox = null;
@@ -43,6 +43,7 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
             source.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
             source.open();
             final MapInfo info = source.getMapInfo();
+
             source.close();
             if (info != null) {
                 checkLanguage(languages, info.languagesPreference);
@@ -64,13 +65,13 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
             TileProviderFactory.setLanguages(languages.toArray(new String[]{}));
         }
 
-        final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
-        MAP_MAPSFORGE.applyTheme();
+        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap(tileSource);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
+        fragment.applyTheme();
 
         if (boundingBox != null && !boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-            MAP_MAPSFORGE.zoomToBounds(boundingBox);
+            fragment.zoomToBounds(boundingBox);
         }
     }
 

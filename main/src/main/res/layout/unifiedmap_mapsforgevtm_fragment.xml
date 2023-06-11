@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/unifiedmap_vtm"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <org.oscim.android.MapView
         android:id="@+id/mapViewVTM"
@@ -10,10 +10,6 @@
         android:layout_height="fill_parent" />
 
     <include layout="@layout/map_bearingindicator" />
-    <include layout="@layout/filter_sort_bar" />
-    <include layout="@layout/map_distanceinfo" />
-    <include layout="@layout/map_settings_button" />
-    <include layout="@layout/map_progressbar" />
 
     <LinearLayout
         android:id="@+id/container_zoomin"

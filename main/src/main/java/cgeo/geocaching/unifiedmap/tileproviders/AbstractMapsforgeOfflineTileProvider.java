@@ -3,7 +3,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
@@ -28,14 +28,14 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
     }
 
     @Override
-    public void addTileLayer(final Map map) {
+    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
         tileSource = new MapFileTileSource();
         tileSource.setPreferredLanguage(Settings.getMapLanguage());
         tileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(mapUri));
-        final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
-        MAP_MAPSFORGE.applyTheme();
+        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap(tileSource);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
+        fragment.applyTheme();
 
         final MapInfo info = tileSource.getMapInfo();
         if (info != null) {
@@ -45,7 +45,7 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
             }
             parseZoomLevel(info.zoomLevel);
             if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-                MAP_MAPSFORGE.zoomToBounds(info.boundingBox);
+                fragment.zoomToBounds(info.boundingBox);
             }
         }
     }
