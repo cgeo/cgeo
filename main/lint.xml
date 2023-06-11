@@ -55,15 +55,35 @@
         <ignore path="res/values-*/strings.xml" />
 
         <!-- cache rating markers (drawables and color values used by the drawables) -->
-        <ignore path="res/drawable/marker_rating_*.xml" />
+        <ignore path="res/drawable/marker_rating_d_0.xml" />
+        <ignore path="res/drawable/marker_rating_d_5.xml" />
+        <ignore path="res/drawable/marker_rating_d_10.xml" />
+        <ignore path="res/drawable/marker_rating_d_15.xml" />
+        <ignore path="res/drawable/marker_rating_d_20.xml" />
+        <ignore path="res/drawable/marker_rating_d_25.xml" />
+        <ignore path="res/drawable/marker_rating_d_30.xml" />
+        <ignore path="res/drawable/marker_rating_d_35.xml" />
+        <ignore path="res/drawable/marker_rating_d_40.xml" />
+        <ignore path="res/drawable/marker_rating_d_45.xml" />
+        <ignore path="res/drawable/marker_rating_d_50.xml" />
+        <ignore path="res/drawable/marker_rating_t_0.xml" />
+        <ignore path="res/drawable/marker_rating_t_5.xml" />
+        <ignore path="res/drawable/marker_rating_t_10.xml" />
+        <ignore path="res/drawable/marker_rating_t_15.xml" />
+        <ignore path="res/drawable/marker_rating_t_20.xml" />
+        <ignore path="res/drawable/marker_rating_t_25.xml" />
+        <ignore path="res/drawable/marker_rating_t_30.xml" />
+        <ignore path="res/drawable/marker_rating_t_35.xml" />
+        <ignore path="res/drawable/marker_rating_t_40.xml" />
+        <ignore path="res/drawable/marker_rating_t_45.xml" />
+        <ignore path="res/drawable/marker_rating_t_50.xml" />
         <ignore regexp="R\.color\.marker_rating_[0-5]{1,2}" />
-
         <!-- defined in build.gradle android.buildTypes.manifestPlaceholders -->
         <ignore path="res/*/ic_launcher_*round.xml" />
     </issue>
 
     <issue id="MissingDefaultResource" severity="informational"/>
-    
+
     <!-- We've decided to stay with our slim splashscreen -->
     <issue id="CustomSplashScreen" severity="ignore"/>
 </lint>

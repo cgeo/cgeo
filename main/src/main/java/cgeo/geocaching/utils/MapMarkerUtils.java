@@ -697,6 +697,7 @@ public final class MapMarkerUtils {
         }
     }
 
+    @SuppressWarnings("DiscouragedApi")
     private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_bg, null));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
