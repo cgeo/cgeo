@@ -27,7 +27,8 @@ public interface ILoggingManager {
                       @NonNull String log,
                       @Nullable String logPassword,
                       @NonNull List<TrackableLog> trackableLogs,
-                      @NonNull ReportProblemType reportProblem);
+                      @NonNull ReportProblemType reportProblem,
+                      float rating);
 
     @NonNull
     @WorkerThread

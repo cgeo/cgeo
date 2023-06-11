@@ -590,7 +590,8 @@ final class OkapiClient {
 
     @NonNull
     @WorkerThread
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
+    @SuppressWarnings("PMD.NPathComplexity")
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.ocType);
         params.add("comment", log);
@@ -605,8 +606,13 @@ final class OkapiClient {
         if (reportProblem == ReportProblemType.NEEDS_MAINTENANCE) { // OKAPI only knows this one problem type
             params.add("needs_maintenance2", "true");
         }
-        if (logType == LogType.FOUND_IT && addToFavorites) {
-            params.add("recommend", "true");
+        if (logType == LogType.FOUND_IT) {
+            if (addToFavorites) {
+                params.add("recommend", "true");
+            }
+            if ((int) rating != 0) {
+                params.add("rating", String.valueOf((int) rating));
+            }
         }
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;

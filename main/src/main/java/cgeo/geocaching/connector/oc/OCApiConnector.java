@@ -113,6 +113,10 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         return apiSupport;
     }
 
+    public ApiBranch getApiBranch() {
+        return apiBranch;
+    }
+
     @Override
     public int getTokenPublicPrefKeyId() {
         return 0;

@@ -84,16 +84,16 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, false);
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, false, rating);
         connector.login();
         return result;
     }
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
-        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, addToFavorites);
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, addToFavorites, rating);
         connector.login();
         return result;
     }

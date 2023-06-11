@@ -53,13 +53,13 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
 
     @NonNull
     @Override
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
+        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false, rating);
     }
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
         final LogResult result;
         try {
             result = SuApi.postLog(cache, logType, date, log, addToFavorites);

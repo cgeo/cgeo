@@ -33,7 +33,8 @@ public interface ILoggingWithFavorites extends ILoggingManager {
                       @Nullable String logPassword,
                       @NonNull List<TrackableLog> trackableLogs,
                       @NonNull ReportProblemType reportProblem,
-                      boolean addToFavorites);
+                      boolean addToFavorites,
+                      float rating);
 
     /**
      * @return number of available favorite points. This number will be displayed near "add to favorites" checkbox
