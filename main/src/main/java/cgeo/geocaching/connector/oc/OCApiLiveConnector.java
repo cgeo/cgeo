@@ -43,8 +43,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED, UNKNOWN_FINDS);
 
-    public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation) {
-        super(name, host, https, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport, abbreviation);
+    public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch) {
+        super(name, host, https, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport, abbreviation, apiBranch);
 
         cS = CryptUtils.rot13(CgeoApplication.getInstance().getString(cSResId));
         this.isActivePrefKeyId = isActivePrefKeyId;
