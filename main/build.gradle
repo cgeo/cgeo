@@ -479,7 +479,7 @@ dependencies {
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
     //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
-    //See https://github.com/guardian/toolargetool 
+    //See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
@@ -700,4 +700,27 @@ tasks.register('checkstyle', Checkstyle) {
 
 tasks.named('check') {
     mustRunAfter tasks.named('checkstyle')
+}
+
+apply plugin: 'pmd'
+
+pmd {
+    consoleOutput = true
+    toolVersion = "6.55.0"
+    rulesMinimumPriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
+}
+
+tasks.register('pmd', Pmd) {
+    group 'verification'
+    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    ruleSetFiles = rootProject.files("pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
