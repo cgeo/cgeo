@@ -702,11 +702,16 @@ public final class MapMarkerUtils {
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(background));
 
-        final String packageName = CgeoApplication.getInstance().getPackageName();
-        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty)));
-        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain)));
+        if (difficulty < 0.5 && terrain < 0.5) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable));
+        } else {
+            final String packageName = CgeoApplication.getInstance().getPackageName();
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain)));
 
-        insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
+        }
+
         return buildLayerDrawable(insetsBuilder, 4, 0);
     }
 
