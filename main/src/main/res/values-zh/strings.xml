@@ -518,6 +518,7 @@
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
     <string name="init_backup_summary">请注意，此功能可以备份藏点，航点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>
