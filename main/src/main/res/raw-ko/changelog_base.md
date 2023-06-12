@@ -1,5 +1,6 @@
 ### 지도
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
 
 ### 캐시 상세정보
 
