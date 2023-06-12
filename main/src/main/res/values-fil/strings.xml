@@ -390,6 +390,7 @@
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
     <string name="init_backup_running">Gumawa ng backup para sa cache database&#8230;</string>
