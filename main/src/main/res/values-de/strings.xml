@@ -888,6 +888,7 @@
         <item>Dunkel</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Standardbildschirm</string>
     <string name="init_wallpaper">Hintergrundbild</string>
     <string name="init_summary_wallpaper">Geräte-Hintergrund als Hintergrund für den Startbildschirm anzeigen</string>
     <!-- backup / restore -->
@@ -1448,6 +1449,8 @@
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache / Wegpunkt)</string>
+    <string name="init_show_routing_menu">Routing-Menü anzeigen</string>
+    <string name="init_summary_show_routing_menu">Langes Tippen auf einen Cache zeigt ein Menü mit erweiterten Optionen, um den Cache zu einer Route hinzuzufügen/von ihr zu entfernen. Wenn deaktiviert, wird der Cache direkt zur Route hinzugefügt/von ihr entfernt.</string>
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches /Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
