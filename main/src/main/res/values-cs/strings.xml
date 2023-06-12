@@ -899,6 +899,7 @@
         <item>Světlý</item>
         <item>Tmavý</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
     <!-- backup / restore -->
