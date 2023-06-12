@@ -885,6 +885,7 @@
         <item>Chiaro</item>
         <item>Scuro</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Sfondo</string>
     <string name="init_summary_wallpaper">Mostra sfondo del dispositivo come sfondo della schermata iniziale</string>
     <!-- backup / restore -->
