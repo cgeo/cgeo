@@ -46,7 +46,7 @@ public class PositionLayer implements ILayer {
 
     public PositionLayer(final AppCompatActivity activity) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
-        viewModel.getPositionAndHeading().observe(activity, positionAndHeading -> {
+        viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
 
             if (!positionAndHeading.equals(lastPos)) {
                 lastPos = positionAndHeading;
@@ -62,7 +62,7 @@ public class PositionLayer implements ILayer {
         });
 
         // todo: hmm, better move to different layer?
-        viewModel.getLongTapCoords().observe(activity, gp -> {
+        viewModel.longTapCoords.observe(activity, gp -> {
             if (gp == null) {
                 positionLayer.remove(KEY_LONG_TAP);
             } else {

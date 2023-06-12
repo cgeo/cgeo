@@ -42,9 +42,9 @@ public class PositionHistoryLayer implements ILayer {
     public PositionHistoryLayer(final AppCompatActivity activity) {
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getPositionHistory().observe(activity, positionHistory -> drawHistory());
+        viewModel.positionHistory.observe(activity, positionHistory -> drawHistory());
 
-        viewModel.getPositionAndHeading().observe(activity, positionAndHeading -> {
+        viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
             if (!positionAndHeading.first.equals(lastPos)) {
                 lastPos = positionAndHeading.first;
                 drawHistory();
@@ -53,7 +53,7 @@ public class PositionHistoryLayer implements ILayer {
     }
 
     private void drawHistory() {
-        final PositionHistory history = viewModel.getPositionHistory().getValue();
+        final PositionHistory history = viewModel.positionHistory.getValue();
 
         // only draw if position history is currently enabled. Remove possible old history line if not.
         if (history == null || history.getHistory().isEmpty()) {
