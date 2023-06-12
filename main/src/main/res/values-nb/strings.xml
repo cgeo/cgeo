@@ -749,6 +749,7 @@
         <item>Lyst</item>
         <item>Mørkt</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Bakgrunnsbilde</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opprett sikkerhetskopi</string>

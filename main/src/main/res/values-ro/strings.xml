@@ -449,6 +449,7 @@
     <string name="init_livelist">Arată direcţia</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
     <string name="init_backup_restore">Restaurează</string>

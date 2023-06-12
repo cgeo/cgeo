@@ -897,6 +897,7 @@
         <item>Светлая</item>
         <item>Темная</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Обои</string>
     <string name="init_summary_wallpaper">Использовать обои устройства в качестве фона на главном экране</string>
     <!-- backup / restore -->

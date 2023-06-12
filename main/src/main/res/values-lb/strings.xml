@@ -488,6 +488,7 @@
     <string name="init_livelist">Richtung uweisen</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
     <string name="init_restore_title">Backup restauréieren</string>

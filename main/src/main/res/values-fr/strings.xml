@@ -885,6 +885,7 @@
         <item>Clair</item>
         <item>Sombre</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Fond d\'écran</string>
     <string name="init_summary_wallpaper">Afficher le fond d\'écran de l\'appareil comme fond d\'écran d\'accueil</string>
     <!-- backup / restore -->

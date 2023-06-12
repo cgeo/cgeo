@@ -887,6 +887,7 @@
         <item>Licht</item>
         <item>Donker</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Achtergrond</string>
     <string name="init_summary_wallpaper">Toon apparaat achtergrond als startscherm achtergrond</string>
     <!-- backup / restore -->

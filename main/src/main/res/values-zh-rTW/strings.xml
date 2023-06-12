@@ -663,6 +663,7 @@
         <item>亮色</item>
         <item>深色</item>
     </string-array>
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">建立備份</string>
     <string name="init_restore_title">還原備份</string>

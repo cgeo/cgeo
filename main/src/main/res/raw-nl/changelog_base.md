@@ -1,7 +1,12 @@
 ### Kaart
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
 
 ### Cache details
 
 ### Algemeen
-- Nieuw: Voeg meer nunmer emojis toe (aparte categorie)
-- Wijziging: gebruik een andere bron voor voorbeeld van pocket queries
+- New: Add more number emojis (separate category)
+- Change: Use different source for preview of pocket queries
+- New: Make startscreen selectable
+- New: Support target selector for additional navi apps
+- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown

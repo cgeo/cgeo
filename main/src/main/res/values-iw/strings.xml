@@ -367,6 +367,7 @@
     <string name="init_summary_address">הצגת כתובת במקום נקודות ציון על המסך הראשי</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creating backup of cache database&#8230;</string>
     <string name="init_restore_running">Restoring cache database&#8230;</string>

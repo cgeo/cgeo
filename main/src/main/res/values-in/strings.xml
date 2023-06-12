@@ -392,6 +392,7 @@
     <string name="init_livelist">Menunjukkan Arah</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
     <string name="init_backup_running">Membuat cadangan dari basis data cache&#8230;</string>

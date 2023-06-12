@@ -396,6 +396,7 @@
     <string name="init_livelist">Ipakita ang mga direksyon</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">I-backup</string>
     <string name="init_backup_running">Ang paglikha ng backup ng cahe na database&#8230;</string>

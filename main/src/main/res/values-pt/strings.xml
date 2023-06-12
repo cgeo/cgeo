@@ -885,6 +885,7 @@
         <item>Claro</item>
         <item>Escuro</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Imagem de fundo</string>
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->

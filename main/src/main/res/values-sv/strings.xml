@@ -881,6 +881,7 @@
         <item>Ljust</item>
         <item>Mörkt</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Bakgrund</string>
     <string name="init_summary_wallpaper">Visa enhetens bakgrundsbild som startskärmens bakgrund</string>
     <!-- backup / restore -->

@@ -401,6 +401,7 @@
     <string name="init_livelist">Pokaži smeri</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>

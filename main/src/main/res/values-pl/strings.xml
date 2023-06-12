@@ -366,6 +366,8 @@
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
     <string name="caches_store_background_option_add_to_list">Dodaj do listy</string>
+    <string name="caches_store_background_option_refresh_and_add">Odśwież i dodaj do listy</string>
+    <string name="caches_store_background_option_refresh_and_keep">Odśwież i zachowaj bieżące przypisania listy</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
     <plurals name="caches_store_background_result">
@@ -897,6 +899,8 @@
         <item>Jasny</item>
         <item>Ciemny</item>
     </string-array>
+    <!-- app startscreen -->
+    <string name="settings_startscreen_title">Ekran domyślny</string>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
     <!-- backup / restore -->
@@ -1461,6 +1465,7 @@
     <string name="context_map_remove_from_route">Usuń z trasy</string>
     <string name="context_map_remove_from_route_start">Usuń z początku</string>
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
+    <string name="context_map_remove_from_route_end">Usuń od końca</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
@@ -1472,6 +1477,8 @@
     <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele „Idź do”. Jest ona automatycznie tworzona po użyciu funkcji „Idź do” w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacji. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrytkę zdefiniowaną przez użytkownika)</string>
+    <string name="init_show_routing_menu">Pokaż menu wyznaczania trasy</string>
+    <string name="init_summary_show_routing_menu">Długie dotknięcie na skrytce pokazuje menu z zaawansowanymi opcjami dodawania/usuwania skrytki do/z trasy. Jeśli opcja jest wyłączona, wtedy skrytka jest po prostu dodawana/usuwana do/z trasy.</string>
     <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
     <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
     <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>

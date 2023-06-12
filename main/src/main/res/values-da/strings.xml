@@ -703,6 +703,7 @@
         <item>Lys</item>
         <item>Mørk</item>
     </string-array>
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
     <string name="init_backup_summary">Bemærk venligst, at denne funktion kan sikkerhedskopiere caches, waypoints &amp; indstillinger, men ikke cachebilleder. \nFor at kunne gendanne data hvis du mister din telefon, skal backupfilerne kopieres til en uafhængig placering.</string>
