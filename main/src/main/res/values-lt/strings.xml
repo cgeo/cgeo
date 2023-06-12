@@ -897,6 +897,7 @@
         <item>Šviesi</item>
         <item>Tamsi</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Ekrano fonas</string>
     <string name="init_summary_wallpaper">Pradžios ekrano foną rodyti kaip įrengino ekrano fonas</string>
     <!-- backup / restore -->
