@@ -1,5 +1,6 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
@@ -11,16 +12,26 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.Version;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -28,6 +39,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +61,8 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 public abstract class AbstractBottomNavigationActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
+    private static final String STATE_BACKUPUTILS = "backuputils";
+
     public static final @IdRes
     int MENU_MAP = R.id.page_map;
     public static final @IdRes
@@ -63,6 +77,11 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     int MENU_HIDE_BOTTOM_NAVIGATION = -1;
 
     private static Boolean loginSuccessful = null; // must be static so that the login state is stored while switching between activities
+
+    private static final Object initializedMutex = new Object();
+    private static boolean initialized = false;
+    private static boolean restoreMessageShown = false;
+    private BackupUtils backupUtils = null;
 
 
     private ActivityBottomNavigationBinding binding = null;
@@ -160,6 +179,18 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     public void onPause() {
         unregisterReceiver(connectivityChangeReceiver);
         super.onPause();
+    }
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        runInitAndMaintenance();
     }
 
     @Override
@@ -289,7 +320,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     /**
      * detect whether c:geo is unable to log in
-     *
      */
     public void startLoginIssueHandler() {
         if (loginSuccessful != null && !loginSuccessful) {
@@ -366,4 +396,101 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             badge.setVisible(lowPrioNotificationCounter.get() > 0);
         }
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);  // call super to make lint happy
+        backupUtils.onActivityResult(requestCode, resultCode, intent);
+    }
+
+    protected void runInitAndMaintenance() {
+        synchronized (initializedMutex) {
+            if (initialized) {
+                return;
+            }
+            initialized = true;
+        }
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "AbstractBottomNavigationActivity.runInitAndMaintenance")) {
+
+            //check database
+            final String errorMsg = DataStore.initAndCheck(false);
+            if (errorMsg != null) {
+                DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
+            }
+            cLog.add("ds");
+
+            Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
+
+            final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
+            locationDataProvider.initialize();
+            // Attempt to acquire an initial location before any real activity happens.
+            locationDataProvider.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+            cLog.add("ph");
+
+            checkRestore();
+
+            DataStore.cleanIfNeeded(this);
+
+            LocalStorage.initGeocacheDataDir();
+            if (LocalStorage.isRunningLowOnDiskSpace()) {
+                SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
+            }
+            cLog.add("ls");
+
+            confirmDebug();
+
+            //do file migrations if necessary
+            LocalStorage.migrateLocalStorage(this);
+            cLog.add("mls");
+
+            //sync map Theme folder
+            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+            cLog.add("rth");
+
+            // automated backup check
+            if (Settings.automaticBackupDue()) {
+                new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
+            }
+            cLog.add("ab");
+
+            // check for finished, but unreceived downloads
+            DownloaderUtils.checkPendingDownloads(this);
+        }
+    }
+
+    private void checkRestore() {
+        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown && BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+            restoreMessageShown = true;
+            Dialogs.newBuilder(this)
+                    .setTitle(res.getString(R.string.init_backup_restore))
+                    .setMessage(res.getString(R.string.init_restore_confirm))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
+                        dialog.dismiss();
+                        DataStore.resetNewlyCreatedDatabase();
+                        backupUtils.restore(BackupUtils.newestBackupFolder(false));
+                    })
+                    .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
+                        dialog.cancel();
+                        DataStore.resetNewlyCreatedDatabase();
+                    })
+                    .create()
+                    .show();
+        }
+    }
+
+    private void confirmDebug() {
+        if (Settings.isDebug() && !BuildConfig.DEBUG) {
+            SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
+        }
+    }
+
+
+
 }
