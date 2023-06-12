@@ -1,5 +1,6 @@
 ### Mapa
 - Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięci na skrytce/punkcie nawigacji (konfigurowalne)
+- New: Add 'Set as target' to map's long-tap popup
 
 ### Szczegóły skrytki
 
