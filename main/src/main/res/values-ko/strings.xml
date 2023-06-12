@@ -880,6 +880,7 @@
         <item>밝음</item>
         <item>어두움</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">배경화면</string>
     <string name="init_summary_wallpaper">장치 배경 화면을 홈 화면 배경으로 표시</string>
     <!-- backup / restore -->
