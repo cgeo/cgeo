@@ -400,6 +400,7 @@
     <string name="init_livelist">عرض الاتجاه</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
     <string name="init_backup_running">إنشاء نسخ إحتياطي لبيانات المخبئ&#8230;</string>
