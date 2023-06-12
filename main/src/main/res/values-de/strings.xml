@@ -887,6 +887,7 @@
         <item>Hell</item>
         <item>Dunkel</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Hintergrundbild</string>
     <string name="init_summary_wallpaper">Geräte-Hintergrund als Hintergrund für den Startbildschirm anzeigen</string>
     <!-- backup / restore -->
