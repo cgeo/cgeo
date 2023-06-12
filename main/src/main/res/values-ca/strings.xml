@@ -881,6 +881,7 @@
         <item>Clar</item>
         <item>Fosc</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Fons de pantalla</string>
     <string name="init_summary_wallpaper">Mostra el fons de pantalla del dispositiu com a fons de la pantalla d\'inici</string>
     <!-- backup / restore -->
