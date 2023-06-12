@@ -129,7 +129,6 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
-
         init();
     }
 
