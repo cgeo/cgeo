@@ -494,6 +494,7 @@
     <string name="init_livelist">Rādīt virzienu</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup">Dublētie slēpņi / starpposmi</string>
     <string name="init_backup_backup">Izveidot rezerves kopiju</string>
