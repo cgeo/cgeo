@@ -880,6 +880,7 @@
         <item>Vaalea</item>
         <item>Tumma</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Taustakuva</string>
     <string name="init_summary_wallpaper">Näytä laitteen taustakuva aloitusnäytön taustakuvana</string>
     <!-- backup / restore -->
