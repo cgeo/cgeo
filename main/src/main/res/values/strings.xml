@@ -992,6 +992,17 @@
         <item>Light</item>
         <item>Dark</item>
     </string-array>
+
+    <!-- app startscreen -->
+    <string name="settings_startscreen_title">Default screen</string>
+    <string-array name="settings_startscreen">
+        <item>@string/home_button</item>
+        <item>@string/stored_caches_button</item>
+        <item>@string/map_map</item>
+        <item>@string/advanced_search_button</item>
+        <item>@string/caches_nearby_button</item>
+    </string-array>
+
     <string name="init_wallpaper">Wallpaper</string>
     <string name="init_summary_wallpaper">Show device wallpaper as home screen background</string>
 
@@ -1614,6 +1625,8 @@
     <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
     <string name="init_longtap_map">Long tap on map</string>
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user-defined cache / waypoint)</string>
+    <string name="init_show_routing_menu">Show routing menu</string>
+    <string name="init_summary_show_routing_menu">Long tap on a cache shows a menu with advanced options to add/remove the cache to/from a route. If disabled the cache is just added/removed to/from the route.</string>
     <string name="init_ActionbarAutohide">Hide toolbar on tap</string>
     <string name="init_summary_ActionbarAutohide">Tap on free map space to hide/show the toolbar</string>
     <string name="onetime_info_longtap_disabled">By long tapping on map you can create individual routes and user-defined caches / waypoints.\n\nLong tap on map is currently disabled.\n\nYou can change this in Settings → Map → Map behavior</string>

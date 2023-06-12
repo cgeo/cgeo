@@ -1378,7 +1378,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
 
         final RouteItem routeItem = new RouteItem(item);
-        if (MapUtils.isPartOfRoute(routeItem, individualRoute)) {
+        if (Settings.isShowRouteMenu()) {
             final int tapX = (int) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - MercatorProjection.longitudeToPixelX(mapView.getViewport().bottomLeft.getLongitude(), mapSize));
             final int tapY = (int) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - MercatorProjection.latitudeToPixelY(mapView.getViewport().topRight.getLatitude(), mapSize));
             MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, individualRoute, routeLayer, this::updateRouteTrackButtonVisibility)

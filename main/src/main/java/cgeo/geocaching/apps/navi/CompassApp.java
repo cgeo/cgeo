@@ -32,7 +32,7 @@ class CompassApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
         CompassActivity.startActivityCache(context, cache);
     }
 

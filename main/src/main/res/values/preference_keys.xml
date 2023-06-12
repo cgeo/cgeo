@@ -157,6 +157,7 @@
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
     <string translatable="false" name="pref_units_imperial">units</string>
     <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
+    <string translatable="false" name="pref_startscreen">startscreen</string>
 
     <!-- category cache lists -->
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
@@ -212,6 +213,7 @@
 
     <!-- category map behavior -->
     <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
+    <string translatable="false" name="pref_showRouteMenu">showRouteMenu</string>
     <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
 
     <!-- category proximity notfication -->
@@ -399,6 +401,20 @@
         <item>@string/pref_value_theme_system_default</item>
         <item>@string/pref_value_theme_light</item>
         <item>@string/pref_value_theme_dark</item>
+    </string-array>
+
+    <!-- appearance => start screen -->
+    <string translatable="false" name="pref_value_startscreen_home">HOME</string>
+    <string translatable="false" name="pref_value_startscreen_stored">STORED</string>
+    <string translatable="false" name="pref_value_startscreen_map">MAP</string>
+    <string translatable="false" name="pref_value_startscreen_search">SEARCH</string>
+    <string translatable="false" name="pref_value_startscreen_nearby">NEARBY</string>
+    <string-array name="pref_startscreen_values">
+        <item>@string/pref_value_startscreen_home</item>
+        <item>@string/pref_value_startscreen_stored</item>
+        <item>@string/pref_value_startscreen_map</item>
+        <item>@string/pref_value_startscreen_search</item>
+        <item>@string/pref_value_startscreen_nearby</item>
     </string-array>
 
     <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>

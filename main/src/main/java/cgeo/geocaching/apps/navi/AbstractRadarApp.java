@@ -33,7 +33,7 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
         final Intent intent = createIntent(cache.getCoords());
         addIntentExtras(intent, cache);
         context.startActivity(intent);
