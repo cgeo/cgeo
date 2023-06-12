@@ -3,3 +3,4 @@
 - New: Display geocaching.com login error messages on home screen
 - Fix: Store caches - "refresh and keep list assignments" option does not store new caches
 - Fix: Some seekbar issues
+- Fix: SVG geochecker images not being displayed

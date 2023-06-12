@@ -366,6 +366,8 @@
     <string name="caches_store_background_already_stored">Niektóre skrytki są już zapisane. Co powinno się z nimi stać?</string>
     <string name="caches_store_background_option_nothing">Nic nie rób</string>
     <string name="caches_store_background_option_add_to_list">Dodaj do listy</string>
+    <string name="caches_store_background_option_refresh_and_add">Odśwież i dodaj do listy</string>
+    <string name="caches_store_background_option_refresh_and_keep">Odśwież i zachowaj bieżące przypisania listy</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Pobieranie nie powiodło się, pobrano %1$d/%2$d skrytek</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Pobieranie anulowane, pobrano %1$d/%2$d skrytek</string>
     <plurals name="caches_store_background_result">
@@ -1460,6 +1462,7 @@
     <string name="context_map_remove_from_route">Usuń z trasy</string>
     <string name="context_map_remove_from_route_start">Usuń z początku</string>
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
+    <string name="context_map_remove_from_route_end">Usuń od końca</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
