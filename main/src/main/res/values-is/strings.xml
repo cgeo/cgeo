@@ -313,6 +313,7 @@
     <string name="init_livelist">Sýna átt</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Öryggisafrit</string>
     <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>
