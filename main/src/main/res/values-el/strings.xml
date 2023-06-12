@@ -840,6 +840,7 @@
         <item>Ανοιχτόχρωμο</item>
         <item>Σκούρο</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Ταπετσαρία</string>
     <string name="init_summary_wallpaper">Εμφάνιση ταπετσαρίας συσκευής ως φόντο στην αρχική οθόνη</string>
     <!-- backup / restore -->
