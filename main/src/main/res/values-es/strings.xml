@@ -801,6 +801,7 @@
         <item>Claro</item>
         <item>Oscuro</item>
     </string-array>
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">Crear copia de seguridad</string>
     <string name="init_backup_summary">Tenga en cuenta que esta característica puede respaldar cachés, waypoints &amp; configuraciones, pero no las imágenes de caché. \nCon el fin de poder restaurar los datos incluso después de perder tu teléfono, los archivos de la copia de seguridad deben ser copiados a una ubicación independiente.</string>
