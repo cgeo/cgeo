@@ -773,6 +773,7 @@
         <item>ライト</item>
         <item>ダーク</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">壁紙</string>
     <string name="init_summary_wallpaper">端末の壁紙をホーム画面の背景として表示</string>
     <!-- backup / restore -->
