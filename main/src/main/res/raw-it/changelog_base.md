@@ -1,5 +1,6 @@
 ### Mappa
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
 
 ### Dettagli del cache
 
