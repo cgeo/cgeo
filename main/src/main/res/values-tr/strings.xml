@@ -784,6 +784,7 @@
         <item>Açık</item>
         <item>Koyu</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Duvar kağıdı</string>
     <string name="init_summary_wallpaper">Cihaz arka planını ana ekran arka planı olarak göster</string>
     <!-- backup / restore -->
