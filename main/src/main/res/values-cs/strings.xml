@@ -901,13 +901,6 @@
     </string-array>
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Výchozí obrazovka</string>
-    <string-array name="settings_startscreen">
-        <item>@string/tlačítko Domů</item>
-        <item>@string/tlačítko Uložit kešky</item>
-        <item>@string/mapa_mapa</item>
-        <item>@string/tlačítko Pokročilé vyhledávání</item>
-        <item>@string/tlačítko Kešky v blízkosti</item>
-    </string-array>
     <string name="init_wallpaper">Tapeta</string>
     <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
     <!-- backup / restore -->
