@@ -200,6 +200,15 @@
     <string translatable="false" name="ellipsis">…</string>
     <string translatable="false" name="triple_dash_vertical">┆</string>
 
+    <!-- app startscreen config item names -->
+    <string-array translatable="false" name="settings_startscreen">
+        <item>@string/home_button</item>
+        <item>@string/stored_caches_button</item>
+        <item>@string/map_map</item>
+        <item>@string/advanced_search_button</item>
+        <item>@string/caches_nearby_button</item>
+    </string-array>
+
     <!-- websites and product names -->
     <string translatable="false" name="caches_map_locus">Locus</string>
     <string translatable="false" name="settings_title_gc">Geocaching.com</string>
