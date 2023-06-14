@@ -995,13 +995,6 @@
 
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Default screen</string>
-    <string-array name="settings_startscreen">
-        <item>@string/home_button</item>
-        <item>@string/stored_caches_button</item>
-        <item>@string/map_map</item>
-        <item>@string/advanced_search_button</item>
-        <item>@string/caches_nearby_button</item>
-    </string-array>
 
     <string name="init_wallpaper">Wallpaper</string>
     <string name="init_summary_wallpaper">Show device wallpaper as home screen background</string>
