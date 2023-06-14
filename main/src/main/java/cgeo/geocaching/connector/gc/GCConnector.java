@@ -121,6 +121,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public float getRatingStep() {
+        return 0.5f;
+    }
+
+    @Override
     public String getDescription(final float rating) {
         return IVotingCapability.getDefaultFiveStarsDescription(rating);
     }

@@ -58,13 +58,19 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
 
         final ContextLogger cLog = new ContextLogger("LCA.Poster.doInBackgroundInternal(%s)", log);
         try {
+            final IConnector cacheConnector = ConnectorFactory.getConnector(taskInterface.geocache);
+            float logRating = 0;
+            if (cacheConnector instanceof IVotingCapability) {
+                logRating = getLogRating((IVotingCapability) cacheConnector);
+            }
+
             final LogResult logResult;
             if (taskInterface.loggingManager instanceof ILoggingWithFavorites) {
                 logResult = ((ILoggingWithFavorites) taskInterface.loggingManager).postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, taskInterface.binding.favoriteCheck.isChecked());
+                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, taskInterface.binding.favoriteCheck.isChecked(), logRating);
             } else {
                 logResult = taskInterface.loggingManager.postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType);
+                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, logRating);
             }
 
             ImageResult imageResult = null;
@@ -88,7 +94,6 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
 
                 // login credentials may vary from actual username
                 // Get correct author name from connector (if applicable)
-                final IConnector cacheConnector = ConnectorFactory.getConnector(taskInterface.geocache);
                 if (cacheConnector instanceof ILogin) {
                     final String username = ((ILogin) cacheConnector).getUserName();
                     if (StringUtils.isNotBlank(username)) {
@@ -180,6 +185,13 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
             publishProgress(res.getString(R.string.log_posting_twitter));
             Twitter.postTweetCache(taskInterface.geocache.getGeocode(), logNow);
         }
+    }
+
+    private float getLogRating(final IVotingCapability votingConnector) {
+        if (votingConnector != null && votingConnector.supportsVoting(taskInterface.geocache) && votingConnector.isValidRating(taskInterface.cacheVotingBar.getRating())) {
+            return taskInterface.cacheVotingBar.getRating();
+        }
+        return 0;
     }
 
     private void postCacheRating(final IConnector cacheConnector) {

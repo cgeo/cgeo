@@ -13,6 +13,7 @@ import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.connector.oc.OCApiConnector.ApiBranch;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
@@ -63,19 +64,19 @@ public final class ConnectorFactory {
             new OCCZConnector(),
             new OCApiLiveConnector("opencache.uk", "opencache.uk", true, "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret,
-                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK"),
+                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK", ApiBranch.ocpl),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", true, "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
-                    R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL"),
+                    R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL", ApiBranch.ocpl),
             new OCApiLiveConnector("opencaching.pl", "opencaching.pl", true, "OP", "CC BY-SA 3.0",
                     R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret,
-                    R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current, "OC.PL"),
+                    R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current, "OC.PL", ApiBranch.ocpl),
             new OCApiLiveConnector("opencaching.us", "www.opencaching.us", true, "OU", "CC BY-NC-SA 2.5",
                     R.string.oc_us_okapi_consumer_key, R.string.oc_us_okapi_consumer_secret,
-                    R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current, "OC.US"),
+                    R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current, "OC.US", ApiBranch.ocpl),
             new OCApiLiveConnector("opencaching.ro", "www.opencaching.ro", true, "OR", "CC BY-SA 3.0",
                     R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret,
-                    R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current, "OC.RO"),
+                    R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current, "OC.RO", ApiBranch.ocpl),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
             new TerraCachingConnector(),
