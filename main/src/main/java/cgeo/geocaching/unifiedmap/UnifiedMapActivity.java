@@ -28,6 +28,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.layers.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
@@ -95,8 +96,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
     private AbstractMapFragment mapFragment = null;
-    private AbstractGeoitemLayer<?> geoitemLayer = null;
-
     private final List<ILayer> layers = new ArrayList<>();
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
@@ -258,6 +257,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         layers.add(new PositionHistoryLayer(this));
         layers.add(new TracksLayer(this));
         layers.add(new IndividualRouteLayer(this));
+        layers.add(new GeoItemLayer(this));
 
         viewModel.init(routeTrackUtils);
 
@@ -346,9 +346,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
             routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue());
 
-            // create geoitem layers
-//            geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
-
             // react to mapType
             setMapModeFromMapType();
             switch (mapType.type) {
@@ -361,7 +358,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     // load cache, focus map on it, and set it as target
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
-                        geoitemLayer.add(cache);
+                        viewModel.geoItems.add(cache.getGeocode(), cache);
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         viewModel.setTarget(cache.getCoords(), cache.getName());
                     }
@@ -415,7 +412,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         for (String geocode : searchResult.getGeocodes()) {
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                geoitemLayer.add(temp);
+                viewModel.geoItems.add(geocode, temp);
             }
         }
     }
@@ -423,7 +420,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
         Log.e("addSearchResult: " + searchResult.size());
         for (Geocache cache : searchResult) {
-            geoitemLayer.add(cache);
+            viewModel.geoItems.add(cache.getGeocode(), cache);
         }
     }
 
@@ -433,7 +430,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             s.append(" ").append(geocode);
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                geoitemLayer.add(temp);
+                viewModel.geoItems.add(geocode, temp);
             }
         }
         Log.e("add [" + s + "]");
@@ -757,7 +754,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         bb.maxLongitudeE6 = (int) (longitudeE6 + 1.5 * deltaLong);
 
         // lookup elements touched by this
-        final LinkedList<RouteItem> result = geoitemLayer.find(bb);
+        final LinkedList<RouteItem> result = new LinkedList<>(); //todo - get real results
         Log.e("touched elements (" + result.size() + "): " + result);
 
         if (result.size() == 0) {

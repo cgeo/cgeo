@@ -37,6 +37,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private final GoogleMapController mapController = new GoogleMapController();
     private long lastTouchStart = -1;
 
+    private LatLngBounds lastBounds;
+
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
     }
@@ -81,17 +83,22 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //        });
 //        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
 
+        lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+
         mMap.setOnCameraMoveStartedListener(reason -> {
+            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
             }
         });
-//        mMap.setOnCameraIdleListener(() -> {
+        mMap.setOnCameraIdleListener(() -> {
+            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 //            if (activityMapChangeListener != null) {
 //                final CameraPosition pos = mMap.getCameraPosition();
 //                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
 //            }
-//        });
+        });
 
         //todo more to come...
         initLayers();
@@ -151,8 +158,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public BoundingBox getBoundingBox() {
-        final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-        return new BoundingBox(bounds.southwest.latitude, bounds.southwest.longitude, bounds.northeast.latitude, bounds.northeast.longitude);
+        // mMap.getProjection() needs to be called on UI thread
+        return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
     // ========================================================================

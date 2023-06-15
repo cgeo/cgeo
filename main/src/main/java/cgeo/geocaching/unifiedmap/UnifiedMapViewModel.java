@@ -4,12 +4,14 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.ConstantLiveData;
-import cgeo.geocaching.utils.Event;
+import cgeo.geocaching.utils.livedata.ConstantLiveData;
+import cgeo.geocaching.utils.livedata.Event;
+import cgeo.geocaching.utils.livedata.HashMapLiveData;
 
 import android.content.Context;
 import android.location.Location;
@@ -34,6 +36,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
+    public final HashMapLiveData<String, IWaypoint> geoItems = new HashMapLiveData<>();
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     /**
      * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
