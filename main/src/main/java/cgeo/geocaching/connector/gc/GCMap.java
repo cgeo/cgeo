@@ -212,6 +212,7 @@ public class GCMap {
                 search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? FALSE : null));
                 break;
             case HIDDEN:
+            case EVENT_DATE:
                 final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;
                 search.setPlacementDate(hiddenFilter.getMinDate(), hiddenFilter.getMaxDate());
                 break;

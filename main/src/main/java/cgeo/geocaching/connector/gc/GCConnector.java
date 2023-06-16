@@ -313,7 +313,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
                 GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
                 GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
                 GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
-                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
+                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.EVENT_DATE, GeocacheFilterType.LOG_ENTRY);
     }
 
 
