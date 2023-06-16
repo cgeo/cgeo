@@ -543,6 +543,7 @@
     <string name="cache_filter_favorites">Favorites</string>
     <string name="cache_filter_distance">Distance</string>
     <string name="cache_filter_hidden">Hidden Date</string>
+    <string name="cache_filter_eventdate">Event Date</string>
     <string name="cache_filter_logs_count">Logs Count</string>
     <string name="cache_filter_last_found">Last Found Date</string>
     <string name="cache_filter_log_entry">Log Entry</string>
@@ -710,6 +711,40 @@
         <item>1w</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+
+    <integer-array name="cache_filter_event_date_stored_values_d" translatable="false">
+        <item>-100000</item> <!-- past events -->
+        <item>0</item> <!-- today -->
+        <item>1</item> <!-- tomorrow -->
+        <item>2</item> <!-- 2 days from now -->
+        <item>3</item> <!-- 3 days from now -->
+        <item>7</item> <!-- 1 week from now -->
+        <item>14</item> <!-- 2 weeks from now -->
+        <item>30</item> <!-- 1 month from now -->
+        <item>500</item> <!-- forever in the future -->
+    </integer-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>past</item>
+        <item>today</item>
+        <item>tomorrow</item>
+        <item>2 days from now</item>
+        <item>3 days from now</item>
+        <item>1 week from now</item>
+        <item>2 weeks from now</item>
+        <item>1 month from now</item>
+        <item>all future</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>past</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1w</item>
+        <item>2w</item>
+        <item>1m</item>
+        <item>&gt;1m</item>
     </string-array>
 
     <!-- about -->
