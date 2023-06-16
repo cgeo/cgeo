@@ -10,3 +10,4 @@
 - Novinka: Možnost volby úvodní obrazovky
 - Novinka: Podpora výběru cíle pro další navigační aplikace
 - Novinka: Zobrazení otazníku v symbolu obtížnosti/terénu, pokud není známa obtížnost ani terén
+- Novinka: Možnost hlasovat během logování o keškách opencaching (OCPL)
