@@ -16,9 +16,11 @@ import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -106,8 +108,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         if (mMap != null) {
             initLayers();
         }
@@ -247,13 +249,25 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private void onTouchEvent(final MotionEvent event) {
         if (MotionEvent.ACTION_DOWN == event.getAction()) {
             lastTouchStart = System.currentTimeMillis();
-        } else if (MotionEvent.ACTION_UP == event.getAction()) {
-//            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-//            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
+
+            // get values already here, as event will return wrong data later
+            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+            final int x = (int) event.getX();
+            final int y = (int) event.getY();
+
+            requireView().postDelayed(() -> {
+                if (lastTouchStart != -1) {
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), x, y, true);
+                    lastTouchStart = -1;
+                }
+            }, ViewConfiguration.getLongPressTimeout());
+        } else if (MotionEvent.ACTION_MOVE == event.getAction()) {
+            lastTouchStart = -1;
+        } else if (MotionEvent.ACTION_UP == event.getAction() && lastTouchStart != -1) {
+            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
             lastTouchStart = -1;
         }
-
     }
-
 
 }

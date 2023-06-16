@@ -17,6 +17,7 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -50,14 +51,12 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
-import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,6 +96,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private AbstractTileProvider tileProvider = null;
     private AbstractMapFragment mapFragment = null;
     private final List<GeoItemLayer<?>> layers = new ArrayList<>();
+    GeoItemLayer<String> clickableItemsLayer;
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -253,7 +253,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // initialize layers
         layers.clear();
 
-        final GeoItemLayer<String> clickableItemsLayer = new GeoItemLayer<>("clickableItems");
+        clickableItemsLayer = new GeoItemLayer<>("clickableItems");
         final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems");
         final GeoItemLayer<String> testLayer = new GeoItemLayer<>("test");
 
@@ -266,8 +266,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         new PositionLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, nonClickableItemsLayer);
-        new IndividualRouteLayer(this, nonClickableItemsLayer);
 
+        new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
 
 
@@ -742,31 +742,24 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Map tap handling
 
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
-    //        for (ILayer layer : layers) {
-    //            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap)) {
-    //                return;
-    //            }
-    //        }
-
-        // numbers of cache markers fitting into width/height
-        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        final View v = mapFragment.requireView();
-        final float numMarkersWidth = v.getWidth() / displayMetrics.density / SIZE_CACHE_MARKER_DP;
-        final float numMarkersHeight = v.getHeight() / displayMetrics.density / SIZE_CACHE_MARKER_DP;
-
-        // lat/lon covered by single marker
-        final BoundingBox bb = mapFragment.getBoundingBox();
-        final int deltaLat = (int) ((bb.maxLatitudeE6 - bb.minLatitudeE6) / numMarkersHeight);
-        final int deltaLong = (int) ((bb.maxLongitudeE6 - bb.minLongitudeE6) / numMarkersWidth);
-
-        // calculate new bounding box, taking offset of icon vs. hotspot into account
-        bb.minLatitudeE6 = latitudeE6 - 2 * deltaLat;
-        bb.maxLatitudeE6 = latitudeE6 + deltaLat;
-        bb.minLongitudeE6 = (int) (longitudeE6 - 1.5 * deltaLong);
-        bb.maxLongitudeE6 = (int) (longitudeE6 + 1.5 * deltaLong);
 
         // lookup elements touched by this
-        final LinkedList<RouteItem> result = new LinkedList<>(); //todo - get real results
+        final LinkedList<RouteItem> result = new LinkedList<>();
+
+        for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
+            final IWaypoint wp = viewModel.geoItems.getMap().get(key);
+            if (wp != null) {
+                result.add(new RouteItem(wp));
+            } else if (isLongTap) {
+                for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
+                    if (key.equals(item.getIdentifier())) {
+                        result.add(item);
+                        break;
+                    }
+                }
+            }
+        }
+
         Log.e("touched elements (" + result.size() + "): " + result);
 
         if (result.size() == 0) {

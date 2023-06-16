@@ -37,7 +37,7 @@ public class IndividualRouteLayer {
         viewModel.individualRoute.observe(activity, individualRoute -> {
 
             for (String key : layer.keySet()) {
-                if (!KEY_INDIVIDUAL_ROUTE.equals(key)) {
+                if (key.startsWith("COORDS!")) {
                     layer.remove(key);
                 }
             }
@@ -61,17 +61,4 @@ public class IndividualRouteLayer {
 
     }
 
-//    @Override
-//    public boolean handleTap(final Context context, final Geopoint tapped, final boolean isLongTap) {
-//        final Set<String> items = geoItemLayer.getTouched(tapped);
-//        if (items.size() <= 2) { // route line + coords marker
-//            for (String item : items) {
-//                if (isLongTap && !KEY_INDIVIDUAL_ROUTE.equals(item)) {
-//                    viewModel.toggleRouteItem(context, new RouteItem(geoItemLayer.get(item).getCenter()));
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
 }
