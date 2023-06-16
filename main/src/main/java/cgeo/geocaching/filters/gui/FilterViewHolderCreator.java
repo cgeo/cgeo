@@ -103,6 +103,12 @@ public class FilterViewHolderCreator {
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
                 break;
+            case EVENT_DATE:
+                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
+                        LocalizationUtils.getIntArray(R.array.cache_filter_event_date_stored_values_d),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label_short));
+                break;
             case LAST_FOUND:
                 final int[] values = LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d);
                 result = new DateRangeFilterViewHolder<LastFoundGeocacheFilter>(true,
