@@ -26,9 +26,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
-import cgeo.geocaching.unifiedmap.layers.GeoItemLayer;
+import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
@@ -96,7 +96,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
     private AbstractMapFragment mapFragment = null;
-    private final List<ILayer> layers = new ArrayList<>();
+    private final List<GeoItemLayer<?>> layers = new ArrayList<>();
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -252,12 +252,24 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // initialize layers
         layers.clear();
-        layers.add(new GeoItemTestLayer());
-        layers.add(new PositionLayer(this));
-        layers.add(new PositionHistoryLayer(this));
-        layers.add(new TracksLayer(this));
-        layers.add(new IndividualRouteLayer(this));
-        layers.add(new GeoItemLayer(this));
+
+        final GeoItemLayer<String> clickableItemsLayer = new GeoItemLayer<>("clickableItems");
+        final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems");
+        final GeoItemLayer<String> testLayer = new GeoItemLayer<>("test");
+
+        layers.add(clickableItemsLayer);
+        layers.add(nonClickableItemsLayer);
+        layers.add(testLayer);
+
+        new GeoItemTestLayer().initforUnifiedMap(testLayer);
+
+        new PositionLayer(this, nonClickableItemsLayer);
+        new PositionHistoryLayer(this, nonClickableItemsLayer);
+        new TracksLayer(this, nonClickableItemsLayer);
+        new IndividualRouteLayer(this, nonClickableItemsLayer);
+
+        new GeoItemsLayer(this, clickableItemsLayer);
+
 
         viewModel.init(routeTrackUtils);
 
@@ -287,7 +299,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         return mapFragment;
     }
 
-    public List<ILayer> getLayers() {
+    public List<GeoItemLayer<?>> getLayers() {
         return layers;
     }
 
@@ -730,11 +742,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Map tap handling
 
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
-        for (ILayer layer : layers) {
-            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap)) {
-                return;
-            }
-        }
+    //        for (ILayer layer : layers) {
+    //            if (layer.handleTap(this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap)) {
+    //                return;
+    //            }
+    //        }
 
         // numbers of cache markers fitting into width/height
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();

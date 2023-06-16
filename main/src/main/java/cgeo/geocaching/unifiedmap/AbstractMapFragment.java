@@ -3,7 +3,7 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
@@ -45,11 +45,11 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
     protected void initLayers() {
-        forEveryLayer(layer -> layer.init(createGeoItemProviderLayer()));
+        forEveryLayer(layer -> layer.setProvider(createGeoItemProviderLayer(), 0));
     }
 
     public void prepareForTileSourceChange() {
-        forEveryLayer(ILayer::destroy);
+        forEveryLayer(GeoItemLayer::destroy);
     }
 
     @Override
@@ -66,12 +66,12 @@ public abstract class AbstractMapFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        forEveryLayer(ILayer::destroy);
+        forEveryLayer(GeoItemLayer::destroy);
     }
 
-    private void forEveryLayer(final Consumer<ILayer> consumer) {
+    private void forEveryLayer(final Consumer<GeoItemLayer<?>> consumer) {
         final UnifiedMapActivity activity = (UnifiedMapActivity) requireActivity();
-        for (ILayer layer : activity.getLayers()) {
+        for (GeoItemLayer<?> layer : activity.getLayers()) {
             consumer.accept(layer);
         }
     }

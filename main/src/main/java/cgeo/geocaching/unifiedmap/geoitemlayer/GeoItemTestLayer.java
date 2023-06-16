@@ -30,12 +30,21 @@ import java.util.Set;
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /** This is a test layer to experiment with unified geoitem layers. It is only activated with a specific developer setting */
-public class GeoItemTestLayer implements ILayer {
+public class GeoItemTestLayer {
 
     private static final Geopoint CENTER = new Geopoint(40, 10);
 
     private GeoItemLayer<String> testLayer = new GeoItemLayer<>("test");
     private Disposable stopper;
+
+    public void initforUnifiedMap(final GeoItemLayer<String> layer) {
+        if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
+            return;
+        }
+        destroy();
+        testLayer = layer;
+        this.stopper = startData();
+    }
 
     public void init(final IProviderGeoItemLayer<?> provider) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
@@ -61,15 +70,14 @@ public class GeoItemTestLayer implements ILayer {
         }
     }
 
-    @Override
-    public boolean handleTap(final Context ctx, final Geopoint tapped, final boolean isLongTap) {
+    public void handleTap(final Context ctx, final Geopoint tapped, final boolean isLongTap) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
-            return false;
+            return;
         }
 
         final Set<String> touched = testLayer.getTouched(tapped);
         if (touched.isEmpty()) {
-            return false;
+            return;
         }
 
         final String message = CollectionStream.of(touched).map(s -> "* " + s + " (`" + testLayer.get(s) + "`)").toJoinedString("\n");
@@ -80,7 +88,6 @@ public class GeoItemTestLayer implements ILayer {
             SimpleDialog.ofContext(ctx).setTitle(TextParam.text("Touched items")).setMessage(TextParam.text(message).setMarkdown(true))
                     .show();
         }
-        return true;
     }
 
     private Disposable startData() {
