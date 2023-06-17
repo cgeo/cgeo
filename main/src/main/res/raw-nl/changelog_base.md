@@ -10,4 +10,4 @@
 - Nieuw: Maak startscherm selecteerbaar
 - Nieuw: Ondersteun doel selecteur voor extra navi apps
 - Nieuw: Toon vraagteken in moeilijkheid/terrein symbool, als zowel moeilijkheidsgraad als terrein onbekend zijn
-- New: Option to vote on opencaching (OCPL) caches during logging
+- Nieuw: Optie om te stemmen op opencaching (OCPL) caches tijdens het loggen
