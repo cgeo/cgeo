@@ -1,6 +1,8 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.CachePopup;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
@@ -31,6 +33,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
+import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
@@ -63,6 +66,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -266,6 +270,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         new PositionLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, nonClickableItemsLayer);
+        new NavigationTargetLayer(this, nonClickableItemsLayer);
 
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
@@ -501,50 +506,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Routes, tracks and targets handling
 
     @Nullable
-    private Geocache getCurrentTargetCache() {
+    public Geocache getCurrentTargetCache() {
         final UnifiedMapViewModel.Target target = viewModel.target.getValue();
         if (target != null && StringUtils.isNotBlank(target.geocode)) {
             return DataStore.loadCache(target.geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
         return null;
     }
-
-    // todo observe viewmodel.getTarget()
-//    private void setTarget(final Geopoint geopoint, final String geocode) {
-//        AbstractPositionLayer positionLayer = tileProvider.getMap().positionLayer;
-//        if (positionLayer == null) {
-//            positionLayer = tileProvider.getMap().configPositionLayer(true);
-//        }
-//        if (positionLayer != null) {
-//            positionLayer.mapDistanceDrawer.setLastNavTarget(geopoint);
-//            if (StringUtils.isNotBlank(geocode)) {
-//                positionLayer.mapDistanceDrawer.setTargetGeocode(geocode);
-//                final Geocache target = getCurrentTargetCache();
-//                positionLayer.mapDistanceDrawer.setTarget(target != null ? target.getName() : StringUtils.EMPTY);
-//                positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
-//                if (positionLayer.mapDistanceDrawer.getLastNavTarget() == null && target != null) {
-//                    positionLayer.mapDistanceDrawer.setLastNavTarget(target.getCoords());
-//                }
-//            } else {
-//                positionLayer.mapDistanceDrawer.setTargetGeocode(null);
-//                positionLayer.mapDistanceDrawer.setTarget(null);
-//                if (tileProvider.getMap().positionLayer != null) {
-//                    tileProvider.getMap().positionLayer.setDestination(null);
-//                }
-//            }
-//            /*
-//            if (navigationLayer != null) {
-//                navigationLayer.setDestination(lastNavTarget);
-//                navigationLayer.requestRedraw();
-//            }
-//            if (distanceView != null) {
-//                distanceView.setDestination(lastNavTarget);
-//                distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
-//            }
-//            */
-//        }
-//        ActivityMixin.invalidateOptionsMenu(this);
-//    }
 
     // glue method for old map
     // can be removed when removing CGeoMap and NewMap, routeTrackUtils need to be adapted then
@@ -554,7 +522,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     private boolean isTargetSet() {
-        return viewModel.target != null;
+        return viewModel.target.getValue() != null;
     }
 
     // ========================================================================
@@ -736,6 +704,17 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
+            final AbstractDialogFragment.TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
+            if (targetInfo != null) {
+                if (Settings.isAutotargetIndividualRoute()) {
+                    Settings.setAutotargetIndividualRoute(false);
+                    Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                }
+                viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
+            }
+        }
     }
 
     // ========================================================================

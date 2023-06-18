@@ -1,4 +1,4 @@
-package cgeo.geocaching.unifiedmap;
+package cgeo.geocaching.unifiedmap.layers;
 
 /*
  * Manages distance and target views
@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 import org.apache.commons.lang3.StringUtils;
 
-class UnifiedTargetAndDistancesHandler {
+public class UnifiedTargetAndDistancesHandler {
 
     // navigation target info
     protected String targetGeocode = null;
@@ -164,16 +164,8 @@ class UnifiedTargetAndDistancesHandler {
         }
     }
 
-    public Geopoint getLastNavTarget() {
-        return lastNavTarget;
-    }
-
     public void setLastNavTarget(final Geopoint geopoint) {
         lastNavTarget = geopoint;
-    }
-
-    public String getTargetGeocode() {
-        return targetGeocode;
     }
 
     public void setTargetGeocode(final String geocode) {
