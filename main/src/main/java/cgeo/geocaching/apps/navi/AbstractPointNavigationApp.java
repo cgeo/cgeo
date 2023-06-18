@@ -54,7 +54,8 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         final ArrayList<IWaypoint> targets = new ArrayList<>();
         targets.add(cache);
         for (final Waypoint waypoint : cache.getWaypoints()) {
-            if ((waypoint.getWaypointType() == WaypointType.PARKING || waypoint.getWaypointType() == WaypointType.FINAL) && !cache.getCoords().equals(waypoint.getCoords())) {
+            final Geopoint coords = waypoint.getCoords();
+            if (coords != null && (waypoint.getWaypointType() == WaypointType.PARKING || waypoint.getWaypointType() == WaypointType.FINAL) && !cache.getCoords().equals(coords) && coords.isValid()) {
                 targets.add(waypoint);
             }
         }
