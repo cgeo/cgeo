@@ -10,3 +10,4 @@
 - New: Make startscreen selectable
 - New: Support target selector for additional navi apps
 - New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
+- New: Option to vote on opencaching (OCPL) caches during logging

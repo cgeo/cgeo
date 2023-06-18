@@ -1,6 +1,6 @@
 ### Mapa
 - Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięci na skrytce/punkcie nawigacji (konfigurowalne)
-- New: Add 'Set as target' to map's long-tap popup
+- Nowość: Dodaj 'Ustaw jako cel' do wyskakującego okna po długim dotknięciu
 
 ### Szczegóły skrytki
 
@@ -10,3 +10,4 @@
 - Nowość: Wybór ekranu startowego
 - Nowość: Wsparcie wyboru celu dla dodatkowych aplikacji nawigacyjnych
 - Nowość: Wyświetlaj znak zapytania w symbolu trudności/terenu, jeśli obie wartości są nieznane
+- Nowość: Możliwość głosowania na skrzynki opencaching (OCPL) podczas dokonywania wpisu do dziennika znalezień

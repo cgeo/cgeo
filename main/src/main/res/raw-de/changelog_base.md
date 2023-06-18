@@ -1,6 +1,6 @@
 ### Karte
 - Änderung: Beim langen Tippen auf Cache/Wegpunkt immer Popupmenü anzeigen (konfigurierbar)
-- New: Add 'Set as target' to map's long-tap popup
+- Neu: 'Als Ziel setzen' im Karten-Popup bei langem Tippen
 
 ### Cache-Details
 
@@ -10,3 +10,4 @@
 - Neu: Startbildschirm auswählbar machen
 - Neu: Unterstütze Zielauswahl für zusätzliche Navigations-Apps
 - Neu: Zeige Fragezeichen im Symbol für Schwierigkeit/Gelände an, wenn sowohl Schwierigkeit als auch Gelände unbekannt sind
+- Neu: Option zum Bewerten eines Opencaching (OCPL) Caches während des Loggens
