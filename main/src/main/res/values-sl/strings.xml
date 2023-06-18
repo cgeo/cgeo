@@ -593,7 +593,7 @@
     <string name="cache_own_rating">Moja ocena</string>
     <string name="cache_favorite">Priljubljeni</string>
     <string name="cache_owner">Lastnik</string>
-    <string name="cache_hidden">Skritih</string>
+    <string name="cache_hidden">Skrit</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Lokacija</string>
     <string name="cache_coordinates">Koordinate</string>
@@ -727,7 +727,7 @@
     <string name="geokret_type_post">Pošta</string>
     <!-- user -->
     <string name="user_menu_title">Uporabnik</string>
-    <string name="user_menu_view_hidden">Skritih zakladov</string>
+    <string name="user_menu_view_hidden">Skriti zakladi</string>
     <string name="user_menu_open_browser">Odpri profil v brskalniku</string>
     <string name="user_menu_send_message">Pošlji sporočilo</string>
     <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
