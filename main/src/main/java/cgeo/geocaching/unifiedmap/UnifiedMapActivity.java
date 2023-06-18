@@ -770,7 +770,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
-                HideActionBarUtils.toggleActionBar(this);
+                mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
             }
         } else if (result.size() == 1) {
             handleTap(result.get(0), isLongTap, x, y);

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -340,4 +341,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
     }
 
+    @Override
+    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        final View compass = requireView().findViewById(R.id.bearingIndicator);
+        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+    }
 }

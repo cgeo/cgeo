@@ -173,4 +173,8 @@ public abstract class AbstractMapFragment extends Fragment {
         ((UnifiedMapActivity) requireActivity()).onTap(latitudeE6, longitudeE6, x, y, isLongTap);
     }
 
+    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        // default is empty
+    }
+
 }
