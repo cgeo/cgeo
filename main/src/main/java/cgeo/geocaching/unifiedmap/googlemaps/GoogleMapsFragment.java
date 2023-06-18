@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -16,9 +17,11 @@ import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +39,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private GoogleMap mMap;
     private final GoogleMapController mapController = new GoogleMapController();
     private long lastTouchStart = -1;
+
+    private LatLngBounds lastBounds;
 
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
@@ -81,41 +86,37 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //        });
 //        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
 
+        lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+
         mMap.setOnCameraMoveStartedListener(reason -> {
+            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
             }
         });
-//        mMap.setOnCameraIdleListener(() -> {
+        mMap.setOnCameraIdleListener(() -> {
+            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 //            if (activityMapChangeListener != null) {
 //                final CameraPosition pos = mMap.getCameraPosition();
 //                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
 //            }
-//        });
+        });
 
-        //todo more to come...
+        adaptLayoutForActionbar(true);
+
+
         initLayers();
         onMapReadyTasks.run();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         if (mMap != null) {
             initLayers();
         }
     }
-
-    //    private void adaptLayoutForActionbar(@Nullable final Activity activity, @Nullable final GoogleMap googleMap, final boolean actionBarShowing) {
-//        if (activity != null && googleMap != null) {
-//            try {
-//                final View mapView = activity.findViewById(R.id.mapViewGM);
-//                final View compass = mapView.findViewWithTag("GoogleMapCompass");
-//                compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
-//            } catch (Exception ignore) {
-//            }
-//        }
-//    }
 
     @Override
     public boolean supportsTileSource(final AbstractTileProvider newSource) {
@@ -151,8 +152,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public BoundingBox getBoundingBox() {
-        final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-        return new BoundingBox(bounds.southwest.latitude, bounds.southwest.longitude, bounds.northeast.latitude, bounds.northeast.longitude);
+        // mMap.getProjection() needs to be called on UI thread
+        return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
     // ========================================================================
@@ -237,16 +238,41 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     }
 
+    // ========================================================================
+    // Tap handling methods
+
     private void onTouchEvent(final MotionEvent event) {
         if (MotionEvent.ACTION_DOWN == event.getAction()) {
             lastTouchStart = System.currentTimeMillis();
-        } else if (MotionEvent.ACTION_UP == event.getAction()) {
-//            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-//            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), (System.currentTimeMillis() - lastTouchStart) >= getLongPressTimeout());
+
+            // get values already here, as event will return wrong data later
+            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+            final int x = (int) event.getX();
+            final int y = (int) event.getY();
+
+            requireView().postDelayed(() -> {
+                if (lastTouchStart != -1) {
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), x, y, true);
+                    lastTouchStart = -1;
+                }
+            }, ViewConfiguration.getLongPressTimeout());
+        } else if (MotionEvent.ACTION_MOVE == event.getAction()) {
+            lastTouchStart = -1;
+        } else if (MotionEvent.ACTION_UP == event.getAction() && lastTouchStart != -1) {
+            final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
             lastTouchStart = -1;
         }
-
     }
 
+    @Override
+    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        if (mMap == null) {
+            return;
+        }
+
+        final View compass = requireView().findViewWithTag("GoogleMapCompass");
+        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+    }
 
 }

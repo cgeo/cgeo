@@ -3,9 +3,10 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -45,11 +46,11 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
     protected void initLayers() {
-        forEveryLayer(layer -> layer.init(createGeoItemProviderLayer()));
+        forEveryLayer(layer -> layer.setProvider(createGeoItemProviderLayer(), 0));
     }
 
     public void prepareForTileSourceChange() {
-        forEveryLayer(ILayer::destroy);
+        forEveryLayer(GeoItemLayer::destroy);
     }
 
     @Override
@@ -64,14 +65,14 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        forEveryLayer(ILayer::destroy);
+    public void onStop() {
+        super.onStop();
+        forEveryLayer(GeoItemLayer::destroy);
     }
 
-    private void forEveryLayer(final Consumer<ILayer> consumer) {
+    private void forEveryLayer(final Consumer<GeoItemLayer<?>> consumer) {
         final UnifiedMapActivity activity = (UnifiedMapActivity) requireActivity();
-        for (ILayer layer : activity.getLayers()) {
+        for (GeoItemLayer<?> layer : activity.getLayers()) {
             consumer.accept(layer);
         }
     }
@@ -160,21 +161,20 @@ public abstract class AbstractMapFragment extends Fragment {
         // default: do nothing
     }
 
-//
-//    // ========================================================================
-//    // Tap handling methods
-//
-//    /**
-//     * transmits tap on map to activity
-//     */
-//    protected void onTapCallback(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
-//        Log.d("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
-//
-//        final UnifiedMapActivity activity = activityRef.get();
-//        if (activity == null) {
-//            throw new IllegalStateException("map tap handler: lost connection to map activity");
-//        }
-//        activity.onTap(latitudeE6, longitudeE6, x, y, isLongTap);
-//    }
+
+    // ========================================================================
+    // Tap handling methods
+
+    /**
+     * transmits tap on map to activity
+     */
+    protected void onTapCallback(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
+        Log.d("registered " + (isLongTap ? "long " : "") + " tap on map @ (" + latitudeE6 + ", " + longitudeE6 + ")");
+        ((UnifiedMapActivity) requireActivity()).onTap(latitudeE6, longitudeE6, x, y, isLongTap);
+    }
+
+    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        // default is empty
+    }
 
 }

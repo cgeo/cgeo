@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.utils.livedata;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

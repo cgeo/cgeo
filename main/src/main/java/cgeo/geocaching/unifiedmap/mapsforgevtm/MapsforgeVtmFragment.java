@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -32,7 +33,11 @@ import java.util.ArrayList;
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
+import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
+import org.oscim.event.Gesture;
+import org.oscim.event.GestureListener;
+import org.oscim.event.MotionEvent;
 import org.oscim.layers.Layer;
 import org.oscim.layers.tile.TileLayer;
 import org.oscim.layers.tile.vector.OsmTileLayer;
@@ -96,12 +101,12 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         initLayers();
         applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
 //        mMapView.onResume(); needed? probably not, as the view receives the normal lifecycle
-//        mMapLayers.add(new MapsforgeVtmView.MapEventsReceiver(mMap));
+        mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
     }
 
     @Override
@@ -315,25 +320,30 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 //    // ========================================================================
 //    // Tap handling methods
 //
-//    class MapEventsReceiver extends Layer implements GestureListener {
-//
-//        MapEventsReceiver(final Map map) {
-//            super(map);
-//        }
-//
-//        @Override
-//        public boolean onGesture(final Gesture g, final MotionEvent e) {
-//            if (g instanceof Gesture.Tap) {
-//                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-//                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), false);
-//                return true;
-//            } else if (g instanceof Gesture.LongPress) {
-//                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
-//                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), true);
-//                return true;
-//            }
-//            return false;
-//        }
-//    }
+    class MapEventsReceiver extends Layer implements GestureListener {
 
+        MapEventsReceiver(final Map map) {
+            super(map);
+        }
+
+        @Override
+        public boolean onGesture(final Gesture g, final MotionEvent e) {
+            if (g instanceof Gesture.Tap) {
+                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), false);
+                return true;
+            } else if (g instanceof Gesture.LongPress) {
+                final GeoPoint p = mMap.viewport().fromScreenPoint(e.getX(), e.getY());
+                onTapCallback(p.latitudeE6, p.longitudeE6, (int) e.getX(), (int) e.getY(), true);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    @Override
+    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+        final View compass = requireView().findViewById(R.id.bearingIndicator);
+        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+    }
 }
