@@ -8,8 +8,8 @@
     <string name="search">Iskanje</string>
     <string name="helpers">Uporabne aplikacije</string>
     <string name="about">O c:geo</string>
-    <string name="latitude">Geog. širina</string>
-    <string name="longitude">Geog. dolžina</string>
+    <string name="latitude">Zemlj. širina</string>
+    <string name="longitude">Zemlj. dolžina</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo nastavitve</string>
     <!-- caches -->
