@@ -192,6 +192,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         if (mTheme != null) {
             mTheme.dispose();
         }
+        // reset scale to avoid tile scaling issues (see #13593)
+        CanvasAdapter.userScale = 1;
+        CanvasAdapter.textScale = 1;
+        CanvasAdapter.symbolScale = 1;
     }
 
     private ThemeFile createThemeFor(@NonNull final ThemeData theme) throws IOException {
