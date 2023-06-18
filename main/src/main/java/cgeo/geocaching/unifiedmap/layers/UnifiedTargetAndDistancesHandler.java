@@ -149,6 +149,7 @@ public class UnifiedTargetAndDistancesHandler {
     private void swap() {
         final int supersize = (Settings.getSupersizeDistance() + 1) % (bothViewsNeeded ? 3 : 2);
         Settings.setSupersizeDistance(supersize);
+        drawDistance(showBothDistances, distance, realDistance);
     }
 
     // target handling ----------------------------------------------------------------------------------------------
