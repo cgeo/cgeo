@@ -1,20 +1,31 @@
 package cgeo.geocaching.apps.navi;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.apps.AbstractApp;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 /**
  * navigation app for simple point navigation (no differentiation between cache/waypoint/point)
  */
-abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
+abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, TargetSelectorNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
     protected AbstractPointNavigationApp(@NonNull final String name, @Nullable final String intent) {
         super(name, intent);
@@ -36,6 +47,42 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         final Geopoint coords = waypoint.getCoords();
         assert coords != null; // asserted by caller
         navigate(context, coords);
+    }
+
+    @Override
+    public void navigateWithTargetSelector(@NonNull final Context context, @NonNull final Geocache cache) {
+        final ArrayList<IWaypoint> targets = new ArrayList<>();
+        targets.add(cache);
+        for (final Waypoint waypoint : cache.getWaypoints()) {
+            if ((waypoint.getWaypointType() == WaypointType.PARKING || waypoint.getWaypointType() == WaypointType.FINAL) && !cache.getCoords().equals(waypoint.getCoords())) {
+                targets.add(waypoint);
+            }
+        }
+        if (targets.size() < 2) {
+            navigate(context, cache);
+        } else {
+            // show a selection of all parking places and the cache itself, when using the navigation for driving
+            final Context themeContext = Dialogs.newContextThemeWrapper(context);
+            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
+                @Override
+                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                    return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position),
+                            GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
+                }
+            };
+
+            Dialogs.newBuilder(context)
+                    .setTitle(R.string.cache_menu_navigation_drive_select_target)
+                    .setAdapter(adapter, (dialog, which) -> {
+                        final IWaypoint target = targets.get(which);
+                        if (target instanceof Geocache) {
+                            navigate(context, (Geocache) target);
+                        }
+                        if (target instanceof Waypoint) {
+                            navigate(context, (Waypoint) target);
+                        }
+                    }).show();
+        }
     }
 
     @Override
