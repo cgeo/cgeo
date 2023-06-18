@@ -697,13 +697,24 @@ public final class MapMarkerUtils {
         }
     }
 
-    @SuppressWarnings("DiscouragedApi")
+    /**
+     * Create a LayerDrawable showing the caches difficulty and terrain rating. If the connector doesn't support D/T show a "-" instead, if the info is missing (not loaded) a "?"
+     * @param res           Resources bundle
+     * @param difficulty    Difficulty rating
+     * @param terrain       Terrain rating
+     * @return              LayerDrawable composed of round background and foreground showing the ratings
+     */
     private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_bg, null));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(background));
+        int layers = 4;
 
-        if (difficulty < 0.5 && terrain < 0.5) {
+        if (difficulty == -1 && terrain == -1) {
+            layers = 2;
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported));
+        } else if (difficulty == 0 && terrain == 0) {
+            layers = 2;
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable));
         } else {
             final String packageName = CgeoApplication.getInstance().getPackageName();
@@ -713,9 +724,10 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
         }
 
-        return buildLayerDrawable(insetsBuilder, 4, 0);
+        return buildLayerDrawable(insetsBuilder, layers, 0);
     }
 
+    @SuppressWarnings("DiscouragedApi")
     private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));

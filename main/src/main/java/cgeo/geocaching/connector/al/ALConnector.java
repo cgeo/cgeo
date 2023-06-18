@@ -110,6 +110,11 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean supportsDifficultyTerrain() {
+        return false;
+    }
+
+    @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
         if (geocode == null) {
             return null;

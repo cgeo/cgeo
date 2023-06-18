@@ -257,6 +257,12 @@ public interface IConnector {
     String getWaypointPrefix(String name);
 
     /**
+     * Get info whether connector supports D/T ratings
+     */
+    @NonNull
+    boolean supportsDifficultyTerrain();
+
+    /**
      * Get the maximum value for Terrain
      */
     int getMaxTerrain();

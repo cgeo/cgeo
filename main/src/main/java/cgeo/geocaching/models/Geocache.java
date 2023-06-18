@@ -686,7 +686,7 @@ public class Geocache implements IWaypoint {
     }
 
     public float getDifficulty() {
-        return difficulty;
+        return getConnector().supportsDifficultyTerrain() ? difficulty : -1;
     }
 
     @Override
@@ -717,7 +717,7 @@ public class Geocache implements IWaypoint {
     }
 
     public float getTerrain() {
-        return terrain;
+        return getConnector().supportsDifficultyTerrain() ? terrain : -1;
     }
 
     public boolean isArchived() {
