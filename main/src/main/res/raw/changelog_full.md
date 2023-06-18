@@ -7,6 +7,17 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.06.18 Bugfix Release
+
+### General
+- Fix: Crash in Google Maps on certain map source changes
+- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
+- Fix: Some seekbar issues
+- Fix: SVG geochecker images not being displayed
+- New: Display geocaching.com login error messages on home screen
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.05.15 Feature Release
 
 ### Map
