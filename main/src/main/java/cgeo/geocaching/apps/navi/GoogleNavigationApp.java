@@ -50,7 +50,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         }
     }
 
-    static class GoogleNavigationDrivingApp extends GoogleNavigationApp {
+    static class GoogleNavigationDrivingApp extends GoogleNavigationApp implements TargetSelectorNavigationApp {
         GoogleNavigationDrivingApp() {
             super(R.string.cache_menu_navigation_drive, "d");
         }

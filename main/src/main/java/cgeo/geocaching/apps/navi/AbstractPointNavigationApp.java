@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * navigation app for simple point navigation (no differentiation between cache/waypoint/point)
  */
-abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, TargetSelectorNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
+abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
     protected AbstractPointNavigationApp(@NonNull final String name, @Nullable final String intent) {
         super(name, intent);
@@ -49,7 +49,12 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         navigate(context, coords);
     }
 
-    @Override
+    public void navigateWithoutTargetSelector(@NonNull final Context context, @NonNull final Geocache cache) {
+        final Geopoint coords = cache.getCoords();
+        assert coords != null; // asserted by caller
+        navigate(context, coords);
+    }
+
     public void navigateWithTargetSelector(@NonNull final Context context, @NonNull final Geocache cache) {
         final ArrayList<IWaypoint> targets = new ArrayList<>();
         targets.add(cache);
@@ -60,7 +65,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
             }
         }
         if (targets.size() < 2) {
-            navigate(context, cache);
+            navigateWithoutTargetSelector(context, cache);
         } else {
             // show a selection of all parking places and the cache itself, when using the navigation for driving
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
@@ -77,7 +82,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
                     .setAdapter(adapter, (dialog, which) -> {
                         final IWaypoint target = targets.get(which);
                         if (target instanceof Geocache) {
-                            navigate(context, (Geocache) target);
+                            navigateWithoutTargetSelector(context, (Geocache) target);
                         }
                         if (target instanceof Waypoint) {
                             navigate(context, (Waypoint) target);

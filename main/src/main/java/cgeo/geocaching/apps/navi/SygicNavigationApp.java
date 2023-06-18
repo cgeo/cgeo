@@ -47,7 +47,7 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
         }
     }
 
-    static class SygicNavigationDrivingApp extends SygicNavigationApp {
+    static class SygicNavigationDrivingApp extends SygicNavigationApp implements TargetSelectorNavigationApp {
         SygicNavigationDrivingApp() {
             super(R.string.cache_menu_sygic_drive, "drive");
         }

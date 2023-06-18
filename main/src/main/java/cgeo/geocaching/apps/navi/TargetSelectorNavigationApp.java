@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 public interface TargetSelectorNavigationApp extends CacheNavigationApp {
 
     /*
-     * same as navigate(...), but will display a selector if cache has more than one waypoint
+     * same as navigate(...), might be called from navigateWithTargetSelector to navigate to Geocache
      */
-    void navigateWithTargetSelector(@NonNull Context context, @NonNull Geocache cache);
+    void navigateWithoutTargetSelector(@NonNull Context context, @NonNull Geocache cache);
 
 }
