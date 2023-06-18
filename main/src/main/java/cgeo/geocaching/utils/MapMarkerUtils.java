@@ -685,7 +685,7 @@ public final class MapMarkerUtils {
     }
 
     public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
-        final int hashcode = new HashCodeBuilder().append(difficulty).append(terrain).toHashCode();
+        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
