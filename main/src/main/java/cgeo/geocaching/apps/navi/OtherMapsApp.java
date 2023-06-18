@@ -53,7 +53,7 @@ abstract class OtherMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         navigate(context, cache.getCoords(), cache.getName());
     }
 

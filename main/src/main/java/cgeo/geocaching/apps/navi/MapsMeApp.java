@@ -29,7 +29,7 @@ class MapsMeApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final List<Waypoint> waypoints = cache.getWaypoints();
         if (waypoints.isEmpty()) {
             navigate(context, cache.getCoords(), cache.getName());

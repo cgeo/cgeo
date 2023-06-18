@@ -29,7 +29,7 @@ public class CruiserNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigateWithoutSelector(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         assert coords != null; // asserted by caller
         navigate(context, coords, cache.getName());
