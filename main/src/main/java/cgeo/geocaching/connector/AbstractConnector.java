@@ -292,6 +292,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean supportsDifficultyTerrain() {
+        return true;
+    }
+
+    @Override
     public int getMaxTerrain() {
         return 5;
     }
