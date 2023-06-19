@@ -8,8 +8,8 @@
     <string name="search">Iskanje</string>
     <string name="helpers">Uporabne aplikacije</string>
     <string name="about">O c:geo</string>
-    <string name="latitude">Geog. širina</string>
-    <string name="longitude">Geog. dolžina</string>
+    <string name="latitude">Zemlj. širina</string>
+    <string name="longitude">Zemlj. dolžina</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo nastavitve</string>
     <!-- caches -->
@@ -523,9 +523,9 @@
     <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
-    <string name="cache_watchlist_on">Zaklad je na vašem spisku nadzorov.</string>
-    <string name="cache_watchlist_not_on">Zaklad ni na vašem spisku nadzorov.</string>
-    <string name="cache_favpoint_on">Zaklad je na vašem spisku priljubljenih.</string>
+    <string name="cache_watchlist_on">Zaklad je na vašem opazovalnem seznamu.</string>
+    <string name="cache_watchlist_not_on">Zaklad ni na vašem opazovalnem seznamu.</string>
+    <string name="cache_favpoint_on">Zaklad je na vašem seznamu priljubljenih.</string>
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
