@@ -28,6 +28,14 @@
         tools:ignore="AlwaysShowAction">
     </item>
     <item
+        android:id="@+id/menu_item_save_and_upload"
+        android:icon="@drawable/ic_menu_upload"
+        android:title="@string/cache_personal_note_save_and_upload"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
+    </item>
+    <item
         android:id="@+id/menu_item_cancel"
         android:icon="@drawable/ic_menu_cancel"
         android:title="@string/cancel"
