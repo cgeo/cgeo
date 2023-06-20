@@ -101,9 +101,9 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
-import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
@@ -900,7 +900,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
-        cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
+        cache.setChangeNotificationHandler(new ChangeNotificationHandler(this));
 
         setCacheTitleBar(cache);
         setIsContentRefreshable(cache.supportsRefresh());
@@ -996,7 +996,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void refreshCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
@@ -1006,21 +1006,20 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return;
         }
 
-        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this, progress);
-
-        progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
+        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this);
+        refreshCacheHandler.showProgress();
 
         cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
     }
 
     private void dropCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
-
-        progress.show(this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-        cache.drop(new ChangeNotificationHandler(this, progress));
+        final ChangeNotificationHandler handler = new ChangeNotificationHandler(this);
+        handler.showProgress();
+        cache.drop(handler);
     }
 
     private void dropUserdefinedWaypoints() {
@@ -1062,7 +1061,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void storeCache(final boolean fastStoreOnLastSelection) {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
@@ -1077,7 +1076,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void moveCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
@@ -1095,18 +1094,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), selectedListIds);
-            new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(DisposableHandler.DONE);
+            new StoreCacheHandler(CacheDetailActivity.this).sendEmptyMessage(DisposableHandler.DONE);
         } else {
             storeCache(selectedListIds);
         }
     }
 
-    private static final class CheckboxHandler extends SimpleDisposableHandler {
+    private static final class CheckboxHandler extends ProgressBarDisposableHandler {
         private final WeakReference<DetailsViewCreator> creatorRef;
         private final WeakReference<CacheDetailActivity> activityWeakReference;
 
-        CheckboxHandler(final DetailsViewCreator creator, final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        CheckboxHandler(final DetailsViewCreator creator, final CacheDetailActivity activity) {
+            super(activity);
 
             creatorRef = new WeakReference<>(creator);
             activityWeakReference = new WeakReference<>(activity);
@@ -1367,21 +1366,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * Abstract Listener for add / remove buttons for watchlist
          */
         private abstract class AbstractPropertyListener implements View.OnClickListener {
-            private final SimpleDisposableHandler handler;
+            private final ProgressBarDisposableHandler handler;
 
             AbstractPropertyListener() {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-                handler = new CheckboxHandler(DetailsViewCreator.this, activity, activity.progress);
+                handler = new CheckboxHandler(DetailsViewCreator.this, activity);
             }
 
-            public void doExecute(final int titleId, final int messageId, final Action1<SimpleDisposableHandler> action) {
+            public void doExecute(final int titleId, final int messageId, final Action1<ProgressBarDisposableHandler> action) {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
-                    if (activity.progress.isShowing()) {
+                    if (ProgressBarDisposableHandler.isInProgress(activity) || activity.progress.isShowing()) {
                         activity.showToast(activity.res.getString(R.string.err_watchlist_still_managing));
                         return;
                     }
-                    activity.progress.show(activity, activity.res.getString(titleId), activity.res.getString(messageId), true, null);
+                    handler.showProgress();
                 }
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> action.call(handler));
             }
@@ -1414,7 +1413,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Add this cache to the watchlist of the user
          */
-        private void watchListAdd(final SimpleDisposableHandler handler) {
+        private void watchListAdd(final ProgressBarDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1426,7 +1425,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache from the watchlist of the user
          */
-        private void watchListRemove(final SimpleDisposableHandler handler) {
+        private void watchListRemove(final ProgressBarDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1438,7 +1437,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Add this cache to the favorite list of the user
          */
-        private void favoriteAdd(final SimpleDisposableHandler handler) {
+        private void favoriteAdd(final ProgressBarDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1450,7 +1449,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache to the favorite list of the user
          */
-        private void favoriteRemove(final SimpleDisposableHandler handler) {
+        private void favoriteRemove(final ProgressBarDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -2809,49 +2808,48 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return cache;
     }
 
-    private static class StoreCacheHandler extends SimpleDisposableHandler {
+    private static class StoreCacheHandler extends ProgressBarDisposableHandler {
 
-        StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        StoreCacheHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
-                updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
-            } else {
+            if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
+                dismissProgress(R.string.cache_progress_done_store);
                 notifyDataSetChanged(activityRef);
             }
         }
     }
 
-    private static final class RefreshCacheHandler extends SimpleDisposableHandler {
+    private static final class RefreshCacheHandler extends ProgressBarDisposableHandler {
 
-        RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        RefreshCacheHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
-                updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
-            } else if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
+            if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
                 showToast((String) msg.obj);
-            } else {
+            } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
+                dismissProgress(R.string.cache_progress_done_refresh);
                 notifyDataSetChanged(activityRef);
             }
         }
     }
 
-    private static final class ChangeNotificationHandler extends SimpleHandler {
+    private static final class ChangeNotificationHandler extends ProgressBarDisposableHandler {
 
-        ChangeNotificationHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        ChangeNotificationHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleMessage(final Message msg) {
             notifyDataSetChanged(activityRef);
+            dismissProgress();
         }
     }
 
@@ -2863,8 +2861,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     protected void storeCache(final Set<Integer> listIds) {
-        final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
-        progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
+        final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this);
+        storeCacheHandler.showProgress();
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> cache.store(listIds, storeCacheHandler));
     }
 
@@ -2884,10 +2882,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void uploadPersonalNote() {
-        final SimpleDisposableHandler myHandler = new SimpleDisposableHandler(this, this.progress);
-
-        final Message cancelMessage = myHandler.cancelMessage(getString(R.string.cache_personal_note_upload_cancelled));
-        progress.show(this, getString(R.string.cache_personal_note_uploading), getString(R.string.cache_personal_note_uploading), true, cancelMessage);
+        final ProgressBarDisposableHandler myHandler = new ProgressBarDisposableHandler(this);
+        myHandler.showProgress();
 
         myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
