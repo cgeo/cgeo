@@ -1738,16 +1738,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
-                final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
                 binding.uploadPersonalnote.setVisibility(View.VISIBLE);
                 TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
                 binding.uploadPersonalnote.setOnClickListener(v -> {
-                    final int personalNoteLength = StringUtils.length(cache.getPersonalNote());
-                    if (personalNoteLength > maxPersonalNotesChars) {
-                        warnPersonalNoteExceedsLimit(activity, personalNoteLength, maxPersonalNotesChars, connector.getName());
-                    } else {
-                        uploadPersonalNote(activity);
-                    }
+                    activity.checkAndUploadPersonalNote(connector);
                 });
             } else {
                 binding.uploadPersonalnote.setVisibility(View.GONE);
@@ -1842,33 +1836,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                            }
                            cache.changeVariables(toChange);
                         ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
-                    });
-        }
-
-        private void uploadPersonalNote(final CacheDetailActivity activity) {
-            final SimpleDisposableHandler myHandler = new SimpleDisposableHandler(activity, activity.progress);
-
-            final Message cancelMessage = myHandler.cancelMessage(getString(R.string.cache_personal_note_upload_cancelled));
-            activity.progress.show(activity, getString(R.string.cache_personal_note_uploading), getString(R.string.cache_personal_note_uploading), true, cancelMessage);
-
-            myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
-                final boolean success = connector.uploadPersonalNote(cache);
-                final Message msg = Message.obtain();
-                final Bundle bundle = new Bundle();
-                bundle.putString(SimpleDisposableHandler.MESSAGE_TEXT,
-                        CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
-                msg.setData(bundle);
-                myHandler.sendMessage(msg);
-            }));
-        }
-
-        private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity, final int personalNoteLength, final int maxPersonalNotesChars, final String connectorName) {
-            final int reduceLength = personalNoteLength - maxPersonalNotesChars;
-            SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, maxPersonalNotesChars, connectorName).confirm(
-                    (dialog, which) -> {
-                        dialog.dismiss();
-                        uploadPersonalNote(activity);
                     });
         }
 
@@ -2903,14 +2870,49 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         final FragmentManager fm = activity.getSupportFragmentManager();
-        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote());
+        final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
+        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote(), (connector != null && connector.canAddPersonalNote(cache)));
         dialog.show(fm, "fragment_edit_note");
     }
 
     @Override
-    public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote) {
+    public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote, final boolean uploadNote) {
         setNewPersonalNote(note, preventWaypointsFromNote);
+        if (uploadNote) {
+            checkAndUploadPersonalNote(ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class));
+        }
+    }
 
+    private void uploadPersonalNote() {
+        final SimpleDisposableHandler myHandler = new SimpleDisposableHandler(this, this.progress);
+
+        final Message cancelMessage = myHandler.cancelMessage(getString(R.string.cache_personal_note_upload_cancelled));
+        progress.show(this, getString(R.string.cache_personal_note_uploading), getString(R.string.cache_personal_note_uploading), true, cancelMessage);
+
+        myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+            final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
+            final boolean success = connector.uploadPersonalNote(cache);
+            final Message msg = Message.obtain();
+            final Bundle bundle = new Bundle();
+            bundle.putString(SimpleDisposableHandler.MESSAGE_TEXT,
+                    CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
+            msg.setData(bundle);
+            myHandler.sendMessage(msg);
+        }));
+    }
+
+    private void checkAndUploadPersonalNote(final PersonalNoteCapability connector) {
+        final int personalNoteLength = StringUtils.length(cache.getPersonalNote());
+        if (personalNoteLength > connector.getPersonalNoteMaxChars()) {
+            final int reduceLength = personalNoteLength - connector.getPersonalNoteMaxChars();
+            SimpleDialog.of(this).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, connector.getPersonalNoteMaxChars(), connector.getName()).confirm(
+                    (dialog, which) -> {
+                        dialog.dismiss();
+                        uploadPersonalNote();
+                    });
+        } else {
+            uploadPersonalNote();
+        }
     }
 
     public void removeWaypointsFromPersonalNote(final Geocache cache) {
