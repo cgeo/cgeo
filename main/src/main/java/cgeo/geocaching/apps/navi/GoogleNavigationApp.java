@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -49,9 +50,14 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         }
     }
 
-    static class GoogleNavigationDrivingApp extends GoogleNavigationApp {
+    static class GoogleNavigationDrivingApp extends GoogleNavigationApp implements TargetSelectorNavigationApp {
         GoogleNavigationDrivingApp() {
             super(R.string.cache_menu_navigation_drive, "d");
+        }
+
+        @Override
+        public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+            navigateWithTargetSelector(context, cache);
         }
     }
 

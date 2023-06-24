@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.content.Context;
@@ -46,9 +47,14 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
         }
     }
 
-    static class SygicNavigationDrivingApp extends SygicNavigationApp {
+    static class SygicNavigationDrivingApp extends SygicNavigationApp implements TargetSelectorNavigationApp {
         SygicNavigationDrivingApp() {
             super(R.string.cache_menu_sygic_drive, "drive");
+        }
+
+        @Override
+        public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+            navigateWithTargetSelector(context, cache);
         }
     }
 }
