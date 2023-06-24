@@ -3,11 +3,13 @@
 - 신규: 지도의 길게 누름 팝업에 '목표로 설정' 추가
 
 ### 캐시 상세정보
+- New: 'Save and upload' button when editing personal note
 
 ### 일반
-- 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
-- 변경: 포켓 쿼리 미리보기에 다른 소스 사용
-- 신규: 이제 시작 화면을 선택할 수 있습니다.
-- 신규: 추가 내비게이션 앱을 위한 대상 선택기 지원
-- 신규: 난이도와 지형이 모두 알려지지 않은 경우 난이도/지형 기호에 물음표 표시
-- 신규: 로그 중 opencaching(OCPL) 캐시에 투표하는 옵션
+- New: Add more number emojis (separate category)
+- Change: Use different source for preview of pocket queries
+- New: Make startscreen selectable
+- New: Support target selector for additional navi apps
+- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
+- New: Option to vote on opencaching (OCPL) caches during logging
+- New: Event Date filter for upcoming events
