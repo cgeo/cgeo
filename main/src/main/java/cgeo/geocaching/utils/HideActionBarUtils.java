@@ -18,14 +18,14 @@ public class HideActionBarUtils {
         // utility class
     }
 
-    /** use this instead of AbstractBootmNavigationActivity.setContentView for being able to use a action bar toogle */
+    /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractBottomNavigationActivity activity, final View contentView, final boolean showSpacer) {
         setStableLayout(activity, showSpacer);
         activity.setContentView(contentView);
         showActionBarSpacer(activity, showSpacer);
     }
 
-    /** use this instead of AbstractBootmNavigationActivity.setContentView for being able to use a action bar toogle */
+    /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
     public static void setContentView(@NonNull final AbstractBottomNavigationActivity activity, @LayoutRes final int layoutResID, final boolean showSpacer) {
         setStableLayout(activity, showSpacer);
         activity.setContentView(layoutResID);
