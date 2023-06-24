@@ -3,6 +3,7 @@
 - New: Add 'Set as target' to map's long-tap popup
 
 ### Cache details
+- New: 'Save and upload' button when editing personal note
 
 ### General
 - New: Add more number emojis (separate category)
