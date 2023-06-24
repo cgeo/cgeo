@@ -621,6 +621,17 @@
         <item>3T</item>
         <item>&lt;3T</item>
     </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>vergangene</item>
+        <item>today</item>
+        <item>tomorrow</item>
+        <item>2 days from now</item>
+        <item>3 days from now</item>
+        <item>1 week from now</item>
+        <item>2 weeks from now</item>
+        <item>1 month from now</item>
+        <item>all future</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Änderungen</string>
