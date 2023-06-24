@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
@@ -142,11 +144,15 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
     }
 
-        protected void repaintRotationIndicator(final float bearing) {
+    protected void repaintRotationIndicator(final float bearing) {
         final ImageView compassrose = requireView().findViewById(R.id.bearingIndicator);
         if (bearing == 0.0f) {
             compassrose.setImageBitmap(null);
         } else {
+            final ActionBar actionBar = ((UnifiedMapActivity) requireActivity()).getSupportActionBar();
+            final boolean actionBarIsShowing = actionBar != null && actionBar.isShowing();
+            adaptLayoutForActionbar(actionBarIsShowing);
+
             final Matrix matrix = new Matrix();
             matrix.setRotate(bearing, rotationWidth / 2.0f, rotationHeight / 2.0f);
             compassrose.setImageBitmap(Bitmap.createBitmap(rotationIndicator, 0, 0, rotationWidth, rotationHeight, matrix, true));
