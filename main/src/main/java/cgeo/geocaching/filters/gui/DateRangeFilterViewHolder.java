@@ -73,12 +73,13 @@ public class DateRangeFilterViewHolder<F extends DateRangeGeocacheFilter> extend
 
         relativeSlider = new ItemRangeSlider<>(getActivity());
         relativeSlider.setScale(Arrays.asList(relativeValues), (i, v) -> relativeLabels[i], (i, v) -> relativeShortLabels[i]);
-        relativeSlider.setVisibility(View.GONE);
 
         llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(0), 0, dpToPixel(5));
         ll.addView(relativeSlider, llp);
 
+        dateRangeSelector.setVisibility(View.GONE);
+        absoluteRelative.setCheckedButtonByIndex(1, true);
         return ll;
     }
 
