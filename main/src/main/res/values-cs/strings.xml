@@ -505,6 +505,7 @@
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
     <string name="cache_filter_hidden">Datum skrytí</string>
+    <string name="cache_filter_eventdate">Datum eventu</string>
     <string name="cache_filter_logs_count">Počet logů</string>
     <string name="cache_filter_last_found">Datum posledního nálezu</string>
     <string name="cache_filter_log_entry">Záznam logu</string>
@@ -632,6 +633,28 @@
         <item>1t</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>vložit</item>
+        <item>dnes</item>
+        <item>zítra</item>
+        <item>od teď za 2 dny</item>
+        <item>od teď za 3 dny</item>
+        <item>od teď za týden</item>
+        <item>od teď za 2 týdny</item>
+        <item>od teď za měsíc</item>
+        <item>všechny budoucí</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>vložit</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1t</item>
+        <item>2t</item>
+        <item>1m</item>
+        <item>&gt;1m</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Verze</string>
@@ -1281,6 +1304,7 @@
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
     <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
     <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
+    <string name="cache_personal_note_save_and_upload">Uložit a nahrát</string>
     <string name="cache_personal_note_vars_out_of_sync">Proměnné v poznámkách nejsou synchronizovány (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizovat proměnné</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Zkontrolujte proměnné, jejichž hodnota má být přepsána z poznámek</string>
