@@ -495,6 +495,7 @@
     <string name="cache_filter_favorites">Favoritos</string>
     <string name="cache_filter_distance">Distância</string>
     <string name="cache_filter_hidden">Data de Colocação</string>
+    <string name="cache_filter_eventdate">Data do Evento</string>
     <string name="cache_filter_logs_count">Contagem de registos</string>
     <string name="cache_filter_last_found">Última Data Encontrada</string>
     <string name="cache_filter_log_entry">Publicação do Registo</string>
@@ -620,6 +621,28 @@
         <item>1sem</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>passado</item>
+        <item>hoje</item>
+        <item>amanhã</item>
+        <item>daqui a 2 dias</item>
+        <item>daqui a 3 dias</item>
+        <item>daqui a 1 semana</item>
+        <item>daqui a 2 semanas</item>
+        <item>daqui a 1 mês</item>
+        <item>todos os futuros</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>passados</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1semana</item>
+        <item>2semanas</item>
+        <item>1m</item>
+        <item>&gt;1m</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versão</string>
@@ -1253,6 +1276,7 @@
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
     <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
+    <string name="cache_personal_note_save_and_upload">Guardar e enviar</string>
     <string name="cache_personal_note_vars_out_of_sync">Variáveis nas notas estão fora de sincronização (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variáveis de sincronização</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Verificar variáveis cujo valor deve ser substituído a partir das notas</string>
