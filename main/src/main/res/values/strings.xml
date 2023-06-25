@@ -653,31 +653,30 @@
     <string name="cache_filter_log_entry_foundby">Found by</string>
     <string name="cache_filter_log_entry_logtext">Log text</string>
 
-    <string name="cache_filter_stored_since_notstored">Not stored</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-
-    <string name="cache_filter_stored_since_stored_zero">0 hours</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <integer-array name="cache_filter_stored_since_stored_values_h" translatable="false">
-        <item>8</item>
-        <item>24</item>
-        <item>168</item> <!-- 7 days in hours -->
-        <item>720</item> <!-- 30 days in hours -->
+    <integer-array name="cache_filter_stored_since_stored_values_d" translatable="false">
+        <item>-100000</item> <!-- forever in the past -->
+        <item>-365</item> <!-- a year ago -->
+        <item>-30</item> <!-- a month ago -->
+        <item>-7</item> <!-- a week ago -->
+        <item>-1</item> <!-- 1 day ago -->
+        <item>100000</item> <!-- forever in the future -->
     </integer-array>
     <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 hours</item>
-        <item>24 hours</item>
-        <item>7 days</item>
-        <item>30 days</item>
+        <item>more than a year ago</item>
+        <item>a year ago</item>
+        <item>30 days ago</item>
+        <item>a week ago</item>
+        <item>1 day ago</item>
+        <item>less than 1 day ago</item>
     </string-array>
     <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
+        <item>&gt;1y</item>
+        <item>1y</item>
         <item>30d</item>
+        <item>1w</item>
+        <item>1d</item>
+        <item>&lt;1d</item>
     </string-array>
-    <string name="cache_filter_stored_since_stored_max">the dawn of time</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
 
     <integer-array name="cache_filter_hidden_since_stored_values_d" translatable="false">
         <item>-100000</item> <!-- forever in the past -->
