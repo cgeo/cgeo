@@ -99,7 +99,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         };
         mMap.events.bind(mapUpdateListener);
 
-        onMapReadyTasks.run();
+        if (onMapReadyTasks != null) {
+            onMapReadyTasks.run();
+        }
     }
 
     @Override
