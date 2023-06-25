@@ -19,12 +19,15 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -68,6 +71,20 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         setMapRotation(Settings.getMapRotation());
+        onMapReadyCheckForActivity();
+    }
+
+    private void onMapReadyCheckForActivity() {
+        final FragmentActivity activity = getActivity();
+        if (activity != null) {
+            onMapAndActivityReady();
+        } else {
+            // wait a bit until fragment is attached and activity becomes available
+            new Handler(Looper.getMainLooper()).postDelayed(this::onMapReadyCheckForActivity, 100);
+        }
+    }
+
+    private void onMapAndActivityReady() {
         GoogleMapsThemeHelper.setTheme(requireActivity(), mMap);
         if (position != null) {
             setCenter(position);
