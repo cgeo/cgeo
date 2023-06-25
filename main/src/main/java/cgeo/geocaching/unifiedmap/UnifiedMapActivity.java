@@ -282,7 +282,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // FilterUtils.initializeFilterBar(this, this);
 
-        Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.individualRoute.notifyDataChanged(), this);
+        Routing.connect(ROUTING_SERVICE_KEY, () -> viewModel.reloadIndividualRoute(), this);
         viewModel.reloadIndividualRoute();
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
