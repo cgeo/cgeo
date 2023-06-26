@@ -10,15 +10,14 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
-import android.view.View;
 
 import androidx.annotation.StringRes;
+
+import java.lang.ref.WeakReference;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.CircularProgressIndicatorSpec;
 import com.google.android.material.progressindicator.IndeterminateDrawable;
-
-import java.lang.ref.WeakReference;
 
 public class ProgressButtonDisposableHandler extends DisposableHandler {
     public static final String MESSAGE_TEXT = "message_text";
@@ -110,8 +109,8 @@ public class ProgressButtonDisposableHandler extends DisposableHandler {
     }
 
     private static IndeterminateDrawable getCircularProgressIndicatorDrawable(final Context context) {
-        CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(context, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_ExtraSmall);
-        spec.indicatorSize = ViewUtils.dpToPixel(28);
+        final CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(context, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_ExtraSmall);
+        spec.indicatorSize = ViewUtils.dpToPixel(context.getResources().getDimension(R.dimen.buttonSize_iconButton) / context.getResources().getDisplayMetrics().density / 1.5f);
         return IndeterminateDrawable.createCircularDrawable(context, spec);
     }
 
