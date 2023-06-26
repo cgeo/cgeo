@@ -80,7 +80,7 @@ public class ProgressBarDisposableHandler extends DisposableHandler {
         if (activity != null) {
             final View progressBar = activity.findViewById(R.id.progressBar);
             if (progressBar != null) {
-                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         }
         if (resId != null) {
