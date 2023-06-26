@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true" >
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/offline_refresh"
                         style="@style/button_icon"
                         app:icon="@drawable/ic_menu_refresh"
@@ -188,7 +188,7 @@
                     tools:text="The cache may or may not be on your watch list."
                     android:textIsSelectable="false" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/add_to_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
@@ -196,7 +196,7 @@
                     app:icon="@drawable/ic_menu_watch"
                     tools:visibility="visible" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/remove_from_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"

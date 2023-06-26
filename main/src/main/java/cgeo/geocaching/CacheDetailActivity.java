@@ -102,6 +102,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
+import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
 import cgeo.geocaching.utils.TextUtils;
@@ -160,6 +161,8 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -753,7 +756,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, cache.getCoords());
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache, this::setCacheIcon);
+            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache, newCacheIcon -> setCacheIcon(newCacheIcon));
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             refreshOnResume = true;
         } else {
@@ -1069,7 +1072,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    this::storeCacheInLists, true, cache.getLists(), fastStoreOnLastSelection);
+                    selectedListIds -> storeCacheInLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -1100,7 +1103,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private static final class CheckboxHandler extends ProgressBarDisposableHandler {
+    private static final class CheckboxHandler extends ProgressButtonDisposableHandler {
         private final WeakReference<DetailsViewCreator> creatorRef;
         private final WeakReference<CacheDetailActivity> activityWeakReference;
 
@@ -1366,21 +1369,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * Abstract Listener for add / remove buttons for watchlist
          */
         private abstract class AbstractPropertyListener implements View.OnClickListener {
-            private final ProgressBarDisposableHandler handler;
+            private final ProgressButtonDisposableHandler handler;
+            protected MaterialButton button;
 
             AbstractPropertyListener() {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 handler = new CheckboxHandler(DetailsViewCreator.this, activity);
             }
 
-            public void doExecute(final int titleId, final int messageId, final Action1<ProgressBarDisposableHandler> action) {
+            public void doExecute(final int titleId, final int messageId, final Action1<ProgressButtonDisposableHandler> action) {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     if (ProgressBarDisposableHandler.isInProgress(activity) || activity.progress.isShowing()) {
                         activity.showToast(activity.res.getString(R.string.err_watchlist_still_managing));
                         return;
                     }
-                    handler.showProgress();
+                    handler.showProgress(button);
                 }
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> action.call(handler));
             }
@@ -1390,11 +1394,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * Listener for "add to watchlist" button
          */
         private class AddToWatchlistClickListener extends AbstractPropertyListener {
+
             @Override
             public void onClick(final View arg0) {
+                button = (MaterialButton) arg0;
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        DetailsViewCreator.this::watchListAdd);
+                        handler -> DetailsViewCreator.this.watchListAdd(handler));
             }
         }
 
@@ -1404,16 +1410,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class RemoveFromWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
+                button = (MaterialButton) arg0;
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        DetailsViewCreator.this::watchListRemove);
+                        handler -> DetailsViewCreator.this.watchListRemove(handler));
             }
         }
 
         /**
          * Add this cache to the watchlist of the user
          */
-        private void watchListAdd(final ProgressBarDisposableHandler handler) {
+        private void watchListAdd(final ProgressButtonDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1425,7 +1432,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache from the watchlist of the user
          */
-        private void watchListRemove(final ProgressBarDisposableHandler handler) {
+        private void watchListRemove(final ProgressButtonDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromWatchlist(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1437,7 +1444,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Add this cache to the favorite list of the user
          */
-        private void favoriteAdd(final ProgressBarDisposableHandler handler) {
+        private void favoriteAdd(final ProgressButtonDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1449,7 +1456,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache to the favorite list of the user
          */
-        private void favoriteRemove(final ProgressBarDisposableHandler handler) {
+        private void favoriteRemove(final ProgressButtonDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromFavorites(cache)) {
                 handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
@@ -1464,9 +1471,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class FavoriteAddClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
+                button = (MaterialButton) arg0;
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        DetailsViewCreator.this::favoriteAdd);
+                        handler -> DetailsViewCreator.this.favoriteAdd(handler));
             }
         }
 
@@ -1476,9 +1484,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class FavoriteRemoveClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
+                button = (MaterialButton) arg0;
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        DetailsViewCreator.this::favoriteRemove);
+                        handler -> DetailsViewCreator.this.favoriteRemove(handler));
             }
         }
 
@@ -2808,7 +2817,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return cache;
     }
 
-    private static class StoreCacheHandler extends ProgressBarDisposableHandler {
+    private static class StoreCacheHandler extends ProgressButtonDisposableHandler {
 
         StoreCacheHandler(final CacheDetailActivity activity) {
             super(activity);
@@ -2817,6 +2826,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @Override
         public void handleRegularMessage(final Message msg) {
             if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
+                button.setIcon(originalIcon);
                 dismissProgress(R.string.cache_progress_done_store);
                 notifyDataSetChanged(activityRef);
             }
@@ -2862,7 +2872,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected void storeCache(final Set<Integer> listIds) {
         final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this);
-        storeCacheHandler.showProgress();
+        storeCacheHandler.showProgress(findViewById(R.id.offline_store));
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> cache.store(listIds, storeCacheHandler));
     }
 
