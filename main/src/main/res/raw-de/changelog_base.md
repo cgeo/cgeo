@@ -13,3 +13,4 @@
 - Neu: Zeige Fragezeichen im Symbol für Schwierigkeit/Gelände an, wenn sowohl Schwierigkeit als auch Gelände unbekannt sind
 - Neu: Option zum Bewerten eines Opencaching (OCPL) Caches während des Loggens
 - New: Event Date filter for upcoming events
+- Change: Make 'relative' the default for date filters
