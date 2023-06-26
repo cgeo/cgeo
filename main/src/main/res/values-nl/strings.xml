@@ -495,6 +495,7 @@
     <string name="cache_filter_favorites">Favorieten</string>
     <string name="cache_filter_distance">Afstand</string>
     <string name="cache_filter_hidden">Verstopt op</string>
+    <string name="cache_filter_eventdate">Evenement datum</string>
     <string name="cache_filter_logs_count">Aantal logs</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
@@ -620,6 +621,28 @@
         <item>1w</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>verleden</item>
+        <item>vandaag</item>
+        <item>morgen</item>
+        <item>over 2 dagen</item>
+        <item>over 3 dagen</item>
+        <item>over 1 week</item>
+        <item>over 2 weken</item>
+        <item>over 1 maand</item>
+        <item>alle toekomstige</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>verleden</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1w</item>
+        <item>2w</item>
+        <item>1m</item>
+        <item>&gt;1m</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versie</string>
@@ -1253,6 +1276,7 @@
     <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
     <string name="cache_personal_note_upload_error">Fout bij uploaden persoonlijke notitie</string>
     <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
+    <string name="cache_personal_note_save_and_upload">Opslaan en uploaden</string>
     <string name="cache_personal_note_vars_out_of_sync">Variabelen in notities zijn niet gesynchroniseerd (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchroniseer variabelen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Controleer variabelen waarvan de waarde uit notities moet worden overschreven</string>
