@@ -623,14 +623,25 @@
     </string-array>
     <string-array name="cache_filter_event_date_stored_values_label">
         <item>vergangene</item>
-        <item>today</item>
-        <item>tomorrow</item>
-        <item>2 days from now</item>
-        <item>3 days from now</item>
-        <item>1 week from now</item>
-        <item>2 weeks from now</item>
-        <item>1 month from now</item>
+        <item>heute</item>
+        <item>morgen</item>
+        <item>in 2 Tagen</item>
+        <item>in 3 Tagen</item>
+        <item>in 1 Woche</item>
+        <item>in 2 Wochen</item>
+        <item>in 1 Monat</item>
         <item>all future</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>past</item>
+        <item>0T</item>
+        <item>1T</item>
+        <item>2T</item>
+        <item>3T</item>
+        <item>1W</item>
+        <item>2W</item>
+        <item>1M</item>
+        <item>&gt;1M</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
