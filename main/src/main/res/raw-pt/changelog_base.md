@@ -13,3 +13,4 @@
 - Novo: Mostra um ponto de interrogação no símbolo de dificuldade/terreno, se ambos são desconhecidos
 - Novo: Opção de votar em caches de opencaching (OCPL) durante o registo
 - Novo: Filtro por Data do Evento para próximos eventos
+- Change: Make 'relative' the default for date filters
