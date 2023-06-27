@@ -13,4 +13,4 @@
 - Nieuw: Toon vraagteken bij moeilijkheid/terrein symbool, als zowel moeilijkheidsgraad als terrein onbekend zijn
 - Nieuw: Optie om te stemmen op opencaching (OCPL) caches tijdens het loggen
 - Nieuw: Evenementdatum filter voor aankomende evenementen
-- Change: Make 'relative' the default for date filters
+- Wijziging: Maak 'relatief' de standaard voor datumfilters
