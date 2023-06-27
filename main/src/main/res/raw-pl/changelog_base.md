@@ -13,4 +13,4 @@
 - Nowość: Wyświetlaj znak zapytania w symbolu trudności/terenu, jeśli obie wartości są nieznane
 - Nowość: Możliwość głosowania na skrzynki opencaching (OCPL) podczas dokonywania wpisu do dziennika znalezień
 - Nowość: Filtr daty wydarzenia dla nadchodzących wydarzeń
-- Change: Make 'relative' the default for date filters
+- Zmiana: Podczas filtrowania dat ustaw tryb „W stosunku do dzisiaj” jako domyślny
