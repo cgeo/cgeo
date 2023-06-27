@@ -13,4 +13,4 @@
 - Novinka: Zobrazení otazníku v symbolu obtížnosti/terénu, pokud není známa obtížnost ani terén
 - Novinka: Možnost hlasovat během logování o keškách opencaching (OCPL)
 - Novinka: Filtr datum eventu pro nadcházející eventy
-- Change: Make 'relative' the default for date filters
+- Změna: Nastavení "relativní" jako přednastavené pro filtr datumu
