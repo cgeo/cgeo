@@ -176,7 +176,7 @@ public class GCLogin extends AbstractLogin {
 
             if (StringUtils.isBlank(tryLoggedInData)) {
                 logLastLoginError("Failed to retrieve login page (1st)");
-                return StatusCode.CONNECTION_FAILED; // no login page
+                return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
             if (getLoginStatus(tryLoggedInData)) {
@@ -229,7 +229,7 @@ public class GCLogin extends AbstractLogin {
             return status.statusCode;
         } catch (final Exception ignored) {
             logLastLoginError("communication error");
-            return StatusCode.CONNECTION_FAILED;
+            return StatusCode.CONNECTION_FAILED_GC;
         }
     }
 

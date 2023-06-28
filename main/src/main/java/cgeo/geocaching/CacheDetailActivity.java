@@ -1002,7 +1002,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         if (!Network.isConnected()) {
-            showToast(getString(R.string.err_server));
+            showToast(getString(R.string.err_server_general));
             return;
         }
 
