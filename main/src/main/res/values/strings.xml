@@ -216,7 +216,8 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Failed Login page parsing</string>
     <string name="err_captcha">The service requires a Captcha. Please open the geocaching.com website with your browser and solve the Captcha shown while logging in there. Then try again to login with c:geo.</string>
-    <string name="err_server">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
+    <string name="err_server_general">Unable to contact geocaching server. The website may be down or your internet connection not working.</string>
+    <string name="err_server_gc">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_lc">Unable to contact labs.geocaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>

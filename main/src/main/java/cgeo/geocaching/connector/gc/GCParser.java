@@ -909,13 +909,13 @@ public final class GCParser {
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchByNextPage: No data from server");
-            return new SearchResult(con, StatusCode.CONNECTION_FAILED);
+            return new SearchResult(con, StatusCode.CONNECTION_FAILED_GC);
         }
 
         final SearchResult searchResult = parseSearch(con, url, page, context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0));
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByNextPage: No cache parsed");
-            return new SearchResult(con, StatusCode.CONNECTION_FAILED);
+            return new SearchResult(con, StatusCode.CONNECTION_FAILED_GC);
         }
 
         // search results don't need to be filtered so load GCVote ratings here
