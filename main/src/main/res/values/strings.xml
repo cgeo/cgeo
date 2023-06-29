@@ -1618,7 +1618,12 @@
     <string name="cache_recently_viewed_empty">No recently viewed caches</string>
     <string name="cache_clear_recently_viewed">clear</string>
 
-    <string name="cache_progress_done_refresh">%s refreshed</string>
+    <string name="cachedetails_progress_refresh">%s refreshed</string>
+    <string name="cachedetails_progress_watch">Added to watchlist</string>
+    <string name="cachedetails_progress_unwatch">Removed from watchlist</string>
+    <string name="cachedetails_progress_favorite">Added to favorites</string>
+    <string name="cachedetails_progress_unfavorite">Removed to favorites</string>
+    <string name="cachedetails_progress_upload_note">Personal note uploaded</string>
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
