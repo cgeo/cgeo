@@ -242,7 +242,6 @@
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_still_working">Still working on another task.</string>
     <string name="err_detail_premium_log_found">This cache is only available to premium members of geocaching.com. Therefore, the cache information cannot be displayed.\n\nHowever, if you have already found this cache, you can log it here.</string>
-    <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
     <string name="err_watchlist_failed">Changing your watchlist failed.</string>
     <string name="err_application_no">c:geo can\'t find any suitable application.</string>
     <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
@@ -1619,8 +1618,7 @@
     <string name="cache_recently_viewed_empty">No recently viewed caches</string>
     <string name="cache_clear_recently_viewed">clear</string>
 
-    <string name="cache_progress_done_refresh">Cache details refreshed</string>
-    <string name="cache_progress_done_store">Cache stored</string>
+    <string name="cache_progress_done_refresh">%s refreshed</string>
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>

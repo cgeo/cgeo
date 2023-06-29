@@ -162,8 +162,6 @@ import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -180,6 +178,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -1381,7 +1380,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     if (ProgressBarDisposableHandler.isInProgress(activity) || activity.progress.isShowing()) {
-                        activity.showToast(activity.res.getString(R.string.err_watchlist_still_managing));
+                        activity.showToast(activity.res.getString(R.string.err_detail_still_working));
                         return;
                     }
                     handler.showProgress(button);
@@ -2826,8 +2825,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @Override
         public void handleRegularMessage(final Message msg) {
             if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
-                button.setIcon(originalIcon);
-                dismissProgress(R.string.cache_progress_done_store);
+                dismissProgress();
                 notifyDataSetChanged(activityRef);
             }
         }
@@ -2841,10 +2839,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         @Override
         public void handleRegularMessage(final Message msg) {
+            final CacheDetailActivity cacheDetailActivity = (CacheDetailActivity) activityRef.get();
             if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
                 showToast((String) msg.obj);
             } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
-                dismissProgress(R.string.cache_progress_done_refresh);
+                dismissProgress(cacheDetailActivity.getString(R.string.cache_progress_done_refresh, cacheDetailActivity.geocode));
                 notifyDataSetChanged(activityRef);
             }
         }
