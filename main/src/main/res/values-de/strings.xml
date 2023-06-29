@@ -495,6 +495,7 @@
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
+    <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Anzahl Logs</string>
     <string name="cache_filter_last_found">Letztes Funddatum</string>
     <string name="cache_filter_log_entry">Logeintrag</string>
@@ -630,10 +631,10 @@
         <item>in 1 Woche</item>
         <item>in 2 Wochen</item>
         <item>in 1 Monat</item>
-        <item>all future</item>
+        <item>alle zukünftigen</item>
     </string-array>
     <string-array name="cache_filter_event_date_stored_values_label_short">
-        <item>past</item>
+        <item>vergangene</item>
         <item>0T</item>
         <item>1T</item>
         <item>2T</item>
@@ -1275,6 +1276,7 @@
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_personal_note_upload_error">Fehler beim Hochladen der persönlichen Notiz</string>
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
+    <string name="cache_personal_note_save_and_upload">Speichern &amp; hochladen</string>
     <string name="cache_personal_note_vars_out_of_sync">Variablen in Notizen sind nicht synchronisiert (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronisiere Variablen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Wähle die Variablen, die aus den Notizen überschrieben werden sollen</string>
