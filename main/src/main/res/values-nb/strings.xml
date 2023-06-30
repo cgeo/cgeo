@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
-    <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
     <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
     <string name="err_server_lc">Klarte ikke koble til land.geocaching.com. Nettsiden er nede eller din internettforbindelse virker ikke.</string>
     <string name="err_server_su">Får ikke kontakt med Geocaching.su. Nettstedet kan være nede eller Internettilkoblingen din fungerer ikke.</string>
