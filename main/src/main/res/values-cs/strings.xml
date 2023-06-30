@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
     <string name="err_captcha">Služba vyžaduje Captchu. Otevřete prosím webovou stránku geocaching.com v prohlížeči a vyřešte Captchu, která se zobrazí při přihlašování. Poté se zkuste znovu přihlásit pomocí c:geo.</string>
-    <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
     <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_lc">Nelze se připojit k labs.geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
@@ -594,24 +593,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Dílčí filtr je aktuálně prázdný</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
     <string name="cache_filter_log_entry_logtext">Text logu</string>
-    <string name="cache_filter_stored_since_notstored">Neuložené</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 hodin</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 hodin</item>
-        <item>24 hodin</item>
-        <item>7 dní</item>
-        <item>30 dní</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">úsvit</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>před více než rokem</item>
         <item>před rokem</item>
