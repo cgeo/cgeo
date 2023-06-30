@@ -200,7 +200,6 @@
     <string name="err_none">Ok</string>
     <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
     <string name="err_captcha">Tjänsten kräver en Captcha. Vänligen öppna websidan geocaching.com med din webbläsare och lös den Captcha som visas medan du loggar in där. Försök sedan igen för att logga in med c:geo.</string>
-    <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
     <string name="err_server_lc">Det går inte att kontakta labs.geocaching.com. Webbplatsen kan vara nere eller så fungerar inte din internetanslutning.</string>
     <string name="err_server_su">Misslyckades att ansluta till Geocaching.su. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
@@ -577,24 +576,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Det underordnade filtret är för närvarande tomt</string>
     <string name="cache_filter_log_entry_foundby">Hittad av</string>
     <string name="cache_filter_log_entry_logtext">Loggtext</string>
-    <string name="cache_filter_stored_since_notstored">Inte lagrad</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 timmar</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 timmar</item>
-        <item>24 timmar</item>
-        <item>7 dagar</item>
-        <item>30 dagar</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">Tidernas begynnelse</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>mer än ett år sedan</item>
         <item>ett år sedan</item>
