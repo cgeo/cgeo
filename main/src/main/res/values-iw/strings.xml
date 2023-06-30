@@ -138,7 +138,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
     <string name="err_parse">טעינת עמוד ההתחברות כשלה</string>
-    <string name="err_server">אין אפשרות ליצור קשר עם Geocaching.com. אתר האינטרנט עשוי להיות לא זמין או שחיבור האינטרנט שלך אינו פועל.</string>
     <string name="err_server_ec">אין אפשרות ליצור קשר עם Extremcaching.com. אתר האינטרנט עשוי להיות לא זמין או שחיבור האינטרנט שלך אינו פועל.</string>
     <string name="err_server_gk">אין אפשרות ליצור קשר עם GeoKrety.org. אתר האינטרנט עשוי להיות למטה או את החיבור שלך לאינטרנט אינו פועל.</string>
     <string name="err_login">אין מידע התחברות שמור</string>
