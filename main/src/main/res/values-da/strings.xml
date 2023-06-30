@@ -193,7 +193,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Login-side kan ikke indlæses</string>
-    <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
     <string name="err_server_ec">Kan ikke forbinde til Extremecaching.com. Hjemmesiden kan være nede eller du har ikke forbindelse til Internettet.</string>
     <string name="err_server_lc">Kan ikke forbinde til labs.geocaching.com (server- eller forbindelsesfejl?).</string>
     <string name="err_server_su">Kan ikke forbinde til Geocaching.su. Serveren kan være nede eller din enhed mangler forbindelse til Internettet.</string>
@@ -518,24 +517,6 @@
     <string name="cache_filter_status_exclude_archived">Udelad arkiverede</string>
     <string name="cache_filter_log_entry_foundby">Fundet af</string>
     <string name="cache_filter_log_entry_logtext">Logtekst</string>
-    <string name="cache_filter_stored_since_notstored">Ikke gemt</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 timer</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0t</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 timer</item>
-        <item>24 timer</item>
-        <item>7 dage</item>
-        <item>30 dage</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8t</item>
-        <item>24t</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">arilds tid</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
