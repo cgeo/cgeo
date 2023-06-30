@@ -186,7 +186,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">解析登入頁失敗</string>
-    <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
@@ -493,7 +492,7 @@
         <item>8小時</item>
         <item>24小時</item>
         <item>7天</item>
-        <item>30天</item>
+        <item>30d</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max_short">最大的</string>
     <!-- about -->
