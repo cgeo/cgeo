@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
-    <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_lc">labs.geocaching.com\'a bağlanılamıyor. Sitede sorun olabilir veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_su">Geocaching.su adresine bağlanılamıyor. Site veya internet bağlantınız çalışmıyor olabilir.</string>
@@ -566,7 +565,7 @@
         <item>8s</item>
         <item>24s</item>
         <item>7g</item>
-        <item>30g</item>
+        <item>30d</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">ezelden beri</string>
     <string name="cache_filter_stored_since_stored_max_short">maks</string>
