@@ -200,7 +200,6 @@
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
     <string name="err_captcha">이 서비스에는 Captcha가 필요합니다. 브라우저에서 geocaching.com 웹 사이트를 열고 로그인할 때 표시되는 Captcha를 해결하십시오. 다음에는 c:geo로 다시 로그인을 시도하십시오.</string>
-    <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_su">Geocaching.su에 접속할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -575,24 +574,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
-    <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0시간</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0시간</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8시간</item>
-        <item>24시간</item>
-        <item>7 일</item>
-        <item>30일</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8시간</item>
-        <item>24 시간</item>
-        <item>7일</item>
-        <item>30일</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">시간의 여명</string>
-    <string name="cache_filter_stored_since_stored_max_short">최대</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>1년 이상</item>
         <item>1년 전</item>
