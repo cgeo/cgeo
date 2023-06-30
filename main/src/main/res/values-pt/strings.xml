@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
     <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
-    <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -582,24 +581,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
-    <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 horas</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 horas</item>
-        <item>24 horas</item>
-        <item>7 dias</item>
-        <item>30 dias</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">desde o amanhecer</string>
-    <string name="cache_filter_stored_since_stored_max_short">máx</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>há mais de um ano</item>
         <item>um ano atrás</item>
