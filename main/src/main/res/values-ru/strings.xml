@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
     <string name="err_captcha">Сервис требует капчу. Пожалуйста, откройте в браузере сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
-    <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -607,7 +606,7 @@
         <item>8ч</item>
         <item>24ч</item>
         <item>7дн</item>
-        <item>30дн</item>
+        <item>30д</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">с незапамятных времен</string>
     <string name="cache_filter_stored_since_stored_max_short">макс</string>
