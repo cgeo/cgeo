@@ -170,7 +170,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Pagina de autentificare nu a putut fi parcursă</string>
-    <string name="err_server">Geocaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_ec">Extremcaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_gk">GeoKrety.org nu poate fi contactat. Conexiunea la internet nu funcţionează sau site-ul s-ar putea să fie indisponibil momentan.</string>
     <string name="err_login">Nu există informaţii de autorizare</string>
