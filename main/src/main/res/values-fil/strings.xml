@@ -122,7 +122,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Okay</string>
     <string name="err_parse">Nabigong pag-login sa isang pahina ng parsing</string>
-    <string name="err_server">Hindi nakakontak ang Geocaching.com. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_server_ec">Hindi makontak ang Extremcaching.com. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_server_gk">Hindi makontak ang GeoKrety.org. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_login">Walang naka-imbak na Impormasyon sa Login</string>
