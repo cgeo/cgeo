@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
     <string name="err_captcha">Palvelu edellyttää Captchaa. Ole hyvä ja avaa geocaching.com sivusto selaimellasi ja ratkaise näkyvä Captcha kun kirjaudut sinne. Yritä sitten uudelleen kirjautua c:geoon.</string>
-    <string name="err_server">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -589,7 +588,7 @@
         <item>8h</item>
         <item>24h</item>
         <item>7pv</item>
-        <item>30pv</item>
+        <item>30p</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">ajan alkamisen jälkeen</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
