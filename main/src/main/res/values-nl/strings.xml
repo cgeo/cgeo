@@ -200,6 +200,8 @@
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
     <string name="err_captcha">Deze service vereist een Captcha. Open de geocaching.com website met je browser en los de captcha op die getoond wordt tijdens het inloggen. Probeer daarna opnieuw in te loggen met c:geo.</string>
+    <string name="err_server_general">De geocaching server kan niet bereikt worden. De website kan offline zijn of je internetverbinding werkt niet.</string>
+    <string name="err_server_gc">Verbinding met Geocaching.com mislukt. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
@@ -581,6 +583,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Het subfilter is momenteel leeg</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door</string>
     <string name="cache_filter_log_entry_logtext">Log tekst</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>meer dan 1 jaar geleden</item>
+        <item>een jaar geleden</item>
+        <item>30 dagen geleden</item>
+        <item>een week geleden</item>
+        <item>1 dag geleden</item>
+        <item>minder dan 1 dag geleden</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1j</item>
+        <item>1j</item>
+        <item>30d</item>
+        <item>1w</item>
+        <item>1d</item>
+        <item>&lt;1d</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>meer dan 1 jaar geleden</item>
         <item>een jaar geleden</item>
