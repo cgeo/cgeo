@@ -163,66 +163,6 @@
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
     <string translatable="false" name="pref_cacheListInfo">cacheListInfo</string>
 
-    <!-- ============================================================================================================================================================================== -->
-    <!-- keys for cachedetails screen -->
-    <string translatable="false" name="preference_screen_cachedetails">preference_screen_cachedetails</string>
-    <!-- ============================================================================================================================================================================== -->
-    <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
-    <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
-    <string translatable="false" name="pref_livelist">livelist</string>
-    <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
-    <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
-    <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
-    <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
-
-
-    <!-- ============================================================================================================================================================================== -->
-    <!-- keys for map screen -->
-    <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
-    <string translatable="false" name="preference_screen_map_content_behavior">preference_screen_map_content_behavior</string>
-    <!-- ============================================================================================================================================================================== -->
-
-    <!-- category map data -->
-    <string translatable="false" name="pref_mapsource">mapsource</string>
-    <string translatable="false" name="pref_tileprovider">tileprovider</string>
-    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
-    <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
-    <string translatable="false" name="pref_mapAutoDownloadsInterval">mapAutoDownloadsInterval</string>
-    <string translatable="false" name="pref_persistablefolder_offlinemaps">persistablefolder_offlinemaps</string>
-    <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
-    <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
-    <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
-    <string translatable="false" name="pref_maphillshading">maphillshading</string>
-    <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
-    <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
-    <string translatable="false" name="pref_mapRotation">mapRotation</string>
-
-    <!-- category waypoints -->
-    <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
-    <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
-    <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
-    <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
-    <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
-
-    <!-- category map content -->
-    <string translatable="false" name="pref_maptrail">maptrail</string>
-    <string translatable="false" name="pref_maptrail_length">maptrail_length</string>
-    <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
-    <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
-
-    <!-- category map behavior -->
-    <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
-    <string translatable="false" name="pref_showRouteMenu">showRouteMenu</string>
-    <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
-
-    <!-- category proximity notfication -->
-    <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
-    <string translatable="false" name="pref_proximityDistanceNear">pref_proximityDistanceNear</string>
-    <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
-    <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
-    <string translatable="false" name="pref_proximityNotificationType">pref_proximityNotificationType</string>
-
     <!-- category mapline customization -->
     <string translatable="false" name="pref_mapline_trailcolor">mapline_trailcolor</string>
     <string translatable="false" name="pref_mapline_trailwidth">mapline_trailwidth</string>
@@ -237,10 +177,86 @@
     <string translatable="false" name="pref_mapline_accuracycirclecolor">mapline_accuracycirclecolor</string>
     <string translatable="false" name="pref_mapline_accuracycirclefillcolor">mapline_accuracycirclefillcolor</string>
 
+
+    <!-- ============================================================================================================================================================================== -->
+    <!-- keys for cachedetails screen -->
+    <string translatable="false" name="preference_screen_cachedetails">preference_screen_cachedetails</string>
+    <!-- ============================================================================================================================================================================== -->
+    <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
+    <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
+    <string translatable="false" name="pref_livelist">livelist</string>
+    <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
+    <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
+    <string translatable="false" name="pref_customtabs_as_browser">customtabs_as_browser</string>
+    <string translatable="false" name="pref_rot13_hint">pref_scramble_hint</string>
+
+
+    <!-- ============================================================================================================================================================================== -->
+    <!-- keys for map sources screen -->
+    <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
+    <!-- ============================================================================================================================================================================== -->
+
+    <!-- category map data -->
+    <string translatable="false" name="pref_mapsource">mapsource</string>
+
+    <!-- category offline maps -->
+    <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
+    <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
+    <string translatable="false" name="pref_mapAutoDownloadsInterval">mapAutoDownloadsInterval</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemaps">persistablefolder_offlinemaps</string>
+
+    <!-- category offline map themes -->
+    <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemapthemes">persistablefolder_offlinemapthemes</string>
+    <string translatable="false" name="pref_renderthemefolder_synctolocal">renderthemefolder_synctolocal</string>
+
+    <!-- category offline maps hillshading -->
+    <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
+    <string translatable="false" name="pref_maphillshading">maphillshading</string>
+    <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
+    <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>
+    <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
+
+    <!-- category unified map -->
+    <string translatable="false" name="pref_fakekey_unifiedmap">fakekey_unifiedmap</string>
+    <string translatable="false" name="pref_tileprovider">tileprovider</string>
+    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
+    <string translatable="false" name="pref_useUnifiedMap">useUnifiedMap</string>
+
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
-    <string translatable="false" name="pref_fakekey_unifiedmap">fakekey_unifiedmap</string>
-    <string translatable="false" name="pref_useUnifiedMap">useUnifiedMap</string>
+
+
+    <!-- ============================================================================================================================================================================== -->
+    <!-- keys for map content & behavior screen -->
+    <string translatable="false" name="preference_screen_map_content_behavior">preference_screen_map_content_behavior</string>
+    <!-- ============================================================================================================================================================================== -->
+
+    <!-- category map content -->
+    <string translatable="false" name="pref_maptrail">maptrail</string>
+    <string translatable="false" name="pref_maptrail_length">maptrail_length</string>
+    <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
+    <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
+
+    <!-- category waypoints -->
+    <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
+    <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
+    <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
+    <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>
+    <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
+
+    <!-- category map behavior -->
+    <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
+    <string translatable="false" name="pref_showRouteMenu">showRouteMenu</string>
+    <string translatable="false" name="pref_mapRotation">mapRotation</string>
+    <string translatable="false" name="pref_mapActionbarAutohide">mapActionbarAutohide</string>
+
+    <!-- category proximity notfication -->
+    <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
+    <string translatable="false" name="pref_proximityDistanceNear">pref_proximityDistanceNear</string>
+    <string translatable="false" name="pref_proximityNotificationGeneral">pref_proximityNotificationGeneral</string>
+    <string translatable="false" name="pref_proximityNotificationSpecific">pref_proximityNotificationSpecific</string>
+    <string translatable="false" name="pref_proximityNotificationType">pref_proximityNotificationType</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -416,10 +432,6 @@
         <item>@string/pref_value_startscreen_search</item>
         <item>@string/pref_value_startscreen_nearby</item>
     </string-array>
-
-    <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>
-    <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
-
 
     <!-- ============================================================================================================================================================================== -->
     <!-- other preference keys (not used directly in our preferences) -->
