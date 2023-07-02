@@ -525,7 +525,7 @@ public class Settings {
 
     }
 
-    private static long getLong(final int prefKeyId, final long defaultValue) {
+    public static long getLong(final int prefKeyId, final long defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
     }
 
@@ -2352,6 +2352,10 @@ public class Settings {
 
     public static boolean getHintAsRot13() {
         return getBoolean(R.string.pref_rot13_hint, true);
+    }
+
+    public static boolean getIconScaleEverywhere() {
+        return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
     public static double getMapShadingScale() {

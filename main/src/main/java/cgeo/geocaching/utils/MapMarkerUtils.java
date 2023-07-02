@@ -50,7 +50,10 @@ public final class MapMarkerUtils {
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
     private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
-    private static EmojiUtils.EmojiPaint lPaint = null; // list markers
+    private static EmojiUtils.EmojiPaint lcPaint = null; // list markers for caches
+    private static EmojiUtils.EmojiPaint lwPaint = null; // list markers for waypoints
+    private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
+    private static final float scalingFactorWpIcons = Settings.getLong(R.string.pref_mapWpScale, 100) / 100.0f;
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -68,7 +71,7 @@ public final class MapMarkerUtils {
      * @return a drawable representing the current cache status
      */
     @NonNull
-    public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
+    public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final boolean applyScaling) {
         final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
                 .append(cache.getAssignedEmoji())
@@ -92,12 +95,13 @@ public final class MapMarkerUtils {
                 .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
                 .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
                 .append(CacheDownloaderService.isDownloadPending(cache))
+                .append(applyScaling)
                 .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createCacheMarker(res, cache, cacheListType, assignedMarkers));
+                marker = new CacheMarker(hashcode, createCacheMarker(res, cache, cacheListType, assignedMarkers, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -115,14 +119,14 @@ public final class MapMarkerUtils {
     @NonNull
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
+    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers, final boolean applyScaling) {
         final int useEmoji = cache.getAssignedEmoji();
 
         // marker shape
-        final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
+        final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null), applyScaling ? scalingFactorCacheIcons : 1);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         if (showPin(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, applyScaling ? scalingFactorCacheIcons : 1));
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
@@ -133,62 +137,62 @@ public final class MapMarkerUtils {
         if (useEmoji > 0 && !doubleSize) {
             // custom icon
             if (cPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15)); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15 * (applyScaling ? scalingFactorCacheIcons : 1))); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
                 cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
         } else if (doubleSize) {
             // main icon (type icon / custom cache icon)
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, applyScaling ? scalingFactorCacheIcons : 1));
         } else {
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
             // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-            final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
-            DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
-            insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
+            final Drawable backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
+            DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
+            insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, applyScaling ? scalingFactorCacheIcons : 1), Gravity.CENTER));
             // main icon (type icon / custom cache icon)
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, applyScaling ? scalingFactorCacheIcons : 1));
         }
 
         // overlays
         // center: archived
         if (cache.isArchived()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, applyScaling ? scalingFactorCacheIcons : 1));
         }
         // top-right: DT marker / sync / stored
         if (Settings.isDTMarkerEnabled()) {
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain()), Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
         } else if (CacheDownloaderService.isDownloadPending(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT, applyScaling ? scalingFactorCacheIcons : 1));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT, applyScaling ? scalingFactorCacheIcons : 1));
         }
         // top-center: sync / stored (if DT marker enabled)
         if (Settings.isDTMarkerEnabled() && CacheDownloaderService.isDownloadPending(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.CENTER_HORIZONTAL, applyScaling ? scalingFactorCacheIcons : 1));
         } else if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL, applyScaling ? scalingFactorCacheIcons : 1));
         }
         // top-left: will attend / found / not found / offline-logs
         if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
-                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
+                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT, applyScaling ? scalingFactorCacheIcons : 1));
             }
         }
         // bottom-right: user modified coords / final waypoint defined
         if (cache.hasUserModifiedCoords() && mainMarkerId != R.drawable.marker_usermodifiedcoords) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT, applyScaling ? scalingFactorCacheIcons : 1));
         } else if (cache.hasFinalDefined() && !cache.hasUserModifiedCoords()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT, applyScaling ? scalingFactorCacheIcons : 1));
         }
         // bottom-left: personal note
         if (cache.getPersonalNote() != null) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT, applyScaling ? scalingFactorCacheIcons : 1));
         }
         // center-left/center-right: list markers
-        addListMarkers(res, insetsBuilder, assignedMarkers);
+        addListMarkers(res, insetsBuilder, assignedMarkers, true, applyScaling);
 
         return buildLayerDrawable(insetsBuilder, 12, 13);
     }
@@ -202,7 +206,7 @@ public final class MapMarkerUtils {
      * @return a drawable representing the current waypoint status
      */
     @NonNull
-    public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin) {
+    public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
@@ -222,12 +226,13 @@ public final class MapMarkerUtils {
                 .append(cacheIsDisabled)
                 .append(cacheIsArchived)
                 .append(showPin)
+                .append(applyScaling)
                 .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived, showPin));
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived, showPin, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -242,13 +247,17 @@ public final class MapMarkerUtils {
      * @return a drawable representing the current waypoint status
      */
     @NonNull
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived, final boolean showPin) {
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived, final boolean showPin, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
-        final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null);
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null), applyScaling ? scalingFactorWpIcons : 1);
+        final int size = marker.getIntrinsicWidth();
+
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, size, size);
         if (showPin) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, applyScaling ? scalingFactorWpIcons : 1));
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
@@ -258,17 +267,18 @@ public final class MapMarkerUtils {
             mainMarker.mutate();
             DrawableCompat.setTint(mainMarker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
         }
-        insetsBuilder.withInset(new InsetBuilder(mainMarker, Gravity.CENTER));
+        final Drawable mainMarkerScaled = new ScalableDrawable(mainMarker, applyScaling ? scalingFactorWpIcons : 1);
+        insetsBuilder.withInset(new InsetBuilder(mainMarkerScaled, Gravity.CENTER));
 
         if (cacheIsArchived) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, applyScaling ? scalingFactorWpIcons : 1));
         }
         // bottom-right: visited
         if (waypoint.isVisited()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_visited, Gravity.BOTTOM | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_visited, Gravity.BOTTOM | Gravity.RIGHT, applyScaling ? scalingFactorWpIcons : 1));
         }
 
-        addListMarkers(res, insetsBuilder, assignedMarkers);
+        addListMarkers(res, insetsBuilder, assignedMarkers, false, applyScaling);
 
         return buildLayerDrawable(insetsBuilder, 7, 7);
     }
@@ -620,15 +630,21 @@ public final class MapMarkerUtils {
     /**
      * adds list markers to drawable given by insetsBuilder
      */
-    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
+    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
         if (assignedMarkers.size() > 0) {
-            if (lPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f);
-                lPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
+            EmojiUtils.EmojiPaint paint = forCaches ? lcPaint : lwPaint;
+            if (paint == null) {
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f * (applyScaling ? (forCaches ? scalingFactorCacheIcons : scalingFactorWpIcons) : 1));
+                paint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
+                if (forCaches) {
+                    lcPaint = paint;
+                } else {
+                    lwPaint = paint;
+                }
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
-                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
             }
         }
     }
@@ -684,13 +700,13 @@ public final class MapMarkerUtils {
         return result;
     }
 
-    public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
-        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
+    public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
+        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain));
+                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -704,34 +720,34 @@ public final class MapMarkerUtils {
      * @param terrain       Terrain rating
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
-    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_bg, null));
+    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
+        final Drawable background = new ScalableDrawable(DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_bg, null)), applyScaling ? scalingFactorCacheIcons : 1);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
         if (difficulty == -1 && terrain == -1) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, applyScaling ? scalingFactorCacheIcons : 1));
         } else if (difficulty == 0 && terrain == 0) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, applyScaling ? scalingFactorCacheIcons : 1));
         } else {
             final String packageName = CgeoApplication.getInstance().getPackageName();
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty)));
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty, applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain, applyScaling)));
 
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg, applyScaling ? scalingFactorCacheIcons : 1));
         }
 
         return buildLayerDrawable(insetsBuilder, layers, 0);
     }
 
     @SuppressWarnings("DiscouragedApi")
-    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating) {
+    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final boolean applyScaling) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
-        return DrawableCompat.wrap(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null));
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), applyScaling ? scalingFactorCacheIcons : 1);
     }
 
 }

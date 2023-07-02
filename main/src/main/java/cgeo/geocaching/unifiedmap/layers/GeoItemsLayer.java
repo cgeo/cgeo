@@ -29,8 +29,8 @@ public class GeoItemsLayer {
             }
 
             final CacheMarker cm = item instanceof Geocache
-                    ? MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), (Geocache) item, null)
-                    : MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), (Waypoint) item, true);
+                    ? MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), (Geocache) item, null, true)
+                    : MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), (Waypoint) item, true, true);
 
             layer.put(key, GeoPrimitive.createMarker(item.getCoords(),
                     GeoIcon.builder()

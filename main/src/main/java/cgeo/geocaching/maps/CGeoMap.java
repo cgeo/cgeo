@@ -1614,7 +1614,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (isDotMode) {
             item.setMarker(MapMarkerUtils.getCacheDotMarker(getResources(), cache));
         } else {
-            item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache, null));
+            item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache, null, true));
         }
         return item;
     }
@@ -1624,7 +1624,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (isDotMode) {
             item.setMarker(MapMarkerUtils.getWaypointDotMarker(getResources(), waypoint));
         } else {
-            item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, true));
+            item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, true, true));
         }
         return item;
     }

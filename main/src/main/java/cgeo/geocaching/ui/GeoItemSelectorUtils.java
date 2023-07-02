@@ -9,6 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -38,7 +39,7 @@ public class GeoItemSelectorUtils {
         setTitleTextStyle(context, tv, cache);
         tv.setText(cache.getName());
 
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
         if (cache.getDifficulty() > 0.1f) {
@@ -59,7 +60,7 @@ public class GeoItemSelectorUtils {
         final TextView tv = (TextView) view.findViewById(R.id.text);
         tv.setText(waypoint.getName());
 
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false).getDrawable(), null, null, null);
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
         final Geocache parentCache = waypoint.getParentGeocache();

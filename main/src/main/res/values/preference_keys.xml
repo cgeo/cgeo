@@ -529,6 +529,10 @@
     <string translatable="false" name="pref_map_routing">map_routing</string>
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_google_map_theme">google_map_theme</string>
+    <string translatable="false" name="pref_mapSemitransVisitedWp">mapSemitransVisitedWp</string>
+    <string translatable="false" name="pref_mapCacheScale">mapCacheScale</string>
+    <string translatable="false" name="pref_mapWpScale">mapWpScale</string>
+    <string translatable="false" name="pref_mapScaleOnly">mapScaleOnly</string>
 
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
