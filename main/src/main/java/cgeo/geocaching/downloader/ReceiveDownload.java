@@ -225,14 +225,21 @@ class ReceiveDownload {
 
         // clean up
         if (!cancelled.get()) {
-            try {
-                context.getContentResolver().delete(uri, null, null);
-            } catch (IllegalArgumentException iae) {
-                Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+            if (status == CopyStates.SUCCESS) {
+                // having successfully received the copy we can delete the temporary copy
+                try {
+                    context.getContentResolver().delete(uri, null, null);
+                } catch (IllegalArgumentException iae) {
+                    Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+                }
+                // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
+                downloader.onSuccessfulReceive(outputUri);
+            } else {
+                // delete partial copy, but don't change status
+                ContentStorage.get().delete(outputUri);
             }
-            // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
-            downloader.onSuccessfulReceive(outputUri);
         } else {
+            // delete partial copy, set status to CANCELLED
             ContentStorage.get().delete(outputUri);
             status = CopyStates.CANCELLED;
         }
