@@ -23,6 +23,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
+import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -37,7 +38,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +62,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private final CompositeDisposable createDisposables = new CompositeDisposable();
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
+    private final TextSpinner<LogTypeTrackable> logType = new TextSpinner<>();
     private String geocode = null;
     private Geopoint geopoint;
     private Geocache geocache = new Geocache();
@@ -103,9 +104,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
             possibleLogTypesTrackable.addAll(logTypesTrackable);
+            logType.setValues(possibleLogTypesTrackable);
 
             if (!logTypesTrackable.contains(typeSelected)) {
-                setType(logTypesTrackable.get(0));
+                setType(logTypesTrackable.get(0), false);
                 showToast(res.getString(R.string.info_log_type_changed));
             }
         }
@@ -258,37 +260,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         init();
     }
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
-        super.onCreateContextMenu(menu, view, info);
-        final int viewId = view.getId();
-
-        if (viewId == R.id.type) {
-            for (final LogTypeTrackable typeOne : possibleLogTypesTrackable) {
-                menu.add(viewId, typeOne.id, 0, typeOne.getLabel());
-            }
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final int group = item.getGroupId();
-        final int id = item.getItemId();
-
-        if (group == R.id.type) {
-            setType(LogTypeTrackable.getById(id));
-
-            return true;
-        }
-
-        return false;
-    }
-
     private void init() {
-        registerForContextMenu(binding.type);
-        binding.type.setOnClickListener(this::openContextMenu);
+        logType.setTextView(binding.type).setDisplayMapper(LogTypeTrackable::getLabel);
+        logType.setValues(possibleLogTypesTrackable);
+        logType.setChangeListener(lt -> setType(lt, true));
 
-        setType(typeSelected);
+        setType(typeSelected, false);
 
         // show/hide Time selector
         date.setTimeVisible(loggingManager.canLogTime());
@@ -318,9 +295,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
     }
 
-    public void setType(final LogTypeTrackable type) {
+    public void setType(final LogTypeTrackable type, final boolean skipUpdateTextSpinner) {
         typeSelected = type;
-        binding.type.setText(typeSelected.getLabel());
+        if (!skipUpdateTextSpinner) {
+            logType.set(type);
+        }
 
         // show/hide Tracking Code Field for note type
         if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
