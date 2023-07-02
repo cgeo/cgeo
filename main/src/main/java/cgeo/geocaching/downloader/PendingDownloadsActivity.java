@@ -109,7 +109,8 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         // retrieve list of pending downloads
         pendingDownloads = PendingDownload.getAllPendingDownloads();
         if (pendingDownloads.size() == 0) {
-            SimpleDialog.of(this).setTitle(R.string.debug_current_downloads).setMessage(R.string.downloader_no_pending_downloads).confirm((dialog, which) -> finish());
+            showShortToast(R.string.downloader_no_pending_downloads);
+            finish();
         } else {
             // get detailed info
             downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
