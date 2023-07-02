@@ -3,12 +3,16 @@ package cgeo.geocaching.location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.TextFactory;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.ToneGenerator;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Parcel;
@@ -219,16 +223,29 @@ public class ProximityNotification implements Parcelable {
             lastTone = tone;
 
             if (useToneNotifications) {
-                final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
-                toneG.startTone(tone);
-                final Handler handler = new Handler(Looper.getMainLooper());
-                if (tone == TONE_NEAR) {
-                    handler.postDelayed(() -> {
-                        toneG.startTone(TONE_NEAR);
+                final Uri audiofile = tone == TONE_NEAR ? PersistableUri.PROXIMITY_NOTIFICATION_CLOSE.getUri() : PersistableUri.PROXIMITY_NOTIFICATION_FAR.getUri();
+                if (audiofile == null) {
+                    final ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_MUSIC, ToneGenerator.MAX_VOLUME);
+                    toneG.startTone(tone);
+                    final Handler handler = new Handler(Looper.getMainLooper());
+                    if (tone == TONE_NEAR) {
+                        handler.postDelayed(() -> {
+                            toneG.startTone(TONE_NEAR);
+                            handler.postDelayed(toneG::release, 350);
+                        }, 350);
+                    } else {
                         handler.postDelayed(toneG::release, 350);
-                    }, 350);
+                    }
                 } else {
-                    handler.postDelayed(toneG::release, 350);
+                    final MediaPlayer mp = new MediaPlayer();
+                    try {
+                        mp.setDataSource(context, audiofile);
+                        mp.setVolume(1f, 1f);
+                        mp.prepare();
+                        mp.start();
+                    } catch (Exception e) {
+                        Log.e("print tone: " + e);
+                    }
                 }
             }
         }

@@ -1293,7 +1293,9 @@
     <string name="persistablefolder_routingbase">Routing</string>
     <string name="persistablefolder_routingtiles">Routing data</string>
 
-    <string name="persistableuri_track">Trackfile</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Audio file (far)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Audio file (close)</string>
+    <string name="proximitynotification_internal">(internal)</string>
 
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s done</string>

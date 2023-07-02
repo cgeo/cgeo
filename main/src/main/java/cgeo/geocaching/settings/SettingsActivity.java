@@ -26,6 +26,7 @@ import cgeo.geocaching.settings.fragments.PreferenceSystemFragment;
 import cgeo.geocaching.settings.fragments.PreferencesFragment;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
@@ -36,6 +37,7 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -81,10 +83,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     public static final int RESTART_NEEDED = 2;
 
     public static final String STATE_CSAH = "csah";
+    public static final String STATE_CSAH_PN = "csahpn";
     public static final String STATE_BACKUPUTILS = "backuputils";
 
     private BackupUtils backupUtils = null;
     private ContentStorageActivityHelper contentStorageHelper = null;
+
     private CharSequence title;
 
     private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
@@ -100,16 +104,22 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
-
                     final List<Fragment> fragments = getSupportFragmentManager().getFragments();
                     for (Fragment f : fragments) {
                         if (f instanceof PreferenceFragmentCompat) {
                             initPublicFolders((PreferenceFragmentCompat) f, contentStorageHelper);
                         }
                     }
-
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
                         RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+                    }
+                })
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, file -> {
+                    final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                    for (Fragment f : fragments) {
+                        if (f instanceof PreferenceMapContentBehaviorFragment) {
+                            ((PreferenceMapContentBehaviorFragment) f).updateNotificationAudioInfo();
+                        }
                     }
                 });
 
@@ -291,6 +301,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     public ContentStorageActivityHelper getCsah() {
         return contentStorageHelper;
+    }
+
+    // to be called by PreferenceMapContentBehaviorFragment
+    public void startProximityNotificationSelector(final boolean first) {
+        contentStorageHelper.selectPersistableUri(first ? PersistableUri.PROXIMITY_NOTIFICATION_FAR : PersistableUri.PROXIMITY_NOTIFICATION_CLOSE);
     }
 
     @Override

@@ -152,5 +152,15 @@
             android:summary="%s"
             android:title="@string/init_proximity_notification_type"
             app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ButtonPreference
+            android:key="@string/pref_persistableuri_proximity_notification_far"
+            android:title="@string/persistableuri_proximitynotification_audiofile_far"
+            app:src="@drawable/ic_menu_delete"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ButtonPreference
+            android:key="@string/pref_persistableuri_proximity_notification_close"
+            android:title="@string/persistableuri_proximitynotification_audiofile_close"
+            app:src="@drawable/ic_menu_delete"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
