@@ -17,7 +17,7 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
     private ContinuousRangeSlider slider;
     private ButtonToggleGroup percentage;
 
-    private float maxValue = 1000;
+    private float maxValue = 10000;
     private float granularity = 1;
 
 
@@ -46,19 +46,19 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
 
     private void resetSliderScale() {
         if (percentage.getCheckedButtonIndex() == 0) {
-            maxValue = 1000;
+            maxValue = 10000;
             granularity = 1;
-            slider.setScale(-0.2f, 1000.2f, f -> {
-                maxValue = 1000;
+            slider.setScale(-0.2f, 10000.2f, f -> {
+                maxValue = 10000;
                 if (f <= 0) {
                     return "0";
                 }
-                if (f > 1000) {
-                    return ">1000";
+                if (f > 10000) {
+                    return ">10000";
                 }
                 return "" + Math.round(f);
             }, 6, 1);
-            slider.setRange(-0.2f, 1000.2f);
+            slider.setRange(-0.2f, 10000.2f);
         } else {
             maxValue = 1;
             granularity = 100;
