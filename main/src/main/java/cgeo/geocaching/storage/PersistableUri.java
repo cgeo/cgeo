@@ -13,7 +13,8 @@ import androidx.annotation.StringRes;
  */
 public enum PersistableUri {
 
-    UNUSED_TRACK(R.string.pref_persistableuri_track, R.string.persistableuri_track, null);
+    PROXIMITY_NOTIFICATION_FAR(R.string.pref_persistableuri_proximity_notification_far, R.string.persistableuri_proximitynotification_audiofile_far, null),
+    PROXIMITY_NOTIFICATION_CLOSE(R.string.pref_persistableuri_proximity_notification_close, R.string.persistableuri_proximitynotification_audiofile_close, null);
 
     @StringRes
     private final int prefKeyId;

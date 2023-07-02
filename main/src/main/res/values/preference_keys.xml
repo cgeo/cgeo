@@ -443,7 +443,8 @@
     <string translatable="false" name="pref_persistablefolder_fieldnotes">persistablefolder_fieldnotes</string>
     <string translatable="false" name="pref_persistablefolder_spoilerimages">persistablefolder_spoilerimages</string>
     <string translatable="false" name="pref_persistablefolder_routingbase">persistablefolder_routingbase</string>
-    <string translatable="false" name="pref_persistableuri_track">persistableuri_track</string>
+    <string translatable="false" name="pref_persistableuri_proximity_notification_far">persistableuri_proximity_notification_far</string>
+    <string translatable="false" name="pref_persistableuri_proximity_notification_close">persistableuri_proximity_notification_close</string>
 
     <!-- services => authentification (grouped by service) -->
     <string translatable="false" name="pref_username">username</string>

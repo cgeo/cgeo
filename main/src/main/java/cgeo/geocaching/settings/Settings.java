@@ -486,7 +486,7 @@ public class Settings {
         return CgeoApplication.getInstance() == null ? -1 : CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
-    protected static String getString(final int prefKeyId, final String defaultValue) {
+    public static String getString(final int prefKeyId, final String defaultValue) {
         return getStringDirect(getKey(prefKeyId), defaultValue);
     }
 
@@ -546,7 +546,7 @@ public class Settings {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
-    protected static void putString(final int prefKeyId, final String value) {
+    public static void putString(final int prefKeyId, final String value) {
         putStringDirect(getKey(prefKeyId), value);
     }
 
@@ -2172,8 +2172,6 @@ public class Settings {
             return new String[]{"mapDirectory"};
         } else if (keyId == R.string.pref_persistablefolder_gpx) {
             return new String[]{"gpxExportDir", "gpxImportDir"};
-        } else if (keyId == R.string.pref_persistableuri_track) {
-            return new String[]{"pref_trackfile"};
         } else if (keyId == R.string.pref_persistablefolder_offlinemapthemes) {
             return new String[]{"renderthemepath"};
         } else {
