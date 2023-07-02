@@ -399,7 +399,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         } else {
             holder.binding.logStatusMark.setImageResource(R.drawable.mark_transparent);
         }
-        holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType).getDrawable());
+        holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getCacheMarker(res, cache, holder.cacheListType, Settings.getIconScaleEverywhere()).getDrawable());
     }
 
     @Override
