@@ -100,6 +100,17 @@ public abstract class AbstractDownloader {
         return null;
     }
 
+    // do some integrity check after file download (and before copying it to final location)
+    // true = integrity ok (or untested), false = error (file will be deleted automatically)
+    protected boolean verifiedBeforeCopying(final String filename, final Uri result) {
+        return true;
+    }
+
+    // similar to verifiedBeforeCopying, but after having copied (and probably ZIP-extracted) the file
+    protected boolean verifiedAfterCopying(final String filename, final Uri result) {
+        return true;
+    }
+
     // default action to be started after having received and copied the downloaded file successfully
     protected void onSuccessfulReceive(final Uri result) {
         // default: nothing to do

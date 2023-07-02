@@ -49,7 +49,7 @@ class ReceiveDownload {
 
 
     protected enum CopyStates {
-        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, UNKNOWN_STATE
+        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, INTEGRITY_CHECK_ERROR, UNKNOWN_STATE
     }
 
     /**
@@ -123,14 +123,21 @@ class ReceiveDownload {
                                final boolean isZipFile, final String nameWithinZip) {
         cleanupFolder();
 
-        // now start copy task
-        final CopyStates status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip);
-
-        final String resultMsg;
         Worker.Result resultId = Worker.Result.failure();
+        final String resultMsg;
+
         String fileinfo = filename;
         if (fileinfo != null) {
             fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length());
+        }
+
+        // do some integrity checks (if supported by file type)
+        final CopyStates status;
+        if (!downloader.verifiedBeforeCopying(filename, uri)) {
+            status = CopyStates.INTEGRITY_CHECK_ERROR;
+        } else {
+            // now start copy task
+            status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip);
         }
         switch (status) {
             case SUCCESS:
@@ -149,6 +156,9 @@ class ReceiveDownload {
                 break;
             case FILENOTFOUND_EXCEPTION:
                 resultMsg = context.getString(R.string.receivedownload_error_filenotfound_exception);
+                break;
+            case INTEGRITY_CHECK_ERROR:
+                resultMsg = context.getString(R.string.receivedownload_integritycheck_failed);
                 break;
             default:
                 resultMsg = context.getString(R.string.receivedownload_error);
@@ -213,6 +223,10 @@ class ReceiveDownload {
                 }
             } else {
                 status = doCopy(context, notification, updateForegroundNotification, inputStream, outputUri);
+            }
+            if (status == CopyStates.SUCCESS && !downloader.verifiedAfterCopying(filename, outputUri)) {
+                status = CopyStates.INTEGRITY_CHECK_ERROR;
+                cancelled.set(true);
             }
         } catch (SecurityException e) {
             Log.e("SecurityException on receiving map file: " + e.getMessage());

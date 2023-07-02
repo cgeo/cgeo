@@ -2652,6 +2652,7 @@
     <string name="receivedownload_error_filenotfound_exception">File not found error while receiving file.</string>
     <string name="receivedownload_amount_copied">%s copied</string>
     <string name="receivedownload_cancelled">File transfer cancelled</string>
+    <string name="receivedownload_integritycheck_failed">Integrity check failed</string>
 
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Download offline map</string>
