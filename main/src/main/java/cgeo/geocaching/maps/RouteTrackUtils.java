@@ -50,12 +50,10 @@ import org.apache.commons.lang3.StringUtils;
 public class RouteTrackUtils {
 
     private static final int REQUEST_SORT_INDIVIDUAL_ROUTE = 4712;
-    private static final String STATE_CSAH_ROUTE = "csah_route";
-    private static final String STATE_CSAH_TRACK = "csah_track";
+    private static final String STATE_CSAH = "rtu_csah";
 
     private final Activity activity;
-    private final ContentStorageActivityHelper fileSelectorRoute;
-    private final ContentStorageActivityHelper fileSelectorTrack;
+    private final ContentStorageActivityHelper csah;
     private View popup = null;
     private Tracks tracks = null;
 
@@ -76,9 +74,8 @@ public class RouteTrackUtils {
         this.updateTrack = updateTrack;
         this.isTargetSet = isTargetSet;
 
-        this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
-                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
-        this.fileSelectorTrack = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_TRACK))
+        this.csah = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute)
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importTracks);
     }
 
@@ -127,7 +124,7 @@ public class RouteTrackUtils {
     }
 
     private void startFileSelectorIndividualRoute() {
-        fileSelectorRoute.selectFile(null, PersistableFolder.GPX.getUri());
+        csah.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
     private void updateDialogIndividualRoute(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
@@ -208,7 +205,7 @@ public class RouteTrackUtils {
         }
         final LinearLayout tracklist = dialog.findViewById(R.id.tracklist);
         tracklist.removeAllViews();
-        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> fileSelectorTrack.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
+        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> csah.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
         tracks.traverse((key, geoData) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
@@ -317,20 +314,19 @@ public class RouteTrackUtils {
     }
 
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (fileSelectorRoute.onActivityResult(requestCode, resultCode, data)) {
+        if (csah.onActivityResult(requestCode, resultCode, data)) {
             return true;
         }
         if (requestCode == REQUEST_SORT_INDIVIDUAL_ROUTE) {
             reloadIndividualRoute.run();
             return true;
         }
-        return (fileSelectorTrack.onActivityResult(requestCode, resultCode, data));
+        return (csah.onActivityResult(requestCode, resultCode, data));
     }
 
     public Bundle getState() {
         final Bundle bundle = new Bundle();
-        bundle.putBundle(STATE_CSAH_ROUTE, this.fileSelectorRoute.getState());
-        bundle.putBundle(STATE_CSAH_TRACK, this.fileSelectorTrack.getState());
+        bundle.putBundle(STATE_CSAH, this.csah.getState());
         return bundle;
     }
 
