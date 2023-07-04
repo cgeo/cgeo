@@ -563,7 +563,7 @@ public class Settings {
         putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
     }
 
-    protected static void putBoolean(final int prefKeyId, final boolean value) {
+    public static void putBoolean(final int prefKeyId, final boolean value) {
         if (sharedPrefs == null) {
             return;
         }
