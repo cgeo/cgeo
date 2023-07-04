@@ -80,7 +80,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
@@ -113,7 +112,6 @@ import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -587,9 +585,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
                 createResetCacheCoordinatesDialog(selectedWaypoint).show();
             } else {
-                final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-                final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
+                final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, false);
+                handler.showProgress();
+                resetCoords(cache, handler, selectedWaypoint, true, false);
             }
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
@@ -1071,7 +1069,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForMultiListSelection(R.string.lists_title,
-                    selectedListIds -> storeCacheInLists(selectedListIds), true, cache.getLists(), fastStoreOnLastSelection);
+                    this::storeCacheInLists, true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             storeCacheInLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
@@ -2560,30 +2558,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final String[] items = {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
         builder.setSingleChoiceItems(items, 0, (dialog, which) -> {
             dialog.dismiss();
-            final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-            final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
-            resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog);
+            final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, which == 1);
+            handler.showProgress();
+            resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1);
         });
         return builder.create();
     }
 
-    private static class HandlerResetCoordinates extends WeakReferenceHandler<CacheDetailActivity> {
+    private static class HandlerResetCoordinates extends ProgressBarDisposableHandler {
         public static final int LOCAL = 0;
         public static final int ON_WEBSITE = 1;
-
         private boolean remoteFinished = false;
         private boolean localFinished = false;
-        private final ProgressDialog progressDialog;
         private final boolean resetRemote;
 
-        protected HandlerResetCoordinates(final CacheDetailActivity activity, final ProgressDialog progressDialog, final boolean resetRemote) {
+        protected HandlerResetCoordinates(final CacheDetailActivity activity, final boolean resetRemote) {
             super(activity);
-            this.progressDialog = progressDialog;
             this.resetRemote = resetRemote;
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (msg.what == LOCAL) {
                 localFinished = true;
             } else {
@@ -2591,19 +2586,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             if (localFinished && (remoteFinished || !resetRemote)) {
-                progressDialog.dismiss();
-                final CacheDetailActivity activity = getReference();
-                if (activity != null) {
-                    activity.notifyDataSetChanged();
+                final CacheDetailActivity cacheDetailActivity = (CacheDetailActivity) activityRef.get();
+                if (cacheDetailActivity != null) {
+                    cacheDetailActivity.notifyDataSetChanged();
                 }
+                dismissProgress();
             }
         }
     }
 
-    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
+    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote) {
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             if (local) {
-                runOnUiThread(() -> progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords)));
                 cache.setCoords(wpt.getCoords());
                 cache.setUserModifiedCoords(false);
                 cache.deleteWaypointForce(wpt);
@@ -2613,8 +2607,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             final IConnector con = ConnectorFactory.getConnector(cache);
             if (remote && con.supportsOwnCoordinates()) {
-                runOnUiThread(() -> progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website)));
-
                 final boolean result = con.deleteModifiedCoordinates(cache);
 
                 runOnUiThread(() -> {
