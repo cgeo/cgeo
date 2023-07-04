@@ -3177,4 +3177,15 @@
     <string name="smiley_disapprove">Disapproved</string>
     <string name="smiley_question">Question</string>
 
+    <!-- message center notifications -->
+    <string name="mcpolling_title">Message Center</string>
+    <string name="mcpolling_summary">Check message center for incoming messages in regular intervals</string>
+    <plurals name="mcupdate">
+        <item quantity="zero">%d unread messages in message center</item>
+        <item quantity="one">%d unread message in message center</item>
+        <item quantity="two">%d unread messages in message center</item>
+        <item quantity="few">%d unread messages in message center</item>
+        <item quantity="many">%d unread messages in message center</item>
+        <item quantity="other">%d unread messages in message center</item>
+    </plurals>
 </resources>

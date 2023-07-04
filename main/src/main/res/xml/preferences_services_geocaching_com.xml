@@ -27,6 +27,14 @@
             app:summary="@string/auth_unconnected"
             app:iconSpaceReserved="false" />
 
+        <CheckBoxPreference
+            android:dependency="@string/pref_connectorGCActive"
+            android:key="@string/pref_pollMessageCenter"
+            android:title="@string/mcpolling_title"
+            android:summary="@string/mcpolling_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
