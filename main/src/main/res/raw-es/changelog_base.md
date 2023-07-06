@@ -3,6 +3,7 @@
 - New: Add 'Set as target' to map's long-tap popup
 
 ### Detalles del caché
+- New: 'Save and upload' button when editing personal note
 
 ### General
 - New: Add more number emojis (separate category)
@@ -11,3 +12,5 @@
 - New: Support target selector for additional navi apps
 - New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
 - New: Option to vote on opencaching (OCPL) caches during logging
+- New: Event Date filter for upcoming events
+- Change: Make 'relative' the default for date filters
