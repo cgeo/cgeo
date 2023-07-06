@@ -3,11 +3,14 @@
 - Nieuw: Voeg 'Instellen als doel' toe aan lang tikken op kaart pop-up
 
 ### Cache details
+- Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
 
 ### Algemeen
-- Nieuw: Voeg meer nunmer emojis toe (aparte categorie)
+- Nieuw: Voeg meer nummer emojis toe (aparte categorie)
 - Wijziging: Gebruik een andere bron voor voorbeeld van pocket queries
 - Nieuw: Maak startscherm selecteerbaar
-- Nieuw: Ondersteun doel selecteur voor extra navi apps
-- Nieuw: Toon vraagteken in moeilijkheid/terrein symbool, als zowel moeilijkheidsgraad als terrein onbekend zijn
+- Nieuw: Ondersteun doel selectie voor extra navi apps
+- Nieuw: Toon vraagteken bij moeilijkheid/terrein symbool, als zowel moeilijkheidsgraad als terrein onbekend zijn
 - Nieuw: Optie om te stemmen op opencaching (OCPL) caches tijdens het loggen
+- Nieuw: Evenementdatum filter voor aankomende evenementen
+- Wijziging: Maak 'relatief' de standaard voor datumfilters
