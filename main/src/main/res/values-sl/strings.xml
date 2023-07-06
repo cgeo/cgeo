@@ -8,8 +8,8 @@
     <string name="search">Iskanje</string>
     <string name="helpers">Uporabne aplikacije</string>
     <string name="about">O c:geo</string>
-    <string name="latitude">Geog. širina</string>
-    <string name="longitude">Geog. dolžina</string>
+    <string name="latitude">Zemlj. širina</string>
+    <string name="longitude">Zemlj. dolžina</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo nastavitve</string>
     <!-- caches -->
@@ -140,7 +140,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
-    <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_ec">Povezava z Extremcaching.com ni uspela. Lahko vam povezava ne deluje ali pa je stran nedosegljiva.</string>
     <string name="err_server_su">Ni bilo mogoče vzpostaviti povezave z Geocaching.su. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
