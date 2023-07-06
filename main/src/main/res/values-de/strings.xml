@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
     <string name="err_captcha">Der Dienst benötigt ein Captcha. Bitte öffne die geocaching.com-Webseite mit deinem Browser und löse das Captcha, welches dort beim Anmelden angezeigt wird. Dann versuche erneut die Anmeldung in c:geo.</string>
-    <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_lc">Verbindung zu labs.geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden. Server nicht verfügbar oder Internetverbindung unterbrochen.</string>
@@ -495,6 +494,7 @@
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
     <string name="cache_filter_hidden">Versteckdatum</string>
+    <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Anzahl Logs</string>
     <string name="cache_filter_last_found">Letztes Funddatum</string>
     <string name="cache_filter_log_entry">Logeintrag</string>
@@ -581,24 +581,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Der Unter-Filter ist aktuell leer</string>
     <string name="cache_filter_log_entry_foundby">Gefunden von</string>
     <string name="cache_filter_log_entry_logtext">Logtext</string>
-    <string name="cache_filter_stored_since_notstored">Nicht gespeichert</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 Stunden</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 Stunden</item>
-        <item>24 Stunden</item>
-        <item>7 Tage</item>
-        <item>30 Tage</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7T</item>
-        <item>30T</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">Anbeginn der Zeit</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>Vor mehr als einem Jahr</item>
         <item>Vor einem Jahr</item>
@@ -620,6 +602,28 @@
         <item>1W</item>
         <item>3T</item>
         <item>&lt;3T</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>vergangene</item>
+        <item>heute</item>
+        <item>morgen</item>
+        <item>in 2 Tagen</item>
+        <item>in 3 Tagen</item>
+        <item>in 1 Woche</item>
+        <item>in 2 Wochen</item>
+        <item>in 1 Monat</item>
+        <item>alle zukünftigen</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>vergangene</item>
+        <item>0T</item>
+        <item>1T</item>
+        <item>2T</item>
+        <item>3T</item>
+        <item>1W</item>
+        <item>2W</item>
+        <item>1M</item>
+        <item>&gt;1M</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
@@ -1253,6 +1257,7 @@
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_personal_note_upload_error">Fehler beim Hochladen der persönlichen Notiz</string>
     <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
+    <string name="cache_personal_note_save_and_upload">Speichern &amp; hochladen</string>
     <string name="cache_personal_note_vars_out_of_sync">Variablen in Notizen sind nicht synchronisiert (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronisiere Variablen</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Wähle die Variablen, die aus den Notizen überschrieben werden sollen</string>
