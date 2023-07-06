@@ -200,7 +200,6 @@
     <string name="err_none">D\'acord</string>
     <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
     <string name="err_captcha">El servei requereix un Captcha. Obriu el lloc web geocaching.com amb el vostre navegador i resol el Captcha que es mostra mentre inicieu sessió allà. A continuació, torneu a intentar iniciar sessió amb C:geo.</string>
-    <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_lc">No es pot contactar amb labs.geocaching.com. Pot ser que el lloc web estigui inactiu o la connexió a Internet no funcioni.</string>
     <string name="err_server_su">No es pot contactar amb Geocaching.su. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
@@ -576,24 +575,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">El subfiltre està buit actualment</string>
     <string name="cache_filter_log_entry_foundby">Trobat per</string>
     <string name="cache_filter_log_entry_logtext">Text del registre</string>
-    <string name="cache_filter_stored_since_notstored">No desat</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 hores</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 hores</item>
-        <item>24 hores</item>
-        <item>7 dies</item>
-        <item>30 dies</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">l\'inici dels temps</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>fa més d\'un any</item>
         <item>fa un any</item>
