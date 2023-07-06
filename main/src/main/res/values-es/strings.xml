@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Aceptar</string>
     <string name="err_parse">Error procesando la página de acceso</string>
-    <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
     <string name="err_server_ec">Imposible conectar a Extremcaching.com. La página web puede estar caída o su conexión a Internet no funciona.</string>
     <string name="err_server_lc">No se puede contactar con labs.geocaching.com. El sitio web puede estar caído o su conexión a Internet no funciona.</string>
     <string name="err_server_su">No es posible conectar con Geocaching.su. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>
@@ -556,24 +555,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">El sub-filtro está vacío</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto del registro</string>
-    <string name="cache_filter_stored_since_notstored">No guardado</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 horas</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 horas</item>
-        <item>24 horas</item>
-        <item>7 días</item>
-        <item>30 días</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">el amanecer de los tiempos</string>
-    <string name="cache_filter_stored_since_stored_max_short">máx</string>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
