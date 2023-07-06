@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
     <string name="err_captcha">Сервис требует капчу. Пожалуйста, откройте в браузере сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
-    <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -465,6 +464,7 @@
     <string name="list_menu_import">Импортировать</string>
     <string name="list_title">Выбрать список</string>
     <string name="lists_title">Выбрать списки</string>
+    <string name="lists_title_new_caches">Выберите список (новые тайники)</string>
     <string name="list_inbox">Сохраненные</string>
     <string name="list_all_lists">Все тайники</string>
     <string name="list_dialog_create_title">Новый список</string>
@@ -606,7 +606,7 @@
         <item>8ч</item>
         <item>24ч</item>
         <item>7дн</item>
-        <item>30дн</item>
+        <item>30д</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">с незапамятных времен</string>
     <string name="cache_filter_stored_since_stored_max_short">макс</string>
@@ -657,6 +657,7 @@
     <string name="about_system_write_logcat_success">Лог файл \"%1$s\" записан в папку \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Ошибка при записи лога</string>
     <string name="about_system_write_infos_downloadmanager">Просмотреть загрузки</string>
+    <string name="about_changelog_full">Список всех изменений</string>
     <string name="about_nutshellmanual">Описание на сайте</string>
     <string name="about_contributors_carnerodetails">\"папа\" c:geo</string>
     <string name="about_contributors_recent">Недавние участники</string>
@@ -1414,7 +1415,7 @@
     <string name="cache_rating_of_new">%1$.1f из %2$d</string>
     <string name="cache_favorite">Рекомендуют</string>
     <string name="cache_owner">Создатель</string>
-    <string name="cache_hidden">Спрятано</string>
+    <string name="cache_hidden">Создан</string>
     <string name="cache_event">Дата</string>
     <string name="cache_location">Место</string>
     <string name="cache_coordinates">Координаты</string>
