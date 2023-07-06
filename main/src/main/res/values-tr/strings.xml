@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
-    <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_lc">labs.geocaching.com\'a bağlanılamıyor. Sitede sorun olabilir veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_su">Geocaching.su adresine bağlanılamıyor. Site veya internet bağlantınız çalışmıyor olabilir.</string>
@@ -552,24 +551,6 @@
     <string name="cache_filter_nested_filter_modify">düzenle</string>
     <string name="cache_filter_log_entry_foundby">Bulan</string>
     <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
-    <string name="cache_filter_stored_since_notstored">Kaydedilmemiş</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 saat</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0s</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 saat</item>
-        <item>24 saat</item>
-        <item>7 gün</item>
-        <item>30 gün</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8s</item>
-        <item>24s</item>
-        <item>7g</item>
-        <item>30g</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">ezelden beri</string>
-    <string name="cache_filter_stored_since_stored_max_short">maks</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>

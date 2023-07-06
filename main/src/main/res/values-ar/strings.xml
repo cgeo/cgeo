@@ -130,7 +130,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
     <string name="err_parse">أخفق تحليل صفحة تسجيل الدخول</string>
-    <string name="err_server">غير قادر على الاتصال بـ Geocaching.com. قد يكون الموقع معطل أو يوجد مشكل في اتصالك بالانترنات.</string>
     <string name="err_server_ec">غير قادر على الاتصال بـ Extremcaching.com. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_server_gk">غير قادر على الاتصال بـ GeoKrety.org. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_login">لا توجد معلومات تسجيل الدخول مخزنة</string>

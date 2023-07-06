@@ -200,7 +200,6 @@
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
     <string name="err_captcha">Le service utilise un Captcha. Veuillez vous connecter au site geocaching.com avec votre navigateur web et résoudre le Captcha puis essayez de vous connecter à nouveau à c:geo.</string>
-    <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -580,24 +579,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Actuellement, le sous-filtre est vide</string>
     <string name="cache_filter_log_entry_foundby">Trouvée par</string>
     <string name="cache_filter_log_entry_logtext">Texte du journal</string>
-    <string name="cache_filter_stored_since_notstored">Non enregistrée</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 heure</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 heures</item>
-        <item>24 heures</item>
-        <item>7 jours</item>
-        <item>30 jours</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7j</item>
-        <item>30j</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">la nuit des temps</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>il y a plus d\'un an</item>
         <item>il y a un an</item>

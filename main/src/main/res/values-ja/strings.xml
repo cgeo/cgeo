@@ -195,7 +195,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
     <string name="err_captcha">このサービスにはCaptchaが必要です。ブラウザでgeocaching.comを開き、そこに表示されるCaptchaを解いてログインしてください。その後、再度c:geoでログインを試みてください。</string>
-    <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_su">Geocaching.suに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
@@ -543,24 +542,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">サブフィルタが未定義です</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
-    <string name="cache_filter_stored_since_notstored">未保存</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0時間前</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8時間前</item>
-        <item>24時間前</item>
-        <item>7日前</item>
-        <item>30日前</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7日</item>
-        <item>30日</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">時の始まり</string>
-    <string name="cache_filter_stored_since_stored_max_short">最大</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>

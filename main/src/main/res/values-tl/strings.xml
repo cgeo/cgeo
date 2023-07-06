@@ -129,7 +129,6 @@
     <string name="translate_length_warning">Ang pagsasalin ay pwedeng mabigo na may malaking halaga ng teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Nabigong mag-parse sa pag-login ng pahina</string>
-    <string name="err_server">Hindi nakakontak ang Geocaching.com. Maaaring bumaba ang website o ang iyong koneksyon sa internet ay hindi gumagana.</string>
     <string name="err_server_ec">Hindi nakakontak ang Geocaching.com. Maaaring bumaba ang website o ang iyong koneksyon sa internet ay hindi gumagana.</string>
     <string name="err_server_gk">Hindi nakakontak ang Geocaching.com. Maaaring bumaba ang website o ang iyong koneksyon sa internet ay hindi gumagana.</string>
     <string name="err_login">Walang naka-imbak na impormasyon sa pag-login</string>

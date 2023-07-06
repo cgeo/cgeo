@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in Google Maps on certain map source changes
-- New: Display geocaching.com login error messages on home screen
-- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
-- Fix: Some seekbar issues
-- Fix: SVG geochecker images not being displayed
+- Исправлено: сбой в картах Google при определенных изменениях источника карты
+- Новое: Отображение сообщения ошибки авторизации geocaching.com на домашнем экране
+- Исправлено: Сохранение тайников - опция "обновить и сохранить в списке" не сохраняла новые тайники
+- Исправлено: некоторые проблемы с панелью поиска
+- Исправлено: SVG изображения геочекера не отображались

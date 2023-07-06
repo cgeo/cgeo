@@ -118,7 +118,6 @@
     <string name="translate_length_warning">Ang paghubad kay mahimon nga mapakyas sa usa ka dako nga kantidad sa teksto.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Napakyas nga pagpasulod sa parsing nga panid</string>
-    <string name="err_server">Dili ma kontak ang Geocaching.com. Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_server_ec">Dili ma kontak ang Extremecahing.com. Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_server_gk">Dili ma kontak ang GeoKrety.org, Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_login">Walay pagsulod sa impormasyon nga gitipigan</string>

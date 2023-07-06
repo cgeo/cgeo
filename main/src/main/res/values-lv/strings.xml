@@ -157,7 +157,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
-    <string name="err_server">Nevar sazināties ar Geocaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_ec">Nevar sazināties ar Extremcaching.com. Vietne šobrīd var nedarboties vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_server_su">Nav iespējams savienoties ar Geocaching.su. Iespējams mājaslapa vai Jūsu interneta savienojums nestrādā.</string>
     <string name="err_server_gk">Nevar sazināties ar GeoKrety.org. Vietne var būt uz laiku nepieejama vai arī tavs interneta savienojums nedarbojas.</string>

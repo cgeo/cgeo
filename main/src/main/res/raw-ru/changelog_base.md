@@ -1,8 +1,9 @@
 ### Карта
-- Change: Always show popup menu on cache/waypoint long-tap (configurable)
-- New: Add 'Set as target' to map's long-tap popup
+- Изменение: Всегда показывать всплывающее меню при длительном нажатии на тайник/путевую точку (настраиваемое)
+- Новое: Добавлено 'Установить как цель' во всплывающее окно при долгом нажатии на карте
 
 ### Детали тайника
+- New: 'Save and upload' button when editing personal note
 
 ### Общее
 - New: Add more number emojis (separate category)
@@ -11,3 +12,5 @@
 - New: Support target selector for additional navi apps
 - New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
 - New: Option to vote on opencaching (OCPL) caches during logging
+- New: Event Date filter for upcoming events
+- Change: Make 'relative' the default for date filters

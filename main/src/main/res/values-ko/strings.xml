@@ -200,7 +200,8 @@
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
     <string name="err_captcha">이 서비스에는 Captcha가 필요합니다. 브라우저에서 geocaching.com 웹 사이트를 열고 로그인할 때 표시되는 Captcha를 해결하십시오. 다음에는 c:geo로 다시 로그인을 시도하십시오.</string>
-    <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
+    <string name="err_server_general">지오캐싱 서버에 연결할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
+    <string name="err_server_gc">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_su">Geocaching.su에 접속할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -490,6 +491,7 @@
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
     <string name="cache_filter_hidden">숨긴 날짜</string>
+    <string name="cache_filter_eventdate">이벤트 날짜</string>
     <string name="cache_filter_logs_count">로그 수</string>
     <string name="cache_filter_last_found">마지막 찾은 날짜</string>
     <string name="cache_filter_log_entry">로그</string>
@@ -575,24 +577,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
-    <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0시간</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0시간</string>
     <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8시간</item>
-        <item>24시간</item>
-        <item>7 일</item>
-        <item>30일</item>
+        <item>1년 이상</item>
+        <item>1년 전</item>
+        <item>30일 전</item>
+        <item>1 주일 전</item>
+        <item>1일 전</item>
+        <item>1일 이내</item>
     </string-array>
     <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8시간</item>
-        <item>24 시간</item>
-        <item>7일</item>
+        <item>&gt;1년</item>
+        <item>1년</item>
         <item>30일</item>
+        <item>1주</item>
+        <item>1일</item>
+        <item>&lt;1일</item>
     </string-array>
-    <string name="cache_filter_stored_since_stored_max">시간의 여명</string>
-    <string name="cache_filter_stored_since_stored_max_short">최대</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>1년 이상</item>
         <item>1년 전</item>
@@ -614,6 +614,28 @@
         <item>1주</item>
         <item>3일</item>
         <item>&lt;3일</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>과거</item>
+        <item>오늘</item>
+        <item>내일</item>
+        <item>2일 후</item>
+        <item>3일 후</item>
+        <item>1주 후</item>
+        <item>2주 후</item>
+        <item>1달 후</item>
+        <item>모든 미래</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>과거</item>
+        <item>0일</item>
+        <item>1일</item>
+        <item>2일</item>
+        <item>3일</item>
+        <item>1주</item>
+        <item>2주</item>
+        <item>1달</item>
+        <item>&gt;1달</item>
     </string-array>
     <!-- about -->
     <string name="about_version">버전</string>
@@ -1239,6 +1261,7 @@
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
     <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
+    <string name="cache_personal_note_save_and_upload">저장 및 업로드</string>
     <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">변수 동기화</string>
     <string name="cache_personal_note_vars_out_of_sync_title">메모에서 값을 덮어써야 하는 변수 확인</string>
