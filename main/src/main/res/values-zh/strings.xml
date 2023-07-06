@@ -162,7 +162,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
-    <string name="err_server">无法连接 Geocaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_ec">无法连接 Extremcaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_su">无法连接 Geocaching.su。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_gk">无法连接 GeoKrety.org。网站可能已经关闭，或者是你的网络连接有问题。</string>
