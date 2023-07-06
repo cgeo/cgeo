@@ -186,7 +186,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">解析登入頁失敗</string>
-    <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
@@ -479,23 +478,6 @@
     <string name="cache_filter_status_exclude_archived">排除歸檔的</string>
     <string name="cache_filter_log_entry_foundby">由發現</string>
     <string name="cache_filter_log_entry_logtext">日誌文字</string>
-    <string name="cache_filter_stored_since_notstored">未儲存</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 小时</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0小時</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8小時</item>
-        <item>24 小時</item>
-        <item>7 天</item>
-        <item>30天</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8小時</item>
-        <item>24小時</item>
-        <item>7天</item>
-        <item>30天</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max_short">最大的</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日誌</string>
