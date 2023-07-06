@@ -157,7 +157,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
-    <string name="err_server">Onfäeg Geocaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_ec">Onfäeg Extremcaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_su">Onfäeg Geocaching.su ze kontaktéieren. D\'Website kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_gk">Onfäeg GeoKrety.org ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
