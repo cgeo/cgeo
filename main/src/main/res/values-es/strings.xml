@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Aceptar</string>
     <string name="err_parse">Error procesando la página de acceso</string>
-    <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
     <string name="err_server_ec">Imposible conectar a Extremcaching.com. La página web puede estar caída o su conexión a Internet no funciona.</string>
     <string name="err_server_lc">No se puede contactar con labs.geocaching.com. El sitio web puede estar caído o su conexión a Internet no funciona.</string>
     <string name="err_server_su">No es posible conectar con Geocaching.su. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>

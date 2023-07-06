@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
     <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
-    <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -455,6 +454,7 @@
     <string name="list_menu_import">Importar</string>
     <string name="list_title">Escolha uma lista</string>
     <string name="lists_title">Escolha as listas</string>
+    <string name="lists_title_new_caches">Escolha a lista (novas caches)</string>
     <string name="list_inbox">Lista geral</string>
     <string name="list_all_lists">Todas as caches</string>
     <string name="list_dialog_create_title">Nova lista</string>
@@ -645,6 +645,7 @@
     <string name="about_system_write_logcat_success">Ficheiro de registos \"%1$s\" gravado na pasta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
     <string name="about_system_write_infos_downloadmanager">Ver transferências</string>
+    <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
     <string name="about_contributors_recent">Colaboradores recentes</string>

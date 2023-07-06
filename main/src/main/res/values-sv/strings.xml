@@ -200,7 +200,6 @@
     <string name="err_none">Ok</string>
     <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
     <string name="err_captcha">Tjänsten kräver en Captcha. Vänligen öppna websidan geocaching.com med din webbläsare och lös den Captcha som visas medan du loggar in där. Försök sedan igen för att logga in med c:geo.</string>
-    <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
     <string name="err_server_lc">Det går inte att kontakta labs.geocaching.com. Webbplatsen kan vara nere eller så fungerar inte din internetanslutning.</string>
     <string name="err_server_su">Misslyckades att ansluta till Geocaching.su. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>

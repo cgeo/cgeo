@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
-    <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_lc">Η επικοινωνία με την Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
