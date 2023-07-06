@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
     <string name="err_captcha">Il servizio richiede un Captcha. Aprire il sito web geocaching.com con il proprio browser e risolvere il Captcha mostrato durante il login. Quindi riprovare il login con c:geo.</string>
-    <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
@@ -580,24 +579,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Il sotto-filtro è attualmente vuoto</string>
     <string name="cache_filter_log_entry_foundby">Trovato da</string>
     <string name="cache_filter_log_entry_logtext">Testo del Log</string>
-    <string name="cache_filter_stored_since_notstored">Non salvato</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 ore</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 ore</item>
-        <item>24 ore</item>
-        <item>7 giorni</item>
-        <item>30 giorni</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7gg</item>
-        <item>30gg</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">l\'alba dei tempi</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>più di un anno fa</item>
         <item>un anno fa</item>
