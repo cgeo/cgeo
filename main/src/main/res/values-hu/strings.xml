@@ -194,7 +194,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
-    <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_lc">Nem sikerült kapcsolatba lépni a labs.geocaching.com oldallal. A webhely leállt vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_su">A geocaching.su. nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
