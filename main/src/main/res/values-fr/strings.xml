@@ -200,7 +200,6 @@
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
     <string name="err_captcha">Le service utilise un Captcha. Veuillez vous connecter au site geocaching.com avec votre navigateur web et résoudre le Captcha puis essayez de vous connecter à nouveau à c:geo.</string>
-    <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -594,7 +593,7 @@
         <item>8h</item>
         <item>24h</item>
         <item>7j</item>
-        <item>30j</item>
+        <item>30 j</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">la nuit des temps</string>
     <string name="cache_filter_stored_since_stored_max_short">max</string>
