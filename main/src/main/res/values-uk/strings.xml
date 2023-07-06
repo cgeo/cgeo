@@ -157,7 +157,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
     <string name="err_parse">Не вдалося проаналізувати сторінку входу</string>
-    <string name="err_server">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_ec">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_su">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_gk">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
