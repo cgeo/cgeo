@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
-    <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
     <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
     <string name="err_server_lc">Klarte ikke koble til land.geocaching.com. Nettsiden er nede eller din internettforbindelse virker ikke.</string>
     <string name="err_server_su">Får ikke kontakt med Geocaching.su. Nettstedet kan være nede eller Internettilkoblingen din fungerer ikke.</string>
@@ -534,24 +533,6 @@
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inkluder cacher uten V/T</string>
     <string name="cache_filter_log_entry_foundby">Funnet av</string>
     <string name="cache_filter_log_entry_logtext">Loggtekst</string>
-    <string name="cache_filter_stored_since_notstored">Ikke lagret</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 timer</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0t</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 timer</item>
-        <item>24 timer</item>
-        <item>7 dager</item>
-        <item>30 dager</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8t</item>
-        <item>24t</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">tidenes morgen</string>
-    <string name="cache_filter_stored_since_stored_max_short">maks</string>
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
