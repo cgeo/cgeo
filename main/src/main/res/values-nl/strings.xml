@@ -200,7 +200,7 @@
     <string name="err_none">Ok</string>
     <string name="err_parse">Login pagina verwerken mislukt</string>
     <string name="err_captcha">Deze service vereist een Captcha. Open de geocaching.com website met je browser en los de captcha op die getoond wordt tijdens het inloggen. Probeer daarna opnieuw in te loggen met c:geo.</string>
-    <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
+    <string name="err_server">Verbinding met Geocaching.com mislukt. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_lc">Kan geen contact maken met labs.geocaching.com. De website kan offline zijn of je internetverbinding werkt niet.</string>
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
