@@ -197,7 +197,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OΚ</string>
     <string name="err_parse">Αδυναμία ορθής σύνδεσης</string>
-    <string name="err_server">Η επικοινωνία με το Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_ec">Η επικοινωνία με το Extremcaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_lc">Η επικοινωνία με την Geocaching.com απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
@@ -555,24 +554,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Το υπο- φίλτρο είναι επί του παρόντος άδειο</string>
     <string name="cache_filter_log_entry_foundby">Βρέθηκε από</string>
     <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής</string>
-    <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 ώρες</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0ω</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 ώρες</item>
-        <item>24 ώρες</item>
-        <item>7 ημέρες</item>
-        <item>30 Ημέρες</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8Ω</item>
-        <item>24Ω</item>
-        <item>7μ</item>
-        <item>30μ</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">την αυγή του χρόνου</string>
-    <string name="cache_filter_stored_since_stored_max_short">μέγιστο</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>Περισσότερο από ένα χρόνο πριν</item>
         <item>πριν ένα χρόνο</item>
