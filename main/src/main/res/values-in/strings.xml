@@ -124,7 +124,6 @@
     <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>
-    <string name="err_server">Tidak dapat menghubungi Geocaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_server_ec">Tidak dapat menghubungi Extremcaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_server_gk">Tidak dapat menghubungi GeoKrety.org. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_login">Tidak ada informasi login yang tersimpan</string>
