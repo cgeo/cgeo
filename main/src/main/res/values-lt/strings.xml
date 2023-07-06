@@ -200,7 +200,6 @@
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
     <string name="err_captcha">Paslaugai reikalinga Captcha. Atidarykite geocaching.com svetainę naudodami savo naršyklę ir išspręskite Captcha, rodomą prisijungiant. Tada bandykite dar kartą prisijungti naudodami c:geo.</string>
-    <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -592,24 +591,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Papildomas filtras šiuo metu tuščias</string>
     <string name="cache_filter_log_entry_foundby">Surado</string>
     <string name="cache_filter_log_entry_logtext">Įrašo tekstas</string>
-    <string name="cache_filter_stored_since_notstored">Neišsaugota</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 valandų</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0val.</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 valandos</item>
-        <item>24 valandos</item>
-        <item>7 dienos</item>
-        <item>30 dienų</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8val.</item>
-        <item>24val.</item>
-        <item>7d.</item>
-        <item>30d.</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">laiko pradžia</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>daugiau nei prieš metus</item>
         <item>prieš metus</item>
