@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
     <string name="err_captcha">Il servizio richiede un Captcha. Aprire il sito web geocaching.com con il proprio browser e risolvere il Captcha mostrato durante il login. Quindi riprovare il login con c:geo.</string>
-    <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
