@@ -200,7 +200,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
     <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
-    <string name="err_server">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -455,6 +454,7 @@
     <string name="list_menu_import">Importar</string>
     <string name="list_title">Escolha uma lista</string>
     <string name="lists_title">Escolha as listas</string>
+    <string name="lists_title_new_caches">Escolha a lista (novas caches)</string>
     <string name="list_inbox">Lista geral</string>
     <string name="list_all_lists">Todas as caches</string>
     <string name="list_dialog_create_title">Nova lista</string>
@@ -494,6 +494,7 @@
     <string name="cache_filter_favorites">Favoritos</string>
     <string name="cache_filter_distance">Distância</string>
     <string name="cache_filter_hidden">Data de Colocação</string>
+    <string name="cache_filter_eventdate">Data do Evento</string>
     <string name="cache_filter_logs_count">Contagem de registos</string>
     <string name="cache_filter_last_found">Última Data Encontrada</string>
     <string name="cache_filter_log_entry">Publicação do Registo</string>
@@ -580,24 +581,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
-    <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 horas</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 horas</item>
-        <item>24 horas</item>
-        <item>7 dias</item>
-        <item>30 dias</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7d</item>
-        <item>30d</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">desde o amanhecer</string>
-    <string name="cache_filter_stored_since_stored_max_short">máx</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>há mais de um ano</item>
         <item>um ano atrás</item>
@@ -619,6 +602,28 @@
         <item>1sem</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>passado</item>
+        <item>hoje</item>
+        <item>amanhã</item>
+        <item>daqui a 2 dias</item>
+        <item>daqui a 3 dias</item>
+        <item>daqui a 1 semana</item>
+        <item>daqui a 2 semanas</item>
+        <item>daqui a 1 mês</item>
+        <item>todos os futuros</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>passados</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1semana</item>
+        <item>2semanas</item>
+        <item>1m</item>
+        <item>&gt;1m</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versão</string>
@@ -645,6 +650,7 @@
     <string name="about_system_write_logcat_success">Ficheiro de registos \"%1$s\" gravado na pasta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
     <string name="about_system_write_infos_downloadmanager">Ver transferências</string>
+    <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
     <string name="about_contributors_recent">Colaboradores recentes</string>
@@ -886,6 +892,7 @@
         <item>Escuro</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
@@ -1250,6 +1257,7 @@
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
     <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
     <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
+    <string name="cache_personal_note_save_and_upload">Guardar e enviar</string>
     <string name="cache_personal_note_vars_out_of_sync">Variáveis nas notas estão fora de sincronização (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variáveis de sincronização</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Verificar variáveis cujo valor deve ser substituído a partir das notas</string>
@@ -1446,6 +1454,8 @@
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
+    <string name="init_show_routing_menu">Mostrar menu de encaminhamento</string>
+    <string name="init_summary_show_routing_menu">Toque longo numa cache mostra um menu com opções avançadas para adicionar/remover a cache a/de uma rota. Se desabilitado, a cache é apenas adicionada/removida à/da rota.</string>
     <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
     <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
     <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
