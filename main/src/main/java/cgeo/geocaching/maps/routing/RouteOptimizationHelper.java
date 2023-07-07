@@ -3,13 +3,13 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
@@ -121,7 +121,7 @@ public class RouteOptimizationHelper {
             return;
         }
 
-        SimpleDialog.of((Activity) context).setTitle(TextParam.id(R.string.route_optimization)).setMessage(TextParam.id(R.string.route_optimization_info)).confirm((d, which) -> {
+        Dialogs.advancedOneTimeMessage(context, OneTimeDialogs.DialogType.ROUTE_OPTIMIZATION, context.getString(R.string.route_optimization), context.getString(R.string.route_optimization_info), "", true, null, () -> {
             final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
             final TSPDialog dialog = new TSPDialog(context, executor, updateRoute);
             dialog.show();
@@ -138,6 +138,7 @@ public class RouteOptimizationHelper {
                 runTSPWrapper(dialog, executor);
             });
         });
+
     }
 
     private void runTSPWrapper(final TSPDialog dialog, final ExecutorService executor) {
