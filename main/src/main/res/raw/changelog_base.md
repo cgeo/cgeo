@@ -1,6 +1,7 @@
 ### Map
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
 - New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
 
 ### Cache details
 - New: 'Save and upload' button when editing personal note
