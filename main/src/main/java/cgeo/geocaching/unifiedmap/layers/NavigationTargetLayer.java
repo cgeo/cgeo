@@ -38,7 +38,6 @@ public class NavigationTargetLayer {
 
     private Location currentLocation = null;
 
-
     public NavigationTargetLayer(final UnifiedMapActivity activity, final GeoItemLayer<String> layer) {
         mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo));
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
@@ -69,10 +68,12 @@ public class NavigationTargetLayer {
                 repaintHelper(viewModel.target.getValue());
             }
         });
+
+        viewModel.individualRoute.observe(activity, individualRoute -> mapDistanceDrawer.drawRouteDistance(individualRoute.getDistance()));
     }
 
+
     private void repaintHelper(final UnifiedMapViewModel.Target target) {
-        mapDistanceDrawer.drawRouteDistance(viewModel.individualRoute.getValue().getDistance());
 
         if (currentLocation != null && target.geopoint != null) {
             final Geopoint currentGp = new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude());
