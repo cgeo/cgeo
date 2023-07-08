@@ -835,7 +835,6 @@
     <string name="persistablefolder_spoilerimages">提示圖片</string>
     <string name="persistablefolder_routingbase">路徑</string>
     <string name="persistablefolder_routingtiles">路線規劃資料</string>
-    <string name="persistableuri_track">軌跡檔案</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s，%3$s/%4$s已完成</string>
     <string name="folder_process_status_currentfile">進度：%1$s</string>
