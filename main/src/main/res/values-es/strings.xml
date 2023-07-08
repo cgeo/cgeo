@@ -1005,7 +1005,6 @@
     <string name="persistablefolder_spoilerimages">Imágenes reveladoras</string>
     <string name="persistablefolder_routingbase">Enrutamiento</string>
     <string name="persistablefolder_routingtiles">Datos de ruta</string>
-    <string name="persistableuri_track">Archivo de recorrido</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hecho</string>
     <string name="folder_process_status_currentfile">Procesar %1$s</string>
