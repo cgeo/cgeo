@@ -1113,7 +1113,6 @@
     <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
     <string name="persistablefolder_routingbase">Reititys</string>
     <string name="persistablefolder_routingtiles">Reititystiedot</string>
-    <string name="persistableuri_track">Jälkitiedosto</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
     <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
