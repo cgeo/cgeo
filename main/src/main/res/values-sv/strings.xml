@@ -1114,7 +1114,6 @@
     <string name="persistablefolder_spoilerimages">Spoilerbilder</string>
     <string name="persistablefolder_routingbase">Navigering</string>
     <string name="persistablefolder_routingtiles">Navigeringdata</string>
-    <string name="persistableuri_track">Spårningsfil</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s gjort</string>
     <string name="folder_process_status_currentfile">Bearbeta %1$s</string>
