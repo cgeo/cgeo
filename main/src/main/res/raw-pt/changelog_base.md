@@ -1,6 +1,9 @@
 ### Mapa
 - Alteração: Mostrar sempre o menu de pop-up ao fazer toque longo na cache/ponto adicional (configurável)
 - Novo: Adicionado 'Definir como destino' ao popup do toque longo do mapa
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
 
 ### Detalhes da cache
 - Novo: botão 'Guardar e Enviar' ao editar nota pessoal
