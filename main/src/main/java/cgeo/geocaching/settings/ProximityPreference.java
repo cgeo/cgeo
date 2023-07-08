@@ -33,7 +33,6 @@ public class ProximityPreference extends SeekbarPreference {
     @Override
     protected void init() {
         minProgress = 1;
-        maxProgress = valueToProgressHelper(Settings.getKeyInt(R.integer.proximitynotification_distance_max));
     }
 
     @Override
