@@ -1,6 +1,9 @@
 ### Mapa
 - Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięci na skrytce/punkcie nawigacji (konfigurowalne)
 - Nowość: Dodaj 'Ustaw jako cel' do wyskakującego okna po długim dotknięciu
+- Poprawka: Pliki częściowe pozostałe po przerwaniu kopiowania pobranych plików
+- Nowość: Sprawdzanie integralności pobranych kafelków routingu
+- Nowość: Obsługa dźwięku wybranego przez użytkownika dla powiadomień zbliżeniowych
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
