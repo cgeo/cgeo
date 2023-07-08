@@ -1,6 +1,9 @@
 ### Карта
 - Изменение: Всегда показывать всплывающее меню при длительном нажатии на тайник/путевую точку (настраиваемое)
 - Новое: Добавлено 'Установить как цель' во всплывающее окно при долгом нажатии на карте
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
 
 ### Детали тайника
 - New: 'Save and upload' button when editing personal note
