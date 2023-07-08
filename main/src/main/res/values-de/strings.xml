@@ -200,6 +200,7 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
     <string name="err_captcha">Der Dienst benötigt ein Captcha. Bitte öffne die geocaching.com-Webseite mit deinem Browser und löse das Captcha, welches dort beim Anmelden angezeigt wird. Dann versuche erneut die Anmeldung in c:geo.</string>
+    <string name="err_server">Verbindung zu geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_lc">Verbindung zu labs.geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden. Server nicht verfügbar oder Internetverbindung unterbrochen.</string>
