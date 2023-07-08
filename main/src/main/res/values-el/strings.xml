@@ -1061,7 +1061,6 @@
     <string name="persistablefolder_spoilerimages">Εικόνες spoiler</string>
     <string name="persistablefolder_routingbase">Δρομολόγηση</string>
     <string name="persistablefolder_routingtiles">Δεδομένα δρομολόγησης</string>
-    <string name="persistableuri_track">Αρχείο Διαδρομής</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ολοκληρώθηκαν</string>
     <string name="folder_process_status_currentfile">Διαδικασία %1$s</string>
