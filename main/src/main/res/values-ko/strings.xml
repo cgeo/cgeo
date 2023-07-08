@@ -1156,7 +1156,6 @@
     <string name="persistablefolder_spoilerimages">스포일러 사진</string>
     <string name="persistablefolder_routingbase">라우팅</string>
     <string name="persistablefolder_routingtiles">라우팅 데이터</string>
-    <string name="persistableuri_track">트랙파일</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s 완료</string>
     <string name="folder_process_status_currentfile">진행 %1$s</string>
