@@ -989,7 +989,6 @@
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
     <string name="persistablefolder_routingbase">Yönlendirme</string>
     <string name="persistablefolder_routingtiles">Yönlendirme verisi</string>
-    <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
     <string name="folder_process_status_currentfile">%1$s işlemi</string>
