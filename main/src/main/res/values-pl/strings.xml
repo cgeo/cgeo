@@ -1174,7 +1174,9 @@
     <string name="persistablefolder_spoilerimages">Zdjęcia ze spoilerami</string>
     <string name="persistablefolder_routingbase">Wyznaczanie trasy</string>
     <string name="persistablefolder_routingtiles">Dane nawigowania</string>
-    <string name="persistableuri_track">Plik śladu</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Plik audio (daleko)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Plik audio (blisko)</string>
+    <string name="proximitynotification_internal">(Wewnętrzny)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s wykonano</string>
     <string name="folder_process_status_currentfile">Przetwarzanie %1$s</string>
@@ -2397,6 +2399,7 @@
     <string name="receivedownload_error_filenotfound_exception">Nie znaleziono pliku podczas pobierania pliku.</string>
     <string name="receivedownload_amount_copied">%s skopiowany</string>
     <string name="receivedownload_cancelled">Anulowany transfer pliku</string>
+    <string name="receivedownload_integritycheck_failed">Sprawdzanie integralności nie powiodło się</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Pobierz mapę offline</string>
     <string name="delete_offlinemap_title">Usuń mapę offline</string>
