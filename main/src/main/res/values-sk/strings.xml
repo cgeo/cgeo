@@ -1130,7 +1130,6 @@
     <string name="persistablefolder_spoilerimages">Obrázky s pomôckou</string>
     <string name="persistablefolder_routingbase">Navigácia</string>
     <string name="persistablefolder_routingtiles">Údaje navigácie</string>
-    <string name="persistableuri_track">Súbor so stopou</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hotovo</string>
     <string name="folder_process_status_currentfile">Spracovávanie %1$s</string>
