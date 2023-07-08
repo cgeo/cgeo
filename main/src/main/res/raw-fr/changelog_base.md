@@ -1,6 +1,9 @@
 ### Carte
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
 - New: Add 'Set as target' to map's long-tap popup
+- Correction : L'interruption des téléchargements laissait des fichiers incomplets
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
 
 ### Détails de la cache
 - New: 'Save and upload' button when editing personal note
