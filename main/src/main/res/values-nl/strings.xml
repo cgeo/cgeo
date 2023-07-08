@@ -1162,7 +1162,6 @@
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
     <string name="persistablefolder_routingbase">Routering</string>
     <string name="persistablefolder_routingtiles">Routering gegevens</string>
-    <string name="persistableuri_track">Spoorbestand</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
     <string name="folder_process_status_currentfile">%1$s verwerken</string>
