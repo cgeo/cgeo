@@ -200,6 +200,8 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Verarbeiten der Anmeldeseite fehlgeschlagen</string>
     <string name="err_captcha">Der Dienst benötigt ein Captcha. Bitte öffne die geocaching.com-Webseite mit deinem Browser und löse das Captcha, welches dort beim Anmelden angezeigt wird. Dann versuche erneut die Anmeldung in c:geo.</string>
+    <string name="err_server_general">Verbindung zum Geocaching-Server konnte nicht hergestellt werden. Server nicht verfügbar oder Internetverbindung unterbrochen.</string>
+    <string name="err_server_gc">Verbindung zu geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_lc">Verbindung zu labs.geocaching.com konnte nicht hergestellt werden. Dienst nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden. Server nicht verfügbar oder Internetverbindung unterbrochen.</string>
@@ -581,6 +583,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Der Unter-Filter ist aktuell leer</string>
     <string name="cache_filter_log_entry_foundby">Gefunden von</string>
     <string name="cache_filter_log_entry_logtext">Logtext</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>Vor mehr als einem Jahr</item>
+        <item>Vor einem Jahr</item>
+        <item>Vor 30 Tagen</item>
+        <item>Vor einer Woche</item>
+        <item>Gestern</item>
+        <item>vor weniger als einem Tag</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1J</item>
+        <item>1J</item>
+        <item>30T</item>
+        <item>1W</item>
+        <item>1T</item>
+        <item>&lt;1T</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>Vor mehr als einem Jahr</item>
         <item>Vor einem Jahr</item>
@@ -1144,7 +1162,6 @@
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
     <string name="persistablefolder_routingbase">Routing</string>
     <string name="persistablefolder_routingtiles">Routingdaten</string>
-    <string name="persistableuri_track">Trackdatei</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
