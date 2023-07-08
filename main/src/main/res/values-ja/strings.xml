@@ -981,7 +981,6 @@
     <string name="persistablefolder_spoilerimages">スポイラー画像</string>
     <string name="persistablefolder_routingbase">ルート検索</string>
     <string name="persistablefolder_routingtiles">ルート検索データ</string>
-    <string name="persistableuri_track">トラックファイル</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s、%3$s/%4$s 完了</string>
     <string name="folder_process_status_currentfile">処理中:%1$s</string>
