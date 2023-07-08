@@ -1144,7 +1144,6 @@
     <string name="persistablefolder_spoilerimages">Imagens spoiler</string>
     <string name="persistablefolder_routingbase">Encaminhamento</string>
     <string name="persistablefolder_routingtiles">Dados de encaminhamento</string>
-    <string name="persistableuri_track">Ficheiro dos percursos</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s concluídos</string>
     <string name="folder_process_status_currentfile">A processar %1$s</string>
