@@ -1114,7 +1114,6 @@
     <string name="persistablefolder_spoilerimages">Imatges d\'ajuda</string>
     <string name="persistablefolder_routingbase">Encaminament</string>
     <string name="persistablefolder_routingtiles">Dades d\'encaminament</string>
-    <string name="persistableuri_track">Fitxer de track</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fet</string>
     <string name="folder_process_status_currentfile">Procés %1$s</string>
