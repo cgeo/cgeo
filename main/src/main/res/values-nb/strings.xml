@@ -954,7 +954,6 @@
     <string name="persistablefolder_spoilerimages">Spoiler-bilder</string>
     <string name="persistablefolder_routingbase">Ruting</string>
     <string name="persistablefolder_routingtiles">Ruting data</string>
-    <string name="persistableuri_track">Sporingsfil</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s ferdig</string>
     <string name="folder_process_status_currentfile">Prosess %1$s</string>
