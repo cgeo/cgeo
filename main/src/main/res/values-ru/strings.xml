@@ -1133,7 +1133,6 @@
     <string name="persistablefolder_spoilerimages">Фото в спойлере</string>
     <string name="persistablefolder_routingbase">Навигация</string>
     <string name="persistablefolder_routingtiles">Данные маршрутизации</string>
-    <string name="persistableuri_track">Файл трека</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s выполнено</string>
     <string name="folder_process_status_currentfile">Обработка %1$s</string>
