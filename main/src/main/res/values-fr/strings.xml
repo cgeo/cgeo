@@ -1115,7 +1115,6 @@
     <string name="persistablefolder_spoilerimages">Images indices</string>
     <string name="persistablefolder_routingbase">Calcul d\'itinéraire</string>
     <string name="persistablefolder_routingtiles">Données d\'itinéraire</string>
-    <string name="persistableuri_track">Fichier de trace</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s réalisé</string>
     <string name="folder_process_status_currentfile">Traitement de : %1$s</string>
