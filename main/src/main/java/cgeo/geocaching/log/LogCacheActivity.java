@@ -872,8 +872,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             } else if (status == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
                 finish(SaveMode.SKIP);
-            } else {
-                SimpleDialog.of(activity)
+            } else if (!LogCacheActivity.this.isFinishing()) {
+                SimpleDialog.of(LogCacheActivity.this)
                         .setTitle(R.string.info_log_post_failed)
                         .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
                                 TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
