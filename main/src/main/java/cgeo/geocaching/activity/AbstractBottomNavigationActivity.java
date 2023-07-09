@@ -196,6 +196,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     @Override
     protected void onResume() {
         super.onResume();
+        showHideBottomNavItems();
         updateSelectedBottomNavItemId();
         startLoginIssueHandler();
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -217,6 +218,13 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
         // avoid weired transitions
         ActivityMixin.overrideTransitionToFade(this);
+    }
+
+    /** show or hide elements of bottom navigation at user's request (default: show all) */
+    private void showHideBottomNavItems() {
+        // add the other elements as well, but first make sure, that they are all available as home screen shortcuts,
+        // otherwise you will lock yourself out from reaching settings etc. if you disable home screen
+        ((NavigationBarView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY).setVisible(!Settings.getBoolean(R.string.pref_hidebn_nearby, false));
     }
 
     public void updateSelectedBottomNavItemId() {

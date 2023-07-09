@@ -535,6 +535,9 @@
     <string translatable="false" name="pref_mapWpScale">mapWpScale</string>
     <string translatable="false" name="pref_mapScaleOnly">mapScaleOnly</string>
 
+    <!-- hide parts of bottom navigation -->
+    <string translatable="false" name="pref_hidebn_nearby">hidebn_nearby</string>
+
     <!-- pq/bookmark list: show downloadable/new only -->
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
     <string translatable="false" name="pref_bookmarklistsShowNewOnly">bookmarklistsShowNewOnly</string>
