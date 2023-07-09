@@ -4,21 +4,14 @@ import cgeo.geocaching.enumerations.StatusCode;
 
 import androidx.annotation.NonNull;
 
-public class ImageResult {
+public class ImageResult extends StatusResult {
 
-    @NonNull
-    private final StatusCode postResult;
     @NonNull
     private final String imageUri;
 
-    public ImageResult(@NonNull final StatusCode postResult, @NonNull final String imageUri) {
-        this.postResult = postResult;
+    public ImageResult(@NonNull final StatusCode statusCode, @NonNull final String imageUri) {
+        super(statusCode);
         this.imageUri = imageUri;
-    }
-
-    @NonNull
-    public StatusCode getPostResult() {
-        return postResult;
     }
 
     @NonNull

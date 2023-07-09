@@ -67,7 +67,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
         try {
             LastTrackableAction.setAction(trackableLog);
-            final StatusCode status = GCParser.postLogTrackable(
+            return GCParser.postLogTrackable(
                     guid,
                     trackableLog.trackCode,
                     viewstates,
@@ -76,8 +76,6 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
                     date.get(Calendar.MONTH) + 1,
                     date.get(Calendar.DATE),
                     log);
-
-            return new LogResult(status, "");
         } catch (final Exception e) {
             Log.e("TrackableLoggingManager.postLog", e);
         }
