@@ -469,7 +469,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.logOffline(LogCacheActivity.this, logEntry);
-                        Settings.setLastCacheLog(logEntry.log);
+                        if (!logEntry.log.isEmpty()) {
+                            Settings.setLastCacheLog(logEntry.log);
+                        }
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                     }
