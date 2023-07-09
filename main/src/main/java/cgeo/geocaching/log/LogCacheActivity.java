@@ -594,8 +594,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else {
             SimpleDialog.of(this)
                     .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
-                            TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
                     .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(LogCacheActivity.SaveMode.FORCE));
 
