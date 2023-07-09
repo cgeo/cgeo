@@ -258,7 +258,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             } else {
                 followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             }
-            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
+            configureProximityNotifications();
         }
         individualRoute = null;
         if (null != proximityNotification) {
@@ -277,7 +277,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // map settings popup
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, this::configureProximityNotifications, mapOptions.filterContext));
 
         // routes / tracks popup
         findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
@@ -660,6 +660,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, Settings.isShowCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
+    private void configureProximityNotifications() {
+        // reconfigure, but only if necessary
+        proximityNotification = Settings.isGeneralProximityNotificationActive() ? proximityNotification != null ? proximityNotification : new ProximityNotification(true, false) : null;
+        Log.e("configured pn");
+    }
 
     private void switchTileLayer(final MapSource newSource) {
         final ITileLayer oldLayer = this.tileLayer;

@@ -114,6 +114,19 @@
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@id/routing_tooglegroup"
             android:visibility="gone"/>
+        <Button
+            android:id="@+id/proximitynotification_toggle_isOn"
+            style="@style/button_icon_accent"
+            app:icon="@drawable/notifications_active"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/proximitynotification_toggle_isOff"
+            android:layout_alignBottom="@id/routing_tooglegroup"/>
+        <Button
+            android:id="@+id/proximitynotification_toggle_isOff"
+            style="@style/button_icon"
+            app:icon="@drawable/notifications"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/routing_tooglegroup"/>
     </RelativeLayout>
 
     <RelativeLayout

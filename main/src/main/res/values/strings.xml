@@ -1235,6 +1235,8 @@
     <string name="pn_tone_only">Tone only</string>
     <string name="pn_text_only">Text only</string>
     <string name="pn_tone_and_text">Tone + text</string>
+    <string name="pn_quick_settings_on">Proximity notifications are enabled, tap to disable</string>
+    <string name="pn_quick_settings_off">Proximity notifications are disabled, tap to enable</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>

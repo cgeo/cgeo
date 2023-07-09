@@ -1425,11 +1425,24 @@ public class Settings {
      */
 
     public static boolean isGeneralProximityNotificationActive() {
-        return getBoolean(R.string.pref_proximityNotificationGeneral, false);
+        return isProximityNotificationMasterToggleOn() && getBoolean(R.string.pref_proximityNotificationGeneral, false);
     }
 
     public static boolean isSpecificProximityNotificationActive() {
-        return getBoolean(R.string.pref_proximityNotificationSpecific, false);
+        return isProximityNotificationMasterToggleOn() && getBoolean(R.string.pref_proximityNotificationSpecific, false);
+    }
+
+    /** master toggle to enable/disable proximity notifications without changing their individual settings */
+    public static boolean isProximityNotificationMasterToggleOn() {
+        return getBoolean(R.string.pref_proximityNotificationMasterToggle, true);
+    }
+
+    /**
+     * master toggle to enable/disable proximity notifications without changing their individual settings
+     * still requires individual notifications to be enabled / configured to get notifications
+     **/
+    public static void enableProximityNotifications(final boolean enable) {
+        putBoolean(R.string.pref_proximityNotificationMasterToggle, enable);
     }
 
     public static int getProximityNotificationThreshold(final boolean farDistance) {

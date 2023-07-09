@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
@@ -52,7 +53,7 @@ public class MapSettingsUtils {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
@@ -147,6 +148,34 @@ public class MapSettingsUtils {
                 dialogView.routingInfo.setVisibility(View.GONE);
             }));
         }
+
+        // proximity notification master toggle
+        if (configureProximityNotificationToggleButtons(dialogView)) {
+            setProximityNotificationToggleButtonListener(dialogView.proximitynotificationToggleIsOn, dialogView, false, configureProximityNotifications);
+            setProximityNotificationToggleButtonListener(dialogView.proximitynotificationToggleIsOff, dialogView, true, configureProximityNotifications);
+        }
+    }
+
+    private static boolean configureProximityNotificationToggleButtons(final MapSettingsDialogBinding dialogView) {
+        final boolean anyPNActive = Settings.getBoolean(R.string.pref_proximityNotificationGeneral, false) || Settings.getBoolean(R.string.pref_proximityNotificationSpecific, false);
+        final boolean masterPNActive = Settings.isGeneralProximityNotificationActive();
+        dialogView.proximitynotificationToggleIsOn.setVisibility(anyPNActive && masterPNActive ? View.VISIBLE : View.GONE);
+        dialogView.proximitynotificationToggleIsOff.setVisibility(anyPNActive && !masterPNActive ? View.VISIBLE : View.GONE);
+        if (anyPNActive) {
+            ViewUtils.setTooltip(dialogView.proximitynotificationToggleIsOn, TextParam.id(R.string.pn_quick_settings_on));
+            ViewUtils.setTooltip(dialogView.proximitynotificationToggleIsOff, TextParam.id(R.string.pn_quick_settings_off));
+        }
+        return anyPNActive;
+    }
+
+    private static void setProximityNotificationToggleButtonListener(final Button button, final MapSettingsDialogBinding dialogView, final boolean newState, final Runnable configureProximityNotifications) {
+        button.setOnClickListener(v -> {
+            Settings.enableProximityNotifications(newState);
+            configureProximityNotificationToggleButtons(dialogView);
+            if (configureProximityNotifications != null) {
+                configureProximityNotifications.run();
+            }
+        });
     }
 
     private static void configureRoutingButtons(final boolean enabled, final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper) {
