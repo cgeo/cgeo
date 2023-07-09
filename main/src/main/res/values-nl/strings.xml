@@ -1162,6 +1162,9 @@
     <string name="persistablefolder_spoilerimages">Spoiler afbeeldingen</string>
     <string name="persistablefolder_routingbase">Routering</string>
     <string name="persistablefolder_routingtiles">Routering gegevens</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Audio-bestand (far)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Audio-bestand (dichtbij)</string>
+    <string name="proximitynotification_internal">(intern)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s voltooid</string>
     <string name="folder_process_status_currentfile">%1$s verwerken</string>
@@ -2342,6 +2345,7 @@
     <string name="receivedownload_error_filenotfound_exception">Bestand niet gevonden fout tijdens het ontvangen van bestand.</string>
     <string name="receivedownload_amount_copied">%s gekopieerd</string>
     <string name="receivedownload_cancelled">Bestandsoverdracht geannuleerd</string>
+    <string name="receivedownload_integritycheck_failed">Integriteitscontrole mislukt</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline kaart downloaden</string>
     <string name="delete_offlinemap_title">Verwijder offline kaart</string>
