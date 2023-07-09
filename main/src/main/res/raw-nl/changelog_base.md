@@ -2,8 +2,8 @@
 - Wijziging: Altijd pop-up menu weergeven op cache/waypoint lange tik (configureerbaar)
 - Nieuw: Voeg 'Instellen als doel' toe aan lang tikken op kaart pop-up
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
-- New: Integrity check for downloaded routing tiles
-- New: Support for user-selected audio for proximity notifications
+- Nieuw: Integriteitscontrole voor gedownloade routeringstegels
+- Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
