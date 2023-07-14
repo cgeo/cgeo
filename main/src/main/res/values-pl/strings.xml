@@ -226,7 +226,6 @@
     <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęć ze spoilerami dla tej skrytki.</string>
     <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
     <string name="err_detail_premium_log_found">Ta skrytka jest dostępna tylko dla członków premium geocaching.com. Dlatego nie można wyświetlić informacji o skrytce.\n\nJeśli jednak już znalazłeś tę skrytkę, możesz ją zalogować tutaj.</string>
-    <string name="err_watchlist_still_managing">Wciąż pracuję nad listą obserwowanych.</string>
     <string name="err_watchlist_failed">Zmiana listy obserwowanych zakończona niepowodzeniem.</string>
     <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
     <string name="err_auth_initialize">c:geo nie mógł rozpocząć autoryzacji.</string>
@@ -2883,4 +2882,5 @@
     <string name="smiley_approve">Zatwierdzone</string>
     <string name="smiley_disapprove">Odrzucone</string>
     <string name="smiley_question">Pytanie</string>
+    <!-- message center notifications -->
 </resources>
