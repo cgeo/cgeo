@@ -7,6 +7,7 @@
 
 ### Detaily kešky
 - New: 'Save and upload' button when editing personal note
+- Change: Replace most update progress dialogs by background actions
 
 ### Všeobecné
 - New: Add more number emojis (separate category)
@@ -17,3 +18,4 @@
 - New: Option to vote on opencaching (OCPL) caches during logging
 - New: Event Date filter for upcoming events
 - Change: Make 'relative' the default for date filters
+- New: Display info on home screen for unread messages (optional)
