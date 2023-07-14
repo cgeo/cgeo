@@ -7,6 +7,7 @@
 
 ### Detalhes da cache
 - Novo: botão 'Guardar e Enviar' ao editar nota pessoal
+- Change: Replace most update progress dialogs by background actions
 
 ### Geral
 - Novo: Adicionados mais emojis de números (categoria separada)
@@ -17,3 +18,4 @@
 - Novo: Opção de votar em caches de opencaching (OCPL) durante o registo
 - Novo: Filtro por Data do Evento para próximos eventos
 - Alteração: Tornar "relativo" como o padrão para filtros de data
+- New: Display info on home screen for unread messages (optional)
