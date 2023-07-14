@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo не нашёл картинок-подсказок для этого тайника.</string>
     <string name="err_detail_still_working">Выполняется другое задание.</string>
     <string name="err_detail_premium_log_found">Этот тайник доступен только для премиум-пользователей geocaching.com. Поэтому информация о тайнике не отображается.\n\nОднако, если вы уже нашли этот тайник, вы можете отметить его здесь.</string>
-    <string name="err_watchlist_still_managing">Список Отслеживаемых еще обновляется.</string>
     <string name="err_watchlist_failed">Изменить ваш список отслеживаемых не удалось.</string>
     <string name="err_application_no">c:geo не может найти подходящее приложение.</string>
     <string name="err_auth_initialize">Не удалось начать авторизацию.</string>
@@ -2843,4 +2842,5 @@
     <string name="smiley_approve">Одобрено</string>
     <string name="smiley_disapprove">Отклонено</string>
     <string name="smiley_question">Вопрос</string>
+    <!-- message center notifications -->
 </resources>
