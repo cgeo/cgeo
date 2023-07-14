@@ -159,7 +159,6 @@
     <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
     <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
     <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
-    <string name="err_watchlist_still_managing">Še vedno upravljam vaš spisek nadzorov.</string>
     <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
     <string name="err_application_no">c:geo ne najde primerne aplikacije.</string>
     <string name="err_auth_initialize">c:geo ni uspel začeti z avtorizacijskim postopkom.</string>
@@ -1068,4 +1067,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
