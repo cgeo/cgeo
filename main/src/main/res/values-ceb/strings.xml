@@ -136,7 +136,6 @@
     <string name="err_detail_cache_find_any">ang c:geo dili maka pangita bisan unsa na mga geocache.</string>
     <string name="err_detail_no_spoiler">ang c:geo kay walay nakit an na mga spoiler na imahe para sa ka ni nga cache.</string>
     <string name="err_detail_still_working">Nagahimo pa og lain nga bulohaton.</string>
-    <string name="err_watchlist_still_managing">Nagdumala pa sa imohang watchlist.</string>
     <string name="err_watchlist_failed">Ang pag-usab sa imong watchlist kay nakapyas.</string>
     <string name="err_application_no">ang c:geo wala nakakita og mga angay na aplikasyon.</string>
     <string name="err_auth_initialize">ang c:geo napakyas og pagpasiuna sa proseso sa awtorisasyon.</string>
@@ -1116,4 +1115,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
