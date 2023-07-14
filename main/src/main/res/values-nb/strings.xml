@@ -220,7 +220,6 @@
     <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
     <string name="err_detail_still_working">Er fremdeles opptatt med en annen oppgave.</string>
     <string name="err_detail_premium_log_found">Denne cachen er kun tilgjengelig for premium-medlemmer på geocaching.com. Derfor kan ikke cacheinformasjonen vises.\n\nHvis du allerede har funnet denne cachen, kan du imidlertid logge den her.</string>
-    <string name="err_watchlist_still_managing">Håndterer fremdeles overvåkningslisten.</string>
     <string name="err_watchlist_failed">Endring av din overvåkningsliste var mislykket.</string>
     <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
     <string name="err_auth_initialize">Beklager, c:geo klarte ikke å starte autoriserings-prosessen.</string>
@@ -2246,4 +2245,5 @@
     <string name="rtl_prison">fengsel</string>
     <string name="rtl_ruin">ruin</string>
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
