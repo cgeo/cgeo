@@ -220,7 +220,6 @@
     <string name="err_detail_no_spoiler">Το c:geo δεν βρήκε spoiler εικόνες για αυτή την κρύπτη.</string>
     <string name="err_detail_still_working">Δεν έχει ολοκληρωθεί η προηγούμενη λειτουργία.</string>
     <string name="err_detail_premium_log_found">Αυτή η κρύπτη είναι διαθέσιμη μόνο σε premium μέλη του geocaching.com. Επομένως, δεν είναι δυνατή η εμφάνιση των πληροφοριών της κρύπτη.\n\n Ωστόσο, εάν έχετε ήδη βρει αυτήν την κρύπτη, μπορείτε να την καταγράψετε εδώ.</string>
-    <string name="err_watchlist_still_managing">Εξακολουθεί η διαχείριση της λίστας παρακολούθησής σας.</string>
     <string name="err_watchlist_failed">Η αλλαγή της λίστας παρακολούθησής σας απέτυχε.</string>
     <string name="err_application_no">Το c:geo δεν μπορεί να βρει μια κατάλληλη εφαρμογή.</string>
     <string name="err_auth_initialize">Το c:geo απέτυχε να εκκινήσει τη διαδικασίας εξουσιοδότησης.</string>
@@ -2358,4 +2357,5 @@
     <string name="smiley_approve">Εγκεκριμένο</string>
     <string name="smiley_disapprove">Απορριπτέο</string>
     <string name="smiley_question">Ερώτηση</string>
+    <!-- message center notifications -->
 </resources>
