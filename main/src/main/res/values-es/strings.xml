@@ -220,7 +220,6 @@
     <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este caché.</string>
     <string name="err_detail_still_working">Todavía hay otra tarea en ejecución.</string>
     <string name="err_detail_premium_log_found">Este caché sólo está disponible para miembros premium de geocaching.com. Por lo tanto, la información de caché no se puede mostrar.\n\nSin embargo, si ya has encontrado este caché, puedes registrarlo aquí.</string>
-    <string name="err_watchlist_still_managing">Todavía gestionando tu lista de seguimiento.</string>
     <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
     <string name="err_application_no">c:geo no encuentra ninguna aplicación válida.</string>
     <string name="err_auth_initialize">c:geo no ha podido iniciar el proceso de autorización.</string>
@@ -2311,4 +2310,5 @@ Nombre de archivo:%2$s</string>
     <string name="rtl_alp">alpes</string>
     <string name="rtl_wetland">humedal</string>
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
