@@ -179,7 +179,6 @@
     <string name="err_detail_no_spoiler">c:geo не знайдено зображень спойлера для цього кешу.</string>
     <string name="err_detail_still_working">Продовжуйте працювати над іншим завданням.</string>
     <string name="err_detail_premium_log_found">Цей кеш доступний лише для преміум членів geocaching.com. Таким чином, інформація з кешу не може бути відображена.\n\n, Однак, якщо ви вже знайшли цей кеш, увійдіть сюди.</string>
-    <string name="err_watchlist_still_managing">Все ще керуй своїм списком спостереження.</string>
     <string name="err_watchlist_failed">Не вдалося змінити твій списку перегляду.</string>
     <string name="err_application_no">c:geo не може знайти відповідну програму.</string>
     <string name="err_auth_initialize">c:geo не вдалося ініціалізувати процес авторизації.</string>
@@ -1470,4 +1469,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
