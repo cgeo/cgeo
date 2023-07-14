@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
     <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
     <string name="err_detail_premium_log_found">Cette géocache est uniquement disponible pour les membres premium de geocaching.com. Les informations de la géocache ne peuvent donc pas être affichées.\n\nCependant, si vous avez déjà trouvé cette géocache, vous pouvez enregistrer votre visite ici.</string>
-    <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
     <string name="err_watchlist_failed">Échec lors de la modification de votre liste de suivi.</string>
     <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
     <string name="err_auth_initialize">c:geo a échoué dans la demande d\'autorisation.</string>
@@ -2768,4 +2767,5 @@
     <string name="smiley_approve">Approuvé</string>
     <string name="smiley_disapprove">Désapprouvé</string>
     <string name="smiley_question">Interrogatif(ve)</string>
+    <!-- message center notifications -->
 </resources>
