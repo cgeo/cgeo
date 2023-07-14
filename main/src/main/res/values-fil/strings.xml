@@ -140,7 +140,6 @@
     <string name="err_detail_cache_find_any">ang anumang mga geocache ay hindi nakita ng c:geo.</string>
     <string name="err_detail_no_spoiler">c:geo nakita ang walang taga salita ng larawan para sa cache.</string>
     <string name="err_detail_still_working">Gumagawa pa ng trabaho sa ibang gawain.</string>
-    <string name="err_watchlist_still_managing">Nangangasiwa parin sa iyong watchlist.</string>
     <string name="err_watchlist_failed">Binago ang watchlist na nabigo.</string>
     <string name="err_application_no">c:geo hindi nahanap ang saktong aplikasyon.</string>
     <string name="err_auth_initialize">c:geo ay nabigo upang magpasimula ng proseso ng pahintulot.</string>
@@ -1153,4 +1152,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
