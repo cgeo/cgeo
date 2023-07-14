@@ -226,7 +226,6 @@
     <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
     <string name="err_detail_premium_log_found">Esta cache apenas está disponível para os membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
-    <string name="err_watchlist_still_managing">Ainda se encontra a gerir a sua lista de observação.</string>
     <string name="err_watchlist_failed">A alteração da sua lista de observação falhou.</string>
     <string name="err_application_no">O c:geo não encontra nenhuma aplicação compatível.</string>
     <string name="err_auth_initialize">O c:geo falhou a inicialização do processo de autorização.</string>
@@ -2829,4 +2828,5 @@
     <string name="smiley_approve">Aprovado</string>
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
+    <!-- message center notifications -->
 </resources>
