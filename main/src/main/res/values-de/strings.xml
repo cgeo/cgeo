@@ -226,7 +226,6 @@
     <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
     <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
     <string name="err_detail_premium_log_found">Dieser Cache ist nur für Premium-Mitglieder von Geocaching.com sichtbar. Daher können die Cache-Informationen nicht angezeigt werden.\n\nFalls du diesen Cache aber bereits gefunden hast, kannst du ihn hier loggen.</string>
-    <string name="err_watchlist_still_managing">c:geo versucht noch immer die Watchlist zu aktualisieren.</string>
     <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
     <string name="err_application_no">c:geo konnte keine passende Anwendung finden.</string>
     <string name="err_auth_initialize">c:geo konnte die Autorisierung nicht starten.</string>
@@ -2825,4 +2824,5 @@
     <string name="smiley_approve">Zustimmung</string>
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
+    <!-- message center notifications -->
 </resources>
