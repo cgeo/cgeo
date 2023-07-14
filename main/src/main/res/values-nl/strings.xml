@@ -226,7 +226,6 @@
     <string name="err_detail_no_spoiler">c:geo heeft geen spoiler images gevonden voor deze cache.</string>
     <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
     <string name="err_detail_premium_log_found">Deze cache is alleen beschikbaar voor premium leden van geocaching.com. Daarom kan de cache informatie niet worden weergegeven.\n\nAls je deze cache al hebt gevonden, kan je deze hier loggen.</string>
-    <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
     <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
     <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
     <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
@@ -2829,4 +2828,5 @@
     <string name="smiley_approve">Goedgekeurd</string>
     <string name="smiley_disapprove">Afgekeurd</string>
     <string name="smiley_question">Vraag</string>
+    <!-- message center notifications -->
 </resources>
