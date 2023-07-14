@@ -218,7 +218,6 @@
     <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした</string>
     <string name="err_detail_still_working">ほかのタスクがまだ動作中です</string>
     <string name="err_detail_premium_log_found">このキャッシュはgeocaching.comプレミアム会員のみ利用できます。そのためキャッシュ情報を表示することはできません。\n\nただし、このキャッシュをすでに発見している場合はこちらからログを書くことは出来ます</string>
-    <string name="err_watchlist_still_managing">まだウォッチリストを管理中です</string>
     <string name="err_watchlist_failed">ウォッチリストの変更に失敗しました</string>
     <string name="err_application_no">適切なアプリが見つかりません</string>
     <string name="err_auth_initialize">認証プロセスの初期化に失敗しました</string>
@@ -2174,4 +2173,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_clown">ピエロ</string>
     <string name="smiley_8ball">8ボール</string>
     <string name="smiley_question">疑問</string>
+    <!-- message center notifications -->
 </resources>
