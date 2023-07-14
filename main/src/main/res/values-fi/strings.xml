@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo ei löytänyt kätkön spoilerikuvia.</string>
     <string name="err_detail_still_working">Työstetään vielä toista tehtävää.</string>
     <string name="err_detail_premium_log_found">Tämä kätkö on saatavilla vain geocaching.com premium-jäsenille. Tällöin kätkön tietoja ei voida näyttää.\n\n Mutta jos olet kuitenkin löytänyt tämän kätkön, voit kirjata löytösi täällä.</string>
-    <string name="err_watchlist_still_managing">Käsitellään edelleen tarkkailulistaasi.</string>
     <string name="err_watchlist_failed">Tarkkailulistasi muuttaminen epäonnistui.</string>
     <string name="err_application_no">c:geo ei löydä sopivaa sovellusta.</string>
     <string name="err_auth_initialize">c:geo epäonnistui valtuutuksen alustuksessa.</string>
@@ -2764,4 +2763,5 @@
     <string name="smiley_approve">Hyväksytty</string>
     <string name="smiley_disapprove">Hylätty</string>
     <string name="smiley_question">Kysymys</string>
+    <!-- message center notifications -->
 </resources>
