@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo nenašlo pre túto skrýšu žiaden obrázok s nápovedou.</string>
     <string name="err_detail_still_working">Stále prebieha práca na inej úlohe.</string>
     <string name="err_detail_premium_log_found">Táto keška je dostupná len pre prémiových členov geocaching.com. Z tohto dôvodu informácie o keške nemôžu byť zobrazené.\n\nNapriek tomu, pokiaľ už si túto kešku našiel, môžeš ju odtiaľto zalogovať.</string>
-    <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
     <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
     <string name="err_application_no">Prepáčte, c:geo nemôže nájsť žiadnu vhodnú aplikáciu.</string>
     <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
@@ -2831,4 +2830,5 @@
     <string name="smiley_approve">Schválené</string>
     <string name="smiley_disapprove">Zamietavý</string>
     <string name="smiley_question">Otázka</string>
+    <!-- message center notifications -->
 </resources>
