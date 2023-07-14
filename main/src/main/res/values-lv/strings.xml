@@ -179,7 +179,6 @@
     <string name="err_detail_no_spoiler">c:geo neatrada spoilerbildi šim slēpnim.</string>
     <string name="err_detail_still_working">Joprojām strādā pie citas darbības.</string>
     <string name="err_detail_premium_log_found">Šis slēpnis ir pieejams tikai geocaching.com premium lietotājiem. Tādēļ slēpņa informācija nevar tikt attēlota. \n\nTomēr, ja tu jau esi atradis šo slēpni, tad vari to piereģistrēt šeit.</string>
-    <string name="err_watchlist_still_managing">Joprojām kārto tavu novērojamo slēpņu sarakstu.</string>
     <string name="err_watchlist_failed">Neizdevās mainīt tavu novērojamo slēpņu sarakstu.</string>
     <string name="err_application_no">c:geo nevar atrast nevienu piemērotu aplikāciju.</string>
     <string name="err_auth_initialize">c:geo neizdevās izpildīt pierakstīšanās procesu.</string>
@@ -1363,4 +1362,5 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>
