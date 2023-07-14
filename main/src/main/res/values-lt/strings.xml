@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
     <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei suradote šią slėptuvę, galite registruoti ją čia.</string>
-    <string name="err_watchlist_still_managing">Dar tvarkomas stebimų slėptuvių sąrašas.</string>
     <string name="err_watchlist_failed">Nepavyko pakeisti stebimų slėptuvių sąrašo.</string>
     <string name="err_application_no">c:geo neranda tinkamos programos.</string>
     <string name="err_auth_initialize">c:geo nepavyko inicijuoti registracijos proceso.</string>
@@ -2831,4 +2830,5 @@
     <string name="smiley_approve">Patvirtinta</string>
     <string name="smiley_disapprove">Nepatvirtinta</string>
     <string name="smiley_question">Klausimas</string>
+    <!-- message center notifications -->
 </resources>
