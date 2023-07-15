@@ -1161,6 +1161,9 @@
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
     <string name="persistablefolder_routingbase">Routing</string>
     <string name="persistablefolder_routingtiles">Routingdaten</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Audiodatei (weit weg)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Audiodatei (nah)</string>
+    <string name="proximitynotification_internal">(intern)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
@@ -2341,6 +2344,7 @@
     <string name="receivedownload_error_filenotfound_exception">Zu empfangene Datei nicht gefunden.</string>
     <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
+    <string name="receivedownload_integritycheck_failed">Integritätsprüfung fehlgeschlagen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
     <string name="delete_offlinemap_title">Offline-Karte löschen</string>
