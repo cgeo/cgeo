@@ -1429,6 +1429,12 @@
     <string name="cache_recently_viewed">최근에 조회됨</string>
     <string name="cache_recently_viewed_empty">최근 본 캐시 없음</string>
     <string name="cache_clear_recently_viewed">지우기</string>
+    <string name="cachedetails_progress_refresh">%s 새로 고침</string>
+    <string name="cachedetails_progress_watch">관심목록에 추가되었습니다</string>
+    <string name="cachedetails_progress_unwatch">관심목록에서 제거되었습니다</string>
+    <string name="cachedetails_progress_favorite">호감점수 목록에 추가했습니다</string>
+    <string name="cachedetails_progress_unfavorite">호감점수 목록에 제거했습니다</string>
+    <string name="cachedetails_progress_upload_note">개인 메모 올라감</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -2799,4 +2805,9 @@
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">메세지 센터</string>
+    <string name="mcpolling_summary">메시지 센터에서 정기적으로 들어오는 메시지를 확인합니다.</string>
+    <plurals name="mcupdate">
+        <item quantity="other">메시지 센터에서 %d개의 읽지 않은 메시지</item>
+    </plurals>
 </resources>
