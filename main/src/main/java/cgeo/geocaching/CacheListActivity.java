@@ -727,8 +727,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
-            setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
             setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, Settings.isGCConnectorActive() && Settings.isGCPremiumMember(), !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, Settings.isGCConnectorActive(), !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_upload_allcoords, Settings.isGCConnectorActive(), !isEmpty);
+            setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
+            setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
 
             // Manage Lists submenu
             setVisible(menu, R.id.menu_lists, isOffline);
