@@ -7,7 +7,7 @@
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
-- Change: Replace most update progress dialogs by background actions
+- Změna: Nahrazení většiny dialogových oken průběhu aktualizace akcemi na pozadí
 
 ### Obecné
 - Novinka: Přidány další číselné emotikony (samostatná kategorie)
@@ -18,4 +18,4 @@
 - Novinka: Možnost hlasovat během logování o keškách opencaching (OCPL)
 - Novinka: Filtr datum eventu pro nadcházející eventy
 - Změna: Nastavení "relativní" jako přednastavené pro filtr datumu
-- New: Display info on home screen for unread messages (optional)
+- Novinka: Zobrazení informací o nepřečtených zprávách na domovské obrazovce (volitelné)
