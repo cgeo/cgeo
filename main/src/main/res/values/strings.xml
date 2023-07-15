@@ -1624,7 +1624,7 @@
     <string name="cachedetails_progress_watch">Added to watchlist</string>
     <string name="cachedetails_progress_unwatch">Removed from watchlist</string>
     <string name="cachedetails_progress_favorite">Added to favorites</string>
-    <string name="cachedetails_progress_unfavorite">Removed to favorites</string>
+    <string name="cachedetails_progress_unfavorite">Removed from favorites</string>
     <string name="cachedetails_progress_upload_note">Personal note uploaded</string>
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
