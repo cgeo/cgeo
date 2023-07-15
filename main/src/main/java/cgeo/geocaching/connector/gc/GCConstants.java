@@ -219,6 +219,9 @@ public final class GCConstants {
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";
 
+    // URL to message center
+    public static final String URL_MESSAGECENTER = "https://www.geocaching.com/account/messagecenter";
+
     /**
      * Number of logs to retrieve from GC.com
      */

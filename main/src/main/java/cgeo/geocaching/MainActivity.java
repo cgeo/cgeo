@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -318,7 +319,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                 displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
                                     updateHomeBadge(-1);
                                     if (actionRequested) {
-                                        ShareUtils.openUrl(this, "https://www.geocaching.com/account/messagecenter");
+                                        ShareUtils.openUrl(this, GCConstants.URL_MESSAGECENTER);
                                     }
                                 });
                             });
@@ -398,6 +399,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
             SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+        } else if (which == QuickLaunchItem.VALUES.MESSAGECENTER.id) {
+            ShareUtils.openUrl(this, GCConstants.URL_MESSAGECENTER);
         } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
             ShareUtils.openUrl(this, getString(R.string.manual_link_full));
         } else if (which == QuickLaunchItem.VALUES.FAQ.id) {

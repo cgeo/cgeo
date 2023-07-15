@@ -22,6 +22,7 @@ public class QuickLaunchItem extends InfoItem {
         SETTINGS(4),
         VIEWSETTINGS(8),
         BACKUPRESTORE(5),
+        MESSAGECENTER(10),
         MANUAL(6),
         FAQ(7);
 
@@ -39,6 +40,7 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.SETTINGS, R.string.menu_settings, R.drawable.settings_nut, false),
         new QuickLaunchItem(VALUES.VIEWSETTINGS, R.string.view_settings, R.drawable.settings_eye, false),
         new QuickLaunchItem(VALUES.BACKUPRESTORE, R.string.menu_backup, R.drawable.settings_backup, false),
+        new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, false),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, false),
         new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false)
     ));
