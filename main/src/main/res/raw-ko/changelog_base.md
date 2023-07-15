@@ -7,7 +7,7 @@
 
 ### 캐시 상세정보
 - 신규: 개인 메모 편집 시 '저장 및 업로드' 버튼
-- Change: Replace most update progress dialogs by background actions
+- 변경: 대부분의 업데이트 진행률 대화 상자를 백그라운드 작업으로 교체
 
 ### 일반
 - 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
@@ -18,4 +18,4 @@
 - 신규: 로그 중 opencaching(OCPL) 캐시에 투표하는 옵션
 - 신규: 예정된 이벤트에 대한 이벤트 날짜 필터
 - 변경: '상대적'을 날짜 필터의 기본값으로 설정
-- New: Display info on home screen for unread messages (optional)
+- 신규: 읽지 않은 메시지에 대한 정보를 홈 화면에 표시(선택 사항)
