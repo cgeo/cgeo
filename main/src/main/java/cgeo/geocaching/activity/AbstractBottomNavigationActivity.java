@@ -204,7 +204,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     @Override
     protected void onNewIntent(final Intent intent) {
         super.onNewIntent(intent);
-        // avoid weired transitions
+        // avoid weird transitions
         ActivityMixin.overrideTransitionToFade(this);
     }
 
@@ -215,7 +215,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
         super.onBackPressed();
 
-        // avoid weired transitions
+        // avoid weird transitions
         ActivityMixin.overrideTransitionToFade(this);
     }
 
