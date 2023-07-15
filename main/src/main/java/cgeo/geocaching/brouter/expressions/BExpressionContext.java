@@ -47,6 +47,9 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private final BitCoderContext ctxEndode = new BitCoderContext(abBuf);
     private final BitCoderContext ctxDecode = new BitCoderContext(new byte[0]);
     private final Map<String, Integer> variableNumbers = new HashMap<>();
+    List<BExpression> lastAssignedExpression = new ArrayList<>();
+    boolean skipConstantExpressionOptimizations = false;
+    int expressionNodeCount;
     private float[] variableData;
     // hash-cache for function results
     private final CacheNode probeCacheNode = new CacheNode();
@@ -797,6 +800,10 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public void parseFile(final Uri uri, final String readOnlyContext) {
+        parseFile(uri, readOnlyContext, null);
+    }
+
+    public void parseFile(final Uri uri, String readOnlyContext, Map<String, String> keyValues) {
         final InputStream is = ContentStorage.get().openForRead(uri);
         if (is == null) {
             throw new IllegalArgumentException("profile " + uri + " does not exist");
@@ -808,7 +815,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                 context = readOnlyContext;
 
                 final InputStream is2 = ContentStorage.get().openForRead(uri);
-                expressionList = parseFileHelper(is2);
+                expressionList = parseFileHelper(is2, keyValues);
                 variableData = new float[variableNumbers.size()];
                 evaluate(lookupData); // lookupData is dummy here - evaluate just to create the variables
                 context = realContext;
@@ -816,7 +823,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             linenr = 1;
             minWriteIdx = variableData == null ? 0 : variableData.length;
 
-            expressionList = parseFileHelper(is);
+            expressionList = parseFileHelper(is, null);
+            lastAssignedExpression = null;
 
             // determine the build-in variable indices
             final String[] varNames = getBuildInVariableNames();
@@ -841,10 +849,19 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         }
     }
 
-    private List<BExpression> parseFileHelper(final InputStream is) throws Exception {
+    private List<BExpression> parseFileHelper(final InputStream is, Map<String, String> keyValues) throws Exception {
         br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         readerDone = false;
         final List<BExpression> result = new ArrayList<>();
+
+        // if injected keyValues are present, create assign expressions for them
+        if (keyValues != null) {
+            for (String key : keyValues.keySet()) {
+                final String value = keyValues.get(key);
+                result.add(BExpression.createAssignExpressionFromKeyValue(this, key, value));
+            }
+        }
+
         for (; ; ) {
             final BExpression exp = BExpression.parse(this, 0);
             if (exp == null) {
@@ -888,6 +905,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             if (create) {
                 num = variableNumbers.size();
                 variableNumbers.put(name, num);
+                lastAssignedExpression.add(null);
             } else {
                 return -1;
             }
@@ -925,6 +943,19 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         for (int i = 0; i < lookupIdxUsed.length; i++) {
             lookupIdxUsed[i] = true;
         }
+    }
+
+    public String usedTagList() {
+        final StringBuilder sb = new StringBuilder();
+        for (int inum = 0; inum < lookupValues.size(); inum++) {
+            if (lookupIdxUsed[inum]) {
+                if (sb.length() > 0) {
+                    sb.append(',');
+                }
+                sb.append(lookupNames.get(inum));
+            }
+        }
+        return sb.toString();
     }
 
     public int getLookupValueIdx(final int nameIdx, final String value) {

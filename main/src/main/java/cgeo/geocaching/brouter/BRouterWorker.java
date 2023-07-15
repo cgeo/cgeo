@@ -22,10 +22,16 @@ public class BRouterWorker {
     public List<OsmNodeNamed> waypoints;
     public List<OsmNodeNamed> nogoList;
     public List<OsmNodeNamed> nogoPolygonsList;
+    public String profileParams;
 
     // external code, do not refactor
     @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch"})
     public String getTrackFromParams(final Bundle params) {
+        int engineMode = 0;
+        if (params.containsKey("engineMode")) {
+            engineMode = params.getInt("engineMode", 0);
+        }
+
         long maxRunningTime = 60000;
         final String sMaxRunningTime = params.getString("maxRunningTime");
         if (sMaxRunningTime != null) {
@@ -75,15 +81,25 @@ public class BRouterWorker {
             waypoints = readPositions(params);
         }
         if (params.containsKey("lonlats")) {
-            waypoints = readLonlats(params);
+            waypoints = readLonlats(params, engineMode);
         }
 
         if (waypoints == null) {
             return "no pts ";
         }
 
+        String extraParams = null;
         if (params.containsKey("extraParams")) {  // add user params
-            final String extraParams = params.getString("extraParams");
+            extraParams = params.getString("extraParams");
+        }
+        if (extraParams != null && this.profileParams != null) {
+            // don't overwrite incoming values
+            extraParams = this.profileParams + "&" + extraParams;
+        } else if (this.profileParams != null) {
+            extraParams = this.profileParams;
+        }
+
+        if (params.containsKey("extraParams")) {  // add user params
             if (rc.keyValues == null) {
                 rc.keyValues = new HashMap<String, String>();
             }
@@ -101,49 +117,56 @@ public class BRouterWorker {
             }
         }
 
-        final RoutingEngine cr = new RoutingEngine(waypoints, rc);
+        final RoutingEngine cr = new RoutingEngine(waypoints, rc, engineMode);
         cr.doRun(maxRunningTime);
 
-        // store new reference track if any
-        // (can exist for timed-out search)
-        if (cr.getFoundRawTrack() != null) {
-            try {
-                cr.getFoundRawTrack().writeBinary(rawTrackPath);
-            } catch (Exception ignored) {
+        if (engineMode == RoutingEngine.BROUTER_ENGINEMODE_ROUTING) {
+            // store new reference track if any
+            // (can exist for timed-out search)
+            if (cr.getFoundRawTrack() != null) {
+                try {
+                    cr.getFoundRawTrack().writeBinary(rawTrackPath);
+                } catch (Exception ignored) {
+                }
             }
-        }
 
-        if (cr.getErrorMessage() != null) {
-            return cr.getErrorMessage();
-        }
+            if (cr.getErrorMessage() != null) {
+                return cr.getErrorMessage();
+            }
 
-        final String format = params.getString("trackFormat");
-        int writeFromat = OUTPUT_FORMAT_GPX;
-        if (format != null) {
-            if ("kml".equals(format)) {
-                writeFromat = OUTPUT_FORMAT_KML;
+            final String format = params.getString("trackFormat");
+            int writeFromat = OUTPUT_FORMAT_GPX;
+            if (format != null) {
+                if ("kml".equals(format)) {
+                    writeFromat = OUTPUT_FORMAT_KML;
+                }
+                if ("json".equals(format)) {
+                    writeFromat = OUTPUT_FORMAT_JSON;
+                }
             }
-            if ("json".equals(format)) {
-                writeFromat = OUTPUT_FORMAT_JSON;
-            }
-        }
 
-        final OsmTrack track = cr.getFoundTrack();
+            final OsmTrack track = cr.getFoundTrack();
 
-        if (track != null) {
-            if (params.containsKey("exportWaypoints")) {
-                track.exportWaypoints = (params.getInt("exportWaypoints", 0) == 1);
+            if (track != null) {
+                if (params.containsKey("exportWaypoints")) {
+                    track.exportWaypoints = (params.getInt("exportWaypoints", 0) == 1);
+                }
+                switch (writeFromat) {
+                    case OUTPUT_FORMAT_GPX:
+                        return track.formatAsGpx();
+                    case OUTPUT_FORMAT_KML:
+                        return track.formatAsKml();
+                    case OUTPUT_FORMAT_JSON:
+                        return track.formatAsGeoJson();
+                    default:
+                        return track.formatAsGpx();
+                }
             }
-            switch (writeFromat) {
-                case OUTPUT_FORMAT_GPX:
-                    return track.formatAsGpx();
-                case OUTPUT_FORMAT_KML:
-                    return track.formatAsKml();
-                case OUTPUT_FORMAT_JSON:
-                    return track.formatAsGeoJson();
-                default:
-                    return track.formatAsGpx();
+        } else {    // get other infos
+            if (cr.getErrorMessage() != null) {
+                return cr.getErrorMessage();
             }
+            return cr.getFoundInfo();
         }
         return null;
     }
@@ -171,7 +194,7 @@ public class BRouterWorker {
         return wplist;
     }
 
-    private List<OsmNodeNamed> readLonlats(final Bundle params) {
+    private List<OsmNodeNamed> readLonlats(final Bundle params, final int mode) {
         final List<OsmNodeNamed> wplist = new ArrayList<>();
 
         final String lonLats = params.getString("lonlats");
@@ -179,15 +202,21 @@ public class BRouterWorker {
             throw new IllegalArgumentException("lonlats parameter not set");
         }
 
-        final String[] coords = lonLats.split("\\|");
-        if (coords.length < 2) {
-            throw new IllegalArgumentException("we need two lat/lon points at least!");
+        final String[] coords;
+        if (mode == 0) {
+            coords = lonLats.split("\\|");
+            if (coords.length < 2) {
+                throw new IllegalArgumentException("we need two lat/lon points at least!");
+            }
+        } else {
+            coords = new String[1];
+            coords[0] = lonLats;
         }
 
         for (int i = 0; i < coords.length; i++) {
             final String[] lonLat = coords[i].split(",");
             if (lonLat.length < 2) {
-                throw new IllegalArgumentException("we need two lat/lon points at least!");
+                throw new IllegalArgumentException("we need a lat and a lon point at least!");
             }
             wplist.add(readPosition(lonLat[0], lonLat[1], "via" + i));
         }

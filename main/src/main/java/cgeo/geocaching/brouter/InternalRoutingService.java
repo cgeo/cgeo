@@ -1,8 +1,10 @@
 package cgeo.geocaching.brouter;
 
+import cgeo.geocaching.brouter.core.RoutingEngine;
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_PROFILE_ELEVATION_ONLY;
 import static cgeo.geocaching.brouter.BRouterConstants.PROFILE_PARAMTERKEY;
 
 import android.app.Service;
@@ -22,9 +24,18 @@ public class InternalRoutingService extends Service {
         public String getTrackFromParams(final Bundle params) {
             final BRouterWorker worker = new BRouterWorker();
 
-            worker.profileFilename = params.getString(PROFILE_PARAMTERKEY);
-            if (StringUtils.isBlank(worker.profileFilename)) {
-                return ""; // cannot calculate a route without a profile
+            int engineMode = 0;
+            if (params.containsKey("engineMode")) {
+                engineMode = params.getInt("engineMode", 0);
+            }
+
+            if (engineMode == RoutingEngine.BROUTER_ENGINEMODE_ROUTING) {
+                worker.profileFilename = params.getString(PROFILE_PARAMTERKEY);
+                if (StringUtils.isBlank(worker.profileFilename)) {
+                    return ""; // cannot calculate a route without a profile
+                }
+            } else {
+                worker.profileFilename = BROUTER_PROFILE_ELEVATION_ONLY;
             }
 
             final String mode = params.getString("v");

@@ -291,7 +291,13 @@ public final class NodesCache implements Closeable {
     public void matchWaypointsToNodes(final List<MatchedWaypoint> unmatchedWaypoints, final double maxDistance, final OsmNodePairSet islandNodePairs) {
         waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, maxDistance, islandNodePairs);
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
-            preloadPosition(mwp.waypoint);
+            int cellsize = 12500;
+            preloadPosition(mwp.waypoint, cellsize);
+            // get a second chance
+            if (mwp.crosspoint == null) {
+                cellsize = 1000000 / 32;
+                preloadPosition(mwp.waypoint, cellsize);
+            }
         }
 
         if (firstFileAccessFailed) {
@@ -315,8 +321,7 @@ public final class NodesCache implements Closeable {
         }
     }
 
-    private void preloadPosition(final OsmNode n) {
-        final int d = 12500;
+    private void preloadPosition(final OsmNode n, final int d) {
         firstFileAccessFailed = false;
         firstFileAccessName = null;
         loadSegmentFor(n.ilon, n.ilat);

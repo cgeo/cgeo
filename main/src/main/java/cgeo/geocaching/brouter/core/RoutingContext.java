@@ -280,15 +280,6 @@ public final class RoutingContext {
     public void readGlobalConfig() {
         final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
-        if (keyValues != null) {
-            // add parameter to context
-            for (Map.Entry<String, String> e : keyValues.entrySet()) {
-                final float f = Float.parseFloat(e.getValue());
-                expctxWay.setVariableValue(e.getKey(), f, true);
-                expctxNode.setVariableValue(e.getKey(), f, true);
-            }
-        }
-
         setModel(expctxGlobal.useKinematicModel);
 
         carMode = 0.f != expctxGlobal.getVariableValue("validForCars", 0.f);

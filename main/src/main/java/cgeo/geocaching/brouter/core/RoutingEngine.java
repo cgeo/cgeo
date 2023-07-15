@@ -20,6 +20,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class RoutingEngine extends Thread {
+
+    public static final int BROUTER_ENGINEMODE_ROUTING = 0;
+    public static final int BROUTER_ENGINEMODE_SEED = 1;
+    public static final int BROUTER_ENGINEMODE_GETELEV = 2;
+
     public double airDistanceCostFactor;
     public SearchBoundary boundary;
     protected List<OsmNodeNamed> waypoints = null;
@@ -34,9 +39,12 @@ public class RoutingEngine extends Thread {
     private int nodeLimit; // used for target island search
     private static final int MAXNODES_ISLAND_CHECK = 500;
     private final OsmNodePairSet islandNodePairs = new OsmNodePairSet(MAXNODES_ISLAND_CHECK);
+    private int engineMode = 0;
     private static final int MAX_STEPS_CHECK = 10;
     private OsmTrack foundRawTrack = null;
+    protected String outputMessage = null;
     private volatile boolean terminated;
+    public double lastAirDistanceCostFactor;
     private OsmTrack guideTrack;
     private OsmPathElement matchPath;
     private long startTime;
@@ -46,8 +54,13 @@ public class RoutingEngine extends Thread {
     private String outfile;
 
     public RoutingEngine(final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
+        this(waypoints, rc, 0);
+    }
+
+    public RoutingEngine(final List<OsmNodeNamed> waypoints, final RoutingContext rc, final int engineMode) {
         this.waypoints = waypoints;
         this.routingContext = rc;
+        this.engineMode = engineMode;
 
         ProfileCache.parseProfile(rc);
     }
@@ -71,7 +84,24 @@ public class RoutingEngine extends Thread {
         doRun(0);
     }
 
-    public void doRun(final long maxRunningTime) {
+    public void doRun(long maxRunningTime) {
+
+        switch (engineMode) {
+            case BROUTER_ENGINEMODE_ROUTING:
+                doRouting(maxRunningTime);
+                break;
+            case BROUTER_ENGINEMODE_SEED: /* do nothing, handled the old way */
+                break;
+            case BROUTER_ENGINEMODE_GETELEV:
+                doGetElev();
+                break;
+            default:
+                doRouting(maxRunningTime);
+                break;
+        }
+    }
+
+    public void doRouting(final long maxRunningTime) {
         try {
             startTime = System.currentTimeMillis();
             final long startTime0 = startTime;
@@ -129,6 +159,44 @@ public class RoutingEngine extends Thread {
             }
             openSet.clear();
             finished = true; // this signals termination to outside
+        }
+    }
+
+    public void doGetElev() {
+        try {
+            startTime = System.currentTimeMillis();
+
+            routingContext.turnInstructionMode = 9;
+            final MatchedWaypoint wpt1 = new MatchedWaypoint();
+            wpt1.waypoint = waypoints.get(0);
+            wpt1.name = "wpt_info";
+            final List<MatchedWaypoint> listOne = new ArrayList<>();
+            listOne.add(wpt1);
+            matchWaypointsToNodes(listOne);
+
+            resetCache(true);
+            nodesCache.nodesMap.cleanupMode = 0;
+
+            final int distCn1 = listOne.get(0).crosspoint.calcDistance(listOne.get(0).node1);
+            final int distCn2 = listOne.get(0).crosspoint.calcDistance(listOne.get(0).node2);
+
+            final OsmNode startNode;
+            if (distCn1 < distCn2) {
+                startNode = nodesCache.getStartNode(listOne.get(0).node1.getIdFromPos());
+            } else {
+                startNode = nodesCache.getStartNode(listOne.get(0).node2.getIdFromPos());
+            }
+
+            final OsmNodeNamed n = new OsmNodeNamed(listOne.get(0).crosspoint);
+            n.selev = startNode != null ? startNode.getSElev() : Short.MIN_VALUE;
+
+            outputMessage = OsmTrack.formatAsGpxWaypoint(n);
+
+            final long endTime = System.currentTimeMillis();
+            logInfo("execution time = " + (endTime - startTime) / 1000. + " seconds");
+        } catch (Exception e) {
+            e.getStackTrace();
+            logException(e);
         }
     }
 
@@ -736,6 +804,9 @@ public class RoutingEngine extends Thread {
 
         if (track == null) {
             for (int cfi = 0; cfi < airDistanceCostFactors.length; cfi++) {
+                if (cfi > 0) {
+                    lastAirDistanceCostFactor = airDistanceCostFactors[cfi - 1];
+                }
                 airDistanceCostFactor = airDistanceCostFactors[cfi];
 
                 if (airDistanceCostFactor < 0.) {
@@ -789,6 +860,7 @@ public class RoutingEngine extends Thread {
 
         // final run for verbose log info and detail nodes
         airDistanceCostFactor = 0.;
+        lastAirDistanceCostFactor = 0.;
         guideTrack = track;
         startTime = System.currentTimeMillis(); // reset timeout...
         try {
@@ -1152,7 +1224,8 @@ public class RoutingEngine extends Thread {
                 }
 
                 // recheck cutoff before doing expensive stuff
-                if (path.cost + path.airdistance > maxTotalCost + 100) {
+                final int addDiff = 100;
+                if (path.cost + path.airdistance > maxTotalCost + addDiff) {
                     path.unregisterUpTree(routingContext);
                     continue;
                 }
@@ -1248,7 +1321,7 @@ public class RoutingEngine extends Thread {
 
                         final boolean inRadius = boundary == null || boundary.isInBoundary(nextNode, bestPath.cost);
 
-                        if (inRadius && (isFinalLink || bestPath.cost + bestPath.airdistance <= maxTotalCost + 100)) {
+                        if (inRadius && (isFinalLink || bestPath.cost + bestPath.airdistance <= (lastAirDistanceCostFactor != 0. ? maxTotalCost * lastAirDistanceCostFactor : maxTotalCost) + addDiff)) {
                             // add only if this may beat an existing path for that link
                             OsmLinkHolder dominator = link.getFirstLinkHolder(currentNode);
                             while (!trafficSim && dominator != null) {
@@ -1386,6 +1459,10 @@ public class RoutingEngine extends Thread {
 
     public OsmTrack getFoundTrack() {
         return foundTrack;
+    }
+
+    public String getFoundInfo() {
+        return outputMessage;
     }
 
     public OsmTrack getFoundRawTrack() {
