@@ -14,6 +14,7 @@ interface IInternalRoutingService {
     //  "nogoLats"-->double[] array of nogo latitudes; may be null.
     //  "nogoLons"-->double[] array of nogo longitudes; may be null.
     //  "nogoRadi"-->double[] array of nogo radius in meters; may be null.
+    //  "engineMode"-->0 (optional, default 0, 2 = get elevation)
     //
     //return null if all ok and no path given, the track if ok and path given, an error message if it was wrong
     //
