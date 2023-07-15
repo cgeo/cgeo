@@ -1471,6 +1471,12 @@
     <string name="cache_recently_viewed">Naposledy zobrazené</string>
     <string name="cache_recently_viewed_empty">Žádné nedávno zobrazené kešky</string>
     <string name="cache_clear_recently_viewed">vymazat</string>
+    <string name="cachedetails_progress_refresh">%s obnoveno</string>
+    <string name="cachedetails_progress_watch">Přidáno do seznamu sledovaných</string>
+    <string name="cachedetails_progress_unwatch">Odebráno ze seznamu sledovaných</string>
+    <string name="cachedetails_progress_favorite">Přidáno do oblíbených</string>
+    <string name="cachedetails_progress_unfavorite">Odebráno z oblíbených</string>
+    <string name="cachedetails_progress_upload_note">Osobní poznámka nahrána</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -2889,4 +2895,6 @@
     <string name="smiley_disapprove">Neschváleno</string>
     <string name="smiley_question">Otázka</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centrum zpráv</string>
+    <string name="mcpolling_summary">Kontrola příchozích zpráv v centru zpráv v pravidelných intervalech</string>
 </resources>
