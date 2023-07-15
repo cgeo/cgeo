@@ -13,6 +13,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
@@ -32,6 +33,8 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_EMPTY;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -57,6 +60,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 
@@ -198,6 +202,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         super.onResume();
         updateSelectedBottomNavItemId();
         startLoginIssueHandler();
+        setCustomBNitem();
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
@@ -242,6 +247,23 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         ((NavigationBarView) binding.activityBottomNavigation).setOnItemSelectedListener(this);
     }
 
+    private void setCustomBNitem() {
+        final MenuItem menu = ((BottomNavigationView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY);
+        final int item = Settings.getCustomBNitem();
+        if (item == CUSTOMBNITEM_EMPTY) {
+            menu.setVisible(false);
+        } else if (item == CUSTOMBNITEM_NEARBY) {
+            menu.setVisible(true);
+            menu.setIcon(R.drawable.ic_menu_nearby);
+            menu.setTitle(R.string.caches_nearby_button);
+        } else {
+            menu.setVisible(true);
+            final QuickLaunchItem iitem = (QuickLaunchItem) QuickLaunchItem.getById(item, QuickLaunchItem.ITEMS);
+            menu.setIcon(iitem.iconRes);
+            menu.setTitle(iitem.getTitleResId());
+        }
+    }
+
     /**
      * @return the menu item id which should be selected
      */
@@ -280,9 +302,20 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
     }
 
+    private static void launchActivity(final Activity fromActivity, final int id) {
+        if (id == MENU_NEARBY) {
+            final int item = Settings.getCustomBNitem();
+            if (item != CUSTOMBNITEM_NEARBY) {
+                QuickLaunchItem.launchQuickLaunchItem(fromActivity, item);
+                return;
+            }
+        }
+        final Intent launchIntent = getBottomNavigationIntent(fromActivity, id);
+        fromActivity.startActivity(launchIntent);
+    }
+
     public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {
-        final Intent launchIntent = getBottomNavigationIntent(this, item.getItemId());
-        startActivity(launchIntent);
+        launchActivity(this, item.getItemId());
 
         // Clear activity stack if the user actively navigates via the bottom navigation
         clearBackStack();

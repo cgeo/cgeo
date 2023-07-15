@@ -158,6 +158,7 @@
     <string translatable="false" name="pref_units_imperial">units</string>
     <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
     <string translatable="false" name="pref_startscreen">startscreen</string>
+    <string translatable="false" name="pref_custombnitem">custombnitem</string>
 
     <!-- category cache lists -->
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
