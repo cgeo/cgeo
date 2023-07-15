@@ -184,7 +184,6 @@
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
-    <string name="err_watchlist_still_managing">仍然在管理你的watchlist。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
@@ -734,4 +733,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

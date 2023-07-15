@@ -226,7 +226,6 @@
     <string name="err_detail_no_spoiler">이 캐시의 스포일러 사진을 찾을 수 없습니다.</string>
     <string name="err_detail_still_working">현재 다른 작업중입니다.</string>
     <string name="err_detail_premium_log_found">이 캐시는 geocaching.com의 프리미엄 회원만 사용할 수 있습니다. 따라서 캐시 정보를 표시 할 수 없습니다.\n\n그렇지만 이 캐시를 이미 찾은 경우 여기에 로그할 수 있습니다.</string>
-    <string name="err_watchlist_still_managing">현재 관심목록을 관리중입니다.</string>
     <string name="err_watchlist_failed">관심목록을 바꾸지 못했습니다.</string>
     <string name="err_application_no">적절한 응용프로그램을 찾지 못했습니다.</string>
     <string name="err_auth_initialize">인증 프로세스를 초기화시키지 못했습니다.</string>
@@ -1156,7 +1155,9 @@
     <string name="persistablefolder_spoilerimages">스포일러 사진</string>
     <string name="persistablefolder_routingbase">라우팅</string>
     <string name="persistablefolder_routingtiles">라우팅 데이터</string>
-    <string name="persistableuri_track">트랙파일</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">오디오 파일 (멀리)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">오디오 파일 (가까이)</string>
+    <string name="proximitynotification_internal">(내부)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s 완료</string>
     <string name="folder_process_status_currentfile">진행 %1$s</string>
@@ -2313,6 +2314,7 @@
     <string name="receivedownload_error_filenotfound_exception">파일을 받는 중 파일을 찾을 수 없음 오류가 발생했습니다.</string>
     <string name="receivedownload_amount_copied">%s를 복사했습니다</string>
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
+    <string name="receivedownload_integritycheck_failed">무결성 체크 실패</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
     <string name="delete_offlinemap_title">오프라인 지도 삭제</string>
@@ -2796,4 +2798,5 @@
     <string name="smiley_approve">승인</string>
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
+    <!-- message center notifications -->
 </resources>

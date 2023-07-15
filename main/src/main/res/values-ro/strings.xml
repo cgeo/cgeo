@@ -191,7 +191,6 @@
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
     <string name="err_detail_premium_log_found">Acest cache este disponibil doar membrilor premium ai geocaching.com. Prin urmare, informațiile despre cache nu pot fi afișate.\n\nCu toate acestea, dacă ați găsit deja acest cache, puteți scrie un jurnal aici.</string>
-    <string name="err_watchlist_still_managing">Încă lucrez la lista obiectelor urmărite.</string>
     <string name="err_watchlist_failed">Modificarea listei de cutii urmărite a eşuat.</string>
     <string name="err_application_no">c:geo nu a găsit nici o aplicaţie adecvată.</string>
     <string name="err_auth_initialize">c:geo nu a putut iniţia procesul de autentificare.</string>
@@ -1227,4 +1226,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

@@ -224,7 +224,6 @@
     <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
     <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
     <string name="err_detail_premium_log_found">Den här cachen är endast tillgänglig för premium-medlemmar på geocaching.com. Därav kan inte cache-informationen visas.\n\nMen om du redan har hittat den här cachen så kan du logga den här.</string>
-    <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
     <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
     <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
     <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
@@ -1114,7 +1113,6 @@
     <string name="persistablefolder_spoilerimages">Spoilerbilder</string>
     <string name="persistablefolder_routingbase">Navigering</string>
     <string name="persistablefolder_routingtiles">Navigeringdata</string>
-    <string name="persistableuri_track">Spårningsfil</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s gjort</string>
     <string name="folder_process_status_currentfile">Bearbeta %1$s</string>
@@ -2764,4 +2762,5 @@
     <string name="smiley_approve">Godkänd</string>
     <string name="smiley_disapprove">Ej godkänd</string>
     <string name="smiley_question">Fråga</string>
+    <!-- message center notifications -->
 </resources>

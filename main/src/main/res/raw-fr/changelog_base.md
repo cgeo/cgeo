@@ -1,9 +1,13 @@
 ### Carte
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
 - New: Add 'Set as target' to map's long-tap popup
+- Correction : L'interruption des téléchargements laissait des fichiers incomplets
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
 
 ### Détails de la cache
 - New: 'Save and upload' button when editing personal note
+- Change: Replace most update progress dialogs by background actions
 
 ### Général
 - New: Add more number emojis (separate category)
@@ -14,3 +18,4 @@
 - New: Option to vote on opencaching (OCPL) caches during logging
 - New: Event Date filter for upcoming events
 - Change: Make 'relative' the default for date filters
+- New: Display info on home screen for unread messages (optional)

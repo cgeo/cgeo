@@ -209,7 +209,6 @@
     <string name="err_detail_no_spoiler">c:geo未找到相關的spoiler照片</string>
     <string name="err_detail_still_working">仍然在處理另一個工作</string>
     <string name="err_detail_premium_log_found">這個是geocaching.com付費會員專屬的地理藏寶。雖然無法顯示這個地理藏寶的詳細資訊，但您仍可以發佈您的日誌。</string>
-    <string name="err_watchlist_still_managing">繼續管理您的觀察名單</string>
     <string name="err_watchlist_failed">無法更改您的觀察名單</string>
     <string name="err_application_no">c:geo無法找到合適的app</string>
     <string name="err_auth_initialize">無法驗證初始身份</string>
@@ -835,7 +834,6 @@
     <string name="persistablefolder_spoilerimages">提示圖片</string>
     <string name="persistablefolder_routingbase">路徑</string>
     <string name="persistablefolder_routingtiles">路線規劃資料</string>
-    <string name="persistableuri_track">軌跡檔案</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s，%3$s/%4$s已完成</string>
     <string name="folder_process_status_currentfile">進度：%1$s</string>
@@ -1664,4 +1662,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

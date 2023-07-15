@@ -148,7 +148,6 @@
     <string name="err_detail_cache_find_any">c:geo لا يمكنه إيجاد و لا أي مخبآت.</string>
     <string name="err_detail_no_spoiler">c:geo لم يتمكن من العثور على صور مفسدة لهذا المخبئ.</string>
     <string name="err_detail_still_working">لا يزال يعمل في مهمة أخرى.</string>
-    <string name="err_watchlist_still_managing">لا يزال يدير القائمة الخاصة بك لمشاهدة المخبآت.</string>
     <string name="err_watchlist_failed">فشل في تغيير القائمة الخاصة بك لمشاهدة المخبآت.</string>
     <string name="err_application_no">c:geo لم يجد أي تطبيق مناسب.</string>
     <string name="err_auth_initialize">c:geo فشل في تهيئة عملية المصادقة.</string>
@@ -1118,4 +1117,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

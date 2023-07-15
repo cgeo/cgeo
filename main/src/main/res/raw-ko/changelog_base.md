@@ -1,9 +1,13 @@
 ### 지도
 - 변경: 캐시/지점 길게 누르면 항상 팝업 메뉴 표시 (구성 가능)
 - 신규: 지도의 길게 누름 팝업에 '목표로 설정' 추가
+- 수정: 다운로드한 파일의 복사 중단 시 일부 파일이 남아 있음
+- 신규: 다운로드된 라우팅 타일에 대한 무결성 체크
+- 신규: 근접 알림을 위한 사용자 선택 오디오 지원
 
 ### 캐시 상세정보
 - 신규: 개인 메모 편집 시 '저장 및 업로드' 버튼
+- Change: Replace most update progress dialogs by background actions
 
 ### 일반
 - 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
@@ -14,3 +18,4 @@
 - 신규: 로그 중 opencaching(OCPL) 캐시에 투표하는 옵션
 - 신규: 예정된 이벤트에 대한 이벤트 날짜 필터
 - 변경: '상대적'을 날짜 필터의 기본값으로 설정
+- New: Display info on home screen for unread messages (optional)

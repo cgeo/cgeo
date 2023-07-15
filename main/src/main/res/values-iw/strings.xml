@@ -156,7 +156,6 @@
     <string name="err_detail_cache_find_any">ג: גיא לא יכול למצוא אף ג\'יוקשים</string>
     <string name="err_detail_no_spoiler">c:geo לא מצאה תמונות ספוילר עבור מטמון זה.</string>
     <string name="err_detail_still_working">עדיין עובד על משימה אחרת.</string>
-    <string name="err_watchlist_still_managing">עדיין מנהל את רשימת המעקב.</string>
     <string name="err_watchlist_failed">שינוי רשימת המעקב שלך נכשלה.</string>
     <string name="err_application_no">c:geo לא הצליח למצוא אף יישום מתאים.</string>
     <string name="err_auth_initialize">c:geo כשל בהתחלת תהליך האימות.</string>
@@ -489,4 +488,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

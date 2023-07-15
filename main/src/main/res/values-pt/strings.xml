@@ -200,6 +200,8 @@
     <string name="err_none">OK</string>
     <string name="err_parse">O processamento da página de Início de Sessão falhou</string>
     <string name="err_captcha">O serviço requer uma validação Captcha. Por favor, com o seu navegador aceda a \'geocaching.com\' e resolva o Captcha que é mostrado ao iniciar a sessão. A seguir, volte a tentar iniciar a sessão no c:geo.</string>
+    <string name="err_server_general">Não foi possível contactar o servidor de geocaching. O sítio web pode estar em baixo ou a sua ligação à internet não está a funcionar.</string>
+    <string name="err_server_gc">Não é possível contactar o sítio \'Geocaching.com\'. O sítio web pode estar em baixo ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_ec">Não é possível contactar o sítio \'Extremcaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_lc">Não é possível contactar o sítio \'labs.geocaching.com\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
@@ -224,7 +226,6 @@
     <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
     <string name="err_detail_premium_log_found">Esta cache apenas está disponível para os membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
-    <string name="err_watchlist_still_managing">Ainda se encontra a gerir a sua lista de observação.</string>
     <string name="err_watchlist_failed">A alteração da sua lista de observação falhou.</string>
     <string name="err_application_no">O c:geo não encontra nenhuma aplicação compatível.</string>
     <string name="err_auth_initialize">O c:geo falhou a inicialização do processo de autorização.</string>
@@ -581,6 +582,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>há mais de um ano</item>
+        <item>há um ano</item>
+        <item>há 30 dias</item>
+        <item>há uma semana</item>
+        <item>há 1 dia</item>
+        <item>há menos de 1 dia</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1y</item>
+        <item>1a</item>
+        <item>30d</item>
+        <item>1sem</item>
+        <item>1d</item>
+        <item>&lt;1d</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>há mais de um ano</item>
         <item>um ano atrás</item>
@@ -1144,7 +1161,9 @@
     <string name="persistablefolder_spoilerimages">Imagens spoiler</string>
     <string name="persistablefolder_routingbase">Encaminhamento</string>
     <string name="persistablefolder_routingtiles">Dados de encaminhamento</string>
-    <string name="persistableuri_track">Ficheiro dos percursos</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Ficheiro áudio (longe)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Ficheiro áudio (perto)</string>
+    <string name="proximitynotification_internal">(interno)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s concluídos</string>
     <string name="folder_process_status_currentfile">A processar %1$s</string>
@@ -2325,6 +2344,7 @@
     <string name="receivedownload_error_filenotfound_exception">Erro de ficheiro não encontrado, ao receber o ficheiro.</string>
     <string name="receivedownload_amount_copied">%s copiado</string>
     <string name="receivedownload_cancelled">Transferência de ficheiros cancelada</string>
+    <string name="receivedownload_integritycheck_failed">Falhou a verificação de integridade</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Transferir mapa offline</string>
     <string name="delete_offlinemap_title">Apagar mapa offline</string>
@@ -2808,4 +2828,5 @@
     <string name="smiley_approve">Aprovado</string>
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
+    <!-- message center notifications -->
 </resources>

@@ -147,7 +147,6 @@
     <string name="err_detail_cache_find_any">ang c:geo ay hindi makapaghanap ng kahit anong mga geocache.</string>
     <string name="err_detail_no_spoiler">ang c: geo natagpuan na walang mga imahe ng spoiler para sa cache na ito.</string>
     <string name="err_detail_still_working">Nananatiling gumagawa sa ibang gawain.</string>
-    <string name="err_watchlist_still_managing">Panatilihing pamahalaan ang iyong listahan.</string>
     <string name="err_watchlist_failed">Ang pagbabago ng iyong listahan ay pumalya.</string>
     <string name="err_application_no">ang c:geo ay hindi makahanap ng kahit anong aplikasyon.</string>
     <string name="err_auth_initialize">ang c:geo ay nabigo sa pagsimula sa pagproseso ng awtorisasyon.</string>
@@ -1157,4 +1156,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

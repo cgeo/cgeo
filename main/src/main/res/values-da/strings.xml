@@ -216,7 +216,6 @@
     <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
     <string name="err_detail_still_working">Arbejder stadig på en anden opgave.</string>
     <string name="err_detail_premium_log_found">Denne cache er kun tilgængelig for premium-medlemmer af geocaching.com. Derfor kan cacheinformationen ikke vises.\n\nMen hvis du allerede har fundet denne cache, kan du logge den her.</string>
-    <string name="err_watchlist_still_managing">Administrerer stadig din overvågningsliste.</string>
     <string name="err_watchlist_failed">Ændring af din overvågningsliste mislykkedes.</string>
     <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
     <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
@@ -1762,4 +1761,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

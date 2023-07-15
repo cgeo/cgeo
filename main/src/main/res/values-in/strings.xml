@@ -142,7 +142,6 @@
     <string name="err_detail_cache_find_any">c: geo tidak dapat menemukan geocaches.</string>
     <string name="err_detail_no_spoiler">c: geo tidak menemukan gambar spoiler untuk cache ini.</string>
     <string name="err_detail_still_working">Masih mengerjakan tugas lain.</string>
-    <string name="err_watchlist_still_managing">Masih mengelola daftar pantauan Anda.</string>
     <string name="err_watchlist_failed">Mengubah daftar tontonan anda telah gagal.</string>
     <string name="err_application_no">c:geo tidak dapat menemukan aplikasi yang cocok.</string>
     <string name="err_auth_initialize">c:geo telah gagal untuk menginisialisasi proses otorisasi.</string>
@@ -1143,4 +1142,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

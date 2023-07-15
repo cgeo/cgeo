@@ -1,9 +1,13 @@
 ### Mapa
 - Změna: Při dlouhém poklepání na kešku/waypoint se vždy zobrazí kontextové menu (konfigurovatelné)
 - Novinka: Přidání možnosti "Nastavit jako cíl" do vyskakovacího okna mapy při dlouhém klepnutí
+- Oprava: Částečně zachované soubory při přerušeném kopírování stažených souborů
+- Novinka: Kontrola integrity pro stažené dlaždice navigace
+- Novinka: Podpora uživatelem vybraného zvuku pro oznámení o přiblížení
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
+- Change: Replace most update progress dialogs by background actions
 
 ### Obecné
 - Novinka: Přidány další číselné emotikony (samostatná kategorie)
@@ -14,3 +18,4 @@
 - Novinka: Možnost hlasovat během logování o keškách opencaching (OCPL)
 - Novinka: Filtr datum eventu pro nadcházející eventy
 - Změna: Nastavení "relativní" jako přednastavené pro filtr datumu
+- New: Display info on home screen for unread messages (optional)

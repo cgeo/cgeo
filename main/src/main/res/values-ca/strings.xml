@@ -225,7 +225,6 @@
     <string name="err_detail_no_spoiler">El c:geo no troba cap imatge d\'ajuda per aquest catxé.</string>
     <string name="err_detail_still_working">Encara hi ha una altra tasca en execució.</string>
     <string name="err_detail_premium_log_found">Aquesta catxé només està disponible per a membres premium de geocaching.com. Per tant, la seva informació no es pot mostrar. \n\n Tanmateix, si ja heu trobat aquest catxé, podeu registrar-ho aquí.</string>
-    <string name="err_watchlist_still_managing">Encara s\'està gestionant la llista de seguiment.</string>
     <string name="err_watchlist_failed">S\'ha produït un error canviant la llista de seguiment.</string>
     <string name="err_application_no">El c:geo no troba cap aplicació adequada.</string>
     <string name="err_auth_initialize">El c:geo no ha pogut iniciar el procés d\'autorització.</string>
@@ -1114,7 +1113,6 @@
     <string name="persistablefolder_spoilerimages">Imatges d\'ajuda</string>
     <string name="persistablefolder_routingbase">Encaminament</string>
     <string name="persistablefolder_routingtiles">Dades d\'encaminament</string>
-    <string name="persistableuri_track">Fitxer de track</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fet</string>
     <string name="folder_process_status_currentfile">Procés %1$s</string>
@@ -2767,4 +2765,5 @@
     <string name="smiley_approve">Aprovat</string>
     <string name="smiley_disapprove">Desaprovat</string>
     <string name="smiley_question">Pregunta</string>
+    <!-- message center notifications -->
 </resources>
