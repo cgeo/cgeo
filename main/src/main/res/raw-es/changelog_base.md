@@ -4,6 +4,7 @@
 - Fix: Partial files remaining on aborted copying of downloaded files
 - New: Integrity check for downloaded routing tiles
 - New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
 
 ### Detalles del caché
 - New: 'Save and upload' button when editing personal note
