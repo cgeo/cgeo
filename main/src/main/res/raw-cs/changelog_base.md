@@ -4,6 +4,7 @@
 - Oprava: Částečně zachované soubory při přerušeném kopírování stažených souborů
 - Novinka: Kontrola integrity pro stažené dlaždice navigace
 - Novinka: Podpora uživatelem vybraného zvuku pro oznámení o přiblížení
+- Novinka: Přepínání upozornění na přiblížení z rychlého nastavení mapy
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
