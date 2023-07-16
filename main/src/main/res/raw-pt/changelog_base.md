@@ -4,6 +4,7 @@
 - Correcção: Ficheiros parciais mantidos ao abortar a cópia de ficheiros transferidos
 - Novo: Verificação de integridade dos blocos de roteamento transferidos
 - Novo: Suporte a ficheiros de áudio escolhidos pelo utilizador para notificações próximas
+- New: Toggle proximity notifications from map quick settings
 
 ### Detalhes da cache
 - Novo: botão 'Guardar e Enviar' ao editar nota pessoal
