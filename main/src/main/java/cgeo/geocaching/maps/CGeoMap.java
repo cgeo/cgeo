@@ -500,7 +500,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
-            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
+            configureProximityNotifications();
         }
         individualRoute = null;
         if (null != proximityNotification) {
@@ -516,7 +516,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-                MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+                MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, this::configureProximityNotifications, mapOptions.filterContext));
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
@@ -571,6 +571,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         MapUtils.showMapOneTimeMessages(activity, mapOptions.mapMode);
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
+    }
+
+    private void configureProximityNotifications() {
+        proximityNotification = Settings.isGeneralProximityNotificationActive() ? proximityNotification != null ? proximityNotification : new ProximityNotification(true, false) : null;
     }
 
     public void toggleRouteItem(final IWaypoint item) {
