@@ -1121,6 +1121,7 @@
     <string name="pn_tone_only">Pouze tón</string>
     <string name="pn_text_only">Pouze text</string>
     <string name="pn_tone_and_text">Tón + text</string>
+    <string name="pn_enabled">Povolit upozornění na přiblížení</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
@@ -1707,6 +1708,7 @@
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
+    <string name="other_settings">Další nastavení</string>
     <string name="map_show_caches_title">Zobrazit kešky:</string>
     <string name="map_show_waypoints_title">Zobrazit trasové body:</string>
     <string name="map_show_other_title">Zobrazit ostatní:</string>
