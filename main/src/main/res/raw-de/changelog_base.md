@@ -4,6 +4,7 @@
 - Korrektur: Downloader: Unvollständig kopierte Dateien nicht gelöscht
 - Neu: Integritätsprüfung für heruntergeladene Routingdaten
 - Neu: Unterstützung eigener Audiodateien für die Annäherungsbenachrichtigung
+- New: Toggle proximity notifications from map quick settings
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
