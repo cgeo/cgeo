@@ -1005,6 +1005,7 @@
     <string name="init_quicklaunchitems">Quick launch buttons</string>
     <string name="init_summary_quicklaunchitems">Select one or more items as quick launch buttons on home screen</string>
     <string name="init_custombnitem">Custom Menu Entry</string>
+    <string name="init_custombnitem_default">Nearby search (default)</string>
 
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>

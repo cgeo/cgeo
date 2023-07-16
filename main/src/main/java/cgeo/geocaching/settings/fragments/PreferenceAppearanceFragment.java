@@ -86,16 +86,11 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
         final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 2];
         final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 2];
-        cbniEntries[0] = "(empty)";
-        cbniValues[0] = String.valueOf(CUSTOMBNITEM_EMPTY);
-        cbniEntries[1] = "Nearby search";
-        cbniValues[1] = String.valueOf(CUSTOMBNITEM_NEARBY);
-        int i = 1;
+        int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
         for (InfoItem item : QuickLaunchItem.ITEMS) {
-            i++;
-            cbniEntries[i] = getString(item.getTitleResId());
-            cbniValues[i] = String.valueOf(item.getId());
+            i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
         }
+        addCustomBNSelectionItem(i, "(empty)", String.valueOf(CUSTOMBNITEM_EMPTY), cbniEntries, cbniValues);
         customBNitem.setEntries(cbniEntries);
         customBNitem.setEntryValues(cbniValues);
         setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
@@ -103,6 +98,12 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(newValue.toString())]);
             return true;
         });
+    }
+
+    private int addCustomBNSelectionItem(final int nextFreeItem, final String entry, final String value, final String[] cbniEntries, final String[] cbniValues) {
+        cbniEntries[nextFreeItem] = entry;
+        cbniValues[nextFreeItem] = value;
+        return nextFreeItem + 1;
     }
 
     private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
