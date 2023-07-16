@@ -4,6 +4,7 @@
 - Correction : L'interruption des téléchargements laissait des fichiers incomplets
 - New: Integrity check for downloaded routing tiles
 - New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
 
 ### Détails de la cache
 - New: 'Save and upload' button when editing personal note
