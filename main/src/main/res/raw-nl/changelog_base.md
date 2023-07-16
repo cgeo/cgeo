@@ -4,6 +4,7 @@
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
 - Nieuw: Integriteitscontrole voor gedownloade routeringstegels
 - Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
+- New: Toggle proximity notifications from map quick settings
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
