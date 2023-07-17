@@ -1103,6 +1103,7 @@
     <string name="pn_tone_only">소리만</string>
     <string name="pn_text_only">텍스트만</string>
     <string name="pn_tone_and_text">소리 및 텍스트</string>
+    <string name="pn_enabled">근접성 알림 사용</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
@@ -1662,6 +1663,7 @@
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <string name="quick_settings">빠른 설정</string>
     <string name="quick_settings_info">일부지도 설정 (지도 설정, 숨기기, 경로)이 새로운 \"빠른 설정\"팝업으로 이동되었습니다.\n지도 하단 중앙에있는 아이콘을 사용하여 이 팝업을 열 수 있습니다.</string>
+    <string name="other_settings">기타 설정</string>
     <string name="map_show_caches_title">캐시 보기:</string>
     <string name="map_show_waypoints_title">지점 보기:</string>
     <string name="map_show_other_title">기타 보기:</string>
