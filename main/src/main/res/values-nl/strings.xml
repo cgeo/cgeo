@@ -1109,6 +1109,7 @@
     <string name="pn_tone_only">Alleen toon</string>
     <string name="pn_text_only">Alleen tekst</string>
     <string name="pn_tone_and_text">Toon en tekst</string>
+    <string name="pn_enabled">Nabijheidsmeldingen inschakelen</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -1443,6 +1444,12 @@
     <string name="cache_recently_viewed">Recent bekeken</string>
     <string name="cache_recently_viewed_empty">Geen recent bekeken caches</string>
     <string name="cache_clear_recently_viewed">wissen</string>
+    <string name="cachedetails_progress_refresh">%s vernieuwd</string>
+    <string name="cachedetails_progress_watch">Toegevoegd aan watchlist</string>
+    <string name="cachedetails_progress_unwatch">Verwijderd van watchlist</string>
+    <string name="cachedetails_progress_favorite">Toegevoegd aan favorieten</string>
+    <string name="cachedetails_progress_unfavorite">Verwijderd uit favorieten</string>
+    <string name="cachedetails_progress_upload_note">Persoonlijke notitie geupload</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
@@ -1671,6 +1678,7 @@
     <string name="map_gm_autorotation_disable">Automatische rotatie uitschakelen?\n\nJe kunt het opnieuw inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
+    <string name="other_settings">Overige instellingen</string>
     <string name="map_show_caches_title">Toon caches:</string>
     <string name="map_show_waypoints_title">Toon waypoints:</string>
     <string name="map_show_other_title">Toon andere:</string>
@@ -2829,4 +2837,10 @@
     <string name="smiley_disapprove">Afgekeurd</string>
     <string name="smiley_question">Vraag</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Berichtencentrum</string>
+    <string name="mcpolling_summary">Berichtcentrum controleren voor inkomende berichten in regelmatige intervallen</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d ongelezen bericht in berichtencentrum</item>
+        <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
+    </plurals>
 </resources>
