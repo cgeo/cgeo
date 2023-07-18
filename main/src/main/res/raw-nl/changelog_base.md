@@ -4,11 +4,11 @@
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
 - Nieuw: Integriteitscontrole voor gedownloade routeringstegels
 - Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
-- New: Toggle proximity notifications from map quick settings
+- Nieuw: nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
-- Change: Replace most update progress dialogs by background actions
+- Wijziging: vervang de meeste voortgangsdialoogvensters door achtergrondacties
 
 ### Algemeen
 - Nieuw: Voeg meer nummer emojis toe (aparte categorie)
@@ -19,4 +19,4 @@
 - Nieuw: Optie om te stemmen op opencaching (OCPL) caches tijdens het loggen
 - Nieuw: Evenementdatum filter voor aankomende evenementen
 - Wijziging: Maak 'relatief' de standaard voor datumfilters
-- New: Display info on home screen for unread messages (optional)
+- Nieuw: Toon info op het startscherm voor ongelezen berichten (optioneel)
