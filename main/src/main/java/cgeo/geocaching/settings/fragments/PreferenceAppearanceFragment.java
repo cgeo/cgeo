@@ -8,8 +8,9 @@ import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_EMPTY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.os.Bundle;
@@ -84,13 +85,14 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
     private void configCustomBNitemPreference() {
         final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
-        final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 2];
-        final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 2];
+        final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
+        final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
         int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
         for (InfoItem item : QuickLaunchItem.ITEMS) {
             i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
         }
-        addCustomBNSelectionItem(i, "(empty)", String.valueOf(CUSTOMBNITEM_EMPTY), cbniEntries, cbniValues);
+        i = addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
+        addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
         customBNitem.setEntries(cbniEntries);
         customBNitem.setEntryValues(cbniValues);
         setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);

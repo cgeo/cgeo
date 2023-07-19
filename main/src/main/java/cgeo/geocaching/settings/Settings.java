@@ -105,7 +105,8 @@ public class Settings {
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
 
-    public static final int CUSTOMBNITEM_EMPTY = -1;
+    public static final int CUSTOMBNITEM_PLACEHOLDER = -2;
+    public static final int CUSTOMBNITEM_NONE = -1;
     public static final int CUSTOMBNITEM_NEARBY = 0;
 
     public static final int HOURS_TO_SECONDS = 60 * 60;
@@ -2060,7 +2061,7 @@ public class Settings {
 
     public static int getCustomBNitem() {
         final int item = Integer.parseInt(getString(R.string.pref_custombnitem, "0"));
-        if (item == CUSTOMBNITEM_EMPTY || item == CUSTOMBNITEM_NEARBY) {
+        if (item == CUSTOMBNITEM_NEARBY || item == CUSTOMBNITEM_NONE || item == CUSTOMBNITEM_PLACEHOLDER) {
             return item;
         }
         // valid QuickLaunchItem entry?

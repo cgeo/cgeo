@@ -33,8 +33,9 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
-import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_EMPTY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -249,15 +250,19 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     private void setCustomBNitem() {
         final MenuItem menu = ((BottomNavigationView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY);
+        menu.setVisible(true);
+        menu.setEnabled(true);
         final int item = Settings.getCustomBNitem();
-        if (item == CUSTOMBNITEM_EMPTY) {
-            menu.setVisible(false);
-        } else if (item == CUSTOMBNITEM_NEARBY) {
-            menu.setVisible(true);
+        if (item == CUSTOMBNITEM_NEARBY) {
             menu.setIcon(R.drawable.ic_menu_nearby);
             menu.setTitle(R.string.caches_nearby_button);
+        } else if (item == CUSTOMBNITEM_NONE) {
+            menu.setVisible(false);
+        } else if (item == CUSTOMBNITEM_PLACEHOLDER) {
+            menu.setEnabled(false);
+            menu.setIcon(R.drawable.ic_empty_placeholder);
+            menu.setTitle("");
         } else {
-            menu.setVisible(true);
             final QuickLaunchItem iitem = (QuickLaunchItem) QuickLaunchItem.getById(item, QuickLaunchItem.ITEMS);
             menu.setIcon(iitem.iconRes);
             menu.setTitle(iitem.getTitleResId());
