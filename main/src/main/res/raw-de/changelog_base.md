@@ -4,11 +4,11 @@
 - Korrektur: Downloader: Unvollständig kopierte Dateien nicht gelöscht
 - Neu: Integritätsprüfung für heruntergeladene Routingdaten
 - Neu: Unterstützung eigener Audiodateien für die Annäherungsbenachrichtigung
-- New: Toggle proximity notifications from map quick settings
+- Neu: Annäherungsbenachrichtigungen in den Kartenschnelleinstellungen umschalten
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
-- Change: Replace most update progress dialogs by background actions
+- Änderung: (Fast alle) Update-Dialoge durch Hintergrundaktionen ersetzt
 
 ### Allgemein
 - Neu: Zusätzliche Zahlen-Emojis (eigene Kategorie)
@@ -19,4 +19,5 @@
 - Neu: Option zum Bewerten eines Opencaching (OCPL) Caches während des Loggens
 - Neu: Filter "Eventdatum" für anstehende Events
 - Änderung: Datumsfilter mit 'relativ' vorbelegen
-- New: Display info on home screen for unread messages (optional)
+- Neu: Hinweis auf dem Startbildschirm anzeigen für ungelesene Nachrichten (optional)
+- Neu: Schnellstart-Schaltfläche für Nachrichten-Center
