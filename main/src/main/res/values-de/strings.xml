@@ -1109,6 +1109,7 @@
     <string name="pn_tone_only">Nur Ton</string>
     <string name="pn_text_only">Nur Text</string>
     <string name="pn_tone_and_text">Ton + Text</string>
+    <string name="pn_enabled">Annäherungsbenachrichtigungen aktivieren</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -1443,6 +1444,12 @@
     <string name="cache_recently_viewed">Zuletzt angesehen</string>
     <string name="cache_recently_viewed_empty">Keine kürzlich angesehenen Caches</string>
     <string name="cache_clear_recently_viewed">Leeren</string>
+    <string name="cachedetails_progress_refresh">%s aktualisiert</string>
+    <string name="cachedetails_progress_watch">Zur Watchlist hinzugefügt</string>
+    <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
+    <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
+    <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
+    <string name="cachedetails_progress_upload_note">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
@@ -1671,6 +1678,7 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
+    <string name="other_settings">Weitere Einstellungen</string>
     <string name="map_show_caches_title">Caches anzeigen:</string>
     <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
     <string name="map_show_other_title">Weiteres anzeigen:</string>
@@ -2829,4 +2837,6 @@
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Nachrichten-Center</string>
+    <string name="mcpolling_summary">Nachrichten-Center regelmäßig auf ungelesene Nachrichten prüfen</string>
 </resources>
