@@ -627,7 +627,7 @@ final class OkapiClient {
                 return new LogResult(StatusCode.NO_ERROR, data.get("log_uuid").asText());
             }
 
-            LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
+            final LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
             logResult.setPostServerMessage(data.get("message").asText());
             return logResult;
         } catch (final NullPointerException e) {
@@ -660,7 +660,7 @@ final class OkapiClient {
                 return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText());
             }
 
-            ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            final ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
             logResult.setPostServerMessage(data.get("message").asText());
             return logResult;
         } catch (final Exception e) {

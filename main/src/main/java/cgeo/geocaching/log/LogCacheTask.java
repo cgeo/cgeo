@@ -110,7 +110,8 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
 
             // if an image could not be uploaded, use its error as final state
             if (!isOkResult(imageResult)) {
-                return imageResult;            }
+                return imageResult;
+            }
             return logResult;
         } catch (final RuntimeException e) {
             cLog.setException(e);
@@ -119,7 +120,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
             cLog.endLog();
         }
 
-        return new LogResult( StatusCode.LOG_POST_ERROR, "");
+        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     private ImageResult postImages(final LogEntry.Builder logBuilder, final LogResult logResult) {

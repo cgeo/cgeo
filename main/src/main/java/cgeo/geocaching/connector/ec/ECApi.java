@@ -158,7 +158,7 @@ final class ECApi {
                 apiRequest(uri, params, true);
             }
             if (response.code() != 200) {
-                LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
+                final LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
                 logResult.setPostServerMessage(response.message());
                 return logResult;
             }

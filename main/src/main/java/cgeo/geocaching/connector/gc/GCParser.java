@@ -1318,12 +1318,12 @@ public final class GCParser {
                                              final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLogTrackable: No viewstate given");
-            return new LogResult( StatusCode.LOG_POST_ERROR, "" );
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
         if (StringUtils.isBlank(log)) {
             Log.w("GCParser.postLogTrackable: No log text given");
-            return new LogResult( StatusCode.NO_LOG_TEXT, "" );
+            return new LogResult(StatusCode.NO_LOG_TEXT, "");
         }
 
         Log.i("Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
@@ -1347,7 +1347,7 @@ public final class GCParser {
         final String page = GCLogin.getInstance().postRequestLogged(uri, params);
         if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
-            return new LogResult( StatusCode.NOT_LOGGED_IN, "" );
+            return new LogResult(StatusCode.NOT_LOGGED_IN, "");
         }
 
         try {
@@ -1355,14 +1355,14 @@ public final class GCParser {
             final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK2, page);
             if (matcherOk.find()) {
                 Log.i("Log successfully posted to trackable #" + trackingCode);
-                return new LogResult( StatusCode.NO_ERROR, "" );
+                return new LogResult(StatusCode.NO_ERROR, "");
             }
         } catch (final Exception e) {
             Log.e("GCParser.postLogTrackable.check", e);
         }
 
         Log.e("GCParser.postLogTrackable: Failed to post log because of unknown error");
-        return new LogResult( StatusCode.LOG_POST_ERROR, "" );
+        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     /**
