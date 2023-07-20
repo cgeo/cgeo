@@ -180,7 +180,7 @@
     <string name="log_problem_missing_text">Ten geocacher poinformował, że skrytka mogła zniknąć.</string>
     <string name="log_problem_other_label">Inne</string>
     <string name="log_problem_other_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
-    <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
+    <string name="log_problem_archive_label">Skrytka powinna zostać archiwizowana</string>
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ta skrytka powinna być zarchiwizowana. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
