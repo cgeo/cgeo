@@ -24,8 +24,6 @@ assign allow_ferries         = true   # %allow_ferries% | set to false to disall
 assign allow_motorways       = false  # %allow_motorways% | Set to true to allow motorways (useful in Asia / Oceania for example) | boolean
 assign ignore_cycleroutes    = false  # %ignore_cycleroutes% | Set to true for better elevation results | boolean
 assign stick_to_cycleroutes  = false  # %stick_to_cycleroutes% | Set to true to just follow cycleroutes | boolean
-assign avoid_unsafe          = false  # %avoid_unsafe% | Set to true to avoid standard highways | boolean
-assign avoid_path            = false  # %avoid_path% | Set to true to avoid pathes | boolean
 
 assign consider_traffic      = false  # %consider_traffic% | Activate to avoid traffic | boolean
 assign consider_noise        = false  # %consider_noise% | Activate to prefer a low-noise route | boolean
@@ -261,8 +259,7 @@ assign costfactor
   switch    highway=cycleway                          1.3
   switch    isresidentialorliving                     switch isunpaved 10 1.2
   switch    highway=service                           switch isunpaved 10 1.2
-  switch    highway=path                              switch avoid_path 2.1 1.1
-  switch or highway=track or highway=road highway=footway
+  switch or highway=track or highway=road or highway=path highway=footway
    switch tracktype=grade1 switch isunpaved 3 1.2
    switch tracktype=grade2 switch isunpaved 10 3
    switch tracktype=grade3 10.0
