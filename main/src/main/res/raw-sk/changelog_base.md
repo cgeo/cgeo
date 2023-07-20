@@ -20,4 +20,4 @@
 - New: Event Date filter for upcoming events
 - Change: Make 'relative' the default for date filters
 - New: Display info on home screen for unread messages (optional)
-- New: Quick launch item for message center
+- Nové: Nová položka rýchleho spúšťania pre centrum správ
