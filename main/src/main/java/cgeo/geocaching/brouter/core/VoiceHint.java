@@ -20,11 +20,11 @@ public class VoiceHint {
     public static final int KL = 8; // keep left
     public static final int KR = 9; // keep right
     public static final int TLU = 10; // U-turn
-    public static final int TU = 11; // 180 degree u-turn
-    public static final int TRU = 12; // Right U-turn
-    public static final int OFFR = 13; // Off route
-    public static final int RNDB = 14; // Roundabout
-    public static final int RNLB = 15; // Roundabout left
+    public static final int TRU = 11; // Right U-turn
+    public static final int OFFR = 12; // Off route
+    public static final int RNDB = 13; // Roundabout
+    public static final int RNLB = 14; // Roundabout left
+    public static final int TU = 15; // 180 degree u-turn
     public static final int BL = 16; // Beeline routing
 
     public int ilon;
@@ -61,6 +61,45 @@ public class VoiceHint {
 
     public int getCommand() {
         return cmd;
+    }
+
+    public int getJsonCommandIndex() {
+        switch (cmd) {
+            case TLU:
+                return 10;
+            case TU:
+                return 15;
+            case TSHL:
+                return 4;
+            case TL:
+                return 2;
+            case TSLL:
+                return 3;
+            case KL:
+                return 8;
+            case C:
+                return 1;
+            case KR:
+                return 9;
+            case TSLR:
+                return 6;
+            case TR:
+                return 5;
+            case TSHR:
+                return 7;
+            case TRU:
+                return 11;
+            case RNDB:
+                return 13;
+            case RNLB:
+                return 14;
+            case BL:
+                return 16;
+            case OFFR:
+                return 12;
+            default:
+                throw new IllegalArgumentException("unknown command: " + cmd);
+        }
     }
 
     public int getExitNumber() {
