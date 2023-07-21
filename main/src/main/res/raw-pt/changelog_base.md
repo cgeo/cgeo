@@ -21,3 +21,4 @@
 - Alteração: Tornar "relativo" como o padrão para filtros de data
 - New: Display info on home screen for unread messages (optional)
 - New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
