@@ -20,4 +20,5 @@
 - Nieuw: Evenementdatum filter voor aankomende evenementen
 - Wijziging: Maak 'relatief' de standaard voor datumfilters
 - Nieuw: Toon info op het startscherm voor ongelezen berichten (optioneel)
-- New: Quick launch item for message center
+- Nieuw: Snel openen item voor berichtencentrum
+- New: Make last bottom navigation item customizable
