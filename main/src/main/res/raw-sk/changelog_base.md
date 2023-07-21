@@ -21,3 +21,4 @@
 - Change: Make 'relative' the default for date filters
 - New: Display info on home screen for unread messages (optional)
 - Nové: Nová položka rýchleho spúšťania pre centrum správ
+- New: Make last bottom navigation item customizable
