@@ -898,6 +898,10 @@
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
     <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
     <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
+    <string name="init_custombnitem">Własny wpis menu</string>
+    <string name="init_custombnitem_default">Szukaj w pobliżu (domyślnie)</string>
+    <string name="init_custombnitem_none">(brak)</string>
+    <string name="init_custombnitem_empty_placeholder">(pusty tekst zastępczy)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokod</string>
     <string name="cacheListInfoItem_Difficulty">Trudność</string>
