@@ -21,3 +21,4 @@
 - 변경: '상대적'을 날짜 필터의 기본값으로 설정
 - 신규: 읽지 않은 메시지에 대한 정보를 홈 화면에 표시(선택 사항)
 - New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
