@@ -21,3 +21,4 @@
 - Change: Make 'relative' the default for date filters
 - New: Display info on home screen for unread messages (optional)
 - New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
