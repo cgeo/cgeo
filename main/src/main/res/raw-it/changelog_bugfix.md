@@ -1,6 +1,6 @@
 ##
-- Fix: Crash in Google Maps on certain map source changes
-- New: Display geocaching.com login error messages on home screen
-- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
-- Fix: Some seekbar issues
-- Fix: SVG geochecker images not being displayed
+- Corretto: Crash in Google Maps su determinate modifiche della sorgente mappa
+- Nuovo: Visualizza messaggi di errore all'accesso di geocaching.com nella schermata iniziale
+- Correzione: memorizzazione cache - l'opzione "aggiorna e mantiene le assegnazioni" non memorizza nuovi cache
+- Corretto: alcuni problemi nella barra di ricerca
+- Corretto: immagini SVG in geochecker non vengono visualizzate
