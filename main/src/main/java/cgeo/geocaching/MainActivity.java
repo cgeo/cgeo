@@ -30,7 +30,6 @@ import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -360,7 +359,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> launchQuickLaunchItem(item.getId()), getString(item.getTitleResId()));
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId()), getString(item.getTitleResId()));
             }
         }
 
@@ -379,37 +378,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         TooltipCompat.setTooltipText(b, tooltip);
         binding.quicklaunchitems.addView(b);
         binding.quicklaunchitems.setVisibility(View.VISIBLE);
-    }
-
-    private void launchQuickLaunchItem(final int which) {
-        if (which == QuickLaunchItem.VALUES.GOTO.id) {
-            InternalConnector.assertHistoryCacheExists(this);
-            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-        } else if (which == QuickLaunchItem.VALUES.POCKETQUERY.id) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, PocketQueryListActivity.class));
-            }
-        } else if (which == QuickLaunchItem.VALUES.BOOKMARKLIST.id) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, BookmarkListActivity.class));
-            }
-        } else if (which == QuickLaunchItem.VALUES.RECENTLY_VIEWED.id) {
-            CacheListActivity.startActivityLastViewed(this, new SearchResult(DataStore.getLastOpenedCaches()));
-        } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
-            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
-        } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
-        } else if (which == QuickLaunchItem.VALUES.MESSAGECENTER.id) {
-            ShareUtils.openUrl(this, GCConstants.URL_MESSAGECENTER);
-        } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
-            ShareUtils.openUrl(this, getString(R.string.manual_link_full));
-        } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
-            ShareUtils.openUrl(this, getString(R.string.faq_link_full));
-        } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {
-            startActivity(new Intent(this, ViewSettingsActivity.class));
-        } else {
-            throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
-        }
     }
 
     private void init() {

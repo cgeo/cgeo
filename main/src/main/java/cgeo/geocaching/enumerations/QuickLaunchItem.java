@@ -1,9 +1,23 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.gc.BookmarkListActivity;
+import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.models.InfoItem;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.settings.ViewSettingsActivity;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
@@ -57,4 +71,36 @@ public class QuickLaunchItem extends InfoItem {
     public static void startActivity(final Activity caller, final @StringRes int title, @StringRes final int prefKey) {
         InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey, 1);
     }
+
+    public static void launchQuickLaunchItem(final Activity activity, final int which) {
+        if (which == QuickLaunchItem.VALUES.GOTO.id) {
+            InternalConnector.assertHistoryCacheExists(activity);
+            CacheDetailActivity.startActivity(activity, InternalConnector.GEOCODE_HISTORY_CACHE, true);
+        } else if (which == QuickLaunchItem.VALUES.POCKETQUERY.id) {
+            if (Settings.isGCPremiumMember()) {
+                activity.startActivity(new Intent(activity, PocketQueryListActivity.class));
+            }
+        } else if (which == QuickLaunchItem.VALUES.BOOKMARKLIST.id) {
+            if (Settings.isGCPremiumMember()) {
+                activity.startActivity(new Intent(activity, BookmarkListActivity.class));
+            }
+        } else if (which == QuickLaunchItem.VALUES.RECENTLY_VIEWED.id) {
+            CacheListActivity.startActivityLastViewed(activity, new SearchResult(DataStore.getLastOpenedCaches()));
+        } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
+            activity.startActivityForResult(new Intent(activity, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
+        } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, activity);
+        } else if (which == QuickLaunchItem.VALUES.MESSAGECENTER.id) {
+            ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
+        } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
+            ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full));
+        } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
+            ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
+        } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {
+            activity.startActivity(new Intent(activity, ViewSettingsActivity.class));
+        } else {
+            throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
+        }
+    }
+
 }

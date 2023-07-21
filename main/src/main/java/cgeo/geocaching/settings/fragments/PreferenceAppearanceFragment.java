@@ -5,8 +5,12 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
+import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.os.Bundle;
@@ -63,6 +67,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2);
         });
 
+        configCustomBNitemPreference();
     }
 
     @Override
@@ -76,6 +81,35 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             }
         });
 
+    }
+
+    private void configCustomBNitemPreference() {
+        final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
+        final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
+        final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
+        int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
+        for (InfoItem item : QuickLaunchItem.ITEMS) {
+            i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
+        }
+        i = addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
+        addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
+        customBNitem.setEntries(cbniEntries);
+        customBNitem.setEntryValues(cbniValues);
+        setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
+        customBNitem.setOnPreferenceChangeListener((preference, newValue) -> {
+            setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(newValue.toString())]);
+            return true;
+        });
+    }
+
+    private int addCustomBNSelectionItem(final int nextFreeItem, final String entry, final String value, final String[] cbniEntries, final String[] cbniValues) {
+        cbniEntries[nextFreeItem] = entry;
+        cbniValues[nextFreeItem] = value;
+        return nextFreeItem + 1;
+    }
+
+    private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
+        customBNitem.setSummary(newValue);
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {

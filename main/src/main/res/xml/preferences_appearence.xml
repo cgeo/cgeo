@@ -59,6 +59,11 @@
             android:title="@string/settings_startscreen_title"
             android:summary="%s"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="0"
+            android:key="@string/pref_custombnitem"
+            android:title="@string/init_custombnitem"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

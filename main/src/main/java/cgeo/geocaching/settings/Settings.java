@@ -30,6 +30,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.DirectionData;
@@ -103,6 +104,10 @@ public class Settings {
     public static final int COMPACTICON_OFF = 0;
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
+
+    public static final int CUSTOMBNITEM_PLACEHOLDER = -2;
+    public static final int CUSTOMBNITEM_NONE = -1;
+    public static final int CUSTOMBNITEM_NEARBY = 0;
 
     public static final int HOURS_TO_SECONDS = 60 * 60;
     public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
@@ -2052,6 +2057,19 @@ public class Settings {
             s.append(i);
         }
         putString(prefKey, s.toString());
+    }
+
+    public static int getCustomBNitem() {
+        final int item = Integer.parseInt(getString(R.string.pref_custombnitem, "0"));
+        if (item == CUSTOMBNITEM_NEARBY || item == CUSTOMBNITEM_NONE || item == CUSTOMBNITEM_PLACEHOLDER) {
+            return item;
+        }
+        // valid QuickLaunchItem entry?
+        final InfoItem temp = QuickLaunchItem.getById(item, QuickLaunchItem.ITEMS);
+        if (temp == null) {
+            return CUSTOMBNITEM_NEARBY;
+        }
+        return temp.getId();
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
