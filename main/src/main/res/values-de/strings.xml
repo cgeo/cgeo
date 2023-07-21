@@ -2836,4 +2836,8 @@
     <!-- message center notifications -->
     <string name="mcpolling_title">Nachrichten-Center</string>
     <string name="mcpolling_summary">Nachrichten-Center regelmäßig auf ungelesene Nachrichten prüfen</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
+        <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
+    </plurals>
 </resources>
