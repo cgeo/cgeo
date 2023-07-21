@@ -4,33 +4,33 @@
 - Nuovo: Colorazione delle singole tracce
 - Nuovo: aggiorna l'elenco delle mappe sulla ricezione del file della mappa
 - Cambio: non installa automaticamente map/tema scaricato
-- New: Individual route optimization (experimental)
+- Nuovo: Ottimizzazione del percorso individuale (sperimentale)
 - Nuovo: Supporto per mappe "Google: Terrain"
 - Nuovo: Impostazione della larghezza del tratto per la traccia
 - Nuovo: nasconde la barra delle azioni della mappa su richiesta (tocca lo spazio vuoto sulla mappa)
 - Cambiato: Spostati i pulsanti delle impostazioni rapide a sinistra in modalità orizzontale per guadagnare più spazio verticale
-- New: Visualize coords-only-points of individual route
+- Nuovo: Visualizza i coords-only-points del percorso individuale
 - Corretto: Preserva il geocode di destinazione nel cambio di mappa
 - Cambio: Un tocco prolungato sul cache/waypoint, che fa parte del percorso individuale, aprirà il menu contestuale
-- New: Add online attribute filtering for opencaching services
-- Fix: Waypoints of Adventure Labs sometimes not being displayed
+- Nuovo: Aggiunto filtro attributi online per i servizi di opencaching
+- Corretto: Waypoint di Adventure Lab che a volte non vengono visualizzati
 
 ### Dettagli del cache
-- Change: Force redownload of cache when importing via send2cgeo
-- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
-- Fix: Preserve scroll position when using "render complete description" button
+- Cambia: Forza la riabilitazione della cache durante l'importazione tramite send2cgeo
+- Cambio: Differenziazione tra la dimensione "non scelta" e "altri" per le cache geocaching.com (potrebbe dare filtraggio diverso per alcune cache più vecchie del 2013)
+- Corretto: conservare la posizione di scorrimento quando si utilizza il pulsante "render descrizione completa"
 
 ### Generale
-- Fix: Preview button displayed only with filter setting "show all" in PQ list
-- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
-- New: Import geocaching.com bookmark lists from links
-- New: Allow opening recently viewed caches as list
-- New: Make quicklaunch buttons sortable
-- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
-- New: Make cache list info items configurable
-- New: Clear recently viewed caches
-- New: Add 'recently viewed caches' to quicklaunch options
-- New: Add last logs smiley row to configurable info items
+- Corretto: Pulsante anteprima visualizzato solo con impostazione filtro "mostra tutto" nella lista PQ
+- Nuovo: Aggiunta Cruiser come app di navigazione (richiede Cruiser 3.0.9 o successivo)
+- Nuovo: Importa liste di segnalibri di geocaching.com dai link
+- Nuovo: Consente di aprire i cache visualizzati di recente come elenco
+- Nuovo: I pulsanti di avvio rapido sono ordinabili
+- Nuovo: Workaround per il conflitto di namespace tracciabile (funziona per il connettore GeoKrety disabilitato)
+- Nuovo: Le informazioni della lista cache sono configurabili
+- Nuovo: Cancella i cache visualizzati di recente
+- Nuovo: Aggiunto 'cache visualizzati di recente' alle opzioni di avvio rapido
+- Nuovo: Aggiungi gli ultimi log smiley row agli elementi di informazioni configurabili
 - Nuovo: Aggiunto "aggiungi al percorso individuale" al menu lista cache
-- New: Updated integrated BRouter to v1.7.0
-- Fix: Alignment of compass status view in landscape mode
+- Nuovo: Aggiornato BRouter integrato a v1.7.0
+- Corretto: allineamento della vista di stato bussola in modalità orizzontale
