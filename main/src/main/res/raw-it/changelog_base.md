@@ -1,23 +1,24 @@
 ### Mappa
-- Change: Always show popup menu on cache/waypoint long-tap (configurable)
-- New: Add 'Set as target' to map's long-tap popup
-- Fix: Partial files remaining on aborted copying of downloaded files
-- New: Integrity check for downloaded routing tiles
-- New: Support for user-selected audio for proximity notifications
-- New: Toggle proximity notifications from map quick settings
+- Cambio: Mostra sempre il menu a comparsa con un tocco prolungato sul cache/waypoint (configurabile)
+- Nuovo: Aggiungi 'Imposta come obiettivo' al popup a lungo tocco della mappa
+- Corretto: File parziali rimanenti sulla copia abortita dei file scaricati
+- Nuovo: Controllo integrità per i tasselli di routing scaricati
+- Nuovo: Supporto per l'audio selezionato dall'utente per le notifiche di prossimità
+- Nuovo: Attiva/Disattiva le notifiche di prossimità dalle impostazioni rapide della mappa
 
 ### Dettagli del cache
-- New: 'Save and upload' button when editing personal note
-- Change: Replace most update progress dialogs by background actions
+- Nuovo: pulsante 'Salva e carica' durante la modifica della nota personale
+- Cambio: sostituita la maggior parte delle finestre di avanzamento degli aggiornamenti con azioni in background
 
 ### Generale
-- New: Add more number emojis (separate category)
-- Change: Use different source for preview of pocket queries
-- New: Make startscreen selectable
-- New: Support target selector for additional navi apps
-- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
-- New: Option to vote on opencaching (OCPL) caches during logging
-- New: Event Date filter for upcoming events
-- Change: Make 'relative' the default for date filters
-- New: Display info on home screen for unread messages (optional)
-- New: Quick launch item for message center
+- Nuovo: Aggiunti più numeri emoji (categoria separata)
+- Cambio: usata fonte differente per l'anteprima delle pocket query
+- Nuovo: Possibilità di selezionabile la schermata iniziale
+- Nuovo: Selettore di destinazione per applicazioni aggiuntive di navigazione
+- Nuovo: Mostra il punto interrogativo nel simbolo di difficoltà/terreno, quando sia la difficoltà che il terreno sono sconosciuti
+- Nuovo: Opzione per votare i cache di opencaching (OCPL) durante il log
+- Nuovo: filtro Data evento per i prossimi eventi
+- Cambio: Reso 'relative' il valore predefinito per i filtri data
+- Nuovo: Mostra le informazioni sulla schermata iniziale per i messaggi non letti (opzionale)
+- Nuovo: Avvio rapido del centro messaggi
+- Nuovo: Rendi personalizzabile l'ultimo elemento di navigazione inferiore
