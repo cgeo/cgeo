@@ -21,3 +21,4 @@
 - Änderung: Datumsfilter mit 'relativ' vorbelegen
 - Neu: Hinweis auf dem Startbildschirm anzeigen für ungelesene Nachrichten (optional)
 - Neu: Schnellstart-Schaltfläche für Nachrichten-Center
+- New: Make last bottom navigation item customizable
