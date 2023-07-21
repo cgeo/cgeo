@@ -399,6 +399,9 @@ dependencies {
     // Maps.ME integration
     implementation project(":mapswithme-api")
 
+    // Organic Maps integration
+    implementation project(":organicmaps-api")
+
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.18.0'
 
