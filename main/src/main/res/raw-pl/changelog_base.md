@@ -21,3 +21,4 @@
 - Zmiana: Podczas filtrowania dat ustaw tryb „W stosunku do dzisiaj” jako domyślny
 - Nowość: Wyświetlaj informacje na ekranie głównym dla nieprzeczytanych wiadomości (opcjonalnie)
 - New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
