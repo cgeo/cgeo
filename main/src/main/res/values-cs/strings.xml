@@ -898,6 +898,10 @@
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
+    <string name="init_custombnitem">Vlastní položka nabídky</string>
+    <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
+    <string name="init_custombnitem_none">(žádné)</string>
+    <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokód</string>
     <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
