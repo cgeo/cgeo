@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-/** Represents a drawable primitive GeoItem such as a point, polyline or polygon */
+/** Represents a group of drawable GeoItem such as a point, polyline, polygon or enclosed groups */
 public class GeoGroup implements GeoItem, Parcelable {
 
     //immutable

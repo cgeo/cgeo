@@ -67,8 +67,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -170,8 +168,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private GeoObjectLayer geoObjectLayer;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
-
-    private final GeoItemTestLayer testItemLayer = new GeoItemTestLayer();
 
     private RenderThemeHelper renderThemeHelper = null; //must be initialized in onCreate();
 
@@ -802,9 +798,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.historyLayer = new HistoryLayer(trailHistory);
         this.mapView.getLayerManager().getLayers().add(this.historyLayer);
 
-        //Test Layer
-        testItemLayer.init(new MapsforgeV6GeoItemLayer(this.mapView.getLayerManager(), this.mapView.getMapViewProjection()));
-
         // RouteLayer
         this.routeLayer = new RouteLayer(realRouteDistance -> {
             if (null != this.distanceView) {
@@ -843,7 +836,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         GeoitemLayer.resetColors();
 
         // TapHandler
-        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler(), this.testItemLayer, this);
+        this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler(), this);
         this.mapView.getLayerManager().getLayers().add(this.tapHandlerLayer);
 
         // Caches bundle
@@ -904,10 +897,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     private void terminateLayers() {
-
-        //test
-        testItemLayer.destroy();
-
 
         this.resumeDisposables.clear();
 

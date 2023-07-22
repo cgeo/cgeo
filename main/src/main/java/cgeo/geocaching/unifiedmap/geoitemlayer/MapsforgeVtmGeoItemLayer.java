@@ -18,6 +18,7 @@ import androidx.core.util.Supplier;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -38,6 +39,7 @@ import org.oscim.layers.vector.geometries.LineDrawable;
 import org.oscim.layers.vector.geometries.PolygonDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
+import org.oscim.utils.geom.GeomBuilder;
 
 public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Drawable, MarkerInterface>> {
 
@@ -136,7 +138,16 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 drawable = new CircleDrawable(GP_CONVERTER.to(item.getCenter()), item.getRadius(), style);
                 break;
             case POLYGON:
-                drawable = new PolygonDrawable(GP_CONVERTER.toList(item.getPoints()), style);
+                //we have to construct our own GeomBuilder
+                //because standard constructorss of PoygonDrawable doesn't support multiple holes
+                final GeomBuilder gb = new GeomBuilder();
+                addRingToGeoBuilder(gb, item.getPoints());
+                if (item.getHoles() != null) {
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        addRingToGeoBuilder(gb, hole);
+                    }
+                }
+                drawable = new PolygonDrawable(gb.toPolygon(), style);
                 break;
             case POLYLINE:
             default:
@@ -165,8 +176,20 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         return new Pair<>(drawable, marker);
     }
 
+    private static void addRingToGeoBuilder(final GeomBuilder gb, final List<Geopoint> ring) {
+        for (Geopoint pt : ring) {
+            final GeoPoint gpt = GP_CONVERTER.to(pt);
+            gb.point(gpt.getLongitude(), gpt.getLatitude());
+        }
+        gb.ring();
+    }
+
     @Override
     public void remove(final GeoPrimitive item, final Pair<Drawable, MarkerInterface> context) {
+        if (context == null) {
+            return;
+        }
+
         final int zLevel = getZLevel(item);
         if (context.first != null) {
             final VectorLayer vectorLayer = getVectorLayer(zLevel, false);

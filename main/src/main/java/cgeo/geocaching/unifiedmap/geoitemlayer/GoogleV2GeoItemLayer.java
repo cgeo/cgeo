@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -99,12 +100,18 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
                         .zIndex(zLevel));
                 break;
             case POLYGON:
-                context = map.addPolygon(new PolygonOptions()
+                final PolygonOptions polygonOptions = new PolygonOptions()
                         .strokeWidth(strokeWidth)
                         .strokeColor(strokeColor)
                         .fillColor(fillColor)
                         .addAll(GP_CONVERTER.toList(item.getPoints()))
-                        .zIndex(zLevel));
+                        .zIndex(zLevel);
+                if (item.getHoles() != null) {
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        polygonOptions.addHole(GP_CONVERTER.toList(hole));
+                    }
+                }
+                context = map.addPolygon(polygonOptions);
                 break;
             case POLYLINE:
             default:

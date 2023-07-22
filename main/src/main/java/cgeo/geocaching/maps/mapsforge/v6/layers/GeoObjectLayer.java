@@ -38,29 +38,40 @@ public class GeoObjectLayer extends GroupLayer {
             final float defaultWidth, final int defaultStrokeColor, final int defaultFillColor, final Func1<Float, Float> widthAdjuster) {
         final GroupLayer gl = new GroupLayer();
         gl.setDisplayModel(displayModel);
-        for (GeoPrimitive go : objects) {
-            final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(go.getStyle(), defaultStrokeColor));
-            strokePaint.setStrokeWidth(widthAdjuster.call(GeoStyle.getStrokeWidth(go.getStyle(), defaultWidth)));
+        for (GeoPrimitive item : objects) {
+            final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle(), defaultStrokeColor));
+            strokePaint.setStrokeWidth(widthAdjuster.call(GeoStyle.getStrokeWidth(item.getStyle(), defaultWidth)));
             strokePaint.setStyle(Style.STROKE);
-            final Paint fillPaint = createPaint(GeoStyle.getFillColor(go.getStyle(), defaultFillColor));
+            final Paint fillPaint = createPaint(GeoStyle.getFillColor(item.getStyle(), defaultFillColor));
             fillPaint.setStyle(Style.FILL);
             final Layer goLayer;
-            switch (go.getType()) {
+            switch (item.getType()) {
                 case MARKER:
                 case CIRCLE:
-                    final float radius = go.getType() == GeoItem.GeoType.MARKER ? 5f : go.getRadius() * 10;
-                    goLayer = new FixedPixelCircle(latLong(go.getPoints().get(0)), widthAdjuster.call(radius), strokePaint, strokePaint);
+                    final float radius = item.getType() == GeoItem.GeoType.MARKER ? 5f : item.getRadius() * 10;
+                    goLayer = new FixedPixelCircle(latLong(item.getPoints().get(0)), widthAdjuster.call(radius), strokePaint, strokePaint);
                     break;
                 case POLYLINE:
                     final Polyline pl = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
-                    pl.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
+                    pl.addPoints(CollectionStream.of(item.getPoints()).map(GeoObjectLayer::latLong).toList());
                     goLayer = pl;
                     break;
                 case POLYGON:
                 default:
                     final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
-                    po.addPoints(CollectionStream.of(go.getPoints()).map(GeoObjectLayer::latLong).toList());
-                    goLayer = po;
+                    po.addPoints(CollectionStream.of(item.getPoints()).map(GeoObjectLayer::latLong).toList());
+                    if (item.getHoles() == null) {
+                        goLayer = po;
+                    } else {
+                        final GroupLayer group = new GroupLayer();
+                        group.layers.add(po);
+                        for (List<Geopoint> hole : item.getHoles()) {
+                            final Polyline plHole = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
+                            plHole.addPoints(CollectionStream.of(hole).map(GeoObjectLayer::latLong).toList());
+                            group.layers.add(plHole);
+                        }
+                        goLayer = group;
+                    }
                     break;
             }
             goLayer.setDisplayModel(displayModel);

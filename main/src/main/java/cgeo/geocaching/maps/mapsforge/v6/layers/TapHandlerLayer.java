@@ -2,9 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.TapHandler;
-import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 
 import android.content.Context;
 
@@ -27,12 +25,10 @@ public class TapHandlerLayer extends Layer {
     private LatLong longTapLatLong;
     private Bitmap markerBitmap;
 
-    private final GeoItemTestLayer testItemLayer;
     private final WeakReference<Context> wrContext;
 
-    public TapHandlerLayer(final TapHandler tapHandler, final GeoItemTestLayer testItemLayer, final Context context) {
+    public TapHandlerLayer(final TapHandler tapHandler, final Context context) {
         this.tapHandler = tapHandler;
-        this.testItemLayer = testItemLayer;
         this.wrContext = new WeakReference<>(context);
     }
 
@@ -53,11 +49,6 @@ public class TapHandlerLayer extends Layer {
     public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
 
         tapHandler.finished();
-
-        final Context ctx = wrContext.get();
-        if (testItemLayer != null && ctx != null) {
-            testItemLayer.handleTap(ctx, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), false);
-        }
 
         return true;
     }
