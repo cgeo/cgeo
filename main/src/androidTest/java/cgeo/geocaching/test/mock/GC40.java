@@ -97,6 +97,12 @@ public class GC40 extends MockedCache {
         return "Namur, Belgium";
     }
 
+    /* cache temporarily disabled as of July 22nd, 2023 */
+    @Override
+    public boolean isDisabled() {
+        return true;
+    }
+
     /*
      * (non-Javadoc)
      *
