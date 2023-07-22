@@ -20,5 +20,5 @@
 - Novinka: Filtr datum eventu pro nadcházející eventy
 - Změna: Nastavení "relativní" jako přednastavené pro filtr datumu
 - Novinka: Zobrazení informací o nepřečtených zprávách na domovské obrazovce (volitelné)
-- New: Quick launch item for message center
-- New: Make last bottom navigation item customizable
+- Novinka: Položka rychlého spuštění pro centrum zpráv
+- Novinka: Poslední spodní položka navigace lze přizpůsobit
