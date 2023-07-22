@@ -29,6 +29,7 @@ import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.layer.GroupLayer;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 import org.mapsforge.map.layer.overlay.Circle;
@@ -94,7 +95,18 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             default:
                 final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
                 po.addPoints(CollectionStream.of(item.getPoints()).map(MapsforgeV6GeoItemLayer::latLong).toList());
-                goLayer = po;
+                if (item.getHoles() == null) {
+                    goLayer = po;
+                } else {
+                    final GroupLayer group = new GroupLayer();
+                    group.layers.add(po);
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        final Polyline plHole = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
+                        plHole.addPoints(CollectionStream.of(hole).map(MapsforgeV6GeoItemLayer::latLong).toList());
+                        group.layers.add(plHole);
+                    }
+                    goLayer = group;
+                }
                 break;
         }
         if (goLayer != null) {

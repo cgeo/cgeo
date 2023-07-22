@@ -70,8 +70,8 @@ public class GeoItemTestLayer {
         }
     }
 
-    public void handleTap(final Context ctx, final Geopoint tapped, final boolean isLongTap) {
-        if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
+    public static void handleTapTest(final GeoItemLayer<String> testLayer, final Context ctx, final Geopoint tapped, final boolean isLongTap) {
+        if (!Settings.enableFeatureUnifiedGeoItemLayer() || testLayer == null) {
             return;
         }
 
@@ -111,39 +111,49 @@ public class GeoItemTestLayer {
             for (int y = 0; y <= 2; y++) {
                 final Geopoint point = center.project(90, x * 20).project(180, y * 20);
                 final GeoItem gi = testIconWithPoly(point, Color.GREEN, x * 0.5f, y * 0.5f, 0);
-                layer.put("testMarkerOffset-" + x + "-" + y, gi);
+                layer.put("test-MarkerOffset-" + x + "-" + y, gi);
             }
         }
 
-        layer.put("testMarkerOffsetRightTop", testIconWithPoly(center.project(90, 100), Color.GRAY, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.xAnchor, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.yAnchor, 0));
+        layer.put("test-MarkerOffsetRightTop", testIconWithPoly(center.project(90, 100), Color.GRAY, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.xAnchor, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.yAnchor, 0));
 
         final Geopoint circleCenter = center.project(90, 200);
         for (int a = 0; a < 360; a += 40) {
             final Geopoint point = circleCenter.project(a, 40);
             final GeoItem gi = testIconWithPoly(point, Color.RED, GeoIcon.Hotspot.CENTER.xAnchor, GeoIcon.Hotspot.CENTER.yAnchor, a);
-            layer.put("testMarkerAngle-" + a, gi);
+            layer.put("test-MarkerAngle-" + a, gi);
         }
 
         final Geopoint staticPolylineCenter = center.project(180, 50);
-        layer.put("staticPolyline", polygonAround(staticPolylineCenter, 50, Color.RED));
+        layer.put("test-staticPolyline", polygonAround(staticPolylineCenter, 50, Color.RED));
 
         final Geopoint staticCircle = staticPolylineCenter.project(90, 50);
-        layer.put("staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.builder().setStrokeColor(Color.DKGRAY).setFillColor(Color.YELLOW).build()));
+        layer.put("test-staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.builder().setStrokeColor(Color.DKGRAY).setFillColor(Color.YELLOW).build()));
 
         final Geopoint staticPolygon = staticCircle.project(90, 50);
-        layer.put("staticPolygon", GeoPrimitive.createPolygon(geoGridPoints(
+        layer.put("test-staticPolygon", GeoPrimitive.createPolygon(geoGridPoints(
                 staticPolygon, 10, 0, 0, 3, 0, 3, 1, 2, 1, 2, 2, 3, 2, 3, 3, 1, 3, 0, 2
         ), GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build()));
 
+        final Geopoint staticPolWithHole = staticPolygon.project(90, 50);
+        final GeoPrimitive pol = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON)
+                .setStyle(GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build())
+                .addPoints(geoGridPoints(staticPolWithHole, 10, 0, 0, 7, 0, 7, 7, 0, 7))
+                .addHole(geoGridPoints(staticPolWithHole, 10, 1, 1, 1, 2, 2, 2, 2, 1))
+                .addHole(geoGridPoints(staticPolWithHole, 10, 4, 4, 4, 5, 5, 5, 5, 4))
+                .build();
+        layer.put("test-staticPolygonWithTwoHoles", pol);
 
         final Geopoint zLevelStuff = staticPolygon.project(180, 50);
         final GeoPrimitive one = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
         final GeoPrimitive two = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
         final GeoPrimitive three = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
 
-        layer.put("zOne", one.buildUpon().setZLevel(0).build());
-        layer.put("zTwo", two.buildUpon().setZLevel(2).build());
-        layer.put("zThree", three.buildUpon().setZLevel(1).build());
+        layer.put("test-zOne", one.buildUpon().setZLevel(0).build());
+        layer.put("test-zTwo", two.buildUpon().setZLevel(2).build());
+        layer.put("test-zThree", three.buildUpon().setZLevel(1).build());
+
+
     }
 
     private static GeoGroup testIconWithPoly(final Geopoint point, final int polyColor, final float xAnchor, final float yAnchor, final float angle) {
@@ -195,12 +205,12 @@ public class GeoItemTestLayer {
         final GeoItem point = GeoPrimitive.createPoint(center.project(angle, distance), GeoStyle.builder().setStrokeColor(Color.GREEN).build());
         final GeoItem group = GeoGroup.builder().addItems(point, poly).build();
 
-        layer.put("testQuad", group);
+        layer.put("test-Quad", group);
 
         final GeoItem flowMarker = GeoPrimitive.createMarker(center.project(angle, distance * 0.8), GeoIcon.builder()
                 .setBitmap(createBitmap(R.drawable.type_event))
                 .setRotation(angle).build());
-        layer.put("testFlowMarker", flowMarker);
+        layer.put("test-FlowMarker", flowMarker);
 
     }
 

@@ -259,13 +259,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         clickableItemsLayer = new GeoItemLayer<>("clickableItems");
         final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems");
-        final GeoItemLayer<String> testLayer = new GeoItemLayer<>("test");
 
         layers.add(clickableItemsLayer);
         layers.add(nonClickableItemsLayer);
-        layers.add(testLayer);
 
-        new GeoItemTestLayer().initforUnifiedMap(testLayer);
+        new GeoItemTestLayer().initforUnifiedMap(clickableItemsLayer);
 
         new PositionLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
@@ -726,6 +724,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         final LinkedList<RouteItem> result = new LinkedList<>();
 
         for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
+
             final IWaypoint wp = viewModel.geoItems.getMap().get(key);
             if (wp != null) {
                 result.add(new RouteItem(wp));
@@ -738,7 +737,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 }
             }
         }
-
         Log.e("touched elements (" + result.size() + "): " + result);
 
         if (result.size() == 0) {
@@ -750,6 +748,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         .show();
             } else {
                 mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
+                GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap);
             }
         } else if (result.size() == 1) {
             handleTap(result.get(0), isLongTap, x, y);

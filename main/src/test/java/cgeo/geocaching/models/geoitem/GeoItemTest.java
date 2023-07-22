@@ -13,6 +13,9 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -104,6 +107,12 @@ public class GeoItemTest {
         assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, 0).touches(addE6(GP_1, 750, 750), TO_LATLON_E6)).isTrue();
         assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, 0).touches(addE6(GP_1, 1000, 0), TO_LATLON_E6)).isFalse();
 
+        //inside a hole
+        final GeoPrimitive pWithHole = polygon(GP_1, 0, true, 0, 1000, 1000, 1000, 1000, 0)
+                .buildUpon().addHole(geopointList(GP_1, 0, 800, 800, 0)).build();
+        assertThat(pWithHole.touches(addE6(GP_1, 200, 200), TO_LATLON_E6)).as("inside the hole").isFalse();
+        assertThat(pWithHole.touches(addE6(GP_1, 900, 900), TO_LATLON_E6)).as("inside polygon but outside the hole").isTrue();
+
     }
 
     @Test
@@ -134,14 +143,20 @@ public class GeoItemTest {
 
     private static GeoPrimitive polylineGon(final boolean isPolygon, final Geopoint start, final int lineWidth, final boolean filled, final int ... points) {
 
-        final GeoPrimitive.Builder gbb = GeoPrimitive.builder().setType(isPolygon ? POLYGON : POLYLINE)
-                .setStyle(GeoStyle.builder().setStrokeWidth((float) lineWidth).setFillColor(filled ? Color.BLACK : Color.TRANSPARENT).build()).addPoints(start);
+        return GeoPrimitive.builder().setType(isPolygon ? POLYGON : POLYLINE)
+                .setStyle(GeoStyle.builder().setStrokeWidth((float) lineWidth).setFillColor(filled ? Color.BLACK : Color.TRANSPARENT).build())
+                .addPoints(geopointList(start, points)).build();
+    }
+
+    private static List<Geopoint> geopointList(final Geopoint start, final int ... points) {
+        final List<Geopoint> result = new ArrayList<>();
+        result.add(start);
         Geopoint current = start;
         for (int i = 0; i < points.length; i += 2) {
             current = addE6(current, points[i], points[i + 1]);
-            gbb.addPoints(current);
+            result.add(current);
         }
-        return gbb.build();
+        return result;
     }
 
     private static GeoPrimitive circle(final Geopoint gp, final float radius, final int lineWidth, final boolean filled) {
