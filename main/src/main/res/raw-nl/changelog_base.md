@@ -21,4 +21,4 @@
 - Wijziging: Maak 'relatief' de standaard voor datumfilters
 - Nieuw: Toon info op het startscherm voor ongelezen berichten (optioneel)
 - Nieuw: Snel openen item voor berichtencentrum
-- New: Make last bottom navigation item customizable
+- Nieuw: Maak laatste navigatie-item aanpasbaar
