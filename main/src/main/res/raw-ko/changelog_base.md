@@ -20,5 +20,5 @@
 - 신규: 예정된 이벤트에 대한 이벤트 날짜 필터
 - 변경: '상대적'을 날짜 필터의 기본값으로 설정
 - 신규: 읽지 않은 메시지에 대한 정보를 홈 화면에 표시(선택 사항)
-- New: Quick launch item for message center
-- New: Make last bottom navigation item customizable
+- 신규: 메시지 센터용 빠른 실행 항목
+- 신규: 마지막 하단 탐색 항목을 사용자 정의할 수 있도록 합니다.
