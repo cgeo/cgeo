@@ -886,6 +886,10 @@
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
+    <string name="init_custombnitem">Aangepast Menu-Item</string>
+    <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
+    <string name="init_custombnitem_none">(geen)</string>
+    <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Moeilijkheid</string>
