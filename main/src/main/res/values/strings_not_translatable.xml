@@ -187,6 +187,7 @@
     <!-- cache menu -->
     <string translatable="false" name="caches_map_mapswithme">Maps.me</string>
     <string translatable="false" name="cache_menu_mapswithme">Maps.me</string>
+    <string translatable="false" name="caches_menu_organicmaps">Organic Maps</string>
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
     <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>

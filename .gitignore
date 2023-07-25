@@ -34,6 +34,7 @@ private.properties
 .gradle/
 main/build/
 mapswithme-api/build/
+organicmaps-api/build/
 build
 build-cache/
 # build system user specific files
