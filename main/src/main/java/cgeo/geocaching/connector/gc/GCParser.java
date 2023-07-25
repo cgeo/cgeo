@@ -44,6 +44,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.text.HtmlCompat;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -1608,7 +1609,7 @@ public final class GCParser {
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
             if (matcherSpottedUser.find()) {
                 trackable.setSpottedGuid(matcherSpottedUser.group(3));
-                trackable.setSpottedName(matcherSpottedUser.group(1).trim());
+                trackable.setSpottedName(HtmlCompat.fromHtml(matcherSpottedUser.group(1), HtmlCompat.FROM_HTML_MODE_LEGACY).toString().trim()); // remove HTML in parsed username, see #14442
                 trackable.setSpottedType(Trackable.SPOTTED_USER);
             }
 
