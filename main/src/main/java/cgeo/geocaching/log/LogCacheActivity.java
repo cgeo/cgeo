@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ILoggingWithFavorites;
+import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
@@ -576,8 +577,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         public DateTimeEditor date;
     }
 
-    private void onPostExecuteInternal(final StatusCode status) {
-        if (status == StatusCode.NO_ERROR) {
+    private void onPostExecuteInternal(final StatusResult statusResult) {
+        if (statusResult.getStatusCode() == StatusCode.NO_ERROR) {
             //reset Gui and all values
             resetValues();
             refreshGui();
@@ -589,14 +590,13 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             showToast(res.getString(R.string.info_log_posted));
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (status == StatusCode.LOG_SAVED) {
+        } else if (statusResult.getStatusCode() == StatusCode.LOG_SAVED) {
             showToast(res.getString(R.string.info_log_saved));
             finish(LogCacheActivity.SaveMode.SKIP);
         } else {
             SimpleDialog.of(this)
                     .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
-                            TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
                     .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(LogCacheActivity.SaveMode.FORCE));
 

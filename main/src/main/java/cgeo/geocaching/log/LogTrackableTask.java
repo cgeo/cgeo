@@ -39,7 +39,7 @@ public class LogTrackableTask extends AsyncTaskWithProgress<String, StatusCode> 
             final LogResult logResult = taskInterface.loggingManager.postLog(taskInterface.geocache, trackableLog, taskInterface.date.getCalendar(), logMsg);
 
             // Now posting tweet if log is OK
-            if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
+            if (logResult.getStatusCode() == StatusCode.NO_ERROR) {
                 addLocalTrackableLog(logMsg);
                 if (taskInterface.binding.tweet.isChecked() && taskInterface.binding.tweetBox.getVisibility() == View.VISIBLE) {
                     // TODO oldLogType as a temp workaround...
@@ -57,7 +57,7 @@ public class LogTrackableTask extends AsyncTaskWithProgress<String, StatusCode> 
             }
 
             // Return request status
-            return logResult.getPostLogResult();
+            return logResult.getStatusCode();
         } catch (final RuntimeException e) {
             Log.e("LogTrackableActivity.Poster.doInBackgroundInternal", e);
         }

@@ -263,6 +263,7 @@
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code is missing.</string>
     <string name="err_log_post_missing_coordinates">Coordinates are missing.</string>
+    <string name="err_website_message">The website responded with following message: </string>
     <string name="err_log_post_failed">It seems that your log was not posted. Please check it on the cache originating website.</string>
     <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">It seems that your log was not posted. Please check it on GeoKrety.org.</string>
