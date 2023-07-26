@@ -5,10 +5,13 @@
 - Nuovo: Controllo integrità per i tasselli di routing scaricati
 - Nuovo: Supporto per l'audio selezionato dall'utente per le notifiche di prossimità
 - Nuovo: Attiva/Disattiva le notifiche di prossimità dalle impostazioni rapide della mappa
+- New: Extended GeoJSON support for Google Maps
 
 ### Dettagli del cache
 - Nuovo: pulsante 'Salva e carica' durante la modifica della nota personale
 - Cambio: sostituita la maggior parte delle finestre di avanzamento degli aggiornamenti con azioni in background
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
 
 ### Generale
 - Nuovo: Aggiunti più numeri emoji (categoria separata)
@@ -22,3 +25,6 @@
 - Nuovo: Mostra le informazioni sulla schermata iniziale per i messaggi non letti (opzionale)
 - Nuovo: Avvio rapido del centro messaggi
 - Nuovo: Rendi personalizzabile l'ultimo elemento di navigazione inferiore
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- 
