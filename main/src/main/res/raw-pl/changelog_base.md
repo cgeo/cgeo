@@ -5,10 +5,13 @@
 - Nowość: Sprawdzanie integralności pobranych kafelków routingu
 - Nowość: Obsługa dźwięku wybranego przez użytkownika dla powiadomień zbliżeniowych
 - New: Toggle proximity notifications from map quick settings
+- Nowość: Rozszerzone wsparcie GeoJSON dla map Google
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
 - Change: Replace most update progress dialogs by background actions
+- Zmiana: Używaj tylko niepustych logów dla opcji „powtórz ostatni log”
+- New: Display logging errors
 
 ### Ogólne
 - Nowość: Dodano więcej emoji liczbowych (oddzielna kategoria)
@@ -22,3 +25,6 @@
 - Nowość: Wyświetlaj informacje na ekranie głównym dla nieprzeczytanych wiadomości (opcjonalnie)
 - New: Quick launch item for message center
 - New: Make last bottom navigation item customizable
+- Nowość: zaktualizowano zintegrowany BRouter
+- Nowość: Dodano interfejs do OrganicMaps dla nawigacji
+- 
