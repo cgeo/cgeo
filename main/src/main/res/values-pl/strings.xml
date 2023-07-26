@@ -249,6 +249,7 @@
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
     <string name="err_log_post_missing_tracking_code">Brak kodu przedmiotu podróżnego.</string>
     <string name="err_log_post_missing_coordinates">Brak współrzędnych.</string>
+    <string name="err_website_message">Strona internetowa odpowiedziała następującym komunikatem: </string>
     <string name="err_log_post_failed">Wygląda na to, że wpis nie został dodany. Proszę sprawdzić to na stronie internetowej skrytki.</string>
     <string name="err_log_post_failed_ec">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na GeoKrety.org.</string>
