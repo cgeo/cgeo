@@ -5,10 +5,13 @@
 - 신규: 다운로드된 라우팅 타일에 대한 무결성 체크
 - 신규: 근접 알림을 위한 사용자 선택 오디오 지원
 - 신규: 지도 빠른 설정에서 근접 알림을 전환합니다.
+- New: Extended GeoJSON support for Google Maps
 
 ### 캐시 상세정보
 - 신규: 개인 메모 편집 시 '저장 및 업로드' 버튼
 - 변경: 대부분의 업데이트 진행률 대화 상자를 백그라운드 작업으로 교체
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
 
 ### 일반
 - 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
@@ -22,3 +25,6 @@
 - 신규: 읽지 않은 메시지에 대한 정보를 홈 화면에 표시(선택 사항)
 - 신규: 메시지 센터용 빠른 실행 항목
 - 신규: 마지막 하단 탐색 항목을 사용자 정의할 수 있도록 합니다.
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- 
