@@ -404,11 +404,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
                 final String comment = MetadataUtils.getComment(p.second);
                 if (!StringUtils.isBlank(comment)) {
-                    String commentInView = comment;
-                    if (comment.length() > 300) {
-                        commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
-                    }
-                    imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + commentInView + "</i>"));
+                    imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + comment + "</i>"));
                 }
 
                 binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
