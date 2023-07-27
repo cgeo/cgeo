@@ -249,6 +249,7 @@
     <string name="err_log_load_data">로그에 필요한 자료를 가져오지 못했습니다.</string>
     <string name="err_log_post_missing_tracking_code">추적코드가 빠졌습니다.</string>
     <string name="err_log_post_missing_coordinates">좌표가 빠졌습니다.</string>
+    <string name="err_website_message">웹 사이트는 다음 메시지로 응답했습니다. </string>
     <string name="err_log_post_failed">로그가 올려지지 않은 것 같습니다. 캐시 페이지에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_ec">로그가 올려지지 않은 것 같습니다. Extremcaching.com 에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_gk">로그가 올려지지 않은 것 같습니다. GeoKrety.org 에서 확인해보시기 바랍니다.</string>
