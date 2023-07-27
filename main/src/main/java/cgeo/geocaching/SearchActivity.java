@@ -115,7 +115,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
                 // non-fuzzy-geo that already has lat/lon => search via lat/lon
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(geo.getLatitude(), geo.getLongitude()), name);
             } else if (name != null) {
-                // fuzzy geo with seach-query and without lat/lon => search via address
+                // fuzzy geo with search-query and without lat/lon => search via address
                 findByAddressFn(name);
             }
             finish();
