@@ -26,6 +26,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.HideActionBarUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
@@ -44,21 +45,28 @@ import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javax.annotation.Nullable;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
@@ -88,6 +96,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private WeakReference<AbstractBottomNavigationActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
+    private Marker coordsMarker;
 
     private int fromList = StoredList.TEMPORARY_LIST.id;
 
@@ -192,6 +201,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             mapReadyCallback.mapReady();
             mapReadyCallback = null;
         }
+
         redraw();
     }
 
@@ -203,6 +213,20 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                 compass.animate().translationY((actionBarShowing ? mapView.getRootView().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
             } catch (Exception ignore) {
             }
+        }
+    }
+
+    @Override
+    public void setCoordsMarker(@Nullable final Geopoint coords) {
+        if (coordsMarker != null) {
+            coordsMarker.remove();
+            coordsMarker = null;
+        }
+        if (coords != null && coords.isValid()) {
+            coordsMarker = googleMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(coords.getLatitude(), coords.getLongitude()))
+                    .icon(BitmapDescriptorFactory.fromBitmap(Objects.requireNonNull(ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(getResources(), R.drawable.coords_indicator, null)))))
+            );
         }
     }
 
