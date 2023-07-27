@@ -39,6 +39,7 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemLayer;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.maps.mapsforge.v6.layers.CoordsMarkerLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.GeoObjectLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HistoryLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
@@ -166,6 +167,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private RouteLayer routeLayer;
     private TrackLayer trackLayer;
     private GeoObjectLayer geoObjectLayer;
+    private CoordsMarkerLayer coordsMarkerLayer;
+    private Geopoint coordsMarkerPosition;
     private CachesBundle caches;
     private final MapHandlers mapHandlers = new MapHandlers(new TapHandler(this), new DisplayHandler(this), new ShowProgressHandler(this));
 
@@ -338,6 +341,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else if (mapOptions.coords != null) {
             postZoomToViewport(new Viewport(mapOptions.coords, 0, 0));
             if (mapOptions.mapMode == MapMode.LIVE) {
+                coordsMarkerPosition = mapOptions.coords;
+                if (coordsMarkerLayer != null) {
+                    coordsMarkerLayer.setCoordsMarker(coordsMarkerPosition);
+                }
                 mapOptions.coords = null;   // no direction line, even if enabled in settings
                 followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
             }
@@ -839,6 +846,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         // GeoitemLayer
         GeoitemLayer.resetColors();
+
+        // Coords marker
+        this.coordsMarkerLayer = new CoordsMarkerLayer();
+        coordsMarkerLayer.setCoordsMarker(coordsMarkerPosition);
+        this.mapView.getLayerManager().getLayers().add(this.coordsMarkerLayer);
 
         // TapHandler
         this.tapHandlerLayer = new TapHandlerLayer(this.mapHandlers.getTapHandler(), this);
