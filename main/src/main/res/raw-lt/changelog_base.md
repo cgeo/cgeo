@@ -27,4 +27,4 @@
 - New: Make last bottom navigation item customizable
 - New: Updated integrated BRouter
 - New: Add interface to OrganicMaps for navigation
-- 
+- Fix: HTML-encoded chars in 'trackable last spotted" name
