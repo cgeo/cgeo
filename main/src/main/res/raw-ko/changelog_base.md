@@ -27,4 +27,4 @@
 - 신규: 마지막 하단 탐색 항목을 사용자 정의할 수 있도록 합니다.
 - 신규: 업데이트된 통합 BRouter
 - 신규: 탐색을 위해 OrganicMaps에 인터페이스 추가
-- 
+- Fix: HTML-encoded chars in 'trackable last spotted" name
