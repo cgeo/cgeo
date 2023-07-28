@@ -249,6 +249,7 @@
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking-Code fehlt.</string>
     <string name="err_log_post_missing_coordinates">Koordinaten fehlen.</string>
+    <string name="err_website_message">Die Webseite hat mit folgender Fehlermeldung geantwortet: </string>
     <string name="err_log_post_failed">Der Log-Eintrag wurde scheinbar nicht gesendet. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
     <string name="err_log_post_failed_ec">c:geo konnte den Log nicht absenden. Bitte auf Extremcaching.com überprüfen.</string>
     <string name="err_log_post_failed_gk">c:geo konnte den Log nicht absenden. Bitte auf GeoKrety.org überprüfen.</string>
@@ -886,6 +887,10 @@
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
+    <string name="init_custombnitem">Benutzerdefinierter Menüeintrag</string>
+    <string name="init_custombnitem_default">Suche in der Nähe (Standard)</string>
+    <string name="init_custombnitem_none">(keiner)</string>
+    <string name="init_custombnitem_empty_placeholder">(leerer Platzhalter)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
