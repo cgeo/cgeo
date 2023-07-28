@@ -593,8 +593,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         } else if (statusResult.getStatusCode() == StatusCode.LOG_SAVED) {
             showToast(res.getString(R.string.info_log_saved));
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else {
-            SimpleDialog.of(this)
+        } else if (!LogCacheActivity.this.isFinishing()) {
+            SimpleDialog.of(LogCacheActivity.this)
                     .setTitle(R.string.info_log_post_failed)
                     .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
