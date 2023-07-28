@@ -249,6 +249,7 @@
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
     <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
     <string name="err_log_post_missing_coordinates">Chybí souřadnice.</string>
+    <string name="err_website_message">Webová stránka odpověděla následující zprávou: </string>
     <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce kešky.</string>
     <string name="err_log_post_failed_ec">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na GeoKrety.org.</string>
