@@ -291,12 +291,12 @@
     <string translatable="false" name="mapserver_openandromaps_themes_voluntary_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/voluntary/downloads/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
-    <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string>
+    <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string><!-- cannot use https: here due to certificate not valid for subdomain -->
     <string translatable="false" name="mapserver_freizeitkarte_likeiturl">https://www.freizeitkarte-osm.de/android/de/impressum.html</string>
     <string translatable="false" name="mapserver_freizeitkarte_projecturl">https://www.freizeitkarte-osm.de/android/en/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_themes_name">Freizeitkarte Themes</string>
-    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/latest/</string>
+    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/latest/</string><!-- cannot use https: here due to certificate not valid for subdomain -->
 
     <string translatable="false" name="mapserver_hylly_name">Hylly</string>
     <string translatable="false" name="mapserver_hylly_updatecheckurl">https://kartat.hylly.org/</string>
@@ -308,7 +308,7 @@
     <string translatable="false" name="mapserver_hylly_themes_downloadurl">https://kartat-dl.hylly.org/</string>
 
     <string translatable="false" name="brouter_name">BRouter</string>
-    <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
+    <string translatable="false" name="brouter_downloadurl">https://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
     <string translatable="false" name="mapserver_osmpaws_name">Paws</string>
