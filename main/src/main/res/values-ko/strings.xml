@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">확인</string>
     <!-- basics -->
     <string name="cache">캐시</string>
     <string name="detail">상세표시</string>
@@ -252,6 +249,7 @@
     <string name="err_log_load_data">로그에 필요한 자료를 가져오지 못했습니다.</string>
     <string name="err_log_post_missing_tracking_code">추적코드가 빠졌습니다.</string>
     <string name="err_log_post_missing_coordinates">좌표가 빠졌습니다.</string>
+    <string name="err_website_message">웹 사이트는 다음 메시지로 응답했습니다. </string>
     <string name="err_log_post_failed">로그가 올려지지 않은 것 같습니다. 캐시 페이지에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_ec">로그가 올려지지 않은 것 같습니다. Extremcaching.com 에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_gk">로그가 올려지지 않은 것 같습니다. GeoKrety.org 에서 확인해보시기 바랍니다.</string>
@@ -883,6 +881,10 @@
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
+    <string name="init_custombnitem">사용자 정의 메뉴 항목</string>
+    <string name="init_custombnitem_default">주변 검색 (기본값)</string>
+    <string name="init_custombnitem_none">(없음)</string>
+    <string name="init_custombnitem_empty_placeholder">(빈 자리 표시자)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">지오코드</string>
     <string name="cacheListInfoItem_Difficulty">난이도</string>
@@ -1103,6 +1105,7 @@
     <string name="pn_tone_only">소리만</string>
     <string name="pn_text_only">텍스트만</string>
     <string name="pn_tone_and_text">소리 및 텍스트</string>
+    <string name="pn_enabled">근접성 알림 사용</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
@@ -1429,6 +1432,12 @@
     <string name="cache_recently_viewed">최근에 조회됨</string>
     <string name="cache_recently_viewed_empty">최근 본 캐시 없음</string>
     <string name="cache_clear_recently_viewed">지우기</string>
+    <string name="cachedetails_progress_refresh">%s 새로 고침</string>
+    <string name="cachedetails_progress_watch">관심목록에 추가되었습니다</string>
+    <string name="cachedetails_progress_unwatch">관심목록에서 제거되었습니다</string>
+    <string name="cachedetails_progress_favorite">호감점수 목록에 추가했습니다</string>
+    <string name="cachedetails_progress_unfavorite">호감점수 목록에 제거했습니다</string>
+    <string name="cachedetails_progress_upload_note">개인 메모 올라감</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -1656,6 +1665,7 @@
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <string name="quick_settings">빠른 설정</string>
     <string name="quick_settings_info">일부지도 설정 (지도 설정, 숨기기, 경로)이 새로운 \"빠른 설정\"팝업으로 이동되었습니다.\n지도 하단 중앙에있는 아이콘을 사용하여 이 팝업을 열 수 있습니다.</string>
+    <string name="other_settings">기타 설정</string>
     <string name="map_show_caches_title">캐시 보기:</string>
     <string name="map_show_waypoints_title">지점 보기:</string>
     <string name="map_show_other_title">기타 보기:</string>
@@ -2799,4 +2809,9 @@
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">메세지 센터</string>
+    <string name="mcpolling_summary">메시지 센터에서 정기적으로 들어오는 메시지를 확인합니다.</string>
+    <plurals name="mcupdate">
+        <item quantity="other">메시지 센터에서 %d개의 읽지 않은 메시지</item>
+    </plurals>
 </resources>

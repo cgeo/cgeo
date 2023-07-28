@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Keška</string>
     <string name="detail">Detaily</string>
@@ -252,6 +249,7 @@
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
     <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
     <string name="err_log_post_missing_coordinates">Chybí souřadnice.</string>
+    <string name="err_website_message">Webová stránka odpověděla následující zprávou: </string>
     <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce kešky.</string>
     <string name="err_log_post_failed_ec">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Zdá se, že tvůj log nebyl odeslán. Prosím, zkontroluj to na GeoKrety.org.</string>
@@ -901,6 +899,10 @@
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
+    <string name="init_custombnitem">Vlastní položka nabídky</string>
+    <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
+    <string name="init_custombnitem_none">(žádné)</string>
+    <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokód</string>
     <string name="cacheListInfoItem_Difficulty">Obtížnost</string>
@@ -1121,6 +1123,7 @@
     <string name="pn_tone_only">Pouze tón</string>
     <string name="pn_text_only">Pouze text</string>
     <string name="pn_tone_and_text">Tón + text</string>
+    <string name="pn_enabled">Povolit upozornění na přiblížení</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelitní</string>
@@ -1471,6 +1474,12 @@
     <string name="cache_recently_viewed">Naposledy zobrazené</string>
     <string name="cache_recently_viewed_empty">Žádné nedávno zobrazené kešky</string>
     <string name="cache_clear_recently_viewed">vymazat</string>
+    <string name="cachedetails_progress_refresh">%s obnoveno</string>
+    <string name="cachedetails_progress_watch">Přidáno do seznamu sledovaných</string>
+    <string name="cachedetails_progress_unwatch">Odebráno ze seznamu sledovaných</string>
+    <string name="cachedetails_progress_favorite">Přidáno do oblíbených</string>
+    <string name="cachedetails_progress_unfavorite">Odebráno z oblíbených</string>
+    <string name="cachedetails_progress_upload_note">Osobní poznámka nahrána</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1701,6 +1710,7 @@
     <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
+    <string name="other_settings">Další nastavení</string>
     <string name="map_show_caches_title">Zobrazit kešky:</string>
     <string name="map_show_waypoints_title">Zobrazit trasové body:</string>
     <string name="map_show_other_title">Zobrazit ostatní:</string>
@@ -2889,4 +2899,6 @@
     <string name="smiley_disapprove">Neschváleno</string>
     <string name="smiley_question">Otázka</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centrum zpráv</string>
+    <string name="mcpolling_summary">Kontrola příchozích zpráv v centru zpráv v pravidelných intervalech</string>
 </resources>

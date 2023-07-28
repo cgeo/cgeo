@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Details</string>
@@ -252,6 +249,7 @@
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking-Code fehlt.</string>
     <string name="err_log_post_missing_coordinates">Koordinaten fehlen.</string>
+    <string name="err_website_message">Die Webseite hat mit folgender Fehlermeldung geantwortet: </string>
     <string name="err_log_post_failed">Der Log-Eintrag wurde scheinbar nicht gesendet. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
     <string name="err_log_post_failed_ec">c:geo konnte den Log nicht absenden. Bitte auf Extremcaching.com überprüfen.</string>
     <string name="err_log_post_failed_gk">c:geo konnte den Log nicht absenden. Bitte auf GeoKrety.org überprüfen.</string>
@@ -889,6 +887,10 @@
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
+    <string name="init_custombnitem">Benutzerdefinierter Menüeintrag</string>
+    <string name="init_custombnitem_default">Suche in der Nähe (Standard)</string>
+    <string name="init_custombnitem_none">(keiner)</string>
+    <string name="init_custombnitem_empty_placeholder">(leerer Platzhalter)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Schwierigkeit</string>
@@ -1109,6 +1111,7 @@
     <string name="pn_tone_only">Nur Ton</string>
     <string name="pn_text_only">Nur Text</string>
     <string name="pn_tone_and_text">Ton + Text</string>
+    <string name="pn_enabled">Annäherungsbenachrichtigungen aktivieren</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Karte</string>
     <string name="map_source_google_satellite">Google: Satellit</string>
@@ -1161,6 +1164,9 @@
     <string name="persistablefolder_spoilerimages">Hinweisbilder</string>
     <string name="persistablefolder_routingbase">Routing</string>
     <string name="persistablefolder_routingtiles">Routingdaten</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Audiodatei (weit weg)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Audiodatei (nah)</string>
+    <string name="proximitynotification_internal">(intern)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fertig</string>
     <string name="folder_process_status_currentfile">Prozess %1$s</string>
@@ -1440,6 +1446,12 @@
     <string name="cache_recently_viewed">Zuletzt angesehen</string>
     <string name="cache_recently_viewed_empty">Keine kürzlich angesehenen Caches</string>
     <string name="cache_clear_recently_viewed">Leeren</string>
+    <string name="cachedetails_progress_refresh">%s aktualisiert</string>
+    <string name="cachedetails_progress_watch">Zur Watchlist hinzugefügt</string>
+    <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
+    <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
+    <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
+    <string name="cachedetails_progress_upload_note">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
@@ -1668,6 +1680,7 @@
     <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
+    <string name="other_settings">Weitere Einstellungen</string>
     <string name="map_show_caches_title">Caches anzeigen:</string>
     <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
     <string name="map_show_other_title">Weiteres anzeigen:</string>
@@ -2341,6 +2354,7 @@
     <string name="receivedownload_error_filenotfound_exception">Zu empfangene Datei nicht gefunden.</string>
     <string name="receivedownload_amount_copied">%s kopiert</string>
     <string name="receivedownload_cancelled">Dateiübertragung abgebrochen</string>
+    <string name="receivedownload_integritycheck_failed">Integritätsprüfung fehlgeschlagen</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
     <string name="delete_offlinemap_title">Offline-Karte löschen</string>
@@ -2825,4 +2839,10 @@
     <string name="smiley_disapprove">Ablehnung</string>
     <string name="smiley_question">Frage</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Nachrichten-Center</string>
+    <string name="mcpolling_summary">Nachrichten-Center regelmäßig auf ungelesene Nachrichten prüfen</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
+        <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
+    </plurals>
 </resources>

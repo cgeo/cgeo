@@ -4,10 +4,14 @@
 - Correction : L'interruption des téléchargements laissait des fichiers incomplets
 - New: Integrity check for downloaded routing tiles
 - New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
 
 ### Détails de la cache
 - New: 'Save and upload' button when editing personal note
 - Change: Replace most update progress dialogs by background actions
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
 
 ### Général
 - New: Add more number emojis (separate category)
@@ -19,3 +23,8 @@
 - New: Event Date filter for upcoming events
 - Change: Make 'relative' the default for date filters
 - New: Display info on home screen for unread messages (optional)
+- New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- Fix: HTML-encoded chars in 'trackable last spotted" name

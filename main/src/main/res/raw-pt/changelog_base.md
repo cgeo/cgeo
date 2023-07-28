@@ -4,10 +4,14 @@
 - Correcção: Ficheiros parciais mantidos ao abortar a cópia de ficheiros transferidos
 - Novo: Verificação de integridade dos blocos de roteamento transferidos
 - Novo: Suporte a ficheiros de áudio escolhidos pelo utilizador para notificações próximas
+- Novo: Alterar notificações de proximidade nas configurações rápidas do mapa
+- New: Extended GeoJSON support for Google Maps
 
 ### Detalhes da cache
 - Novo: botão 'Guardar e Enviar' ao editar nota pessoal
-- Change: Replace most update progress dialogs by background actions
+- Alteração: Substituir os diálogos de progresso da maioria das actualizações por acções em segundo plano
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
 
 ### Geral
 - Novo: Adicionados mais emojis de números (categoria separada)
@@ -18,4 +22,9 @@
 - Novo: Opção de votar em caches de opencaching (OCPL) durante o registo
 - Novo: Filtro por Data do Evento para próximos eventos
 - Alteração: Tornar "relativo" como o padrão para filtros de data
-- New: Display info on home screen for unread messages (optional)
+- Novo: Exibir informações no ecrã inicial para mensagens por ler (opcional)
+- Novo: Item para a central de mensagens no Início Rápido
+- Novo: Tornar personalizável o último item inferior da navegação
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- Fix: HTML-encoded chars in 'trackable last spotted" name

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -200,6 +197,8 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Errore analizzando la pagina di login</string>
     <string name="err_captcha">Il servizio richiede un Captcha. Aprire il sito web geocaching.com con il proprio browser e risolvere il Captcha mostrato durante il login. Quindi riprovare il login con c:geo.</string>
+    <string name="err_server_general">Impossibile contattare il server Geocaching. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
+    <string name="err_server_gc">Impossibile contattare Geocaching.com. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
     <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
     <string name="err_server_lc">Impossibile contattare labs.geocaching.com. Il sito Web potrebbe essere non attivo o la tua connessione internet interrotta.</string>
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
@@ -453,6 +452,7 @@
     <string name="list_menu_import">Importazione</string>
     <string name="list_title">Seleziona una lista</string>
     <string name="lists_title">Scegli una lista</string>
+    <string name="lists_title_new_caches">Scegli l\'elenco (nuovi cache)</string>
     <string name="list_inbox">Salvate</string>
     <string name="list_all_lists">Tutti i cache</string>
     <string name="list_dialog_create_title">Nuova lista</string>
@@ -492,6 +492,7 @@
     <string name="cache_filter_favorites">Preferiti</string>
     <string name="cache_filter_distance">Distanza</string>
     <string name="cache_filter_hidden">Data Nascosta</string>
+    <string name="cache_filter_eventdate">Data evento</string>
     <string name="cache_filter_logs_count">Conteggio Log</string>
     <string name="cache_filter_last_found">Data ultimo trovato</string>
     <string name="cache_filter_log_entry">Voce di Registro Log</string>
@@ -578,6 +579,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Il sotto-filtro è attualmente vuoto</string>
     <string name="cache_filter_log_entry_foundby">Trovato da</string>
     <string name="cache_filter_log_entry_logtext">Testo del Log</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>più di un anno fa</item>
+        <item>un anno fa</item>
+        <item>30 giorni fa</item>
+        <item>una settimana fa</item>
+        <item>1 giorno fa</item>
+        <item>meno di 1 giorno fa</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1anno</item>
+        <item>1 anno</item>
+        <item>30gg</item>
+        <item>1sett</item>
+        <item>1g</item>
+        <item>&lt;1g</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>più di un anno fa</item>
         <item>un anno fa</item>
@@ -599,6 +616,28 @@
         <item>1 set</item>
         <item>3gg</item>
         <item>&lt;3gg</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>passato</item>
+        <item>oggi</item>
+        <item>domani</item>
+        <item>2 giorni da ora</item>
+        <item>3 giorni da ora</item>
+        <item>1 settimana da ora</item>
+        <item>2 settimane da ora</item>
+        <item>1 mese da ora</item>
+        <item>tutto il futuro</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>passato</item>
+        <item>0gg</item>
+        <item>1gg</item>
+        <item>2gg</item>
+        <item>3gg</item>
+        <item>1sett</item>
+        <item>2 sett</item>
+        <item>1 mese</item>
+        <item>&gt;1 mese</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versione</string>
@@ -625,6 +664,7 @@
     <string name="about_system_write_logcat_success">File di registro \"%1$s\" scritto nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
     <string name="about_system_write_infos_downloadmanager">Visualizza download</string>
+    <string name="about_changelog_full">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
     <string name="about_contributors_recent">Contributori recenti</string>
@@ -846,6 +886,10 @@
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
     <string name="init_summary_quicklaunchitems">Seleziona uno o più elementi come pulsanti di avvio rapido nella schermata iniziale</string>
+    <string name="init_custombnitem">Voce Menu Personalizzata</string>
+    <string name="init_custombnitem_default">Ricerca nelle vicinanze (predefinita)</string>
+    <string name="init_custombnitem_none">(nessuno)</string>
+    <string name="init_custombnitem_empty_placeholder">(segnaposto vuoto)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geocode</string>
     <string name="cacheListInfoItem_Difficulty">Difficoltà</string>
@@ -866,6 +910,7 @@
         <item>Scuro</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Schermata predefinita</string>
     <string name="init_wallpaper">Sfondo</string>
     <string name="init_summary_wallpaper">Mostra sfondo del dispositivo come sfondo della schermata iniziale</string>
     <!-- backup / restore -->
@@ -1065,6 +1110,7 @@
     <string name="pn_tone_only">Solo tono</string>
     <string name="pn_text_only">Solo testo</string>
     <string name="pn_tone_and_text">Tono + testo</string>
+    <string name="pn_enabled">Abilita notifiche di prossimità</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>
@@ -1117,6 +1163,9 @@
     <string name="persistablefolder_spoilerimages">Immagini Spoiler</string>
     <string name="persistablefolder_routingbase">Navigazione</string>
     <string name="persistablefolder_routingtiles">Dati di navigazione</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">File audio (lontano)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">File audio (vicino)</string>
+    <string name="proximitynotification_internal">(interno)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s fatto</string>
     <string name="folder_process_status_currentfile">Processo %1$s</string>
@@ -1229,6 +1278,7 @@
     <string name="cache_personal_note_upload_done">Nota personale caricata</string>
     <string name="cache_personal_note_upload_error">Errore durante il caricamento delle note personali</string>
     <string name="cache_personal_note_upload_cancelled">Caricamento nota personale annullato</string>
+    <string name="cache_personal_note_save_and_upload">Salva e carica</string>
     <string name="cache_personal_note_vars_out_of_sync">Le variabili nelle note non sono sincronizzate (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sincronizza variabili</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Controlla le variabili il cui valore dovrebbe essere sovrascritto dalle note</string>
@@ -1310,6 +1360,7 @@
     <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
     <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
+    <string name="cache_empty_log">c:geo non ha potuto inviare il tuo log perché è vuoto.</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
     <string name="cache_menu_around">Cache qui intorno</string>
@@ -1394,6 +1445,12 @@
     <string name="cache_recently_viewed">Visualizzati di recente</string>
     <string name="cache_recently_viewed_empty">Nessun cache visualizzato di recente</string>
     <string name="cache_clear_recently_viewed">Pulisci</string>
+    <string name="cachedetails_progress_refresh">%s aggiornato</string>
+    <string name="cachedetails_progress_watch">Aggiunto alla watchlist</string>
+    <string name="cachedetails_progress_unwatch">Rimosso dalla watchlist</string>
+    <string name="cachedetails_progress_favorite">Aggiunto ai preferiti</string>
+    <string name="cachedetails_progress_unfavorite">Rimosso dai preferiti</string>
+    <string name="cachedetails_progress_upload_note">Nota personale caricata</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
     <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
@@ -1424,6 +1481,8 @@
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
     <string name="init_summary_longtap_map">Attiva tocco prolungato sudi un\'icona nella mappa (crea un percorso personalizzato) o sullo spazio libero sulla mappa (crea un cache/waypoint definito dall\'utente)</string>
+    <string name="init_show_routing_menu">Mostra menu di navigazione</string>
+    <string name="init_summary_show_routing_menu">Un tocco prolungato su di un cache mostra un menu con opzioni avanzate per aggiungere/rimuovere il cache in un percorso. Se disabilitato, il cache viene direttamente aggiunto/rimosso dal percorso (configurabile).</string>
     <string name="init_ActionbarAutohide">Nascondi barra degli strumenti al tocco</string>
     <string name="init_summary_ActionbarAutohide">Tocca lo spazio libero della mappa per nascondere/mostrare la barra degli strumenti</string>
     <string name="onetime_info_longtap_disabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
@@ -1620,6 +1679,7 @@
     <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
+    <string name="other_settings">Altre impostazioni</string>
     <string name="map_show_caches_title">Mostra Cache:</string>
     <string name="map_show_waypoints_title">Mostra waypoint:</string>
     <string name="map_show_other_title">Mostra altro:</string>
@@ -2135,6 +2195,10 @@
     <string name="command_rename_list_result">Lista rinominata</string>
     <string name="command_delete_list_result">Lista eliminata</string>
     <string name="command_unique_list_result">Cache eliminati da altri elenchi</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Consiglia questo cache (%d rimanenti)</item>
+        <item quantity="other">Consiglia questi cache (%d rimanenti)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
         <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
@@ -2289,6 +2353,7 @@
     <string name="receivedownload_error_filenotfound_exception">Errore di file non trovato durante la ricezione.</string>
     <string name="receivedownload_amount_copied">%s copiato</string>
     <string name="receivedownload_cancelled">Trasferimento file annullato</string>
+    <string name="receivedownload_integritycheck_failed">Controllo integrità non riuscito</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Scarica mappa offline</string>
     <string name="delete_offlinemap_title">Elimina mappa offline</string>
@@ -2773,4 +2838,10 @@
     <string name="smiley_disapprove">Disapprovato</string>
     <string name="smiley_question">Domanda</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centro messaggi</string>
+    <string name="mcpolling_summary">Controlla il centro messaggi per i messaggi in arrivo a intervalli regolari</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d messaggio non letto nel centro messaggi</item>
+        <item quantity="other">%d messaggi non letti nel centro messaggi</item>
+    </plurals>
 </resources>

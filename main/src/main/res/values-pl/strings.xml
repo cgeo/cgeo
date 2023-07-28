@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Skrytka</string>
     <string name="detail">Szczegóły</string>
@@ -180,7 +177,7 @@
     <string name="log_problem_missing_text">Ten geocacher poinformował, że skrytka mogła zniknąć.</string>
     <string name="log_problem_other_label">Inne</string>
     <string name="log_problem_other_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
-    <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
+    <string name="log_problem_archive_label">Skrytka powinna zostać archiwizowana</string>
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ta skrytka powinna być zarchiwizowana. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
@@ -252,6 +249,7 @@
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
     <string name="err_log_post_missing_tracking_code">Brak kodu przedmiotu podróżnego.</string>
     <string name="err_log_post_missing_coordinates">Brak współrzędnych.</string>
+    <string name="err_website_message">Strona internetowa odpowiedziała następującym komunikatem: </string>
     <string name="err_log_post_failed">Wygląda na to, że wpis nie został dodany. Proszę sprawdzić to na stronie internetowej skrytki.</string>
     <string name="err_log_post_failed_ec">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na GeoKrety.org.</string>
@@ -901,6 +899,10 @@
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
     <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
     <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
+    <string name="init_custombnitem">Własny wpis menu</string>
+    <string name="init_custombnitem_default">Szukaj w pobliżu (domyślnie)</string>
+    <string name="init_custombnitem_none">(brak)</string>
+    <string name="init_custombnitem_empty_placeholder">(pusty tekst zastępczy)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokod</string>
     <string name="cacheListInfoItem_Difficulty">Trudność</string>
@@ -1471,6 +1473,12 @@
     <string name="cache_recently_viewed">Ostatnio oglądane</string>
     <string name="cache_recently_viewed_empty">Brak ostatnio oglądanych skrytek</string>
     <string name="cache_clear_recently_viewed">wyczyść</string>
+    <string name="cachedetails_progress_refresh">Odświeżenie %s</string>
+    <string name="cachedetails_progress_watch">Dodano do obserwowanych</string>
+    <string name="cachedetails_progress_unwatch">Usunięto z obserwowanych</string>
+    <string name="cachedetails_progress_favorite">Dodano do ulubionych</string>
+    <string name="cachedetails_progress_unfavorite">Usunięto z ulubionych</string>
+    <string name="cachedetails_progress_upload_note">Notatka osobista wysłana</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -2236,6 +2244,12 @@
     <string name="command_rename_list_result">Zmieniono nazwę listy</string>
     <string name="command_delete_list_result">Usunięto listę</string>
     <string name="command_unique_list_result">Usunięte skrytki z innych list</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Zarekomenduj tę skrzynkę (pozostało %d)</item>
+        <item quantity="few">Zarekomenduj tę skrzynkę (pozostało %d)</item>
+        <item quantity="many">Zarekomenduj tę skrzynkę (pozostało %d)</item>
+        <item quantity="other">Zarekomenduj tę skrzynkę (pozostało %d)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
         <item quantity="few">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
@@ -2883,4 +2897,12 @@
     <string name="smiley_disapprove">Odrzucone</string>
     <string name="smiley_question">Pytanie</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centrum wiadomości</string>
+    <string name="mcpolling_summary">Sprawdzaj wiadomości przychodzące do centrum wiadomości w regularnych odstępach czasu</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d nieprzeczytana wiadomość w centrum wiadomości</item>
+        <item quantity="few">%d nieprzeczytane wiadomości w centrum wiadomości</item>
+        <item quantity="many">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
+        <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
+    </plurals>
 </resources>

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detalhes</string>
@@ -252,6 +249,7 @@
     <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
     <string name="err_log_post_missing_tracking_code">Código de acompanhamento em falta.</string>
     <string name="err_log_post_missing_coordinates">Coordenadas em falta.</string>
+    <string name="err_website_message">O sítio web respondeu com a seguinte mensagem: </string>
     <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique na página web da cache se o registo foi publicado.</string>
     <string name="err_log_post_failed_ec">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'Extremcaching.com\'.</string>
     <string name="err_log_post_failed_gk">Parece que o seu registo não foi publicado. Por favor, verifique-o em \'GeoKrety.org\'.</string>
@@ -889,6 +887,10 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
+    <string name="init_custombnitem">Item personalizado do Menu</string>
+    <string name="init_custombnitem_default">Pesquisa nas proximidades (padrão)</string>
+    <string name="init_custombnitem_none">(vazio)</string>
+    <string name="init_custombnitem_empty_placeholder">(espaço reservado vazio)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geo-código</string>
     <string name="cacheListInfoItem_Difficulty">Dificuldade</string>
@@ -1109,6 +1111,7 @@
     <string name="pn_tone_only">Apenas toque</string>
     <string name="pn_text_only">Apenas texto</string>
     <string name="pn_tone_and_text">Toque + texto</string>
+    <string name="pn_enabled">Activar as notificações de proximidade</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satélite</string>
@@ -1443,6 +1446,12 @@
     <string name="cache_recently_viewed">Visualizadas recentemente</string>
     <string name="cache_recently_viewed_empty">Não há caches visualizadas recentemente</string>
     <string name="cache_clear_recently_viewed">Limpar</string>
+    <string name="cachedetails_progress_refresh">%s actualizado</string>
+    <string name="cachedetails_progress_watch">Adicionada à lista de observação</string>
+    <string name="cachedetails_progress_unwatch">Removida da lista de observação</string>
+    <string name="cachedetails_progress_favorite">Adicionada aos favoritos</string>
+    <string name="cachedetails_progress_unfavorite">Removida dos favoritos</string>
+    <string name="cachedetails_progress_upload_note">Nota pessoal carregada</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
@@ -1671,6 +1680,7 @@
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
+    <string name="other_settings">Outras configurações</string>
     <string name="map_show_caches_title">Mostrar Caches:\n</string>
     <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
     <string name="map_show_other_title">Mostrar outro:</string>
@@ -2829,4 +2839,10 @@
     <string name="smiley_disapprove">Reprovado</string>
     <string name="smiley_question">Questão</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centro de mensagens</string>
+    <string name="mcpolling_summary">Verificar se há mensagens recebidas no centro de mensagens, em intervalos regulares</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d mensagem não lida no centro de mensagens</item>
+        <item quantity="other">%d mensagens não lidas no centro de mensagens</item>
+    </plurals>
 </resources>

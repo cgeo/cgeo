@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Détails</string>
@@ -1062,6 +1059,7 @@
     <string name="pn_tone_only">Son seulement</string>
     <string name="pn_text_only">Texte seulement</string>
     <string name="pn_tone_and_text">Son + texte</string>
+    <string name="pn_enabled">Activer les notifications de proximité</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Maps : plan</string>
     <string name="map_source_google_satellite">Google Maps : satellite</string>
@@ -1617,6 +1615,7 @@
     <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
     <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
+    <string name="other_settings">Autres paramètres</string>
     <string name="map_show_caches_title">Afficher les caches :</string>
     <string name="map_show_waypoints_title">Afficher les points de passage :</string>
     <string name="map_show_other_title">Autres options :</string>
