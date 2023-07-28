@@ -5,13 +5,13 @@
 - Novinka: Kontrola integrity pro stažené dlaždice navigace
 - Novinka: Podpora uživatelem vybraného zvuku pro oznámení o přiblížení
 - Novinka: Přepínání upozornění na přiblížení z rychlého nastavení mapy
-- New: Extended GeoJSON support for Google Maps
+- Novinka: Rozšířená podpora GeoJSON pro Google Mapy
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
 - Změna: Nahrazení většiny dialogových oken průběhu aktualizace akcemi na pozadí
-- Change: Use only non-empty logs for 'repeat last log'
-- New: Display logging errors
+- Změna: Použijte pouze neprázdné logy pro 'opakování posledního logu'
+- Novinka: Zobrazí chyby logování
 
 ### Obecné
 - Novinka: Přidány další číselné emotikony (samostatná kategorie)
@@ -25,6 +25,6 @@
 - Novinka: Zobrazení informací o nepřečtených zprávách na domovské obrazovce (volitelné)
 - Novinka: Položka rychlého spuštění pro centrum zpráv
 - Novinka: Poslední spodní položka navigace lze přizpůsobit
-- New: Updated integrated BRouter
-- New: Add interface to OrganicMaps for navigation
-- 
+- Novinka: Aktualizován vestavený BRouter
+- Novinka: Přidáno rozhraní do OrganicMaps pro navigaci
+- Oprava: Znaky kódované v HTML v názvu "trackable last spotted"
