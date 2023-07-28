@@ -5,13 +5,13 @@
 - Nieuw: Integriteitscontrole voor gedownloade routeringstegels
 - Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
 - Nieuw: nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
-- New: Extended GeoJSON support for Google Maps
+- Nieuw: Uitgebreide GeoJSON ondersteuning voor Google Maps
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
 - Wijziging: vervang de meeste voortgangsdialoogvensters door achtergrondacties
-- Change: Use only non-empty logs for 'repeat last log'
-- New: Display logging errors
+- Wijziging: gebruik alleen niet-lege logs voor 'herhaal laatste log'
+- Nieuw: Toon logging fouten
 
 ### Algemeen
 - Nieuw: Voeg meer nummer emojis toe (aparte categorie)
@@ -25,6 +25,6 @@
 - Nieuw: Toon info op het startscherm voor ongelezen berichten (optioneel)
 - Nieuw: Snel openen item voor berichtencentrum
 - Nieuw: Maak laatste navigatie-item aanpasbaar
-- New: Updated integrated BRouter
-- New: Add interface to OrganicMaps for navigation
+- Nieuw: bijgewerkt geïntegreerd BRouter
+- Nieuw: Voeg interface toe aan OrganicMaps voor navigatie
 - 
