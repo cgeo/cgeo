@@ -249,6 +249,7 @@
     <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code ontbreekt.</string>
     <string name="err_log_post_missing_coordinates">Coördinaten ontbreken.</string>
+    <string name="err_website_message">De website reageerde met het volgende bericht: </string>
     <string name="err_log_post_failed">Het lijkt erop dat je log niet werd gepost. Controleer het op de cache webpagina.</string>
     <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Het lijkt erop dat uw log niet werd gepost. Controleer het op GeoKrety.org.</string>
