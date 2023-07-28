@@ -5,13 +5,13 @@
 - Neu: Integritätsprüfung für heruntergeladene Routingdaten
 - Neu: Unterstützung eigener Audiodateien für die Annäherungsbenachrichtigung
 - Neu: Annäherungsbenachrichtigungen in den Kartenschnelleinstellungen umschalten
-- New: Extended GeoJSON support for Google Maps
+- Neu: Erweiterte Unterstützung von GeoJSON auf Google Maps
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
 - Änderung: (Fast alle) Update-Dialoge durch Hintergrundaktionen ersetzt
-- Change: Use only non-empty logs for 'repeat last log'
-- New: Display logging errors
+- Änderung: Verwende nur nicht-leere Logs bei 'Verwende das letzte Log erneut'
+- Neu: Fehler beim Senden von Logs anzeigen
 
 ### Allgemein
 - Neu: Zusätzliche Zahlen-Emojis (eigene Kategorie)
@@ -24,7 +24,7 @@
 - Änderung: Datumsfilter mit 'relativ' vorbelegen
 - Neu: Hinweis auf dem Startbildschirm anzeigen für ungelesene Nachrichten (optional)
 - Neu: Schnellstart-Schaltfläche für Nachrichten-Center
-- New: Make last bottom navigation item customizable
-- New: Updated integrated BRouter
-- New: Add interface to OrganicMaps for navigation
-- 
+- Neu: Benutzerdefinierter Menüeintrag
+- Neu: Internen BRouter auf v1.7.2 aktualisiert
+- Neu: Navigations-Schnittstelle zu OrganicMaps
+- Fix: HTML-encoded chars in 'trackable last spotted" name
