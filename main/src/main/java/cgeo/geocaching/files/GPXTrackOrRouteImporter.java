@@ -63,15 +63,9 @@ public class GPXTrackOrRouteImporter {
     private static IGeoItemSupplier doInBackground(final Context context, final Uri uri) {
         try {
             // default: import properly formatted routes or tracks
-            Route route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
+            Route route = parse(new GPXTrackOrRouteParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
             if (null == route) {
-                route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
-            }
-            if (null == route) {
-                route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
-            }
-            if (null == route) {
-                route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
+                route = parse(new GPXTrackOrRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
             }
             // import waypoints as tracks
             if (null == route) {
@@ -82,7 +76,7 @@ public class GPXTrackOrRouteImporter {
             }
             // as last resort ignore missing namespace identifier
             if (null == route) {
-                route = parse(new GPXTrackParser("", "1.0"), uri);
+                route = parse(new GPXTrackOrRouteParser("", "1.0"), uri);
             }
             if (null != route) {
                 route.calculateNavigationRoute();
