@@ -27,4 +27,4 @@
 - Nieuw: Maak laatste navigatie-item aanpasbaar
 - Nieuw: bijgewerkt geïntegreerd BRouter
 - Nieuw: Voeg interface toe aan OrganicMaps voor navigatie
-- Fix: HTML-encoded chars in 'trackable last spotted" name
+- Oplossing: HTML-gecodeerde tekens in de naam 'trackable last spotted'
