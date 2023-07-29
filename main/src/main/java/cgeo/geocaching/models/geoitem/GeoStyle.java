@@ -14,6 +14,14 @@ import java.util.Objects;
  */
 public class GeoStyle implements Parcelable {
 
+    public static final GeoStyle EMPTY = GeoStyle.builder().build();
+
+    public static final GeoStyle SYSTEM_DEFAULT = GeoStyle.builder()
+            .setStrokeColor(Color.BLACK)
+            .setStrokeWidth(2f)
+            .setFillColor(Color.TRANSPARENT)
+            .build();
+
     @ColorInt @Nullable private final Integer strokeColor;
     @Nullable private final Float strokeWidth;
     @ColorInt @Nullable private final Integer fillColor;
@@ -62,7 +70,7 @@ public class GeoStyle implements Parcelable {
             return style.strokeColor;
         }
         final Integer dv = firstNonNull(defaults);
-        return dv == null ? Color.BLACK : dv;
+        return dv == null ? SYSTEM_DEFAULT.getStrokeColor() : dv;
     }
 
     /** Returns a non-null strokewidth. If width for this object is null then given defaults are used */
@@ -71,7 +79,7 @@ public class GeoStyle implements Parcelable {
             return style.strokeWidth;
         }
         final Float dv = firstNonNull(defaults);
-        return dv == null ? 2f : dv;
+        return dv == null ? SYSTEM_DEFAULT.getStrokeWidth() : dv;
     }
 
     /** Returns a non-null fillcolor. If color for this object is null then given defaults are used */
@@ -81,7 +89,7 @@ public class GeoStyle implements Parcelable {
             return style.fillColor;
         }
         final Integer dv = firstNonNull(defaults);
-        return dv == null ? Color.TRANSPARENT : dv;
+        return dv == null ? SYSTEM_DEFAULT.getFillColor() : dv;
     }
 
     public static int getAlpha(@ColorInt final int color) {
@@ -145,6 +153,8 @@ public class GeoStyle implements Parcelable {
             this.strokeColor = strokeColor;
             return this;
         }
+
+
 
         public Builder setStrokeWidth(@Nullable final Float strokeWidth) {
             this.strokeWidth = strokeWidth;

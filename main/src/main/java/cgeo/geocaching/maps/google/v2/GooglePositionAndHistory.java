@@ -12,7 +12,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
@@ -239,9 +239,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private static ArrayList<List<LatLng>> toLatLng(final IGeoItemSupplier gg) {
         final ArrayList<List<LatLng>> list = new ArrayList<>();
-        for (GeoPrimitive go : gg.getGeoData()) {
-            list.add(GP_CONVERTER.toList(go.getPoints()));
-        }
+        GeoGroup.forAllPrimitives(gg.getItem(), go -> list.add(GP_CONVERTER.toList(go.getPoints())));
         return list;
     }
 

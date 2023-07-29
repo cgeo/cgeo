@@ -1,6 +1,6 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -56,9 +56,7 @@ public class GeopointConverter<T> {
 
     public List<List<T>> toListList(final IGeoItemSupplier gg) {
         final List<List<T>> list = new ArrayList<>();
-        for (GeoPrimitive go : gg.getGeoData()) {
-            list.add(toList(go.getPoints()));
-        }
+        GeoGroup.forAllPrimitives(gg.getItem(), go -> list.add(toList(go.getPoints())));
         return list;
     }
 

@@ -37,12 +37,39 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     private GeoPrimitive(@Nullable final GeoItem.GeoType type, @Nullable final List<Geopoint> points, @Nullable final List<List<Geopoint>> holes, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style, final int zLevel) {
         this.type = type == null || type == GeoType.GROUP ? GeoItem.GeoType.POLYLINE : type;
+
+        //points: ensure point order in case of polygon (see https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6)
+        if (this.type == GeoType.POLYGON && points != null) {
+            fixPolygonLine(points, false);
+        }
         this.points = points == null ? Collections.emptyList() : Collections.unmodifiableList(points);
-        this.holes = holes == null ? null : Collections.unmodifiableList(holes);
+
+        //holes: ensure point order (see https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6)
+        if (holes == null) {
+            this.holes = null;
+        } else {
+            for (List<Geopoint> hole : holes) {
+                fixPolygonLine(hole, true);
+            }
+            this.holes = Collections.unmodifiableList(holes);
+        }
+
         this.icon = icon;
         this.radius = radius;
         this.style = style;
         this.zLevel = Math.max(-1, zLevel);
+    }
+
+    /** This constructor is specifically for creating objects with applied default style */
+    private GeoPrimitive(final GeoPrimitive source, final GeoStyle defaultStyle) {
+        this.type = source.type;
+        this.points = source.points;
+        this.holes = source.holes;
+        this.icon = source.icon;
+        this.radius = source.radius;
+        this.zLevel = source.zLevel;
+
+        this.style = GeoStyle.applyAsDefault(source.style, defaultStyle);
     }
 
 
@@ -114,6 +141,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             case CIRCLE:
                 return getCenter() != null && getCenter().isValid() && getRadius() > 0;
             case POLYGON:
+                return getPoints().size() >= 3;
             case POLYLINE:
             default:
                 return getPoints().size() >= 2;
@@ -179,6 +207,15 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public GeoPrimitive applyDefaultStyle(final GeoStyle style) {
+        if (style == null || Objects.equals(getStyle(), style)) {
+            return this;
+        }
+
+        return new GeoPrimitive(this, style);
     }
 
     public static GeoPrimitive createPoint(final Geopoint p, final GeoStyle style) {
@@ -335,6 +372,43 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             return new GeoPrimitive(type, points, holes, icon, radius, style, zLevel);
         }
 
+    }
+
+    private static void fixPolygonLine(final List<Geopoint> points, final boolean clockwise) {
+        if (points.isEmpty()) {
+            return;
+        }
+
+        //ensure that last point equals first point
+        if (!Objects.equals(points.get(0), points.get(points.size() - 1))) {
+            points.add(points.get(0));
+        }
+
+        //not a valid polygon -> make it empty
+        if (points.size() < 3) {
+            points.clear();
+        }
+
+        //correct orientation if necessary
+        if (isClockwise(points) != clockwise) {
+            Collections.reverse(points);
+        }
+
+    }
+
+    public static boolean isClockwise(final List<Geopoint> points) {
+        if (points.size() < 3) {
+            return false;
+        }
+
+        long sum = 0;
+        Geopoint last = points.get(points.size() - 1);
+        for (Geopoint curr : points) {
+            sum += (long) (curr.getLongitudeE6() - last.getLongitudeE6()) * (curr.getLatitudeE6() + last.getLatitudeE6());
+            last = curr;
+        }
+
+        return sum < 0;
     }
 
 
