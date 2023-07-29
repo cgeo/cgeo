@@ -17,9 +17,13 @@ import java.util.List;
 public class Route implements IGeoItemSupplier, Parcelable {
     private String name = "";
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
-    private final boolean routeable;
+    private boolean routeable;
     protected float distance = 0.0f;
     protected boolean isHidden = false;
+
+    public Route() {
+        // should use setRouteable later if using this constructor
+    }
 
     public Route(final boolean routeable) {
         this.routeable = routeable;
@@ -42,6 +46,9 @@ public class Route implements IGeoItemSupplier, Parcelable {
         this.name = name;
     }
 
+    public void setRouteable(final boolean routeable) {
+        this.routeable = routeable;
+    }
 
     public String getName() {
         return name;
