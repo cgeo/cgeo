@@ -1,4 +1,5 @@
 ### Χάρτης
+- Change (OpenStreetMap maps only): Temporarily disabled multithreading option for testing purposes - we are trying to pin some crashes which may be related to that option
 - Change: Always show popup menu on cache/waypoint long-tap (configurable)
 - New: Add 'Set as target' to map's long-tap popup
 - Fix: Partial files remaining on aborted copying of downloaded files
@@ -6,12 +7,14 @@
 - New: Support for user-selected audio for proximity notifications
 - New: Toggle proximity notifications from map quick settings
 - New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
 
 ### Λεπτομέρειες κρύπτης
 - New: 'Save and upload' button when editing personal note
 - Change: Replace most update progress dialogs by background actions
 - Change: Use only non-empty logs for 'repeat last log'
 - New: Display logging errors
+- New: Allow selecting, copying etc. of image description (EXIF info)
 
 ### Γενικά
 - New: Add more number emojis (separate category)
