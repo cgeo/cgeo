@@ -31,6 +31,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.layers.CoordsIndicatorLayer;
 import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
@@ -266,6 +267,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         new GeoItemTestLayer().initforUnifiedMap(clickableItemsLayer);
 
         new PositionLayer(this, nonClickableItemsLayer);
+        new CoordsIndicatorLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, nonClickableItemsLayer);
         new NavigationTargetLayer(this, nonClickableItemsLayer);
@@ -363,6 +365,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
             // react to mapType
             setMapModeFromMapType();
+            viewModel.coordsIndicator.setValue(null);
             switch (mapType.type) {
                 case UMTT_PlainMap:
                     // restore last saved position and zoom
@@ -381,6 +384,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 case UMTT_TargetCoords:
                     // set given coords as map center
                     mapFragment.setCenter(mapType.coords);
+                    viewModel.coordsIndicator.setValue(mapType.coords);
                     break;
                 case UMTT_SearchResult:
                     // load list of caches and scale map to see them all
