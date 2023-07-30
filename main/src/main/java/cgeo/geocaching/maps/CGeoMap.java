@@ -467,6 +467,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
         }
 
+        mapView.setCoordsMarker(mapOptions != null && mapOptions.mapMode == MapMode.LIVE ? savedCoords : null);
     }
 
     @Override
