@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -61,11 +61,8 @@ abstract class AbstractRouteLayer extends Layer {
     }
 
     private static List<List<Geopoint>> getAllPoints(final Route route) {
-        final List<GeoPrimitive> gos = route.getGeoData();
         final List<List<Geopoint>> result = new ArrayList<>();
-        for (GeoPrimitive go : gos) {
-            result.add(new ArrayList<>(go.getPoints()));
-        }
+        GeoGroup.forAllPrimitives(route.getItem(), p -> result.add(new ArrayList<>(p.getPoints())));
         return result;
     }
 

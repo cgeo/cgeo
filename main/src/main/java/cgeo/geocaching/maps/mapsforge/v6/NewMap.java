@@ -19,7 +19,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
-import cgeo.geocaching.location.GeoObjectList;
+import cgeo.geocaching.location.GeoItemHolder;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
@@ -754,7 +754,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             if (trackLayer != null && (gdp == null || gdp instanceof Route)) {
                 trackLayer.updateRoute(key, gdp, tracks.getColor(key), tracks.getWidth(key));
             }
-            if (null != geoObjectLayer && (gdp == null || gdp instanceof GeoObjectList)) {
+            if (null != geoObjectLayer && (gdp == null || gdp instanceof GeoItemHolder)) {
                 if (gdp == null || gdp.isHidden()) {
                     geoObjectLayer.removeGeoObjectLayer(key);
                 } else {
@@ -765,7 +765,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                     final int defaultFillColor = Color.argb(32, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
                     final Func1<Float, Float> widthAdjuster = w -> MapLineUtils.getWidthFromRaw(w == null ? 1 : w.intValue(), false) * widthFactor;
 
-                    final Layer l = GeoObjectLayer.createGeoObjectLayer(((GeoObjectList) gdp).getGeodata(), geoObjectLayer.getDisplayModel(),
+                    final Layer l = GeoObjectLayer.createGeoObjectLayer(gdp.getItem(), geoObjectLayer.getDisplayModel(),
                             defaultWidth, defaultStrokeColor, defaultFillColor, widthAdjuster);
                     geoObjectLayer.addGeoObjectLayer(key, l);
                 }

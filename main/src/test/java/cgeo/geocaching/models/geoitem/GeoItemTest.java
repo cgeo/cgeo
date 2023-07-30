@@ -99,17 +99,17 @@ public class GeoItemTest {
 
         //within "half linewidth" distance of line
         final int minLineWidth  = GeoItemUtils.getMinPixelTouchWidth();
-        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, 0).touches(addE6(GP_1, minLineWidth / 2, 10), TO_LATLON_E6)).isTrue();
-        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, 0).touches(addE6(GP_1, minLineWidth / 2 + 10, 10), TO_LATLON_E6)).isFalse();
+        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, -1000).touches(addE6(GP_1, minLineWidth / 2, 10), TO_LATLON_E6)).isTrue();
+        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, -1000).touches(addE6(GP_1, minLineWidth / 2 + 10, minLineWidth / 2 + 10), TO_LATLON_E6)).isFalse();
 
         //inside
-        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, 0).touches(addE6(GP_1, 750, 750), TO_LATLON_E6)).isFalse();
-        assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, 0).touches(addE6(GP_1, 750, 750), TO_LATLON_E6)).isTrue();
-        assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, 0).touches(addE6(GP_1, 1000, 0), TO_LATLON_E6)).isFalse();
+        assertThat(polygon(GP_1, 0, false, 0, 1000, 1000, -1000).touches(addE6(GP_1, 250, 250), TO_LATLON_E6)).isFalse();
+        assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, -1000).touches(addE6(GP_1, 250, 250), TO_LATLON_E6)).isTrue();
+        assertThat(polygon(GP_1, 0, true, 0, 1000, 1000, -1000).touches(addE6(GP_1, 1000, 1000), TO_LATLON_E6)).isFalse();
 
         //inside a hole
-        final GeoPrimitive pWithHole = polygon(GP_1, 0, true, 0, 1000, 1000, 1000, 1000, 0)
-                .buildUpon().addHole(geopointList(GP_1, 0, 800, 800, 0)).build();
+        final GeoPrimitive pWithHole = polygon(GP_1, 0, true, 0, 1000, 1000, 0, 0, -1000)
+                .buildUpon().addHole(geopointList(GP_1, 0, 800, 800, -800)).build();
         assertThat(pWithHole.touches(addE6(GP_1, 200, 200), TO_LATLON_E6)).as("inside the hole").isFalse();
         assertThat(pWithHole.touches(addE6(GP_1, 900, 900), TO_LATLON_E6)).as("inside polygon but outside the hole").isTrue();
 
@@ -129,7 +129,12 @@ public class GeoItemTest {
         assertThat(circle(GP_1, 10, 0, false).touches(GP_1, TO_LATLON_E6)).isFalse();
         assertThat(circle(GP_1, 10, 0, true).touches(GP_1, TO_LATLON_E6)).isTrue();
         assertThat(circle(GP_1, 10, 0, true).touches(addE6(GP_1.project(180, 10), - minLineWidth / 2 - 10, 0), TO_LATLON_E6)).isFalse();
+    }
 
+    @Test
+    public void polygonOrientation() {
+        assertThat(GeoPrimitive.isClockwise(geopointList(GP_1, 0, 100, 100, 0))).isTrue();
+        assertThat(GeoPrimitive.isClockwise(geopointList(GP_1, 100, 0, 0, 100))).isFalse();
     }
 
     private static GeoPrimitive polyline(final Geopoint start, final int lineWidth, final int ... points) {

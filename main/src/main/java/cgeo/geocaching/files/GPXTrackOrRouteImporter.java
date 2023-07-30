@@ -1,9 +1,8 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.GeoObjectList;
+import cgeo.geocaching.location.GeoItemHolder;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -21,7 +20,6 @@ import androidx.annotation.NonNull;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -129,10 +127,8 @@ public class GPXTrackOrRouteImporter {
             if (is == null) {
                 return null;
             }
-            final List<GeoPrimitive> gos = GeoJsonUtils.parseGeoJson(is);
-            final GeoObjectList gg = new GeoObjectList();
-            gg.addAll(gos);
-            return gg;
+
+            return new GeoItemHolder(GeoJsonUtils.parseGeoJson(is));
         } catch (JSONException e) {
             Log.w("Problem parsing GeoJson file '" + uri + "': " + e);
             return null;

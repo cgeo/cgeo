@@ -42,8 +42,8 @@ public class Route implements IGeoItemSupplier, Parcelable {
         this.name = name;
     }
 
-    @Override
-    public String getId() {
+
+    public String getName() {
         return name;
     }
 
@@ -77,25 +77,6 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     @Override
-    public List<GeoPrimitive> getGeoData() {
-        final List<GeoPrimitive> result = new ArrayList<>();
-        final List<Geopoint> points = new ArrayList<>();
-        if (getSegments() != null) {
-            for (RouteSegment rs : getSegments()) {
-                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
-                    result.add(GeoPrimitive.createPolyline(points, null));
-                    points.clear();
-                }
-                points.addAll(rs.getPoints());
-            }
-        }
-        if (!points.isEmpty()) {
-            result.add(GeoPrimitive.createPolyline(points, null));
-        }
-        return result;
-    }
-
-    @Override
     public Viewport getViewport() {
         final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
         for (RouteSegment rs : getSegments()) {
@@ -106,7 +87,22 @@ public class Route implements IGeoItemSupplier, Parcelable {
 
     @Override
     public GeoItem getItem() {
-        return GeoGroup.create(getGeoData());
+        final GeoGroup.Builder result = GeoGroup.builder();
+        final List<Geopoint> points = new ArrayList<>();
+        if (getSegments() != null) {
+            for (RouteSegment rs : getSegments()) {
+                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
+                    result.addItems(GeoPrimitive.createPolyline(points, null));
+                    points.clear();
+                }
+                points.addAll(rs.getPoints());
+            }
+        }
+        if (!points.isEmpty()) {
+            result.addItems(GeoPrimitive.createPolyline(points, null));
+        }
+
+        return result.build();
     }
 
     public RouteSegment[] getSegments() {

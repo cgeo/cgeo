@@ -111,6 +111,15 @@ public class GeoGroup implements GeoItem, Parcelable {
         }
     }
 
+    @Override
+    public GeoItem applyDefaultStyle(final GeoStyle style) {
+        final GeoGroup.Builder builder = new GeoGroup.Builder();
+        for (GeoItem item : items) {
+            builder.addItems(item.applyDefaultStyle(style));
+        }
+        return builder.build();
+    }
+
 
     //equals/HashCode
 

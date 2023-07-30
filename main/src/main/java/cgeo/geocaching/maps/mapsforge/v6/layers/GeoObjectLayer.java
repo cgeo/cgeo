@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoItem;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.functions.Func1;
@@ -34,11 +34,11 @@ public class GeoObjectLayer extends GroupLayer {
         this.layers.add(goLayer);
     }
 
-    public static Layer createGeoObjectLayer(final List<GeoPrimitive> objects, final DisplayModel displayModel,
+    public static Layer createGeoObjectLayer(final GeoItem objects, final DisplayModel displayModel,
             final float defaultWidth, final int defaultStrokeColor, final int defaultFillColor, final Func1<Float, Float> widthAdjuster) {
         final GroupLayer gl = new GroupLayer();
         gl.setDisplayModel(displayModel);
-        for (GeoPrimitive item : objects) {
+        GeoGroup.forAllPrimitives(objects, item -> {
             final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle(), defaultStrokeColor));
             strokePaint.setStrokeWidth(widthAdjuster.call(GeoStyle.getStrokeWidth(item.getStyle(), defaultWidth)));
             strokePaint.setStyle(Style.STROKE);
@@ -76,7 +76,7 @@ public class GeoObjectLayer extends GroupLayer {
             }
             goLayer.setDisplayModel(displayModel);
             gl.layers.add(goLayer);
-        }
+        });
         return gl;
     }
 

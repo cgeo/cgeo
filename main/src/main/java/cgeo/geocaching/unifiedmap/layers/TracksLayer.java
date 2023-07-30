@@ -1,8 +1,6 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.maps.Tracks;
-import cgeo.geocaching.models.geoitem.GeoGroup;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -31,19 +29,13 @@ public class TracksLayer {
                 final float defaultWidth = track.getTrackfile().getWidth() / widthFactor;
                 final int defaultStrokeColor = track.getTrackfile().getColor();
                 final int defaultFillColor = Color.argb(128, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
+                final GeoStyle defaultStyle = GeoStyle.builder()
+                        .setFillColor(defaultFillColor)
+                        .setStrokeColor(defaultStrokeColor)
+                        .setStrokeWidth(defaultWidth).build();
 
-                final GeoGroup.Builder geoGroup = GeoGroup.builder();
-                for (GeoPrimitive item : track.getRoute().getGeoData()) {
-                    final GeoStyle style = GeoStyle.builder()
-                        .setStrokeColor(GeoStyle.getStrokeColor(item.getStyle(), defaultStrokeColor))
-                        .setFillColor(GeoStyle.getFillColor(item.getStyle(), defaultFillColor))
-                        .setStrokeWidth(GeoStyle.getStrokeWidth(item.getStyle(), defaultWidth)).build();
-
-                    geoGroup.addItems(item.buildUpon().setStyle(style).build());
-                }
-
-                layer.put(key, geoGroup.build());
-            }
+                layer.put(key, track.getRoute().getItem().applyDefaultStyle(defaultStyle));
+             }
         })));
 
     }

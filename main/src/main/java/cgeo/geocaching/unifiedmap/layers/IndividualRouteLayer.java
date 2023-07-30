@@ -44,9 +44,8 @@ public class IndividualRouteLayer {
                 layer.remove(KEY_INDIVIDUAL_ROUTE);
             } else {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
-                for (GeoPrimitive segment : individualRoute.getGeoData()) {
-                    geoGroup.addItems(GeoPrimitive.createPolyline(segment.getPoints(), lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_TRACK_ROUTE).build());
-                }
+                GeoGroup.forAllPrimitives(individualRoute.getItem(), segment ->
+                        geoGroup.addItems(GeoPrimitive.createPolyline(segment.getPoints(), lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_TRACK_ROUTE).build()));
                 layer.put(KEY_INDIVIDUAL_ROUTE, geoGroup.build());
 
                 for (RouteItem item : individualRoute.getRouteItems()) {
