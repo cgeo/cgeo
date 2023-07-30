@@ -1,17 +1,20 @@
 ### Mappa
-- Cambio: Mostra sempre il menu a comparsa con un tocco prolungato sul cache/waypoint (configurabile)
-- Nuovo: Aggiungi 'Imposta come obiettivo' al popup a lungo tocco della mappa
-- Corretto: File parziali rimanenti sulla copia abortita dei file scaricati
-- Nuovo: Controllo integrità per i tasselli di routing scaricati
-- Nuovo: Supporto per l'audio selezionato dall'utente per le notifiche di prossimità
-- Nuovo: Attiva/Disattiva le notifiche di prossimità dalle impostazioni rapide della mappa
+- Change (OpenStreetMap maps only): Temporarily disabled multithreading option for testing purposes - we are trying to pin some crashes which may be related to that option
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
 - New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
 
 ### Dettagli del cache
 - Nuovo: pulsante 'Salva e carica' durante la modifica della nota personale
 - Cambio: sostituita la maggior parte delle finestre di avanzamento degli aggiornamenti con azioni in background
 - Change: Use only non-empty logs for 'repeat last log'
 - New: Display logging errors
+- New: Allow selecting, copying etc. of image description (EXIF info)
 
 ### Generale
 - Nuovo: Aggiunti più numeri emoji (categoria separata)
