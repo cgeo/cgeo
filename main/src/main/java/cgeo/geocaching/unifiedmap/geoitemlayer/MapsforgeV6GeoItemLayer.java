@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.geoitemlayer;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.mapsforge.v6.layers.Polygon;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
@@ -29,12 +30,10 @@ import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
-import org.mapsforge.map.layer.GroupLayer;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 import org.mapsforge.map.layer.overlay.Circle;
 import org.mapsforge.map.layer.overlay.Marker;
-import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.util.MapViewProjection;
 
@@ -95,18 +94,12 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             default:
                 final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
                 po.addPoints(CollectionStream.of(item.getPoints()).map(MapsforgeV6GeoItemLayer::latLong).toList());
-                if (item.getHoles() == null) {
-                    goLayer = po;
-                } else {
-                    final GroupLayer group = new GroupLayer();
-                    group.layers.add(po);
+                if (item.getHoles() != null) {
                     for (List<Geopoint> hole : item.getHoles()) {
-                        final Polyline plHole = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
-                        plHole.addPoints(CollectionStream.of(hole).map(MapsforgeV6GeoItemLayer::latLong).toList());
-                        group.layers.add(plHole);
+                        po.addHole(CollectionStream.of(hole).map(MapsforgeV6GeoItemLayer::latLong).toList());
                     }
-                    goLayer = group;
                 }
+                goLayer = po;
                 break;
         }
         if (goLayer != null) {
