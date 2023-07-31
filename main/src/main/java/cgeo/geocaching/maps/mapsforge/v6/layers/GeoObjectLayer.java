@@ -20,7 +20,6 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.GroupLayer;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.overlay.FixedPixelCircle;
-import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.model.DisplayModel;
 
@@ -60,18 +59,12 @@ public class GeoObjectLayer extends GroupLayer {
                 default:
                     final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
                     po.addPoints(CollectionStream.of(item.getPoints()).map(GeoObjectLayer::latLong).toList());
-                    if (item.getHoles() == null) {
-                        goLayer = po;
-                    } else {
-                        final GroupLayer group = new GroupLayer();
-                        group.layers.add(po);
+                    if (item.getHoles() != null) {
                         for (List<Geopoint> hole : item.getHoles()) {
-                            final Polyline plHole = new Polyline(strokePaint, AndroidGraphicFactory.INSTANCE);
-                            plHole.addPoints(CollectionStream.of(hole).map(GeoObjectLayer::latLong).toList());
-                            group.layers.add(plHole);
+                            po.addHole(CollectionStream.of(hole).map(GeoObjectLayer::latLong).toList());
                         }
-                        goLayer = group;
                     }
+                    goLayer = po;
                     break;
             }
             goLayer.setDisplayModel(displayModel);
