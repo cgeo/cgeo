@@ -63,6 +63,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigationrail.NavigationRailView;
 
 
 public abstract class AbstractBottomNavigationActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
@@ -249,7 +250,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     }
 
     private void setCustomBNitem() {
-        final MenuItem menu = ((BottomNavigationView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY);
+        final MenuItem menu = (binding.activityBottomNavigation instanceof  NavigationRailView
+                ? ((NavigationRailView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY) // landscpae mode
+                : ((BottomNavigationView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY)); // portrait mode
+
         menu.setVisible(true);
         menu.setEnabled(true);
         final int item = Settings.getCustomBNitem();
