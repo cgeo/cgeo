@@ -132,7 +132,6 @@
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Posting log and uploading images…</string>
     <string name="log_posting_log">Posting log…</string>
-    <string name="log_posting_twitter">Posting tweet…</string>
     <string name="log_posting_vote">Posting cache vote…</string>
     <string name="log_posting_image">Posting images…</string>
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
@@ -871,7 +870,6 @@
     <string name="init_settings_description_unlimited">unlimited</string>
 
     <string name="settings_category_geocaching_additionals">Further services and addon</string>
-    <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Other Logging Options</string>
 
     <string name="settings_goto_url_button">more …</string>
@@ -1191,8 +1189,6 @@
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
     <string name="settings_advanced">Advanced settings</string>
-    <string name="settings_twitter_cache_message">Message for found cache</string>
-    <string name="settings_twitter_trackable_message">Message for found trackable</string>
     <string name="init_ec_icons">Map Icons</string>
     <string name="settings_ec_icons_other">Own style</string>
     <string name="settings_ec_icons_oc">Like OC</string>
@@ -1353,9 +1349,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_token_explain_long">Filling your credential and tapping the \"authorize c:geo\" button will start the process. This process will connect to %s and retrieve an authentication token. That\'s all.</string>
-
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
 
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
@@ -1838,9 +1831,6 @@
     <string name="imageview_error">Couldn\'t load image</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Comment</string>
-
-    <!-- visit -->
-    <string name="visit_tweet">Post this find to Twitter</string>
 
     <!-- map -->
     <string name="map_map">Map</string>
@@ -2333,7 +2323,6 @@
     <string name="fangroup_link"><a href="">German user group</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo on Google Play</a></string>
-    <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
 

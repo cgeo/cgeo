@@ -45,7 +45,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -119,10 +118,6 @@ public class Settings {
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    // twitter api keys
-    @NonNull private static final String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    @NonNull private static final String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private static boolean useCompass = true;
     private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
@@ -302,14 +297,11 @@ public class Settings {
             // migrate from non standard file location and integer based boolean types
             final Editor e = sharedPrefs.edit();
 
-            e.putString(getKey(R.string.pref_temp_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_temp_twitter_token_public), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_public), null));
             e.putBoolean(getKey(R.string.pref_help_shown), prefsV0.getInt(getKey(R.string.pref_help_shown), 0) != 0);
             e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
             e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
             e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
             e.putInt(getKey(R.string.pref_mapsource), prefsV0.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
-            e.putBoolean(getKey(R.string.pref_twitter), prefsV0.getInt(getKey(R.string.pref_twitter), 0) != 0);
             e.putBoolean(getKey(R.string.pref_showaddress), prefsV0.getInt(getKey(R.string.pref_showaddress), 1) != 0);
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
@@ -317,8 +309,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
-            e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
@@ -1323,16 +1313,6 @@ public class Settings {
         }
     }
 
-    @NonNull
-    public static String getTwitterKeyConsumerPublic() {
-        return TWITTER_KEY_CONSUMER_PUBLIC;
-    }
-
-    @NonNull
-    public static String getTwitterKeyConsumerSecret() {
-        return TWITTER_KEY_CONSUMER_SECRET;
-    }
-
     public static String getWebDeviceCode() {
         return getString(R.string.pref_webDeviceCode, null);
     }
@@ -1480,57 +1460,6 @@ public class Settings {
 
     public static void setCreateUDCuseGivenList(final boolean createUDCuseGivenList) {
         putBoolean(R.string.pref_createUDCuseGivenList, createUDCuseGivenList);
-    }
-
-    public static boolean isUseTwitter() {
-        return getBoolean(R.string.pref_twitter, false);
-    }
-
-    private static void setUseTwitter(final boolean useTwitter) {
-        putBoolean(R.string.pref_twitter, useTwitter);
-    }
-
-    public static boolean isTwitterLoginValid() {
-        return StringUtils.isNotBlank(getTokenPublic())
-                && StringUtils.isNotBlank(getTokenSecret());
-    }
-
-    public static String getTokenPublic() {
-        return getString(R.string.pref_twitter_token_public, null);
-    }
-
-    public static String getTokenSecret() {
-        return getString(R.string.pref_twitter_token_secret, null);
-
-    }
-
-    static boolean hasTwitterAuthorization() {
-        return StringUtils.isNotBlank(getTokenPublic())
-                && StringUtils.isNotBlank(getTokenSecret());
-    }
-
-    public static void setTwitterTokens(@Nullable final String tokenPublic,
-                                        @Nullable final String tokenSecret, final boolean enableTwitter) {
-        putString(R.string.pref_twitter_token_public, tokenPublic);
-        putString(R.string.pref_twitter_token_secret, tokenSecret);
-        if (tokenPublic != null) {
-            remove(R.string.pref_temp_twitter_token_public);
-            remove(R.string.pref_temp_twitter_token_secret);
-        }
-        setUseTwitter(enableTwitter);
-    }
-
-    public static void setTwitterTempTokens(@Nullable final String tokenPublic,
-                                            @Nullable final String tokenSecret) {
-        putString(R.string.pref_temp_twitter_token_public, tokenPublic);
-        putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
-    }
-
-    @NonNull
-    public static ImmutablePair<String, String> getTempToken() {
-        final String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
-        final String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
-        return new ImmutablePair<>(tokenPublic, tokenSecret);
     }
 
     public static int getVersion() {
@@ -1723,16 +1652,6 @@ public class Settings {
 
     public static int getNearbySearchLimit() {
         return getInt(R.string.pref_nearbySearchLimit, 0);
-    }
-
-    @NonNull
-    public static String getCacheTwitterMessage() {
-        return StringUtils.defaultString(getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL])."));
-    }
-
-    @NonNull
-    public static String getTrackableTwitterMessage() {
-        return StringUtils.defaultString(getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL])."));
     }
 
     public static int getLogImageScale() {
@@ -2290,7 +2209,6 @@ public class Settings {
                 context.getString(R.string.pref_username), context.getString(R.string.pref_password),
                 context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
                 context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
-                context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
                 context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
                 context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
                 context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),

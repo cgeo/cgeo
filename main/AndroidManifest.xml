@@ -218,25 +218,6 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".twitter.TwitterAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/auth_twitter"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.cgeo.org"
-                    android:pathPrefix="/twitter/"
-                    android:scheme="callback" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".EditWaypointActivity"
             android:label="@string/waypoint_edit_title"
             android:windowSoftInputMode="stateHidden" >
