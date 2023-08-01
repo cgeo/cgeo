@@ -39,10 +39,6 @@ public final class OfflineLogEntry extends LogEntry {
      */
     public final boolean favorite;
     /**
-     * whether tweet for this log shall be published
-     */
-    public final boolean tweet;
-    /**
      * cache rating to be set with this log
      */
     public final Float rating;
@@ -62,7 +58,6 @@ public final class OfflineLogEntry extends LogEntry {
         imageTitlePraefix = in.readString();
         imageScale = in.readInt();
         favorite = in.readInt() == 1;
-        tweet = in.readInt() == 1;
         rating = (Float) in.readValue(Float.class.getClassLoader());
         password = in.readString();
         trackableActions = new HashMap<>();
@@ -75,7 +70,6 @@ public final class OfflineLogEntry extends LogEntry {
         dest.writeString(imageTitlePraefix);
         dest.writeInt(imageScale);
         dest.writeInt(favorite ? 1 : 0);
-        dest.writeInt(tweet ? 1 : 0);
         dest.writeValue(rating);
         dest.writeString(password);
         dest.writeMap(trackableActions);
@@ -101,7 +95,6 @@ public final class OfflineLogEntry extends LogEntry {
         this.imageTitlePraefix = builder.imageTitlePraefix;
         this.imageScale = builder.imageScale;
         this.favorite = builder.favorite;
-        this.tweet = builder.tweet;
         this.rating = builder.rating;
         this.password = builder.password;
         this.trackableActions = Collections.unmodifiableMap(builder.trackableActions);
@@ -119,7 +112,6 @@ public final class OfflineLogEntry extends LogEntry {
         private String imageTitlePraefix = "";
         private int imageScale = -1; // not set
         private boolean favorite = false;
-        private boolean tweet = false;
         private Float rating = null;
         private String password = null;
         private final Map<String, LogTypeTrackable> trackableActions = new HashMap<>();
@@ -144,11 +136,6 @@ public final class OfflineLogEntry extends LogEntry {
 
         public T setFavorite(final boolean favorite) {
             this.favorite = favorite;
-            return (T) this;
-        }
-
-        public T setTweet(final boolean tweet) {
-            this.tweet = tweet;
             return (T) this;
         }
 
@@ -189,7 +176,6 @@ public final class OfflineLogEntry extends LogEntry {
         changed |= !Objects.equals(reportProblem, prev.reportProblem);
         changed |= !Objects.equals(date, prev.date);
         changed |= favorite != prev.favorite;
-        changed |= tweet != prev.tweet;
         changed |= !equalsFloat(rating, prev.rating, 0.2f);
         changed |= !Objects.equals(password, prev.password);
         changed |= !Objects.equals(imageScale, prev.imageScale);

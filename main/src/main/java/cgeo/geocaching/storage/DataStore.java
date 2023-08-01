@@ -446,7 +446,7 @@ public class DataStore {
             + "favorite INTEGER, "
             + "rating FLOAT, "
             + "password TEXT, "
-            + "tweet INTEGER"
+            + "tweet INTEGER" // no longer used
             + "); ";
     private static final String dbCreateLogsOfflineImages = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOfflineImages + " ("
@@ -1529,7 +1529,7 @@ public class DataStore {
                             createColumnIfNotExists(db, dbTableLogsOffline, "favorite INTEGER");
                             createColumnIfNotExists(db, dbTableLogsOffline, "rating FLOAT");
                             createColumnIfNotExists(db, dbTableLogsOffline, "password TEXT");
-                            createColumnIfNotExists(db, dbTableLogsOffline, "tweet INTEGER");
+                            createColumnIfNotExists(db, dbTableLogsOffline, "tweet INTEGER"); // no longer used
                             //add new tables
                             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineImages);
                             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogsOfflineTrackables);
@@ -5065,7 +5065,6 @@ public class DataStore {
 
                     values.put("image_title_prefix", logEntry.imageTitlePraefix);
                     values.put("image_scale", logEntry.imageScale);
-                    values.put("tweet", logEntry.tweet ? 1 : 0);
                     values.put("favorite", logEntry.favorite ? 1 : 0);
                     values.put("rating", logEntry.rating);
                     values.put("password", logEntry.password);
@@ -5153,7 +5152,6 @@ public class DataStore {
                                 .setImageTitlePraefix(c.getString(7))
                                 .setImageScale(c.getInt(8))
                                 .setFavorite(c.getInt(9) > 0)
-                                .setTweet(c.getInt(10) > 0)
                                 .setRating(c.isNull(11) ? null : c.getFloat(11))
                                 .setPassword(c.getString(12))
                 );

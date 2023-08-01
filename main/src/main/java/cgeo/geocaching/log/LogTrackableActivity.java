@@ -278,8 +278,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             binding.coordinates.setOnClickListener(new CoordinatesListener());
         }
 
-        initTwitter();
-
         if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
             possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
         }
@@ -327,15 +325,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private void showProgress(final boolean loading) {
         readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-    }
-
-    private void initTwitter() {
-        binding.tweet.setChecked(true);
-        if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            binding.tweetBox.setVisibility(View.VISIBLE);
-        } else {
-            binding.tweetBox.setVisibility(View.GONE);
-        }
     }
 
     @Override

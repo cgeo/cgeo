@@ -322,7 +322,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(logEntry.reportProblem);
         cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
         binding.favoriteCheck.setChecked(logEntry.favorite);
-        binding.tweet.setChecked(logEntry.tweet);
         binding.logPassword.setText(logEntry.password);
 
         imageListFragment.setImages(logEntry.logImages);
@@ -339,7 +338,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(binding.favoriteCheck.isChecked())
-                .setTweet(binding.tweet.isChecked())
                 .setPassword(binding.logPassword.getText().toString());
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
@@ -377,7 +375,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(ReportProblemType.NO_PROBLEM);
         cacheVotingBar.setRating(cache.getMyVote());
         imageListFragment.clearImages();
-        binding.tweet.setChecked(true);
         binding.favoriteCheck.setChecked(false);
         binding.logPassword.setText(StringUtils.EMPTY);
 
@@ -422,7 +419,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     public void refreshGui() {
-        updateTweetBox(logType.get());
         updateLogPasswordBox(logType.get());
         cacheVotingBar.validateVisibility(cache, logType.get());
         initializeFavoriteCheck();
@@ -433,14 +429,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void showProgress(final boolean loading) {
         readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-    }
-
-    private void updateTweetBox(final LogType type) {
-        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            binding.tweet.setVisibility(View.VISIBLE);
-        } else {
-            binding.tweet.setVisibility(View.GONE);
-        }
     }
 
     private void updateLogPasswordBox(final LogType type) {

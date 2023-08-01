@@ -234,8 +234,6 @@
     <string translatable="false" name="init_gcvote">GCvote.com</string>
     <string translatable="false" name="facebook_title">Facebook</string>
     <string translatable="false" name="twitter_title">Twitter</string>
-    <string translatable="false" name="init_twitter">Twitter</string>
-    <string translatable="false" name="auth_twitter">Twitter</string>
     <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
     <string translatable="false" name="cache_menu_pebble">Pebble</string>
     <string translatable="false" name="init_geokrety">GeoKrety.org</string>

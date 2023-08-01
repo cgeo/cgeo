@@ -99,27 +99,6 @@
                 android:maxLength="4000" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:id="@+id/tweet_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <CheckBox
-                android:id="@+id/tweet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:gravity="center"
-                android:padding="2sp"
-                android:text="@string/visit_tweet" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator

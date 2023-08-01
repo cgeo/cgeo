@@ -15,7 +15,6 @@ import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
@@ -25,7 +24,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.view.View;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -103,7 +101,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                 }
 
                 imageResult = postImages(logBuilder, logResult);
-                storeLogInDatabaseAndTwitter(logBuilder);
+                storeLogInDatabase(logBuilder);
                 postCacheRating(cacheConnector);
                 postTrackables(log);
             }
@@ -168,7 +166,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
         return imageResult;
     }
 
-    private void storeLogInDatabaseAndTwitter(final LogEntry.Builder logBuilder) {
+    private void storeLogInDatabase(final LogEntry.Builder logBuilder) {
         // update logs in DB
         final List<LogEntry> newLogs = new ArrayList<>(taskInterface.geocache.getLogs());
         final LogEntry logNow = logBuilder.build();
@@ -182,10 +180,6 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
         // update offline log in DB
         taskInterface.geocache.clearOfflineLog();
 
-        if (taskInterface.logType == LogType.FOUND_IT && taskInterface.binding.tweet.isChecked() && taskInterface.binding.tweet.getVisibility() == View.VISIBLE) {
-            publishProgress(res.getString(R.string.log_posting_twitter));
-            Twitter.postTweetCache(taskInterface.geocache.getGeocode(), logNow);
-        }
     }
 
     private float getLogRating(final IVotingCapability votingConnector) {

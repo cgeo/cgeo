@@ -224,7 +224,6 @@ public class DataStoreTest {
                     .setImageScale(123)
                     .setImageTitlePraefix("ImagePraefix")
                     .setFavorite(false)
-                    .setTweet(true)
                     .setRating(4.5f)
                     .addLogImage(new Image.Builder().setUrl("https://www.cgeo.org/images/logo.png").setTitle("The logo").setDescription("This is the logo").build())
                     .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_multi.png").setTitle("Multicache icon").setDescription("This is the icon for a multicache").build())
@@ -245,7 +244,6 @@ public class DataStoreTest {
                     .setImageScale(456)
                     .setImageTitlePraefix("NewImagePraefix")
                     .setFavorite(true)
-                    .setTweet(false)
                     .setRating(1.0f)
                     .setPassword("pwd")
                     .setLogImages(new ArrayList<>())
@@ -307,7 +305,6 @@ public class DataStoreTest {
         assertThat(dbLogEntry.imageScale).isEqualTo(expectedLogEntry.imageScale);
         assertThat(dbLogEntry.imageTitlePraefix).isEqualTo(expectedLogEntry.imageTitlePraefix);
         assertThat(dbLogEntry.favorite).isEqualTo(expectedLogEntry.favorite);
-        assertThat(dbLogEntry.tweet).isEqualTo(expectedLogEntry.tweet);
         assertThat(dbLogEntry.rating).isEqualTo(expectedLogEntry.rating);
         assertThat(dbLogEntry.password).isEqualTo(expectedLogEntry.password);
 

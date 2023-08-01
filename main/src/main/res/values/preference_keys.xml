@@ -138,14 +138,6 @@
     <string translatable="false" name="pref_fakekey_sendtocgeo_info">fakekey_sendtocgeo_info</string>
     <string translatable="false" name="pref_fakekey_sendtocgeo_website">fakekey_sendtocgeo_website</string>
 
-    <!-- settings for twitter screen -->
-    <string translatable="false" name="preference_screen_twitter">preference_screen_twitter</string>
-    <string translatable="false" name="pref_twitter">twitter</string>
-    <string translatable="false" name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
-    <string translatable="false" name="pref_twitter_cache_message">twitter_cache_message</string>
-    <string translatable="false" name="pref_twitter_trackable_message">twitter_trackable_message</string>
-
-
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for appearance screen -->
     <string translatable="false" name="preference_screen_appearance">preference_screen_appearance</string>
@@ -496,11 +488,6 @@
     <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>
     <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
     <string translatable="false" name="pref_temp_su_token_public">su-temp-token-public</string>
-
-    <string translatable="false" name="pref_twitter_token_secret">tokensecret</string>
-    <string translatable="false" name="pref_twitter_token_public">tokenpublic</string>
-    <string translatable="false" name="pref_temp_twitter_token_secret">temp-token-secret</string>
-    <string translatable="false" name="pref_temp_twitter_token_public">temp-token-public</string>
 
     <!-- services => additional settings -->
     <string translatable="false" name="pref_alc_advanced">alc_advanced</string>

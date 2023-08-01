@@ -176,7 +176,6 @@ public class LogEntryTest {
                 .setLogType(LogType.DIDNT_FIND_IT)
                 .setDate(50)
                 .setFavorite(true)
-                .setTweet(true)
                 .setRating(5.0f)
                 .setPassword("pwd")
                 .setImageScale(5)
@@ -195,7 +194,6 @@ public class LogEntryTest {
         assertThat(otherLogEntry.logType).isEqualTo(LogType.DIDNT_FIND_IT);
         assertThat(otherLogEntry.date).isEqualTo(50);
         assertThat(otherLogEntry.favorite).isEqualTo(true);
-        assertThat(otherLogEntry.tweet).isEqualTo(true);
         assertThat(otherLogEntry.rating).isEqualTo(5.0f);
         assertThat(otherLogEntry.imageScale).isEqualTo(5);
         assertThat(otherLogEntry.password).isEqualTo("pwd");

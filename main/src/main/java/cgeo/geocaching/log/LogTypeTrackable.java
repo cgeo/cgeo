@@ -32,8 +32,6 @@ public enum LogTypeTrackable {
     private final int resourceId;
     @DrawableRes
     public final int markerId;
-    // A link to the old LogType. This is done while Twitter still only handle LogType
-    public final LogType oldLogtype;
 
     LogTypeTrackable(final int id, final int gkid, @NonNull final String action, @StringRes final int resourceId, @DrawableRes final int markerId, final LogType oldLogtype, final int gcApiId) {
         this.id = id;
@@ -42,7 +40,6 @@ public enum LogTypeTrackable {
         this.action = action;
         this.resourceId = resourceId;
         this.markerId = markerId;
-        this.oldLogtype = oldLogtype;
     }
 
     LogTypeTrackable(final int id, final int gkid, @NonNull final String action, @StringRes final int resourceId, @DrawableRes final int markerId, final LogType oldLogtype) {
