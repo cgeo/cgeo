@@ -1,6 +1,7 @@
 package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
@@ -40,8 +41,7 @@ public class MapsMeCacheListApp extends AbstractApp implements CacheListApp {
 
     @Override
     public boolean isInstalled() {
-        // API can handle installing on the fly
-        return true;
+        return MapsWithMeApi.isMapsWithMeInstalled(CgeoApplication.getInstance());
     }
 
     /**
