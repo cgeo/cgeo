@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
@@ -100,7 +100,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
-public class MainActivity extends AbstractBottomNavigationActivity {
+public class MainActivity extends AbstractNavigationBarActivity {
 
     private MainActivityBinding binding;
 

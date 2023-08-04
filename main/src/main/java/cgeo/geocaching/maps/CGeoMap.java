@@ -6,7 +6,7 @@ import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.MapGoogleBinding;
@@ -143,7 +143,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
-    private AbstractBottomNavigationActivity activity;
+    private AbstractNavigationBarActivity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
     private MapSource mapSource;
@@ -477,7 +477,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // class init
         res = this.getResources();
-        activity = (AbstractBottomNavigationActivity) this.getActivity();
+        activity = (AbstractNavigationBarActivity) this.getActivity();
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 

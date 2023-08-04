@@ -6,7 +6,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -88,7 +88,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 
-public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
+public class UnifiedMapActivity extends AbstractNavigationBarActivity {
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 

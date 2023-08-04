@@ -13,18 +13,16 @@
 
     <FrameLayout
         android:id="@+id/activity_content"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/activity_bottom_navigation" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/activity_navigationbar" />
 
-    <!-- Show a navigation rail on landscape devices instead. -->
-    <com.google.android.material.navigationrail.NavigationRailView
-        android:id="@+id/activity_bottom_navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/actionBarSpacer"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/activity_navigationbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/activity_navigationbar_menu" />
 </cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>
