@@ -84,7 +84,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     case WAYPOINT:
                         assert data instanceof Waypoint;
                         final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        holder.binding.detail.setText(data.getGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
+                        holder.binding.detail.setText(((Waypoint) data).getShortGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
                         holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
                         break;
                     case COORDS:
