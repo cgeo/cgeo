@@ -141,6 +141,7 @@ public class TileProviderFactory {
         registerTileProvider(new OsmOrgSource());
         registerTileProvider(new OsmDeSource());
         registerTileProvider(new CyclosmSource());
+        registerTileProvider(new OpenTopoMapSource());
 
         // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =
