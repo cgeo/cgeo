@@ -9,6 +9,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.livedata.ConstantLiveData;
 import cgeo.geocaching.utils.livedata.Event;
 import cgeo.geocaching.utils.livedata.HashMapLiveData;
@@ -16,6 +17,7 @@ import cgeo.geocaching.utils.livedata.HashMapLiveData;
 import android.content.Context;
 import android.location.Location;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -33,7 +35,8 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
      * Event based LiveData notifying about track updates
      */
     public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
-    public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
+    public final MutableLiveData<PositionAndHeading> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
+    public final MutableLiveData<Float> bearing = new MutableLiveData<>();
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
     public final HashMapLiveData<String, IWaypoint> geoItems = new HashMapLiveData<>();
@@ -52,7 +55,8 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         if (ph != null) {
             ph.rememberTrailPosition(location);
         }
-        positionAndHeading.setValue(new Pair<>(location, heading));
+        Log.e("Set heading=" + heading + ", pos=" + location.getLatitude() + "/" + location.getLongitude());
+        positionAndHeading.setValue(new PositionAndHeading(location, heading));
     }
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
@@ -100,6 +104,26 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         public Target(final Geopoint geopoint, final String geocode) {
             this.geopoint = geopoint;
             this.geocode = geocode;
+        }
+    }
+
+    public static class PositionAndHeading {
+        public Location location;
+        public float heading;
+
+        PositionAndHeading(final Location location, final float heading) {
+            this.location = location;
+            this.heading = heading;
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            return obj instanceof PositionAndHeading && super.equals(location) && super.equals(heading);
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
         }
     }
 }

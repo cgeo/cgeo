@@ -1,5 +1,7 @@
 package cgeo.geocaching.unifiedmap;
 
+import static org.oscim.utils.math.MathUtils.random;
+
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.Intents;
@@ -176,7 +178,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                            mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                            mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, random() > 0.5f ? 0.0f : 15.1f /*currentHeading*/);
                             // @todo: check if proximity notification needs an update
                         }
                     }
@@ -191,11 +193,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (mapActivity == null) {
                 return false;
             }
-            final Pair<Location, Float> positionAndHeading = mapActivity.viewModel.positionAndHeading.getValue();
+            final UnifiedMapViewModel.PositionAndHeading positionAndHeading = mapActivity.viewModel.positionAndHeading.getValue();
             if (positionAndHeading == null) {
                 return true;
             }
-            return Math.abs(AngleUtils.difference(currentHeading, positionAndHeading.second)) > MIN_HEADING_DELTA;
+            return Math.abs(AngleUtils.difference(currentHeading, positionAndHeading.heading)) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistanceOrAccuracy() {
@@ -208,6 +210,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 return true;
             }
             // @todo: NewMap uses a more sophisticated calculation taking map dimensions into account - check if this is still needed
+            Log.e("geo: distance=" + currentLocation.distanceTo(lastLocation) + ", last=" + lastLocation + ", current=" + currentLocation);
             return currentLocation.distanceTo(lastLocation) > MIN_LOCATION_DELTA;
         }
     }

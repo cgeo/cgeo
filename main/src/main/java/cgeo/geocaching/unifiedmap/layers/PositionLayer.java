@@ -9,6 +9,7 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -37,7 +38,7 @@ public class PositionLayer {
             .build();
 
 
-    Pair<Location, Float> lastPos = null;
+    UnifiedMapViewModel.PositionAndHeading lastPos = null;
 
     public PositionLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
@@ -46,13 +47,14 @@ public class PositionLayer {
             if (!positionAndHeading.equals(lastPos)) {
                 lastPos = positionAndHeading;
 
-                layer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(positionAndHeading.first),
-                                positionAndHeading.first.getAccuracy() / 1000.0f, accuracyStyle)
+                layer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(positionAndHeading.location),
+                                positionAndHeading.location.getAccuracy() / 1000.0f, accuracyStyle)
                         .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION_ACCURACY_CIRCLE).build());
 
+                final Float currentBearing = viewModel.bearing.getValue();
                 layer.put(KEY_POSITION,
-                        GeoPrimitive.createMarker(new Geopoint(positionAndHeading.first), GeoIcon.builder()
-                                        .setRotation(positionAndHeading.second)
+                        GeoPrimitive.createMarker(new Geopoint(positionAndHeading.location), GeoIcon.builder()
+                                        .setRotation(AngleUtils.normalize(positionAndHeading.heading + (currentBearing != null ? currentBearing : 0.0f)))
                                         .setBitmap(markerPosition).build())
                                 .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
             }

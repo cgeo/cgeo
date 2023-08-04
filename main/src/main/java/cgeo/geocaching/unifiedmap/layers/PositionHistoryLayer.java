@@ -47,8 +47,8 @@ public class PositionHistoryLayer {
         viewModel.positionHistory.observe(activity, positionHistory -> drawHistory());
 
         viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
-            if (!positionAndHeading.first.equals(lastPos)) {
-                lastPos = positionAndHeading.first;
+            if (!positionAndHeading.location.equals(lastPos)) {
+                lastPos = positionAndHeading.location;
                 drawHistory();
             }
         });

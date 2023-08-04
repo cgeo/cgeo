@@ -63,8 +63,8 @@ public class NavigationTargetLayer {
         });
 
         viewModel.positionAndHeading.observe(activity, locationFloatPair -> {
-            if (currentLocation == null || !currentLocation.equals(locationFloatPair.first)) {
-                currentLocation = locationFloatPair.first;
+            if (currentLocation == null || !currentLocation.equals(locationFloatPair.location)) {
+                currentLocation = locationFloatPair.location;
                 repaintHelper(viewModel.target.getValue());
             }
         });

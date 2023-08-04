@@ -89,6 +89,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mapUpdateListener = (event, mapPosition) -> {
             if (event == Map.ROTATE_EVENT) {
                 repaintRotationIndicator(mapPosition.bearing);
+                viewModel.bearing.setValue(mapPosition.bearing);
             }
             if (event == Map.MOVE_EVENT && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
