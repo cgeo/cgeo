@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -93,7 +93,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
-    private WeakReference<AbstractBottomNavigationActivity> activityRef;
+    private WeakReference<AbstractNavigationBarActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
     private Marker coordsMarker;
@@ -252,7 +252,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return;
         }
 
-        activityRef = new WeakReference<>((AbstractBottomNavigationActivity) context);
+        activityRef = new WeakReference<>((AbstractNavigationBarActivity) context);
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
@@ -270,7 +270,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         getMapAsync(this);
-        gestureDetector = new GestureDetector(context, new GestureListener((AbstractBottomNavigationActivity) context));
+        gestureDetector = new GestureDetector(context, new GestureListener((AbstractNavigationBarActivity) context));
     }
 
 
@@ -461,9 +461,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         private static final String GOOGLEMAP_ZOOMOUT_BUTTON = "GoogleMapZoomOutButton";
         private static final String GOOGLEMAP_COMPASS = "GoogleMapCompass";
 
-        private final WeakReference<AbstractBottomNavigationActivity> activityRef;
+        private final WeakReference<AbstractNavigationBarActivity> activityRef;
 
-        GestureListener(final AbstractBottomNavigationActivity activity) {
+        GestureListener(final AbstractNavigationBarActivity activity) {
             super();
             this.activityRef = new WeakReference<>(activity);
         }

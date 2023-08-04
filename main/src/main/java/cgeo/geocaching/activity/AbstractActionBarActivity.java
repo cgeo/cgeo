@@ -21,7 +21,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             // don't display a back button it the activity is running as top-level activity with bottom navigation attached
-            actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractBottomNavigationActivity));
+            actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractNavigationBarActivity));
         }
     }
 

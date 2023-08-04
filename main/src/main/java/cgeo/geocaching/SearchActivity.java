@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -50,7 +50,7 @@ import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
 import org.apache.commons.lang3.StringUtils;
 
-public class SearchActivity extends AbstractBottomNavigationActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class SearchActivity extends AbstractNavigationBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";

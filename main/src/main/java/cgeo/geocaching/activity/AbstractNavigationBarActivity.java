@@ -11,7 +11,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
+import cgeo.geocaching.databinding.ActivityNavigationbarBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.list.PseudoList;
@@ -63,7 +63,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationBarView;
 
-public abstract class AbstractBottomNavigationActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
+public abstract class AbstractNavigationBarActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
     private static final String STATE_BACKUPUTILS = "backuputils";
 
     public static final @IdRes
@@ -87,7 +87,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     private BackupUtils backupUtils = null;
 
 
-    private ActivityBottomNavigationBinding binding = null;
+    private ActivityNavigationbarBinding binding = null;
 
     private final ConnectivityChangeReceiver connectivityChangeReceiver = new ConnectivityChangeReceiver();
     private final Handler loginHandler = new Handler();
@@ -104,7 +104,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     @Override
     public void setContentView(final View contentView) {
-        binding = ActivityBottomNavigationBinding.inflate(getLayoutInflater());
+        binding = ActivityNavigationbarBinding.inflate(getLayoutInflater());
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
 
@@ -154,8 +154,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         final ListAdapter adapter = new ArrayAdapter<Geocache>(this, R.layout.cacheslist_item_select, lastCaches) {
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                return GeoItemSelectorUtils.createGeocacheItemView(AbstractBottomNavigationActivity.this, getItem(position),
-                        GeoItemSelectorUtils.getOrCreateView(AbstractBottomNavigationActivity.this, convertView, parent));
+                return GeoItemSelectorUtils.createGeocacheItemView(AbstractNavigationBarActivity.this, getItem(position),
+                        GeoItemSelectorUtils.getOrCreateView(AbstractNavigationBarActivity.this, convertView, parent));
             }
         };
         Dialogs.newBuilder(this)
@@ -225,15 +225,15 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     public void updateSelectedBottomNavItemId() {
         // unregister listener before changing anything, as it would otherwise trigger the listener directly
-        ((NavigationBarView) binding.activityBottomNavigation).setOnItemSelectedListener(null);
+        ((NavigationBarView) binding.activityNavigationbar).setOnItemSelectedListener(null);
 
         final int menuId = getSelectedBottomItemId();
 
         if (menuId == MENU_HIDE_BOTTOM_NAVIGATION) {
-            binding.activityBottomNavigation.setVisibility(View.GONE);
+            binding.activityNavigationbar.setVisibility(View.GONE);
         } else {
-            binding.activityBottomNavigation.setVisibility(View.VISIBLE);
-            ((NavigationBarView) binding.activityBottomNavigation).setSelectedItemId(menuId);
+            binding.activityNavigationbar.setVisibility(View.VISIBLE);
+            ((NavigationBarView) binding.activityNavigationbar).setSelectedItemId(menuId);
         }
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
@@ -243,11 +243,11 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
 
         // re-register the listener
-        ((NavigationBarView) binding.activityBottomNavigation).setOnItemSelectedListener(this);
+        ((NavigationBarView) binding.activityNavigationbar).setOnItemSelectedListener(this);
     }
 
     private void setCustomBNitem() {
-        final MenuItem menu = ((NavigationBarView) binding.activityBottomNavigation).getMenu().findItem(MENU_NEARBY);
+        final MenuItem menu = ((NavigationBarView) binding.activityNavigationbar).getMenu().findItem(MENU_NEARBY);
 
         menu.setVisible(true);
         menu.setEnabled(true);
@@ -427,7 +427,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
         synchronized (lowPrioNotificationCounter) {
             lowPrioNotificationCounter.set(lowPrioNotificationCounter.get() + delta);
-            final BadgeDrawable badge = ((NavigationBarView) binding.activityBottomNavigation).getOrCreateBadge(MENU_HOME);
+            final BadgeDrawable badge = ((NavigationBarView) binding.activityNavigationbar).getOrCreateBadge(MENU_HOME);
             badge.clearNumber();
             badge.setBackgroundColor(badgeColor);
             badge.setVisible(lowPrioNotificationCounter.get() > 0);
