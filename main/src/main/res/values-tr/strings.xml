@@ -124,7 +124,6 @@
     <string name="log_saving">Kayıt gönderiliyor…</string>
     <string name="log_saving_and_uploading">Kaydınız yayınlanıyor ve resimler yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
-    <string name="log_posting_twitter">Tweet gönderiliyor…</string>
     <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
     <string name="log_posting_image">Resimler gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
@@ -638,7 +637,6 @@
     <string name="settings_category_nearbysearch">Yakınlarda ara</string>
     <string name="init_nearbysearchlimit_title">Yakınları arama limiti</string>
     <string name="settings_category_geocaching_additionals">Diğer servisler ve eklentiler</string>
-    <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
     <string name="settings_service_activate">Etkinleştir</string>
@@ -899,8 +897,6 @@
     <string name="settings_settings">Ayarlar</string>
     <string name="settings_information">Bilgi</string>
     <string name="settings_advanced">Gelişmiş ayarlar</string>
-    <string name="settings_twitter_cache_message">Bulunan Geocache için mesaj</string>
-    <string name="settings_twitter_trackable_message">Bulunan Trackable için mesaj</string>
     <string name="init_ec_icons">Harita Simgeleri</string>
     <string name="settings_ec_icons_other">Kendi tarzı</string>
     <string name="settings_ec_icons_oc">OC</string>
@@ -1027,8 +1023,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_token_explain_long">Hesap bilgilerinizi doldurup \"c:geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem, %s adresine bağlanıp kimlik doğrulama kodunu almaktır. Hepsi bu kadar.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo şimdi Twitter\'da yayın yapmaya yetkili.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
     <!-- auth geokrety -->
@@ -1375,8 +1369,6 @@
     <!-- ImageView -->
     <string name="imageview_metadata_geopoint">Geopuan</string>
     <string name="imageview_metadata_comment">Yorum</string>
-    <!-- visit -->
-    <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
     <string name="map_map">Harita</string>
     <string name="map_live">Canlı Harita</string>
@@ -1845,7 +1837,6 @@
     <string name="fangroup_link"><a href="">Alman kullanıcı grubu</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
-    <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->

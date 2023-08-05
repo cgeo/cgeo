@@ -74,7 +74,6 @@
     <string name="log_tb_archived">Na-arkibo</string>
     <string name="log_saving">Pagpasa sa log…</string>
     <string name="log_posting_log">Ang pag-post sa log…</string>
-    <string name="log_posting_twitter">Ang pag-post sa tweet…</string>
     <string name="log_posting_generic_trackable">Nagpost sa %1$s %2$d/%3$d</string>
     <string name="log_clear">Tin-aw</string>
     <string name="log_post_not_possible">Giproseso ang pag-download sa datos…\nPalihug suway og balik human sa pipila ka mga segundo o suta-a ang imoha nga koneksyon sa internet.</string>
@@ -314,7 +313,6 @@
     <string name="settings_title_basicmembers">Pilianan para sa sukaranon na mga miyembro</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu sa nabigasyon</string>
-    <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Lain nga kapilian sa pag logging</string>
     <string name="settings_goto_url_button">dugang …</string>
     <string name="settings_service_activate">Pag-aktibo</string>
@@ -431,8 +429,6 @@
     <string name="settings_open_geokretymap_website">Pag-abli sa website sa GeoKrety.org</string>
     <string name="settings_settings">Mga Setting</string>
     <string name="settings_information">Impormasyon</string>
-    <string name="settings_twitter_cache_message">Mensahe alang sa nakit-an nga cache</string>
-    <string name="settings_twitter_trackable_message">Mensahe alang sa nakit-an nga trackable</string>
     <string name="init_ec_icons">Mga Icon sa Mapa</string>
     <string name="settings_ec_icons_other">Kaugalingong istilo</string>
     <string name="settings_ec_icons_oc">Pareha sa OC</string>
@@ -480,8 +476,6 @@
     <string name="auth_credentials_explain_short">Ang sunod nga proseso kay magtugot sa <b>c:geo</b> nga maka-access %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang kani nga proseso kay nagtugot sa <b>c:geo</b> nga maka-access %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">ang c:geo kay ge awtorisar nga maka-post sa Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">ang c:geo kay ge awtorisar para makig-interact kauban ang %s.</string>
     <!-- auth geokrety -->
@@ -676,8 +670,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">I-post ning nakit-an sa Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mga mapa nga live</string>
@@ -1008,7 +1000,6 @@
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Suporta</string>
     <string name="website_title">Websayt</string>
-    <string name="about_twitter">Ang <b>c:geo</b> ba magmantala og bag-o nga estado sa Twitter matag oras nya mo log ka og cache?</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mosturya na kompas</string>

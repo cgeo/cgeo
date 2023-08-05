@@ -124,7 +124,6 @@
     <string name="log_saving">Zapisuję w dzienniku…</string>
     <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
-    <string name="log_posting_twitter">Wysyłanie tweetu…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrytki…</string>
     <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
@@ -772,7 +771,6 @@
     <string name="init_nearbysearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania w pobliżu (0=nieograniczona)</string>
     <string name="init_settings_description_unlimited">bez ograniczeń</string>
     <string name="settings_category_geocaching_additionals">Dalsze usługi i dodatki</string>
-    <string name="settings_category_social">Portale społecznościowe</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
     <string name="settings_goto_url_button">więcej …</string>
     <string name="settings_service_activate">Aktywuj</string>
@@ -1081,8 +1079,6 @@
     <string name="settings_settings">Ustawienia</string>
     <string name="settings_information">Informacje</string>
     <string name="settings_advanced">Ustawienia zaawansowane</string>
-    <string name="settings_twitter_cache_message">Wiadomość o znalezieniu skrytki</string>
-    <string name="settings_twitter_trackable_message">Wiadomość o znalezieniu przedmiotu podróżnego</string>
     <string name="init_ec_icons">Ikony mapy</string>
     <string name="settings_ec_icons_other">Własny styl</string>
     <string name="settings_ec_icons_oc">Jak na OC</string>
@@ -1224,8 +1220,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Następujący proces umożliwi <b>c:geo</b> na dostęp do %s.</string>
     <string name="auth_token_explain_long">Uzupełnienie danych i dotknięcie przycisku „Sprawdź uwierzytelnienie” rozpocznie proces uwierzytelniający. Aplikacja połączy się z %s i sprawdzi Twoje dane uwierzytelniające. To wszystko.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
     <!-- auth geokrety -->
@@ -1665,8 +1659,6 @@
     <string name="imageview_error">Nie udało się załadować obrazu</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Komentarz</string>
-    <!-- visit -->
-    <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa online</string>
@@ -2141,7 +2133,6 @@
     <string name="fangroup_link"><a href="">Niemiecka grupa użytkowników</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo w Google Play</a></string>
-    <string name="about_twitter">Czy chcesz aby <b>c:geo</b> publikował nowy status na Twitterze za każdym razem kiedy dokonasz wpisu do dziennika skrytki?</string>
     <string name="github_title">Śledzenie błędów</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->

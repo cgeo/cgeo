@@ -84,7 +84,6 @@
     <string name="log_save">حفظ بدون اتصال</string>
     <string name="log_saving">إرسال السجل&#8230;</string>
     <string name="log_posting_log">جاري نشر السجل&#8230;</string>
-    <string name="log_posting_twitter">جاري نشر التغريدة&#8230;</string>
     <string name="log_posting_generic_trackable">نشر %1$s %2$d/%3$d</string>
     <string name="log_clear">مسح</string>
     <string name="log_post_not_possible">جاري تحميل البيانات&#8230;\nيرجى المحاولة مرة أخر بعد ثوان أو تحقق من إتصالك بالإنترنات.</string>
@@ -332,7 +331,6 @@
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
     <string name="settings_title_system">النظام</string>
     <string name="settings_title_navigation_menu">الملاحة</string>
-    <string name="settings_category_social">وسائل التواصل الإجتماعي</string>
     <string name="settings_category_logging_other">خيارات أخر ى لتسجيل الزيارات</string>
     <string name="settings_goto_url_button">المزيد &#8230;</string>
     <string name="settings_service_activate">تنشيط</string>
@@ -456,8 +454,6 @@
     <string name="settings_settings">الإعدادات</string>
     <string name="settings_information">المعلومات</string>
     <string name="settings_advanced">إعدادات متقدمة</string>
-    <string name="settings_twitter_cache_message">رسالة من أجل المخبآت التي تم العثور عليها</string>
-    <string name="settings_twitter_trackable_message">رسالة من أجل المخبآت أمتعة السفر التي تم العثور عليه</string>
     <string name="init_ec_icons">أيقونات الخريطة</string>
     <string name="settings_ec_icons_other">النمط الخاص</string>
     <string name="settings_ec_icons_oc">كما في OC</string>
@@ -508,8 +504,6 @@
     <string name="auth_credentials_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo الآن مرخص له بالنشر على التويتر.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo الآن مرخص له بالتفاعل مع %s.</string>
     <!-- auth geokrety -->
@@ -704,8 +698,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">نشر هذا الاكتشاف على التويتر</string>
     <!-- map -->
     <string name="map_map">خريطة</string>
     <string name="map_live">خريطة على نات</string>
@@ -1045,7 +1037,6 @@
     <string name="website_title">الموقع</string>
     <string name="facebook_link"><a href="">صفحة c:geo</a></string>
     <string name="market_link"><a href="">صفحة c:geo على Google Play</a></string>
-    <string name="about_twitter">هل يجب على <b>c:geo</b> أن ينشر تغريدة جديدة في كل مرة تقوم فيها بتسجيل زيارة لمخبئ ما؟</string>
     <string name="faq_title">الأسئلة الشائعة</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->

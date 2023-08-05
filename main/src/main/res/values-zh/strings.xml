@@ -95,7 +95,6 @@
     <string name="log_saving">正在发送日志…</string>
     <string name="log_saving_and_uploading">正在发布日志并上传图片…</string>
     <string name="log_posting_log">正在发布日志…</string>
-    <string name="log_posting_twitter">正在发布推文…</string>
     <string name="log_posting_vote">正在发布藏点评分…</string>
     <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">正在发布 %1$s %2$d/%3$d</string>
@@ -425,7 +424,6 @@
     <string name="settings_title_navigation_menu">导航菜单</string>
     <string name="settings_category_geocaching_platform">地理藏宝平台</string>
     <string name="settings_category_geocaching_additionals">更多服务和插件</string>
-    <string name="settings_category_social">社交媒体</string>
     <string name="settings_category_logging_other">其他记录日志选项</string>
     <string name="settings_goto_url_button">更多 …</string>
     <string name="settings_service_activate">激活</string>
@@ -624,8 +622,6 @@
     <string name="settings_settings">设置</string>
     <string name="settings_information">信息</string>
     <string name="settings_advanced">高级设置</string>
-    <string name="settings_twitter_cache_message">已找到藏点的消息</string>
-    <string name="settings_twitter_trackable_message">已找到可追踪物的消息</string>
     <string name="init_ec_icons">地图图标</string>
     <string name="settings_features">支持的功能</string>
     <string name="feature_personal_notes">个人笔记</string>
@@ -655,7 +651,6 @@
     <string name="auth_unconnected">尚未连接</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -670,7 +665,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <!-- search -->
     <!-- trackable -->

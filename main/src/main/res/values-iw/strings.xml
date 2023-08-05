@@ -86,7 +86,6 @@
     <string name="log_save">שמור באופן לא מקוון</string>
     <string name="log_saving">שולח לוג&#8230;</string>
     <string name="log_posting_log">מפרסם רישום ביומן&#8230;</string>
-    <string name="log_posting_twitter">מפרסם ציוץ&#8230;</string>
     <string name="log_posting_generic_trackable">מפרסם %1$s %2$d %3$d</string>
     <string name="log_clear">נקה</string>
     <string name="log_post_not_possible">הורדת נתונים&#8230;\n נסו שוב בעוד מספר שניות או בדקו את החיבור לרשת.</string>
@@ -332,7 +331,6 @@
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
-    <string name="settings_category_social">רשתות חבריות</string>
     <string name="settings_category_logging_other">אפשרויות לוג אחרות</string>
     <string name="settings_goto_url_button">עוד&#8230;</string>
     <string name="settings_service_activate">הפעל</string>
@@ -380,7 +378,6 @@
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -429,7 +426,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
     <string name="map_gm_autorotation_disable">לבטל סיבוב מפה אוטומטי?\n\nניתן להפעיל זאת שוב באמצעות תפריט סיבוב מפה</string>

@@ -124,7 +124,6 @@
     <string name="log_saving">Log opslaan…</string>
     <string name="log_saving_and_uploading">Log posten en afbeeldingen uploaden…</string>
     <string name="log_posting_log">Posten log…</string>
-    <string name="log_posting_twitter">Posten tweet…</string>
     <string name="log_posting_vote">Cache stem posten…</string>
     <string name="log_posting_image">Afbeeldingen posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
@@ -760,7 +759,6 @@
     <string name="init_nearbysearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met zoeken in de buurt (0=ongelimiteerd)</string>
     <string name="init_settings_description_unlimited">onbeperkt</string>
     <string name="settings_category_geocaching_additionals">Overige diensten en addons</string>
-    <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
     <string name="settings_goto_url_button">meer…</string>
     <string name="settings_service_activate">Activeren</string>
@@ -1069,8 +1067,6 @@
     <string name="settings_settings">Instellingen</string>
     <string name="settings_information">Informatie</string>
     <string name="settings_advanced">Geavanceerde instellingen</string>
-    <string name="settings_twitter_cache_message">Bericht voor een gevonden cache</string>
-    <string name="settings_twitter_trackable_message">Bericht voor een gevonden trackable</string>
     <string name="init_ec_icons">Kaartpictogrammen</string>
     <string name="settings_ec_icons_other">Eigen stijl</string>
     <string name="settings_ec_icons_oc">Zoals OC</string>
@@ -1209,8 +1205,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
     <string name="auth_token_explain_long">Het invullen van je inloggegevens en het tikken op de knop \"Autoriseren c:geo\" zal het proces starten. Dit proces maakt verbinding met %s en haalt een authenticatietoken op. Dat is alles.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo is nu gekoppeld met Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
     <!-- auth geokrety -->
@@ -1636,8 +1630,6 @@
     <string name="imageview_error">Kon afbeelding niet laden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Opmerking</string>
-    <!-- visit -->
-    <string name="visit_tweet">Post deze vondst op Twitter</string>
     <!-- map -->
     <string name="map_map">Kaart</string>
     <string name="map_live">Live kaart</string>
@@ -2111,7 +2103,6 @@
     <string name="fangroup_link"><a href="">Duitse gebruikersgroep</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo op Google Play</a></string>
-    <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->

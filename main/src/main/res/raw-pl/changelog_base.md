@@ -1,17 +1,21 @@
 ### Mapa
-- Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięci na skrytce/punkcie nawigacji (konfigurowalne)
+- Zmiana (tylko mapy OpenStreetMap): tymczasowo wyłączona opcja wielowątkowości do celów testowania – próbujemy namierzyć kilka awarii, które mogą być związane z tą opcją
+- Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięciu na skrytce/punkcie nawigacji (konfigurowalne)
 - Nowość: Dodaj 'Ustaw jako cel' do wyskakującego okna po długim dotknięciu
 - Poprawka: Pliki częściowe pozostałe po przerwaniu kopiowania pobranych plików
 - Nowość: Sprawdzanie integralności pobranych kafelków routingu
 - Nowość: Obsługa dźwięku wybranego przez użytkownika dla powiadomień zbliżeniowych
-- New: Toggle proximity notifications from map quick settings
+- Nowość: Przełącz powiadomienia zbliżeniowe z szybkich ustawień mapy
 - Nowość: Rozszerzone wsparcie GeoJSON dla map Google
+- Nowość: Wyświetlaj wskaźnik centrum wyszukiwania podczas wyszukiwania adresów => dotknij symbolu mapy
+- New: OpenTopoMap map provider
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
 - Change: Replace most update progress dialogs by background actions
 - Zmiana: Używaj tylko niepustych logów dla opcji „powtórz ostatni log”
 - New: Display logging errors
+- Nowość: Zezwalaj na wybieranie, kopiowanie itp. opisu obrazu (EXIF info)
 
 ### Ogólne
 - Nowość: Dodano więcej emoji liczbowych (oddzielna kategoria)
@@ -27,4 +31,5 @@
 - New: Make last bottom navigation item customizable
 - Nowość: zaktualizowano zintegrowany BRouter
 - Nowość: Dodano interfejs do OrganicMaps dla nawigacji
-- Fix: HTML-encoded chars in 'trackable last spotted" name
+- Poprawka: Znaki zakodowane w HTML w nazwie ostatnio widzianego przedmiotu podróżnego
+- Change: Removed outdated Twitter support

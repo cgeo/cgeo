@@ -79,7 +79,6 @@
     <string name="log_save">Simpan offline</string>
     <string name="log_saving">Mengirim catatan&#8230;</string>
     <string name="log_posting_log">Memposting log&#8230;</string>
-    <string name="log_posting_twitter">Posting tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Mencatat %1$s %2$d/%3$d</string>
     <string name="log_clear">Bersihkan</string>
     <string name="log_post_not_possible">Data yang diunduh sedang berlangsung&#8230;\nsilahkan coba lagi dalam beberapa detik atau periksa koneksi internet anda.</string>
@@ -325,7 +324,6 @@
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
-    <string name="settings_category_social">Media sosial</string>
     <string name="settings_category_logging_other">Pilihan login lainnya</string>
     <string name="settings_goto_url_button">lebih banyak &#8230;</string>
     <string name="settings_service_activate">Aktifkan</string>
@@ -447,8 +445,6 @@
     <string name="settings_settings">Pengaturan</string>
     <string name="settings_information">Informasi</string>
     <string name="settings_advanced">Pengaturan lanjutan</string>
-    <string name="settings_twitter_cache_message">Pesan untuk menemukan cache</string>
-    <string name="settings_twitter_trackable_message">Pesan ditemukan untuk dilacak</string>
     <string name="init_ec_icons">Ikon Peta</string>
     <string name="settings_ec_icons_other">Gaya sendiri</string>
     <string name="settings_ec_icons_oc">Seperti OC</string>
@@ -498,8 +494,6 @@
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo sekarang resmi untuk posting di twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
     <!-- auth geokrety -->
@@ -704,8 +698,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Poskan ini ke kericau</string>
     <!-- map -->
     <string name="map_map">Peta</string>
     <string name="map_live">Peta hidup</string>
@@ -1046,7 +1038,6 @@
     <string name="website_title">Situs web</string>
     <string name="facebook_link"><a href="">c: halaman geo </a></string>
     <string name="market_link"><a href="">c: geo di Google Play</a></string>
-    <string name="about_twitter">Harus <b>c:geo</b> mempublikasikan sebuah status baru di Twitter setiap kali anda log cache?</string>
     <string name="faq_title">Tanya jawab</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->

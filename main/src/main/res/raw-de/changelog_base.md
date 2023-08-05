@@ -1,4 +1,5 @@
 ### Karte
+- Ändern (nur OpenStreetMap): Multithreading-Option temporär für Testzwecke deaktiviert - wir versuchen einige Abstürze einzugrenzen, die einen Bezug zu dieser Option haben könnten
 - Änderung: Beim langen Tippen auf Cache/Wegpunkt immer Popupmenü anzeigen (konfigurierbar)
 - Neu: 'Als Ziel setzen' im Karten-Popup bei langem Tippen
 - Korrektur: Downloader: Unvollständig kopierte Dateien nicht gelöscht
@@ -6,12 +7,15 @@
 - Neu: Unterstützung eigener Audiodateien für die Annäherungsbenachrichtigung
 - Neu: Annäherungsbenachrichtigungen in den Kartenschnelleinstellungen umschalten
 - Neu: Erweiterte Unterstützung von GeoJSON auf Google Maps
+- Neu: Kennzeichne den Suchmittelpunkt auf der Karte (Adresssuche an => Kartensymbol)
+- New: OpenTopoMap map provider
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
 - Änderung: (Fast alle) Update-Dialoge durch Hintergrundaktionen ersetzt
 - Änderung: Verwende nur nicht-leere Logs bei 'Verwende das letzte Log erneut'
 - Neu: Fehler beim Senden von Logs anzeigen
+- Neu: Auswählen, Kopieren usw. der Bildbeschreibung erlauben (EXIF-Infos)
 
 ### Allgemein
 - Neu: Zusätzliche Zahlen-Emojis (eigene Kategorie)
@@ -27,4 +31,5 @@
 - Neu: Benutzerdefinierter Menüeintrag
 - Neu: Internen BRouter auf v1.7.2 aktualisiert
 - Neu: Navigations-Schnittstelle zu OrganicMaps
-- Fix: HTML-encoded chars in 'trackable last spotted" name
+- Korrektur: HTML-kodierte Zeichen im 'Trackable gesehen bei' Namen
+- Change: Removed outdated Twitter support

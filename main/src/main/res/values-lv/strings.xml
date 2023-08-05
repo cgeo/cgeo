@@ -91,7 +91,6 @@
     <string name="log_saving">Ieraksta nosūtīšana…</string>
     <string name="log_saving_and_uploading">Publicē ierakstu un augšupielādē attēlu…</string>
     <string name="log_posting_log">Publicē ierakstu…</string>
-    <string name="log_posting_twitter">Publicē tvītu…</string>
     <string name="log_posting_vote">Publicē slēpņa balsojumu…</string>
     <string name="log_posting_image">Publicē attēlu…</string>
     <string name="log_posting_generic_trackable">Publicē %1$s %2$d/%3$d</string>
@@ -407,7 +406,6 @@
     <string name="settings_title_navigation_menu">Navigācijas izvēlne</string>
     <string name="settings_category_geocaching_platform">Slēpņošanas platforma</string>
     <string name="settings_category_geocaching_additionals">Citi pakalpojumi un addon</string>
-    <string name="settings_category_social">Sociālie mēdiji</string>
     <string name="settings_category_logging_other">Citi pierakstīšanās iestatījumi</string>
     <string name="settings_goto_url_button">vairāk…</string>
     <string name="settings_service_activate">Aktivizēt</string>
@@ -564,8 +562,6 @@
     <string name="settings_settings">Iestatījumi</string>
     <string name="settings_information">Informācija</string>
     <string name="settings_advanced">Papildu iestatījumi</string>
-    <string name="settings_twitter_cache_message">Ziņojums par atrastu slēpni</string>
-    <string name="settings_twitter_trackable_message">Ziņojums par atrastu ceļotāju</string>
     <string name="init_ec_icons">Kartes ikonas</string>
     <string name="settings_ec_icons_other">Savs stils</string>
     <string name="settings_ec_icons_oc">Piemēram, OC</string>
@@ -621,8 +617,6 @@
     <string name="auth_credentials_explain_short">Šis process ļaus <b>c:geo</b> piekļūt %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Šis process ļaus piekļūt %s <b>c:geo</b>.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo tagad ir atļauja ziņot Twitter\'ī.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo tagad ir atļauja sazināties ar %s.</string>
     <!-- auth geokrety -->
@@ -878,8 +872,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Publicēt šo atradumu Twitter\'ī</string>
     <!-- map -->
     <string name="map_map">Karte</string>
     <string name="map_live">TIešsaistes karte</string>
@@ -1237,7 +1229,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="facebook_link"><a href=""> c:geo lapa</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo iekš Google Play</a></string>
-    <string name="about_twitter">Vai <b>c:geo</b> publicēt jaunu statusu vietnē Twitter pēc katra atrastā slēpņa?</string>
     <string name="faq_title">BUJ</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->

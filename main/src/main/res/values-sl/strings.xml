@@ -86,7 +86,6 @@
     <string name="log_save">Shrani za delo brez povezave</string>
     <string name="log_saving">Pošiljam…</string>
     <string name="log_posting_log">Pošiljam zapis…</string>
-    <string name="log_posting_twitter">Pošiljam na Twitter…</string>
     <string name="log_clear">Počisti</string>
     <string name="log_post_not_possible">Prenos podatkov je v teku…\nPoskusite znova čez nekaj sekund ali preverite vašo povezavo z internetom.</string>
     <string name="log_date_future_not_allowed">Vnaprejšnji datumi niso dovoljeni.</string>
@@ -341,7 +340,6 @@
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
-    <string name="settings_category_social">Socialni vtičniki</string>
     <string name="settings_category_logging_other">Druge možnosti zapisa</string>
     <string name="settings_goto_url_button">več …</string>
     <string name="settings_service_activate">Aktiviraj</string>
@@ -446,8 +444,6 @@
     <string name="settings_settings">Nastavitve</string>
     <string name="settings_information">Informacije</string>
     <string name="settings_advanced">Napredne nastavitve</string>
-    <string name="settings_twitter_cache_message">Sporočilo za najden zaklad</string>
-    <string name="settings_twitter_trackable_message">Sporočilo za najden sledljivček</string>
     <string name="init_ec_icons">Ikone zemljevida</string>
     <string name="settings_ec_icons_other">Svoj stil</string>
     <string name="settings_ec_icons_oc">Kot OC</string>
@@ -490,8 +486,6 @@
     <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
     <!-- auth geokrety -->
@@ -667,8 +661,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Objavi na Twitter</string>
     <!-- map -->
     <string name="map_map">Zemljevid</string>
     <string name="map_live">Zemljevid</string>
@@ -998,7 +990,6 @@
     <string name="website_title">Spletna stran</string>
     <string name="facebook_link"><a href="">spletna stran c:geo</a></string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
-    <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
     <string name="faq_title">Pogosta vprašanja</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->

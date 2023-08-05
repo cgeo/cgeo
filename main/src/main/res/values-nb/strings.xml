@@ -124,7 +124,6 @@
     <string name="log_saving">Lagrer logg…</string>
     <string name="log_saving_and_uploading">Laster opp logg og bilder…</string>
     <string name="log_posting_log">Laster opp logg…</string>
-    <string name="log_posting_twitter">Laster opp tweet…</string>
     <string name="log_posting_vote">Laster opp cachestemme…</string>
     <string name="log_posting_image">Laster opp bilder…</string>
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
@@ -609,7 +608,6 @@
     <string name="settings_category_nearbysearch">Søk i nærheten</string>
     <string name="init_nearbysearchlimit_title">Søk i nærheten avgrensning</string>
     <string name="settings_category_geocaching_additionals">Flere tjenester og tillegg</string>
-    <string name="settings_category_social">Sosiale medier</string>
     <string name="settings_category_logging_other">Andre loggeinnstillinger</string>
     <string name="settings_goto_url_button">mer…</string>
     <string name="settings_service_activate">Aktiver</string>
@@ -864,8 +862,6 @@
     <string name="settings_settings">Innstillinger</string>
     <string name="settings_information">Informasjon</string>
     <string name="settings_advanced">Avanserte innstillinger</string>
-    <string name="settings_twitter_cache_message">Tekst ved funn av cache</string>
-    <string name="settings_twitter_trackable_message">Tekst ved funn av sporbare</string>
     <string name="init_ec_icons">Kartikoner</string>
     <string name="settings_ec_icons_other">Egen stil</string>
     <string name="settings_ec_icons_oc">Lik OC</string>
@@ -990,8 +986,6 @@
     <string name="auth_credentials_explain_long">Hvis du allerede har en konto, vennligst skriv inn kontoen for %s nedenfor:</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Følgende prosess vil gi <b>c:geo</b> tilgang til %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo har nå fått godkjenning til å kvitre på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
     <!-- auth geokrety -->
@@ -1342,8 +1336,6 @@
     <string name="formula_error_empty">Tom formel</string>
     <string name="formula_error_other">Feil: \'%1$s</string>
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Del dette funnet på Twitter</string>
     <!-- map -->
     <string name="map_map">Kart</string>
     <string name="map_live">Live-kart</string>
@@ -1804,7 +1796,6 @@
     <string name="fangroup_link"><a href="">Tysk brukergruppe</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo i Google Play</a></string>
-    <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
     <string name="github_title">Feilrapportering</string>
     <string name="faq_title">Ofte Stilte Spørsmål</string>
     <!-- status (used via string based resource loading) -->

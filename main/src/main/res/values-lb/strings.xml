@@ -91,7 +91,6 @@
     <string name="log_saving">Log gëtt geschéckt…</string>
     <string name="log_saving_and_uploading">Log gëtt publizéiert an d\'Biller eropgelueden…</string>
     <string name="log_posting_log">Log gëtt publizéiert…</string>
-    <string name="log_posting_twitter">Tweet gëtt publizéiert…</string>
     <string name="log_posting_vote">Cache Bewäertung gëtt publizéiert…</string>
     <string name="log_posting_image">Biller gi publizéiert…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d gëtt publizéiert</string>
@@ -404,7 +403,6 @@
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_geocaching_platform">Geocaching Plattform</string>
     <string name="settings_category_geocaching_additionals">Aner Servicer an Addons</string>
-    <string name="settings_category_social">Sozial Netzwierker</string>
     <string name="settings_category_logging_other">Aner Logging Optiounen</string>
     <string name="settings_goto_url_button">méi …</string>
     <string name="settings_service_activate">Aktivéieren</string>
@@ -509,7 +507,6 @@
     <!-- auth generic -->
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -523,7 +520,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <!-- search -->
     <!-- trackable -->

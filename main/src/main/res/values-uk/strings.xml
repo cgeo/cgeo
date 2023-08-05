@@ -91,7 +91,6 @@
     <string name="log_saving">Надсилання журналу…</string>
     <string name="log_saving_and_uploading">Розміщення журналу та завантаження зображень…</string>
     <string name="log_posting_log">Журнал відправлення…</string>
-    <string name="log_posting_twitter">Розміщення твіту…</string>
     <string name="log_posting_vote">Розміщення кешу голосування…</string>
     <string name="log_posting_image">Розміщення зображень…</string>
     <string name="log_posting_generic_trackable">Постинг %1$s %2$d/%3$d</string>
@@ -405,7 +404,6 @@
     <string name="settings_title_navigation_menu">Навігаційне меню</string>
     <string name="settings_category_geocaching_platform">Платформа геокешингу</string>
     <string name="settings_category_geocaching_additionals">Додаткові послуги та аддон</string>
-    <string name="settings_category_social">Соціальні медіа</string>
     <string name="settings_category_logging_other">Інші параметри ведення журналу</string>
     <string name="settings_goto_url_button">більше …</string>
     <string name="settings_service_activate">Активувати</string>
@@ -596,8 +594,6 @@
     <string name="settings_settings">Налаштування</string>
     <string name="settings_information">Інформація</string>
     <string name="settings_advanced">розширені налаштування</string>
-    <string name="settings_twitter_cache_message">Повідомлення для пошуку кешу</string>
-    <string name="settings_twitter_trackable_message">Повідомлення для пошуку кешу</string>
     <string name="init_ec_icons">іконки на карті</string>
     <string name="settings_ec_icons_other">Власний стиль</string>
     <string name="settings_ec_icons_oc">Вподобати OC</string>
@@ -664,8 +660,6 @@
     <string name="auth_credentials_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo тепер авторизований для публікації у Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo тепер авторизований для публікації у Twitter %s.</string>
     <!-- auth geokrety -->
@@ -908,8 +902,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Опублікувати це на Твіттері</string>
     <!-- map -->
     <string name="map_map">Карта</string>
     <string name="map_live">Жива карта</string>
@@ -1308,7 +1300,6 @@
     <string name="facebook_link"><a href="">сторінка:geo</a></string>
     <string name="market_title">Google Ігри</string>
     <string name="market_link"><a href="">c:geo у Google Play</a></string>
-    <string name="about_twitter">Чи має <b>c:geo</b> публікувати новий статус в Twitter кожен раз, коли ви будете записувати кеш?</string>
     <string name="github_title">вишукувач</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->

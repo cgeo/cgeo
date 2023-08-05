@@ -124,7 +124,6 @@
     <string name="log_saving">Log wird gesendet…</string>
     <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
-    <string name="log_posting_twitter">Sende Tweet…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
     <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
@@ -760,7 +759,6 @@
     <string name="init_nearbysearchlimit_description">Begrenzt die Distanz, bis zu der Caches für die Suche in der Nähe zurückgegeben werden (0=unbegrenzt)</string>
     <string name="init_settings_description_unlimited">unbegrenzt</string>
     <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
-    <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
     <string name="settings_goto_url_button">mehr …</string>
     <string name="settings_service_activate">Aktivieren</string>
@@ -1069,8 +1067,6 @@
     <string name="settings_settings">Einstellungen</string>
     <string name="settings_information">Information</string>
     <string name="settings_advanced">Erweiterte Einstellungen</string>
-    <string name="settings_twitter_cache_message">Nachricht für gefundenen Cache</string>
-    <string name="settings_twitter_trackable_message">Nachricht für gefundenen Trackable</string>
     <string name="init_ec_icons">Kartensymbole</string>
     <string name="settings_ec_icons_other">Eigener Stil</string>
     <string name="settings_ec_icons_oc">Wie OC-Caches</string>
@@ -1209,8 +1205,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>
     <string name="auth_token_explain_long">Nach Eingabe der Anmeldeinformation „Starte Autorisierung“ auswählen, um den Prozess zu starten. Dieser Prozess verbindet mit %s und ruft einen Authentifizierungstoken ab. Das ist alles.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
     <!-- auth geokrety -->
@@ -1636,8 +1630,6 @@
     <string name="imageview_error">Bild konnte nicht geladen werden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentar</string>
-    <!-- visit -->
-    <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
     <!-- map -->
     <string name="map_map">Karte</string>
     <string name="map_live">Live-Karte</string>
@@ -2111,7 +2103,6 @@
     <string name="fangroup_link"><a href="">Deutsche Anwendergruppe</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo bei Google Play</a></string>
-    <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
     <string name="github_title">BugTracker</string>
     <string name="faq_title">FAQs</string>
     <!-- status (used via string based resource loading) -->
