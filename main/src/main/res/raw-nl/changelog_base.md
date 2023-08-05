@@ -8,6 +8,7 @@
 - Nieuw: Nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
 - Nieuw: Uitgebreide GeoJSON ondersteuning voor Google Maps
 - Nieuw: Toon een zoekcentrum indicator bij het zoeken van adres => tik op kaart symbool
+- New: OpenTopoMap map provider
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
@@ -31,3 +32,4 @@
 - Nieuw: bijgewerkt geïntegreerd BRouter
 - Nieuw: Voeg interface toe aan OrganicMaps voor navigatie
 - Oplossing: HTML-gecodeerde tekens in de naam 'trackable last spotted'
+- Change: Removed outdated Twitter support
