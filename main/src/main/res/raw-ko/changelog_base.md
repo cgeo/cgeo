@@ -8,6 +8,7 @@
 - New: Toggle proximity notifications from map quick settings
 - New: Extended GeoJSON support for Google Maps
 - New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### 캐시 상세정보
 - 신규: 개인 메모 편집 시 '저장 및 업로드' 버튼
@@ -31,3 +32,4 @@
 - 신규: 업데이트된 통합 BRouter
 - 신규: 탐색을 위해 OrganicMaps에 인터페이스 추가
 - Fix: HTML-encoded chars in 'trackable last spotted" name
+- Change: Removed outdated Twitter support
