@@ -122,7 +122,6 @@
     <string name="log_saving">ログを投稿中…</string>
     <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
-    <string name="log_posting_twitter">ツイートを投稿中…</string>
     <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
     <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
@@ -621,7 +620,6 @@
     <string name="init_nearbysearchlimit_title">近くの検索の範囲</string>
     <string name="init_nearbysearchlimit_description">近くの検索でキャッシュまでの距離の範囲。0にすると無制限になります</string>
     <string name="settings_category_geocaching_additionals">ほかのサービスとアドオン</string>
-    <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
     <string name="settings_service_activate">有効化</string>
@@ -891,8 +889,6 @@
     <string name="settings_settings">設定</string>
     <string name="settings_information">情報</string>
     <string name="settings_advanced">詳細設定</string>
-    <string name="settings_twitter_cache_message">発見したキャッシュのメッセージ</string>
-    <string name="settings_twitter_trackable_message">発見したトラッカブルのメッセージ</string>
     <string name="init_ec_icons">地図のアイコン</string>
     <string name="settings_ec_icons_other">独自のスタイル</string>
     <string name="settings_ec_icons_oc">OCと同じ</string>
@@ -1017,8 +1013,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンをタップすると、%sに接続して認証トークンを取得します</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました</string>
     <!-- auth geokrety -->
@@ -1385,8 +1379,6 @@
     <string name="imageview_mimetype">MIMEタイプ</string>
     <string name="imageview_metadata_geopoint">ジオポイント</string>
     <string name="imageview_metadata_comment">コメント</string>
-    <!-- visit -->
-    <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
     <string name="map_map">地図</string>
     <string name="map_live">オンライン地図</string>
@@ -1854,7 +1846,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="fangroup_link"><a href="">ドイツ語ユーザーグループ</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Playストアのc:geo</a></string>
-    <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="github_title">課題/バグ管理</string>
     <string name="faq_title">よくある質問</string>
     <!-- status (used via string based resource loading) -->
