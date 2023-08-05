@@ -124,7 +124,6 @@
     <string name="log_saving">Отправка записи…</string>
     <string name="log_saving_and_uploading">Отправка записи и загрузка фотографий…</string>
     <string name="log_posting_log">Отправка записи…</string>
-    <string name="log_posting_twitter">Отправка твита…</string>
     <string name="log_posting_vote">Отправка оценки тайника…</string>
     <string name="log_posting_image">Отправка фотографий…</string>
     <string name="log_posting_generic_trackable">Отправка %1$s %2$d/%3$d</string>
@@ -730,7 +729,6 @@
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
     <string name="settings_category_geocaching_additionals">Дополнительные плагины и приложения</string>
-    <string name="settings_category_social">Социальные сети</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
     <string name="settings_goto_url_button">Подробнее…</string>
     <string name="settings_service_activate">Активировать</string>
@@ -1035,8 +1033,6 @@
     <string name="settings_settings">Настройки</string>
     <string name="settings_information">Информация</string>
     <string name="settings_advanced">Расширенные настройки</string>
-    <string name="settings_twitter_cache_message">Сообщения для найденного тайника</string>
-    <string name="settings_twitter_trackable_message">Сообщение для найденных трекаблов</string>
     <string name="init_ec_icons">Иконки карты</string>
     <string name="settings_ec_icons_other">Собственный стиль</string>
     <string name="settings_ec_icons_oc">Как в Opencaching</string>
@@ -1175,8 +1171,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_token_explain_long">Заполните учётные данные и нажмите «Начать авторизацию». Приложение подключится к %s и получит токен аутентификации.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo теперь может размещать записи в Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo теперь может взаимодействовать с %s.</string>
     <!-- auth geokrety -->
@@ -1609,8 +1603,6 @@
     <string name="imageview_error">Не удалось загрузить изображение</string>
     <string name="imageview_metadata_geopoint">Геоточка</string>
     <string name="imageview_metadata_comment">Комментарий</string>
-    <!-- visit -->
-    <string name="visit_tweet">Отправить в Twitter</string>
     <!-- map -->
     <string name="map_map">Карта</string>
     <string name="map_live">Онлайн карта</string>
@@ -2085,7 +2077,6 @@
     <string name="fangroup_link"><a href="">Немецкая группа пользователей</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo на Google Play</a></string>
-    <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
     <string name="github_title">Сообщения об ошибках</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
