@@ -124,7 +124,6 @@
     <string name="log_saving">로그 발송중…</string>
     <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
-    <string name="log_posting_twitter">트위터에 올리는 중…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
     <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
@@ -754,7 +753,6 @@
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
     <string name="settings_category_geocaching_additionals">추가 서비스 및 애드온</string>
-    <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
     <string name="settings_service_activate">활성화</string>
@@ -1063,8 +1061,6 @@
     <string name="settings_settings">설정</string>
     <string name="settings_information">정보</string>
     <string name="settings_advanced">고급 설정</string>
-    <string name="settings_twitter_cache_message">찾은 캐시에 대한 메시지</string>
-    <string name="settings_twitter_trackable_message">찾은 추적아이템에 대한 메시지</string>
     <string name="init_ec_icons">지도 아이콘</string>
     <string name="settings_ec_icons_other">나만의 스타일</string>
     <string name="settings_ec_icons_oc">OC 처럼</string>
@@ -1201,8 +1197,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
     <string name="auth_token_explain_long">사용자 정보를 입력하고 \"c:geo 인증하기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 에 연결되고, 인증 토큰을 받아오게됩니다.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">이제 c:geo에서 트위터에 글을 올리도록 허용되었습니다.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">이제 c:geo에서 %s 에 상호작용하도록 허용되었습니다.</string>
     <!-- auth geokrety -->
@@ -1621,8 +1615,6 @@
     <string name="imageview_error">이미지를 로드할 수 없습니다</string>
     <string name="imageview_metadata_geopoint">지오포인트</string>
     <string name="imageview_metadata_comment">코멘트</string>
-    <!-- visit -->
-    <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->
     <string name="map_map">지도</string>
     <string name="map_live">라이브 지도</string>
@@ -2095,7 +2087,6 @@
     <string name="fangroup_link"><a href="">독일어 사용자 그룹</a></string>
     <string name="market_title">구글 플레이</string>
     <string name="market_link"><a href=""> 구글 플레이에서 c:geo</a></string>
-    <string name="about_twitter">로그를 할 떄마다 <b>c:geo</b>에서 트위터로 새로운 상황을 알리겠습니까?</string>
     <string name="github_title">버그추적기</string>
     <string name="faq_title">자주 묻는 질문(FAQ)</string>
     <!-- status (used via string based resource loading) -->
