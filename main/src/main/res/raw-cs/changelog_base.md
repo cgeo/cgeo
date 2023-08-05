@@ -8,6 +8,7 @@
 - New: Toggle proximity notifications from map quick settings
 - New: Extended GeoJSON support for Google Maps
 - New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
@@ -31,3 +32,4 @@
 - Novinka: Aktualizován vestavený BRouter
 - Novinka: Přidáno rozhraní do OrganicMaps pro navigaci
 - Oprava: Znaky kódované v HTML v názvu "trackable last spotted"
+- Change: Removed outdated Twitter support
