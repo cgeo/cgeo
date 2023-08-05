@@ -72,7 +72,6 @@
     <string name="log_tb_archived">Í geymslu</string>
     <string name="log_saving">Færsla í innsendingu…</string>
     <string name="log_posting_log">Set færslu inn…</string>
-    <string name="log_posting_twitter">Set tíst inn…</string>
     <string name="log_posting_generic_trackable">Set inn %1$s %2$d/%3$d</string>
     <string name="log_clear">Hreinsa</string>
     <string name="log_post_not_possible">Niðurhal gagna er í gangi…\nVinsamlegast reyndu aftur eftir nokkrar sekúndur eða skoðaðu internet tenginguna þína.</string>
@@ -266,7 +265,6 @@
     <string name="settings_title_map_content">Innihald korts</string>
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
     <string name="settings_title_system">Kerfi</string>
-    <string name="settings_category_social">Samfélagsmiðlar</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
     <string name="settings_service_activate">Virkja</string>
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
@@ -363,8 +361,6 @@
     <string name="auth_dialog_waiting">Bíð eftir %s…</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo má núna setja inn á Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
     <!-- auth geokrety -->
@@ -504,8 +500,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Tilkynna fundinn á Twitter</string>
     <!-- map -->
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
@@ -632,7 +626,6 @@
     <string name="support_title">Aðstoð</string>
     <string name="website_title">Vefsíða</string>
     <string name="market_link"><a href="">c:geo á Google Play</a></string>
-    <string name="about_twitter">Á <b>c:geo</b> að setja inn nýja færslu á Twitter í hvert skipti sem þú skráir heimsókn þína?</string>
     <string name="faq_title">Algengar spurningar</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
