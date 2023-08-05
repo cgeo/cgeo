@@ -122,7 +122,6 @@
     <string name="log_saving">Log mentése…</string>
     <string name="log_saving_and_uploading">Log küldése és képek feltöltése…</string>
     <string name="log_posting_log">Log küldése…</string>
-    <string name="log_posting_twitter">Twittelés…</string>
     <string name="log_posting_vote">Ládaszavazat küldése…</string>
     <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
@@ -484,7 +483,6 @@
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_geocaching_platform">Geocaching platformok</string>
     <string name="settings_category_geocaching_additionals">További szolgáltatások és addonok</string>
-    <string name="settings_category_social">Közösségi média</string>
     <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
     <string name="settings_goto_url_button">Tovább…</string>
     <string name="settings_service_activate">Aktiválás</string>
@@ -630,8 +628,6 @@
     <string name="settings_settings">Beállítások</string>
     <string name="settings_information">További információk</string>
     <string name="settings_advanced">Haladó beállítások</string>
-    <string name="settings_twitter_cache_message">Twitter üzenet megtalált ládához</string>
-    <string name="settings_twitter_trackable_message">Twitter üzenet megtalált utazóhoz</string>
     <string name="init_ec_icons">Térkép ikonok</string>
     <string name="settings_ec_icons_other">Saját stílus</string>
     <string name="settings_ec_icons_oc">OC stílusú ládajelölők</string>
@@ -684,8 +680,6 @@
     <string name="auth_credentials_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">Twitter: A c:geo engedélyt kapott bejegyzések küldésére.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <!-- auth geokrety -->
@@ -907,8 +901,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
     <!-- map -->
     <string name="map_map">Térkép</string>
     <string name="map_live">Élő térkép</string>
@@ -1259,7 +1251,6 @@
     <string name="website_title">Weboldal</string>
     <string name="facebook_link"><a href="">c:geo honlap</a></string>
     <string name="market_link"><a href="">c:geo a Google Play-en</a></string>
-    <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
     <string name="faq_title">GYIK</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
