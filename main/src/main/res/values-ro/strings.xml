@@ -103,7 +103,6 @@
     <string name="log_saving">Trimitere jurnal…</string>
     <string name="log_saving_and_uploading">Publicare jurnal și încărcare imagini…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
-    <string name="log_posting_twitter">Se publică tweet…</string>
     <string name="log_posting_vote">Publicarea votului…</string>
     <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
@@ -503,8 +502,6 @@
     <string name="settings_settings">Opţiuni</string>
     <string name="settings_information">Informaţii</string>
     <string name="settings_advanced">Setări avansate</string>
-    <string name="settings_twitter_cache_message">Mesaj pentru cutie găsită</string>
-    <string name="settings_twitter_trackable_message">Mesaj pentru obiect călător găsit</string>
     <string name="init_ec_icons">Iconiţe hartă</string>
     <string name="settings_ec_icons_other">Stil propriu</string>
     <string name="settings_ec_icons_oc">La fel ca OC</string>
@@ -553,8 +550,6 @@
     <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo este acum autorizat să posteze pe Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo este acum autorizat să comunice cu %s.</string>
     <!-- auth geokrety -->
@@ -764,8 +759,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Publică pe Twitter</string>
     <!-- map -->
     <string name="map_map">Hartă</string>
     <string name="map_live">Hartă</string>
@@ -1106,7 +1099,6 @@
     <string name="website_title">Pagină Web</string>
     <string name="facebook_link"><a href="">pagina c:geo</a></string>
     <string name="market_link"><a href="">c:geo pe Google Play</a></string>
-    <string name="about_twitter">Ar trebui ca <b>c:geo</b> să publice un statut nou pe Twitter de fiecare dată când scrii o însemnare pentru o geocutie?</string>
     <string name="faq_title">Întrebari frecvente</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
