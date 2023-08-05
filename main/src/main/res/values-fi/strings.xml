@@ -124,7 +124,6 @@
     <string name="log_saving">Lähetetään merkintää…</string>
     <string name="log_saving_and_uploading">Lähetetään lokia ja kuvia…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
-    <string name="log_posting_twitter">Lähetetään twiittiä…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
     <string name="log_posting_image">Kuvia lähetetään…</string>
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
@@ -711,7 +710,6 @@
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
     <string name="init_settings_description_unlimited">rajoittamaton</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
-    <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut kirjausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_service_activate">Aktivoi</string>
@@ -1015,8 +1013,6 @@
     <string name="settings_settings">Asetukset</string>
     <string name="settings_information">Tiedot</string>
     <string name="settings_advanced">Lisäasetukset</string>
-    <string name="settings_twitter_cache_message">Löydetyn kätkön viesti</string>
-    <string name="settings_twitter_trackable_message">Löydetyn reissaajan viesti</string>
     <string name="init_ec_icons">Kartta ikonit</string>
     <string name="settings_ec_icons_other">Oma tyyli</string>
     <string name="settings_ec_icons_oc">Kuten OC</string>
@@ -1151,8 +1147,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Seuraava prosessi sallii <b>c:geo</b>:lle pääsyn %s.</string>
     <string name="auth_token_explain_long">Täyttämällä tiedot ja painamalla \"Valtuuta c:geo\" painiketta Aloitat tapahtuman. Tämä tapahtuma yhdistää %s ja hakea todennuksen. Siinä kaikki.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo on nyt valtuutettu julkaisemaan Twitterissä.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo on nyt valtuutettu toimimaan %s kanssa.</string>
     <!-- auth geokrety -->
@@ -1564,8 +1558,6 @@
     <string name="imageview_error">Kuvan lataaminen epäonnistui</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentti</string>
-    <!-- visit -->
-    <string name="visit_tweet">Lähetä tämä löytö Twitteriin</string>
     <!-- map -->
     <string name="map_map">Kartta</string>
     <string name="map_live">Live-kartta</string>
@@ -2038,7 +2030,6 @@
     <string name="fangroup_link"><a href="">Saksalainen käyttäjäryhmä</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
-    <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun kirjaat kätkön?</string>
     <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
