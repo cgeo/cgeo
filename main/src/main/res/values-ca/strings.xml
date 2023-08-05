@@ -124,7 +124,6 @@
     <string name="log_saving">S\'està enviant el registre…</string>
     <string name="log_saving_and_uploading">Publicant registre i carregant la imatge…</string>
     <string name="log_posting_log">Publicant registre…</string>
-    <string name="log_posting_twitter">Publicant Tweet…</string>
     <string name="log_posting_vote">S’està publicant el vot…</string>
     <string name="log_posting_image">Publicant imatges…</string>
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
@@ -712,7 +711,6 @@
     <string name="init_nearbysearchlimit_description">Limita la distància fins a la qual es retornen els catxés amb la cerca propera (0=il·limitat)</string>
     <string name="init_settings_description_unlimited">il·limitat</string>
     <string name="settings_category_geocaching_additionals">Serveis addicionals i addon</string>
-    <string name="settings_category_social">Xarxes socials</string>
     <string name="settings_category_logging_other">Altres opcions de registre</string>
     <string name="settings_goto_url_button">més…</string>
     <string name="settings_service_activate">Activa</string>
@@ -1016,8 +1014,6 @@
     <string name="settings_settings">Configuració</string>
     <string name="settings_information">Informació</string>
     <string name="settings_advanced">Configuració avançada</string>
-    <string name="settings_twitter_cache_message">Missatge per un catxé trobat</string>
-    <string name="settings_twitter_trackable_message">Missatge per un traçable trobat</string>
     <string name="init_ec_icons">Icones del mapa</string>
     <string name="settings_ec_icons_other">Estil propi</string>
     <string name="settings_ec_icons_oc">Com OC</string>
@@ -1152,8 +1148,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
     <string name="auth_token_explain_long">Empleneu la vostra credencial i toqueu el botó \"Autoritza c: geo\" per iniciar el procés. Aquest procés es connectarà a %s i recuperarà un testimoni d\'autenticació.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">El c:geo ara està autoritzat a publicar al Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
     <!-- auth geokrety -->
@@ -1565,8 +1559,6 @@
     <string name="imageview_error">No s\'ha pogut carregar la imatge</string>
     <string name="imageview_metadata_geopoint">Geopunt</string>
     <string name="imageview_metadata_comment">Comenta</string>
-    <!-- visit -->
-    <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa en viu</string>
@@ -2040,7 +2032,6 @@
     <string name="fangroup_link"><a href="">Grup d\'usuaris alemany</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo a Google Play</a></string>
-    <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
     <string name="github_title">Rastrejador d\'errors</string>
     <string name="faq_title">Preguntes freqüents</string>
     <!-- status (used via string based resource loading) -->
