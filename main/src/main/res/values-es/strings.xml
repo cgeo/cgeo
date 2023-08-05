@@ -124,7 +124,6 @@
     <string name="log_saving">Enviando registro…</string>
     <string name="log_saving_and_uploading">Publicando registro y subiendo imágenes…</string>
     <string name="log_posting_log">Enviando registro…</string>
-    <string name="log_posting_twitter">Publicando tweet…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
     <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
@@ -652,7 +651,6 @@
     <string name="settings_title_navigation_menu">Menú de navegación</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
     <string name="settings_category_geocaching_additionals">Servicios adicionales y addon</string>
-    <string name="settings_category_social">Redes sociales</string>
     <string name="settings_category_logging_other">Otras opciones de registro</string>
     <string name="settings_goto_url_button">más …</string>
     <string name="settings_service_activate">Activar</string>
@@ -915,8 +913,6 @@
     <string name="settings_settings">Ajustes</string>
     <string name="settings_information">Información</string>
     <string name="settings_advanced">Opciones avanzadas</string>
-    <string name="settings_twitter_cache_message">Mensaje para caché encontrado</string>
-    <string name="settings_twitter_trackable_message">Mensaje para rastreable encontrado</string>
     <string name="init_ec_icons">Iconos del mapa</string>
     <string name="settings_ec_icons_other">Estilo propio</string>
     <string name="settings_ec_icons_oc">Como OC</string>
@@ -1043,8 +1039,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
     <string name="auth_token_explain_long">Rellenando tus datos y presionando el botón \"autorizar a c:geo\" comenzará el proceso. Este proceso conectará con %s y obtendrá una autorización. Eso es todo.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo está autorizado ahora a publicar en Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo está autorizado a interactuar con %s.</string>
     <!-- auth geokrety -->
@@ -1395,8 +1389,6 @@
     <string name="formula_function_substring">Subhilo</string>
     <string name="formula_function_rot13">Rotar caracteres por 13</string>
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Publicar en Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa activo</string>
@@ -1859,7 +1851,6 @@ Nombre de archivo:%2$s</string>
     <string name="fangroup_link"><a href="">Grupo de usuarios alemán</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo en Google Play</a></string>
-    <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un caché?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">Preguntas frecuentes</string>
     <!-- status (used via string based resource loading) -->
