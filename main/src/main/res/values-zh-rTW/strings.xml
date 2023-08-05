@@ -117,7 +117,6 @@
     <string name="log_saving">傳送日誌</string>
     <string name="log_saving_and_uploading">發佈日誌和上傳照片中</string>
     <string name="log_posting_log">張貼日誌中</string>
-    <string name="log_posting_twitter">張貼到推特中</string>
     <string name="log_posting_vote">投票中</string>
     <string name="log_posting_image">張貼照片中</string>
     <string name="log_posting_generic_trackable">张贴 %1$s %2$d/%3$d</string>
@@ -544,7 +543,6 @@
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
     <string name="settings_category_geocaching_platform">地理藏寶平台</string>
     <string name="settings_category_geocaching_additionals">未來的服務與軟體plug-in</string>
-    <string name="settings_category_social">社群媒體</string>
     <string name="settings_category_logging_other">其他的登入選項</string>
     <string name="settings_goto_url_button">更多…</string>
     <string name="settings_service_activate">啟動</string>
@@ -757,8 +755,6 @@
     <string name="settings_settings">設定</string>
     <string name="settings_information">資訊</string>
     <string name="settings_advanced">進階設定</string>
-    <string name="settings_twitter_cache_message">找到的cache訊息</string>
-    <string name="settings_twitter_trackable_message">找到的 trackable的訊息</string>
     <string name="init_ec_icons">地圖圖示</string>
     <string name="settings_ec_icons_other">擁有的格式</string>
     <string name="settings_features">支援的功能</string>
@@ -862,8 +858,6 @@
     <!-- auth credentials -->
     <!-- auth token -->
     <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到%s並驗證您的身份。</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo正被授權在推特發表。</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo正被授權與%s互動。</string>
     <!-- auth geokrety -->
@@ -1126,8 +1120,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">發佈這個found到推特</string>
     <!-- map -->
     <string name="map_map">地圖</string>
     <string name="map_live">即時地圖</string>
