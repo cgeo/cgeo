@@ -8,6 +8,7 @@
 - Nowość: Przełącz powiadomienia zbliżeniowe z szybkich ustawień mapy
 - Nowość: Rozszerzone wsparcie GeoJSON dla map Google
 - Nowość: Wyświetlaj wskaźnik centrum wyszukiwania podczas wyszukiwania adresów => dotknij symbolu mapy
+- New: OpenTopoMap map provider
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
@@ -31,3 +32,4 @@
 - Nowość: zaktualizowano zintegrowany BRouter
 - Nowość: Dodano interfejs do OrganicMaps dla nawigacji
 - Poprawka: Znaki zakodowane w HTML w nazwie ostatnio widzianego przedmiotu podróżnego
+- Change: Removed outdated Twitter support
