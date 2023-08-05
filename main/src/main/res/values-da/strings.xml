@@ -121,7 +121,6 @@
     <string name="log_saving">Sender logbesked…</string>
     <string name="log_saving_and_uploading">Sender logs og billeder…</string>
     <string name="log_posting_log">Sender logbesked…</string>
-    <string name="log_posting_twitter">Sender tweet…</string>
     <string name="log_posting_vote">Sender din stemme på cachen…</string>
     <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
@@ -585,7 +584,6 @@
     <string name="settings_category_geocaching_platform">Geocaching-platform</string>
     <string name="init_settings_description_unlimited">ubegrænset</string>
     <string name="settings_category_geocaching_additionals">Yderligere tjenester og tilføjelser</string>
-    <string name="settings_category_social">Sociale medier</string>
     <string name="settings_category_logging_other">Andre logningsmuligheder</string>
     <string name="settings_goto_url_button">mere…</string>
     <string name="settings_service_activate">Aktivér</string>
@@ -794,8 +792,6 @@
     <string name="settings_settings">Indstillinger</string>
     <string name="settings_information">Information</string>
     <string name="settings_advanced">Avancerede indstillinger</string>
-    <string name="settings_twitter_cache_message">Besked for funden cache</string>
-    <string name="settings_twitter_trackable_message">Besked for funden Trackable</string>
     <string name="init_ec_icons">Kortsymboler</string>
     <string name="settings_ec_icons_other">Egen symbolstil</string>
     <string name="settings_ec_icons_oc">Som OC</string>
@@ -862,8 +858,6 @@
     <string name="auth_credentials_explain_short">Den følgende opsætningsguide vil give <b>c:geo</b> tilladelse til at tilgå %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ved at gennemføre denne opsætning, tillader du at <b>c:geo</b> kan få adgang til %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo er nu godkendt til at lave opslag på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo er nu godkendt til at arbejde sammen med %s.</string>
     <!-- auth geokrety -->
@@ -1138,8 +1132,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Post fund på Twitter</string>
     <!-- map -->
     <string name="map_map">Kort</string>
     <string name="map_live">Live-kort</string>
@@ -1540,7 +1532,6 @@
     <string name="facebook_link"><a href="">c:geo webside</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo på Google Play</a></string>
-    <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hver gang du logger en cache?</string>
     <string name="faq_title">Ofte stillede spørgsmål</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Din enhed bruger en ældre version af Android. Denne version af c:geo er ikke længere kompatibel med din enhed, hvilket kan medføre fejl eller uventet opførsel!\nTryk på denne besked for at få yderligere information.</string>
