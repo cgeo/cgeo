@@ -124,7 +124,6 @@
     <string name="log_saving">Sparar logg…</string>
     <string name="log_saving_and_uploading">Skickar logg och laddar upp bilder…</string>
     <string name="log_posting_log">Skickar logg…</string>
-    <string name="log_posting_twitter">Skickar tweet…</string>
     <string name="log_posting_vote">Skickar cache-röst…</string>
     <string name="log_posting_image">Skickar bilder…</string>
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
@@ -713,7 +712,6 @@
     <string name="init_nearbysearchlimit_description">Begränsar avståndet upp till vilka cacher som returneras med sökning i närheten (0=obegränsat)</string>
     <string name="init_settings_description_unlimited">obegränsad</string>
     <string name="settings_category_geocaching_additionals">Vidare tjänster och tillägg</string>
-    <string name="settings_category_social">Sociala media</string>
     <string name="settings_category_logging_other">Andra loggningsinställningar</string>
     <string name="settings_goto_url_button">mer …</string>
     <string name="settings_service_activate">Aktivera</string>
@@ -1016,8 +1014,6 @@
     <string name="settings_settings">Inställningar</string>
     <string name="settings_information">Information</string>
     <string name="settings_advanced">Avancerade inställningar</string>
-    <string name="settings_twitter_cache_message">Meddelande för hittad cache</string>
-    <string name="settings_twitter_trackable_message">Meddelande för hittad trackable</string>
     <string name="init_ec_icons">Kartikoner</string>
     <string name="settings_ec_icons_other">Egen stil</string>
     <string name="settings_ec_icons_oc">Som OC</string>
@@ -1152,8 +1148,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Följande process kommer ge <b>c:geo</b> tillgång till %s.</string>
     <string name="auth_token_explain_long">Fyll i dina inloggningsuppgifter och tryck på knappen \"auktorisera c:geo\" vilket kommer att starta processen. Den här processen kommer att ansluta till %s och hämta en autentiseringstoken. Det är allt.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
     <!-- auth geokrety -->
@@ -1565,8 +1559,6 @@
     <string name="imageview_error">Det gick inte att ladda bilden</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Kommentar</string>
-    <!-- visit -->
-    <string name="visit_tweet">Skicka att du hittat till Twitter</string>
     <!-- map -->
     <string name="map_map">Karta</string>
     <string name="map_live">Live karta</string>
@@ -2039,7 +2031,6 @@
     <string name="fangroup_link"><a href="">Tysk användargrupp</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo på Google Play</a></string>
-    <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">Vanliga frågor</string>
     <!-- status (used via string based resource loading) -->
