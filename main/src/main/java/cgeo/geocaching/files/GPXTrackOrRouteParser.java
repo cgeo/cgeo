@@ -33,9 +33,10 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         final Element pointsTrack = root.getChild(namespace, "trk");
         pointsTrack.setStartElementListener(attributes -> {
             if (parsingMode == PARSINGMODE.MODE_NONE) {
+                points = pointsTrack;
                 final Element trackSegment = points.getChild(namespace, "trkseg");
                 point = trackSegment.getChild(namespace, "trkpt");
-                configure(PARSINGMODE.MODE_TRACK, false, pointsTrack);
+                configure(PARSINGMODE.MODE_TRACK, false, points, false);
             }
         });
 
@@ -43,25 +44,25 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         final Element pointsRoute = root.getChild(namespace, "rte");
         pointsRoute.setStartElementListener(attributes -> {
             if (parsingMode == PARSINGMODE.MODE_NONE) {
+                points = pointsRoute;
                 point = points.getChild(namespace, "rtept");
-                configure(PARSINGMODE.MODE_ROUTE, true, pointsRoute);
+                configure(PARSINGMODE.MODE_ROUTE, true, point, true);
             }
         });
 
         return doParsing(stream, root);
     }
 
-    private void configure(final PARSINGMODE parsingMode, final boolean routeable, final Element points) {
+    private void configure(final PARSINGMODE parsingMode, final boolean routeable, final Element endElementForListener, final boolean resetToEmpty) {
         this.parsingMode = parsingMode;
         result.setRouteable(routeable);
-        this.points = points;
 
         temp = new ArrayList<>();
         setNameAndLatLonParsers();
-        point.setEndElementListener(() -> {
+        endElementForListener.setEndElementListener(() -> {
             if (temp.size() > 0) {
                 result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
-                temp = new ArrayList<>();
+                temp = resetToEmpty ? new ArrayList<>() : null;
             }
         });
     }
