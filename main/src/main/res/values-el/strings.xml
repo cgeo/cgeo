@@ -124,7 +124,6 @@
     <string name="log_saving">Αποστολή αρχείου καταγραφής…</string>
     <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και μεταφόρτωση εικόνων…</string>
     <string name="log_posting_log">Αποστολή καταγραφής…</string>
-    <string name="log_posting_twitter">Αποστολή tweet…</string>
     <string name="log_posting_vote">Δημοσίευση βαθμολογίας κρύπτης…</string>
     <string name="log_posting_image">Μεταφόρτωση εικόνων…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
@@ -685,7 +684,6 @@
     <string name="init_nearbysearchlimit_title">Όρια αναζήτησης αποτελεσμάτων</string>
     <string name="init_nearbysearchlimit_description">Περιορίζει την απόσταση μέχρι την οποία επιστρέφονται κρύπτες με κοντινή αναζήτηση (0=απεριόριστη)</string>
     <string name="settings_category_geocaching_additionals">Περαιτέρω υπηρεσίες και πρόσθετα</string>
-    <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
     <string name="settings_goto_url_button">περισσότερα…</string>
     <string name="settings_service_activate">Ενεργοποίηση</string>
@@ -966,8 +964,6 @@
     <string name="settings_settings">Ρυθμίσεις</string>
     <string name="settings_information">Πληροφορίες</string>
     <string name="settings_advanced">Σύνθετες ρυθμίσεις</string>
-    <string name="settings_twitter_cache_message">Μήνυμα για εύρεση κρύπτης</string>
-    <string name="settings_twitter_trackable_message">Μήνυμα για εύρεση ανιχνεύσιμου</string>
     <string name="init_ec_icons">Εικονίδια χάρτη</string>
     <string name="settings_ec_icons_other">Δικό μου στυλ</string>
     <string name="settings_ec_icons_oc">Σαν OC</string>
@@ -1099,8 +1095,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Η ακόλουθη διαδικασία θα επιτρέψει στο <b>c:geo</b> να αποκτήσει πρόσβαση σε %s.</string>
     <string name="auth_token_explain_long">Συμπληρώνοντας τα στοιχεία σας και πατώντας το κουμπί «εξουσιοδοτήστε το c:geo», θα ξεκινήσει η διαδικασία. Με αυτή θα συνδεθείτε με το %s και θα ανακτήσετε έναν κωδικό πιστοποίησης. Αυτό είναι όλο.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">Το c:geo είναι τώρα εξουσιοδοτημένο να δημοσιεύει στο Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">Το c:geo είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με %s.</string>
     <!-- auth geokrety -->
@@ -1501,8 +1495,6 @@
     <string name="imageview_width_height">%1$d x %2$d px</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Σχόλιο</string>
-    <!-- visit -->
-    <string name="visit_tweet">Δημοσιεύστε αυτή την εύρεση στο Twitter</string>
     <!-- map -->
     <string name="map_map">Χάρτης</string>
     <string name="map_live">Live Χάρτης</string>
@@ -1974,7 +1966,6 @@
     <string name="fangroup_link"><a href="">Γερμανική ομάδα χρηστών</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo στο Google Play</a></string>
-    <string name="about_twitter">Να δημοσιεύει το<b>c:geo</b> μια νέα κατάσταση στο Twitter κάθε φορά που καταγράφετε μια κρύπτη;</string>
     <string name="github_title">Εντοπίστης σφαλμάτων</string>
     <string name="faq_title">Συχνές ερωτήσεις</string>
     <!-- status (used via string based resource loading) -->
