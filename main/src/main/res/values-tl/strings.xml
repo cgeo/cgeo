@@ -84,7 +84,6 @@
     <string name="log_save">I-save ang offline</string>
     <string name="log_saving">Ang pagpadala ng mensahe&#8230;</string>
     <string name="log_posting_log">Ang pag-post ng log&#8230;</string>
-    <string name="log_posting_twitter">Ang pag-post ng tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Ang pag-popost ay %1$s%2$d%3$d</string>
     <string name="log_clear">Malinaw</string>
     <string name="log_post_not_possible">Ang pag-download ng datos ay nasa pag-unlad&#8230;\nMaaaring subukang muli makalipas ang ilang minuto o suriin ang iyong internet koneksiyon.</string>
@@ -330,7 +329,6 @@
     <string name="settings_title_basicmembers">Ang mga opsyon sa mga baguhang miyembro</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Menu ng Nabigasyon</string>
-    <string name="settings_category_social">Sosyal Medya</string>
     <string name="settings_category_logging_other">Iba pang mga Logging na pagpipilian</string>
     <string name="settings_goto_url_button">higit pa &#8230;</string>
     <string name="settings_service_activate">Gawing aktibo</string>
@@ -450,8 +448,6 @@
     <string name="settings_settings">Ang mga setting</string>
     <string name="settings_information">Impormasyon</string>
     <string name="settings_advanced">Pinahusay na setting</string>
-    <string name="settings_twitter_cache_message">Mesahe para sa natagpuang cache</string>
-    <string name="settings_twitter_trackable_message">Mensahe para sa natagpuang trackable</string>
     <string name="init_ec_icons">Ang mga imahe ng mapa</string>
     <string name="settings_ec_icons_other">Sariling estilo</string>
     <string name="settings_ec_icons_oc">Tulad ng OC</string>
@@ -501,8 +497,6 @@
     <string name="auth_credentials_explain_short">Ang mga sumusunod na proseso ay pinapayagan ang <b>c:geo</b> sna ma-access ang %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang mga sumusunod na mga proseso ay pinapayagan ang <b>c:geo</b> na ma-access ang %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">ang c:geo ay awtorisadong nang magpost sa Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">ang c:geo ay awtorisadong nang mag-interak kasama ang %s.</string>
     <!-- auth geokrety -->
@@ -708,8 +702,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Ipaskil ang paghahanap na ito sa Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Ang live na mapa</string>
@@ -1050,7 +1042,6 @@
     <string name="facebook_link"><a href="">c:geo na pahina</a></string>
     <string name="market_title">Ang google play</string>
     <string name="market_link">&lt;a href=\'\"&gt;c:geo sa google play&lt;/a&gt;</string>
-    <string name="about_twitter">Dapat ang <b>d:geo</b> ilathala ang bagong katayuan sa twitter bawat oras na iyong pag log ng cahce?</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Nagsasalitang kumpas</string>
