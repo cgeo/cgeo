@@ -124,7 +124,6 @@
     <string name="log_saving">Siunčiamas įrašas…</string>
     <string name="log_saving_and_uploading">Skelbiamas įrašas ir įkeliami vaizdai…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
-    <string name="log_posting_twitter">Skelbiamas Tweet…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
     <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
@@ -728,7 +727,6 @@
     <string name="init_nearbysearchlimit_description">Apriboja atstumą, iki kurio slėptuvės rodomos atliekant paiešką netoliese (0= neribotas)</string>
     <string name="init_settings_description_unlimited">neribotas</string>
     <string name="settings_category_geocaching_additionals">Kitos paslaugos ir priedai</string>
-    <string name="settings_category_social">Socialiniai tinklai</string>
     <string name="settings_category_logging_other">Kitos registravimo parinktys</string>
     <string name="settings_goto_url_button">Plačiau</string>
     <string name="settings_service_activate">Aktyvuoti</string>
@@ -1032,8 +1030,6 @@
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
     <string name="settings_advanced">Išplėstiniai parametrai</string>
-    <string name="settings_twitter_cache_message">Surastos slėptuvės žinutė</string>
-    <string name="settings_twitter_trackable_message">Surasto keliauninko žinutė</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1172,8 +1168,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo dabar registruota ir leidžiama naudotis %s.</string>
     <!-- auth geokrety -->
@@ -1603,8 +1597,6 @@
     <string name="imageview_error">Nepavyko įkelti vaizdo</string>
     <string name="imageview_metadata_geopoint">Geo taškas</string>
     <string name="imageview_metadata_comment">Komentaras</string>
-    <!-- visit -->
-    <string name="visit_tweet">Paskelbti šį radinį Twitter paskyroje</string>
     <!-- map -->
     <string name="map_map">Žemėlapis</string>
     <string name="map_live">Žemėlapis gyvai</string>
@@ -2079,7 +2071,6 @@
     <string name="fangroup_link"><a href="">Vokietijos vartotojų grupė</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo Google Play</a></string>
-    <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">DUK</string>
     <!-- status (used via string based resource loading) -->
