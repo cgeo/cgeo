@@ -124,7 +124,6 @@
     <string name="log_saving">Enregistrement en cours…</string>
     <string name="log_saving_and_uploading">Envoi de la visite et des images…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
-    <string name="log_posting_twitter">Envoi du Tweet…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
     <string name="log_posting_image">Envoi des images…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
@@ -716,7 +715,6 @@
     <string name="init_nearbysearchlimit_description">Distance maximale pour la recherche de caches à proximité (0=illimité)</string>
     <string name="init_settings_description_unlimited">illimité</string>
     <string name="settings_category_geocaching_additionals">Autres services et addons</string>
-    <string name="settings_category_social">Réseaux sociaux</string>
     <string name="settings_category_logging_other">Options de visite supplémentaires</string>
     <string name="settings_goto_url_button">plus…</string>
     <string name="settings_service_activate">Activer</string>
@@ -1017,8 +1015,6 @@
     <string name="settings_settings">Paramètres</string>
     <string name="settings_information">Information</string>
     <string name="settings_advanced">Paramètres avancés</string>
-    <string name="settings_twitter_cache_message">Message pour une cache trouvée</string>
-    <string name="settings_twitter_trackable_message">Message pour un objet voyageur trouvé</string>
     <string name="init_ec_icons">Icônes de carte</string>
     <string name="settings_ec_icons_other">Style propre</string>
     <string name="settings_ec_icons_oc">Comme ceux de OC</string>
@@ -1154,8 +1150,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Vous êtes sur le point d\'autoriser <b>c:geo</b> à accéder à %s.</string>
     <string name="auth_token_explain_long">Renseigner vos identifiants et appuyer sur le bouton \"Autoriser c:geo\" démarrera le processus. Ce processus va se connecter à %s et récupérer un jeton d\'authentification. C\'est tout.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
     <!-- auth geokrety -->
@@ -1571,8 +1565,6 @@
     <string name="imageview_error">Impossible de charger l\'image</string>
     <string name="imageview_metadata_geopoint">Geopoint</string>
     <string name="imageview_metadata_comment">Commentaire</string>
-    <!-- visit -->
-    <string name="visit_tweet">Publier votre découverte sur Twitter</string>
     <!-- map -->
     <string name="map_map">Carte</string>
     <string name="map_live">Carte temps réel</string>
@@ -2046,7 +2038,6 @@
     <string name="fangroup_link"><a href="">Groupe d\'utilisateurs allemand</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
-    <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
     <string name="github_title">Suivi des bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
