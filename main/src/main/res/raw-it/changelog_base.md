@@ -8,6 +8,7 @@
 - New: Toggle proximity notifications from map quick settings
 - New: Extended GeoJSON support for Google Maps
 - New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### Dettagli del cache
 - Nuovo: pulsante 'Salva e carica' durante la modifica della nota personale
@@ -31,3 +32,4 @@
 - New: Updated integrated BRouter
 - New: Add interface to OrganicMaps for navigation
 - Fix: HTML-encoded chars in 'trackable last spotted" name
+- Change: Removed outdated Twitter support
