@@ -2892,4 +2892,10 @@
     <!-- message center notifications -->
     <string name="mcpolling_title">Centrum zpráv</string>
     <string name="mcpolling_summary">Kontrola příchozích zpráv v centru zpráv v pravidelných intervalech</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d nepřečtená zpráva v centru zpráv</item>
+        <item quantity="few">%d nepřečtené zprávy v centru zpráv</item>
+        <item quantity="many">%d nepřečtené zprávy v centru zpráv</item>
+        <item quantity="other">%d nepřečtených zpráv v centru zpráv</item>
+    </plurals>
 </resources>
