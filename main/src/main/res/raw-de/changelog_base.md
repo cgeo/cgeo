@@ -8,7 +8,7 @@
 - Neu: Annäherungsbenachrichtigungen in den Kartenschnelleinstellungen umschalten
 - Neu: Erweiterte Unterstützung von GeoJSON auf Google Maps
 - Neu: Kennzeichne den Suchmittelpunkt auf der Karte (Adresssuche an => Kartensymbol)
-- New: OpenTopoMap map provider
+- Neu: OpenTopoMap Kartenquelle
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
@@ -32,4 +32,4 @@
 - Neu: Internen BRouter auf v1.7.2 aktualisiert
 - Neu: Navigations-Schnittstelle zu OrganicMaps
 - Korrektur: HTML-kodierte Zeichen im 'Trackable gesehen bei' Namen
-- Change: Removed outdated Twitter support
+- Änderung: Veralteten Twitter-Support entfernt
