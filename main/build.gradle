@@ -469,7 +469,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.browser:browser:1.6.0'
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
