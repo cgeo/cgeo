@@ -700,7 +700,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_select_next100, adapter.isSelectMode()); // same here
 
             setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_cache_list_app, listNavigationApps.size() == 1, !isEmpty);
 
             // Manage Caches submenu
             setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
@@ -905,10 +904,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_show_attributes) {
             adapter.showAttributes();
-        } else if (menuItem == R.id.menu_cache_list_app) {
-            if (cacheToShow()) {
-                CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(adapter.getList()), this, getFilteredSearch());
-            }
         } else if (menuItem == R.id.menu_make_list_unique) {
             new MakeListUniqueCommand(this, listId) {
 
