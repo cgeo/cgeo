@@ -1014,9 +1014,7 @@ public class Settings {
     }
 
     public static int getMapOsmThreads() {
-        // @todo temporarily disabled, see https://github.com/orgs/cgeo/discussions/73
-        return 1;
-        // return hasOSMMultiThreading() ? Math.max(1, getInt(R.string.pref_map_osm_threads, Math.min(Runtime.getRuntime().availableProcessors() + 1, 4))) : 1;
+        return hasOSMMultiThreading() ? Math.max(1, getInt(R.string.pref_map_osm_threads, Math.min(Runtime.getRuntime().availableProcessors() + 1, 4))) : 1;
     }
 
     public static int getCompactIconMode() {
