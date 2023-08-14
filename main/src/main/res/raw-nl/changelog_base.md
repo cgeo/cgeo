@@ -1,5 +1,4 @@
 ### Kaart
-- Wijziging: (alleen OpenStreetMap kaarten): Tijdelijk uitgeschakelde multithreading optie voor testdoeleinden - we proberen enkele crashes te pinnen die gerelateerd kunnen zijn aan die optie
 - Wijziging: Altijd pop-up menu weergeven op cache/waypoint lange tik (configureerbaar)
 - Nieuw: Voeg 'Instellen als doel' toe aan lang tikken op kaart pop-up
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
