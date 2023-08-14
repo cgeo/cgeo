@@ -1,5 +1,4 @@
 ### Karte
-- Ändern (nur OpenStreetMap): Multithreading-Option temporär für Testzwecke deaktiviert - wir versuchen einige Abstürze einzugrenzen, die einen Bezug zu dieser Option haben könnten
 - Änderung: Beim langen Tippen auf Cache/Wegpunkt immer Popupmenü anzeigen (konfigurierbar)
 - Neu: 'Als Ziel setzen' im Karten-Popup bei langem Tippen
 - Korrektur: Downloader: Unvollständig kopierte Dateien nicht gelöscht
