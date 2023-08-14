@@ -1,21 +1,20 @@
 ### 지도
-- Change (OpenStreetMap maps only): Temporarily disabled multithreading option for testing purposes - we are trying to pin some crashes which may be related to that option
-- Change: Always show popup menu on cache/waypoint long-tap (configurable)
-- New: Add 'Set as target' to map's long-tap popup
-- Fix: Partial files remaining on aborted copying of downloaded files
-- New: Integrity check for downloaded routing tiles
-- New: Support for user-selected audio for proximity notifications
-- New: Toggle proximity notifications from map quick settings
-- New: Extended GeoJSON support for Google Maps
-- New: Display a search center indicator when performing address search => tap on map symbol
-- New: OpenTopoMap map provider
+- 변경: 캐시/지점 길게 탭 시 항상 팝업 메뉴 표시(구성 가능)
+- 신규: 지도의 길게 탭 팝업에 '목표로 설정' 추가
+- 수정: 다운로드한 파일의 복사 중단 시 일부 파일이 남아 있음
+- 신규: 다운로드된 라우팅 타일에 대한 무결성 검사
+- 신규: 근접 알림을 위한 사용자 선택 오디오 지원
+- 신규: 지도 빠른 설정에서 근접 알림을 전환합니다.
+- 신규: Google 지도에 대한 확장된 GeoJSON 지원
+- 신규: 주소 검색을 수행할 때 검색 센터 표시기 표시 => 지도 기호 누름
+- 신규: OpenTopoMap 지도 제공자
 
 ### 캐시 상세정보
 - 신규: 개인 메모 편집 시 '저장 및 업로드' 버튼
 - 변경: 대부분의 업데이트 진행률 대화 상자를 백그라운드 작업으로 교체
 - 변경: '마지막 로그 반복'에 비어 있지 않은 로그만 사용
 - 신규: 로그 오류 표시
-- New: Allow selecting, copying etc. of image description (EXIF info)
+- 신규: 이미지 설명 (EXIF 정보) 선택, 복사 등 허용
 
 ### 일반
 - 신규: 더 많은 숫자 이모티콘 추가 (별도의 범주)
@@ -31,5 +30,5 @@
 - 신규: 마지막 하단 탐색 항목을 사용자 정의할 수 있도록 합니다.
 - 신규: 업데이트된 통합 BRouter
 - 신규: 탐색을 위해 OrganicMaps에 인터페이스 추가
-- Fix: HTML-encoded chars in 'trackable last spotted" name
-- Change: Removed outdated Twitter support
+- 수정: '추적아이템 마지막 발견' 이름의 HTML 인코딩 문자
+- 변경: 오래된 Twitter 지원 제거

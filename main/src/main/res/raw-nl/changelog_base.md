@@ -1,5 +1,4 @@
 ### Kaart
-- Wijziging: (alleen OpenStreetMap kaarten): Tijdelijk uitgeschakelde multithreading optie voor testdoeleinden - we proberen enkele crashes te pinnen die gerelateerd kunnen zijn aan die optie
 - Wijziging: Altijd pop-up menu weergeven op cache/waypoint lange tik (configureerbaar)
 - Nieuw: Voeg 'Instellen als doel' toe aan lang tikken op kaart pop-up
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
@@ -8,7 +7,7 @@
 - Nieuw: Nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
 - Nieuw: Uitgebreide GeoJSON ondersteuning voor Google Maps
 - Nieuw: Toon een zoekcentrum indicator bij het zoeken van adres => tik op kaart symbool
-- New: OpenTopoMap map provider
+- Nieuw: OpenTopoMap kaartaanbieder
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
@@ -32,4 +31,4 @@
 - Nieuw: bijgewerkt geïntegreerd BRouter
 - Nieuw: Voeg interface toe aan OrganicMaps voor navigatie
 - Oplossing: HTML-gecodeerde tekens in de naam 'trackable last spotted'
-- Change: Removed outdated Twitter support
+- Wijziging: Verouderde Twitter-ondersteuning verwijderd
