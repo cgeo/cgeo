@@ -56,7 +56,7 @@ public class MapSettingsUtils {
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
-        final boolean showPNMastertoggle = Settings.isGeneralProximityNotificationActive() || Settings.isSpecificProximityNotificationActive();
+        final boolean showPNMastertoggle = Settings.showProximityNotificationMasterToggle();
 
         final GeocacheFilter filter = filterContext.get();
         final Map<GeocacheFilter.QuickFilter, Boolean> quickFilter = filter.getQuickFilter();

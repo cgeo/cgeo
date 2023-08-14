@@ -1422,6 +1422,11 @@ public class Settings {
         return getBoolean(R.string.pref_proximityNotificationMasterToggle, true);
     }
 
+    /** similar to isGeneralProximityNotificationActive() || isSpecificProximityNotificationActive(), but without checking isProximityNotificationMasterToggleOn() */
+    public static boolean showProximityNotificationMasterToggle() {
+        return getBoolean(R.string.pref_proximityNotificationGeneral, false) || getBoolean(R.string.pref_proximityNotificationSpecific, false);
+    }
+
     /**
      * master toggle to enable/disable proximity notifications without changing their individual settings
      * still requires individual notifications to be enabled / configured to get notifications
