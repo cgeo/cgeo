@@ -1,5 +1,4 @@
 ### Mapa
-- Změna (pouze mapy OpenStreetMap): Dočasně vypnuta možnost multithreadingu pro účely testování - snažíme se zjistit některé pády, které mohou s touto možností souviset
 - Změna: Při dlouhém poklepání na kešku/waypoint se vždy zobrazí kontextové menu (konfigurovatelné)
 - Novinka: Přidání možnosti "Nastavit jako cíl" do vyskakovacího okna mapy při dlouhém klepnutí
 - Oprava: Částečně zachované soubory při přerušeném kopírování stažených souborů
