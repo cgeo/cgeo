@@ -1,13 +1,13 @@
 ### Mapa
-- Změna: Při dlouhém poklepání na kešku/waypoint se vždy zobrazí kontextové menu (konfigurovatelné)
-- Novinka: Přidání možnosti "Nastavit jako cíl" do vyskakovacího okna mapy při dlouhém klepnutí
-- Oprava: Částečně zachované soubory při přerušeném kopírování stažených souborů
-- Novinka: Kontrola integrity pro stažené dlaždice navigace
-- Novinka: Podpora uživatelem vybraného zvuku pro oznámení o přiblížení
-- Novinka: Přepínání upozornění na přiblížení z rychlého nastavení mapy
-- Novinka: Rozšířená podpora GeoJSON pro Google Mapy
-- Nové: Zobrazení ukazatele středu vyhledávání při hledání adresy => klepněte na symbol mapy
-- Novinka: Poskytovatel map OpenTopoMap
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### Detaily kešky
 - Novinka: Přidáno tlačítko "Uložit a nahrát" při úpravě osobní poznámky
