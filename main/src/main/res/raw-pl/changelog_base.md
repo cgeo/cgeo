@@ -1,5 +1,4 @@
 ### Mapa
-- Zmiana (tylko mapy OpenStreetMap): tymczasowo wyłączona opcja wielowątkowości do celów testowania – próbujemy namierzyć kilka awarii, które mogą być związane z tą opcją
 - Zmiana: Zawsze pokazuj wyskakujące menu po długim dotknięciu na skrytce/punkcie nawigacji (konfigurowalne)
 - Nowość: Dodaj 'Ustaw jako cel' do wyskakującego okna po długim dotknięciu
 - Poprawka: Pliki częściowe pozostałe po przerwaniu kopiowania pobranych plików
@@ -8,7 +7,7 @@
 - Nowość: Przełącz powiadomienia zbliżeniowe z szybkich ustawień mapy
 - Nowość: Rozszerzone wsparcie GeoJSON dla map Google
 - Nowość: Wyświetlaj wskaźnik centrum wyszukiwania podczas wyszukiwania adresów => dotknij symbolu mapy
-- New: OpenTopoMap map provider
+- Nowość: dostawca mapy OpenTopoMap
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
