@@ -374,7 +374,7 @@ dependencies {
 
     // Mapsforge VTM implementation
     String mapsforgeVTMSource = 'org.mapsforge'
-    String mapsforgeVTMVersion = '0.19.0'
+    String mapsforgeVTMVersion = '0.20.0'
 
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
