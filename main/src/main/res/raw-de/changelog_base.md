@@ -1,13 +1,13 @@
 ### Karte
-- Änderung: Beim langen Tippen auf Cache/Wegpunkt immer Popupmenü anzeigen (konfigurierbar)
-- Neu: 'Als Ziel setzen' im Karten-Popup bei langem Tippen
-- Korrektur: Downloader: Unvollständig kopierte Dateien nicht gelöscht
-- Neu: Integritätsprüfung für heruntergeladene Routingdaten
-- Neu: Unterstützung eigener Audiodateien für die Annäherungsbenachrichtigung
-- Neu: Annäherungsbenachrichtigungen in den Kartenschnelleinstellungen umschalten
-- Neu: Erweiterte Unterstützung von GeoJSON auf Google Maps
-- Neu: Kennzeichne den Suchmittelpunkt auf der Karte (Adresssuche an => Kartensymbol)
-- Neu: OpenTopoMap Kartenquelle
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### Cache-Details
 - Neu: "Speichern und Hochladen"-Button beim Bearbeiten der persönlichen Notiz
