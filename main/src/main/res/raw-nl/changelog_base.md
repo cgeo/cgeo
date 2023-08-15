@@ -1,13 +1,13 @@
 ### Kaart
-- Wijziging: Altijd pop-up menu weergeven op cache/waypoint lange tik (configureerbaar)
-- Nieuw: Voeg 'Instellen als doel' toe aan lang tikken op kaart pop-up
-- Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
-- Nieuw: Integriteitscontrole voor gedownloade routeringstegels
-- Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
-- Nieuw: Nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
-- Nieuw: Uitgebreide GeoJSON ondersteuning voor Google Maps
-- Nieuw: Toon een zoekcentrum indicator bij het zoeken van adres => tik op kaart symbool
-- Nieuw: OpenTopoMap kaartaanbieder
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
 
 ### Cache details
 - Nieuw: 'Opslaan en uploaden' knop bij het bewerken van persoonlijke notitie
