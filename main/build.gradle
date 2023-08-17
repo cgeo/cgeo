@@ -127,7 +127,7 @@ android {
         }
     }
 
-    buildTypes.all { buildType ->
+    buildTypes.configureEach { buildType ->
         // as it affects the build speed, do skip some steps for debug builds
         if (buildType.name != 'debug') {
             // enable proguard and remove unused code
@@ -238,7 +238,7 @@ android {
         }
     }
 
-    flavorDimensions "javaCompilerTime" // all flavours must be assigned a dimension
+    flavorDimensions.add("javaCompilerTime") // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
@@ -253,21 +253,21 @@ android {
     }
 
     // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
             outputFileName = outputFileName.replace('-basic-', '-')
         }
     }
 
     // special version code for nightly and rc builds
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         if (variant.buildType.name == 'nightly') {
-            variant.outputs.all {
+            variant.outputs.configureEach {
                 setVersionCodeOverride(versionCodeFromDate(10000000))
             }
         }
         if (variant.buildType.name == 'rc') {
-            variant.outputs.all {
+            variant.outputs.configureEach {
                 setVersionCodeOverride(versionCodeFromDate(-1))
             }
         }
@@ -275,7 +275,7 @@ android {
             String legacyName = System.getenv('LEGACY_VERSION_NAME')
             Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
             if (legacyName != null && legacyVersion != null) {
-                variant.outputs.all {
+                variant.outputs.configureEach {
                     setVersionNameOverride(legacyName)
                     setVersionCodeOverride(legacyVersion)
                 }
@@ -561,7 +561,7 @@ static boolean isContinuousIntegrationServer() {
 }
 
 // have a run task for our builds to launch the app directly from gradle
-android.applicationVariants.all { variant ->
+android.applicationVariants.configureEach { variant ->
     if (variant.installProvider) {
         tasks.register("run${variant.name.capitalize()}") {
             group 'cgeo'
@@ -591,7 +591,7 @@ android.applicationVariants.all { variant ->
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
 // This uses eager task creation API.
-tasks.create('testDebug') {
+tasks.register('testDebug') {
     group 'verification'
     description "Tests the debug build both with device-dependent and device-independent tests."
 
@@ -662,7 +662,7 @@ tasks.register('copyDefaultPreferencesToAndroid') {
     }
 }
 
-tasks.whenTaskAdded { theTask ->
+tasks.configureEach { theTask ->
     // only verify the existence of private.properties, when the file is really needed
     if (theTask.name == "packageRelease") {
         theTask.dependsOn "verifyPrivateProperties"
