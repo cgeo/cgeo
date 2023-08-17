@@ -86,7 +86,7 @@ tasks.register('cgeoHelp') {
 // filter out non release version updates and other updates we cannot use
 allprojects {
     configurations {
-        all {
+        configureEach {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
@@ -133,7 +133,7 @@ subprojects {
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.compilerArgs << "-Xlint:-processing"
     }
 
