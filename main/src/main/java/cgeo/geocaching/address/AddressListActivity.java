@@ -45,7 +45,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
         final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword)
-                .onErrorResumeWith(MapQuestGeocoder.getFromLocationName(keyword));
+                .onErrorResumeNext(throwable -> MapQuestGeocoder.getFromLocationName(keyword));
         AndroidRxUtils.bindActivity(this, geocoderObservable.toList()).subscribe(foundAddresses -> {
             waitDialog.dismiss();
             addresses.addAll(foundAddresses);
