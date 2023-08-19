@@ -1115,8 +1115,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final DetailsViewCreator creator = creatorRef.get();
             if (creator != null) {
                 super.handleRegularMessage(message);
-                creator.updateWatchlistBox(activityWeakReference.get());
-                creator.updateFavPointBox();
+                if (creator.getContext() != null) {
+                    creator.updateWatchlistBox(activityWeakReference.get());
+                    creator.updateFavPointBox();
+                }
             }
         }
     }
