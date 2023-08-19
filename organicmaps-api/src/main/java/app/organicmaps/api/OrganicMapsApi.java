@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import java.util.ArrayList;
 
 public class OrganicMapsApi {
+
+    static final String PACKAGE_NAME_RELEASE = "app.organicmaps";
+    static final String PACKAGE_NAME_DEBUG = "app.organicmaps.debug";
+    static final String PACKAGE_NAME_BETA = "app.organicmaps.beta";
 
     private OrganicMapsApi() {
         // utility class
@@ -28,7 +33,7 @@ public class OrganicMapsApi {
     };
 
     public static void sendRequest(final Activity caller, final Intent intent) {
-        if (isOrganicMapsInstalled(caller)) {
+        if (canHandleOrganicMapsIntents(caller)) {
             caller.startActivity(intent);
         } else {
             new DownloadDialog(caller).show();
@@ -36,11 +41,20 @@ public class OrganicMapsApi {
     }
 
     /**
-     * Detects if any version of OrganicMaps is installed on the device
+     * Detects if any handler for OrganicMaps intents is installed on the device
      */
-    public static boolean isOrganicMapsInstalled(final Context context) {
+    public static boolean canHandleOrganicMapsIntents(final Context context) {
         final ComponentName c = new MapRequest().toIntent().resolveActivity(context.getPackageManager());
         return c != null;
     }
 
+    /**
+     * Detects if one of the specific OrganicMaps packages is installed
+     */
+    public static boolean isOrganicMapsPackageInstalled(final Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return (pm.getLaunchIntentForPackage(PACKAGE_NAME_RELEASE) != null
+                || pm.getLaunchIntentForPackage(PACKAGE_NAME_BETA) != null
+                || pm.getLaunchIntentForPackage(PACKAGE_NAME_DEBUG) != null);
+    }
 }
