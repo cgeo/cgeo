@@ -1116,7 +1116,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (creator != null) {
                 super.handleRegularMessage(message);
                 creator.updateWatchlistBox(activityWeakReference.get());
-                creator.updateFavPointBox();
+                creator.updateFavPointBox(activityWeakReference.get());
             }
         }
     }
@@ -1252,7 +1252,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // favorite points
             binding.addToFavpoint.setOnClickListener(new FavoriteAddClickListener());
             binding.removeFromFavpoint.setOnClickListener(new FavoriteRemoveClickListener());
-            updateFavPointBox();
+            updateFavPointBox(activity);
 
             // data license
             final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -1521,7 +1521,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Show/hide buttons, set text in favorite line and box
          */
-        private void updateFavPointBox() {
+        private void updateFavPointBox(final CacheDetailActivity activity) {
             // Favorite counts
             final int favCount = cache.getFavoritePoints();
             if (favCount >= 0 && !cache.isEventCache()) {
@@ -1529,9 +1529,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                 final int findsCount = cache.getFindsCount();
                 if (findsCount > 0) {
-                    favoriteLine.valueView.setText(getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
+                    favoriteLine.valueView.setText(activity.res.getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
                 } else {
-                    favoriteLine.valueView.setText(getString(R.string.favorite_count, favCount));
+                    favoriteLine.valueView.setText(activity.res.getString(R.string.favorite_count, favCount));
                 }
             } else {
                 favoriteLine.layout.setVisibility(View.GONE);
