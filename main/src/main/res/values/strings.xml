@@ -1188,7 +1188,6 @@
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
-    <string name="settings_advanced">Advanced settings</string>
     <string name="init_ec_icons">Map Icons</string>
     <string name="settings_ec_icons_other">Own style</string>
     <string name="settings_ec_icons_oc">Like OC</string>
@@ -1442,10 +1441,8 @@
     <string name="cache_personal_note_limit">Personal note limit</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">This personal note will be truncated by approx. %1$d characters by %3$s (max size %2$d).</string>
     <string name="cache_personal_note_upload">Upload</string>
-    <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
     <string name="cache_personal_note_upload_error">Error uploading personal note</string>
-    <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_personal_note_save_and_upload">Save and upload</string>
     <string name="cache_personal_note_vars_out_of_sync">Variables in notes are out of sync (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sync variables</string>
@@ -1498,14 +1495,6 @@
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory…</string>
     <string name="cache_dialog_refresh_title">Refresh</string>
     <string name="cache_dialog_refresh_message">Reloading cache details…</string>
-    <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist…</string>
-    <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
-    <string name="cache_dialog_favorite_add_title">Favorite</string>
-    <string name="cache_dialog_favorite_add_message">Adding cache to your favorites…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorite</string>
-    <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites…</string>
     <string name="cache_menu_navigate">Navigate</string>
     <string name="cache_menu_target">Set as target</string>
     <string name="cache_menu_navigation_drive">Navigation (Driving)</string>
@@ -1619,7 +1608,6 @@
     <string name="cachedetails_progress_unwatch">Removed from watchlist</string>
     <string name="cachedetails_progress_favorite">Added to favorites</string>
     <string name="cachedetails_progress_unfavorite">Removed from favorites</string>
-    <string name="cachedetails_progress_upload_note">Personal note uploaded</string>
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
@@ -1639,7 +1627,6 @@
 
     <string name="context_map_add_to_route">Append to route</string>
     <string name="context_map_add_to_route_start">Prepend to route</string>
-    <string name="context_map_remove_from_route">Remove from route</string>
     <string name="context_map_remove_from_route_start">Remove from start</string>
     <string name="context_map_remove_from_route_pos">Remove from position %d</string>
     <string name="context_map_remove_from_route_end">Remove from end</string>
@@ -1736,8 +1723,6 @@
     <string name="waypoint_save_and_modify_on_website">Set as cache coordinates in c:geo and on website</string>
     <string name="waypoint_reset_cache_coords">Reset cache coordinates</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Cache coordinates have been reset on website.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Resetting cache coordinates on website…</string>
-    <string name="waypoint_reset">Reset</string>
     <string name="waypoint_localy_reset_cache_coords">Reset in c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Reset in c:geo and on website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Website doesn\'t support modifying cache coordinates.</string>
