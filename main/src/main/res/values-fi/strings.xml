@@ -1380,6 +1380,7 @@
     <string name="cache_recently_viewed">Äskettäin katsottu</string>
     <string name="cache_recently_viewed_empty">Ei äskettäin katsottuja kätköjä</string>
     <string name="cache_clear_recently_viewed">tyhjennä</string>
+    <string name="cachedetails_progress_upload_note">Oma muistiinpano ladattu</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
