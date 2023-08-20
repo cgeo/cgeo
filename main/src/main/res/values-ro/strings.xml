@@ -629,9 +629,7 @@
     <string name="cache_dialog_watchlist_add_message">Adăugare cutie în lista de cutii urmărite…</string>
     <string name="cache_dialog_watchlist_remove_title">Listă cutii urmărite</string>
     <string name="cache_dialog_watchlist_remove_message">Ştergere geocutie din lista celor urmărite…</string>
-    <string name="cache_dialog_favorite_add_title">Favorită</string>
     <string name="cache_dialog_favorite_add_message">Adăugare la favorite…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorită</string>
     <string name="cache_dialog_favorite_remove_message">Ştergere geocutie din lista celor favorite…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
@@ -696,6 +694,7 @@
     <string name="cache_share_field">ora</string>
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
+    <string name="cachedetails_progress_upload_note">Nota personală a fost încărcată</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
