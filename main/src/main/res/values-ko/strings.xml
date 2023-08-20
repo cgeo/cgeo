@@ -1315,9 +1315,9 @@
     <string name="cache_dialog_watchlist_add_message">캐시를 관심목록에 추가중…</string>
     <string name="cache_dialog_watchlist_remove_title">관심목록</string>
     <string name="cache_dialog_watchlist_remove_message">캐시를 관심목록서 삭제중…</string>
-    <string name="cache_dialog_favorite_add_title">호감캐시</string>
+    <string name="cache_dialog_favorite_add_title">호감점수</string>
     <string name="cache_dialog_favorite_add_message">호감캐시로 추가중…</string>
-    <string name="cache_dialog_favorite_remove_title">호감캐시</string>
+    <string name="cache_dialog_favorite_remove_title">호감점수</string>
     <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_target">대상으로 설정</string>
