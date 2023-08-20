@@ -1012,7 +1012,6 @@
     <string name="settings_open_geokretymap_website">Avaa GeoKretyMap.org nettisivu</string>
     <string name="settings_settings">Asetukset</string>
     <string name="settings_information">Tiedot</string>
-    <string name="settings_advanced">Lisäasetukset</string>
     <string name="init_ec_icons">Kartta ikonit</string>
     <string name="settings_ec_icons_other">Oma tyyli</string>
     <string name="settings_ec_icons_oc">Kuten OC</string>
@@ -1211,10 +1210,8 @@
     <string name="cache_personal_note_limit">Omien merkintöjen raja</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Tämä henkilökohtainen muistiinpano lyhennetään arviolta %1$d merkillä %2$d merkkiin (%3$s:n maksimikoko).</string>
     <string name="cache_personal_note_upload">Lataa</string>
-    <string name="cache_personal_note_uploading">Ladataan omaa muistiinpanoa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
-    <string name="cache_personal_note_upload_cancelled">Oman muistiinpanon lataaminen peruttu</string>
     <string name="cache_personal_note_vars_out_of_sync">Muistiinpanoissa olevat muuttujia ei ole synkronoitu (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronoi muuttujat</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Tarkista muuttujat, joiden arvo tulee korvata muistiinpanoista</string>
@@ -1266,14 +1263,6 @@
     <string name="cache_dialog_offline_drop_message">Poistetaan kätkö laitteen muistista…</string>
     <string name="cache_dialog_refresh_title">Päivitä</string>
     <string name="cache_dialog_refresh_message">Ladataan kätkön tietoja uudestaan…</string>
-    <string name="cache_dialog_watchlist_add_title">Seurantalista</string>
-    <string name="cache_dialog_watchlist_add_message">Listään kätkö seurattaviin…</string>
-    <string name="cache_dialog_watchlist_remove_title">Seurantalista</string>
-    <string name="cache_dialog_watchlist_remove_message">Poistetaan kätköä seurattavista…</string>
-    <string name="cache_dialog_favorite_add_title">Suosikki</string>
-    <string name="cache_dialog_favorite_add_message">Lisää kätkö suosikkeihisi…</string>
-    <string name="cache_dialog_favorite_remove_title">Suosikki</string>
-    <string name="cache_dialog_favorite_remove_message">Poista kätkö suosikeistasi…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
@@ -1472,8 +1461,6 @@
     <string name="waypoint_save_and_modify_on_website">Muuta kätkön koordinaateiksi c:geossa ja nettisivulla</string>
     <string name="waypoint_reset_cache_coords">Palauta kätkön koordinaatit</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Kätkön koordinaatit palautettu nettisivulla.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Palautetaan kätkökoordinaatteja nettisivulla…</string>
-    <string name="waypoint_reset">Nollaa muutokset</string>
     <string name="waypoint_localy_reset_cache_coords">Nollaa muutokset c:geossa</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Nollaa muutokset c:geossa sekä nettisivulla</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Nettisivu ei tue kätkökoordinaattien muuttamista.</string>
