@@ -444,7 +444,6 @@
     <string name="settings_open_geokretymap_website">Buka situs web GeoKretyMap.org</string>
     <string name="settings_settings">Pengaturan</string>
     <string name="settings_information">Informasi</string>
-    <string name="settings_advanced">Pengaturan lanjutan</string>
     <string name="init_ec_icons">Ikon Peta</string>
     <string name="settings_ec_icons_other">Gaya sendiri</string>
     <string name="settings_ec_icons_oc">Seperti OC</string>
@@ -530,10 +529,8 @@
     <string name="cache_personal_note_edit">Sunting</string>
     <string name="cache_personal_note_limit">Batas catatan pribadi</string>
     <string name="cache_personal_note_upload">Unggah</string>
-    <string name="cache_personal_note_uploading">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_done">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_error">Gagal mengunggah catatan pribadi</string>
-    <string name="cache_personal_note_upload_cancelled">Batalkan pengunggahan catatan pribadi</string>
     <string name="cache_description">Deskripsi</string>
     <string name="cache_description_table_note">Format tabel berisi deskripsi yang mungkin perlu dilihat pada %s harus dilihat dengan benar.</string>
     <string name="cache_watchlist_on">Cache ini ada pada daftar pantauan anda.</string>
@@ -562,14 +559,6 @@
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
     <string name="cache_dialog_refresh_title">Menyegarkan</string>
     <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">Daftar Pantauan</string>
-    <string name="cache_dialog_watchlist_add_message">Menambahkan cache ke daftar pantauan anda&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">Daftar tontonan</string>
-    <string name="cache_dialog_watchlist_remove_message">Menghapus cache dari daftar pantauan anda&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">Favorit</string>
-    <string name="cache_dialog_favorite_add_message">Menambahkan cache ke favorit anda&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">Favorit</string>
-    <string name="cache_dialog_favorite_remove_message">Menghapus cache dari favorit anda&#8230;</string>
     <string name="cache_menu_navigate">Navigasi</string>
     <string name="cache_menu_navigation_drive">Navigasi (Mengemudi)</string>
     <string name="cache_menu_navigation_walk">Navigasi (Berjalan)</string>
@@ -680,8 +669,6 @@
     <string name="waypoint_save_and_modify_on_website">Tetapkan sebagai koordinat cache di c:geo dan di situs web</string>
     <string name="waypoint_reset_cache_coords">Memasang kembali catatan koordinat</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Koordinat cache telah dipasang kembali pada situs.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Memasang kembali koordinat cache pada situs&#8230;</string>
-    <string name="waypoint_reset">Setel ulang</string>
     <string name="waypoint_localy_reset_cache_coords">Setel ulang di c: geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Setel ulang di c:geo dan di situs</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Situs web tidak mendukung perubahan koordinat cache.</string>
