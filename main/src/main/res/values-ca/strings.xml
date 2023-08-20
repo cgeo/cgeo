@@ -1381,6 +1381,7 @@
     <string name="cache_recently_viewed">Vist recentment</string>
     <string name="cache_recently_viewed_empty">No hi ha cap catxé vist recentment</string>
     <string name="cache_clear_recently_viewed">Esborra</string>
+    <string name="cachedetails_progress_upload_note">S\'ha pujat la nota personal</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
