@@ -11,8 +11,11 @@ import cgeo.geocaching.ui.ImageActivityHelper;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -31,6 +34,8 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     private final TextSpinner<Integer> imageScale = new TextSpinner<>();
 
+    private static final int RC_EDIT_IMAGE_EXTERNAL = 50;
+
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_ORIGINAL_IMAGE = "cgeo.geocaching.saved_state_original_image";
     private static final String SAVED_STATE_IMAGE_INDEX = "cgeo.geocaching.saved_state_image_index";
@@ -41,7 +46,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
 
 
-    private Image originalImage;
+    private Uri originalImageUri;
     private Image image;
     private int imageIndex = -1;
     private long maxImageUploadSize;
@@ -49,9 +54,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     @Nullable private String geocode;
 
     private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, (rc, imgs, uk) -> {
-        deleteImageFromDeviceIfNotOriginal(image);
-        image = imgs.isEmpty() ? null : ImageUtils.toLocalLogImage(geocode, imgs.get(0));
-        loadImagePreview();
+        if (imgs.size() >= 1 && imgs.get(0) != null) {
+            setImageTo(imgs.get(0));
+            loadImagePreview();
+        }
     });
 
     @Override
@@ -68,7 +74,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
-            originalImage = image;
+            originalImageUri = image == null ? null : image.uri;
             imageIndex = extras.getInt(Intents.EXTRA_INDEX, -1);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             imageCaptionMandatory = extras.getBoolean(Intents.EXTRA_IMAGE_CAPTION_MANDATORY);
@@ -91,7 +97,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // Restore previous state
         if (savedInstanceState != null) {
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
-            originalImage = savedInstanceState.getParcelable(SAVED_STATE_ORIGINAL_IMAGE);
+            originalImageUri = savedInstanceState.getParcelable(SAVED_STATE_ORIGINAL_IMAGE);
             imageIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_INDEX, -1);
             imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
@@ -108,8 +114,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         }
         updateScaleValueDisplay();
 
-        binding.camera.setOnClickListener(view -> selectImageFromCamera());
-        binding.stored.setOnClickListener(view -> selectImageFromStorage());
+        binding.imageCamera.setOnClickListener(view -> selectImageFromCamera());
+        binding.imageStored.setOnClickListener(view -> selectImageFromStorage());
+        binding.imageRotate.setOnClickListener(view -> manipulateAsBitmap(b -> ImageUtils.rotateBitmap(b, 90f)));
+        binding.imageFlip.setOnClickListener(view -> manipulateAsBitmap(b -> ImageUtils.flipBitmap(b, true, false)));
+        binding.imageEditExternal.setOnClickListener(view -> editExternal());
 
         if (image.hasTitle()) {
             binding.caption.setText(image.getTitle());
@@ -134,7 +143,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         super.onSaveInstanceState(outState);
         syncEditTexts();
         outState.putParcelable(SAVED_STATE_IMAGE, image);
-        outState.putParcelable(SAVED_STATE_ORIGINAL_IMAGE, originalImage);
+        outState.putParcelable(SAVED_STATE_ORIGINAL_IMAGE, originalImageUri);
         outState.putInt(SAVED_STATE_IMAGE_INDEX, imageIndex);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
@@ -150,7 +159,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             syncEditTexts();
             intent.putExtra(Intents.EXTRA_IMAGE, image);
             intent.putExtra(Intents.EXTRA_INDEX, imageIndex);
-            //"originalImage" is now obsolete. But we never delete originalImage (in case log gets not stored)
+            //"originalImageUri" is now obsolete. But we never delete originalImage (in case log gets not stored)
             setResult(RESULT_OK, intent);
             finish();
         } else if (deleteImage) {
@@ -158,11 +167,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             intent.putExtra(Intents.EXTRA_DELETE_FLAG, true);
             intent.putExtra(Intents.EXTRA_INDEX, imageIndex);
             setResult(RESULT_OK, intent);
-            deleteImageFromDeviceIfNotOriginal(image);
+            deleteImageFromDeviceIfNotOriginal();
             //original image is now obsolete. BUt we never delete original Image (in case log gets not stored)
             finish();
         } else {
-            deleteImageFromDeviceIfNotOriginal(image);
+            deleteImageFromDeviceIfNotOriginal();
             setResult(RESULT_CANCELED);
             finish();
         }
@@ -185,22 +194,53 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         imageActivityHelper.getImageFromStorage(this.geocode, false, null);
     }
 
-    private boolean deleteImageFromDeviceIfNotOriginal(final Image img) {
-        if (img != null && img.getUri() != null && (originalImage == null || !img.getUri().equals(originalImage.getUri()))) {
-            return ImageUtils.deleteImage(img.getUri());
+    private void setImageTo(final Uri newUri) {
+        deleteImageFromDeviceIfNotOriginal();
+        final Image copyImage = ImageUtils.toLocalLogImage(geocode, newUri);
+        image = (image == null ? Image.NONE : image).buildUpon().setUrl(copyImage.uri).build();
+    }
+
+    private void ensureImageEditCopy() {
+        if (image == null || image.getUri() == null || !imageUriIsOriginal()) {
+            return;
+        }
+        final Image copyImage = ImageUtils.toLocalLogImage(geocode, image.uri);
+        image = (image == null ? Image.NONE : image).buildUpon().setUrl(copyImage.uri).build();
+    }
+
+    private boolean deleteImageFromDeviceIfNotOriginal() {
+        if (!imageUriIsOriginal()) {
+            return ImageUtils.deleteImage(image.getUri());
         }
         return false;
+    }
+
+    private boolean imageUriIsOriginal() {
+        if (originalImageUri == null) {
+            return image == null || image.getUri() == null;
+        }
+        return image != null && originalImageUri.equals(image.getUri());
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
+
+        if (requestCode == RC_EDIT_IMAGE_EXTERNAL) {
+            loadImagePreview();
+        }
         imageActivityHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     private void loadImagePreview() {
         ImageActivityHelper.displayImageAsync(image, binding.imagePreview);
         updateScaleValueDisplay();
+
+        final boolean imagePresent = image != null && image != Image.NONE &&
+                image.getUri() != null && image.getUri() != Uri.EMPTY;
+        binding.imageEditExternal.setEnabled(imagePresent);
+        binding.imageRotate.setEnabled(imagePresent);
+        binding.imageFlip.setEnabled(imagePresent);
     }
 
     private void updateScaleValueDisplay() {
@@ -231,5 +271,18 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             return displayValue;
         });
 
+    }
+
+    private void editExternal() {
+        ensureImageEditCopy();
+        final Intent intent = ImageUtils.createExternalEditImageIntent(this, image.getUri());
+        startActivityForResult(Intent.createChooser(intent, null), RC_EDIT_IMAGE_EXTERNAL);
+    }
+
+    private void manipulateAsBitmap(final Func1<Bitmap, Bitmap> fct) {
+        final Uri targetUri = ImageUtils.createLocalLogImageUri(geocode);
+        ImageUtils.manipulateImageAsBitmap(image.getUri(), targetUri, fct);
+        setImageTo(targetUri);
+        loadImagePreview();
     }
 }
