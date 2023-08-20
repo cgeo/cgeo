@@ -593,7 +593,6 @@
     <string name="settings_open_geokretymap_website">Відкрити сайт GeoKretyMap.org</string>
     <string name="settings_settings">Налаштування</string>
     <string name="settings_information">Інформація</string>
-    <string name="settings_advanced">розширені налаштування</string>
     <string name="init_ec_icons">іконки на карті</string>
     <string name="settings_ec_icons_other">Власний стиль</string>
     <string name="settings_ec_icons_oc">Вподобати OC</string>
@@ -691,10 +690,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">запобігання вилученню шляхових точок</string>
     <string name="cache_personal_note_limit">обмеження особистих записок</string>
     <string name="cache_personal_note_upload">завантажити</string>
-    <string name="cache_personal_note_uploading">Завантаження особистої нотатки</string>
     <string name="cache_personal_note_upload_done">завантажено особисту нотатку</string>
     <string name="cache_personal_note_upload_error">Помилка завантаження особистої нотатки</string>
-    <string name="cache_personal_note_upload_cancelled">Завантаження персональних нотаток скасовано</string>
     <string name="cache_description">опис</string>
     <string name="cache_description_table_note">Опис містить форматування таблиці, яке, можливо, необхідно переглянути на %s щоб побачити правильно.</string>
     <string name="cache_area_description">опис району</string>
@@ -733,14 +730,6 @@
     <string name="cache_dialog_offline_drop_message">Видалення кеш-пам\'яті з пам\'яті пристрою…</string>
     <string name="cache_dialog_refresh_title">освіжити</string>
     <string name="cache_dialog_refresh_message">перезавантаження деталей кешу…</string>
-    <string name="cache_dialog_watchlist_add_title">список спостереження</string>
-    <string name="cache_dialog_watchlist_add_message">Додавання кешу до списку перегляду…</string>
-    <string name="cache_dialog_watchlist_remove_title">список спостереження</string>
-    <string name="cache_dialog_watchlist_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
-    <string name="cache_dialog_favorite_add_title">улюблений</string>
-    <string name="cache_dialog_favorite_add_message">Додавання кешу до вибраного…</string>
-    <string name="cache_dialog_favorite_remove_title">улюблений</string>
-    <string name="cache_dialog_favorite_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
     <string name="cache_menu_navigation_walk">Навігація (ходьба)</string>
@@ -883,8 +872,6 @@
     <string name="waypoint_save_and_modify_on_website">Встановити як кеш-координати в c:geo і на сайті</string>
     <string name="waypoint_reset_cache_coords">Скинути координати кешу</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Координати кешу було скинуто на веб-сайті.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Скидання координат кешу на веб-сайті…</string>
-    <string name="waypoint_reset">Скинути</string>
     <string name="waypoint_localy_reset_cache_coords">Скинути за:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Скинути на c:geo та на сайт</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Сайт не підтримує зміну координат кешу.</string>
