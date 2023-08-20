@@ -508,10 +508,8 @@
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Limitasyon sa personal nga nota</string>
     <string name="cache_personal_note_upload">I-upload</string>
-    <string name="cache_personal_note_uploading">Pag-upload ug personal nga nota</string>
     <string name="cache_personal_note_upload_done">Ang personal nga nota kay na-upload</string>
     <string name="cache_personal_note_upload_error">Sayup ang pag-upload sa personal nga nota</string>
-    <string name="cache_personal_note_upload_cancelled">Na kansel ang pag-upload sa personal nga nota</string>
     <string name="cache_description">Paghulagway</string>
     <string name="cache_description_table_note">Ang paghulagway adunay han-ay nga porma nga mahimong giya para makita %s og tarung ug sakto.</string>
     <string name="cache_watchlist_on">Ang kini nga cache kay anaa sa imong listahan.</string>
@@ -538,12 +536,6 @@
     <string name="cache_dialog_offline_drop_message">Pagtangtang sa cache gikan sa memorya sa device…</string>
     <string name="cache_dialog_refresh_title">I-refresh</string>
     <string name="cache_dialog_refresh_message">Pag-usab sa mga detalye sa cache…</string>
-    <string name="cache_dialog_watchlist_add_message">Pagdugang og cache sa imong watchlist…</string>
-    <string name="cache_dialog_watchlist_remove_message">Pagtangtang sa cache gikan sa imong watchlist…</string>
-    <string name="cache_dialog_favorite_add_title">Paborito</string>
-    <string name="cache_dialog_favorite_add_message">Pagdugang sa cache sa imong mga paborito…</string>
-    <string name="cache_dialog_favorite_remove_title">Paborito</string>
-    <string name="cache_dialog_favorite_remove_message">Pagtangtang sa cache gikan sa imong mga paborito…</string>
     <string name="cache_menu_navigate">Pag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmaneho)</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglakaw)</string>
@@ -652,8 +644,6 @@
     <string name="waypoint_save_and_modify_on_website">Nagtakda ug cache coordinates sa c:geo ug sa website</string>
     <string name="waypoint_reset_cache_coords">I-reset ang cache coordinates</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Cache coordinates kay na reset samtang naa sa website.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ang pag-reset sa cache coordinates sa website…</string>
-    <string name="waypoint_reset">I-reset</string>
     <string name="waypoint_localy_reset_cache_coords">I-reset sa c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">I-reset ang c:geo ug sa website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Ang website kay wala magsuporta sa pag-usab sa cache coordinataes.</string>
