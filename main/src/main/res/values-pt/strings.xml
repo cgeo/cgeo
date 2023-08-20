@@ -1329,9 +1329,9 @@
     <string name="cache_dialog_watchlist_add_message">A adicionar a geocache à lista de observação…</string>
     <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
     <string name="cache_dialog_watchlist_remove_message">A remover a geocache da lista de observação…</string>
-    <string name="cache_dialog_favorite_add_title">Favorita</string>
+    <string name="cache_dialog_favorite_add_title">Favoritos</string>
     <string name="cache_dialog_favorite_add_message">A incluir geocache na lista de favoritas…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorita</string>
+    <string name="cache_dialog_favorite_remove_title">Favoritos</string>
     <string name="cache_dialog_favorite_remove_message">A retirar geocache da lista de favoritas…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Definir como destino</string>
