@@ -621,7 +621,6 @@
     <string name="settings_open_geokretymap_website">打开 GeoKretyMap.org 网站</string>
     <string name="settings_settings">设置</string>
     <string name="settings_information">信息</string>
-    <string name="settings_advanced">高级设置</string>
     <string name="init_ec_icons">地图图标</string>
     <string name="settings_features">支持的功能</string>
     <string name="feature_personal_notes">个人笔记</string>
