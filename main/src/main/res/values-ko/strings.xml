@@ -1060,7 +1060,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
     <string name="settings_settings">설정</string>
     <string name="settings_information">정보</string>
-    <string name="settings_advanced">고급 설정</string>
     <string name="init_ec_icons">지도 아이콘</string>
     <string name="settings_ec_icons_other">나만의 스타일</string>
     <string name="settings_ec_icons_oc">OC 처럼</string>
@@ -1255,10 +1254,8 @@
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">이 개인 메모는 약 %1$d 문자에서 %3$s(최대 크기 %2$d)로 잘립니다.</string>
     <string name="cache_personal_note_upload">올리기</string>
-    <string name="cache_personal_note_uploading">개인 메모 올리기</string>
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
-    <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
     <string name="cache_personal_note_save_and_upload">저장 및 업로드</string>
     <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">변수 동기화</string>
@@ -1311,14 +1308,6 @@
     <string name="cache_dialog_offline_drop_message">기기에서 캐시 제거중…</string>
     <string name="cache_dialog_refresh_title">새로 고침</string>
     <string name="cache_dialog_refresh_message">캐시 정보 다시 불러오는 중…</string>
-    <string name="cache_dialog_watchlist_add_title">관심목록</string>
-    <string name="cache_dialog_watchlist_add_message">캐시를 관심목록에 추가중…</string>
-    <string name="cache_dialog_watchlist_remove_title">관심목록</string>
-    <string name="cache_dialog_watchlist_remove_message">캐시를 관심목록서 삭제중…</string>
-    <string name="cache_dialog_favorite_add_title">호감캐시</string>
-    <string name="cache_dialog_favorite_add_message">호감캐시로 추가중…</string>
-    <string name="cache_dialog_favorite_remove_title">호감캐시</string>
-    <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_target">대상으로 설정</string>
     <string name="cache_menu_navigation_drive">길찾기(자동차)</string>
@@ -1431,7 +1420,6 @@
     <string name="cachedetails_progress_unwatch">관심목록에서 제거되었습니다</string>
     <string name="cachedetails_progress_favorite">호감점수 목록에 추가했습니다</string>
     <string name="cachedetails_progress_unfavorite">호감점수 목록에 제거했습니다</string>
-    <string name="cachedetails_progress_upload_note">개인 메모 올라감</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -1447,7 +1435,6 @@
     <string name="image_category_log">로그</string>
     <string name="context_map_add_to_route">경로 후에 추가</string>
     <string name="context_map_add_to_route_start">경로 전에 추가</string>
-    <string name="context_map_remove_from_route">경로에서 제거</string>
     <string name="context_map_remove_from_route_start">시작에서 제거</string>
     <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
     <string name="context_map_remove_from_route_end">끝에서 제거</string>
@@ -1529,8 +1516,6 @@
     <string name="waypoint_save_and_modify_on_website">c:geo에서 캐시 좌표를 설정합니다.</string>
     <string name="waypoint_reset_cache_coords">캐시 좌표 재설정</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">웹사이트에서 캐시 좌표가 재설정 되었습니다.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">웹사이트에서 캐시좌표 재설정중…</string>
-    <string name="waypoint_reset">재설정</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo에서 초기화</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo와 웹사이트에서 초기화</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">웹사이트가 캐시 좌표 수정을 지원하지 않습니다.</string>
