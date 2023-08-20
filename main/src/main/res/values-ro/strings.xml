@@ -501,7 +501,6 @@
     <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
     <string name="settings_settings">Opţiuni</string>
     <string name="settings_information">Informaţii</string>
-    <string name="settings_advanced">Setări avansate</string>
     <string name="init_ec_icons">Iconiţe hartă</string>
     <string name="settings_ec_icons_other">Stil propriu</string>
     <string name="settings_ec_icons_oc">La fel ca OC</string>
@@ -590,10 +589,8 @@
     <string name="cache_personal_note_edit">Modifică</string>
     <string name="cache_personal_note_limit">Limită pentru note personale</string>
     <string name="cache_personal_note_upload">Încarcă</string>
-    <string name="cache_personal_note_uploading">Încărcare notă personală</string>
     <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
     <string name="cache_personal_note_upload_error">Eroare la încărcarea notei personale</string>
-    <string name="cache_personal_note_upload_cancelled">Încărcarea notei personale a fost anulată</string>
     <string name="cache_description">Descriere</string>
     <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
     <string name="cache_watchlist_on">Aceasta cutie se află în lista ta de cutii urmărite.</string>
@@ -625,14 +622,6 @@
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
     <string name="cache_dialog_refresh_title">Reîncarcă</string>
     <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
-    <string name="cache_dialog_watchlist_add_title">Listă cutii urmărite</string>
-    <string name="cache_dialog_watchlist_add_message">Adăugare cutie în lista de cutii urmărite…</string>
-    <string name="cache_dialog_watchlist_remove_title">Listă cutii urmărite</string>
-    <string name="cache_dialog_watchlist_remove_message">Ştergere geocutie din lista celor urmărite…</string>
-    <string name="cache_dialog_favorite_add_title">Favorită</string>
-    <string name="cache_dialog_favorite_add_message">Adăugare la favorite…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorită</string>
-    <string name="cache_dialog_favorite_remove_message">Ştergere geocutie din lista celor favorite…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
@@ -742,7 +731,6 @@
     <string name="waypoint_save_and_modify_on_website">Salvează ca coordonatele geocutiei în c:geo cât şi pe site</string>
     <string name="waypoint_reset_cache_coords">Revin-o la coordonatele iniţiale</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Coordonatele geocutiei pe site au fost readuse la valoarea iniţială.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Revenire la coordonatele iniţiale site…</string>
     <string name="waypoint_localy_reset_cache_coords">Resetează în c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Resetează în c:geo şi pe site</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Site-ul nu suportă modificarea coordonatelor geocutiei.</string>
