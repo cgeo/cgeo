@@ -254,8 +254,10 @@ public final class VoiceHintProcessor {
 
             if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
                 int badWayPrio = 0;
-                for (MessageData md : input.badWays) {
-                    badWayPrio = Math.max(badWayPrio, md.getPrio());
+                if (input.badWays != null) {
+                    for (MessageData md : input.badWays) {
+                        badWayPrio = Math.max(badWayPrio, md.getPrio());
+                    }
                 }
                 if (input.goodWay.getPrio() < badWayPrio) {
                     results.add(input);
