@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public final class OsmTrack {
-    static final String version = "1.7.2";
+    static final String version = "1.7.3";
 
     // csv-header-line
     private static final String MESSAGES_HEADER = "Longitude\tLatitude\tElevation\tDistance\tCostPerKm\tElevCost\tTurnCost\tNodeCost\tInitialCost\tWayTags\tNodeTags\tTime\tEnergy";
