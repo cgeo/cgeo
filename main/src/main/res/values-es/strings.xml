@@ -1244,6 +1244,7 @@
     <string name="cache_share_field">Compartir</string>
     <string name="cache_time_full_hours">en punto</string>
     <string name="cache_listed_on">Listado en %s</string>
+    <string name="cachedetails_progress_upload_note">Nota personal cargada</string>
     <string name="cache_whereyougo_start">Abre WhereYouGo para descargar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descargar e iniciar este cartucho</string>
     <string name="cache_alc_start">Abrir Adventure Lab para empezar a jugar esta aventura</string>
