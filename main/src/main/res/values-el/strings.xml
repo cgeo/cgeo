@@ -963,7 +963,6 @@
     <string name="settings_open_geokretymap_website">Ανοίξτε την ιστοσελίδα GeoKretyMap.org</string>
     <string name="settings_settings">Ρυθμίσεις</string>
     <string name="settings_information">Πληροφορίες</string>
-    <string name="settings_advanced">Σύνθετες ρυθμίσεις</string>
     <string name="init_ec_icons">Εικονίδια χάρτη</string>
     <string name="settings_ec_icons_other">Δικό μου στυλ</string>
     <string name="settings_ec_icons_oc">Σαν OC</string>
@@ -1159,10 +1158,8 @@
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Αυτή η προσωπική σημείωση θα περικοπεί από περίπου %1$d χαρακτήρες κατά %3$s (μέγιστο μέγεθος %2$d).</string>
     <string name="cache_personal_note_upload">Ανέβασμα</string>
-    <string name="cache_personal_note_uploading">Ανέβασμα προσωπικής σημείωσης</string>
     <string name="cache_personal_note_upload_done">Η προσωπική σημείωση ανέβηκε</string>
     <string name="cache_personal_note_upload_error">Σφάλμα στο ανεβάσμα προσωπικής σημείωσης</string>
-    <string name="cache_personal_note_upload_cancelled">Το ανέβασμα προσωπικής σημείωσης ακυρώθηκε</string>
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
     <string name="cache_description_rendering">Επεξεργασία  αποτύπωσης, παρακαλώ περιμένετε…</string>
@@ -1210,14 +1207,6 @@
     <string name="cache_dialog_offline_drop_message">Αφαιρείται η κρύπτη από τη μνήμη της συσκευής…</string>
     <string name="cache_dialog_refresh_title">Ανανέωση</string>
     <string name="cache_dialog_refresh_message">Επαναφορτώνει τις λεπτομέρειες της κρύπτης…</string>
-    <string name="cache_dialog_watchlist_add_title">Λίστα παρακολούθησης</string>
-    <string name="cache_dialog_watchlist_add_message">Προσθήκη της κρύπτης στη λίστα παρακολούθησής σας…</string>
-    <string name="cache_dialog_watchlist_remove_title">Λίστα παρακολούθησης</string>
-    <string name="cache_dialog_watchlist_remove_message">Αφαέρεση της κρύπτης από τη λίστα παρακολούθησής σας…</string>
-    <string name="cache_dialog_favorite_add_title">Αγαπημένη</string>
-    <string name="cache_dialog_favorite_add_message">Προσθήκη της κρύπτης στις αγαπημένες σας…</string>
-    <string name="cache_dialog_favorite_remove_title">Αγαπημένη</string>
-    <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
@@ -1410,8 +1399,6 @@
     <string name="waypoint_save_and_modify_on_website">Ορισμός ως συντεταγμένες κρύπτης στο c:geo και στην ιστοσελίδα</string>
     <string name="waypoint_reset_cache_coords">Επαναφορά συντεταγμένων γεωκρύπτης</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Έχει γίνει επαναφορά των συντεταγμένων της γεωκρύπτης στην ιστοσελίδα.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Γίνεται επαναφορά των συντεταγμένων της κρύπτης στην ιστοσελίδα…</string>
-    <string name="waypoint_reset">Επαναφορά</string>
     <string name="waypoint_localy_reset_cache_coords">Επαναφορά στο c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Επαναφορά στο c:geo και στην ιστοσελίδα</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Η ιστοσελίδα δεν υποστηρίζει τη μετατροπή των συντεταγμένων της γεωκρύπτης.</string>
