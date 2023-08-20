@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.backup.BackupActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -8,6 +9,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_NONE;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +31,9 @@ public class SplashActivity extends AppCompatActivity {
                 // new install, base folder missing or folder migration needed => run installation wizard
                 intent = new Intent(this, InstallWizardActivity.class);
                 intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? InstallWizardActivity.WizardMode.WIZARDMODE_DEFAULT.id : InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id);
+            } else if (Settings.getEDBARequested() != EDBA_NONE) {
+                // if any pending backup requests are found: start backup
+                intent = new Intent(this, BackupActivity.class);
             } else {
                 // otherwise regular startup
                 intent = Settings.getStartscreenIntent(this);

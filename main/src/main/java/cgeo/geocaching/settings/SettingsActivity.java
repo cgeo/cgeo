@@ -28,7 +28,6 @@ import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.ApplicationSettings;
-import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
@@ -84,9 +83,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     public static final String STATE_CSAH = "csah";
     public static final String STATE_CSAH_PN = "csahpn";
-    public static final String STATE_BACKUPUTILS = "backuputils";
 
-    private BackupUtils backupUtils = null;
     private ContentStorageActivityHelper contentStorageHelper = null;
 
     private CharSequence title;
@@ -99,8 +96,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     protected void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
         super.onCreate(savedInstanceState);
-
-        backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
         this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
@@ -137,10 +132,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
-    }
-
-    public BackupUtils getBackupUtils() {
-        return backupUtils;
     }
 
     public void askShowWallpaperPermission() {
@@ -253,7 +244,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBundle(STATE_CSAH, contentStorageHelper.getState());
-        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
 
         // Save current activity title so we can set it again after a configuration change
         savedInstanceState.putCharSequence(TITLE_TAG, title);
@@ -313,9 +303,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         super.onActivityResult(requestCode, resultCode, data);
 
         if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-        if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
     }

@@ -48,6 +48,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_NONE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -107,6 +108,8 @@ public class Settings {
     public static final int CUSTOMBNITEM_PLACEHOLDER = -2;
     public static final int CUSTOMBNITEM_NONE = -1;
     public static final int CUSTOMBNITEM_NEARBY = 0;
+
+    public enum EXCLUSIVEDBACTION { EDBA_NONE, EDBA_BACKUP_AUTO, EDBA_BACKUP_MANUAL, EDBA_RESTORE_NEWEST, EDBA_RESTORE_SELECT, EDBA_SETSIZE, EDBA_DBMOVE }
 
     public static final int HOURS_TO_SECONDS = 60 * 60;
     public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
@@ -574,6 +577,16 @@ public class Settings {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putInt(getKey(prefKeyId), value);
         edit.apply();
+    }
+
+    /** same as putInt(), but immediately stores values (blocking) */
+    private static void putIntSync(final int prefKeyId, final int value) {
+        if (sharedPrefs == null) {
+            return;
+        }
+        final SharedPreferences.Editor edit = sharedPrefs.edit();
+        edit.putInt(getKey(prefKeyId), value);
+        edit.commit();
     }
 
     private static void putLong(final int prefKeyId, final long value) {
@@ -2044,6 +2057,16 @@ public class Settings {
 
     public static void setAutomaticBackupLastCheck(final boolean delay) {
         putLong(R.string.pref_automaticBackupLastCheck, calculateNewTimestamp(delay, getAutomaticBackupInterval() * 24));
+    }
+
+    public static EXCLUSIVEDBACTION getEDBARequested() {
+        Log.e("getEDBARequested: " + getInt(R.string.pref_EDBARequested, EDBA_NONE.ordinal()));
+        return EXCLUSIVEDBACTION.values()[getInt(R.string.pref_EDBARequested, EDBA_NONE.ordinal())];
+    }
+
+    public static void setEDBARequested(final EXCLUSIVEDBACTION action) {
+        Log.e("setEDBARequested(" + action + "): " + action.ordinal());
+        putIntSync(R.string.pref_EDBARequested, action.ordinal());
     }
 
     /**

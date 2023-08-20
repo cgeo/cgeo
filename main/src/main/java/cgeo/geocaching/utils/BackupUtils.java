@@ -19,6 +19,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import static cgeo.geocaching.utils.ProcessUtils.restartApplication;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 
@@ -757,6 +758,13 @@ public class BackupUtils {
             return null;
         }
         return subfolder;
+    }
+
+    public static void restartForBackupRestore(final Activity activity, final Settings.EXCLUSIVEDBACTION action) {
+        SimpleDialog.of(activity).setTitle(TextParam.text("Restart required")).setMessage(TextParam.text("c:geo needs to be restarted to perform this action")).confirm((x, y) -> {
+            Settings.setEDBARequested(action);
+            restartApplication(activity);
+        });
     }
 
 }

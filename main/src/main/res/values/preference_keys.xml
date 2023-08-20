@@ -536,6 +536,10 @@
     <string translatable="false" name="pref_next_unique_notification_id">next_unique_notification_id</string>
     <string translatable="false" name="pref_changelog_last_checksum">changelog_last_checksum</string>
 
+    <!-- handling backups (used internally) -->
+    <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
+    <string translatable="false" name="pref_EDBARequested">EDBARequested</string>
+
     <!-- other preferences, used internally -->
     <string translatable="false" name="pref_dataDir">pref_dataDir</string>
     <string translatable="false" name="pref_logTemplates">logTemplates</string>
@@ -558,7 +562,6 @@
     <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
     <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
     <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
-    <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
     <string translatable="false" name="pref_dbCleanupLastCheck">dbCleanupLastCheck</string>
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
     <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>

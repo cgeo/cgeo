@@ -111,6 +111,10 @@
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity>
         <activity
+            android:name=".backup.BackupActivity"
+            android:theme="@style/cgeo"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/cgeo"

@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.Version;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_BACKUP_AUTO;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -492,7 +493,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
             // automated backup check
             if (Settings.automaticBackupDue()) {
-                new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
+                Settings.setEDBARequested(EDBA_BACKUP_AUTO);
             }
             cLog.add("ab");
 

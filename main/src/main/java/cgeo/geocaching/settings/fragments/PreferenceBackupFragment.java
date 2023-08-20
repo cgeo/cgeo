@@ -1,36 +1,33 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.BackupSeekbarPreference;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_BACKUP_MANUAL;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_RESTORE_NEWEST;
+import static cgeo.geocaching.settings.Settings.EXCLUSIVEDBACTION.EDBA_RESTORE_SELECT;
 
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
 
 public class PreferenceBackupFragment extends BasePreferenceFragment {
-    public static final String STATE_BACKUPUTILS = "backuputils";
-
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_backup, rootKey);
 
-        final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
-
         findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
-            backupUtils.backup(this::updateSummary, false);
+            BackupUtils.restartForBackupRestore(getActivity(), EDBA_BACKUP_MANUAL);
             return true;
         });
 
         findPreference(getString(R.string.pref_fakekey_startrestore)).setOnPreferenceClickListener(preference -> {
-            backupUtils.restore(BackupUtils.newestBackupFolder(false));
+            BackupUtils.restartForBackupRestore(getActivity(), EDBA_RESTORE_NEWEST);
             return true;
         });
 
         findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)).setOnPreferenceClickListener(preference -> {
-            backupUtils.selectBackupDirIntent();
+            BackupUtils.restartForBackupRestore(getActivity(), EDBA_RESTORE_SELECT);
             return true;
         });
 
@@ -45,10 +42,12 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         updateSummary();
 
+        /* @todo
         findPreference(getString(R.string.pref_backup_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
             backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value, false);
             return true;
         });
+        */
 
     }
 
