@@ -1321,6 +1321,7 @@
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
+    <string name="cachedetails_progress_upload_note">Η προσωπική σημείωση ανέβηκε</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
