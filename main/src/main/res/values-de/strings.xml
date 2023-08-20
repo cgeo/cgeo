@@ -1066,7 +1066,6 @@
     <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
     <string name="settings_settings">Einstellungen</string>
     <string name="settings_information">Information</string>
-    <string name="settings_advanced">Erweiterte Einstellungen</string>
     <string name="init_ec_icons">Kartensymbole</string>
     <string name="settings_ec_icons_other">Eigener Stil</string>
     <string name="settings_ec_icons_oc">Wie OC-Caches</string>
@@ -1269,10 +1268,8 @@
     <string name="cache_personal_note_limit">Upload der persönlicher Notiz ist begrenzt</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Diese persönliche Notiz wird um ca. %1$d Zeichen von %3$s gekürzt (maximale Größe %2$d).</string>
     <string name="cache_personal_note_upload">Hochladen</string>
-    <string name="cache_personal_note_uploading">Persönliche Notiz wird gesendet</string>
     <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_personal_note_upload_error">Fehler beim Hochladen der persönlichen Notiz</string>
-    <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
     <string name="cache_personal_note_save_and_upload">Speichern &amp; hochladen</string>
     <string name="cache_personal_note_vars_out_of_sync">Variablen in Notizen sind nicht synchronisiert (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronisiere Variablen</string>
@@ -1325,14 +1322,6 @@
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
     <string name="cache_dialog_refresh_title">Aktualisieren</string>
     <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
-    <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
-    <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-    <string name="cache_dialog_favorite_add_title">Favorit</string>
-    <string name="cache_dialog_favorite_add_message">Füge den Cache zu Favoriten hinzu…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorit</string>
-    <string name="cache_dialog_favorite_remove_message">Entferne den Cache von deinen Favoriten…</string>
     <string name="cache_menu_navigate">Navigieren</string>
     <string name="cache_menu_target">Als Ziel festlegen</string>
     <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
@@ -1445,7 +1434,6 @@
     <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
     <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
     <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
-    <string name="cachedetails_progress_upload_note">Persönliche Notiz wurde hochgeladen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
@@ -1461,7 +1449,6 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">An Route anhängen</string>
     <string name="context_map_add_to_route_start">Vor Route einfügen</string>
-    <string name="context_map_remove_from_route">Von Route entfernen</string>
     <string name="context_map_remove_from_route_start">Vom Start entfernen</string>
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
@@ -1544,8 +1531,6 @@
     <string name="waypoint_save_and_modify_on_website">Als Cache-Koordinaten lokal und auf Webseite setzen</string>
     <string name="waypoint_reset_cache_coords">Zurücksetzen</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Koordinaten auf Webseite zurückgesetzt</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Koordinaten werden zurückgesetzt</string>
-    <string name="waypoint_reset">Zurücksetzen</string>
     <string name="waypoint_localy_reset_cache_coords">Koodinaten lokal zurücksetzen</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Koordinaten lokal und auf Webseite zurücksetzen</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Cache-Koordinaten auf der Webseite konnten nicht zurückgesetzt werden</string>
