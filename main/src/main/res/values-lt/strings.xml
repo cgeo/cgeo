@@ -1029,7 +1029,6 @@
     <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
-    <string name="settings_advanced">Išplėstiniai parametrai</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1244,10 +1243,8 @@
     <string name="cache_personal_note_limit">Asmeninės pastabos limitas</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ši asmeninė pastaba bus sutrumpinta apytiksliai. %1$d simbolių iki %3$s (maks. dydis %2$d).</string>
     <string name="cache_personal_note_upload">Įkelti</string>
-    <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
-    <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
     <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sinchronizuoti kintamuosius</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
@@ -1299,14 +1296,6 @@
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
     <string name="cache_dialog_refresh_title">Atnaujinama</string>
     <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
-    <string name="cache_dialog_watchlist_add_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
-    <string name="cache_dialog_watchlist_remove_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_remove_message">Slėptuvė šalinama iš stebimų slėptuvių sąrašo…</string>
-    <string name="cache_dialog_favorite_add_title">Įtraukti į mėgstamų slėptuvių sąrašą</string>
-    <string name="cache_dialog_favorite_add_message">Slėptuvė įtraukiama į Jūsų mėgstamų sąrašą…</string>
-    <string name="cache_dialog_favorite_remove_title">Pašalinti iš mėgstamų sąrašo</string>
-    <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
@@ -1428,7 +1417,6 @@
     <string name="image_category_log">Įrašas</string>
     <string name="context_map_add_to_route">Pridėti prie maršruto</string>
     <string name="context_map_add_to_route_start">Įterpti į maršrutą</string>
-    <string name="context_map_remove_from_route">Pašalinti iš maršruto</string>
     <string name="context_map_remove_from_route_start">Pašalinti iš pradžios</string>
     <string name="context_map_remove_from_route_pos">Pašalinti iš pozicijos %d</string>
     <string name="context_map_remove_from_route_end">Pašalinti iš pabaigos</string>
@@ -1511,8 +1499,6 @@
     <string name="waypoint_save_and_modify_on_website">Nustatyti kaip slėptuvės koordinatės c:geo programoje ir svetainėje</string>
     <string name="waypoint_reset_cache_coords">Atstatyti originalias slėptuvės koordinates</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Originalios slėptuvės koordinatės svetainėje buvo atstatytos.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Atstatomos originalios slėptuvės koordinatės svetainėje…</string>
-    <string name="waypoint_reset">Atstatyti</string>
     <string name="waypoint_localy_reset_cache_coords">Atstatyti c:geo programoje</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Atstatyti c:geo programoje ir svetainėje</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Svetainė nepalaiko pakeistų slėptuvės koordinačių.</string>
