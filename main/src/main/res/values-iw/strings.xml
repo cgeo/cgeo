@@ -387,10 +387,6 @@
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
     <string name="cache_dialog_refresh_message">Reloading cache details&#8230;</string>
-    <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist&#8230;</string>
-    <string name="cache_dialog_favorite_add_message">Adding cache to your favorites&#8230;</string>
-    <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites&#8230;</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
@@ -413,8 +409,6 @@
     <string name="waypoint_save_and_modify_on_website">הגדר כנקודות ציון של מטמון בc:geo ובאתר</string>
     <string name="waypoint_reset_cache_coords">הגדר מחדש נקודות ציון של מטמון</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">נקודות ציון של המטמון עודכנו באתר.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">מעדכן נקודות ציון של המטמון באתר&#8230;</string>
-    <string name="waypoint_reset">אתחל</string>
     <string name="waypoint_localy_reset_cache_coords">אתחל בc:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">אתחל בc:geo ובאתר</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">האתר אינו תומך בשינוי נקודות ציון של מטמון.</string>
