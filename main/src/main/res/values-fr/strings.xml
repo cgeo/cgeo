@@ -1383,6 +1383,7 @@
     <string name="cache_recently_viewed">Vu récemment</string>
     <string name="cache_recently_viewed_empty">Aucune cache consultée récemment</string>
     <string name="cache_clear_recently_viewed">effacer</string>
+    <string name="cachedetails_progress_upload_note">Note personnelle envoyée</string>
     <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_chirpwolf_start">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez utiliser l\'application Chirp Wolf.</string>
