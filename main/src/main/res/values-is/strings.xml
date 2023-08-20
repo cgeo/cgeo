@@ -330,7 +330,6 @@
     <string name="settings_open_website">Opna heimasíðu</string>
     <string name="settings_settings">Stillingar</string>
     <string name="settings_information">Upplýsingar</string>
-    <string name="settings_advanced">Ítarlegar stillingar</string>
     <string name="init_ec_icons">Kortatákn</string>
     <string name="settings_features">Studdir eiginleikar</string>
     <string name="feature_watch_list">Vaktlisti</string>
@@ -491,7 +490,6 @@
     <string name="waypoint_save">Vista</string>
     <string name="waypoint_set_as_cache_coords">Setja sem hnit kassa í c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Setja sem hnit kassa í c:geo og á vefsíðunni</string>
-    <string name="waypoint_reset">Endurstilla</string>
     <string name="waypoint_localy_reset_cache_coords">Endurstilla í c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
     <string name="waypoint_done">Lokið</string>
