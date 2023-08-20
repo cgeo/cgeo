@@ -18,16 +18,15 @@ import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.GlobalGPSDistanceComparator;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Paint;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,7 +38,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.lang.ref.WeakReference;
@@ -441,19 +439,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         compasses.add(holder.binding.direction);
         holder.binding.direction.setTargetCoords(cache.getCoords());
-
-        if (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache)) { // strike
-            holder.binding.text.setPaintFlags(holder.binding.text.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else {
-            holder.binding.text.setPaintFlags(holder.binding.text.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        if (cache.isArchived()) { // red color
-            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
-        } else {
-            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.colorText));
-        }
-
-        holder.binding.text.setText(cache.getName(), TextView.BufferType.NORMAL);
+        holder.binding.text.setText(TextUtils.coloredCacheText(getContext(), cache, cache.getName()), TextView.BufferType.SPANNABLE);
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
 
