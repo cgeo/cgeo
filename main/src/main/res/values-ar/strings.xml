@@ -453,7 +453,6 @@
     <string name="settings_open_geokretymap_website">فتح موقع GeoKretyMap.org</string>
     <string name="settings_settings">الإعدادات</string>
     <string name="settings_information">المعلومات</string>
-    <string name="settings_advanced">إعدادات متقدمة</string>
     <string name="init_ec_icons">أيقونات الخريطة</string>
     <string name="settings_ec_icons_other">النمط الخاص</string>
     <string name="settings_ec_icons_oc">كما في OC</string>
@@ -525,10 +524,8 @@
     <string name="cache_personal_note_edit">تعديل</string>
     <string name="cache_personal_note_limit">حد الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload">رفع</string>
-    <string name="cache_personal_note_uploading">رفع الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload_done">تم رفع الملاحضة الشخصية</string>
     <string name="cache_personal_note_upload_error">خطأ في رفع الملاحضة الشخصية</string>
-    <string name="cache_personal_note_upload_cancelled">تم إلغاء رفع الملاحضة الشخصية</string>
     <string name="cache_description">الوصف</string>
     <string name="cache_description_table_note">الوصف يحتوي على جدول التنسيقات الذي بدورها يتطلب مراجعة في %s لنظر فيه إن كان صحيحاً.</string>
     <string name="cache_watchlist_on">هذا المخبئ في قائمة المشاهدة الخاص بك.</string>
@@ -559,14 +556,6 @@
     <string name="cache_dialog_offline_drop_message">إزالة المخبئ من ذاكرة الجهاز&#8230;</string>
     <string name="cache_dialog_refresh_title">تحديث</string>
     <string name="cache_dialog_refresh_message">إعادة تحميل تفاصيل المخبآت&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">قائمة المشاهدة</string>
-    <string name="cache_dialog_watchlist_add_message">إضافة المخبئ إلى قائمة المشاهدة الخاصة بك&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">قائمة المشاهدة</string>
-    <string name="cache_dialog_watchlist_remove_message">إزالة المخبئ من قائمة المشاهدة الخاصة بك&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">المفضل</string>
-    <string name="cache_dialog_favorite_add_message">إضافة المخبئ إلى المفضلات&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">المفضل</string>
-    <string name="cache_dialog_favorite_remove_message">إزالة المخبئ من المفضلات الخاصة بك&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
@@ -680,8 +669,6 @@
     <string name="waypoint_save_and_modify_on_website">قم بتعيين كـ إحدثيات طريق في c:geo و على الموقع</string>
     <string name="waypoint_reset_cache_coords">إعادة ظبط إحدثيات الطريق</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">تم إعادة ظبط إحدثيات الطريق.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">إعادة ظبط إحدثيات المخبآت على الموقع&#8230;</string>
-    <string name="waypoint_reset">إعادة ظبط</string>
     <string name="waypoint_localy_reset_cache_coords">إعادة الظبط في c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">إعادة ظبط في c:geo على الموقع</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">الموقع لا يدعم التعديل على إحداثيات المخبآت.</string>
