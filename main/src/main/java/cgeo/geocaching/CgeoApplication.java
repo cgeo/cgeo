@@ -50,6 +50,7 @@ public class CgeoApplication extends Application {
     @Override
     public void onCreate() {
         Log.iForce("---------------- CGeoApplication: startup -------------");
+        Log.e("c:geo version " + BuildConfig.VERSION_NAME);
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
             super.onCreate();
 
