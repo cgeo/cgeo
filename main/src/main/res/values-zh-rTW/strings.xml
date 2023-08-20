@@ -754,7 +754,6 @@
     <string name="settings_open_geokretymap_website">開啟GeoKretyMap.org網站</string>
     <string name="settings_settings">設定</string>
     <string name="settings_information">資訊</string>
-    <string name="settings_advanced">進階設定</string>
     <string name="init_ec_icons">地圖圖示</string>
     <string name="settings_ec_icons_other">擁有的格式</string>
     <string name="settings_features">支援的功能</string>
@@ -907,10 +906,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
-    <string name="cache_personal_note_uploading">上傳個人筆記</string>
     <string name="cache_personal_note_upload_done">個人筆記已經上傳</string>
     <string name="cache_personal_note_upload_error">上傳個人筆記錯誤</string>
-    <string name="cache_personal_note_upload_cancelled">個人筆記上傳取消</string>
     <string name="cache_description">描述</string>
     <string name="cache_area_description">地區描述</string>
     <string name="cache_cache_description">藏寶描述</string>
@@ -948,12 +945,6 @@
     <string name="cache_dialog_offline_drop_title">離線</string>
     <string name="cache_dialog_refresh_title">重新整理</string>
     <string name="cache_dialog_refresh_message">重新載入詳細的cache資訊</string>
-    <string name="cache_dialog_watchlist_add_title">追蹤清單</string>
-    <string name="cache_dialog_watchlist_remove_title">觀察名單</string>
-    <string name="cache_dialog_favorite_add_title">我的最愛</string>
-    <string name="cache_dialog_favorite_add_message">把寶加入我的最愛</string>
-    <string name="cache_dialog_favorite_remove_title">我的最愛</string>
-    <string name="cache_dialog_favorite_remove_message">從你的最愛裡移除cache</string>
     <string name="cache_menu_navigate">瀏覽</string>
     <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
@@ -1103,8 +1094,6 @@
     <string name="waypoint_save_and_modify_on_website">在c:geo和網站設定成cache座標</string>
     <string name="waypoint_reset_cache_coords">重置cache座標</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">在網站上完成重置cache座標</string>
-    <string name="waypoint_coordinates_being_reset_on_website">正在網站上重置cache座標</string>
-    <string name="waypoint_reset">重設</string>
     <string name="waypoint_localy_reset_cache_coords">在c:geo重置</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">在c:geo和網站重置</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">網站上不支援更改座標</string>
