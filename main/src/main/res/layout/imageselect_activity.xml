@@ -25,24 +25,72 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/stored"
+                android:id="@+id/delete"
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1"
-                android:text="@string/log_image_stored" />
+                android:text="@string/log_image_delete" />
 
             <Button
-                android:id="@+id/camera"
+                android:id="@+id/cancel"
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1"
-                android:text="@string/log_image_camera" />
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/save"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/ok" />
+
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/image_stored"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_image" />
+
+            <Button
+                android:id="@+id/image_camera"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:layout_toRightOf="@+id/image_stored"
+                app:icon="@drawable/ic_menu_camera" />
+
+            <Button
+                android:id="@+id/image_rotate"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:layout_toRightOf="@+id/image_camera"
+                android:layout_marginLeft="50dp"
+                app:icon="@drawable/ic_menu_rotate_right" />
+
+            <Button
+                android:id="@+id/image_flip"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:layout_toRightOf="@+id/image_rotate"
+                app:icon="@drawable/ic_menu_flip" />
+
+            <Button
+                android:id="@+id/image_edit_external"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/image_flip"
+                app:icon="@drawable/ic_menu_edit" />
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/image_preview"
@@ -93,33 +141,6 @@
             android:prompt="@string/log_image_scale"
             tools:listitem="@android:layout/simple_spinner_item" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/delete"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/log_image_delete" />
-
-            <Button
-                android:id="@+id/cancel"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/save"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/ok" />
-
-        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

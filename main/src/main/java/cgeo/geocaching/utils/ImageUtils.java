@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -728,6 +729,12 @@ public final class ImageUtils {
         return new Image.Builder().setUrl(targetUri).build();
     }
 
+    public static Uri createLocalLogImageUri(final String geocode) {
+        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
+        final Folder folder = Folder.fromFile(getFileForOfflineLogImage(imageFileName).getParentFile());
+        return ContentStorage.get().create(folder, imageFileName);
+    }
+
     public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
         if (geocode == null) {
             return;
@@ -925,6 +932,35 @@ public final class ImageUtils {
         final Matrix matrix = new Matrix();
         matrix.setRotate(angleInDegree, w / 2f, h / 2f);
         return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
+    }
+
+    @Nullable
+    public static Bitmap flipBitmap(@Nullable final Bitmap bm, final boolean xFlip, final boolean yFlip) {
+        if (bm == null) {
+            return bm;
+        }
+        final int h = bm.getHeight();
+        final int w = bm.getWidth();
+        final Matrix matrix = new Matrix();
+
+        matrix.setScale(xFlip ? -1 : 1, yFlip ? -1 : 1, w / 2f, h / 2f);
+        return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
+    }
+    public static void manipulateImageAsBitmap(final Uri imageUri, final Uri targetUri, final Func1<Bitmap, Bitmap> fct) {
+        final Bitmap image = readDownsampledImage(imageUri, -1, -1);
+        final Bitmap newImage = fct.call(image);
+        storeBitmap(newImage, Bitmap.CompressFormat.JPEG, 100, targetUri);
+
+    }
+
+    public static Intent createExternalEditImageIntent(final Context ctx, final Uri imageUri) {
+        final Intent intent = new Intent(Intent.ACTION_EDIT);
+        //final Uri uri = ContentStorage.get().copy(image.uri, PersistableFolder.GPX.getFolder(), FileNameCreator.forName("test.jpg"), false);
+        final Uri uri = UriUtils.toContentUri(ctx, imageUri);
+        intent.setDataAndType(uri, "image/*");
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        return Intent.createChooser(intent, null);
     }
 
     /** tries to read an image from a stream supplier. Returns null if this fails. Supports normal Android bitmaps and SVG. */
