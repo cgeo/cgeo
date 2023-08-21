@@ -1,8 +1,8 @@
 ### Karte
-- Updated Mapsforge and VTM libs to v0.20
+- Mapsforge und VTM-Bibliotheken auf v0.20 aktualisiert
 
 ### Cache-Details
 -
 
 ### Allgemein
-- New: Increased target SDK to 33
+- Neu: targetSDK auf 33 erhöht
