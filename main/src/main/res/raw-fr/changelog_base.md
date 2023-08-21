@@ -1,5 +1,5 @@
 ### Carte
-- Updated Mapsforge and VTM libs to v0.20
+- Mis à jour des librairies Mapsforge et VTM en version 0.20
 
 ### Détails de la cache
 -
