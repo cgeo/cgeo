@@ -1,2 +1,3 @@
 ##
-- Oplossing: Crash bij het toevoegen aan favorieten (onder bepaalde omstandigheden)
+- Fix: Crash on adding to favorites (under certain conditions)
+- Fix: Individual route actions not working when using Google Maps
