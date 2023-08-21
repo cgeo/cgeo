@@ -2,7 +2,6 @@ package cgeo.geocaching.unifiedmap.geoitemlayer;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.maps.mapsforge.v6.layers.Polygon;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
@@ -34,6 +33,7 @@ import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 import org.mapsforge.map.layer.overlay.Circle;
 import org.mapsforge.map.layer.overlay.Marker;
+import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.util.MapViewProjection;
 
