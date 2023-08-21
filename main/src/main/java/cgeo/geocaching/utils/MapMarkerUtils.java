@@ -50,6 +50,7 @@ public final class MapMarkerUtils {
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
     private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
+    private static EmojiUtils.EmojiPaint cPaintScaled = null; // cache icons
     private static EmojiUtils.EmojiPaint lcPaint = null; // list markers for caches
     private static EmojiUtils.EmojiPaint lwPaint = null; // list markers for waypoints
     private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
@@ -136,11 +137,17 @@ public final class MapMarkerUtils {
         final boolean doubleSize = showBigSmileys(cacheListType) && (mainMarkerId != cache.getType().markerId);
         if (useEmoji > 0 && !doubleSize) {
             // custom icon
-            if (cPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15 * (applyScaling ? scalingFactorCacheIcons : 1))); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
-                cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
+            EmojiUtils.EmojiPaint paint = applyScaling ? cPaintScaled : cPaint;
+            if (paint == null) {
+                final int availableSize = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15 * (applyScaling ? scalingFactorCacheIcons : 1))); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
+                paint = new EmojiUtils.EmojiPaint(res, new Pair<>(availableSize, availableSize), availableSize, 0, DisplayUtils.calculateMaxFontsize(35, 1, 1000, availableSize));
+                if (applyScaling) {
+                    cPaintScaled = paint;
+                } else {
+                    cPaint = paint;
+                }
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, useEmoji), Gravity.CENTER));
         } else if (doubleSize) {
             // main icon (type icon / custom cache icon)
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, applyScaling ? scalingFactorCacheIcons : 1));
