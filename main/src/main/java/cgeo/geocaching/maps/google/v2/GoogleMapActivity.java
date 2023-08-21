@@ -19,7 +19,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
-import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
@@ -41,8 +40,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import org.apache.commons.lang3.StringUtils;
 
 // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...)
@@ -50,7 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 //       Either merge GoogleMapActivity with CGeoMap
 //       or generify our map handling so that we only have one map activity at all to avoid code duplication
 @SuppressLint("MissingSuperCall")
-public class GoogleMapActivity extends AbstractNavigationBarActivity implements MapActivityImpl, FilteredActivity, OnMapsSdkInitializedCallback {
+public class GoogleMapActivity extends AbstractNavigationBarActivity implements MapActivityImpl, FilteredActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
@@ -84,7 +81,6 @@ public class GoogleMapActivity extends AbstractNavigationBarActivity implements 
 
     @Override
     public void onCreate(final Bundle icicle) {
-        MapsInitializer.initialize(getApplicationContext(), MapsInitializer.Renderer.LATEST, this);
         mapBase.onCreate(icicle);
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
                 mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
@@ -96,22 +92,6 @@ public class GoogleMapActivity extends AbstractNavigationBarActivity implements 
                 invalidateOptionsMenu();
             }
         });
-    }
-
-    @Override
-    public void onMapsSdkInitialized(final MapsInitializer.Renderer renderer) {
-        switch (renderer) {
-            case LATEST:
-                Log.d("GMv2: The latest version of the renderer is used.");
-                break;
-            case LEGACY:
-                Log.d("GMv2: The legacy version of the renderer is used.");
-                break;
-            default:
-                // to make Codacy happy...
-                Log.w("GMv2: Unknown renderer version used, neither LATEST nor LEGACY.");
-                break;
-        }
     }
 
     @Override
