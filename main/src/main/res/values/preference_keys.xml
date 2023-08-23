@@ -125,6 +125,12 @@
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
 
+    <!-- settings for bettercacher.org screen -->
+    <string translatable="false" name="preference_screen_bettercacher">preference_screen_bettercacher</string>
+    <string translatable="false" name="pref_connectorBetterCacherActive">connectorBetterCacherActive</string>
+    <string translatable="false" name="pref_fakekey_bettercacher_website">fakekey_bettercacher_website</string>
+    <string translatable="false" name="pref_fakekey_bettercacher_settings">fakekey_bettercacher_settings</string>
+
     <!-- settings for geokrety.org screen -->
     <string translatable="false" name="preference_screen_geokrety">preference_screen_geokrety</string>
     <string translatable="false" name="pref_connectorGeokretyActive">connectorGeokretyActive</string>

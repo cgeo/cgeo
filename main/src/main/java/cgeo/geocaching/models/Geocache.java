@@ -121,6 +121,7 @@ public class Geocache implements IWaypoint {
     private String ownerUserId = "";
     private int assignedEmoji = 0;
     private int alcMode = 0;
+    private Tier tier;
 
     @Nullable
     private Date hidden = null;
@@ -173,6 +174,12 @@ public class Geocache implements IWaypoint {
         @Override
         public List<Waypoint> call() {
             return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
+        }
+    };
+    private final LazyInitializedList<Category> categories = new LazyInitializedList<Category>() {
+        @Override
+        public List<Category> call() {
+            return inDatabase() ? DataStore.loadCategories(geocode) : new LinkedList<>();
         }
     };
     private List<Image> spoilers = null;
@@ -349,6 +356,12 @@ public class Geocache implements IWaypoint {
         }
         if (myVote == 0) {
             myVote = other.myVote;
+        }
+        if (tier == null) {
+            tier = other.tier;
+        }
+        if (categories.isEmpty()) {
+            setCategories(other.getCategories());
         }
 
         mergeWaypoints(other.waypoints, false);
@@ -974,6 +987,10 @@ public class Geocache implements IWaypoint {
         return attributes.getUnderlyingList();
     }
 
+    public List<Category> getCategories() {
+        return categories.getUnderlyingList();
+    }
+
     @NonNull
     public List<Image> getSpoilers() {
         return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
@@ -1290,6 +1307,14 @@ public class Geocache implements IWaypoint {
         return alcMode;
     }
 
+    public void setTier(final Tier tier) {
+        this.tier = tier;
+    }
+
+    public Tier getTier() {
+        return this.tier;
+    }
+
     /**
      * Set the number of users watching this geocache
      *
@@ -1467,6 +1492,13 @@ public class Geocache implements IWaypoint {
         this.attributes.clear();
         if (attributes != null) {
             this.attributes.addAll(attributes);
+        }
+    }
+
+    public void setCategories(final Collection<Category> categories) {
+        this.categories.clear();
+        if (categories != null) {
+            this.categories.addAll(categories);
         }
     }
 

@@ -10,6 +10,8 @@ import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
@@ -201,6 +203,20 @@ public final class CacheDetailsCreator {
     public void addTerrain(final Geocache cache) {
         if (cache.getTerrain() > 0) {
             addStars(R.string.cache_terrain, cache.getTerrain(), ConnectorFactory.getConnector(cache).getMaxTerrain());
+        }
+    }
+
+    public void addCategories(final Geocache cache) {
+        if (Settings.isBetterCacherConnectorActive() && !cache.getCategories().isEmpty()) {
+            final NameValueLine nameValue = createNameValueLine(R.string.cache_categories);
+            nameValue.valueView.setText(CollectionStream.of(cache.getCategories()).map(c -> c.getI18nText()).toJoinedString(","));
+        }
+    }
+
+    public void addTier(final Geocache cache) {
+        if (Settings.isBetterCacherConnectorActive() && cache.getTier() != null) {
+            final NameValueLine nameValue = createNameValueLine(R.string.cache_tier);
+            nameValue.valueView.setText(cache.getTier().getI18nText());
         }
     }
 

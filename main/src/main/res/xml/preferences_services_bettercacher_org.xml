@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_bettercacher"
+    android:title="@string/init_bettercacher" >
+
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_connectorBetterCacherActive"
+            android:summary="@string/init_summary_bettercacher"
+            android:title="@string/init_bettercacher"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
+        <Preference
+            android:key="@string/pref_fakekey_bettercacher_website"
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

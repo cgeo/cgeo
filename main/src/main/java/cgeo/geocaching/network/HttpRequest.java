@@ -89,6 +89,10 @@ public class HttpRequest {
     }
 
     public <T> Single<T> requestJson(final Class<T> clazz) {
+        return requestJson(clazz, null);
+    }
+
+    public <T> Single<T> requestJson(final Class<T> clazz, final Func1<IOException, T> exceptionHandler) {
         headers("Accept", "application/json, text/javascript, */*; q=0.01");
         return requestInternal(r -> {
             try {
@@ -99,7 +103,11 @@ public class HttpRequest {
                 }
                 return result;
             } catch (IOException e) {
-                throw new IllegalArgumentException("Could not JSONize to " + clazz, e);
+                if (exceptionHandler != null) {
+                    return exceptionHandler.call(e);
+                } else {
+                    throw new IllegalArgumentException("Could not JSONize to " + clazz, e);
+                }
             }
         });
     }

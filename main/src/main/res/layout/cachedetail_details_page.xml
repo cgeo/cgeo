@@ -336,6 +336,50 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <!-- BetterCacher.org box -->
+
+        <LinearLayout
+            android:id="@+id/bettercacher_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/bettercacher_text"
+                    android:text="@string/cache_bettercacher_open"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    tools:text="Start Adventure Lab"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/bettercacher_send"
+                    style="@style/button_icon_colored"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/bettercacher_icon"
+                    android:visibility="visible"
+                    tools:visibility="visible"/>
+            </RelativeLayout>
+        </LinearLayout>
+
         <!-- Favorite points box -->
 
         <LinearLayout

@@ -124,6 +124,14 @@
             app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment"
             app:title="@string/init_sendToCgeo"
             app:iconSpaceReserved="false" />
+
+        <!-- BetterCacher.org -->
+        <Preference
+            android:key="@string/pref_fakekey_bettercacher_settings"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceBetterCacherFragment"
+            app:title="@string/init_bettercacher"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

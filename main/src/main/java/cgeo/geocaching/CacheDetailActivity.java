@@ -15,6 +15,7 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
+import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.IVotingCapability;
@@ -1185,6 +1186,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addTerrain(cache);
             details.addRating(cache);
 
+            details.addCategories(cache);
+            details.addTier(cache);
+
             // favorite count
             favoriteLine = details.add(R.string.cache_favorite, "");
 
@@ -1244,10 +1248,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.removeFromWatchlist.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox(activity);
 
-            // WhereYouGo, ChirpWolf and Adventure Lab
+            // WhereYouGo, ChirpWolf, Adventure Lab, BetterCacher
             updateWhereYouGoBox(activity);
             updateChirpWolfBox(activity);
             updateALCBox(activity);
+            updateBettercacherBox(activity);
 
             // favorite points
             binding.addToFavpoint.setOnClickListener(new FavoriteAddClickListener());
@@ -1622,6 +1627,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
             }
+        }
+
+        private void updateBettercacherBox(final CacheDetailActivity activity) {
+            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null;
+            binding.bettercacherBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            if (isEnabled) {
+                binding.bettercacherSend.setOnClickListener(v -> {
+                    ShareUtils.openUrl(activity, BetterCacherConnector.INSTANCE.getCacheUrl(cache));
+                });
+            }
+
         }
 
         @Nullable
