@@ -7,6 +7,13 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.08.24 Bugfix Release
+
+- Fix: Individual route actions not working when using Google Maps
+- Fix: Crash on adding to favorites (under certain conditions)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.08.16 Feature Release
 
 ### Map
