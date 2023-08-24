@@ -567,9 +567,9 @@
     <string name="cache_dialog_watchlist_add_message">Ang pagdadagdag ng cache sa iyong watchlist&#8230;</string>
     <string name="cache_dialog_watchlist_remove_title">Ang nasa Watchlist</string>
     <string name="cache_dialog_watchlist_remove_message">Ang pagtatanggal ng cache mula sa iyong watchlist&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">Ang paborito</string>
+    <string name="cache_dialog_favorite_add_title">Ang Paborito</string>
     <string name="cache_dialog_favorite_add_message">Ang pagdadagdag ng cache sa iyong mga paborito&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">Ang paborito</string>
+    <string name="cache_dialog_favorite_remove_title">Ang Paborito</string>
     <string name="cache_dialog_favorite_remove_message">Ang pagtatanggal ng cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Ang nabigasyon</string>
     <string name="cache_menu_navigation_drive">Nabigasyon habang (Nagmamaneho)</string>
@@ -638,6 +638,7 @@
     <string name="cache_share_field">Ang Ibahagi</string>
     <string name="cache_time_full_hours">ang oras</string>
     <string name="cache_listed_on">Ang listahan sa %s</string>
+    <string name="cachedetails_progress_upload_note">Ang pansariling tala ay nai-upload na</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nag-load ang cache mula sa %1$s</string>

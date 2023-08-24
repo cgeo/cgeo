@@ -1306,9 +1306,9 @@
     <string name="cache_dialog_watchlist_add_message">Добавление тайника в список Отслеживаемых…</string>
     <string name="cache_dialog_watchlist_remove_title">Список Отслеживаемых</string>
     <string name="cache_dialog_watchlist_remove_message">Удаление тайника из списка Отслеживаемых…</string>
-    <string name="cache_dialog_favorite_add_title">Рекомендации</string>
+    <string name="cache_dialog_favorite_add_title">Рекомендуют</string>
     <string name="cache_dialog_favorite_add_message">Рекомендация тайника…</string>
-    <string name="cache_dialog_favorite_remove_title">Рекомендации</string>
+    <string name="cache_dialog_favorite_remove_title">Рекомендуют</string>
     <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_target">Установить как цель</string>
@@ -1417,6 +1417,7 @@
     <string name="cache_recently_viewed">Недавно просмотренные</string>
     <string name="cache_recently_viewed_empty">Нет недавно просмотренных тайников</string>
     <string name="cache_clear_recently_viewed">очистить</string>
+    <string name="cachedetails_progress_upload_note">Личная заметка загружена</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>

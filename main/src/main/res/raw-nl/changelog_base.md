@@ -4,7 +4,7 @@
 - Oplossing: Overgebleven gedeeltelijke bestanden bij het afbreken van kopiëren van gedownloade bestanden
 - Nieuw: Integriteitscontrole voor gedownloade routeringstegels
 - Nieuw: Ondersteuning voor door gebruiker geselecteerde audio voor nabijheidsmeldingen
-- Nieuw: Nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
+- Nieuw: nabijheidsmeldingen van kaart snelle instellingen in-/uitschakelen
 - Nieuw: Uitgebreide GeoJSON ondersteuning voor Google Maps
 - Nieuw: Toon een zoekcentrum indicator bij het zoeken van adres => tik op kaart symbool
 - Nieuw: OpenTopoMap kaartaanbieder

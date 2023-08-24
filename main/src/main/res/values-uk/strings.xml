@@ -737,9 +737,9 @@
     <string name="cache_dialog_watchlist_add_message">Додавання кешу до списку перегляду…</string>
     <string name="cache_dialog_watchlist_remove_title">список спостереження</string>
     <string name="cache_dialog_watchlist_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
-    <string name="cache_dialog_favorite_add_title">улюблений</string>
+    <string name="cache_dialog_favorite_add_title">Улюблене</string>
     <string name="cache_dialog_favorite_add_message">Додавання кешу до вибраного…</string>
-    <string name="cache_dialog_favorite_remove_title">улюблений</string>
+    <string name="cache_dialog_favorite_remove_title">Улюблене</string>
     <string name="cache_dialog_favorite_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
@@ -815,6 +815,7 @@
     <string name="cache_share_field">Поділитися</string>
     <string name="cache_time_full_hours">годин</string>
     <string name="cache_listed_on">Список %s</string>
+    <string name="cachedetails_progress_upload_note">завантажено особисту нотатку</string>
     <string name="cache_whereyougo_start">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
     <string name="cache_whereyougo_install">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
     <string name="context_share_as_text">Поділитися текстом</string>

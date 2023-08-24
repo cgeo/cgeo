@@ -1222,6 +1222,7 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
+    <string name="cachedetails_progress_upload_note">パーソナルノートをアップロードしました</string>
     <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
     <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
     <string name="cache_chirpwolf_start">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。Chirp Wolfでchirpデータを読み込めます</string>

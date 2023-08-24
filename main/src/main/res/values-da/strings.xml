@@ -1040,6 +1040,7 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Fra %s</string>
+    <string name="cachedetails_progress_upload_note">Personlig note uploadet</string>
     <string name="cache_whereyougo_start">Hent og start denne cartridge med WhereYouGo</string>
     <string name="cache_whereyougo_install">Installér WhereYouGo for at hente og starte denne cartridge</string>
     <string name="context_share_as_text">Del tekst</string>

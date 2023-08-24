@@ -1239,6 +1239,7 @@
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
     <string name="cache_recently_viewed">Son görüntülenenler</string>
+    <string name="cachedetails_progress_upload_note">Kişisel not yüklendi</string>
     <string name="cache_whereyougo_start">Bu kartuşu indirmek ve başlatmak için WhereYouGo\'yu açın</string>
     <string name="cache_whereyougo_install">Bu kartuşu indirmek ve başlatmak için WhereYouGo oynatıcısını kurun</string>
     <string name="cache_alc_start">Bu macerayı oynayabilmek için Adventure Lab uygulamasını açın</string>

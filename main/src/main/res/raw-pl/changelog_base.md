@@ -7,7 +7,7 @@
 - Nowość: Przełącz powiadomienia zbliżeniowe z szybkich ustawień mapy
 - Nowość: Rozszerzone wsparcie GeoJSON dla map Google
 - Nowość: Wyświetlaj wskaźnik centrum wyszukiwania podczas wyszukiwania adresów => dotknij symbolu mapy
-- New: OpenTopoMap map provider
+- Nowość: dostawca mapy OpenTopoMap
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
