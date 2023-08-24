@@ -710,9 +710,9 @@
     <string name="cache_dialog_watchlist_add_message">Notiek slēpņa pievienošana novērojamo slēpņu sarakstam…</string>
     <string name="cache_dialog_watchlist_remove_title">Saraksts ar novērojamajiem</string>
     <string name="cache_dialog_watchlist_remove_message">Notiek slēpņa dzēšana no novērojamo slēpņu saraksta…</string>
-    <string name="cache_dialog_favorite_add_title">Favorīts</string>
+    <string name="cache_dialog_favorite_add_title">Favorīti</string>
     <string name="cache_dialog_favorite_add_message">Pievieno slēpni favorītiem…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorīts</string>
+    <string name="cache_dialog_favorite_remove_title">Favorīti</string>
     <string name="cache_dialog_favorite_remove_message">Noņemt slēpni no saviem favorītiem…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
@@ -784,6 +784,7 @@
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
     <string name="cache_listed_on">Publicēts %s</string>
+    <string name="cachedetails_progress_upload_note">Personiskā piezīme ir augšupielādēta</string>
     <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>

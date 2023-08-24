@@ -1303,9 +1303,9 @@
     <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
     <string name="cache_dialog_watchlist_remove_title">Stebėjimo sąrašas</string>
     <string name="cache_dialog_watchlist_remove_message">Slėptuvė šalinama iš stebimų slėptuvių sąrašo…</string>
-    <string name="cache_dialog_favorite_add_title">Įtraukti į mėgstamų slėptuvių sąrašą</string>
+    <string name="cache_dialog_favorite_add_title">Mėgstama</string>
     <string name="cache_dialog_favorite_add_message">Slėptuvė įtraukiama į Jūsų mėgstamų sąrašą…</string>
-    <string name="cache_dialog_favorite_remove_title">Pašalinti iš mėgstamų sąrašo</string>
+    <string name="cache_dialog_favorite_remove_title">Mėgstama</string>
     <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
@@ -1413,6 +1413,7 @@
     <string name="cache_recently_viewed">Neseniai peržiūrėta</string>
     <string name="cache_recently_viewed_empty">Nėra neseniai peržiūrėtų slėptuvių</string>
     <string name="cache_clear_recently_viewed">išvalyti</string>
+    <string name="cachedetails_progress_upload_note">Asmeninė pastaba įkelta</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>

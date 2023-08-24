@@ -1381,6 +1381,7 @@
     <string name="cache_recently_viewed">Nyligen visade</string>
     <string name="cache_recently_viewed_empty">Inga nyligen visade cacher</string>
     <string name="cache_clear_recently_viewed">Rensa</string>
+    <string name="cachedetails_progress_upload_note">Den personliga anteckning har laddats upp</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>

@@ -836,6 +836,7 @@
     <string name="cache_share_field">Megosztás</string>
     <string name="cache_time_full_hours">óra</string>
     <string name="cache_listed_on">Listázva a %s-on is</string>
+    <string name="cachedetails_progress_upload_note">Személyes megjegyzés feltöltve</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->

@@ -1356,9 +1356,9 @@
     <string name="cache_dialog_watchlist_add_message">Dodaję skrytkę do listy obserwowanych…</string>
     <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
     <string name="cache_dialog_watchlist_remove_message">Usuwam skrytkę z listy obserwowanych…</string>
-    <string name="cache_dialog_favorite_add_title">Ulubione</string>
+    <string name="cache_dialog_favorite_add_title">Ulubiona</string>
     <string name="cache_dialog_favorite_add_message">Dodaję skrytkę do listy ulubionych…</string>
-    <string name="cache_dialog_favorite_remove_title">Ulubione</string>
+    <string name="cache_dialog_favorite_remove_title">Ulubiona</string>
     <string name="cache_dialog_favorite_remove_message">Usuwam skrytkę z listy ulubionych…</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
