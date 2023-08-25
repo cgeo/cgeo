@@ -1,8 +1,8 @@
 ### 지도
-- Updated Mapsforge and VTM libs to v0.20
+- Mapsforge 및 VTM libs를 v0.20으로 업데이트했습니다.
 
 ### 캐시 상세정보
 -
 
 ### 일반
-- New: Increased target SDK to 33
+- 신규: 대상 SDK를 33으로 증가
