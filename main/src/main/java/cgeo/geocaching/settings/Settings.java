@@ -1111,6 +1111,10 @@ public class Settings {
         return getBoolean(R.string.pref_zoomincludingwaypoints, false);
     }
 
+    public static boolean isAutogroupWaypoints() {
+        return getBoolean(R.string.pref_autogroupwaypoints, false);
+    }
+
     public static void setMapCenter(final GeoPointImpl mapViewCenter) {
         if (mapViewCenter == null) {
             return;

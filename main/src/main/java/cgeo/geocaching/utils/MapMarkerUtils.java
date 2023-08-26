@@ -48,6 +48,7 @@ public final class MapMarkerUtils {
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
 
+
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
     private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
     private static EmojiUtils.EmojiPaint cPaintScaled = null; // cache icons
@@ -55,6 +56,8 @@ public final class MapMarkerUtils {
     private static EmojiUtils.EmojiPaint lwPaint = null; // list markers for waypoints
     private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
     private static final float scalingFactorWpIcons = Settings.getLong(R.string.pref_mapWpScale, 100) / 100.0f;
+
+    private static final int[] autogroupMarkers = EmojiUtils.AUTOGROUP_MARKERS;
 
     private MapMarkerUtils() {
         // Do not instantiate
@@ -73,7 +76,7 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final boolean applyScaling) {
-        final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
+        final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache, cacheListType == null);
         final int hashcode = new HashCodeBuilder()
                 .append(cache.getAssignedEmoji())
                 .append(cache.getType().id)
@@ -97,6 +100,8 @@ public final class MapMarkerUtils {
                 .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
                 .append(CacheDownloaderService.isDownloadPending(cache))
                 .append(applyScaling)
+                .append(isAutogroupWaypoints())
+                .append(cacheListType == null)
                 .toHashCode();
 
         synchronized (overlaysCache) {
@@ -198,7 +203,7 @@ public final class MapMarkerUtils {
         if (cache.getPersonalNote() != null) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT, applyScaling ? scalingFactorCacheIcons : 1));
         }
-        // center-left/center-right: list markers
+        // center-left/center-right: list markers, groupMarker
         addListMarkers(res, insetsBuilder, assignedMarkers, true, applyScaling);
 
         return buildLayerDrawable(insetsBuilder, 12, 13);
@@ -221,7 +226,7 @@ public final class MapMarkerUtils {
         boolean cacheIsArchived = false;
         final Geocache cache = waypoint.getParentGeocache();
         if (null != cache) {
-            assignedMarkers = getAssignedMarkers(cache);
+            assignedMarkers = getAssignedMarkers(cache, showPin);
             cacheIsDisabled = cache.isDisabled();
             cacheIsArchived = cache.isArchived();
         }
@@ -234,6 +239,7 @@ public final class MapMarkerUtils {
                 .append(cacheIsArchived)
                 .append(showPin)
                 .append(applyScaling)
+                .append(isAutogroupWaypoints())
                 .toHashCode();
 
         synchronized (overlaysCache) {
@@ -649,7 +655,9 @@ public final class MapMarkerUtils {
                     lwPaint = paint;
                 }
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            if (assignedMarkers.get(0) != null) {
+                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            }
             if (assignedMarkers.size() > 1) {
                 insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
             }
@@ -693,18 +701,46 @@ public final class MapMarkerUtils {
         listsRead = false;
     }
 
-    private static ArrayList<Integer> getAssignedMarkers(final Geocache cache) {
+    private static ArrayList<Integer> getAssignedMarkers(final Geocache cache, final boolean isMap) {
         readLists();
 
-        final ArrayList<Integer> result = new ArrayList<>();
+        final ArrayList<Integer> result = new ArrayList<>(2);
         final Set<Integer> lists = cache.getLists();
         for (final Integer list : lists) {
             final Integer markerId = list2marker.get(list);
             if (markerId != null) {
                 result.add(markerId);
+                if (result.size() == 2) {
+                    break;
+                }
             }
         }
+
+        //autogroup marker
+        if (isAutogroupWaypoints() && isMap && cache.hasWaypointsWithCoordinates()) {
+            final int autogroupMarker = calculateGroupMarker(cache);
+            //make sure autogroupMarker is always at second position
+            if (result.isEmpty()) {
+                result.add(null);
+            }
+            if (result.size() == 1) {
+                result.add(autogroupMarker);
+            } else {
+                result.set(1, autogroupMarker);
+            }
+        }
+
         return result;
+    }
+
+    private static int calculateGroupMarker(final Geocache cache) {
+        if (cache == null) {
+            return autogroupMarkers[0];
+        }
+        final int hashcode = new HashCodeBuilder()
+                .append(cache.getGeocode())
+                .append(cache.getCoords()).toHashCode();
+        return autogroupMarkers[Math.abs(hashcode) % autogroupMarkers.length];
     }
 
     public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
@@ -755,6 +791,10 @@ public final class MapMarkerUtils {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), applyScaling ? scalingFactorCacheIcons : 1);
+    }
+
+    private static boolean isAutogroupWaypoints() {
+        return Settings.isAutogroupWaypoints();
     }
 
 }

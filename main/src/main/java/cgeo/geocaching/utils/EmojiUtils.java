@@ -144,6 +144,19 @@ public class EmojiUtils {
     };
     private static final int CUSTOM_GLYPHS_ID = 1;
 
+    public static final int[] AUTOGROUP_MARKERS = new int[CUSTOM_SET_SIZE_PER_OPACITY + 11];
+
+    static {
+        //circles
+        for (int i = 0; i < CUSTOM_SET_SIZE_PER_OPACITY; i++) {
+            AUTOGROUP_MARKERS[i] = CUSTOM_ICONS_START_CIRCLES + i;
+        }
+        //geometric symbols
+        for (int i = 0; i < 11; i++) {
+            AUTOGROUP_MARKERS[CUSTOM_SET_SIZE_PER_OPACITY + i] = symbols[0].symbols[9 + i];
+        }
+    }
+
     private static boolean fontIsChecked = false;
     private static final Boolean lockGuard = false;
     private static final SparseArray<CacheMarker> emojiCache = new SparseArray<>();
@@ -503,4 +516,5 @@ public class EmojiUtils {
             this.fontsize = fontsize;
         }
     }
+
 }

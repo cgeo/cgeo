@@ -973,6 +973,8 @@
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
     <string name="init_zoomincludingwaypoints_description">If mapping a single cache: Should zoom be adjusted to include all its waypoints?</string>
+    <string name="init_autogroupwaypoints">Autogroup waypoints to cache</string>
+    <string name="init_autogroupwaypoints_description">If enabled, then waypoint and the cache they belong to will get a random symbol assigned to visually group them on the map</string>
     <string name="init_brouterThreshold">Calculate route</string>
     <string name="init_brouterThreshold_description">Maximum distance up to which offline routing will calculate a route.</string>
     <string name="init_brouterShowBothDistances">Show straight distance</string>
