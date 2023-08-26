@@ -684,6 +684,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorSUActive, false);
     }
 
+    public static boolean isBetterCacherConnectorActive() {
+        return getBoolean(R.string.pref_connectorBetterCacherActive, false);
+    }
+
     public static boolean isGCPremiumMember() {
         return getGCMemberStatus().isPremium();
     }

@@ -232,6 +232,7 @@
     <string translatable="false" name="init_su">Geocaching.su</string>
     <string translatable="false" name="auth_su">geocaching.su</string>
     <string translatable="false" name="init_gcvote">GCvote.com</string>
+    <string translatable="false" name="init_bettercacher">BetterCacher.org</string>
     <string translatable="false" name="facebook_title">Facebook</string>
     <string translatable="false" name="twitter_title">Twitter</string>
     <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>

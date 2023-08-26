@@ -25,11 +25,13 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.models.Category;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
+import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
@@ -213,7 +215,8 @@ public class DataStore {
                     "cg_caches.preventWaypointsFromNote," +  // 43
                     "cg_caches.owner_guid," +  // 44
                     "cg_caches.emoji," +       // 45
-                    "cg_caches.alcMode";       // 46
+                    "cg_caches.alcMode," +       // 46
+                    "cg_caches.tier"; // 47
 
     /**
      * The list of fields needed for mapping.
@@ -230,7 +233,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 99;
+    private static final int dbVersion = 100;
     public static final int customListIdOffset = 10;
 
     /**
@@ -265,7 +268,8 @@ public class DataStore {
             96, // add preventAskForDeletion to cg_lists
             97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
             98, // add table cg_variables to store cache variables
-            99  // add alcMode to differentiate Linear vs Random
+            99,  // add alcMode to differentiate Linear vs Random
+            100 // add column "tier" and table for cache categories. Initially used for bettercacher.org data
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -274,6 +278,7 @@ public class DataStore {
     @NonNull private static final String dbTableAttributes = "cg_attributes";
     @NonNull private static final String dbTableWaypoints = "cg_waypoints";
     @NonNull private static final String dbTableVariables = "cg_variables";
+    @NonNull private static final String dbTableCategories = "cg_categories";
     @NonNull private static final String dbTableSpoilers = "cg_spoilers";
     @NonNull private static final String dbTableLogs = "cg_logs";
     @NonNull private static final String dbTableLogCount = "cg_logCount";
@@ -337,7 +342,8 @@ public class DataStore {
             + "preventWaypointsFromNote INTEGER DEFAULT 0,"
             + "owner_guid TEXT NOT NULL DEFAULT '',"
             + "emoji INTEGER DEFAULT 0,"
-            + "alcMode INTEGER DEFAULT 0"
+            + "alcMode INTEGER DEFAULT 0,"
+            + "tier TEXT"
             + "); ";
     private static final String dbCreateLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLists + " ("
@@ -388,6 +394,13 @@ public class DataStore {
             + "varname TEXT, "
             + "varorder INTEGER DEFAULT 0, "
             + "formula TEXT"
+            + "); ";
+
+    private static final String dbCreateCategories = ""
+            + "CREATE TABLE IF NOT EXISTS " + dbTableCategories + " ("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "geocode TEXT NOT NULL, "
+            + "category TEXT"
             + "); ";
 
     private static final String dbCreateSpoilers = ""
@@ -1021,6 +1034,7 @@ public class DataStore {
             db.execSQL(dbCreateAttributes);
             db.execSQL(dbCreateWaypoints);
             db.execSQL(dbCreateVariables);
+            db.execSQL(dbCreateCategories);
             db.execSQL(dbCreateSpoilers);
             db.execSQL(dbCreateLogs);
             db.execSQL(dbCreateLogCount);
@@ -1068,6 +1082,9 @@ public class DataStore {
             }
             if (currentVersion >= 98) {
                 db.execSQL("CREATE INDEX IF NOT EXISTS in_vars_geo ON " + dbTableVariables + " (geocode)");
+            }
+            if (currentVersion >= 100) {
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_cats_geo ON " + dbTableCategories + " (geocode)");
             }
         }
 
@@ -1690,6 +1707,17 @@ public class DataStore {
                         }
                     }
 
+                    //create table for category storage
+                    if (oldVersion < 100) {
+                        try {
+                            createColumnIfNotExists(db, dbTableCaches, "tier TEXT");
+                            db.execSQL(dbCreateCategories);
+                            createIndices(db, 100);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 100);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1783,6 +1811,7 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableAttributes);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableWaypoints);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableVariables);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableCategories);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSpoilers);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogs);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogCount);
@@ -2274,6 +2303,7 @@ public class DataStore {
         values.put("owner_guid", cache.getOwnerGuid());
         values.put("emoji", cache.getAssignedEmoji());
         values.put("alcMode", cache.getAlcMode());
+        values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
 
         init();
 
@@ -2282,6 +2312,7 @@ public class DataStore {
 
         try {
             saveAttributesWithoutTransaction(cache);
+            saveCategoriesWithoutTransaction(cache);
             saveWaypointsWithoutTransaction(cache);
             saveSpoilersWithoutTransaction(cache);
             saveLogCountsWithoutTransaction(cache);
@@ -2326,6 +2357,30 @@ public class DataStore {
             statement.executeInsert();
         }
     }
+
+    private static void saveCategoriesWithoutTransaction(final Geocache cache) {
+        final String geocode = cache.getGeocode();
+
+        // The attributes must be fetched first because lazy loading may load
+        // a null set otherwise.
+        final List<Category> categories = cache.getCategories();
+        database.delete(dbTableCategories, "geocode = ?", new String[]{geocode});
+
+        if (categories.isEmpty()) {
+            return;
+        }
+        final SQLiteStatement statement = PreparedStatement.INSERT_CATEGORY.getStatement();
+        for (final Category category : categories) {
+            if (category == null) {
+                continue;
+            }
+            statement.bindString(1, geocode);
+            statement.bindString(2, category.getRaw());
+
+            statement.executeInsert();
+        }
+    }
+
 
     private static void saveListsWithoutTransaction(final Geocache cache) {
         final String geocode = cache.getGeocode();
@@ -2748,6 +2803,7 @@ public class DataStore {
         if (loadFlags.contains(LoadFlag.DB_MINIMAL) ||
                 loadFlags.contains(LoadFlag.ATTRIBUTES) ||
                 loadFlags.contains(LoadFlag.WAYPOINTS) ||
+                loadFlags.contains(LoadFlag.CATEGORIES) ||
                 loadFlags.contains(LoadFlag.SPOILERS) ||
                 loadFlags.contains(LoadFlag.LOGS) ||
                 loadFlags.contains(LoadFlag.INVENTORY) ||
@@ -2866,6 +2922,13 @@ public class DataStore {
                         }
                     }
 
+                    if (loadFlags.contains(LoadFlag.CATEGORIES)) {
+                        final List<Category> categories = loadCategories(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(categories)) {
+                            cache.setCategories(categories);
+                        }
+                    }
+
                     if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
                         if (logIndex < 0) {
                             logIndex = cursor.getColumnIndex("log");
@@ -2969,6 +3032,7 @@ public class DataStore {
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
+        cache.setTier(Tier.of(cursor.getString(47)));
 
         return cache;
     }
@@ -2987,6 +3051,22 @@ public class DataStore {
                 "100",
                 new LinkedList<>(),
                 GET_STRING_0);
+    }
+
+    @Nullable
+    public static List<Category> loadCategories(final String geocode) {
+        if (StringUtils.isBlank(geocode)) {
+            return null;
+        }
+
+        return queryToColl(dbTableCategories,
+                new String[]{"category"},
+                "geocode = ?",
+                new String[]{geocode},
+                null,
+                "100",
+                new LinkedList<>(),
+                cursor -> new Category(cursor.getString(0)));
     }
 
     @Nullable
@@ -3857,6 +3937,9 @@ public class DataStore {
         Log.d("Database clean: removing non-existing caches from variables");
         database.delete(dbTableVariables, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
 
+        Log.d("Database clean: removing non-existing caches from categories");
+        database.delete(dbTableCategories, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
         Log.d("Database clean: removing non-existing caches from trackables");
         database.delete(dbTableTrackables, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
 
@@ -4024,6 +4107,7 @@ public class DataStore {
                 }
                 database.delete(dbTableWaypoints, wayPointClause, null);
                 database.delete(dbTableVariables, baseWhereClause, null);
+                database.delete(dbTableCategories, baseWhereClause, null);
                 database.delete(dbTableTrackables, baseWhereClause, null);
                 database.setTransactionSuccessful();
             } finally {
@@ -4687,6 +4771,7 @@ public class DataStore {
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, service_log_id, type, author, author_guid, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"),
         CLEAN_LOG("DELETE FROM " + dbTableLogs + " WHERE geocode = ? AND date >= ? AND date <= ? AND type = ? AND author = ?"),
         INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
+        INSERT_CATEGORY("INSERT INTO " + dbTableCategories + " (geocode, category) VALUES (?, ?)"),
         ADD_TO_LIST("INSERT OR REPLACE INTO " + dbTableCachesLists + " (list_id, geocode) VALUES (?, ?)"),
         GEOCODE_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.geocode = ? AND c.geocode = l.geocode AND c.detailed = 1 AND l.list_id != " + StoredList.TEMPORARY_LIST.id),
         GUID_OFFLINE("SELECT COUNT(l.list_id) FROM " + dbTableCachesLists + " l, " + dbTableCaches + " c WHERE c.guid = ? AND c.geocode = l.geocode AND c.detailed = 1 AND list_id != " + StoredList.TEMPORARY_LIST.id),

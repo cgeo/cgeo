@@ -18,7 +18,8 @@ public interface LoadFlags {
         SPOILERS,
         LOGS,
         INVENTORY,
-        OFFLINE_LOG
+        OFFLINE_LOG,
+        CATEGORIES
     }
 
     /**

@@ -1,12 +1,17 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.utils.functions.Action1;
+
 import android.os.Build;
 import android.util.Pair;
 
 import androidx.core.util.Supplier;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -58,5 +63,22 @@ public class CommonUtils {
                 return supplier.get();
             }
         };
+    }
+
+    /** executes a given action on each 'partitionSize' numer of elements of the given collection */
+    public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Action1<List<T>> action) {
+        final List<T> sublist = new ArrayList<>(partitionSize);
+        int cnt = 0;
+        for (T element : coll) {
+            sublist.add(element);
+            cnt++;
+            if (cnt == partitionSize) {
+                action.call(sublist);
+                sublist.clear();
+            }
+        }
+        if (!sublist.isEmpty()) {
+            action.call(sublist);
+        }
     }
 }

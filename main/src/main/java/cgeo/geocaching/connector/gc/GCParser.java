@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
@@ -1994,6 +1995,7 @@ public final class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
+        AmendmentUtils.amendCaches(Collections.singleton(cache));
 
         // Wait for completion of logs parsing, retrieving and merging
         mergedLogs.ignoreElement().blockingAwait();
