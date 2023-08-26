@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Markør</string>
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generert</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Funnet</string>
     <string name="log_dnf">Ikke funnet</string>
