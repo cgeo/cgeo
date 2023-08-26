@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Точка</string>
     <string name="wpnew_original">Оригинал</string>
     <string name="wpnew_generated">Создано</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Найден</string>
     <string name="log_dnf">Не найден</string>
