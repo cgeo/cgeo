@@ -41,6 +41,8 @@
     <string name="wp_waypoint">Puntong Pangreperensiya</string>
     <string name="wp_original">Mga Orihinal na mga Koordina</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Natagpuan ito</string>
     <string name="log_dnf">Hindi ito nakita</string>
