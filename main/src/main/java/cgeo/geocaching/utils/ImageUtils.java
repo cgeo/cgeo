@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
@@ -175,17 +176,23 @@ public final class ImageUtils {
     }
 
     /**
-     * Scales a bitmap to the device display size.
+     * Scales a bitmap to the device display size. Also ensures a minimum image size
      *
      * @param image The image Bitmap representation to scale
      * @return BitmapDrawable The scaled image
      */
     @NonNull
-    public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
+    public static BitmapDrawable scaleBitmapToDisplay(@NonNull final Bitmap image) {
+
+        //special case: 1x1 images used for layouting
+        final boolean isOneToOne = image.getHeight() == 1 && image.getWidth() == 1;
+
         final Point displaySize = DisplayUtils.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
-        return scaleBitmapTo(image, maxWidth, maxHeight);
+        final int minWidth = isOneToOne ? 1 : ViewUtils.spToPixel(20);
+        final int minHeight = isOneToOne ? 1 : ViewUtils.spToPixel(20);
+        return scaleBitmapTo(image, maxWidth, maxHeight, minWidth, minHeight);
     }
 
     /**
@@ -217,9 +224,14 @@ public final class ImageUtils {
      */
     @NonNull
     private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
+        return scaleBitmapTo(image, maxWidth, maxHeight, -1, -1);
+    }
+
+    @NonNull
+    private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight, final int minWidth, final int minHeight) {
         final Application app = CgeoApplication.getInstance();
         Bitmap result = image;
-        final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight);
+        final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight, minWidth, minHeight);
 
         if (scaledSize.right) {
             result = Bitmap.createScaledBitmap(image, scaledSize.left, scaledSize.middle, true);
@@ -232,17 +244,28 @@ public final class ImageUtils {
     }
 
     public static ImmutableTriple<Integer, Integer, Boolean> calculateScaledImageSizes(final int originalWidth, final int originalHeight, final int maxWidth, final int maxHeight) {
+        return calculateScaledImageSizes(originalWidth, originalHeight, maxWidth, maxHeight, -1, -1);
+    }
+
+    public static ImmutableTriple<Integer, Integer, Boolean> calculateScaledImageSizes(final int originalWidth, final int originalHeight, final int maxWidth, final int maxHeight, final int minWidth, final int minHeight) {
+
         int width = originalWidth;
         int height = originalHeight;
         final int realMaxWidth = maxWidth <= 0 ? width : maxWidth;
         final int realMaxHeight = maxHeight <= 0 ? height : maxHeight;
+        final int realMinWidth = minWidth <= 0 ? width : minWidth;
+        final int realMinHeight = minHeight <= 0 ? height : minHeight;
         final boolean imageTooLarge = width > realMaxWidth || height > realMaxHeight;
+        final boolean imageTooSmall = width < realMinWidth || height < realMinHeight;
 
-        if (!imageTooLarge) {
+        if (!imageTooLarge && !imageTooSmall) {
             return new ImmutableTriple<>(width, height, false);
         }
 
-        final double ratio = Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width);
+        final double ratio = imageTooLarge ?
+                Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width) :
+                Math.max((double) realMinHeight / (double) height, (double) realMinWidth / (double) width) ;
+
         width = (int) Math.ceil(width * ratio);
         height = (int) Math.ceil(height * ratio);
         return new ImmutableTriple<>(width, height, true);

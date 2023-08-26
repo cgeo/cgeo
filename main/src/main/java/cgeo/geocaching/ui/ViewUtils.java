@@ -80,6 +80,10 @@ public class ViewUtils {
         return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
+    public static int spToPixel(final float sp) {
+        return (int) (sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity));
+    }
+
     public static int pixelToDp(final float px) {
         return (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
