@@ -47,6 +47,8 @@
     <string name="wp_waypoint">Ang puno ng reperensya</string>
     <string name="wp_original">Ang orihinal na mga kordinado</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Natagpuan sa</string>
     <string name="log_dnf">Hindi natagpuan ito</string>
