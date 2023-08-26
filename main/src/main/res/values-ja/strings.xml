@@ -84,6 +84,8 @@
     <string name="wpnew_trailhead">経由地</string>
     <string name="wpnew_waypoint">マーカー</string>
     <string name="wpnew_original">オリジナル</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">発見</string>
     <string name="log_dnf">未発見</string>
