@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Δείκτης</string>
     <string name="wpnew_original">Αρχικό</string>
     <string name="wpnew_generated">Δημιουργήθηκε</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Το βρήκα</string>
     <string name="log_dnf">Δεν το βρήκα</string>
