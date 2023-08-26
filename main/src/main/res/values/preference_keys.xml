@@ -275,6 +275,7 @@
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>
     <string translatable="false" name="pref_log_offline">log_offline</string>
     <string translatable="false" name="pref_offlinelogs_homescreen">offlinelogs_homescreen</string>
+    <string translatable="false" name="pref_log_image_default_prefix">pref_log_image_default_prefix</string>
 
 
     <!-- ============================================================================================================================================================================== -->
