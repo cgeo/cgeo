@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">표식</string>
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
