@@ -57,6 +57,8 @@
     <string name="wpnew_pkg">停车场</string>
     <string name="wpnew_waypoint">标记</string>
     <string name="wpnew_original">原始坐标</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">已发现</string>
     <string name="log_dnf">未发现</string>
