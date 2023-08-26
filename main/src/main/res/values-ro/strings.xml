@@ -65,6 +65,8 @@
     <string name="wp_waypoint">Punct de referinţă</string>
     <string name="wp_original">Coordonatele originale</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Am gasit-o</string>
     <string name="log_dnf">Nu am găsit-o</string>
