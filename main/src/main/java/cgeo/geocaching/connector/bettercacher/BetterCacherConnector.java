@@ -80,10 +80,12 @@ public class BetterCacherConnector extends AbstractConnector implements ICacheAm
 
         public List<Category> getCategories() {
             final List<Category> cats = new ArrayList<>();
-            for (String att : attributes) {
-                final Category cat = new Category("bc-" + att);
-                if (cat.getType() != Category.Type.UNKNOWN) {
-                    cats.add(cat);
+            if (attributes != null) {
+                for (String att : attributes) {
+                    final Category cat = new Category("bc-" + att);
+                    if (cat.getType() != Category.Type.UNKNOWN) {
+                        cats.add(cat);
+                    }
                 }
             }
             return cats;
