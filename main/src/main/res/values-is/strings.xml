@@ -41,6 +41,8 @@
     <string name="wp_waypoint">Viðmiðunarpunktur</string>
     <string name="wp_original">Upprunanleg hnit</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fundið</string>
     <string name="log_dnf">Fannst ekki</string>
