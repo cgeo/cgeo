@@ -79,6 +79,8 @@
     <string name="wpnew_trailhead">透過</string>
     <string name="wpnew_waypoint">標記</string>
     <string name="wpnew_original">原始的</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">发现它</string>
     <string name="log_dnf">没有发现</string>
