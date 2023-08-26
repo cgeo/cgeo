@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Markering</string>
     <string name="wpnew_original">Ursprunglig</string>
     <string name="wpnew_generated">Genererad</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Hittad</string>
     <string name="log_dnf">Hittade inte</string>
