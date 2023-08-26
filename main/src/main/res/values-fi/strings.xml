@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Merkki</string>
     <string name="wpnew_original">Alkuperäinen</string>
     <string name="wpnew_generated">Luotu</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
