@@ -53,6 +53,8 @@
     <string name="wp_waypoint">Орієнтир</string>
     <string name="wp_original">Оригінальні координати</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Знайдено</string>
     <string name="log_dnf">Не знайдено</string>
