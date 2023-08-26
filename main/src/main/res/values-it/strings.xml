@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Marcatore</string>
     <string name="wpnew_original">Originale</string>
     <string name="wpnew_generated">Generato</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Trovato</string>
     <string name="log_dnf">Non trovato (DNF)</string>
