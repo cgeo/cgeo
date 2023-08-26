@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Žymeklis</string>
     <string name="wpnew_original">Originalus</string>
     <string name="wpnew_generated">Sugeneruotas</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
