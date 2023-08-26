@@ -224,7 +224,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
                 final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(FileUtils.urlToFile(url), true);
-                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) :
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToDisplay(data.left), data.middle)) :
                         Observable.just(IMAGE_ERROR_DATA);
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
@@ -235,7 +235,7 @@ public class HtmlImage implements Html.ImageGetter {
                 delayForTest();
 
                 final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(uri, true, -1);
-                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) :
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToDisplay(data.left), data.middle)) :
                         Observable.just(IMAGE_ERROR_DATA);
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
@@ -319,7 +319,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     protected ImmutableTriple<BitmapDrawable, Metadata, Boolean> scaleImage(final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.left;
-        return ImmutableTriple.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.middle, loadResult.right);
+        return ImmutableTriple.of(bitmap != null ? ImageUtils.scaleBitmapToDisplay(bitmap) : null, loadResult.middle, loadResult.right);
     }
 
     public Completable waitForEndCompletable(@Nullable final DisposableHandler handler) {
