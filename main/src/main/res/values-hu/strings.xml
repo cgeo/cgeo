@@ -84,6 +84,8 @@
     <string name="wpnew_trailhead">Keresztül</string>
     <string name="wpnew_waypoint">Kijelölő</string>
     <string name="wpnew_original">Eredeti</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Megtaláltam</string>
     <string name="log_dnf">Nem találtam meg</string>
