@@ -46,6 +46,7 @@ import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
@@ -2266,6 +2267,18 @@ public class Settings {
             Log.e("Failure parsing log templates: " + e.getMessage());
             return new ArrayList<>();
         }
+    }
+
+    public static String getLogImageCaptionDefaultPraefix() {
+        final String praefix = getString(R.string.pref_log_image_default_prefix, null);
+        return getLogImageCaptionDefaultPraefixFor(praefix);
+    }
+
+    public static String getLogImageCaptionDefaultPraefixFor(final String prefValue) {
+        if (StringUtils.isBlank(prefValue)) {
+            return LocalizationUtils.getString(R.string.log_image_titleprefix);
+        }
+        return prefValue.trim();
     }
 
     public static boolean isDTMarkerEnabled() {

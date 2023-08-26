@@ -76,10 +76,11 @@ public class ImageListFragment extends Fragment {
         if (StringUtils.isNotBlank(image.getTitle())) {
             return image.getTitle();
         }
+        final String imageTitlePrafix = Settings.getLogImageCaptionDefaultPraefix();
         if (imageList.getItemCount() == 1) {
-            return getString(R.string.log_image_titleprefix); // number is unnecessary if only one image is posted
+            return imageTitlePrafix; // number is unnecessary if only one image is posted
         }
-        return getString(R.string.log_image_titleprefix) + " " + (position + 1);
+        return imageTitlePrafix + " " + (position + 1);
     }
 
     private void rebuildImageTitles() {

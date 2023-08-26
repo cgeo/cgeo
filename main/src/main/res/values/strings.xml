@@ -1151,6 +1151,7 @@
     <string name="init_summary_trackautovisit">Set trackables to \"Visited\" by default</string>
     <string name="init_sigautoinsert">Insert automatically</string>
     <string name="init_offlinelogs_homescreen">Show offline logs</string>
+    <string name="init_log_image_default_prefix_title">Default Caption for Log Images</string>
     <string name="init_summary_offlinelogs_homescreen">An offline log counter (e.g. \"+ 1\") will be shown next to your online find count on the home screen if you have logs, that are not submitted yet.</string>
     <string name="init_loaddirectionimg">Direction Image</string>
     <string name="init_summary_loaddirectionimg">Download directional arrow image if necessary (only required for Basic Members)</string>

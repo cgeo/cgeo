@@ -36,6 +36,12 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
         // Init "Log Templates"
         recreateLogTemplatePreferences();
 
+        // Update "Log Image Default Caption Prefix"
+        SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefix());
+        findPreference(getString(R.string.pref_log_image_default_prefix)).setOnPreferenceChangeListener((preference, newValue) -> {
+            SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefixFor(String.valueOf(newValue)));
+            return true;
+        });
     }
 
     private void recreateLogTemplatePreferences() {
