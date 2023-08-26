@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Značka</string>
     <string name="wpnew_original">Pôvodné</string>
     <string name="wpnew_generated">Vygenerované</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Nájdená</string>
     <string name="log_dnf">Nenájdená</string>
