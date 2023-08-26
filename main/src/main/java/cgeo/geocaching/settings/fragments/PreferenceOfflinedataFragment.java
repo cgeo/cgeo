@@ -7,6 +7,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
@@ -48,9 +49,8 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         final Preference isDbOnSdCard = findPreference(getString(R.string.pref_dbonsdcard));
         isDbOnSdCard.setPersistent(false);
         isDbOnSdCard.setOnPreferenceClickListener(preference -> {
-            final boolean oldValue = Settings.isDbOnSDCard();
-            DataStore.moveDatabase(getActivity());
-            return oldValue != Settings.isDbOnSDCard();
+            BackupUtils.startAction(getActivity(), BackupUtils.StartupAction.MOVE_DATABASE);
+            return true;
         });
 
         final Preference dataDirPreference = findPreference(getString(R.string.pref_fakekey_dataDir));

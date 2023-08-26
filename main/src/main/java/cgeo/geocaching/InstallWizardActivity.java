@@ -67,7 +67,6 @@ public class InstallWizardActivity extends AppCompatActivity {
     private WizardStep step = WizardStep.WIZARD_START;
     private boolean forceSkipButton = false;
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
-    private BackupUtils backupUtils;
 
     private static final int REQUEST_CODE_WIZARD_GC = 0x7167;
 
@@ -99,7 +98,6 @@ public class InstallWizardActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setTheme(R.style.NoActionbarTheme);
 
-        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_BACKUPUTILS));
         if (savedInstanceState != null) {
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
             mode = WizardMode.values()[savedInstanceState.getInt(BUNDLE_MODE)];
@@ -236,9 +234,9 @@ public class InstallWizardActivity extends AppCompatActivity {
                     setButtonToDone();
                     DataStore.resetNewlyCreatedDatabase();
                     if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
-                        backupUtils.restore(BackupUtils.newestBackupFolder(false));
+                        BackupUtils.startAction(this, BackupUtils.StartupAction.RESTORE);
                     } else {
-                        backupUtils.selectBackupDirIntent();
+                        BackupUtils.startAction(this, BackupUtils.StartupAction.RESTORE_OTHER_FOLDER);
                     }
                 }, button3Info, R.string.wizard_advanced_restore_info);
                 break;
@@ -528,7 +526,6 @@ public class InstallWizardActivity extends AppCompatActivity {
         savedInstanceState.putInt(BUNDLE_MODE, mode.id);
         savedInstanceState.putInt(BUNDLE_STEP, step.ordinal());
         savedInstanceState.putBundle(BUNDLE_CSAH, contentStorageActivityHelper.getState());
-        savedInstanceState.putBundle(BUNDLE_BACKUPUTILS, backupUtils.getState());
     }
 
     @Override
@@ -549,6 +546,5 @@ public class InstallWizardActivity extends AppCompatActivity {
         if ((contentStorageActivityHelper == null || !contentStorageActivityHelper.onActivityResult(requestCode, resultCode, data))) {
             return;
         }
-        backupUtils.onActivityResult(requestCode, resultCode, data);
     }
 }

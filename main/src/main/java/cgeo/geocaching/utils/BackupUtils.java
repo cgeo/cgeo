@@ -87,12 +87,93 @@ public class BackupUtils {
     private boolean regrantAccessRestartNeeded = false;
     private String regrantAccessResultString = null;
 
-    public BackupUtils(final Activity activityContext, final Bundle savedState) {
+    private Runnable runAfterwards;
+
+    public enum StartupAction {
+        BACKUP(R.string.init_backup_now),
+        RESTORE(R.string.init_backup_start_restore),
+        RESTORE_OTHER_FOLDER(R.string.init_backup_restore_different_backup),
+        MOVE_DATABASE(R.string.init_dbonsdcard_title);
+
+        private final int textId;
+        StartupAction(final int textId) {
+            this.textId = textId;
+        }
+
+        public String toI18N() {
+            return LocalizationUtils.getString(textId);
+        }
+    }
+
+    public BackupUtils(final Activity activityContext, final Bundle savedState, final Runnable runAfterwards) {
         this.activityContext = activityContext;
         this.fileSelector = new ContentStorageActivityHelper(activityContext, savedState == null ? null : savedState.getBundle(STATE_CSAH))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER, Folder.class, this::restore)
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> triggerNextRegrantStep(pf, null))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> triggerNextRegrantStep(null, uri));
+        this.runAfterwards = runAfterwards;
+    }
+
+    public void executeStartupOptions() {
+        //Auto-Backup
+        if (Settings.automaticBackupDue()) {
+            backup(() -> {
+                Settings.setAutomaticBackupLastCheck(false);
+                continueExecuteStartupOptions();
+            }, true);
+        } else {
+            continueExecuteStartupOptions();
+        }
+    }
+
+    public static void startAction(final Activity activity, final StartupAction action) {
+        Settings.setStartupAction(action);
+        SimpleDialog.of(activity).setTitle(TextParam.text(action.toI18N()))
+                .setMessage(TextParam.text("Your request was registered. To perform this action, please restart c:geo"))
+                .show();
+    }
+
+    private void continueExecuteStartupOptions() {
+
+        final StartupAction action = Settings.getStartupAction();
+        if (action != null) {
+            Settings.setStartupAction(null);
+            Log.iForce("Executing startup action: " + action);
+            SimpleDialog.of(this.activityContext).setTitle(TextParam.text(action.toI18N()))
+                    .setMessage(TextParam.text("A database action was requested before restart. Do you want to continue?"))
+                    .confirm((v, i) -> executeStartupAction(action), (v, i) -> finishStartupOptions());
+        } else {
+            finishStartupOptions();
+        }
+    }
+
+    private void executeStartupAction(final StartupAction action) {
+        switch (action) {
+            case RESTORE:
+                restore(newestBackupFolder(false));
+                break;
+            case RESTORE_OTHER_FOLDER:
+                selectBackupDirIntent();
+                break;
+            case MOVE_DATABASE:
+                moveDatabase();
+                break;
+            case BACKUP:
+            default:
+                backup(this::finishStartupOptions, false);
+                break;
+        }
+    }
+
+    private void finishStartupOptions() {
+        if (runAfterwards != null) {
+            runAfterwards.run();
+        }
+    }
+
+    private void moveDatabase() {
+        DataStore.moveDatabase(activityContext);
+        finishStartupOptions();
     }
 
     private void triggerNextRegrantStep(final PersistableFolder folder, final PersistableUri uri) {
@@ -175,11 +256,13 @@ public class BackupUtils {
     public void restore(final Folder backupDir) {
 
         if (backupDir == null) {
+            finishStartupOptions();
             return;
         }
 
         if (!hasBackup(backupDir)) {
             Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();
+            finishStartupOptions();
             return;
         }
 
@@ -211,7 +294,10 @@ public class BackupUtils {
                     alertDialog.dismiss();
                     restoreInternal(activityContext, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
                 })
-                .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> alertDialog.cancel())
+                .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> {
+                    alertDialog.cancel();
+                    finishStartupOptions();
+                })
                 .create();
 
         dialog.setOwnerActivity(activityContext);
@@ -315,14 +401,17 @@ public class BackupUtils {
         // finish restore with restore if settings where changed
         if (settingsChanged && !(activityContext instanceof InstallWizardActivity)) {
             SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + activityContext.getString(R.string.settings_restart)))
-                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(
+                            (dialog2, which2) -> ProcessUtils.restartApplication(activityContext),
+                            (d, w) -> finishStartupOptions());
         } else {
-            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString)).show();
+            SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString)).show((v, i) -> finishStartupOptions());
+
         }
     }
 
-    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue, final boolean autobackup) {
-        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(newValue + 1, autobackup);
+    public static void deleteBackupHistoryDialog(final Activity activityContext, final BackupSeekbarPreference preference, final int newValue, final boolean autobackup) {
+        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(activityContext, newValue + 1, autobackup);
 
         if (dirs != null) {
             final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
@@ -354,7 +443,7 @@ public class BackupUtils {
      * Create a backup after confirming to overwrite the existing backup.
      */
     public void backup(final Runnable runAfterwards, final boolean autobackup) {
-        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(autobackup ? MAX_AUTO_BACKUPS : Settings.allowedBackupsNumber(), autobackup);
+        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(activityContext, autobackup ? MAX_AUTO_BACKUPS : Settings.allowedBackupsNumber(), autobackup);
         if (dirs != null) {
             if (autobackup) {
                 removeDirs(dirs);
@@ -540,11 +629,7 @@ public class BackupUtils {
         }
         final boolean settingsResult = createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
         final Consumer<Boolean> consumer = dbResult -> {
-            showBackupCompletedStatusDialog(backupDir, settingsResult, dbResult, autobackup);
-
-            if (runAfterwards != null) {
-                runAfterwards.run();
-            }
+            showBackupCompletedStatusDialog(backupDir, settingsResult, dbResult, autobackup, runAfterwards);
         };
         createDatabaseBackupInternal(backupDir, consumer);
     }
@@ -618,7 +703,7 @@ public class BackupUtils {
         });
     }
 
-    private void showBackupCompletedStatusDialog(final Folder backupDir, final Boolean settingsResult, final Boolean databaseResult, final boolean autobackup) {
+    private void showBackupCompletedStatusDialog(final Folder backupDir, final Boolean settingsResult, final Boolean databaseResult, final boolean autobackup, final Runnable runAfterwards) {
         String msg;
         final String title;
         if (settingsResult && databaseResult) {
@@ -656,7 +741,16 @@ public class BackupUtils {
         } else {
             SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
                     .setButtons(0, 0, R.string.cache_share_field)
-                    .show(SimpleDialog.DO_NOTHING, null, (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
+                    .show((d, w) -> execute(runAfterwards), null, (dialog, which) -> {
+                        ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup);
+                        execute(runAfterwards);
+                    });
+        }
+    }
+
+    private static void execute(final Runnable runAfterwards) {
+        if (runAfterwards != null) {
+            runAfterwards.run();
         }
     }
 
@@ -726,7 +820,7 @@ public class BackupUtils {
     }
 
     @Nullable
-    private List<ContentStorage.FileInformation> getDirsToRemove(final int maxBackupNumber, final boolean autobackup) {
+    private static List<ContentStorage.FileInformation> getDirsToRemove(final Activity activityContext, final int maxBackupNumber, final boolean autobackup) {
         final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(autobackup);
 
         if (dirs == null || dirs.size() <= maxBackupNumber || maxBackupNumber >= activityContext.getResources().getInteger(R.integer.backup_history_length_max)) {
@@ -737,7 +831,7 @@ public class BackupUtils {
         return dirs.subList(0, dirs.size() - maxBackupNumber);
     }
 
-    private void removeDirs(final List<ContentStorage.FileInformation> dirs) {
+    private static void removeDirs(final List<ContentStorage.FileInformation> dirs) {
         for (ContentStorage.FileInformation dir : dirs) {
             FolderUtils.get().deleteAll(dir.dirLocation);
             ContentStorage.get().delete(dir.dirLocation.getUri());

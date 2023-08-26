@@ -45,6 +45,7 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -2023,6 +2024,21 @@ public class Settings {
 
     public static int allowedBackupsNumber() {
         return getInt(R.string.pref_backup_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
+    }
+
+    public static BackupUtils.StartupAction getStartupAction() {
+        final int startupActionInt = getInt(R.string.pref_startup_action, -1);
+        Log.iForce("get StartupAction returns: " + startupActionInt);
+        if (startupActionInt < 0 || startupActionInt >= BackupUtils.StartupAction.values().length) {
+            return null;
+        }
+        return BackupUtils.StartupAction.values()[startupActionInt];
+    }
+
+    public static void setStartupAction(final BackupUtils.StartupAction action) {
+        final int startupAction = action == null ? -1 : action.ordinal();
+        Log.iForce("set StartupAction to: " + startupAction);
+        putInt(R.string.pref_startup_action, startupAction);
     }
 
     public static boolean automaticBackupDue() {

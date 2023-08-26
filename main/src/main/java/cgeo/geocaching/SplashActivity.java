@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -12,15 +13,27 @@ import cgeo.geocaching.utils.TextUtils;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private BackupUtils backupUtils = null;
+
+    public static final String STATE_BACKUPUTILS = "backuputils";
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        // don't call the super implementation with the layout argument, as that would set the wrong theme
+        super.onCreate(savedInstanceState);
+
+        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS), this::continueStartup);
+        backupUtils.executeStartupOptions();
+    }
+
+    private void continueStartup() {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "SplashActivity.onCreate")) {
-            // don't call the super implementation with the layout argument, as that would set the wrong theme
-            super.onCreate(savedInstanceState);
+
 
             final Intent intent;
             final boolean firstInstall = Settings.getLastChangelogChecksum() == 0;
@@ -53,7 +66,13 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        finish();
+        backupUtils.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
     }
 
     private void checkChangedInstall() {

@@ -2,7 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.BackupSeekbarPreference;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
@@ -11,26 +10,23 @@ import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 
 public class PreferenceBackupFragment extends BasePreferenceFragment {
-    public static final String STATE_BACKUPUTILS = "backuputils";
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_backup, rootKey);
 
-        final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
-
         findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
-            backupUtils.backup(this::updateSummary, false);
+            BackupUtils.startAction(this.getActivity(), BackupUtils.StartupAction.BACKUP);
             return true;
         });
 
         findPreference(getString(R.string.pref_fakekey_startrestore)).setOnPreferenceClickListener(preference -> {
-            backupUtils.restore(BackupUtils.newestBackupFolder(false));
+            BackupUtils.startAction(this.getActivity(), BackupUtils.StartupAction.RESTORE);
             return true;
         });
 
         findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)).setOnPreferenceClickListener(preference -> {
-            backupUtils.selectBackupDirIntent();
+            BackupUtils.startAction(this.getActivity(), BackupUtils.StartupAction.RESTORE_OTHER_FOLDER);
             return true;
         });
 
@@ -46,10 +42,9 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         updateSummary();
 
         findPreference(getString(R.string.pref_backup_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
-            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value, false);
+            BackupUtils.deleteBackupHistoryDialog(getActivity(), (BackupSeekbarPreference) preference, (int) value, false);
             return true;
         });
-
     }
 
     @Override

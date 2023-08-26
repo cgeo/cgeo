@@ -84,7 +84,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private static final Object initializedMutex = new Object();
     private static boolean initialized = false;
     private static boolean restoreMessageShown = false;
-    private BackupUtils backupUtils = null;
 
 
     private ActivityNavigationbarBinding binding = null;
@@ -187,7 +186,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
     }
 
     @Override
@@ -437,13 +435,11 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);  // call super to make lint happy
-        backupUtils.onActivityResult(requestCode, resultCode, intent);
     }
 
     protected void runInitAndMaintenance() {
@@ -490,12 +486,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
             cLog.add("rth");
 
-            // automated backup check
-            if (Settings.automaticBackupDue()) {
-                new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
-            }
-            cLog.add("ab");
-
             // check for finished, but unreceived downloads
             DownloaderUtils.checkPendingDownloads(this);
         }
@@ -511,7 +501,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
                     .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
                         dialog.dismiss();
                         DataStore.resetNewlyCreatedDatabase();
-                        backupUtils.restore(BackupUtils.newestBackupFolder(false));
+                        BackupUtils.startAction(this, BackupUtils.StartupAction.RESTORE);
                     })
                     .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
                         dialog.cancel();

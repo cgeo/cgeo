@@ -564,6 +564,7 @@
     <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
     <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
     <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
+    <string translatable="false" name="pref_startup_action">startup_action</string>
     <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
     <string translatable="false" name="pref_dbCleanupLastCheck">dbCleanupLastCheck</string>
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
