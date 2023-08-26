@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Znacznik</string>
     <string name="wpnew_original">Oryginalne</string>
     <string name="wpnew_generated">Wygenerowane</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
