@@ -83,6 +83,8 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Markør</string>
     <string name="wpnew_original">Oprindeligt</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fundet</string>
     <string name="log_dnf">Ikke fundet</string>
