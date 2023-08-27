@@ -1615,7 +1615,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache, final boolean isDotMode) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule(), latestRenderer);
         if (isDotMode) {
             item.setMarker(MapMarkerUtils.getCacheDotMarker(getResources(), cache));
         } else {
@@ -1625,7 +1625,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint, final boolean isDotMode) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.applyDistanceRule());
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.applyDistanceRule(), latestRenderer);
         if (isDotMode) {
             item.setMarker(MapMarkerUtils.getWaypointDotMarker(getResources(), waypoint));
         } else {

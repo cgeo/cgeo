@@ -100,16 +100,20 @@ public class GoogleMapActivity extends AbstractNavigationBarActivity implements 
 
     @Override
     public void onMapsSdkInitialized(final MapsInitializer.Renderer renderer) {
+        Log.e("onMapsSdkInitialized");
         switch (renderer) {
             case LATEST:
                 Log.d("GMv2: The latest version of the renderer is used.");
+                mapBase.setLatestRenderer(true);
                 break;
             case LEGACY:
                 Log.d("GMv2: The legacy version of the renderer is used.");
+                mapBase.setLatestRenderer(false);
                 break;
             default:
                 // to make Codacy happy...
                 Log.w("GMv2: Unknown renderer version used, neither LATEST nor LEGACY.");
+                mapBase.setLatestRenderer(false);
                 break;
         }
     }

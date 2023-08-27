@@ -7,6 +7,6 @@ public interface MapItemFactory {
 
     GeoPointImpl getGeoPointBase(Geopoint coords);
 
-    CachesOverlayItemImpl getCachesOverlayItem(IWaypoint iWaypoint, boolean applyDistanceRule);
+    CachesOverlayItemImpl getCachesOverlayItem(IWaypoint iWaypoint, boolean applyDistanceRule, boolean setDraggable);
 
 }

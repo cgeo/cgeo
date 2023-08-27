@@ -43,6 +43,7 @@ public abstract class AbstractMap {
     public String targetGeocode = null;
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
+    protected volatile boolean latestRenderer = false; // GM specific
 
     protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;
@@ -158,4 +159,7 @@ public abstract class AbstractMap {
 
     public abstract MapOptions getMapOptions();
 
+    public void setLatestRenderer(final boolean latestRenderer) {
+        this.latestRenderer = latestRenderer;
+    }
 }

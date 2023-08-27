@@ -20,6 +20,7 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
@@ -43,6 +44,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -114,8 +116,10 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         initialize(context);
     }
 
-
-    public void onMapReady(final GoogleMap googleMap) {
+    @Override
+    // splitting-up method would not improve readability
+    @SuppressWarnings("PMD.NPathComplexity")
+    public void onMapReady(@NonNull final GoogleMap googleMap) {
         if (this.googleMap != null) {
             if (this.googleMap == googleMap) {
                 return;
@@ -145,19 +149,10 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // ("The default behavior is for the camera to move to the marker and an info window to appear.")
             return true;
         });
-        googleMap.setOnMapLongClickListener(tapLatLong -> {
-            if (Settings.isLongTapOnMapActivated()) {
-                boolean hitWaypoint = false;
-                final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+        if (Settings.isLongTapOnMapActivated()) {
+            googleMap.setOnMapLongClickListener(tapLatLong -> {
                 final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLatLong);
-                if (closest != null) {
-                    final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
-                    if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
-                        hitWaypoint = true;
-                        ((CGeoMap) onCacheTapListener).handleCacheWaypointLongTap(closest.getCoord(), waypointPoint.x, waypointPoint.y);
-                    }
-                }
-                if (!hitWaypoint && null != positionAndHistoryRef) {
+                if (!isLongTappedOnGeoItem(tapLatLong, null) && null != positionAndHistoryRef) {
                     final GooglePositionAndHistory positionAndHistory = (GooglePositionAndHistory) positionAndHistoryRef.get();
                     if (null != positionAndHistory) {
                         for (RouteItem item : positionAndHistory.individualRoutePoints) {
@@ -171,8 +166,34 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
                         ((CGeoMap) onCacheTapListener).triggerLongTapContextMenu(tappedPoint);
                     }
                 }
-            }
-        });
+            });
+            // new GM renderer needs to catch long tap by catching drag events
+            googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                @Override
+                public void onMarkerDrag(final @NonNull Marker marker) {
+                    restorePosition(marker);
+                }
+
+                @Override
+                public void onMarkerDragEnd(final @NonNull Marker marker) {
+                    restorePosition(marker);
+                }
+
+                @Override
+                public void onMarkerDragStart(final @NonNull Marker marker) {
+                    isLongTappedOnGeoItem(marker.getPosition(), marker);
+                    restorePosition(marker);
+                }
+
+                private void restorePosition(final @NonNull Marker marker) {
+                    // keep original position
+                    final IWaypoint oldPosition = (IWaypoint) marker.getTag();
+                    if (oldPosition != null) {
+                        marker.setPosition(new LatLng(oldPosition.getCoords().getLatitude(), oldPosition.getCoords().getLongitude()));
+                    }
+                }
+            });
+        }
         adaptLayoutForActionbar(true);
         googleMap.setOnCameraChangeListener(cameraPosition -> {
             // check for tap on compass rose, which resets bearing to 0.0
@@ -203,6 +224,22 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         redraw();
+    }
+
+    private boolean isLongTappedOnGeoItem(final LatLng tapLocation, @Nullable final Marker marker) {
+        final GoogleCacheOverlayItem closest = closest(new Geopoint(tapLocation.latitude, tapLocation.longitude));
+        final Point tappedPoint = googleMap.getProjection().toScreenLocation(tapLocation);
+        if (closest != null) {
+            if (marker != null) {
+                marker.setTag(closest.getCoord());
+            }
+            final Point waypointPoint = googleMap.getProjection().toScreenLocation(new LatLng(closest.getCoord().getCoords().getLatitude(), closest.getCoord().getCoords().getLongitude()));
+            if (insideCachePointDrawable(tappedPoint, waypointPoint, closest.getMarker(0).getDrawable())) {
+                ((CGeoMap) onCacheTapListener).handleCacheWaypointLongTap(closest.getCoord(), waypointPoint.x, waypointPoint.y);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void adaptLayoutForActionbar(final boolean actionBarShowing) {
