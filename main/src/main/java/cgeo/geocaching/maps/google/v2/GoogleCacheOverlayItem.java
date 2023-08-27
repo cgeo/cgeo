@@ -16,10 +16,12 @@ public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectO
     private final boolean applyDistanceRule;
     private BitmapDescriptorCache bitmapDescriptorCache;
     private CacheMarker marker;
+    private final boolean setDraggable;
 
-    public GoogleCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
+    public GoogleCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
         this.coord = coordinate;
         this.applyDistanceRule = applyDistanceRule;
+        this.setDraggable = setDraggable;
     }
 
     @Override
@@ -61,7 +63,8 @@ public class GoogleCacheOverlayItem implements CachesOverlayItemImpl, MapObjectO
                 .icon(toBitmapDescriptor(this.marker))
                 .position(toLatLng(coord))
                 .anchor(0.5f, 1)
-                .zIndex((coord instanceof Geocache) ? GoogleCachesList.ZINDEX_GEOCACHE : GoogleCachesList.ZINDEX_WAYPOINT);
+                .zIndex((coord instanceof Geocache) ? GoogleCachesList.ZINDEX_GEOCACHE : GoogleCachesList.ZINDEX_WAYPOINT)
+                .draggable(setDraggable);
 
         if (showCircles && applyDistanceRule) {
             final CircleOptions circle = new CircleOptions()

@@ -16,8 +16,8 @@ public class GoogleMapItemFactory implements MapItemFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
-        final GoogleCacheOverlayItem item = new GoogleCacheOverlayItem(coordinate, applyDistanceRule);
+    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule, final boolean setDraggable) {
+        final GoogleCacheOverlayItem item = new GoogleCacheOverlayItem(coordinate, applyDistanceRule, setDraggable);
         item.setBitmapDescriptorCache(bitmapDescriptorCache);
         return item;
     }
