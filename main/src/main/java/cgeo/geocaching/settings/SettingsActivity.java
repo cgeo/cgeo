@@ -83,7 +83,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     public static final int RESTART_NEEDED = 2;
 
     public static final String STATE_CSAH = "csah";
-    public static final String STATE_CSAH_PN = "csahpn";
     public static final String STATE_BACKUPUTILS = "backuputils";
 
     private BackupUtils backupUtils = null;
