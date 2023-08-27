@@ -456,7 +456,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "AbstractBottomNavigationActivity.runInitAndMaintenance")) {
 
             //check database
-            final String errorMsg = DataStore.initAndCheck(false);
+            final String errorMsg = DataStore.initAndCheck();
             if (errorMsg != null) {
                 DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
             }
