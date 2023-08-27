@@ -1027,6 +1027,7 @@
     <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
     <string name="init_sigautoinsert">Voeg automatisch toe</string>
     <string name="init_offlinelogs_homescreen">Offline logs tonen</string>
+    <string name="init_log_image_default_prefix_title">Standaard onderschrift voor Log Afbeeldingen</string>
     <string name="init_summary_offlinelogs_homescreen">Een offline log teller (bijv. \"+ 1\") zal worden getoond naast het aantal online gevonden caches als je logs hebt die nog niet zijn ingediend.</string>
     <string name="init_loaddirectionimg">Richting-afbeelding</string>
     <string name="init_summary_loaddirectionimg">Laad de richting-afbeelding in, indien nodig (alleen basis-leden)</string>
