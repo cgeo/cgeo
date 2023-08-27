@@ -87,7 +87,19 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_unknown">Neznámé</string>
+    <string name="cache_cat_bc_nature">BC Příroda</string>
+    <string name="cache_cat_bc_location">BC Místo</string>
+    <string name="cache_cat_bc_recommended">BC Doporučené</string>
+    <string name="cache_cat_bc_gadget">BC Gadget</string>
+    <string name="cache_cat_bc_mystery">BC Mysterka</string>
+    <string name="cache_cat_bc_hiking">BC Turistika</string>
+    <string name="cache_cat_bc_other">BC Ostatní</string>
     <!-- cache Tier -->
+    <string name="cache_tier_unknown">Neznámé</string>
+    <string name="cache_tier_bc_blue">BC Modré</string>
+    <string name="cache_tier_bc_silver">BC Stříbrné</string>
+    <string name="cache_tier_bc_gold">BC Zlaté</string>
     <!-- logs -->
     <string name="log_found">Nalezeno</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -845,6 +857,7 @@
     <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
+    <string name="init_summary_bettercacher">Načíst kategorie kešek a úrovní z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -1026,6 +1039,7 @@
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
     <string name="init_offlinelogs_homescreen">Zobrazit offline logy</string>
+    <string name="init_log_image_default_prefix_title">Výchozí název obrázků v logu</string>
     <string name="init_summary_offlinelogs_homescreen">Pokud máte logy, které ještě nebyly odeslány, zobrazí se na vaší domovské obrazovce počitadlo offline logů (např. \"+1\").</string>
     <string name="init_loaddirectionimg">V případě potřeby stahovat směrový obrázek (pouze Běžní členové)</string>
     <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Běžní členové)</string>
@@ -1432,6 +1446,8 @@
     <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
+    <string name="cache_categories">Kategorie</string>
+    <string name="cache_tier">Úroveň</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
@@ -1471,6 +1487,7 @@
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
     <string name="cache_alc_related_start">Otevřete Adventure Lab a začněte hrát související dobrodružství</string>
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
+    <string name="cache_bettercacher_open">Otevřít kešku na BetterCacher.org</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="image_category_uncategorized">Nezařazené</string>
