@@ -86,6 +86,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private static boolean restoreMessageShown = false;
     private BackupUtils backupUtils = null;
 
+    private static final String BUNDLE_HIDEBOTTOMNAVIGATION = "hidebottomnavigation";
+    private boolean hideBottomNavigation = false;
 
     private ActivityNavigationbarBinding binding = null;
 
@@ -98,12 +100,14 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     @Override
     public void setContentView(final int layoutResID) {
+        checkIntentHideBottomNavigation();
         final View view = getLayoutInflater().inflate(layoutResID, null);
         setContentView(view);
     }
 
     @Override
     public void setContentView(final View contentView) {
+        checkIntentHideBottomNavigation();
         binding = ActivityNavigationbarBinding.inflate(getLayoutInflater());
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
@@ -227,7 +231,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         // unregister listener before changing anything, as it would otherwise trigger the listener directly
         ((NavigationBarView) binding.activityNavigationbar).setOnItemSelectedListener(null);
 
-        final int menuId = getSelectedBottomItemId();
+        final int menuId = hideBottomNavigation ? MENU_HIDE_BOTTOM_NAVIGATION : getSelectedBottomItemId();
 
         if (menuId == MENU_HIDE_BOTTOM_NAVIGATION) {
             binding.activityNavigationbar.setVisibility(View.GONE);
@@ -310,12 +314,27 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         if (id == MENU_NEARBY) {
             final int item = Settings.getCustomBNitem();
             if (item != CUSTOMBNITEM_NEARBY) {
-                QuickLaunchItem.launchQuickLaunchItem(fromActivity, item);
+                QuickLaunchItem.launchQuickLaunchItem(fromActivity, item, false);
                 return;
             }
         }
         final Intent launchIntent = getBottomNavigationIntent(fromActivity, id);
         fromActivity.startActivity(launchIntent);
+    }
+
+    public static void setIntentHideBottomNavigation(final Intent intent, final boolean hideBottomNavigation) {
+        intent.putExtra(BUNDLE_HIDEBOTTOMNAVIGATION, hideBottomNavigation);
+    }
+
+    protected void checkIntentHideBottomNavigation() {
+        checkIntentHideBottomNavigation(false);
+    }
+
+    protected void checkIntentHideBottomNavigation(final boolean defaultValue) {
+        final Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(BUNDLE_HIDEBOTTOMNAVIGATION)) {
+            hideBottomNavigation = intent.getBooleanExtra(BUNDLE_HIDEBOTTOMNAVIGATION, defaultValue);
+        }
     }
 
     public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {

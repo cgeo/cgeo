@@ -359,7 +359,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId()), getString(item.getTitleResId()));
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()));
             }
         }
 
@@ -535,11 +535,13 @@ public class MainActivity extends AbstractNavigationBarActivity {
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (id == R.id.menu_backup) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, this, true);
         } else if (id == R.id.menu_paste_search) {
             startActivity(new Intent(this, SearchActivity.class).setAction(SearchActivity.ACTION_CLIPBOARD).putExtra(SearchManager.QUERY, ClipboardUtils.getText()));
         } else if (id == R.id.menu_history) {
-            startActivity(CacheListActivity.getHistoryIntent(this));
+            final Intent intent = CacheListActivity.getHistoryIntent(this);
+            AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, true);
+            startActivity(intent);
             ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_goto) {
             InternalConnector.assertHistoryCacheExists(this);

@@ -72,7 +72,7 @@ public class QuickLaunchItem extends InfoItem {
         InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey, 1);
     }
 
-    public static void launchQuickLaunchItem(final Activity activity, final int which) {
+    public static void launchQuickLaunchItem(final Activity activity, final int which, final boolean hideBottomNavigation) {
         if (which == QuickLaunchItem.VALUES.GOTO.id) {
             InternalConnector.assertHistoryCacheExists(activity);
             CacheDetailActivity.startActivity(activity, InternalConnector.GEOCODE_HISTORY_CACHE, true);
@@ -89,7 +89,7 @@ public class QuickLaunchItem extends InfoItem {
         } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
             activity.startActivityForResult(new Intent(activity, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, activity);
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, activity, hideBottomNavigation);
         } else if (which == QuickLaunchItem.VALUES.MESSAGECENTER.id) {
             ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
         } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
