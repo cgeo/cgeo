@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
@@ -48,7 +48,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-public class ViewSettingsActivity extends AbstractActivity {
+public class ViewSettingsActivity extends CustomMenuEntryActivity {
 
     private ArrayAdapter<KeyValue> debugAdapter;
     private ArrayList<KeyValue> filteredItems;
