@@ -2,7 +2,8 @@
 - Zaktualizowano bliblioteki Mapsforge i VTM do v0.20
 
 ### Szczegóły skrytki
-- New: Edit default value for log image caption prefix
+- Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
+- New: Ensure minimum image size for display
 
 ### Ogólne
 - Nowość: Zwiększony docelowy SDK do 33
