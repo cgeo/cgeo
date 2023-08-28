@@ -10,12 +10,12 @@ public class CustomMenuEntryActivity extends AbstractNavigationBarActivity {
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_NEARBY;
+        return MENU_CUSTOM;
     }
 
     @Override
-    protected void checkIntentHideBottomNavigation() {
-        checkIntentHideBottomNavigation(true);
+    protected void checkIntentHideNavigationBar() {
+        checkIntentHideNavigationBar(true);
     }
 
 }
