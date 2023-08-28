@@ -5,6 +5,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -72,24 +73,30 @@ public class QuickLaunchItem extends InfoItem {
         InfoItem.startActivity(caller, QuickLaunchItem.class.getCanonicalName(), "ITEMS", title, prefKey, 1);
     }
 
-    public static void launchQuickLaunchItem(final Activity activity, final int which, final boolean hideBottomNavigation) {
+    public static void launchQuickLaunchItem(final Activity activity, final int which, final boolean hideNavigationBar) {
         if (which == QuickLaunchItem.VALUES.GOTO.id) {
             InternalConnector.assertHistoryCacheExists(activity);
             CacheDetailActivity.startActivity(activity, InternalConnector.GEOCODE_HISTORY_CACHE, true);
         } else if (which == QuickLaunchItem.VALUES.POCKETQUERY.id) {
             if (Settings.isGCPremiumMember()) {
-                activity.startActivity(new Intent(activity, PocketQueryListActivity.class));
+                final Intent intent = new Intent(activity, PocketQueryListActivity.class);
+                AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
+                activity.startActivity(intent);
             }
         } else if (which == QuickLaunchItem.VALUES.BOOKMARKLIST.id) {
             if (Settings.isGCPremiumMember()) {
-                activity.startActivity(new Intent(activity, BookmarkListActivity.class));
+                final Intent intent = new Intent(activity, BookmarkListActivity.class);
+                AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
+                activity.startActivity(intent);
             }
         } else if (which == QuickLaunchItem.VALUES.RECENTLY_VIEWED.id) {
             CacheListActivity.startActivityLastViewed(activity, new SearchResult(DataStore.getLastOpenedCaches()));
         } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
-            activity.startActivityForResult(new Intent(activity, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
+            final Intent intent = new Intent(activity, SettingsActivity.class);
+            AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
+            activity.startActivityForResult(intent, Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, activity, hideBottomNavigation);
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, activity, hideNavigationBar);
         } else if (which == QuickLaunchItem.VALUES.MESSAGECENTER.id) {
             ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
         } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
@@ -97,7 +104,9 @@ public class QuickLaunchItem extends InfoItem {
         } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
             ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
         } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {
-            activity.startActivity(new Intent(activity, ViewSettingsActivity.class));
+            final Intent intent = new Intent(activity, ViewSettingsActivity.class);
+            AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
+            activity.startActivity(intent);
         } else {
             throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
         }

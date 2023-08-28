@@ -397,7 +397,7 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapOptions.mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_BOTTOM_NAVIGATION;
+        return mapOptions.mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     @Override
