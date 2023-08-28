@@ -37,6 +37,7 @@ import locus.api.android.objects.VersionCode;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 import locus.api.objects.extra.Location;
+import locus.api.objects.geoData.GeoDataHelperKt;
 import locus.api.objects.geoData.Point;
 import locus.api.objects.geocaching.GeocachingAttribute;
 import locus.api.objects.geocaching.GeocachingData;
@@ -253,8 +254,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
         loc.setLongitude(coordinates.getLongitude());
 
         final Point p = new Point(waypoint.getName(), loc);
-        p.setParameterDescription(
-                "Name: " + waypoint.getName() +
+        GeoDataHelperKt.setParameterDescription(
+                p, "Name: " + waypoint.getName() +
                         "<br />Note: " + waypoint.getNote() +
                         "<br />UserNote: " + waypoint.getUserNote() +
                         "<br /><br /> <a href=\"" + waypoint.getUrl() + "\">" + waypoint.getGeocode() + "</a>"
