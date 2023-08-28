@@ -279,13 +279,6 @@ public class ImageListFragment extends Fragment {
     }
 
     /**
-     * trigger the start of the detailed "add image" dialog
-     */
-    public void startAddImageDialog() {
-        addOrEditImage(-1);
-    }
-
-    /**
      * internally start the detail image edit dialog
      */
     private void addOrEditImage(final int imageIndex) {

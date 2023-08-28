@@ -503,8 +503,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             } else {
                 Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
             }
-        } else if (itemId == R.id.menu_image) {
-            imageListFragment.startAddImageDialog();
         } else if (itemId == R.id.save) {
             finish(SaveMode.FORCE);
         } else if (itemId == R.id.clear) {
@@ -594,7 +592,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);

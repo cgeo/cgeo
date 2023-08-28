@@ -33,13 +33,14 @@ public class ImageEditActivity extends AbstractActionBarActivity {
 
     private static final int RC_EDIT_IMAGE_EXTERNAL = 50;
 
+    private static final int ANIMATION_DURATION_IN_MS = 200;
+
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_ORIGINAL_IMAGE_URI = "cgeo.geocaching.saved_state_original_image_uri";
     private static final String SAVED_STATE_IMAGE_INDEX = "cgeo.geocaching.saved_state_image_index";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
     private static final String SAVED_STATE_GEOCODE = "cgeo.geocaching.saved_state_geocode";
-    private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
 
     private Uri originalImageUri;
     private Image image;
@@ -47,13 +48,6 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private long maxImageUploadSize;
 
     @Nullable private String geocode;
-
-    private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, (rc, imgs, uk) -> {
-        if (imgs.size() >= 1 && imgs.get(0) != null) {
-            setImageTo(imgs.get(0));
-            loadImagePreview();
-        }
-    });
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -86,7 +80,6 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
             geocode = savedInstanceState.getString(SAVED_STATE_GEOCODE);
-            imageActivityHelper.setState(savedInstanceState.getBundle(SAVED_STATE_IMAGEHELPER));
         }
 
         if (image == null) {
@@ -97,10 +90,8 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         }
         updateScaleValueDisplay();
 
-        binding.imageCamera.setOnClickListener(view -> selectImageFromCamera());
-        binding.imageStored.setOnClickListener(view -> selectImageFromStorage());
-        binding.imageRotate.setOnClickListener(view -> manipulateAsBitmap(b -> ImageUtils.rotateBitmap(b, 90f)));
-        binding.imageFlip.setOnClickListener(view -> manipulateAsBitmap(b -> ImageUtils.flipBitmap(b, true, false)));
+        binding.imageRotate.setOnClickListener(view -> rotateBy(90));
+        binding.imageFlip.setOnClickListener(view -> flipHorizontal());
         binding.imageEditExternal.setOnClickListener(view -> editExternal());
 
         if (image.hasTitle()) {
@@ -147,7 +138,6 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
         outState.putString(SAVED_STATE_GEOCODE, geocode);
-        outState.putBundle(SAVED_STATE_IMAGEHELPER, imageActivityHelper.getState());
     }
 
     public void finishEdit(final boolean saveInfo) {
@@ -174,14 +164,6 @@ public class ImageEditActivity extends AbstractActionBarActivity {
                 .setTargetScale(imageScale.get())
                 .setDescription(binding.description.getText().toString())
                 .build();
-    }
-
-    private void selectImageFromCamera() {
-        imageActivityHelper.getImageFromCamera(this.geocode, false, null);
-    }
-
-    private void selectImageFromStorage() {
-        imageActivityHelper.getImageFromStorage(this.geocode, false, null);
     }
 
     private void setImageTo(final Uri newUri) {
@@ -215,22 +197,24 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
-
         if (requestCode == RC_EDIT_IMAGE_EXTERNAL) {
             loadImagePreview();
         }
-        imageActivityHelper.onActivityResult(requestCode, resultCode, data);
     }
 
     private void loadImagePreview() {
-        ImageActivityHelper.displayImageAsync(image, binding.imagePreview);
+        ImageActivityHelper.displayImageAsync(image, binding.imagePreview, iv -> {
+            iv.setRotationY(0);
+            iv.setRotation(0);
+        });
         updateScaleValueDisplay();
 
-        final boolean imagePresent = image != null && image != Image.NONE &&
-                image.getUri() != null && image.getUri() != Uri.EMPTY;
-        binding.imageEditExternal.setEnabled(imagePresent);
-        binding.imageRotate.setEnabled(imagePresent);
-        binding.imageFlip.setEnabled(imagePresent);
+    }
+
+    private void enableImageEditActions(final boolean enable) {
+        binding.imageEditExternal.setEnabled(enable);
+        binding.imageRotate.setEnabled(enable);
+        binding.imageFlip.setEnabled(enable);
     }
 
     private void updateScaleValueDisplay() {
@@ -269,10 +253,30 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         startActivityForResult(Intent.createChooser(intent, null), RC_EDIT_IMAGE_EXTERNAL);
     }
 
-    private void manipulateAsBitmap(final Func1<Bitmap, Bitmap> fct) {
+    private void rotateBy(final float degree) {
+        final float rotateDegree = binding.imagePreview.getRotationY() == 0 ? degree : -degree;
+        binding.imagePreview.animate().setDuration(ANIMATION_DURATION_IN_MS).rotationBy(rotateDegree)
+                .withStartAction(this::startAnimatedManipulation)
+                .withEndAction(() -> endAnimatedManipulation(b -> ImageUtils.rotateBitmap(b, degree))).start();
+    }
+
+    private void flipHorizontal() {
+        binding.imagePreview.animate().setDuration(ANIMATION_DURATION_IN_MS).rotationYBy(180)
+                .withStartAction(this::startAnimatedManipulation)
+                .withEndAction(() -> endAnimatedManipulation(b -> ImageUtils.flipBitmap(b, true, false))).start();
+    }
+
+    private void startAnimatedManipulation() {
+        enableImageEditActions(false);
+    }
+
+
+    private void endAnimatedManipulation(final Func1<Bitmap, Bitmap> fct) {
         final Uri targetUri = ImageUtils.createLocalLogImageUri(geocode);
         ImageUtils.manipulateImageAsBitmap(image.getUri(), targetUri, fct);
         setImageTo(targetUri);
-        loadImagePreview();
+        enableImageEditActions(true);
+        updateScaleValueDisplay();
+        //do NOT call "loadImagePreview()" -> the image is already current due to animation
     }
 }

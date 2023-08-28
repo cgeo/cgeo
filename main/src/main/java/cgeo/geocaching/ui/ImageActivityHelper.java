@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
@@ -267,12 +268,20 @@ public class ImageActivityHelper {
      * Helper function to load and scale an image asynchronously into a view
      */
     public static void displayImageAsync(final Image image, final ImageView imageView) {
+        displayImageAsync(image, imageView, null);
+    }
+
+    public static void displayImageAsync(final Image image, final ImageView imageView, final Action1<ImageView> resetAction) {
+
         if (image.isEmpty()) {
             return;
         }
         imageView.setVisibility(View.INVISIBLE);
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri()), bitmap -> {
             imageView.setImageBitmap(bitmap);
+            if (resetAction != null) {
+                resetAction.call(imageView);
+            }
             imageView.setVisibility(View.VISIBLE);
         });
     }
