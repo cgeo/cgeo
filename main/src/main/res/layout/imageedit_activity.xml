@@ -8,47 +8,24 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".ImageSelectActivity">
+    tools:context=".ImageEditActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/log_image" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <ImageView
+            android:id="@+id/image_preview"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/delete"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/log_image_delete" />
-
-            <Button
-                android:id="@+id/cancel"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/save"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@string/ok" />
-
-        </LinearLayout>
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#000000"
+            android:padding="1dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -92,17 +69,12 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/image_preview"
-            android:scaleType="centerInside"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/logImageScale"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginTop="5dip"
-            android:background="#000000"
-            android:padding="1dp"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            android:prompt="@string/log_image_scale"
+            tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/textinput_edittext_singleline"
@@ -133,13 +105,6 @@
                 android:maxLength="250"
                 android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/logImageScale"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/log_image_scale"
-            tools:listitem="@android:layout/simple_spinner_item" />
 
     </LinearLayout>
 
