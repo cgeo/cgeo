@@ -17,38 +17,26 @@
 
         <ImageView
             android:id="@+id/image_preview"
-            android:scaleType="centerInside"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="5dip"
             android:layout_marginTop="5dip"
-            android:background="#000000"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/transparent"
             android:padding="1dp"
             android:visibility="gone"
             tools:visibility="visible"/>
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/image_stored"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_image" />
-
-            <Button
-                android:id="@+id/image_camera"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:layout_toRightOf="@+id/image_stored"
-                app:icon="@drawable/ic_menu_camera" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
             <Button
                 android:id="@+id/image_rotate"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:layout_toRightOf="@+id/image_camera"
                 android:layout_marginLeft="50dp"
                 app:icon="@drawable/ic_menu_rotate_right" />
 
@@ -74,6 +62,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:prompt="@string/log_image_scale"
+            android:paddingVertical="10dp"
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <com.google.android.material.textfield.TextInputLayout
