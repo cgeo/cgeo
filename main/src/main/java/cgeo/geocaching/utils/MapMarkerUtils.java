@@ -22,6 +22,7 @@ import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -35,6 +36,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,10 +51,7 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
-    private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
-    private static EmojiUtils.EmojiPaint cPaintScaled = null; // cache icons
-    private static EmojiUtils.EmojiPaint lcPaint = null; // list markers for caches
-    private static EmojiUtils.EmojiPaint lwPaint = null; // list markers for waypoints
+    private static Map<String, EmojiUtils.EmojiPaint> emojiPaintMap = new HashMap<>();
     private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
     private static final float scalingFactorWpIcons = Settings.getLong(R.string.pref_mapWpScale, 100) / 100.0f;
 
@@ -137,17 +136,7 @@ public final class MapMarkerUtils {
         final boolean doubleSize = showBigSmileys(cacheListType) && (mainMarkerId != cache.getType().markerId);
         if (useEmoji > 0 && !doubleSize) {
             // custom icon
-            EmojiUtils.EmojiPaint paint = applyScaling ? cPaintScaled : cPaint;
-            if (paint == null) {
-                final int availableSize = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, (float) (Math.sqrt(0.5) * 1.15 * (applyScaling ? scalingFactorCacheIcons : 1))); // 1 fits for a round icon; to fit a square icon into the same space calculate the sqrt; then a little bit larger (1.2) to make both square and round icons look ok
-                paint = new EmojiUtils.EmojiPaint(res, new Pair<>(availableSize, availableSize), availableSize, 0, DisplayUtils.calculateMaxFontsize(35, 1, 1000, availableSize));
-                if (applyScaling) {
-                    cPaintScaled = paint;
-                } else {
-                    cPaint = paint;
-                }
-            }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, useEmoji), Gravity.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "cacheIcon", applyScaling), Gravity.CENTER));
         } else if (doubleSize) {
             // main icon (type icon / custom cache icon)
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, applyScaling ? scalingFactorCacheIcons : 1));
@@ -639,19 +628,9 @@ public final class MapMarkerUtils {
      */
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
         if (assignedMarkers.size() > 0) {
-            EmojiUtils.EmojiPaint paint = forCaches ? lcPaint : lwPaint;
-            if (paint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f * (applyScaling ? (forCaches ? scalingFactorCacheIcons : scalingFactorWpIcons) : 1));
-                paint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
-                if (forCaches) {
-                    lcPaint = paint;
-                } else {
-                    lwPaint = paint;
-                }
-            }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(0), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
-                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(paint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(1), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
             }
         }
     }
@@ -755,6 +734,38 @@ public final class MapMarkerUtils {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), applyScaling ? scalingFactorCacheIcons : 1);
+    }
+
+    private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {
+        final EmojiUtils.EmojiPaint paint;
+        if (emojiPaintMap.containsKey(wantedSize + applyScaling)) {
+            paint = emojiPaintMap.get(wantedSize + applyScaling);
+        } else {
+            final float scalingFactor;
+            final float size;
+            switch (wantedSize) {
+                case "listMarkerForCache":
+                    scalingFactor = 1.2f * (applyScaling ? scalingFactorCacheIcons : 1);
+                    size = SIZE_LIST_MARKER_DP;
+                    break;
+                case "listMarkerForWaypoint":
+                    scalingFactor = 1.2f * (applyScaling ? scalingFactorWpIcons : 1);
+                    size = SIZE_LIST_MARKER_DP;
+                    break;
+                case "cacheIcon":
+                    scalingFactor = (float) (Math.sqrt(0.5) * 1.15 * (applyScaling ? scalingFactorCacheIcons : 1));
+                    size = SIZE_CACHE_MARKER_DP;
+                    break;
+                default:
+                    scalingFactor = 1.2f * (applyScaling ? scalingFactorCacheIcons : 1);
+                    size = SIZE_CACHE_MARKER_DP;
+            }
+
+            final int availableSize = DisplayUtils.getPxFromDp(res, size, scalingFactor);
+            paint = new EmojiUtils.EmojiPaint(res, new Pair<>(availableSize, availableSize), availableSize, 0, DisplayUtils.calculateMaxFontsize(10, 1, 1000, availableSize));
+            emojiPaintMap.put(wantedSize + applyScaling, paint);
+        }
+        return EmojiUtils.getEmojiDrawable(paint, emoji);
     }
 
 }

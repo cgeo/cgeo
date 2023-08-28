@@ -36,7 +36,7 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
                 points = pointsTrack;
                 final Element trackSegment = points.getChild(namespace, "trkseg");
                 point = trackSegment.getChild(namespace, "trkpt");
-                configure(PARSINGMODE.MODE_TRACK, false, points, false);
+                configure(PARSINGMODE.MODE_TRACK, false, points);
             }
         });
 
@@ -46,14 +46,14 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
             if (parsingMode == PARSINGMODE.MODE_NONE) {
                 points = pointsRoute;
                 point = points.getChild(namespace, "rtept");
-                configure(PARSINGMODE.MODE_ROUTE, true, point, true);
+                configure(PARSINGMODE.MODE_ROUTE, true, point);
             }
         });
 
         return doParsing(stream, root);
     }
 
-    private void configure(final PARSINGMODE parsingMode, final boolean routeable, final Element endElementForListener, final boolean resetToEmpty) {
+    private void configure(final PARSINGMODE parsingMode, final boolean routeable, final Element endElementForListener) {
         this.parsingMode = parsingMode;
         result.setRouteable(routeable);
 
@@ -62,7 +62,7 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         endElementForListener.setEndElementListener(() -> {
             if (temp.size() > 0) {
                 result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
-                temp = resetToEmpty ? new ArrayList<>() : null;
+                temp = new ArrayList<>();
             }
         });
     }
