@@ -732,7 +732,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".ImageSelectActivity"
+            android:name=".ImageEditActivity"
             android:label="@string/log_image" >
         </activity>
 

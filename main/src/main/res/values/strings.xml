@@ -176,10 +176,8 @@
     <string name="log_smilies">Smilies</string>
     <string name="log_image">Image</string>
     <string name="log_images">Images</string>
+    <string name="log_edit_image">Edit Image</string>
     <string name="log_image_attach">Attach Image</string>
-    <string name="log_image_stored">Existing</string>
-    <string name="log_image_camera">New</string>
-    <string name="log_image_delete">Delete</string>
     <string name="log_image_caption">Caption</string>
     <string name="log_image_description">Description</string>
     <string name="log_image_scale">Scaling</string>
