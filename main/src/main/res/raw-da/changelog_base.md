@@ -3,6 +3,7 @@
 
 ### Cachedetaljer
 - New: Edit default value for log image caption prefix
+- New: Ensure minimum image size for display
 
 ### General
 - New: Increased target SDK to 33
