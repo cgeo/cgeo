@@ -87,7 +87,19 @@
     <string name="wpnew_original">Oryginalne</string>
     <string name="wpnew_generated">Wygenerowane</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_unknown">Nieznana</string>
+    <string name="cache_cat_bc_nature">BC Przyroda</string>
+    <string name="cache_cat_bc_location">BC Lokalizacja</string>
+    <string name="cache_cat_bc_recommended">BC Rekomendowana</string>
+    <string name="cache_cat_bc_gadget">BC Gadżet</string>
+    <string name="cache_cat_bc_mystery">BC Zagadka</string>
+    <string name="cache_cat_bc_hiking">BC Turystyka piesza</string>
+    <string name="cache_cat_bc_other">BC Inna</string>
     <!-- cache Tier -->
+    <string name="cache_tier_unknown">Nieznany</string>
+    <string name="cache_tier_bc_blue">BC Niebieski</string>
+    <string name="cache_tier_bc_silver">BC Srebrny</string>
+    <string name="cache_tier_bc_gold">BC Złoty</string>
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -845,6 +857,7 @@
     <string name="init_signature_template_geocode">Geokod</string>
     <string name="init_ratingwanted">Ocena GCvote</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
+    <string name="init_summary_bettercacher">Wczytaj kategorie i poziom skrytek z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
     <string name="init_openlastdetailspage">Ostatnia strona ze szczegółami</string>
@@ -1026,6 +1039,7 @@
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
     <string name="init_offlinelogs_homescreen">Pokaż wpisy offline</string>
+    <string name="init_log_image_default_prefix_title">Domyślny podpis dla obrazów w dzienniku</string>
     <string name="init_summary_offlinelogs_homescreen">Licznik wpisów offline (np. „+ 1”) pojawi się obok Twojego licznika znalezień online na ekranie głównym, jeśli masz wpisy, które jeszcze nie zostały przesłane.</string>
     <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
     <string name="init_summary_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
@@ -1120,6 +1134,7 @@
     <string name="pn_tone_only">Tylko ton</string>
     <string name="pn_text_only">Tylko tekst</string>
     <string name="pn_tone_and_text">Ton i tekst</string>
+    <string name="pn_enabled">Włącz powiadomienia zbliżeniowe</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
@@ -1431,6 +1446,8 @@
     <string name="cache_favorite">Ulubiona</string>
     <string name="cache_owner">Właściciel</string>
     <string name="cache_hidden">Ukryta</string>
+    <string name="cache_categories">Kategorie</string>
+    <string name="cache_tier">Poziom</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Położenie</string>
     <string name="cache_coordinates">Współrzędne</string>
@@ -1470,6 +1487,7 @@
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_related_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
+    <string name="cache_bettercacher_open">Otwórz skrytkę na BetterCacher.org</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
     <string name="context_share_as_link">Udostępnij link</string>
     <string name="image_category_uncategorized">Bez kategorii</string>
@@ -1688,6 +1706,7 @@
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
+    <string name="other_settings">Inne ustawienia</string>
     <string name="map_show_caches_title">Pokaż skrytki:</string>
     <string name="map_show_waypoints_title">Pokaż punkty nawigacji:</string>
     <string name="map_show_other_title">Pokaż inne:</string>
