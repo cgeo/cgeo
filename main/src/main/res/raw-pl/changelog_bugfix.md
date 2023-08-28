@@ -1,6 +1,6 @@
 ##
-- Fix: GPX import with multiple tracks in same file
+- Poprawka: Import GPX z wieloma ścieżkami w tym samym pliku
 
 ##
-- Fix: Crash on adding to favorites (under certain conditions)
-- Fix: Individual route actions not working when using Google Maps
+- Poprawka: Awarie podczas dodawania do ulubionych (pod pewnymi warunkami)
+- Poprawka: Indywidualne działania trasy nie działają podczas korzystania z map Google
