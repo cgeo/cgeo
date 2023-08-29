@@ -146,10 +146,6 @@
     <string name="log_smilies">表情符号 按钮</string>
     <string name="log_image">圖片</string>
     <string name="log_images">照片</string>
-    <string name="log_image_attach">附加圖片</string>
-    <string name="log_image_stored">已存在</string>
-    <string name="log_image_camera">新的</string>
-    <string name="log_image_delete">刪除</string>
     <string name="log_image_caption">标题</string>
     <string name="log_image_description">描述信心</string>
     <string name="log_image_scale">缩放比例</string>
