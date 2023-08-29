@@ -151,10 +151,6 @@
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
     <string name="log_images">画像</string>
-    <string name="log_image_attach">画像を添付</string>
-    <string name="log_image_stored">ファイル選択</string>
-    <string name="log_image_camera">撮影</string>
-    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
