@@ -111,9 +111,6 @@
     <string name="log_yesterday">Včeraj</string>
     <string name="log_smilies">Smeškoti</string>
     <string name="log_image">Slika</string>
-    <string name="log_image_attach">Dodaj sliko</string>
-    <string name="log_image_stored">Obstoječa</string>
-    <string name="log_image_camera">Nova</string>
     <string name="log_image_caption">Naslov</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skaliranje</string>
