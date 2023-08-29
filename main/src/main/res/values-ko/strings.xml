@@ -154,10 +154,6 @@
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
     <string name="log_images">이미지</string>
-    <string name="log_image_attach">사진 첨부</string>
-    <string name="log_image_stored">사진첩</string>
-    <string name="log_image_camera">촬영하기</string>
-    <string name="log_image_delete">삭제</string>
     <string name="log_image_caption">제목</string>
     <string name="log_image_description">설명</string>
     <string name="log_image_scale">크기 조정</string>
