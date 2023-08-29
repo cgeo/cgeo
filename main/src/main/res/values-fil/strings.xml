@@ -102,9 +102,6 @@
     <string name="log_today">Ngayong araw</string>
     <string name="log_yesterday">Kahapon</string>
     <string name="log_image">Imahe</string>
-    <string name="log_image_attach">Maglakip ng mga Imahe</string>
-    <string name="log_image_stored">Umiiral</string>
-    <string name="log_image_camera">Bago</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paglalarawan</string>
     <string name="log_image_scale">Pag-iiskala</string>
