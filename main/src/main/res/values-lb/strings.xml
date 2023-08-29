@@ -120,10 +120,6 @@
     <string name="log_smilies">Smilieen</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Biller</string>
-    <string name="log_image_attach">Bild unhänken</string>
-    <string name="log_image_stored">Bestoend</string>
-    <string name="log_image_camera">Nei</string>
-    <string name="log_image_delete">Läschen</string>
     <string name="log_image_caption">Ënnertitel</string>
     <string name="log_image_description">Beschreiwung</string>
     <string name="log_image_scale">Scaléieren</string>
