@@ -151,10 +151,6 @@
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
     <string name="log_images">Képek</string>
-    <string name="log_image_attach">Kép csatolása</string>
-    <string name="log_image_stored">Meglévő</string>
-    <string name="log_image_camera">Új</string>
-    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
