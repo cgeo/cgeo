@@ -166,10 +166,7 @@
     <string name="log_smilies">Uśmiechy</string>
     <string name="log_image">Obraz</string>
     <string name="log_images">Zdjęcia</string>
-    <string name="log_image_attach">Załącz obraz</string>
-    <string name="log_image_stored">Zapisany</string>
-    <string name="log_image_camera">Nowy</string>
-    <string name="log_image_delete">Usuń</string>
+    <string name="log_edit_image">Edytuj obraz</string>
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
