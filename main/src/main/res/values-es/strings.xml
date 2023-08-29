@@ -154,10 +154,6 @@
     <string name="log_smilies">Emoticonos</string>
     <string name="log_image">Imagen</string>
     <string name="log_images">Imágenes</string>
-    <string name="log_image_attach">Adjuntar imagen</string>
-    <string name="log_image_stored">Galería</string>
-    <string name="log_image_camera">Tomar foto</string>
-    <string name="log_image_delete">Borrar</string>
     <string name="log_image_caption">Título</string>
     <string name="log_image_description">Descripción</string>
     <string name="log_image_scale">Redimensionamiento</string>
