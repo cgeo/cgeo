@@ -154,10 +154,6 @@
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
     <string name="log_images">Resimler</string>
-    <string name="log_image_attach">Resim ekle</string>
-    <string name="log_image_stored">Var olan</string>
-    <string name="log_image_camera">Yeni</string>
-    <string name="log_image_delete">Sil</string>
     <string name="log_image_caption">Başlık</string>
     <string name="log_image_description">Açıklama</string>
     <string name="log_image_scale">Ölçekleme</string>
