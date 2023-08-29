@@ -154,10 +154,6 @@
     <string name="log_smilies">Χαμόγελα</string>
     <string name="log_image">Εικόνα</string>
     <string name="log_images">Εικόνες</string>
-    <string name="log_image_attach">Επισύναψη εικόνας</string>
-    <string name="log_image_stored">Υπάρχον</string>
-    <string name="log_image_camera">Νέο</string>
-    <string name="log_image_delete">Διαγραφή</string>
     <string name="log_image_caption">Λεζάντα</string>
     <string name="log_image_description">Περιγραφή</string>
     <string name="log_image_scale">Προσαρμογή μεγέθους</string>
