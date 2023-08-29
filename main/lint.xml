@@ -22,6 +22,11 @@
 
     <issue id="IconDensities" severity="ignore" />
 
+    <issue id="IconDuplicates" severity="ignore">
+        <!-- planned duplicate -->
+        <ignore path="src/main/res/drawable-xhdpi/attribute_kids*.png" />
+    </issue>
+
     <!-- unfinished localizations are okay since we always have English as fallback -->
     <issue id="MissingTranslation" severity="ignore" />
     <!-- old translation will be deleted by the next crowdin import -->
