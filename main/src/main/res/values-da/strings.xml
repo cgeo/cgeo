@@ -150,10 +150,6 @@
     <string name="log_smilies">Smileyer</string>
     <string name="log_image">Billede</string>
     <string name="log_images">Billeder</string>
-    <string name="log_image_attach">Vedhæft billede</string>
-    <string name="log_image_stored">Eksisterende</string>
-    <string name="log_image_camera">Nyt</string>
-    <string name="log_image_delete">Slet</string>
     <string name="log_image_caption">Billedtekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
