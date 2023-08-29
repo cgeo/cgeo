@@ -105,9 +105,6 @@
     <string name="log_yesterday">Kemarin</string>
     <string name="log_smilies">Smile</string>
     <string name="log_image">Gambar</string>
-    <string name="log_image_attach">Lampirkan Gambar</string>
-    <string name="log_image_stored">Telah ada</string>
-    <string name="log_image_camera">Baru</string>
     <string name="log_image_caption">Keterangan</string>
     <string name="log_image_description">Penjelasan</string>
     <string name="log_image_scale">Penskalaan</string>
