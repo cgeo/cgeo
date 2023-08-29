@@ -110,9 +110,6 @@
     <string name="log_yesterday">أمس</string>
     <string name="log_smilies">الابتسامات</string>
     <string name="log_image">صورة</string>
-    <string name="log_image_attach">إرفاق صورة</string>
-    <string name="log_image_stored">موجود</string>
-    <string name="log_image_camera">جديد</string>
     <string name="log_image_caption">التسمية</string>
     <string name="log_image_description">الوصف</string>
     <string name="log_image_scale">تحجيم</string>
