@@ -112,9 +112,6 @@
     <string name="log_yesterday">אתמול</string>
     <string name="log_smilies">סמיילים</string>
     <string name="log_image">תמונה</string>
-    <string name="log_image_attach">צרף תמונה</string>
-    <string name="log_image_stored">תמונה קיימת</string>
-    <string name="log_image_camera">תמונה חדשה</string>
     <string name="log_image_caption">כותרת</string>
     <string name="log_image_description">תאור</string>
     <string name="log_image_scale">שינוי קנה מידה</string>
