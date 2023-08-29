@@ -154,10 +154,6 @@
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
     <string name="log_images">Bilder</string>
-    <string name="log_image_attach">Legg ved bilde</string>
-    <string name="log_image_stored">Eksisterende</string>
-    <string name="log_image_camera">Nytt</string>
-    <string name="log_image_delete">Slett</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
