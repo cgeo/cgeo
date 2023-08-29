@@ -125,7 +125,6 @@
     <string name="log_image_attach">附加图片</string>
     <string name="log_image_stored">现有</string>
     <string name="log_image_camera">新建</string>
-    <string name="log_image_delete">删除</string>
     <string name="log_image_caption">说明</string>
     <string name="log_image_description">描述</string>
     <string name="log_image_scale">缩放</string>
