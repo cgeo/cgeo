@@ -154,10 +154,6 @@
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Добавить фото</string>
     <string name="log_images">Фотографии</string>
-    <string name="log_image_attach">Прикрепить изображение</string>
-    <string name="log_image_stored">Выбрать</string>
-    <string name="log_image_camera">Камера</string>
-    <string name="log_image_delete">Удалить</string>
     <string name="log_image_caption">Заголовок</string>
     <string name="log_image_description">Описание</string>
     <string name="log_image_scale">Масштабирование</string>
