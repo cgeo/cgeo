@@ -154,10 +154,7 @@
     <string name="log_smilies">Sourillards</string>
     <string name="log_image">Image</string>
     <string name="log_images">Images</string>
-    <string name="log_image_attach">Ajouter une image</string>
-    <string name="log_image_stored">Existante</string>
-    <string name="log_image_camera">Nouvelle</string>
-    <string name="log_image_delete">Supprimer</string>
+    <string name="log_edit_image">Modifier l\'image</string>
     <string name="log_image_caption">Légende</string>
     <string name="log_image_description">Description</string>
     <string name="log_image_scale">Mise à l\'échelle</string>
