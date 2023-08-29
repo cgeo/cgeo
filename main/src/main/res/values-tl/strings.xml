@@ -110,9 +110,6 @@
     <string name="log_yesterday">Kahapon</string>
     <string name="log_smilies">Ang Smilies</string>
     <string name="log_image">Ang imahe</string>
-    <string name="log_image_attach">Ilakip ang imahe</string>
-    <string name="log_image_stored">Umiiral na</string>
-    <string name="log_image_camera">Bago</string>
     <string name="log_image_caption">Ang kapsyon</string>
     <string name="log_image_description">Ang paglalarawan</string>
     <string name="log_image_scale">Pag-iskala</string>
