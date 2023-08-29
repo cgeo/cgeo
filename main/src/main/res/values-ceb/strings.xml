@@ -99,9 +99,6 @@
     <string name="log_yesterday">Kagahapon</string>
     <string name="log_smilies">Ang mga Smilies</string>
     <string name="log_image">Ang larawan</string>
-    <string name="log_image_attach">Ang imahe kay ibutang</string>
-    <string name="log_image_stored">Anaa na</string>
-    <string name="log_image_camera">Bag-o</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paghulagway</string>
     <string name="log_image_scale">Pagsaka</string>
