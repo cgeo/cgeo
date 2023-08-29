@@ -154,10 +154,6 @@
     <string name="log_smilies">Emoticones</string>
     <string name="log_image">Imatge</string>
     <string name="log_images">Imatges</string>
-    <string name="log_image_attach">Adjunta una imatge</string>
-    <string name="log_image_stored">Existent</string>
-    <string name="log_image_camera">Nou</string>
-    <string name="log_image_delete">Esborra</string>
     <string name="log_image_caption">Títol</string>
     <string name="log_image_description">Descripció</string>
     <string name="log_image_scale">Redimensionament</string>
