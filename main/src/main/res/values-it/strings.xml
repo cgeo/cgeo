@@ -154,10 +154,6 @@
     <string name="log_smilies">Faccine</string>
     <string name="log_image">Immagine</string>
     <string name="log_images">Immagini</string>
-    <string name="log_image_attach">Aggiungi immagine</string>
-    <string name="log_image_stored">Esistente</string>
-    <string name="log_image_camera">Nuova</string>
-    <string name="log_image_delete">Elimina</string>
     <string name="log_image_caption">Didascalia</string>
     <string name="log_image_description">Descrizione</string>
     <string name="log_image_scale">Ridimensiona</string>
