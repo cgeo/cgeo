@@ -154,10 +154,6 @@
     <string name="log_smilies">Sorrisos</string>
     <string name="log_image">Imagem</string>
     <string name="log_images">Imagens</string>
-    <string name="log_image_attach">Anexar Imagem</string>
-    <string name="log_image_stored">Existente</string>
-    <string name="log_image_camera">Nova</string>
-    <string name="log_image_delete">Eliminar</string>
     <string name="log_image_caption">Legenda</string>
     <string name="log_image_description">Descrição</string>
     <string name="log_image_scale">Redimensionar</string>
