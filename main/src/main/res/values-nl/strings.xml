@@ -166,10 +166,7 @@
     <string name="log_smilies">Smilies</string>
     <string name="log_image">Foto</string>
     <string name="log_images">Afbeeldingen</string>
-    <string name="log_image_attach">Foto koppelen</string>
-    <string name="log_image_stored">Bestaande</string>
-    <string name="log_image_camera">Nieuw</string>
-    <string name="log_image_delete">Verwijderen</string>
+    <string name="log_edit_image">Afbeelding bewerken</string>
     <string name="log_image_caption">Bijschrift</string>
     <string name="log_image_description">Omschrijving</string>
     <string name="log_image_scale">Schalen</string>
