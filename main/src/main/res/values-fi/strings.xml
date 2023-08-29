@@ -154,10 +154,6 @@
     <string name="log_smilies">Hymiöt</string>
     <string name="log_image">Kuva</string>
     <string name="log_images">Kuvat</string>
-    <string name="log_image_attach">Liitä kuva</string>
-    <string name="log_image_stored">Selaa…</string>
-    <string name="log_image_camera">Uusi</string>
-    <string name="log_image_delete">Poista</string>
     <string name="log_image_caption">Kuvateksti</string>
     <string name="log_image_description">Kuvaus</string>
     <string name="log_image_scale">Skaalaus</string>
