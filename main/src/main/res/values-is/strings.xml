@@ -98,9 +98,6 @@
     <string name="log_yesterday">Í gær</string>
     <string name="log_smilies">Broskarlar</string>
     <string name="log_image">Mynd</string>
-    <string name="log_image_attach">Festa mynd við</string>
-    <string name="log_image_stored">úr safni</string>
-    <string name="log_image_camera">Ný</string>
     <string name="log_image_caption">Fyrirsögn</string>
     <string name="log_image_description">Lýsing</string>
     <string name="log_image_scale">Breyta stærð</string>
