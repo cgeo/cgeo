@@ -154,10 +154,6 @@
     <string name="log_smilies">Smileys</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Bilder</string>
-    <string name="log_image_attach">Lägg till bild</string>
-    <string name="log_image_stored">Från fil</string>
-    <string name="log_image_camera">Ny</string>
-    <string name="log_image_delete">Ta bort</string>
     <string name="log_image_caption">Bildtext</string>
     <string name="log_image_description">Beskrivning</string>
     <string name="log_image_scale">Skalning</string>
