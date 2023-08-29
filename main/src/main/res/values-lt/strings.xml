@@ -154,10 +154,6 @@
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Vaizdas</string>
     <string name="log_images">Vaizdai</string>
-    <string name="log_image_attach">Pridėti vaizdą</string>
-    <string name="log_image_stored">Esamą</string>
-    <string name="log_image_camera">Naują</string>
-    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
