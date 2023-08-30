@@ -4,6 +4,9 @@
 ### Szczegóły skrytki
 - Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
 - New: Ensure minimum image size for display
+- Zmiana: Przeprojektowane opcje edycji dla własnych obrazów dziennika
 
 ### Ogólne
 - Nowość: Zwiększony docelowy SDK do 33
+- Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
+
