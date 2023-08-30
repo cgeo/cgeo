@@ -4,6 +4,9 @@
 ### Detalhes da cache
 - New: Edit default value for log image caption prefix
 - New: Ensure minimum image size for display
+- Change: Redesigned edit options for own log images
 
 ### Geral
 - New: Increased target SDK to 33
+- Change: Handling of database access to avoid "database not available" crashes
+
