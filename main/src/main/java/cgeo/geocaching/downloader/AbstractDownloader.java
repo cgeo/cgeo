@@ -28,7 +28,6 @@ public abstract class AbstractDownloader {
     public final String projectUrl;
     public final String likeItUrl;
     public final PersistableFolder targetFolder;
-    public static final String oneDirUp = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
     public String forceExtension = "";
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
     @DrawableRes public int iconRes = R.drawable.ic_menu_save;
@@ -69,7 +68,7 @@ public abstract class AbstractDownloader {
                 final String oneUp = uri.toString();
                 final int endOfPreviousSegment = oneUp.lastIndexOf("/", oneUp.length() - 2); // skip trailing "/"
                 if (endOfPreviousSegment > -1) {
-                    final Download offlineMap = new Download(oneDirUp, Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), true, "", "", offlineMapType, ICONRES_FOLDER);
+                    final Download offlineMap = new Download(Uri.parse(oneUp.substring(0, endOfPreviousSegment + 1)), offlineMapType);
                     list.add(offlineMap);
                 }
             }

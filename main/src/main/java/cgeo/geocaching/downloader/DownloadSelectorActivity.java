@@ -20,6 +20,7 @@ import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -83,9 +84,9 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             final Download offlineMap = activity.getQueries().get(position);
             holder.binding.label.setText(offlineMap.getName());
             holder.binding.progressHorizontal.setVisibility(View.GONE);
-            if (offlineMap.getIsDir()) {
+            if (offlineMap.isDir()) {
                 holder.binding.info.setText(R.string.downloadmap_directory);
-                holder.binding.action.setImageResource(R.drawable.downloader_folder);
+                holder.binding.action.setImageResource(offlineMap.isBackDir() ? R.drawable.downloader_folder_back : R.drawable.downloader_folder);
                 holder.binding.getRoot().setOnClickListener(v -> new DownloadSelectorMapListTask(activity, offlineMap.getUri(), offlineMap.getName(), current, lastCompanionType, lastCompanionList, activity::setLastCompanions, activity::onMapListTaskPostExecuteInternal).execute());
             } else {
                 final int typeResId = offlineMap.getType().getTypeNameResId();
@@ -221,6 +222,27 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                 ShareUtils.openUrl(this, current.projectUrl);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // navigate one level back instead of leaving the activity if possible
+        for (Download offlineMap : maps) {
+            if (offlineMap.isBackDir()) {
+                new DownloadSelectorMapListTask(this, offlineMap.getUri(), offlineMap.getName(), current, lastCompanionType, lastCompanionList, this::setLastCompanions, this::onMapListTaskPostExecuteInternal).execute();
+                return;
+            }
+        }
+        super.onBackPressed();
     }
 
     private void changeSource(final int position) {
