@@ -28,6 +28,7 @@ public class AbstractLocusAppTest {
         final HashMap<CacheType, Integer> testTypeList = new HashMap<>();
         testTypeList.put(CacheType.TRADITIONAL, GeocachingData.CACHE_TYPE_TRADITIONAL);
         testTypeList.put(CacheType.VIRTUAL, GeocachingData.CACHE_TYPE_VIRTUAL);
+        testTypeList.put(CacheType.ADVLAB, GeocachingData.CACHE_TYPE_LAB_CACHE);
         testTypeList.put(CacheType.USER_DEFINED, GeocachingData.CACHE_TYPE_UNDEFINED);
         testTypeList.put(CacheType.UNKNOWN, GeocachingData.CACHE_TYPE_UNDEFINED);
 
@@ -77,6 +78,7 @@ public class AbstractLocusAppTest {
         final HashMap<WaypointType, String> testWaypointList = new HashMap<>();
         testWaypointList.put(WaypointType.FINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_FINAL);
         testWaypointList.put(WaypointType.ORIGINAL, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE);
+        testWaypointList.put(WaypointType.GENERATED, GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE);
 
         final ArrayList<WaypointType> testCgeoWpts = new ArrayList<>(testWaypointList.keySet());
         final ArrayList<String> testLoWapts = new ArrayList<>(testWaypointList.values());
