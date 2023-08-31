@@ -1,6 +1,6 @@
 ##
-- Fix: GPX import with multiple tracks in same file
+- Korjaa: GPX tuonti useilla reiteillä samassa tiedostossa
 
 ##
-- Fix: Crash on adding to favorites (under certain conditions)
-- Fix: Individual route actions not working when using Google Maps
+- Korjaa: Kaatuminen suosikkeihin lisättäessä (tietyin edellytyksin)
+- Korjaus: Yksittäisten reittien valinnat eivät toimi Google Mapsin ollessa käytössä
