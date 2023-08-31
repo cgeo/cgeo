@@ -87,7 +87,19 @@
     <string name="wpnew_original">Alkuperäinen</string>
     <string name="wpnew_generated">Luotu</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_unknown">Tuntematon</string>
+    <string name="cache_cat_bc_nature">BC Luonto</string>
+    <string name="cache_cat_bc_location">BC Sijainti</string>
+    <string name="cache_cat_bc_recommended">BC Suositeltu</string>
+    <string name="cache_cat_bc_gadget">BC Gadget</string>
+    <string name="cache_cat_bc_mystery">BC Mysteeri</string>
+    <string name="cache_cat_bc_hiking">BC Vaellus</string>
+    <string name="cache_cat_bc_other">BC Muu</string>
     <!-- cache Tier -->
+    <string name="cache_tier_unknown">Tuntematon</string>
+    <string name="cache_tier_bc_blue">BC Sininen</string>
+    <string name="cache_tier_bc_silver">BC Hopea</string>
+    <string name="cache_tier_bc_gold">BC Kulta</string>
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
@@ -154,6 +166,7 @@
     <string name="log_smilies">Hymiöt</string>
     <string name="log_image">Kuva</string>
     <string name="log_images">Kuvat</string>
+    <string name="log_edit_image">Muokkaa kuvaa</string>
     <string name="log_image_caption">Kuvateksti</string>
     <string name="log_image_description">Kuvaus</string>
     <string name="log_image_scale">Skaalaus</string>
@@ -194,6 +207,8 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Kirjautumissivun käsittely epäonnistui</string>
     <string name="err_captcha">Palvelu edellyttää Captchaa. Ole hyvä ja avaa geocaching.com sivusto selaimellasi ja ratkaise näkyvä Captcha kun kirjaudut sinne. Yritä sitten uudelleen kirjautua c:geoon.</string>
+    <string name="err_server_general">Geokätköilysivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
+    <string name="err_server_gc">Geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_ec">Extremecaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_lc">labs.geocaching.com:iin ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
@@ -244,6 +259,7 @@
     <string name="err_log_load_data">c:geo ei voi ladata kirjaamiseen tarvittavia tietoja.</string>
     <string name="err_log_post_missing_tracking_code">Seurantakoodi puuttuu.</string>
     <string name="err_log_post_missing_coordinates">Koordinaatit puuttuvat.</string>
+    <string name="err_website_message">Sivusto vastasi seuraavalla viestillä: </string>
     <string name="err_log_post_failed">Näyttää että lokiasi ei julkaistu. Tarkista se kätkön alkuperäiseltä nettisivulta.</string>
     <string name="err_log_post_failed_ec">Näyttää siltä, että lokiasi ei kirjattu. Ole hyvä ja tarkista se osoitteessa Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Näyttää siltä, että lokiasi ei kirjattu. Ole hyvä ja tarkista se osoitteessa GeoKrety.org.</string>
@@ -356,6 +372,8 @@
     <string name="caches_store_background_already_stored">Jotkut kätköt on jo tallennettu. Mitä pitäisi tehdä näiden kanssa?</string>
     <string name="caches_store_background_option_nothing">Älä tee mitään</string>
     <string name="caches_store_background_option_add_to_list">Lisää listaan</string>
+    <string name="caches_store_background_option_refresh_and_add">Päivitä ja lisää listaan</string>
+    <string name="caches_store_background_option_refresh_and_keep">Päivitä ja säilytä nykyiset listatehtävät</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Lataus epäonnistui, %1$d/%2$d kätköä ladattiin</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Lataus peruutettu, %1$d/%2$d kätköä ladattiin</string>
     <plurals name="caches_store_background_result">
@@ -394,6 +412,9 @@
     <string name="caches_remove_selected">Poista valitut listalta</string>
     <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
     <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
+    <string name="caches_append_to_route_selected">Lisää valittu yksittäiseen reittiin</string>
+    <string name="caches_append_to_route_all">Lisää kaikki yksittäiseen reittiin</string>
+    <string name="caches_appended_to_route">Kätköt lisätty reittiin</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
     <string name="caches_upload_bookmarklist">Lisää kirjanmerkkilistaan</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
@@ -442,6 +463,7 @@
     <string name="list_menu_import">Tuo</string>
     <string name="list_title">Valitse lista</string>
     <string name="lists_title">Valitse listat</string>
+    <string name="lists_title_new_caches">Valitse lista (uusille kätköille)</string>
     <string name="list_inbox">Tallennettu</string>
     <string name="list_all_lists">Kaikki kätköt</string>
     <string name="list_dialog_create_title">Uusi lista</string>
@@ -481,6 +503,7 @@
     <string name="cache_filter_favorites">Suosikit</string>
     <string name="cache_filter_distance">Etäisyys</string>
     <string name="cache_filter_hidden">Piilotuspäivä</string>
+    <string name="cache_filter_eventdate">Tapahtumapäivä</string>
     <string name="cache_filter_logs_count">Lokien määrä</string>
     <string name="cache_filter_last_found">Viimeinen löytöpäivä</string>
     <string name="cache_filter_log_entry">Lokikirjaus</string>
@@ -567,6 +590,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Alisuodatin on tällä hetkellä tyhjä</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt</string>
     <string name="cache_filter_log_entry_logtext">Lokiteksti</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>yli vuosi sitten</item>
+        <item>vuosi sitten</item>
+        <item>30 päivää sitten</item>
+        <item>viikko sitten</item>
+        <item>1 päivä sitten</item>
+        <item>alle 1 päivä sitten</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1v</item>
+        <item>1v</item>
+        <item>30pv</item>
+        <item>1vk</item>
+        <item>1pv</item>
+        <item>&lt;1pv</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>yli vuosi sitten</item>
         <item>vuosi sitten</item>
@@ -588,6 +627,28 @@
         <item>1vk</item>
         <item>3p</item>
         <item>&lt;3p</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>mennyt</item>
+        <item>tänään</item>
+        <item>huomenna</item>
+        <item>ylihuomenna</item>
+        <item>3 päivän päästä</item>
+        <item>viikon päästä</item>
+        <item>2 viikon päästä</item>
+        <item>kuukauden päästä</item>
+        <item>kaikki tulevat</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>menneet</item>
+        <item>0pv</item>
+        <item>1pv</item>
+        <item>2pv</item>
+        <item>3pv</item>
+        <item>1vk</item>
+        <item>2vk</item>
+        <item>1kk</item>
+        <item>&gt;1kk</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versio</string>
@@ -614,6 +675,7 @@
     <string name="about_system_write_logcat_success">Lokitiedosto \"%1$s\" kirjoitettu kansioon \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
     <string name="about_system_write_infos_downloadmanager">Näytä lataukset</string>
+    <string name="about_changelog_full">Luettelo kaikista muutoksista</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
     <string name="about_contributors_recent">Viimeisimmät avustajat</string>
@@ -780,6 +842,7 @@
     <string name="init_signature_template_geocode">Geokoodi</string>
     <string name="init_ratingwanted">GCVote-arvostelu</string>
     <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
+    <string name="init_summary_bettercacher">Lataa kätkökategoriat ja -tasot BetterCacher.orgista</string>
     <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
     <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
     <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
@@ -834,6 +897,10 @@
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
+    <string name="init_custombnitem">Mukautettu valikkokohde</string>
+    <string name="init_custombnitem_default">Lähistöllä-haku (oletus)</string>
+    <string name="init_custombnitem_none">(ei mikään)</string>
+    <string name="init_custombnitem_empty_placeholder">(tyhjä paikkamerkki)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Geokoodi</string>
     <string name="cacheListInfoItem_Difficulty">Vaikeusaste</string>
@@ -854,6 +921,7 @@
         <item>Tumma</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Oletusnäyttö</string>
     <string name="init_wallpaper">Taustakuva</string>
     <string name="init_summary_wallpaper">Näytä laitteen taustakuva aloitusnäytön taustakuvana</string>
     <!-- backup / restore -->
@@ -956,6 +1024,7 @@
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
     <string name="init_sigautoinsert">Lisää automaattisesti</string>
     <string name="init_offlinelogs_homescreen">Näytä offline-lokit</string>
+    <string name="init_log_image_default_prefix_title">Lokikuvien oletuskuvateksti</string>
     <string name="init_summary_offlinelogs_homescreen">Offline-tilassa olevien lokien laskuri (esim. \"+ 1\") näytetään verkkosivulla olevien löytöjesi vieressä aloitusnäytössä jos sinulla on lokeja, joita ei ole vielä lähetetty.</string>
     <string name="init_loaddirectionimg">Suuntakuva</string>
     <string name="init_summary_loaddirectionimg">Lataa suuntanuoli-kuva tarvittaessa (tarvitaan vain perusjäsenille)</string>
@@ -1050,6 +1119,7 @@
     <string name="pn_tone_only">Vain ääni</string>
     <string name="pn_text_only">Vain teksti</string>
     <string name="pn_tone_and_text">Ääni + teksti</string>
+    <string name="pn_enabled">Ota läheisyysilmoitukset käyttöön</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google Map</string>
     <string name="map_source_google_satellite">Google: Satelliitti</string>
@@ -1102,6 +1172,9 @@
     <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
     <string name="persistablefolder_routingbase">Reititys</string>
     <string name="persistablefolder_routingtiles">Reititystiedot</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Äänitiedosto (kaukana)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Äänitiedosto (lähellä)</string>
+    <string name="proximitynotification_internal">(sisäinen)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
     <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
@@ -1210,6 +1283,7 @@
     <string name="cache_personal_note_upload">Lataa</string>
     <string name="cache_personal_note_upload_done">Oma muistiinpano ladattu</string>
     <string name="cache_personal_note_upload_error">Virhe oman muistiinpanon lähettämisessä</string>
+    <string name="cache_personal_note_save_and_upload">Tallenna ja lähetä</string>
     <string name="cache_personal_note_vars_out_of_sync">Muistiinpanoissa olevat muuttujia ei ole synkronoitu (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronoi muuttujat</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Tarkista muuttujat, joiden arvo tulee korvata muistiinpanoista</string>
@@ -1283,6 +1357,7 @@
     <string name="cache_menu_open_with">Avaa kohteessa…</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
     <string name="cache_log_too_long">c:geo ei voinut lähettää lokiasi, koska se on liian pitkä. Kiitos kuitenkin siitä, että yrität kirjoittaa näin laajan lokin ;-)</string>
+    <string name="cache_empty_log">c:geo ei voinut lähettää kirjaustasi, koska se on tyhjä.</string>
     <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
     <string name="cache_menu_around">Kätköt lähistöllä</string>
@@ -1340,6 +1415,8 @@
     <string name="cache_favorite">Suosikki</string>
     <string name="cache_owner">Omistaja</string>
     <string name="cache_hidden">Piilotettu</string>
+    <string name="cache_categories">Kategoriat</string>
+    <string name="cache_tier">Taso</string>
     <string name="cache_event">Päivämäärä</string>
     <string name="cache_location">Sijainti</string>
     <string name="cache_coordinates">Koordinaatit</string>
@@ -1367,6 +1444,11 @@
     <string name="cache_recently_viewed">Äskettäin katsottu</string>
     <string name="cache_recently_viewed_empty">Ei äskettäin katsottuja kätköjä</string>
     <string name="cache_clear_recently_viewed">tyhjennä</string>
+    <string name="cachedetails_progress_refresh">%s päivitetty</string>
+    <string name="cachedetails_progress_watch">Lisätty seurantalistalle</string>
+    <string name="cachedetails_progress_unwatch">Poistettu seurantalistalta</string>
+    <string name="cachedetails_progress_favorite">Lisätty suosikkeihin</string>
+    <string name="cachedetails_progress_unfavorite">Poistettu suosikeista</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
@@ -1374,6 +1456,7 @@
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
     <string name="cache_alc_related_start">Avaa Adventure Lab -sovellus aloittaaksesi liittyvän seikkailun</string>
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
+    <string name="cache_bettercacher_open">Avaa kätkö BetterCacher.org:ssa</string>
     <string name="context_share_as_text">Jaa teksti</string>
     <string name="context_share_as_link">Jaa linkki</string>
     <string name="image_category_uncategorized">Luokittelematon</string>
@@ -1382,6 +1465,9 @@
     <string name="image_category_log">Loki</string>
     <string name="context_map_add_to_route">Lisää reitin loppuun</string>
     <string name="context_map_add_to_route_start">Lisää reitin alkuun</string>
+    <string name="context_map_remove_from_route_start">Poista alusta</string>
+    <string name="context_map_remove_from_route_pos">Poista paikasta %d</string>
+    <string name="context_map_remove_from_route_end">Poista lopusta</string>
     <string name="context_map_show_coords">Näytä koordinaatit</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
@@ -1393,6 +1479,8 @@
     <string name="internal_goto_targets_description">Tämä kätkö tallentaa viimeisimmät \"Siirry\" sijainnit. Se luodaan automaattisesti kun käytät \"Siirry\"-toimintoa päävalikossa. Kyseiseen toimintoon syötetyt koordinaatit tallennetaan tämän kätkön reittipisteiksi. Jos et enää tarvitse kyseisiä koordinaatteja, voit turvallisesti poistaa tämän kätkön tai sen reittipisteitä. Voit myös siirtää tämän kätkön mihin tahansa haluamaasi listalle.</string>
     <string name="init_longtap_map">Kartan pitkä painallus</string>
     <string name="init_summary_longtap_map">Aktivoi pitkä painallus kartan kuvakkeen (luo yksittäinen reitti) tai kartan vapaalla alueella (luo käyttäjän määrittämä kätkö/reittipiste)</string>
+    <string name="init_show_routing_menu">Näytä reititysvalikko</string>
+    <string name="init_summary_show_routing_menu">Kätkön pitkä painallus näyttää valikon, jossa on lisäasetuksia kätkön lisäämiseksi reittiin/poistamiseksi reitiltä. Jos tämä kytketään pois päältä, kätkö yksinkertaisesti lisätään reittiin/poistetaan reitiltä.</string>
     <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
     <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
     <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
@@ -1585,6 +1673,7 @@
     <string name="map_gm_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
     <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
+    <string name="other_settings">Muut asetukset</string>
     <string name="map_show_caches_title">Näytä kätköt:</string>
     <string name="map_show_waypoints_title">Näytä reittipisteet:</string>
     <string name="map_show_other_title">Näytä muu:</string>
@@ -2099,6 +2188,10 @@
     <string name="command_rename_list_result">Uudelleen nimetty luettelo</string>
     <string name="command_delete_list_result">Poistettu luettelo</string>
     <string name="command_unique_list_result">Kätköt poistettiin muilta listoilta</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Suosittele tätä kätköä (%d jäljellä)</item>
+        <item quantity="other">Suosittele tätä kätköä (%d jäljellä)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
         <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
@@ -2253,6 +2346,7 @@
     <string name="receivedownload_error_filenotfound_exception">Tiedostoa ei löydy -virhe tapahtui vastaanottaessa tiedostoa.</string>
     <string name="receivedownload_amount_copied">%s kopioitu</string>
     <string name="receivedownload_cancelled">Tiedostonsiirto peruttu</string>
+    <string name="receivedownload_integritycheck_failed">Eheyden tarkistus epäonnistui</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Lataa offline-kartta</string>
     <string name="delete_offlinemap_title">Poista offline-kartta</string>
@@ -2737,4 +2831,10 @@
     <string name="smiley_disapprove">Hylätty</string>
     <string name="smiley_question">Kysymys</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Viestikeskus</string>
+    <string name="mcpolling_summary">Tarkista viestikeskuksen saapuneet viestit säännöllisin väliajoin</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d lukematon viesti viestikeskuksessa</item>
+        <item quantity="other">%d lukematonta viestiä viestikeskuksessa</item>
+    </plurals>
 </resources>
