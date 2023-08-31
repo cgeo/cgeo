@@ -1,12 +1,12 @@
 ### Kartta
-- Updated Mapsforge and VTM libs to v0.20
+- Mapsforge ja VTM libs päivitetty versioon v0.20
 
 ### Kätkön tiedot
-- New: Edit default value for log image caption prefix
-- New: Ensure minimum image size for display
-- Change: Redesigned edit options for own log images
+- Uusi: Muokkaa lokikuvan kuvatekstin oletusarvoa
+- Uusi: Varmista kuvan pienin koko näytölle
+- Muutos: Omien lokikuvien muokkausvalinnat on uudelleen suunniteltu
 
 ### Yleinen
-- New: Increased target SDK to 33
-- Change: Handling of database access to avoid "database not available" crashes
+- Uusi: nostettu tavoite SDK 33:een
+- Muutos: Tietokannan käyttöoikeuden käsittely "tietokantaa ei saatavilla" kaatumisien välttämiseksi
 
