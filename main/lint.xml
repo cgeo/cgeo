@@ -56,9 +56,6 @@
         <!-- changelog files are referenced depending of release phase -->
         <ignore path="src/main/res/raw/changelog_*.md" />
 
-        <!-- part of the internal brouter -->
-        <ignore path="src/main/res/raw/routing_dummy.brf" />
-
         <!-- translations no longer used -->
         <ignore path="src/main/res/values-*/strings.xml" />
 
