@@ -87,7 +87,19 @@
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_unknown">알 수 없음</string>
+    <string name="cache_cat_bc_nature">BC 자연</string>
+    <string name="cache_cat_bc_location">BC 위치</string>
+    <string name="cache_cat_bc_recommended">BC 추천</string>
+    <string name="cache_cat_bc_gadget">BC 가젯</string>
+    <string name="cache_cat_bc_mystery">BC 미스터리</string>
+    <string name="cache_cat_bc_hiking">BC 등산</string>
+    <string name="cache_cat_bc_other">BC 기타</string>
     <!-- cache Tier -->
+    <string name="cache_tier_unknown">알 수 없음</string>
+    <string name="cache_tier_bc_blue">BC 파랑</string>
+    <string name="cache_tier_bc_silver">BC 은</string>
+    <string name="cache_tier_bc_gold">BC 금</string>
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -154,6 +166,7 @@
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
     <string name="log_images">이미지</string>
+    <string name="log_edit_image">이미지 편집</string>
     <string name="log_image_caption">제목</string>
     <string name="log_image_description">설명</string>
     <string name="log_image_scale">크기 조정</string>
@@ -823,6 +836,7 @@
     <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
+    <string name="init_summary_bettercacher">BetterCacher.org에서 캐시 카테고리 및 계층을 로드하기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
     <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
     <string name="init_openlastdetailspage">마지막 상세내용 페이지</string>
@@ -1004,6 +1018,7 @@
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
     <string name="init_sigautoinsert">자동으로 입력하기</string>
     <string name="init_offlinelogs_homescreen">오프라인 로그 표시</string>
+    <string name="init_log_image_default_prefix_title">로그 이미지의 기본 캡션</string>
     <string name="init_summary_offlinelogs_homescreen">아직 제출하지 않은 로그가있는 경우 홈 화면의 온라인 찾기 수 옆에 오프라인 로그 카운터 (예 \"+1\")가 표시됩니다.</string>
     <string name="init_loaddirectionimg">이미지 방향</string>
     <string name="init_summary_loaddirectionimg">필요시 방향 화살표 이미지를 다운로드 받습니다.(일반회원만 필요함)</string>
@@ -1386,6 +1401,8 @@
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
+    <string name="cache_categories">카테고리</string>
+    <string name="cache_tier">계층</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
     <string name="cache_coordinates">좌표</string>
@@ -1425,6 +1442,7 @@
     <string name="cache_alc_start">이 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_related_start">연결한 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
+    <string name="cache_bettercacher_open">BetterCacher.org의 오픈캐시</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
     <string name="image_category_uncategorized">카테고리 없음</string>
