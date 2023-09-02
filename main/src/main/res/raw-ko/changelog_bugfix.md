@@ -1,5 +1,5 @@
 ##
-- Fix: GPX import with multiple tracks in same file
+- 수정: 동일한 파일에 여러 경로가 포함된 GPX 가져오기
 
 ##
 - 수정: 호감점수에 추가할 때 충돌이 발생함 (특정 조건에서)
