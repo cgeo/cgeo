@@ -6,31 +6,28 @@
     android:layout_height="match_parent"
     android:layout_gravity="left|center_vertical"
     android:orientation="vertical"
+    android:paddingStart="0dp"
     tools:context=".CacheListSpinnerAdapter">
 
     <TextView
         android:id="@android:id/text1"
-        tools:text="This is the title"
-        android:ellipsize="end"
+        style="@style/action_bar_title"
         android:layout_width="match_parent"
-        style="?attr/titleTextStyle"
-        android:textSize="@dimen/textSize_toolbarPrimary"
-        android:textColor="@color/colorTextActionBar"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
         android:maxLines="1"
-        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
+        android:paddingStart="0dp"
+        tools:text="This is the title" />
 
 
     <TextView
+        android:id="@android:id/text2"
+        style="@style/action_bar_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        style="?attr/subtitleTextStyle"
-        android:textSize="@dimen/textSize_toolbarSecondary"
-        android:textColor="@color/colorTextHintActionBar"
-        tools:text="This is the subtitle"
-        android:id="@android:id/text2"
         android:maxLines="1"
-        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
+        android:paddingStart="0dp"
+        tools:text="This is the subtitle" />
 
 </LinearLayout>

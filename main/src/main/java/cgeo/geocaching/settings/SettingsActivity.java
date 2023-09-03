@@ -458,8 +458,8 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         final int iPos = StringUtils.indexOfIgnoreCase(text, searchTerm);
         final Spannable s = new SpannableString(text);
         if (iPos >= 0) {
-            s.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.colorAccent)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            s.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorText)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.md_theme_primary)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.md_theme_onPrimary)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return s;
     }

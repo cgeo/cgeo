@@ -6,7 +6,7 @@
         android:width="2px"
         android:color="#99FFFFFF" />
 
-    <solid android:color="@color/colorBackgroundActionBar" />
+    <solid android:color="@color/md_theme_primaryContainer" />
 
     <corners
         android:bottomLeftRadius="3dp"

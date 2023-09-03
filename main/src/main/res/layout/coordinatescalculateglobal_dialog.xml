@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.SwitchCompat
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/cc_switch_guided"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
@@ -46,7 +46,7 @@
 
             <Button
                 android:id="@+id/cc_paste"
-                style="@style/button_icon_accent"
+                style="@style/button_icon"
                 android:layout_toLeftOf="@id/cc_plain_tools"
                 android:tooltipText="@string/calccoord_paste_from_clipboard"
                 app:icon="@drawable/ic_menu_paste"
@@ -54,7 +54,7 @@
 
             <Button
                 android:id="@+id/cc_plain_tools"
-                style="@style/button_icon_accent"
+                style="@style/button_icon"
                 android:layout_alignParentRight="true"
                 app:icon="@drawable/ic_menu_auto_fix_high"
                 android:layout_centerVertical="true"/>

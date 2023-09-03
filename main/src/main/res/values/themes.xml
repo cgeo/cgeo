@@ -3,32 +3,65 @@
 
     <!-- theme for (nearly) all activities -->
 
-    <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="cgeo" parent="Theme.Material3.DayNight"><!-- Theme.Material3.DayNight.DarkActionBar -->
         <!-- Action bar theming -->
         <item name="actionBarStyle">@style/actionBarStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>
+        <item name="android:statusBarColor">@color/md_theme_surface</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">@bool/isLightTheme</item>
+
+        <!--        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>-->
 
         <!-- UX component styles -->
-        <item name="checkboxStyle">@style/checkboxStyle</item>
-        <item name="radioButtonStyle">@style/radioButtonStyle</item>
-        <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>
+<!--        <item name="checkboxStyle">@style/checkboxStyle</item>-->
+<!--        <item name="radioButtonStyle">@style/radioButtonStyle</item>-->
+<!--        <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>-->
+
+        <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
+        <item name="dialogCornerRadius">@dimen/dialogCornerRadius</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
 
         <!-- set Material theme colors -->
-        <item name="colorOnBackground">@color/colorText</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
+<!--        <item name="colorOnBackground">@color/colorText</item>-->
+<!--        <item name="android:colorBackground">@color/colorBackground</item>-->
 
-        <item name="colorOnPrimary">?colorOnBackground</item>
-        <item name="colorPrimary">@color/colorAccent</item>
-        <item name="colorPrimaryVariant">@color/colorAccent</item>
+<!--        <item name="colorOnPrimary">?colorOnBackground</item>-->
+<!--        <item name="colorPrimary">@color/colorAccent</item>-->
+<!--        <item name="colorPrimaryVariant">@color/colorAccent</item>-->
 
-        <item name="colorOnSecondary">?colorOnBackground</item>
-        <item name="colorSecondary">@color/colorAccent</item>
-        <item name="colorSecondaryVariant">@color/colorAccent</item>
+<!--        <item name="colorOnSecondary">?colorOnBackground</item>-->
+<!--        <item name="colorSecondary">@color/colorAccent</item>-->
+<!--        <item name="colorSecondaryVariant">@color/colorAccent</item>-->
 
         <!-- some components aren't fully compatible with AppCompat, therefore we need these legacy style definitions -->
-        <item name="android:indeterminateTint">@color/colorAccent</item>
-        <item name="android:progressTint">@color/colorAccent</item>
+<!--        <item name="android:indeterminateTint">@color/colorAccent</item>-->
+<!--        <item name="android:progressTint">@color/colorAccent</item>-->
+
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+        <item name="android:colorBackground">@color/md_theme_background</item>
+        <item name="colorOnBackground">@color/md_theme_onBackground</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_inversePrimary</item>
 
         <!-- forward style references to make them accessible in code -->
         <item name="quickLaunchButtonStyle">@style/quicklaunch_button</item>
@@ -37,10 +70,10 @@
 
     <!-- theme for alert dialogs -->
 
-    <style name="materialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>
-        <item name="android:colorBackground">@color/colorBackgroundDialog</item>
+    <style name="materialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+<!--        <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>-->
+<!--        <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>-->
+<!--        <item name="android:background">@color/md_theme_surfaceVariant</item>-->
     </style>
 
     <!-- theme for dialogs with compact lists (e. g.: "pick a list" dialogs -->
@@ -51,14 +84,14 @@
     </style>
 
     <!-- Full-screen dialogs -->
-    <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+    <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.Material3.Dialog">
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 
-    <!-- theme for cache/waypoint popups -->
+    <!-- transparent theme for cache/waypoint popups -->
 
-    <style name="Theme.AppCompat.Transparent.NoActionBar" parent="cgeo">
+    <style name="Theme.AppCompat.Transparent.NoActionBar" parent="NoActionbarTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -70,7 +103,7 @@
 
     <!-- theme for splash screen -->
 
-    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="SplashScreenTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/just_black</item>
         <item name="android:windowBackground">@drawable/splashscreen_background</item>
         <item name="android:windowActivityTransitions">false</item>
@@ -80,6 +113,7 @@
 
     <style name="NoActionbarTheme" parent="cgeo">
         <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 </resources>

@@ -2,8 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:left="6dp" android:right="6dp" android:bottom="6dp" android:top="6dp">
         <shape>
-            <solid android:color="@color/colorBackgroundTransparent"/>
-            <stroke android:width="2dp" android:color="@color/colorAccent" />
+            <solid android:color="@color/md_theme_surface"/>
+            <stroke android:width="2dp" android:color="@color/md_theme_primary" />
             <corners android:radius="4dp"/>
             <padding android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp" />
         </shape>

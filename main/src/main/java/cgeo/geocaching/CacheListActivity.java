@@ -106,6 +106,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -169,8 +170,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     //private final List<Geocache> cacheList = new ArrayList<>();
     private CacheListAdapter adapter = null;
     private View listFooter = null;
-    private TextView listFooterLine1 = null;
-    private TextView listFooterLine2 = null;
+    private Button listFooterLine1 = null;
+    private Button listFooterLine2 = null;
     private final Progress progress = new Progress();
     private String title = "";
     private final AtomicInteger detailProgress = new AtomicInteger(0);

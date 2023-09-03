@@ -30,7 +30,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
         final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
-            final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
+            final Settings.ThemeModeSetting darkTheme = Settings.ThemeModeSetting.valueOf((String) newValue);
             Settings.setAppTheme(darkTheme);
             requireActivity().recreate();
             return true;

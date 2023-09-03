@@ -35,7 +35,7 @@
 
             <Button
                 android:id="@+id/compacticon_off"
-                style="@style/button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +43,7 @@
 
             <Button
                 android:id="@+id/compacticon_auto"
-                style="@style/button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -51,7 +51,7 @@
 
             <Button
                 android:id="@+id/compacticon_on"
-                style="@style/button"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

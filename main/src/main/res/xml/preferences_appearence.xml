@@ -11,7 +11,7 @@
         android:title="@string/init_appearance_general"
         app:iconSpaceReserved="false">
         <ListPreference
-            android:defaultValue="@string/pref_value_theme_dark"
+            android:defaultValue="@string/pref_value_theme_system_default"
             android:entries="@array/settings_theme_entries"
             android:entryValues="@array/pref_theme_values"
             android:key="@string/pref_theme_setting"

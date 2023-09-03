@@ -43,7 +43,7 @@
     <TextView
         android:id="@+id/location_permission_status"
         style="@style/location_current"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/md_theme_primary"
         android:textIsSelectable="false"
         android:text="@string/loc_trying"
         android:visibility="visible"/>

@@ -1,42 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
-
-<TextView
-    android:id="@+id/more_caches_1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@color/colorBackgroundActionBar"
-    android:ellipsize="end"
-    android:gravity="center"
-    android:lines="1"
-    android:padding="8dip"
-    android:scrollHorizontally="true"
-    android:text="@string/caches_no_cache"
-    android:textSize="@dimen/textSize_detailsPrimary"
-    android:textColor="@color/colorTextActionBar"
-    tools:context=".CacheListActivity"
-    android:maxLines="1" />
+    android:orientation="vertical"
+    android:paddingTop="6dp"
+    android:paddingBottom="20dp">
 
-    <TextView
+    <Button
+        android:id="@+id/more_caches_1"
+        style="@style/button_full"
+        android:text="@string/caches_no_cache" />
+
+    <Button
         android:id="@+id/more_caches_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorBackgroundActionBar"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:lines="1"
-        android:padding="8dip"
-        android:scrollHorizontally="true"
-        android:text="@string/caches_no_cache"
-        android:textSize="@dimen/textSize_detailsPrimary"
-        android:textColor="@color/colorTextActionBar"
-        tools:context=".CacheListActivity"
-        android:maxLines="1" />
+        style="@style/button_full"
+        android:text="@string/caches_no_cache" />
 
 </LinearLayout>
