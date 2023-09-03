@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -36,8 +35,6 @@ import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSIO
 
 import android.app.Activity;
 import android.graphics.Point;
-import android.text.Html;
-import android.text.Spanned;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -115,12 +112,6 @@ public class MapUtils {
         if (mapMode == MapMode.LIVE && !Settings.isLiveMap()) {
             Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_LIVE_DISABLED);
         }
-    }
-
-    // workaround for colored ActionBar titles/subtitles
-    // @todo remove after switching map ActionBar to Toolbar
-    public static Spanned getColoredValue(final String value) {
-        return Html.fromHtml("<font color=\"" + String.format("#%06X", 0xFFFFFF & CgeoApplication.getInstance().getResources().getColor(R.color.colorTextActionBar)) + "\">" + value + "</font>");
     }
 
     // check whether routing tile data is available for the whole viewport given

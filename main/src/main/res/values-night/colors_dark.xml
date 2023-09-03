@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
+    <bool name="isLightTheme">false</bool>
+
     <!-- dark theme-specific colors only -->
+
+    <!-- material theme (generated via https://m3.material.io/theme-builder#/custom based on color accent #F5981D as input) -->
+
+    <color name="md_theme_primary">#FFB86D</color>
+    <color name="md_theme_onPrimary">#492900</color>
+    <color name="md_theme_primaryContainer">#683C00</color>
+    <color name="md_theme_onPrimaryContainer">#FFDCBD</color>
+    <color name="md_theme_secondary">#E1C1A3</color>
+    <color name="md_theme_onSecondary">#402C18</color>
+    <color name="md_theme_secondaryContainer">#59422C</color>
+    <color name="md_theme_onSecondaryContainer">#FEDDBE</color>
+    <color name="md_theme_tertiary">#BFCC9B</color>
+    <color name="md_theme_onTertiary">#2A3411</color>
+    <color name="md_theme_tertiaryContainer">#404B25</color>
+    <color name="md_theme_onTertiaryContainer">#DBE8B5</color>
+    <color name="md_theme_error">#FFB4AB</color>
+    <color name="md_theme_errorContainer">#93000A</color>
+    <color name="md_theme_onError">#690005</color>
+    <color name="md_theme_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_background">#201B16</color>
+    <color name="md_theme_onBackground">#EBE1D9</color>
+    <color name="md_theme_surface">#201B16</color>
+    <color name="md_theme_onSurface">#EBE1D9</color>
+    <color name="md_theme_surfaceVariant">#50453A</color>
+    <color name="md_theme_onSurfaceVariant">#D5C3B5</color>
+    <color name="md_theme_outline">#9D8E81</color>
+    <color name="md_theme_inverseOnSurface">#201B16</color>
+    <color name="md_theme_inverseSurface">#EBE1D9</color>
+    <color name="md_theme_inversePrimary">#895100</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_surfaceTint">#FFB86D</color>
+    <color name="md_theme_outlineVariant">#50453A</color>
+    <color name="md_theme_scrim">#000000</color>
+
+    <!-- other -->
 
     <color name="colorText">@color/just_white</color>
     <color name="colorTextDark">#AAFFFFFF</color>

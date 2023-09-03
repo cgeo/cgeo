@@ -79,7 +79,7 @@
             android:layout_toRightOf="@id/info_notloggedin_icon"
             android:gravity="center"
             android:text="@string/warn_notloggedin_short"
-            android:textColor="@color/text_icon"
+            android:textColor="@color/md_theme_onPrimaryContainer"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_detailsPrimary" />
     </RelativeLayout>

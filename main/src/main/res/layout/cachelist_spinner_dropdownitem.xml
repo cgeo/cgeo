@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="left|center_vertical"
+    android:paddingVertical="6dp"
     android:minHeight="?attr/dropdownListPreferredItemHeight"
     android:orientation="vertical"
     android:foreground="?android:attr/selectableItemBackground"
-    android:background="@color/colorBackgroundActionBar"
     tools:context=".CacheListSpinnerAdapter">
 
     <TextView
@@ -16,9 +16,9 @@
         tools:text="This is the title"
         android:ellipsize="end"
         android:layout_width="match_parent"
-        style="?attr/titleTextStyle"
+        style="@style/action_bar_title"
         android:textSize="@dimen/textSize_listsPrimary"
-        android:textColor="@color/colorTextActionBar"
+        android:textColor="@color/md_theme_onSurfaceVariant"
         android:layout_height="wrap_content"
         android:maxLines="1" />
 
@@ -27,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        style="?attr/subtitleTextStyle"
+        style="@style/action_bar_subtitle"
         android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorTextHintActionBar"
+        android:textColor="@color/md_theme_onSurface"
         tools:text="This is the subtitle"
         android:id="@android:id/text2"
         android:maxLines="1" />

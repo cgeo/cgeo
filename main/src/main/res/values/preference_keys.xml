@@ -584,7 +584,6 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="old_pref_useenglish">useenglish</string>
     <string translatable="false" name="old_pref_mapAutoDownloads">mapAutoDownloads</string>
-    <string translatable="false" name="old_pref_skin">skin</string>
     <string translatable="false" name="old_pref_quicklaunchitems">quicklaunchitems</string>
     <string translatable="false" name="old_pref_showListsInCacheList">showListsInCacheList</string>
 

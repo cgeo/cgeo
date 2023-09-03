@@ -8,16 +8,18 @@
         for dark theme-specific colors see values-night/colors.xml
     -->
 
+    <!--  color accent should only be used for launcher icons, not inside the app  -->
+
     <color name="colorAccent">#F5981D</color>
+
+    <!--  some general colors  -->
 
     <color name="just_white">#FFFFFFFF</color>
     <color name="just_black">#FF000000</color>
-    <color name="text_icon">#FFFFFFFF</color>
     <color name="shortcut_background">#FFF5F5F5</color>
 
     <color name="colorText_listsPrimary">@color/colorText</color>
     <color name="colorText_listsSecondary">@color/colorTextHint</color>
-    <color name="colorTextActionBar">#FFE4E4E4</color>
 
     <color name="osm_zoomcontrol">#FF666666</color>
     <color name="osm_zoomcontrolbackground">#C0FFFFFF</color>
