@@ -3,7 +3,7 @@
 
     <!-- theme for (nearly) all activities -->
 
-    <style name="cgeo" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="cgeo" parent="Theme.Material3.DayNight"><!-- Theme.Material3.DayNight.DarkActionBar -->
         <!-- Action bar theming -->
         <item name="actionBarStyle">@style/actionBarStyle</item>
         <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>
@@ -37,7 +37,7 @@
 
     <!-- theme for alert dialogs -->
 
-    <style name="materialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="materialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>
         <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>
         <item name="android:colorBackground">@color/colorBackgroundDialog</item>
@@ -51,7 +51,7 @@
     </style>
 
     <!-- Full-screen dialogs -->
-    <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+    <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.Material3.Dialog">
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
         <item name="android:windowIsFloating">false</item>
     </style>
@@ -70,7 +70,7 @@
 
     <!-- theme for splash screen -->
 
-    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="SplashScreenTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/just_black</item>
         <item name="android:windowBackground">@drawable/splashscreen_background</item>
         <item name="android:windowActivityTransitions">false</item>

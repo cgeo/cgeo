@@ -27,7 +27,7 @@
 
     <!-- checkbox formatting -->
 
-    <style name="checkboxStyle" parent="@style/Widget.MaterialComponents.CompoundButton.CheckBox">
+    <style name="checkboxStyle" parent="@style/Widget.Material3.CompoundButton.CheckBox">
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
         <item name="android:textColor">@color/colorText</item>
@@ -46,7 +46,7 @@
 
     <!-- radiobutton formatting -->
 
-    <style name="radioButtonStyle" parent="@style/Widget.MaterialComponents.CompoundButton.RadioButton">
+    <style name="radioButtonStyle" parent="@style/Widget.Material3.CompoundButton.RadioButton">
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
     </style>
 
@@ -63,19 +63,19 @@
 
     <!-- alert dialog formatting -->
 
-    <style name="alertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="alertDialogTitleTextStyle" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textSize">@dimen/textSize_headingPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="alertDialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <style name="alertDialogBodyTextStyle" parent="MaterialAlertDialog.Material3.Body.Text">
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
         <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- actionbar -->
 
-    <style name="actionBarStyle" parent="Widget.MaterialComponents.ActionBar.Solid">
+    <style name="actionBarStyle" parent="Widget.Material3.ActionBar.Solid">
         <item name="android:textColorPrimary">@color/colorTextActionBar</item>
         <item name="android:textColor">@color/colorTextActionBar</item>
         <item name="background">@color/colorBackgroundActionBar</item>
@@ -117,7 +117,7 @@
 
     <!-- buttons -->
 
-    <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="button" parent="@style/Widget.Material3.Button.OutlinedButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">6dip</item>
@@ -239,7 +239,7 @@
 
   <!-- Chips -->
 
-    <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Filter">
+    <style name="chip_choice" parent="@style/Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_background_selector</item>
         <item name="android:textColor">@color/chip_textcolor_selector</item>
         <item name="android:padding">6dip</item>
@@ -252,7 +252,7 @@
 
     <!-- TextInputLayout for AutoCompleteTextView or EditText -->
 
-    <style name="textinput_autocompletetextview" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+    <style name="textinput_autocompletetextview" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="android:padding">6dip</item>
         <item name="android:singleLine">true</item>
         <item name="android:autoText">true</item>
@@ -266,7 +266,7 @@
         <item name="suffixTextColor">@color/colorTextDark</item>
     </style>
 
-    <style name="textinput_edittext" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="textinput_edittext" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:padding">6dip</item>
         <item name="android:autoText">true</item>
         <item name="android:gravity">top|left</item>
@@ -567,7 +567,7 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
     </style>
-    <style name="InstallationWizardButtonOutlined" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="InstallationWizardButtonOutlined" parent="@style/Widget.Material3.Button.OutlinedButton">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -584,7 +584,7 @@
         <item name="android:padding">12dp</item>
         <item name="android:layout_marginBottom">12dp</item>
     </style>
-    <style name="InstallationWizardButtonFooterSolid" parent="@style/Widget.MaterialComponents.Button">
+    <style name="InstallationWizardButtonFooterSolid" parent="@style/Widget.Material3.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
