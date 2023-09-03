@@ -17,7 +17,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_map_content_behavior, rootKey);
+        initPreferences(R.xml.preferences_map_content_behavior, rootKey);
     }
 
     @Override

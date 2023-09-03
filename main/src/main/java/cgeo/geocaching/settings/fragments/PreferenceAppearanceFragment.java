@@ -26,7 +26,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_appearence, rootKey);
+        initPreferences(R.xml.preferences_appearence, rootKey);
 
         final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {

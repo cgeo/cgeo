@@ -25,7 +25,7 @@ import java.util.List;
 public class PreferenceNavigationFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_navigation, rootKey);
+        initPreferences(R.xml.preferences_navigation, rootKey);
 
         initDefaultNavigationPreferences();
         initOfflineRoutingPreferences();

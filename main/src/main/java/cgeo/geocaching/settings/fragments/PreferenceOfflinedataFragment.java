@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_offlinedata, rootKey);
+        initPreferences(R.xml.preferences_offlinedata, rootKey);
 
         findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)).setOnPreferenceClickListener(preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time

@@ -367,6 +367,9 @@
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
 
+    <!-- category power user -->
+    <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
+
     <!-- category debug -->
     <string translatable="false" name="pref_debug">debug</string>
     <string translatable="false" name="pref_fakekey_generate_logcat">fakekey_generate_logcat</string>

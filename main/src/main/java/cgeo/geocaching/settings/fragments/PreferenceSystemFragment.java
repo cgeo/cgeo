@@ -16,7 +16,7 @@ import android.os.Bundle;
 public class PreferenceSystemFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_system, rootKey);
+        initPreferences(R.xml.preferences_system, rootKey);
     }
 
     @Override
