@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.PreferenceTextAlwaysShow;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
@@ -47,6 +48,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // map sources
             R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
             R.string.pref_persistablefolder_offlinemaps,
+            R.string.pref_fakekey_info_offline_mapthemes,
             // map content & behavior
             R.string.pref_maptrail,
             R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,
@@ -57,10 +59,10 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // logging
             R.string.pref_signature, R.string.pref_sigautoinsert, R.string.preference_category_logging_logtemplates, R.string.pref_trackautovisit, R.string.pref_log_offline,
             // offline data
-            // @todo: disable whole section
+            // whole section disabled @todo: enable in extended config mode
             // routing / navigation
-            R.string.pref_fakekey_brouterDistanceThresholdTitle,
-            R.string.pref_defaultNavigationTool, R.string.pref_defaultNavigationTool2,
+            R.string.pref_fakekey_brouterDistanceThresholdTitle, R.string.pref_brouterDistanceThreshold,
+            R.string.pref_defaultNavigationTool, R.string.pref_defaultNavigationTool2, R.string.pref_fakekey_navigationMenu,
             // system
             R.string.pref_persistablefolder_basedir,
             R.string.pref_googleplayservices, R.string.pref_lowpowermode, R.string.pref_force_orientation_sensor, R.string.pref_extended_settings_enabled, R.string.pref_debug, R.string.pref_fakekey_generate_logcat, R.string.pref_fakekey_memory_dump, R.string.pref_fakekey_generate_infos_downloadmanager, R.string.pref_fakekey_view_settings,
@@ -174,7 +176,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
         final int prefCount = start.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = start.getPreference(i);
-            if (showAll || ArrayUtils.contains(basicPreferences, pref.getKey())) {
+            if (showAll || ArrayUtils.contains(basicPreferences, pref.getKey()) || pref instanceof PreferenceTextAlwaysShow) {
                 pref.setVisible(true);
                 visibleCount++;
             } else if (!(pref instanceof PreferenceGroup)) {

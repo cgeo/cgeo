@@ -9,7 +9,7 @@
     <PreferenceCategory
         android:title="@string/init_backup_title"
         app:iconSpaceReserved="false">
-        <Preference android:summary="@string/init_backup_summary" app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_backup_summary" app:iconSpaceReserved="false" />
 
         <Preference
             android:title="@string/init_backup_history_length_title"

@@ -319,6 +319,7 @@
     <!-- categories default navigation / secondary navigation -->
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
+    <string translatable="false" name="pref_fakekey_navigationMenu">fakekey_preference_navigationMenu</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -367,7 +368,7 @@
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
 
-    <!-- category power user -->
+    <!-- category extended settings -->
     <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
 
     <!-- category debug -->
