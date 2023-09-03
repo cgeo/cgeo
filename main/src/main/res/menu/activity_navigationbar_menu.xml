@@ -22,7 +22,7 @@
         android:icon="@drawable/ic_menu_search"
         android:title="@string/advanced_search_button" />
     <item
-        android:id="@+id/page_nearby"
+        android:id="@+id/page_custom"
         android:enabled="true"
         android:icon="@drawable/ic_menu_nearby"
         android:title="@string/caches_nearby_button" />

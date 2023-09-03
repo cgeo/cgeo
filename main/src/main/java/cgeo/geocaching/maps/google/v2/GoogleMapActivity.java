@@ -280,6 +280,6 @@ public class GoogleMapActivity extends AbstractNavigationBarActivity implements 
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapBase.getMapOptions().mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_BOTTOM_NAVIGATION;
+        return mapBase.getMapOptions().mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 }

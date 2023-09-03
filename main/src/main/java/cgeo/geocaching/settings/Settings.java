@@ -1310,7 +1310,7 @@ public class Settings {
         } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_search))) {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_SEARCH);
         } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_nearby))) {
-            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_NEARBY);
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_CUSTOM);
         } else {
             return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_HOME);
         }

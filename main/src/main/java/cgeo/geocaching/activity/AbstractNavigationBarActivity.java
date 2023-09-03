@@ -73,11 +73,11 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     public static final @IdRes
     int MENU_SEARCH = R.id.page_search;
     public static final @IdRes
-    int MENU_NEARBY = R.id.page_nearby;
+    int MENU_CUSTOM = R.id.page_custom;
     public static final @IdRes
     int MENU_HOME = R.id.page_home;
     public static final @IdRes
-    int MENU_HIDE_BOTTOM_NAVIGATION = -1;
+    int MENU_HIDE_NAVIGATIONBAR = -1;
 
     private static Boolean loginSuccessful = null; // must be static so that the login state is stored while switching between activities
 
@@ -86,6 +86,8 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private static boolean restoreMessageShown = false;
     private BackupUtils backupUtils = null;
 
+    private static final String BUNDLE_HIDENAVIGATIONBAR = "hideNavigationBar";
+    private boolean hideNavigationBar = false;
 
     private ActivityNavigationbarBinding binding = null;
 
@@ -98,12 +100,14 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     @Override
     public void setContentView(final int layoutResID) {
+        checkIntentHideNavigationBar();
         final View view = getLayoutInflater().inflate(layoutResID, null);
         setContentView(view);
     }
 
     @Override
     public void setContentView(final View contentView) {
+        checkIntentHideNavigationBar();
         binding = ActivityNavigationbarBinding.inflate(getLayoutInflater());
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
@@ -225,29 +229,29 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     public void updateSelectedBottomNavItemId() {
         // unregister listener before changing anything, as it would otherwise trigger the listener directly
-        ((NavigationBarView) binding.activityNavigationbar).setOnItemSelectedListener(null);
+        ((NavigationBarView) binding.activityNavigationBar).setOnItemSelectedListener(null);
 
-        final int menuId = getSelectedBottomItemId();
+        final int menuId = hideNavigationBar ? MENU_HIDE_NAVIGATIONBAR : getSelectedBottomItemId();
 
-        if (menuId == MENU_HIDE_BOTTOM_NAVIGATION) {
-            binding.activityNavigationbar.setVisibility(View.GONE);
+        if (menuId == MENU_HIDE_NAVIGATIONBAR) {
+            binding.activityNavigationBar.setVisibility(View.GONE);
         } else {
-            binding.activityNavigationbar.setVisibility(View.VISIBLE);
-            ((NavigationBarView) binding.activityNavigationbar).setSelectedItemId(menuId);
+            binding.activityNavigationBar.setVisibility(View.VISIBLE);
+            ((NavigationBarView) binding.activityNavigationBar).setSelectedItemId(menuId);
         }
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(menuId == MENU_HIDE_BOTTOM_NAVIGATION);
+            actionBar.setDisplayHomeAsUpEnabled(menuId == MENU_HIDE_NAVIGATIONBAR);
         }
 
         // re-register the listener
-        ((NavigationBarView) binding.activityNavigationbar).setOnItemSelectedListener(this);
+        ((NavigationBarView) binding.activityNavigationBar).setOnItemSelectedListener(this);
     }
 
     private void setCustomBNitem() {
-        final MenuItem menu = ((NavigationBarView) binding.activityNavigationbar).getMenu().findItem(MENU_NEARBY);
+        final MenuItem menu = ((NavigationBarView) binding.activityNavigationBar).getMenu().findItem(MENU_CUSTOM);
 
         menu.setVisible(true);
         menu.setEnabled(true);
@@ -297,7 +301,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             return CacheListActivity.getActivityOfflineIntent(fromActivity);
         } else if (id == MENU_SEARCH) {
             return new Intent(fromActivity, SearchActivity.class);
-        } else if (id == MENU_NEARBY) {
+        } else if (id == MENU_CUSTOM) {
             return CacheListActivity.getNearestIntent(fromActivity);
         } else if (id == MENU_HOME) {
             return new Intent(fromActivity, MainActivity.class);
@@ -307,15 +311,28 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private static void launchActivity(final Activity fromActivity, final int id) {
-        if (id == MENU_NEARBY) {
+        if (id == MENU_CUSTOM) {
             final int item = Settings.getCustomBNitem();
             if (item != CUSTOMBNITEM_NEARBY) {
-                QuickLaunchItem.launchQuickLaunchItem(fromActivity, item);
+                QuickLaunchItem.launchQuickLaunchItem(fromActivity, item, false);
                 return;
             }
         }
         final Intent launchIntent = getBottomNavigationIntent(fromActivity, id);
         fromActivity.startActivity(launchIntent);
+    }
+
+    public static void setIntentHideBottomNavigation(final Intent intent, final boolean hideBottomNavigation) {
+        intent.putExtra(BUNDLE_HIDENAVIGATIONBAR, hideBottomNavigation);
+    }
+
+    protected void checkIntentHideNavigationBar() {
+        checkIntentHideNavigationBar(false);
+    }
+
+    protected void checkIntentHideNavigationBar(final boolean defaultValue) {
+        final Intent intent = getIntent();
+        hideNavigationBar = (intent != null && intent.hasExtra(BUNDLE_HIDENAVIGATIONBAR)) ? intent.getBooleanExtra(BUNDLE_HIDENAVIGATIONBAR, defaultValue) : defaultValue;
     }
 
     public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {
@@ -427,7 +444,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         }
         synchronized (lowPrioNotificationCounter) {
             lowPrioNotificationCounter.set(lowPrioNotificationCounter.get() + delta);
-            final BadgeDrawable badge = ((NavigationBarView) binding.activityNavigationbar).getOrCreateBadge(MENU_HOME);
+            final BadgeDrawable badge = ((NavigationBarView) binding.activityNavigationBar).getOrCreateBadge(MENU_HOME);
             badge.clearNumber();
             badge.setBackgroundColor(badgeColor);
             badge.setVisible(lowPrioNotificationCounter.get() > 0);

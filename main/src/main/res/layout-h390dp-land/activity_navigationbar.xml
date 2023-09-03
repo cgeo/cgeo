@@ -16,11 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/activity_navigationbar" />
+        android:layout_toEndOf="@id/activity_navigationBar" />
 
     <!-- Show a navigation rail on landscape devices instead. -->
     <com.google.android.material.navigationrail.NavigationRailView
-        android:id="@+id/activity_navigationbar"
+        android:id="@+id/activity_navigationBar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"

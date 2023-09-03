@@ -639,7 +639,7 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 }
                 project.exec {
                     executable = project.android.getAdbExe().toString()
-                    args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
                 project.exec {
                     executable = project.android.getAdbExe().toString()
