@@ -280,6 +280,7 @@
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for offlinedata screen -->
+    <string translatable="false" name="preference_menu_offlinedata">preference_menu_offlinedata</string>
     <string translatable="false" name="preference_screen_offlinedata">preference_screen_offlinedata</string>
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
