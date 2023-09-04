@@ -4,9 +4,9 @@
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
 - Novinka: Zajištění minimální velikosti obrázku pro zobrazení
-- Change: Redesigned edit options for own log images
+- Změna: Přepracované možnosti úprav vlastních obrázků do logu
 
 ### Obecné
 - Novinka: Zvýšeno cílové SDK na 33
-- Change: Handling of database access to avoid "database not available" crashes
+- Změna: Zpracování přístupu k databázi, aby se zabránilo pádům "databáze není k dispozici"
 
