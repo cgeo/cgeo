@@ -268,19 +268,19 @@ public class ImageActivityHelper {
      * Helper function to load and scale an image asynchronously into a view
      */
     public static void displayImageAsync(final Image image, final ImageView imageView) {
-        displayImageAsync(image, imageView, null);
+        displayImageAsync(image, imageView, true, null);
     }
 
-    public static void displayImageAsync(final Image image, final ImageView imageView, final Action1<ImageView> resetAction) {
+    public static void displayImageAsync(final Image image, final ImageView imageView, final boolean adjustOrientation, final Action1<ImageView> action) {
 
         if (image.isEmpty()) {
             return;
         }
         imageView.setVisibility(View.INVISIBLE);
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri()), bitmap -> {
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri(), adjustOrientation), bitmap -> {
             imageView.setImageBitmap(bitmap);
-            if (resetAction != null) {
-                resetAction.call(imageView);
+            if (action != null) {
+                action.call(imageView);
             }
             imageView.setVisibility(View.VISIBLE);
         });

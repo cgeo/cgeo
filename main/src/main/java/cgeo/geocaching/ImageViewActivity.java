@@ -380,7 +380,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     binding.imageFull.setRotation(0);
                 } else {
                     binding.imageFull.setImageDrawable(p.first);
-                    binding.imageFull.setRotation(ImageUtils.getImageRotationDegrees(currentImage.getUri()));
+                    ImageUtils.getImageOrientation(currentImage.getUri()).applyToView(binding.imageFull);
                 }
                 binding.imageProgressBar.setVisibility(View.GONE);
 

@@ -9,7 +9,6 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -78,13 +77,6 @@ public final class ImageUtils {
 
     private static final String OFFLINE_LOG_IMAGE_PRAEFIX = "cgeo-image-";
 
-    private static final int[] ORIENTATIONS = {
-            ExifInterface.ORIENTATION_ROTATE_90,
-            ExifInterface.ORIENTATION_ROTATE_180,
-            ExifInterface.ORIENTATION_ROTATE_270
-    };
-
-    private static final int[] ROTATION = {90, 180, 270};
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
@@ -202,13 +194,13 @@ public final class ImageUtils {
      * @return Bitmap The scaled image or Null if source image can't be read
      */
     @Nullable
-    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData) {
+    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData, final boolean adjustOrientation) {
         final Point displaySize = DisplayUtils.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
 
-        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight);
+        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight, adjustOrientation);
         if (image == null) {
             return null;
         }
@@ -298,7 +290,7 @@ public final class ImageUtils {
     @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
-        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY, true);
         if (image == null) {
             return null;
         }
@@ -325,7 +317,7 @@ public final class ImageUtils {
      * @return Bitmap the image or null if image can't be read
      */
     @Nullable
-    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
+    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY, final boolean adjustOrientation) {
 
         final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStreamIfLocal(imageUri));
         if (sizeOnlyOptions == null) {
@@ -339,11 +331,11 @@ public final class ImageUtils {
             sampleOptions.inSampleSize = sampleSize;
         }
 
-        return readDownsampledImageInternal(imageUri, sampleOptions);
+        return readDownsampledImageInternal(imageUri, sampleOptions, adjustOrientation);
     }
 
-    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions) {
-        final int orientation = getImageOrientation(imageUri);
+    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions, final boolean adjustOrientation) {
+        final ViewOrientation orientation = adjustOrientation ? getImageOrientation(imageUri) : null;
 
         try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
@@ -351,12 +343,8 @@ public final class ImageUtils {
             }
             final Bitmap decodedImage = BitmapFactory.decodeStream(imageStream, null, sampleOptions);
             if (decodedImage != null) {
-                for (int i = 0; i < ORIENTATIONS.length; i++) {
-                    if (orientation == ORIENTATIONS[i]) {
-                        final Matrix matrix = new Matrix();
-                        matrix.postRotate(ROTATION[i]);
-                        return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
-                    }
+                if (orientation != null && !orientation.isNormal()) {
+                    return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), orientation.createOrientationCalculationMatrix(), true);
                 }
             }
             return decodedImage;
@@ -366,27 +354,19 @@ public final class ImageUtils {
         return null;
     }
 
-    public static float getImageRotationDegrees(@NonNull final Uri imageUri) {
-        final int orientation = getImageOrientation(imageUri);
-        for (int i = 0; i < ORIENTATIONS.length; i++) {
-            if (orientation == ORIENTATIONS[i]) {
-                return ROTATION[i];
-            }
-        }
-        return 0;
+    public static ViewOrientation getImageOrientation(@NonNull final Uri imageUri) {
+        return ViewOrientation.ofExif(getExif(imageUri));
     }
 
-    private static int getImageOrientation(@NonNull final Uri imageUri) {
-        int orientation = ExifInterface.ORIENTATION_NORMAL;
+    public static ExifInterface getExif(@NonNull final Uri imageUri) {
         try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream != null) {
-                final ExifInterface exif = new ExifInterface(imageStream);
-                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                return new ExifInterface(imageStream);
             }
         } catch (final IOException e) {
             Log.e("ImageUtils.getImageOrientation(ExifIf)", e);
         }
-        return orientation;
+        return null;
     }
 
     /**
@@ -418,8 +398,13 @@ public final class ImageUtils {
             if (imageStream == null) {
                 return null;
             }
-            final Bitmap bm = BitmapFactory.decodeStream(imageStream);
-            return bm == null ? null : new ImmutablePair<>(bm.getWidth(), bm.getHeight());
+            final BitmapFactory.Options bounds = new BitmapFactory.Options();
+            bounds.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(imageStream, null, bounds);
+            if (bounds.outWidth == -1 || bounds.outHeight < 0) {
+                return null;
+            }
+            return new ImmutablePair<>(bounds.outWidth, bounds.outHeight);
         } catch (IOException e) {
             Log.e("ImageUtils.getImageSize", e);
         }
@@ -953,27 +938,8 @@ public final class ImageUtils {
         final int h = bm.getHeight();
         final int w = bm.getWidth();
         final Matrix matrix = new Matrix();
-        matrix.setRotate(angleInDegree, w / 2f, h / 2f);
+        matrix.postRotate(angleInDegree); //, w / 2f, h / 2f);
         return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
-    }
-
-    @Nullable
-    public static Bitmap flipBitmap(@Nullable final Bitmap bm, final boolean xFlip, final boolean yFlip) {
-        if (bm == null) {
-            return bm;
-        }
-        final int h = bm.getHeight();
-        final int w = bm.getWidth();
-        final Matrix matrix = new Matrix();
-
-        matrix.setScale(xFlip ? -1 : 1, yFlip ? -1 : 1, w / 2f, h / 2f);
-        return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
-    }
-    public static void manipulateImageAsBitmap(final Uri imageUri, final Uri targetUri, final Func1<Bitmap, Bitmap> fct) {
-        final Bitmap image = readDownsampledImage(imageUri, -1, -1);
-        final Bitmap newImage = fct.call(image);
-        storeBitmap(newImage, Bitmap.CompressFormat.JPEG, 100, targetUri);
-
     }
 
     public static Intent createExternalEditImageIntent(final Context ctx, final Uri imageUri) {
