@@ -79,8 +79,8 @@ public final class ActivityMixin {
      * @param context the activity the user is facing
      * @param resId   the message
      */
-    public static void showToast(final Context context, @StringRes final int resId) {
-        showToast(context, context.getString(resId));
+    public static void showToast(final Context context, @StringRes final int resId, final Object ... params) {
+        showToast(context, context.getString(resId, params));
     }
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {

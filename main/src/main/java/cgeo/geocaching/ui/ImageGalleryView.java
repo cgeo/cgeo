@@ -222,7 +222,7 @@ public class ImageGalleryView extends LinearLayout {
                     binding.imageImage.setRotation(0);
                 } else {
                     binding.imageImage.setImageDrawable(p.first);
-                    binding.imageImage.setRotation(ImageUtils.getImageRotationDegrees(currentEntry.image.getUri()));
+                    ImageUtils.getImageOrientation(currentEntry.image.getUri()).applyToView(binding.imageImage);
                 }
                 binding.imageImage.setVisibility(View.VISIBLE);
 
