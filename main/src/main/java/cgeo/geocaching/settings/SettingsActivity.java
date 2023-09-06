@@ -342,6 +342,13 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     // search related extensions
 
+    public void rebuildSearchIndex() {
+        synchronized (searchIndex) {
+            searchIndex.clear();
+        }
+        buildSearchIndex();
+    }
+
     private void buildSearchIndex() {
         synchronized (searchIndex) {
             if (searchIndex.size() > 0) {

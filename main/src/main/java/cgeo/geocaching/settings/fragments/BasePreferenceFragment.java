@@ -139,6 +139,8 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
      * (prefers preference entries over preference groups)
      */
     private void doSearch(final String baseKey, final ArrayList<PrefSearchDescriptor> data, final PreferenceGroup start) {
+        lazyInitPreferenceKeys();
+        final boolean showAll = Settings.extendedSettingsAreEnabled();
         final int prefCount = start.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = start.getPreference(i);
@@ -148,7 +150,9 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
                     pref.setKey(baseKey + "-" + (nextKey++));
                 }
             }
-            data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon));
+            if (showAll || ArrayUtils.contains(basicPreferences, pref.getKey()) || pref instanceof PreferenceTextAlwaysShow) {
+                data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon));
+            }
             if (pref instanceof PreferenceGroup) {
                 doSearch(baseKey, data, (PreferenceGroup) pref);
             }

@@ -35,6 +35,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
 
         findPreference(getString(R.string.pref_extended_settings_enabled)).setOnPreferenceChangeListener((pref, newValue) -> {
             checkExtendedSettingsVisibility((boolean) newValue);
+            ((SettingsActivity) getActivity()).rebuildSearchIndex();
             return true;
         });
 
