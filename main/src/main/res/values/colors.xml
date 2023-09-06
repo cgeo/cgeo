@@ -18,12 +18,16 @@
     <color name="just_black">#FF000000</color>
     <color name="shortcut_background">#FFF5F5F5</color>
 
-    <color name="colorText_listsPrimary">@color/colorText</color>
+    <color name="colorText_listsPrimary">@color/md_theme_onBackground</color>
     <color name="colorText_listsSecondary">@color/colorTextHint</color>
 
     <color name="osm_zoomcontrol">#FF666666</color>
     <color name="osm_zoomcontrolbackground">#C0FFFFFF</color>
     <color name="osm_zoomcontroldivider">#C0666666</color>
+
+    <color name="archived_cache_color">@color/md_theme_error</color>
+
+    <color name="colorTextHint">@color/md_theme_secondary</color><!-- todo discus whether brows is appreciated if it should be changed back to #FF666666 / #A0CCCCCC -->
 
     <!-- default colors for map lines -->
 

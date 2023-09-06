@@ -12,7 +12,7 @@
 
     <style name="text_default" parent="@style/text">
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="text_label" parent="text">
@@ -30,13 +30,13 @@
     <style name="checkboxStyle" parent="@style/Widget.Material3.CompoundButton.CheckBox">
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="checkboxStyleNoParent">
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="checkbox_full">
@@ -70,7 +70,7 @@
 
     <style name="alertDialogBodyTextStyle" parent="MaterialAlertDialog.Material3.Body.Text">
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <!-- actionbar -->
@@ -92,7 +92,7 @@
 <!--        <item name="android:layout_width">fill_parent</item>-->
 <!--        <item name="android:layout_height">@dimen/actionbar_height</item>-->
 <!--&lt;!&ndash;        <item name="colorControlNormal">@color/colorTextActionBar</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textColor">@color/colorText</item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="android:textColor">@color/md_theme_onBackground</item>&ndash;&gt;-->
 <!--    </style>-->
 
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -210,11 +210,12 @@
 
     <style name="quicklaunch_button" parent="button_icon_accent">
 <!--        <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>-->
-        <item name="backgroundTint">#38808080</item>
+        <item name="backgroundTint">@color/md_theme_surfaceVariant</item>
         <item name="cornerRadius">12dip</item>
         <item name="strokeWidth">0dip</item>
         <item name="android:layout_margin">7dip</item>
         <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/md_theme_onSurfaceVariant</item>
     </style>
 
     <style name="button_icon_colored" parent="button_icon_accent">
@@ -225,7 +226,7 @@
 
 <!--     <style name="IconButtonThemeOverlay">-->
 <!--        &lt;!&ndash; For filled buttons, your theme's colorPrimary provides the default background color of the component &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/colorText</item>-->
+<!--        <item name="colorPrimary">@color/md_theme_onBackground</item>-->
 <!--    </style>-->
 
     <style name="shapeCircle" parent="">
@@ -262,9 +263,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="endIconMode">clear_text</item>
-        <item name="endIconTint">@color/colorTextDark</item>
-        <item name="prefixTextColor">@color/colorTextDark</item>
-        <item name="suffixTextColor">@color/colorTextDark</item>
+        <item name="endIconTint">@color/md_theme_onBackground</item>
+        <item name="prefixTextColor">@color/md_theme_onBackground</item>
+        <item name="suffixTextColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="textinput_edittext" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox">
@@ -275,9 +276,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="endIconMode">none</item>
-        <item name="endIconTint">@color/colorTextDark</item>
-        <item name="prefixTextColor">@color/colorTextDark</item>
-        <item name="suffixTextColor">@color/colorTextDark</item>
+        <item name="endIconTint">@color/md_theme_onBackground</item>
+        <item name="prefixTextColor">@color/md_theme_onBackground</item>
+        <item name="suffixTextColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="textinput_edittext_singleline" parent="textinput_edittext">
@@ -291,8 +292,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:inputType">text</item>
-        <item name="android:textColor">@color/colorText</item>
-        <item name="colorOnSurface">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
+        <item name="colorOnSurface">@color/md_theme_onBackground</item>
         <item name="android:gravity">top|left</item>
         <item name="android:textSize">@dimen/textSize_textinputPrimary</item>
     </style>
@@ -313,7 +314,7 @@
         <item name="android:autoText">true</item>
         <item name="android:gravity">top|left</item>
         <item name="android:capitalize">none</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <style name="edittext_full" parent="edittext">
@@ -390,14 +391,14 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1dip</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:background">@color/colorSeparator</item>
+        <item name="android:background">@color/md_theme_outline</item>
     </style>
 
     <style name="separator_vertical">
         <item name="android:layout_width">1dip</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:background">@color/colorSeparator</item>
+        <item name="android:background">@color/md_theme_outline</item>
     </style>
 
     <style name="separator_horizontal_layout">
@@ -411,7 +412,7 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">3dip</item>
         <item name="android:layout_centerInParent">true</item>
-        <item name="android:background">@color/colorSeparator</item>
+        <item name="android:background">@color/md_theme_outline</item>
     </style>
 
     <style name="separator_horizontal_heading_text">
@@ -426,7 +427,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_headingPrimary</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@color/colorBackground</item>
+        <item name="android:background">@color/md_theme_background</item>
     </style>
 
     <!-- images -->
@@ -451,7 +452,7 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/textSize_headingSecondary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
 
     <!-- date, found state on the left of a log entry -->
@@ -512,14 +513,13 @@
         <item name="android:layout_marginBottom">-10dp</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-    r<style name="map_quicksettings_subtitle">
+    <style name="map_quicksettings_subtitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">14dip</item>
         <item name="android:paddingBottom">6dip</item>
         <item name="android:paddingLeft">14dip</item>
-        <item name="android:textSize">@dimen/textSize_headingSecondary</item>
-        <item name="android:textColor">@color/colorTextHeadline</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.TitleMedium</item>
     </style>
 
     <!-- map quick buttons styles -->
@@ -609,7 +609,7 @@
     <!-- about pages styles -->
     <style name="about_base">
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
-        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
         <item name="android:layout_gravity">left</item>
     </style>
     <style name="about_contributors" parent="@style/about_base">

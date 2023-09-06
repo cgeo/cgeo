@@ -21,7 +21,7 @@
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
 
         <!-- set Material theme colors -->
-<!--        <item name="colorOnBackground">@color/colorText</item>-->
+<!--        <item name="colorOnBackground">@color/md_theme_onBackground</item>-->
 <!--        <item name="android:colorBackground">@color/colorBackground</item>-->
 
 <!--        <item name="colorOnPrimary">?colorOnBackground</item>-->
@@ -85,7 +85,7 @@
 
     <!-- Full-screen dialogs -->
     <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.Material3.Dialog">
-        <item name="android:windowBackground">@color/colorBackgroundDialog</item>
+        <item name="android:windowBackground">@color/md_theme_surface</item>
         <item name="android:windowIsFloating">false</item>
     </style>
 

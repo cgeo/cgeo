@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- derived from mtl_btn_stroke_color_selector, but higher alpha value -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="?attr/colorPrimary" android:state_checked="true"/>
-    <item android:alpha="0.38" android:color="?attr/colorOnSurface" android:state_checked="false"/>
-</selector>

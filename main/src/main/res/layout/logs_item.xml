@@ -72,7 +72,7 @@
                 android:gravity="left"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/colorText"/>
+                android:textColor="@color/md_theme_onBackground"/>
 
             <TextView
                 android:id="@+id/log_images"

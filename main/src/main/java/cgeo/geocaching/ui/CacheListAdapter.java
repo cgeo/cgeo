@@ -450,7 +450,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (cache.isArchived()) { // red color
             holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.archived_cache_color));
         } else {
-            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.colorText));
+            holder.binding.text.setTextColor(ContextCompat.getColor(getContext(), R.color.md_theme_onBackground));
         }
 
         holder.binding.text.setText(cache.getName(), TextView.BufferType.NORMAL);

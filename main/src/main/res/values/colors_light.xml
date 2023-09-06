@@ -40,21 +40,7 @@
 
     <!-- other -->
 
-    <color name="colorText">@color/just_black</color>
-    <color name="colorTextDark">#AA000000</color>
-    <color name="colorTextHint">#FF666666</color>
-    <color name="archived_cache_color">#FFAC0B0B</color>
-
-    <color name="colorTextHeadline">#88000000</color>
-    <color name="colorTextHintActionBar">#FFAAAAAA</color>
-
-    <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
-    <color name="colorBackgroundDialog">#FFFFFFFF</color>
-    <color name="colorBackgroundSelected">#FFCCCCCC</color>
-    <color name="colorBackgroundActionBar">#FF505050</color>
-
-    <color name="colorSeparator">#44000000</color>
 
     <color name="attribute_filter_disabled">#ffcccccc</color>
     <color name="attribute_category_tools_disabled">#ffb26666</color>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorBackgroundDialog"
+    android:background="@color/md_theme_surface"
     android:windowBackground="@null"
     android:orientation="vertical"
     tools:context=".CachePopupFragment">
@@ -28,7 +28,7 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorText"
+                android:textColor="@color/md_theme_onBackground"
                 android:textSize="@dimen/textSize_headingPrimary"
                 android:gravity="center">
             </TextView>
@@ -89,7 +89,7 @@
                     android:paddingRight="3dip"
                     android:textIsSelectable="false"
                     android:textSize="@dimen/textSize_detailsSecondary"
-                    android:textColor="@color/colorText"/>
+                    android:textColor="@color/md_theme_onBackground"/>
 
                 <Button
                     android:id="@+id/offline_refresh"
@@ -113,7 +113,7 @@
                     android:textIsSelectable="false"
                     android:textSize="@dimen/textSize_detailsSecondary"
                     tools:text="list 1, list 2"
-                    android:textColor="@color/colorText"/>
+                    android:textColor="@color/md_theme_onBackground"/>
 
                 <Button
                     android:id="@+id/offline_edit"
@@ -157,7 +157,7 @@
                 android:textSize="@dimen/textSize_detailsSecondary"
                 android:visibility="gone"
                 tools:text="hint"
-                android:textColor="@color/colorText"/>
+                android:textColor="@color/md_theme_onBackground"/>
 
         </LinearLayout>
     </ScrollView>
