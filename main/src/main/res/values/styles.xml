@@ -76,24 +76,9 @@
     <!-- actionbar -->
 
     <style name="actionBarStyle" parent="Widget.Material3.ActionBar.Solid">
-<!--        <item name="android:textColorPrimary">@color/colorTextActionBar</item>-->
-<!--        <item name="android:textColor">@color/colorTextActionBar</item>-->
-<!--        <item name="background">@color/colorBackgroundActionBar</item>-->
         <item name="titleTextStyle">@style/action_bar_title</item>
         <item name="subtitleTextStyle">@style/action_bar_subtitle</item>
     </style>
-
-<!--    <style name="actionBarActionOverflow" parent="Widget.AppCompat.ActionButton.Overflow">-->
-<!--        <item name="android:src">@drawable/three_dot_vertical</item>-->
-<!--        <item name="tint">@color/colorTextActionBar</item>-->
-<!--    </style>-->
-
-<!--    <style name="tool_bar" parent="actionBarStyle">-->
-<!--        <item name="android:layout_width">fill_parent</item>-->
-<!--        <item name="android:layout_height">@dimen/actionbar_height</item>-->
-<!--&lt;!&ndash;        <item name="colorControlNormal">@color/colorTextActionBar</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textColor">@color/md_theme_onBackground</item>&ndash;&gt;-->
-<!--    </style>-->
 
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:layout_width">0dip</item>
@@ -106,12 +91,10 @@
         <item name="android:lines">1</item>
         <item name="android:text">c:geo</item>
         <item name="android:textSize">@dimen/textSize_toolbarPrimary</item>
-<!--        <item name="android:textColor">@color/colorTextActionBar</item>-->
     </style>
 
     <style name="action_bar_subtitle" parent="action_bar_title">
         <item name="android:textSize">@dimen/textSize_toolbarSecondary</item>
-<!--        <item name="android:textColor">@color/colorTextHintActionBar</item>-->
         <item name="android:text" />
     </style>
 
@@ -195,7 +178,6 @@
     <style name="button_icon" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-<!--        <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>-->
     </style>
 
     <style name="button_icon_actionbar" parent="button_icon">
@@ -209,7 +191,6 @@
     </style>
 
     <style name="quicklaunch_button" parent="button_icon_accent">
-<!--        <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>-->
         <item name="backgroundTint">@color/md_theme_surfaceVariant</item>
         <item name="cornerRadius">12dip</item>
         <item name="strokeWidth">0dip</item>
@@ -224,11 +205,6 @@
         <item name="iconTintMode">multiply</item>
     </style>
 
-<!--     <style name="IconButtonThemeOverlay">-->
-<!--        &lt;!&ndash; For filled buttons, your theme's colorPrimary provides the default background color of the component &ndash;&gt;-->
-<!--        <item name="colorPrimary">@color/md_theme_onBackground</item>-->
-<!--    </style>-->
-
     <style name="shapeCircle" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -242,8 +218,6 @@
   <!-- Chips -->
 
     <style name="chip_choice" parent="@style/Widget.Material3.Chip.Filter">
-<!--        <item name="chipBackgroundColor">@color/chip_background_selector</item>-->
-<!--        <item name="android:textColor">@color/chip_textcolor_selector</item>-->
         <item name="android:padding">6dip</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
