@@ -56,6 +56,7 @@ import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
@@ -1630,7 +1631,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateBettercacherBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null;
+            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null && cache.getTier() != Tier.NONE;
             binding.bettercacherBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             if (isEnabled) {
                 binding.bettercacherSend.setOnClickListener(v -> {

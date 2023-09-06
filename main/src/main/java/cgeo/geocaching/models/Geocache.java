@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -41,6 +42,7 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
@@ -1498,7 +1500,7 @@ public class Geocache implements IWaypoint {
     public void setCategories(final Collection<Category> categories) {
         this.categories.clear();
         if (categories != null) {
-            this.categories.addAll(categories);
+            this.categories.addAll(CollectionStream.of(categories).filter(Category::isValid).toList());
         }
     }
 
@@ -2180,16 +2182,19 @@ public class Geocache implements IWaypoint {
             return search;
         }
 
+
+        SearchResult result = null;
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, handler);
+            result = GCConnector.getInstance().searchByGeocode(null, guid, handler);
+        } else {
+            final IConnector connector = ConnectorFactory.getConnector(geocode);
+            if (connector instanceof ISearchByGeocode) {
+                result = ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
+            }
         }
-
-        final IConnector connector = ConnectorFactory.getConnector(geocode);
-        if (connector instanceof ISearchByGeocode) {
-            return ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
-        }
-        return null;
+        AmendmentUtils.amendCaches(result);
+        return result;
     }
 
     public boolean isOffline() {

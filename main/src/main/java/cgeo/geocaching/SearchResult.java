@@ -285,6 +285,10 @@ public class SearchResult implements Parcelable {
         return DataStore.loadCaches(geocodes, loadFlags);
     }
 
+    public Set<Geocache> getCachesFromSearchResult() {
+        return getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+    }
+
     /**
      * Add the geocode to the search. No cache is loaded into the CacheCache
      */

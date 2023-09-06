@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.os.Build;
 import android.util.Pair;
@@ -65,15 +65,18 @@ public class CommonUtils {
         };
     }
 
-    /** executes a given action on each 'partitionSize' numer of elements of the given collection */
-    public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Action1<List<T>> action) {
+    /** executes a given action on each 'partitionSize' numer of elements of the given collection. If false is returned, action is abandoned */
+    public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Func1<List<T>, Boolean> action) {
         final List<T> sublist = new ArrayList<>(partitionSize);
         int cnt = 0;
         for (T element : coll) {
             sublist.add(element);
             cnt++;
             if (cnt == partitionSize) {
-                action.call(sublist);
+                final Boolean cont = action.call(sublist);
+                if (!Boolean.TRUE.equals(cont)) {
+                    return;
+                }
                 sublist.clear();
             }
         }
@@ -81,4 +84,5 @@ public class CommonUtils {
             action.call(sublist);
         }
     }
+
 }

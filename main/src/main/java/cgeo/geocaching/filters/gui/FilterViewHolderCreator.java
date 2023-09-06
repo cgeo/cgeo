@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.core.CategoryGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
@@ -13,9 +14,12 @@ import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
+import cgeo.geocaching.filters.core.TierGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.models.Category;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
@@ -140,6 +144,25 @@ public class FilterViewHolderCreator {
                         LocalizationUtils.getIntArray(R.array.cache_filter_stored_since_stored_values_d),
                         LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label),
                         LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label_short));
+                break;
+            case CATEGORY:
+                result = new CheckboxFilterViewHolder<>(
+                        new ValueGroupFilterAccessor<Category, CategoryGeocacheFilter>()
+                                .setFilterValueGetter(CategoryGeocacheFilter::getCategories)
+                                .setFilterValueSetter(CategoryGeocacheFilter::setCategories)
+                                .setGeocacheValueGetter((f, c) -> new HashSet<>(c.getCategories()))
+                                .setSelectableValues(Category.getAllCategoriesExceptUnknown())
+                                .setValueDisplayTextGetter(Category::getI18nText)
+                                .setValueDrawableGetter(c -> ImageParam.id(c.getIconId())),
+                        2, null);
+                break;
+            case TIER:
+                result = new CheckboxFilterViewHolder<>(
+                        ValueGroupFilterAccessor.<Tier, TierGeocacheFilter>createForValueGroupFilter()
+                                .setSelectableValues(Tier.values())
+                                .setValueDisplayTextGetter(Tier::getI18nText)
+                                .setValueDrawableGetter(t -> ImageParam.id(t.getIconId())),
+                        2, null);
                 break;
             case LOGICAL_FILTER_GROUP:
                 result = new LogicalFilterViewHolder();

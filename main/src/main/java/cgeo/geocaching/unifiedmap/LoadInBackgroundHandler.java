@@ -88,7 +88,7 @@ class LoadInBackgroundHandler {
                     // retrieving live caches (if enabled)
                     final boolean useLastSearchResult = null != lastSearchResult && null != previousViewport && previousViewport.includes(viewport);
                     final Viewport newViewport = viewport.resize(3.0);
-                    final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
+                    final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport, null /* filter */);
 
                     final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
 /* @todo: filtering
