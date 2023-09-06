@@ -127,6 +127,12 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragment);
+    }
+
     /**
      * searches recursively in all elements of given prefGroup for first occurrence of s
      * returns found preference on success, null else
@@ -151,12 +157,14 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
 
     public void initPreferences(final @XmlRes int preferenceResource, final String rootKey) {
         setPreferencesFromResource(preferenceResource, rootKey);
+        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragment);
+    }
+
+    protected void checkExtendedSettingsVisibility(final boolean forceShowAll) {
         lazyInitPreferenceKeys();
-        if (!Settings.extendedSettingsAreEnabled()) {
-            final PreferenceScreen prefScreen = getPreferenceScreen();
-            if (prefScreen != null) {
-                hideExtendedSettings(prefScreen, false);
-            }
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+        if (prefScreen != null) {
+            checkExtendedSettingsVisibilityHelper(prefScreen, forceShowAll);
         }
     }
 
@@ -168,7 +176,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
         }
     }
 
-    private int hideExtendedSettings(final PreferenceGroup start, final boolean forceShowAll) {
+    private int checkExtendedSettingsVisibilityHelper(final PreferenceGroup start, final boolean forceShowAll) {
         // if key of start group is included, all entries below will be included as well
         final boolean showAll = forceShowAll || ArrayUtils.contains(basicPreferences, start.getKey());
         // recursively test all items below
@@ -183,7 +191,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
                 pref.setVisible(false);
             }
             if (pref instanceof PreferenceGroup) {
-                visibleCount += hideExtendedSettings((PreferenceGroup) pref, showAll);
+                visibleCount += checkExtendedSettingsVisibilityHelper((PreferenceGroup) pref, showAll);
             }
         }
         if (visibleCount == 0) {

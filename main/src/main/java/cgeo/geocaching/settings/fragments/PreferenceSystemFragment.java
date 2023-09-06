@@ -33,6 +33,11 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
 
         findPreference(getString(R.string.pref_persistablefolder_testdir)).setVisible(BranchDetectionHelper.isDeveloperBuild());
 
+        findPreference(getString(R.string.pref_extended_settings_enabled)).setOnPreferenceChangeListener((pref, newValue) -> {
+            checkExtendedSettingsVisibility((boolean) newValue);
+            return true;
+        });
+
         findPreference(getString(R.string.pref_debug)).setOnPreferenceChangeListener((pref, newValue) -> {
             Log.setDebug((Boolean) newValue);
             return true;
