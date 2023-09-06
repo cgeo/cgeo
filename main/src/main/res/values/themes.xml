@@ -3,39 +3,24 @@
 
     <!-- theme for (nearly) all activities -->
 
-    <style name="cgeo" parent="Theme.Material3.DayNight"><!-- Theme.Material3.DayNight.DarkActionBar -->
+    <style name="cgeo" parent="Theme.Material3.DayNight">
         <!-- Action bar theming -->
         <item name="actionBarStyle">@style/actionBarStyle</item>
         <item name="android:statusBarColor">@color/md_theme_surface</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">@bool/isLightTheme</item>
 
-        <!--        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow</item>-->
+        <!-- UX component styles (some components doesn't look good enough by default, e.g. checkboxes/radiobuttons have to much padding) -->
+        <item name="checkboxStyle">@style/checkboxStyle</item>
+        <item name="radioButtonStyle">@style/radioButtonStyle</item>
 
-        <!-- UX component styles -->
-<!--        <item name="checkboxStyle">@style/checkboxStyle</item>-->
-<!--        <item name="radioButtonStyle">@style/radioButtonStyle</item>-->
-<!--        <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>-->
-
+        <!-- some components aren't fully compatible with AppCompat/Material, therefore we need these legacy style definitions -->
         <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
         <item name="dialogCornerRadius">@dimen/dialogCornerRadius</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
+        <item name="android:indeterminateTint">@color/md_theme_primary</item>
+        <item name="android:progressTint">@color/md_theme_primary</item>
 
         <!-- set Material theme colors -->
-<!--        <item name="colorOnBackground">@color/md_theme_onBackground</item>-->
-<!--        <item name="android:colorBackground">@color/colorBackground</item>-->
-
-<!--        <item name="colorOnPrimary">?colorOnBackground</item>-->
-<!--        <item name="colorPrimary">@color/colorAccent</item>-->
-<!--        <item name="colorPrimaryVariant">@color/colorAccent</item>-->
-
-<!--        <item name="colorOnSecondary">?colorOnBackground</item>-->
-<!--        <item name="colorSecondary">@color/colorAccent</item>-->
-<!--        <item name="colorSecondaryVariant">@color/colorAccent</item>-->
-
-        <!-- some components aren't fully compatible with AppCompat, therefore we need these legacy style definitions -->
-<!--        <item name="android:indeterminateTint">@color/colorAccent</item>-->
-<!--        <item name="android:progressTint">@color/colorAccent</item>-->
-
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -68,17 +53,9 @@
 
     </style>
 
-    <!-- theme for alert dialogs -->
-
-    <style name="materialAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-<!--        <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>-->
-<!--        <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>-->
-<!--        <item name="android:background">@color/md_theme_surfaceVariant</item>-->
-    </style>
-
     <!-- theme for dialogs with compact lists (e. g.: "pick a list" dialogs -->
 
-    <style name="cgeo.compactDialogs" parent="materialAlertDialogTheme">
+    <style name="cgeo.compactDialogs" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="android:listPreferredItemHeightSmall">40dp</item>
         <item name="android:checkedTextViewStyle">@style/checkboxStyleNoParent</item>
     </style>
