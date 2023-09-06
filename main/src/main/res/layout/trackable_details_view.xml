@@ -39,7 +39,7 @@
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/colorText"
+                android:textColor="@color/md_theme_onBackground"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="goal of the trackable"/>
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="10dip"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/colorText"
+                android:textColor="@color/md_theme_onBackground"
                 android:visibility="gone"
                 tools:visibility="visible"
                 tools:text="details of the trackable"/>

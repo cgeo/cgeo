@@ -24,7 +24,7 @@
         android:textSize="@dimen/textSize_detailsSecondary"
         android:visibility="gone"
         tools:text="hint"
-        android:textColor="@color/colorText"/>
+        android:textColor="@color/md_theme_onBackground"/>
     <RelativeLayout
         android:id="@+id/offline_hint_separator2"
         android:layout_above="@id/location_status"
