@@ -141,6 +141,14 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         setResult(NO_RESTART_NEEDED);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId() == android.R.id.home && getSupportFragmentManager().popBackStackImmediate()) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public BackupUtils getBackupUtils() {
         return backupUtils;
     }
