@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.IDifficultyTerrainMatrixNeededCapability;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -52,15 +53,17 @@ import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -312,7 +315,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
                 GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
                 GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
-                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
+                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN_MATRIX,
                 GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.EVENT_DATE, GeocacheFilterType.LOG_ENTRY);
     }
 
@@ -659,6 +662,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
         result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
         return result;
+    }
+
+    @Override
+    @NonNull
+    public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
+        return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
     }
 
     /**

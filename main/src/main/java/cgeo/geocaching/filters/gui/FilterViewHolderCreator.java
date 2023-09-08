@@ -88,6 +88,9 @@ public class FilterViewHolderCreator {
             case DIFFICULTY_TERRAIN:
                 result = new DifficultyAndTerrainFilterViewHolder();
                 break;
+            case DIFFICULTY_TERRAIN_MATRIX:
+                result = new DifficultyTerrainMatrixFilterViewHolder();
+                break;
             case STATUS:
                 result = new StatusFilterViewHolder();
                 break;
@@ -192,7 +195,11 @@ public class FilterViewHolderCreator {
     }
 
     public static <T extends IGeocacheFilter> IGeocacheFilter createFrom(final IFilterViewHolder<T> holder) {
-        return holder.createFilterFromView();
+        final IGeocacheFilter filter = holder.createFilterFromView();
+        if (filter == null || filter.getType() == null) {
+            throw new IllegalStateException("ViewHolder did not create valid filter: " + holder.getClass().getName());
+        }
+        return filter;
     }
 
     public static boolean isListInfoFilled() {

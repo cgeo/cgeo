@@ -139,12 +139,16 @@ public class ExpressionParser<T extends IExpression<T>> {
         return idx;
     }
 
+    public static ExpressionConfig parse(final String configString) {
+        final ExpressionConfig config = new ExpressionConfig();
+        parseConfiguration(configString, 0, config);
+        return config;
+    }
+
     /**
      * parses a configuration from string 'text', starting at position 'idx'. Config read is filled into 'result'.
-     * Method will ALWAYS fill in at least an empty List for key 'null' into result
      */
     public static int parseConfiguration(final String text, final int startIdx, @NonNull final Map<String, List<String>> result) {
-        result.put(null, new ArrayList<>());
         if (text == null) {
             return 0;
         }
@@ -158,6 +162,10 @@ public class ExpressionParser<T extends IExpression<T>> {
             idx = parseToNextDelim(text, idx, ESCAPE_CHARS, nextToken);
             if (idx < text.length() && text.charAt(idx) == KEYVALUE_SEPARATOR) {
                 currKey = nextToken.toString();
+                //special case: if = is right at the start, then this is the default list
+                if ("".equals(currKey) && idx == startIdx) {
+                    currKey = null;
+                }
             } else {
                 List<String> values = result.get(currKey);
                 if (values == null) {
@@ -192,8 +200,12 @@ public class ExpressionParser<T extends IExpression<T>> {
     public static String toConfig(final ExpressionConfig config) {
         final StringBuilder sb = new StringBuilder();
         boolean first = true;
-        if (config.get(null) != null) {
-            for (String value : config.get(null)) {
+        final List<String> defaultConfig = config.get(null);
+        if (defaultConfig != null && !defaultConfig.isEmpty()) {
+            if (defaultConfig.get(0).equals("")) {
+                sb.append(KEYVALUE_SEPARATOR);
+            }
+            for (String value : defaultConfig) {
                 if (!first) {
                     sb.append(CONFIG_SEPARATOR);
                 }

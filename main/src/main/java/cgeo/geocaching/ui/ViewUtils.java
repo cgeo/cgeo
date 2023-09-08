@@ -39,6 +39,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -231,6 +232,12 @@ public class ViewUtils {
         return tv;
     }
 
+    public static ImageView createIconView(final Context ctx, final int iconId) {
+        final ImageView iv = new ImageView(wrap(ctx));
+        iv.setImageResource(iconId);
+        return iv;
+    }
+
     public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
         final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
         text.applyTo(button);
@@ -304,6 +311,13 @@ public class ViewUtils {
         rp.setMargins(0, ViewUtils.dpToPixel(10), 0, ViewUtils.dpToPixel(10));
         llSep.addView(separatorView, rp);
         return llSep;
+    }
+
+    public static View createExpandableSeparatorPixelView(final Context context) {
+        final TextView view = new TextView(context, null, 0, R.style.separator_pixel);
+        view.setText("");
+        view.setTextSize(1);
+        return view;
     }
 
     /**
