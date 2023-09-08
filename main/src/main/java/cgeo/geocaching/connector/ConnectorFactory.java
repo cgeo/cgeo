@@ -28,6 +28,7 @@ import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
 import cgeo.geocaching.connector.wm.WaymarkingConnector;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -361,7 +362,14 @@ public final class ConnectorFactory {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        return searchByViewport(viewport, null);
+    }
+
+    @NonNull
+    public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
+        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        AmendmentUtils.amendCachesForViewport(result, viewport, filter);
+        return result;
     }
 
     @Nullable

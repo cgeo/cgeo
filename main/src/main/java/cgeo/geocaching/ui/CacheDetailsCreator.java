@@ -5,8 +5,10 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.models.Category;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -209,12 +211,12 @@ public final class CacheDetailsCreator {
     public void addCategories(final Geocache cache) {
         if (Settings.isBetterCacherConnectorActive() && !cache.getCategories().isEmpty()) {
             final NameValueLine nameValue = createNameValueLine(R.string.cache_categories);
-            nameValue.valueView.setText(CollectionStream.of(cache.getCategories()).map(c -> c.getI18nText()).toJoinedString(","));
+            nameValue.valueView.setText(CollectionStream.of(cache.getCategories()).map(Category::getI18nText).toJoinedString(","));
         }
     }
 
     public void addTier(final Geocache cache) {
-        if (Settings.isBetterCacherConnectorActive() && cache.getTier() != null) {
+        if (Settings.isBetterCacherConnectorActive() && Tier.isValid(cache.getTier())) {
             final NameValueLine nameValue = createNameValueLine(R.string.cache_tier);
             nameValue.valueView.setText(cache.getTier().getI18nText());
         }

@@ -1329,7 +1329,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(mapView.getViewport());
             final Viewport newViewport = mapView.getViewport().resize(3.0);
-            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
+            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport, mapOptions.filterContext.get());
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);

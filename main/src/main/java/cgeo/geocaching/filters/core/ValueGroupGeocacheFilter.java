@@ -160,6 +160,8 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String colName = getSqlColumnName();
+        final T sqlNullValue = getSqlNullValue();
+        boolean addNull = false;
         if (colName != null && !getValues().isEmpty()) {
             final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " IN (");
             final List<String> params = new ArrayList<>();
@@ -167,6 +169,9 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
             for (T rawV : getRawValues()) {
                 if (rawV == null) {
                     continue;
+                }
+                if (rawV.equals(sqlNullValue)) {
+                    addNull = true;
                 }
                 if (!first) {
                     sb.append(",");
@@ -176,10 +181,22 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
                 params.add(valueToSqlValue(rawV));
             }
             sb.append(")");
+            if (addNull) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + colName + " IS NULL");
+            }
             sqlBuilder.addWhere(sb.toString(), params);
+            if (addNull) {
+                sqlBuilder.closeWhere();
+            }
+
         } else {
             sqlBuilder.addWhereTrue();
         }
+    }
+
+    protected T getSqlNullValue() {
+        return null;
     }
 
     @Override

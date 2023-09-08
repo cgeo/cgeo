@@ -9,8 +9,10 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import cgeo.geocaching.utils.expressions.ExpressionParser;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Predicate;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -322,6 +324,34 @@ public class GeocacheFilter implements Cloneable {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }
     }
+
+    /** returns true if filter contains the given BaseFilter somewhere in its tree */
+    public <T extends BaseGeocacheFilter> boolean containsAny(final Class<T> filterClazz, final Predicate<T> filterCheck) {
+        return TRUE.equals(traverseFiltersInternal(this.getTree(),
+                f -> filterClazz.isAssignableFrom(f.getClass()) &&
+                        (filterCheck == null || filterCheck.test((T) f)) ? true : null));
+    }
+
+    /** traverses all (sub-)filters and performs a check on it. If checker returns null, traverse is continued. Otherwise traverse is stopped and value is returned */
+    private static <T> T traverseFiltersInternal(final IGeocacheFilter filterToCheck, final Func1<IGeocacheFilter, T> checker) {
+        if (filterToCheck == null) {
+            return null;
+        }
+        final T result = checker.call(filterToCheck);
+        if (result != null) {
+            return result;
+        }
+        if (filterToCheck.getChildren() != null) {
+            for (IGeocacheFilter child : filterToCheck.getChildren()) {
+                final T childResult = traverseFiltersInternal(child, checker);
+                if (childResult != null) {
+                    return childResult;
+                }
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Extracts quickfilter settings from this filter. For each quickfilter, an entry is returned

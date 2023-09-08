@@ -3152,7 +3152,7 @@ public class DataStore {
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
-        cache.setTier(Tier.of(cursor.getString(47)));
+        cache.setTier(Tier.getByName(cursor.getString(47)));
 
         return cache;
     }
@@ -3190,7 +3190,7 @@ public class DataStore {
                     null,
                     "100",
                     new LinkedList<>(),
-                    cursor -> new Category(cursor.getString(0)));
+                    cursor -> Category.getByName(cursor.getString(0)));
         });
     }
 

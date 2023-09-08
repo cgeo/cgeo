@@ -105,7 +105,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
 
             final boolean useLastSearchResult = null != lastSearchResult && null != lastViewport && lastViewport.includes(getViewport());
             final Viewport newViewport = getViewport().resize(3.0);
-            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
+            final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport, getFilterContext().get());
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             MapUtils.filter(result, getFilterContext());

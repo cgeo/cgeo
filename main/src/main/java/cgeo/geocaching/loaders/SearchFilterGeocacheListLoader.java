@@ -1,6 +1,7 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 
@@ -19,8 +20,10 @@ public class SearchFilterGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(),
+        final SearchResult result = nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(),
                 connector -> connector.searchByFilter(filter));
+        AmendmentUtils.amendCachesForFilter(result, filter);
+        return result;
     }
 
 }

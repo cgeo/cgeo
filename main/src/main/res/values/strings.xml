@@ -105,7 +105,7 @@
     <string name="cache_cat_bc_other">BC Other</string>
 
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Unknown</string>
+    <string name="cache_tier_none">None</string>
     <string name="cache_tier_bc_blue">BC Blue</string>
     <string name="cache_tier_bc_silver">BC Silver</string>
     <string name="cache_tier_bc_gold">BC Gold</string>
@@ -559,6 +559,8 @@
     <string name="cache_filter_stored_lists">Stored Lists</string>
     <string name="cache_filter_origin">Origin</string>
     <string name="cache_filter_stored_since">Last details update</string>
+    <string name="cache_filter_category">Category</string>
+    <string name="cache_filter_tier">Tier</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
