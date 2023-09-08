@@ -9,4 +9,4 @@
 ### General
 - New: Increased target SDK to 33
 - Change: Handling of database access to avoid "database not available" crashes
-
+- New: Upgraded GUI components to Material3
