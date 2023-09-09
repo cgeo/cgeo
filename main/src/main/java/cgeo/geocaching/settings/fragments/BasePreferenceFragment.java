@@ -38,7 +38,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // services (all)
             R.string.preference_screen_services,
             // appearance
-            R.string.pref_theme_setting, R.string.pref_wallpaper,
+            R.string.pref_theme_setting,
             R.string.pref_selected_language, R.string.pref_units_imperial,
             R.string.pref_cacheListInfo,
             // cache details
@@ -48,24 +48,23 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // map sources
             R.string.pref_mapsource, R.string.pref_fakekey_info_offline_maps, R.string.pref_fakekey_start_downloader,
             R.string.pref_persistablefolder_offlinemaps,
-            R.string.pref_fakekey_info_offline_mapthemes,
+            R.string.pref_fakekey_info_offline_mapthemes, R.string.pref_persistablefolder_offlinemapthemes,
             // map content & behavior
             R.string.pref_maptrail,
             R.string.pref_bigSmileysOnMap, R.string.pref_dtMarkerOnCacheIcon,
             R.string.pref_excludeWpOriginal, R.string.pref_excludeWpParking, R.string.pref_excludeWpVisited,
             R.string.pref_longTapOnMap,
             R.string.pref_mapRotation,
-            R.string.pref_proximityDistanceFar, R.string.pref_proximityDistanceNear, R.string.pref_proximityNotificationGeneral, R.string.pref_proximityNotificationSpecific, R.string.pref_proximityNotificationType,
             // logging
             R.string.pref_signature, R.string.pref_sigautoinsert, R.string.preference_category_logging_logtemplates, R.string.pref_trackautovisit, R.string.pref_log_offline,
             // offline data
-            // whole section disabled @todo: enable in extended config mode
+            // whole section disabled in basic mode
             // routing / navigation
             R.string.pref_fakekey_brouterDistanceThresholdTitle, R.string.pref_brouterDistanceThreshold,
             R.string.pref_defaultNavigationTool, R.string.pref_defaultNavigationTool2, R.string.pref_fakekey_navigationMenu,
             // system
             R.string.pref_persistablefolder_basedir,
-            R.string.pref_googleplayservices, R.string.pref_lowpowermode, R.string.pref_force_orientation_sensor, R.string.pref_extended_settings_enabled, R.string.pref_debug, R.string.pref_fakekey_generate_logcat, R.string.pref_fakekey_memory_dump, R.string.pref_fakekey_generate_infos_downloadmanager, R.string.pref_fakekey_view_settings,
+            R.string.pref_extended_settings_enabled, R.string.pref_debug, R.string.pref_fakekey_generate_logcat,
             // backup / restore
             R.string.pref_backup_logins, R.string.pref_fakekey_preference_startbackup, R.string.pref_fakekey_startrestore, R.string.pref_fakekey_startrestore_dirselect
     };
