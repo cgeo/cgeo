@@ -9,7 +9,6 @@ import cgeo.geocaching.models.Category;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.network.HttpRequest;
-import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.ContextLogger;
@@ -63,53 +62,44 @@ public final class BetterCacherAPI {
     //   (parameter coords is lat-center,lon-center,distance-in-km
     // - reply: same as for geocodes
     //
-    //API format to search by geocode for "full data". This is the "multiple query" explained here: api.bettercacher.org
-    // - request example: https://api.bettercacher.org/V2/GC5HP25,XYZ123,ABC987,GC1EKQ8,GC6C1B3,GC4TGJC,GC6HGCA,GC8KF5Y,GC7BA2P
+    //API format to search by geocode for "full data". Same URL as for "stump data" with additional flag
+    // - request example: https://api.bettercacher.org/cgeo/data?gccodes=XYZ123,ABC987,GC5HP25
     // - reply example:
-    // {
-    //    "geocaches": [
-    //        {
-    // "id": "2208",
-    // "name": "Vaters letzter Wille",
-    // "lat": "48.132984",
-    // "lng": "10.241067",
-    // "type": "unknown",
-    // "difficulty": "4_5",
-    // "terrain": "1_5",
-    // "size": "large",
-    // "gccode": "GC5HP25",
-    // "logs": [ //log data not used by c:geo // ],
-    // "platform": "gc",
-    // "state": "Germany",
-    // "country": "Bayern",
-    // "add": "2015-07-12 17:22:45",
-    // "parel": "false",
-    // "status": "0",
-    // "catmystery": "true",
-    // "catgadget": "false",
-    // "catnature": "false",
-    // "cathiking": "false",
-    // "catlocation": "true",
-    // "catother": "false",
-    // "catrecommendation": "true",
-    // "tier": "GOLD"
-    //        },
-    //        {
-    // "error": "true",
-    // "gccode": "XYZ123",
-    // "reason": "cache is not listed on BetterCacher"
-    //        },
-    //        {
-    // "error": "true",
-    // "gccode": "ABC987",
-    // "reason": "cache is not listed on BetterCacher"
-    //        }
-    //    ]
-    //}
+    // [
+    //    {
+    //        "gccode": "XYZ123",
+    //        "error": true,
+    //        "reason": "No data found for the provided gccode."
+    //    },
+    //    {
+    //        "gccode": "ABC987",
+    //        "error": true,
+    //        "reason": "No data found for the provided gccode."
+    //    },
+    //    {
+    //        "gccode": "GC5HP25",
+    //        "name": "Vaters letzter Wille",
+    //        "lat": "48.132984",
+    //        "lng": "10.241067",
+    //        "difficulty": "4.5",
+    //        "terrain": "1.5",
+    //        "type": "mystery",
+    //        "size": "large",
+    //        "country": "Germany",
+    //        "state": "Bayern",
+    //        "acceptedOn": "2015-07-12 17:22:45",
+    //        "tier": "GOLD",
+    //        "attributes": [
+    //            "mystery",
+    //            "location",
+    //            "recommendation"
+    //        ]
+    //    }
+    //]
 
     private static final String API_URL_STUMPS_FOR_GEOCODES = "https://api.bettercacher.org/cgeo/data?gccodes=";
     private static final String API_URL_STUMPS_FOR_COORDS = "https://api.bettercacher.org/cgeo/location?coords=";
-    private static final String API_URL_FULLDATA_FOR_GEOCODES = "https://api.bettercacher.org/V2/";
+    private static final String API_URL_FULLDATA_FOR_GEOCODES = "https://api.bettercacher.org/cgeo/data?fulldata=true&gccodes=";
 
     private static final Map<String, CacheType> CACHE_TYPE_MAP = new HashMap<>();
     private static final Map<String, CacheSize> CACHE_SIZE_MAP = new HashMap<>();
@@ -117,20 +107,21 @@ public final class BetterCacherAPI {
     private static final Map<String, Category> CACHE_CATEGORY_MAP = new HashMap<>();
 
     static {
-        //possible CacheType values: unknown, multi, traditional, wherigo, letter, earthcache
-        CACHE_TYPE_MAP.put("unknown", CacheType.MYSTERY);
+        //possible CacheType values: mystery, multi, traditional, wherigo, letter, earthcache
+        CACHE_TYPE_MAP.put("mystery", CacheType.MYSTERY);
         CACHE_TYPE_MAP.put("multi", CacheType.MULTI);
         CACHE_TYPE_MAP.put("traditional", CacheType.TRADITIONAL);
         CACHE_TYPE_MAP.put("wherigo", CacheType.WHERIGO);
         CACHE_TYPE_MAP.put("letter", CacheType.LETTERBOX);
         CACHE_TYPE_MAP.put("earthcache", CacheType.EARTH);
-        //possible CacheSize values: micro, small, regular, large, other, v (=virtual)
+        //possible CacheSize values: micro, small, regular, large, other, v (=virtual), not
         CACHE_SIZE_MAP.put("micro", CacheSize.MICRO);
         CACHE_SIZE_MAP.put("small", CacheSize.SMALL);
         CACHE_SIZE_MAP.put("regular", CacheSize.REGULAR);
         CACHE_SIZE_MAP.put("large", CacheSize.LARGE);
         CACHE_SIZE_MAP.put("other", CacheSize.OTHER);
         CACHE_SIZE_MAP.put("v", CacheSize.VIRTUAL);
+        CACHE_SIZE_MAP.put("not", CacheSize.NOT_CHOSEN);
         //possible Tier values: blue, silver, gold
         CACHE_TIER_MAP.put("blue", Tier.BC_BLUE);
         CACHE_TIER_MAP.put("silver", Tier.BC_SILVER);
@@ -166,9 +157,6 @@ public final class BetterCacherAPI {
 
         //full data
 
-        //"id": "2208",
-        @JsonProperty("id")
-        String id;
         // "name": "Vaters letzter Wille",
         @JsonProperty("name")
         String name;
@@ -181,54 +169,24 @@ public final class BetterCacherAPI {
         // "type": "unknown",
         @JsonProperty("type")
         String type;
-        // "difficulty": "4_5",
+        // "difficulty": "4.5",
         @JsonProperty("difficulty")
         String difficulty;
-        // "terrain": "1_5",
+        // "terrain": "1.5",
         @JsonProperty("terrain")
         String terrain;
         // "size": "large",
         @JsonProperty("size")
         String size;
-        // "platform": "gc",
-        @JsonProperty("platform")
-        String platform;
         // "state": "Germany",
         @JsonProperty("state")
         String state;
         // "country": "Bayern",
         @JsonProperty("country")
         String country;
-        // "add": "2015-07-12 17:22:45",
-        @JsonProperty("add")
-        String add;
-        // "parel": "false",
-        @JsonProperty("parel")
-        String parel;
-        // "status": "0",
-        @JsonProperty("status")
-        String status;
-        // "catmystery": "true",
-        @JsonProperty("catmystery")
-        String catmystery;
-        // "catgadget": "false",
-        @JsonProperty("catgadget")
-        String catgadget;
-        // "catnature": "false",
-        @JsonProperty("catnature")
-        String catnature;
-        // "cathiking": "false",
-        @JsonProperty("cathiking")
-        String cathiking;
-        // "catlocation": "true",
-        @JsonProperty("catlocation")
-        String catlocation;
-        // "catother": "false",
-        @JsonProperty("catother")
-        String catother;
-        // "catrecommendation": "true",
-        @JsonProperty("catrecommendation")
-        String catrecommendation;
+        // "acceptedOn": "2015-07-12 17:22:45",
+        @JsonProperty("acceptedOn")
+        String acceptedOn;
 
         private boolean hasFullData;
 
@@ -250,20 +208,7 @@ public final class BetterCacherAPI {
                     }
                 }
             }
-            addCategoryIf(catmystery, cats, Category.BC_MYSTERY);
-            addCategoryIf(catgadget, cats, Category.BC_GADGET);
-            addCategoryIf(cathiking, cats, Category.BC_HIKING);
-            addCategoryIf(catlocation, cats, Category.BC_LOCATION);
-            addCategoryIf(catnature, cats, Category.BC_NATURE);
-            addCategoryIf(catother, cats, Category.BC_OTHER);
-            addCategoryIf(catrecommendation, cats, Category.BC_RECOMMENDATION);
             return cats;
-        }
-
-        private void addCategoryIf(final String value, final List<Category> cats, final Category cat) {
-            if (value != null && Boolean.parseBoolean(value)) {
-                cats.add(cat);
-            }
         }
 
         public Tier getTier() {
@@ -292,9 +237,9 @@ public final class BetterCacherAPI {
             cache.setCoords(GeopointParser.parse(lat + " " + lng, null));
             // "type": "unknown",
             cache.setType(getFromJson(CACHE_TYPE_MAP, type, CacheType.UNKNOWN));
-            // "difficulty": "4_5",
+            // "difficulty": "4.5",
             cache.setDifficulty(getNumberFromJson(difficulty, 0));
-            // "terrain": "1_5",
+            // "terrain": "1.5",
             cache.setTerrain(getNumberFromJson(terrain, 0));
             // "size": "large", possible values are: micro, small, regular, large, other, v
             cache.setSize(getFromJson(CACHE_SIZE_MAP, size, CacheSize.UNKNOWN));
@@ -303,11 +248,7 @@ public final class BetterCacherAPI {
             cache.setLocation(getLocation(state, country));
 
             //Not used:
-            // "platform": "gc", // possible values are: oc, gc
-            // "parel": "false",
-            // "add": "2015-07-12 17:22:45",
-            // "status": "0",
-            // "logs": [ //log data not used by c:geo // ],
+            // "acceptedOn": "2015-07-12 17:22:45",
 
             return cache;
         }
@@ -341,15 +282,6 @@ public final class BetterCacherAPI {
             }
             return countryIsBlank ? state.trim() : state.trim() + ", " + country.trim();
         }
-    }
-
-    //Wrapper class for "full cache" answers
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class BetterCacherWrapper extends HttpResponse {
-
-        @JsonProperty("geocaches")
-        BetterCacherCache[] geocaches;
-
     }
 
     private BetterCacherAPI() {
@@ -386,23 +318,11 @@ public final class BetterCacherAPI {
 
     private static Map<String, BetterCacherCache> callAPI(final String uri, final boolean fullData) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "BetterCacherAPI.callAPI, uri=%1$s, fullData=%2$b", uri, fullData)) {
-            final HttpRequest httpRequest = new HttpRequest().uri(uri);
-            BetterCacherCache[] caches = null;
-            if (fullData) {
-                final BetterCacherWrapper wrapper = httpRequest.requestJson(BetterCacherWrapper.class, e -> {
-                    logException(uri, e);
-                    return null;
-                }).blockingGet();
-                if (wrapper != null) {
-                    caches = wrapper.geocaches;
-                }
-            } else {
-                caches = new HttpRequest().uri(uri)
+            final BetterCacherCache[] caches = new HttpRequest().uri(uri)
                         .requestJson(BetterCacherCache[].class, e -> {
                             logException(uri, e);
                             return null;
                         }).blockingGet();
-            }
             if (caches == null || caches.length == 0) {
                 cLog.add("empty");
                 return Collections.emptyMap();
