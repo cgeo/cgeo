@@ -5,8 +5,9 @@
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
 - 신규: 표시할 최소 이미지 크기 보장
 - 변경: 자체 로그 이미지에 대한 편집 옵션을 재설계했습니다.
+- New: Bettercacher integration
 
 ### 일반
 - 신규: 대상 SDK를 33으로 증가
 - 변경: "데이터베이스를 사용할 수 없음" 충돌을 방지하기 위한 데이터베이스 액세스 처리
-
+- New: Upgraded GUI components to Material3
