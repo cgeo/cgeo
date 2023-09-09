@@ -96,7 +96,7 @@
     <string name="cache_cat_bc_hiking">BC Turystyka piesza</string>
     <string name="cache_cat_bc_other">BC Inna</string>
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Nieznany</string>
+    <string name="cache_tier_none">Brak</string>
     <string name="cache_tier_bc_blue">BC Niebieski</string>
     <string name="cache_tier_bc_silver">BC Srebrny</string>
     <string name="cache_tier_bc_gold">BC Złoty</string>
@@ -521,6 +521,8 @@
     <string name="cache_filter_stored_lists">Zapisane listy</string>
     <string name="cache_filter_origin">Pochodzenie</string>
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
+    <string name="cache_filter_category">Kategoria</string>
+    <string name="cache_filter_tier">Poziom</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
