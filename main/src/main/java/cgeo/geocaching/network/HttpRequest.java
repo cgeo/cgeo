@@ -6,11 +6,11 @@ import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.network.Network.MEDIA_TYPE_APPLICATION_JSON;
 import static cgeo.geocaching.network.Network.MEDIA_TYPE_TEXT_PLAIN;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -147,7 +147,11 @@ public class HttpRequest {
 
         //Uri
         final String finalUri = uriBase == null ? uri : uriBase + uri;
-        final HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(finalUri)).newBuilder();
+        final HttpUrl httpUrl = HttpUrl.parse(finalUri);
+        if (httpUrl == null) {
+            throw new IllegalStateException("Non-parseable uri: " + finalUri);
+        }
+        final HttpUrl.Builder urlBuilder = httpUrl.newBuilder();
         if (!uriParams.isEmpty()) {
             urlBuilder.encodedQuery(uriParams.toString());
         }
@@ -177,6 +181,8 @@ public class HttpRequest {
         return builder;
     }
 
+
+    /** sets body to a simple key-value-pair list */
     public HttpRequest body(final Parameters params) {
         this.requestBodySupplier = () -> {
             final FormBody.Builder body = new FormBody.Builder();
@@ -190,26 +196,38 @@ public class HttpRequest {
         return this;
     }
 
-    public HttpRequest body(final Parameters params, final String fileFieldName, final String fileContentType, final File file) {
+    /**
+     * Sets body to Multipart-FORM, including one optional File body part.
+     * Set "file" to null to not pass a file. If "file" is not null, then "fileMediaType" must be set as well
+     */
+    public HttpRequest bodyForm(@Nullable final Parameters formParams, @Nullable final String fileFormFieldName, @Nullable final String fileMediaType, @Nullable final File file) {
         this.requestBodySupplier = () -> {
             final MultipartBody.Builder entity = new MultipartBody.Builder().setType(MultipartBody.FORM);
-            if (params != null) {
-                for (final ImmutablePair<String, String> param : params) {
+            if (formParams != null) {
+                for (final ImmutablePair<String, String> param : formParams) {
                     entity.addFormDataPart(param.left, param.right);
                 }
             }
-            entity.addFormDataPart(fileFieldName, file.getName(),
-                    RequestBody.create(file, MediaType.parse(fileContentType)));
+            if (file != null) {
+                final MediaType mediaType = MediaType.parse(fileMediaType);
+                if (mediaType == null) {
+                    throw new IllegalStateException("Invalid mediaType for file " + file + ": " + fileMediaType);
+                }
+                entity.addFormDataPart(fileFormFieldName == null ? "file" : fileFormFieldName, file.getName(),
+                        RequestBody.create(file, mediaType));
+            }
             return entity.build();
         };
         return this;
     }
 
+    /** Sets body to plain text */
     public HttpRequest body(final String text) {
         this.requestBodySupplier = () -> RequestBody.create(text, MEDIA_TYPE_TEXT_PLAIN);
         return this;
     }
 
+    /** Sets body to Json parsed from given object */
     public HttpRequest body(final Object jsonObject) {
         try {
             final String jsonString = JSON_MAPPER.writeValueAsString(jsonObject);
