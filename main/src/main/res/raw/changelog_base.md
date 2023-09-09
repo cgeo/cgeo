@@ -1,5 +1,6 @@
 ### Map
 - Updated Mapsforge and VTM libs to v0.20
+- Updated Google Maps renderer
 
 ### Cache details
 - New: Edit default value for log image caption prefix
