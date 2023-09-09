@@ -96,7 +96,7 @@
     <string name="cache_cat_bc_hiking">BC Wandern</string>
     <string name="cache_cat_bc_other">BC Andere</string>
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Unbekannt</string>
+    <string name="cache_tier_none">Keine</string>
     <string name="cache_tier_bc_blue">BC Blau</string>
     <string name="cache_tier_bc_silver">BC Silber</string>
     <string name="cache_tier_bc_gold">BC Gold</string>
@@ -166,6 +166,7 @@
     <string name="log_smilies">Smileys</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Bilder</string>
+    <string name="log_edit_image">Bild bearbeiten</string>
     <string name="log_image_caption">Überschrift</string>
     <string name="log_image_description">Beschreibung</string>
     <string name="log_image_scale">Skalierung</string>
@@ -510,6 +511,8 @@
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
+    <string name="cache_filter_category">Kategorie</string>
+    <string name="cache_filter_tier">Rang</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -1023,6 +1026,7 @@
     <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
     <string name="init_sigautoinsert">Automatisch einfügen</string>
     <string name="init_offlinelogs_homescreen">Offlinelogs anzeigen</string>
+    <string name="init_log_image_default_prefix_title">Standardname für Logbilder</string>
     <string name="init_summary_offlinelogs_homescreen">Ein Offline-Logzähler (z.B. \"+ 1\") wird neben deinem Online-Fundzähler auf dem Startbildschirm angezeigt, wenn du Logs hast, die noch nicht übermittelt wurden.</string>
     <string name="init_loaddirectionimg">Richtungs-Grafik</string>
     <string name="init_summary_loaddirectionimg">Richtungs-Pfeil laden wenn nötig (nur Basis-Mitglieder)</string>
