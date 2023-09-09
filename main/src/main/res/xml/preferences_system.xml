@@ -83,11 +83,6 @@
             android:title="@string/init_create_memory_dump"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_fakekey_generate_infos_downloadmanager"
-            android:layout="@layout/preference_button"
-            android:title="@string/about_system_write_infos_downloadmanager"
-            app:iconSpaceReserved="false" />
-        <Preference
             android:key="@string/pref_fakekey_view_settings"
             android:layout="@layout/preference_button"
             android:title="@string/view_settings"

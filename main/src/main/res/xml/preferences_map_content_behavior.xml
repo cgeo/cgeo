@@ -59,22 +59,6 @@
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_excludeWpOriginal"
-            android:summary="@string/init_summary_hidewp_original"
-            android:title="@string/init_hidewp"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludeWpParking"
-            android:summary="@string/init_summary_hidewp_parking"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludeWpVisited"
-            android:summary="@string/init_summary_hidewp_visited"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_zoomincludingwaypoints"
             android:summary="@string/init_zoomincludingwaypoints_description"
             android:title="@string/init_zoomincludingwaypoints"
@@ -95,14 +79,6 @@
             android:key="@string/pref_showRouteMenu"
             android:summary="@string/init_summary_show_routing_menu"
             android:title="@string/init_show_routing_menu"
-            app:iconSpaceReserved="false" />
-        <ListPreference
-            android:defaultValue="@string/pref_maprotation_manual"
-            android:entries="@array/maprotation"
-            android:entryValues="@array/maprotationValues"
-            android:key="@string/pref_mapRotation"
-            android:summary="%s"
-            android:title="@string/settings_title_map_rotation"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
