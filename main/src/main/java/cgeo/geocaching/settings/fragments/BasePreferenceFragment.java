@@ -79,13 +79,15 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
         public CharSequence prefTitle;
         public CharSequence prefSummary;
         public int prefCategoryIconRes;
+        public boolean isBasicSetting;
 
-        PrefSearchDescriptor(final String baseKey, final String prefKey, final CharSequence prefTitle, final CharSequence prefSummary, @DrawableRes final int prefCategoryIconRes) {
+        PrefSearchDescriptor(final String baseKey, final String prefKey, final CharSequence prefTitle, final CharSequence prefSummary, @DrawableRes final int prefCategoryIconRes, final boolean isBasicSetting) {
             this.baseKey = baseKey;
             this.prefKey = prefKey;
             this.prefTitle = prefTitle;
             this.prefSummary = prefSummary;
             this.prefCategoryIconRes = prefCategoryIconRes;
+            this.isBasicSetting = isBasicSetting;
         }
     }
 
@@ -139,7 +141,6 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
      */
     private void doSearch(final String baseKey, final ArrayList<PrefSearchDescriptor> data, final PreferenceGroup start) {
         lazyInitPreferenceKeys();
-        final boolean showAll = Settings.extendedSettingsAreEnabled();
         final int prefCount = start.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = start.getPreference(i);
@@ -149,9 +150,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
                     pref.setKey(baseKey + "-" + (nextKey++));
                 }
             }
-            if (showAll || ArrayUtils.contains(basicPreferences, pref.getKey()) || pref instanceof PreferenceTextAlwaysShow) {
-                data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon));
-            }
+            data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon, ArrayUtils.contains(basicPreferences, pref.getKey()) || pref instanceof PreferenceTextAlwaysShow));
             if (pref instanceof PreferenceGroup) {
                 doSearch(baseKey, data, (PreferenceGroup) pref);
             }
