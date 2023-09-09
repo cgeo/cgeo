@@ -96,7 +96,6 @@
     <string name="cache_cat_bc_hiking">BC Vaellus</string>
     <string name="cache_cat_bc_other">BC Muu</string>
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Tuntematon</string>
     <string name="cache_tier_bc_blue">BC Sininen</string>
     <string name="cache_tier_bc_silver">BC Hopea</string>
     <string name="cache_tier_bc_gold">BC Kulta</string>
