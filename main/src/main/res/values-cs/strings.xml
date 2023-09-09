@@ -96,7 +96,6 @@
     <string name="cache_cat_bc_hiking">BC Turistika</string>
     <string name="cache_cat_bc_other">BC Ostatní</string>
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Neznámé</string>
     <string name="cache_tier_bc_blue">BC Modré</string>
     <string name="cache_tier_bc_silver">BC Stříbrné</string>
     <string name="cache_tier_bc_gold">BC Zlaté</string>
