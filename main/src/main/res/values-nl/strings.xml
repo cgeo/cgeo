@@ -96,7 +96,7 @@
     <string name="cache_cat_bc_hiking">BC Wandelen</string>
     <string name="cache_cat_bc_other">BC Overig</string>
     <!-- cache Tier -->
-    <string name="cache_tier_unknown">Onbekend</string>
+    <string name="cache_tier_none">Geen</string>
     <string name="cache_tier_bc_blue">BC Blauw</string>
     <string name="cache_tier_bc_silver">BC Zilver</string>
     <string name="cache_tier_bc_gold">BC Goud</string>
@@ -511,6 +511,8 @@
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filter_stored_since">Laatste details update</string>
+    <string name="cache_filter_category">Categorie</string>
+    <string name="cache_filter_tier">Niveau</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
