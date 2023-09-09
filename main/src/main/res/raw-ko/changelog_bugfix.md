@@ -1,5 +1,7 @@
 ##
+- New: Increased target SDK to 33 (due to Play Store requirements)
 - 수정: 동일한 파일에 여러 경로가 포함된 GPX 가져오기
+- Fix: Favorite ratio > 100% under certain conditions
 
 ##
 - 수정: 호감점수에 추가할 때 충돌이 발생함 (특정 조건에서)
