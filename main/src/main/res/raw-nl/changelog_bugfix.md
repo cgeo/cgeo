@@ -1,5 +1,7 @@
 ##
+- Nieuw: Doel SDK naar 33 verhoogd (vanwege de vereisten van de Play Store)
 - Oplossing: GPX import met meerdere tracks in hetzelfde bestand
+- Oplossing: Favoriet ratio > 100% onder bepaalde voorwaarden
 
 ##
 - Oplossing: Crash bij het toevoegen aan favorieten (onder bepaalde omstandigheden)
