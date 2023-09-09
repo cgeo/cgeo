@@ -1201,7 +1201,7 @@ class GCWebAPI {
         final Parameters params = new Parameters();
         params.put("guid", UUID.randomUUID().toString());
 
-        final PostLogImageResponse postImageResponse = apiReq().uri("/web/v1/LogDrafts/images").body(params, "qqfilename", "image/jpeg", image.getFile()).requestJson(PostLogImageResponse.class).blockingGet();
+        final PostLogImageResponse postImageResponse = apiReq().uri("/web/v1/LogDrafts/images").bodyForm(params, "qqfilename", "image/jpeg", image.getFile()).requestJson(PostLogImageResponse.class).blockingGet();
         if (!postImageResponse.success) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
