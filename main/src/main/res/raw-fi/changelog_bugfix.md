@@ -1,5 +1,7 @@
 ##
+- New: Increased target SDK to 33 (due to Play Store requirements)
 - Korjaa: GPX tuonti useilla reiteillä samassa tiedostossa
+- Fix: Favorite ratio > 100% under certain conditions
 
 ##
 - Korjaa: Kaatuminen suosikkeihin lisättäessä (tietyin edellytyksin)
