@@ -1,6 +1,9 @@
 package cgeo.geocaching.utils.expressions;
 
+import cgeo.geocaching.utils.functions.Action1;
+
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -218,15 +221,15 @@ public class ExpressionParserTest {
         assertThat(config).hasSize(1);
         assertThat(config.get(null)).containsExactly("simple");
 
-        //stability check: check that even on strange input values or empty input at least an empty list for null-key is present in result
+        //stability checks
         config.clear();
         assertThat(ExpressionParser.parseConfiguration("eins", 10, config)).isEqualTo("eins".length());
-        assertThat(config).hasSize(1);
-        assertThat(config.get(null)).isEmpty();
+        assertThat(config).hasSize(0);
+        assertThat(config.get(null)).isNull();
 
         assertThat(ExpressionParser.parseConfiguration(null, 10, config)).isEqualTo(0);
-        assertThat(config).hasSize(1);
-        assertThat(config.get(null)).isEmpty();
+        assertThat(config).hasSize(0);
+        assertThat(config.get(null)).isNull();
     }
 
     @Test
@@ -262,4 +265,45 @@ public class ExpressionParserTest {
             assertThat(exp2.call(paramExpextedResultPairs[i])).isEqualTo(paramExpextedResultPairs[i + 1]);
         }
     }
+
+    @Test
+    public void parseConfigs()  {
+        assertConfig("", c -> { });
+        assertConfig("one:two", c -> c.putDefaultList(Arrays.asList("one", "two")));
+        assertConfig("testList=one", c -> c.putList("testList", "one"));
+        assertConfig("one:two:testList=testOne:testList=testTwo", c -> {
+            c.putList("testList", "testOne", "testTwo");
+            c.putDefaultList(Arrays.asList("one", "two"));
+        });
+        assertConfig("=:testList=one", c -> {
+            c.putList("testList", "one");
+            c.putDefaultList(Collections.singletonList(""));
+        });
+        assertConfig(" ", c -> c.putDefaultList(Collections.singletonList(" ")));
+        assertConfig("=:", c -> c.putDefaultList(Arrays.asList("", "")));
+
+        assertConfig("=", c -> c.putDefaultList(Collections.singletonList("")));
+
+        assertConfig("\\=\\=", c -> c.putDefaultList(Collections.singletonList("==")));
+    }
+
+    private static void assertConfig(final String expectedConfigString, final Action1<ExpressionConfig> changer) {
+        final ExpressionConfig config = new ExpressionConfig();
+        changer.call(config);
+        final String configString = ExpressionParser.toConfig(config);
+        assertThat(configString).isEqualTo(expectedConfigString);
+
+        final ExpressionConfig parsedConfig = ExpressionParser.parse(configString);
+        //assert that config is identical
+        assertThat(parsedConfig.getDefaultList()).as("Default list not equal").isEqualTo(config.getDefaultList());
+
+        assertThat(parsedConfig.keySet()).as("Different keys").containsExactlyInAnyOrderElementsOf(config.keySet());
+        for (String key : config.keySet()) {
+            if (key == null) {
+                continue;
+            }
+            assertThat(parsedConfig.get(key)).as("Content differs for key '" + key + "'").isEqualTo(config.get(key));
+        }
+    }
+
 }

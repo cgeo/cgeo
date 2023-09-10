@@ -109,6 +109,7 @@ class GCWebAPI {
         private String notFoundBy = null;
         private String difficulty = null;
         private String terrain = null;
+        private String difficultyTerrainCombis = null;
         private String placedFrom;
         private String placedTo;
         private String keywords;
@@ -322,6 +323,21 @@ class GCWebAPI {
             return this;
         }
 
+        // Example: m=1-4.5%2C2.5-4.5%2C3-5%2C4.5-5%2C5-3.5%2C5-4%2C5-4.5
+        public WebApiSearch setDifficultyTerrainCombis(final Collection<ImmutablePair<Float, Float>> combis) {
+            final StringBuilder sb = new StringBuilder();
+            boolean first = true;
+            for (ImmutablePair<Float, Float> combi : combis) {
+                if (!first) {
+                    sb.append(",");
+                }
+                first = false;
+                sb.append(getCombiString(combi.left, combi.right));
+            }
+            this.difficultyTerrainCombis = sb.toString();
+            return this;
+        }
+
         /**
          * Returns a string specifying a range from 1-5 (in 0.5-steps) as used for parameters difficulty and terrain
          */
@@ -336,6 +352,10 @@ class GCWebAPI {
                 return to + "-" + from;
             }
             return from + "-" + to;
+        }
+
+        private String getCombiString(final float diff, final float terrain) {
+           return diff + "-" + terrain;
         }
 
         @WorkerThread
@@ -415,6 +435,10 @@ class GCWebAPI {
 
             if (this.terrain != null) {
                 params.put("t", this.terrain);
+            }
+
+            if (this.difficultyTerrainCombis != null) {
+                params.put("m", this.difficultyTerrainCombis);
             }
 
             if (this.placedFrom != null || this.placedTo != null) {
@@ -1230,6 +1254,30 @@ class GCWebAPI {
         }
 
         return new ImmutablePair<>(StatusCode.NO_ERROR, postImageResponse.url);
+    }
+
+    @NonNull
+    public static Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
+        // Request URI: see code below
+        // Answer is a json string array, something like: ["1-4.5","2.5-4.5","3-5","4.5-5","5-3.5","5-4","5-4.5"]
+
+        final String[] rawCombis = apiReq().uri("/web/v1/statistics/difficultyterrainmatrix/needed")
+                .requestJson(String[].class).blockingGet();
+        if (rawCombis == null || rawCombis.length == 0) {
+            return Collections.emptyList();
+        }
+        final List<ImmutablePair<Float, Float>> result = new ArrayList<>(rawCombis.length);
+        try {
+            for (String rawCombi : rawCombis) {
+                final String[] parts = rawCombi.split("-");
+                final float difficulty = Float.parseFloat(parts[0]);
+                final float terrain = Float.parseFloat((parts[1]));
+                result.add(new ImmutablePair<>(difficulty, terrain));
+            }
+        } catch (Exception ex) {
+            Log.w("Problems parsing as list of dt-combis: " + Arrays.asList(rawCombis));
+        }
+        return result;
     }
 
     private static HttpRequest httpReq() {

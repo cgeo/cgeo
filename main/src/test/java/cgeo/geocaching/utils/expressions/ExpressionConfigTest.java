@@ -2,6 +2,7 @@ package cgeo.geocaching.utils.expressions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ExpressionConfigTest {
-    private static final List<String> stringListSingle = new ArrayList<>(Arrays.asList("singleValue"));
+    private static final List<String> stringListSingle = new ArrayList<>(Collections.singletonList("singleValue"));
     private static final List<String> stringListMulti = new ArrayList<>(Arrays.asList("value1", "value2", "value3"));
     private static final String keyString = "testKey";
 

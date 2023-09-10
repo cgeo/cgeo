@@ -19,6 +19,7 @@ public enum GeocacheFilterType {
     DIFFICULTY("difficulty", R.string.cache_filter_difficulty, R.string.cache_filtergroup_details, DifficultyGeocacheFilter::new),
     TERRAIN("terrain", R.string.cache_filter_terrain, R.string.cache_filtergroup_details, TerrainGeocacheFilter::new),
     DIFFICULTY_TERRAIN("difficulty_terrain", R.string.cache_filter_difficulty_terrain, R.string.cache_filtergroup_details, DifficultyAndTerrainGeocacheFilter::new),
+    DIFFICULTY_TERRAIN_MATRIX("difficulty_terrain_matrix", R.string.cache_filter_difficulty_terrain_matrix, R.string.cache_filtergroup_details, DifficultyTerrainMatrixGeocacheFilter::new),
     RATING("rating", R.string.cache_filter_rating, R.string.cache_filtergroup_details, RatingGeocacheFilter::new),
     STATUS("status", R.string.cache_filter_status, R.string.cache_filtergroup_basic, StatusGeocacheFilter::new),
     ATTRIBUTES("attributes", R.string.cache_filter_attributes, R.string.cache_filtergroup_details, AttributesGeocacheFilter::new),
