@@ -132,15 +132,16 @@ public final class MapMarkerUtils {
 
         // marker foreground
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
-        // doubleSize = "Big icons for logged caches" enabled AND no offline log
-        final boolean doubleSize = showBigSmileys(cacheListType) && (mainMarkerId != cache.getType().markerId);
-        if (useEmoji > 0 && !doubleSize) {
+
+        // Main icon
+        if (showBigSmileys(cacheListType) && !mainIconIsTypeIcon(cache, cacheListType)) {
+            // log icon in bigSmiley mode
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, getCacheScalingFactor(applyScaling)));
+        } else if (cache.getAssignedEmoji() != 0) {
             // custom icon
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "cacheIcon", applyScaling), Gravity.CENTER));
-        } else if (doubleSize) {
-            // main icon (type icon / custom cache icon)
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, getCacheScalingFactor(applyScaling)));
         } else {
+            // type icon
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
             // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
@@ -170,12 +171,16 @@ public final class MapMarkerUtils {
         } else if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL, getCacheScalingFactor(applyScaling)));
         }
-        // top-left: will attend / found / not found / offline-logs
+        // top-left: will attend / found / not found / offline-logs - if not logged and custom emoji assigned or bigSmileyMode - show icon
         if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT, getCacheScalingFactor(applyScaling)));
+            } else if (cache.getAssignedEmoji() != 0) {
+                insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, applyScaling), Gravity.TOP | Gravity.LEFT));
             }
+        } else if (!mainIconIsTypeIcon(cache, cacheListType) || cache.getAssignedEmoji() != 0) {
+            insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, applyScaling), Gravity.TOP | Gravity.LEFT));
         }
 
         // bottom-right: user modified coords / final waypoint defined
@@ -754,27 +759,27 @@ public final class MapMarkerUtils {
             final float size;
             switch (wantedSize) {
                 case "listMarkerForCache":
-                    scalingFactor = 1.2f * (getCacheScalingFactor(applyScaling));
+                    scalingFactor = 1.2f * getCacheScalingFactor(applyScaling);
                     size = SIZE_LIST_MARKER_DP;
                     break;
                 case "listMarkerForWaypoint":
-                    scalingFactor = 1.2f * (getWaypointScalingFactor(applyScaling));
+                    scalingFactor = 1.2f * getWaypointScalingFactor(applyScaling);
                     size = SIZE_LIST_MARKER_DP;
                     break;
                 case "iconMarkerForWaypoint":
-                    scalingFactor = 0.6f * (getWaypointScalingFactor(applyScaling));
+                    scalingFactor = 0.6f * getWaypointScalingFactor(applyScaling);
                     size = SIZE_LIST_MARKER_DP;
                     break;
                 case "iconMarkerForCache":
-                    scalingFactor = 0.6f * (getCacheScalingFactor(applyScaling));
+                    scalingFactor = 0.6f * getCacheScalingFactor(applyScaling);
                     size = SIZE_LIST_MARKER_DP;
                     break;
                 case "cacheIcon":
-                    scalingFactor = (float) (Math.sqrt(0.5) * 1.15 * (getCacheScalingFactor(applyScaling)));
+                    scalingFactor = (float) (Math.sqrt(0.5) * 1.15 * getCacheScalingFactor(applyScaling));
                     size = SIZE_CACHE_MARKER_DP;
                     break;
                 default:
-                    scalingFactor = 1.2f * (getCacheScalingFactor(applyScaling));
+                    scalingFactor = 1.2f * getCacheScalingFactor(applyScaling);
                     size = SIZE_CACHE_MARKER_DP;
             }
 
@@ -793,30 +798,29 @@ public final class MapMarkerUtils {
         return applyScaling ? scalingFactorWpIcons : 1;
     }
 
-    private static boolean isNonDefaultIcon(final Geocache cache, final CacheListType cacheListType) {
+    private static boolean mainIconIsTypeIcon(final Geocache cache, final CacheListType cacheListType) {
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
-        return mainMarkerId != cache.getType().markerId;
+        return mainMarkerId == cache.getType().markerId;
     }
 
     private static Drawable getEmojiMarker(final Resources res, final int emoji, final boolean applyScaling) {
-        final Drawable emojiBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), getWaypointScalingFactor(applyScaling));
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, emojiBg.getIntrinsicWidth(), emojiBg.getIntrinsicHeight());
-        markerBuilder.withInset(new InsetBuilder(emojiBg));
+        final Drawable markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), getWaypointScalingFactor(applyScaling));
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
+        markerBuilder.withInset(new InsetBuilder(markerBg));
         markerBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, emoji, "iconMarkerForWaypoint", applyScaling)));
         return buildLayerDrawable(markerBuilder, 2, 2);
     }
 
     private static Drawable getTypeMarker(final Resources res, final Geocache cache, final boolean applyScaling) {
-        final Drawable emojiBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), getCacheScalingFactor(applyScaling));
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, emojiBg.getIntrinsicWidth(), emojiBg.getIntrinsicHeight());
-        markerBuilder.withInset(new InsetBuilder(emojiBg));
+        final Drawable markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), getCacheScalingFactor(applyScaling));
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
+        markerBuilder.withInset(new InsetBuilder(markerBg));
         // cache type background color
         final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
         final Drawable backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
-        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling) * 0.4f), Gravity.CENTER));
-        // TODO: Show cache icon - needs all icons to be cropped
-        //markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, getCacheScalingFactor(applyScaling) * 0.4f));
+        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling) * 0.43f), Gravity.CENTER));
+        markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, getCacheScalingFactor(applyScaling) * 0.43f));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
 
