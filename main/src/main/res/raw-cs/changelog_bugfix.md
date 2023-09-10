@@ -1,7 +1,8 @@
 ##
-- New: Increased target SDK to 33 (due to Play Store requirements)
+- Novinka: Zvýšení cílové SDK na 33 (kvůli požadavkům Obchodu Play)
 - Oprava: Import GPX s více stopami v jednom souboru
-- Fix: Favorite ratio > 100% under certain conditions
+- Oprava: Přidání poměru stran > 100 % mezi oblíbené za určitých podmínek
+- Fix: Navigation line lost on screen rotation with Google Maps
 
 ##
 - Oprava: Pád při přidávání do oblíbených položek (za určitých podmínek)
