@@ -1073,6 +1073,8 @@
     <string name="init_force_orientation_sensor_title">Oriëntatie-sensor</string>
     <string name="init_force_orientation_sensor_note">Op sommige apparaten werkt het kompas niet juist, waardoor de verkeerde richting wordt aangegeven. In dit geval kan de GPS-sensor een beter resultaat geven.</string>
     <string name="init_force_orientation_sensor">Forceer gebruik van oriëntatiesensor</string>
+    <string name="init_title_extended_settings">Uitgebreide instellingen</string>
+    <string name="init_summary_extended_settings">Instellingen voor de meer ervaren gebruiker weergeven</string>
     <string name="init_create_memory_dump">Geheugendump maken</string>
     <string name="init_memory_dump">Geheugendump</string>
     <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
