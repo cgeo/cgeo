@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.ScalableDrawable;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
@@ -48,6 +49,12 @@ public class InsetBuilder {
     public InsetBuilder(final Drawable drawable, final int pos) {
         this.drawable = drawable;
         this.pos = pos;
+    }
+
+    public InsetBuilder(final Drawable drawable, final int pos, final float scalingFactor) {
+        this.drawable = drawable;
+        this.pos = pos;
+        this.scalingFactor = scalingFactor;
     }
 
     public InsetBuilder(final int id, final int pos, final boolean doubleSize, final float scalingFactor) {
