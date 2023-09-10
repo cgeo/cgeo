@@ -1222,7 +1222,7 @@ class GCWebAPI {
 
         final HttpResponse attachResponse = apiReq()
                 .uri("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid)
-                .body(attachImageRequest)
+                .bodyJson(attachImageRequest)
                 .headers("X-Verification-Token", requestVerificationToken)
                 .request().blockingGet();
         if (!attachResponse.isSuccessful()) {

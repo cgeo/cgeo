@@ -78,7 +78,7 @@ public class HttpRequestTest {
         final String jsonResp = "{ \"id\": 13, \"name\": \"Schmidt\" }";
 
         mockServerEnqueue(new MockResponse().setResponseCode(200).setBody(jsonResp));
-        final JsonHolder resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").body(jsonReq).requestJson(JsonHolder.class).blockingGet();
+        final JsonHolder resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo").bodyJson(jsonReq).requestJson(JsonHolder.class).blockingGet();
         final RecordedRequest req = mockServerTakeRequest();
 
         assertThat(req.getMethod()).isEqualTo("POST");

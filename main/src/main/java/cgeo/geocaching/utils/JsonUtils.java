@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonUtils {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    public static final ObjectMapper mapper = new ObjectMapper();
     public static final ObjectReader reader = mapper.reader();
     public static final ObjectWriter writer = mapper.writer();
 
