@@ -12,3 +12,4 @@
 - New: Increased target SDK to 33
 - Change: Handling of database access to avoid "database not available" crashes
 - New: Upgraded GUI components to Material3
+- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
