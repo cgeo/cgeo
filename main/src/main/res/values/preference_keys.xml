@@ -280,6 +280,7 @@
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for offlinedata screen -->
+    <string translatable="false" name="preference_menu_offlinedata">preference_menu_offlinedata</string>
     <string translatable="false" name="preference_screen_offlinedata">preference_screen_offlinedata</string>
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_logimages">logimages</string>
@@ -319,6 +320,7 @@
     <!-- categories default navigation / secondary navigation -->
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>
     <string translatable="false" name="pref_defaultNavigationTool2">defaultNavigationTool2</string>
+    <string translatable="false" name="pref_fakekey_navigationMenu">fakekey_preference_navigationMenu</string>
 
 
     <!-- ============================================================================================================================================================================== -->
@@ -366,6 +368,9 @@
 
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
+
+    <!-- category extended settings -->
+    <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
 
     <!-- category debug -->
     <string translatable="false" name="pref_debug">debug</string>

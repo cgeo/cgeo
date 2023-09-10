@@ -9,7 +9,7 @@
     <PreferenceCategory
         android:title="@string/settings_title_offline_routing"
         app:iconSpaceReserved="false">
-        <Preference android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
 
         <Preference
             android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
@@ -88,7 +88,7 @@
     <PreferenceCategory
         android:title="@string/init_default_navigation_tool"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_default_navigation_tool_description"
             app:iconSpaceReserved="false" />
         <ListPreference
@@ -103,7 +103,7 @@
     <PreferenceCategory
         android:title="@string/init_secondary_navigation_tool"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_default_navigation_tool_2_description"
             app:iconSpaceReserved="false" />
         <ListPreference
@@ -118,12 +118,13 @@
     <PreferenceCategory
         android:title="@string/settings_title_navigation_menu"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_navigation_menu_description"
             app:iconSpaceReserved="false" />
 
         <!-- Navigation Navigation -->
         <Preference
+            android:key="@string/pref_fakekey_navigationMenu"
             app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationNavigationFragment"
             app:title="@string/settings_title_navigation_menu"
             app:iconSpaceReserved="false" />

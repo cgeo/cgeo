@@ -9,7 +9,7 @@ import android.os.Bundle;
 public class PreferenceServicesFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_services, rootKey);
+        initPreferences(R.xml.preferences_services, rootKey);
     }
 
     @Override

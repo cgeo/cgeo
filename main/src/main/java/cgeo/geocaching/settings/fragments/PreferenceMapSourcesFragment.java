@@ -28,7 +28,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_map_sources, rootKey);
+        initPreferences(R.xml.preferences_map_sources, rootKey);
         prefMapSources = findPreference(getString(R.string.pref_mapsource));
 
         initMapSourcePreference();

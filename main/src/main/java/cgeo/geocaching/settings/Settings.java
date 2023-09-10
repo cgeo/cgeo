@@ -2337,4 +2337,7 @@ public class Settings {
         return getBoolean(R.string.pref_mapActionbarAutohide, false);
     }
 
+    public static boolean extendedSettingsAreEnabled() {
+        return getBoolean(R.string.pref_extended_settings_enabled, false);
+    }
 }

@@ -431,11 +431,12 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
         @Override
         protected Cursor query(@NonNull final String searchTerm) {
+            final boolean showExtended = Settings.extendedSettingsAreEnabled();
             final SettingsSearchSuggestionCursor resultCursor = new SettingsSearchSuggestionCursor();
             if (searchTerm.length() > 2) {
                 synchronized (searchdata) {
                     for (BasePreferenceFragment.PrefSearchDescriptor item : searchdata) {
-                        if (StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) {
+                        if ((StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) && (showExtended || item.isBasicSetting)) {
                             resultCursor.addItem(item.prefTitle, item.prefSummary, item.prefKey, item.prefCategoryIconRes);
                         }
                     }

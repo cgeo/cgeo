@@ -15,7 +15,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_backup, rootKey);
+        initPreferences(R.xml.preferences_backup, rootKey);
 
         final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
