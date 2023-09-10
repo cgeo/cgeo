@@ -96,6 +96,7 @@
     <string name="cache_cat_bc_hiking">BC Turistika</string>
     <string name="cache_cat_bc_other">BC Ostatní</string>
     <!-- cache Tier -->
+    <string name="cache_tier_none">Žádná</string>
     <string name="cache_tier_bc_blue">BC Modré</string>
     <string name="cache_tier_bc_silver">BC Stříbrné</string>
     <string name="cache_tier_bc_gold">BC Zlaté</string>
@@ -520,6 +521,8 @@
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
+    <string name="cache_filter_category">Kategorie</string>
+    <string name="cache_filter_tier">Úroveň</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
