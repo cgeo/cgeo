@@ -398,6 +398,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     public void finish(final SaveMode saveMode) {
         saveLog(saveMode);
+        if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
+            Settings.setLastCacheLog(lastSavedState.log);
+        }
         super.finish();
     }
 
@@ -458,9 +461,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.logOffline(LogCacheActivity.this, logEntry);
-                        if (!logEntry.log.isEmpty()) {
-                            Settings.setLastCacheLog(logEntry.log);
-                        }
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                     }
