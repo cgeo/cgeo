@@ -507,10 +507,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (null != proximityNotification) {
             proximityNotification.setTextNotifications(activity);
         }
-        if (mapOptions.mapState != null) {
-            this.targetGeocode = mapOptions.mapState.getTargetGeocode();
-            this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
-        }
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
         HideActionBarUtils.setContentView(activity, MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot(), true);
@@ -562,7 +558,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.onCreate(savedInstanceState);
         mapView.setListId(mapOptions.fromList);
 
-        mapView.onMapReady(() -> initializeMap(trailHistory));
+        mapView.onMapReady(() -> {
+            initializeMap(trailHistory);
+            if (mapOptions != null && mapOptions.mapState != null) {
+                setTarget(mapOptions.mapState.getLastNavTarget(), mapOptions.mapState.getTargetGeocode());
+            }
+        });
 
         FilterUtils.initializeFilterBar(activity, mapActivity);
         MapUtils.updateFilterBar(activity, mapOptions.filterContext);
