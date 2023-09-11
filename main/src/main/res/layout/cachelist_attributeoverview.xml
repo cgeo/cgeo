@@ -32,7 +32,7 @@
             android:paddingRight="6dp"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_detailsSecondary"
-            android:textColor="@color/md_theme_onBackground"
+            android:textColor="@color/colorText"
             android:visibility="visible"/>
     </LinearLayout>
 </ScrollView>

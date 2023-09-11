@@ -1928,7 +1928,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     handleImageClick(activity, cache, description);
                     //display various fixes
                     fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
-                    fixTextColor(description, R.color.md_theme_background);
+                    fixTextColor(description, R.color.colorBackground);
                     final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
                     fixOldGeocheckerLink(activity, cache, description, gcLinkInfo);
                 }

@@ -32,7 +32,7 @@
             android:layout_marginLeft="6dp"
             android:layout_centerVertical="true"
 	        android:textSize="@dimen/textSize_detailsPrimary"
-            android:textColor="@color/md_theme_onBackground"/>
+            android:textColor="@color/colorText"/>
         <ImageView
             android:id="@+id/item_info"
             android:layout_width="18dp"

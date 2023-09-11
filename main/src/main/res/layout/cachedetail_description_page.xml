@@ -22,7 +22,7 @@
             android:linksClickable="true"
             android:textIsSelectable="true"
             android:textSize="@dimen/textSize_detailsPrimary"
-            android:textColor="@color/md_theme_onBackground"
+            android:textColor="@color/colorText"
             android:visibility="gone"
             tools:text="This is the cache description. It might be very long..."
             tools:visibility="visible" />
@@ -79,7 +79,7 @@
                     android:layout_marginRight="60dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
-                    android:textColor="@color/md_theme_onBackground"
+                    android:textColor="@color/colorText"
                     android:textIsSelectable="false" />
 
                 <Button
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dip"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/md_theme_onBackground" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <!-- Hint and spoiler-images box -->
@@ -144,7 +144,7 @@
                 android:linksClickable="true"
                 android:textIsSelectable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/md_theme_onBackground"
+                android:textColor="@color/colorText"
                 tools:text="A hint for finding the cache..." />
 
             <TextView
@@ -156,7 +156,7 @@
                 android:drawablePadding="3dip"
                 android:text="@string/cache_menu_spoilers"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/md_theme_onBackground"
+                android:textColor="@color/colorText"
                 app:drawableLeftCompat="@drawable/log_img_icon" />
         </LinearLayout>
 
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:linksClickable="true"
                 android:textSize="@dimen/textSize_detailsPrimary"
-                android:textColor="@color/md_theme_onBackground"
+                android:textColor="@color/colorText"
                 tools:text="Personal note text\nline 2\nline 3" />
 
             <View style="@style/separator_horizontal"
