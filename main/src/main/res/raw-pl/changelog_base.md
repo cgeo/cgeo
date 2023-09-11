@@ -12,4 +12,4 @@
 - Nowość: Zwiększony docelowy SDK do 33
 - Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
 - Nowość: Aktualizacja komponentów GUI do Material3
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- Zmiana: Tylko podstawowe ustawienia będą wyświetlane domyślnie. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
