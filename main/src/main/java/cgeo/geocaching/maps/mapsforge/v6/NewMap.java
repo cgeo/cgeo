@@ -1085,7 +1085,7 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(MapUtils.getColoredValue(title));
+            actionBar.setTitle(title);
         }
     }
 
@@ -1111,7 +1111,7 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setSubtitle(MapUtils.getColoredValue(subtitle));
+            actionBar.setSubtitle(subtitle);
         }
     }
 

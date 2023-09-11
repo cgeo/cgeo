@@ -161,7 +161,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                     }
 
                     //mark view as "selected"
-                    viewHolder.itemView.setBackgroundColor(CgeoApplication.getInstance().getResources().getColor(R.color.colorBackgroundSelected));
+                    viewHolder.itemView.setBackgroundColor(CgeoApplication.getInstance().getResources().getColor(R.color.md_theme_surfaceVariant));
                 }
             }
 

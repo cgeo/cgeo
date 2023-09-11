@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/filterbar"
-    android:background="@color/colorBackgroundActionBar">
+    android:background="@color/md_theme_surfaceVariant">
 
     <Space
         android:id="@+id/actionBarSpacer"
@@ -30,13 +30,13 @@
             style="@style/image_small_prepend_text"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_menu_filter"
-            app:tint="@color/colorTextActionBar" />
+            app:tint="@color/md_theme_onSurfaceVariant" />
 
         <TextView
             android:id="@+id/filter_text"
             style="@style/text_label"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/colorTextActionBar"
+            android:textColor="@color/md_theme_onSurfaceVariant"
             android:textSize="@dimen/textSize_detailsSecondary"
             tools:text="currently active filter" />
 
@@ -56,7 +56,7 @@
             style="@style/image_small_prepend_text"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_menu_sort_alphabetically"
-            app:tint="@color/colorTextActionBar" />
+            app:tint="@color/md_theme_onSurfaceVariant" />
 
         <TextView
             android:id="@+id/sort_text"
@@ -64,7 +64,7 @@
             android:layout_gravity="center_vertical"
             android:paddingRight="6dp"
             android:text="@string/caches_sort_difficulty"
-            android:textColor="@color/colorTextActionBar"
+            android:textColor="@color/md_theme_onSurfaceVariant"
             android:textSize="@dimen/textSize_detailsSecondary"
             tools:text="currently active sort" />
     </LinearLayout>

@@ -7,6 +7,6 @@
     android:padding="8dp"
     android:background="@drawable/helper_bcg"
     android:gravity="center"
-    android:textColor="@color/text_icon"
+    android:textColor="@color/md_theme_onPrimaryContainer"
     android:textIsSelectable="false"
     android:textSize="@dimen/textSize_detailsPrimary" />

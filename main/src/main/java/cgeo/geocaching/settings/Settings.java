@@ -152,7 +152,7 @@ public class Settings {
     /**
      * Possible values of the Dark Mode Setting.
      * <p>
-     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link DarkModeSetting#getPreferenceValue(Context)} and received via {@link DarkModeSetting#valueOf(String)}.
+     * The Dark Mode Setting can be stored in {@link android.content.SharedPreferences} as String by using {@link ThemeModeSetting#getPreferenceValue(Context)} and received via {@link ThemeModeSetting#valueOf(String)}.
      * <p>
      * Additionally, the equivalent {@link AppCompatDelegate}-Mode can be received via {@link #getModeId()}.
      *
@@ -160,7 +160,7 @@ public class Settings {
      * @see AppCompatDelegate#MODE_NIGHT_NO
      * @see AppCompatDelegate#MODE_NIGHT_FOLLOW_SYSTEM
      */
-    public enum DarkModeSetting {
+    public enum ThemeModeSetting {
 
         /**
          * Always use light mode.
@@ -180,7 +180,7 @@ public class Settings {
         private final @StringRes
         int preferenceValue;
 
-        DarkModeSetting(final @AppCompatDelegate.NightMode int modeId, final @StringRes int preferenceValue) {
+        ThemeModeSetting(final @AppCompatDelegate.NightMode int modeId, final @StringRes int preferenceValue) {
             this.modeId = modeId;
             this.preferenceValue = preferenceValue;
         }
@@ -308,7 +308,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), prefsV0.getInt(getKey(R.string.pref_livelist), 1) != 0);
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
-            e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
@@ -1275,20 +1274,19 @@ public class Settings {
         setAppTheme(getAppTheme(context));
     }
 
-    public static void setAppTheme(final DarkModeSetting setting) {
+    public static void setAppTheme(final ThemeModeSetting setting) {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
 
-    private static DarkModeSetting getAppTheme(final @NonNull Context context) {
-        return DarkModeSetting.valueOf(getString(R.string.pref_theme_setting, getBoolean(R.string.old_pref_skin, false) ?
-                DarkModeSetting.LIGHT.getPreferenceValue(context) : DarkModeSetting.DARK.getPreferenceValue(context)));
+    private static ThemeModeSetting getAppTheme(final @NonNull Context context) {
+        return ThemeModeSetting.valueOf(getString(R.string.pref_theme_setting, ThemeModeSetting.SYSTEM_DEFAULT.getPreferenceValue(context)));
     }
 
-    private static boolean isDarkThemeActive(final @NonNull Context context, final DarkModeSetting setting) {
-        if (setting == DarkModeSetting.SYSTEM_DEFAULT) {
+    private static boolean isDarkThemeActive(final @NonNull Context context, final ThemeModeSetting setting) {
+        if (setting == ThemeModeSetting.SYSTEM_DEFAULT) {
             return isDarkThemeActive(context);
         } else {
-            return setting == DarkModeSetting.DARK;
+            return setting == ThemeModeSetting.DARK;
         }
     }
 

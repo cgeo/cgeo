@@ -7,6 +7,7 @@
     android:orientation="horizontal" >
 
     <TextView
+        style="@style/action_bar_title"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,12 +17,9 @@
         android:layout_toLeftOf="@id/switchAB"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/textSize_toolbarPrimary"
-        android:textColor="@color/colorTextActionBar"
-        android:text="@string/menu_lists_pocket_queries"
-        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
+        android:text="@string/menu_lists_pocket_queries" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switchAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +27,6 @@
         android:layout_centerVertical="true"
         android:gravity="right|center_vertical"
         android:textSize="@dimen/textSize_toolbarSecondary"
-        android:textColor="@color/colorTextActionBar"
         android:text="@string/show_all"
         tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 </RelativeLayout>

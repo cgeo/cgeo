@@ -64,7 +64,7 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
         final int[] result = new int[textIds.length];
 
         for (int idx = 0; idx < textIds.length; idx++) {
-            final Button b = (Button) inflater.inflate(R.layout.button_view, this, false);
+            final Button b = (Button) inflater.inflate(R.layout.button_view_outlined, this, false);
             final int id = View.generateViewId();
             b.setId(id);
             b.setText(textIds[idx]);

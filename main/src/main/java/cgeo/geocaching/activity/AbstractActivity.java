@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.google.android.material.elevation.SurfaceColors;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
@@ -175,6 +176,9 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
      * Common actions for all onCreate functions.
      */
     private void onCreateCommon() {
+        // match status bar color with actionbar
+        getWindow().setStatusBarColor(SurfaceColors.SURFACE_2.getColor(this));
+
         try {
             supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         } catch (final AndroidRuntimeException ex) {

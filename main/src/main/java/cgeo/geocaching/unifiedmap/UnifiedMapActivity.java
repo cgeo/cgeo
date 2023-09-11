@@ -458,7 +458,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity {
     private void setTitle() {
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(MapUtils.getColoredValue(calculateTitle()));
+            actionBar.setTitle(calculateTitle());
         }
     }
 

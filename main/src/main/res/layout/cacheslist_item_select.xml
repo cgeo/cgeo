@@ -5,7 +5,6 @@
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackgroundDialog"
     android:foreground="?android:attr/selectableItemBackground" >
 
     <!-- cache name and icon -->

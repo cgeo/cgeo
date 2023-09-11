@@ -241,7 +241,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private final Handler displayHandler = new DisplayHandler(this);
 
     private void setTitle() {
-        getActionBar().setTitle(MapUtils.getColoredValue(calculateTitle()));
+        getActionBar().setTitle(calculateTitle());
     }
 
     private String calculateTitle() {
@@ -273,7 +273,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (StringUtils.isEmpty(subtitle)) {
             return;
         }
-        getActionBar().setSubtitle(MapUtils.getColoredValue(subtitle));
+        getActionBar().setSubtitle(subtitle);
     }
 
     private String calculateSubtitle() {

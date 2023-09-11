@@ -160,7 +160,7 @@ public class GeoItemSelectorUtils {
         if (cache != null && cache.isArchived()) { // red color
             tv.setTextColor(ContextCompat.getColor(context, R.color.archived_cache_color));
         } else {
-            tv.setTextColor(ContextCompat.getColor(context, R.color.colorText));
+            tv.setTextColor(ContextCompat.getColor(context, R.color.md_theme_onBackground));
         }
     }
 
