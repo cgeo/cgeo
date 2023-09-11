@@ -819,8 +819,8 @@ public final class MapMarkerUtils {
         final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
         final Drawable backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
-        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling) * 0.43f), Gravity.CENTER));
-        markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, getCacheScalingFactor(applyScaling) * 0.43f));
+        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling) * 0.5f), Gravity.CENTER));
+        markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, getCacheScalingFactor(applyScaling) * 0.5f));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
 
