@@ -12,4 +12,4 @@
 - Novinka: Zvýšeno cílové SDK na 33
 - Změna: Zpracování přístupu k databázi, aby se zabránilo pádům "databáze není k dispozici"
 - Novinka: Upgrade součástí grafického uživatelského rozhraní na Material3
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- Změna: Ve výchozím nastavení se zobrazí pouze základní nastavení. Přejděte do Nastavení => Rozšířená nastavení a povolte rozšířené nastavení
