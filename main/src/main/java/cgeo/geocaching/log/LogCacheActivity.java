@@ -322,6 +322,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(logEntry.reportProblem);
         cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
         binding.favoriteCheck.setChecked(logEntry.favorite);
+        //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
+        if (logEntry.favorite) {
+            binding.favoriteCheck.setVisibility(View.VISIBLE);
+        }
         binding.logPassword.setText(logEntry.password);
 
         imageListFragment.setImages(logEntry.logImages);
@@ -354,9 +358,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
             final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
+            binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
             if (favoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
-                binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
