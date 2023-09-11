@@ -1085,6 +1085,8 @@
     <string name="init_force_orientation_sensor_title">Senzor orientace</string>
     <string name="init_force_orientation_sensor_note">Na některých zařízeních se běžný senzor otáčení chová nevyzpytatelně a udává špatný směr. V takových případech může alternativní senzor (snímač orientace) poskytnout lepší výsledky.</string>
     <string name="init_force_orientation_sensor">Vynutit použití orientačního senzoru</string>
+    <string name="init_title_extended_settings">Rozšířené nastavení</string>
+    <string name="init_summary_extended_settings">Zobrazit nastavení pro zkušenější uživatele</string>
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
