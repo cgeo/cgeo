@@ -197,6 +197,46 @@ public class CacheArtefactParserTest {
     }
 
     @Test
+    public void testCreateParseableVisitedWaypointTextAndParseIt() {
+        final Waypoint wp = new Waypoint("name", WaypointType.FINAL, true);
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        wp.setCoords(gp);
+        wp.setVisited(true);
+        wp.setPrefix("PR");
+        wp.setUserNote("user note with {v} visited text");
+        assertThat(CacheArtefactParser.getParseableText(wp)).isEqualTo(
+                "@name (F) {v} " + toParseableWpString(gp) + " " +
+                        "\"user note with {v} visited text\"");
+
+        final CacheArtefactParser cacheArtefactParser = createParser("Prefix");
+        final Collection<Waypoint> parsedWaypoints = cacheArtefactParser.parse(CacheArtefactParser.getParseableText(wp)).getWaypoints();
+        assertThat(parsedWaypoints).hasSize(1);
+        final Waypoint newWp = parsedWaypoints.iterator().next();
+        assertWaypoint(newWp, wp);
+        assertThat(newWp.isVisited()).isTrue();
+    }
+
+    @Test
+    public void testCreateParseableWaypointVisitedTextAndParseIt() {
+        final Waypoint wp = new Waypoint("name", WaypointType.FINAL, true);
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        wp.setCoords(gp);
+        wp.setPrefix("PR");
+        wp.setUserNote("user note with {v} visited text");
+        assertThat(CacheArtefactParser.getParseableText(wp)).isEqualTo(
+                "@name (F) " + toParseableWpString(gp) + " " +
+                        "\"user note with {v} visited text\"");
+
+        final CacheArtefactParser cacheArtefactParser = createParser("Prefix");
+        final Collection<Waypoint> parsedWaypoints = cacheArtefactParser.parse(CacheArtefactParser.getParseableText(wp)).getWaypoints();
+        assertThat(parsedWaypoints).hasSize(1);
+        final Waypoint newWp = parsedWaypoints.iterator().next();
+        assertWaypoint(newWp, wp);
+        assertThat(newWp.isVisited()).isFalse();
+
+    }
+
+    @Test
     public void testCreateParseableWaypointTextWithoutCoordinateAndParseIt() {
         final Waypoint wp = new Waypoint("name", WaypointType.FINAL, false);
         wp.setCoords(null);
