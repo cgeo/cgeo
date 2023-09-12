@@ -1,14 +1,14 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Tier;
+import cgeo.geocaching.models.bettercacher.Tier;
 
 public class TierGeocacheFilter extends ValueGroupGeocacheFilter<Tier, Tier> {
 
 
     @Override
     public Tier getRawCacheValue(final Geocache cache) {
-        return cache.getTier() == null ? Tier.NONE : cache.getTier();
+        return cache.getBcTier() == null ? Tier.NONE : cache.getBcTier();
     }
 
     @Override

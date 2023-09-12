@@ -56,9 +56,9 @@ import cgeo.geocaching.models.CacheArtefactParser;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
@@ -1187,8 +1187,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addTerrain(cache);
             details.addRating(cache);
 
-            details.addCategories(cache);
-            details.addTier(cache);
+            details.addBetterCacher(cache);
 
             // favorite count
             favoriteLine = details.add(R.string.cache_favorite, "");
@@ -1631,7 +1630,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateBettercacherBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null && cache.getTier() != Tier.NONE;
+            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getBcTier() != null && cache.getBcTier() != Tier.NONE;
             binding.bettercacherBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             if (isEnabled) {
                 binding.bettercacherSend.setOnClickListener(v -> {

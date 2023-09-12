@@ -8,7 +8,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.TierGeocacheFilter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Tier;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.settings.Settings;
 
 import androidx.annotation.NonNull;
@@ -117,9 +117,9 @@ public class BetterCacherConnector extends AbstractConnector implements ICacheAm
     private static void amend(final BetterCacherAPI.BetterCacherCache bcCache, final Geocache cache) {
         if (bcCache != null) {
             if (Tier.isValid(bcCache.getTier())) {
-                cache.setTier(bcCache.getTier());
+                cache.setBcTier(bcCache.getTier());
             }
-            cache.setCategories(bcCache.getCategories());
+            cache.setBcCategories(bcCache.getCategories());
         }
     }
 
