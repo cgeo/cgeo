@@ -1,15 +1,16 @@
 ### Karte
 - Mapsforge und VTM-Bibliotheken auf v0.20 aktualisiert
-- Updated Google Maps renderer
+- Google Maps Bibliothek aktualisiert
+- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- New: Show custom cache icon as marker for related waypoints
 
 ### Cache-Details
-- New: Edit default value for log image caption prefix
-- New: Ensure minimum image size for display
+- Neu: Standardpräfix für die Beschriftung des Logbildes ändern
+- Neu: Mindestgröße für Bilder in Cachelistings
 - Änderung: Neues Design der Bearbeitungsoptionen für eigene Logbilder
 - Neu: Bettercacher Integration
 
 ### Allgemein
 - Neu: targetSDK auf 33 erhöht
 - Änderung: Art des Datenbankzugriffs optimiert, um Abstürze zu vermeiden, wenn die Datenbank nicht verfügbar ist
-- New: Upgraded GUI components to Material3
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => System => Erweiterte Einstellungen kannst du alle sichtbar machen
