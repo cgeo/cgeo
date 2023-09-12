@@ -3,6 +3,7 @@
 - Poprawka: Import GPX z wieloma ścieżkami w tym samym pliku
 - Poprawka: Współczynnik ulubionych mógł w szczególnych przypadkach przekroczyć 100%
 - Fix: Navigation line lost on screen rotation with Google Maps
+- Poprawka: Indywidualna trasa nie była usuwana z map Google po usunięciu
 
 ##
 - Poprawka: Awarie podczas dodawania do ulubionych (pod pewnymi warunkami)
