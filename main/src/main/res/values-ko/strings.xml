@@ -96,6 +96,7 @@
     <string name="cache_cat_bc_hiking">BC 등산</string>
     <string name="cache_cat_bc_other">BC 기타</string>
     <!-- cache Tier -->
+    <string name="cache_tier_none">없음</string>
     <string name="cache_tier_bc_blue">BC 파랑</string>
     <string name="cache_tier_bc_silver">BC 은</string>
     <string name="cache_tier_bc_gold">BC 금</string>
@@ -491,6 +492,7 @@
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
     <string name="cache_filter_difficulty_terrain">난이도 / 지형</string>
+    <string name="cache_filter_difficulty_terrain_matrix">난이도 / 지형 등급</string>
     <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">캐시 속성</string>
@@ -505,6 +507,8 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_category">분류</string>
+    <string name="cache_filter_tier">계층</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
@@ -579,6 +583,8 @@
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
+    <string name="cache_filter_difficulty_terrain_matrix_use_gc_live_matrix_info">geocaching.com에 대한 온라인 검색이 실행될 때마다 등급을 81er 라이브 데이터로 대체해야 하는지 여기에서 확인하세요.</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">gc.com으로 채우기</string>
     <string name="cache_filter_nested_filter_modify">편집</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
@@ -1064,6 +1070,8 @@
     <string name="init_force_orientation_sensor_title">방향 센서</string>
     <string name="init_force_orientation_sensor_note">일부기기는 일반 회전 벡터 센서가 이상하게 작동하여 잘못된 방향으로 표시됩니다. 이 경우, 별도의 센서(방향센서)가 더 좋은 결과를 제공할 수 있습니다.</string>
     <string name="init_force_orientation_sensor">방향센서 강제 사용</string>
+    <string name="init_title_extended_settings">확장 설정</string>
+    <string name="init_summary_extended_settings">고급 사용자를 위한 설정 표시</string>
     <string name="init_create_memory_dump">메모리 덤프 생성</string>
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
