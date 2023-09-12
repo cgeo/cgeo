@@ -1,6 +1,8 @@
 ### Map
 - Updated Mapsforge and VTM libs to v0.20
 - Updated Google Maps renderer
+- Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- Show custom cache icon as marker for related waypoints
 
 ### Cache details
 - New: Edit default value for log image caption prefix
