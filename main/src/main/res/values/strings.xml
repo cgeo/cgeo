@@ -658,7 +658,6 @@
 
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Include caches without D/T</string>
 
-    <string name="cache_filter_difficulty_terrain_matrix_use_gc_live_matrix_info">Check here if matrix should be replaced by 81er live data whenever an online search to geocaching.com is executed</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Fill with gc.com</string>
 
     <string name="cache_filter_nested_filter_modify">modify</string>
