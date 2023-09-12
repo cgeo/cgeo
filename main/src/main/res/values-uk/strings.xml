@@ -121,7 +121,6 @@
     <string name="log_image_attach">Прикріпити зображення</string>
     <string name="log_image_stored">Існуючий</string>
     <string name="log_image_camera">Новий</string>
-    <string name="log_image_delete">Видалити</string>
     <string name="log_image_caption">Підпис</string>
     <string name="log_image_description">Опис</string>
     <string name="log_image_scale">Масштабування</string>

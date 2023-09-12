@@ -11,9 +11,9 @@
 
 ### Szczegóły skrytki
 - Nowość: przycisk 'Zapisz i wgraj' podczas edycji osobistej notatki
-- Change: Replace most update progress dialogs by background actions
+- Zmiana: Zastąpiono większość okienek z postępem przez akcje w tle
 - Zmiana: Używaj tylko niepustych logów dla opcji „powtórz ostatni log”
-- New: Display logging errors
+- Nowość: Wyświetlaj błędy w rejestrowaniu
 - Nowość: Zezwalaj na wybieranie, kopiowanie itp. opisu obrazu (EXIF info)
 
 ### Ogólne
@@ -26,9 +26,9 @@
 - Nowość: Filtr daty wydarzenia dla nadchodzących wydarzeń
 - Zmiana: Podczas filtrowania dat ustaw tryb „W stosunku do dzisiaj” jako domyślny
 - Nowość: Wyświetlaj informacje na ekranie głównym dla nieprzeczytanych wiadomości (opcjonalnie)
-- New: Quick launch item for message center
-- New: Make last bottom navigation item customizable
+- Nowość: Szybkie uruchamianie dla centrum wiadomości
+- Nowość: Możliwość dostosowania ostatniego elementu dolnej nawigacji
 - Nowość: zaktualizowano zintegrowany BRouter
 - Nowość: Dodano interfejs do OrganicMaps dla nawigacji
 - Poprawka: Znaki zakodowane w HTML w nazwie ostatnio widzianego przedmiotu podróżnego
-- Change: Removed outdated Twitter support
+- Zmiana: Usunięto przestarzałą obsługę Twittera

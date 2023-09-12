@@ -1119,6 +1119,7 @@
     <string name="pn_tone_only">Tylko ton</string>
     <string name="pn_text_only">Tylko tekst</string>
     <string name="pn_tone_and_text">Ton i tekst</string>
+    <string name="pn_enabled">Włącz powiadomienia zbliżeniowe</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Mapa</string>
     <string name="map_source_google_satellite">Google: Satelita</string>
@@ -1701,6 +1702,7 @@
     <string name="map_gm_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
+    <string name="other_settings">Inne ustawienia</string>
     <string name="map_show_caches_title">Pokaż skrytki:</string>
     <string name="map_show_waypoints_title">Pokaż punkty nawigacji:</string>
     <string name="map_show_other_title">Pokaż inne:</string>
