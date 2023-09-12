@@ -3,6 +3,7 @@
 - Oplossing: GPX import met meerdere tracks in hetzelfde bestand
 - Oplossing: Favoriet ratio > 100% onder bepaalde voorwaarden
 - Oplossing: Navigatielijn verloren bij scherm rotatie met Google Maps
+- Oplossing: Individuele route werd niet verwijderd uit Google Maps bij verwijderen
 
 ##
 - Oplossing: Crash bij het toevoegen aan favorieten (onder bepaalde omstandigheden)
