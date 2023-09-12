@@ -497,6 +497,7 @@
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
     <string name="cache_filter_difficulty_terrain">Schwierigkeit / Gelände</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Schwierigkeits- / Gelände-Matrix</string>
     <string name="cache_filter_rating">Bewertung</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-Attribute</string>
@@ -1073,6 +1074,7 @@
     <string name="init_force_orientation_sensor_title">Orientierungssensor</string>
     <string name="init_force_orientation_sensor_note">Auf einigen Geräten verhält sich der Rotationssensor fehlerhaft und zeigt die falsche Richtung an. In diesem Fall kann ein alternativer Sensor (der Orientierungssensor) bessere Ergebnisse liefern.</string>
     <string name="init_force_orientation_sensor">Orientierungssensor nutzen</string>
+    <string name="init_title_extended_settings">Erweiterte Einstellungen</string>
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
