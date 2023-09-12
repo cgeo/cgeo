@@ -601,7 +601,6 @@
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
-    <string name="cache_filter_difficulty_terrain_matrix_use_gc_live_matrix_info">Sprawdź, czy matryca powinna być zastąpiona przez 81er na żywo za każdym razem, gdy wyszukuje się online w serwisie geocaching.com</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Wypełnij z gc.com</string>
     <string name="cache_filter_nested_filter_modify">modyfikuj</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Podfiltr jest obecnie pusty</string>
