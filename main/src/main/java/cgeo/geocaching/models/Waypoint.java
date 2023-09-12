@@ -173,7 +173,7 @@ public class Waypoint implements IWaypoint {
      */
     public boolean isUserModified() {
         return
-                isUserDefined() ||
+                isUserDefined() || isVisited() ||
                         (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
                         StringUtils.isNotBlank(getUserNote());
     }
@@ -393,6 +393,11 @@ public class Waypoint implements IWaypoint {
             this.setUserNote(parsedWaypoint.getUserNote());
             changed = true;
         }
+
+        if (parsedWaypoint.isVisited()) {
+            setVisited(true);
+        }
+
         return changed;
     }
 
