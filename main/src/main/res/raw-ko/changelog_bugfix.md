@@ -1,8 +1,9 @@
 ##
-- New: Increased target SDK to 33 (due to Play Store requirements)
+- 신규: 타겟 SDK를 33으로 늘렸습니다(Play 스토어 요구 사항으로 인해)
 - 수정: 동일한 파일에 여러 경로가 포함된 GPX 가져오기
-- Fix: Favorite ratio > 100% under certain conditions
-- Fix: Navigation line lost on screen rotation with Google Maps
+- 수정: 특정 조건에서 호감점수 비율 > 100%
+- 수정: Google 지도에서 화면 회전 시 내비게이션 선이 손실됨
+- 수정: 삭제 시 Google 지도에서 개별 경로가 삭제되지 않음
 
 ##
 - 수정: 호감점수에 추가할 때 충돌이 발생함 (특정 조건에서)
