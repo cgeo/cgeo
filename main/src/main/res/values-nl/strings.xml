@@ -589,7 +589,6 @@
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclusief caches zonder D/T</string>
-    <string name="cache_filter_difficulty_terrain_matrix_use_gc_live_matrix_info">Controleer hier of de matrix moet worden vervangen door 81er live data wanneer een online zoekopdracht naar geocaching.com wordt uitgevoerd</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Vul met gc.com</string>
     <string name="cache_filter_nested_filter_modify">bewerk</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Het subfilter is momenteel leeg</string>
