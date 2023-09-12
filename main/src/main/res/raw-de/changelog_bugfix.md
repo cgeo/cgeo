@@ -3,6 +3,7 @@
 - Korrektur: Fehler bei GPX-Import mit mehreren Tracks in derselben Datei
 - Fix: Favorite ratio > 100% under certain conditions
 - Fix: Navigation line lost on screen rotation with Google Maps
+- Fix: Individual route not deleted from Google Maps on deletion
 
 ##
 - Korrektur: Absturz beim Hinzufügen zu Favoriten (unter bestimmten Bedingungen)
