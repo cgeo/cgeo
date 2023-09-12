@@ -121,7 +121,6 @@
     <string name="log_image_attach">Pievienot attēlu</string>
     <string name="log_image_stored">Esošo</string>
     <string name="log_image_camera">Jaunu</string>
-    <string name="log_image_delete">Dzēst</string>
     <string name="log_image_caption">Nosaukums</string>
     <string name="log_image_description">Apraksts</string>
     <string name="log_image_scale">Izšķirtspēja</string>

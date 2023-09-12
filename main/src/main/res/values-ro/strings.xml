@@ -133,7 +133,6 @@
     <string name="log_image_attach">Ataşează imagine</string>
     <string name="log_image_stored">Existentă</string>
     <string name="log_image_camera">Nouă</string>
-    <string name="log_image_delete">Ștergeți</string>
     <string name="log_image_caption">Titlu</string>
     <string name="log_image_description">Descriere</string>
     <string name="log_image_scale">Mărire</string>

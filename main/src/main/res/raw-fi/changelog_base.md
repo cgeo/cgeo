@@ -1,34 +1,34 @@
 ### Kartta
-- Change: Always show popup menu on cache/waypoint long-tap (configurable)
-- New: Add 'Set as target' to map's long-tap popup
-- Fix: Partial files remaining on aborted copying of downloaded files
-- New: Integrity check for downloaded routing tiles
-- New: Support for user-selected audio for proximity notifications
-- New: Toggle proximity notifications from map quick settings
-- New: Extended GeoJSON support for Google Maps
-- New: Display a search center indicator when performing address search => tap on map symbol
-- New: OpenTopoMap map provider
+- Muutos: Näytä aina ponnahdusikkuna välimuisti/reittipisteen pitkässä napautuksessa (määriteltävissä)
+- Uusi: Lisää 'Aseta kohteeksi' kartan pitkän napautuksen ponnahdusikkunaan
+- Korjaa: Osittaiset tiedostot, jotka ovat jäljellä ladattujen tiedostojen kopioinnin peruutuksen jälkeen
+- Uusi: Eheyden tarkistus ladattaessa reititystietoja
+- Uusi: Tuki käyttäjän valitulle äänelle läheisyysilmoituksille
+- Uusi: Vaihda läheisyysilmoitukset kartan pika-asetuksista
+- Uusi: Laajennettu GeoJSON tuki Google Maps
+- Uusi: Näytä hakukeskuksen indikaattori suoritettaessa osoitehaku => napautettaessa karttasymbolia
+- Uusi: OpenTopoMap: kartan tarjoaja
 
 ### Kätkön tiedot
-- New: 'Save and upload' button when editing personal note
-- Change: Replace most update progress dialogs by background actions
-- Change: Use only non-empty logs for 'repeat last log'
-- New: Display logging errors
-- New: Allow selecting, copying etc. of image description (EXIF info)
+- Uusi: 'Tallenna ja lähetä' -painike muokattaessa henkilökohtaista muistiinpanoa
+- Muutos: Korvaa useimmat päivityksen edistymisen valintaikkunat taustatoiminnoilla
+- Muutos: Käytä vain ei-tyhjiä lokeja 'toista viimeinen loki'
+- Uusi: Näytä kirjausvirheet
+- Uusi: Salli kuvan kuvauksen valinta, kopiointi jne. (EXIF-tiedot)
 
 ### Yleinen
-- New: Add more number emojis (separate category)
-- Change: Use different source for preview of pocket queries
-- New: Make startscreen selectable
-- New: Support target selector for additional navi apps
-- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
-- New: Option to vote on opencaching (OCPL) caches during logging
-- New: Event Date filter for upcoming events
-- Change: Make 'relative' the default for date filters
-- New: Display info on home screen for unread messages (optional)
-- New: Quick launch item for message center
-- New: Make last bottom navigation item customizable
-- New: Updated integrated BRouter
-- New: Add interface to OrganicMaps for navigation
-- Fix: HTML-encoded chars in 'trackable last spotted" name
-- Change: Removed outdated Twitter support
+- Uusi: Lisää numeroemojeita (erillinen kategoria)
+- Muutos: Käytä eri lähdettä Pocket Queryjen esikatseluun
+- Uusi: Tee aloitusnäytöstä valittava
+- Uusi: Tuki kohdevalitsimelle ulkoisille navi-sovelluksille
+- Uusi: Näytä kysymysmerkki vaikeudelle/maastolle, jos sekä vaikeus ja maasto ovat tuntemattomia
+- Uusi: Mahdollisuus äänestää opencaching (OCPL) -kätköistä kirjaamisen aikana
+- Uusi: Tapahtumapäiväsuodatin tuleville tapahtumille
+- Muutos: Tee 'suhteellinen' oletus päivämäärän suodattimille
+- Uusi: Näytä tiedot aloitusnäytössä lukemattomille viesteille (valinnainen)
+- Uusi: Nopea käynnistyspikakuva viestikeskukseen
+- Uusi: Tee viimeinen alareunan navigointikohde muokattavaksi
+- Uusi: Päivitetty integroitu BRouter
+- Uusi: Lisää käyttöliittymä OrganicMapsiin navigointia varten
+- Korjaus: HTML-koodatut merkit 'reissaaja viimeksi nähty' nimessä
+- Muutos: Poistettu vanhentunut Twitter-tuki
