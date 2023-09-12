@@ -3,6 +3,7 @@
 - Korjaa: GPX tuonti useilla reiteillä samassa tiedostossa
 - Fix: Favorite ratio > 100% under certain conditions
 - Fix: Navigation line lost on screen rotation with Google Maps
+- Fix: Individual route not deleted from Google Maps on deletion
 
 ##
 - Korjaa: Kaatuminen suosikkeihin lisättäessä (tietyin edellytyksin)
