@@ -1,15 +1,15 @@
 ### 지도
 - Mapsforge 및 VTM libs를 v0.20으로 업데이트했습니다.
-- Updated Google Maps renderer
+- 업데이트된 Google 지도 렌더러
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
 - 신규: 표시할 최소 이미지 크기 보장
 - 변경: 자체 로그 이미지에 대한 편집 옵션을 재설계했습니다.
-- New: Bettercacher integration
+- 신규: Bettercacher 통합
 
 ### 일반
 - 신규: 대상 SDK를 33으로 증가
 - 변경: "데이터베이스를 사용할 수 없음" 충돌을 방지하기 위한 데이터베이스 액세스 처리
-- New: Upgraded GUI components to Material3
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- 신규: GUI 구성요소를 Material3으로 업그레이드했습니다.
+- 변경: 기본적으로 기본 설정만 표시됩니다. 설정으로 이동 => 확장 설정을 활성화하는 확장 설정
