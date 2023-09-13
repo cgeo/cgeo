@@ -53,6 +53,8 @@
     <string name="wp_waypoint">Referenzpunkt</string>
     <string name="wp_original">Original Koordinaten</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fonnt</string>
     <string name="log_dnf">Net fonnt</string>
@@ -118,9 +120,6 @@
     <string name="log_smilies">Smilieen</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Biller</string>
-    <string name="log_image_attach">Bild unhänken</string>
-    <string name="log_image_stored">Bestoend</string>
-    <string name="log_image_camera">Nei</string>
     <string name="log_image_caption">Ënnertitel</string>
     <string name="log_image_description">Beschreiwung</string>
     <string name="log_image_scale">Scaléieren</string>
