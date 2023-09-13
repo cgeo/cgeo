@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Marcador</string>
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generat</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Trobat</string>
     <string name="log_dnf">No trobat</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Emoticones</string>
     <string name="log_image">Imatge</string>
     <string name="log_images">Imatges</string>
-    <string name="log_image_attach">Adjunta una imatge</string>
-    <string name="log_image_stored">Existent</string>
-    <string name="log_image_camera">Nou</string>
-    <string name="log_image_delete">Esborra</string>
     <string name="log_image_caption">Títol</string>
     <string name="log_image_description">Descripció</string>
     <string name="log_image_scale">Redimensionament</string>
@@ -1013,7 +1011,6 @@
     <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
     <string name="settings_settings">Configuració</string>
     <string name="settings_information">Informació</string>
-    <string name="settings_advanced">Configuració avançada</string>
     <string name="init_ec_icons">Icones del mapa</string>
     <string name="settings_ec_icons_other">Estil propi</string>
     <string name="settings_ec_icons_oc">Com OC</string>
@@ -1212,10 +1209,8 @@
     <string name="cache_personal_note_limit">Límit de la nota personal</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Aquesta nota personal es veurà truncada aprox. %1$d caràcters per %3$s (mida màxima %2$d).</string>
     <string name="cache_personal_note_upload">Puja</string>
-    <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
     <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
     <string name="cache_personal_note_upload_error">Error carregant nota personal</string>
-    <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
     <string name="cache_personal_note_vars_out_of_sync">Les variables de les notes no estan sincronitzades (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variables de sincronització</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Comproveu les variables el valor de les quals s\'ha de sobreescriure de les notes</string>
@@ -1267,14 +1262,6 @@
     <string name="cache_dialog_offline_drop_message">S\'estan eliminant el catxé de la memòria del dispositiu…</string>
     <string name="cache_dialog_refresh_title">Actualitza</string>
     <string name="cache_dialog_refresh_message">S\'estan recarregant els detalls del catxé…</string>
-    <string name="cache_dialog_watchlist_add_title">Llista de seguiment</string>
-    <string name="cache_dialog_watchlist_add_message">S\'està afegint el catxé a la llista de seguiment…</string>
-    <string name="cache_dialog_watchlist_remove_title">Llista de seguiment</string>
-    <string name="cache_dialog_watchlist_remove_message">S\'estan eliminant els catxés de la llista de seguiment…</string>
-    <string name="cache_dialog_favorite_add_title">Preferit</string>
-    <string name="cache_dialog_favorite_add_message">S\'està afegint el catxé als preferits…</string>
-    <string name="cache_dialog_favorite_remove_title">Preferit</string>
-    <string name="cache_dialog_favorite_remove_message">S\'esta eliminant el catxé dels preferits…</string>
     <string name="cache_menu_navigate">Navega</string>
     <string name="cache_menu_target">Definiu com objectiu</string>
     <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
@@ -1381,7 +1368,6 @@
     <string name="cache_recently_viewed">Vist recentment</string>
     <string name="cache_recently_viewed_empty">No hi ha cap catxé vist recentment</string>
     <string name="cache_clear_recently_viewed">Esborra</string>
-    <string name="cachedetails_progress_upload_note">S\'ha pujat la nota personal</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
@@ -1474,8 +1460,6 @@
     <string name="waypoint_save_and_modify_on_website">Estableix com a coordenades del catxé al c:geo i a la pàgina web</string>
     <string name="waypoint_reset_cache_coords">Restableix les coordenades del catxé</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">S\'han restablert les coordenades del catxé a la pàgina web.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">S\'està restablint les coordenades del catxé a la pàgina web…</string>
-    <string name="waypoint_reset">Reinicia</string>
     <string name="waypoint_localy_reset_cache_coords">Restableix al c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Reinicia el c:geo i la pàgina web</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">La pàgina web no admet la modificació de coordenades del catxé.</string>
