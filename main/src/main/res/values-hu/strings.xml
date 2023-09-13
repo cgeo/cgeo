@@ -84,6 +84,8 @@
     <string name="wpnew_trailhead">Keresztül</string>
     <string name="wpnew_waypoint">Kijelölő</string>
     <string name="wpnew_original">Eredeti</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Megtaláltam</string>
     <string name="log_dnf">Nem találtam meg</string>
@@ -149,10 +151,6 @@
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
     <string name="log_images">Képek</string>
-    <string name="log_image_attach">Kép csatolása</string>
-    <string name="log_image_stored">Meglévő</string>
-    <string name="log_image_camera">Új</string>
-    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
@@ -627,7 +625,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
     <string name="settings_settings">Beállítások</string>
     <string name="settings_information">További információk</string>
-    <string name="settings_advanced">Haladó beállítások</string>
     <string name="init_ec_icons">Térkép ikonok</string>
     <string name="settings_ec_icons_other">Saját stílus</string>
     <string name="settings_ec_icons_oc">OC stílusú ládajelölők</string>
@@ -726,10 +723,8 @@
     <string name="cache_personal_note_edit">Szerkesztés</string>
     <string name="cache_personal_note_limit">Személyes megjegyzés max. hossza</string>
     <string name="cache_personal_note_upload">Feltöltés</string>
-    <string name="cache_personal_note_uploading">Személyes megjegyzés feltöltése</string>
     <string name="cache_personal_note_upload_done">Személyes megjegyzés feltöltve</string>
     <string name="cache_personal_note_upload_error">A személyes megjegyzés feltöltése sikertelen</string>
-    <string name="cache_personal_note_upload_cancelled">Személyes megjegyzés feltöltése megszakítva</string>
     <string name="cache_description">Leírás</string>
     <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
     <string name="cache_area_description">Terület leírása</string>
@@ -764,14 +759,6 @@
     <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
     <string name="cache_dialog_refresh_title">Frissítés</string>
     <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
-    <string name="cache_dialog_watchlist_add_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_add_message">Láda hozzáadása a figyelőlistádhoz…</string>
-    <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_remove_message">Láda törlése a figyelőlistádról…</string>
-    <string name="cache_dialog_favorite_add_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_add_message">Láda hozzáadása a kedvencekhez…</string>
-    <string name="cache_dialog_favorite_remove_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -836,7 +823,6 @@
     <string name="cache_share_field">Megosztás</string>
     <string name="cache_time_full_hours">óra</string>
     <string name="cache_listed_on">Listázva a %s-on is</string>
-    <string name="cachedetails_progress_upload_note">Személyes megjegyzés feltöltve</string>
     <string name="internal_cache_default_owner">Te</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
@@ -884,8 +870,6 @@
     <string name="waypoint_save_and_modify_on_website">A láda új koordinátái a c:geo-ban és a weboldalon</string>
     <string name="waypoint_reset_cache_coords">Ládakoordináták visszaállítása</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">A ládakoordináták visszaállítása megtörtént a weboldalon.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ládakoordináták visszaállítása a weboldalon…</string>
-    <string name="waypoint_reset">Visszaállítás</string>
     <string name="waypoint_localy_reset_cache_coords">Visszaállítás a c:geo-ban</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Visszaállítás a c:geo-ban és a weboldalon</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">A weboldal nem támogatja a ládakoordináták módosítását.</string>
