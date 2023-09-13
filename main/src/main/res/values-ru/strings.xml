@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Точка</string>
     <string name="wpnew_original">Оригинал</string>
     <string name="wpnew_generated">Создано</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Найден</string>
     <string name="log_dnf">Не найден</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Добавить фото</string>
     <string name="log_images">Фотографии</string>
-    <string name="log_image_attach">Прикрепить изображение</string>
-    <string name="log_image_stored">Выбрать</string>
-    <string name="log_image_camera">Камера</string>
-    <string name="log_image_delete">Удалить</string>
     <string name="log_image_caption">Заголовок</string>
     <string name="log_image_description">Описание</string>
     <string name="log_image_scale">Масштабирование</string>
@@ -1032,7 +1030,6 @@
     <string name="settings_open_geokretymap_website">Открыть GeoKretyMap.org</string>
     <string name="settings_settings">Настройки</string>
     <string name="settings_information">Информация</string>
-    <string name="settings_advanced">Расширенные настройки</string>
     <string name="init_ec_icons">Иконки карты</string>
     <string name="settings_ec_icons_other">Собственный стиль</string>
     <string name="settings_ec_icons_oc">Как в Opencaching</string>
@@ -1247,10 +1244,8 @@
     <string name="cache_personal_note_limit">Лимит персональных заметок</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Персональная заметка будет обрезана примерно на %1$d символов до %3$s (макс. размер %2$d).</string>
     <string name="cache_personal_note_upload">Загрузить</string>
-    <string name="cache_personal_note_uploading">Загрузка личной заметки</string>
     <string name="cache_personal_note_upload_done">Личная заметка загружена</string>
     <string name="cache_personal_note_upload_error">Ошибка отправки персональной заметки</string>
-    <string name="cache_personal_note_upload_cancelled">Загрузка личной заметки отменена</string>
     <string name="cache_personal_note_vars_out_of_sync">Переменные в заметках не синхронизированы (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Синхронизация переменных</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Проверьте переменные, значения которых должны быть перезаписаны из заметок</string>
@@ -1302,14 +1297,6 @@
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
     <string name="cache_dialog_refresh_title">Обновление</string>
     <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
-    <string name="cache_dialog_watchlist_add_title">Список Отслеживаемых</string>
-    <string name="cache_dialog_watchlist_add_message">Добавление тайника в список Отслеживаемых…</string>
-    <string name="cache_dialog_watchlist_remove_title">Список Отслеживаемых</string>
-    <string name="cache_dialog_watchlist_remove_message">Удаление тайника из списка Отслеживаемых…</string>
-    <string name="cache_dialog_favorite_add_title">Рекомендуют</string>
-    <string name="cache_dialog_favorite_add_message">Рекомендация тайника…</string>
-    <string name="cache_dialog_favorite_remove_title">Рекомендуют</string>
-    <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_target">Установить как цель</string>
     <string name="cache_menu_navigation_drive">Навигация (за рулем)</string>
@@ -1417,7 +1404,6 @@
     <string name="cache_recently_viewed">Недавно просмотренные</string>
     <string name="cache_recently_viewed_empty">Нет недавно просмотренных тайников</string>
     <string name="cache_clear_recently_viewed">очистить</string>
-    <string name="cachedetails_progress_upload_note">Личная заметка загружена</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
@@ -1433,7 +1419,6 @@
     <string name="image_category_log">Запись</string>
     <string name="context_map_add_to_route">Добавить в маршрут</string>
     <string name="context_map_add_to_route_start">Добавить в начале маршрута</string>
-    <string name="context_map_remove_from_route">Исключить из маршрута</string>
     <string name="context_map_remove_from_route_start">Удалить из начала маршрута</string>
     <string name="context_map_remove_from_route_pos">Удалить из позиции %d</string>
     <string name="context_map_remove_from_route_end">Удалить из конца маршрута</string>
@@ -1518,8 +1503,6 @@
     <string name="waypoint_save_and_modify_on_website">Установить как координаты тайника в c:geo и на сайте</string>
     <string name="waypoint_reset_cache_coords">Сбросить координаты тайника</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Координаты тайника были сброшены на сайте.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Сброс координат тайника на сайте…</string>
-    <string name="waypoint_reset">Сброс</string>
     <string name="waypoint_localy_reset_cache_coords">Сбросить в c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Сбросить в c:geo и на сайте</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Сайт не поддерживает изменение координат тайника.</string>
