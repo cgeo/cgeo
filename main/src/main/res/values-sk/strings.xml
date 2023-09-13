@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Značka</string>
     <string name="wpnew_original">Pôvodné</string>
     <string name="wpnew_generated">Vygenerované</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Nájdená</string>
     <string name="log_dnf">Nenájdená</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Smajlíci</string>
     <string name="log_image">Obrázok</string>
     <string name="log_images">Obrázky</string>
-    <string name="log_image_attach">Pripojiť obrázok</string>
-    <string name="log_image_stored">Existujúci</string>
-    <string name="log_image_camera">Nový</string>
-    <string name="log_image_delete">Odstrániť</string>
     <string name="log_image_caption">Titulok</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Mierka</string>
@@ -1029,7 +1027,6 @@
     <string name="settings_open_geokretymap_website">Otvoriť stránku GeoKretyMap.org</string>
     <string name="settings_settings">Nastavenia</string>
     <string name="settings_information">Informácia</string>
-    <string name="settings_advanced">Pokročilé nastavenia</string>
     <string name="init_ec_icons">Mapové ikony</string>
     <string name="settings_ec_icons_other">Vlastný štýl</string>
     <string name="settings_ec_icons_oc">Ako OC</string>
@@ -1244,10 +1241,8 @@
     <string name="cache_personal_note_limit">Limit na osobné poznámky</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Táto osobná poznámka sa skráti približne o %1$d znakov na %3$s (max. veľkosť %2$d).</string>
     <string name="cache_personal_note_upload">Nahrať</string>
-    <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
     <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
     <string name="cache_personal_note_upload_error">Chyba nahrávania osobnej poznámky</string>
-    <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
     <string name="cache_personal_note_vars_out_of_sync">Premenné v poznámkach sú nesynchronizované (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizácia premenných</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Skontrolujte premenné, ktorých hodnota sa má prepísať z poznámok</string>
@@ -1299,14 +1294,6 @@
     <string name="cache_dialog_offline_drop_message">Odstraňovanie skrýše z pamäte zariadenia…</string>
     <string name="cache_dialog_refresh_title">Obnoviť</string>
     <string name="cache_dialog_refresh_message">Aktualizujem detaily skrýše…</string>
-    <string name="cache_dialog_watchlist_add_title">Zoznam sledovaných</string>
-    <string name="cache_dialog_watchlist_add_message">Pridávanie skrýše do vášho zoznamu sledovaných…</string>
-    <string name="cache_dialog_watchlist_remove_title">Zoznam sledovaných</string>
-    <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných…</string>
-    <string name="cache_dialog_favorite_add_title">Obľúbené</string>
-    <string name="cache_dialog_favorite_add_message">Pridávanie skrýše medzi obľúbené…</string>
-    <string name="cache_dialog_favorite_remove_title">Obľúbené</string>
-    <string name="cache_dialog_favorite_remove_message">Odstraňovanie skrýše z obľúbených…</string>
     <string name="cache_menu_navigate">Navigovať</string>
     <string name="cache_menu_target">Nastaviť ako cieľ</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
@@ -1413,7 +1400,6 @@
     <string name="cache_recently_viewed">Nedávno zobrazené</string>
     <string name="cache_recently_viewed_empty">Žiadne nedávno prezerané kešky</string>
     <string name="cache_clear_recently_viewed">vymazať</string>
-    <string name="cachedetails_progress_upload_note">Osobná poznámka nahraná</string>
     <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_chirpwolf_start">Táto keška môže používať buť vysielač chirp alebo iný druh bezdrôtového vysielača. Pre načítanie údajov z chirpu môžete otvoriť Chirp Wolf.</string>
@@ -1429,7 +1415,6 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Pridať do trasy</string>
     <string name="context_map_add_to_route_start">Pridať pred trasu</string>
-    <string name="context_map_remove_from_route">Odstrániť z trasy</string>
     <string name="context_map_remove_from_route_start">Odstrániť zo štartu</string>
     <string name="context_map_remove_from_route_pos">Odstrániť z pozície %d</string>
     <string name="context_map_remove_from_route_end">Odstrániť z konca</string>
@@ -1512,8 +1497,6 @@
     <string name="waypoint_save_and_modify_on_website">Nastaviť ako súradnice skrýše v c:geo a na webe</string>
     <string name="waypoint_reset_cache_coords">Obnoviť súradnice skrýše</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Súradnice skrýše na webe boli obnovené.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Obnovujem súradnice skrýše na webe…</string>
-    <string name="waypoint_reset">Obnovovanie</string>
     <string name="waypoint_localy_reset_cache_coords">Obnoviť v c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Obnoviť v c:geo a na webových stránkach</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Web nepodporuje úpravu súradníc skrýše.</string>
