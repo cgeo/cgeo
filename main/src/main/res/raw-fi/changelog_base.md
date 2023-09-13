@@ -1,34 +1,16 @@
 ### Kartta
-- Muutos: Näytä aina ponnahdusikkuna välimuisti/reittipisteen pitkässä napautuksessa (määriteltävissä)
-- Uusi: Lisää 'Aseta kohteeksi' kartan pitkän napautuksen ponnahdusikkunaan
-- Korjaa: Osittaiset tiedostot, jotka ovat jäljellä ladattujen tiedostojen kopioinnin peruutuksen jälkeen
-- Uusi: Eheyden tarkistus ladattaessa reititystietoja
-- Uusi: Tuki käyttäjän valitulle äänelle läheisyysilmoituksille
-- Uusi: Vaihda läheisyysilmoitukset kartan pika-asetuksista
-- Uusi: Laajennettu GeoJSON tuki Google Maps
-- Uusi: Näytä hakukeskuksen indikaattori suoritettaessa osoitehaku => napautettaessa karttasymbolia
-- Uusi: OpenTopoMap: kartan tarjoaja
+- Mapsforge ja VTM libs päivitetty versioon v0.20
+- Updated Google Maps renderer
+- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- New: Show custom cache icon as marker for related waypoints
 
 ### Kätkön tiedot
-- Uusi: 'Tallenna ja lähetä' -painike muokattaessa henkilökohtaista muistiinpanoa
-- Muutos: Korvaa useimmat päivityksen edistymisen valintaikkunat taustatoiminnoilla
-- Muutos: Käytä vain ei-tyhjiä lokeja 'toista viimeinen loki'
-- Uusi: Näytä kirjausvirheet
-- Uusi: Salli kuvan kuvauksen valinta, kopiointi jne. (EXIF-tiedot)
+- Uusi: Muokkaa lokikuvan kuvatekstin oletusarvoa
+- Uusi: Varmista kuvan pienin koko näytölle
+- Muutos: Omien lokikuvien muokkausvalinnat on uudelleen suunniteltu
+- New: Bettercacher integration
 
 ### Yleinen
-- Uusi: Lisää numeroemojeita (erillinen kategoria)
-- Muutos: Käytä eri lähdettä Pocket Queryjen esikatseluun
-- Uusi: Tee aloitusnäytöstä valittava
-- Uusi: Tuki kohdevalitsimelle ulkoisille navi-sovelluksille
-- Uusi: Näytä kysymysmerkki vaikeudelle/maastolle, jos sekä vaikeus ja maasto ovat tuntemattomia
-- Uusi: Mahdollisuus äänestää opencaching (OCPL) -kätköistä kirjaamisen aikana
-- Uusi: Tapahtumapäiväsuodatin tuleville tapahtumille
-- Muutos: Tee 'suhteellinen' oletus päivämäärän suodattimille
-- Uusi: Näytä tiedot aloitusnäytössä lukemattomille viesteille (valinnainen)
-- Uusi: Nopea käynnistyspikakuva viestikeskukseen
-- Uusi: Tee viimeinen alareunan navigointikohde muokattavaksi
-- Uusi: Päivitetty integroitu BRouter
-- Uusi: Lisää käyttöliittymä OrganicMapsiin navigointia varten
-- Korjaus: HTML-koodatut merkit 'reissaaja viimeksi nähty' nimessä
-- Muutos: Poistettu vanhentunut Twitter-tuki
+- Uusi: nostettu tavoite SDK 33:een
+- Muutos: Tietokannan käyttöoikeuden käsittely "tietokantaa ei saatavilla" kaatumisien välttämiseksi
+- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
