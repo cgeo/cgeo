@@ -17,11 +17,20 @@ public class PreferencesFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+        adjustScreen(Settings.extendedSettingsAreEnabled());
+
+        findPreference(getString(R.string.pref_extended_settings_enabled)).setOnPreferenceChangeListener((pref, newValue) -> {
+            adjustScreen((boolean) newValue);
+            return true;
+        });
+    }
+
+    private void adjustScreen(final boolean value) {
         final PreferenceScreen prefScreen = getPreferenceScreen();
         if (prefScreen != null) {
             final Preference pref = prefScreen.findPreference(getString(R.string.preference_menu_offlinedata));
             if (pref != null) {
-                pref.setEnabled(Settings.extendedSettingsAreEnabled());
+                pref.setEnabled(value);
             }
         }
     }
