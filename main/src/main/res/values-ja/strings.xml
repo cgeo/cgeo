@@ -84,6 +84,8 @@
     <string name="wpnew_trailhead">経由地</string>
     <string name="wpnew_waypoint">マーカー</string>
     <string name="wpnew_original">オリジナル</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">発見</string>
     <string name="log_dnf">未発見</string>
@@ -149,10 +151,6 @@
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
     <string name="log_images">画像</string>
-    <string name="log_image_attach">画像を添付</string>
-    <string name="log_image_stored">ファイル選択</string>
-    <string name="log_image_camera">撮影</string>
-    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
@@ -888,7 +886,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org</string>
     <string name="settings_settings">設定</string>
     <string name="settings_information">情報</string>
-    <string name="settings_advanced">詳細設定</string>
     <string name="init_ec_icons">地図のアイコン</string>
     <string name="settings_ec_icons_other">独自のスタイル</string>
     <string name="settings_ec_icons_oc">OCと同じ</string>
@@ -1067,10 +1064,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">ウェイポイント抽出しない</string>
     <string name="cache_personal_note_limit">パーソナルノートの制限</string>
     <string name="cache_personal_note_upload">アップロード</string>
-    <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
     <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
-    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルされました</string>
     <string name="cache_description">説明</string>
     <string name="cache_description_table_note">キャッシュの説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
     <string name="cache_area_description">エリアの説明</string>
@@ -1115,14 +1110,6 @@
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
     <string name="cache_dialog_refresh_title">更新</string>
     <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中…</string>
-    <string name="cache_dialog_watchlist_add_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
-    <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
-    <string name="cache_dialog_favorite_add_title">お気に入り</string>
-    <string name="cache_dialog_favorite_add_message">お気に入りに追加中…</string>
-    <string name="cache_dialog_favorite_remove_title">お気に入り</string>
-    <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_target">目的地に設定</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
@@ -1222,7 +1209,6 @@
     <string name="cache_image_background">リストの背景画像をキャッシュ</string>
     <string name="cache_share_field">共有</string>
     <string name="cache_time_full_hours">時</string>
-    <string name="cachedetails_progress_upload_note">パーソナルノートをアップロードしました</string>
     <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
     <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
     <string name="cache_chirpwolf_start">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。Chirp Wolfでchirpデータを読み込めます</string>
@@ -1311,8 +1297,6 @@
     <string name="waypoint_save_and_modify_on_website">c:geo内部とWebサイトでキャッシュ座標を変更</string>
     <string name="waypoint_reset_cache_coords">キャッシュ座標をリセット</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Webサイトでのキャッシュ座標をリセットしました</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Webサイトでのキャッシュ座標をリセットしています…</string>
-    <string name="waypoint_reset">リセット</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo内部のみでリセット</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo内部とWebサイトでリセット</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Webサイトではキャッシュ座標の修正に対応していません</string>
