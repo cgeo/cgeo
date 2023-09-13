@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Mevcut konum</string>
     <string name="wpnew_original">Orijinal</string>
     <string name="wpnew_generated">Oluşturuldu</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Buldum</string>
     <string name="log_dnf">Bulamadım</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
     <string name="log_images">Resimler</string>
-    <string name="log_image_attach">Resim ekle</string>
-    <string name="log_image_stored">Var olan</string>
-    <string name="log_image_camera">Yeni</string>
-    <string name="log_image_delete">Sil</string>
     <string name="log_image_caption">Başlık</string>
     <string name="log_image_description">Açıklama</string>
     <string name="log_image_scale">Ölçekleme</string>
@@ -896,7 +894,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org web sitesini aç</string>
     <string name="settings_settings">Ayarlar</string>
     <string name="settings_information">Bilgi</string>
-    <string name="settings_advanced">Gelişmiş ayarlar</string>
     <string name="init_ec_icons">Harita Simgeleri</string>
     <string name="settings_ec_icons_other">Kendi tarzı</string>
     <string name="settings_ec_icons_oc">OC</string>
@@ -1083,10 +1080,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">Yol noktası çıkarmayı engelle</string>
     <string name="cache_personal_note_limit">Kişisel not sınırı</string>
     <string name="cache_personal_note_upload">Yükle</string>
-    <string name="cache_personal_note_uploading">Kişisel not yükleniyor</string>
     <string name="cache_personal_note_upload_done">Kişisel not yüklendi</string>
     <string name="cache_personal_note_upload_error">Kişisel not yüklenirken hata oluştu</string>
-    <string name="cache_personal_note_upload_cancelled">Kişisel not yüklemesi iptal edildi</string>
     <string name="cache_description">Açıklama</string>
     <string name="cache_description_table_note">Açıklama %s\'de doğru şekilde görülebilmesi için görülebilecek tablo biçimlendirmesini içerir.</string>
     <string name="cache_area_description">Bölge Açıklaması</string>
@@ -1131,14 +1126,6 @@
     <string name="cache_dialog_offline_drop_message">Geocache cihaz hafızasından siliniyor…</string>
     <string name="cache_dialog_refresh_title">Yenile</string>
     <string name="cache_dialog_refresh_message">Geocache detayları yükleniyor…</string>
-    <string name="cache_dialog_watchlist_add_title">Takip listesi</string>
-    <string name="cache_dialog_watchlist_add_message">Geocache takip listenize ekleniyor…</string>
-    <string name="cache_dialog_watchlist_remove_title">Takip listesi</string>
-    <string name="cache_dialog_watchlist_remove_message">Geocache takip listenizden çıkartılıyor…</string>
-    <string name="cache_dialog_favorite_add_title">Favori</string>
-    <string name="cache_dialog_favorite_add_message">Geocache favorilerinize ekleniyor…</string>
-    <string name="cache_dialog_favorite_remove_title">Favori</string>
-    <string name="cache_dialog_favorite_remove_message">Geocache favorilerinizden çıkartılıyor…</string>
     <string name="cache_menu_navigate">Navigasyon</string>
     <string name="cache_menu_target">Hedef olarak ayarla</string>
     <string name="cache_menu_navigation_drive">Navigasyon (Arabayla)</string>
@@ -1239,7 +1226,6 @@
     <string name="cache_time_full_hours">saattinde</string>
     <string name="cache_listed_on">%s listesinde</string>
     <string name="cache_recently_viewed">Son görüntülenenler</string>
-    <string name="cachedetails_progress_upload_note">Kişisel not yüklendi</string>
     <string name="cache_whereyougo_start">Bu kartuşu indirmek ve başlatmak için WhereYouGo\'yu açın</string>
     <string name="cache_whereyougo_install">Bu kartuşu indirmek ve başlatmak için WhereYouGo oynatıcısını kurun</string>
     <string name="cache_alc_start">Bu macerayı oynayabilmek için Adventure Lab uygulamasını açın</string>
@@ -1323,8 +1309,6 @@
     <string name="waypoint_save_and_modify_on_website">Web sitesinde ve c:geo\'da Geocache koordinatları olarak ayarla</string>
     <string name="waypoint_reset_cache_coords">Geocache koordinatlarını sıfırla</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Geocache koordinatları web sitesi üzerinde sıfırlandı.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Geocache koordinatları web sitesi üzerinde sıfırlanıyor…</string>
-    <string name="waypoint_reset">Sıfırla</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo\'da sıfırla</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Web sitesi üzerinde ve c:geo\'da sıfırla</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Web sitesi değiştirilmiş Geocache koordinatlarını desteklemez.</string>
