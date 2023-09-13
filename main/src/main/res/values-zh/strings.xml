@@ -57,6 +57,8 @@
     <string name="wpnew_pkg">停车场</string>
     <string name="wpnew_waypoint">标记</string>
     <string name="wpnew_original">原始坐标</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">已发现</string>
     <string name="log_dnf">未发现</string>
@@ -122,9 +124,6 @@
     <string name="log_smilies">微笑</string>
     <string name="log_image">图片</string>
     <string name="log_images">图片</string>
-    <string name="log_image_attach">附加图片</string>
-    <string name="log_image_stored">现有</string>
-    <string name="log_image_camera">新建</string>
     <string name="log_image_caption">说明</string>
     <string name="log_image_description">描述</string>
     <string name="log_image_scale">缩放</string>
@@ -620,7 +619,6 @@
     <string name="settings_open_geokretymap_website">打开 GeoKretyMap.org 网站</string>
     <string name="settings_settings">设置</string>
     <string name="settings_information">信息</string>
-    <string name="settings_advanced">高级设置</string>
     <string name="init_ec_icons">地图图标</string>
     <string name="settings_features">支持的功能</string>
     <string name="feature_personal_notes">个人笔记</string>
