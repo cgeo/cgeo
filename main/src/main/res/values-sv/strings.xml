@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Markering</string>
     <string name="wpnew_original">Ursprunglig</string>
     <string name="wpnew_generated">Genererad</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Hittad</string>
     <string name="log_dnf">Hittade inte</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Smileys</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Bilder</string>
-    <string name="log_image_attach">Lägg till bild</string>
-    <string name="log_image_stored">Från fil</string>
-    <string name="log_image_camera">Ny</string>
-    <string name="log_image_delete">Ta bort</string>
     <string name="log_image_caption">Bildtext</string>
     <string name="log_image_description">Beskrivning</string>
     <string name="log_image_scale">Skalning</string>
@@ -1013,7 +1011,6 @@
     <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
     <string name="settings_settings">Inställningar</string>
     <string name="settings_information">Information</string>
-    <string name="settings_advanced">Avancerade inställningar</string>
     <string name="init_ec_icons">Kartikoner</string>
     <string name="settings_ec_icons_other">Egen stil</string>
     <string name="settings_ec_icons_oc">Som OC</string>
@@ -1212,10 +1209,8 @@
     <string name="cache_personal_note_limit">Begränsning av personlig kommentar</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Denna personliga anteckning kommer att förkortas med ca %1$d tecken vid %3$s (max storlek %2$d).</string>
     <string name="cache_personal_note_upload">Ladda upp</string>
-    <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
     <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
     <string name="cache_personal_note_upload_error">Fel vid uppladdning av personlig anteckning</string>
-    <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
     <string name="cache_personal_note_vars_out_of_sync">Variabler i anteckningar är ur synk (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synkronisera variabler</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Kontrollera variabler vars värde ska skrivas över från anteckningar</string>
@@ -1267,14 +1262,6 @@
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
     <string name="cache_dialog_refresh_title">Uppdatera</string>
     <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
-    <string name="cache_dialog_watchlist_add_title">Bevakningslista</string>
-    <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
-    <string name="cache_dialog_watchlist_remove_title">Bevakningslista</string>
-    <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
-    <string name="cache_dialog_favorite_add_title">Favorit</string>
-    <string name="cache_dialog_favorite_add_message">Lägger till cachen till dina favoriter…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorit</string>
-    <string name="cache_dialog_favorite_remove_message">Tar bort cachen från dina favoriter…</string>
     <string name="cache_menu_navigate">Navigera</string>
     <string name="cache_menu_target">Ange som mål</string>
     <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
@@ -1381,7 +1368,6 @@
     <string name="cache_recently_viewed">Nyligen visade</string>
     <string name="cache_recently_viewed_empty">Inga nyligen visade cacher</string>
     <string name="cache_clear_recently_viewed">Rensa</string>
-    <string name="cachedetails_progress_upload_note">Den personliga anteckning har laddats upp</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -1474,8 +1460,6 @@
     <string name="waypoint_save_and_modify_on_website">Ange som cachens koordinater i c:geo och på hemsidan</string>
     <string name="waypoint_reset_cache_coords">Återställ cachens koordinater</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Cachens koordinater har återställts på hemsidan.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Återställer cachens koordinater på hemsidan…</string>
-    <string name="waypoint_reset">Återställ</string>
     <string name="waypoint_localy_reset_cache_coords">Återställ koordinaterna i c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Återställ i c:geo och på hemsidan</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Hemsidan kan inte hantera att ändra cachens koordinater.</string>
