@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Markør</string>
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generert</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Funnet</string>
     <string name="log_dnf">Ikke funnet</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
     <string name="log_images">Bilder</string>
-    <string name="log_image_attach">Legg ved bilde</string>
-    <string name="log_image_stored">Eksisterende</string>
-    <string name="log_image_camera">Nytt</string>
-    <string name="log_image_delete">Slett</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -861,7 +859,6 @@
     <string name="settings_open_geokretymap_website">Åpne nettsiden til GeoKretyMap.org</string>
     <string name="settings_settings">Innstillinger</string>
     <string name="settings_information">Informasjon</string>
-    <string name="settings_advanced">Avanserte innstillinger</string>
     <string name="init_ec_icons">Kartikoner</string>
     <string name="settings_ec_icons_other">Egen stil</string>
     <string name="settings_ec_icons_oc">Lik OC</string>
@@ -1046,10 +1043,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">Unngå uttrekk av veipunkter</string>
     <string name="cache_personal_note_limit">Begrensning på personlig cachenotat</string>
     <string name="cache_personal_note_upload">Last opp</string>
-    <string name="cache_personal_note_uploading">Laster opp personlig cachenotat</string>
     <string name="cache_personal_note_upload_done">Personlig cachenotat er lastet opp</string>
     <string name="cache_personal_note_upload_error">Feil under opplasting av personlig notat</string>
-    <string name="cache_personal_note_upload_cancelled">Personlig cachenotat ble avbrutt under opplasting</string>
     <string name="cache_description">Beskrivelse</string>
     <string name="cache_description_table_note">Beskrivelsen inneholder tabellformatering og må åpnes på %s for å vises riktig.</string>
     <string name="cache_area_description">Områdebeskrivelse</string>
@@ -1094,14 +1089,6 @@
     <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten…</string>
     <string name="cache_dialog_refresh_title">Oppdater</string>
     <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
-    <string name="cache_dialog_watchlist_add_title">Overvåkningsliste</string>
-    <string name="cache_dialog_watchlist_add_message">Legger cachen til i din overvåkningsliste…</string>
-    <string name="cache_dialog_watchlist_remove_title">Overvåkningsliste</string>
-    <string name="cache_dialog_watchlist_remove_message">Fjerner cachen fra din overvåkningsliste…</string>
-    <string name="cache_dialog_favorite_add_title">Favoritt</string>
-    <string name="cache_dialog_favorite_add_message">Legger cachen til dine favoritter…</string>
-    <string name="cache_dialog_favorite_remove_title">Favoritt</string>
-    <string name="cache_dialog_favorite_remove_message">Fjerner cachen fra dine favoritter…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_target">Sett som mål</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
@@ -1193,7 +1180,6 @@
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Oppført på %s</string>
     <string name="cache_recently_viewed">Nylig sett på</string>
-    <string name="cachedetails_progress_upload_note">Personlig cachenotat er lastet opp</string>
     <string name="cache_whereyougo_start">Åpne WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
     <string name="cache_whereyougo_install">Installer WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
     <string name="cache_chirpwolf_start">Denne cachen bruker kanskje en chirp-sender eller en annen type trådløs signaler. For å lese chirp data kan du åpne Chirp Wolf.</string>
@@ -1273,8 +1259,6 @@
     <string name="waypoint_save_and_modify_on_website">Angi som cachens koordinater i c:geo og på geocaching.com</string>
     <string name="waypoint_reset_cache_coords">Tilbakestill cachens koordinater</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Cachens koordinater er nå endret på nettsiden.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Tilbakestiller cachens koordinater på nettsiden…</string>
-    <string name="waypoint_reset">Tilbakestill</string>
     <string name="waypoint_localy_reset_cache_coords">Tilbakestill i c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Tilbakestill i c:geo og på nettsiden</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Nettsiden støtter ikke endring av cachens koordinater.</string>
