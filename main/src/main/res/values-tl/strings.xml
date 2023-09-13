@@ -47,6 +47,8 @@
     <string name="wp_waypoint">Ang puno ng reperensya</string>
     <string name="wp_original">Ang orihinal na mga kordinado</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Natagpuan sa</string>
     <string name="log_dnf">Hindi natagpuan ito</string>
@@ -108,9 +110,6 @@
     <string name="log_yesterday">Kahapon</string>
     <string name="log_smilies">Ang Smilies</string>
     <string name="log_image">Ang imahe</string>
-    <string name="log_image_attach">Ilakip ang imahe</string>
-    <string name="log_image_stored">Umiiral na</string>
-    <string name="log_image_camera">Bago</string>
     <string name="log_image_caption">Ang kapsyon</string>
     <string name="log_image_description">Ang paglalarawan</string>
     <string name="log_image_scale">Pag-iskala</string>
@@ -447,7 +446,6 @@
     <string name="settings_open_geokretymap_website">Magbukas sa Geokretymap.org na website</string>
     <string name="settings_settings">Ang mga setting</string>
     <string name="settings_information">Impormasyon</string>
-    <string name="settings_advanced">Pinahusay na setting</string>
     <string name="init_ec_icons">Ang mga imahe ng mapa</string>
     <string name="settings_ec_icons_other">Sariling estilo</string>
     <string name="settings_ec_icons_oc">Tulad ng OC</string>
@@ -533,10 +531,8 @@
     <string name="cache_personal_note_edit">Baguhin</string>
     <string name="cache_personal_note_limit">Ang limitasyon ng pansariling tala</string>
     <string name="cache_personal_note_upload">I-upload</string>
-    <string name="cache_personal_note_uploading">Ang pag-upload ng sariling tala</string>
     <string name="cache_personal_note_upload_done">Ang sariling tala ay nai-upload</string>
     <string name="cache_personal_note_upload_error">Ang pagkakamali sa pag-upload ng sariling tala</string>
-    <string name="cache_personal_note_upload_cancelled">Ang sariling pag-upload ng tala ay na-kansela</string>
     <string name="cache_description">Ang paglalarawan</string>
     <string name="cache_description_table_note">Ang paglalarawan ng nilalaman na pagpo-pormat ng lamesa kung saan ay kailangang matingnan sa %s para makita ng tama.</string>
     <string name="cache_watchlist_on">Ang cache na ito ay nasa satili mong listahan.</string>
@@ -565,14 +561,6 @@
     <string name="cache_dialog_offline_drop_message">Ang pag-tanggal ng cache mula sa aparato&#8230;</string>
     <string name="cache_dialog_refresh_title">I-refresh</string>
     <string name="cache_dialog_refresh_message">Ang pag-load mulit na mga detalye ng mga cache&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">Listaan ng sinusubaybayan</string>
-    <string name="cache_dialog_watchlist_add_message">Ang pagdagdag ng cache sa iyong listahan&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">Listaan ng sinusubaybayan</string>
-    <string name="cache_dialog_watchlist_remove_message">Ang pagtanggal ng cache mula sa iyog listahan&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">Paborito</string>
-    <string name="cache_dialog_favorite_add_message">Ang pagdagdag ng cache sa iyong mga paborito&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">Paborito</string>
-    <string name="cache_dialog_favorite_remove_message">Tinatanggal ang cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Mag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmamaneho)</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglalakad)</string>
@@ -638,7 +626,6 @@
     <string name="cache_share_field">Ibahagi</string>
     <string name="cache_time_full_hours">alas</string>
     <string name="cache_listed_on">Nailista sa %s</string>
-    <string name="cachedetails_progress_upload_note">Ang sariling tala ay nai-upload</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ang nag-loloading na mga caches sa %1$s</string>
@@ -685,8 +672,6 @@
     <string name="waypoint_save_and_modify_on_website">Itakda bilang cache ang mga koordinado sa c:geo at sa website</string>
     <string name="waypoint_reset_cache_coords">I-reset ang cache ng mga koordinado</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Ang cache ng koordinado ay nareset na sa website.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Nire-reset ang cache ng mga koordinado sa website&#8230;</string>
-    <string name="waypoint_reset">I-set muli</string>
     <string name="waypoint_localy_reset_cache_coords">I-reset sa c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">I-reset sa c:geo at sa website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Ang website ay hindi sumusuporta ng pagbabago ng cache ng mga koordinado.</string>
