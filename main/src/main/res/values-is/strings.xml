@@ -41,6 +41,8 @@
     <string name="wp_waypoint">Viðmiðunarpunktur</string>
     <string name="wp_original">Upprunanleg hnit</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fundið</string>
     <string name="log_dnf">Fannst ekki</string>
@@ -96,9 +98,6 @@
     <string name="log_yesterday">Í gær</string>
     <string name="log_smilies">Broskarlar</string>
     <string name="log_image">Mynd</string>
-    <string name="log_image_attach">Festa mynd við</string>
-    <string name="log_image_stored">úr safni</string>
-    <string name="log_image_camera">Ný</string>
     <string name="log_image_caption">Fyrirsögn</string>
     <string name="log_image_description">Lýsing</string>
     <string name="log_image_scale">Breyta stærð</string>
@@ -330,7 +329,6 @@
     <string name="settings_open_website">Opna heimasíðu</string>
     <string name="settings_settings">Stillingar</string>
     <string name="settings_information">Upplýsingar</string>
-    <string name="settings_advanced">Ítarlegar stillingar</string>
     <string name="init_ec_icons">Kortatákn</string>
     <string name="settings_features">Studdir eiginleikar</string>
     <string name="feature_watch_list">Vaktlisti</string>
@@ -409,8 +407,6 @@
     <string name="cache_hint_not_available">Engin vísbending í boði</string>
     <string name="cache_logs">Færslubók</string>
     <string name="cache_dialog_offline_drop_message">Fjarlægja cache úr minni tækis…</string>
-    <string name="cache_dialog_favorite_add_title">Eftirlætis</string>
-    <string name="cache_dialog_favorite_remove_title">Eftirlætis</string>
     <string name="cache_menu_navigation_drive">Leiðsögn (keyrandi)</string>
     <string name="cache_menu_navigation_walk">Leiðsögn (gangandi)</string>
     <string name="cache_menu_navigation_transit">Leiðsögn (almenningssamgöngur)</string>
@@ -493,7 +489,6 @@
     <string name="waypoint_save">Vista</string>
     <string name="waypoint_set_as_cache_coords">Setja sem hnit kassa í c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Setja sem hnit kassa í c:geo og á vefsíðunni</string>
-    <string name="waypoint_reset">Endurstilla</string>
     <string name="waypoint_localy_reset_cache_coords">Endurstilla í c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
     <string name="waypoint_done">Lokið</string>
