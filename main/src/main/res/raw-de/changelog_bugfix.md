@@ -5,7 +5,7 @@
 - Korrektur: Navigationslinie geht bei Bildschirmdrehung unter Google Maps verloren
 - Korrektur: Individuelle Route beim Löschen nicht von Google Maps gelöscht
 - Korrektur: Letzter Log-Text wird verworfen, wenn im nächsten Log zuerst ein Bild hinzugefügt wird
-- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+- Korrektur: "Als Favorit setzen" kann nicht deaktiviert werden, wenn kein Favoritenpunkt übrig ist, Logging schlägt mit Fehler fehl
 
 ##
 - Korrektur: Absturz beim Hinzufügen zu Favoriten (unter bestimmten Bedingungen)
