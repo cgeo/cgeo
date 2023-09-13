@@ -49,6 +49,8 @@
     <string name="wp_waypoint">Referenčna točka</string>
     <string name="wp_original">Originalne koordinate</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Najden</string>
     <string name="log_dnf">Ni najden</string>
@@ -109,9 +111,6 @@
     <string name="log_yesterday">Včeraj</string>
     <string name="log_smilies">Smeškoti</string>
     <string name="log_image">Slika</string>
-    <string name="log_image_attach">Dodaj sliko</string>
-    <string name="log_image_stored">Obstoječa</string>
-    <string name="log_image_camera">Nova</string>
     <string name="log_image_caption">Naslov</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skaliranje</string>
@@ -443,7 +442,6 @@
     <string name="settings_open_website">Odpri spletno stran</string>
     <string name="settings_settings">Nastavitve</string>
     <string name="settings_information">Informacije</string>
-    <string name="settings_advanced">Napredne nastavitve</string>
     <string name="init_ec_icons">Ikone zemljevida</string>
     <string name="settings_ec_icons_other">Svoj stil</string>
     <string name="settings_ec_icons_oc">Kot OC</string>
@@ -508,10 +506,8 @@
     <string name="cache_personal_note_edit">Uredi</string>
     <string name="cache_personal_note_limit">Omejitev osebnega zapisa</string>
     <string name="cache_personal_note_upload">Naloži</string>
-    <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
     <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
     <string name="cache_personal_note_upload_error">Napaka pri nalaganju osebnega zapisa</string>
-    <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
     <string name="cache_watchlist_on">Zaklad je na vašem opazovalnem seznamu.</string>
@@ -538,14 +534,6 @@
     <string name="cache_dialog_offline_drop_message">Brisanje zaklada iz naprave…</string>
     <string name="cache_dialog_refresh_title">Osveži</string>
     <string name="cache_dialog_refresh_message">Ponovno nalaganje podatkov zaklada…</string>
-    <string name="cache_dialog_watchlist_add_title">Spisek nadzorov</string>
-    <string name="cache_dialog_watchlist_add_message">Dodajanje zaklada na spisek nadzorov…</string>
-    <string name="cache_dialog_watchlist_remove_title">Spisek nadzorov</string>
-    <string name="cache_dialog_watchlist_remove_message">Odstranjevanje zaklada s spiska nadzorov…</string>
-    <string name="cache_dialog_favorite_add_title">Priljubljeni</string>
-    <string name="cache_dialog_favorite_add_message">Dodajanje zaklada na spisek priljubljenih…</string>
-    <string name="cache_dialog_favorite_remove_title">Priljubljeni</string>
-    <string name="cache_dialog_favorite_remove_message">Odstranjevanje zaklada s spiska priljubljenih…</string>
     <string name="cache_menu_navigate">Navigiraj</string>
     <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
     <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
@@ -601,7 +589,6 @@
     <string name="cache_share_field">deli</string>
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
-    <string name="cachedetails_progress_upload_note">Lastna opomba je bila uspešno naložena na spletno stran</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
@@ -645,8 +632,6 @@
     <string name="waypoint_save_and_modify_on_website">Nastavi kot koordinate zaklada v c:geo in na spletni strani</string>
     <string name="waypoint_reset_cache_coords">Ponastavi koordinate zaklada</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Koordinate zaklada so bile nastavljene na spletni strani.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ponastavljanje koordinat zaklada na spletni strani…</string>
-    <string name="waypoint_reset">Ponastavi</string>
     <string name="waypoint_localy_reset_cache_coords">Ponastavi v c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Ponastavi v c:geo in na spletni strani</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Spletna stran ne omogoča spreminjanja koordinat zaklada.</string>
