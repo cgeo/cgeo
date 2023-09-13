@@ -53,17 +53,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/init_title_extended_settings"
-        app:iconSpaceReserved="false">
-        <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_summary_extended_settings" app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_extended_settings_enabled"
-            android:title="@string/init_title_extended_settings"
-            app:iconSpaceReserved="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/init_debug_title"
         app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />

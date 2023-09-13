@@ -3,76 +3,88 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_main">
 
-    <!-- Services -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceServicesFragment"
-        app:icon="@drawable/settings_cloud"
-        app:summary="@string/settings_summary_services"
-        app:title="@string/settings_title_services" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/pref_extended_settings_enabled"
+        android:summary="@string/init_summary_extended_settings"
+        android:title="@string/init_title_extended_settings"
+        app:iconSpaceReserved="false" />
 
-    <!-- Appearance -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment"
-        app:icon="@drawable/settings_eye"
-        app:summary="@string/settings_summary_appearance"
-        app:title="@string/settings_title_appearance" />
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false">
 
-    <!-- Cache Details -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceCachedetailsFragment"
-        app:icon="@drawable/settings_details"
-        app:summary="@string/settings_summary_cachedetails"
-        app:title="@string/settings_title_cachedetails" />
+        <!-- Services -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServicesFragment"
+            app:icon="@drawable/settings_cloud"
+            app:summary="@string/settings_summary_services"
+            app:title="@string/settings_title_services" />
 
-    <!-- Map Sources -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment"
-        app:icon="@drawable/settings_map"
-        app:summary="@string/settings_summary_map_sources"
-        app:title="@string/settings_title_map_sources" />
+        <!-- Appearance -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment"
+            app:icon="@drawable/settings_eye"
+            app:summary="@string/settings_summary_appearance"
+            app:title="@string/settings_title_appearance" />
 
-    <!-- Map Content / Behavior -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment"
-        app:icon="@drawable/settings_map_content"
-        app:summary="@string/settings_summary_map_content_behavior"
-        app:title="@string/settings_title_map_content_behavior" />
+        <!-- Cache Details -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceCachedetailsFragment"
+            app:icon="@drawable/settings_details"
+            app:summary="@string/settings_summary_cachedetails"
+            app:title="@string/settings_title_cachedetails" />
 
-    <!-- Logging -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceLoggingFragment"
-        app:icon="@drawable/settings_pen"
-        app:summary="@string/settings_summary_logging"
-        app:title="@string/settings_title_logging" />
+        <!-- Map Sources -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment"
+            app:icon="@drawable/settings_map"
+            app:summary="@string/settings_summary_map_sources"
+            app:title="@string/settings_title_map_sources" />
 
-    <!-- Offline data -->
-    <Preference
-        android:key="@string/preference_menu_offlinedata"
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment"
-        app:icon="@drawable/settings_sdcard"
-        app:summary="@string/settings_summary_offlinedata"
-        app:title="@string/settings_title_offlinedata"
-        android:enabled="false"/>
+        <!-- Map Content / Behavior -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment"
+            app:icon="@drawable/settings_map_content"
+            app:summary="@string/settings_summary_map_content_behavior"
+            app:title="@string/settings_title_map_content_behavior" />
 
-    <!-- Navigation -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationFragment"
-        app:icon="@drawable/settings_arrow"
-        app:summary="@string/settings_summary_navigation"
-        app:title="@string/settings_title_navigation" />
+        <!-- Logging -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceLoggingFragment"
+            app:icon="@drawable/settings_pen"
+            app:summary="@string/settings_summary_logging"
+            app:title="@string/settings_title_logging" />
 
-    <!-- System -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceSystemFragment"
-        app:icon="@drawable/settings_nut"
-        app:summary="@string/settings_summary_system"
-        app:title="@string/settings_title_system" />
+        <!-- Offline data -->
+        <Preference
+            android:key="@string/preference_menu_offlinedata"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment"
+            app:icon="@drawable/settings_sdcard"
+            app:summary="@string/settings_summary_offlinedata"
+            app:title="@string/settings_title_offlinedata"
+            android:enabled="false"/>
 
-    <!-- Backup -->
-    <Preference
-        app:fragment="cgeo.geocaching.settings.fragments.PreferenceBackupFragment"
-        app:icon="@drawable/settings_backup"
-        app:summary="@string/settings_summary_backup"
-        app:title="@string/settings_title_backup" />
+        <!-- Navigation -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationFragment"
+            app:icon="@drawable/settings_arrow"
+            app:summary="@string/settings_summary_navigation"
+            app:title="@string/settings_title_navigation" />
 
+        <!-- System -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceSystemFragment"
+            app:icon="@drawable/settings_nut"
+            app:summary="@string/settings_summary_system"
+            app:title="@string/settings_title_system" />
+
+        <!-- Backup -->
+        <Preference
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceBackupFragment"
+            app:icon="@drawable/settings_backup"
+            app:summary="@string/settings_summary_backup"
+            app:title="@string/settings_title_backup" />
+
+    </PreferenceCategory>
 </PreferenceScreen>
