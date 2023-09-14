@@ -62,8 +62,7 @@
             app:fragment="cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment"
             app:icon="@drawable/settings_sdcard"
             app:summary="@string/settings_summary_offlinedata"
-            app:title="@string/settings_title_offlinedata"
-            android:enabled="false"/>
+            app:title="@string/settings_title_offlinedata" />
 
         <!-- Navigation -->
         <Preference

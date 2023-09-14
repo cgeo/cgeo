@@ -30,7 +30,7 @@ public class PreferencesFragment extends BasePreferenceFragment {
         if (prefScreen != null) {
             final Preference pref = prefScreen.findPreference(getString(R.string.preference_menu_offlinedata));
             if (pref != null) {
-                pref.setEnabled(value);
+                pref.setVisible(value);
             }
         }
     }
