@@ -148,6 +148,13 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (!getSupportFragmentManager().popBackStackImmediate()) {
+            super.onBackPressed();
+        }
+    }
+
     public BackupUtils getBackupUtils() {
         return backupUtils;
     }

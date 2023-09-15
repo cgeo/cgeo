@@ -4,8 +4,8 @@
 - Oplossing: Favoriet ratio > 100% onder bepaalde voorwaarden
 - Oplossing: Navigatielijn verloren bij scherm rotatie met Google Maps
 - Oplossing: Individuele route werd niet verwijderd uit Google Maps bij verwijderen
-- Fix: Last log text discarded when adding image first on new log
-- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+- Oplossing: Laatste logtekst werd verwijderd bij het eerst toevoegen van een afbeelding aan een nieuw log
+- Oplossing: "Instellen als favoriet" kan niet worden uitgeschakeld als er geen favoriet punt meer is; het loggen mislukt met een fout
 
 ##
 - Oplossing: Crash bij het toevoegen aan favorieten (onder bepaalde omstandigheden)
