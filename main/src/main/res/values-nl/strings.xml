@@ -87,19 +87,7 @@
     <string name="wpnew_original">Oorspronkelijk</string>
     <string name="wpnew_generated">Gegenereerd</string>
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Onbekend</string>
-    <string name="cache_cat_bc_nature">BC Natuur</string>
-    <string name="cache_cat_bc_location">BC Locatie</string>
-    <string name="cache_cat_bc_recommended">BC Aanbevolen</string>
-    <string name="cache_cat_bc_gadget">BC Gadget</string>
-    <string name="cache_cat_bc_mystery">BC Mysterie</string>
-    <string name="cache_cat_bc_hiking">BC Wandelen</string>
-    <string name="cache_cat_bc_other">BC Overig</string>
     <!-- cache Tier -->
-    <string name="cache_tier_none">Geen</string>
-    <string name="cache_tier_bc_blue">BC Blauw</string>
-    <string name="cache_tier_bc_silver">BC Zilver</string>
-    <string name="cache_tier_bc_gold">BC Goud</string>
     <!-- logs -->
     <string name="log_found">Gevonden</string>
     <string name="log_dnf">Niet gevonden</string>
@@ -512,8 +500,6 @@
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filter_stored_since">Laatste details update</string>
-    <string name="cache_filter_category">Categorie</string>
-    <string name="cache_filter_tier">Niveau</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -846,7 +832,6 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote.com waardering</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
-    <string name="init_summary_bettercacher">Laad cache categorieën en niveau van BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
     <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
     <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
@@ -1421,8 +1406,6 @@
     <string name="cache_favorite">Favoriet</string>
     <string name="cache_owner">Eigenaar</string>
     <string name="cache_hidden">Verstopt</string>
-    <string name="cache_categories">Categorieën</string>
-    <string name="cache_tier">Niveau</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Locatie</string>
     <string name="cache_coordinates">Coördinaten</string>
