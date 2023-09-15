@@ -87,19 +87,7 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generiert</string>
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Unbekannt</string>
-    <string name="cache_cat_bc_nature">BC Natur</string>
-    <string name="cache_cat_bc_location">BC Lokation</string>
-    <string name="cache_cat_bc_recommended">BC Empfohlen</string>
-    <string name="cache_cat_bc_gadget">BC Gadget</string>
-    <string name="cache_cat_bc_mystery">BC Mystery</string>
-    <string name="cache_cat_bc_hiking">BC Wandern</string>
-    <string name="cache_cat_bc_other">BC Andere</string>
     <!-- cache Tier -->
-    <string name="cache_tier_none">Keine</string>
-    <string name="cache_tier_bc_blue">BC Blau</string>
-    <string name="cache_tier_bc_silver">BC Silber</string>
-    <string name="cache_tier_bc_gold">BC Gold</string>
     <!-- logs -->
     <string name="log_found">Gefunden</string>
     <string name="log_dnf">Nicht gefunden</string>
@@ -512,8 +500,6 @@
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
-    <string name="cache_filter_category">Kategorie</string>
-    <string name="cache_filter_tier">Rang</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -845,7 +831,6 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCVote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
-    <string name="init_summary_bettercacher">Cache-Kategorien und -Stufe von BetterCacher.org laden</string>
     <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
     <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
@@ -1420,8 +1405,6 @@
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Besitzer</string>
     <string name="cache_hidden">Versteckt</string>
-    <string name="cache_categories">Kategorien</string>
-    <string name="cache_tier">Rang</string>
     <string name="cache_event">Zeitangabe</string>
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
