@@ -1187,10 +1187,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addTerrain(cache);
             details.addRating(cache);
 
-            details.addBetterCacher(cache);
-
             // favorite count
             favoriteLine = details.add(R.string.cache_favorite, "");
+
+            details.addBetterCacher(cache);
 
             // own rating
             if (cache.getMyVote() > 0) {

@@ -977,7 +977,7 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
-    <string name="init_summary_bettercacher">Load cache categories and tier from BetterCacher.org</string>
+    <string name="init_summary_bettercacher">Load cache tier and categories from BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
