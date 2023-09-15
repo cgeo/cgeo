@@ -87,19 +87,7 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Neznámé</string>
-    <string name="cache_cat_bc_nature">BC Příroda</string>
-    <string name="cache_cat_bc_location">BC Místo</string>
-    <string name="cache_cat_bc_recommended">BC Doporučené</string>
-    <string name="cache_cat_bc_gadget">BC Gadget</string>
-    <string name="cache_cat_bc_mystery">BC Mysterka</string>
-    <string name="cache_cat_bc_hiking">BC Turistika</string>
-    <string name="cache_cat_bc_other">BC Ostatní</string>
     <!-- cache Tier -->
-    <string name="cache_tier_none">Žádná</string>
-    <string name="cache_tier_bc_blue">BC Modré</string>
-    <string name="cache_tier_bc_silver">BC Stříbrné</string>
-    <string name="cache_tier_bc_gold">BC Zlaté</string>
     <!-- logs -->
     <string name="log_found">Nalezeno</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -521,8 +509,6 @@
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
-    <string name="cache_filter_category">Kategorie</string>
-    <string name="cache_filter_tier">Úroveň</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
@@ -856,7 +842,6 @@
     <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
-    <string name="init_summary_bettercacher">Načíst kategorie kešek a úrovní z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -1447,8 +1432,6 @@
     <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
-    <string name="cache_categories">Kategorie</string>
-    <string name="cache_tier">Úroveň</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
