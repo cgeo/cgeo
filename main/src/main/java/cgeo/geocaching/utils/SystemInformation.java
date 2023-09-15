@@ -296,7 +296,7 @@ public final class SystemInformation {
     }
 
     private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
-        body.append("\n- ").append(permission).append(":: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+        body.append("\n- ").append(StringUtils.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {
