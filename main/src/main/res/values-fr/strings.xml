@@ -494,7 +494,6 @@
     <string name="cache_filter_stored_lists">Listes stockées</string>
     <string name="cache_filter_origin">Origine</string>
     <string name="cache_filter_stored_since">Détails de la dernière mise à jour</string>
-    <string name="cache_filter_category">Catégorie</string>
     <string name="cache_filter_logical_filter_group">Filtre imbriqué</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
