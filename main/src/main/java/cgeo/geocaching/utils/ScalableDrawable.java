@@ -22,8 +22,9 @@ public class ScalableDrawable extends Drawable {
 
     public ScalableDrawable(final Drawable drawable, final float factor) {
         this(drawable);
-        final int size = (int) (drawable.getIntrinsicWidth() * factor);
-        setBounds(0, 0, size, size);
+        final int width = (int) (drawable.getIntrinsicWidth() * factor);
+        final int height = (int) (drawable.getIntrinsicHeight() * factor);
+        setBounds(0, 0, width, height);
     }
 
     @Override
