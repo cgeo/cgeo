@@ -87,18 +87,7 @@
     <string name="wpnew_original">Alkuperäinen</string>
     <string name="wpnew_generated">Luotu</string>
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Tuntematon</string>
-    <string name="cache_cat_bc_nature">BC Luonto</string>
-    <string name="cache_cat_bc_location">BC Sijainti</string>
-    <string name="cache_cat_bc_recommended">BC Suositeltu</string>
-    <string name="cache_cat_bc_gadget">BC Gadget</string>
-    <string name="cache_cat_bc_mystery">BC Mysteeri</string>
-    <string name="cache_cat_bc_hiking">BC Vaellus</string>
-    <string name="cache_cat_bc_other">BC Muu</string>
     <!-- cache Tier -->
-    <string name="cache_tier_bc_blue">BC Sininen</string>
-    <string name="cache_tier_bc_silver">BC Hopea</string>
-    <string name="cache_tier_bc_gold">BC Kulta</string>
     <!-- logs -->
     <string name="log_found">Löytyi</string>
     <string name="log_dnf">Ei löytynyt</string>
@@ -841,7 +830,6 @@
     <string name="init_signature_template_geocode">Geokoodi</string>
     <string name="init_ratingwanted">GCVote-arvostelu</string>
     <string name="init_summary_ratingwanted">Lataa kätkön arvostelu GCVotesta</string>
-    <string name="init_summary_bettercacher">Lataa kätkökategoriat ja -tasot BetterCacher.orgista</string>
     <string name="init_friends_and_own_logs_wanted">Näytä ystävien/omat</string>
     <string name="init_summary_friends_and_own_logs_wanted">Näytä erillinen lokikirjan sivu omille sekä ystävien lokeille</string>
     <string name="init_openlastdetailspage">Viimeisimmät tiedot -sivu</string>
@@ -1414,8 +1402,6 @@
     <string name="cache_favorite">Suosikki</string>
     <string name="cache_owner">Omistaja</string>
     <string name="cache_hidden">Piilotettu</string>
-    <string name="cache_categories">Kategoriat</string>
-    <string name="cache_tier">Taso</string>
     <string name="cache_event">Päivämäärä</string>
     <string name="cache_location">Sijainti</string>
     <string name="cache_coordinates">Koordinaatit</string>
