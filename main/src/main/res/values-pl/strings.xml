@@ -87,19 +87,7 @@
     <string name="wpnew_original">Oryginalne</string>
     <string name="wpnew_generated">Wygenerowane</string>
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Nieznana</string>
-    <string name="cache_cat_bc_nature">BC Przyroda</string>
-    <string name="cache_cat_bc_location">BC Lokalizacja</string>
-    <string name="cache_cat_bc_recommended">BC Rekomendowana</string>
-    <string name="cache_cat_bc_gadget">BC Gadżet</string>
-    <string name="cache_cat_bc_mystery">BC Zagadka</string>
-    <string name="cache_cat_bc_hiking">BC Turystyka piesza</string>
-    <string name="cache_cat_bc_other">BC Inna</string>
     <!-- cache Tier -->
-    <string name="cache_tier_none">Brak</string>
-    <string name="cache_tier_bc_blue">BC Niebieski</string>
-    <string name="cache_tier_bc_silver">BC Srebrny</string>
-    <string name="cache_tier_bc_gold">BC Złoty</string>
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -522,8 +510,6 @@
     <string name="cache_filter_stored_lists">Zapisane listy</string>
     <string name="cache_filter_origin">Pochodzenie</string>
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
-    <string name="cache_filter_category">Kategoria</string>
-    <string name="cache_filter_tier">Poziom</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
@@ -858,7 +844,6 @@
     <string name="init_signature_template_geocode">Geokod</string>
     <string name="init_ratingwanted">Ocena GCvote</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrytki z GCvote.com</string>
-    <string name="init_summary_bettercacher">Wczytaj kategorie i poziom skrytek z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
     <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
     <string name="init_openlastdetailspage">Ostatnia strona ze szczegółami</string>
@@ -1449,8 +1434,6 @@
     <string name="cache_favorite">Ulubiona</string>
     <string name="cache_owner">Właściciel</string>
     <string name="cache_hidden">Ukryta</string>
-    <string name="cache_categories">Kategorie</string>
-    <string name="cache_tier">Poziom</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Położenie</string>
     <string name="cache_coordinates">Współrzędne</string>
