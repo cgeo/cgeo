@@ -25,16 +25,16 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.models.Category;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
-import cgeo.geocaching.models.Tier;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.search.GeocacheSearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
@@ -2399,7 +2399,7 @@ public class DataStore {
             values.put("owner_guid", cache.getOwnerGuid());
             values.put("emoji", cache.getAssignedEmoji());
             values.put("alcMode", cache.getAlcMode());
-            values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
+            values.put("tier", cache.getBcTier() == null ? null : cache.getBcTier().getRaw());
 
             init();
 
@@ -2460,7 +2460,7 @@ public class DataStore {
 
         // The attributes must be fetched first because lazy loading may load
         // a null set otherwise.
-        final List<Category> categories = cache.getCategories();
+        final List<Category> categories = cache.getBcCategories();
         database.delete(dbTableCategories, "geocode = ?", new String[]{geocode});
 
         if (categories.isEmpty()) {
@@ -3045,7 +3045,7 @@ public class DataStore {
                     if (loadFlags.contains(LoadFlag.CATEGORIES)) {
                         final List<Category> categories = loadCategories(cache.getGeocode());
                         if (CollectionUtils.isNotEmpty(categories)) {
-                            cache.setCategories(categories);
+                            cache.setBcCategories(categories);
                         }
                     }
 
@@ -3152,7 +3152,7 @@ public class DataStore {
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
-        cache.setTier(Tier.getByName(cursor.getString(47)));
+        cache.setBcTier(Tier.getByName(cursor.getString(47)));
 
         return cache;
     }

@@ -1,4 +1,4 @@
-package cgeo.geocaching.models;
+package cgeo.geocaching.models.bettercacher;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.EnumValueMapper;
@@ -6,13 +6,14 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 public enum Tier {
 
-    NONE(R.string.cache_tier_none, R.drawable.type_unknown, "none"),
-    BC_BLUE(R.string.cache_tier_bc_blue, R.drawable.type_unknown, "bc-blue"),
-    BC_SILVER(R.string.cache_tier_bc_silver, R.drawable.type_unknown, "bc-silver"),
-    BC_GOLD(R.string.cache_tier_bc_gold, R.drawable.type_unknown, "bc-gold");
+    NONE(R.string.cache_tier_bc_none, R.string.cache_tier_desc_bc_none, R.drawable.type_unknown, "none"),
+    BC_BLUE(R.string.cache_tier_bc_blue, R.string.cache_tier_desc_bc_blue, R.drawable.bc_tier_blue, "bc-blue"),
+    BC_SILVER(R.string.cache_tier_bc_silver, R.string.cache_tier_desc_bc_silver, R.drawable.bc_tier_silver, "bc-silver"),
+    BC_GOLD(R.string.cache_tier_bc_gold, R.string.cache_tier_desc_bc_gold, R.drawable.bc_tier_gold, "bc-gold");
 
-    public final int iconId;
-    public final int textId;
+    private final int iconId;
+    private final int textId;
+    private final int descId;
     private final String[] names;
 
     private static final EnumValueMapper<String, Tier> NAME_TO_TIER = new EnumValueMapper<>();
@@ -23,9 +24,10 @@ public enum Tier {
         }
     }
 
-    Tier(final int textId, final int iconId, final String ... names) {
+    Tier(final int textId, final int descId, final int iconId, final String ... names) {
         this.iconId = iconId;
         this.textId = textId;
+        this.descId = descId;
         this.names = names;
     }
 
@@ -43,6 +45,10 @@ public enum Tier {
 
     public String getI18nText() {
         return LocalizationUtils.getString(textId);
+    }
+
+    public String getI18nDescription() {
+        return LocalizationUtils.getString(descId);
     }
 
     public String getRaw() {

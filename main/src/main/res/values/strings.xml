@@ -95,20 +95,34 @@
     <string name="wpnew_generated">Generated</string>
 
     <!-- Cache Categories -->
-    <string name="cache_cat_unknown">Unknown</string>
-    <string name="cache_cat_bc_nature">BC Nature</string>
-    <string name="cache_cat_bc_location">BC Location</string>
-    <string name="cache_cat_bc_recommended">BC Recommended</string>
-    <string name="cache_cat_bc_gadget">BC Gadget</string>
-    <string name="cache_cat_bc_mystery">BC Mystery</string>
-    <string name="cache_cat_bc_hiking">BC Hiking</string>
-    <string name="cache_cat_bc_other">BC Other</string>
+    <string name="cache_cat_bc_unknown">Unknown</string>
+    <string name="cache_cat_bc_nature">Nature</string>
+    <string name="cache_cat_bc_location">Location</string>
+    <string name="cache_cat_bc_recommended">Recommended</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mystery</string>
+    <string name="cache_cat_bc_hiking">Hiking</string>
+    <string name="cache_cat_bc_other">Other</string>
+
+    <string name="cache_cat_desc_bc_unknown">-</string>
+    <string name="cache_cat_desc_bc_nature">Surrounded by special nature</string>
+    <string name="cache_cat_desc_bc_location">Shows you a great location</string>
+    <string name="cache_cat_desc_bc_recommended">Recommended by the BetterCacher team</string>
+    <string name="cache_cat_desc_bc_gadget">Special handicraft, cool gadget, etc</string>
+    <string name="cache_cat_desc_bc_mystery">An extraordinary and challenging puzzle</string>
+    <string name="cache_cat_desc_bc_hiking">Offers an excellent hike</string>
+    <string name="cache_cat_desc_bc_other">Other features - consult recommendation log</string>
 
     <!-- cache Tier -->
-    <string name="cache_tier_none">None</string>
-    <string name="cache_tier_bc_blue">BC Blue</string>
-    <string name="cache_tier_bc_silver">BC Silver</string>
-    <string name="cache_tier_bc_gold">BC Gold</string>
+    <string name="cache_tier_bc_none">None</string>
+    <string name="cache_tier_bc_blue">Blue</string>
+    <string name="cache_tier_bc_silver">Silver</string>
+    <string name="cache_tier_bc_gold">Gold</string>
+
+    <string name="cache_tier_desc_bc_none">-</string>
+    <string name="cache_tier_desc_bc_blue">Default tier for listed caches</string>
+    <string name="cache_tier_desc_bc_silver">Visited by BetterCacher team, automatically awarded</string>
+    <string name="cache_tier_desc_bc_gold">Outstanding cache, recommended by BetterCacher team</string>
 
     <!-- logs -->
     <string name="log_found">Found it</string>
@@ -560,8 +574,8 @@
     <string name="cache_filter_stored_lists">Stored Lists</string>
     <string name="cache_filter_origin">Origin</string>
     <string name="cache_filter_stored_since">Last details update</string>
-    <string name="cache_filter_category">Category</string>
-    <string name="cache_filter_tier">Tier</string>
+    <string name="cache_filter_category">BC Category</string>
+    <string name="cache_filter_tier">BC Tier</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
@@ -962,7 +976,7 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
-    <string name="init_summary_bettercacher">Load cache categories and tier from BetterCacher.org</string>
+    <string name="init_summary_bettercacher">Load cache tier and categories from BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
     <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
@@ -1597,8 +1611,7 @@
     <string name="cache_favorite">Favorite</string>
     <string name="cache_owner">Owner</string>
     <string name="cache_hidden">Hidden</string>
-    <string name="cache_categories">Categories</string>
-    <string name="cache_tier">Tier</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Date</string>
     <string name="cache_location">Location</string>
     <string name="cache_coordinates">Coordinates</string>
