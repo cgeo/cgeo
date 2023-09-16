@@ -87,7 +87,29 @@
     <string name="wpnew_original">Oorspronkelijk</string>
     <string name="wpnew_generated">Gegenereerd</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Onbekend</string>
+    <string name="cache_cat_bc_nature">Natuur</string>
+    <string name="cache_cat_bc_location">Locatie</string>
+    <string name="cache_cat_bc_recommended">Aanbevolen</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysterie</string>
+    <string name="cache_cat_bc_hiking">Hiken</string>
+    <string name="cache_cat_bc_other">Overig</string>
+    <string name="cache_cat_desc_bc_nature">Omgeven door speciale natuur</string>
+    <string name="cache_cat_desc_bc_location">Toont je een geweldige locatie</string>
+    <string name="cache_cat_desc_bc_recommended">Aanbevolen door het BetterCacher team</string>
+    <string name="cache_cat_desc_bc_gadget">Speciale handicraft, coole gadget, etc</string>
+    <string name="cache_cat_desc_bc_mystery">Een buitengewone en uitdagende puzzel</string>
+    <string name="cache_cat_desc_bc_hiking">Biedt een uitstekende wandeling</string>
+    <string name="cache_cat_desc_bc_other">Andere functies - raadpleeg de aanbevelingslog</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Geen</string>
+    <string name="cache_tier_bc_blue">Blauw</string>
+    <string name="cache_tier_bc_silver">Zilver</string>
+    <string name="cache_tier_bc_gold">Goud</string>
+    <string name="cache_tier_desc_bc_blue">Standaard laag voor getoonde caches</string>
+    <string name="cache_tier_desc_bc_silver">Bezocht door BetterCacher team, automatisch toegekend</string>
+    <string name="cache_tier_desc_bc_gold">Buitengewone cache, aanbevolen door het BetterCacher team</string>
     <!-- logs -->
     <string name="log_found">Gevonden</string>
     <string name="log_dnf">Niet gevonden</string>
@@ -500,6 +522,8 @@
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filter_stored_since">Laatste details update</string>
+    <string name="cache_filter_category">BC categorie</string>
+    <string name="cache_filter_tier">BC Laag</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -664,7 +688,6 @@
     <string name="about_system_write_logcat_type_extended">Uitgebreid</string>
     <string name="about_system_write_logcat_success">Logbestand \"%1$s\" geschreven naar map \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fout bij schrijven naar logbestand</string>
-    <string name="about_system_write_infos_downloadmanager">Bekijk downloads</string>
     <string name="about_changelog_full">Lijst van alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
@@ -734,7 +757,6 @@
     <string name="settings_title_map_hillshading">Offline kaarten reliëf tonen</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
-    <string name="settings_title_map_rotation">Kaart rotatie (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
     <string name="settings_title_map_behavior">Kaart gedrag</string>
@@ -832,6 +854,7 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCvote.com waardering</string>
     <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
+    <string name="init_summary_bettercacher">Laad cache niveau en categorieën van BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
     <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
     <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
@@ -1406,6 +1429,7 @@
     <string name="cache_favorite">Favoriet</string>
     <string name="cache_owner">Eigenaar</string>
     <string name="cache_hidden">Verstopt</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Locatie</string>
     <string name="cache_coordinates">Coördinaten</string>
@@ -1642,10 +1666,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaartthema-map continu synchroniseren in een app-specifieke map voor snellere toegang tot het bestand. Zorg ervoor dat je thema map alleen je thema\'s bevat maar geen extra (grote) gegevens voordat u deze functie inschakelt.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
     <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
-    <string name="init_hidewp">Waypoints verbergen</string>
-    <string name="init_summary_hidewp_original">Originele waypoints op de kaart verbergen</string>
-    <string name="init_summary_hidewp_parking">Parkeer waypoints op de kaart verbergen</string>
-    <string name="init_summary_hidewp_visited">Bezochte waypoints op de kaart verbergen</string>
     <string name="map_theme_select">Selecteer mapthema</string>
     <string name="map_theme_options">Thema opties</string>
     <string name="map_language">Kaart taal</string>
@@ -2215,6 +2235,8 @@
     <string name="permission_read_external_storage_explanation">c:geo kan je systeem achtergrond gebruiken als achtergrond voor de app. Hiervoor heeft c:geo toestemming nodig om je media gegevens te lezen op externe opslag.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart, b.v. wanneer je geocaches opslaat voor offline gebruik, importeren of exporteren van bestanden en andere functies. Op sommige Android-versies, dien je extra toestemming te geven voor deze acties.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Oude schrijfrechten voor externe opslag</string>
+    <string name="permission_post_notifications_explanation">c:geo gebruikt meldingen om je te informeren over downloads en het naderen van caches (indien geactiveerd)</string>
+    <string name="permission_post_notifications_explanation_title">Toestemming voor meldingen</string>
     <string name="storage_permission_needed">Deze functie is niet mogelijk zonder opslagpermissie.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Kleurschema selecteren</string>
