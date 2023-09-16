@@ -619,7 +619,6 @@
     <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal \"%1$s\" écrit dans le dossier \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
-    <string name="about_system_write_infos_downloadmanager">Afficher les téléchargements</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
     <string name="about_contributors_recent">Contributeurs récents</string>
@@ -688,7 +687,6 @@
     <string name="settings_title_map_hillshading">Ombrage du relief des cartes hors-ligne</string>
     <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_summary_offline_routing">Le routage hors ligne est disponible si l\'application \"BRouter\" est installée et configurée ou si le routage interne est activé.</string>
-    <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
     <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
@@ -1572,10 +1570,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier Thèmes des cartes dans un dossier d\'application privée pour un accès plus rapide aux fichiers. Soyez certain que le dossier des thèmes contient seulement vos thèmes, mais pas de données supplémentaires (volumineuses, avant d\'activer cette fonctionnalité.\n\nVotre dossier de thème “%1$s” a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous vraiment activer la synchronisation ?</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
-    <string name="init_hidewp">Masquer tous les points de passage</string>
-    <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
-    <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
-    <string name="init_summary_hidewp_visited">Masquer les points de passage visités sur la carte</string>
     <string name="map_theme_select">Sélectionner le thème</string>
     <string name="map_theme_options">Options de thème</string>
     <string name="map_language">Langue de la carte</string>
