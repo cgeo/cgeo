@@ -304,7 +304,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         if (actionBar != null) {
             if (type != null) {
                 actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.markerId, null));
+                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.iconId, null));
             } else {
                 actionBar.setIcon(android.R.color.transparent);
             }
