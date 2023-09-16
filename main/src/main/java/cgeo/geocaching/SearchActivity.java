@@ -524,12 +524,4 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         return super.onOptionsItemSelected(item);
     }
 
-    public static void startActivityScan(final String scan, final Activity fromActivity) {
-        final Intent searchIntent = new Intent(fromActivity, SearchActivity.class);
-        searchIntent.setAction(Intent.ACTION_SEARCH).
-                putExtra(SearchManager.QUERY, scan).
-                putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
-        fromActivity.startActivityForResult(searchIntent, Intents.SEARCH_REQUEST_CODE);
-    }
-
 }
