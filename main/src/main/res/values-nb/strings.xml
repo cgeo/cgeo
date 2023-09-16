@@ -548,7 +548,6 @@
     <string name="about_system_write_logcat_type_extended">Utvidet</string>
     <string name="about_system_write_logcat_success">Loggfil \"%1$s\" skrevet til mappe \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Feil ved skriving av loggfil</string>
-    <string name="about_system_write_infos_downloadmanager">Vis nedlastinger</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
     <string name="about_contributors_carnerodetails">som faren til c:geo</string>
     <string name="about_contributors_recent">Siste bidragsytere</string>
@@ -584,7 +583,6 @@
     <string name="settings_title_map_data">Kartdata</string>
     <string name="settings_title_offline_routing">Frakoblet ruting</string>
     <string name="settings_summary_offline_routing">Frakoblet ruting er tilgjengelig hvis enten hjelper-appen \"BRouter\" er installert og konfigurert, eller intern ruting er aktivert.</string>
-    <string name="settings_title_map_rotation">Kartrotasjon (Google Maps)</string>
     <string name="settings_title_waypoints">Veipunkter</string>
     <string name="settings_title_map_content">Kartinnhold</string>
     <string name="settings_title_map_behavior">Kartatferd</string>
@@ -1340,10 +1338,6 @@
     <string name="init_renderthemefolder_synctolocal">Synkroniser temaer</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av temamappe</string>
     <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
-    <string name="init_hidewp">Skjul veipunkter</string>
-    <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
-    <string name="init_summary_hidewp_parking">Skjul parkeringsveipunkter på kartet</string>
-    <string name="init_summary_hidewp_visited">Skjul besøkte veipunkter på kartet</string>
     <string name="map_theme_select">Velg karttema</string>
     <string name="map_theme_options">Valg for karttemaer</string>
     <string name="map_language">Kartspråk</string>
