@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Značka</string>
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Nalezeno</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -152,10 +154,7 @@
     <string name="log_smilies">Smajlíci</string>
     <string name="log_image">Obrázek</string>
     <string name="log_images">Obrázky</string>
-    <string name="log_image_attach">Připojit obrázek</string>
-    <string name="log_image_stored">Existující</string>
-    <string name="log_image_camera">Nový</string>
-    <string name="log_image_delete">Odstranit</string>
+    <string name="log_edit_image">Upravit obrázek</string>
     <string name="log_image_caption">Titulek</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Měřítko</string>
@@ -675,7 +674,6 @@
     <string name="about_system_write_logcat_type_extended">Rozšířený</string>
     <string name="about_system_write_logcat_success">Soubor protokolu \"%1$s\" zapsán do složky \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
-    <string name="about_system_write_infos_downloadmanager">Zobrazit stažené</string>
     <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
@@ -745,7 +743,6 @@
     <string name="settings_title_map_hillshading">Stínování kopců v offline mapách</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
-    <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
     <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
@@ -1024,6 +1021,7 @@
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
     <string name="init_offlinelogs_homescreen">Zobrazit offline logy</string>
+    <string name="init_log_image_default_prefix_title">Výchozí název obrázků v logu</string>
     <string name="init_summary_offlinelogs_homescreen">Pokud máte logy, které ještě nebyly odeslány, zobrazí se na vaší domovské obrazovce počitadlo offline logů (např. \"+1\").</string>
     <string name="init_loaddirectionimg">V případě potřeby stahovat směrový obrázek (pouze Běžní členové)</string>
     <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Běžní členové)</string>
@@ -1070,6 +1068,8 @@
     <string name="init_force_orientation_sensor_title">Senzor orientace</string>
     <string name="init_force_orientation_sensor_note">Na některých zařízeních se běžný senzor otáčení chová nevyzpytatelně a udává špatný směr. V takových případech může alternativní senzor (snímač orientace) poskytnout lepší výsledky.</string>
     <string name="init_force_orientation_sensor">Vynutit použití orientačního senzoru</string>
+    <string name="init_title_extended_settings">Rozšířené nastavení</string>
+    <string name="init_summary_extended_settings">Zobrazit nastavení pro zkušenější uživatele</string>
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
@@ -1078,7 +1078,6 @@
     <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
     <string name="settings_settings">Nastavení</string>
     <string name="settings_information">Informace</string>
-    <string name="settings_advanced">Pokročilé nastavení</string>
     <string name="init_ec_icons">Mapové ikony</string>
     <string name="settings_ec_icons_other">Vlastní styl</string>
     <string name="settings_ec_icons_oc">Jako OC</string>
@@ -1297,10 +1296,8 @@
     <string name="cache_personal_note_limit">Omezení osobní poznámky</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Tato osobní poznámka bude zkrácena přibližně o %1$d znaků do %3$s (maximální velikost %2$d).</string>
     <string name="cache_personal_note_upload">Nahrát</string>
-    <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
     <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
     <string name="cache_personal_note_upload_error">Při nahrávání osobní poznámky došlo k chybě</string>
-    <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
     <string name="cache_personal_note_save_and_upload">Uložit a nahrát</string>
     <string name="cache_personal_note_vars_out_of_sync">Proměnné v poznámkách nejsou synchronizovány (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizovat proměnné</string>
@@ -1353,14 +1350,6 @@
     <string name="cache_dialog_offline_drop_message">Odstraňování kešky z paměti zařízení…</string>
     <string name="cache_dialog_refresh_title">Aktualizovat</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů kešky…</string>
-    <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_add_message">Přidávání kešky do tvého watchlistu…</string>
-    <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-    <string name="cache_dialog_watchlist_remove_message">Odstraňování kešky z tvého watchlistu…</string>
-    <string name="cache_dialog_favorite_add_title">Oblíbené</string>
-    <string name="cache_dialog_favorite_add_message">Přidávání kešky do oblíbených…</string>
-    <string name="cache_dialog_favorite_remove_title">Oblíbené</string>
-    <string name="cache_dialog_favorite_remove_message">Odstraňování kešky z oblíbených…</string>
     <string name="cache_menu_navigate">Navigovat</string>
     <string name="cache_menu_target">Nastavit jako cíl</string>
     <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
@@ -1473,7 +1462,6 @@
     <string name="cachedetails_progress_unwatch">Odebráno ze seznamu sledovaných</string>
     <string name="cachedetails_progress_favorite">Přidáno do oblíbených</string>
     <string name="cachedetails_progress_unfavorite">Odebráno z oblíbených</string>
-    <string name="cachedetails_progress_upload_note">Osobní poznámka nahrána</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1481,6 +1469,7 @@
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
     <string name="cache_alc_related_start">Otevřete Adventure Lab a začněte hrát související dobrodružství</string>
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
+    <string name="cache_bettercacher_open">Otevřít kešku na BetterCacher.org</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
     <string name="image_category_uncategorized">Nezařazené</string>
@@ -1489,7 +1478,6 @@
     <string name="image_category_log">Log</string>
     <string name="context_map_add_to_route">Přidat na trasu</string>
     <string name="context_map_add_to_route_start">Přidat před trasu</string>
-    <string name="context_map_remove_from_route">Odstranit z trasy</string>
     <string name="context_map_remove_from_route_start">Odstranit ze začátku trasy</string>
     <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
     <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
@@ -1574,8 +1562,6 @@
     <string name="waypoint_save_and_modify_on_website">Nastavit jako souřadnice kešky v c:geo a na webu</string>
     <string name="waypoint_reset_cache_coords">Obnovit původní souřadnice kešky</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Souřadnice kešky byly obnoveny na webu.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Souřadnice kešky se obnovují na webu…</string>
-    <string name="waypoint_reset">Obnovení</string>
     <string name="waypoint_localy_reset_cache_coords">Obnovit souřadnice keše v zařízení</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Obnovit původní souřadnice v c:geo a na webu</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Souřadnice kešky nemohou být na webu změněny.</string>
@@ -1682,10 +1668,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tím se průběžně synchronizuje obsah složky s motivy do soukromé složky aplikace pro rychlejší přístup k souborům. Než povolíte tuto funkci, ujistěte se, že vaše složka s motivy obsahuje pouze vaše motivy, ale ne žádné další (velké) soubory.\n\nVaše složka s motivy \'%1$s\' má aktuálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
     <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
-    <string name="init_hidewp">Skrýt trasové body</string>
-    <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
-    <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
-    <string name="init_summary_hidewp_visited">Skrýt navštívené trasové body na mapě</string>
     <string name="map_theme_select">Vybrat motiv mapy</string>
     <string name="map_theme_options">Možnosti motivu</string>
     <string name="map_language">Jazyk mapy</string>

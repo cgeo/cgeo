@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Marqueur</string>
     <string name="wpnew_original">Originale</string>
     <string name="wpnew_generated">Généré</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Trouvée</string>
     <string name="log_dnf">Non trouvée</string>
@@ -152,10 +154,7 @@
     <string name="log_smilies">Sourillards</string>
     <string name="log_image">Image</string>
     <string name="log_images">Images</string>
-    <string name="log_image_attach">Ajouter une image</string>
-    <string name="log_image_stored">Existante</string>
-    <string name="log_image_camera">Nouvelle</string>
-    <string name="log_image_delete">Supprimer</string>
+    <string name="log_edit_image">Modifier l\'image</string>
     <string name="log_image_caption">Légende</string>
     <string name="log_image_description">Description</string>
     <string name="log_image_scale">Mise à l\'échelle</string>
@@ -620,7 +619,6 @@
     <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal \"%1$s\" écrit dans le dossier \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
-    <string name="about_system_write_infos_downloadmanager">Afficher les téléchargements</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
     <string name="about_contributors_recent">Contributeurs récents</string>
@@ -689,7 +687,6 @@
     <string name="settings_title_map_hillshading">Ombrage du relief des cartes hors-ligne</string>
     <string name="settings_title_offline_routing">Calcul d\'itinéraire hors-ligne</string>
     <string name="settings_summary_offline_routing">Le routage hors ligne est disponible si l\'application \"BRouter\" est installée et configurée ou si le routage interne est activé.</string>
-    <string name="settings_title_map_rotation">Rotation de la carte (Google Maps)</string>
     <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
@@ -1014,7 +1011,6 @@
     <string name="settings_open_geokretymap_website">Accéder au site GeoKretyMap.org</string>
     <string name="settings_settings">Paramètres</string>
     <string name="settings_information">Information</string>
-    <string name="settings_advanced">Paramètres avancés</string>
     <string name="init_ec_icons">Icônes de carte</string>
     <string name="settings_ec_icons_other">Style propre</string>
     <string name="settings_ec_icons_oc">Comme ceux de OC</string>
@@ -1214,10 +1210,8 @@
     <string name="cache_personal_note_limit">Limite de taille pour les notes personnelles</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Cette note personnelle sera tronquée d\'environ %1$d caractères par %3$s (taille maxi %2$d).</string>
     <string name="cache_personal_note_upload">Envoyer</string>
-    <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
     <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
     <string name="cache_personal_note_upload_error">Une erreur est survenue lors de l\'envoi de votre note personnelle</string>
-    <string name="cache_personal_note_upload_cancelled">Envoi de la note personnelle annulé</string>
     <string name="cache_personal_note_vars_out_of_sync">Les variables dans les notes sont désynchronisées (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchroniser les variables</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Vérifier les variables dont la valeur doit être remplacée par les notes</string>
@@ -1269,14 +1263,6 @@
     <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
     <string name="cache_dialog_refresh_title">Actualiser</string>
     <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
-    <string name="cache_dialog_watchlist_add_title">Liste de suivi</string>
-    <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
-    <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
-    <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
-    <string name="cache_dialog_favorite_add_title">Favori</string>
-    <string name="cache_dialog_favorite_add_message">Ajout de la cache à vos favoris…</string>
-    <string name="cache_dialog_favorite_remove_title">Favori</string>
-    <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris…</string>
     <string name="cache_menu_navigate">Navigation</string>
     <string name="cache_menu_target">Définir comme destination</string>
     <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
@@ -1383,7 +1369,6 @@
     <string name="cache_recently_viewed">Vu récemment</string>
     <string name="cache_recently_viewed_empty">Aucune cache consultée récemment</string>
     <string name="cache_clear_recently_viewed">effacer</string>
-    <string name="cachedetails_progress_upload_note">Note personnelle envoyée</string>
     <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_chirpwolf_start">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez utiliser l\'application Chirp Wolf.</string>
@@ -1399,7 +1384,6 @@
     <string name="image_category_log">Signaler votre visite</string>
     <string name="context_map_add_to_route">Ajouter à la trace</string>
     <string name="context_map_add_to_route_start">Ajouter à la route</string>
-    <string name="context_map_remove_from_route">Retirer de la route</string>
     <string name="context_map_remove_from_route_start">Retirer depuis le début</string>
     <string name="context_map_remove_from_route_pos">Retirer de la position %d</string>
     <string name="context_map_remove_from_route_end">Retirer depuis la fin</string>
@@ -1480,8 +1464,6 @@
     <string name="waypoint_save_and_modify_on_website">Utiliser comme coordonnées de la cache dans c:geo et sur le site web</string>
     <string name="waypoint_reset_cache_coords">Réinitialiser les coordonnées de la cache</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Les coordonnées de la cache ont été reinitialisées sur le site web.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Réinitialisation des coordonnées de la cache sur le site web…</string>
-    <string name="waypoint_reset">Réinitialiser</string>
     <string name="waypoint_localy_reset_cache_coords">Réinitialiser dans c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Réinitialiser dans c:geo et sur le site web</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Le site web n\'accepte pas la modification des coordonnées de la cache.</string>
@@ -1588,10 +1570,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier Thèmes des cartes dans un dossier d\'application privée pour un accès plus rapide aux fichiers. Soyez certain que le dossier des thèmes contient seulement vos thèmes, mais pas de données supplémentaires (volumineuses, avant d\'activer cette fonctionnalité.\n\nVotre dossier de thème “%1$s” a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous vraiment activer la synchronisation ?</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
-    <string name="init_hidewp">Masquer tous les points de passage</string>
-    <string name="init_summary_hidewp_original">Masquer les points de passage d\'origine sur la carte</string>
-    <string name="init_summary_hidewp_parking">Masquer les points de passage de stationnement sur la carte</string>
-    <string name="init_summary_hidewp_visited">Masquer les points de passage visités sur la carte</string>
     <string name="map_theme_select">Sélectionner le thème</string>
     <string name="map_theme_options">Options de thème</string>
     <string name="map_language">Langue de la carte</string>

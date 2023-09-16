@@ -53,6 +53,8 @@
     <string name="wp_waypoint">Izziņas vieta</string>
     <string name="wp_original">Sākotnējās koordinātas</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Atrasts</string>
     <string name="log_dnf">Nav atrasts</string>
@@ -118,9 +120,6 @@
     <string name="log_smilies">Smaidiņi</string>
     <string name="log_image">Attēls</string>
     <string name="log_images">Attēli</string>
-    <string name="log_image_attach">Pievienot attēlu</string>
-    <string name="log_image_stored">Esošo</string>
-    <string name="log_image_camera">Jaunu</string>
     <string name="log_image_caption">Nosaukums</string>
     <string name="log_image_description">Apraksts</string>
     <string name="log_image_scale">Izšķirtspēja</string>
@@ -392,7 +391,6 @@
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
     <string name="settings_title_map_data">Karšu dati</string>
-    <string name="settings_title_map_rotation">Kartes sagriešana (Google Maps)</string>
     <string name="settings_title_waypoints">Ceļa punkti</string>
     <string name="settings_title_map_content">Kartes saturs</string>
     <string name="settings_title_map_behavior">Kartes uzvedība</string>
@@ -560,7 +558,6 @@
     <string name="settings_open_geokretymap_website">Atvērt GeoKretyMap.org mājaslapu</string>
     <string name="settings_settings">Iestatījumi</string>
     <string name="settings_information">Informācija</string>
-    <string name="settings_advanced">Papildu iestatījumi</string>
     <string name="init_ec_icons">Kartes ikonas</string>
     <string name="settings_ec_icons_other">Savs stils</string>
     <string name="settings_ec_icons_oc">Piemēram, OC</string>
@@ -665,10 +662,8 @@
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nav atrasti saglabājami ceļa punkti</string>
     <string name="cache_personal_note_limit">Personiskās piezīmes limits</string>
     <string name="cache_personal_note_upload">Augšupielādēt</string>
-    <string name="cache_personal_note_uploading">Augšupielādē personīgo piezīmi</string>
     <string name="cache_personal_note_upload_done">Personiskā piezīme ir augšupielādēta</string>
     <string name="cache_personal_note_upload_error">Kļūda augšupielādējot personisko piezīmi</string>
-    <string name="cache_personal_note_upload_cancelled">Personiskās piezīmes ielāde atcelta</string>
     <string name="cache_description">Apraksts</string>
     <string name="cache_description_table_note">Apraksts satur tabulas formatējumu, kuru, iespējams, vajadzēs apskatīt %s, lai redzētu pareizi.</string>
     <string name="cache_area_description">Apvidus apraksts</string>
@@ -705,14 +700,6 @@
     <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
     <string name="cache_dialog_refresh_title">Atjaunot</string>
     <string name="cache_dialog_refresh_message">Pārlādē slēpņa informāciju…</string>
-    <string name="cache_dialog_watchlist_add_title">Saraksts ar novērojamajiem</string>
-    <string name="cache_dialog_watchlist_add_message">Notiek slēpņa pievienošana novērojamo slēpņu sarakstam…</string>
-    <string name="cache_dialog_watchlist_remove_title">Saraksts ar novērojamajiem</string>
-    <string name="cache_dialog_watchlist_remove_message">Notiek slēpņa dzēšana no novērojamo slēpņu saraksta…</string>
-    <string name="cache_dialog_favorite_add_title">Favorīti</string>
-    <string name="cache_dialog_favorite_add_message">Pievieno slēpni favorītiem…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorīti</string>
-    <string name="cache_dialog_favorite_remove_message">Noņemt slēpni no saviem favorītiem…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
     <string name="cache_menu_navigation_walk">Navigēt (Ar kājām)</string>
@@ -783,7 +770,6 @@
     <string name="cache_share_field">Dalīties</string>
     <string name="cache_time_full_hours">plkst.</string>
     <string name="cache_listed_on">Publicēts %s</string>
-    <string name="cachedetails_progress_upload_note">Personiskā piezīme ir augšupielādēta</string>
     <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>
@@ -853,8 +839,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_save_and_modify_on_website">Iestatīt kā slēpņa koordinātas c:geo un mājas lapā</string>
     <string name="waypoint_reset_cache_coords">Atiestatīt slēpņa koordinātas</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Slēpņa koordinātas ir atiestatītas mājas lapā.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Atiestatīt slēpņa koordinātas mājas lapā…</string>
-    <string name="waypoint_reset">Atiestatīt</string>
     <string name="waypoint_localy_reset_cache_coords">Atiestatīt iekš c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Atiestatīt iekš c:geo un mājas lapā</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Mājas lapa neatbalsta slēpņa koordinātu modificēšanu.</string>
@@ -878,8 +862,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
-    <string name="init_hidewp">Slēpt ceļa punktus</string>
-    <string name="init_summary_hidewp_original">Slēpt oriģinālos ceļa punktus kartē</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
     <string name="map_theme_options">Kartes motīva iestatījumi</string>
     <string name="map_language">Kartes valoda</string>

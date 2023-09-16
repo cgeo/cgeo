@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Marcador</string>
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Gerado</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Encontrada</string>
     <string name="log_dnf">Não encontrada</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Sorrisos</string>
     <string name="log_image">Imagem</string>
     <string name="log_images">Imagens</string>
-    <string name="log_image_attach">Anexar Imagem</string>
-    <string name="log_image_stored">Existente</string>
-    <string name="log_image_camera">Nova</string>
-    <string name="log_image_delete">Eliminar</string>
     <string name="log_image_caption">Legenda</string>
     <string name="log_image_description">Descrição</string>
     <string name="log_image_scale">Redimensionar</string>
@@ -663,7 +661,6 @@
     <string name="about_system_write_logcat_type_extended">Extendido</string>
     <string name="about_system_write_logcat_success">Ficheiro de registos \"%1$s\" gravado na pasta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erro ao escrever no ficheiro de depuração</string>
-    <string name="about_system_write_infos_downloadmanager">Ver transferências</string>
     <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
@@ -733,7 +730,6 @@
     <string name="settings_title_map_hillshading">Sombreado de elevações nos mapas offline</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
-    <string name="settings_title_map_rotation">Rotação do mapa (Google Maps)</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
@@ -1066,7 +1062,6 @@
     <string name="settings_open_geokretymap_website">Abrir o sítio web \"GeoKretyMap.org\"</string>
     <string name="settings_settings">Definições</string>
     <string name="settings_information">Informações</string>
-    <string name="settings_advanced">Definições avançadas</string>
     <string name="init_ec_icons">Ícones do mapa</string>
     <string name="settings_ec_icons_other">Estilo pessoal</string>
     <string name="settings_ec_icons_oc">como OC</string>
@@ -1269,10 +1264,8 @@
     <string name="cache_personal_note_limit">Limite de nota pessoal</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Serão reduzidos %1$d caracteres a esta nota pessoal pelo serviço %3$s (número máximo de caracteres %2$d).</string>
     <string name="cache_personal_note_upload">Carregar</string>
-    <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
     <string name="cache_personal_note_upload_done">Nota pessoal carregada</string>
     <string name="cache_personal_note_upload_error">Erro ao enviar nota pessoal</string>
-    <string name="cache_personal_note_upload_cancelled">Cancelado o carregamento da nota pessoal</string>
     <string name="cache_personal_note_save_and_upload">Guardar e enviar</string>
     <string name="cache_personal_note_vars_out_of_sync">Variáveis nas notas estão fora de sincronização (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Variáveis de sincronização</string>
@@ -1325,14 +1318,6 @@
     <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
     <string name="cache_dialog_refresh_title">Actualizar</string>
     <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
-    <string name="cache_dialog_watchlist_add_title">Lista de observação</string>
-    <string name="cache_dialog_watchlist_add_message">A adicionar a geocache à lista de observação…</string>
-    <string name="cache_dialog_watchlist_remove_title">Lista de observação</string>
-    <string name="cache_dialog_watchlist_remove_message">A remover a geocache da lista de observação…</string>
-    <string name="cache_dialog_favorite_add_title">Favoritos</string>
-    <string name="cache_dialog_favorite_add_message">A incluir geocache na lista de favoritas…</string>
-    <string name="cache_dialog_favorite_remove_title">Favoritos</string>
-    <string name="cache_dialog_favorite_remove_message">A retirar geocache da lista de favoritas…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Definir como destino</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
@@ -1445,7 +1430,6 @@
     <string name="cachedetails_progress_unwatch">Removida da lista de observação</string>
     <string name="cachedetails_progress_favorite">Adicionada aos favoritos</string>
     <string name="cachedetails_progress_unfavorite">Removida dos favoritos</string>
-    <string name="cachedetails_progress_upload_note">Nota pessoal carregada</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
@@ -1461,7 +1445,6 @@
     <string name="image_category_log">Registar</string>
     <string name="context_map_add_to_route">Acrescentar à rota</string>
     <string name="context_map_add_to_route_start">Acrescentar ao início da rota</string>
-    <string name="context_map_remove_from_route">Remover da rota</string>
     <string name="context_map_remove_from_route_start">Remover do início</string>
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
@@ -1544,8 +1527,6 @@
     <string name="waypoint_save_and_modify_on_website">Definir como coordenadas da geocache no c:geo e website</string>
     <string name="waypoint_reset_cache_coords">Repor as coordenadas da geocache</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">As coordenadas da geocache foram repostas no website.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">A restaurar as coordenadas da geocache no website…</string>
-    <string name="waypoint_reset">Redefinir</string>
     <string name="waypoint_localy_reset_cache_coords">Repor no c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Repor no c:geo e no website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">O sítio web não suporta a modificação das coordenadas da cache.</string>
@@ -1652,10 +1633,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar continuamente o conteúdo da pasta Temas de Mapa numa pasta privada da aplicação para acesso mais rápido aos ficheiros. Certifique-se de que a pasta do tema apenas contém os seus temas, mas nenhum dado adicional (grande) antes de activar esta funcionalidade.\n\nA sua pasta do tema \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
     <string name="onetime_mapthemefixslow_title">Corrigir renderização lenta do tema de mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabalhar com temas de mapa não compactados pode diminuir o desempenho da abertura do visualizador de mapa. Pode compactar ou sincronizar os seus temas para obter um desempenho mais rápido e reduzir o atraso ao iniciar o mapa.</string>
-    <string name="init_hidewp">Ocultar pontos adicionais</string>
-    <string name="init_summary_hidewp_original">Oculta os pontos adicionais originais no mapa</string>
-    <string name="init_summary_hidewp_parking">Ocultar os pontos adicionais de estacionamento no mapa</string>
-    <string name="init_summary_hidewp_visited">Ocultar os pontos adicionais visitados no mapa</string>
     <string name="map_theme_select">Seleccionar o tema de mapa</string>
     <string name="map_theme_options">Opções do Tema</string>
     <string name="map_language">Idioma do mapa</string>

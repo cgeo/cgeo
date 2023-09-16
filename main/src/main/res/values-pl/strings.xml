@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Znacznik</string>
     <string name="wpnew_original">Oryginalne</string>
     <string name="wpnew_generated">Wygenerowane</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Znaleziono</string>
     <string name="log_dnf">Nie znaleziono</string>
@@ -152,10 +154,7 @@
     <string name="log_smilies">Uśmiechy</string>
     <string name="log_image">Obraz</string>
     <string name="log_images">Zdjęcia</string>
-    <string name="log_image_attach">Załącz obraz</string>
-    <string name="log_image_stored">Zapisany</string>
-    <string name="log_image_camera">Nowy</string>
-    <string name="log_image_delete">Usuń</string>
+    <string name="log_edit_image">Edytuj obraz</string>
     <string name="log_image_caption">Podpis</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skalowanie obrazu</string>
@@ -496,6 +495,7 @@
     <string name="cache_filter_difficulty">Trudność</string>
     <string name="cache_filter_terrain">Teren</string>
     <string name="cache_filter_difficulty_terrain">Trudność / Teren</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matryca Trudność / Teren</string>
     <string name="cache_filter_rating">Ocena</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Atrybuty skrytki</string>
@@ -587,6 +587,7 @@
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Wypełnij z gc.com</string>
     <string name="cache_filter_nested_filter_modify">modyfikuj</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Podfiltr jest obecnie pusty</string>
     <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
@@ -675,7 +676,6 @@
     <string name="about_system_write_logcat_type_extended">Rozszerzony</string>
     <string name="about_system_write_logcat_success">Plik dziennika „%1$s” zapisany do folderu „%2$s”</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
-    <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
     <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
@@ -745,7 +745,6 @@
     <string name="settings_title_map_hillshading">Cieniowanie map offline</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
-    <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
@@ -1024,6 +1023,7 @@
     <string name="init_summary_trackautovisit">Ustaw przedmioty podróżne domyślnie na „Odwiedzony”</string>
     <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
     <string name="init_offlinelogs_homescreen">Pokaż wpisy offline</string>
+    <string name="init_log_image_default_prefix_title">Domyślny podpis dla obrazów w dzienniku</string>
     <string name="init_summary_offlinelogs_homescreen">Licznik wpisów offline (np. „+ 1”) pojawi się obok Twojego licznika znalezień online na ekranie głównym, jeśli masz wpisy, które jeszcze nie zostały przesłane.</string>
     <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
     <string name="init_summary_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby (tylko użytkownicy Basic)</string>
@@ -1070,6 +1070,8 @@
     <string name="init_force_orientation_sensor_title">Czujnik orientacji</string>
     <string name="init_force_orientation_sensor_note">Na niektórych urządzeniach, standardowy czujnik obrotu nie działa poprawnie, zwracając zły kierunek. W tej sytuacji, alternatywny czujnik (czujnik orientacji) może działać lepiej.</string>
     <string name="init_force_orientation_sensor">Wymuś użycie czujnika orientacji</string>
+    <string name="init_title_extended_settings">Ustawienia rozszerzone</string>
+    <string name="init_summary_extended_settings">Pokaż ustawienia dla bardziej doświadczonych użytkowników</string>
     <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
@@ -1078,7 +1080,6 @@
     <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
     <string name="settings_settings">Ustawienia</string>
     <string name="settings_information">Informacje</string>
-    <string name="settings_advanced">Ustawienia zaawansowane</string>
     <string name="init_ec_icons">Ikony mapy</string>
     <string name="settings_ec_icons_other">Własny styl</string>
     <string name="settings_ec_icons_oc">Jak na OC</string>
@@ -1297,10 +1298,8 @@
     <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ta osobista notatka będzie obcięta o około %1$d znaków na %3$s (maksymalny rozmiar %2$d).</string>
     <string name="cache_personal_note_upload">Wyślij</string>
-    <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
     <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
     <string name="cache_personal_note_upload_error">Błąd podczas wysyłania notatki osobistej</string>
-    <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
     <string name="cache_personal_note_save_and_upload">Zapisz i wgraj</string>
     <string name="cache_personal_note_vars_out_of_sync">Zmienne w notatkach nie są zsynchronizowane (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Synchronizuj zmienne</string>
@@ -1353,14 +1352,6 @@
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
     <string name="cache_dialog_refresh_title">Odśwież</string>
     <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrytki…</string>
-    <string name="cache_dialog_watchlist_add_title">Lista obserwowanych</string>
-    <string name="cache_dialog_watchlist_add_message">Dodaję skrytkę do listy obserwowanych…</string>
-    <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
-    <string name="cache_dialog_watchlist_remove_message">Usuwam skrytkę z listy obserwowanych…</string>
-    <string name="cache_dialog_favorite_add_title">Ulubiona</string>
-    <string name="cache_dialog_favorite_add_message">Dodaję skrytkę do listy ulubionych…</string>
-    <string name="cache_dialog_favorite_remove_title">Ulubiona</string>
-    <string name="cache_dialog_favorite_remove_message">Usuwam skrytkę z listy ulubionych…</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
@@ -1473,7 +1464,6 @@
     <string name="cachedetails_progress_unwatch">Usunięto z obserwowanych</string>
     <string name="cachedetails_progress_favorite">Dodano do ulubionych</string>
     <string name="cachedetails_progress_unfavorite">Usunięto z ulubionych</string>
-    <string name="cachedetails_progress_upload_note">Notatka osobista wysłana</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -1481,6 +1471,7 @@
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_related_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
+    <string name="cache_bettercacher_open">Otwórz skrytkę na BetterCacher.org</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
     <string name="context_share_as_link">Udostępnij link</string>
     <string name="image_category_uncategorized">Bez kategorii</string>
@@ -1489,7 +1480,6 @@
     <string name="image_category_log">Z dziennika</string>
     <string name="context_map_add_to_route">Dołącz na koniec trasy</string>
     <string name="context_map_add_to_route_start">Dołącz na początek trasy</string>
-    <string name="context_map_remove_from_route">Usuń z trasy</string>
     <string name="context_map_remove_from_route_start">Usuń z początku</string>
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_remove_from_route_end">Usuń od końca</string>
@@ -1574,8 +1564,6 @@
     <string name="waypoint_save_and_modify_on_website">Ustaw jako współrzędne skrytki w c:geo i na stronie WWW</string>
     <string name="waypoint_reset_cache_coords">Ustaw ponownie współrzędne skrytki</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Współrzędne skrytki zostały ustawione ponownie na stronie WWW.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ponowne ustawianie współrzędnych skrytki na stronie WWW…</string>
-    <string name="waypoint_reset">Ponowne ustawianie</string>
     <string name="waypoint_localy_reset_cache_coords">Ponowne ustawianie w c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Ponowne ustawianie w c:geo i na stronie WWW</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Strona WWW nie obsługuje zmiany współrzędnych skrytki.</string>
@@ -1682,10 +1670,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu Map Theme w folderze prywatnym dla szybszego dostępu do plików. Upewnij się, że folder twojego motywu zawiera tylko pliki dotyczące motywu, ale nie zawiera dodatkowych (dużych) danych przed włączeniem tej funkcji.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderu?</string>
     <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
     <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
-    <string name="init_hidewp">Ukryj punkty nawigacji</string>
-    <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
-    <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
-    <string name="init_summary_hidewp_visited">Ukryj odwiedzone punkty nawigacji na mapie</string>
     <string name="map_theme_select">Wybierz motyw mapy</string>
     <string name="map_theme_options">Opcje motywu</string>
     <string name="map_language">Język mapy</string>

@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Žymeklis</string>
     <string name="wpnew_original">Originalus</string>
     <string name="wpnew_generated">Sugeneruotas</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Vaizdas</string>
     <string name="log_images">Vaizdai</string>
-    <string name="log_image_attach">Pridėti vaizdą</string>
-    <string name="log_image_stored">Esamą</string>
-    <string name="log_image_camera">Naują</string>
-    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -632,7 +630,6 @@
     <string name="about_system_write_logcat_type_extended">Išplėstas</string>
     <string name="about_system_write_logcat_success">Žurnalo failas \'%1$s\' įrašytas į aplanką \'%2$s\'</string>
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
-    <string name="about_system_write_infos_downloadmanager">Rodyti siuntinius</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
     <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
@@ -701,7 +698,6 @@
     <string name="settings_title_map_hillshading">Žemėlapio naudojamo neprisijungus kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
-    <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Kelio taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
     <string name="settings_title_map_behavior">Žemėlapio elgsena</string>
@@ -1029,7 +1025,6 @@
     <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
-    <string name="settings_advanced">Išplėstiniai parametrai</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1244,10 +1239,8 @@
     <string name="cache_personal_note_limit">Asmeninės pastabos limitas</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ši asmeninė pastaba bus sutrumpinta apytiksliai. %1$d simbolių iki %3$s (maks. dydis %2$d).</string>
     <string name="cache_personal_note_upload">Įkelti</string>
-    <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
-    <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
     <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sinchronizuoti kintamuosius</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
@@ -1299,14 +1292,6 @@
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
     <string name="cache_dialog_refresh_title">Atnaujinama</string>
     <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
-    <string name="cache_dialog_watchlist_add_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
-    <string name="cache_dialog_watchlist_remove_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_remove_message">Slėptuvė šalinama iš stebimų slėptuvių sąrašo…</string>
-    <string name="cache_dialog_favorite_add_title">Mėgstama</string>
-    <string name="cache_dialog_favorite_add_message">Slėptuvė įtraukiama į Jūsų mėgstamų sąrašą…</string>
-    <string name="cache_dialog_favorite_remove_title">Mėgstama</string>
-    <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
@@ -1413,7 +1398,6 @@
     <string name="cache_recently_viewed">Neseniai peržiūrėta</string>
     <string name="cache_recently_viewed_empty">Nėra neseniai peržiūrėtų slėptuvių</string>
     <string name="cache_clear_recently_viewed">išvalyti</string>
-    <string name="cachedetails_progress_upload_note">Asmeninė pastaba įkelta</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
@@ -1429,7 +1413,6 @@
     <string name="image_category_log">Įrašas</string>
     <string name="context_map_add_to_route">Pridėti prie maršruto</string>
     <string name="context_map_add_to_route_start">Įterpti į maršrutą</string>
-    <string name="context_map_remove_from_route">Pašalinti iš maršruto</string>
     <string name="context_map_remove_from_route_start">Pašalinti iš pradžios</string>
     <string name="context_map_remove_from_route_pos">Pašalinti iš pozicijos %d</string>
     <string name="context_map_remove_from_route_end">Pašalinti iš pabaigos</string>
@@ -1512,8 +1495,6 @@
     <string name="waypoint_save_and_modify_on_website">Nustatyti kaip slėptuvės koordinatės c:geo programoje ir svetainėje</string>
     <string name="waypoint_reset_cache_coords">Atstatyti originalias slėptuvės koordinates</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Originalios slėptuvės koordinatės svetainėje buvo atstatytos.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Atstatomos originalios slėptuvės koordinatės svetainėje…</string>
-    <string name="waypoint_reset">Atstatyti</string>
     <string name="waypoint_localy_reset_cache_coords">Atstatyti c:geo programoje</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Atstatyti c:geo programoje ir svetainėje</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Svetainė nepalaiko pakeistų slėptuvės koordinačių.</string>
@@ -1620,10 +1601,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
     <string name="onetime_mapthemefixslow_title">Pataisykite lėtą žemėlapio temos atvaizdavimą</string>
     <string name="onetime_mapthemefixslow_message">Dirbant su nesupakuotomis žemėlapių temomis, gali sumažėti žemėlapių peržiūros priemonės atidarymo našumas. Galite supakuoti arba sinchronizuoti savo temas, kad padidintumėte našumą ir sumažintumėte žemėlapio paleidimo delsą.</string>
-    <string name="init_hidewp">Slėpti kelio taškus</string>
-    <string name="init_summary_hidewp_original">Slėpti originalius kelio taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_visited">Slėpti aplankytus kelio taškus žemėlapyje</string>
     <string name="map_theme_select">Pasirinkite žemėlapio temą</string>
     <string name="map_theme_options">Temos parinktys</string>
     <string name="map_language">Žemėlapio kalba</string>

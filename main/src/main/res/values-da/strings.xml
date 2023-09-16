@@ -83,6 +83,8 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Markør</string>
     <string name="wpnew_original">Oprindeligt</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fundet</string>
     <string name="log_dnf">Ikke fundet</string>
@@ -148,10 +150,6 @@
     <string name="log_smilies">Smileyer</string>
     <string name="log_image">Billede</string>
     <string name="log_images">Billeder</string>
-    <string name="log_image_attach">Vedhæft billede</string>
-    <string name="log_image_stored">Eksisterende</string>
-    <string name="log_image_camera">Nyt</string>
-    <string name="log_image_delete">Slet</string>
     <string name="log_image_caption">Billedtekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -533,7 +531,6 @@
     <string name="about_system_write_logcat_type_extended">Udvidet</string>
     <string name="about_system_write_logcat_success">Logfil \"%1$s\" skrevet til mappen \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
-    <string name="about_system_write_infos_downloadmanager">Se downloads</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
     <string name="about_contributors_recent">Seneste bidragsydere</string>
@@ -564,7 +561,6 @@
     <string name="settings_title_logging">Logning</string>
     <string name="settings_summary_logging">Konfigurér signatur og indstillinger for logbeskeder.</string>
     <string name="settings_title_map_data">Kortdata</string>
-    <string name="settings_title_map_rotation">Kortrotation (Google Maps)</string>
     <string name="settings_title_waypoints">Rutepunkter</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_map_behavior">Kortbetjening</string>
@@ -791,7 +787,6 @@
     <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
     <string name="settings_settings">Indstillinger</string>
     <string name="settings_information">Information</string>
-    <string name="settings_advanced">Avancerede indstillinger</string>
     <string name="init_ec_icons">Kortsymboler</string>
     <string name="settings_ec_icons_other">Egen symbolstil</string>
     <string name="settings_ec_icons_oc">Som OC</string>
@@ -913,10 +908,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">Undgå ekstraktion af rutepunkter</string>
     <string name="cache_personal_note_limit">Afkortning af personlig note</string>
     <string name="cache_personal_note_upload">Upload</string>
-    <string name="cache_personal_note_uploading">Upload personlig note</string>
     <string name="cache_personal_note_upload_done">Personlig note uploadet</string>
     <string name="cache_personal_note_upload_error">Fejl ved upload af personlig note</string>
-    <string name="cache_personal_note_upload_cancelled">Upload af personlig note blev afbrudt</string>
     <string name="cache_description">Beskrivelse</string>
     <string name="cache_description_table_note">Beskrivelsen indeholder tabeller som måske kun kan vises korrekt på %s.</string>
     <string name="cache_area_description">Områdebeskrivelse</string>
@@ -955,14 +948,6 @@
     <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
     <string name="cache_dialog_refresh_title">Genindlæs</string>
     <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
-    <string name="cache_dialog_watchlist_add_title">Overvågningsliste</string>
-    <string name="cache_dialog_watchlist_add_message">Tilføjer cache til din overvågningsliste…</string>
-    <string name="cache_dialog_watchlist_remove_title">Overvågningsliste</string>
-    <string name="cache_dialog_watchlist_remove_message">Fjerner cache fra din overvågningsliste…</string>
-    <string name="cache_dialog_favorite_add_title">Favorit</string>
-    <string name="cache_dialog_favorite_add_message">Tilføjer cache til dine favoritter…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorit</string>
-    <string name="cache_dialog_favorite_remove_message">Fjerner cache fra dine favoritter…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_navigation_drive">Navigation (bil)</string>
     <string name="cache_menu_navigation_walk">Navigation (til fods)</string>
@@ -1040,7 +1025,6 @@
     <string name="cache_share_field">Del</string>
     <string name="cache_time_full_hours">klokken</string>
     <string name="cache_listed_on">Fra %s</string>
-    <string name="cachedetails_progress_upload_note">Personlig note uploadet</string>
     <string name="cache_whereyougo_start">Hent og start denne cartridge med WhereYouGo</string>
     <string name="cache_whereyougo_install">Installér WhereYouGo for at hente og starte denne cartridge</string>
     <string name="context_share_as_text">Del tekst</string>
@@ -1114,8 +1098,6 @@
     <string name="waypoint_save_and_modify_on_website">Sæt som cacheposition i c:geo og på website</string>
     <string name="waypoint_reset_cache_coords">Nulstil cacheposition</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Cachepositionen blev nulstillet på websitet.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Nulstiller cacheposition på websitet…</string>
-    <string name="waypoint_reset">Nulstil</string>
     <string name="waypoint_localy_reset_cache_coords">Nulstil i c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Nulstil i c:geo og på website</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Websitet understøtter ikke ændringer til cacheposition.</string>
@@ -1141,10 +1123,6 @@
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_showc_found_offline">Fundet (offline)</string>
     <string name="onetime_mapthemefixslow_title">Fix langsom gengivelse af korttema</string>
-    <string name="init_hidewp">Skjul rutepunkter</string>
-    <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
-    <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
-    <string name="init_summary_hidewp_visited">Skjul besøgte rutepunkter på kortet</string>
     <string name="map_theme_select">Vælg korttema</string>
     <string name="map_theme_options">Indstillinger for tema</string>
     <string name="map_language">Kortsprog</string>

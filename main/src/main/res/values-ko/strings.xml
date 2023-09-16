@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">표식</string>
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -152,10 +154,7 @@
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
     <string name="log_images">이미지</string>
-    <string name="log_image_attach">사진 첨부</string>
-    <string name="log_image_stored">사진첩</string>
-    <string name="log_image_camera">촬영하기</string>
-    <string name="log_image_delete">삭제</string>
+    <string name="log_edit_image">이미지 편집</string>
     <string name="log_image_caption">제목</string>
     <string name="log_image_description">설명</string>
     <string name="log_image_scale">크기 조정</string>
@@ -481,6 +480,7 @@
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
     <string name="cache_filter_difficulty_terrain">난이도 / 지형</string>
+    <string name="cache_filter_difficulty_terrain_matrix">난이도 / 지형 등급</string>
     <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">캐시 속성</string>
@@ -569,6 +569,7 @@
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">gc.com으로 채우기</string>
     <string name="cache_filter_nested_filter_modify">편집</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
@@ -657,7 +658,6 @@
     <string name="about_system_write_logcat_type_extended">확장</string>
     <string name="about_system_write_logcat_success">\"%2$s\"폴더에 로그 파일 \"%1$s\"이 기록되었습니다.</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
-    <string name="about_system_write_infos_downloadmanager">다운로드보기</string>
     <string name="about_changelog_full">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
@@ -727,7 +727,6 @@
     <string name="settings_title_map_hillshading">오프라인 지도 음영식</string>
     <string name="settings_title_offline_routing">오프라인 라우팅</string>
     <string name="settings_summary_offline_routing">도우미 앱 \"BRouter\"가 설치 및 구성되어 있거나 내부 라우팅이 활성화 된 경우 오프라인 라우팅을 사용할 수 있습니다.</string>
-    <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
@@ -1006,6 +1005,7 @@
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
     <string name="init_sigautoinsert">자동으로 입력하기</string>
     <string name="init_offlinelogs_homescreen">오프라인 로그 표시</string>
+    <string name="init_log_image_default_prefix_title">로그 이미지의 기본 캡션</string>
     <string name="init_summary_offlinelogs_homescreen">아직 제출하지 않은 로그가있는 경우 홈 화면의 온라인 찾기 수 옆에 오프라인 로그 카운터 (예 \"+1\")가 표시됩니다.</string>
     <string name="init_loaddirectionimg">이미지 방향</string>
     <string name="init_summary_loaddirectionimg">필요시 방향 화살표 이미지를 다운로드 받습니다.(일반회원만 필요함)</string>
@@ -1052,6 +1052,8 @@
     <string name="init_force_orientation_sensor_title">방향 센서</string>
     <string name="init_force_orientation_sensor_note">일부기기는 일반 회전 벡터 센서가 이상하게 작동하여 잘못된 방향으로 표시됩니다. 이 경우, 별도의 센서(방향센서)가 더 좋은 결과를 제공할 수 있습니다.</string>
     <string name="init_force_orientation_sensor">방향센서 강제 사용</string>
+    <string name="init_title_extended_settings">확장 설정</string>
+    <string name="init_summary_extended_settings">고급 사용자를 위한 설정 표시</string>
     <string name="init_create_memory_dump">메모리 덤프 생성</string>
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
@@ -1060,7 +1062,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
     <string name="settings_settings">설정</string>
     <string name="settings_information">정보</string>
-    <string name="settings_advanced">고급 설정</string>
     <string name="init_ec_icons">지도 아이콘</string>
     <string name="settings_ec_icons_other">나만의 스타일</string>
     <string name="settings_ec_icons_oc">OC 처럼</string>
@@ -1255,10 +1256,8 @@
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">이 개인 메모는 약 %1$d 문자에서 %3$s(최대 크기 %2$d)로 잘립니다.</string>
     <string name="cache_personal_note_upload">올리기</string>
-    <string name="cache_personal_note_uploading">개인 메모 올리기</string>
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
-    <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
     <string name="cache_personal_note_save_and_upload">저장 및 업로드</string>
     <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">변수 동기화</string>
@@ -1311,14 +1310,6 @@
     <string name="cache_dialog_offline_drop_message">기기에서 캐시 제거중…</string>
     <string name="cache_dialog_refresh_title">새로 고침</string>
     <string name="cache_dialog_refresh_message">캐시 정보 다시 불러오는 중…</string>
-    <string name="cache_dialog_watchlist_add_title">관심목록</string>
-    <string name="cache_dialog_watchlist_add_message">캐시를 관심목록에 추가중…</string>
-    <string name="cache_dialog_watchlist_remove_title">관심목록</string>
-    <string name="cache_dialog_watchlist_remove_message">캐시를 관심목록서 삭제중…</string>
-    <string name="cache_dialog_favorite_add_title">호감점수</string>
-    <string name="cache_dialog_favorite_add_message">호감캐시로 추가중…</string>
-    <string name="cache_dialog_favorite_remove_title">호감점수</string>
-    <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_target">대상으로 설정</string>
     <string name="cache_menu_navigation_drive">길찾기(자동차)</string>
@@ -1431,7 +1422,6 @@
     <string name="cachedetails_progress_unwatch">관심목록에서 제거되었습니다</string>
     <string name="cachedetails_progress_favorite">호감점수 목록에 추가했습니다</string>
     <string name="cachedetails_progress_unfavorite">호감점수 목록에 제거했습니다</string>
-    <string name="cachedetails_progress_upload_note">개인 메모 올라감</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -1439,6 +1429,7 @@
     <string name="cache_alc_start">이 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_related_start">연결한 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
+    <string name="cache_bettercacher_open">BetterCacher.org의 오픈캐시</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
     <string name="image_category_uncategorized">카테고리 없음</string>
@@ -1447,7 +1438,6 @@
     <string name="image_category_log">로그</string>
     <string name="context_map_add_to_route">경로 후에 추가</string>
     <string name="context_map_add_to_route_start">경로 전에 추가</string>
-    <string name="context_map_remove_from_route">경로에서 제거</string>
     <string name="context_map_remove_from_route_start">시작에서 제거</string>
     <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
     <string name="context_map_remove_from_route_end">끝에서 제거</string>
@@ -1529,8 +1519,6 @@
     <string name="waypoint_save_and_modify_on_website">c:geo에서 캐시 좌표를 설정합니다.</string>
     <string name="waypoint_reset_cache_coords">캐시 좌표 재설정</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">웹사이트에서 캐시 좌표가 재설정 되었습니다.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">웹사이트에서 캐시좌표 재설정중…</string>
-    <string name="waypoint_reset">재설정</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo에서 초기화</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo와 웹사이트에서 초기화</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">웹사이트가 캐시 좌표 수정을 지원하지 않습니다.</string>
@@ -1637,10 +1625,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">이렇게하면 더 빠른 파일 액세스를 위해지도 테마 폴더의 콘텐츠가 앱 전용 폴더에 지속적으로 동기화됩니다. 이 기능을 활성화하기 전에 테마 폴더에 테마 만 포함되고 추가 (대용량) 데이터가 없는지 확인하십시오.\n\n지도 테마 폴더 \'%1$s\'의 현재 크기는 %2$s, %3$s이며 크기는 %4$s입니다.\n\n폴더 동기화를 켜시겠습니까?</string>
     <string name="onetime_mapthemefixslow_title">느린 지도 테마 렌더링 수정</string>
     <string name="onetime_mapthemefixslow_message">압축되지 않은 지도 테마로 작업하면 지도 보기 열기 성능이 저하 될 수 있습니다. 테마를 압축하거나 동기화하여 더 빠른 성능을 얻고 지도 시작 지연을 줄일 수 있습니다.</string>
-    <string name="init_hidewp">지점 숨기기</string>
-    <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
-    <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
-    <string name="init_summary_hidewp_visited">지도에서 방문한 지점 숨기기</string>
     <string name="map_theme_select">지도 테마 선택</string>
     <string name="map_theme_options">테마 옵션</string>
     <string name="map_language">지도 언어</string>

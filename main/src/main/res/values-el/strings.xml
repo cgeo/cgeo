@@ -86,6 +86,8 @@
     <string name="wpnew_waypoint">Δείκτης</string>
     <string name="wpnew_original">Αρχικό</string>
     <string name="wpnew_generated">Δημιουργήθηκε</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Το βρήκα</string>
     <string name="log_dnf">Δεν το βρήκα</string>
@@ -152,10 +154,6 @@
     <string name="log_smilies">Χαμόγελα</string>
     <string name="log_image">Εικόνα</string>
     <string name="log_images">Εικόνες</string>
-    <string name="log_image_attach">Επισύναψη εικόνας</string>
-    <string name="log_image_stored">Υπάρχον</string>
-    <string name="log_image_camera">Νέο</string>
-    <string name="log_image_delete">Διαγραφή</string>
     <string name="log_image_caption">Λεζάντα</string>
     <string name="log_image_description">Περιγραφή</string>
     <string name="log_image_scale">Προσαρμογή μεγέθους</string>
@@ -594,7 +592,6 @@
     <string name="about_system_write_logcat_type_extended">Εκτεταμένο</string>
     <string name="about_system_write_logcat_success">Αρχείο καταγραφής \"%1$s\" γράφτηκε στο φάκελο \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
-    <string name="about_system_write_infos_downloadmanager">Προβολή λήψεων</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
     <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
@@ -659,7 +656,6 @@
     <string name="settings_title_map_hillshading">Σκιάζοντας χωρίς σύνδεση χάρτες</string>
     <string name="settings_title_offline_routing">Δρομολόγηση εκτός σύνδεσης</string>
     <string name="settings_summary_offline_routing">Η σύνδεση δρομολόγησης είναι διαθέσιμη αν είτε η βοηθητική εφαρμογή \"BRouter\" είναι εγκατεστημένη και ρυθμισμένη είτε η εσωτερική δρομολόγηση είναι ενεργοποιημένη.</string>
-    <string name="settings_title_map_rotation">Περιστροφή χάρτη (Google Maps)</string>
     <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
     <string name="settings_title_map_behavior">Συμπεριφορά χάρτη</string>
@@ -963,7 +959,6 @@
     <string name="settings_open_geokretymap_website">Ανοίξτε την ιστοσελίδα GeoKretyMap.org</string>
     <string name="settings_settings">Ρυθμίσεις</string>
     <string name="settings_information">Πληροφορίες</string>
-    <string name="settings_advanced">Σύνθετες ρυθμίσεις</string>
     <string name="init_ec_icons">Εικονίδια χάρτη</string>
     <string name="settings_ec_icons_other">Δικό μου στυλ</string>
     <string name="settings_ec_icons_oc">Σαν OC</string>
@@ -1159,10 +1154,8 @@
     <string name="cache_personal_note_limit">Όριο προσωπικής σημείωσης</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Αυτή η προσωπική σημείωση θα περικοπεί από περίπου %1$d χαρακτήρες κατά %3$s (μέγιστο μέγεθος %2$d).</string>
     <string name="cache_personal_note_upload">Ανέβασμα</string>
-    <string name="cache_personal_note_uploading">Ανέβασμα προσωπικής σημείωσης</string>
     <string name="cache_personal_note_upload_done">Η προσωπική σημείωση ανέβηκε</string>
     <string name="cache_personal_note_upload_error">Σφάλμα στο ανεβάσμα προσωπικής σημείωσης</string>
-    <string name="cache_personal_note_upload_cancelled">Το ανέβασμα προσωπικής σημείωσης ακυρώθηκε</string>
     <string name="cache_description">Περιγραφή</string>
     <string name="cache_description_table_note">Η περιγραφή περιέχει πίνακα μορφοποίησης που μπορεί να χρειαστεί να προβληθεί στο %s για να εμφανιστεί σωστά.</string>
     <string name="cache_description_rendering">Επεξεργασία  αποτύπωσης, παρακαλώ περιμένετε…</string>
@@ -1210,14 +1203,6 @@
     <string name="cache_dialog_offline_drop_message">Αφαιρείται η κρύπτη από τη μνήμη της συσκευής…</string>
     <string name="cache_dialog_refresh_title">Ανανέωση</string>
     <string name="cache_dialog_refresh_message">Επαναφορτώνει τις λεπτομέρειες της κρύπτης…</string>
-    <string name="cache_dialog_watchlist_add_title">Λίστα παρακολούθησης</string>
-    <string name="cache_dialog_watchlist_add_message">Προσθήκη της κρύπτης στη λίστα παρακολούθησής σας…</string>
-    <string name="cache_dialog_watchlist_remove_title">Λίστα παρακολούθησης</string>
-    <string name="cache_dialog_watchlist_remove_message">Αφαέρεση της κρύπτης από τη λίστα παρακολούθησής σας…</string>
-    <string name="cache_dialog_favorite_add_title">Αγαπημένη</string>
-    <string name="cache_dialog_favorite_add_message">Προσθήκη της κρύπτης στις αγαπημένες σας…</string>
-    <string name="cache_dialog_favorite_remove_title">Αγαπημένη</string>
-    <string name="cache_dialog_favorite_remove_message">Αφαιρεί την κρύπτη από τις αγαπημένες σας…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
@@ -1321,7 +1306,6 @@
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
-    <string name="cachedetails_progress_upload_note">Η προσωπική σημείωση ανέβηκε</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
@@ -1411,8 +1395,6 @@
     <string name="waypoint_save_and_modify_on_website">Ορισμός ως συντεταγμένες κρύπτης στο c:geo και στην ιστοσελίδα</string>
     <string name="waypoint_reset_cache_coords">Επαναφορά συντεταγμένων γεωκρύπτης</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Έχει γίνει επαναφορά των συντεταγμένων της γεωκρύπτης στην ιστοσελίδα.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Γίνεται επαναφορά των συντεταγμένων της κρύπτης στην ιστοσελίδα…</string>
-    <string name="waypoint_reset">Επαναφορά</string>
     <string name="waypoint_localy_reset_cache_coords">Επαναφορά στο c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Επαναφορά στο c:geo και στην ιστοσελίδα</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Η ιστοσελίδα δεν υποστηρίζει τη μετατροπή των συντεταγμένων της γεωκρύπτης.</string>
@@ -1518,10 +1500,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτό θα συγχρονίζει συνεχώς το περιεχόμενο του φακέλου ΄΄θέμα χάρτη΄΄ σε αποκλειστικό φάκελο για ταχύτερη πρόσβαση. Σιγουρευτείτε ότι ο φάκελος θεμάτων σας περιέχει μόνο τα θέματα και όχι πρόσθετα (μεγάλα) αρχεία πριν ενεργοποιήσετε αυτή τη δυνατότητα.\n\nΟ φάκελος χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s.\n\nΘέλετε να ενεργοποιήσετε το συγχρονισμό φακέλων;</string>
     <string name="onetime_mapthemefixslow_title">Διόρθωση αποτύπωσης αργού θέματος χάρτη</string>
     <string name="onetime_mapthemefixslow_message">Εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χάρτη. Μπορείτε να συμπιεσετε ή να συγχρονίσετε τα θέματα σας για να πάρετε ταχύτερη απόδοση και να μειώσετε την καθυστέρηση στην προβολή του χάρτη.</string>
-    <string name="init_hidewp">Απόκρυψη ενδιάμεσων σταθμών</string>
-    <string name="init_summary_hidewp_original">Απόκρυψη αρχικών ενδιάμεσων σταθμών από τον χάρτη</string>
-    <string name="init_summary_hidewp_parking">Απόκρυψη ενδιάμεσων σταθμών στάθμευσης από τον χάρτη</string>
-    <string name="init_summary_hidewp_visited">Απόκρυψη ενδιάμεσων σταθμών που έχουν δεχθεί επίσκεψη απο τον χάρτη</string>
     <string name="map_theme_select">Επιλογή θέματος χάρτη</string>
     <string name="map_theme_options">Επιλογές θέματος</string>
     <string name="map_language">Γλώσσα χάρτη</string>
