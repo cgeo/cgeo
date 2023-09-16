@@ -797,7 +797,6 @@
     <string name="about_system_write_logcat_type_extended">Extended</string>
     <string name="about_system_write_logcat_success">Logfile \"%1$s\" written to folder \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error writing logfile</string>
-    <string name="about_system_write_infos_downloadmanager">View downloads</string>
     <string name="about_changelog_full">List of all changes</string>
     <string name="about_nutshellmanual">Online manual</string>
 
@@ -873,7 +872,6 @@
     <string name="settings_title_map_hillshading">Offline maps hillshading</string>
     <string name="settings_title_offline_routing">Offline routing</string>
     <string name="settings_summary_offline_routing">Offline routing is available if either helper app \"BRouter\" is installed and configured or internal routing is enabled.</string>
-    <string name="settings_title_map_rotation">Map rotation (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_map_behavior">Map behavior</string>
@@ -1877,10 +1875,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">This will continuously synchronize the content of the Map Theme folder into an app-private folder for faster file access. Make sure your theme folder only contains your themes but no additional (large) data before enabling this feature.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
     <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
-    <string name="init_hidewp">Hide waypoints</string>
-    <string name="init_summary_hidewp_original">Hide original waypoints on the map</string>
-    <string name="init_summary_hidewp_parking">Hide parking waypoints on the map</string>
-    <string name="init_summary_hidewp_visited">Hide visited waypoints on the map</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
     <string name="map_language">Map language</string>
