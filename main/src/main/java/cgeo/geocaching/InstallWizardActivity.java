@@ -57,7 +57,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     private enum WizardStep {
         WIZARD_START,
         WIZARD_PERMISSIONS, WIZARD_PERMISSIONS_LOCATION, WIZARD_PERMISSIONS_LEGACY_WRITE_STORAGE,
-        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER, WIZARD_PERMISSIONS_BROUTERTILESFOLDER,
+        WIZARD_PERMISSIONS_BASEFOLDER, WIZARD_PERMISSIONS_MAPFOLDER, WIZARD_PERMISSIONS_MAPTHEMEFOLDER, WIZARD_PERMISSIONS_GPXFOLDER, WIZARD_PERMISSIONS_BROUTERTILESFOLDER, WIZARD_PERMISSIONS_NOTIFICATIONS,
         WIZARD_PLATFORMS,
         WIZARD_ADVANCED,
         WIZARD_END
@@ -73,6 +73,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> gotoNext());
     private final PermissionAction<Void> askLegacyStoragePermissionAction = PermissionAction.register(this, PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE, b -> gotoNext());
+    private final PermissionAction<Void> askNotificationsPermissionAction = PermissionAction.register(this, PermissionContext.NOTIFICATIONS, b -> gotoNext());
 
     // dialog elements
     private ImageView logo = null;
@@ -202,6 +203,11 @@ public class InstallWizardActivity extends AppCompatActivity {
             case WIZARD_PERMISSIONS_BROUTERTILESFOLDER:
                 setFolderInfo(PersistableFolder.ROUTING_TILES, R.string.wizard_broutertilesfolder_request_explanation, true);
                 setNavigation(this::gotoPrevious, 0, forceSkipButton ? this::gotoNext : null, 0, this::requestBroutertilesfolder, 0);
+                break;
+            case WIZARD_PERMISSIONS_NOTIFICATIONS:
+                title.setText(PermissionContext.NOTIFICATIONS.getExplanationTitle());
+                PermissionContext.NOTIFICATIONS.getExplanation().applyTo(text);
+                setNavigation(this::gotoPrevious, 0, null, 0, this::requestNotifications, 0);
                 break;
             case WIZARD_PLATFORMS:
                 title.setText(R.string.wizard_platforms_title);
@@ -375,6 +381,7 @@ public class InstallWizardActivity extends AppCompatActivity {
                 || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
                 || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
                 || (step == WizardStep.WIZARD_PERMISSIONS_BROUTERTILESFOLDER && !broutertilesFolderNeedsMigration())
+                || (step == WizardStep.WIZARD_PERMISSIONS_NOTIFICATIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU || hasNotificationsPermission()))
                 || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
                 || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
                 ;
@@ -396,7 +403,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     public static boolean isConfigurationOk() {
         final boolean isPlatformConfigured = ConnectorFactory.getActiveConnectorsWithValidCredentials().length > 0;
-        return hasLocationPermission() && hasLegacyWriteStoragePermission() && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
+        return hasLocationPermission() && hasLegacyWriteStoragePermission() && hasNotificationsPermission() && isPlatformConfigured && ContentStorageActivityHelper.baseFolderIsSet();
     }
 
     public static boolean needsFolderMigration() {
@@ -404,7 +411,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     // -------------------------------------------------------------------
-    // old Android permissions related methods
+    // other Android permissions related methods
 
     private static boolean hasLocationPermission() {
         return PermissionContext.LOCATION.hasAllPermissions();
@@ -424,6 +431,14 @@ public class InstallWizardActivity extends AppCompatActivity {
         return !DO_LEGACY_WRITE_STORAGE || PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions();
     }
 
+    private void requestNotifications() {
+        setSkip(this::gotoNext, 0);
+        askNotificationsPermissionAction.launch(null, true);
+    }
+
+    private static boolean hasNotificationsPermission() {
+        return PermissionContext.NOTIFICATIONS.hasAllPermissions();
+    }
 
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods
