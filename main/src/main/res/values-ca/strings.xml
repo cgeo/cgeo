@@ -614,7 +614,6 @@
     <string name="about_system_write_logcat_type_extended">Ampliat</string>
     <string name="about_system_write_logcat_success">Fitxer de registre \"%1$s\" escrit a la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error en el Fitxer de registre</string>
-    <string name="about_system_write_infos_downloadmanager">Veure descàrregues</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
     <string name="about_contributors_recent">Col·laboradors recents</string>
@@ -683,7 +682,6 @@
     <string name="settings_title_map_hillshading">Mapes ombrejats fora de línia</string>
     <string name="settings_title_offline_routing">Encaminament fora de línia</string>
     <string name="settings_summary_offline_routing">L\'encaminament fora de línia està disponible si hi ha instal·lada i configurada l\'aplicació auxiliar \"BRouter\" o si l\'encaminament intern està habilitat.</string>
-    <string name="settings_title_map_rotation">Rotació de mapes (Google Maps)</string>
     <string name="settings_title_waypoints">Punts de ruta</string>
     <string name="settings_title_map_content">Contingut del mapa</string>
     <string name="settings_title_map_behavior">Comportament del mapa</string>
@@ -1566,10 +1564,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Això sincronitzarà contínuament el contingut de la carpeta del tema del mapa amb una carpeta privada de l’aplicació per accedir més ràpidament als fitxers. Assegureu-vos que la carpeta de temes només contingui els vostres temes, però no hi hagi dades addicionals (grans) abans d’activar aquesta funció.\n\nLa carpeta de temes del mapa \"%1$s\" té actualment %2$s, %3$s i té una mida de %4$s.\n\nVoleu activar la sincronització de carpetes?</string>
     <string name="onetime_mapthemefixslow_title">Corregiu la representació del tema del mapa lent</string>
     <string name="onetime_mapthemefixslow_message">Treballar amb temes de mapes no comprimits pot reduir el rendiment d\'obertura del visor de mapes. Podeu comprimir o sincronitzar els temes per obtenir un rendiment més ràpid i reduir el retard en iniciar el mapa.</string>
-    <string name="init_hidewp">Amaga els punts de ruta</string>
-    <string name="init_summary_hidewp_original">Amaga els punts de ruta originals del mapa</string>
-    <string name="init_summary_hidewp_parking">Amaga els punts d\'aparcament al mapa</string>
-    <string name="init_summary_hidewp_visited">Amaga els punts de ruta visitats al mapa</string>
     <string name="map_theme_select">Trieu els detalls del mapa</string>
     <string name="map_theme_options">Opcions del tema</string>
     <string name="map_language">Idioma del mapa</string>
