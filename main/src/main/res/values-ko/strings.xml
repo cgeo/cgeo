@@ -658,7 +658,6 @@
     <string name="about_system_write_logcat_type_extended">확장</string>
     <string name="about_system_write_logcat_success">\"%2$s\"폴더에 로그 파일 \"%1$s\"이 기록되었습니다.</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
-    <string name="about_system_write_infos_downloadmanager">다운로드보기</string>
     <string name="about_changelog_full">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
@@ -728,7 +727,6 @@
     <string name="settings_title_map_hillshading">오프라인 지도 음영식</string>
     <string name="settings_title_offline_routing">오프라인 라우팅</string>
     <string name="settings_summary_offline_routing">도우미 앱 \"BRouter\"가 설치 및 구성되어 있거나 내부 라우팅이 활성화 된 경우 오프라인 라우팅을 사용할 수 있습니다.</string>
-    <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
@@ -1627,10 +1625,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">이렇게하면 더 빠른 파일 액세스를 위해지도 테마 폴더의 콘텐츠가 앱 전용 폴더에 지속적으로 동기화됩니다. 이 기능을 활성화하기 전에 테마 폴더에 테마 만 포함되고 추가 (대용량) 데이터가 없는지 확인하십시오.\n\n지도 테마 폴더 \'%1$s\'의 현재 크기는 %2$s, %3$s이며 크기는 %4$s입니다.\n\n폴더 동기화를 켜시겠습니까?</string>
     <string name="onetime_mapthemefixslow_title">느린 지도 테마 렌더링 수정</string>
     <string name="onetime_mapthemefixslow_message">압축되지 않은 지도 테마로 작업하면 지도 보기 열기 성능이 저하 될 수 있습니다. 테마를 압축하거나 동기화하여 더 빠른 성능을 얻고 지도 시작 지연을 줄일 수 있습니다.</string>
-    <string name="init_hidewp">지점 숨기기</string>
-    <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
-    <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
-    <string name="init_summary_hidewp_visited">지도에서 방문한 지점 숨기기</string>
     <string name="map_theme_select">지도 테마 선택</string>
     <string name="map_theme_options">테마 옵션</string>
     <string name="map_language">지도 언어</string>
