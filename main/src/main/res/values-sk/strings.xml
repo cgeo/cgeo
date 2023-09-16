@@ -630,7 +630,6 @@
     <string name="about_system_write_logcat_type_extended">Rozšírený</string>
     <string name="about_system_write_logcat_success">Súbor denníka \"%1$s\" zapísaný do priečinka \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
-    <string name="about_system_write_infos_downloadmanager">Zobraziť prevzaté súbory</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
     <string name="about_contributors_recent">Nedávni prispievatelia</string>
@@ -699,7 +698,6 @@
     <string name="settings_title_map_hillshading">Tieňovanie kopcov na offline mapách</string>
     <string name="settings_title_offline_routing">Offline navigácia</string>
     <string name="settings_summary_offline_routing">Offline navigácia je k dispozícii, ak je nainštalovaná a nakonfigurovaná pomocná aplikácia \"BRouter\", prípadne aj je povolená interná navigácia.</string>
-    <string name="settings_title_map_rotation">Otáčanie mapy (Google Mapy)</string>
     <string name="settings_title_waypoints">Body trasy</string>
     <string name="settings_title_map_content">Obsah máp</string>
     <string name="settings_title_map_behavior">Nastavenie správania mapy</string>
@@ -1603,10 +1601,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tým sa bude nepretržite synchronizovať obsah priečinka s mapovými motívmi do súkromného priečinka aplikácie pre rýchlejší prístup k súborom. Pred aktivovaním tejto funkcie zaistite, aby priečinok s motívmi obsahoval len vaše motívy a žiadne ďalšie (veľké) dáta.\n\nVáš priečinok s mapovými motívmi \'%1$s\' má momentálne %2$s, %3$s a veľkosť %4$s.\n\nChcete povoliť synchronizáciu priečinka?</string>
     <string name="onetime_mapthemefixslow_title">Oprava pomalého vykresľovania mapového motívu</string>
     <string name="onetime_mapthemefixslow_message">Práca s nezbalenými mapovými motívmi môže znižovať výkon otvárania zobrazovača mapy. Motívy môžete zbaliť alebo synchronizovať a dosiahnuť tak rýchlejší výkon a skrátiť oneskorenie pri spúšťaní mapy.</string>
-    <string name="init_hidewp">Skryť body trasy</string>
-    <string name="init_summary_hidewp_original">Skryť pôvodné body trasy na mape</string>
-    <string name="init_summary_hidewp_parking">Skryť parkoviská na mape</string>
-    <string name="init_summary_hidewp_visited">Skryť navštívené body trasy na mape</string>
     <string name="map_theme_select">Vybrať tému mapy</string>
     <string name="map_theme_options">Nastavenia Témy</string>
     <string name="map_language">Jazyk mapy</string>
