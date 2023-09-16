@@ -90,8 +90,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.android.material.button.MaterialButton;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -583,23 +581,14 @@ public class MainActivity extends AbstractNavigationBarActivity {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 ProcessUtils.restartApplication(this);
             }
-        } else {
-            final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-            if (scanResult != null) {
-                final String scan = scanResult.getContents();
-                if (StringUtils.isBlank(scan)) {
-                    return;
+        } else if (requestCode == Intents.SEARCH_REQUEST_CODE) {
+            // SearchActivity activity returned without making a search
+            if (resultCode == RESULT_CANCELED) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                if (query == null) {
+                    query = "";
                 }
-                SearchActivity.startActivityScan(scan, this);
-            } else if (requestCode == Intents.SEARCH_REQUEST_CODE) {
-                // SearchActivity activity returned without making a search
-                if (resultCode == RESULT_CANCELED) {
-                    String query = intent.getStringExtra(SearchManager.QUERY);
-                    if (query == null) {
-                        query = "";
-                    }
-                    SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
-                }
+                SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
             }
         }
     }
