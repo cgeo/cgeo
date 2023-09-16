@@ -405,7 +405,6 @@
     <string name="settings_title_map_data">地图数据</string>
     <string name="settings_title_offline_routing">离线路线规划</string>
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
-    <string name="settings_title_map_rotation">地图旋转 (谷歌地图)</string>
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地图行为</string>
