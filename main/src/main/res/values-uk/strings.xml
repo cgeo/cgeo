@@ -388,7 +388,6 @@
     <string name="settings_title_logging">вихід із системи</string>
     <string name="settings_summary_logging">Налаштуйте ваш підпис і встановіть параметри логування.</string>
     <string name="settings_title_map_data">Дані карти</string>
-    <string name="settings_title_map_rotation">Поворот карти (Карти Google)</string>
     <string name="settings_title_waypoints">шляхові точки</string>
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
@@ -893,10 +892,6 @@
     <string name="map_view_map">Перегляд карти</string>
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>
-    <string name="init_hidewp">сховати шляхові точки</string>
-    <string name="init_summary_hidewp_original">Сховати оригінальні маршрутні точки на карті</string>
-    <string name="init_summary_hidewp_parking">Сховати на карті маршрутні точки паркування</string>
-    <string name="init_summary_hidewp_visited">Сховати відвідані точки на карті</string>
     <string name="map_theme_select">виберіть тему карти</string>
     <string name="map_theme_options">Параметри тем</string>
     <string name="map_language">Мова карти</string>
