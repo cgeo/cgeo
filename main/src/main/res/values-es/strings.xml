@@ -570,7 +570,6 @@
     <string name="about_system_write_logcat_type_extended">Extendido</string>
     <string name="about_system_write_logcat_success">Archivo de registro \"%1$s\" escrito en la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
-    <string name="about_system_write_infos_downloadmanager">Ver Descargas</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
     <string name="about_contributors_recent">Contribuyentes recientes</string>
@@ -629,7 +628,6 @@
     <string name="settings_title_map_data">Datos del mapa</string>
     <string name="settings_title_offline_routing">Ruta sin conexión</string>
     <string name="settings_summary_offline_routing">La ruta sin conexión está disponible si la aplicación de ayuda \"BRouter\" está instalada y configurada o si está habilitada la ruta interna.</string>
-    <string name="settings_title_map_rotation">Rotación del mapa (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenido del mapa</string>
     <string name="settings_title_map_behavior">Comportamiento del mapa</string>
@@ -1395,10 +1393,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Esto sincronizará continuamente el contenido de la carpeta Temas del Mapa en una carpeta de aplicación privada para un acceso más rápido a los archivos. Asegúrese de que la carpeta de temas sólo contiene sus temas y no hay datos adicionales (grandes) antes de activar esta función.\n\nLa carpeta de temas de tu mapa \'%1$s\' tiene actualmente %2$s, %3$s y un tamaño de %4$s.\n\n¿Desea activar la sincronización de carpetas?</string>
     <string name="onetime_mapthemefixslow_title">Corrige el procesamiento lento del tema del mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabajar con temas de mapas no comprimidos puede disminuir el rendimiento del visor de mapas. Puede comprimir o sincronizar sus temas para obtener un rendimiento más rápido y reducir el retraso al iniciar el mapa.</string>
-    <string name="init_hidewp">Ocultar waypoints</string>
-    <string name="init_summary_hidewp_original">Ocultar waypoints originales en el mapa</string>
-    <string name="init_summary_hidewp_parking">Ocultar waypoints de estacionamiento en el mapa</string>
-    <string name="init_summary_hidewp_visited">Ocultar waypoints visitados en el mapa</string>
     <string name="map_theme_select">Seleccionar tema del mapa</string>
     <string name="map_theme_options">Opciones de Temas</string>
     <string name="map_language">Idioma del mapa</string>
