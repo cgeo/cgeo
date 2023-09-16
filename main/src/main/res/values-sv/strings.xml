@@ -615,7 +615,6 @@
     <string name="about_system_write_logcat_type_extended">Utökad</string>
     <string name="about_system_write_logcat_success">Loggfil \"%1$s\" skriven till mapp \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fel vid skrivning av loggfil</string>
-    <string name="about_system_write_infos_downloadmanager">Visa nedladdningar</string>
     <string name="about_nutshellmanual">Hjälpmanualen på webben</string>
     <string name="about_contributors_carnerodetails">som skaparen av c:geo</string>
     <string name="about_contributors_recent">Senaste bidragsgivare</string>
@@ -684,7 +683,6 @@
     <string name="settings_title_map_hillshading">Offline kartor terrängskuggning</string>
     <string name="settings_title_offline_routing">Offline navigering</string>
     <string name="settings_summary_offline_routing">Offline navigering är tillgänglig om antingen hjälpappen \"BRouter\" är installerad och konfigurerad eller intern routing är aktiverad.</string>
-    <string name="settings_title_map_rotation">Kartrotation (Google Maps)</string>
     <string name="settings_title_waypoints">Vägpunkter</string>
     <string name="settings_title_map_content">Kartinnehåll</string>
     <string name="settings_title_map_behavior">Kartbeteende</string>
@@ -1566,10 +1564,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
     <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
     <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
-    <string name="init_hidewp">Dölj vägpunkter</string>
-    <string name="init_summary_hidewp_original">Dölj ursprungliga vägpunkter på kartan</string>
-    <string name="init_summary_hidewp_parking">Dölj vägpunkter för parkering på kartan</string>
-    <string name="init_summary_hidewp_visited">Dölj besökta vägpunkter på kartan</string>
     <string name="map_theme_select">Välj karttema</string>
     <string name="map_theme_options">Inställningar för teman</string>
     <string name="map_language">Kartspråk</string>
