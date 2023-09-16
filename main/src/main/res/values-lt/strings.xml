@@ -630,7 +630,6 @@
     <string name="about_system_write_logcat_type_extended">Išplėstas</string>
     <string name="about_system_write_logcat_success">Žurnalo failas \'%1$s\' įrašytas į aplanką \'%2$s\'</string>
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
-    <string name="about_system_write_infos_downloadmanager">Rodyti siuntinius</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
     <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
@@ -699,7 +698,6 @@
     <string name="settings_title_map_hillshading">Žemėlapio naudojamo neprisijungus kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
-    <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Kelio taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
     <string name="settings_title_map_behavior">Žemėlapio elgsena</string>
@@ -1603,10 +1601,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
     <string name="onetime_mapthemefixslow_title">Pataisykite lėtą žemėlapio temos atvaizdavimą</string>
     <string name="onetime_mapthemefixslow_message">Dirbant su nesupakuotomis žemėlapių temomis, gali sumažėti žemėlapių peržiūros priemonės atidarymo našumas. Galite supakuoti arba sinchronizuoti savo temas, kad padidintumėte našumą ir sumažintumėte žemėlapio paleidimo delsą.</string>
-    <string name="init_hidewp">Slėpti kelio taškus</string>
-    <string name="init_summary_hidewp_original">Slėpti originalius kelio taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_visited">Slėpti aplankytus kelio taškus žemėlapyje</string>
     <string name="map_theme_select">Pasirinkite žemėlapio temą</string>
     <string name="map_theme_options">Temos parinktys</string>
     <string name="map_language">Žemėlapio kalba</string>
