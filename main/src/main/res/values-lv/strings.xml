@@ -391,7 +391,6 @@
     <string name="settings_title_logging">Pierakstīšanās</string>
     <string name="settings_summary_logging">Konfigurē savu parakstu un iestati reģistrācijas ieraksta opcijas.</string>
     <string name="settings_title_map_data">Karšu dati</string>
-    <string name="settings_title_map_rotation">Kartes sagriešana (Google Maps)</string>
     <string name="settings_title_waypoints">Ceļa punkti</string>
     <string name="settings_title_map_content">Kartes saturs</string>
     <string name="settings_title_map_behavior">Kartes uzvedība</string>
@@ -863,8 +862,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
-    <string name="init_hidewp">Slēpt ceļa punktus</string>
-    <string name="init_summary_hidewp_original">Slēpt oriģinālos ceļa punktus kartē</string>
     <string name="map_theme_select">Atlasiet kartes dizainu</string>
     <string name="map_theme_options">Kartes motīva iestatījumi</string>
     <string name="map_language">Kartes valoda</string>
