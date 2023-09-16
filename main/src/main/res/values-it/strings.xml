@@ -660,7 +660,6 @@
     <string name="about_system_write_logcat_type_extended">Esteso</string>
     <string name="about_system_write_logcat_success">File di registro \"%1$s\" scritto nella cartella \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Errore durante la scrittura del file di log</string>
-    <string name="about_system_write_infos_downloadmanager">Visualizza download</string>
     <string name="about_changelog_full">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
@@ -730,7 +729,6 @@
     <string name="settings_title_map_hillshading">Ombreggiatura delle Mappe offline</string>
     <string name="settings_title_offline_routing">Navigazione offline</string>
     <string name="settings_summary_offline_routing">La navigazione offline è disponibile se l\'app si supporto \"BRouter\" è installata e configurata o se il routing interno è abilitato.</string>
-    <string name="settings_title_map_rotation">Rotazione mappa (Google Maps)</string>
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
@@ -1634,10 +1632,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà continuamente il contenuto del tema della mappa in una cartella privata dell\'app per un accesso più veloce ai file. Assicurati che la cartella del tema contenga solo i tuoi temi e che non ci siano dati aggiuntivi (di grosse dimensioni) prima di abilitare questa funzione.\n\nLa tua cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione della cartella?</string>
     <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
     <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
-    <string name="init_hidewp">Nascondi tutti i waypoint</string>
-    <string name="init_summary_hidewp_original">Nascondi i waypoint originali sulla mappa</string>
-    <string name="init_summary_hidewp_parking">Nascondi i waypoint di parcheggio sulla mappa</string>
-    <string name="init_summary_hidewp_visited">Nascondi i waypoint visitati sulla mappa</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
     <string name="map_theme_options">Opzioni Tema</string>
     <string name="map_language">Lingua della mappa</string>
