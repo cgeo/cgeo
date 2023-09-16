@@ -674,7 +674,6 @@
     <string name="about_system_write_logcat_type_extended">Rozšířený</string>
     <string name="about_system_write_logcat_success">Soubor protokolu \"%1$s\" zapsán do složky \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Chyba při zápisu souboru protokolu</string>
-    <string name="about_system_write_infos_downloadmanager">Zobrazit stažené</string>
     <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
@@ -744,7 +743,6 @@
     <string name="settings_title_map_hillshading">Stínování kopců v offline mapách</string>
     <string name="settings_title_offline_routing">Offline směrování</string>
     <string name="settings_summary_offline_routing">Offline směrování je k dispozici, pokud je nainstalována a nakonfigurována pomocná aplikace \"BRouter\" nebo je povoleno interní směrování.</string>
-    <string name="settings_title_map_rotation">Otáčení mapy (Mapy Google)</string>
     <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
@@ -1670,10 +1668,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tím se průběžně synchronizuje obsah složky s motivy do soukromé složky aplikace pro rychlejší přístup k souborům. Než povolíte tuto funkci, ujistěte se, že vaše složka s motivy obsahuje pouze vaše motivy, ale ne žádné další (velké) soubory.\n\nVaše složka s motivy \'%1$s\' má aktuálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
     <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
-    <string name="init_hidewp">Skrýt trasové body</string>
-    <string name="init_summary_hidewp_original">Skrýt původní trasové body na mapě</string>
-    <string name="init_summary_hidewp_parking">Skrýt parkovací místa na mapě</string>
-    <string name="init_summary_hidewp_visited">Skrýt navštívené trasové body na mapě</string>
     <string name="map_theme_select">Vybrat motiv mapy</string>
     <string name="map_theme_options">Možnosti motivu</string>
     <string name="map_language">Jazyk mapy</string>
