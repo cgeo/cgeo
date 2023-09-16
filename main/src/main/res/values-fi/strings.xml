@@ -662,7 +662,6 @@
     <string name="about_system_write_logcat_type_extended">Laajennettu</string>
     <string name="about_system_write_logcat_success">Lokitiedosto \"%1$s\" kirjoitettu kansioon \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Virhe kirjoitettaessa lokitiedostoa</string>
-    <string name="about_system_write_infos_downloadmanager">Näytä lataukset</string>
     <string name="about_changelog_full">Luettelo kaikista muutoksista</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
@@ -732,7 +731,6 @@
     <string name="settings_title_map_hillshading">Offlinekarttojen rinnevarjostukset</string>
     <string name="settings_title_offline_routing">Offline-reititys</string>
     <string name="settings_summary_offline_routing">Offline-reititys on käytettävissä, kun joko apusovellus \"BRouter\" on asennettu ja määritetty tai sisäinen reititys on käytössä.</string>
-    <string name="settings_title_map_rotation">Kartan kääntö (Google Maps)</string>
     <string name="settings_title_waypoints">Reittipisteet</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
     <string name="settings_title_map_behavior">Kartan käyttäytyminen</string>
@@ -1638,10 +1636,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
     <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
     <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
-    <string name="init_hidewp">Piilota reittipisteet</string>
-    <string name="init_summary_hidewp_original">Piilota kartalta alkuperäiset reittipisteet</string>
-    <string name="init_summary_hidewp_parking">Piilota kartalta parkkipaikka-reittipisteet</string>
-    <string name="init_summary_hidewp_visited">Piilota kartalta vieraillut reittipisteet</string>
     <string name="map_theme_select">Valitse kartan teema</string>
     <string name="map_theme_options">Teeman asetukset</string>
     <string name="map_language">Kartan kieli</string>
