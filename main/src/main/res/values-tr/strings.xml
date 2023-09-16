@@ -567,7 +567,6 @@
     <string name="about_system_write_logcat_type_extended">Genişletilmiş</string>
     <string name="about_system_write_logcat_success">\'\'%1$s\'\' kayıt dosyası \'\'%2$s\'\' klasörüne kaydedildi</string>
     <string name="about_system_write_logcat_error">Kayıt dosyasına yazılırken hata oluştu</string>
-    <string name="about_system_write_infos_downloadmanager">İndirmeleri Görüntüle</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
@@ -613,7 +612,6 @@
     <string name="settings_title_offline_maps">Çevrimdışı haritalar</string>
     <string name="settings_title_offline_routing">Çevrimdışı yönlendirme</string>
     <string name="settings_summary_offline_routing">Çevrim dışı yönlendirme \"BRouter\" yardımcı uygulaması yüklü olduğunda ve yapılandırıldığında veya dahili yönlendirme etkinleştirildiği zaman mevcut olacaktır.</string>
-    <string name="settings_title_map_rotation">Harita açısı (Google Maps)</string>
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
@@ -1376,10 +1374,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Bu seçenek Harita Temaları klasöründeki dosyaları, dosyalara daha hızlı ulaşabilmek için uygulamaya özel bir klasöre senkronize eder. Bu seçeneği etkinleştirmeden önce tema klasörünüzün sadece temalarınızı içerdiğini, fazladan (büyük) dosya içermediğine emin olun.\n\nSizin harita dosyanız \'%1$s\' %4$s boyutunda %2$s, %3$s dosyaya sahip.\n\nKlasör senkronizasyonunu etkinleştirmek istediğinize emin misiniz?</string>
     <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
     <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
-    <string name="init_hidewp">Yol noktalarını gizle</string>
-    <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
-    <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
-    <string name="init_summary_hidewp_visited">Haritadaki ziyaret edilmiş yol noktalarını gizle</string>
     <string name="map_theme_select">Harita temasını seçin</string>
     <string name="map_theme_options">Tema Seçenekleri</string>
     <string name="map_language">Harita dili</string>
