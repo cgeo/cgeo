@@ -676,7 +676,6 @@
     <string name="about_system_write_logcat_type_extended">Rozszerzony</string>
     <string name="about_system_write_logcat_success">Plik dziennika „%1$s” zapisany do folderu „%2$s”</string>
     <string name="about_system_write_logcat_error">Błąd zapisu pliku logu</string>
-    <string name="about_system_write_infos_downloadmanager">Zobacz pobrane</string>
     <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
@@ -746,7 +745,6 @@
     <string name="settings_title_map_hillshading">Cieniowanie map offline</string>
     <string name="settings_title_offline_routing">Wyznaczanie trasy offline</string>
     <string name="settings_summary_offline_routing">Wyznaczanie trasy offline jest dostępne jeśli zainstalowana i skonfigurowana jest aplikacja „BRouter” lub włączone jest wewnętrzene wyznaczanie trasy.</string>
-    <string name="settings_title_map_rotation">Obrót mapy (Google Maps)</string>
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
@@ -1672,10 +1670,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu Map Theme w folderze prywatnym dla szybszego dostępu do plików. Upewnij się, że folder twojego motywu zawiera tylko pliki dotyczące motywu, ale nie zawiera dodatkowych (dużych) danych przed włączeniem tej funkcji.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderu?</string>
     <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
     <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
-    <string name="init_hidewp">Ukryj punkty nawigacji</string>
-    <string name="init_summary_hidewp_original">Ukryj oryginalne punkty nawigacji na mapie</string>
-    <string name="init_summary_hidewp_parking">Ukryj parkingi na mapie</string>
-    <string name="init_summary_hidewp_visited">Ukryj odwiedzone punkty nawigacji na mapie</string>
     <string name="map_theme_select">Wybierz motyw mapy</string>
     <string name="map_theme_options">Opcje motywu</string>
     <string name="map_language">Język mapy</string>
