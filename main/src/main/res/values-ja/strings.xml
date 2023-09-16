@@ -555,7 +555,6 @@
     <string name="about_system_write_logcat_type_extended">拡張</string>
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
-    <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>
@@ -595,7 +594,6 @@
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_offline_routing">オフライン ルート検索</string>
     <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっていると使用できます</string>
-    <string name="settings_title_map_rotation">地図の回転 (Googleマップ)</string>
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
     <string name="settings_title_map_behavior">地図の動作</string>
@@ -1385,10 +1383,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
     <string name="onetime_mapthemefixslow_message">zip圧縮されてないテーマファイルでは表示が遅くなる時があります。zip圧縮するかテーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
-    <string name="init_hidewp">ウェイポイントを非表示</string>
-    <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
-    <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
-    <string name="init_summary_hidewp_visited">地図上で訪問したウェイポイントを非表示</string>
     <string name="map_theme_select">地図テーマを選択</string>
     <string name="map_theme_options">テーマのオプション</string>
     <string name="map_language">地図の言語</string>
