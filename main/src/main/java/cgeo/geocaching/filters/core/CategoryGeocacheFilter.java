@@ -1,8 +1,8 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -34,7 +34,7 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
             return true;
         }
 
-        for (Category cat : cache.getBcCategories()) {
+        for (Category cat : cache.getCategories()) {
             if (categories.contains(cat)) {
                 return true;
             }

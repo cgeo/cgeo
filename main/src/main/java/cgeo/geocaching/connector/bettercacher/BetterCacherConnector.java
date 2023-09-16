@@ -117,9 +117,9 @@ public class BetterCacherConnector extends AbstractConnector implements ICacheAm
     private static void amend(final BetterCacherAPI.BetterCacherCache bcCache, final Geocache cache) {
         if (bcCache != null) {
             if (Tier.isValid(bcCache.getTier())) {
-                cache.setBcTier(bcCache.getTier());
+                cache.setTier(bcCache.getTier());
             }
-            cache.setBcCategories(bcCache.getCategories());
+            cache.setCategories(bcCache.getCategories());
         }
     }
 
