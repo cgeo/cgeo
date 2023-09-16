@@ -1,68 +1,68 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="23.4dp"
-    android:height="23.4dp"
-    android:viewportWidth="23.4"
-    android:viewportHeight="23.4">
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
   <path
-      android:pathData="m9.21,14.191a3.52,3.52 0,1 1,2.489 1.031"
+      android:pathData="m15.5106,20.4914a3.52,3.52 0,1 1,2.4891 1.031"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m13.944,6.282a5.867,5.867 0,0 1,3.175 3.175"
+      android:pathData="m20.2447,12.5822a5.8667,5.8667 0,0 1,3.175 3.175"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m17.566,11.702a5.867,5.867 0,0 1,-0.447 2.245"
+      android:pathData="m23.8663,18.0023a5.8667,5.8667 74.8465,0 1,-0.4466 2.245"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="M13.944,17.122A5.867,5.867 0,0 1,6.279 13.947"
+      android:pathData="m20.2447,23.4224a5.8667,5.8667 0,0 1,-7.6652 -3.175"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m6.279,9.457a5.867,5.867 0,0 1,3.175 -3.175"
+      android:pathData="m12.5796,15.7573a5.8667,5.8667 0,0 1,3.175 -3.175"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m14.842,4.114a8.213,8.213 0,1 1,-3.143 -0.625"
+      android:pathData="m21.1427,10.4142a8.2133,8.2133 0,1 1,-3.1431 -0.6252"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m11.699,5.836v2.347"
+      android:pathData="M17.9996,12.1356L17.9996,14.4823"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m14.842,4.114 l-0.898,2.168"
+      android:pathData="M21.1427,10.4142L20.2447,12.5822"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m17.566,11.702h-2.347"
+      android:pathData="M23.8663,18.0023L21.5196,18.0023"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m17.507,17.51 l-1.659,-1.659"
+      android:pathData="M23.8073,23.81L22.148,22.1506"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m14.842,19.291 l-0.898,-2.168"
+      android:pathData="M21.1427,25.5908L20.2447,23.4224"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M11.699,17.569V15.222"
+      android:pathData="M17.9996,23.869L17.9996,21.5223"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m5.833,11.702h2.347"
+      android:pathData="M12.133,18.0023L14.4796,18.0023"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="m5.892,5.895 l1.659,1.659"
+      android:pathData="M12.1919,12.1946L13.8513,13.854"
       android:strokeWidth="1.15"
       android:strokeColor="@color/cacheMarker_icon"/>
 </vector>
