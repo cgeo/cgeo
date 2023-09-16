@@ -1,9 +1,9 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="23.4dp"
-    android:height="23.4dp"
-    android:viewportWidth="23.4"
-    android:viewportHeight="23.4">
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
   <path
-      android:pathData="M16.833,9.133 L11.7,12.113 6.566,9.133V7.942l5.133,2.979 5.133,-2.979m0,-1.192H6.566C5.854,6.75 5.283,7.28 5.283,7.942v7.15a1.283,1.192 0,0 0,1.283 1.192H16.833a1.283,1.192 0,0 0,1.283 -1.192v-7.15C18.116,7.28 17.539,6.75 16.833,6.75Z"
+      android:pathData="M23.1333,15.4333L18,18.4125L12.8667,15.4333L12.8667,14.2417L18,17.2208L23.1333,14.2417M23.1333,13.05L12.8667,13.05C12.1544,13.05 11.5833,13.5803 11.5833,14.2417L11.5833,21.3917A1.1917,1.2833 90,0 0,12.8667 22.5833L23.1333,22.5833A1.1917,1.2833 90,0 0,24.4167 21.3917L24.4167,14.2417C24.4167,13.5803 23.8392,13.05 23.1333,13.05Z"
       android:fillColor="@color/cacheMarker_icon"/>
 </vector>

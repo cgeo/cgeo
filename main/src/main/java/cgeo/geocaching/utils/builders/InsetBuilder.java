@@ -50,12 +50,6 @@ public class InsetBuilder {
         this.pos = pos;
     }
 
-    public InsetBuilder(final Drawable drawable, final int pos, final float scalingFactor) {
-        this.drawable = drawable;
-        this.pos = pos;
-        this.scalingFactor = scalingFactor;
-    }
-
     public InsetBuilder(final int id, final int pos, final boolean doubleSize, final float scalingFactor) {
         this(id, pos);
         this.doubleSize = doubleSize;
