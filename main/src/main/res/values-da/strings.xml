@@ -531,7 +531,6 @@
     <string name="about_system_write_logcat_type_extended">Udvidet</string>
     <string name="about_system_write_logcat_success">Logfil \"%1$s\" skrevet til mappen \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
-    <string name="about_system_write_infos_downloadmanager">Se downloads</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
     <string name="about_contributors_recent">Seneste bidragsydere</string>
@@ -562,7 +561,6 @@
     <string name="settings_title_logging">Logning</string>
     <string name="settings_summary_logging">Konfigurér signatur og indstillinger for logbeskeder.</string>
     <string name="settings_title_map_data">Kortdata</string>
-    <string name="settings_title_map_rotation">Kortrotation (Google Maps)</string>
     <string name="settings_title_waypoints">Rutepunkter</string>
     <string name="settings_title_map_content">Kortindhold</string>
     <string name="settings_title_map_behavior">Kortbetjening</string>
@@ -1125,10 +1123,6 @@
     <string name="map_dot_mode">Brug små ikoner</string>
     <string name="map_showc_found_offline">Fundet (offline)</string>
     <string name="onetime_mapthemefixslow_title">Fix langsom gengivelse af korttema</string>
-    <string name="init_hidewp">Skjul rutepunkter</string>
-    <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
-    <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
-    <string name="init_summary_hidewp_visited">Skjul besøgte rutepunkter på kortet</string>
     <string name="map_theme_select">Vælg korttema</string>
     <string name="map_theme_options">Indstillinger for tema</string>
     <string name="map_language">Kortsprog</string>
