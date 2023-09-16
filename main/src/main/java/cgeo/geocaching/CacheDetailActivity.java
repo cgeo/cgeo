@@ -1630,7 +1630,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateBettercacherBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getBcTier() != null && cache.getBcTier() != Tier.NONE;
+            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null && cache.getTier() != Tier.NONE;
             binding.bettercacherBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             if (isEnabled) {
                 binding.bettercacherSend.setOnClickListener(v -> {

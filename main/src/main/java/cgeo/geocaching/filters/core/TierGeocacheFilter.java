@@ -8,7 +8,7 @@ public class TierGeocacheFilter extends ValueGroupGeocacheFilter<Tier, Tier> {
 
     @Override
     public Tier getRawCacheValue(final Geocache cache) {
-        return cache.getBcTier() == null ? Tier.NONE : cache.getBcTier();
+        return cache.getTier() == null ? Tier.NONE : cache.getTier();
     }
 
     @Override

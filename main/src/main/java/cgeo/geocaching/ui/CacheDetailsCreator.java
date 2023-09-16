@@ -222,7 +222,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addBetterCacher(final Geocache cache) {
-        if (Settings.isBetterCacherConnectorActive() && Tier.isValid(cache.getBcTier())) {
+        if (Settings.isBetterCacherConnectorActive() && Tier.isValid(cache.getTier())) {
             final Context context = parentView.getContext();
 
             final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
@@ -233,16 +233,16 @@ public final class CacheDetailsCreator {
             nameView.setText(R.string.cache_bettercacher);
 
             final TextView valueView = layout.findViewById(R.id.value);
-            valueView.setText(cache.getBcTier().getI18nText());
+            valueView.setText(cache.getTier().getI18nText());
 
             final LinearLayout linearLayout = layout.findViewById(R.id.linearlayout);
 
             final int iconHeight = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
 
-            if (!cache.getBcCategories().isEmpty()) {
+            if (!cache.getCategories().isEmpty()) {
                 final LinearLayout.LayoutParams lpCategory = new LinearLayout.LayoutParams(iconHeight, iconHeight);
                 lpCategory.setMargins(8, 0, 0, 0);
-                for (Category category : cache.getBcCategories()) {
+                for (Category category : cache.getCategories()) {
                     final ImageView catIcon = new ImageView(context);
                     catIcon.setLayoutParams(lpCategory);
                     catIcon.setBackgroundResource(category.getIconId());
@@ -260,8 +260,8 @@ public final class CacheDetailsCreator {
 
         final ContextMenuDialog dialog = new ContextMenuDialog((Activity) context);
         dialog.setTitle(res.getString(R.string.cache_bettercacher));
-        dialog.addItem(cache.getBcTier().getI18nText() + ": " + cache.getBcTier().getI18nDescription(), cache.getBcTier().getIconId());
-        for (Category category : cache.getBcCategories()) {
+        dialog.addItem(cache.getTier().getI18nText() + ": " + cache.getTier().getI18nDescription(), cache.getTier().getIconId());
+        for (Category category : cache.getCategories()) {
             dialog.addItem(category.getI18nText() + ": " + category.getI18nDescription(), category.getIconId());
         }
         dialog.addItem(R.string.cache_bettercacher_open, R.drawable.bettercacher_icon, e -> ShareUtils.openUrl(context, BetterCacherConnector.INSTANCE.getCacheUrl(cache)));

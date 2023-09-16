@@ -5,9 +5,9 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
-import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
@@ -222,8 +222,8 @@ public final class BetterCacherAPI {
             final Geocache cache = new Geocache();
             //set stump data
             cache.setGeocode(gccode);
-            cache.setBcCategories(getCategories());
-            cache.setBcTier(getTier());
+            cache.setCategories(getCategories());
+            cache.setTier(getTier());
 
             if (!hasFullData()) {
                 return cache;

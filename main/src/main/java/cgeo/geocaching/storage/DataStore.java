@@ -2399,7 +2399,7 @@ public class DataStore {
             values.put("owner_guid", cache.getOwnerGuid());
             values.put("emoji", cache.getAssignedEmoji());
             values.put("alcMode", cache.getAlcMode());
-            values.put("tier", cache.getBcTier() == null ? null : cache.getBcTier().getRaw());
+            values.put("tier", cache.getTier() == null ? null : cache.getTier().getRaw());
 
             init();
 
@@ -2460,7 +2460,7 @@ public class DataStore {
 
         // The attributes must be fetched first because lazy loading may load
         // a null set otherwise.
-        final List<Category> categories = cache.getBcCategories();
+        final Set<Category> categories = cache.getCategories();
         database.delete(dbTableCategories, "geocode = ?", new String[]{geocode});
 
         if (categories.isEmpty()) {
@@ -3045,7 +3045,7 @@ public class DataStore {
                     if (loadFlags.contains(LoadFlag.CATEGORIES)) {
                         final List<Category> categories = loadCategories(cache.getGeocode());
                         if (CollectionUtils.isNotEmpty(categories)) {
-                            cache.setBcCategories(categories);
+                            cache.setCategories(categories);
                         }
                     }
 
@@ -3152,7 +3152,7 @@ public class DataStore {
         cache.setOwnerGuid(cursor.getString(44));
         cache.setAssignedEmoji(cursor.getInt(45));
         cache.setAlcMode(cursor.getInt(46));
-        cache.setBcTier(Tier.getByName(cursor.getString(47)));
+        cache.setTier(Tier.getByName(cursor.getString(47)));
 
         return cache;
     }

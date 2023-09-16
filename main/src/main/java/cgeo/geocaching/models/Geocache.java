@@ -50,6 +50,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
+import cgeo.geocaching.utils.LazyInitializedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.ShareUtils;
@@ -125,7 +126,7 @@ public class Geocache implements IWaypoint {
     private String ownerUserId = "";
     private int assignedEmoji = 0;
     private int alcMode = 0;
-    private Tier bcTier;
+    private Tier tier;
 
     @Nullable
     private Date hidden = null;
@@ -180,12 +181,8 @@ public class Geocache implements IWaypoint {
             return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
         }
     };
-    private final LazyInitializedList<Category> bcCategories = new LazyInitializedList<Category>() {
-        @Override
-        public List<Category> call() {
-            return inDatabase() ? DataStore.loadCategories(geocode) : new LinkedList<>();
-        }
-    };
+    private final LazyInitializedSet<Category> categories = new LazyInitializedSet<>(() ->
+            inDatabase() ? DataStore.loadCategories(geocode) : null);
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
@@ -361,11 +358,11 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (bcTier == null) {
-            bcTier = other.bcTier;
+        if (tier == null || Tier.NONE == tier) {
+            tier = other.tier;
         }
-        if (bcCategories.isEmpty()) {
-            setBcCategories(other.getBcCategories());
+        if (categories.isEmpty()) {
+            setCategories(other.getCategories());
         }
 
         mergeWaypoints(other.waypoints, false);
@@ -991,8 +988,8 @@ public class Geocache implements IWaypoint {
         return attributes.getUnderlyingList();
     }
 
-    public List<Category> getBcCategories() {
-        return bcCategories.getUnderlyingList();
+    public Set<Category> getCategories() {
+        return categories.getUnderlyingSet();
     }
 
     @NonNull
@@ -1311,12 +1308,12 @@ public class Geocache implements IWaypoint {
         return alcMode;
     }
 
-    public void setBcTier(final Tier bcTier) {
-        this.bcTier = bcTier;
+    public void setTier(final Tier tier) {
+        this.tier = tier;
     }
 
-    public Tier getBcTier() {
-        return this.bcTier;
+    public Tier getTier() {
+        return this.tier;
     }
 
     /**
@@ -1499,10 +1496,10 @@ public class Geocache implements IWaypoint {
         }
     }
 
-    public void setBcCategories(final Collection<Category> bcCategories) {
-        this.bcCategories.clear();
-        if (bcCategories != null) {
-            this.bcCategories.addAll(CollectionStream.of(bcCategories).filter(Category::isValid).toList());
+    public void setCategories(final Collection<Category> categories) {
+        this.categories.clear();
+        if (categories != null) {
+            this.categories.addAll(CollectionStream.of(categories).filter(Category::isValid).toList());
         }
     }
 

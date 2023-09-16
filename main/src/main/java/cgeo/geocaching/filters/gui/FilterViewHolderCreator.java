@@ -17,8 +17,8 @@ import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
 import cgeo.geocaching.filters.core.TierGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
@@ -153,7 +153,7 @@ public class FilterViewHolderCreator {
                         new ValueGroupFilterAccessor<Category, CategoryGeocacheFilter>()
                                 .setFilterValueGetter(CategoryGeocacheFilter::getCategories)
                                 .setFilterValueSetter(CategoryGeocacheFilter::setCategories)
-                                .setGeocacheValueGetter((f, c) -> new HashSet<>(c.getBcCategories()))
+                                .setGeocacheValueGetter((f, c) -> new HashSet<>(c.getCategories()))
                                 .setSelectableValues(Category.getAllCategoriesExceptUnknown())
                                 .setValueDisplayTextGetter(Category::getI18nText)
                                 .setValueDrawableGetter(c -> ImageParam.id(c.getIconId())),
