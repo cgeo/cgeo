@@ -2432,7 +2432,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
+        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().iconId);
     }
 
     @NonNull
