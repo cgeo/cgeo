@@ -50,13 +50,38 @@ public final class MapMarkerUtils {
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
 
+    // the following vars depend on cache/wp scaling factor and need to be part of resetCache()
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
     private static final Map<String, EmojiUtils.EmojiPaint> emojiPaintMap = new HashMap<>();
-    private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
-    private static final float scalingFactorWpIcons = Settings.getLong(R.string.pref_mapWpScale, 100) / 100.0f;
+    private static float scalingFactorCacheIcons;
+    private static float scalingFactorWpIcons;
+
+    static {
+        resetAllCaches();
+    }
 
     private MapMarkerUtils() {
         // Do not instantiate
+    }
+
+    /**
+     * clear all caches and reset scaling-related variables
+     */
+    public static synchronized void resetAllCaches() {
+        overlaysCache.clear();
+        emojiPaintMap.clear();
+        scalingFactorCacheIcons = Settings.getInt(R.string.pref_mapCacheScaling, 100) / 100.0f;
+        scalingFactorWpIcons = Settings.getInt(R.string.pref_mapWpScaling, 100) / 100.0f;
+        Log.e("reset scaling factors to " + scalingFactorCacheIcons + " / " + scalingFactorWpIcons);
+    }
+
+    /**
+     * Clear the cache of drawable items.
+     */
+    public static void clearCachedItems() {
+        synchronized (overlaysCache) {
+            overlaysCache.clear();
+        }
     }
 
     /**
@@ -559,15 +584,6 @@ public final class MapMarkerUtils {
         final int offsetRightBottom = diffWidth - offsetLeftTop;
         layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
         return layerDrawable;
-    }
-
-    /**
-     * Clear the cache of drawable items.
-     */
-    public static void clearCachedItems() {
-        synchronized (overlaysCache) {
-            overlaysCache.clear();
-        }
     }
 
     public static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
