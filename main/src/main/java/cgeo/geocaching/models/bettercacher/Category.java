@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Category {
-    UNKNOWN(R.string.cache_cat_bc_unknown, R.string.cache_cat_desc_bc_unknown, R.drawable.type_unknown, "unknown"),
+    UNKNOWN(R.string.cache_cat_bc_unknown, R.string.hyphen, R.drawable.type_unknown, "unknown"),
     BC_MYSTERY(R.string.cache_cat_bc_mystery, R.string.cache_cat_desc_bc_mystery, R.drawable.bc_category_mystery, "bc-mystery"),
     BC_GADGET(R.string.cache_cat_bc_gadget, R.string.cache_cat_desc_bc_gadget, R.drawable.bc_category_gadget, "bc-gadget"),
     BC_NATURE(R.string.cache_cat_bc_nature, R.string.cache_cat_desc_bc_nature, R.drawable.bc_category_nature, "bc-nature"),

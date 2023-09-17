@@ -6,7 +6,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 public enum Tier {
 
-    NONE(R.string.cache_tier_bc_none, R.string.cache_tier_desc_bc_none, R.drawable.type_unknown, "none"),
+    NONE(R.string.cache_tier_bc_none, R.string.hyphen, R.drawable.type_unknown, "none"),
     BC_BLUE(R.string.cache_tier_bc_blue, R.string.cache_tier_desc_bc_blue, R.drawable.bc_tier_blue, "bc-blue"),
     BC_SILVER(R.string.cache_tier_bc_silver, R.string.cache_tier_desc_bc_silver, R.drawable.bc_tier_silver, "bc-silver"),
     BC_GOLD(R.string.cache_tier_bc_gold, R.string.cache_tier_desc_bc_gold, R.drawable.bc_tier_gold, "bc-gold");
