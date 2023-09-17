@@ -104,7 +104,6 @@
     <string name="cache_cat_bc_hiking">Hiking</string>
     <string name="cache_cat_bc_other">Other</string>
 
-    <string name="cache_cat_desc_bc_unknown" translatable="false">-</string>
     <string name="cache_cat_desc_bc_nature">Surrounded by special nature</string>
     <string name="cache_cat_desc_bc_location">Shows you a great location</string>
     <string name="cache_cat_desc_bc_recommended">Recommended by the BetterCacher team</string>
@@ -119,7 +118,6 @@
     <string name="cache_tier_bc_silver">Silver</string>
     <string name="cache_tier_bc_gold">Gold</string>
 
-    <string name="cache_tier_desc_bc_none" translatable="false">-</string>
     <string name="cache_tier_desc_bc_blue">Default tier for listed caches</string>
     <string name="cache_tier_desc_bc_silver">Visited by BetterCacher team, automatically awarded</string>
     <string name="cache_tier_desc_bc_gold">Outstanding cache, recommended by BetterCacher team</string>

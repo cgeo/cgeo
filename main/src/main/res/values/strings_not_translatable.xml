@@ -331,4 +331,7 @@
 
     <!-- Help Ressources -->
     <string translatable="false" name="formula_syntax_url">https://manual.cgeo.org/en/cachevariables</string>
+
+    <!-- default marker -->
+    <string translatable="false" name="hyphen">-</string>
 </resources>
