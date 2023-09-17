@@ -1195,6 +1195,11 @@
     <string name="init_mapShadingLinearity_description">Small values accentuate contrast in steep slopes but hide changes in flats, large values make it more linear</string>
     <string name="init_mapShadingScale_title">Shading Opacity</string>
     <string name="init_mapShadingScale_description">Opacity of the shading layer, from invisible to higher values intensifying shading but may produce artifacts</string>
+    <string name="init_iconsizes">Icon Sizes</string>
+    <string name="init_mapCacheScaling_title">Cache icon scaling</string>
+    <string name="init_mapCacheScaling_description">Scaling factor for cache icons (in %)</string>
+    <string name="init_mapWpScaling_title">Waypoint icon scaling</string>
+    <string name="init_mapWpScaling_description">Scaling factor for waypoint icons (in %)</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
