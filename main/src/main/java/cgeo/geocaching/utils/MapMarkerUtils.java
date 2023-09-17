@@ -51,7 +51,7 @@ public final class MapMarkerUtils {
     private static Boolean listsRead = false;
 
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
-    private static Map<String, EmojiUtils.EmojiPaint> emojiPaintMap = new HashMap<>();
+    private static final Map<String, EmojiUtils.EmojiPaint> emojiPaintMap = new HashMap<>();
     private static final float scalingFactorCacheIcons = Settings.getLong(R.string.pref_mapCacheScale, 100) / 100.0f;
     private static final float scalingFactorWpIcons = Settings.getLong(R.string.pref_mapWpScale, 100) / 100.0f;
 
