@@ -9,6 +9,7 @@
 - Nieuw: Zorg voor minimale afbeeldingsgrootte voor weergave
 - Wijziging: Opties voor eigen log-afbeeldingen herontworpen
 - Nieuw: Bettercacher integratie
+- Nieuw: Synchroniseer bezocht status bij het synchroniseren van waypoints met persoonlijke notitie
 
 ### Algemeen
 - Nieuw: Doel SDK opgehoogd naar 33
