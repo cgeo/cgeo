@@ -9,6 +9,7 @@
 - New: Ensure minimum image size for display
 - Change: Redesigned edit options for own log images
 - New: Bettercacher integration
+- New: Sync visited state on synchronizing waypoints to personal note
 
 ### Γενικά
 - New: Increased target SDK to 33
