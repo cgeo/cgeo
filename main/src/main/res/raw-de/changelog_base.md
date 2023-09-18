@@ -9,6 +9,7 @@
 - Neu: Mindestgröße für Bilder in Cachelistings
 - Änderung: Neues Design der Bearbeitungsoptionen für eigene Logbilder
 - Neu: Bettercacher Integration
+- New: Sync visited state on synchronizing waypoints to personal note
 
 ### Allgemein
 - Neu: targetSDK auf 33 erhöht
