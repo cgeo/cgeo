@@ -9,6 +9,7 @@
 - Uusi: Varmista kuvan pienin koko näytölle
 - Muutos: Omien lokikuvien muokkausvalinnat on uudelleen suunniteltu
 - New: Bettercacher integration
+- New: Sync visited state on synchronizing waypoints to personal note
 
 ### Yleinen
 - Uusi: nostettu tavoite SDK 33:een
