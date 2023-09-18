@@ -9,6 +9,7 @@
 - 신규: 표시할 최소 이미지 크기 보장
 - 변경: 자체 로그 이미지에 대한 편집 옵션을 재설계했습니다.
 - 신규: Bettercacher 통합
+- New: Sync visited state on synchronizing waypoints to personal note
 
 ### 일반
 - 신규: 대상 SDK를 33으로 증가
