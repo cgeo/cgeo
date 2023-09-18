@@ -5,7 +5,7 @@
 - Poprawka: Linia nawigacji znikała przy obracaniu ekranu z Mapami Google
 - Poprawka: Indywidualna trasa nie była usuwana z map Google po usunięciu
 - Poprawka: Ostatni tekst dziennika był odrzucany gdy w nowym dzienniku najpierw dodawany był obraz
-- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+- Poprawka: Nie można było odznaczyć „Ustaw jako ulubiona”, jeśli nie miało się wolnych punktów ulubionych, nieudane logowanie kończyło się błędem
 
 ##
 - Poprawka: Awarie podczas dodawania do ulubionych (pod pewnymi warunkami)
