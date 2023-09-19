@@ -55,7 +55,6 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
-import static cgeo.geocaching.settings.Settings.getUserName;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -198,6 +197,7 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|willattends|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "";
+    private static final String SERVICE_CACHE_FOUND_DATE_FIELDS = "code|name|is_found|latest_logs";
 
     private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
@@ -234,6 +234,31 @@ final class OkapiClient {
         return result.isSuccess ? parseCache(result.data) : null;
     }
 
+    @Nullable
+    @WorkerThread
+    public static long getCacheFoundDate(final String geoCode) {
+        final IConnector connector = ConnectorFactory.getConnector(geoCode);
+        if (!(connector instanceof OCApiConnector)) {
+            return 0;
+        }
+
+        final OCApiConnector ocapiConn = (OCApiConnector) connector;
+
+        final Parameters params = new Parameters("cache_code", geoCode);
+        params.add("fields", SERVICE_CACHE_FOUND_DATE_FIELDS);
+        params.add("user_logs_only", "true");
+        params.add(PARAMETER_LOG_FIELDS_KEY, PARAMETER_LOG_FIELDS_VALUE);
+
+
+        final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
+        final List<LogEntry> logs = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode);
+        for (LogEntry log : logs) {
+            if (log.logType.id == 2 || log.logType.id == 10) {
+                return log.date;
+            }
+        }
+        return 0;
+    }
     @NonNull
     @WorkerThread
     public static List<Geocache> getCachesAround(@NonNull final Geopoint center, @NonNull final OCApiConnector connector) {
@@ -810,18 +835,12 @@ final class OkapiClient {
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
-
-            final List<LogEntry> logs = parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode());
-            final String me = getUserName();
-            for (LogEntry log : logs) {
-                if (log.author.equals(me) && (log.logType.id == 2 || log.logType.id == 10)) {
-                    cache.setVisitedDate(log.date);
-                }
+            if (cache.isFound()) {
+                cache.setVisitedDate(getCacheFoundDate(cache.getGeocode()));
             }
-
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), logs, true);
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
