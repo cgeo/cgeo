@@ -14,4 +14,4 @@
 ### Ogólne
 - Nowość: Zwiększony docelowy SDK do 33
 - Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
-- Change: Only basic settings will be displayed per default. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
+- Zmiana: Domyślnie będą wyświetlane tylko podstawowe ustawienia. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
