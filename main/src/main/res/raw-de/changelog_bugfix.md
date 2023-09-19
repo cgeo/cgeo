@@ -1,5 +1,6 @@
 ##
 - Neu: targetSDK auf 33 aktualisiert (aufgrund von Play Store-Anforderungen)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
 - Korrektur: Fehler bei GPX-Import mit mehreren Tracks in derselben Datei
 - Korrektur: Favoritenanteil > 100% unter bestimmten Bedingungen
 - Korrektur: Navigationslinie geht bei Bildschirmdrehung unter Google Maps verloren
