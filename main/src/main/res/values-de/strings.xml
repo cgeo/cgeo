@@ -1406,6 +1406,7 @@
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Besitzer</string>
     <string name="cache_hidden">Versteckt</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Zeitangabe</string>
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
@@ -2211,6 +2212,8 @@
     <string name="permission_read_external_storage_explanation">c:geo kann dein System-Hintergrund als Hintergrund für die App verwenden. Um dies zu tun, benötigt c:geo die Erlaubnis, deine Mediendaten auf externem Speicher zu lesen.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo schreibt Daten auf den Telefonspeicher oder die SD-Karte, beispielsweise beim Speichern von Geocaches zur Offline-Nutzung, beim Import oder Export und weiteren Funktionen. Manche Android-Versionen benötigen hierfür eine zusätzliche Berechtigung.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Schreibberechtigung für externen Speicher</string>
+    <string name="permission_post_notifications_explanation">c:geo verwendet Benachrichtigungen, um dich über laufende Downloads und Annäherung an Caches zu informieren (falls aktiviert)</string>
+    <string name="permission_post_notifications_explanation_title">Berechtigung für Benachrichtigungen</string>
     <string name="storage_permission_needed">Diese Funktion ist ohne Speicherberechtigung nicht möglich.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Farbschema auswählen</string>
