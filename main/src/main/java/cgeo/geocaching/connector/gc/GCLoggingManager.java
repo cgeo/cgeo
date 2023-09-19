@@ -94,7 +94,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
                 }
 
-                final List<LogType> possibleLogTypes = GCParser.parseTypes(page);
+                final List<LogType> possibleLogTypes = Settings.enableFeatureNewGCLogApi() ?
+                        GCParser.parseTypesNew(page) : GCParser.parseTypes(page);
 
                 // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 
