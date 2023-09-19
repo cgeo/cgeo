@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
+import static cgeo.geocaching.utils.EmojiUtils.NUMBER_START;
 
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
@@ -139,7 +140,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, getCacheScalingFactor(applyScaling)));
         } else if (cache.getAssignedEmoji() != 0) {
             // custom icon
-            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "cacheIcon", applyScaling), Gravity.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "mainIconForCache", applyScaling), Gravity.CENTER));
         } else {
             // type icon
             // cache type background color
@@ -177,10 +178,10 @@ public final class MapMarkerUtils {
             if (loggedMarkerId != null) {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT, getCacheScalingFactor(applyScaling)));
             } else if (cache.getAssignedEmoji() != 0) {
-                insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, applyScaling), Gravity.TOP | Gravity.LEFT));
+                insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, true), Gravity.TOP | Gravity.LEFT));
             }
         } else if (!mainIconIsTypeIcon(cache, cacheListType) || cache.getAssignedEmoji() != 0) {
-            insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, applyScaling), Gravity.TOP | Gravity.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, true), Gravity.TOP | Gravity.LEFT));
         }
 
         // bottom-right: user modified coords / final waypoint defined
@@ -214,12 +215,14 @@ public final class MapMarkerUtils {
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
         boolean cacheIsDisabled = false;
         boolean cacheIsArchived = false;
+        boolean cacheIsLinearAlc = false;
         int cacheEmoji = 0;
         final Geocache cache = waypoint.getParentGeocache();
         if (null != cache) {
             assignedMarkers = getAssignedMarkers(cache);
             cacheIsDisabled = cache.isDisabled();
             cacheIsArchived = cache.isArchived();
+            cacheIsLinearAlc = cache.isLinearAlc();
             cacheEmoji = cache.getAssignedEmoji();
         }
         final int hashcode = new HashCodeBuilder()
@@ -229,6 +232,7 @@ public final class MapMarkerUtils {
                 .append(assignedMarkers)
                 .append(cacheIsDisabled)
                 .append(cacheIsArchived)
+                .append(cacheIsLinearAlc ? waypoint.getPrefix() : false)
                 .append(showPin)
                 .append(applyScaling)
                 .append(cacheEmoji)
@@ -237,7 +241,7 @@ public final class MapMarkerUtils {
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived, showPin, cacheEmoji, applyScaling));
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, cache, showPin, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -254,28 +258,34 @@ public final class MapMarkerUtils {
     @NonNull
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived, final boolean showPin, final int emoji, final boolean applyScaling) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final Geocache cache, final boolean forMap, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null), getWaypointScalingFactor(applyScaling));
         final int size = marker.getIntrinsicWidth();
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, size, size);
-        if (showPin) {
+        if (forMap) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getWaypointScalingFactor(applyScaling)));
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        final Drawable mainMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId, null));
-        if (cacheIsDisabled || cacheIsArchived) {
+        if (cache.isLinearAlc()) {
+            int stageCounter = Integer.parseInt(waypoint.getPrefix());
+            while (stageCounter > 9) {
+                stageCounter = stageCounter - 10;
+            }
+            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
+        } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
-            mainMarker.mutate();
-            DrawableCompat.setTint(mainMarker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
+            final Drawable waypointTypeIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypointType.markerId, null)).mutate();
+            if (cache.isDisabled() || cache.isArchived()) {
+                DrawableCompat.setTint(waypointTypeIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
+            }
+            insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(waypointTypeIcon, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
         }
-        final Drawable mainMarkerScaled = new ScalableDrawable(mainMarker, getWaypointScalingFactor(applyScaling));
-        insetsBuilder.withInset(new InsetBuilder(mainMarkerScaled, Gravity.CENTER));
 
-        if (cacheIsArchived) {
+        if (cache.isArchived()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, getWaypointScalingFactor(applyScaling)));
         }
         // bottom-right: visited
@@ -284,11 +294,13 @@ public final class MapMarkerUtils {
         }
 
         // top-left: emoji
-        if (emoji != 0) {
-            insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, emoji, applyScaling), Gravity.TOP | Gravity.LEFT));
+        if (forMap && cache.getAssignedEmoji() != 0) {
+            insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, cache.getAssignedEmoji(), applyScaling), Gravity.TOP | Gravity.LEFT));
+        } else if (forMap) {
+            insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, false), Gravity.TOP | Gravity.LEFT));
         }
 
-        addListMarkers(res, insetsBuilder, assignedMarkers, false, applyScaling);
+        addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
 
         return buildLayerDrawable(insetsBuilder, 8, 8);
     }
@@ -466,26 +478,6 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Provide the LayerDrawable representing the cache type icon
-     *
-     * @param res   Android Resources
-     * @param cache Geocache to get the icon for
-     * @return Layered Drawable
-     */
-    public static Drawable getCacheTypeMarker(final Resources res, final Geocache cache) {
-        final int hashcode = new HashCodeBuilder().append(cache.getMapMarkerId()).append(cache.getType().id).toHashCode();
-
-        synchronized (overlaysCache) {
-            CacheMarker marker = overlaysCache.get(hashcode);
-            if (marker == null) {
-                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, cache));
-                overlaysCache.put(hashcode, marker);
-            }
-            return marker.getDrawable();
-        }
-    }
-
-    /**
      * Create a cache from a cache type to select the proper background shape
      *
      * @param res  Android Resources
@@ -497,7 +489,7 @@ public final class MapMarkerUtils {
         tempCache.setType(type);
         // user-defined should always use the hexagonal icon
         tempCache.setGeocode(type == CacheType.USER_DEFINED ? "ZZ1" : "GC1");
-        return getCacheTypeMarker(res, tempCache);
+        return getTypeMarker(res, tempCache, false, false, true);
     }
 
     /**
@@ -570,7 +562,7 @@ public final class MapMarkerUtils {
         }
     }
 
-    public static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
+    private static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final List<Drawable> layers = new ArrayList<>(layersInitialCapacity);
         final List<int[]> insets = new ArrayList<>(insetsInitialCapacity);
@@ -700,7 +692,7 @@ public final class MapMarkerUtils {
         return result;
     }
 
-    public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
+    private static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
         final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
@@ -774,8 +766,12 @@ public final class MapMarkerUtils {
                     scalingFactor = 0.6f * getCacheScalingFactor(applyScaling);
                     size = SIZE_LIST_MARKER_DP;
                     break;
-                case "cacheIcon":
+                case "mainIconForCache":
                     scalingFactor = (float) (Math.sqrt(0.5) * 1.15 * getCacheScalingFactor(applyScaling));
+                    size = SIZE_CACHE_MARKER_DP;
+                    break;
+                case "mainIconForWaypoint":
+                    scalingFactor = (float) (Math.sqrt(0.5) * 1.15 * getWaypointScalingFactor(applyScaling));
                     size = SIZE_CACHE_MARKER_DP;
                     break;
                 default:
@@ -811,35 +807,76 @@ public final class MapMarkerUtils {
         return buildLayerDrawable(markerBuilder, 2, 2);
     }
 
-    public static Drawable getTypeMarker(final Resources res, final Geocache cache, final boolean applyScaling) {
+    /**
+     * Provide the LayerDrawable representing the cache type icon
+     *
+     * @param res   Android Resources
+     * @param cache Geocache to get the icon for
+     * @param withBorder    Draw a round border around the icon (for waypoint markers)
+     * @param applyScaling  S
+     * @return Layered Drawable
+     */
+    public static Drawable getTypeMarker(final Resources res, final Geocache cache, final boolean withBorder, final boolean applyScaling, final boolean forCache) {
         final int hashcode = new HashCodeBuilder()
                 .append("typeMarker")
                 .append(cache.getType().id)
                 .append(cache.isDisabled())
                 .append(cache.isArchived())
+                .append(withBorder)
+                .append(forCache)
                 .append(applyScaling)
                 .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createTypeMarker(res, cache, applyScaling));
+                marker = new CacheMarker(hashcode, createTypeMarker(res, cache, withBorder, applyScaling, forCache));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
         }
     }
 
-    private static Drawable createTypeMarker(final Resources res, final Geocache cache, final boolean applyScaling) {
-        final Drawable markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_empty, null), getCacheScalingFactor(applyScaling));
+    public static Drawable getTypeMarker(final Resources res, final Geocache cache) {
+        return getTypeMarker(res, cache, false, false, false);
+    }
+
+    /**
+     * Create the LayerDrawable representing the cache type icon
+     *
+     * @param res   Android Resources
+     * @param cache Geocache to get the icon for
+     * @param withBorder    Draw a round border around the icon (for waypoint markers)
+     * @param applyScaling  S
+     * @return Layered Drawable
+     */
+    private static Drawable createTypeMarker(final Resources res, final Geocache cache, final boolean withBorder, final boolean applyScaling, final boolean scaleForCache) {
+        final float scalingFactor;
+        if (scaleForCache) {
+            scalingFactor = getCacheScalingFactor(applyScaling);
+        } else {
+            scalingFactor = getWaypointScalingFactor(applyScaling);
+        }
+        final Drawable markerBg;
+        if (withBorder) {
+            markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_empty, null), scalingFactor);
+        } else {
+            markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), scalingFactor);
+        }
         final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
         markerBuilder.withInset(new InsetBuilder(markerBg));
         // cache type background color
-        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
-        final Drawable backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null)).mutate();
+            final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+        final Drawable backgroundTemp;
+        // special case for drawing the userdefined type icon in filter dialog
+        if (!"ZZ1".equals(cache.getGeocode())) {
+            backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null)).mutate();
+        } else {
+            backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_marker_other, null)).mutate();
+        }
         DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
-        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling)), Gravity.CENTER));
-        markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, getCacheScalingFactor(applyScaling)));
+        markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, scalingFactor), Gravity.CENTER));
+        markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
 
