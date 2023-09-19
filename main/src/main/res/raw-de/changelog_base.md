@@ -1,8 +1,8 @@
 ### Karte
 - Mapsforge und VTM-Bibliotheken auf v0.20 aktualisiert
 - Google Maps Bibliothek aktualisiert
-- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
-- New: Show custom cache icon as marker for related waypoints
+- Neu: Symbol für Cachetyp als Marker anzeigen, wenn benutzerdefiniertes Cache-Symbol gesetzt wurde (Emoji) oder große Symbole aktiviert sind
+- Neu: Benutzerdefiniertes Cache-Symbol als Marker für zugehörige Wegpunkte anzeigen
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
