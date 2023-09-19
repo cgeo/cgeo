@@ -1,5 +1,6 @@
 ##
 - Nieuw: Doel SDK naar 33 verhoogd (vanwege de vereisten van de Play Store)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
 - Oplossing: GPX import met meerdere tracks in hetzelfde bestand
 - Oplossing: Favoriet ratio > 100% onder bepaalde voorwaarden
 - Oplossing: Navigatielijn verloren bij scherm rotatie met Google Maps
