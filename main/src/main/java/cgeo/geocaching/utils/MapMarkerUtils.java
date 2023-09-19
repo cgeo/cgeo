@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -146,7 +147,7 @@ public final class MapMarkerUtils {
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
             // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-            final Drawable backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
+            final Drawable backgroundTemp = getMutatedDrawable(res, cache.getMapMarkerBackgroundId());
             DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
             insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling)), Gravity.CENTER));
             // main icon (type icon / custom cache icon)
@@ -278,7 +279,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
-            final Drawable waypointTypeIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypointType.markerId, null)).mutate();
+            final Drawable waypointTypeIcon = getMutatedDrawable(res, waypointType.markerId);
             if (cache.isDisabled() || cache.isArchived()) {
                 DrawableCompat.setTint(waypointTypeIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
@@ -392,9 +393,9 @@ public final class MapMarkerUtils {
             dotIcon = R.drawable.dot_marker_hasfinal;
         }
 
-        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
+        final Drawable dotMarker = ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null);
         // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null)).mutate();
+        final Drawable dotBackground = getMutatedDrawable(res, cache.getMapDotMarkerBackgroundId());
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
@@ -452,12 +453,12 @@ public final class MapMarkerUtils {
      */
     @NonNull
     private static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null)).mutate();
+        final Drawable dotMarker = getMutatedDrawable(res, waypoint.getMapDotMarkerId());
         DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointOutline, null));
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null)).mutate();
+        final Drawable dotBackground = getMutatedDrawable(res, waypoint.getMapDotMarkerBackgroundId());
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
-        final Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getWaypointType().dotMarkerId, null));
+        final Drawable dotIcon = getMutatedDrawable(res, waypoint.getWaypointType().dotMarkerId);
 
         // Tint disabled waypoints
         final String geocode = waypoint.getGeocode();
@@ -493,28 +494,6 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Build the layered drawable for a cache type icon using a background color + foreground icon
-     *
-     * @param res   Android Resources
-     * @param cache Geocache to get the icon for
-     * @return Layered Drawable
-     */
-    private static Drawable createCacheTypeMarker(final Resources res, final Geocache cache) {
-        // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
-        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, cache.getType().typeColor, null));
-        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{background, ResourcesCompat.getDrawable(res, cache.getType().iconId, null)});
-
-        // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 27.02*23.4dp). Drawable must be square!
-        final int diffWidth = background.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 27.02f, 1);
-        final int offsetLeftTop = diffWidth - diffWidth / 2;
-        final int offsetRightBottom = diffWidth - offsetLeftTop;
-        layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
-        layerDrawable.setLayerInset(1, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
-        return layerDrawable;
-    }
-
-    /**
      * Create a waypoint marker without background - basically the zoomed in waypoint icon
      *
      * @param res      Android Resources
@@ -542,7 +521,7 @@ public final class MapMarkerUtils {
      * @return Layered Drawable
      */
     private static Drawable createWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
-        final Drawable waypointMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.markerId, null)).mutate();
+        final Drawable waypointMarker = getMutatedDrawable(res, waypoint.markerId);
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{waypointMarker});
 
         // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17,25dp). Drawable must be square!
@@ -866,13 +845,13 @@ public final class MapMarkerUtils {
         final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
         markerBuilder.withInset(new InsetBuilder(markerBg));
         // cache type background color
-            final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
         final Drawable backgroundTemp;
         // special case for drawing the userdefined type icon in filter dialog
         if (!"ZZ1".equals(cache.getGeocode())) {
-            backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null)).mutate();
+            backgroundTemp = getMutatedDrawable(res, R.drawable.marker_background);
         } else {
-            backgroundTemp = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_marker_other, null)).mutate();
+            backgroundTemp = getMutatedDrawable(res, R.drawable.dot_marker_other);
         }
         DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
         markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, scalingFactor), Gravity.CENTER));
@@ -880,4 +859,7 @@ public final class MapMarkerUtils {
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
 
+    private static Drawable getMutatedDrawable(final Resources res, final int drwId) {
+        return DrawableCompat.wrap(Objects.requireNonNull(ResourcesCompat.getDrawable(res, drwId, null))).mutate();
+    }
 }
