@@ -1,5 +1,6 @@
 ##
 - 신규: 타겟 SDK를 33으로 늘렸습니다(Play 스토어 요구 사항으로 인해)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
 - 수정: 동일한 파일에 여러 경로가 포함된 GPX 가져오기
 - 수정: 특정 조건에서 호감점수 비율 > 100%
 - 수정: Google 지도에서 화면 회전 시 내비게이션 선이 손실됨

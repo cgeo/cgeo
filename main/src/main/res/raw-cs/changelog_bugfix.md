@@ -1,5 +1,6 @@
 ##
 - Novinka: Zvýšení cílové SDK na 33 (kvůli požadavkům Obchodu Play)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
 - Oprava: Import GPX s více stopami v jednom souboru
 - Oprava: Přidání poměru stran > 100 % mezi oblíbené za určitých podmínek
 - Oprava: Ztráta navigačního řádku při otočení obrazovky v Mapách Google
