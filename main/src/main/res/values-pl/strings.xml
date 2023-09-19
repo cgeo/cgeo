@@ -2283,6 +2283,8 @@
     <string name="permission_read_external_storage_explanation">c:geo może używać tapety systemowej jako tła aplikacji. Aby to zrobić, c:geo potrzebuje uprawnień do odczytu Twoich danych multimedialnych z pamięci zewnętrznej.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo będzie zapisywał dane w pamięciu telefonu lub karcie SD, np. podczas zapisu skrytki do użytku offline, importu lub eksportu pliku i innych funkcji. W niektórych wersjach Androida musisz przyznać dodatkowe uprawnienia dla tych działań.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Uprawnienia do zapisu pamięci zewnętrznej</string>
+    <string name="permission_post_notifications_explanation">c:geo używa powiadomień, aby poinformować Cię o pobieraniu i zbliżaniu się do skrytki (jeśli aktywowane)</string>
+    <string name="permission_post_notifications_explanation_title">Uprawnienie do powiadomień</string>
     <string name="storage_permission_needed">Ta funkcja nie jest możliwa bez uprawnień do przechowywania.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Wybierz schemat kolorów</string>
