@@ -55,6 +55,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
+import static cgeo.geocaching.settings.Settings.getUserName;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -809,9 +810,18 @@ final class OkapiClient {
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
+
+            final List<LogEntry> logs = parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode());
+            final String me = getUserName();
+            for (LogEntry log : logs) {
+                if (log.author.equals(me) && (log.logType.id == 2 || log.logType.id == 10)) {
+                    cache.setVisitedDate(log.date);
+                }
+            }
+
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);
+            DataStore.saveLogs(cache.getGeocode(), logs, true);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
