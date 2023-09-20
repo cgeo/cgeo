@@ -677,6 +677,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (tracks != null) {
             tracks.resumeAllTracks(this::resumeTrack);
         }
+        if (Settings.removeFromRouteOnLog()) {
+            reloadIndividualRoute();
+        }
     }
 
     @Override

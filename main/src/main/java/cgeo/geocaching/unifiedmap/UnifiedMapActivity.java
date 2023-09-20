@@ -850,6 +850,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity {
 
     @Override
     protected void onResume() {
+        if (Settings.removeFromRouteOnLog()) {
+            viewModel.reloadIndividualRoute();
+        }
         super.onResume();
 //        MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }

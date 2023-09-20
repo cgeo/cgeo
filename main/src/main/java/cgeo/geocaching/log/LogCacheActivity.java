@@ -17,6 +17,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -405,6 +406,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
             Settings.setLastCacheLog(lastSavedState.log);
         }
+        if (Settings.removeFromRouteOnLog()) {
+            new IndividualRoute().removeGeocache(geocode);
+        }
         super.finish();
     }
 
@@ -553,6 +557,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         taskInterface.date = date;
         new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
+        if (Settings.removeFromRouteOnLog()) {
+            new IndividualRoute().removeGeocache(geocode);
+        }
     }
 
     protected static class LogCacheTaskInterface {

@@ -316,6 +316,7 @@
     <string translatable="false" name="pref_brouterProfileWalk">brouterProfileWalk</string>
     <string translatable="false" name="pref_brouterProfileBike">brouterProfileBike</string>
     <string translatable="false" name="pref_brouterProfileCar">brouterProfileCar</string>
+    <string translatable="false" name="pref_removeFromRouteOnLog">removeFromRouteOnLog</string>
 
     <!-- categories default navigation / secondary navigation -->
     <string translatable="false" name="pref_defaultNavigationTool">defaultNavigationTool</string>

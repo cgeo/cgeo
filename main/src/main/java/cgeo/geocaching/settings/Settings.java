@@ -2342,4 +2342,8 @@ public class Settings {
     public static boolean extendedSettingsAreEnabled() {
         return getBoolean(R.string.pref_extended_settings_enabled, false);
     }
+
+    public static boolean removeFromRouteOnLog() {
+        return getBoolean(R.string.pref_removeFromRouteOnLog, false);
+    }
 }

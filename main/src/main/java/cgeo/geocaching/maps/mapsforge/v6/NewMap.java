@@ -786,7 +786,7 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
         Log.d("NewMap: onResume");
 
         resumeTileLayer();
-        resumeRoute(false);
+        resumeRoute(Settings.removeFromRouteOnLog());
         if (tracks != null) {
             tracks.resumeAllTracks(this::resumeTrack);
         }
