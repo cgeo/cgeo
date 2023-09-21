@@ -87,7 +87,29 @@
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">알 수 없음</string>
+    <string name="cache_cat_bc_nature">자연</string>
+    <string name="cache_cat_bc_location">위치</string>
+    <string name="cache_cat_bc_recommended">추천</string>
+    <string name="cache_cat_bc_gadget">가젯</string>
+    <string name="cache_cat_bc_mystery">미스터리</string>
+    <string name="cache_cat_bc_hiking">등산</string>
+    <string name="cache_cat_bc_other">기타</string>
+    <string name="cache_cat_desc_bc_nature">특별한 자연에 둘러싸임</string>
+    <string name="cache_cat_desc_bc_location">좋은 위치를 보여줍니다</string>
+    <string name="cache_cat_desc_bc_recommended">BetterCacher 팀에서 추천함</string>
+    <string name="cache_cat_desc_bc_gadget">특별한 수공예품, 멋진 가잿 등</string>
+    <string name="cache_cat_desc_bc_mystery">특별하고 도전적인 퍼즐</string>
+    <string name="cache_cat_desc_bc_hiking">훌륭한 등산을 제공합니다</string>
+    <string name="cache_cat_desc_bc_other">기타 기능 - 추천 로그 참조</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">없음</string>
+    <string name="cache_tier_bc_blue">파랑</string>
+    <string name="cache_tier_bc_silver">은</string>
+    <string name="cache_tier_bc_gold">금</string>
+    <string name="cache_tier_desc_bc_blue">나열된 캐시의 기본 계층</string>
+    <string name="cache_tier_desc_bc_silver">BetterCacher 팀이 방문하여 자동으로 수여됨</string>
+    <string name="cache_tier_desc_bc_gold">BetterCacher 팀이 권장하는 뛰어난 캐시</string>
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -495,6 +517,8 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_category">BC 분류</string>
+    <string name="cache_filter_tier">BC 계층</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
@@ -824,6 +848,7 @@
     <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
+    <string name="init_summary_bettercacher">BetterCacher.org에서 캐시 계층 및 분류를 로드하세요.</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
     <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
     <string name="init_openlastdetailspage">마지막 상세내용 페이지</string>
@@ -1390,6 +1415,7 @@
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
     <string name="cache_coordinates">좌표</string>
@@ -2180,6 +2206,8 @@
     <string name="permission_read_external_storage_explanation">c:geo는 시스템 배경화면을 앱의 배경으로 사용할 수 있습니다. 이렇게 하려면 c:geo에 외부 저장소의 미디어 데이터를 읽을 수 있는 권한이 필요합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo는 휴대폰 저장소 또는 SD 카드에 데이터를 기록합니다. 예: 오프라인 사용을 위해 지오캐시를 저장하면 파일 및 기타 기능을 가져오거나 내보낼 수 있습니다. 일부 Android 버전에서는 이러한 작업에 대한 추가 권한을 부여해야 합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">레거시 외부 저장소 쓰기 권한</string>
+    <string name="permission_post_notifications_explanation">c:geo는 알림을 사용하여 다운로드 및 근처 캐시에 대해 알려줍니다. (활성화된 경우)</string>
+    <string name="permission_post_notifications_explanation_title">알림 권한</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
