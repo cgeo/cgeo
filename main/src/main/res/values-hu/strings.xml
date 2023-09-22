@@ -1342,6 +1342,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
