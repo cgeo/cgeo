@@ -2256,6 +2256,7 @@
     <string name="generating_distance_matrix">거리 행렬 생성</string>
     <string name="running_route_optimizations">경로 최적화 실행</string>
     <string name="route_optimization_finished">경로 최적화 완료</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
