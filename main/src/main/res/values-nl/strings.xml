@@ -2286,6 +2286,9 @@
     <string name="generating_distance_matrix">Afstandsmatrix genereren</string>
     <string name="running_route_optimizations">Routes optimaliseren</string>
     <string name="route_optimization_finished">Route optimalisatie voltooid</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Machtigingen gewijzigd</string>
+    <string name="changed_permissions_info">Android heeft een nieuwe machtiging ingevoerd die benodigd is door c:geo. Voer de c:geo configuratiewizard uit om deze machtiging te controleren en meer gedetailleerde info te krijgen. Je kunt de wizard nu uitvoeren of later uitvoeren met behulp van het menu-item voor c:geo home scherm.\n\nWilt u de configuratiewizard nu uitvoeren?</string>
     <!-- individual track -->
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
