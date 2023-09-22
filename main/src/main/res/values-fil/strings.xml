@@ -1121,6 +1121,7 @@
     <!-- individual routes -->
     <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->

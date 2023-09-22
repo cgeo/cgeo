@@ -1380,6 +1380,7 @@
     <string name="sorted_route_saved">Окремий маршрут збережено</string>
     <string name="load_individual_route_error">Помилка при завантаженні окремого маршруту</string>
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Завантажувати маршрут/маршрут від GPX</string>
     <string name="load_track_error">Помилка при завантаженні маршруту/маршруту</string>

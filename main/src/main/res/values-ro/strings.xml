@@ -1190,6 +1190,7 @@
     <string name="number_input_title">Introduceți o valoare între %1$s și %2$s</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
