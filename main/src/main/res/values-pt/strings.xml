@@ -2284,6 +2284,7 @@
     <string name="generating_distance_matrix">A gerar matriz de distância</string>
     <string name="running_route_optimizations">Optimização de rota em curso</string>
     <string name="route_optimization_finished">Optimização de rota concluída</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
