@@ -1999,6 +1999,7 @@ Nombre de archivo:%2$s</string>
     </plurals>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="load_track_error">Error al cargar pista/ruta</string>
