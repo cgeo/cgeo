@@ -460,6 +460,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">לטעון מסלול מ-GPX</string>
     <string name="load_track_error">שגיאה בטעינת מסלול</string>
