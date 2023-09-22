@@ -213,31 +213,23 @@ public final class MapMarkerUtils {
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
-        ArrayList<Integer> assignedMarkers = new ArrayList<>();
-        boolean cacheIsDisabled = false;
-        boolean cacheIsArchived = false;
-        boolean cacheIsLinearAlc = false;
-        int cacheEmoji = 0;
-        final Geocache cache = waypoint.getParentGeocache();
-        if (null != cache) {
-            assignedMarkers = getAssignedMarkers(cache);
-            cacheIsDisabled = cache.isDisabled();
-            cacheIsArchived = cache.isArchived();
-            cacheIsLinearAlc = cache.isLinearAlc();
-            cacheEmoji = cache.getAssignedEmoji();
-        }
-        final int hashcode = new HashCodeBuilder()
+
+        final HashCodeBuilder hcb = new HashCodeBuilder()
                 .append(waypoint.isVisited())
                 .append(id)
                 .append(waypoint.getMapMarkerId())
-                .append(assignedMarkers)
-                .append(cacheIsDisabled)
-                .append(cacheIsArchived)
-                .append(cacheIsLinearAlc ? waypoint.getPrefix() : false)
                 .append(showPin)
-                .append(applyScaling)
-                .append(cacheEmoji)
-                .toHashCode();
+                .append(applyScaling);
+        final Geocache cache = waypoint.getParentGeocache();
+        if (null != cache) {
+            hcb.append(getAssignedMarkers(cache))
+                    .append(cache.isDisabled())
+                    .append(cache.isArchived())
+                    .append(cache.isLinearAlc() ? waypoint.getPrefix() : false)
+                    .append(cache.getAssignedEmoji())
+                    .append(cache.getType());
+        }
+        final int hashcode = hcb.toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
