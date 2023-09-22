@@ -1939,6 +1939,7 @@
         <item quantity="other">Rute lastet med %d rutepunkter</item>
     </plurals>
     <string name="individual_route_set_as_start_title">Sett som rutestart</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Last inn spor/rute fra GPX</string>
     <string name="load_track_error">Feil ved lasting av spor/rute</string>
