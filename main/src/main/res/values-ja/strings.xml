@@ -1982,6 +1982,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     </plurals>
     <string name="individual_route_set_as_start_title">ルート開始点にする</string>
     <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
