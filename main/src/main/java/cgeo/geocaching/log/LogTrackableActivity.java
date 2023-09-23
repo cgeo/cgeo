@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
@@ -17,7 +16,6 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -36,7 +34,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -130,7 +127,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = AndroidBeam.getUri(getIntent());
 
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -145,21 +141,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             // Load Tracking Code
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
-            }
-        }
-
-        // try to get data from URI
-        if (geocode == null && uri != null) {
-            geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
-        }
-
-        // try to get data from URI from a potential tracking Code
-        if (geocode == null && uri != null) {
-            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
-
-            if (!tbTrackingCode.isEmpty()) {
-                brand = tbTrackingCode.brand;
-                geocode = tbTrackingCode.trackingCode;
             }
         }
 

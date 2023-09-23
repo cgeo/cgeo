@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.search.BaseSearchSuggestionCursor;
@@ -134,8 +133,6 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
     }

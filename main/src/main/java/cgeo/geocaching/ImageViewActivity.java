@@ -6,7 +6,6 @@ import cgeo.geocaching.databinding.ImageviewImageBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
@@ -27,7 +26,6 @@ import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.transition.Transition;
@@ -254,12 +252,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         // Restore previous state
         if (savedInstanceState != null) {
             restoreState(savedInstanceState);
-        }
-
-        //handle case where Activity is called without intent parameters but with Uri (e.g. from outside c:geo)
-        final Uri uri = AndroidBeam.getUri(getIntent());
-        if (uri != null) {
-            imageList.add(new Image.Builder().setUrl(uri).build());
         }
 
         //safeguard for invalid/empty input data

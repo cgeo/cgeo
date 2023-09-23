@@ -47,7 +47,6 @@ import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -568,8 +567,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         FilterUtils.initializeFilterBar(activity, mapActivity);
         MapUtils.updateFilterBar(activity, mapOptions.filterContext);
-
-        AndroidBeam.disable(activity);
 
         MapUtils.showMapOneTimeMessages(activity, mapOptions.mapMode);
 
