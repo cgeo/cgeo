@@ -59,7 +59,6 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.bettercacher.Tier;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
@@ -99,7 +98,6 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
@@ -172,7 +170,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -195,7 +192,7 @@ import org.apache.commons.text.StringEscapeUtils;
  * e.g. details, description, logs, waypoints, inventory, variables...
  */
 public class CacheDetailActivity extends TabbedViewPagerActivity
-        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
+        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -261,7 +258,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = AndroidBeam.getUri(getIntent());
 
         // try to get data from extras
         String name = null;
@@ -278,44 +274,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // When clicking a cache in MapsWithMe, we get back a PendingIntent
         if (StringUtils.isEmpty(geocode)) {
             geocode = MapsMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
-        }
-
-        if (geocode == null && uri != null) {
-            geocode = ConnectorFactory.getGeocodeFromURL(uri.toString());
-        }
-
-        // try to get data from URI
-        if (geocode == null && guid == null && uri != null) {
-            final String uriHost = uri.getHost().toLowerCase(Locale.US);
-            final String uriPath = uri.getPath().toLowerCase(Locale.US);
-            final String uriQuery = uri.getQuery();
-
-            if (uriQuery != null) {
-                Log.i("Opening URI: " + uriHost + uriPath + "?" + uriQuery);
-            } else {
-                Log.i("Opening URI: " + uriHost + uriPath);
-            }
-
-            if (uriHost.contains("geocaching.com")) {
-                if (StringUtils.startsWith(uriPath, "/geocache/gc")) {
-                    geocode = StringUtils.substringBefore(uriPath.substring(10), "_").toUpperCase(Locale.US);
-                } else {
-                    geocode = uri.getQueryParameter("wp");
-                    guid = uri.getQueryParameter("guid");
-
-                    if (StringUtils.isNotBlank(geocode)) {
-                        geocode = geocode.toUpperCase(Locale.US);
-                        guid = null;
-                    } else if (StringUtils.isNotBlank(guid)) {
-                        geocode = null;
-                        guid = guid.toLowerCase(Locale.US);
-                    } else {
-                        showToast(res.getString(R.string.err_detail_open));
-                        finish();
-                        return;
-                    }
-                }
-            }
         }
 
         // no given data
@@ -390,9 +348,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
 
-        // If we have a newer Android device setup Android Beam for easy cache sharing
-        AndroidBeam.enable(this, this);
-
         // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
@@ -402,13 +357,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             }
         });
-    }
-
-
-    @Override
-    @Nullable
-    public String getAndroidBeamUri() {
-        return cache != null ? cache.getUrl() : null;
     }
 
     @Override

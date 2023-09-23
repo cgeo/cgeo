@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -180,7 +179,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         } catch (final AndroidRuntimeException ex) {
             Log.e("Error requesting indeterminate progress", ex);
         }
-        AndroidBeam.disable(this);
         initializeCommonFields();
     }
 
