@@ -87,7 +87,29 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Neznámé</string>
+    <string name="cache_cat_bc_nature">Příroda</string>
+    <string name="cache_cat_bc_location">Místo</string>
+    <string name="cache_cat_bc_recommended">Doporučené</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysterka</string>
+    <string name="cache_cat_bc_hiking">Turistika</string>
+    <string name="cache_cat_bc_other">Ostatní</string>
+    <string name="cache_cat_desc_bc_nature">Obklopené zvláštní přírodou</string>
+    <string name="cache_cat_desc_bc_location">Ukáže vám skvělé místo</string>
+    <string name="cache_cat_desc_bc_recommended">Doporučeno týmem BetterCacher</string>
+    <string name="cache_cat_desc_bc_gadget">Speciální řemeslné výrobky, cool gadgety atd.</string>
+    <string name="cache_cat_desc_bc_mystery">Mimořádná a náročná hádanka</string>
+    <string name="cache_cat_desc_bc_hiking">Nabízí vynikající turistiku</string>
+    <string name="cache_cat_desc_bc_other">Další funkce - nahlédněte do doporučujícího protokolu</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Žádné</string>
+    <string name="cache_tier_bc_blue">Modrá</string>
+    <string name="cache_tier_bc_silver">Stříbrná</string>
+    <string name="cache_tier_bc_gold">Zlatá</string>
+    <string name="cache_tier_desc_bc_blue">Výchozí úroveň pro kešky v seznamu</string>
+    <string name="cache_tier_desc_bc_silver">Navštíveno týmem BetterCacher, automaticky oceněno</string>
+    <string name="cache_tier_desc_bc_gold">Vynikající keška, doporučená týmem BetterCacher</string>
     <!-- logs -->
     <string name="log_found">Nalezeno</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -495,6 +517,7 @@
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
     <string name="cache_filter_difficulty_terrain">Obtížnost / Terén</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matrice obtížnosti / terénu</string>
     <string name="cache_filter_rating">Hodnocení</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atributy kešky</string>
@@ -509,6 +532,8 @@
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
+    <string name="cache_filter_category">Kategorie BC</string>
+    <string name="cache_filter_tier">Úroveň BC</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
@@ -586,6 +611,7 @@
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Zahrnout kešky bez O/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Vyplnit pomocí gc.com</string>
     <string name="cache_filter_nested_filter_modify">upravit</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Dílčí filtr je aktuálně prázdný</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
@@ -840,6 +866,7 @@
     <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
+    <string name="init_summary_bettercacher">Načíst úroveň kešek a kategorie z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -1430,6 +1457,7 @@
     <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
@@ -2265,6 +2293,8 @@
     <string name="permission_read_external_storage_explanation">c:geo může jako pozadí aplikace použít tapetu vašeho systému. K tomu potřebuje c:geo oprávnění ke čtení multimediálních dat v externím úložišti.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo bude zapisovat data do úložiště telefonu nebo na SD kartu, např. při ukládání keškek pro offline použití, importu nebo exportu souborů a dalších funkcích. V některých verzích systému Android je třeba pro tyto akce udělit další oprávnění.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Starší oprávnění pro zápis do externího úložiště</string>
+    <string name="permission_post_notifications_explanation">c:geo používá oznámení, aby vás informoval o stahování balíčků a blížících se keškách (pokud jsou aktivovány)</string>
+    <string name="permission_post_notifications_explanation_title">Oprávnění k oznámením</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
