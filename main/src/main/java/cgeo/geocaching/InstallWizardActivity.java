@@ -440,6 +440,10 @@ public class InstallWizardActivity extends AppCompatActivity {
         return PermissionContext.NOTIFICATIONS.hasAllPermissions();
     }
 
+    public static boolean needsNotificationsPermission() {
+        return android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !hasNotificationsPermission();
+    }
+
     // -------------------------------------------------------------------
     // Android SAF-based permissions related methods
 

@@ -4,6 +4,7 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
@@ -24,6 +25,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -515,6 +517,12 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
             // check for finished, but unreceived downloads
             DownloaderUtils.checkPendingDownloads(this);
+
+            // check for notifications permission on migration (API 33+ only)
+            if (InstallWizardActivity.needsNotificationsPermission()) {
+                Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.NOTIFICATION_PERMISSION, () -> startActivity(new Intent(this, InstallWizardActivity.class)));
+            }
+
         }
     }
 

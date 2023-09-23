@@ -2598,6 +2598,10 @@
     <string name="running_route_optimizations">Running route optimizations</string>
     <string name="route_optimization_finished">Route optimization finished</string>
 
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Changed permissions</string>
+    <string name="changed_permissions_info">Android has introduced a new permission required by c:geo. Run the c:geo configuration wizard to check this permission and get more detailed info. You can either run the wizard now or run it later using the menu entry for it on c:geo home screen.\n\nDo you want to run the configuration wizard now?</string>
+
     <!-- individual track -->
     <string name="map_load_track">Load track/route from GPX</string>
     <string name="load_track_error">Error loading track/route</string>

@@ -2188,6 +2188,7 @@
     <string name="generating_distance_matrix">Generació de la matriu de distància</string>
     <string name="running_route_optimizations">Execució d\'optimitzacions de ruta</string>
     <string name="route_optimization_finished">Finalitzat l\'optimització de la ruta</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Carrega track/ruta del GPX</string>
     <string name="load_track_error">S\'ha produït un error en carregar el track/ruta</string>

@@ -2326,6 +2326,7 @@
     <string name="generating_distance_matrix">Generování matice vzdálenosti</string>
     <string name="running_route_optimizations">Probíhá optimalizace trasy</string>
     <string name="route_optimization_finished">Optimalizace trasy dokončena</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>

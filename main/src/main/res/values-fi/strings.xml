@@ -2264,6 +2264,7 @@
     <string name="generating_distance_matrix">Luodaan etäisyysmatriksia</string>
     <string name="running_route_optimizations">Reitin optimointi</string>
     <string name="route_optimization_finished">Reitin optimointi valmis</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
