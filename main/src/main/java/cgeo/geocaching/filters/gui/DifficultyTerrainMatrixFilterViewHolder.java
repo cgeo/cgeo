@@ -59,7 +59,7 @@ public class DifficultyTerrainMatrixFilterViewHolder extends BaseFilterViewHolde
         matrix.setLabels(LocalizationUtils.getString(R.string.cache_difficulty), LocalizationUtils.getString(R.string.cache_terrain));
 
         final LinearLayout.LayoutParams matrixLp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        matrixLp.gravity = Gravity.RIGHT;
+        matrixLp.gravity = Gravity.CENTER;
         ll.addView(matrix, matrixLp);
 
         return ll;

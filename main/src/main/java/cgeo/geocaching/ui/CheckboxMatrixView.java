@@ -54,7 +54,7 @@ public class CheckboxMatrixView extends androidx.constraintlayout.widget.Constra
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
-    
+
     private void init() {
         final ContextThemeWrapper ctw = new ContextThemeWrapper(getContext(), R.style.cgeo);
         inflate(ctw, R.layout.checkboxmatrix_view, this);
@@ -99,6 +99,17 @@ public class CheckboxMatrixView extends androidx.constraintlayout.widget.Constra
     public void setLabels(final String rowLabel, final String columnLabel) {
         binding.rowsLabel.setText(rowLabel);
         binding.colsLabel.setText(columnLabel);
+        rotateTextView(binding.rowsLabel);
+    }
+
+    private static void rotateTextView(final TextView textView) {
+        //measure normal text width
+        textView.setRotation(0);
+        textView.measure(0, 0);
+        final int width = textView.getMeasuredWidth();
+        textView.setRotation(-90);
+        textView.setTranslationX((float) -(width - ViewUtils.spToPixel(14)) / 2);
+        textView.requestLayout();
     }
 
     /** (re-)initializes the matrix with given data. Matrix data is deleted in the process */
