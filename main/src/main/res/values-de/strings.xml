@@ -2273,6 +2273,9 @@
     <string name="generating_distance_matrix">Erstelle Distanzmatrix</string>
     <string name="running_route_optimizations">Optimiere Route</string>
     <string name="route_optimization_finished">Routenoptimierung abgeschlossen</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Veränderte Berechtigungen</string>
+    <string name="changed_permissions_info">Android hat eine neue Berechtigung eingeführt, die von c:geo benötigt wird. Führe den c:geo Konfigurations-Assistenten aus, um diese Berechtigung zu überprüfen und detailliertere Informationen zu erhalten. Du kannst den Assistenten jetzt starten oder ihn später über den Menüeintrag auf dem c:geo Startbildschirm ausführen.\n\nMöchtest du den Konfigurations-Assistenten jetzt ausführen?</string>
     <!-- individual track -->
     <string name="map_load_track">Lade Track/Route aus GPX</string>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
