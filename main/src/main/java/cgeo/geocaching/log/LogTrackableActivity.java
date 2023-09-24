@@ -112,7 +112,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             }
         }
 
-        showProgress(!loggingManager.postReady());
+        showProgress(false);
     }
 
     @Override

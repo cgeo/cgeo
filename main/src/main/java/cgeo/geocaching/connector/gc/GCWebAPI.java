@@ -63,7 +63,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  * These are all HTTP endpoints with prefix {@link #API_URL}.
  * This is not the official GC Live API.
  */
-class GCWebAPI {
+public class GCWebAPI {
 
     private static final Object CACHE_LOCK = new Object();
     private static final String WEBSITE_URL = "https://www.geocaching.com";
@@ -1315,8 +1315,39 @@ class GCWebAPI {
         Integer trackableLogTypeId;
     }
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static final class GCWebLogEntry extends HttpResponse {
-        //Log Creation Fields
+    public static class GCWebLogRequest extends GCWebLogBase {
+        @JsonProperty("logType")
+        Integer logType;
+        @JsonProperty("trackables")
+        GCWebLogTrackable[] trackables;
+        @JsonProperty("usedFavoritePoint")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        Boolean usedFavoritePoint;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GCWebLogResponse extends GCWebLogRequest {
+
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GCWebTrackableLogRequest extends GCWebLogBase {
+        @JsonProperty("logType")
+        Integer logType;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GCWebTrackableLogResponse extends GCWebLogBase {
+        @JsonProperty("logType")
+        GCWebLogTrackableResponseLogType logType;
+    }
+
+    //Contains common fields in JSONs related to Log request and response for both Caches and Trackables
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class GCWebLogBase extends HttpResponse {
+
+        // --- common request fields ---
+
         @JsonProperty("images")
         String[] images; //image GUIDs
         @JsonProperty("logDate")
@@ -1324,12 +1355,13 @@ class GCWebAPI {
         Date logDate;
         @JsonProperty("logText")
         String logText;
-        @JsonProperty("logType")
-        Integer logType;
-        @JsonProperty("trackables")
-        GCWebLogTrackable[] trackables;
 
-        //Field used in return
+        @JsonProperty("trackingCode")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        String trackingCode; //used only for Trackable Logs
+
+        // --- common response fields ---
+
         @JsonProperty("guid")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         String guid;
@@ -1347,9 +1379,9 @@ class GCWebAPI {
         @JsonProperty("cannotDelete")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         Boolean cannotDelete;
-        @JsonProperty("usedFavoritePoint")
+        @JsonProperty("isArchived")
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        Boolean usedFavoritePoint;
+        Boolean isArchived;
 
     }
 
@@ -1373,6 +1405,12 @@ class GCWebAPI {
 
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GCWebLogTrackableResponseLogType {
+        @JsonProperty("id")
+        Integer id;
+    }
+
     //New Log API
     @NonNull
     @WorkerThread
@@ -1389,7 +1427,7 @@ class GCWebAPI {
         }
 
         //2,) Fill Log Entry object and post it
-        final GCWebLogEntry logEntry = new GCWebLogEntry();
+        final GCWebLogRequest logEntry = new GCWebLogRequest();
         logEntry.images = new String[0];
         logEntry.logDate = date;
         logEntry.logType = logType.id;
@@ -1402,11 +1440,11 @@ class GCWebAPI {
         }).toArray(GCWebLogTrackable.class);
         logEntry.usedFavoritePoint = addToFavorites; //not used by web page, but seems to work
 
-        final GCWebLogEntry response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
+        final GCWebLogResponse response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
                 .bodyJson(logEntry)
-                .requestJson(GCWebLogEntry.class).blockingGet();
+                .requestJson(GCWebLogResponse.class).blockingGet();
 
         if (response.logReferenceCode == null) {
             return generateLogError(false, "Problem pasting log, response is: " + response);
@@ -1460,6 +1498,39 @@ class GCWebAPI {
         }
 
         return new ImmutablePair<>(StatusCode.NO_ERROR, imgResponse.url);
+    }
+
+    public static ImmutablePair<StatusCode, String> postLogTrackableNew(final cgeo.geocaching.log.TrackableLog trackableLog, final Date date, final String log) {
+        final String tbCode = trackableLog.geocode;
+
+        //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
+        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
+        if (csrfToken == null) {
+            return generateLogError(true, "Problem getting CSRF-Token");
+        }
+
+        //2,) Fill Trackable Log Entry object and post it
+        //  Exemplary JSOn to send: {"images":[],"logDate":"2023-09-08T23:13:36.414Z","logText":"Write a note for a trackable","logType":4,"trackingCode":null}
+        final GCWebTrackableLogRequest logEntry = new GCWebTrackableLogRequest();
+        logEntry.images = new String[0];
+        logEntry.logDate = date;
+        logEntry.logType = trackableLog.action.gcApiId;
+        logEntry.logText = log;
+        logEntry.trackingCode = trackableLog.trackCode;
+
+        //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
+        final GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
+                .method(HttpRequest.Method.POST)
+                .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+                .bodyJson(logEntry)
+                .requestJson(GCWebTrackableLogResponse.class).blockingGet();
+
+        if (response.logReferenceCode == null) {
+            return generateLogError(false, "Problem pasting trackable log, response is: " + response);
+        }
+
+        return new ImmutablePair<>(StatusCode.NO_ERROR, response.logReferenceCode);
+
     }
 
     private static ImmutablePair<StatusCode, String> generateLogError(final boolean image, final String errorMsg) {

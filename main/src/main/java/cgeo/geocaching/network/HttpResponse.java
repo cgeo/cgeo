@@ -71,6 +71,7 @@ public class HttpResponse {
         }
     }
 
+    @JsonIgnore
     public int getStatusCode() {
         return response == null ? -1 : response.code();
     }
