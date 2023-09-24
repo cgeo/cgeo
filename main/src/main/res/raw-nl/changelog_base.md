@@ -3,6 +3,7 @@
 - Google Maps renderer bijgewerkt
 - Nieuw: Toon cache type icoon als marker als een eigen cache icoon is ingesteld (emoji) of grote iconen zijn ingeschakeld
 - Nieuw: Toon eigen cache icoon als markering voor gerelateerde waypoints
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
@@ -10,6 +11,7 @@
 - Wijziging: Opties voor eigen log-afbeeldingen herontworpen
 - Nieuw: Bettercacher integratie
 - Nieuw: Synchroniseer bezocht status bij het synchroniseren van waypoints met persoonlijke notitie
+- New: Retrieve found date for Opencaching-based caches
 
 ### Algemeen
 - Nieuw: Doel SDK opgehoogd naar 33
