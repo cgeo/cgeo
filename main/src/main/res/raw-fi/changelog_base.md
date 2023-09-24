@@ -3,6 +3,7 @@
 - Updated Google Maps renderer
 - New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
 - New: Show custom cache icon as marker for related waypoints
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
 
 ### Kätkön tiedot
 - Uusi: Muokkaa lokikuvan kuvatekstin oletusarvoa
@@ -10,6 +11,7 @@
 - Muutos: Omien lokikuvien muokkausvalinnat on uudelleen suunniteltu
 - New: Bettercacher integration
 - New: Sync visited state on synchronizing waypoints to personal note
+- New: Retrieve found date for Opencaching-based caches
 
 ### Yleinen
 - Uusi: nostettu tavoite SDK 33:een
