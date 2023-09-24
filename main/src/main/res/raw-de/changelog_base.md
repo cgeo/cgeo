@@ -3,6 +3,7 @@
 - Google Maps Bibliothek aktualisiert
 - Neu: Symbol für Cachetyp als Marker anzeigen, wenn benutzerdefiniertes Cache-Symbol gesetzt wurde (Emoji) oder große Symbole aktiviert sind
 - Neu: Benutzerdefiniertes Cache-Symbol als Marker für zugehörige Wegpunkte anzeigen
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
@@ -10,6 +11,7 @@
 - Änderung: Neues Design der Bearbeitungsoptionen für eigene Logbilder
 - Neu: Bettercacher Integration
 - New: Sync visited state on synchronizing waypoints to personal note
+- New: Retrieve found date for Opencaching-based caches
 
 ### Allgemein
 - Neu: targetSDK auf 33 erhöht
