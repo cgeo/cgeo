@@ -130,6 +130,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     public void onLoadFinished(@NonNull final Loader<GCLoggingManager.Result> loader, final GCLoggingManager.Result result) {
         if (result == null) {
             hasLoaderError = true;
+            Log.w("GCLoggingManager loaderError: empty result");
         } else {
             if (result.trackables != null) {
                 trackables = result.trackables;
@@ -140,6 +141,9 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
             possibleLogTypes = result.possibleLogTypes;
             hasLoaderError = possibleLogTypes.isEmpty();
+            if (possibleLogTypes.isEmpty()) {
+                Log.w("GCLoggingManager loaderError: empty log types");
+            }
 
             if (result.premFavcount != null) {
                 premFavcount = result.premFavcount;
