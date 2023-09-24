@@ -2252,6 +2252,7 @@
     <string name="generating_distance_matrix">Generavima atstumo matrica</string>
     <string name="running_route_optimizations">Atliekamas maršruto optimizavimas</string>
     <string name="route_optimization_finished">Maršruto optimizavimas baigtas</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Įkelti pėdsaką/maršrutą iš GPX</string>
     <string name="load_track_error">Klaida įkeliant pėdsaką/maršrutą</string>
