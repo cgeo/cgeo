@@ -1080,6 +1080,11 @@
     <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
     <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
     <string name="init_mapShadingScale_description">Neprůhlednost vrstvy stínování, od neviditelné po vyšší hodnoty, které zintenzivňují stínování, ale mohou vytvářet artefakty</string>
+    <string name="init_iconsizes">Velikosti ikon</string>
+    <string name="init_mapCacheScaling_title">Měřítko ikony kešky</string>
+    <string name="init_mapCacheScaling_description">Měřítko pro ikony kešek (v %)</string>
+    <string name="init_mapWpScaling_title">Měřítko ikony trasového bodu</string>
+    <string name="init_mapWpScaling_description">Měřítko pro ikony trasových bodů (v %)</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
@@ -2356,6 +2361,9 @@
     <string name="generating_distance_matrix">Generování matice vzdálenosti</string>
     <string name="running_route_optimizations">Probíhá optimalizace trasy</string>
     <string name="route_optimization_finished">Optimalizace trasy dokončena</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Změněná oprávnění</string>
+    <string name="changed_permissions_info">Systém Android zavedl nové oprávnění vyžadované pomocí c:geo. Spusťte průvodce konfigurací c:geo, abyste toto oprávnění zkontrolovali a získali podrobnější informace. Průvodce můžete spustit buď nyní, nebo později pomocí položky v nabídce na domovské obrazovce c:geo.\n\nChcete spustit průvodce konfigurací nyní?</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
