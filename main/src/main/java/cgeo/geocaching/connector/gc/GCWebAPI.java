@@ -1381,8 +1381,6 @@ class GCWebAPI {
                                                      final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
                                                      final boolean addToFavorites) {
 
-        //TODO: "addToFavorites" is ignored for now
-
         final String geocode = geocache.getGeocode();
         //1.) Call log page and get a valid CSRF Token
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/geocache/" + geocode + "/log");
@@ -1402,6 +1400,7 @@ class GCWebAPI {
             tLog.trackableLogTypeId = t.action.gcApiId;
             return tLog;
         }).toArray(GCWebLogTrackable.class);
+        logEntry.usedFavoritePoint = addToFavorites; //not used by web page, but seems to work
 
         final GCWebLogEntry response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
                 .method(HttpRequest.Method.POST)

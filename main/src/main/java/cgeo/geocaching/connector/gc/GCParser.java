@@ -1952,7 +1952,13 @@ public final class GCParser {
 
         final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
         if (match == null) {
-            return Collections.emptyList();
+            //September 2023:
+            // During migration time of gc.com to new log page there is still the old page returned for non-migrated members.
+            //--> call old parser in this case.
+            //-- > when migration is completed on gc.com side, replace with: return Collections.emptyList();
+            //see https://github.com/orgs/cgeo/discussions/77 for complete discussion
+            return parseTypes(page);
+            //return Collections.emptyList();
         }
         try {
             final AvailableLogTypeNew[] availableTypes = MAPPER.readValue("[" + match + "]", AvailableLogTypeNew[].class);
