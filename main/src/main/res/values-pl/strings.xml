@@ -1080,6 +1080,11 @@
     <string name="init_mapShadingLinearity_description">Małe wartości akcentują kontrast na stromych nachyleniach, ale ukrywają zmiany w płaskich; duże wartości sprawiają, że jest bardziej liniowy</string>
     <string name="init_mapShadingScale_title">Nieprzezroczystość cieniowania</string>
     <string name="init_mapShadingScale_description">Nieprzezroczystość warstwy cieniowania, od niewidzialności do wyższych wartości intensyfikujących cień, ale może powodować artefakty</string>
+    <string name="init_iconsizes">Rozmiary ikon</string>
+    <string name="init_mapCacheScaling_title">Skalowanie ikon skrytek</string>
+    <string name="init_mapCacheScaling_description">Współczynnik skalowania dla ikon skrytek (w %)</string>
+    <string name="init_mapWpScaling_title">Skalowanie ikon punktów nawigacji</string>
+    <string name="init_mapWpScaling_description">Współczynnik skalowania dla ikon punktów nawigacji (w %)</string>
     <string name="init_maintenance">Konserwacja</string>
     <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
@@ -2356,6 +2361,9 @@
     <string name="generating_distance_matrix">Generowanie matrycy odległości</string>
     <string name="running_route_optimizations">Uruchamianie optymalizacji trasy</string>
     <string name="route_optimization_finished">Zakończono optymalizację trasy</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Zmienione uprawnienia</string>
+    <string name="changed_permissions_info">Android wprowadził nowe uprawnienia wymagane przez c:geo. Uruchom kreatora konfiguracji c:geo, aby sprawdzić to uprawnienie i uzyskać bardziej szczegółowe informacje. Możesz uruchomić kreatora teraz lub uruchomić go później za pomocą wpisu menu na ekranie głównym c:geo.\n\nCzy chcesz uruchomić kreatora konfiguracji?</string>
     <!-- individual track -->
     <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania śladu/trasy</string>
