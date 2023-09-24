@@ -1062,6 +1062,11 @@
     <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
     <string name="init_mapShadingScale_title">음영 불투명도</string>
     <string name="init_mapShadingScale_description">음영 레이어의 불투명도는 보이지 않는 값에서 더 높은 값까지 음영을 강화하지만 아티팩트를 생성할 수 있습니다.</string>
+    <string name="init_iconsizes">아이콘 크기</string>
+    <string name="init_mapCacheScaling_title">캐시 아이콘 크기 조정</string>
+    <string name="init_mapCacheScaling_description">캐시 아이콘의 크기 조정 (%으로)</string>
+    <string name="init_mapWpScaling_title">지점 아이콘 크기 조정</string>
+    <string name="init_mapWpScaling_description">지점 아이콘의 크기 조정 (%으로)</string>
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
@@ -2266,6 +2271,9 @@
     <string name="generating_distance_matrix">거리 행렬 생성</string>
     <string name="running_route_optimizations">경로 최적화 실행</string>
     <string name="route_optimization_finished">경로 최적화 완료</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">변경된 권한</string>
+    <string name="changed_permissions_info">Android에서는 c:geo에 필요한 새로운 권한을 도입했습니다. c:geo 구성 마법사를 실행하여 이 권한을 확인하고 더 자세한 정보를 얻으세요. 지금 마법사를 실행하거나 나중에 c:geo 홈 화면의 메뉴 항목을 사용하여 실행할 수 있습니다.\n\n지금 구성 마법사를 실행하시겠습니까?</string>
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
