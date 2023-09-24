@@ -3,6 +3,7 @@
 - Aktualizovaný vykreslovač Google Maps
 - Novinka: Zobrazení ikony typu kešky jako značky, pokud byla nastavena vlastní ikona kešky (emoji) nebo jsou povoleny velké ikony
 - Novinka: Zobrazení vlastní ikony kešky jako značky pro související trasové body
+- Novinka: Povolení měřítka ikon kešek/trasových bodů (viz Nastavení => Vzhled)
 
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
@@ -10,6 +11,7 @@
 - Změna: Přepracované možnosti úprav vlastních obrázků do logu
 - Novinka: Integrace Bettercacher
 - Novinka: Synchronizace navštíveného stavu při synchronizaci trasových bodů s osobní poznámkou
+- Novinka: Získání data nálezu pro kešky založené na službě Opencaching
 
 ### Obecné
 - Novinka: Zvýšeno cílové SDK na 33
