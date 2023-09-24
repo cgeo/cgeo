@@ -2257,6 +2257,8 @@
     <string name="running_route_optimizations">경로 최적화 실행</string>
     <string name="route_optimization_finished">경로 최적화 완료</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">변경된 권한</string>
+    <string name="changed_permissions_info">Android에서는 c:geo에 필요한 새로운 권한을 도입했습니다. c:geo 구성 마법사를 실행하여 이 권한을 확인하고 더 자세한 정보를 얻으세요. 지금 마법사를 실행하거나 나중에 c:geo 홈 화면의 메뉴 항목을 사용하여 실행할 수 있습니다.\n\n지금 구성 마법사를 실행하시겠습니까?</string>
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
