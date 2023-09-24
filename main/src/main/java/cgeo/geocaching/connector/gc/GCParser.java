@@ -1944,32 +1944,53 @@ public final class GCParser {
     }
 
     @NonNull
-    static List<LogType> parseTypesNew(final String page) {
-        //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
-        if (StringUtils.isBlank(page)) {
-            return Collections.emptyList();
-        }
-
-        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
-        if (match == null) {
-            //September 2023:
-            // During migration time of gc.com to new log page there is still the old page returned for non-migrated members.
-            //--> call old parser in this case.
-            //-- > when migration is completed on gc.com side, replace with: return Collections.emptyList();
-            //see https://github.com/orgs/cgeo/discussions/77 for complete discussion
-            return parseTypes(page);
+    public static List<LogTypeTrackable> parseLogTypesTrackablesNew(final String page) {
+        final AvailableLogTypeNew[] availableTypes = parseLogTypesNew(page);
+        if (availableTypes == null) {
+            //September 2023: same note as in method "parseTypesNew" also applies here
+            return parseLogTypesTrackables(page);
             //return Collections.emptyList();
         }
-        try {
-            final AvailableLogTypeNew[] availableTypes = MAPPER.readValue("[" + match + "]", AvailableLogTypeNew[].class);
+        return CollectionStream.of(availableTypes)
+                .filter(a -> a.value > 0)
+                .map(a -> LogTypeTrackable.getById(a.value))
+                .toList();
+    }
+
+    @NonNull
+    static List<LogType> parseTypesNew(final String page) {
+            final AvailableLogTypeNew[] availableTypes = parseLogTypesNew(page);
+            if (availableTypes == null) {
+                //September 2023:
+                // During migration time of gc.com to new log page there is still the old page returned for non-migrated members.
+                //--> call old parser in this case.
+                //-- > when migration is completed on gc.com side, replace with: return Collections.emptyList();
+                //see https://github.com/orgs/cgeo/discussions/77 for complete discussion
+                return parseTypes(page);
+                //return Collections.emptyList();
+            }
             return CollectionStream.of(availableTypes)
                     .filter(a -> a.value > 0)
                     .map(a -> LogType.getById(a.value))
                     .filter(t -> t != LogType.UPDATE_COORDINATES)
                     .toList();
+        }
+
+    private static AvailableLogTypeNew[] parseLogTypesNew(final String page) {
+        //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
+        if (StringUtils.isBlank(page)) {
+            return new AvailableLogTypeNew[0];
+        }
+
+        final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
+        if (match == null) {
+            return null;
+        }
+        try {
+            return MAPPER.readValue("[" + match + "]", AvailableLogTypeNew[].class);
         } catch (final Exception e) {
             Log.e("Error parsing log types from [" + match + "]", e);
-            return Collections.emptyList();
+            return new AvailableLogTypeNew[0];
         }
     }
 
