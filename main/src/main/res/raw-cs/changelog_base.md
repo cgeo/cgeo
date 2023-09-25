@@ -4,6 +4,8 @@
 - Novinka: Zobrazení ikony typu kešky jako značky, pokud byla nastavena vlastní ikona kešky (emoji) nebo jsou povoleny velké ikony
 - Novinka: Zobrazení vlastní ikony kešky jako značky pro související trasové body
 - Novinka: Povolení měřítka ikon kešek/trasových bodů (viz Nastavení => Vzhled)
+- Novinka: Lineární labky používají čísla jako značky trasových bodů
+- Novinka: Trasové body kešky zobrazují ikonu typu kešky jako značku
 
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
