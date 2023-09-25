@@ -4,6 +4,8 @@
 - New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
 - New: Show custom cache icon as marker for related waypoints
 - New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
+- New: Linear labs use numbers as waypoint markers
+- New: Waypoints of a cache show cache type icon as marker
 
 ### Slėptuvės detalės
 - New: Edit default value for log image caption prefix
