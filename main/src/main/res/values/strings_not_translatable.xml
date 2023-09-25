@@ -74,8 +74,9 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2022-05 to 2023-05 -->
+    <!-- currently listed: contributions 2022-10 to 2023-09 -->
     <string translatable="false" name="contributors_recent">
+    baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
@@ -85,8 +86,10 @@
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
+    mzylowski|https://github.com/mzylowski|c|
     NotWoods|https://github.com/NotWoods|c|
     osmpaws|https://github.com/osmpaws|c|
+    UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -95,7 +98,6 @@
     <string translatable="false" name="contributors_other">
     avogadogc|||
     Arne Schwabe||c|
-    baiti|https://github.com/baiti|c|
     Bananeweizen||c|
     BeckyDTP|https://github.com/BeckyDTP|c|
     bjdupuis||c|
@@ -146,7 +148,6 @@
     SchoolGuy|https://github.com/SchoolGuy|c|
     stephanme/Geoteufel||c|
     Surfoo||c|
-    UniQP|https://github.com/UniQP|c|
     TakoTheDank|https://github.com/TacoTheDank|c|
     thiasB||c|
     Volthai7us||c

@@ -227,6 +227,7 @@ public class SeekbarPreference extends Preference {
         // get views
         final SeekBar seekBar = (SeekBar) holder.findViewById(R.id.preference_seekbar);
         valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);
+        holder.setDividerAllowedAbove(false);
 
         // init seekbar
         seekBar.setMax(maxProgress);
@@ -280,4 +281,12 @@ public class SeekbarPreference extends Preference {
             });
         });
     }
+
+    /** apply mapping to change notifications */
+    @Override
+    public boolean callChangeListener(final Object newValue) {
+        final OnPreferenceChangeListener opcl = getOnPreferenceChangeListener();
+        return opcl == null || opcl.onPreferenceChange(this, progressToValue((int) newValue));
+    }
+
 }

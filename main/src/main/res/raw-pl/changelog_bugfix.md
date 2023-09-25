@@ -1,11 +1,12 @@
 ##
 - Nowość: Zwiększono docelowy SDK do 33 (z powodu wymagań Sklepu Play)
+- Nowość: (tylko Android 13) Dodano uprawnienie „Powiadomienia” – może być konieczne uruchomienie kreatora konfiguracji z ekranu głównego lub ręczne przyznanie uprawnień do powiadomień, aby zobaczyć powiadomienia o pobieraniu
 - Poprawka: Import GPX z wieloma ścieżkami w tym samym pliku
 - Poprawka: Współczynnik ulubionych mógł w szczególnych przypadkach przekroczyć 100%
-- Fix: Navigation line lost on screen rotation with Google Maps
+- Poprawka: Linia nawigacji znikała przy obracaniu ekranu z Mapami Google
 - Poprawka: Indywidualna trasa nie była usuwana z map Google po usunięciu
-- Fix: Last log text discarded when adding image first on new log
-- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+- Poprawka: Ostatni tekst dziennika był odrzucany gdy w nowym dzienniku najpierw dodawany był obraz
+- Poprawka: Nie można było odznaczyć „Ustaw jako ulubiona”, jeśli nie miało się wolnych punktów ulubionych, nieudane logowanie kończyło się błędem
 
 ##
 - Poprawka: Awarie podczas dodawania do ulubionych (pod pewnymi warunkami)

@@ -508,6 +508,7 @@
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
+    <string translatable="false" name="pref_feature_new_gc_log_api">feature_new_gc_log_api</string>
 
     <!-- additional map settings -->
     <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
@@ -532,8 +533,8 @@
     <string translatable="false" name="pref_theme_menu">theme_menu</string>
     <string translatable="false" name="pref_google_map_theme">google_map_theme</string>
     <string translatable="false" name="pref_mapSemitransVisitedWp">mapSemitransVisitedWp</string>
-    <string translatable="false" name="pref_mapCacheScale">mapCacheScale</string>
-    <string translatable="false" name="pref_mapWpScale">mapWpScale</string>
+    <string translatable="false" name="pref_mapCacheScaling">mapCacheScaling</string>
+    <string translatable="false" name="pref_mapWpScaling">mapWpScaling</string>
     <string translatable="false" name="pref_mapScaleOnly">mapScaleOnly</string>
 
     <!-- pq/bookmark list: show downloadable/new only -->

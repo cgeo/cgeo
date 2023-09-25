@@ -30,7 +30,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class HttpRequest {
 
-    public enum Method { GET, POST, PATCH }
+    public enum Method { GET, POST, PATCH, PUT }
 
     private static final ObjectMapper JSON_MAPPER = JsonUtils.mapper;
 
@@ -138,18 +138,11 @@ public class HttpRequest {
             return mappedResponse;
         });
 
-        //error logging
-        return result.onErrorResumeNext(t -> {
-            Log.w(LOGPRAEFIX + "ERR: Exception on calling " + getFinalUri() + "/" + method, t);
-            return Single.error(t);
-        });
+        return result;
     }
 
     private Single<Response> executeRequest(final Request.Builder reqBuilder) {
         final Request req = reqBuilder.build();
-        if (Log.isDebug()) {
-            Log.d(LOGPRAEFIX + req.method() + ": " + req.url());
-        }
         return RxOkHttpUtils.request(Network.OK_HTTP_CLIENT, req);
     }
 
@@ -178,6 +171,9 @@ public class HttpRequest {
                 break;
             case PATCH:
                 builder.patch(rbs.get());
+                break;
+            case PUT:
+                builder.put(rbs.get());
                 break;
             case GET:
             default:
@@ -247,6 +243,7 @@ public class HttpRequest {
     public HttpRequest bodyJson(final Object jsonObject) {
         try {
             final String jsonString = JSON_MAPPER.writeValueAsString(jsonObject);
+            Log.d("HTTP-JSON: attempt to send: " + jsonString);
             this.requestBodySupplier = () -> RequestBody.create(jsonString, MEDIA_TYPE_APPLICATION_JSON);
             return this;
         } catch (JsonProcessingException jpe) {

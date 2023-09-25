@@ -499,7 +499,7 @@ public class Settings {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
     }
 
-    private static int getInt(final int prefKeyId, final int defaultValue) {
+    public static int getInt(final int prefKeyId, final int defaultValue) {
         return getIntDirect(getKey(prefKeyId), defaultValue);
     }
 
@@ -569,11 +569,15 @@ public class Settings {
     }
 
     private static void putInt(final int prefKeyId, final int value) {
+        putIntDirect(getKey(prefKeyId), value);
+    }
+
+    public static void putIntDirect(final String prefKey, final int value) {
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putInt(getKey(prefKeyId), value);
+        edit.putInt(prefKey, value);
         edit.apply();
     }
 
@@ -697,6 +701,9 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
+    public static boolean enableFeatureNewGCLogApi() {
+        return getBoolean(R.string.pref_feature_new_gc_log_api, false);
+    }
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }

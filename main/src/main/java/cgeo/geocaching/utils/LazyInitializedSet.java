@@ -28,7 +28,9 @@ public class LazyInitializedSet<T> extends AbstractSet<T> {
                         this.set = (Set<T>) rawSet;
                     } else {
                         this.set = new HashSet<>();
-                        this.set.addAll(rawSet);
+                        if (rawSet != null) {
+                            this.set.addAll(rawSet);
+                        }
                     }
 
                 } catch (final Exception e) {

@@ -19,6 +19,7 @@ import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
@@ -42,7 +43,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.reactivex.rxjava3.core.Single;
@@ -69,6 +72,7 @@ class GCWebAPI {
     //<input name="__RequestVerificationToken" type="hidden" value="(token-value)" />
     private static final Pattern PATTERN_REQUEST_VERIFICATION_TOKEN = Pattern.compile("name=\"__RequestVerificationToken\"\\s+type=\"hidden\"\\s+value=\"([^\"]+)\"");
 
+    private static final String HTML_HEADER_CSRF_TOKEN = "CSRF-Token";
 
     /**
      * maximum number of elements to retrieve with one call
@@ -530,13 +534,13 @@ class GCWebAPI {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class TrackableInventoryEntry {
         @JsonProperty("referenceCode")
-        String referenceCode;
+        String referenceCode; // The public one, starting with "TB"
         @JsonProperty("name")
         String name;
         @JsonProperty("iconUrl")
         String iconUrl;
         @JsonProperty("trackingNumber")
-        String trackingNumber;
+        String trackingNumber; // The secret one
     }
 
     private static Single<Authorization> getAuthorization() {
@@ -1036,6 +1040,10 @@ class GCWebAPI {
                 + "; date: " + date + ", log: " + logInfo
                 + "; trackables: " + trackables.size());
 
+        if (Settings.enableFeatureNewGCLogApi()) {
+            return postLogNew(geocache, logType, date, log, trackables, addToFavorites);
+        }
+
         try {
             // coordinates are only used for LogType.UPDATE_COORDINATES, which c:geo doesn't support at the moment
             final double latitude = 0.0;
@@ -1211,6 +1219,10 @@ class GCWebAPI {
     @NonNull
     static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
 
+        if (Settings.enableFeatureNewGCLogApi()) {
+            return postLogImageNew(geocode, logId, image);
+        }
+
         // 0) open log page to get a Request Token
         final String html = httpReq().uri(WEBSITE_URL + "/play/geocache/" + geocode + "/log").request().blockingGet().getBodyString();
         if (html == null) {
@@ -1280,12 +1292,203 @@ class GCWebAPI {
         return result;
     }
 
+    //Format Request:
+    // {
+    //   'images': [], // an array of image GUIDs  (String)
+    //   'logDate': logdate, // timestamp, e.g. "2023-09-08T22:31:54.004Z"
+    //   'logText': logtext, //string (logtext)
+    //   'logType': logtype, //integer
+    //   'trackables': [], //array of object. Example: [{"trackableCode":"TBxyz","trackableLogTypeId":75}]
+    //   'updatedCoordinates': null, //unknown, most likely only used for Owner log
+    //   'usedFavoritePoint': false //boolean. Not yet verified
+    //  }
+    //
+    //Format Reply:
+    // {"guid":"xyz","logReferenceCode":"GLxyz","dateTimeCreatedUtc":"2023-09-17T14:03:26","dateTimeLastUpdatedUtc":"2023-09-17T14:03:26","logDate":"2023-09-08T12:00:00","logType":4,"images":[],"trackables":[],"cannotDelete":false,"usedFavoritePoint":false}
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GCWebLogTrackable {
+        //Log Creation Fields
+        @JsonProperty("trackableCode")
+        String trackableCode; // e.g. "TBxyz"
+        @JsonProperty("trackableLogTypeId")
+        Integer trackableLogTypeId;
+    }
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GCWebLogEntry extends HttpResponse {
+        //Log Creation Fields
+        @JsonProperty("images")
+        String[] images; //image GUIDs
+        @JsonProperty("logDate")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        Date logDate;
+        @JsonProperty("logText")
+        String logText;
+        @JsonProperty("logType")
+        Integer logType;
+        @JsonProperty("trackables")
+        GCWebLogTrackable[] trackables;
+
+        //Field used in return
+        @JsonProperty("guid")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        String guid;
+        @JsonProperty("logReferenceCode")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        String logReferenceCode;
+        @JsonProperty("dateTimeCreatedUtc")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        Date dateTimeCreatedUtc;
+        @JsonProperty("dateTimeLastUpdatedUtc")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        Date dateTimeLastUpdatedUtc;
+        @JsonProperty("cannotDelete")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        Boolean cannotDelete;
+        @JsonProperty("usedFavoritePoint")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        Boolean usedFavoritePoint;
+
+    }
+
+    // Response for GC Log Image create/update request:
+    // {
+    //    "guid": "c7xyz-xyz-xyz-xyz-xyz",
+    //    "url": "https://img.geocaching.com/c7xyz-xyz-xyz-xyz-xyz.jpg",
+    //    "thumbnailUrl": "https://img.geocaching.com/large/c7xyz-xyz-xyz-xyz-xyz.jpg",
+    //    "success": true
+    //}
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GCWebLogImageResponse extends HttpResponse {
+        @JsonProperty("guid")
+        String guid;
+        @JsonProperty("url")
+        String url;
+        @JsonProperty("thumbnailUrl")
+        String thumbnailUrl;
+        @JsonProperty("success")
+        Boolean success;
+
+    }
+
+    //New Log API
+    @NonNull
+    @WorkerThread
+    public static ImmutablePair<StatusCode, String> postLogNew (final Geocache geocache,
+                                                     final LogType logType, final Date date,
+                                                     final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
+                                                     final boolean addToFavorites) {
+
+        final String geocode = geocache.getGeocode();
+        //1.) Call log page and get a valid CSRF Token
+        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/geocache/" + geocode + "/log");
+        if (csrfToken == null) {
+            return generateLogError(false, "Lost Post: unable to find a CSRF Token in Log Page");
+        }
+
+        //2,) Fill Log Entry object and post it
+        final GCWebLogEntry logEntry = new GCWebLogEntry();
+        logEntry.images = new String[0];
+        logEntry.logDate = date;
+        logEntry.logType = logType.id;
+        logEntry.logText = log;
+        logEntry.trackables = CollectionStream.of(trackables).map(t -> {
+            final GCWebLogTrackable tLog = new GCWebLogTrackable();
+            tLog.trackableCode = t.geocode;
+            tLog.trackableLogTypeId = t.action.gcApiId;
+            return tLog;
+        }).toArray(GCWebLogTrackable.class);
+        logEntry.usedFavoritePoint = addToFavorites; //not used by web page, but seems to work
+
+        final GCWebLogEntry response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
+                .method(HttpRequest.Method.POST)
+                .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+                .bodyJson(logEntry)
+                .requestJson(GCWebLogEntry.class).blockingGet();
+
+        if (response.logReferenceCode == null) {
+            return generateLogError(false, "Problem pasting log, response is: " + response);
+        }
+
+        return new ImmutablePair<>(StatusCode.NO_ERROR, response.logReferenceCode);
+    }
+
+    @WorkerThread
+    @NonNull
+    static ImmutablePair<StatusCode, String> postLogImageNew(final String geocode, final String logId, final Image image) {
+        //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
+        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        if (csrfToken == null) {
+            return generateLogError(true, "Problem getting CSRF-Token");
+        }
+
+        //2) Create a new "image" attached to the log, uploading only image data
+        //   (Do not yet upload name + description, for some reason this results in a server timeout)
+        // via POST to https://www.geocaching.com/api/live/v1/logs/GLxyz/images with image payload
+        final GCWebLogImageResponse imgResponse = websiteReq().uri("/api/live/v1/logs/" + logId + "/images")
+                .method(HttpRequest.Method.POST)
+                .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+                .bodyForm(null, "image", "image/jpeg", image.getFile())
+                .requestJson(GCWebLogImageResponse.class).blockingGet();
+        if (imgResponse.guid == null || imgResponse.url == null) {
+            return generateLogError(true, "Problem posting log, response is: " + imgResponse);
+        }
+
+        //3) Post the image name + description via PUT
+        // URL like: https://www.geocaching.com/api/live/v1/images/GLxyz/c7xyz-xyz-xyz-xyz-xyz/replace (PUT)
+        final Parameters params = new Parameters();
+        if (!StringUtils.isBlank(image.getTitle())) {
+            params.put("name", image.getTitle());
+        }
+        if (!StringUtils.isBlank(image.getDescription())) {
+            params.put("description", image.getDescription());
+        }
+
+        if (!params.isEmpty()) {
+            //We can reuse same CSRF-Token in this second request
+            final GCWebLogImageResponse putImgResponse = websiteReq().uri("/api/live/v1/images/" + logId + "/" + imgResponse.guid + "/replace")
+                    .method(HttpRequest.Method.PUT)
+                    .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+                    //.bodyForm(params, "image", "image/jpeg", image.getFile())
+                    .bodyForm(params, null, null, null)
+                    .requestJson(GCWebLogImageResponse.class).blockingGet();
+            if (putImgResponse.url == null) {
+                return generateLogError(true, "Problem putting image: " + putImgResponse);
+            }
+        }
+
+        return new ImmutablePair<>(StatusCode.NO_ERROR, imgResponse.url);
+    }
+
+    private static ImmutablePair<StatusCode, String> generateLogError(final boolean image, final String errorMsg) {
+        Log.w((image ? "LOG IMAGE ERROR:" : "LOG ERROR:") + errorMsg);
+        return new ImmutablePair<>(image ? StatusCode.LOGIMAGE_POST_ERROR : StatusCode.LOG_POST_ERROR, "");
+    }
+
+    private static String getCsrfTokenFromUrl(final String url) {
+        final String html =
+                httpReq().uri(url).request().blockingGet().getBodyString();
+        final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
+        if (csrfToken == null) {
+            Log.w("Lost Post: unable to find a CSRF Token in Log Page '" + url + "'");
+            return null;
+        }
+        return csrfToken;
+    }
+
     private static HttpRequest httpReq() {
         return new HttpRequest().requestPreparer(reqBuilder -> getCachedAuthorization().map(a -> {
             reqBuilder.addHeader("Authorization", a.getAuthorizationField());
             return reqBuilder;
         }));
     }
+
+    private static HttpRequest websiteReq() {
+        return httpReq().uriBase(WEBSITE_URL);
+    }
+
 
     private static HttpRequest apiReq() {
         return httpReq().uriBase(API_URL);
