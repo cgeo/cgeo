@@ -87,6 +87,13 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generiert</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Unbekannt</string>
+    <string name="cache_cat_bc_nature">Natur</string>
+    <string name="cache_cat_bc_location">Ort</string>
+    <string name="cache_cat_bc_recommended">Empfohlen</string>
+    <string name="cache_cat_bc_mystery">Mystery</string>
+    <string name="cache_cat_bc_hiking">Wanderung</string>
+    <string name="cache_cat_bc_other">Sonstiges</string>
     <!-- cache Tier -->
     <string name="cache_tier_bc_blue">Blau</string>
     <string name="cache_tier_bc_silver">Silber</string>
@@ -1045,6 +1052,11 @@
     <string name="init_mapShadingLinearity_description">Kleine Werte betonen den Kontrast in steilen Hängen aber verbergen Unterschiede in der Ebene, große Werte sind linearer</string>
     <string name="init_mapShadingScale_title">Schattierungsdeckkraft</string>
     <string name="init_mapShadingScale_description">Deckkraft der Schattierungsebene, von unsichtbar über höhere Werte zunehmend intensiver, kann aber Artefakte hervorbringen</string>
+    <string name="init_iconsizes">Symbolgrößen</string>
+    <string name="init_mapCacheScaling_title">Skalierung Cachesymbole</string>
+    <string name="init_mapCacheScaling_description">Skalierungsfaktor für Cachesymbole (in %)</string>
+    <string name="init_mapWpScaling_title">Skalierung Wegpunktsymbole</string>
+    <string name="init_mapWpScaling_description">Skalierungsfaktor für Wegpunktsymbole (in %)</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
