@@ -4,6 +4,8 @@
 - Nowość: Pokaż ikonę typu skrytki jako znacznik, jeśli ustawiono ikonę skrytki (emoji) lub włączone są duże ikony
 - Nowość: Pokaż ikonę skrytki jako znacznik dla powiązanych punktów nawigacji
 - Nowość: Zezwalaj na skalowanie ikon skrytek/punktów nawigacji (patrz Ustawienia => Wygląd)
+- Nowość: Liniowe laby wykorzystują liczby jako znaczniki punktów nawigacji
+- Nowość: Punkty nawigacji skrytki wyświetlają ikonę typu skrzynki jako znacznik
 
 ### Szczegóły skrytki
 - Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
