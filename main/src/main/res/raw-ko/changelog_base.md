@@ -4,6 +4,8 @@
 - 신규: 사용자 정의 캐시 아이콘이 설정(이모티콘)되었거나 큰 아이콘이 활성화된 경우 캐시 유형 아이콘을 마커로 표시합니다.
 - 신규: 관련 지점에 대한 마커로 사용자 지정 캐시 아이콘 표시
 - 신규: 캐시/지점 아이콘 크기 조정 허용(설정 => 모양 참조)
+- New: Linear labs use numbers as waypoint markers
+- New: Waypoints of a cache show cache type icon as marker
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
