@@ -4,8 +4,8 @@
 - Nieuw: Toon cache type icoon als marker als een eigen cache icoon is ingesteld (emoji) of grote iconen zijn ingeschakeld
 - Nieuw: Toon eigen cache icoon als markering voor gerelateerde waypoints
 - Nieuw: Sta het schalen van cache/waypoint iconen toe (Zie Instellingen => uiterlijk)
-- New: Linear labs use numbers as waypoint markers
-- New: Waypoints of a cache show cache type icon as marker
+- Nieuw: Lineaire labs gebruiken getallen als markeerpunten
+- Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
