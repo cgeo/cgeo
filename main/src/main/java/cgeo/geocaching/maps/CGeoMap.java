@@ -1405,7 +1405,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode(cachesCnt);
                 if (mapOptions.mapMode == MapMode.SINGLE || cachesCnt < Settings.getWayPointsThreshold()) {
                     for (final Waypoint waypoint : waypointsToDisplay) {
-                        if (waypoint != null && waypoint.getCoords() != null && waypoint.getCoords().isValid()) {
+                        if (waypoint != null && waypoint.getCoords() != null && waypoint.getCoords().isValid() && !(waypoint.getCoords() == waypoint.getParentGeocache().getCoords() && waypoint.getNote().isEmpty())) {
                             itemsToDisplay.add(getWaypointItem(waypoint, forceCompactIconMode));
                         }
                     }
