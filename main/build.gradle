@@ -680,7 +680,7 @@ checkstyle {
     // assign the checkstyle version explicitly here
     // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
     // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.3.4'
+    toolVersion = '10.12.2'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
@@ -696,6 +696,9 @@ tasks.register('checkstyle', Checkstyle) {
     include '**/*.java'
 
     classpath = files()
+
+    // see https://docs.gradle.org/7.5.1/userguide/upgrading_version_7.html#declare_unreadable_input_output
+    doNotTrackState("unreadable input property 'configDirectory'")
 }
 
 tasks.named('check') {
