@@ -29,10 +29,6 @@ public class IndividualRoute extends Route implements Parcelable {
     private boolean loadingRoute = false;
     private SetTarget setTarget = null;
 
-    public IndividualRoute() {
-        super(true);
-    }
-
     public IndividualRoute(@Nullable final SetTarget setTarget) {
         super(true);
         this.setTarget = setTarget;
@@ -247,15 +243,5 @@ public class IndividualRoute extends Route implements Parcelable {
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         super.writeToParcel(dest, flags);
-    }
-
-    public void removeGeocache(final String geocode) {
-        loadRouteInternal();
-        for (RouteItem item : getRouteItems()) {
-            if (geocode.equals(item.getGeocode())) {
-                removeItem(pos(item));
-            }
-        }
-        saveRoute();
     }
 }

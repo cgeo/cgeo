@@ -894,11 +894,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void reloadIndividualRoute() {
-        individualRoute.reloadRoute((route) -> {
-            overlayPositionAndScale.updateIndividualRoute(route);
-            updateRouteTrackButtonVisibility();
-            mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
-        });
+        if (individualRoute != null) {
+            individualRoute.reloadRoute((route) -> {
+                overlayPositionAndScale.updateIndividualRoute(route);
+                updateRouteTrackButtonVisibility();
+                mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null);
+            });
+        }
     }
 
     private void clearTrailHistory() {

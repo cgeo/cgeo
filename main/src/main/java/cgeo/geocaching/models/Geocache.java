@@ -598,7 +598,7 @@ public class Geocache implements IWaypoint {
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
             if (Settings.removeFromRouteOnLog()) {
-                new IndividualRoute().removeGeocache(geocode);
+                DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
             }
             offlineLog = logEntry;
             notifyChange();
