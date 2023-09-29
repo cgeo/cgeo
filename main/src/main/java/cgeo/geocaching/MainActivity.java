@@ -156,7 +156,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
                             if (conn instanceof GCConnector && !StringUtils.equalsAny(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working), activity.getString(R.string.init_login_popup_ok))) {
                                 final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
-                                if (lastError != null && StringUtils.isNotBlank(lastError.first)) {
+                                if (lastError != null && StringUtils.isNotBlank(lastError.first) && lastError.second > Settings.getLastLoginSuccessGC()) {
                                     connInfo.append(" (").append(lastError.first).append(")");
                                 }
                             }
