@@ -24,6 +24,7 @@ public class DefaultFilesUtils {
         MOPED(R.raw.routing_moped, "moped.brf"),
         SHORTEST(R.raw.routing_shortest, "shortest.brf"),
         TREKKING(R.raw.routing_trekking, "trekking.brf"),
+        DUMMY(R.raw.routing_dummy, "dummy.brf"),
         LOOKUPS(R.raw.routing_lookups, "lookups.dat");
 
         @RawRes
