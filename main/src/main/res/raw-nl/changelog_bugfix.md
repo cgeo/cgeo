@@ -1,12 +1,15 @@
 ##
-- Nieuw: Doel SDK naar 33 verhoogd (vanwege de vereisten van de Play Store)
+- Fix: Hide outdated connection error message
+
+##
+- New: Increased target SDK to 33 (due to Play Store requirements)
 - Nieuw: (Alleen Android 13) heeft "Meldingen" toestemming toegevoegd - je dient mogelijk de configuratiewizard vanaf het startscherm uit te voeren of handmatig toestemming te geven voor meldingen om de download meldingen te zien
 - Oplossing: GPX import met meerdere tracks in hetzelfde bestand
-- Oplossing: Favoriet ratio > 100% onder bepaalde voorwaarden
-- Oplossing: Navigatielijn verloren bij scherm rotatie met Google Maps
-- Oplossing: Individuele route werd niet verwijderd uit Google Maps bij verwijderen
-- Oplossing: Laatste logtekst werd verwijderd bij het eerst toevoegen van een afbeelding aan een nieuw log
-- Oplossing: "Instellen als favoriet" kan niet worden uitgeschakeld als er geen favoriet punt meer is; het loggen mislukt met een fout
+- Fix: Favorite ratio > 100% under certain conditions
+- Fix: Navigation line lost on screen rotation with Google Maps
+- Fix: Individual route not deleted from Google Maps on deletion
+- Fix: Last log text discarded when adding image first on new log
+- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
 
 ##
 - Oplossing: Crash bij het toevoegen aan favorieten (onder bepaalde omstandigheden)
