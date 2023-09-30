@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -388,19 +389,19 @@ public class SimpleDialog {
      * Use this method to create and display a 'select multi' dialog using the data defined before using this classes' setters
      * <p>
      * A 'select multi' dialog allows the user to select multiple (or no) value out of a given list of choices
-     *
+     * <p>
      * The method will auto-generate an entry "Select All" to select all/none item
      *
-     * @param items            the list of items to select from
-     * @param displayMapper    mapper to get the display value for each of the items
-     * @param preselect        mapper defining for each of the given items whether it is preselected or not
-     * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
+     * @param items             the list of items to select from
+     * @param displayMapper     mapper to get the display value for each of the items
+     * @param preselect         mapper defining for each of the given items whether it is preselected or not
+     * @param lastselect        mapper defining for each of the given items whether it was part of last selection; onNeutralListener gets ignored in this case
+     * @param onSelectListener  provide the select listener called when user made a selection (called when user clicks on positive button)
      */
     @SafeVarargs
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>>... onNeutralListener) {
-
+    public final <T> void selectMultiple(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, Boolean> preselect, @Nullable final Func2<T, Integer, Boolean> lastselect, final boolean nonEmptyResultRequired, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>>... onNeutralListener) {
         final boolean addSelectAll = items.size() > 1;
         final int offset = addSelectAll ? 1 : 0;
 
@@ -412,19 +413,16 @@ public class SimpleDialog {
                     .setMarkdown(true).getText(null);
         }
         int idx = offset;
-        boolean allSelected = true;
         for (T item : items) {
             final TextParam tp = displayMapper.call(item, idx);
             itemTexts[idx] = tp == null ? String.valueOf(item) : tp.getText(getContext());
             itemSelects[idx] = preselect != null && TRUE.equals(preselect.call(item, idx - offset));
             if (itemSelects[idx]) {
                 result.add(item);
-            } else {
-                allSelected = false;
             }
             idx++;
         }
-        if (addSelectAll && allSelected) {
+        if (addSelectAll && result.size() == items.size()) {
             itemSelects[0] = true;
         }
 
@@ -459,18 +457,51 @@ public class SimpleDialog {
                     itemSelects[0] = false;
                 }
             }
-
+            checkOkButton((AlertDialog) d, nonEmptyResultRequired, result.size());
         });
 
         builder.setPositiveButton(getPositiveButton(), (d, w) -> onSelectListener.accept(result));
-        builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
-        if (onNeutralListener.length > 0) {
-            builder.setNeutralButton(getNeutralButton(), (d, w) -> onNeutralListener[0].accept(result));
+        if (lastselect != null) {
+            // listener needs to be set to null to prevent closing the dialog
+            builder.setNeutralButton(R.string.cache_list_select_last, null);
+            // actual listener will be set below
+        } else {
+            if (onNeutralListener.length > 0) {
+                builder.setNeutralButton(getNeutralButton(), (d, w) -> onNeutralListener[0].accept(result));
+            }
+            builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
         }
 
         final AlertDialog dialog = builder.create();
         dialog.show();
+        checkOkButton(dialog, nonEmptyResultRequired, result.size());
+
+        if (lastselect != null) {
+            // set actual listener to neutral button to retrieve last selection (without dismissing dialog)
+            dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
+                // set given selection
+                final ListView lv = dialog.getListView();
+                result.clear();
+                int i = offset;
+                for (T item : items) {
+                    itemSelects[i] = TRUE.equals(lastselect.call(item, i - offset));
+                    if (itemSelects[i]) {
+                        result.add(item);
+                    }
+                    lv.setItemChecked(i, itemSelects[i]);
+                    i++;
+                }
+                checkOkButton(dialog, nonEmptyResultRequired, result.size());
+            });
+        }
         adjustCommons(dialog);
+    }
+
+    private void checkOkButton(@NonNull final AlertDialog dialog, final boolean nonEmptyResultRequired, final int resultSize) {
+        final Button okButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (okButton != null) {
+            okButton.setEnabled(!nonEmptyResultRequired || resultSize > 0);
+        }
     }
 
     /**

@@ -46,6 +46,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
 
     private void recreateLogTemplatePreferences() {
         logTemplatesCategory.removeAll();
+        logTemplatesCategory.setVisible(true);
         for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
             logTemplatesCategory.addPreference(createLogTemplatePreference(template));
         }

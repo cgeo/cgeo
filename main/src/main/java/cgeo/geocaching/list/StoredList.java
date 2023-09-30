@@ -6,19 +6,14 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.view.View;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 import java.lang.ref.WeakReference;
 import java.text.Collator;
@@ -93,17 +88,13 @@ public final class StoredList extends AbstractList {
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento, final boolean fastStoreOnLastSelection) {
             final Set<Integer> selectedListIds = new HashSet<>(fastStoreOnLastSelection ? Settings.getLastSelectedLists() : currentListIds);
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, selectedListIds);
+            final Set<Integer> lastSelectedLists = Settings.getLastSelectedLists();
 
-            final CharSequence[] listTitles = new CharSequence[lists.size()];
-            final boolean[] selectedItems = new boolean[lists.size()];
+            // remove from selected which are not available anymore
             final Set<Integer> allListIds = new HashSet<>(lists.size());
-            for (int i = 0; i < lists.size(); i++) {
-                final AbstractList list = lists.get(i);
-                listTitles[i] = list.getTitleAndCount();
-                selectedItems[i] = selectedListIds.contains(list.id);
+            for (AbstractList list : lists) {
                 allListIds.add(list.id);
             }
-            // remove from selected which are not available anymore
             selectedListIds.retainAll(allListIds);
 
             if (fastStoreOnLastSelection && !selectedListIds.isEmpty()) {
@@ -111,46 +102,43 @@ public final class StoredList extends AbstractList {
                 return;
             }
 
-            final Activity activity = activityRef.get();
-
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
-            builder.setTitle(res.getString(titleId));
-            builder.setMultiChoiceItems(listTitles, selectedItems, new MultiChoiceClickListener(lists, selectedListIds));
-            builder.setPositiveButton(android.R.string.ok, new OnOkClickListener(selectedListIds, runAfterwards, listNameMemento));
-            final Set<Integer> lastSelectedLists = Settings.getLastSelectedLists();
-            if (currentListIds.isEmpty() && !lastSelectedLists.isEmpty()) {
-                // onClickListener is null because it is handled below to prevent closing of the dialog
-                builder.setNeutralButton(R.string.cache_list_select_last, null);
-            }
-            final AlertDialog dialog = builder.create();
-            dialog.show();
-            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
-            dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(new OnLastSelectionClickListener(selectedListIds, lastSelectedLists, dialog, lists, selectedItems));
+            SimpleDialog.of(activityRef.get()).setTitle(TextParam.id(titleId)).selectMultiple(lists,
+                    (item, p) -> TextParam.text(item.getTitleAndCount()),
+                    (item, p) -> selectedListIds.contains(item.id),
+                    (item, p) -> lastSelectedLists.contains(item.id),
+                    true,
+                    sel -> {
+                        selectedListIds.clear();
+                        for (AbstractList list : sel) {
+                            selectedListIds.add(list.id);
+                        }
+                        if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
+                            // create new list on the fly
+                            promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
+                        } else {
+                            Settings.setLastSelectedLists(selectedListIds);
+                            runAfterwards.call(selectedListIds);
+                        }
+                    }
+            );
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.emptySet());
 
-            final List<CharSequence> listsTitle = new ArrayList<>();
-            for (final AbstractList list : lists) {
-                listsTitle.add(list.getTitleAndCount());
-            }
-
-            final CharSequence[] items = new CharSequence[listsTitle.size()];
-
-            final Activity activity = activityRef.get();
-            final AlertDialog.Builder builder = Dialogs.newBuilder(activity, R.style.cgeo_compactDialogs);
-            builder.setTitle(res.getString(titleId));
-            builder.setItems(listsTitle.toArray(items), (dialogInterface, itemId) -> {
-                final AbstractList list = lists.get(itemId);
-                if (list == PseudoList.NEW_LIST) {
-                    // create new list on the fly
-                    promptForListCreation(runAfterwards, listNameMemento.getTerm());
-                } else {
-                    runAfterwards.call(lists.get(itemId).id);
-                }
-            });
-            builder.create().show();
+            SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(lists,
+                    (item, p) -> TextParam.text(item.getTitleAndCount()),
+                    -1,
+                    SimpleDialog.SingleChoiceMode.NONE,
+                    (item, p) -> {
+                        if (item == PseudoList.NEW_LIST) {
+                            // create new list on the fly
+                            promptForListCreation(runAfterwards, listNameMemento.getTerm());
+                        } else {
+                            runAfterwards.call(item.id);
+                        }
+                    }
+            );
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
@@ -268,78 +256,6 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        private static class MultiChoiceClickListener implements DialogInterface.OnMultiChoiceClickListener {
-            private final List<AbstractList> lists;
-            private final Set<Integer> selectedListIds;
-
-            MultiChoiceClickListener(final List<AbstractList> lists, final Set<Integer> selectedListIds) {
-                this.lists = lists;
-                this.selectedListIds = selectedListIds;
-            }
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int itemId, final boolean isChecked) {
-                final AbstractList list = lists.get(itemId);
-                if (isChecked) {
-                    selectedListIds.add(list.id);
-                } else {
-                    selectedListIds.remove(list.id);
-                }
-                ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
-            }
-        }
-
-        private static class OnLastSelectionClickListener implements View.OnClickListener {
-            private final Set<Integer> selectedListIds;
-            private final Set<Integer> lastSelectedLists;
-            private final AlertDialog dialog;
-            private final List<AbstractList> lists;
-            private final boolean[] selectedItems;
-
-            OnLastSelectionClickListener(final Set<Integer> selectedListIds, final Set<Integer> lastSelectedLists, final AlertDialog dialog, final List<AbstractList> lists, final boolean[] selectedItems) {
-                this.selectedListIds = selectedListIds;
-                this.lastSelectedLists = lastSelectedLists;
-                this.dialog = dialog;
-                this.lists = lists;
-                this.selectedItems = selectedItems;
-            }
-
-            @Override
-            public void onClick(final View v) {
-                selectedListIds.clear();
-                selectedListIds.addAll(lastSelectedLists);
-                final ListView listView = dialog.getListView();
-                for (int i = 0; i < lists.size(); i++) {
-                    selectedItems[i] = selectedListIds.contains(lists.get(i).id);
-                    listView.setItemChecked(i, selectedItems[i]);
-                }
-                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(!selectedListIds.isEmpty());
-            }
-        }
-
-        private class OnOkClickListener implements DialogInterface.OnClickListener {
-            private final Set<Integer> selectedListIds;
-            private final Action1<Set<Integer>> runAfterwards;
-            private final ListNameMemento listNameMemento;
-
-            OnOkClickListener(final Set<Integer> selectedListIds, final Action1<Set<Integer>> runAfterwards, final ListNameMemento listNameMemento) {
-                this.selectedListIds = selectedListIds;
-                this.runAfterwards = runAfterwards;
-                this.listNameMemento = listNameMemento;
-            }
-
-            @Override
-            public void onClick(final DialogInterface dialog, final int id) {
-                if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
-                    // create new list on the fly
-                    promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
-                } else {
-                    Settings.setLastSelectedLists(selectedListIds);
-                    runAfterwards.call(selectedListIds);
-                }
-                dialog.cancel();
-            }
-        }
     }
 
     /**
