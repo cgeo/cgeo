@@ -37,6 +37,7 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
@@ -1097,6 +1098,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
                             if (map.proximityNotification != null) {
                                 map.proximityNotification.checkDistance(map.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
+                            }
+
+                            if (Settings.showElevation()) {
+                                final float elevation = Routing.getElevation(new Geopoint(currentLocation));
+                                map.overlayPositionAndScale.setElevation(elevation, currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
                             }
                         } else if (needsRepaintForHeading) {
                             final float mapBearing = map.mapView.getBearing();

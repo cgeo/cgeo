@@ -4,12 +4,13 @@ package cgeo.geocaching.unifiedmap.layers;
  * Manages distance and target views
  *
  * Standard view is: (at the top of the map view)
- * target           distances1
- *     supersize    distances2
+ * target      distances1
+ * supersize
+ *             distances2
  *
  * - target is only used when in target navigation (opened via cache/waypoint popup)
  * - distances1/distances2 placeholder will be filled with straight distance, routed distance,
- *   individual route length (depending on settings and current data)
+ *   individual route length and elevation info (depending on settings and current data)
  * - By tapping on any of the distance fields either straight or routed distance can be supersized.
  *   It gets removed from the distance view containers and displayed in a larger font:
  * - Tapping on the supersized window toggles between real distance supersized, straight distance
@@ -28,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,6 +41,7 @@ public class UnifiedTargetAndDistancesHandler {
 
     private static final String STRAIGHT_LINE_SYMBOL = Character.toString((char) 0x007C);
     private static final String WAVY_LINE_SYMBOL = Character.toString((char) 0x2307);
+    private static final String ELEVATION_SYMBOL = Character.toString((char) 0x25e2);
 
     private final LinearLayout distances1;
     private final LinearLayout distances2;
@@ -54,6 +57,7 @@ public class UnifiedTargetAndDistancesHandler {
     private String realDistanceInfo = "";
     private String distanceInfo = "";
     private String routingInfo = "";
+    private String elevationInfo = "";
 
     UnifiedTargetAndDistancesHandler(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -93,12 +97,12 @@ public class UnifiedTargetAndDistancesHandler {
     }
 
     private void updateDistanceViews() {
-        updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, distances1, distances2, distanceSupersizeView, targetView);
+        updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, elevationInfo, distances1, distances2, distanceSupersizeView, targetView);
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
-            final String distanceInfo, final String realDistanceInfo, final String routingInfo,
+            final String distanceInfo, final String realDistanceInfo, final String routingInfo, final String elevationInfo,
             final LinearLayout distances1, final LinearLayout distances2,
             final TextView distanceSupersizeView, final TextView targetView
     ) {
@@ -126,6 +130,10 @@ public class UnifiedTargetAndDistancesHandler {
 
         if (!routingInfo.isEmpty()) {
             data[data[0].size() > 0 && !supersizeInfo.isEmpty() ? 1 : 0].add(routingInfo);
+        }
+
+        if (!elevationInfo.isEmpty()) {
+            data[data[0].size() > 0 && !supersizeInfo.isEmpty() ? 1 : 0].add(elevationInfo);
         }
 
         syncViews(distances1, data[0]);
@@ -163,6 +171,19 @@ public class UnifiedTargetAndDistancesHandler {
         for (int i = count; i < existing; i++) {
             ll.removeView(ll.getChildAt(data.size()));
         }
+    }
+
+    // elevation handling -------------------------------------------------------------------------------------------
+
+    public void drawElevation(final float elevation) {
+        elevationInfo = buildElevationInfo(elevation, Float.NaN);
+        updateDistanceViews();
+    }
+
+    public static String buildElevationInfo(final float elevationFromRouting, final float elevationFromGNSS) {
+        // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
+        final String temp = !Float.isNaN(elevationFromRouting) ? String.format(Locale.getDefault(), "%.1f", elevationFromRouting) : !Float.isNaN(elevationFromGNSS) ? String.format(Locale.getDefault(), "%.1f", elevationFromGNSS) : "";
+        return StringUtils.isBlank(temp) ? "" : ELEVATION_SYMBOL + " " + temp + "m";
     }
 
     // target handling ----------------------------------------------------------------------------------------------

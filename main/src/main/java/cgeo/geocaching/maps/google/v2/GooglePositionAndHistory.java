@@ -150,6 +150,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
     }
 
+    @Override
+    public void setElevation(final float elevationFromRouting, final float elevationFromGNSS) {
+        mapView.setElevation(elevationFromRouting, elevationFromGNSS);
+    }
+
     public void updateMapRotation() {
         this.mapRotation = Settings.getMapRotation();
         final GoogleMap map = mapRef.get();

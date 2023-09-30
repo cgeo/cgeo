@@ -2,12 +2,13 @@ package cgeo.geocaching.maps;
 
 /*
  * Standard view is: (at the top of the map view)
- * target           distances1
- *     supersize    distances2
+ * target      distances1
+ * supersize
+ *             distances2
  *
  * - target is only used when in target navigation (opened via cache/waypoint popup)
  * - distances1/distances2 placeholder will be filled with straight distance, routed distance,
- *   individual route length (depending on settings and current data)
+ *   individual route length and elevation info (depending on settings and current data)
  * - By tapping on any of the distance fields either straight or routed distance can be supersized.
  *   It gets removed from the distance view containers and displayed in a larger font:
  * - Tapping on the supersized window toggles between real distance supersized, straight distance
@@ -42,6 +43,7 @@ public class MapDistanceDrawerCommons {
     private String realDistanceInfo = "";
     private String distanceInfo = "";
     private String routingInfo = "";
+    private String elevationInfo = "";
 
     public MapDistanceDrawerCommons(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -67,6 +69,11 @@ public class MapDistanceDrawerCommons {
         updateDistanceViews();
     }
 
+    public void drawElevation(final float elevationFromRouting, final float elevationFromGNSS) {
+        elevationInfo = UnifiedTargetAndDistancesHandler.buildElevationInfo(elevationFromRouting, elevationFromGNSS);
+        updateDistanceViews();
+    }
+
     public void drawRouteDistance(final float routeDistance) {
         this.routeDistance = routeDistance;
         drawDistance(showBothDistances, distance, realDistance);
@@ -80,7 +87,7 @@ public class MapDistanceDrawerCommons {
 
     private void updateDistanceViews() {
         // glue code to UnifiedMap
-        UnifiedTargetAndDistancesHandler.updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, distances1, distances2, distanceSupersizeView, targetView);
+        UnifiedTargetAndDistancesHandler.updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, elevationInfo, distances1, distances2, distanceSupersizeView, targetView);
     }
 
 }
