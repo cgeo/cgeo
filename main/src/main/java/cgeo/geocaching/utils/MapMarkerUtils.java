@@ -74,7 +74,6 @@ public final class MapMarkerUtils {
         emojiPaintMap.clear();
         scalingFactorCacheIcons = Settings.getInt(R.string.pref_mapCacheScaling, 100) / 100.0f;
         scalingFactorWpIcons = Settings.getInt(R.string.pref_mapWpScaling, 100) / 100.0f;
-        Log.e("reset scaling factors to " + scalingFactorCacheIcons + " / " + scalingFactorWpIcons);
     }
 
     /**
