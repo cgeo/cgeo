@@ -24,6 +24,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.os.Bundle;
@@ -48,9 +49,9 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @SuppressWarnings("PMD.ExcessiveParameterList")
     public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch) {
-        super(name, host, https, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport, abbreviation, apiBranch);
+        super(name, host, https, prefix, CryptUtils.rot13(LocalizationUtils.getString(cKResId)), licenseString, apiSupport, abbreviation, apiBranch);
 
-        cS = CryptUtils.rot13(CgeoApplication.getInstance().getString(cSResId));
+        cS = CryptUtils.rot13(LocalizationUtils.getString(cSResId));
         this.isActivePrefKeyId = isActivePrefKeyId;
         this.tokenPublicPrefKeyId = tokenPublicPrefKeyId;
         this.tokenSecretPrefKeyId = tokenSecretPrefKeyId;

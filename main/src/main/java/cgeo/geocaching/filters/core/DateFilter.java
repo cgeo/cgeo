@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import java.text.DateFormat;
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -98,29 +101,29 @@ public class DateFilter {
         this.isRelative = true;
     }
 
-    public void setFromConfig(final String[] config, final int startPos) {
-        if (config != null && config.length > startPos + 1) {
-            minDate = parseDate(config[startPos]);
-            maxDate = parseDate(config[startPos + 1]);
-        }
-        if (config != null && config.length > startPos + 4) {
-            isRelative = Boolean.parseBoolean(config[startPos + 2]);
-            minDateOffset = Integer.parseInt(config[startPos + 3]);
-            maxDateOffset = Integer.parseInt(config[startPos + 4]);
-        }
-    }
-
-    public String[] addToConfig(final String[] config, final int startPos) {
-        if (config == null || config.length <= startPos + 4) {
-            return config;
-        }
-        config[startPos] = minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate);
-        config[startPos + 1] = maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate);
-        config[startPos + 2] = Boolean.toString(isRelative);
-        config[startPos + 3] = String.valueOf(minDateOffset);
-        config[startPos + 4] = String.valueOf(maxDateOffset);
-        return config;
-    }
+//    public void setFromConfig(final String[] config, final int startPos) {
+//        if (config != null && config.length > startPos + 1) {
+//            minDate = parseDate(config[startPos]);
+//            maxDate = parseDate(config[startPos + 1]);
+//        }
+//        if (config != null && config.length > startPos + 4) {
+//            isRelative = Boolean.parseBoolean(config[startPos + 2]);
+//            minDateOffset = Integer.parseInt(config[startPos + 3]);
+//            maxDateOffset = Integer.parseInt(config[startPos + 4]);
+//        }
+//    }
+//
+//    public String[] addToConfig(final String[] config, final int startPos) {
+//        if (config == null || config.length <= startPos + 4) {
+//            return config;
+//        }
+//        config[startPos] = minDate == null ? "-" : DAY_DATE_FORMAT.format(minDate);
+//        config[startPos + 1] = maxDate == null ? "-" : DAY_DATE_FORMAT.format(maxDate);
+//        config[startPos + 2] = Boolean.toString(isRelative);
+//        config[startPos + 3] = String.valueOf(minDateOffset);
+//        config[startPos + 4] = String.valueOf(maxDateOffset);
+//        return config;
+//    }
 
     public void setConfig(final List<String> config) {
         if (config != null) {
@@ -153,6 +156,28 @@ public class DateFilter {
             return null;
         }
     }
+
+    public void setJsonConfig(final JsonNode node) {
+        if (node != null) {
+            minDate = JsonUtils.getDate(node, "min", null);
+            maxDate = JsonUtils.getDate(node, "max", null);
+            isRelative = JsonUtils.getBoolean(node, "relative", false);
+            minDateOffset = JsonUtils.getInt(node, "minOffset", -1);
+            maxDateOffset = JsonUtils.getInt(node, "maxOffset", -1);
+        }
+    }
+
+
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setDate(node, "min", minDate);
+        JsonUtils.setDate(node, "max", maxDate);
+        JsonUtils.setBoolean(node, "relative", isRelative);
+        JsonUtils.setInt(node, "minOffset", minDateOffset);
+        JsonUtils.setInt(node, "maxOffset", maxDateOffset);
+        return node;
+    }
+
 
     public boolean isFilled() {
         return getMinDate() != null || getMaxDate() != null;

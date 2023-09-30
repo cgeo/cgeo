@@ -5,16 +5,23 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class CategoryGeocacheFilter extends BaseGeocacheFilter {
 
-    private Set<Category> categories = new HashSet<>();
+    private final Set<Category> categories = new HashSet<>();
 
     public void setCategories(final Collection<Category> cats) {
         categories.clear();
@@ -63,7 +70,7 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyConfig config) {
         categories.clear();
         for (String value : config.getDefaultList()) {
             final Category cat = Category.getByName(value);
@@ -74,12 +81,33 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = new ExpressionConfig();
+    public LegacyConfig getConfig() {
+        final LegacyConfig config = new LegacyConfig();
         if (!categories.isEmpty()) {
             config.putDefaultList(CollectionStream.of(categories).map(Category::getRaw).toList());
         }
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        final List<String> cats = CollectionStream.of(categories).map(Category::getRaw).toList();
+        JsonUtils.setTextCollection(node, "cat", cats);
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        categories.clear();
+        final List<String> cats = JsonUtils.getTextList(node, "cat");
+        for (String value : cats) {
+            final Category cat = Category.getByName(value);
+            if (cat != Category.UNKNOWN) {
+                categories.add(cat);
+            }
+        }
     }
 
     @Override

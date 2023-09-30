@@ -2,9 +2,14 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
@@ -47,15 +52,26 @@ public abstract class DateRangeGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyConfig config) {
         dateFilter.setConfig(config.get(null));
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = new ExpressionConfig();
+    public LegacyConfig getConfig() {
+        final LegacyConfig config = new LegacyConfig();
         config.put(null, dateFilter.getConfig());
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        return dateFilter.getJsonConfig();
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        dateFilter.setJsonConfig(node);
     }
 
     @Override
