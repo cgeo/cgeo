@@ -22,7 +22,7 @@ android {
     defaultConfig {
         minSdk 21
         //noinspection OldTargetApi
-        targetSdk 31
+        targetSdk 33
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
