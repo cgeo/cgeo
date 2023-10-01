@@ -479,7 +479,7 @@ public class ViewUtils {
         return new BitmapDrawable(APP_RESOURCES, bitmap);
     }
 
-    public static TextWatcher createSimpleWatcher(final Consumer<Editable> callback) {
+    public static TextWatcher createSimpleWatcher(@NonNull final Consumer<Editable> callback) {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
