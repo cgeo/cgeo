@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -408,10 +410,7 @@ public class SimpleDialog {
         final CharSequence[] itemTexts = new CharSequence[addSelectAll ? items.size() + 1 : items.size()];
         final boolean[] itemSelects = new boolean[addSelectAll ? items.size() + 1 : items.size()];
         final Set<T> result = new HashSet<>();
-        if (addSelectAll) {
-            itemTexts[0] = TextParam.text("<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + items.size() + ")>")
-                    .setMarkdown(true).getText(null);
-        }
+        final ArrayList<Integer> filteredPositions = new ArrayList<>(itemTexts.length);
         int idx = offset;
         for (T item : items) {
             final TextParam tp = displayMapper.call(item, idx);
@@ -426,39 +425,27 @@ public class SimpleDialog {
             itemSelects[0] = true;
         }
 
+        final Action1<CharSequence> applyFilter = filter -> {
+            filteredPositions.clear();
+            int idx1 = 0;
+            for (CharSequence item : itemTexts) {
+                if ((idx1 == 0 && addSelectAll) || StringUtils.indexOfIgnoreCase(item, filter) != -1) {
+                    filteredPositions.add(idx1);
+                }
+                idx1++;
+            }
+            if (addSelectAll) {
+                itemTexts[0] = "<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + (filteredPositions.size() - 1) + ")>";
+            }
+        };
+        applyFilter.call("");
+
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext(), R.style.cgeo_compactDialogs);
         applyCommonsForSelectionDialogs(builder);
 
-        builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
-            final ListView lv = ((AlertDialog) d).getListView();
-
-            if (addSelectAll && i == 0) {
-                //set the AlertDialog's data model and the view model
-                for (int j = 1; j < itemSelects.length; j++) {
-                    itemSelects[j] = c;
-                    lv.setItemChecked(j, c);
-                }
-                //set our own "data model"
-                if (c) {
-                    result.addAll(items);
-                } else {
-                    result.clear();
-                }
-            } else if (c) {
-                result.add(items.get(i - offset));
-                if (addSelectAll && result.size() == items.size() && !lv.isItemChecked(0)) {
-                    lv.setItemChecked(0, true);
-                    itemSelects[0] = true;
-                }
-            } else {
-                result.remove(items.get(i - offset));
-                if (addSelectAll && result.size() < items.size() && lv.isItemChecked(0)) {
-                    lv.setItemChecked(0, false);
-                    itemSelects[0] = false;
-                }
-            }
-            checkOkButton((AlertDialog) d, nonEmptyResultRequired, result.size());
-        });
+        final View dv = LayoutInflater.from(context).inflate(R.layout.simpledialog_filtered_selection, null);
+        builder.setView(dv);
+        final ListView lv = dv.findViewById(R.id.selection);
 
         builder.setPositiveButton(getPositiveButton(), (d, w) -> onSelectListener.accept(result));
         if (lastselect != null) {
@@ -474,13 +461,62 @@ public class SimpleDialog {
 
         final AlertDialog dialog = builder.create();
         dialog.show();
-        checkOkButton(dialog, nonEmptyResultRequired, result.size());
+
+        final ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getContext(), 0, 0, filteredPositions) {
+            @NonNull
+            @Override
+            public View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
+                final int originalPos = getItem(position);
+                final View v = convertView != null ? convertView : LayoutInflater.from(getContext()).inflate(R.layout.select_dialog_multichoice_material, parent, false);
+                final CheckedTextView tv = v.findViewById(android.R.id.text1);
+                tv.setText(itemTexts[originalPos]);
+                tv.setChecked(itemSelects[originalPos]);
+
+                tv.setOnClickListener(v1 -> {
+                    final CheckedTextView ctv = (CheckedTextView) v1;
+                    final boolean newStateIsChecked = !ctv.isChecked();
+                    if (addSelectAll && originalPos == 0) {
+                        for (int pos : filteredPositions) {
+                            if (pos != 0) {
+                                if (newStateIsChecked) {
+                                    result.add(items.get(pos - offset));
+                                } else {
+                                    result.remove(items.get(pos - offset));
+                                }
+                            }
+                            itemSelects[pos] = newStateIsChecked;
+                        }
+                        notifyDataSetChanged();
+                    } else {
+                        if (newStateIsChecked) {
+                            result.add(items.get(originalPos - offset));
+                        } else {
+                            result.remove(items.get(originalPos - offset));
+                        }
+                    }
+                    ctv.setChecked(newStateIsChecked);
+                    itemSelects[originalPos] = ctv.isChecked();
+                    checkOkButton(dialog, nonEmptyResultRequired, result.size());
+                });
+                return v;
+            }
+        };
+        lv.setAdapter(adapter);
+
+        final EditText filterField = dv.findViewById(R.id.filter);
+        if (itemTexts.length > 10) {
+            filterField.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                applyFilter.call(s.toString());
+                adapter.notifyDataSetChanged();
+            }));
+        } else {
+            filterField.setVisibility(View.GONE);
+        }
 
         if (lastselect != null) {
             // set actual listener to neutral button to retrieve last selection (without dismissing dialog)
             dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
                 // set given selection
-                final ListView lv = dialog.getListView();
                 result.clear();
                 int i = offset;
                 for (T item : items) {
@@ -488,12 +524,14 @@ public class SimpleDialog {
                     if (itemSelects[i]) {
                         result.add(item);
                     }
-                    lv.setItemChecked(i, itemSelects[i]);
                     i++;
                 }
+                adapter.notifyDataSetChanged();
                 checkOkButton(dialog, nonEmptyResultRequired, result.size());
             });
         }
+
+        checkOkButton(dialog, nonEmptyResultRequired, result.size());
         adjustCommons(dialog);
     }
 
