@@ -1,20 +1,20 @@
 ### Mappa
-- Change: Always show popup menu on cache/waypoint long-tap (configurable)
-- New: Add 'Set as target' to map's long-tap popup
-- Fix: Partial files remaining on aborted copying of downloaded files
-- New: Integrity check for downloaded routing tiles
-- New: Support for user-selected audio for proximity notifications
-- New: Toggle proximity notifications from map quick settings
-- New: Extended GeoJSON support for Google Maps
-- New: Display a search center indicator when performing address search => tap on map symbol
-- New: OpenTopoMap map provider
+- Cambio: Mostra sempre il menu a comparsa con un tocco prolungato sul cache/waypoint (configurabile)
+- Nuovo: Aggiunta l'opzione 'Imposta come obiettivo' al popup con tocco lungo sulla mappa
+- Corretto: File parziali che rimanevano sulla copia abortita di file scaricati
+- Nuovo: Controllo dell'integrità per i tasselli di routing scaricati
+- Nuovo: Supporto per l'audio selezionato dall'utente per le notifiche di prossimità
+- Nuovo: Attiva/Disattiva le notifiche di prossimità dalle impostazioni rapide della mappa
+- Nuovo: Supporto GeoJSON esteso per Google Maps
+- Nuovo: Mostra un indicatore del centro della ricerca quando si esegue la ricerca dell'indirizzo => con un tocco del simbolo della mappa
+- Nuovo: Provider di mappe OpenTopoMap
 
 ### Dettagli del cache
 - Nuovo: pulsante 'Salva e carica' durante la modifica della nota personale
 - Cambio: sostituita la maggior parte delle finestre di avanzamento degli aggiornamenti con azioni in background
-- Change: Use only non-empty logs for 'repeat last log'
-- New: Display logging errors
-- New: Allow selecting, copying etc. of image description (EXIF info)
+- Modifica: Utilizzati solo i log non vuoti per 'ripetere l'ultimo registro'
+- Nuovo: Visualizza errori di log
+- Nuovo: Consenti la selezione, la copia ecc. della descrizione dell'immagine (informazioni EXIF)
 
 ### Generale
 - Nuovo: Aggiunti più numeri emoji (categoria separata)
@@ -28,7 +28,7 @@
 - Nuovo: Mostra le informazioni sulla schermata iniziale per i messaggi non letti (opzionale)
 - Nuovo: Avvio rapido del centro messaggi
 - Nuovo: Rendi personalizzabile l'ultimo elemento di navigazione inferiore
-- New: Updated integrated BRouter
-- New: Add interface to OrganicMaps for navigation
-- Fix: HTML-encoded chars in 'trackable last spotted" name
-- Change: Removed outdated Twitter support
+- Nuovo: Aggiornato BRouter integrato
+- Nuovo: Aggiunta interfaccia all'app OrganicMaps per la navigazione
+- Corretto: caratteri codificati con HTML nel nome 'trackable last spotted"
+- Modifica: Rimosso supporto a Twitter obsoleto
