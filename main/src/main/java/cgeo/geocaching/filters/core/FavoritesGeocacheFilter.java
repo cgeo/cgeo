@@ -5,7 +5,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,14 +69,14 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         percentage = config.getFirstValue(CONFIG_KEY_PERCENTAGE, false, BooleanUtils::toBoolean);
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = super.getConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_PERCENTAGE, Boolean.toString(percentage));
         return config;
     }

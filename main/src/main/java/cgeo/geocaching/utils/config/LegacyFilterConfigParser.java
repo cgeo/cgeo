@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 @Deprecated
-public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
+public class LegacyFilterConfigParser<T extends IJsonConfigurable<T>> {
 
     private static final char OPEN_PAREN = '(';
     private static final char CLOSE_PAREN = ')';
@@ -38,16 +38,16 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
     private final Map<String, Supplier<T>> registeredExpressions = new HashMap<>();
     private final boolean ignoreSpecialCharsInTypeIds;
 
-    public LegacyConfigParser() {
+    public LegacyFilterConfigParser() {
         this(false);
     }
 
-    public LegacyConfigParser(final boolean ignoreSpecialCharsInTypeIds) {
+    public LegacyFilterConfigParser(final boolean ignoreSpecialCharsInTypeIds) {
         this.ignoreSpecialCharsInTypeIds = ignoreSpecialCharsInTypeIds;
     }
 
 
-    public LegacyConfigParser<T> register(final Supplier<T> expressionCreator) {
+    public LegacyFilterConfigParser<T> register(final Supplier<T> expressionCreator) {
         final String typeId = expressionCreator.get().getId();
         this.registeredExpressions.put(typeId == null ? "" :
                         this.ignoreSpecialCharsInTypeIds ? TextUtils.toComparableStringIgnoreCaseAndSpecialChars(typeId) : typeId.trim().toLowerCase(Locale.getDefault()),
@@ -80,7 +80,7 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
 
     private void writeConfig(final T exp, final StringBuilder stringBuilder) {
         final String expId = escape(exp.getId());
-        final LegacyConfig expConfig = exp.getConfig();
+        final LegacyFilterConfig expConfig = exp.getConfig();
 
         final String singleConfigValue = getSingleValue(expConfig);
 
@@ -107,11 +107,11 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
         }
     }
 
-    private boolean isEmpty(final LegacyConfig config) {
+    private boolean isEmpty(final LegacyFilterConfig config) {
         return config == null || config.isEmpty();
     }
 
-    private String getSingleValue(final LegacyConfig config) {
+    private String getSingleValue(final LegacyFilterConfig config) {
         return config == null ? null : config.getSingleValue();
     }
 
@@ -140,8 +140,8 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
         return idx;
     }
 
-    public static LegacyConfig parse(final String configString) {
-        final LegacyConfig config = new LegacyConfig();
+    public static LegacyFilterConfig parse(final String configString) {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         parseConfiguration(configString, 0, config);
         return config;
     }
@@ -198,7 +198,7 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
         return ESCAPE_CHAR_FINDER.matcher(raw).replaceAll("" + ESCAPE_CHAR + ESCAPE_CHAR + "$1");
     }
 
-    public static String toConfig(final LegacyConfig config) {
+    public static String toConfig(final LegacyFilterConfig config) {
         final StringBuilder sb = new StringBuilder();
         boolean first = true;
         final List<String> defaultConfig = config.get(null);
@@ -287,7 +287,7 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
                     TextUtils.toComparableStringIgnoreCaseAndSpecialChars(parseToNextDelim().trim()) :
                     parseToNextDelim().trim().toLowerCase(Locale.getDefault());
 
-            final LegacyConfig typeConfig = new LegacyConfig();
+            final LegacyFilterConfig typeConfig = new LegacyFilterConfig();
             if (currentCharIs(CONFIG_SEPARATOR, false)) {
                 idx++;
                 idx = parseConfiguration(config, idx, typeConfig);
@@ -317,7 +317,7 @@ public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
         private String parseToNextDelim() {
             final StringBuilder result = new StringBuilder();
 
-            idx = LegacyConfigParser.parseToNextDelim(config, idx, endChars, result);
+            idx = LegacyFilterConfigParser.parseToNextDelim(config, idx, endChars, result);
 
             return result.toString();
         }

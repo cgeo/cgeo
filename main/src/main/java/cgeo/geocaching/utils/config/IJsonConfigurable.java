@@ -13,12 +13,12 @@ public interface IJsonConfigurable<T extends IJsonConfigurable<T>> {
     String getId();
 
     @Deprecated
-    default void setConfig(LegacyConfig config) {
+    default void setConfig(LegacyFilterConfig config) {
         //empty on purpose
     }
 
     @Deprecated
-    default LegacyConfig getConfig() {
+    default LegacyFilterConfig getConfig() {
         return null;
     };
 
@@ -35,12 +35,4 @@ public interface IJsonConfigurable<T extends IJsonConfigurable<T>> {
 
     void setJsonConfig(@NonNull ObjectNode node);
 
-//    default JsonNode getJsonConfig() {
-//        return null;
-//    }
-//
-//    default void setJsonConfig(@NonNull final JsonNode node) {
-//        //empty on purpose
-//    }
-//
 }

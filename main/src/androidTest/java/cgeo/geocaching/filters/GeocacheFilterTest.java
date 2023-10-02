@@ -38,6 +38,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -97,7 +98,7 @@ public class GeocacheFilterTest {
     private GeocacheFilter assertFilterFromConfig(final String config, final String expectedName, final Class<? extends IGeocacheFilter> expectedFilterClass) {
         final GeocacheFilter filter;
         try {
-            filter = GeocacheFilter.parseLegacy(null, config, true);
+            filter = LegacyFilterConfig.parseLegacy(null, config, true);
         } catch (ParseException e) {
             throw new IllegalArgumentException(e);
         }
@@ -107,9 +108,9 @@ public class GeocacheFilterTest {
     }
 
     @Test
-    public void playWithJson() throws ParseException {
+    public void legacyParsing() throws ParseException {
         final String filterConfig = "[=:inconclusive=false:advanced=true]AND(rating:2.0:-;NOT(OR(status:has_user_defined_waypoints_yes:solved_mystery_yes;name:test:contains));difficulty_terrain_matrix:1.0-1.0:1.5-2.5:2.0-2.0:1.5-2.0:include-wo-dt=true)";
-        final GeocacheFilter filter = GeocacheFilter.parseLegacy(null, filterConfig, true);
+        final GeocacheFilter filter = LegacyFilterConfig.parseLegacy(null, filterConfig, true);
 
         final String json = filter.toConfig();
         final GeocacheFilter filter2 = GeocacheFilter.createFromConfig(json);
@@ -149,13 +150,15 @@ public class GeocacheFilterTest {
 
     private static void assertFilterConfig(final GeocacheFilter filter) throws ParseException {
         final String filterJson = filter.toConfig();
-        final String legacyConfig = filter.toLegacyConfig();
+
         final GeocacheFilter filterFromJson = GeocacheFilter.createFromConfig(filterJson);
         assertThat(filterFromJson.toConfig()).isEqualTo(filterJson);
-        assertThat(filterFromJson.toLegacyConfig()).isEqualTo(legacyConfig);
         assertThat(filterFromJson.getName()).isEqualTo(filter.getName());
         assertThat(filterFromJson.isIncludeInconclusive()).isEqualTo(filter.isIncludeInconclusive());
         assertThat(filterFromJson.isOpenInAdvancedMode()).isEqualTo(filter.isOpenInAdvancedMode());
+
+        //legacy
+        assertThat(LegacyFilterConfig.toLegacyConfig(filterFromJson)).isEqualTo(LegacyFilterConfig.toLegacyConfig(filter));
     }
 
     private static IGeocacheFilter getFilledInstance(final GeocacheFilterType type) {

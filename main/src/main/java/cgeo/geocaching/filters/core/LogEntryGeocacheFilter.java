@@ -4,7 +4,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -98,15 +98,15 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         foundByFilter.setConfig(config.getDefaultList());
         inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
         logTextFilter.setConfig(config.get(CONFIG_KEY_LOG_TEXT));
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = new LegacyConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putDefaultList(foundByFilter.getConfig());
         config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
         config.put(CONFIG_KEY_LOG_TEXT, logTextFilter.getConfig());

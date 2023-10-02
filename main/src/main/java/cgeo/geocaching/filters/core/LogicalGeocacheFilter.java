@@ -2,7 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,12 @@ public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         //Logical filter has no config
     }
 
     @Override
-    public LegacyConfig getConfig() {
+    public LegacyFilterConfig getConfig() {
         //Logical filter has no config
         return null;
     }

@@ -12,7 +12,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -255,7 +255,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         setConfigInternal(config.getDefaultList());
     }
 
@@ -311,8 +311,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig result = new LegacyConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig result = new LegacyFilterConfig();
         result.putDefaultList(getConfigInternal());
         return result;
     }
