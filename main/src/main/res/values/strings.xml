@@ -574,6 +574,7 @@
     <string name="cache_filter_stored_since">Last details update</string>
     <string name="cache_filter_category">BC Category</string>
     <string name="cache_filter_tier">BC Tier</string>
+    <string name="cache_filter_named_filter">Named Filter</string>
     <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>

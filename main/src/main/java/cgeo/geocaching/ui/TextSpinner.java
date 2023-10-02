@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +75,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     /**
      * (Re)Sets the values which are available for selection using this TextSpinner
      */
-    public TextSpinner<T> setValues(@Nullable final List<T> newValues) {
+    public TextSpinner<T> setValues(@Nullable final Collection<T> newValues) {
 
         this.values.clear();
         this.displayValues.clear();
