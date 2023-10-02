@@ -896,6 +896,8 @@
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
     <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
+    <string name="init_showElevation">Pokaż wysokość</string>
+    <string name="init_summary_showElevation">Pokaż informacje o wysokości dla bieżącej pozycji, pobrane z danych trasy lub GNSS (jeśli są dostępne)</string>
     <string name="init_global_wp_extraction_disable">Wyłącz wyodrębnianie punktów nawigacji</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacji z osobistych notatek skrytek. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki.</string>
     <string name="init_prevent_cache_note_merge">Nadpisz osobistą notatkę skrytki</string>
