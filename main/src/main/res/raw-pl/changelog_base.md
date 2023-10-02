@@ -6,6 +6,7 @@
 - Nowość: Zezwalaj na skalowanie ikon skrytek/punktów nawigacji (patrz Ustawienia => Wygląd)
 - Nowość: Liniowe laby wykorzystują liczby jako znaczniki punktów nawigacji
 - Nowość: Punkty nawigacji skrytki wyświetlają ikonę typu skrzynki jako znacznik
+- Nowość: Pokaż informacje o wysokości dla bieżącej pozycji na mapie (patrz Ustawienia => Zawartość mapy & Zachowanie)
 
 ### Szczegóły skrytki
 - Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
