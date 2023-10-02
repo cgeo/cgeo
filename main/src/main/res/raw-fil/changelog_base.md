@@ -6,6 +6,7 @@
 - New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
 - New: Linear labs use numbers as waypoint markers
 - New: Waypoints of a cache show cache type icon as marker
+- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
 
 ### Cache details
 - New: Edit default value for log image caption prefix
