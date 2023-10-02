@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.AuthorizationCredentialsActivityBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
@@ -19,7 +20,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
@@ -72,7 +72,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
             binding.register.setOnClickListener(new RegisterListener());
         }
 
-        final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
+        final TextWatcher enableStartButtonWatcher = ViewUtils.createSimpleWatcher(s -> enableCheckButtonIfReady());
         binding.username.addTextChangedListener(enableStartButtonWatcher);
         binding.password.addTextChangedListener(enableStartButtonWatcher);
     }
@@ -199,27 +199,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     protected void enableCheckButtonIfReady() {
         binding.check.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
                 StringUtils.isNotEmpty(binding.password.getText()));
-    }
-
-    /**
-     * A TextWatcher to monitor changes on usernameEditText and passwordEditText for enabling start button
-     * dynamically.
-     */
-    private class EnableStartButtonWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-            // empty
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-            // empty
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            enableCheckButtonIfReady();
-        }
     }
 
     public static class CredentialsAuthParameters {
