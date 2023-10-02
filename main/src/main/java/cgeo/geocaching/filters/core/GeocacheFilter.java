@@ -55,6 +55,11 @@ public class GeocacheFilter implements Cloneable {
             return storedFilters.values();
         }
 
+        public static synchronized GeocacheFilter get(final String name) {
+            ensureInit();
+            return storedFilters.get(name);
+        }
+
         public static synchronized boolean exists(final String filtername) {
             ensureInit();
             return storedFilters.containsKey(filtername);
@@ -100,6 +105,10 @@ public class GeocacheFilter implements Cloneable {
     @NonNull
     public String getName() {
         return name == null ? "" : name;
+    }
+
+    public boolean isNamed() {
+        return !StringUtils.isBlank(getName());
     }
 
     public boolean isOpenInAdvancedMode() {

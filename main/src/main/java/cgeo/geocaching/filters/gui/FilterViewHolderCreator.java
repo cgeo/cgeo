@@ -134,6 +134,9 @@ public class FilterViewHolderCreator {
             case STORED_LISTS:
                 result = createStoredListFilterViewHolder();
                 break;
+            case NAMED_FILTER:
+                result = new NamedFilterFilterViewHolder();
+                break;
             case ORIGIN:
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
@@ -256,5 +259,4 @@ public class FilterViewHolderCreator {
 
         return new CheckboxFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
-
 }
