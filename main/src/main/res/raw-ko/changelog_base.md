@@ -6,6 +6,7 @@
 - 신규: 캐시/지점 아이콘 크기 조정 허용(설정 => 모양 참조)
 - New: Linear labs use numbers as waypoint markers
 - New: Waypoints of a cache show cache type icon as marker
+- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
