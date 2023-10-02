@@ -896,6 +896,8 @@
     <string name="init_summary_bigSmileysOnMap">Pokud je tato funkce povolena, budou se symboly jako \"nalezený smajlík\" nebo značka \"opravené souřadnice\" zobrazovat na mapě zvětšené, namísto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnocení O/T na ikonách kešky</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazit značku pro hodnocení obtížnosti (vlevo) a terénu (vpravo) na značkách kešky v pravém horním rohu (značka „uložená“ se přesune doprostřed).</string>
+    <string name="init_showElevation">Zobrazit nadmořskou výšku</string>
+    <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
     <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
