@@ -6,6 +6,7 @@
 - Nieuw: Sta het schalen van cache/waypoint iconen toe (Zie Instellingen => uiterlijk)
 - Nieuw: Lineaire labs gebruiken getallen als markeerpunten
 - Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
+- Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
