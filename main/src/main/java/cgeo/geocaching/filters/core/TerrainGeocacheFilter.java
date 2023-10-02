@@ -5,7 +5,7 @@ import cgeo.geocaching.models.Geocache;
 public class TerrainGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     public TerrainGeocacheFilter() {
-        super(Float::valueOf);
+        super(Float::valueOf, f -> f);
     }
 
     @Override

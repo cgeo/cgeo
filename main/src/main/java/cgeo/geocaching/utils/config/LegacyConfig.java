@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.expressions;
+package cgeo.geocaching.utils.config;
 
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -10,7 +10,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpressionConfig extends HashMap<String, List<String>> {
+@Deprecated
+public class LegacyConfig extends HashMap<String, List<String>> {
 
     /**
      * IF this config has only one single String value then this value is returned. Otherwise null is returned
@@ -35,7 +36,7 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
         return result == null ? Collections.emptyList() : result;
     }
 
-    public ExpressionConfig addToDefaultList(final String... values) {
+    public LegacyConfig addToDefaultList(final String... values) {
         if (get(null) == null) {
             put(null, new ArrayList<>());
         }
@@ -50,8 +51,8 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
     /**
      * creates a new config object, taking the content of one key of this config and putting it into the default list
      */
-    public ExpressionConfig getSubConfig(final String key) {
-        final ExpressionConfig subConfig = new ExpressionConfig();
+    public LegacyConfig getSubConfig(final String key) {
+        final LegacyConfig subConfig = new LegacyConfig();
         subConfig.putDefaultList(this.get(key));
         return subConfig;
     }

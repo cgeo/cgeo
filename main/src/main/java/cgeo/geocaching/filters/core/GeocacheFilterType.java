@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
@@ -47,6 +48,14 @@ public enum GeocacheFilterType {
     @StringRes
     private final int groupId;
 
+    private static final EnumValueMapper<String, GeocacheFilterType> TYPEID_TO_TYPE = new EnumValueMapper<>();
+
+    static {
+        for (GeocacheFilterType type : values()) {
+            TYPEID_TO_TYPE.add(type, type.typeId);
+        }
+    }
+
     GeocacheFilterType(final String typeId, @StringRes final int nameId, @StringRes final int groupId, final Supplier<BaseGeocacheFilter> supplier) {
         this.supplier = supplier;
         this.nameId = nameId;
@@ -63,6 +72,10 @@ public enum GeocacheFilterType {
         final T gcf = (T) supplier.get();
         gcf.setType(this);
         return gcf;
+    }
+
+    public static GeocacheFilterType getByTypeId(final String typeId) {
+        return TYPEID_TO_TYPE.get(typeId, null);
     }
 
     public String getUserDisplayableName() {

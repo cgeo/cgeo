@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.expressions;
+package cgeo.geocaching.utils.config;
 
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -19,7 +19,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class ExpressionParser<T extends IExpression<T>> {
+@Deprecated
+public class LegacyConfigParser<T extends IJsonConfigurable<T>> {
 
     private static final char OPEN_PAREN = '(';
     private static final char CLOSE_PAREN = ')';
@@ -37,16 +38,16 @@ public class ExpressionParser<T extends IExpression<T>> {
     private final Map<String, Supplier<T>> registeredExpressions = new HashMap<>();
     private final boolean ignoreSpecialCharsInTypeIds;
 
-    public ExpressionParser() {
+    public LegacyConfigParser() {
         this(false);
     }
 
-    public ExpressionParser(final boolean ignoreSpecialCharsInTypeIds) {
+    public LegacyConfigParser(final boolean ignoreSpecialCharsInTypeIds) {
         this.ignoreSpecialCharsInTypeIds = ignoreSpecialCharsInTypeIds;
     }
 
 
-    public ExpressionParser<T> register(final Supplier<T> expressionCreator) {
+    public LegacyConfigParser<T> register(final Supplier<T> expressionCreator) {
         final String typeId = expressionCreator.get().getId();
         this.registeredExpressions.put(typeId == null ? "" :
                         this.ignoreSpecialCharsInTypeIds ? TextUtils.toComparableStringIgnoreCaseAndSpecialChars(typeId) : typeId.trim().toLowerCase(Locale.getDefault()),
@@ -79,7 +80,7 @@ public class ExpressionParser<T extends IExpression<T>> {
 
     private void writeConfig(final T exp, final StringBuilder stringBuilder) {
         final String expId = escape(exp.getId());
-        final ExpressionConfig expConfig = exp.getConfig();
+        final LegacyConfig expConfig = exp.getConfig();
 
         final String singleConfigValue = getSingleValue(expConfig);
 
@@ -106,11 +107,11 @@ public class ExpressionParser<T extends IExpression<T>> {
         }
     }
 
-    private boolean isEmpty(final ExpressionConfig config) {
+    private boolean isEmpty(final LegacyConfig config) {
         return config == null || config.isEmpty();
     }
 
-    private String getSingleValue(final ExpressionConfig config) {
+    private String getSingleValue(final LegacyConfig config) {
         return config == null ? null : config.getSingleValue();
     }
 
@@ -139,8 +140,8 @@ public class ExpressionParser<T extends IExpression<T>> {
         return idx;
     }
 
-    public static ExpressionConfig parse(final String configString) {
-        final ExpressionConfig config = new ExpressionConfig();
+    public static LegacyConfig parse(final String configString) {
+        final LegacyConfig config = new LegacyConfig();
         parseConfiguration(configString, 0, config);
         return config;
     }
@@ -197,11 +198,11 @@ public class ExpressionParser<T extends IExpression<T>> {
         return ESCAPE_CHAR_FINDER.matcher(raw).replaceAll("" + ESCAPE_CHAR + ESCAPE_CHAR + "$1");
     }
 
-    public static String toConfig(final ExpressionConfig config) {
+    public static String toConfig(final LegacyConfig config) {
         final StringBuilder sb = new StringBuilder();
         boolean first = true;
         final List<String> defaultConfig = config.get(null);
-        if (defaultConfig != null && !defaultConfig.isEmpty()) {
+        if (defaultConfig != null && !defaultConfig.isEmpty() && defaultConfig.get(0) != null) {
             if (defaultConfig.get(0).equals("")) {
                 sb.append(KEYVALUE_SEPARATOR);
             }
@@ -286,7 +287,7 @@ public class ExpressionParser<T extends IExpression<T>> {
                     TextUtils.toComparableStringIgnoreCaseAndSpecialChars(parseToNextDelim().trim()) :
                     parseToNextDelim().trim().toLowerCase(Locale.getDefault());
 
-            final ExpressionConfig typeConfig = new ExpressionConfig();
+            final LegacyConfig typeConfig = new LegacyConfig();
             if (currentCharIs(CONFIG_SEPARATOR, false)) {
                 idx++;
                 idx = parseConfiguration(config, idx, typeConfig);
@@ -316,7 +317,7 @@ public class ExpressionParser<T extends IExpression<T>> {
         private String parseToNextDelim() {
             final StringBuilder result = new StringBuilder();
 
-            idx = ExpressionParser.parseToNextDelim(config, idx, endChars, result);
+            idx = LegacyConfigParser.parseToNextDelim(config, idx, endChars, result);
 
             return result.toString();
         }
