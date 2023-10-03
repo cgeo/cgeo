@@ -2357,4 +2357,10 @@ public class Settings {
     public static boolean extendedSettingsAreEnabled() {
         return getBoolean(R.string.pref_extended_settings_enabled, false);
     }
+
+    public static boolean checkAndSetLegacyFilterConfigMigrated() {
+        final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
+        putBoolean(R.string.pref_legacy_filter_config_migrated, true);
+        return isMigrated;
+    }
 }

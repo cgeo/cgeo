@@ -7,7 +7,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -128,7 +128,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         this.inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
         this.sources = config.getFirstValue(CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources(), Integer::parseInt);
         attributes.clear();
@@ -146,8 +146,8 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = new LegacyConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
         config.putList(CONFIG_KEY_SOURCES, Integer.toString(sources));
         config.putDefaultList(new ArrayList<>(attributes.keySet()));

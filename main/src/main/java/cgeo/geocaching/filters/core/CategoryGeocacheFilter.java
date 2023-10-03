@@ -7,7 +7,7 @@ import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -70,7 +70,7 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         categories.clear();
         for (String value : config.getDefaultList()) {
             final Category cat = Category.getByName(value);
@@ -81,8 +81,8 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = new LegacyConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         if (!categories.isEmpty()) {
             config.putDefaultList(CollectionStream.of(categories).map(Category::getRaw).toList());
         }

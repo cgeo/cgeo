@@ -48,6 +48,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -280,6 +281,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
 
             configureMessageCenterPolling();
+
+            LegacyFilterConfig.checkAndMigrate();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {

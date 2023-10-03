@@ -2,7 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
@@ -93,13 +93,13 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         numberRangeFilter.setConfig(config.getDefaultList());
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = new LegacyConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putDefaultList(numberRangeFilter.getConfig());
         return config;
     }

@@ -5,11 +5,9 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.config.JsonConfigurationUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
-import cgeo.geocaching.utils.config.LegacyConfigParser;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -22,14 +20,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import static java.lang.Boolean.TRUE;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter implements Cloneable {
@@ -42,17 +38,6 @@ public class GeocacheFilter implements Cloneable {
     private static final String CONFIG_KEY_ADV_MODE = "advanced";
     private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
     private static final String CONFIG_KEY_TREE = "tree";
-
-    private static final LegacyConfigParser<IGeocacheFilter> FILTER_PARSER = new LegacyConfigParser<IGeocacheFilter>(true)
-            .register(AndGeocacheFilter::new)
-            .register(OrGeocacheFilter::new)
-            .register(NotGeocacheFilter::new);
-
-    static {
-        for (GeocacheFilterType gcf : GeocacheFilterType.values()) {
-            FILTER_PARSER.register(gcf::create);
-        }
-    }
 
     private String name;
     private IGeocacheFilter tree;
@@ -79,7 +64,7 @@ public class GeocacheFilter implements Cloneable {
             ensureInit();
             final GeocacheFilter other = storedFilters.get(newName);
             return other != null &&
-                    (!Objects.equals(other.getTreeConfig(), filter.getTreeConfig()) ||
+                    (!JsonConfigurationUtils.equals(other.getTree(), filter.getTree()) ||
                             filter.isIncludeInconclusive() != other.isIncludeInconclusive());
         }
 
@@ -129,10 +114,6 @@ public class GeocacheFilter implements Cloneable {
         return tree;
     }
 
-    public String getTreeConfig() {
-        return tree == null ? null : FILTER_PARSER.getConfig(tree);
-    }
-
     @NonNull
     public static GeocacheFilter create(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
         return new GeocacheFilter(name, openInAdvancedMode, includeInconclusive, tree);
@@ -167,52 +148,8 @@ public class GeocacheFilter implements Cloneable {
         return createInternal(null, filterConfig, true);
     }
 
-    @Deprecated
-    public static GeocacheFilter parseLegacy(final String pName, final String pFilterConfig, final boolean throwOnParseError) throws ParseException {
-
-        final String filterConfig = pFilterConfig == null ? "" : pFilterConfig;
-        String name = pName;
-        IGeocacheFilter tree = null;
-        boolean openInAdvancedMode = false;
-        boolean includeInconclusive = false;
-
-        //See if config contains info beside the filter expression itself
-        int idx = 0;
-        if (filterConfig.startsWith("[")) {
-            final LegacyConfig config = new LegacyConfig();
-            idx = LegacyConfigParser.parseConfiguration(filterConfig, 1, config) + 1;
-            if (name == null) {
-                name = config.getDefaultList().isEmpty() ? "" : config.getDefaultList().get(0);
-            }
-            openInAdvancedMode = config.getFirstValue(CONFIG_KEY_ADV_MODE, false, BooleanUtils::toBoolean);
-            includeInconclusive = config.getFirstValue(CONFIG_KEY_INCLUDE_INCLUSIVE, false, BooleanUtils::toBoolean);
-        }
-
-        final String treeConfig = filterConfig.substring(Math.min(idx, filterConfig.length()));
-        if (!StringUtils.isBlank(treeConfig)) {
-            try {
-                tree = FILTER_PARSER.create(treeConfig);
-            } catch (ParseException pe) {
-                if (throwOnParseError) {
-                    throw pe;
-                }
-                Log.w("Couldn't parse expression '" + filterConfig + "' (idx: " + idx + ")", pe);
-            }
-        }
-        return new GeocacheFilter(name, openInAdvancedMode, includeInconclusive, tree);
-    }
-
     public boolean isFiltering() {
         return tree != null && tree.isFiltering();
-    }
-
-    @Deprecated
-    public String toLegacyConfig() {
-        final LegacyConfig config = new LegacyConfig();
-        config.addToDefaultList(getName());
-        config.putList(CONFIG_KEY_ADV_MODE, BooleanUtils.toStringTrueFalse(isOpenInAdvancedMode()));
-        config.putList(CONFIG_KEY_INCLUDE_INCLUSIVE, BooleanUtils.toStringTrueFalse(isIncludeInconclusive()));
-        return "[" + LegacyConfigParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
     }
 
     @NonNull
@@ -446,7 +383,7 @@ public class GeocacheFilter implements Cloneable {
 
         if (pJsonConfig != null && !pJsonConfig.trim().startsWith("{")) {
             //legacy
-            return parseLegacy(pName, pJsonConfig, throwOnParseError);
+            return LegacyFilterConfig.parseLegacy(pName, pJsonConfig, throwOnParseError);
         }
 
         final JsonNode node = JsonUtils.stringToNode(pJsonConfig);

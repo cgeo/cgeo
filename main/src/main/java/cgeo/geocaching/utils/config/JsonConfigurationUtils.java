@@ -4,6 +4,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,10 @@ public final class JsonConfigurationUtils {
 
     public static JsonNode toJsonConfig(final IJsonConfigurable<?> expression) {
         return expression == null ? null : createJsonNode(expression);
+    }
+
+    public static String toJsonConfigString(final IJsonConfigurable<?> expression) {
+        return expression == null ? null : JsonUtils.nodeToString(toJsonConfig(expression));
     }
 
     public static <T extends IJsonConfigurable<T>> T fromJsonConfig(final JsonNode node, final Func1<String, T> expressionCreator) {
@@ -49,7 +54,39 @@ public final class JsonConfigurationUtils {
         return expression;
     }
 
-    private static <T extends IJsonConfigurable<T>> JsonNode createJsonNode(final IJsonConfigurable<T> expression) {
+    public static <T extends IJsonConfigurable<T>> T fromJsonConfig(final String json, final Func1<String, T> expressionCreator) {
+        if (json == null) {
+            return null;
+        }
+
+        return fromJsonConfig(JsonUtils.stringToNode(json), expressionCreator);
+    }
+
+    /** Helper method to compare two IJsonComfigration objects using their JSON representation */
+    public static boolean equals(final IJsonConfigurable<?> jsonConfig1, final IJsonConfigurable<?> jsonConfig2) {
+        if (jsonConfig1 == jsonConfig2) {
+            return true;
+        }
+        if (jsonConfig1 == null || jsonConfig2 == null) {
+            return false;
+        }
+        final JsonNode node1 = jsonConfig1.getJsonConfig();
+        final JsonNode node2 = jsonConfig2.getJsonConfig();
+
+        return Objects.equals(node1, node2);
+    }
+
+    /** Helper method to implement HashCode for an object implementing IJsonConfiguration */
+    public static int hashCode(final IJsonConfigurable<?> jsonConfig) {
+        if (jsonConfig == null) {
+            return 7;
+        }
+        final JsonNode node = jsonConfig.getJsonConfig();
+        return node == null ? 13 : node.hashCode();
+    }
+
+
+        private static <T extends IJsonConfigurable<T>> JsonNode createJsonNode(final IJsonConfigurable<T> expression) {
         if (expression == null) {
             return null;
         }

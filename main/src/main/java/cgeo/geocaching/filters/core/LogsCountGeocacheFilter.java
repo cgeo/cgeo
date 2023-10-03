@@ -5,7 +5,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.config.LegacyConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import static cgeo.geocaching.log.LogType.ATTENDED;
 import static cgeo.geocaching.log.LogType.FOUND_IT;
 import static cgeo.geocaching.log.LogType.WEBCAM_PHOTO_TAKEN;
@@ -94,14 +94,14 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
     }
 
     @Override
-    public void setConfig(final LegacyConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         logType = config.getFirstValue(CONFIG_KEY_LOGTYPE, null, s -> EnumUtils.getEnum(LogType.class, s, null));
     }
 
     @Override
-    public LegacyConfig getConfig() {
-        final LegacyConfig config = super.getConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_LOGTYPE, logType == null ? "" : logType.name());
         return config;
     }
