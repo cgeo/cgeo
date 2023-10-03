@@ -20,3 +20,4 @@
 - Novinka: Zvýšeno cílové SDK na 33
 - Změna: Zpracování přístupu k databázi, aby se zabránilo pádům "databáze není k dispozici"
 - Změna: Ve výchozím nastavení se zobrazí pouze základní nastavení. Přejděte do Nastavení => Rozšířená nastavení a povolte rozšířené nastavení
+- New: Allow filtering in multi selection lists
