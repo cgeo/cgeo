@@ -1506,7 +1506,7 @@ public class GCWebAPI {
         //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
         if (csrfToken == null) {
-            return generateLogError(true, "Problem getting CSRF-Token");
+            return generateLogError(false, "Problem getting CSRF-Token");
         }
 
         //2,) Fill Trackable Log Entry object and post it
