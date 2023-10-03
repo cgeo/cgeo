@@ -20,3 +20,4 @@
 - Nowość: Zwiększony docelowy SDK do 33
 - Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
 - Zmiana: Domyślnie będą wyświetlane tylko podstawowe ustawienia. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
+- Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
