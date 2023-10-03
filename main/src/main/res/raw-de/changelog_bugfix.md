@@ -1,5 +1,5 @@
 ##
-- Fix: Hide outdated connection error message
+- Korrektur: Veraltete Verbindungsfehlermeldung ausblenden
 
 ##
 - Neu: targetSDK auf 33 aktualisiert (aufgrund von Play Store-Anforderungen)
