@@ -20,3 +20,4 @@
 - New: Increased target SDK to 33
 - Zmena: Spracovávanie prístupu k databáze, aby nedochádzalo k zlyhaniam „Databáza je nedostupná“
 - Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- New: Allow filtering in multi selection lists
