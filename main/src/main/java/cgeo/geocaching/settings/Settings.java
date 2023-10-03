@@ -706,7 +706,7 @@ public class Settings {
         if (contains(R.string.pref_feature_new_gc_log_api)) {
             return getBoolean(R.string.pref_feature_new_gc_log_api, false);
         }
-        return BranchDetectionHelper.isDeveloperBuild();
+        return !BranchDetectionHelper.isProductionBuild();
     }
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
