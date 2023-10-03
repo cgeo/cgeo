@@ -4,9 +4,9 @@
 - Neu: Symbol für Cachetyp als Marker anzeigen, wenn benutzerdefiniertes Cache-Symbol gesetzt wurde (Emoji) oder große Symbole aktiviert sind
 - Neu: Benutzerdefiniertes Cache-Symbol als Marker für zugehörige Wegpunkte anzeigen
 - Neu: Skalierung von Cache/Wegpunkt-Symbolen (siehe Einstellungen => Erscheinungsbild)
-- New: Linear labs use numbers as waypoint markers
-- New: Waypoints of a cache show cache type icon as marker
-- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- Neu: Lineare Lab Adventures verwenden Zahlen als Wegpunkt-Marker
+- Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
+- Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
@@ -20,3 +20,4 @@
 - Neu: targetSDK auf 33 erhöht
 - Änderung: Art des Datenbankzugriffs optimiert, um Abstürze zu vermeiden, wenn die Datenbank nicht verfügbar ist
 - Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
+- New: Allow filtering in multi selection lists
