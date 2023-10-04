@@ -4,9 +4,9 @@
 - 신규: 사용자 정의 캐시 아이콘이 설정(이모티콘)되었거나 큰 아이콘이 활성화된 경우 캐시 유형 아이콘을 마커로 표시합니다.
 - 신규: 관련 지점에 대한 마커로 사용자 지정 캐시 아이콘 표시
 - 신규: 캐시/지점 아이콘 크기 조정 허용(설정 => 모양 참조)
-- New: Linear labs use numbers as waypoint markers
-- New: Waypoints of a cache show cache type icon as marker
-- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- 신규: 선형 연구소는 숫자를 지점 마커로 사용합니다.
+- 신규: 캐시의 지점은 캐시 유형 아이콘을 마커로 표시합니다.
+- 신규: 지도의 현재 위치에 대한 고도 정보 표시 (설정 => 지도 콘텐츠 및 동작 참조)
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
@@ -20,4 +20,4 @@
 - 신규: 대상 SDK를 33으로 증가
 - 변경: "데이터베이스를 사용할 수 없음" 충돌을 방지하기 위한 데이터베이스 액세스 처리
 - 변경: 기본적으로 기본 설정만 표시됩니다. 설정으로 이동 => 확장 설정을 활성화하는 확장 설정
-- New: Allow filtering in multi selection lists
+- 신규: 다중 선택 목록에서 필터 허용
