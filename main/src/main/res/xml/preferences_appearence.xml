@@ -91,6 +91,31 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/init_iconsizes"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:title="@string/init_mapCacheScaling_title"
+            android:summary="@string/init_mapCacheScaling_description"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_mapCacheScaling"
+            android:defaultValue="100"
+            app:min="50"
+            app:max="200"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:title="@string/init_mapWpScaling_title"
+            android:summary="@string/init_mapWpScaling_description"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_mapWpScaling"
+            android:defaultValue="100"
+            app:min="50"
+            app:max="200"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/init_maplines_title"
         app:iconSpaceReserved="false">
 

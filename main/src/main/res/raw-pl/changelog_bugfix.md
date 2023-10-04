@@ -1,6 +1,6 @@
 ##
 - Nowość: Zwiększono docelowy SDK do 33 (z powodu wymagań Sklepu Play)
-- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
+- Nowość: (tylko Android 13) Dodano uprawnienie „Powiadomienia” – może być konieczne uruchomienie kreatora konfiguracji z ekranu głównego lub ręczne przyznanie uprawnień do powiadomień, aby zobaczyć powiadomienia o pobieraniu
 - Poprawka: Import GPX z wieloma ścieżkami w tym samym pliku
 - Poprawka: Współczynnik ulubionych mógł w szczególnych przypadkach przekroczyć 100%
 - Poprawka: Linia nawigacji znikała przy obracaniu ekranu z Mapami Google

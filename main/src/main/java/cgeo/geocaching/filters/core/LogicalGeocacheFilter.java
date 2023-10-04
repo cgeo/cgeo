@@ -2,10 +2,12 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
 
@@ -16,15 +18,24 @@ public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         //Logical filter has no config
     }
 
     @Override
-    public ExpressionConfig getConfig() {
+    public LegacyFilterConfig getConfig() {
         //Logical filter has no config
         return null;
     }
+
+    public ObjectNode getJsonConfig() {
+        return null;
+    }
+
+    public void setJsonConfig(final ObjectNode config) {
+        //empty on purpose
+    }
+
 
     @Override
     public void addChild(final IGeocacheFilter child) {

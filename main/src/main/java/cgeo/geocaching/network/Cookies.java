@@ -1,6 +1,7 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.settings.DiskCookieStore;
+import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 
@@ -25,12 +26,25 @@ public final class Cookies {
         @Override
         public synchronized void saveFromResponse(@NonNull final HttpUrl url, final List<Cookie> cookies) {
             boolean needStoreUpdate = false;
+            final boolean doLogging = Log.isEnabled(Log.LogLevel.DEBUG);
+            final StringBuilder cookieLogString = doLogging ? new StringBuilder() : null;
             for (final Cookie cookie : cookies) {
                 needStoreUpdate |= addCookie(cookie);
+                if (doLogging) {
+                    cookieLogString.append(";").append(cookie.name()).append("=").append(prepareCookieValueForLog(cookie.value()));
+                }
+            }
+            if (doLogging) {
+                Log.d("HTTP-COOKIES: SAVE for " + url + ": " + cookieLogString);
             }
             if (needStoreUpdate) {
-                DiskCookieStore.setCookieStore(dumpCookieStore());
+                dumpCookieStore();
             }
+        }
+
+        private static String prepareCookieValueForLog(final String value) {
+            return StringUtils.isBlank(value) || value.length() < 50 ? value : value.substring(0, 10) + "#" + value.length() + "#" + value.substring(value.length() - 3);
+
         }
 
         private boolean addCookie(final Cookie cookie) {
@@ -47,12 +61,20 @@ public final class Cookies {
         @NonNull
         public List<Cookie> loadForRequest(@NonNull final HttpUrl url) {
             final List<Cookie> cookies = new LinkedList<>();
+            final boolean doLogging = Log.isEnabled(Log.LogLevel.DEBUG);
+            final StringBuilder cookieLogString = doLogging ? new StringBuilder() : null;
             synchronized (this) {
                 for (final Cookie cookie : allCookies.values()) {
                     if (cookie.matches(url)) {
                         cookies.add(cookie);
+                        if (doLogging) {
+                            cookieLogString.append(";").append(cookie.name()).append("=").append(prepareCookieValueForLog(cookie.value()));
+                        }
                     }
                 }
+            }
+            if (doLogging) {
+                Log.d("HTTP-COOKIES: SEND for " + url + ": " + cookieLogString);
             }
             return cookies;
         }
@@ -78,17 +100,20 @@ public final class Cookies {
             }
         }
 
-        private String dumpCookieStore() {
-            final StringBuilder cookies = new StringBuilder();
+        private void dumpCookieStore() {
+            final StringBuilder persistentCookies = new StringBuilder();
             for (final Cookie cookie : allCookies.values()) {
-                cookies.append(cookie.name());
-                cookies.append('=');
-                cookies.append(cookie.value());
-                cookies.append('=');
-                cookies.append(cookie.domain());
-                cookies.append(';');
+                if (!cookie.persistent()) {
+                    continue;
+                }
+                persistentCookies.append(cookie.name());
+                persistentCookies.append('=');
+                persistentCookies.append(cookie.value());
+                persistentCookies.append('=');
+                persistentCookies.append(cookie.domain());
+                persistentCookies.append(';');
             }
-            return cookies.toString();
+            DiskCookieStore.setCookieStore(persistentCookies.toString());
         }
     }
 

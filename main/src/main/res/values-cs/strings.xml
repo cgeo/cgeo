@@ -2265,6 +2265,8 @@
     <string name="permission_read_external_storage_explanation">c:geo může jako pozadí aplikace použít tapetu vašeho systému. K tomu potřebuje c:geo oprávnění ke čtení multimediálních dat v externím úložišti.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo bude zapisovat data do úložiště telefonu nebo na SD kartu, např. při ukládání keškek pro offline použití, importu nebo exportu souborů a dalších funkcích. V některých verzích systému Android je třeba pro tyto akce udělit další oprávnění.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Starší oprávnění pro zápis do externího úložiště</string>
+    <string name="permission_post_notifications_explanation">c:geo používá oznámení, aby vás informoval o stahování balíčků a blížících se keškách (pokud jsou aktivovány)</string>
+    <string name="permission_post_notifications_explanation_title">Oprávnění k oznámením</string>
     <string name="storage_permission_needed">Tato funkce není možná bez povolení přístupu k úložišti.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Vyberte barevné schéma</string>
@@ -2326,6 +2328,9 @@
     <string name="generating_distance_matrix">Generování matice vzdálenosti</string>
     <string name="running_route_optimizations">Probíhá optimalizace trasy</string>
     <string name="route_optimization_finished">Optimalizace trasy dokončena</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Změněná oprávnění</string>
+    <string name="changed_permissions_info">Systém Android zavedl nové oprávnění vyžadované pomocí c:geo. Spusťte průvodce konfigurací c:geo, abyste toto oprávnění zkontrolovali a získali podrobnější informace. Průvodce můžete spustit buď nyní, nebo později pomocí položky v nabídce na domovské obrazovce c:geo.\n\nChcete spustit průvodce konfigurací nyní?</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>

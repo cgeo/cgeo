@@ -2185,6 +2185,7 @@
     <string name="generating_distance_matrix">Genererar distansmatris</string>
     <string name="running_route_optimizations">Optimering av körrutt</string>
     <string name="route_optimization_finished">Optimering av rutt slutförd</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Ladda spår/rutt från GPX</string>
     <string name="load_track_error">Fel uppstod när spåret/rutten laddades</string>

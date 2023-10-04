@@ -7,11 +7,13 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.BooleanUtils;
 
 public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
@@ -23,7 +25,7 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     private boolean useCurrentPosition;
 
     public DistanceGeocacheFilter() {
-        super(Float::valueOf);
+        super(Float::valueOf, f -> f);
     }
 
     /**
@@ -64,18 +66,35 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         useCurrentPosition = config.getFirstValue(CONFIG_KEY_USE_CURRENT_POS, false, BooleanUtils::toBoolean);
         coordinate = config.getFirstValue(CONFIG_KEY_COORD, null, s -> GeopointParser.parse(s, null));
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = super.getConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_USE_CURRENT_POS, Boolean.toString(useCurrentPosition));
         config.putList(CONFIG_KEY_COORD, coordinate == null ? "-" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, coordinate));
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = super.getJsonConfig();
+        JsonUtils.setBoolean(node, CONFIG_KEY_USE_CURRENT_POS, useCurrentPosition);
+        JsonUtils.setText(node, CONFIG_KEY_COORD, coordinate == null ? null : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, coordinate));
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode config) {
+        super.setJsonConfig(config);
+        useCurrentPosition = JsonUtils.getBoolean(config, CONFIG_KEY_USE_CURRENT_POS, false);
+        final String coordText = JsonUtils.getText(config, CONFIG_KEY_COORD, null);
+        coordinate = coordText == null ? null : GeopointParser.parse(coordText, null);
     }
 
     @Override

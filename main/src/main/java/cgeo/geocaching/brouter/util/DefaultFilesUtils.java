@@ -2,6 +2,7 @@ package cgeo.geocaching.brouter.util;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
@@ -18,13 +19,14 @@ import java.util.List;
 public class DefaultFilesUtils {
 
     private enum DefaultFiles {
-        CAR_ECO(R.raw.routing_car_eco, "car-eco.brf"),
+        CAR_ECO(R.raw.routing_car_eco, BRouterConstants.BROUTER_PROFILE_CAR_DEFAULT),
         CAR_FAST(R.raw.routing_car_fast, "car-fast.brf"),
         FASTBIKE(R.raw.routing_fastbike, "fastbike.brf"),
         MOPED(R.raw.routing_moped, "moped.brf"),
-        SHORTEST(R.raw.routing_shortest, "shortest.brf"),
-        TREKKING(R.raw.routing_trekking, "trekking.brf"),
-        LOOKUPS(R.raw.routing_lookups, "lookups.dat");
+        SHORTEST(R.raw.routing_shortest, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT),
+        TREKKING(R.raw.routing_trekking, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT),
+        DUMMY(R.raw.routing_dummy, BRouterConstants.BROUTER_PROFILE_ELEVATION_ONLY),
+        LOOKUPS(R.raw.routing_lookups, BRouterConstants.BROUTER_LOOKUPS_FILENAME);
 
         @RawRes
         public final int resId;

@@ -314,7 +314,7 @@ dependencies {
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation('com.github.k3b:k3b-geoHelper:v1.1.11') {
+    implementation('com.github.k3b:k3b-geoHelper:1.1.12') {
         // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
         exclude group: 'commons-io', module: 'commons-io'
     }
@@ -423,7 +423,7 @@ dependencies {
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.7'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
     // Support Library Lifecycle Helpers
@@ -680,7 +680,7 @@ checkstyle {
     // assign the checkstyle version explicitly here
     // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
     // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.3.4'
+    toolVersion = '10.12.2'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
@@ -696,6 +696,9 @@ tasks.register('checkstyle', Checkstyle) {
     include '**/*.java'
 
     classpath = files()
+
+    // see https://docs.gradle.org/7.5.1/userguide/upgrading_version_7.html#declare_unreadable_input_output
+    doNotTrackState("unreadable input property 'configDirectory'")
 }
 
 tasks.named('check') {

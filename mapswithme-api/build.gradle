@@ -13,7 +13,7 @@ android {
     defaultConfig {
         minSdk 21
         //noinspection OldTargetApi
-        targetSdk 31
+        targetSdk 33
     }
 
     sourceSets.main {

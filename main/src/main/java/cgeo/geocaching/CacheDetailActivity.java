@@ -1841,7 +1841,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             TextUtils.sortListLocaleAware(items, i -> i.left);
             SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_dialog_title))
                     .setMessage(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
-                    .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, sel -> {
+                    .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, null, false, sel -> {
                            final Map<String, String> toChange = new HashMap<>();
                            for (ImmutableTriple<String, String, String> e : sel) {
                                toChange.put(e.left, e.middle);

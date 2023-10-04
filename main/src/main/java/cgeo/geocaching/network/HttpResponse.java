@@ -3,6 +3,8 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -69,6 +71,11 @@ public class HttpResponse {
         }
     }
 
+    @JsonIgnore
+    public int getStatusCode() {
+        return response == null ? -1 : response.code();
+    }
+
 
     public Response getResponse() {
         return response;
@@ -95,6 +102,12 @@ public class HttpResponse {
             }
         }
         return null;
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        return this.getClass().getName() + ", status=" + getStatusCode() + ", isSuccessful=" + isSuccessful() + ", response = " + response + ", body = " + getBodyString();
     }
 
 }

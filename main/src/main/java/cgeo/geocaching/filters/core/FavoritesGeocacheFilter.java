@@ -4,10 +4,15 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Arrays;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.BooleanUtils;
 
 public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
@@ -17,7 +22,7 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     private boolean percentage = false;
 
     public FavoritesGeocacheFilter() {
-        super(Float::valueOf);
+        super(Float::valueOf, f -> f);
     }
 
     public boolean isPercentage() {
@@ -64,16 +69,30 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         percentage = config.getFirstValue(CONFIG_KEY_PERCENTAGE, false, BooleanUtils::toBoolean);
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = super.getConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_PERCENTAGE, Boolean.toString(percentage));
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = super.getJsonConfig();
+        JsonUtils.setBoolean(node, CONFIG_KEY_PERCENTAGE, percentage);
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode config) {
+        super.setJsonConfig(config);
+        percentage = JsonUtils.getBoolean(config, CONFIG_KEY_PERCENTAGE, false);
     }
 
     @Override

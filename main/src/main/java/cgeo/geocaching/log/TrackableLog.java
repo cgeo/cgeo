@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 public final class TrackableLog {
     public final int ctl;
     public final int id;
-    public final String geocode;
-    public final String trackCode;
+    public final String geocode; // The public one, e.g. starting with "TB" for gc.com trackables
+    public final String trackCode; // The secret one
     public final String name;
     public final TrackableBrand brand;
     public LogTypeTrackable action = LogTypeTrackable.DO_NOTHING; // base.logTrackablesAction - no action

@@ -2264,6 +2264,7 @@
     <string name="generating_distance_matrix">Создание матрицы расстояния</string>
     <string name="running_route_optimizations">Выполняется оптимизация маршрута</string>
     <string name="route_optimization_finished">Оптимизация маршрута завершена</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>

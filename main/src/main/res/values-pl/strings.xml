@@ -2330,6 +2330,9 @@
     <string name="generating_distance_matrix">Generowanie matrycy odległości</string>
     <string name="running_route_optimizations">Uruchamianie optymalizacji trasy</string>
     <string name="route_optimization_finished">Zakończono optymalizację trasy</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Zmienione uprawnienia</string>
+    <string name="changed_permissions_info">Android wprowadził nowe uprawnienia wymagane przez c:geo. Uruchom kreatora konfiguracji c:geo, aby sprawdzić to uprawnienie i uzyskać bardziej szczegółowe informacje. Możesz uruchomić kreatora teraz lub uruchomić go później za pomocą wpisu menu na ekranie głównym c:geo.\n\nCzy chcesz uruchomić kreatora konfiguracji?</string>
     <!-- individual track -->
     <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania śladu/trasy</string>

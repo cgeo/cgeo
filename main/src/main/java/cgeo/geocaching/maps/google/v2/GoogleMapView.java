@@ -462,6 +462,12 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
     }
 
+    public void setElevation(final float elevationFromRouting, final float elevationFromGNSS) {
+        if (distanceDrawer != null) {
+            this.distanceDrawer.setElevation(elevationFromRouting, elevationFromGNSS);
+        }
+    }
+
     public Geopoint getDestinationCoords() {
         if (distanceDrawer != null) {
             return distanceDrawer.getDestinationCoords();

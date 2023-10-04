@@ -84,7 +84,7 @@ public final class ActivityMixin {
     }
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
-        Log.v("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
+        Log.d("[" + context.getClass().getName() + "].showToast(" + text + "){" + toastDuration + "}");
         try {
             final Toast toast = Toast.makeText(context, text, toastDuration);
             if (Build.VERSION.SDK_INT < 30) {

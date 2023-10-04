@@ -2194,6 +2194,7 @@
     <string name="generating_distance_matrix">Génération de la matrice de distance</string>
     <string name="running_route_optimizations">Optimisations de la route en cours</string>
     <string name="route_optimization_finished">Optimisation de la route terminée</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
     <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>

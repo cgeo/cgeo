@@ -45,6 +45,7 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -499,7 +500,7 @@ public class Settings {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
     }
 
-    private static int getInt(final int prefKeyId, final int defaultValue) {
+    public static int getInt(final int prefKeyId, final int defaultValue) {
         return getIntDirect(getKey(prefKeyId), defaultValue);
     }
 
@@ -569,11 +570,15 @@ public class Settings {
     }
 
     private static void putInt(final int prefKeyId, final int value) {
+        putIntDirect(getKey(prefKeyId), value);
+    }
+
+    public static void putIntDirect(final String prefKey, final int value) {
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putInt(getKey(prefKeyId), value);
+        edit.putInt(prefKey, value);
         edit.apply();
     }
 
@@ -697,6 +702,12 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
+    public static boolean enableFeatureNewGCLogApi() {
+        if (contains(R.string.pref_feature_new_gc_log_api)) {
+            return getBoolean(R.string.pref_feature_new_gc_log_api, false);
+        }
+        return !BranchDetectionHelper.isProductionBuild();
+    }
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
@@ -1408,6 +1419,10 @@ public class Settings {
 
     public static boolean isBigSmileysEnabled() {
         return getBoolean(R.string.pref_bigSmileysOnMap, false);
+    }
+
+    public static boolean showElevation() {
+        return getBoolean(R.string.pref_showElevation, false);
     }
 
     /**
@@ -2345,5 +2360,11 @@ public class Settings {
 
     public static boolean removeFromRouteOnLog() {
         return getBoolean(R.string.pref_removeFromRouteOnLog, false);
+    }
+
+    public static boolean checkAndSetLegacyFilterConfigMigrated() {
+        final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
+        putBoolean(R.string.pref_legacy_filter_config_migrated, true);
+        return isMigrated;
     }
 }
