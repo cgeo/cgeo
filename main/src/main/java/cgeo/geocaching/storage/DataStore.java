@@ -3560,6 +3560,21 @@ public class DataStore {
         });
     }
 
+    public static void removeFirstMatchingIdFromIndividualRoute(final String id) {
+        withAccessLock(() -> {
+            init();
+            database.beginTransaction();
+            try {
+                database.delete(dbTableRoute, "precedence = (SELECT precedence FROM " + dbTableRoute + " WHERE id = ? OR id LIKE ? ORDER BY precedence LIMIT 1)", new String[] { id, id + "-%" });
+                database.setTransactionSuccessful();
+            } catch (final Exception e) {
+                Log.e("Saving route failed", e);
+            } finally {
+                database.endTransaction();
+            }
+        });
+    }
+
     public static void appendToIndividualRoute(@NonNull final Collection<Geocache> caches) {
         withAccessLock(() -> {
 

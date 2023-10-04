@@ -597,6 +597,9 @@ public class Geocache implements IWaypoint {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
+            if (Settings.removeFromRouteOnLog()) {
+                DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
+            }
             offlineLog = logEntry;
             notifyChange();
         } else {

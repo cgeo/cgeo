@@ -993,6 +993,8 @@
     <string name="init_brouterProfileWalk">\"Walk\" profile</string>
     <string name="init_brouterProfileBike">\"Bike\" profile</string>
     <string name="init_brouterProfileCar">\"Car\" profile</string>
+    <string name="init_removeFromRouteOnLog">Remove from route on log</string>
+    <string name="init_summary_removeFromRouteOnLog">On sending or storing a log remove the cache from current route.</string>
     <string name="brouter_recalculating">Recalculating route in background…</string>
     <string name="brouter_missing_data">Open BRouter to download missing routing data (%s)</string>
     <string name="init_summary_brouterShowBothDistances">If routing is active: Show the straight distance in addition to the calculated route length.</string>

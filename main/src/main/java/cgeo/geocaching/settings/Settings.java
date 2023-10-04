@@ -2358,6 +2358,10 @@ public class Settings {
         return getBoolean(R.string.pref_extended_settings_enabled, false);
     }
 
+    public static boolean removeFromRouteOnLog() {
+        return getBoolean(R.string.pref_removeFromRouteOnLog, false);
+    }
+
     public static boolean checkAndSetLegacyFilterConfigMigrated() {
         final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
         putBoolean(R.string.pref_legacy_filter_config_migrated, true);
