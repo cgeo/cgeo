@@ -21,3 +21,4 @@
 - Change: Handling of database access to avoid "database not available" crashes
 - Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
 - New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
