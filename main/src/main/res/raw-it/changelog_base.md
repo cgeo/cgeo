@@ -21,3 +21,4 @@
 - Modifica: Gestione dell'accesso al database per evitare i crash "database non disponibile"
 - Modifica: Per impostazione predefinita, verranno visualizzate solo le impostazioni di base. Vai a Impostazioni => Impostazioni avanzate per abilitare le impostazioni avanzate
 - New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
