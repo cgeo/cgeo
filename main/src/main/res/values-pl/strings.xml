@@ -534,6 +534,7 @@
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
     <string name="cache_filter_category">Kategoria BC</string>
     <string name="cache_filter_tier">Poziom BC</string>
+    <string name="cache_filter_named_filter">Nazwany filtr</string>
     <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowe</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
@@ -887,6 +888,8 @@
     <string name="init_brouterProfileWalk">Profil „Pieszo”</string>
     <string name="init_brouterProfileBike">Profil „Rower”</string>
     <string name="init_brouterProfileCar">Profil „Samochód”</string>
+    <string name="init_removeFromRouteOnLog">Usuń z trasy po zalogowaniu</string>
+    <string name="init_summary_removeFromRouteOnLog">Przy wysyłaniu lub zapisaniu dziennika usuń skrytkę z bieżącej trasy.</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
     <string name="brouter_missing_data">Otwórz BRouter, aby pobrać brakujące dane nawigowania (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
