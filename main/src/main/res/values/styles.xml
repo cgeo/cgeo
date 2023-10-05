@@ -37,6 +37,7 @@
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="listPreferredItemHeightSmall">@dimen/radioButtonCheckboxPreferredItemHeight</item>
     </style>
 
     <style name="checkbox_full">
@@ -222,7 +223,7 @@
     </style>
 
     <!-- Chips -->
-    
+
     <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_background_selector</item>
         <item name="android:textColor">@color/chip_textcolor_selector</item>
