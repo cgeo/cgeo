@@ -12,6 +12,7 @@
         <item name="checkboxStyle">@style/checkboxStyle</item>
         <item name="radioButtonStyle">@style/radioButtonStyle</item>
         <item name="materialAlertDialogTheme">@style/materialAlertDialogTheme</item>
+        <item name="android:textAppearanceMedium">@style/text_default</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
 
         <!-- set Material theme colors -->

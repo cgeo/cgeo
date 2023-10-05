@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -467,7 +468,7 @@ public class SimpleDialog {
             @Override
             public View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
                 final int originalPos = getItem(position);
-                final View v = convertView != null ? convertView : LayoutInflater.from(getContext()).inflate(R.layout.select_dialog_multichoice_material, parent, false);
+                final View v = convertView != null ? convertView : LayoutInflater.from(new ContextThemeWrapper(getContext(), R.style.checkboxStyleNoParent)).inflate(R.layout.select_dialog_multichoice_material, parent, false);
                 final CheckedTextView tv = v.findViewById(android.R.id.text1);
                 tv.setText(itemTexts[originalPos]);
                 tv.setChecked(itemSelects[originalPos]);
