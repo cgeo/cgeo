@@ -21,3 +21,4 @@
 - Änderung: Art des Datenbankzugriffs optimiert, um Abstürze zu vermeiden, wenn die Datenbank nicht verfügbar ist
 - Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
 - New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
