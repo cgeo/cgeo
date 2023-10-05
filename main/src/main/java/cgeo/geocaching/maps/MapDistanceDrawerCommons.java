@@ -10,7 +10,7 @@ package cgeo.geocaching.maps;
  * - distances1/distances2 placeholder will be filled with straight distance, routed distance,
  *   individual route length and elevation info (depending on settings and current data)
  * - By tapping on any of the distance fields either straight or routed distance can be supersized.
- *   It gets removed from the distance view containers and displayed in a larger font:
+ *   It gets removed from the distance view containers and displayed in a larger font
  * - Tapping on the supersized window toggles between real distance supersized, straight distance
  *   supersized (depending on availability) and no supersize
  */
@@ -57,14 +57,15 @@ public class MapDistanceDrawerCommons {
     }
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
+        final boolean routingModeStraight = Settings.getRoutingMode() == RoutingMode.STRAIGHT;
         this.showBothDistances = showBothDistances;
         this.distance = distance;
         this.realDistance = realDistance;
-        final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
+        final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && !routingModeStraight;
         bothViewsNeeded = showBothDistances && showRealDistance;
 
         realDistanceInfo = showRealDistance ? (showBothDistances ? WAVY_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(realDistance) : "";
-        distanceInfo = bothViewsNeeded && distance > 0.0f ? (showBothDistances ? STRAIGHT_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(distance) : "";
+        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? (showBothDistances ? STRAIGHT_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(distance) : "";
         routingInfo = routeDistance > 0.0f ? Units.getDistanceFromKilometers(routeDistance) : "";
         updateDistanceViews();
     }
