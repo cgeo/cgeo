@@ -666,7 +666,6 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
     private void configureProximityNotifications() {
         // reconfigure, but only if necessary
         proximityNotification = Settings.isGeneralProximityNotificationActive() ? proximityNotification != null ? proximityNotification : new ProximityNotification(true, false) : null;
-        Log.e("configured pn");
     }
 
     private void switchTileLayer(final MapSource newSource) {
