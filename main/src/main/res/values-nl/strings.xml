@@ -524,6 +524,7 @@
     <string name="cache_filter_stored_since">Laatste details update</string>
     <string name="cache_filter_category">BC categorie</string>
     <string name="cache_filter_tier">BC Laag</string>
+    <string name="cache_filter_named_filter">Benoemde filter</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -875,6 +876,8 @@
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
+    <string name="init_removeFromRouteOnLog">Verwijder uit de route bij het logboek</string>
+    <string name="init_summary_removeFromRouteOnLog">Bij het verzenden of opslaan van een log verwijder de cache van de huidige route.</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="brouter_missing_data">Open BRouter om ontbrekende routeringsgegevens te downloaden (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
