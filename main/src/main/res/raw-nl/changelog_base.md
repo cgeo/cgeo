@@ -20,5 +20,5 @@
 - Nieuw: Doel SDK opgehoogd naar 33
 - Wijziging: Afhandeling van databasetoegang om crashes met "database niet beschikbaar" te voorkomen
 - Wijziging: Alleen basisinstellingen worden standaard weergegeven. Ga naar Instellingen => Uitgebreide instellingen om uitgebreide instellingen in te schakelen
-- New: Allow filtering in multi selection lists
-- New: Filter to include other named (stored) filters
+- Nieuw: Filteren in multiselect lijsten toestaan
+- Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
