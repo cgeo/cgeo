@@ -118,7 +118,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     }
 
     private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
-        customBNitem.setSummary(newValue);
+        customBNitem.setSummary(String.format(getString(R.string.init_custombnitem_description), newValue));
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {
