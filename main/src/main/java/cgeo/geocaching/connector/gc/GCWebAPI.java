@@ -1423,7 +1423,9 @@ public class GCWebAPI {
         //1.) Call log page and get a valid CSRF Token
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/geocache/" + geocode + "/log");
         if (csrfToken == null) {
-            return generateLogError(false, "Lost Post: unable to find a CSRF Token in Log Page");
+            //try old log flow
+            Log.w("Log Post: unable to extract CSRF Token in new Log Flow Page");
+            return postLog(geocache, logType, date, log, trackables, addToFavorites);
         }
 
         //2,) Fill Log Entry object and post it
@@ -1459,7 +1461,9 @@ public class GCWebAPI {
         //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
         if (csrfToken == null) {
-            return generateLogError(true, "Problem getting CSRF-Token");
+            //try old log flow
+            Log.w("Log Image Post: unable to extract CSRF Token in new Log Flow Page");
+            return postLogImage(geocode, logId, image);
         }
 
         //2) Create a new "image" attached to the log, uploading only image data
@@ -1506,7 +1510,9 @@ public class GCWebAPI {
         //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
         if (csrfToken == null) {
-            return generateLogError(false, "Problem getting CSRF-Token");
+            //try old log flow
+            Log.w("Log Trackable Post: unable to extract CSRF Token in new Log Flow Page");
+            return null; // this will trigger trying old log flow
         }
 
         //2,) Fill Trackable Log Entry object and post it
@@ -1539,11 +1545,12 @@ public class GCWebAPI {
     }
 
     private static String getCsrfTokenFromUrl(final String url) {
-        final String html =
-                httpReq().uri(url).request().blockingGet().getBodyString();
+        final HttpResponse htmlResp =
+                httpReq().uri(url).request().blockingGet();
+        final String html = htmlResp.getBodyString();
         final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
-        if (csrfToken == null) {
-            Log.w("Lost Post: unable to find a CSRF Token in Log Page '" + url + "'");
+        if (!htmlResp.isSuccessful() || csrfToken == null) {
+            Log.w("Log Post: unable to find a CSRF Token in Log Page '" + url + "':" + htmlResp);
             return null;
         }
         return csrfToken;

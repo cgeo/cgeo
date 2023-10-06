@@ -73,7 +73,10 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
         if (Settings.enableFeatureNewGCLogApi()) {
             final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackableNew(trackableLog, date.getTime(), log);
-            return new LogResult(result.left, result.right);
+            //if result is null then old log flow shall be used. If result is non-null then new log flow was used
+            if (result != null) {
+                return new LogResult(result.left, result.right);
+            }
         }
 
         try {
