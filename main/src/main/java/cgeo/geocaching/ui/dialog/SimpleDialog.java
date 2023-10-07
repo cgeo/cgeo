@@ -638,7 +638,7 @@ public class SimpleDialog {
     @NotNull
     private ListAdapter createListAdapterSingle(@NotNull final List<TextParam> items, final SingleChoiceMode showMode, final Func1<Integer, Integer> groupMapper) {
 
-        final LayoutInflater inflater = LayoutInflater.from(getContext());
+        final LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(getContext(), R.style.text_default)); // fixes text size
 
         return new ArrayAdapter<TextParam>(
                 getContext(),
