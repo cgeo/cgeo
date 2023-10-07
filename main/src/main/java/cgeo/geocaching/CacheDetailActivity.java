@@ -741,6 +741,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                 notifyDataSetChanged();
             }));
+        } else if (menuItem == R.id.menu_add_to_route) {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.appendToIndividualRoute(cache.getWaypoints()), () -> ActivityMixin.showShortToast(this, R.string.waypoints_appended_to_route));
         } else if (menuItem == R.id.menu_export_gpx) {
             new GpxExport().export(Collections.singletonList(cache), this, cache.getName());
         } else if (menuItem == R.id.menu_export_fieldnotes) {
