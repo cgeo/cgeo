@@ -459,6 +459,7 @@
     <string name="caches_append_to_route_selected">Append selected to individual route</string>
     <string name="caches_append_to_route_all">Append all to individual route</string>
     <string name="caches_appended_to_route">Caches appended to route</string>
+    <string name="waypoints_appended_to_route">Waypoints appended to route</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_upload_bookmarklist">Add to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>

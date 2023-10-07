@@ -131,6 +131,10 @@
                 android:title="@string/clear_goto_history_title"
                 android:visible="false">
             </item>
+            <item
+                android:id="@+id/menu_add_to_route"
+                android:title="@string/caches_append_to_route_all"
+                app:showAsAction="ifRoom|withText"/>
         </menu>
     </item>
     <item
