@@ -2406,6 +2406,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
+    <string name="failed_creating_shortcut">Failed to create shortcut</string>
     <string name="send">Send</string>
 
     <string name="confirm_log_title">Special log type</string>
