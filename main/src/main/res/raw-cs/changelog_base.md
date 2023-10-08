@@ -15,10 +15,12 @@
 - Novinka: Integrace Bettercacher
 - Novinka: Synchronizace navštíveného stavu při synchronizaci trasových bodů s osobní poznámkou
 - Novinka: Získání data nálezu pro kešky založené na službě Opencaching
+- Novinka: Přidání všech trasových bodů k jednotlivým trasám
 
 ### Obecné
 - Novinka: Zvýšeno cílové SDK na 33
 - Změna: Zpracování přístupu k databázi, aby se zabránilo pádům "databáze není k dispozici"
 - Změna: Ve výchozím nastavení se zobrazí pouze základní nastavení. Přejděte do Nastavení => Rozšířená nastavení a povolte rozšířené nastavení
 - Nové: Umožněno filtrování v seznamech s vícenásobným výběrem
-- New: Filter to include other named (stored) filters
+- Novinka: Filtr pro zahrnutí ostatních pojmenovaných (uložených) filtrů
+- Změna: Odstraněn AndroidBeam, který již není podporován platformou Android
