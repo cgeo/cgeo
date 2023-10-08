@@ -15,6 +15,7 @@
 - Nieuw: Bettercacher integratie
 - Nieuw: Synchroniseer bezocht status bij het synchroniseren van waypoints met persoonlijke notitie
 - Nieuw: Haal datum gevonden op voor Opencaching-gebaseerde caches
+- New: Append all waypoints to individual route
 
 ### Algemeen
 - Nieuw: Doel SDK opgehoogd naar 33
@@ -22,3 +23,4 @@
 - Wijziging: Alleen basisinstellingen worden standaard weergegeven. Ga naar Instellingen => Uitgebreide instellingen om uitgebreide instellingen in te schakelen
 - Nieuw: Filteren in multiselect lijsten toestaan
 - Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
+- Change: Removed AndroidBeam which is no longer supported by Android platform
