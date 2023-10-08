@@ -132,7 +132,9 @@ public class ProximityNotification implements Parcelable {
         if (useTextNotifications) {
             final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.PROXIMITY_NOTIFICATION.name())
                     .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
-                    .setContentTitle(context.getString(R.string.notification_proximity_title))
+                    // deliberately set notification info to both title and content, as some devices
+                    // show title first (and content is cut off)
+                    .setContentTitle(notification)
                     .setContentText(notification)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
                     .setPriority(NotificationCompat.PRIORITY_HIGH)

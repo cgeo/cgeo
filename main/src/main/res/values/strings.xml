@@ -2539,7 +2539,6 @@
     <string name="notification_channel_downloader_description">result notifications for downloads (e.g. offline maps)</string>
     <string name="notification_channel_cache_download_name">cache downloader</string>
     <string name="notification_channel_cache_download_description">result notifications for caches background downloads</string>
-    <string name="notification_proximity_title">c:geo proximity notification</string>
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->
