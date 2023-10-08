@@ -15,6 +15,7 @@
 - New: Bettercacher integration
 - New: Sync visited state on synchronizing waypoints to personal note
 - New: Retrieve found date for Opencaching-based caches
+- New: Append all waypoints to individual route
 
 ### General
 - New: Increased target SDK to 33
