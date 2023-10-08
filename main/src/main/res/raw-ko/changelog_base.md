@@ -15,6 +15,7 @@
 - 신규: Bettercacher 통합
 - 신규: 지점을 개인 메모에 동기화할 때 방문 상태를 동기화합니다.
 - 신규: Opencaching 기반 캐시의 찾음 날짜 검색
+- New: Append all waypoints to individual route
 
 ### 일반
 - 신규: 대상 SDK를 33으로 증가
@@ -22,3 +23,4 @@
 - 변경: 기본적으로 기본 설정만 표시됩니다. 설정으로 이동 => 확장 설정을 활성화하는 확장 설정
 - 신규: 다중 선택 목록에서 필터 허용
 - New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
