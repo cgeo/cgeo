@@ -15,10 +15,12 @@
 - Neu: Bettercacher Integration
 - Neu: Synchronisiere "besucht"-Status beim Synchronisieren von Wegpunkten mit persönlicher Notiz
 - Neu: Funddatum für Opencaching-basierte Caches anzeigen
+- Neu: Alle Wegpunkte an individuelle Route anhängen
 
 ### Allgemein
 - Neu: targetSDK auf 33 erhöht
 - Änderung: Art des Datenbankzugriffs optimiert, um Abstürze zu vermeiden, wenn die Datenbank nicht verfügbar ist
 - Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
-- New: Allow filtering in multi selection lists
-- New: Filter to include other named (stored) filters
+- Neu: Filtern in Mehrfachauswahllisten
+- Neu: Filter zum Einbinden benannter (gespeicherter) Filter
+- Change: Removed AndroidBeam which is no longer supported by Android platform
