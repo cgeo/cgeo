@@ -905,7 +905,6 @@
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
-    <string name="init_custombnitem">사용자 정의 메뉴 항목</string>
     <string name="init_custombnitem_default">주변 검색 (기본값)</string>
     <string name="init_custombnitem_none">(없음)</string>
     <string name="init_custombnitem_empty_placeholder">(빈 자리 표시자)</string>
