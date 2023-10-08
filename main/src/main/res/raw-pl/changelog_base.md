@@ -15,6 +15,7 @@
 - Nowość: Integracja z Bettercacher
 - Nowość: Synchronizacja stanu odwiedzin podczas synchronizacji punktów nawigacji z notatką osobistą
 - Nowość: Pobierz datę znalezienia skrytek Opencaching
+- Nowość: Dołącz wszystkie punkty nawigacji do indywidualnej trasy
 
 ### Ogólne
 - Nowość: Zwiększony docelowy SDK do 33
@@ -22,3 +23,4 @@
 - Zmiana: Domyślnie będą wyświetlane tylko podstawowe ustawienia. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
 - Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
 - Nowość: Filtr, który pozwala na dołączenie innych nazwanych (zapisanych) filtrów
+- Zmiana: Usunięto AndroidBeam, który nie jest już obsługiwany przez platformę Android
