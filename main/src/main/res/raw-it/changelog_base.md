@@ -15,6 +15,7 @@
 - Nuovo: Integrazione con Bettercacher
 - Nuovo: Sincronizza lo stato visitato con la sincronizzazione dei waypoint nella nota personale
 - Nuovo: Recupera la data del ritrovamento dei cache basati su Opencaching
+- New: Append all waypoints to individual route
 
 ### Generale
 - Nuovo: Obiettivo SDK aumentato a 33
@@ -22,3 +23,4 @@
 - Modifica: Per impostazione predefinita, verranno visualizzate solo le impostazioni di base. Vai a Impostazioni => Impostazioni avanzate per abilitare le impostazioni avanzate
 - New: Allow filtering in multi selection lists
 - New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
