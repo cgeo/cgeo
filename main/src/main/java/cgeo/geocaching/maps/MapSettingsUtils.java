@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.databinding.MapSettingsDialogBinding;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -17,6 +18,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.LayoutInflater;
@@ -38,6 +40,7 @@ import java.util.Objects;
 import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
@@ -51,6 +54,7 @@ public class MapSettingsUtils {
     }
 
     // splitting up that method would not help improve readability
+    @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
         isShowCircles = Settings.isShowCircles();
@@ -103,6 +107,21 @@ public class MapSettingsUtils {
         final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+        }
+
+        // routing profile legend for user-defined entries
+        final StringBuilder sb = new StringBuilder();
+        final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
+        if (StringUtils.isNotBlank(temp1)) {
+            sb.append("1: ").append(temp1);
+        }
+        final String temp2 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER2), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
+        if (StringUtils.isNotBlank(temp2)) {
+            sb.append(StringUtils.isNotBlank(sb) ? " - " : "").append("2: ").append(temp2);
+        }
+        if (StringUtils.isNotBlank(sb)) {
+            dialogView.routingProfileinfo.setVisibility(View.VISIBLE);
+            dialogView.routingProfileinfo.setText("(" + sb + ")");
         }
 
         if (showAutotargetIndividualRoute || showPNMastertoggle) {

@@ -13,7 +13,9 @@ public enum RoutingMode {
     STRAIGHT("straight", R.string.routingmode_straight, R.id.routing_straight),
     WALK("foot", R.string.routingmode_walk, R.id.routing_walk),
     BIKE("bicycle", R.string.routingmode_bike, R.id.routing_bike),
-    CAR("motorcar", R.string.routingmode_car, R.id.routing_car);
+    CAR("motorcar", R.string.routingmode_car, R.id.routing_car),
+    USER1("user1", R.string.routingmode_user1, R.id.routing_user1),
+    USER2("user2", R.string.routingmode_user2, R.id.routing_user2);
 
     @NonNull
     public final String parameterValue;

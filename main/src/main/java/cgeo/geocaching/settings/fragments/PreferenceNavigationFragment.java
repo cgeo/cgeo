@@ -109,6 +109,8 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
         updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values);
         updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values);
         updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, entries, values);
     }
 
     private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values) {

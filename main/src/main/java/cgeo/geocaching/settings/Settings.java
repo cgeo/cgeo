@@ -1388,6 +1388,10 @@ public class Settings {
             return getString(R.string.pref_brouterProfileBike, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT);
         } else if (mode.equals(RoutingMode.WALK)) {
             return getString(R.string.pref_brouterProfileWalk, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT);
+        } else if (mode.equals(RoutingMode.USER1)) {
+            return getString(R.string.pref_brouterProfileUser1, null);
+        } else if (mode.equals(RoutingMode.USER2)) {
+            return getString(R.string.pref_brouterProfileUser2, null);
         } else {
             return null;
         }
