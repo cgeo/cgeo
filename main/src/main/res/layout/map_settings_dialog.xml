@@ -104,6 +104,16 @@
                 android:id="@+id/routing_car"
                 style="@style/button_icon_accent"
                 app:icon="@drawable/routing_car" />
+
+            <Button
+                android:id="@+id/routing_user1"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/number_one" />
+
+            <Button
+                android:id="@+id/routing_user2"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/number_two" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <ImageView
@@ -113,6 +123,14 @@
             android:src="@drawable/ic_info_blue"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@id/routing_tooglegroup"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/routing_profileinfo"
+            style="@style/text_default"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            android:text="@string/map_routing"
+            android:layout_below="@id/routing_tooglegroup"
             android:visibility="gone"/>
     </RelativeLayout>
 

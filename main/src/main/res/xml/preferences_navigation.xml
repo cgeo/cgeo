@@ -82,6 +82,16 @@
             android:key="@string/pref_brouterProfileCar"
             android:title="@string/init_brouterProfileCar"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:dialogTitle="@string/init_brouterProfileUser"
+            android:key="@string/pref_brouterProfileUser1"
+            android:title="@string/init_brouterProfileUser"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:dialogTitle="@string/init_brouterProfileUser"
+            android:key="@string/pref_brouterProfileUser2"
+            android:title="@string/init_brouterProfileUser"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="false"
