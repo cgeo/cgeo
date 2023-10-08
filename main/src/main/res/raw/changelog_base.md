@@ -23,3 +23,4 @@
 - Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
 - New: Allow filtering in multi selection lists
 - New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
