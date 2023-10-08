@@ -911,7 +911,6 @@
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
     <string name="init_summary_quicklaunchitems">Seleziona uno o più elementi come pulsanti di avvio rapido nella schermata iniziale</string>
-    <string name="init_custombnitem">Voce Menu Personalizzata</string>
     <string name="init_custombnitem_default">Ricerca nelle vicinanze (predefinita)</string>
     <string name="init_custombnitem_none">(nessuno)</string>
     <string name="init_custombnitem_empty_placeholder">(segnaposto vuoto)</string>
