@@ -19,17 +19,6 @@
             android:padding="4dip"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/warning"
-                style="@style/text_default"
-                android:gravity="center"
-                android:textColor="@color/archived_cache_color"
-                android:text="Note: using new gc.com log API"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

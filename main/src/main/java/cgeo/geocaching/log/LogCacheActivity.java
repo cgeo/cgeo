@@ -204,9 +204,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
-        if (Settings.enableFeatureNewGCLogApi()) {
-            binding.warning.setVisibility(View.VISIBLE);
-        }
 
         date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type).setDisplayMapper(LogType::getL10n);
