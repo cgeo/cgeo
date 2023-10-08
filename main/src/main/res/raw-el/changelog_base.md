@@ -15,6 +15,7 @@
 - New: Bettercacher integration
 - New: Sync visited state on synchronizing waypoints to personal note
 - New: Retrieve found date for Opencaching-based caches
+- New: Append all waypoints to individual route
 
 ### Γενικά
 - New: Increased target SDK to 33
@@ -22,3 +23,4 @@
 - Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
 - New: Allow filtering in multi selection lists
 - New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
