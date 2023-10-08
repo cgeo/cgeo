@@ -429,6 +429,7 @@
     <string name="caches_append_to_route_selected">Připojit vybrané k individuální trase</string>
     <string name="caches_append_to_route_all">Připojit všechny k individuální trase</string>
     <string name="caches_appended_to_route">Kešky připojené k trase</string>
+    <string name="waypoints_appended_to_route">Trasové body připojené k trase</string>
     <string name="caches_delete_events">Odstranit staré události</string>
     <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
@@ -534,6 +535,7 @@
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
     <string name="cache_filter_category">Kategorie BC</string>
     <string name="cache_filter_tier">Úroveň BC</string>
+    <string name="cache_filter_named_filter">Pojmenovaný filtr</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
@@ -887,6 +889,8 @@
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
+    <string name="init_removeFromRouteOnLog">Odstranit z trasy při zalogování</string>
+    <string name="init_summary_removeFromRouteOnLog">Po odeslání nebo uložení logu odstraní kešku z aktuální trasy.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="brouter_missing_data">Otevřete BRouter ke stažení chybějících směrovacích dat (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
@@ -924,6 +928,7 @@
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <string name="init_custombnitem">Vlastní položka nabídky</string>
+    <string name="init_custombnitem_description">Pravá nejspodnější položka navigačního menu:\n%s</string>
     <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
     <string name="init_custombnitem_none">(žádné)</string>
     <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
