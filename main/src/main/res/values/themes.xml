@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- theme for (nearly) all activities -->
 
     <style name="cgeo" parent="Theme.Material3.DayNight">
         <!-- Action bar theming -->
         <item name="actionBarStyle">@style/actionBarStyle</item>
-        <item name="android:statusBarColor">@color/md_theme_surface</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">@bool/isLightTheme</item>
+<!--        <item name="android:statusBarColor">@color/md_theme_surface</item>-->
+<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">@bool/isLightTheme</item>-->
 
         <!-- UX component styles (some components doesn't look good enough by default, e.g. checkboxes/radiobuttons have to much padding) -->
         <item name="checkboxStyle">@style/checkboxStyle</item>
         <item name="radioButtonStyle">@style/radioButtonStyle</item>
 
         <!-- some components aren't fully compatible with AppCompat/Material, therefore we need these legacy style definitions -->
-        <item name="alertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog</item>
         <item name="dialogCornerRadius">@dimen/dialogCornerRadius</item>
         <item name="android:spinnerStyle">@style/spinnerStyle</item>
         <item name="android:indeterminateTint">@color/md_theme_primary</item>

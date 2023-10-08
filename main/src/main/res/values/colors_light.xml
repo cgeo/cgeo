@@ -5,13 +5,13 @@
 
     <!-- light theme-specific colors only -->
 
-    <!-- material theme (generated via https://m3.material.io/theme-builder#/custom based on color accent #F5981D as input) -->
+    <!-- material theme colors generated via https://m3.material.io/theme-builder#/custom based on color accent #F5981D as input (modified) -->
 
-    <color name="md_theme_primary">#895100</color>
+    <color name="md_theme_primary">#F5981D</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#FFDCBD</color>
     <color name="md_theme_onPrimaryContainer">#2C1600</color>
-    <color name="md_theme_secondary">#725A42</color>
+    <color name="md_theme_secondary">#FF666666</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
     <color name="md_theme_secondaryContainer">#FEDDBE</color>
     <color name="md_theme_onSecondaryContainer">#291806</color>
@@ -19,7 +19,7 @@
     <color name="md_theme_onTertiary">#FFFFFF</color>
     <color name="md_theme_tertiaryContainer">#DBE8B5</color>
     <color name="md_theme_onTertiaryContainer">#151F01</color>
-    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_error">#FFAC0B0B</color>
     <color name="md_theme_errorContainer">#FFDAD6</color>
     <color name="md_theme_onError">#FFFFFF</color>
     <color name="md_theme_onErrorContainer">#410002</color>

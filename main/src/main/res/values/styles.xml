@@ -78,6 +78,7 @@
     <style name="actionBarStyle" parent="Widget.Material3.ActionBar.Solid">
         <item name="titleTextStyle">@style/action_bar_title</item>
         <item name="subtitleTextStyle">@style/action_bar_subtitle</item>
+        <item name="background">@color/md_theme_surfaceVariant</item>
     </style>
 
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -100,7 +101,7 @@
 
     <!-- buttons -->
 
-    <style name="button" parent="@style/Widget.Material3.Button.TonalButton">
+    <style name="button" parent="@style/Widget.Material3.Button.OutlinedButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">6dip</item>
@@ -175,7 +176,7 @@
         <item name="iconSize">30dp</item>
     </style>
 
-    <style name="button_icon" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+    <style name="button_icon" parent="Widget.Material3.Button.IconButton.Outlined">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>

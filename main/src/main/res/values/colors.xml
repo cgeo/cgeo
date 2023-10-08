@@ -27,7 +27,7 @@
 
     <color name="archived_cache_color">@color/md_theme_error</color>
 
-    <color name="colorTextHint">@color/md_theme_secondary</color><!-- todo discus whether brows is appreciated if it should be changed back to #FF666666 / #A0CCCCCC -->
+    <color name="colorTextHint">@color/md_theme_secondary</color>
 
     <!-- default colors for map lines -->
 

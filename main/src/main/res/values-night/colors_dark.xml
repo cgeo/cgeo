@@ -5,13 +5,13 @@
 
     <!-- dark theme-specific colors only -->
 
-    <!-- material theme (generated via https://m3.material.io/theme-builder#/custom based on color accent #F5981D as input) -->
+    <!-- material theme colors generated via https://m3.material.io/theme-builder#/custom based on color accent #F5981D as input (modified) -->
 
-    <color name="md_theme_primary">#FFB86D</color>
+    <color name="md_theme_primary">#F5981D</color>
     <color name="md_theme_onPrimary">#492900</color>
-    <color name="md_theme_primaryContainer">#683C00</color>
-    <color name="md_theme_onPrimaryContainer">#FFDCBD</color>
-    <color name="md_theme_secondary">#E1C1A3</color>
+    <color name="md_theme_primaryContainer">#6E6252</color>
+    <color name="md_theme_onPrimaryContainer">#FFF4EB</color>
+    <color name="md_theme_secondary">#A0CCCCCC</color>
     <color name="md_theme_onSecondary">#402C18</color>
     <color name="md_theme_secondaryContainer">#59422C</color>
     <color name="md_theme_onSecondaryContainer">#FEDDBE</color>
@@ -19,13 +19,13 @@
     <color name="md_theme_onTertiary">#2A3411</color>
     <color name="md_theme_tertiaryContainer">#404B25</color>
     <color name="md_theme_onTertiaryContainer">#DBE8B5</color>
-    <color name="md_theme_error">#FFB4AB</color>
+    <color name="md_theme_error">#FFEA0000</color>
     <color name="md_theme_errorContainer">#93000A</color>
     <color name="md_theme_onError">#690005</color>
     <color name="md_theme_onErrorContainer">#FFDAD6</color>
-    <color name="md_theme_background">#201B16</color>
+    <color name="md_theme_background">#201E1C</color>
     <color name="md_theme_onBackground">#EBE1D9</color>
-    <color name="md_theme_surface">#201B16</color>
+    <color name="md_theme_surface">#221F1D</color>
     <color name="md_theme_onSurface">#EBE1D9</color>
     <color name="md_theme_surfaceVariant">#50453A</color>
     <color name="md_theme_onSurfaceVariant">#D5C3B5</color>
