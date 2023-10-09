@@ -425,6 +425,7 @@
     <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
     <string name="caches_append_to_route_all">Voeg alle geselecteerden aan individuele route toe</string>
     <string name="caches_appended_to_route">Caches toegevoegd aan route</string>
+    <string name="waypoints_appended_to_route">Waypoints toegevoegd aan route</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
@@ -914,6 +915,8 @@
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
+    <string name="init_custombnitem">Aangepast Menu-Item</string>
+    <string name="init_custombnitem_description">Meest rechtsonder navigatie menu-item:\n%s</string>
     <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
     <string name="init_custombnitem_none">(geen)</string>
     <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
