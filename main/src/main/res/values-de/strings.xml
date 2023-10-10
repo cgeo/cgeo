@@ -87,10 +87,29 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generiert</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Unbekannt</string>
+    <string name="cache_cat_bc_nature">Natur</string>
+    <string name="cache_cat_bc_location">Ort</string>
+    <string name="cache_cat_bc_recommended">Empfohlen</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mystery</string>
+    <string name="cache_cat_bc_hiking">Wanderung</string>
+    <string name="cache_cat_bc_other">Sonstiges</string>
+    <string name="cache_cat_desc_bc_nature">Umgeben von einer besonderen Natur</string>
+    <string name="cache_cat_desc_bc_location">Zeigt einen tollen Ort</string>
+    <string name="cache_cat_desc_bc_recommended">Vom BetterCacher-Team empfohlen</string>
+    <string name="cache_cat_desc_bc_gadget">Besonderes Handwerk, cooles Gadget, etc</string>
+    <string name="cache_cat_desc_bc_mystery">Ein außergewöhnliches und herausforderndes Puzzle</string>
+    <string name="cache_cat_desc_bc_hiking">Bietet eine ausgezeichnete Wanderung</string>
+    <string name="cache_cat_desc_bc_other">Etwas anderes - Schaue dir die Logs an</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Keine</string>
     <string name="cache_tier_bc_blue">Blau</string>
     <string name="cache_tier_bc_silver">Silber</string>
     <string name="cache_tier_bc_gold">Gold</string>
+    <string name="cache_tier_desc_bc_blue">Standard-Stufe für gelistete Caches</string>
+    <string name="cache_tier_desc_bc_silver">Vom BetterCacher-Team besucht, automatisch vergeben</string>
+    <string name="cache_tier_desc_bc_gold">Besonderer Cache mit Empfehlung vom BetterCacher-Team</string>
     <!-- logs -->
     <string name="log_found">Gefunden</string>
     <string name="log_dnf">Nicht gefunden</string>
@@ -406,6 +425,7 @@
     <string name="caches_append_to_route_selected">Ausgewählte an Route anhängen</string>
     <string name="caches_append_to_route_all">Alle an Route anhängen</string>
     <string name="caches_appended_to_route">Caches an Route angehängt</string>
+    <string name="waypoints_appended_to_route">Wegpunkte an die Route angehängt</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
     <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
@@ -503,6 +523,9 @@
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
+    <string name="cache_filter_category">BC-Kategorie</string>
+    <string name="cache_filter_tier">BC-Stufe</string>
+    <string name="cache_filter_named_filter">Benannter Filter</string>
     <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -578,6 +601,7 @@
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Caches ohne D/T einbeziehen</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Mit gc.com füllen</string>
     <string name="cache_filter_nested_filter_modify">Bearbeiten</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Der Unter-Filter ist aktuell leer</string>
     <string name="cache_filter_log_entry_foundby">Gefunden von</string>
@@ -832,6 +856,7 @@
     <string name="init_signature_template_geocode">Geocode</string>
     <string name="init_ratingwanted">GCVote-Bewertung</string>
     <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCVote.com</string>
+    <string name="init_summary_bettercacher">Cache-Einstufung und -Kategorien von BetterCacher.org laden</string>
     <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zeige zusätzliche Logbuchseite für Logs von dir und deinen Freunden</string>
     <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
@@ -852,6 +877,8 @@
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
+    <string name="init_removeFromRouteOnLog">Von Route entfernen bei Log</string>
+    <string name="init_summary_removeFromRouteOnLog">Beim Senden oder Speichern eines Logs den Cache von der aktuellen Route entfernen.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
     <string name="brouter_missing_data">BRouter öffnen, um fehlende Routingdaten herunterzuladen (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Wenn Wegführung aktiv ist: Zeigt neben der berechneten Routenlänge die Entfernung in Luftlinie an.</string>
@@ -861,6 +888,8 @@
     <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden Symbole wie \'Gefunden\' oder \'Korrigierte Koordination\' auf der Karte vergrößert anstelle des Cache-Typ-Symbols angezeigt.</string>
     <string name="init_dtMarkerOnCacheIcon">D/T-Bewertung in Cache-Symbolen</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zeige eine Markierung für die Schwierigkeitswertung (links) und die Geländewertung (rechts) von Caches in der oberen rechten Ecke (\"Gespeichert\"-Markierung wird in die Mitte verschoben).</string>
+    <string name="init_showElevation">Höhe anzeigen</string>
+    <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
@@ -887,6 +916,7 @@
     <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
     <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <string name="init_custombnitem">Benutzerdefinierter Menüeintrag</string>
+    <string name="init_custombnitem_description">Letzter Punkt in Hauptnavigation unten:\n%s</string>
     <string name="init_custombnitem_default">Suche in der Nähe (Standard)</string>
     <string name="init_custombnitem_none">(keiner)</string>
     <string name="init_custombnitem_empty_placeholder">(leerer Platzhalter)</string>
@@ -1045,6 +1075,11 @@
     <string name="init_mapShadingLinearity_description">Kleine Werte betonen den Kontrast in steilen Hängen aber verbergen Unterschiede in der Ebene, große Werte sind linearer</string>
     <string name="init_mapShadingScale_title">Schattierungsdeckkraft</string>
     <string name="init_mapShadingScale_description">Deckkraft der Schattierungsebene, von unsichtbar über höhere Werte zunehmend intensiver, kann aber Artefakte hervorbringen</string>
+    <string name="init_iconsizes">Symbolgrößen</string>
+    <string name="init_mapCacheScaling_title">Skalierung Cachesymbole</string>
+    <string name="init_mapCacheScaling_description">Skalierungsfaktor für Cachesymbole (in %)</string>
+    <string name="init_mapWpScaling_title">Skalierung Wegpunktsymbole</string>
+    <string name="init_mapWpScaling_description">Skalierungsfaktor für Wegpunktsymbole (in %)</string>
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
@@ -1406,6 +1441,7 @@
     <string name="cache_favorite">Favorit</string>
     <string name="cache_owner">Besitzer</string>
     <string name="cache_hidden">Versteckt</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Zeitangabe</string>
     <string name="cache_location">Bundesland</string>
     <string name="cache_coordinates">Koordinaten</string>
