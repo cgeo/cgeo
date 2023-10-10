@@ -87,7 +87,29 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Neznámé</string>
+    <string name="cache_cat_bc_nature">Příroda</string>
+    <string name="cache_cat_bc_location">Místo</string>
+    <string name="cache_cat_bc_recommended">Doporučené</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysterka</string>
+    <string name="cache_cat_bc_hiking">Turistika</string>
+    <string name="cache_cat_bc_other">Ostatní</string>
+    <string name="cache_cat_desc_bc_nature">Obklopené zvláštní přírodou</string>
+    <string name="cache_cat_desc_bc_location">Ukáže vám skvělé místo</string>
+    <string name="cache_cat_desc_bc_recommended">Doporučeno týmem BetterCacher</string>
+    <string name="cache_cat_desc_bc_gadget">Speciální řemeslné výrobky, cool gadgety atd.</string>
+    <string name="cache_cat_desc_bc_mystery">Mimořádná a náročná hádanka</string>
+    <string name="cache_cat_desc_bc_hiking">Nabízí vynikající turistiku</string>
+    <string name="cache_cat_desc_bc_other">Další funkce - nahlédněte do doporučujícího protokolu</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Žádné</string>
+    <string name="cache_tier_bc_blue">Modrá</string>
+    <string name="cache_tier_bc_silver">Stříbrná</string>
+    <string name="cache_tier_bc_gold">Zlatá</string>
+    <string name="cache_tier_desc_bc_blue">Výchozí úroveň pro kešky v seznamu</string>
+    <string name="cache_tier_desc_bc_silver">Navštíveno týmem BetterCacher, automaticky oceněno</string>
+    <string name="cache_tier_desc_bc_gold">Vynikající keška, doporučená týmem BetterCacher</string>
     <!-- logs -->
     <string name="log_found">Nalezeno</string>
     <string name="log_dnf">Nenalezeno</string>
@@ -407,6 +429,7 @@
     <string name="caches_append_to_route_selected">Připojit vybrané k individuální trase</string>
     <string name="caches_append_to_route_all">Připojit všechny k individuální trase</string>
     <string name="caches_appended_to_route">Kešky připojené k trase</string>
+    <string name="waypoints_appended_to_route">Trasové body připojené k trase</string>
     <string name="caches_delete_events">Odstranit staré události</string>
     <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
@@ -495,6 +518,7 @@
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
     <string name="cache_filter_difficulty_terrain">Obtížnost / Terén</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matrice obtížnosti / terénu</string>
     <string name="cache_filter_rating">Hodnocení</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atributy kešky</string>
@@ -509,6 +533,9 @@
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
     <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
+    <string name="cache_filter_category">Kategorie BC</string>
+    <string name="cache_filter_tier">Úroveň BC</string>
+    <string name="cache_filter_named_filter">Pojmenovaný filtr</string>
     <string name="cache_filter_logical_filter_group">Vložený filtr</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
@@ -586,6 +613,7 @@
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Zahrnout kešky bez O/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Vyplnit pomocí gc.com</string>
     <string name="cache_filter_nested_filter_modify">upravit</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Dílčí filtr je aktuálně prázdný</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
@@ -840,6 +868,7 @@
     <string name="init_signature_template_geocode">Geokód</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
+    <string name="init_summary_bettercacher">Načíst úroveň kešek a kategorie z BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
     <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další logbook s mými logy a logy přátel</string>
     <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
@@ -860,6 +889,8 @@
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
+    <string name="init_removeFromRouteOnLog">Odstranit z trasy při zalogování</string>
+    <string name="init_summary_removeFromRouteOnLog">Po odeslání nebo uložení logu odstraní kešku z aktuální trasy.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
     <string name="brouter_missing_data">Otevřete BRouter ke stažení chybějících směrovacích dat (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Pokud je směrování aktivní: Kromě vypočítané délky trasy zobrazí přímou vzdálenost.</string>
@@ -869,6 +900,8 @@
     <string name="init_summary_bigSmileysOnMap">Pokud je tato funkce povolena, budou se symboly jako \"nalezený smajlík\" nebo značka \"opravené souřadnice\" zobrazovat na mapě zvětšené, namísto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnocení O/T na ikonách kešky</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazit značku pro hodnocení obtížnosti (vlevo) a terénu (vpravo) na značkách kešky v pravém horním rohu (značka „uložená“ se přesune doprostřed).</string>
+    <string name="init_showElevation">Zobrazit nadmořskou výšku</string>
+    <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
     <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
@@ -895,6 +928,7 @@
     <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
     <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <string name="init_custombnitem">Vlastní položka nabídky</string>
+    <string name="init_custombnitem_description">Pravá nejspodnější položka navigačního menu:\n%s</string>
     <string name="init_custombnitem_default">Hledání v okolí (výchozí)</string>
     <string name="init_custombnitem_none">(žádné)</string>
     <string name="init_custombnitem_empty_placeholder">(prázdný zástupný řetězec)</string>
@@ -1053,6 +1087,11 @@
     <string name="init_mapShadingLinearity_description">Malé hodnoty zvýrazňují kontrast na strmých svazích, ale skrývají změny na rovinách, velké hodnoty jej činí více lineárními</string>
     <string name="init_mapShadingScale_title">Neprůhlednost stínování</string>
     <string name="init_mapShadingScale_description">Neprůhlednost vrstvy stínování, od neviditelné po vyšší hodnoty, které zintenzivňují stínování, ale mohou vytvářet artefakty</string>
+    <string name="init_iconsizes">Velikosti ikon</string>
+    <string name="init_mapCacheScaling_title">Měřítko ikony kešky</string>
+    <string name="init_mapCacheScaling_description">Měřítko pro ikony kešek (v %)</string>
+    <string name="init_mapWpScaling_title">Měřítko ikony trasového bodu</string>
+    <string name="init_mapWpScaling_description">Měřítko pro ikony trasových bodů (v %)</string>
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
@@ -1430,6 +1469,7 @@
     <string name="cache_favorite">Oblíbené</string>
     <string name="cache_owner">Zakladatel</string>
     <string name="cache_hidden">Skryta</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
     <string name="cache_coordinates">Souřadnice</string>
