@@ -98,6 +98,7 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
@@ -170,6 +171,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -258,6 +260,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
+        final Uri uri = getIntent().getData();
 
         // try to get data from extras
         String name = null;
@@ -274,6 +277,44 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // When clicking a cache in MapsWithMe, we get back a PendingIntent
         if (StringUtils.isEmpty(geocode)) {
             geocode = MapsMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
+        }
+
+        if (geocode == null && uri != null) {
+            geocode = ConnectorFactory.getGeocodeFromURL(uri.toString());
+        }
+
+        // try to get data from URI
+        if (geocode == null && guid == null && uri != null) {
+            final String uriHost = uri.getHost().toLowerCase(Locale.US);
+            final String uriPath = uri.getPath().toLowerCase(Locale.US);
+            final String uriQuery = uri.getQuery();
+
+            if (uriQuery != null) {
+                Log.i("Opening URI: " + uriHost + uriPath + "?" + uriQuery);
+            } else {
+                Log.i("Opening URI: " + uriHost + uriPath);
+            }
+
+            if (uriHost.contains("geocaching.com")) {
+                if (StringUtils.startsWith(uriPath, "/geocache/gc")) {
+                    geocode = StringUtils.substringBefore(uriPath.substring(10), "_").toUpperCase(Locale.US);
+                } else {
+                    geocode = uri.getQueryParameter("wp");
+                    guid = uri.getQueryParameter("guid");
+
+                    if (StringUtils.isNotBlank(geocode)) {
+                        geocode = geocode.toUpperCase(Locale.US);
+                        guid = null;
+                    } else if (StringUtils.isNotBlank(guid)) {
+                        geocode = null;
+                        guid = guid.toLowerCase(Locale.US);
+                    } else {
+                        showToast(res.getString(R.string.err_detail_open));
+                        finish();
+                        return;
+                    }
+                }
+            }
         }
 
         // no given data
