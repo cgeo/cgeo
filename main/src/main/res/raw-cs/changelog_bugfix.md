@@ -1,4 +1,7 @@
 ##
+- Oprava: Skryta chybová zprává o zastaralém připojení
+
+##
 - Novinka: Zvýšení cílové SDK na 33 (kvůli požadavkům Obchodu Play)
 - Novinka: (pouze Android 13) Přidáno oprávnění "Oznámení" - pro zobrazení oznámení o stahování může být nutné spustit průvodce konfigurací z domovské obrazovky nebo udělit oprávnění k oznámení ručně
 - Oprava: Import GPX s více stopami v jednom souboru
