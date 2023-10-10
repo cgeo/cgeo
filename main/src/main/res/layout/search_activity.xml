@@ -59,9 +59,10 @@
             <AutoCompleteTextView
                 android:id="@+id/geocode"
                 style="@style/textinput_embedded_singleline_go"
-                android:inputType="textVisiblePassword"
                 android:text="GC"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                android:inputType="textVisiblePassword"
+                android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -181,7 +182,8 @@
             <AutoCompleteTextView
                 android:id="@+id/trackable"
                 style="@style/textinput_embedded_singleline_go"
-                android:inputType="textVisiblePassword" />
+                android:inputType="textVisiblePassword"
+                android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
