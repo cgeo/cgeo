@@ -1,4 +1,7 @@
 ##
+- Fix: Hide outdated connection error message
+
+##
 - New: Increased target SDK to 33 (due to Play Store requirements)
 - New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
 - Korjaa: GPX tuonti useilla reiteillä samassa tiedostossa
