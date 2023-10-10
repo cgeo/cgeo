@@ -881,7 +881,6 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
-    <string name="init_custombnitem">Item personalizado do Menu</string>
     <string name="init_custombnitem_default">Pesquisa nas proximidades (padrão)</string>
     <string name="init_custombnitem_none">(vazio)</string>
     <string name="init_custombnitem_empty_placeholder">(espaço reservado vazio)</string>
