@@ -1,13 +1,16 @@
 ##
-- New: Increased target SDK to 33 (due to Play Store requirements)
-- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
-- Fix: GPX import with multiple tracks in same file
-- Fix: Favorite ratio > 100% under certain conditions
-- Fix: Navigation line lost on screen rotation with Google Maps
-- Fix: Individual route not deleted from Google Maps on deletion
-- Fix: Last log text discarded when adding image first on new log
-- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+- Corretto: Nascosto messaggio di errore di connessione obsoleto
 
 ##
-- Fix: Crash on adding to favorites (under certain conditions)
-- Fix: Individual route actions not working when using Google Maps
+- Nuovo: target SDK portato a 33 (a causa dei requisiti del PlayStore)
+- Nuovo: (solo Android 13) Aggiunta l'autorizzazione "Notifiche" - potrebbe essere necessario eseguire la procedura guidata di configurazione dalla schermata iniziale o concedere l'autorizzazione di notifica manualmente per vedere le notifiche di download
+- Corretto: importazione GPX con più tracce nello stesso file
+- Corretto: Favorito > 100% in determinate condizioni
+- Corretto: La linea di navigazione veniva persa con la rotazione dello schermo con Google Maps
+- Corretto: Percorso personalizzato non cancellato da Google Maps durante la cancellazione
+- Corretto: l'ultimo testo di log scartato quando si aggiunge prima l'immagine ad un nuovo log
+- Corretto: "Imposta come preferito" non può essere deselezionato se non si hanno più punti preferiti, la registrazione fallisce con errore
+
+##
+- Corretto: Crash durante l'aggiunta ai preferiti (in determinate condizioni)
+- Correggimento: Il percorso personalizzato non funziona quando si utilizza Google Maps
