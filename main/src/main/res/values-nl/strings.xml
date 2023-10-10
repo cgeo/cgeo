@@ -425,6 +425,7 @@
     <string name="caches_append_to_route_selected">Voeg geselecteerde aan individuele route toe</string>
     <string name="caches_append_to_route_all">Voeg alle geselecteerden aan individuele route toe</string>
     <string name="caches_appended_to_route">Caches toegevoegd aan route</string>
+    <string name="waypoints_appended_to_route">Waypoints toegevoegd aan route</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
     <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
@@ -524,6 +525,7 @@
     <string name="cache_filter_stored_since">Laatste details update</string>
     <string name="cache_filter_category">BC categorie</string>
     <string name="cache_filter_tier">BC Laag</string>
+    <string name="cache_filter_named_filter">Benoemde filter</string>
     <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
@@ -875,6 +877,8 @@
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
+    <string name="init_removeFromRouteOnLog">Verwijder uit de route bij het logboek</string>
+    <string name="init_summary_removeFromRouteOnLog">Bij het verzenden of opslaan van een log verwijder de cache van de huidige route.</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
     <string name="brouter_missing_data">Open BRouter om ontbrekende routeringsgegevens te downloaden (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
@@ -884,6 +888,8 @@
     <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld, worden symbolen zoals \'gevonden smiley\' of de \'gecorrigeerde coördinaten\'-marker vergroot weergegeven op de kaart in plaats van het pictogram van het cachetype.</string>
     <string name="init_dtMarkerOnCacheIcon">D/T beoordeling op cache pictogrammen</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Toon een marker voor de moeilijkheidsgraad (links) en het terrein (rechts) waarderingen op de cache markers in de rechter bovenhoek (\"opgeslagen\" marker wordt verplaatst naar het midden).</string>
+    <string name="init_showElevation">Toon steiging</string>
+    <string name="init_summary_showElevation">Toon steigingsinformatie voor huidige positie, van routing data of GNSS (indien beschikbaar)</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel algemene waypoint extractie uit van persoonlijke cache notities. Het kan nog steeds geactiveerd worden voor individuele caches door het vakje te deactiveren onder de persoonlijke cache notitie.</string>
     <string name="init_prevent_cache_note_merge">Overschrijf persoonlijke cache notitie</string>
@@ -910,6 +916,7 @@
     <string name="init_quicklaunchitems">Snelstartknoppen</string>
     <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <string name="init_custombnitem">Aangepast Menu-Item</string>
+    <string name="init_custombnitem_description">Meest rechtsonder navigatie menu-item:\n%s</string>
     <string name="init_custombnitem_default">Zoeken in de buurt (standaard)</string>
     <string name="init_custombnitem_none">(geen)</string>
     <string name="init_custombnitem_empty_placeholder">(lege plaatshouder)</string>
@@ -1068,6 +1075,11 @@
     <string name="init_mapShadingLinearity_description">Kleine waarden accentueren contrast in steile hellingen, maar verbergen veranderingen in vlakten, grote waarden maken het meer lineair</string>
     <string name="init_mapShadingScale_title">Arcering Doorzichtigheid</string>
     <string name="init_mapShadingScale_description">Doorzichtbaarheid van de arceringslaag, van onzichtbaar tot hogere waarden die arcering intensiveren, maar kan artefacten produceren</string>
+    <string name="init_iconsizes">Pictogramgroottes</string>
+    <string name="init_mapCacheScaling_title">Cache pictogram schalen</string>
+    <string name="init_mapCacheScaling_description">Schaalfactor voor cache pictogrammen (in %)</string>
+    <string name="init_mapWpScaling_title">Waypoint pictogram schalen</string>
+    <string name="init_mapWpScaling_description">Schaalfactor voor waypoint iconen (in %)</string>
     <string name="init_maintenance">Onderhoud</string>
     <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
     <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
