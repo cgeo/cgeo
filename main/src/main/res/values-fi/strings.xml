@@ -882,7 +882,6 @@
     <string name="init_summary_livelist">Näytä listan kätköille kompassisuuntaan osoittava nuoli</string>
     <string name="init_quicklaunchitems">Pikapainikkeet</string>
     <string name="init_summary_quicklaunchitems">Valitse yksi tai useampi kohde aloitusnäytön pikapainikkeeksi</string>
-    <string name="init_custombnitem">Mukautettu valikkokohde</string>
     <string name="init_custombnitem_default">Lähistöllä-haku (oletus)</string>
     <string name="init_custombnitem_none">(ei mikään)</string>
     <string name="init_custombnitem_empty_placeholder">(tyhjä paikkamerkki)</string>
