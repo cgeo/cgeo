@@ -87,7 +87,29 @@
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">알 수 없음</string>
+    <string name="cache_cat_bc_nature">자연</string>
+    <string name="cache_cat_bc_location">위치</string>
+    <string name="cache_cat_bc_recommended">추천</string>
+    <string name="cache_cat_bc_gadget">가젯</string>
+    <string name="cache_cat_bc_mystery">미스터리</string>
+    <string name="cache_cat_bc_hiking">등산</string>
+    <string name="cache_cat_bc_other">기타</string>
+    <string name="cache_cat_desc_bc_nature">특별한 자연에 둘러싸임</string>
+    <string name="cache_cat_desc_bc_location">좋은 위치를 보여줍니다</string>
+    <string name="cache_cat_desc_bc_recommended">BetterCacher 팀에서 추천함</string>
+    <string name="cache_cat_desc_bc_gadget">특별한 수공예품, 멋진 가잿 등</string>
+    <string name="cache_cat_desc_bc_mystery">특별하고 도전적인 퍼즐</string>
+    <string name="cache_cat_desc_bc_hiking">훌륭한 등산을 제공합니다</string>
+    <string name="cache_cat_desc_bc_other">기타 기능 - 추천 로그 참조</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">없음</string>
+    <string name="cache_tier_bc_blue">파랑</string>
+    <string name="cache_tier_bc_silver">은</string>
+    <string name="cache_tier_bc_gold">금</string>
+    <string name="cache_tier_desc_bc_blue">나열된 캐시의 기본 계층</string>
+    <string name="cache_tier_desc_bc_silver">BetterCacher 팀이 방문하여 자동으로 수여됨</string>
+    <string name="cache_tier_desc_bc_gold">BetterCacher 팀이 권장하는 뛰어난 캐시</string>
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -495,6 +517,8 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_category">BC 분류</string>
+    <string name="cache_filter_tier">BC 계층</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
@@ -824,6 +848,7 @@
     <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
+    <string name="init_summary_bettercacher">BetterCacher.org에서 캐시 계층 및 분류를 로드하세요.</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
     <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
     <string name="init_openlastdetailspage">마지막 상세내용 페이지</string>
@@ -853,6 +878,8 @@
     <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 \'찾음 스마일리\' 또는 \'수정된 좌표\' 마커와 같은 기호가 지도에서 확대되어 표시됩니다.</string>
     <string name="init_dtMarkerOnCacheIcon">캐시 아이콘의 D/T 등급</string>
     <string name="init_summary_dtMarkerOnCacheIcon">오른쪽 상단의 캐시 마커에 난이도(왼쪽) 및 지형(오른쪽) 등급 마커를 표시합니다 (\"저장된\" 마커가 가운데로 이동됨).</string>
+    <string name="init_showElevation">높이 값보기</string>
+    <string name="init_summary_showElevation">경로 데이터 또는 GNSS에서 가져온 현재 위치의 고도 정보 표시(사용 가능한 경우)</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_prevent_cache_note_merge">개인 캐시 메모 덮어쓰기</string>
@@ -878,7 +905,6 @@
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
-    <string name="init_custombnitem">사용자 정의 메뉴 항목</string>
     <string name="init_custombnitem_default">주변 검색 (기본값)</string>
     <string name="init_custombnitem_none">(없음)</string>
     <string name="init_custombnitem_empty_placeholder">(빈 자리 표시자)</string>
@@ -1037,6 +1063,11 @@
     <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
     <string name="init_mapShadingScale_title">음영 불투명도</string>
     <string name="init_mapShadingScale_description">음영 레이어의 불투명도는 보이지 않는 값에서 더 높은 값까지 음영을 강화하지만 아티팩트를 생성할 수 있습니다.</string>
+    <string name="init_iconsizes">아이콘 크기</string>
+    <string name="init_mapCacheScaling_title">캐시 아이콘 크기 조정</string>
+    <string name="init_mapCacheScaling_description">캐시 아이콘의 크기 조정 (%으로)</string>
+    <string name="init_mapWpScaling_title">지점 아이콘 크기 조정</string>
+    <string name="init_mapWpScaling_description">지점 아이콘의 크기 조정 (%으로)</string>
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
@@ -1390,6 +1421,7 @@
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
     <string name="cache_coordinates">좌표</string>
