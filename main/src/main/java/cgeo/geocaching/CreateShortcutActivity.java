@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapActivity;
@@ -19,12 +20,23 @@ import android.os.Bundle;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateShortcutActivity extends AbstractActionBarActivity {
+
+    private static final String ID_FRAGMENT_MAP = "MAP";
+    private static final String ID_FRAGMENT_NEARBY = "NEARBY";
+    private static final String ID_FRAGMENT_LIST = "PICK LIST";
+    private static final String ID_FRAGMENT_ALL_CACHES = "ALL CACHES";
+    private static final String ID_FRAGMENT_SEARCH = "SEARCH";
+    private static final String ID_FRAGMENT_GO_TO = "GO TO";
+    private static final String ID_FRAGMENT_HISTORY = "HISTORY";
 
     private static class Shortcut {
 
@@ -33,14 +45,16 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         @DrawableRes
         private final int drawableResourceId;
         private final Intent intent;
+        private final String idFragment;
 
         /**
          * shortcut with a separate icon
          */
-        Shortcut(@StringRes final int titleResourceId, @DrawableRes final int drawableResourceId, final Intent intent) {
+        Shortcut(@StringRes final int titleResourceId, @DrawableRes final int drawableResourceId, final Intent intent, final String idFragment) {
             this.titleResourceId = titleResourceId;
             this.drawableResourceId = drawableResourceId;
             this.intent = intent;
+            this.idFragment = idFragment;
         }
 
         @DrawableRes
@@ -68,21 +82,21 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, MapActivity.class)));
-        shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this)));
+        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, MapActivity.class), ID_FRAGMENT_MAP));
+        shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this), ID_FRAGMENT_NEARBY));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally
         // shortcuts.add(new Shortcut(R.string.cache_menu_visit, new Intent(this, LogCacheActivity.class)));
         // shortcuts.add(new Shortcut(R.string.trackable_log_touch, new Intent(this, LogTrackableActivity.class)));
 
-        final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.sc_stored, null);
+        final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.sc_stored, null, ID_FRAGMENT_LIST);
         shortcuts.add(offlineShortcut);
         final Intent allIntent = new Intent(this, CacheListActivity.class);
         allIntent.putExtra(Intents.EXTRA_LIST_ID, PseudoList.ALL_LIST.id);
-        shortcuts.add(new Shortcut(R.string.list_all_lists, R.drawable.sc_stored, allIntent));
-        shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.sc_search, new Intent(this, SearchActivity.class)));
-        shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class)));
-        shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this)));
+        shortcuts.add(new Shortcut(R.string.list_all_lists, R.drawable.sc_stored, allIntent, ID_FRAGMENT_ALL_CACHES));
+        shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.sc_search, new Intent(this, SearchActivity.class), ID_FRAGMENT_SEARCH));
+        shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class), ID_FRAGMENT_GO_TO));
+        shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this), ID_FRAGMENT_HISTORY));
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
                 .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, SimpleDialog.SingleChoiceMode.NONE, (shortcut, pos) -> {
@@ -91,7 +105,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
                     if (offlineShortcut.equals(shortcut)) {
                         promptForListShortcut();
                     } else {
-                        createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
+                        createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId, shortcut.idFragment);
                     }
                 });
     }
@@ -107,17 +121,19 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         targetIntent.putExtra(Intents.EXTRA_LIST_ID, list.id);
 
         // shortcut to be returned
-        createShortcutAndFinish(list.title, targetIntent, R.drawable.sc_stored);
+        createShortcutAndFinish(list.title, targetIntent, R.drawable.sc_stored, ID_FRAGMENT_LIST + list.id);
     }
 
-    private void createShortcutAndFinish(final String title, final Intent targetIntent, @DrawableRes final int iconResourceId) {
-        final Intent intent = new Intent();
-        intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, targetIntent);
-        intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
-        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createOverlay(iconResourceId));
-
-        setResult(RESULT_OK, intent);
-
+    private void createShortcutAndFinish(final String title, final Intent targetIntent, @DrawableRes final int iconResourceId, final String idFragment) {
+        targetIntent.setAction("ACTION_VIEW");
+        final ShortcutInfoCompat info = new ShortcutInfoCompat.Builder(this, "c:geo " + idFragment + " shortcut")
+                .setIntent(targetIntent)
+                .setShortLabel(title)
+                .setIcon(IconCompat.createWithAdaptiveBitmap(createOverlay(iconResourceId)))
+                .build();
+        if (!ShortcutManagerCompat.requestPinShortcut(this, info, null)) {
+            ActivityMixin.showShortToast(this, R.string.failed_creating_shortcut);
+        }
         // finish activity to return the shortcut
         finish();
     }
