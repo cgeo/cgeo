@@ -2091,7 +2091,6 @@
     <string name="notification_channel_downloader_description">ειδοποιήσεις αποτελεσμάτων για λήψεις (π.χ. χάρτες εκτός σύνδεσης)</string>
     <string name="notification_channel_cache_download_name">Κατέβασμα κρυπτών</string>
     <string name="notification_channel_cache_download_description">Ειδοποιήσεις αποτελέσματος για λήψεις κρυπτών στο παρασκήνιο</string>
-    <string name="notification_proximity_title">Ειδοποίηση εγγύτητας του c:geo</string>
     <string name="notification_download_receiver_title">Εισαγωγή λήψης</string>
     <!-- individual routes -->
     <string name="individual_route">Μεμονωμένη διαδρομή</string>
