@@ -7,6 +7,7 @@
 - New: Linear labs use numbers as waypoint markers
 - New: Waypoints of a cache show cache type icon as marker
 - New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- New: User-defined routing profiles (internal routing only)
 
 ### Detaily kešky
 - New: Edit default value for log image caption prefix
