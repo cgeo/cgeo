@@ -2329,7 +2329,6 @@
     <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
     <string name="notification_channel_cache_download_name">stahování kešky</string>
     <string name="notification_channel_cache_download_description">oznámení o výsledku stahování kešek na pozadí</string>
-    <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
     <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
     <string name="individual_route">Individuální trasa</string>
