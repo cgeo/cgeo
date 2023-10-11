@@ -1,4 +1,9 @@
 ##
+- Oplossing: Verberg verouderde verbindingsfoutmelding
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+
+##
 - Nieuw: Doel SDK naar 33 verhoogd (vanwege de vereisten van de Play Store)
 - Nieuw: (Alleen Android 13) heeft "Meldingen" toestemming toegevoegd - je dient mogelijk de configuratiewizard vanaf het startscherm uit te voeren of handmatig toestemming te geven voor meldingen om de download meldingen te zien
 - Oplossing: GPX import met meerdere tracks in hetzelfde bestand
