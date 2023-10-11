@@ -127,23 +127,23 @@ public class BackupUtils {
                                 regrantAccessFolders.remove(0);
                                 triggerNextRegrantStep(null, null);
                             });
-/* reactivate this if there will ever be PersistableUri again stored in our preferences
         } else if (!regrantAccessUris.isEmpty()) {
-            final Uri uriToBeRestored = Uri.parse(regrantAccessUris.get(0).right);
-            final String temp = uriToBeRestored.getPath();
-            final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
+            for (ImmutableTriple<PersistableUri, String, String> data : regrantAccessUris) {
+                final Uri uriToBeRestored = Uri.parse(data.right);
+                final String temp = uriToBeRestored.getPath();
+                final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
 
-            SimpleDialog.of(activityContext)
-                .setTitle(R.string.init_backup_settings_restore)
-                .setMessage(R.string.settings_file_changed, activityContext.getString(regrantAccessUris.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                .confirm((d, v) -> {
-                    fileSelector.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored);
-                },
-                (d2, v2) -> {
-                    regrantAccessUris.remove(0);
-                    triggerNextRegrantStep(null, null);
-                });
-*/
+                SimpleDialog.of(activityContext)
+                    .setTitle(R.string.init_backup_settings_restore)
+                    .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                    .confirm((d, v) -> {
+                        fileSelector.restorePersistableUri(data.left, uriToBeRestored);
+                    },
+                    (d2, v2) -> {
+                        regrantAccessUris.remove(0);
+                        triggerNextRegrantStep(null, null);
+                    });
+            }
         } else {
             finishRestoreInternal(activityContext, regrantAccessRestartNeeded, regrantAccessResultString);
         }
