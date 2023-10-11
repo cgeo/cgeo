@@ -1,5 +1,7 @@
 ##
 - Korrektur: Veraltete Verbindungsfehlermeldung ausblenden
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
 
 ##
 - Neu: targetSDK auf 33 aktualisiert (aufgrund von Play Store-Anforderungen)
