@@ -1,4 +1,9 @@
 ##
+- Korrektur: Veraltete Verbindungsfehlermeldung ausblenden
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+
+##
 - Neu: targetSDK auf 33 aktualisiert (aufgrund von Play Store-Anforderungen)
 - Neu: (nur Android 13) "Benachrichtigung"-Berechtigung ergänzt - Führe den Konfigurations-Assistenten auf dem Startbildschirm aus oder gewähre die Benachrichtigungsberechtigung manuell, um Download-Benachrichtigungen zu sehen
 - Korrektur: Fehler bei GPX-Import mit mehreren Tracks in derselben Datei
