@@ -2200,6 +2200,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
+    <string name="failed_creating_shortcut">Nie udało się utworzyć skrótu</string>
     <string name="send">Wyślij</string>
     <string name="confirm_log_title">Specjalny typ wpisu</string>
     <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
@@ -2307,7 +2308,6 @@
     <string name="notification_channel_downloader_description">powiadomienia o wynikach pobierania (np. map offline)</string>
     <string name="notification_channel_cache_download_name">pobieranie skrytek</string>
     <string name="notification_channel_cache_download_description">powiadomienia o wynikach pobierania skrytek w tle</string>
-    <string name="notification_proximity_title">Powiadomienie o bliskości</string>
     <string name="notification_download_receiver_title">Importowanie pobierania</string>
     <!-- individual routes -->
     <string name="individual_route">Indywidualna trasa</string>
