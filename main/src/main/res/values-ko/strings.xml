@@ -2220,7 +2220,6 @@
     <string name="notification_channel_downloader_description">다운로드 결과 알림 (예: 오프라인지도)</string>
     <string name="notification_channel_cache_download_name">캐시 다운로더</string>
     <string name="notification_channel_cache_download_description">캐시 백그라운드 다운로드에 대한 결과 알림</string>
-    <string name="notification_proximity_title">c:geo 근접성 알림</string>
     <string name="notification_download_receiver_title">다운로드 가져오는 중</string>
     <!-- individual routes -->
     <string name="individual_route">개별 경로</string>
