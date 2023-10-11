@@ -1913,7 +1913,6 @@
     <string name="notification_channel_foreground_name">forgrunnstjenester</string>
     <string name="notification_channel_foreground_description">varsling vises mens c:geo utfører bakgrunnsarbeidet</string>
     <string name="notification_channel_downloader_name">Nedlasting i c:geo</string>
-    <string name="notification_proximity_title">c:geo nærhetsvarsling</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rute</string>
     <string name="individual_route_added">Legg til i ruten</string>
