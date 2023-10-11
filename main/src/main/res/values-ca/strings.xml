@@ -2173,7 +2173,6 @@
     <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
     <string name="notification_channel_cache_download_name">descàrrega de catxé</string>
     <string name="notification_channel_cache_download_description">notificacions de resultats per a les baixades de fons de catxés</string>
-    <string name="notification_proximity_title">notificació de proximitat de c:geo</string>
     <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
