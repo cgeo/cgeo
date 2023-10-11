@@ -57,6 +57,10 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             if (waypoint == null || waypoint.getCoords() == null || !waypoint.getCoords().isValid()) {
                 continue;
             }
+            final Geocache cache = waypoint.getParentGeocache();
+            if (waypoint.getNote().isEmpty() && cache != null && cache.getCoords() != null && cache.getCoords().isValid() && waypoint.getCoords().equals(cache.getCoords())) {
+                continue;
+            }
             if (removeCodes.contains(waypoint.getFullGpxId())) {
                 removeCodes.remove(waypoint.getFullGpxId());
             } else {
