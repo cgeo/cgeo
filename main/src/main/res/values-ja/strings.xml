@@ -1934,7 +1934,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="notification_channel_downloader_description">ダウンロード結果の通知(オフラインマップなど)</string>
     <string name="notification_channel_cache_download_name">キャッシュダウンローダー</string>
     <string name="notification_channel_cache_download_description">キャッシュのバックグラウンドダウンロード結果の通知</string>
-    <string name="notification_proximity_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
     <string name="individual_route_added">ルートに追加しました</string>
