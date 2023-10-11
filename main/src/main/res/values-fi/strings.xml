@@ -2226,7 +2226,6 @@
     <string name="notification_channel_downloader_description">latausten tulosilmoitukset (kuten offline-kartat)</string>
     <string name="notification_channel_cache_download_name">kätkölataaja</string>
     <string name="notification_channel_cache_download_description">tulosilmoitukset kätköjen taustalatauksille</string>
-    <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
     <string name="notification_download_receiver_title">Tuodaan latausta</string>
     <!-- individual routes -->
     <string name="individual_route">Yksittäinen reitti</string>
