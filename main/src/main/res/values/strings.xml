@@ -2785,11 +2785,6 @@
     <string name="wizard_platforms_intro">To find geocaches with c:geo you need an account for a geocaching service supported by c:geo.\nSelect the desired service below to either login with your existing account or create a new account.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; others</string>
-    <string name="wizard_welcome_advanced">Advanced configuration</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline maps</string>
-    <string name="wizard_advanced_offlinemaps_info">This page provides some advanced functions, which are optional to use.\n\nc:geo can download map files for offline usage.</string>
-    <string name="wizard_advanced_routing_label">Activate offline routing</string>
-    <string name="wizard_advanced_routing_info">c:geo has an internal routing engine for offline routing and can automatically download missing routing data for you.</string>
     <string name="wizard_advanced_restore_label">Restore</string>
     <string name="wizard_advanced_restore_info">If you have a backup of a previous installation you can restore settings and/or geocache data.</string>
     <string name="status_not_ok">ERROR</string>
