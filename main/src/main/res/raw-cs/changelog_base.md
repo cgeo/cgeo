@@ -7,6 +7,7 @@
 - Novinka: Lineární labky používají čísla jako značky trasových bodů
 - Novinka: Trasové body kešky zobrazují ikonu typu kešky jako značku
 - Novinka: Zobrazení informací o nadmořské výšce pro aktuální polohu na mapě (viz Nastavení => Obsah mapy & Chování)
+- New: User-defined routing profiles (internal routing only)
 
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
