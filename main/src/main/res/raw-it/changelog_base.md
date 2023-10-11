@@ -7,6 +7,7 @@
 - Nuovo: I Lab lineari usano i numeri come segnalatori di waypoint
 - Nuovo: I waypoint di un cache usano l'icona del tipo di cache come marker
 - Nuovo: Mostra l'altitudine per la posizione corrente sulla mappa (vedere Impostazioni => Contenuto della mappa & Comportamento)
+- New: User-defined routing profiles (internal routing only)
 
 ### Dettagli del cache
 - Nuovo: modifica il valore predefinito per il prefisso della didascalia delle immagini nel log
