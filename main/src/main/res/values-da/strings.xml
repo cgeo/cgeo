@@ -1630,7 +1630,6 @@
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
     <!-- notification / channel texts -->
-    <string name="notification_proximity_title">Afstandsnotifikation</string>
     <!-- individual routes -->
     <string name="individual_route">Individuel rute</string>
     <string name="individual_route_added">Tilføjet til rute</string>
