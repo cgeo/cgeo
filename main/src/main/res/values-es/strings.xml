@@ -1950,7 +1950,6 @@ Nombre de archivo:%2$s</string>
     <string name="notification_channel_foreground_description">la notificación se muestra mientras c:geo funciona en segundo plano</string>
     <string name="notification_channel_downloader_name">Descargador c:geo</string>
     <string name="notification_channel_downloader_description">notificaciones de resultados para descargas (ej: mapas sin conexión)</string>
-    <string name="notification_proximity_title">Notificación de proximidad de c:geo</string>
     <string name="notification_download_receiver_title">Importando descarga</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
