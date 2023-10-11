@@ -2157,7 +2157,6 @@
     <string name="notification_channel_downloader_description">Notification des résultats de téléchargement (par exemple pour les cartes hors-ligne)</string>
     <string name="notification_channel_cache_download_name">téléchargeur de cache</string>
     <string name="notification_channel_cache_download_description">notifications des résultats du téléchargement de cache en arrière-plan</string>
-    <string name="notification_proximity_title">notification de proximité c:geo</string>
     <string name="notification_download_receiver_title">Téléchargement en cours</string>
     <!-- individual routes -->
     <string name="individual_route">Itinéraire individuel</string>
