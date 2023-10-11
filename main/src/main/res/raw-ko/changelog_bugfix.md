@@ -1,5 +1,7 @@
 ##
 - 수정: 오래된 연결 오류 메시지 숨기기
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
 
 ##
 - 신규: 타겟 SDK를 33으로 늘렸습니다(Play 스토어 요구 사항으로 인해).
