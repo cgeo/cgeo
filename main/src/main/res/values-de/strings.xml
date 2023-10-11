@@ -2249,7 +2249,6 @@
     <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
     <string name="notification_channel_cache_download_name">Cache Downloader</string>
     <string name="notification_channel_cache_download_description">Ergebnisbenachrichtigung für Cache Downloads</string>
-    <string name="notification_proximity_title">c:geo Annäherungsbenachrichtigung</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
     <string name="individual_route">Individuelle Route</string>
