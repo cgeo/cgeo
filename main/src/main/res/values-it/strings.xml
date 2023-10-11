@@ -248,6 +248,7 @@
     <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
     <string name="err_log_post_missing_tracking_code">Il codice di tracking è mancante.</string>
     <string name="err_log_post_missing_coordinates">Mancano le coordinate.</string>
+    <string name="err_website_message">Il sito web ha risposto con il seguente messaggio: </string>
     <string name="err_log_post_failed">Sembra che il log non sia stato pubblicato. Si prega di controllare sul sito Web del cache originario.</string>
     <string name="err_log_post_failed_ec">Sembra che il tuo log non sia stato pubblicato. Controlla su Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Sembra che il tuo log non sia stato pubblicato. Controlla su GeoKrety.org.</string>
@@ -2224,6 +2225,8 @@
     <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo scriverà dati sulla memoria del telefono o sulla scheda SD, ad es. quando si salvano geocache per l\'uso offline, importare o esportare file e altre funzioni. Su alcune versioni di Android, è necessario concedere un permesso aggiuntivo per queste azioni.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permessi di lettura memoria esterna (legacy)</string>
+    <string name="permission_post_notifications_explanation">c:geo utilizza le notifiche per informarti dei download e dell\'avvicinamento a cache (se attivato)</string>
+    <string name="permission_post_notifications_explanation_title">Autorizzazione alle notifiche</string>
     <string name="storage_permission_needed">Questa funzione non è possibile senza permessi di accesso al dispositivo di archiviazione.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Selezionare lo schema colori</string>
@@ -2246,7 +2249,6 @@
     <string name="notification_channel_downloader_description">notifiche del risultato per i download (ad esempio mappe offline)</string>
     <string name="notification_channel_cache_download_name">cache downloader</string>
     <string name="notification_channel_cache_download_description">notifiche dei risultati per i download in background dei cache</string>
-    <string name="notification_proximity_title">Notifica di prossimità c:geo</string>
     <string name="notification_download_receiver_title">Importazione download</string>
     <!-- individual routes -->
     <string name="individual_route">Percorso individuale</string>
@@ -2284,6 +2286,8 @@
     <string name="running_route_optimizations">Esecuzione della ottimizzazione percorso</string>
     <string name="route_optimization_finished">Ottimizzazione percorso terminata</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Autorizzazioni modificate</string>
+    <string name="changed_permissions_info">Android ha introdotto una nuova autorizzazione richiesta da c:geo. Eseguire la procedura guidata di configurazione di c:geo per controllare questa autorizzazione e ottenere informazioni più dettagliate. È possibile eseguire la procedura guidata ora oppure farlo in seguito utilizzando la voce di menu dedicata nella schermata home.\n\nVuoi avviare ora la procedura di configurazione guidata?</string>
     <!-- individual track -->
     <string name="map_load_track">Carica traccia/percorso da GPX</string>
     <string name="load_track_error">Errore nel caricare la traccia/percorso</string>
