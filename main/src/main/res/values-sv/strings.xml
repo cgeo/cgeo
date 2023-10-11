@@ -2149,7 +2149,6 @@
     <string name="notification_channel_downloader_description">aviseringar för hämtningar (t.ex. offline-kartor)</string>
     <string name="notification_channel_cache_download_name">cache-hämtare</string>
     <string name="notification_channel_cache_download_description">resultatnotifieringar för cachers bakgrunds-nedladdningar</string>
-    <string name="notification_proximity_title">c:geo närhetsnotifiering</string>
     <string name="notification_download_receiver_title">Importerar nedladdning</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rutt</string>
