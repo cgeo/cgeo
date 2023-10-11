@@ -7,6 +7,7 @@
 - Neu: Lineare Lab Adventures verwenden Zahlen als Wegpunkt-Marker
 - Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
 - Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
+- New: User-defined routing profiles (internal routing only)
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
