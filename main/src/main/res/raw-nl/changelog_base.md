@@ -7,6 +7,7 @@
 - Nieuw: Lineaire labs gebruiken getallen als markeerpunten
 - Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
 - Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
+- New: User-defined routing profiles (internal routing only)
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
