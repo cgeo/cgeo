@@ -2225,7 +2225,6 @@
     <string name="notification_channel_downloader_description">уведомления о загрузках (например, офлайн-карт)</string>
     <string name="notification_channel_cache_download_name">загрузчик тайника</string>
     <string name="notification_channel_cache_download_description">уведомления о фоновых загрузках тайников</string>
-    <string name="notification_proximity_title">уведомление о приближении c:geo</string>
     <string name="notification_download_receiver_title">Импорт загрузки</string>
     <!-- individual routes -->
     <string name="individual_route">Личный маршрут</string>
