@@ -1362,7 +1362,6 @@
     <string name="number_input_err_boundarymax">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_format">Неприпустимий час формат</string>
     <!-- notification / channel texts -->
-    <string name="notification_proximity_title">повідомлення про близькість</string>
     <!-- individual routes -->
     <string name="individual_route">Індивідуальний маршрут</string>
     <string name="individual_route_added">Додати до маршруту</string>
