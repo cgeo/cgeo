@@ -1937,7 +1937,6 @@
     <string name="notification_channel_downloader_name">c:geo indirici</string>
     <string name="notification_channel_downloader_description">indirme sonuç bildirimleri ( ör: çevrimdışı haritalar)</string>
     <string name="notification_channel_cache_download_name">Geocache indirici</string>
-    <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
     <string name="notification_download_receiver_title">İndirmeyi dışa aktarma</string>
     <!-- individual routes -->
     <string name="individual_route">Özel rota</string>
