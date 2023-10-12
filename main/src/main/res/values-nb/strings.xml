@@ -2049,7 +2049,6 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; andre</string>
     <string name="wizard_welcome_advanced">Avansert konfigurasjon</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline-kart</string>
     <string name="wizard_advanced_offlinemaps_info">Denne siden gir noen avanserte funksjoner, som er valgfrie å bruke.\n\nc:geo kan laste ned kartfiler for offline bruk.</string>
     <string name="wizard_advanced_restore_label">Gjenopprett</string>
     <string name="wizard_advanced_restore_info">Hvis du har en sikkerhetskopi av en tidligere installasjon, kan du gjenopprette innstillinger og/eller geocache-data.</string>
