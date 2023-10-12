@@ -2434,7 +2434,7 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching ir kiti</string>
     <string name="wizard_welcome_advanced">Išplėstinė konfigūracija</string>
-    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai naudojimui neprisijungus</string>
+    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai neprisijungus</string>
     <string name="wizard_advanced_offlinemaps_info">Šiame puslapyje pateikiamos kai kurios išplėstinės funkcijos, kurių naudojimas yra neprivalomas.\n\nc:geo gali atsisiųsti žemėlapio failus, skirtus naudoti neprisijungus.</string>
     <string name="wizard_advanced_routing_label">Suaktyvinkite maršruto parinkimą neprisijungus</string>
     <string name="wizard_advanced_routing_info">c:geo turi vidinį maršruto parinkimo variklį, skirtą maršrutizavimui neprisijungus, ir gali automatiškai atsisiųsti trūkstamus maršruto duomenis.</string>
