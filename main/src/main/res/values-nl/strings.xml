@@ -877,6 +877,7 @@
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
+    <string name="init_brouterProfileUser">Gebruikersgedefinieerd profiel</string>
     <string name="init_removeFromRouteOnLog">Verwijder uit de route bij het logboek</string>
     <string name="init_summary_removeFromRouteOnLog">Bij het verzenden of opslaan van een log verwijder de cache van de huidige route.</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
@@ -2178,6 +2179,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
+    <string name="failed_creating_shortcut">Snelkoppeling maken mislukt</string>
     <string name="send">Verzenden</string>
     <string name="confirm_log_title">Speciaal log type</string>
     <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
@@ -2344,6 +2346,8 @@
     <string name="routingmode_walk">Lopen</string>
     <string name="routingmode_bike">Fiets</string>
     <string name="routingmode_car">Auto</string>
+    <string name="routingmode_user1">Gebruiker 1</string>
+    <string name="routingmode_user2">Gebruiker 2</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>
@@ -2469,11 +2473,6 @@
     <string name="wizard_platforms_intro">Om geocaches met c:geo te vinden heb je een account nodig voor een geocaching service ondersteund door c:geo.\nSelecteer de gewenste service hieronder om in te loggen met je bestaande account of maak een nieuw account aan.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; anderen</string>
-    <string name="wizard_welcome_advanced">Geavanceerde configuratie</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline kaarten</string>
-    <string name="wizard_advanced_offlinemaps_info">Deze pagina biedt enkele geavanceerde functies, die optioneel te gebruiken zijn.\n\nc:geo kan kaartbestanden downloaden voor offline gebruik.</string>
-    <string name="wizard_advanced_routing_label">Activeer offline routering</string>
-    <string name="wizard_advanced_routing_info">c:geo heeft een interne routeplanner voor offline routeren en kan automatisch ontbrekende routeringsgegevens voor je downloaden.</string>
     <string name="wizard_advanced_restore_label">Terugzetten</string>
     <string name="wizard_advanced_restore_info">Als je een backup van een eerdere installatie hebt, kun je instellingen en/of geocache gegevens herstellen.</string>
     <string name="status_not_ok">FOUT</string>
