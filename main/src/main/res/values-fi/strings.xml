@@ -2422,11 +2422,6 @@
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; muut</string>
-    <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
-    <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
-    <string name="wizard_advanced_routing_label">Aktivoi offline-reititys</string>
-    <string name="wizard_advanced_routing_info">c:geossa on sisäinen reititysmoottori offline-reititykseen ja se voi ladata automaattisesti puuttuvat reititystiedot puolestasi.</string>
     <string name="wizard_advanced_restore_label">Palauta</string>
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>
