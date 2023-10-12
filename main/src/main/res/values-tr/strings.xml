@@ -2093,11 +2093,6 @@
     <string name="wizard_platforms_intro">c:geo ile Geocache\'leri bulmak için c:geo tarafından desteklenen bir Geocaching hizmetinden hesabınızın olması gerekiyor.\nTercih ettiğiniz hizmeti var olan hesabınızla giriş yaparak veya yeni bir hesap oluşturak seçebilirsiniz.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; diğerleri</string>
-    <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
-    <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
-    <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
-    <string name="wizard_advanced_routing_label">Çevrimdışı yönlendirmeyi aktive et</string>
-    <string name="wizard_advanced_routing_info">c:geo\'nun eksik yönlendirme verilerini otomatik indirebilen dahili bir çevrimdışı yönlendirme motoru bulunmaktadır.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
