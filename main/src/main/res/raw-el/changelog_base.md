@@ -25,3 +25,4 @@
 - New: Allow filtering in multi selection lists
 - New: Filter to include other named (stored) filters
 - Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
