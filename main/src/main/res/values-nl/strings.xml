@@ -2156,6 +2156,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
+    <string name="failed_creating_shortcut">Snelkoppeling maken mislukt</string>
     <string name="send">Verzenden</string>
     <string name="confirm_log_title">Speciaal log type</string>
     <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
