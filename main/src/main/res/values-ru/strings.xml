@@ -2446,7 +2446,7 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching и др.</string>
     <string name="wizard_welcome_advanced">Дополнительные настройки</string>
-    <string name="wizard_advanced_offlinemaps_label">Офлайн-карты</string>
+    <string name="wizard_advanced_offlinemaps_label">Карты офлайн</string>
     <string name="wizard_advanced_offlinemaps_info">Здесь содержатся некоторые дополнительные возможности, которые могут быть использованы.\n\nc:geo может скачивать файлы карт для использования офлайн.</string>
     <string name="wizard_advanced_routing_label">Включить офлайн-навигацию</string>
     <string name="wizard_advanced_routing_info">c:geo имеет встроенный механизм для навигации офлайн и может автоматически загружать нужные для этого данные.</string>
