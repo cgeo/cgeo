@@ -25,3 +25,4 @@
 - Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
 - Nowość: Filtr, który pozwala na dołączenie innych nazwanych (zapisanych) filtrów
 - Zmiana: Usunięto AndroidBeam, który nie jest już obsługiwany przez platformę Android
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
