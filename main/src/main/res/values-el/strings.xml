@@ -2242,11 +2242,6 @@
     <string name="wizard_platforms_intro">Για να βρείτε κρύπτες με το c:geo χρειάζεστε ένα λογαριασμό για μια υπηρεσία geocaching που υποστηρίζεται από το c:geo.\nΕπιλέξτε την επιθυμητή υπηρεσία παρακάτω για να συνδεθείτε με τον υπάρχοντα λογαριασμό σας ή να δημιουργήσετε ένα νέο λογαριασμό.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; άλλα</string>
-    <string name="wizard_welcome_advanced">Προηγμένη διαμόρφωση</string>
-    <string name="wizard_advanced_offlinemaps_label">Χάρτες χωρίς σύνδεση</string>
-    <string name="wizard_advanced_offlinemaps_info">Αυτή η σελίδα παρέχει μερικές προηγμένες λειτουργίες, οι οποίες είναι προαιρετικές για χρήση.\n\nτο c:geo μπορεί να κατεβάσει αρχεία χάρτη για χρήση χωρίς σύνδεση.</string>
-    <string name="wizard_advanced_routing_label">Ενεργοποίηση εκτός σύνδεσης δρομολόγησης</string>
-    <string name="wizard_advanced_routing_info">Το c:geo έχει εσωτερικό μηχανισμό για δρομολόγηση εκτός σύνδεσης και μπορεί να κατεβάσει αυτόματα τα ελλειπόντα δεδομένα δρομολόγησης για εσάς.</string>
     <string name="wizard_advanced_restore_label">Επαναφορά</string>
     <string name="wizard_advanced_restore_info">Εάν έχετε ένα αντίγραφο ασφαλείας μιας προηγούμενης εγκατάστασης, μπορείτε να επαναφέρετε τις ρυθμίσεις και/ή geocache δεδομένα.</string>
     <string name="status_not_ok">ΛΑΘΟΣ</string>
