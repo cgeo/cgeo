@@ -2373,7 +2373,7 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; autres</string>
     <string name="wizard_welcome_advanced">Paramètres avancés</string>
-    <string name="wizard_advanced_offlinemaps_label">Cartes hors ligne</string>
+    <string name="wizard_advanced_offlinemaps_label">Cartes hors-ligne</string>
     <string name="wizard_advanced_offlinemaps_info">Cette page fournit des fonctions avancées, qu\'il n\'est pas obligatoire d\'utiliser.\n\nc:geo peut télécharger des fichiers cartographiques pour une utilisation hors-ligne.</string>
     <string name="wizard_advanced_routing_label">Activer le routage hors ligne</string>
     <string name="wizard_advanced_routing_info">c:geo a un moteur de routage interne pour le routage hors ligne et peut télécharger automatiquement les données de routage manquantes pour vous.</string>
