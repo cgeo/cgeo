@@ -25,3 +25,4 @@
 - Nové: Umožněno filtrování v seznamech s vícenásobným výběrem
 - Novinka: Filtr pro zahrnutí ostatních pojmenovaných (uložených) filtrů
 - Změna: Odstraněn AndroidBeam, který již není podporován platformou Android
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
