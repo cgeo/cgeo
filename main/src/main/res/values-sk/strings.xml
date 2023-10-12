@@ -2410,11 +2410,6 @@
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching a ďalšie</string>
-    <string name="wizard_welcome_advanced">Rozšírená konfigurácia</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
-    <string name="wizard_advanced_offlinemaps_info">Na tejto stránke sú určité rozšírené funkcie, ktoré môžete voliteľne použiť.\n\nAplikácia c:geo môže stiahnuť mapové súbory na použitie offline.</string>
-    <string name="wizard_advanced_routing_label">Aktivovať offline navigáciu</string>
-    <string name="wizard_advanced_routing_info">Aplikácia c:geo má interné prostredie navigácie pre offline navigáciu a môže pre vás automaticky preberať chýbajúce údaje navigácie.</string>
     <string name="wizard_advanced_restore_label">Obnoviť</string>
     <string name="wizard_advanced_restore_info">Ak máte zálohu predchádzajúcej inštalácie, môžete obnoviť nastavenia a/alebo údaje kešiek.</string>
     <string name="status_not_ok">CHYBA</string>
