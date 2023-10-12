@@ -2529,11 +2529,6 @@
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching a další</string>
-    <string name="wizard_welcome_advanced">Pokročilá nastavení</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
-    <string name="wizard_advanced_offlinemaps_info">Tato stránka poskytuje některé pokročilé funkce, které jsou pouze volitelné.\n\nc:geo může stáhnout mapové soubory pro offline použití.</string>
-    <string name="wizard_advanced_routing_label">Aktivovat offline směrování</string>
-    <string name="wizard_advanced_routing_info">c:geo má interní směrovací engine pro offline směrování a může automaticky stahovat chybějící směrovací data.</string>
     <string name="wizard_advanced_restore_label">Obnovit</string>
     <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
     <string name="status_not_ok">CHYBA</string>
