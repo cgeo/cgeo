@@ -7,7 +7,7 @@
 - Nieuw: Lineaire labs gebruiken getallen als markeerpunten
 - Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
 - Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
-- New: User-defined routing profiles (internal routing only)
+- Nieuw: Gebruikersgedefinieerde routeringsprofielen (alleen interne routering)
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
@@ -25,3 +25,4 @@
 - Nieuw: Filteren in multiselect lijsten toestaan
 - Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
 - Wijziging: AndroidBeam verwijderd, die niet langer wordt ondersteund door het Android-platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
