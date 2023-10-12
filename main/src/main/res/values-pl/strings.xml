@@ -2533,11 +2533,6 @@
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; inne</string>
-    <string name="wizard_welcome_advanced">Konfiguracja zaawansowana</string>
-    <string name="wizard_advanced_offlinemaps_label">Mapy offline</string>
-    <string name="wizard_advanced_offlinemaps_info">Ta strona zawiera pewne zaawansowane funkcje, których użycie jest opcjonalne.\n\nc:geo może pobierać pliki map do użytku offline.</string>
-    <string name="wizard_advanced_routing_label">Aktywuj wyznaczanie trasy offline</string>
-    <string name="wizard_advanced_routing_info">c:geo posiada wewnętrzny silnik służący do wyznaczania trasy offline i może automatycznie pobrać brakujące dane nawigowania dla ciebie.</string>
     <string name="wizard_advanced_restore_label">Przywróć</string>
     <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
     <string name="status_not_ok">BŁĄD</string>
