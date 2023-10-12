@@ -2350,11 +2350,6 @@
     <string name="wizard_platforms_intro">Pour trouver des géocaches avec c:geo, vous avez besoin d\'un compte pour un service de géocaching supporté par c:geo.\nSélectionnez le service souhaité ci-dessous pour vous connecter avec votre compte existant ou créer un nouveau compte.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; autres</string>
-    <string name="wizard_welcome_advanced">Paramètres avancés</string>
-    <string name="wizard_advanced_offlinemaps_label">Cartes hors ligne</string>
-    <string name="wizard_advanced_offlinemaps_info">Cette page fournit des fonctions avancées, qu\'il n\'est pas obligatoire d\'utiliser.\n\nc:geo peut télécharger des fichiers cartographiques pour une utilisation hors-ligne.</string>
-    <string name="wizard_advanced_routing_label">Activer le routage hors ligne</string>
-    <string name="wizard_advanced_routing_info">c:geo a un moteur de routage interne pour le routage hors ligne et peut télécharger automatiquement les données de routage manquantes pour vous.</string>
     <string name="wizard_advanced_restore_label">Restaurer</string>
     <string name="wizard_advanced_restore_info">Si vous avez une sauvegarde d\'une installation précédente, vous pouvez restaurer les paramètres et/ou les données des géocaches.</string>
     <string name="status_not_ok">ERREUR</string>
