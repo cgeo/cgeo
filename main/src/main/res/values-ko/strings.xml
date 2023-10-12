@@ -2433,11 +2433,6 @@
     <string name="wizard_platforms_intro">c:geo로 지오 캐시를 찾으려면 c:geo에서 지원하는 지오 캐싱 서비스에 대한 계정이 필요합니다.\n아래에서 원하는 서비스를 선택하여 기존 계정으로 로그인하거나 새 계정을 만드십시오.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; 기타</string>
-    <string name="wizard_welcome_advanced">고급 설정</string>
-    <string name="wizard_advanced_offlinemaps_label">오프라인 지도</string>
-    <string name="wizard_advanced_offlinemaps_info">이 페이지는 선택적으로 사용할 수있는 몇 가지 고급 기능을 제공합니다.\n\nc:geo는 오프라인 사용을 위해 지도 파일을 다운로드할 수 있습니다.</string>
-    <string name="wizard_advanced_routing_label">오프라인 라우팅 활성화</string>
-    <string name="wizard_advanced_routing_info">c:geo에는 오프라인 라우팅을위한 내부 라우팅 엔진이 있으며 누락된 라우팅 데이터를 자동으로 다운로드 할 수 있습니다.</string>
     <string name="wizard_advanced_restore_label">복원</string>
     <string name="wizard_advanced_restore_info">이전 설치의 백업이있는 경우 설정 및 / 또는 지오캐시 데이터를 복원 할 수 있습니다.</string>
     <string name="status_not_ok">오류</string>
