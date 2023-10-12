@@ -2106,11 +2106,6 @@ Nombre de archivo:%2$s</string>
     <string name="wizard_platforms_intro">Para encontrar cachés con c:geo necesitas una cuenta de servicio de geocaching soportada por c:geo.\nSeleccione el servicio deseado a continuación para iniciar sesión con su cuenta existente o crear una nueva cuenta.</string>
     <string name="wizard_platforms_gc">Geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; otros</string>
-    <string name="wizard_welcome_advanced">Configuración avanzada</string>
-    <string name="wizard_advanced_offlinemaps_label">Mapas sin conexión</string>
-    <string name="wizard_advanced_offlinemaps_info">Esta página proporciona algunas funciones avanzadas, que son opcionales para usar.\n\nc:geo puede descargar archivos de mapa para uso sin conexión.</string>
-    <string name="wizard_advanced_routing_label">Activar enrutamiento sin conexión</string>
-    <string name="wizard_advanced_routing_info">c:geo tiene un motor de enrutamiento interno para la ruta sin conexión y puede descargar automáticamente los datos de enrutamiento que faltan para usted.</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
     <string name="wizard_advanced_restore_info">Si tienes una copia de seguridad de una instalación anterior puedes restaurar la configuración y/o los datos del caché.</string>
     <string name="status_not_ok">ERROR</string>
