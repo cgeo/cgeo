@@ -1420,8 +1420,6 @@
     <string name="wizard_outro_error">Неповна конфігурація\nНе всі частини c:geo будуть працювати належним чином!</string>
     <string name="wizard_permissions_title">Налаштування дозволів</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
-    <string name="wizard_welcome_advanced">Розширена конфігурація</string>
-    <string name="wizard_advanced_offlinemaps_label">офлайн-карти</string>
     <string name="wizard_advanced_restore_label">Відновити</string>
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>
