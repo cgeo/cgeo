@@ -1127,6 +1127,7 @@
     <string name="settings_readingerror">Error reading settings</string>
     <string name="settings_restart">c:geo needs to be restarted now to bring loaded settings into effect</string>
     <string name="settings_folder_changed">Folder \"%1$s\" will be changed to \"%2$s\" during restoration.\n\nTap \"%4$s\" to proceed. In that case you will be asked to regrant c:geo access to that folder.\n\nTap \"%3$s\" to keep the current folder setting instead.</string>
+    <string name="settings_file_changed">\"%1$s\" will be changed to \"%2$s\" during restoration.\n\nTap \"%4$s\" to proceed. In that case you will be asked to regrant c:geo access to that file.\n\nTap \"%3$s\" to keep the current setting instead.</string>
 
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
     <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can obtain maps from different providers or even create your own maps (from OSM data). First you have to select the folder in which offline maps are to be stored.</string>
