@@ -25,3 +25,4 @@
 - 신규: 다중 선택 목록에서 필터 허용
 - New: Filter to include other named (stored) filters
 - Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
