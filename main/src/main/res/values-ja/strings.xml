@@ -2119,7 +2119,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
     <string name="wizard_welcome_advanced">追加設定</string>
-    <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
     <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
     <string name="wizard_advanced_routing_label">c:geoルート検索を使用する</string>
     <string name="wizard_advanced_routing_info">c:geoルート検索(Brouter互換)はオフライン用のルート検索エンジンです。データの自動ダウンロードなどもできます。</string>
