@@ -2422,11 +2422,6 @@
     <string name="wizard_platforms_intro">Для поиска тайников с c:geo необходим аккаунт на одном из сервисов геокешинга, поддерживаемых c:geo.\nВыберите нужный сервис ниже, чтобы войти с существующей учетной записью или создать новую учетную запись.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching и др.</string>
-    <string name="wizard_welcome_advanced">Дополнительные настройки</string>
-    <string name="wizard_advanced_offlinemaps_label">Офлайн-карты</string>
-    <string name="wizard_advanced_offlinemaps_info">Здесь содержатся некоторые дополнительные возможности, которые могут быть использованы.\n\nc:geo может скачивать файлы карт для использования офлайн.</string>
-    <string name="wizard_advanced_routing_label">Включить офлайн-навигацию</string>
-    <string name="wizard_advanced_routing_info">c:geo имеет встроенный механизм для навигации офлайн и может автоматически загружать нужные для этого данные.</string>
     <string name="wizard_advanced_restore_label">Восстановить</string>
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
     <string name="status_not_ok">ОШИБКА</string>
