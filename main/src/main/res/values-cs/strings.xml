@@ -982,6 +982,7 @@
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
     <string name="settings_folder_changed">Složka \"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo do této složky.\n\nKlepnutím na „%3$s“ zachováte místo toho aktuální nastavení složky.</string>
+    <string name="settings_file_changed">\"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo k danému souboru.\n\nKlepnutím na „%3$s“ místo toho zachováte aktuální nastavení.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o motivech mapy</string>
@@ -2200,6 +2201,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
+    <string name="failed_creating_shortcut">Nepodařilo se vytvořit zkratku</string>
     <string name="send">Odeslat</string>
     <string name="confirm_log_title">Speciální typ logu</string>
     <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
