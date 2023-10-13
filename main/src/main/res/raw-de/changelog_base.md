@@ -24,5 +24,5 @@
 - Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
 - Neu: Filtern in Mehrfachauswahllisten
 - Neu: Filter zum Einbinden benannter (gespeicherter) Filter
-- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Änderung: AndroidBeam-Unterstützung entfernt, da nicht mehr von der Android-Plattform unterstützt
 - Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
