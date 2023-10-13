@@ -25,4 +25,4 @@
 - Nieuw: Filteren in multiselect lijsten toestaan
 - Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
 - Wijziging: AndroidBeam verwijderd, die niet langer wordt ondersteund door het Android-platform
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Wijziging: Configuratiewizard: "herstel" functionaliteit in het "services configureren" scherm geïntegreerd en het geavanceerde configuratiescherm verwijderd.
