@@ -7,7 +7,7 @@
 - Novinka: Lineární labky používají čísla jako značky trasových bodů
 - Novinka: Trasové body kešky zobrazují ikonu typu kešky jako značku
 - Novinka: Zobrazení informací o nadmořské výšce pro aktuální polohu na mapě (viz Nastavení => Obsah mapy & Chování)
-- New: User-defined routing profiles (internal routing only)
+- Novinka: Uživatelem definované profily směrování (pouze interní směrování)
 
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
@@ -25,4 +25,4 @@
 - Nové: Umožněno filtrování v seznamech s vícenásobným výběrem
 - Novinka: Filtr pro zahrnutí ostatních pojmenovaných (uložených) filtrů
 - Změna: Odstraněn AndroidBeam, který již není podporován platformou Android
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Změna: Průvodce konfigurací: Integrována funkce "obnovení" na obrazovce "konfigurace služeb" a odstraněna obrazovka pokročilé konfigurace.
