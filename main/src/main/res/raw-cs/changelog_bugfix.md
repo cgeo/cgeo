@@ -1,7 +1,7 @@
 ##
 - Oprava: Skryta chybová zprává o zastaralém připojení
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- Oprava: Příliš dlouhý název oznámení o přiblížení, skutečné oznámení se na malých obrazovkách ořízne
+- Oprava: Na novějších systémech Android nelze vytvořit zástupce pro widgety c:geo
 
 ##
 - Novinka: Zvýšení cílové SDK na 33 (kvůli požadavkům Obchodu Play)
