@@ -8,6 +8,7 @@
 - Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
 - Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
 - Neu: Benutzerdefinierte Routingprofile (nur internes Routing)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
@@ -26,3 +27,5 @@
 - Neu: Filter zum Einbinden benannter (gespeicherter) Filter
 - Änderung: AndroidBeam-Unterstützung entfernt, da nicht mehr von der Android-Plattform unterstützt
 - Änderung: Konfigurationsassistent: "Wiederherstellung"-Funktionalität in Bildschirm "Dienste konfigurieren" integriert und erweiterten Konfigurationsbildschirm entfernt
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
