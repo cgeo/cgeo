@@ -1,18 +1,2 @@
 ##
-- 수정: 오래된 연결 오류 메시지 숨기기
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
 
-##
-- 신규: 타겟 SDK를 33으로 늘렸습니다(Play 스토어 요구 사항으로 인해).
-- 신규: (Android 13만 해당) "알림" 권한이 추가되었습니다. 다운로드 알림을 보려면 홈 화면에서 구성 마법사를 실행하거나 수동으로 알림 권한을 부여해야 할 수도 있습니다.
-- 수정: 동일한 파일에 여러 경로가 포함된 GPX 가져오기
-- 수정: 호감점수 비율 > 특정 조건에서는 100%
-- 수정: Google 지도에서 화면 회전 시 내비게이션 선이 손실됨
-- 수정: 삭제 시 Google 지도에서 개별 경로가 삭제되지 않음
-- 수정: 새 로그에 이미지를 먼저 추가할 때 마지막 로그 텍스트가 삭제됨
-- 수정: 호감점수가 남아 있지 않은 경우 "호감점수로 설정"을 선택 취소할 수 없으며 오류로 인해 로그가 실패합니다.
-
-##
-- 수정: 호감점수에 추가할 때 충돌이 발생함 (특정 조건에서)
-- 수정: Google 지도를 사용할 때 개별 경로 작업이 작동하지 않습니다.
