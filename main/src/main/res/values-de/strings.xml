@@ -877,6 +877,7 @@
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
+    <string name="init_brouterProfileUser">Benutzerdefiniertes Profil</string>
     <string name="init_removeFromRouteOnLog">Von Route entfernen bei Log</string>
     <string name="init_summary_removeFromRouteOnLog">Beim Senden oder Speichern eines Logs den Cache von der aktuellen Route entfernen.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
@@ -1001,6 +1002,7 @@
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
+    <string name="settings_file_changed">\"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diese Datei zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Einstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -2178,6 +2180,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
+    <string name="failed_creating_shortcut">Verknüpfung konnte nicht erstellt werden</string>
     <string name="send">Senden</string>
     <string name="confirm_log_title">Spezieller Log Typ</string>
     <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
@@ -2344,6 +2347,8 @@
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
     <string name="routingmode_car">Auto</string>
+    <string name="routingmode_user1">Benutzerdefiniert 1</string>
+    <string name="routingmode_user2">Benutzerdefiniert 2</string>
     <!-- view settings -->
     <string name="view_settings">Einstellungen anzeigen</string>
     <string name="delete_setting">Einstellung löschen</string>
