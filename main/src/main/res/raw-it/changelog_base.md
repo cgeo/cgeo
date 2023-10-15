@@ -8,6 +8,7 @@
 - Nuovo: I waypoint di un cache usano l'icona del tipo di cache come marker
 - Nuovo: Mostra l'altitudine per la posizione corrente sulla mappa (vedere Impostazioni => Contenuto della mappa & Comportamento)
 - New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Dettagli del cache
 - Nuovo: modifica il valore predefinito per il prefisso della didascalia delle immagini nel log
@@ -26,3 +27,5 @@
 - New: Filter to include other named (stored) filters
 - Change: Removed AndroidBeam which is no longer supported by Android platform
 - Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
