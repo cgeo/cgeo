@@ -1,5 +1,7 @@
 ##
 - Oplossing: Verberg verouderde verbindingsfoutmelding
+- Oplossing: De titel van de nabijheidsmeldingen is te lang, de werkelijke notificatie wordt uitgeschakeld op kleine schermen
+- Oplossing: Kan geen snelkoppelingen maken voor c:geo widgets op nieuwere Android-systemen
 
 ##
 - Nieuw: Doel SDK naar 33 verhoogd (vanwege de vereisten van de Play Store)

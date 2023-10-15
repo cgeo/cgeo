@@ -7,6 +7,8 @@
 - New: Linear labs use numbers as waypoint markers
 - New: Waypoints of a cache show cache type icon as marker
 - New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Slėptuvės detalės
 - New: Edit default value for log image caption prefix
@@ -24,3 +26,6 @@
 - New: Allow filtering in multi selection lists
 - New: Filter to include other named (stored) filters
 - Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

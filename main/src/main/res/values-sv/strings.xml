@@ -2149,7 +2149,6 @@
     <string name="notification_channel_downloader_description">aviseringar för hämtningar (t.ex. offline-kartor)</string>
     <string name="notification_channel_cache_download_name">cache-hämtare</string>
     <string name="notification_channel_cache_download_description">resultatnotifieringar för cachers bakgrunds-nedladdningar</string>
-    <string name="notification_proximity_title">c:geo närhetsnotifiering</string>
     <string name="notification_download_receiver_title">Importerar nedladdning</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rutt</string>
@@ -2344,11 +2343,6 @@
     <string name="wizard_platforms_intro">För att hitta geocacher med c:geo behöver du ett konto för en geocachingtjänst som stöds av c:geo.\nVälj önskad tjänst nedan för att antingen logga in med ditt befintliga konto eller skapa ett nytt konto.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; andra</string>
-    <string name="wizard_welcome_advanced">Avancerade inställningar</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline-kartor</string>
-    <string name="wizard_advanced_offlinemaps_info">Denna sida innehåller några avancerade funktioner, som är valfria att använda.\n\nc:geo kan ladda ner kartfiler för offline-användning.</string>
-    <string name="wizard_advanced_routing_label">Aktivera offline-routing</string>
-    <string name="wizard_advanced_routing_info">c:geo har en intern routingmotor för offline-routing och kan automatiskt ladda ner saknade routing-data åt dig.</string>
     <string name="wizard_advanced_restore_label">Återställ</string>
     <string name="wizard_advanced_restore_info">Om du har en säkerhetskopia av en tidigare installation kan du återställa inställningar och/eller geocache-data.</string>
     <string name="status_not_ok">FEL</string>

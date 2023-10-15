@@ -889,6 +889,7 @@
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
+    <string name="init_brouterProfileUser">Uživatelem definovaný profil</string>
     <string name="init_removeFromRouteOnLog">Odstranit z trasy při zalogování</string>
     <string name="init_summary_removeFromRouteOnLog">Po odeslání nebo uložení logu odstraní kešku z aktuální trasy.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
@@ -1013,6 +1014,7 @@
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
     <string name="settings_folder_changed">Složka \"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo do této složky.\n\nKlepnutím na „%3$s“ zachováte místo toho aktuální nastavení složky.</string>
+    <string name="settings_file_changed">\"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo k danému souboru.\n\nKlepnutím na „%3$s“ místo toho zachováte aktuální nastavení.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o motivech mapy</string>
@@ -2222,6 +2224,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
+    <string name="failed_creating_shortcut">Nepodařilo se vytvořit zkratku</string>
     <string name="send">Odeslat</string>
     <string name="confirm_log_title">Speciální typ logu</string>
     <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
@@ -2329,7 +2332,6 @@
     <string name="notification_channel_downloader_description">oznámení o výsledcích stahování (např. offline mapy)</string>
     <string name="notification_channel_cache_download_name">stahování kešky</string>
     <string name="notification_channel_cache_download_description">oznámení o výsledku stahování kešek na pozadí</string>
-    <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
     <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
     <string name="individual_route">Individuální trasa</string>
@@ -2405,6 +2407,8 @@
     <string name="routingmode_walk">Chůze</string>
     <string name="routingmode_bike">Kolo</string>
     <string name="routingmode_car">Auto</string>
+    <string name="routingmode_user1">Uživatel 1</string>
+    <string name="routingmode_user2">Uživatel 2</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
@@ -2530,11 +2534,6 @@
     <string name="wizard_platforms_intro">Na hledání kešek s aplikací c:geo je potřebný účet na geocachingové službě podporované aplikací c:geo.\nVyberte níže požadovanou službu, do které se přihlásíte, případně si vytvořte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching a další</string>
-    <string name="wizard_welcome_advanced">Pokročilá nastavení</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
-    <string name="wizard_advanced_offlinemaps_info">Tato stránka poskytuje některé pokročilé funkce, které jsou pouze volitelné.\n\nc:geo může stáhnout mapové soubory pro offline použití.</string>
-    <string name="wizard_advanced_routing_label">Aktivovat offline směrování</string>
-    <string name="wizard_advanced_routing_info">c:geo má interní směrovací engine pro offline směrování a může automaticky stahovat chybějící směrovací data.</string>
     <string name="wizard_advanced_restore_label">Obnovit</string>
     <string name="wizard_advanced_restore_info">Pokud máte zálohu předchozí instalace, můžete obnovit nastavení a/nebo data kešek.</string>
     <string name="status_not_ok">CHYBA</string>

@@ -2213,7 +2213,6 @@
     <string name="notification_channel_downloader_description">atsisiuntimų rezultatų pranešimai (pvz., žemėlapiai neprisijungus)</string>
     <string name="notification_channel_cache_download_name">sleptuvės parsisiuntimo programa</string>
     <string name="notification_channel_cache_download_description">slėptuvių atsisiuntimų rezultatų fono pranešimai</string>
-    <string name="notification_proximity_title">c:geo priartėjimo pranešimas</string>
     <string name="notification_download_receiver_title">Importuojamas atsisiuntimas</string>
     <!-- individual routes -->
     <string name="individual_route">Asmeninis maršrutas</string>
@@ -2411,11 +2410,6 @@
     <string name="wizard_platforms_intro">Norėdami rasti geoslėptuves su c:geo, jums reikia paskyros, skirtos geoslėptuvių ieškojimo paslaugai, kurią palaiko c:geo.\nToliau pasirinkite norimą paslaugą, kad prisijungtumėte naudodami esamą paskyrą arba sukurtumėte naują paskyrą.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching ir kiti</string>
-    <string name="wizard_welcome_advanced">Išplėstinė konfigūracija</string>
-    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai naudojimui neprisijungus</string>
-    <string name="wizard_advanced_offlinemaps_info">Šiame puslapyje pateikiamos kai kurios išplėstinės funkcijos, kurių naudojimas yra neprivalomas.\n\nc:geo gali atsisiųsti žemėlapio failus, skirtus naudoti neprisijungus.</string>
-    <string name="wizard_advanced_routing_label">Suaktyvinkite maršruto parinkimą neprisijungus</string>
-    <string name="wizard_advanced_routing_info">c:geo turi vidinį maršruto parinkimo variklį, skirtą maršrutizavimui neprisijungus, ir gali automatiškai atsisiųsti trūkstamus maršruto duomenis.</string>
     <string name="wizard_advanced_restore_label">Atkurti</string>
     <string name="wizard_advanced_restore_info">Jei turite ankstesnio diegimo atsarginę kopiją, galite atkurti nustatymus ir (arba) geoslėptuvių duomenis.</string>
     <string name="status_not_ok">KLAIDA</string>

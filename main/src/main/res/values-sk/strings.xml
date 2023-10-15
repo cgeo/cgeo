@@ -2213,7 +2213,6 @@
     <string name="notification_channel_downloader_description">upozornenia na výsledok preberania (napr. offline mapy)</string>
     <string name="notification_channel_cache_download_name">sťahovanie kešky</string>
     <string name="notification_channel_cache_download_description">oznámenia o výsledku pre sťahovanie kešiek na pozadí</string>
-    <string name="notification_proximity_title">Upozornenie c:geo na blízkosť</string>
     <string name="notification_download_receiver_title">Preberanie importu</string>
     <!-- individual routes -->
     <string name="individual_route">Individuálna trasa</string>
@@ -2411,11 +2410,6 @@
     <string name="wizard_platforms_intro">Na hľadanie kešiek s aplikáciou c\"geo je potrebný účet na geocachingovej službe podporovanej aplikáciou c:geo.\nVyberte dole požadovanú službu, do ktorej sa prihlásite, prípadne si vytvorte nový účet.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching a ďalšie</string>
-    <string name="wizard_welcome_advanced">Rozšírená konfigurácia</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline mapy</string>
-    <string name="wizard_advanced_offlinemaps_info">Na tejto stránke sú určité rozšírené funkcie, ktoré môžete voliteľne použiť.\n\nAplikácia c:geo môže stiahnuť mapové súbory na použitie offline.</string>
-    <string name="wizard_advanced_routing_label">Aktivovať offline navigáciu</string>
-    <string name="wizard_advanced_routing_info">Aplikácia c:geo má interné prostredie navigácie pre offline navigáciu a môže pre vás automaticky preberať chýbajúce údaje navigácie.</string>
     <string name="wizard_advanced_restore_label">Obnoviť</string>
     <string name="wizard_advanced_restore_info">Ak máte zálohu predchádzajúcej inštalácie, môžete obnoviť nastavenia a/alebo údaje kešiek.</string>
     <string name="status_not_ok">CHYBA</string>

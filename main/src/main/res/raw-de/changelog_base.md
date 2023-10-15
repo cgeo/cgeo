@@ -7,6 +7,8 @@
 - Neu: Lineare Lab Adventures verwenden Zahlen als Wegpunkt-Marker
 - Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
 - Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
+- Neu: Benutzerdefinierte Routingprofile (nur internes Routing)
+- Korrektur: Titel der Näherungsbenachrichtigung ist zu lang, die tatsächliche Benachrichtigung wird auf kleinen Bildschirmen abgeschnitten
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
@@ -23,4 +25,7 @@
 - Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
 - Neu: Filtern in Mehrfachauswahllisten
 - Neu: Filter zum Einbinden benannter (gespeicherter) Filter
-- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Änderung: AndroidBeam-Unterstützung entfernt, da nicht mehr von der Android-Plattform unterstützt
+- Änderung: Konfigurationsassistent: "Wiederherstellung"-Funktionalität in Bildschirm "Dienste konfigurieren" integriert und erweiterten Konfigurationsbildschirm entfernt
+- Korrektur: Veraltete Verbindungsfehlermeldung ausblenden
+- Korrektur: Verknüpfungen für c:geo Widgets können auf neueren Android Systemen nicht erstellt werden

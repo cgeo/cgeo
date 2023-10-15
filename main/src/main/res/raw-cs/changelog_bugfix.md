@@ -1,5 +1,7 @@
 ##
 - Oprava: Skryta chybová zprává o zastaralém připojení
+- Oprava: Příliš dlouhý název oznámení o přiblížení, skutečné oznámení se na malých obrazovkách ořízne
+- Oprava: Na novějších systémech Android nelze vytvořit zástupce pro widgety c:geo
 
 ##
 - Novinka: Zvýšení cílové SDK na 33 (kvůli požadavkům Obchodu Play)

@@ -1,5 +1,7 @@
 ##
 - Poprawka: Ukryj nieaktualny komunikat o błędzie połączenia
+- Poprawka: Zbyt długi tytuł powiadomień zbliżeniowych, rzeczywiste powiadomienia były obcięte na małych ekranach
+- Poprawka: Nie można utworzyć skrótów dla widgetów c:geo na nowszych systemach Android
 
 ##
 - Nowość: Zwiększono docelowy SDK do 33 (z powodu wymagań Sklepu Play)

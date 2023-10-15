@@ -889,6 +889,7 @@
     <string name="init_brouterProfileWalk">Profil „Pieszo”</string>
     <string name="init_brouterProfileBike">Profil „Rower”</string>
     <string name="init_brouterProfileCar">Profil „Samochód”</string>
+    <string name="init_brouterProfileUser">Profil zdefiniowany przez użytkownika</string>
     <string name="init_removeFromRouteOnLog">Usuń z trasy po zalogowaniu</string>
     <string name="init_summary_removeFromRouteOnLog">Przy wysyłaniu lub zapisaniu dziennika usuń skrytkę z bieżącej trasy.</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
@@ -2222,6 +2223,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
+    <string name="failed_creating_shortcut">Nie udało się utworzyć skrótu</string>
     <string name="send">Wyślij</string>
     <string name="confirm_log_title">Specjalny typ wpisu</string>
     <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
@@ -2329,7 +2331,6 @@
     <string name="notification_channel_downloader_description">powiadomienia o wynikach pobierania (np. map offline)</string>
     <string name="notification_channel_cache_download_name">pobieranie skrytek</string>
     <string name="notification_channel_cache_download_description">powiadomienia o wynikach pobierania skrytek w tle</string>
-    <string name="notification_proximity_title">Powiadomienie o bliskości</string>
     <string name="notification_download_receiver_title">Importowanie pobierania</string>
     <!-- individual routes -->
     <string name="individual_route">Indywidualna trasa</string>
@@ -2405,6 +2406,8 @@
     <string name="routingmode_walk">Pieszo</string>
     <string name="routingmode_bike">Rower</string>
     <string name="routingmode_car">Samochód</string>
+    <string name="routingmode_user1">Użytkownik 1</string>
+    <string name="routingmode_user2">Użytkownik 2</string>
     <!-- view settings -->
     <string name="view_settings">Pokaż ustawienia</string>
     <string name="delete_setting">Usuń ustawienie</string>
@@ -2530,11 +2533,6 @@
     <string name="wizard_platforms_intro">Aby znaleźć skrytki z c:geo, potrzebujesz konta w usłudze geocaching obsługiwanej przez c:geo. \nWybierz żądaną usługę poniżej, aby zalogować się na istniejące konto lub utworzyć nowe.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; inne</string>
-    <string name="wizard_welcome_advanced">Konfiguracja zaawansowana</string>
-    <string name="wizard_advanced_offlinemaps_label">Mapy offline</string>
-    <string name="wizard_advanced_offlinemaps_info">Ta strona zawiera pewne zaawansowane funkcje, których użycie jest opcjonalne.\n\nc:geo może pobierać pliki map do użytku offline.</string>
-    <string name="wizard_advanced_routing_label">Aktywuj wyznaczanie trasy offline</string>
-    <string name="wizard_advanced_routing_info">c:geo posiada wewnętrzny silnik służący do wyznaczania trasy offline i może automatycznie pobrać brakujące dane nawigowania dla ciebie.</string>
     <string name="wizard_advanced_restore_label">Przywróć</string>
     <string name="wizard_advanced_restore_info">Jeśli masz kopię zapasową poprzedniej instalacji, możesz przywrócić ustawienia i/lub dane skrytek.</string>
     <string name="status_not_ok">BŁĄD</string>

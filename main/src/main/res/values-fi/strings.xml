@@ -2226,7 +2226,6 @@
     <string name="notification_channel_downloader_description">latausten tulosilmoitukset (kuten offline-kartat)</string>
     <string name="notification_channel_cache_download_name">kätkölataaja</string>
     <string name="notification_channel_cache_download_description">tulosilmoitukset kätköjen taustalatauksille</string>
-    <string name="notification_proximity_title">c:geon läheisyysilmoitus</string>
     <string name="notification_download_receiver_title">Tuodaan latausta</string>
     <!-- individual routes -->
     <string name="individual_route">Yksittäinen reitti</string>
@@ -2423,11 +2422,6 @@
     <string name="wizard_platforms_intro">Löytääksesi geokätköjä c:geon avulla, tarvitset tilin c:geon tukemaa geokätköilypalvelua varten.\nValitse haluamasi palvelu alta, jotta voit kirjautua sisään olemassa olevalla tililläsi tai luoda uuden tilin.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; muut</string>
-    <string name="wizard_welcome_advanced">Edistyneet määritysasetukset</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline-kartat</string>
-    <string name="wizard_advanced_offlinemaps_info">Tällä sivulla on joitakin lisätoimintoja, joiden käyttö on valinnaista.\n\nc:geo voi ladata karttatiedostoja offline-käyttöön.</string>
-    <string name="wizard_advanced_routing_label">Aktivoi offline-reititys</string>
-    <string name="wizard_advanced_routing_info">c:geossa on sisäinen reititysmoottori offline-reititykseen ja se voi ladata automaattisesti puuttuvat reititystiedot puolestasi.</string>
     <string name="wizard_advanced_restore_label">Palauta</string>
     <string name="wizard_advanced_restore_info">Jos sinulla on varmuuskopio aiemmasta asennuksesta, voit palauttaa asetukset ja/tai geokätkötiedot.</string>
     <string name="status_not_ok">VIRHE</string>

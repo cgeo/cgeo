@@ -1934,7 +1934,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="notification_channel_downloader_description">ダウンロード結果の通知(オフラインマップなど)</string>
     <string name="notification_channel_cache_download_name">キャッシュダウンローダー</string>
     <string name="notification_channel_cache_download_description">キャッシュのバックグラウンドダウンロード結果の通知</string>
-    <string name="notification_proximity_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
     <string name="individual_route_added">ルートに追加しました</string>
@@ -2097,11 +2096,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
-    <string name="wizard_welcome_advanced">追加設定</string>
-    <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
-    <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
-    <string name="wizard_advanced_routing_label">c:geoルート検索を使用する</string>
-    <string name="wizard_advanced_routing_info">c:geoルート検索(Brouter互換)はオフライン用のルート検索エンジンです。データの自動ダウンロードなどもできます。</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>

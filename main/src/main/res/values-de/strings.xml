@@ -877,6 +877,7 @@
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
+    <string name="init_brouterProfileUser">Benutzerdefiniertes Profil</string>
     <string name="init_removeFromRouteOnLog">Von Route entfernen bei Log</string>
     <string name="init_summary_removeFromRouteOnLog">Beim Senden oder Speichern eines Logs den Cache von der aktuellen Route entfernen.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
@@ -1001,6 +1002,7 @@
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
+    <string name="settings_file_changed">\"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diese Datei zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Einstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -2178,6 +2180,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
+    <string name="failed_creating_shortcut">Verknüpfung konnte nicht erstellt werden</string>
     <string name="send">Senden</string>
     <string name="confirm_log_title">Spezieller Log Typ</string>
     <string name="confirm_log_message">Du möchtest „%s“ loggen. Bist du dir sicher?</string>
@@ -2271,7 +2274,6 @@
     <string name="notification_channel_downloader_description">Ergebnisbenachrichtigung für Downloads (z.B. Offline-Karten)</string>
     <string name="notification_channel_cache_download_name">Cache Downloader</string>
     <string name="notification_channel_cache_download_description">Ergebnisbenachrichtigung für Cache Downloads</string>
-    <string name="notification_proximity_title">c:geo Annäherungsbenachrichtigung</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
     <string name="individual_route">Individuelle Route</string>
@@ -2345,6 +2347,8 @@
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
     <string name="routingmode_car">Auto</string>
+    <string name="routingmode_user1">Benutzerdefiniert 1</string>
+    <string name="routingmode_user2">Benutzerdefiniert 2</string>
     <!-- view settings -->
     <string name="view_settings">Einstellungen anzeigen</string>
     <string name="delete_setting">Einstellung löschen</string>
@@ -2470,11 +2474,6 @@
     <string name="wizard_platforms_intro">Um Geocaches mit c:geo zu finden, benötigst du ein Konto für einen Geocaching-Dienst, der von c:geo unterstützt wird.\nWähle unten den gewünschten Dienst aus, um dich entweder mit deinem bestehenden Konto anzumelden oder ein neues Konto zu erstellen.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; Andere</string>
-    <string name="wizard_welcome_advanced">Erweiterte Konfiguration</string>
-    <string name="wizard_advanced_offlinemaps_label">Offline-Karten</string>
-    <string name="wizard_advanced_offlinemaps_info">Diese Seite bietet einige erweiterte Funktionen, die optional verwendet werden können.\n\nc:geo kann Kartendateien zur Offline-Nutzung herunterladen.</string>
-    <string name="wizard_advanced_routing_label">Offline-Routing aktivieren</string>
-    <string name="wizard_advanced_routing_info">c:geo verfügt über eine interne Routing-Engine für Offline-Routing und kann automatisch fehlende Routing-Daten für dich herunterladen.</string>
     <string name="wizard_advanced_restore_label">Wiederherstellen</string>
     <string name="wizard_advanced_restore_info">Wenn du eine Sicherung einer vorherigen Installation hast, kannst du Einstellungen und/oder Geocache-Daten wiederherstellen.</string>
     <string name="status_not_ok">FEHLER</string>

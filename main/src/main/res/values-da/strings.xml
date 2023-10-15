@@ -1608,7 +1608,6 @@
     <string name="number_input_err_boundarymax">Den indtastede værdi er for høj og er blevet erstattet af maximumsværdien</string>
     <string name="number_input_err_format">Ugyldigt talformat</string>
     <!-- notification / channel texts -->
-    <string name="notification_proximity_title">Afstandsnotifikation</string>
     <!-- individual routes -->
     <string name="individual_route">Individuel rute</string>
     <string name="individual_route_added">Tilføjet til rute</string>
@@ -1707,9 +1706,6 @@
     <string name="wizard_platforms_intro">For at finde geocaches med c:geo har du brug for en konto til en geocaching service understøttet af c:geo.\nVælg den ønskede tjeneste nedenfor, for enten at logge ind med din eksisterende konto eller oprette en ny konto.</string>
     <string name="wizard_platforms_gc">Geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; andre</string>
-    <string name="wizard_welcome_advanced">Avanceret konfiguration</string>
-    <string name="wizard_advanced_offlinemaps_label">Offlinekort</string>
-    <string name="wizard_advanced_offlinemaps_info">Denne side indeholder nogle avancerede funktioner, som er valgfri at bruge.\n\nc:geo kan downloade kortfiler til offline brug.</string>
     <string name="wizard_advanced_restore_label">Genskab</string>
     <string name="wizard_advanced_restore_info">Hvis du har en sikkerhedskopi af en tidligere installation, kan du gendanne indstillinger og/eller geocache-data.</string>
     <string name="status_not_ok">FEJL</string>

@@ -2151,7 +2151,6 @@
     <string name="notification_channel_downloader_description">notificacions de resultats per a baixades (ex, mapes fora de línia)</string>
     <string name="notification_channel_cache_download_name">descàrrega de catxé</string>
     <string name="notification_channel_cache_download_description">notificacions de resultats per a les baixades de fons de catxés</string>
-    <string name="notification_proximity_title">notificació de proximitat de c:geo</string>
     <string name="notification_download_receiver_title">S\'està important la baixada</string>
     <!-- individual routes -->
     <string name="individual_route">Ruta individual</string>
@@ -2347,11 +2346,6 @@
     <string name="wizard_platforms_intro">Per trobar geocatxes amb C: geo, necessiteu un compte  d\'un servei de geocatxing compatible.\nSeleccioneu el servei desitjat a continuació per iniciar la sessió amb el vostre compte existent o creeu un compte nou.</string>
     <string name="wizard_platforms_gc">Geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; altres</string>
-    <string name="wizard_welcome_advanced">Configuració avançada</string>
-    <string name="wizard_advanced_offlinemaps_label">Mapes fora de línia</string>
-    <string name="wizard_advanced_offlinemaps_info">Aquesta pàgina proporciona algunes funcions avançades que són opcionals .\n\nC: geo pot descarregar fitxers de mapes per fora de línia.</string>
-    <string name="wizard_advanced_routing_label">Activeu l\'encaminament fora de línia</string>
-    <string name="wizard_advanced_routing_info">C:geo té un motor intern per a l’encaminament fora de línia i us pot descarregar automàticament les dades d’encaminament que falten.</string>
     <string name="wizard_advanced_restore_label">Restaura</string>
     <string name="wizard_advanced_restore_info">Si teniu una còpia de seguretat d\'una instal·lació anterior, podeu restaurar la configuració i/o les dades dels catxés.</string>
     <string name="status_not_ok">ERROR</string>

@@ -2223,7 +2223,6 @@
     <string name="notification_channel_downloader_description">notificações acerca das transferências (ex: mapas offline)</string>
     <string name="notification_channel_cache_download_name">gestor de transferências de caches</string>
     <string name="notification_channel_cache_download_description">notificações do resultado das transferências de caches em segundo plano</string>
-    <string name="notification_proximity_title">notificação de proximidade</string>
     <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
     <string name="individual_route">Rota individual</string>
@@ -2420,11 +2419,6 @@
     <string name="wizard_platforms_intro">Para encontrar geocaches com o c:geo, precisa de uma conta num serviço de geocaching suportado pelo c:geo.\nSeleccione abaixo o serviço pretendido, seja para iniciar a sessão com a sua conta ou para criar uma nova conta.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching e outros</string>
-    <string name="wizard_welcome_advanced">Configurações avançadas</string>
-    <string name="wizard_advanced_offlinemaps_label">Mapas offline</string>
-    <string name="wizard_advanced_offlinemaps_info">Esta página fornece algumas funções avançadas, que são de uso opcional.\n\nO c:geo pode descarregar ficheiros de mapa para usar sem estar ligado à Internet.</string>
-    <string name="wizard_advanced_routing_label">Activar encaminhamento offline</string>
-    <string name="wizard_advanced_routing_info">O c:geo tem um mecanismo de encaminhamento interno para encaminhamento offline e pode transferir automaticamente esses dados em falta.</string>
     <string name="wizard_advanced_restore_label">Restaurar</string>
     <string name="wizard_advanced_restore_info">Se tiver uma cópia de segurança de uma instalação anterior, pode restaurar configurações e/ou dados de geocaches.</string>
     <string name="status_not_ok">ERRO</string>
