@@ -7,7 +7,7 @@
 - Neu: Lineare Lab Adventures verwenden Zahlen als Wegpunkt-Marker
 - Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
 - Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
-- New: User-defined routing profiles (internal routing only)
+- Neu: Benutzerdefinierte Routingprofile (nur internes Routing)
 
 ### Cache-Details
 - Neu: Standardpräfix für die Beschriftung des Logbildes ändern
@@ -25,4 +25,4 @@
 - Neu: Filtern in Mehrfachauswahllisten
 - Neu: Filter zum Einbinden benannter (gespeicherter) Filter
 - Änderung: AndroidBeam-Unterstützung entfernt, da nicht mehr von der Android-Plattform unterstützt
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Änderung: Konfigurationsassistent: "Wiederherstellung"-Funktionalität in Bildschirm "Dienste konfigurieren" integriert und erweiterten Konfigurationsbildschirm entfernt
