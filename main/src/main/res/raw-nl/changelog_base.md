@@ -8,6 +8,7 @@
 - Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
 - Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
 - Nieuw: Gebruikersgedefinieerde routeringsprofielen (alleen interne routering)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Cache details
 - Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
@@ -26,3 +27,5 @@
 - Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
 - Wijziging: AndroidBeam verwijderd, die niet langer wordt ondersteund door het Android-platform
 - Wijziging: Configuratiewizard: "herstel" functionaliteit in het "services configureren" scherm geïntegreerd en het geavanceerde configuratiescherm verwijderd.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
