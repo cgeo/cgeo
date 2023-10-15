@@ -8,6 +8,7 @@
 - 신규: 캐시의 지점은 캐시 유형 아이콘을 마커로 표시합니다.
 - 신규: 지도의 현재 위치에 대한 고도 정보 표시 (설정 => 지도 콘텐츠 및 동작 참조)
 - New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
@@ -26,3 +27,5 @@
 - New: Filter to include other named (stored) filters
 - Change: Removed AndroidBeam which is no longer supported by Android platform
 - Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
