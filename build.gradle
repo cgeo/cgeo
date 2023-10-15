@@ -28,11 +28,6 @@ plugins {
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
     id 'com.github.spotbugs' version '4.7.8'
-
-    // adds gradle tasks 'tiTree' (print a task dependency graph), 'tiOrder' (display the execution queue),
-    // 'tiJson' (export as a JSON file), see https://gitlab.com/barfuin/gradle-taskinfo
-    // they need cmdline parameter, e.g. gradlew tiTree assembleBasicDebug
-    id 'org.barfuin.gradle.taskinfo' version '2.0.0'
 }
 
 /*
