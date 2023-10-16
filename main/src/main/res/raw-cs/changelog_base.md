@@ -8,7 +8,7 @@
 - Novinka: Trasové body kešky zobrazují ikonu typu kešky jako značku
 - Novinka: Zobrazení informací o nadmořské výšce pro aktuální polohu na mapě (viz Nastavení => Obsah mapy & Chování)
 - Novinka: Uživatelem definované profily směrování (pouze interní směrování)
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Oprava: Příliš dlouhý název oznámení o přiblížení, skutečné oznámení se na malých obrazovkách ořízne
 
 ### Detaily kešky
 - Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
@@ -27,5 +27,5 @@
 - Novinka: Filtr pro zahrnutí ostatních pojmenovaných (uložených) filtrů
 - Změna: Odstraněn AndroidBeam, který již není podporován platformou Android
 - Změna: Průvodce konfigurací: Integrována funkce "obnovení" na obrazovce "konfigurace služeb" a odstraněna obrazovka pokročilé konfigurace.
-- Fix: Hide outdated connection error message
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- Oprava: Skryta chybová zprává o zastaralém připojení
+- Oprava: Na novějších systémech Android nelze vytvořit zástupce pro widgety c:geo
