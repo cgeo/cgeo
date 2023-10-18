@@ -23,7 +23,6 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -87,7 +86,6 @@ import androidx.lifecycle.ViewModelProvider;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -395,7 +393,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                     // load cache, focus map on it, and set it as target
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
-                        viewModel.geoItems.add(cache.getGeocode(), cache);
+                        viewModel.caches.getValue().add(cache);
+                        viewModel.caches.notifyDataChanged();
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         viewModel.setTarget(cache.getCoords(), cache.getName());
                     }
@@ -450,16 +449,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         for (String geocode : searchResult.getGeocodes()) {
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                viewModel.geoItems.add(geocode, temp);
+                // todo - LeastRecentlyUsedSet - remove before adding?
+                viewModel.caches.getValue().add(temp);
+                viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
             }
         }
     }
 
     public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
         Log.e("addSearchResult: " + searchResult.size());
-        for (Geocache cache : searchResult) {
-            viewModel.geoItems.add(cache.getGeocode(), cache);
-        }
+        // todo - LeastRecentlyUsedSet - remove before adding?
+        viewModel.caches.getValue().addAll(searchResult);
+        viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
+
     }
 
     public void addSearchResultByGeocodes(final Set<String> searchResult) {
@@ -468,7 +470,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             s.append(" ").append(geocode);
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                viewModel.geoItems.add(geocode, temp);
+                // todo - LeastRecentlyUsedSet - remove before adding?
+                viewModel.caches.getValue().add(temp);
+                viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
             }
         }
         Log.e("add [" + s + "]");
@@ -747,7 +751,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            refreshMapData(false);
+
+
+            // maybe move all this to refreshMapData() ???
+            MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
+            viewModel.caches.notifyDataChanged();
+            if (loadInBackgroundHandler != null) {
+                loadInBackgroundHandler.onDestroy();
+            }
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+//            refreshMapData(false);
         }
     }
 
@@ -757,14 +770,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     @Override
     public void showFilterMenu() {
         // create list of caches for FilterActivity, ignore other geoItems
-        final ArrayList<Geocache> caches = new ArrayList<>();
-        final HashMap<String, IWaypoint> map = viewModel.geoItems.getMap();
-        for (IWaypoint item : map.values()) {
-            if (item instanceof Geocache) {
-                caches.add((Geocache) item);
-            }
-        }
-        FilterUtils.openFilterActivity(this, mapType.filterContext, caches);
+//        final ArrayList<Geocache> caches = new ArrayList<>();
+//        final Map<String, Geocache> map = viewModel.geoItems.getMap();
+//        for (Geocache item : map.values()) {
+//            if (item != null) {
+//                caches.add((Geocache) item);
+//            }
+//        }
+        FilterUtils.openFilterActivity(this, mapType.filterContext, viewModel.caches.getValue());
     }
 
     @Override
@@ -775,7 +788,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapType.filterContext.set(filter);
-        refreshMapData(false);
+
+        // maybe move all this to refreshMapData() ???
+        MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
+        viewModel.caches.notifyDataChanged();
+        if (loadInBackgroundHandler != null) {
+            loadInBackgroundHandler.onDestroy();
+        }
+        loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+//        refreshMapData(false);
     }
 
     protected GeocacheFilterContext getFilterContext() {
@@ -796,7 +817,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
 
-            final IWaypoint wp = viewModel.geoItems.getMap().get(key);
+            //todo make caches/WPs clickable
+            /*final IWaypoint wp = viewModel.geoItems.getMap().get(key);
             if (wp != null) {
                 result.add(new RouteItem(wp));
             } else if (isLongTap) {
@@ -806,7 +828,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                         break;
                     }
                 }
-            }
+            }*/
         }
         Log.e("touched elements (" + result.size() + "): " + result);
 

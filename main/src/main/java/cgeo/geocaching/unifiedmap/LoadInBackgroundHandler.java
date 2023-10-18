@@ -97,7 +97,7 @@ class LoadInBackgroundHandler {
                     final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
                     Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes);
                     DataStore.removeCaches(filteredCodes, EnumSet.of(LoadFlags.RemoveFlag.CACHE));
-                    activity.addSearchResultByGeocodes(filteredCodes);
+//                    activity.addSearchResultByGeocodes(filteredCodes);
                     activity.addSearchResultByGeocaches(searchResult);
 
                     lastSearchResult = searchResult;
