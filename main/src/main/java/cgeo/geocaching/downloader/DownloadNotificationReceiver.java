@@ -58,6 +58,8 @@ public class DownloadNotificationReceiver extends BroadcastReceiver {
                     }
                 }
             }
+        } else if (DownloadManager.ACTION_NOTIFICATION_CLICKED.equals(action)) {
+            context.startActivity(new Intent(context, PendingDownloadsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
         }
     }
 }
