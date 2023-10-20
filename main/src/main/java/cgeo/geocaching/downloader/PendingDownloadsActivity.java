@@ -1,6 +1,7 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SplashActivity;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -13,6 +14,7 @@ import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,6 +46,17 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         setContentView(R.layout.generic_recyclerview);
         setTitle(R.string.debug_current_downloads);
         fillAdapter();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!isTaskRoot()) {
+            super.onBackPressed();
+        } else {
+            // if launched from outside c:geo
+            startActivity(new Intent(this, SplashActivity.class));
+            finish();
+        }
     }
 
     private String formatStatus(final int statusCode) {
