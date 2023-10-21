@@ -1,6 +1,8 @@
 import com.getkeepsafe.dexcount.OutputFormat
 import org.apache.tools.ant.filters.ReplaceTokens
 
+import javax.inject.Inject
+
 /*
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
@@ -629,29 +631,33 @@ tasks.register('verifyPrivateProperties') {
     }
 }
 
+interface Injected {
+    @Inject ExecOperations getExecOperations()
+}
+
 // copy preferences containing user and password to the device
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
     doFirst {
         if (preferencesFile.exists()) {
             try {
-                ExecOperations.exec {
+                execOperations.exec {
                     executable = project.android.getAdbExe().toString()
                     args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
                 }
-                ExecOperations.exec {
+                execOperations.exec {
                     executable = project.android.getAdbExe().toString()
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                ExecOperations.exec {
+                execOperations.exec {
                     executable = project.android.getAdbExe().toString()
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
                 }
-                ExecOperations.exec {
+                execOperations.exec {
                     executable = project.android.getAdbExe().toString()
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                ExecOperations.exec {
+                execOperations.exec {
                     executable = project.android.getAdbExe().toString()
                     args = ['shell', 'getprop', 'ro.build.version.release']
                 }
