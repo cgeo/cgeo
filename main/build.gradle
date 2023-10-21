@@ -663,17 +663,15 @@ tasks.configureEach { theTask ->
 }
 
 /*
+ * dex counting - start it manually, when necessary
  * https://github.com/KeepSafe/dexcount-gradle-plugin
- * dex counting can take several seconds, therefore do this only on the CI server
  */
-if (isContinuousIntegrationServer()) {
-    apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.getkeepsafe.dexcount'
 
-    dexcount {
-        format = OutputFormat.LIST
-        includeClassCount = true
-        includeTotalMethodCount = true
-    }
+dexcount {
+    format = OutputFormat.LIST
+    includeClassCount = true
+    includeTotalMethodCount = true
 }
 
 // check whether this is a local build or a CI server build
